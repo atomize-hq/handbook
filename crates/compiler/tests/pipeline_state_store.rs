@@ -8,11 +8,12 @@ use std::time::Duration;
 
 use handbook_compiler::{
     build_route_basis, effective_route_basis_run, load_pipeline_definition, load_route_state,
-    load_route_state_with_supported_variables, persist_route_basis, resolve_pipeline_route,
-    set_route_state, supported_route_state_variables, RouteBasisPersistOutcome,
-    RouteBasisPersistRefusal, RouteState, RouteStateMutation, RouteStateMutationOutcome,
-    RouteStateMutationRefusal, RouteStateReadError, RouteStateStoreError, RouteStateValue,
-    RouteVariables, ROUTE_STATE_AUDIT_LIMIT, ROUTE_STATE_SCHEMA_VERSION,
+    load_route_state_with_supported_variables, load_trusted_pipeline_session, persist_route_basis,
+    resolve_pipeline_route, set_route_state, supported_route_state_variables,
+    RouteBasisPersistOutcome, RouteBasisPersistRefusal, RouteBasisStageStatus, RouteState,
+    RouteStateMutation, RouteStateMutationOutcome, RouteStateMutationRefusal, RouteStateReadError,
+    RouteStateStoreError, RouteStateValue, RouteVariables, TrustedPipelineSessionRefusal,
+    ROUTE_STATE_AUDIT_LIMIT, ROUTE_STATE_SCHEMA_VERSION,
 };
 
 fn write_file(path: &Path, contents: &str) {
@@ -222,6 +223,147 @@ fn route_basis_round_trips_when_written_by_resolve() {
     )
     .expect("reload state");
     assert_eq!(reloaded_state.route_basis.as_ref(), Some(&route_basis));
+}
+
+#[test]
+fn trusted_pipeline_session_refuses_missing_route_basis() {
+    let (_dir, repo_root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let (definition, _) =
+        pipeline_proof_corpus_support::load_foundation_inputs_definition(&repo_root);
+
+    let err = load_trusted_pipeline_session(&repo_root, &definition)
+        .expect_err("missing route_basis should refuse");
+
+    match err {
+        TrustedPipelineSessionRefusal::MissingRouteBasis { pipeline_id } => {
+            assert_eq!(
+                pipeline_id,
+                pipeline_proof_corpus_support::FOUNDATION_INPUTS_PIPELINE_ID
+            );
+        }
+        other => panic!("expected missing-route-basis refusal, got {other:?}"),
+    }
+}
+
+#[test]
+fn trusted_pipeline_session_refuses_stale_route_basis() {
+    let (_dir, repo_root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let (definition, supported_variables) =
+        pipeline_proof_corpus_support::load_foundation_inputs_definition(&repo_root);
+    let _ = pipeline_proof_corpus_support::persist_foundation_inputs_route_basis(&repo_root);
+    pipeline_proof_corpus_support::apply_foundation_inputs_state_mutation(
+        &repo_root,
+        &supported_variables,
+        RouteStateMutation::RoutingVariable {
+            variable: "needs_project_context".to_string(),
+            value: true,
+        },
+    );
+
+    let err = load_trusted_pipeline_session(&repo_root, &definition)
+        .expect_err("stale basis should refuse");
+
+    match err {
+        TrustedPipelineSessionRefusal::StaleRouteBasis {
+            pipeline_id,
+            reason,
+        } => {
+            assert_eq!(
+                pipeline_id,
+                pipeline_proof_corpus_support::FOUNDATION_INPUTS_PIPELINE_ID
+            );
+            assert!(reason.contains("revision"), "{reason}");
+        }
+        other => panic!("expected stale-route-basis refusal, got {other:?}"),
+    }
+}
+
+#[test]
+fn trusted_pipeline_session_refuses_malformed_route_basis() {
+    let (_dir, repo_root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let (definition, _) =
+        pipeline_proof_corpus_support::load_foundation_inputs_definition(&repo_root);
+    let _ = pipeline_proof_corpus_support::persist_foundation_inputs_route_basis(&repo_root);
+    let path = pipeline_proof_corpus_support::pipeline_state_path(&repo_root);
+    let mut state: RouteState =
+        serde_yaml_bw::from_str(&std::fs::read_to_string(&path).expect("read state"))
+            .expect("deserialize state");
+    let forged_stage = state
+        .route_basis
+        .as_mut()
+        .expect("route_basis")
+        .route
+        .iter_mut()
+        .find(|stage| stage.stage_id == pipeline_proof_corpus_support::STAGE_10_FEATURE_SPEC_ID)
+        .expect("stage.10_feature_spec");
+    forged_stage.status = RouteBasisStageStatus::Active;
+    forged_stage.reason = None;
+    std::fs::write(
+        &path,
+        serde_yaml_bw::to_string(&state).expect("serialize state"),
+    )
+    .expect("write state");
+
+    let err = load_trusted_pipeline_session(&repo_root, &definition)
+        .expect_err("malformed route_basis should refuse");
+
+    match err {
+        TrustedPipelineSessionRefusal::MalformedRouteBasis {
+            pipeline_id,
+            reason,
+        } => {
+            assert_eq!(
+                pipeline_id,
+                pipeline_proof_corpus_support::FOUNDATION_INPUTS_PIPELINE_ID
+            );
+            assert!(reason.contains("stage.10_feature_spec"), "{reason}");
+            assert!(reason.contains("status `active`"), "{reason}");
+            assert!(reason.contains("canonical `blocked`"), "{reason}");
+        }
+        other => panic!("expected malformed-route-basis refusal, got {other:?}"),
+    }
+}
+
+#[test]
+fn trusted_pipeline_session_normalizes_repo_root_and_refuses_inactive_stage() {
+    let (_dir, repo_root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let (definition, _) =
+        pipeline_proof_corpus_support::load_foundation_inputs_definition(&repo_root);
+    let _ = pipeline_proof_corpus_support::persist_foundation_inputs_route_basis(&repo_root);
+
+    let session = load_trusted_pipeline_session(&repo_root, &definition).expect("trusted session");
+    assert_eq!(
+        session.route_state.run.repo_root.as_deref(),
+        Some(handbook_compiler::ROUTE_BASIS_REPO_ROOT_SENTINEL)
+    );
+    assert_eq!(
+        session.route_basis.run.repo_root.as_deref(),
+        Some(handbook_compiler::ROUTE_BASIS_REPO_ROOT_SENTINEL)
+    );
+
+    let err = session
+        .require_active_stage(pipeline_proof_corpus_support::STAGE_10_FEATURE_SPEC_ID)
+        .expect_err("inactive stage should refuse");
+
+    match err {
+        TrustedPipelineSessionRefusal::InactiveStage {
+            pipeline_id,
+            stage_id,
+            status,
+            ..
+        } => {
+            assert_eq!(
+                pipeline_id,
+                pipeline_proof_corpus_support::FOUNDATION_INPUTS_PIPELINE_ID
+            );
+            assert_eq!(
+                stage_id,
+                pipeline_proof_corpus_support::STAGE_10_FEATURE_SPEC_ID
+            );
+            assert_eq!(status, RouteBasisStageStatus::Blocked);
+        }
+        other => panic!("expected inactive-stage refusal, got {other:?}"),
+    }
 }
 
 #[test]

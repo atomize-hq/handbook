@@ -2,7 +2,9 @@ use crate::declarative_roots::{
     profile_file as profile_repo_file, profile_root, runner_file as runner_repo_file, runner_root,
     PROFILES_ROOT_DISPLAY, RUNNERS_ROOT_DISPLAY,
 };
-use crate::pipeline::{load_selected_pipeline_definition, PipelineDefinition};
+use crate::pipeline::{
+    load_selected_pipeline_definition, supported_route_state_variables, PipelineDefinition,
+};
 use crate::pipeline_route::{
     resolve_pipeline_route, ResolvedPipelineRoute, RouteStageReason, RouteStageStatus,
     RouteVariables,
@@ -347,6 +349,81 @@ pub enum RouteBasisPersistRefusal {
     },
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct TrustedPipelineSession {
+    pub pipeline_id: String,
+    pub route_state: RouteState,
+    pub route_basis: RouteBasis,
+}
+
+impl TrustedPipelineSession {
+    pub fn require_active_stage(
+        &self,
+        stage_id: impl AsRef<str>,
+    ) -> Result<&RouteBasisResolvedStage, TrustedPipelineSessionRefusal> {
+        let stage_id = stage_id.as_ref();
+        let Some(stage) = self
+            .route_basis
+            .route
+            .iter()
+            .find(|stage| stage.stage_id == stage_id)
+        else {
+            return Err(TrustedPipelineSessionRefusal::MissingStage {
+                pipeline_id: self.pipeline_id.clone(),
+                stage_id: stage_id.to_string(),
+            });
+        };
+
+        if stage.status != RouteBasisStageStatus::Active {
+            return Err(TrustedPipelineSessionRefusal::InactiveStage {
+                pipeline_id: self.pipeline_id.clone(),
+                stage_id: stage_id.to_string(),
+                status: stage.status,
+                reason: stage.reason.clone(),
+            });
+        }
+
+        Ok(stage)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum TrustedPipelineSessionRefusal {
+    InvalidPipelineId {
+        pipeline_id: String,
+        reason: &'static str,
+    },
+    ReadFailure {
+        path: PathBuf,
+        reason: String,
+    },
+    InvalidState {
+        path: PathBuf,
+        reason: String,
+    },
+    MissingRouteBasis {
+        pipeline_id: String,
+    },
+    StaleRouteBasis {
+        pipeline_id: String,
+        reason: String,
+    },
+    MalformedRouteBasis {
+        pipeline_id: String,
+        reason: String,
+    },
+    MissingStage {
+        pipeline_id: String,
+        stage_id: String,
+    },
+    InactiveStage {
+        pipeline_id: String,
+        stage_id: String,
+        status: RouteBasisStageStatus,
+        reason: Option<RouteBasisStageReason>,
+    },
+}
+
 #[derive(Debug)]
 struct RouteStateInventoryLoadError {
     path: PathBuf,
@@ -492,6 +569,59 @@ pub fn set_route_state(
     persist_route_state(&state_path, &state)?;
 
     Ok(RouteStateMutationOutcome::Applied(Box::new(state)))
+}
+
+pub fn load_trusted_pipeline_session(
+    repo_root: impl AsRef<Path>,
+    pipeline: &PipelineDefinition,
+) -> Result<TrustedPipelineSession, TrustedPipelineSessionRefusal> {
+    let repo_root = repo_root.as_ref();
+    let supported_variables = supported_route_state_variables(pipeline);
+    let state = load_route_state_with_supported_variables(
+        repo_root,
+        &pipeline.header.id,
+        &supported_variables,
+    )
+    .map_err(classify_trusted_pipeline_session_read_error)?;
+    let route_basis = state.route_basis.clone().ok_or_else(|| {
+        TrustedPipelineSessionRefusal::MissingRouteBasis {
+            pipeline_id: pipeline.header.id.clone(),
+        }
+    })?;
+    let canonical_route_basis = rebuild_canonical_route_basis(repo_root, pipeline, &state)
+        .map_err(|reason| TrustedPipelineSessionRefusal::StaleRouteBasis {
+            pipeline_id: pipeline.header.id.clone(),
+            reason: format!("failed to rebuild canonical route_basis: {reason}"),
+        })?;
+
+    if let Some(reason) = trusted_pipeline_session_stale_reason(
+        repo_root,
+        pipeline,
+        &state,
+        &route_basis,
+        &canonical_route_basis,
+    ) {
+        return Err(TrustedPipelineSessionRefusal::StaleRouteBasis {
+            pipeline_id: pipeline.header.id.clone(),
+            reason,
+        });
+    }
+
+    if let Some(reason) = route_basis_mismatch_reason(&route_basis, &canonical_route_basis) {
+        return Err(TrustedPipelineSessionRefusal::MalformedRouteBasis {
+            pipeline_id: pipeline.header.id.clone(),
+            reason,
+        });
+    }
+
+    let mut route_state = normalized_state_for_route_basis(&state, repo_root);
+    route_state.route_basis = Some(canonical_route_basis.clone());
+
+    Ok(TrustedPipelineSession {
+        pipeline_id: pipeline.header.id.clone(),
+        route_state,
+        route_basis: canonical_route_basis,
+    })
 }
 
 pub fn build_route_basis(
@@ -741,6 +871,90 @@ pub(crate) fn route_basis_mismatch_reason(
                 "route_basis stage `{}` file_sha256 does not match canonical fingerprint",
                 canonical_stage.stage_id
             ));
+        }
+    }
+
+    None
+}
+
+fn classify_trusted_pipeline_session_read_error(
+    err: RouteStateReadError,
+) -> TrustedPipelineSessionRefusal {
+    match err {
+        RouteStateReadError::InvalidPipelineId {
+            pipeline_id,
+            reason,
+        } => TrustedPipelineSessionRefusal::InvalidPipelineId {
+            pipeline_id,
+            reason,
+        },
+        RouteStateReadError::ReadFailure { path, source } => {
+            TrustedPipelineSessionRefusal::ReadFailure {
+                path,
+                reason: source.to_string(),
+            }
+        }
+        RouteStateReadError::MalformedState { path, reason } => {
+            TrustedPipelineSessionRefusal::InvalidState { path, reason }
+        }
+    }
+}
+
+fn trusted_pipeline_session_stale_reason(
+    repo_root: &Path,
+    pipeline: &PipelineDefinition,
+    state: &RouteState,
+    basis: &RouteBasis,
+    canonical_basis: &RouteBasis,
+) -> Option<String> {
+    if state.revision != basis.state_revision {
+        return Some(format!(
+            "route state revision {} does not match persisted route_basis revision {}",
+            state.revision, basis.state_revision
+        ));
+    }
+
+    let effective_run = effective_route_basis_run(repo_root, pipeline, state);
+    if state.routing != basis.routing
+        || state.refs != basis.refs
+        || effective_run != normalize_route_basis_run(&basis.run)
+    {
+        return Some(
+            "route_state routing/refs/run no longer match the persisted route_basis".to_string(),
+        );
+    }
+
+    if basis.pipeline_file_sha256 != canonical_basis.pipeline_file_sha256 {
+        return Some(
+            "pipeline definition fingerprint drifted after the last `pipeline resolve`".to_string(),
+        );
+    }
+
+    if basis.runner.file_sha256 != canonical_basis.runner.file_sha256 {
+        return Some(format!(
+            "runner document `{}` changed after the last `pipeline resolve`",
+            basis.runner.file
+        ));
+    }
+
+    if basis.profile.profile_yaml_sha256 != canonical_basis.profile.profile_yaml_sha256
+        || basis.profile.commands_yaml_sha256 != canonical_basis.profile.commands_yaml_sha256
+        || basis.profile.conventions_md_sha256 != canonical_basis.profile.conventions_md_sha256
+    {
+        return Some("selected profile pack changed after the last `pipeline resolve`".to_string());
+    }
+
+    if basis.route.len() == canonical_basis.route.len() {
+        for (basis_stage, canonical_stage) in basis.route.iter().zip(canonical_basis.route.iter()) {
+            if basis_stage.stage_id == canonical_stage.stage_id
+                && basis_stage.file == canonical_stage.file
+                && basis_stage.file_sha256 != canonical_stage.file_sha256
+            {
+                return Some(format!(
+                    "stage file `{}` changed after the last `pipeline resolve`",
+                    basis_stage.file
+                ));
+            }
         }
     }
 
@@ -2438,6 +2652,73 @@ impl fmt::Display for RouteBasisPersistRefusal {
             } => write!(
                 f,
                 "revision conflict while persisting route_basis: expected {expected_revision}, found {actual_revision}"
+            ),
+        }
+    }
+}
+
+impl fmt::Display for TrustedPipelineSessionRefusal {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            TrustedPipelineSessionRefusal::InvalidPipelineId {
+                pipeline_id,
+                reason,
+            } => {
+                write!(
+                    f,
+                    "trusted pipeline session pipeline id `{pipeline_id}` is invalid: {reason}"
+                )
+            }
+            TrustedPipelineSessionRefusal::ReadFailure { path, reason } => {
+                write!(
+                    f,
+                    "failed to read trusted pipeline session state at {}: {reason}",
+                    path.display()
+                )
+            }
+            TrustedPipelineSessionRefusal::InvalidState { path, reason } => {
+                write!(
+                    f,
+                    "trusted pipeline session state at {} is invalid: {reason}",
+                    path.display()
+                )
+            }
+            TrustedPipelineSessionRefusal::MissingRouteBasis { pipeline_id } => {
+                write!(
+                    f,
+                    "persisted route_basis is missing for trusted pipeline `{pipeline_id}`"
+                )
+            }
+            TrustedPipelineSessionRefusal::StaleRouteBasis {
+                pipeline_id,
+                reason,
+            } => write!(
+                f,
+                "persisted route_basis for trusted pipeline `{pipeline_id}` is stale: {reason}"
+            ),
+            TrustedPipelineSessionRefusal::MalformedRouteBasis {
+                pipeline_id,
+                reason,
+            } => write!(
+                f,
+                "persisted route_basis for trusted pipeline `{pipeline_id}` is malformed: {reason}"
+            ),
+            TrustedPipelineSessionRefusal::MissingStage {
+                pipeline_id,
+                stage_id,
+            } => write!(
+                f,
+                "trusted pipeline `{pipeline_id}` route_basis does not include stage `{stage_id}`"
+            ),
+            TrustedPipelineSessionRefusal::InactiveStage {
+                pipeline_id,
+                stage_id,
+                status,
+                ..
+            } => write!(
+                f,
+                "trusted pipeline `{pipeline_id}` stage `{stage_id}` is not active (current status: {})",
+                route_basis_stage_status_label(*status)
             ),
         }
     }
