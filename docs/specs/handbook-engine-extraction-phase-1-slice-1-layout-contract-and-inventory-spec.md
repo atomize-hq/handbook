@@ -198,6 +198,8 @@ Coverage expectation:
 
 The exact Rust type names may still change during implementation, but the ownership domains are fixed by this slice.
 
+Packet 1.1.1 is the Ownership domain freeze for Slice 1.1: it keeps the approved separate layout types boundary, permits no caller migration in Slice 1.1, hands Canonical root layout adoption to Slice 1.2, hands Runtime state layout / Capture provenance layout / Handoff bundle layout adoption to Slice 1.3, and hands Authoring layout adoption to Slice 1.4.
+
 | Ownership domain | What it owns | Primary current sources | Expected follow-on adoption slice |
 | --- | --- | --- | --- |
 | Canonical root layout | canonical `.handbook` root and canonical artifact namespace roots | `canonical_artifacts.rs`, `setup.rs` | Slice 1.2 |
@@ -245,6 +247,7 @@ Goal:
 Required outcome:
 
 - the slice authority set names the layout family and the adoption handoff for later slices
+- the separate layout types contract freezes the Canonical root layout, Runtime state layout, Capture provenance layout, Handoff bundle layout, and Authoring layout Ownership domain boundaries without caller migration
 
 ### Packet 1.1.2: Storage Inventory And Temporary-Exception Freeze
 

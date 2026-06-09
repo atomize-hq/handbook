@@ -38,9 +38,9 @@ Why first:
 
 Output:
 
-- one approved ownership-domain list
+- one approved Ownership domain list covering Canonical root layout, Runtime state layout, Capture provenance layout, Handoff bundle layout, and Authoring layout
 - one explicit “no caller migration in Slice 1.1” rule
-- one mapping from owner domains to future Phase 1 slices
+- one mapping from owner domains to future Phase 1 slices: Slice 1.2 for canonical/setup adoption, Slice 1.3 for runtime-state/capture/handoff adoption, and Slice 1.4 for authoring adoption
 
 ### Packet 1.1.2 second: Freeze the reusable-internal storage inventory
 
