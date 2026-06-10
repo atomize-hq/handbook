@@ -126,14 +126,13 @@ pub(crate) fn load_stage_10_feature_spec_capture_provenance(
     repo_root: &Path,
 ) -> Result<Stage10FeatureSpecCaptureProvenance, String> {
     let provenance_path = stage_10_feature_spec_capture_provenance_path(repo_root);
-    let body =
-        read_repo_relative_string(repo_root, provenance_path.as_str()).map_err(|err| {
-            format!(
-                "stage-10 capture provenance is missing or unreadable at `{}`: {}",
-                provenance_path.as_str(),
-                format_repo_file_access_error(&err)
-            )
-        })?;
+    let body = read_repo_relative_string(repo_root, provenance_path.as_str()).map_err(|err| {
+        format!(
+            "stage-10 capture provenance is missing or unreadable at `{}`: {}",
+            provenance_path.as_str(),
+            format_repo_file_access_error(&err)
+        )
+    })?;
     let provenance: Stage10FeatureSpecCaptureProvenance =
         serde_json::from_str(&body).map_err(|err| {
             format!(
@@ -226,9 +225,7 @@ fn normalize_compile_payload_for_provenance(payload: &str) -> String {
     normalized
 }
 
-fn stage_10_feature_spec_capture_provenance_path(
-    repo_root: &Path,
-) -> NormalizedRepoRelativePath {
+fn stage_10_feature_spec_capture_provenance_path(repo_root: &Path) -> NormalizedRepoRelativePath {
     RepoLayoutRoot::new(repo_root)
         .capture_provenance()
         .stage_capture_provenance_relative_path(SUPPORTED_PIPELINE_ID, SUPPORTED_STAGE_ID)
