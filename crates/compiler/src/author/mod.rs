@@ -1,5 +1,6 @@
 pub mod charter;
 mod charter_core;
+mod charter_shell;
 pub mod environment_inventory;
 pub mod project_context;
 #[path = "../template_library.rs"]
