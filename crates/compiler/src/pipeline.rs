@@ -93,33 +93,33 @@ pub struct StageCatalogEntry {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct SupportedPipelineTarget {
+pub(crate) struct SupportedPipelineTarget {
     pub id: String,
     pub declared_stage_ids: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct SupportedStageTarget {
+pub(crate) struct SupportedStageTarget {
     pub id: String,
     pub source_path: PathBuf,
     pub pipeline_ids: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct SupportedConsumerTarget {
+pub(crate) struct SupportedConsumerTarget {
     pub id: String,
     pub allowed_pipeline_ids: Vec<String>,
     pub allowed_stage_ids: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct SupportedCompileTarget {
+pub(crate) struct SupportedCompileTarget {
     pub pipeline: SupportedPipelineTarget,
     pub stage: SupportedStageTarget,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct SupportedTargetRegistry {
+pub(crate) struct SupportedTargetRegistry {
     pipelines: BTreeMap<String, SupportedPipelineTarget>,
     stages: BTreeMap<String, SupportedStageTarget>,
     consumers: BTreeMap<String, SupportedConsumerTarget>,
@@ -328,7 +328,7 @@ impl SupportedTargetRegistry {
 }
 
 #[derive(Debug)]
-pub enum SupportedTargetRegistryLoadError {
+pub(crate) enum SupportedTargetRegistryLoadError {
     Catalog(PipelineCatalogError),
     MissingSupportedPipeline {
         pipeline_id: String,
@@ -389,7 +389,7 @@ impl std::error::Error for SupportedTargetRegistryLoadError {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub enum SupportedTargetResolutionError {
+pub(crate) enum SupportedTargetResolutionError {
     UnsupportedPipeline {
         pipeline_id: String,
     },
