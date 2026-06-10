@@ -4,6 +4,7 @@ mod charter_shell;
 pub mod environment_inventory;
 pub mod project_context;
 mod project_context_core;
+mod project_context_shell;
 #[path = "../template_library.rs"]
 pub mod template_library;
 
