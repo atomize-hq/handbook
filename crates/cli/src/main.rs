@@ -519,11 +519,11 @@ fn generate(args: RequestArgs) -> ExitCode {
         }
     };
 
-    let result = match handbook_compiler::resolve(
+    let result = match handbook_flow::resolve(
         &compiler_root,
-        handbook_compiler::ResolveRequest {
+        handbook_flow::ResolveRequest {
             packet_id: packet_id.as_str(),
-            ..handbook_compiler::ResolveRequest::default()
+            ..handbook_flow::ResolveRequest::default()
         },
     ) {
         Ok(result) => result,
@@ -533,17 +533,18 @@ fn generate(args: RequestArgs) -> ExitCode {
         }
     };
 
-    let model = match handbook_compiler::build_output_model(&result) {
+    let ready = result.selection.status == handbook_flow::PacketSelectionStatus::Selected
+        && result.refusal.is_none()
+        && result.blockers.is_empty();
+
+    let compiler_result = flow_result_for_rendering(result);
+    let model = match handbook_compiler::build_output_model(&compiler_result) {
         Ok(model) => model,
         Err(err) => {
             println!("PRESENTATION FAILURE: {err}");
             return ExitCode::from(1);
         }
     };
-
-    let ready = model.packet_status == handbook_compiler::PacketSelectionStatus::Selected
-        && model.refusal.is_none()
-        && model.blockers.is_empty();
 
     println!("{}", handbook_compiler::render_markdown(&model));
     if ready {
@@ -751,9 +752,10 @@ where
                     };
                 }
             };
-            let input = match handbook_compiler::parse_charter_structured_input_yaml(&yaml) {
+            let input = match handbook_engine::parse_charter_structured_input_yaml(&yaml) {
                 Ok(input) => input,
-                Err(refusal) => {
+                Err(err) => {
+                    let refusal = map_engine_charter_core_error(err);
                     return RenderedCommand {
                         output: render_author_charter_refusal(&refusal),
                         exit_code: ExitCode::from(1),
@@ -901,10 +903,11 @@ where
                     };
                 }
             };
-            let input = match handbook_compiler::parse_project_context_structured_input_yaml(&yaml)
+            let input = match handbook_engine::parse_project_context_structured_input_yaml(&yaml)
             {
                 Ok(input) => input,
-                Err(refusal) => {
+                Err(err) => {
+                    let refusal = map_engine_project_context_core_error(err);
                     return RenderedCommand {
                         output: render_project_context_refusal(&refusal),
                         exit_code: ExitCode::from(1),
@@ -950,6 +953,272 @@ where
 
 fn interactive_authoring_is_allowed() -> bool {
     io::stdin().is_terminal() && io::stdout().is_terminal()
+}
+
+fn flow_result_for_rendering(
+    result: handbook_flow::ResolverResult,
+) -> handbook_compiler::ResolverResult {
+    handbook_compiler::ResolverResult {
+        c04_result_version: result.c04_result_version,
+        c03_schema_version: result.c03_schema_version,
+        c03_manifest_generation_version: result.c03_manifest_generation_version,
+        c03_fingerprint_sha256: result.c03_fingerprint_sha256,
+        packet_result: result.packet_result,
+        decision_log: handbook_compiler::DecisionLog {
+            entries: result.decision_log_entries,
+        },
+        budget_outcome: result.budget_outcome,
+        selection: result.selection,
+        refusal: result.refusal.map(flow_refusal_for_rendering),
+        blockers: result.blockers.into_iter().map(flow_blocker_for_rendering).collect(),
+    }
+}
+
+fn flow_refusal_for_rendering(refusal: handbook_flow::ResolverRefusal) -> handbook_compiler::Refusal {
+    handbook_compiler::Refusal {
+        category: flow_refusal_category_for_rendering(refusal.category),
+        summary: refusal.summary,
+        broken_subject: flow_subject_ref_for_rendering(refusal.broken_subject),
+        next_safe_action: flow_next_safe_action_for_rendering(refusal.next_safe_action),
+    }
+}
+
+fn flow_blocker_for_rendering(blocker: handbook_flow::ResolverBlocker) -> handbook_compiler::Blocker {
+    handbook_compiler::Blocker {
+        category: flow_blocker_category_for_rendering(blocker.category),
+        subject: flow_subject_ref_for_rendering(blocker.subject),
+        summary: blocker.summary,
+        next_safe_action: flow_next_safe_action_for_rendering(blocker.next_safe_action),
+    }
+}
+
+fn flow_refusal_category_for_rendering(
+    category: handbook_flow::ResolverRefusalCategory,
+) -> handbook_compiler::RefusalCategory {
+    match category {
+        handbook_flow::ResolverRefusalCategory::NonCanonicalInputAttempt => {
+            handbook_compiler::RefusalCategory::NonCanonicalInputAttempt
+        }
+        handbook_flow::ResolverRefusalCategory::SystemRootMissing => {
+            handbook_compiler::RefusalCategory::SystemRootMissing
+        }
+        handbook_flow::ResolverRefusalCategory::SystemRootNotDir => {
+            handbook_compiler::RefusalCategory::SystemRootNotDir
+        }
+        handbook_flow::ResolverRefusalCategory::SystemRootSymlinkNotAllowed => {
+            handbook_compiler::RefusalCategory::SystemRootSymlinkNotAllowed
+        }
+        handbook_flow::ResolverRefusalCategory::RequiredArtifactMissing => {
+            handbook_compiler::RefusalCategory::RequiredArtifactMissing
+        }
+        handbook_flow::ResolverRefusalCategory::RequiredArtifactEmpty => {
+            handbook_compiler::RefusalCategory::RequiredArtifactEmpty
+        }
+        handbook_flow::ResolverRefusalCategory::RequiredArtifactStarterTemplate => {
+            handbook_compiler::RefusalCategory::RequiredArtifactStarterTemplate
+        }
+        handbook_flow::ResolverRefusalCategory::RequiredArtifactInvalid => {
+            handbook_compiler::RefusalCategory::RequiredArtifactInvalid
+        }
+        handbook_flow::ResolverRefusalCategory::ArtifactReadError => {
+            handbook_compiler::RefusalCategory::ArtifactReadError
+        }
+        handbook_flow::ResolverRefusalCategory::FreshnessInvalid => {
+            handbook_compiler::RefusalCategory::FreshnessInvalid
+        }
+        handbook_flow::ResolverRefusalCategory::BudgetRefused => {
+            handbook_compiler::RefusalCategory::BudgetRefused
+        }
+        handbook_flow::ResolverRefusalCategory::UnsupportedRequest => {
+            handbook_compiler::RefusalCategory::UnsupportedRequest
+        }
+    }
+}
+
+fn flow_blocker_category_for_rendering(
+    category: handbook_flow::ResolverBlockerCategory,
+) -> handbook_compiler::BlockerCategory {
+    match category {
+        handbook_flow::ResolverBlockerCategory::SystemRootMissing => {
+            handbook_compiler::BlockerCategory::SystemRootMissing
+        }
+        handbook_flow::ResolverBlockerCategory::SystemRootNotDir => {
+            handbook_compiler::BlockerCategory::SystemRootNotDir
+        }
+        handbook_flow::ResolverBlockerCategory::SystemRootSymlinkNotAllowed => {
+            handbook_compiler::BlockerCategory::SystemRootSymlinkNotAllowed
+        }
+        handbook_flow::ResolverBlockerCategory::RequiredArtifactMissing => {
+            handbook_compiler::BlockerCategory::RequiredArtifactMissing
+        }
+        handbook_flow::ResolverBlockerCategory::RequiredArtifactEmpty => {
+            handbook_compiler::BlockerCategory::RequiredArtifactEmpty
+        }
+        handbook_flow::ResolverBlockerCategory::RequiredArtifactStarterTemplate => {
+            handbook_compiler::BlockerCategory::RequiredArtifactStarterTemplate
+        }
+        handbook_flow::ResolverBlockerCategory::RequiredArtifactInvalid => {
+            handbook_compiler::BlockerCategory::RequiredArtifactInvalid
+        }
+        handbook_flow::ResolverBlockerCategory::ArtifactReadError => {
+            handbook_compiler::BlockerCategory::ArtifactReadError
+        }
+        handbook_flow::ResolverBlockerCategory::FreshnessInvalid => {
+            handbook_compiler::BlockerCategory::FreshnessInvalid
+        }
+        handbook_flow::ResolverBlockerCategory::BudgetRefused => {
+            handbook_compiler::BlockerCategory::BudgetRefused
+        }
+        handbook_flow::ResolverBlockerCategory::UnsupportedRequest => {
+            handbook_compiler::BlockerCategory::UnsupportedRequest
+        }
+    }
+}
+
+fn flow_subject_ref_for_rendering(
+    subject: handbook_flow::ResolverSubjectRef,
+) -> handbook_compiler::SubjectRef {
+    match subject {
+        handbook_flow::ResolverSubjectRef::CanonicalArtifact {
+            kind,
+            canonical_repo_relative_path,
+        } => handbook_compiler::SubjectRef::CanonicalArtifact {
+            kind,
+            canonical_repo_relative_path,
+        },
+        handbook_flow::ResolverSubjectRef::InheritedDependency {
+            dependency_id,
+            version,
+        } => handbook_compiler::SubjectRef::InheritedDependency {
+            dependency_id,
+            version,
+        },
+        handbook_flow::ResolverSubjectRef::Policy { policy_id } => {
+            handbook_compiler::SubjectRef::Policy { policy_id }
+        }
+    }
+}
+
+fn flow_next_safe_action_for_rendering(
+    action: handbook_flow::ResolverNextSafeAction,
+) -> handbook_compiler::NextSafeAction {
+    match action {
+        handbook_flow::ResolverNextSafeAction::RunSetup => handbook_compiler::NextSafeAction::RunSetup,
+        handbook_flow::ResolverNextSafeAction::RunSetupInit => {
+            handbook_compiler::NextSafeAction::RunSetupInit
+        }
+        handbook_flow::ResolverNextSafeAction::RunSetupRefresh => {
+            handbook_compiler::NextSafeAction::RunSetupRefresh
+        }
+        handbook_flow::ResolverNextSafeAction::RunAuthorCharter => {
+            handbook_compiler::NextSafeAction::RunAuthorCharter
+        }
+        handbook_flow::ResolverNextSafeAction::RunAuthorProjectContext => {
+            handbook_compiler::NextSafeAction::RunAuthorProjectContext
+        }
+        handbook_flow::ResolverNextSafeAction::RunAuthorEnvironmentInventory => {
+            handbook_compiler::NextSafeAction::RunAuthorEnvironmentInventory
+        }
+        handbook_flow::ResolverNextSafeAction::CreateSystemRoot {
+            canonical_repo_relative_path,
+        } => handbook_compiler::NextSafeAction::CreateSystemRoot {
+            canonical_repo_relative_path,
+        },
+        handbook_flow::ResolverNextSafeAction::EnsureSystemRootIsDirectory {
+            canonical_repo_relative_path,
+        } => handbook_compiler::NextSafeAction::EnsureSystemRootIsDirectory {
+            canonical_repo_relative_path,
+        },
+        handbook_flow::ResolverNextSafeAction::RemoveSystemRootSymlink {
+            canonical_repo_relative_path,
+        } => handbook_compiler::NextSafeAction::RemoveSystemRootSymlink {
+            canonical_repo_relative_path,
+        },
+        handbook_flow::ResolverNextSafeAction::CreateCanonicalArtifact {
+            canonical_repo_relative_path,
+        } => handbook_compiler::NextSafeAction::CreateCanonicalArtifact {
+            canonical_repo_relative_path,
+        },
+        handbook_flow::ResolverNextSafeAction::FillCanonicalArtifact {
+            canonical_repo_relative_path,
+        } => handbook_compiler::NextSafeAction::FillCanonicalArtifact {
+            canonical_repo_relative_path,
+        },
+        handbook_flow::ResolverNextSafeAction::ReduceCanonicalArtifactSize {
+            canonical_repo_relative_path,
+        } => handbook_compiler::NextSafeAction::ReduceCanonicalArtifactSize {
+            canonical_repo_relative_path,
+        },
+        handbook_flow::ResolverNextSafeAction::RunGenerate { packet_id } => {
+            handbook_compiler::NextSafeAction::RunGenerate { packet_id }
+        }
+        handbook_flow::ResolverNextSafeAction::RunDoctor => handbook_compiler::NextSafeAction::RunDoctor,
+    }
+}
+
+fn map_engine_charter_core_error(
+    err: handbook_engine::CharterCoreError,
+) -> handbook_compiler::AuthorCharterRefusal {
+    match err.kind {
+        handbook_engine::CharterCoreErrorKind::MalformedStructuredInput => {
+            handbook_compiler::AuthorCharterRefusal {
+                kind: handbook_compiler::AuthorCharterRefusalKind::MalformedStructuredInput,
+                summary: err.summary,
+                broken_subject: "structured charter input".to_string(),
+                next_safe_action:
+                    "repair the structured charter input and retry `handbook author charter --from-inputs <path|->`"
+                        .to_string(),
+            }
+        }
+        handbook_engine::CharterCoreErrorKind::IncompleteStructuredInput => {
+            handbook_compiler::AuthorCharterRefusal {
+                kind: handbook_compiler::AuthorCharterRefusalKind::IncompleteStructuredInput,
+                summary: err.summary,
+                broken_subject: "structured charter input".to_string(),
+                next_safe_action:
+                    "repair the structured charter input and retry `handbook author charter --from-inputs <path|->`"
+                        .to_string(),
+            }
+        }
+        handbook_engine::CharterCoreErrorKind::DeterministicRenderFailed => {
+            handbook_compiler::AuthorCharterRefusal {
+                kind: handbook_compiler::AuthorCharterRefusalKind::SynthesisFailed,
+                summary: err.summary,
+                broken_subject: "final charter render".to_string(),
+                next_safe_action:
+                    "repair the structured charter input or compiler-owned charter render path and retry `handbook author charter --from-inputs <path|->`"
+                        .to_string(),
+            }
+        }
+    }
+}
+
+fn map_engine_project_context_core_error(
+    err: handbook_engine::ProjectContextCoreError,
+) -> handbook_compiler::AuthorProjectContextRefusal {
+    match err.kind {
+        handbook_engine::ProjectContextCoreErrorKind::MalformedStructuredInput => {
+            handbook_compiler::AuthorProjectContextRefusal {
+                kind: handbook_compiler::AuthorProjectContextRefusalKind::MalformedStructuredInput,
+                summary: err.summary,
+                broken_subject: "structured project-context input".to_string(),
+                next_safe_action:
+                    "repair the structured project-context input and retry `handbook author project-context --from-inputs <path|->`"
+                        .to_string(),
+            }
+        }
+        handbook_engine::ProjectContextCoreErrorKind::IncompleteStructuredInput
+        | handbook_engine::ProjectContextCoreErrorKind::DeterministicRenderFailed => {
+            handbook_compiler::AuthorProjectContextRefusal {
+                kind: handbook_compiler::AuthorProjectContextRefusalKind::IncompleteStructuredInput,
+                summary: err.summary,
+                broken_subject: "structured project-context input".to_string(),
+                next_safe_action:
+                    "repair the structured project-context input and retry `handbook author project-context --from-inputs <path|->`"
+                        .to_string(),
+            }
+        }
+    }
 }
 
 fn render_author_charter_success(
@@ -2128,7 +2397,7 @@ fn normalize_required_csv(value: &str) -> Option<Vec<String>> {
 }
 
 fn normalize_free_text_answer(value: &str) -> String {
-    handbook_compiler::normalize_charter_free_text(value)
+    handbook_engine::author::normalize_charter_free_text(value)
 }
 
 fn join_csv_default(items: &[String]) -> String {
@@ -2140,7 +2409,7 @@ fn join_csv_default(items: &[String]) -> String {
 }
 
 fn is_unusably_vague_text(value: &str) -> bool {
-    handbook_compiler::is_unusably_vague_charter_text(value)
+    handbook_engine::author::is_unusably_vague_charter_text(value)
 }
 
 fn render_interview_incomplete_refusal(summary: &str) -> String {
@@ -3624,11 +3893,11 @@ fn inspect(args: RequestArgs) -> ExitCode {
         }
     };
 
-    let result = match handbook_compiler::resolve(
+    let result = match handbook_flow::resolve(
         &compiler_root,
-        handbook_compiler::ResolveRequest {
+        handbook_flow::ResolveRequest {
             packet_id: packet_id.as_str(),
-            ..handbook_compiler::ResolveRequest::default()
+            ..handbook_flow::ResolveRequest::default()
         },
     ) {
         Ok(result) => result,
@@ -3638,17 +3907,18 @@ fn inspect(args: RequestArgs) -> ExitCode {
         }
     };
 
-    let model = match handbook_compiler::build_output_model(&result) {
+    let ready = result.selection.status == handbook_flow::PacketSelectionStatus::Selected
+        && result.refusal.is_none()
+        && result.blockers.is_empty();
+
+    let compiler_result = flow_result_for_rendering(result);
+    let model = match handbook_compiler::build_output_model(&compiler_result) {
         Ok(model) => model,
         Err(err) => {
             println!("PRESENTATION FAILURE: {err}");
             return ExitCode::from(1);
         }
     };
-
-    let ready = model.packet_status == handbook_compiler::PacketSelectionStatus::Selected
-        && model.refusal.is_none()
-        && model.blockers.is_empty();
 
     if ready {
         println!("{}", handbook_compiler::render_inspect(&model));
