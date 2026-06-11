@@ -11,8 +11,10 @@ path = "src/lib.rs"
 handbook-engine = { path = "../engine" }
 libc = "0.2"
 serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 serde_yaml_bw = "2.5.4"
 sha2 = "0.10"
+time = { version = "0.3", features = ["formatting", "macros"] }
 
 [dev-dependencies]
 handbook-compiler = { path = "../compiler" }

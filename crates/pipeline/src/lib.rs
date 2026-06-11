@@ -1,9 +1,13 @@
 pub mod declarative_roots;
 mod layout;
 pub mod pipeline;
+pub mod pipeline_capture;
+pub mod pipeline_compile;
+pub mod pipeline_handoff;
 pub mod pipeline_route;
 mod repo_file_access;
 pub mod route_state;
+mod stage_10_feature_spec_provenance;
 
 pub use pipeline::{
     load_pipeline_catalog, load_pipeline_catalog_metadata, load_pipeline_definition,
@@ -17,6 +21,35 @@ pub use pipeline::{
     PipelineHeader, PipelineLoadError, PipelineLookupError, PipelineMetadataSelectionError,
     PipelineSelection, PipelineStage, PipelineValidationError, StageActivation, StageCatalogEntry,
     StageFileValidationError,
+};
+pub use pipeline_capture::{
+    apply_cached_pipeline_capture, apply_pipeline_capture, capture_pipeline_output,
+    load_pipeline_capture_cache_entry, preview_pipeline_capture,
+    render_pipeline_capture_apply_result, render_pipeline_capture_preview,
+    render_pipeline_capture_refusal, PipelineCaptureApplyResult, PipelineCaptureCacheEntry,
+    PipelineCapturePlan, PipelineCapturePreview, PipelineCaptureRefusal,
+    PipelineCaptureRefusalClassification, PipelineCaptureRequest, PipelineCaptureStateEffect,
+    PipelineCaptureStateUpdate, PipelineCaptureStateValue, PipelineCaptureTarget,
+    PipelineCaptureWrite, PipelineCaptureWriteIntent, PIPELINE_CAPTURE_CACHE_SCHEMA_VERSION,
+};
+pub use pipeline_compile::{
+    compile_pipeline_stage, compile_pipeline_stage_with_runtime, render_pipeline_compile_explain,
+    render_pipeline_compile_payload, PipelineCompileDocument, PipelineCompileDocumentKind,
+    PipelineCompileDocumentStatus, PipelineCompileGatingSummary, PipelineCompileOutput,
+    PipelineCompileOutputKind, PipelineCompileRefusal, PipelineCompileRefusalClassification,
+    PipelineCompileResult, PipelineCompileRuntimeContext, PipelineCompileTarget,
+    PipelineCompileVariable, PIPELINE_COMPILE_NOW_UTC_ENV_VAR,
+};
+pub use pipeline_handoff::{
+    emit_pipeline_handoff_bundle, render_pipeline_handoff_emit_result,
+    render_pipeline_handoff_refusal, validate_pipeline_handoff_bundle,
+    PipelineHandoffCanonicalArtifactFingerprint, PipelineHandoffCanonicalProvenance,
+    PipelineHandoffEmitRequest, PipelineHandoffEmitResult, PipelineHandoffFallbackMetadata,
+    PipelineHandoffFeatureSpecCompileProvenance, PipelineHandoffInput, PipelineHandoffManifest,
+    PipelineHandoffProducer, PipelineHandoffReadAllowlist, PipelineHandoffRefusal,
+    PipelineHandoffRefusalClassification, PipelineHandoffRouteBasisProvenance,
+    PipelineHandoffTrustClass, PipelineHandoffValidatedBundle, PipelineHandoffValidationFailure,
+    PipelineHandoffValidationFailureClassification,
 };
 pub use pipeline_route::{
     resolve_pipeline_route, ResolvedPipelineRoute, ResolvedPipelineStage, RouteEvaluationError,

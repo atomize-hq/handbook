@@ -316,9 +316,11 @@ dependencies = [
  "handbook-engine",
  "libc",
  "serde",
+ "serde_json",
  "serde_yaml_bw",
  "sha2",
  "tempfile",
+ "time",
 ]
 
 [[package]]
