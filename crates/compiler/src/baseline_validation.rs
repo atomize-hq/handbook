@@ -1,123 +1,31 @@
+pub use handbook_engine::baseline_validation::{
+    baseline_artifact_validation_for_path, BaselineArtifactValidation, BaselineArtifactVerdict,
+};
+
 use crate::author::{
     validate_charter_markdown, validate_environment_inventory_markdown,
     validate_project_context_markdown,
 };
-use crate::canonical_artifacts::{
-    canonical_artifact_descriptors, ArtifactIngestIssueKind, ArtifactPresence, CanonicalArtifact,
-    CanonicalArtifactDescriptor, CanonicalArtifactKind, CanonicalArtifacts,
-};
-
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum BaselineArtifactVerdict {
-    Missing,
-    Empty,
-    StarterOwned,
-    IngestInvalid,
-    SemanticallyInvalid { summary: String },
-    ValidCanonicalTruth { markdown: String },
-}
-
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct BaselineArtifactValidation {
-    pub kind: CanonicalArtifactKind,
-    pub canonical_repo_relative_path: &'static str,
-    pub packet_required: bool,
-    pub verdict: BaselineArtifactVerdict,
-}
+use crate::canonical_artifacts::{CanonicalArtifactKind, CanonicalArtifacts};
 
 pub fn baseline_artifact_validations(
     artifacts: &CanonicalArtifacts,
 ) -> Vec<BaselineArtifactValidation> {
-    canonical_artifact_descriptors()
-        .iter()
-        .filter(|descriptor| descriptor.baseline_required)
-        .map(|descriptor| validation_for_descriptor(artifacts, descriptor))
-        .collect()
+    handbook_engine::baseline_validation::baseline_artifact_validations(
+        artifacts,
+        validate_artifact_markdown,
+    )
 }
 
 pub fn baseline_artifact_validation(
     artifacts: &CanonicalArtifacts,
     kind: CanonicalArtifactKind,
 ) -> Option<BaselineArtifactValidation> {
-    canonical_artifact_descriptors()
-        .iter()
-        .find(|descriptor| descriptor.baseline_required && descriptor.kind == kind)
-        .map(|descriptor| validation_for_descriptor(artifacts, descriptor))
-}
-
-pub fn baseline_artifact_validation_for_path<'a>(
-    validations: &'a [BaselineArtifactValidation],
-    canonical_repo_relative_path: &str,
-) -> Option<&'a BaselineArtifactValidation> {
-    validations
-        .iter()
-        .find(|validation| validation.canonical_repo_relative_path == canonical_repo_relative_path)
-}
-
-fn validation_for_descriptor(
-    artifacts: &CanonicalArtifacts,
-    descriptor: &CanonicalArtifactDescriptor,
-) -> BaselineArtifactValidation {
-    BaselineArtifactValidation {
-        kind: descriptor.kind,
-        canonical_repo_relative_path: descriptor.relative_path,
-        packet_required: descriptor.packet_required,
-        verdict: verdict_for_descriptor(artifacts, descriptor),
-    }
-}
-
-fn verdict_for_descriptor(
-    artifacts: &CanonicalArtifacts,
-    descriptor: &CanonicalArtifactDescriptor,
-) -> BaselineArtifactVerdict {
-    if has_ingest_issue_for_artifact(artifacts, descriptor) {
-        return BaselineArtifactVerdict::IngestInvalid;
-    }
-
-    let artifact = canonical_artifact(artifacts, descriptor.kind);
-    match artifact.identity.presence {
-        ArtifactPresence::Missing => BaselineArtifactVerdict::Missing,
-        ArtifactPresence::PresentEmpty => BaselineArtifactVerdict::Empty,
-        ArtifactPresence::PresentNonEmpty if artifact.identity.matches_setup_starter_template => {
-            BaselineArtifactVerdict::StarterOwned
-        }
-        ArtifactPresence::PresentNonEmpty => {
-            let markdown = match artifact.bytes.as_ref() {
-                Some(bytes) => match String::from_utf8(bytes.clone()) {
-                    Ok(markdown) => markdown,
-                    Err(_) => {
-                        return BaselineArtifactVerdict::SemanticallyInvalid {
-                            summary: "canonical artifact must be valid UTF-8 markdown".to_string(),
-                        };
-                    }
-                },
-                None => {
-                    return BaselineArtifactVerdict::SemanticallyInvalid {
-                        summary: "canonical artifact bytes could not be loaded".to_string(),
-                    };
-                }
-            };
-
-            match validate_artifact_markdown(descriptor.kind, &markdown) {
-                Ok(()) => BaselineArtifactVerdict::ValidCanonicalTruth { markdown },
-                Err(summary) => BaselineArtifactVerdict::SemanticallyInvalid { summary },
-            }
-        }
-    }
-}
-
-fn has_ingest_issue_for_artifact(
-    artifacts: &CanonicalArtifacts,
-    descriptor: &CanonicalArtifactDescriptor,
-) -> bool {
-    artifacts.ingest_issues.iter().any(|issue| {
-        matches!(
-            issue.kind,
-            ArtifactIngestIssueKind::CanonicalArtifactReadError
-                | ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed
-        ) && issue.artifact_kind == descriptor.kind
-            && issue.canonical_repo_relative_path == descriptor.relative_path
-    })
+    handbook_engine::baseline_validation::baseline_artifact_validation(
+        artifacts,
+        kind,
+        validate_artifact_markdown,
+    )
 }
 
 fn validate_artifact_markdown(kind: CanonicalArtifactKind, markdown: &str) -> Result<(), String> {
@@ -132,17 +40,5 @@ fn validate_artifact_markdown(kind: CanonicalArtifactKind, markdown: &str) -> Re
         CanonicalArtifactKind::FeatureSpec => {
             Err("feature spec is not part of baseline validation".to_string())
         }
-    }
-}
-
-fn canonical_artifact(
-    artifacts: &CanonicalArtifacts,
-    kind: CanonicalArtifactKind,
-) -> &CanonicalArtifact {
-    match kind {
-        CanonicalArtifactKind::Charter => &artifacts.charter,
-        CanonicalArtifactKind::ProjectContext => &artifacts.project_context,
-        CanonicalArtifactKind::EnvironmentInventory => &artifacts.environment_inventory,
-        CanonicalArtifactKind::FeatureSpec => &artifacts.feature_spec,
     }
 }

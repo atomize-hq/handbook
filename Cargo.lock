@@ -279,6 +279,7 @@ dependencies = [
 name = "handbook-compiler"
 version = "0.1.0"
 dependencies = [
+ "handbook-engine",
  "libc",
  "serde",
  "serde_json",
@@ -292,7 +293,10 @@ dependencies = [
 name = "handbook-engine"
 version = "0.1.0"
 dependencies = [
- "handbook-compiler",
+ "libc",
+ "serde",
+ "sha2",
+ "tempfile",
 ]
 
 [[package]]

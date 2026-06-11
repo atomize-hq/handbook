@@ -156,5 +156,5 @@ pub use setup::{
 };
 
 pub fn workspace_contract_version() -> &'static str {
-    "C-02"
+    handbook_engine::workspace_contract_version()
 }

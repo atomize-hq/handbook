@@ -473,7 +473,13 @@ fn artifact_for_kind(
 fn artifact_order_index_for_path(path: &str) -> usize {
     CANONICAL_ARTIFACT_ORDER
         .iter()
-        .position(|kind| kind.relative_path() == path)
+        .position(|kind| {
+            canonical_artifact_descriptors()
+                .iter()
+                .find(|descriptor| descriptor.kind == *kind)
+                .map(|descriptor| descriptor.relative_path == path)
+                .unwrap_or(false)
+        })
         .unwrap_or(usize::MAX)
 }
 

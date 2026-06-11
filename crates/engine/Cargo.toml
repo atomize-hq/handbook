@@ -8,4 +8,9 @@ name = "handbook_engine"
 path = "src/lib.rs"
 
 [dependencies]
-handbook-compiler = { path = "../compiler" }
+libc = "0.2"
+serde = { version = "1", features = ["derive"] }
+sha2 = "0.10"
+
+[dev-dependencies]
+tempfile = "3"
