@@ -2,5 +2,8 @@
 members = [
     "crates/compiler",
     "crates/cli",
+    "crates/engine",
+    "crates/pipeline",
+    "crates/flow",
 ]
 resolver = "2"
