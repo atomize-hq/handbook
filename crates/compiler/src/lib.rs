@@ -26,6 +26,7 @@ mod repo_file_access;
 pub mod resolver;
 pub mod route_state;
 pub mod setup;
+mod setup_shell;
 mod stage_10_feature_spec_provenance;
 
 pub use artifact_manifest::{
