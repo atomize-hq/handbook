@@ -1,7 +1,9 @@
 use handbook_flow::{
     resolve, BudgetDisposition, BudgetPolicy, PacketSectionMode, PacketSelectionStatus,
-    PacketVariant, ResolveRequest, ResolverRefusalCategory,
+    PacketVariant, ResolveRequest, ResolverNextSafeAction, ResolverRefusalCategory,
+    ResolverSubjectRef,
 };
+use handbook_engine::CanonicalArtifactKind;
 
 fn write_file(path: &std::path::Path, contents: &[u8]) {
     if let Some(parent) = path.parent() {
@@ -178,6 +180,23 @@ fn flow_resolver_blocks_missing_system_root_with_typed_refusal() {
 }
 
 #[test]
+fn flow_resolver_prioritizes_system_root_missing_over_live_execution_refusal() {
+    let dir = tempfile::tempdir().expect("tempdir");
+
+    let result = resolve(
+        dir.path(),
+        ResolveRequest {
+            packet_id: "execution.live.packet",
+            ..ResolveRequest::default()
+        },
+    )
+    .expect("resolve");
+
+    let refusal = result.refusal.expect("refusal");
+    assert_eq!(refusal.category, ResolverRefusalCategory::SystemRootMissing);
+}
+
+#[test]
 fn flow_resolver_builds_ready_planning_packet_body() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
@@ -256,6 +275,190 @@ fn flow_resolver_summarizes_optional_sources_when_budget_demands_it() {
         note.text
             == "optional source summarized due to budget: .handbook/project_context/PROJECT_CONTEXT.md"
     }));
+}
+
+#[cfg(unix)]
+#[test]
+fn flow_resolver_refuses_symlinked_canonical_artifact_as_non_canonical_input() {
+    use std::os::unix::fs::symlink;
+
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+
+    std::fs::create_dir_all(root.join(".handbook/charter")).expect("mkdirs");
+    std::fs::create_dir_all(root.join(".handbook/feature_spec")).expect("mkdirs");
+
+    let real = root.join("real_charter.md");
+    write_file(&real, b"charter");
+    symlink(&real, root.join(".handbook/charter/CHARTER.md")).expect("symlink charter");
+    write_file(
+        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
+        b"spec",
+    );
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+
+    let refusal = result.refusal.expect("refusal");
+    assert_eq!(
+        refusal.category,
+        ResolverRefusalCategory::NonCanonicalInputAttempt
+    );
+    assert_eq!(
+        refusal.broken_subject,
+        ResolverSubjectRef::CanonicalArtifact {
+            kind: CanonicalArtifactKind::Charter,
+            canonical_repo_relative_path: ".handbook/charter/CHARTER.md",
+        }
+    );
+    assert_eq!(refusal.next_safe_action, ResolverNextSafeAction::RunSetupRefresh);
+}
+
+#[test]
+fn flow_resolver_blocks_optional_artifact_read_error_without_refusal() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+
+    write_file(
+        &root.join(".handbook/charter/CHARTER.md"),
+        valid_charter_markdown().as_bytes(),
+    );
+    write_file(
+        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
+        b"feature",
+    );
+    std::fs::create_dir_all(root.join(".handbook/project_context/PROJECT_CONTEXT.md"))
+        .expect("project_context dir");
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+
+    assert_eq!(result.selection.status, PacketSelectionStatus::Blocked);
+    assert!(result.refusal.is_none());
+    assert!(result.packet_result.sections.is_empty());
+    assert!(
+        !result.packet_result.notes.iter().any(|note| {
+            note.text == "optional source omitted: .handbook/project_context/PROJECT_CONTEXT.md"
+        }),
+        "read errors must not be mislabeled as benign omissions: {:?}",
+        result.packet_result.notes
+    );
+    assert!(result
+        .packet_result
+        .notes
+        .iter()
+        .any(|note| note.text == "packet body omitted because request is not ready"));
+    assert!(result.blockers.iter().any(|blocker| {
+        blocker.summary == "failed to read canonical artifact"
+            && blocker.subject
+                == ResolverSubjectRef::CanonicalArtifact {
+                    kind: CanonicalArtifactKind::ProjectContext,
+                    canonical_repo_relative_path:
+                        ".handbook/project_context/PROJECT_CONTEXT.md",
+                }
+            && blocker.next_safe_action == ResolverNextSafeAction::RunSetupRefresh
+    }));
+}
+
+#[test]
+fn flow_resolver_refuses_required_artifact_malformed_path_read_error() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+
+    std::fs::create_dir_all(root.join(".handbook/charter/CHARTER.md")).expect("charter dir");
+    write_file(
+        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
+        b"spec",
+    );
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+
+    let refusal = result.refusal.expect("refusal");
+    assert_eq!(refusal.category, ResolverRefusalCategory::ArtifactReadError);
+    assert_eq!(
+        refusal.broken_subject,
+        ResolverSubjectRef::CanonicalArtifact {
+            kind: CanonicalArtifactKind::Charter,
+            canonical_repo_relative_path: ".handbook/charter/CHARTER.md",
+        }
+    );
+    assert_eq!(refusal.next_safe_action, ResolverNextSafeAction::RunSetupRefresh);
+}
+
+#[test]
+fn flow_resolver_refuses_when_budget_is_exhausted() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+
+    write_file(
+        &root.join(".handbook/charter/CHARTER.md"),
+        valid_charter_markdown().as_bytes(),
+    );
+    write_file(
+        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
+        b"feature spec that is longer than one byte",
+    );
+
+    let result = resolve(
+        root,
+        ResolveRequest {
+            budget_policy: BudgetPolicy {
+                max_total_bytes: None,
+                max_per_artifact_bytes: Some(1),
+            },
+            packet_id: "planning.packet",
+        },
+    )
+    .expect("resolve");
+
+    assert_eq!(result.budget_outcome.disposition, BudgetDisposition::Refuse);
+    let refusal = result.refusal.expect("refusal");
+    assert_eq!(refusal.category, ResolverRefusalCategory::BudgetRefused);
+    assert_eq!(
+        refusal.broken_subject,
+        ResolverSubjectRef::Policy {
+            policy_id: "budget",
+        }
+    );
+    assert!(matches!(
+        refusal.next_safe_action,
+        ResolverNextSafeAction::ReduceCanonicalArtifactSize { .. }
+    ));
+}
+
+#[test]
+fn flow_resolver_refuses_live_execution_packets_without_fixture_backing() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+
+    write_file(
+        &root.join(".handbook/charter/CHARTER.md"),
+        valid_charter_markdown().as_bytes(),
+    );
+    write_file(
+        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
+        b"feature",
+    );
+
+    let result = resolve(
+        root,
+        ResolveRequest {
+            packet_id: "execution.live.packet",
+            ..ResolveRequest::default()
+        },
+    )
+    .expect("resolve");
+
+    let refusal = result.refusal.expect("refusal");
+    assert_eq!(refusal.category, ResolverRefusalCategory::UnsupportedRequest);
+    assert!(
+        refusal.summary.contains("fixture-backed"),
+        "expected boundary statement mentioning fixture-backed demos: {:?}",
+        refusal.summary
+    );
+    assert!(
+        refusal.summary.contains("planning"),
+        "expected boundary statement mentioning planning packets: {:?}",
+        refusal.summary
+    );
 }
 
 #[test]
