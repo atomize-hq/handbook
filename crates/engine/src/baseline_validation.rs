@@ -70,10 +70,11 @@ fn validation_for_descriptor<F>(
 where
     F: Fn(CanonicalArtifactKind, &str) -> Result<(), String> + Copy,
 {
+    let artifact = canonical_artifact(artifacts, descriptor.kind);
     BaselineArtifactValidation {
         kind: descriptor.kind,
-        canonical_repo_relative_path: descriptor.relative_path,
-        packet_required: descriptor.packet_required,
+        canonical_repo_relative_path: artifact.identity.relative_path,
+        packet_required: artifact.identity.packet_required,
         verdict: verdict_for_descriptor(artifacts, descriptor, validate_artifact_markdown),
     }
 }
@@ -86,11 +87,12 @@ fn verdict_for_descriptor<F>(
 where
     F: Fn(CanonicalArtifactKind, &str) -> Result<(), String> + Copy,
 {
-    if has_ingest_issue_for_artifact(artifacts, descriptor) {
+    let artifact = canonical_artifact(artifacts, descriptor.kind);
+
+    if has_ingest_issue_for_artifact(artifacts, artifact) {
         return BaselineArtifactVerdict::IngestInvalid;
     }
 
-    let artifact = canonical_artifact(artifacts, descriptor.kind);
     match artifact.identity.presence {
         ArtifactPresence::Missing => BaselineArtifactVerdict::Missing,
         ArtifactPresence::PresentEmpty => BaselineArtifactVerdict::Empty,
@@ -114,7 +116,7 @@ where
                 }
             };
 
-            match validate_artifact_markdown(descriptor.kind, &markdown) {
+            match validate_artifact_markdown(artifact.identity.kind, &markdown) {
                 Ok(()) => BaselineArtifactVerdict::ValidCanonicalTruth { markdown },
                 Err(summary) => BaselineArtifactVerdict::SemanticallyInvalid { summary },
             }
@@ -124,15 +126,15 @@ where
 
 fn has_ingest_issue_for_artifact(
     artifacts: &CanonicalArtifacts,
-    descriptor: &CanonicalArtifactDescriptor,
+    artifact: &CanonicalArtifact,
 ) -> bool {
     artifacts.ingest_issues.iter().any(|issue| {
         matches!(
             issue.kind,
             ArtifactIngestIssueKind::CanonicalArtifactReadError
                 | ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed
-        ) && issue.artifact_kind == descriptor.kind
-            && issue.canonical_repo_relative_path == descriptor.relative_path
+        ) && issue.artifact_kind == artifact.identity.kind
+            && issue.canonical_repo_relative_path == artifact.identity.relative_path
     })
 }
 
