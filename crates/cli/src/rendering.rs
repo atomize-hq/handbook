@@ -6,16 +6,21 @@ pub(crate) struct PreparedFlowOutput {
 }
 
 impl PreparedFlowOutput {
-    pub(crate) fn is_ready(&self) -> bool {
-        self.ready
-    }
-
     pub(crate) fn render_markdown(&self) -> String {
         handbook_compiler::render_markdown(&self.model)
     }
 
     pub(crate) fn render_inspect(&self) -> String {
-        handbook_compiler::render_inspect(&self.model)
+        let rendered = handbook_compiler::render_inspect(&self.model);
+        if self.ready {
+            return rendered;
+        }
+
+        let Some(context) = self.model.packet_result.fixture_context.as_ref() else {
+            return rendered;
+        };
+
+        inject_after_first_three_lines(&rendered, &render_fixture_section_for_demo(context))
     }
 
     pub(crate) fn exit_code(&self) -> ExitCode {
@@ -25,6 +30,71 @@ impl PreparedFlowOutput {
             ExitCode::from(1)
         }
     }
+}
+
+fn render_fixture_section_for_demo(context: &handbook_flow::PacketFixtureContext) -> String {
+    let mut out = String::new();
+    out.push_str("MODE: fixture-backed execution demo\n");
+    out.push_str("## FIXTURE DEMO\n");
+    out.push_str(&format!("FIXTURE SET: {}\n", context.fixture_set_id));
+    out.push_str(&format!(
+        "FIXTURE BASIS ROOT: {}\n",
+        context.fixture_basis_root
+    ));
+    out.push_str("FIXTURE LINEAGE:\n");
+    if context.fixture_lineage.is_empty() {
+        out.push_str("NONE\n");
+    } else {
+        for (index, item) in context.fixture_lineage.iter().enumerate() {
+            out.push_str(&format!(
+                "{}. {}\n",
+                index + 1,
+                render_packet_source_summary(item)
+            ));
+        }
+    }
+    out
+}
+
+fn render_packet_source_summary(source: &handbook_flow::PacketSourceSummary) -> String {
+    let presence = match source.presence {
+        handbook_engine::ArtifactPresence::Missing => "missing",
+        handbook_engine::ArtifactPresence::PresentEmpty => "empty",
+        handbook_engine::ArtifactPresence::PresentNonEmpty => "present",
+    };
+
+    let bytes = match source.byte_len {
+        Some(len) => format!("{len} bytes"),
+        None => "byte length unavailable".to_string(),
+    };
+
+    let hash = source
+        .content_sha256
+        .as_ref()
+        .map(|value| format!(", sha256={value}"))
+        .unwrap_or_default();
+
+    format!(
+        "{} [{}] ({presence}, {bytes}{hash})",
+        render_canonical_artifact_kind(source.kind),
+        source.canonical_repo_relative_path
+    )
+}
+
+fn render_canonical_artifact_kind(kind: handbook_engine::CanonicalArtifactKind) -> &'static str {
+    match kind {
+        handbook_engine::CanonicalArtifactKind::Charter => "Charter",
+        handbook_engine::CanonicalArtifactKind::ProjectContext => "ProjectContext",
+        handbook_engine::CanonicalArtifactKind::EnvironmentInventory => "EnvironmentInventory",
+        handbook_engine::CanonicalArtifactKind::FeatureSpec => "FeatureSpec",
+    }
+}
+
+fn inject_after_first_three_lines(rendered: &str, injection: &str) -> String {
+    let mut lines: Vec<&str> = rendered.split('\n').collect();
+    let insert_at = 3.min(lines.len());
+    lines.insert(insert_at, injection.trim_end_matches('\n'));
+    lines.join("\n")
 }
 
 pub(crate) fn prepare_flow_output(

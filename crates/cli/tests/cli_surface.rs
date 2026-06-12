@@ -6361,6 +6361,76 @@ fn inspect_preserves_full_execution_demo_fixture_lineage_order() {
 }
 
 #[test]
+fn inspect_non_ready_execution_demo_preserves_environment_inventory_in_fixture_lineage() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    let fixture_root = root.join("tests/fixtures/execution_demo/non-ready/.handbook");
+
+    write_file(&fixture_root.join("charter/CHARTER.md"), b"");
+    write_file(
+        &fixture_root.join("project_context/PROJECT_CONTEXT.md"),
+        valid_project_context_markdown().as_bytes(),
+    );
+    write_file(
+        &fixture_root.join("environment_inventory/ENVIRONMENT_INVENTORY.md"),
+        valid_environment_inventory_markdown().as_bytes(),
+    );
+    write_file(
+        &fixture_root.join("feature_spec/FEATURE_SPEC.md"),
+        b"demo feature",
+    );
+
+    let output = binary_in(root)
+        .args([
+            "inspect",
+            "--packet",
+            "execution.demo.packet",
+            "--fixture-set",
+            "non-ready",
+        ])
+        .output()
+        .expect("inspect should run");
+
+    assert!(
+        !output.status.success(),
+        "inspect should be non-zero when the execution demo fixture is not ready: {}",
+        String::from_utf8_lossy(&output.stdout)
+    );
+
+    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
+    let fixture_section_start = stdout
+        .find("MODE: fixture-backed execution demo")
+        .expect("fixture-backed label should be injected near the top");
+    let decision_log_start = stdout.find("## DECISION LOG").expect("decision log");
+    assert!(
+        fixture_section_start < decision_log_start,
+        "expected fixture section before decision log for non-ready inspect output: {stdout}"
+    );
+    assert!(
+        stdout.contains("FIXTURE SET: non-ready"),
+        "expected fixture set id: {stdout}"
+    );
+    assert!(
+        stdout.contains("FIXTURE LINEAGE:"),
+        "expected fixture lineage list: {stdout}"
+    );
+    assert_in_order(
+        &stdout,
+        &[
+            "1. Charter [.handbook/charter/CHARTER.md]",
+            "2. ProjectContext [.handbook/project_context/PROJECT_CONTEXT.md]",
+            "3. EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]",
+        ],
+    );
+    assert!(
+        !stdout.contains(
+            "tests/fixtures/execution_demo/non-ready/.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"
+        ),
+        "expected typed lineage rendering instead of ad hoc filesystem-derived entries: {stdout}"
+    );
+}
+
+#[test]
 fn inspect_resolves_execution_demo_packet_from_nested_directory_inside_repo() {
     let (_dir, nested) = execution_demo_repo_with_nested_cwd();
 

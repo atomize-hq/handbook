@@ -21,7 +21,6 @@ impl PacketId {
 pub(super) struct PreparedRequest {
     pub(super) packet_id: PacketId,
     pub(super) compiler_root: PathBuf,
-    pub(super) demo_fixture_set_id: Option<String>,
 }
 
 pub(super) fn prepare_request(
@@ -29,8 +28,8 @@ pub(super) fn prepare_request(
     repo_root: &Path,
 ) -> Result<PreparedRequest, String> {
     let packet_id = parse_packet_id(&args.packet)?;
-    let (compiler_root, demo_fixture_set_id) = match packet_id {
-        PacketId::Planning | PacketId::ExecutionLive => (repo_root.to_path_buf(), None),
+    let compiler_root = match packet_id {
+        PacketId::Planning | PacketId::ExecutionLive => repo_root.to_path_buf(),
         PacketId::ExecutionDemo => {
             let fixture_set_id = match args.fixture_set.as_deref() {
                 Some(id) => id.trim(),
@@ -46,14 +45,13 @@ pub(super) fn prepare_request(
             ensure_dir(&fixture_set_dir, "fixture set directory")?;
             let basis_root = fixture_set_dir.join(".handbook");
             ensure_dir(&basis_root, "fixture basis root")?;
-            (fixture_set_dir, Some(fixture_set_id.to_string()))
+            fixture_set_dir
         }
     };
 
     Ok(PreparedRequest {
         packet_id,
         compiler_root,
-        demo_fixture_set_id,
     })
 }
 
