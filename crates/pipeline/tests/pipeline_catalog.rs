@@ -712,7 +712,10 @@ fn supported_target_registry_derives_current_pipeline_and_stage_wedge_from_catal
         registry.canonical_compile_pipeline_id(),
         "pipeline.foundation_inputs"
     );
-    assert_eq!(registry.canonical_compile_stage_id(), "stage.10_feature_spec");
+    assert_eq!(
+        registry.canonical_compile_stage_id(),
+        "stage.10_feature_spec"
+    );
 
     let compile_target = registry.compile_target();
     assert_eq!(compile_target.pipeline.id, "pipeline.foundation_inputs");
@@ -733,10 +736,7 @@ fn supported_target_registry_derives_current_pipeline_and_stage_wedge_from_catal
             "stage.10_feature_spec".to_string(),
         ]
     );
-    assert!(!registry.supports_capture_target(
-        &compile_target.pipeline.id,
-        "stage.00_base"
-    ));
+    assert!(!registry.supports_capture_target(&compile_target.pipeline.id, "stage.00_base"));
 }
 
 #[test]
@@ -813,7 +813,8 @@ stages:
 }
 
 #[test]
-fn supported_target_registry_ignores_unrelated_compile_broken_pipeline_during_topology_resolution() {
+fn supported_target_registry_ignores_unrelated_compile_broken_pipeline_during_topology_resolution()
+{
     let source_root = repo_root();
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
@@ -867,20 +868,24 @@ stages:
 
     let unrelated_pipeline = load_pipeline_definition(root, "core/pipelines/unrelated.yaml")
         .expect("unrelated pipeline definition");
-    let broken_stage_err = load_stage_compile_definition(root, &unrelated_pipeline, "stage.99_unrelated")
-        .expect_err("unrelated stage compile definition should be broken");
+    let broken_stage_err =
+        load_stage_compile_definition(root, &unrelated_pipeline, "stage.99_unrelated")
+            .expect_err("unrelated stage compile definition should be broken");
     match broken_stage_err {
         handbook_pipeline::CompileStageLoadError::ParseFrontMatter { .. } => {}
         other => panic!("expected compile front-matter parse refusal, got {other:?}"),
     }
 
-    let registry =
-        SupportedTargetRegistry::load(root).expect("supported target registry should ignore unrelated broken pipeline");
+    let registry = SupportedTargetRegistry::load(root)
+        .expect("supported target registry should ignore unrelated broken pipeline");
     assert_eq!(
         registry.canonical_compile_pipeline_id(),
         "pipeline.foundation_inputs"
     );
-    assert_eq!(registry.canonical_compile_stage_id(), "stage.10_feature_spec");
+    assert_eq!(
+        registry.canonical_compile_stage_id(),
+        "stage.10_feature_spec"
+    );
 }
 
 fn write_file(path: &Path, contents: &str) {

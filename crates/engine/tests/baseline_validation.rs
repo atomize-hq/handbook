@@ -144,22 +144,17 @@ fn baseline_validation_uses_loaded_custom_paths_and_custom_ingest_issue_paths() 
         ]
     );
 
-    let charter = baseline_artifact_validation(
-        &artifacts,
-        CanonicalArtifactKind::Charter,
-        test_validator,
-    )
-    .expect("charter validation");
+    let charter =
+        baseline_artifact_validation(&artifacts, CanonicalArtifactKind::Charter, test_validator)
+            .expect("charter validation");
     assert_eq!(
         charter.canonical_repo_relative_path,
         ".custom_handbook/charter/CHARTER.md"
     );
     assert_eq!(charter.verdict, BaselineArtifactVerdict::IngestInvalid);
 
-    let found = baseline_artifact_validation_for_path(
-        &validations,
-        ".custom_handbook/charter/CHARTER.md",
-    )
-    .expect("matching validation");
+    let found =
+        baseline_artifact_validation_for_path(&validations, ".custom_handbook/charter/CHARTER.md")
+            .expect("matching validation");
     assert_eq!(found.verdict, BaselineArtifactVerdict::IngestInvalid);
 }

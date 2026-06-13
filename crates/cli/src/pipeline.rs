@@ -312,11 +312,12 @@ fn pipeline_handoff(args: PipelineHandoffArgs) -> ExitCode {
 
     match args.command {
         PipelineHandoffCommand::Emit(emit_args) => {
-            let supported_target =
-                match handbook_pipeline::pipeline::SupportedTargetRegistry::load(&repo_root) {
-                    Ok(registry) => registry.handoff_target(),
-                    Err(err) => {
-                        println!(
+            let supported_target = match handbook_pipeline::pipeline::SupportedTargetRegistry::load(
+                &repo_root,
+            ) {
+                Ok(registry) => registry.handoff_target(),
+                Err(err) => {
+                    println!(
                             "{}",
                             handbook_pipeline::render_pipeline_handoff_refusal(
                                 &handbook_pipeline::PipelineHandoffRefusal {
@@ -333,9 +334,9 @@ fn pipeline_handoff(args: PipelineHandoffArgs) -> ExitCode {
                                 }
                             )
                         );
-                        return ExitCode::from(1);
-                    }
-                };
+                    return ExitCode::from(1);
+                }
+            };
             let request = handbook_pipeline::PipelineHandoffEmitRequest {
                 pipeline_selector: emit_args.id,
                 consumer_selector: emit_args.consumer,
