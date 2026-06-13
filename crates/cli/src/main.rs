@@ -444,10 +444,8 @@ decision_records:
             |_, _| panic!("guided mode should not run from-input preflight"),
             || {
                 collect_called.set(true);
-                handbook_engine::parse_charter_structured_input_yaml(
-                    valid_structured_inputs_yaml(),
-                )
-                .map_err(|err| err.summary)
+                handbook_engine::parse_charter_structured_input_yaml(valid_structured_inputs_yaml())
+                    .map_err(|err| err.summary)
             },
             |repo_root, input| {
                 author_called.set(true);
