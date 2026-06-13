@@ -34,6 +34,7 @@ This contract defines the reduced-v1 Rust workspace and CLI command-surface trut
   - `crates/flow` owns resolver, packet-result, and budget runtime surfaces.
   - `crates/pipeline` owns declarative pipeline loading, route state, compile/capture, and handoff runtime surfaces.
   - `crates/compiler` is a narrow compatibility/support crate for the remaining CLI-facing seams that still span owner crates, including setup/doctor orchestration, rendering/refusal/blocker adapters, and template-library support.
+  - Direct callers MUST treat `crates/engine`, `crates/flow`, and `crates/pipeline` as the default owner surfaces for extracted logic rather than routing that logic through `crates/compiler`.
   - `crates/cli` MUST NOT become the home for resolver logic, packet selection, or shared domain types beyond thin wiring.
   - `crates/compiler` MUST NOT parse CLI arguments or own the supported help surface.
 
@@ -45,6 +46,7 @@ This contract defines the reduced-v1 Rust workspace and CLI command-surface trut
 - The CLI crate MUST remain a thin orchestration layer that delegates logic to the crate that actually owns it.
 - `crates/engine`, `crates/flow`, and `crates/pipeline` MUST remain the default import surfaces for the logic they own.
 - `crates/compiler` MUST remain a narrow compatibility/support seam and MUST NOT revert to being an umbrella re-export crate for engine-, flow-, or pipeline-owned logic.
+- Direct callers MUST keep using the direct owner crates for extracted logic and MUST use `crates/compiler` only for the retained CLI-facing compatibility/support seam.
 - The compiler crate MUST remain the compile-time home for the small shared support types and adapters that still bind the CLI-facing seams together.
 - For the first supported `M2` compile wedge, the CLI crate MUST stay thin and the retained compiler support seam MUST own compile-proof rendering and refusal adaptation without spreading that behavior across a new abstraction stack.
 - For the first supported `M2` compile wedge, plain `pipeline compile` and `pipeline compile --explain` MUST still render from one shared typed compile result rather than maintaining separate assembly paths.

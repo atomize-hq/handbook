@@ -240,8 +240,10 @@ fn support_story_docs_match_help_snapshots() {
         .unwrap_or_else(|err| panic!("read {}: {}", root_readme_path.display(), err));
     let docs = [
         root_readme_path.clone(),
+        root.join("docs/README.md"),
         root.join("docs/START_HERE.md"),
         root.join("docs/SUPPORTED_COMMANDS.md"),
+        root.join("docs/contracts/C-02-rust-workspace-and-cli-command-surface.md"),
     ];
     let docs_text = docs
         .iter()
@@ -288,6 +290,11 @@ fn support_story_docs_match_help_snapshots() {
         "`setup refresh --reset-state` resets only `.handbook/state/**`",
         "The shipped starter templates are scaffolding only.",
         "Setup hands off to `handbook doctor`, which renders an ordered checklist",
+    ];
+    let ownership_required_doc_phrases = [
+        "direct owner crates for extracted logic",
+        "narrow compatibility/support seam",
+        "default owner surfaces for extracted logic rather than routing that logic through `crates/compiler`",
     ];
     let root_readme_required_phrases = [
         "pipeline capture --preview",
@@ -371,6 +378,13 @@ fn support_story_docs_match_help_snapshots() {
         assert!(
             docs_text.contains(phrase),
             "docs missing author-surface phrase `{phrase}`"
+        );
+    }
+
+    for phrase in ownership_required_doc_phrases {
+        assert!(
+            docs_text.contains(phrase),
+            "docs missing ownership-boundary phrase `{phrase}`"
         );
     }
 

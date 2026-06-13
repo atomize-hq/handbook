@@ -134,7 +134,7 @@ cargo run -p handbook-cli -- inspect
 ## Repo Layout
 
 - `crates/cli/`: CLI binary and command-surface tests
-- `crates/compiler/`: narrow compatibility/support seam for CLI-facing authoring, setup/doctor, rendering, and template-library glue that still spans owner crates
+- `crates/compiler/`: narrow compatibility/support seam for CLI-facing authoring, setup/doctor, rendering, and template-library glue that still spans owner crates; direct callers should import `crates/engine/`, `crates/flow/`, and `crates/pipeline/` for extracted logic instead of routing through this crate
 - `crates/engine/`: canonical artifact, freshness, and structured authoring core
 - `crates/flow/`: resolver, packet-result, and budget runtime surfaces
 - `crates/pipeline/`: declarative pipeline loading, route state, compile/capture, and handoff runtime surfaces

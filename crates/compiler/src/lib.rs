@@ -19,11 +19,13 @@ mod route_state;
 mod setup;
 mod setup_shell;
 
-// Packet 4.5.2 posture: `handbook-compiler` remains a narrow compatibility/support
-// crate for the unresolved CLI-facing seams that still span multiple owner crates.
-// Engine-, flow-, and pipeline-owned logic stays in those crates; this crate exposes
-// only the reviewed CLI-facing support types and adapters at the compiler root and
-// keeps no legacy owner-family facade modules alive in the source tree.
+// Slice 4.5 retained-seam posture: `handbook-compiler` remains a narrow
+// compatibility/support crate for the unresolved CLI-facing seams that still
+// span multiple owner crates. Engine-, flow-, and pipeline-owned logic stays in
+// those crates, and direct callers should import those owners unless they are
+// intentionally consuming the retained compiler support seam. This crate exposes
+// only the reviewed CLI-facing support types and adapters at the compiler root
+// and keeps no legacy owner-family facade modules alive in the source tree.
 pub use author::template_library::{
     resolve_shipped_template_library, resolve_template_library, CharterTemplateLibraryOverride,
     EnvironmentInventoryTemplateLibraryOverride, TemplateLibraryAsset,
