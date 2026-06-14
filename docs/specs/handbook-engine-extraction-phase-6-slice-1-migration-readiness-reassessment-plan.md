@@ -5,7 +5,8 @@
 - Planned reassessment slice.
 - This plan defines how to decide whether the repo is ready for a separate ownership/integration planning family.
 - The packet order below is sequential by default and should stay narrow unless live regression evidence forces a different seam.
-- Packet 6.1.2's ownership matrix is now captured in `docs/specs/handbook-engine-extraction-phase-6-slice-1-packet-6-1-2-ownership-matrix.md`; the final verdict packets remain pending.
+- Packet 6.1.2's ownership matrix is now captured in `docs/specs/handbook-engine-extraction-phase-6-slice-1-packet-6-1-2-ownership-matrix.md`.
+- Packet 6.1.3's final verdict is now READY with explicit deferrals; Packet 6.1.4 remains pending.
 
 ## Objective
 
@@ -76,6 +77,15 @@ Output:
 - one final verdict: ready for a separate ownership/integration planning family, or not ready because of a named blocker
 - explicit unresolved questions that remain legitimate follow-on planning inputs rather than hidden blockers
 - explicit statement of whether `handbook-compiler` is merely retained temporary glue or still a readiness ambiguity
+
+Landed Packet 6.1.3 result:
+
+- Final verdict: **READY** for a separate ownership/integration planning family.
+- Blockers: none from the Packet 6.1.1 verification wall, Packet 6.1.2 ownership matrix, or the root Phase 6 checklist.
+- Handbook-owned/imported now: `handbook-engine`, `handbook-pipeline`.
+- Explicitly deferred handbook-side seams: `handbook-flow`, `handbook-cli`, retained `handbook-compiler`.
+- Retained `handbook-compiler` is classified as temporary transition glue rather than a remaining readiness ambiguity.
+- Still deferred: any ownership/integration planning artifact authoring, any code repair, and any actual crate-move or runtime-widening work.
 
 ### Packet 6.1.4: Name the next planning artifact boundary without starting it
 

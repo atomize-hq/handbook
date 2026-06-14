@@ -5,7 +5,9 @@
 - Planned validation/planning slice.
 - Phase 6 is the next authoritative step after the landed Phase 1 through Phase 5 extraction work.
 - This slice is a reassessment boundary only. It must not be treated as permission to start ownership/import implementation.
-- Packet 6.1.2 ownership reassessment is now recorded in `docs/specs/handbook-engine-extraction-phase-6-slice-1-packet-6-1-2-ownership-matrix.md`; Packet 6.1.3 and Packet 6.1.4 remain pending.
+- Packet 6.1.2 ownership reassessment is now recorded in `docs/specs/handbook-engine-extraction-phase-6-slice-1-packet-6-1-2-ownership-matrix.md`.
+- Packet 6.1.3 now resolves the readiness verdict and explicit deferrals below.
+- Packet 6.1.4 remains pending and is still out of scope for this slice update.
 
 ## Assumptions
 
@@ -239,6 +241,49 @@ That matrix answers, for each crate:
 - whether ownership should remain handbook-side longer
 - which handbook-product assumptions still matter to the call
 
+## Packet 6.1.3 landed verdict
+
+Final verdict: **READY** for a separate ownership/integration planning family.
+
+Verdict basis:
+
+- Packet 6.1.1 already froze a clean committed repo posture and a green representative/full verification wall.
+- Packet 6.1.2 already made every in-scope crate explicit instead of leaving ownership/readiness implicit.
+- The root Phase 6 checklist in `HANDBOOK_ENGINE_EXTRACTION_PLAN.md` is now satisfied at the reassessment level: the repo can truthfully distinguish handbook-owned/imported crates from explicit handbook-side deferrals without hiding code repair inside readiness cleanup.
+
+### Final crate-by-crate readiness posture
+
+| Crate | Packet 6.1.3 posture | Blocker status | Non-blocking open question or explicit deferral |
+| --- | --- | --- | --- |
+| `handbook-engine` | Handbook-owned/imported. The clean adapter-boundary posture is strong enough for later planning to assume handbook remains the owner and Substrate is the consumer. | No blocker. | Defer any later adapter-shape refinement to the separate ownership/integration planning family. |
+| `handbook-pipeline` | Handbook-owned/imported through the already-reviewed boundary. | No blocker. The intentionally bounded runtime wedge is still acceptable for readiness. | Keep the compiler-backed test-fixture coupling and longer-term bounded-runtime posture explicit as follow-on planning inputs, not hidden blockers. |
+| `handbook-flow` | Explicitly deferred handbook-side middle layer, not a current move target. | No blocker. | The long-term ownership question stays open for the next family, but the current evidence is already clear enough to avoid blocking readiness. |
+| `handbook-cli` | Handbook-owned product shell and explicitly outside any import target. | No blocker. | Any future CLI product split or redesign is deferred; it is not part of migration-readiness cleanup. |
+| retained `handbook-compiler` seam | Retained handbook-side transition glue, not an import target and not the implementation center. | No blocker. | Retirement/narrowing timing remains explicitly deferred, but the seam is no longer a readiness ambiguity for Phase 6. |
+
+### Readiness blockers
+
+- None identified from the Packet 6.1.1 truth freeze, verification wall, Packet 6.1.2 matrix, or the root Phase 6 checklist.
+- No real code regression was surfaced that needs to be routed back to an earlier closeout seam.
+
+### Non-blocking open questions
+
+- Should `handbook-pipeline` keep the current compiler-backed test fixture path longer, or should a later planning family narrow that coupling further?
+- Does `handbook-flow` ever earn a future ownership move, or does it remain handbook-owned longer-term?
+- Which `rendering`, `refusal`, or error-surfaces should the later ownership/integration planning family treat as explicit handbook-owned boundaries?
+- When should retained `handbook-compiler` glue be narrowed or retired after the planning family is defined?
+
+### Explicit deferrals that remain out of scope
+
+- Authoring the follow-on ownership/integration planning family itself.
+- Any production-code repair, crate move, or runtime widening.
+- Any decision to move `handbook-flow`, `handbook-cli`, or retained `handbook-compiler` out of handbook ownership.
+- Any retirement/narrowing work for retained `handbook-compiler` beyond documenting it as transition glue.
+
+### Retained `handbook-compiler` readiness call
+
+For Phase 6 readiness, retained `handbook-compiler` is temporary transition glue, not a still-blocking ownership ambiguity. The only deferred work is when and how later planning narrows or retires that glue.
+
 ## Success Criteria
 
 - The Phase 1 through Phase 5 migration gate is revalidated against live repo truth.
@@ -251,6 +296,6 @@ That matrix answers, for each crate:
 ## Open Questions
 
 - Should `handbook-pipeline` remain handbook-owned longer than `handbook-engine`, even if Substrate can consume it through a clean adapter boundary?
-- Is `handbook-flow` mature enough to classify now, or should Phase 6 explicitly defer that ownership call longer than engine/pipeline?
+- Does `handbook-flow` ever earn a later ownership move, or is the honest long-term outcome still handbook-owned composition?
 - Which parts of `rendering`, `refusal`, and `error` still need ownership clarification before a later import plan can be honest?
 - At what point should retained `handbook-compiler` support glue be retired instead of remaining as a transition seam?

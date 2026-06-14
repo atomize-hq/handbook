@@ -7,7 +7,7 @@ This note records the Packet 6.1.2 crate-boundary reassessment for Phase 6 Slice
 - Packet scope: ownership/readiness reassessment only.
 - No production code was changed.
 - This note builds on committed Packet 6.1.1 truth at `30b22d5` (`Record Packet 6.1.1 migration-gate truth freeze`), which itself froze the representative migration-gate baseline from committed HEAD `5644ff7`.
-- The live working tree also contains unrelated local edits in `AGENTS.md` and `CLAUDE.md`; those edits were preserved and are not part of Packet 6.1.2.
+- At Packet 6.1.2 capture time, the live working tree also contained unrelated local edits in `AGENTS.md` and `CLAUDE.md`; those edits were preserved and were not part of Packet 6.1.2.
 
 ## Evidence used
 
