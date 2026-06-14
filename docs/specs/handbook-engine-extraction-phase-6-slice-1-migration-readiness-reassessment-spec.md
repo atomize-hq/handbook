@@ -7,7 +7,7 @@
 - This slice is a reassessment boundary only. It must not be treated as permission to start ownership/import implementation.
 - Packet 6.1.2 ownership reassessment is now recorded in `docs/specs/handbook-engine-extraction-phase-6-slice-1-packet-6-1-2-ownership-matrix.md`.
 - Packet 6.1.3 now resolves the readiness verdict and explicit deferrals below.
-- Packet 6.1.4 remains deferred. Packet 6.1.3 only establishes that the repo is **READY** for a separate future ownership/integration planning family; naming or authoring that family stays out of scope here.
+- Packet 6.1.4 now names the next planning boundary as the `Handbook Engine Extraction Phase 6 - Ownership And Integration Planning` family while keeping that family itself out of scope for Slice 6.1 execution.
 
 ## Assumptions
 
@@ -28,7 +28,7 @@ The maintainer needs this slice because the extraction work is now landed throug
 - each extracted crate is reassessed against the handbook-domain versus substrate-domain ownership rule
 - the bounded current wedge is evaluated honestly without confusing intentional deferral with regression
 - the repo ends with an explicit READY / NOT READY style migration-readiness reassessment
-- the slice makes the follow-on ownership/integration planning work explicit as future work without naming or authoring that family yet
+- the slice names the follow-on ownership/integration planning family clearly enough for a future session to start it cleanly without authoring or starting that family here
 
 ## Tech Stack
 
@@ -287,15 +287,27 @@ Verdict basis:
 
 For Phase 6 readiness, retained `handbook-compiler` is temporary transition glue, not a still-blocking ownership ambiguity. The only deferred work is when and how later planning narrows or retires that glue.
 
-## Packet 6.1.4 explicit deferral
+## Packet 6.1.4 named next boundary
 
-Packet 6.1.3 stops before Packet 6.1.4. The only Phase 6 claim here is that the repo is **READY** for a separate future ownership/integration planning family.
+Packet 6.1.4 lands the planning-boundary statement that Packet 6.1.3 deliberately deferred.
 
-Still deferred to Packet 6.1.4 or later explicit approval:
+Named next family:
 
-- naming the exact follow-on planning family or artifact triplet
-- deciding whether any local draft ownership/integration-planning docs should be reused, replaced, or discarded
-- routing any future planning packet beyond the explicit readiness/deferral boundary recorded here
+- `Handbook Engine Extraction Phase 6 - Ownership And Integration Planning`
+- artifact stem: `docs/specs/handbook-engine-extraction-phase-6-ownership-and-integration-planning-{spec,plan,tasks}.md`
+
+Why this is the next honest step:
+
+- the root Phase 6 exit criterion is now satisfied: the repo is ready for a separate ownership and integration plan
+- Packet 6.1.2 already made the crate-by-crate ownership posture explicit, and Packet 6.1.3 already established that none of the remaining questions are readiness blockers
+- the remaining work is planning-family work: decide handbook-owned import seams versus any future substrate-owned move targets, define the integration decision framework, and sequence later execution seams without widening into implementation
+
+Still out of scope in Slice 6.1:
+
+- treating any local draft `handbook-engine-extraction-phase-6-ownership-and-integration-planning-*` docs as landed authority
+- authoring or revising that follow-on family inside this packet
+- any production-code repair, crate move, runtime widening, or ownership/import implementation
+- any blocker-routing action, because the live Packet 6.1.3 verdict remains **READY** rather than **NOT READY**
 
 ## Success Criteria
 
@@ -304,7 +316,7 @@ Still deferred to Packet 6.1.4 or later explicit approval:
 - Each crate in the extracted workspace has an explicit ownership/readiness assessment.
 - The retained `handbook-compiler` seam is described honestly as either temporary glue to retire later or as a still-blocking ambiguity.
 - The slice ends with a clear readiness verdict for separate ownership/integration planning.
-- The slice makes later ownership/integration planning explicit as deferred future work rather than silently beginning it.
+- The slice names the exact next ownership/integration planning family without silently beginning it.
 
 ## Open Questions
 

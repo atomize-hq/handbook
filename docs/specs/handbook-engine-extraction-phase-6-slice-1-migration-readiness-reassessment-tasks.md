@@ -10,7 +10,7 @@ Plan reference: [handbook-engine-extraction-phase-6-slice-1-migration-readiness-
 - Packet 6.1.1 is now revalidated against unstaged local truth at HEAD `a883d16`; unrelated unstaged `AGENTS.md` and `CLAUDE.md` edits plus four untracked follow-on planning docs were preserved outside packet scope.
 - Packet 6.1.2 is now recorded against committed Packet 6.1.1 truth at `30b22d5`; at Packet 6.1.2 capture time, unrelated local edits in `AGENTS.md` and `CLAUDE.md` were preserved outside packet scope.
 - Packet 6.1.3 is now revalidated at committed HEAD `c8d9e7222b3b2e436a9484fc59f6ec923f2a01b6` with a READY verdict because the prior `handbook-engine` boundary blocker remains cleared in live repo truth.
-- Packet 6.1.4 remains deferred; any exact future ownership/integration-planning family naming is outside this packet.
+- Packet 6.1.4 now names the exact next family as `Handbook Engine Extraction Phase 6 - Ownership And Integration Planning` while keeping that family itself out of scope for this packet.
 
 ## Implementation Authority Used
 
@@ -68,19 +68,19 @@ This slice is a reassessment seam. It should validate readiness and make later p
   - Files: `docs/specs/handbook-engine-extraction-phase-6-slice-1-migration-readiness-reassessment-*.md`
   - Completion note: Packet 6.1.3 now lands a READY verdict because the old `handbook-engine` blocker stays cleared in live repo truth at `c8d9e7222b3b2e436a9484fc59f6ec923f2a01b6`; the remaining open questions stay separate from readiness, retained `handbook-compiler` remains temporary transition glue rather than a readiness ambiguity, and naming any exact follow-on planning family remains explicitly deferred.
 
-## Packet 6.1.4: Name The Next Planning Boundary (Deferred, Not Started Here)
+## Packet 6.1.4: Name The Next Planning Boundary
 
-- [ ] Task: If READY, name the exact next planning family without starting it
+- [x] Task: If READY, name the exact next planning family without starting it
   - Acceptance: The output names the follow-on ownership/integration planning family clearly enough for a future session to start it cleanly, but does not generate that family inside Slice 6.1.
   - Verify: Manual review that the named next family is distinct from this reassessment slice and does not reopen a closed earlier seam.
   - Files: `docs/specs/handbook-engine-extraction-phase-6-slice-1-migration-readiness-reassessment-*.md`
-  - Deferred note: Packet 6.1.3 is explicitly **READY**, but this packet intentionally stops before naming the exact future planning family.
+  - Completion note: Because Packet 6.1.3 remains explicitly **READY**, Packet 6.1.4 now names the next family as `Handbook Engine Extraction Phase 6 - Ownership And Integration Planning` with artifact stem `docs/specs/handbook-engine-extraction-phase-6-ownership-and-integration-planning-{spec,plan,tasks}.md`; this is the next honest step because the remaining work is ownership/integration decision framing, not more reassessment and not implementation.
 
-- [ ] Task: If NOT READY, route the blocker back to a narrow earlier seam rather than vague “more Phase 6”
+- [x] Task: If NOT READY, route the blocker back to a narrow earlier seam rather than vague “more Phase 6”
   - Acceptance: Any blocking regression is attached to a concrete earlier seam owner (for example layout parameterization, target parameterization, caller/compiler narrowing, or CLI shell closeout) instead of being left as generic unfinished reassessment work.
   - Verify: Manual review against `docs/specs/handbook-engine-extraction-closeout-four-set-map.md` and the relevant landed closeout triplet.
   - Files: `docs/specs/handbook-engine-extraction-closeout-four-set-map.md`, `docs/specs/handbook-engine-extraction-phase-6-slice-1-migration-readiness-reassessment-*.md`
-  - Deferred note: Not taken here because Packet 6.1.3 is READY; if future evidence ever flips that verdict, the blocker must be routed back to a concrete earlier seam instead of vague “more Phase 6”.
+  - Completion note: Not exercised in the current READY path, but the boundary remains explicit: if future evidence ever flips Phase 6 back to **NOT READY**, the blocker must route to a concrete earlier seam owner from the closeout map rather than vague “more Phase 6”.
 
 ## Human Review Gate
 

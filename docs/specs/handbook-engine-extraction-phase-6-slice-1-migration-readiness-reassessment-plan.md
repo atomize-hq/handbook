@@ -7,7 +7,7 @@
 - The packet order below is sequential by default and should stay narrow unless live regression evidence forces a different seam.
 - Packet 6.1.2's ownership matrix is now captured in `docs/specs/handbook-engine-extraction-phase-6-slice-1-packet-6-1-2-ownership-matrix.md`.
 - Packet 6.1.3's final verdict remains READY because the prior `handbook-engine` boundary blocker stays cleared in current live repo truth.
-- Packet 6.1.4 remains deferred; this slice now stops at Packet 6.1.3's readiness verdict and explicit deferrals.
+- Packet 6.1.4 now names the exact follow-on family as `Handbook Engine Extraction Phase 6 - Ownership And Integration Planning` while keeping that family itself out of scope for this slice.
 
 ## Objective
 
@@ -90,7 +90,7 @@ Landed Packet 6.1.3 result:
 - Retained `handbook-compiler` is classified as temporary transition glue rather than a remaining readiness ambiguity.
 - Still deferred: naming or authoring the ownership/integration planning family itself, any code repair, and any actual crate-move or runtime-widening work.
 
-### Packet 6.1.4: Name the next planning artifact boundary without starting it (deferred; not landed here)
+### Packet 6.1.4: Name the next planning artifact boundary without starting it
 
 Why last:
 
@@ -98,17 +98,19 @@ Why last:
 - if READY, the next artifact family must be named clearly enough that a future session can start cleanly
 - if NOT READY, the next artifact must be the narrow repair seam rather than a vague “more Phase 6”
 
-Output when explicitly approved later:
+Output:
 
 - exact next planning family name and scope if READY
 - exact blocker seam name and scope if NOT READY
 - no ownership/import plan authored yet
 
-Deferred Packet 6.1.4 posture:
+Landed Packet 6.1.4 result:
 
-- Not started here.
-- Packet 6.1.3 only establishes READY for a separate future ownership/integration planning family.
-- Exact family naming, artifact selection, and any later planning packet beyond the readiness/deferral boundary remain out of scope for this packet.
+- Current verdict path: **READY**, so Packet 6.1.4 names the next family as `Handbook Engine Extraction Phase 6 - Ownership And Integration Planning`.
+- Exact artifact boundary for that future family: `docs/specs/handbook-engine-extraction-phase-6-ownership-and-integration-planning-{spec,plan,tasks}.md`.
+- Exact next-family scope: decide per-crate architectural ownership, define handbook-import versus future substrate-move criteria, and sequence later execution seams without starting code implementation or packet prompts.
+- Existing local draft docs at that artifact stem remain outside Packet 6.1.4 authority; this packet only names the boundary and does not approve, revise, or land those drafts.
+- The NOT READY branch stays preserved as a rule only: if later evidence flips the verdict, route the blocker back to a named earlier seam instead of reopening vague “more Phase 6”.
 
 ## Risks And Mitigations
 
