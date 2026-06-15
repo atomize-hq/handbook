@@ -4,9 +4,9 @@ Plan reference: [handbook-engine-extraction-phase-6-ownership-and-integration-pl
 
 ## Status
 
-- Packets 1 and 2 are landed in this task ledger.
+- Packets 1, 2, and 3 are landed in this task ledger.
 - This ledger remains planning-only and docs-only.
-- Packets 3 and 4 are not started here.
+- Packet 4 is not started here.
 - Packet 1 verification-time repo-truth freeze (pre-landing baseline, not the later landed HEAD):
   - branch: `feat/seam-extraction`
   - pre-landing baseline HEAD: `01b50868599bc55e7680784a9b5b2dace5ab6042`
@@ -27,6 +27,9 @@ Plan reference: [handbook-engine-extraction-phase-6-ownership-and-integration-pl
 - `crates/engine/src/canonical_paths.rs`
 - `crates/pipeline/src/lib.rs`
 - `crates/pipeline/tests/pipeline_catalog.rs`
+- `crates/flow/src/lib.rs`
+- `crates/cli/src/main.rs`
+- `crates/compiler/src/lib.rs`
 
 ## Packet 1: Freeze Current Authority And Scope Guard
 
@@ -63,14 +66,31 @@ Plan reference: [handbook-engine-extraction-phase-6-ownership-and-integration-pl
   - Completion note: The docs now state that `handbook-engine` stays handbook-owned and is importable through its current public crate surface, while `handbook-pipeline` stays handbook-owned but should be consumed only through the supported-target reviewed boundary rather than the entire re-export surface.
 
 - [x] Task: Name the deferred pipeline-specific cleanup seam explicitly and keep later packets out of scope
-  - Acceptance: The triplet names the residual pipeline seam instead of hiding it in the ownership verdict and leaves Packets 3 and 4 untouched.
+  - Acceptance: The triplet names the residual pipeline seam instead of hiding it in the ownership verdict and, at Packet 2 landing time, leaves Packets 3 and 4 untouched.
   - Verify: `rg -n "compiler-backed fixture/support decoupling|template_library|Packet 3|Packet 4|out of scope" docs/specs/handbook-engine-extraction-phase-6-ownership-and-integration-planning-{spec,plan,tasks}.md`
-  - Completion note: Packet 2 names compiler-backed fixture/support decoupling for the catalog/runtime wedge—starting with `crates/pipeline/tests/pipeline_catalog.rs` reaching into `handbook_compiler::author::template_library`—as its own later bounded seam. Packet 3 and Packet 4 remain pending and out of scope.
+  - Completion note: Packet 2 names compiler-backed fixture/support decoupling for the catalog/runtime wedge—starting with `crates/pipeline/tests/pipeline_catalog.rs` reaching into `handbook_compiler::author::template_library`—as its own later bounded seam. At the Packet 2 landing point, Packet 3 and Packet 4 remained pending and out of scope.
 
 ## Packet 3: Decide Handbook-Side Deferred Boundaries And Non-Targets
 
-- [ ] Not started in this landing.
-- [ ] Out of scope until a later explicit packet request.
+- [x] Task: Verify the `handbook-flow` surface and lock the handbook-owned longer-term posture without overclaiming an import target
+  - Acceptance: The triplet states that `handbook-flow` remains handbook-owned longer-term, treats the current crate as a handbook-side middle layer rather than a move target, and names what a future narrower import boundary would have to prove without claiming that proof already exists.
+  - Verify: `rg -n "pub mod|pub use|resolve|PacketResult|BudgetOutcome" crates/flow/src/lib.rs crates/flow/src && cargo tree -p handbook-flow && cargo test -p handbook-flow --test resolver_core`
+  - Completion note: `crates/flow/src/lib.rs` still exports only the `budget`, `packet_result`, and `resolver` family plus reviewed re-exports, `flow_contract_version()` still delegates to `handbook_engine::workspace_contract_version()`, `cargo tree -p handbook-flow` shows the crate sitting directly on `handbook-engine`, and `resolver_core` passed. Packet 3 therefore records `handbook-flow` as handbook-owned longer-term and requires any later narrower import boundary to prove a stable reviewed contract around the resolver / packet-result / budget family before later planning can bless it.
+
+- [x] Task: Lock `handbook-cli` as the handbook-owned product shell and explicit non-target
+  - Acceptance: The triplet states plainly that `handbook-cli` is handbook-owned product shell, not an import target, and ties that decision to live shell ownership evidence instead of vague product-language.
+  - Verify: `rg -n "CommandFactory|ExitCode|pipeline_help|doctor|rendering|prompt" crates/cli/src/main.rs crates/cli/src && cargo test -p handbook-cli --test help_drift_guard`
+  - Completion note: `crates/cli/src/main.rs` still owns the clap command tree, dynamic pipeline help, prompting, rendering, command dispatch, doctor/setup shell flow, and exit-code handling; the top-level about text still presents the full handbook product shell; and `help_drift_guard` passed. Packet 3 therefore records `handbook-cli` as handbook-owned product shell rather than any import target and keeps CLI redesign/product splitting out of scope.
+
+- [x] Task: Lock retained `handbook-compiler` as transition glue rather than a future ownership target
+  - Acceptance: The triplet states that retained `handbook-compiler` remains handbook-side transition glue, not the implementation center and not a future ownership target, and ties that call to the live re-export/dependency posture.
+  - Verify: `rg -n "rendering|refusal|doctor|setup|template_library|pub use" crates/compiler/src/lib.rs crates/compiler/src && cargo tree -p handbook-compiler && cargo check --workspace`
+  - Completion note: `crates/compiler/src/lib.rs` still re-exports author/template-library, doctor, refusal, rendering, resolver, and setup adapters while depending on `handbook-engine`, `handbook-flow`, and `handbook-pipeline`; `cargo tree -p handbook-compiler` still shows the compiler crate sitting above those extracted owner crates; and `cargo check --workspace` passed. Packet 3 therefore records retained `handbook-compiler` as handbook-side transition glue that later work may narrow or retire, but not as the future durable owner boundary.
+
+- [x] Task: Name the deferred handbook-side support surfaces explicitly and keep Packet 4 out of scope
+  - Acceptance: The triplet keeps `handbook-flow`, `handbook-cli`, and retained `handbook-compiler` distinct, explicitly names the support surfaces left to later seams, and does not drift into Packet 4 downstream execution planning.
+  - Verify: `rg -n "handbook-flow|handbook-cli|handbook-compiler|rendering|refusal|error|doctor|setup|Packet 4|review gate|deferred" docs/specs/handbook-engine-extraction-phase-6-ownership-and-integration-planning-{spec,plan,tasks}.md`
+  - Completion note: Packet 3 now separately records the `handbook-flow` future-proof requirement, the `handbook-cli` product-shell boundary, and the retained `handbook-compiler` transition-glue posture; it also leaves the exact `rendering` / `refusal` / error split, CLI-facing `doctor` / `setup` / template-library support adapters, retained-compiler narrowing/retirement timing, and Packet 4 downstream execution seams as explicit later seams instead of pretending they are already settled here.
 
 ## Packet 4: Define Downstream Execution Seams And Review Gate
 
@@ -79,4 +99,4 @@ Plan reference: [handbook-engine-extraction-phase-6-ownership-and-integration-pl
 
 ## Human Review Gate
 
-Do not begin Packet 3, Packet 4, packet-prompt authoring, implementation, production code edits, crate moves, runtime behavior changes, CLI redesign, retained-compiler retirement work, or Substrate integration work from this ledger. Stop at Packet 2 and route the result to orchestration review.
+Do not begin Packet 4, packet-prompt authoring, implementation, production code edits, crate moves, runtime behavior changes, CLI redesign, retained-compiler retirement work, or Substrate integration work from this ledger. Stop at Packet 3 and route the result to orchestration review.
