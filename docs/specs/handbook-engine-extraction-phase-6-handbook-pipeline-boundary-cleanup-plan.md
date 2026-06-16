@@ -37,7 +37,7 @@ Success for this plan means:
 
 6. **Verification and review gate**
    - the future implementation verification wall for pipeline and compiler authoring proof
-   - the explicit human review gate that still blocks implementation, publication, crates.io work, Substrate consumption, and integration execution
+   - the explicit human review gate that still blocks implementation, packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, and integration implementation
 
 ## Order
 
@@ -79,31 +79,23 @@ Output:
 - one explicit **bounded cleanup target**: later implementation must remove or relocate the pipeline-side compiler-backed fixture/support dependency needed by pipeline catalog/runtime proof
 - one explicit **non-goals** list that keeps retained `handbook-compiler` retirement, broader authoring-stack relocation, and CLI shell/support reassignment out of this seam
 
-### Packet 3: Choose the allowed cleanup shape and verification wall
+### Packet 3: Choose the allowed cleanup shape, verification wall, and review stop
 
 Why third:
 
 - once the seam boundary and coupling evidence are frozen, the plan can describe what future implementation is allowed to do without over-prescribing the code change
 - the cleanup must be narrow enough to preserve compiler authoring support while removing the pipeline test/support dependency
 - the verification wall must prove both pipeline behavior and non-regression of the still-retained compiler authoring support
+- the landed Phase 6 family already established that planning does not equal execution approval, so Packet 3 must end at review instead of leaving the stop condition implicit
 
 Output:
 
 - one allowed cleanup envelope: pipeline-owned or compiler-neutral support for the specific shipped template defaults needed by pipeline catalog/runtime proof
 - one explicit prohibition on turning this seam into full retained-compiler narrowing
 - one verification wall spanning `pipeline_catalog`, pipeline compile/capture/handoff proof, compiler authoring proof, and workspace compile health
-
-### Packet 4: End at a human review gate
-
-Why last:
-
-- the landed Phase 6 family already established that planning does not equal execution approval
-- this seam must preserve that posture so future implementation starts only after separate human review
-
-Output:
-
+- one explicit justification that `pipeline_loader`, `pipeline_route_resolution`, and `pipeline_state_store` stay adjacent evidence for loading/selection and route-state coverage rather than new mandatory wall items because they do not import compiler template-library support
 - one explicit stop point for the new triplet
-- one statement that packet prompts, production edits, publication, crates.io work, Substrate consumption, and integration implementation remain blocked until separately approved
+- one statement that implementation, packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, and integration implementation remain blocked until a human separately reviews this triplet and explicitly approves a later execution packet
 
 ## Risks And Mitigations
 
@@ -205,7 +197,7 @@ Suggested verification:
 rg -n "remove or relocate|pipeline catalog/runtime proof|retained handbook-compiler retirement|authoring-stack relocation|CLI shell/support" docs/specs/handbook-engine-extraction-phase-6-handbook-pipeline-boundary-cleanup-{spec,plan,tasks}.md
 ```
 
-### Checkpoint 4: Future implementation verification wall is ready
+### Checkpoint 4: Future implementation verification wall and review stop are ready
 
 Confirm the triplet records the future implementation proof wall:
 
@@ -218,6 +210,10 @@ cargo test -p handbook-compiler --test author
 cargo check --workspace
 ```
 
+Confirm the triplet also explains why `pipeline_loader`, `pipeline_route_resolution`, and `pipeline_state_store` remain adjacent evidence instead of mandatory seam-specific wall entries: they cover loading/selection and route-state behavior, but live repo truth does not show them importing compiler template-library support, so `pipeline_catalog` remains the only known compiler-backed coupling proof inside this seam-specific wall.
+
+Confirm the triplet also states plainly that it is planning-only and that implementation, packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, and integration implementation remain blocked until a human separately reviews this triplet and explicitly approves a later execution packet.
+
 ## Exit Conditions
 
 This triplet is ready for human review when:
@@ -227,3 +223,7 @@ This triplet is ready for human review when:
 - the Packet 2 freeze distinguishes the live evidence ledger, retained compiler context, bounded cleanup target, and explicit non-goals clearly enough that later packets can remove the coupling without reopening adjacent seams
 - the verification wall covers both pipeline proof and retained compiler authoring non-regression
 - the final stop condition is explicit: this triplet is planning-only and awaits separate human approval before implementation
+
+## Human Review Gate
+
+This triplet is planning-only and stops at review. Implementation, packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, and integration implementation remain blocked until a human separately reviews this triplet and explicitly approves a later execution packet.

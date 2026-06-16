@@ -18,7 +18,7 @@ This triplet must define, in docs only:
 - the live evidence ledger and retained compiler context for the specific compiler-backed fixture/support coupling that still prevents the full current `handbook-pipeline` crate surface from being blessed as the durable importer contract
 - the bounded cleanup target and explicit non-goals needed to remove or relocate that coupling without widening into CLI shell/support clarification, `handbook-flow` importer-proof work, retained `handbook-compiler` narrowing, or optional `handbook-engine` boundary-freeze work
 
-This triplet is planning-only. It does **not** authorize implementation, packet-prompt authoring, production edits, crate publication, crates.io work, Substrate consumption, or integration implementation.
+This triplet is planning-only and stops at human review. Implementation, packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, and integration implementation remain blocked until a human separately reviews this triplet and explicitly approves a later execution packet.
 
 ## Why This Seam Is The Next Planning Target
 
@@ -119,6 +119,26 @@ This triplet does not change production code, so its immediate verification is e
 - **Repo-truth evidence now:** confirm the current public `handbook-pipeline` surface, the remaining compiler dev-dependency, and the `pipeline_catalog` test import into compiler template-library support.
 - **Implementation-proof wall later:** future packets for this seam must prove the catalog/runtime wedge still works, that compile/capture/handoff behavior stays green, and that compiler authoring support still works after the pipeline test/support dependency is cleaned up.
 - **Boundary-proof expectation:** future implementation must prove that `pipeline_catalog` no longer depends on compiler-owned template-library support while preserving the Packet 2 rule that only the reviewed supported-target wedge, not the full crate surface, is the durable importer contract.
+
+## Packet 3 Verification Wall
+
+Future implementation for this seam must clear the full verification wall below before the seam can be considered implementation-complete:
+
+- `cargo test -p handbook-pipeline --test pipeline_catalog`
+- `cargo test -p handbook-pipeline --test pipeline_compile`
+- `cargo test -p handbook-pipeline --test pipeline_capture`
+- `cargo test -p handbook-pipeline --test pipeline_handoff`
+- `cargo test -p handbook-compiler --test author`
+- `cargo check --workspace`
+
+This verification wall is reserved for a later execution packet. This triplet does not authorize running implementation, packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, or integration implementation.
+
+### Adjacent evidence vs. seam-specific wall
+
+- `pipeline_catalog` stays inside the mandatory Packet 3 wall because live repo truth still shows it importing `handbook_compiler::author::template_library::{resolve_shipped_template_library, TemplateLibraryRequest, TemplateLibrarySelection}`.
+- `pipeline_loader` remains adjacent evidence for loading/selection surfaces, and `pipeline_route_resolution` plus `pipeline_state_store` remain adjacent evidence for route-state surfaces.
+- Those adjacent tests do **not** currently import compiler template-library support, so they are evidence for the reviewed boundary shape rather than additional seam-specific proof that the compiler-backed coupling was removed.
+- The mandatory Packet 3 wall therefore stays intentionally narrow: prove the known compiler-backed coupling seam (`pipeline_catalog`), preserve compile/capture/handoff proof for the reviewed supported-target wedge, preserve compiler authoring proof, and keep workspace compile health green.
 
 ## Seam Scope
 
@@ -222,7 +242,7 @@ Acceptable future implementation postures may include a pipeline-owned or compil
   - bless the full current `handbook-pipeline` crate surface as the durable importer contract
   - reopen the Phase 6 ownership verdicts for `handbook-engine`, `handbook-flow`, `handbook-cli`, or retained `handbook-compiler`
   - start implementation from this triplet alone
-  - authorize packet prompts, crates.io work, crate publication, or integration implementation
+  - authorize packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, or integration implementation
 
 ## Success Criteria
 
@@ -235,8 +255,12 @@ Acceptable future implementation postures may include a pipeline-owned or compil
 - The triplet plans a bounded cleanup path that removes or relocates that coupling without widening into retained `handbook-compiler` retirement, broader authoring-stack relocation, or CLI shell/support reassignment.
 - The triplet includes a future implementation verification wall and an explicit human review gate.
 
+## Human Review Gate
+
+This triplet stops at review. Implementation, packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, and integration implementation remain blocked until a human separately reviews this triplet and explicitly approves a later execution packet.
+
 ## Open Questions
 
 - Which minimal replacement source should later implementation use for the shipped template defaults needed by `pipeline_catalog`: a pipeline-owned test/support fixture, or a compiler-neutral shared helper that does not drag author-shell ownership into the pipeline boundary?
 - Does any current `handbook-pipeline` export outside the reviewed supported-target wedge still need temporary transitional documentation, or can this triplet treat the non-reviewed remainder simply as out of boundary?
-- Are there additional `handbook-pipeline` tests beyond `pipeline_catalog` that still depend on compiler-owned support surfaces and therefore need to be included in the bounded evidence ledger before implementation starts?
+- Current live repo truth says `pipeline_loader`, `pipeline_route_resolution`, and `pipeline_state_store` cover adjacent loading/selection and route-state behavior without importing compiler template-library support; if a later repo change introduces another compiler-backed pipeline test beyond `pipeline_catalog`, add it to the bounded evidence ledger before implementation starts.

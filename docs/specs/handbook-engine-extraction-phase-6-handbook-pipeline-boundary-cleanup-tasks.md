@@ -38,16 +38,19 @@ Plan reference: [handbook-engine-extraction-phase-6-handbook-pipeline-boundary-c
 
 ## Packet 3: Prepare Future Implementation Verification And Stop At Review
 
-- [ ] Task: Record the future implementation verification wall for this seam
+- [x] Task: Record the future implementation verification wall for this seam
   - Acceptance: The triplet records `pipeline_catalog`, `pipeline_compile`, `pipeline_capture`, `pipeline_handoff`, compiler `author`, and `cargo check --workspace` as the future implementation verification wall for this seam.
   - Verify: `rg -n "pipeline_catalog|pipeline_compile|pipeline_capture|pipeline_handoff|handbook-compiler --test author|cargo check --workspace" docs/specs/handbook-engine-extraction-phase-6-handbook-pipeline-boundary-cleanup-{spec,plan,tasks}.md`
   - Files: `docs/specs/handbook-engine-extraction-phase-6-handbook-pipeline-boundary-cleanup-spec.md`, `docs/specs/handbook-engine-extraction-phase-6-handbook-pipeline-boundary-cleanup-plan.md`, `docs/specs/handbook-engine-extraction-phase-6-handbook-pipeline-boundary-cleanup-tasks.md`
+  - Completion note: Packet 3 now records the full future implementation verification wall in quote-ready form across the triplet: `pipeline_catalog`, `pipeline_compile`, `pipeline_capture`, `pipeline_handoff`, compiler `author`, and `cargo check --workspace` all remain required proof for a later execution packet.
+  - Scope note: `pipeline_loader`, `pipeline_route_resolution`, and `pipeline_state_store` remain adjacent evidence for loading/selection and route-state coverage rather than new mandatory wall entries because live repo truth does not show them importing compiler template-library support; `pipeline_catalog` remains the known compiler-backed coupling seam this wall must prove.
 
-- [ ] Task: Preserve the human review gate and planning-only stop condition
-  - Acceptance: The triplet states plainly that it is planning-only; implementation, packet-prompt authoring, production edits, publication, crates.io work, Substrate consumption, and integration implementation remain blocked until a human separately reviews and approves a later execution packet.
+- [x] Task: Preserve the human review gate and planning-only stop condition
+  - Acceptance: The triplet states plainly that it is planning-only; implementation, packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, and integration implementation remain blocked until a human separately reviews this triplet and explicitly approves a later execution packet.
   - Verify: `rg -n "planning-only|packet-prompt authoring|production edits|publication|crates\.io|Substrate consumption|integration implementation|Human Review Gate" docs/specs/handbook-engine-extraction-phase-6-handbook-pipeline-boundary-cleanup-{spec,plan,tasks}.md`
   - Files: `docs/specs/handbook-engine-extraction-phase-6-handbook-pipeline-boundary-cleanup-spec.md`, `docs/specs/handbook-engine-extraction-phase-6-handbook-pipeline-boundary-cleanup-plan.md`, `docs/specs/handbook-engine-extraction-phase-6-handbook-pipeline-boundary-cleanup-tasks.md`
+  - Completion note: Packet 3 now ends at an explicit **Human Review Gate** in all three docs. The stop condition is quote-ready and says that implementation, packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, and integration implementation remain blocked until a human separately reviews this triplet and explicitly approves a later execution packet.
 
 ## Human Review Gate
 
-Stop after this triplet is reviewed. Do **not** start implementation from these docs alone. A later execution packet still requires separate human approval, and the original Phase 6 review-gate constraints remain in force.
+This triplet is planning-only and stops at review. Implementation, packet-prompt authoring for later execution, production edits, publication, crates.io work, Substrate consumption, and integration implementation remain blocked until a human separately reviews this triplet and explicitly approves a later execution packet.
