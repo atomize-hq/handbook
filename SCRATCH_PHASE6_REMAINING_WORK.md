@@ -1,42 +1,51 @@
-# Phase 6 Remaining Work — Scratch Plan
+# Phase 6 Remaining Work — Scratch Status
 
-## Next Steps (in order)
+## Current live status
 
-### 1. Close out Lane A — Pipeline boundary cleanup
+- **Lane A**: closed.
+- **Lane B**: authority unblocked and re-shaped; execution still pending.
+- **Lane C**: deferred / optional.
+- **Lane D**: blocked on Lane B completion.
 
-- [ ] Update the pipeline-boundary-cleanup tasks doc to reflect that Implementation Packet 1 landed (commit `2dfb9b7`)
-- [ ] Run the full verification wall:
-  ```
-  cargo test -p handbook-pipeline --test pipeline_catalog
-  cargo test -p handbook-pipeline --test pipeline_compile
-  cargo test -p handbook-pipeline --test pipeline_capture
-  cargo test -p handbook-pipeline --test pipeline_handoff
-  cargo test -p handbook-compiler --test author
-  cargo check --workspace
-  ```
-- [ ] Make the durable boundary decision: narrower public facade vs. documented frozen subset of the current public surface
-- [ ] Record the decision and close out the slice
+## Adopted Lane B direction
 
-### 2. Docs hygiene / archive pass — DONE
+The authority decision is now made:
 
-- Keep active: `HANDBOOK_ENGINE_EXTRACTION_PLAN.md`, `docs/specs/handbook-engine-extraction-slice-map.md`, `docs/specs/handbook-engine-extraction-closeout-four-set-map.md`
-- Archive: all landed Phase 1–5 slice triplets, all old packet-prompt artifacts for landed work, the Phase 6 Slice 6.1 packet artifacts, likely the current Phase 6 packet-prompt artifacts, possibly the current Phase 6 planning triplets after lifting still-valid conclusions
-- Add: one archive index / map
+- `handbook-flow` is a **required** import target alongside `handbook-engine` and `handbook-pipeline`.
+- `handbook-cli` remains the only product shell in this phase; Lane B is not a shell redesign.
+- The old scratch framing of “Option A vs Option B” is retired.
+- The active direction is the narrow production cleanup seam before consumer-contract formalization.
 
-### 3. Write fresh remaining-work triplet
+## Lane B packet structure now in force
 
-- `docs/specs/handbook-engine-extraction-phase-6-remaining-work-spec.md`
-- `...plan.md`
-- `...tasks.md`
-- State up front: target Substrate crate set is engine + pipeline + flow; handbook-cli is out; retained handbook-compiler is not an import target; handbook-engine is import-ready; handbook-pipeline needs boundary freeze; handbook-flow needs import-boundary proof
+1. **Packet 6.B.1 — Gather Evidence**
+   - preserve the honest proof that `handbook-flow -> handbook-engine` crate coupling is already clean
+   - record transitive type-dependency truth
+   - separately record the residual shell-owned/operator-facing copy still leaking through the flow surface
+2. **Packet 6.B.2 — Clean Flow Import-Surface Shell Ownership**
+   - narrow production seam
+   - remove final shell-owned/operator-facing copy from the public flow surface
+   - keep the cleanup bounded; no broad CLI redesign
+3. **Packet 6.B.3 — Formalize Consumer Contract**
+   - freeze the cleaned import surface
+   - explicitly record what typed semantics remain in-boundary vs what shell-owned copy is out of boundary
+4. **Packet 6.B.4 — Verification Wall**
+   - rerun dependency proof, shell-copy proof, tests, workspace check, fmt, and clippy
 
-### 4. Execute Lane B — Flow import-boundary proof
+## Live repo truth the new lane shape is built around
 
-- Prove Substrate can consume `resolve`, `ResolveRequest`, `ResolverResult`, `budget`, `packet_result` without dragging in CLI shell behavior, compiler rendering/refusal/error glue, or doctor/setup concerns
-- Formalize the stable consumer contract
-- Run the verification wall
+- `handbook-flow` still has clean crate coupling: `handbook-flow -> handbook-engine` only.
+- `crates/flow/src/resolver.rs` still exposes typed next-safe-action semantics and ready-packet command strings.
+- `crates/flow/src/packet_result.rs` still exposes `PacketDecisionSummary.ready_next_safe_action: String` on the public flow surface.
+- `crates/cli/src/rendering.rs` and `crates/compiler/src/rendering/shared.rs` already render shell wording for many next-safe-action cases, so the likely cleanup seam is moving the remaining final shell copy out of flow rather than redesigning the decision model.
 
-### 5. Execute Lane D — Final Substrate import plan
+## Active boundary decision
 
-- Write the actual import/adoption plan for engine + pipeline + flow
-- (Lane C — engine optional boundary freeze — is optional and not a blocker)
+- **Typed next-action/status semantics may remain** on the flow surface if they stay machine-readable and import-safe.
+- **Final shell-owned/operator-facing copy must move out** of the flow import surface before the consumer contract is frozen.
+- CLI/compiler remain responsible for rendering final shell wording and commands.
+
+## Lane D dependency update
+
+Lane D now waits for **Packets 6.B.1–6.B.4** instead of the old three-packet Lane B shape.
+Its flow boundary summary should reference the cleaned consumer contract, not the pre-cleanup evidence posture.

@@ -6,7 +6,7 @@ Plan source: [handbook-engine-extraction-phase-6-remaining-work-plan.md](./handb
 
 These prompts are ready to paste into fresh orchestration sessions. Each one starts in `/goal`, requires fresh `GPT-5.4` `high` subagents, uses `$incremental-implementation` for implementation and fix rounds, uses `$code-review-and-quality` for review rounds, preserves commit boundaries between implementation, review, and fix work, and keeps execution bounded to the approved Phase 6 remaining-work seam.
 
-This slice is approved for Lane B (flow import-boundary proof) and Lane D (final Substrate import plan) only. Do not widen into executing the actual Substrate import, reopening Lane A, CLI shell redesign, compiler retirement, publication, crates.io work, or making `substrate-context` become handbook. If the narrow packet cannot land honestly without such widening, stop and report the blocker instead of silently expanding scope.
+This slice is approved only for the remaining Phase 6 packet set captured in this artifact: Lane B (flow required-import boundary cleanup + contract freeze, including Packets 6.B.1 through 6.B.4), Lane C Packet 6.C.1 (defer-or-activate decision), and Lane D (final Substrate import plan / review gate). Do not widen into executing the actual Substrate import, reopening Lane A, CLI shell redesign, compiler retirement, publication, crates.io work, or making `substrate-context` become handbook. If the narrow packet cannot land honestly without such widening, stop and report the blocker instead of silently expanding scope.
 
 The orchestration session must not implement, review, or fix the packet work itself first. It must delegate implementation, review, and any fix rounds to fresh subagents exactly as directed below.
 
@@ -15,7 +15,7 @@ The orchestration session must not implement, review, or fix the packet work its
 ## Packet 6.B.1 Prompt — Gather Evidence
 
 ```text
-/goal Orchestrate Phase 6 Remaining Work Packet 6.B.1: Gather Flow Import-Boundary Evidence in /Users/spensermcconnell/__Active_Code/system.
+/goal Orchestrate Phase 6 Remaining Work Packet 6.B.1: Gather Flow Required-Import Boundary Evidence in /Users/spensermcconnell/__Active_Code/system.
 
 Mission:
 - Land only Packet 6.B.1 from /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md.
@@ -24,7 +24,8 @@ Mission:
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-spec.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-plan.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md
-- Treat the packet as one narrow evidence-gathering seam: capture `cargo tree` output, `rg` coupling-exclusion output, transitive type-dependency traces, and exclusion-of-CLI/compiler/doctor/setup/pipeline evidence — all recorded into the consumer contract doc's evidence section.
+- Treat the packet as one narrow evidence seam: record both the already-clean crate/type dependency boundary and the residual shell-owned/operator-facing copy still leaking through the public flow surface.
+- `handbook-flow` is a required import target. This packet does not decide otherwise; it documents what still must be cleaned up before the contract is frozen.
 - Stay inside Packet 6.B.1 only.
 
 Hard rules:
@@ -37,60 +38,60 @@ Hard rules:
 - If review finds issues, spawn a fresh GPT-5.4 subagent on high to fix them.
 - Every fix subagent prompt must begin with `/goal ` and must explicitly use $incremental-implementation.
 - After each accepted fix round that changes files, commit before dispatching the next fresh review subagent.
-- Before editing any production symbol or helper under `crates/flow/src/**`, run GitNexus impact analysis first and report the blast radius. If the packet can close inside `docs/specs/handbook-flow-import-boundary-consumer-contract.md` plus `crates/flow/src/**` (read-only inspection only), do not widen into production-symbol edits.
 - Before every commit, run GitNexus detect-changes and verify the affected scope matches Packet 6.B.1 only.
 - Stay inside Packet 6.B.1 scope.
 
 Packet 6.B.1 scope:
-- Capture `cargo tree -p handbook-flow` output and record it, showing only `handbook-engine` as intra-workspace dependency.
+- Capture `cargo tree -p handbook-flow` output and record it, showing only `handbook-engine` as the intra-workspace dependency.
 - Capture `rg -n "handbook_compiler|handbook_cli|handbook_pipeline" crates/flow/src/ crates/flow/tests/` output and record zero matches.
-- Trace transitive type dependencies for all in-boundary public symbols from `resolver`, `budget`, `packet_result` — confirm each resolves only to `handbook-engine` types or std types. Flag any symbol whose implementation pulls in engine types beyond the engine public surface.
-- Confirm exclusion of CLI/compiler/doctor/setup/pipeline concerns by source inspection of `crates/flow/src/*.rs` — confirm `use` statements reference only `crate::*`, `handbook_engine::*`, and std.
-- Record all evidence into the evidence section of `docs/specs/handbook-flow-import-boundary-consumer-contract.md` (create the file with the evidence section if it does not yet exist; the full contract formalization is Packet 6.B.2, so only write the evidence section now).
+- Trace transitive type dependencies for all in-boundary public symbols from `resolver`, `budget`, `packet_result` and confirm each resolves only to `handbook-engine` public types, std types, or flow-local types.
+- Inspect `crates/flow/src/resolver.rs`, `crates/flow/src/packet_result.rs`, `crates/cli/src/rendering.rs`, and `crates/compiler/src/rendering/shared.rs` to record exactly what final shell-owned/operator-facing copy still leaks through flow.
+- Explicitly distinguish typed next-action/status semantics that may remain machine-readable from final shell wording/command strings that Packet 6.B.2 must move out.
+- Record all evidence into the evidence section of `docs/specs/handbook-flow-import-boundary-consumer-contract.md`.
 - Expected files:
   - docs/specs/handbook-flow-import-boundary-consumer-contract.md (evidence section only)
 
 Out of scope — do NOT touch:
-- Writing the full consumer contract (frozen symbol set, contract version function, exclusions section) — that is Packet 6.B.2
-- Running the verification wall — that is Packet 6.B.3
+- Packet 6.B.2 production cleanup work
+- Packet 6.B.3 consumer-contract formalization
+- Packet 6.B.4 verification wall
 - Lane C (engine optional boundary freeze)
 - Lane D (import/adoption plan)
-- any production code changes in `crates/flow/src/**` or any other crate source
-- any CLI shell, compiler, doctor/setup, or pipeline surface changes
+- any production code changes in `crates/flow/src/**`, `crates/cli/src/rendering.rs`, or `crates/compiler/src/rendering/shared.rs`
 - publication or crates.io work
 - Substrate consumption or broader integration implementation
 - any new packet authoring beyond this approved packet prompt artifact
 
 Implementation subagent prompt requirements:
-- Begin with `/goal Land Phase 6 Remaining Work Packet 6.B.1: Gather Flow Import-Boundary Evidence`.
+- Begin with `/goal Land Phase 6 Remaining Work Packet 6.B.1: Gather Flow Required-Import Boundary Evidence`.
 - Tell the subagent to use $incremental-implementation.
 - Require live verification with:
   - `git status --short --branch`
   - `cargo tree -p handbook-flow`
   - `rg -n "handbook_compiler|handbook_cli|handbook_pipeline" crates/flow/src/ crates/flow/tests/`
-  - `sed -n '1,60p' crates/flow/src/resolver.rs`
-  - `sed -n '1,60p' crates/flow/src/budget.rs`
-  - `sed -n '1,60p' crates/flow/src/packet_result.rs`
-  - `sed -n '1,40p' crates/engine/src/lib.rs`
+  - `sed -n '70,210p' crates/flow/src/resolver.rs`
+  - `sed -n '1,140p' crates/flow/src/packet_result.rs`
+  - `sed -n '518,590p' crates/cli/src/rendering.rs`
+  - `sed -n '315,360p' crates/compiler/src/rendering/shared.rs`
 - Require the implementation to:
   - run `cargo tree -p handbook-flow` and record the exact output
   - run `rg -n "handbook_compiler|handbook_cli|handbook_pipeline" crates/flow/src/ crates/flow/tests/` and record the zero-match result
-  - inspect each public symbol in `resolver`, `budget`, `packet_result` and trace its type dependencies to confirm engine-only or std
-  - inspect all `use` statements in `crates/flow/src/*.rs` and confirm they reference only `crate::*`, `handbook_engine::*`, and std
+  - inspect each public symbol in `resolver`, `budget`, `packet_result` and trace its type dependencies
+  - record exactly what final shell-owned/operator-facing copy still leaks through flow and where it lives
+  - explicitly distinguish typed next-action/status semantics that may remain machine-readable from final shell wording/command strings that must move out in Packet 6.B.2
   - record all evidence into the evidence section of `docs/specs/handbook-flow-import-boundary-consumer-contract.md`
-  - avoid widening into full contract formalization, verification wall, Lane C, Lane D, or any production code changes
+  - avoid widening into production cleanup, contract formalization, verification, Lane C, Lane D, or any production code changes
 - Require the subagent to stop after Packet 6.B.1 acceptance is met and report touched files, evidence captured, verification run, and residual risks.
 
 Review subagent prompt requirements:
-- Begin with `/goal Review Phase 6 Remaining Work Packet 6.B.1: Gather Flow Import-Boundary Evidence`.
+- Begin with `/goal Review Phase 6 Remaining Work Packet 6.B.1: Gather Flow Required-Import Boundary Evidence`.
 - Tell the subagent to use $code-review-and-quality.
 - Require findings-first review across correctness, readability, architecture, security, and performance.
 - Require the reviewer to review the packet against the approved seam spec, plan, tasks, and verification evidence.
 - Require special attention to:
-  - whether `cargo tree` output was captured accurately and shows only `handbook-engine` as intra-workspace dependency
-  - whether `rg` output was captured accurately and shows zero matches
-  - whether transitive type-dependency traces are complete for all in-boundary public symbols
-  - whether exclusion proof covers CLI shell, compiler glue, doctor/setup, and pipeline surfaces
+  - whether the clean crate/type dependency proof is complete and accurate
+  - whether the residual shell-owned/operator-facing leakage is recorded honestly rather than hand-waved away
+  - whether the packet distinguishes typed semantics that may remain from final shell wording/command strings that must move out
   - whether any evidence was paraphrased rather than recorded from live output
   - whether the evidence section is internally consistent with live source
 - Require severity labels and explicit callouts if evidence is incomplete, inaccurate, or if scope leaked beyond Packet 6.B.1.
@@ -109,16 +110,16 @@ Commit policy:
 - Commit messages must describe the evidence-gathering work clearly and standalone.
 
 Stop conditions:
-- Stop once Packet 6.B.1 is review-clean, committed, and all four evidence tasks have verifiable output.
-- Stop and report blocked if the packet cannot close honestly without widening into full contract formalization, verification wall, production code changes, Lane C, Lane D, or broader integration implementation.
+- Stop once Packet 6.B.1 is review-clean, committed, and the evidence clearly captures both the clean import boundary and the remaining shell-owned leakage.
+- Stop and report blocked if the packet cannot close honestly without widening into production cleanup, consumer-contract authoring, verification, Lane C, Lane D, or broader integration implementation.
 ```
 
 ---
 
-## Packet 6.B.2 Prompt — Formalize Consumer Contract
+## Packet 6.B.2 Prompt — Clean Flow Import-Surface Shell Ownership
 
 ```text
-/goal Orchestrate Phase 6 Remaining Work Packet 6.B.2: Formalize Flow Import-Boundary Consumer Contract in /Users/spensermcconnell/__Active_Code/system.
+/goal Orchestrate Phase 6 Remaining Work Packet 6.B.2: Clean Flow Import-Surface Shell Ownership in /Users/spensermcconnell/__Active_Code/system.
 
 Mission:
 - Land only Packet 6.B.2 from /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md.
@@ -127,8 +128,9 @@ Mission:
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-spec.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-plan.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md
-- Treat the packet as one narrow contract-formalization seam: write the standalone consumer contract document at `docs/specs/handbook-flow-import-boundary-consumer-contract.md` that records the frozen in-boundary symbol set, their transitive type dependencies, explicit exclusions, the contract version function, and evidence references.
-- This packet depends on Packet 6.B.1 being complete (evidence section already populated). Verify Packet 6.B.1 evidence exists before starting.
+- Treat the packet as one narrow production seam: remove final shell-owned/operator-facing copy from the public flow import surface while preserving typed next-action/status semantics wherever that keeps the cleanup narrow and honest.
+- `handbook-flow` remains a required import target; `handbook-cli` remains the only product shell.
+- This packet depends on Packet 6.B.1 being complete (the evidence must already distinguish clean boundary proof from residual shell leakage).
 - Stay inside Packet 6.B.2 only.
 
 Hard rules:
@@ -141,67 +143,69 @@ Hard rules:
 - If review finds issues, spawn a fresh GPT-5.4 subagent on high to fix them.
 - Every fix subagent prompt must begin with `/goal ` and must explicitly use $incremental-implementation.
 - After each accepted fix round that changes files, commit before dispatching the next fresh review subagent.
+- Before editing any production symbol or helper under `crates/flow/src/**`, `crates/cli/src/rendering.rs`, or `crates/compiler/src/rendering/shared.rs`, run GitNexus impact analysis first and report the blast radius. If the blast radius is HIGH or CRITICAL, stop and report it before editing.
 - Before every commit, run GitNexus detect-changes and verify the affected scope matches Packet 6.B.2 only.
 - Stay inside Packet 6.B.2 scope.
 
 Packet 6.B.2 scope:
-- Write the full standalone consumer contract document at `docs/specs/handbook-flow-import-boundary-consumer-contract.md` that records:
-  - The frozen in-boundary symbol set — all public re-exports from `budget`, `packet_result`, `resolver`:
-    - From `resolver`: `resolve`, `ResolveRequest`, `ResolverResult`, `ResolverRefusal`, `ResolverRefusalCategory`, `ResolverBlocker`, `ResolverBlockerCategory`, `ResolverNextSafeAction`, `ResolverSubjectRef`, `PacketSelection`, `PacketSelectionStatus`, `C04_RESULT_VERSION`
-    - From `budget`: `evaluate_budget`, `BudgetDisposition`, `BudgetOutcome`, `BudgetPolicy`, `BudgetReason`, `BudgetTarget`, `NextSafeAction`
-    - From `packet_result`: `PacketResult`, `PacketSection`, `PacketSectionMode`, `PacketBodyNote`, `PacketBodyNoteKind`, `PacketDecisionSummary`, `PacketFixtureContext`, `PacketSourceSummary`, `PacketVariant`
-  - Their transitive type dependencies (all engine-only or std) — carried from Packet 6.B.1 evidence
-  - Explicit exclusions (CLI shell, compiler glue, doctor/setup, pipeline surfaces)
-  - The contract version function (`flow_contract_version()`) and its delegation to `handbook_engine::workspace_contract_version()`
-  - Evidence references (cargo tree output, rg output, source inspection conclusions from Packet 6.B.1)
-- Preserve the evidence section from Packet 6.B.1 — do not overwrite or remove it; integrate it into the full document.
+- Remove final shell-owned/operator-facing command strings or equivalent final rendered shell copy from the public flow surface.
+- Keep typed next-action/status semantics if they remain useful machine-readable flow results after the cleanup.
+- Update CLI/compiler rendering or adapter code only as needed so final shell wording lives outside flow.
+- Add or update only the minimal tests needed to verify the cleaned import surface.
 - Expected files:
-  - docs/specs/handbook-flow-import-boundary-consumer-contract.md (full document)
+  - crates/flow/src/resolver.rs
+  - crates/flow/src/packet_result.rs
+  - crates/cli/src/rendering.rs
+  - crates/compiler/src/rendering/shared.rs
+  - minimally impacted tests, if needed
 
 Out of scope — do NOT touch:
-- Running the verification wall — that is Packet 6.B.3
-- Any production code changes in `crates/flow/src/**` or any other crate source
+- Full CLI shell redesign or doctor/setup redesign
+- Removing typed next-safe-action semantics purely because they mention setup/doctor if they can remain as machine-readable data
+- Packet 6.B.3 consumer-contract formalization
+- Packet 6.B.4 verification wall
 - Lane C (engine optional boundary freeze)
 - Lane D (import/adoption plan)
-- any CLI shell, compiler, doctor/setup, or pipeline surface changes
 - publication or crates.io work
 - Substrate consumption or broader integration implementation
 - any new packet authoring beyond this approved packet prompt artifact
 
 Implementation subagent prompt requirements:
-- Begin with `/goal Land Phase 6 Remaining Work Packet 6.B.2: Formalize Flow Import-Boundary Consumer Contract`.
+- Begin with `/goal Land Phase 6 Remaining Work Packet 6.B.2: Clean Flow Import-Surface Shell Ownership`.
 - Tell the subagent to use $incremental-implementation.
 - Require live verification with:
   - `git status --short --branch`
-  - `sed -n '1,80p' docs/specs/handbook-flow-import-boundary-consumer-contract.md`
-  - `rg -n "pub (fn|struct|enum|type|const)" crates/flow/src/resolver.rs crates/flow/src/budget.rs crates/flow/src/packet_result.rs`
-  - `rg -n "flow_contract_version" crates/flow/src/`
-  - `rg -n "workspace_contract_version" crates/engine/src/`
+  - `sed -n '1,220p' docs/specs/handbook-flow-import-boundary-consumer-contract.md`
+  - `sed -n '70,210p' crates/flow/src/resolver.rs`
+  - `sed -n '1,140p' crates/flow/src/packet_result.rs`
+  - `sed -n '518,590p' crates/cli/src/rendering.rs`
+  - `sed -n '315,360p' crates/compiler/src/rendering/shared.rs`
+  - `rg -n 'run `doctor`|handbook inspect --packet|handbook generate --packet|handbook setup' crates/flow/src/`
 - Require the implementation to:
-  - verify Packet 6.B.1 evidence exists in the doc before writing the full contract
-  - record every public symbol from `resolver`, `budget`, `packet_result` exactly as they appear in live source
-  - trace each symbol's type dependencies and confirm they resolve to engine-only or std
-  - record explicit exclusions for CLI shell, compiler glue, doctor/setup, and pipeline surfaces
-  - record the contract version function and its delegation chain
-  - reference the Packet 6.B.1 evidence (cargo tree, rg, source inspection)
-  - ensure the document is internally consistent with live source — no paraphrased or invented symbol names
-  - avoid widening into verification wall, production code changes, Lane C, Lane D, or broader integration
-- Require the subagent to stop after Packet 6.B.2 acceptance is met and report touched files, contract contents summary, verification run, and residual risks.
+  - verify Packet 6.B.1 evidence exists before changing code
+  - run GitNexus impact analysis before editing any production symbols and report the blast radius
+  - remove final shell-owned/operator-facing copy from the public flow surface
+  - preserve typed next-action/status semantics where they remain useful machine-readable data
+  - update CLI/compiler rendering or adapter code only as needed so final shell wording remains outside flow
+  - rerun and record the post-cleanup proof shape required by the tasks authority: source inspection of `crates/flow/src/resolver.rs` and `crates/flow/src/packet_result.rs`, the shell-copy spot-check `rg -n 'run \`doctor\`|handbook inspect --packet|handbook generate --packet|handbook setup' crates/flow/src/`, and `cargo test -p handbook-flow`
+  - run `cargo test -p handbook-flow`
+  - run `cargo check --workspace`
+  - avoid widening into broader CLI redesign, contract formalization, verification, Lane C, Lane D, or actual Substrate import work
+- Require the subagent to stop after Packet 6.B.2 acceptance is met and report touched files, impact-analysis results, the recorded post-cleanup source-inspection + shell-copy proof, verification run, and residual risks.
 
 Review subagent prompt requirements:
-- Begin with `/goal Review Phase 6 Remaining Work Packet 6.B.2: Formalize Flow Import-Boundary Consumer Contract`.
+- Begin with `/goal Review Phase 6 Remaining Work Packet 6.B.2: Clean Flow Import-Surface Shell Ownership`.
 - Tell the subagent to use $code-review-and-quality.
 - Require findings-first review across correctness, readability, architecture, security, and performance.
 - Require the reviewer to review the packet against the approved seam spec, plan, tasks, and Packet 6.B.1 evidence.
 - Require special attention to:
-  - whether every public symbol from `resolver`, `budget`, `packet_result` is recorded and matches live source exactly
-  - whether transitive type dependencies are complete and accurate (no missing symbols, no invented symbols)
-  - whether explicit exclusions cover CLI shell, compiler glue, doctor/setup, and pipeline surfaces
-  - whether the contract version function and its delegation chain are correctly recorded
-  - whether the Packet 6.B.1 evidence section was preserved and integrated, not overwritten
-  - whether the document is internally consistent — no contradictions between symbol set, type dependencies, and exclusions
+  - whether final shell-owned/operator-facing copy is actually gone from the public flow surface
+  - whether typed next-action/status semantics were preserved appropriately instead of being widened into a redesign
+  - whether CLI/compiler now own the final shell wording without scope creep
+  - whether the post-cleanup source inspection and shell-copy `rg` proof were rerun and recorded, not just the pre-change baseline
+  - whether GitNexus impact analysis was run before production symbol edits and the blast radius stayed acceptable
   - whether any scope leaked beyond Packet 6.B.2
-- Require severity labels and explicit callouts if the contract is incomplete, inaccurate, or if scope leaked.
+- Require severity labels and explicit callouts if the cleanup is incomplete, widened unnecessarily, or skipped the required impact analysis.
 
 Fix loop:
 - If the review is clean, stop and report Packet 6.B.2 complete.
@@ -214,19 +218,19 @@ Commit policy:
 - Commit once after implementation if Packet 6.B.2 lands cleanly.
 - Before each commit, run GitNexus detect-changes and confirm the affected scope matches Packet 6.B.2 only.
 - Commit after each accepted fix round.
-- Commit messages must describe the consumer contract formalization clearly and standalone.
+- Commit messages must describe the import-surface cleanup clearly and standalone.
 
 Stop conditions:
-- Stop once Packet 6.B.2 is review-clean, committed, and the consumer contract doc is internally consistent with live source.
-- Stop and report blocked if the packet cannot close honestly without widening into verification wall, production code changes, Lane C, Lane D, or broader integration implementation.
+- Stop once Packet 6.B.2 is review-clean, committed, and the final shell-owned flow copy has been moved out without a broader redesign.
+- Stop and report blocked if the packet cannot close honestly without widening into a larger CLI/doctor/setup redesign, Lane C, Lane D, or broader integration implementation.
 ```
 
 ---
 
-## Packet 6.B.3 Prompt — Verification Wall
+## Packet 6.B.3 Prompt — Formalize Consumer Contract
 
 ```text
-/goal Orchestrate Phase 6 Remaining Work Packet 6.B.3: Run Flow Import-Boundary Verification Wall in /Users/spensermcconnell/__Active_Code/system.
+/goal Orchestrate Phase 6 Remaining Work Packet 6.B.3: Formalize Flow Import-Boundary Consumer Contract in /Users/spensermcconnell/__Active_Code/system.
 
 Mission:
 - Land only Packet 6.B.3 from /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md.
@@ -235,8 +239,8 @@ Mission:
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-spec.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-plan.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md
-- Treat the packet as one narrow verification seam: run the full Lane B verification wall, record pass/fail for each command, and record completion notes in the tasks doc.
-- This packet depends on Packets 6.B.1 and 6.B.2 being complete. Verify both are landed before starting.
+- Treat the packet as one narrow contract-formalization seam: write the standalone consumer contract document for the cleaned `handbook-flow` surface.
+- This packet depends on Packet 6.B.1 evidence and Packet 6.B.2 cleanup both being complete.
 - Stay inside Packet 6.B.3 only.
 
 Hard rules:
@@ -253,56 +257,59 @@ Hard rules:
 - Stay inside Packet 6.B.3 scope.
 
 Packet 6.B.3 scope:
-- Run each of the following verification commands and record pass/fail:
-  - `cargo tree -p handbook-flow` — must show only `handbook-engine` as intra-workspace dependency
-  - `rg -n "handbook_compiler|handbook_cli|handbook_pipeline" crates/flow/src/ crates/flow/tests/` — must return zero matches
-  - `cargo test -p handbook-flow` — must pass
-  - `cargo check --workspace` — must pass
-  - `cargo fmt --all -- --check && cargo clippy --workspace --all-targets -- -D warnings` — must pass
-- Record completion notes in `docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md` (Packet 6.B.3 section) with pass/fail status for each command.
-- If any command fails, stop and report the blocker — do not attempt to fix the underlying issue in this packet without explicit direction.
+- Write the full standalone consumer contract document at `docs/specs/handbook-flow-import-boundary-consumer-contract.md` that records:
+  - The frozen in-boundary symbol set — all public re-exports from `budget`, `packet_result`, `resolver`
+  - Their transitive type dependencies (engine-public, std, or flow-local only)
+  - Which typed next-action/status semantics remain in-boundary after Packet 6.B.2
+  - Which shell-owned/operator-facing copy and rendering responsibilities are explicitly out of boundary
+  - The contract version function (`flow_contract_version()`) and its delegation to `handbook_engine::workspace_contract_version()`
+  - Evidence references from Packet 6.B.1 and cleanup references from Packet 6.B.2
+- Preserve the evidence section from Packet 6.B.1 and integrate it into the full document.
 - Expected files:
-  - docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md (completion notes section)
+  - docs/specs/handbook-flow-import-boundary-consumer-contract.md (full document)
 
 Out of scope — do NOT touch:
-- Any production code changes in any crate
+- Packet 6.B.2 production cleanup work
+- Packet 6.B.4 verification wall
+- Any production code changes in `crates/flow/src/**` or any other crate source
 - Lane C (engine optional boundary freeze)
 - Lane D (import/adoption plan)
-- any CLI shell, compiler, doctor/setup, or pipeline surface changes
 - publication or crates.io work
 - Substrate consumption or broader integration implementation
 - any new packet authoring beyond this approved packet prompt artifact
 
 Implementation subagent prompt requirements:
-- Begin with `/goal Land Phase 6 Remaining Work Packet 6.B.3: Run Flow Import-Boundary Verification Wall`.
+- Begin with `/goal Land Phase 6 Remaining Work Packet 6.B.3: Formalize Flow Import-Boundary Consumer Contract`.
 - Tell the subagent to use $incremental-implementation.
 - Require live verification with:
   - `git status --short --branch`
-  - `sed -n '1,40p' docs/specs/handbook-flow-import-boundary-consumer-contract.md`
+  - `sed -n '1,220p' docs/specs/handbook-flow-import-boundary-consumer-contract.md`
+  - `rg -n "pub (fn|struct|enum|type|const)" crates/flow/src/resolver.rs crates/flow/src/budget.rs crates/flow/src/packet_result.rs`
+  - `rg -n "flow_contract_version" crates/flow/src/`
 - Require the implementation to:
-  - verify Packets 6.B.1 and 6.B.2 are complete (evidence section and full contract exist in the consumer contract doc)
-  - run `cargo tree -p handbook-flow` and record the exact output with pass/fail
-  - run `rg -n "handbook_compiler|handbook_cli|handbook_pipeline" crates/flow/src/ crates/flow/tests/` and record the result with pass/fail
-  - run `cargo test -p handbook-flow` and record pass/fail
-  - run `cargo check --workspace` and record pass/fail
-  - run `cargo fmt --all -- --check && cargo clippy --workspace --all-targets -- -D warnings` and record pass/fail
-  - record all results in the Packet 6.B.3 completion notes section of `docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md`
-  - if any command fails, stop and report the exact failure output — do not attempt fixes
-  - avoid widening into production code changes, Lane C, Lane D, or broader integration
-- Require the subagent to stop after Packet 6.B.3 acceptance is met and report touched files, verification results, and residual risks.
+  - verify Packet 6.B.1 evidence exists and Packet 6.B.2 cleanup has landed before writing the full contract
+  - record every public symbol from `resolver`, `budget`, `packet_result` exactly as it appears in live source
+  - record which typed next-action/status semantics remain in-boundary after the cleanup
+  - record which shell-owned/operator-facing copy and rendering responsibilities now live outside flow
+  - record the contract version function and its delegation chain
+  - reference the Packet 6.B.1 evidence and Packet 6.B.2 cleanup outcome
+  - ensure the document is internally consistent with live source — no paraphrased or invented symbol names
+  - avoid widening into verification, production code changes, Lane C, Lane D, or broader integration
+- Require the subagent to stop after Packet 6.B.3 acceptance is met and report touched files, contract contents summary, verification run, and residual risks.
 
 Review subagent prompt requirements:
-- Begin with `/goal Review Phase 6 Remaining Work Packet 6.B.3: Run Flow Import-Boundary Verification Wall`.
+- Begin with `/goal Review Phase 6 Remaining Work Packet 6.B.3: Formalize Flow Import-Boundary Consumer Contract`.
 - Tell the subagent to use $code-review-and-quality.
 - Require findings-first review across correctness, readability, architecture, security, and performance.
-- Require the reviewer to review the packet against the approved seam spec, plan, tasks, and the recorded verification results.
+- Require the reviewer to review the packet against the approved seam spec, plan, tasks, and Packet 6.B.1/6.B.2 outcomes.
 - Require special attention to:
-  - whether all five verification commands were run and their output was recorded accurately
-  - whether pass/fail status is honest and matches actual command output
-  - whether any command output was paraphrased or omitted
-  - whether the completion notes are consistent with the consumer contract doc and live source
+  - whether every public symbol is recorded accurately
+  - whether the in-boundary typed semantics vs out-of-boundary shell copy distinction is explicit and honest
+  - whether the consumer contract matches the cleaned live source rather than the pre-cleanup state
+  - whether the contract version function and delegation chain are correct
+  - whether the evidence section was preserved and integrated, not overwritten
   - whether any scope leaked beyond Packet 6.B.3
-- Require severity labels and explicit callouts if any verification result is missing, inaccurate, or if scope leaked.
+- Require severity labels and explicit callouts if the contract is incomplete, inaccurate, or out of sync with the cleaned surface.
 
 Fix loop:
 - If the review is clean, stop and report Packet 6.B.3 complete.
@@ -315,11 +322,123 @@ Commit policy:
 - Commit once after implementation if Packet 6.B.3 lands cleanly.
 - Before each commit, run GitNexus detect-changes and confirm the affected scope matches Packet 6.B.3 only.
 - Commit after each accepted fix round.
+- Commit messages must describe the consumer contract formalization clearly and standalone.
+
+Stop conditions:
+- Stop once Packet 6.B.3 is review-clean, committed, and the consumer contract doc is internally consistent with the cleaned live source.
+- Stop and report blocked if the packet cannot close honestly without widening into verification, production code changes, Lane C, Lane D, or broader integration implementation.
+```
+
+---
+
+## Packet 6.B.4 Prompt — Verification Wall
+
+```text
+/goal Orchestrate Phase 6 Remaining Work Packet 6.B.4: Run Flow Import-Boundary Verification Wall in /Users/spensermcconnell/__Active_Code/system.
+
+Mission:
+- Land only Packet 6.B.4 from /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md.
+- Verify live repo truth before changing anything.
+- Use the approved seam authority at:
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-spec.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-plan.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md
+- Treat the packet as one narrow verification seam: run the full Lane B verification wall, record pass/fail for each command, and record completion notes in the tasks doc.
+- This packet depends on Packets 6.B.1, 6.B.2, and 6.B.3 being complete.
+- Stay inside Packet 6.B.4 only.
+
+Hard rules:
+- Do not implement, review, or fix Packet 6.B.4 work in the orchestration session yourself.
+- Spawn a fresh GPT-5.4 subagent on high for implementation.
+- The implementation subagent prompt must begin with `/goal ` and must explicitly use the $incremental-implementation skill from /Users/spensermcconnell/.agents/skills/incremental-implementation/SKILL.md.
+- After implementation completes, commit the implementation before any review round.
+- Then spawn a fresh GPT-5.4 subagent on high for review.
+- The review subagent prompt must begin with `/goal ` and must explicitly use the $code-review-and-quality skill from /Users/spensermcconnell/.agents/skills/code-review-and-quality/SKILL.md.
+- If review finds issues, spawn a fresh GPT-5.4 subagent on high to fix them.
+- Every fix subagent prompt must begin with `/goal ` and must explicitly use $incremental-implementation.
+- After each accepted fix round that changes files, commit before dispatching the next fresh review subagent.
+- Before every commit, run GitNexus detect-changes and verify the affected scope matches Packet 6.B.4 only.
+- Stay inside Packet 6.B.4 scope.
+
+Packet 6.B.4 scope:
+- Run each of the following verification checks and record pass/fail:
+  - `cargo tree -p handbook-flow` — must show only `handbook-engine` as the intra-workspace dependency
+  - `rg -n "handbook_compiler|handbook_cli|handbook_pipeline" crates/flow/src/ crates/flow/tests/` — must return zero matches
+  - source-inspect the public `handbook-flow` surface (`crates/flow/src/lib.rs`, `crates/flow/src/budget.rs`, `crates/flow/src/packet_result.rs`, `crates/flow/src/resolver.rs`) against the Packet 6.B.3 consumer contract and prove no final shell-owned/operator-facing copy remains on that surface; any remaining next-action/status data must be typed/machine-readable only
+  - `rg -n 'run `doctor`|handbook inspect --packet|handbook generate --packet|handbook setup' crates/flow/src/` — must return zero matches as a supporting spot-check, not the sole proof
+  - `cargo test -p handbook-flow` — must pass
+  - `cargo check --workspace` — must pass
+  - `cargo fmt --all -- --check && cargo clippy --workspace --all-targets -- -D warnings` — must pass
+- Record completion notes in `docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md` (Packet 6.B.4 section) with pass/fail status for each command plus the broader source-inspection proof outcome.
+- If any command fails, stop and report the blocker — do not attempt to fix the underlying issue in this packet without explicit direction.
+- Expected files:
+  - docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md (completion notes section)
+
+Out of scope — do NOT touch:
+- Any production code changes in any crate
+- Lane C (engine optional boundary freeze)
+- Lane D (import/adoption plan)
+- publication or crates.io work
+- Substrate consumption or broader integration implementation
+- any new packet authoring beyond this approved packet prompt artifact
+
+Implementation subagent prompt requirements:
+- Begin with `/goal Land Phase 6 Remaining Work Packet 6.B.4: Run Flow Import-Boundary Verification Wall`.
+- Tell the subagent to use $incremental-implementation.
+- Require live verification with:
+  - `git status --short --branch`
+  - `sed -n '1,220p' docs/specs/handbook-flow-import-boundary-consumer-contract.md`
+  - `sed -n '1,240p' crates/flow/src/lib.rs`
+  - `sed -n '1,260p' crates/flow/src/budget.rs`
+  - `sed -n '1,220p' crates/flow/src/packet_result.rs`
+  - `sed -n '1,320p' crates/flow/src/resolver.rs`
+- Require the implementation to:
+  - verify Packets 6.B.1, 6.B.2, and 6.B.3 are complete before running the wall
+  - run `cargo tree -p handbook-flow` and record the exact output with pass/fail
+  - run `rg -n "handbook_compiler|handbook_cli|handbook_pipeline" crates/flow/src/ crates/flow/tests/` and record the result with pass/fail
+  - source-inspect `crates/flow/src/lib.rs`, `crates/flow/src/budget.rs`, `crates/flow/src/packet_result.rs`, and `crates/flow/src/resolver.rs` against the Packet 6.B.3 consumer contract and record an explicit proof that no final shell-owned/operator-facing copy remains on the public flow surface
+  - record whether any remaining next-action/status data is still typed/machine-readable only and contract-approved
+  - run `rg -n 'run `doctor`|handbook inspect --packet|handbook generate --packet|handbook setup' crates/flow/src/` and record the result with pass/fail as supporting spot-check evidence, not as the sole proof
+  - run `cargo test -p handbook-flow` and record pass/fail
+  - run `cargo check --workspace` and record pass/fail
+  - run `cargo fmt --all -- --check && cargo clippy --workspace --all-targets -- -D warnings` and record pass/fail
+  - record all results in the Packet 6.B.4 completion notes section of `docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md`, including the broader source-inspection proof outcome
+  - if any command fails, stop and report the exact failure output — do not attempt fixes
+  - avoid widening into production code changes, Lane C, Lane D, or broader integration
+- Require the subagent to stop after Packet 6.B.4 acceptance is met and report touched files, verification results, and residual risks.
+
+Review subagent prompt requirements:
+- Begin with `/goal Review Phase 6 Remaining Work Packet 6.B.4: Run Flow Import-Boundary Verification Wall`.
+- Tell the subagent to use $code-review-and-quality.
+- Require findings-first review across correctness, readability, architecture, security, and performance.
+- Require the reviewer to review the packet against the approved seam spec, plan, tasks, and the recorded verification results.
+- Require special attention to:
+  - whether the broader source-inspection proof actually covers the full public `handbook-flow` surface rather than only a few known strings
+  - whether the Packet 6.B.3 consumer contract and the verification notes agree about what remains in-boundary vs out-of-boundary
+  - whether all verification commands were run and their output was recorded accurately
+  - whether pass/fail status is honest and matches actual command output
+  - whether the shell-copy spot-check in `crates/flow/src/` was recorded accurately and not overstated as the whole proof
+  - whether any command output was paraphrased or omitted
+  - whether the completion notes are consistent with the consumer contract doc and live source
+  - whether any scope leaked beyond Packet 6.B.4
+- Require severity labels and explicit callouts if any verification result is missing, inaccurate, or if scope leaked.
+
+Fix loop:
+- If the review is clean, stop and report Packet 6.B.4 complete.
+- If the review finds issues, spawn one fresh GPT-5.4 high fix subagent per review round using `$incremental-implementation`.
+- The fix prompt must cite the exact review findings and require only the minimal Packet-6.B.4-bounded changes needed to close them.
+- Commit accepted fixes before dispatching the next fresh review subagent.
+- Re-run a fresh review subagent after fixes.
+
+Commit policy:
+- Commit once after implementation if Packet 6.B.4 lands cleanly.
+- Before each commit, run GitNexus detect-changes and confirm the affected scope matches Packet 6.B.4 only.
+- Commit after each accepted fix round.
 - Commit messages must describe the verification wall results clearly and standalone.
 
 Stop conditions:
-- Stop once Packet 6.B.3 is review-clean, committed, and all five verification commands have honest pass/fail records.
-- Stop and report blocked if any verification command fails and the failure cannot be resolved within Packet 6.B.3 scope (i.e., the failure requires production code changes or widening into another lane).
+- Stop once Packet 6.B.4 is review-clean, committed, and the verification notes honestly record both the broader public-surface proof and the supporting command results.
+- Stop and report blocked if any verification command fails and the failure cannot be resolved within Packet 6.B.4 scope (i.e., the failure requires production code changes or widening into another lane).
 ```
 
 ---
@@ -427,7 +546,7 @@ Mission:
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-plan.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md
 - Treat the packet as one narrow planning-artifact seam: write a standalone import/adoption plan doc at `docs/specs/handbook-substrate-import-adoption-plan.md` that records import order, rationale, per-crate frozen boundary summaries, adapter/facade assessment, import verification gates, and Substrate-side constraints.
-- This packet depends on Lane B being complete (Packets 6.B.1, 6.B.2, 6.B.3 all landed) and Lane C being deferred (Packet 6.C.1 landed). Verify all are complete before starting.
+- This packet depends on Lane B being complete (Packets 6.B.1, 6.B.2, 6.B.3, and 6.B.4 all landed). Lane C is optional and not blocking for Lane D; if its deferral note exists, treat it as context rather than a prerequisite. Verify Lane B is complete before starting.
 - Stay inside Packet 6.D.1 only.
 
 Hard rules:
@@ -450,7 +569,7 @@ Packet 6.D.1 scope:
   - Per-crate frozen boundary summary:
     - Engine: current public surface (Lane C deferred) — modules: `artifact_manifest`, `author`, `baseline_validation`, `canonical_artifacts`, `freshness`, plus `workspace_contract_version()` and `engine_contract_version()`
     - Pipeline: documented frozen subset from Lane A closeout — in-boundary modules: `pipeline`, `pipeline_capture`, `pipeline_compile`, `pipeline_handoff`, `pipeline_route`, `route_state`, plus `pipeline_contract_version()`
-    - Flow: Lane B consumer contract — in-boundary symbols from `resolver`, `budget`, `packet_result` (reference the consumer contract doc)
+    - Flow: Lane B consumer contract — cleaned import surface from `resolver`, `budget`, `packet_result`, with typed semantics only where contract-approved and final shell copy out of boundary (reference the consumer contract doc)
   - Adapter/facade assessment (current evidence: none needed; record the assessment with evidence)
   - Import verification gate per phase (what checks Substrate must pass after importing each crate)
   - Substrate-side constraints (resolved from live repo inspection, 2026-06-17):
@@ -481,7 +600,7 @@ Implementation subagent prompt requirements:
   - `rg -n "pub (fn|struct|enum|mod)" crates/engine/src/lib.rs`
   - `rg -n "pub (fn|struct|enum|mod)" crates/pipeline/src/lib.rs`
 - Require the implementation to:
-  - verify Lane B (Packets 6.B.1–6.B.3) and Lane C (Packet 6.C.1) are complete before writing the plan
+  - verify Lane B (Packets 6.B.1–6.B.4) is complete before writing the plan; treat Lane C as optional context, not a blocker
   - record the import order with rationale (engine first, then pipeline, then flow)
   - record per-crate frozen boundary summaries consistent with live source and the Lane A/B closeout artifacts
   - record the adapter/facade assessment with evidence (current evidence: none needed)

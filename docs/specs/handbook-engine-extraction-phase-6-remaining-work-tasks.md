@@ -6,12 +6,12 @@ Spec reference: [handbook-engine-extraction-phase-6-remaining-work-spec.md](./ha
 
 ---
 
-## Lane B: Flow Import-Boundary Proof
+## Lane B: Flow Required-Import Boundary Cleanup + Contract Freeze
 
 ### Packet 6.B.1: Gather Evidence
 
 - [ ] Task: Capture dependency-tree evidence for `handbook-flow`
-  - Acceptance: `cargo tree -p handbook-flow` output recorded, showing only `handbook-engine` as intra-workspace dependency.
+  - Acceptance: `cargo tree -p handbook-flow` output recorded, showing only `handbook-engine` as the intra-workspace dependency.
   - Verify: `cargo tree -p handbook-flow`
   - Files: `docs/specs/handbook-flow-import-boundary-consumer-contract.md` (evidence section)
 
@@ -21,37 +21,52 @@ Spec reference: [handbook-engine-extraction-phase-6-remaining-work-spec.md](./ha
   - Files: `docs/specs/handbook-flow-import-boundary-consumer-contract.md` (evidence section)
 
 - [ ] Task: Trace transitive type dependencies for all in-boundary symbols
-  - Acceptance: For each public symbol in the in-boundary set (from `resolver`, `budget`, `packet_result`), its type dependencies are recorded and confirmed to resolve only to `handbook-engine` types or std types. Any symbol whose implementation pulls in engine types beyond what is already in the engine public surface is flagged.
+  - Acceptance: For each public symbol in the in-boundary set (from `resolver`, `budget`, `packet_result`), its type dependencies are recorded and confirmed to resolve only to `handbook-engine` public types, std types, or flow-local types.
   - Verify: Source inspection of `crates/flow/src/resolver.rs`, `crates/flow/src/budget.rs`, `crates/flow/src/packet_result.rs` cross-referenced against `crates/engine/src/lib.rs` exports.
   - Files: `docs/specs/handbook-flow-import-boundary-consumer-contract.md` (transitive dependency table)
 
-- [ ] Task: Confirm exclusion of CLI/compiler/doctor/setup/pipeline concerns
-  - Acceptance: Evidence recorded confirming that no in-boundary symbol's implementation touches CLI shell behavior, compiler rendering/refusal/error glue, doctor/setup concerns, or pipeline loading/selection/compile/capture/handoff/route surfaces.
-  - Verify: Source inspection of `crates/flow/src/*.rs` — confirm `use` statements reference only `crate::*` and `handbook_engine::*` and std.
-  - Files: `docs/specs/handbook-flow-import-boundary-consumer-contract.md` (exclusion section)
+- [ ] Task: Record residual shell-ownership leakage separately from the clean import boundary proof
+  - Acceptance: The evidence section explicitly records that the crate/type dependency boundary is clean **and** that final shell-owned/operator-facing copy still leaks through the live flow import surface. It must distinguish typed next-action/status semantics that may remain machine-readable from final shell wording/command strings that Packet 6.B.2 must move out.
+  - Verify: Source inspection cross-referencing `crates/flow/src/resolver.rs`, `crates/flow/src/packet_result.rs`, `crates/cli/src/rendering.rs`, and `crates/compiler/src/rendering/shared.rs`.
+  - Files: `docs/specs/handbook-flow-import-boundary-consumer-contract.md` (evidence section)
 
-### Packet 6.B.2: Formalize Consumer Contract
+### Packet 6.B.2: Clean Flow Import-Surface Shell Ownership
 
-- [ ] Task: Write the `handbook-flow` import-boundary consumer contract document
-  - Acceptance: A standalone doc at `docs/specs/handbook-flow-import-boundary-consumer-contract.md` that records:
-    - The frozen in-boundary symbol set (all public re-exports from `budget`, `packet_result`, `resolver`)
-    - Their transitive type dependencies (all engine-only or std)
-    - Explicit exclusions (CLI shell, compiler glue, doctor/setup, pipeline surfaces)
+- [ ] Task: Remove final shell-owned/operator-facing copy from the public flow import surface
+  - Acceptance: `handbook-flow` no longer returns final shell command strings or product-shell action wording from its public import surface. Any remaining next-action data exposed by flow is typed/machine-readable rather than final rendered shell copy.
+  - Verify: Source inspection of `crates/flow/src/resolver.rs` and `crates/flow/src/packet_result.rs`; `rg -n 'run `doctor`|handbook inspect --packet|handbook generate --packet|handbook setup' crates/flow/src/`; `cargo test -p handbook-flow`.
+  - Files: `crates/flow/src/resolver.rs`, `crates/flow/src/packet_result.rs`, impacted flow tests if needed
+
+- [ ] Task: Keep CLI/compiler responsible for final shell rendering without widening into redesign
+  - Acceptance: Any caller-side changes stay narrowly bounded to the rendering/adapter files required by the flow cleanup. Typed next-action/status semantics may remain, but final shell copy is rendered outside flow. No broader CLI shell redesign is introduced.
+  - Verify: Source inspection of `crates/cli/src/rendering.rs`, `crates/compiler/src/rendering/shared.rs`; `cargo check --workspace`.
+  - Files: `crates/cli/src/rendering.rs`, `crates/compiler/src/rendering/shared.rs`, impacted tests if needed
+
+### Packet 6.B.3: Formalize Consumer Contract
+
+- [ ] Task: Write the `handbook-flow` import-boundary consumer contract document against the cleaned surface
+  - Acceptance: A standalone doc at `docs/specs/handbook-flow-import-boundary-consumer-contract.md` records:
+    - The frozen in-boundary symbol set (public re-exports from `budget`, `packet_result`, `resolver`)
+    - Their transitive type dependencies (engine-public, std, or flow-local only)
+    - Which typed next-action/status semantics remain in-boundary after Packet 6.B.2
+    - Which shell-owned/operator-facing copy and rendering responsibilities are explicitly out of boundary
     - The contract version function (`flow_contract_version()`)
-    - Evidence references (cargo tree output, rg output, source inspection conclusions)
+    - Evidence references from Packet 6.B.1 and cleanup references from Packet 6.B.2
   - Verify: Doc exists and is internally consistent with live source.
   - Files: `docs/specs/handbook-flow-import-boundary-consumer-contract.md`
 
-### Packet 6.B.3: Verification Wall
+### Packet 6.B.4: Verification Wall
 
 - [ ] Task: Run the Lane B verification wall
   - Acceptance: All of the following pass:
-    - `cargo tree -p handbook-flow` shows only `handbook-engine` as intra-workspace dependency
+    - `cargo tree -p handbook-flow` shows only `handbook-engine` as the intra-workspace dependency
     - `rg -n "handbook_compiler|handbook_cli|handbook_pipeline" crates/flow/src/ crates/flow/tests/` returns zero matches
+    - Source inspection of the public `handbook-flow` surface (`crates/flow/src/lib.rs`, `crates/flow/src/budget.rs`, `crates/flow/src/packet_result.rs`, `crates/flow/src/resolver.rs`) confirms no final shell-owned/operator-facing copy remains on that surface; any remaining next-action/status data is typed/machine-readable only and stays within the Packet 6.B.3 consumer contract
+    - `rg -n 'run `doctor`|handbook inspect --packet|handbook generate --packet|handbook setup' crates/flow/src/` returns zero matches as a supporting spot-check, not the sole proof
     - `cargo test -p handbook-flow` passes
     - `cargo check --workspace` passes
     - `cargo fmt --all -- --check && cargo clippy --workspace --all-targets -- -D warnings` passes
-  - Verify: Run each command and record pass/fail.
+  - Verify: Run each command, perform and record the required source inspection, and record pass/fail for both the broader surface proof and the supporting grep spot-check.
   - Files: `docs/specs/handbook-engine-extraction-phase-6-remaining-work-tasks.md` (completion notes)
 
 ---
@@ -72,14 +87,14 @@ Spec reference: [handbook-engine-extraction-phase-6-remaining-work-spec.md](./ha
 ### Packet 6.D.1: Write Import/Adoption Plan
 
 - [ ] Task: Write the phased import plan for engine + pipeline + flow
-  - Acceptance: A standalone doc at `docs/specs/handbook-substrate-import-adoption-plan.md` that records:
+  - Acceptance: A standalone doc at `docs/specs/handbook-substrate-import-adoption-plan.md` records:
     - Import order: engine first (no intra-workspace deps), then pipeline (depends on engine), then flow (depends on engine)
     - Rationale for the phased order
     - Per-crate frozen boundary summary:
       - Engine: current public surface (Lane C deferred)
       - Pipeline: documented frozen subset from Lane A closeout (in-boundary modules listed)
-      - Flow: Lane B consumer contract (in-boundary symbols listed)
-    - Adapter/facade assessment (current evidence: none needed; record the assessment with evidence)
+      - Flow: Lane B consumer contract (clean import surface, typed semantics only where contract-approved, final shell copy out of boundary)
+    - Adapter/facade assessment (current evidence: none needed beyond the Lane B cleanup; record the assessment with evidence)
     - Import verification gate per phase (what checks Substrate must pass after importing each crate)
     - Substrate-side constraints (resolved from live repo inspection, 2026-06-17):
       - License field: add `license = "MIT"` to the three crate Cargo.toml files before import
@@ -103,7 +118,7 @@ Spec reference: [handbook-engine-extraction-phase-6-remaining-work-spec.md](./ha
 Stop after Lane B and Lane D land. Do not:
 - Execute the actual Substrate import
 - Reopen Lane A
-- Widen into CLI shell redesign, compiler retirement, publication, or crates.io work
+- Widen into full CLI shell redesign, compiler retirement, publication, or crates.io work
 - Make `substrate-context` become handbook
 - Introduce compatibility aliases as a long-term architecture substitute
 
