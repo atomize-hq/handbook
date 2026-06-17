@@ -16,7 +16,7 @@
 #### `git status --short --branch`
 
 ```text
-## feat/seam-extraction...origin/feat/seam-extraction
+## feat/seam-extraction...origin/feat/seam-extraction [ahead 1]
  M AGENTS.md
  M CLAUDE.md
 ```
@@ -109,10 +109,12 @@ Exit status: `1` (zero matches).
 
 #### Required source inspections
 
-- `sed -n '1,60p' crates/flow/src/resolver.rs`
-- `sed -n '1,60p' crates/flow/src/budget.rs`
-- `sed -n '1,60p' crates/flow/src/packet_result.rs`
-- `sed -n '1,40p' crates/engine/src/lib.rs`
+- `sed -n '1,260p' crates/flow/src/lib.rs`
+- `sed -n '1,260p' crates/flow/src/resolver.rs`
+- `sed -n '1,220p' crates/flow/src/budget.rs`
+- `sed -n '1,260p' crates/flow/src/packet_result.rs`
+- `sed -n '1,200p' crates/engine/src/lib.rs`
+- `rg -n 'RunSetup|RunSetupInit|RunSetupRefresh|RunGenerate|RunDoctor|doctor|handbook inspect --packet|matches_setup_starter_template' crates/flow/src/resolver.rs`
 
 ### Import-surface inventory from `crates/flow/src/lib.rs`
 
@@ -171,6 +173,7 @@ Implementation note: `evaluate_budget` uses only `handbook_engine::{ArtifactPres
 | Symbol | Transitive type dependencies | Result |
 |---|---|---|
 | `PacketVariant` | none beyond self | std/flow-only |
+| `PacketVariant::as_str(self) -> &'static str` | `PacketVariant` -> self, `&'static str` | std/flow-only |
 | `PacketSourceSummary` | `CanonicalArtifactKind` -> `handbook_engine` public enum, `&'static str`, `bool`, `ArtifactPresence` -> `handbook_engine` public enum, `Option<u64>`, `Option<String>` | engine-public + std only |
 | `PacketBodyNoteKind` | none beyond self | std/flow-only |
 | `PacketSectionMode` | none beyond self | std/flow-only |
@@ -179,6 +182,7 @@ Implementation note: `evaluate_budget` uses only `handbook_engine::{ArtifactPres
 | `PacketFixtureContext` | `String`, `Vec<PacketSourceSummary>` -> std + engine-public via `PacketSourceSummary` | engine-public + std only |
 | `PacketDecisionSummary` | `PacketSelectionStatus` -> flow resolver type, `BudgetDisposition`/`BudgetReason` -> flow budget types, `usize`, `String` | std/flow-only |
 | `PacketResult` | `String`, `PacketVariant`, `Option<PacketFixtureContext>`, `Vec<PacketSourceSummary>`, `Vec<PacketBodyNote>`, `PacketDecisionSummary`, `Vec<PacketSection>` | engine-public + std only via nested packet types |
+| `PacketResult::is_ready(&self) -> bool` | `PacketDecisionSummary.packet_status` -> `PacketSelectionStatus`, `bool` | std/flow-only |
 
 Implementation note: `packet_result.rs` imports only `crate::budget`, `crate::resolver::PacketSelectionStatus`, and `handbook_engine::{ArtifactPresence, CanonicalArtifactKind}`.
 
@@ -194,6 +198,7 @@ Implementation note: `packet_result.rs` imports only `crate::budget`, `crate::re
 | `ResolverBlockerCategory` | none beyond self | std/flow-only |
 | `ResolverBlocker` | `ResolverBlockerCategory`, `ResolverSubjectRef`, `String`, `ResolverNextSafeAction` | engine-public + std only through nested `ResolverSubjectRef` |
 | `ResolveRequest` | `BudgetPolicy`, `&'static str` | std/flow-only |
+| `Default for ResolveRequest` | `BudgetPolicy::default()` -> flow budget type with std fields only, `DEFAULT_PACKET_ID` -> `&'static str` | std/flow-only |
 | `PacketSelectionStatus` | none beyond self | std/flow-only |
 | `PacketSelection` | `String`, `PacketSelectionStatus` | std/flow-only |
 | `ResolverResult` | `String`, `u32`, `PacketResult`, `Vec<String>`, `BudgetOutcome`, `PacketSelection`, `Option<ResolverRefusal>`, `Vec<ResolverBlocker>` | engine-public + std only through nested `PacketResult` / `ResolverRefusal` / `ResolverBlocker` |
@@ -228,20 +233,30 @@ Implementation-only engine surface used by `resolve` and helper routines:
 
 Finding: all resolver implementation dependencies that cross the crate boundary resolve through `handbook_engine` public modules or `pub use` re-exports exposed by `crates/engine/src/lib.rs`. No resolver symbol requires engine-internal/private modules.
 
+#### `lib`
+
+| Symbol | Transitive type dependencies | Result |
+|---|---|---|
+| `flow_contract_version() -> &'static str` | return type `&'static str`; implementation delegates to `handbook_engine::workspace_contract_version()` -> engine-public function | engine-public + std only |
+
 ### Flag check: engine types beyond the engine public surface
 
 Flagged symbols: **none**.
 
 Every cross-crate type/function reference observed in `crates/flow/src/{resolver,budget,packet_result,lib}.rs` resolves through `handbook_engine` public modules or public re-exports declared by `crates/engine/src/lib.rs`.
 
-### Exclusion proof for CLI/compiler/doctor/setup/pipeline concerns
+### Evidence and limits for CLI/compiler/doctor/setup/pipeline concerns
 
 1. **Compiler / CLI / pipeline imports:** excluded by the zero-match `rg` result across `crates/flow/src/` and `crates/flow/tests/`.
 2. **All `use` statements in `crates/flow/src/*.rs`:** limited to `crate::*`, `handbook_engine::*`, and `std::*`.
 3. **Pipeline coupling:** no imports or type references to pipeline loading/selection/compile/capture/handoff/route modules or types were found in `crates/flow/src/*.rs`.
 4. **Compiler glue coupling:** no imports or type references to compiler rendering/refusal/error glue were found in `crates/flow/src/*.rs`.
-5. **CLI shell coupling:** no imports or type references to clap/help/exit-code/product-shell modules were found in `crates/flow/src/*.rs`.
-6. **Doctor/setup nuance from live source:** resolver logic contains flow-owned symbolic next-safe-action values such as `ResolverNextSafeAction::{RunSetup, RunSetupInit, RunSetupRefresh, RunGenerate, RunDoctor}` and user-facing strings like `run \`doctor\`` / `run \`handbook inspect --packet ...\``. These are string/enum recommendations only. Source inspection found no imports from doctor/setup/cli/compiler crates or APIs; the concern is represented symbolically inside `handbook-flow`, not via external crate coupling.
+5. **CLI shell-module coupling:** no imports or type references to clap/help/exit-code/product-shell modules were found in `crates/flow/src/*.rs`.
+6. **Live public/observable flow surface still includes doctor/setup/CLI-adjacent behavior:**
+   - `ResolverNextSafeAction` publicly exposes `RunSetup`, `RunSetupInit`, `RunSetupRefresh`, `RunGenerate`, and `RunDoctor` in `crates/flow/src/resolver.rs:79-106`.
+   - `next_safe_action_for_ready_packet()` returns user-facing command strings such as `run \`doctor\`` and `run \`handbook inspect --packet ...\`` in `crates/flow/src/resolver.rs:1083-1096`.
+   - setup-starter-template handling still participates in resolver packet logic via `matches_setup_starter_template` branches in `crates/flow/src/resolver.rs:802-804` and `866-872`.
+7. **Honest conclusion for Packet 6.B.1 evidence:** the live source proves absence of extra crate imports/coupling to `handbook_cli`, `handbook_compiler`, and `handbook_pipeline`, and it proves resolver implementation dependencies stay within `handbook_engine` + std + flow-local types. It does **not** prove full exclusion of doctor/setup/CLI concerns from the public or observable `handbook-flow` surface, because those concerns are still represented by public enums and emitted command strings inside `resolver.rs`.
 
 ### Exclusion proof for tests
 
