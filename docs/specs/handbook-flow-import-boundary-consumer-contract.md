@@ -16,9 +16,7 @@
 #### `git status --short --branch`
 
 ```text
-## feat/seam-extraction...origin/feat/seam-extraction [ahead 1]
- M AGENTS.md
- M CLAUDE.md
+## feat/seam-extraction...origin/feat/seam-extraction
 ```
 
 #### `cargo tree -p handbook-flow`
@@ -109,12 +107,17 @@ Exit status: `1` (zero matches).
 
 #### Required source inspections
 
-- `sed -n '1,260p' crates/flow/src/lib.rs`
-- `sed -n '1,260p' crates/flow/src/resolver.rs`
-- `sed -n '1,220p' crates/flow/src/budget.rs`
-- `sed -n '1,260p' crates/flow/src/packet_result.rs`
-- `sed -n '1,200p' crates/engine/src/lib.rs`
-- `rg -n 'RunSetup|RunSetupInit|RunSetupRefresh|RunGenerate|RunDoctor|doctor|handbook inspect --packet|matches_setup_starter_template' crates/flow/src/resolver.rs`
+- Required packet commands run exactly:
+  - `sed -n '70,210p' crates/flow/src/resolver.rs`
+  - `sed -n '1,140p' crates/flow/src/packet_result.rs`
+  - `sed -n '1,220p' crates/flow/src/budget.rs`
+  - `sed -n '518,590p' crates/cli/src/rendering.rs`
+  - `sed -n '315,360p' crates/compiler/src/rendering/shared.rs`
+- Supplemental live cross-checks used to keep the evidence honest:
+  - `sed -n '1,260p' crates/flow/src/lib.rs`
+  - `sed -n '1,240p' crates/engine/src/lib.rs`
+  - `sed -n '1060,1110p' crates/flow/src/resolver.rs`
+  - `rg -n 'run \`doctor\`|handbook inspect --packet|handbook generate --packet|handbook setup|matches_setup_starter_template|next_safe_action_for_ready_packet|ready_next_safe_action' crates/flow/src/resolver.rs crates/flow/src/packet_result.rs crates/cli/src/rendering.rs crates/compiler/src/rendering/shared.rs`
 
 ### Import-surface inventory from `crates/flow/src/lib.rs`
 
@@ -254,9 +257,12 @@ Every cross-crate type/function reference observed in `crates/flow/src/{resolver
 5. **CLI shell-module coupling:** no imports or type references to clap/help/exit-code/product-shell modules were found in `crates/flow/src/*.rs`.
 6. **Live public/observable flow surface still includes doctor/setup/CLI-adjacent behavior:**
    - `ResolverNextSafeAction` publicly exposes `RunSetup`, `RunSetupInit`, `RunSetupRefresh`, `RunGenerate`, and `RunDoctor` in `crates/flow/src/resolver.rs:79-106`.
-   - `next_safe_action_for_ready_packet()` returns user-facing command strings such as `run \`doctor\`` and `run \`handbook inspect --packet ...\`` in `crates/flow/src/resolver.rs:1083-1096`.
+   - `next_safe_action_for_ready_packet()` returns final user-facing command strings such as `run \`doctor\`` and `run \`handbook inspect --packet ...\` for proof` in `crates/flow/src/resolver.rs:1079-1098`.
+   - `PacketDecisionSummary.ready_next_safe_action: String` keeps that final rendered shell copy on the public flow surface in `crates/flow/src/packet_result.rs:69-74`.
+   - `crates/cli/src/rendering.rs:526-585` and `crates/compiler/src/rendering/shared.rs:315-360` already render typed `NextSafeAction` values into final shell wording for refusal/blocker cases, but both still pass through `packet.decision_summary.ready_next_safe_action.clone()` for ready packets. That is the residual shell-owned seam Packet 6.B.2 must move out of `handbook-flow`.
    - setup-starter-template handling still participates in resolver packet logic via `matches_setup_starter_template` branches in `crates/flow/src/resolver.rs:802-804` and `866-872`.
-7. **Honest conclusion for Packet 6.B.1 evidence:** the live source proves absence of extra crate imports/coupling to `handbook_cli`, `handbook_compiler`, and `handbook_pipeline`, and it proves resolver implementation dependencies stay within `handbook_engine` + std + flow-local types. It does **not** prove full exclusion of doctor/setup/CLI concerns from the public or observable `handbook-flow` surface, because those concerns are still represented by public enums and emitted command strings inside `resolver.rs`.
+7. **Typed semantics vs final shell wording:** the typed/machine-readable side of the flow surface still consists of enums and categories such as `ResolverNextSafeAction`, `ResolverBlockerCategory`, `ResolverRefusalCategory`, `PacketSelectionStatus`, and the budget/result enums. The final shell-owned/operator-facing side is the rendered command/copy string surface: `next_safe_action_for_ready_packet()` in `resolver.rs` plus `PacketDecisionSummary.ready_next_safe_action: String` in `packet_result.rs`.
+8. **Honest conclusion for Packet 6.B.1 evidence:** the live source proves absence of extra crate imports/coupling to `handbook_cli`, `handbook_compiler`, and `handbook_pipeline`, and it proves resolver/budget/packet-result implementation dependencies stay within `handbook_engine` + std + flow-local types. It does **not** prove full exclusion of doctor/setup/CLI concerns from the public or observable `handbook-flow` surface, because the public flow result still carries final rendered shell wording via `ready_next_safe_action`, even though CLI/compiler already own most typed-next-action rendering for refusal/blocker paths.
 
 ### Exclusion proof for tests
 
