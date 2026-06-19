@@ -11,6 +11,9 @@ pub mod setup;
 mod stage_10_feature_spec_provenance;
 
 pub use declarative_roots::PipelineDeclarativeRootsContract;
+pub use layout::{
+    handbook_product_pipeline_storage_layout_contract, PipelineStorageLayoutContract,
+};
 pub use pipeline::{
     handbook_product_pipeline_declarative_roots, load_pipeline_catalog,
     load_pipeline_catalog_metadata, load_pipeline_definition, load_pipeline_selection_metadata,
