@@ -763,6 +763,62 @@ fn supported_target_registry_derives_current_pipeline_and_stage_wedge_from_catal
 }
 
 #[test]
+fn explicit_roots_drive_catalog_discovery_and_supported_target_derivation() {
+    let source_root = repo_root();
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    let roots = PipelineDeclarativeRootsContract::from_paths(
+        "core/pipelines",
+        "core/profiles",
+        "core/runners",
+        ".substrate/handbook/core/stages",
+    );
+
+    copy_tree(
+        &source_root.join("core/stages"),
+        &root.join(roots.stage_root_relative()),
+    );
+
+    let imported_pipeline =
+        fs::read_to_string(source_root.join("core/pipelines/foundation_inputs.yaml"))
+            .expect("read source pipeline")
+            .replace("core/stages/", &format!("{}/", roots.stage_root_relative()));
+    write_file(
+        &root.join(roots.pipeline_file("foundation_inputs.yaml")),
+        &imported_pipeline,
+    );
+
+    let catalog = handbook_pipeline::pipeline::load_pipeline_catalog_with_roots(root, &roots)
+        .expect("catalog should discover stages from the explicit stage root");
+    assert_eq!(catalog.pipeline_count(), 1);
+    assert!(catalog.stage_count() >= 6);
+
+    let stage = catalog
+        .resolve_selector("stage.10_feature_spec")
+        .expect("stage selection");
+    match stage {
+        PipelineSelection::Stage(stage) => {
+            assert_eq!(
+                stage.source_path,
+                PathBuf::from(roots.stage_file("10_feature_spec.md"))
+            );
+        }
+        other => panic!("expected stage selection, got {other:?}"),
+    }
+
+    let registry = SupportedTargetRegistry::load_with_roots(root, &roots)
+        .expect("supported target registry should follow explicit stage roots");
+    assert_eq!(
+        registry.compile_target().stage.source_path,
+        PathBuf::from(roots.stage_file("10_feature_spec.md"))
+    );
+    assert_eq!(
+        registry.compile_target().pipeline.id,
+        "pipeline.foundation_inputs"
+    );
+}
+
+#[test]
 fn supported_target_registry_refuses_foundation_inputs_shape_that_widens_beyond_packet_wedge() {
     let source_root = repo_root();
     let dir = tempfile::tempdir().expect("tempdir");

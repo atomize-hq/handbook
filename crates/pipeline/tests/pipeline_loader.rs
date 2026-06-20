@@ -83,7 +83,7 @@ fn default_declarative_root_helper_preserves_existing_loader_behavior() {
 }
 
 #[test]
-fn non_default_stage_roots_are_not_yet_adopted_by_loader_validation() {
+fn explicit_roots_allow_loader_validation_to_accept_non_default_stage_roots() {
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
     let roots = handbook_product_pipeline_declarative_roots();
@@ -97,11 +97,11 @@ fn non_default_stage_roots_are_not_yet_adopted_by_loader_validation() {
     write_stage_with_front_matter(
         repo_root,
         &imported_stage_roots.stage_file("00_base.md"),
-        r#"id: stage.00_base
+        r#"kind: stage
+id: stage.00_base
+version: 0.1.0
 title: Imported Stage
-slug: imported-stage
-capabilities:
-  - implement
+description: imported-stage
 "#,
     );
     write_file(
@@ -126,28 +126,18 @@ stages:
         ),
     );
 
-    let err = load_pipeline_definition(&repo_root, roots.pipeline_file("imported-stage-root.yaml"))
-        .expect_err("non-default stage root should still be rejected in Packet 1.1");
+    let definition = handbook_pipeline::pipeline::load_pipeline_definition_with_roots(
+        &repo_root,
+        &imported_stage_roots,
+        roots.pipeline_file("imported-stage-root.yaml"),
+    )
+    .expect("explicit declarative roots should admit the imported stage root");
 
-    match err {
-        PipelineLoadError::Validation {
-            error:
-                PipelineValidationError::InvalidStageFile {
-                    stage_id,
-                    file,
-                    reason: StageFileValidationError::OutsideStageDirectory,
-                },
-            ..
-        } => {
-            assert_eq!(stage_id, "stage.00_base");
-            assert_eq!(file, ".substrate/handbook/core/stages/00_base.md");
-            assert_eq!(
-                StageFileValidationError::OutsideStageDirectory.to_string(),
-                format!("must live under `{}/`", roots.stage_root_relative())
-            );
-        }
-        other => panic!("expected stage-directory refusal, got {other:?}"),
-    }
+    assert_eq!(definition.header.id, "pipeline.imported_stage_root");
+    assert_eq!(
+        definition.body.stages[0].file,
+        imported_stage_roots.stage_file("00_base.md")
+    );
 }
 
 #[test]

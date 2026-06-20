@@ -1,6 +1,5 @@
 use crate::declarative_roots::{
-    handbook_product_declarative_roots, pipeline_root, stage_root,
-    PipelineDeclarativeRootsContract,
+    handbook_product_declarative_roots, pipeline_root, stage_root, PipelineDeclarativeRootsContract,
 };
 use crate::repo_file_access::{
     CompilerWorkspace, NormalizedRepoRelativePath, RepoRelativeFileAccessError,
@@ -21,6 +20,10 @@ const SUPPORTED_CAPTURE_STAGE_FILE_NAMES: &[&str] = &[
     "07_foundation_pack.md",
     SUPPORTED_COMPILE_STAGE_FILE_NAME,
 ];
+const ACTIVE_PIPELINE_ROOT_REASON: &str =
+    "pipeline YAML must live under the active declarative pipeline root";
+const ACTIVE_PIPELINE_EXTENSION_REASON: &str =
+    "pipeline YAML must use the `.yaml` extension under the active declarative pipeline root";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PipelineDefinition {
@@ -146,6 +149,84 @@ impl SupportedTargetRegistry {
         let catalog = load_pipeline_catalog_metadata(repo_root)
             .map_err(SupportedTargetRegistryLoadError::Catalog)?;
         let supported_topology = resolve_supported_target_topology(&catalog)?;
+        let supported_pipeline = supported_topology.pipeline;
+
+        let mut stages = BTreeMap::new();
+        for stage_id in &supported_topology.capture_stage_ids {
+            let stage = catalog.stages.get(stage_id).ok_or_else(|| {
+                SupportedTargetRegistryLoadError::MissingSupportedStage {
+                    stage_id: stage_id.clone(),
+                }
+            })?;
+            if !stage
+                .pipelines
+                .iter()
+                .any(|pipeline_id| pipeline_id == &supported_pipeline.id)
+            {
+                return Err(
+                    SupportedTargetRegistryLoadError::UnsupportedStagePipelineMembership {
+                        pipeline_id: supported_pipeline.id.clone(),
+                        stage_id: stage_id.clone(),
+                    },
+                );
+            }
+            stages.insert(
+                stage.id.clone(),
+                SupportedStageTarget {
+                    id: stage.id.clone(),
+                    source_path: stage.source_path.clone(),
+                    pipeline_ids: stage.pipelines.clone(),
+                },
+            );
+        }
+
+        let pipeline_id = supported_pipeline.id.clone();
+        let compile_stage_id = supported_topology.compile_stage_id;
+        let mut pipelines = BTreeMap::new();
+        pipelines.insert(pipeline_id.clone(), supported_pipeline);
+
+        let mut consumers = BTreeMap::new();
+        consumers.insert(
+            SUPPORTED_CONSUMER_TARGET_ID.to_string(),
+            SupportedConsumerTarget {
+                id: SUPPORTED_CONSUMER_TARGET_ID.to_string(),
+                allowed_pipeline_ids: vec![pipeline_id.clone()],
+                allowed_stage_ids: vec![compile_stage_id.clone()],
+            },
+        );
+
+        let compile_pairs = BTreeSet::from([(pipeline_id.clone(), compile_stage_id.clone())]);
+        let capture_pairs = supported_topology
+            .capture_stage_ids
+            .iter()
+            .map(|stage_id| (pipeline_id.clone(), stage_id.clone()))
+            .collect();
+        let provenance_pairs = compile_pairs.clone();
+        let handoff_pairs = BTreeSet::from([(
+            pipeline_id,
+            compile_stage_id,
+            SUPPORTED_CONSUMER_TARGET_ID.to_string(),
+        )]);
+
+        Ok(Self {
+            pipelines,
+            stages,
+            consumers,
+            compile_pairs,
+            capture_pairs,
+            provenance_pairs,
+            handoff_pairs,
+        })
+    }
+
+    pub fn load_with_roots(
+        repo_root: impl AsRef<Path>,
+        roots: &PipelineDeclarativeRootsContract,
+    ) -> Result<Self, SupportedTargetRegistryLoadError> {
+        let repo_root = repo_root.as_ref();
+        let catalog = load_pipeline_catalog_metadata_with_roots(repo_root, roots)
+            .map_err(SupportedTargetRegistryLoadError::Catalog)?;
+        let supported_topology = resolve_supported_target_topology_with_roots(&catalog, roots)?;
         let supported_pipeline = supported_topology.pipeline;
 
         let mut stages = BTreeMap::new();
@@ -409,7 +490,121 @@ fn resolve_supported_target_topology(
         .stages
         .iter()
         .filter(|stage| {
-            supported_capture_stage_source_path_matches(stage, &supported_capture_stage_source_paths)
+            supported_capture_stage_source_path_matches(
+                stage,
+                &supported_capture_stage_source_paths,
+            )
+        })
+        .map(|stage| stage.stage_id.clone())
+        .collect::<Vec<_>>();
+    if capture_stage_ids.len() != supported_capture_stage_source_paths.len() {
+        return Err(
+            SupportedTargetRegistryLoadError::MissingCatalogBackedCaptureStages {
+                pipeline_id: pipeline.definition.header.id.clone(),
+                required_stage_source_paths: supported_stage_source_paths(
+                    &supported_capture_stage_source_paths,
+                ),
+            },
+        );
+    }
+
+    if !capture_stage_ids
+        .iter()
+        .any(|stage_id| stage_id == &compile_stage_id)
+    {
+        return Err(SupportedTargetRegistryLoadError::MissingPipelineStage {
+            pipeline_id: pipeline.definition.header.id.clone(),
+            stage_id: compile_stage_id.clone(),
+        });
+    }
+
+    Ok(SupportedTargetTopology {
+        pipeline: SupportedPipelineTarget {
+            id: pipeline.definition.header.id.clone(),
+            declared_stage_ids: pipeline
+                .stages
+                .iter()
+                .map(|stage| stage.stage_id.clone())
+                .collect(),
+        },
+        compile_stage_id,
+        capture_stage_ids,
+    })
+}
+
+fn resolve_supported_target_topology_with_roots(
+    catalog: &PipelineCatalog,
+    roots: &PipelineDeclarativeRootsContract,
+) -> Result<SupportedTargetTopology, SupportedTargetRegistryLoadError> {
+    let supported_pipeline_stage_source_paths = supported_pipeline_stage_source_paths(roots);
+    let supported_compile_stage_source_path = supported_compile_stage_source_path(roots);
+    let supported_base_stage_source_path = supported_base_stage_source_path(roots);
+    let supported_capture_stage_source_paths = supported_capture_stage_source_paths(roots);
+    let mut pipeline_candidates = catalog
+        .pipelines
+        .values()
+        .filter(|pipeline| {
+            supported_pipeline_stage_shape_matches(pipeline, &supported_pipeline_stage_source_paths)
+        })
+        .collect::<Vec<_>>();
+
+    if pipeline_candidates.is_empty() {
+        return Err(
+            SupportedTargetRegistryLoadError::MissingCatalogBackedPipelineShape {
+                required_stage_source_paths: supported_stage_source_paths(
+                    &supported_pipeline_stage_source_paths,
+                ),
+            },
+        );
+    }
+
+    if pipeline_candidates.len() > 1 {
+        return Err(
+            SupportedTargetRegistryLoadError::AmbiguousCatalogBackedPipelineShape {
+                pipeline_ids: pipeline_candidates
+                    .iter()
+                    .map(|pipeline| pipeline.definition.header.id.clone())
+                    .collect(),
+            },
+        );
+    }
+
+    let pipeline = pipeline_candidates.remove(0);
+    let compile_stage_id = pipeline
+        .stages
+        .iter()
+        .find(|stage| stage_source_path_matches(stage, &supported_compile_stage_source_path))
+        .map(|stage| stage.stage_id.clone())
+        .ok_or_else(
+            || SupportedTargetRegistryLoadError::MissingCatalogBackedCompileStage {
+                pipeline_id: pipeline.definition.header.id.clone(),
+                required_stage_source_path: supported_compile_stage_source_path
+                    .display()
+                    .to_string(),
+            },
+        )?;
+
+    if !pipeline
+        .stages
+        .iter()
+        .any(|stage| stage_source_path_matches(stage, &supported_base_stage_source_path))
+    {
+        return Err(
+            SupportedTargetRegistryLoadError::MissingCatalogBackedBaseStage {
+                pipeline_id: pipeline.definition.header.id.clone(),
+                required_stage_source_path: supported_base_stage_source_path.display().to_string(),
+            },
+        );
+    }
+
+    let capture_stage_ids = pipeline
+        .stages
+        .iter()
+        .filter(|stage| {
+            supported_capture_stage_source_path_matches(
+                stage,
+                &supported_capture_stage_source_paths,
+            )
         })
         .map(|stage| stage.stage_id.clone())
         .collect::<Vec<_>>();
@@ -488,18 +683,14 @@ fn supported_compile_stage_source_path(roots: &PipelineDeclarativeRootsContract)
     PathBuf::from(roots.stage_file(SUPPORTED_COMPILE_STAGE_FILE_NAME))
 }
 
-fn supported_capture_stage_source_paths(
-    roots: &PipelineDeclarativeRootsContract,
-) -> Vec<PathBuf> {
+fn supported_capture_stage_source_paths(roots: &PipelineDeclarativeRootsContract) -> Vec<PathBuf> {
     SUPPORTED_CAPTURE_STAGE_FILE_NAMES
         .iter()
         .map(|file_name| PathBuf::from(roots.stage_file(file_name)))
         .collect()
 }
 
-fn supported_pipeline_stage_source_paths(
-    roots: &PipelineDeclarativeRootsContract,
-) -> Vec<PathBuf> {
+fn supported_pipeline_stage_source_paths(roots: &PipelineDeclarativeRootsContract) -> Vec<PathBuf> {
     std::iter::once(supported_base_stage_source_path(roots))
         .chain(supported_capture_stage_source_paths(roots))
         .collect()
@@ -1200,10 +1391,28 @@ pub fn load_pipeline_catalog(
     load_pipeline_catalog_with_mode(repo_root, PipelineLoadMode::RouteAware)
 }
 
+pub fn load_pipeline_catalog_with_roots(
+    repo_root: impl AsRef<Path>,
+    roots: &PipelineDeclarativeRootsContract,
+) -> Result<PipelineCatalog, PipelineCatalogError> {
+    load_pipeline_catalog_with_mode_and_roots(
+        repo_root.as_ref(),
+        roots,
+        PipelineLoadMode::RouteAware,
+    )
+}
+
 pub fn load_pipeline_catalog_metadata(
     repo_root: impl AsRef<Path>,
 ) -> Result<PipelineCatalog, PipelineCatalogError> {
     load_pipeline_metadata_catalog_index(repo_root.as_ref())
+}
+
+pub fn load_pipeline_catalog_metadata_with_roots(
+    repo_root: impl AsRef<Path>,
+    roots: &PipelineDeclarativeRootsContract,
+) -> Result<PipelineCatalog, PipelineCatalogError> {
+    load_pipeline_metadata_catalog_index_with_roots(repo_root.as_ref(), roots)
 }
 
 pub fn handbook_product_pipeline_declarative_roots() -> &'static PipelineDeclarativeRootsContract {
@@ -1421,6 +1630,91 @@ fn load_pipeline_catalog_with_mode(
     Ok(PipelineCatalog { pipelines, stages })
 }
 
+fn load_pipeline_catalog_with_mode_and_roots(
+    repo_root: &Path,
+    roots: &PipelineDeclarativeRootsContract,
+    mode: PipelineLoadMode,
+) -> Result<PipelineCatalog, PipelineCatalogError> {
+    let mut pipelines = std::collections::BTreeMap::<String, PipelineCatalogEntry>::new();
+    let mut stages = std::collections::BTreeMap::<String, StageCatalogEntry>::new();
+    let stage_catalog = load_stage_catalog_with_roots(repo_root, roots)?;
+    let mut stage_memberships: std::collections::BTreeMap<String, Vec<String>> =
+        std::collections::BTreeMap::new();
+
+    for pipeline_path in discover_repo_relative_files_with_kind(
+        repo_root,
+        roots.pipeline_root(),
+        "yaml",
+        CatalogDiscoveryKind::Pipelines,
+    )? {
+        let definition =
+            load_pipeline_definition_with_mode_and_roots(repo_root, roots, &pipeline_path, mode)
+                .map_err(|source| PipelineCatalogError::PipelineLoad {
+                    path: repo_root.join(&pipeline_path),
+                    source: Box::new(source),
+                })?;
+        let pipeline_id = definition.header.id.clone();
+
+        let mut stage_entries = Vec::with_capacity(definition.declared_stages().len());
+        for stage in definition.declared_stages() {
+            let stage_catalog_entry =
+                stage_catalog.get(Path::new(&stage.file)).ok_or_else(|| {
+                    PipelineCatalogError::StageFrontMatter {
+                        path: repo_root.join(&stage.file),
+                        source: <serde_yaml_bw::Error as serde::de::Error>::custom(format!(
+                            "stage file {} is missing front matter or is not cataloged",
+                            stage.file
+                        )),
+                    }
+                })?;
+
+            if stage_catalog_entry.id != stage.id {
+                return Err(PipelineCatalogError::StageIdMismatch {
+                    path: stage_catalog_entry.source_path.clone(),
+                    expected: stage.id.clone(),
+                    actual: stage_catalog_entry.id.clone(),
+                });
+            }
+
+            stage_entries.push(PipelineCatalogStageEntry {
+                stage_id: stage_catalog_entry.id.clone(),
+                title: stage_catalog_entry.title.clone(),
+                work_level: stage_catalog_entry.work_level.clone(),
+                source_path: stage_catalog_entry.source_path.clone(),
+            });
+
+            stage_memberships
+                .entry(stage_catalog_entry.id.clone())
+                .or_default()
+                .push(definition.header.id.clone());
+        }
+
+        if pipelines
+            .insert(
+                pipeline_id.clone(),
+                PipelineCatalogEntry {
+                    definition,
+                    stages: stage_entries,
+                },
+            )
+            .is_some()
+        {
+            return Err(PipelineCatalogError::DuplicatePipelineId { id: pipeline_id });
+        }
+    }
+
+    for (stage_path, mut entry) in stage_catalog {
+        entry.pipelines = stage_memberships.remove(&entry.id).unwrap_or_default();
+        let stage_id = entry.id.clone();
+        if stages.insert(stage_id.clone(), entry).is_some() {
+            return Err(PipelineCatalogError::DuplicateStageId { id: stage_id });
+        }
+        let _ = stage_path;
+    }
+
+    Ok(PipelineCatalog { pipelines, stages })
+}
+
 fn load_pipeline_metadata_catalog_index(
     repo_root: &Path,
 ) -> Result<PipelineCatalog, PipelineCatalogError> {
@@ -1432,6 +1726,71 @@ fn load_pipeline_metadata_catalog_index(
     for pipeline_path in discover_repo_relative_files(repo_root, pipeline_root(), "yaml")? {
         let definition = match load_pipeline_definition_with_mode(
             repo_root,
+            &pipeline_path,
+            PipelineLoadMode::MetadataOnly,
+        ) {
+            Ok(definition) => definition,
+            Err(_) => continue,
+        };
+
+        let entry = match build_pipeline_catalog_entry_metadata(repo_root, &definition) {
+            Ok(entry) => entry,
+            Err(_) => continue,
+        };
+
+        let pipeline_id = definition.header.id.clone();
+        if pipelines.insert(pipeline_id.clone(), entry).is_some() {
+            return Err(PipelineCatalogError::DuplicatePipelineId { id: pipeline_id });
+        }
+
+        for stage in definition.declared_stages() {
+            let stage_entry = load_stage_catalog_entry_for_reference(repo_root, stage)?;
+            stage_memberships
+                .entry(stage_entry.id.clone())
+                .or_default()
+                .push(definition.header.id.clone());
+
+            match stages.get(&stage_entry.id) {
+                Some(existing) if existing.source_path != stage_entry.source_path => {
+                    return Err(PipelineCatalogError::DuplicateStageId {
+                        id: stage_entry.id.clone(),
+                    });
+                }
+                Some(_) => {}
+                None => {
+                    stages.insert(stage_entry.id.clone(), stage_entry);
+                }
+            }
+        }
+    }
+
+    for (stage_id, pipelines_for_stage) in stage_memberships {
+        if let Some(stage) = stages.get_mut(&stage_id) {
+            stage.pipelines = pipelines_for_stage;
+        }
+    }
+
+    Ok(PipelineCatalog { pipelines, stages })
+}
+
+fn load_pipeline_metadata_catalog_index_with_roots(
+    repo_root: &Path,
+    roots: &PipelineDeclarativeRootsContract,
+) -> Result<PipelineCatalog, PipelineCatalogError> {
+    let mut pipelines = std::collections::BTreeMap::<String, PipelineCatalogEntry>::new();
+    let mut stages = std::collections::BTreeMap::<String, StageCatalogEntry>::new();
+    let mut stage_memberships: std::collections::BTreeMap<String, Vec<String>> =
+        std::collections::BTreeMap::new();
+
+    for pipeline_path in discover_repo_relative_files_with_kind(
+        repo_root,
+        roots.pipeline_root(),
+        "yaml",
+        CatalogDiscoveryKind::Pipelines,
+    )? {
+        let definition = match load_pipeline_definition_with_mode_and_roots(
+            repo_root,
+            roots,
             &pipeline_path,
             PipelineLoadMode::MetadataOnly,
         ) {
@@ -1861,6 +2220,67 @@ fn load_stage_catalog(
     Ok(out)
 }
 
+fn load_stage_catalog_with_roots(
+    repo_root: &Path,
+    roots: &PipelineDeclarativeRootsContract,
+) -> Result<std::collections::BTreeMap<PathBuf, StageCatalogEntry>, PipelineCatalogError> {
+    let mut out = std::collections::BTreeMap::new();
+    for stage_path in discover_repo_relative_files_with_kind(
+        repo_root,
+        roots.stage_root(),
+        "md",
+        CatalogDiscoveryKind::Stages,
+    )? {
+        let full_path = repo_root.join(&stage_path);
+        let Some(front_matter) =
+            load_stage_front_matter(repo_root, &stage_path).map_err(|err| match err {
+                StageFrontMatterLoadError::Read(source) => PipelineCatalogError::ReadStageCatalog {
+                    path: full_path.clone(),
+                    source,
+                },
+                StageFrontMatterLoadError::Parse(source) => {
+                    PipelineCatalogError::StageFrontMatter {
+                        path: full_path.clone(),
+                        source,
+                    }
+                }
+            })?
+        else {
+            continue;
+        };
+
+        if front_matter.kind != "stage" {
+            return Err(PipelineCatalogError::StageKindMismatch {
+                path: full_path.clone(),
+                actual: front_matter.kind,
+            });
+        }
+        if let Some(reason) = canonical_id_path_like_reason(&front_matter.id) {
+            return Err(PipelineCatalogError::InvalidStageCanonicalId {
+                path: full_path.clone(),
+                value: front_matter.id,
+                reason,
+            });
+        }
+
+        out.insert(
+            stage_path.clone(),
+            StageCatalogEntry {
+                id: front_matter.id,
+                kind: front_matter.kind,
+                version: front_matter.version,
+                title: front_matter.title,
+                description: front_matter.description,
+                work_level: front_matter.work_level,
+                source_path: stage_path.clone(),
+                pipelines: Vec::new(),
+            },
+        );
+    }
+
+    Ok(out)
+}
+
 fn extract_front_matter_block(contents: &str) -> Option<String> {
     extract_front_matter_parts(contents).map(|(front_matter, _body)| front_matter)
 }
@@ -1938,6 +2358,59 @@ fn discover_repo_relative_files(
 
         let relative = path.strip_prefix(repo_root).unwrap_or(&path).to_path_buf();
         out.push(relative);
+    }
+
+    out.sort();
+    Ok(out)
+}
+
+#[derive(Clone, Copy)]
+enum CatalogDiscoveryKind {
+    Pipelines,
+    Stages,
+}
+
+fn discover_repo_relative_files_with_kind(
+    repo_root: &Path,
+    relative_dir: &Path,
+    extension: &str,
+    kind: CatalogDiscoveryKind,
+) -> Result<Vec<PathBuf>, PipelineCatalogError> {
+    let full_dir = repo_root.join(relative_dir);
+    let entries = std::fs::read_dir(&full_dir).map_err(|source| match kind {
+        CatalogDiscoveryKind::Pipelines => PipelineCatalogError::ReadPipelineCatalog {
+            path: full_dir.clone(),
+            source,
+        },
+        CatalogDiscoveryKind::Stages => PipelineCatalogError::ReadStageCatalog {
+            path: full_dir.clone(),
+            source,
+        },
+    })?;
+
+    let mut out = Vec::new();
+    for entry in entries {
+        let entry = entry.map_err(|source| match kind {
+            CatalogDiscoveryKind::Pipelines => PipelineCatalogError::ReadPipelineCatalog {
+                path: full_dir.clone(),
+                source,
+            },
+            CatalogDiscoveryKind::Stages => PipelineCatalogError::ReadStageCatalog {
+                path: full_dir.clone(),
+                source,
+            },
+        })?;
+        let path = entry.path();
+        if !path.is_file() {
+            continue;
+        }
+        if path.extension().and_then(|value| value.to_str()) != Some(extension) {
+            continue;
+        }
+        let relative_path = path
+            .strip_prefix(repo_root)
+            .expect("discovered file should stay within repo root");
+        out.push(relative_path.to_path_buf());
     }
 
     out.sort();
@@ -2123,6 +2596,19 @@ pub fn load_pipeline_definition(
     load_pipeline_definition_with_mode(repo_root, pipeline_path, PipelineLoadMode::RouteAware)
 }
 
+pub fn load_pipeline_definition_with_roots(
+    repo_root: impl AsRef<Path>,
+    roots: &PipelineDeclarativeRootsContract,
+    pipeline_path: impl AsRef<Path>,
+) -> Result<PipelineDefinition, PipelineLoadError> {
+    load_pipeline_definition_with_mode_and_roots(
+        repo_root.as_ref(),
+        roots,
+        pipeline_path.as_ref(),
+        PipelineLoadMode::RouteAware,
+    )
+}
+
 fn load_pipeline_header(
     repo_root: &Path,
     pipeline_path: &Path,
@@ -2207,6 +2693,69 @@ fn load_pipeline_definition_with_mode(
     }
 
     validate_pipeline_definition(repo_root, &full_path, &header, &body, mode)?;
+
+    Ok(PipelineDefinition {
+        source_path: PathBuf::from(relative_pipeline_path.as_str()),
+        header,
+        body,
+    })
+}
+
+fn load_pipeline_definition_with_mode_and_roots(
+    repo_root: &Path,
+    roots: &PipelineDeclarativeRootsContract,
+    pipeline_path: &Path,
+    mode: PipelineLoadMode,
+) -> Result<PipelineDefinition, PipelineLoadError> {
+    let relative_pipeline_path =
+        validate_pipeline_repo_relative_path_with_roots(repo_root, roots, pipeline_path)?;
+    let full_path = repo_root.join(relative_pipeline_path.as_str());
+    let contents =
+        std::fs::read_to_string(&full_path).map_err(|source| PipelineLoadError::ReadFailure {
+            path: full_path.clone(),
+            source,
+        })?;
+
+    let mut docs = serde_yaml_bw::Deserializer::from_str(&contents);
+    let header_doc = docs.next();
+    let body_doc = docs.next();
+
+    if header_doc.is_none() {
+        return Err(PipelineLoadError::WrongDocumentCount {
+            path: full_path,
+            actual: 0,
+        });
+    }
+    if body_doc.is_none() {
+        return Err(PipelineLoadError::WrongDocumentCount {
+            path: full_path,
+            actual: 1,
+        });
+    }
+
+    let header =
+        PipelineHeader::deserialize(header_doc.expect("header doc present")).map_err(|source| {
+            PipelineLoadError::HeaderParse {
+                path: full_path.clone(),
+                source,
+            }
+        })?;
+    let body =
+        PipelineBody::deserialize(body_doc.expect("body doc present")).map_err(|source| {
+            PipelineLoadError::BodyParse {
+                path: full_path.clone(),
+                source,
+            }
+        })?;
+
+    if docs.next().is_some() {
+        return Err(PipelineLoadError::WrongDocumentCount {
+            path: full_path,
+            actual: 3,
+        });
+    }
+
+    validate_pipeline_definition_with_roots(repo_root, roots, &full_path, &header, &body, mode)?;
 
     Ok(PipelineDefinition {
         source_path: PathBuf::from(relative_pipeline_path.as_str()),
@@ -2422,14 +2971,24 @@ impl fmt::Display for ActivationValidationError {
 fn configured_stage_root_display() -> &'static str {
     static DISPLAY: OnceLock<String> = OnceLock::new();
     DISPLAY
-        .get_or_init(|| format!("{}/", handbook_product_declarative_roots().stage_root_relative()))
+        .get_or_init(|| {
+            format!(
+                "{}/",
+                handbook_product_declarative_roots().stage_root_relative()
+            )
+        })
         .as_str()
 }
 
 fn configured_pipeline_root_display() -> &'static str {
     static DISPLAY: OnceLock<String> = OnceLock::new();
     DISPLAY
-        .get_or_init(|| format!("{}/", handbook_product_declarative_roots().pipeline_root_relative()))
+        .get_or_init(|| {
+            format!(
+                "{}/",
+                handbook_product_declarative_roots().pipeline_root_relative()
+            )
+        })
         .as_str()
 }
 
@@ -2443,7 +3002,12 @@ fn stage_file_outside_directory_reason() -> &'static str {
 fn pipeline_yaml_root_reason() -> &'static str {
     static REASON: OnceLock<String> = OnceLock::new();
     REASON
-        .get_or_init(|| format!("pipeline YAML must live under `{}`", configured_pipeline_root_display()))
+        .get_or_init(|| {
+            format!(
+                "pipeline YAML must live under `{}`",
+                configured_pipeline_root_display()
+            )
+        })
         .as_str()
 }
 
@@ -2539,6 +3103,96 @@ fn validate_pipeline_definition(
         }
 
         validate_stage_file(repo_root, path, stage)?;
+        validate_stage_activation(path, stage)?;
+        if mode == PipelineLoadMode::RouteAware {
+            validate_stage_activation_equivalence(repo_root, path, stage)?;
+        }
+    }
+
+    Ok(())
+}
+
+fn validate_pipeline_definition_with_roots(
+    repo_root: &Path,
+    roots: &PipelineDeclarativeRootsContract,
+    path: &Path,
+    header: &PipelineHeader,
+    body: &PipelineBody,
+    mode: PipelineLoadMode,
+) -> Result<(), PipelineLoadError> {
+    validate_non_empty(path, "kind", &header.kind)?;
+    if header.kind != "pipeline" {
+        return Err(PipelineLoadError::Validation {
+            path: path.to_path_buf(),
+            error: PipelineValidationError::UnsupportedKind {
+                actual: header.kind.clone(),
+            },
+        });
+    }
+    validate_non_empty(path, "id", &header.id)?;
+    validate_canonical_id(path, "id", &header.id)?;
+    validate_non_empty(path, "version", &header.version)?;
+    validate_non_empty(path, "title", &header.title)?;
+    validate_non_empty(path, "description", &header.description)?;
+    validate_non_empty(path, "defaults.runner", &body.defaults.runner)?;
+    validate_non_empty(path, "defaults.profile", &body.defaults.profile)?;
+
+    if body.stages.is_empty() {
+        return Err(PipelineLoadError::Validation {
+            path: path.to_path_buf(),
+            error: PipelineValidationError::EmptyStages,
+        });
+    }
+
+    let mut stage_ids = BTreeSet::new();
+    for stage in &body.stages {
+        validate_non_empty(path, "stage.id", &stage.id)?;
+        validate_canonical_id(path, "stage.id", &stage.id)?;
+        validate_non_empty(path, "stage.file", &stage.file)?;
+
+        if !stage_ids.insert(stage.id.clone()) {
+            return Err(PipelineLoadError::Validation {
+                path: path.to_path_buf(),
+                error: PipelineValidationError::DuplicateStageId {
+                    stage_id: stage.id.clone(),
+                },
+            });
+        }
+
+        if let Some(sets) = &stage.sets {
+            if sets.is_empty() {
+                return Err(PipelineLoadError::Validation {
+                    path: path.to_path_buf(),
+                    error: PipelineValidationError::EmptySetsList {
+                        stage_id: stage.id.clone(),
+                    },
+                });
+            }
+
+            for (index, entry) in sets.iter().enumerate() {
+                if entry.trim().is_empty() {
+                    return Err(PipelineLoadError::Validation {
+                        path: path.to_path_buf(),
+                        error: PipelineValidationError::EmptySetVariable {
+                            stage_id: stage.id.clone(),
+                            index,
+                        },
+                    });
+                }
+                if let Some(reason) = invalid_route_variable_name_reason(entry) {
+                    return Err(PipelineLoadError::Validation {
+                        path: path.to_path_buf(),
+                        error: PipelineValidationError::InvalidSetVariable {
+                            stage_id: stage.id.clone(),
+                            variable: entry.clone(),
+                            reason,
+                        },
+                    });
+                }
+            }
+        }
+
+        validate_stage_file_with_roots(repo_root, roots, path, stage)?;
         validate_stage_activation(path, stage)?;
         if mode == PipelineLoadMode::RouteAware {
             validate_stage_activation_equivalence(repo_root, path, stage)?;
@@ -2653,6 +3307,65 @@ fn invalid_stage_file_error(
             file: stage.file.clone(),
             reason,
         },
+    }
+}
+
+fn validate_stage_file_with_roots(
+    repo_root: &Path,
+    roots: &PipelineDeclarativeRootsContract,
+    path: &Path,
+    stage: &PipelineStage,
+) -> Result<(), PipelineLoadError> {
+    let workspace = CompilerWorkspace::new(repo_root);
+    let file_path = workspace
+        .normalize_repo_relative(&stage.file)
+        .map_err(|_| PipelineLoadError::Validation {
+            path: path.to_path_buf(),
+            error: PipelineValidationError::StageFileOutsideRepoRoot {
+                stage_id: stage.id.clone(),
+                file: stage.file.clone(),
+            },
+        })?;
+    let file_path_view = Path::new(file_path.as_str());
+
+    if !file_path_view.starts_with(roots.stage_root()) {
+        return Err(PipelineLoadError::Validation {
+            path: path.to_path_buf(),
+            error: PipelineValidationError::InvalidStageFile {
+                stage_id: stage.id.clone(),
+                file: stage.file.clone(),
+                reason: StageFileValidationError::OutsideStageDirectory,
+            },
+        });
+    }
+
+    if file_path_view.extension().and_then(|ext| ext.to_str()) != Some("md") {
+        return Err(invalid_stage_file_error(
+            path,
+            stage,
+            StageFileValidationError::WrongExtension,
+        ));
+    }
+
+    match workspace.trusted_read(&file_path) {
+        Ok(_) => Ok(()),
+        Err(RepoRelativeFileAccessError::Missing(_)) => Err(invalid_stage_file_error(
+            path,
+            stage,
+            StageFileValidationError::Missing,
+        )),
+        Err(
+            RepoRelativeFileAccessError::SymlinkNotAllowed(_)
+            | RepoRelativeFileAccessError::NotRegularFile(_)
+            | RepoRelativeFileAccessError::ReadFailure { .. },
+        ) => Err(invalid_stage_file_error(
+            path,
+            stage,
+            StageFileValidationError::NotRegularFile,
+        )),
+        Err(RepoRelativeFileAccessError::InvalidPath(_)) => {
+            unreachable!("stage file path was already normalized successfully")
+        }
     }
 }
 
@@ -2825,6 +3538,37 @@ fn validate_pipeline_repo_relative_path(
         return Err(PipelineLoadError::UnsupportedPipelinePath {
             path: path.to_path_buf(),
             reason: pipeline_yaml_extension_reason(),
+        });
+    }
+
+    Ok(relative_path)
+}
+
+fn validate_pipeline_repo_relative_path_with_roots(
+    repo_root: &Path,
+    roots: &PipelineDeclarativeRootsContract,
+    path: &Path,
+) -> Result<NormalizedRepoRelativePath, PipelineLoadError> {
+    let workspace = CompilerWorkspace::new(repo_root);
+    let relative_path = workspace
+        .normalize_repo_relative_path(path)
+        .map_err(|reason| PipelineLoadError::UnsupportedPipelinePath {
+            path: path.to_path_buf(),
+            reason: pipeline_path_reason(&reason),
+        })?;
+    let relative_path_view = Path::new(relative_path.as_str());
+
+    if !relative_path_view.starts_with(roots.pipeline_root()) {
+        return Err(PipelineLoadError::UnsupportedPipelinePath {
+            path: path.to_path_buf(),
+            reason: ACTIVE_PIPELINE_ROOT_REASON,
+        });
+    }
+
+    if relative_path_view.extension().and_then(|ext| ext.to_str()) != Some("yaml") {
+        return Err(PipelineLoadError::UnsupportedPipelinePath {
+            path: path.to_path_buf(),
+            reason: ACTIVE_PIPELINE_EXTENSION_REASON,
         });
     }
 
