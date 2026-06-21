@@ -59,19 +59,28 @@ Spec reference: [handbook-substrate-parameterization-set-2-flow-canonical-layout
 
 #### Packet 2.3 completion notes
 
+- Status: ACCEPTED — per the user's explicit instruction not to reopen earlier packets, Packet 2.3 normalized the existing flow formatting with `cargo fmt --all`, reran the full Set 2 proof wall, and the wall is now clean without widening beyond proof notes plus formatting-only cleanup in the already-landed flow files.
+- Packet 2.1 / 2.2 landing check:
+  - PASS — live source and recent history still show the intended structural seam already landed: `crates/flow/src/lib.rs` publicly re-exports `resolve_with_contract(...)`; `crates/flow/src/resolver.rs` keeps `resolve(...)` as the explicit default wrapper while loading through `CanonicalArtifacts::load_with_contract(...)`; and `crates/flow/tests/resolver_core.rs` contains non-default contract coverage. Relevant commits observed before proof: `25a01e6`, `91f91db`, `3437650`, `c369121`.
 - Verification wall:
-  - PENDING — `cargo test -p handbook-engine --test canonical_artifacts_ingest`
-  - PENDING — `cargo test -p handbook-engine --test baseline_validation`
-  - PENDING — `cargo test -p handbook-flow --test resolver_core`
-  - PENDING — `cargo test -p handbook-flow`
-  - PENDING — `cargo check --workspace`
-  - PENDING — `cargo fmt --all -- --check`
-  - PENDING — `cargo clippy --workspace --all-targets -- -D warnings`
+  - PASS — `cargo test -p handbook-engine --test canonical_artifacts_ingest`
+  - PASS — `cargo test -p handbook-engine --test baseline_validation`
+  - PASS — `cargo test -p handbook-flow --test resolver_core`
+  - PASS — `cargo test -p handbook-flow`
+  - PASS — `cargo check --workspace`
+  - PASS — `cargo fmt --all -- --check` after first normalizing `crates/flow/src/resolver.rs` and `crates/flow/tests/resolver_core.rs` with `cargo fmt --all`
+  - PASS — `cargo clippy --workspace --all-targets -- -D warnings`
 - Residual bounded-default inventory:
-  - PENDING — record acceptable Set 3-deferred `.handbook` wording/default helpers here.
-  - PENDING — record any evidence that requires reopening Packet 2.1 or Packet 2.2 here.
+  - PASS — `rg -n "CanonicalArtifacts::load\\(|load_with_contract|default_canonical_layout_contract|canonical \\.handbook root|\\.handbook" crates/flow/src crates/flow/tests crates/engine/src crates/engine/tests` completed and the remaining hits stay bounded.
+  - Acceptable retained `.handbook` references that remain Set 3 honesty-cleanup or default-layout territory:
+    - `crates/flow/src/resolver.rs` still keeps the explicit default wrapper via `*default_canonical_layout_contract()` and internal/default-labeled helper text such as `c03.handbook_root`; this does not make the supported contract-aware flow seam dishonest because `resolve_with_contract(...)` and its non-default tests already use the supplied contract.
+    - `crates/engine/src/canonical_paths.rs` and `crates/engine/src/canonical_artifacts.rs` still define the engine-owned default `.handbook/**` contract and default-layout diagnostics; those hits are expected default-layout ownership, not evidence that flow still depends on default-only loading for the supported injected path.
+    - `crates/flow/tests/resolver_core.rs` plus engine tests still contain many `.handbook` literals in default-layout fixtures, authored markdown samples, and default-path assertions; these are fixture/test/default-surface references, not proof that the public contract-aware seam regressed.
+  - Structural blocker inventory:
+    - No residual-default sweep evidence shows Packet 2.1 or Packet 2.2 missed the contract-aware flow seam itself; the supported non-default path, default-wrapper behavior, and non-default resolver coverage are all present.
+    - No remaining Packet 2 structural blocker was observed after the formatting normalization and clean verification rerun.
 - Proof-only rule:
-  - If verification reveals unfinished structural work from Packet 2.1 or Packet 2.2, stop and reopen the relevant earlier packet explicitly instead of turning Packet 2.3 into an implementation sink.
+  - Packet 2.3 stayed proof-bounded: no Set 1 / Set 3 work was touched, no semantic resolver/engine changes were introduced, and the only non-doc changes were the formatting-only cleanup needed to let the verification wall speak honestly.
 
 ---
 

@@ -220,9 +220,10 @@ fn flow_resolver_blocks_missing_non_default_system_root_without_default_wording(
         blocker.category == handbook_flow::ResolverBlockerCategory::SystemRootMissing
             && blocker.summary == "missing canonical handbook root"
             && !blocker.summary.contains(".handbook")
-            && blocker.subject == ResolverSubjectRef::Policy {
-                policy_id: "system_root",
-            }
+            && blocker.subject
+                == ResolverSubjectRef::Policy {
+                    policy_id: "system_root",
+                }
             && blocker.next_safe_action == ResolverNextSafeAction::RunSetup
     }));
 }
@@ -715,7 +716,9 @@ fn flow_resolver_builds_honest_fixture_context_for_non_default_execution_demo_co
         valid_project_context_markdown().as_bytes(),
     );
     write_file(
-        &root.join(custom_handbook_path("environment_inventory/ENVIRONMENT_INVENTORY.md")),
+        &root.join(custom_handbook_path(
+            "environment_inventory/ENVIRONMENT_INVENTORY.md",
+        )),
         valid_environment_inventory_markdown().as_bytes(),
     );
     write_file(
@@ -745,11 +748,7 @@ fn flow_resolver_builds_honest_fixture_context_for_non_default_execution_demo_co
         "tests/fixtures/execution_demo/custom/.custom_handbook/"
     );
     assert_eq!(fixture_context.fixture_lineage.len(), 4);
-    assert!(
-        result
-            .packet_result
-            .sections
-            .iter()
-            .all(|section| section.canonical_repo_relative_path.starts_with(".custom_handbook/"))
-    );
+    assert!(result.packet_result.sections.iter().all(|section| section
+        .canonical_repo_relative_path
+        .starts_with(".custom_handbook/")));
 }

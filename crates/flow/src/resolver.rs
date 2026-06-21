@@ -1067,10 +1067,7 @@ fn summarize_artifact(artifact: &CanonicalArtifact) -> String {
     )
 }
 
-fn fixture_basis_root_for(
-    contract: CanonicalLayoutContract,
-    fixture_set_id: &str,
-) -> String {
+fn fixture_basis_root_for(contract: CanonicalLayoutContract, fixture_set_id: &str) -> String {
     format!(
         "tests/fixtures/execution_demo/{fixture_set_id}/{}/",
         contract.system_root_relative()
