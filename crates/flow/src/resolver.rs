@@ -12,8 +12,8 @@ use handbook_engine::{
     validate_charter_markdown, validate_environment_inventory_markdown,
     validate_project_context_markdown, ArtifactIngestIssueKind, ArtifactManifest, ArtifactPresence,
     BaselineArtifactValidation, BaselineArtifactVerdict, CanonicalArtifact, CanonicalArtifactKind,
-    CanonicalArtifacts, FreshnessIssueKind, FreshnessStatus, ManifestError, ManifestInputs,
-    SystemRootStatus,
+    CanonicalArtifacts, CanonicalLayoutContract, FreshnessIssueKind, FreshnessStatus,
+    ManifestError, ManifestInputs, SystemRootStatus,
 };
 use std::cmp::Ordering;
 use std::path::Path;
@@ -458,8 +458,17 @@ pub fn resolve(
     repo_root: impl AsRef<Path>,
     request: ResolveRequest,
 ) -> Result<ResolverResult, ManifestError> {
-    let canonical_artifacts =
-        CanonicalArtifacts::load(repo_root.as_ref()).map_err(ManifestError::Ingest)?;
+    resolve_with_contract(repo_root, request, *default_canonical_layout_contract())
+}
+
+pub fn resolve_with_contract(
+    repo_root: impl AsRef<Path>,
+    request: ResolveRequest,
+    contract: CanonicalLayoutContract,
+) -> Result<ResolverResult, ManifestError> {
+    let repo_root = repo_root.as_ref();
+    let canonical_artifacts = CanonicalArtifacts::load_with_contract(repo_root, contract)
+        .map_err(ManifestError::Ingest)?;
 
     let manifest =
         ArtifactManifest::from_canonical_artifacts(&canonical_artifacts, ManifestInputs::default());
@@ -577,7 +586,7 @@ pub fn resolve(
     ));
 
     let packet_result = build_packet_result(BuildPacketResultInput {
-        repo_root: repo_root.as_ref(),
+        repo_root,
         request: &request,
         artifacts: &canonical_artifacts,
         manifest: &manifest,

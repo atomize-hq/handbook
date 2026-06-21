@@ -14,9 +14,9 @@ pub use packet_result::{
     ReadyPacketNextSafeAction,
 };
 pub use resolver::{
-    resolve, PacketSelection, PacketSelectionStatus, ResolveRequest, ResolverBlocker,
-    ResolverBlockerCategory, ResolverNextSafeAction, ResolverRefusal, ResolverRefusalCategory,
-    ResolverResult, ResolverSubjectRef, C04_RESULT_VERSION,
+    resolve, resolve_with_contract, PacketSelection, PacketSelectionStatus, ResolveRequest,
+    ResolverBlocker, ResolverBlockerCategory, ResolverNextSafeAction, ResolverRefusal,
+    ResolverRefusalCategory, ResolverResult, ResolverSubjectRef, C04_RESULT_VERSION,
 };
 
 pub fn flow_contract_version() -> &'static str {
