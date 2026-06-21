@@ -13,7 +13,7 @@ name = "handbook_pipeline"
 path = "src/lib.rs"
 
 [dependencies]
-handbook-engine = { path = "../engine" }
+handbook-engine = { version = "0.1.0", path = "../engine" }
 libc = "0.2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

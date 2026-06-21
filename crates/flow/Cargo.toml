@@ -13,7 +13,7 @@ name = "handbook_flow"
 path = "src/lib.rs"
 
 [dependencies]
-handbook-engine = { path = "../engine" }
+handbook-engine = { version = "0.1.0", path = "../engine" }
 
 [dev-dependencies]
 tempfile = "3"
