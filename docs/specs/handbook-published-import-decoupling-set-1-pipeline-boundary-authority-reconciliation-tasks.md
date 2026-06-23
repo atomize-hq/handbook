@@ -55,10 +55,10 @@ Spec reference: [handbook-published-import-decoupling-set-1-pipeline-boundary-au
 - Requirement lock:
   - full reusable `handbook-pipeline` capability for Substrate remains mandatory active authority work
   - Packet 4.2 remains valid only as narrow published `engine + flow` proof
-- Stable Set 2 target:
-  - public declarative-roots contract surface, with first-wave public proof bound to `handbook_pipeline::pipeline::SupportedTargetRegistry::load`, `handbook_pipeline::pipeline::load_pipeline_catalog`, `handbook_pipeline::pipeline::load_pipeline_catalog_metadata`, `handbook_pipeline::pipeline::load_pipeline_selection_metadata`, `handbook_pipeline::pipeline::load_pipeline_definition`, and `handbook_pipeline::pipeline::load_selected_pipeline_definition`
-  - public storage-layout contract surface, with first-wave public proof bound to `handbook_pipeline::route_state::{load_route_state, set_route_state, load_trusted_pipeline_session, persist_route_basis}`, `handbook_pipeline::pipeline_capture::{preview_pipeline_capture, capture_pipeline_output, apply_pipeline_capture, load_pipeline_capture_cache_entry}`, and `handbook_pipeline::pipeline_handoff::{emit_pipeline_handoff_bundle, validate_pipeline_handoff_bundle}`
-  - contract-aware entrypoints on those exact existing public pipeline surfaces
+- Bounded Set 2 candidate proof surface:
+  - public declarative-roots contract surface, with candidate first-wave public proof bounded to `handbook_pipeline::pipeline::SupportedTargetRegistry::load`, `handbook_pipeline::pipeline::load_pipeline_catalog`, `handbook_pipeline::pipeline::load_pipeline_catalog_metadata`, `handbook_pipeline::pipeline::load_pipeline_selection_metadata`, `handbook_pipeline::pipeline::load_pipeline_definition`, and `handbook_pipeline::pipeline::load_selected_pipeline_definition` for declarative-root control plus stage-root-aware catalog/loading behavior
+  - public storage-layout contract surface, with candidate first-wave public proof bounded to `handbook_pipeline::route_state::{load_route_state, set_route_state, load_trusted_pipeline_session, persist_route_basis}`, `handbook_pipeline::pipeline_capture::{preview_pipeline_capture, capture_pipeline_output, apply_pipeline_capture, load_pipeline_capture_cache_entry}`, and `handbook_pipeline::pipeline_handoff::{emit_pipeline_handoff_bundle, validate_pipeline_handoff_bundle}` for route-state, capture, and handoff storage-layout control
+  - contract-aware entrypoints on that candidate existing public pipeline surface
   - only the typed results/errors downstream must actually handle
 - Keep private by default:
   - `RepoLayoutRoot`
@@ -67,7 +67,8 @@ Spec reference: [handbook-published-import-decoupling-set-1-pipeline-boundary-au
   - product-shell wording and CLI/product-only behavior
 - Set 2 acceptance wall:
   - published `handbook-pipeline` consumer can construct non-default contracts through public APIs only
-  - published consumer must prove those exact `handbook_pipeline::pipeline::*`, `handbook_pipeline::route_state::*`, `handbook_pipeline::pipeline_capture::*`, and `handbook_pipeline::pipeline_handoff::*` paths without private-module imports
+  - published consumer must either justify each retained candidate `handbook_pipeline::pipeline::*`, `handbook_pipeline::route_state::*`, `handbook_pipeline::pipeline_capture::*`, and `handbook_pipeline::pipeline_handoff::*` path against declarative-root control, stage-root-aware catalog/loading, route-state control, capture control, or handoff control for the intended consumer shape, or shrink that candidate surface explicitly
+  - Set 2 may not widen beyond that bounded candidate proof surface without reopening Set 1 authority
   - Packet 4.2 stays classified as `engine + flow` proof only
   - downstream Substrate adoption remains a later dedicated-worktree proof, not something Packet 1.2 or Set 2 may overclaim
 
