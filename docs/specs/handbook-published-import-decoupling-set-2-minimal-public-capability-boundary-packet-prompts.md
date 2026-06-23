@@ -64,7 +64,7 @@ Packet 2.1 scope:
   - optionally tightly related tests if required for honest acceptance
 
 Out of scope — do NOT touch:
-- Packet 2.2 declarative-root façade entrypoints
+- Packet 2.2a / 2.2b / 2.2c declarative-root packet family
 - Packet 2.3 route-state storage-layout façade
 - Packet 2.4 capture/handoff façade
 - Packet 2.5 external consumer proof harness
@@ -122,13 +122,13 @@ Stop conditions:
 
 ---
 
-## Packet 2.2 Prompt — Declarative-Root Public Façade
+## Packet 2.2a Prompt — Retained Declarative-Root Façade Landing
 
 ```text
-/goal Orchestrate Set 2 Packet 2.2: Declarative-Root Public Façade in /Users/spensermcconnell/__Active_Code/system.
+/goal Orchestrate Set 2 Packet 2.2a: Retained Declarative-Root Façade Landing in /Users/spensermcconnell/__Active_Code/system.
 
 Mission:
-- Land only Packet 2.2 from /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md.
+- Land only Packet 2.2a from /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md.
 - Use these authorities:
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/MAP.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-1-pipeline-boundary-authority-reconciliation-spec.md
@@ -136,12 +136,12 @@ Mission:
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-spec.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-plan.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md
-- Treat this as one narrow implementation seam: expose only the retained declarative-root-aware entrypoints and keep dropped seams private unless authority is explicitly reopened.
+- Treat this as one narrow implementation seam: land only the retained declarative-root-aware public façade as additive seams, keep default entrypoints behaviorally stable, and do not privatize dropped seams yet.
 - Packet 2.1 must already be complete.
-- Stay inside Packet 2.2 only.
+- Stay inside Packet 2.2a only.
 
 Hard rules:
-- Do not implement, review, or fix Packet 2.2 work in the orchestration session yourself.
+- Do not implement, review, or fix Packet 2.2a work in the orchestration session yourself.
 - Spawn a fresh GPT-5.4 subagent on high for implementation.
 - The implementation subagent prompt must begin with `/goal ` and must explicitly use the $incremental-implementation skill from /Users/spensermcconnell/.agents/skills/incremental-implementation/SKILL.md.
 - After implementation completes, commit the implementation before any review round.
@@ -150,16 +150,17 @@ Hard rules:
 - If the review subagent finds issues, spawn a fresh GPT-5.4 subagent on high to fix them.
 - Every fix subagent prompt must begin with `/goal ` and must explicitly use $incremental-implementation.
 - After each accepted fix round that changes files, commit before dispatching the next fresh review subagent.
-- Before every commit, run `npx gitnexus detect-changes --repo system` and confirm the affected scope matches Packet 2.2 only.
-- Stay inside Packet 2.2 scope.
+- Before every commit, run `npx gitnexus detect-changes --repo system` and confirm the affected scope matches Packet 2.2a only.
+- Stay inside Packet 2.2a scope.
 
-Packet 2.2 scope:
+Packet 2.2a scope:
 - Expose only retained declarative-root-aware entrypoints for:
   - `load_pipeline_catalog_metadata`
   - `load_pipeline_selection_metadata`
   - `load_pipeline_definition`
   - `load_selected_pipeline_definition`
-- Keep `SupportedTargetRegistry::load` and route-aware `load_pipeline_catalog` private unless the retained/dropped matrix is explicitly reopened first.
+- Keep existing default entrypoints behaviorally stable.
+- Do **not** privatize `SupportedTargetRegistry::load` or route-aware `load_pipeline_catalog` in this packet.
 - Prove custom declarative roots through package-local tests that use only public APIs.
 - Expected files:
   - crates/pipeline/src/pipeline.rs
@@ -174,11 +175,11 @@ Out of scope — do NOT touch:
 - Packet 2.4 capture/handoff façade
 - Packet 2.5 external consumer proof harness
 - Set 3 proof, release, or downstream Substrate work
-- widening to dropped declarative-root candidate seams
+- caller/test migration off dropped seams
 - unrelated cleanup
 
 Implementation subagent prompt requirements:
-- Begin with `/goal Land Set 2 Packet 2.2: Declarative-Root Public Façade`.
+- Begin with `/goal Land Set 2 Packet 2.2a: Retained Declarative-Root Façade Landing`.
 - Tell the subagent to use $incremental-implementation.
 - Require live verification with:
   - `git status --short --branch`
@@ -186,43 +187,256 @@ Implementation subagent prompt requirements:
   - `sed -n '1,220p' docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md`
   - `sed -n '1380,1548p' crates/pipeline/src/pipeline.rs`
   - `sed -n '2590,2635p' crates/pipeline/src/pipeline.rs`
+  - `npx gitnexus status`
+  - `npx gitnexus impact --direction upstream --depth 3 --include-tests --repo /Users/spensermcconnell/__Active_Code/system load_pipeline_catalog_metadata`
+  - `npx gitnexus impact --direction upstream --depth 3 --include-tests --repo /Users/spensermcconnell/__Active_Code/system load_pipeline_definition`
+  - `npx gitnexus impact --direction upstream --depth 3 --include-tests --repo /Users/spensermcconnell/__Active_Code/system load_selected_pipeline_definition`
   - `cargo test -p handbook-pipeline --test pipeline_catalog`
   - `cargo test -p handbook-pipeline --test pipeline_loader`
 - Require the implementation to:
+  - treat the CRITICAL retained-loader blast radius as an additive-landing constraint: do not repurpose default entrypoints in place when a public sibling/facade seam can land instead
   - expose only retained declarative-root-aware public façade seams
-  - avoid publicizing dropped seams from the matrix
+  - keep dropped seams unchanged in visibility for this packet
   - keep tests public-API-only with no private module imports
   - run targeted tests plus `cargo check --workspace`
-  - stop after Packet 2.2 acceptance is met and report exact files touched, exact verification run, and residual risks
+  - stop after Packet 2.2a acceptance is met and report exact files touched, exact verification run, and residual risks
 
 Review subagent prompt requirements:
-- Begin with `/goal Review Set 2 Packet 2.2: Declarative-Root Public Façade`.
+- Begin with `/goal Review Set 2 Packet 2.2a: Retained Declarative-Root Façade Landing`.
 - Tell the subagent to use $code-review-and-quality.
 - Require findings-first review across correctness, readability, architecture, security, and performance.
 - Require the reviewer to check:
   - whether each landed public seam matches a retained row in the matrix
-  - whether dropped declarative-root seams stayed private
+  - whether the packet stayed additive and left dropped-seam visibility unchanged
   - whether custom-root tests are public-API-only and meaningful
   - whether the naming and boundary shape preserve the MAP intent
-  - whether the packet stayed inside 2.2 scope
+  - whether the packet stayed inside 2.2a scope
 - Require severity labels and explicit callouts for overexposure, ambiguous API shape, or weak proof coverage.
 
 Fix loop:
-- If the review is clean, stop and report Packet 2.2 complete.
+- If the review is clean, stop and report Packet 2.2a complete.
 - If the review finds issues, spawn one fresh GPT-5.4 high fix subagent per review round using `$incremental-implementation`.
-- The fix prompt must cite the exact review findings and require only the minimal Packet-2.2-bounded changes needed to close them.
+- The fix prompt must cite the exact review findings and require only the minimal Packet-2.2a-bounded changes needed to close them.
 - Commit accepted fixes before dispatching the next fresh review subagent.
 - Re-run a fresh review subagent after fixes.
 
 Commit policy:
-- Commit once after implementation if Packet 2.2 lands cleanly.
-- Before each commit, run `npx gitnexus detect-changes --repo system` and confirm the affected scope matches Packet 2.2 only.
+- Commit once after implementation if Packet 2.2a lands cleanly.
+- Before each commit, run `npx gitnexus detect-changes --repo system` and confirm the affected scope matches Packet 2.2a only.
 - Commit after each accepted fix round.
-- Commit messages must describe the declarative-root façade work clearly and standalone.
+- Commit messages must describe the retained declarative-root additive façade landing clearly and standalone.
 
 Stop conditions:
-- Stop once Packet 2.2 is review-clean, committed, and the retained declarative-root-aware façade is landed with public-API-only proof.
-- Stop and report blocked if honest completion requires promoting dropped seams or widening into later packets.
+- Stop once Packet 2.2a is review-clean, committed, and the retained declarative-root-aware additive façade is landed with public-API-only proof.
+- Stop and report blocked if honest completion requires caller migration, privacy clamp, or widening into later packets.
+```
+
+---
+
+## Packet 2.2b Prompt — Caller/Test Migration Off Dropped Seams
+
+```text
+/goal Orchestrate Set 2 Packet 2.2b: Caller/Test Migration Off Dropped Seams in /Users/spensermcconnell/__Active_Code/system.
+
+Mission:
+- Land only Packet 2.2b from /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md.
+- Use these authorities:
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/MAP.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-1-pipeline-boundary-authority-reconciliation-spec.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-1-pipeline-boundary-authority-reconciliation-tasks.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-spec.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-plan.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md
+- Treat this as one narrow migration seam: replace in-repo usage of dropped declarative-root seams with retained/public alternatives without widening into later packet capability.
+- Packets 2.1 and 2.2a must already be complete.
+- Stay inside Packet 2.2b only.
+
+Hard rules:
+- Do not implement, review, or fix Packet 2.2b work in the orchestration session yourself.
+- Spawn a fresh GPT-5.4 subagent on high for implementation.
+- The implementation subagent prompt must begin with `/goal ` and must explicitly use the $incremental-implementation skill from /Users/spensermcconnell/.agents/skills/incremental-implementation/SKILL.md.
+- After implementation completes, commit the implementation before any review round.
+- Then spawn a fresh GPT-5.4 subagent on high for review.
+- The review subagent prompt must begin with `/goal ` and must explicitly use the $code-review-and-quality skill from /Users/spensermcconnell/.agents/skills/code-review-and-quality/SKILL.md.
+- If the review subagent finds issues, spawn a fresh GPT-5.4 subagent on high to fix them.
+- Every fix subagent prompt must begin with `/goal ` and must explicitly use $incremental-implementation.
+- After each accepted fix round that changes files, commit before dispatching the next fresh review subagent.
+- Before every commit, run `npx gitnexus detect-changes --repo system` and confirm the affected scope matches Packet 2.2b only.
+- Stay inside Packet 2.2b scope.
+
+Packet 2.2b scope:
+- Migrate known in-repo callers off:
+  - `SupportedTargetRegistry::load`
+  - route-aware `load_pipeline_catalog`
+- Migrate package-local and adjacent in-repo proof away from those dropped seams.
+- Keep the work limited to declarative-root-family caller/test migration.
+- Expected files may include:
+  - crates/cli/src/pipeline.rs
+  - crates/cli/src/pipeline_help.rs
+  - crates/pipeline/src/pipeline_capture.rs
+  - crates/pipeline/src/pipeline_compile.rs
+  - crates/pipeline/src/pipeline_handoff.rs
+  - crates/pipeline/src/stage_10_feature_spec_provenance.rs
+  - crates/pipeline/tests/pipeline_catalog.rs
+  - crates/pipeline/tests/pipeline_loader.rs
+  - crates/compiler/tests/pipeline_catalog.rs
+  - optionally tightly related caller/test support files required for honest migration
+
+Out of scope — do NOT touch:
+- Packet 2.2a retained façade shape beyond minimal carry-forward use
+- Packet 2.2c privacy clamp
+- Packet 2.3 route-state storage-layout façade
+- Packet 2.4 capture/handoff façade
+- Packet 2.5 external consumer proof harness
+- Set 3 proof, release, or downstream Substrate work
+- unrelated cleanup
+
+Implementation subagent prompt requirements:
+- Begin with `/goal Land Set 2 Packet 2.2b: Caller/Test Migration Off Dropped Seams`.
+- Tell the subagent to use $incremental-implementation.
+- Require live verification with:
+  - `git status --short --branch`
+  - `sed -n '1,260p' docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-spec.md`
+  - `sed -n '1,260p' docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-plan.md`
+  - `sed -n '1,240p' docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md`
+  - `rg -n "SupportedTargetRegistry::load\\(|load_pipeline_catalog\\(" crates`
+  - `cargo test -p handbook-pipeline --test pipeline_catalog`
+  - `cargo test -p handbook-pipeline --test pipeline_loader`
+- Require the implementation to:
+  - migrate known in-repo dropped-seam callers to retained/public alternatives
+  - keep the migration bounded to declarative-root-family usage replacement
+  - avoid tightening visibility in this packet
+  - run targeted tests for the touched callers/tests plus `cargo check --workspace`
+  - stop after Packet 2.2b acceptance is met and report exact files touched, exact verification run, and residual risks
+
+Review subagent prompt requirements:
+- Begin with `/goal Review Set 2 Packet 2.2b: Caller/Test Migration Off Dropped Seams`.
+- Tell the subagent to use $code-review-and-quality.
+- Require findings-first review across correctness, readability, architecture, security, and performance.
+- Require the reviewer to check:
+  - whether known dropped-seam callers were migrated honestly
+  - whether the migration stayed inside declarative-root-family work
+  - whether tests/proof now use retained/public seams instead of the dropped seams
+  - whether the packet avoided premature privacy tightening
+  - whether the packet stayed inside 2.2b scope
+- Require severity labels and explicit callouts for missed callers, scope drift, or weak migration proof.
+
+Fix loop:
+- If the review is clean, stop and report Packet 2.2b complete.
+- If the review finds issues, spawn one fresh GPT-5.4 high fix subagent per review round using `$incremental-implementation`.
+- The fix prompt must cite the exact review findings and require only the minimal Packet-2.2b-bounded changes needed to close them.
+- Commit accepted fixes before dispatching the next fresh review subagent.
+- Re-run a fresh review subagent after fixes.
+
+Commit policy:
+- Commit once after implementation if Packet 2.2b lands cleanly.
+- Before each commit, run `npx gitnexus detect-changes --repo system` and confirm the affected scope matches Packet 2.2b only.
+- Commit after each accepted fix round.
+- Commit messages must describe the dropped-seam caller/test migration clearly and standalone.
+
+Stop conditions:
+- Stop once Packet 2.2b is review-clean, committed, and known declarative-root-family dropped-seam callers/tests are migrated to retained/public alternatives.
+- Stop and report blocked if honest completion requires privacy clamp, later-packet capability, or reopened retained/dropped authority.
+```
+
+---
+
+## Packet 2.2c Prompt — Dropped-Seam Privacy Clamp
+
+```text
+/goal Orchestrate Set 2 Packet 2.2c: Dropped-Seam Privacy Clamp in /Users/spensermcconnell/__Active_Code/system.
+
+Mission:
+- Land only Packet 2.2c from /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md.
+- Use these authorities:
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/MAP.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-1-pipeline-boundary-authority-reconciliation-spec.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-1-pipeline-boundary-authority-reconciliation-tasks.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-spec.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-plan.md
+  - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md
+- Treat this as one narrow clamp seam: after caller migration is complete, make the dropped declarative-root seams private and reprove the retained/public entrypoint wall.
+- Packets 2.1, 2.2a, and 2.2b must already be complete.
+- Stay inside Packet 2.2c only.
+
+Hard rules:
+- Do not implement, review, or fix Packet 2.2c work in the orchestration session yourself.
+- Spawn a fresh GPT-5.4 subagent on high for implementation.
+- The implementation subagent prompt must begin with `/goal ` and must explicitly use the $incremental-implementation skill from /Users/spensermcconnell/.agents/skills/incremental-implementation/SKILL.md.
+- After implementation completes, commit the implementation before any review round.
+- Then spawn a fresh GPT-5.4 subagent on high for review.
+- The review subagent prompt must begin with `/goal ` and must explicitly use the $code-review-and-quality skill from /Users/spensermcconnell/.agents/skills/code-review-and-quality/SKILL.md.
+- If the review subagent finds issues, spawn a fresh GPT-5.4 subagent on high to fix them.
+- Every fix subagent prompt must begin with `/goal ` and must explicitly use $incremental-implementation.
+- After each accepted fix round that changes files, commit before dispatching the next fresh review subagent.
+- Before every commit, run `npx gitnexus detect-changes --repo system` and confirm the affected scope matches Packet 2.2c only.
+- Stay inside Packet 2.2c scope.
+
+Packet 2.2c scope:
+- Make `SupportedTargetRegistry::load` private/internal.
+- Make route-aware `load_pipeline_catalog` private/internal.
+- Re-run the declarative-root-family proof wall so the retained/public façade is the only supported path.
+- Expected files:
+  - crates/pipeline/src/pipeline.rs
+  - crates/pipeline/src/lib.rs
+  - crates/pipeline/tests/pipeline_catalog.rs
+  - crates/pipeline/tests/pipeline_loader.rs
+  - plus the migrated caller/test files from Packet 2.2b only if narrowly required to finish the clamp
+
+Out of scope — do NOT touch:
+- Packet 2.2a retained façade shape beyond minimal carry-forward use
+- Packet 2.2b caller migration except where narrowly required to finish the privacy clamp
+- Packet 2.3 route-state storage-layout façade
+- Packet 2.4 capture/handoff façade
+- Packet 2.5 external consumer proof harness
+- Set 3 proof, release, or downstream Substrate work
+- unrelated cleanup
+
+Implementation subagent prompt requirements:
+- Begin with `/goal Land Set 2 Packet 2.2c: Dropped-Seam Privacy Clamp`.
+- Tell the subagent to use $incremental-implementation.
+- Require live verification with:
+  - `git status --short --branch`
+  - `sed -n '1,260p' docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-spec.md`
+  - `sed -n '1,260p' docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-plan.md`
+  - `sed -n '1,260p' docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md`
+  - `sed -n '1380,1548p' crates/pipeline/src/pipeline.rs`
+  - `rg -n "SupportedTargetRegistry::load\\(|load_pipeline_catalog\\(" crates`
+  - `cargo test -p handbook-pipeline --test pipeline_catalog`
+  - `cargo test -p handbook-pipeline --test pipeline_loader`
+- Require the implementation to:
+  - clamp dropped-seam visibility only after confirming migration is in place
+  - keep the retained/public façade intact
+  - run targeted tests plus `cargo check --workspace`
+  - stop after Packet 2.2c acceptance is met and report exact files touched, exact verification run, and residual risks
+
+Review subagent prompt requirements:
+- Begin with `/goal Review Set 2 Packet 2.2c: Dropped-Seam Privacy Clamp`.
+- Tell the subagent to use $code-review-and-quality.
+- Require findings-first review across correctness, readability, architecture, security, and performance.
+- Require the reviewer to check:
+  - whether `SupportedTargetRegistry::load` and route-aware `load_pipeline_catalog` are no longer public
+  - whether known callers/tests still compile and verify against retained/public alternatives
+  - whether the retained/dropped matrix now matches the live API honestly
+  - whether the packet stayed inside 2.2c scope
+- Require severity labels and explicit callouts for missed callers, accidental overclamp, or weak privacy proof.
+
+Fix loop:
+- If the review is clean, stop and report Packet 2.2c complete.
+- If the review finds issues, spawn one fresh GPT-5.4 high fix subagent per review round using `$incremental-implementation`.
+- The fix prompt must cite the exact review findings and require only the minimal Packet-2.2c-bounded changes needed to close them.
+- Commit accepted fixes before dispatching the next fresh review subagent.
+- Re-run a fresh review subagent after fixes.
+
+Commit policy:
+- Commit once after implementation if Packet 2.2c lands cleanly.
+- Before each commit, run `npx gitnexus detect-changes --repo system` and confirm the affected scope matches Packet 2.2c only.
+- Commit after each accepted fix round.
+- Commit messages must describe the declarative-root dropped-seam privacy clamp clearly and standalone.
+
+Stop conditions:
+- Stop once Packet 2.2c is review-clean, committed, and the dropped declarative-root seams are private with retained/public proof still passing.
+- Stop and report blocked if honest completion requires widening into later packets or reopening retained/dropped authority.
 ```
 
 ---
@@ -241,7 +455,7 @@ Mission:
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-plan.md
   - /Users/spensermcconnell/__Active_Code/system/docs/specs/handbook-published-import-decoupling-set-2-minimal-public-capability-boundary-tasks.md
 - Treat this as one narrow implementation seam: expose only the retained storage-layout-aware route-state entrypoints and keep repo-layout plumbing and extra convenience surfaces private.
-- Packets 2.1 and 2.2 must already be complete.
+- Packets 2.1, 2.2a, 2.2b, and 2.2c must already be complete.
 - Stay inside Packet 2.3 only.
 
 Hard rules:
@@ -273,7 +487,7 @@ Packet 2.3 scope:
   - optionally tightly related test support files
 
 Out of scope — do NOT touch:
-- Packet 2.2 declarative-root façade beyond minimal carry-forward use
+- Packet 2.2a / 2.2b / 2.2c declarative-root packet family beyond minimal carry-forward use
 - Packet 2.4 capture/handoff façade
 - Packet 2.5 external consumer proof harness
 - Set 3 proof, release, or downstream Substrate work

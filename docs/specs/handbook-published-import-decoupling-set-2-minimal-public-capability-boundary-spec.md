@@ -11,6 +11,7 @@
 5. Existing handbook-product default entrypoints should stay available for handbook's own product behavior; Set 2 adds or promotes reviewed contract-aware variants without widening into handbook-only convenience helpers.
 6. Because the new boundary is not yet released, the Set 2 closeout proof should validate the **packaged public boundary** from outside the crate source tree (for example via `cargo package` output or an unpacked release-candidate artifact), while Set 3 remains responsible for final released-crate and downstream Substrate proof.
 7. Unless live implementation proves otherwise, no new public result/error/output types are needed beyond the reviewed public contract owners plus already-public pipeline-facing types.
+8. Packet 2.2 must be decomposed into additive retained-façade landing, caller/test migration, and dropped-seam privacy clamp sub-packets because the retained loaders are high-blast-radius seams and the dropped seams still have active in-repo callers.
 
 ## Active Authority Routing For Set 2
 
@@ -167,6 +168,23 @@ The intended first-wave consumer is a **Substrate-owned pipeline boundary provid
 
 This consumer shape is intentionally narrower than “any downstream code can call any pipeline helper directly.”
 
+## Packet 2.2 Decomposition Rule
+
+Packet 2.2 is intentionally split into three sequential sub-packets:
+
+1. **Packet 2.2a — Retained Façade Landing**
+   - add or promote only the retained declarative-root-aware public entrypoints
+   - keep existing default entrypoints behaviorally stable
+   - do **not** privatize dropped seams yet
+2. **Packet 2.2b — Caller/Test Migration Off Dropped Seams**
+   - migrate in-repo callers and package-local tests away from `SupportedTargetRegistry::load(...)` and route-aware `load_pipeline_catalog(...)`
+   - keep the change scoped to replacing dropped-seam usage with retained/public alternatives
+3. **Packet 2.2c — Dropped-Seam Privacy Clamp**
+   - only after known callers are migrated, make `SupportedTargetRegistry::load(...)` and route-aware `load_pipeline_catalog(...)` private
+   - finish the declarative-root-family public-API-only proof wall
+
+This decomposition is part of the active Set 2 authority. Do not collapse these three concerns back into one packet unless the retained/dropped matrix is explicitly reopened first.
+
 ## Retained / Dropped Justification Matrix
 
 This matrix satisfies the Set 1 mandatory start gate for Set 2. Every retained row names the MAP-required capability it serves and why the intended consumer shape needs that exact public seam. Every dropped row explains why it stays private.
@@ -233,6 +251,10 @@ Set 2 should land the following reviewed public shape:
    - `handbook_pipeline::declarative_roots::*` stays private
    - `handbook_pipeline::layout::*` stays private
    - `crates/pipeline/src/lib.rs` should expose only the reviewed façade and contract owners
+5. **Packet 2.2 must land in three passes**
+   - additive retained-façade landing first
+   - caller/test migration second
+   - dropped-seam privacy clamp third
 
 ## Code Style
 
@@ -315,6 +337,7 @@ Key conventions:
   - keep `/Users/spensermcconnell/__Active_Code/system/docs/specs/MAP.md` and the Set 1 triplet as stronger authority than older docs
   - keep the retained/dropped matrix honest when implementation decisions change
   - preserve handbook-product default behavior for existing default entrypoints unless the task explicitly changes them
+  - keep Packet 2.2 split into 2.2a / 2.2b / 2.2c; do not bundle additive façade landing, caller migration, and privacy clamp into one implementation diff
   - run targeted `handbook-pipeline` tests and `cargo check --workspace` before claiming packet completion
   - run `npx gitnexus detect-changes --repo system` before every commit
 - Ask first:
@@ -338,10 +361,12 @@ Set 2 is successful only when all of the following are true:
 4. All dropped/private seams in this spec remain private or otherwise unexposed.
 5. No raw `declarative_roots` or `layout` module promotion is used to satisfy downstream capability.
 6. Package-local tests prove custom-root and custom-layout behavior through the retained public façade only.
-7. A release-candidate external consumer proof exercises every retained capability family from outside the crate source tree using only public APIs.
-8. The Set 2 closeout notes explicitly preserve that downstream Substrate source-touching proof is a Set 3 responsibility.
+7. Packet 2.2a, Packet 2.2b, and Packet 2.2c land sequentially and leave no required dropped-seam callers behind before the privacy clamp.
+8. A release-candidate external consumer proof exercises every retained capability family from outside the crate source tree using only public APIs.
+9. The Set 2 closeout notes explicitly preserve that downstream Substrate source-touching proof is a Set 3 responsibility.
 
 ## Open Questions
 
 1. Should the Set 2 closeout proof be satisfied by packaged release-candidate artifacts alone, or should the workstream require an immediately published version before Set 2 can close? This spec assumes packaged release-candidate proof is enough for Set 2 and reserves final released-crate proof for Set 3.
 2. If live downstream consumer ergonomics later prove that one-shot capture is materially required, should `capture_pipeline_output_with_storage_layout` be promoted in Set 2, or deferred to a later narrow reopen of the retained/dropped matrix?
+3. If Packet 2.2b discovers an additional in-repo dropped-seam caller outside the initially expected file list, can that migration still count as in-scope declarative-root-family work? This spec assumes yes, as long as it remains limited to replacing dropped-seam usage and does not widen into later packet capability.

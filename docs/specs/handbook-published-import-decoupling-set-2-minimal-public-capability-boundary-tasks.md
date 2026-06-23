@@ -32,17 +32,45 @@ If those sources disagree, the MAP plus the Set 1 triplet plus this Set 2 triple
 
 ---
 
-## Packet 2.2: Declarative-Root Public Façade
+## Packet 2.2a: Retained Declarative-Root Façade Landing
 
-- [ ] Task: Expose only the retained declarative-root-aware entrypoints
-  - Acceptance: The landed public boundary includes retained contract-aware variants for metadata browse, selector resolution, direct definition load, and selected definition load; `SupportedTargetRegistry::load` and route-aware `load_pipeline_catalog` stay private unless the Set 2 matrix is reopened first.
+- [ ] Task: Expose only the retained declarative-root-aware entrypoints as additive public façade seams
+  - Acceptance: The landed public boundary includes retained contract-aware variants for metadata browse, selector resolution, direct definition load, and selected definition load; existing default entrypoints stay behaviorally stable; this packet does **not** yet privatize `SupportedTargetRegistry::load` or route-aware `load_pipeline_catalog`.
   - Verify: Source inspection of `crates/pipeline/src/pipeline.rs`; `rg -n "load_pipeline_catalog_metadata|load_pipeline_selection_metadata|load_pipeline_definition|load_selected_pipeline_definition|load_with_roots|pub fn" crates/pipeline/src/pipeline.rs`
   - Files: `crates/pipeline/src/pipeline.rs`, `crates/pipeline/src/lib.rs`
 
 - [ ] Task: Prove custom declarative roots through package-local tests only via the retained public façade
-  - Acceptance: Tests show non-default pipeline/profile/runner/stage roots work for metadata browse, selector resolution, and definition load without importing private module paths.
+  - Acceptance: Tests added or updated in this packet show non-default pipeline/profile/runner/stage roots work for metadata browse, selector resolution, and definition load without importing private module paths.
   - Verify: `cargo test -p handbook-pipeline --test pipeline_catalog`; `cargo test -p handbook-pipeline --test pipeline_loader`
   - Files: `crates/pipeline/tests/pipeline_catalog.rs`, `crates/pipeline/tests/pipeline_loader.rs`, optionally `crates/pipeline/tests/support/*`
+
+---
+
+## Packet 2.2b: Caller/Test Migration Off Dropped Seams
+
+- [ ] Task: Migrate in-repo dropped-seam callers to retained/public declarative-root APIs
+  - Acceptance: Known in-repo callers no longer require `SupportedTargetRegistry::load` or route-aware `load_pipeline_catalog` to satisfy the declarative-root capability family, and the migration stays inside declarative-root-family work rather than widening into later packets.
+  - Verify: `rg -n "SupportedTargetRegistry::load\\(|load_pipeline_catalog\\(" crates`; source inspection of touched caller files
+  - Files: `crates/cli/src/pipeline.rs`, `crates/cli/src/pipeline_help.rs`, `crates/pipeline/src/pipeline_capture.rs`, `crates/pipeline/src/pipeline_compile.rs`, `crates/pipeline/src/pipeline_handoff.rs`, `crates/pipeline/src/stage_10_feature_spec_provenance.rs`, optionally tightly related caller/test files required for honest migration
+
+- [ ] Task: Migrate package-local and adjacent in-repo proof off dropped seams
+  - Acceptance: Declarative-root-family tests use retained/public APIs only and no longer rely on the dropped seams for coverage or setup.
+  - Verify: `cargo test -p handbook-pipeline --test pipeline_catalog`; `cargo test -p handbook-pipeline --test pipeline_loader`; optionally targeted adjacent test commands for touched non-pipeline test crates
+  - Files: `crates/pipeline/tests/pipeline_catalog.rs`, `crates/pipeline/tests/pipeline_loader.rs`, `crates/compiler/tests/pipeline_catalog.rs`, optionally tightly related test support files
+
+---
+
+## Packet 2.2c: Dropped-Seam Privacy Clamp
+
+- [ ] Task: Make dropped declarative-root seams private only after the migration wall is satisfied
+  - Acceptance: `SupportedTargetRegistry::load` and route-aware `load_pipeline_catalog` are no longer public, and no required in-repo caller still depends on them.
+  - Verify: Source inspection of `crates/pipeline/src/pipeline.rs`; `rg -n "pub fn load_pipeline_catalog\\(|pub fn load\\(" crates/pipeline/src/pipeline.rs`; `rg -n "SupportedTargetRegistry::load\\(|load_pipeline_catalog\\(" crates`
+  - Files: `crates/pipeline/src/pipeline.rs`, `crates/pipeline/src/lib.rs`, plus the migrated caller/test files carried forward from Packet 2.2b only if narrowly required to finish the clamp
+
+- [ ] Task: Finish the public-API-only proof wall for the declarative-root family
+  - Acceptance: The declarative-root-family proof now runs through retained/public entrypoints only, with dropped seams private and no private module imports required.
+  - Verify: `cargo test -p handbook-pipeline --test pipeline_catalog`; `cargo test -p handbook-pipeline --test pipeline_loader`; `cargo check --workspace`
+  - Files: `crates/pipeline/tests/pipeline_catalog.rs`, `crates/pipeline/tests/pipeline_loader.rs`, optionally tightly related test support files
 
 ---
 
@@ -105,6 +133,7 @@ Set 2 is complete only when:
 - the public API still matches the retained/dropped matrix from the Set 2 spec,
 - downstream can construct non-default contract owners through public APIs,
 - retained capability families are exercised through public façade entrypoints only,
+- the Packet 2.2a / 2.2b / 2.2c sequence completed in order without leaving required dropped-seam callers behind,
 - dropped/private seams stayed private,
 - the release-candidate external proof passed,
 - and the closeout notes hand off released-crate proof, downstream Substrate proof, and guard rails to Set 3 explicitly.
