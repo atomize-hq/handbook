@@ -12,15 +12,38 @@ use handbook_pipeline::{
         RouteVariables,
     },
     route_state::{
-        load_route_state_with_supported_variables, set_route_state, RouteStateMutation,
+        load_route_state_with_storage_layout, load_route_state_with_supported_variables,
+        set_route_state, set_route_state_with_storage_layout, RouteStateMutation,
         RouteStateMutationOutcome,
     },
+    PipelineStorageLayoutContract,
 };
 use std::path::PathBuf;
 
 fn fixture(path: &str) -> PipelineDefinition {
     let root = pipeline_proof_corpus_support::committed_repo_root();
     load_pipeline_definition(&root, path).expect("pipeline fixture")
+}
+
+fn custom_storage_layout() -> PipelineStorageLayoutContract {
+    PipelineStorageLayoutContract::try_from_paths(
+        ".custom_handbook/state",
+        ".custom_handbook/state/pipelines",
+        ".custom_handbook/state/pipelines/stage_capture",
+        ".custom_handbook/state/pipelines/capture_cache",
+        "custom_artifacts/handoff/feature_slice",
+    )
+    .expect("valid custom storage layout")
+}
+
+fn custom_state_path(
+    repo_root: &std::path::Path,
+    pipeline_id: &str,
+    storage_layout: PipelineStorageLayoutContract,
+) -> PathBuf {
+    repo_root
+        .join(storage_layout.pipeline_dir_relative())
+        .join(format!("{pipeline_id}.yaml"))
 }
 
 #[test]
@@ -513,4 +536,77 @@ fn shared_proof_corpus_state_mutation_outputs_match_repo_owned_goldens() {
         Some(&malformed_state_path),
         "state_set.refused.malformed_route_state.txt",
     );
+}
+
+#[test]
+fn route_state_storage_layout_public_api_drives_route_resolution_from_non_default_state_root() {
+    let (_dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let storage_layout = custom_storage_layout();
+    let definition = load_pipeline_definition(&root, "core/pipelines/foundation_inputs.yaml")
+        .expect("proof corpus definition");
+    let pipeline_id = definition.header.id.clone();
+    let supported_variables = supported_route_state_variables(&definition);
+
+    let first_outcome = set_route_state_with_storage_layout(
+        &root,
+        &pipeline_id,
+        supported_variables.iter().map(String::as_str),
+        RouteStateMutation::RoutingVariable {
+            variable: "needs_project_context".to_string(),
+            value: true,
+        },
+        0,
+        storage_layout,
+    )
+    .expect("first custom mutation");
+    let first_state = match first_outcome {
+        RouteStateMutationOutcome::Applied(state) => *state,
+        RouteStateMutationOutcome::Refused(refusal) => {
+            panic!("expected applied custom mutation, got {refusal:?}")
+        }
+    };
+
+    let second_outcome = set_route_state_with_storage_layout(
+        &root,
+        &pipeline_id,
+        supported_variables.iter().map(String::as_str),
+        RouteStateMutation::RoutingVariable {
+            variable: "charter_gaps_detected".to_string(),
+            value: true,
+        },
+        first_state.revision,
+        storage_layout,
+    )
+    .expect("second custom mutation");
+    match second_outcome {
+        RouteStateMutationOutcome::Applied(_) => {}
+        RouteStateMutationOutcome::Refused(refusal) => {
+            panic!("expected second custom mutation to apply, got {refusal:?}")
+        }
+    }
+
+    let custom_path = custom_state_path(&root, &pipeline_id, storage_layout);
+    assert!(custom_path.exists(), "custom state path should exist");
+    assert!(
+        !root
+            .join(".handbook")
+            .join("state")
+            .join("pipeline")
+            .join(format!("{pipeline_id}.yaml"))
+            .exists(),
+        "default state path should remain unused"
+    );
+
+    let routed_state = load_route_state_with_storage_layout(&root, &pipeline_id, storage_layout)
+        .expect("load custom routed state");
+    let route = resolve_pipeline_route(
+        &definition,
+        &RouteVariables::new(routed_state.routing.clone()).expect("route variables"),
+    )
+    .expect("route");
+
+    assert!(route
+        .stages
+        .iter()
+        .all(|stage| stage.status == RouteStageStatus::Active));
 }

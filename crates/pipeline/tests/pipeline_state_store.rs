@@ -11,12 +11,15 @@ use handbook_pipeline::{
     pipeline_route::{resolve_pipeline_route, RouteVariables},
     route_state::{
         build_route_basis, effective_route_basis_run, load_route_state,
-        load_route_state_with_supported_variables, load_trusted_pipeline_session,
-        persist_route_basis, set_route_state, RouteBasisPersistOutcome, RouteBasisPersistRefusal,
+        load_route_state_with_storage_layout, load_route_state_with_supported_variables,
+        load_trusted_pipeline_session, load_trusted_pipeline_session_with_storage_layout,
+        persist_route_basis, persist_route_basis_with_storage_layout, set_route_state,
+        set_route_state_with_storage_layout, RouteBasisPersistOutcome, RouteBasisPersistRefusal,
         RouteBasisStageStatus, RouteState, RouteStateMutation, RouteStateMutationOutcome,
         RouteStateMutationRefusal, RouteStateReadError, RouteStateStoreError, RouteStateValue,
         TrustedPipelineSessionRefusal, ROUTE_STATE_AUDIT_LIMIT, ROUTE_STATE_SCHEMA_VERSION,
     },
+    PipelineStorageLayoutContract,
 };
 
 fn write_file(path: &Path, contents: &str) {
@@ -71,6 +74,27 @@ fn state_path(repo_root: &Path, pipeline_id: &str) -> PathBuf {
         .join(".handbook")
         .join("state")
         .join("pipeline")
+        .join(format!("{pipeline_id}.yaml"))
+}
+
+fn custom_storage_layout() -> PipelineStorageLayoutContract {
+    PipelineStorageLayoutContract::try_from_paths(
+        ".custom_handbook/state",
+        ".custom_handbook/state/pipelines",
+        ".custom_handbook/state/pipelines/stage_capture",
+        ".custom_handbook/state/pipelines/capture_cache",
+        "custom_artifacts/handoff/feature_slice",
+    )
+    .expect("valid custom storage layout")
+}
+
+fn custom_state_path(
+    repo_root: &Path,
+    pipeline_id: &str,
+    storage_layout: PipelineStorageLayoutContract,
+) -> PathBuf {
+    repo_root
+        .join(storage_layout.pipeline_dir_relative())
         .join(format!("{pipeline_id}.yaml"))
 }
 
@@ -434,6 +458,80 @@ fn trusted_pipeline_session_normalizes_repo_root_and_refuses_inactive_stage() {
         }
         other => panic!("expected inactive-stage refusal, got {other:?}"),
     }
+}
+
+#[test]
+fn custom_storage_layout_round_trips_route_state_and_trusted_session_through_public_apis() {
+    let (_dir, repo_root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let storage_layout = custom_storage_layout();
+    let (definition, supported_variables) =
+        pipeline_proof_corpus_support::load_foundation_inputs_definition(&repo_root);
+    let pipeline_id = definition.header.id.clone();
+
+    let initial = load_route_state_with_storage_layout(&repo_root, &pipeline_id, storage_layout)
+        .expect("initial custom state");
+    assert_eq!(initial.revision, 0);
+
+    let outcome = set_route_state_with_storage_layout(
+        &repo_root,
+        &pipeline_id,
+        supported_variables.iter().map(String::as_str),
+        RouteStateMutation::RoutingVariable {
+            variable: "needs_project_context".to_string(),
+            value: true,
+        },
+        initial.revision,
+        storage_layout,
+    )
+    .expect("set custom route state");
+    let state = match outcome {
+        RouteStateMutationOutcome::Applied(state) => *state,
+        RouteStateMutationOutcome::Refused(refusal) => {
+            panic!("expected custom route-state mutation to apply, got {refusal:?}")
+        }
+    };
+    assert_eq!(state.routing.get("needs_project_context"), Some(&true));
+
+    let custom_path = custom_state_path(&repo_root, &pipeline_id, storage_layout);
+    assert!(custom_path.exists(), "custom state path should exist");
+    assert!(
+        !state_path(&repo_root, &pipeline_id).exists(),
+        "default state path should remain unused"
+    );
+
+    let reloaded = load_route_state_with_storage_layout(&repo_root, &pipeline_id, storage_layout)
+        .expect("reload custom state");
+    let route = resolve_pipeline_route(
+        &definition,
+        &RouteVariables::new(reloaded.routing.clone()).expect("route variables"),
+    )
+    .expect("resolve route");
+    let route_basis = build_route_basis(&repo_root, &definition, &reloaded, &route).expect("basis");
+
+    let persisted = persist_route_basis_with_storage_layout(
+        &repo_root,
+        &pipeline_id,
+        route_basis.clone(),
+        storage_layout,
+    )
+    .expect("persist custom route basis");
+    let persisted_state = match persisted {
+        RouteBasisPersistOutcome::Applied(state) => *state,
+        RouteBasisPersistOutcome::Refused(refusal) => {
+            panic!("expected custom route basis persist to apply, got {refusal:?}")
+        }
+    };
+    assert_eq!(persisted_state.route_basis.as_ref(), Some(&route_basis));
+
+    let session =
+        load_trusted_pipeline_session_with_storage_layout(&repo_root, &definition, storage_layout)
+            .expect("trusted session via custom storage layout");
+    assert_eq!(session.pipeline_id, pipeline_id);
+    assert_eq!(session.route_basis, route_basis);
+    assert_eq!(
+        session.route_state.run.repo_root.as_deref(),
+        Some(handbook_pipeline::route_state::ROUTE_BASIS_REPO_ROOT_SENTINEL)
+    );
 }
 
 #[test]

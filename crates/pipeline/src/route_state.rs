@@ -458,8 +458,7 @@ pub fn load_route_state(
     load_route_state_at_path(&state_path, pipeline_id, None, &run_inventory)
 }
 
-#[allow(dead_code)]
-pub(crate) fn load_route_state_with_storage_layout(
+pub fn load_route_state_with_storage_layout(
     repo_root: impl AsRef<Path>,
     pipeline_id: impl AsRef<str>,
     storage_layout: PipelineStorageLayoutContract,
@@ -628,7 +627,7 @@ pub fn set_route_state(
 }
 
 #[allow(dead_code)]
-pub(crate) fn set_route_state_with_storage_layout(
+pub fn set_route_state_with_storage_layout(
     repo_root: impl AsRef<Path>,
     pipeline_id: impl AsRef<str>,
     supported_variables: impl IntoIterator<Item = impl AsRef<str>>,
@@ -736,7 +735,7 @@ pub fn load_trusted_pipeline_session(
     )
 }
 
-pub(crate) fn load_trusted_pipeline_session_with_storage_layout(
+pub fn load_trusted_pipeline_session_with_storage_layout(
     repo_root: impl AsRef<Path>,
     pipeline: &PipelineDefinition,
     storage_layout: PipelineStorageLayoutContract,
@@ -1242,8 +1241,7 @@ pub fn persist_route_basis(
     Ok(RouteBasisPersistOutcome::Applied(Box::new(state)))
 }
 
-#[allow(dead_code)]
-pub(crate) fn persist_route_basis_with_storage_layout(
+pub fn persist_route_basis_with_storage_layout(
     repo_root: impl AsRef<Path>,
     pipeline_id: impl AsRef<str>,
     route_basis: RouteBasis,
