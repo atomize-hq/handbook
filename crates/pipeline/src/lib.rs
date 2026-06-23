@@ -9,6 +9,9 @@ mod repo_file_access;
 pub mod route_state;
 mod stage_10_feature_spec_provenance;
 
+pub use declarative_roots::PipelineDeclarativeRootsContract;
+pub use layout::PipelineStorageLayoutContract;
+
 pub fn pipeline_contract_version() -> &'static str {
     handbook_engine::workspace_contract_version()
 }

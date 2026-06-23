@@ -71,7 +71,7 @@ impl HandoffBundleLayoutContract {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub(crate) struct PipelineStorageLayoutContract {
+pub struct PipelineStorageLayoutContract {
     runtime_state: RuntimeStateLayoutContract,
     capture_storage: CaptureStorageLayoutContract,
     handoff_bundle: HandoffBundleLayoutContract,
@@ -109,7 +109,7 @@ impl PipelineStorageLayoutContract {
     }
 
     #[allow(dead_code)]
-    pub(crate) fn try_from_paths(
+    pub fn try_from_paths(
         state_root_relative: &'static str,
         pipeline_dir_relative: &'static str,
         stage_capture_root_relative: &'static str,
@@ -125,6 +125,26 @@ impl PipelineStorageLayoutContract {
         );
         validate_pipeline_storage_layout_contract(contract)?;
         Ok(contract)
+    }
+
+    pub const fn state_root_relative(self) -> &'static str {
+        self.runtime_state.state_root_relative
+    }
+
+    pub const fn pipeline_dir_relative(self) -> &'static str {
+        self.runtime_state.pipeline_dir_relative
+    }
+
+    pub const fn stage_capture_root_relative(self) -> &'static str {
+        self.capture_storage.stage_capture_root_relative
+    }
+
+    pub const fn capture_cache_root_relative(self) -> &'static str {
+        self.capture_storage.capture_cache_root_relative
+    }
+
+    pub const fn feature_slice_root_relative(self) -> &'static str {
+        self.handoff_bundle.feature_slice_root_relative
     }
 
     const fn runtime_state(self) -> RuntimeStateLayoutContract {
@@ -381,6 +401,24 @@ mod tests {
             ".custom_handbook/state/pipelines/stage_capture",
             ".custom_handbook/state/pipelines/capture_cache",
             "custom_artifacts/handoff/feature_slice",
+        );
+
+        assert_eq!(contract.state_root_relative(), ".custom_handbook/state");
+        assert_eq!(
+            contract.pipeline_dir_relative(),
+            ".custom_handbook/state/pipelines"
+        );
+        assert_eq!(
+            contract.stage_capture_root_relative(),
+            ".custom_handbook/state/pipelines/stage_capture"
+        );
+        assert_eq!(
+            contract.capture_cache_root_relative(),
+            ".custom_handbook/state/pipelines/capture_cache"
+        );
+        assert_eq!(
+            contract.feature_slice_root_relative(),
+            "custom_artifacts/handoff/feature_slice"
         );
 
         let layout = RepoLayoutRoot::with_contract(Path::new("."), contract);
