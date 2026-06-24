@@ -1,0 +1,8 @@
+[package]
+name = "handbook-pipeline-released-boundary-proof"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+handbook-pipeline = "=__HANDBOOK_PIPELINE_VERSION__"

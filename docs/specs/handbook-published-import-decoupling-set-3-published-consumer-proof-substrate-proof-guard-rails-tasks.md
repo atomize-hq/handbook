@@ -21,15 +21,22 @@ If those sources disagree, the MAP plus the active Set 1 triplet plus the active
 
 ## Packet 3.1: Released-Proof Harness + Release Preparation
 
-- [ ] Task: Add an exact-published-version external consumer proof harness for `handbook-pipeline`
+- [x] Task: Add an exact-published-version external consumer proof harness for `handbook-pipeline`
   - Acceptance: A new proof script plus fixture consume `handbook-pipeline` through an exact crates.io version pin, run outside the source tree, exercise retained public APIs only, and fail if proof falls back to sibling-path or source-tree dependency accidents.
   - Verify: source inspection of the proof script + fixture; `cargo package -p handbook-pipeline --allow-dirty`; `cargo publish --dry-run -p handbook-pipeline`
   - Files: `tools/proof/handbook_pipeline_released_boundary.sh`, `tests/fixtures/external_consumers/handbook_pipeline_released_boundary/Cargo.toml`, `tests/fixtures/external_consumers/handbook_pipeline_released_boundary/src/main.rs`
 
-- [ ] Task: Record the smallest honest publish target for the Set 2 boundary
+- [x] Task: Record the smallest honest publish target for the Set 2 boundary
   - Acceptance: The active Set 3 docs explicitly state which crate version(s) must be published for Set 3, why `handbook-pipeline 0.1.1` is insufficient, and whether the publish is `handbook-pipeline` only or a coordinated version train.
   - Verify: source inspection of the Set 3 triplet; `rg -n "0\.1\.1|publish target|exact published version|coordinated version" docs/specs/handbook-published-import-decoupling-set-3-published-consumer-proof-substrate-proof-guard-rails-*.md`
   - Files: `docs/specs/handbook-published-import-decoupling-set-3-published-consumer-proof-substrate-proof-guard-rails-spec.md`, `docs/specs/handbook-published-import-decoupling-set-3-published-consumer-proof-substrate-proof-guard-rails-plan.md`, `docs/specs/handbook-published-import-decoupling-set-3-published-consumer-proof-substrate-proof-guard-rails-tasks.md`
+
+### Packet 3.1 closeout note (2026-06-23)
+
+- The released proof tier now lives at `tools/proof/handbook_pipeline_released_boundary.sh` plus `tests/fixtures/external_consumers/handbook_pipeline_released_boundary/`, separate from the Set 2 packaged proof tier.
+- The released fixture pins `handbook-pipeline` with an exact crates.io version only, and the harness rejects path-dependency or source-tree fallback before any proof run can count.
+- `handbook-pipeline 0.1.1` is insufficient because crates.io already contains `0.1.1` while the retained Set 2 boundary being proved is present only in the current unpublished source/package.
+- The smallest honest publish target for Packet 3.2 is `handbook-pipeline 0.1.2` only; Packet 3.1 found no evidence that `handbook-engine` or `handbook-flow` need a coordinated version train.
 
 ---
 

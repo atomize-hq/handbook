@@ -3,7 +3,7 @@
 ## Assumptions I'm Making
 
 1. Set 2 is complete only at the **packaged-boundary** level: the retained `handbook-pipeline` public boundary exists in live source and the packaged external proof passed locally on 2026-06-23, but that does **not** yet count as released-crate proof or downstream Substrate proof.
-2. The currently published crates.io `handbook-pipeline = 0.1.1` does **not** contain the full Set 2 public boundary, so Set 3 must route through a newly published version before released-consumer proof can count as complete.
+2. The currently published crates.io `handbook-pipeline = 0.1.1` does **not** contain the full Set 2 public boundary. The Set 2 packaged proof exercises `PipelineDeclarativeRootsContract`, `PipelineStorageLayoutContract`, the retained metadata/definition `*_with_roots` entrypoints, and the retained route-state/capture/handoff `*_with_storage_layout` entrypoints, but that proof landed only in the current unpublished `handbook-pipeline` source/package. Set 3 must therefore route through a newly published version before released-consumer proof can count as complete.
 3. Set 3 may touch both `/Users/spensermcconnell/__Active_Code/system` and a dedicated Substrate worktree under `/Users/spensermcconnell/.codex/worktrees/`, but the active execution authority for the workstream remains the `system` repo docs.
 4. Set 3 must **not** widen the public surface beyond the Set 2 retained/dropped matrix unless the active authority is explicitly reopened first.
 5. Packet 4.2 remains only an `engine + flow` proof; Set 3 must not reclassify that seam as `handbook-pipeline` proof.
@@ -257,8 +257,14 @@ Set 3 is complete only when all of the following are true:
    - docs overclaim the boundary relative to the released crate,
    - or `engine + flow` proof is mislabeled as pipeline proof.
 
+## Packet 3.1 release-preparation note (2026-06-23)
+
+- The released-boundary harness now lives at `/Users/spensermcconnell/__Active_Code/system/tools/proof/handbook_pipeline_released_boundary.sh` and the exact-version external consumer fixture now lives at `/Users/spensermcconnell/__Active_Code/system/tests/fixtures/external_consumers/handbook_pipeline_released_boundary/`.
+- That harness intentionally keeps the released tier distinct from the Set 2 packaged tier: it requires `--version <published_version>`, pins `handbook-pipeline` with an exact crates.io version in the fixture, copies the proof corpus into an isolated temp workspace, and rejects path-dependency or source-tree fallback before any proof run counts.
+- `handbook-pipeline 0.1.1` is insufficient for released proof because crates.io already contains that version while the retained Set 2 boundary exercised by the packaged proof exists only in the current unpublished `handbook-pipeline` source/package.
+- The smallest honest publish target for Packet 3.2 is `handbook-pipeline 0.1.2` only. Packet 3.1 found no evidence that `handbook-engine` or `handbook-flow` require a coordinated version train: `cargo publish --dry-run -p handbook-pipeline` still verifies against the existing `handbook-engine 0.1.1` dependency, the released-proof fixture imports `handbook-pipeline` only, and Packet 4.2 remains classified only as `engine + flow` proof.
+
 ## Open Questions
 
-1. Does the first released Set 3 proof require publishing only `handbook-pipeline`, or should `handbook-engine` / `handbook-flow` ride a coordinated version train for dependency clarity even if their public surfaces do not change?
-2. Should the downstream Set 3 proof reuse the current dedicated worktree at `/Users/spensermcconnell/.codex/worktrees/substrate-packet-4-2-20260622-133054` if it stays isolated and clean, or should it start from a fresh dedicated worktree?
-3. Which exact narrow downstream production seam is the least-disruptive place to prove `handbook-pipeline` capability while preserving Substrate-owned behavior?
+1. Should the downstream Set 3 proof reuse the current dedicated worktree at `/Users/spensermcconnell/.codex/worktrees/substrate-packet-4-2-20260622-133054` if it stays isolated and clean, or should it start from a fresh dedicated worktree?
+2. Which exact narrow downstream production seam is the least-disruptive place to prove `handbook-pipeline` capability while preserving Substrate-owned behavior?

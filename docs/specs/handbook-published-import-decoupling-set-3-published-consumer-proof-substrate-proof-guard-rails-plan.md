@@ -74,6 +74,13 @@ Packet 3.1 is done only when:
 - the publish target version strategy is explicit enough to support the next packet
 - no public API widening has been smuggled into release-prep work
 
+### Packet 3.1 closeout note (2026-06-23)
+
+- The released proof tier now has its own harness at `tools/proof/handbook_pipeline_released_boundary.sh` plus its own external fixture at `tests/fixtures/external_consumers/handbook_pipeline_released_boundary/`; the Set 2 packaged harness remains unchanged at `tools/proof/handbook_pipeline_minimal_boundary.sh`.
+- The released fixture now pins `handbook-pipeline` to an exact crates.io version only, and the harness rejects path dependencies plus any `cargo metadata` resolution that points back into the local `system` source tree.
+- `handbook-pipeline 0.1.1` is not an honest released-proof target because crates.io already contains that version while the retained Set 2 boundary being proved still lives only in the current unpublished source/package.
+- The smallest honest publish target for Packet 3.2 is `handbook-pipeline 0.1.2` only. Packet 3.1 did not uncover any release coupling that would require a coordinated `handbook-engine` or `handbook-flow` version train.
+
 ## Packet 3.2 — Published Crates.io Proof
 
 ### Goal
@@ -155,10 +162,10 @@ Packet 3.4 is done only when:
 
 ## Risks And Mitigations
 
-### Risk 1: publishing before the proof shape is stable
+### Risk 1: publishing before the proof shape or target version is stable
 
 - **Why it matters:** a premature publish could force another release just to repair proof harness shape or exact-version pinning mistakes.
-- **Mitigation:** complete Packet 3.1 first, including the released-proof harness and explicit version-release strategy.
+- **Mitigation:** complete Packet 3.1 first, including the released-proof harness and the explicit `handbook-pipeline 0.1.2`-only target unless a later packet finds real release coupling.
 
 ### Risk 2: downstream proof drifts into product redesign
 
