@@ -67,20 +67,41 @@ If those sources disagree, the MAP plus the active Set 1 triplet plus the active
 
 ## Packet 3.3: Downstream Substrate Published-Boundary Proof
 
-- [ ] Task: Choose one narrow downstream Substrate proof seam in a dedicated worktree and pin the exact published version
+- [x] Task: Choose one narrow downstream Substrate proof seam in a dedicated worktree and pin the exact published version
   - Acceptance: The downstream proof work happens only in a dedicated worktree under `/Users/spensermcconnell/.codex/worktrees/`, the main Substrate checkout remains untouched, and the worktree resolves the exact published `handbook-pipeline` version proved in Packet 3.2.
   - Verify: `git status --short --branch`; `cargo tree -p handbook-pipeline`; `cargo tree -p handbook-engine`; `cargo tree -p handbook-flow`
   - Files: the dedicated Substrate worktree `Cargo.toml` / manifest surfaces needed to pin the published version, plus the active Set 3 docs if they must record the selected seam/worktree path
 
-- [ ] Task: Implement only the smallest downstream seam needed to prove real `handbook-pipeline` capability
+- [x] Task: Implement only the smallest downstream seam needed to prove real `handbook-pipeline` capability
   - Acceptance: The chosen Substrate seam uses published `handbook-pipeline` public APIs only, does not rely on sibling-path fallback or private internals, and keeps final wording/runtime behavior owned by Substrate.
   - Verify: `cargo check --workspace` in the dedicated Substrate worktree, plus the targeted downstream proof command(s) selected for the seam
   - Files: one narrow downstream file group in the dedicated worktree, ideally no more than ~5 files, plus tightly related tests if needed for honest proof
 
-- [ ] Task: Record an explicit downstream capability map instead of overclaiming full family usage
+- [x] Task: Record an explicit downstream capability map instead of overclaiming full family usage
   - Acceptance: Active docs state exactly which retained `handbook-pipeline` capability families the chosen Substrate seam uses now, which families remain externally proved but unused downstream, and why that still satisfies the MAP objective for Substrate's actual needs.
   - Verify: source inspection of the Set 3 triplet; `rg -n "capability map|externally proved|unused downstream|actual needs|Substrate-owned" docs/specs/handbook-published-import-decoupling-set-3-published-consumer-proof-substrate-proof-guard-rails-*.md`
   - Files: `docs/specs/handbook-published-import-decoupling-set-3-published-consumer-proof-substrate-proof-guard-rails-spec.md`, `docs/specs/handbook-published-import-decoupling-set-3-published-consumer-proof-substrate-proof-guard-rails-plan.md`, `docs/specs/handbook-published-import-decoupling-set-3-published-consumer-proof-substrate-proof-guard-rails-tasks.md`
+
+### Packet 3.3 closeout status (2026-06-23)
+
+- Dedicated downstream worktree used: `/Users/spensermcconnell/.codex/worktrees/substrate-packet-3-3-20260623-213135` on branch `packet-3-3-20260623-213135`.
+- Exact downstream proof seam chosen: `/Users/spensermcconnell/.codex/worktrees/substrate-packet-3-3-20260623-213135/crates/shell/src/execution/prompt_fulfillment.rs`
+  - the Substrate-owned host-toolbox prompt composer now injects handbook planning advisory text through published `handbook-pipeline` APIs only
+- Exact version pin result:
+  - root worktree manifest now pins `handbook-pipeline = "=0.1.2"`
+  - `cargo tree -p handbook-pipeline` resolves `handbook-pipeline v0.1.2`
+  - `cargo tree -p handbook-engine` and `cargo tree -p handbook-flow` remain at `v0.1.1`
+  - the worktree manifests contain no `[patch.crates-io]` override or sibling-path dependency for handbook crates
+- Targeted downstream proof runs:
+  - `cargo test -p shell compose_prompt_with_host_toolbox_contract -- --nocapture` passed
+  - `cargo check --workspace` passed in the dedicated worktree
+- Downstream capability map:
+  - consumed now: declarative-root contract construction for `.handbook/core/...`; metadata browse; selector resolution; selected definition load
+  - externally proved / unused downstream now: direct definition load by explicit repo-relative path; route-state storage-layout; capture storage-layout; handoff storage-layout
+- Packet 3.3 claim boundary:
+  - this packet proves a narrow Substrate planning-context seam only
+  - Packet 4.2 remains `engine + flow` only
+  - Packet 3.4 still owns release/update guard rails and final Set 3 closeout
 
 ---
 

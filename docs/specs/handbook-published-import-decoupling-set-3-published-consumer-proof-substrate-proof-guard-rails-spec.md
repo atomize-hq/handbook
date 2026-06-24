@@ -257,6 +257,34 @@ Set 3 is complete only when all of the following are true:
    - docs overclaim the boundary relative to the released crate,
    - or `engine + flow` proof is mislabeled as pipeline proof.
 
+## Packet 3.3 downstream proof note (2026-06-23)
+
+- Dedicated downstream proof worktree: `/Users/spensermcconnell/.codex/worktrees/substrate-packet-3-3-20260623-213135`
+- Exact downstream proof seam: `/Users/spensermcconnell/.codex/worktrees/substrate-packet-3-3-20260623-213135/crates/shell/src/execution/prompt_fulfillment.rs`
+  - Substrate's host-toolbox prompt composer now injects handbook planning advisory text through published `handbook-pipeline` public APIs only
+- Exact published-version proof for the worktree:
+  - root manifest pins `handbook-pipeline = "=0.1.2"`
+  - `cargo tree -p handbook-pipeline` resolves `handbook-pipeline v0.1.2`
+  - `cargo tree -p handbook-engine` and `cargo tree -p handbook-flow` remain at `v0.1.1`
+  - no `[patch.crates-io]` or sibling-path handbook override exists in the worktree manifests
+- Downstream capability map for this seam:
+  - consumed now:
+    - declarative-root contract construction for Substrate's repo-owned `.handbook/core/...` layout
+    - metadata browse via `load_pipeline_catalog_metadata_with_roots(...)`
+    - selector resolution via `load_pipeline_selection_metadata_with_roots(...)`
+    - selected definition load via `load_selected_pipeline_definition_with_roots(...)`
+  - externally proved but unused downstream now:
+    - direct definition load by explicit repo-relative path
+    - route-state storage-layout control
+    - capture storage-layout control
+    - handoff storage-layout control
+- Why this satisfies Substrate's actual needs here:
+  - the chosen seam only needs published handbook planning discovery + selection so Substrate can ground prompt fulfillment against repo-owned handbook context
+  - the broader route-state/capture/handoff families remain real on crates.io because Packet 3.2 already proved them externally, but this packet does not overclaim that Substrate uses them in the chosen seam
+- Ownership split preserved:
+  - handbook owns typed catalog/selection/definition mechanics
+  - Substrate still owns the final advisory wording, prompt composition behavior, and decision to treat the result as advisory only
+
 ## Packet 3.1 release-preparation note (2026-06-23)
 
 - The released-boundary harness now lives at `/Users/spensermcconnell/__Active_Code/system/tools/proof/handbook_pipeline_released_boundary.sh` and the exact-version external consumer fixture now lives at `/Users/spensermcconnell/__Active_Code/system/tests/fixtures/external_consumers/handbook_pipeline_released_boundary/`.
@@ -273,4 +301,6 @@ Set 3 is complete only when all of the following are true:
 ## Open Questions
 
 1. Should the downstream Set 3 proof reuse the current dedicated worktree at `/Users/spensermcconnell/.codex/worktrees/substrate-packet-4-2-20260622-133054` if it stays isolated and clean, or should it start from a fresh dedicated worktree?
+   - Resolved for Packet 3.3: use the fresh dedicated worktree `/Users/spensermcconnell/.codex/worktrees/substrate-packet-3-3-20260623-213135`; keep Packet 4.2 as baseline context only.
 2. Which exact narrow downstream production seam is the least-disruptive place to prove `handbook-pipeline` capability while preserving Substrate-owned behavior?
+   - Resolved for Packet 3.3: the least-disruptive seam is `crates/shell/src/execution/prompt_fulfillment.rs`, where Substrate can adopt published planning-context discovery without widening into route-state, capture, handoff, or broader runtime redesign.
