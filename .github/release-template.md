@@ -28,7 +28,7 @@
 | Linux | x86_64 | [handbook-v${VERSION}-linux_x86_64.tar.gz](https://github.com/atomize-hq/handbook/releases/download/${RELEASE_TAG}/handbook-v${VERSION}-linux_x86_64.tar.gz) |
 | macOS | arm64 | [handbook-v${VERSION}-macos_arm64.tar.gz](https://github.com/atomize-hq/handbook/releases/download/${RELEASE_TAG}/handbook-v${VERSION}-macos_arm64.tar.gz) |
 
-Each bundle contains the exact curated `~/handbook/` home expected by the shipped Codex packaging contract, including `~/handbook/bin/handbook`, `runtime-manifest.json`, `resources/**`, the installed thin projections under `~/handbook/.agents/skills/*`, refreshed Codex discovery links under `~/.codex/skills/*`, and compatibility discovery links under `~/.agents/skills/*`.
+Each bundle contains the exact curated `~/handbook/` home expected by the shipped Codex packaging contract, including `~/handbook/bin/handbook`, `runtime-manifest.json`, `resources/**`, the installed thin projections under `~/handbook/.agents/skills/*`, and refreshed Codex discovery links under `~/.codex/skills/*`.
 
 ## Checksums
 

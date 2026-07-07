@@ -14,8 +14,8 @@ INSTALLED_ROOT_SKILL="$HANDBOOK_HOME/.agents/skills/handbook"
 INSTALLED_DISCOVERY_SKILL="$HANDBOOK_HOME/.agents/skills/handbook-charter-intake"
 CODEX_ROOT_SKILL="$HOME/.codex/skills/handbook"
 CODEX_DISCOVERY_SKILL="$HOME/.codex/skills/handbook-charter-intake"
-AGENTS_ROOT_SKILL="$HOME/.agents/skills/handbook"
-AGENTS_DISCOVERY_SKILL="$HOME/.agents/skills/handbook-charter-intake"
+LEGACY_AGENTS_ROOT_SKILL="$HOME/.agents/skills/handbook"
+LEGACY_AGENTS_DISCOVERY_SKILL="$HOME/.agents/skills/handbook-charter-intake"
 
 assert_exact_file_set() {
   local root="$1"
@@ -79,7 +79,12 @@ EOF
 SKILL.md
 agents/openai.yaml
 EOF
-)"
+  )"
+}
+
+assert_repo_projection_absent() {
+  assert_path_absent "$ROOT_DIR/.agents/skills/handbook"
+  assert_path_absent "$ROOT_DIR/.agents/skills/handbook-charter-intake"
 }
 
 assert_repo_root_install_sources_absent() {
@@ -101,6 +106,7 @@ agents/openai.yaml
 bin/handbook
 charter-intake/SKILL.md
 charter-intake/SKILL.md.tmpl
+charter-intake/openai.yaml
 resources/authoring/charter_authoring_method.md
 resources/charter/CHARTER_INPUTS.yaml.tmpl
 resources/charter/charter_inputs_directive.md
@@ -128,16 +134,8 @@ assert_discovery_links_to_handbook_home() {
     readlink "$CODEX_DISCOVERY_SKILL" || true
     exit 1
   }
-  [[ "$(readlink "$AGENTS_ROOT_SKILL")" == "$INSTALLED_ROOT_SKILL" ]] || {
-    echo "unexpected agent root discovery link target"
-    readlink "$AGENTS_ROOT_SKILL" || true
-    exit 1
-  }
-  [[ "$(readlink "$AGENTS_DISCOVERY_SKILL")" == "$INSTALLED_DISCOVERY_SKILL" ]] || {
-    echo "unexpected agent leaf discovery link target"
-    readlink "$AGENTS_DISCOVERY_SKILL" || true
-    exit 1
-  }
+  assert_path_absent "$LEGACY_AGENTS_ROOT_SKILL"
+  assert_path_absent "$LEGACY_AGENTS_DISCOVERY_SKILL"
 }
 
 assert_dev_setup_links_to_repo() {
@@ -151,16 +149,8 @@ assert_dev_setup_links_to_repo() {
     readlink "$CODEX_DISCOVERY_SKILL" || true
     exit 1
   }
-  [[ "$(readlink "$AGENTS_ROOT_SKILL")" == "$ROOT_DIR/.agents/skills/handbook" ]] || {
-    echo "unexpected dev agent root discovery link target"
-    readlink "$AGENTS_ROOT_SKILL" || true
-    exit 1
-  }
-  [[ "$(readlink "$AGENTS_DISCOVERY_SKILL")" == "$ROOT_DIR/.agents/skills/handbook-charter-intake" ]] || {
-    echo "unexpected dev agent leaf discovery link target"
-    readlink "$AGENTS_DISCOVERY_SKILL" || true
-    exit 1
-  }
+  assert_path_absent "$LEGACY_AGENTS_ROOT_SKILL"
+  assert_path_absent "$LEGACY_AGENTS_DISCOVERY_SKILL"
 }
 
 target_label() {
@@ -188,10 +178,12 @@ handbook doctor --help >/dev/null
 handbook author charter --help >/dev/null
 
 echo "==> generator/install smoke"
-bash tools/codex/generate.sh
+bash tools/codex/generate.sh --repo-local
 assert_repo_projection_thin
 assert_repo_root_install_sources_absent
+rm -rf "$ROOT_DIR/.agents/skills/handbook" "$ROOT_DIR/.agents/skills/handbook-charter-intake"
 bash tools/codex/install.sh
+assert_repo_projection_absent
 assert_installed_home_file_set
 assert_installed_runtime_contract
 assert_discovery_links_to_handbook_home
@@ -205,6 +197,7 @@ after_listing="$(find "$HANDBOOK_HOME" -type f -print | sort)"
   echo "reinstall changed installed file set"
   exit 1
 }
+assert_repo_projection_absent
 assert_installed_home_file_set
 assert_installed_runtime_contract
 assert_discovery_links_to_handbook_home
@@ -219,6 +212,7 @@ echo "==> install-mode crossover smoke"
 bash tools/codex/install.sh
 test -L "$CODEX_ROOT_SKILL"
 test -L "$CODEX_DISCOVERY_SKILL"
+assert_repo_projection_absent
 assert_discovery_links_to_handbook_home
 assert_installed_home_file_set
 assert_installed_runtime_contract
@@ -249,15 +243,7 @@ HOME="$release_home" HANDBOOK_INSTALL_BASE_URL="file://$release_bundle_root" \
   readlink "$release_home/.codex/skills/handbook-charter-intake" || true
   exit 1
 }
-[[ "$(readlink "$release_home/.agents/skills/handbook")" == "$release_home/handbook/.agents/skills/handbook" ]] || {
-  echo "unexpected public install agent root link target"
-  readlink "$release_home/.agents/skills/handbook" || true
-  exit 1
-}
-[[ "$(readlink "$release_home/.agents/skills/handbook-charter-intake")" == "$release_home/handbook/.agents/skills/handbook-charter-intake" ]] || {
-  echo "unexpected public install agent leaf link target"
-  readlink "$release_home/.agents/skills/handbook-charter-intake" || true
-  exit 1
-}
+assert_path_absent "$release_home/.agents/skills/handbook"
+assert_path_absent "$release_home/.agents/skills/handbook-charter-intake"
 
 echo "OK"

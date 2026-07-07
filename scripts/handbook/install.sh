@@ -143,8 +143,8 @@ archive_path="$tmp_root/$ASSET_NAME"
 checksums_path="$tmp_root/SHA256SUMS"
 extract_root="$tmp_root/extracted"
 handbook_home="$HOME/handbook"
-agents_root="$HOME/.agents/skills"
 codex_root="$HOME/.codex/skills"
+legacy_agents_root="$HOME/.agents/skills"
 
 mkdir -p "$HOME"
 mkdir -p "$extract_root"
@@ -165,13 +165,13 @@ mv "$extract_root/handbook" "$handbook_home"
 [[ -x "$handbook_home/bin/handbook" ]] || fatal "installed bundle missing ~/handbook/bin/handbook"
 [[ -f "$handbook_home/runtime-manifest.json" ]] || fatal "installed bundle missing ~/handbook/runtime-manifest.json"
 
-mkdir -p "$agents_root"
 mkdir -p "$codex_root"
-install_discovery_entry "$handbook_home/.agents/skills/handbook" "$agents_root/handbook"
-install_discovery_entry "$handbook_home/.agents/skills/handbook-charter-intake" "$agents_root/handbook-charter-intake"
 install_discovery_entry "$handbook_home/.agents/skills/handbook" "$codex_root/handbook"
 install_discovery_entry "$handbook_home/.agents/skills/handbook-charter-intake" "$codex_root/handbook-charter-intake"
+rm -rf \
+  "$legacy_agents_root/handbook" \
+  "$legacy_agents_root/handbook-charter-intake"
 
 log "Installed handbook ${VERSION} to ${handbook_home}"
-log "Discovery links refreshed under ${codex_root} and ${agents_root}"
+log "Codex discovery links refreshed under ${codex_root}"
 log "Optional PATH entry: ${handbook_home}/bin"

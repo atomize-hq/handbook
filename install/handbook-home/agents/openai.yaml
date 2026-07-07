@@ -1,6 +1,6 @@
 interface:
-  display_name: "handbook"
-  short_description: "Thin discovery metadata for the handbook family and the handbook-charter-intake workflow."
-  default_prompt: "Use handbook for this task."
+  display_name: "Handbook"
+  short_description: "Thin discovery metadata for the Handbook family and the Handbook charter intake workflow."
+  default_prompt: "Use Handbook for this task."
 policy:
   allow_implicit_invocation: true

@@ -3,6 +3,52 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 SOURCE_ROOT="$ROOT_DIR/install/handbook-home"
+OUTPUT_ROOT=""
+
+usage() {
+  cat <<'EOF'
+Usage: generate.sh [--repo-local | --output-root <dir>]
+
+Generate the thin Handbook skill projections.
+
+Options:
+  --repo-local         Write projections into the repo at .agents/skills/
+  --output-root <dir>  Write projections into the provided output root
+EOF
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --repo-local)
+      OUTPUT_ROOT="$ROOT_DIR/.agents/skills"
+      shift
+      ;;
+    --output-root)
+      OUTPUT_ROOT="${2:-}"
+      [[ -n "$OUTPUT_ROOT" ]] || {
+        echo "missing value for --output-root" >&2
+        usage >&2
+        exit 1
+      }
+      shift 2
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "unknown argument: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+done
+
+[[ -n "$OUTPUT_ROOT" ]] || {
+  echo "refusing to generate projections without an explicit target; use --repo-local or --output-root" >&2
+  usage >&2
+  exit 1
+}
 
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/handbook-codex-generate.XXXXXX")"
 cleanup() {
@@ -66,7 +112,7 @@ render_template "$SOURCE_ROOT/charter-intake/SKILL.md.tmpl" "$generated_leaf_ski
 copy_file "$generated_root_skill_tmp" "$root_projection_tmp/SKILL.md"
 copy_file "$SOURCE_ROOT/agents/openai.yaml" "$root_projection_tmp/agents/openai.yaml"
 copy_file "$generated_leaf_skill_tmp" "$leaf_projection_tmp/SKILL.md"
-copy_file "$SOURCE_ROOT/agents/openai.yaml" "$leaf_projection_tmp/agents/openai.yaml"
+copy_file "$SOURCE_ROOT/charter-intake/openai.yaml" "$leaf_projection_tmp/agents/openai.yaml"
 
 assert_exact_file_set "$root_projection_tmp" "$(cat <<'EOF'
 SKILL.md
@@ -79,7 +125,7 @@ agents/openai.yaml
 EOF
 )"
 
-mkdir -p "$ROOT_DIR/.agents/skills"
-rm -rf "$ROOT_DIR/.agents/skills/handbook" "$ROOT_DIR/.agents/skills/handbook-charter-intake"
-cp -R "$root_projection_tmp" "$ROOT_DIR/.agents/skills/handbook"
-cp -R "$leaf_projection_tmp" "$ROOT_DIR/.agents/skills/handbook-charter-intake"
+mkdir -p "$OUTPUT_ROOT"
+rm -rf "$OUTPUT_ROOT/handbook" "$OUTPUT_ROOT/handbook-charter-intake"
+cp -R "$root_projection_tmp" "$OUTPUT_ROOT/handbook"
+cp -R "$leaf_projection_tmp" "$OUTPUT_ROOT/handbook-charter-intake"

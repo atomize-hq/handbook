@@ -6,14 +6,14 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 GENERATE_SCRIPT="$SCRIPT_DIR/generate.sh"
 RUNTIME_TEMPLATE_ROOT="$SCRIPT_DIR/runtime"
 INSTALL_SOURCE_ROOT="$ROOT_DIR/install/handbook-home"
-GENERATED_ROOT="$ROOT_DIR/.agents/skills"
 HANDBOOK_HOME="$HOME/handbook"
 HANDBOOK_DISCOVERY_ROOT="$HANDBOOK_HOME/.agents/skills"
 CODEX_DISCOVERY_ROOT="$HOME/.codex/skills"
-AGENTS_DISCOVERY_ROOT="$HOME/.agents/skills"
+LEGACY_AGENTS_DISCOVERY_ROOT="$HOME/.agents/skills"
 DISCOVERY_NAME="handbook-charter-intake"
 ROOT_SKILL_NAME="handbook"
 MANIFEST_VERSION="1"
+INSTALL_REPO_LOCAL_PROJECTIONS=0
 
 require_file() {
   local path="$1"
@@ -41,6 +41,30 @@ require_command() {
     exit 1
   }
 }
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --repo-local)
+      INSTALL_REPO_LOCAL_PROJECTIONS=1
+      shift
+      ;;
+    -h|--help)
+      cat <<'EOF'
+Usage: install.sh [--repo-local]
+
+Install the global Handbook runtime under ~/handbook and refresh ~/.codex/skills.
+
+Options:
+  --repo-local  Also refresh repo-local .agents/skills projections for development.
+EOF
+      exit 0
+      ;;
+    *)
+      echo "unknown argument: $1" >&2
+      exit 1
+      ;;
+  esac
+done
 
 render_template() {
   local template_path="$1"
@@ -124,11 +148,18 @@ require_file "$RUNTIME_TEMPLATE_ROOT/runtime-manifest.json.tmpl"
 require_file "$INSTALL_SOURCE_ROOT/SKILL.md.tmpl"
 require_file "$INSTALL_SOURCE_ROOT/agents/openai.yaml"
 require_file "$INSTALL_SOURCE_ROOT/charter-intake/SKILL.md.tmpl"
+require_file "$INSTALL_SOURCE_ROOT/charter-intake/openai.yaml"
 require_command handbook
-bash "$GENERATE_SCRIPT"
 
-ROOT_SKILL_SOURCE="$GENERATED_ROOT/$ROOT_SKILL_NAME"
-DISCOVERY_SOURCE="$GENERATED_ROOT/$DISCOVERY_NAME"
+generated_root="$(mktemp -d "${TMPDIR:-/tmp}/handbook-install-generated.XXXXXX")"
+generated_cleanup() {
+  rm -rf "$generated_root"
+}
+trap generated_cleanup RETURN
+bash "$GENERATE_SCRIPT" --output-root "$generated_root"
+
+ROOT_SKILL_SOURCE="$generated_root/$ROOT_SKILL_NAME"
+DISCOVERY_SOURCE="$generated_root/$DISCOVERY_NAME"
 
 require_directory "$ROOT_SKILL_SOURCE"
 require_directory "$DISCOVERY_SOURCE"
@@ -160,6 +191,7 @@ mkdir -p \
 install_copy "$INSTALL_SOURCE_ROOT/SKILL.md.tmpl" "$stage_root/SKILL.md.tmpl"
 install_copy "$INSTALL_SOURCE_ROOT/agents/openai.yaml" "$stage_root/agents/openai.yaml"
 install_copy "$INSTALL_SOURCE_ROOT/charter-intake/SKILL.md.tmpl" "$stage_root/charter-intake/SKILL.md.tmpl"
+install_copy "$INSTALL_SOURCE_ROOT/charter-intake/openai.yaml" "$stage_root/charter-intake/openai.yaml"
 install_copy "$HANDBOOK_BIN_ON_PATH" "$stage_root/bin/handbook"
 install_copy "$ROOT_SKILL_SOURCE" "$stage_root/.agents/skills/$ROOT_SKILL_NAME"
 install_copy "$DISCOVERY_SOURCE" "$stage_root/.agents/skills/$DISCOVERY_NAME"
@@ -180,8 +212,15 @@ mv "$stage_root" "$HANDBOOK_HOME"
 trap - EXIT
 
 mkdir -p "$CODEX_DISCOVERY_ROOT"
-mkdir -p "$AGENTS_DISCOVERY_ROOT"
 install_discovery_entry "$HANDBOOK_DISCOVERY_ROOT/$ROOT_SKILL_NAME" "$CODEX_DISCOVERY_ROOT/$ROOT_SKILL_NAME"
 install_discovery_entry "$HANDBOOK_DISCOVERY_ROOT/$DISCOVERY_NAME" "$CODEX_DISCOVERY_ROOT/$DISCOVERY_NAME"
-install_discovery_entry "$HANDBOOK_DISCOVERY_ROOT/$ROOT_SKILL_NAME" "$AGENTS_DISCOVERY_ROOT/$ROOT_SKILL_NAME"
-install_discovery_entry "$HANDBOOK_DISCOVERY_ROOT/$DISCOVERY_NAME" "$AGENTS_DISCOVERY_ROOT/$DISCOVERY_NAME"
+rm -rf \
+  "$LEGACY_AGENTS_DISCOVERY_ROOT/$ROOT_SKILL_NAME" \
+  "$LEGACY_AGENTS_DISCOVERY_ROOT/$DISCOVERY_NAME"
+rm -rf \
+  "$ROOT_DIR/.agents/skills/$ROOT_SKILL_NAME" \
+  "$ROOT_DIR/.agents/skills/$DISCOVERY_NAME"
+
+if [[ "$INSTALL_REPO_LOCAL_PROJECTIONS" -eq 1 ]]; then
+  bash "$GENERATE_SCRIPT" --repo-local
+fi

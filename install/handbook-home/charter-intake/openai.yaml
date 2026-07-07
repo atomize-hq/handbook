@@ -1,0 +1,6 @@
+interface:
+  display_name: "Handbook Charter Intake"
+  short_description: "Run the Handbook charter intake workflow against the installed Handbook runtime from inside a real git repository."
+  default_prompt: "Use Handbook Charter Intake for this task."
+policy:
+  allow_implicit_invocation: true

@@ -1,23 +1,27 @@
-# handbook
+---
+name: handbook
+description: "Root host skill for the Handbook family. Use to discover the installed Handbook global runtime and the Handbook charter intake workflow."
+---
 
-Root host skill for the `handbook` family.
+# Handbook
+
+Root host skill for the `Handbook` family.
 
 - Installed home: `~/handbook/`
 - Installed thin projections: `~/handbook/.agents/skills/handbook/` and `~/handbook/.agents/skills/handbook-charter-intake/`
 - Codex discovery glue: `~/.codex/skills/handbook*`
-- Compatibility discovery glue: `~/.agents/skills/handbook*`
 
 This root skill is informational and packaging-oriented. Use `handbook-charter-intake` for the charter intake workflow.
 
-Successful user-global installs refresh all three surfaces together:
+Successful user-global installs refresh these surfaces together:
 
 - `~/handbook/`
 - `~/.codex/skills/handbook*`
-- `~/.agents/skills/handbook*`
 
 Preferred install/update paths:
 
 - Tagged release install/update: `scripts/handbook/install.sh`
-- Source checkout install/update: `cargo install --locked --force --path crates/cli && bash tools/codex/install.sh`
+- Source checkout global install/update: `cargo install --locked --force --path crates/cli && bash tools/codex/install.sh`
+- Repo-local projection refresh for development only: `bash tools/codex/generate.sh --repo-local` or `bash tools/codex/install.sh --repo-local`
 
-Do not edit generated projections under `.agents/skills/**` by hand. Edit `install/handbook-home/SKILL.md.tmpl`, `install/handbook-home/charter-intake/SKILL.md.tmpl`, or `install/handbook-home/agents/openai.yaml`, then rerun `bash tools/codex/generate.sh`.
+Do not edit generated projections under `.agents/skills/**` by hand. Edit `install/handbook-home/SKILL.md.tmpl`, `install/handbook-home/agents/openai.yaml`, `install/handbook-home/charter-intake/SKILL.md.tmpl`, or `install/handbook-home/charter-intake/openai.yaml`, then rerun `bash tools/codex/generate.sh`.
