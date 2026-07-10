@@ -4,22 +4,25 @@ use std::sync::{Mutex, OnceLock};
 
 use handbook_compiler::{
     author_charter, author_charter_guided, author_environment_inventory,
-    author_project_context_from_input, parse_charter_structured_input_yaml,
+    author_environment_inventory_from_input, author_project_context_from_input,
+    parse_charter_structured_input_yaml, parse_environment_inventory_structured_input_yaml,
     parse_project_context_structured_input_yaml, preflight_author_charter,
     preflight_author_charter_from_input, preflight_author_environment_inventory,
-    preflight_author_project_context, render_charter_markdown, render_project_context_markdown,
-    resolve_shipped_template_library, resolve_template_library, run_setup,
-    validate_charter_structured_input, validate_environment_inventory_markdown,
-    validate_project_context_markdown, validate_project_context_structured_input,
-    AuthorCharterRefusalKind, AuthorEnvironmentInventoryRefusalKind,
-    AuthorProjectContextRefusalKind, CanonicalArtifactKind, CharterAudience,
-    CharterBackwardCompatibility, CharterDebtTrackingInput, CharterDecisionRecordsInput,
-    CharterDefaultImplicationsInput, CharterDeprecationPolicy, CharterDimensionInput,
-    CharterDimensionName, CharterDomainInput, CharterExceptionsInput, CharterExpectedLifetime,
-    CharterObservabilityThreshold, CharterOperationalRealityInput, CharterPostureInput,
-    CharterProjectClassification, CharterProjectConstraintsInput, CharterProjectInput,
-    CharterRequiredness, CharterRolloutControls, CharterRuntimeEnvironment, CharterStructuredInput,
-    CharterSurface, CharterTemplateLibraryOverride, EnvironmentInventoryTemplateLibraryOverride,
+    preflight_author_environment_inventory_from_input, preflight_author_project_context,
+    render_charter_markdown, render_environment_inventory_markdown,
+    render_project_context_markdown, resolve_shipped_template_library, resolve_template_library,
+    run_setup, validate_charter_structured_input, validate_environment_inventory_markdown,
+    validate_environment_inventory_structured_input, validate_project_context_markdown,
+    validate_project_context_structured_input, AuthorCharterRefusalKind,
+    AuthorEnvironmentInventoryRefusalKind, AuthorProjectContextRefusalKind, CanonicalArtifactKind,
+    CharterAudience, CharterBackwardCompatibility, CharterDebtTrackingInput,
+    CharterDecisionRecordsInput, CharterDefaultImplicationsInput, CharterDeprecationPolicy,
+    CharterDimensionInput, CharterDimensionName, CharterDomainInput, CharterExceptionsInput,
+    CharterExpectedLifetime, CharterObservabilityThreshold, CharterOperationalRealityInput,
+    CharterPostureInput, CharterProjectClassification, CharterProjectConstraintsInput,
+    CharterProjectInput, CharterRequiredness, CharterRolloutControls, CharterRuntimeEnvironment,
+    CharterStructuredInput, CharterSurface, CharterTemplateLibraryOverride,
+    EnvironmentInventoryStructuredInput, EnvironmentInventoryTemplateLibraryOverride,
     ProjectContextClassificationImplicationsInput, ProjectContextConstraintsInput,
     ProjectContextDataRealityInput, ProjectContextEnvironmentsAndDeliveryInput,
     ProjectContextIntegrationInput, ProjectContextKnownUnknownInput,
@@ -38,6 +41,8 @@ const AUTHOR_ENVIRONMENT_INVENTORY_CODEX_BIN_ENV_VAR: &str =
 const AUTHOR_ENVIRONMENT_INVENTORY_CODEX_MODEL_ENV_VAR: &str =
     "HANDBOOK_AUTHOR_ENVIRONMENT_INVENTORY_CODEX_MODEL";
 const AUTHOR_PROJECT_CONTEXT_NOW_UTC_ENV_VAR: &str = "HANDBOOK_AUTHOR_PROJECT_CONTEXT_NOW_UTC";
+const AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR: &str =
+    "HANDBOOK_AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC";
 const PROMPT_CAPTURE_REPO_PATH: &str = ".handbook/state/authoring/last_prompt.txt";
 
 fn write_file(path: &Path, contents: &[u8]) {
@@ -166,6 +171,24 @@ fn with_project_context_now_utc<T>(value: &str, action: impl FnOnce() -> T) -> T
     match previous {
         Some(previous) => std::env::set_var(AUTHOR_PROJECT_CONTEXT_NOW_UTC_ENV_VAR, previous),
         None => std::env::remove_var(AUTHOR_PROJECT_CONTEXT_NOW_UTC_ENV_VAR),
+    }
+
+    match result {
+        Ok(value) => value,
+        Err(payload) => resume_unwind(payload),
+    }
+}
+
+fn with_environment_inventory_now_utc<T>(value: &str, action: impl FnOnce() -> T) -> T {
+    let _guard = author_runtime_lock().lock().expect("author runtime lock");
+    let previous = std::env::var_os(AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR);
+    std::env::set_var(AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR, value);
+
+    let result = catch_unwind(AssertUnwindSafe(action));
+
+    match previous {
+        Some(previous) => std::env::set_var(AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR, previous),
+        None => std::env::remove_var(AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR),
     }
 
     match result {
@@ -484,6 +507,61 @@ fn legacy_placeholder_project_context_markdown() -> String {
             "- **Is anything live in production today?** no",
             "- **Is anything live in production today?** Unknown from local repo inspection; confirm before planning live changes.",
         )
+}
+
+fn valid_environment_inventory_input() -> EnvironmentInventoryStructuredInput {
+    parse_environment_inventory_structured_input_yaml(
+        r#"
+schema_version: "0.1.0"
+project_name: "Handbook"
+owner: "compiler-team"
+team: "System"
+repo_or_project_ref: "handbook"
+charter_ref: ".handbook/charter/CHARTER.md"
+project_context_ref: null
+environment_variables: []
+secret_handling:
+  charter_posture: "never store real credentials in repository artifacts"
+  storage_locations: ["operator secret store"]
+  rotation_expectations: "follow the owning provider policy"
+external_services: []
+runtime_assumptions:
+  listening_ports: "None"
+  filesystem_requirements: "write access to the managed repository"
+  persistent_storage: "repository-local canonical artifacts"
+  network_assumptions: "Unknown for future hosted use; offline authoring requires none"
+  performance_budgets: "normal CLI latency"
+local_development:
+  prerequisites: ["Rust stable toolchain"]
+  works_on_my_machine_prevention: "run workspace tests and install smoke"
+  environment_file_pattern: "None"
+ci:
+  system: "GitHub Actions"
+  required_secret_names: ["None"]
+  services: ["None"]
+  artifacts: ["test output"]
+production:
+  exists_today: false
+  hosting_model: "Not applicable"
+  runtime_environments: ["local CLI"]
+  required_secret_names: ["None"]
+  observability: "command output and CI logs"
+  backup_and_disaster_recovery: "git history"
+tooling:
+  primary_language_runtime: "Rust stable"
+  package_manager_build_system: "Cargo"
+  lockfiles: ["Cargo.lock"]
+  lint_type_test_tools: ["rustfmt", "clippy", "cargo test"]
+  minimum_versions: ["Rust 2021 edition"]
+update_contract:
+  exception_record_location: ".handbook/charter/CHARTER.md#exceptions"
+known_unknowns:
+  - item: "future hosted runtime requirements"
+    owner: "project owner"
+    revisit_trigger: "before adding a hosted deployment"
+"#,
+    )
+    .expect("valid environment-inventory input")
 }
 
 fn expected_environment_inventory_markdown(project_context_ref: &str) -> String {
@@ -1659,6 +1737,98 @@ fn project_context_starter_template_fixture_remains_the_pre_write_state_for_scaf
         .expect("starter project-context bytes"),
         setup_starter_template_bytes(CanonicalArtifactKind::ProjectContext)
     );
+}
+
+#[test]
+fn parse_environment_inventory_inputs_maps_malformed_yaml_refusal() {
+    let error = parse_environment_inventory_structured_input_yaml("project_name: [")
+        .expect_err("malformed input must refuse");
+    assert_eq!(
+        error.kind,
+        AuthorEnvironmentInventoryRefusalKind::MalformedStructuredInput
+    );
+}
+
+#[test]
+fn preflight_environment_inventory_from_input_is_non_mutating() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    scaffold_repo(dir.path());
+    write_file(
+        &dir.path().join(".handbook/charter/CHARTER.md"),
+        valid_charter_markdown().as_bytes(),
+    );
+    let canonical = dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH);
+    let before = std::fs::read(&canonical).expect("starter inventory");
+    let input = valid_environment_inventory_input();
+
+    validate_environment_inventory_structured_input(&input).expect("valid input");
+    preflight_author_environment_inventory_from_input(dir.path(), &input)
+        .expect("preflight should succeed");
+
+    assert_eq!(
+        std::fs::read(&canonical).expect("inventory after preflight"),
+        before
+    );
+    assert!(!dir
+        .path()
+        .join(".handbook/state/authoring/environment-inventory.lock")
+        .exists());
+}
+
+#[test]
+fn author_environment_inventory_from_input_writes_deterministically_without_prompt_capture() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    scaffold_repo(dir.path());
+    write_file(
+        &dir.path().join(".handbook/charter/CHARTER.md"),
+        valid_charter_markdown().as_bytes(),
+    );
+    let input = valid_environment_inventory_input();
+    let expected = with_environment_inventory_now_utc("2026-07-10T12:34:56Z", || {
+        render_environment_inventory_markdown(&input).expect("render expected inventory")
+    });
+
+    let result = with_environment_inventory_now_utc("2026-07-10T12:34:56Z", || {
+        author_environment_inventory_from_input(dir.path(), &input)
+            .expect("deterministic environment authoring")
+    });
+
+    assert_eq!(
+        result.canonical_repo_relative_path,
+        CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH
+    );
+    assert_eq!(
+        std::fs::read_to_string(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
+            .expect("canonical inventory"),
+        expected
+    );
+    assert!(!prompt_capture_path(dir.path()).exists());
+}
+
+#[test]
+fn author_environment_inventory_from_input_repairs_semantically_invalid_truth() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    scaffold_repo(dir.path());
+    write_file(
+        &dir.path().join(".handbook/charter/CHARTER.md"),
+        valid_charter_markdown().as_bytes(),
+    );
+    write_file(
+        &dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH),
+        b"invalid environment inventory\n",
+    );
+    let input = valid_environment_inventory_input();
+
+    with_environment_inventory_now_utc("2026-07-10T12:34:56Z", || {
+        author_environment_inventory_from_input(dir.path(), &input)
+            .expect("invalid truth should be repairable");
+    });
+
+    let markdown =
+        std::fs::read_to_string(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
+            .expect("repaired inventory");
+    assert!(markdown.starts_with("# Environment Inventory — Handbook"));
+    assert!(!prompt_capture_path(dir.path()).exists());
 }
 
 #[test]

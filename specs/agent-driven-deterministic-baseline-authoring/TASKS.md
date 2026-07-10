@@ -54,7 +54,7 @@ Plan reference: [`plan.md`](./plan.md)
     - Added deterministic rendering with an explicit timestamp, canonical heading validation, placeholder/render-safety checks, and secret-value refusal.
     - Added four focused engine tests; the engine test suite and dependency tree pass with no new Handbook dependency edge.
 
-- [ ] **P1.2: Add compiler validation/write adapters for environment inputs**
+- [x] **P1.2: Add compiler validation/write adapters for environment inputs**
   - Depends on: P1.1
   - Acceptance:
     - Compiler maps engine parse/validation errors into existing artifact refusals.
@@ -70,6 +70,10 @@ Plan reference: [`plan.md`](./plan.md)
     - `crates/compiler/src/author/environment_inventory_shell.rs`
     - `crates/compiler/src/author/mod.rs`
     - `crates/compiler/tests/author.rs`
+  - Result (2026-07-10):
+    - Added compiler parse/validate/render adapters and structured-input refusal mapping.
+    - Added non-mutating input preflight and guarded deterministic authoring while retaining the old synthesis path without new callers.
+    - Added malformed-input, non-mutation, deterministic-write, and safe-repair tests; all 63 compiler author tests and compiler check pass.
 
 - [ ] **P1.3: Cut environment CLI to `--from-inputs` and `--validate`**
   - Depends on: P1.2

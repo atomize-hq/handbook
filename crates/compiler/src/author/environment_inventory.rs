@@ -1,14 +1,27 @@
 use super::{
-    environment_inventory_core::validate_environment_inventory_markdown as validate_environment_inventory_markdown_core,
+    environment_inventory_core::{
+        parse_environment_inventory_structured_input_yaml as parse_environment_inventory_structured_input_yaml_core,
+        validate_environment_inventory_markdown as validate_environment_inventory_markdown_core,
+        validate_environment_inventory_structured_input as validate_environment_inventory_structured_input_core,
+        EnvironmentInventoryCoreError, EnvironmentInventoryCoreErrorKind,
+    },
     environment_inventory_shell::{
         preflight_author_environment_inventory as preflight_author_environment_inventory_shell,
         prepare_environment_inventory_authoring_inputs,
+        render_environment_inventory_markdown as render_environment_inventory_markdown_shell,
         synthesis_refusal as synthesis_refusal_shell, synthesize_environment_inventory_markdown,
         with_environment_inventory_authoring_lock, write_canonical_environment_inventory_markdown,
     },
 };
 use crate::layout::CANONICAL_ENVIRONMENT_INVENTORY_RELATIVE_PATH;
 use std::path::Path;
+
+pub use super::environment_inventory_core::{
+    EnvironmentCiInput, EnvironmentExternalServiceInput, EnvironmentInventoryStructuredInput,
+    EnvironmentKnownUnknownInput, EnvironmentLocalDevelopmentInput, EnvironmentProductionInput,
+    EnvironmentRuntimeAssumptionsInput, EnvironmentSecretHandlingInput, EnvironmentToolingInput,
+    EnvironmentUpdateContractInput, EnvironmentVariableInput,
+};
 
 pub const CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH: &str =
     CANONICAL_ENVIRONMENT_INVENTORY_RELATIVE_PATH;
@@ -17,6 +30,8 @@ pub const CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH: &str =
 pub enum AuthorEnvironmentInventoryRefusalKind {
     MissingSystemRoot,
     InvalidSystemRoot,
+    MalformedStructuredInput,
+    IncompleteStructuredInput,
     MissingRequiredCharter,
     InvalidUpstreamCanonicalTruth,
     ExistingCanonicalTruth,
@@ -46,10 +61,38 @@ pub struct AuthorEnvironmentInventoryResult {
     pub bytes_written: usize,
 }
 
+pub fn parse_environment_inventory_structured_input_yaml(
+    yaml: &str,
+) -> Result<EnvironmentInventoryStructuredInput, AuthorEnvironmentInventoryRefusal> {
+    parse_environment_inventory_structured_input_yaml_core(yaml)
+        .map_err(map_environment_inventory_core_error)
+}
+
+pub fn validate_environment_inventory_structured_input(
+    input: &EnvironmentInventoryStructuredInput,
+) -> Result<(), AuthorEnvironmentInventoryRefusal> {
+    validate_environment_inventory_structured_input_core(input)
+        .map_err(map_environment_inventory_core_error)
+}
+
+pub fn render_environment_inventory_markdown(
+    input: &EnvironmentInventoryStructuredInput,
+) -> Result<String, AuthorEnvironmentInventoryRefusal> {
+    render_environment_inventory_markdown_shell(input)
+}
+
 pub fn preflight_author_environment_inventory(
     repo_root: impl AsRef<Path>,
 ) -> Result<(), AuthorEnvironmentInventoryRefusal> {
     preflight_author_environment_inventory_shell(repo_root.as_ref())
+}
+
+pub fn preflight_author_environment_inventory_from_input(
+    repo_root: impl AsRef<Path>,
+    input: &EnvironmentInventoryStructuredInput,
+) -> Result<(), AuthorEnvironmentInventoryRefusal> {
+    validate_environment_inventory_structured_input(input)?;
+    preflight_author_environment_inventory(repo_root)
 }
 
 pub fn author_environment_inventory(
@@ -64,10 +107,60 @@ pub fn author_environment_inventory(
     })
 }
 
+pub fn author_environment_inventory_from_input(
+    repo_root: impl AsRef<Path>,
+    input: &EnvironmentInventoryStructuredInput,
+) -> Result<AuthorEnvironmentInventoryResult, AuthorEnvironmentInventoryRefusal> {
+    let repo_root = repo_root.as_ref();
+    preflight_author_environment_inventory_from_input(repo_root, input)?;
+    with_environment_inventory_authoring_lock(repo_root, || {
+        preflight_author_environment_inventory_from_input(repo_root, input)?;
+        let markdown = render_environment_inventory_markdown(input)?;
+        write_canonical_environment_inventory_markdown(repo_root, &markdown)
+    })
+}
+
 pub fn validate_environment_inventory_markdown(
     markdown: &str,
 ) -> Result<(), AuthorEnvironmentInventoryRefusal> {
     validate_environment_inventory_markdown_core(markdown).map_err(synthesis_refusal_shell)
+}
+
+pub(super) fn map_environment_inventory_core_error(
+    error: EnvironmentInventoryCoreError,
+) -> AuthorEnvironmentInventoryRefusal {
+    match error.kind {
+        EnvironmentInventoryCoreErrorKind::MalformedStructuredInput => {
+            AuthorEnvironmentInventoryRefusal {
+                kind: AuthorEnvironmentInventoryRefusalKind::MalformedStructuredInput,
+                summary: error.summary,
+                broken_subject: "structured environment-inventory input".to_string(),
+                next_safe_action:
+                    "repair the structured environment-inventory input and retry `handbook author environment-inventory --from-inputs <path|->`"
+                        .to_string(),
+            }
+        }
+        EnvironmentInventoryCoreErrorKind::IncompleteStructuredInput => {
+            AuthorEnvironmentInventoryRefusal {
+                kind: AuthorEnvironmentInventoryRefusalKind::IncompleteStructuredInput,
+                summary: error.summary,
+                broken_subject: "structured environment-inventory input".to_string(),
+                next_safe_action:
+                    "repair the structured environment-inventory input and retry `handbook author environment-inventory --from-inputs <path|->`"
+                        .to_string(),
+            }
+        }
+        EnvironmentInventoryCoreErrorKind::DeterministicRenderFailed => {
+            AuthorEnvironmentInventoryRefusal {
+                kind: AuthorEnvironmentInventoryRefusalKind::SynthesisFailed,
+                summary: error.summary,
+                broken_subject: "final environment inventory render".to_string(),
+                next_safe_action:
+                    "repair the structured environment-inventory input or deterministic render path and retry `handbook author environment-inventory --from-inputs <path|->`"
+                        .to_string(),
+            }
+        }
+    }
 }
 
 #[cfg(test)]

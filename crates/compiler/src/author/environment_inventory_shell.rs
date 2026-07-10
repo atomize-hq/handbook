@@ -1,12 +1,14 @@
 use super::{
     acquire_authoring_lock, baseline_authoring_eligibility, canonical_artifact_identity,
     environment_inventory::{
-        AuthorEnvironmentInventoryRefusal, AuthorEnvironmentInventoryRefusalKind,
-        AuthorEnvironmentInventoryResult,
+        map_environment_inventory_core_error, AuthorEnvironmentInventoryRefusal,
+        AuthorEnvironmentInventoryRefusalKind, AuthorEnvironmentInventoryResult,
     },
     environment_inventory_core::{
+        render_environment_inventory_markdown as render_environment_inventory_markdown_core,
         validate_synthesized_environment_inventory_markdown as validate_synthesized_environment_inventory_markdown_core,
-        EnvironmentInventoryValidationExpectations,
+        EnvironmentInventoryCoreError, EnvironmentInventoryCoreErrorKind,
+        EnvironmentInventoryStructuredInput, EnvironmentInventoryValidationExpectations,
     },
     format_repo_mutation_error, format_repo_write_path_error, render_exit_status,
     summarize_process_output,
@@ -25,16 +27,35 @@ use std::io::Write as IoWrite;
 use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
 use std::time::{SystemTime, UNIX_EPOCH};
+use time::macros::format_description;
+use time::OffsetDateTime;
 
 const AUTHOR_ENVIRONMENT_INVENTORY_CODEX_BIN_ENV_VAR: &str =
     "HANDBOOK_AUTHOR_ENVIRONMENT_INVENTORY_CODEX_BIN";
 const AUTHOR_ENVIRONMENT_INVENTORY_CODEX_MODEL_ENV_VAR: &str =
     "HANDBOOK_AUTHOR_ENVIRONMENT_INVENTORY_CODEX_MODEL";
+const AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR: &str =
+    "HANDBOOK_AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC";
+const NOW_UTC_FORMAT: &[time::format_description::FormatItem<'static>] =
+    format_description!("[year]-[month]-[day]T[hour]:[minute]:[second]Z");
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(super) struct EnvironmentInventorySynthesisInputs {
     charter_markdown: String,
     project_context_markdown: Option<String>,
+}
+
+pub(super) fn render_environment_inventory_markdown(
+    input: &EnvironmentInventoryStructuredInput,
+) -> Result<String, AuthorEnvironmentInventoryRefusal> {
+    let now_utc = resolve_environment_inventory_now_utc().map_err(|summary| {
+        map_environment_inventory_core_error(EnvironmentInventoryCoreError {
+            kind: EnvironmentInventoryCoreErrorKind::DeterministicRenderFailed,
+            summary,
+        })
+    })?;
+    render_environment_inventory_markdown_core(input, &now_utc)
+        .map_err(map_environment_inventory_core_error)
 }
 
 pub(super) fn preflight_author_environment_inventory(
@@ -532,6 +553,21 @@ fn invalid_upstream_canonical_truth_refusal(
         broken_subject: broken_subject.to_string(),
         next_safe_action,
     }
+}
+
+fn resolve_environment_inventory_now_utc() -> Result<String, String> {
+    if let Ok(value) = std::env::var(AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR) {
+        let trimmed = value.trim();
+        if !trimmed.is_empty() {
+            return Ok(trimmed.to_string());
+        }
+    }
+
+    OffsetDateTime::now_utc()
+        .format(NOW_UTC_FORMAT)
+        .map_err(|error| {
+            format!("failed to derive environment-inventory render timestamp: {error}")
+        })
 }
 
 fn map_authoring_lock_error(

@@ -25,9 +25,16 @@ pub use charter::{
     DEFAULT_EXCEPTION_RECORD_LOCATION,
 };
 pub use environment_inventory::{
-    author_environment_inventory, preflight_author_environment_inventory,
-    validate_environment_inventory_markdown, AuthorEnvironmentInventoryRefusal,
-    AuthorEnvironmentInventoryRefusalKind, AuthorEnvironmentInventoryResult,
+    author_environment_inventory, author_environment_inventory_from_input,
+    parse_environment_inventory_structured_input_yaml, preflight_author_environment_inventory,
+    preflight_author_environment_inventory_from_input, render_environment_inventory_markdown,
+    validate_environment_inventory_markdown, validate_environment_inventory_structured_input,
+    AuthorEnvironmentInventoryRefusal, AuthorEnvironmentInventoryRefusalKind,
+    AuthorEnvironmentInventoryResult, EnvironmentCiInput, EnvironmentExternalServiceInput,
+    EnvironmentInventoryStructuredInput, EnvironmentKnownUnknownInput,
+    EnvironmentLocalDevelopmentInput, EnvironmentProductionInput,
+    EnvironmentRuntimeAssumptionsInput, EnvironmentSecretHandlingInput, EnvironmentToolingInput,
+    EnvironmentUpdateContractInput, EnvironmentVariableInput,
     CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH,
 };
 pub use project_context::{
