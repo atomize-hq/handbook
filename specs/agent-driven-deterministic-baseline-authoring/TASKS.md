@@ -4,7 +4,7 @@ Plan reference: [`plan.md`](./plan.md)
 
 ## Phase 0 — Preflight
 
-- [ ] **P0.1: Refresh GitNexus and record the impact ledger**
+- [x] **P0.1: Refresh GitNexus and record the impact ledger**
   - Depends on: none
   - Acceptance:
     - GitNexus index matches implementation `HEAD`.
@@ -15,6 +15,11 @@ Plan reference: [`plan.md`](./plan.md)
     - `npx gitnexus status`
     - `npx gitnexus impact --repo system --direction upstream --include-tests <symbol>`
   - Files: no product files
+  - Result (2026-07-10):
+    - Refreshed the local index to `d6de19c`; `npx gitnexus status` reports up to date.
+    - Used the checkout path to disambiguate the repository from another registered `system` index.
+    - Fresh impact: `execute_author_charter_command` CRITICAL; `author_environment_inventory` HIGH; `synthesize_environment_inventory_markdown` HIGH; `author_charter_guided` MEDIUM; remaining required symbols LOW.
+    - HIGH/CRITICAL results were reported before product edits. Symbol-specific impact remains mandatory immediately before each implementation edit.
 
 - [ ] **P0.2: Re-run and record the author/pipeline baseline wall**
   - Depends on: P0.1
