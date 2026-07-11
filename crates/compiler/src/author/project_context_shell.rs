@@ -71,7 +71,7 @@ pub(super) fn write_canonical_project_context_markdown(
         mutation_refusal(
             format_repo_mutation_error(project_context_layout.canonical_target_relative(), err),
             "canonical project context write target",
-            "repair the blocked canonical project context path and retry `handbook author project-context`",
+            "repair the blocked canonical project context path and retry `handbook author project-context --from-inputs <path|->`",
         )
     })?;
 
@@ -84,7 +84,7 @@ pub(super) fn write_canonical_project_context_markdown(
 pub(super) fn project_context_inputs_required_refusal() -> AuthorProjectContextRefusal {
     AuthorProjectContextRefusal {
         kind: AuthorProjectContextRefusalKind::IncompleteStructuredInput,
-        summary: "project-context authoring requires guided answers or explicit structured inputs; use `handbook author project-context --from-inputs <path|->` or provide guided answers through the CLI".to_string(),
+        summary: "project-context authoring requires normalized structured inputs; use `handbook author project-context --from-inputs <path|->`".to_string(),
         broken_subject: "structured project-context input".to_string(),
         next_safe_action:
             "repair the structured project-context input and retry `handbook author project-context --from-inputs <path|->`"
@@ -138,7 +138,7 @@ fn validate_authoring_preconditions(
                 .to_string(),
             broken_subject: "canonical project context truth".to_string(),
             next_safe_action:
-                "inspect canonical artifact metadata and retry `handbook author project-context`"
+                "inspect canonical artifact metadata and retry `handbook author project-context --from-inputs <path|->`"
                     .to_string(),
         });
     }
@@ -149,11 +149,11 @@ fn validate_authoring_preconditions(
             return Err(AuthorProjectContextRefusal {
                 kind: AuthorProjectContextRefusalKind::ExistingCanonicalTruth,
                 summary:
-                    "canonical project context truth already exists as valid non-starter truth; `handbook author project-context` refuses to overwrite authored canonical truth"
+                    "canonical project context truth already exists as valid non-starter truth; `handbook author project-context --from-inputs <path|->` refuses to overwrite authored canonical truth"
                         .to_string(),
                 broken_subject: project_context_layout.canonical_target_relative().to_string(),
                 next_safe_action: format!(
-                    "inspect `{}` instead of rerunning `handbook author project-context`",
+                    "inspect `{}` instead of rerunning `handbook author project-context --from-inputs <path|->`",
                     project_context_layout.canonical_target_relative()
                 ),
             });
@@ -162,7 +162,7 @@ fn validate_authoring_preconditions(
             return Err(AuthorProjectContextRefusal {
                 kind: AuthorProjectContextRefusalKind::MutationRefused,
                 summary:
-                    "canonical project context truth is unreadable or path-invalid; repair it with `handbook setup refresh` before rerunning `handbook author project-context`"
+                    "canonical project context truth is unreadable or path-invalid; repair it with `handbook setup refresh` before rerunning `handbook author project-context --from-inputs <path|->`"
                         .to_string(),
                 broken_subject: project_context_layout.canonical_target_relative().to_string(),
                 next_safe_action: "run `handbook setup refresh`".to_string(),
@@ -175,7 +175,7 @@ fn validate_authoring_preconditions(
             mutation_refusal(
                 format_repo_write_path_error(project_context_layout.canonical_target_relative(), err),
                 "canonical project context write target",
-                "repair the blocked canonical project context path and retry `handbook author project-context`",
+                "repair the blocked canonical project context path and retry `handbook author project-context --from-inputs <path|->`",
             )
         })?;
 
@@ -199,7 +199,7 @@ fn render_timestamp_refusal(summary: String) -> AuthorProjectContextRefusal {
     mutation_refusal(
         summary,
         "project-context render timestamp",
-        "repair the project-context timestamp runtime and retry `handbook author project-context`",
+        "repair the project-context timestamp runtime and retry `handbook author project-context --from-inputs <path|->`",
     )
 }
 
@@ -212,7 +212,7 @@ fn map_authoring_lock_error(
         AuthoringLockError::WritePath(path_err) => mutation_refusal(
             format_repo_write_path_error(project_context_layout.lock_relative_path(), path_err),
             "project-context authoring lock",
-            "repair the blocked project-context authoring lock path and retry `handbook author project-context`",
+            "repair the blocked project-context authoring lock path and retry `handbook author project-context --from-inputs <path|->`",
         ),
         AuthoringLockError::Io { lock_path, source } => mutation_refusal(
             format!(
@@ -220,7 +220,7 @@ fn map_authoring_lock_error(
                 lock_path.display()
             ),
             "project-context authoring lock",
-            "wait for any in-progress `handbook author project-context` run to finish or repair the lock path, then retry `handbook author project-context`",
+            "wait for any in-progress `handbook author project-context --from-inputs <path|->` run to finish or repair the lock path, then retry `handbook author project-context --from-inputs <path|->`",
         ),
     }
 }

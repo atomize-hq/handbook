@@ -1,0 +1,71 @@
+schema_version: "0.1.0"
+project_name: "Handbook Runtime Smoke"
+owner: "compiler-team"
+team: "Handbook"
+repo_or_project_ref: "runtime-smoke"
+charter_ref: ".handbook/charter/CHARTER.md"
+project_summary:
+  what_this_project_is: "CLI and compiler for canonical planning artifacts and workflow proofs"
+  primary_surface: "CLI plus compiler library"
+  primary_users: "internal operators and automation"
+  key_workflows:
+    - "scaffold canonical .handbook state"
+    - "author baseline artifacts"
+    - "compile and inspect planning outputs"
+  non_goals: "End-user product delivery"
+operational_reality:
+  is_live_in_production_today: "no"
+  users: "internal operators only"
+  data_in_production: "none"
+  uptime_expectations: "best effort during active development"
+  incident_on_call_reality: "no formal on-call rotation today"
+  primary_risk_flags_present: "incorrect planning guidance and canonical write regressions"
+classification_implications:
+  project_type: "greenfield with an active brownfield codebase"
+  backward_compatibility_required: "no"
+  backward_compatibility_notes: "no external customers depend on the current compiler API"
+  migration_planning_required: "not applicable"
+  migration_planning_notes: "no legacy production data to migrate"
+  deprecation_policy_exists: "not yet"
+  deprecation_policy_notes: "internal interfaces can change with coordinated release notes"
+  rollout_controls_required: "lightweight only"
+  rollout_controls_notes: "feature branches and tests gate changes before merge"
+system_boundaries:
+  owned_areas:
+    - "compiler and CLI crates in this repository"
+    - "canonical .handbook artifact formats and setup flow"
+  external_dependencies:
+    - "local filesystem layout and git worktree state"
+integrations: []
+environments_and_delivery:
+  environments_that_exist: "local development and CI"
+  deployment_model: "cargo-driven local execution"
+  ci_cd_reality: "basic CI with compiler and CLI test coverage"
+  release_cadence: "repo-driven iterative releases"
+  config_and_secrets: "standard local environment variables and git config"
+  observability_stack: "test output and local command stderr"
+data_reality:
+  primary_data_stores: "repo-local markdown, yaml, and route-state files"
+  data_classification: "source code and internal planning metadata"
+  retention_requirements: "none beyond repository history"
+  backups_disaster_recovery: "git history plus local worktree backups"
+  existing_migrations_history: "none for production data"
+repo_codebase_reality:
+  codebase_exists_today: true
+  current_maturity: "medium-sized active Rust workspace"
+  key_modules_or_areas:
+    - "crates/compiler"
+    - "crates/cli"
+    - "core/library"
+  known_constraints_from_existing_code: "lane ownership and canonical artifact ordering must be preserved"
+constraints:
+  deadline_time_constraints: "must fit the current milestone split"
+  budget_constraints: "limited to local engineering time"
+  must_use_or_prohibited_tech: "must stay in Rust and preserve existing canonical paths"
+  compliance_legal_constraints: "none beyond repository policy"
+  performance_constraints: "compiler authoring should stay fast and deterministic"
+  security_constraints: "no writes outside canonical repo-owned targets"
+known_unknowns:
+  - item: "future external integration requirements"
+    owner: "Lane D"
+    revisit_trigger: "before adding an external integration"

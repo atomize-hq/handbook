@@ -1,0 +1,92 @@
+# ENVIRONMENT_INVENTORY_INPUTS.yaml (template)
+#
+# Purpose: stable, testable facts for deterministic ENVIRONMENT_INVENTORY.md authoring.
+# - Never put real secret values in this file.
+# - For secret variables, use `None`, `Redacted`, or `Secret store only` as the example.
+# - Use explicit `Unknown ...` statements and track them under `known_unknowns`.
+# - Use `None` or `Not applicable` only when that is confirmed project truth.
+#
+schema_version: "0.1.0"
+project_name: "{{PROJECT_NAME}}"
+owner: "project_owner"
+team: "project_team"
+repo_or_project_ref: "{{REPO_OR_PROJECT_REF}}"
+charter_ref: ".handbook/charter/CHARTER.md"
+project_context_ref: null # or .handbook/project_context/PROJECT_CONTEXT.md
+
+environment_variables: []
+# environment_variables:
+#   - name: "DATABASE_URL"
+#     required: true
+#     secret: true
+#     default_or_example: "Secret store only"
+#     validation_notes: "must be a valid connection URL"
+#     where_used: "application runtime"
+#     source_of_truth: "deployment-platform secret store"
+
+secret_handling:
+  charter_posture: ""
+  storage_locations:
+    - ""
+  rotation_expectations: ""
+
+external_services: []
+# external_services:
+#   - name: "Postgres"
+#     required: true
+#     environments:
+#       - "development"
+#       - "production"
+#     purpose: "application persistence"
+#     connection_details: "connection information is supplied through DATABASE_URL"
+#     notes: "credentials remain in the owning secret store"
+
+runtime_assumptions:
+  listening_ports: "None"
+  filesystem_requirements: "None"
+  persistent_storage: "None"
+  network_assumptions: "Unknown; confirm before deployment"
+  performance_budgets: "None"
+
+local_development:
+  prerequisites:
+    - ""
+  works_on_my_machine_prevention: ""
+  environment_file_pattern: "None"
+
+ci:
+  system: "Unknown; confirm before CI changes"
+  required_secret_names:
+    - "None"
+  services:
+    - "None"
+  artifacts:
+    - "None"
+
+production:
+  exists_today: false
+  hosting_model: "Not applicable"
+  runtime_environments:
+    - "None"
+  required_secret_names:
+    - "None"
+  observability: "None"
+  backup_and_disaster_recovery: "Not applicable"
+
+tooling:
+  primary_language_runtime: ""
+  package_manager_build_system: ""
+  lockfiles:
+    - "None"
+  lint_type_test_tools:
+    - ""
+  minimum_versions:
+    - "Unknown; confirm before toolchain changes"
+
+update_contract:
+  exception_record_location: ".handbook/charter/CHARTER.md#exceptions"
+
+known_unknowns:
+  - item: ""
+    owner: "project_owner"
+    revisit_trigger: ""

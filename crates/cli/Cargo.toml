@@ -16,5 +16,4 @@ handbook-flow = { path = "../flow" }
 handbook-pipeline = { path = "../pipeline" }
 
 [dev-dependencies]
-portable-pty = "0.8"
 tempfile = "3"

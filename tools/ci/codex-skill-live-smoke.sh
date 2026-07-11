@@ -8,7 +8,9 @@ STATE_ROOT="${XDG_STATE_HOME:-$HOME/.local/state}/handbook/intake/runs"
 HANDBOOK_HOME="$HOME/handbook"
 HANDBOOK_BINARY="$HANDBOOK_HOME/bin/handbook"
 RUNTIME_MANIFEST="$HANDBOOK_HOME/runtime-manifest.json"
-FIXTURE_INPUTS="$ROOT_DIR/tools/fixtures/charter_inputs/runtime_smoke_valid.yaml"
+CHARTER_FIXTURE_INPUTS="$ROOT_DIR/tools/fixtures/charter_inputs/runtime_smoke_valid.yaml"
+PROJECT_CONTEXT_FIXTURE_INPUTS="$ROOT_DIR/tools/fixtures/project_context_inputs/runtime_smoke_valid.yaml"
+ENVIRONMENT_INVENTORY_FIXTURE_INPUTS="$ROOT_DIR/tools/fixtures/environment_inventory_inputs/runtime_smoke_valid.yaml"
 RELEASE_VERSION="$(tr -d '[:space:]' <"$ROOT_DIR/VERSION")"
 export PATH="${CARGO_HOME:-$HOME/.cargo}/bin:$PATH"
 
@@ -92,6 +94,24 @@ assert_run_dir_file_set() {
     printf '%s\n' "$expected"
     exit 1
   }
+}
+
+assert_baseline_complete() {
+  local doctor_json_path="$1"
+
+  python3 - "$doctor_json_path" <<'PY'
+import json
+import sys
+
+with open(sys.argv[1], encoding="utf-8") as handle:
+    data = json.load(handle)
+if data.get("baseline_state") != "baseline_complete":
+    raise SystemExit(f"expected baseline_complete, got: {data.get('baseline_state')}")
+if data.get("status") != "baseline_complete":
+    raise SystemExit(f"expected complete status, got: {data.get('status')}")
+if data.get("blockers"):
+    raise SystemExit(f"expected no blockers, got: {data['blockers']}")
+PY
 }
 
 assert_no_misplaced_run_evidence() {
@@ -237,7 +257,9 @@ validate_runtime_contract() {
   for required in \
     "$HANDBOOK_HOME/resources/authoring/charter_authoring_method.md" \
     "$HANDBOOK_HOME/resources/charter/CHARTER_INPUTS.yaml.tmpl" \
-    "$HANDBOOK_HOME/resources/charter/charter_inputs_directive.md"; do
+    "$HANDBOOK_HOME/resources/charter/charter_inputs_directive.md" \
+    "$HANDBOOK_HOME/resources/project_context/PROJECT_CONTEXT_INPUTS.yaml.tmpl" \
+    "$HANDBOOK_HOME/resources/environment_inventory/ENVIRONMENT_INVENTORY_INPUTS.yaml.tmpl"; do
     [[ -f "$required" ]] || {
       echo "REFUSED: missing installed handbook home prerequisite: $required" >&2
       return 1
@@ -295,7 +317,7 @@ run_leaf_skill() {
 
   run_dir="$(mktemp -d "$STATE_ROOT/run.XXXXXX")"
   LAST_RUN_DIR="$run_dir"
-  cp "$FIXTURE_INPUTS" "$run_dir/charter_inputs.yaml"
+  cp "$CHARTER_FIXTURE_INPUTS" "$run_dir/charter_inputs.yaml"
   write_session_json "$run_dir/session.json" "$repo_root" "$HANDBOOK_HOME" "$MANIFEST_VERSION_VALUE"
 
   doctor_before_status="$(capture_doctor_json "$repo_root" "$run_dir/doctor.before.json")"
@@ -312,7 +334,7 @@ run_leaf_skill() {
     "$run_dir/validate.stdout.txt" \
     "$run_dir/validate.stderr.txt" \
     "$run_dir/validate.exit" \
-    "$HANDBOOK_BINARY" author charter --validate --from-inputs "$FIXTURE_INPUTS" >/dev/null
+    "$HANDBOOK_BINARY" author charter --validate --from-inputs "$CHARTER_FIXTURE_INPUTS" >/dev/null
 
   author_status="$(
     capture_in_repo \
@@ -320,7 +342,7 @@ run_leaf_skill() {
     "$run_dir/author.stdout.txt" \
     "$run_dir/author.stderr.txt" \
     "$run_dir/author.exit" \
-    "$HANDBOOK_BINARY" author charter --from-inputs "$FIXTURE_INPUTS"
+    "$HANDBOOK_BINARY" author charter --from-inputs "$CHARTER_FIXTURE_INPUTS"
   )"
 
   if [[ $author_status -eq 0 ]]; then
@@ -359,6 +381,39 @@ assert_run_dir_file_set "$happy_run_dir" "$(common_success_files)"
 assert_session_fields "$happy_run_dir/session.json" "$HANDBOOK_HOME"
 test -f "$happy_repo/.handbook/charter/CHARTER.md"
 
+echo "==> all-three deterministic baseline smoke without Codex or credentials"
+all_three_repo="$tmp_root/all-three-repo"
+offline_path="$tmp_root/no-codex-path"
+all_three_doctor="$tmp_root/all-three-doctor.json"
+mkdir -p "$all_three_repo" "$offline_path"
+git -C "$all_three_repo" init -q
+(
+  cd "$all_three_repo"
+  env -u CODEX_API_KEY -u OPENAI_API_KEY \
+    PATH="$offline_path" \
+    "$HANDBOOK_BINARY" setup >/dev/null
+  env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
+    "$HANDBOOK_BINARY" author charter --validate --from-inputs "$CHARTER_FIXTURE_INPUTS" >/dev/null
+  env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
+    "$HANDBOOK_BINARY" author charter --from-inputs "$CHARTER_FIXTURE_INPUTS" >/dev/null
+  env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
+    "$HANDBOOK_BINARY" author project-context --validate --from-inputs - \
+    <"$PROJECT_CONTEXT_FIXTURE_INPUTS" >/dev/null
+  env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
+    "$HANDBOOK_BINARY" author project-context --from-inputs - \
+    <"$PROJECT_CONTEXT_FIXTURE_INPUTS" >/dev/null
+  env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
+    "$HANDBOOK_BINARY" author environment-inventory --validate --from-inputs "$ENVIRONMENT_INVENTORY_FIXTURE_INPUTS" >/dev/null
+  env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
+    "$HANDBOOK_BINARY" author environment-inventory --from-inputs "$ENVIRONMENT_INVENTORY_FIXTURE_INPUTS" >/dev/null
+  env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
+    "$HANDBOOK_BINARY" doctor --json >"$all_three_doctor"
+)
+test -f "$all_three_repo/.handbook/charter/CHARTER.md"
+test -f "$all_three_repo/.handbook/project_context/PROJECT_CONTEXT.md"
+test -f "$all_three_repo/.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"
+assert_baseline_complete "$all_three_doctor"
+
 echo "==> existing charter refusal smoke"
 existing_repo="$tmp_root/existing-charter-repo"
 mkdir -p "$existing_repo"
@@ -366,7 +421,7 @@ git -C "$existing_repo" init -q
 (
   cd "$existing_repo"
   "$HANDBOOK_BINARY" setup >/dev/null
-  "$HANDBOOK_BINARY" author charter --from-inputs "$FIXTURE_INPUTS" >/dev/null
+  "$HANDBOOK_BINARY" author charter --from-inputs "$CHARTER_FIXTURE_INPUTS" >/dev/null
 )
 before_existing_count="$(count_run_dirs)"
 set +e

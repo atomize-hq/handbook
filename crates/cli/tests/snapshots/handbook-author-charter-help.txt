@@ -1,4 +1,4 @@
-Author canonical `.handbook/charter/CHARTER.md`
+Deterministically author canonical `.handbook/charter/CHARTER.md`
 
 Usage: handbook author charter [OPTIONS]
 

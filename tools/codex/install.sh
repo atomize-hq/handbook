@@ -186,6 +186,8 @@ mkdir -p \
   "$stage_root/charter-intake" \
   "$stage_root/resources/authoring" \
   "$stage_root/resources/charter" \
+  "$stage_root/resources/project_context" \
+  "$stage_root/resources/environment_inventory" \
   "$stage_root/.agents/skills"
 
 install_copy "$INSTALL_SOURCE_ROOT/SKILL.md.tmpl" "$stage_root/SKILL.md.tmpl"
@@ -198,6 +200,8 @@ install_copy "$DISCOVERY_SOURCE" "$stage_root/.agents/skills/$DISCOVERY_NAME"
 install_copy "$ROOT_DIR/core/library/authoring/charter_authoring_method.md" "$stage_root/resources/authoring/charter_authoring_method.md"
 install_copy "$ROOT_DIR/core/library/charter/CHARTER_INPUTS.yaml.tmpl" "$stage_root/resources/charter/CHARTER_INPUTS.yaml.tmpl"
 install_copy "$ROOT_DIR/core/library/charter/charter_inputs_directive.md" "$stage_root/resources/charter/charter_inputs_directive.md"
+install_copy "$ROOT_DIR/core/library/project_context/PROJECT_CONTEXT_INPUTS.yaml.tmpl" "$stage_root/resources/project_context/PROJECT_CONTEXT_INPUTS.yaml.tmpl"
+install_copy "$ROOT_DIR/core/library/environment_inventory/ENVIRONMENT_INVENTORY_INPUTS.yaml.tmpl" "$stage_root/resources/environment_inventory/ENVIRONMENT_INVENTORY_INPUTS.yaml.tmpl"
 
 export GENERATED_AT_UTC MANIFEST_VERSION HANDBOOK_RELEASE_VERSION
 export SKILL_NAME="$ROOT_SKILL_NAME"

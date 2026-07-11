@@ -18,11 +18,19 @@ pub use charter_core::{
     CharterRolloutControls, CharterRuntimeEnvironment, CharterStructuredInput, CharterSurface,
     DEFAULT_EXCEPTION_RECORD_LOCATION,
 };
+#[allow(deprecated)]
 pub use environment_inventory_core::{
-    validate_environment_inventory_markdown,
+    parse_environment_inventory_structured_input_yaml, render_environment_inventory_markdown,
+    validate_environment_inventory_markdown, validate_environment_inventory_structured_input,
     validate_required_heading_order_result as validate_environment_inventory_heading_order_result,
-    validate_synthesized_environment_inventory_markdown,
-    EnvironmentInventoryValidationExpectations, REQUIRED_ENVIRONMENT_INVENTORY_HEADINGS,
+    validate_synthesized_environment_inventory_markdown, EnvironmentCiInput,
+    EnvironmentExternalServiceInput, EnvironmentInventoryCoreError,
+    EnvironmentInventoryCoreErrorKind, EnvironmentInventoryStructuredInput,
+    EnvironmentInventoryValidationExpectations, EnvironmentKnownUnknownInput,
+    EnvironmentLocalDevelopmentInput, EnvironmentProductionInput,
+    EnvironmentRuntimeAssumptionsInput, EnvironmentSecretHandlingInput, EnvironmentToolingInput,
+    EnvironmentUpdateContractInput, EnvironmentVariableInput,
+    REQUIRED_ENVIRONMENT_INVENTORY_HEADINGS,
 };
 pub use project_context_core::{
     collect_render_safety_issues, normalize_project_context_text,

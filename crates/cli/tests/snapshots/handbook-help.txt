@@ -4,7 +4,7 @@ Usage: handbook [COMMAND]
 
 Commands:
   setup     Initialize or refresh canonical repo-local `.handbook/` inputs
-  author    Human-guided and deterministic baseline authoring surfaces
+  author    Deterministic agent-facing baseline authoring from normalized inputs
   pipeline  Pipeline operator surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations
   generate  Generate a reduced-v1 packet
   inspect   Inspect packet composition and decision evidence

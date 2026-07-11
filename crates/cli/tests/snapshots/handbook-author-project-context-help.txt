@@ -1,7 +1,8 @@
-Author canonical `.handbook/project_context/PROJECT_CONTEXT.md`
+Deterministically author canonical `.handbook/project_context/PROJECT_CONTEXT.md`
 
 Usage: handbook author project-context [OPTIONS]
 
 Options:
       --from-inputs <path|->  Read normalized structured inputs from a YAML file or `-` for stdin
+      --validate              Validate normalized structured inputs and repo write preconditions without mutation
   -h, --help                  Print help

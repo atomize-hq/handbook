@@ -7,8 +7,8 @@ use super::{
         CharterCoreError, CharterCoreErrorKind,
     },
     charter_shell::{
-        preflight_author_charter as preflight_author_charter_shell, synthesize_charter_markdown,
-        with_charter_authoring_lock, write_canonical_charter_markdown,
+        preflight_author_charter as preflight_author_charter_shell, with_charter_authoring_lock,
+        write_canonical_charter_markdown,
     },
 };
 use crate::layout::CANONICAL_CHARTER_RELATIVE_PATH;
@@ -30,11 +30,6 @@ pub const CANONICAL_CHARTER_REPO_PATH: &str = CANONICAL_CHARTER_RELATIVE_PATH;
 // `handbook author charter --from-inputs <path|->`
 // -> normalized `CharterStructuredInput`
 // -> compiler-owned deterministic render
-// -> guarded write to `.handbook/charter/CHARTER.md`
-//
-// `handbook author charter`
-// -> normalized `CharterStructuredInput`
-// -> Codex-backed guided synthesis
 // -> guarded write to `.handbook/charter/CHARTER.md`
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -142,21 +137,6 @@ pub fn author_charter(
     with_charter_authoring_lock(repo_root, || {
         preflight_author_charter_from_input(repo_root, input)?;
         let markdown = compiler_owned_charter_markdown(input)?;
-        write_canonical_charter_markdown(repo_root, &markdown)
-    })
-}
-
-pub fn author_charter_guided(
-    repo_root: impl AsRef<Path>,
-    input: &CharterStructuredInput,
-) -> Result<AuthorCharterResult, AuthorCharterRefusal> {
-    let repo_root = repo_root.as_ref();
-    validate_charter_structured_input(input)?;
-    preflight_author_charter_shell(repo_root)?;
-    with_charter_authoring_lock(repo_root, || {
-        validate_charter_structured_input(input)?;
-        preflight_author_charter_shell(repo_root)?;
-        let markdown = synthesize_charter_markdown(repo_root, input)?;
         write_canonical_charter_markdown(repo_root, &markdown)
     })
 }

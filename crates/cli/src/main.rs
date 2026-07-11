@@ -1,5 +1,4 @@
 mod author;
-mod author_prompting;
 mod doctor;
 mod doctor_rendering;
 mod exit_policy;
@@ -53,7 +52,7 @@ struct Cli {
 enum Command {
     /// Initialize or refresh canonical repo-local `.handbook/` inputs.
     Setup(SetupArgs),
-    /// Human-guided and deterministic baseline authoring surfaces.
+    /// Deterministic agent-facing baseline authoring from normalized inputs.
     Author(AuthorArgs),
     /// Pipeline operator surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations.
     Pipeline(PipelineArgs),
@@ -110,12 +109,12 @@ struct AuthorArgs {
 
 #[derive(Subcommand, Debug)]
 enum AuthorCommand {
-    /// Author canonical `.handbook/charter/CHARTER.md`.
+    /// Deterministically author canonical `.handbook/charter/CHARTER.md`.
     Charter(AuthorCharterArgs),
-    /// Author canonical `.handbook/project_context/PROJECT_CONTEXT.md`.
+    /// Deterministically author canonical `.handbook/project_context/PROJECT_CONTEXT.md`.
     ProjectContext(AuthorProjectContextArgs),
-    /// Author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`.
-    EnvironmentInventory,
+    /// Deterministically author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`.
+    EnvironmentInventory(AuthorEnvironmentInventoryArgs),
 }
 
 #[derive(clap::Args, Debug)]
@@ -133,6 +132,19 @@ struct AuthorProjectContextArgs {
     /// Read normalized structured inputs from a YAML file or `-` for stdin.
     #[arg(long = "from-inputs", value_name = "path|-")]
     from_inputs: Option<String>,
+    /// Validate normalized structured inputs and repo write preconditions without mutation.
+    #[arg(long)]
+    validate: bool,
+}
+
+#[derive(clap::Args, Debug)]
+struct AuthorEnvironmentInventoryArgs {
+    /// Read normalized structured inputs from a YAML file or `-` for stdin.
+    #[arg(long = "from-inputs", value_name = "path|-")]
+    from_inputs: Option<String>,
+    /// Validate normalized structured inputs and repo write preconditions without mutation.
+    #[arg(long)]
+    validate: bool,
 }
 
 #[derive(clap::Args, Debug)]
@@ -430,46 +442,6 @@ decision_records:
     }
 
     #[test]
-    fn execute_author_charter_command_renders_guided_success_with_injected_author() {
-        let dir = tempfile::tempdir().expect("tempdir");
-        let collect_called = Cell::new(false);
-        let author_called = Cell::new(false);
-
-        let rendered = execute_author_charter_command(
-            AuthorCharterArgs {
-                from_inputs: None,
-                validate: false,
-            },
-            || Ok(dir.path().to_path_buf()),
-            || true,
-            |_| Ok(()),
-            |_, _| panic!("guided mode should not run from-input preflight"),
-            || {
-                collect_called.set(true);
-                handbook_engine::parse_charter_structured_input_yaml(valid_structured_inputs_yaml())
-                    .map_err(|err| err.summary)
-            },
-            |repo_root, input| {
-                author_called.set(true);
-                assert_eq!(repo_root, dir.path());
-                assert_eq!(input.project.name, "Handbook");
-                Ok(handbook_compiler::AuthorCharterResult {
-                    canonical_repo_relative_path: ".handbook/charter/CHARTER.md",
-                    bytes_written: 42,
-                })
-            },
-            |_, _| panic!("guided mode should not run deterministic author"),
-        );
-
-        assert!(collect_called.get(), "guided input should be collected");
-        assert!(author_called.get(), "authoring closure should be called");
-        assert_eq!(rendered.exit_code, ExitCode::SUCCESS);
-        assert!(rendered.output.contains("OUTCOME: AUTHORED"));
-        assert!(rendered.output.contains("MODE: guided_interview"));
-        assert!(rendered.output.contains("SOURCE: interactive terminal"));
-    }
-
-    #[test]
     fn execute_author_charter_command_renders_file_success_with_injected_author() {
         let dir = tempfile::tempdir().expect("tempdir");
         let inputs_path = dir.path().join("charter-inputs.yaml");
@@ -482,11 +454,7 @@ decision_records:
                 validate: false,
             },
             || Ok(dir.path().to_path_buf()),
-            || panic!("file inputs should not check interactive tty state"),
-            |_| panic!("file inputs should not run guided preflight"),
             |_, _| Ok(()),
-            || panic!("file inputs should not run guided collection"),
-            |_, _| panic!("file inputs should not run guided author"),
             |repo_root, input| {
                 author_called.set(true);
                 assert_eq!(repo_root, dir.path());
@@ -504,71 +472,5 @@ decision_records:
         assert!(rendered
             .output
             .contains(&format!("SOURCE: {}", inputs_path.display())));
-    }
-
-    #[test]
-    fn execute_author_charter_command_refuses_without_tty_for_guided_mode() {
-        let dir = tempfile::tempdir().expect("tempdir");
-
-        let rendered = execute_author_charter_command(
-            AuthorCharterArgs {
-                from_inputs: None,
-                validate: false,
-            },
-            || Ok(dir.path().to_path_buf()),
-            || false,
-            |_| panic!("guided non-tty refusal should happen before preflight"),
-            |_, _| panic!("guided non-tty refusal should happen before from-input preflight"),
-            || panic!("guided collection should not run without tty"),
-            |_, _| panic!("authoring should not run without tty"),
-            |_, _| panic!("deterministic author should not run without tty"),
-        );
-
-        assert_eq!(rendered.exit_code, ExitCode::from(1));
-        assert!(rendered.output.contains("OUTCOME: REFUSED"));
-        assert!(rendered.output.contains("CATEGORY: NonInteractiveRefusal"));
-        assert!(rendered
-            .output
-            .contains("run `handbook author charter --from-inputs <path|->`"));
-    }
-
-    #[test]
-    fn execute_author_charter_command_refuses_during_preflight_before_guided_collection() {
-        let dir = tempfile::tempdir().expect("tempdir");
-        let collect_called = Cell::new(false);
-
-        let rendered = execute_author_charter_command(
-            AuthorCharterArgs {
-                from_inputs: None,
-                validate: false,
-            },
-            || Ok(dir.path().to_path_buf()),
-            || true,
-            |_| {
-                Err(handbook_compiler::AuthorCharterRefusal {
-                    kind: handbook_compiler::AuthorCharterRefusalKind::ExistingCanonicalTruth,
-                    summary: "canonical charter truth already exists".to_string(),
-                    broken_subject: ".handbook/charter/CHARTER.md".to_string(),
-                    next_safe_action:
-                        "inspect `.handbook/charter/CHARTER.md` instead of rerunning `handbook author charter`"
-                            .to_string(),
-                })
-            },
-            |_, _| panic!("guided preflight refusal should happen before from-input preflight"),
-            || {
-                collect_called.set(true);
-                panic!("guided collection should not run after preflight refusal")
-            },
-            |_, _| panic!("authoring should not run after preflight refusal"),
-            |_, _| panic!("deterministic author should not run after preflight refusal"),
-        );
-
-        assert!(
-            !collect_called.get(),
-            "guided input should not be collected"
-        );
-        assert_eq!(rendered.exit_code, ExitCode::from(1));
-        assert!(rendered.output.contains("OUTCOME: REFUSED"));
-        assert!(rendered.output.contains("CATEGORY: ExistingCanonicalTruth"));
     }
 }

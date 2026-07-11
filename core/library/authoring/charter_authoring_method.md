@@ -2,17 +2,17 @@
 
 Author only the canonical charter at `.handbook/charter/CHARTER.md`.
 
-Use this method for both shipped M7 entrypoints:
+Use only the deterministic structured-input entrypoint:
 
-- `handbook author charter` is the human-guided surface.
-- `handbook author charter --from-inputs <path|->` is the agent and automation surface.
+- `handbook author charter --validate --from-inputs <path|->` validates without mutation.
+- `handbook author charter --from-inputs <path|->` renders and writes the canonical charter.
 
 Method rules:
 
-- Normalize interview answers into structured charter inputs before synthesis.
-- Ask at most one bounded clarification when a required answer is empty or unusably vague after normalization.
-- Do not run per-answer synthesis calls during the interview.
-- Treat the completed structured input document as the source of truth for the final charter synthesis.
+- Gather concrete repository facts into normalized structured charter inputs.
+- Refuse or record an explicit known unknown when a required fact cannot be established; do not invent an answer.
+- Treat the completed structured input document as the source of truth for deterministic rendering.
+- Validate the input before mutation.
 - Refuse instead of overwriting an existing non-starter canonical charter.
 - Write only `.handbook/charter/CHARTER.md`; do not persist derived mirrors.
 

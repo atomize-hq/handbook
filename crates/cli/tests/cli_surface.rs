@@ -4572,6 +4572,35 @@ fn setup_refresh_help_matches_snapshot() {
 }
 
 #[test]
+fn author_help_matches_snapshot() {
+    assert_help_snapshot(&["author", "--help"], "handbook-author-help.txt");
+}
+
+#[test]
+fn author_charter_help_matches_snapshot() {
+    assert_help_snapshot(
+        &["author", "charter", "--help"],
+        "handbook-author-charter-help.txt",
+    );
+}
+
+#[test]
+fn author_project_context_help_matches_snapshot() {
+    assert_help_snapshot(
+        &["author", "project-context", "--help"],
+        "handbook-author-project-context-help.txt",
+    );
+}
+
+#[test]
+fn author_environment_inventory_help_matches_snapshot() {
+    assert_help_snapshot(
+        &["author", "environment-inventory", "--help"],
+        "handbook-author-environment-inventory-help.txt",
+    );
+}
+
+#[test]
 fn bare_setup_routes_to_init_on_uninitialized_repo() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
@@ -5242,19 +5271,19 @@ fn doctor_retry_after_repair_reports_ready_after_repair() {
     );
     assert!(
         second_stdout.contains(
-            "CHARTER [.handbook/charter/CHARTER.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author charter`"
+            "CHARTER [.handbook/charter/CHARTER.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author charter --from-inputs <path|->`"
         ),
         "{second_stdout}"
     );
     assert!(
         second_stdout.contains(
-            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author project-context`"
+            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author project-context --from-inputs <path|->`"
         ),
         "{second_stdout}"
     );
     assert!(
         second_stdout.contains(
-            "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author environment-inventory`"
+            "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author environment-inventory --from-inputs <path|->`"
         ),
         "{second_stdout}"
     );
@@ -5288,7 +5317,7 @@ fn doctor_rejects_legacy_placeholder_project_context_truth() {
     assert!(stdout.contains("INVALID_BASELINE"), "{stdout}");
     assert!(
         stdout.contains(
-            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: INVALID ACTION: run `handbook author project-context`"
+            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: INVALID ACTION: run `handbook author project-context --from-inputs <path|->`"
         ),
         "{stdout}"
     );
@@ -5298,8 +5327,8 @@ fn doctor_rejects_legacy_placeholder_project_context_truth() {
 fn doctor_marks_empty_charter_as_invalid_baseline() {
     assert_doctor_empty_baseline_invalid(
         ".handbook/charter/CHARTER.md",
-        "NEXT SAFE ACTION: run `handbook author charter`",
-        "CHARTER [.handbook/charter/CHARTER.md] STATUS: EMPTY ACTION: run `handbook author charter`",
+        "NEXT SAFE ACTION: run `handbook author charter --from-inputs <path|->`",
+        "CHARTER [.handbook/charter/CHARTER.md] STATUS: EMPTY ACTION: run `handbook author charter --from-inputs <path|->`",
     );
 }
 
@@ -5307,8 +5336,8 @@ fn doctor_marks_empty_charter_as_invalid_baseline() {
 fn doctor_marks_empty_project_context_as_invalid_baseline() {
     assert_doctor_empty_baseline_invalid(
         ".handbook/project_context/PROJECT_CONTEXT.md",
-        "NEXT SAFE ACTION: run `handbook author project-context`",
-        "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: EMPTY ACTION: run `handbook author project-context`",
+        "NEXT SAFE ACTION: run `handbook author project-context --from-inputs <path|->`",
+        "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: EMPTY ACTION: run `handbook author project-context --from-inputs <path|->`",
     );
 }
 
@@ -5316,8 +5345,8 @@ fn doctor_marks_empty_project_context_as_invalid_baseline() {
 fn doctor_marks_empty_environment_inventory_as_invalid_baseline() {
     assert_doctor_empty_baseline_invalid(
         ".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-        "NEXT SAFE ACTION: run `handbook author environment-inventory`",
-        "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: EMPTY ACTION: run `handbook author environment-inventory`",
+        "NEXT SAFE ACTION: run `handbook author environment-inventory --from-inputs <path|->`",
+        "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: EMPTY ACTION: run `handbook author environment-inventory --from-inputs <path|->`",
     );
 }
 
@@ -5417,7 +5446,7 @@ fn generate_blocks_invalid_required_charter_with_required_artifact_invalid() {
         [
             "OUTCOME: REFUSED",
             "OBJECT: planning.packet",
-            "NEXT SAFE ACTION: run `handbook author charter`",
+            "NEXT SAFE ACTION: run `handbook author charter --from-inputs <path|->`",
         ],
     );
     assert!(stdout.contains("CATEGORY: RequiredArtifactInvalid"));
@@ -5493,19 +5522,19 @@ fn setup_scaffold_does_not_satisfy_doctor_or_generate_until_required_truth_is_re
     assert!(doctor_stdout.contains("ROOT STATUS: OK"), "{doctor_stdout}");
     assert!(
         doctor_stdout.contains(
-            "CHARTER [.handbook/charter/CHARTER.md] STATUS: STARTER_OWNED ACTION: run `handbook author charter`"
+            "CHARTER [.handbook/charter/CHARTER.md] STATUS: STARTER_OWNED ACTION: run `handbook author charter --from-inputs <path|->`"
         ),
         "{doctor_stdout}"
     );
     assert!(
         doctor_stdout.contains(
-            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: STARTER_OWNED ACTION: run `handbook author project-context`"
+            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: STARTER_OWNED ACTION: run `handbook author project-context --from-inputs <path|->`"
         ),
         "{doctor_stdout}"
     );
     assert!(
         doctor_stdout.contains(
-            "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: STARTER_OWNED ACTION: run `handbook author environment-inventory`"
+            "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: STARTER_OWNED ACTION: run `handbook author environment-inventory --from-inputs <path|->`"
         ),
         "{doctor_stdout}"
     );
@@ -5521,7 +5550,7 @@ fn setup_scaffold_does_not_satisfy_doctor_or_generate_until_required_truth_is_re
         [
             "OUTCOME: REFUSED",
             "OBJECT: planning.packet",
-            "NEXT SAFE ACTION: run `handbook author charter`",
+            "NEXT SAFE ACTION: run `handbook author charter --from-inputs <path|->`",
         ],
     );
     assert!(generate_stdout.contains("CATEGORY: RequiredArtifactStarterTemplate"));
@@ -6866,19 +6895,19 @@ fn doctor_blocks_when_optional_project_context_path_is_malformed() {
     );
     assert!(
         stdout.contains(
-            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: INVALID ACTION: run `handbook author project-context`"
+            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: INVALID ACTION: run `handbook author project-context --from-inputs <path|->`"
         ),
         "{stdout}"
     );
     assert!(
         stdout.contains(
-            "CHARTER [.handbook/charter/CHARTER.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author charter`"
+            "CHARTER [.handbook/charter/CHARTER.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author charter --from-inputs <path|->`"
         ),
         "{stdout}"
     );
     assert!(
         stdout.contains(
-            "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author environment-inventory`"
+            "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author environment-inventory --from-inputs <path|->`"
         ),
         "{stdout}"
     );

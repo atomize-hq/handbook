@@ -568,13 +568,13 @@ fn render_next_safe_action_value(action: &handbook_compiler::NextSafeAction) -> 
             "run `handbook setup refresh`".to_string()
         }
         handbook_compiler::NextSafeAction::RunAuthorCharter => {
-            "run `handbook author charter`".to_string()
+            "run `handbook author charter --from-inputs <path|->`".to_string()
         }
         handbook_compiler::NextSafeAction::RunAuthorProjectContext => {
-            "run `handbook author project-context`".to_string()
+            "run `handbook author project-context --from-inputs <path|->`".to_string()
         }
         handbook_compiler::NextSafeAction::RunAuthorEnvironmentInventory => {
-            "run `handbook author environment-inventory`".to_string()
+            "run `handbook author environment-inventory --from-inputs <path|->`".to_string()
         }
         handbook_compiler::NextSafeAction::CreateSystemRoot {
             canonical_repo_relative_path,

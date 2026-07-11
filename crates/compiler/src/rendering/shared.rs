@@ -352,12 +352,14 @@ mod recovery_shell {
             NextSafeAction::RunSetup => "run `handbook setup`".to_string(),
             NextSafeAction::RunSetupInit => "run `handbook setup init`".to_string(),
             NextSafeAction::RunSetupRefresh => "run `handbook setup refresh`".to_string(),
-            NextSafeAction::RunAuthorCharter => "run `handbook author charter`".to_string(),
+            NextSafeAction::RunAuthorCharter => {
+                "run `handbook author charter --from-inputs <path|->`".to_string()
+            }
             NextSafeAction::RunAuthorProjectContext => {
-                "run `handbook author project-context`".to_string()
+                "run `handbook author project-context --from-inputs <path|->`".to_string()
             }
             NextSafeAction::RunAuthorEnvironmentInventory => {
-                "run `handbook author environment-inventory`".to_string()
+                "run `handbook author environment-inventory --from-inputs <path|->`".to_string()
             }
             NextSafeAction::CreateSystemRoot {
                 canonical_repo_relative_path,

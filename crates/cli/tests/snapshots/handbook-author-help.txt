@@ -1,11 +1,11 @@
-Human-guided and deterministic baseline authoring surfaces
+Deterministic agent-facing baseline authoring from normalized inputs
 
 Usage: handbook author [COMMAND]
 
 Commands:
-  charter                Author canonical `.handbook/charter/CHARTER.md`
-  project-context        Author canonical `.handbook/project_context/PROJECT_CONTEXT.md`
-  environment-inventory  Author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
+  charter                Deterministically author canonical `.handbook/charter/CHARTER.md`
+  project-context        Deterministically author canonical `.handbook/project_context/PROJECT_CONTEXT.md`
+  environment-inventory  Deterministically author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
 
 Options:
   -h, --help  Print help

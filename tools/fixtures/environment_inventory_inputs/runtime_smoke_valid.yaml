@@ -1,0 +1,47 @@
+schema_version: "0.1.0"
+project_name: "Handbook Runtime Smoke"
+owner: "compiler-team"
+team: "Handbook"
+repo_or_project_ref: "runtime-smoke"
+charter_ref: ".handbook/charter/CHARTER.md"
+project_context_ref: ".handbook/project_context/PROJECT_CONTEXT.md"
+environment_variables: []
+secret_handling:
+  charter_posture: "never store real credentials in repository artifacts"
+  storage_locations: ["operator secret store"]
+  rotation_expectations: "follow the owning provider policy"
+external_services: []
+runtime_assumptions:
+  listening_ports: "None"
+  filesystem_requirements: "write access to the managed repository"
+  persistent_storage: "repository-local canonical artifacts"
+  network_assumptions: "Unknown for future hosted use; offline authoring requires none"
+  performance_budgets: "normal CLI latency"
+local_development:
+  prerequisites: ["Rust stable toolchain"]
+  works_on_my_machine_prevention: "run workspace tests and install smoke"
+  environment_file_pattern: "None"
+ci:
+  system: "GitHub Actions"
+  required_secret_names: ["None"]
+  services: ["None"]
+  artifacts: ["test output"]
+production:
+  exists_today: false
+  hosting_model: "Not applicable"
+  runtime_environments: ["local CLI"]
+  required_secret_names: ["None"]
+  observability: "command output and CI logs"
+  backup_and_disaster_recovery: "git history"
+tooling:
+  primary_language_runtime: "Rust stable"
+  package_manager_build_system: "Cargo"
+  lockfiles: ["Cargo.lock"]
+  lint_type_test_tools: ["rustfmt", "clippy", "cargo test"]
+  minimum_versions: ["Rust 2021 edition"]
+update_contract:
+  exception_record_location: ".handbook/charter/CHARTER.md#exceptions"
+known_unknowns:
+  - item: "future hosted runtime requirements"
+    owner: "project owner"
+    revisit_trigger: "before adding a hosted deployment"

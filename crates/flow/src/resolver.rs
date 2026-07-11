@@ -488,7 +488,7 @@ pub fn resolve_with_contract(
         "c03.provenance schema_version={} manifest_generation_version={} fingerprint_sha256={}",
         manifest.version.schema.version,
         manifest.version.generation,
-        &manifest.freshness.fingerprint_sha256
+        manifest.freshness.fingerprint_sha256
     ));
 
     for artifact in &manifest.artifacts {

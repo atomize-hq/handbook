@@ -37,10 +37,10 @@ export HANDBOOK_HOME="$handbook_home"
 Workflow:
 
 1. Review `$HANDBOOK_HOME/resources/authoring/charter_authoring_method.md` and `$HANDBOOK_HOME/resources/charter/charter_inputs_directive.md`.
-2. Gather only the charter facts needed to fill the normalized YAML shape from `$HANDBOOK_HOME/resources/charter/CHARTER_INPUTS.yaml.tmpl`.
+2. Gather concrete repository facts needed to fill the normalized YAML shape from `$HANDBOOK_HOME/resources/charter/CHARTER_INPUTS.yaml.tmpl`; do not run a human interview or invent missing facts.
 3. Write the normalized YAML to a temporary file outside the target repo.
 4. Validate without mutation: `$HANDBOOK_HOME/bin/handbook author charter --validate --from-inputs <path|->`.
 5. Author the charter: `$HANDBOOK_HOME/bin/handbook author charter --from-inputs <path|->`.
-6. Treat `handbook doctor --json` as the only machine-parsed evidence surface after authoring.
+6. Treat `$HANDBOOK_HOME/bin/handbook doctor --json` as the only machine-parsed evidence surface after authoring.
 
 Repo-local `.agents/skills/handbook*` trees remain thin generated projections. They are never the runtime payload root.
