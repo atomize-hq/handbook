@@ -208,7 +208,7 @@ Plan reference: [`plan.md`](./plan.md)
 
 ## Phase 4 — Shell, Recovery, And Skill Contract
 
-- [ ] **P4.1: Align help, output, doctor, and blocker recovery guidance**
+- [x] **P4.1: Align help, output, doctor, and blocker recovery guidance**
   - Depends on: P1.3, P2.1, P2.2
   - Acceptance:
     - Author help says deterministic/agent-facing, not human-guided.
@@ -226,6 +226,10 @@ Plan reference: [`plan.md`](./plan.md)
     - `crates/compiler/src/blocker.rs` only if typed next-action construction requires it
     - `crates/cli/tests/cli_surface.rs`
     - `crates/cli/tests/snapshots/handbook-author-help.txt`
+  - Result (2026-07-10):
+    - Author help now describes deterministic agent-facing authoring, and all three subcommand snapshots enforce the shared file/stdin plus validation grammar.
+    - Doctor checklist, blocker rendering, and author refusal recovery now point to executable `--from-inputs <path|->` commands; obsolete guided-answer wording is gone.
+    - CLI surface (123), CLI author (22), and compiler doctor (10) tests pass without changing baseline verdict or canonical-validity behavior.
 
 - [ ] **P4.2: Package all deterministic input resources through existing skills**
   - Depends on: P1.1, P1.3, P2.1, P2.2

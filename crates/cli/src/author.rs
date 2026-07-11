@@ -73,7 +73,7 @@ fn author_environment_inventory_command(args: AuthorEnvironmentInventoryArgs) ->
                     "WorkingDirectoryUnavailable",
                     &format!("failed to determine repo root: {err}"),
                     "current working directory",
-                    "repair the current working directory and retry `handbook author environment-inventory`",
+                    "repair the current working directory and retry `handbook author environment-inventory --from-inputs <path|->`",
                 )
             );
             return ExitCode::from(1);

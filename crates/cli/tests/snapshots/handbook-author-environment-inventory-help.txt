@@ -1,4 +1,4 @@
-Author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
+Deterministically author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
 
 Usage: handbook author environment-inventory [OPTIONS]
 

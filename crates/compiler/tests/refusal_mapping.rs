@@ -162,7 +162,7 @@ fn refusal_required_artifact_starter_template() {
     );
     assert_eq!(
         render_next_safe_action_value(&refusal.next_safe_action),
-        "run `handbook author charter`"
+        "run `handbook author charter --from-inputs <path|->`"
     );
 }
 
@@ -189,7 +189,7 @@ fn refusal_required_artifact_invalid() {
     );
     assert_eq!(
         render_next_safe_action_value(&refusal.next_safe_action),
-        "run `handbook author charter`"
+        "run `handbook author charter --from-inputs <path|->`"
     );
 }
 

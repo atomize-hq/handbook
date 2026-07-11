@@ -52,7 +52,7 @@ struct Cli {
 enum Command {
     /// Initialize or refresh canonical repo-local `.handbook/` inputs.
     Setup(SetupArgs),
-    /// Human-guided and deterministic baseline authoring surfaces.
+    /// Deterministic agent-facing baseline authoring from normalized inputs.
     Author(AuthorArgs),
     /// Pipeline operator surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations.
     Pipeline(PipelineArgs),
@@ -109,11 +109,11 @@ struct AuthorArgs {
 
 #[derive(Subcommand, Debug)]
 enum AuthorCommand {
-    /// Author canonical `.handbook/charter/CHARTER.md`.
+    /// Deterministically author canonical `.handbook/charter/CHARTER.md`.
     Charter(AuthorCharterArgs),
-    /// Author canonical `.handbook/project_context/PROJECT_CONTEXT.md`.
+    /// Deterministically author canonical `.handbook/project_context/PROJECT_CONTEXT.md`.
     ProjectContext(AuthorProjectContextArgs),
-    /// Author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`.
+    /// Deterministically author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`.
     EnvironmentInventory(AuthorEnvironmentInventoryArgs),
 }
 

@@ -93,7 +93,7 @@ pub(super) fn write_canonical_environment_inventory_markdown(
         ),
         broken_subject: "canonical environment inventory write target".to_string(),
         next_safe_action:
-            "repair the blocked canonical environment inventory path and retry `handbook author environment-inventory`"
+            "repair the blocked canonical environment inventory path and retry `handbook author environment-inventory --from-inputs <path|->`"
                 .to_string(),
     })?;
 
@@ -151,7 +151,7 @@ fn validate_environment_inventory_authoring_preconditions(
                 .to_string(),
             broken_subject: "canonical environment inventory truth".to_string(),
             next_safe_action:
-                "inspect canonical artifact metadata and retry `handbook author environment-inventory`"
+                "inspect canonical artifact metadata and retry `handbook author environment-inventory --from-inputs <path|->`"
                     .to_string(),
         });
     }
@@ -162,13 +162,13 @@ fn validate_environment_inventory_authoring_preconditions(
             return Err(AuthorEnvironmentInventoryRefusal {
                 kind: AuthorEnvironmentInventoryRefusalKind::ExistingCanonicalTruth,
                 summary:
-                    "canonical environment inventory truth already exists as valid non-starter truth; `handbook author environment-inventory` refuses to overwrite authored canonical truth"
+                    "canonical environment inventory truth already exists as valid non-starter truth; `handbook author environment-inventory --from-inputs <path|->` refuses to overwrite authored canonical truth"
                         .to_string(),
                 broken_subject: environment_inventory_layout
                     .canonical_target_relative()
                     .to_string(),
                 next_safe_action: format!(
-                    "inspect `{}` instead of rerunning `handbook author environment-inventory`",
+                    "inspect `{}` instead of rerunning `handbook author environment-inventory --from-inputs <path|->`",
                     environment_inventory_layout.canonical_target_relative()
                 ),
             });
@@ -177,7 +177,7 @@ fn validate_environment_inventory_authoring_preconditions(
             return Err(AuthorEnvironmentInventoryRefusal {
                 kind: AuthorEnvironmentInventoryRefusalKind::MutationRefused,
                 summary:
-                    "canonical environment inventory truth is unreadable or path-invalid; repair it with `handbook setup refresh` before rerunning `handbook author environment-inventory`"
+                    "canonical environment inventory truth is unreadable or path-invalid; repair it with `handbook setup refresh` before rerunning `handbook author environment-inventory --from-inputs <path|->`"
                         .to_string(),
                 broken_subject: environment_inventory_layout
                     .canonical_target_relative()
@@ -196,7 +196,7 @@ fn validate_environment_inventory_authoring_preconditions(
             ),
             broken_subject: "canonical environment inventory write target".to_string(),
             next_safe_action:
-                "repair the blocked canonical environment inventory path and retry `handbook author environment-inventory`"
+                "repair the blocked canonical environment inventory path and retry `handbook author environment-inventory --from-inputs <path|->`"
                     .to_string(),
         })?;
 
@@ -216,7 +216,7 @@ fn required_charter_markdown(
                 "canonical charter truth is missing; environment inventory authoring requires a completed charter first"
                     .to_string(),
             broken_subject: ".handbook/charter/CHARTER.md".to_string(),
-            next_safe_action: "run `handbook author charter`".to_string(),
+            next_safe_action: "run `handbook author charter --from-inputs <path|->`".to_string(),
         }),
         BaselineArtifactVerdict::Empty => Err(AuthorEnvironmentInventoryRefusal {
             kind: AuthorEnvironmentInventoryRefusalKind::MissingRequiredCharter,
@@ -224,7 +224,7 @@ fn required_charter_markdown(
                 "canonical charter truth is empty; environment inventory authoring requires a completed charter first"
                     .to_string(),
             broken_subject: ".handbook/charter/CHARTER.md".to_string(),
-            next_safe_action: "run `handbook author charter`".to_string(),
+            next_safe_action: "run `handbook author charter --from-inputs <path|->`".to_string(),
         }),
         BaselineArtifactVerdict::StarterOwned => Err(AuthorEnvironmentInventoryRefusal {
             kind: AuthorEnvironmentInventoryRefusalKind::MissingRequiredCharter,
@@ -232,7 +232,7 @@ fn required_charter_markdown(
                 "canonical charter truth still contains the shipped starter template; environment inventory authoring requires a completed charter first"
                     .to_string(),
             broken_subject: ".handbook/charter/CHARTER.md".to_string(),
-            next_safe_action: "run `handbook author charter`".to_string(),
+            next_safe_action: "run `handbook author charter --from-inputs <path|->`".to_string(),
         }),
         BaselineArtifactVerdict::IngestInvalid => Err(invalid_upstream_canonical_truth_refusal(
             ".handbook/charter/CHARTER.md",
@@ -243,7 +243,7 @@ fn required_charter_markdown(
             Err(invalid_upstream_canonical_truth_refusal(
                 ".handbook/charter/CHARTER.md",
                 format!("canonical charter truth is invalid: {summary}"),
-                "run `handbook author charter`".to_string(),
+                "run `handbook author charter --from-inputs <path|->`".to_string(),
             ))
         }
         BaselineArtifactVerdict::ValidCanonicalTruth { markdown } => Ok(markdown),
@@ -270,7 +270,7 @@ fn optional_project_context_markdown(
             Err(invalid_upstream_canonical_truth_refusal(
                 ".handbook/project_context/PROJECT_CONTEXT.md",
                 format!("canonical project context truth is invalid: {summary}"),
-                "run `handbook author project-context`".to_string(),
+                "run `handbook author project-context --from-inputs <path|->`".to_string(),
             ))
         }
         BaselineArtifactVerdict::ValidCanonicalTruth { markdown } => {
@@ -328,7 +328,7 @@ fn map_authoring_lock_error(
             ),
             broken_subject: "environment inventory authoring lock".to_string(),
             next_safe_action:
-                "repair the blocked environment inventory authoring lock path and retry `handbook author environment-inventory`"
+                "repair the blocked environment inventory authoring lock path and retry `handbook author environment-inventory --from-inputs <path|->`"
                     .to_string(),
         },
         AuthoringLockError::Io { lock_path, source } => AuthorEnvironmentInventoryRefusal {
@@ -339,7 +339,7 @@ fn map_authoring_lock_error(
             ),
             broken_subject: "environment inventory authoring lock".to_string(),
             next_safe_action:
-                "wait for any in-progress `handbook author environment-inventory` run to finish or repair the lock path, then retry `handbook author environment-inventory`"
+                "wait for any in-progress `handbook author environment-inventory --from-inputs <path|->` run to finish or repair the lock path, then retry `handbook author environment-inventory --from-inputs <path|->`"
                     .to_string(),
         },
     }
