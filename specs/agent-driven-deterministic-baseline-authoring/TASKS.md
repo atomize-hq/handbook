@@ -117,7 +117,7 @@ Plan reference: [`plan.md`](./plan.md)
     - Added file/stdin validation-only parity with zero canonical mutation and updated help output.
     - Targeted CLI and compiler project-context tests pass; obsolete PTY success tests are quarantined for deletion in P3.3.
 
-- [ ] **P2.2: Make charter authoring deterministic-only**
+- [x] **P2.2: Make charter authoring deterministic-only**
   - Depends on: P0.2
   - Acceptance:
     - `--from-inputs` is required for mutation.
@@ -131,6 +131,10 @@ Plan reference: [`plan.md`](./plan.md)
     - `crates/cli/src/author.rs`
     - `crates/cli/tests/author_cli.rs`
     - `crates/cli/tests/snapshots/handbook-author-charter-help.txt`
+  - Result (2026-07-10):
+    - Bare charter authoring now immediately requires `--from-inputs`; the active dispatcher no longer checks TTY state or accepts guided callbacks.
+    - Existing deterministic file/stdin, validation, render, lock, and repair behavior remains green.
+    - The full CLI suite passes; obsolete PTY success tests are quarantined for deletion with prompting infrastructure in P3.3.
 
 ## Phase 3 — Delete Obsolete Leaves
 

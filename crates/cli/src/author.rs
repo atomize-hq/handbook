@@ -39,11 +39,7 @@ fn author_charter_command(args: AuthorCharterArgs) -> ExitCode {
     let rendered = execute_author_charter_command(
         args,
         std::env::current_dir,
-        interactive_authoring_is_allowed,
-        |repo_root| handbook_compiler::preflight_author_charter(repo_root),
         |repo_root, input| handbook_compiler::preflight_author_charter_from_input(repo_root, input),
-        collect_guided_charter_input,
-        |repo_root, input| handbook_compiler::author_charter_guided(repo_root, input),
         |repo_root, input| handbook_compiler::author_charter(repo_root, input),
     );
     println!("{}", rendered.output);
@@ -149,41 +145,22 @@ fn author_environment_inventory_command(args: AuthorEnvironmentInventoryArgs) ->
     }
 }
 
-#[allow(clippy::too_many_arguments)]
 pub(crate) fn execute_author_charter_command<
     GetCurrentDir,
-    InteractiveAllowed,
-    PreflightGuided,
     PreflightFromInput,
-    CollectGuidedInput,
-    RunGuidedAuthor,
     RunDeterministicAuthor,
 >(
     args: AuthorCharterArgs,
     get_current_dir: GetCurrentDir,
-    interactive_allowed: InteractiveAllowed,
-    preflight_guided: PreflightGuided,
     preflight_from_input: PreflightFromInput,
-    collect_guided_input: CollectGuidedInput,
-    run_guided_author: RunGuidedAuthor,
     run_deterministic_author: RunDeterministicAuthor,
 ) -> RenderedCommand
 where
     GetCurrentDir: FnOnce() -> io::Result<PathBuf>,
-    InteractiveAllowed: Fn() -> bool,
-    PreflightGuided: Fn(&Path) -> Result<(), handbook_compiler::AuthorCharterRefusal>,
     PreflightFromInput: Fn(
         &Path,
         &handbook_engine::CharterStructuredInput,
     ) -> Result<(), handbook_compiler::AuthorCharterRefusal>,
-    CollectGuidedInput: Fn() -> Result<handbook_engine::CharterStructuredInput, String>,
-    RunGuidedAuthor: Fn(
-        &Path,
-        &handbook_engine::CharterStructuredInput,
-    ) -> Result<
-        handbook_compiler::AuthorCharterResult,
-        handbook_compiler::AuthorCharterRefusal,
-    >,
     RunDeterministicAuthor: Fn(
         &Path,
         &handbook_engine::CharterStructuredInput,
@@ -192,6 +169,31 @@ where
         handbook_compiler::AuthorCharterRefusal,
     >,
 {
+    let Some(path_or_dash) = args.from_inputs.as_deref() else {
+        let (summary, next_safe_action) = if args.validate {
+            (
+                "`handbook author charter --validate` requires `--from-inputs <path|->`",
+                "retry `handbook author charter --validate --from-inputs <path|->`",
+            )
+        } else {
+            (
+                "`handbook author charter` requires `--from-inputs <path|->`",
+                "retry `handbook author charter --from-inputs <path|->`",
+            )
+        };
+        return RenderedCommand {
+            output: render_author_custom_refusal(
+                "author charter",
+                "REFUSED",
+                "InvalidRequest",
+                summary,
+                "command arguments",
+                next_safe_action,
+            ),
+            exit_code: ExitCode::from(1),
+        };
+    };
+
     let cwd = match get_current_dir() {
         Ok(dir) => dir,
         Err(err) => {
@@ -202,7 +204,7 @@ where
                     "WorkingDirectoryUnavailable",
                     &format!("failed to determine repo root: {err}"),
                     "current working directory",
-                    "repair the current working directory and retry `handbook author charter`",
+                    "repair the current working directory and retry `handbook author charter --from-inputs <path|->`",
                 ),
                 exit_code: ExitCode::from(1),
             };
@@ -210,118 +212,51 @@ where
     };
     let repo_root = discover_managed_repo_root(&cwd);
 
-    if args.validate && args.from_inputs.is_none() {
-        return RenderedCommand {
-            output: render_author_custom_refusal(
-                "author charter",
-                "REFUSED",
-                "InvalidRequest",
-                "`handbook author charter --validate` requires `--from-inputs <path|->`",
-                "command arguments",
-                "retry `handbook author charter --validate --from-inputs <path|->`",
-            ),
-            exit_code: ExitCode::from(1),
-        };
-    }
-
-    if args.from_inputs.is_none() && !interactive_allowed() {
-        return RenderedCommand {
-            output: render_author_custom_refusal(
-                "author charter",
-                "REFUSED",
-                "NonInteractiveRefusal",
-                "`handbook author charter` is a TTY-only guided interview",
-                "interactive terminal",
-                "run `handbook author charter --from-inputs <path|->`",
-            ),
-            exit_code: ExitCode::from(1),
-        };
-    }
-
-    if args.from_inputs.is_none() {
-        if let Err(refusal) = preflight_guided(&repo_root) {
+    let yaml = match read_author_inputs_source(
+        "author charter",
+        "handbook author charter --from-inputs",
+        path_or_dash,
+    ) {
+        Ok(yaml) => yaml,
+        Err(rendered) => {
+            return RenderedCommand {
+                output: rendered,
+                exit_code: ExitCode::from(1),
+            };
+        }
+    };
+    let input = match handbook_compiler::parse_charter_structured_input_yaml(&yaml) {
+        Ok(input) => input,
+        Err(refusal) => {
             return RenderedCommand {
                 output: render_author_charter_refusal(&refusal),
                 exit_code: ExitCode::from(1),
             };
-        }
-    }
-
-    let (input, input_mode, input_source, guided_mode) = match args.from_inputs.as_deref() {
-        Some(path_or_dash) => {
-            let yaml = match read_author_inputs_source(
-                "author charter",
-                "handbook author charter --from-inputs",
-                path_or_dash,
-            ) {
-                Ok(yaml) => yaml,
-                Err(rendered) => {
-                    return RenderedCommand {
-                        output: rendered,
-                        exit_code: ExitCode::from(1),
-                    };
-                }
-            };
-            let input = match handbook_engine::parse_charter_structured_input_yaml(&yaml) {
-                Ok(input) => input,
-                Err(err) => {
-                    let refusal = map_engine_charter_core_error(err);
-                    return RenderedCommand {
-                        output: render_author_charter_refusal(&refusal),
-                        exit_code: ExitCode::from(1),
-                    };
-                }
-            };
-            let input_mode = if path_or_dash == "-" {
-                "structured_inputs_stdin"
-            } else {
-                "structured_inputs_file"
-            };
-            (input, input_mode, path_or_dash.to_string(), false)
-        }
-        None => {
-            let input = match collect_guided_input() {
-                Ok(input) => input,
-                Err(rendered) => {
-                    return RenderedCommand {
-                        output: rendered,
-                        exit_code: ExitCode::from(1),
-                    };
-                }
-            };
-            (
-                input,
-                "guided_interview",
-                "interactive terminal".to_string(),
-                true,
-            )
         }
     };
 
-    if !guided_mode {
-        if let Err(refusal) = preflight_from_input(&repo_root, &input) {
-            return RenderedCommand {
-                output: render_author_charter_refusal(&refusal),
-                exit_code: ExitCode::from(1),
-            };
-        }
-        if args.validate {
-            return RenderedCommand {
-                output: render_author_charter_validation_success(input_mode, &input_source),
-                exit_code: ExitCode::SUCCESS,
-            };
-        }
+    if let Err(refusal) = preflight_from_input(&repo_root, &input) {
+        return RenderedCommand {
+            output: render_author_charter_refusal(&refusal),
+            exit_code: ExitCode::from(1),
+        };
     }
 
-    let result = if guided_mode {
-        run_guided_author(&repo_root, &input)
+    let input_mode = if path_or_dash == "-" {
+        "structured_inputs_stdin"
     } else {
-        run_deterministic_author(&repo_root, &input)
+        "structured_inputs_file"
     };
+    if args.validate {
+        return RenderedCommand {
+            output: render_author_charter_validation_success(input_mode, path_or_dash),
+            exit_code: ExitCode::SUCCESS,
+        };
+    }
 
-    match result {
+    match run_deterministic_author(&repo_root, &input) {
         Ok(result) => RenderedCommand {
-            output: render_author_charter_success(&result, input_mode, &input_source),
+            output: render_author_charter_success(&result, input_mode, path_or_dash),
             exit_code: ExitCode::SUCCESS,
         },
         Err(refusal) => RenderedCommand {

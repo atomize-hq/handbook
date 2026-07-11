@@ -1085,7 +1085,7 @@ fn run_guided_project_context_under_pty(dir: &Path) -> (String, portable_pty::Ex
 }
 
 #[test]
-fn non_tty_author_refuses_and_points_to_deterministic_path() {
+fn bare_charter_author_requires_structured_inputs() {
     let dir = scaffold_repo();
 
     let output = run_in(dir.path(), &["author", "charter"]);
@@ -1093,8 +1093,8 @@ fn non_tty_author_refuses_and_points_to_deterministic_path() {
     assert!(!output.status.success(), "non-tty author should refuse");
     let out = stdout(&output);
     assert!(out.contains("OUTCOME: REFUSED"));
-    assert!(out.contains("CATEGORY: NonInteractiveRefusal"));
-    assert!(out.contains("TTY-only guided interview"));
+    assert!(out.contains("CATEGORY: InvalidRequest"));
+    assert!(out.contains("requires `--from-inputs <path|->`"));
     assert!(out.contains("handbook author charter --from-inputs <path|->"));
 }
 
@@ -1367,6 +1367,7 @@ fn validate_refuses_without_from_inputs() {
 }
 
 #[test]
+#[ignore = "guided charter path removed; PTY harness is deleted in P3.3"]
 fn guided_tty_author_charter_succeeds_via_real_binary_path() {
     let dir = scaffold_repo();
     let expected_markdown = stubbed_authored_markdown();
@@ -1398,6 +1399,7 @@ fn guided_tty_author_charter_succeeds_via_real_binary_path() {
 }
 
 #[test]
+#[ignore = "guided charter path removed; PTY harness is deleted in P3.3"]
 fn guided_tty_author_charter_unblocks_doctor_and_generate() {
     let dir = scaffold_repo();
     let expected_markdown = stubbed_authored_markdown();
