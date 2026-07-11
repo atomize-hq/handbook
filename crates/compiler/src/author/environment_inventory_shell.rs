@@ -41,7 +41,7 @@ pub(super) fn render_environment_inventory_markdown(
 
 pub(super) fn preflight_author_environment_inventory(
     repo_root: &Path,
-) -> Result<(), AuthorEnvironmentInventoryRefusal> {
+) -> Result<bool, AuthorEnvironmentInventoryRefusal> {
     let artifacts =
         CanonicalArtifacts::load(repo_root).map_err(|err| AuthorEnvironmentInventoryRefusal {
             kind: AuthorEnvironmentInventoryRefusalKind::InvalidSystemRoot,
@@ -53,8 +53,8 @@ pub(super) fn preflight_author_environment_inventory(
 
     validate_environment_inventory_authoring_preconditions(repo_root, &artifacts)?;
     required_charter_markdown(&artifacts)?;
-    optional_project_context_markdown(&artifacts)?;
-    Ok(())
+    let has_project_context = optional_project_context_markdown(&artifacts)?.is_some();
+    Ok(has_project_context)
 }
 
 pub(super) fn with_environment_inventory_authoring_lock<T, F>(

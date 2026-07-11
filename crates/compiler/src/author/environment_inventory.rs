@@ -82,7 +82,7 @@ pub fn render_environment_inventory_markdown(
 pub fn preflight_author_environment_inventory(
     repo_root: impl AsRef<Path>,
 ) -> Result<(), AuthorEnvironmentInventoryRefusal> {
-    preflight_author_environment_inventory_shell(repo_root.as_ref())
+    preflight_author_environment_inventory_shell(repo_root.as_ref()).map(|_| ())
 }
 
 pub fn preflight_author_environment_inventory_from_input(
@@ -90,7 +90,31 @@ pub fn preflight_author_environment_inventory_from_input(
     input: &EnvironmentInventoryStructuredInput,
 ) -> Result<(), AuthorEnvironmentInventoryRefusal> {
     validate_environment_inventory_structured_input(input)?;
-    preflight_author_environment_inventory(repo_root)
+    let has_project_context = preflight_author_environment_inventory_shell(repo_root.as_ref())?;
+    validate_project_context_reference(input, has_project_context)
+}
+
+fn validate_project_context_reference(
+    input: &EnvironmentInventoryStructuredInput,
+    has_project_context: bool,
+) -> Result<(), AuthorEnvironmentInventoryRefusal> {
+    if input.project_context_ref.is_some() == has_project_context {
+        return Ok(());
+    }
+
+    let summary = if has_project_context {
+        "structured environment-inventory input must set `project_context_ref` to `.handbook/project_context/PROJECT_CONTEXT.md` because valid canonical project context truth exists"
+    } else {
+        "structured environment-inventory input must set `project_context_ref` to null because valid canonical project context truth does not exist"
+    };
+    Err(AuthorEnvironmentInventoryRefusal {
+        kind: AuthorEnvironmentInventoryRefusalKind::IncompleteStructuredInput,
+        summary: summary.to_string(),
+        broken_subject: "structured environment-inventory input project_context_ref".to_string(),
+        next_safe_action:
+            "align `project_context_ref` with canonical project-context truth and retry `handbook author environment-inventory --from-inputs <path|->`"
+                .to_string(),
+    })
 }
 
 pub fn author_environment_inventory_from_input(

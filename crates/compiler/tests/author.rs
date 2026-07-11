@@ -1285,6 +1285,56 @@ fn preflight_environment_inventory_from_input_is_non_mutating() {
 }
 
 #[test]
+fn environment_inventory_input_refuses_missing_ref_when_project_context_exists() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    scaffold_repo(dir.path());
+    write_file(
+        &dir.path().join(".handbook/charter/CHARTER.md"),
+        valid_charter_markdown().as_bytes(),
+    );
+    write_file(
+        &dir.path()
+            .join(".handbook/project_context/PROJECT_CONTEXT.md"),
+        expected_project_context_markdown().as_bytes(),
+    );
+
+    let err = preflight_author_environment_inventory_from_input(
+        dir.path(),
+        &valid_environment_inventory_input(),
+    )
+    .expect_err("project-context reference must match canonical truth");
+
+    assert_eq!(
+        err.kind,
+        AuthorEnvironmentInventoryRefusalKind::IncompleteStructuredInput
+    );
+    assert!(err.summary.contains("must set `project_context_ref`"));
+}
+
+#[test]
+fn environment_inventory_input_refuses_ref_when_project_context_is_absent() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    scaffold_repo(dir.path());
+    write_file(
+        &dir.path().join(".handbook/charter/CHARTER.md"),
+        valid_charter_markdown().as_bytes(),
+    );
+    let mut input = valid_environment_inventory_input();
+    input.project_context_ref = Some(".handbook/project_context/PROJECT_CONTEXT.md".to_string());
+
+    let err = preflight_author_environment_inventory_from_input(dir.path(), &input)
+        .expect_err("project-context reference must match canonical truth");
+
+    assert_eq!(
+        err.kind,
+        AuthorEnvironmentInventoryRefusalKind::IncompleteStructuredInput
+    );
+    assert!(err
+        .summary
+        .contains("must set `project_context_ref` to null"));
+}
+
+#[test]
 fn author_environment_inventory_from_input_writes_deterministically_without_prompt_capture() {
     let dir = tempfile::tempdir().expect("tempdir");
     scaffold_repo(dir.path());
