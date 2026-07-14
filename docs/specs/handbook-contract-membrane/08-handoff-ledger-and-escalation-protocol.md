@@ -14,6 +14,7 @@ The protocol supports:
 - finding-driven decomposition;
 - review/proof follow-up;
 - orchestration dispatch of the next bounded session.
+- optional session-start/session-end Snapshot Memory refs and deterministic deltas until snapshot capture becomes mandatory after its implementation slice lands.
 
 ## Storage model
 
@@ -36,8 +37,28 @@ handoffs/
 - `ledger.jsonl` is a rebuildable append-only query index, not a second authority.
 - Each dispatch under `dispatches/` is an immutable ready-to-run next-session prompt.
 - Corrections create a new handoff record whose `supersedes` field references the prior record.
+- Handoffs reference snapshots/deltas; they do not duplicate the captured world/project state.
+- Handoffs may carry `semantic_refs` to exact artifact-kind/instance, intake/candidate/canonical, posture, and default-set decision records without copying their contents or changing their authority.
 
 Per-record files avoid one large mutable JSON document and reduce worktree/merge conflicts.
+
+## Snapshot, handoff, and dispatch roles
+
+| Record | Role |
+|---|---|
+| Snapshot Memory | Describes selected state observed at a point in time. |
+| SnapshotDelta | Deterministically describes change between compatible snapshots. |
+| Handoff | Normatively records what happened and how work should transition. |
+| Dispatch | Authorizes one exact next-session objective and boundary. |
+
+Snapshot refs are optional until `HCM-3.4` lands. New handoff records still include `snapshot_refs.capture_status`:
+
+- use `captured` when all applicable refs exist;
+- use `partial` when a bounded subset exists and omissions are named;
+- use `failed` when capture was required but failed, with a blocker/finding;
+- use `not_available` before the capability lands, with null refs.
+
+Never synthesize a snapshot ref merely to satisfy the schema.
 
 ## File naming
 
@@ -91,24 +112,29 @@ Every escalation must state:
 
 “Needs more context” is not sufficient.
 
+When the missing authority is an explicitly reserved user/product decision—such as the shipped default artifact set—the escalation must request the named research and brainstorming/decision session. The orchestrator must not convert current implementation, historical files, or illustrative examples into an implicit decision.
+
 ## Session closeout procedure
 
 1. Re-read the active packet and applicable proof gates.
 2. Inspect final git/worktree state.
-3. Separate completed work, unresolved findings, proof, and assumptions.
-4. Copy `handoff-template.json` to a correctly named file under `records/`.
-5. Fill every required field and delete placeholder content.
-6. Prefer repository-relative evidence/file references.
-7. Keep logs and long reports in referenced artifacts; do not embed them in the record.
-8. Validate the record:
+3. When Snapshot Memory is available, capture the session-end snapshot and compute the session-start -> session-end delta. If unavailable, record `snapshot_refs.capture_status: not_available` and null refs.
+4. Separate completed work, unresolved findings, proof, and assumptions.
+5. Copy `handoff-template.json` to a correctly named file under `records/`.
+6. Fill every required field and delete placeholder content.
+7. Reference start/end snapshots, grounding/session deltas, and grounding projection without copying their contents.
+8. Populate applicable `semantic_refs`; use empty arrays/null for semantic record classes not involved in the session.
+9. Prefer repository-relative evidence/file references.
+10. Keep logs, snapshots, diffs, and long reports in referenced artifacts; do not embed them in the handoff record.
+11. Validate the record:
 
    ```bash
    jq empty docs/specs/handbook-contract-membrane/handoffs/records/<record>.json
    ```
 
-9. Append/rebuild the ledger index.
-10. Verify the new index entry resolves back to the record.
-11. Return only the short chat closeout defined below.
+12. Append/rebuild the ledger index.
+13. Verify the new index entry resolves back to the record.
+14. Return only the short chat closeout defined below.
 
 ## Ledger entry creation
 
@@ -219,15 +245,19 @@ The orchestration session:
 
 1. selects latest or exact handoff;
 2. validates record/index consistency;
-3. reads only named pack sections and live files;
-4. rechecks drift-prone claims;
-5. chooses one next-action classification;
-6. repairs/decomposes/escalates documentation if required;
-7. writes one dispatch artifact;
-8. writes its own orchestration handoff;
-9. returns a short chat summary.
+3. loads referenced snapshot/delta metadata when available;
+4. captures or verifies current start state and requests a Resolution-appropriate grounding projection;
+5. reads only named pack sections and live files;
+6. rechecks drift-prone claims and classifies snapshot delta signals as explained, unexplained, or not yet available;
+7. chooses one next-action classification;
+8. repairs/decomposes/escalates documentation if required;
+9. writes one dispatch artifact;
+10. captures its end snapshot when available and writes its own orchestration handoff;
+11. returns a short chat summary.
 
 If the handoff is stale, the orchestrator does not edit it. It writes a superseding record.
+
+For artifact/intake/posture work, the orchestrator also verifies that kind definitions are not conflated with repository instances, intake candidates are not treated as canonical truth, posture recommendations have not self-enacted, and no custom kind or vocabulary profile is being used to justify dynamic CLI commands.
 
 ## Dispatch requirements
 
@@ -236,6 +266,8 @@ Every dispatch must be runnable without copying the prior chat transcript.
 It includes:
 
 - source handoff and orchestration decision;
+- source/end/start snapshot, delta, and grounding-projection refs or explicit not-available state;
+- applicable artifact kind/instance, intake/candidate/canonical, posture, and shipped-default decision refs;
 - exact objective and session kind;
 - active Resolution envelope;
 - authority order and must-read sections;
@@ -266,6 +298,12 @@ For orchestration sessions also include:
 DISPATCH: <repo-relative dispatch path>
 ```
 
+When captured, a single additional line is allowed:
+
+```text
+SNAPSHOT: <session-end snapshot ref>
+```
+
 Do not paste the full findings, command output, or next-session prompt into chat unless durable file writing was impossible.
 
 ## Failure rules
@@ -274,5 +312,7 @@ Do not paste the full findings, command output, or next-session prompt into chat
 - If `jq` validation fails, the session is not closed.
 - If ledger index and record disagree, rebuild the index from records.
 - If live truth contradicts the handoff, write a superseding record before dispatch.
+- If a snapshot is unstable, do not use it for closeout/promotion; retry or record the capture blocker and perform bounded live verification.
+- If snapshot projection would expose out-of-Resolution or sensitive state, omit it explicitly and record the omission.
 - If scope must broaden, stop and escalate; do not “finish one extra thing.”
 - If documentation repair is required, dispatch that repair and return to implementation only after a new handoff confirms consistency.

@@ -1,0 +1,259 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.0",
+  "handoff_id": "20260712T235757Z--HCM-0-1--documentation--snapshot-memory-layering",
+  "created_at_utc": "2026-07-12T23:57:57Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.1",
+  "packet_id": null,
+  "session": {
+    "kind": "documentation",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "review_required",
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "program_control_pack",
+    "detail_resolution": "architecture_and_protocol",
+    "temporal_horizon": "phase_0",
+    "authority_horizon": "docs_and_context_infrastructure",
+    "memory_horizon": "program_record",
+    "validation_horizon": "control_pack_bootstrap"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "objective": "Layer deterministic, auditable, Resolution-aware Snapshot Memory through the Handbook Contract Membrane control pack and handoff/orchestration protocol without changing Rust.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": ["Memory semantics", "Snapshot Memory"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Snapshot capture policy",
+        "Context Memory Snapshot",
+        "Snapshot delta",
+        "Snapshot projection request/result"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": ["Open program proof gates", "Control-pack proof gate"]
+    }
+  ],
+  "repo_state": {
+    "branch": "main",
+    "head": "144c5d4254376d927a213ae26c4bb03860d60475",
+    "dirty": true,
+    "changed_paths": [
+      "docs/ideas/handbook-contract-membrane-architecture-memo.md",
+      "docs/specs/handbook-contract-membrane/00-README.md",
+      "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatch-template.md",
+      "docs/specs/handbook-contract-membrane/handoffs/handoff-record.schema.json",
+      "docs/specs/handbook-contract-membrane/handoffs/handoff-template.json",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260712T235757Z--HCM-0-1--documentation--snapshot-memory-layering.json"
+    ]
+  },
+  "work_completed": [
+    "Separated memory horizons from memory record classes and defined Snapshot Memory as a cross-horizon record class.",
+    "Defined deterministic snapshot capture policy, strategic hooks, consistency modes, state/record fingerprints, redaction, retention, and immutable authority boundaries.",
+    "Defined deterministic SnapshotDelta and drift signal semantics with durable justification references.",
+    "Defined Resolution-aware snapshot projection so comprehensive capture does not imply comprehensive disclosure.",
+    "Added Snapshot Memory to target ownership, seam truth, Phase 3 sequencing, SDK/skill/Tauri posture, and proof gates.",
+    "Added optional snapshot refs to handoff records and integrated start/end snapshots, deltas, and grounding projections into orchestration and dispatch templates."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "status": "completed",
+      "summary": "Expanded memory horizons/classes plus complete Snapshot Memory semantics, hooks, consistency, deltas, drift, projection, security, and handoff relationships."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "status": "completed",
+      "summary": "Added preliminary capture-policy, ContextMemorySnapshot, SnapshotDelta, projection, redaction, retention, and SDK/evidence/gate contracts."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "status": "completed",
+      "summary": "Added HCM-3.4 Snapshot Memory/delta engine and HCM-3.5 Resolution-aware adoption."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "status": "completed",
+      "summary": "Added narrow live precursors and six Snapshot Memory proof gates plus handoff integration proof."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "status": "completed",
+      "summary": "Added snapshot/delta selection, live start-state comparison, bounded grounding projection, and no-fabrication fallback."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "status": "completed",
+      "summary": "Separated snapshot, handoff, and dispatch roles and added optional start/end/delta protocol."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-record.schema.json",
+      "status": "completed",
+      "summary": "Added backward-compatible optional snapshot reference object for new handoff records."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-D-005",
+      "summary": "Snapshot Memory is a memory record class spanning strategic, coordination, execution, and operation horizons, not a fifth horizon.",
+      "authority_effect": "Memory taxonomy now separates horizon from record class.",
+      "refs": ["docs/specs/handbook-contract-membrane/02-semantic-model.md"]
+    },
+    {
+      "decision_id": "HCM-D-006",
+      "summary": "Snapshots are immutable descriptive evidence; contracts/artifacts remain normative truth and handoffs/dispatches remain transition authority.",
+      "authority_effect": "Snapshot capture cannot lock, mutate, close, or rewrite canonical/transition truth.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-D-007",
+      "summary": "Snapshot deltas and drift signals are deterministic and cite durable justification; they do not invent causal intent.",
+      "authority_effect": "Authorized divergence stays distinguishable from unexplained scope, proof, planning, or semantic drift.",
+      "refs": ["docs/specs/handbook-contract-membrane/02-semantic-model.md"]
+    },
+    {
+      "decision_id": "HCM-D-008",
+      "summary": "Agents receive Resolution-aware snapshot grounding projections rather than comprehensive snapshots by default.",
+      "authority_effect": "Snapshot disclosure is constrained by scope, detail, authority, memory, and validation horizons.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-F-002",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Snapshot Memory is now fully represented in the control-pack target, but no runtime capture, delta, redaction, or projection implementation exists; all PG-SNAP gates remain open.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-F-003",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "HCM-0.1 still requires the fresh independent control-pack review recorded by the superseded bootstrap handoff before implementation authority can freeze.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#control-pack-proof-gate"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "jq parse plus Python Draft 2020-12 schema validation for handoff schema/template/prior records",
+      "status": "passed",
+      "evidence_ref": null
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence_ref": null
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": ["Scope", "Control-pack map", "Per-slice context assembly protocol", "Orchestration loop"],
+      "reason": "Make Snapshot Memory part of program scope and session grounding.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/ideas/handbook-contract-membrane-architecture-memo.md",
+      "sections": ["Resolution and durable orchestration"],
+      "reason": "Preserve a concise pointer to snapshot/handoff/delta semantics in the architecture lineage.",
+      "status": "completed"
+    }
+  ],
+  "next_session": {
+    "recommended_kind": "orchestration",
+    "objective": "Select this superseding handoff and dispatch the fresh independent docs-only review of the complete HCM-0.1 control pack, including Snapshot Memory cohesion, contracts, security, orchestration, and proof gates.",
+    "dispatch_required": true,
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sections": ["Authority stack", "Control-pack map", "Per-slice context assembly protocol"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "sections": ["Memory semantics", "Snapshot Memory"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sections": [
+          "Snapshot capture policy",
+          "Context Memory Snapshot",
+          "Snapshot delta",
+          "Snapshot projection request/result"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sections": ["Open program proof gates", "Control-pack proof gate"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sections": ["Ready-to-use prompt"]
+      }
+    ],
+    "allowed_scope": [
+      "docs/specs/handbook-contract-membrane/**",
+      "docs/ideas/handbook-contract-membrane-architecture-memo.md"
+    ],
+    "prohibited_scope": [
+      "Rust implementation",
+      "Snapshot runtime implementation",
+      "First implementation slice packet",
+      "Substrate source changes",
+      "Unrelated documentation cleanup"
+    ],
+    "acceptance_criteria": [
+      "A fresh review checks Snapshot Memory taxonomy, authority separation, deterministic capture/delta semantics, consistency, redaction, retention, Resolution projection, and handoff integration.",
+      "Cross-document naming, HCM sequencing, schemas, and proof gates remain cohesive and concrete.",
+      "Actionable findings are remediated through a bounded dispatch and durable superseding handoff.",
+      "HCM-0.1 closes only after the complete control-pack proof gate is satisfied."
+    ],
+    "stop_conditions": [
+      "Stop and record an escalation if review exposes an unresolved Snapshot Memory authority or privacy decision.",
+      "Do not begin Snapshot Memory or other Rust implementation before HCM-0.1 review closes."
+    ]
+  },
+  "supersedes": [
+    "20260712T175918Z--HCM-0-1--documentation--control-pack-bootstrap"
+  ],
+  "chat_summary": "Layered Snapshot Memory through the complete control pack: cross-horizon memory class, deterministic capture/deltas, drift signals, Resolution-aware projections, security, proof gates, orchestration, and optional handoff refs. HCM-0.1 remains review-required; no Rust changed."
+}

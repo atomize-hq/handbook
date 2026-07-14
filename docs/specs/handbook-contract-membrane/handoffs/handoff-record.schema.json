@@ -116,6 +116,82 @@
         "validation_horizon": { "type": "string", "minLength": 1 }
       }
     },
+    "snapshot_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capture_status",
+        "prior_end_snapshot_ref",
+        "session_start_snapshot_ref",
+        "grounding_delta_ref",
+        "grounding_projection_ref",
+        "session_end_snapshot_ref",
+        "session_delta_ref"
+      ],
+      "properties": {
+        "capture_status": {
+          "enum": ["not_available", "captured", "partial", "failed"]
+        },
+        "prior_end_snapshot_ref": { "type": ["string", "null"] },
+        "session_start_snapshot_ref": { "type": ["string", "null"] },
+        "grounding_delta_ref": { "type": ["string", "null"] },
+        "grounding_projection_ref": { "type": ["string", "null"] },
+        "session_end_snapshot_ref": { "type": ["string", "null"] },
+        "session_delta_ref": { "type": ["string", "null"] }
+      }
+    },
+    "semantic_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_kind_refs",
+        "artifact_instance_refs",
+        "intake_definition_refs",
+        "intake_record_refs",
+        "artifact_candidate_refs",
+        "canonical_artifact_refs",
+        "posture_kernel_ref",
+        "posture_recommendation_refs",
+        "posture_transition_refs",
+        "default_set_decision_ref"
+      ],
+      "properties": {
+        "artifact_kind_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "artifact_instance_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "intake_definition_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "intake_record_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "artifact_candidate_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "canonical_artifact_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "posture_kernel_ref": { "type": ["string", "null"] },
+        "posture_recommendation_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "posture_transition_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "default_set_decision_ref": { "type": ["string", "null"] }
+      }
+    },
     "objective": {
       "type": "string",
       "minLength": 1

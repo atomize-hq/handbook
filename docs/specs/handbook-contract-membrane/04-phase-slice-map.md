@@ -10,9 +10,10 @@ The program proceeds from semantic authority to representation, projection, tran
 
 ```text
 control-pack/design authority
-  -> profile and artifact semantics
+  -> artifact-kind/intake semantics + researched default set
+  -> profile and artifact-instance semantics
   -> canonical YAML truth
-  -> vocabulary + Context Resolution + projections
+  -> vocabulary + Context Resolution + Snapshot Memory + posture + projections
   -> SDK + complete machine transports
   -> contract membrane + docks
   -> Substrate/Tauri/adapters
@@ -27,11 +28,12 @@ Do not begin with the CLI, Tauri UI, external docks, or Substrate integration be
 | Slice | Objective | Primary outputs | Exit gate |
 |---|---|---|---|
 | `HCM-0.1` | Establish the context-engineering control pack | `00`–`08`, handoff schema/template, active-doc pointers | pack is cohesive, repo-truth grounded, JSON artifacts valid, and reviewed |
-| `HCM-0.2` | Freeze instance-profile, artifact-registry, vocabulary, and constitutional-root semantics | approved `02` and exact schema sections in `05`; decision records for remaining profile questions | every semantic field has an owner, default, validation rule, and explicit non-goal |
-| `HCM-0.3` | Freeze Context Resolution and deterministic projection contracts | exact envelope, projection, omission, provenance, and promotion contracts | reveal/derive/synthesize boundaries are unambiguous and testable |
+| `HCM-0.2` | Freeze artifact-kind/instance, schema-registry, intake, instance-profile, vocabulary, and constitutional-root semantics | approved `02` and exact schema sections in `05`; `ArtifactKindDefinition`, `ArtifactInstanceDescriptor`, `ArtifactIntakeDefinition`, Charter intake/promotion, and posture-kernel decisions | every semantic field has an owner, defaulting rule, validation rule, authority boundary, and explicit non-goal; examples are not treated as shipped defaults |
+| `HCM-0.3` | Freeze Context Resolution, Snapshot Memory, and deterministic projection contracts | exact envelope, snapshot/capture/delta/projection, omission, provenance, consistency, redaction, and promotion contracts | reveal/derive/synthesize boundaries and snapshot authority/consistency rules are unambiguous and testable |
 | `HCM-0.4` | Freeze crate ownership, `handbook-sdk`, CLI JSON, Tauri, and Substrate integration ladder | owner matrix, SDK use-case inventory, transport DTO contract, published proof plan | no use case depends on CLI prose; bridge and permanent boundary are distinct |
 | `HCM-0.5` | Freeze contract-membrane and dock protocol boundaries | lifecycle, claim/evidence/verdict/gate contracts; process-dock capability/request/result contract | validators remain witnesses; Resolution limits proof; first proof dock is selected |
-| `HCM-0.6` | Approve the implementation program and first slice packet | reviewed phase map plus first `slices/<id>/SPEC.md`, plan, and todo | first slice is independently implementable and has a complete proof wall |
+| `HCM-0.6` | Research and approve the shipped default artifact set | research dossier; minimal/standard/full candidate comparison; user brainstorming/decision record; approved shipped kind/instance/requiredness list | default set is evidence-backed and explicitly approved; no current enum, template, filename, or illustrative example became a default by inertia |
+| `HCM-0.7` | Approve the implementation program and first slice packet | reviewed phase map plus first `slices/<id>/SPEC.md`, plan, and todo | Phase 0 contracts/default decisions are closed and the first slice is independently implementable with a complete proof wall |
 
 ### Phase 0 non-goals
 
@@ -42,26 +44,36 @@ Do not begin with the CLI, Tauri UI, external docks, or Substrate integration be
 - Tauri scaffolding;
 - actual dock execution;
 - speculative third-party workflow adapters.
+- implementation-selected shipped artifact defaults before `HCM-0.6` approval.
 
 ## Phase 1 — Profile and artifact semantic kernel
 
 **Purpose:** replace the fixed artifact universe with a versioned profile-selected semantic model.
 
-### `HCM-1.1` — Profile schema and shipped default
+### `HCM-1.1` — Artifact-kind and schema registry
+
+- implement versioned `ArtifactKindDefinition` and kind-definition meta-validation;
+- resolve local canonical schemas with stable IDs, versions, and fingerprints;
+- separate structural schema, semantic validation, intake coverage, and external docks;
+- refuse remote/ambient/unversioned schema execution;
+- prove one repository-defined custom kind without a Rust enum variant.
+
+### `HCM-1.2` — Profile schema, artifact instances, and shipped default
 
 - define typed profile identity/version;
-- define shipped opinionated default semantics directly;
+- define `ArtifactInstanceDescriptor` independently from kind definitions;
+- encode only the shipped default set approved by `HCM-0.6`;
 - validate explicit profile selection and repository profile input;
 - do not add a legacy profile merely to preserve old behavior.
 
-### `HCM-1.2` — Descriptor-driven artifact registry
+### `HCM-1.3` — Descriptor-driven artifact-instance registry
 
-- replace enum-owned universe with profile-resolved descriptors;
-- support first-party stable roles plus custom artifact IDs;
+- replace enum-owned universe with profile-resolved kind and instance registries;
+- support first-party stable capabilities/roles plus custom kind and instance IDs;
 - make requiredness, dependencies, paths, and validators data-driven;
 - preserve trusted repo-relative path enforcement.
 
-### `HCM-1.3` — Profile-aware setup and doctor decisions
+### `HCM-1.4` — Profile-aware setup and doctor decisions
 
 - make setup/doctor use typed profile decisions;
 - keep CLI wording outside engine decisions;
@@ -70,8 +82,9 @@ Do not begin with the CLI, Tauri UI, external docks, or Substrate integration be
 ### Phase 1 exit gate
 
 - one selected profile determines the complete artifact registry;
-- custom artifacts do not require new enum variants;
-- shipped defaults are intentional target semantics;
+- kind definitions remain distinct from repository artifact instances;
+- custom kinds/artifacts do not require new enum variants or generated CLI commands;
+- shipped defaults exactly match the approved `HCM-0.6` decision;
 - no permanent compatibility dispatch remains;
 - setup and doctor consume the same resolved profile truth.
 
@@ -81,7 +94,7 @@ Do not begin with the CLI, Tauri UI, external docks, or Substrate integration be
 
 ### `HCM-2.1` — Vertical pilot artifact
 
-Select one lower-risk artifact family after Phase 0 review. Project Context is the current leading candidate because a structured input model and deterministic renderer already exist.
+Select one lower-risk artifact family after Phase 0 review. Project Context is the current leading implementation candidate because a structured input model and deterministic renderer already exist; pilot selection does not itself add that kind to the approved shipped default set.
 
 - canonical YAML load/validate/write;
 - derived Markdown projection;
@@ -93,9 +106,21 @@ Select one lower-risk artifact family after Phase 0 review. Project Context is t
 
 - cut the constitutional-root artifact to canonical structured truth;
 - preserve semantic root authority without requiring a literal filename;
+- implement `CharterIntakeDefinition` as the first rich intake coverage contract;
+- support guided-adaptive, express, and agent-assisted acquisition through the skill-directed agent, all targeting the same Charter candidate schema;
+- preserve immutable intake provenance, explicit known unknowns, validation, approval, and promotion without restoring a nested CLI wizard;
+- render Markdown and Resolution-specific views only from approved canonical Charter YAML;
 - prove derived human review output and lifecycle behavior.
 
-### `HCM-2.3` — Remaining shipped artifact families
+### `HCM-2.3` — Generic custom-kind intake and projection proof
+
+- register one repository-defined kind/schema without Handbook code changes;
+- use stable generic CLI/SDK operations selected by kind/instance ID;
+- validate canonical YAML and produce at least one deterministic configured projection;
+- exercise optional intake coverage when supplied;
+- prove no dynamic command or filename dispatch is involved.
+
+### `HCM-2.4` — Remaining shipped artifact families
 
 - convert remaining first-party artifacts that need structured manipulation;
 - decide explicitly which outputs are views only;
@@ -104,11 +129,14 @@ Select one lower-risk artifact family after Phase 0 review. Project Context is t
 ### Phase 2 exit gate
 
 - each targeted artifact has exactly one editable canonical truth;
+- all intake modes converge on the same kind-selected canonical schema and expose missing coverage;
+- the Charter intake record/candidate/canonical boundaries are auditable and non-competing;
+- at least one custom kind validates/projects without a Rust enum variant or generated command;
 - Markdown is reproducibly derived;
 - no user migration tooling or dual-read promise exists;
 - every temporary internal cutover bridge named in `06` is deleted.
 
-## Phase 3 — Vocabulary, Context Resolution, and projections
+## Phase 3 — Vocabulary, Context Resolution, Snapshot Memory, and projections
 
 **Purpose:** make views and agent context profile-aware and resolution-aware.
 
@@ -134,18 +162,46 @@ Select one lower-risk artifact family after Phase 0 review. Project Context is t
 - source/profile/projection fingerprints;
 - no synthesis in the core implementation.
 
-### `HCM-3.4` — Resolution-aware packet and pipeline adoption
+### `HCM-3.4` — Snapshot Memory and deterministic delta engine
+
+- capture-policy model and strategic hooks;
+- immutable normalized `ContextMemorySnapshot`;
+- stable/bounded/unstable consistency classification;
+- state and record fingerprints;
+- deterministic snapshot-to-snapshot deltas;
+- expected/justified/unexplained drift signals;
+- security redaction, artifact references, retention, and content-addressed deduplication posture;
+- paired prior-end/new-start snapshot workflow;
+- no model interpretation inside deterministic snapshot/delta semantics.
+
+### `HCM-3.5` — Resolution-aware snapshot, packet, and pipeline adoption
 
 - flow consumes Context Resolution rather than only byte budgets;
+- flow produces Resolution-aware snapshot grounding projections rather than loading comprehensive snapshots into every session;
 - pipeline scoped inclusion consumes namespaced shared semantics;
+- handoffs reference session start/end snapshots and deltas;
 - gates distinguish local completion from parent promotion readiness.
+
+### `HCM-3.6` — Project posture resolution and recommendation loop
+
+- resolve a fingerprinted `ProjectPostureKernel` from canonical Charter policy, approved overrides, applicable conditions, contracts, and evidence;
+- keep engineering-posture dimensions distinct from Context Resolution dimensions;
+- derive typed `PostureRecommendation` records from hard lifecycle triggers and sustained snapshot/evidence signals;
+- configure threshold windows, cooldowns, recipients, and acknowledgment/escalation through an approved `PostureEvaluationPolicy`;
+- require authorized `PostureTransition` records for canonical policy changes;
+- apply hysteresis: immediate raise recommendations may follow hard triggers, while lowering requires sustained evidence and cannot cross floors/red lines;
+- reopen only affected intake coverage instead of regenerating the Charter wholesale.
 
 ### Phase 3 exit gate
 
 - the same canonical truth produces multiple deterministic Resolution views;
+- stable world/project snapshots and deterministic deltas can ground session transitions;
+- comprehensive snapshots are projected down to the receiving session's Resolution envelope;
+- capture instability and redaction are explicit and test-covered;
 - custom vocabulary appears consistently in generated surfaces;
 - omitted claims cannot be misreported as passed;
 - current work-level behavior is either intentionally represented or removed.
+- posture recommendations remain evidence-linked and advisory until approved; resolved posture is not a second editable authority.
 
 ## Phase 4 — SDK and machine transports
 
@@ -181,6 +237,9 @@ Select one lower-risk artifact family after Phase 0 review. Project Context is t
 ### `HCM-4.5` — Capability-driven Handbook skill
 
 - update the installed Handbook skill to discover supported profiles, artifacts, schemas, vocabulary, and Resolution capabilities through machine interfaces;
+- let the skill-directed LLM agent select guided-adaptive, express, or agent-assisted intake and conduct the conversation while calling stable generic CLI/SDK operations;
+- expose intake coverage, evidence/confidence, unresolved gaps, candidate validation, and approval requirements through typed machine responses;
+- have session onboarding request the applicable prior snapshot plus a Resolution-aware grounding projection/delta rather than the complete snapshot;
 - keep the agent workflow as structured-input gathering plus supported CLI/SDK invocation;
 - prohibit prompt-owned reimplementation and untracked nested synthesis;
 - preserve deterministic refusal and doctor/contract closeout.
@@ -191,6 +250,7 @@ Select one lower-risk artifact family after Phase 0 review. Project Context is t
 - `handbook-compiler` has an explicit retained or retirement posture;
 - JSON Schema covers every supported machine response;
 - no transport owns domain truth.
+- custom artifact kinds and profile vocabulary do not add or rename CLI commands.
 
 ## Phase 5 — Contract membrane and docks
 
@@ -254,8 +314,8 @@ Select one lower-risk artifact family after Phase 0 review. Project Context is t
 
 ### `HCM-6.4` — Tauri product implementation
 
-- GUI over the same SDK capabilities;
-- artifact browsing, projection, contract execution, and evidence display;
+- GUI over the same SDK capabilities, including artifact-kind discovery, intake coverage/candidate review, and approval;
+- artifact, snapshot timeline/delta, projection, contract execution, and evidence display;
 - no new semantic authority in the frontend.
 
 ### `HCM-6.5` — Workflow adapter foundation

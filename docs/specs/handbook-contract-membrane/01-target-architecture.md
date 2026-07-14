@@ -4,7 +4,7 @@
 
 Handbook will become a profile-driven, resolution-aware contract membrane with one transport-neutral capability layer:
 
-> Canonical structured truth is interpreted through stable semantic roles, user-defined artifact and vocabulary profiles, explicit Context Resolution envelopes, deterministic projections, executable contracts, normalized evidence, and hard gate semantics.
+> Canonical structured truth is interpreted through stable semantic roles, schema-defined artifact kinds, profile-selected artifact instances, agent-directed intake coverage, explicit Context Resolution envelopes, a Charter-led project-posture kernel, deterministic Snapshot Memory and projections, executable contracts, normalized evidence, and hard gate semantics.
 
 The same non-CLI use cases must support:
 
@@ -19,16 +19,31 @@ The same non-CLI use cases must support:
 
 ```mermaid
 flowchart TD
-    PROFILE["Instance profile\nartifact registry + vocabulary + resolution stack"]
+    PROFILE["Instance profile\nartifact instances + vocabulary + resolution stack"]
+    KINDS["Artifact kind registry\nschema + intake + projections"]
+    INTAKE["Agent-directed intake\ncoverage + candidate + approval"]
     YAML["Canonical YAML truth"]
+    POSTURE["Resolved project-posture kernel\nCharter-led + evidence-aware"]
     CONTRACT["Contract membrane\nclaims + lifecycle + evidence + verdicts + gates"]
+    SNAP["Snapshot Memory\nimmutable capture + delta + projection"]
     PROJ["Resolution projection\nreveal + derive"]
     SDK["handbook-sdk\ntransport-neutral use cases + DTOs"]
 
-    PROFILE --> YAML
+    PROFILE --> KINDS
+    KINDS --> YAML
+    INTAKE -. "validated promotion" .-> YAML
     PROFILE --> PROJ
     YAML --> CONTRACT
     YAML --> PROJ
+    YAML --> POSTURE
+    PROFILE --> SNAP
+    YAML --> SNAP
+    CONTRACT --> SNAP
+    SNAP --> POSTURE
+    POSTURE --> PROJ
+    POSTURE --> SDK
+    SNAP --> PROJ
+    SNAP --> SDK
     CONTRACT --> SDK
     PROJ --> SDK
 
@@ -36,6 +51,7 @@ flowchart TD
     SDK --> TAURI["Tauri adapter"]
     SDK --> RUST["Published Rust consumers"]
     SDK --> HTTP["Optional future HTTP/OpenAPI adapter"]
+    SDK -. "strategic capture hooks" .-> SNAP
 
     CLI --> SUBCLI["Initial bundled-CLI Substrate bridge"]
     RUST --> SUBRUST["Permanent direct Substrate integration"]
@@ -52,9 +68,12 @@ flowchart TD
 - canonical structured artifact truth;
 - stable semantic role identifiers;
 - instance-profile validation and resolution;
-- artifact registry and requiredness semantics;
+- artifact-kind definitions, schema registry, artifact-instance descriptors, and requiredness semantics;
+- intake coverage definitions, candidate validation, approval/promotion semantics, and deterministic Charter authoring boundaries;
+- resolved project-posture semantics and typed recommendation/transition records without automatic canonical mutation;
 - vocabulary and intentional conflation semantics;
 - Context Resolution schemas and projection semantics;
+- Snapshot Memory capture policy, immutable record, consistency, fingerprint, delta, drift, and projection semantics;
 - contract identity, lifecycle, claims, and invariants;
 - dock protocol and capability negotiation;
 - evidence normalization;
@@ -92,8 +111,8 @@ Advanced consumers may still import owner crates directly. The SDK must expose c
 
 The target should preserve the useful decoupling already present:
 
-- `handbook-engine`: canonical data, schemas, profile/semantic validation, pure transformations;
-- `handbook-flow`: request-scoped selection, context assembly, Resolution envelope application, packet/projection results;
+- `handbook-engine`: canonical data, artifact-kind/intake schemas, profile/semantic validation, Charter/posture resolution, snapshot normalization/fingerprints/deltas, and other pure transformations;
+- `handbook-flow`: request-scoped selection, context assembly, Resolution envelope application, posture/snapshot projection, and packet/projection results;
 - `handbook-pipeline`: declarative workflow compilation/capture/handoff and execution sequencing;
 - `handbook-compiler`: current compatibility/support seam, not presumed to be the permanent facade;
 - `handbook-cli`: executable transport only.
@@ -105,10 +124,13 @@ The final owner for contract-membrane primitives may be an existing owner crate 
 The primary agent workflow is skill-directed CLI use:
 
 - the accompanying installed Handbook skill teaches an AI agent which repository facts to gather and which Handbook operations to invoke;
+- for authoring, the skill invokes a guided-adaptive, express, or agent-assisted intake workflow against a Handbook-provided coverage contract; all modes target the same artifact schema;
+- the LLM agent running the skill conducts the conversation and submits structured observations/declarations through the CLI or, later, the SDK; Handbook does not hide a nested model call inside deterministic authoring;
 - the agent supplies structured inputs and requests through the supported CLI/SDK contract;
 - Handbook performs deterministic parsing, validation, projection, contract evaluation, and writing;
 - the skill must not recreate Handbook semantics in prompt prose or introduce an untracked nested model call;
-- future skill instructions consume profile, capability, schema, and Resolution truth from Handbook rather than hard-coding one artifact/vocabulary set.
+- future skill instructions consume profile, capability, schema, and Resolution truth from Handbook rather than hard-coding one artifact/vocabulary set;
+- session onboarding requests a Resolution-appropriate projection of the latest applicable snapshot instead of loading the complete world view by default.
 
 The skill is an onboarding/orchestration adapter. The CLI/SDK remains the executable product authority.
 
@@ -147,11 +169,45 @@ Substrate imports exact published Handbook crate versions from crates.io and use
 
 ## Canonical and projected artifacts
 
+- An `ArtifactKindDefinition` defines reusable schema, intake, semantic-validation, lifecycle, and projection capabilities; an `ArtifactInstanceDescriptor` binds a kind to a repository-specific identity, path, label, requiredness rule, and dependencies.
+- The shipped default profile selects an opinionated set of artifact instances, but that set is not approved by examples in this pack. Phase 0 must research candidate defaults and complete a user brainstorming/decision session before freezing it.
+- Repository-defined custom kinds use the same registry and generic operations as shipped kinds; adding one must not require a new Rust enum variant or CLI subcommand.
 - YAML is the durable canonical representation where structure is semantically meaningful.
 - Markdown, CLI text, GUI views, packets, OpenAPI, and external workflow formats are derived projections or adapter outputs.
 - A derived view cannot silently become a second editable authority.
 - Every projection identifies its source fingerprint, projection definition, target resolution, vocabulary profile, and lossiness.
 - Expansion may reveal or deterministically derive existing truth. It may not invent canonical detail.
+
+## Charter intake and project-posture kernel
+
+The historical Charter questionnaire becomes a versioned `CharterIntakeDefinition`, not a restored question-by-question CLI wizard.
+
+- it defines coverage, conditional branches, inferable versus user-declared fields, evidence expectations, specificity/completeness rules, approval requirements, and mapping into Charter semantics;
+- guided-adaptive, express, and agent-assisted acquisition modes all produce the same Charter candidate schema;
+- the external LLM agent using the Handbook skill asks the questions and calls stable generic CLI/SDK operations;
+- Handbook validates candidate completeness and provenance, then promotes only through an explicit approval boundary;
+- canonical Charter YAML is authoritative; Markdown, GUI views, packets, and agent context are derived projections;
+- an immutable intake record explains how a candidate was produced but never becomes a competing Charter authority.
+
+The `ProjectPostureKernel` is a fingerprinted resolved view, not another independently editable document. It is led by canonical Charter policy and may incorporate approved domain overrides, applicable project conditions, contracts, and current evidence. Snapshot deltas may trigger a typed `PostureRecommendation` under an approved threshold/window/cooldown/notification policy, but only an authorized `PostureTransition` may change canonical policy. Raising posture may react to one hard trigger; lowering posture requires sustained evidence and may never cross approved floors or red lines. Adapters may deliver notifications but do not own recommendation or approval semantics.
+
+## Snapshot Memory posture
+
+Snapshot Memory is an immutable, deterministic, provenance-bearing observation of selected repository, artifact, workflow, contract, evidence, and session state at a declared point in time and Context Resolution.
+
+It is a memory record class, not an additional Resolution horizon. Strategic, coordination, execution, and operation horizons may each have snapshots.
+
+The target supports:
+
+- policy-driven capture at session, work-item, artifact, contract, gate, commit, merge, publish, blocker, and escalation boundaries;
+- stable normalized state and record fingerprints;
+- consistency classification when state changes during capture;
+- deterministic snapshot-to-snapshot deltas;
+- planned-versus-actual and expected-versus-observed drift signals;
+- Resolution-aware projection so an agent receives only the snapshot fields appropriate to its envelope;
+- references from handoffs, dispatches, evidence, and gates without duplicating snapshot contents.
+
+Snapshots are descriptive evidence, not contract or artifact authority. A previous end snapshot accelerates onboarding, but a new session must capture or verify current state before acting on it.
 
 ## Synthesis boundary
 
@@ -199,13 +255,26 @@ Handbook defines one semantic dock protocol.
 10. **Published means consumable** — downstream-intended Rust APIs are complete only after exact crates.io real-seam proof.
 11. **CLI bridge is transitional by design** — it has an explicit replacement gate.
 12. **Escalation is durable** — blocked or broadened work is recorded and re-dispatched; it is not carried only in chat history.
+13. **Snapshots are immutable observations** — Snapshot Memory records what was observed, not what must be true or what should happen next.
+14. **Snapshot access is resolution-aware** — comprehensive capture does not imply comprehensive disclosure to every agent.
+15. **Snapshot drift is explained, not merely scored** — authorized plan changes and escalations remain distinguishable from unexplained divergence.
+16. **Kinds and instances are distinct** — reusable schema/behavior definitions do not carry repository-specific path or requiredness state.
+17. **Intake modes converge on one schema** — express or inferred acquisition cannot create a structurally weaker class of canonical artifact.
+18. **Inference is not authority** — agent-derived Charter candidates expose evidence, confidence, gaps, and approval needs before promotion.
+19. **Posture recommendations do not self-enact** — observed drift can recommend a transition but cannot rewrite the Charter or approved policy.
+20. **CLI operations remain stable** — profile vocabulary and custom artifact kinds never generate or rename commands.
 
 ## Explicit non-goals
 
 - dynamic CLI command renaming from vocabulary profiles;
+- generated CLI command families for repository-defined artifact kinds;
+- treating the illustrative artifact names in this pack as an approved shipped default set;
+- a hidden or prompt-wrapped model call inside Handbook's deterministic intake/authoring kernel;
+- automatic mutation of the Charter or posture policy from Snapshot Memory or recommendations;
 - a universal validator reimplementation;
 - arbitrary graph-shaped Resolution topology in the first version;
 - model-generated canonical projections in the first version;
+- raw command logs, secrets, credential material, or unrestricted full diffs embedded in Snapshot Memory;
 - a remote organization-profile registry in the first version;
 - a third-party adapter marketplace in the first program;
 - user migration tooling for legacy Handbook formats;

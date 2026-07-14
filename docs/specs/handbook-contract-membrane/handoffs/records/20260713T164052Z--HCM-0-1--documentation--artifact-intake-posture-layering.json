@@ -1,0 +1,419 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.0",
+  "handoff_id": "20260713T164052Z--HCM-0-1--documentation--artifact-intake-posture-layering",
+  "created_at_utc": "2026-07-13T16:40:52Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.1",
+  "packet_id": null,
+  "session": {
+    "kind": "documentation",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "review_required",
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "program_control_pack",
+    "detail_resolution": "architecture_and_protocol",
+    "temporal_horizon": "phase_0",
+    "authority_horizon": "docs_and_context_infrastructure",
+    "memory_horizon": "program_record",
+    "validation_horizon": "control_pack_bootstrap"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Layer artifact-kind/schema registries, adaptive agent-directed intake, Charter candidate/promotion authority, a resolved posture kernel, and a research/user-decision gate for shipped defaults through the Handbook Contract Membrane control pack without changing Rust.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Artifact-kind and instance registries",
+        "Artifact intake semantics",
+        "Project posture kernel"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Phase 0 — Architecture and contract freeze",
+        "Phase 1 — Profile and artifact semantic kernel",
+        "Phase 2 — Canonical YAML artifact authority",
+        "Phase 3 — Vocabulary, Context Resolution, Snapshot Memory, and projections"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Artifact kind definition contract",
+        "Artifact instance descriptor contract",
+        "Artifact intake definition contract",
+        "Intake record and artifact candidate contracts",
+        "Charter intake and canonical contract",
+        "Artifact validation layers",
+        "Project posture kernel and recommendation contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "Control-pack proof gate"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "main",
+    "head": "144c5d4254376d927a213ae26c4bb03860d60475",
+    "dirty": true,
+    "changed_paths": [
+      "docs/ideas/handbook-contract-membrane-architecture-memo.md",
+      "docs/specs/handbook-contract-membrane/00-README.md",
+      "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatch-template.md",
+      "docs/specs/handbook-contract-membrane/handoffs/handoff-record.schema.json",
+      "docs/specs/handbook-contract-membrane/handoffs/handoff-template.json",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260712T235757Z--HCM-0-1--documentation--snapshot-memory-layering.json",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260713T164052Z--HCM-0-1--documentation--artifact-intake-posture-layering.json"
+    ]
+  },
+  "work_completed": [
+    "Separated reusable ArtifactKindDefinition contracts from profile-selected ArtifactInstanceDescriptor state.",
+    "Defined safe repository-local custom schemas, meta-validation, generic operations, and the no-Rust-enum/no-dynamic-command boundary.",
+    "Converted the historical Charter questionnaire concept into a versioned CharterIntakeDefinition coverage contract used by a skill-directed external LLM agent.",
+    "Defined guided-adaptive, express, and agent-assisted acquisition modes that converge on one candidate schema and expose provenance, unknowns, contradictions, and approvals.",
+    "Separated immutable intake records, non-canonical artifact candidates, approved canonical Charter YAML, and derived Markdown/Resolution projections.",
+    "Defined ProjectPostureKernel, PostureEvaluationPolicy, PostureRecommendation, and authorized PostureTransition semantics tied to Snapshot Memory and hysteresis.",
+    "Reserved the shipped default artifact set for HCM-0.6 research plus a user brainstorming/decision session rather than inferring defaults from existing code or examples.",
+    "Added semantic references to handoff and dispatch infrastructure while preserving old immutable handoff compatibility."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "status": "completed",
+      "summary": "Added kind/instance, intake/Charter, posture, skill/CLI/Substrate ownership, default-set research, and non-negotiable boundaries."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "status": "completed",
+      "summary": "Defined artifact kinds/instances, custom schemas, intake coverage and acquisition modes, Charter authority, posture resolution, recommendations, transitions, and snapshot integration."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "status": "completed",
+      "summary": "Recorded current precursors and target gaps for kind registries, shipped defaults, Charter intake, posture resolution, and skill behavior."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "status": "completed",
+      "summary": "Added HCM-0.6 default-set research/decision, kind/schema and instance slices, Charter/custom-intake proofs, and the posture recommendation loop."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "status": "completed",
+      "summary": "Added preliminary kind, instance, intake, candidate/promotion, Charter, validation-layer, posture, threshold, notification, and stable generic operation contracts."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "status": "completed",
+      "summary": "Added current Charter coverage precursor plus default, kind, intake, Charter, and posture proof gates and regression rules."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-record.schema.json",
+      "status": "completed",
+      "summary": "Added backward-compatible optional semantic refs for artifact, intake, canonical, posture, and default-set decision records."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-D-009",
+      "summary": "Artifact kinds are reusable versioned schema/intake/validation/projection definitions; artifact instances bind kinds to repository paths, labels, requiredness, roles, and dependencies.",
+      "authority_effect": "Profiles select instances without turning every custom artifact into a hard-coded product type.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-D-010",
+      "summary": "Repository-defined custom kinds use safely resolved local schemas and stable generic CLI/SDK operations without Rust enum variants, executable schema hooks, remote fetching, or dynamic commands.",
+      "authority_effect": "Customizability remains data-driven and transport command semantics stay stable.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-D-011",
+      "summary": "The historical Charter questionnaire becomes CharterIntakeDefinition; a skill-directed external LLM agent conducts guided-adaptive, express, or agent-assisted acquisition against one coverage/candidate schema.",
+      "authority_effect": "Handbook owns deterministic coverage/evaluation/promotion without restoring a nested CLI wizard or hidden model call.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-D-012",
+      "summary": "Intake records are descriptive provenance, artifact candidates are proposals, canonical Charter YAML is constitutional authority, and Markdown/GUI/packet/agent views are projections.",
+      "authority_effect": "Collected intake remains auditable without creating a second editable Charter authority.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+        "docs/specs/handbook-contract-membrane/02-semantic-model.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-D-013",
+      "summary": "ProjectPostureKernel is a deterministic resolved view; policy-controlled snapshot/evidence triggers emit advisory PostureRecommendation records, and only authorized PostureTransition records change canonical policy.",
+      "authority_effect": "Dynamic guidance gains thresholds, hysteresis, notifications, and auditability without self-mutating governance.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-D-014",
+      "summary": "The shipped default artifact set remains unresolved until HCM-0.6 completes focused research and a user brainstorming/decision session.",
+      "authority_effect": "Existing enums, historical artifacts, templates, and illustrative examples cannot become defaults by inertia.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-F-004",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Artifact-kind/schema, adaptive intake, canonical promotion, and posture contracts are target-only; their new proof gates remain open until bounded implementation slices land.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-F-005",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "summary": "The future shipped default artifact set requires dedicated research and user product/design authority; it must not be selected during implementation.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#phase-0--architecture-and-contract-freeze"
+      ]
+    },
+    {
+      "finding_id": "HCM-F-006",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "HCM-0.1 still requires a fresh independent review of the complete expanded control pack before implementation authority can freeze.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#control-pack-proof-gate"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [
+    {
+      "escalation_id": "HCM-E-001",
+      "trigger": "The shipped default artifact set would otherwise be inferred from current implementation or illustrative candidate names.",
+      "current_resolution": "HCM-0.1 control-pack architecture",
+      "target_resolution": "HCM-0.6 research and user product/design decision",
+      "decision_required": "Approve the versioned shipped artifact kinds, default instances, and requiredness posture after comparing evidence-backed candidate sets.",
+      "options": [
+        "Minimal constitutional set",
+        "Standard opinionated project-governance/context set",
+        "Fuller optional-by-default catalog with a smaller required core"
+      ],
+      "recommendation": "Run focused research first, then a user brainstorming session that evaluates minimal, standard, and fuller candidates before recording the approved default.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/02-semantic-model.md#shipped-defaults-require-a-decision-session",
+        "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#phase-0--architecture-and-contract-freeze"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "Phase 1 shipped-default implementation may begin only after HCM-0.6 records the approved kind/instance/requiredness set."
+    }
+  ],
+  "validation": [
+    {
+      "command": "Python Draft 2020-12 schema validation for handoff schema/template/all records and ledger entries",
+      "status": "passed",
+      "evidence_ref": null
+    },
+    {
+      "command": "Deterministic ledger rebuild comparison",
+      "status": "passed",
+      "evidence_ref": null
+    },
+    {
+      "command": "Control-pack Markdown link, semantic-threading, portability, and phase-ID assertions",
+      "status": "passed",
+      "evidence_ref": null
+    },
+    {
+      "command": "python3 tools/check_archive_boundary.py",
+      "status": "passed",
+      "evidence_ref": null
+    },
+    {
+      "command": "git diff --check and docs-only changed-path assertion",
+      "status": "passed",
+      "evidence_ref": null
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Scope",
+        "Control-pack map",
+        "Per-slice context assembly protocol",
+        "Session closeout rule",
+        "Initial program conclusion"
+      ],
+      "reason": "Make kind/schema, intake/Charter, posture, semantic refs, and unresolved shipped defaults part of the program control surface.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/ideas/handbook-contract-membrane-architecture-memo.md",
+      "sections": [
+        "Executive summary",
+        "Resolution and durable orchestration"
+      ],
+      "reason": "Keep the concise lineage aligned while leaving implementation-grade detail in the control pack.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Ready-to-use prompt"
+      ],
+      "reason": "Prevent orchestration from conflating semantic layers, inferring shipped defaults, or accepting dynamic commands/hidden intake synthesis.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Canonical truth",
+        "Resolution escalation record",
+        "Session closeout procedure",
+        "Orchestration protocol",
+        "Dispatch requirements"
+      ],
+      "reason": "Carry exact semantic refs and reserved user decisions through durable transitions.",
+      "status": "completed"
+    }
+  ],
+  "next_session": {
+    "recommended_kind": "orchestration",
+    "objective": "Select this superseding handoff and dispatch a fresh independent docs-only review of the complete HCM-0.1 control pack, including artifact kind/instance separation, custom-schema safety, adaptive Charter intake, posture authority, Snapshot integration, default-set reservation, sequencing, and proof gates.",
+    "dispatch_required": true,
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sections": [
+          "Authority stack",
+          "Control-pack map",
+          "Per-slice context assembly protocol"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "sections": [
+          "Artifact-kind and instance registries",
+          "Artifact intake semantics",
+          "Project posture kernel",
+          "Snapshot Memory"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sections": [
+          "Phase 0 — Architecture and contract freeze",
+          "Phase 1 — Profile and artifact semantic kernel",
+          "Phase 2 — Canonical YAML artifact authority",
+          "Phase 3 — Vocabulary, Context Resolution, Snapshot Memory, and projections"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sections": [
+          "Artifact kind definition contract",
+          "Artifact instance descriptor contract",
+          "Artifact intake definition contract",
+          "Charter intake and canonical contract",
+          "Artifact validation layers",
+          "Project posture kernel and recommendation contracts"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sections": [
+          "Open program proof gates",
+          "Control-pack proof gate"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sections": [
+          "Ready-to-use prompt"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "docs/specs/handbook-contract-membrane/**",
+      "docs/ideas/handbook-contract-membrane-architecture-memo.md"
+    ],
+    "prohibited_scope": [
+      "Rust implementation",
+      "Selecting the shipped default artifact set without the HCM-0.6 research/user decision",
+      "Restoring a nested or question-by-question CLI wizard",
+      "Dynamic CLI commands",
+      "Substrate source changes",
+      "First implementation slice packet",
+      "Unrelated documentation cleanup"
+    ],
+    "acceptance_criteria": [
+      "A fresh review checks kind/instance/schema ownership, custom-kind safety, intake authority/provenance, one-schema acquisition modes, Charter promotion/projection, posture thresholds/hysteresis/notifications, and Snapshot integration.",
+      "The review verifies that candidate artifact names are not treated as an approved shipped default set and that HCM-0.6 requires research plus user decision.",
+      "Cross-document terminology, phase sequencing, schemas, semantic refs, orchestration, and proof gates are cohesive and concrete.",
+      "Actionable findings are remediated through a bounded dispatch and durable superseding handoff.",
+      "HCM-0.1 closes only after the complete control-pack proof gate is satisfied."
+    ],
+    "stop_conditions": [
+      "Stop and record an escalation if review exposes an unresolved authority boundary among intake, canonical artifacts, posture, snapshots, or contracts.",
+      "Do not select the shipped default set during review; route that decision to HCM-0.6.",
+      "Do not begin Rust implementation before HCM-0.1 review closes and a slice-local packet is approved."
+    ]
+  },
+  "supersedes": [
+    "20260712T235757Z--HCM-0-1--documentation--snapshot-memory-layering"
+  ],
+  "chat_summary": "Layered artifact kinds/instances, custom schemas, adaptive Charter intake, canonical promotion, resolved posture recommendations, semantic handoff refs, and the HCM-0.6 default-set research/user-decision gate through the control pack. HCM-0.1 remains review-required; no Rust changed."
+}

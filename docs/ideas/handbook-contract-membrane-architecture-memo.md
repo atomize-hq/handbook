@@ -26,8 +26,9 @@ A second important principle is scope control:
 A third principle is structured, configurable, resolution-aware truth:
 
 - semantically meaningful artifacts move from Markdown-first authority to canonical structured YAML
-- a shipped opinionated instance profile defines the default artifact set, vocabulary, and Resolution stack
-- repositories may define their own canonical artifact descriptors, requiredness, vocabulary, and intentional workflow-role conflations
+- reusable `ArtifactKindDefinition` records own versioned canonical schemas, optional intake coverage, lifecycle, validation, and projections; profile-selected `ArtifactInstanceDescriptor` records own repository path, label, requiredness, and dependency state
+- a shipped opinionated instance profile defines the default artifact instances, vocabulary, and Resolution stack only after a dedicated research pass and user brainstorming/decision session approves the default set
+- repositories may define their own schema-backed artifact kinds and instances, requiredness, vocabulary, and intentional workflow-role conflations without Rust enum variants or dynamic CLI commands
 - Markdown, packets, CLI text, GUI views, OpenAPI, and external workflow formats are projections or adapter outputs
 - projections are selected by an explicit namespaced Context Resolution envelope rather than only a token/byte budget
 - initial projection behavior is deterministic reveal/derive; model synthesis is candidate-only and not part of canonical projection
@@ -60,6 +61,10 @@ It controls:
 - when the work must escalate to a broader orchestration/design context
 
 Every program session writes a durable handoff record. Blockers, newly discovered decomposition, cross-document repairs, and broader-resolution decisions return through an orchestration session that updates authority and emits the next bounded dispatch prompt. Long chat closeout reports are not the durable program ledger.
+
+Snapshot Memory complements that transition record with immutable, deterministic observations of repository, artifact, work, contract, evidence, and session state at strategic hooks such as session start/end and artifact/contract/gate transitions. Handoffs reference snapshots and deltas rather than duplicating them. New sessions compare the prior end snapshot with a fresh start snapshot, then receive only the grounding projection allowed by their Context Resolution envelope.
+
+The historical Charter questionnaire becomes a versioned `CharterIntakeDefinition` used by the Handbook skill's external LLM agent. Guided-adaptive, express, and agent-assisted acquisition all target one Charter candidate schema; Handbook owns coverage/evaluation/promotion while the agent asks questions and invokes stable CLI/SDK operations. Approved canonical Charter YAML produces Markdown and other projections. A deterministic resolved project-posture kernel may combine that Charter with approved overrides and current conditions, while Snapshot-driven posture recommendations remain advisory until an authorized transition changes canonical policy.
 
 ## Architecture decision statement
 
