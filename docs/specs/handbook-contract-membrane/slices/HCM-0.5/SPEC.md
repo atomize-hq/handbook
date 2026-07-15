@@ -12,10 +12,10 @@ This slice is documentation/design-only. It authorizes no Rust, Cargo, CLI, Taur
 PHASE_ID: HCM-0
 SLICE_ID: HCM-0.5
 ACTIVE_PACKET: docs/specs/handbook-contract-membrane/slices/HCM-0.5
-HANDOFF_SELECTOR: none
+HANDOFF_SELECTOR: 20260715T202049Z--HCM-0-5--orchestration--planning-review-budget-exhausted
 ```
 
-HCM-0.4 is completed dependency evidence at `git:214a5b8eb182fce74478df49d4f55d226d65fdf5` and in `handoffs/records/20260715T141656Z--HCM-0-4--orchestration--sdk-transport-contracts-frozen.json`. HCM-0.9 is abandoned evidence only. It supplies no resume context, topology authority, or contract-catalog leaf authority.
+HCM-0.4 is completed dependency evidence at `git:214a5b8eb182fce74478df49d4f55d226d65fdf5` and in `handoffs/records/20260715T141656Z--HCM-0-4--orchestration--sdk-transport-contracts-frozen.json`. HCM-0.9 is abandoned evidence only. It supplies no resume context, topology authority, or contract-catalog leaf authority. The selected HCM-0.5 handoff is immutable resume evidence for the exhausted historical planning-review lineage; the human-authorized continuation below replaces its stop recommendation without rewriting that record or its dispatches.
 
 ## Selective context capsule
 
@@ -23,7 +23,7 @@ HCM-0.4 is completed dependency evidence at `git:214a5b8eb182fce74478df49d4f55d2
 SLICE / OBJECTIVE: HCM-0.5 / freeze contract, evidence, verdict, gate, and dock semantics
 ACTIVE PACKET: docs/specs/handbook-contract-membrane/slices/HCM-0.5
 DEPENDENCY / AUTHORIZATION PROOF: HCM-0.2, HCM-0.3, HCM-0.4, and HCM-0.8 are closed design dependencies; Phase 0 authorizes docs/design only
-SELECTED HANDOFF / VALIDITY: none; HCM-0.4 completion is dependency evidence, not resume authority
+SELECTED HANDOFF / VALIDITY: 20260715T202049Z--HCM-0-5--orchestration--planning-review-budget-exhausted; schema/ledger-valid immutable resume evidence; its Reviews 1-4 remain historical and are not renumbered
 ACTIVE RESOLUTION ENVELOPE: repository-local documentation scope; no product Resolution label/default is selected; proof comparisons use the frozen six explicit dimensions
 GROUNDING SNAPSHOT / START DELTA: Snapshot Memory runtime is not implemented; branch, HEAD, clean status, dependency record, and canonical 05 fingerprint are live preflight evidence
 TARGET AUTHORITY BOUNDARY: handbook-contracts owns protocol-neutral semantics; separable docks witness; SDK composes ordinary operations; transports remain thin
@@ -31,14 +31,14 @@ CURRENT REPO-TRUTH STATUS: target contract/dock semantics are preliminary and no
 MUST-READ PACK SECTIONS: 01 authority/dock/invariants; 02 Resolution/validation/adapter rules; 03 membrane/dock rows; 04 HCM-0.5 and Phase 5; 05 HCM-0.4 operation/transport rules plus preliminary contract/dock sections; 06 open gates/regressions
 LIVE SOURCE / TESTS / PRECEDENT: handoff Draft 2020-12 validator and local schema policy are implementation precedents only; ideas memo supplies design lineage, not owner override
 SIBLING SEAMS IN CONTEXT: HCM-0.2 semantic identities, HCM-0.3 Resolution/Snapshot/Projection, HCM-0.4 SDK/transport, HCM-0.6 defaults, HCM-5.1 through HCM-5.4 runtime
-ALLOWED AREAS: this packet and affected 01-06 sections of the control pack
-EXPLICIT NON-GOALS: HCM-0.9 repair/decomposition, leaf catalogs, Rust/runtime work, shipped defaults, universal validator, marketplace, HCM-0.6
+ALLOWED AREAS: current continuation: this three-file packet, additive continuation-review dispatches, final planning-continuation handoff, and ledger; fresh execution session after approved planning: affected 01-06 sections
+EXPLICIT NON-GOALS: canonical 00-06 edits in this continuation; HCM-0.9 repair/decomposition; leaf catalogs; Rust/runtime work; shipped defaults; universal validator; marketplace; HCM-0.6
 APPLICABLE CONTRACTS / PROOF GATES: PG-CONTRACT-01, PG-DOCK-01, PG-GATE-01 stay open; HCM-0.5 documentation-freeze gate is added
 REQUIRED SKILL CHAIN: using-agent-skills -> context-engineering -> spec-driven-development -> planning-and-task-breakdown -> api-and-interface-design -> security-and-hardening -> incremental-implementation -> documentation-and-adrs -> debugging-and-error-recovery as needed -> code-review-and-quality -> git-workflow-and-versioning
 KNOWN CORRECTIONS OR CONFLICTS: preliminary 05 conflates passed/blocked evaluation with contract lifecycle; freeze must separate them without changing HCM-0.4 contracts
 MAXIMUM PERMITTED CLASSIFICATION / PROOF CHANGE: documentation/design freeze only; runtime seams remain TargetOnly and runtime proof gates remain open
-EXIT PROOF: planning review clean, canonical freeze complete, full proof wall green, final fresh review clean, primary commit plus mechanical handoff/ledger commit
-STOP CONDITIONS: product choice not established by authority; broader slice redesign; runtime proof required; review budget exhausted without clean; mandatory delegation unavailable
+EXIT PROOF: this continuation exits after a clean Continuation Planning Review, complete packet validation, approved planning commit, and partial/context-boundary v1.2 handoff; canonical freeze and Design Reviews 1-3 belong to the authorized fresh execution session
+STOP CONDITIONS: Continuation Planning Review 2 non-clean; a non-bounded or out-of-authority Continuation Planning Review 1 result; product choice absent from authority; broader redesign; runtime proof required; mandatory delegation unavailable
 ```
 
 ## Objective
@@ -326,7 +326,7 @@ The freeze and proof wall must cover at least:
 
 | File | Required HCM-0.5 change |
 |---|---|
-| `00-README.md` | mark HCM-0.5 semantics frozen after clean closeout; retain docs-only/runtime-open wording |
+| `00-README.md` | author the final intended HCM-0.5 status during Tasks 3-5, include those bytes in the complete proof wall and every Design Review manifest, and make them effective only through the clean reviewed design commit; no post-`CLEAN` status-byte edit |
 | `01-target-architecture.md` | tighten dock posture, validator witness boundary, process-first/future-Rust semantic parity, and non-goals |
 | `02-semantic-model.md` | add contract/evidence/Resolution/applicability semantics and adapter implications without changing HCM-0.3 definitions |
 | `03-seam-crosswalk.md` | record frozen target semantics/selected first proof target while both runtime seams stay `TargetOnly` |
@@ -348,8 +348,8 @@ The freeze and proof wall must cover at least:
 10. Check Markdown relative links, anchors, fences, and archive boundary.
 11. Run all three handoff validator modes.
 12. Run `git diff --check`, scoped diff inspection, no absolute durable paths, no Rust/Cargo changes, no HCM-0.6 changes, and repository-required GitNexus change detection.
-13. Obtain a fresh isolated built-in `default` final review over the complete final subject and proof evidence.
-14. Mechanically assert the closed review state machine: Reviews 1-4 have unique round numbers and fingerprints; Review 3 `CLEAN` is required before canonical edits; final-design completion additionally requires the full proof wall before a `CLEAN` Review 4; the Review 3-findings path uses Remediation 3 and Review 4 only for planning closure; every other Review 4 outcome stops; and no state schedules Review 5.
+13. In the later design-freeze execution session, obtain Design Review 1 over the complete final subject and proof evidence; use Design Review 2 only after the first permitted design remediation and Design Review 3 only after the second. Every Design Review manifest includes the final intended `00-README.md` bytes, and byte-identical staging/commit verification requires that file's hash to equal the clean review manifest entry.
+14. Mechanically assert the stage-scoped state machines: historical Planning Reviews 1-4 remain unchanged; Continuation Planning Review 1 may lead to at most one remediation and Continuation Planning Review 2; the future design stage permits at most Design Reviews 1-3 and two remediations; every stage stops immediately on `CLEAN`; every non-clean terminal review transitions byte-identically to its non-completion handoff; no continuation review is named `Review 5`; and no Design Review 4 exists.
 
 ## Non-goals
 
@@ -362,28 +362,42 @@ The freeze and proof wall must cover at least:
 - waiver semantics, automatic contract mutation, auto-promotion, model synthesis, or executable predicates in claims/schemas;
 - claiming PG-CONTRACT-01, PG-DOCK-01, or PG-GATE-01 passed from documentation.
 
-## Review budget and honest stop behavior
+## Stage-scoped review authority and honest stop behavior
 
-- Maximum four complete-subject reviewer invocations total. Review 1 was the initial planning review; Review 2 was the first remediated planning review; the next remediated planning review is Review 3. If Review 3 is `CLEAN`, the complete final design review is Review 4. No invocation may reuse or renumber a prior round, and there is no Review 5.
-- Maximum three remediation rounds total across planning and design.
-- Every post-remediation review uses a different fresh isolated built-in `default` reviewer.
-- Stop immediately on `CLEAN` for the current required wall; never reuse a reviewer or self-approve.
-- If Review 3 reports only bounded in-authority corrections, Remediation 3 and Review 4 may close planning, but the slice must then stop honestly because no independent final-design review budget remains. If Review 3 is clean, reserve Review 4 exclusively for the complete final design. Any Review 4 finding leaves the slice not review-clean; a local correction may be recorded, but completion cannot be claimed without prohibited Review 5.
-- Stop with `human_input` if first-proof-dock selection or another decision needs product authority absent from the live pack/evidence.
-- Stop with `authority_boundary`, `external_blocker`, `context_boundary`, or `capability_unavailable` exactly when that is the true reason.
-- If Review 4 is not clean, preserve safe reviewed work if any and create an honest partial/blocked/authority-boundary handoff naming the exact remaining finding and the exhausted review budget; budget exhaustion does not turn a local finding into abandonment.
+Review identity is stage-scoped. There is no shared counter across planning continuation and design execution:
+
+| Stage | Review identities | Remediation authority | Terminal rule |
+|---|---|---|---|
+| historical planning | Planning Reviews 1-4 and Remediations 1-3 | exhausted; immutable evidence only | preserve all four dispatches and reviewed fingerprints unchanged |
+| current planning continuation | Continuation Planning Review 1; Continuation Planning Review 2 only after one permitted remediation | maximum one bounded planning remediation | stop on `CLEAN`; stop after Continuation Planning Review 2; never call either invocation `Review 5` |
+| future canonical design freeze | Design Review 1; Design Review 2 only after design Remediation 1; Design Review 3 only after design Remediation 2 | maximum two design remediations | stop on `CLEAN`; after non-clean Design Review 3, create an honest non-completion handoff; no Design Review 4 |
+
+Every review uses a fresh isolated built-in `default` reviewer with `using-agent-skills` and `code-review-and-quality`; every post-remediation review uses a different fresh identity. A `CLEAN` result ends that stage's review loop immediately. Review budgets are maxima, not targets.
+
+The current planning continuation may change only this three-file subject and additive continuation-review dispatches. After correcting HCM-0.5-R4-001 and HCM-0.5-R4-002, submit the complete subject to Continuation Planning Review 1. If it reports only bounded actionable planning defects classified `local_remediation` and every correction stays inside the authorized three-file subject, permit one remediation and submit the new complete subject to Continuation Planning Review 2. Any other non-clean Continuation Planning Review 1 result is terminal. Every non-clean Continuation Planning Review 2 result is terminal.
+
+A non-clean terminal review permits no local correction. The subject manifest and aggregate fingerprint recorded by its non-completion handoff must equal the terminal review's manifest and fingerprint exactly; no subject byte may change between review and handoff. Budget exhaustion is reported as an honest partial/escalation boundary and never as automatic abandonment.
 
 The review transition set is closed:
 
 | Prior state | Event | Only allowed next state |
 |---|---|---|
-| Review 2 findings remediated | Review 3 `CLEAN` | canonical design edits, complete proof wall, then Review 4 final-design review |
-| Review 2 findings remediated | Review 3 bounded findings | Remediation 3, then Review 4 planning-closure review |
-| Review 3 `CLEAN` + complete proof wall | Review 4 final-design `CLEAN` | byte-identical proof replay/staging and completion commits |
-| Review 3 `CLEAN` + complete proof wall | Review 4 final-design findings | exact non-completion handoff; no remediation presented as clean |
-| Review 3 findings + Remediation 3 | Review 4 planning `CLEAN` or findings | exact non-completion handoff; no canonical edits |
-| Any Review 4 terminal state | any proposed Review 5 | refuse as review-budget violation |
+| human-authorized continuation + R4-001/R4-002 repair | Continuation Planning Review 1 `CLEAN` | validate byte-identical subject, commit approved planning continuation, then partial/context-boundary handoff authorizing a fresh design-freeze session |
+| human-authorized continuation + R4-001/R4-002 repair | Continuation Planning Review 1 bounded local planning findings only | one planning remediation, full verification, then different-fresh Continuation Planning Review 2 |
+| human-authorized continuation + R4-001/R4-002 repair | Continuation Planning Review 1 any other non-clean result | byte-identical non-completion handoff; no canonical edit |
+| Continuation Planning Review 1 bounded findings remediated | Continuation Planning Review 2 `CLEAN` | validate byte-identical subject, commit approved planning continuation, then partial/context-boundary handoff authorizing a fresh design-freeze session |
+| Continuation Planning Review 1 bounded findings remediated | Continuation Planning Review 2 any non-clean result | byte-identical non-completion handoff; no further remediation or canonical edit |
+| approved planning commit + fresh design-freeze session + complete proof wall | Design Review 1 `CLEAN` | byte-identical proof replay/staging and completion commits |
+| approved planning commit + fresh design-freeze session + complete proof wall | Design Review 1 findings | design Remediation 1, full proof wall, then different-fresh Design Review 2 |
+| Design Review 1 findings remediated + complete proof wall | Design Review 2 `CLEAN` | byte-identical proof replay/staging and completion commits |
+| Design Review 1 findings remediated + complete proof wall | Design Review 2 findings | design Remediation 2, full proof wall, then different-fresh Design Review 3 |
+| Design Review 2 findings remediated + complete proof wall | Design Review 3 `CLEAN` | byte-identical proof replay/staging and completion commits |
+| Design Review 2 findings remediated + complete proof wall | Design Review 3 any non-clean result | byte-identical non-completion handoff; no Design Review 4 |
+
+Stop with `human_input` if first-proof-dock selection or another decision needs product authority absent from the live pack/evidence. Use `authority_boundary`, `external_blocker`, `context_boundary`, or `capability_unavailable` only when that is the true reason.
 
 ## Closeout
 
-Only the alternate Review 3-`CLEAN` plus final-design Review 4-`CLEAN` branch may use the completion path: commit the reviewed packet/control-pack subject first, then create one completed v1.2 parent handoff bound to that primary commit and final clean manifest, rebuild/validate the ledger, and commit only the mechanical handoff/ledger closeout. On the live Review 3-findings branch, Review 4 can close planning only; create an exact v1.2 non-completion handoff naming the exhausted independent final-design review capacity and the bounded continuation required, and do not claim or create the design-freeze completion commits. Do not start HCM-0.6.
+This planning-continuation session never edits canonical `00`-`06`. After a clean Continuation Planning Review, run complete packet validation and GitNexus change detection, commit the exact reviewed planning subject plus its additive continuation-review dispatches, then create a `partial` / `context_boundary` v1.2 parent handoff. That handoff records the approved planning commit, historical Planning Reviews 1-4, Continuation Planning Review 1 and optional Continuation Planning Review 2, the reserved Design Review 1-3/two-remediation budget, the exact execution packet path, and the prohibition on treating any planning review as final-design review. Rebuild/validate the ledger and commit only the mechanical handoff/ledger closeout separately.
+
+The fresh design-freeze execution session may use the completed-design path only after canonical design bytes, the complete proof wall, and a `CLEAN` Design Review 1, 2, or 3 over the complete final-design subject. It commits the reviewed packet/control-pack subject first, then creates one completed v1.2 handoff bound to that primary commit and clean manifest and commits the mechanical closeout separately. A non-clean terminal continuation or design review uses the byte-identical non-completion path instead. Do not start HCM-0.6.

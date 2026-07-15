@@ -1,0 +1,181 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260715T214619Z--HCM-0-5--continuation-planning-review-2",
+  "created_at_utc": "2026-07-15T21:46:19Z",
+  "source_handoff_ids": [
+    "20260715T202049Z--HCM-0-5--orchestration--planning-review-budget-exhausted"
+  ],
+  "parent_orchestration_id": "20260715T213542Z--HCM-0-5--planning-continuation-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.5",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:cc1f2fe160164299145e44c3a1a2d86329c0ce749278aa26eab079f50c8c898d",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.5/SPEC.md",
+        "sha256": "e882a50d996cc1d51f05986f0f652afd42eb81a8a2fbae905f10f1d52402e6e4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.5/tasks/plan.md",
+        "sha256": "eb9a0606299843f2a11cfef02a00e67b2777dd89c41798c0b167dec056dfe6b2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.5/tasks/todo.md",
+        "sha256": "e8a7dcaafeccc274160ef64b83ce27f2c7c436d2c3481a68c3e5d2a84881e16a"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:cc1f2fe160164299145e44c3a1a2d86329c0ce749278aa26eab079f50c8c898d"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "control_pack_planning",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "continuation_planning_review_2_terminal"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Authority stack",
+        "Per-slice context assembly protocol",
+        "Top-level orchestration and closeout rule"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Authority split",
+        "Dock posture",
+        "Non-negotiable invariants",
+        "Explicit non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Context Resolution",
+        "Resolution-aware validation",
+        "Adapter implications"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Contract membrane",
+        "External docks",
+        "Contract catalog remains monolithic"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-0.5",
+        "Phase 0 non-goals",
+        "Phase 5 Contract membrane and docks"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "HCM-0.4 crate ownership and dependency contract",
+        "SDK ordinary-use-case contract",
+        "Operation definition contract",
+        "Contract record through Dock request/result"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "Regression rules",
+        "HCM-0.4 ownership/SDK/transport freeze proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Fresh review / remediation loop",
+        "Full proof wall",
+        "True-stop handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout",
+        "Create a v1.2 parent handoff"
+      ]
+    }
+  ],
+  "repo_truth": "The exact three-file HCM-0.5 planning manifest is the complete review subject. Canonical 00-06 files remain unchanged and preliminary for HCM-0.5. Historical Planning Reviews 1-4 and their dispatches are immutable evidence. This invocation is terminal Continuation Planning Review 2; no further planning remediation or review is authorized. A later fresh canonical design-freeze session reserves Design Reviews 1-3 and two remediations. The exact dependency graph is: selected exhausted-budget handoff -> explicit human continuation -> R4-001/R4-002 planning repair -> Continuation Planning Review 1 -> at most one bounded planning remediation -> Continuation Planning Review 2. CLEAN -> complete packet validation and GitNexus detection -> approved planning commit -> validated partial/context-boundary handoff binding that commit and exact packet -> fresh session selecting that exact handoff -> Tasks 3-5 -> complete proof wall -> Design Review 1. Any non-clean Continuation Planning Review 2 -> Task 7 byte-identical handoff and stop. Tasks 3-6 and 8-10 remain prohibited until Task 2B, including its handoff, is complete; Task 7 remains executable solely for a terminal non-completion handoff. Future design findings permit at most two remediations and Design Reviews 2-3; terminal non-clean transitions byte-identically to Task 7 and no Design Review 4.",
+  "allowed_scope": [
+    "Read and replay the exact three-file subject manifest and the named authority sections.",
+    "Run read-only Markdown, schema/example, link, portability, Git, review-lineage, and handoff checks needed to validate the plan.",
+    "Review the complete planning subject for internal consistency, exact dependency ordering, stage-scoped review identities, byte-identical terminal handoff behavior, complete final-design subject timing, and independently executable future design-review budget."
+  ],
+  "non_goals": [
+    "No repository edits, commits, new dispatches, global handoff, ledger write, or user task hop by the reviewer.",
+    "No canonical 00-06 design edits, 05 contract changes, Rust, Cargo, runtime, CLI, Tauri, SDK, Substrate, dock implementation, HCM-0.6 activation, HCM-0.9 change, catalog leaf, or substantive semantic redesign.",
+    "Do not treat a planning review as final-design review, rename a continuation review Review 5, schedule Design Review 4, rewrite historical dispatches/handoffs, or authorize canonical design work from a non-clean planning subject."
+  ],
+  "tasks": [
+    "Replay the complete three-file subject manifest and aggregate fingerprint before reviewing content.",
+    "Verify HCM-0.5-R4-001 is repaired: no terminal review permits a local subject correction; every non-clean terminal review transitions to a non-completion handoff with the identical manifest/fingerprint and no intervening subject-byte change.",
+    "Verify HCM-0.5-R4-002 is repaired: Tasks 3-6 and 8-10 are prohibited until Task 2B is complete, including the validated partial/context-boundary handoff and fresh-session selection of that exact handoff, while Task 7 remains executable for a terminal non-completion handoff.",
+    "Verify the exact dependency graph in repo_truth is represented consistently in SPEC.md, plan.md, and todo.md without an unreachable handoff, missing resume-selector gate, or premature canonical-design branch.",
+    "Verify historical Planning Reviews 1-4 remain unchanged; Continuation Planning Reviews 1-2 are distinct and exhausted by this invocation; Design Reviews 1-3 are reserved for the fresh future session and permit at most two remediations; every stage stops immediately on CLEAN; no continuation Review 5 or Design Review 4 exists.",
+    "Verify final intended 00-README.md status bytes are authored before the complete proof wall, included in every Design Review manifest, made effective only by the clean reviewed design commit, and never changed after CLEAN.",
+    "Review whether the future execution plan still fully closes the HCM-0.5 semantic questions, owner boundaries, process-dock posture, HCM-0.4 regression boundary, proof-before-review ordering, complete final-design manifest, and two-commit closeout without adding implementation authority.",
+    "Review non-goals, current-session scope, exact clean and non-clean closeout paths, and the rule that planning review never satisfies final-design review.",
+    "Return findings first ordered Critical, Required, Optional, Nit with exact file/line, violated authority/objective, impact, smallest remediation, and missing verification. Return CLEAN only if no actionable planning finding remains."
+  ],
+  "contracts_and_gates": [
+    "Authorized terminal finding HCM-0.5-R4-001: terminal non-clean subject bytes must be preserved unchanged into the non-completion handoff.",
+    "Authorized terminal finding HCM-0.5-R4-002: the pre-planning-clean task prohibition must exclude Task 7 while continuing to block canonical design, proof, completion, and implementation tasks until the validated planning handoff is selected by a fresh session.",
+    "Historical stage: immutable Planning Reviews 1-4 and Remediations 1-3; no renumbering or rewrite.",
+    "Continuation stage: this is terminal Continuation Planning Review 2; stop immediately on CLEAN; any non-clean result transitions byte-identically to Task 7 with no further remediation.",
+    "Future design stage: maximum three complete final-design reviews, maximum two remediations, stop immediately on CLEAN, no Design Review 4, and honest byte-identical handoff on terminal non-clean.",
+    "Verification evidence for the current subject: planning phrase/state/dependency assertions passed; changed paths are exactly the three packet files plus additive continuation dispatch evidence; all four historical dispatches match HEAD; archive boundary and negative self-test passed; all three handoff validator modes passed; git diff --check passed."
+  ],
+  "stop_conditions": [
+    "Return a Required finding if the planning packet contains any actionable defect, including an inconsistent task edge, manifest boundary, or review-stage transition.",
+    "Return blocked if the exact subject/authority or required read-only capability is unavailable.",
+    "Do not modify repository state or write orchestration artifacts.",
+    "Do not authorize canonical design edits, implementation, HCM-0.6, HCM-0.9, Review 5, or Design Review 4."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

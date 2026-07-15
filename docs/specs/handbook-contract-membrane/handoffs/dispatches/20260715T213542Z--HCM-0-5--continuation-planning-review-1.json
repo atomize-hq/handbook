@@ -1,0 +1,180 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260715T213542Z--HCM-0-5--continuation-planning-review-1",
+  "created_at_utc": "2026-07-15T21:35:42Z",
+  "source_handoff_ids": [
+    "20260715T202049Z--HCM-0-5--orchestration--planning-review-budget-exhausted"
+  ],
+  "parent_orchestration_id": "20260715T213542Z--HCM-0-5--planning-continuation-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.5",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:8859c03be1b761d9a94aa623eb34be2a7c7f0de600eaae29648e03db87562386",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.5/SPEC.md",
+        "sha256": "c26e9bf2b5c27a4b3be51c32025d7c4c2fcfde7329e06ff4ee1333996b9d20bb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.5/tasks/plan.md",
+        "sha256": "2542d0c323bc06ffc1bcc7e838189e3a293ccf9051f3d77e18cf392c35046e28"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.5/tasks/todo.md",
+        "sha256": "98288bce038a4ba4b42c8363e9cda49b452ae80886e5b0465747b948725f45e0"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:8859c03be1b761d9a94aa623eb34be2a7c7f0de600eaae29648e03db87562386"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "control_pack_planning",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "continuation_planning_review_1"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Authority stack",
+        "Per-slice context assembly protocol",
+        "Top-level orchestration and closeout rule"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Authority split",
+        "Dock posture",
+        "Non-negotiable invariants",
+        "Explicit non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Context Resolution",
+        "Resolution-aware validation",
+        "Adapter implications"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Contract membrane",
+        "External docks",
+        "Contract catalog remains monolithic"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-0.5",
+        "Phase 0 non-goals",
+        "Phase 5 Contract membrane and docks"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "HCM-0.4 crate ownership and dependency contract",
+        "SDK ordinary-use-case contract",
+        "Operation definition contract",
+        "Contract record through Dock request/result"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "Regression rules",
+        "HCM-0.4 ownership/SDK/transport freeze proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Fresh review / remediation loop",
+        "Full proof wall",
+        "True-stop handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout",
+        "Create a v1.2 parent handoff"
+      ]
+    }
+  ],
+  "repo_truth": "The exact three-file HCM-0.5 planning manifest is the complete review subject. Canonical 00-06 files remain unchanged and preliminary for HCM-0.5. Historical Planning Reviews 1-4 and their dispatches are immutable evidence. The current stage uses Continuation Planning Review 1 and permits Continuation Planning Review 2 only after one bounded local planning remediation. A later fresh canonical design-freeze session reserves Design Reviews 1-3 and two remediations. The exact dependency graph is: selected exhausted-budget handoff -> explicit human continuation -> R4-001/R4-002 planning repair -> Continuation Planning Review 1 -> CLEAN approved-planning closeout; bounded local planning findings only -> one remediation -> Continuation Planning Review 2 -> CLEAN approved-planning closeout or non-clean byte-identical handoff; any other non-clean Continuation Planning Review 1 -> byte-identical handoff. Only an approved planning commit authorizes the fresh design session; Tasks 3-6 and 8-10 remain prohibited until then, while Task 7 remains executable solely for a terminal non-completion handoff.",
+  "allowed_scope": [
+    "Read and replay the exact three-file subject manifest and the named authority sections.",
+    "Run read-only Markdown, schema/example, link, portability, Git, review-lineage, and handoff checks needed to validate the plan.",
+    "Review the complete planning subject for internal consistency, exact dependency ordering, stage-scoped review identities, byte-identical terminal handoff behavior, and independently executable future design-review budget."
+  ],
+  "non_goals": [
+    "No repository edits, commits, new dispatches, global handoff, ledger write, or user task hop by the reviewer.",
+    "No canonical 00-06 design edits, 05 contract changes, Rust, Cargo, runtime, CLI, Tauri, SDK, Substrate, dock implementation, HCM-0.6 activation, HCM-0.9 change, catalog leaf, or substantive semantic redesign.",
+    "Do not treat a planning review as final-design review, rename a continuation review Review 5, schedule Design Review 4, rewrite historical dispatches/handoffs, or authorize canonical design work from a non-clean planning subject."
+  ],
+  "tasks": [
+    "Replay the complete three-file subject manifest and aggregate fingerprint before reviewing content.",
+    "Verify HCM-0.5-R4-001 is repaired: no terminal review permits a local subject correction; every non-clean terminal review transitions to a non-completion handoff with the identical manifest/fingerprint and no intervening subject-byte change.",
+    "Verify HCM-0.5-R4-002 is repaired: Tasks 3-6 and 8-10 are prohibited until continuation planning is independently CLEAN, while Task 7 remains executable for the required terminal non-completion handoff.",
+    "Verify the exact dependency graph in repo_truth is represented consistently in SPEC.md, plan.md, and todo.md without an unreachable handoff or premature canonical-design branch.",
+    "Verify historical Planning Reviews 1-4 remain unchanged; Continuation Planning Reviews 1-2 are distinct and permit at most one remediation; Design Reviews 1-3 are reserved for the fresh future session and permit at most two remediations; every stage stops immediately on CLEAN; no continuation Review 5 or Design Review 4 exists.",
+    "Review whether the future execution plan still fully closes the HCM-0.5 semantic questions, owner boundaries, process-dock posture, HCM-0.4 regression boundary, proof-before-review ordering, and two-commit closeout without adding implementation authority.",
+    "Review non-goals, current-session scope, exact clean and non-clean closeout paths, and the rule that planning review never satisfies final-design review.",
+    "Return findings first ordered Critical, Required, Optional, Nit with exact file/line, violated authority/objective, impact, smallest remediation, and missing verification. Return CLEAN only if no actionable planning finding remains."
+  ],
+  "contracts_and_gates": [
+    "Authorized terminal finding HCM-0.5-R4-001: terminal non-clean subject bytes must be preserved unchanged into the non-completion handoff.",
+    "Authorized terminal finding HCM-0.5-R4-002: the pre-planning-clean task prohibition must exclude Task 7 while continuing to block canonical design, proof, completion, and implementation tasks.",
+    "Historical stage: immutable Planning Reviews 1-4 and Remediations 1-3; no renumbering or rewrite.",
+    "Continuation stage: maximum two complete-subject reviews, maximum one remediation, stop immediately on CLEAN, and stop after Continuation Planning Review 2.",
+    "Future design stage: maximum three complete final-design reviews, maximum two remediations, stop immediately on CLEAN, no Design Review 4, and honest byte-identical handoff on terminal non-clean.",
+    "Verification evidence: planning subject phrase/state assertions passed; changed paths are exactly the three packet files; all four historical dispatches match HEAD; archive boundary and negative self-test passed; all three handoff validator modes passed; git diff --check passed."
+  ],
+  "stop_conditions": [
+    "Return a Required finding if the planning packet contains any actionable defect, including an inconsistent task edge or review-stage transition.",
+    "Return blocked if the exact subject/authority or required read-only capability is unavailable.",
+    "Do not modify repository state or write orchestration artifacts.",
+    "Do not authorize canonical design edits, implementation, HCM-0.6, HCM-0.9, Review 5, or Design Review 4."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

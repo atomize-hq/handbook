@@ -2,14 +2,18 @@
 
 ## Overview
 
-Execute a documentation-only semantic freeze through a closed review-budget state machine. A clean Review 3 would have authorized the canonical monolithic control-pack edits, the complete proof wall, and Review 4 as the final-design review. Because Review 3 instead returned bounded planning findings, the live path is now Remediation 3 followed by Review 4 as planning closure, then an honest non-completion handoff. Canonical design edits, final-design approval, and the two-commit completion path are unavailable on this branch. Runtime contract/dock work remains deferred to Phase 5.
+First complete a bounded documentation-only planning continuation. Repair only HCM-0.5-R4-001 and HCM-0.5-R4-002, replace the exhausted shared review counter with explicit stage-scoped review authority, and obtain a clean Continuation Planning Review before any canonical design work. A clean continuation produces an approved planning commit and a separate partial/context-boundary handoff for a fresh design-freeze session. This session never edits canonical `00`-`06`; runtime contract/dock implementation remains deferred to Phase 5.
 
 ## Authority and sequencing decisions
 
-- Use the explicit HCM-0.5 selection; `HANDOFF_SELECTOR: none` means no resume record.
+- Use the explicit HCM-0.5 selection and exact resume record `20260715T202049Z--HCM-0-5--orchestration--planning-review-budget-exhausted`.
 - Treat the HCM-0.4 completion record as dependency evidence only.
 - Ignore HCM-0.9 as resume/design authority and create no catalog leaves.
 - Keep `05-contracts-schemas-and-gates.md` canonical.
+- Preserve historical Planning Reviews 1-4 and their dispatches unchanged; they are consumed evidence and never renumbered.
+- Use Continuation Planning Review 1 and, only after one permitted bounded remediation, Continuation Planning Review 2. Never name a continuation review `Review 5`.
+- Reserve Design Reviews 1-3 and at most two design remediations for the fresh canonical design-freeze session. Planning reviews do not consume or satisfy that budget.
+- Stop immediately on `CLEAN`. A non-clean terminal review transitions byte-identically to its non-completion handoff; no reviewed subject byte may be corrected after that review.
 - Separate contract lifecycle from evaluation/verdict/gate outcomes.
 - Use exact contract ref/fingerprint selection, a closed SemVer-impact table, a total lifecycle transition/authority table, and closed evidence-cardinality/precedence rules.
 - Bind each all-of evidence-kind requirement to its own case/cardinality/stability tuple; omitted score weight means no score participation.
@@ -23,21 +27,31 @@ Execute a documentation-only semantic freeze through a closed review-budget stat
 
 ```text
 live preflight + completed HCM-0.2/0.3/0.4/0.8 evidence
-  -> SPEC/plan/todo
-  -> Review 1 findings -> Remediation 1
-  -> Review 2 findings -> Remediation 2
-  -> Review 3
-       CLEAN -> canonical 01-06 design freeze + ordinary operations
-             -> complete proof wall (SPEC items 1-12 with captured results)
-             -> immutable Review 4 final-design dispatch
-                  CLEAN -> byte-identical proof replay + staging checks
-                        -> primary reviewed-slice commit
-                        -> completed v1.2 handoff + ledger closeout commit
-                  FINDINGS -> stop without completion; no remediation or Review 5
-       FINDINGS -> bounded Remediation 3
-                -> Review 4 planning-closure dispatch
-                     CLEAN or FINDINGS -> stop without canonical edits or completion;
-                                          write exact non-completion handoff; no Review 5
+  -> historical Planning Reviews 1-4 + Remediations 1-3
+  -> selected exhausted-budget handoff
+  -> explicit human continuation authority
+  -> repair only R4-001/R4-002 + define stage-scoped review authority
+  -> Continuation Planning Review 1
+       CLEAN -> complete packet validation + GitNexus detection
+             -> approved planning-continuation commit
+             -> partial/context-boundary v1.2 handoff + ledger commit
+             -> fresh design-freeze execution session
+       BOUNDED LOCAL PLANNING FINDINGS ONLY -> one planning remediation
+                                            -> Continuation Planning Review 2
+                                                 CLEAN -> same approved-planning closeout
+                                                 NON-CLEAN -> Task 7 byte-identical non-completion handoff; stop
+       ANY OTHER NON-CLEAN -> Task 7 byte-identical non-completion handoff; stop
+
+fresh design-freeze execution session + approved planning commit
+  -> Tasks 3-5 canonical 01-06 design freeze
+  -> complete proof wall (SPEC items 1-12 with captured results)
+  -> Design Review 1
+       CLEAN -> byte-identical proof replay + staging checks -> Tasks 9-10 completion
+       FINDINGS -> design Remediation 1 -> proof wall -> Design Review 2
+                       CLEAN -> byte-identical proof replay + staging checks -> Tasks 9-10 completion
+                       FINDINGS -> design Remediation 2 -> proof wall -> Design Review 3
+                                      CLEAN -> byte-identical proof replay + staging checks -> Tasks 9-10 completion
+                                      NON-CLEAN -> Task 7 byte-identical non-completion handoff; no Design Review 4
 ```
 
 ## Phase 1: Planning authority
@@ -78,14 +92,52 @@ live preflight + completed HCM-0.2/0.3/0.4/0.8 evidence
 
 **Estimated scope:** M.
 
-### Checkpoint A: Fresh planning review and closed budget branch
+### Task 2A: Repair the authorized planning continuation
 
-- [x] Build immutable JSON Review 1-3 dispatches with sorted path/SHA-256 manifests over the three planning files.
-- [x] Use a different fresh isolated built-in `default` reviewer for every submission with `using-agent-skills`, `code-review-and-quality`, `api-and-interface-design`, and `security-and-hardening`.
-- [x] Require `CLEAN` or typed actionable findings; provide no prior reviewer conclusions.
-- [x] Apply bounded Remediations 1-3 and rerun planning verification after each.
-- [ ] Submit Review 4 only as the planning-closure review over Remediation 3.
-- [ ] After Review 4, stop without canonical design edits or completion and write the exact non-completion handoff; Review 5 is forbidden.
+**Description:** Correct HCM-0.5-R4-001 and HCM-0.5-R4-002 in the three-file planning subject and replace the shared review counter with the historical-planning, planning-continuation, and future-design review identities.
+
+**Acceptance criteria:**
+- [x] No terminal review permits a local subject correction without another independent review.
+- [x] A terminal non-clean review's handoff records the identical subject manifest/fingerprint with no intervening subject-byte change.
+- [x] The live planning prohibition names Tasks 3-6 and 8-10, leaving Task 7 executable for a required terminal non-completion handoff.
+- [x] Historical Planning Reviews 1-4 remain immutable; Continuation Planning Reviews 1-2 and Design Reviews 1-3 are disjoint.
+- [x] The continuation and future design budgets match the human authority exactly.
+
+**Verification:** exact phrase/state-transition assertions; subject-manifest replay; historical dispatch hash/status inspection; `git diff --check`; scoped diff inspection.
+
+**Dependencies:** Task 2 and the selected human-authorized continuation handoff.
+
+**Files likely touched:** `slices/HCM-0.5/SPEC.md`, `slices/HCM-0.5/tasks/plan.md`, `slices/HCM-0.5/tasks/todo.md`.
+
+**Estimated scope:** S.
+
+### Task 2B: Obtain continuation planning approval and close the context boundary
+
+**Description:** Submit the complete three-file subject to Continuation Planning Review 1. Stop on `CLEAN`; otherwise allow one remediation only for bounded in-authority planning defects and submit the new complete subject to a different-fresh Continuation Planning Review 2. After a clean result, commit the exact reviewed planning subject and continuation dispatches, then create and separately commit a partial/context-boundary v1.2 handoff authorizing a fresh design-freeze execution session.
+
+**Acceptance criteria:**
+- [ ] Every continuation dispatch has a replayable sorted manifest and aggregate fingerprint over the complete three-file subject.
+- [ ] Every reviewer is a fresh isolated built-in `default` agent using `using-agent-skills` and `code-review-and-quality`.
+- [ ] A clean result ends the planning loop; Continuation Planning Review 2 is invoked only after the one allowed remediation and is terminal.
+- [ ] The approved planning commit contains no canonical `00`-`06` edit.
+- [ ] The separate handoff/ledger commit records the approved planning commit, full historical/continuation lineage, reserved Design Review budget, exact packet path, and the prohibition on treating planning review as final-design review.
+
+**Verification:** complete planning validation; manifest/result fingerprint replay; `git diff --check`; staged GitNexus detection; primary commit inspection; three handoff validator modes; deterministic ledger rebuild; mechanical staged detection.
+
+**Dependencies:** Task 2A.
+
+**Files likely touched:** the three planning files, additive continuation-review dispatches, one final planning-continuation handoff, and `handoffs/ledger.jsonl`.
+
+**Estimated scope:** M.
+
+### Checkpoint A: Stage-scoped planning authority
+
+- [x] Preserve immutable historical Planning Reviews 1-4 and Remediations 1-3.
+- [x] Define Continuation Planning Reviews 1-2 with at most one remediation and no `Review 5` alias.
+- [x] Reserve Design Reviews 1-3 with at most two remediations and no Design Review 4.
+- [x] Require byte-identical non-completion handoff transition after every non-clean terminal review.
+- [ ] Obtain `CLEAN` from Continuation Planning Review 1 or permitted Continuation Planning Review 2 before Tasks 3-6 or 8-10 execute.
+- [ ] On terminal non-clean, execute Task 7 only; do not edit the reviewed subject or canonical files.
 
 ## Phase 2: Canonical design freeze
 
@@ -99,9 +151,9 @@ live preflight + completed HCM-0.2/0.3/0.4/0.8 evidence
 - [ ] HCM-0.5 exit rules and JSON Schema first-proof selection are explicit.
 - [ ] HCM-0.6 remains unstarted/unselected.
 
-**Verification:** targeted cross-file assertions and scoped diff inspection.
+**Verification:** targeted cross-file assertions, including proof that the fresh session selected the validated planning-continuation handoff and that the handoff binds the approved planning commit; scoped diff inspection.
 
-**Dependencies:** Checkpoint A Review 3 `CLEAN`. This dependency is not satisfied on the live Review 3 findings branch, so Tasks 3-10 must not execute.
+**Dependencies:** completed Task 2B: continuation planning `CLEAN`, the approved planning-continuation commit, the validated partial/context-boundary handoff that binds that commit and exact packet path, and a fresh design-freeze session selecting that exact handoff. Until every dependency is satisfied, Tasks 3-6 and 8-10 must not execute. Task 7 remains executable only for the terminal non-completion handoff required by a non-clean continuation review.
 
 **Files likely touched:** `00-README.md`, `01-target-architecture.md`, `02-semantic-model.md`, `03-seam-crosswalk.md`, `04-phase-slice-map.md`.
 
@@ -146,7 +198,7 @@ live preflight + completed HCM-0.2/0.3/0.4/0.8 evidence
 
 ### Checkpoint B: Design verification
 
-- [ ] Complete every SPEC proof-wall item 1-12 and capture its result before constructing any final-design Review 4 dispatch.
+- [ ] Complete every SPEC proof-wall item 1-12 and capture its result before constructing the Design Review 1 dispatch.
 - [ ] Parse all new JSON/YAML examples.
 - [ ] Run identity/SemVer, exact lifecycle adjacency/transition/authority, applicability, all-of per-kind evidence cardinality/precedence, score omission, exhaustive gate-effect x verdict, implementation-substitution, protocol, isolation/no-network, and ordinary-operation assertions.
 - [ ] Run HCM-0.2/0.3/0.4 regression assertions.
@@ -154,37 +206,38 @@ live preflight + completed HCM-0.2/0.3/0.4/0.8 evidence
 
 ## Phase 3: Independent final review and remediation
 
-### Task 6: Submit the complete design subject to a fresh reviewer
+### Task 6: Submit the complete design subject to Design Review 1
 
-**Description:** Assemble a fresh immutable review dispatch over the complete HCM-0.5 packet, affected 00-06 files, and proof results. Use a fresh isolated built-in `default` reviewer with no implementation narrative or previous findings.
+**Description:** Assemble a fresh immutable Design Review 1 dispatch over the complete HCM-0.5 packet, affected `00`-`06` files, and proof results. Use a fresh isolated built-in `default` reviewer with no implementation narrative, planning-review conclusions, or previous design findings.
 
 **Acceptance criteria:**
 - [ ] Subject manifest and aggregate fingerprint recompute.
+- [ ] The manifest includes the final intended `00-README.md` status bytes plus the complete packet and every other affected canonical `01`-`06` file.
 - [ ] Reviewer checks correctness, API stability, security/isolation, owner boundaries, Resolution semantics, HCM-0.4 regression, and proof coverage.
 - [ ] Result is `CLEAN` or provides typed, bounded findings.
 
 **Verification:** parent recomputes manifest and validates result fingerprint/status.
 
-**Dependencies:** Review 3 `CLEAN` and Checkpoint B items 1-12 green with captured results. These dependencies are not satisfied on the live path.
+**Dependencies:** approved planning-continuation commit and Checkpoint B items 1-12 green with captured results in the fresh design-freeze execution session.
 
 **Files likely touched:** one immutable review dispatch; no reviewer edits.
 
 **Estimated scope:** S.
 
-### Task 7: Enforce the terminal Review 4 branches
+### Task 7: Enforce stage-scoped terminal non-completion branches
 
-**Description:** Review 4 is terminal. On the alternate Review 3-clean path, Review 4 reviews the complete final design after the full proof wall; `CLEAN` permits only byte-identical proof replay/staging, while any finding stops without completion. On the live Review 3-findings path, Review 4 reviews only Remediation 3 planning bytes; every outcome stops without canonical design edits or completion because no independent final-design review remains.
+**Description:** This task is the sole exception to the pre-planning-clean prohibition. In the current continuation it executes when Continuation Planning Review 1 returns a terminal non-bounded result or Continuation Planning Review 2 is non-clean. In the future design session it executes after a terminal non-clean Design Review 3. It creates the honest v1.2 non-completion handoff and deterministic ledger without changing any reviewed subject byte.
 
 **Acceptance criteria:**
-- [ ] Immutable lineage contains distinct Reviews 1-4 and no duplicate round number.
-- [ ] No Review 4 finding is remediated and presented as review-clean without an independent review.
-- [ ] No Review 5 is scheduled or invoked.
-- [ ] Completion is possible only when Review 3 was `CLEAN` and final-design Review 4 is `CLEAN` over bytes produced after the complete proof wall.
-- [ ] The live Review 3-findings branch ends with a non-completion handoff after planning Review 4, regardless of its verdict.
+- [ ] The handoff's subject manifest/fingerprint equals the terminal review subject byte-for-byte.
+- [ ] No local correction occurs after the terminal review.
+- [ ] The handoff names the exact remaining defect, consumed stage budget, and human resume condition without calling the slice abandoned.
+- [ ] No continuation `Review 5` or Design Review 4 is scheduled or invoked.
+- [ ] No canonical design edit occurs on a non-clean continuation branch.
 
-**Verification:** mechanically assert the Review 1-4 lineage, the two Review 3 branches, every Review 4 outcome, the final-design-clean completion precondition, and rejection of Review 5 scheduling.
+**Verification:** replay the terminal manifest against the handoff subject; assert no subject diff after review; validate the exact stage lineage, no forbidden next review, record/index parity, and all handoff validator modes.
 
-**Dependencies:** Review 4 result. This task makes no subject edit.
+**Dependencies:** a terminal non-clean Continuation Planning Review 1 or 2, or a terminal non-clean Design Review 3. This task makes no reviewed-subject edit and does not depend on planning `CLEAN`.
 
 **Files likely touched:** one exact-status v1.2 non-completion handoff and the deterministic ledger on every terminal non-completion branch; no reviewed subject edit.
 
@@ -194,24 +247,25 @@ live preflight + completed HCM-0.2/0.3/0.4/0.8 evidence
 
 ### Task 8: Replay proof byte-identically and run staged scope detection
 
-**Description:** On the alternate final-design-`CLEAN` branch only, rerun every Checkpoint B proof against byte-identical reviewed bytes, then stage those exact bytes and run repository-required GitNexus change detection. This is a replay/staging gate, not the first complete proof wall, and it may not repair or otherwise change the subject after Review 4.
+**Description:** After a `CLEAN` Design Review 1, 2, or 3, rerun every Checkpoint B proof against byte-identical reviewed bytes, then stage those exact bytes and run repository-required GitNexus change detection. This is a replay/staging gate, not the first complete proof wall, and it may not repair or otherwise change the subject after the clean review.
 
 **Acceptance criteria:**
-- [ ] The complete Checkpoint B proof wall and captured results existed before the final-design Review 4 dispatch.
+- [ ] The complete Checkpoint B proof wall and captured results existed before the clean Design Review dispatch.
 - [ ] All proof commands pass again on byte-identical reviewed bytes.
 - [ ] GitNexus reports documentation-only expected scope.
 - [ ] Staged paths contain only reviewed HCM-0.5 subject/dispatch evidence.
-- [ ] The staged subject fingerprint equals the Review 4 subject fingerprint exactly.
+- [ ] The staged subject fingerprint equals the clean Design Review subject fingerprint exactly.
+- [ ] The staged and committed `00-README.md` hash equals its clean Design Review manifest entry; no post-`CLEAN` status-byte edit occurs.
 
 **Verification:** captured command results, staged diff, `git diff --cached --check`, staged change detection.
 
-**Dependencies:** Review 3 `CLEAN`, Checkpoint B green before dispatch, and final-design Review 4 `CLEAN`. These dependencies are not satisfied on the live path.
+**Dependencies:** approved planning-continuation commit, Checkpoint B green before dispatch, and a clean Design Review 1, 2, or 3.
 
 **Files likely touched:** None beyond proof artifacts already in approved scope.
 
 **Estimated scope:** S.
 
-### Task 9: Commit reviewed HCM-0.5 planning and design authority
+### Task 9: Commit reviewed HCM-0.5 design authority
 
 **Description:** Stage only the reviewed subject and immutable proof-relevant HCM-0.5 dispatches, then create one scoped documentation commit.
 
@@ -234,7 +288,7 @@ live preflight + completed HCM-0.2/0.3/0.4/0.8 evidence
 
 **Acceptance criteria:**
 - [ ] Handoff uses `status: completed`, `stop_reason: completed`, and `resume.execution_target: none`.
-- [ ] It records planning/final review lineage and remediations exactly.
+- [ ] It records the approved planning commit, planning-review lineage, Design Review lineage, and design remediations exactly without treating a planning review as final-design review.
 - [ ] Ledger rebuild is byte-identical and all validator modes pass.
 - [ ] Second commit contains only the new record and ledger mutation.
 - [ ] HCM-0.6 is not started.
@@ -257,7 +311,7 @@ live preflight + completed HCM-0.2/0.3/0.4/0.8 evidence
 | Dock executable/runtime substitution preserves a trusted identity | High | content-addressed bundle manifest, exact entrypoint/runtime closure, host allowlist mapping, and pre-spawn digest verification |
 | HCM-0.4 transport contracts drift | High | append only named operation definitions; compare frozen sections and review explicitly |
 | First dock is selected by implementation inertia | High | evidence-backed three-candidate comparison and narrow selection criteria |
-| Review budget exhausted | Medium | prioritize correctness/authority/security findings; Review 4 only for bounded corrections; honest handoff otherwise |
+| Stage review budget exhausted | Medium | keep planning and design identities separate; stop immediately on clean; terminal non-clean transitions byte-identically to an honest handoff |
 | Monolith size makes review unfocused | Medium | exact section ranges and a bounded manifest; no decomposition or leaf creation |
 
 ## Open questions
