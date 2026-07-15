@@ -2,7 +2,7 @@
 
 ## Status
 
-The HCM-0.2 scope in this document is frozen design authority: stable semantics and configurable language, instance-profile artifact/vocabulary composition, schema registration, artifact kinds and instances, intake and promotion, the constitutional root, Charter intake, the project-posture owner boundary, and vocabulary semantics. HCM-0.3 additionally freezes Context Resolution, deterministic Projection, memory promotion, Snapshot Memory, delta/drift, redaction/retention, and snapshot-grounding semantics. The exact field contracts and validation/defaulting matrices live in `05-contracts-schemas-and-gates.md`.
+The HCM-0.2 scope in this document is frozen design authority: stable semantics and configurable language, instance-profile artifact/vocabulary composition, schema registration, artifact kinds and instances, intake and promotion, the constitutional root, Charter intake, the project-posture owner boundary, and vocabulary semantics. HCM-0.3 additionally freezes Context Resolution, deterministic Projection, memory promotion, Snapshot Memory, delta/drift, redaction/retention, and snapshot-grounding semantics. HCM-0.4 freezes adapter preservation across the SDK, CLI, Tauri, and the distinct transitional/permanent Substrate boundaries. The exact field contracts and validation/defaulting matrices live in `05-contracts-schemas-and-gates.md`.
 
 These freezes are not implementation proof. All runtime gates remain open, and the shipped artifact/default-instance set plus shipped Resolution labels/default policy remain explicitly unresolved rather than being selected by examples.
 
@@ -795,6 +795,8 @@ A projection can prove only what it exposes and observes.
 
 ## Adapter implications
 
+`handbook-sdk` presents transport-neutral typed use cases over the semantic owners. CLI, Tauri, and Substrate adapters preserve the selected operation definition, negotiated API context, request fingerprint, schema versions, exact semantic refs/fingerprints, Resolution envelope, provenance, omissions, idempotency result, conditional write set/receipts, and typed outcome; they may change invocation mechanics and product wording but not domain meaning. A distinct immutable bootstrap descriptor per API major is the discovery root; snapshot-bound paged operation/profile/schema/governed-record catalogs, exact record and vocabulary/Resolution/Projection reads, and applicable-snapshot selection follow it, and adapters never infer shipped defaults or depend on retained process-local state.
+
 Future workflow adapters map:
 
 - stable semantic roles;
@@ -806,3 +808,5 @@ Future workflow adapters map:
 - lifecycle and gate semantics.
 
 An adapter translates between systems. It does not mutate Handbook canonical truth merely to imitate another tool's terminology.
+
+No adapter may infer an operation from CLI help/prose, convert a blocked/refused outcome into an untyped string, silently widen a Resolution envelope, or replace a canonical semantic ref with a display label. The transitional Substrate CLI bridge and permanent crates.io Rust boundary are separate adapters and require separate proof; success of either one does not prove the other.

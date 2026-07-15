@@ -97,27 +97,42 @@ The CLI must not own contract evaluation, artifact semantics, resolution project
 
 `handbook-sdk` is the preferred name for the ordinary-consumer facade. The name communicates an embeddable library rather than a network daemon. Internal modules may use service/use-case terminology.
 
-It should own:
+It owns:
 
 - stable consumer-oriented use cases;
 - request/result DTOs shared by CLI, Tauri, and ordinary Rust consumers;
 - transport-neutral error/refusal types;
-- capability and schema-version reporting;
+- immutable bootstrap capability reporting plus exact profile/schema catalog listing and schema retrieval;
 - composition over the narrower owner crates.
 
-Advanced consumers may still import owner crates directly. The SDK must expose capabilities, not internal module topology.
+The Rust facade exposes typed methods, not a public `serde_json::Value` dispatcher. Stable operation IDs and generated JSON Schemas describe those same typed methods to machine transports. An immutable distinct-ref-per-major bootstrap descriptor breaks capability-discovery circularity; snapshot-bound paged operation/profile/schema/governed-record catalogs, exact record/vocabulary/Resolution/Projection reads, and applicable-snapshot selection expose complete restart-safe machine inputs rather than inferred defaults or process-local state. Advanced consumers may still import owner crates directly. The SDK exposes capabilities, not internal module topology, and no owner crate depends back on the SDK.
 
-### Existing owner crates
+### Crate ownership
 
 The target should preserve the useful decoupling already present:
 
 - `handbook-engine`: canonical data, artifact-kind/intake schemas, profile/semantic validation, Charter/posture resolution, snapshot normalization/fingerprints/deltas, and other pure transformations;
 - `handbook-flow`: request-scoped selection, context assembly, Resolution envelope application, posture/snapshot projection, and packet/projection results;
 - `handbook-pipeline`: declarative workflow compilation/capture/handoff and execution sequencing;
-- `handbook-compiler`: current compatibility/support seam, not presumed to be the permanent facade;
+- `handbook-contracts`: purpose-named owner for contract identity/lifecycle, claims, evidence, verdicts, hard gates, and protocol-neutral dock types; HCM-0.5 freezes those type semantics before the crate is implemented;
+- `handbook-compiler`: current compatibility/support seam with an approved retirement posture, not a target facade or SDK dependency;
+- `handbook-sdk`: ordinary-consumer composition and transport DTO facade;
 - `handbook-cli`: executable transport only.
 
-The final owner for contract-membrane primitives may be an existing owner crate or a purpose-named new crate. That decision belongs to the Phase 0 owner-boundary design slice; do not default it into `handbook-compiler` merely because that crate spans current shell concerns.
+The target dependency direction is acyclic:
+
+```text
+handbook-flow      depends on handbook-engine
+handbook-contracts depends on handbook-engine
+handbook-pipeline  depends on handbook-engine
+handbook-pipeline  may additionally depend on handbook-contracts in Phase 5
+handbook-sdk       depends on the implemented owner crates
+transports         depend on handbook-sdk
+```
+
+The diagram expresses allowed inward dependencies, not a requirement that every crate import every predecessor. `handbook-contracts` may depend on exact semantic types from `handbook-engine`; `handbook-pipeline` may consume `handbook-contracts` when contract execution lands; `handbook-sdk` composes the four owner crates. `handbook-engine`, `handbook-flow`, `handbook-pipeline`, and `handbook-contracts` never depend on `handbook-sdk`, a transport, or Substrate. Process-dock implementations remain separable adapters over `handbook-contracts`; HCM-0.5 freezes their protocol before an implementation crate name is selected.
+
+`handbook-compiler` is retired during HCM-4.1: composition that belongs to ordinary consumers moves to `handbook-sdk`, executable-shell behavior moves to `handbook-cli`, and already-owned behavior remains in its owner crate. It may exist as bounded cutover scaffolding only until the CLI no longer depends on it; no new downstream API or permanent domain owner is added there.
 
 ### Agent-facing Handbook skill
 
@@ -173,15 +188,15 @@ The CLI calls transport-neutral use cases and offers complete JSON output for ev
 
 Substrate may bundle and invoke an exact Handbook binary version and consume only its versioned JSON protocol.
 
-This is a supported integration milestone. It is not proof that a downstream-intended Rust API is complete.
+This is a supported transitional integration milestone. It pins the binary, immutable bootstrap descriptor, operation-definition fingerprints, response schemas, time/resource bounds, and replacement gate. Sensitive bodies travel only through bounded stdin or trusted exact refs, never argv, environment, stderr, process titles, or ambient temporary files. It is not proof that a downstream-intended Rust API is complete and it is removed from the normal Substrate path once Tier 4 satisfies `PG-SUB-RUST-01`.
 
 ### Tier 3 — Tauri parity
 
-The Tauri application invokes the same SDK use cases and Serde DTOs directly. It does not shell out to the CLI for normal operation.
+The Tauri application invokes the same SDK use cases and Serde DTOs directly. Tauri command names and scheduling are adapter concerns; the command payload and result remain the SDK DTOs. It does not shell out to the CLI for normal operation, throw prose in place of typed expected outcomes, or evaluate domain policy in the frontend.
 
 ### Tier 4 — Permanent Substrate Rust boundary
 
-Substrate imports exact published Handbook crate versions from crates.io and uses them in a real seam. The proof must not rely on sibling paths or unpublished workspace internals.
+Substrate imports exact published `handbook-sdk` and/or advanced owner-crate versions from crates.io and uses them in a real seam. The proof starts from current Substrate tip and must not rely on sibling paths, `[patch]` overrides, unpublished workspace internals, or the Tier-2 process bridge. Substrate still owns runtime orchestration and product wording; direct linking changes transport, not semantic authority.
 
 ## Canonical artifacts, renderer-derived views, and Projections
 
@@ -243,10 +258,12 @@ Substrate may instead remain the only synthesis owner. The core Handbook crates 
 ## Tauri and API posture
 
 - Rust DTOs and JSON Schema are the primary transport-neutral contracts.
+- The reviewed Rust DTO and its checked-in generated Draft 2020-12 JSON Schema form one fingerprint-bound public contract; neither may drift alone.
 - Tauri commands are thin adapters around SDK use cases.
 - OpenAPI is generated only when an HTTP boundary exists; it is not the canonical authority for CLI/Tauri payloads.
 - Human CLI wording is not an API schema.
 - Expected blocked/refused outcomes are structured results, not unparseable stderr prose.
+- Stable operation IDs are independent of CLI command paths, Tauri command names, profile vocabulary, and custom artifact IDs.
 
 ## Dock posture
 

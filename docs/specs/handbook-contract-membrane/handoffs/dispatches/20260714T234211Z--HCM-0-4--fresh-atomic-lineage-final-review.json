@@ -1,0 +1,191 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review",
+  "created_at_utc": "2026-07-14T23:42:11Z",
+  "source_handoff_ids": [
+    "20260714T221404Z--HCM-0-3--orchestration--resolution-snapshot-projection-contracts-frozen"
+  ],
+  "parent_orchestration_id": "20260714T224422Z--HCM-0-4--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "api-and-interface-design"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:99fdd0f5fe78701914dcf912d7eff7c108e73cc4d51e9a0bfacb97e2c11cb1b3",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "71528b0f5c6b3285c9369c8b3d61a962060dc45d7f7be71152488169d822e69d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+        "sha256": "e41741bc08a735a91fb5451300b653ec33ccd9c6b2c25dd3ffbe27b92da20413"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "sha256": "b752a70cf9be73181d410f2d8e5ad9c77ec14f041c099e014f9170d27f7f299a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "c5a6d53d2d412a8a9626779ef022e3484e4cdd89de818a0086a5b5ed669ae2c1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "1afd4c3864a77151bade4534f05ea95d8867cb34566b6957abe0dbbdef0e6bf0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "d47b8196cba3152ad3e57710875e1ad85b87acdd2a310b6cb2fe4b0962457c8f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "6dc34f2eef1266722e05065e3f0778dc21f9442ab1c213d4f8e5f31ecca9b0be"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:99fdd0f5fe78701914dcf912d7eff7c108e73cc4d51e9a0bfacb97e2c11cb1b3"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "control_pack",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "slice_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Authority split",
+        "Crate ownership",
+        "Integration ladder",
+        "Tauri and API posture",
+        "Non-negotiable invariants",
+        "Explicit non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Status",
+        "Adapter implications"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Public owner crates through Direct Substrate imports rows",
+        "CLI and compatibility logic"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-0.4 row and dependency statement",
+        "Phase 0 non-goals",
+        "Phase 4 SDK and machine transports",
+        "Phase 6 Consumer adoption"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Status",
+        "HCM-0.4 crate ownership and dependency contract through Published Rust API proof plan",
+        "Public API proof gates",
+        "Schema compatibility posture"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PR-001",
+        "Open program proof gates",
+        "Greenfield deletion gates",
+        "Regression rules 49-67",
+        "HCM-0.4 ownership/SDK/transport freeze proof gate"
+      ]
+    }
+  ],
+  "repo_truth": "Current Handbook workspace has handbook-engine 0.1.1, handbook-flow 0.1.1, handbook-pipeline 0.1.2, handbook-compiler 0.1.0, and handbook-cli 0.1.0; no handbook-sdk, handbook-contracts, or Tauri crate exists. CLI has explicit JSON selection only for doctor. Compiler still composes CLI-facing support. The currently inspected Substrate checkout pins engine/flow/pipeline 0.1.1 but has no live Handbook API call; the historical dedicated worktree memo proves published engine/flow consumption only for its exact throwaway seam. HCM-0.4 changes seven control-pack docs only, authorizes no Rust/runtime work, leaves every SDK/JSON/Tauri/Substrate/publication gate open, and leaves HCM-0.5 contract/dock operations plus HCM-0.6 shipped defaults unresolved. Snapshot Memory is not available, so grounding is manual against clean HEAD c10fc2c and the exact completed HCM-0.3 handoff. Four fresh reviews reported eleven, nine, five, then two Required contract gaps. The parent remediated every round in the live seven-document subject without changing runtime scope. This is a fifth, different fresh final review of the atomic-lineage closure subject.",
+  "allowed_scope": [
+    "Read and replay every subject_manifest entry against the live repository; review the complete HCM-0.4 diff read-only.",
+    "Read the exact authority sections, current Handbook manifests/public surfaces/CLI JSON precedent, prior published-boundary proof scripts/memo, and a discoverable sibling Substrate checkout only to verify stated current truth.",
+    "Run read-only schema/example parsing, semantic probes, link/archive/handoff validation, scope/portability, change-detection, and whitespace checks."
+  ],
+  "non_goals": [
+    "No edits, commits, new dispatches, global handoff, ledger write, or user task hop by the reviewer.",
+    "No Rust/runtime implementation, crate creation/publication, CLI/Tauri/Substrate changes, runtime proof-gate promotion, HCM-0.5 contract/dock freeze, HCM-0.6 shipped-default selection, or new CLI command design.",
+    "Do not rely on parent design reasoning or infer success from the verification summary; judge the exact authority and subject."
+  ],
+  "tasks": [
+    "Replay the sorted path/SHA-256 subject manifest and independently validate HCM-0.4 dependency and authorization boundaries.",
+    "Review the owner matrix and dependency graph for one unambiguous owner per concern, acyclicity, no SDK/transport/Substrate back-edge, credible handbook-compiler retirement, and a non-preemptive handbook-contracts boundary.",
+    "Review all 50 ordinary operation IDs for completeness, data-parameterization, semantic-owner/effect correctness, renderer-versus-Projection separation, and explicit HCM-0.5/HCM-0.6 deferral.",
+    "Verify candidate and approval persistence plus escalation and memory-promotion request/disposition operations preserve the frozen HCM-0.2/HCM-0.3 lifecycle, lineage, authority, and atomicity rules.",
+    "Verify OperationDefinition field ownership, exact version/ref/fingerprint rules, mutability/idempotency/authority consistency, schema graph direction, and capability-discovery honesty are complete and testable.",
+    "Verify the immutable bootstrap descriptor removes discovery circularity; profile/schema catalogs are retrievable without inferred defaults; schema/operation/API version domains and deprecation bindings are mechanically exact.",
+    "Verify request and response envelopes are field-complete, deterministic, closed, exact-ref bound, safe for sensitive data, and have a total mutually exclusive ok/blocked/refused/error truth table without false success or partial output.",
+    "Verify the exact shared DTO, request-fingerprint, extension, mutability, idempotency-key scope/conflict/concurrency/retention/replay, ordering, bound, sensitivity, and nullability contracts are implementation-testable.",
+    "Verify write mechanics and authority class are separate and exact for every mutating operation; posture evaluation/persistence is total; semantic-memory, repository, pipeline, and observation writes cannot acquire canonical authority.",
+    "Verify OperationDefinition conditional write sets and response write receipts exactly represent memory-promotion applied/refused/stale record sets and prevent authority upgrades.",
+    "Verify compare-and-write atomic groups may legally include semantic lineage records and that promotion, posture transition, and memory promotion realize the exact complete record sets and receipts.",
+    "Verify governed-record discovery includes artifact promotion, posture transition, and resulting semantic-memory records, with no derived-kernel authority upgrade.",
+    "Verify typed governed-record list/read and applicable-snapshot selection make multi-actor restart workflows complete without repository/prose or process-local discovery.",
+    "Verify negotiated API/bootstrap context enters request fingerprints and idempotency scope across compatibility and removal-major boundaries.",
+    "Verify the complete Problem category/nullability partition and versioned ArtifactRef tagged locator/no-follow/content-address rules are closed and testable.",
+    "Verify catalog pagination is snapshot-bound, complete, ordered, duplicate-free, bounded, expiry-safe, and sufficient for a cold client to retrieve vocabulary, Resolution-stack, and Projection definitions.",
+    "Verify same/different-request idempotency races, result retention, non-expiring consumed-key tombstones, per-major bootstrap refs, transport-schema versus legacy record-routing domains, and the complete Problem nullability matrix.",
+    "Verify Rust DTO/generated Draft 2020-12 schema parity, compatibility/versioning, closed discriminated unions, discovery, deprecation, and typed SDK rules cannot drift into arbitrary JSON or CLI prose authority.",
+    "Verify CLI JSON atomic stdout/stderr/exit/domain-result rules and Tauri same-DTO/no-subprocess/no-frontend-authority rules are complete, mutually consistent, and realistically provable.",
+    "Verify the publication plan truly interleaves proof/package/isolation/publication/checksum resolution per DAG node before any dependent is packaged.",
+    "Verify the process bridge sensitive-input/leakage contract and per-crate topological package/isolate/publish algorithm close the prior transport and co-evolving-crate proof gaps.",
+    "Verify the transitional Substrate process bridge and permanent crates.io Rust boundary are distinct, fail closed, resource bounded, independently provable, and connected to an exact achievable deletion gate.",
+    "Verify the publication proof plan distinguishes package isolation, registry-only proof, and current-tip real-seam adoption; prior evidence/current live Substrate claims are not overstated.",
+    "Verify cross-document terminology, classifications, proof-gate non-promotion, HCM-0.5/HCM-0.6 boundaries, examples, links, portability, and no-Rust scope are coherent.",
+    "Return findings first ordered Critical, Required, Optional, Nit. Each actionable finding must name severity, exact file/line, violated contract/invariant/gate, why it is wrong, smallest valid remediation, and missing verification. Return CLEAN only if no actionable finding remains."
+  ],
+  "contracts_and_gates": [
+    "04 HCM-0.4 objective/exit gate, Phase 0 non-goals, and Phase 4/6 sequencing",
+    "01 invariants 1, 6, 8, 10, 11, 16, 20 and the frozen owner/integration boundaries",
+    "05 HCM-0.4 owner, operation, DTO, CLI, Tauri, Substrate, and published-proof contracts",
+    "06 PR-001 adoption boundary; open PG-SDK/JSON/TAURI/SUB-CLI/PUBLISH/SUB-RUST gates; BR-SUB-CLI-01; regression rules 49-67",
+    "06 HCM-0.4 ownership/SDK/transport freeze proof gate"
+  ],
+  "stop_conditions": [
+    "Return blocked if the subject, exact authority, or required read-only validation capability is unavailable.",
+    "Return a Required finding rather than selecting shipped defaults, freezing HCM-0.5 contract/dock operations, implementing runtime work, or widening beyond HCM-0.4.",
+    "Do not modify repository state or write orchestration artifacts."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -2,9 +2,9 @@
 
 ## Status
 
-The HCM-0.2 sections are frozen design contracts: schema policy, instance-profile composition for stable-role/schema/kind/instance/vocabulary truth, stable-role and schema registries, artifact kinds, artifact instances, intake records/candidates/promotion, Charter/constitutional-root semantics, validation layers, vocabulary, and the project-posture owner/transition boundary. HCM-0.3 additionally freezes the Context Resolution stack/envelope/escalation/promotion, deterministic Projection definition/request/result, Snapshot Memory capture/record/delta/projection, and redaction/retention contracts. They are implementation authority for later slice packets, not published API guarantees or evidence that the runtime types exist.
+The HCM-0.2 sections are frozen design contracts: schema policy, instance-profile composition for stable-role/schema/kind/instance/vocabulary truth, stable-role and schema registries, artifact kinds, artifact instances, intake records/candidates/promotion, Charter/constitutional-root semantics, validation layers, vocabulary, and the project-posture owner/transition boundary. HCM-0.3 additionally freezes the Context Resolution stack/envelope/escalation/promotion, deterministic Projection definition/request/result, Snapshot Memory capture/record/delta/projection, and redaction/retention contracts. HCM-0.4 freezes crate ownership, the SDK ordinary-use-case inventory, operation/DTO identities, CLI JSON and Tauri adapter behavior, the transitional Substrate process bridge, and the permanent published-Rust proof plan. They are implementation authority for later slice packets, not published API guarantees or evidence that the runtime types exist.
 
-SDK/transport, contract/dock, and public-API sections remain preliminary until their named Phase 0 slices close. The shipped artifact-kind/default-instance/requiredness set and shipped Resolution labels/default policy remain unresolved rather than being selected by illustrative examples.
+Contract/dock semantic sections remain preliminary until HCM-0.5 closes. The HCM-0.4 owner, SDK/transport, and public-proof-plan sections are frozen design authority but do not prove any implemented or published API. The shipped artifact-kind/default-instance/requiredness set and shipped Resolution labels/default policy remain unresolved rather than being selected by illustrative examples.
 
 ## Schema policy
 
@@ -2972,60 +2972,572 @@ implement or document
 
 The orchestrator may not self-approve. A dispatch artifact proves a bounded job was specified; only captured built-in agent identity/status plus reconciled results prove that the job was executed.
 
-## SDK command contract
+## HCM-0.4 crate ownership and dependency contract
 
-Every ordinary use case has:
+The target owner matrix is exact:
 
-- a typed request;
-- a typed result;
-- structured expected blocked/refused states;
-- a stable operation identifier;
-- schema and capability versions;
-- deterministic serialization.
+| Crate/surface | Owns | May depend on | Must not own or depend on |
+|---|---|---|---|
+| `handbook-engine` | canonical semantic records; profile/kind/instance/intake/posture/Resolution/Snapshot types, validation, trusted repository access, normalization, fingerprints, deltas, and deterministic transforms | no other Handbook workspace crate; standard/third-party libraries | flow/pipeline/SDK/CLI/Tauri/Substrate; process execution; product wording |
+| `handbook-flow` | request-scoped selection, context assembly, Resolution application, Projection execution, omission accounting, packet/grounding results | `handbook-engine` | canonical mutation, CLI/Tauri concerns, Substrate orchestration |
+| `handbook-contracts` | contract identity/lifecycle, claims/invariants, normalized evidence, verdicts, hard gates, and protocol-neutral dock types/evaluation | `handbook-engine` exact semantic types | process-dock execution, CLI/Tauri/Substrate wording or orchestration; `handbook-sdk` |
+| `handbook-pipeline` | declarative catalog/route/compile/capture/handoff/state sequencing and later sequencing of contract use cases | `handbook-engine`; `handbook-contracts` only when Phase 5 execution lands | ordinary-consumer facade, CLI rendering, Substrate runtime authority |
+| `handbook-sdk` | typed ordinary-consumer use cases, request/result/outcome DTOs, capability/schema reporting, and composition over owners | engine, flow, contracts, pipeline | canonical semantic truth, transport-specific wording, generic public `Value` dispatch, process spawning |
+| `handbook-cli` | command grammar/help, argument and cwd/repo discovery, SDK invocation, human rendering, JSON/stdout/stderr discipline, exit mapping | `handbook-sdk` plus executable-shell libraries | domain decisions, owner-crate composition, contract/projection/evidence evaluation |
+| Tauri adapter | stable Tauri command mapping, async/scheduling boundary, SDK invocation, DTO serialization | `handbook-sdk`, Tauri runtime | CLI subprocesses in normal operation, frontend domain authority, transport-specific DTO forks |
+| Substrate process bridge | exact binary invocation and exact JSON protocol validation inside an isolated replaceable Substrate adapter | published Handbook binary only | human-output parsing, Handbook domain reimplementation, permanent integration claims |
+| Direct Substrate integration | Substrate-owned orchestration and product rendering over exact published SDK/owner APIs | exact crates.io versions of `handbook-sdk` and/or advanced owner crates | sibling/path/patch fallback, CLI process dependency in the proved seam, competing contract authority |
 
-Snapshot use cases should include capture, compare/delta, project, inspect, and verify-current operations without forcing callers to parse git or handoff prose themselves.
+The workspace dependency graph is acyclic. Owner crates never depend on `handbook-sdk`; no Handbook crate depends on Substrate; `handbook-contracts` never depends on pipeline; transports never become semantic owners. `handbook-compiler` is not in the target graph. HCM-4.1 retires it after moving ordinary composition to SDK, executable-shell behavior to CLI, and already-owned behavior to its owner crate.
 
-Artifact/intake use cases should include kind/instance discovery, structural/semantic validation, coverage inspection, evidence/declaration submission, candidate validation, promotion, projection, posture inspection, and recommendation acknowledgment. Operation IDs remain generic and select kind/instance IDs; custom kinds and vocabulary never create or rename CLI commands.
+HCM-0.4 selects `handbook-contracts` as the contract-membrane owner but does not preempt HCM-0.5 semantics. HCM-0.5 freezes the exact contract/dock types and appends their ordinary operation definitions. Process-dock implementation crates stay separable and are named only in their implementation packet.
 
-Proposed common response envelope:
+## SDK ordinary-use-case contract
+
+The Rust SDK exposes one typed method per ordinary operation. It may share internal orchestration helpers, but the public surface is not a stringly typed dispatcher and does not return arbitrary JSON values. Every method binds one exact operation definition, typed request/result schemas, structured expected outcomes, and deterministic transport serialization.
+
+The frozen inventory below is data-oriented: custom kind IDs, instance IDs, vocabulary, profile selections, Resolution definitions, and pipeline IDs are request fields. They never create operation IDs, Rust methods, CLI commands, or Tauri commands.
+
+All listed operation IDs start at operation version `1.0.0`; an implemented definition adds exact schema/capability refs and a recomputable definition fingerprint before it becomes discoverable.
+
+| Family | Stable operation ID | Semantic owner/composition | Effect |
+|---|---|---|---|
+| Capability | `capabilities.describe` | SDK registry over all implemented owners | read-only bootstrap catalog |
+| Profile | `profile.list` | engine | read-only exact profile catalog |
+| Profile | `profile.resolve` | engine | read-only |
+| Schema registry | `schema.list` | engine | read-only exact schema catalog |
+| Schema registry | `schema.read` | engine | read-only exact schema document |
+| Vocabulary | `vocabulary.read` | engine | read-only exact vocabulary definition |
+| Resolution | `resolution.stack.read` | engine | read-only exact Context Resolution stack definition |
+| Projection | `projection.definition.read` | flow over engine definition registry | read-only exact Projection definition |
+| Artifact registry | `artifact.kind.list` | engine | read-only |
+| Artifact registry | `artifact.instance.list` | engine | read-only |
+| Artifact | `artifact.read` | engine | read-only |
+| Artifact | `artifact.validate` | engine | read-only |
+| Artifact | `artifact.render` | engine | read-only fixed renderer-derived view; capitalized Projections use `projection.create` |
+| Intake | `intake.definition.read` | engine | read-only |
+| Intake | `intake.coverage.evaluate` | engine | read-only |
+| Intake | `intake.record.append` | engine through SDK repository transaction | append-only |
+| Governed records | `record.list` | engine | read-only snapshot-bound typed catalog with family/state selectors |
+| Governed records | `record.read` | engine | read-only exact typed record |
+| Candidate | `artifact.candidate.validate` | engine | read-only |
+| Candidate | `artifact.candidate.append` | engine through SDK repository transaction | append-only immutable candidate |
+| Approval | `artifact.approval.append` | engine through SDK repository transaction | append-only immutable approval |
+| Candidate | `artifact.candidate.promote` | engine through SDK repository transaction | compare-and-write canonical mutation |
+| Posture | `posture.resolve` | engine | read-only |
+| Posture | `posture.recommendation.evaluate` | engine | read-only typed recommendation-or-no-recommendation result |
+| Posture | `posture.recommendation.append` | engine through SDK repository transaction | append-only immutable recommendation |
+| Posture | `posture.recommendation.acknowledge` | engine through SDK repository transaction | append-only |
+| Posture | `posture.transition.apply` | engine through SDK repository transaction | authorized compare-and-write mutation |
+| Projection | `projection.create` | flow over engine definitions | read-only derived result |
+| Resolution | `resolution.escalation.request.append` | engine through SDK repository transaction | append-only immutable request |
+| Resolution | `resolution.escalation.disposition.append` | engine through SDK repository transaction | append-only terminal disposition |
+| Memory | `memory.promotion.request.append` | engine through SDK repository transaction | append-only immutable request |
+| Memory | `memory.promotion.disposition.append` | engine through SDK repository transaction | compare-and-write terminal disposition and, only for `applied`, semantic-memory result |
+| Snapshot | `snapshot.capture` | SDK orchestration over engine normalization and repository readers | append-only immutable capture |
+| Snapshot | `snapshot.read` | engine storage boundary through SDK | read-only |
+| Snapshot | `snapshot.delta` | engine | read-only derived result |
+| Snapshot | `snapshot.project` | flow over engine snapshot semantics | read-only derived result |
+| Snapshot | `snapshot.verify_current` | SDK orchestration over engine comparison | read-only |
+| Snapshot | `snapshot.resolve_applicable` | SDK orchestration over engine policy/profile/Resolution comparison | read-only exact prior snapshot or typed no-applicable result |
+| Repository | `repository.setup.plan` | SDK composition over engine/profile owners | read-only plan |
+| Repository | `repository.setup.apply` | SDK repository transaction | compare-and-write mutation |
+| Repository | `repository.doctor` | SDK composition over owners | read-only |
+| Flow | `flow.resolve` | flow | read-only |
+| Pipeline catalog | `pipeline.catalog.list` | pipeline | read-only |
+| Pipeline catalog | `pipeline.catalog.read` | pipeline | read-only |
+| Pipeline route | `pipeline.route.resolve` | pipeline | read-only |
+| Pipeline compile | `pipeline.compile` | pipeline | read-only in-memory result/artifact production; no repository or content-store write |
+| Pipeline capture | `pipeline.capture.plan` | pipeline | read-only plan |
+| Pipeline capture | `pipeline.capture.apply` | pipeline through SDK repository transaction | compare-and-write mutation |
+| Pipeline handoff | `pipeline.handoff.emit` | pipeline through SDK repository transaction | append-only |
+| Pipeline state | `pipeline.state.apply` | pipeline through SDK repository transaction | compare-and-write mutation |
+
+`contract.*`, `dock.*`, evidence, verdict, and gate operation IDs are intentionally absent until HCM-0.5 freezes their semantics. Adding them later extends this catalog; it cannot change the owner/DTO/transport rules in this section. The SDK may expose advanced owner APIs through direct crate imports, but only catalogued ordinary operations owe CLI JSON and Tauri parity.
+
+The intake lifecycle is mechanically reachable through ordinary operations: append an immutable intake record, validate a candidate without writing, append that exact candidate, append zero or more immutable approval records over its exact fingerprint, then compare-and-write promotion against the current target. The promotion request cites the intake-record, candidate, and approval ref/fingerprint pairs and the current target fingerprint; no step mutates or replaces an earlier record. Posture evaluation is pure and always returns one typed `recommendation` or `no_recommendation` variant; only `posture.recommendation.append` persists an exact evaluated recommendation. Resolution escalation and memory promotion similarly expose separate request/disposition operations. Escalation dispositions are append-only terminal records. Memory-promotion dispositions use compare-and-write because an `applied` disposition atomically appends both the unique terminal disposition and the newly derived semantic-memory record; refusal or stale outcomes append only the terminal disposition. The HCM-0.2 and HCM-0.3 lineage, uniqueness, authority, nullability, and byte-identical replay rules remain authoritative.
+
+`record.list` and `record.read` are generic but not untyped. `record_family` is a closed discriminant over intake record, artifact candidate, artifact approval, artifact promotion, posture recommendation/acknowledgment, posture transition, Resolution-escalation request/disposition, memory-promotion request/disposition, and semantic-memory record. Each variant selects one exact request/result schema and Rust enum case. `record.list` uses the snapshot-bound catalog-page contract and an allowlisted family-specific state filter; `pending` is valid only for a request family and means no exact terminal disposition exists in that immutable catalog snapshot. `record.read` requires the expected family plus exact record ref/fingerprint and returns that variant only. Unknown families, invalid filters, family/ref mismatch, and stale fingerprints refuse. These operations let a restarted client or separate authority actor recover exact promotion/transition/memory lineage without direct repository reads.
+
+`snapshot.resolve_applicable` takes exact repository/profile/Resolution/capture-policy refs/fingerprints plus the required boundary/horizon selector. It deterministically returns `applicable` with one exact retained snapshot pair or `none` with typed reasons; incompatible, unstable, redacted-beyond-selection, ambiguous, or retention-expired candidates do not silently win. Ordering is policy definition first, then greatest admissible boundary sequence, then exact record fingerprint as the deterministic tie check; multiple distinct candidates at the winning identity refuse. It never captures implicitly or widens Resolution.
+
+## Operation definition contract
+
+```yaml
+schema_id: handbook.operation-definition
+schema_version: "1.0.0"
+operation_id: artifact.validate
+operation_version: 1.0.0
+owner_crate: handbook-engine
+request_schema:
+  ref: handbook.operation.artifact-validate-request@1.0.0
+  fingerprint: sha256:...
+result_schema:
+  ref: handbook.operation.artifact-validate-result@1.0.0
+  fingerprint: sha256:...
+outcome_schemas:
+  blocker:
+    ref: handbook.operation-blocker@1.0.0
+    fingerprint: sha256:...
+  refusal:
+    ref: handbook.operation-refusal@1.0.0
+    fingerprint: sha256:...
+  error:
+    ref: handbook.operation-error@1.0.0
+    fingerprint: sha256:...
+mutability: read_only
+idempotency: safe
+required_capabilities: []
+transport_targets: [rust_sdk, cli_json, tauri]
+authority_effect: none
+write_set: []
+idempotency_retention: null
+deprecation: null
+definition_fingerprint: sha256:...
+```
+
+The example illustrates shape, not an implemented API or runtime proof.
+
+| Field | Authority/default | Validation/refusal rule |
+|---|---|---|
+| `schema_id` / `schema_version` | operation-definition schema owns exact values | only `handbook.operation-definition` / `1.0.0` routes here; the exact schema ref is derived as `handbook.operation-definition@1.0.0` |
+| `operation_id` | HCM catalog/approved extension owns stable machine identity | lowercase dot-separated snake-case segments matching `^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$`; exact match; never derived from CLI/Tauri/vocabulary/custom IDs |
+| `operation_version` | operation owner publishes SemVer | exact version only; no ranges, latest, or ambient fallback |
+| `owner_crate` | owner matrix above | exact target owner; SDK composition does not change semantic ownership |
+| request/result/outcome schema pairs | operation owner pins exact ref and fingerprint | every ref resolves locally/published with matching recomputable fingerprint; no bare ref |
+| `mutability` | operation definition | one of `read_only`, `append_only`, `compare_and_write`; implemented behavior must match |
+| `idempotency` | operation definition | `safe`, `idempotency_key_required`, or `compare_and_write_required`; must match the legal-combination matrix below |
+| `required_capabilities` | exact capability refs/fingerprints | all resolve and are reported by `capabilities.describe`; missing/mismatch refuses before body access |
+| `transport_targets` | ordinary-use-case catalog | non-empty subset of `rust_sdk`, `cli_json`, `tauri`; every catalogued operation eventually targets all three unless an approved advanced-owner exception removes it from the ordinary catalog |
+| `authority_effect` | semantic owner | one of `none`, `append_record`, `compare_and_write`; it describes write mechanics, not the authority of affected records |
+| `write_set` | semantic owner | closed list of `{record_kind, authority_class, condition, cardinality, atomic_group}`; exact operation grouping and conditional writes are declared below, and read-only operations require `[]` |
+| `idempotency_retention` | operation owner | null only for read-only operations; mutations declare a positive duration supported by the durable replay ledger |
+| `deprecation` | operation owner | null or `{replacement: ExactBinding, announced_in_api_version, removal_api_major, migration: ArtifactRef}`; replacement and migration fingerprints are mandatory and no silent removal or prose-only migration is valid |
+| `definition_fingerprint` | derived | normalized SHA-256 over every semantic field except itself; any field change changes the fingerprint |
+
+Definition graphs are acyclic. A response/request schema may reference shared DTO schemas, but no DTO schema may reference an operation definition or transport adapter. Implemented capability discovery reports only definitions whose exact request/result/outcome schemas are present and whose transport status is honest.
+
+HCM-0.4 public transport and generated JSON Schema identities use one full-SemVer domain: `schema_id` is the stable identity, `schema_version` is full SemVer, and the exact schema ref is mechanically `schema_id + "@" + schema_version`. Operation refs are mechanically `operation_id + "@" + operation_version`. API compatibility versions are also full SemVer but are not schema or operation refs. The already-frozen HCM-0.2/HCM-0.3 records whose payload contains `schema_version: "1.0"` use that legacy field solely as a two-component **record-routing tag**; it is not a public JSON Schema identity, is never converted or aliased to `@1.0.0`, and cannot appear as a `SchemaManifestEntry`. When such a record is carried in an operation, its public wire schema is the distinct full-SemVer operation result schema cited by the operation definition and response manifest; kind/definition-specific exact bindings inside the record remain independently fingerprinted. A deprecation replacement is an exact operation ref/definition-fingerprint pair; its migration artifact is an exact bounded artifact ref/fingerprint pair. Clients refuse a public schema ref whose declared identity/version does not derive the cited ref, any fingerprint mismatch, any attempt to treat a record-routing tag as a schema ref, and a deprecated operation after its declared removal major.
+
+The legal mutation combinations are closed:
+
+| Mutability | Idempotency | Authority effect | Allowed write-set classes | Required request fields | Replay behavior |
+|---|---|---|---|---|---|
+| `read_only` | `safe` | `none` | empty write set | no idempotency key or mutation basis | repeat evaluation is side-effect free |
+| `append_only` | `idempotency_key_required` | `append_record` | `semantic_record`, `observation_evidence`, or `operational_state` | `idempotency_key` | one immutable append; exact retry replays the semantic result |
+| `compare_and_write` | `compare_and_write_required` | `compare_and_write` | `canonical_truth`, `semantic_memory`, `semantic_record`, `observation_evidence`, or `operational_state`; multiple classes may share one exact atomic group | `idempotency_key` plus operation-defined exact expected fingerprints | one successful atomic write set; exact retry replays even after the basis advanced |
+
+No other combination is valid. Each write-set item uses authority class `canonical_truth`, `semantic_memory`, `semantic_record`, `observation_evidence`, or `operational_state`; condition is `always` or one exact operation-result discriminant; cardinality is `exactly_one`; and all items realized by one operation share one atomic group. Exact mutation classification is:
+
+| Authority class | Write-set item and condition |
+|---|---|
+| `canonical_truth` | canonical artifact for `artifact.candidate.promote` always; canonical constitutional-root artifact update for `posture.transition.apply` always |
+| `semantic_memory` | semantic-memory record for `memory.promotion.disposition.append` only when `data.disposition=applied`; it can never create artifact, contract, posture, or gate authority |
+| `semantic_record` | one always-written record for `intake.record.append`, `artifact.candidate.append`, `artifact.approval.append`, `posture.recommendation.append`, both Resolution-escalation append operations, and `memory.promotion.request.append`; successful `artifact.candidate.promote` also writes its immutable `ArtifactPromotionRecord` in the same atomic group as the canonical artifact; successful `posture.transition.apply` also writes its immutable `PostureTransition` in the same atomic group as the constitutional-root update; `memory.promotion.disposition.append` always writes its terminal disposition here in the same atomic group as its conditional semantic-memory item |
+| `observation_evidence` | snapshot for `snapshot.capture` always; capture record for `pipeline.capture.apply` always |
+| `operational_state` | acknowledgment for `posture.recommendation.acknowledge` always; setup state for `repository.setup.apply` always; handoff for `pipeline.handoff.emit` always; pipeline state for `pipeline.state.apply` always |
+
+Any operation not named in this table is read-only with an empty write set. Repository setup and pipeline state do not become canonical semantic authority merely because they use compare-and-write. `artifact.candidate.promote` and `posture.transition.apply` each realize exactly two receipts on success; refusal before commit realizes none. The posture result may return a newly derived `ProjectPostureKernel` and fingerprint, but the kernel is not written as canonical authority; its inputs are the updated constitutional-root artifact plus exact semantic inputs. For memory-promotion `refused`/`stale`, only the always-written semantic-record disposition is realized; for `applied`, both exact items are committed atomically. Every operation-definition fixture and result fixture asserts the realized write set, atomic group, exact record identities, and absence of undeclared writes.
+
+An idempotency key is scoped to the exact repository-identity fingerprint, negotiated API version/bootstrap-descriptor pair, operation ref, and operation-definition fingerprint and is durably bound to the request fingerprint. The outcome matrix is total:
+
+| Ledger state | Same request fingerprint | Different request fingerprint |
+|---|---|---|
+| no consumed key | establish immediately before mutation execution | establish for this request immediately before mutation execution |
+| retained result | replay the same semantic result/record refs with no second write | refuse `idempotency.key_conflict` |
+| consumed-key tombstone after result retention | refuse `idempotency.expired` | refuse `idempotency.key_conflict` |
+
+Concurrent same-fingerprint requests serialize so exactly one establishes/wins and the rest replay that result. Concurrent different-fingerprint requests serialize one establishment and every nonmatching request conflicts. A compare-and-write retry with the original key replays a prior success before rechecking an advanced basis; a new key with a stale basis refuses unless the exact operation definition declares stale comparison as an authorized terminal-record result. At result-retention expiry, the ledger compacts the result to a non-expiring consumed-key tombstone containing the key scope, request fingerprint, and original result fingerprint but no sensitive result body. Tombstones may be removed only when the repository-identity namespace is irreversibly retired and cannot be reused. Transport correlation IDs may differ on replay and therefore do not enter the semantic replay binding.
+
+`original_result_fingerprint` is the lowercase `sha256:<64-hex>` of the RFC 8785 canonical object containing exactly `{schema_id, schema_version, request_fingerprint, operation_ref, operation_definition_fingerprint, status, data, blockers, refusals, errors, diagnostics, next_actions, artifact_refs, write_receipts, provenance, schema_manifest}` from the committed ordinary response. It excludes exactly `request_id`, the complete `idempotency` member, and `response_fingerprint`. The domain commit atomically stores this computed identity with the retained committed-result closure and receipts even though the first response's `idempotency.original_result_fingerprint` is null; every replay exposes the stored value there, and tombstone compaction preserves the same value. Thus a different replay correlation ID or `replayed` flag changes the outer response fingerprint but not original-result identity, while any change to semantic data, outcome arrays, provenance, schemas, or realized receipts fails recomputation.
+
+`memory.promotion.disposition.append` is the sole initial stale-terminal exception. After request identity, no-prior-terminal-disposition, disposition schema, and requested-actor authority validate, the SDK establishes the idempotency key before evaluating the target compare. An authorized `refused` decision returns `status=ok`, `data.disposition=refused`, and the terminal semantic-record receipt. An authorized `applied` decision whose expected target matches writes the terminal disposition plus semantic memory atomically. The same decision whose target basis is stale returns `status=ok`, `data.disposition=stale`, and writes the terminal semantic-record disposition, leaving no request pending and no semantic-memory receipt. An unauthorized actor, duplicate terminal disposition, malformed decision, or stale request fingerprint is an ordinary pre-establishment refusal and writes nothing. Same-key stale retry replays the recorded stale result; same key with a different request fingerprint conflicts.
+
+## Capability bootstrap and catalog discovery
+
+Capability discovery has a non-circular root. API major `M` publishes one immutable `handbook.bootstrap-descriptor@M.0.0` alongside the SDK, CLI, generated schemas, Tauri adapter, and bridge bundle; therefore API major 1 uses `handbook.bootstrap-descriptor@1.0.0` and major 2 uses `@2.0.0`. The separately versioned descriptor schema is an exact full-SemVer binding inside the descriptor. Its fingerprint closure contains the exact same-major `capabilities.describe` definition, bootstrap request/response/refusal schemas, generic response schema, and supported API major. The descriptor is compiled into typed clients and separately checksum-pinned by a process bridge; it is not discovered from the endpoint it validates.
+
+A cold client sends only the descriptor-pinned bootstrap request. A matching runtime returns exact `CatalogRoot` values for implemented operation definitions, schemas, and profiles plus owner-crate versions and the first bounded capability page. The client then uses paged `capabilities.describe`, `schema.list`/`schema.read`, and `profile.list` to retrieve closed exact catalogs/documents; `vocabulary.read`, `resolution.stack.read`, and `projection.definition.read` retrieve the exact definitions referenced by a resolved profile, so the client never reads repository files or infers shipped defaults.
+
+Every catalog/list request carries `page_size` and an exact-or-null cursor. `CatalogRoot` contains catalog ref/fingerprint, total entry count, entry schema binding, and canonical sort definition. A page repeats that root, contains a bounded duplicate-free contiguous entry sequence, and returns a null terminal cursor or a cursor cryptographically bound to the catalog fingerprint and next sort key. The first request atomically materializes an immutable content-addressed catalog snapshot; later pages read that same snapshot despite concurrent registry changes. If its declared retention expires before traversal finishes, the next page is `blocked` with a typed restart condition rather than mixing versions. Page-size overflow, cursor/catalog mismatch, gaps, duplicates, reordered entries, and total-count mismatch refuse. Bootstrap/catalog conformance proves empty, single-page, multi-page, concurrent-change, expiry/restart, and oversized cases.
+
+A stale descriptor fingerprint or unsupported API major returns the descriptor-defined typed bootstrap refusal without deserializing an ordinary operation body. After a valid bootstrap, an unknown/malformed ordinary operation ref, incompatible requested API context, or invalid/stale definition fingerprint returns the descriptor-bound admission-refusal envelope below rather than fabricating trusted ordinary operation fields. An unknown bootstrap operation, invalid descriptor checksum, cross-major descriptor substitution, or tampered/unparseable bootstrap response is an adapter/bootstrap failure and yields no fabricated Handbook domain result. The bootstrap descriptor may change only under a new exact descriptor ref/fingerprint, and a breaking bootstrap change requires a new API major.
+
+### Preselection admission-refusal envelope
+
+This envelope is separate from `handbook.operation-response` and is valid only before an exact operation definition is accepted:
 
 ```json
 {
-  "schema_id": "handbook.command-response",
-  "schema_version": "1.0",
-  "operation": "contract.verify",
-  "status": "ok",
-  "data": {},
-  "diagnostics": [],
-  "next_actions": [],
-  "artifact_refs": [],
-  "provenance": {}
+  "schema_id": "handbook.operation-admission-refusal",
+  "schema_version": "1.0.0",
+  "request_id": "req_example",
+  "request_fingerprint": "sha256:...",
+  "operation_ref": null,
+  "operation_definition_fingerprint": null,
+  "bootstrap_descriptor": {
+    "ref": "handbook.bootstrap-descriptor@1.0.0",
+    "fingerprint": "sha256:..."
+  },
+  "admission": {
+    "state": "not_selected",
+    "stage": "operation_selection",
+    "reason": "operation_unknown",
+    "request_object_digest": "sha256:...",
+    "selection_evidence": {
+      "requested_operation_ref": "unknown.operation@1.0.0"
+    },
+    "terminal_problem": {
+      "problem_id": "problem_admission",
+      "problem_fingerprint": "sha256:..."
+    }
+  },
+  "status": "refused",
+  "data": null,
+  "blockers": [],
+  "refusals": [
+    {
+      "problem_id": "problem_admission",
+      "code": "admission.operation_unknown",
+      "category": "compatibility",
+      "subject": {
+        "ref": "handbook.bootstrap-descriptor@1.0.0",
+        "fingerprint": "sha256:..."
+      },
+      "rule": {
+        "ref": "handbook.admission-rule.operation-unknown@1.0.0",
+        "fingerprint": "sha256:..."
+      },
+      "details_schema": {
+        "ref": "handbook.admission-details.operation-unknown@1.0.0",
+        "fingerprint": "sha256:..."
+      },
+      "details": {
+        "request_object_digest": "sha256:...",
+        "stage": "operation_selection",
+        "reason": "operation_unknown",
+        "selection_evidence": {
+          "requested_operation_ref": "unknown.operation@1.0.0"
+        }
+      },
+      "details_fingerprint": "sha256:...",
+      "evidence": [],
+      "retry": "after_request_change",
+      "recheck": null,
+      "correlation_ref": null,
+      "problem_fingerprint": "sha256:..."
+    }
+  ],
+  "errors": [],
+  "schema_manifest": [
+    {
+      "schema": {"ref": "handbook.operation-admission-refusal@1.0.0", "fingerprint": "sha256:..."},
+      "draft": "2020-12",
+      "byte_length": 2048,
+      "media_type": "application/schema+json"
+    },
+    {
+      "schema": {"ref": "handbook.operation-refusal@1.0.0", "fingerprint": "sha256:..."},
+      "draft": "2020-12",
+      "byte_length": 1024,
+      "media_type": "application/schema+json"
+    },
+    {
+      "schema": {"ref": "handbook.admission-details.operation-unknown@1.0.0", "fingerprint": "sha256:..."},
+      "draft": "2020-12",
+      "byte_length": 512,
+      "media_type": "application/schema+json"
+    }
+  ],
+  "response_fingerprint": "sha256:..."
 }
 ```
 
-Status values:
+The `admission` member is a closed reason-discriminated union. Every variant contains exactly `state`, `stage`, `reason`, `request_object_digest`, `selection_evidence`, and `terminal_problem`; `state` is always `not_selected`. To compute `request_object_digest`, copy the complete bounded parseable request object, delete exactly the top-level `request_id` correlation member and top-level client-supplied `request_fingerprint` derived member whether their values are absent, null, valid, or invalid, RFC 8785-normalize the remaining object, then SHA-256 those bytes. No other field is deleted. The digest therefore preserves compound-invalid semantic identity without exposing fields that admission never evaluated, while correlation-only or client-supplied-fingerprint-only changes cannot alter it. `selection_evidence` contains only the winning field evidence listed below; later-selection fields are omitted, not set to null or opportunistically normalized.
 
-- `ok`;
-- `blocked`;
-- `refused`;
-- `error`.
+The admission envelope's `request_id` has the closed output type `string | null`. A supplied value is valid only when it is a JSON string matching `^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$`; that exact string is echoed. An absent member, explicit null, non-string, overlong string, or string outside the allowlist emits null and is never echoed or included in any semantic fingerprint. Correlation validation does not outrank or replace the admission reason. For otherwise identical input, two different valid IDs produce identical object/request/Problem semantic fingerprints but different echoed IDs and outer response fingerprints; absent, null, and every invalid ID all emit null and produce identical complete envelopes/fingerprints; changing only client-supplied `request_fingerprint` changes no emitted field or fingerprint; combined changes follow only the emitted valid-ID-versus-null distinction.
 
-Domain verdicts such as contract `fail` remain inside `data`; they are not collapsed into process/transport failure.
+The reason/evidence variants are:
+
+| Stage | Reason | Exact `selection_evidence` shape | Meaning |
+|---|---|---|---|
+| `operation_selection` | `operation_ref_missing` | `{ "operation_ref": null }` | the client omitted the operation ref |
+| `operation_selection` | `operation_ref_malformed` | `{ "attempted_operation_ref_digest": "sha256:..." }` | the supplied value cannot be normalized as an operation ref; digest ownership is the attempted operation-ref value only |
+| `operation_selection` | `operation_unknown` | `{ "requested_operation_ref": "unknown.operation@1.0.0" }` | the normalized ref is absent from the descriptor-bound operation catalog |
+| `api_negotiation` | `api_context_missing` | `{ "requested_operation_ref": "...", "missing_api_context_fields": ["client.api_version", ...] }` | at least one required API-context leaf is absent or null; the array is non-empty, unique, and sorted in the fixed field order below |
+| `api_negotiation` | `api_context_malformed` | `{ "requested_operation_ref": "...", "malformed_api_context_field": "client.api_version", "attempted_api_context_digest": "sha256:..." }` | the first present non-null API-context parent or leaf fails its exact type/syntax rule; the path and digest bind that one winning raw value |
+| `api_negotiation` | `api_incompatible` | `{ "requested_operation_ref": "...", "requested_api_context": { "client_api_version": "1.0.0", "negotiated_api_version": "1.0.0", "bootstrap_descriptor": { "ref": "handbook.bootstrap-descriptor@1.0.0", "fingerprint": "sha256:..." } } }` | the concrete normalized context is internally inconsistent, unsupported, or differs from the exact outer bootstrap-descriptor binding |
+| `definition_validation` | `definition_pin_missing` | `{ "requested_operation_ref": "...", "requested_api_context": { "client_api_version": "1.0.0", "negotiated_api_version": "1.0.0", "bootstrap_descriptor": { "ref": "...", "fingerprint": "sha256:..." } }, "requested_definition_fingerprint": null }` | the client omitted or set null the `operation_definition_fingerprint` pin |
+| `definition_validation` | `definition_fingerprint_malformed` | `{ "requested_operation_ref": "...", "requested_api_context": { "client_api_version": "1.0.0", "negotiated_api_version": "1.0.0", "bootstrap_descriptor": { "ref": "...", "fingerprint": "sha256:..." } }, "attempted_definition_fingerprint_digest": "sha256:..." }` | the supplied definition fingerprint cannot be normalized; its digest owns only that supplied field value |
+| `definition_validation` | `definition_registry_missing` | `{ "requested_operation_ref": "...", "requested_api_context": { "client_api_version": "1.0.0", "negotiated_api_version": "1.0.0", "bootstrap_descriptor": { "ref": "...", "fingerprint": "sha256:..." } }, "requested_definition_fingerprint": "sha256:..." }` | the client supplied a valid exact pin but the runtime registry does not contain that definition |
+| `definition_validation` | `definition_mismatch` | `{ "requested_operation_ref": "...", "requested_api_context": { "client_api_version": "1.0.0", "negotiated_api_version": "1.0.0", "bootstrap_descriptor": { "ref": "...", "fingerprint": "sha256:..." } }, "requested_definition_fingerprint": "sha256:..." }` | the valid registry-resolvable pin does not bind the selected operation/API pair |
+| `definition_validation` | `definition_stale` | `{ "requested_operation_ref": "...", "requested_api_context": { "client_api_version": "1.0.0", "negotiated_api_version": "1.0.0", "bootstrap_descriptor": { "ref": "...", "fingerprint": "sha256:..." } }, "requested_definition_fingerprint": "sha256:..." }` | the exact binding is known but no longer admitted by the selected API context |
+
+The API-context selector is not an inferred object. It reads exactly these request paths in this order: `client`, `client.api_version`, `negotiated_api_context`, `negotiated_api_context.api_version`, `negotiated_api_context.bootstrap_descriptor`, `negotiated_api_context.bootstrap_descriptor.ref`, and `negotiated_api_context.bootstrap_descriptor.fingerprint`. The three parent paths must be objects. The four leaves must be non-null strings with full-SemVer, full-SemVer, exact descriptor-ref, and SHA-256 fingerprint syntax respectively. An absent or null parent contributes all of its required descendant leaves to `missing_api_context_fields`; an absent or null leaf contributes itself. A present non-object parent or present non-null invalid leaf is malformed, and only the first invalid path in the fixed order wins. Once valid, the four leaves normalize to the exact `requested_api_context` DTO shown in the table. Unequal client and negotiated API versions, an API major/version unsupported by the descriptor, or a normalized descriptor pair unequal to the envelope's outer `bootstrap_descriptor` is `api_incompatible`. Thus absent, explicit null, partial, malformed, internally mismatched, descriptor-mismatched, and unsupported inputs each have one deterministic classification.
+
+Every attempted-value digest is `sha256(RFC8785({"field_path": <exact request path>, "value": <raw JSON value>}))`. For `operation_ref_malformed` the path is `operation_ref`; for `definition_fingerprint_malformed` it is `operation_definition_fingerprint`; for `api_context_malformed` it is the exact `malformed_api_context_field`. This wrapper, including the raw JSON type, is the complete digest input; bytes outside the parsed value and any later field are excluded.
+
+The admission algorithm applies those variants in this total order: operation-ref presence, syntax, then existence; API-context presence, syntax, then compatibility; definition-pin presence, syntax, registry existence, selected-operation/API match, then currentness. Compound-invalid input emits only the first winning variant and never includes evidence for a later step. `definition_pin_missing` is exclusively an absent or null client `operation_definition_fingerprint`; `definition_registry_missing` is exclusively a valid client pin absent from the runtime registry.
+
+Every admission refusal has exactly one descriptor-owned stage-details schema selected by `(stage, reason)`. The mapping is injective and mechanical: Problem `code` is `admission.<reason>`; rule ref is `handbook.admission-rule.<reason-with-underscores-replaced-by-hyphens>@1.0.0`; details-schema ref is `handbook.admission-details.<reason-with-underscores-replaced-by-hyphens>@1.0.0`; and the descriptor supplies each exact fingerprint. Its sole Problem has the exact bootstrap descriptor as subject and `details` equal byte-for-byte in canonical form to `{ "request_object_digest": admission.request_object_digest, "stage": admission.stage, "reason": admission.reason, "selection_evidence": admission.selection_evidence }`; its `details_fingerprint` and `problem_fingerprint` bind that exact object plus the injective code/rule/details-schema bindings. Registry-missing, mismatch, and stale therefore cannot alias even when their requested values match. The same Problem matches `admission.terminal_problem`; blockers/errors remain empty. The schema manifest closes over only the admission-refusal, Problem, and selected stage-details schemas. There is no operation result schema, operation-specific Problem schema, ordinary `idempotency`, or write receipt.
+
+Admission evaluation first requires bounded input bytes, UTF-8, rejection of duplicate object-member names at every nesting level by the tokenizing parser, and one parseable JSON object. Duplicate names are rejected before object construction, admission selection, or fingerprinting; they are an adapter/bootstrap failure with no Handbook response, including duplicates of excluded correlation/derived members. Failure of framing, size, UTF-8, duplicate-name uniqueness, or JSON parsing therefore occurs before request fingerprinting and yields no fabricated Handbook result. Direct SDK structured requests cannot represent duplicates; their conformance fixture proves such a state is unconstructible. Every byte-oriented SDK dynamic-JSON, CLI JSON, Tauri, and bridge entry point uses duplicate-rejecting parsing and proves identical no-response behavior for top-level and nested duplicates.
+
+For a parseable unique-member object, the non-null server-computed `request_fingerprint` covers the exact descriptor binding, `request_object_digest`, and the selected `(stage, reason, selection_evidence)` tuple. It excludes the top-level `request_id` and any top-level client-supplied `request_fingerprint` transitively because both were deleted before `request_object_digest`; the envelope always emits the recomputed value rather than echoing the supplied value. `response_fingerprint` covers the complete emitted envelope except itself, so a different valid echoed `request_id` may change only that outer response fingerprint. Unknown semantic request fields remain in `request_object_digest`; non-null trusted operation fields, missing or extra terminal Problems, a mismatch between Problem details and admission evidence, an operation schema in the manifest, or use after a definition is accepted refuse serialization. Direct SDK dynamic admission, CLI JSON adapter, Tauri, and bridge fixtures prove every variant, all missing/malformed distinctions, registry-missing versus client-pin-missing, compound-error precedence, and byte-equivalent semantics. Additional fixtures cover valid changed IDs, absent/null/malformed IDs, client-fingerprint-only changes, combined changes, and duplicate top-level/nested selection or excluded fields against the exact correlation and no-response matrices above.
+
+## Transport request contract
+
+Transport adapters construct the same generic envelope around one operation-specific typed body. Rust callers normally use the typed method/request directly; the SDK derives this envelope for transport parity and proof.
+
+```json
+{
+  "schema_id": "handbook.operation-request",
+  "schema_version": "1.0.0",
+  "request_id": "req_example",
+  "operation_ref": "artifact.validate@1.0.0",
+  "operation_definition_fingerprint": "sha256:...",
+  "client": {
+    "client_id": "handbook-cli",
+    "client_version": "0.0.0-example",
+    "api_version": "1.0.0"
+  },
+  "expected_response_schema": {
+    "ref": "handbook.operation-response@1.0.0",
+    "fingerprint": "sha256:..."
+  },
+  "negotiated_api_context": {
+    "api_version": "1.0.0",
+    "bootstrap_descriptor": {
+      "ref": "handbook.bootstrap-descriptor@1.0.0",
+      "fingerprint": "sha256:..."
+    }
+  },
+  "context": {
+    "repository_root": ".",
+    "repository_identity_fingerprint": "sha256:...",
+    "resolution_envelope": null,
+    "snapshot": null
+  },
+  "body": {},
+  "extensions": {},
+  "request_fingerprint": "sha256:..."
+}
+```
+
+Request rules:
+
+1. `request_id` is opaque correlation metadata, unique within the client session, and excluded from semantic replay decisions. A valid ordinary request uses the same safe non-null string syntax used by admission echoing. After exact definition acceptance, absent, null, non-string, overlong, or disallowed correlation input is an ordinary `request_validation` refusal under the total response rule below; it never re-enters the admission envelope.
+2. `operation_ref`, definition fingerprint, expected response schema pair, and `negotiated_api_context` are mandatory exact pins. The API context must match the descriptor used for bootstrap and `client.api_version`; a mismatch refuses before deserializing the operation body.
+3. The adapter resolves cwd/repository discovery before SDK invocation and records an explicit trusted root plus identity fingerprint. Owner logic never reads ambient cwd.
+4. Resolution/snapshot refs are null only when the operation definition permits them; any non-null ref is exact and fingerprint-validated by the body schema.
+5. `body` validates against the exact operation request schema. Mutation bodies carry operation-owned idempotency keys and/or current compare-and-write fingerprints; the generic envelope never invents mutation authority.
+6. `extensions` is exactly `{}` in v1. Any non-empty map refuses as `transport.extensions_unsupported`; extensions cannot add semantics outside the operation-definition fingerprint closure.
+7. `request_fingerprint` is normalized SHA-256 over operation ref/fingerprint, expected response schema, exact negotiated API version/descriptor binding, context, body, and extensions. It excludes `request_id`, `client_id`, and `client_version`; `client.api_version` is semantic, must equal the negotiated API version, and is covered through that exact context.
+
+Transport schemas use closed objects (`additionalProperties: false`); the v1 `extensions` property has `maxProperties: 0`. Normalization sorts object keys, preserves array order, uses UTF-8 and canonical JSON scalar forms, rejects non-finite numbers, and excludes only fields explicitly named by that schema's fingerprint rule.
+
+## Transport response and expected-outcome contract
+
+```json
+{
+  "schema_id": "handbook.operation-response",
+  "schema_version": "1.0.0",
+  "request_id": "req_example",
+  "request_fingerprint": "sha256:...",
+  "operation_ref": "artifact.validate@1.0.0",
+  "operation_definition_fingerprint": "sha256:...",
+  "status": "ok",
+  "data": {},
+  "blockers": [],
+  "refusals": [],
+  "errors": [],
+  "diagnostics": [],
+  "next_actions": [],
+  "artifact_refs": [],
+  "write_receipts": [],
+  "idempotency": {
+    "state": "not_applicable"
+  },
+  "provenance": {
+    "source_bindings": [],
+    "resolution_envelope": null,
+    "snapshot": null,
+    "omissions": []
+  },
+  "schema_manifest": [
+    {
+      "schema": {
+        "ref": "handbook.operation-response@1.0.0",
+        "fingerprint": "sha256:..."
+      },
+      "draft": "2020-12",
+      "byte_length": 2048,
+      "media_type": "application/schema+json"
+    },
+    {
+      "schema": {
+        "ref": "handbook.operation.artifact-validate-result@1.0.0",
+        "fingerprint": "sha256:..."
+      },
+      "draft": "2020-12",
+      "byte_length": 1024,
+      "media_type": "application/schema+json"
+    }
+  ],
+  "response_fingerprint": "sha256:..."
+}
+```
+
+| `status` | `data` | `blockers` | `refusals` | `errors` | Meaning |
+|---|---|---|---|---|---|
+| `ok` | required, exact result schema | empty | empty | empty | operation executed as specified; domain results such as a failed validation/verdict remain typed inside data |
+| `blocked` | null | non-empty | empty | empty | request is valid but named prerequisite/external state is missing; each blocker includes a typed recheck condition |
+| `refused` | null | empty | non-empty | empty | request violates schema, capability, Resolution, authority, precondition, or safety contract and must change before retry |
+| `error` | null | empty | empty | non-empty | unexpected implementation/adapter failure prevented a trustworthy result; no domain decision may be inferred |
+
+All four terminal fields are always present. Mixed terminal outcome arrays refuse response construction. `request_fingerprint` is mandatory and must equal the normalized accepted-definition request; failures before bounded UTF-8/JSON-object normalization are adapter/bootstrap failures with no Handbook response, while selection-field failures use the non-null-fingerprint admission envelope above. `idempotency` is a closed discriminated union:
+
+The ordinary response's `request_id` is also `string | null`. A supplied ID matching `^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$` is echoed exactly. After exact definition acceptance, absent, null, non-string, overlong, or disallowed input emits null and terminates as `status=refused` with one `request_validation`/`schema` Problem whose exact code is `transport.request_id_invalid` and whose bounded details are the constant `{ "field": "request_id", "rule": "safe_correlation" }`; no raw correlation value or invalid-shape discriminator is included. The ordinary semantic `request_fingerprint`, details fingerprint, and Problem fingerprint therefore remain invariant across all invalid correlation representations. A read-only operation uses `idempotency.state=not_applicable`; a mutation uses `not_established` at `request_validation`, before key establishment or any write. The outer response fingerprint binds the emitted valid string or null. Cross-adapter fixtures cover the full valid/absent/null/non-string/overlong/disallowed matrix for both mutability classes.
+
+- `not_applicable` is valid if and only if an accepted operation definition is read-only, regardless of terminal response status;
+- `not_established` is valid if and only if an accepted mutating operation terminates before a domain commit and has exactly `{state, stage, terminal_problem}` with no key/result fields. `stage` is one of `capability_validation`, `request_validation`, `resolution_validation`, `authority_validation`, `precondition_validation`, `safety_validation`, `idempotency_validation`, or `execution_start`. `terminal_problem: ProblemBinding` must match exactly one terminal Problem in the response by ID and instance fingerprint; and
+- `established` carries `{state, key, request_fingerprint, replayed, original_result_fingerprint, result_retention_until_utc}`, with original result null on first execution and equal to the persisted committed-result closure fingerprint defined above on replay.
+
+The ordinary-response variants are mutually exclusive and total after exact definition acceptance: every response for an accepted read-only operation, including blocked/refused/error, uses only `not_applicable`; only an accepted mutating pre-commit blocked/refused/error uses `not_established`; and only a committed mutation result/replay uses `established`. Pre-definition failures use only the separate admission envelope. After selection, stage/category binding is exact: `capability_validation` permits blocker `prerequisite` or refusal `capability`; `request_validation` only refusal `schema`; `resolution_validation` blocker `prerequisite` or refusal `resolution`; `authority_validation` blocker `prerequisite` or refusal `authority`; `precondition_validation` blocker `prerequisite` or refusal `precondition`; `safety_validation` only refusal `safety`; `idempotency_validation` only refusal `idempotency`; and `execution_start` only error `implementation` or `adapter`. An implementation/adapter error detected after selection but before domain commit uses `execution_start` even if the underlying adapter failed while serving an earlier validation step. No other stage/status/category triple is valid.
+
+Key establishment normally occurs only after API/definition/capability/envelope/body/key/precondition validation and immediately before mutation execution. The memory-promotion stale-terminal exception above establishes after structural/admission/actor-authority validation but before its domain compare. Every committed mutation response is `established`.
+
+`write_receipts` is always present: it is empty for read-only and pre-execution non-`ok` outcomes, while a successful mutation lists exactly the operation write-set items realized by its typed data variant. A post-commit adapter failure emits no ordinary response; retry uses the established key to recover the schema-valid `ok` response and receipts. Every non-null Resolution, snapshot, source, schema, evidence, next-action subject, and artifact binding carries exact identity/version plus fingerprint; a bare ref is invalid. Large/binary outputs and sensitive details use bounded artifact refs rather than inline payloads.
+
+The shared DTO schemas are closed and exact:
+
+| DTO | Required fields and closed semantics |
+|---|---|
+| `ExactBinding` | `ref`, `fingerprint`; both non-empty, mutually matching, and no bare/relative-latest ref |
+| `Problem` | unique response-local `problem_id`, `code`, closed `category`, `subject: ExactBinding`, `rule: ExactBinding|null`, `details_schema: ExactBinding`, schema-valid bounded `details`, derived `details_fingerprint`, `evidence: ArtifactRef[]`, `retry`, `recheck`, `correlation_ref`, and derived `problem_fingerprint` |
+| `Diagnostic` | `code`, `severity` (`information` or `warning`), `subject: ExactBinding`, `details_schema: ExactBinding`, bounded `details`, derived `details_fingerprint`, optional non-authoritative `display_message` |
+| `NextAction` | stable `action_id`, allowlisted `kind`, `subject: ExactBinding`, `parameter_schema: ExactBinding`, schema-valid bounded `parameters`, optional non-authoritative `display_label` |
+| `ArtifactRef` | `artifact: ExactBinding`, `media_type`, `byte_length`, `sensitivity` (`public`, `internal`, or `restricted`), and closed tagged `locator`; artifact fingerprint is the exact content fingerprint and restricted bytes are never inline |
+| `SourceBinding` | `source: ExactBinding`, `captured_revision: ExactBinding`, `adapter: ExactBinding`; no ambient or label-only source |
+| `Omission` | `item: ExactBinding`, allowlisted `reason`, `proof_effect` (`none`, `partial`, `blocked`, or `refused`), `source: SourceBinding|null`, and stable `ordinal` |
+| `SchemaManifestEntry` | `schema: ExactBinding`, `draft` (exactly `2020-12`), `byte_length`, and `media_type` (exactly `application/schema+json`) |
+| `CatalogRoot` | `catalog: ExactBinding`, `entry_schema: ExactBinding`, nonnegative `total_entries`, `canonical_sort: ExactBinding`, and non-null future `retention_until_utc`; `catalog.fingerprint` is the independently recomputable catalog-snapshot digest defined below |
+| `CatalogCursor` | `catalog: ExactBinding`, bounded `next_sort_key`, and derived `cursor_fingerprint`; it is valid only for that catalog fingerprint and exact next key |
+| `CatalogPage` | `root: CatalogRoot`, schema-valid bounded `entries`, `next_cursor: CatalogCursor|null`, and derived `page_fingerprint`; entries are one duplicate-free contiguous sequence in the root's exact sort |
+| `RecheckCondition` | `condition_schema: ExactBinding`, schema-valid bounded `condition`, and derived `condition_fingerprint`; evaluation is deterministic and cannot perform an implicit mutation |
+| `CorrelationRef` | opaque non-secret token matching `^corr_[A-Za-z0-9_-]{16,128}$`; it reveals no path, input, trace, or credential |
+| `WriteReceipt` | `record_kind`, `record: ExactBinding`, `authority_class`, `condition`, `atomic_group`, and derived `receipt_fingerprint`; it must match one realized operation-definition write-set item exactly |
+| `IdempotencyState` | ordinary-response closed union `not_applicable`, `not_established`, or `established` with the exact mutability/stage/Problem-binding fields defined above; preselection uses the separate admission envelope and no ordinary idempotency field |
+| `ProblemBinding` | `{problem_id, problem_fingerprint}`; both must match exactly one terminal Problem instance in the same response, and problem IDs are unique across all terminal arrays |
+
+For `Problem`, category is a closed enum partitioned by terminal variant: blocker permits only `prerequisite`; refusal permits only `schema`, `compatibility`, `capability`, `resolution`, `authority`, `precondition`, `safety`, or `idempotency`; error permits only `implementation` or `adapter`. A blocker requires `rule: null`, a non-null `RecheckCondition`, `correlation_ref: null`, and retry `after_recheck`. A refusal requires a non-null violated `rule`, `recheck: null`, `correlation_ref: null`, and retry `after_request_change`, `after_authority_change`, or `never`. An error requires `rule: null`, `recheck: null`, a non-null `CorrelationRef`, retry `transient` or `never`, and redacted details. No other category or conditional field combination is schema-valid. `diagnostics` can never contain a blocker/refusal/error-only severity or supply the sole decision. `next_actions` cannot grant authority or weaken the associated problem.
+
+`ArtifactRef.locator` is a discriminated union. `repo_relative` requires `{kind, repository_identity_fingerprint, path, no_follow: true}`; the path is UTF-8 NFC with `/` separators, is non-empty and relative, and contains no empty, `.`, `..`, NUL, platform-prefix, or percent-encoded traversal segment. Resolution opens from the already trusted repository root, rejects symlinks at every component with no-follow semantics, and verifies bytes against `artifact.fingerprint`. `content_addressed` requires `{kind, store: ExactBinding, algorithm: "sha256", digest}` where digest equals the artifact fingerprint and fetched bytes recompute identically. Unknown locator kinds/fields, unsafe paths, symlinks, store mismatch, digest mismatch, or post-open identity change refuse.
+
+All DTO collections have operation-schema byte/item limits and reject overflow before serialization. Blockers/refusals/errors are unique and sorted by `(code, subject.ref, details_schema.ref, details fingerprint)`; diagnostics by `(severity, code, subject.ref, details fingerprint)`; next actions by `(action_id, subject.ref)`; artifact/source/schema bindings by `(ref-or-id, fingerprint)`; omissions by unique ordinal. Collections with domain-significant order must name that order in the operation result schema and preserve it; unordered duplicates refuse. Optional display fields are nullable/omittable only where named above and never enter machine decisions. Unknown enum values, unknown fields, invalid nulls, secret-bearing inline details, unsafe locators, unbounded values, or non-canonical ordering refuse response construction.
+
+Every shared DTO instance fingerprint uses RFC 8785 canonical JSON and lowercase `sha256:<64-hex>`. A schema names exactly one fingerprint field; recomputation includes every other schema field and every nested exact binding and excludes only that instance's own fingerprint field. `details_fingerprint` covers `{details_schema, details}`; diagnostic details use the same rule; `problem_fingerprint` covers the complete Problem including `details_fingerprint` but excluding only itself; `condition_fingerprint` covers `{condition_schema, condition}`; `cursor_fingerprint` covers `{catalog, next_sort_key}`; `page_fingerprint` covers `{root, entries, next_cursor}`; and `receipt_fingerprint` covers `{record_kind, record, authority_class, condition, atomic_group}`. A catalog snapshot is the one exception to avoid circularity: `catalog.fingerprint` covers `{catalog.ref, entry_schema, total_entries, canonical_sort, retention_until_utc, ordered_entry_bindings}` and does not include the enclosing `CatalogRoot` or `catalog.fingerprint` itself. A client validates each page immediately and, after collecting the declared total entry set, recomputes the catalog fingerprint before treating traversal as complete. The response fingerprint then covers these already-validated DTO values. Any inner mismatch refuses response construction even when the outer document would otherwise validate; transplanted Problems/cursors/pages/conditions/receipts fail their exact input closure.
+
+The idempotency ledger is **protocol-control metadata**, not a governed/domain record: it has no authority class, never appears in an operation write set or `write_receipts`, cannot be returned by `record.list`/`record.read`, and cannot satisfy evidence or authority requirements. Its internal closed states are `reserved`, `committed_result`, `aborted`, and `consumed_tombstone`. Reservation and the domain transaction share one crash-recoverable transaction journal. A proven pre-domain failure atomically aborts/removes the reservation and returns mutation `not_established`; a domain commit atomically records `committed_result` with the exact retained closure, realized write receipts, and recomputable original-result fingerprint; an unknown commit outcome emits no ordinary response and recovery resolves the journal to committed replay or safe abort before retry; retained-result compaction atomically replaces only control metadata with a tombstone carrying key scope, request fingerprint, and that same original-result fingerprint. Therefore establishment failure, replay retention, and tombstone compaction are durable protocol mechanics but never undeclared domain writes or receipts.
+
+`provenance` always contains canonically ordered `source_bindings`, exact-or-null Resolution and Snapshot bindings, and ordered `omissions`; it cannot be replaced by free-form text. `schema_manifest` lists every response/result/problem/details/parameter schema as `SchemaManifestEntry` values. `response_fingerprint` covers every field except itself using the request normalization rule. Producers validate the response against the generic, shared-DTO, and operation-result schemas before serialization; failure becomes an adapter invariant error and must never emit a partial success document.
+
+## DTO and JSON Schema generation contract
+
+1. SDK request/result/problem/reference DTOs are public typed Rust structs/enums with Serde and Draft 2020-12 JSON Schema generation.
+2. The reviewed Rust type plus its checked-in generated schema are one public contract. CI regenerates into a temporary tree and requires byte identity, recomputes schema fingerprints, and fails if either side drifts.
+3. Discriminated unions use explicit tag fields; public data shapes do not use unbounded `serde_json::Value`, flatten unknown fields, or infer variants from field presence.
+4. Every public schema has exact ID/version, closed-object policy, explicit nullability/default rules, and a recomputable fingerprint producer.
+5. Breaking field/removal/meaning changes require a new operation/schema major. Additive optional fields require a new schema/operation minor and remain absent-by-default. Patch releases cannot change serialized meaning.
+6. Clients refuse unsupported majors and definition/schema fingerprint mismatch. They may accept a higher compatible minor only when capability negotiation explicitly advertises it; no range/latest fallback occurs.
+7. OpenAPI may later describe an HTTP adapter but cannot become authority for SDK, CLI, or Tauri DTOs.
+
+The generated package includes the immutable bootstrap descriptor and every discoverable schema document/index. Capability and profile/schema catalog fixtures prove cold, compatible, stale, unsupported-major, unknown-operation, missing-profile/schema, and tampered-fingerprint behavior. A machine client discovers behavior from these typed catalogs or exact compile-time Rust types, never by parsing CLI help, examples, error prose, or Tauri command names.
 
 ## CLI JSON contract
 
-For every nontrivial command in JSON mode:
+Each recognized nontrivial CLI invocation maps to exactly one operation definition. Multiple command paths may map to one operation, but command grammar is not operation identity. Custom kinds/profiles/vocabulary are arguments or body data and never add/rename commands.
 
-1. stdout contains exactly one complete JSON response document;
-2. human progress and logs use stderr;
-3. expected blocked/refused outcomes still serialize the envelope;
-4. exit codes are stable and separately documented;
-5. no ANSI styling appears in JSON;
-6. large/binary outputs use artifact references;
-7. the response reports capability/schema versions;
-8. human output renders from the same typed result.
+In JSON mode:
 
-The initial Substrate CLI bridge consumes this contract only. It never parses human text.
+1. stdout contains exactly one complete UTF-8 JSON response document followed only by zero or one LF byte;
+2. stdout is empty until the validated response can be emitted atomically;
+3. progress, human diagnostics, tracing, and logs use stderr and do not alter the response;
+4. `ok`, `blocked`, `refused`, and `error` all serialize the response contract; no expected outcome is prose-only;
+5. no ANSI styling, prompts, banners, or progress frames appear on stdout;
+6. human output is rendered from the same typed SDK result/outcome, not from a second domain path;
+7. schema/operation/capability pins and response fingerprints are preserved byte-for-value;
+8. binary/large output uses bounded artifact refs.
+
+Exit mapping is exact:
+
+| Exit | Meaning |
+|---|---|
+| `0` | response `status=ok`, including a successfully evaluated domain result whose typed verdict/validation is negative |
+| `3` | response `status=blocked` |
+| `4` | response `status=refused` |
+| `5` | response `status=error` |
+| `64` | CLI grammar/usage failed before an operation could be selected; help/version are also shell-only, not operation responses |
+| `70` | the CLI could not validate/serialize one complete response; stdout remains empty and stderr reports only a safe adapter correlation code |
+
+For selected JSON operations, exit and response status must agree. Machine consumers parse and validate the response; exit status alone is not the domain result. The CLI never maps a contract/validation `fail` in successful `data` to transport `error`.
+
+## Tauri adapter contract
+
+The Tauri adapter maintains a checked mapping from each exposed Tauri command ID to one exact SDK operation ref/fingerprint. It deserializes the operation request DTO, invokes the typed SDK method, and serializes the exact SDK response DTO without reshaping domain fields.
+
+- command naming, window state, cancellation wiring, and async/blocking scheduling are adapter concerns;
+- repository discovery becomes an explicit trusted request context before the SDK call;
+- expected blocked/refused outcomes resolve as response DTOs rather than rejected prose promises;
+- an unexpected adapter failure proven to occur after operation selection but before domain commit uses the same typed `error` response;
+- post-commit serialization or delivery uncertainty emits no ordinary Handbook response and only a bounded host-level adapter failure; retrying the established idempotency key recovers the committed result and exact receipts without another write;
+- normal operation never shells out to `handbook`, parses CLI output, or reimplements capability/Resolution/authority checks;
+- the frontend may render and request operations but cannot mutate canonical truth outside an authorized SDK operation.
+
+Tauri parity is proven per operation by serializing the same request fixture through direct SDK, CLI JSON, and Tauri adapter paths and requiring schema-valid semantic equivalence after excluding only declared transport correlation fields. Failure injection separately proves pre-commit adapter failure yields the typed error variant, while post-commit serialization/delivery failure yields no false domain response and an established-key retry replays the committed result, fingerprint, and receipts without a duplicate write.
+
+## Substrate integration contracts
+
+### Transitional bundled-CLI bridge
+
+The Tier-2 bridge is one isolated Substrate-owned process adapter. It must:
+
+1. pin the exact Handbook binary build/version/checksum and reject substitution;
+2. call only recognized `--json` operations and preflight `capabilities.describe` against exact operation-definition/schema fingerprints;
+3. set an explicit repository root and bounded environment; never let domain behavior depend on ambient cwd;
+4. bound wall time, stdout/stderr bytes, input size, process count, and cancellation/termination behavior;
+5. accept exactly one complete response on stdout followed by zero or one LF byte, validate both generic and operation schemas/fingerprints, and reject every other trailing byte including spaces, tabs, CRLF, a second LF, banners, data, or another document;
+6. treat stderr as non-authoritative diagnostics only and never parse human wording;
+7. map spawn/timeout/truncation/version/schema/serialization failures into typed Substrate adapter failures without fabricating a Handbook domain result;
+8. carry non-sensitive bounded request metadata only in arguments, pass sensitive request bodies only through bounded stdin or an exact trusted content-addressed/repo-relative ref, and prohibit sensitive values in argv, environment variables, stderr, ambient temporary files, or process titles;
+9. redact adapter diagnostics and crash reports by classification before persistence, delete any explicitly allocated private input file on every exit path, and prove with leakage fixtures that secrets are absent from argv/env/stderr/process listings/temp roots; and
+10. keep all process-specific behavior behind one replaceable interface and carry `BR-SUB-CLI-01` as its deletion gate.
+
+For a mutating bridge call, spawn failure or a validated response proving pre-establishment termination is a proven pre-commit adapter outcome. Once the child may have entered mutation execution, timeout, cancellation, truncation, invalid exit/status agreement, missing/extra stdout, schema/fingerprint failure, or serialization/delivery failure is **commit-uncertain**. The bridge emits no fabricated Handbook `error`, retains the exact original request envelope, idempotency key, and request fingerprint in bounded private non-authoritative recovery state under the sensitive-input rules above, and retries only that byte-identical semantic request with the same key. Recovery must resolve to safe pre-commit abort or an `established` replay carrying the persisted original-result fingerprint and exact receipts; it never chooses a new key, rebinds the request, or performs a second domain write. Failure injection covers every listed uncertainty both before establishment and after commit-before-valid-stdout.
+
+Bridge proof satisfies only `PG-SUB-CLI-01`. It does not satisfy SDK publication, Tauri parity, direct Rust adoption, or a contract/dock real path.
+
+### Permanent published-Rust boundary
+
+The Tier-4 boundary invokes exact published SDK/owner APIs directly in a real current-tip Substrate product seam. It does not invoke the CLI in that seam. Substrate owns when the use case runs, runtime authority, failure policy, agent orchestration, and final product wording; Handbook owns operation semantics and typed results.
+
+Normal ordinary-consumer integration prefers `handbook-sdk`. Direct imports of `handbook-engine`, `handbook-flow`, `handbook-pipeline`, or `handbook-contracts` are advanced boundaries and must justify why the SDK operation is insufficient without recreating composition. No Substrate crate becomes a Handbook semantic owner.
+
+The direct boundary satisfies `PG-SUB-RUST-01` only after the published API and real-seam proof below pass. At that point the Tier-2 adapter is removed from the normal product path and `BR-SUB-CLI-01` closes; retaining the standalone Handbook CLI product is unrelated to retaining the Substrate bridge.
+
+## Published Rust API proof plan
+
+A downstream-intended API is not complete because its symbol is `pub`, workspace tests pass, or a path dependency compiles. Each new/changed downstream-intended SDK or owner API must pass the following ordered proof:
+
+1. **Compute the release DAG:** reject cycles and order `handbook-engine` before `handbook-flow`/`handbook-contracts`, those owners before pipeline where applicable, all owners before SDK, and SDK before CLI/adapters. Record the exact node/version/dependency plan before publishing the first node.
+2. **Interleave proof and publication per node:** visit one node in topological order. Every changed Handbook dependency of that node must already have completed this step and resolve at its exact checksum from crates.io. Only then run public-type/docs/SemVer/generated-schema/unit/integration/negative proof, package include/exclude audit, and `cargo package` for the node from a clean cache with no path/git/patch/workspace fallback.
+3. **Isolate then publish that node:** unpack only that node's `.crate` into a clean external consumer, resolve its Handbook dependencies only at their already-published exact crates.io versions, and prove no unlisted workspace/sibling file is required. Then publish the node, wait until its exact version/checksum resolves from crates.io, record the evidence, and advance to the next DAG node. A dependent is never packaged before its new dependency is registry-resolvable. Abort the chain on mismatch/unavailability; resuming starts at the first unpublished node after revalidating all earlier checksums.
+4. **Registry-only external consumer:** in a clean directory outside both workspaces, depend on exact `=x.y.z` versions, run locked fetch/metadata/build/tests, and assert each Handbook package source is the crates.io registry with no path, git, `[patch]`, or workspace override.
+5. **Current-tip Substrate worktree:** create a dedicated clean worktree from the then-current Substrate tip, pin the exact registry versions, inspect the lockfile/source graph, and implement one named real product seam. A toy binary, manifest-only dependency, or dead test helper does not count.
+6. **Real-seam proof wall:** exercise positive, typed blocked/refused, incompatible-version/schema, and no-fallback cases; run Substrate format/lint/build/tests and the seam's runtime proof; demonstrate Substrate-owned wording/orchestration and Handbook-owned semantics.
+7. **Evidence record:** preserve Handbook and Substrate commit/tree IDs, crate versions/checksums, registry metadata/source assertions, lockfile diff, exact seam path/symbol, commands/results, negative proof, and independent review.
+
+`PG-PUBLISH-01` closes for the exact published API only after steps 1-4. `PG-SUB-RUST-01` closes for the exact real seam only after steps 5-7. A prior release proof remains evidence only for the exact versions/APIs/seam it exercised. The Tier-2 bridge and Tier-4 boundary have separate subject fingerprints and cannot substitute proof for each other.
 
 ## Contract record
 
@@ -3154,22 +3666,11 @@ Result includes:
 
 ### CLI bridge gate
 
-- exact Handbook binary version;
-- exact JSON schema/capability versions;
-- real Substrate seam;
-- no human-output parsing;
-- explicit replacement boundary.
+The bridge must satisfy the complete **Transitional bundled-CLI bridge** contract above: exact binary version/checksum, exact operation/schema/capability fingerprints, bounded process behavior, one validated response document, a real Substrate seam, no human-output parsing, typed fail-closed adapter errors, and `BR-SUB-CLI-01`.
 
 ### Published Rust API gate
 
-A downstream-intended API is complete only when:
-
-1. relevant crates are published to crates.io;
-2. a registry-only external consumer resolves exact versions;
-3. a dedicated Substrate worktree from current tip imports those exact versions;
-4. a real seam uses the API;
-5. the proof wall passes;
-6. no sibling-path or unpublished fallback exists.
+A downstream-intended API is complete only after the complete **Published Rust API proof plan** above passes, including packaged-artifact isolation, exact crates.io publication, registry-only external consumption, a dedicated current-tip Substrate worktree, a named real seam, negative/no-fallback proof, and preserved review evidence.
 
 The CLI bridge may ship earlier, but it cannot satisfy this Rust API gate.
 

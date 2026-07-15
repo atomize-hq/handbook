@@ -46,6 +46,8 @@ Creating a child packet or internal dispatch does not complete the parent slice.
 
 `HCM-0.8` is a corrective insertion and must close before `HCM-0.7`, despite its later-discovered numeric identifier.
 
+`HCM-0.4` consumes the frozen HCM-0.2 semantic identities and HCM-0.3 Resolution/Snapshot/Projection contracts plus the closed HCM-0.8 orchestration control plane. It does not wait for HCM-0.5 contract/dock semantics or HCM-0.6 shipped defaults: those later design slices append their approved use cases/data selections without changing the transport and ownership rules frozen here.
+
 ### Phase 0 non-goals
 
 - Rust changes;

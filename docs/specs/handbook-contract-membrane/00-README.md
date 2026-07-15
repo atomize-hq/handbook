@@ -1,10 +1,10 @@
 # Handbook Contract Membrane Control Pack
 
 **Status:** draft active control pack; docs and architecture only  
-**Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, context assembly, handoff, escalation, and proof gates
+**Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, context assembly, handoff, escalation, and proof gates
 
 **Implementation authorization:** none; implementation begins only from an approved slice-local packet  
-**Repo-truth snapshot:** 2026-07-12; re-check live code before every slice
+**Repo-truth snapshot:** 2026-07-14; re-check live code before every slice
 
 ## Purpose
 
