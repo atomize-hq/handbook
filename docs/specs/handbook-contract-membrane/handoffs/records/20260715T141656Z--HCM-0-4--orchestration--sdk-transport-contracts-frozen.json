@@ -1,0 +1,2594 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.2",
+  "handoff_id": "20260715T141656Z--HCM-0-4--orchestration--sdk-transport-contracts-frozen",
+  "created_at_utc": "2026-07-15T14:16:56Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.4",
+  "packet_id": null,
+  "orchestration_id": "20260714T224422Z--HCM-0-4--orchestration",
+  "source_handoff_ids": [
+    "20260715T044452Z--HCM-0-4--orchestration--live-agent-registry-capacity-blocked"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-15T14:16:56Z",
+    "evidence_ref": "Nine fresh isolated built-in default review allocations executed after registry reset; eight returned structured results through round 31, and one no-payload completion was replaced by a different fresh reviewer. Final round 31 returned CLEAN."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "review-round-1",
+      "dispatch_id": "20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+      "dispatch_fingerprint": "sha256:8d718cef60ebc8618157700ef9a17e4999af4f8c146d548fa272bc6957abc4c9",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_contract_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:9684ba1697190e1ba84cffbee08d8b0e34c800e3bec787dda920ed06fe6b54d2",
+      "result_subject_fingerprint": "sha256:9684ba1697190e1ba84cffbee08d8b0e34c800e3bec787dda920ed06fe6b54d2",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R1-001",
+        "HCM-0.4-R1-002",
+        "HCM-0.4-R1-003",
+        "HCM-0.4-R1-004",
+        "HCM-0.4-R1-005",
+        "HCM-0.4-R1-006",
+        "HCM-0.4-R1-007",
+        "HCM-0.4-R1-008",
+        "HCM-0.4-R1-009",
+        "HCM-0.4-R1-010",
+        "HCM-0.4-R1-011",
+        "HCM-0.4-R1-012"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-2",
+      "dispatch_id": "20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+      "dispatch_fingerprint": "sha256:fae4a12f78a79a0467d0215313d5f95bf68a6c8dd5f5f5579b4dceef7d522ad0",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_fresh_contract_rereview",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:fd136d31012aa973190287cb393161e1666ddd876e8ff2a86bd9831574ae9277",
+      "result_subject_fingerprint": "sha256:fd136d31012aa973190287cb393161e1666ddd876e8ff2a86bd9831574ae9277",
+      "review_round": 2,
+      "predecessor_run_id": "review-round-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R2-001",
+        "HCM-0.4-R2-002",
+        "HCM-0.4-R2-003",
+        "HCM-0.4-R2-004",
+        "HCM-0.4-R2-005",
+        "HCM-0.4-R2-006",
+        "HCM-0.4-R2-007",
+        "HCM-0.4-R2-008",
+        "HCM-0.4-R2-009"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-3",
+      "dispatch_id": "20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json",
+      "dispatch_fingerprint": "sha256:a48b2be2ad9cda6b2cd9fd6925fc70387547824d1f14d8c34645b4391ef04cb1",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_fresh_final_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:2c736c8d424e693e920ac0151d5982f6e09e9801d94c8394448d62f6d7273b1a",
+      "result_subject_fingerprint": "sha256:2c736c8d424e693e920ac0151d5982f6e09e9801d94c8394448d62f6d7273b1a",
+      "review_round": 3,
+      "predecessor_run_id": "review-round-2",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R3-001",
+        "HCM-0.4-R3-002",
+        "HCM-0.4-R3-003",
+        "HCM-0.4-R3-004",
+        "HCM-0.4-R3-005"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-4",
+      "dispatch_id": "20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review.json",
+      "dispatch_fingerprint": "sha256:6407cbc0a4bf63ae9d1dd60bc7109383d5304e1d5e6bf19a77ee469d46d994bb",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_write_set_closure_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:ded3dcb871e6d084554081cfe0bbacf2661de6227f2326071e99925b018d62c4",
+      "result_subject_fingerprint": "sha256:ded3dcb871e6d084554081cfe0bbacf2661de6227f2326071e99925b018d62c4",
+      "review_round": 4,
+      "predecessor_run_id": "review-round-3",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R4-001",
+        "HCM-0.4-R4-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-5",
+      "dispatch_id": "20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review.json",
+      "dispatch_fingerprint": "sha256:7437930e4817d6b40a0940af9df2d95708d626d0d0efbb832424c0c929221c79",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_atomic_lineage_final_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:99fdd0f5fe78701914dcf912d7eff7c108e73cc4d51e9a0bfacb97e2c11cb1b3",
+      "result_subject_fingerprint": "sha256:99fdd0f5fe78701914dcf912d7eff7c108e73cc4d51e9a0bfacb97e2c11cb1b3",
+      "review_round": 5,
+      "predecessor_run_id": "review-round-4",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R5-001",
+        "HCM-0.4-R5-002",
+        "HCM-0.4-R5-003",
+        "HCM-0.4-R5-004"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-6",
+      "dispatch_id": "20260715T000107Z--HCM-0-4--fresh-protocol-consistency-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T000107Z--HCM-0-4--fresh-protocol-consistency-closure-review.json",
+      "dispatch_fingerprint": "sha256:5e1bfb4ede1d4db03059081a26b5cf07056c8516642dd41ea599847ca4c59db9",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_protocol_consistency_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:516d57c3024c56821f94be4367368c96bdba64e38e8836ffa82ae66123078620",
+      "result_subject_fingerprint": "sha256:516d57c3024c56821f94be4367368c96bdba64e38e8836ffa82ae66123078620",
+      "review_round": 6,
+      "predecessor_run_id": "review-round-5",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R6-001",
+        "HCM-0.4-R6-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T000107Z--HCM-0-4--fresh-protocol-consistency-closure-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-7",
+      "dispatch_id": "20260715T001902Z--HCM-0-4--fresh-idempotency-terminal-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T001902Z--HCM-0-4--fresh-idempotency-terminal-closure-review.json",
+      "dispatch_fingerprint": "sha256:7a49c4def88c915108d0da35b77e1d05b506190232c98b60f858cb7bd3c76327",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_idempotency_terminal_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:b0fc7d4d7f877eb1d6cf25ee1eb5ebece6c2f9ba069793f660865fc170d0bcb3",
+      "result_subject_fingerprint": "sha256:b0fc7d4d7f877eb1d6cf25ee1eb5ebece6c2f9ba069793f660865fc170d0bcb3",
+      "review_round": 7,
+      "predecessor_run_id": "review-round-6",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R7-001",
+        "HCM-0.4-R7-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T001902Z--HCM-0-4--fresh-idempotency-terminal-closure-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-8",
+      "dispatch_id": "20260715T003710Z--HCM-0-4--fresh-problem-binding-control-metadata-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T003710Z--HCM-0-4--fresh-problem-binding-control-metadata-review.json",
+      "dispatch_fingerprint": "sha256:24190dc0d9c455cef5eeeb26c2fae3576df5ad997d9b4018a2ad47d98ef02dce",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_problem_control_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:d1ff44d547c0e0f5c47b91e421be26a8d66f061b75fc10e1c556a41a024f444f",
+      "result_subject_fingerprint": "sha256:d1ff44d547c0e0f5c47b91e421be26a8d66f061b75fc10e1c556a41a024f444f",
+      "review_round": 8,
+      "predecessor_run_id": "review-round-7",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R8-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T003710Z--HCM-0-4--fresh-problem-binding-control-metadata-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-9",
+      "dispatch_id": "20260715T005628Z--HCM-0-4--fresh-preselection-totality-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T005628Z--HCM-0-4--fresh-preselection-totality-final-review.json",
+      "dispatch_fingerprint": "sha256:e1c02ba4d4fde9d46c2f8c48a8dc0428a43467f312a899371e9bd42581f4edb6",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_preselection_final_review_retry",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:4a3636a221c83728cff4e46ae456131ac7503781b7cbbe359b1350d9dabe15fb",
+      "result_subject_fingerprint": "sha256:4a3636a221c83728cff4e46ae456131ac7503781b7cbbe359b1350d9dabe15fb",
+      "review_round": 9,
+      "predecessor_run_id": "review-round-8",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R9-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T005628Z--HCM-0-4--fresh-preselection-totality-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-10",
+      "dispatch_id": "20260715T013757Z--HCM-0-4--fresh-admission-envelope-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T013757Z--HCM-0-4--fresh-admission-envelope-closure-review.json",
+      "dispatch_fingerprint": "sha256:0ac9ec8b7f9566cbd0feb193219bfcc9457013f09af8b111275f63311a7abb4d",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_admission_envelope_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:b0e8f2f4b25f97eab276296cf04b240334f1e32d84d64a90c0ff73b99be2f5e9",
+      "result_subject_fingerprint": "sha256:b0e8f2f4b25f97eab276296cf04b240334f1e32d84d64a90c0ff73b99be2f5e9",
+      "review_round": 10,
+      "predecessor_run_id": "review-round-9",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R10-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T013757Z--HCM-0-4--fresh-admission-envelope-closure-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-11",
+      "dispatch_id": "20260715T014639Z--HCM-0-4--fresh-admission-totality-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T014639Z--HCM-0-4--fresh-admission-totality-final-review.json",
+      "dispatch_fingerprint": "sha256:13b9d8a80d1200ffb155c35fb73d687056a7df51bd228396333c5c3968c15b95",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_admission_totality_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:1e5d3e4a6bf9064b32d400f22880714e2aa0ed0414bc16e25b6bb0e6f48ca8f0",
+      "result_subject_fingerprint": "sha256:1e5d3e4a6bf9064b32d400f22880714e2aa0ed0414bc16e25b6bb0e6f48ca8f0",
+      "review_round": 11,
+      "predecessor_run_id": "review-round-10",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R11-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T014639Z--HCM-0-4--fresh-admission-totality-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-12",
+      "dispatch_id": "20260715T015720Z--HCM-0-4--fresh-admission-variant-totality-clean-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T015720Z--HCM-0-4--fresh-admission-variant-totality-clean-review.json",
+      "dispatch_fingerprint": "sha256:6e07b0fddba0ab2a0c0f522ea06d2e64f0149e614a7c391caa715b0406807f62",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_admission_variant_clean_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:6090d2f364b9908e30a726c331653ecff5752fe18d397b259f5d1c00ccd959e8",
+      "result_subject_fingerprint": "sha256:6090d2f364b9908e30a726c331653ecff5752fe18d397b259f5d1c00ccd959e8",
+      "review_round": 12,
+      "predecessor_run_id": "review-round-11",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R12-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T015720Z--HCM-0-4--fresh-admission-variant-totality-clean-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-13",
+      "dispatch_id": "20260715T020618Z--HCM-0-4--fresh-api-context-fingerprint-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T020618Z--HCM-0-4--fresh-api-context-fingerprint-closure-review.json",
+      "dispatch_fingerprint": "sha256:0b8eed9815160e45838dc9988e7d85ae4f0bf8c6463febd3e100cbcd4665a501",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_api_context_fingerprint_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:b644daba5ac08a2f8034796f126673bbacc0195c698ea7fdad8afb5839e4e9ce",
+      "result_subject_fingerprint": "sha256:b644daba5ac08a2f8034796f126673bbacc0195c698ea7fdad8afb5839e4e9ce",
+      "review_round": 13,
+      "predecessor_run_id": "review-round-12",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R13-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T020618Z--HCM-0-4--fresh-api-context-fingerprint-closure-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-14",
+      "dispatch_id": "20260715T021403Z--HCM-0-4--fresh-correlation-fingerprint-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T021403Z--HCM-0-4--fresh-correlation-fingerprint-final-review.json",
+      "dispatch_fingerprint": "sha256:da8e23e543139d1c5f6a49afad307e57e879baa3a03e1b5e02e139b5066e0545",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_correlation_fingerprint_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:4e87f3b2ae6714374a5c19be86545938cefe139882edd5aa9fab9f5a5d4c776a",
+      "result_subject_fingerprint": "sha256:4e87f3b2ae6714374a5c19be86545938cefe139882edd5aa9fab9f5a5d4c776a",
+      "review_round": 14,
+      "predecessor_run_id": "review-round-13",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R14-001",
+        "HCM-0.4-R14-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T021403Z--HCM-0-4--fresh-correlation-fingerprint-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-15",
+      "dispatch_id": "20260715T022305Z--HCM-0-4--fresh-adapter-boundary-totality-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T022305Z--HCM-0-4--fresh-adapter-boundary-totality-review.json",
+      "dispatch_fingerprint": "sha256:d3bc3fd55a2ab84de1e20bb2e4b00f8900a2aed2f5392ca45870042e269ee9c1",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_adapter_boundary_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:c7bd81d207c04e9cedaf402e09496e62276fbb8b08c0efa99abeff324be27817",
+      "result_subject_fingerprint": "sha256:c7bd81d207c04e9cedaf402e09496e62276fbb8b08c0efa99abeff324be27817",
+      "review_round": 15,
+      "predecessor_run_id": "review-round-14",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R15-001",
+        "HCM-0.4-R15-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T022305Z--HCM-0-4--fresh-adapter-boundary-totality-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-16",
+      "dispatch_id": "20260715T023318Z--HCM-0-4--fresh-ordinary-correlation-commit-boundary-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T023318Z--HCM-0-4--fresh-ordinary-correlation-commit-boundary-review.json",
+      "dispatch_fingerprint": "sha256:6e40faff25a04a4e975768d76901f3c814c82fc10f74d53b9f767015f4082b2c",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_ordinary_commit_boundary_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:cc8e60487893c8b4f2134e05c1db6c8e06837113056fe3719140e682349c98bf",
+      "result_subject_fingerprint": "sha256:cc8e60487893c8b4f2134e05c1db6c8e06837113056fe3719140e682349c98bf",
+      "review_round": 16,
+      "predecessor_run_id": "review-round-15",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R16-001",
+        "HCM-0.4-R16-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T023318Z--HCM-0-4--fresh-ordinary-correlation-commit-boundary-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-17",
+      "dispatch_id": "20260715T024254Z--HCM-0-4--fresh-result-identity-bridge-recovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T024254Z--HCM-0-4--fresh-result-identity-bridge-recovery-review.json",
+      "dispatch_fingerprint": "sha256:e502002fae7d4313201cdc2cd83de374228dcb434dd957606728d12f301f8abe",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_result_bridge_recovery_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:f4c96c4cf367c3e16afd360d7d2b41c0d1f8d75160c2e683e68a5026e765cce6",
+      "result_subject_fingerprint": "sha256:f4c96c4cf367c3e16afd360d7d2b41c0d1f8d75160c2e683e68a5026e765cce6",
+      "review_round": 17,
+      "predecessor_run_id": "review-round-16",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R17-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T024254Z--HCM-0-4--fresh-result-identity-bridge-recovery-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-18",
+      "dispatch_id": "20260715T030320Z--HCM-0-4--fresh-recovery-hold-retention-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T030320Z--HCM-0-4--fresh-recovery-hold-retention-closure-review.json",
+      "dispatch_fingerprint": "sha256:4c9ffa662f8d6fbc1ef912be68685048783b4f6707dbc571c40fc1987f397cc2",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_recovery_hold_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:783d983b0ad29b4f451a9609689f9ff467c8687ff5b58bd4f2247aceb561e950",
+      "result_subject_fingerprint": "sha256:783d983b0ad29b4f451a9609689f9ff467c8687ff5b58bd4f2247aceb561e950",
+      "review_round": 18,
+      "predecessor_run_id": "review-round-17",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R18-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T030320Z--HCM-0-4--fresh-recovery-hold-retention-closure-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-19",
+      "dispatch_id": "20260715T031232Z--HCM-0-4--fresh-release-tombstone-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T031232Z--HCM-0-4--fresh-release-tombstone-final-review.json",
+      "dispatch_fingerprint": "sha256:ff5ad399ba298af566cef537dc6180cdc1365ef92f0ba40b2fd64447dbffe2b8",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_release_tombstone_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:53f94aa990dd2ffbc7cd322b17fa34d4fbff985d10d7a748e71b14aec6e204ff",
+      "result_subject_fingerprint": "sha256:53f94aa990dd2ffbc7cd322b17fa34d4fbff985d10d7a748e71b14aec6e204ff",
+      "review_round": 19,
+      "predecessor_run_id": "review-round-18",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R19-001",
+        "HCM-0.4-R19-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T031232Z--HCM-0-4--fresh-release-tombstone-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-20",
+      "dispatch_id": "20260715T032239Z--HCM-0-4--fresh-hold-event-matrix-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T032239Z--HCM-0-4--fresh-hold-event-matrix-closure-review.json",
+      "dispatch_fingerprint": "sha256:a0d994c6f9efe0bcfc264a413de2fa4e21b794c4e4eae6b65d28cd5ff9704cf5",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_hold_event_matrix_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:618bd0b26e8a26c08f89e6fb7d5c57e21410329058ac5d6db93b5ebb5d296180",
+      "result_subject_fingerprint": "sha256:618bd0b26e8a26c08f89e6fb7d5c57e21410329058ac5d6db93b5ebb5d296180",
+      "review_round": 20,
+      "predecessor_run_id": "review-round-19",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R20-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T032239Z--HCM-0-4--fresh-hold-event-matrix-closure-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-21",
+      "dispatch_id": "20260715T033000Z--HCM-0-4--fresh-recovery-ordering-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033000Z--HCM-0-4--fresh-recovery-ordering-final-review.json",
+      "dispatch_fingerprint": "sha256:ef6ab157bc6df5a6212ee202d4f71df5c1967a797f8150770d5012930a28102e",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_recovery_ordering_final_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:dc94198462d1707acbe819ec016be163c9e05e4ebd80b6c2645cf8e70ab8b62b",
+      "result_subject_fingerprint": "sha256:dc94198462d1707acbe819ec016be163c9e05e4ebd80b6c2645cf8e70ab8b62b",
+      "review_round": 21,
+      "predecessor_run_id": "review-round-20",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R21-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033000Z--HCM-0-4--fresh-recovery-ordering-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-22",
+      "dispatch_id": "20260715T033731Z--HCM-0-4--fresh-release-persistence-crash-window-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033731Z--HCM-0-4--fresh-release-persistence-crash-window-review.json",
+      "dispatch_fingerprint": "sha256:0192a83986f454858c933ccd97dca65a495dc33f1aaea9a7b1bd19d38f7122db",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_release_persistence_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:82c32706be50de873f966418448d86be767f33de4f2bd9c0cee40a0cc730c0ef",
+      "result_subject_fingerprint": "sha256:82c32706be50de873f966418448d86be767f33de4f2bd9c0cee40a0cc730c0ef",
+      "review_round": 22,
+      "predecessor_run_id": "review-round-21",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R22-001",
+        "HCM-0.4-R22-002",
+        "HCM-0.4-R22-003",
+        "HCM-0.4-R22-004"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033731Z--HCM-0-4--fresh-release-persistence-crash-window-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-23",
+      "dispatch_id": "20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json",
+      "dispatch_fingerprint": "sha256:baf3b9f982edc49ab58cabe27a8e154ceabf495619b00cca2fdd0a55201592bd",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_private_control_protocol_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:8c75963a2312f7d684136f9d212f7492e48b1708d6be83aa580f75c0d441cdca",
+      "result_subject_fingerprint": "sha256:8c75963a2312f7d684136f9d212f7492e48b1708d6be83aa580f75c0d441cdca",
+      "review_round": 23,
+      "predecessor_run_id": "review-round-22",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R23-001",
+        "HCM-0.4-R23-002",
+        "HCM-0.4-R23-003",
+        "HCM-0.4-R23-004"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-24",
+      "dispatch_id": "20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json",
+      "dispatch_fingerprint": "sha256:f4943a103696790c0b69be7d74fd7931d1935b183c11adfdf25a7db89138c4cd",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_control_identity_ack_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:acf4178f0536f73d09e246e271e8d564a2930ec55020c4fa0f86dc80f16881b4",
+      "result_subject_fingerprint": "sha256:acf4178f0536f73d09e246e271e8d564a2930ec55020c4fa0f86dc80f16881b4",
+      "review_round": 24,
+      "predecessor_run_id": "review-round-23",
+      "remediation_for_run_ids": [],
+      "final_status": "interrupted",
+      "verdict": "blocked",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-24-replacement",
+      "dispatch_id": "20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json",
+      "dispatch_fingerprint": "sha256:f4943a103696790c0b69be7d74fd7931d1935b183c11adfdf25a7db89138c4cd",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_round_24_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:acf4178f0536f73d09e246e271e8d564a2930ec55020c4fa0f86dc80f16881b4",
+      "result_subject_fingerprint": "sha256:acf4178f0536f73d09e246e271e8d564a2930ec55020c4fa0f86dc80f16881b4",
+      "review_round": 24,
+      "predecessor_run_id": "review-round-24",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R24-001",
+        "HCM-0.4-R24-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-25",
+      "dispatch_id": "20260715T122045Z--HCM-0-4--fresh-ack-replay-definition-binding-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T122045Z--HCM-0-4--fresh-ack-replay-definition-binding-review.json",
+      "dispatch_fingerprint": "sha256:12d8f000842d384cb385f72f2ebd3a21a16775a1895037400e911167eb27b3df",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_round_25_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:ec09bbccc6662e5a4a82bec29f9dbdc1b8c08085b2d0e648eaccf39bbaa591d4",
+      "result_subject_fingerprint": "sha256:ec09bbccc6662e5a4a82bec29f9dbdc1b8c08085b2d0e648eaccf39bbaa591d4",
+      "review_round": 25,
+      "predecessor_run_id": "review-round-24-replacement",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R25-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T122045Z--HCM-0-4--fresh-ack-replay-definition-binding-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-26",
+      "dispatch_id": "20260715T124205Z--HCM-0-4--fresh-request-hold-binding-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T124205Z--HCM-0-4--fresh-request-hold-binding-final-review.json",
+      "dispatch_fingerprint": "sha256:4ca42f2bf78f6dbb35fea80fa70e31316ff52c0a47a8bf346c2ebec0542a65be",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_round_26_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:edc5038af6d30008b58d3c9b913b7517ab4d8096b6888bbcae6ff085d5923844",
+      "result_subject_fingerprint": "sha256:edc5038af6d30008b58d3c9b913b7517ab4d8096b6888bbcae6ff085d5923844",
+      "review_round": 26,
+      "predecessor_run_id": "review-round-25",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R26-001",
+        "HCM-0.4-R26-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T124205Z--HCM-0-4--fresh-request-hold-binding-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-27-attempt",
+      "dispatch_id": "20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json",
+      "dispatch_fingerprint": "sha256:3f5b636970b7d8cb96334f5146bf190fdc89e4c9420642ca54bb477bfe7053e8",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_round_27_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:f965ba70802be40b379bdbb28fd981704613c540faa2a010a88b35c7ce1abf89",
+      "result_subject_fingerprint": "sha256:f965ba70802be40b379bdbb28fd981704613c540faa2a010a88b35c7ce1abf89",
+      "review_round": 27,
+      "predecessor_run_id": "review-round-26",
+      "remediation_for_run_ids": [],
+      "final_status": "failed",
+      "verdict": "blocked",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "Built-in agent completed without a structured result payload; no review verdict was accepted."
+      ]
+    },
+    {
+      "run_id": "review-round-27-replacement",
+      "dispatch_id": "20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json",
+      "dispatch_fingerprint": "sha256:3f5b636970b7d8cb96334f5146bf190fdc89e4c9420642ca54bb477bfe7053e8",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_round_27_replacement_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:f965ba70802be40b379bdbb28fd981704613c540faa2a010a88b35c7ce1abf89",
+      "result_subject_fingerprint": "sha256:f965ba70802be40b379bdbb28fd981704613c540faa2a010a88b35c7ce1abf89",
+      "review_round": 27,
+      "predecessor_run_id": "review-round-27-attempt",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R27-001",
+        "HCM-0.4-R27-002",
+        "HCM-0.4-R27-003"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-28",
+      "dispatch_id": "20260715T133120Z--HCM-0-4--fresh-domain-state-request-schema-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T133120Z--HCM-0-4--fresh-domain-state-request-schema-final-review.json",
+      "dispatch_fingerprint": "sha256:234be1b06efd0f3fbada1cd30215fd701ac1c78e93e4d8f108d37873a960fa94",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_round_28_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:412c5b915edba2b4294a07484cd5fbed79d1f50852a9ba23498bc1e886dd6cf4",
+      "result_subject_fingerprint": "sha256:412c5b915edba2b4294a07484cd5fbed79d1f50852a9ba23498bc1e886dd6cf4",
+      "review_round": 28,
+      "predecessor_run_id": "review-round-27-replacement",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R28-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T133120Z--HCM-0-4--fresh-domain-state-request-schema-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-29",
+      "dispatch_id": "20260715T134358Z--HCM-0-4--fresh-postselection-request-identity-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T134358Z--HCM-0-4--fresh-postselection-request-identity-final-review.json",
+      "dispatch_fingerprint": "sha256:96aedc390e47f7e489979511abd4f782e5f3a88b9ba20763d6e09e6c7e12a31b",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_round_29_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:c84e37a80086c8f364b6238888f50555d45381bcb102f185ddd1500e46502e18",
+      "result_subject_fingerprint": "sha256:c84e37a80086c8f364b6238888f50555d45381bcb102f185ddd1500e46502e18",
+      "review_round": 29,
+      "predecessor_run_id": "review-round-28",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R29-001",
+        "HCM-0.4-R29-002",
+        "HCM-0.4-R29-003"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T134358Z--HCM-0-4--fresh-postselection-request-identity-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-30",
+      "dispatch_id": "20260715T135535Z--HCM-0-4--fresh-bridge-preflight-extension-key-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T135535Z--HCM-0-4--fresh-bridge-preflight-extension-key-final-review.json",
+      "dispatch_fingerprint": "sha256:5eb069f89db5e8a0b5acda3c06e3889a8aff44805fdd5042c5fd3b8b29d37e7d",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_round_30_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:b62f954f018d91c5bf382a2b440258bb6326a182fbd717f3a267cf46d4ac2a4f",
+      "result_subject_fingerprint": "sha256:b62f954f018d91c5bf382a2b440258bb6326a182fbd717f3a267cf46d4ac2a4f",
+      "review_round": 30,
+      "predecessor_run_id": "review-round-29",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.4-R30-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T135535Z--HCM-0-4--fresh-bridge-preflight-extension-key-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "run_id": "review-round-31",
+      "dispatch_id": "20260715T140519Z--HCM-0-4--fresh-private-recovery-record-bound-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T140519Z--HCM-0-4--fresh-private-recovery-record-bound-final-review.json",
+      "dispatch_fingerprint": "sha256:ad5cf43f015618ecd52e958b53f023a65d0f7d1c16d03fce7c8c73182405a987",
+      "role": "review",
+      "agent_id": "/root/hcm_0_4_round_31_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:6a2e2f2826753eeb8e2028bb5bfffa18cd25cac823f74083c1f3ade4fd1ff9a4",
+      "result_subject_fingerprint": "sha256:6a2e2f2826753eeb8e2028bb5bfffa18cd25cac823f74083c1f3ade4fd1ff9a4",
+      "review_round": 31,
+      "predecessor_run_id": "review-round-30",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T140519Z--HCM-0-4--fresh-private-recovery-record-bound-final-review.json",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "parent-remediation-round-1",
+      "finding_run_id": "review-round-1",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-2",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:fd136d31012aa973190287cb393161e1666ddd876e8ff2a86bd9831574ae9277",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-2",
+      "finding_run_id": "review-round-2",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-3",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:2c736c8d424e693e920ac0151d5982f6e09e9801d94c8394448d62f6d7273b1a",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-3",
+      "finding_run_id": "review-round-3",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-4",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:ded3dcb871e6d084554081cfe0bbacf2661de6227f2326071e99925b018d62c4",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-4",
+      "finding_run_id": "review-round-4",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-5",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:99fdd0f5fe78701914dcf912d7eff7c108e73cc4d51e9a0bfacb97e2c11cb1b3",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-5",
+      "finding_run_id": "review-round-5",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-6",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:516d57c3024c56821f94be4367368c96bdba64e38e8836ffa82ae66123078620",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T000107Z--HCM-0-4--fresh-protocol-consistency-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-6",
+      "finding_run_id": "review-round-6",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-7",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:b0fc7d4d7f877eb1d6cf25ee1eb5ebece6c2f9ba069793f660865fc170d0bcb3",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T001902Z--HCM-0-4--fresh-idempotency-terminal-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-7",
+      "finding_run_id": "review-round-7",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-8",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:d1ff44d547c0e0f5c47b91e421be26a8d66f061b75fc10e1c556a41a024f444f",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T003710Z--HCM-0-4--fresh-problem-binding-control-metadata-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-8",
+      "finding_run_id": "review-round-8",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-9",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:4a3636a221c83728cff4e46ae456131ac7503781b7cbbe359b1350d9dabe15fb",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T005628Z--HCM-0-4--fresh-preselection-totality-final-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-9",
+      "finding_run_id": "review-round-9",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-10",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:b0e8f2f4b25f97eab276296cf04b240334f1e32d84d64a90c0ff73b99be2f5e9",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T013757Z--HCM-0-4--fresh-admission-envelope-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-10",
+      "finding_run_id": "review-round-10",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-11",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:1e5d3e4a6bf9064b32d400f22880714e2aa0ed0414bc16e25b6bb0e6f48ca8f0",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T014639Z--HCM-0-4--fresh-admission-totality-final-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-11",
+      "finding_run_id": "review-round-11",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-12",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:6090d2f364b9908e30a726c331653ecff5752fe18d397b259f5d1c00ccd959e8",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T015720Z--HCM-0-4--fresh-admission-variant-totality-clean-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-12",
+      "finding_run_id": "review-round-12",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-13",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:b644daba5ac08a2f8034796f126673bbacc0195c698ea7fdad8afb5839e4e9ce",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T020618Z--HCM-0-4--fresh-api-context-fingerprint-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-13",
+      "finding_run_id": "review-round-13",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-14",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:4e87f3b2ae6714374a5c19be86545938cefe139882edd5aa9fab9f5a5d4c776a",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T021403Z--HCM-0-4--fresh-correlation-fingerprint-final-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-14",
+      "finding_run_id": "review-round-14",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-15",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:c7bd81d207c04e9cedaf402e09496e62276fbb8b08c0efa99abeff324be27817",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T022305Z--HCM-0-4--fresh-adapter-boundary-totality-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-15",
+      "finding_run_id": "review-round-15",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-16",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:cc8e60487893c8b4f2134e05c1db6c8e06837113056fe3719140e682349c98bf",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T023318Z--HCM-0-4--fresh-ordinary-correlation-commit-boundary-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-16",
+      "finding_run_id": "review-round-16",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-17",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:f4c96c4cf367c3e16afd360d7d2b41c0d1f8d75160c2e683e68a5026e765cce6",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T024254Z--HCM-0-4--fresh-result-identity-bridge-recovery-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-17",
+      "finding_run_id": "review-round-17",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-18",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:783d983b0ad29b4f451a9609689f9ff467c8687ff5b58bd4f2247aceb561e950",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T030320Z--HCM-0-4--fresh-recovery-hold-retention-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-18",
+      "finding_run_id": "review-round-18",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-19",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:53f94aa990dd2ffbc7cd322b17fa34d4fbff985d10d7a748e71b14aec6e204ff",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T031232Z--HCM-0-4--fresh-release-tombstone-final-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-19",
+      "finding_run_id": "review-round-19",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-20",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:618bd0b26e8a26c08f89e6fb7d5c57e21410329058ac5d6db93b5ebb5d296180",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T032239Z--HCM-0-4--fresh-hold-event-matrix-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-20",
+      "finding_run_id": "review-round-20",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-21",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:dc94198462d1707acbe819ec016be163c9e05e4ebd80b6c2645cf8e70ab8b62b",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033000Z--HCM-0-4--fresh-recovery-ordering-final-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-21",
+      "finding_run_id": "review-round-21",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-22",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:82c32706be50de873f966418448d86be767f33de4f2bd9c0cee40a0cc730c0ef",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033731Z--HCM-0-4--fresh-release-persistence-crash-window-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-22",
+      "finding_run_id": "review-round-22",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-23",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:8c75963a2312f7d684136f9d212f7492e48b1708d6be83aa580f75c0d441cdca",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-23",
+      "finding_run_id": "review-round-23",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-24-replacement",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:acf4178f0536f73d09e246e271e8d564a2930ec55020c4fa0f86dc80f16881b4",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-24-replacement",
+      "finding_run_id": "review-round-24-replacement",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-25",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:ec09bbccc6662e5a4a82bec29f9dbdc1b8c08085b2d0e648eaccf39bbaa591d4",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T122045Z--HCM-0-4--fresh-ack-replay-definition-binding-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-25",
+      "finding_run_id": "review-round-25",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-26",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:edc5038af6d30008b58d3c9b913b7517ab4d8096b6888bbcae6ff085d5923844",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T124205Z--HCM-0-4--fresh-request-hold-binding-final-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-26",
+      "finding_run_id": "review-round-26",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-27-replacement",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:f965ba70802be40b379bdbb28fd981704613c540faa2a010a88b35c7ce1abf89",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-27",
+      "finding_run_id": "review-round-27-replacement",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-28",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:412c5b915edba2b4294a07484cd5fbed79d1f50852a9ba23498bc1e886dd6cf4",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T133120Z--HCM-0-4--fresh-domain-state-request-schema-final-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-28",
+      "finding_run_id": "review-round-28",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-29",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:c84e37a80086c8f364b6238888f50555d45381bcb102f185ddd1500e46502e18",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T134358Z--HCM-0-4--fresh-postselection-request-identity-final-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-29",
+      "finding_run_id": "review-round-29",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-30",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:b62f954f018d91c5bf382a2b440258bb6326a182fbd717f3a267cf46d4ac2a4f",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T135535Z--HCM-0-4--fresh-bridge-preflight-extension-key-final-review.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-round-30",
+      "finding_run_id": "review-round-30",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-round-31",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:6a2e2f2826753eeb8e2028bb5bfffa18cd25cac823f74083c1f3ade4fd1ff9a4",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T140519Z--HCM-0-4--fresh-private-recovery-record-bound-final-review.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "214a5b8eb182fce74478df49d4f55d226d65fdf5",
+    "subject_fingerprint": "sha256:6a2e2f2826753eeb8e2028bb5bfffa18cd25cac823f74083c1f3ade4fd1ff9a4",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T140519Z--HCM-0-4--fresh-private-recovery-record-bound-final-review.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#hcm-04-ownershipsdktransport-freeze-proof-gate",
+      "git:214a5b8eb182fce74478df49d4f55d226d65fdf5",
+      "Fresh isolated built-in default reviewer /root/hcm_0_4_round_31_review returned CLEAN."
+    ]
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "control_pack",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "slice_closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Freeze HCM-0.4 crate ownership, typed SDK operation/DTO boundaries, JSON/Tauri transport parity, transitional Substrate process integration, permanent published-Rust adoption, and proof/deletion gates without implementing Rust.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "HCM-0.4 status and authority boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Authority split",
+        "Crate ownership",
+        "Integration ladder",
+        "Tauri and API posture",
+        "Non-negotiable invariants",
+        "Explicit non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Status",
+        "Adapter implications"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Current-to-target crosswalk"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-0.4",
+        "Phase 0 non-goals",
+        "Phase 4",
+        "Phase 6"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "HCM-0.4 ownership and dependency contract",
+        "SDK ordinary-use-case contract",
+        "Transport request contract",
+        "Transport response and expected-outcome contract",
+        "Tauri adapter contract",
+        "Substrate integration contracts",
+        "Published Rust API proof plan"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "Regression rules 49-67",
+        "HCM-0.4 ownership/SDK/transport freeze proof gate"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "214a5b8eb182fce74478df49d4f55d226d65fdf5",
+    "dirty": false,
+    "changed_paths": []
+  },
+  "work_completed": [
+    "Resumed the exact HCM-0.4 round-24 review dispatch after collaboration-registry reset and completed a fresh replacement review.",
+    "Remediated every Required finding from rounds 24-30 in the parent without widening beyond the HCM-0.4 documentation/control-pack boundary.",
+    "Created and replayed immutable seven-document dispatch manifests for every different-fresh re-review through round 31.",
+    "Obtained a final CLEAN result from fresh isolated built-in default reviewer /root/hcm_0_4_round_31_review over subject sha256:6a2e2f2826753eeb8e2028bb5bfffa18cd25cac823f74083c1f3ade4fd1ff9a4.",
+    "Ran the complete semantic/example/inventory/link/archive/handoff proof wall, kept all runtime gates open, and committed the reviewed HCM-0.4 documentation/control state as git:214a5b8eb182fce74478df49d4f55d226d65fdf5."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "status": "completed",
+      "summary": "HCM-0.4 ownership, SDK, transport, bridge, and publication design contracts are frozen and review-clean; runtime implementation gates remain open."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "status": "completed",
+      "summary": "HCM-0.4 ownership, SDK, transport, bridge, and publication design contracts are frozen and review-clean; runtime implementation gates remain open."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "status": "completed",
+      "summary": "HCM-0.4 ownership, SDK, transport, bridge, and publication design contracts are frozen and review-clean; runtime implementation gates remain open."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "status": "completed",
+      "summary": "HCM-0.4 ownership, SDK, transport, bridge, and publication design contracts are frozen and review-clean; runtime implementation gates remain open."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "status": "completed",
+      "summary": "HCM-0.4 ownership, SDK, transport, bridge, and publication design contracts are frozen and review-clean; runtime implementation gates remain open."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "status": "completed",
+      "summary": "HCM-0.4 ownership, SDK, transport, bridge, and publication design contracts are frozen and review-clean; runtime implementation gates remain open."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "status": "completed",
+      "summary": "HCM-0.4 ownership, SDK, transport, bridge, and publication design contracts are frozen and review-clean; runtime implementation gates remain open."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T024254Z--HCM-0-4--fresh-result-identity-bridge-recovery-review.json",
+      "status": "completed",
+      "summary": "Fresh review round 17 executed and returned actionable findings that were remediated in the next subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T030320Z--HCM-0-4--fresh-recovery-hold-retention-closure-review.json",
+      "status": "completed",
+      "summary": "Fresh review round 18 executed and returned actionable findings that were remediated in the next subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T031232Z--HCM-0-4--fresh-release-tombstone-final-review.json",
+      "status": "completed",
+      "summary": "Fresh review round 19 executed and returned actionable findings that were remediated in the next subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T032239Z--HCM-0-4--fresh-hold-event-matrix-closure-review.json",
+      "status": "completed",
+      "summary": "Fresh review round 20 executed and returned actionable findings that were remediated in the next subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033000Z--HCM-0-4--fresh-recovery-ordering-final-review.json",
+      "status": "completed",
+      "summary": "Fresh review round 21 executed and returned actionable findings that were remediated in the next subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033731Z--HCM-0-4--fresh-release-persistence-crash-window-review.json",
+      "status": "completed",
+      "summary": "Fresh review round 22 executed and returned actionable findings that were remediated in the next subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json",
+      "status": "completed",
+      "summary": "Fresh review round 23 executed and returned actionable findings that were remediated in the next subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json",
+      "status": "completed",
+      "summary": "Exact round-24 dispatch executed by a fresh replacement reviewer; findings were remediated and re-reviewed."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T122045Z--HCM-0-4--fresh-ack-replay-definition-binding-review.json",
+      "status": "completed",
+      "summary": "Round 25 reviewed round-24 acknowledgment/definition-binding remediation and returned one Required finding."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T124205Z--HCM-0-4--fresh-request-hold-binding-final-review.json",
+      "status": "completed",
+      "summary": "Round 26 reviewed request/hold binding and returned two Required findings."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json",
+      "status": "completed",
+      "summary": "Round 27 replacement reviewed active-hold/secret closure and returned three Required findings."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T133120Z--HCM-0-4--fresh-domain-state-request-schema-final-review.json",
+      "status": "completed",
+      "summary": "Round 28 reviewed domain-state/request-schema closure and returned one Required finding."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T134358Z--HCM-0-4--fresh-postselection-request-identity-final-review.json",
+      "status": "completed",
+      "summary": "Round 29 reviewed postselection request identity and returned three Required findings."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T135535Z--HCM-0-4--fresh-bridge-preflight-extension-key-final-review.json",
+      "status": "completed",
+      "summary": "Round 30 reviewed bridge preflight/extension/key closure and returned one Required finding."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T140519Z--HCM-0-4--fresh-private-recovery-record-bound-final-review.json",
+      "status": "completed",
+      "summary": "Round 31 reviewed the complete final subject and returned CLEAN."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-0.4-D01",
+      "summary": "Keep HCM-0.4 documentation/design-only; no Rust, Cargo, CLI, Tauri, or Substrate implementation is authorized.",
+      "authority_effect": "none",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.4-D02",
+      "summary": "Use one typed SDK operation/DTO/schema boundary with thin JSON, Tauri, and transitional process adapters.",
+      "authority_effect": "freezes target ownership only; runtime gates remain open",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.4-D03",
+      "summary": "Keep the process bridge transitional and crates.io Rust consumption permanent, with separate proof and deletion gates.",
+      "authority_effect": "none until real-path proof",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.4-D04",
+      "summary": "Declare HCM-0.4 complete only after the different-fresh round-31 CLEAN review and full parent proof wall.",
+      "authority_effect": "permits documentation/design-freeze completion only; all runtime gates remain open",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T140519Z--HCM-0-4--fresh-private-recovery-record-bound-final-review.json"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.4-D05",
+      "summary": "Treat private bridge-control state as non-authoritative protocol metadata with exact framing, identity, crash recovery, and persistent terminal-memory semantics; keep all runtime gates open until implementation proof.",
+      "authority_effect": "documents the pending target contract only",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-0.4-R1-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 2; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 3; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-004",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 4; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-005",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 5; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-006",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 6; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-007",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 7; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-008",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 8; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-009",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 9; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-010",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 10; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-011",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 11; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R1-012",
+      "classification": "local_remediation",
+      "severity": "warning",
+      "summary": "Fresh review round 1 identified actionable HCM-0.4 contract closure issue 12; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T224422Z--HCM-0-4--independent-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R2-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 2 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R2-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 2 identified actionable HCM-0.4 contract closure issue 2; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R2-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 2 identified actionable HCM-0.4 contract closure issue 3; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R2-004",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 2 identified actionable HCM-0.4 contract closure issue 4; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R2-005",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 2 identified actionable HCM-0.4 contract closure issue 5; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R2-006",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 2 identified actionable HCM-0.4 contract closure issue 6; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R2-007",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 2 identified actionable HCM-0.4 contract closure issue 7; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R2-008",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 2 identified actionable HCM-0.4 contract closure issue 8; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R2-009",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 2 identified actionable HCM-0.4 contract closure issue 9; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T230438Z--HCM-0-4--fresh-post-remediation-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R3-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 3 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R3-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 3 identified actionable HCM-0.4 contract closure issue 2; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R3-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 3 identified actionable HCM-0.4 contract closure issue 3; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R3-004",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 3 identified actionable HCM-0.4 contract closure issue 4; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R3-005",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 3 identified actionable HCM-0.4 contract closure issue 5; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T231951Z--HCM-0-4--fresh-final-ownership-sdk-transport-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R4-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 4 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R4-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 4 identified actionable HCM-0.4 contract closure issue 2; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T233352Z--HCM-0-4--fresh-write-set-discovery-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R5-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 5 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T000107Z--HCM-0-4--fresh-protocol-consistency-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R5-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 5 identified actionable HCM-0.4 contract closure issue 2; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T000107Z--HCM-0-4--fresh-protocol-consistency-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R5-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 5 identified actionable HCM-0.4 contract closure issue 3; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T000107Z--HCM-0-4--fresh-protocol-consistency-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R5-004",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 5 identified actionable HCM-0.4 contract closure issue 4; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260714T234211Z--HCM-0-4--fresh-atomic-lineage-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T000107Z--HCM-0-4--fresh-protocol-consistency-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R6-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 6 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T000107Z--HCM-0-4--fresh-protocol-consistency-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T001902Z--HCM-0-4--fresh-idempotency-terminal-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R6-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 6 identified actionable HCM-0.4 contract closure issue 2; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T000107Z--HCM-0-4--fresh-protocol-consistency-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T001902Z--HCM-0-4--fresh-idempotency-terminal-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R7-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 7 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T001902Z--HCM-0-4--fresh-idempotency-terminal-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T003710Z--HCM-0-4--fresh-problem-binding-control-metadata-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R7-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 7 identified actionable HCM-0.4 contract closure issue 2; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T001902Z--HCM-0-4--fresh-idempotency-terminal-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T003710Z--HCM-0-4--fresh-problem-binding-control-metadata-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R8-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 8 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T003710Z--HCM-0-4--fresh-problem-binding-control-metadata-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T005628Z--HCM-0-4--fresh-preselection-totality-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R9-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 9 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T005628Z--HCM-0-4--fresh-preselection-totality-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T013757Z--HCM-0-4--fresh-admission-envelope-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R10-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 10 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T013757Z--HCM-0-4--fresh-admission-envelope-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T014639Z--HCM-0-4--fresh-admission-totality-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R11-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 11 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T014639Z--HCM-0-4--fresh-admission-totality-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T015720Z--HCM-0-4--fresh-admission-variant-totality-clean-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R12-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 12 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T015720Z--HCM-0-4--fresh-admission-variant-totality-clean-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T020618Z--HCM-0-4--fresh-api-context-fingerprint-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R13-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 13 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T020618Z--HCM-0-4--fresh-api-context-fingerprint-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T021403Z--HCM-0-4--fresh-correlation-fingerprint-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R14-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 14 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T021403Z--HCM-0-4--fresh-correlation-fingerprint-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T022305Z--HCM-0-4--fresh-adapter-boundary-totality-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R14-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 14 identified actionable HCM-0.4 contract closure issue 2; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T021403Z--HCM-0-4--fresh-correlation-fingerprint-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T022305Z--HCM-0-4--fresh-adapter-boundary-totality-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R15-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 15 identified actionable HCM-0.4 contract closure issue 1; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T022305Z--HCM-0-4--fresh-adapter-boundary-totality-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T023318Z--HCM-0-4--fresh-ordinary-correlation-commit-boundary-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R15-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 15 identified actionable HCM-0.4 contract closure issue 2; the parent remediated it before the next different fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T022305Z--HCM-0-4--fresh-adapter-boundary-totality-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T023318Z--HCM-0-4--fresh-ordinary-correlation-commit-boundary-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R16-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 16 identified an actionable committed-result identity or commit-uncertain bridge-recovery gap. The parent applied a candidate remediation, but the required different-fresh re-review could not be allocated.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T023318Z--HCM-0-4--fresh-ordinary-correlation-commit-boundary-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T024254Z--HCM-0-4--fresh-result-identity-bridge-recovery-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R16-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh review round 16 identified an actionable committed-result identity or commit-uncertain bridge-recovery gap. The parent applied a candidate remediation, but the required different-fresh re-review could not be allocated.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T023318Z--HCM-0-4--fresh-ordinary-correlation-commit-boundary-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T024254Z--HCM-0-4--fresh-result-identity-bridge-recovery-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R17-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Retained-result compaction could strand delayed exact replay during commit-uncertain bridge recovery. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T024254Z--HCM-0-4--fresh-result-identity-bridge-recovery-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T030320Z--HCM-0-4--fresh-recovery-hold-retention-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R18-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Release-to-absence could not make lost release acknowledgments idempotent and fail closed. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T030320Z--HCM-0-4--fresh-recovery-hold-retention-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T031232Z--HCM-0-4--fresh-release-tombstone-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R19-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "A released hold ID could ambiguously reopen. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T031232Z--HCM-0-4--fresh-release-tombstone-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T032239Z--HCM-0-4--fresh-hold-event-matrix-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R19-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "The complete request/open recovery identity was not required durable before open transmission. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T031232Z--HCM-0-4--fresh-release-tombstone-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T032239Z--HCM-0-4--fresh-hold-event-matrix-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R20-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "The bridge ordering text required release acknowledgment before open and therefore deadlocked recovery. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T032239Z--HCM-0-4--fresh-hold-event-matrix-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033000Z--HCM-0-4--fresh-recovery-ordering-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R21-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "The exact terminal release frame/evidence was not required durable before first release transmission. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033000Z--HCM-0-4--fresh-recovery-ordering-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033731Z--HCM-0-4--fresh-release-persistence-crash-window-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R22-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "The recovery frames had no legal private binary entry point. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033731Z--HCM-0-4--fresh-release-persistence-crash-window-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R22-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Private-control fingerprints lacked exact recomputable closures. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033731Z--HCM-0-4--fresh-release-persistence-crash-window-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R22-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Malformed control-frame admission and state precedence were incomplete. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033731Z--HCM-0-4--fresh-release-persistence-crash-window-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R22-004",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Released-tombstone aggregate storage was falsely described as bounded. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T033731Z--HCM-0-4--fresh-release-persistence-crash-window-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R23-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "The open frame lacked the schema-bound preimage needed to recompute nested identities. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R23-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Release identity did not cryptographically bind the exact open identity. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R23-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Proven-noncommit evidence could not truthfully represent child-not-spawned outcomes. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R23-004",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "The control acknowledgment fields were not deterministic for every state/event cell. The parent remediated it before the next different-fresh review attempt.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T035006Z--HCM-0-4--fresh-private-control-protocol-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R24-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Lost-ack replay used a replay-only code, changing acknowledgment bytes and fingerprint. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T122045Z--HCM-0-4--fresh-ack-replay-definition-binding-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R24-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Duplicate operation-definition bindings could disagree while their enclosing fingerprints recomputed. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T040153Z--HCM-0-4--fresh-control-identity-and-ack-matrix-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T122045Z--HCM-0-4--fresh-ack-replay-definition-binding-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R25-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "The private open trusted an opaque request fingerprint and allowed scope/request transplantation. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T122045Z--HCM-0-4--fresh-ack-replay-definition-binding-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T124205Z--HCM-0-4--fresh-request-hold-binding-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R26-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Ordinary admission lacked active-hold precedence for a different request on the same scope/key. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T124205Z--HCM-0-4--fresh-request-hold-binding-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R26-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Established IdempotencyState used an ambiguous key field and did not close raw-key leakage. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T124205Z--HCM-0-4--fresh-request-hold-binding-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R27-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Control-open admission could create an orphan hold over retained-different or tombstoned domain-key state. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T133120Z--HCM-0-4--fresh-domain-state-request-schema-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R27-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Generic ordinary-request schema identity was not descriptor-pinned into request identity. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T133120Z--HCM-0-4--fresh-domain-state-request-schema-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R27-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Private raw-key input and redacted durable key-fingerprint state were described contradictorily. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T130030Z--HCM-0-4--fresh-active-hold-transport-secret-closure-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T133120Z--HCM-0-4--fresh-domain-state-request-schema-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R28-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Accepted-definition request-validation refusals lacked a total non-null fingerprint path for invalid exact bindings and mutation keys. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T133120Z--HCM-0-4--fresh-domain-state-request-schema-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T134358Z--HCM-0-4--fresh-postselection-request-identity-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R29-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "The mutating bridge could not safely emit an ordinary refusal for postselection-invalid input because a hold must precede spawn. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T134358Z--HCM-0-4--fresh-postselection-request-identity-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T135535Z--HCM-0-4--fresh-bridge-preflight-extension-key-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R29-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Ordinary idempotency-key mismatch had no authoritative comparison value. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T134358Z--HCM-0-4--fresh-postselection-request-identity-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T135535Z--HCM-0-4--fresh-bridge-preflight-extension-key-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R29-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "The named extensions-unsupported refusal was absent from the closed postselection reason mapping. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T134358Z--HCM-0-4--fresh-postselection-request-identity-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T135535Z--HCM-0-4--fresh-bridge-preflight-extension-key-final-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.4-R30-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Variable-length private bridge recovery state was falsely described as fixed-size per record. The parent remediated it before the next different-fresh review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T135535Z--HCM-0-4--fresh-bridge-preflight-extension-key-final-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T140519Z--HCM-0-4--fresh-private-recovery-record-bound-final-review.json"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "Fresh built-in default review rounds 24 replacement through 31",
+      "status": "passed",
+      "evidence_ref": "All findings were parent-remediated and different-fresh re-reviewed; final CLEAN: docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T140519Z--HCM-0-4--fresh-private-recovery-record-bound-final-review.json"
+    },
+    {
+      "command": "Final subject manifest SHA-256 replay at primary reviewed commit",
+      "status": "passed",
+      "evidence_ref": "sha256:6a2e2f2826753eeb8e2028bb5bfffa18cd25cac823f74083c1f3ade4fd1ff9a4; git:214a5b8eb182fce74478df49d4f55d226d65fdf5"
+    },
+    {
+      "command": "HCM-0.4 fenced-example, operation, recovery-state, and semantic closure checks",
+      "status": "passed",
+      "evidence_ref": "46 YAML, 5 JSON, 50 unique ordinary operations, 17 recovery state/event rows, postselection/idempotency/bridge boundary probes passed"
+    },
+    {
+      "command": "Relative-link, portability, docs-only, runtime-gate, and scope assertions",
+      "status": "passed",
+      "evidence_ref": "8 relative targets; no machine-absolute paths; no Rust/Cargo/runtime changes; all six HCM-0.4 runtime gates remain open"
+    },
+    {
+      "command": "python3 tools/check_archive_boundary.py && python3 tools/check_archive_boundary.py --self-test",
+      "status": "passed",
+      "evidence_ref": "supported roots clean; negative fixture rejected"
+    },
+    {
+      "command": "python3 docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py plus both self-tests",
+      "status": "passed",
+      "evidence_ref": "all pre-closeout records/dispatches/templates and exact ledger parity passed"
+    },
+    {
+      "command": "npx gitnexus detect-changes -r handbook -s staged",
+      "status": "passed",
+      "evidence_ref": "9 HCM-0.4 documentation/control files, 10 documentation symbols, zero affected processes, low risk"
+    },
+    {
+      "command": "git diff --cached --check",
+      "status": "passed",
+      "evidence_ref": "primary reviewed commit git:214a5b8eb182fce74478df49d4f55d226d65fdf5"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "HCM-0.4 affected sections"
+      ],
+      "reason": "Prepared the HCM-0.4 ownership/SDK/transport freeze subject.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "HCM-0.4 affected sections"
+      ],
+      "reason": "Prepared the HCM-0.4 ownership/SDK/transport freeze subject.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "HCM-0.4 affected sections"
+      ],
+      "reason": "Prepared the HCM-0.4 ownership/SDK/transport freeze subject.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "HCM-0.4 affected sections"
+      ],
+      "reason": "Prepared the HCM-0.4 ownership/SDK/transport freeze subject.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-0.4 affected sections"
+      ],
+      "reason": "Prepared the HCM-0.4 ownership/SDK/transport freeze subject.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "HCM-0.4 affected sections"
+      ],
+      "reason": "Prepared the HCM-0.4 ownership/SDK/transport freeze subject.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-0.4 affected sections"
+      ],
+      "reason": "Prepared the HCM-0.4 ownership/SDK/transport freeze subject.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No HCM-0.4 resume is required.",
+    "condition": "HCM-0.4 is complete after this v1.2 parent record and deterministic ledger validate.",
+    "must_read": [],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not reopen HCM-0.4 without new evidence.",
+      "Do not implement Rust or promote SDK/JSON/Tauri/Substrate/publication runtime gates from this documentation freeze.",
+      "Do not start HCM-0.5, HCM-0.6, or another slice automatically."
+    ],
+    "acceptance_criteria": [
+      "Parent record and deterministic ledger validate."
+    ],
+    "stop_conditions": []
+  },
+  "supersedes": [
+    "20260715T044452Z--HCM-0-4--orchestration--live-agent-registry-capacity-blocked"
+  ],
+  "chat_summary": "HCM-0.4 is complete as a documentation/design freeze. Fresh review rounds through 31 are fully remediated and final-clean; the full proof wall passed and no Rust/runtime gate was promoted."
+}
