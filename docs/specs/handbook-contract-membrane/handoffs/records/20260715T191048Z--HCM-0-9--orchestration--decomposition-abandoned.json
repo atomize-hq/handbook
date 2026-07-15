@@ -1,0 +1,424 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.2",
+  "handoff_id": "20260715T191048Z--HCM-0-9--orchestration--decomposition-abandoned",
+  "created_at_utc": "2026-07-15T19:10:48Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.9",
+  "packet_id": "docs/specs/handbook-contract-membrane/slices/HCM-0.9",
+  "orchestration_id": "20260715T184659Z--HCM-0-9--mechanical-redesign-planning",
+  "source_handoff_ids": [
+    "20260715T181543Z--HCM-0-9--orchestration--continuation-review-2-not-clean"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "partial",
+  "stop_reason": "human_input",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-15T19:10:48Z",
+    "evidence_ref": "Two fresh isolated built-in default redesign reviewers completed; Redesign Review 2 was terminal and not CLEAN."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "redesign-review-1",
+      "dispatch_id": "20260715T184659Z--HCM-0-9--redesign-planning-review-1",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T184659Z--HCM-0-9--redesign-planning-review-1.json",
+      "dispatch_fingerprint": "sha256:080044c24564b865d02507363479587b066b444be684ece28b2408d9115b26ab",
+      "role": "review",
+      "agent_id": "/root/hcm_0_9_redesign_review_1",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:1eb7104e4c0877f15bad0da781c2859b1356bc1cbd22f31387e5dd3e71f66b7f",
+      "result_subject_fingerprint": "sha256:1eb7104e4c0877f15bad0da781c2859b1356bc1cbd22f31387e5dd3e71f66b7f",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.9-RDR1-001",
+        "HCM-0.9-RDR1-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T184659Z--HCM-0-9--redesign-planning-review-1.json",
+        "git:f3a33ddb55443d37f3a51ffb58f1c85b74a28b23:docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md"
+      ]
+    },
+    {
+      "run_id": "redesign-review-2",
+      "dispatch_id": "20260715T185741Z--HCM-0-9--redesign-planning-review-2",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T185741Z--HCM-0-9--redesign-planning-review-2.json",
+      "dispatch_fingerprint": "sha256:2536e2296ffc3c569440dd6eb99a92424a8357cfd78c91e068d647162a2dae25",
+      "role": "review",
+      "agent_id": "/root/hcm_0_9_redesign_review_2",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:c0a719f7d35f7eff0ce73cb008baf2593b73ef43001fbf5068b902f46492451c",
+      "result_subject_fingerprint": "sha256:c0a719f7d35f7eff0ce73cb008baf2593b73ef43001fbf5068b902f46492451c",
+      "review_round": 2,
+      "predecessor_run_id": "redesign-review-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.9-RDR2-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T185741Z--HCM-0-9--redesign-planning-review-2.json",
+        "git:f3a33ddb55443d37f3a51ffb58f1c85b74a28b23:docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md"
+      ]
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "parent-remediation-redesign-review-1",
+      "finding_run_id": "redesign-review-1",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "redesign-review-2",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:c0a719f7d35f7eff0ce73cb008baf2593b73ef43001fbf5068b902f46492451c",
+      "evidence_refs": [
+        "git:f3a33ddb55443d37f3a51ffb58f1c85b74a28b23:docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/decomposition-inventory.md",
+        "git:f3a33ddb55443d37f3a51ffb58f1c85b74a28b23:docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T185741Z--HCM-0-9--redesign-planning-review-2.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "f3a33ddb55443d37f3a51ffb58f1c85b74a28b23",
+    "subject_fingerprint": "sha256:c0a719f7d35f7eff0ce73cb008baf2593b73ef43001fbf5068b902f46492451c",
+    "proof_refs": [
+      "git:214a5b8eb182fce74478df49d4f55d226d65fdf5:docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T184659Z--HCM-0-9--redesign-planning-review-1.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T185741Z--HCM-0-9--redesign-planning-review-2.json",
+      "Redesign Review 2 returned one unresolved Required finding; the decomposition was abandoned."
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T185741Z--HCM-0-9--redesign-planning-review-2.json"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "control_pack",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "slice_closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Apply the preauthorized terminal outcome after Redesign Review 2 is not CLEAN: abandon HCM-0.9 decomposition, retain the monolithic 05 catalog as canonical, and prohibit automatic continuation or execution.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+      "sections": [
+        "Decision",
+        "Historical evidence",
+        "Revival boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Canonical monolithic catalog; frozen HCM-0.4 baseline at commit 214a5b8eb182fce74478df49d4f55d226d65fdf5"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T184659Z--HCM-0-9--redesign-planning-review-1.json",
+      "sections": [
+        "Redesign Review 1 subject and contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T185741Z--HCM-0-9--redesign-planning-review-2.json",
+      "sections": [
+        "Terminal Redesign Review 2 subject and contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260715T181543Z--HCM-0-9--orchestration--continuation-review-2-not-clean.json",
+      "sections": [
+        "Prior redesign-or-abandon decision boundary"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "786744e727c3db3a1bf685b50316754f09aadb30",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260715T191048Z--HCM-0-9--orchestration--decomposition-abandoned.json"
+    ]
+  },
+  "work_completed": [
+    "Applied the human decision to abandon the trigger/route/co-activation/operation-fixture/semantic-dependency design and drafted an eight-leaf mechanical-only candidate.",
+    "Ran fresh isolated Redesign Review 1, validated two Required findings, performed the single permitted remediation, reran complete validation, and ran a different fresh terminal Redesign Review 2.",
+    "Stopped without Review 3 after Redesign Review 2 returned one Required finding.",
+    "Preserved the exact rejected terminal subject and both redesign dispatches as non-authoritative evidence commit f3a33ddb55443d37f3a51ffb58f1c85b74a28b23.",
+    "Committed abandonment control update 786744e727c3db3a1bf685b50316754f09aadb30; no catalog payload, Rust/runtime, or HCM-0.5 work occurred."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+      "status": "completed",
+      "summary": "Authoritative abandonment tombstone; HCM-0.9 execution is prohibited and the monolith remains canonical."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "status": "completed",
+      "summary": "Unchanged canonical monolithic catalog; SHA-256 c7f61db209a81ba20690f365b4069dd01f11e395335bfa10d2ce21143cc2985d."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T184659Z--HCM-0-9--redesign-planning-review-1.json",
+      "status": "completed",
+      "summary": "Fresh Redesign Review 1 exact subject and review contract."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T185741Z--HCM-0-9--redesign-planning-review-2.json",
+      "status": "completed",
+      "summary": "Terminal fresh Redesign Review 2 exact subject and review contract."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-0.9-ABANDON-001",
+      "summary": "Abandon the automatic semantic-routing design and attempt only a mechanical 6-8 leaf planning redesign.",
+      "authority_effect": "The prior trigger/route inventory and semantic-dependency audit remain historical evidence only.",
+      "refs": [
+        "git:5e3d5ba82af32087916e8ab53573c3797c87a86c",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.9-ABANDON-002",
+      "summary": "Stop after terminal Redesign Review 2; do not remediate its finding or run Review 3.",
+      "authority_effect": "The simplified planning subject is not approved and cannot authorize execution.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T185741Z--HCM-0-9--redesign-planning-review-2.json",
+        "git:f3a33ddb55443d37f3a51ffb58f1c85b74a28b23"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.9-ABANDON-003",
+      "summary": "Abandon HCM-0.9 decomposition and retain the monolithic 05 catalog as canonical.",
+      "authority_effect": "HCM-0.9 has no execution selector or automatic resume; any revival requires a new human decision and new slice packet.",
+      "refs": [
+        "git:786744e727c3db3a1bf685b50316754f09aadb30",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-0.9-RDR2-001",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "summary": "Required: the rejected simplified packet specified one forbidden runtime or HCM-0.5 scope fixture rather than requiring two distinct negative fixtures. The finding is intentionally not remediated because terminal Review 2 exhausted the authorized budget and triggered abandonment.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T185741Z--HCM-0-9--redesign-planning-review-2.json",
+        "git:f3a33ddb55443d37f3a51ffb58f1c85b74a28b23:docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-0.9-ABANDON-BLOCK-001",
+      "classification": "authority",
+      "summary": "HCM-0.9 is abandoned and has no execution authority.",
+      "resume_condition": "Only a new explicit human decision may create a new catalog-decomposition slice and review budget; HCM-0.9 itself does not resume.",
+      "owner": "user"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-0.9-ABANDON-ESC-001",
+      "trigger": "Any future request to execute, repair, or resume HCM-0.9 after terminal abandonment.",
+      "current_resolution": "Retain the monolithic 05 catalog as canonical; no action is pending.",
+      "target_resolution": "If decomposition is desired later, make a new explicit human decision and create a new slice/packet from current monolith authority.",
+      "decision_required": "No current decision is required. A new human decision is required only to revive decomposition under a new slice.",
+      "options": [
+        "Retain the canonical monolith (current terminal disposition).",
+        "Explicitly authorize a new decomposition slice and fresh planning/review budget in the future."
+      ],
+      "recommendation": "Retain the monolith; do not resume HCM-0.9.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "A future user explicitly authorizes a new slice; never treat this handoff as HCM-0.9 execution authority."
+    }
+  ],
+  "validation": [
+    {
+      "command": "Redesign Review 1",
+      "status": "failed",
+      "evidence_ref": "Two Required findings; dispatch 20260715T184659Z--HCM-0-9--redesign-planning-review-1."
+    },
+    {
+      "command": "Terminal Redesign Review 2",
+      "status": "failed",
+      "evidence_ref": "One Required finding; no CLEAN verdict; dispatch 20260715T185741Z--HCM-0-9--redesign-planning-review-2."
+    },
+    {
+      "command": "Terminal nine-file manifest replay",
+      "status": "passed",
+      "evidence_ref": "Exact aggregate sha256:c0a719f7d35f7eff0ce73cb008baf2593b73ef43001fbf5068b902f46492451c preserved at git:f3a33ddb55443d37f3a51ffb58f1c85b74a28b23."
+    },
+    {
+      "command": "Canonical monolith identity",
+      "status": "passed",
+      "evidence_ref": "Working 05 Git blob equals baseline commit 214a5b8eb182fce74478df49d4f55d226d65fdf5 and SHA-256 c7f61db209a81ba20690f365b4069dd01f11e395335bfa10d2ce21143cc2985d."
+    },
+    {
+      "command": "python3 tools/check_archive_boundary.py plus --self-test",
+      "status": "passed",
+      "evidence_ref": "Supported roots clean; negative fixture rejected."
+    },
+    {
+      "command": "python3 handoffs/validate_handoffs.py plus both self-tests",
+      "status": "passed",
+      "evidence_ref": "Records, dispatches, ledger, historical admission, and orchestration contract passed before this record."
+    },
+    {
+      "command": "git diff --check and staged GitNexus detect-changes",
+      "status": "passed",
+      "evidence_ref": "Evidence and abandonment commits had no whitespace errors; documentation-only staged detection reported no runtime changes."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "HCM-0.9 status"
+      ],
+      "reason": "Mark decomposition abandoned and monolith canonical.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Contract catalog remains monolithic"
+      ],
+      "reason": "Remove active decomposition/semantic-routing claim.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-0.9 corrective maintenance contract"
+      ],
+      "reason": "Record terminal abandonment and no HCM-0.5 start.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-CATALOG-01",
+        "HCM-0.9 abandoned contract-catalog decomposition gate"
+      ],
+      "reason": "Retire the unproved gate without promotion.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+      "sections": [
+        "Entire file"
+      ],
+      "reason": "Replace rejected planning authority with abandonment tombstone.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Only if decomposition is desired again, decide whether to authorize a new catalog-decomposition slice; do not resume or execute HCM-0.9.",
+    "condition": "No action is pending under the current abandonment. Use this boundary only after a new explicit human decision to revisit decomposition.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260715T191048Z--HCM-0-9--orchestration--decomposition-abandoned.json",
+        "sections": [
+          "Decisions",
+          "Findings",
+          "Resume"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+        "sections": [
+          "Decision",
+          "Revival boundary"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sections": [
+          "Canonical monolithic catalog"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T185741Z--HCM-0-9--redesign-planning-review-2.json",
+        "sections": [
+          "Terminal review contract and subject"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Retain and use the monolithic 05 catalog as current authority.",
+      "Inspect immutable HCM-0.9 evidence.",
+      "After a new explicit human decision, create a new decomposition slice and review budget rather than editing HCM-0.9."
+    ],
+    "prohibited_scope": [
+      "Do not execute, repair, or resume HCM-0.9.",
+      "Do not run Redesign Review 3 or remediate HCM-0.9-RDR2-001.",
+      "Do not create catalog leaves, cut over 05, or build automatic semantic routing from rejected subjects.",
+      "Do not start HCM-0.5 in this closeout or implement Rust/runtime/public API work."
+    ],
+    "acceptance_criteria": [
+      "The monolithic 05 remains canonical and unchanged.",
+      "No HCM-0.9 execution selector is issued.",
+      "Any future decomposition begins only after a new explicit human decision and in a new reviewed slice."
+    ],
+    "stop_conditions": [
+      "Stop any automatic attempt to continue HCM-0.9.",
+      "Stop if a future request treats rejected checkpoints as authority.",
+      "Stop on any scope that rewrites immutable historical evidence."
+    ]
+  },
+  "supersedes": [
+    "20260715T181543Z--HCM-0-9--orchestration--continuation-review-2-not-clean"
+  ],
+  "chat_summary": "HCM-0.9 is abandoned. The simplified eight-leaf plan received two fresh reviews and one remediation; terminal Redesign Review 2 remained not CLEAN with one Required scope-negative defect. No Review 3 ran. Exact rejected evidence is preserved at f3a33ddb55443d37f3a51ffb58f1c85b74a28b23, abandonment control is committed at 786744e727c3db3a1bf685b50316754f09aadb30, the monolithic 05 remains canonical, and no HCM-0.9 execution or HCM-0.5 start is authorized."
+}
