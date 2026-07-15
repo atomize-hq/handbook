@@ -1,0 +1,480 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.2",
+  "handoff_id": "20260715T181543Z--HCM-0-9--orchestration--continuation-review-2-not-clean",
+  "created_at_utc": "2026-07-15T18:15:43Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.9",
+  "packet_id": "docs/specs/handbook-contract-membrane/slices/HCM-0.9",
+  "orchestration_id": "20260715T174005Z--HCM-0-9--bounded-planning-continuation",
+  "source_handoff_ids": [
+    "20260715T164439Z--HCM-0-9--orchestration--planning-review-budget-exhausted"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "partial",
+  "stop_reason": "human_input",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-15T18:15:43Z",
+    "evidence_ref": "Two fresh isolated built-in default continuation reviewers completed; Continuation Review 2 was terminal."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "continuation-review-1",
+      "dispatch_id": "20260715T174005Z--HCM-0-9--continuation-planning-review-1",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T174005Z--HCM-0-9--continuation-planning-review-1.json",
+      "dispatch_fingerprint": "sha256:202186a490ef95074cf5d2d198678432372dd19bf9ef63355af966f5260b5ed2",
+      "role": "review",
+      "agent_id": "/root/hcm_0_9_continuation_review_1",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:3a53b7eba088c47762d91aa7f0ed3085f65d576ee88cc5beb3319095a6eaa1d0",
+      "result_subject_fingerprint": "sha256:3a53b7eba088c47762d91aa7f0ed3085f65d576ee88cc5beb3319095a6eaa1d0",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.9-CR1-001",
+        "HCM-0.9-CR1-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T174005Z--HCM-0-9--continuation-planning-review-1.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md"
+      ]
+    },
+    {
+      "run_id": "continuation-review-2",
+      "dispatch_id": "20260715T180242Z--HCM-0-9--continuation-planning-review-2",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json",
+      "dispatch_fingerprint": "sha256:b880583b5f6ebce5bfc9a78908657aa7636899c4cca40ccbb3571091e00c15f4",
+      "role": "review",
+      "agent_id": "/root/hcm_0_9_continuation_review_2",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:5513e995c83c9a04fbb83e99ec0c9dc5e4ed1d84103223819f79613865a15c55",
+      "result_subject_fingerprint": "sha256:5513e995c83c9a04fbb83e99ec0c9dc5e4ed1d84103223819f79613865a15c55",
+      "review_round": 2,
+      "predecessor_run_id": "continuation-review-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.9-CR2-001",
+        "HCM-0.9-CR2-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md"
+      ]
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "parent-remediation-continuation-review-1",
+      "finding_run_id": "continuation-review-1",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "continuation-review-2",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:5513e995c83c9a04fbb83e99ec0c9dc5e4ed1d84103223819f79613865a15c55",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "5e3d5ba82af32087916e8ab53573c3797c87a86c",
+    "subject_fingerprint": "sha256:5513e995c83c9a04fbb83e99ec0c9dc5e4ed1d84103223819f79613865a15c55",
+    "proof_refs": [
+      "git:214a5b8eb182fce74478df49d4f55d226d65fdf5:docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T174005Z--HCM-0-9--continuation-planning-review-1.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json",
+      "Continuation Review 2 returned two unresolved Required findings; planning is not approved."
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "control_pack",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "slice_closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Continue HCM-0.9 planning under the one human-authorized bounded pass, preserve exact review evidence, and stop for human choice when terminal Continuation Review 2 is not CLEAN.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260715T164439Z--HCM-0-9--orchestration--planning-review-budget-exhausted.json",
+      "sections": [
+        "Terminal Planning Review 3 findings and human-input boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T174005Z--HCM-0-9--continuation-planning-review-1.json",
+      "sections": [
+        "Continuation Review 1 exact manifest and contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json",
+      "sections": [
+        "Terminal Continuation Review 2 exact manifest and contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+      "sections": [
+        "Canonical leaf topology",
+        "Cross-leaf context preservation",
+        "Planning packet review budget"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md",
+      "sections": [
+        "Entire non-authoritative all-eleven audit candidate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/tasks/plan.md",
+      "sections": [
+        "Entire non-authoritative execution plan"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/tasks/todo.md",
+      "sections": [
+        "Entire non-authoritative checklist"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Frozen baseline at commit 214a5b8eb182fce74478df49d4f55d226d65fdf5"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Top-level orchestration and review boundaries"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "True-stop handoff and human-input routing"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "5e3d5ba82af32087916e8ab53573c3797c87a86c",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260715T181543Z--HCM-0-9--orchestration--continuation-review-2-not-clean.json"
+    ]
+  },
+  "work_completed": [
+    "Committed the exact stopped Planning Review 3 subject and evidence as non-authoritative checkpoint 754970ef141c4e9efcce8ca6e76c683dbb248a11 before modifying reviewed bytes.",
+    "Completed an all-eleven dependency audit and corrected the subject-manifest versus unchanged-authority rule under the bounded continuation.",
+    "Ran Continuation Review 1, validated its two Required findings, performed the single permitted intervening remediation, reran the complete mechanical proof wall, and ran a different fresh Continuation Review 2.",
+    "Stopped without execution authorization after terminal Continuation Review 2 returned two Required findings; committed exact continuation evidence as non-authoritative checkpoint 5e3d5ba82af32087916e8ab53573c3797c87a86c."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+      "status": "partial",
+      "summary": "Trigger-indexed topology candidate is preserved but not approved; trigger identity and route completeness remain Required defects."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md",
+      "status": "partial",
+      "summary": "All-eleven mechanical inventory is preserved but semantically incomplete and lacks a closed machine-readable trigger identity."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/tasks/plan.md",
+      "status": "partial",
+      "summary": "Execution plan exists but is not authorized."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/tasks/todo.md",
+      "status": "partial",
+      "summary": "Execution checklist exists but is not authorized."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T174005Z--HCM-0-9--continuation-planning-review-1.json",
+      "status": "completed",
+      "summary": "Continuation Review 1 exact subject manifest and scope."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json",
+      "status": "completed",
+      "summary": "Terminal Continuation Review 2 exact subject manifest and scope."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-0.9-CONT-STOP-001",
+      "summary": "Stop after terminal Continuation Review 2; do not run a third continuation review.",
+      "authority_effect": "HCM-0.9 planning remains unapproved and execution is prohibited.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md#planning-packet-review-budget"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.9-CONT-STOP-002",
+      "summary": "Preserve both continuation subjects and dispatches as non-authoritative review evidence.",
+      "authority_effect": "Checkpoint commits do not approve planning, authorize decomposition, or promote runtime proof.",
+      "refs": [
+        "git:5e3d5ba82af32087916e8ab53573c3797c87a86c",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T174005Z--HCM-0-9--continuation-planning-review-1.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.9-CONT-STOP-003",
+      "summary": "Present only redesign or abandonment as the next human decision.",
+      "authority_effect": "No further automatic extension is authorized.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260715T181543Z--HCM-0-9--orchestration--continuation-review-2-not-clean.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-0.9-CR2-001",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "summary": "Required: exact trigger activation is not mechanically defined. Free-text trigger cells and overlapping source-line evidence cannot deterministically select or reject R/O activation. A redesign needs closed machine-readable trigger identity, explicit permitted co-activation, and deterministic selection/overlap proof.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.9-CR2-002",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "summary": "Required: the claimed 98-route inventory still omits cross-leaf authority uses across intake/candidate/promotion, operation-definition schema/capability bindings, bootstrap request/response schema bindings, and the permanent published-Rust boundary. A complete 70-heading semantic re-audit is required after trigger identity is redesigned.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json",
+        "git:214a5b8eb182fce74478df49d4f55d226d65fdf5:docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-0.9-CONT-BLOCK-001",
+      "classification": "proof",
+      "summary": "Terminal Continuation Review 2 is not CLEAN and the authorized two-review/one-remediation continuation budget is exhausted.",
+      "resume_condition": "A human explicitly chooses redesign or abandonment and, for redesign, authorizes a new topology-planning boundary; execution remains prohibited.",
+      "owner": "user"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-0.9-CONT-ESC-001",
+      "trigger": "Terminal Continuation Review 2 returned two valid Required findings after the single permitted intervening remediation.",
+      "current_resolution": "HCM-0.9 planning is partial and unapproved; both evidence checkpoints are non-authoritative and frozen 05 remains canonical.",
+      "target_resolution": "Human choice between a new topology redesign and abandonment.",
+      "decision_required": "Choose exactly one: redesign HCM-0.9 under new explicit authority, or abandon HCM-0.9.",
+      "options": [
+        "Redesign trigger identity and topology, then repeat a complete 70-heading semantic dependency audit under a newly authorized human budget.",
+        "Abandon HCM-0.9 and retain the monolithic 05 catalog as canonical."
+      ],
+      "recommendation": "Abandon unless the selective-context benefit justifies a ground-up trigger/topology redesign and full semantic re-audit; do not extend the current automatic loop.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "User explicitly selects redesign or abandonment; redesign requires a new narrow planning authority before any edits or review."
+    }
+  ],
+  "validation": [
+    {
+      "command": "Terminal Continuation Review 2",
+      "status": "failed",
+      "evidence_ref": "Two Required findings and no CLEAN verdict: docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json"
+    },
+    {
+      "command": "Continuation Review 2 six-file manifest replay",
+      "status": "passed",
+      "evidence_ref": "Exact aggregate sha256:5513e995c83c9a04fbb83e99ec0c9dc5e4ed1d84103223819f79613865a15c55; subject preserved at git:5e3d5ba82af32087916e8ab53573c3797c87a86c."
+    },
+    {
+      "command": "Frozen baseline and mechanical audit assertions",
+      "status": "passed",
+      "evidence_ref": "05 SHA-256 c7f61db209a81ba20690f365b4069dd01f11e395335bfa10d2ce21143cc2985d; 11 spans, 48 H2, 22 H3, 84 positional occurrences; semantic completeness failed review."
+    },
+    {
+      "command": "python3 tools/check_archive_boundary.py plus --self-test",
+      "status": "passed",
+      "evidence_ref": "Supported roots clean; negative fixture rejected."
+    },
+    {
+      "command": "python3 handoffs/validate_handoffs.py plus both self-tests",
+      "status": "passed",
+      "evidence_ref": "Records, dispatches, deterministic ledger, historical admission, and orchestration semantics passed before this record."
+    },
+    {
+      "command": "git diff --check and staged GitNexus detect-changes",
+      "status": "passed",
+      "evidence_ref": "Non-authoritative continuation checkpoint had no whitespace errors; GitNexus risk low with zero affected processes."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+      "sections": [
+        "Canonical leaf topology",
+        "Exact cross-leaf dependency table",
+        "Selective-routing behavior"
+      ],
+      "reason": "A future redesign must define closed trigger identity and permitted co-activation before another semantic audit.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md",
+      "sections": [
+        "Named cross-leaf authority inventory",
+        "Named-section aggregate-fanout audit",
+        "Required mechanical proof"
+      ],
+      "reason": "A future redesign must repeat the semantic audit across all 70 headings and add omitted authority routes.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/tasks/plan.md",
+      "sections": [
+        "Parity/routing verifier",
+        "Proof wall"
+      ],
+      "reason": "Execution planning remains unauthorized until redesign is review-clean.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/tasks/todo.md",
+      "sections": [
+        "Parity/routing verifier",
+        "Fresh independent review loop"
+      ],
+      "reason": "Checklist remains unauthorized until redesign is review-clean.",
+      "status": "deferred"
+    }
+  ],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Choose whether to redesign or abandon HCM-0.9; do not execute HCM-0.9.",
+    "condition": "Resume only after the user explicitly chooses redesign or abandonment. Redesign requires a new explicit, narrow planning boundary and review budget.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260715T181543Z--HCM-0-9--orchestration--continuation-review-2-not-clean.json",
+        "sections": [
+          "Findings",
+          "Blockers",
+          "Escalations",
+          "Resume"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260715T180242Z--HCM-0-9--continuation-planning-review-2.json",
+        "sections": [
+          "Terminal Continuation Review 2 manifest and contract"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/SPEC.md",
+        "sections": [
+          "Canonical leaf topology",
+          "Selective-routing behavior",
+          "Planning packet review budget"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.9/evidence/dependency-audit.md",
+        "sections": [
+          "Completeness and topology result",
+          "Required mechanical proof"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sections": [
+          "Frozen baseline at commit 214a5b8eb182fce74478df49d4f55d226d65fdf5"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Human decision between redesign and abandonment.",
+      "If redesigning, first define a closed machine-readable trigger identity and a new bounded planning/review authority, then repeat the complete 70-heading semantic audit.",
+      "If abandoning, retain frozen 05 as canonical and treat both continuation checkpoints as non-authoritative evidence."
+    ],
+    "prohibited_scope": [
+      "Do not execute or decompose HCM-0.9 from the current packet.",
+      "Do not run Continuation Review 3 or another automatic remediation.",
+      "Do not self-approve, weaken, or patch only the representative Review 2 omissions.",
+      "Do not implement Rust/runtime/public API work, start HCM-0.5, rewrite historical evidence, or discard unrelated work."
+    ],
+    "acceptance_criteria": [
+      "The user explicitly chooses redesign or abandonment.",
+      "Any redesign has new explicit authority, closed trigger identity, complete semantic audit, and a fresh review budget before edits/review.",
+      "Frozen 05 and historical evidence remain unchanged."
+    ],
+    "stop_conditions": [
+      "Stop if no explicit human choice is available.",
+      "Stop if a proposed continuation would execute decomposition or merely patch representative omissions.",
+      "Stop on any request to suppress Review 2 findings or exceed the exhausted continuation budget."
+    ]
+  },
+  "supersedes": [
+    "20260715T164439Z--HCM-0-9--orchestration--planning-review-budget-exhausted"
+  ],
+  "chat_summary": "HCM-0.9 remains partial after terminal Continuation Review 2 found two Required defects: trigger activation is not mechanically closed and the semantic route inventory is incomplete. No execution is authorized and no third continuation review may run. Human must choose redesign under new authority or abandonment."
+}
