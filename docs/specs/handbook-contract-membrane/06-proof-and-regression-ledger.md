@@ -420,6 +420,68 @@ transport, contract, dock, or gate proof. Before HCM-0.6 may close:
 - the primary reviewed documentation commit plus a second mechanical v1.2
   completed handoff/ledger closeout bind and replay the exact subject.
 
+## HCM-0.7 implementation-program and first-packet proof gate
+
+HCM-0.7 approves planning authority only. It does not execute HCM-1.1, change
+Rust/Cargo/runtime/assets, promote the Artifact kind/schema registry seam, or
+close `PG-KIND-01`/`PG-KIND-02`. Before HCM-0.7 may close:
+
+- completed v1.2 records for HCM-0.2, HCM-0.3, HCM-0.4, HCM-0.5, HCM-0.6,
+  and HCM-0.8 validate as dependency evidence, while HCM-0.9 remains abandoned
+  and the monolithic `05` remains canonical;
+- `00-README.md` and `04-phase-slice-map.md` agree that Phase 0 is closed,
+  phases execute in numeric order, slices inside a phase execute in listed
+  order, phase exits gate the next phase, and only a review-clean slice-local
+  packet authorizes implementation;
+- only HCM-1.1 is authorized, packet approval is not execution, later slices
+  remain unauthorized, and no parallel cross-slice execution or sibling cleanup
+  is implied;
+- `slices/HCM-1.1/SPEC.md`, `tasks/plan.md`, and `tasks/todo.md` exist and agree
+  on exact objective, owner, live baseline, public boundary, source/asset
+  topology, dependency configuration, task ordering, proof wall, non-goals,
+  classification ceiling, and stop conditions;
+- the HCM-1.1 packet preserves the current four-variant
+  `CanonicalArtifactKind`, layout/setup/doctor/flow paths, and HCM-1.2 through
+  HCM-1.4 ownership while authorizing only an additive `handbook-engine`
+  kind/schema-registry boundary;
+- the packet requires a bounded lowercase-ASCII definition-identity grammar,
+  canonical full-SemVer roundtrip, exact ref delimiter, RFC 8785/SHA-256
+  closure fingerprints, closed typed definition decoding with duplicate/unknown/
+  wrong-record/non-empty-extension refusal before fingerprinting, Draft 2020-12
+  meta/instance validation, an exact root Draft 2020-12 declaration plus closed
+  schema-position keyword allowlist, explicit in-memory local-ref registration
+  with all resolver features disabled, a frozen v1 identifier/resource policy
+  that refuses authored base rebinding, anchors, and dynamic references,
+  repo-relative no-follow access, bounded inputs, typed fail-closed errors, and
+  no custom executable keywords, remote refs, ambient discovery, or
+  source-order winner;
+- the packet's positive proof includes one capability-free repository-defined
+  custom kind loaded and structurally exercised without a new Rust enum variant
+  or CLI command, while non-empty semantic-capability, renderer, lifecycle,
+  intake, Projection, instance, and profile publication stays outside the
+  HCM-1.1 loader and refuses until an owning later packet supplies type-specific
+  source bytes, normalization/fingerprint producers, compatibility rules, and
+  non-vacuous proof;
+- the custom proof corpus contains at least two distinct valid schema entries
+  and two distinct valid kinds so both accepted source permutations must yield
+  identical schema/kind registry fingerprints, exact lookup sets, closures, and
+  validation behavior rather than a vacuous one-element reversal;
+- the packet permits at most `BoundaryLanded` for the Artifact kind/schema
+  registry and bounded kind/schema structural evidence for `PG-KIND-01` and
+  `PG-KIND-02`; both gates remain open until later slices prove the missing
+  non-vacuous lifecycle/Projection and supplied-intake coverage; it forbids
+  product-path, shipped-profile, release, or downstream proof claims;
+- Markdown relative links, headings, packet cross-references, prohibited-path
+  assertions, archive boundary/self-test, all handoff validator modes, exact
+  scoped diff, `git diff --check`, and repository-required change detection
+  pass;
+- a fresh isolated built-in `default` reviewer reports no valid Critical or
+  Required finding over the complete phase-map/packet/proof subject; any valid
+  finding is remediated and checked by a different fresh reviewer; and
+- proof and staging replay the clean subject byte-identically before the primary
+  documentation/planning commit, followed only by the separate parent-owned
+  v1.2 handoff/ledger closeout commit.
+
 ## Control-pack orchestration-repair proof gate
 
 The immutable HCM-0.1 history remains evidence of the prior workflow and is not rewritten. At corrective slice HCM-0.8's completed closeout, the following conditions had to hold; the later HCM-0.6 decision resolves the shipped-default item that was intentionally open at that boundary:

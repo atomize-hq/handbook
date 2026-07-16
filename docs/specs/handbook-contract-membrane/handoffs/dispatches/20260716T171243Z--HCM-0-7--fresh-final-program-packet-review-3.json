@@ -1,0 +1,224 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260716T171243Z--HCM-0-7--fresh-final-program-packet-review-3",
+  "created_at_utc": "2026-07-16T17:12:43Z",
+  "source_handoff_ids": [
+    "20260716T153303Z--HCM-0-6--orchestration--shipped-defaults-frozen"
+  ],
+  "parent_orchestration_id": "20260716T165911Z--HCM-0-7--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs",
+    "api-and-interface-design",
+    "source-driven-development",
+    "code-review-and-quality",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.7",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:2063c6e92fa454422d0edc17f95659a386dec6aafeff019db2242a7633c647e5",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "b19601d3f03abef78fbafcbc64c24b79c272df3ff861122a70c56935723ce24e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "4403add4733d8edf36f4e0a41a44b2720512d6094caf4168e35cb06601e112d6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "9d6d165fa696139b5fbf41dbe7c8a29e0819594df7876f7049254f816d86fdaf"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.7/proof/20260716T165911Z--implementation-program-packet-proof-wall.md",
+        "sha256": "774692bbd7242fcf0d2bd5d9fb7d78aa85b0fd3565a840dd1cccd224e44ca47b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/SPEC.md",
+        "sha256": "22f8dcc996a171032cc43d641289588d01acebdfb20959b79976c272396c719f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/tasks/plan.md",
+        "sha256": "673e5ff489755cab0bb78f8116e384e06b9642431b84227b0bb700ca71a0e51d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/tasks/todo.md",
+        "sha256": "9d5f1f12271239fc526029a2274eeda4eed4f6a6d19a430d832b78af4a616033"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:2063c6e92fa454422d0edc17f95659a386dec6aafeff019db2242a7633c647e5"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "approved_phase_zero_program",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "final_slice_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Implementation authorization",
+        "Initial program conclusion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Schema registry",
+        "ArtifactKindDefinition",
+        "Stable roles and semantic capabilities"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Artifact kind/schema registry"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Status",
+        "Sequencing rule",
+        "HCM-0.7 implementation-program approval contract",
+        "HCM-1.1 \u2014 Artifact-kind and schema registry",
+        "Phase 1 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity",
+        "Stable-role registry contract",
+        "Schema-registry entry",
+        "Artifact kind definition contract",
+        "Semantic capability contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "HCM-0.7 implementation-program and first-packet proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+      "sections": [
+        "Exact stable-role registry decision",
+        "Exact first-party kind catalog",
+        "Explicitly unresolved subordinate contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/SPEC.md",
+      "sections": [
+        "Status and authority",
+        "Objective",
+        "Allowed implementation scope",
+        "Public semantic boundary",
+        "Safe schema-closure algorithm",
+        "Permitted classification and gate change",
+        "Exit gate",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Specify, plan, and decompose",
+        "Fresh review / remediation loop",
+        "Full proof wall",
+        "Control-pack closeout and commit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_truth": "Review the exact seven-entry uncommitted documentation/planning subject over baseline HEAD 367a969c578e34118bb6f4b2f4655811229bb223. Current Rust still uses the fixed CanonicalArtifactKind and product paths; HCM-0.7 may plan but must not execute HCM-1.1 or promote runtime gates. Derive the verdict from live authority and replayed bytes.",
+  "allowed_scope": [
+    "Remain read-only and replay every sorted subject-manifest entry plus aggregate before review.",
+    "Review the HCM-0.7 canonical status/map/ledger changes, complete HCM-1.1 SPEC/plan/todo packet, and proof wall.",
+    "Read unchanged canonical 01-05, HCM-0.6 decision, live engine/Cargo sources, and official dependency documentation only as needed to validate authority and feasibility.",
+    "Run read-only Markdown, link, Git, schema/handoff, source, dependency-feature, security, and semantic assertion checks needed to evaluate the subject.",
+    "Return findings first through the built-in channel with exact file and line evidence."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, new dispatches, global handoffs, ledger writes, or user-task hops.",
+    "No Rust, Cargo, runtime asset, generated schema, first-party kind/profile/instance, intake, renderer, Projection, CLI, SDK, Tauri, Substrate, contract, dock, or later-slice implementation.",
+    "Do not start HCM-1.1 or treat packet approval as implementation completion.",
+    "Do not infer missing HCM-0.6 subordinate schemas, capability contracts, intake/renderer definitions, profile publication, or content fields.",
+    "Do not require a conventional alternative without identifying a violated authority, invariant, proof gate, scope boundary, or concrete feasibility defect."
+  ],
+  "tasks": [
+    "Invoke required skills in order, remain read-only, replay the exact sorted seven-entry manifest and aggregate, and return BLOCKED if any byte differs.",
+    "Review findings first in Critical, Required, Optional, Nit order. Each actionable finding must include severity, exact file/line, violated contract/invariant/gate, why the boundary or proof is wrong, smallest valid remediation, and missing verification.",
+    "Verify completed HCM-0.2/.3/.4/.5/.6/.8 evidence, abandoned HCM-0.9 treatment, Phase 0 closure, strict phase/list sequencing, packet authorization, and no accidental next-slice execution are coherent with canonical authority.",
+    "Verify HCM-1.1 is the correct first implementation slice and that SPEC, plan, todo, 00, 04, and 06 agree on objective, owner, baseline, exact scope, dependencies, source/asset topology, task ordering, proof, classification ceiling, non-goals, and stop conditions.",
+    "Verify the packet is additive and preserves CanonicalArtifactKind, canonical layout, setup, doctor, flow, HCM-1.2 through HCM-1.4 ownership, HCM-0.6 unpublished subordinate definitions, and current runtime/open-gate truth.",
+    "Verify exact identity, RFC 8785/SHA-256 typed closure, duplicate-key refusal, path/no-follow/bounds rules, Draft 2020-12 validation, in-memory-only resolution, dependency feature posture, typed errors, and no remote/ambient/executable behavior are implementable and contract-correct.",
+    "Verify the frozen v1 schema resource policy refuses authored IDs, anchors, dynamic/recursive references, and plain-name fragments; assigns one exact internal base per file; and requires prewalk, closure member, validator target, and reported schema location equality with complete negative proof.",
+    "Verify stable-role assets and fingerprints, capability/kind meta-validation, source ordering, public API boundary, package-content proof, and the capability-free custom fixture neither invent later definitions nor smuggle product adoption.",
+    "Verify HCM-1.1 may record only bounded structural subsets of PG-KIND-01 and PG-KIND-02; both gates remain open until later non-vacuous lifecycle/Projection and supplied-intake proof, with no contradictory closure wording.",
+    "Verify TDD increments and positive/negative/security/package/workspace proof are sufficient to make future HCM-1.1 independently implementable and reviewable without widening authority.",
+    "Replay the proof wall sufficiently to identify fabricated, incomplete, stale, circular, or untracked-byte assertions and verify exact docs-only scope.",
+    "Return CLEAN only if there is no valid Critical or Required finding; otherwise return CHANGES_REQUIRED or BLOCKED. Make no edits."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#hcm-07-implementation-program-approval-contract",
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#hcm-11--artifact-kind-and-schema-registry",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#uniform-exact-definition-identity",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#stable-role-registry-contract",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#hcm-07-implementation-program-and-first-packet-proof-gate",
+    "docs/specs/handbook-contract-membrane/slices/HCM-1.1/SPEC.md#permitted-classification-and-gate-change",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if the manifest, aggregate, required authority, or a required read-only verification cannot be reproduced.",
+    "Return CHANGES_REQUIRED rather than resolving any missing product/subordinate decision by inference.",
+    "Return to the parent if correction would require Rust/runtime implementation, first-party definition publication, a later slice, or authority outside HCM-0.7 documentation/planning scope."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

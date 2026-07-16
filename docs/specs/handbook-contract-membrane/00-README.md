@@ -1,11 +1,11 @@
 # Handbook Contract Membrane Control Pack
 
-**Status:** active control pack; HCM-0.2 through HCM-0.4 are frozen design authority, and HCM-0.5 contains the complete implementation-grade design subject governed by its recorded proof/review closeout; implementation and runtime proof remain open
+**Status:** active control pack; Phase 0 design/default authority is closed, the implementation program is approved, and the first independently executable packet is `slices/HCM-1.1/`; implementation and runtime proof remain open
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
-**Implementation authorization:** none; implementation begins only from an approved slice-local packet  
-**Repo-truth snapshot:** 2026-07-14; re-check live code before every slice
+**Implementation authorization:** only `HCM-1.1`, and only through its approved slice-local packet; later slices require their own reviewed packets
+**Repo-truth snapshot:** 2026-07-16; re-check live code before every slice
 
 ## Purpose
 
@@ -195,6 +195,10 @@ The live repository contains published, reusable owner crates and several valuab
 
 The contract membrane and external docks therefore remain `TargetOnly`. `PG-CONTRACT-01`, `PG-DOCK-01`, and `PG-GATE-01` remain open, and the HCM-0.5 design freeze authorizes no Rust, schema publication, process execution, CLI, Tauri, Substrate, or SDK implementation.
 
-The next authorized work remains separately selected Phase 0 documentation/design work. No Rust implementation is authorized by the existence of this pack or by the HCM-0.6 default decision alone.
+HCM-0.7 approves the implementation sequence and the first packet at
+[`slices/HCM-1.1/`](slices/HCM-1.1/SPEC.md). The next separately selected work
+is HCM-1.1; no later slice, sibling seam, or HCM-1.1 implementation begins in
+the HCM-0.7 closeout. The pack and HCM-0.6 decision alone still authorize no
+Rust change outside the exact HCM-1.1 packet.
 
 The shipped default artifact set is approved only as target data in [`slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md`](slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md). It must not be inferred from current enums, templates, filenames, or illustrative examples, and it is not implemented until later authorized slices publish and consume the exact registry, kind, condition, profile, intake, and renderer definitions.

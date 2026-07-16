@@ -2,7 +2,17 @@
 
 ## Status
 
-This is the provisional program decomposition. Phase 0 documentation/design slices may proceed after control-pack review. No Rust implementation slice is authorized until its own packet is created and approved.
+This is the approved implementation program. Phase 0 design/default authority
+is closed. Implementation phases execute in numeric phase order and, within a
+phase, in the listed slice order unless this map is changed by a separately
+reviewed planning slice. A Rust implementation slice is authorized only when
+its own `SPEC.md`, `tasks/plan.md`, and `tasks/todo.md` packet is present and
+review-clean.
+
+HCM-1.1 is the only implementation slice currently authorized. Its packet is
+[`slices/HCM-1.1/`](slices/HCM-1.1/SPEC.md). Packet approval is not execution:
+HCM-1.1 begins only in a separately selected top-level run, and every later
+slice remains unauthorized until its own packet is created and reviewed.
 
 ## Sequencing rule
 
@@ -20,6 +30,12 @@ control-pack/design authority
 ```
 
 Do not begin with the CLI, Tauri UI, external docks, or Substrate integration before their underlying typed semantics exist.
+
+Phase exit gates are entry gates for the next phase. Within one phase, each
+listed slice consumes the reviewed closeout of the preceding listed slice.
+Creating a later packet may prepare future work but never waives that dependency
+or starts the later slice. Parallel cross-slice execution is not authorized by
+this map.
 
 ## Top-level slice-runner rule
 
@@ -48,6 +64,39 @@ Creating a child packet or internal dispatch does not complete the parent slice.
 `HCM-0.8` is a corrective insertion and must close before `HCM-0.7`, despite its later-discovered numeric identifier.
 
 `HCM-0.4` consumes the frozen HCM-0.2 semantic identities and HCM-0.3 Resolution/Snapshot/Projection contracts plus the closed HCM-0.8 orchestration control plane. It does not wait for HCM-0.5 contract/dock semantics or HCM-0.6 shipped defaults: those later design slices append their approved use cases/data selections without changing the transport and ownership rules frozen here.
+
+### `HCM-0.7` implementation-program approval contract
+
+**Dependencies:** completed HCM-0.2, HCM-0.3, HCM-0.4, HCM-0.5, HCM-0.6,
+and HCM-0.8 records are dependency evidence. HCM-0.9 is abandoned evidence
+only and supplies no catalog topology or resume authority.
+
+**Authorized output:** documentation/planning changes that make this map the
+approved sequential implementation program and create the exact HCM-1.1
+`SPEC.md`, `tasks/plan.md`, and `tasks/todo.md` packet. HCM-0.7 may add its own
+proof/review/closeout evidence. It changes no Rust, Cargo, runtime, schema or
+definition asset, current seam classification, or open runtime proof gate.
+
+**First implementation boundary:** HCM-1.1 is an additive `handbook-engine`
+kind/schema-registry foundation. It may expose and prove the correct owner
+boundary, safe local Draft 2020-12 schema closure, uniform exact-definition
+fingerprints, and one capability-free repository-defined custom kind. It does
+not replace `CanonicalArtifactKind`, current layout/setup/doctor/flow paths, or
+publish the HCM-0.6 profile/instances/first-party kind catalog. Those remain in
+HCM-1.2 through HCM-1.4.
+
+**Exit gate:** the phase/list sequencing and per-slice packet rule are exact;
+the HCM-1.1 packet freezes owner, public boundary, source/asset topology,
+dependency posture, TDD increments, fail-closed cases, full proof wall,
+permitted classification/gate change, non-goals, and stop conditions; targeted
+documentation checks and a fresh independent review are clean; the reviewed
+subject and mechanical parent closeout use separate commits.
+
+**Non-goals:** HCM-1.1 execution; Rust or Cargo changes; first-party content
+schema/kind/profile/instance publication; enum/layout/setup/doctor/flow
+replacement; canonical YAML cutover; intake, renderer, Projection, SDK, CLI,
+Tauri, Substrate, contract, dock, or later-slice work; HCM-0.9 revival; or any
+claim that `PG-KIND-01`, `PG-KIND-02`, or a runtime seam has landed.
 
 `HCM-0.9` was an attempted corrective control-maintenance insertion after HCM-0.4. It is now abandoned and does not execute before HCM-0.5. This closeout does not start HCM-0.5; any future HCM-0.5 packet must use the canonical monolithic `05` authority unless a new human decision later authorizes and approves a replacement topology.
 
@@ -110,8 +159,22 @@ Creating a child packet or internal dispatch does not complete the parent slice.
 - refuse remote/ambient/unversioned schema execution;
 - prove one repository-defined custom kind without a Rust enum variant.
 
+The approved execution packet is [`slices/HCM-1.1/`](slices/HCM-1.1/SPEC.md).
+This slice is additive: `CanonicalArtifactKind`, fixed layout, setup, doctor,
+baseline validation, and flow remain on their current path until HCM-1.3 and
+HCM-1.4. HCM-1.1 may promote only the Artifact kind/schema registry seam to
+`BoundaryLanded` and record the kind/schema structural subset of `PG-KIND-01`
+plus the registration and structural-validation subset of `PG-KIND-02` for the
+exact owner-library and repository-fixture proof its packet requires. Both
+gates remain open: later slices must prove non-vacuous lifecycle/Projection and
+supplied-intake coverage. HCM-1.1 cannot claim product-path adoption,
+shipped-profile publication, or a released downstream API.
+
 ### `HCM-1.2` — Profile schema, artifact instances, and shipped default
 
+- before enabling non-empty semantic-capability or other later-owned kind
+  dependencies, define their exact typed source/fingerprint producers and a
+  machine-readable binding-shape compatibility contract with non-vacuous proof;
 - define typed profile identity/version;
 - define `ArtifactInstanceDescriptor` independently from kind definitions;
 - encode only the shipped default set approved by `HCM-0.6`;
