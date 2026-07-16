@@ -26,6 +26,7 @@ pub enum RegistryLoadErrorKind {
     UnsupportedDialect,
     UnsupportedMediaType,
     UnsupportedCompatibility,
+    UnsupportedStructuralValidationProfile,
     UnsupportedSchemaKeyword,
     UnsupportedSchemaIdentifier,
     InvalidJsonPointer,

@@ -120,20 +120,33 @@ impl SchemaRegistry {
         entry_source_paths: &[String],
         allowed_schema_roots: &[String],
     ) -> Result<Self, RegistryLoadError> {
+        let mut budget = SourceByteBudget::default();
+        Self::load_with_budget(
+            repo_root.as_ref(),
+            entry_source_paths,
+            allowed_schema_roots,
+            &mut budget,
+        )
+    }
+
+    pub(crate) fn load_with_budget(
+        repo_root: &Path,
+        entry_source_paths: &[String],
+        allowed_schema_roots: &[String],
+        budget: &mut SourceByteBudget,
+    ) -> Result<Self, RegistryLoadError> {
         if entry_source_paths.is_empty() {
             return Err(RegistryLoadError::new(
                 RegistryLoadErrorKind::MissingSchema,
                 "at least one schema-registry entry source is required",
             ));
         }
-        let repo_root = repo_root.as_ref();
         let allowed_roots = normalize_allowed_roots(repo_root, allowed_schema_roots)?;
-        let mut budget = SourceByteBudget::default();
         let mut entries: BTreeMap<ExactDefinitionRef, ResolvedSchema> = BTreeMap::new();
 
         for source_path in entry_source_paths {
             let (normalized_source, bytes) =
-                read_trusted_repo_source(repo_root, source_path, &mut budget)?;
+                read_trusted_repo_source(repo_root, source_path, budget)?;
             if normalized_source != *source_path {
                 return Err(RegistryLoadError::at(
                     RegistryLoadErrorKind::InvalidSourcePath,
@@ -143,7 +156,7 @@ impl SchemaRegistry {
             }
             let authored = AuthoredSchemaRegistryEntry::parse(&bytes)?;
             let exact_ref = authored.exact_ref()?;
-            let resolved = authored.resolve(repo_root, &allowed_roots, &mut budget)?;
+            let resolved = authored.resolve(repo_root, &allowed_roots, budget)?;
             if let Some(existing) = entries.get(&exact_ref) {
                 let kind = if existing.entry.entry_fingerprint == resolved.entry.entry_fingerprint
                     && existing.entry.closure_fingerprint == resolved.entry.closure_fingerprint

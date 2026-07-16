@@ -1,5 +1,6 @@
 #![forbid(unsafe_code)]
 
+pub mod artifact_kind_registry;
 pub mod artifact_manifest;
 pub mod author;
 pub mod baseline_validation;
@@ -11,6 +12,10 @@ pub mod freshness;
 pub mod schema_registry;
 pub mod stable_role_registry;
 
+pub use artifact_kind_registry::{
+    load_artifact_kind_registry, ArtifactKindDefinition, ArtifactKindRegistry,
+    ArtifactKindRegistryLoadRequest,
+};
 pub use artifact_manifest::{
     ArtifactManifest, ManifestError, ManifestInputs, ManifestVersion, SchemaVersion,
 };
