@@ -14,6 +14,7 @@ const DRAFT_2020_12: &str = "https://json-schema.org/draft/2020-12/schema";
 const SCHEMA_MEDIA_TYPE: &str = "application/schema+json";
 const MAX_CLOSURE_DOCUMENTS: usize = 128;
 const MAX_REFERENCE_DEPTH: usize = 32;
+const MAX_STRUCTURAL_LOCATION_BYTES: usize = 512;
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct StructuralValidationError {
@@ -83,6 +84,7 @@ impl ResolvedSchema {
             .validator
             .iter_errors(instance)
             .map(|error| {
+                let instance_location = error.instance_path().to_string();
                 let schema_location = error
                     .absolute_keyword_location()
                     .map(|uri| internal_uri_to_repo_location(uri.as_str()))
@@ -90,8 +92,12 @@ impl ResolvedSchema {
                         format!("{}#{}", self.entry.document_ref, error.schema_path())
                     });
                 StructuralValidationError {
-                    instance_location: error.instance_path().to_string(),
-                    schema_location,
+                    instance_location: if instance_location.len() <= 512 {
+                        instance_location
+                    } else {
+                        String::new()
+                    },
+                    schema_location: bounded_structural_location(schema_location),
                 }
             })
             .collect::<Vec<_>>();
@@ -150,7 +156,7 @@ impl SchemaRegistry {
             if normalized_source != *source_path {
                 return Err(RegistryLoadError::at(
                     RegistryLoadErrorKind::InvalidSourcePath,
-                    source_path,
+                    "schema_entry_source",
                     "schema-entry source path must already be normalized",
                 ));
             }
@@ -167,7 +173,7 @@ impl SchemaRegistry {
                 };
                 return Err(RegistryLoadError::at(
                     kind,
-                    exact_ref.as_str(),
+                    "schema_registry_entries",
                     "schema-registry exact identity appears more than once",
                 ));
             }
@@ -251,24 +257,25 @@ impl AuthoredSchemaRegistryEntry {
         if normalized_document_ref != self.document_ref {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::InvalidSourcePath,
-                &self.document_ref,
+                "document_ref",
                 "schema document_ref must already be normalized",
             ));
         }
 
         let mut loader = ClosureLoader::new(repo_root, allowed_roots, budget);
-        loader.load_document(&self.document_ref, 0)?;
+        loader.load_document(&self.document_ref)?;
+        loader.validate_reference_graph()?;
         let root = loader.documents.get(&self.document_ref).ok_or_else(|| {
             RegistryLoadError::at(
                 RegistryLoadErrorKind::ValidatorTargetMismatch,
-                &self.document_ref,
+                "document_ref",
                 "prewalk did not retain the selected root document",
             )
         })?;
         if root.fingerprint != supplied_document_fingerprint {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::FingerprintMismatch,
-                &self.document_ref,
+                "document_fingerprint",
                 "schema document fingerprint does not match exact source bytes",
             ));
         }
@@ -285,7 +292,7 @@ impl AuthoredSchemaRegistryEntry {
         if computed_closure_fingerprint != supplied_closure_fingerprint {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::FingerprintMismatch,
-                &self.document_ref,
+                "closure_fingerprint",
                 "schema closure fingerprint does not match the prewalked closure",
             ));
         }
@@ -294,7 +301,7 @@ impl AuthoredSchemaRegistryEntry {
         if computed_entry_fingerprint != supplied_entry_fingerprint {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::FingerprintMismatch,
-                exact_ref.as_str(),
+                "entry_fingerprint",
                 "schema-registry entry fingerprint does not match normalized source",
             ));
         }
@@ -355,6 +362,8 @@ struct LoadedSchemaDocument {
     value: Value,
     fingerprint: DefinitionFingerprint,
     schema_pointers: BTreeSet<String>,
+    schema_children: BTreeMap<String, Vec<String>>,
+    references: Vec<LocalSchemaReference>,
 }
 
 struct ClosureLoader<'a> {
@@ -362,7 +371,6 @@ struct ClosureLoader<'a> {
     allowed_roots: &'a [String],
     budget: &'a mut SourceByteBudget,
     documents: BTreeMap<String, LoadedSchemaDocument>,
-    visiting: BTreeSet<String>,
 }
 
 impl<'a> ClosureLoader<'a> {
@@ -376,42 +384,22 @@ impl<'a> ClosureLoader<'a> {
             allowed_roots,
             budget,
             documents: BTreeMap::new(),
-            visiting: BTreeSet::new(),
         }
     }
 
-    fn load_document(
-        &mut self,
-        requested_path: &str,
-        depth: usize,
-    ) -> Result<(), RegistryLoadError> {
-        if depth > MAX_REFERENCE_DEPTH {
-            return Err(RegistryLoadError::at(
-                RegistryLoadErrorKind::ReferenceDepthExceeded,
-                requested_path,
-                "local schema reference depth exceeds 32 edges",
-            ));
-        }
+    fn load_document(&mut self, requested_path: &str) -> Result<(), RegistryLoadError> {
         let normalized = normalize_schema_path(self.repo_root, requested_path)?;
         self.require_allowed_root(&normalized)?;
-        if self.visiting.contains(&normalized) {
-            return Err(RegistryLoadError::at(
-                RegistryLoadErrorKind::LocalReferenceCycle,
-                &normalized,
-                "local schema reference cycle is not admitted in HCM-1.1",
-            ));
-        }
         if self.documents.contains_key(&normalized) {
             return Ok(());
         }
-        if self.documents.len() + self.visiting.len() >= MAX_CLOSURE_DOCUMENTS {
+        if self.documents.len() >= MAX_CLOSURE_DOCUMENTS {
             return Err(RegistryLoadError::new(
                 RegistryLoadErrorKind::DocumentLimitExceeded,
                 "schema closure exceeds 128 documents",
             ));
         }
 
-        self.visiting.insert(normalized.clone());
         let (_, bytes) = read_trusted_repo_source(self.repo_root, &normalized, self.budget)
             .map_err(|error| {
                 if error.kind() == RegistryLoadErrorKind::MissingSource {
@@ -427,26 +415,10 @@ impl<'a> ClosureLoader<'a> {
         let value = parse_schema_json(&bytes)?;
         validate_schema_document(&normalized, &value)?;
         let profile = collect_schema_profile(&normalized, &value)?;
-        validate_same_document_reference_cycles(&normalized, &profile.references)?;
         validate_schema_meta(&normalized, &value)?;
 
         for reference in &profile.references {
-            if let Some(target_path) = &reference.target_path {
-                self.load_document(target_path, depth + 1)?;
-                let target = self.documents.get(target_path).ok_or_else(|| {
-                    RegistryLoadError::at(
-                        RegistryLoadErrorKind::ValidatorTargetMismatch,
-                        target_path,
-                        "prewalk target was not retained in the schema closure",
-                    )
-                })?;
-                validate_pointer_target(
-                    target_path,
-                    &target.value,
-                    &target.schema_pointers,
-                    &reference.fragment,
-                )?;
-            } else {
+            if reference.target_path.is_none() {
                 validate_pointer_target(
                     &normalized,
                     &value,
@@ -456,17 +428,137 @@ impl<'a> ClosureLoader<'a> {
             }
         }
 
-        self.visiting.remove(&normalized);
+        let target_paths = profile
+            .references
+            .iter()
+            .filter_map(|reference| reference.target_path.clone())
+            .collect::<BTreeSet<_>>();
         self.documents.insert(
             normalized.clone(),
             LoadedSchemaDocument {
-                path: normalized,
+                path: normalized.clone(),
                 value,
                 fingerprint: DefinitionFingerprint::from_bytes(&bytes),
                 schema_pointers: profile.schema_pointers,
+                schema_children: profile.schema_children,
+                references: profile.references,
             },
         );
+
+        for target_path in target_paths {
+            self.load_document(&target_path)?;
+        }
+        let references = self
+            .documents
+            .get(&normalized)
+            .map(|document| document.references.clone())
+            .unwrap_or_default();
+        for reference in references {
+            if let Some(target_path) = reference.target_path {
+                let target = self.documents.get(&target_path).ok_or_else(|| {
+                    RegistryLoadError::at(
+                        RegistryLoadErrorKind::ValidatorTargetMismatch,
+                        &target_path,
+                        "prewalk target was not retained in the schema closure",
+                    )
+                })?;
+                validate_pointer_target(
+                    &target_path,
+                    &target.value,
+                    &target.schema_pointers,
+                    &reference.fragment,
+                )?;
+            }
+        }
         Ok(())
+    }
+
+    fn validate_reference_graph(&self) -> Result<(), RegistryLoadError> {
+        let mut visiting = BTreeSet::new();
+        let mut longest_paths = BTreeMap::new();
+        for document in self.documents.values() {
+            for pointer in &document.schema_pointers {
+                self.longest_reference_path(
+                    SchemaLocation {
+                        document_path: document.path.clone(),
+                        pointer: pointer.clone(),
+                    },
+                    &mut visiting,
+                    &mut longest_paths,
+                )?;
+            }
+        }
+        Ok(())
+    }
+
+    fn longest_reference_path(
+        &self,
+        location: SchemaLocation,
+        visiting: &mut BTreeSet<SchemaLocation>,
+        longest_paths: &mut BTreeMap<SchemaLocation, usize>,
+    ) -> Result<usize, RegistryLoadError> {
+        if let Some(longest) = longest_paths.get(&location) {
+            return Ok(*longest);
+        }
+        if !visiting.insert(location.clone()) {
+            return Err(RegistryLoadError::at(
+                RegistryLoadErrorKind::LocalReferenceCycle,
+                &location.document_path,
+                "local schema reference cycle is not admitted in HCM-1.1",
+            ));
+        }
+
+        let document = self.documents.get(&location.document_path).ok_or_else(|| {
+            RegistryLoadError::at(
+                RegistryLoadErrorKind::ValidatorTargetMismatch,
+                &location.document_path,
+                "reference graph document is absent from the admitted closure",
+            )
+        })?;
+        let children = document
+            .schema_children
+            .get(&location.pointer)
+            .cloned()
+            .unwrap_or_default();
+        let references = document
+            .references
+            .iter()
+            .filter(|reference| reference.source_pointer == location.pointer)
+            .cloned()
+            .collect::<Vec<_>>();
+
+        let mut longest = 0;
+        for child in children {
+            longest = longest.max(self.longest_reference_path(
+                SchemaLocation {
+                    document_path: location.document_path.clone(),
+                    pointer: child,
+                },
+                visiting,
+                longest_paths,
+            )?);
+        }
+        for reference in references {
+            let target = SchemaLocation {
+                document_path: reference
+                    .target_path
+                    .unwrap_or_else(|| location.document_path.clone()),
+                pointer: reference.fragment,
+            };
+            let target_longest = self.longest_reference_path(target, visiting, longest_paths)?;
+            longest = longest.max(target_longest.saturating_add(1));
+            if longest > MAX_REFERENCE_DEPTH {
+                return Err(RegistryLoadError::at(
+                    RegistryLoadErrorKind::ReferenceDepthExceeded,
+                    &location.document_path,
+                    "local schema reference depth exceeds 32 edges",
+                ));
+            }
+        }
+
+        visiting.remove(&location);
+        longest_paths.insert(location, longest);
+        Ok(longest)
     }
 
     fn require_allowed_root(&self, normalized_path: &str) -> Result<(), RegistryLoadError> {
@@ -485,16 +577,23 @@ impl<'a> ClosureLoader<'a> {
     }
 }
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 struct LocalSchemaReference {
     source_pointer: String,
     target_path: Option<String>,
     fragment: String,
 }
 
+#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
+struct SchemaLocation {
+    document_path: String,
+    pointer: String,
+}
+
 struct SchemaProfile {
     references: Vec<LocalSchemaReference>,
     schema_pointers: BTreeSet<String>,
+    schema_children: BTreeMap<String, Vec<String>>,
 }
 
 fn collect_schema_profile(
@@ -503,6 +602,7 @@ fn collect_schema_profile(
 ) -> Result<SchemaProfile, RegistryLoadError> {
     let mut references = Vec::new();
     let mut schema_pointers = BTreeSet::new();
+    let mut schema_children = BTreeMap::new();
     validate_schema_node(
         document_path,
         value,
@@ -510,10 +610,12 @@ fn collect_schema_profile(
         true,
         &mut references,
         &mut schema_pointers,
+        &mut schema_children,
     )?;
     Ok(SchemaProfile {
         references,
         schema_pointers,
+        schema_children,
     })
 }
 
@@ -539,11 +641,11 @@ fn validate_schema_document(path: &str, value: &Value) -> Result<(), RegistryLoa
 }
 
 fn validate_schema_meta(path: &str, value: &Value) -> Result<(), RegistryLoadError> {
-    jsonschema::draft202012::meta::validate(value).map_err(|error| {
+    jsonschema::draft202012::meta::validate(value).map_err(|_| {
         RegistryLoadError::at(
             RegistryLoadErrorKind::UnsupportedDialect,
             path,
-            format!("schema document fails Draft 2020-12 meta-validation: {error}"),
+            "schema document fails Draft 2020-12 meta-validation",
         )
     })
 }
@@ -555,8 +657,10 @@ fn validate_schema_node(
     document_root: bool,
     references: &mut Vec<LocalSchemaReference>,
     schema_pointers: &mut BTreeSet<String>,
+    schema_children: &mut BTreeMap<String, Vec<String>>,
 ) -> Result<(), RegistryLoadError> {
     schema_pointers.insert(pointer.to_owned());
+    schema_children.entry(pointer.to_owned()).or_default();
     if node.is_boolean() {
         if document_root {
             return Err(RegistryLoadError::at(
@@ -570,7 +674,7 @@ fn validate_schema_node(
     let Some(object) = node.as_object() else {
         return Err(RegistryLoadError::at(
             RegistryLoadErrorKind::UnsupportedDialect,
-            format!("{document_path}#{pointer}"),
+            bounded_schema_location(document_path, pointer),
             "schema position must contain an object or boolean",
         ));
     };
@@ -580,21 +684,21 @@ fn validate_schema_node(
         if is_unsupported_identifier_keyword(keyword) {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::UnsupportedSchemaIdentifier,
-                format!("{document_path}#{keyword_pointer}"),
+                bounded_schema_location(document_path, &keyword_pointer),
                 "authored identifiers, anchors, and dynamic or recursive references are unsupported",
             ));
         }
         if keyword == "$schema" && !document_root {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::UnsupportedDialect,
-                format!("{document_path}#{keyword_pointer}"),
+                bounded_schema_location(document_path, &keyword_pointer),
                 "nested $schema declarations are unsupported",
             ));
         }
         if !is_allowed_schema_keyword(keyword) {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::UnsupportedSchemaKeyword,
-                format!("{document_path}#{keyword_pointer}"),
+                bounded_schema_location(document_path, &keyword_pointer),
                 "schema-position keyword is outside the frozen HCM-1.1 allowlist",
             ));
         }
@@ -602,7 +706,7 @@ fn validate_schema_node(
             let reference = keyword_value.as_str().ok_or_else(|| {
                 RegistryLoadError::at(
                     RegistryLoadErrorKind::RemoteReferenceRefused,
-                    format!("{document_path}#{keyword_pointer}"),
+                    bounded_schema_location(document_path, &keyword_pointer),
                     "$ref must be a local string reference",
                 )
             })?;
@@ -623,26 +727,38 @@ fn validate_schema_node(
         "unevaluatedProperties",
     ] {
         if let Some(child) = object.get(keyword) {
+            let child_pointer = format!("{pointer}/{}", escape_json_pointer_token(keyword));
+            schema_children
+                .entry(pointer.to_owned())
+                .or_default()
+                .push(child_pointer.clone());
             validate_schema_node(
                 document_path,
                 child,
-                &format!("{pointer}/{}", escape_json_pointer_token(keyword)),
+                &child_pointer,
                 false,
                 references,
                 schema_pointers,
+                schema_children,
             )?;
         }
     }
     for keyword in ["allOf", "anyOf", "oneOf", "prefixItems"] {
         if let Some(children) = object.get(keyword).and_then(Value::as_array) {
             for (index, child) in children.iter().enumerate() {
+                let child_pointer = format!("{pointer}/{keyword}/{index}");
+                schema_children
+                    .entry(pointer.to_owned())
+                    .or_default()
+                    .push(child_pointer.clone());
                 validate_schema_node(
                     document_path,
                     child,
-                    &format!("{pointer}/{keyword}/{index}"),
+                    &child_pointer,
                     false,
                     references,
                     schema_pointers,
+                    schema_children,
                 )?;
             }
         }
@@ -655,13 +771,20 @@ fn validate_schema_node(
     ] {
         if let Some(children) = object.get(keyword).and_then(Value::as_object) {
             for (name, child) in children {
+                let child_pointer =
+                    format!("{pointer}/{keyword}/{}", escape_json_pointer_token(name));
+                schema_children
+                    .entry(pointer.to_owned())
+                    .or_default()
+                    .push(child_pointer.clone());
                 validate_schema_node(
                     document_path,
                     child,
-                    &format!("{pointer}/{keyword}/{}", escape_json_pointer_token(name)),
+                    &child_pointer,
                     false,
                     references,
                     schema_pointers,
+                    schema_children,
                 )?;
             }
         }
@@ -764,66 +887,17 @@ fn validate_pointer_target(
     if document.pointer(fragment).is_none() {
         return Err(RegistryLoadError::at(
             RegistryLoadErrorKind::LocalReferenceMissing,
-            format!("{document_path}#{fragment}"),
+            document_path,
             "local JSON Pointer target does not exist",
         ));
     }
     if !schema_pointers.contains(fragment) {
         return Err(RegistryLoadError::at(
             RegistryLoadErrorKind::ValidatorTargetMismatch,
-            format!("{document_path}#{fragment}"),
+            document_path,
             "local JSON Pointer target is not an admitted schema position",
         ));
     }
-    Ok(())
-}
-
-fn validate_same_document_reference_cycles(
-    document_path: &str,
-    references: &[LocalSchemaReference],
-) -> Result<(), RegistryLoadError> {
-    let mut edges: BTreeMap<&str, Vec<&str>> = BTreeMap::new();
-    for reference in references
-        .iter()
-        .filter(|reference| reference.target_path.is_none())
-    {
-        edges
-            .entry(reference.source_pointer.as_str())
-            .or_default()
-            .push(reference.fragment.as_str());
-    }
-    let mut visiting = BTreeSet::new();
-    let mut visited = BTreeSet::new();
-    for source in edges.keys().copied().collect::<Vec<_>>() {
-        visit_reference_node(document_path, source, &edges, &mut visiting, &mut visited)?;
-    }
-    Ok(())
-}
-
-fn visit_reference_node<'a>(
-    document_path: &str,
-    node: &'a str,
-    edges: &BTreeMap<&'a str, Vec<&'a str>>,
-    visiting: &mut BTreeSet<&'a str>,
-    visited: &mut BTreeSet<&'a str>,
-) -> Result<(), RegistryLoadError> {
-    if visited.contains(node) {
-        return Ok(());
-    }
-    if !visiting.insert(node) {
-        return Err(RegistryLoadError::at(
-            RegistryLoadErrorKind::LocalReferenceCycle,
-            format!("{document_path}#{node}"),
-            "same-document JSON Pointer reference cycle is not admitted in HCM-1.1",
-        ));
-    }
-    if let Some(targets) = edges.get(node) {
-        for target in targets {
-            visit_reference_node(document_path, target, edges, visiting, visited)?;
-        }
-    }
-    visiting.remove(node);
-    visited.insert(node);
     Ok(())
 }
 
@@ -833,23 +907,21 @@ fn build_validator(
 ) -> Result<Validator, RegistryLoadError> {
     let mut registry_builder = jsonschema::Registry::new().draft(Draft::Draft202012);
     for document in documents.values() {
+        let validator_value = validator_document_value(document)?;
         registry_builder = registry_builder
-            .add(
-                internal_resource_uri(&document.path),
-                document.value.clone(),
-            )
-            .map_err(|error| {
+            .add(internal_resource_uri(&document.path), validator_value)
+            .map_err(|_| {
                 RegistryLoadError::at(
                     RegistryLoadErrorKind::DuplicateResourceIdentity,
                     &document.path,
-                    format!("internal schema resource registration failed: {error}"),
+                    "internal schema resource registration failed",
                 )
             })?;
     }
-    let registry = registry_builder.prepare().map_err(|error| {
+    let registry = registry_builder.prepare().map_err(|_| {
         RegistryLoadError::new(
             RegistryLoadErrorKind::DuplicateResourceIdentity,
-            format!("in-memory schema resource registry failed: {error}"),
+            "in-memory schema resource registry failed",
         )
     })?;
     let root = documents.get(root_document_ref).ok_or_else(|| {
@@ -859,18 +931,47 @@ fn build_validator(
             "validator root is missing from the prevalidated closure",
         )
     })?;
+    let root_validator_value = validator_document_value(root)?;
     jsonschema::draft202012::options()
         .with_registry(&registry)
         .with_base_uri(internal_resource_uri(root_document_ref))
         .with_pattern_options(PatternOptions::regex())
-        .build(&root.value)
-        .map_err(|error| {
+        .build(&root_validator_value)
+        .map_err(|_| {
             RegistryLoadError::at(
                 RegistryLoadErrorKind::StructuralValidationSetup,
                 root_document_ref,
-                format!("prevalidated in-memory schema failed validator construction: {error}"),
+                "prevalidated in-memory schema failed validator construction",
             )
         })
+}
+
+fn validator_document_value(document: &LoadedSchemaDocument) -> Result<Value, RegistryLoadError> {
+    let mut value = document.value.clone();
+    for reference in &document.references {
+        let mut target = match &reference.target_path {
+            Some(target_path) => internal_resource_uri(target_path),
+            None => internal_resource_uri(&document.path),
+        };
+        if !reference.fragment.is_empty() {
+            target.push('#');
+            target.push_str(&percent_encode_uri_path_like(&reference.fragment));
+        }
+        let pointer = if reference.source_pointer.is_empty() {
+            "/$ref".to_string()
+        } else {
+            format!("{}/$ref", reference.source_pointer)
+        };
+        let Some(slot) = value.pointer_mut(&pointer) else {
+            return Err(RegistryLoadError::at(
+                RegistryLoadErrorKind::ValidatorTargetMismatch,
+                "schema_reference",
+                "prewalk reference source is absent from the validator document",
+            ));
+        };
+        *slot = Value::String(target);
+    }
+    Ok(value)
 }
 
 fn normalize_allowed_roots(
@@ -887,12 +988,16 @@ fn normalize_allowed_roots(
     let mut normalized = BTreeSet::new();
     for root in allowed_roots {
         let path = workspace.normalize_repo_relative(root).map_err(|detail| {
-            RegistryLoadError::at(RegistryLoadErrorKind::InvalidSourcePath, root, detail)
+            RegistryLoadError::at(
+                RegistryLoadErrorKind::InvalidSourcePath,
+                "allowed_schema_root",
+                detail,
+            )
         })?;
         if path.as_str() != root {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::InvalidSourcePath,
-                root,
+                "allowed_schema_root",
                 "allowed schema root must already be normalized",
             ));
         }
@@ -907,16 +1012,26 @@ fn normalize_schema_path(repo_root: &Path, path: &str) -> Result<String, Registr
         .normalize_repo_relative(path)
         .map(|normalized| normalized.as_str().to_owned())
         .map_err(|detail| {
-            RegistryLoadError::at(RegistryLoadErrorKind::InvalidSourcePath, path, detail)
+            RegistryLoadError::at(
+                RegistryLoadErrorKind::InvalidSourcePath,
+                "source_path",
+                detail,
+            )
         })
 }
 
 fn classify_entry_decode_error(error: serde_json::Error) -> RegistryLoadError {
-    let detail = error.to_string();
-    let kind = if detail.contains("unknown field") {
-        RegistryLoadErrorKind::UnknownField
+    let rendered = error.to_string();
+    let (kind, detail) = if rendered.contains("unknown field") {
+        (
+            RegistryLoadErrorKind::UnknownField,
+            "schema-registry entry contains an unknown field",
+        )
     } else {
-        RegistryLoadErrorKind::SyntaxError
+        (
+            RegistryLoadErrorKind::SyntaxError,
+            "schema-registry entry does not match its closed typed record",
+        )
     };
     RegistryLoadError::new(kind, detail)
 }
@@ -982,24 +1097,95 @@ fn is_allowed_schema_keyword(keyword: &str) -> bool {
     )
 }
 
-fn remote_reference_error(document_path: &str, reference: &str) -> RegistryLoadError {
+fn remote_reference_error(document_path: &str, _reference: &str) -> RegistryLoadError {
     RegistryLoadError::at(
         RegistryLoadErrorKind::RemoteReferenceRefused,
         document_path,
-        format!(
-            "remote, ambient, encoded, query, backslash, or traversal ref refused: {reference}"
-        ),
+        "remote, ambient, encoded, query, backslash, or traversal ref refused",
     )
 }
 
+fn bounded_schema_location(document_path: &str, pointer: &str) -> String {
+    if pointer.len() <= 256 {
+        format!("{document_path}#{pointer}")
+    } else {
+        document_path.to_owned()
+    }
+}
+
 fn internal_resource_uri(path: &str) -> String {
-    format!("handbook+repo:///{path}")
+    let mut uri = String::with_capacity("handbook+repo:///".len() + path.len());
+    uri.push_str("handbook+repo:///");
+    uri.push_str(&percent_encode_uri_path_like(path));
+    uri
+}
+
+fn percent_encode_uri_path_like(value: &str) -> String {
+    const HEX: &[u8; 16] = b"0123456789ABCDEF";
+
+    let mut encoded = String::with_capacity(value.len());
+    for byte in value.bytes() {
+        if byte.is_ascii_alphanumeric() || matches!(byte, b'-' | b'.' | b'_' | b'~' | b'/') {
+            encoded.push(char::from(byte));
+        } else {
+            encoded.push('%');
+            encoded.push(char::from(HEX[usize::from(byte >> 4)]));
+            encoded.push(char::from(HEX[usize::from(byte & 0x0f)]));
+        }
+    }
+    encoded
 }
 
 fn internal_uri_to_repo_location(uri: &str) -> String {
-    uri.strip_prefix("handbook+repo:///")
-        .unwrap_or(uri)
-        .to_owned()
+    let Some(encoded) = uri.strip_prefix("handbook+repo:///") else {
+        return "schema_root".to_string();
+    };
+    let (encoded_path, fragment) = encoded.split_once('#').unwrap_or((encoded, ""));
+    let Some(path) = percent_decode_utf8(encoded_path) else {
+        return "schema_root".to_string();
+    };
+    if fragment.is_empty() {
+        return path;
+    }
+    let Some(fragment) = percent_decode_utf8(fragment) else {
+        return "schema_root".to_string();
+    };
+    format!("{path}#{fragment}")
+}
+
+fn percent_decode_utf8(encoded: &str) -> Option<String> {
+    let bytes = encoded.as_bytes();
+    let mut decoded = Vec::with_capacity(bytes.len());
+    let mut index = 0;
+    while index < bytes.len() {
+        if bytes[index] == b'%' {
+            let high = *bytes.get(index + 1)?;
+            let low = *bytes.get(index + 2)?;
+            decoded.push((hex_value(high)? << 4) | hex_value(low)?);
+            index += 3;
+        } else {
+            decoded.push(bytes[index]);
+            index += 1;
+        }
+    }
+    String::from_utf8(decoded).ok()
+}
+
+fn hex_value(byte: u8) -> Option<u8> {
+    match byte {
+        b'0'..=b'9' => Some(byte - b'0'),
+        b'a'..=b'f' => Some(byte - b'a' + 10),
+        b'A'..=b'F' => Some(byte - b'A' + 10),
+        _ => None,
+    }
+}
+
+fn bounded_structural_location(location: String) -> String {
+    if location.len() <= MAX_STRUCTURAL_LOCATION_BYTES && !location.chars().any(char::is_control) {
+        location
+    } else {
+        "schema_root".to_string()
+    }
 }
 
 fn escape_json_pointer_token(token: &str) -> String {
@@ -1017,4 +1203,42 @@ struct SchemaRegistryFingerprintMember<'a> {
     entry_ref: &'a str,
     entry_fingerprint: &'a str,
     closure_fingerprint: &'a str,
+}
+
+#[cfg(test)]
+mod internal_resource_uri_tests {
+    use super::{internal_resource_uri, internal_uri_to_repo_location};
+
+    #[test]
+    fn internal_resource_uris_are_injective_and_round_trip_utf8_paths() {
+        for (path, expected) in [
+            ("schemas/a b.json", "handbook+repo:///schemas/a%20b.json"),
+            (
+                "schemas/a%20b.json",
+                "handbook+repo:///schemas/a%2520b.json",
+            ),
+            (
+                "schemas/café.json",
+                "handbook+repo:///schemas/caf%C3%A9.json",
+            ),
+        ] {
+            let uri = internal_resource_uri(path);
+            assert_eq!(uri, expected);
+            assert_eq!(internal_uri_to_repo_location(&uri), path);
+        }
+        assert_ne!(
+            internal_resource_uri("schemas/a b.json"),
+            internal_resource_uri("schemas/a%20b.json")
+        );
+    }
+
+    #[test]
+    fn encoded_private_fragments_decode_to_exact_json_pointers() {
+        assert_eq!(
+            internal_uri_to_repo_location(
+                "handbook+repo:///schemas/child.json#/$defs/caf%C3%A9%20field/type"
+            ),
+            "schemas/child.json#/$defs/café field/type"
+        );
+    }
 }

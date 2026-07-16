@@ -1,0 +1,2 @@
+# HCM proof walls use Markdown two-space hard breaks intentionally.
+docs/specs/handbook-contract-membrane/slices/HCM-1.1/proof/*.md whitespace=-trailing-space

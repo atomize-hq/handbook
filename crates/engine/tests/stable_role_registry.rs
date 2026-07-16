@@ -76,6 +76,18 @@ fn stable_role_records_are_closed_and_fingerprint_checked() {
         RegistryLoadErrorKind::UnknownField
     );
 
+    let secret_field = format!("SECRET_STABLE_FIELD_{}", "x".repeat(500));
+    let unknown_secret = base.replace(
+        "registry_fingerprint:",
+        &format!("{secret_field}: true\nregistry_fingerprint:"),
+    );
+    let error = StableRoleRegistry::parse_yaml(unknown_secret.as_bytes())
+        .expect_err("secret unknown field");
+    assert_eq!(error.kind(), RegistryLoadErrorKind::UnknownField);
+    assert!(!error.detail().contains("SECRET_STABLE_FIELD"));
+    assert!(!error.to_string().contains("SECRET_STABLE_FIELD"));
+    assert!(error.detail().len() < 256);
+
     let changed_bytes = base.replace("Project Context", "Project Facts");
     assert_eq!(
         StableRoleRegistry::parse_yaml(changed_bytes.as_bytes())
@@ -106,4 +118,19 @@ fn duplicate_roles_and_invalid_categories_refuse() {
             .kind(),
         RegistryLoadErrorKind::InvalidStableRoleCategory
     );
+
+    let secret_category = format!("SECRET_CATEGORY_{}", "x".repeat(500));
+    let invalid_secret = base.replace(
+        "category: governance",
+        &format!("category: {secret_category}"),
+    );
+    let error = StableRoleRegistry::parse_yaml(invalid_secret.as_bytes())
+        .expect_err("secret invalid category");
+    assert_eq!(
+        error.kind(),
+        RegistryLoadErrorKind::InvalidStableRoleCategory
+    );
+    assert!(!error.detail().contains("SECRET_CATEGORY"));
+    assert!(!error.to_string().contains("SECRET_CATEGORY"));
+    assert!(error.detail().len() < 256);
 }

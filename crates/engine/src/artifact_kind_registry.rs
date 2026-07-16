@@ -150,7 +150,7 @@ pub fn load_artifact_kind_registry(
         if normalized_source != *source_path {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::InvalidSourcePath,
-                source_path,
+                "artifact_kind_source",
                 "artifact-kind source path must already be normalized",
             ));
         }
@@ -164,7 +164,7 @@ pub fn load_artifact_kind_registry(
             };
             return Err(RegistryLoadError::at(
                 kind,
-                definition.exact_ref().as_str(),
+                "artifact_kind_definitions",
                 "artifact-kind exact identity appears more than once",
             ));
         }
@@ -262,14 +262,14 @@ impl AuthoredArtifactKindDefinition {
             if stable_role_registry.role(role_ref).is_none() {
                 return Err(RegistryLoadError::at(
                     RegistryLoadErrorKind::UnknownStableRole,
-                    format!("supported_role_refs/{role_ref}"),
+                    "supported_role_refs",
                     "artifact-kind role is absent from the selected stable-role registry",
                 ));
             }
             if !roles.insert(role_ref.clone()) {
                 return Err(RegistryLoadError::at(
                     RegistryLoadErrorKind::DuplicateIdentity,
-                    format!("supported_role_refs/{role_ref}"),
+                    "supported_role_refs",
                     "artifact-kind role is duplicated",
                 ));
             }
@@ -280,7 +280,7 @@ impl AuthoredArtifactKindDefinition {
         let Some(schema_entry) = schema_registry.entry(&canonical_schema_ref) else {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::MissingSchema,
-                canonical_schema_ref.as_str(),
+                "canonical_schema_ref",
                 "artifact-kind canonical schema is absent from the exact schema registry",
             ));
         };
@@ -349,11 +349,17 @@ struct ArtifactKindRegistryFingerprintMember<'a> {
 }
 
 fn classify_kind_decode_error(error: serde_json::Error) -> RegistryLoadError {
-    let detail = error.to_string();
-    let kind = if detail.contains("unknown field") {
-        RegistryLoadErrorKind::UnknownField
+    let rendered = error.to_string();
+    let (kind, detail) = if rendered.contains("unknown field") {
+        (
+            RegistryLoadErrorKind::UnknownField,
+            "artifact-kind definition contains an unknown field",
+        )
     } else {
-        RegistryLoadErrorKind::SyntaxError
+        (
+            RegistryLoadErrorKind::SyntaxError,
+            "artifact-kind definition does not match its closed typed record",
+        )
     };
     RegistryLoadError::new(kind, detail)
 }

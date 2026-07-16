@@ -1,0 +1,364 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260716T220035Z--HCM-1-1--fresh-final-registry-review-8",
+  "created_at_utc": "2026-07-16T22:00:35Z",
+  "source_handoff_ids": [
+    "20260716T181353Z--HCM-0-7--orchestration--implementation-program-approved"
+  ],
+  "parent_orchestration_id": "20260716T183000Z--HCM-1-1--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "test-driven-development",
+    "code-review-and-quality",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-1",
+  "slice_id": "HCM-1.1",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:5b061cfcedad526de689e1493978cc8b97ae1e1a0e9c333af9259f1cada5562d",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "Cargo.lock",
+        "sha256": "eaeeb44acc268b8c205ec8b0670e1f120cb7b8b36a5e8cdac5038c42e17d4839"
+      },
+      {
+        "path": "crates/engine/Cargo.toml",
+        "sha256": "d03a9e83cfbadf2420df369dbb9ff96fd83edd320202cbfdf893b420840ccfad"
+      },
+      {
+        "path": "crates/engine/definitions/stable-roles/handbook.roles.core/1.0.0.yaml",
+        "sha256": "f58fb02956161afec736290d1fb713c2c0c8eb7ae350430e4464ecc5634ba53d"
+      },
+      {
+        "path": "crates/engine/definitions/stable-roles/handbook.roles.core/1.1.0.yaml",
+        "sha256": "c969d5f7516de6500c3c5333682bee5b0f05fd61a30ea3aa2704d87bbd48e790"
+      },
+      {
+        "path": "crates/engine/src/artifact_kind_registry.rs",
+        "sha256": "367f7ad0ef44c905952967e099e5293f8f2609c7b0f70859812204f035230dba"
+      },
+      {
+        "path": "crates/engine/src/canonical_repo_support.rs",
+        "sha256": "97adc5beae88778349dc41935cf034c4d09ff4fdc490202cd39313f8eeb93571"
+      },
+      {
+        "path": "crates/engine/src/definition_identity.rs",
+        "sha256": "e105dc34f3735db7d88a80abbcdedfa7527bc263bdc43389784a43d4b92ff8d7"
+      },
+      {
+        "path": "crates/engine/src/lib.rs",
+        "sha256": "265fa2d126537153112bc2fedccb87e2bcda0559694a502af18fee7c048e9fbc"
+      },
+      {
+        "path": "crates/engine/src/schema_registry.rs",
+        "sha256": "be14de2845e35737527fba6d1ae6a7c39afff78d12213e9723586c3d952aacc9"
+      },
+      {
+        "path": "crates/engine/src/stable_role_registry.rs",
+        "sha256": "6bda9d656e2de0982a664192804bdd632779f60888d15c220487cf9c93e85b66"
+      },
+      {
+        "path": "crates/engine/tests/artifact_kind_registry.rs",
+        "sha256": "877aa734cea8486d76321b308b7fced518f05d86f7497e4301129adcd2a7be2e"
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "sha256": "222de611ceb9c3badfad282e84614c141a2cbb3a0c64a178cc39e6586eb8cdc7"
+      },
+      {
+        "path": "crates/engine/tests/definition_identity.rs",
+        "sha256": "5fd248457d2d99915637ea03772c550abda761e7b25881d82368c0eee915b388"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_1_1_custom_kind/companion-kind.yaml",
+        "sha256": "498f5c9304bad5845e9281feff2b4eab1082faf1d3e31587442a4da549d94c0e"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_1_1_custom_kind/companion-schema-entry.yaml",
+        "sha256": "1727716ee959c22b17688792d804ab260f19a4ce3b77b031aa7233403aa1f06b"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_1_1_custom_kind/companion.schema.json",
+        "sha256": "19c14e8c41eeaaba3aa4012f5d6f12b661b9b350cd9e04d019b6dbecb8ee2861"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_1_1_custom_kind/fields.schema.json",
+        "sha256": "d3d56430014e492581e8827f4da0ed868ecaf479bb5449de4baef9df946279da"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_1_1_custom_kind/kind.yaml",
+        "sha256": "0b80eec3996a5d2f7a9672dcb27046c237563333e149a84540df58f9ed166f34"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_1_1_custom_kind/root.schema.json",
+        "sha256": "f52ffaec29bc1edbd51addc1391dd844ab5e58d07e85d69970fcaeeac0159510"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_1_1_custom_kind/schema-entry.yaml",
+        "sha256": "ede69fb62b0b5a0b023bee65f0adf1c980155d535e47b37108a4097eeaade536"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_1_1_custom_kind/valid.yaml",
+        "sha256": "7a20b0436ad1415ef527181b4c5f053ed69dbc1a30143a685661ef2524d3e686"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_1_custom_kind.rs",
+        "sha256": "92e8bd5d9b356b49c7ad4de940eaca7c617b712cdebfbfaf8098d757ad59fd14"
+      },
+      {
+        "path": "crates/engine/tests/schema_registry.rs",
+        "sha256": "df252cee072ab29485275914faf75718b2e9054bae5a02b2b0faaf46a79bf697"
+      },
+      {
+        "path": "crates/engine/tests/stable_role_registry.rs",
+        "sha256": "96ae699a77da2b809c225f9bbae06b1e5dae63b23fc0657b6e6f38d01e9e6351"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "80c1820308070392cd6e88e96f7125e0383a157bf34920af0285c112d267a886"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "90dd4c082cb668fba0bad4b922d68aaeebfdcd9581f2c84645438c28582fb9d7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260716T193424Z--HCM-1-1--fresh-final-registry-review-1.json",
+        "sha256": "437a2640ff462dbf02ce2be850accc02ac892533c4cea316f1912f9b7c89d244"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260716T200406Z--HCM-1-1--fresh-final-registry-review-2.json",
+        "sha256": "3e2322b4d73c74079571c9c6c072339e616f516292e46a4b675c13893cbe4274"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260716T202257Z--HCM-1-1--fresh-final-registry-review-3.json",
+        "sha256": "be97a36c4d9056b52d9f29290eb4a8d79dae788b23f6d06c8e1eacfc89445860"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260716T204651Z--HCM-1-1--fresh-final-registry-review-4.json",
+        "sha256": "cc5516f42bc8135c439757ff4cacb074f2f060111c401796dce55673de57b804"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260716T211109Z--HCM-1-1--fresh-final-registry-review-5.json",
+        "sha256": "44f6aa0fc98bf1eadfcad58d09b8717c54ebd18c61804d8ae95e331d3edea9e4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260716T213006Z--HCM-1-1--fresh-final-registry-review-6.json",
+        "sha256": "0a7ca2e5a4a8c09e2c97e5e6249a99c9686fb43f93524302a7ec810d31382378"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260716T214858Z--HCM-1-1--fresh-final-registry-review-7.json",
+        "sha256": "fe2ba186e0a6bfeb79a49d4cf5ede5eb9916d20c87225a44338e622e0a14be42"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/SPEC.md",
+        "sha256": "0e38a004e03af919d4f960b7cf71ca23916cf75d7d47c0db0d650dcb7caf761d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/proof/20260716T193058Z--pre-final-review-proof-wall.md",
+        "sha256": "7988f50f1f0d911ab9dd1d8fe566654529479492971dd440420f8c2174b18039"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/proof/20260716T200245Z--review-1-remediation-proof-wall.md",
+        "sha256": "5ef2675ea4d904b1b7663bef6396a02d75f4636f5f605277f0cc3f49666f3c72"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/proof/20260716T202154Z--review-2-remediation-proof-wall.md",
+        "sha256": "a4158056ae5768d2744a039273ed48f61c9687e87afbfc94353c440cb0deff6d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/proof/20260716T204535Z--review-3-remediation-proof-wall.md",
+        "sha256": "ea85c78502f990f6fbb3b9ff259a58894e7fdcccb44d35b1fb9c272c3f66f8f9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/proof/20260716T211002Z--review-4-remediation-proof-wall.md",
+        "sha256": "f2c9ae07fdeae96dff0620bc652c8baa13c713bf8940022abfe8ab6a482f1823"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/proof/20260716T212917Z--review-5-remediation-proof-wall.md",
+        "sha256": "4049c1a5330f57a71f38cb081eb4f102713286f72d87f43dc05533a8ff7f07f9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/proof/20260716T214814Z--review-6-remediation-proof-wall.md",
+        "sha256": "063f2d71951297f275037de09305379e7f53bed5971475499649720c024f28d9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/proof/20260716T215955Z--review-7-remediation-proof-wall.md",
+        "sha256": "fdc6196b383ea5209db87f489aed8a9c8a1ca24dd87e91d6b25ed7e5d3a1404f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/tasks/plan.md",
+        "sha256": "20036e9a83a3b6e1a51cc389a07118580c2349371f93f4d5610166d14b246140"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/tasks/todo.md",
+        "sha256": "d78640df2773cf73b412be05391c95c94c7e6a70a5bd9efaa1571cf5997e6f61"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:5b061cfcedad526de689e1493978cc8b97ae1e1a0e9c333af9259f1cada5562d"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "final_slice_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Schema registry",
+        "ArtifactKindDefinition",
+        "Stable roles and semantic capabilities"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Seam-by-seam crosswalk"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-1.1 \u2014 Artifact-kind and schema registry",
+        "Phase 1 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity",
+        "Stable-role registry contract",
+        "Schema-registry entry",
+        "Artifact kind definition contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "HCM-1.1 additive kind/schema registry boundary proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/SPEC.md",
+      "sections": [
+        "Status and authority",
+        "Objective",
+        "Exact allowed scope",
+        "Public owner boundary",
+        "Safe schema-closure algorithm",
+        "Artifact-kind definitions",
+        "Full proof wall",
+        "Permitted classification and gate change",
+        "Exit gate",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 \u2014 FRESH REVIEW / REMEDIATION LOOP",
+        "PHASE 6 \u2014 FULL PROOF WALL",
+        "PHASE 7 \u2014 CONTROL-PACK CLOSEOUT AND COMMIT"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_truth": "Review the exact manifest over baseline 87bc3ab3e175aa1d6c058ac0ed57495989fe5451. Fresh Final Registry Reviews 1 through 7 returned five, three, four, two, two, one, and one Required findings; the parent accepted and remediated every Required finding within HCM-1.1. The two repeated non-blocking Optional observations remain unchanged. The subject includes all seven immutable prior review dispatches and all eight proof walls. Registry errors and structural locations are fail-safe bounded. Every prewalked ref, including same-document and cross-document RFC 6901 fragments with space/UTF-8 tokens, maps injectively to exact private in-memory resources and decodes to exact reported paths/pointers. Authored bytes/fingerprints remain unchanged. The selected repository root remains the caller-provided trust anchor while every relative component is descriptor-relative no-follow. Current canonical product paths still use the fixed four-variant CanonicalArtifactKind and do not call the new registry. Derive the verdict only from live authority, replayed bytes, and read-only verification.",
+  "allowed_scope": [
+    "Remain read-only and replay every sorted subject-manifest entry plus aggregate before review.",
+    "Review every engine implementation, stable-role asset, test/fixture, HCM-1.1 packet/status/proof byte, all seven prior immutable review dispatches, the single crosswalk row, and bounded gate-evidence change in the manifest.",
+    "Read unchanged canonical authority, entry handoff/ledger, live Cargo metadata, platform APIs, and official dependency documentation only as needed to validate the subject.",
+    "Run read-only focused, workspace, cross-target compile, package, dependency-feature, archive, handoff, Git, source, security, and semantic checks needed to evaluate the subject.",
+    "Return findings first through the built-in channel with exact file and line evidence."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, new dispatches, global handoffs, ledger writes, or user-task hops.",
+    "No HCM-1.2 or later-slice work and no canonical artifact, layout, setup, doctor, flow, compiler, CLI, SDK, Tauri, Substrate, profile, instance, intake, renderer, lifecycle, Projection, publication, or downstream adoption.",
+    "Do not infer missing first-party schemas, semantic-capability contracts, intake/renderer/lifecycle/Projection definitions, shipped profile assets, or product authority.",
+    "Do not accept unit proof as product-path adoption or close PG-KIND-01/PG-KIND-02.",
+    "Do not require stylistic alternatives without a violated authority, invariant, security boundary, proof gate, or concrete defect."
+  ],
+  "tasks": [
+    "Invoke the required skills, remain read-only, replay the exact sorted manifest and aggregate, and return BLOCKED if any subject byte differs.",
+    "Review findings first in Critical, Required, Optional, Nit order. Each actionable finding must include severity, exact file/line, violated contract or invariant, why the boundary/proof is wrong, smallest valid remediation, and missing verification.",
+    "Verify all Review 1 through Review 7 Required findings are fully remediated and the latest proof accurately supersedes earlier overclaims without erasing immutable lineage.",
+    "Stress typed error boundaries with large duplicate YAML/JSON keys, unknown fields, unknown variants, malformed identities, invalid meta-shapes/regexes, paths, refs, and validation locations; prove no absolute machine path, upstream display text, authored sentinel, or unbounded content reaches detail, location, or Display.",
+    "Reproduce the Review 4 long noncanonical source-path and 100,000-byte exact-schema-ref probes; verify location and Display are bounded and contain no sentinel, and audit every dynamic exact/document location for a stable field label or the central fail-safe bound.",
+    "Reproduce the Review 5 valid 583+ byte document-path structural-error probe and require the stable schema_root fallback; verify no structural instance/schema location exceeds 512 bytes or echoes the sentinel.",
+    "Reproduce the Review 5 live space/UTF-8 closure and exact URI matrix; prove private URI encoding is injective and reversible, validator-only translated refs target the exact prewalked resources, authored bytes/fingerprints remain unchanged, and reported repo paths decode without drift.",
+    "Reproduce the Review 6 cross-document RFC 6901 fragment cases with space and UTF-8 tokens; prove injective private fragment encoding, exact decoded structural pointers, valid/invalid behavior, closure agreement, unchanged authored fingerprints, and continued authored-percent refusal.",
+    "Reproduce the Review 7 same-document RFC 6901 fragment cases with space and UTF-8 tokens; prove the current exact private resource is used, structural pointers decode exactly, validation/closure/fingerprint behavior is unchanged, and cross-document cases remain green.",
+    "Verify the caller-selected Unix repository root is an explicit trust anchor, including through a directory symlink, while every repo-relative component remains descriptor-relative no-follow; verify NONBLOCK on the final component, retained-handle regularity before reads, prompt FIFO refusal, and typed intermediate symlink versus ordinary non-directory classification.",
+    "Replay the canonical product real-root versus symlink-selected-root equality regression and the paired intermediate relative artifact-component symlink refusal; verify the trust-anchor repair does not weaken repo-relative no-follow enforcement.",
+    "Verify the shared reader split preserves legacy canonical-product behavior on non-Unix while strict registry access fails closed there; replay the x86_64-pc-windows-gnu engine-tests compile and do not claim native Windows execution.",
+    "Literally inspect and replay both custom entries and both custom kinds: forward/reverse registry fingerprints, exact lookup sets, exact closure member sets, each entry closure/definition fingerprint, each kind definition fingerprint, and valid/invalid behavior for both kinds.",
+    "Literally verify every source/document/reference bound, fingerprint drift, media/compatibility, root containment, schema meta/keyword/identifier policy, duplicate/conflict order, resolver exclusion, and later-owned dependency refusal required by SPEC.",
+    "Audit the rustix 1.1.4 fs dependency repair, target configuration, lockfile edge, descriptor error classification, retained-handle race tests, source budgets, and platform branches for containment, hangs, panics, portability claims, and unintended capability.",
+    "Verify the implementation matches the exact additive HCM-1.1 public owner boundary, source/asset topology, dependency pins/features, error contract, TDD evidence, proof wall, classification ceiling, and non-goals.",
+    "Audit jsonschema configuration and the resolved dependency graph for in-memory-only resources, disabled ambient resolver behavior, linear regex, and absence of HTTP/TLS/async/file/custom execution paths.",
+    "Verify the public API has exact-ref lookups and deterministic structural validation without an untyped dependency dispatcher; distinguish the two acknowledged Optional ergonomics/performance observations from Critical/Required contract defects.",
+    "Replay or inspect every positive, negative, security, engine/workspace, cross-target, feature-tree, package-content, archive, handoff, diff/scope, and GitNexus assertion in the latest proof; identify any asserted case not actually exercised or any required proof absent from the manifest.",
+    "Verify the crosswalk promotes only the additive owner-library seam to BoundaryLanded, PG-KIND-01 and PG-KIND-02 remain open, and no sibling gate or product-path claim is widened.",
+    "Return CLEAN only if no valid Critical or Required finding remains; otherwise return CHANGES_REQUIRED or BLOCKED. Make no edits."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#hcm-11--artifact-kind-and-schema-registry",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#uniform-exact-definition-identity",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#stable-role-registry-contract",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#schema-registry-entry",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#artifact-kind-definition-contract",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#hcm-11-additive-kindschema-registry-boundary-proof-gate",
+    "docs/specs/handbook-contract-membrane/slices/HCM-1.1/SPEC.md#permitted-classification-and-gate-change",
+    "docs/specs/handbook-contract-membrane/slices/HCM-1.1/SPEC.md#exit-gate",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if the manifest, aggregate, entry authority, or required read-only verification cannot be reproduced.",
+    "Return CHANGES_REQUIRED rather than resolving a missing product, semantic-capability, lifecycle, intake, renderer, Projection, publication, or downstream decision by inference.",
+    "Return to the parent if remediation would require HCM-1.2+, a current product path, a sibling crate, or authority outside the exact HCM-1.1 packet."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -34,6 +34,17 @@ fn exact_refs_require_the_frozen_identity_and_canonical_semver_grammar() {
             RegistryLoadErrorKind::InvalidExactDefinitionRef
         );
     }
+
+    let secret_identity = format!("SECRET_IDENTITY.{}", "x".repeat(1_000));
+    let error = ExactDefinitionRef::new(&secret_identity, "1.0.0")
+        .expect_err("oversized authored identity");
+    assert_eq!(
+        error.kind(),
+        RegistryLoadErrorKind::InvalidExactDefinitionRef
+    );
+    assert!(!error.detail().contains("SECRET_IDENTITY"));
+    assert!(!error.to_string().contains("SECRET_IDENTITY"));
+    assert!(error.detail().len() < 256);
 }
 
 #[test]
@@ -99,6 +110,21 @@ fn duplicate_yaml_and_json_mapping_keys_fail_before_typed_decoding() {
             .kind(),
         RegistryLoadErrorKind::DuplicateKey
     );
+
+    let yaml_secret_key = format!("SECRET_DUPLICATE_KEY_{}", "x".repeat(500));
+    let json_secret_key = format!("SECRET_DUPLICATE_KEY_{}", "x".repeat(50_000));
+    let yaml = format!("{yaml_secret_key}: first\n{yaml_secret_key}: second\n");
+    let json = format!(r#"{{"{json_secret_key}":"first","{json_secret_key}":"second"}}"#);
+    for error in [
+        handbook_engine::parse_definition_yaml(yaml.as_bytes())
+            .expect_err("large duplicate YAML key"),
+        handbook_engine::parse_schema_json(json.as_bytes()).expect_err("large duplicate JSON key"),
+    ] {
+        assert_eq!(error.kind(), RegistryLoadErrorKind::DuplicateKey);
+        assert!(!error.detail().contains("SECRET_DUPLICATE_KEY"));
+        assert!(!error.to_string().contains("SECRET_DUPLICATE_KEY"));
+        assert!(error.detail().len() < 256);
+    }
 }
 
 #[test]

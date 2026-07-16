@@ -51,16 +51,32 @@ fn repository_defined_custom_kind_loads_without_a_product_path_variant() {
     let primary_kind =
         ExactDefinitionRef::parse("example.artifact-kind.hcm-incident@1.0.0").unwrap();
     let primary_schema = ExactDefinitionRef::parse("example.schemas.hcm-incident@1.0.0").unwrap();
+    let companion_kind =
+        ExactDefinitionRef::parse("example.artifact-kind.hcm-companion@1.0.0").unwrap();
+    let companion_schema =
+        ExactDefinitionRef::parse("example.schemas.hcm-companion@1.0.0").unwrap();
     let resolved = forward
         .schema_registry()
         .resolved(&primary_schema)
         .expect("primary schema");
+    let reverse_primary = reverse
+        .schema_registry()
+        .resolved(&primary_schema)
+        .expect("reverse primary schema");
     assert_eq!(
         resolved.closure_document_refs(),
         [
             format!("{FIXTURE_ROOT}/fields.schema.json"),
             format!("{FIXTURE_ROOT}/root.schema.json"),
         ]
+    );
+    assert_eq!(
+        resolved.closure_document_refs(),
+        reverse_primary.closure_document_refs()
+    );
+    assert_eq!(
+        resolved.entry().closure_fingerprint(),
+        reverse_primary.entry().closure_fingerprint()
     );
     assert_eq!(
         resolved.entry().entry_fingerprint(),
@@ -77,6 +93,48 @@ fn repository_defined_custom_kind_loads_without_a_product_path_variant() {
             .definition_fingerprint(),
         reverse
             .kind(&primary_kind)
+            .unwrap()
+            .definition_fingerprint()
+    );
+    let forward_companion = forward
+        .schema_registry()
+        .resolved(&companion_schema)
+        .expect("forward companion schema");
+    let reverse_companion = reverse
+        .schema_registry()
+        .resolved(&companion_schema)
+        .expect("reverse companion schema");
+    assert_eq!(
+        forward_companion.closure_document_refs(),
+        [format!("{FIXTURE_ROOT}/companion.schema.json")]
+    );
+    assert_eq!(
+        forward_companion.closure_document_refs(),
+        reverse_companion.closure_document_refs()
+    );
+    assert_eq!(
+        forward_companion.entry().closure_fingerprint(),
+        reverse_companion.entry().closure_fingerprint()
+    );
+    assert_eq!(
+        forward
+            .schema_registry()
+            .entry(&companion_schema)
+            .unwrap()
+            .entry_fingerprint(),
+        reverse
+            .schema_registry()
+            .entry(&companion_schema)
+            .unwrap()
+            .entry_fingerprint()
+    );
+    assert_eq!(
+        forward
+            .kind(&companion_kind)
+            .unwrap()
+            .definition_fingerprint(),
+        reverse
+            .kind(&companion_kind)
             .unwrap()
             .definition_fingerprint()
     );
@@ -98,6 +156,23 @@ fn repository_defined_custom_kind_loads_without_a_product_path_variant() {
     assert!(forward_errors
         .iter()
         .any(|error| error.instance_location() == "/title"));
+
+    let valid_companion = json!({"enabled": true});
+    assert!(forward
+        .validate_json(&companion_kind, &valid_companion)
+        .is_ok());
+    assert!(reverse
+        .validate_json(&companion_kind, &valid_companion)
+        .is_ok());
+    let invalid_companion = json!({"enabled": "SECRET_INVALID"});
+    let forward_companion_errors = forward
+        .validate_json(&companion_kind, &invalid_companion)
+        .expect_err("invalid companion fixture");
+    let reverse_companion_errors = reverse
+        .validate_json(&companion_kind, &invalid_companion)
+        .expect_err("invalid reverse companion fixture");
+    assert_eq!(forward_companion_errors, reverse_companion_errors);
+    assert_eq!(forward_companion_errors[0].instance_location(), "/enabled");
 
     let fixed_product_kinds = [
         CanonicalArtifactKind::Charter,

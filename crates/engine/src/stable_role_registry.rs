@@ -1,7 +1,7 @@
 use crate::canonical_repo_support::{CanonicalWorkspace, RepoRelativeFileAccessError};
 use crate::definition_identity::{
     fingerprint_serializable, parse_definition_yaml, DefinitionFingerprint, ExactDefinitionRef,
-    RegistryLoadError, RegistryLoadErrorKind, SourceByteBudget,
+    RegistryLoadError, RegistryLoadErrorKind, SourceByteBudget, MAX_SOURCE_DOCUMENT_BYTES,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
@@ -134,7 +134,7 @@ impl AuthoredStableRoleRegistry {
             if !role_ids.insert(role.role_id.as_str()) {
                 return Err(RegistryLoadError::at(
                     RegistryLoadErrorKind::DuplicateIdentity,
-                    format!("roles/{}", role.role_id),
+                    "roles",
                     "stable-role ID is duplicated",
                 ));
             }
@@ -168,43 +168,61 @@ pub(crate) fn read_trusted_repo_source(
         .map_err(|detail| {
             RegistryLoadError::at(
                 RegistryLoadErrorKind::InvalidSourcePath,
-                source_path,
+                "source_path",
                 detail,
             )
         })?;
     let normalized_path = normalized.as_str().to_owned();
-    let trusted = workspace.trusted_read(&normalized).map_err(|error| {
-        let (kind, detail) = match error {
-            RepoRelativeFileAccessError::Missing(_) => (
-                RegistryLoadErrorKind::MissingSource,
-                "source file does not exist",
-            ),
-            RepoRelativeFileAccessError::InvalidPath(_) => (
-                RegistryLoadErrorKind::InvalidSourcePath,
-                "source path is invalid",
-            ),
-            RepoRelativeFileAccessError::SymlinkNotAllowed(_) => (
-                RegistryLoadErrorKind::SymlinkSource,
-                "source path contains a symlink",
-            ),
-            RepoRelativeFileAccessError::NotRegularFile(_) => (
-                RegistryLoadErrorKind::NonRegularSource,
-                "source path is not a regular file",
-            ),
-            RepoRelativeFileAccessError::ReadFailure { .. } => (
-                RegistryLoadErrorKind::SourceReadFailure,
-                "source metadata could not be read",
-            ),
-        };
-        RegistryLoadError::at(kind, &normalized_path, detail)
-    })?;
-    let bytes = trusted.read_bytes().map_err(|_| {
+    let trusted = workspace
+        .trusted_read_strict(&normalized)
+        .map_err(|error| {
+            let (kind, detail) = match error {
+                RepoRelativeFileAccessError::Missing(_) => (
+                    RegistryLoadErrorKind::MissingSource,
+                    "source file does not exist",
+                ),
+                RepoRelativeFileAccessError::InvalidPath(_) => (
+                    RegistryLoadErrorKind::InvalidSourcePath,
+                    "source path is invalid",
+                ),
+                RepoRelativeFileAccessError::SymlinkNotAllowed(_) => (
+                    RegistryLoadErrorKind::SymlinkSource,
+                    "source path contains a symlink",
+                ),
+                RepoRelativeFileAccessError::NotRegularFile(_) => (
+                    RegistryLoadErrorKind::NonRegularSource,
+                    "source path is not a regular file",
+                ),
+                RepoRelativeFileAccessError::ReadFailure { .. } => (
+                    RegistryLoadErrorKind::SourceReadFailure,
+                    "source metadata could not be read",
+                ),
+            };
+            RegistryLoadError::at(kind, &normalized_path, detail)
+        })?;
+    let remaining = budget.remaining_bytes();
+    let maximum = remaining.min(MAX_SOURCE_DOCUMENT_BYTES);
+    let (bytes, exceeded) = trusted.read_bytes_bounded(maximum).map_err(|_| {
         RegistryLoadError::at(
             RegistryLoadErrorKind::SourceReadFailure,
             &normalized_path,
             "source bytes could not be read",
         )
     })?;
+    if exceeded {
+        let (kind, detail) = if remaining < MAX_SOURCE_DOCUMENT_BYTES {
+            (
+                RegistryLoadErrorKind::AggregateLimitExceeded,
+                "aggregate source bytes exceed the 8 MiB limit",
+            )
+        } else {
+            (
+                RegistryLoadErrorKind::SourceLimitExceeded,
+                "source document exceeds the 1 MiB limit",
+            )
+        };
+        return Err(RegistryLoadError::at(kind, &normalized_path, detail));
+    }
     budget.admit(bytes.len())?;
     Ok((normalized_path, bytes))
 }
@@ -222,7 +240,7 @@ fn validate_role_id(role_id: &str) -> Result<(), RegistryLoadError> {
     if !valid {
         return Err(RegistryLoadError::at(
             RegistryLoadErrorKind::UnknownStableRole,
-            format!("roles/{role_id}"),
+            "roles",
             "stable-role ID violates the lowercase ASCII grammar",
         ));
     }
@@ -240,13 +258,22 @@ fn validate_display_label(label: &str) -> Result<(), RegistryLoadError> {
 }
 
 fn classify_typed_decode_error(error: serde_json::Error) -> RegistryLoadError {
-    let detail = error.to_string();
-    let kind = if detail.contains("unknown field") {
-        RegistryLoadErrorKind::UnknownField
-    } else if detail.contains("unknown variant") {
-        RegistryLoadErrorKind::InvalidStableRoleCategory
+    let rendered = error.to_string();
+    let (kind, detail) = if rendered.contains("unknown field") {
+        (
+            RegistryLoadErrorKind::UnknownField,
+            "stable-role registry contains an unknown field",
+        )
+    } else if rendered.contains("unknown variant") {
+        (
+            RegistryLoadErrorKind::InvalidStableRoleCategory,
+            "stable-role registry contains an invalid role category",
+        )
     } else {
-        RegistryLoadErrorKind::SyntaxError
+        (
+            RegistryLoadErrorKind::SyntaxError,
+            "stable-role registry does not match its closed typed record",
+        )
     };
     RegistryLoadError::new(kind, detail)
 }
@@ -277,6 +304,8 @@ mod tests {
     #[test]
     fn trusted_sources_reject_symlinks() {
         use std::os::unix::fs::symlink;
+        use std::sync::mpsc;
+        use std::time::Duration;
 
         let repo = tempfile::tempdir().expect("repo");
         std::fs::write(repo.path().join("target.yaml"), b"value: true\n").expect("target");
@@ -286,5 +315,60 @@ mod tests {
             read_trusted_repo_source(repo.path(), "link.yaml", &mut SourceByteBudget::default())
                 .expect_err("symlink must refuse");
         assert_eq!(error.kind(), RegistryLoadErrorKind::SymlinkSource);
+
+        std::fs::create_dir_all(repo.path().join("target/sub")).expect("target directory");
+        std::fs::write(repo.path().join("target/sub/value.yaml"), b"value: true\n")
+            .expect("nested target");
+        symlink("target", repo.path().join("link-directory")).expect("directory symlink");
+        let error = read_trusted_repo_source(
+            repo.path(),
+            "link-directory/sub/value.yaml",
+            &mut SourceByteBudget::default(),
+        )
+        .expect_err("intermediate symlink must refuse distinctly");
+        assert_eq!(error.kind(), RegistryLoadErrorKind::SymlinkSource);
+
+        std::fs::write(repo.path().join("ordinary"), b"not a directory\n")
+            .expect("ordinary intermediate");
+        let error = read_trusted_repo_source(
+            repo.path(),
+            "ordinary/value.yaml",
+            &mut SourceByteBudget::default(),
+        )
+        .expect_err("ordinary intermediate must be non-regular");
+        assert_eq!(error.kind(), RegistryLoadErrorKind::NonRegularSource);
+
+        assert!(
+            std::process::Command::new("mkfifo")
+                .arg(repo.path().join("source.pipe"))
+                .status()
+                .expect("run mkfifo")
+                .success(),
+            "mkfifo must create the non-regular source fixture"
+        );
+        let repo_path = repo.path().to_path_buf();
+        let (sender, receiver) = mpsc::channel();
+        std::thread::spawn(move || {
+            let result = read_trusted_repo_source(
+                &repo_path,
+                "source.pipe",
+                &mut SourceByteBudget::default(),
+            )
+            .map(|_| None)
+            .unwrap_or_else(|error| Some(error.kind()));
+            sender.send(result).expect("send FIFO result");
+        });
+        match receiver.recv_timeout(Duration::from_millis(250)) {
+            Ok(kind) => assert_eq!(kind, Some(RegistryLoadErrorKind::NonRegularSource)),
+            Err(mpsc::RecvTimeoutError::Timeout) => {
+                let _writer = std::fs::OpenOptions::new()
+                    .write(true)
+                    .open(repo.path().join("source.pipe"))
+                    .expect("release blocked FIFO reader");
+                let _ = receiver.recv_timeout(Duration::from_secs(1));
+                panic!("FIFO source open blocked before non-regular refusal");
+            }
+            Err(error) => panic!("FIFO result channel failed: {error}"),
+        }
     }
 }

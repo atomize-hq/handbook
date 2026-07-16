@@ -349,3 +349,48 @@ fn non_default_layout_contract_flows_through_ingest_identities_and_issue_paths()
         .iter()
         .all(|identity| identity.relative_path.starts_with(".custom_handbook/")));
 }
+
+#[cfg(unix)]
+#[test]
+fn selected_repo_root_symlink_is_trusted_but_relative_artifact_symlinks_are_refused() {
+    use std::os::unix::fs::symlink;
+
+    let outer = tempfile::tempdir().expect("outer tempdir");
+    let real_root = outer.path().join("real-root");
+    write_file(
+        &real_root.join(".handbook/charter/CHARTER.md"),
+        b"canonical charter",
+    );
+    write_file(
+        &real_root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
+        b"canonical feature spec",
+    );
+    let selected_root = outer.path().join("selected-root");
+    symlink(&real_root, &selected_root).expect("selected root symlink");
+
+    let through_real_root = CanonicalArtifacts::load(&real_root).expect("real-root load");
+    let through_selected_root =
+        CanonicalArtifacts::load(&selected_root).expect("symlink-selected-root load");
+    assert_eq!(through_selected_root, through_real_root);
+
+    let malicious_root = outer.path().join("malicious-root");
+    let outside_charter = outer.path().join("outside-charter");
+    write_file(&outside_charter.join("CHARTER.md"), b"outside charter");
+    std::fs::create_dir_all(malicious_root.join(".handbook")).expect("system root");
+    symlink(&outside_charter, malicious_root.join(".handbook/charter"))
+        .expect("relative component symlink");
+    write_file(
+        &malicious_root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
+        b"canonical feature spec",
+    );
+
+    let artifacts = CanonicalArtifacts::load(&malicious_root).expect("malicious-root load");
+    assert_eq!(
+        artifacts.charter.identity.presence,
+        ArtifactPresence::Missing
+    );
+    assert!(artifacts.ingest_issues.iter().any(|issue| {
+        issue.kind == ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed
+            && issue.canonical_repo_relative_path == ".handbook/charter/CHARTER.md"
+    }));
+}

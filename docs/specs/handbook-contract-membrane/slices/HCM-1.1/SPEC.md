@@ -129,10 +129,15 @@ flow, setup, doctor, CLI, pipeline, or a sibling crate, stop with
 
 ## Dependency and official-source posture
 
-Add only these direct engine dependencies:
+Use exactly these direct engine dependency changes. The four registry/identity
+dependencies are additive; safe descriptor-relative traversal replaces the
+existing direct `libc` dependency with the safe `rustix` filesystem API after
+Fresh Final Review 1 proved that path-wide metadata checks plus final-component
+`O_NOFOLLOW` were raceable.
 
 ```toml
 jsonschema = { version = "0.47.0", default-features = false }
+rustix = { version = "1.1.4", features = ["fs"] } # cfg(unix); replaces libc
 semver = "1"
 serde_json = "1"
 serde_json_canonicalizer = "0.3.2"
@@ -152,7 +157,21 @@ Implementation must follow the current official APIs:
   <https://docs.rs/jsonschema/0.47.0/jsonschema/#example-use-the-regex-engine-instead>;
   and
 - RFC 8785-compatible `to_vec` canonicalization:
-  <https://docs.rs/serde_json_canonicalizer/0.3.2/serde_json_canonicalizer/>.
+  <https://docs.rs/serde_json_canonicalizer/0.3.2/serde_json_canonicalizer/>;
+  and
+- safe descriptor-relative `openat` plus `NOFOLLOW`/`DIRECTORY` flags:
+  <https://docs.rs/rustix/1.1.4/rustix/fs/fn.openat.html> and
+  <https://docs.rs/rustix/1.1.4/rustix/fs/struct.OFlags.html>.
+
+The strict registry path is target-Unix and treats the explicitly selected
+repository root as the caller-provided trust anchor, including when that root
+is selected through a directory symlink. Every repo-relative component beneath
+that anchor still uses descriptor-relative no-follow opens, with `NONBLOCK` on
+the final component, retained-handle metadata, and a bounded retained-handle
+read. Registry loads fail closed on non-Unix.
+That strict path is separate from the pre-existing canonical-product reader:
+the latter retains its prior non-Unix behavior so HCM-1.1 does not turn a
+registry security boundary into a canonical-artifact regression.
 
 Do not enable `resolve-http`, `resolve-file`, `resolve-async`, macros, custom
 keywords, custom formats, or an HTTP/TLS client. A dependency or API conflict
@@ -309,7 +328,14 @@ proof data, not a first-party shipped kind or product default.
 
 1. Normalize and validate every request source path and allowed schema root
    through the existing engine repo-relative path contract.
-2. Read every path component and final regular file with no-follow behavior.
+2. On Unix, open the explicitly selected repository root as a caller-provided
+   trust anchor, then read every repo-relative path component through a retained
+   parent descriptor with no-follow behavior; open the final component
+   nonblocking, verify the retained handle is regular, and only then read it.
+   Resolve an ambiguous intermediate `ENOTDIR` with descriptor-relative
+   no-follow metadata so a symlink and an ordinary non-directory retain
+   distinct typed failures. Registry loads fail closed on non-Unix without
+   changing the separate legacy canonical-product reader.
 3. Enforce fixed v1 bounds before parsing:
    - at most 1 MiB per source document;
    - at most 8 MiB total source bytes per load;
@@ -333,17 +359,26 @@ proof data, not a first-party shipped kind or product default.
      schema rules; and
    - missing refs, cycles, over-depth, over-count, or conflicting bytes refuse.
 6. Map each validated normalized path to one unique deterministic internal
-   `handbook+repo:///...` resource identity. The loader supplies that identity
-   as the document's validator-time base without changing fingerprinted
-   authored bytes. This internal identity has no authority and is never
-   accepted as an authored ref. Duplicate internal identities or aliases
-   refuse.
+   `handbook+repo:///...` resource identity. Percent-encode every non-
+   unreserved UTF-8 path byte while preserving `/`, and prove the mapping is
+   injective and reversible. The loader supplies that identity as the
+   document's validator-time base without changing fingerprinted authored
+   bytes. This internal identity has no authority and is never accepted as an
+   authored ref. Duplicate internal identities or aliases refuse.
 7. Resolve the prewalked reference table against those exact internal bases,
-   register the same complete resource table in memory, configure Draft
-   2020-12 with the linear-time regex engine, and build the validator with
-   every crate resolver feature disabled. The prewalk target, validator target,
-   closure fingerprint member, and reported schema location must agree for
-   every `$ref`; disagreement is a typed load failure.
+   register the same complete resource table in memory, and translate every
+   already-prewalked `$ref` to an exact private absolute URI in a validator-only
+   clone. Cross-document refs use the exact target resource; fragment-only refs
+   use the current document's exact private resource. Apply the same injective
+   encoding to the prewalked RFC 6901 fragment, preserving `/` and unreserved
+   bytes, so spaces, non-ASCII tokens, and other reserved bytes remain valid
+   private URI fragments. Source
+   bytes and fingerprints remain authored-byte based. Configure Draft 2020-12
+   with the linear-time regex engine and build the validator with every crate
+   resolver feature disabled. Decode reported private path and fragment bytes
+   back to the exact repo-relative path and JSON Pointer. The prewalk target,
+   validator target, closure fingerprint member, and reported schema location
+   must agree for every `$ref`; disagreement is a typed load failure.
 8. Never register repository-provided executable keywords/formats, call a
    command, inspect `PATH`, load a shared library, fetch a URL, or read a file
    that is not in the prevalidated closure.
@@ -473,6 +508,12 @@ are supported by this registry version.
 
 Tests assert typed discriminants and stable structured locations, not prose.
 Errors must not contain absolute machine paths or unbounded source contents.
+Every registry error location is capped at 240 bytes with a stable fallback;
+source-path, exact-identity, document-fingerprint, closure-fingerprint, and
+canonical-schema-ref failures use stable field locations rather than echoing
+authored values. Structural instance/schema locations are capped at 512 bytes;
+an overlong or undecodable schema location uses the stable `schema_root`
+fallback rather than an authored document path.
 
 ## Threat model and fail-closed posture
 
@@ -575,6 +616,16 @@ Before HCM-1.1 closeout, preserve exact command/result evidence for:
   forged digest, changed-byte, wrong-kind, and source-order substitution input;
   and
 - invalid custom-kind instance with stable structural error locations.
+- long normalized document refs cannot escape the 512-byte structural-location
+  bound, and admitted space/non-ASCII paths round-trip through collision-free
+  internal URIs without reported-location drift.
+- cross-document RFC 6901 fragments with space and non-ASCII tokens load,
+  target the exact prewalked schema, and report the decoded pointer exactly.
+- same-document RFC 6901 fragments with space and non-ASCII tokens satisfy the
+  same exact target, fingerprint, validation, and decoded-location proof.
+- a canonical product load selected through a repository-root directory symlink
+  is byte-identical to the real-root load, while a symlink in any relative
+  artifact component remains refused.
 
 ### Regression and repository proof
 

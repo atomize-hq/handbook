@@ -127,8 +127,8 @@ No lower proof level implies a higher one.
 |---|---|---|
 | `PG-PROFILE-01` | selected profile resolves complete artifact/vocabulary/Resolution truth with deterministic fingerprint | open |
 | `PG-DEFAULT-01` | focused research plus a user brainstorming/decision session explicitly approve the shipped kind set, default instances, and requiredness; examples/current enums do not count | closed for the HCM-0.6 documentation decision by its exact approved record, final proof wall, clean independent review, and two-commit closeout; no runtime/profile publication proof |
-| `PG-KIND-01` | a versioned `ArtifactKindDefinition` resolves a safe canonical schema, validation, optional intake, lifecycle, and projections independently from repository instance state | open |
-| `PG-KIND-02` | repository-defined custom kind registers, passes meta-schema/structural validation, and exercises supplied intake coverage without a new Rust enum variant, executable hook, remote schema fetch, generated CLI command, or pre-Phase-3 generic projection engine | open |
+| `PG-KIND-01` | a versioned `ArtifactKindDefinition` resolves a safe canonical schema, validation, optional intake, lifecycle, and projections independently from repository instance state | open; HCM-1.1 proves the exact capability-free kind/schema resolution and structural-validation subset only, while lifecycle and Projection coverage remain unimplemented |
+| `PG-KIND-02` | repository-defined custom kind registers, passes meta-schema/structural validation, and exercises supplied intake coverage without a new Rust enum variant, executable hook, remote schema fetch, generated CLI command, or pre-Phase-3 generic projection engine | open; HCM-1.1 proves registration, local meta-schema/structural validation, and enum/remote-hook/CLI/Projection non-adoption for a two-kind custom fixture, while supplied intake coverage remains unimplemented |
 | `PG-ARTIFACT-01` | a profile-selected `ArtifactInstanceDescriptor` binds a kind to path/label/requiredness/dependencies and participates in validation/doctor/flow | open |
 | `PG-INTAKE-01` | guided-adaptive, express, and agent-assisted acquisition use one intake definition and produce the same candidate schema while exposing missing coverage | open |
 | `PG-INTAKE-02` | intake provenance distinguishes user declarations, evidenced inference, defaults, unknowns, contradictions, waivers, and approvals; normative fields cannot be silently inferred into authority | open |
@@ -481,6 +481,70 @@ close `PG-KIND-01`/`PG-KIND-02`. Before HCM-0.7 may close:
 - proof and staging replay the clean subject byte-identically before the primary
   documentation/planning commit, followed only by the separate parent-owned
   v1.2 handoff/ledger closeout commit.
+
+## HCM-1.1 additive kind/schema registry boundary proof gate
+
+HCM-1.1 lands only the additive `handbook-engine` owner-library boundary. It
+does not adopt the registry in current canonical artifact, layout, setup,
+doctor, flow, compiler, CLI, SDK, Tauri, Substrate, profile, instance, intake,
+renderer, lifecycle, Projection, publication, or downstream paths. Before the
+parent may close HCM-1.1:
+
+- exact definition refs enforce the bounded lowercase-ASCII namespaced identity
+  grammar plus byte-canonical full SemVer, and definition fingerprints replay
+  lowercase SHA-256 over RFC 8785 JSON with duplicate-key and fixed source/
+  aggregate-limit refusal before typed decoding;
+- the package owns exact `handbook.roles.core@1.0.0` and `@1.1.0` bytes whose
+  frozen fingerprints replay, whose typed records reject unknown fields,
+  invalid categories, duplicates, and substitutions, and whose assets appear in
+  `cargo package` contents;
+- schema-registry entries are explicit repository-relative YAML sources, schema
+  documents stay under explicit allowed roots, every component/final file is
+  opened descriptor-relatively with safe `rustix::fs::openat` plus no-follow
+  flags and a retained final handle, bounded reads stop after one sentinel byte,
+  and the bounded closure binds exact
+  document, entry, closure, and registry fingerprints;
+- the Draft 2020-12 schema profile requires the exact root dialect, rejects
+  nested dialects, authored identifiers/anchors/dynamic or recursive refs,
+  unknown schema-position keywords, ambient/remote/file/data/query/backslash/
+  encoded-traversal refs, unsafe pointers, cycles, missing targets, drift, and
+  prewalk/validator-target mismatches, while object-valued instance data under
+  `const`/`enum`/`default`/`examples` remains data;
+- JSON Schema resolver features remain disabled, the validator registry contains
+  only admitted in-memory `handbook+repo:///` resources, regex compilation uses
+  the linear engine, and the engine dependency graph contains no HTTP/TLS,
+  async, file-resolver, custom-keyword, custom-format, or executable-hook path;
+- capability-free `ArtifactKindDefinition` records select one exact built-in
+  stable-role registry, one exact schema entry/closure, known stable roles, and
+  the exact structural profile, while every non-empty semantic capability,
+  required capability, semantic validator, renderer, lifecycle policy, review
+  trigger, Projection ref, extension, opaque dependency producer, wrong-record,
+  instance, setup, or intake field refuses before entering the fingerprint;
+- artifact-kind definition fingerprints bind only the normalized capability-free
+  record plus the exact selected stable-role and schema-entry/closure
+  fingerprints, and kind/schema registry fingerprints are sorted exact-member
+  closures without source-order winners;
+- the committed proof corpus supplies two distinct schema entries and two
+  distinct kinds, a real local `$ref` closure, a valid YAML instance, stable
+  invalid-instance locations, deterministic repeated fingerprints, and equal
+  forward/reverse source-permutation lookup sets and behavior without adding a
+  `CanonicalArtifactKind` variant or product-path command;
+- focused positive, negative, security, format, clippy, engine, full-workspace,
+  dependency-feature, package-content, archive-boundary, handoff-validator, and
+  scoped-diff proof passes, and repository-required staged GitNexus detection
+  reports only the expected additive owner-library flows;
+- `Artifact kind/schema registry` promotes only to `BoundaryLanded`;
+  `PG-KIND-01` remains open for lifecycle/Projection coverage and `PG-KIND-02`
+  remains open for supplied-intake coverage, while every sibling gate and
+  product-path classification stays unchanged;
+- one fresh isolated read-only built-in `default` reviewer reports no actionable
+  Critical or Required finding over every implementation, asset, fixture,
+  packet-status, crosswalk, gate-evidence, proof, and immutable dispatch byte;
+  any accepted finding receives bounded remediation, a complete proof replay,
+  and a different fresh reviewer; and
+- the final clean manifest and proof replay byte-identically before the primary
+  reviewed-slice commit, followed only by a separate completed v1.2 parent
+  handoff/ledger closeout commit; HCM-1.2 is not started.
 
 ## Control-pack orchestration-repair proof gate
 

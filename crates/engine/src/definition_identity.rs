@@ -7,6 +7,7 @@ use std::fmt;
 
 pub const MAX_SOURCE_DOCUMENT_BYTES: usize = 1024 * 1024;
 pub const MAX_TOTAL_SOURCE_BYTES: usize = 8 * 1024 * 1024;
+const MAX_REGISTRY_ERROR_LOCATION_BYTES: usize = 240;
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum RegistryLoadErrorKind {
@@ -71,9 +72,10 @@ impl RegistryLoadError {
         location: impl Into<String>,
         detail: impl Into<String>,
     ) -> Self {
+        let location = bounded_registry_error_location(location.into());
         Self {
             kind,
-            location: Some(location.into()),
+            location: Some(location),
             detail: detail.into(),
         }
     }
@@ -88,6 +90,21 @@ impl RegistryLoadError {
 
     pub fn detail(&self) -> &str {
         &self.detail
+    }
+}
+
+fn bounded_registry_error_location(location: String) -> String {
+    let bytes = location.as_bytes();
+    let looks_absolute = location.starts_with('/')
+        || location.starts_with('\\')
+        || matches!(bytes, [drive, b':', ..] if drive.is_ascii_alphabetic());
+    if location.len() > MAX_REGISTRY_ERROR_LOCATION_BYTES
+        || location.chars().any(char::is_control)
+        || looks_absolute
+    {
+        "registry_location".to_string()
+    } else {
+        location
     }
 }
 
@@ -236,6 +253,10 @@ impl SourceByteBudget {
     pub fn total_bytes(&self) -> usize {
         self.total_bytes
     }
+
+    pub fn remaining_bytes(&self) -> usize {
+        MAX_TOTAL_SOURCE_BYTES - self.total_bytes
+    }
 }
 
 pub fn parse_definition_yaml(bytes: &[u8]) -> Result<Value, RegistryLoadError> {
@@ -254,10 +275,10 @@ pub fn parse_schema_json(bytes: &[u8]) -> Result<Value, RegistryLoadError> {
 }
 
 pub(crate) fn canonical_json_bytes(value: &Value) -> Result<Vec<u8>, RegistryLoadError> {
-    serde_json_canonicalizer::to_vec(value).map_err(|error| {
+    serde_json_canonicalizer::to_vec(value).map_err(|_| {
         RegistryLoadError::new(
             RegistryLoadErrorKind::SyntaxError,
-            format!("RFC 8785 canonicalization failed: {error}"),
+            "RFC 8785 canonicalization failed",
         )
     })
 }
@@ -265,10 +286,10 @@ pub(crate) fn canonical_json_bytes(value: &Value) -> Result<Vec<u8>, RegistryLoa
 pub(crate) fn fingerprint_serializable<T: Serialize>(
     value: &T,
 ) -> Result<DefinitionFingerprint, RegistryLoadError> {
-    let json = serde_json::to_value(value).map_err(|error| {
+    let json = serde_json::to_value(value).map_err(|_| {
         RegistryLoadError::new(
             RegistryLoadErrorKind::SyntaxError,
-            format!("typed JSON conversion failed: {error}"),
+            "typed JSON conversion failed",
         )
     })?;
     DefinitionFingerprint::from_json_value(&json)
@@ -336,11 +357,17 @@ fn invalid_exact_ref(detail: impl Into<String>) -> RegistryLoadError {
 }
 
 fn classify_parse_error(error: impl fmt::Display) -> RegistryLoadError {
-    let detail = error.to_string();
-    let kind = if detail.to_ascii_lowercase().contains("duplicate") {
-        RegistryLoadErrorKind::DuplicateKey
+    let rendered = error.to_string();
+    let (kind, detail) = if rendered.to_ascii_lowercase().contains("duplicate") {
+        (
+            RegistryLoadErrorKind::DuplicateKey,
+            "source contains a duplicate mapping key",
+        )
     } else {
-        RegistryLoadErrorKind::SyntaxError
+        (
+            RegistryLoadErrorKind::SyntaxError,
+            "source document is syntactically invalid",
+        )
     };
     RegistryLoadError::new(kind, detail)
 }
@@ -429,9 +456,7 @@ impl<'de> Visitor<'de> for NoDuplicateValueVisitor {
         let mut values = Map::new();
         while let Some((key, value)) = mapping.next_entry::<String, NoDuplicateValue>()? {
             if values.insert(key.clone(), value.0).is_some() {
-                return Err(serde::de::Error::custom(format!(
-                    "duplicate mapping key '{key}'"
-                )));
+                return Err(serde::de::Error::custom("duplicate mapping key"));
             }
         }
         Ok(Value::Object(values))

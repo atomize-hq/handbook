@@ -258,6 +258,30 @@ fn later_owned_and_wrong_record_fields_refuse_before_fingerprinting() {
             .expect_err(field);
         assert_eq!(error.kind(), RegistryLoadErrorKind::UnknownField, "{field}");
     }
+
+    let repo = tempfile::tempdir().unwrap();
+    let (entry_path, schema_ref, _) = write_schema_entry(repo.path(), "secret-field");
+    let mut record = kind_record("example.artifact-kind.secret-field", &schema_ref);
+    let secret_field = format!("SECRET_KIND_FIELD_{}", "x".repeat(500));
+    record
+        .as_object_mut()
+        .unwrap()
+        .insert(secret_field, json!(true));
+    record.as_object_mut().unwrap().insert(
+        "definition_fingerprint".into(),
+        "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa".into(),
+    );
+    let path = "definitions/secret-field.kind.yaml".to_string();
+    write(
+        &repo.path().join(&path),
+        serde_yaml_bw::to_string(&record).unwrap(),
+    );
+    let error = load_artifact_kind_registry(repo.path(), request(vec![entry_path], vec![path]))
+        .expect_err("secret unknown kind field");
+    assert_eq!(error.kind(), RegistryLoadErrorKind::UnknownField);
+    assert!(!error.detail().contains("SECRET_KIND_FIELD"));
+    assert!(!error.to_string().contains("SECRET_KIND_FIELD"));
+    assert!(error.detail().len() < 256);
 }
 
 #[test]
@@ -441,6 +465,36 @@ fn dependency_identity_shape_and_fingerprint_failures_are_typed() {
             .expect_err("mutation must refuse");
         assert_eq!(error.kind(), expected, "case {index}");
     }
+}
+
+#[test]
+fn long_missing_schema_identity_location_is_bounded_and_redacted() {
+    let repo = tempfile::tempdir().unwrap();
+    let (entry_path, schema_ref, _) = write_schema_entry(repo.path(), "bounded-location");
+    let sentinel = "SECRET-SCHEMA-REF";
+    let missing_schema_ref = format!(
+        "example.schemas.missing@1.0.0+{sentinel}.{}",
+        "x".repeat(100_000)
+    );
+    let mut record = kind_record("example.artifact-kind.bounded-location", &schema_ref);
+    record["canonical_schema_ref"] = json!(missing_schema_ref);
+    record["definition_fingerprint"] =
+        json!("sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    let kind_path = "definitions/bounded-location.kind.yaml".to_string();
+    write(
+        &repo.path().join(&kind_path),
+        serde_yaml_bw::to_string(&record).unwrap(),
+    );
+
+    let error =
+        load_artifact_kind_registry(repo.path(), request(vec![entry_path], vec![kind_path]))
+            .expect_err("missing exact schema must refuse");
+
+    assert_eq!(error.kind(), RegistryLoadErrorKind::MissingSchema);
+    assert!(!error.location().unwrap_or_default().contains(sentinel));
+    assert!(!error.to_string().contains(sentinel));
+    assert!(error.location().unwrap_or_default().len() < 256);
+    assert!(error.to_string().len() < 512);
 }
 
 #[test]
