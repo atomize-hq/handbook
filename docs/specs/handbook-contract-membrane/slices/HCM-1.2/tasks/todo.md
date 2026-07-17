@@ -51,9 +51,9 @@ unchecked. Canonical `07`/`08` own review lineage and two-commit closeout.
 
 ## Task 6 — Risk schema
 
-- [ ] RED exact shape/status/review-basis/boundary cases.
-- [ ] Add two exact assets and prove closure/package equality.
-- [ ] Verify, detect staged scope, and commit the green increment.
+- [x] RED exact shape/status/review-basis/boundary cases.
+- [x] Add two exact assets and prove closure/package equality.
+- [x] Verify, detect staged scope, and commit the green increment.
 
 ## Task 7 — Capability/validator metadata
 
