@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_id": {
+      "const": "handbook.artifact.environment-context"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "record_id": {
+      "$ref": "#/$defs/recordId"
+    },
+    "applicability_basis": {
+      "$ref": "#/$defs/nonEmptyReferenceList"
+    },
+    "operational_surfaces": {
+      "$ref": "#/$defs/shortTextList"
+    },
+    "runtime_dependencies": {
+      "$ref": "#/$defs/shortTextList"
+    },
+    "safe_configuration_references": {
+      "$ref": "#/$defs/referenceList"
+    },
+    "authoritative_references": {
+      "$ref": "#/$defs/referenceList"
+    },
+    "known_unknowns": {
+      "$ref": "#/$defs/optionalShortTextList"
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "record_id",
+    "applicability_basis",
+    "operational_surfaces",
+    "runtime_dependencies",
+    "safe_configuration_references",
+    "authoritative_references",
+    "known_unknowns"
+  ],
+  "additionalProperties": false,
+  "unevaluatedProperties": false,
+  "$defs": {
+    "shortText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\u0000]+$"
+    },
+    "longText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8192,
+      "pattern": "^[^\\u0000]+$"
+    },
+    "stableRef": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 320,
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*(?:\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*)+(?:@[0-9]+\\.[0-9]+\\.[0-9]+)?$"
+    },
+    "shortTextList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/shortText"
+      },
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true
+    },
+    "optionalShortTextList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/shortText"
+      },
+      "minItems": 0,
+      "maxItems": 64,
+      "uniqueItems": true
+    },
+    "referenceList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stableRef"
+      },
+      "minItems": 0,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "nonEmptyReferenceList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stableRef"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "recordId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255,
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*(?:\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*)+$"
+    }
+  }
+}

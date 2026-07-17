@@ -38,10 +38,10 @@ unchecked. Canonical `07`/`08` own review lineage and two-commit closeout.
 
 ## Task 4 — Project/Environment Context schemas
 
-- [ ] RED both complete shapes, bounds, structural duplicate rejection,
+- [x] RED both complete shapes, bounds, structural duplicate rejection,
   forward/reverse unique-order acceptance, and secret-surface negatives.
-- [ ] Add four exact assets and prove closure/package equality.
-- [ ] Verify, detect staged scope, and commit the green increment.
+- [x] Add four exact assets and prove closure/package equality.
+- [x] Verify, detect staged scope, and commit the green increment.
 
 ## Task 5 — Work/Decision schemas
 
