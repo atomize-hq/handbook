@@ -1,5 +1,6 @@
 #![forbid(unsafe_code)]
 
+pub mod artifact_instance;
 pub mod artifact_kind_registry;
 pub mod artifact_manifest;
 pub mod author;
@@ -17,6 +18,10 @@ pub mod semantic_capability_registry;
 pub mod stable_role_registry;
 pub mod vocabulary_registry;
 
+pub use artifact_instance::{
+    shipped_root_artifact_instance_values, ArtifactInstanceDescriptor, ArtifactInstanceRegistry,
+    RequirednessMode,
+};
 pub use artifact_kind_registry::{
     load_artifact_kind_registry, ArtifactKindCapability, ArtifactKindDefinition,
     ArtifactKindRegistry, ArtifactKindRegistryLoadRequest,

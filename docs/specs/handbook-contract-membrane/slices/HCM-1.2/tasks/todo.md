@@ -103,10 +103,10 @@ unchecked. Canonical `07`/`08` own review lineage and two-commit closeout.
 
 ## Task 14 — Artifact descriptors
 
-- [ ] RED whole-record/requiredness/dependency/root matrices.
-- [ ] Add closed types and exact three descriptors.
-- [ ] Refuse invalid refs/paths/providers/later fields/root sets.
-- [ ] Verify and commit green.
+- [x] RED whole-record/requiredness/dependency/root matrices.
+- [x] Add closed types and exact three descriptors.
+- [x] Refuse invalid refs/paths/providers/later fields/root sets.
+- [x] Verify and commit green.
 
 ## Task 15 — Profile source/layering
 
