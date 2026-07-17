@@ -1,0 +1,34 @@
+schema_id: handbook.artifact-kind-definition
+schema_version: '1.0'
+kind_id: handbook.artifact-kind.project-authority
+kind_version: 1.0.0
+compatibility: exact
+stable_role_registry:
+  ref: handbook.roles.core@1.1.0
+  fingerprint: sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029
+canonical_schema_ref: handbook.schemas.artifacts.project-authority@1.0.0
+supported_role_refs:
+- constitutional_authority
+semantic_capabilities:
+- capability_id: constitutional_root
+  contract_ref: handbook.capabilities.constitutional-root@1.0.0
+  bindings:
+    policy_root: /policy
+    policy_revision: /policy/revision
+    decision_authority: /governance/decision_authority
+    required_approvals: /governance/required_approvals
+    exception_policy: /governance/exception_policy
+    engineering_posture_dimensions: /engineering_posture/dimensions
+    red_lines: /engineering_posture/red_lines
+    review_triggers: /governance/review_triggers
+    reassessment_triggers: /governance/reassessment_triggers
+structural_validation_profile_ref: json-schema.draft-2020-12
+semantic_validation_profile_refs:
+- handbook.semantic-validation.constitutional-root@1.0.0
+renderer_definition_refs: []
+projection_definition_refs: []
+lifecycle_policy_ref: null
+review_triggers: []
+required_capabilities: []
+extensions: {}
+definition_fingerprint: sha256:276c9f5a9686f9f8648db829f83d97730245062a5ddc47b6b3eccd087b8ce42b

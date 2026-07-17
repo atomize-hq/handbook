@@ -65,10 +65,10 @@ unchecked. Canonical `07`/`08` own review lineage and two-commit closeout.
 
 ## Task 8 — Selected-root kinds
 
-- [ ] RED literal three-kind set and allowlists.
-- [ ] Add exact Project Authority/Project Context/Environment Context kinds.
-- [ ] Prove only Project Authority capability and all later fields empty/null.
-- [ ] Verify package/order/scope and commit green.
+- [x] RED literal three-kind set and allowlists.
+- [x] Add exact Project Authority/Project Context/Environment Context kinds.
+- [x] Prove only Project Authority capability and all later fields empty/null.
+- [x] Verify package/order/scope and commit green.
 
 ## Task 9 — Unselected kinds
 

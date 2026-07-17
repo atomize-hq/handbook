@@ -1,0 +1,21 @@
+schema_id: handbook.artifact-kind-definition
+schema_version: '1.0'
+kind_id: handbook.artifact-kind.environment-context
+kind_version: 1.0.0
+compatibility: exact
+stable_role_registry:
+  ref: handbook.roles.core@1.1.0
+  fingerprint: sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029
+canonical_schema_ref: handbook.schemas.artifacts.environment-context@1.0.0
+supported_role_refs:
+- environment_context
+semantic_capabilities: []
+structural_validation_profile_ref: json-schema.draft-2020-12
+semantic_validation_profile_refs: []
+renderer_definition_refs: []
+projection_definition_refs: []
+lifecycle_policy_ref: null
+review_triggers: []
+required_capabilities: []
+extensions: {}
+definition_fingerprint: sha256:5a4d224f96d5742568359f48d0fd9037a8f5bbfd2e9a250e34cb77138aa2927c
