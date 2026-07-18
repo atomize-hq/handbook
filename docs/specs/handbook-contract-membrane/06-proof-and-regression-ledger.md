@@ -169,6 +169,7 @@ Temporary scaffolding may be introduced only when a row is added here first.
 | Bridge ID | Architectural purpose | Allowed lifetime | Deletion proof |
 |---|---|---|---|
 | `BR-SUB-CLI-01` | let Substrate consume the versioned Handbook JSON protocol before the permanent published-Rust boundary is available | may enter the normal path only in HCM-6.1 after `PG-JSON-01`; remains isolated and replaceable until HCM-6.3 | `PG-PUBLISH-01` and `PG-SUB-RUST-01` pass for the replacing exact API/seam; the normal Substrate path no longer spawns/parses the Handbook CLI; bridge-specific dependencies/config/tests are removed; standalone Handbook CLI remains unaffected |
+| `BR-HCM-2-PILOT-FLOW-01` | let the one-family HCM-2.1 flow cutover consume selected canonical Project Context YAML and its in-memory fixed renderer while unconverted Charter, Environment Inventory content authority, and Feature Spec sources remain on the frozen fixed family; Environment Inventory receives only the packet's selected-YAML reference cutover | may enter only after the exact HCM-2.1 packet receives immutable clean review, parent closeout, and separate selection; it may select only exact instance `project_context`, may not read or translate legacy Project Context Markdown, and survives no later than HCM-2.4 | all shipped families consumed by flow use profile-selected canonical structured truth; the mixed fixed/selected adapter, legacy Project Context output tag exception, and bridge-specific tests are removed; HCM-2.4 proof shows no fixed family/path selector or Project Context Markdown influence remains |
 
 There is no approved user migration tool, legacy importer, dual-read mode, or compatibility profile.
 
@@ -780,6 +781,146 @@ new profile/condition CLI grammar, canonical artifact write, content-semantic
 authority, condition evidence/evaluator work, transactional reset repair,
 compiler publication, renderer/Projection work, HCM-2 work, or adjacent
 cleanup.
+
+## HCM-2.1 Project Context canonical-YAML pilot proof gate
+
+The candidate planning-only packet at [`slices/HCM-2.1/`](slices/HCM-2.1/SPEC.md)
+freezes a proposed future implementation boundary. It grants no implementation
+authority unless an immutable fresh review returns `CLEAN` over the exact
+packet subject and the parent planning closeout records that result. The
+planning session itself changes no Rust, template, fixture, test, or runtime
+byte and cannot promote a seam. A later separately selected implementation may
+promote only the shipped `project_context` content-authority pilot and must
+prove:
+
+- the selected source is exactly instance `project_context`, kind
+  `handbook.artifact-kind.project-context@1.0.0`, schema
+  `handbook.schemas.artifacts.project-context@1.0.0`, and descriptor path
+  `.handbook/project/context.yaml`; no schema/kind/profile/descriptor definition
+  byte or fingerprint changes and no fixed path or legacy enum selects that
+  source;
+- canonical content is the closed `handbook.artifact.project-context` / `1.0`
+  record with `record_id`, `summary`, `system_boundaries`, `ownership`,
+  `authoritative_references`, and `known_unknowns`; no retired rich-input field,
+  old Markdown content, repository fact, default, or inference is mapped into
+  it;
+- duplicate keys at any nesting level, multiple documents, non-object roots,
+  unknown/missing fields, wrong constants/types, bounds, stable-ref failures,
+  schema/typed-decode disagreement, aliases/tags outside the admitted JSON data
+  model, oversized input, unsafe paths, symlinks, non-regular files, typed-
+  decode/render disagreement, different-byte substitution, identical-byte inode
+  ABA, and read failures refuse before canonical truth or a fingerprint is
+  returned; Project Context inspection retains one source observation and adds
+  only the packet's exact typed-decode, render-refusal, and observation-change
+  reasons with fixed precedence;
+- accepted authoring serialization uses the packet's closed eight-key emitter,
+  exact `: ` scalar/empty-list versus `:`+LF non-empty-list framing, closed
+  double-quoted scalar escaping, and literal boundary
+  golden UTF-8/LF bytes; no general YAML serializer selects fingerprint bytes;
+  validation-only file/stdin is non-mutating and authoring atomically writes
+  only the descriptor-owned YAML path after complete parse/render, selected-
+  path, overwrite, root, lock, and mutation preflight;
+- the fixed first-party Markdown renderer consumes only the typed canonical
+  record, uses the packet's exhaustive whitespace/control/punctuation transform
+  plus exact headings/list/empty-list rules, reads no clock/environment/
+  repository/Resolution/vocabulary input, emits the literal boundary golden
+  UTF-8/LF bytes, and persists no Markdown file;
+- source fingerprint is lowercase SHA-256 over exact accepted canonical YAML
+  bytes and rendered-output fingerprint is a separate lowercase SHA-256 over
+  exact Markdown bytes; identical bytes replay identically, byte-different
+  semantic equivalents remain distinguishable at the source domain, and
+  neither fingerprint is labeled as definition, approval, evidence, freshness,
+  Resolution, lifecycle, or Projection truth;
+- `handbook author project-context` keeps its command/file/stdin/validate
+  grammar but accepts only the canonical `1.0` record, returns path/byte count/
+  both fingerprints/`text/markdown`, and never reads, writes, copies, renames,
+  imports, or uses `.handbook/project_context/PROJECT_CONTEXT.md` for overwrite
+  decisions;
+- the public Project Context author result owns its descriptor-selected path as
+  `String`; the legacy fixed Markdown path constant and all re-exports are
+  deleted without a YAML-path alias, and compiler/CLI/API goldens prove the
+  selected decision alone supplies the returned path;
+- Environment Inventory remains fixed Markdown authority but its required
+  `project_context_ref`, preflight, template, fixture, rendered line, tests, and
+  all-three smoke cut only to the selected `.handbook/project/context.yaml`;
+  missing/invalid/unsafe selected truth or null/legacy/mismatched refs refuse
+  before mutation and no other Environment Inventory contract changes;
+- setup remains selected-profile and non-authoring: missing required Project
+  Context is `author_required`, accepted canonical YAML is `preserve`, unsafe or
+  invalid truth is `invalid`, rewrite remains a no-materializer refusal, and no
+  Project Context or Markdown byte is written;
+- doctor schema `1.1.0` preserves every HCM-1.4 profile/condition/role/
+  capability/applicability/inspection/readiness/error/JSON/exit field and adds
+  only the packet's exact nullable Project Context fingerprint row; the row is
+  non-null only from the same retained structurally valid, typed-decodable,
+  rendered, final-stability-checked observation; exact typed/render/change
+  reasons make the existing artifact row and overall report INVALID with no
+  fingerprints;
+- flow enters only `BR-HCM-2-PILOT-FLOW-01`: Project Context membership/path/
+  parse/validation/rendering come from the selected descriptor and engine owner,
+  missing/invalid selected truth blocks because it is always required; owned
+  path DTOs, nullable rendered fields, `Rendered` section mode, source versus
+  rendered budget domains, unchanged `reduced-v1-m8` freshness inputs that
+  exclude both source length and rendered values, and the exact extra rendered
+  log line follow the packet's field/domain table; conflicting legacy
+  Markdown, Project Context legacy layout overrides, or pipeline-produced
+  Markdown have no effect on manifest, freshness, blockers, notes, sections,
+  fixture lineage, logs, or results;
+- every selected path stays owned through packet, budget, all path-bearing flow
+  resolver subject/next-action variants, compiler subject/next-action variants,
+  JSON/inspect/CLI projection, blocker, and refusal without leaking, interning,
+  hard-coded adaptation, or lifetime coercion; fixed sibling paths become owned
+  once at the same DTO boundary;
+- engine canonical identity, ingest-issue, baseline-validation, and manifest
+  artifact paths are owned; static sibling sources convert once and selected
+  Project Context supplies its descriptor path; freshness borrows those strings
+  only, with byte-identical `reduced-v1-m8` preimages, sort/order, fingerprint,
+  and generation proof before/after ownership adaptation;
+- the enclosing flow and compiler C04 result envelope advances exactly from
+  `reduced-v1-m8.1` to `reduced-v1-m8.2`; compiler accepts `.2` and rejects `.1`
+  while C03 remains `reduced-v1-m8` generation `1`;
+- non-Unix validate-only remains available while authoring refuses before any
+  filesystem delta, strict read maps to the existing unsupported-platform
+  reason, doctor is invalid/null, and flow blocks; native Windows runtime proof
+  is required in addition to cross-compilation;
+- CLI setup changes only its exhaustive name mapping for
+  `typed_decode_failed`, `rendered_view_refused`, and
+  `observation_changed_during_inspection`; every other setup output, command,
+  decision, and exit byte remains unchanged;
+- Charter, Environment Inventory content authority except its enumerated
+  Project Context reference, Feature Spec, setup root/reset behavior,
+  HCM-1 definitions/decisions/inspection, frozen pipeline code and external
+  consumer proof, authoring siblings, CLI grammar, and all unselected/later
+  seams remain unchanged except direct Project Context expectation cutovers
+  explicitly named by the packet;
+- focused positive/negative/no-follow/race/golden/fingerprint/legacy-
+  irrelevance tests, complete HCM-1.1-HCM-1.4 tests, Project Context and
+  Environment Inventory author, setup, doctor, flow, CLI, live-skill/install
+  smoke, workspace, formatting, Clippy, docs, Windows-target plus native Windows
+  runtime, frozen pipeline, package, handoff-validator, scope, secret,
+  whitespace, and GitNexus walls pass;
+- the literal HCM-1.2 29-member definition manifest remains exact in tree and
+  engine package by path, size, SHA-256, and byte equality;
+- classifications promote only the exact Project Context pilot subset:
+  `PG-YAML-01` may close for one family, while `PG-ARTIFACT-01` and
+  `PG-YAML-02` remain open program-wide for unconverted sibling/pipeline
+  surfaces and `PG-KIND-01` remains open for semantic validation, intake,
+  lifecycle, and Projection coverage;
+- one fresh isolated read-only built-in `default` reviewer returns `CLEAN` over
+  the exact complete implementation subject and proof wall; every valid finding
+  receives bounded remediation, full proof replay, a new immutable dispatch,
+  and a different fresh reviewer; and
+- the clean implementation/control-pack subject is committed first, followed
+  only by one separate parent-owned completed v1.2 handoff and deterministic
+  ledger closeout commit. HCM-2.2 is not started.
+
+Planning-packet approval requires the exact `SPEC.md`, plan, todo, affected
+`00`/`04`/`06` rows, planning proof, and immutable dispatch to agree on the
+same schema/path/direct-cutover/bridge/classification ceiling; Markdown links,
+unchecked future tasks, docs-only scope, handoff validators, `git diff --check`,
+and staged GitNexus detection pass; and a fresh isolated built-in `default`
+reviewer returns `CLEAN` after any parent remediation and different-fresh
+re-review.
 
 ## Control-pack orchestration-repair proof gate
 

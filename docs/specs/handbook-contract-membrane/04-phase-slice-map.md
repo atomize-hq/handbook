@@ -9,11 +9,14 @@ reviewed planning slice. A Rust implementation slice is authorized only when
 its own `SPEC.md`, `tasks/plan.md`, and `tasks/todo.md` packet is present and
 review-clean.
 
-HCM-1.1 through HCM-1.4 have landed through separately reviewed implementation
-subjects. They are completed bounded dependency evidence, not continuing
-implementation authority. HCM-1.4's remaining parent handoff/ledger work is
-mechanical closeout only. HCM-2 and every later slice remain unauthorized until
-their own packets are created, reviewed, and explicitly selected.
+HCM-1.1 through HCM-1.4 have landed and closed through separately reviewed
+implementation and parent-handoff subjects. They are completed bounded
+dependency evidence, not continuing implementation authority. HCM-2.1 has a
+planning-only packet whose authority remains contingent on an immutable clean
+planning review and parent closeout; even then, implementation begins only in a
+separately selected top-level session. HCM-2.2 and every later slice remain
+unauthorized until their own packets are created, reviewed, and explicitly
+selected.
 
 ## Sequencing rule
 
@@ -263,6 +266,42 @@ Select one lower-risk artifact family after Phase 0 review. Project Context is t
 - source and rendered-output fingerprints without a Resolution or Projection provenance claim;
 - setup, authoring, doctor, and flow integration for the pilot;
 - direct cutover of tests and fixtures.
+
+The candidate planning-only implementation packet is
+[`slices/HCM-2.1/`](slices/HCM-2.1/SPEC.md). It fixes the named Project Context
+candidate as the exact pilot and consumes the already admitted
+`handbook.schemas.artifacts.project-context@1.0.0` schema plus the shipped
+`project_context` descriptor at `.handbook/project/context.yaml` without
+changing any definition byte. Authoring accepts that canonical record directly;
+setup remains non-authoring; doctor reports exact source/rendered fingerprints;
+and flow uses a named temporary mixed-family bridge that reads Project Context
+only from the selected descriptor while fixed sibling content authority remains
+unchanged. The packet also cuts Environment Inventory's reference-only
+dependency to that selected YAML path so the installed all-three flow has no
+dangling legacy Project Context Markdown reference.
+
+The fixed first-party Markdown renderer is an in-memory, clock-free human-
+review transformation. It writes no Markdown file and claims no Context
+Resolution or capitalized Projection provenance. The old rich Project Context
+input/timestamped Markdown model receives no mapper, importer, alias, or dual-
+read compatibility path. The packet becomes future implementation authority
+only after an immutable fresh review returns `CLEAN` over its exact bytes, the
+parent planning closeout records that result, and a separate explicit session
+selects it; this planning subject changes no Rust, runtime, template, test, or
+fixture byte and starts no HCM-2.2 work.
+
+The packet freezes one retained inspection observation for doctor, a closed
+YAML emitter and exhaustive Markdown transform with literal boundary goldens,
+exact owned-path/rendered-fingerprint/budget/log flow DTO semantics, and a typed
+non-Unix fail-before-mutation boundary with required native Windows proof. The
+owned selected path is closed through flow and compiler refusal/blocker carriers,
+and the changed C04 public result envelope advances exactly to
+`reduced-v1-m8.2` while C03 stays `reduced-v1-m8` generation `1`.
+Engine identity/ingest/baseline/manifest paths become owned with borrowing-only
+C03 encoder adaptation and byte-identical preimage proof. CLI setup adds only
+the three new inspection-reason names required by the public enum closure.
+The Project Context author result also owns the descriptor-selected path; the
+legacy fixed Markdown path constant and re-exports are removed without an alias.
 
 ### `HCM-2.2` — Constitutional-root artifact
 
