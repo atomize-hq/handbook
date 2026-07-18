@@ -1,0 +1,1075 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.2",
+  "handoff_id": "20260718T133219Z--HCM-1-4--orchestration--implementation-packet-approved",
+  "created_at_utc": "2026-07-18T13:32:19Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-1",
+  "slice_id": "HCM-1.4",
+  "packet_id": null,
+  "orchestration_id": "20260717T192217Z--HCM-1-4--orchestration",
+  "source_handoff_ids": [
+    "20260717T183202Z--HCM-1-3--orchestration--artifact-registry-landed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-18T13:32:19Z",
+    "evidence_ref": "Eleven fresh isolated built-in default review dispatches were attempted. Reviews 1-7, 9, and 10 returned Required findings and each complete findings round received parent remediation plus a different fresh re-review. Review 8 returned no verdict after bounded waits and was interrupted as non-authoritative. Review 11 returned CLEAN."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "planning-review-1",
+      "dispatch_id": "20260717T192357Z--HCM-1-4--fresh-planning-review-1",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T192357Z--HCM-1-4--fresh-planning-review-1.json",
+      "dispatch_fingerprint": "sha256:3208d5467feff13a8a8122c2cc14090dc66259b4d43a7ed673363ec5d13c683b",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_1",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:6100edcd8491c3770cf870de3eb62d6692bd897b9bd6bea777712ae463604e5d",
+      "result_subject_fingerprint": "sha256:6100edcd8491c3770cf870de3eb62d6692bd897b9bd6bea777712ae463604e5d",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-1.4-PR1-R001",
+        "HCM-1.4-PR1-R002",
+        "HCM-1.4-PR1-R003",
+        "HCM-1.4-PR1-R004",
+        "HCM-1.4-PR1-R005",
+        "HCM-1.4-PR1-R006"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T192357Z--HCM-1-4--fresh-planning-review-1.json"
+      ]
+    },
+    {
+      "run_id": "planning-review-2",
+      "dispatch_id": "20260717T194705Z--HCM-1-4--fresh-planning-review-2",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T194705Z--HCM-1-4--fresh-planning-review-2.json",
+      "dispatch_fingerprint": "sha256:7ec52e9f83422e033b97a062b15e96c909e7d07134539d09cd3ea1ad26ba186d",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_2",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:b7c93398ed497c3910e402ce4070a3e5a990cfba9eb15e9fe630af4141db4fbd",
+      "result_subject_fingerprint": "sha256:b7c93398ed497c3910e402ce4070a3e5a990cfba9eb15e9fe630af4141db4fbd",
+      "review_round": 2,
+      "predecessor_run_id": "planning-review-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-1.4-PR2-R001",
+        "HCM-1.4-PR2-R002",
+        "HCM-1.4-PR2-R003",
+        "HCM-1.4-PR2-R004"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T194705Z--HCM-1-4--fresh-planning-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T194516Z--planning-remediation-1-proof-wall.md"
+      ]
+    },
+    {
+      "run_id": "planning-review-3",
+      "dispatch_id": "20260717T200810Z--HCM-1-4--fresh-planning-review-3",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T200810Z--HCM-1-4--fresh-planning-review-3.json",
+      "dispatch_fingerprint": "sha256:144c80b8e9bd389fcbd11c6699ce83f0e3b38eec3a5029d36be13991c583272f",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_3",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:6b37609552f50d14da062fa8782057d37b6b3679ceeb8c10135db7fd51375f79",
+      "result_subject_fingerprint": "sha256:6b37609552f50d14da062fa8782057d37b6b3679ceeb8c10135db7fd51375f79",
+      "review_round": 3,
+      "predecessor_run_id": "planning-review-2",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-1.4-PR3-R001",
+        "HCM-1.4-PR3-R002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T200810Z--HCM-1-4--fresh-planning-review-3.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T200637Z--planning-remediation-2-proof-wall.md"
+      ]
+    },
+    {
+      "run_id": "planning-review-4",
+      "dispatch_id": "20260717T202552Z--HCM-1-4--fresh-planning-review-4",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T202552Z--HCM-1-4--fresh-planning-review-4.json",
+      "dispatch_fingerprint": "sha256:52afbf91b17aa1750537ea63d26e52c301e5794759de692f956a5cbaa517f09c",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_4",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:d85e52b6263a3e3d38aafe80773ef2e1a908579c71db8cf8e9c8f0e5468f65b7",
+      "result_subject_fingerprint": "sha256:d85e52b6263a3e3d38aafe80773ef2e1a908579c71db8cf8e9c8f0e5468f65b7",
+      "review_round": 4,
+      "predecessor_run_id": "planning-review-3",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-1.4-PR4-R001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T202552Z--HCM-1-4--fresh-planning-review-4.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T202432Z--planning-remediation-3-proof-wall.md"
+      ]
+    },
+    {
+      "run_id": "planning-review-5",
+      "dispatch_id": "20260717T204012Z--HCM-1-4--fresh-planning-review-5",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T204012Z--HCM-1-4--fresh-planning-review-5.json",
+      "dispatch_fingerprint": "sha256:5104fa8371c3135a20f86ee841f44abdc2d3c9a46729815ec7543c89549ed0ed",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_5",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:e2d0c60e12b0c5f2ba099b95833ce7e0f381bdb6a247d3a6992cfccc153782ad",
+      "result_subject_fingerprint": "sha256:e2d0c60e12b0c5f2ba099b95833ce7e0f381bdb6a247d3a6992cfccc153782ad",
+      "review_round": 5,
+      "predecessor_run_id": "planning-review-4",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-1.4-PR5-R001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T204012Z--HCM-1-4--fresh-planning-review-5.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T203917Z--planning-remediation-4-proof-wall.md"
+      ]
+    },
+    {
+      "run_id": "planning-review-6",
+      "dispatch_id": "20260717T205757Z--HCM-1-4--fresh-planning-review-6",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T205757Z--HCM-1-4--fresh-planning-review-6.json",
+      "dispatch_fingerprint": "sha256:48e4597efc9b966f95dfba00a867ca96a8e6fd1862fed695662912b6f020b086",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_6",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:44b1c445a64e157844cceece48efbcdb23cf88e57783707e4210de0ffdb7641f",
+      "result_subject_fingerprint": "sha256:44b1c445a64e157844cceece48efbcdb23cf88e57783707e4210de0ffdb7641f",
+      "review_round": 6,
+      "predecessor_run_id": "planning-review-5",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-1.4-PR6-R001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T205757Z--HCM-1-4--fresh-planning-review-6.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T205615Z--planning-remediation-5-proof-wall.md"
+      ]
+    },
+    {
+      "run_id": "planning-review-7",
+      "dispatch_id": "20260717T211659Z--HCM-1-4--fresh-planning-review-7",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T211659Z--HCM-1-4--fresh-planning-review-7.json",
+      "dispatch_fingerprint": "sha256:bb85d64a805e28d609e18cadd64f00235cc8712df7d2b1868ab393d0dc93d96c",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_7",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:d68328abf2435e4e35d5bd87d8635227ee4ebafb6f0764c7e1b1b680e6bfebd5",
+      "result_subject_fingerprint": "sha256:d68328abf2435e4e35d5bd87d8635227ee4ebafb6f0764c7e1b1b680e6bfebd5",
+      "review_round": 7,
+      "predecessor_run_id": "planning-review-6",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-1.4-PR7-R001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T211659Z--HCM-1-4--fresh-planning-review-7.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T211556Z--planning-remediation-6-proof-wall.md"
+      ]
+    },
+    {
+      "run_id": "planning-review-8",
+      "dispatch_id": "20260717T213054Z--HCM-1-4--fresh-planning-review-8",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T213054Z--HCM-1-4--fresh-planning-review-8.json",
+      "dispatch_fingerprint": "sha256:f22ea8f92341f670c9413a4e06cb7fc21ecf4785d732749482dfae58de84879a",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_8",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:8f8e48ecc32dc7cfc8e8d1df8cf5a732ae9e15ed31cde40ac9eb96237bff4d29",
+      "result_subject_fingerprint": "sha256:8f8e48ecc32dc7cfc8e8d1df8cf5a732ae9e15ed31cde40ac9eb96237bff4d29",
+      "review_round": 8,
+      "predecessor_run_id": "planning-review-7",
+      "remediation_for_run_ids": [],
+      "final_status": "interrupted",
+      "verdict": "blocked",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T213054Z--HCM-1-4--fresh-planning-review-8.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T220841Z--planning-review-8-interrupted-stop.md"
+      ]
+    },
+    {
+      "run_id": "planning-review-9",
+      "dispatch_id": "20260717T220933Z--HCM-1-4--fresh-planning-review-9",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T220933Z--HCM-1-4--fresh-planning-review-9.json",
+      "dispatch_fingerprint": "sha256:70f59f88d9272465b56da7a8dfed82c8fa414a751db809a240c30c73d93ff161",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_9",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:34ee576a071d889faebff6ffe79c51c38ec7c004eecf0579509712108fca7693",
+      "result_subject_fingerprint": "sha256:34ee576a071d889faebff6ffe79c51c38ec7c004eecf0579509712108fca7693",
+      "review_round": 9,
+      "predecessor_run_id": "planning-review-8",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-1.4-PR9-R001",
+        "HCM-1.4-PR9-R002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T220933Z--HCM-1-4--fresh-planning-review-9.json"
+      ]
+    },
+    {
+      "run_id": "planning-review-10",
+      "dispatch_id": "20260717T222942Z--HCM-1-4--fresh-planning-review-10",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T222942Z--HCM-1-4--fresh-planning-review-10.json",
+      "dispatch_fingerprint": "sha256:3cc48e21eaa0583a8d86eac2fe5cd35bb93b4ae0d33a786cbf0089e9f6663589",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_10",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:56a70b115aec4e6e6952e3eee1b06e8f44d9683bdfa937dba3b91a17435a93ce",
+      "result_subject_fingerprint": "sha256:56a70b115aec4e6e6952e3eee1b06e8f44d9683bdfa937dba3b91a17435a93ce",
+      "review_round": 10,
+      "predecessor_run_id": "planning-review-9",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-1.4-PR10-R001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T222942Z--HCM-1-4--fresh-planning-review-10.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T222826Z--planning-remediation-8-proof-wall.md"
+      ]
+    },
+    {
+      "run_id": "planning-review-11",
+      "dispatch_id": "20260717T224303Z--HCM-1-4--fresh-planning-review-11",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T224303Z--HCM-1-4--fresh-planning-review-11.json",
+      "dispatch_fingerprint": "sha256:8a8e1088b68773472390ea5d03ff428a535f6e0a104a6e3a63b4328419676ab7",
+      "role": "review",
+      "agent_id": "/root/hcm_1_4_planning_review_11",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:b79567aef4eb8b6d91df76bdb2a07906a0d5aa66960679928dcc60b7578b739e",
+      "result_subject_fingerprint": "sha256:b79567aef4eb8b6d91df76bdb2a07906a0d5aa66960679928dcc60b7578b739e",
+      "review_round": 11,
+      "predecessor_run_id": "planning-review-10",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T224303Z--HCM-1-4--fresh-planning-review-11.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T224146Z--planning-remediation-9-proof-wall.md"
+      ]
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "parent-remediation-planning-review-1",
+      "finding_run_id": "planning-review-1",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-review-2",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:b7c93398ed497c3910e402ce4070a3e5a990cfba9eb15e9fe630af4141db4fbd",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T192357Z--HCM-1-4--fresh-planning-review-1.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T194516Z--planning-remediation-1-proof-wall.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T194705Z--HCM-1-4--fresh-planning-review-2.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-planning-review-2",
+      "finding_run_id": "planning-review-2",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-review-3",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:6b37609552f50d14da062fa8782057d37b6b3679ceeb8c10135db7fd51375f79",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T194705Z--HCM-1-4--fresh-planning-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T200637Z--planning-remediation-2-proof-wall.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T200810Z--HCM-1-4--fresh-planning-review-3.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-planning-review-3",
+      "finding_run_id": "planning-review-3",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-review-4",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:d85e52b6263a3e3d38aafe80773ef2e1a908579c71db8cf8e9c8f0e5468f65b7",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T200810Z--HCM-1-4--fresh-planning-review-3.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T202432Z--planning-remediation-3-proof-wall.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T202552Z--HCM-1-4--fresh-planning-review-4.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-planning-review-4",
+      "finding_run_id": "planning-review-4",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-review-5",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:e2d0c60e12b0c5f2ba099b95833ce7e0f381bdb6a247d3a6992cfccc153782ad",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T202552Z--HCM-1-4--fresh-planning-review-4.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T203917Z--planning-remediation-4-proof-wall.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T204012Z--HCM-1-4--fresh-planning-review-5.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-planning-review-5",
+      "finding_run_id": "planning-review-5",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-review-6",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:44b1c445a64e157844cceece48efbcdb23cf88e57783707e4210de0ffdb7641f",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T204012Z--HCM-1-4--fresh-planning-review-5.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T205615Z--planning-remediation-5-proof-wall.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T205757Z--HCM-1-4--fresh-planning-review-6.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-planning-review-6",
+      "finding_run_id": "planning-review-6",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-review-7",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:d68328abf2435e4e35d5bd87d8635227ee4ebafb6f0764c7e1b1b680e6bfebd5",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T205757Z--HCM-1-4--fresh-planning-review-6.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T211556Z--planning-remediation-6-proof-wall.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T211659Z--HCM-1-4--fresh-planning-review-7.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-planning-review-7",
+      "finding_run_id": "planning-review-7",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-review-9",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:34ee576a071d889faebff6ffe79c51c38ec7c004eecf0579509712108fca7693",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T211659Z--HCM-1-4--fresh-planning-review-7.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T212948Z--planning-remediation-7-proof-wall.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T213054Z--HCM-1-4--fresh-planning-review-8.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T220841Z--planning-review-8-interrupted-stop.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T220933Z--HCM-1-4--fresh-planning-review-9.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-planning-review-9",
+      "finding_run_id": "planning-review-9",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-review-10",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:56a70b115aec4e6e6952e3eee1b06e8f44d9683bdfa937dba3b91a17435a93ce",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T220933Z--HCM-1-4--fresh-planning-review-9.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T222826Z--planning-remediation-8-proof-wall.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T222942Z--HCM-1-4--fresh-planning-review-10.json"
+      ]
+    },
+    {
+      "remediation_id": "parent-remediation-planning-review-10",
+      "finding_run_id": "planning-review-10",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-review-11",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:b79567aef4eb8b6d91df76bdb2a07906a0d5aa66960679928dcc60b7578b739e",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T222942Z--HCM-1-4--fresh-planning-review-10.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T224146Z--planning-remediation-9-proof-wall.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T224303Z--HCM-1-4--fresh-planning-review-11.json"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "1310e92096f71da1c90ac17b35c66c57519f2e5b",
+    "dirty": false,
+    "changed_paths": []
+  },
+  "reviewed_state": {
+    "baseline_head": "1310e92096f71da1c90ac17b35c66c57519f2e5b",
+    "subject_fingerprint": "sha256:b79567aef4eb8b6d91df76bdb2a07906a0d5aa66960679928dcc60b7578b739e",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T224303Z--HCM-1-4--fresh-planning-review-11.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T224146Z--planning-remediation-9-proof-wall.md",
+      "git:1310e92096f71da1c90ac17b35c66c57519f2e5b"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T224303Z--HCM-1-4--fresh-planning-review-11.json"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-1.4_planning_packet_approved",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "review_clean_planning_closeout"
+  },
+  "objective": "Create and independently approve the complete planning-only HCM-1.4 profile-aware setup/doctor implementation packet; commit the exact reviewed packet and review/proof evidence first; then close through a separate v1.2 parent record and deterministic ledger without beginning Rust or HCM-2.",
+  "work_completed": [
+    "Validated the exact branch, entry HEAD, clean worktree, HCM-1.1/HCM-1.2/HCM-1.3 dependency ancestry, selected HCM-1.3 closeout, reviewed subject fingerprint, ledger parity, and all three validator modes before editing.",
+    "Read live profile/registry/setup/doctor/route-state/author/CLI source and tests, refreshed GitNexus at entry, and recorded required impact including HIGH run_setup and HIGH acquire_authoring_lock surfaces before freezing the packet.",
+    "Created the authoritative HCM-1.4 SPEC, dependency-ordered plan, entirely unchecked future implementation todo, and complete immutable planning/review/remediation lineage without changing Rust, Cargo, runtime, product, or definition assets.",
+    "Closed nineteen Required findings across Reviews 1-7, 9, and 10; recorded Review 8 as an interrupted non-authoritative attempt; and obtained final CLEAN from Review 11 over the exact 27-file subject.",
+    "Committed the exact final reviewed planning subject plus immutable review/proof evidence as 1310e92096f71da1c90ac17b35c66c57519f2e5b. No HCM-1.4 implementation or HCM-2 work began."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md",
+      "status": "completed",
+      "summary": "Review-clean profile-aware setup and doctor implementation specification."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/tasks/plan.md",
+      "status": "completed",
+      "summary": "Dependency-ordered test-first future implementation and proof plan."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/tasks/todo.md",
+      "status": "completed",
+      "summary": "Entirely unchecked future implementation and closeout checklist."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/",
+      "status": "completed",
+      "summary": "Immutable planning, nine remediation, and one interrupted-review proof lineage."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T224303Z--HCM-1-4--fresh-planning-review-11.json",
+      "status": "completed",
+      "summary": "Final fresh CLEAN review dispatch and exact 27-file subject manifest."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260718T133219Z--HCM-1-4--orchestration--implementation-packet-approved.json",
+      "status": "completed",
+      "summary": "Parent v1.2 planning closeout with exact future implementation selector."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-1.4-D1",
+      "summary": "Approve the exact HCM-1.4 packet as planning authority only.",
+      "authority_effect": "A future separately selected top-level session may implement the packet; approval itself starts no Rust, runtime, or product work.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-1.4-D2",
+      "summary": "Use one engine-owned resolved profile decision and structural-inspection closure for both setup and doctor.",
+      "authority_effect": "Setup and doctor must consume the same selected-profile registry truth with no fixed artifact fallback, canonical content write, compatibility profile, or condition evidence invention.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-1.4-D3",
+      "summary": "Freeze unresolved condition truth, four-field capability identity reporting, closed setup/doctor errors, bounded structural inspection, no-write setup behavior, honest legacy reset behavior, and the exact Windows portability prerequisite.",
+      "authority_effect": "The future implementation has exact APIs, error/status precedence, proof, platform, and scope boundaries without claiming evaluator, content-authority, compiler-publication, or HCM-2 semantics.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-1.4-D4",
+      "summary": "Record the exact future implementation selector without activating it.",
+      "authority_effect": "A future user-selected top-level session may use PHASE_ID HCM-1, SLICE_ID HCM-1.4, ACTIVE_PACKET none, HANDOFF_SELECTOR 20260718T133219Z--HCM-1-4--orchestration--implementation-packet-approved, and packet path docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md. This closeout does not execute those parameters.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md",
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-1.4-PR1-R001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: stale program conclusion. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T192357Z--HCM-1-4--fresh-planning-review-1.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T194516Z--planning-remediation-1-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR1-R002",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: unowned evidence/evaluator authority. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T192357Z--HCM-1-4--fresh-planning-review-1.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T194516Z--planning-remediation-1-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR1-R003",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: reset atomicity versus exact scope. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T192357Z--HCM-1-4--fresh-planning-review-1.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T194516Z--planning-remediation-1-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR1-R004",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: compiler public contract underspecified. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T192357Z--HCM-1-4--fresh-planning-review-1.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T194516Z--planning-remediation-1-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR1-R005",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: impossible compiler package proof. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T192357Z--HCM-1-4--fresh-planning-review-1.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T194516Z--planning-remediation-1-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR1-R006",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: Windows compile-only proof. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T192357Z--HCM-1-4--fresh-planning-review-1.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T194516Z--planning-remediation-1-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR2-R001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: author test scaffolds depend on old setup. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T194705Z--HCM-1-4--fresh-planning-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T200637Z--planning-remediation-2-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR2-R002",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: setup error/precedence map incomplete. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T194705Z--HCM-1-4--fresh-planning-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T200637Z--planning-remediation-2-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR2-R003",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: SetupMode serialization unspecified. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T194705Z--HCM-1-4--fresh-planning-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T200637Z--planning-remediation-2-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR2-R004",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: inspection status/reason pairs incomplete. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T194705Z--HCM-1-4--fresh-planning-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T200637Z--planning-remediation-2-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR3-R001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: unreachable invalid-root replacement. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T200810Z--HCM-1-4--fresh-planning-review-3.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T202432Z--planning-remediation-3-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR3-R002",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: SetupError optional fields not total. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T200810Z--HCM-1-4--fresh-planning-review-3.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T202432Z--planning-remediation-3-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR4-R001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: publicly constructible invalid SetupError rows. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T202552Z--HCM-1-4--fresh-planning-review-4.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T203917Z--planning-remediation-4-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR5-R001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: combined privacy doctest was not independently discriminating. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T204012Z--HCM-1-4--fresh-planning-review-5.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T205615Z--planning-remediation-5-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR6-R001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: unavailable required evidence/input must be unresolved. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T205757Z--HCM-1-4--fresh-planning-review-6.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T211556Z--planning-remediation-6-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR7-R001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: DoctorError kind/reason combinations were not closed. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T211659Z--HCM-1-4--fresh-planning-review-7.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T212948Z--planning-remediation-7-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR9-R001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: mandatory Windows proof was impossible in frozen scope. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T220933Z--HCM-1-4--fresh-planning-review-9.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T222826Z--planning-remediation-8-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR9-R002",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: report overclaimed a complete capability closure. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T220933Z--HCM-1-4--fresh-planning-review-9.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T222826Z--planning-remediation-8-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-1.4-PR10-R001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "summary": "Resolved: one-argument helper prescription broke Unix unlock. Parent remediation was re-reviewed by a different fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T222942Z--HCM-1-4--fresh-planning-review-10.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/20260717T224146Z--planning-remediation-9-proof-wall.md"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "Final Review 11 exact 27-entry manifest replay",
+      "status": "passed",
+      "evidence_ref": "CLEAN agent /root/hcm_1_4_planning_review_11; docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T224303Z--HCM-1-4--fresh-planning-review-11.json; sha256:b79567aef4eb8b6d91df76bdb2a07906a0d5aa66960679928dcc60b7578b739e"
+    },
+    {
+      "command": "Final clean subject replay at primary reviewed commit",
+      "status": "passed",
+      "evidence_ref": "sha256:b79567aef4eb8b6d91df76bdb2a07906a0d5aa66960679928dcc60b7578b739e; git:1310e92096f71da1c90ac17b35c66c57519f2e5b"
+    },
+    {
+      "command": "validate_handoffs.py plus both self-test modes before primary commit",
+      "status": "passed",
+      "evidence_ref": "39 records, 159 current dispatches, eight admitted legacy dispatches; historical admission and orchestration suites passed."
+    },
+    {
+      "command": "GitNexus detect_changes staged primary subject",
+      "status": "passed",
+      "evidence_ref": "28 documentation/control files, 13 changed Markdown symbols, zero affected processes, low risk; final index refresh separately failed with Napi::Error and was not claimed as success."
+    },
+    {
+      "command": "git diff --cached --check, exact 28-file staged set, staged manifest replay, docs-only scope, unchecked todo, and credential-pattern scan",
+      "status": "passed",
+      "evidence_ref": "All 27 reviewed subject blobs matched the CLEAN manifest; final review dispatch was the sole additional evidence file; no Rust/Cargo/product path, checked implementation item, or credential-like material."
+    },
+    {
+      "command": "Review feasibility and regression replay",
+      "status": "passed",
+      "evidence_ref": "Reviews reproduced focused profile/registry/setup/doctor and 47/22 author baselines, literal 29-member engine package proof, compiler Windows RED and temporary-copy exact-hunk GREEN; actual Windows runtime remains a mandatory future implementation stop gate."
+    }
+  ],
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Initial program conclusion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Authority split",
+        "Crate ownership",
+        "Non-negotiable invariants"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Instance profile",
+        "Artifact-kind and instance registries",
+        "Approved HCM-0.6 shipped defaults"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Status",
+        "HCM-1.4 \u2014 Profile-aware setup and doctor decisions",
+        "Phase 1 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Resolved instance profile",
+        "Artifact instance descriptor contract",
+        "Managed-operational-surface condition policy",
+        "HCM-0.6 exact shipped kind and root-profile data"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Regression rules",
+        "HCM-1.4 profile-aware setup and doctor decision proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.3/SPEC.md",
+      "sections": [
+        "Frozen engine public API",
+        "Exit gate",
+        "Explicit non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260717T183202Z--HCM-1-3--orchestration--artifact-registry-landed.json",
+      "sections": [
+        "reviewed dependency, implementation, and proof evidence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Phase 5 \u2014 Fresh review / remediation loop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "supersedes": [],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Initial program conclusion"
+      ],
+      "reason": "Recorded HCM-1.1 through HCM-1.3 as landed dependencies and HCM-1.4 packet approval as the next authorization boundary without activation.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Status",
+        "HCM-1.4 \u2014 Profile-aware setup and doctor decisions",
+        "Phase 1 exit gate"
+      ],
+      "reason": "Froze the exact HCM-1.4 implementation and proof boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-1.4 profile-aware setup and doctor decision proof gate"
+      ],
+      "reason": "Added the complete implementation proof and regression gate.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md",
+      "sections": [
+        "Complete document"
+      ],
+      "reason": "Created the review-clean implementation specification.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/tasks/plan.md",
+      "sections": [
+        "Complete document"
+      ],
+      "reason": "Created the dependency-ordered test-first future implementation plan.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/tasks/todo.md",
+      "sections": [
+        "Complete document"
+      ],
+      "reason": "Created the entirely unchecked future execution checklist.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/proof/",
+      "sections": [
+        "Complete planning proof lineage"
+      ],
+      "reason": "Recorded planning proof, nine bounded remediation rounds, and the non-authoritative interrupted Review 8 stop.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic resume is active. The exact future implementation packet is docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md; a separately user-selected top-level session may use PHASE_ID HCM-1, SLICE_ID HCM-1.4, ACTIVE_PACKET none, and HANDOFF_SELECTOR 20260718T133219Z--HCM-1-4--orchestration--implementation-packet-approved.",
+    "condition": "Only a new explicit user instruction selecting that exact top-level parameter set may begin HCM-1.4 implementation after this parent record and deterministic ledger validate.",
+    "must_read": [],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not start HCM-1.4 implementation automatically from this planning closeout.",
+      "Do not treat the HCM-1.3 dependency closeout, this packet approval, or the future selector as condition evidence/evaluation, canonical YAML authority, setup/doctor adoption, authoring migration, compiler publication, or HCM-2 authority.",
+      "Do not create or begin HCM-2 in this session.",
+      "Do not reopen reviewed planning bytes without new evidence and explicit planning authority."
+    ],
+    "acceptance_criteria": [
+      "This parent record and the deterministic ledger validate in all three required modes.",
+      "The separate closeout commit contains only this new record and ledger.jsonl.",
+      "The terminal worktree is clean and no HCM-1.4 implementation or HCM-2 work has begun."
+    ],
+    "stop_conditions": []
+  },
+  "chat_summary": "HCM-1.4 now has a complete review-clean planning-only implementation packet. Nine bounded parent remediation rounds, one interrupted non-authoritative review attempt, and Review 11 ended CLEAN. The reviewed subject is committed as 1310e92096f71da1c90ac17b35c66c57519f2e5b. This closeout records the exact future selector but starts no Rust and does not authorize HCM-2."
+}
