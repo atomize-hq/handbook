@@ -1,0 +1,263 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.2",
+  "handoff_id": "20260718T134551Z--HCM-1-4--orchestration--windows-runtime-blocked",
+  "created_at_utc": "2026-07-18T13:45:51Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-1",
+  "slice_id": "HCM-1.4",
+  "packet_id": null,
+  "orchestration_id": "20260718T134551Z--HCM-1-4--orchestration",
+  "source_handoff_ids": [
+    "20260718T133219Z--HCM-1-4--orchestration--implementation-packet-approved"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "blocked",
+  "stop_reason": "external_blocker",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-18T13:45:51Z",
+    "evidence_ref": "The current Codex session exposed built-in default-agent spawn, wait/status, message/follow-up, interrupt, and registry capabilities. No proof-relevant child was dispatched because the mandatory external platform gate blocked the run during pre-edit preflight."
+  },
+  "delegated_runs": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "1310e92096f71da1c90ac17b35c66c57519f2e5b",
+    "subject_fingerprint": "sha256:b79567aef4eb8b6d91df76bdb2a07906a0d5aa66960679928dcc60b7578b739e",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260718T133219Z--HCM-1-4--orchestration--implementation-packet-approved.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T224303Z--HCM-1-4--fresh-planning-review-11.json"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260717T224303Z--HCM-1-4--fresh-planning-review-11.json"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "normal",
+    "temporal_horizon": "current_session",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "slice_closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md"
+  },
+  "objective": "Execute the approved HCM-1.4 profile-aware setup and doctor decision packet from preflight through implementation, proof, fresh review, two-commit closeout, and stop without beginning HCM-2.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-1.4 — Profile-aware setup and doctor decisions",
+        "Phase 1 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-1.4 profile-aware setup and doctor decision proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md",
+      "sections": [
+        "Regression matrix",
+        "Exit gate",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/tasks/plan.md",
+      "sections": [
+        "Entry gate",
+        "Packet 5 — Regression, proof, and closeout",
+        "Permanent stop checks"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Phase 0 — Preflight",
+        "Mandatory stop conditions",
+        "Phase 8 — True-stop handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "True top-level stop reasons",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "47c31c7fa9ced7fe9687dcd4f0b1aefc663f04fe",
+    "dirty": false,
+    "changed_paths": []
+  },
+  "work_completed": [
+    "Resolved the exact selected handoff from ledger.jsonl and confirmed record/index parity.",
+    "Replayed the final twenty-seven-entry planning manifest and aggregate fingerprint exactly as sha256:b79567aef4eb8b6d91df76bdb2a07906a0d5aa66960679928dcc60b7578b739e.",
+    "Confirmed HCM-1.1, HCM-1.2, HCM-1.3, and the reviewed HCM-1.4 planning commit are ancestors of the clean current HEAD.",
+    "Read the repository onboarding runner, selected packet, required skills, exact authority sections, proof gate, and true-stop protocol.",
+    "Ran all three handoff validator modes successfully and refreshed the GitNexus index with npx gitnexus analyze --index-only.",
+    "Inspected the live host, Rust target set, repository CI workflow, repository Actions runners, and organization Actions runner access before any code edit."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md",
+      "status": "not_started",
+      "summary": "Implementation remains byte-unchanged because the packet's mandatory actual-Windows runtime proof is unavailable at preflight."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-1.4-RUN-D1",
+      "summary": "Stop before behavior-changing edits because the mandatory actual Windows MSVC runtime proof is unavailable.",
+      "authority_effect": "The approved packet explicitly states that macOS/Linux execution or Windows cross-compilation cannot substitute for the two named Windows runtime tests. Beginning implementation without an accessible Windows host would knowingly create an uncloseable slice and violate the frozen stop condition.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-1.4-PREFLIGHT-F001",
+      "classification": "external_blocker",
+      "severity": "critical",
+      "summary": "The current host is macOS arm64; the repository CI matrix contains only Ubuntu and macOS; the repository has zero configured Actions runners; no organization Windows runner was accessible. Therefore the two mandatory runtime tests cannot execute on an actual Windows MSVC host in this run.",
+      "evidence_refs": [
+        ".github/workflows/ci.yml",
+        "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md#regression-matrix"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-1.4-B001",
+      "classification": "external",
+      "summary": "No accessible actual Windows MSVC execution host or runner exists for the packet's two mandatory named runtime tests.",
+      "resume_condition": "Provide access to an actual Windows MSVC host or CI runner capable of checking out the exact HCM-1.4 implementation subject and executing both named cargo test commands from the SPEC with captured host OS/architecture, Rust target, command, exit status, and test name.",
+      "owner": "operator/platform"
+    }
+  ],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "Exact selector record/index parity plus final planning subject-manifest replay",
+      "status": "passed",
+      "evidence_ref": "Selected record path matched ledger.jsonl and the aggregate replay matched sha256:b79567aef4eb8b6d91df76bdb2a07906a0d5aa66960679928dcc60b7578b739e."
+    },
+    {
+      "command": "git merge-base --is-ancestor for reviewed HCM-1.1, HCM-1.2, HCM-1.3, and HCM-1.4 planning commits",
+      "status": "passed",
+      "evidence_ref": "0bc51a9cc282581143a5b21f50162456aa32154c, 832716a66241bdcf86e2a82ffb3ae72680a7c2cd, 8194f9f4534b2d27e1077ffab2c89d12da5ff456, and 1310e92096f71da1c90ac17b35c66c57519f2e5b are ancestors of 47c31c7fa9ced7fe9687dcd4f0b1aefc663f04fe."
+    },
+    {
+      "command": "python3 validate_handoffs.py plus both required self-test modes",
+      "status": "passed",
+      "evidence_ref": "Normal validation, historical v1 admission self-test, and orchestration-contract self-test all passed before closeout."
+    },
+    {
+      "command": "npx gitnexus analyze --index-only",
+      "status": "passed",
+      "evidence_ref": "Incremental index completed successfully with 13,114 nodes, 23,832 edges, 346 clusters, and 300 flows."
+    },
+    {
+      "command": "uname -a; sw_vers; rustup target list --installed",
+      "status": "blocked",
+      "evidence_ref": "Host is arm64 macOS 15.7.7. Windows MSVC is installed only as a Rust cross-compilation target, which the SPEC says cannot substitute for actual Windows runtime proof."
+    },
+    {
+      "command": "Inspect .github/workflows/ci.yml and query repository/organization Actions runners",
+      "status": "blocked",
+      "evidence_ref": "CI jobs use ubuntu-22.04 and macos-14 only; the repository Actions runner inventory returned total_count 0; no accessible organization Windows runner was returned."
+    },
+    {
+      "command": "cargo test -p handbook-engine --test hcm_1_4_profile_inspection --target x86_64-pc-windows-msvc -- non_unix_repository_inspection_refuses_before_read",
+      "status": "not_run",
+      "evidence_ref": "Requires an actual Windows MSVC host after implementation; cross-running the Windows target on macOS is not valid proof."
+    },
+    {
+      "command": "cargo test -p handbook-compiler --test setup --target x86_64-pc-windows-msvc -- windows_profile_inspection_refusal_prevents_setup_mutation",
+      "status": "not_run",
+      "evidence_ref": "Requires an actual Windows MSVC host after implementation; cross-running the Windows target on macOS is not valid proof."
+    }
+  ],
+  "pack_updates": [],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Resume the exact HCM-1.4 implementation packet from pre-edit preflight, execute it test-first, prove it on an actual Windows MSVC host, obtain fresh clean review, and complete the two-commit closeout without starting HCM-2.",
+    "condition": "An actual Windows MSVC host or runner is accessible to the top-level orchestrator for both mandatory named runtime tests, with an exact mechanism to test the final uncommitted or review-bound HCM-1.4 subject without changing the packet's forbidden CI/Cargo scope.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.4/SPEC.md",
+        "sections": [
+          "Regression matrix",
+          "Exit gate",
+          "Stop conditions"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sections": [
+          "HCM-1.4 profile-aware setup and doctor decision proof gate"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sections": [
+          "Phase 0 — Preflight",
+          "Phase 5 — Fresh review / remediation loop",
+          "Phase 8 — True-stop handoff"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Use the exact existing HCM-1.4 SPEC.md, tasks/plan.md, and tasks/todo.md packet without reopening reviewed planning bytes.",
+      "Edit only the exact engine, compiler, CLI, test, control-pack, proof, dispatch, and closeout paths allowlisted by the HCM-1.4 SPEC.",
+      "Use the available actual Windows MSVC execution mechanism only for the two required named runtime tests and already-authorized cross-platform proof."
+    ],
+    "prohibited_scope": [
+      "Do not begin implementation until the actual Windows runtime execution path is available.",
+      "Do not add or modify CI, Cargo manifests, lockfiles, definition assets, schemas, condition evidence/evaluator contracts, canonical writes, compatibility bridges, new CLI grammar, compiler publication, or HCM-2 work merely to manufacture platform proof.",
+      "Do not treat cross-compilation, Wine, macOS, Linux, or an emulated compile-only check as actual Windows runtime evidence.",
+      "Do not modify or supersede the approved planning bytes without new evidence and explicit planning authority."
+    ],
+    "acceptance_criteria": [
+      "Preflight identifies an accessible actual Windows MSVC host/runner and records how the final exact subject will be exercised without forbidden-scope changes.",
+      "Both named Windows runtime tests execute on that host and their host/target/command/status/test-name evidence is included in the final proof wall.",
+      "Every remaining HCM-1.4 implementation, regression, package, scope, security, fresh-review, and two-commit closeout gate passes exactly as frozen."
+    ],
+    "stop_conditions": [
+      "Stop again with external_blocker if the actual Windows runtime execution path is still unavailable or cannot exercise the exact final subject.",
+      "Stop if satisfying the platform gate would require a file or authority outside the approved HCM-1.4 packet.",
+      "Stop on any other frozen HCM-1.4 stop condition rather than widening scope."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-1.4 stopped during clean pre-edit preflight. The approved packet requires two named runtime tests on an actual Windows MSVC host and explicitly rejects cross-compilation as a substitute; this macOS checkout has no accessible Windows runner. Resume only after such a host is available without widening the frozen packet."
+}
