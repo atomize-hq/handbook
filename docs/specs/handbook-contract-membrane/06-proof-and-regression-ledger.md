@@ -135,6 +135,7 @@ No lower proof level implies a higher one.
 | `PG-CHARTER-01` | `CharterIntakeDefinition` covers approved questionnaire domains, promotes only an approved schema-valid candidate to canonical Charter YAML, and deterministically renders Markdown as a renderer-derived human-review view | open |
 | `PG-YAML-01` | one artifact family is canonically YAML, structurally validated, and deterministically rendered | closed for exact shipped instance `project_context` by HCM-2.1; no program-wide or sibling-family claim |
 | `PG-YAML-02` | no dual editable Markdown/YAML truth remains for converted families | open program-wide; HCM-2.1 proves no editable or selected legacy Project Context Markdown truth, while unconverted sibling and frozen pipeline surfaces remain |
+
 | `PG-VOCAB-01` | lexical and structural conflation render correctly without losing stable role resolution | open |
 | `PG-RES-01` | six-dimension envelope validates inheritance, authority, memory, and validation horizons | open |
 | `PG-PROJ-01` | same source truth yields multiple deterministic Resolution projections with provenance | open |
@@ -162,6 +163,12 @@ No lower proof level implies a higher one.
 | `PG-ORCH-02` | every current internal dispatch declares execution target, parent ID, role, replayable subject manifest/fingerprint, fresh-context requirement, closeout owner, ordered required-skills chain beginning with `using-agent-skills`, and complete structured return contract; unavailable mandatory delegation fails closed | proven by HCM-0.8 current-schema dispatch validation and fail-closed orchestration self-tests |
 | `PG-CATALOG-01` | proposed proof that the frozen HCM-0.4 `05` payload was mechanically decomposed without semantic delta | retired without proof; HCM-0.9 was abandoned after terminal Redesign Review 2 was not CLEAN, no decomposition occurred, and the monolith remains canonical |
 
+The planning-only HCM-2.2 packet at
+[`slices/HCM-2.2/`](slices/HCM-2.2/SPEC.md) proposes the exact first-party
+Charter proof needed for `PG-INTAKE-01`, `PG-INTAKE-02`, and `PG-CHARTER-01`.
+It changes no current gate state and grants no implementation authority before
+fresh independent review and parent planning closeout.
+
 ## Greenfield deletion gates
 
 Temporary scaffolding may be introduced only when a row is added here first.
@@ -170,6 +177,7 @@ Temporary scaffolding may be introduced only when a row is added here first.
 |---|---|---|---|
 | `BR-SUB-CLI-01` | let Substrate consume the versioned Handbook JSON protocol before the permanent published-Rust boundary is available | may enter the normal path only in HCM-6.1 after `PG-JSON-01`; remains isolated and replaceable until HCM-6.3 | `PG-PUBLISH-01` and `PG-SUB-RUST-01` pass for the replacing exact API/seam; the normal Substrate path no longer spawns/parses the Handbook CLI; bridge-specific dependencies/config/tests are removed; standalone Handbook CLI remains unaffected |
 | `BR-HCM-2-PILOT-FLOW-01` | let the one-family HCM-2.1 flow cutover consume selected canonical Project Context YAML and its in-memory fixed renderer while unconverted Charter, Environment Inventory content authority, and Feature Spec sources remain on the frozen fixed family; Environment Inventory receives only the packet's selected-YAML reference cutover | active only for exact selected instance `project_context`; it does not read or translate legacy Project Context Markdown and must be deleted no later than HCM-2.4 | all shipped families consumed by flow use profile-selected canonical structured truth; the mixed fixed/selected adapter, legacy Project Context output tag exception, and bridge-specific tests are removed; HCM-2.4 proof shows no fixed family/path selector or Project Context Markdown influence remains |
+| `BR-HCM-2-CHARTER-FLOW-01` | permit the future HCM-2.2 cutover to add selected canonical Charter YAML and its in-memory fixed renderer to flow while Environment Inventory content and Feature Spec remain on the frozen fixed family | proposed by the planning-only HCM-2.2 packet; may become active only with reviewed implementation proof and must be deleted no later than HCM-2.4 | Charter is selected only by profile/instance/kind/schema refs; no legacy Charter Markdown/input influence remains; HCM-2.4 moves all shipped families to selected structured truth and removes this adapter and its tests |
 
 There is no approved user migration tool, legacy importer, dual-read mode, or compatibility profile.
 

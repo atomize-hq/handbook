@@ -1,0 +1,451 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260719T224526Z--HCM-2-2--fresh-planning-review-19",
+  "created_at_utc": "2026-07-19T22:45:26Z",
+  "source_handoff_ids": [
+    "20260719T104915Z--HCM-2-1--orchestration--project-context-canonical-yaml-landed"
+  ],
+  "parent_orchestration_id": "20260719T130500Z--HCM-2-2--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "test-driven-development",
+    "documentation-and-adrs",
+    "code-review-and-quality",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:265bfa2118278ad88ff71646eb217a753f4e0bb84f20aec6c53ff7e5e2993831",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "9a6a54f1b6ee5c62f45e19c314777612bf23b385229d15fae30102ec9ec9fa57"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "22eb5640f242538849209f71f5944357a8ca0469822f98bdee9dae897dd76c1b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "a240f87a70aa460a23edb3f7a5b4ec3bbbae1c8d14982cf5fb7ec03d07f82a9f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T131536Z--HCM-2-2--fresh-planning-review-1.json",
+        "sha256": "ec4940a16aa92e13b7fec5ec9473368fe50fc378ef4913f47724263665892c60"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T134309Z--HCM-2-2--fresh-planning-review-2.json",
+        "sha256": "ee54f8455d6f0f9704b443b363e1b577451afb98aae559b0cdbb7926e5c85108"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T141402Z--HCM-2-2--fresh-planning-review-3.json",
+        "sha256": "c6ae4e621615ad70851e4b4e7871c04befcf53ff9c43704c703c5d645f9b5a8d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T150951Z--HCM-2-2--fresh-planning-review-4.json",
+        "sha256": "cf2eaec58388b2923c7044fec20e4eca68c4bbffad0edba4447619cec78bbf2a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T154513Z--HCM-2-2--fresh-planning-review-5.json",
+        "sha256": "e6374c9944bd6834cb161869e259f78fe129c7a7ebdaac5532d386cc5ea8b89b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T163123Z--HCM-2-2--fresh-planning-review-6.json",
+        "sha256": "9f5cd5439d412f0a18c2aedb22d17eedfdd42b6b0661a03415848be3f9aa8b55"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T165652Z--HCM-2-2--fresh-planning-review-7.json",
+        "sha256": "07ca3994f1eb762cb1c66fead74f2e88c1946e003d5d63b49f3dbbb73e367110"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T172911Z--HCM-2-2--fresh-planning-review-8.json",
+        "sha256": "033d4cb49772dfe695601cb5fe518b93b0364cc6fce359f3ecfa796dce59e445"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T180228Z--HCM-2-2--fresh-planning-review-9.json",
+        "sha256": "e0582f497f563ecf42ff9c3605e63a7e525bf0b5b8b34f3bcdb2068b1a4645f3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T181712Z--HCM-2-2--fresh-planning-review-10.json",
+        "sha256": "0df11c2db72a86414e8d42d3a5373a7dd45d8d38ff86829d0a9e88934eaef015"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T185028Z--HCM-2-2--fresh-planning-review-11.json",
+        "sha256": "cf1cbb397717bc4fe5aabb19cb396d4ccf16fda52938292cea2073bc467e2cc1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T191204Z--HCM-2-2--fresh-planning-review-12.json",
+        "sha256": "497e81980340b861c9ef3f7144a20b80b7a0e7b1278e08c206e70cf8dab73bd6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T194155Z--HCM-2-2--fresh-planning-review-13.json",
+        "sha256": "28220597c2998a79a9d8997f80384e9c83cf51452f5243a5e96399e415b932fb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T202418Z--HCM-2-2--fresh-planning-review-14.json",
+        "sha256": "24393d349e1eaaac5294d9d0db2c6c12e0f6acf0360bc0f74d97379dac72e1ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T211056Z--HCM-2-2--fresh-planning-review-15.json",
+        "sha256": "955aa7f43ffd6e05907bf6e1f4cc47939ff6289b41f3934bd78223c27ae0e452"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T214115Z--HCM-2-2--fresh-planning-review-16.json",
+        "sha256": "3b538129ca99c87929252b914d513371c7bbdb52f50ed1ea98e907c42f234eee"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T220642Z--HCM-2-2--fresh-planning-review-17.json",
+        "sha256": "fc20757a674d6f05bfc515432c346a3677470054978d7c235468faa477a0db50"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T222931Z--HCM-2-2--fresh-planning-review-18.json",
+        "sha256": "6f69863eba94cabb2c589ae55d69a07b6fd8abfc47a7cba367cbeb464c07d13c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "4f6124e859ca036d7dd77899e22b7a5b4142429ac15c1e6d1b5ac74d160515b2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-1.0.0.schema.json",
+        "sha256": "d9ed6682d66c4417d76df2e376bf8e48b092a28a830eba6f049853791c952228"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-vectors-v1.0.json",
+        "sha256": "bf791c17e50e0fa7840b201186e3ce89fb58e53646aa69e96e93fadcb3e252e7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-registry-1.0.0.schema.json",
+        "sha256": "b3dab13ae3a73ecf6512af5f4e3f7857a116370812d0ddf1dd57c6cf10b58464"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-registry-transition-1.0.0.schema.json",
+        "sha256": "1f329bf80ca875d62bd5016693499d8831f73aa8be242def44a5bb10a400251c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authenticator-assertion-1.0.0.schema.json",
+        "sha256": "5efb348fdddaa4e290f35251f9f707307215ed8860c3c6357c935212b9f8ac23"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authenticator-challenge-1.0.0.schema.json",
+        "sha256": "8cb47ee9ca4b975704f782900c3850d29e7bdd6719af193ab0726f37ec311c29"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authenticator-get-assertion-response-1.0.0.schema.json",
+        "sha256": "7dbed64cc1a2bec3ca3a3348b6c46626d76287f876f4028f81934b6c3dd54be6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authenticator-make-credential-response-1.0.0.schema.json",
+        "sha256": "2dd22f26b5a949a84966f7ffa25c35998b5f0b08664a53937339b6e7ebd620a2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authenticator-registration-1.0.0.schema.json",
+        "sha256": "bb0a3446349c2733376373cd511a46989b30bacd6afb6a9aba98b9bc0a352855"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authenticator-registration-request-1.0.0.schema.json",
+        "sha256": "f2a352f15cb28f3770666f683b8dbc9f1f1d18f0cedee6d3b95e8241db0c4059"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authenticator-transcript-vectors-v1.0.json",
+        "sha256": "21f42b17a0f6962cb26278a3d706ae8d64553917f54f05a51fd5712689db9e47"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml",
+        "sha256": "36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/charter-intake-definition-1.0.0.yaml",
+        "sha256": "c845cd7012764645965bc54cabc66e65c91dac468b2f80123f4c62be31565f6a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/charter-review-boundary-v1.0.md",
+        "sha256": "4bebff7b716e624a955637f9462e65f4b42b6857b31b0b2add8809034c7b1061"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/ctap-status-mapping-v1.0.json",
+        "sha256": "1ea8ebafb6f92ffd7fc7de32788da85520d7791dcc362b4843df5840c7dd70c5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-closure-vectors-v1.0.json",
+        "sha256": "a308985ade375107398208a8008e5acc6d6a6c92363500d5d5580c9f5219d43c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+        "sha256": "5d5ec63ea4044547165332caeb5782b984e5f18447e5cf04c1dd6f2b482460ec"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/final-use-add-lockout-vectors-v1.0.json",
+        "sha256": "ef971c5ab4112d57669073c5e4fd0d71eeacb7ca6e6b91dd10c5af104e4c8cc4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/project-authority-1.1.0.schema.json",
+        "sha256": "7afabe1e26ea2b56752ca7c23b2d1bfeb0beef89b15dc54f898785d5cc337a33"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json",
+        "sha256": "4d4895c53812bf70c6d22bb5ede5daaacc7fc46352741cb739666b3e30d9e6b5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/security-boundary-limit-vectors-v1.0.json",
+        "sha256": "03c38c8e1fba3c5cce7cb540a15f0a23b4cf7486d5cc63d0a7f7a88193f6a50e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/trigger-evidence-1.0.0.schema.json",
+        "sha256": "6c158d3f1f047d851e26f46946ecc4e07ef58c8866e89e79da5a9e2c34883af3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/user-handle-derivation-vectors-v1.0.json",
+        "sha256": "ae2a2a697547ca26547c7a691c20267decb2dbbc937f9c56a19a478c07be5000"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/waiver-acceptance-order-vectors-v1.0.json",
+        "sha256": "953d31e11436de3f2de504a55c81d8c46d3ceef8ba3381015d6dc8100891e7b8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T130500Z--planning-proof-wall.md",
+        "sha256": "075777feb331a6f3a5b56caa899b70fa66e1841f85ce3babf10294b82f6f8c5d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T134000Z--planning-review-1-remediation.md",
+        "sha256": "c3252d40f9c24ea0e0d5330a0376d14cf31cc2374bb6690b1d9915036436799b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T141131Z--planning-review-2-remediation.md",
+        "sha256": "91e581017de79c4d113ae81b7972538198a7eafc704418687aa72131613fe984"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T145347Z--planning-review-3-remediation.md",
+        "sha256": "7f97dd7d8685e48dff8fc2fe5c3f1014ebd860f27b446d6f81ea54799b514bcb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T154500Z--planning-review-4-remediation.md",
+        "sha256": "673d1f02140fc71c8b2e3e59d9ad9cd655899973066e1ab09ebb04a6cafc41f7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T163000Z--planning-review-5-remediation.md",
+        "sha256": "0a86b552a6af687b68ce90539ffdb1dcacee2bea0419c93c463734ddab799747"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T165400Z--planning-review-6-remediation.md",
+        "sha256": "8b824ec558d7dc538832bcd765c359a52bf976326f39b014eee87ce84501d9fb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T172506Z--planning-review-7-remediation.md",
+        "sha256": "8b58fa9882d48f3010c790b70eb0d5a8c0bebb581d8366030a8895d3d18bdb0a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T180111Z--planning-review-8-remediation.md",
+        "sha256": "3416080b99eb2dc97566940dd786c09fdab5a2be10c1c0d3c123bc645f06fca3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T181528Z--planning-review-9-remediation.md",
+        "sha256": "fab2ffb01a3bb1b5e308373981eac69ca9ba419c3e9a5f830bfb25591fbf527b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T184650Z--planning-review-10-remediation.md",
+        "sha256": "90a2e70a366d3f48db11a99b0856a696c630c3b656ca6c5bec79f6f1fd0d3e72"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T190931Z--planning-review-11-remediation.md",
+        "sha256": "ccab02b7aae9f1c998c59cfea7911b30ea02acd1792fa696f79ff0cdcba06b51"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T193944Z--planning-review-12-remediation.md",
+        "sha256": "76385de6b4618d67839ce9cc7769d6bc9b1409d75694611749f0fa2c112e2342"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T202027Z--planning-review-13-remediation.md",
+        "sha256": "2dc9d44cf43eaffaeeced842c15cd87b7c388b04dd22a71441d92680c5464323"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T210359Z--planning-review-14-remediation.md",
+        "sha256": "e612f084bdac72b76a8ecb441f16f6d7500c99ac3ba45abcf9b2c14962078bef"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T213637Z--planning-review-15-remediation.md",
+        "sha256": "8a26e5ac583ac6841be9d50d859866313a1f77a869c158d2b5284be5f56c14a6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T220506Z--planning-review-16-remediation.md",
+        "sha256": "1bb6a5134ad223c21b64186066b5e22b891d588461ac114670e35e8ef73b9a16"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T222802Z--planning-review-17-remediation.md",
+        "sha256": "d385a5b21a089d3fb2ec21093c6ac2587f17afcf11e5d40c4674310c15c94086"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T224348Z--planning-review-18-remediation.md",
+        "sha256": "e46cb2f3527de96fdf8d0fb72986db643cdceb02a057aa16cc4db835dddd9b74"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+        "sha256": "afaf40256cc0b9aed8d08a4ef8b689fca7d0e889b46b7c5ea57e4ae45b195d17"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+        "sha256": "ae8ca42931573a88e1e0c26b211853bf9bb00107212fa6d7885eee58523f583e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:265bfa2118278ad88ff71646eb217a753f4e0bb84f20aec6c53ff7e5e2993831"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.2_planning_only",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "complete_eighteen-times-remediated_exact-byte_planning_subject_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Authority split",
+        "Canonical artifacts, renderer-derived views, and Projections",
+        "Artifact intake and authoring boundary",
+        "Non-negotiable invariants"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Instance profile",
+        "Artifact-kind and instance registries",
+        "Artifact intake",
+        "Charter and constitutional authority",
+        "Promotion semantics"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Sequencing rule",
+        "HCM-2.2 — Constitutional-root artifact",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity",
+        "Semantic capability contract",
+        "Artifact kind definition contract",
+        "Artifact intake definition contract",
+        "Intake record and artifact candidate contracts",
+        "Charter intake and canonical contract",
+        "Artifact validation layers"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PR-009 — Charter questionnaire-shaped coverage and posture validation",
+        "Open program proof gates",
+        "Greenfield deletion gates",
+        "Regression rules"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+      "sections": [
+        "Exact shipped root-profile instance set",
+        "Unique constitutional root",
+        "Lifecycle and reassessment posture",
+        "Explicitly unresolved subordinate contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260719T104915Z--HCM-2-1--orchestration--project-context-canonical-yaml-landed.json",
+      "sections": [
+        "complete selected dependency and transition record"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Phase 5 — Fresh review / remediation loop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_truth": "Fresh read-only review of the exact complete HCM-2.2 eighteen-times-remediated planning subject. It freezes future implementation contracts but contains no product implementation, grants no implementation authority before clean closeout, and carries no clean-review conclusion.",
+  "allowed_scope": [
+    "Remain read-only and replay the sorted complete manifest and aggregate fingerprint before review.",
+    "Review every subject byte: 00, 04, 06, eighteen immutable prior dispatches, SPEC, all exact contract/schema/vector/JCS/transcript/API/security/waiver/status/final-use fixtures, plan, unchecked todo, planning proof, and eighteen remediation records.",
+    "Read unchanged 01, 02, 03, 05, 07, 08, HCM-0.6 decision, selected HCM-2.1 record/packet/proof, exact live definition assets, and engine/compiler/flow/CLI/skill/template/test sources only as needed.",
+    "Run bounded read-only exact schema/JCS/fingerprint/profile/intake, runtime cross-record, raw CTAP2 status/CBOR/authenticator-data/descriptor/DER/ES256, deterministic credential selection, bootstrap ownership, security bound, waiver order, final-use lockout, cross-family recovery, admin DTO, transaction, Markdown/link, Git, handoff, bridge, and classification checks.",
+    "Return findings first with exact file/line evidence through the built-in channel."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, new dispatches, global handoffs, ledger writes, or user task hops.",
+    "No Rust, Cargo, production definitions, runtime fixtures/tests/product/generated-skill/pipeline, HCM-2.3+, Phase-3, SDK, Tauri, Substrate, contract, dock, or publication implementation.",
+    "Do not invent alternate schema/intake bytes, CTAP response/status/selection semantics, bootstrap mappings, record partition, fingerprint/ref behavior, approval/waiver/identity/registry/use-chain trust, transaction visibility, lifecycle, renderer, migration, compatibility, bridge, or sibling scope.",
+    "Do not treat prior findings, passing reproduction, or contingent planning status as proof that the 67-entry subject is clean."
+  ],
+  "tasks": [
+    "Invoke required skills in order, remain read-only, replay the exact complete manifest/aggregate, and return BLOCKED if any byte differs.",
+    "Review findings first in Critical, Required, Optional, Nit order with exact file/line, violated authority, failure, smallest remediation, and missing or invalidated proof.",
+    "Reproduce eleven literal schema entries, eleven current-producer-closed definition JCS vectors, fourteen runtime identities/seven schema validations, 17 content-addressed and 17 external current-producer bindings, thirteen positive and seventeen negative Admin vectors, seven ceremonies, two crossed approval-challenge negatives, five canonical command-0x02 requests whose key 2 equals the current challenge JCS hash, five raw GetAssertion positives, eighteen signed/raw-response negatives, four selection vectors, strict CBOR/P-256/DER/registry-resolved ES256, 17 profile sources/nine security sources, exact 33-group/52-pointer security-bound equality, closure fingerprints, old-byte preservation, and independent encoders/decoders.",
+    "Verify the raw GetAssertion port boundary is total: every canonical command-0x02 request key 2 equals SHA-256 of its current literal challenge JCS and the exact signed preimage; deterministic eligibility/raw-ID ordering/max-64 allow-list; returned descriptor; success status plus canonical {1,2,3} CBOR; exact 37-byte RP-hash/0x05/counter authenticator data; forbidden RFU/backup/AT/ED/trailing data; strict DER/key verification; decoded response-to-assertion equality; and three operation-specific closed challenge branches with crossed initial/amend basis refusal before native I/O.",
+    "Verify the disjoint received-status table covers every 0x01..0xff value exactly once with frozen refusal/retryability/non-empty exact-next-action semantics and exact Admin projection, a source audit of every named status including retryable 0x3f, representative reserved/extension/vendor vectors, no CBOR decode on error, and no received status classified as AUTHENTICATOR_UNAVAILABLE.",
+    "Verify bootstrap derives only sorted quorum plus fixed registry-admin mappings in-engine; verify exact set equality across all 33 security-bound groups and 52 bounded schema pointers including both approval branches; verify unique/canonical waiver acceptance; verify every runtime content-addressed record binding and external current-producer binding; and verify the full sequence-4095 incomplete-add fixture binds exact request/prestate/mapping/all-null result/empty native log/byte-identical authority.",
+    "Verify response-inclusive add/revoke/update changed paths, complete ceremony record sets, shared cross-family use recovery, global lock order, retained observations, canonical/Markdown fixtures, C03/C04, product cutover, bridges, proof/deletion gates, planning-only status, primary commit, and separate parent closeout.",
+    "Return CLEAN only if no valid Critical or Required finding remains; otherwise CHANGES_REQUIRED or BLOCKED. Make no edits."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#hcm-22--constitutional-root-artifact",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#uniform-exact-definition-identity",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#artifact-intake-definition-contract",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#intake-record-and-artifact-candidate-contracts",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#charter-intake-and-canonical-contract",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#open-program-proof-gates",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if the manifest/aggregate, required authority, live definitions/source, literal fixtures/vectors, or mandatory read-only verification cannot be reproduced.",
+    "Return CHANGES_REQUIRED rather than selecting unspecified semantic bytes, fingerprint/ref behavior, authority/authentication/registry trust, transaction/lifecycle visibility, unsafe fallback, compatibility, sibling, or later-slice behavior.",
+    "Return to the parent if valid remediation would require implementation now, released-definition mutation, broader product/default authority, HCM-2.3+, or global handoff/ledger mutation."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

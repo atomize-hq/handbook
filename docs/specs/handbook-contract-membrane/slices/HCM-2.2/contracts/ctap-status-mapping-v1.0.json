@@ -1,0 +1,1329 @@
+{
+  "schema_id": "hcm-2.2-ctap-status-mapping-vectors",
+  "schema_version": "1.0",
+  "source": {
+    "specification": "FIDO Client to Authenticator Protocol 2.1 Proposed Standard",
+    "status_code_table": "https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-20210615.html#sctn-status-codes"
+  },
+  "transport_boundary": {
+    "response_shape": "exactly one status byte; only 0x00 is followed by canonical CBOR",
+    "received_status_never_maps_to": "AUTHENTICATOR_UNAVAILABLE",
+    "unavailability_source": "only an out-of-band port availability or transport exception before a complete status byte is received"
+  },
+  "success": {
+    "status_byte": 0,
+    "status_hex": "0x00",
+    "semantic_action": "decode the one following exact canonical GetAssertion CBOR map",
+    "refusal": null
+  },
+  "refusal_groups": [
+    {
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "status_bytes": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        17,
+        18,
+        20,
+        38,
+        43,
+        44,
+        55,
+        57,
+        62
+      ],
+      "status_hex": [
+        "0x01",
+        "0x02",
+        "0x03",
+        "0x04",
+        "0x0b",
+        "0x11",
+        "0x12",
+        "0x14",
+        "0x26",
+        "0x2b",
+        "0x2c",
+        "0x37",
+        "0x39",
+        "0x3e"
+      ]
+    },
+    {
+      "refusal_code": "transaction_conflict",
+      "retryable": true,
+      "next_action": "retry the complete operation with a fresh observed head and fresh challenge",
+      "status_bytes": [
+        6,
+        10,
+        33,
+        35,
+        36,
+        37
+      ],
+      "status_hex": [
+        "0x06",
+        "0x0a",
+        "0x21",
+        "0x23",
+        "0x24",
+        "0x25"
+      ]
+    },
+    {
+      "refusal_code": "authenticator_user_timeout",
+      "retryable": true,
+      "next_action": "repeat only through a new explicit user-directed ceremony",
+      "status_bytes": [
+        5,
+        47,
+        58
+      ],
+      "status_hex": [
+        "0x05",
+        "0x2f",
+        "0x3a"
+      ]
+    },
+    {
+      "refusal_code": "authenticator_resource_exhausted",
+      "retryable": false,
+      "next_action": "free or replace authenticator capacity before retry",
+      "status_bytes": [
+        21,
+        23,
+        24,
+        40
+      ],
+      "status_hex": [
+        "0x15",
+        "0x17",
+        "0x18",
+        "0x28"
+      ]
+    },
+    {
+      "refusal_code": "authorization_refused",
+      "retryable": false,
+      "next_action": "use an eligible authorized credential or change committed authority",
+      "status_bytes": [
+        25,
+        34,
+        39,
+        46,
+        48,
+        53,
+        64
+      ],
+      "status_hex": [
+        "0x19",
+        "0x22",
+        "0x27",
+        "0x2e",
+        "0x30",
+        "0x35",
+        "0x40"
+      ]
+    },
+    {
+      "refusal_code": "authenticator_security_blocked",
+      "retryable": false,
+      "next_action": "unblock or replace the authenticator through its trusted operator flow",
+      "status_bytes": [
+        50,
+        52,
+        60,
+        61
+      ],
+      "status_hex": [
+        "0x32",
+        "0x34",
+        "0x3c",
+        "0x3d"
+      ]
+    },
+    {
+      "refusal_code": "authenticator_user_cancelled",
+      "retryable": false,
+      "next_action": "begin a new explicit user-directed ceremony if still desired",
+      "status_bytes": [
+        45
+      ],
+      "status_hex": [
+        "0x2d"
+      ]
+    },
+    {
+      "refusal_code": "authenticator_user_verification_retry",
+      "retryable": true,
+      "next_action": "repeat with a fresh challenge and successful user verification",
+      "status_bytes": [
+        49,
+        51,
+        54,
+        59,
+        63
+      ],
+      "status_hex": [
+        "0x31",
+        "0x33",
+        "0x36",
+        "0x3b",
+        "0x3f"
+      ]
+    },
+    {
+      "refusal_code": "authenticator_unknown_error",
+      "retryable": false,
+      "next_action": "preserve the status as evidence and require operator diagnosis",
+      "status_bytes": [
+        7,
+        8,
+        9,
+        12,
+        13,
+        14,
+        15,
+        16,
+        19,
+        22,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        41,
+        42,
+        56,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255
+      ],
+      "status_hex": [
+        "0x07",
+        "0x08",
+        "0x09",
+        "0x0c",
+        "0x0d",
+        "0x0e",
+        "0x0f",
+        "0x10",
+        "0x13",
+        "0x16",
+        "0x1a",
+        "0x1b",
+        "0x1c",
+        "0x1d",
+        "0x1e",
+        "0x1f",
+        "0x20",
+        "0x29",
+        "0x2a",
+        "0x38",
+        "0x41",
+        "0x42",
+        "0x43",
+        "0x44",
+        "0x45",
+        "0x46",
+        "0x47",
+        "0x48",
+        "0x49",
+        "0x4a",
+        "0x4b",
+        "0x4c",
+        "0x4d",
+        "0x4e",
+        "0x4f",
+        "0x50",
+        "0x51",
+        "0x52",
+        "0x53",
+        "0x54",
+        "0x55",
+        "0x56",
+        "0x57",
+        "0x58",
+        "0x59",
+        "0x5a",
+        "0x5b",
+        "0x5c",
+        "0x5d",
+        "0x5e",
+        "0x5f",
+        "0x60",
+        "0x61",
+        "0x62",
+        "0x63",
+        "0x64",
+        "0x65",
+        "0x66",
+        "0x67",
+        "0x68",
+        "0x69",
+        "0x6a",
+        "0x6b",
+        "0x6c",
+        "0x6d",
+        "0x6e",
+        "0x6f",
+        "0x70",
+        "0x71",
+        "0x72",
+        "0x73",
+        "0x74",
+        "0x75",
+        "0x76",
+        "0x77",
+        "0x78",
+        "0x79",
+        "0x7a",
+        "0x7b",
+        "0x7c",
+        "0x7d",
+        "0x7e",
+        "0x7f",
+        "0x80",
+        "0x81",
+        "0x82",
+        "0x83",
+        "0x84",
+        "0x85",
+        "0x86",
+        "0x87",
+        "0x88",
+        "0x89",
+        "0x8a",
+        "0x8b",
+        "0x8c",
+        "0x8d",
+        "0x8e",
+        "0x8f",
+        "0x90",
+        "0x91",
+        "0x92",
+        "0x93",
+        "0x94",
+        "0x95",
+        "0x96",
+        "0x97",
+        "0x98",
+        "0x99",
+        "0x9a",
+        "0x9b",
+        "0x9c",
+        "0x9d",
+        "0x9e",
+        "0x9f",
+        "0xa0",
+        "0xa1",
+        "0xa2",
+        "0xa3",
+        "0xa4",
+        "0xa5",
+        "0xa6",
+        "0xa7",
+        "0xa8",
+        "0xa9",
+        "0xaa",
+        "0xab",
+        "0xac",
+        "0xad",
+        "0xae",
+        "0xaf",
+        "0xb0",
+        "0xb1",
+        "0xb2",
+        "0xb3",
+        "0xb4",
+        "0xb5",
+        "0xb6",
+        "0xb7",
+        "0xb8",
+        "0xb9",
+        "0xba",
+        "0xbb",
+        "0xbc",
+        "0xbd",
+        "0xbe",
+        "0xbf",
+        "0xc0",
+        "0xc1",
+        "0xc2",
+        "0xc3",
+        "0xc4",
+        "0xc5",
+        "0xc6",
+        "0xc7",
+        "0xc8",
+        "0xc9",
+        "0xca",
+        "0xcb",
+        "0xcc",
+        "0xcd",
+        "0xce",
+        "0xcf",
+        "0xd0",
+        "0xd1",
+        "0xd2",
+        "0xd3",
+        "0xd4",
+        "0xd5",
+        "0xd6",
+        "0xd7",
+        "0xd8",
+        "0xd9",
+        "0xda",
+        "0xdb",
+        "0xdc",
+        "0xdd",
+        "0xde",
+        "0xdf",
+        "0xe0",
+        "0xe1",
+        "0xe2",
+        "0xe3",
+        "0xe4",
+        "0xe5",
+        "0xe6",
+        "0xe7",
+        "0xe8",
+        "0xe9",
+        "0xea",
+        "0xeb",
+        "0xec",
+        "0xed",
+        "0xee",
+        "0xef",
+        "0xf0",
+        "0xf1",
+        "0xf2",
+        "0xf3",
+        "0xf4",
+        "0xf5",
+        "0xf6",
+        "0xf7",
+        "0xf8",
+        "0xf9",
+        "0xfa",
+        "0xfb",
+        "0xfc",
+        "0xfd",
+        "0xfe",
+        "0xff"
+      ]
+    }
+  ],
+  "coverage_assertion": {
+    "domain": "all integers 0x01 through 0xff",
+    "group_union": "exactly domain",
+    "group_intersection": "empty",
+    "unmapped_status_count": 0,
+    "duplicate_status_count": 0
+  },
+  "representative_vectors": [
+    {
+      "vector_id": "status-00-success",
+      "raw_transport_response_base64": "AKMBomJpZFgg7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75pkdHlwZWpwdWJsaWMta2V5AlglHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABwNYRzBFAiEA3x1oU4Vzem02gdtkWA9aO24LSukz7g40ET8jWSuqUDYCICPsDiUURZTGuHRa1kafJwP3ZXXsHiLstFBMA9t/aV1+",
+      "status_byte": 0,
+      "status_hex": "0x00",
+      "expected_refusal": null,
+      "cbor_decode_attempted": true,
+      "semantic_record_created": true,
+      "expected_next_actions": [],
+      "expected_admin_projection": null
+    },
+    {
+      "vector_id": "status-01-invalid_request",
+      "raw_transport_response_base64": "AQ==",
+      "status_byte": 1,
+      "status_hex": "0x01",
+      "expected_refusal": {
+        "code": "invalid_request",
+        "retryable": false
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "correct the engine-built request or reject the incompatible authenticator response"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "invalid_request",
+        "retryable": false,
+        "next_actions": [
+          "correct the engine-built request or reject the incompatible authenticator response"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-06-transaction_conflict",
+      "raw_transport_response_base64": "Bg==",
+      "status_byte": 6,
+      "status_hex": "0x06",
+      "expected_refusal": {
+        "code": "transaction_conflict",
+        "retryable": true
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "retry the complete operation with a fresh observed head and fresh challenge"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "transaction_conflict",
+        "retryable": true,
+        "next_actions": [
+          "retry the complete operation with a fresh observed head and fresh challenge"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-05-authenticator_user_timeout",
+      "raw_transport_response_base64": "BQ==",
+      "status_byte": 5,
+      "status_hex": "0x05",
+      "expected_refusal": {
+        "code": "authenticator_user_timeout",
+        "retryable": true
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "repeat only through a new explicit user-directed ceremony"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "authenticator_user_timeout",
+        "retryable": true,
+        "next_actions": [
+          "repeat only through a new explicit user-directed ceremony"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-15-authenticator_resource_exhausted",
+      "raw_transport_response_base64": "FQ==",
+      "status_byte": 21,
+      "status_hex": "0x15",
+      "expected_refusal": {
+        "code": "authenticator_resource_exhausted",
+        "retryable": false
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "free or replace authenticator capacity before retry"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "authenticator_resource_exhausted",
+        "retryable": false,
+        "next_actions": [
+          "free or replace authenticator capacity before retry"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-2e-authorization_refused",
+      "raw_transport_response_base64": "Lg==",
+      "status_byte": 46,
+      "status_hex": "0x2e",
+      "expected_refusal": {
+        "code": "authorization_refused",
+        "retryable": false
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "use an eligible authorized credential or change committed authority"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "authorization_refused",
+        "retryable": false,
+        "next_actions": [
+          "use an eligible authorized credential or change committed authority"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-32-authenticator_security_blocked",
+      "raw_transport_response_base64": "Mg==",
+      "status_byte": 50,
+      "status_hex": "0x32",
+      "expected_refusal": {
+        "code": "authenticator_security_blocked",
+        "retryable": false
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "unblock or replace the authenticator through its trusted operator flow"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "authenticator_security_blocked",
+        "retryable": false,
+        "next_actions": [
+          "unblock or replace the authenticator through its trusted operator flow"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-2d-authenticator_user_cancelled",
+      "raw_transport_response_base64": "LQ==",
+      "status_byte": 45,
+      "status_hex": "0x2d",
+      "expected_refusal": {
+        "code": "authenticator_user_cancelled",
+        "retryable": false
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "begin a new explicit user-directed ceremony if still desired"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "authenticator_user_cancelled",
+        "retryable": false,
+        "next_actions": [
+          "begin a new explicit user-directed ceremony if still desired"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-07-authenticator_unknown_error",
+      "raw_transport_response_base64": "Bw==",
+      "status_byte": 7,
+      "status_hex": "0x07",
+      "expected_refusal": {
+        "code": "authenticator_unknown_error",
+        "retryable": false
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "preserve the status as evidence and require operator diagnosis"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "authenticator_unknown_error",
+        "retryable": false,
+        "next_actions": [
+          "preserve the status as evidence and require operator diagnosis"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-7f-authenticator_unknown_error",
+      "raw_transport_response_base64": "fw==",
+      "status_byte": 127,
+      "status_hex": "0x7f",
+      "expected_refusal": {
+        "code": "authenticator_unknown_error",
+        "retryable": false
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "preserve the status as evidence and require operator diagnosis"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "authenticator_unknown_error",
+        "retryable": false,
+        "next_actions": [
+          "preserve the status as evidence and require operator diagnosis"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-e0-authenticator_unknown_error",
+      "raw_transport_response_base64": "4A==",
+      "status_byte": 224,
+      "status_hex": "0xe0",
+      "expected_refusal": {
+        "code": "authenticator_unknown_error",
+        "retryable": false
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "preserve the status as evidence and require operator diagnosis"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "authenticator_unknown_error",
+        "retryable": false,
+        "next_actions": [
+          "preserve the status as evidence and require operator diagnosis"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-f0-authenticator_unknown_error",
+      "raw_transport_response_base64": "8A==",
+      "status_byte": 240,
+      "status_hex": "0xf0",
+      "expected_refusal": {
+        "code": "authenticator_unknown_error",
+        "retryable": false
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false,
+      "expected_next_actions": [
+        "preserve the status as evidence and require operator diagnosis"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "authenticator_unknown_error",
+        "retryable": false,
+        "next_actions": [
+          "preserve the status as evidence and require operator diagnosis"
+        ]
+      }
+    },
+    {
+      "vector_id": "status-3f-authenticator_user_verification_retry",
+      "raw_transport_response_base64": "Pw==",
+      "status_byte": 63,
+      "status_hex": "0x3f",
+      "expected_refusal": {
+        "code": "authenticator_user_verification_retry",
+        "retryable": true
+      },
+      "expected_next_actions": [
+        "repeat with a fresh challenge and successful user verification"
+      ],
+      "expected_admin_projection": {
+        "refusal_code": "authenticator_user_verification_retry",
+        "retryable": true,
+        "next_actions": [
+          "repeat with a fresh challenge and successful user verification"
+        ]
+      },
+      "cbor_decode_attempted": false,
+      "semantic_record_created": false
+    }
+  ],
+  "source_status_audit": [
+    {
+      "status_byte": 1,
+      "status_hex": "0x01",
+      "status_name": "CTAP1_ERR_INVALID_COMMAND",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 2,
+      "status_hex": "0x02",
+      "status_name": "CTAP1_ERR_INVALID_PARAMETER",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 3,
+      "status_hex": "0x03",
+      "status_name": "CTAP1_ERR_INVALID_LENGTH",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 4,
+      "status_hex": "0x04",
+      "status_name": "CTAP1_ERR_INVALID_SEQ",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 5,
+      "status_hex": "0x05",
+      "status_name": "CTAP1_ERR_TIMEOUT",
+      "refusal_code": "authenticator_user_timeout",
+      "retryable": true,
+      "next_action": "repeat only through a new explicit user-directed ceremony",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 6,
+      "status_hex": "0x06",
+      "status_name": "CTAP1_ERR_CHANNEL_BUSY",
+      "refusal_code": "transaction_conflict",
+      "retryable": true,
+      "next_action": "retry the complete operation with a fresh observed head and fresh challenge",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 10,
+      "status_hex": "0x0a",
+      "status_name": "CTAP1_ERR_LOCK_REQUIRED",
+      "refusal_code": "transaction_conflict",
+      "retryable": true,
+      "next_action": "retry the complete operation with a fresh observed head and fresh challenge",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 11,
+      "status_hex": "0x0b",
+      "status_name": "CTAP1_ERR_INVALID_CHANNEL",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 17,
+      "status_hex": "0x11",
+      "status_name": "CTAP2_ERR_CBOR_UNEXPECTED_TYPE",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 18,
+      "status_hex": "0x12",
+      "status_name": "CTAP2_ERR_INVALID_CBOR",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 20,
+      "status_hex": "0x14",
+      "status_name": "CTAP2_ERR_MISSING_PARAMETER",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 21,
+      "status_hex": "0x15",
+      "status_name": "CTAP2_ERR_LIMIT_EXCEEDED",
+      "refusal_code": "authenticator_resource_exhausted",
+      "retryable": false,
+      "next_action": "free or replace authenticator capacity before retry",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 23,
+      "status_hex": "0x17",
+      "status_name": "CTAP2_ERR_FP_DATABASE_FULL",
+      "refusal_code": "authenticator_resource_exhausted",
+      "retryable": false,
+      "next_action": "free or replace authenticator capacity before retry",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 24,
+      "status_hex": "0x18",
+      "status_name": "CTAP2_ERR_LARGE_BLOB_STORAGE_FULL",
+      "refusal_code": "authenticator_resource_exhausted",
+      "retryable": false,
+      "next_action": "free or replace authenticator capacity before retry",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 25,
+      "status_hex": "0x19",
+      "status_name": "CTAP2_ERR_CREDENTIAL_EXCLUDED",
+      "refusal_code": "authorization_refused",
+      "retryable": false,
+      "next_action": "use an eligible authorized credential or change committed authority",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 33,
+      "status_hex": "0x21",
+      "status_name": "CTAP2_ERR_PROCESSING",
+      "refusal_code": "transaction_conflict",
+      "retryable": true,
+      "next_action": "retry the complete operation with a fresh observed head and fresh challenge",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 34,
+      "status_hex": "0x22",
+      "status_name": "CTAP2_ERR_INVALID_CREDENTIAL",
+      "refusal_code": "authorization_refused",
+      "retryable": false,
+      "next_action": "use an eligible authorized credential or change committed authority",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 35,
+      "status_hex": "0x23",
+      "status_name": "CTAP2_ERR_USER_ACTION_PENDING",
+      "refusal_code": "transaction_conflict",
+      "retryable": true,
+      "next_action": "retry the complete operation with a fresh observed head and fresh challenge",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 36,
+      "status_hex": "0x24",
+      "status_name": "CTAP2_ERR_OPERATION_PENDING",
+      "refusal_code": "transaction_conflict",
+      "retryable": true,
+      "next_action": "retry the complete operation with a fresh observed head and fresh challenge",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 37,
+      "status_hex": "0x25",
+      "status_name": "CTAP2_ERR_NO_OPERATIONS",
+      "refusal_code": "transaction_conflict",
+      "retryable": true,
+      "next_action": "retry the complete operation with a fresh observed head and fresh challenge",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 38,
+      "status_hex": "0x26",
+      "status_name": "CTAP2_ERR_UNSUPPORTED_ALGORITHM",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 39,
+      "status_hex": "0x27",
+      "status_name": "CTAP2_ERR_OPERATION_DENIED",
+      "refusal_code": "authorization_refused",
+      "retryable": false,
+      "next_action": "use an eligible authorized credential or change committed authority",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 40,
+      "status_hex": "0x28",
+      "status_name": "CTAP2_ERR_KEY_STORE_FULL",
+      "refusal_code": "authenticator_resource_exhausted",
+      "retryable": false,
+      "next_action": "free or replace authenticator capacity before retry",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 43,
+      "status_hex": "0x2b",
+      "status_name": "CTAP2_ERR_UNSUPPORTED_OPTION",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 44,
+      "status_hex": "0x2c",
+      "status_name": "CTAP2_ERR_INVALID_OPTION",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 45,
+      "status_hex": "0x2d",
+      "status_name": "CTAP2_ERR_KEEPALIVE_CANCEL",
+      "refusal_code": "authenticator_user_cancelled",
+      "retryable": false,
+      "next_action": "begin a new explicit user-directed ceremony if still desired",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 46,
+      "status_hex": "0x2e",
+      "status_name": "CTAP2_ERR_NO_CREDENTIALS",
+      "refusal_code": "authorization_refused",
+      "retryable": false,
+      "next_action": "use an eligible authorized credential or change committed authority",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 47,
+      "status_hex": "0x2f",
+      "status_name": "CTAP2_ERR_USER_ACTION_TIMEOUT",
+      "refusal_code": "authenticator_user_timeout",
+      "retryable": true,
+      "next_action": "repeat only through a new explicit user-directed ceremony",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 48,
+      "status_hex": "0x30",
+      "status_name": "CTAP2_ERR_NOT_ALLOWED",
+      "refusal_code": "authorization_refused",
+      "retryable": false,
+      "next_action": "use an eligible authorized credential or change committed authority",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 49,
+      "status_hex": "0x31",
+      "status_name": "CTAP2_ERR_PIN_INVALID",
+      "refusal_code": "authenticator_user_verification_retry",
+      "retryable": true,
+      "next_action": "repeat with a fresh challenge and successful user verification",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 50,
+      "status_hex": "0x32",
+      "status_name": "CTAP2_ERR_PIN_BLOCKED",
+      "refusal_code": "authenticator_security_blocked",
+      "retryable": false,
+      "next_action": "unblock or replace the authenticator through its trusted operator flow",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 51,
+      "status_hex": "0x33",
+      "status_name": "CTAP2_ERR_PIN_AUTH_INVALID",
+      "refusal_code": "authenticator_user_verification_retry",
+      "retryable": true,
+      "next_action": "repeat with a fresh challenge and successful user verification",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 52,
+      "status_hex": "0x34",
+      "status_name": "CTAP2_ERR_PIN_AUTH_BLOCKED",
+      "refusal_code": "authenticator_security_blocked",
+      "retryable": false,
+      "next_action": "unblock or replace the authenticator through its trusted operator flow",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 53,
+      "status_hex": "0x35",
+      "status_name": "CTAP2_ERR_PIN_NOT_SET",
+      "refusal_code": "authorization_refused",
+      "retryable": false,
+      "next_action": "use an eligible authorized credential or change committed authority",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 54,
+      "status_hex": "0x36",
+      "status_name": "CTAP2_ERR_PUAT_REQUIRED",
+      "refusal_code": "authenticator_user_verification_retry",
+      "retryable": true,
+      "next_action": "repeat with a fresh challenge and successful user verification",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 55,
+      "status_hex": "0x37",
+      "status_name": "CTAP2_ERR_PIN_POLICY_VIOLATION",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 57,
+      "status_hex": "0x39",
+      "status_name": "CTAP2_ERR_REQUEST_TOO_LARGE",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 58,
+      "status_hex": "0x3a",
+      "status_name": "CTAP2_ERR_ACTION_TIMEOUT",
+      "refusal_code": "authenticator_user_timeout",
+      "retryable": true,
+      "next_action": "repeat only through a new explicit user-directed ceremony",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 59,
+      "status_hex": "0x3b",
+      "status_name": "CTAP2_ERR_UP_REQUIRED",
+      "refusal_code": "authenticator_user_verification_retry",
+      "retryable": true,
+      "next_action": "repeat with a fresh challenge and successful user verification",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 60,
+      "status_hex": "0x3c",
+      "status_name": "CTAP2_ERR_UV_BLOCKED",
+      "refusal_code": "authenticator_security_blocked",
+      "retryable": false,
+      "next_action": "unblock or replace the authenticator through its trusted operator flow",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 61,
+      "status_hex": "0x3d",
+      "status_name": "CTAP2_ERR_INTEGRITY_FAILURE",
+      "refusal_code": "authenticator_security_blocked",
+      "retryable": false,
+      "next_action": "unblock or replace the authenticator through its trusted operator flow",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 62,
+      "status_hex": "0x3e",
+      "status_name": "CTAP2_ERR_INVALID_SUBCOMMAND",
+      "refusal_code": "invalid_request",
+      "retryable": false,
+      "next_action": "correct the engine-built request or reject the incompatible authenticator response",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 63,
+      "status_hex": "0x3f",
+      "status_name": "CTAP2_ERR_UV_INVALID",
+      "refusal_code": "authenticator_user_verification_retry",
+      "retryable": true,
+      "next_action": "repeat with a fresh challenge and successful user verification",
+      "mapping_rationale": "the CTAP table explicitly directs platform retry after fresh user verification"
+    },
+    {
+      "status_byte": 64,
+      "status_hex": "0x40",
+      "status_name": "CTAP2_ERR_UNAUTHORIZED_PERMISSION",
+      "refusal_code": "authorization_refused",
+      "retryable": false,
+      "next_action": "use an eligible authorized credential or change committed authority",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 127,
+      "status_hex": "0x7f",
+      "status_name": "CTAP1_ERR_OTHER",
+      "refusal_code": "authenticator_unknown_error",
+      "retryable": false,
+      "next_action": "preserve the status as evidence and require operator diagnosis",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    },
+    {
+      "status_byte": 223,
+      "status_hex": "0xdf",
+      "status_name": "CTAP2_ERR_SPEC_LAST",
+      "refusal_code": "authenticator_unknown_error",
+      "retryable": false,
+      "next_action": "preserve the status as evidence and require operator diagnosis",
+      "mapping_rationale": "mapped by the status meaning to the frozen high-level operator outcome"
+    }
+  ],
+  "unknown_status_classes": [
+    {
+      "class": "reserved_or_unassigned",
+      "refusal_code": "authenticator_unknown_error",
+      "retryable": false
+    },
+    {
+      "class": "extension_0xe0_through_0xef",
+      "refusal_code": "authenticator_unknown_error",
+      "retryable": false
+    },
+    {
+      "class": "vendor_0xf0_through_0xff",
+      "refusal_code": "authenticator_unknown_error",
+      "retryable": false
+    }
+  ]
+}

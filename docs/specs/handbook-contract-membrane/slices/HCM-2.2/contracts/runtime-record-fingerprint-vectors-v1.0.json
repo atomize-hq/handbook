@@ -1,0 +1,1125 @@
+{
+  "id_rule": "record ID when present, otherwise derived content-addressed path ID, equals <record-class>_<lowercase-sha256-hex>",
+  "normalization": "RFC8785-JCS-UTF8",
+  "schema_id": "hcm-2.2-runtime-record-fingerprint-vectors",
+  "schema_version": "1.0",
+  "vectors": [
+    {
+      "audit_only_excluded_fields": [
+        "finalized_at_utc"
+      ],
+      "expected_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
+      "expected_id": "intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
+      "fingerprint_field": "record_fingerprint",
+      "fingerprint_preimage": {
+        "acquisition_mode": "guided_adaptive",
+        "basis_artifact_fingerprint": null,
+        "consumer": {
+          "id": "handbook",
+          "kind": "handbook_skill",
+          "version": "1.0.0"
+        },
+        "coverage_results": [
+          {
+            "applicability": "applicable",
+            "confidence": "high",
+            "contradiction_refs": [],
+            "coverage_id": "policy.authority_and_revision",
+            "evaluation": "satisfied",
+            "evidence_refs": [],
+            "freshness": null,
+            "sensitivity": "internal",
+            "source_kind": "user_declaration",
+            "value_ref": "intake-values/policy.json",
+            "waiver_ref": null
+          }
+        ],
+        "intake_definition_ref": "handbook.intake.charter@1.0.0",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "prompt_event_refs": [],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-intake-record",
+        "schema_version": "1.1",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0"
+      },
+      "id_field": "intake_record_id",
+      "id_location": "record",
+      "record": {
+        "acquisition_mode": "guided_adaptive",
+        "basis_artifact_fingerprint": null,
+        "consumer": {
+          "id": "handbook",
+          "kind": "handbook_skill",
+          "version": "1.0.0"
+        },
+        "coverage_results": [
+          {
+            "applicability": "applicable",
+            "confidence": "high",
+            "contradiction_refs": [],
+            "coverage_id": "policy.authority_and_revision",
+            "evaluation": "satisfied",
+            "evidence_refs": [],
+            "freshness": null,
+            "sensitivity": "internal",
+            "source_kind": "user_declaration",
+            "value_ref": "intake-values/policy.json",
+            "waiver_ref": null
+          }
+        ],
+        "finalized_at_utc": "2026-07-19T16:00:00Z",
+        "intake_definition_ref": "handbook.intake.charter@1.0.0",
+        "intake_record_id": "intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "prompt_event_refs": [],
+        "record_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-intake-record",
+        "schema_version": "1.1",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0"
+      },
+      "record_class": "intake",
+      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+      "expected_id": "candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+      "fingerprint_field": "candidate_fingerprint",
+      "fingerprint_preimage": {
+        "basis_artifact_fingerprint": null,
+        "field_sources": [
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/revision"
+          }
+        ],
+        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "normalized_content_ref": "candidates/candidate.yaml",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_eligibility": "requires_approval",
+        "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.1",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+        "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+        "unresolved_coverage_ids": [],
+        "validation_result_refs": [
+          "validation_001"
+        ]
+      },
+      "id_field": "candidate_id",
+      "id_location": "record",
+      "record": {
+        "basis_artifact_fingerprint": null,
+        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+        "candidate_id": "candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+        "field_sources": [
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/revision"
+          }
+        ],
+        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "normalized_content_ref": "candidates/candidate.yaml",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_eligibility": "requires_approval",
+        "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.1",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+        "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+        "unresolved_coverage_ids": [],
+        "validation_result_refs": [
+          "validation_001"
+        ]
+      },
+      "record_class": "candidate",
+      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1",
+      "expected_id": "approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1",
+      "fingerprint_field": "approval_fingerprint",
+      "fingerprint_preimage": {
+        "accepted_waivers": [],
+        "actor_ref": "credential:sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "approval_class": "Project owner approval",
+        "approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "authenticator_assertion_fingerprint": "sha256:229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
+        "authenticator_assertion_ref": "authenticator-assertions/authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf.json",
+        "authority_ref": "Project owner",
+        "basis_artifact_fingerprint": null,
+        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+        "candidate_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+        "conditions": [],
+        "decided_at_utc": "2026-07-19T16:01:00Z",
+        "decision": "approved",
+        "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+        "schema_id": "handbook.artifact-approval-record",
+        "schema_version": "1.1"
+      },
+      "id_field": "approval_id",
+      "id_location": "record",
+      "record": {
+        "accepted_waivers": [],
+        "actor_ref": "credential:sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "approval_class": "Project owner approval",
+        "approval_fingerprint": "sha256:09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1",
+        "approval_id": "approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1",
+        "approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "authenticator_assertion_fingerprint": "sha256:229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
+        "authenticator_assertion_ref": "authenticator-assertions/authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf.json",
+        "authority_ref": "Project owner",
+        "basis_artifact_fingerprint": null,
+        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+        "candidate_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+        "conditions": [],
+        "decided_at_utc": "2026-07-19T16:01:00Z",
+        "decision": "approved",
+        "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+        "schema_id": "handbook.artifact-approval-record",
+        "schema_version": "1.1"
+      },
+      "record_class": "approval",
+      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:9bbd10e6e762618c58ae369dbaaef70c6dbc79da02b4155c09979d5ab7237b7a",
+      "expected_id": "promotion_9bbd10e6e762618c58ae369dbaaef70c6dbc79da02b4155c09979d5ab7237b7a",
+      "fingerprint_field": "promotion_fingerprint",
+      "fingerprint_preimage": {
+        "approval_refs": [
+          "approvals/approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1.json"
+        ],
+        "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "authorized_by_ref": "Project owner",
+        "basis_artifact_fingerprint": null,
+        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+        "candidate_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+        "canonical_artifact_fingerprint": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "decision": "approved",
+        "expected_current_artifact_fingerprint": null,
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+        "resolved_definitions": [
+          {
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-promotion-record",
+        "schema_version": "1.1",
+        "target_instance_id": "project_authority",
+        "validation_result_refs": [
+          "validation_001"
+        ]
+      },
+      "id_field": "promotion_id",
+      "id_location": "record",
+      "record": {
+        "approval_refs": [
+          "approvals/approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1.json"
+        ],
+        "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "authorized_by_ref": "Project owner",
+        "basis_artifact_fingerprint": null,
+        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+        "candidate_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+        "canonical_artifact_fingerprint": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "decision": "approved",
+        "expected_current_artifact_fingerprint": null,
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_fingerprint": "sha256:9bbd10e6e762618c58ae369dbaaef70c6dbc79da02b4155c09979d5ab7237b7a",
+        "promotion_id": "promotion_9bbd10e6e762618c58ae369dbaaef70c6dbc79da02b4155c09979d5ab7237b7a",
+        "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+        "resolved_definitions": [
+          {
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-promotion-record",
+        "schema_version": "1.1",
+        "target_instance_id": "project_authority",
+        "validation_result_refs": [
+          "validation_001"
+        ]
+      },
+      "record_class": "promotion",
+      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:c91ca3ae8556052afb99643ebcf92785622427746d8a82863bad33c28508d0bd",
+      "expected_id": "waiver_c91ca3ae8556052afb99643ebcf92785622427746d8a82863bad33c28508d0bd",
+      "fingerprint_field": "waiver_fingerprint",
+      "fingerprint_preimage": {
+        "accepted_risk": "Review before expiry",
+        "actor_ref": "credential:sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "authority_ref": "Project owner",
+        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+        "coverage_id": "policy.authority_and_revision",
+        "expires_at_utc": "2026-08-19T00:00:00Z",
+        "quality_obligation": "minimum_specificity",
+        "rationale": "Emergency specificity exception",
+        "review_at_utc": "2026-08-01T00:00:00Z",
+        "schema_id": "handbook.artifact-intake-waiver",
+        "schema_version": "1.0",
+        "source_kind": "user_declaration",
+        "value_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "value_ref": "intake-values/policy.json"
+      },
+      "id_field": "waiver_id",
+      "id_location": "record",
+      "record": {
+        "accepted_risk": "Review before expiry",
+        "actor_ref": "credential:sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "authority_ref": "Project owner",
+        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+        "coverage_id": "policy.authority_and_revision",
+        "expires_at_utc": "2026-08-19T00:00:00Z",
+        "quality_obligation": "minimum_specificity",
+        "rationale": "Emergency specificity exception",
+        "review_at_utc": "2026-08-01T00:00:00Z",
+        "schema_id": "handbook.artifact-intake-waiver",
+        "schema_version": "1.0",
+        "source_kind": "user_declaration",
+        "value_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "value_ref": "intake-values/policy.json",
+        "waiver_fingerprint": "sha256:c91ca3ae8556052afb99643ebcf92785622427746d8a82863bad33c28508d0bd",
+        "waiver_id": "waiver_c91ca3ae8556052afb99643ebcf92785622427746d8a82863bad33c28508d0bd"
+      },
+      "record_class": "waiver",
+      "schema_contract": "exact closed runtime shape frozen by HCM-2.2 SPEC and this complete vector"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+      "expected_id": "registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+      "fingerprint_field": "registry_state_fingerprint",
+      "fingerprint_preimage": {
+        "credentials": [
+          {
+            "algorithm": "ES256",
+            "approval_mappings": [
+              {
+                "approval_class": "Project owner approval",
+                "authority_ref": "Project owner"
+              },
+              {
+                "approval_class": "registry_admin",
+                "authority_ref": "repository_registry_admin"
+              }
+            ],
+            "cose_public_key_base64": "pQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+            "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+            "extensions": {},
+            "registration_fingerprint": "sha256:35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b",
+            "registration_ref": "authenticator-registrations/authenticator-registration_35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b.json",
+            "status": "active"
+          }
+        ],
+        "extensions": {},
+        "initial_charter_quorum": [
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          }
+        ],
+        "registry_id": "repository-approvers",
+        "registry_version": 1,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "schema_id": "handbook.approver-registry-state",
+        "schema_version": "1.0"
+      },
+      "id_field": null,
+      "id_location": "derived_content_addressed_path",
+      "record": {
+        "credentials": [
+          {
+            "algorithm": "ES256",
+            "approval_mappings": [
+              {
+                "approval_class": "Project owner approval",
+                "authority_ref": "Project owner"
+              },
+              {
+                "approval_class": "registry_admin",
+                "authority_ref": "repository_registry_admin"
+              }
+            ],
+            "cose_public_key_base64": "pQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+            "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+            "extensions": {},
+            "registration_fingerprint": "sha256:35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b",
+            "registration_ref": "authenticator-registrations/authenticator-registration_35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b.json",
+            "status": "active"
+          }
+        ],
+        "extensions": {},
+        "initial_charter_quorum": [
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          }
+        ],
+        "registry_id": "repository-approvers",
+        "registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "registry_version": 1,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "schema_id": "handbook.approver-registry-state",
+        "schema_version": "1.0"
+      },
+      "record_class": "registry-state",
+      "schema_contract": "closed published schema"
+    },
+    {
+      "audit_only_excluded_fields": [
+        "occurred_at_utc"
+      ],
+      "expected_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+      "expected_id": "registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+      "fingerprint_field": "transition_fingerprint",
+      "fingerprint_preimage": {
+        "admin_credential_id_hash": null,
+        "authorization_fingerprint": "sha256:35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b",
+        "authorization_kind": "registration",
+        "authorization_ref": "authenticator-registrations/authenticator-registration_35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b.json",
+        "changed_credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "operation": "bootstrap",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "prior_transition_fingerprint": null,
+        "prior_transition_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "result_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "schema_id": "handbook.approver-registry-transition",
+        "schema_version": "1.0"
+      },
+      "id_field": "transition_id",
+      "id_location": "record",
+      "record": {
+        "admin_credential_id_hash": null,
+        "authorization_fingerprint": "sha256:35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b",
+        "authorization_kind": "registration",
+        "authorization_ref": "authenticator-registrations/authenticator-registration_35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b.json",
+        "changed_credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "occurred_at_utc": "2026-07-19T16:02:00Z",
+        "operation": "bootstrap",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "prior_transition_fingerprint": null,
+        "prior_transition_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "result_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "schema_id": "handbook.approver-registry-transition",
+        "schema_version": "1.0",
+        "transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "transition_id": "registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd"
+      },
+      "record_class": "registry-transition",
+      "schema_contract": "closed published schema"
+    },
+    {
+      "audit_only_excluded_fields": [
+        "registered_at_utc"
+      ],
+      "expected_fingerprint": "sha256:35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b",
+      "expected_id": "authenticator-registration_35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b",
+      "fingerprint_field": "registration_fingerprint",
+      "fingerprint_preimage": {
+        "algorithm": "ES256",
+        "attestation_format": "none",
+        "attestation_object_base64": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+ElFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIOxQ7B+07rQVwXT5RlqkOFilUarRyND9uv6Ay7TTze+apQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "attestation_trust": "none",
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+ElFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIOxQ7B+07rQVwXT5RlqkOFilUarRyND9uv6Ay7TTze+apQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "client_data_hash": "sha256:ebd65c79d01e92bae662994218c5c9d77e0231d64a6b1c47d46570bc524b5d38",
+        "cose_public_key_base64": "pQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "decoded_response_fingerprint": "sha256:dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6",
+        "decoded_response_ref": "authenticator-make-credential-responses/authenticator-make-credential-response_dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6.json",
+        "decoded_response_schema_ref": "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+        "protocol_id": "fido2-ctap2.1-native",
+        "request_fingerprint": "sha256:ebd65c79d01e92bae662994218c5c9d77e0231d64a6b1c47d46570bc524b5d38",
+        "request_jcs_base64": "eyIkc2NoZW1hIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAyMC0xMi9zY2hlbWEiLCJhbGxvd2VkX2FsZ29yaXRobXMiOlsiRVMyNTYiXSwiYXBwcm92YWxfbWFwcGluZ3MiOlt7ImFwcHJvdmFsX2NsYXNzIjoiUHJvamVjdCBvd25lciBhcHByb3ZhbCIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIn0seyJhcHByb3ZhbF9jbGFzcyI6InJlZ2lzdHJ5X2FkbWluIiwiYXV0aG9yaXR5X3JlZiI6InJlcG9zaXRvcnlfcmVnaXN0cnlfYWRtaW4ifV0sImF0dGVzdGF0aW9uX3BvbGljeSI6Im5vbmUiLCJleHRlbnNpb25zIjp7fSwiaW5pdGlhbF9jaGFydGVyX3F1b3J1bSI6W3siYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXV0aG9yaXR5X3JlZiI6IlByb2plY3Qgb3duZXIifV0sIm5vbmNlX2Jhc2U2NCI6IkFBRUNBd1FGQmdjSUNRb0xEQTBPRHhBUkVoTVVGUllYR0JrYUd4d2RIaDg9Iiwib3BlcmF0aW9uIjoiYm9vdHN0cmFwIiwib3BlcmF0aW9uX2lkIjoiYm9vdHN0cmFwLTAwMSIsInByb3RvY29sX2lkIjoiZmlkbzItY3RhcDIuMS1uYXRpdmUiLCJyZXBvc2l0b3J5X2lkZW50aXR5X2ZpbmdlcnByaW50Ijoic2hhMjU2OjExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTEiLCJycCI6eyJpZCI6ImhhbmRib29rLmxvY2FsIiwibmFtZSI6IkhhbmRib29rIHJlcG9zaXRvcnkgYXV0aG9yaXR5In0sInNjaGVtYV9pZCI6ImhhbmRib29rLmF1dGhlbnRpY2F0b3ItcmVnaXN0cmF0aW9uLXJlcXVlc3QiLCJzY2hlbWFfdmVyc2lvbiI6IjEuMCIsInVzZXJfaGFuZGxlX2hhc2giOiJzaGEyNTY6NWQ0Y2M4MjBiMzdmM2QxZmQwYzZlMDRlZDUwYTU2ZWFkOGQ0OTdlY2ZkM2MyNWM3NDk4NTVlZDlkODUyODM3ZCIsInVzZXJfdmVyaWZpY2F0aW9uIjoicmVxdWlyZWQifQ==",
+        "request_schema_ref": "handbook.schemas.security.authenticator-registration-request@1.0.0",
+        "rp_id": "handbook.local",
+        "schema_id": "handbook.authenticator-registration",
+        "schema_version": "1.0",
+        "sign_count": 0,
+        "user_handle_hash": "sha256:5d4cc820b37f3d1fd0c6e04ed50a56ead8d497ecfd3c25c749855ed9d852837d",
+        "user_present": true,
+        "user_verified": true
+      },
+      "id_field": "registration_id",
+      "id_location": "record",
+      "record": {
+        "algorithm": "ES256",
+        "attestation_format": "none",
+        "attestation_object_base64": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+ElFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIOxQ7B+07rQVwXT5RlqkOFilUarRyND9uv6Ay7TTze+apQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "attestation_trust": "none",
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+ElFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIOxQ7B+07rQVwXT5RlqkOFilUarRyND9uv6Ay7TTze+apQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "client_data_hash": "sha256:ebd65c79d01e92bae662994218c5c9d77e0231d64a6b1c47d46570bc524b5d38",
+        "cose_public_key_base64": "pQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "decoded_response_fingerprint": "sha256:dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6",
+        "decoded_response_ref": "authenticator-make-credential-responses/authenticator-make-credential-response_dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6.json",
+        "decoded_response_schema_ref": "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+        "protocol_id": "fido2-ctap2.1-native",
+        "registered_at_utc": "2026-07-19T16:03:00Z",
+        "registration_fingerprint": "sha256:35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b",
+        "registration_id": "authenticator-registration_35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b",
+        "request_fingerprint": "sha256:ebd65c79d01e92bae662994218c5c9d77e0231d64a6b1c47d46570bc524b5d38",
+        "request_jcs_base64": "eyIkc2NoZW1hIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAyMC0xMi9zY2hlbWEiLCJhbGxvd2VkX2FsZ29yaXRobXMiOlsiRVMyNTYiXSwiYXBwcm92YWxfbWFwcGluZ3MiOlt7ImFwcHJvdmFsX2NsYXNzIjoiUHJvamVjdCBvd25lciBhcHByb3ZhbCIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIn0seyJhcHByb3ZhbF9jbGFzcyI6InJlZ2lzdHJ5X2FkbWluIiwiYXV0aG9yaXR5X3JlZiI6InJlcG9zaXRvcnlfcmVnaXN0cnlfYWRtaW4ifV0sImF0dGVzdGF0aW9uX3BvbGljeSI6Im5vbmUiLCJleHRlbnNpb25zIjp7fSwiaW5pdGlhbF9jaGFydGVyX3F1b3J1bSI6W3siYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXV0aG9yaXR5X3JlZiI6IlByb2plY3Qgb3duZXIifV0sIm5vbmNlX2Jhc2U2NCI6IkFBRUNBd1FGQmdjSUNRb0xEQTBPRHhBUkVoTVVGUllYR0JrYUd4d2RIaDg9Iiwib3BlcmF0aW9uIjoiYm9vdHN0cmFwIiwib3BlcmF0aW9uX2lkIjoiYm9vdHN0cmFwLTAwMSIsInByb3RvY29sX2lkIjoiZmlkbzItY3RhcDIuMS1uYXRpdmUiLCJyZXBvc2l0b3J5X2lkZW50aXR5X2ZpbmdlcnByaW50Ijoic2hhMjU2OjExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTEiLCJycCI6eyJpZCI6ImhhbmRib29rLmxvY2FsIiwibmFtZSI6IkhhbmRib29rIHJlcG9zaXRvcnkgYXV0aG9yaXR5In0sInNjaGVtYV9pZCI6ImhhbmRib29rLmF1dGhlbnRpY2F0b3ItcmVnaXN0cmF0aW9uLXJlcXVlc3QiLCJzY2hlbWFfdmVyc2lvbiI6IjEuMCIsInVzZXJfaGFuZGxlX2hhc2giOiJzaGEyNTY6NWQ0Y2M4MjBiMzdmM2QxZmQwYzZlMDRlZDUwYTU2ZWFkOGQ0OTdlY2ZkM2MyNWM3NDk4NTVlZDlkODUyODM3ZCIsInVzZXJfdmVyaWZpY2F0aW9uIjoicmVxdWlyZWQifQ==",
+        "request_schema_ref": "handbook.schemas.security.authenticator-registration-request@1.0.0",
+        "rp_id": "handbook.local",
+        "schema_id": "handbook.authenticator-registration",
+        "schema_version": "1.0",
+        "sign_count": 0,
+        "user_handle_hash": "sha256:5d4cc820b37f3d1fd0c6e04ed50a56ead8d497ecfd3c25c749855ed9d852837d",
+        "user_present": true,
+        "user_verified": true
+      },
+      "record_class": "authenticator-registration",
+      "schema_contract": "closed published schema"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6",
+      "expected_id": "authenticator-make-credential-response_dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6",
+      "fingerprint_field": "response_fingerprint",
+      "fingerprint_preimage": {
+        "aaguid_base64": "AAAAAAAAAAAAAAAAAAAAAA==",
+        "algorithm": "ES256",
+        "attestation_format": "none",
+        "attestation_object_base64": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+ElFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIOxQ7B+07rQVwXT5RlqkOFilUarRyND9uv6Ay7TTze+apQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "attestation_statement_cbor_base64": "oA==",
+        "attested_credential_data_included": true,
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+ElFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIOxQ7B+07rQVwXT5RlqkOFilUarRyND9uv6Ay7TTze+apQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "cose_public_key_base64": "pQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "credential_id_base64": "7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75o=",
+        "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "flags_byte": 69,
+        "protocol_id": "fido2-ctap2.1-native",
+        "rp_id_hash": "sha256:1efff55eb078be3aa99e9510cdb3134ece04b5891c2a6c11fc884a7f7598f849",
+        "schema_id": "handbook.authenticator-make-credential-response",
+        "schema_version": "1.0",
+        "sign_count": 0,
+        "user_present": true,
+        "user_verified": true
+      },
+      "id_field": "response_id",
+      "id_location": "record",
+      "record": {
+        "aaguid_base64": "AAAAAAAAAAAAAAAAAAAAAA==",
+        "algorithm": "ES256",
+        "attestation_format": "none",
+        "attestation_object_base64": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+ElFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIOxQ7B+07rQVwXT5RlqkOFilUarRyND9uv6Ay7TTze+apQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "attestation_statement_cbor_base64": "oA==",
+        "attested_credential_data_included": true,
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+ElFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIOxQ7B+07rQVwXT5RlqkOFilUarRyND9uv6Ay7TTze+apQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "cose_public_key_base64": "pQECAyYgASFYIGsX0fLhLEJH+Lzm5WOkQPJ3A32BLeszoPShOUXYmMKWIlggT+NC4v4af5uO5+tKfA+eFivOM1drMV7Oy7ZAaDe/UfU=",
+        "credential_id_base64": "7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75o=",
+        "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "flags_byte": 69,
+        "protocol_id": "fido2-ctap2.1-native",
+        "response_fingerprint": "sha256:dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6",
+        "response_id": "authenticator-make-credential-response_dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6",
+        "rp_id_hash": "sha256:1efff55eb078be3aa99e9510cdb3134ece04b5891c2a6c11fc884a7f7598f849",
+        "schema_id": "handbook.authenticator-make-credential-response",
+        "schema_version": "1.0",
+        "sign_count": 0,
+        "user_present": true,
+        "user_verified": true
+      },
+      "record_class": "authenticator-make-credential-response",
+      "schema_contract": "closed published schema"
+    },
+    {
+      "record_class": "authenticator-get-assertion-response",
+      "schema_contract": "closed decoded status-plus-canonical-CBOR GetAssertion response",
+      "audit_only_excluded_fields": [],
+      "fingerprint_field": "response_fingerprint",
+      "id_field": "response_id",
+      "id_location": "record",
+      "fingerprint_preimage": {
+        "schema_id": "handbook.authenticator-get-assertion-response",
+        "schema_version": "1.0",
+        "protocol_id": "fido2-ctap2.1-native",
+        "status_byte": 0,
+        "credential_descriptor": {
+          "type": "public-key",
+          "credential_id_base64": "7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75o=",
+          "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd"
+        },
+        "rp_id_hash": "sha256:1efff55eb078be3aa99e9510cdb3134ece04b5891c2a6c11fc884a7f7598f849",
+        "flags_byte": 5,
+        "user_present": true,
+        "user_verified": true,
+        "sign_count": 7,
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABw==",
+        "algorithm": "ES256",
+        "signature_encoding": "asn1-der-ecdsa",
+        "signature_base64": "MEYCIQCKnf4uWM6StCqRq06Md5FPN0BjziIlxNsBF8cI7YI3DAIhAMX4sCac/8NJvjFBgh03m2Sm0nZkDGKSnQKcKkpt4SQI",
+        "raw_response_base64": "AKMBomJpZFgg7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75pkdHlwZWpwdWJsaWMta2V5AlglHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABwNYSDBGAiEAip3+LljOkrQqkatOjHeRTzdAY84iJcTbARfHCO2CNwwCIQDF+LAmnP/DSb4xQYIdN5tkptJ2ZAxikp0CnCpKbeEkCA==",
+        "attested_credential_data_included": false,
+        "extensions_included": false
+      },
+      "expected_fingerprint": "sha256:dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+      "expected_id": "authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+      "record": {
+        "schema_id": "handbook.authenticator-get-assertion-response",
+        "schema_version": "1.0",
+        "response_id": "authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+        "protocol_id": "fido2-ctap2.1-native",
+        "status_byte": 0,
+        "credential_descriptor": {
+          "type": "public-key",
+          "credential_id_base64": "7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75o=",
+          "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd"
+        },
+        "rp_id_hash": "sha256:1efff55eb078be3aa99e9510cdb3134ece04b5891c2a6c11fc884a7f7598f849",
+        "flags_byte": 5,
+        "user_present": true,
+        "user_verified": true,
+        "sign_count": 7,
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABw==",
+        "algorithm": "ES256",
+        "signature_encoding": "asn1-der-ecdsa",
+        "signature_base64": "MEYCIQCKnf4uWM6StCqRq06Md5FPN0BjziIlxNsBF8cI7YI3DAIhAMX4sCac/8NJvjFBgh03m2Sm0nZkDGKSnQKcKkpt4SQI",
+        "raw_response_base64": "AKMBomJpZFgg7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75pkdHlwZWpwdWJsaWMta2V5AlglHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABwNYSDBGAiEAip3+LljOkrQqkatOjHeRTzdAY84iJcTbARfHCO2CNwwCIQDF+LAmnP/DSb4xQYIdN5tkptJ2ZAxikp0CnCpKbeEkCA==",
+        "response_fingerprint": "sha256:dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+        "attested_credential_data_included": false,
+        "extensions_included": false
+      }
+    },
+    {
+      "audit_only_excluded_fields": [
+        "verified_at_utc"
+      ],
+      "expected_fingerprint": "sha256:229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
+      "expected_id": "authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
+      "fingerprint_field": "assertion_fingerprint",
+      "fingerprint_preimage": {
+        "algorithm": "ES256",
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABw==",
+        "challenge_fingerprint": "sha256:2f1ef052391f0121251e99c520edf2e9dc55690104e475dc8766d33b49e78dff",
+        "challenge_jcs_base64": "eyIkc2NoZW1hIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAyMC0xMi9zY2hlbWEiLCJhY2NlcHRlZF93YWl2ZXJfZmluZ2VycHJpbnRzIjpbXSwiYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXBwcm92ZXJfcmVnaXN0cnlfc3RhdGVfZmluZ2VycHJpbnQiOiJzaGEyNTY6NzhmZDZiMDQ1MDVhNGZlMzQ1MWE5OWE5OGNhNTcwMGE0NGJjYjlkMjE2YzQ3YzJjZTUwMTI4OGQwYTQwNzhlMiIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIiwiYmFzaXNfYXJ0aWZhY3RfZmluZ2VycHJpbnQiOm51bGwsImNhbmRpZGF0ZV9maW5nZXJwcmludCI6InNoYTI1NjpiMTRjOWY4OWFiYzRlNTg5MmE4Y2U3NzU3YWUzZTFmYjc0MDhjOGIzMWRiYzk4ODMxNDdmNzcyODgxYzA3MGE4IiwiY2FuZGlkYXRlX3JlZiI6ImNhbmRpZGF0ZXMvY2FuZGlkYXRlX2IxNGM5Zjg5YWJjNGU1ODkyYThjZTc3NTdhZTNlMWZiNzQwOGM4YjMxZGJjOTg4MzE0N2Y3NzI4ODFjMDcwYTguanNvbiIsIm5vbmNlX2Jhc2U2NCI6IkFBRUNBd1FGQmdjSUNRb0xEQTBPRHhBUkVoTVVGUllYR0JrYUd4d2RIaDg9Iiwib3BlcmF0aW9uIjoiaW5pdGlhbF9jaGFydGVyX2FwcHJvdmFsIiwib3BlcmF0aW9uX2lkIjoiaW5pdGlhbC1hcHByb3ZhbC0wMDEiLCJyZWdpc3RyeV9oZWFkX3RyYW5zaXRpb25fZmluZ2VycHJpbnQiOiJzaGEyNTY6YTZmNjUxMmNlOGY3YzkzZDk4YzZhMmM5NDQ5MTE5MjU0MzAyODFhNDEwZDdmMTgxYTVlMGU4OTM4Yzg2YmRmZCIsInJlcG9zaXRvcnlfaWRlbnRpdHlfZmluZ2VycHJpbnQiOiJzaGEyNTY6MTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMSIsInNjaGVtYV9pZCI6ImhhbmRib29rLmF1dGhlbnRpY2F0b3ItY2hhbGxlbmdlIiwic2NoZW1hX3ZlcnNpb24iOiIxLjAifQ==",
+        "challenge_schema_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+        "client_data_hash": "sha256:2f1ef052391f0121251e99c520edf2e9dc55690104e475dc8766d33b49e78dff",
+        "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "protocol_id": "fido2-ctap2.1-native",
+        "rp_id": "handbook.local",
+        "schema_id": "handbook.authenticator-assertion",
+        "schema_version": "1.0",
+        "sign_count": 7,
+        "signature_base64": "MEYCIQCKnf4uWM6StCqRq06Md5FPN0BjziIlxNsBF8cI7YI3DAIhAMX4sCac/8NJvjFBgh03m2Sm0nZkDGKSnQKcKkpt4SQI",
+        "signed_preimage_sha256": "sha256:67c7382635e687abdf7d7932cdd6824ce609c712e4a68d2af5ec6ad696ae49bd",
+        "user_present": true,
+        "user_verified": true,
+        "decoded_response_schema_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+        "decoded_response_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29.json",
+        "decoded_response_fingerprint": "sha256:dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+        "flags_byte": 5,
+        "attested_credential_data_included": false,
+        "extensions_included": false
+      },
+      "id_field": "assertion_id",
+      "id_location": "record",
+      "record": {
+        "algorithm": "ES256",
+        "assertion_fingerprint": "sha256:229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
+        "assertion_id": "authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABw==",
+        "challenge_fingerprint": "sha256:2f1ef052391f0121251e99c520edf2e9dc55690104e475dc8766d33b49e78dff",
+        "challenge_jcs_base64": "eyIkc2NoZW1hIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAyMC0xMi9zY2hlbWEiLCJhY2NlcHRlZF93YWl2ZXJfZmluZ2VycHJpbnRzIjpbXSwiYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXBwcm92ZXJfcmVnaXN0cnlfc3RhdGVfZmluZ2VycHJpbnQiOiJzaGEyNTY6NzhmZDZiMDQ1MDVhNGZlMzQ1MWE5OWE5OGNhNTcwMGE0NGJjYjlkMjE2YzQ3YzJjZTUwMTI4OGQwYTQwNzhlMiIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIiwiYmFzaXNfYXJ0aWZhY3RfZmluZ2VycHJpbnQiOm51bGwsImNhbmRpZGF0ZV9maW5nZXJwcmludCI6InNoYTI1NjpiMTRjOWY4OWFiYzRlNTg5MmE4Y2U3NzU3YWUzZTFmYjc0MDhjOGIzMWRiYzk4ODMxNDdmNzcyODgxYzA3MGE4IiwiY2FuZGlkYXRlX3JlZiI6ImNhbmRpZGF0ZXMvY2FuZGlkYXRlX2IxNGM5Zjg5YWJjNGU1ODkyYThjZTc3NTdhZTNlMWZiNzQwOGM4YjMxZGJjOTg4MzE0N2Y3NzI4ODFjMDcwYTguanNvbiIsIm5vbmNlX2Jhc2U2NCI6IkFBRUNBd1FGQmdjSUNRb0xEQTBPRHhBUkVoTVVGUllYR0JrYUd4d2RIaDg9Iiwib3BlcmF0aW9uIjoiaW5pdGlhbF9jaGFydGVyX2FwcHJvdmFsIiwib3BlcmF0aW9uX2lkIjoiaW5pdGlhbC1hcHByb3ZhbC0wMDEiLCJyZWdpc3RyeV9oZWFkX3RyYW5zaXRpb25fZmluZ2VycHJpbnQiOiJzaGEyNTY6YTZmNjUxMmNlOGY3YzkzZDk4YzZhMmM5NDQ5MTE5MjU0MzAyODFhNDEwZDdmMTgxYTVlMGU4OTM4Yzg2YmRmZCIsInJlcG9zaXRvcnlfaWRlbnRpdHlfZmluZ2VycHJpbnQiOiJzaGEyNTY6MTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMSIsInNjaGVtYV9pZCI6ImhhbmRib29rLmF1dGhlbnRpY2F0b3ItY2hhbGxlbmdlIiwic2NoZW1hX3ZlcnNpb24iOiIxLjAifQ==",
+        "challenge_schema_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+        "client_data_hash": "sha256:2f1ef052391f0121251e99c520edf2e9dc55690104e475dc8766d33b49e78dff",
+        "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "protocol_id": "fido2-ctap2.1-native",
+        "rp_id": "handbook.local",
+        "schema_id": "handbook.authenticator-assertion",
+        "schema_version": "1.0",
+        "sign_count": 7,
+        "signature_base64": "MEYCIQCKnf4uWM6StCqRq06Md5FPN0BjziIlxNsBF8cI7YI3DAIhAMX4sCac/8NJvjFBgh03m2Sm0nZkDGKSnQKcKkpt4SQI",
+        "signed_preimage_sha256": "sha256:67c7382635e687abdf7d7932cdd6824ce609c712e4a68d2af5ec6ad696ae49bd",
+        "user_present": true,
+        "user_verified": true,
+        "verified_at_utc": "2026-07-19T16:04:00Z",
+        "decoded_response_schema_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+        "decoded_response_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29.json",
+        "decoded_response_fingerprint": "sha256:dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+        "flags_byte": 5,
+        "attested_credential_data_included": false,
+        "extensions_included": false
+      },
+      "record_class": "authenticator-assertion",
+      "schema_contract": "closed published schema"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
+      "expected_id": "lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
+      "fingerprint_field": "observation_fingerprint",
+      "fingerprint_preimage": {
+        "basis_canonical_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "event_kind": "production_posture_changed",
+        "evidence_fingerprint": "sha256:0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c",
+        "evidence_ref": "trigger-evidence/trigger-evidence_0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c.json",
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "observed_at_utc": "2026-07-19T16:05:00Z",
+        "schema_id": "handbook.lifecycle-observation",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority",
+        "trigger_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6",
+        "trigger_ref": "handbook.intake-trigger.production-posture-changed@1.0.0"
+      },
+      "id_field": "observation_id",
+      "id_location": "record",
+      "record": {
+        "basis_canonical_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "event_kind": "production_posture_changed",
+        "evidence_fingerprint": "sha256:0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c",
+        "evidence_ref": "trigger-evidence/trigger-evidence_0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c.json",
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "observation_fingerprint": "sha256:b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
+        "observation_id": "lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
+        "observed_at_utc": "2026-07-19T16:05:00Z",
+        "schema_id": "handbook.lifecycle-observation",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority",
+        "trigger_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6",
+        "trigger_ref": "handbook.intake-trigger.production-posture-changed@1.0.0"
+      },
+      "record_class": "lifecycle-observation",
+      "schema_contract": "exact closed runtime shape frozen by HCM-2.2 SPEC and this complete vector"
+    },
+    {
+      "audit_only_excluded_fields": [
+        "transitioned_at_utc"
+      ],
+      "expected_fingerprint": "sha256:ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde",
+      "expected_id": "lifecycle-transition_ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde",
+      "fingerprint_field": "transition_fingerprint",
+      "fingerprint_preimage": {
+        "active_observation_refs": [
+          "lifecycle-observations/lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098.json"
+        ],
+        "clearance_promotion_ref": null,
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "new_observation_refs": [
+          "lifecycle-observations/lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098.json"
+        ],
+        "prior_state": "current",
+        "prior_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "result_state": "reassessment_required",
+        "result_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "schema_id": "handbook.lifecycle-transition",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority"
+      },
+      "id_field": "transition_id",
+      "id_location": "record",
+      "record": {
+        "active_observation_refs": [
+          "lifecycle-observations/lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098.json"
+        ],
+        "clearance_promotion_ref": null,
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "new_observation_refs": [
+          "lifecycle-observations/lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098.json"
+        ],
+        "prior_state": "current",
+        "prior_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "result_state": "reassessment_required",
+        "result_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "schema_id": "handbook.lifecycle-transition",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority",
+        "transition_fingerprint": "sha256:ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde",
+        "transition_id": "lifecycle-transition_ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde",
+        "transitioned_at_utc": "2026-07-19T16:06:00Z"
+      },
+      "record_class": "lifecycle-transition",
+      "schema_contract": "exact closed runtime shape frozen by HCM-2.2 SPEC and this complete vector"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c",
+      "expected_id": "trigger-evidence_0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c",
+      "fingerprint_field": "evidence_fingerprint",
+      "fingerprint_preimage": {
+        "basis_canonical_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "current_evidence_fingerprint": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "current_evidence_ref": "evidence/current.json",
+        "event_kind": "production_posture_changed",
+        "extensions": {},
+        "observed_at_utc": "2026-07-19T16:07:00Z",
+        "prior_evidence_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "prior_evidence_ref": "evidence/prior.json",
+        "schema_id": "handbook.lifecycle-trigger-evidence",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority"
+      },
+      "id_field": "event_id",
+      "id_location": "record",
+      "record": {
+        "basis_canonical_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "current_evidence_fingerprint": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "current_evidence_ref": "evidence/current.json",
+        "event_id": "trigger-evidence_0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c",
+        "event_kind": "production_posture_changed",
+        "evidence_fingerprint": "sha256:0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c",
+        "extensions": {},
+        "observed_at_utc": "2026-07-19T16:07:00Z",
+        "prior_evidence_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "prior_evidence_ref": "evidence/prior.json",
+        "schema_id": "handbook.lifecycle-trigger-evidence",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority"
+      },
+      "record_class": "trigger-evidence",
+      "schema_contract": "closed published schema"
+    }
+  ],
+  "cross_record_contract": {
+    "reference_rule": "partition path basename without .json equals the exact target expected_id",
+    "fingerprint_rule": "every declared target fingerprint equals target expected_fingerprint",
+    "target_rule": "target record independently recomputes both expected_id and expected_fingerprint from exact fingerprint_preimage bytes",
+    "external_non_record_refs": "definition, profile, policy, canonical-artifact, value, validation-result, prompt-event, and raw evidence refs are outside this content-addressed semantic-record graph"
+  },
+  "cross_record_bindings": [
+    {
+      "source_record_class": "candidate",
+      "source_field": "intake_record_ref",
+      "target_record_class": "intake",
+      "expected_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+      "declared_fingerprint_field": null,
+      "expected_target_id": "intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
+      "expected_target_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e"
+    },
+    {
+      "source_record_class": "approval",
+      "source_field": "candidate_ref",
+      "target_record_class": "candidate",
+      "expected_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+      "declared_fingerprint_field": "candidate_fingerprint",
+      "expected_target_id": "candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+      "expected_target_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8"
+    },
+    {
+      "source_record_class": "approval",
+      "source_field": "approver_registry_state_ref",
+      "target_record_class": "registry-state",
+      "expected_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+      "declared_fingerprint_field": "approver_registry_state_fingerprint",
+      "expected_target_id": "registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+      "expected_target_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2"
+    },
+    {
+      "source_record_class": "approval",
+      "source_field": "registry_head_transition_ref",
+      "target_record_class": "registry-transition",
+      "expected_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+      "declared_fingerprint_field": "registry_head_transition_fingerprint",
+      "expected_target_id": "registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+      "expected_target_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd"
+    },
+    {
+      "source_record_class": "approval",
+      "source_field": "authenticator_assertion_ref",
+      "target_record_class": "authenticator-assertion",
+      "expected_ref": "authenticator-assertions/authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf.json",
+      "declared_fingerprint_field": "authenticator_assertion_fingerprint",
+      "expected_target_id": "authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
+      "expected_target_fingerprint": "sha256:229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf"
+    },
+    {
+      "source_record_class": "promotion",
+      "source_field": "candidate_ref",
+      "target_record_class": "candidate",
+      "expected_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+      "declared_fingerprint_field": "candidate_fingerprint",
+      "expected_target_id": "candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+      "expected_target_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8"
+    },
+    {
+      "source_record_class": "promotion",
+      "source_field": "approval_refs[0]",
+      "target_record_class": "approval",
+      "expected_ref": "approvals/approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1.json",
+      "declared_fingerprint_field": null,
+      "expected_target_id": "approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1",
+      "expected_target_fingerprint": "sha256:09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1"
+    },
+    {
+      "source_record_class": "promotion",
+      "source_field": "approver_registry_state_ref",
+      "target_record_class": "registry-state",
+      "expected_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+      "declared_fingerprint_field": "approver_registry_state_fingerprint",
+      "expected_target_id": "registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+      "expected_target_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2"
+    },
+    {
+      "source_record_class": "promotion",
+      "source_field": "registry_head_transition_ref",
+      "target_record_class": "registry-transition",
+      "expected_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+      "declared_fingerprint_field": "registry_head_transition_fingerprint",
+      "expected_target_id": "registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+      "expected_target_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd"
+    },
+    {
+      "source_record_class": "registry-state",
+      "source_field": "credentials[0].registration_ref",
+      "target_record_class": "authenticator-registration",
+      "expected_ref": "authenticator-registrations/authenticator-registration_35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b.json",
+      "declared_fingerprint_field": "credentials[0].registration_fingerprint",
+      "expected_target_id": "authenticator-registration_35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b",
+      "expected_target_fingerprint": "sha256:35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b"
+    },
+    {
+      "source_record_class": "registry-transition",
+      "source_field": "authorization_ref",
+      "target_record_class": "authenticator-registration",
+      "expected_ref": "authenticator-registrations/authenticator-registration_35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b.json",
+      "declared_fingerprint_field": "authorization_fingerprint",
+      "expected_target_id": "authenticator-registration_35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b",
+      "expected_target_fingerprint": "sha256:35793a264b51929849480cb49e69f3b2dede0d5407d933ae06f90ebe9df80a9b"
+    },
+    {
+      "source_record_class": "registry-transition",
+      "source_field": "result_registry_state_ref",
+      "target_record_class": "registry-state",
+      "expected_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+      "declared_fingerprint_field": "result_registry_state_fingerprint",
+      "expected_target_id": "registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+      "expected_target_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2"
+    },
+    {
+      "source_record_class": "authenticator-registration",
+      "source_field": "decoded_response_ref",
+      "target_record_class": "authenticator-make-credential-response",
+      "expected_ref": "authenticator-make-credential-responses/authenticator-make-credential-response_dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6.json",
+      "declared_fingerprint_field": "decoded_response_fingerprint",
+      "expected_target_id": "authenticator-make-credential-response_dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6",
+      "expected_target_fingerprint": "sha256:dc16fd84f07c9ff1b2e3fb272b921fdfaa35daf549eba957c285f20a37007df6"
+    },
+    {
+      "source_record_class": "authenticator-assertion",
+      "source_field": "decoded_response_ref",
+      "target_record_class": "authenticator-get-assertion-response",
+      "expected_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29.json",
+      "declared_fingerprint_field": "decoded_response_fingerprint",
+      "expected_target_id": "authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+      "expected_target_fingerprint": "sha256:dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29"
+    },
+    {
+      "source_record_class": "lifecycle-observation",
+      "source_field": "evidence_ref",
+      "target_record_class": "trigger-evidence",
+      "expected_ref": "trigger-evidence/trigger-evidence_0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c.json",
+      "declared_fingerprint_field": "evidence_fingerprint",
+      "expected_target_id": "trigger-evidence_0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c",
+      "expected_target_fingerprint": "sha256:0a44718b51eb268a95265829c36f636b7e50d24e3cd762e1040660fdecf1850c"
+    },
+    {
+      "source_record_class": "lifecycle-transition",
+      "source_field": "active_observation_refs[0]",
+      "target_record_class": "lifecycle-observation",
+      "expected_ref": "lifecycle-observations/lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098.json",
+      "declared_fingerprint_field": null,
+      "expected_target_id": "lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
+      "expected_target_fingerprint": "sha256:b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098"
+    },
+    {
+      "source_record_class": "lifecycle-transition",
+      "source_field": "new_observation_refs[0]",
+      "target_record_class": "lifecycle-observation",
+      "expected_ref": "lifecycle-observations/lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098.json",
+      "declared_fingerprint_field": null,
+      "expected_target_id": "lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
+      "expected_target_fingerprint": "sha256:b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098"
+    }
+  ],
+  "external_reference_contract": {
+    "rule": "every definition, profile, policy, trigger, and published-schema ref in an admitted vector resolves to this exact current producer fingerprint; a stale but self-consistent record refuses",
+    "excluded_reference_classes": [
+      "content values",
+      "validation results",
+      "prompt events",
+      "canonical artifact targets",
+      "raw lifecycle evidence"
+    ]
+  },
+  "external_reference_bindings": [
+    {
+      "source_record_class": "intake",
+      "source_field": "profile_ref",
+      "expected_ref": "handbook.profile.shipped-root@1.1.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+      "declared_fingerprint_field": "resolved_profile_fingerprint"
+    },
+    {
+      "source_record_class": "intake",
+      "source_field": "intake_definition_ref",
+      "expected_ref": "handbook.intake.charter@1.0.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c",
+      "declared_fingerprint_field": null
+    },
+    {
+      "source_record_class": "intake",
+      "source_field": "target_kind_ref",
+      "expected_ref": "handbook.artifact-kind.project-authority@1.1.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+      "declared_fingerprint_field": null
+    },
+    {
+      "source_record_class": "candidate",
+      "source_field": "profile_ref",
+      "expected_ref": "handbook.profile.shipped-root@1.1.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+      "declared_fingerprint_field": "resolved_profile_fingerprint"
+    },
+    {
+      "source_record_class": "candidate",
+      "source_field": "required_approval_policy_ref",
+      "expected_ref": "handbook.approval.constitutional-candidate@1.0.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29",
+      "declared_fingerprint_field": null
+    },
+    {
+      "source_record_class": "candidate",
+      "source_field": "target_kind_ref",
+      "expected_ref": "handbook.artifact-kind.project-authority@1.1.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+      "declared_fingerprint_field": null
+    },
+    {
+      "source_record_class": "candidate",
+      "source_field": "target_schema_ref",
+      "expected_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+      "producer_kind": "schema_entry",
+      "expected_producer_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+      "declared_fingerprint_field": null
+    },
+    {
+      "source_record_class": "approval",
+      "source_field": "approval_policy_ref",
+      "expected_ref": "handbook.approval.constitutional-candidate@1.0.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29",
+      "declared_fingerprint_field": null
+    },
+    {
+      "source_record_class": "promotion",
+      "source_field": "profile_ref",
+      "expected_ref": "handbook.profile.shipped-root@1.1.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+      "declared_fingerprint_field": "resolved_profile_fingerprint"
+    },
+    {
+      "source_record_class": "promotion",
+      "source_field": "resolved_definitions[0].definition_ref",
+      "expected_ref": "handbook.artifact-kind.project-authority@1.1.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+      "declared_fingerprint_field": "resolved_definitions[0].definition_fingerprint"
+    },
+    {
+      "source_record_class": "authenticator-registration",
+      "source_field": "request_schema_ref",
+      "expected_ref": "handbook.schemas.security.authenticator-registration-request@1.0.0",
+      "producer_kind": "schema_entry",
+      "expected_producer_fingerprint": "sha256:8b8ca6acb8572dff1b311aef58d85b893377ed7c6864af66394a9e27ed1131b6",
+      "declared_fingerprint_field": null
+    },
+    {
+      "source_record_class": "authenticator-registration",
+      "source_field": "decoded_response_schema_ref",
+      "expected_ref": "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+      "producer_kind": "schema_entry",
+      "expected_producer_fingerprint": "sha256:51ea813057dea7777fccbe63239df09f1d7a4a963b4781b6bebc993d7b50acab",
+      "declared_fingerprint_field": null
+    },
+    {
+      "source_record_class": "authenticator-assertion",
+      "source_field": "challenge_schema_ref",
+      "expected_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+      "producer_kind": "schema_entry",
+      "expected_producer_fingerprint": "sha256:0cf273fe522c267fa791c879a312805ca84be80b5568b3bacff599c555e21cb8",
+      "declared_fingerprint_field": null
+    },
+    {
+      "source_record_class": "authenticator-assertion",
+      "source_field": "decoded_response_schema_ref",
+      "expected_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+      "producer_kind": "schema_entry",
+      "expected_producer_fingerprint": "sha256:d8c9a89434c513e3ecb301ee0ccb5a8fe219ce262c239ba94cba652b73938768",
+      "declared_fingerprint_field": null
+    },
+    {
+      "source_record_class": "lifecycle-observation",
+      "source_field": "lifecycle_policy_ref",
+      "expected_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+      "declared_fingerprint_field": "lifecycle_policy_fingerprint"
+    },
+    {
+      "source_record_class": "lifecycle-observation",
+      "source_field": "trigger_ref",
+      "expected_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6",
+      "declared_fingerprint_field": "trigger_fingerprint"
+    },
+    {
+      "source_record_class": "lifecycle-transition",
+      "source_field": "lifecycle_policy_ref",
+      "expected_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+      "producer_kind": "definition",
+      "expected_producer_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+      "declared_fingerprint_field": "lifecycle_policy_fingerprint"
+    }
+  ]
+}

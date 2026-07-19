@@ -1,0 +1,1671 @@
+{
+  "schema_id": "hcm-2.2-definition-closure-vectors",
+  "schema_version": "1.0",
+  "normalization_contract": {
+    "encoding": "RFC8785-JCS-UTF8",
+    "preimage_shape": {
+      "definition": "record with only own fingerprint removed",
+      "resolved_dependencies": "sorted by dependency_role then definition_ref"
+    },
+    "hash": "lowercase sha256 with sha256 prefix",
+    "schema_document_encoding": "minified JSON UTF-8 plus one final LF; exact bytes are base64 below"
+  },
+  "schema_entries": {
+    "handbook.schemas.artifacts.project-authority@1.1.0": {
+      "document_byte_length": 12218,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.artifacts.project-authority",
+        "content_schema_version": "1.1.0",
+        "document_ref": "definitions/schemas/handbook.schemas.artifacts.project-authority/1.1.0.schema.json",
+        "document_fingerprint": "sha256:7afabe1e26ea2b56752ca7c23b2d1bfeb0beef89b15dc54f898785d5cc337a33",
+        "closure_fingerprint": "sha256:35758a71494f288b2874065bf1ee2fc7bf71136253c8dfcb28e7025b8e8bf076",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836"
+      },
+      "document_contract_path": "contracts/project-authority-1.1.0.schema.json"
+    },
+    "handbook.schemas.lifecycle.trigger-evidence@1.0.0": {
+      "document_byte_length": 1301,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.lifecycle.trigger-evidence",
+        "content_schema_version": "1.0.0",
+        "document_ref": "definitions/schemas/handbook.schemas.lifecycle.trigger-evidence/1.0.0.schema.json",
+        "document_fingerprint": "sha256:6c158d3f1f047d851e26f46946ecc4e07ef58c8866e89e79da5a9e2c34883af3",
+        "closure_fingerprint": "sha256:39641f9d97132df92c9d43bfe44784a382c37b5751d5e79ee1b177c51bf63a34",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:5c8a1fbc3eac9ff541a70c8c7fd7ba83ea6c19ab54f8f22950f50817839d4532"
+      },
+      "document_contract_path": "contracts/trigger-evidence-1.0.0.schema.json"
+    },
+    "handbook.schemas.security.approver-registry@1.0.0": {
+      "document_byte_length": 2154,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.security.approver-registry",
+        "content_schema_version": "1.0.0",
+        "document_ref": "definitions/schemas/handbook.schemas.security.approver-registry/1.0.0.schema.json",
+        "document_fingerprint": "sha256:b3dab13ae3a73ecf6512af5f4e3f7857a116370812d0ddf1dd57c6cf10b58464",
+        "closure_fingerprint": "sha256:6992033e2e4ed27ffb88af93583a17d4605454564f430eab65a8bb48cbf030dd",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:3d7bcca84a17b6f07defefbb87f4ab6d0fc84aea45403fadd4bcf0cd9aaf7c47"
+      },
+      "document_contract_path": "contracts/approver-registry-1.0.0.schema.json"
+    },
+    "handbook.schemas.security.authenticator-registration-request@1.0.0": {
+      "document_byte_length": 3937,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.security.authenticator-registration-request",
+        "content_schema_version": "1.0.0",
+        "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-registration-request/1.0.0.schema.json",
+        "document_fingerprint": "sha256:f2a352f15cb28f3770666f683b8dbc9f1f1d18f0cedee6d3b95e8241db0c4059",
+        "closure_fingerprint": "sha256:d650b798a000894ffe3d90745283b9d733ddcfd4aa7efa089539e6292d308f93",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:8b8ca6acb8572dff1b311aef58d85b893377ed7c6864af66394a9e27ed1131b6"
+      },
+      "document_contract_path": "contracts/authenticator-registration-request-1.0.0.schema.json"
+    },
+    "handbook.schemas.security.authenticator-challenge@1.0.0": {
+      "document_byte_length": 4302,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.security.authenticator-challenge",
+        "content_schema_version": "1.0.0",
+        "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-challenge/1.0.0.schema.json",
+        "document_fingerprint": "sha256:8cb47ee9ca4b975704f782900c3850d29e7bdd6719af193ab0726f37ec311c29",
+        "closure_fingerprint": "sha256:10f0fdde7f5480cca18c7eff2fbf8d57aeffc9b21f1714558f3548e33cee5b62",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:0cf273fe522c267fa791c879a312805ca84be80b5568b3bacff599c555e21cb8"
+      },
+      "document_contract_path": "contracts/authenticator-challenge-1.0.0.schema.json"
+    },
+    "handbook.schemas.security.authenticator-make-credential-response@1.0.0": {
+      "document_byte_length": 1687,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.security.authenticator-make-credential-response",
+        "content_schema_version": "1.0.0",
+        "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-make-credential-response/1.0.0.schema.json",
+        "document_fingerprint": "sha256:2dd22f26b5a949a84966f7ffa25c35998b5f0b08664a53937339b6e7ebd620a2",
+        "closure_fingerprint": "sha256:8d86aa32abb313972a6105f4858c515d759745e2595e7794507936360d10f5bb",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:51ea813057dea7777fccbe63239df09f1d7a4a963b4781b6bebc993d7b50acab"
+      },
+      "document_contract_path": "contracts/authenticator-make-credential-response-1.0.0.schema.json"
+    },
+    "handbook.schemas.security.authenticator-registration@1.0.0": {
+      "document_byte_length": 2208,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.security.authenticator-registration",
+        "content_schema_version": "1.0.0",
+        "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-registration/1.0.0.schema.json",
+        "document_fingerprint": "sha256:bb0a3446349c2733376373cd511a46989b30bacd6afb6a9aba98b9bc0a352855",
+        "closure_fingerprint": "sha256:8db03f3cb40e774be64cff398af5727d6fec261875f48607aa238f1075c4f1bc",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:caecd1ff93ea9599f53a3780f76d3d91574ea8c89a3757c80c2a6b9716b785b7"
+      },
+      "document_contract_path": "contracts/authenticator-registration-1.0.0.schema.json"
+    },
+    "handbook.schemas.security.authenticator-get-assertion-response@1.0.0": {
+      "document_byte_length": 1791,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.security.authenticator-get-assertion-response",
+        "content_schema_version": "1.0.0",
+        "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-get-assertion-response/1.0.0.schema.json",
+        "document_fingerprint": "sha256:7dbed64cc1a2bec3ca3a3348b6c46626d76287f876f4028f81934b6c3dd54be6",
+        "closure_fingerprint": "sha256:617d49aa3aa23eb1eab4a6489aea4043966abdfe458ccb0cb1f1757ad6be4a26",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:d8c9a89434c513e3ecb301ee0ccb5a8fe219ce262c239ba94cba652b73938768"
+      },
+      "document_contract_path": "contracts/authenticator-get-assertion-response-1.0.0.schema.json"
+    },
+    "handbook.schemas.security.authenticator-assertion@1.0.0": {
+      "document_byte_length": 2185,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.security.authenticator-assertion",
+        "content_schema_version": "1.0.0",
+        "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-assertion/1.0.0.schema.json",
+        "document_fingerprint": "sha256:5efb348fdddaa4e290f35251f9f707307215ed8860c3c6357c935212b9f8ac23",
+        "closure_fingerprint": "sha256:5ff910957a0695cdd263d9ce180d7988eff96491c2cbb26e544338933c646ea6",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:f87787b7b675484fad8d0136d15097f61fd99a73e524e33d7ae424b6e45bafe0"
+      },
+      "document_contract_path": "contracts/authenticator-assertion-1.0.0.schema.json"
+    },
+    "handbook.schemas.security.approver-admin-api@1.0.0": {
+      "document_byte_length": 20697,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.security.approver-admin-api",
+        "content_schema_version": "1.0.0",
+        "document_ref": "definitions/schemas/handbook.schemas.security.approver-admin-api/1.0.0.schema.json",
+        "document_fingerprint": "sha256:d9ed6682d66c4417d76df2e376bf8e48b092a28a830eba6f049853791c952228",
+        "closure_fingerprint": "sha256:84cb605b56e0c9ff1dcd2a34320d2b1c9c7cf7d019b1e592b1aaa5cf9dc6e999",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:50af81e84e6134cdad4bffd250c4ac421405aed2415d1a3eae4f3c48e93dccd8"
+      },
+      "document_contract_path": "contracts/approver-admin-api-1.0.0.schema.json"
+    },
+    "handbook.schemas.security.approver-registry-transition@1.0.0": {
+      "document_byte_length": 2998,
+      "entry": {
+        "schema_id": "handbook.schema-registry-entry",
+        "schema_version": "1.0",
+        "content_schema_id": "handbook.schemas.security.approver-registry-transition",
+        "content_schema_version": "1.0.0",
+        "document_ref": "definitions/schemas/handbook.schemas.security.approver-registry-transition/1.0.0.schema.json",
+        "document_fingerprint": "sha256:1f329bf80ca875d62bd5016693499d8831f73aa8be242def44a5bb10a400251c",
+        "closure_fingerprint": "sha256:f084bf47ec75f15dae345ceced2fc49ab1805d2c2817cec446bbfb5469d1f9a1",
+        "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+        "media_type": "application/schema+json",
+        "compatibility": "exact",
+        "extensions": {},
+        "entry_fingerprint": "sha256:ca2cb1bc9eeeaf5d39a76965cbbecb8c49624c80a7c60f80d9ac036b6228703a"
+      },
+      "document_contract_path": "contracts/approver-registry-transition-1.0.0.schema.json"
+    }
+  },
+  "definition_vectors": {
+    "handbook.semantic-validation.constitutional-root@1.1.0": {
+      "own_fingerprint_field": "profile_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "binding_rules": [
+            {
+              "binding_key": "policy_root",
+              "cardinality": "singular",
+              "empty_policy": "forbidden",
+              "json_type": "object",
+              "rule_id": "policy_root"
+            },
+            {
+              "binding_key": "policy_revision",
+              "cardinality": "singular",
+              "empty_policy": "forbidden",
+              "json_type": "string",
+              "rule_id": "policy_revision"
+            },
+            {
+              "binding_key": "decision_authority",
+              "cardinality": "plural",
+              "empty_policy": "forbidden",
+              "json_type": "array",
+              "rule_id": "decision_authority"
+            },
+            {
+              "binding_key": "required_approvals",
+              "cardinality": "plural",
+              "empty_policy": "forbidden",
+              "json_type": "array",
+              "rule_id": "required_approvals"
+            },
+            {
+              "binding_key": "exception_policy",
+              "cardinality": "singular",
+              "empty_policy": "forbidden",
+              "json_type": "string",
+              "rule_id": "exception_policy"
+            },
+            {
+              "binding_key": "engineering_posture_dimensions",
+              "cardinality": "plural",
+              "empty_policy": "forbidden",
+              "json_type": "array",
+              "rule_id": "engineering_posture_dimensions"
+            },
+            {
+              "binding_key": "red_lines",
+              "cardinality": "plural",
+              "empty_policy": "forbidden",
+              "json_type": "array",
+              "rule_id": "red_lines"
+            },
+            {
+              "binding_key": "review_triggers",
+              "cardinality": "plural",
+              "empty_policy": "forbidden",
+              "json_type": "array",
+              "rule_id": "review_triggers"
+            },
+            {
+              "binding_key": "reassessment_triggers",
+              "cardinality": "plural",
+              "empty_policy": "forbidden",
+              "json_type": "array",
+              "rule_id": "reassessment_triggers"
+            }
+          ],
+          "candidate_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+          "capability_contract_ref": "handbook.capabilities.constitutional-root@1.0.0",
+          "cross_field_rules": [
+            {
+              "implementation_id": "charter-exact-dimension-sequence-v1",
+              "rule_id": "exact_dimension_sequence"
+            },
+            {
+              "implementation_id": "charter-effective-level-1-through-5-v1",
+              "rule_id": "effective_level"
+            },
+            {
+              "implementation_id": "charter-concrete-posture-text-v1",
+              "rule_id": "concrete_posture_text"
+            },
+            {
+              "implementation_id": "charter-governance-binding-v1",
+              "rule_id": "governance_bindings"
+            },
+            {
+              "implementation_id": "charter-retained-input-validation-v1",
+              "rule_id": "retained_input_validation"
+            }
+          ],
+          "extensions": {},
+          "ordered_dimension_ids": [
+            "speed_vs_quality",
+            "type_safety_static_analysis",
+            "testing_rigor",
+            "scalability_performance",
+            "reliability_operability",
+            "security_privacy",
+            "observability",
+            "dx_tooling_automation",
+            "ux_polish_api_usability"
+          ],
+          "profile_id": "handbook.semantic-validation.constitutional-root",
+          "profile_version": "1.1.0",
+          "required_semantic_validator_refs": [
+            "handbook.semantic-validation.constitutional-root@1.0.0"
+          ],
+          "schema_id": "handbook.semantic-validation-profile-definition",
+          "schema_version": "1.1"
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "dependency_role": "candidate_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "dependency_role": "capability_contract"
+          },
+          {
+            "definition_fingerprint": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "dependency_role": "required_semantic_validator"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 3083,
+      "expected_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 10
+    },
+    "handbook.approval.constitutional-candidate@1.0.0": {
+      "own_fingerprint_field": "approval_policy_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "amendment_authority": {
+            "approval_classes_pointer": "/governance/required_approvals",
+            "authority_pointer": "/governance/decision_authority"
+          },
+          "approval_class_mapping": {
+            "authority_must_be_current_member": true,
+            "class_match": "exact",
+            "duplicate_pair_counts_once": true,
+            "mapping_shape": "approval_class_authority_ref_pair",
+            "one_fresh_record_per_required_pair": true,
+            "source": "committed_registry_state_and_transition_head"
+          },
+          "approver_admin_api_schema_ref": "handbook.schemas.security.approver-admin-api@1.0.0",
+          "approver_registry_schema_ref": "handbook.schemas.security.approver-registry@1.0.0",
+          "approver_registry_transition_schema_ref": "handbook.schemas.security.approver-registry-transition@1.0.0",
+          "authenticator_assertion_schema_ref": "handbook.schemas.security.authenticator-assertion@1.0.0",
+          "authenticator_challenge_schema_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+          "authenticator_get_assertion_response_schema_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+          "authenticator_make_credential_response_schema_ref": "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+          "authenticator_registration_request_schema_ref": "handbook.schemas.security.authenticator-registration-request@1.0.0",
+          "authenticator_registration_schema_ref": "handbook.schemas.security.authenticator-registration@1.0.0",
+          "authenticator_requirement": {
+            "allow_list_max_items": 64,
+            "allow_list_order": "credential_id_raw_bytes_ascending",
+            "allowed_algorithms": [
+              "ES256"
+            ],
+            "attestation_policy": "none",
+            "attested_credential_data": "forbidden",
+            "authenticator_data_bytes": 37,
+            "authenticator_flags_byte": 5,
+            "challenge_nonce_bytes": 32,
+            "client_data_hash": "sha256_rfc8785_jcs_request",
+            "credential_descriptor": "required_exact_allow_list_member",
+            "ctap_status_mapping_contract": {
+              "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/ctap-status-mapping-v1.0.json",
+              "raw_sha256": "sha256:1ea8ebafb6f92ffd7fc7de32788da85520d7791dcc362b4843df5840c7dd70c5"
+            },
+            "eligible_credential_rule": "committed_active_sequence_below_4096_es256_exact_authority_pair",
+            "extensions": "forbidden",
+            "fallback": "forbidden",
+            "final_use_lockout_fixture": {
+              "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/final-use-add-lockout-vectors-v1.0.json",
+              "raw_sha256": "sha256:ef971c5ab4112d57669073c5e4fd0d71eeacb7ca6e6b91dd10c5af104e4c8cc4"
+            },
+            "get_assertion_response_keys": [
+              1,
+              2,
+              3
+            ],
+            "get_assertion_success_status": 0,
+            "protocol_id": "fido2-ctap2.1-native",
+            "rp_id": "handbook.local",
+            "signature_encoding": "asn1-der-ecdsa",
+            "signed_preimage": "authenticator_data_concat_client_data_hash",
+            "user_presence": "required",
+            "user_verification": "required"
+          },
+          "basis_artifact_fingerprint_required": true,
+          "candidate_fingerprint_required": true,
+          "decisions": [
+            "approved",
+            "rejected"
+          ],
+          "extensions": {},
+          "identity_assurance": "fido2_user_verified_repository_approver",
+          "initial_creation_authority": {
+            "bootstrap_mapping_source": "engine_union_of_quorum_and_fixed_registry_admin",
+            "caller_bootstrap_mappings": "forbidden",
+            "caller_subset": "forbidden",
+            "nonempty": true,
+            "one_fresh_approval_per_exact_pair": true,
+            "preserved_by_registry_transitions": true,
+            "source": "registry_state_initial_charter_quorum",
+            "target_must_be_absent": true
+          },
+          "policy_id": "handbook.approval.constitutional-candidate",
+          "policy_version": "1.0.0",
+          "registry_anchor": {
+            "amendment": "committed_chain_from_current_promotion_state_and_head",
+            "initial": "committed_bootstrap_transition_with_null_priors",
+            "unsigned_replacement": "forbidden"
+          },
+          "schema_id": "handbook.approval-policy-definition",
+          "schema_version": "1.0",
+          "target_capability_contract_ref": "handbook.capabilities.constitutional-root@1.0.0",
+          "waiver_acceptance": {
+            "all_candidate_waiver_fingerprints_required": true,
+            "approval_entry_order": "waiver_ref_utf8_then_fingerprint_ascii",
+            "challenge_fingerprint_order": "lowercase_ascii",
+            "extra_waiver_fingerprints_forbidden": true,
+            "unique_waiver_fingerprints": true,
+            "unique_waiver_refs": true
+          }
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:50af81e84e6134cdad4bffd250c4ac421405aed2415d1a3eae4f3c48e93dccd8",
+            "definition_ref": "handbook.schemas.security.approver-admin-api@1.0.0",
+            "dependency_role": "approver_admin_api_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:3d7bcca84a17b6f07defefbb87f4ab6d0fc84aea45403fadd4bcf0cd9aaf7c47",
+            "definition_ref": "handbook.schemas.security.approver-registry@1.0.0",
+            "dependency_role": "approver_registry_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:ca2cb1bc9eeeaf5d39a76965cbbecb8c49624c80a7c60f80d9ac036b6228703a",
+            "definition_ref": "handbook.schemas.security.approver-registry-transition@1.0.0",
+            "dependency_role": "approver_registry_transition_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:f87787b7b675484fad8d0136d15097f61fd99a73e524e33d7ae424b6e45bafe0",
+            "definition_ref": "handbook.schemas.security.authenticator-assertion@1.0.0",
+            "dependency_role": "authenticator_assertion_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:0cf273fe522c267fa791c879a312805ca84be80b5568b3bacff599c555e21cb8",
+            "definition_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+            "dependency_role": "authenticator_challenge_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:d8c9a89434c513e3ecb301ee0ccb5a8fe219ce262c239ba94cba652b73938768",
+            "definition_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+            "dependency_role": "authenticator_get_assertion_response_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:51ea813057dea7777fccbe63239df09f1d7a4a963b4781b6bebc993d7b50acab",
+            "definition_ref": "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+            "dependency_role": "authenticator_make_credential_response_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:8b8ca6acb8572dff1b311aef58d85b893377ed7c6864af66394a9e27ed1131b6",
+            "definition_ref": "handbook.schemas.security.authenticator-registration-request@1.0.0",
+            "dependency_role": "authenticator_registration_request_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:caecd1ff93ea9599f53a3780f76d3d91574ea8c89a3757c80c2a6b9716b785b7",
+            "definition_ref": "handbook.schemas.security.authenticator-registration@1.0.0",
+            "dependency_role": "authenticator_registration_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "dependency_role": "capability_contract"
+          },
+          {
+            "definition_fingerprint": "sha256:1ea8ebafb6f92ffd7fc7de32788da85520d7791dcc362b4843df5840c7dd70c5",
+            "definition_ref": "fixture.ctap-status-mapping-v1.0@1.0.0",
+            "dependency_role": "ctap_status_mapping_fixture"
+          },
+          {
+            "definition_fingerprint": "sha256:ef971c5ab4112d57669073c5e4fd0d71eeacb7ca6e6b91dd10c5af104e4c8cc4",
+            "definition_ref": "fixture.final-use-add-lockout-v1.0@1.0.0",
+            "dependency_role": "final_use_lockout_fixture"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 6658,
+      "expected_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 1
+    },
+    "handbook.waiver.constitutional-intake@1.0.0": {
+      "own_fingerprint_field": "waiver_policy_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "allowed_coverage_ids": [
+            "decisions.records",
+            "delivery.default_implications",
+            "engineering_posture.dimensions",
+            "engineering_posture.red_lines",
+            "governance.decision_authority",
+            "governance.exception_policy",
+            "governance.reassessment_triggers",
+            "governance.required_approvals",
+            "governance.review_triggers",
+            "policy.authority_and_revision"
+          ],
+          "allowed_quality_obligations": [
+            "minimum_specificity"
+          ],
+          "approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+          "candidate_binding_required": true,
+          "expiry_required": true,
+          "extensions": {},
+          "policy_id": "handbook.waiver.constitutional-intake",
+          "policy_version": "1.0.0",
+          "required_fields": [
+            "coverage_id",
+            "quality_obligation",
+            "source_kind",
+            "value_ref",
+            "value_fingerprint",
+            "candidate_fingerprint",
+            "rationale",
+            "accepted_risk",
+            "expires_at_utc",
+            "review_at_utc",
+            "actor_ref",
+            "authority_ref"
+          ],
+          "schema_id": "handbook.waiver-policy-definition",
+          "schema_version": "1.0"
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29",
+            "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+            "dependency_role": "approval_policy"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 1141,
+      "expected_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 11
+    },
+    "handbook.intake-trigger.production-posture-changed@1.0.0": {
+      "own_fingerprint_field": "trigger_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "change_rule": "prior_and_current_fingerprints_must_differ",
+          "event_kind": "production_posture_changed",
+          "evidence_schema_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+          "extensions": {},
+          "freshness": "session",
+          "required_evidence_fields": [
+            "target_instance_id",
+            "basis_canonical_fingerprint",
+            "prior_evidence_ref",
+            "prior_evidence_fingerprint",
+            "current_evidence_ref",
+            "current_evidence_fingerprint"
+          ],
+          "schema_id": "handbook.trigger-definition",
+          "schema_version": "1.0",
+          "sensitivity": "internal",
+          "trigger_id": "handbook.intake-trigger.production-posture-changed",
+          "trigger_version": "1.0.0"
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:5c8a1fbc3eac9ff541a70c8c7fd7ba83ea6c19ab54f8f22950f50817839d4532",
+            "definition_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+            "dependency_role": "evidence_schema"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 827,
+      "expected_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 3
+    },
+    "handbook.intake-trigger.trust-boundary-changed@1.0.0": {
+      "own_fingerprint_field": "trigger_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "change_rule": "prior_and_current_fingerprints_must_differ",
+          "event_kind": "trust_boundary_changed",
+          "evidence_schema_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+          "extensions": {},
+          "freshness": "session",
+          "required_evidence_fields": [
+            "target_instance_id",
+            "basis_canonical_fingerprint",
+            "prior_evidence_ref",
+            "prior_evidence_fingerprint",
+            "current_evidence_ref",
+            "current_evidence_fingerprint"
+          ],
+          "schema_id": "handbook.trigger-definition",
+          "schema_version": "1.0",
+          "sensitivity": "restricted",
+          "trigger_id": "handbook.intake-trigger.trust-boundary-changed",
+          "trigger_version": "1.0.0"
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:5c8a1fbc3eac9ff541a70c8c7fd7ba83ea6c19ab54f8f22950f50817839d4532",
+            "definition_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+            "dependency_role": "evidence_schema"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 821,
+      "expected_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 4
+    },
+    "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0": {
+      "own_fingerprint_field": "trigger_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "change_rule": "prior_and_current_fingerprints_must_differ",
+          "event_kind": "charter_amendment_proposed",
+          "evidence_schema_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+          "extensions": {},
+          "freshness": "current_basis",
+          "required_evidence_fields": [
+            "target_instance_id",
+            "basis_canonical_fingerprint",
+            "prior_evidence_ref",
+            "prior_evidence_fingerprint",
+            "current_evidence_ref",
+            "current_evidence_fingerprint"
+          ],
+          "schema_id": "handbook.trigger-definition",
+          "schema_version": "1.0",
+          "sensitivity": "internal",
+          "trigger_id": "handbook.lifecycle-trigger.charter-amendment-proposed",
+          "trigger_version": "1.0.0"
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:5c8a1fbc3eac9ff541a70c8c7fd7ba83ea6c19ab54f8f22950f50817839d4532",
+            "definition_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+            "dependency_role": "evidence_schema"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 836,
+      "expected_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 6
+    },
+    "handbook.renderer.charter-review-markdown@1.0.0": {
+      "own_fingerprint_field": "renderer_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "boundary_fixture": {
+            "byte_length": 8079,
+            "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/charter-review-boundary-v1.0.md",
+            "raw_sha256": "sha256:4bebff7b716e624a955637f9462e65f4b42b6857b31b0b2add8809034c7b1061"
+          },
+          "determinism_profile": "closed-charter-render-v1",
+          "extensions": {},
+          "implementation_id": "charter-review-markdown-v1",
+          "input_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+          "output_media_type": "text/markdown",
+          "renderer_id": "handbook.renderer.charter-review-markdown",
+          "renderer_version": "1.0.0",
+          "required_capability_contract_ref": "handbook.capabilities.constitutional-root@1.0.0",
+          "resolution_input": null,
+          "schema_id": "handbook.renderer-definition",
+          "schema_version": "1.0"
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:4bebff7b716e624a955637f9462e65f4b42b6857b31b0b2add8809034c7b1061",
+            "definition_ref": "fixture.charter-review-boundary-v1.0@1.0.0",
+            "dependency_role": "boundary_fixture"
+          },
+          {
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "dependency_role": "capability_contract"
+          },
+          {
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "dependency_role": "input_schema"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 1367,
+      "expected_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 9
+    },
+    "handbook.lifecycle.constitutional-review-lock@1.0.0": {
+      "own_fingerprint_field": "lifecycle_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+          "clearance": "new_approved_promotion",
+          "extensions": {},
+          "initial_state": "current",
+          "policy_id": "handbook.lifecycle.constitutional-review-lock",
+          "policy_version": "1.0.0",
+          "reassessment_mappings": [
+            {
+              "affected_coverage_ids": [
+                "operational_reality.production_state"
+              ],
+              "trigger_ref": "handbook.intake-trigger.production-posture-changed@1.0.0"
+            },
+            {
+              "affected_coverage_ids": [
+                "governance.exception_policy"
+              ],
+              "trigger_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0"
+            }
+          ],
+          "review_trigger_refs": [
+            "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0"
+          ],
+          "schema_id": "handbook.lifecycle-policy-definition",
+          "schema_version": "1.0",
+          "states": [
+            "current",
+            "review_required",
+            "reassessment_required"
+          ],
+          "target_capability_contract_ref": "handbook.capabilities.constitutional-root@1.0.0"
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29",
+            "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+            "dependency_role": "approval_policy"
+          },
+          {
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "dependency_role": "capability_contract"
+          },
+          {
+            "definition_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6",
+            "definition_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+            "dependency_role": "reassessment_trigger"
+          },
+          {
+            "definition_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766",
+            "definition_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0",
+            "dependency_role": "reassessment_trigger"
+          },
+          {
+            "definition_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8",
+            "definition_ref": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+            "dependency_role": "review_trigger"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 1938,
+      "expected_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 7
+    },
+    "handbook.artifact-kind.project-authority@1.1.0": {
+      "own_fingerprint_field": "definition_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "canonical_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+          "compatibility": "exact",
+          "extensions": {},
+          "kind_id": "handbook.artifact-kind.project-authority",
+          "kind_version": "1.1.0",
+          "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+          "projection_definition_refs": [],
+          "renderer_definition_refs": [
+            "handbook.renderer.charter-review-markdown@1.0.0"
+          ],
+          "required_capabilities": [],
+          "review_triggers": [
+            "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0"
+          ],
+          "schema_id": "handbook.artifact-kind-definition",
+          "schema_version": "1.0",
+          "semantic_capabilities": [
+            {
+              "bindings": {
+                "decision_authority": "/governance/decision_authority",
+                "engineering_posture_dimensions": "/engineering_posture/dimensions",
+                "exception_policy": "/governance/exception_policy",
+                "policy_revision": "/policy/revision",
+                "policy_root": "/policy",
+                "reassessment_triggers": "/governance/reassessment_triggers",
+                "red_lines": "/engineering_posture/red_lines",
+                "required_approvals": "/governance/required_approvals",
+                "review_triggers": "/governance/review_triggers"
+              },
+              "capability_id": "constitutional_root",
+              "contract_ref": "handbook.capabilities.constitutional-root@1.0.0"
+            }
+          ],
+          "semantic_validation_profile_refs": [
+            "handbook.semantic-validation.constitutional-root@1.0.0",
+            "handbook.semantic-validation.constitutional-root@1.1.0"
+          ],
+          "stable_role_registry": {
+            "fingerprint": "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029",
+            "ref": "handbook.roles.core@1.1.0"
+          },
+          "structural_validation_profile_ref": "json-schema.draft-2020-12",
+          "supported_role_refs": [
+            "constitutional_authority"
+          ]
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "dependency_role": "canonical_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "dependency_role": "capability_contract"
+          },
+          {
+            "definition_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+            "definition_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+            "dependency_role": "lifecycle"
+          },
+          {
+            "definition_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7",
+            "definition_ref": "handbook.renderer.charter-review-markdown@1.0.0",
+            "dependency_role": "renderer"
+          },
+          {
+            "definition_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8",
+            "definition_ref": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+            "dependency_role": "review_trigger"
+          },
+          {
+            "definition_fingerprint": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "dependency_role": "semantic_validator"
+          },
+          {
+            "definition_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+            "dependency_role": "semantic_validator"
+          },
+          {
+            "definition_fingerprint": "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029",
+            "definition_ref": "handbook.roles.core@1.1.0",
+            "dependency_role": "stable_role_registry"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 3243,
+      "expected_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 2
+    },
+    "handbook.intake.charter@1.0.0": {
+      "own_fingerprint_field": "intake_definition_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+          "artifact_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+          "candidate_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+          "coverage": [
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [
+                  "repository_configuration"
+                ],
+                "freshness": "session",
+                "inferable": true,
+                "sensitivity": "internal",
+                "user_declaration_required": false
+              },
+              "applicability": "always",
+              "authority_class": "observational",
+              "coverage_id": "project_shape.definition",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "concrete",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": null
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/record_id",
+                "/project/name",
+                "/project/classification",
+                "/project/team_size",
+                "/project/users",
+                "/project/expected_lifetime",
+                "/project/surfaces",
+                "/project/runtime_environments"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [
+                  "repository_configuration"
+                ],
+                "freshness": "session",
+                "inferable": true,
+                "sensitivity": "internal",
+                "user_declaration_required": false
+              },
+              "applicability": "always",
+              "authority_class": "observational",
+              "coverage_id": "delivery.constraints",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "concrete",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": null
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/project/constraints"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "delivery.default_implications",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "explicit_policy",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": "handbook.waiver.constitutional-intake@1.0.0"
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/project/default_implications"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [
+                  "repository_configuration"
+                ],
+                "freshness": "session",
+                "inferable": true,
+                "sensitivity": "internal",
+                "user_declaration_required": false
+              },
+              "applicability": "always",
+              "authority_class": "observational",
+              "coverage_id": "operational_reality.production_state",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "concrete",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": null
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/project/operational_reality"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [
+                  "repository_configuration"
+                ],
+                "freshness": "session",
+                "inferable": true,
+                "sensitivity": "internal",
+                "user_declaration_required": false
+              },
+              "applicability": "always",
+              "authority_class": "observational",
+              "coverage_id": "risk.domains",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "concrete",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": null
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/domains"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "engineering_posture.baseline",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "explicit_levels",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": null
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/posture/baseline_level",
+                "/posture/baseline_rationale"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "policy.authority_and_revision",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "explicit_policy",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": "handbook.waiver.constitutional-intake@1.0.0"
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/policy"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "governance.decision_authority",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "named_role_or_owner",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": "handbook.waiver.constitutional-intake@1.0.0"
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/governance/decision_authority"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "governance.required_approvals",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "explicit_policy",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": "handbook.waiver.constitutional-intake@1.0.0"
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/governance/required_approvals"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "governance.exception_policy",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "explicit_policy",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": "handbook.waiver.constitutional-intake@1.0.0"
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/governance/exception_policy",
+                "/governance/exception_process"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "engineering_posture.dimensions",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "explicit_levels",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": "handbook.waiver.constitutional-intake@1.0.0"
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/engineering_posture/dimensions"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "engineering_posture.red_lines",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "explicit_policy",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": "handbook.waiver.constitutional-intake@1.0.0"
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/engineering_posture/red_lines"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "governance.review_triggers",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "explicit_policy",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": "handbook.waiver.constitutional-intake@1.0.0"
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/governance/review_triggers"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "governance.reassessment_triggers",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "explicit_policy",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": "handbook.waiver.constitutional-intake@1.0.0"
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/governance/reassessment_triggers"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [
+                  "repository_configuration"
+                ],
+                "freshness": "session",
+                "inferable": true,
+                "sensitivity": "internal",
+                "user_declaration_required": false
+              },
+              "applicability": "always",
+              "authority_class": "observational",
+              "coverage_id": "debt.register",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "concrete",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": null
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/debt"
+              ]
+            },
+            {
+              "acquisition": {
+                "deterministic_default": null,
+                "evidence_kinds": [],
+                "freshness": null,
+                "inferable": false,
+                "sensitivity": "internal",
+                "user_declaration_required": true
+              },
+              "applicability": "always",
+              "authority_class": "normative",
+              "coverage_id": "decisions.records",
+              "evaluation": {
+                "contradiction_policy": "block",
+                "minimum_confidence": "high",
+                "minimum_specificity": "concrete",
+                "required": true,
+                "unknown_policy": "block",
+                "waiver_policy_ref": "handbook.waiver.constitutional-intake@1.0.0"
+              },
+              "prompt_guidance_refs": [],
+              "target_paths": [
+                "/decision_records"
+              ]
+            }
+          ],
+          "extensions": {},
+          "intake_id": "handbook.intake.charter",
+          "intake_version": "1.0.0",
+          "reassessment_triggers": [
+            {
+              "affected_coverage_ids": [
+                "operational_reality.production_state"
+              ],
+              "trigger_ref": "handbook.intake-trigger.production-posture-changed@1.0.0"
+            },
+            {
+              "affected_coverage_ids": [
+                "governance.exception_policy"
+              ],
+              "trigger_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0"
+            }
+          ],
+          "schema_id": "handbook.artifact-intake-definition",
+          "schema_version": "1.0",
+          "supported_modes": [
+            "guided_adaptive",
+            "express",
+            "agent_assisted"
+          ]
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29",
+            "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+            "dependency_role": "approval_policy"
+          },
+          {
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "dependency_role": "candidate_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6",
+            "definition_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+            "dependency_role": "reassessment_trigger"
+          },
+          {
+            "definition_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766",
+            "definition_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0",
+            "dependency_role": "reassessment_trigger"
+          },
+          {
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "dependency_role": "target_kind"
+          },
+          {
+            "definition_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3",
+            "definition_ref": "handbook.waiver.constitutional-intake@1.0.0",
+            "dependency_role": "waiver_policy"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 10889,
+      "expected_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 5
+    },
+    "handbook.profile.shipped-root@1.1.0": {
+      "own_fingerprint_field": "profile_fingerprint",
+      "fingerprint_preimage": {
+        "definition": {
+          "adapter_overlay_refs": [],
+          "artifact_instances": [
+            {
+              "canonical_path": ".handbook/project/charter.yaml",
+              "capability_refs": [
+                "constitutional_root"
+              ],
+              "depends_on": [],
+              "extensions": {},
+              "id": "project_authority",
+              "intake_definition_ref": "handbook.intake.charter@1.0.0",
+              "kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+              "label": "Charter",
+              "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+              "projection_definition_refs": [],
+              "renderer_definition_refs": [
+                "handbook.renderer.charter-review-markdown@1.0.0"
+              ],
+              "requiredness": {
+                "condition_ref": null,
+                "mode": "always"
+              },
+              "role_ref": "constitutional_authority",
+              "schema_id": "handbook.artifact-instance-descriptor",
+              "schema_version": "1.0",
+              "validation_overlay_refs": []
+            },
+            {
+              "canonical_path": ".handbook/project/context.yaml",
+              "capability_refs": [],
+              "depends_on": [],
+              "extensions": {},
+              "id": "project_context",
+              "intake_definition_ref": null,
+              "kind_ref": "handbook.artifact-kind.project-context@1.0.0",
+              "label": "Project Context",
+              "lifecycle_policy_ref": null,
+              "projection_definition_refs": [],
+              "renderer_definition_refs": [],
+              "requiredness": {
+                "condition_ref": null,
+                "mode": "always"
+              },
+              "role_ref": "project_context",
+              "schema_id": "handbook.artifact-instance-descriptor",
+              "schema_version": "1.0",
+              "validation_overlay_refs": []
+            },
+            {
+              "canonical_path": ".handbook/project/environment.yaml",
+              "capability_refs": [],
+              "depends_on": [],
+              "extensions": {},
+              "id": "environment_context",
+              "intake_definition_ref": null,
+              "kind_ref": "handbook.artifact-kind.environment-context@1.0.0",
+              "label": "Environment Context",
+              "lifecycle_policy_ref": null,
+              "projection_definition_refs": [],
+              "renderer_definition_refs": [],
+              "requiredness": {
+                "condition_ref": "handbook.condition.project.managed-operational-surface@1.0.0",
+                "mode": "conditional"
+              },
+              "role_ref": "environment_context",
+              "schema_id": "handbook.artifact-instance-descriptor",
+              "schema_version": "1.0",
+              "validation_overlay_refs": []
+            }
+          ],
+          "artifact_kind_sources": [
+            "handbook.artifact-kind.project-authority@1.0.0",
+            "handbook.artifact-kind.project-authority@1.1.0",
+            "handbook.artifact-kind.project-context@1.0.0",
+            "handbook.artifact-kind.environment-context@1.0.0",
+            "handbook.artifact-kind.work-specification@1.0.0",
+            "handbook.artifact-kind.decision-record@1.0.0",
+            "handbook.artifact-kind.risk-record@1.0.0"
+          ],
+          "context_resolution_ref": "handbook.context-resolution.shipped-root@1.0.0",
+          "dock_requirement_refs": [],
+          "extends_profile_ref": null,
+          "extensions": {},
+          "posture_evaluation_policy": null,
+          "profile_id": "handbook.profile.shipped-root",
+          "profile_scope": "shipped",
+          "profile_version": "1.1.0",
+          "projection_catalog_refs": [],
+          "schema_id": "handbook.instance-profile",
+          "schema_registry_sources": [
+            "handbook.schemas.artifacts.project-authority@1.0.0",
+            "handbook.schemas.artifacts.project-authority@1.1.0",
+            "handbook.schemas.artifacts.project-context@1.0.0",
+            "handbook.schemas.artifacts.environment-context@1.0.0",
+            "handbook.schemas.artifacts.work-specification@1.0.0",
+            "handbook.schemas.artifacts.decision-record@1.0.0",
+            "handbook.schemas.artifacts.risk-record@1.0.0",
+            "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+            "handbook.schemas.security.approver-registry@1.0.0",
+            "handbook.schemas.security.approver-registry-transition@1.0.0",
+            "handbook.schemas.security.authenticator-registration-request@1.0.0",
+            "handbook.schemas.security.authenticator-challenge@1.0.0",
+            "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+            "handbook.schemas.security.authenticator-registration@1.0.0",
+            "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+            "handbook.schemas.security.authenticator-assertion@1.0.0",
+            "handbook.schemas.security.approver-admin-api@1.0.0"
+          ],
+          "schema_version": "1.0",
+          "stable_role_registry": {
+            "fingerprint": "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029",
+            "ref": "handbook.roles.core@1.1.0"
+          },
+          "vocabulary_ref": "handbook.vocabulary.shipped-root@1.0.0"
+        },
+        "resolved_dependencies": [
+          {
+            "definition_fingerprint": "sha256:7924fc428c9b4e11e4a33fe079c31fe520c42d1d2c2ece13bb95db8a83129fbe",
+            "definition_ref": "handbook.artifact-kind.decision-record@1.0.0",
+            "dependency_role": "artifact_kind_source"
+          },
+          {
+            "definition_fingerprint": "sha256:23d946423cfae7127331199980dba739cc7e02fdceb327ae1578cc5e399a6228",
+            "definition_ref": "handbook.artifact-kind.environment-context@1.0.0",
+            "dependency_role": "artifact_kind_source"
+          },
+          {
+            "definition_fingerprint": "sha256:276c9f5a9686f9f8648db829f83d97730245062a5ddc47b6b3eccd087b8ce42b",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.0.0",
+            "dependency_role": "artifact_kind_source"
+          },
+          {
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "dependency_role": "artifact_kind_source"
+          },
+          {
+            "definition_fingerprint": "sha256:12d29537b71297b1212dbe5312c71467c973697abba863fdd69b46bc350ed160",
+            "definition_ref": "handbook.artifact-kind.project-context@1.0.0",
+            "dependency_role": "artifact_kind_source"
+          },
+          {
+            "definition_fingerprint": "sha256:6e5b359bb5f8ae97f0b7675c20b82f9d8165f2b815dae29948d20f8202ae5a02",
+            "definition_ref": "handbook.artifact-kind.risk-record@1.0.0",
+            "dependency_role": "artifact_kind_source"
+          },
+          {
+            "definition_fingerprint": "sha256:50d4c91df9c67a34c221bcfea3f1f659890be199f23253e625d3f332fbdf3ccf",
+            "definition_ref": "handbook.artifact-kind.work-specification@1.0.0",
+            "dependency_role": "artifact_kind_source"
+          },
+          {
+            "definition_fingerprint": "sha256:2ae25788c7860f3062f30659a7674c2ccd8f56b0f8809f1134003e04dea20b61",
+            "definition_ref": "handbook.condition.project.managed-operational-surface@1.0.0",
+            "dependency_role": "condition"
+          },
+          {
+            "definition_fingerprint": "sha256:9e95fdef90b98e28acb60bfe96a72f122418b56b1531eafe8ab6cff3eb7668b4",
+            "definition_ref": "handbook.context-resolution.shipped-root@1.0.0",
+            "dependency_role": "context_resolution"
+          },
+          {
+            "definition_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c",
+            "definition_ref": "handbook.intake.charter@1.0.0",
+            "dependency_role": "intake"
+          },
+          {
+            "definition_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+            "definition_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+            "dependency_role": "lifecycle"
+          },
+          {
+            "definition_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7",
+            "definition_ref": "handbook.renderer.charter-review-markdown@1.0.0",
+            "dependency_role": "renderer"
+          },
+          {
+            "definition_fingerprint": "sha256:08875dd868d539f03e31e48e3e8211cbd44d4e32f9d069cb1fcabed6dd2a6c08",
+            "definition_ref": "handbook.schemas.artifacts.decision-record@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:632e3e9d35806a88dd8a70c8059f4ac6746b6e49d9d0177f68b13dcc91388ad7",
+            "definition_ref": "handbook.schemas.artifacts.environment-context@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:2a4d178686a935d655539df1b36c2e35ab83dcc6fbada7570f17377075029e1c",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:792ea38fc2760f90bca9a376182971d44f4ab19107cc7bf88bdf1786c93b4e24",
+            "definition_ref": "handbook.schemas.artifacts.project-context@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:8d8dc18add39d768cc6c22416c61db83a0e60004d5539332cdb07797cdf37cd0",
+            "definition_ref": "handbook.schemas.artifacts.risk-record@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:cde12216358ff86e3f3cd1364bfd4818cdfcf086645fbdac18556feb70be9747",
+            "definition_ref": "handbook.schemas.artifacts.work-specification@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:5c8a1fbc3eac9ff541a70c8c7fd7ba83ea6c19ab54f8f22950f50817839d4532",
+            "definition_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:50af81e84e6134cdad4bffd250c4ac421405aed2415d1a3eae4f3c48e93dccd8",
+            "definition_ref": "handbook.schemas.security.approver-admin-api@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:ca2cb1bc9eeeaf5d39a76965cbbecb8c49624c80a7c60f80d9ac036b6228703a",
+            "definition_ref": "handbook.schemas.security.approver-registry-transition@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:3d7bcca84a17b6f07defefbb87f4ab6d0fc84aea45403fadd4bcf0cd9aaf7c47",
+            "definition_ref": "handbook.schemas.security.approver-registry@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:f87787b7b675484fad8d0136d15097f61fd99a73e524e33d7ae424b6e45bafe0",
+            "definition_ref": "handbook.schemas.security.authenticator-assertion@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:0cf273fe522c267fa791c879a312805ca84be80b5568b3bacff599c555e21cb8",
+            "definition_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:d8c9a89434c513e3ecb301ee0ccb5a8fe219ce262c239ba94cba652b73938768",
+            "definition_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:51ea813057dea7777fccbe63239df09f1d7a4a963b4781b6bebc993d7b50acab",
+            "definition_ref": "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:8b8ca6acb8572dff1b311aef58d85b893377ed7c6864af66394a9e27ed1131b6",
+            "definition_ref": "handbook.schemas.security.authenticator-registration-request@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:caecd1ff93ea9599f53a3780f76d3d91574ea8c89a3757c80c2a6b9716b785b7",
+            "definition_ref": "handbook.schemas.security.authenticator-registration@1.0.0",
+            "dependency_role": "schema_source"
+          },
+          {
+            "definition_fingerprint": "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029",
+            "definition_ref": "handbook.roles.core@1.1.0",
+            "dependency_role": "stable_role_registry"
+          },
+          {
+            "definition_fingerprint": "sha256:69113b1a9271ce207d45bdb91ebae8d6516249e16b59891b292546078364a22b",
+            "definition_ref": "handbook.vocabulary.shipped-root@1.0.0",
+            "dependency_role": "vocabulary"
+          }
+        ]
+      },
+      "normalized_jcs_byte_length": 10191,
+      "expected_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+      "normalized_jcs_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/definition-normalized-jcs-v1.jsonl",
+      "normalized_jcs_line": 8
+    }
+  },
+  "closure_summary": {
+    "project_authority_schema_entry_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+    "kind_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+    "intake_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c",
+    "profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74"
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260719T131536Z--HCM-2-2--fresh-planning-review-1",
+  "created_at_utc": "2026-07-19T13:15:36Z",
+  "source_handoff_ids": [
+    "20260719T104915Z--HCM-2-1--orchestration--project-context-canonical-yaml-landed"
+  ],
+  "parent_orchestration_id": "20260719T130500Z--HCM-2-2--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "test-driven-development",
+    "documentation-and-adrs",
+    "code-review-and-quality",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:361550eb2c7527f9cb397a12bcb5dbd1844565243f2d45b37b0829a2138368b8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "9a6a54f1b6ee5c62f45e19c314777612bf23b385229d15fae30102ec9ec9fa57"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "22eb5640f242538849209f71f5944357a8ca0469822f98bdee9dae897dd76c1b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "a240f87a70aa460a23edb3f7a5b4ec3bbbae1c8d14982cf5fb7ec03d07f82a9f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "9043d664ebd559650b865ed35b83437de1af9ee44c9700839ef8e702c6c0fe3e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260719T130500Z--planning-proof-wall.md",
+        "sha256": "51ce8a854281e6637d80b55aa808bb611dfc8b724b76714617e8d6702475b0fd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+        "sha256": "5d5eb169c94c820e120162df959cf9be2f75e62927908bf3590664118b7927cf"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+        "sha256": "0722d2f3bf7e34bb8cd76ede0db6042b7c6219c815d9a12e274bdf2e536d5f49"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:361550eb2c7527f9cb397a12bcb5dbd1844565243f2d45b37b0829a2138368b8"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.2_planning_only",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "complete_planning_subject_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Authority stack",
+        "Greenfield rule",
+        "Per-slice context assembly protocol"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Authority split",
+        "Canonical artifacts, renderer-derived views, and Projections",
+        "Artifact intake and authoring boundary",
+        "Non-negotiable invariants"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Instance profile",
+        "Artifact-kind and instance registries",
+        "Artifact intake",
+        "Charter and constitutional authority",
+        "Promotion semantics"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Canonical artifact identities",
+        "Structured authoring",
+        "Markdown validation",
+        "Setup scaffolding",
+        "Doctor command",
+        "Flow packet assembly"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Sequencing rule",
+        "HCM-2.2 — Constitutional-root artifact",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity",
+        "Artifact kind definition contract",
+        "HCM-0.6 exact shipped kind and root-profile data",
+        "Artifact intake definition contract",
+        "Intake record and artifact candidate contracts",
+        "Charter intake and canonical contract",
+        "Artifact validation layers"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PR-009 — Charter questionnaire-shaped coverage and posture validation",
+        "Open program proof gates",
+        "Greenfield deletion gates",
+        "Regression rules"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+      "sections": [
+        "Exact shipped root-profile instance set",
+        "Project Authority boundary",
+        "First-party intake, renderers, and Projection posture",
+        "Explicitly unresolved subordinate contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260719T104915Z--HCM-2-1--orchestration--project-context-canonical-yaml-landed.json",
+      "sections": [
+        "complete selected dependency and transition record"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Phase 5 — Fresh review / remediation loop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_truth": "Fresh read-only review of the exact seven-entry HCM-2.2 planning subject. No HCM-2.2 implementation packet existed at entry. The proposed packet adds planning authority only and must be independently checked against the current control pack, released definition bytes, live Charter/Environment Inventory/flow/CLI carriers, HCM-2.1 precedent, and implementability. The released Project Authority 1.0 schema is minimal while the live rich Charter input remains Markdown-first. Inherit no clean conclusion.",
+  "allowed_scope": [
+    "Remain read-only and replay the sorted seven-entry manifest and aggregate fingerprint before review.",
+    "Review every byte of 00, 04, 06, HCM-2.2 SPEC, plan, unchecked todo, and planning proof wall.",
+    "Read unchanged 01, 02, 03, 05, 07, 08, the HCM-0.6 decision, selected HCM-2.1 record/packet/proof, exact definition assets, and live engine/compiler/flow/CLI/skill/template/test sources only as needed.",
+    "Run bounded read-only Markdown, link, Git, handoff/schema, source/API feasibility, exact-definition/version, lineage/atomicity, cross-platform, determinism, security, bridge, and classification checks.",
+    "Return findings first with exact file/line evidence through the built-in channel."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, new dispatches, global handoffs, ledger writes, or user task hops.",
+    "No Rust, Cargo, definition, template, fixture, test, runtime/product, generated-skill, pipeline, HCM-2.3+, Phase-3, SDK, Tauri, Substrate, contract, dock, or publication implementation.",
+    "Do not invent an alternate schema, intake, CLI, lineage store, transaction, lifecycle, renderer, profile, migration, compatibility mode, trigger, bridge, or sibling-family scope.",
+    "Do not treat baseline tests, packet detail, contingent status wording, or HCM-2.1 precedent as proof that the seven-entry subject is clean."
+  ],
+  "tasks": [
+    "Invoke required skills in order, remain read-only, replay the exact seven-entry manifest/aggregate, and return BLOCKED if any byte differs.",
+    "Review findings first in Critical, Required, Optional, Nit order with exact file/line, violated authority, failure, smallest remediation, and missing or invalidated proof.",
+    "Verify the additive 1.1 schema/kind/profile and new intake/renderer/lifecycle/approval/waiver/trigger closure is compatible with uniform exact-definition identity, current definition loader/package architecture, HCM-0.6 decisions, and live selected-profile consumers.",
+    "Verify the canonical Charter shape and fifteen coverage mappings are internally total and consistent with capability bindings, source/authority rules, immutable intake/candidate/approval/promotion contracts, explicit unknowns, waivers, and targeted reassessment.",
+    "Verify CLI/skill acquisition and approval/promotion choreography has one stable candidate schema, no nested model/wizard/self-approval, a realistic atomic storage boundary, stable typed adapters, and no legacy dual truth.",
+    "Verify renderer/lifecycle, setup/doctor, Environment Inventory, flow/C03/C04, bridge, Windows, security, package/install, regression, and deletion proof are executable and sufficiently bounded.",
+    "Verify planning-only status, exact scope, unchecked todo, gate/classification ceiling, critical GitNexus warning, primary commit, and separate parent handoff/ledger closeout.",
+    "Return CLEAN only if no valid Critical or Required finding remains; otherwise CHANGES_REQUIRED or BLOCKED. Make no edits."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/01-target-architecture.md#canonical-artifacts-renderer-derived-views-and-projections",
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#hcm-22--constitutional-root-artifact",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#artifact-intake-definition-contract",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#intake-record-and-artifact-candidate-contracts",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#charter-intake-and-canonical-contract",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#open-program-proof-gates",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if the manifest/aggregate, required authority, live definitions/source, or mandatory read-only verification cannot be reproduced.",
+    "Return CHANGES_REQUIRED rather than selecting unspecified semantic bytes, authority behavior, transaction claims, unsafe platform fallback, compatibility, pipeline, sibling-family, or later-slice behavior.",
+    "Return to the parent if valid remediation would require implementation now, released-definition mutation, broader product/default-set authority, HCM-2.3+, or global handoff/ledger mutation."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

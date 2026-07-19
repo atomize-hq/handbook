@@ -301,6 +301,12 @@ legacy fixed Markdown path constant and re-exports are removed without an alias.
 
 ### `HCM-2.2` — Constitutional-root artifact
 
+**Planning status:** the planning-only packet at
+[`slices/HCM-2.2/`](slices/HCM-2.2/SPEC.md) freezes the proposed implementation
+boundary and is not runtime authority until fresh independent review returns
+`CLEAN`, the parent closes planning, and a later top-level session explicitly
+selects implementation.
+
 - cut the constitutional-root artifact to canonical structured truth;
 - preserve semantic root authority without requiring a literal filename;
 - implement `CharterIntakeDefinition` as the first rich intake coverage contract;

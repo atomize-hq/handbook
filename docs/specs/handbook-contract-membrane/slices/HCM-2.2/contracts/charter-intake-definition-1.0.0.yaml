@@ -1,0 +1,355 @@
+schema_id: handbook.artifact-intake-definition
+schema_version: '1.0'
+intake_id: handbook.intake.charter
+intake_version: 1.0.0
+artifact_kind_ref: handbook.artifact-kind.project-authority@1.1.0
+candidate_schema_ref: handbook.schemas.artifacts.project-authority@1.1.0
+supported_modes:
+- guided_adaptive
+- express
+- agent_assisted
+coverage:
+- coverage_id: project_shape.definition
+  target_paths:
+  - /record_id
+  - /project/name
+  - /project/classification
+  - /project/team_size
+  - /project/users
+  - /project/expected_lifetime
+  - /project/surfaces
+  - /project/runtime_environments
+  applicability: always
+  authority_class: observational
+  acquisition:
+    inferable: true
+    user_declaration_required: false
+    evidence_kinds:
+    - repository_configuration
+    freshness: session
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: concrete
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: null
+  prompt_guidance_refs: []
+- coverage_id: delivery.constraints
+  target_paths:
+  - /project/constraints
+  applicability: always
+  authority_class: observational
+  acquisition:
+    inferable: true
+    user_declaration_required: false
+    evidence_kinds:
+    - repository_configuration
+    freshness: session
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: concrete
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: null
+  prompt_guidance_refs: []
+- coverage_id: delivery.default_implications
+  target_paths:
+  - /project/default_implications
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: explicit_policy
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: handbook.waiver.constitutional-intake@1.0.0
+  prompt_guidance_refs: []
+- coverage_id: operational_reality.production_state
+  target_paths:
+  - /project/operational_reality
+  applicability: always
+  authority_class: observational
+  acquisition:
+    inferable: true
+    user_declaration_required: false
+    evidence_kinds:
+    - repository_configuration
+    freshness: session
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: concrete
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: null
+  prompt_guidance_refs: []
+- coverage_id: risk.domains
+  target_paths:
+  - /domains
+  applicability: always
+  authority_class: observational
+  acquisition:
+    inferable: true
+    user_declaration_required: false
+    evidence_kinds:
+    - repository_configuration
+    freshness: session
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: concrete
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: null
+  prompt_guidance_refs: []
+- coverage_id: engineering_posture.baseline
+  target_paths:
+  - /posture/baseline_level
+  - /posture/baseline_rationale
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: explicit_levels
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: null
+  prompt_guidance_refs: []
+- coverage_id: policy.authority_and_revision
+  target_paths:
+  - /policy
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: explicit_policy
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: handbook.waiver.constitutional-intake@1.0.0
+  prompt_guidance_refs: []
+- coverage_id: governance.decision_authority
+  target_paths:
+  - /governance/decision_authority
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: named_role_or_owner
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: handbook.waiver.constitutional-intake@1.0.0
+  prompt_guidance_refs: []
+- coverage_id: governance.required_approvals
+  target_paths:
+  - /governance/required_approvals
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: explicit_policy
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: handbook.waiver.constitutional-intake@1.0.0
+  prompt_guidance_refs: []
+- coverage_id: governance.exception_policy
+  target_paths:
+  - /governance/exception_policy
+  - /governance/exception_process
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: explicit_policy
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: handbook.waiver.constitutional-intake@1.0.0
+  prompt_guidance_refs: []
+- coverage_id: engineering_posture.dimensions
+  target_paths:
+  - /engineering_posture/dimensions
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: explicit_levels
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: handbook.waiver.constitutional-intake@1.0.0
+  prompt_guidance_refs: []
+- coverage_id: engineering_posture.red_lines
+  target_paths:
+  - /engineering_posture/red_lines
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: explicit_policy
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: handbook.waiver.constitutional-intake@1.0.0
+  prompt_guidance_refs: []
+- coverage_id: governance.review_triggers
+  target_paths:
+  - /governance/review_triggers
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: explicit_policy
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: handbook.waiver.constitutional-intake@1.0.0
+  prompt_guidance_refs: []
+- coverage_id: governance.reassessment_triggers
+  target_paths:
+  - /governance/reassessment_triggers
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: explicit_policy
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: handbook.waiver.constitutional-intake@1.0.0
+  prompt_guidance_refs: []
+- coverage_id: debt.register
+  target_paths:
+  - /debt
+  applicability: always
+  authority_class: observational
+  acquisition:
+    inferable: true
+    user_declaration_required: false
+    evidence_kinds:
+    - repository_configuration
+    freshness: session
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: concrete
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: null
+  prompt_guidance_refs: []
+- coverage_id: decisions.records
+  target_paths:
+  - /decision_records
+  applicability: always
+  authority_class: normative
+  acquisition:
+    inferable: false
+    user_declaration_required: true
+    evidence_kinds: []
+    freshness: null
+    sensitivity: internal
+    deterministic_default: null
+  evaluation:
+    required: true
+    minimum_specificity: concrete
+    minimum_confidence: high
+    unknown_policy: block
+    contradiction_policy: block
+    waiver_policy_ref: handbook.waiver.constitutional-intake@1.0.0
+  prompt_guidance_refs: []
+approval_policy_ref: handbook.approval.constitutional-candidate@1.0.0
+reassessment_triggers:
+- trigger_ref: handbook.intake-trigger.production-posture-changed@1.0.0
+  affected_coverage_ids:
+  - operational_reality.production_state
+- trigger_ref: handbook.intake-trigger.trust-boundary-changed@1.0.0
+  affected_coverage_ids:
+  - governance.exception_policy
+extensions: {}
+intake_definition_fingerprint: sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c

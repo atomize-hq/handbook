@@ -1,0 +1,1411 @@
+{
+  "negative_vectors": [
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [
+          "authenticator-make-credential-responses/authenticator-make-credential-response_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "bootstrap",
+        "operation_id": "bootstrap-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": null,
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "expected_rejection": "bootstrap success requires registration identity",
+      "vector_id": "bootstrap-success-null-registration"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [
+          "authenticator-make-credential-responses/authenticator-make-credential-response_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "bootstrap",
+        "operation_id": "bootstrap-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": null,
+        "registration_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "registration_ref": "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "expected_rejection": "bootstrap success forbids prior registry identity",
+      "vector_id": "bootstrap-success-nonnull-prior"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "assertion_ref": "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "changed_paths": [
+          "authenticator-make-credential-responses/authenticator-make-credential-response_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-get-assertion-responses/authenticator-get-assertion-response_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": null,
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "expected_rejection": "add success requires registration identity",
+      "vector_id": "add-success-null-registration"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [
+          "authenticator-make-credential-responses/authenticator-make-credential-response_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-get-assertion-responses/authenticator-get-assertion-response_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": null,
+        "registration_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "registration_ref": "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "expected_rejection": "add success requires assertion identity",
+      "vector_id": "add-success-null-assertion"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "assertion_ref": "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "changed_paths": [
+          "authenticator-make-credential-responses/authenticator-make-credential-response_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-get-assertion-responses/authenticator-get-assertion-response_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": null,
+        "registration_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "registration_ref": "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "expected_rejection": "add success requires prior registry identity",
+      "vector_id": "add-success-null-prior"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "assertion_ref": "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "changed_paths": [
+          "authenticator-get-assertion-responses/authenticator-get-assertion-response_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "revoke_credential",
+        "operation_id": "revoke-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": null,
+        "registration_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "registration_ref": "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "expected_rejection": "revoke success forbids registration identity",
+      "vector_id": "revoke-success-nonnull-registration"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [],
+        "next_actions": [
+          "correct the request and retry"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-unavailable-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": {
+          "code": "AUTHENTICATOR_UNAVAILABLE",
+          "message": "native CTAP2.1 authenticator API is unavailable",
+          "retryable": true
+        },
+        "registration_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "registration_ref": "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "expected_rejection": "unavailable refusal forbids registration identity",
+      "vector_id": "unavailable-nonnull-registration"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "assertion_ref": "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "changed_paths": [],
+        "next_actions": [
+          "correct the request and retry"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-unavailable-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": {
+          "code": "AUTHENTICATOR_UNAVAILABLE",
+          "message": "native CTAP2.1 authenticator API is unavailable",
+          "retryable": true
+        },
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "expected_rejection": "unavailable refusal forbids assertion identity",
+      "vector_id": "unavailable-nonnull-assertion"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [],
+        "next_actions": [
+          "correct the request and retry"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-unavailable-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": {
+          "code": "AUTHENTICATOR_UNAVAILABLE",
+          "message": "native CTAP2.1 authenticator API is unavailable",
+          "retryable": true
+        },
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "expected_rejection": "refusal omits every semantic identity",
+      "vector_id": "unavailable-nonnull-prior"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "correct the request and retry"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-unavailable-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": {
+          "code": "AUTHENTICATOR_UNAVAILABLE",
+          "message": "native CTAP2.1 authenticator API is unavailable",
+          "retryable": true
+        },
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "expected_rejection": "refusal forbids changed paths",
+      "vector_id": "unavailable-changed-path"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "assertion_ref": "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "changed_paths": [
+          "authenticator-make-credential-responses/authenticator-make-credential-response_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-get-assertion-responses/authenticator-get-assertion-response_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": {
+          "code": "transaction_conflict",
+          "message": "x",
+          "retryable": true
+        },
+        "registration_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "registration_ref": "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "expected_rejection": "success requires null refusal",
+      "vector_id": "success-nonnull-refusal"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "assertion_ref": "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "changed_paths": [
+          "authenticator-make-credential-responses/authenticator-make-credential-response_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": null,
+        "registration_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "registration_ref": "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "expected_rejection": "add success requires all six changed paths including decoded GetAssertion response before assertion",
+      "vector_id": "add-success-wrong-path-arity"
+    },
+    {
+      "document": {
+        "approval_mappings": [
+          {
+            "approval_class": "registry_admin",
+            "authority_ref": "repository_registry_admin"
+          }
+        ],
+        "expected_registry_state_fingerprint": null,
+        "expected_transition_fingerprint": null,
+        "initial_charter_quorum": [
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          }
+        ],
+        "operation": "bootstrap",
+        "operation_id": "bootstrap-001",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "schema_id": "handbook.approver-admin-request",
+        "schema_version": "1.0"
+      },
+      "expected_rejection": "bootstrap caller may not supply engine-owned mappings",
+      "vector_id": "bootstrap-request-supplied-mappings"
+    },
+    {
+      "document": {
+        "approval_mappings": [
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          },
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          }
+        ],
+        "expected_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "expected_transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "operation": "add_credential",
+        "operation_id": "add-001",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "schema_id": "handbook.approver-admin-request",
+        "schema_version": "1.0"
+      },
+      "expected_rejection": "approval mappings are bounded to 64",
+      "vector_id": "add-request-too-many-mappings"
+    },
+    {
+      "document": {
+        "expected_registry_state_fingerprint": null,
+        "expected_transition_fingerprint": null,
+        "initial_charter_quorum": [
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          }
+        ],
+        "operation": "bootstrap",
+        "operation_id": "bootstrap-001",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "schema_id": "handbook.approver-admin-request",
+        "schema_version": "1.0"
+      },
+      "expected_rejection": "initial Charter quorum is bounded to 64",
+      "vector_id": "bootstrap-request-too-large-quorum"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "assertion_ref": "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "changed_paths": [
+          "authenticator-make-credential-responses/authenticator-make-credential-response_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-get-assertion-responses/authenticator-get-assertion-response_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x",
+          "x"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": null,
+        "registration_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "registration_ref": "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "expected_rejection": "next actions are bounded to 16",
+      "vector_id": "result-too-many-next-actions"
+    },
+    {
+      "vector_id": "bootstrap-crossed-lockout-code",
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [],
+        "next_actions": [
+          "add a distinct usable covering credential or use another usable administrator"
+        ],
+        "operation": "bootstrap",
+        "operation_id": "bootstrap-crossed-lockout-code-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": {
+          "code": "lockout_refused",
+          "message": "final-use add would leave incomplete required authority coverage",
+          "retryable": false
+        },
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "expected_rejection": "lockout_refused belongs only to add, revoke, and update result branches"
+    }
+  ],
+  "schema_id": "hcm-2.2-approver-admin-api-vectors",
+  "schema_ref": "handbook.schemas.security.approver-admin-api@1.0.0",
+  "schema_version": "1.0",
+  "vectors": [
+    {
+      "document": {
+        "expected_registry_state_fingerprint": null,
+        "expected_transition_fingerprint": null,
+        "initial_charter_quorum": [
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          }
+        ],
+        "operation": "bootstrap",
+        "operation_id": "bootstrap-001",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "schema_id": "handbook.approver-admin-request",
+        "schema_version": "1.0"
+      },
+      "vector_id": "bootstrap-request"
+    },
+    {
+      "document": {
+        "approval_mappings": [
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          }
+        ],
+        "expected_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "expected_transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "operation": "add_credential",
+        "operation_id": "add-001",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "schema_id": "handbook.approver-admin-request",
+        "schema_version": "1.0"
+      },
+      "vector_id": "add-request"
+    },
+    {
+      "document": {
+        "credential_id_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "expected_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "expected_transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "operation": "revoke_credential",
+        "operation_id": "revoke-001",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "schema_id": "handbook.approver-admin-request",
+        "schema_version": "1.0"
+      },
+      "vector_id": "revoke-request"
+    },
+    {
+      "document": {
+        "approval_mappings": [
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          }
+        ],
+        "credential_id_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "expected_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "expected_transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "operation": "update_mapping",
+        "operation_id": "update-001",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "schema_id": "handbook.approver-admin-request",
+        "schema_version": "1.0"
+      },
+      "vector_id": "update-request"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [
+          "authenticator-make-credential-responses/authenticator-make-credential-response_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "bootstrap",
+        "operation_id": "bootstrap-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": null,
+        "registration_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "registration_ref": "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "vector_id": "bootstrap-success-result"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "assertion_ref": "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "changed_paths": [
+          "authenticator-make-credential-responses/authenticator-make-credential-response_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+          "authenticator-get-assertion-responses/authenticator-get-assertion-response_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": null,
+        "registration_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "registration_ref": "authenticator-registrations/authenticator-registration_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "vector_id": "add-success-result"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "assertion_ref": "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "changed_paths": [
+          "authenticator-get-assertion-responses/authenticator-get-assertion-response_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "revoke_credential",
+        "operation_id": "revoke-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": null,
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "vector_id": "revoke_credential-success-result"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "assertion_ref": "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "changed_paths": [
+          "authenticator-get-assertion-responses/authenticator-get-assertion-response_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "authenticator-assertions/authenticator-assertion_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+          "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+        ],
+        "next_actions": [
+          "retain the committed transition reference"
+        ],
+        "operation": "update_mapping",
+        "operation_id": "update-001",
+        "prior_registry_state_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "prior_registry_state_ref": "registry-states/registry-state_2222222222222222222222222222222222222222222222222222222222222222.json",
+        "refusal": null,
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_registry_state_ref": "registry-states/registry-state_3333333333333333333333333333333333333333333333333333333333333333.json",
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "succeeded",
+        "transition_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "transition_ref": "registry-transitions/registry-transition_3333333333333333333333333333333333333333333333333333333333333333.json"
+      },
+      "vector_id": "update_mapping-success-result"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [],
+        "next_actions": [
+          "correct the request and retry"
+        ],
+        "operation": "bootstrap",
+        "operation_id": "bootstrap-bad-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": {
+          "code": "registration_invalid",
+          "message": "authenticator response was invalid",
+          "retryable": false
+        },
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "vector_id": "bootstrap-refused-result"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [],
+        "next_actions": [
+          "correct the request and retry"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-unavailable-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": {
+          "code": "AUTHENTICATOR_UNAVAILABLE",
+          "message": "native CTAP2.1 authenticator API is unavailable",
+          "retryable": true
+        },
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "vector_id": "authenticator-unavailable-result"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [],
+        "next_actions": [
+          "correct the request and retry"
+        ],
+        "operation": "revoke_credential",
+        "operation_id": "revoke-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": {
+          "code": "lockout_refused",
+          "message": "last registry admin cannot be revoked",
+          "retryable": false
+        },
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "vector_id": "revoke-refused-result"
+    },
+    {
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [],
+        "next_actions": [
+          "use an eligible authorized credential or change committed authority"
+        ],
+        "operation": "update_mapping",
+        "operation_id": "update-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": {
+          "code": "authorization_refused",
+          "message": "current administrator assertion was refused",
+          "retryable": false
+        },
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "vector_id": "update-refused-result",
+      "status_mapping_status_byte": 46,
+      "status_mapping_ref": "ctap-status-mapping-v1.0.json#/refusal_groups"
+    },
+    {
+      "vector_id": "add-final-use-incomplete-lockout-refused-result",
+      "document": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [],
+        "next_actions": [
+          "add a distinct usable covering credential or use another usable administrator"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-final-use-incomplete-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": {
+          "code": "lockout_refused",
+          "message": "final-use add would leave incomplete required authority coverage",
+          "retryable": false
+        },
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "expected_effects": {
+        "native_calls": 0,
+        "registry_state_delta": false,
+        "authenticator_use_head_delta": false
+      },
+      "scenario_ref": "final-use-add-lockout-vectors-v1.0.json#/vectors/0"
+    }
+  ]
+}

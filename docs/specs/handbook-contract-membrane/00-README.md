@@ -4,7 +4,7 @@
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
-**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; HCM-2.2 and later slices remain unauthorized
+**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; HCM-2.2 has a planning-only packet under review and no implementation authority; later slices remain unauthorized
 **Repo-truth snapshot:** 2026-07-19; re-check live code before every slice
 
 ## Purpose

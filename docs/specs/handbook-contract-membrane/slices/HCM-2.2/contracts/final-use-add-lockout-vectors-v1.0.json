@@ -1,0 +1,108 @@
+{
+  "schema_id": "hcm-2.2-final-use-add-lockout-vectors",
+  "schema_version": "1.0",
+  "vectors": [
+    {
+      "vector_id": "sequence-4095-incomplete-add-refuses-before-native-io",
+      "exact_request": {
+        "approval_mappings": [
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          }
+        ],
+        "expected_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "expected_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "operation": "add_credential",
+        "operation_id": "add-final-use-incomplete-001",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "schema_id": "handbook.approver-admin-request",
+        "schema_version": "1.0"
+      },
+      "required_coverage_pairs": [
+        {
+          "approval_class": "Project owner approval",
+          "authority_ref": "Project owner"
+        },
+        {
+          "approval_class": "registry_admin",
+          "authority_ref": "repository_registry_admin"
+        }
+      ],
+      "before_authority": {
+        "registry_state_jcs_base64": "eyJjcmVkZW50aWFscyI6W3siYWxnb3JpdGhtIjoiRVMyNTYiLCJhcHByb3ZhbF9tYXBwaW5ncyI6W3siYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXV0aG9yaXR5X3JlZiI6IlByb2plY3Qgb3duZXIifSx7ImFwcHJvdmFsX2NsYXNzIjoicmVnaXN0cnlfYWRtaW4iLCJhdXRob3JpdHlfcmVmIjoicmVwb3NpdG9yeV9yZWdpc3RyeV9hZG1pbiJ9XSwiY29zZV9wdWJsaWNfa2V5X2Jhc2U2NCI6InBRRUNBeVlnQVNGWUlHc1gwZkxoTEVKSCtMem01V09rUVBKM0EzMkJMZXN6b1BTaE9VWFltTUtXSWxnZ1QrTkM0djRhZjV1TzUrdEtmQStlRml2T00xZHJNVjdPeTdaQWFEZS9VZlU9IiwiY3JlZGVudGlhbF9pZF9oYXNoIjoic2hhMjU2OmM4MGRjOWJiNGQzY2U4M2I5MWVhMzllYzdjYTBhMTAwMTY0OGRiMTc0NWYzMjU5NmZhM2M4MmEyYjg4MTVlYmQiLCJleHRlbnNpb25zIjp7fSwicmVnaXN0cmF0aW9uX2ZpbmdlcnByaW50Ijoic2hhMjU2OjM1NzkzYTI2NGI1MTkyOTg0OTQ4MGNiNDllNjlmM2IyZGVkZTBkNTQwN2Q5MzNhZTA2ZjkwZWJlOWRmODBhOWIiLCJyZWdpc3RyYXRpb25fcmVmIjoiYXV0aGVudGljYXRvci1yZWdpc3RyYXRpb25zL2F1dGhlbnRpY2F0b3ItcmVnaXN0cmF0aW9uXzM1NzkzYTI2NGI1MTkyOTg0OTQ4MGNiNDllNjlmM2IyZGVkZTBkNTQwN2Q5MzNhZTA2ZjkwZWJlOWRmODBhOWIuanNvbiIsInN0YXR1cyI6ImFjdGl2ZSJ9XSwiZXh0ZW5zaW9ucyI6e30sImluaXRpYWxfY2hhcnRlcl9xdW9ydW0iOlt7ImFwcHJvdmFsX2NsYXNzIjoiUHJvamVjdCBvd25lciBhcHByb3ZhbCIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIn1dLCJyZWdpc3RyeV9pZCI6InJlcG9zaXRvcnktYXBwcm92ZXJzIiwicmVnaXN0cnlfc3RhdGVfZmluZ2VycHJpbnQiOiJzaGEyNTY6NzhmZDZiMDQ1MDVhNGZlMzQ1MWE5OWE5OGNhNTcwMGE0NGJjYjlkMjE2YzQ3YzJjZTUwMTI4OGQwYTQwNzhlMiIsInJlZ2lzdHJ5X3ZlcnNpb24iOjEsInJlcG9zaXRvcnlfaWRlbnRpdHlfZmluZ2VycHJpbnQiOiJzaGEyNTY6MTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMSIsInNjaGVtYV9pZCI6ImhhbmRib29rLmFwcHJvdmVyLXJlZ2lzdHJ5LXN0YXRlIiwic2NoZW1hX3ZlcnNpb24iOiIxLjAifQ==",
+        "registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "registry_transition_head_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+        "registry_transition_head_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "authenticator_use_head_jcs_base64": "eyIkc2NoZW1hIjoiaGFuZGJvb2suYXV0aGVudGljYXRvci11c2UtaGVhZEAxLjAiLCJjcmVkZW50aWFsX2lkX2hhc2giOiJzaGEyNTY6YzgwZGM5YmI0ZDNjZTgzYjkxZWEzOWVjN2NhMGExMDAxNjQ4ZGIxNzQ1ZjMyNTk2ZmEzYzgyYTJiODgxNWViZCIsImhlYWRfZmluZ2VycHJpbnQiOiJzaGEyNTY6MzRlZDhjMDBlOThiMTNjMDY1Yzk4NzA2NzhhOGEwZjg4M2Q4NmNiM2JmZTFjMjhhMjdiYzdlMGNhMTBhOGU1OSIsImxhc3RfYXNzZXJ0aW9uX2ZpbmdlcnByaW50Ijoic2hhMjU2OmFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEiLCJsYXN0X2Fzc2VydGlvbl9yZWYiOiJhdXRoZW50aWNhdG9yLWFzc2VydGlvbnMvYXV0aGVudGljYXRvci1hc3NlcnRpb25fYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYS5qc29uIiwibGFzdF9jaGFsbGVuZ2VfZmluZ2VycHJpbnQiOiJzaGEyNTY6YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYiIsImxhc3Rfbm9uY2Vfc2hhMjU2Ijoic2hhMjU2OmNjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2MiLCJzY2hlbWFfdmVyc2lvbiI6IjEuMCIsInNlcXVlbmNlIjo0MDk1LCJzaWduX2NvdW50Ijo0MDk1fQ==",
+        "authenticator_use_head_fingerprint": "sha256:34ed8c00e98b13c065c9870678a8a0f883d86cb3bfe1c28a27bc7e0ca10a8e59",
+        "authenticator_use_sequence": 4095
+      },
+      "proposed_new_credential": {
+        "credential_id_hash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "engine_validated": false,
+        "approval_mappings": [
+          {
+            "approval_class": "Security approval",
+            "authority_ref": "Security owner"
+          }
+        ],
+        "coverage_after_old_credential_exhaustion": [],
+        "missing_required_coverage_pairs": [
+          {
+            "approval_class": "Project owner approval",
+            "authority_ref": "Project owner"
+          },
+          {
+            "approval_class": "registry_admin",
+            "authority_ref": "repository_registry_admin"
+          }
+        ]
+      },
+      "decision_point": "after request and authority revalidation, before makeCredential or GetAssertion transport",
+      "expected_result": {
+        "assertion_fingerprint": null,
+        "assertion_ref": null,
+        "changed_paths": [],
+        "next_actions": [
+          "add a distinct usable covering credential or use another usable administrator"
+        ],
+        "operation": "add_credential",
+        "operation_id": "add-final-use-incomplete-001",
+        "prior_registry_state_fingerprint": null,
+        "prior_registry_state_ref": null,
+        "refusal": {
+          "code": "lockout_refused",
+          "message": "final-use add would leave incomplete required authority coverage",
+          "retryable": false
+        },
+        "registration_fingerprint": null,
+        "registration_ref": null,
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "result_registry_state_fingerprint": null,
+        "result_registry_state_ref": null,
+        "schema_id": "handbook.approver-admin-result",
+        "schema_version": "1.0",
+        "status": "refused",
+        "transition_fingerprint": null,
+        "transition_ref": null
+      },
+      "expected_native_call_log": [],
+      "expected_semantic_records": [],
+      "after_authority": {
+        "registry_state_jcs_base64": "eyJjcmVkZW50aWFscyI6W3siYWxnb3JpdGhtIjoiRVMyNTYiLCJhcHByb3ZhbF9tYXBwaW5ncyI6W3siYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXV0aG9yaXR5X3JlZiI6IlByb2plY3Qgb3duZXIifSx7ImFwcHJvdmFsX2NsYXNzIjoicmVnaXN0cnlfYWRtaW4iLCJhdXRob3JpdHlfcmVmIjoicmVwb3NpdG9yeV9yZWdpc3RyeV9hZG1pbiJ9XSwiY29zZV9wdWJsaWNfa2V5X2Jhc2U2NCI6InBRRUNBeVlnQVNGWUlHc1gwZkxoTEVKSCtMem01V09rUVBKM0EzMkJMZXN6b1BTaE9VWFltTUtXSWxnZ1QrTkM0djRhZjV1TzUrdEtmQStlRml2T00xZHJNVjdPeTdaQWFEZS9VZlU9IiwiY3JlZGVudGlhbF9pZF9oYXNoIjoic2hhMjU2OmM4MGRjOWJiNGQzY2U4M2I5MWVhMzllYzdjYTBhMTAwMTY0OGRiMTc0NWYzMjU5NmZhM2M4MmEyYjg4MTVlYmQiLCJleHRlbnNpb25zIjp7fSwicmVnaXN0cmF0aW9uX2ZpbmdlcnByaW50Ijoic2hhMjU2OjM1NzkzYTI2NGI1MTkyOTg0OTQ4MGNiNDllNjlmM2IyZGVkZTBkNTQwN2Q5MzNhZTA2ZjkwZWJlOWRmODBhOWIiLCJyZWdpc3RyYXRpb25fcmVmIjoiYXV0aGVudGljYXRvci1yZWdpc3RyYXRpb25zL2F1dGhlbnRpY2F0b3ItcmVnaXN0cmF0aW9uXzM1NzkzYTI2NGI1MTkyOTg0OTQ4MGNiNDllNjlmM2IyZGVkZTBkNTQwN2Q5MzNhZTA2ZjkwZWJlOWRmODBhOWIuanNvbiIsInN0YXR1cyI6ImFjdGl2ZSJ9XSwiZXh0ZW5zaW9ucyI6e30sImluaXRpYWxfY2hhcnRlcl9xdW9ydW0iOlt7ImFwcHJvdmFsX2NsYXNzIjoiUHJvamVjdCBvd25lciBhcHByb3ZhbCIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIn1dLCJyZWdpc3RyeV9pZCI6InJlcG9zaXRvcnktYXBwcm92ZXJzIiwicmVnaXN0cnlfc3RhdGVfZmluZ2VycHJpbnQiOiJzaGEyNTY6NzhmZDZiMDQ1MDVhNGZlMzQ1MWE5OWE5OGNhNTcwMGE0NGJjYjlkMjE2YzQ3YzJjZTUwMTI4OGQwYTQwNzhlMiIsInJlZ2lzdHJ5X3ZlcnNpb24iOjEsInJlcG9zaXRvcnlfaWRlbnRpdHlfZmluZ2VycHJpbnQiOiJzaGEyNTY6MTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMSIsInNjaGVtYV9pZCI6ImhhbmRib29rLmFwcHJvdmVyLXJlZ2lzdHJ5LXN0YXRlIiwic2NoZW1hX3ZlcnNpb24iOiIxLjAifQ==",
+        "registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "registry_transition_head_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+        "registry_transition_head_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "authenticator_use_head_jcs_base64": "eyIkc2NoZW1hIjoiaGFuZGJvb2suYXV0aGVudGljYXRvci11c2UtaGVhZEAxLjAiLCJjcmVkZW50aWFsX2lkX2hhc2giOiJzaGEyNTY6YzgwZGM5YmI0ZDNjZTgzYjkxZWEzOWVjN2NhMGExMDAxNjQ4ZGIxNzQ1ZjMyNTk2ZmEzYzgyYTJiODgxNWViZCIsImhlYWRfZmluZ2VycHJpbnQiOiJzaGEyNTY6MzRlZDhjMDBlOThiMTNjMDY1Yzk4NzA2NzhhOGEwZjg4M2Q4NmNiM2JmZTFjMjhhMjdiYzdlMGNhMTBhOGU1OSIsImxhc3RfYXNzZXJ0aW9uX2ZpbmdlcnByaW50Ijoic2hhMjU2OmFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEiLCJsYXN0X2Fzc2VydGlvbl9yZWYiOiJhdXRoZW50aWNhdG9yLWFzc2VydGlvbnMvYXV0aGVudGljYXRvci1hc3NlcnRpb25fYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYS5qc29uIiwibGFzdF9jaGFsbGVuZ2VfZmluZ2VycHJpbnQiOiJzaGEyNTY6YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYiIsImxhc3Rfbm9uY2Vfc2hhMjU2Ijoic2hhMjU2OmNjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2MiLCJzY2hlbWFfdmVyc2lvbiI6IjEuMCIsInNlcXVlbmNlIjo0MDk1LCJzaWduX2NvdW50Ijo0MDk1fQ==",
+        "authenticator_use_head_fingerprint": "sha256:34ed8c00e98b13c065c9870678a8a0f883d86cb3bfe1c28a27bc7e0ca10a8e59",
+        "authenticator_use_sequence": 4095
+      },
+      "byte_equality_assertions": {
+        "registry_state_before_equals_after": true,
+        "authenticator_use_head_before_equals_after": true,
+        "registry_transition_head_before_equals_after": true
+      }
+    }
+  ]
+}

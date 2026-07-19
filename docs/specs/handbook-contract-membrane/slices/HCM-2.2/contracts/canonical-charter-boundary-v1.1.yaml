@@ -1,0 +1,172 @@
+schema_id: "handbook.artifact.project-authority"
+schema_version: "1.1"
+record_id: "project.charter.boundary"
+project:
+  name: "Boundary Project"
+  classification: "greenfield"
+  team_size: 3
+  users: "mixed"
+  expected_lifetime: "years"
+  surfaces:
+    - "web_app"
+    - "api"
+  runtime_environments:
+    - "browser"
+    - "server"
+  constraints:
+    deadline: "2026 Q4"
+    budget: "Small team"
+    experience_notes: "One senior and two early-career engineers"
+    must_use_tech: []
+  operational_reality:
+    in_production_today: false
+    prod_users_or_data: "No production users or data"
+    external_contracts_to_preserve: []
+    uptime_expectations: "Business-hours support"
+  default_implications:
+    backward_compatibility: "boundary_only"
+    migration_planning: "required"
+    rollout_controls: "lightweight"
+    deprecation_policy: "not_required_yet"
+    observability_threshold: "standard"
+posture:
+  rubric_scale: "1-5"
+  baseline_level: 3
+  baseline_rationale:
+    - "Real users and durable maintenance require balanced rigor"
+domains:
+  - name: "Identity"
+    blast_radius: "Account access and session trust"
+    touches:
+      - "Authentication boundary"
+    constraints:
+      - "Never log credentials"
+policy:
+  revision: "1"
+  authority_statement: "This Charter is the approved project engineering authority"
+governance:
+  decision_authority:
+    - "Project owner"
+  required_approvals:
+    - "Project owner approval"
+  exception_policy: "Exceptions require an approved record before implementation"
+  exception_process:
+    approvers:
+      - "Project owner"
+    record_location: ".handbook/decisions/exceptions"
+    minimum_fields:
+      - "Scope"
+      - "Rationale"
+      - "Expiry"
+  review_triggers:
+    - "Material policy change"
+  reassessment_triggers:
+    - "Production posture changed"
+    - "Trust boundary changed"
+engineering_posture:
+  dimensions:
+    - dimension_id: "speed_vs_quality"
+      level_override: null
+      default_stance: "Prefer small reversible changes"
+      raise_the_bar_triggers:
+        - "Irreversible data change"
+      allowed_shortcuts:
+        - "Time-boxed prototype behind a flag"
+      red_lines:
+        - "Do not bypass required review"
+      domain_overrides: []
+    - dimension_id: "type_safety_static_analysis"
+      level_override: 3
+      default_stance: "Use strict compiler and lint settings"
+      raise_the_bar_triggers:
+        - "Public typed interface"
+      allowed_shortcuts:
+        - "Localized parsing adapter"
+      red_lines:
+        - "Do not suppress unknown unsafe behavior"
+      domain_overrides: []
+    - dimension_id: "testing_rigor"
+      level_override: 4
+      default_stance: "Test behavior at the owning boundary"
+      raise_the_bar_triggers:
+        - "Constitutional authority transition"
+      allowed_shortcuts:
+        - "Documented non-production spike"
+      red_lines:
+        - "Do not ship an untested authority transition"
+      domain_overrides:
+        - "Identity remains level 4"
+    - dimension_id: "scalability_performance"
+      level_override: null
+      default_stance: "Measure before optimizing"
+      raise_the_bar_triggers:
+        - "Budget threshold exceeded"
+      allowed_shortcuts:
+        - "Bounded fixture data"
+      red_lines:
+        - "Do not hide unbounded work"
+      domain_overrides: []
+    - dimension_id: "reliability_operability"
+      level_override: 4
+      default_stance: "Fail closed at authority boundaries"
+      raise_the_bar_triggers:
+        - "Production write path"
+      allowed_shortcuts:
+        - "Read-only local experiment"
+      red_lines:
+        - "Do not report partial success"
+      domain_overrides:
+        - "Identity requires rollback proof"
+    - dimension_id: "security_privacy"
+      level_override: 4
+      default_stance: "Minimize sensitive data and trust"
+      raise_the_bar_triggers:
+        - "Credential or personal-data handling"
+      allowed_shortcuts:
+        - "Synthetic data only"
+      red_lines:
+        - "Do not persist secrets"
+      domain_overrides:
+        - "Identity requires threat review"
+    - dimension_id: "observability"
+      level_override: 3
+      default_stance: "Emit typed bounded diagnostics"
+      raise_the_bar_triggers:
+        - "Unattended production operation"
+      allowed_shortcuts:
+        - "Local deterministic test"
+      red_lines:
+        - "Do not log sensitive values"
+      domain_overrides: []
+    - dimension_id: "dx_tooling_automation"
+      level_override: null
+      default_stance: "Automate repeatable proof"
+      raise_the_bar_triggers:
+        - "Repeated manual release step"
+      allowed_shortcuts:
+        - "One-time documented command"
+      red_lines:
+        - "Do not automate hidden authority"
+      domain_overrides: []
+    - dimension_id: "ux_polish_api_usability"
+      level_override: 3
+      default_stance: "Keep interfaces explicit and actionable"
+      raise_the_bar_triggers:
+        - "Public or irreversible operation"
+      allowed_shortcuts:
+        - "Internal diagnostic wording"
+      red_lines:
+        - "Do not hide refusal reasons"
+      domain_overrides: []
+  red_lines:
+    - "No silent constitutional default"
+    - "No agent self-approval"
+debt:
+  system: "Repository issue tracker"
+  labels:
+    - "technical-debt"
+  review_cadence: "monthly"
+decision_records:
+  enabled: true
+  path: ".handbook/decisions"
+  format: "Markdown ADR"
