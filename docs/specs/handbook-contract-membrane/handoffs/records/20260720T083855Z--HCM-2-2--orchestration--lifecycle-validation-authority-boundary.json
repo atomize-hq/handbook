@@ -1,0 +1,613 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.2",
+  "handoff_id": "20260720T083855Z--HCM-2-2--orchestration--lifecycle-validation-authority-boundary",
+  "created_at_utc": "2026-07-20T08:38:55Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-20T08:38:55Z",
+    "evidence_ref": "Built-in default agents completed two fresh final reviews and two bounded remediation runs."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "final-implementation-review-1",
+      "dispatch_id": "20260720T065241Z--HCM-2-2--fresh-final-implementation-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T065241Z--HCM-2-2--fresh-final-implementation-review.json",
+      "dispatch_fingerprint": "sha256:e7f15118e0bbb1deab5ecbb6cc63ede1ce5db1e06291fc0dd3db0f0d415d275f",
+      "role": "review",
+      "agent_id": "/root/hcm_2_2_final_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "debugging-and-error-recovery",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:eec48427216f45719a050ef995f6cbad0f1171f292bfac7d9606b27bceb84ca1",
+      "result_subject_fingerprint": "sha256:eec48427216f45719a050ef995f6cbad0f1171f292bfac7d9606b27bceb84ca1",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-2.2-FR1-001",
+        "HCM-2.2-FR1-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T065241Z--HCM-2-2--fresh-final-implementation-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T074846Z--final-review-1-remediation-proof-wall.md"
+      ]
+    },
+    {
+      "run_id": "promotion-authority-remediation",
+      "dispatch_id": "20260720T071718Z--HCM-2-2--promotion-authority-remediation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T071718Z--HCM-2-2--promotion-authority-remediation.json",
+      "dispatch_fingerprint": "sha256:8b8a992a0f0442241939207d995d3115a3cc6f4cc3f773f0d3cdf24b8c8a06f6",
+      "role": "remediation",
+      "agent_id": "/root/hcm_2_2_promotion_authority_remediation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "incremental-implementation",
+        "debugging-and-error-recovery",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:bcacc22b07c8d964cdcaff0d25c0a0775d78c0c97d81adca2fd077dc54c2238e",
+      "result_subject_fingerprint": "sha256:8b53ec2230285592706b56227695df950c061591cffecef4604dee6f94034b90",
+      "review_round": null,
+      "predecessor_run_id": "final-implementation-review-1",
+      "remediation_for_run_ids": [
+        "final-implementation-review-1"
+      ],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T071718Z--HCM-2-2--promotion-authority-remediation.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T074846Z--final-review-1-remediation-proof-wall.md"
+      ]
+    },
+    {
+      "run_id": "final-implementation-review-2",
+      "dispatch_id": "20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json",
+      "dispatch_fingerprint": "sha256:acbfa574c3e43eb51e65a5793abcb59ba58686e731719d2ef58f12e505900dc0",
+      "role": "review",
+      "agent_id": "/root/hcm_2_2_final_review_2",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "debugging-and-error-recovery",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:8b53ec2230285592706b56227695df950c061591cffecef4604dee6f94034b90",
+      "result_subject_fingerprint": "sha256:8b53ec2230285592706b56227695df950c061591cffecef4604dee6f94034b90",
+      "review_round": 2,
+      "predecessor_run_id": "promotion-authority-remediation",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-2.2-FR2-001",
+        "HCM-2.2-FR2-002",
+        "HCM-2.2-FR2-003",
+        "HCM-2.2-FR2-004"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md"
+      ]
+    },
+    {
+      "run_id": "lifecycle-validation-authority-remediation",
+      "dispatch_id": "20260720T081800Z--HCM-2-2--lifecycle-validation-authority-remediation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T081800Z--HCM-2-2--lifecycle-validation-authority-remediation.json",
+      "dispatch_fingerprint": "sha256:9bffd5bc5e2770131a67c668a912ae08ce0d24e3c40bef3733b595f79a37f4b3",
+      "role": "remediation",
+      "agent_id": "/root/hcm_2_2_lifecycle_validation_remediation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "incremental-implementation",
+        "debugging-and-error-recovery",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:3dbfcd29d827bd27bf75174c1c0fb3d82a3a1483b2009ecb4e6e045e320ce39d",
+      "result_subject_fingerprint": "sha256:3dbfcd29d827bd27bf75174c1c0fb3d82a3a1483b2009ecb4e6e045e320ce39d",
+      "review_round": null,
+      "predecessor_run_id": "final-implementation-review-2",
+      "remediation_for_run_ids": [
+        "final-implementation-review-2"
+      ],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T081800Z--HCM-2-2--lifecycle-validation-authority-remediation.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md"
+      ]
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "delegated-remediation-final-review-1",
+      "finding_run_id": "final-implementation-review-1",
+      "owner": "delegated_run",
+      "delegated_run_id": "promotion-authority-remediation",
+      "re_review_run_id": "final-implementation-review-2",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:8b53ec2230285592706b56227695df950c061591cffecef4604dee6f94034b90",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T071718Z--HCM-2-2--promotion-authority-remediation.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T074846Z--final-review-1-remediation-proof-wall.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "684029d4dda0c800fe840a19b54bf7f87fb41123",
+    "subject_fingerprint": "sha256:8b53ec2230285592706b56227695df950c061591cffecef4604dee6f94034b90",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md",
+      "checkpoint:684029d4dda0c800fe840a19b54bf7f87fb41123"
+    ]
+  },
+  "active_resolution": {
+    "level": "authority",
+    "scope_horizon": "slice",
+    "detail_resolution": "identity-preimage boundary",
+    "temporal_horizon": "current orchestration checkpoint",
+    "authority_horizon": "HCM-2.2 frozen candidate and lifecycle-validation graph",
+    "memory_horizon": "parent handoff record",
+    "validation_horizon": "fresh final Review 2 plus blocked bounded remediation"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Preserve the HCM-2.2 implementation as a non-authoritative checkpoint and escalate the frozen lifecycle-validation identity cycle without inventing authority.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Top-level runner protocol",
+        "Fresh review / remediation loop",
+        "Authority-boundary stop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "Candidate fingerprint preimage",
+        "Lifecycle validation result binding",
+        "Closed-graph and proof stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Artifact candidate",
+        "Artifact promotion record"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json",
+      "sections": [
+        "Complete-subject fresh review findings"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "684029d4dda0c800fe840a19b54bf7f87fb41123",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260720T083855Z--HCM-2-2--orchestration--lifecycle-validation-authority-boundary.json",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl"
+    ]
+  },
+  "work_completed": [
+    "Implemented and locally validated the approved HCM-2.2 candidate as a checkpoint.",
+    "Ran fresh final implementation Review 1, remediated its promotion authority and journal-path findings, and ran a different fresh final Review 2.",
+    "Admitted the exact 175-path Review 2 subject at sha256:8b53ec2230285592706b56227695df950c061591cffecef4604dee6f94034b90.",
+    "Dispatched a bounded lifecycle-validation remediation; the fresh agent replayed its exact manifest, made no edits, and proved the frozen authority graph cyclic.",
+    "Reclassified control-pack completion claims and recorded the implementation as non-authoritative with all HCM-2.2 gates open.",
+    "Created checkpoint commit 684029d4dda0c800fe840a19b54bf7f87fb41123."
+  ],
+  "deliverables": [
+    {
+      "path": "checkpoint:684029d4dda0c800fe840a19b54bf7f87fb41123",
+      "status": "partial",
+      "summary": "Preserves the HCM-2.2 implementation and truthful blocked control-pack state; it is not landed authority."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md",
+      "status": "completed",
+      "summary": "Records the exact cyclic dependency, retained validation evidence, and resume condition."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json",
+      "status": "blocked",
+      "summary": "Fresh complete-subject Review 2 returned one Critical and three Required findings; no CLEAN verdict exists."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T081800Z--HCM-2-2--lifecycle-validation-authority-remediation.json",
+      "status": "blocked",
+      "summary": "Bounded remediation stopped without edits because closing the Critical finding requires new authority."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.2-DEC-STOP-001",
+      "summary": "Stop HCM-2.2 at an authority boundary and preserve current work only as a non-authoritative checkpoint.",
+      "authority_effect": "No HCM-2.2 completion, canonical promotion, or HCM-2.3 authorization is asserted.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md",
+        "checkpoint:684029d4dda0c800fe840a19b54bf7f87fb41123"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-2.2-FR1-001",
+      "classification": "local_remediation",
+      "severity": "critical",
+      "summary": "Fresh Review 1 found a public low-level promotion path that bypassed required authority checks; the bounded remediation sealed it before Review 2.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T065241Z--HCM-2-2--fresh-final-implementation-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T074846Z--final-review-1-remediation-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.2-FR1-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Fresh Review 1 found promotion journals written beneath the wrong state path; the bounded remediation corrected the path before Review 2.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T065241Z--HCM-2-2--fresh-final-implementation-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T074846Z--final-review-1-remediation-proof-wall.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.2-FR2-001",
+      "classification": "resolution_escalation",
+      "severity": "critical",
+      "summary": "Engine-produced candidates have empty validation_result_refs, while promotion accepts unresolved strings; the frozen candidate/result fingerprint rules form a circular identity dependency that blocks an authoritative repair.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.2-FR2-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "The promotion journal lacks the closed intent, ordered markers, recovery revalidation, and complete fault matrix required for durable promotion.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.2-FR2-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Recovery deletes a journal when final canonical bytes mismatch instead of preserving evidence and refusing mutation.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.2-FR2-004",
+      "classification": "local_remediation",
+      "severity": "major",
+      "summary": "Promotion and lifecycle fault-injection methods remain public production API instead of being confined to test-only surfaces.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.2-BLOCK-001",
+      "classification": "authority",
+      "summary": "The candidate fingerprint includes validation_result_refs, but each lifecycle-validation result must bind that final candidate fingerprint; no named pre-finalization candidate identity exists.",
+      "resume_condition": "A human-approved additive authority revision defines a closed acyclic lifecycle-validation identity and receives fresh planning review.",
+      "owner": "user/product authority"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-2.2-ESC-001",
+      "trigger": "The bounded Critical-finding remediation proved candidate fingerprint -> validation-result ref -> validation result -> candidate fingerprint under the frozen contract.",
+      "current_resolution": "Checkpoint 684029d4dda0c800fe840a19b54bf7f87fb41123 preserves implementation work but is non-authoritative; all HCM-2.2 completion gates remain open and HCM-2.3 is unauthorized.",
+      "target_resolution": "A reviewed, closed, acyclic engine-owned lifecycle-validation identity with exact preimages, refs, persistence class, currentness checks, and migration effect.",
+      "decision_required": "Choose an authority-repair direction or defer HCM-2.2.",
+      "options": [
+        "Option 1: Add a candidate_subject_fingerprint over an exact preimage that excludes validation_result_refs; bind validation results to it while approvals and promotion continue to bind the final candidate fingerprint.",
+        "Option 2: Move lifecycle-validation result refs out of the immutable candidate and into promotion-only authority, accepting the larger schema and flow revision.",
+        "Option 3: Defer HCM-2.2 and retain checkpoint 684029d4dda0c800fe840a19b54bf7f87fb41123 as non-authoritative work only."
+      ],
+      "recommendation": "Option 1, subject to a fresh planning review that proves the exact preimages and migration behavior before implementation resumes.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "The user explicitly selects an option and authorizes an authority-repair planning packet; implementation may resume only after that packet receives a fresh CLEAN planning review."
+    }
+  ],
+  "validation": [
+    {
+      "command": "cargo test --workspace --all-targets; cargo clippy --workspace --all-targets -- -D warnings; RUSTDOCFLAGS=-D warnings cargo doc --workspace --no-deps",
+      "status": "passed",
+      "evidence_ref": "Completed before terminal Review 2; these mechanical gates do not establish authority correctness."
+    },
+    {
+      "command": "HCM-2.2 package, installed smoke, targeted engine/compiler/CLI, and archive-boundary gates",
+      "status": "passed",
+      "evidence_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T064356Z--implementation-proof-wall.md"
+    },
+    {
+      "command": "fresh final implementation Review 1",
+      "status": "failed",
+      "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T065241Z--HCM-2-2--fresh-final-implementation-review.json"
+    },
+    {
+      "command": "promotion-authority remediation focused and affected regressions",
+      "status": "passed",
+      "evidence_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T074846Z--final-review-1-remediation-proof-wall.md"
+    },
+    {
+      "command": "fresh final implementation Review 2",
+      "status": "failed",
+      "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json"
+    },
+    {
+      "command": "lifecycle-validation authority remediation admission and focused tests",
+      "status": "blocked",
+      "evidence_ref": "13/13 manifest entries admitted and 14/14 focused tests passed, but the frozen identity graph is cyclic; no edits were made."
+    },
+    {
+      "command": "cargo fmt --all -- --check and git diff --check",
+      "status": "passed",
+      "evidence_ref": "Passed before the checkpoint commit and authority-boundary closeout."
+    },
+    {
+      "command": "validate_handoffs.py plus orchestration self-test, v1 self-test, and archive-boundary normal/self-test",
+      "status": "passed",
+      "evidence_ref": "Passed before the parent closeout record; rerun after adding this record and deterministic ledger entry."
+    },
+    {
+      "command": "npx gitnexus detect-changes -r handbook",
+      "status": "passed",
+      "evidence_ref": "Pre-checkpoint detection reported CRITICAL scope: 70 files, 457 symbols, and 52 flows; final timestamp-only documentation adjustment reported LOW scope."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "HCM phase status"
+      ],
+      "reason": "Record HCM-2.2 as a non-authoritative blocked checkpoint.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "HCM-2 seam status"
+      ],
+      "reason": "Retain HCM-2.1 proof while classifying HCM-2.2 portions as target-only.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.2"
+      ],
+      "reason": "Record escalation-required checkpoint status and forbid automatic HCM-2.3 transition.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.2 proof gate"
+      ],
+      "reason": "Keep all HCM-2.2 completion gates open after non-CLEAN Review 2.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/status/plan.md",
+      "sections": [
+        "Status"
+      ],
+      "reason": "Record authority-boundary stop.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/status/todo.md",
+      "sections": [
+        "Status"
+      ],
+      "reason": "Record unresolved Review 2 work and exact resume condition.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "Candidate identity",
+        "Lifecycle-validation authority"
+      ],
+      "reason": "Requires an additive authority revision selected by the user and admitted by fresh planning review.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Artifact candidate",
+        "Lifecycle-validation result"
+      ],
+      "reason": "Requires the same reviewed acyclic identity repair before implementation resumes.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260720T083855Z--HCM-2-2--orchestration--lifecycle-validation-authority-boundary.json",
+      "sections": [
+        "entire handoff record"
+      ],
+      "reason": "Record the parent authority-boundary closeout and human decision point.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Extend the query ledger with the escalation handoff.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Select and authorize an HCM-2.2 lifecycle-validation authority repair direction, or explicitly defer the slice.",
+    "condition": "Resume only after the user selects Option 1, 2, or 3 from HCM-2.2-ESC-001. Options 1 or 2 require an authority-repair planning packet and a fresh CLEAN planning review before code changes.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260720T083855Z--HCM-2-2--orchestration--lifecycle-validation-authority-boundary.json",
+        "sections": [
+          "blockers",
+          "escalations",
+          "resume"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md",
+        "sections": [
+          "Terminal review state",
+          "Bounded remediation result",
+          "Exact resume condition"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json",
+        "sections": [
+          "subject_manifest",
+          "review findings"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sections": [
+          "Candidate fingerprint preimage",
+          "Lifecycle validation result binding",
+          "Closed-graph and proof stop conditions"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sections": [
+          "Artifact candidate",
+          "Artifact promotion record"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sections": [
+          "Top-level runner protocol",
+          "Fresh review / remediation loop"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Human selection among the recorded escalation options.",
+      "A bounded authority-repair planning packet for the selected option.",
+      "Implementation only after the revised closed graph receives a fresh CLEAN planning review."
+    ],
+    "prohibited_scope": [
+      "Starting HCM-2.3 or adjacent cleanup.",
+      "Treating checkpoint 684029d4dda0c800fe840a19b54bf7f87fb41123 as landed or authoritative.",
+      "Patching implementation before the authority graph is repaired and reviewed.",
+      "Weakening lifecycle-validation completeness, currentness, or engine-owned authority."
+    ],
+    "acceptance_criteria": [
+      "The user explicitly selects Option 1, Option 2, or Option 3.",
+      "For Option 1 or 2, authority documents define exact identity preimages, refs, persistence, currentness, and migration effects without a cycle.",
+      "A different fresh planning reviewer admits the complete revised subject and returns CLEAN.",
+      "A new implementation packet covers all four Review 2 findings before implementation resumes."
+    ],
+    "stop_conditions": [
+      "Stop if the user has not selected an escalation option.",
+      "Stop if the selected repair remains cyclic or invents authority outside reviewed contracts.",
+      "Stop before HCM-2.3 under all options."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-2.2 is not complete. Checkpoint 684029d4 preserves the implementation, but fresh Review 2 returned one Critical and three Required findings. A bounded remediation proved the Critical lifecycle-validation identity graph cyclic under frozen authority and made no edits. Human choice is required: approve Option 1 (recommended), Option 2, or defer via Option 3. HCM-2.3 is unauthorized."
+}
