@@ -34,6 +34,9 @@ use handbook_compiler::{
 };
 use handbook_engine::{canonical_artifact_descriptors, setup_starter_template_bytes};
 
+#[path = "../../engine/tests/support/hcm_2_2_committed_charter.rs"]
+mod hcm_2_2_committed_charter;
+
 #[cfg(unix)]
 const AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR: &str =
     "HANDBOOK_AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC";
@@ -209,7 +212,7 @@ project_name: "Handbook"
 owner: "compiler-team"
 team: "System"
 repo_or_project_ref: "handbook"
-charter_ref: ".handbook/charter/CHARTER.md"
+charter_ref: ".handbook/project/charter.yaml"
 project_context_ref: ".handbook/project/context.yaml"
 environment_variables: []
 secret_handling:
@@ -246,7 +249,7 @@ tooling:
   lint_type_test_tools: ["rustfmt", "clippy", "cargo test"]
   minimum_versions: ["Rust 2021 edition"]
 update_contract:
-  exception_record_location: ".handbook/charter/CHARTER.md#exceptions"
+  exception_record_location: ".handbook/project/charter.yaml#/governance/exception_process"
 known_unknowns:
   - item: "future hosted runtime requirements"
     owner: "project owner"
@@ -1514,9 +1517,11 @@ fn author_environment_inventory_refuses_when_upstream_charter_is_semantically_in
 
     assert_eq!(
         err.kind,
-        AuthorEnvironmentInventoryRefusalKind::InvalidUpstreamCanonicalTruth
+        AuthorEnvironmentInventoryRefusalKind::MissingRequiredCharter
     );
-    assert!(err.summary.contains("canonical charter truth is invalid"));
+    assert!(err
+        .summary
+        .contains("selected canonical Charter is unavailable"));
     assert_eq!(
         std::fs::read(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
             .expect("environment inventory after refusal"),
@@ -1559,7 +1564,7 @@ fn author_environment_inventory_refuses_when_optional_project_context_is_semanti
     );
 }
 
-#[cfg(not(unix))]
+#[cfg(all(not(unix), not(windows)))]
 #[test]
 fn environment_inventory_author_refuses_before_mutation_without_strict_read_support() {
     let dir = tempfile::tempdir().expect("tempdir");
@@ -1585,4 +1590,103 @@ fn environment_inventory_author_refuses_before_mutation_without_strict_read_supp
         std::fs::read(&target).expect("environment inventory after refusal"),
         before
     );
+}
+
+const HCM_2_2_SELECTED_CHARTER_YAML: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
+));
+
+fn hcm_2_2_with_environment_inventory_now_utc<T>(value: &str, action: impl FnOnce() -> T) -> T {
+    static LOCK: std::sync::OnceLock<std::sync::Mutex<()>> = std::sync::OnceLock::new();
+    let _guard = LOCK
+        .get_or_init(|| std::sync::Mutex::new(()))
+        .lock()
+        .expect("environment inventory clock lock");
+    let variable = "HANDBOOK_AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC";
+    let previous = std::env::var_os(variable);
+    std::env::set_var(variable, value);
+    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(action));
+    match previous {
+        Some(previous) => std::env::set_var(variable, previous),
+        None => std::env::remove_var(variable),
+    }
+    match result {
+        Ok(value) => value,
+        Err(payload) => std::panic::resume_unwind(payload),
+    }
+}
+
+#[test]
+fn hcm_2_2_environment_inventory_input_rejects_legacy_charter_reference() {
+    let mut input = valid_environment_inventory_input();
+    input.charter_ref = ".handbook/charter/CHARTER.md".to_owned();
+
+    let error = handbook_compiler::validate_environment_inventory_structured_input(&input)
+        .expect_err("legacy Charter reference must be rejected");
+
+    assert_eq!(
+        error.kind,
+        AuthorEnvironmentInventoryRefusalKind::IncompleteStructuredInput
+    );
+    assert!(error
+        .summary
+        .contains("charter_ref must be exactly `.handbook/project/charter.yaml`"));
+}
+
+#[test]
+fn hcm_2_2_environment_inventory_preflight_uses_only_selected_charter_truth() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    legacy_authoring_fixture_repo(dir.path());
+    hcm_2_2_committed_charter::promote_committed_charter(
+        dir.path(),
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "hcm-2-2-environment-preflight",
+    );
+    write_file(
+        &dir.path().join(".handbook/charter/CHARTER.md"),
+        b"conflicting legacy Charter Markdown must be ignored\n",
+    );
+    write_valid_selected_project_context(dir.path());
+    let mut input = valid_environment_inventory_input();
+    input.charter_ref = ".handbook/project/charter.yaml".to_owned();
+    input.update_contract.exception_record_location =
+        ".handbook/project/charter.yaml#/governance/exception_process".to_owned();
+
+    preflight_author_environment_inventory_from_input(dir.path(), &input)
+        .expect("selected Charter preflight");
+
+    let rendered = hcm_2_2_with_environment_inventory_now_utc("2026-07-10T12:34:56Z", || {
+        handbook_compiler::render_environment_inventory_markdown(&input)
+            .expect("render selected references")
+    });
+    assert!(rendered.contains("> **Charter Ref:** .handbook/project/charter.yaml"));
+    assert!(rendered.contains(
+        "- Charter exceptions are recorded at: .handbook/project/charter.yaml#/governance/exception_process"
+    ));
+    assert!(!rendered.contains(".handbook/charter/CHARTER.md"));
+}
+
+#[test]
+fn hcm_2_2_environment_inventory_preflight_refuses_uncommitted_selected_charter() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    legacy_authoring_fixture_repo(dir.path());
+    write_file(
+        &dir.path().join(".handbook/project/charter.yaml"),
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+    );
+    write_valid_selected_project_context(dir.path());
+    let input = valid_environment_inventory_input();
+
+    let error = preflight_author_environment_inventory_from_input(dir.path(), &input)
+        .expect_err("uncommitted selected Charter must be refused");
+
+    assert_eq!(
+        error.kind,
+        AuthorEnvironmentInventoryRefusalKind::InvalidUpstreamCanonicalTruth
+    );
+    assert_eq!(error.broken_subject, ".handbook/project/charter.yaml");
+    assert!(error
+        .summary
+        .contains("selected Charter committed-authority read failed"));
 }

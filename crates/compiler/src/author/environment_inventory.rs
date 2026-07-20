@@ -9,6 +9,7 @@ use super::{
         preflight_author_environment_inventory as preflight_author_environment_inventory_shell,
         render_environment_inventory_markdown as render_environment_inventory_markdown_shell,
         with_environment_inventory_authoring_lock, write_canonical_environment_inventory_markdown,
+        EnvironmentInventoryUpstreamSelection,
     },
 };
 use crate::layout::CANONICAL_ENVIRONMENT_INVENTORY_RELATIVE_PATH;
@@ -90,9 +91,33 @@ pub fn preflight_author_environment_inventory_from_input(
     input: &EnvironmentInventoryStructuredInput,
 ) -> Result<(), AuthorEnvironmentInventoryRefusal> {
     validate_environment_inventory_structured_input(input)?;
-    let selected_project_context_path =
-        preflight_author_environment_inventory_shell(repo_root.as_ref())?;
-    validate_project_context_reference(input, &selected_project_context_path)
+    let selected = preflight_author_environment_inventory_shell(repo_root.as_ref())?;
+    validate_charter_reference(input, &selected)?;
+    validate_project_context_reference(input, &selected.project_context_path)
+}
+
+fn validate_charter_reference(
+    input: &EnvironmentInventoryStructuredInput,
+    selected: &EnvironmentInventoryUpstreamSelection,
+) -> Result<(), AuthorEnvironmentInventoryRefusal> {
+    let authority_carrier_is_complete = selected.charter_source_fingerprint.starts_with("sha256:")
+        && !selected.charter_promotion_ref.is_empty()
+        && !selected.charter_lifecycle_transition_ref.is_empty();
+    if input.charter_ref == selected.charter_path && authority_carrier_is_complete {
+        return Ok(());
+    }
+
+    Err(AuthorEnvironmentInventoryRefusal {
+        kind: AuthorEnvironmentInventoryRefusalKind::IncompleteStructuredInput,
+        summary: format!(
+            "structured environment-inventory input must set `charter_ref` exactly to `{}` and the selected Charter must retain committed source-fingerprint authority",
+            selected.charter_path
+        ),
+        broken_subject: "structured environment-inventory input charter_ref".to_string(),
+        next_safe_action:
+            "set `charter_ref` to the selected canonical Charter YAML path, ensure it is promoted, and retry `handbook author environment-inventory --from-inputs <path|->`"
+                .to_string(),
+    })
 }
 
 fn validate_project_context_reference(

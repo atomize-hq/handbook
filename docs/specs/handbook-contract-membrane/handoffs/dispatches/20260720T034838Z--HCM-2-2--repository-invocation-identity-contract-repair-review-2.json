@@ -1,0 +1,41 @@
+{
+  "schema_id":"handbook.internal-dispatch",
+  "schema_version":"1.1",
+  "dispatch_id":"20260720T034838Z--HCM-2-2--repository-invocation-identity-contract-repair-review-2",
+  "created_at_utc":"2026-07-20T03:48:38Z",
+  "source_handoff_ids":["20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"],
+  "parent_orchestration_id":"20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision":"proof_or_review_followup",
+  "execution_target":"internal_subagent",
+  "agent_type":"default",
+  "role":"review",
+  "fresh_context_required":true,
+  "closeout_owner":"parent_orchestrator",
+  "required_skills":["using-agent-skills","source-driven-development","api-and-interface-design","code-review-and-quality"],
+  "phase_id":"HCM-2",
+  "slice_id":"HCM-2.2",
+  "packet_id":"HCM-2.2-contract-repair-2",
+  "subject_fingerprint":"sha256:da21b9f0427cd49743e2ce607a232a1b7bc67d07043edcc32cd6a84cffa5b4a4",
+  "subject_manifest":{"algorithm":"sha256","encoding":"repo-path-null-sha256-newline-v1","entries":[
+    {"path":"docs/specs/handbook-contract-membrane/03-seam-crosswalk.md","sha256":"22f8e5ea897240f987597f91bd94031c31bef77af761fb264118d23a41947f55"},
+    {"path":"docs/specs/handbook-contract-membrane/04-phase-slice-map.md","sha256":"3d1fa0ab86d00c4b4b1fe3b8599c08cb5d703582be28617a3e6d07a5e06d8344"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sha256":"2d8bbcd760c1532cb1dab067573eb43e960872e26a6a83628244a49cf1493a14"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/repository-invocation-identity-vectors-v1.0.json","sha256":"026ea87659209e4d1fba9e2bfbafc319a883cde6b834918d4386ffbe44053319"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md","sha256":"36865953efce61f3422b99f4a98b37b144cd66fa6da0a56a7264a27d7fbb57ee"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md","sha256":"57aa742f918d930102d672bd2d7899450462eff1040561be2a5e0eb5fcb0051d"}
+  ],"aggregate_fingerprint":"sha256:da21b9f0427cd49743e2ce607a232a1b7bc67d07043edcc32cd6a84cffa5b4a4"},
+  "active_resolution":{"level":"contract_repair_review_2","scope_horizon":"HCM-2.2-product-authority","detail_resolution":"high","temporal_horizon":"current_orchestration","authority_horizon":"review_findings_remediated","memory_horizon":"manifest_subject_only","validation_horizon":"pre_behavior_review"},
+  "authority_refs":[
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T032348Z--HCM-2-2--repository-invocation-identity-contract-repair-review.json","sections":["all"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sections":["Acquisition and immutable lineage","Approval authority and bootstrap","API, security, and compatibility posture","Product-path cutover","Verification and promotion gates"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-1.0.0.schema.json","sections":["all"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-vectors-v1.0.json","sections":["all"]}
+  ],
+  "repo_truth":"The first fresh reviewer returned three required findings: no representable pre-invocation result, an overbroad semantic-record continuity claim, and no exact typed operation/token mapping while the Admin schema intentionally retained opaque IDs. The parent repaired them together: one closed engine-owned pre-invocation refusal DTO with a total nullability matrix, operation ID continuity narrowed to request/challenge/raw intent/result/output and added explicitly to both journal contracts, and an exact engine-enum mapping whose derived ID is a compiler/CLI product subset while direct typed engine callers preserve the published bounded opaque correlation contract.",
+  "allowed_scope":["Read the exact manifest subject and named authority only.","Independently recompute vectors and validate all three prior findings against the repaired text.","Return findings to the parent without editing."],
+  "non_goals":["Do not implement Rust behavior, edit files, review unrelated implementation, write handoff/ledger/proof, or commit."],
+  "tasks":["Verify both pre-invocation branches are closed, injective, serializable without fabricated leaves, and disjoint from normal Admin/approval results and setup refusal.","Verify request/challenge/raw-intent/result/output continuity is total and that semantic records intentionally omit non-authoritative operation IDs without contradiction.","Verify the six product-operation mappings/five allocator tokens are exact, crossed-known tokens are impossible/refused, and direct-engine opaque-ID compatibility does not permit compiler/CLI raw input or weaken authority.","Independently recompute repository identity and all operation-ID vectors and replay manifest hashes.","Return CLEAN only if no valid actionable finding remains; classify every finding."],
+  "contracts_and_gates":["No placeholder repository identity or operation ID is permitted.","Preflight has zero native calls and zero filesystem/semantic/journal/registry/lifecycle/canonical delta.","Compiler/CLI select only a typed engine operation and accept no identity, raw token, or operation ID.","Direct engine opaque operation IDs remain non-authoritative correlation values admitted by the already-frozen schema.","Behavior resumes only after this different fresh reviewer returns CLEAN."],
+  "stop_conditions":["Return BLOCKED only for a genuine authority gap outside bounded HCM-2.2 repair.","Do not substitute mutable implementation inspection for contract review."],
+  "return_contract":{"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"read_only","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","prior_finding_disposition","vector_recomputation","validation","parent_disposition"]}
+}

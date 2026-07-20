@@ -5,7 +5,7 @@ use handbook_compiler::{
     SetupArtifactActionKind, SetupErrorCode, SetupErrorKind, SetupErrorReasonCode, SetupMode,
     SetupRequest, SetupRootAction,
 };
-use handbook_engine::resolve_shipped_profile_decisions;
+use handbook_engine::{resolve_shipped_profile_decisions, REPOSITORY_IDENTITY_REPO_PATH};
 use std::fs;
 use tempfile::tempdir;
 
@@ -53,9 +53,96 @@ fn init_plans_root_creation_but_writes_no_selected_artifact() {
 
     let outcome = run_setup_with_decisions(repo.path(), &request, &decisions).unwrap();
     assert_ne!(outcome.status, RepositoryReadinessStatus::Ready);
+    assert!(repo.path().join(".handbook").is_dir());
+    let identity = fs::read(repo.path().join(REPOSITORY_IDENTITY_REPO_PATH)).unwrap();
+    assert_eq!(identity.len(), 71);
+    assert!(identity.starts_with(b"sha256:"));
     for artifact in &outcome.plan.artifacts {
         assert!(!repo.path().join(&artifact.artifact.canonical_path).exists());
     }
+}
+
+#[cfg(unix)]
+#[test]
+fn mutation_admitted_setup_initializes_then_preserves_repository_identity() {
+    let repo = tempdir().unwrap();
+    let decisions = resolve_shipped_profile_decisions(repo.path()).unwrap();
+
+    let first =
+        run_setup_with_decisions(repo.path(), &SetupRequest::default(), &decisions).unwrap();
+    assert!(matches!(
+        first.status,
+        RepositoryReadinessStatus::Ready | RepositoryReadinessStatus::ActionRequired
+    ));
+    let identity_path = repo.path().join(REPOSITORY_IDENTITY_REPO_PATH);
+    let before = fs::read(&identity_path).unwrap();
+    assert_eq!(before.len(), 71);
+
+    let refresh = SetupRequest {
+        mode: SetupMode::Refresh,
+        rewrite: false,
+        reset_state: false,
+    };
+    run_setup_with_decisions(repo.path(), &refresh, &decisions).unwrap();
+    assert_eq!(fs::read(identity_path).unwrap(), before);
+}
+
+#[cfg(unix)]
+#[test]
+fn reset_state_never_selects_or_replaces_repository_identity() {
+    let repo = tempdir().unwrap();
+    let decisions = resolve_shipped_profile_decisions(repo.path()).unwrap();
+    run_setup_with_decisions(repo.path(), &SetupRequest::default(), &decisions).unwrap();
+    let identity_path = repo.path().join(REPOSITORY_IDENTITY_REPO_PATH);
+    let before = fs::read(&identity_path).unwrap();
+    fs::create_dir_all(repo.path().join(".handbook/state/runtime")).unwrap();
+    fs::write(repo.path().join(".handbook/state/runtime/stale"), b"stale").unwrap();
+
+    let reset = SetupRequest {
+        mode: SetupMode::Refresh,
+        rewrite: false,
+        reset_state: true,
+    };
+    let plan = plan_setup_with_decisions(repo.path(), &reset, &decisions).unwrap();
+    assert!(!plan
+        .reset_paths
+        .iter()
+        .any(|path| path == REPOSITORY_IDENTITY_REPO_PATH));
+    let outcome = run_setup_with_decisions(repo.path(), &reset, &decisions).unwrap();
+    assert!(outcome.reset_applied);
+    assert_eq!(fs::read(identity_path).unwrap(), before);
+}
+
+#[cfg(unix)]
+#[test]
+fn malformed_repository_identity_projects_a_typed_setup_error_without_repair() {
+    let repo = tempdir().unwrap();
+    fs::create_dir(repo.path().join(".handbook")).unwrap();
+    let identity_path = repo.path().join(REPOSITORY_IDENTITY_REPO_PATH);
+    let malformed = b"sha256:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    fs::write(&identity_path, malformed).unwrap();
+    let decisions = resolve_shipped_profile_decisions(repo.path()).unwrap();
+
+    let error = run_setup_with_decisions(
+        repo.path(),
+        &SetupRequest {
+            mode: SetupMode::Refresh,
+            rewrite: false,
+            reset_state: false,
+        },
+        &decisions,
+    )
+    .unwrap_err();
+    assert_eq!(error.kind(), SetupErrorKind::RepositoryIdentity);
+    assert_eq!(
+        error.reason_code(),
+        SetupErrorReasonCode::RepositoryIdentityUnsafe
+    );
+    assert_eq!(
+        error.repo_relative_path(),
+        Some(REPOSITORY_IDENTITY_REPO_PATH)
+    );
+    assert_eq!(fs::read(identity_path).unwrap(), malformed);
 }
 
 #[test]
@@ -803,11 +890,17 @@ fn builtin(value: &str) -> DefinitionSourceBinding {
     }
 }
 
-#[cfg(not(unix))]
+#[cfg(windows)]
 #[test]
 fn windows_profile_inspection_refusal_prevents_setup_mutation() {
     let repo = tempdir().unwrap();
     let outcome = run_setup(repo.path(), &SetupRequest::default()).unwrap();
-    assert_eq!(outcome.status, RepositoryReadinessStatus::Invalid);
-    assert!(!repo.path().join(".handbook").exists());
+    assert_eq!(outcome.status, RepositoryReadinessStatus::Indeterminate);
+    assert!(repo.path().join(".handbook").is_dir());
+    let identity = fs::read(repo.path().join(REPOSITORY_IDENTITY_REPO_PATH)).unwrap();
+    assert_eq!(identity.len(), 71);
+    assert!(identity.starts_with(b"sha256:"));
+    for artifact in &outcome.plan.artifacts {
+        assert!(!repo.path().join(&artifact.artifact.canonical_path).exists());
+    }
 }

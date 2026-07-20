@@ -7,6 +7,30 @@ use std::process::{Command, Output, Stdio};
 #[cfg(unix)]
 const AUTHOR_PROJECT_CONTEXT_NOW_UTC_ENV_VAR: &str = "HANDBOOK_AUTHOR_PROJECT_CONTEXT_NOW_UTC";
 
+const CANONICAL_CHARTER_YAML: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
+));
+
+const CHARTER_COVERAGE_IDS: [&str; 16] = [
+    "project_shape.definition",
+    "delivery.constraints",
+    "delivery.default_implications",
+    "operational_reality.production_state",
+    "risk.domains",
+    "engineering_posture.baseline",
+    "policy.authority_and_revision",
+    "governance.decision_authority",
+    "governance.required_approvals",
+    "governance.exception_policy",
+    "engineering_posture.dimensions",
+    "engineering_posture.red_lines",
+    "governance.review_triggers",
+    "governance.reassessment_triggers",
+    "debt.register",
+    "decisions.records",
+];
+
 fn binary() -> Command {
     Command::new(env!("CARGO_BIN_EXE_handbook"))
 }
@@ -101,6 +125,7 @@ fn valid_environment_inventory_markdown(project_context_ref: &str) -> String {
     .to_string()
 }
 
+#[cfg(not(windows))]
 fn valid_environment_inventory_inputs_yaml() -> &'static str {
     r#"schema_version: "0.1.0"
 project_name: "Handbook"
@@ -192,142 +217,23 @@ fn expected_project_context_markdown_from_yaml() -> String {
     .expect("canonical Project Context UTF-8")
 }
 
-fn valid_structured_inputs_yaml() -> &'static str {
-    r#"schema_version: "0.1.0"
-project:
-  name: "Handbook"
-  classification: greenfield
-  team_size: 2
-  users: internal
-  expected_lifetime: months
-  surfaces:
-    - cli
-    - api
-  runtime_environments:
-    - server
-  constraints:
-    deadline: ""
-    budget: ""
-    experience_notes: "small team"
-    must_use_tech:
-      - rust
-  operational_reality:
-    in_production_today: false
-    prod_users_or_data: ""
-    external_contracts_to_preserve: []
-    uptime_expectations: "best effort"
-  default_implications:
-    backward_compatibility: not_required
-    migration_planning: not_required
-    rollout_controls: lightweight
-    deprecation_policy: not_required_yet
-    observability_threshold: standard
-posture:
-  rubric_scale: "1-5"
-  baseline_level: 3
-  baseline_rationale:
-    - "internal operators"
-    - "moderate blast radius"
-domains:
-  - name: "planning"
-    blast_radius: "medium"
-    touches:
-      - "internal operators"
-    constraints:
-      - "preserve trust boundaries"
-dimensions:
-  - name: speed_vs_quality
-    level: 3
-    default_stance: "optimize for durability over shortcuts"
-    raise_the_bar_triggers: ["production data"]
-    allowed_shortcuts: ["time-boxed exploration"]
-    red_lines: ["ship without review"]
-    domain_overrides: []
-  - name: type_safety_static_analysis
-    level: 3
-    default_stance: "type-safe by default"
-    raise_the_bar_triggers: ["cross-boundary interfaces"]
-    allowed_shortcuts: ["fixture-backed exploration"]
-    red_lines: ["unchecked public contracts"]
-    domain_overrides: []
-  - name: testing_rigor
-    level: 3
-    default_stance: "test the shipped path"
-    raise_the_bar_triggers: ["regression risk"]
-    allowed_shortcuts: ["manual validation for throwaway work"]
-    red_lines: ["merge without exercising the path"]
-    domain_overrides: []
-  - name: scalability_performance
-    level: 3
-    default_stance: "track obvious bottlenecks"
-    raise_the_bar_triggers: ["user-visible latency"]
-    allowed_shortcuts: ["defer micro-optimizations"]
-    red_lines: ["ignore known load cliffs"]
-    domain_overrides: []
-  - name: reliability_operability
-    level: 3
-    default_stance: "prefer recoverable changes"
-    raise_the_bar_triggers: ["long-lived state changes"]
-    allowed_shortcuts: ["local-only iteration"]
-    red_lines: ["unrecoverable migrations without a plan"]
-    domain_overrides: []
-  - name: security_privacy
-    level: 3
-    default_stance: "protect boundaries by default"
-    raise_the_bar_triggers: ["credentials or user data"]
-    allowed_shortcuts: ["synthetic data in local dev"]
-    red_lines: ["plaintext secrets"]
-    domain_overrides: []
-  - name: observability
-    level: 3
-    default_stance: "emit enough proof to debug production issues"
-    raise_the_bar_triggers: ["background jobs"]
-    allowed_shortcuts: ["manual logs for local-only work"]
-    red_lines: ["silent failures"]
-    domain_overrides: []
-  - name: dx_tooling_automation
-    level: 3
-    default_stance: "prefer automation that pays for itself"
-    raise_the_bar_triggers: ["frequent repeated workflows"]
-    allowed_shortcuts: ["temporary local scripts"]
-    red_lines: ["manual-only release steps"]
-    domain_overrides: []
-  - name: ux_polish_api_usability
-    level: 3
-    default_stance: "clear operator and API ergonomics"
-    raise_the_bar_triggers: ["external users"]
-    allowed_shortcuts: ["rough internal copy while iterating"]
-    red_lines: ["unclear operator failure modes"]
-    domain_overrides: []
-exceptions:
-  approvers:
-    - project_owner
-  record_location: ".handbook/charter/CHARTER.md#exceptions"
-  minimum_fields:
-    - what
-    - why
-    - scope
-    - risk
-    - owner
-    - expiry_or_revisit_date
-debt_tracking:
-  system: "issues"
-  labels:
-    - debt
-  review_cadence: "monthly"
-decision_records:
-  enabled: false
-  path: ""
-  format: ""
-"#
-}
-
-fn deterministic_authored_markdown() -> String {
-    let input =
-        handbook_engine::parse_charter_structured_input_yaml(valid_structured_inputs_yaml())
-            .expect("parse deterministic charter inputs");
-    handbook_engine::render_charter_markdown(&input)
-        .expect("render deterministic authored markdown")
+fn valid_structured_inputs_yaml() -> String {
+    let mut document = String::from("mode: guided_adaptive\ncontent:\n");
+    for line in CANONICAL_CHARTER_YAML.lines() {
+        document.push_str("  ");
+        document.push_str(line);
+        document.push('\n');
+    }
+    document.push_str("coverage:\n");
+    for coverage_id in CHARTER_COVERAGE_IDS {
+        document.push_str(&format!(
+            "  - coverage_id: {coverage_id:?}\n    source_kind: user_declaration\n    value_ref: \"input://{coverage_id}\"\n    evidence_refs: []\n    confidence: high\n    freshness: null\n    sensitivity: public\n    contradiction_refs: []\n    waiver_ref: null\n"
+        ));
+    }
+    document.push_str(
+        "consumer:\n  kind: agent\n  id: handbook-charter-intake\n  version: \"1.0\"\nprompt_event_refs: []\nfinalized_at_utc: \"2026-07-20T00:00:00Z\"\nexpected_current_fingerprint: null\n",
+    );
+    document
 }
 
 #[test]
@@ -339,9 +245,9 @@ fn bare_charter_author_requires_structured_inputs() {
     assert!(!output.status.success(), "non-tty author should refuse");
     let out = stdout(&output);
     assert!(out.contains("OUTCOME: REFUSED"));
-    assert!(out.contains("CATEGORY: InvalidRequest"));
-    assert!(out.contains("requires `--from-inputs <path|->`"));
-    assert!(out.contains("handbook author charter --from-inputs <path|->"));
+    assert!(out.contains("OPERATION: author"));
+    assert!(out.contains("CODE: invalid_request"));
+    assert!(out.contains("arguments do not select exactly one frozen Charter operation"));
 }
 
 #[test]
@@ -355,6 +261,8 @@ fn file_inputs_refuse_when_yaml_is_malformed() {
         &[
             "author",
             "charter",
+            "--mode",
+            "guided-adaptive",
             "--from-inputs",
             inputs_path.to_str().expect("utf-8 path"),
         ],
@@ -367,7 +275,8 @@ fn file_inputs_refuse_when_yaml_is_malformed() {
     );
     let out = stdout(&output);
     assert!(out.contains("OUTCOME: REFUSED"));
-    assert!(out.contains("CATEGORY: MalformedStructuredInput"));
+    assert!(out.contains("OPERATION: author"));
+    assert!(out.contains("CODE: invalid_intake_envelope"));
 }
 
 #[test]
@@ -376,7 +285,14 @@ fn stdin_inputs_refuse_when_yaml_is_malformed() {
 
     let output = run_in_with_input(
         dir.path(),
-        &["author", "charter", "--from-inputs", "-"],
+        &[
+            "author",
+            "charter",
+            "--mode",
+            "guided-adaptive",
+            "--from-inputs",
+            "-",
+        ],
         "schema_version: [broken\n",
     );
 
@@ -387,16 +303,16 @@ fn stdin_inputs_refuse_when_yaml_is_malformed() {
     );
     let out = stdout(&output);
     assert!(out.contains("OUTCOME: REFUSED"));
-    assert!(out.contains("CATEGORY: MalformedStructuredInput"));
-    assert!(out.contains("OBJECT: author charter"));
+    assert!(out.contains("OPERATION: author"));
+    assert!(out.contains("CODE: invalid_intake_envelope"));
 }
 
 #[test]
 fn file_inputs_preserve_malformed_yaml_refusal_even_when_truth_exists() {
     let dir = legacy_authoring_fixture_repo();
     write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        &deterministic_authored_markdown(),
+        &dir.path().join(".handbook/project/charter.yaml"),
+        CANONICAL_CHARTER_YAML,
     );
     let inputs_path = dir.path().join("charter-inputs.yaml");
     write_file(&inputs_path, "project: [not valid");
@@ -406,6 +322,8 @@ fn file_inputs_preserve_malformed_yaml_refusal_even_when_truth_exists() {
         &[
             "author",
             "charter",
+            "--mode",
+            "guided-adaptive",
             "--from-inputs",
             inputs_path.to_str().expect("utf-8 path"),
         ],
@@ -418,22 +336,25 @@ fn file_inputs_preserve_malformed_yaml_refusal_even_when_truth_exists() {
     );
     let out = stdout(&output);
     assert!(out.contains("OUTCOME: REFUSED"));
-    assert!(out.contains("CATEGORY: MalformedStructuredInput"));
+    assert!(out.contains("OPERATION: author"));
+    assert!(out.contains("CODE: invalid_intake_envelope"));
 }
 
 #[test]
 fn file_inputs_author_charter_successfully_with_deterministic_rendering() {
     let dir = legacy_authoring_fixture_repo();
     let inputs_path = dir.path().join("charter-inputs.yaml");
-    write_file(&inputs_path, valid_structured_inputs_yaml());
-    let expected_markdown = deterministic_authored_markdown();
+    write_file(&inputs_path, &valid_structured_inputs_yaml());
     let output = run_in(
         dir.path(),
         &[
             "author",
             "charter",
+            "--mode",
+            "guided-adaptive",
             "--from-inputs",
             inputs_path.to_str().expect("utf-8 path"),
+            "--json",
         ],
     );
 
@@ -442,14 +363,14 @@ fn file_inputs_author_charter_successfully_with_deterministic_rendering() {
         "file inputs should succeed: {}",
         stdout(&output)
     );
-    let out = stdout(&output);
-    assert!(out.contains("OUTCOME: AUTHORED"));
-    assert!(out.contains("MODE: structured_inputs_file"));
-    assert!(out.contains(&format!("SOURCE: {}", inputs_path.display())));
-    assert_eq!(
-        fs::read_to_string(dir.path().join(".handbook/charter/CHARTER.md")).expect("charter"),
-        expected_markdown
-    );
+    let value: serde_json::Value = serde_json::from_slice(&output.stdout).expect("author JSON");
+    assert_eq!(value["operation"], "author");
+    assert_eq!(value["status"], "succeeded");
+    assert!(value["candidate_ref"].as_str().is_some());
+    assert!(value["changed_paths"]
+        .as_array()
+        .is_some_and(|paths| !paths.is_empty()));
+    assert!(!dir.path().join(".handbook/project/charter.yaml").exists());
     assert!(!dir.path().join("artifacts/charter/CHARTER.md").exists());
     assert!(!dir.path().join("CHARTER.md").exists());
 }
@@ -457,42 +378,56 @@ fn file_inputs_author_charter_successfully_with_deterministic_rendering() {
 #[test]
 fn file_inputs_author_charter_repairs_semantically_invalid_canonical_truth() {
     let dir = legacy_authoring_fixture_repo();
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        "# Engineering Charter - Example\n\n## Rules\n\n- Keep secrets out of git.\n",
-    );
+    let selected = dir.path().join(".handbook/project/charter.yaml");
+    write_file(&selected, "schema_id: invalid-charter\n");
+    let before = fs::read(&selected).expect("invalid selected Charter");
     let inputs_path = dir.path().join("charter-inputs.yaml");
-    write_file(&inputs_path, valid_structured_inputs_yaml());
-    let expected_markdown = deterministic_authored_markdown();
+    write_file(&inputs_path, &valid_structured_inputs_yaml());
     let output = run_in(
         dir.path(),
         &[
             "author",
             "charter",
+            "--mode",
+            "guided-adaptive",
             "--from-inputs",
             inputs_path.to_str().expect("utf-8 path"),
+            "--json",
         ],
     );
 
     assert!(
-        output.status.success(),
-        "repair should succeed: {}",
+        !output.status.success(),
+        "authoring must refuse while selected truth is invalid: {}",
         stdout(&output)
     );
+    let value: serde_json::Value = serde_json::from_slice(&output.stdout).expect("author JSON");
+    assert_eq!(value["operation"], "author");
+    assert_eq!(value["status"], "refused");
+    assert_eq!(value["refusal"]["code"], "canonical_charter_invalid");
+    assert_eq!(value["changed_paths"], serde_json::json!([]));
     assert_eq!(
-        fs::read_to_string(dir.path().join(".handbook/charter/CHARTER.md")).expect("charter"),
-        expected_markdown
+        fs::read(&selected).expect("selected Charter after author"),
+        before
     );
 }
 
 #[test]
 fn stdin_inputs_author_charter_successfully_with_deterministic_rendering() {
     let dir = legacy_authoring_fixture_repo();
-    let expected_markdown = deterministic_authored_markdown();
+    let intake = valid_structured_inputs_yaml();
     let output = run_in_with_input(
         dir.path(),
-        &["author", "charter", "--from-inputs", "-"],
-        valid_structured_inputs_yaml(),
+        &[
+            "author",
+            "charter",
+            "--mode",
+            "guided-adaptive",
+            "--from-inputs",
+            "-",
+            "--json",
+        ],
+        &intake,
     );
 
     assert!(
@@ -500,14 +435,11 @@ fn stdin_inputs_author_charter_successfully_with_deterministic_rendering() {
         "stdin inputs should succeed: {}",
         stdout(&output)
     );
-    let out = stdout(&output);
-    assert!(out.contains("OUTCOME: AUTHORED"));
-    assert!(out.contains("MODE: structured_inputs_stdin"));
-    assert!(out.contains("SOURCE: -"));
-    assert_eq!(
-        fs::read_to_string(dir.path().join(".handbook/charter/CHARTER.md")).expect("charter"),
-        expected_markdown
-    );
+    let value: serde_json::Value = serde_json::from_slice(&output.stdout).expect("author JSON");
+    assert_eq!(value["operation"], "author");
+    assert_eq!(value["status"], "succeeded");
+    assert!(value["candidate_ref"].as_str().is_some());
+    assert!(!dir.path().join(".handbook/project/charter.yaml").exists());
     assert!(!dir.path().join("artifacts/charter/CHARTER.md").exists());
     assert!(!dir.path().join("CHARTER.md").exists());
 }
@@ -515,33 +447,21 @@ fn stdin_inputs_author_charter_successfully_with_deterministic_rendering() {
 #[test]
 fn validate_from_inputs_succeeds_without_mutation() {
     let dir = legacy_authoring_fixture_repo();
-    let inputs_path = dir.path().join("charter-inputs.yaml");
-    write_file(&inputs_path, valid_structured_inputs_yaml());
-    let before =
-        fs::read(dir.path().join(".handbook/charter/CHARTER.md")).expect("starter charter");
-    let output = run_in(
-        dir.path(),
-        &[
-            "author",
-            "charter",
-            "--validate",
-            "--from-inputs",
-            inputs_path.to_str().expect("utf-8 path"),
-        ],
-    );
+    let selected = dir.path().join(".handbook/project/charter.yaml");
+    write_file(&selected, CANONICAL_CHARTER_YAML);
+    let before = fs::read(&selected).expect("selected Charter");
+    let output = run_in(dir.path(), &["author", "charter", "--validate", "--json"]);
 
     assert!(
         output.status.success(),
         "validate should succeed: {}",
         stdout(&output)
     );
-    let out = stdout(&output);
-    assert!(out.contains("OUTCOME: VALIDATED"));
-    assert!(out.contains("MODE: structured_inputs_file"));
-    assert_eq!(
-        fs::read(dir.path().join(".handbook/charter/CHARTER.md")).expect("charter after validate"),
-        before
-    );
+    let value: serde_json::Value = serde_json::from_slice(&output.stdout).expect("validate JSON");
+    assert_eq!(value["operation"], "validate");
+    assert_eq!(value["status"], "succeeded");
+    assert_eq!(value["changed_paths"], serde_json::json!([]));
+    assert_eq!(fs::read(&selected).expect("Charter after validate"), before);
 }
 
 #[test]
@@ -552,13 +472,12 @@ fn validate_refuses_without_from_inputs() {
 
     assert!(
         !output.status.success(),
-        "validate without from-inputs should refuse"
+        "validate without selected truth should refuse"
     );
     let out = stdout(&output);
     assert!(out.contains("OUTCOME: REFUSED"));
-    assert!(out.contains("CATEGORY: InvalidRequest"));
-    assert!(out.contains("--validate"));
-    assert!(out.contains("--from-inputs <path|->"));
+    assert!(out.contains("OPERATION: validate"));
+    assert!(out.contains("CODE: canonical_charter_missing"));
 }
 
 #[test]
@@ -1014,7 +933,7 @@ fn environment_inventory_file_inputs_repair_semantically_invalid_canonical_truth
     assert!(markdown.starts_with("# Environment Inventory — Handbook"));
 }
 
-#[cfg(not(unix))]
+#[cfg(all(not(unix), not(windows)))]
 #[test]
 fn environment_inventory_author_refuses_before_mutation_without_strict_read_support() {
     let dir = legacy_authoring_fixture_repo();
@@ -1053,22 +972,23 @@ fn environment_inventory_author_refuses_before_mutation_without_strict_read_supp
 #[test]
 fn charter_input_templates_and_fixtures_use_canonical_exception_record_location() {
     let shipped_template = include_str!("../../../core/library/charter/CHARTER_INPUTS.yaml.tmpl");
-    let fixture_template = include_str!(
-        "../../../tests/fixtures/foundation_flow_demo/repo/core/library/charter/CHARTER_INPUTS.yaml.tmpl"
-    );
     let brownfield_fixture =
         include_str!("../../../tools/fixtures/charter_inputs/brownfield_external_web.yaml");
     let greenfield_fixture =
         include_str!("../../../tools/fixtures/charter_inputs/greenfield_internal_api.yaml");
+    let runtime_fixture =
+        include_str!("../../../tools/fixtures/charter_inputs/runtime_smoke_valid.yaml");
 
     for contents in [
-        valid_structured_inputs_yaml(),
         shipped_template,
-        fixture_template,
         brownfield_fixture,
         greenfield_fixture,
+        runtime_fixture,
     ] {
-        assert!(contents.contains(handbook_engine::DEFAULT_EXCEPTION_RECORD_LOCATION));
-        assert!(!contents.contains("record_location: \"CHARTER.md#exceptions\""));
+        assert!(
+            contents.contains(".handbook/project/charter.yaml#/governance/exception_process"),
+            "selected Charter exception location missing"
+        );
+        assert!(!contents.contains(".handbook/charter/CHARTER.md#exceptions"));
     }
 }

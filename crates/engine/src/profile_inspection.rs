@@ -1,4 +1,8 @@
 use crate::canonical_repo_support::{CanonicalWorkspace, RepoRelativeFileAccessError};
+use crate::charter_observation::{
+    ensure_charter_observation_stable, load_selected_charter_with_limit,
+    CanonicalCharterObservation, CanonicalCharterProjection,
+};
 use crate::definition_identity::{
     parse_definition_yaml, ExactDefinitionRef, RegistryLoadErrorKind, MAX_SOURCE_DOCUMENT_BYTES,
     MAX_TOTAL_SOURCE_BYTES,
@@ -108,10 +112,12 @@ impl CanonicalProjectContextProjection {
 
 struct CanonicalProjectContextObservation {
     projection: CanonicalProjectContextProjection,
-    #[cfg(unix)]
+    #[cfg(any(unix, windows))]
     source_bytes: Vec<u8>,
     #[cfg(unix)]
     file_identity: crate::canonical_repo_support::TrustedRepoFileIdentity,
+    #[cfg(windows)]
+    source_file: crate::canonical_repo_support::TrustedRepoFile,
 }
 
 impl CanonicalProjectContextObservation {
@@ -165,6 +171,7 @@ pub struct ArtifactInspection {
     applicability: ArtifactApplicability,
     status: ArtifactInspectionStatus,
     reason: ArtifactInspectionReason,
+    charter_observation: Option<CanonicalCharterObservation>,
     project_context_observation: Option<CanonicalProjectContextObservation>,
 }
 
@@ -183,6 +190,11 @@ impl ArtifactInspection {
     }
     pub fn reason(&self) -> ArtifactInspectionReason {
         self.reason
+    }
+    pub fn charter_projection(&self) -> Option<&CanonicalCharterProjection> {
+        self.charter_observation
+            .as_ref()
+            .map(CanonicalCharterObservation::projection)
     }
     pub fn project_context_projection(&self) -> Option<&CanonicalProjectContextProjection> {
         self.project_context_observation
@@ -235,9 +247,50 @@ pub fn inspect_profile_repository_with_stability_hook(
         if consumed_bytes >= MAX_TOTAL_SOURCE_BYTES {
             aggregate_exhausted = true;
         }
+        let mut charter_observation = None;
         let mut project_context_observation = None;
         let (status, reason) = if aggregate_exhausted {
             aggregate_limit()
+        } else if decision.instance_id().as_str() == "project_authority" {
+            let remaining = MAX_TOTAL_SOURCE_BYTES.saturating_sub(consumed_bytes);
+            let read_limit = remaining.min(MAX_SOURCE_DOCUMENT_BYTES);
+            let mut bounded_read = None;
+            let load_result = load_selected_charter_with_limit(
+                &workspace,
+                decisions,
+                decision.canonical_path(),
+                read_limit,
+                |source_byte_length, exceeded| {
+                    bounded_read = Some((source_byte_length, exceeded));
+                },
+            );
+            if let Some((source_byte_length, exceeded)) = bounded_read {
+                let charged_bytes = if exceeded {
+                    read_limit
+                } else {
+                    source_byte_length
+                };
+                consumed_bytes = consumed_bytes
+                    .saturating_add(charged_bytes)
+                    .min(MAX_TOTAL_SOURCE_BYTES);
+                if exceeded && remaining < MAX_SOURCE_DOCUMENT_BYTES {
+                    aggregate_exhausted = true;
+                }
+            }
+            match load_result {
+                Ok(observation) => {
+                    charter_observation = Some(observation);
+                    structurally_valid(decision.applicability())
+                }
+                Err(error)
+                    if error.reason() == ArtifactInspectionReason::DocumentLimitExceeded
+                        && remaining < MAX_SOURCE_DOCUMENT_BYTES =>
+                {
+                    aggregate_exhausted = true;
+                    aggregate_limit()
+                }
+                Err(error) => (error.status(), error.reason()),
+            }
         } else if decision.instance_id().as_str() == "project_context" {
             let remaining = MAX_TOTAL_SOURCE_BYTES.saturating_sub(consumed_bytes);
             let read_limit = remaining.min(MAX_SOURCE_DOCUMENT_BYTES);
@@ -289,6 +342,7 @@ pub fn inspect_profile_repository_with_stability_hook(
                         ArtifactInspectionStatus::UnsafePath,
                         ArtifactInspectionReason::UnsafeRepositoryPath,
                         None,
+                        None,
                     ));
                     continue;
                 }
@@ -339,6 +393,7 @@ pub fn inspect_profile_repository_with_stability_hook(
             decision.applicability(),
             status,
             reason,
+            charter_observation,
             project_context_observation,
         ));
     }
@@ -466,10 +521,12 @@ fn load_selected_project_context_with_limit(
             record,
             rendered_bytes,
         },
-        #[cfg(unix)]
+        #[cfg(any(unix, windows))]
         source_bytes,
         #[cfg(unix)]
         file_identity,
+        #[cfg(windows)]
+        source_file: file,
     };
 
     Ok(observation)
@@ -507,6 +564,32 @@ fn finalize_project_context_observation(
     artifacts: &mut [ArtifactInspection],
     before_final_stability: impl FnOnce(),
 ) {
+    let has_retained_observation = artifacts.iter().any(|artifact| {
+        artifact.charter_observation.is_some() || artifact.project_context_observation.is_some()
+    });
+    if !has_retained_observation {
+        return;
+    }
+
+    before_final_stability();
+
+    if let Some(charter) = artifacts
+        .iter_mut()
+        .find(|artifact| artifact.instance_id.as_str() == "project_authority")
+    {
+        if charter
+            .charter_observation
+            .as_ref()
+            .is_some_and(|observation| {
+                ensure_charter_observation_stable(workspace, observation).is_err()
+            })
+        {
+            charter.status = ArtifactInspectionStatus::Unreadable;
+            charter.reason = ArtifactInspectionReason::ObservationChangedDuringInspection;
+            charter.charter_observation = None;
+        }
+    }
+
     let Some(project_context) = artifacts
         .iter_mut()
         .find(|artifact| artifact.instance_id.as_str() == "project_context")
@@ -517,7 +600,6 @@ fn finalize_project_context_observation(
         return;
     };
 
-    before_final_stability();
     if ensure_project_context_observation_stable(workspace, observation).is_err() {
         project_context.status = ArtifactInspectionStatus::Unreadable;
         project_context.reason = ArtifactInspectionReason::ObservationChangedDuringInspection;
@@ -551,7 +633,28 @@ fn ensure_project_context_observation_stable(
     Ok(())
 }
 
-#[cfg(not(unix))]
+#[cfg(windows)]
+fn ensure_project_context_observation_stable(
+    workspace: &CanonicalWorkspace<'_>,
+    observation: &CanonicalProjectContextObservation,
+) -> Result<(), SelectedProjectContextLoadError> {
+    let _retained_share_guard = &observation.source_file;
+    let normalized = workspace
+        .normalize_repo_relative(observation.projection.canonical_path())
+        .map_err(|_| observation_changed(observation.projection.canonical_path()))?;
+    let final_file = workspace
+        .trusted_read_strict(&normalized)
+        .map_err(|_| observation_changed(observation.projection.canonical_path()))?;
+    let (final_bytes, exceeded) = final_file
+        .read_bytes_bounded(MAX_SOURCE_DOCUMENT_BYTES)
+        .map_err(|_| observation_changed(observation.projection.canonical_path()))?;
+    if exceeded || final_bytes != observation.source_bytes {
+        return Err(observation_changed(observation.projection.canonical_path()));
+    }
+    Ok(())
+}
+
+#[cfg(all(not(unix), not(windows)))]
 fn ensure_project_context_observation_stable(
     _workspace: &CanonicalWorkspace<'_>,
     _observation: &CanonicalProjectContextObservation,
@@ -571,7 +674,7 @@ fn selected_load_error(
     }
 }
 
-#[cfg(unix)]
+#[cfg(any(unix, windows))]
 fn observation_changed(canonical_path: &str) -> SelectedProjectContextLoadError {
     selected_load_error(
         canonical_path,
@@ -648,9 +751,9 @@ fn map_open_error(
             ArtifactInspectionReason::NonRegularFileRefused,
         ),
         RepoRelativeFileAccessError::InvalidPath(_) => {
-            #[cfg(unix)]
+            #[cfg(any(unix, windows))]
             let reason = ArtifactInspectionReason::UnsafeRepositoryPath;
-            #[cfg(not(unix))]
+            #[cfg(all(not(unix), not(windows)))]
             let reason = ArtifactInspectionReason::UnsupportedPlatformStrictRead;
             (ArtifactInspectionStatus::UnsafePath, reason)
         }
@@ -664,6 +767,7 @@ fn inspection(
     applicability: ArtifactApplicability,
     status: ArtifactInspectionStatus,
     reason: ArtifactInspectionReason,
+    charter_observation: Option<CanonicalCharterObservation>,
     project_context_observation: Option<CanonicalProjectContextObservation>,
 ) -> ArtifactInspection {
     ArtifactInspection {
@@ -672,6 +776,7 @@ fn inspection(
         applicability,
         status,
         reason,
+        charter_observation,
         project_context_observation,
     }
 }
@@ -787,7 +892,7 @@ mod mapping_tests {
             RepoRelativeFileAccessError::InvalidPath("invalid".to_owned()),
             ArtifactApplicability::Required,
         );
-        #[cfg(unix)]
+        #[cfg(any(unix, windows))]
         assert_eq!(
             actual,
             (
@@ -795,7 +900,7 @@ mod mapping_tests {
                 ArtifactInspectionReason::UnsafeRepositoryPath,
             )
         );
-        #[cfg(not(unix))]
+        #[cfg(all(not(unix), not(windows)))]
         assert_eq!(
             actual,
             (

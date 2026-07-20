@@ -1,9 +1,14 @@
 use sha2::{Digest, Sha256};
-use std::fs::{self, OpenOptions};
+use std::fs;
+#[cfg(unix)]
+use std::fs::OpenOptions;
+#[cfg(unix)]
 use std::io::{Read, Write};
 use std::path::{Component, Path, PathBuf};
+#[cfg(unix)]
 use std::sync::atomic::{AtomicU64, Ordering};
 
+#[cfg(unix)]
 static TEMP_FILE_COUNTER: AtomicU64 = AtomicU64::new(0);
 
 #[derive(Debug)]
@@ -219,7 +224,7 @@ pub(crate) struct TrustedRepoFile {
 }
 
 impl TrustedRepoFile {
-    #[cfg(test)]
+    #[cfg(all(test, unix))]
     pub(crate) fn repo_relative(&self) -> &NormalizedRepoRelativePath {
         &self.repo_relative
     }
@@ -1048,7 +1053,9 @@ pub(crate) fn read_bytes_no_follow(path: &Path) -> Result<Vec<u8>, std::io::Erro
 
 #[cfg(test)]
 mod tests {
-    use super::{CompilerWorkspace, RepoRelativeFileAccessError, RepoRelativeMutationError};
+    use super::CompilerWorkspace;
+    #[cfg(unix)]
+    use super::{RepoRelativeFileAccessError, RepoRelativeMutationError};
     use std::fs;
 
     #[test]

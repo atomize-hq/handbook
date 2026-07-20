@@ -127,6 +127,11 @@ fn normalize_output_with_explicit_placeholders(
 ) -> String {
     let mut normalized = normalize_newlines(actual);
 
+    #[cfg(windows)]
+    {
+        normalized = normalized.replace('\\', "/");
+    }
+
     for (path, placeholder) in placeholders {
         for candidate in path_candidates(path) {
             normalized = normalized.replace(&candidate, placeholder);
@@ -156,6 +161,15 @@ fn path_candidates(path: &Path) -> Vec<String> {
         if !candidates.contains(&canonical_display) {
             candidates.push(canonical_display);
         }
+    }
+    #[cfg(windows)]
+    {
+        candidates.extend(
+            candidates
+                .clone()
+                .into_iter()
+                .map(|candidate| candidate.replace('\\', "/")),
+        );
     }
     candidates.sort_by_key(|candidate| std::cmp::Reverse(candidate.len()));
     candidates

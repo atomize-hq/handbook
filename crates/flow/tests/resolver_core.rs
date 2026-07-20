@@ -8,6 +8,9 @@ use handbook_flow::{
     resolve, resolve_with_contract, PacketSelectionStatus, ResolveRequest, ResolverNextSafeAction,
     ResolverRefusalCategory, ResolverSubjectRef,
 };
+
+#[path = "../../engine/tests/support/hcm_2_2_committed_charter.rs"]
+mod hcm_2_2_committed_charter;
 #[cfg(unix)]
 use handbook_flow::{
     BudgetDisposition, BudgetPolicy, PacketSectionMode, PacketVariant, ReadyPacketNextSafeAction,
@@ -845,7 +848,7 @@ fn flow_resolver_builds_honest_fixture_context_for_non_default_execution_demo_co
             .starts_with(".custom_handbook/")));
 }
 
-#[cfg(not(unix))]
+#[cfg(all(not(unix), not(windows)))]
 #[test]
 fn flow_resolver_refuses_selected_project_context_without_strict_read_support() {
     let dir = tempfile::tempdir().expect("tempdir");
@@ -865,7 +868,7 @@ fn flow_resolver_refuses_selected_project_context_without_strict_read_support() 
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
     let refusal = result.refusal.expect("selected Project Context refusal");
-    assert_eq!(result.c04_result_version, "reduced-v1-m8.2");
+    assert_eq!(result.c04_result_version, "reduced-v1-m8.3");
     assert_eq!(
         refusal.category,
         ResolverRefusalCategory::RequiredArtifactInvalid
@@ -881,5 +884,257 @@ fn flow_resolver_refuses_selected_project_context_without_strict_read_support() 
     assert_eq!(
         refusal.next_safe_action,
         ResolverNextSafeAction::RunAuthorProjectContext
+    );
+}
+
+const HCM_2_2_SELECTED_CHARTER_YAML: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
+));
+
+fn hcm_2_2_environment_inventory_markdown() -> &'static str {
+    "# Environment Inventory
+
+> **Canonical File:** `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
+> **Project Context Ref:** `.handbook/project/context.yaml`
+
+## What this is
+Canonical environment and runtime inventory.
+
+## How to use
+- Update this file when runtime assumptions change.
+
+## 1) Environment Variables (Inventory)
+- None yet.
+
+## 2) External Services / Infrastructure Dependencies
+- None yet.
+
+## 3) Runtime Assumptions (Ports, Paths, Storage, Limits)
+- None yet.
+
+## 4) Local Development Requirements
+- None yet.
+
+## 5) CI Requirements
+- None yet.
+
+## 6) Production / Deployment Requirements (even if not live yet)
+- None yet.
+
+## 7) Dependency & Tooling Inventory (project-specific)
+- None yet.
+
+## 8) Update Contract (non-negotiable)
+- Update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.
+
+## 9) Known Unknowns
+- None yet.
+"
+}
+
+fn hcm_2_2_flow_fixture(root: &std::path::Path, legacy_charter: &[u8]) {
+    hcm_2_2_committed_charter::promote_committed_charter(
+        root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "hcm-2-2-flow-fixture",
+    );
+    write_file(&root.join(".handbook/charter/CHARTER.md"), legacy_charter);
+    write_file(
+        &root.join(".handbook/project/context.yaml"),
+        valid_project_context_markdown().as_bytes(),
+    );
+    write_file(
+        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
+        hcm_2_2_environment_inventory_markdown().as_bytes(),
+    );
+    write_file(
+        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
+        b"feature spec body",
+    );
+}
+
+fn hcm_2_2_uncommitted_flow_fixture(root: &std::path::Path) {
+    write_file(
+        &root.join(".handbook/project/charter.yaml"),
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+    );
+    write_file(
+        &root.join(".handbook/project/context.yaml"),
+        valid_project_context_markdown().as_bytes(),
+    );
+    write_file(
+        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
+        hcm_2_2_environment_inventory_markdown().as_bytes(),
+    );
+    write_file(
+        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
+        b"feature spec body",
+    );
+}
+
+#[test]
+fn hcm_2_2_flow_projects_selected_charter_yaml_and_ignores_legacy_markdown() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+
+    let decisions =
+        handbook_engine::resolve_shipped_profile_decisions(root).expect("selected profile");
+    let selected = handbook_engine::load_selected_charter(root, &decisions)
+        .expect("selected Charter projection");
+    let first = resolve(root, ResolveRequest::default()).expect("first resolve");
+
+    write_file(
+        &root.join(".handbook/charter/CHARTER.md"),
+        b"legacy Charter Markdown must have zero selected influence\n",
+    );
+    let second = resolve(root, ResolveRequest::default()).expect("second resolve");
+
+    assert_eq!(first.c04_result_version, "reduced-v1-m8.3");
+    assert_eq!(first.c03_schema_version, "reduced-v1-m8");
+    assert_eq!(first.c03_manifest_generation_version, 1);
+    assert_eq!(first, second, "legacy Charter Markdown changed flow truth");
+    assert_eq!(first.selection.status, PacketSelectionStatus::Selected);
+
+    let source = first
+        .packet_result
+        .included_sources
+        .iter()
+        .find(|source| source.kind == CanonicalArtifactKind::Charter)
+        .expect("selected Charter source");
+    assert_eq!(
+        source.canonical_repo_relative_path,
+        selected.canonical_path()
+    );
+    assert_eq!(
+        source.content_sha256.as_deref(),
+        Some(
+            selected
+                .source_fingerprint()
+                .as_str()
+                .strip_prefix("sha256:")
+                .expect("sha256 domain")
+        )
+    );
+    assert_eq!(
+        source.rendered_output_sha256.as_deref(),
+        Some(selected.rendered_output_fingerprint().as_str())
+    );
+    assert_eq!(
+        source.rendered_output_byte_len,
+        Some(selected.rendered_byte_length() as u64)
+    );
+    assert_eq!(source.rendered_media_type.as_deref(), Some("text/markdown"));
+
+    let section = first
+        .packet_result
+        .sections
+        .iter()
+        .find(|section| section.kind == CanonicalArtifactKind::Charter)
+        .expect("rendered Charter section");
+    assert_eq!(section.mode, handbook_flow::PacketSectionMode::Rendered);
+    assert_eq!(
+        section.canonical_repo_relative_path,
+        selected.canonical_path()
+    );
+    assert_eq!(section.contents.as_bytes(), selected.rendered_bytes());
+    assert_eq!(
+        section.source_content_sha256.as_deref(),
+        Some(selected.source_fingerprint().as_str())
+    );
+    assert_eq!(
+        section.rendered_output_sha256.as_deref(),
+        Some(selected.rendered_output_fingerprint().as_str())
+    );
+    assert!(first.decision_log_entries.iter().all(|entry| {
+        !entry.contains(".handbook/charter/CHARTER.md")
+            && !entry.contains("legacy Charter Markdown")
+    }));
+    assert!(first.decision_log_entries.iter().any(|entry| {
+        entry.contains("bridge=BR-HCM-2-CHARTER-FLOW-01")
+            && entry.contains("promotion_ref=promotions/")
+            && entry.contains("lifecycle_transition_ref=lifecycle-transitions/")
+    }));
+}
+
+#[test]
+fn hcm_2_2_flow_refuses_selected_charter_without_committed_current_authority() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_uncommitted_flow_fixture(root);
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+    let refusal = result.refusal.expect("uncommitted Charter refusal");
+
+    assert_eq!(
+        refusal.category,
+        ResolverRefusalCategory::RequiredArtifactInvalid
+    );
+    assert_eq!(
+        refusal.broken_subject,
+        ResolverSubjectRef::CanonicalArtifact {
+            kind: CanonicalArtifactKind::Charter,
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
+        }
+    );
+}
+
+#[test]
+fn hcm_2_2_flow_requires_selected_charter_even_when_legacy_markdown_is_valid() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    std::fs::remove_file(root.join(".handbook/project/charter.yaml"))
+        .expect("remove selected Charter");
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+    let refusal = result.refusal.expect("selected Charter refusal");
+
+    assert_eq!(
+        refusal.category,
+        ResolverRefusalCategory::RequiredArtifactInvalid
+    );
+    assert_eq!(
+        refusal.broken_subject,
+        ResolverSubjectRef::CanonicalArtifact {
+            kind: CanonicalArtifactKind::Charter,
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
+        }
+    );
+}
+
+#[test]
+fn hcm_2_2_flow_budgets_selected_charter_in_the_rendered_domain() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+
+    let decisions =
+        handbook_engine::resolve_shipped_profile_decisions(root).expect("selected profile");
+    let selected = handbook_engine::load_selected_charter(root, &decisions)
+        .expect("selected Charter projection");
+    let result = resolve(
+        root,
+        ResolveRequest {
+            budget_policy: handbook_flow::BudgetPolicy {
+                max_total_bytes: None,
+                max_per_artifact_bytes: Some(selected.rendered_byte_length() as u64 - 1),
+            },
+            ..ResolveRequest::default()
+        },
+    )
+    .expect("resolve");
+
+    let target = result
+        .budget_outcome
+        .targets
+        .iter()
+        .find(|target| target.canonical_repo_relative_path == selected.canonical_path())
+        .expect("selected Charter budget target");
+    assert_eq!(target.byte_len, selected.rendered_byte_length() as u64);
+    assert_eq!(
+        target.byte_domain,
+        handbook_flow::BudgetByteDomain::RenderedOutput
     );
 }

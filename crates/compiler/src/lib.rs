@@ -6,6 +6,7 @@ mod baseline_validation;
 #[allow(dead_code)]
 pub mod blocker;
 mod canonical_artifacts;
+mod charter_product;
 pub mod decision_log;
 mod doctor;
 pub mod error;
@@ -64,10 +65,20 @@ pub use author::{
 };
 pub use blocker::{blocker_category_priority, Blocker, BlockerCategory, C04_RESULT_VERSION};
 pub(crate) use canonical_artifacts::{ArtifactIngestIssueKind, ArtifactPresence};
+pub use charter_product::{
+    execute_approver_admin_intent, execute_charter_command, invalid_charter_command_refusal,
+    legacy_charter_input_refusal, parse_charter_intake_envelope, AdapterOperationStatus,
+    AdapterRefusal, ApproverAdapterResult, ApproverAdminIntent, ApproverAdminOperation,
+    CharterCommandIntent, CharterOperation, CharterOperationResult,
+    APPROVER_ADAPTER_RESULT_SCHEMA_ID, APPROVER_ADAPTER_RESULT_SCHEMA_VERSION,
+    CHARTER_OPERATION_RESULT_SCHEMA_ID, CHARTER_OPERATION_RESULT_SCHEMA_VERSION,
+};
 pub use decision_log::DecisionLog;
 pub use doctor::{
-    doctor, doctor_with_decisions, DoctorError, DoctorErrorKind, DoctorErrorReasonCode,
-    DoctorProjectContextRow, DoctorReport, DOCTOR_REPORT_SCHEMA_ID, DOCTOR_REPORT_SCHEMA_VERSION,
+    doctor, doctor_with_decisions, DoctorCharterDefinitionClosureStatus,
+    DoctorCharterDefinitionRow, DoctorCharterLifecycleState, DoctorCharterNextAction,
+    DoctorCharterRow, DoctorError, DoctorErrorKind, DoctorErrorReasonCode, DoctorProjectContextRow,
+    DoctorReport, DOCTOR_REPORT_SCHEMA_ID, DOCTOR_REPORT_SCHEMA_VERSION,
 };
 pub use error::CompilerError;
 pub(crate) use handbook_engine::artifact_manifest::{ArtifactManifest, ManifestError};

@@ -1,0 +1,125 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260719T235358Z--HCM-2-2--definition-profile-closure-implementation",
+  "created_at_utc": "2026-07-19T23:53:58Z",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "resume_same_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": "HCM-2.2",
+  "subject_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "4f6124e859ca036d7dd77899e22b7a5b4142429ac15c1e6d1b5ac74d160515b2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+        "sha256": "afaf40256cc0b9aed8d08a4ef8b689fca7d0e889b46b7c5ea57e4ae45b195d17"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+        "sha256": "ae8ca42931573a88e1e0c26b211853bf9bb00107212fa6d7885eee58523f583e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8"
+  },
+  "active_resolution": {
+    "level": "bounded_implementation",
+    "scope_horizon": "HCM-2.2-definition-profile-closure",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "approved_slice_packet",
+    "memory_horizon": "live_repository_truth",
+    "validation_horizon": "focused_red_green"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "Required definition closure",
+        "Shipped profile upgrade",
+        "Uniform identity and registry closure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/definition-closure-vectors-v1.0.json",
+      "sections": [
+        "all"
+      ]
+    }
+  ],
+  "repo_truth": "Parent preflight is complete at reviewed HEAD ab0c2613f215979d9336340e47a2a0e19f00096b. The selected packet and dispatch validator pass. The parent has repaired and tested only the native-Windows strict-read seam plus stale platform test gates; this lane owns only additive definition/profile closure files.",
+  "allowed_scope": [
+    "Add the exact HCM-2.2 schema, artifact-kind, semantic-capability, semantic-validator, vocabulary, stable-role, and profile definition bytes specified by the packet and definition-closure vectors.",
+    "Upgrade the shipped product profile additively to version 1.1 and make the Charter intake/artifact/candidate/approval/promotion/journal/approver-registry selections critical exactly as specified.",
+    "Edit only crates/engine/definitions/**, crates/engine/src/profile_builtins.rs, crates/engine/src/profile_decision.rs, crates/engine/src/profile_selection.rs, crates/engine/src/schema_registry.rs, crates/engine/src/artifact_kind_registry.rs, crates/engine/src/lib.rs, and new or directly related crates/engine/tests/** files.",
+    "Run GitNexus impact before editing every existing function/class/method; stop and report HIGH or CRITICAL risk before changing that symbol.",
+    "Use RED tests before implementation and run focused engine tests with CARGO_TARGET_DIR=D:\\codex-build\\handbook-hcm22 and TEMP/TMP=D:\\codex-temp\\handbook-hcm22."
+  ],
+  "non_goals": [
+    "Do not edit Charter authoring, intake runtime, approval service, compiler, flow, CLI, setup, doctor, proof, control, planning, handoff, ledger, or dispatch files.",
+    "Do not add dependency crates or enter HCM-2.3.",
+    "Do not modify released definition bytes; all new definitions and profile 1.1 behavior are additive.",
+    "Do not commit, create a global handoff, write the ledger, create another dispatch, or hop to a user-visible task."
+  ],
+  "tasks": [
+    "Read the complete dispatch, exact packet sections, definition-closure vectors, and existing definition identity/profile precedents.",
+    "Write focused RED tests proving the eleven exact schema registrations, exact definition identity vectors, additive product profile 1.1 selection, and critical Charter resolution behavior.",
+    "Implement the smallest additive definition/profile closure needed to turn those tests green without mutating released bytes.",
+    "Run focused tests and report every changed file, GitNexus impact result, RED/GREEN evidence, and any remaining parent integration work."
+  ],
+  "contracts_and_gates": [
+    "Definition files are immutable byte-identity contracts and fingerprints must match definition-closure-vectors-v1.0.json exactly.",
+    "Schema registry and artifact-kind registry must resolve the new exact ids and versions without altering 1.0 definitions.",
+    "The shipped profile upgrade is additive 1.1; existing profile pins remain valid and the nine specified Charter-related kinds resolve as critical.",
+    "Failure is typed and fail-closed; no heuristic schema or kind fallback is permitted."
+  ],
+  "stop_conditions": [
+    "Stop before editing any HIGH or CRITICAL existing symbol and return the exact blast radius to the parent for explicit continuation.",
+    "Return blocked if exact packet vectors conflict with live released definition identity behavior.",
+    "Return blocked if completing this lane requires edits outside the allowed file list or any HCM-2.3 work."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "impact_analysis",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

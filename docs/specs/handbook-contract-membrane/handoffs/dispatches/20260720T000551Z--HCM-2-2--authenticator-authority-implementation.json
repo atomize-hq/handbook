@@ -1,0 +1,141 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T000551Z--HCM-2-2--authenticator-authority-implementation",
+  "created_at_utc": "2026-07-20T00:05:51Z",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "resume_same_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "api-and-interface-design",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": "HCM-2.2",
+  "subject_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "4f6124e859ca036d7dd77899e22b7a5b4142429ac15c1e6d1b5ac74d160515b2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+        "sha256": "afaf40256cc0b9aed8d08a4ef8b689fca7d0e889b46b7c5ea57e4ae45b195d17"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+        "sha256": "ae8ca42931573a88e1e0c26b211853bf9bb00107212fa6d7885eee58523f583e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8"
+  },
+  "active_resolution": {
+    "level": "bounded_security_implementation",
+    "scope_horizon": "HCM-2.2-authenticator-authority-core",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "approved_slice_packet",
+    "memory_horizon": "live_repository_truth",
+    "validation_horizon": "focused_security_red_green"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "Acquisition and immutable lineage",
+        "Approval authority and bootstrap",
+        "Global authority lock order and retained observations",
+        "API, security, and compatibility posture"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authenticator-transcript-vectors-v1.0.json",
+      "sections": [
+        "all"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-vectors-v1.0.json",
+      "sections": [
+        "all"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/ctap-status-mapping-v1.0.json",
+      "sections": [
+        "all"
+      ]
+    }
+  ],
+  "repo_truth": "Parent preflight and feasibility proof are complete. Native Windows strict read is repaired and six focused baselines pass. Parent owns new Charter artifact/intake modules. This lane owns only new authenticator/authority engine modules, focused tests, and narrowly required dependency manifest updates.",
+  "allowed_scope": [
+    "Add new engine modules for strict canonical CTAP2 request/response codecs, total status mapping, exact 37-byte authenticator-data admission, DER ES256 verification, NativeAuthenticatorPortV1, caller-intent-only ApproverAdminRequestV1/ApproverAdminResultV1, and the in-memory/fake-port core of ApproverRegistryServiceV1.",
+    "Use the packet's frozen security schemas and vectors directly and validate all externally supplied bytes before semantic admission.",
+    "Edit only new files under crates/engine/src/ named charter_authenticator.rs, approver_registry.rs, or narrowly factored child modules; new focused crates/engine/tests/hcm_2_2_*security*.rs files; crates/engine/Cargo.toml; workspace Cargo.toml; Cargo.lock; and parent-coordinated additions to crates/engine/src/lib.rs.",
+    "Use RED tests first. Run focused tests with CARGO_TARGET_DIR=D:\\codex-build\\handbook-hcm22 and TEMP/TMP=D:\\codex-temp\\handbook-hcm22.",
+    "Run GitNexus impact before editing any existing function/class/method and stop before HIGH or CRITICAL edits."
+  ],
+  "non_goals": [
+    "Do not edit definition/profile files, Charter artifact/intake modules, compiler, flow, CLI, setup, doctor, skills, proof/control, planning, handoff, ledger, or dispatch files.",
+    "Do not implement filesystem journals, promotion, lifecycle, platform-native adapters, or HCM-2.3 in this lane.",
+    "Do not add a software/unattended authenticator, caller-supplied ceremony record, semantic port method, browser WebAuthn origin, attestation trust claim, or real-world identity claim.",
+    "Do not commit or create handoffs, ledger rows, dispatches, or user-visible task hops."
+  ],
+  "tasks": [
+    "Read the full dispatch, exact packet security sections, all referenced schemas/vectors, official CTAP2/RFC 8949/RFC 8785 sources, and current dependency/API boundaries.",
+    "Write RED vector tests for exact make-credential/get-assertion request bytes, strict success response decoding, every malformed/status/selection negative, user-handle derivation, total received-status mapping, and closed approver-admin request/result projections.",
+    "Implement the smallest safe engine-owned codec/crypto/port/service core that makes the focused vector wall green while preserving the exact opaque two-method port boundary.",
+    "Return dependency rationale, changed files, exact RED/GREEN evidence, unsupported transaction integration work, and every GitNexus impact result."
+  ],
+  "contracts_and_gates": [
+    "The port has exactly make_credential(bytes)->bytes and get_assertion(bytes)->bytes and receives no semantic identity or authority field.",
+    "Engine-built CBOR is deterministic, definite-length, preferred-encoding, duplicate-free, exact-key ordered, and byte-closed; received success responses reject unknown/duplicate/indefinite/non-shortest/out-of-order/trailing data.",
+    "GetAssertion admits only exact keys 1/2/3, one selected allow-list descriptor, 37-byte authenticator data, SHA-256(handbook.local), flags byte 0x05, and strict DER ES256 verified by the committed registry key.",
+    "All complete nonzero CTAP status bytes use the frozen total disjoint mapping; AUTHENTICATOR_UNAVAILABLE is reserved for an out-of-band port exception before a complete status byte.",
+    "Every refused admin result publishes no semantic refs/fingerprints/changed paths and at least one exact next action."
+  ],
+  "stop_conditions": [
+    "Stop before any HIGH or CRITICAL existing-symbol edit and return the blast radius to the parent.",
+    "Return blocked if an exact frozen vector conflicts with the official protocol source or available safe-Rust dependency boundary.",
+    "Return blocked if a required security property needs work outside the allowed files or a weaker fallback."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "dependencies",
+      "impact_analysis",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

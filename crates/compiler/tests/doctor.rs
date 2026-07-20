@@ -1,4 +1,4 @@
-#[cfg(not(unix))]
+#[cfg(all(not(unix), not(windows)))]
 use handbook_compiler::RepositoryReadinessStatus;
 use handbook_compiler::{
     doctor, doctor_with_decisions, DoctorError, DoctorErrorKind, DoctorErrorReasonCode,
@@ -100,12 +100,12 @@ fn doctor_error_projection_is_exhaustive() {
     }
 }
 
-#[cfg(not(unix))]
+#[cfg(all(not(unix), not(windows)))]
 #[test]
 fn non_unix_doctor_reports_invalid_without_reading_artifacts() {
     let repo = tempdir().unwrap();
     let report = doctor(repo.path()).unwrap();
-    assert_eq!(report.schema_version, "1.1.0");
+    assert_eq!(report.schema_version, "1.2.0");
     assert_eq!(report.status, RepositoryReadinessStatus::Invalid);
     assert!(report.project_context.is_none());
     let project_context = report

@@ -1,28 +1,13 @@
-You are an AI assistant helping produce `CHARTER_INPUTS.yaml`, a **stable, testable** input file used to generate `CHARTER.md` without an interview loop.
+# Charter Intake Envelope Directive
 
-## Goal
+Prepare one YAML document matching the shipped `handbook.intake.charter@1.0.0` closed envelope.
 
-Output a single YAML document that matches the provided template.
+- Select exactly one mode: `guided_adaptive`, `express`, or `agent_assisted`.
+- Put the proposed canonical Charter object in `content`.
+- Include every required coverage identifier exactly once.
+- For each coverage item, preserve source kind, value reference, evidence references, confidence, freshness, sensitivity, contradictions, and waiver reference.
+- Identify the caller in `consumer`, retain prompt-event references, and supply an RFC 3339 UTC finalization time.
+- For an amendment, bind `expected_current_fingerprint` to the selected canonical source fingerprint.
+- Do not invent evidence, erase contradictions, choose authority, or output Markdown.
 
-This stage is for **development/testing** of the system:
-- It avoids multi-turn interviews.
-- It produces deterministic-ish fixtures that the next stage can consume.
-
-## Rules
-
-- **Do not ask questions.**
-- **Do not output any prose.**
-- Output **only** the YAML content for `CHARTER_INPUTS.yaml`.
-- If a value is unknown, use an empty string, empty list, or `null` (do not write "TBD").
-- Keep lists short and crisp (prefer 2–5 bullets max per list).
-
-## Profile-aware behavior
-
-A profile pack may be included (e.g., `core/profiles/python-uv/profile.yaml` + `commands.yaml`).
-
-- Use the selected profile as the default tooling assumption.
-- Do not invent unrelated tooling choices that contradict the profile.
-
-## Required output
-
-Emit a complete `CHARTER_INPUTS.yaml` matching the template structure.
+Submit the envelope with the matching explicit CLI mode. The engine performs semantic validation and records immutable lineage; this directive has no authority to write canonical truth.

@@ -1,0 +1,43 @@
+{
+  "schema_id":"handbook.internal-dispatch",
+  "schema_version":"1.1",
+  "dispatch_id":"20260720T040313Z--HCM-2-2--retained-authority-promotion-remediation",
+  "created_at_utc":"2026-07-20T04:03:13Z",
+  "source_handoff_ids":["20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"],
+  "parent_orchestration_id":"20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision":"proof_or_review_followup",
+  "execution_target":"internal_subagent",
+  "agent_type":"default",
+  "role":"implementation",
+  "fresh_context_required":true,
+  "closeout_owner":"parent_orchestrator",
+  "required_skills":["using-agent-skills","source-driven-development","incremental-implementation","test-driven-development","debugging-and-error-recovery","security-and-hardening","api-and-interface-design"],
+  "phase_id":"HCM-2",
+  "slice_id":"HCM-2.2",
+  "packet_id":"HCM-2.2-retained-authority-promotion",
+  "subject_fingerprint":"sha256:c84af6bd40c960ee0fa6e2ea88682e9d9cc95011b4c04c44e9cce741b421e1a5",
+  "subject_manifest":{"algorithm":"sha256","encoding":"repo-path-null-sha256-newline-v1","entries":[
+    {"path":"crates/engine/src/approver_registry_mutation.rs","sha256":"54733c43de9fe6c5d9bfc3f49c960b260a8a873794819fbea503af65a12638d0"},
+    {"path":"crates/engine/src/approver_registry_observation.rs","sha256":"4ce99f035ada4d3b29d8b719eec78d79ae660f5755d6b5432dca03d59e4adf07"},
+    {"path":"crates/engine/src/charter_approval_workflow.rs","sha256":"56b19dbbe047bae336a34d698b610911515c49e883a43f71048548bf3b9bdfff"},
+    {"path":"crates/engine/src/charter_authority_transaction.rs","sha256":"cafc05fac10af30b523ed161de67bafa2d3b60eb37f0b2ab3ead0c96977984c2"},
+    {"path":"crates/engine/src/charter_lifecycle_store.rs","sha256":"0b830f4e2358ff22b0d2b9b430f7a4ff96f9ea479196181c3d98055590024c92"},
+    {"path":"crates/engine/src/charter_promotion_workflow.rs","sha256":"ab1b8f74ee13532ba3d3dbdee95476a6b05cc51e0588b04e5570f51946c5cf25"},
+    {"path":"crates/engine/tests/hcm_2_2_promotion_workflow.rs","sha256":"aa6a2cc5e3ecb577b33f480c529f72e2aa30a3f0fdad74ac54b1a0e5f86f3c68"},
+    {"path":"crates/engine/tests/hcm_2_2_transaction_promotion.rs","sha256":"be767f0bee2a29df922a3186610a4889e8e7c7f8e9d7f5d78b101290faa0ecd3"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sha256":"2c964edf769be82fd66ecc0685c80af32248f409a7564bbdcc61fb8c0eae6f47"}
+  ],"aggregate_fingerprint":"sha256:c84af6bd40c960ee0fa6e2ea88682e9d9cc95011b4c04c44e9cce741b421e1a5"},
+  "active_resolution":{"level":"retained_authority_promotion","scope_horizon":"HCM-2.2-promotion-atomicity","detail_resolution":"high","temporal_horizon":"current_orchestration","authority_horizon":"approved_slice_packet","memory_horizon":"live_repository_truth","validation_horizon":"concurrency_and_recovery"},
+  "authority_refs":[
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sections":["Global authority lock order and retained observations","Promotion transaction protocol","Approval authority and bootstrap"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/final-use-add-lockout-vectors-v1.0.json","sections":["all"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json","sections":["all"]}
+  ],
+  "repo_truth":"Promotion currently validates committed approvals, a retained registry observation, and lifecycle state before calling the transaction service, then releases those observations. The transaction reacquires promotion/registry/lifecycle locks and rechecks only canonical basis before writing. Registry mutation recovery and complete chain validation exist additively, but the production registry observer still resolves one committed bootstrap journal. This permits an authority-currentness gap between validation and commit.",
+  "allowed_scope":["Edit only the manifest-listed engine authority modules and focused promotion/transaction tests.","Add crate-private locked recovery/observation/transaction APIs and minimal wiring needed to retain one promotion-registry-lifecycle guard through finalization.","Consume the additive complete registry chain-head and shared registry/approval graph APIs; preserve all public product DTO bytes."],
+  "non_goals":["Do not edit `CharterPromotionRequestV1`, the CRITICAL `observe_current_authority` symbol, compiler/CLI/Flow/definitions/docs/proof/control/handoff/ledger files, or any HCM-2.3 surface.","Do not weaken lock order, no-follow/bounded reads, exact-JCS/fingerprint/marker validation, approval quorum, lifecycle clearance, replay/ABA, or immutable record rules.","Do not commit."],
+  "tasks":["Run GitNexus upstream impact before every existing-symbol edit; return before any newly discovered HIGH/CRITICAL edit. `CharterPromotionRequestV1` is already CRITICAL (62 impacted symbols, 57 flows, 20 modules) and is prohibited; `promote_at` is LOW (two direct callers, no indexed flows).","Add one predecessor-ordered recovery path under a single retained promotion-then-registry-then-lifecycle guard: promotion recovery, complete registry mutation plus approval/use recovery and graph validation, then lifecycle recovery. Locked helpers must not reacquire a held lock.","Make production promotion resolve the complete committed registry chain, committed candidate approval journals, canonical basis, and lifecycle clearance under that guard; retain the exact registry state/head bytes and approval/lifecycle observations through the transaction commit and finalization.","Immediately before the commit marker, re-resolve or byte-compare every retained registry state/head, approval, canonical basis, and lifecycle authority binding; any mismatch refuses without assigning authority. Preserve the existing public request and result contracts through an additive internal transaction path.","Add deterministic concurrency/barrier and recovery tests proving registry mutation and standalone lifecycle cannot interleave, approval/registry forks and stale retained bytes refuse, reverse-order/nested reacquisition is absent, and focused recovery/promotion suites remain green."],
+  "contracts_and_gates":["Global lock order is promotion, registry, lifecycle; release is reverse order.","Recovery completes in authority order before observation or new intent.","The exact registry pair used by every approval is the pair bound into the promotion intent/record and rechecked before marker.","All three locks remain held through authority commit and journal finalization.","No public API/schema/CLI grammar change and no caller-owned authority."],
+  "stop_conditions":["Stop and report before any HIGH/CRITICAL existing-symbol edit or public contract change.","Stop rather than introduce nested lock acquisition, a release-and-resume path, or a second authority implementation."],
+  "return_contract":{"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"bounded_write","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","changed_files","impact_analysis","validation","remaining_protocol_work","parent_disposition"]}
+}

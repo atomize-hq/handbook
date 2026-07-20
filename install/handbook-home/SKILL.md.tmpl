@@ -1,17 +1,17 @@
 ---
 name: handbook
-description: "Run deterministic Handbook baseline authoring for charter, project context, and environment inventory through the installed global runtime."
+description: "Run native Handbook Charter governance plus deterministic project-context and environment-inventory authoring."
 ---
 
 # Handbook
 
-Deterministic baseline-authoring workflow for the `Handbook` family.
+Native governance and baseline-authoring workflow for the `Handbook` family.
 
 - Installed home: `~/handbook/`
 - Installed thin projections: `~/handbook/.agents/skills/handbook/` and `~/handbook/.agents/skills/handbook-charter-intake/`
 - Codex discovery glue: `~/.codex/skills/handbook*`
 
-Use this root skill from inside a real git work tree to scaffold and author all three canonical baseline artifacts. The agent gathers repository facts and writes normalized YAML inputs; the installed CLI validates, renders, and writes canonical Markdown without an interview or nested model invocation.
+Use this root skill from inside a real git work tree. Setup creates repository infrastructure but does not author Charter truth. Charter acquisition creates immutable lineage and requires later human approval and atomic promotion; Project Context and Environment Inventory retain their deterministic authoring commands.
 
 Resolve the repository and installed runtime first:
 
@@ -39,21 +39,30 @@ cd "$repo_root"
 Workflow:
 
 1. Run `$HANDBOOK_HOME/bin/handbook setup`.
-2. Gather concrete repository facts and fill temporary YAML files from the installed charter, project-context, and environment-inventory templates. Keep those working inputs outside the target repository unless the user explicitly wants to retain them.
-3. Validate, then author, in dependency order:
+2. Gather concrete repository facts and fill temporary YAML inputs outside the target repository. For Charter, prepare the closed typed intake envelope and preserve unknowns and contradictions.
+3. Acquire, approve, promote, and validate Charter through native operations:
 
    ```bash
-   $HANDBOOK_HOME/bin/handbook author charter --validate --from-inputs <charter-path|->
-   $HANDBOOK_HOME/bin/handbook author charter --from-inputs <charter-path|->
+   handbook author charter --mode guided-adaptive --from-inputs <path|->
+   handbook author charter --mode express --from-inputs <path|->
+   handbook author charter --mode agent-assisted --from-inputs <path|->
+   handbook author charter --approve-candidate <candidate-ref> --approval-class <class> --authority-ref <authority-ref>
+   handbook author charter --promote-candidate <candidate-ref> --approval-ref <approval-ref>
+   handbook author charter --validate
+   ```
+
+4. Validate and author the remaining baseline artifacts:
+
+   ```bash
    $HANDBOOK_HOME/bin/handbook author project-context --validate --from-inputs <project-context-path|->
    $HANDBOOK_HOME/bin/handbook author project-context --from-inputs <project-context-path|->
    $HANDBOOK_HOME/bin/handbook author environment-inventory --validate --from-inputs <environment-inventory-path|->
    $HANDBOOK_HOME/bin/handbook author environment-inventory --from-inputs <environment-inventory-path|->
    ```
 
-4. Run `$HANDBOOK_HOME/bin/handbook doctor --json` and require `"baseline_state": "baseline_complete"` before claiming completion.
+5. Run `$HANDBOOK_HOME/bin/handbook doctor --json` and inspect the additive Charter definition, canonical, lifecycle, source/render fingerprint, and next-action fields before claiming completion.
 
-Use `handbook-charter-intake` when the requested scope is charter-only. Never invent missing facts, store real secret values in inputs, or bypass a CLI refusal.
+Use `handbook-charter-intake` when the requested scope is Charter-only. Never edit canonical Charter YAML, self-approve, invent missing facts, store real secret values in inputs, or bypass a CLI refusal.
 
 Successful user-global installs refresh these surfaces together:
 

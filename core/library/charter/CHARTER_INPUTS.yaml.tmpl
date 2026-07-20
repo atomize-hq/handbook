@@ -1,139 +1,161 @@
-# CHARTER_INPUTS.yaml (template)
-#
-# Purpose: Stable, testable inputs for generating CHARTER.md without an interview loop.
-# - Keep values small and explicit.
-# - Prefer selecting from enumerations over free-form prose.
-# - Use this file as a fixture during handbook development.
-#
-# Notes:
-# - `baseline_level` is the default for all dimensions unless overridden.
-# - `dimensions[*].level` is optional; if omitted, baseline_level applies.
-# - For triggers/shortcuts/red_lines: keep bullets crisp (if X then Y).
-#
-schema_version: 0.1.0
+# Typed Charter intake envelope template.
+# Replace every {{...}} placeholder. Keep this working file outside the target repository.
+# The `content` value must be the complete object defined by
+# handbook.schemas.artifacts.project-authority@1.1.0; it is YAML here and is
+# normalized by the engine before immutable intake/candidate persistence.
+# Canonical exception records use `.handbook/project/charter.yaml#/governance/exception_process`.
 
-project:
-  name: "{{PROJECT_NAME}}"
-  classification: greenfield # greenfield|brownfield|integration|modernization|hardening
-  team_size: 1
-  users: internal # internal|external|mixed
-  expected_lifetime: "months" # days|weeks|months|years
-  surfaces: ["api"] # e.g. ["web_app","api","cli","lib","infra","ml"]
-  runtime_environments: ["server"] # e.g. ["browser","server","cloud","on_prem","edge"]
-  constraints:
-    deadline: ""
-    budget: ""
-    experience_notes: ""
-    must_use_tech: []
-  operational_reality:
-    in_production_today: false
-    prod_users_or_data: ""
-    external_contracts_to_preserve: []
-    uptime_expectations: ""
-  default_implications:
-    backward_compatibility: "not_required" # required|not_required|boundary_only
-    migration_planning: "not_required" # required|not_required
-    rollout_controls: "lightweight" # none|lightweight|required
-    deprecation_policy: "not_required_yet" # required|not_required_yet
-    observability_threshold: "standard" # minimal|standard|high|regulated
-
-posture:
-  rubric_scale: "1-5"
-  baseline_level: 3
-  baseline_rationale:
-    - ""
-
-domains: []
-# domains:
-#   - name: "auth"
-#     blast_radius: "high"
-#     touches: ["pii","money","external_users"]
-#     constraints: []
-
-dimensions:
-  - name: "speed_vs_quality"
-    level: null
-    default_stance: ""
-    raise_the_bar_triggers: []
-    allowed_shortcuts: []
-    red_lines: []
-    domain_overrides: []
-
-  - name: "type_safety_static_analysis"
-    level: null
-    default_stance: ""
-    raise_the_bar_triggers: []
-    allowed_shortcuts: []
-    red_lines: []
-    domain_overrides: []
-
-  - name: "testing_rigor"
-    level: null
-    default_stance: ""
-    raise_the_bar_triggers: []
-    allowed_shortcuts: []
-    red_lines: []
-    domain_overrides: []
-
-  - name: "scalability_performance"
-    level: null
-    default_stance: ""
-    raise_the_bar_triggers: []
-    allowed_shortcuts: []
-    red_lines: []
-    domain_overrides: []
-
-  - name: "reliability_operability"
-    level: null
-    default_stance: ""
-    raise_the_bar_triggers: []
-    allowed_shortcuts: []
-    red_lines: []
-    domain_overrides: []
-
-  - name: "security_privacy"
-    level: null
-    default_stance: ""
-    raise_the_bar_triggers: []
-    allowed_shortcuts: []
-    red_lines: []
-    domain_overrides: []
-
-  - name: "observability"
-    level: null
-    default_stance: ""
-    raise_the_bar_triggers: []
-    allowed_shortcuts: []
-    red_lines: []
-    domain_overrides: []
-
-  - name: "dx_tooling_automation"
-    level: null
-    default_stance: ""
-    raise_the_bar_triggers: []
-    allowed_shortcuts: []
-    red_lines: []
-    domain_overrides: []
-
-  - name: "ux_polish_api_usability"
-    level: null
-    default_stance: ""
-    raise_the_bar_triggers: []
-    allowed_shortcuts: []
-    red_lines: []
-    domain_overrides: []
-
-exceptions:
-  approvers: ["project_owner"]
-  record_location: ".handbook/charter/CHARTER.md#exceptions"
-  minimum_fields: ["what", "why", "scope", "risk", "owner", "expiry_or_revisit_date"]
-
-debt_tracking:
-  system: "issues"
-  labels: ["debt"]
-  review_cadence: "monthly"
-
-decision_records:
-  enabled: true
-  path: "docs/decisions"
-  format: "md"
+mode: guided_adaptive # guided_adaptive | express | agent_assisted
+content: "{{COMPLETE_CANONICAL_CHARTER_OBJECT}}"
+coverage:
+  - coverage_id: project_shape.definition
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: delivery.constraints
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: delivery.default_implications
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: operational_reality.production_state
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: risk.domains
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: engineering_posture.baseline
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: policy.authority_and_revision
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: governance.decision_authority
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: governance.required_approvals
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: governance.exception_policy
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: engineering_posture.dimensions
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: engineering_posture.red_lines
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: governance.review_triggers
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: governance.reassessment_triggers
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: debt.register
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+  - coverage_id: decisions.records
+    source_kind: user_declaration
+    value_ref: "{{VALUE_REF}}"
+    evidence_refs: []
+    confidence: "{{CONFIDENCE}}"
+    freshness: null
+    sensitivity: "{{SENSITIVITY}}"
+    contradiction_refs: []
+    waiver_ref: null
+consumer:
+  kind: agent
+  id: "{{CALLER_ID}}"
+  version: "{{CALLER_VERSION}}"
+prompt_event_refs: []
+finalized_at_utc: "{{RFC3339_UTC}}"
+expected_current_fingerprint: null # required for amendment; omit/null for initial creation

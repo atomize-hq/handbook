@@ -2,12 +2,12 @@
 
 ## Status and authority
 
-This is the complete planning-only implementation packet for `HCM-2.2`. It is
-authority for a future, separately selected implementation session only after
-the exact planning subject receives a fresh `CLEAN` review and the parent
-planning closeout records that result. It authorizes no Rust, product,
-definition, fixture, template, generated-skill, or runtime implementation in
-the session that creates or closes this packet.
+This is the frozen, implemented contract for the completed bounded `HCM-2.2`
+slice. The separate implementation selection
+`20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved`
+authorized the exact Rust, product, definition, fixture, template, generated-
+skill, and runtime boundary below. Its reviewed implementation and proof are
+completed evidence, not continuing authority for HCM-2.3 or later work.
 
 The packet consumes, without reopening, the reviewed HCM-1 registry/profile
 boundaries and the HCM-2.1 Project Context canonical-YAML pilot. Entry evidence
@@ -633,6 +633,129 @@ record-shaped value. The exact CLI-to-engine mapping is:
 | `handbook approvers revoke-credential` | `revoke_approver_credential` | `revoke_credential` |
 | `handbook approvers update-mapping` | `update_approver_mapping` | `update_mapping` |
 
+The product-path operation selector is the closed engine enum
+`RepositoryInvocationOperationV1`; compiler/CLI passes a variant, never a raw
+token. Its exact mapping is:
+
+| Product operation | Request operation | Engine variant | Allocator token |
+|---|---|---|---|
+| approver bootstrap | `bootstrap` | `ApproverBootstrap` | `bootstrap` |
+| approver add | `add_credential` | `ApproverAddCredential` | `add-credential` |
+| approver revoke | `revoke_credential` | `ApproverRevokeCredential` | `revoke-credential` |
+| approver mapping update | `update_mapping` | `ApproverUpdateMapping` | `update-mapping` |
+| initial Charter approval | `initial_charter_approval` | `CharterApproval` | `charter-approval` |
+| amendment Charter approval | `amendment_approval` | `CharterApproval` | `charter-approval` |
+
+The engine-owned `RepositoryInvocationIdentityServiceV1` supplies the two
+request leaves that are intentionally absent from this CLI grammar. Setup, and
+only setup, may initialize the repository identity at exact path
+`.handbook/repository-identity.v1`. The file is exactly 71 lowercase ASCII bytes
+with no BOM or line ending: literal `sha256:` followed by 64 lowercase hex
+digits. Setup takes the promotion-then-registry locks, performs strict no-follow
+inspection, and create-news the absent file through a same-parent temporary
+file, file fsync, atomic rename, and parent fsync. Let `S` be 32 bytes obtained
+from the OS CSPRNG. The initialized value is exactly
+`sha256:` plus the lowercase hex SHA-256 of
+`UTF-8("handbook.repository-identity@1.0") || 0x00 || S`. The entropy bytes are
+never persisted or returned. A CSPRNG, create, fsync, rename, unsafe-path, or
+exact-byte failure refuses setup; an existing valid file is preserved
+byte-for-byte.
+
+After registry bootstrap commits, the signed committed registry state is the
+authority for repository identity. Setup and every identity read must recover
+registry authority first and require the file value to equal that committed
+value. Missing identity before bootstrap makes approve and every approver-admin
+operation refuse before a native call or delta with a next action to run setup;
+missing identity after bootstrap, malformed/unsafe identity state, or any
+file/registry disagreement refuses and preserves evidence. No product adapter
+may derive repository identity from a path, Git metadata, selected profile,
+canonical artifact, fixture value, clock, environment, or caller input.
+`--reset-state` does not select, delete, replace, or regenerate
+`.handbook/repository-identity.v1`.
+
+For each compiler/CLI approve or approver-admin product invocation the same
+engine service allocates one operation ID from a fresh 32-byte OS-CSPRNG value
+`N`, after resolving the exact repository identity `R`. The closed allocator
+token is one of
+`bootstrap`, `add-credential`, `revoke-credential`, `update-mapping`, or
+`charter-approval`. The ID is exactly `<operation-token>-<64 lowercase hex>`,
+where the hex is SHA-256 of
+`UTF-8("handbook.operation-id@1.0") || 0x00 || UTF-8(R) || 0x00 ||
+UTF-8(operation-token) || 0x00 || N`. It is 74 through 82 ASCII bytes and remains
+unchanged through the closed request, native challenge, raw journal intent,
+engine result, and product output; recovery requires equality at every carried
+surface. It grants no authority and is deliberately absent from consuming
+semantic records. Entropy failure refuses before the native call or any delta.
+Compiler/CLI may only request this typed engine value and insert it with the
+resolved identity into the closed request; neither adapter accepts, selects a
+raw token, synthesizes, hashes, or persists either leaf. The exact derivations,
+typed mapping, allocator-token domain, and setup/read refusal cases are frozen by
+[`repository-invocation-identity-vectors-v1.0.json`](contracts/repository-invocation-identity-vectors-v1.0.json).
+
+The allocator form is a product-path subset, not a retroactive narrowing of the
+closed `ApproverAdminRequestV1` or `CharterApprovalRequestV1` correlation field.
+Direct typed engine callers may continue to supply any schema-valid bounded
+opaque `operation_id`; those IDs also grant no authority. The compiler/CLI path
+always uses the allocator, and tests prove it accepts no raw operation ID or
+token. This preserves the published request/schema vectors while making the
+omitted CLI leaf total.
+
+Mandatory predecessor recovery can fail before identity resolution, identity
+resolution can fail before a repository fingerprint exists, and operation-ID
+allocation can fail after the identity exists but before an ID exists. None of
+those conditions may be fabricated as an `ApproverAdminResultV1` or an approval
+result. Identity and operation-ID failures use the exact closed
+`RepositoryInvocationPreflightResultV1` DTO with schema ID
+`handbook.repository-invocation-preflight-result`, version `1.0`, and fields
+exactly `{schema_id, schema_version, operation, stage, status,
+repository_identity_fingerprint, operation_id, changed_paths, refusal,
+next_actions}`. `operation` is one of `bootstrap`, `add_credential`,
+`revoke_credential`, `update_mapping`, or `charter_approval`; `status` is
+literal `refused`; `operation_id` is always null; and `changed_paths` is empty.
+The closed branches are:
+
+| Stage | Repository identity | Refusal | Retryable | Exact next action |
+|---|---|---|---|---|
+| `repository_identity` | null | `repository_identity_unavailable` | false | `run or repair handbook setup, then retry the complete operation` |
+| `operation_id` | exact resolved `sha256:` fingerprint | `operation_id_entropy_unavailable` | true | `retry the complete operation with fresh operating-system randomness` |
+
+The first branch requires a null identity; the second requires a non-null valid
+identity; crossed nullability, any non-null operation ID, unknown fields, or any
+other stage/code pairing refuses serialization. Repository-identity entropy
+failure occurs only inside setup and uses the existing typed setup refusal; it
+does not enter this operation envelope. Compiler/CLI projects this engine-owned
+DTO directly to exact JSON or human text. Once both leaves exist, preflight is
+ineligible and the operation returns only its normal exact engine result.
+Predecessor-ordered registry/approval recovery remains mandatory before
+identity resolution and may perform only the exact roll-forward, rollback,
+cleanup, use-head restoration, and finalization effects authorized by the
+recovery tables below. If recovery cannot finish safely, its typed recovery
+refusal wins and no preflight DTO is emitted. After successful recovery, every
+preflight branch performs zero native calls and creates no new operation-owned
+filesystem, semantic-record, journal, registry, lifecycle, or canonical delta.
+Its empty `changed_paths` therefore describes the refused current operation,
+not prior-transaction recovery; recovery effects remain attributable through
+their retained intent, marker, record, and use-head evidence.
+
+Unsafe or incomplete mandatory recovery instead returns the distinct exact
+closed `RepositoryInvocationRecoveryRefusalV1` envelope with schema ID
+`handbook.repository-invocation-recovery-refusal`, version `1.0`, and fields
+exactly `{schema_id, schema_version, operation, status,
+repository_identity_fingerprint, operation_id, changed_paths, refusal,
+next_actions}`. `operation` uses the same five-value product-operation enum as
+the preflight DTO; `status` is literal `refused`; both identity fields are null;
+and `changed_paths` is empty because it reports current-operation paths only.
+`refusal` is exactly `{code:"authority_recovery_blocked", message:"repository
+authority recovery could not complete safely", retryable:false}` and
+`next_actions` is exactly `["repair retained registry/approval recovery
+evidence, then retry the complete operation"]`. Unknown fields, any non-null
+identity, any other code/message/retryability/action, or any normal/preflight
+result substitution refuses serialization. This envelope has zero native calls
+and no new current-operation-owned delta; only already-authorized recovery-table
+effects may precede it and remain attributable through retained recovery
+evidence. Compiler/CLI projects this engine-owned envelope directly and never
+selects recovery detail or wording.
+
 The bootstrap request branch contains exactly schema identity/version,
 operation/operation ID, repository identity, null expected state/head, and
 `initial_charter_quorum`. It does not admit `approval_mappings`. After validating
@@ -867,7 +990,7 @@ then:
 
 1. create-news `.handbook/state/transactions/registry/<transaction-id>.pending/`;
 2. writes+fsyncs `intent.tmp`, renames it to `intent.json`, and fsyncs the
-   directory. Intent binds transaction ID, operation, observed prior state/head
+   directory. Intent binds transaction ID, operation, operation ID, observed prior state/head
    (both null only for bootstrap), authorization kind/ref/fingerprint, exact
    operation-discriminated record set, every final path/ref/fingerprint, and
    every staged-byte fingerprint. The exact set is make-credential response,
@@ -1064,7 +1187,7 @@ replacement use head. No assertion or semantic record is visible unless that
 journal commits, and recovery restores the exact prior head before abandoning
 partial immutable finals.
 
-The approval intent is closed and binds `transaction_id`, `approval_id`, exact
+The approval intent is closed and binds `transaction_id`, `operation_id`, `approval_id`, exact
 canonical/candidate/class/authority and retained registry-pair identities,
 `credential_id_hash`, prior and result use-head paths/fingerprints/sequences and
 raw-byte fingerprints, assertion/use-transition/approval-record final paths,
@@ -1582,11 +1705,11 @@ policy revision by itself.
 
 ## Product-path cutover
 
-The future implementation must cut one coherent vertical path:
+The implementation cuts one coherent vertical path:
 
 - **engine:** new definition registries, typed canonical Charter, intake and
   lineage records, evaluation, lifecycle, promotion transaction, renderer,
-  and retained-observation inspection;
+  repository invocation identity, and retained-observation inspection;
 - **compiler/CLI:** thin author/approve/promote/validate operations, selected
   profile resolution, typed JSON/human results, setup/doctor inspection, and
   no hidden inference or approval;
@@ -1599,10 +1722,11 @@ The future implementation must cut one coherent vertical path:
 - **flow:** expand selected structured sourcing to Charter under a separately
   named `BR-HCM-2-CHARTER-FLOW-01`, render it in memory, expose source/rendered
   fingerprints, and remove every legacy Charter Markdown influence;
-- **setup/doctor:** setup remains non-authoring; doctor advances its schema
-  additively and reports definition closure, canonical validity, lifecycle
-  state, source/render fingerprints, and typed next actions from one retained
-  observation; and
+- **setup/doctor:** setup remains non-authoring while create-new initializing or
+  byte-preserving the engine-owned repository identity; doctor advances its
+  schema additively and reports identity readiness, definition closure,
+  canonical validity, lifecycle state, source/render fingerprints, and typed
+  next actions from retained engine observations; and
 - **legacy removal:** delete fixed Charter Markdown constants/validators,
   legacy `CharterStructuredInput` selected callers, old author templates, and
   old selected flow/CLI paths only after all named consumers move.
@@ -1627,7 +1751,10 @@ truth bridge.
 - Definition, intake, candidate, approval, promotion, lifecycle, render, and
   refusal DTOs are engine-owned typed values; adapters do not reproduce
   semantic checks.
-- Public operations return exact schema/version envelopes, stable reason codes,
+- Public operations return exact schema/version envelopes, including the
+  pre-invocation refusal union where a normal request/result identity cannot
+  exist and the distinct authority-recovery refusal where mandatory recovery
+  cannot complete, stable reason codes,
   current refs/fingerprints, changed paths, and next actions. Human wording is
   consumer-owned.
 - No remote schema/definition fetch, executable definition hook, dynamic CLI
@@ -1695,7 +1822,7 @@ steps and remain read-only.
 
 ## Verification and promotion gates
 
-The future proof wall must include:
+The implementation proof wall includes:
 
 1. exact old/new definition tree, raw bytes, fingerprints, cross-ref closure,
    package archive, and installed-package equality;
@@ -1712,8 +1839,8 @@ The future proof wall must include:
 7. lifecycle targeted-reopen, unknown-trigger, no-auto-regeneration, and
    authorized-clearing proof;
 8. author/approve/promote/validate, setup/doctor, Environment Inventory, flow,
-   CLI JSON/human, generated skill, install-smoke, and conflicting-legacy-file
-   real-path proof;
+   CLI JSON/human, generated skill, install-smoke, conflicting-legacy-file, and
+   repository-identity/operation-ID derivation and refusal real-path proof;
 9. native Windows read-only and fail-before-mutation proof;
 10. HCM-1.1-HCM-1.4 and HCM-2.1 regressions, full workspace tests, fmt, Clippy,
     docs, package, handoff, archive, link, secret, scope, and diff gates; and

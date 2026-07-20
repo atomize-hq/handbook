@@ -2,8 +2,11 @@
 mod pipeline_proof_corpus_support;
 
 use std::path::{Path, PathBuf};
+#[cfg(unix)]
 use std::sync::mpsc;
+#[cfg(unix)]
 use std::thread;
+#[cfg(unix)]
 use std::time::Duration;
 
 use handbook_pipeline::{
@@ -98,10 +101,12 @@ fn custom_state_path(
         .join(format!("{pipeline_id}.yaml"))
 }
 
+#[cfg(unix)]
 fn lock_path(state_path: &Path) -> PathBuf {
     state_path.with_extension("lock")
 }
 
+#[cfg(unix)]
 fn acquire_unix_lock(path: &Path) -> std::fs::File {
     use std::os::unix::io::AsRawFd;
 
@@ -122,6 +127,7 @@ fn acquire_unix_lock(path: &Path) -> std::fs::File {
     file
 }
 
+#[cfg(unix)]
 fn release_unix_lock(file: &std::fs::File) {
     use std::os::unix::io::AsRawFd;
 
@@ -1051,6 +1057,10 @@ fn malformed_route_basis_is_distinct_from_malformed_route_state() {
     let (_dir, repo_root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
     let malformed_route_basis_path =
         pipeline_proof_corpus_support::install_state_seed(&repo_root, "malformed_route_basis.yaml");
+    let malformed_route_basis = std::fs::read_to_string(&malformed_route_basis_path)
+        .expect("read malformed route basis")
+        .replace("/tmp/foundation-inputs", &repo_root_string(&repo_root));
+    write_file(&malformed_route_basis_path, &malformed_route_basis);
     let malformed_route_basis_err = load_route_state_with_supported_variables(
         &repo_root,
         pipeline_proof_corpus_support::FOUNDATION_INPUTS_PIPELINE_ID,
@@ -1252,12 +1262,13 @@ fn invalid_ref_value_is_rejected_before_write() {
     let repo_root = dir.path();
     let pipeline_id = "pipeline.route_state";
 
+    let absolute_charter_ref = repo_root.join("CHARTER.md").to_string_lossy().into_owned();
     let err = set_route_state(
         repo_root,
         pipeline_id,
         ["needs_project_context"],
         RouteStateMutation::RefCharterRef {
-            value: "/tmp/CHARTER.md".to_string(),
+            value: absolute_charter_ref,
         },
         0,
     )
@@ -1579,6 +1590,7 @@ audit:
 }
 
 #[test]
+#[cfg(unix)]
 fn atomic_replace_happens_under_lock() {
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();

@@ -1,10 +1,12 @@
+#[cfg(not(windows))]
 use handbook_engine::{
     inspect_profile_repository, resolve_shipped_profile_decisions, ArtifactInspectionReason,
     ArtifactInspectionStatus,
 };
+#[cfg(not(windows))]
 use tempfile::tempdir;
 
-#[cfg(not(unix))]
+#[cfg(all(not(unix), not(windows)))]
 #[test]
 fn non_unix_repository_inspection_refuses_before_read() {
     let repo = tempdir().expect("temporary repository");

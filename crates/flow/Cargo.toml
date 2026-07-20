@@ -16,4 +16,6 @@ path = "src/lib.rs"
 handbook-engine = { version = "0.1.1", path = "../engine" }
 
 [dev-dependencies]
+serde_json = "1"
+serde_json_canonicalizer = "0.3.2"
 tempfile = "3"

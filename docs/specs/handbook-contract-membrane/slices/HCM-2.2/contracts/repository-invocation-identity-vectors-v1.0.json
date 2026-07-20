@@ -1,0 +1,99 @@
+{
+  "schema_id": "hcm-2.2-repository-invocation-identity-vectors",
+  "schema_version": "1.0",
+  "repository_identity": {
+    "domain_utf8": "handbook.repository-identity@1.0",
+    "entropy_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "preimage": "UTF-8(domain_utf8) || 0x00 || entropy",
+    "expected_repository_identity_fingerprint": "sha256:ee7147baa7ae6a6d858d9e253e503bc8c90c2ba23a5f1096b5717d1c3231e1db",
+    "state_path": ".handbook/repository-identity.v1",
+    "state_bytes_utf8": "sha256:ee7147baa7ae6a6d858d9e253e503bc8c90c2ba23a5f1096b5717d1c3231e1db",
+    "state_byte_length": 71
+  },
+  "operation_id": {
+    "domain_utf8": "handbook.operation-id@1.0",
+    "entropy_hex": "202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+    "preimage": "UTF-8(domain_utf8) || 0x00 || UTF-8(repository_identity_fingerprint) || 0x00 || UTF-8(operation_token) || 0x00 || entropy",
+    "vectors": [
+      {"operation_token":"bootstrap","expected_operation_id":"bootstrap-2dba41bdd163fdba35657795f59cfe92268a8bdd2aa488ece31c9128d6050c32"},
+      {"operation_token":"add-credential","expected_operation_id":"add-credential-12ff3d066b614295e6b4fbc8c99a4471f875da3cb21f76d1405c8a7acefd27aa"},
+      {"operation_token":"revoke-credential","expected_operation_id":"revoke-credential-b30d32bcdafdf2a19daf711c7e8b8b4a7abf92c8fc99510e64ae58ab67ebb860"},
+      {"operation_token":"update-mapping","expected_operation_id":"update-mapping-a2e1e8c941078be301bbce5543f1cab33528988c955d778667fb1fb7cb0cc23a"},
+      {"operation_token":"charter-approval","expected_operation_id":"charter-approval-6170a1a98ad62de3bcf9ed7c4cb53eb810b5245bb210a9ae7f36b840a3464aae"}
+    ],
+    "product_operation_mapping": [
+      {"product_operation":"approver_bootstrap","request_operation":"bootstrap","typed_variant":"ApproverBootstrap","operation_token":"bootstrap"},
+      {"product_operation":"approver_add","request_operation":"add_credential","typed_variant":"ApproverAddCredential","operation_token":"add-credential"},
+      {"product_operation":"approver_revoke","request_operation":"revoke_credential","typed_variant":"ApproverRevokeCredential","operation_token":"revoke-credential"},
+      {"product_operation":"approver_update_mapping","request_operation":"update_mapping","typed_variant":"ApproverUpdateMapping","operation_token":"update-mapping"},
+      {"product_operation":"initial_charter_approval","request_operation":"initial_charter_approval","typed_variant":"CharterApproval","operation_token":"charter-approval"},
+      {"product_operation":"amendment_charter_approval","request_operation":"amendment_approval","typed_variant":"CharterApproval","operation_token":"charter-approval"}
+    ],
+    "direct_engine_compatibility": "schema-valid bounded opaque operation IDs remain admitted for direct typed engine callers; the exact derived form is mandatory only for compiler/CLI product allocation"
+  },
+  "preflight_delta_contract": {
+    "ordering": "mandatory predecessor-ordered registry/approval recovery completes before identity resolution",
+    "recovery_delta": "only prior-transaction effects authorized by the exact recovery tables are permitted and remain attributable through retained recovery evidence",
+    "changed_paths_semantics": "paths changed by the refused current operation only; prior-transaction recovery effects are not current-operation paths",
+    "new_operation_owned_delta": false
+  },
+  "recovery_refusal": {
+    "case":"authority_recovery_blocked",
+    "result":{"schema_id":"handbook.repository-invocation-recovery-refusal","schema_version":"1.0","operation":"bootstrap","status":"refused","repository_identity_fingerprint":null,"operation_id":null,"changed_paths":[],"refusal":{"code":"authority_recovery_blocked","message":"repository authority recovery could not complete safely","retryable":false},"next_actions":["repair retained registry/approval recovery evidence, then retry the complete operation"]},
+    "native_calls":0,
+    "mandatory_recovery_delta":"only_exact_recovery_table_effects_before_block",
+    "new_operation_owned_delta":false
+  },
+  "mandatory_recovery_refusal_rejections": [
+    "non-null repository identity or operation ID",
+    "unknown field or operation",
+    "code, message, retryability, or next-action mismatch",
+    "preflight or normal operation schema substitution"
+  ],
+  "preflight_results": [
+    {
+      "case":"repository_identity_unavailable",
+      "result":{"schema_id":"handbook.repository-invocation-preflight-result","schema_version":"1.0","operation":"bootstrap","stage":"repository_identity","status":"refused","repository_identity_fingerprint":null,"operation_id":null,"changed_paths":[],"refusal":{"code":"repository_identity_unavailable","message":"repository invocation identity is unavailable","retryable":false},"next_actions":["run or repair handbook setup, then retry the complete operation"]},
+      "native_calls":0,
+      "mandatory_recovery_delta":"permitted_by_exact_recovery_tables",
+      "new_operation_owned_delta":false
+    },
+    {
+      "case":"operation_id_entropy_unavailable",
+      "result":{"schema_id":"handbook.repository-invocation-preflight-result","schema_version":"1.0","operation":"charter_approval","stage":"operation_id","status":"refused","repository_identity_fingerprint":"sha256:ee7147baa7ae6a6d858d9e253e503bc8c90c2ba23a5f1096b5717d1c3231e1db","operation_id":null,"changed_paths":[],"refusal":{"code":"operation_id_entropy_unavailable","message":"operating-system randomness was unavailable for operation ID allocation","retryable":true},"next_actions":["retry the complete operation with fresh operating-system randomness"]},
+      "native_calls":0,
+      "mandatory_recovery_delta":"permitted_by_exact_recovery_tables",
+      "new_operation_owned_delta":false
+    }
+  ],
+  "mandatory_preflight_rejections": [
+    "repository_identity stage with non-null repository identity",
+    "operation_id stage with null or malformed repository identity",
+    "any non-null operation_id",
+    "stage/refusal-code mismatch",
+    "unknown field or operation",
+    "compiler/CLI raw token or operation-ID input",
+    "typed operation mapped to another known token"
+  ],
+  "mandatory_refusals": [
+    {"case":"authority_recovery_blocked","native_calls":0,"mandatory_recovery_delta":"only_exact_recovery_table_effects_before_block","new_operation_owned_delta":false},
+    {"case":"identity_missing_before_bootstrap_outside_setup","native_calls":0,"mandatory_recovery_delta":"permitted_by_exact_recovery_tables","new_operation_owned_delta":false},
+    {"case":"identity_empty","native_calls":0,"mandatory_recovery_delta":"permitted_by_exact_recovery_tables","new_operation_owned_delta":false},
+    {"case":"identity_terminal_lf","native_calls":0,"mandatory_recovery_delta":"permitted_by_exact_recovery_tables","new_operation_owned_delta":false},
+    {"case":"identity_uppercase_hex","native_calls":0,"mandatory_recovery_delta":"permitted_by_exact_recovery_tables","new_operation_owned_delta":false},
+    {"case":"identity_wrong_prefix","native_calls":0,"mandatory_recovery_delta":"permitted_by_exact_recovery_tables","new_operation_owned_delta":false},
+    {"case":"identity_symlink_or_reparse_point","native_calls":0,"mandatory_recovery_delta":"permitted_by_exact_recovery_tables","new_operation_owned_delta":false},
+    {"case":"identity_non_regular_file","native_calls":0,"mandatory_recovery_delta":"permitted_by_exact_recovery_tables","new_operation_owned_delta":false},
+    {"case":"identity_disagrees_with_committed_registry","native_calls":0,"mandatory_recovery_delta":"permitted_by_exact_recovery_tables","new_operation_owned_delta":false},
+    {"case":"repository_identity_entropy_unavailable","native_calls":0,"mandatory_recovery_delta":"not_applicable_setup_only","new_operation_owned_delta":false},
+    {"case":"operation_id_entropy_unavailable","native_calls":0,"mandatory_recovery_delta":"permitted_by_exact_recovery_tables","new_operation_owned_delta":false},
+    {"case":"unknown_operation_token","native_calls":0,"mandatory_recovery_delta":"permitted_by_exact_recovery_tables","new_operation_owned_delta":false}
+  ],
+  "mandatory_state_proof": [
+    "concurrent setup creates exactly one identity and every successful caller observes identical bytes",
+    "repeated setup preserves exact bytes",
+    "reset-state never selects the identity path",
+    "committed registry identity becomes the equality authority",
+    "compiler and CLI accept no repository-identity or operation-ID input"
+  ]
+}

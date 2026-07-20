@@ -19,4 +19,5 @@ sha2 = "0.10"
 time = { version = "0.3", features = ["formatting", "macros"] }
 
 [dev-dependencies]
+serde_json_canonicalizer = "0.3.2"
 tempfile = "3"

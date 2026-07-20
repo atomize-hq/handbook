@@ -195,6 +195,7 @@ fn setup_error_kind_name(kind: handbook_compiler::SetupErrorKind) -> &'static st
         handbook_compiler::SetupErrorKind::MaterializerUnavailable => "materializer_unavailable",
         handbook_compiler::SetupErrorKind::RuntimeStatePlan => "runtime_state_plan",
         handbook_compiler::SetupErrorKind::RuntimeStateApply => "runtime_state_apply",
+        handbook_compiler::SetupErrorKind::RepositoryIdentity => "repository_identity",
     }
 }
 
@@ -230,6 +231,59 @@ fn setup_error_reason_name(reason: handbook_compiler::SetupErrorReasonCode) -> &
         }
         handbook_compiler::SetupErrorReasonCode::RuntimeStateMutationFailed => {
             "runtime_state_mutation_failed"
+        }
+        handbook_compiler::SetupErrorReasonCode::RepositoryAuthorityRecoveryBlocked => {
+            "repository_authority_recovery_blocked"
+        }
+        handbook_compiler::SetupErrorReasonCode::RepositoryIdentityUnsafe => {
+            "repository_identity_unsafe"
+        }
+        handbook_compiler::SetupErrorReasonCode::RepositoryIdentityMismatch => {
+            "repository_identity_mismatch"
+        }
+        handbook_compiler::SetupErrorReasonCode::RepositoryIdentityEntropyUnavailable => {
+            "repository_identity_entropy_unavailable"
+        }
+        handbook_compiler::SetupErrorReasonCode::RepositoryIdentityPersistenceFailed => {
+            "repository_identity_persistence_failed"
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{setup_error_kind_name, setup_error_reason_name};
+
+    #[test]
+    fn repository_identity_setup_error_projection_is_exact() {
+        assert_eq!(
+            setup_error_kind_name(handbook_compiler::SetupErrorKind::RepositoryIdentity),
+            "repository_identity"
+        );
+        let cases = [
+            (
+                handbook_compiler::SetupErrorReasonCode::RepositoryAuthorityRecoveryBlocked,
+                "repository_authority_recovery_blocked",
+            ),
+            (
+                handbook_compiler::SetupErrorReasonCode::RepositoryIdentityUnsafe,
+                "repository_identity_unsafe",
+            ),
+            (
+                handbook_compiler::SetupErrorReasonCode::RepositoryIdentityMismatch,
+                "repository_identity_mismatch",
+            ),
+            (
+                handbook_compiler::SetupErrorReasonCode::RepositoryIdentityEntropyUnavailable,
+                "repository_identity_entropy_unavailable",
+            ),
+            (
+                handbook_compiler::SetupErrorReasonCode::RepositoryIdentityPersistenceFailed,
+                "repository_identity_persistence_failed",
+            ),
+        ];
+        for (reason, expected) in cases {
+            assert_eq!(setup_error_reason_name(reason), expected);
         }
     }
 }

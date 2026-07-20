@@ -2,10 +2,12 @@
 
 ## Status
 
-Planning-only. This plan becomes implementation authority only with the
-review-clean [`../SPEC.md`](../SPEC.md) packet and a separately selected
-top-level HCM-2.2 implementation session. No implementation task is executed in
-the planning session that creates or closes this packet.
+Escalation required; non-authoritative blocked checkpoint. The review-clean
+[`../SPEC.md`](../SPEC.md) packet and separately selected top-level HCM-2.2
+implementation session authorized this plan, but fresh implementation Review 2
+found a missing lifecycle-validation authority path. Bounded remediation proved
+the frozen candidate/validation fingerprints cyclic, so the slice stopped under
+its own closed-graph condition. No HCM-2.3 authority exists.
 
 ## Delivery strategy
 
@@ -96,7 +98,8 @@ risk acknowledged, and immutable baseline manifest recorded.
    goldens with adversarial control/unicode inputs.
 6. Add RED compiler/CLI/skill/setup/doctor/Environment Inventory/flow tests for
    the selected path, result envelopes, no hidden agent, no setup authoring,
-   and legacy Markdown irrelevance.
+   legacy Markdown irrelevance, engine-owned repository identity initialization,
+   and engine-allocated operation IDs with no caller/adapter identity authority.
 7. Add native non-Unix RED tests for read-only success and mutation refusal
    before any filesystem delta.
 
@@ -221,16 +224,28 @@ fail-closed matrices pass.
 
 ## P6 — Cut author, skill, setup, and doctor paths
 
-1. Rewire compiler/CLI to the exact author/approve/promote/validate grammar and
-   engine use cases. Keep adapters free of duplicated semantics.
+1. Add the engine-owned `RepositoryInvocationIdentityServiceV1`, exact
+   derivation vectors, create-new/no-follow setup initialization, committed-
+   registry equality checks, typed product-operation/token allocation, closed
+   pre-invocation refusal union, distinct closed authority-recovery refusal,
+   request/challenge/journal/result ID continuity,
+   and missing/tampered/entropy/crossed-token/concurrency proof. Run the exact
+   predecessor-ordered recovery contract before identity resolution; prove that
+   preflight adds no new operation-owned delta while separately admitting and
+   attributing only recovery-table-authorized prior-transaction effects. Rewire
+   compiler/CLI to the exact author/approve/
+   promote/validate and approver-admin grammar and engine use cases. Keep
+   adapters free of duplicated identity or domain semantics.
 2. Cut core input examples and generated/installable skills to the three
    acquisition workflows. The agent collects declarations/evidence, surfaces
    gaps, requests human approval, and invokes operations; Handbook never calls
    a nested model or asks terminal questions.
 3. Remove direct old Markdown authoring and selected `0.1.0` input paths after
    all callers move. Conflicting legacy files must have zero influence.
-4. Keep setup non-authoring under the new selected profile.
-5. Advance doctor additively with definition closure, canonical/lifecycle,
+4. Keep setup non-authoring under the new selected profile; it may only
+   create-new or preserve the exact repository-identity operational file, which
+   `--reset-state` cannot select or replace.
+5. Advance doctor additively with repository-identity readiness, definition closure, canonical/lifecycle,
    source/render fingerprint, and next-action fields projected from one retained
    engine observation. Preserve existing decision/readiness semantics.
 6. Prove JSON/human exit mappings, validate-only, overwrite/refusal, installed

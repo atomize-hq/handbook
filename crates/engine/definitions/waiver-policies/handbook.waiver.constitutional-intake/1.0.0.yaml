@@ -1,0 +1,40 @@
+{
+  "allowed_coverage_ids": [
+    "decisions.records",
+    "delivery.default_implications",
+    "engineering_posture.dimensions",
+    "engineering_posture.red_lines",
+    "governance.decision_authority",
+    "governance.exception_policy",
+    "governance.reassessment_triggers",
+    "governance.required_approvals",
+    "governance.review_triggers",
+    "policy.authority_and_revision"
+  ],
+  "allowed_quality_obligations": [
+    "minimum_specificity"
+  ],
+  "approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+  "candidate_binding_required": true,
+  "expiry_required": true,
+  "extensions": {},
+  "policy_id": "handbook.waiver.constitutional-intake",
+  "policy_version": "1.0.0",
+  "required_fields": [
+    "coverage_id",
+    "quality_obligation",
+    "source_kind",
+    "value_ref",
+    "value_fingerprint",
+    "candidate_fingerprint",
+    "rationale",
+    "accepted_risk",
+    "expires_at_utc",
+    "review_at_utc",
+    "actor_ref",
+    "authority_ref"
+  ],
+  "schema_id": "handbook.waiver-policy-definition",
+  "schema_version": "1.0",
+  "waiver_policy_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3"
+}

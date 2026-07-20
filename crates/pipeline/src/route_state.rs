@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
 use std::fs::{self, File, OpenOptions};
-use std::io::{Read, Write};
+#[cfg(unix)]
+use std::io::Read;
+use std::io::Write;
 use std::path::{Component, Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 
@@ -1916,8 +1918,8 @@ fn validate_repo_root(value: &str) -> Result<(), String> {
     for component in path.components() {
         match component {
             Component::Normal(_) => saw_normal = true,
-            Component::RootDir => {}
-            Component::ParentDir | Component::CurDir | Component::Prefix(_) => {
+            Component::RootDir | Component::Prefix(_) => {}
+            Component::ParentDir | Component::CurDir => {
                 return Err(format!(
                     "run.repo_root `{trimmed}` must be a clean absolute path"
                 ));
@@ -2701,6 +2703,7 @@ pub fn open_new_temp_file(path: &Path) -> Result<File, RouteStateStoreError> {
         })
 }
 
+#[cfg(unix)]
 pub fn sync_parent_dir(path: &Path) -> Result<(), RouteStateStoreError> {
     let Some(parent) = path.parent() else {
         return Ok(());
@@ -2715,6 +2718,13 @@ pub fn sync_parent_dir(path: &Path) -> Result<(), RouteStateStoreError> {
             path: parent.to_path_buf(),
             source,
         })?;
+    Ok(())
+}
+
+#[cfg(not(unix))]
+pub fn sync_parent_dir(_path: &Path) -> Result<(), RouteStateStoreError> {
+    // Directory handles are not regular files on Windows, so the Unix
+    // directory-fsync durability step has no portable non-Unix equivalent.
     Ok(())
 }
 
@@ -2816,11 +2826,22 @@ fn lock_file(file: &File, operation: libc::c_int) -> Result<(), std::io::Error> 
 }
 
 #[cfg(not(unix))]
+#[allow(
+    dead_code,
+    reason = "the non-Unix no-op preserves the platform lock helper signature without weakening Unix flock"
+)]
 fn lock_file(_file: &File, _operation: libc::c_int) -> Result<(), std::io::Error> {
     Ok(())
 }
 
 pub struct RouteStateLockGuard {
+    #[cfg_attr(
+        not(unix),
+        allow(
+            dead_code,
+            reason = "the open handle is retained for the full guard lifetime even without Unix flock"
+        )
+    )]
     file: File,
     lock_path: PathBuf,
 }

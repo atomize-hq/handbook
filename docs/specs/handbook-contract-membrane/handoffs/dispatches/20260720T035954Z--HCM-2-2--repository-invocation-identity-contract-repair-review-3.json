@@ -1,0 +1,40 @@
+{
+  "schema_id":"handbook.internal-dispatch",
+  "schema_version":"1.1",
+  "dispatch_id":"20260720T035954Z--HCM-2-2--repository-invocation-identity-contract-repair-review-3",
+  "created_at_utc":"2026-07-20T03:59:54Z",
+  "source_handoff_ids":["20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"],
+  "parent_orchestration_id":"20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision":"proof_or_review_followup",
+  "execution_target":"internal_subagent",
+  "agent_type":"default",
+  "role":"review",
+  "fresh_context_required":true,
+  "closeout_owner":"parent_orchestrator",
+  "required_skills":["using-agent-skills","source-driven-development","api-and-interface-design","code-review-and-quality"],
+  "phase_id":"HCM-2",
+  "slice_id":"HCM-2.2",
+  "packet_id":"HCM-2.2-contract-repair-3",
+  "subject_fingerprint":"sha256:c08aa608449e6f0f651ee894c29ab8d2818a4ebded38edeaaf8d5b48d44f2173",
+  "subject_manifest":{"algorithm":"sha256","encoding":"repo-path-null-sha256-newline-v1","entries":[
+    {"path":"docs/specs/handbook-contract-membrane/03-seam-crosswalk.md","sha256":"22f8e5ea897240f987597f91bd94031c31bef77af761fb264118d23a41947f55"},
+    {"path":"docs/specs/handbook-contract-membrane/04-phase-slice-map.md","sha256":"3d1fa0ab86d00c4b4b1fe3b8599c08cb5d703582be28617a3e6d07a5e06d8344"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sha256":"2c964edf769be82fd66ecc0685c80af32248f409a7564bbdcc61fb8c0eae6f47"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/repository-invocation-identity-vectors-v1.0.json","sha256":"1ef8c08251326affea12ff37c956bad6826ed921f5a04b4f99507530ab7b8f21"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md","sha256":"c3698f9bd9bf2f4e6aabfc239936acb9f80d8b8f4312e694d8da90a145c50cdc"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md","sha256":"da10f0ddd5c0ba5b3742f8f46ce361b00b4836f26f9c2cf2e8f8ca926dc7efb4"}
+  ],"aggregate_fingerprint":"sha256:c08aa608449e6f0f651ee894c29ab8d2818a4ebded38edeaaf8d5b48d44f2173"},
+  "active_resolution":{"level":"contract_repair_review_3","scope_horizon":"HCM-2.2-product-authority","detail_resolution":"high","temporal_horizon":"current_orchestration","authority_horizon":"manifest_subject","memory_horizon":"manifest_subject_only","validation_horizon":"pre_behavior_review"},
+  "authority_refs":[
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sections":["Approval authority and bootstrap","Global authority lock order and retained observations","API, security, and compatibility posture","Verification and promotion gates"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-1.0.0.schema.json","sections":["all"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-vectors-v1.0.json","sections":["all"]}
+  ],
+  "repo_truth":"The manifest freezes the repository-invocation identity, typed product operation allocation, pre-invocation refusal, operational correlation, and predecessor-ordered recovery contracts before behavior implementation resumes.",
+  "allowed_scope":["Read the exact manifest subject and named authority only.","Independently recompute vectors and test the recovery/preflight ordering and delta semantics for internal consistency.","Return findings to the parent without editing."],
+  "non_goals":["Do not implement Rust behavior, edit files, review unrelated implementation, write handoff/ledger/proof, or commit."],
+  "tasks":["Verify mandatory predecessor-ordered recovery completes before identity resolution, and unsafe recovery returns its own refusal rather than a preflight result.","Verify recovery may perform only effects authorized by the exact recovery tables and those effects remain attributable as prior-transaction recovery rather than current-operation changes.","Verify each preflight branch performs zero native calls, has empty current-operation changed_paths, and creates no new current-operation filesystem, semantic-record, journal, registry, lifecycle, or canonical delta.","Verify the two preflight branches remain closed and disjoint, the operation/token mapping and direct-engine compatibility remain coherent, and all vectors and manifest hashes recompute exactly.","Return CLEAN only if no valid actionable finding remains; classify every finding."],
+  "contracts_and_gates":["Recovery effects and current-operation effects are distinct and cannot be conflated.","Preflight cannot hide a blocked recovery or authorize effects beyond the exact recovery tables.","After successful recovery, preflight has zero native calls and zero new operation-owned delta; changed_paths is current-operation-only.","Compiler/CLI select only a typed engine operation and accept no identity, raw token, or operation ID.","Behavior resumes only after this different fresh reviewer returns CLEAN."],
+  "stop_conditions":["Return BLOCKED only for a genuine authority gap outside bounded HCM-2.2 repair.","Do not substitute mutable implementation inspection for contract review."],
+  "return_contract":{"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"read_only","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","vector_recomputation","validation","parent_disposition"]}
+}

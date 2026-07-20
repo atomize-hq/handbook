@@ -1,9 +1,16 @@
-# HCM-2.2 Future Implementation Checklist
+# HCM-2.2 Implementation Checklist
+
+**Status:** escalation required. The implementation checkpoint is
+non-authoritative; fresh Review 2 is non-clean, and resumption requires an
+additive frozen-contract decision defining an exact acyclic lifecycle-validation
+binding. Do not mark remaining items complete or start HCM-2.3.
 
 ## Entry and authority
 
 - [ ] Revalidate the selected HCM-2.1 closeout, planning closeout, clean implementation entry, and packet fingerprint.
 - [ ] Reread the required skill chain and named `00`-`08`/HCM-0.6 sections.
+- [ ] Prove setup create-news and preserves `.handbook/repository-identity.v1`, registry equality is fail-closed, reset-state cannot select it, and every approve/admin operation ID comes from the engine-owned frozen derivation with no caller/adapter identity input.
+- [ ] Prove the exact typed operation-to-allocator-token table, direct-engine opaque-ID compatibility, both pre-invocation refusal branches and crossed-nullability negatives, the distinct closed unsafe-recovery refusal envelope, predecessor-ordered recovery before identity resolution, no new operation-owned delta beyond separately attributable recovery-table effects, and request/challenge/raw-intent/result/output equality without adding operation IDs to semantic authority records.
 - [ ] Refresh GitNexus and run upstream impact before every existing-symbol edit.
 - [ ] Warn before the CRITICAL selected-profile resolver edit and freeze its five-process regression set.
 - [ ] Capture the exact old definition/package/install manifest and staged allowed paths.

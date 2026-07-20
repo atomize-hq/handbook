@@ -200,6 +200,13 @@ fn lock_authoring_file(_file: &File, _operation: libc::c_int) -> Result<(), std:
 }
 
 struct AuthoringLockGuard {
+    #[cfg_attr(
+        not(unix),
+        allow(
+            dead_code,
+            reason = "the open handle is retained for the full authoring guard lifetime on every platform"
+        )
+    )]
     file: File,
     lock_path: PathBuf,
 }

@@ -1,0 +1,41 @@
+{
+  "schema_id":"handbook.internal-dispatch",
+  "schema_version":"1.1",
+  "dispatch_id":"20260720T041803Z--HCM-2-2--repository-invocation-identity-implementation",
+  "created_at_utc":"2026-07-20T04:18:03Z",
+  "source_handoff_ids":["20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"],
+  "parent_orchestration_id":"20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision":"proof_or_review_followup",
+  "execution_target":"internal_subagent",
+  "agent_type":"default",
+  "role":"implementation",
+  "fresh_context_required":true,
+  "closeout_owner":"parent_orchestrator",
+  "required_skills":["using-agent-skills","source-driven-development","incremental-implementation","test-driven-development","api-and-interface-design","security-and-hardening","debugging-and-error-recovery"],
+  "phase_id":"HCM-2",
+  "slice_id":"HCM-2.2",
+  "packet_id":"HCM-2.2-repository-invocation-identity",
+  "subject_fingerprint":"sha256:a0f81b0eb10291a54cbe905ea5a7cdf63b33baf92f6209c48db516b088d9b536",
+  "subject_manifest":{"algorithm":"sha256","encoding":"repo-path-null-sha256-newline-v1","entries":[
+    {"path":"crates/cli/src/setup.rs","sha256":"99b73361ed11556a8fa039e3459150c0359e9859558641e50e47452f7115d41b"},
+    {"path":"crates/compiler/src/lib.rs","sha256":"85c51f7fb03b834a6216d6d45b42897d6b35389dfc0636d2d77e24e86b740fe6"},
+    {"path":"crates/compiler/src/setup.rs","sha256":"ffa777316e0165c71247a332e1eac6174e8962d1df74a2e517dc02a16113fd8d"},
+    {"path":"crates/compiler/tests/setup.rs","sha256":"1d352f8366feb4147e2aeed879fb67f20f4589d32dc8ea89c3e380c4a036f6f6"},
+    {"path":"crates/engine/src/lib.rs","sha256":"b5d089ab47fabf0be2ef405ee379c35caa5a28d01c39ae226a2804893ede786a"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sha256":"249ee995bc2a980f939e9df8aedf0edbe8c3dfe67a7250bfa2f65e78196f48f9"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/repository-invocation-identity-vectors-v1.0.json","sha256":"3eab52f414f0365873500689c6509231f2c03f077723d91f9e5e314ea0e9b0b2"}
+  ],"aggregate_fingerprint":"sha256:a0f81b0eb10291a54cbe905ea5a7cdf63b33baf92f6209c48db516b088d9b536"},
+  "active_resolution":{"level":"repository_invocation_identity","scope_horizon":"HCM-2.2-engine-setup","detail_resolution":"high","temporal_horizon":"current_orchestration","authority_horizon":"review_clean_contract","memory_horizon":"live_repository_truth","validation_horizon":"focused_engine_setup"},
+  "authority_refs":[
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sections":["Approval authority and bootstrap","Global authority lock order and retained observations","API, security, and compatibility posture"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/repository-invocation-identity-vectors-v1.0.json","sections":["all"]},
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T041025Z--HCM-2-2--repository-invocation-identity-contract-repair-review-4.json","sections":["all"]}
+  ],
+  "repo_truth":"Fresh isolated contract review 4 returned CLEAN for the exact identity, operation allocation, two-branch preflight, and distinct unsafe-recovery refusal contracts. Engine already depends on getrandom and SHA-256. Compiler setup creates or preserves `.handbook` and optionally resets only planned runtime-state paths; no repository identity service or file exists. A separate retained-authority promotion lane is adding reusable crate-private ordered-lock/recovery observation APIs and may still be active.",
+  "allowed_scope":["Add `crates/engine/src/repository_invocation_identity.rs`, export its reviewed public types/service from engine lib, and add focused engine tests.","Edit compiler setup/lib and focused compiler setup tests to initialize or preserve the identity only on mutation-admitted setup outcomes.","Edit CLI setup rendering or add focused CLI setup tests only if an existing typed setup error projection must be extended after GitNexus impact.","Consume the retained-authority lane's crate-private lock/recovery/complete-registry observation APIs; coordinate missing interfaces with the parent instead of editing authority modules."],
+  "non_goals":["Do not edit registry/approval/promotion/lifecycle authority modules, compiler charter product, approver CLI, Flow, definitions, docs, proof/control/handoff/ledger files, or HCM-2.3.","Do not accept caller repository identity, raw allocator token, operation ID, entropy, path-derived identity, environment identity, or fixture identity in production.","Do not change frozen Admin/approval/public promotion request schemas, add a dependency, or commit."],
+  "tasks":["Run GitNexus upstream impact before every existing-symbol edit and report any HIGH/CRITICAL boundary before proceeding.","Write RED tests that independently reproduce the exact repository identity and five operation-ID vectors, all five typed operation mappings, byte lengths, entropy failure, closed preflight and recovery-refusal serialization/nullability/substitution negatives, and direct-engine opaque-ID compatibility boundary.","Implement `RepositoryInvocationOperationV1`, exact engine-owned identity/operation allocation outputs, `RepositoryInvocationPreflightResultV1`, and distinct `RepositoryInvocationRecoveryRefusalV1`; use fresh OS entropy in production and deterministic injected entropy only in tests.","Implement strict bounded no-follow identity observation and setup-only create-new initialization at `.handbook/repository-identity.v1` with same-parent temporary file, file fsync, atomic rename, parent fsync, exact 71 bytes, concurrency convergence, byte preservation, and unsafe-evidence refusal.","Under retained promotion+registry locks, run the one shared predecessor-ordered registry/approval recovery path before every identity read; before bootstrap admit valid file identity, after bootstrap require exact equality to the complete committed registry-chain state. Project unsafe recovery into the exact recovery-refusal envelope and identity/entropy failures into the exact preflight branches.","Integrate setup so create/refresh initializes or preserves identity only when setup may mutate, `--reset-state` never selects it, existing SetupOutcome semantics remain compatible, and focused compiler/CLI setup tests prove creation, preservation, tamper/unsafe/entropy/concurrency failure, and reset exclusion.","Run focused engine identity tests, compiler setup tests, CLI setup tests if changed, cargo check for engine/compiler/CLI, rustfmt check, and clippy for changed targets."],
+  "contracts_and_gates":["Only setup initializes identity; every product operation only reads it and allocates one fresh ID.","Mandatory recovery precedes identity resolution and can emit only the distinct exact recovery refusal; it never fabricates preflight or normal results.","Preflight/recovery refusal paths perform zero native calls and create no new current-operation-owned delta.","Compiler/CLI pass only the typed engine operation and never implement derivation or authority.","No public request/schema/CLI grammar change."],
+  "stop_conditions":["Stop and report before any HIGH/CRITICAL existing-symbol edit, public contract widening, or duplicate authority/recovery implementation.","If the retained-authority lane has not yet exposed a safe reusable crate-private API, complete only disjoint pure identity/DTO tests and implementation, then report the exact missing interface to the parent rather than editing its files."],
+  "return_contract":{"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"bounded_write","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","changed_files","impact_analysis","validation","remaining_protocol_work","parent_disposition"]}
+}

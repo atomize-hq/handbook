@@ -1,0 +1,107 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T081800Z--HCM-2-2--lifecycle-validation-authority-remediation",
+  "created_at_utc": "2026-07-20T08:18:00Z",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "remediation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "test-driven-development",
+    "incremental-implementation",
+    "debugging-and-error-recovery",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:3dbfcd29d827bd27bf75174c1c0fb3d82a3a1483b2009ecb4e6e045e320ce39d",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/compiler/src/charter_product.rs", "sha256": "238bdb9ffe6122b48e7434f50ab6da00d13680cd4371362e5ea9fadb43e36138"},
+      {"path": "crates/engine/src/charter_authority_workflow.rs", "sha256": "f33f1d209edc5b536e50a3c1b0ce4fb628684ec09bd4bf1c3910cee40542044e"},
+      {"path": "crates/engine/src/charter_intake.rs", "sha256": "9610b7b4534acc29ac478b4efcc8a98539384d04c825310c2f8ecc635efaae2c"},
+      {"path": "crates/engine/src/charter_lifecycle.rs", "sha256": "c5af33d4353b56d7912110bca321ec2555d93bcf02592dce6971dab44a0b2b8a"},
+      {"path": "crates/engine/src/charter_lifecycle_store.rs", "sha256": "55c03e2f04f320a2a2dfc8da8c365d13a806bd76eab1beed2317d9c5cb35bfc4"},
+      {"path": "crates/engine/src/charter_lineage_store.rs", "sha256": "3ebdfd367388c6e252742886657122bd4319cf3b54c4e6e0843558782d8719a1"},
+      {"path": "crates/engine/src/charter_promotion_workflow.rs", "sha256": "5b26b5f077ada5770040e152e62e09ec36b7d1e49ec9cdfa038155719f15657b"},
+      {"path": "crates/engine/tests/hcm_2_2_intake.rs", "sha256": "7fbe2bd99e1c7c5987288b51d29ee94e1e58e3fe8f001183fa1c152de2da67ec"},
+      {"path": "crates/engine/tests/hcm_2_2_lifecycle.rs", "sha256": "ddee2f6121ca1a11c6082e7c385e6149f8192b716816ca6d5f3356cd8a784bdd"},
+      {"path": "crates/engine/tests/hcm_2_2_promotion_workflow.rs", "sha256": "8c81a7640d57ad799220352a2d583135f8bf4fb7d655fc43fb67022faa0e0bd2"},
+      {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sha256": "026d255e8bd4a51821b4c54c0abe819f86227e98a3f49ef08513e9826104ac6a"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json", "sha256": "acbfa574c3e43eb51e65a5793abcb59ba58686e731719d2ef58f12e505900dc0"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sha256": "226d4cb2e6062465044d5308084976dca7cd783c96fb6953b748b24515bfc462"}
+    ],
+    "aggregate_fingerprint": "sha256:3dbfcd29d827bd27bf75174c1c0fb3d82a3a1483b2009ecb4e6e045e320ce39d"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.2 final-review Critical lifecycle-validation authority remediation only",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "post-finding remediation"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T075532Z--HCM-2-2--fresh-final-implementation-review-2.json", "sections": ["Critical lifecycle-validation finding"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sections": ["Acquisition and immutable lineage", "Deterministic canonical bytes, renderer, and lifecycle", "Product-path cutover", "Verification and promotion gates"]},
+    {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sections": ["Artifact candidate", "Artifact promotion record"]},
+    {"path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md", "sections": ["Phase 5 — Fresh review / remediation loop"]}
+  ],
+  "repo_truth": "Fresh final review 2 admitted the exact 175-path subject and returned a Critical finding: all shipped intake candidates contain an empty validation_result_refs array, so author-to-promote cannot succeed; promotion simultaneously accepts arbitrary nonempty strings without resolving an engine-owned validation result and self-addresses lifecycle observations. GitNexus reports HIGH upstream impact for evaluate_charter_intake and LOW for the candidate/lifecycle helpers; preserve the frozen public product grammar and use an additive, test-first repair.",
+  "allowed_scope": [
+    "Edit only the named engine intake, lineage, lifecycle, authority-workflow, and promotion-workflow modules; compiler Charter product adapter; lib.rs only if a safe public use-case export is required; exact affected HCM-2.2 engine/compiler/CLI tests and support; and a new engine-owned lifecycle-validation module or in-crate test module if needed.",
+    "Implement an engine-owned content-addressed lifecycle-validation result with closed exact bytes and no caller-authored authority fields. Persist it under the trusted repo-local state store with no-follow/create-new/exact-equal replay semantics.",
+    "During immutable candidate finalization, produce and bind the exact validation-result ref without a cyclic identity dependency. The result must bind candidate content/lineage identity as frozen by the contract, current canonical or create-only absence, lifecycle policy, current lifecycle state, every active observation, and every reopened coverage ID.",
+    "At promotion, resolve every validation_result_ref and verify its path, ID, fingerprint, candidate/current/policy/state bindings, complete active-observation set, and complete reopened-coverage set. Missing, forged, stale, incomplete, reordered, or excess authority must refuse before mutation.",
+    "Add RED then GREEN proof for the real shipped author-to-approve-to-promote-to-validate path plus missing, forged, stale, incomplete-observation, and reopened-coverage negatives. Run focused engine/compiler/CLI tests, strict Clippy, fmt, and diff checks."
+  ],
+  "non_goals": [
+    "No promotion-journal protocol repair, public test-hook repair, frozen SPEC/control/proof/handoff/ledger edits, commits, or user task hops in this packet.",
+    "No weakened lifecycle clearance, synthetic test-only validation refs, caller-authored validation authority, new CLI grammar, HCM-2.3 work, or adjacent cleanup."
+  ],
+  "tasks": [
+    "Read AGENTS and required skills; replay the 13-entry subject manifest before edits.",
+    "Refresh GitNexus upstream impact for every existing symbol before edit and report HIGH/CRITICAL results before changing it.",
+    "Resolve the candidate/validation-result identity ordering from the frozen contract without changing authority docs; stop if the frozen contract is genuinely cyclic or underspecified.",
+    "Write the narrow failing happy-path and refusal tests, then implement the smallest engine-owned validation authority vertical.",
+    "Run targeted and affected regression, lint, formatting, and diff gates; return exact findings and changed files."
+  ],
+  "contracts_and_gates": [
+    "The shipped author-to-approve-to-promote-to-validate path succeeds from engine-produced records only.",
+    "Every admitted validation ref resolves to exact engine-produced content-addressed bytes and current authority; arbitrary nonempty strings never count.",
+    "Lifecycle clearance addresses every active observation and every reopened coverage ID, with no silent self-addressing or partial set acceptance.",
+    "Rejected validation authority causes zero canonical, lifecycle, promotion-record, journal, or lineage delta."
+  ],
+  "stop_conditions": [
+    "Stop and return BLOCKED if the frozen candidate/validation identity contract is cyclic or requires a SPEC/schema revision beyond an implementation interpretation.",
+    "Stop if complete repair requires widening into the promotion transaction protocol reserved for the next remediation packet.",
+    "Do not create a commit or closeout record."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "changed_files", "validation", "parent_disposition"]
+  }
+}

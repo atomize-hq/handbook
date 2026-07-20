@@ -82,7 +82,14 @@ fn refusal_required_artifact_missing() {
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
     let refusal = result.refusal.expect("refusal");
-    assert_eq!(refusal.category, RefusalCategory::RequiredArtifactMissing);
+    assert_eq!(refusal.category, RefusalCategory::RequiredArtifactInvalid);
+    assert_eq!(
+        refusal.broken_subject,
+        SubjectRef::CanonicalArtifact {
+            kind: CanonicalArtifactKind::Charter,
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
+        }
+    );
 }
 
 #[cfg(unix)]
@@ -125,7 +132,7 @@ fn refusal_required_artifact_empty() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(&root.join(".handbook/charter/CHARTER.md"), b"");
+    write_file(&root.join(".handbook/project/charter.yaml"), b"");
     write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"spec",
@@ -133,7 +140,14 @@ fn refusal_required_artifact_empty() {
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
     let refusal = result.refusal.expect("refusal");
-    assert_eq!(refusal.category, RefusalCategory::RequiredArtifactEmpty);
+    assert_eq!(refusal.category, RefusalCategory::RequiredArtifactInvalid);
+    assert_eq!(
+        refusal.broken_subject,
+        SubjectRef::CanonicalArtifact {
+            kind: CanonicalArtifactKind::Charter,
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
+        }
+    );
 }
 
 #[test]
@@ -142,7 +156,7 @@ fn refusal_required_artifact_starter_template() {
     let root = dir.path();
 
     write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
+        &root.join(".handbook/project/charter.yaml"),
         setup_starter_template_bytes(CanonicalArtifactKind::Charter),
     );
     write_file(
@@ -152,15 +166,12 @@ fn refusal_required_artifact_starter_template() {
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
     let refusal = result.refusal.expect("refusal");
-    assert_eq!(
-        refusal.category,
-        RefusalCategory::RequiredArtifactStarterTemplate
-    );
+    assert_eq!(refusal.category, RefusalCategory::RequiredArtifactInvalid);
     assert_eq!(
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
             kind: CanonicalArtifactKind::Charter,
-            canonical_repo_relative_path: ".handbook/charter/CHARTER.md".to_owned(),
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
     assert_eq!(
@@ -174,7 +185,7 @@ fn refusal_required_artifact_invalid() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(&root.join(".handbook/charter/CHARTER.md"), b"charter");
+    write_file(&root.join(".handbook/project/charter.yaml"), b"charter");
     write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"spec",
@@ -187,7 +198,7 @@ fn refusal_required_artifact_invalid() {
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
             kind: CanonicalArtifactKind::Charter,
-            canonical_repo_relative_path: ".handbook/charter/CHARTER.md".to_owned(),
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
     assert_eq!(
@@ -201,7 +212,7 @@ fn refusal_required_artifact_read_error_is_selected_for_malformed_required_path(
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    std::fs::create_dir_all(root.join(".handbook/charter/CHARTER.md")).expect("charter dir");
+    std::fs::create_dir_all(root.join(".handbook/project/charter.yaml")).expect("charter dir");
     write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"spec",
@@ -209,17 +220,17 @@ fn refusal_required_artifact_read_error_is_selected_for_malformed_required_path(
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
     let refusal = result.refusal.expect("refusal");
-    assert_eq!(refusal.category, RefusalCategory::ArtifactReadError);
+    assert_eq!(refusal.category, RefusalCategory::RequiredArtifactInvalid);
     assert_eq!(
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
             kind: CanonicalArtifactKind::Charter,
-            canonical_repo_relative_path: ".handbook/charter/CHARTER.md".to_owned(),
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
     assert_eq!(
         render_next_safe_action_value(&refusal.next_safe_action),
-        "run `handbook setup refresh`"
+        "run `handbook author charter --from-inputs <path|->`"
     );
 }
 

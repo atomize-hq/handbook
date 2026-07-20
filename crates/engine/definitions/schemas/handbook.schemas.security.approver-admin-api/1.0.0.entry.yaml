@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.schema-registry-entry",
+  "schema_version": "1.0",
+  "content_schema_id": "handbook.schemas.security.approver-admin-api",
+  "content_schema_version": "1.0.0",
+  "document_ref": "definitions/schemas/handbook.schemas.security.approver-admin-api/1.0.0.schema.json",
+  "document_fingerprint": "sha256:d9ed6682d66c4417d76df2e376bf8e48b092a28a830eba6f049853791c952228",
+  "closure_fingerprint": "sha256:84cb605b56e0c9ff1dcd2a34320d2b1c9c7cf7d019b1e592b1aaa5cf9dc6e999",
+  "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+  "media_type": "application/schema+json",
+  "compatibility": "exact",
+  "extensions": {},
+  "entry_fingerprint": "sha256:50af81e84e6134cdad4bffd250c4ac421405aed2415d1a3eae4f3c48e93dccd8"
+}

@@ -1,0 +1,137 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T012021Z--HCM-2-2--authority-workflow-services-implementation",
+  "created_at_utc": "2026-07-20T01:20:21Z",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "resume_same_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "source-driven-development",
+    "spec-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "api-and-interface-design",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": "HCM-2.2",
+  "subject_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "4f6124e859ca036d7dd77899e22b7a5b4142429ac15c1e6d1b5ac74d160515b2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+        "sha256": "afaf40256cc0b9aed8d08a4ef8b689fca7d0e889b46b7c5ea57e4ae45b195d17"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+        "sha256": "ae8ca42931573a88e1e0c26b211853bf9bb00107212fa6d7885eee58523f583e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8"
+  },
+  "active_resolution": {
+    "level": "engine_authority_workflow_implementation",
+    "scope_horizon": "HCM-2.2-authority-workflow-services",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "approved_slice_packet",
+    "memory_horizon": "live_repository_truth",
+    "validation_horizon": "focused_authority_red_green"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "Acquisition and immutable lineage",
+        "Global authority lock order and retained observations",
+        "Promotion transaction protocol",
+        "API, security, and compatibility posture"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authenticator-transcript-vectors-v1.0.json",
+      "sections": ["all"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-vectors-v1.0.json",
+      "sections": ["all"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json",
+      "sections": ["all"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/security-boundary-limit-vectors-v1.0.json",
+      "sections": ["all"]
+    }
+  ],
+  "repo_truth": "Definition/profile, canonical Charter, intake evaluator, lifecycle state machine, append-only lineage store, promotion transaction, native strict reads, and CTAP codec/security primitives are present in the shared worktree. Compiler/CLI mutation adapters remain intentionally fail-closed until this lane lands engine-owned services.",
+  "allowed_scope": [
+    "Add narrowly factored engine workflow modules and focused hcm_2_2 authority tests for author persistence, approval construction/persistence, promotion/lifecycle record builders, persistent approver-registry operations, and exact native-port composition.",
+    "Edit crates/engine/src/approver_registry.rs and crates/engine/src/charter_authenticator.rs only after required GitNexus impact analysis; coordinate additive crates/engine/src/lib.rs exports with the parent.",
+    "Consume, but do not weaken or duplicate, TrustedLineageStoreV1 and CharterAuthorityTransactionServiceV1.",
+    "Use RED tests first and run with CARGO_TARGET_DIR=D:\\codex-build\\handbook-hcm22 and TEMP/TMP=D:\\codex-temp\\handbook-hcm22."
+  ],
+  "non_goals": [
+    "Do not edit definitions, profiles, compiler, CLI, flow, Environment Inventory, skills, proof/control, planning, handoff, ledger, or other dispatch files.",
+    "Do not accept caller-supplied semantic records, ceremony refs, fingerprints, native response files, software signatures, weaker fallback authority, or HCM-2.3 scope.",
+    "Do not commit or create handoffs, ledger rows, dispatches, or user-visible task hops."
+  ],
+  "tasks": [
+    "Read the complete dispatch, exact authority sections/vectors, and live engine modules.",
+    "Implement engine-owned atomic author persistence for exact intake/candidate JCS plus normalized candidate content.",
+    "Implement approval construction/persistence from committed candidate, registry pair, native assertion, waiver ordering, and shared authenticator-use authority; refuse before delta on any mismatch.",
+    "Implement promotion/lifecycle record builders that re-resolve retained lineage and call the existing promotion transaction service without compiler-side semantic construction.",
+    "Complete persistent bootstrap/add/revoke/update registry operations behind the four frozen signatures and caller-intent-only request/result DTOs, including exact unavailable all-null refusal.",
+    "Return exact implemented versus remaining protocol coverage, changed files, RED/GREEN evidence, impacts, and product integration signatures."
+  ],
+  "contracts_and_gates": [
+    "No compiler/CLI adapter constructs a semantic record or supplies ceremony identity.",
+    "Every success publishes only exact content-addressed records after the authority transaction commit; every refusal has null semantic refs and no changed paths.",
+    "All candidate/approval/promotion basis, registry pair, external refs, and fingerprints are re-resolved from committed engine state.",
+    "Unsupported or unavailable native authority refuses before platform calls, journals, records, canonical truth, registry state, or lifecycle delta."
+  ],
+  "stop_conditions": [
+    "Stop before any HIGH or CRITICAL existing-symbol edit and return the blast radius to the parent.",
+    "Return blocked if the frozen DTOs or exact vectors conflict with the live transaction service without a packet-authorized resolution.",
+    "Return bounded gaps rather than inventing HCM-2.3 or weakening native authority."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "impact_analysis",
+      "validation",
+      "remaining_protocol_work",
+      "product_integration",
+      "parent_disposition"
+    ]
+  }
+}

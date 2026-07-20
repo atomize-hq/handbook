@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.schema-registry-entry",
+  "schema_version": "1.0",
+  "content_schema_id": "handbook.schemas.security.authenticator-make-credential-response",
+  "content_schema_version": "1.0.0",
+  "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-make-credential-response/1.0.0.schema.json",
+  "document_fingerprint": "sha256:2dd22f26b5a949a84966f7ffa25c35998b5f0b08664a53937339b6e7ebd620a2",
+  "closure_fingerprint": "sha256:8d86aa32abb313972a6105f4858c515d759745e2595e7794507936360d10f5bb",
+  "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+  "media_type": "application/schema+json",
+  "compatibility": "exact",
+  "extensions": {},
+  "entry_fingerprint": "sha256:51ea813057dea7777fccbe63239df09f1d7a4a963b4781b6bebc993d7b50acab"
+}

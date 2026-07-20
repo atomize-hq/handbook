@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.schema-registry-entry",
+  "schema_version": "1.0",
+  "content_schema_id": "handbook.schemas.security.authenticator-get-assertion-response",
+  "content_schema_version": "1.0.0",
+  "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-get-assertion-response/1.0.0.schema.json",
+  "document_fingerprint": "sha256:7dbed64cc1a2bec3ca3a3348b6c46626d76287f876f4028f81934b6c3dd54be6",
+  "closure_fingerprint": "sha256:617d49aa3aa23eb1eab4a6489aea4043966abdfe458ccb0cb1f1757ad6be4a26",
+  "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+  "media_type": "application/schema+json",
+  "compatibility": "exact",
+  "extensions": {},
+  "entry_fingerprint": "sha256:d8c9a89434c513e3ecb301ee0ccb5a8fe219ce262c239ba94cba652b73938768"
+}

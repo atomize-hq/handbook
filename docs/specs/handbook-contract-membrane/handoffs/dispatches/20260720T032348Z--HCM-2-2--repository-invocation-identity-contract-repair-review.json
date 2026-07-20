@@ -1,0 +1,46 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T032348Z--HCM-2-2--repository-invocation-identity-contract-repair-review",
+  "created_at_utc": "2026-07-20T03:23:48Z",
+  "source_handoff_ids": ["20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "source-driven-development", "api-and-interface-design", "code-review-and-quality"],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": "HCM-2.2-contract-repair",
+  "subject_fingerprint": "sha256:41d03e12508d2552d6aa5e09ccf00393658453fc2fa085703b6823b9ff303080",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path":"docs/specs/handbook-contract-membrane/03-seam-crosswalk.md","sha256":"22f8e5ea897240f987597f91bd94031c31bef77af761fb264118d23a41947f55"},
+      {"path":"docs/specs/handbook-contract-membrane/04-phase-slice-map.md","sha256":"3d1fa0ab86d00c4b4b1fe3b8599c08cb5d703582be28617a3e6d07a5e06d8344"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sha256":"89c5c6a94db8db4069eb7de5f6a476dae34ba8081cf78745ff86694538df833f"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/repository-invocation-identity-vectors-v1.0.json","sha256":"928e80d87fe7a354dc47fef7247f569a5dcf47bd74e300e88064f7f28838a615"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md","sha256":"3d3f7a41c93d8498f685ae1d764923fad552115df42cd613a742f99991d853c6"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md","sha256":"0c9ce9b594a39b3f588d44f98fe597e439e193ef8cb65cd69d4ab3d0f2772f4c"}
+    ],
+    "aggregate_fingerprint": "sha256:41d03e12508d2552d6aa5e09ccf00393658453fc2fa085703b6823b9ff303080"
+  },
+  "active_resolution": {"level":"contract_repair_review","scope_horizon":"HCM-2.2-product-authority","detail_resolution":"high","temporal_horizon":"current_orchestration","authority_horizon":"smallest_cross_document_repair","memory_horizon":"manifest_subject_only","validation_horizon":"pre_behavior_review"},
+  "authority_refs": [
+    {"path":"docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md","sections":["PHASE 2 — SPECIFY, PLAN, AND DECOMPOSE","PHASE 5 — MANDATORY FRESH INDEPENDENT REVIEW"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sections":["Acquisition and immutable lineage","Approval authority and bootstrap","API, security, and compatibility posture","Product-path cutover","Verification and promotion gates"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-1.0.0.schema.json","sections":["all"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/user-handle-derivation-vectors-v1.0.json","sections":["all"]}
+  ],
+  "repo_truth": "Implementation exposed a canonical contradiction: frozen approve/admin CLI forms omit operation_id and repository_identity_fingerprint, while their closed engine requests require them and the approved packet defined no producer. Behavior-changing product integration is paused. The parent made the smallest proposed cross-document repair: setup initializes one exact engine-owned durable repository identity outside reset-state, committed registry state becomes its equality authority, and the engine allocates bounded operation IDs from frozen domain-separated CSPRNG derivations without CLI widening.",
+  "allowed_scope": ["Read the exact manifest subject and named authority only.", "Independently recompute every vector digest and byte/length claim.", "Return actionable contract findings to the parent; do not edit files."],
+  "non_goals": ["Do not implement Rust behavior, edit the subject, approve based on intent alone, or review unrelated HCM-2.2 implementation.", "Do not write a global handoff, ledger entry, proof wall, or commit."],
+  "tasks": ["Verify the repair actually closes both missing-authority leaves without widening frozen CLI grammar or moving semantic authority into compiler/CLI.", "Audit initialization/current-authority/recovery/reset/concurrency/unsafe-path/CSPRNG/native-unavailable behavior for a total fail-closed contract with no hidden delta contradiction.", "Audit operation-token domain, exact preimages, lengths, collision/entropy posture, request/journal/result continuity, and adapter boundary.", "Independently recompute the repository identity and all five operation-ID vector results from their declared byte preimages.", "Classify each finding as local_remediation, cross_document_repair, resolution_escalation, optional, or invalid and return CLEAN only if no valid actionable finding remains."],
+  "contracts_and_gates": ["Canonical contradiction must be repaired and fresh-review CLEAN before product behavior resumes.", "Repository identity has exactly one durable source before bootstrap and exact equality with committed registry authority after bootstrap.", "Setup remains non-canonical-authoring and reset-state cannot rotate identity.", "Approve/admin native unavailability and invalid identity/entropy paths produce zero native calls and no semantic/journal/registry/lifecycle/canonical delta.", "Compiler/CLI accept no identity/operation-ID inputs and construct no semantic authority."],
+  "stop_conditions": ["Return BLOCKED only for a genuine missing authority that cannot be resolved inside this bounded HCM-2.2 repair.", "Do not inspect mutable implementation as a substitute for contract review."],
+  "return_contract": {"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"read_only","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","vector_recomputation","authority_assessment","validation","parent_disposition"]}
+}

@@ -10,7 +10,7 @@ use serde::Serialize;
 use std::path::Path;
 
 pub const DOCTOR_REPORT_SCHEMA_ID: &str = "handbook.repository-doctor-report";
-pub const DOCTOR_REPORT_SCHEMA_VERSION: &str = "1.1.0";
+pub const DOCTOR_REPORT_SCHEMA_VERSION: &str = "1.2.0";
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct DoctorProjectContextRow {
@@ -20,6 +20,51 @@ pub struct DoctorProjectContextRow {
     pub source_fingerprint: String,
     pub rendered_output_fingerprint: String,
     pub rendered_media_type: String,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DoctorCharterDefinitionClosureStatus {
+    Resolved,
+    Unavailable,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DoctorCharterLifecycleState {
+    Unobserved,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DoctorCharterNextAction {
+    RunCharterAuthor,
+    RepairCanonicalCharter,
+    RepairDefinitionClosure,
+    ObserveLifecycle,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
+pub struct DoctorCharterDefinitionRow {
+    pub exact_ref: String,
+    pub definition_fingerprint: String,
+    pub package_path: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
+pub struct DoctorCharterRow {
+    pub instance_id: String,
+    pub kind_ref: String,
+    pub canonical_path: String,
+    pub definition_closure_status: DoctorCharterDefinitionClosureStatus,
+    pub definition_closure: Vec<DoctorCharterDefinitionRow>,
+    pub canonical_status: handbook_engine::ArtifactInspectionStatus,
+    pub canonical_reason: handbook_engine::ArtifactInspectionReason,
+    pub lifecycle_state: DoctorCharterLifecycleState,
+    pub source_fingerprint: Option<String>,
+    pub rendered_output_fingerprint: Option<String>,
+    pub rendered_media_type: Option<String>,
+    pub next_actions: Vec<DoctorCharterNextAction>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
@@ -34,6 +79,7 @@ pub struct DoctorReport {
     pub capabilities: Vec<ProfileCapabilityRow>,
     pub artifacts: Vec<ProfileArtifactRow>,
     pub project_context: Option<DoctorProjectContextRow>,
+    pub charter: Option<DoctorCharterRow>,
     pub status: RepositoryReadinessStatus,
 }
 
@@ -104,6 +150,32 @@ fn doctor_report_from_inspection(
     decisions: &ResolvedProfileDecisions,
     inspection: &ProfileInspectionReport,
 ) -> DoctorReport {
+    let definition_closure = handbook_engine::load_shipped_charter_definition_registry()
+        .and_then(|registry| {
+            registry.validate_selected_decisions(decisions)?;
+            Ok(registry)
+        })
+        .ok();
+    let definition_closure_status = if definition_closure.is_some() {
+        DoctorCharterDefinitionClosureStatus::Resolved
+    } else {
+        DoctorCharterDefinitionClosureStatus::Unavailable
+    };
+    let definition_closure_rows = definition_closure
+        .as_ref()
+        .map(|registry| {
+            registry
+                .refs()
+                .into_iter()
+                .filter_map(|reference| registry.record(reference))
+                .map(|record| DoctorCharterDefinitionRow {
+                    exact_ref: record.exact_ref().as_str().to_owned(),
+                    definition_fingerprint: record.definition_fingerprint().as_str().to_owned(),
+                    package_path: record.package_path().to_owned(),
+                })
+                .collect::<Vec<_>>()
+        })
+        .unwrap_or_default();
     let project_context = inspection
         .artifacts()
         .iter()
@@ -136,6 +208,46 @@ fn doctor_report_from_inspection(
                     rendered_media_type: "text/markdown".to_owned(),
                 })
         });
+    let charter = inspection
+        .artifacts()
+        .iter()
+        .find(|artifact| artifact.instance_id().as_str() == "project_authority")
+        .map(|artifact| {
+            let projection = artifact.charter_projection();
+            let mut next_actions = if projection.is_some() {
+                vec![DoctorCharterNextAction::ObserveLifecycle]
+            } else if artifact.status() == handbook_engine::ArtifactInspectionStatus::Missing {
+                vec![DoctorCharterNextAction::RunCharterAuthor]
+            } else {
+                vec![DoctorCharterNextAction::RepairCanonicalCharter]
+            };
+            if definition_closure_status == DoctorCharterDefinitionClosureStatus::Unavailable {
+                next_actions.insert(0, DoctorCharterNextAction::RepairDefinitionClosure);
+            }
+            DoctorCharterRow {
+                instance_id: artifact.instance_id().as_str().to_owned(),
+                kind_ref: decisions
+                    .artifact_decisions()
+                    .iter()
+                    .find(|decision| decision.instance_id() == artifact.instance_id())
+                    .expect("inspection row retains selected decision")
+                    .kind_ref()
+                    .as_str()
+                    .to_owned(),
+                canonical_path: artifact.canonical_path().to_owned(),
+                definition_closure_status,
+                definition_closure: definition_closure_rows.clone(),
+                canonical_status: artifact.status(),
+                canonical_reason: artifact.reason(),
+                lifecycle_state: DoctorCharterLifecycleState::Unobserved,
+                source_fingerprint: projection
+                    .map(|value| value.source_fingerprint().as_str().to_owned()),
+                rendered_output_fingerprint: projection
+                    .map(|value| value.rendered_output_fingerprint().as_str().to_owned()),
+                rendered_media_type: projection.map(|_| "text/markdown".to_owned()),
+                next_actions,
+            }
+        });
     let projection = project_profile_readiness(decisions, inspection);
     DoctorReport {
         schema_id: DOCTOR_REPORT_SCHEMA_ID.to_owned(),
@@ -148,6 +260,7 @@ fn doctor_report_from_inspection(
         capabilities: projection.capabilities,
         artifacts: projection.artifacts,
         project_context,
+        charter,
         status: projection.status,
     }
 }

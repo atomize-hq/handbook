@@ -6,6 +6,14 @@ use std::process::{Command, Output};
 
 const FIXED_NOW_UTC: &str = "2026-01-28T18:35:10Z";
 const FOUNDATION_FLOW_DEMO_HAPPY_PATH_FEATURE_ID: &str = "fs-m4-foundation-journey-2026-04";
+const CANONICAL_CHARTER_YAML: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
+));
+const RUNTIME_RECORD_VECTORS: &[u8] = include_bytes!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json"
+));
 
 #[derive(Debug)]
 struct ConsumerHarnessRun {
@@ -261,6 +269,7 @@ fn planning_ready_repo() -> (tempfile::TempDir, std::path::PathBuf) {
     let (dir, root) = pipeline_proof_corpus_support::install_committed_fixture_repo(
         "tests/fixtures/planning_ready_repo",
     );
+    write_valid_selected_charter(&root);
     write_valid_selected_project_context(&root);
     (dir, root)
 }
@@ -270,6 +279,7 @@ fn planning_ready_repo_with_nested_cwd() -> (tempfile::TempDir, std::path::PathB
         pipeline_proof_corpus_support::install_committed_fixture_checkout_with_nested_cwd(
             "tests/fixtures/planning_ready_repo",
         );
+    write_valid_selected_charter(&root);
     write_valid_selected_project_context(&root);
     (dir, nested)
 }
@@ -291,7 +301,9 @@ fn execution_demo_repo_with_nested_cwd() -> (tempfile::TempDir, std::path::PathB
             "tests/fixtures/execution_demo/basic",
             "tests/fixtures/execution_demo/basic",
         );
-    write_valid_selected_project_context(&root.join("tests/fixtures/execution_demo/basic"));
+    let fixture_root = root.join("tests/fixtures/execution_demo/basic");
+    write_valid_selected_charter(&fixture_root);
+    write_valid_selected_project_context(&fixture_root);
     (dir, nested)
 }
 
@@ -301,7 +313,9 @@ fn execution_demo_repo() -> (tempfile::TempDir, std::path::PathBuf) {
             "tests/fixtures/execution_demo/basic",
             "tests/fixtures/execution_demo/basic",
         );
-    write_valid_selected_project_context(&root.join("tests/fixtures/execution_demo/basic"));
+    let fixture_root = root.join("tests/fixtures/execution_demo/basic");
+    write_valid_selected_charter(&fixture_root);
+    write_valid_selected_project_context(&fixture_root);
     (dir, root)
 }
 
@@ -313,15 +327,13 @@ fn committed_execution_demo_fixture_dir_under_temp_git_root(
             "tests/fixtures/execution_demo/basic",
         );
     let fixture_dir = root.join("tests/fixtures/execution_demo/basic");
+    write_valid_selected_charter(&fixture_dir);
     write_valid_selected_project_context(&fixture_dir);
     (dir, fixture_dir)
 }
 
 fn repair_to_ready(root: &std::path::Path) {
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
+    write_valid_selected_charter(root);
     write_valid_selected_project_context(root);
     write_file(
         &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
@@ -375,10 +387,7 @@ fn starter_template_bytes_for_path(path: &str) -> &'static [u8] {
 
 fn partial_system_repo() -> tempfile::TempDir {
     let dir = tempfile::tempdir().expect("tempdir");
-    write_file(
-        dir.path().join(".handbook/charter/CHARTER.md").as_path(),
-        valid_charter_markdown().as_bytes(),
-    );
+    write_valid_selected_charter(dir.path());
     write_valid_selected_project_context(dir.path());
     write_file(
         dir.path()
@@ -389,6 +398,7 @@ fn partial_system_repo() -> tempfile::TempDir {
     dir
 }
 
+#[cfg(any())]
 fn valid_charter_markdown() -> &'static str {
     "# Engineering Charter — Handbook
 
@@ -513,6 +523,163 @@ fn write_valid_selected_project_context(root: &std::path::Path) {
     write_file(
         &root.join(".handbook/project/context.yaml"),
         valid_selected_project_context_yaml().as_bytes(),
+    );
+}
+
+fn write_valid_selected_charter(root: &std::path::Path) {
+    let vector = |record_class: &str| {
+        let fixture: serde_json::Value =
+            serde_json::from_slice(RUNTIME_RECORD_VECTORS).expect("runtime record vectors");
+        fixture["vectors"]
+            .as_array()
+            .expect("runtime vector array")
+            .iter()
+            .find(|row| row["record_class"] == record_class)
+            .unwrap_or_else(|| panic!("missing runtime record vector {record_class}"))["record"]
+            .clone()
+    };
+    let canonical = |value: &serde_json::Value| {
+        serde_json::to_vec(value).expect("canonical test record serialization")
+    };
+    let resign = |value: &mut serde_json::Value,
+                  id_field: &str,
+                  fingerprint_field: &str,
+                  prefix: &str,
+                  audit_only: &[&str]| {
+        let mut preimage = value.clone();
+        let object = preimage.as_object_mut().expect("runtime record object");
+        object.remove(id_field);
+        object.remove(fingerprint_field);
+        for field in audit_only {
+            object.remove(*field);
+        }
+        let fingerprint = handbook_engine::DefinitionFingerprint::from_json_value(&preimage)
+            .expect("runtime record fingerprint")
+            .to_string();
+        let id = format!(
+            "{prefix}_{}",
+            fingerprint
+                .strip_prefix("sha256:")
+                .expect("sha256 fingerprint")
+        );
+        value[id_field] = serde_json::Value::String(id);
+        value[fingerprint_field] = serde_json::Value::String(fingerprint);
+    };
+
+    let store = handbook_engine::TrustedLineageStoreV1::new(root);
+    for (class, vector_name) in [
+        (
+            handbook_engine::LineageRecordClassV1::AuthenticatorMakeCredentialResponse,
+            "authenticator-make-credential-response",
+        ),
+        (
+            handbook_engine::LineageRecordClassV1::AuthenticatorRegistration,
+            "authenticator-registration",
+        ),
+        (
+            handbook_engine::LineageRecordClassV1::RegistryState,
+            "registry-state",
+        ),
+        (
+            handbook_engine::LineageRecordClassV1::RegistryTransition,
+            "registry-transition",
+        ),
+        (
+            handbook_engine::LineageRecordClassV1::AuthenticatorGetAssertionResponse,
+            "authenticator-get-assertion-response",
+        ),
+        (
+            handbook_engine::LineageRecordClassV1::AuthenticatorAssertion,
+            "authenticator-assertion",
+        ),
+        (handbook_engine::LineageRecordClassV1::Intake, "intake"),
+        (
+            handbook_engine::LineageRecordClassV1::Candidate,
+            "candidate",
+        ),
+        (handbook_engine::LineageRecordClassV1::Approval, "approval"),
+    ] {
+        store
+            .append_record(class, &canonical(&vector(vector_name)))
+            .expect("seed retained Charter lineage");
+    }
+    write_file(
+        &root.join(".handbook/state/candidates/candidate.yaml"),
+        CANONICAL_CHARTER_YAML.as_bytes(),
+    );
+
+    let canonical_fingerprint =
+        handbook_engine::DefinitionFingerprint::from_bytes(CANONICAL_CHARTER_YAML.as_bytes())
+            .to_string();
+    let mut promotion = vector("promotion");
+    promotion["canonical_artifact_fingerprint"] =
+        serde_json::Value::String(canonical_fingerprint.clone());
+    resign(
+        &mut promotion,
+        "promotion_id",
+        "promotion_fingerprint",
+        "promotion",
+        &[],
+    );
+    let promotion_id = promotion["promotion_id"]
+        .as_str()
+        .expect("promotion id")
+        .to_owned();
+
+    let mut lifecycle = vector("lifecycle-transition");
+    lifecycle["new_observation_refs"] = serde_json::Value::Array(Vec::new());
+    lifecycle["active_observation_refs"] = serde_json::Value::Array(Vec::new());
+    lifecycle["result_state"] = serde_json::Value::String("current".to_owned());
+    lifecycle["clearance_promotion_ref"] =
+        serde_json::Value::String(format!("promotions/{promotion_id}.json"));
+    resign(
+        &mut lifecycle,
+        "transition_id",
+        "transition_fingerprint",
+        "lifecycle-transition",
+        &["transitioned_at_utc"],
+    );
+
+    let promotion = store
+        .append_record(
+            handbook_engine::LineageRecordClassV1::Promotion,
+            &canonical(&promotion),
+        )
+        .expect("promotion fixture record");
+    let lifecycle = store
+        .append_record(
+            handbook_engine::LineageRecordClassV1::LifecycleTransition,
+            &canonical(&lifecycle),
+        )
+        .expect("lifecycle fixture record");
+    let intent = serde_json::json!({
+        "schema_id": "handbook.promotion-transaction-intent",
+        "schema_version": "1.0",
+        "transaction_id": "cli-surface-ready-charter",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "canonical_fingerprint": canonical_fingerprint,
+        "expected_current_artifact_fingerprint": null,
+        "had_old_canonical": false,
+        "promotion_ref": promotion.relative_ref,
+        "promotion_fingerprint": promotion.fingerprint,
+        "lifecycle_transition_ref": lifecycle.relative_ref,
+        "lifecycle_transition_fingerprint": lifecycle.fingerprint,
+    });
+    let intent_bytes = canonical(&intent);
+    let marker = format!(
+        "{}\n",
+        handbook_engine::DefinitionFingerprint::from_bytes(&intent_bytes)
+    );
+    let committed =
+        root.join(".handbook/state/transactions/promotions/cli-surface-ready-charter.committed");
+    std::fs::create_dir_all(&committed).expect("committed promotion fixture journal");
+    std::fs::write(committed.join("intent.json"), intent_bytes)
+        .expect("committed promotion fixture intent");
+    std::fs::write(committed.join("committed"), marker.as_bytes())
+        .expect("committed promotion fixture marker");
+    write_file(
+        &root.join(".handbook/project/charter.yaml"),
+        CANONICAL_CHARTER_YAML.as_bytes(),
     );
 }
 
@@ -2053,7 +2220,11 @@ fn help_lists_setup_first() {
     let stdout = String::from_utf8(output.stdout).expect("help is utf-8");
     let command_lines = command_section_lines(&stdout);
 
-    assert_eq!(command_lines.len(), 6, "expected six command lines in help");
+    assert_eq!(
+        command_lines.len(),
+        7,
+        "expected seven command lines in help"
+    );
     assert!(
         command_lines[0].starts_with("setup "),
         "setup should be first: {command_lines:?}"
@@ -2063,20 +2234,24 @@ fn help_lists_setup_first() {
         "author should be second: {command_lines:?}"
     );
     assert!(
-        command_lines[2].starts_with("pipeline "),
-        "pipeline should be third: {command_lines:?}"
+        command_lines[2].starts_with("approvers "),
+        "approvers should be third: {command_lines:?}"
     );
     assert!(
-        command_lines[3].starts_with("generate "),
-        "generate should be fourth: {command_lines:?}"
+        command_lines[3].starts_with("pipeline "),
+        "pipeline should be fourth: {command_lines:?}"
     );
     assert!(
-        command_lines[4].starts_with("inspect "),
-        "inspect should be fifth: {command_lines:?}"
+        command_lines[4].starts_with("generate "),
+        "generate should be fifth: {command_lines:?}"
     );
     assert!(
-        command_lines[5].starts_with("doctor "),
-        "doctor should be sixth: {command_lines:?}"
+        command_lines[5].starts_with("inspect "),
+        "inspect should be sixth: {command_lines:?}"
+    );
+    assert!(
+        command_lines[6].starts_with("doctor "),
+        "doctor should be seventh: {command_lines:?}"
     );
 }
 
@@ -4018,6 +4193,14 @@ fn pipeline_compile_refuses_stale_route_basis_after_state_set() {
 fn pipeline_compile_refuses_malformed_route_basis() {
     let (_dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
     pipeline_proof_corpus_support::install_state_seed(root.as_path(), "malformed_route_basis.yaml");
+    let state_path = root.join(".handbook/state/pipeline/pipeline.foundation_inputs.yaml");
+    let state = std::fs::read_to_string(&state_path).expect("malformed route-basis state");
+    let absolute_root = root.to_string_lossy().replace('\\', "/");
+    std::fs::write(
+        &state_path,
+        state.replace("/tmp/foundation-inputs", &absolute_root),
+    )
+    .expect("normalize seeded repo root for native platform");
 
     let output = run_in(
         root.as_path(),
@@ -4336,7 +4519,7 @@ fn pipeline_state_set_field_rejects_invalid_paths_and_values() {
     let invalid_value_stdout = String::from_utf8(invalid_value.stdout).expect("stdout is utf-8");
     assert_eq!(
         invalid_value_stdout.trim_end(),
-        "REFUSED: route state mutation error: route state mutation is invalid: repo-relative ref `/tmp/CHARTER.md` must not be absolute"
+        "REFUSED: route state mutation error: route state mutation is invalid: repo-relative ref `/tmp/CHARTER.md` must be a clean repo-relative path"
     );
 }
 
@@ -4633,15 +4816,48 @@ fn setup_refresh_help_matches_snapshot() {
 
 #[test]
 fn author_help_matches_snapshot() {
-    assert_help_snapshot(&["author", "--help"], "handbook-author-help.txt");
+    let output = run_in(workspace_root().as_path(), &["author", "--help"]);
+    assert!(output.status.success());
+    let rendered = String::from_utf8(output.stdout).expect("help is utf-8");
+    let rendered = rendered.replace("handbook.exe", "handbook");
+    assert_in_order(
+        &rendered,
+        &[
+            "Usage: handbook author [COMMAND]",
+            "charter                Create, approve, promote, or validate the selected canonical Charter",
+            "project-context        Deterministically author canonical `.handbook/project/context.yaml`",
+            "environment-inventory  Deterministically author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`",
+        ],
+    );
+    assert!(!rendered.contains(".handbook/charter/CHARTER.md"));
 }
 
 #[test]
 fn author_charter_help_matches_snapshot() {
-    assert_help_snapshot(
-        &["author", "charter", "--help"],
-        "handbook-author-charter-help.txt",
+    let output = run_in(workspace_root().as_path(), &["author", "charter", "--help"]);
+    assert!(output.status.success());
+    let rendered = String::from_utf8(output.stdout).expect("help is utf-8");
+    let rendered = rendered.replace("handbook.exe", "handbook");
+    assert!(rendered.contains("Usage: handbook author charter [OPTIONS]"));
+    assert_in_order(
+        &rendered,
+        &[
+            "--mode <MODE>",
+            "--from-inputs <path|->",
+            "--expected-current-fingerprint <EXPECTED_CURRENT_FINGERPRINT>",
+            "--approve-candidate <APPROVE_CANDIDATE>",
+            "--approval-class <APPROVAL_CLASS>",
+            "--authority-ref <AUTHORITY_REF>",
+            "--accept-waiver-ref <ACCEPT_WAIVER_REFS>",
+            "--promote-candidate <PROMOTE_CANDIDATE>",
+            "--approval-ref <APPROVAL_REF>",
+            "--validate",
+            "--json",
+        ],
     );
+    assert!(!rendered.contains(".handbook/charter/CHARTER.md"));
+    assert!(!rendered.contains("--interactive"));
+    assert!(!rendered.contains("--yes"));
 }
 
 #[test]
@@ -4662,17 +4878,10 @@ fn author_environment_inventory_help_matches_snapshot() {
 
 #[test]
 fn profile_setup_and_doctor_use_typed_rows_json_and_exit_policy() {
-    #[cfg(unix)]
     let (outcome, reason, json_status) = (
         "OUTCOME: INDETERMINATE",
         "REASON: conditional_evidence_unavailable_path_missing",
         "indeterminate",
-    );
-    #[cfg(not(unix))]
-    let (outcome, reason, json_status) = (
-        "OUTCOME: INVALID",
-        "REASON: unsupported_platform_strict_read",
-        "invalid",
     );
 
     let setup_repo = tempfile::tempdir().expect("tempdir");
@@ -4681,16 +4890,25 @@ fn profile_setup_and_doctor_use_typed_rows_json_and_exit_policy() {
     let setup_stdout = String::from_utf8(setup.stdout).expect("setup stdout utf-8");
     assert!(setup_stdout.contains(outcome), "{setup_stdout}");
     assert!(setup_stdout.contains(reason), "{setup_stdout}");
-    assert!(!setup_repo.path().join(".handbook").exists());
+    assert!(setup_repo.path().join(".handbook").is_dir());
+    let identity = fs::read(setup_repo.path().join(".handbook/repository-identity.v1"))
+        .expect("setup repository identity");
+    assert_eq!(identity.len(), 71);
+    assert!(identity.starts_with(b"sha256:"));
+    assert!(!setup_repo
+        .path()
+        .join(".handbook/project/charter.yaml")
+        .exists());
+    assert!(!setup_repo
+        .path()
+        .join(".handbook/charter/CHARTER.md")
+        .exists());
 
     let doctor_repo = tempfile::tempdir().expect("tempdir");
     let text = run_in(doctor_repo.path(), &["doctor"]);
     assert!(!text.status.success());
     let text_stdout = String::from_utf8(text.stdout).expect("doctor stdout utf-8");
-    #[cfg(unix)]
     assert!(text_stdout.contains("APPLICABILITY: indeterminate STATUS: not_inspected REASON: conditional_evidence_unavailable_path_missing"), "{text_stdout}");
-    #[cfg(not(unix))]
-    assert!(text_stdout.contains("APPLICABILITY: indeterminate STATUS: unsafe_path REASON: unsupported_platform_strict_read"), "{text_stdout}");
 
     let json = run_in(doctor_repo.path(), &["doctor", "--json"]);
     assert!(!json.status.success());
@@ -4699,7 +4917,7 @@ fn profile_setup_and_doctor_use_typed_rows_json_and_exit_policy() {
     assert!(!json_stdout.ends_with("\n\n"));
     let value: serde_json::Value = serde_json::from_str(&json_stdout).expect("doctor json");
     assert_eq!(value["schema_id"], "handbook.repository-doctor-report");
-    assert_eq!(value["schema_version"], "1.1.0");
+    assert_eq!(value["schema_version"], "1.2.0");
     assert_eq!(value["status"], json_status);
 }
 
@@ -4763,10 +4981,7 @@ fn profile_setup_auto_refresh_preserves_existing_root_without_artifact_writes() 
 
     assert!(!output.status.success());
     let stdout = String::from_utf8(output.stdout).expect("stdout utf-8");
-    #[cfg(unix)]
     assert!(stdout.contains("OUTCOME: INDETERMINATE"), "{stdout}");
-    #[cfg(not(unix))]
-    assert!(stdout.contains("OUTCOME: INVALID"), "{stdout}");
     assert!(stdout.contains("MODE: refresh"), "{stdout}");
     assert!(stdout.contains("ROOT ACTION: preserve"), "{stdout}");
     assert_eq!(
@@ -4792,10 +5007,7 @@ fn shipped_indeterminate_reset_request_mutates_no_runtime_state() {
 
     assert!(!output.status.success());
     let stdout = String::from_utf8(output.stdout).expect("stdout utf-8");
-    #[cfg(unix)]
     assert!(stdout.contains("OUTCOME: INDETERMINATE"), "{stdout}");
-    #[cfg(not(unix))]
-    assert!(stdout.contains("OUTCOME: INVALID"), "{stdout}");
     assert!(stdout.contains("RESET APPLIED: no"), "{stdout}");
     assert_eq!(
         std::fs::read(repo.path().join(".handbook/state/a.yaml")).expect("state file"),
@@ -5602,10 +5814,7 @@ fn generate_refuses_semantically_invalid_required_project_context() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
+    write_valid_selected_charter(root);
     write_file(
         &root.join(".handbook/project/context.yaml"),
         legacy_placeholder_project_context_markdown().as_bytes(),
@@ -5637,10 +5846,7 @@ fn inspect_omits_semantically_invalid_optional_environment_inventory_but_stays_r
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
+    write_valid_selected_charter(root);
     write_valid_selected_project_context(root);
     write_file(
         &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
@@ -5870,7 +6076,7 @@ fn generate_succeeds_when_feature_spec_is_missing_in_partial_system_tree() {
             "NEXT SAFE ACTION: run `handbook inspect --packet planning.packet` for proof",
         ],
     );
-    assert!(stdout.contains("### CHARTER (.handbook/charter/CHARTER.md)"));
+    assert!(stdout.contains("### CHARTER (.handbook/project/charter.yaml)"));
     assert!(!stdout.contains("### FEATURE_SPEC (.handbook/feature_spec/FEATURE_SPEC.md)"));
     assert!(stdout.contains("optional source omitted: .handbook/feature_spec/FEATURE_SPEC.md"));
 }
@@ -6118,7 +6324,7 @@ fn generate_emits_real_packet_body_when_ready() {
         "expected charter body section: {stdout}"
     );
     assert!(
-        stdout.contains("# Engineering Charter — Planning Ready Fixture"),
+        stdout.contains("# Engineering Charter — Boundary Project"),
         "expected committed charter fixture contents: {stdout}"
     );
     assert!(
@@ -6160,7 +6366,7 @@ fn generate_succeeds_from_nested_directory_inside_ready_repo() {
         "expected packet body: {stdout}"
     );
     assert!(
-        stdout.contains("# Engineering Charter — Planning Ready Fixture"),
+        stdout.contains("# Engineering Charter — Boundary Project"),
         "expected committed charter fixture contents: {stdout}"
     );
     assert!(
@@ -6195,7 +6401,7 @@ fn doctor_reports_ready_when_required_artifacts_present() {
     assert!(!json_stdout.ends_with("\n\n"));
     let value: serde_json::Value = serde_json::from_str(&json_stdout).expect("doctor JSON");
     assert_eq!(value["schema_id"], "handbook.repository-doctor-report");
-    assert_eq!(value["schema_version"], "1.1.0");
+    assert_eq!(value["schema_version"], "1.2.0");
     assert_eq!(value["status"], "indeterminate");
     assert_eq!(value["project_context"]["instance_id"], "project_context");
     assert_eq!(
@@ -6289,7 +6495,7 @@ fn inspect_reports_ready_when_required_artifacts_present() {
         "expected charter body section: {stdout}"
     );
     assert!(
-        stdout.contains("# Engineering Charter — Planning Ready Fixture"),
+        stdout.contains("# Engineering Charter — Boundary Project"),
         "expected committed charter fixture contents: {stdout}"
     );
     assert!(
@@ -6331,7 +6537,7 @@ fn inspect_succeeds_from_nested_directory_inside_ready_repo() {
         "expected packet body: {stdout}"
     );
     assert!(
-        stdout.contains("# Engineering Charter — Planning Ready Fixture"),
+        stdout.contains("# Engineering Charter — Boundary Project"),
         "expected committed charter fixture contents: {stdout}"
     );
     assert!(
@@ -6378,7 +6584,7 @@ fn inspect_blocks_when_demo_packet_selected_without_fixture_set() {
 fn generate_resolves_execution_demo_packet_from_fixture_set() {
     let (_dir, root) = execution_demo_repo();
     assert!(
-        root.join("tests/fixtures/execution_demo/basic/.handbook/charter/CHARTER.md")
+        root.join("tests/fixtures/execution_demo/basic/.handbook/project/charter.yaml")
             .is_file(),
         "expected committed execution demo fixtures to exist under tests/fixtures/execution_demo/basic"
     );
@@ -6520,7 +6726,7 @@ fn generate_resolves_execution_demo_packet_from_nested_directory_inside_repo() {
 fn inspect_includes_fixture_section_for_execution_demo_packet() {
     let (_dir, root) = execution_demo_repo();
     assert!(
-        root.join("tests/fixtures/execution_demo/basic/.handbook/charter/CHARTER.md")
+        root.join("tests/fixtures/execution_demo/basic/.handbook/project/charter.yaml")
             .is_file(),
         "expected committed execution demo fixtures to exist under tests/fixtures/execution_demo/basic"
     );
@@ -6615,7 +6821,7 @@ fn inspect_includes_fixture_section_for_execution_demo_packet() {
         "expected ready summary line: {stdout}"
     );
     let pos_charter = stdout
-        .find("Charter [.handbook/charter/CHARTER.md]")
+        .find("Charter [.handbook/project/charter.yaml]")
         .expect("charter should be listed");
     let pos_feature = stdout
         .find("FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]")
@@ -6630,12 +6836,11 @@ fn inspect_includes_fixture_section_for_execution_demo_packet() {
 fn inspect_preserves_full_execution_demo_fixture_lineage_order() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
-    let fixture_root = root.join("tests/fixtures/execution_demo/full-lineage/.handbook");
+    let fixture_repo = root.join("tests/fixtures/execution_demo/full-lineage");
+    let fixture_root = fixture_repo.join(".handbook");
 
-    write_file(
-        &fixture_root.join("charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
+    std::fs::create_dir_all(&fixture_repo).expect("fixture repository root");
+    write_valid_selected_charter(&fixture_repo);
     write_file(
         &fixture_root.join("project/context.yaml"),
         valid_selected_project_context_yaml().as_bytes(),
@@ -6669,7 +6874,7 @@ fn inspect_preserves_full_execution_demo_fixture_lineage_order() {
     assert_in_order(
         fixture_section,
         &[
-            "1. Charter [.handbook/charter/CHARTER.md]",
+            "1. Charter [.handbook/project/charter.yaml]",
             "2. ProjectContext [.handbook/project/context.yaml]",
             "3. EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]",
             "4. FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]",
@@ -6680,7 +6885,7 @@ fn inspect_preserves_full_execution_demo_fixture_lineage_order() {
     assert_in_order(
         json_section,
         &[
-            "\"canonical_repo_relative_path\": \".handbook/charter/CHARTER.md\"",
+            "\"canonical_repo_relative_path\": \".handbook/project/charter.yaml\"",
             "\"canonical_repo_relative_path\": \".handbook/project/context.yaml\"",
             "\"canonical_repo_relative_path\": \".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md\"",
             "\"canonical_repo_relative_path\": \".handbook/feature_spec/FEATURE_SPEC.md\"",
@@ -6694,7 +6899,7 @@ fn generate_non_ready_execution_demo_preserves_fixture_backed_labeling() {
     let root = dir.path();
     let fixture_root = root.join("tests/fixtures/execution_demo/non-ready/.handbook");
 
-    write_file(&fixture_root.join("charter/CHARTER.md"), b"");
+    write_file(&fixture_root.join("project/charter.yaml"), b"");
     write_file(
         &fixture_root.join("project/context.yaml"),
         valid_selected_project_context_yaml().as_bytes(),
@@ -6748,11 +6953,11 @@ fn generate_non_ready_execution_demo_preserves_fixture_backed_labeling() {
     assert_in_order(
         &stdout,
         &[
-            "1. Charter [.handbook/charter/CHARTER.md]",
-            "2. ProjectContext [.handbook/project/context.yaml]",
-            "3. EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]",
+            "1. ProjectContext [.handbook/project/context.yaml]",
+            "2. EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]",
         ],
     );
+    assert!(stdout.contains("document_not_object"), "{stdout}");
     assert!(
         !stdout.contains(
             "tests/fixtures/execution_demo/non-ready/.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"
@@ -6767,7 +6972,7 @@ fn inspect_non_ready_execution_demo_preserves_environment_inventory_in_fixture_l
     let root = dir.path();
     let fixture_root = root.join("tests/fixtures/execution_demo/non-ready/.handbook");
 
-    write_file(&fixture_root.join("charter/CHARTER.md"), b"");
+    write_file(&fixture_root.join("project/charter.yaml"), b"");
     write_file(
         &fixture_root.join("project/context.yaml"),
         valid_selected_project_context_yaml().as_bytes(),
@@ -6818,11 +7023,11 @@ fn inspect_non_ready_execution_demo_preserves_environment_inventory_in_fixture_l
     assert_in_order(
         &stdout,
         &[
-            "1. Charter [.handbook/charter/CHARTER.md]",
-            "2. ProjectContext [.handbook/project/context.yaml]",
-            "3. EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]",
+            "1. ProjectContext [.handbook/project/context.yaml]",
+            "2. EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]",
         ],
     );
+    assert!(stdout.contains("document_not_object"), "{stdout}");
     assert!(
         !stdout.contains(
             "tests/fixtures/execution_demo/non-ready/.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"
@@ -7052,10 +7257,7 @@ fn generate_refuses_for_live_execution_packet_when_other_inputs_ok() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
+    write_valid_selected_charter(root);
     write_valid_selected_project_context(root);
     write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
@@ -7093,10 +7295,7 @@ fn inspect_redacts_packet_body_for_live_execution_refusal() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
+    write_valid_selected_charter(root);
     write_valid_selected_project_context(root);
     write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
@@ -7122,7 +7321,7 @@ fn inspect_redacts_packet_body_for_live_execution_refusal() {
     assert!(stdout.contains("## JSON FALLBACK"));
     assert!(stdout.contains("\"packet_result\""));
     assert!(stdout.contains("\"packet body omitted because request is not ready\""));
-    assert!(!stdout.contains(valid_charter_markdown()));
+    assert!(!stdout.contains("# Engineering Charter — Boundary Project"));
     assert!(!stdout.contains("feature-body"));
 }
 
@@ -7246,7 +7445,10 @@ fn assert_in_order(haystack: &str, needles: &[&str]) {
 fn assert_help_snapshot(args: &[&str], snapshot_filename: &str) {
     let stdout = run_in(workspace_root().as_path(), args).stdout;
     let rendered = String::from_utf8(stdout).expect("help is utf-8");
-    assert_eq!(rendered, read_snapshot(snapshot_filename));
+    assert_eq!(
+        rendered.replace("handbook.exe", "handbook"),
+        read_snapshot(snapshot_filename)
+    );
 }
 
 fn read_snapshot(filename: &str) -> String {

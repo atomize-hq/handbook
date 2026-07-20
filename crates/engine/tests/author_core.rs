@@ -17,7 +17,7 @@ project_name: "Handbook"
 owner: "compiler-team"
 team: "Handbook"
 repo_or_project_ref: "handbook"
-charter_ref: ".handbook/charter/CHARTER.md"
+charter_ref: ".handbook/project/charter.yaml"
 project_context_ref: ".handbook/project/context.yaml"
 environment_variables:
   - name: "HANDBOOK_HOME"
@@ -88,7 +88,7 @@ tooling:
   minimum_versions:
     - "Rust 2021 edition"
 update_contract:
-  exception_record_location: ".handbook/charter/CHARTER.md#exceptions"
+  exception_record_location: ".handbook/project/charter.yaml#/governance/exception_process"
 known_unknowns:
   - item: "future hosted runtime requirements"
     owner: "project owner"

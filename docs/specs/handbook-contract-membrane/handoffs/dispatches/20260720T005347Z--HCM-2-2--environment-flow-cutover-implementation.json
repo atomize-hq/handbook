@@ -1,0 +1,96 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T005347Z--HCM-2-2--environment-flow-cutover-implementation",
+  "created_at_utc": "2026-07-20T00:53:47Z",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "resume_same_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "api-and-interface-design"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": "HCM-2.2",
+  "subject_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sha256": "4f6124e859ca036d7dd77899e22b7a5b4142429ac15c1e6d1b5ac74d160515b2"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sha256": "afaf40256cc0b9aed8d08a4ef8b689fca7d0e889b46b7c5ea57e4ae45b195d17"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "sha256": "ae8ca42931573a88e1e0c26b211853bf9bb00107212fa6d7885eee58523f583e"}
+    ],
+    "aggregate_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8"
+  },
+  "active_resolution": {
+    "level": "bounded_flow_cutover_implementation",
+    "scope_horizon": "HCM-2.2-environment-inventory-and-flow",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "approved_slice_packet",
+    "memory_horizon": "live_repository_truth",
+    "validation_horizon": "focused_flow_red_green"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sections": ["Product-path cutover", "Exact scope", "Verification and promotion gates"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sections": ["P7 — Cut Environment Inventory and flow"]},
+    {"path": "docs/specs/handbook-contract-membrane/06-bridge-register.md", "sections": ["BR-HCM-2-CHARTER-FLOW-01", "BR-HCM-2-PROJECT-CONTEXT-FLOW-01"]}
+  ],
+  "repo_truth": "The shared worktree now exposes a green selected Charter observation/projection with canonical path, source fingerprint, in-memory Markdown bytes, and rendered fingerprint; Project Context observation is retained. A separate lane owns compiler/CLI/skill/setup/doctor. This lane owns only Environment Inventory reference carriers and flow/C04 cutover.",
+  "allowed_scope": [
+    "Edit Environment Inventory Charter reference/preflight carriers in compiler/core fixtures without changing Environment Inventory content authority.",
+    "Edit engine canonical-artifact/manifest carriers and flow selection, budget, freshness, result/refusal projections needed to source selected Charter YAML and render it in memory.",
+    "Edit compiler/flow C04 DTO version gates together to accept reduced-v1-m8.3 and reject reduced-v1-m8.2 while preserving C03 reduced-v1-m8 generation 1 byte-for-byte.",
+    "Add focused compiler/flow/Environment Inventory tests and fixtures proving legacy Charter Markdown has zero influence and Project Context behavior is unchanged.",
+    "Use RED tests first with CARGO_TARGET_DIR=D:\\codex-build\\handbook-hcm22 and TEMP/TMP=D:\\codex-temp\\handbook-hcm22. Run GitNexus impact before every existing function/class/method edit and pause for parent authorization before HIGH or CRITICAL edits."
+  ],
+  "non_goals": [
+    "Do not edit profile_inspection.rs, lib.rs, definition/schema/profile/security/transaction internals, CLI command grammar, Charter acquisition skills, setup, doctor, proof/control, planning, handoff, ledger, or dispatch files.",
+    "Do not change Environment Inventory content, Project Context ownership/bridge, C03 freshness preimage/generation, Feature Spec, or unrelated pipeline behavior.",
+    "Do not add a second authoring path, dual-read fallback, live selected Markdown Charter root, or HCM-2.3.",
+    "Do not commit or create handoffs, ledger rows, dispatches, or user-visible task hops."
+  ],
+  "tasks": [
+    "Read the complete dispatch, exact P7/product/bridge authority, selected Charter projection API, and every live legacy Charter consumer/carrier.",
+    "Write RED tests that prove Environment Inventory references selected Charter YAML/source fingerprint, flow renders selected Charter in memory, legacy Markdown has zero budget/freshness/manifest/log/fixture influence, C04 .3/.2 behavior is exact, and C03/Project Context are unchanged.",
+    "Run and report GitNexus impact for every existing seam; pause on HIGH/CRITICAL before editing.",
+    "After parent authorization, implement the smallest coherent carrier cutover and return focused GREEN evidence plus exact remaining legacy references, if any."
+  ],
+  "contracts_and_gates": [
+    "BR-HCM-2-CHARTER-FLOW-01 is a separately named temporary bridge that loads selected canonical YAML, validates current authority/lifecycle, renders in memory, and projects selected path plus source/render fingerprints.",
+    "No legacy Charter Markdown/input byte can affect selection, budget, manifest, freshness, blockers, logs, summaries, sections, notes, fixtures, or compiler/CLI carriers after cutover.",
+    "Environment Inventory content remains fixed; only its Charter reference/preflight carrier changes.",
+    "C04 advances atomically to reduced-v1-m8.3; C03 remains reduced-v1-m8 generation 1 with an unchanged preimage."
+  ],
+  "stop_conditions": [
+    "Pause and report before any HIGH or CRITICAL existing-symbol edit.",
+    "Return blocked if removing a live selected Markdown consumer requires scope beyond named engine/compiler/flow/fixture boundaries.",
+    "Return blocked rather than changing C03, Project Context, Environment Inventory content, or adding a dual truth path."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "changed_files", "impact_analysis", "validation", "remaining_legacy_references", "parent_disposition"]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T031044Z--HCM-2-2--registry-recovery-observation-remediation",
+  "created_at_utc": "2026-07-20T03:10:44Z",
+  "source_handoff_ids": ["20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "source-driven-development", "incremental-implementation", "test-driven-development", "debugging-and-error-recovery", "security-and-hardening"],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": "HCM-2.2",
+  "subject_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sha256": "4f6124e859ca036d7dd77899e22b7a5b4142429ac15c1e6d1b5ac74d160515b2"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sha256": "afaf40256cc0b9aed8d08a4ef8b689fca7d0e889b46b7c5ea57e4ae45b195d17"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "sha256": "ae8ca42931573a88e1e0c26b211853bf9bb00107212fa6d7885eee58523f583e"}
+    ],
+    "aggregate_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8"
+  },
+  "active_resolution": {"level": "registry_recovery_observation", "scope_horizon": "HCM-2.2-shared-authenticator-authority", "detail_resolution": "high", "temporal_horizon": "current_orchestration", "authority_horizon": "approved_slice_packet", "memory_horizon": "live_repository_truth", "validation_horizon": "focused_recovery_and_chain"},
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sections": ["Approval authority and bootstrap", "Global authority lock order and retained observations"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/final-use-add-lockout-vectors-v1.0.json", "sections": ["all"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json", "sections": ["all"]}
+  ],
+  "repo_truth": "Bootstrap and dynamic add/revoke/update are implemented and focused tests are green. Registry mutation recovery currently blocks every pending journal rather than applying the packet's total rollback/roll-forward table. The public committed-registry observer accepts only one bootstrap journal, so approval/promotion reject valid mutation chains. Approval remediation is concurrently hardening approval journals and must expose a narrow cross-family composition hook.",
+  "allowed_scope": ["Edit crates/engine/src/approver_registry_mutation.rs, crates/engine/src/approver_registry_observation.rs, and focused additive registry recovery/observation tests.", "Edit crates/engine/src/approver_registry.rs or lib.rs only for narrow internal wiring after GitNexus impact and parent coordination.", "Consume the approval remediation's crate-private recovery/observation interface without editing charter_approval_workflow.rs."],
+  "non_goals": ["Do not edit compiler/CLI/Flow/lifecycle/promotion/proof/control/handoff/ledger files.", "Do not weaken the global lock order, all-null refusals, exact marker, ES256, counter/replay, no-lockout, or immutable-record rules.", "Do not commit."],
+  "tasks": ["Implement the exact registry pending-journal recovery table: delete owned pre-intent/partial staging, roll forward complete staged sets and exact/equal partial finals, restore the retained prior use head when rollback requires it, finalize matching markers, and preserve unsafe/mismatched evidence fail-closed.", "Compose one deterministic registry-then-approval journal discovery and predecessor graph through the current committed use head; reject forks, unreachable priors, cycles, duplicate sequence, non-adjacent replay, and family-local optimism.", "Upgrade observe_committed_approver_registry to validate and expose a complete committed bootstrap-to-mutation registry chain while retaining promotion→registry locks for the guard lifetime.", "Add crash-window, partial-final, marker, cross-family advanced-head/fork, mutation-chain observation, unsafe-path, replay/ABA, and exact idempotent recovery tests.", "Preserve the reconstructed bootstrap source and replay its original 4-test suite plus the dynamic mutation suite."],
+  "contracts_and_gates": ["Recovery completes before authority observation, randomness, native I/O, or new intent.", "Only matching 72-byte raw-intent-hash markers create authority.", "Final content-addressed records are never deleted; cleanup removes only owned staged/journal bytes and restores an exact prior mutable use head when required.", "Public observation accepts exactly one unbroken current registry chain and exposes no orphan/uncommitted state.", "Shared use authority advances only through the unique predecessor-reachable cross-family journal."],
+  "stop_conditions": ["Stop before HIGH/CRITICAL existing-symbol edits and report blast radius.", "Return blocked rather than invent an approval-side interface or overlap the active approval remediation lane."],
+  "return_contract": {"transport": "built_in_subagent", "findings_first": true, "include_agent_identity_and_status": true, "edit_scope": "bounded_write", "global_handoff": "forbidden", "ledger_write": "forbidden", "user_task_hop": "forbidden", "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "changed_files", "impact_analysis", "validation", "remaining_protocol_work", "parent_disposition"]}
+}

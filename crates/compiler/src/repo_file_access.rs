@@ -1,8 +1,13 @@
-use std::fs::{self, OpenOptions};
+use std::fs;
+#[cfg(unix)]
+use std::fs::OpenOptions;
+#[cfg(unix)]
 use std::io::{Read, Write};
 use std::path::{Component, Path, PathBuf};
+#[cfg(unix)]
 use std::sync::atomic::{AtomicU64, Ordering};
 
+#[cfg(unix)]
 static TEMP_FILE_COUNTER: AtomicU64 = AtomicU64::new(0);
 
 #[derive(Debug)]
@@ -128,12 +133,12 @@ pub(crate) struct TrustedRepoFile {
 }
 
 impl TrustedRepoFile {
-    #[cfg(test)]
+    #[cfg(all(test, unix))]
     pub(crate) fn repo_relative(&self) -> &NormalizedRepoRelativePath {
         &self.repo_relative
     }
 
-    #[cfg(test)]
+    #[cfg(all(test, unix))]
     pub(crate) fn absolute_path(&self) -> &Path {
         &self.absolute_path
     }
@@ -676,7 +681,9 @@ fn read_string_no_follow(path: &Path) -> Result<String, std::io::Error> {
 
 #[cfg(test)]
 mod tests {
-    use super::{CompilerWorkspace, RepoRelativeFileAccessError, RepoRelativeMutationError};
+    use super::CompilerWorkspace;
+    #[cfg(unix)]
+    use super::{RepoRelativeFileAccessError, RepoRelativeMutationError};
     use std::fs;
 
     #[test]

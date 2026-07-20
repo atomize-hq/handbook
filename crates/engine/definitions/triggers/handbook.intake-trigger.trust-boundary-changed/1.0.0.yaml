@@ -1,0 +1,21 @@
+{
+  "change_rule": "prior_and_current_fingerprints_must_differ",
+  "event_kind": "trust_boundary_changed",
+  "evidence_schema_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+  "extensions": {},
+  "freshness": "session",
+  "required_evidence_fields": [
+    "target_instance_id",
+    "basis_canonical_fingerprint",
+    "prior_evidence_ref",
+    "prior_evidence_fingerprint",
+    "current_evidence_ref",
+    "current_evidence_fingerprint"
+  ],
+  "schema_id": "handbook.trigger-definition",
+  "schema_version": "1.0",
+  "sensitivity": "restricted",
+  "trigger_id": "handbook.intake-trigger.trust-boundary-changed",
+  "trigger_version": "1.0.0",
+  "trigger_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766"
+}

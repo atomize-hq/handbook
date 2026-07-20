@@ -1119,7 +1119,7 @@ def run_orchestration_contract_self_test() -> int:
         ledger_path = "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl"
         subject_path = temp_repo / ledger_path
         subject_path.parent.mkdir(parents=True)
-        subject_path.write_text('{"handoff_id":"pre-closeout"}\n')
+        subject_path.write_bytes(b'{"handoff_id":"pre-closeout"}\n')
         subprocess.run(["git", "add", ledger_path], cwd=temp_repo, check=True)
         subprocess.run(
             ["git", "commit", "-q", "-m", "reviewed primary state"],
@@ -1141,9 +1141,9 @@ def run_orchestration_contract_self_test() -> int:
             ledger_aggregate
         )
         two_commit_dispatch["subject_fingerprint"] = ledger_aggregate
-        subject_path.write_text(
-            '{"handoff_id":"pre-closeout"}\n'
-            '{"handoff_id":"parent-closeout"}\n'
+        subject_path.write_bytes(
+            b'{"handoff_id":"pre-closeout"}\n'
+            b'{"handoff_id":"parent-closeout"}\n'
         )
         subprocess.run(["git", "add", ledger_path], cwd=temp_repo, check=True)
         subprocess.run(

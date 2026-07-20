@@ -1,0 +1,19 @@
+{
+  "boundary_fixture": {
+    "byte_length": 8079,
+    "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/charter-review-boundary-v1.0.md",
+    "raw_sha256": "sha256:4bebff7b716e624a955637f9462e65f4b42b6857b31b0b2add8809034c7b1061"
+  },
+  "determinism_profile": "closed-charter-render-v1",
+  "extensions": {},
+  "implementation_id": "charter-review-markdown-v1",
+  "input_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+  "output_media_type": "text/markdown",
+  "renderer_id": "handbook.renderer.charter-review-markdown",
+  "renderer_version": "1.0.0",
+  "required_capability_contract_ref": "handbook.capabilities.constitutional-root@1.0.0",
+  "resolution_input": null,
+  "schema_id": "handbook.renderer-definition",
+  "schema_version": "1.0",
+  "renderer_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7"
+}

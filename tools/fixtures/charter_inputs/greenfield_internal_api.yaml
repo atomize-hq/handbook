@@ -92,7 +92,7 @@ dimensions:
 
 exceptions:
   approvers: ["project_owner"]
-  record_location: ".handbook/charter/CHARTER.md#exceptions"
+  record_location: ".handbook/project/charter.yaml#/governance/exception_process"
   minimum_fields: ["what", "why", "scope", "risk", "owner", "expiry_or_revisit_date"]
 
 debt_tracking:

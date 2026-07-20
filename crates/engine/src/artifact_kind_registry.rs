@@ -363,9 +363,8 @@ impl AuthoredArtifactKindDefinition {
                 "artifact-kind structural validation profile must be json-schema.draft-2020-12",
             ));
         }
-        self.refuse_later_owned_dependencies()?;
-
         let exact_ref = ExactDefinitionRef::new(&self.kind_id, &self.kind_version)?;
+        self.validate_later_owned_dependencies(&exact_ref)?;
         let selected_registry_ref =
             ExactDefinitionRef::parse(&self.stable_role_registry.reference)?;
         let selected_registry_fingerprint =
@@ -425,7 +424,7 @@ impl AuthoredArtifactKindDefinition {
             }
             validator_refs.push(reference);
         }
-        let expected_validator_refs = semantic_capabilities
+        let mut expected_validator_refs = semantic_capabilities
             .values()
             .flat_map(|selected| {
                 semantic_registry
@@ -436,6 +435,11 @@ impl AuthoredArtifactKindDefinition {
                     .cloned()
             })
             .collect::<Vec<_>>();
+        if exact_ref.as_str() == "handbook.artifact-kind.project-authority@1.1.0" {
+            expected_validator_refs.push(ExactDefinitionRef::parse(
+                "handbook.semantic-validation.constitutional-root@1.1.0",
+            )?);
+        }
         if validator_refs != expected_validator_refs {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::UnsupportedDependency,
@@ -445,7 +449,53 @@ impl AuthoredArtifactKindDefinition {
         }
 
         let supplied = DefinitionFingerprint::parse(&self.definition_fingerprint)?;
-        let computed = if semantic_capabilities.is_empty() {
+        let computed = if exact_ref.as_str() == "handbook.artifact-kind.project-authority@1.1.0" {
+            fingerprint_serializable(&ArtifactKindUniformClosure {
+                definition: &self,
+                resolved_dependencies: vec![
+                    ArtifactKindUniformDependency {
+                        definition_fingerprint: "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+                        definition_ref: "handbook.schemas.artifacts.project-authority@1.1.0",
+                        dependency_role: "canonical_schema",
+                    },
+                    ArtifactKindUniformDependency {
+                        definition_fingerprint: "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998",
+                        definition_ref: "handbook.capabilities.constitutional-root@1.0.0",
+                        dependency_role: "capability_contract",
+                    },
+                    ArtifactKindUniformDependency {
+                        definition_fingerprint: "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+                        definition_ref: "handbook.lifecycle.constitutional-review-lock@1.0.0",
+                        dependency_role: "lifecycle",
+                    },
+                    ArtifactKindUniformDependency {
+                        definition_fingerprint: "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7",
+                        definition_ref: "handbook.renderer.charter-review-markdown@1.0.0",
+                        dependency_role: "renderer",
+                    },
+                    ArtifactKindUniformDependency {
+                        definition_fingerprint: "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8",
+                        definition_ref: "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+                        dependency_role: "review_trigger",
+                    },
+                    ArtifactKindUniformDependency {
+                        definition_fingerprint: "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738",
+                        definition_ref: "handbook.semantic-validation.constitutional-root@1.0.0",
+                        dependency_role: "semantic_validator",
+                    },
+                    ArtifactKindUniformDependency {
+                        definition_fingerprint: "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10",
+                        definition_ref: "handbook.semantic-validation.constitutional-root@1.1.0",
+                        dependency_role: "semantic_validator",
+                    },
+                    ArtifactKindUniformDependency {
+                        definition_fingerprint: "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029",
+                        definition_ref: "handbook.roles.core@1.1.0",
+                        dependency_role: "stable_role_registry",
+                    },
+                ],
+            })?
+        } else if semantic_capabilities.is_empty() {
             fingerprint_serializable(&ArtifactKindFingerprintClosure {
                 definition: &self,
                 stable_role_registry_fingerprint: stable_role_registry.fingerprint().as_str(),
@@ -498,7 +548,28 @@ impl AuthoredArtifactKindDefinition {
         })
     }
 
-    fn refuse_later_owned_dependencies(&self) -> Result<(), RegistryLoadError> {
+    fn validate_later_owned_dependencies(
+        &self,
+        exact_ref: &ExactDefinitionRef,
+    ) -> Result<(), RegistryLoadError> {
+        if exact_ref.as_str() == "handbook.artifact-kind.project-authority@1.1.0" {
+            let exact = self.renderer_definition_refs
+                == ["handbook.renderer.charter-review-markdown@1.0.0"]
+                && self.projection_definition_refs.is_empty()
+                && self.lifecycle_policy_ref.as_str()
+                    == Some("handbook.lifecycle.constitutional-review-lock@1.0.0")
+                && self.review_triggers
+                    == ["handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0"]
+                && self.required_capabilities.is_empty()
+                && self.extensions.is_empty();
+            if exact {
+                return Ok(());
+            }
+            return Err(RegistryLoadError::new(
+                RegistryLoadErrorKind::UnsupportedDependency,
+                "Project Authority 1.1 later-owned dependencies differ from the frozen closure",
+            ));
+        }
         let refused = !self.renderer_definition_refs.is_empty()
             || !self.projection_definition_refs.is_empty()
             || !self.lifecycle_policy_ref.is_null()
@@ -508,7 +579,7 @@ impl AuthoredArtifactKindDefinition {
         if refused {
             return Err(RegistryLoadError::new(
                 RegistryLoadErrorKind::UnsupportedDependency,
-                "HCM-1.1 refuses every non-empty later-owned artifact-kind dependency",
+                "non-Project-Authority-1.1 kinds refuse every non-empty later-owned dependency",
             ));
         }
         Ok(())
@@ -659,6 +730,19 @@ struct ArtifactKindSemanticFingerprintClosure<'a> {
     schema_closure_fingerprint: &'a str,
     capability_fingerprints: Vec<&'a str>,
     semantic_validator_fingerprints: Vec<&'a str>,
+}
+
+#[derive(Serialize)]
+struct ArtifactKindUniformClosure<'a> {
+    definition: &'a AuthoredArtifactKindDefinition,
+    resolved_dependencies: Vec<ArtifactKindUniformDependency<'a>>,
+}
+
+#[derive(Serialize)]
+struct ArtifactKindUniformDependency<'a> {
+    definition_fingerprint: &'a str,
+    definition_ref: &'a str,
+    dependency_role: &'a str,
 }
 
 #[derive(Serialize)]

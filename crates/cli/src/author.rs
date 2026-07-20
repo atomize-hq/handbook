@@ -1,8 +1,9 @@
 use crate::{
     shell_shared::{discover_managed_repo_root, read_stdin},
     AuthorArgs, AuthorCharterArgs, AuthorCommand, AuthorEnvironmentInventoryArgs,
-    AuthorProjectContextArgs, Cli,
+    AuthorProjectContextArgs, CharterModeArg, Cli,
 };
+use std::fmt::Write as _;
 use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
@@ -25,14 +26,198 @@ pub(crate) struct RenderedCommand {
 }
 
 fn author_charter_command(args: AuthorCharterArgs) -> ExitCode {
-    let rendered = execute_author_charter_command(
-        args,
-        std::env::current_dir,
-        |repo_root, input| handbook_compiler::preflight_author_charter_from_input(repo_root, input),
-        |repo_root, input| handbook_compiler::author_charter(repo_root, input),
-    );
-    println!("{}", rendered.output);
-    rendered.exit_code
+    let json = args.json;
+    let result = execute_selected_author_charter_command(args);
+    let rendered = if json {
+        render_charter_operation_json(&result)
+    } else {
+        render_charter_operation_text(&result)
+    };
+    print!("{rendered}");
+    if result.status == handbook_compiler::AdapterOperationStatus::Succeeded {
+        ExitCode::SUCCESS
+    } else {
+        ExitCode::from(1)
+    }
+}
+
+fn execute_selected_author_charter_command(
+    args: AuthorCharterArgs,
+) -> handbook_compiler::CharterOperationResult {
+    let author_selected = args.mode.is_some()
+        && args.from_inputs.is_some()
+        && args.approve_candidate.is_none()
+        && args.approval_class.is_none()
+        && args.authority_ref.is_none()
+        && args.accept_waiver_refs.is_empty()
+        && args.promote_candidate.is_none()
+        && args.approval_ref.is_none()
+        && !args.validate;
+    let approve_selected = args.mode.is_none()
+        && args.from_inputs.is_none()
+        && args.expected_current_fingerprint.is_none()
+        && args.approve_candidate.is_some()
+        && args.approval_class.is_some()
+        && args.authority_ref.is_some()
+        && args.promote_candidate.is_none()
+        && args.approval_ref.is_none()
+        && !args.validate;
+    let promote_selected = args.mode.is_none()
+        && args.from_inputs.is_none()
+        && args.approve_candidate.is_none()
+        && args.approval_class.is_none()
+        && args.authority_ref.is_none()
+        && args.accept_waiver_refs.is_empty()
+        && args.promote_candidate.is_some()
+        && args.approval_ref.is_some()
+        && !args.validate;
+    let validate_selected = args.mode.is_none()
+        && args.from_inputs.is_none()
+        && args.expected_current_fingerprint.is_none()
+        && args.approve_candidate.is_none()
+        && args.approval_class.is_none()
+        && args.authority_ref.is_none()
+        && args.accept_waiver_refs.is_empty()
+        && args.promote_candidate.is_none()
+        && args.approval_ref.is_none()
+        && args.validate;
+    let legacy_selected = args.mode.is_none()
+        && args.from_inputs.is_some()
+        && args.approve_candidate.is_none()
+        && args.approval_class.is_none()
+        && args.authority_ref.is_none()
+        && args.accept_waiver_refs.is_empty()
+        && args.promote_candidate.is_none()
+        && args.approval_ref.is_none()
+        && !args.validate;
+
+    if legacy_selected {
+        return handbook_compiler::legacy_charter_input_refusal();
+    }
+
+    let operation = if approve_selected {
+        handbook_compiler::CharterOperation::Approve
+    } else if promote_selected {
+        handbook_compiler::CharterOperation::Promote
+    } else if validate_selected {
+        handbook_compiler::CharterOperation::Validate
+    } else {
+        handbook_compiler::CharterOperation::Author
+    };
+    if !(author_selected || approve_selected || promote_selected || validate_selected) {
+        return handbook_compiler::invalid_charter_command_refusal(operation);
+    }
+
+    let cwd = match std::env::current_dir() {
+        Ok(cwd) => cwd,
+        Err(_) => return handbook_compiler::invalid_charter_command_refusal(operation),
+    };
+    let repo_root = discover_managed_repo_root(&cwd);
+    let intent = if author_selected {
+        let path_or_dash = args
+            .from_inputs
+            .as_deref()
+            .expect("author selection requires an input source");
+        let yaml = match read_author_inputs_source(
+            "author charter",
+            "handbook author charter --mode <mode> --from-inputs",
+            path_or_dash,
+        ) {
+            Ok(yaml) => yaml,
+            Err(_) => return handbook_compiler::invalid_charter_command_refusal(operation),
+        };
+        let mut envelope = match handbook_compiler::parse_charter_intake_envelope(&yaml) {
+            Ok(envelope) => envelope,
+            Err(refusal) => return refusal,
+        };
+        if args.expected_current_fingerprint.is_some()
+            && envelope.expected_current_fingerprint.is_some()
+            && args.expected_current_fingerprint.as_deref()
+                != envelope.expected_current_fingerprint.as_deref()
+        {
+            return handbook_compiler::invalid_charter_command_refusal(operation);
+        }
+        if args.expected_current_fingerprint.is_some() {
+            envelope.expected_current_fingerprint = args.expected_current_fingerprint;
+        }
+        handbook_compiler::CharterCommandIntent::Author {
+            mode: charter_mode(args.mode.expect("author selection requires a mode")),
+            envelope,
+        }
+    } else if approve_selected {
+        handbook_compiler::CharterCommandIntent::Approve {
+            candidate_ref: args
+                .approve_candidate
+                .expect("approval selection requires a candidate"),
+            approval_class: args
+                .approval_class
+                .expect("approval selection requires a class"),
+            authority_ref: args
+                .authority_ref
+                .expect("approval selection requires an authority"),
+            accepted_waiver_refs: args.accept_waiver_refs,
+        }
+    } else if promote_selected {
+        handbook_compiler::CharterCommandIntent::Promote {
+            candidate_ref: args
+                .promote_candidate
+                .expect("promotion selection requires a candidate"),
+            approval_ref: args
+                .approval_ref
+                .expect("promotion selection requires an approval"),
+            expected_current_fingerprint: args.expected_current_fingerprint,
+        }
+    } else {
+        handbook_compiler::CharterCommandIntent::Validate
+    };
+    handbook_compiler::execute_charter_command(repo_root, intent)
+}
+
+fn charter_mode(mode: CharterModeArg) -> handbook_engine::CharterAcquisitionMode {
+    match mode {
+        CharterModeArg::GuidedAdaptive => handbook_engine::CharterAcquisitionMode::GuidedAdaptive,
+        CharterModeArg::Express => handbook_engine::CharterAcquisitionMode::Express,
+        CharterModeArg::AgentAssisted => handbook_engine::CharterAcquisitionMode::AgentAssisted,
+    }
+}
+
+fn render_charter_operation_json(result: &handbook_compiler::CharterOperationResult) -> String {
+    let mut output = serde_json::to_string_pretty(result)
+        .unwrap_or_else(|_| "{\"status\":\"refused\"}".to_owned());
+    output.push('\n');
+    output
+}
+
+fn render_charter_operation_text(result: &handbook_compiler::CharterOperationResult) -> String {
+    let status = match result.status {
+        handbook_compiler::AdapterOperationStatus::Succeeded => "SUCCEEDED",
+        handbook_compiler::AdapterOperationStatus::Refused => "REFUSED",
+    };
+    let operation = match result.operation {
+        handbook_compiler::CharterOperation::Author => "author",
+        handbook_compiler::CharterOperation::Approve => "approve",
+        handbook_compiler::CharterOperation::Promote => "promote",
+        handbook_compiler::CharterOperation::Validate => "validate",
+    };
+    let mut output = format!("OUTCOME: {status}\nOPERATION: {operation}\n");
+    if let Some(refusal) = &result.refusal {
+        writeln!(&mut output, "CODE: {}", refusal.code).expect("string write");
+        writeln!(&mut output, "MESSAGE: {}", refusal.message).expect("string write");
+        writeln!(&mut output, "RETRYABLE: {}", refusal.retryable).expect("string write");
+    }
+    if let Some(path) = &result.canonical_path {
+        writeln!(&mut output, "CANONICAL PATH: {path}").expect("string write");
+    }
+    if let Some(fingerprint) = &result.source_fingerprint {
+        writeln!(&mut output, "SOURCE FINGERPRINT: {fingerprint}").expect("string write");
+    }
+    if let Some(fingerprint) = &result.rendered_output_fingerprint {
+        writeln!(&mut output, "RENDERED OUTPUT FINGERPRINT: {fingerprint}").expect("string write");
+    }
+    for action in &result.next_actions {
+        writeln!(&mut output, "NEXT SAFE ACTION: {action}").expect("string write");
+    }
+    output
 }
 
 fn author_project_context_command(args: AuthorProjectContextArgs) -> ExitCode {
@@ -134,6 +319,7 @@ fn author_environment_inventory_command(args: AuthorEnvironmentInventoryArgs) ->
     }
 }
 
+#[cfg(test)]
 pub(crate) fn execute_author_charter_command<
     GetCurrentDir,
     PreflightFromInput,
@@ -358,6 +544,7 @@ where
     }
 }
 
+#[cfg(test)]
 fn render_author_charter_success(
     result: &handbook_compiler::AuthorCharterResult,
     input_mode: &str,
@@ -376,6 +563,7 @@ fn render_author_charter_success(
     out.trim_end().to_string()
 }
 
+#[cfg(test)]
 fn render_author_charter_validation_success(input_mode: &str, input_source: &str) -> String {
     let mut out = String::new();
     out.push_str("OUTCOME: VALIDATED\n");
@@ -391,6 +579,7 @@ fn render_author_charter_validation_success(input_mode: &str, input_source: &str
     out.trim_end().to_string()
 }
 
+#[cfg(test)]
 pub(crate) fn render_author_charter_refusal(
     refusal: &handbook_compiler::AuthorCharterRefusal,
 ) -> String {
@@ -557,6 +746,7 @@ fn render_environment_inventory_refusal(
     )
 }
 
+#[cfg(test)]
 fn author_refusal_outcome_name(kind: handbook_compiler::AuthorCharterRefusalKind) -> &'static str {
     match kind {
         handbook_compiler::AuthorCharterRefusalKind::MissingSystemRoot
@@ -569,6 +759,7 @@ fn author_refusal_outcome_name(kind: handbook_compiler::AuthorCharterRefusalKind
     }
 }
 
+#[cfg(test)]
 fn author_refusal_kind_name(kind: handbook_compiler::AuthorCharterRefusalKind) -> &'static str {
     match kind {
         handbook_compiler::AuthorCharterRefusalKind::MissingSystemRoot => "MissingSystemRoot",

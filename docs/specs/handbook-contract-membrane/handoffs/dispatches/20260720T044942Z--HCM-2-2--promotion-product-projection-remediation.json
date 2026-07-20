@@ -1,0 +1,33 @@
+{
+  "schema_id":"handbook.internal-dispatch",
+  "schema_version":"1.1",
+  "dispatch_id":"20260720T044942Z--HCM-2-2--promotion-product-projection-remediation",
+  "created_at_utc":"2026-07-20T04:49:42Z",
+  "source_handoff_ids":["20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"],
+  "parent_orchestration_id":"20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision":"resolution_escalation",
+  "execution_target":"internal_subagent",
+  "agent_type":"default",
+  "role":"implementation",
+  "fresh_context_required":true,
+  "closeout_owner":"parent_orchestrator",
+  "required_skills":["using-agent-skills","source-driven-development","incremental-implementation","test-driven-development","api-and-interface-design","security-and-hardening"],
+  "phase_id":"HCM-2",
+  "slice_id":"HCM-2.2",
+  "packet_id":"HCM-2.2-promotion-product-projection",
+  "subject_fingerprint":"sha256:10c145e006696a34c728b11ef75ae518f470c5fe01f6de15574435fa3d1bf058",
+  "subject_manifest":{"algorithm":"sha256","encoding":"repo-path-null-sha256-newline-v1","entries":[
+    {"path":"crates/engine/src/charter_promotion_workflow.rs","sha256":"3e77c1ce3707498abdcd6c0304465b6b52980c5727355b41cb1f0acfe4c3a12e"},
+    {"path":"crates/engine/tests/hcm_2_2_promotion_workflow.rs","sha256":"44ba58468d904ea68b0d459b14e5a3015164907d50cf224e895c469e870e77ab"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sha256":"249ee995bc2a980f939e9df8aedf0edbe8c3dfe67a7250bfa2f65e78196f48f9"}
+  ],"aggregate_fingerprint":"sha256:10c145e006696a34c728b11ef75ae518f470c5fe01f6de15574435fa3d1bf058"},
+  "active_resolution":{"level":"promotion_product_projection","scope_horizon":"HCM-2.2-engine-additive","detail_resolution":"high","temporal_horizon":"current_orchestration","authority_horizon":"approved-slice-packet","memory_horizon":"live-repository-truth","validation_horizon":"focused-promotion-product"},
+  "authority_refs":[{"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sections":["Atomic promotion, lifecycle, and recovery","API, security, and compatibility posture"]}],
+  "repo_truth":"The retained atomic promotion workflow is green. Product integration cannot safely project a successful promotion fingerprint/exact changed paths or refusal retryability/next actions because the engine exposes no product projection. GitNexus marks direct modification of CharterPromotionWorkflowCommitV1 CRITICAL (5 dependants, 57 processes, 20 modules); promote_at is LOW (4 callers, 1 process/module).",
+  "allowed_scope":["Edit only crates/engine/src/charter_promotion_workflow.rs and crates/engine/tests/hcm_2_2_promotion_workflow.rs.","Add new projection types and additive methods/accessors around existing commit/error values without modifying their layouts or public request schemas."],
+  "non_goals":["Do not edit CharterPromotionWorkflowCommitV1 fields/layout, CharterPromotionRequestV1, CharterPromotionIntentV1, promote_at transaction semantics, authority/recovery modules, compiler/CLI, docs, proof/control/handoff/ledger, or HCM-2.3.","Do not parse content-addressed refs in compiler/CLI, invent adapter retryability/next actions, expose transaction IDs, or commit."],
+  "tasks":["Verify immutable subject bytes and rerun GitNexus impact. Treat the CRITICAL commit struct as prohibited and report any new HIGH/CRITICAL boundary before edits.","Write RED tests for one additive engine-owned successful-product projection that derives the exact promotion fingerprint from the already-validated content-addressed promotion ref and returns canonical path/fingerprint, promotion ref/fingerprint, exact semantic changed paths, and non-empty success next actions without exposing transaction identity.","Define changed paths to match durable semantic product effects only: canonical Charter path plus state-prefixed promotion and lifecycle-transition refs, consistent with existing authority result semantics that omit internal transaction journals/markers.","Write RED tests and add engine-owned refusal code/retryability/non-empty next-action projection for every CharterPromotionWorkflowErrorKindV1. Preserve detail as the message; use a total explicit kind table and no debug/string parsing.","Prove malformed/unexpected refs fail closed through a typed projection error even though successful commits are internally validated; do not panic at the product boundary.","Run focused promotion workflow/transaction tests, cargo check and clippy for handbook-engine, exact-file rustfmt check, diff check, and GitNexus detect-changes."],
+  "contracts_and_gates":["All changes are additive; existing public structs, requests, service signatures, transaction behavior, retained locks, and record bytes remain unchanged.","Compiler/CLI can consume only the new typed projection/accessors and need not derive fingerprints or paths.","Refusal mapping is total over the closed error enum and always yields one bounded next action.","Projection contains no raw transaction ID, marker path, approval-set internals, or authority bytes."],
+  "stop_conditions":["Stop before modifying the CRITICAL commit struct/layout or any frozen request/schema.","If exact projection cannot be derived from existing validated commit invariants without authority reread or string guessing, report the narrower missing engine state instead of widening scope."],
+  "return_contract":{"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"bounded_write","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","changed_files","impact_analysis","validation","remaining_protocol_work","parent_disposition"]}
+}

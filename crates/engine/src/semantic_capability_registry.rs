@@ -45,6 +45,13 @@ struct AuthoredBindingRule {
     empty_policy: BindingEmptyPolicy,
 }
 
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+struct AuthoredCrossFieldRule {
+    rule_id: String,
+    implementation_id: String,
+}
+
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct SemanticBindingRule {
     rule_id: SymbolicId,
@@ -79,8 +86,19 @@ struct AuthoredValidatorProfile {
     schema_version: String,
     profile_id: String,
     profile_version: String,
-    capability_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    capability_id: Option<String>,
     binding_rules: Vec<AuthoredBindingRule>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    candidate_schema_ref: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    capability_contract_ref: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    cross_field_rules: Option<Vec<AuthoredCrossFieldRule>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    ordered_dimension_ids: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    required_semantic_validator_refs: Option<Vec<String>>,
     extensions: BTreeMap<String, Value>,
     #[serde(skip_serializing)]
     profile_fingerprint: String,
@@ -393,7 +411,7 @@ fn require_enum_field(
 
 fn validate_validator_record_shape(value: &Value) -> Result<(), RegistryLoadError> {
     const LOCATION: &str = "semantic_validator";
-    const FIELDS: &[&str] = &[
+    const FIELDS_1_0: &[&str] = &[
         "schema_id",
         "schema_version",
         "profile_id",
@@ -403,17 +421,65 @@ fn validate_validator_record_shape(value: &Value) -> Result<(), RegistryLoadErro
         "extensions",
         "profile_fingerprint",
     ];
+    const FIELDS_1_1: &[&str] = &[
+        "schema_id",
+        "schema_version",
+        "profile_id",
+        "profile_version",
+        "binding_rules",
+        "candidate_schema_ref",
+        "capability_contract_ref",
+        "cross_field_rules",
+        "ordered_dimension_ids",
+        "required_semantic_validator_refs",
+        "extensions",
+        "profile_fingerprint",
+    ];
     let object = record_object(value, LOCATION)?;
-    reject_unknown_fields(object, FIELDS, LOCATION)?;
+    let schema_version = require_string_field(object, "schema_version", LOCATION)?;
+    let fields = match schema_version {
+        "1.0" => FIELDS_1_0,
+        "1.1" => FIELDS_1_1,
+        _ => {
+            return Err(unsupported_record(
+                "semantic_validator/schema_version",
+                "semantic validator schema version is unsupported",
+            ))
+        }
+    };
+    reject_unknown_fields(object, fields, LOCATION)?;
     for field in [
         "schema_id",
         "schema_version",
         "profile_id",
         "profile_version",
-        "capability_id",
         "profile_fingerprint",
     ] {
         require_string_field(object, field, LOCATION)?;
+    }
+    if schema_version == "1.0" {
+        require_string_field(object, "capability_id", LOCATION)?;
+    } else {
+        require_string_field(object, "candidate_schema_ref", LOCATION)?;
+        require_string_field(object, "capability_contract_ref", LOCATION)?;
+        require_string_array(object, "ordered_dimension_ids", LOCATION)?;
+        require_string_array(object, "required_semantic_validator_refs", LOCATION)?;
+        let rules = required_field(object, "cross_field_rules", LOCATION)?
+            .as_array()
+            .ok_or_else(|| {
+                RegistryLoadError::at(
+                    RegistryLoadErrorKind::SyntaxError,
+                    format!("{LOCATION}/cross_field_rules"),
+                    "semantic validator cross_field_rules must be an array",
+                )
+            })?;
+        for (index, rule) in rules.iter().enumerate() {
+            let location = format!("{LOCATION}/cross_field_rules/{index}");
+            let rule = record_object(rule, &location)?;
+            reject_unknown_fields(rule, &["rule_id", "implementation_id"], &location)?;
+            require_string_field(rule, "rule_id", &location)?;
+            require_string_field(rule, "implementation_id", &location)?;
+        }
     }
     require_object_field(object, "extensions", LOCATION)?;
     let rules = required_field(object, "binding_rules", LOCATION)?
@@ -495,7 +561,10 @@ fn validate_validator_record_header(
             "semantic validator schema id is unsupported",
         ));
     }
-    if authored.schema_version != RECORD_SCHEMA_VERSION {
+    if !matches!(
+        authored.schema_version.as_str(),
+        RECORD_SCHEMA_VERSION | "1.1"
+    ) {
         return Err(unsupported_record(
             "semantic_validator/schema_version",
             "semantic validator schema version is unsupported",
@@ -583,15 +652,46 @@ fn resolve_validator(
 ) -> Result<SemanticValidationProfileDefinition, RegistryLoadError> {
     validate_validator_record_header(&authored)?;
     let exact_ref = ExactDefinitionRef::new(&authored.profile_id, &authored.profile_version)?;
-    let capability_id = SymbolicId::parse(&authored.capability_id).map_err(profile_error)?;
-    if exact_ref.as_str() != "handbook.semantic-validation.constitutional-root@1.0.0"
-        || capability_id.as_str() != "constitutional_root"
-        || authored.binding_rules.len() != CONSTITUTIONAL_BINDINGS.len()
-    {
+    let is_1_0 = exact_ref.as_str() == "handbook.semantic-validation.constitutional-root@1.0.0"
+        && authored.schema_version == RECORD_SCHEMA_VERSION
+        && authored.capability_id.as_deref() == Some("constitutional_root")
+        && authored.candidate_schema_ref.is_none()
+        && authored.capability_contract_ref.is_none()
+        && authored.cross_field_rules.is_none()
+        && authored.ordered_dimension_ids.is_none()
+        && authored.required_semantic_validator_refs.is_none();
+    let is_1_1 = exact_ref.as_str() == "handbook.semantic-validation.constitutional-root@1.1.0"
+        && authored.schema_version == "1.1"
+        && authored.capability_id.is_none()
+        && authored.candidate_schema_ref.as_deref()
+            == Some("handbook.schemas.artifacts.project-authority@1.1.0")
+        && authored.capability_contract_ref.as_deref()
+            == Some("handbook.capabilities.constitutional-root@1.0.0")
+        && authored.cross_field_rules.as_deref().is_some_and(|rules| {
+            rules.len() == CONSTITUTIONAL_CROSS_FIELD_RULES.len()
+                && rules.iter().zip(CONSTITUTIONAL_CROSS_FIELD_RULES).all(
+                    |(rule, (rule_id, implementation_id))| {
+                        rule.rule_id == rule_id && rule.implementation_id == implementation_id
+                    },
+                )
+        })
+        && authored
+            .ordered_dimension_ids
+            .as_deref()
+            .is_some_and(|dimensions| {
+                dimensions
+                    .iter()
+                    .map(String::as_str)
+                    .eq(CONSTITUTIONAL_DIMENSIONS)
+            })
+        && authored.required_semantic_validator_refs.as_deref()
+            == Some(&["handbook.semantic-validation.constitutional-root@1.0.0".to_owned()]);
+    if (!is_1_0 && !is_1_1) || authored.binding_rules.len() != CONSTITUTIONAL_BINDINGS.len() {
         return Err(unsupported(
-            "HCM-1.2 admits only the exact constitutional validator profile",
+            "only the exact constitutional validator profiles are admitted",
         ));
     }
+    let capability_id = SymbolicId::parse("constitutional_root").map_err(profile_error)?;
     let mut seen = BTreeSet::new();
     let mut binding_rules = Vec::new();
     for (index, rule) in authored.binding_rules.iter().enumerate() {
@@ -628,7 +728,33 @@ fn resolve_validator(
         });
     }
     let supplied = DefinitionFingerprint::parse(&authored.profile_fingerprint)?;
-    let computed = fingerprint_serializable(&authored)?;
+    let computed = if is_1_1 {
+        fingerprint_serializable(&SemanticValidatorClosure {
+            definition: &authored,
+            resolved_dependencies: vec![
+                SemanticValidatorDependency {
+                    definition_fingerprint:
+                        "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+                    definition_ref: "handbook.schemas.artifacts.project-authority@1.1.0",
+                    dependency_role: "candidate_schema",
+                },
+                SemanticValidatorDependency {
+                    definition_fingerprint:
+                        "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998",
+                    definition_ref: "handbook.capabilities.constitutional-root@1.0.0",
+                    dependency_role: "capability_contract",
+                },
+                SemanticValidatorDependency {
+                    definition_fingerprint:
+                        "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738",
+                    definition_ref: "handbook.semantic-validation.constitutional-root@1.0.0",
+                    dependency_role: "required_semantic_validator",
+                },
+            ],
+        })?
+    } else {
+        fingerprint_serializable(&authored)?
+    };
     if supplied != computed {
         return Err(fingerprint_mismatch("semantic validator"));
     }
@@ -718,6 +844,17 @@ struct CapabilityClosure<'a> {
     definition: &'a AuthoredCapabilityContract,
     semantic_validator_fingerprints: Vec<&'a str>,
 }
+#[derive(Serialize)]
+struct SemanticValidatorClosure<'a> {
+    definition: &'a AuthoredValidatorProfile,
+    resolved_dependencies: Vec<SemanticValidatorDependency<'a>>,
+}
+#[derive(Serialize)]
+struct SemanticValidatorDependency<'a> {
+    definition_fingerprint: &'a str,
+    definition_ref: &'a str,
+    dependency_role: &'a str,
+}
 const CONSTITUTIONAL_BINDINGS: [&str; 9] = [
     "policy_root",
     "policy_revision",
@@ -728,6 +865,30 @@ const CONSTITUTIONAL_BINDINGS: [&str; 9] = [
     "red_lines",
     "review_triggers",
     "reassessment_triggers",
+];
+const CONSTITUTIONAL_DIMENSIONS: [&str; 9] = [
+    "speed_vs_quality",
+    "type_safety_static_analysis",
+    "testing_rigor",
+    "scalability_performance",
+    "reliability_operability",
+    "security_privacy",
+    "observability",
+    "dx_tooling_automation",
+    "ux_polish_api_usability",
+];
+const CONSTITUTIONAL_CROSS_FIELD_RULES: [(&str, &str); 5] = [
+    (
+        "exact_dimension_sequence",
+        "charter-exact-dimension-sequence-v1",
+    ),
+    ("effective_level", "charter-effective-level-1-through-5-v1"),
+    ("concrete_posture_text", "charter-concrete-posture-text-v1"),
+    ("governance_bindings", "charter-governance-binding-v1"),
+    (
+        "retained_input_validation",
+        "charter-retained-input-validation-v1",
+    ),
 ];
 fn insert_unique<T>(
     map: &mut BTreeMap<ExactDefinitionRef, T>,

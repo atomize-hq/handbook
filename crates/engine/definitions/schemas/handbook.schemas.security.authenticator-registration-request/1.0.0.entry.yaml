@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.schema-registry-entry",
+  "schema_version": "1.0",
+  "content_schema_id": "handbook.schemas.security.authenticator-registration-request",
+  "content_schema_version": "1.0.0",
+  "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-registration-request/1.0.0.schema.json",
+  "document_fingerprint": "sha256:f2a352f15cb28f3770666f683b8dbc9f1f1d18f0cedee6d3b95e8241db0c4059",
+  "closure_fingerprint": "sha256:d650b798a000894ffe3d90745283b9d733ddcfd4aa7efa089539e6292d308f93",
+  "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+  "media_type": "application/schema+json",
+  "compatibility": "exact",
+  "extensions": {},
+  "entry_fingerprint": "sha256:8b8ca6acb8572dff1b311aef58d85b893377ed7c6864af66394a9e27ed1131b6"
+}

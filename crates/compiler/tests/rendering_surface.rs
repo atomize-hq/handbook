@@ -1,13 +1,21 @@
-use handbook_compiler::rendering::{render_inspect, render_markdown};
-use handbook_compiler::{build_output_model, render_json, resolve};
+#[cfg(unix)]
+use handbook_compiler::render_json;
+#[cfg(unix)]
+use handbook_compiler::rendering::render_inspect;
+use handbook_compiler::rendering::render_markdown;
+use handbook_compiler::{build_output_model, resolve};
 #[cfg(unix)]
 use handbook_engine::{
     parse_canonical_project_context, render_project_context_markdown,
     resolve_shipped_profile_decisions,
 };
+#[cfg(unix)]
 use handbook_engine::{setup_starter_template_bytes, CanonicalArtifactKind};
-use handbook_flow::{BudgetPolicy, ResolveRequest};
+#[cfg(unix)]
+use handbook_flow::BudgetPolicy;
+use handbook_flow::ResolveRequest;
 
+#[cfg(unix)]
 fn write_file(path: &std::path::Path, contents: &[u8]) {
     if let Some(parent) = path.parent() {
         std::fs::create_dir_all(parent).expect("mkdirs");
@@ -15,6 +23,7 @@ fn write_file(path: &std::path::Path, contents: &[u8]) {
     std::fs::write(path, contents).expect("write");
 }
 
+#[cfg(unix)]
 fn valid_charter_markdown() -> &'static str {
     "# Engineering Charter — Handbook
 
@@ -64,6 +73,7 @@ Review monthly.
 "
 }
 
+#[cfg(unix)]
 fn valid_project_context_markdown() -> &'static str {
     concat!(
         "schema_id: \"handbook.artifact.project-context\"\n",
@@ -81,6 +91,7 @@ fn valid_project_context_markdown() -> &'static str {
     )
 }
 
+#[cfg(unix)]
 fn valid_environment_inventory_markdown() -> &'static str {
     "# Environment Inventory
 
@@ -122,6 +133,7 @@ Canonical environment and runtime inventory.
 "
 }
 
+#[cfg(unix)]
 fn assert_in_order(haystack: &str, needles: &[&str]) {
     let mut last = 0;
     for needle in needles {
@@ -132,6 +144,7 @@ fn assert_in_order(haystack: &str, needles: &[&str]) {
     }
 }
 
+#[cfg(unix)]
 fn write_valid_project_context(root: &std::path::Path) {
     write_file(
         &root.join(".handbook/project/context.yaml"),

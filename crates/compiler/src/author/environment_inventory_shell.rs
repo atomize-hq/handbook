@@ -13,7 +13,6 @@ use super::{
     validate_system_root_for_authoring, AuthoringLockError, BaselineAuthoringEligibility,
     SystemRootAuthoringError,
 };
-use crate::baseline_validation::{baseline_artifact_validation, BaselineArtifactVerdict};
 use crate::canonical_artifacts::{CanonicalArtifactKind, CanonicalArtifacts};
 use crate::layout::RepoLayoutRoot;
 use crate::repo_file_access::write_repo_relative_bytes;
@@ -25,6 +24,14 @@ const AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR: &str =
     "HANDBOOK_AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC";
 const NOW_UTC_FORMAT: &[time::format_description::FormatItem<'static>] =
     format_description!("[year]-[month]-[day]T[hour]:[minute]:[second]Z");
+
+pub(super) struct EnvironmentInventoryUpstreamSelection {
+    pub(super) charter_path: String,
+    pub(super) charter_source_fingerprint: String,
+    pub(super) charter_promotion_ref: String,
+    pub(super) charter_lifecycle_transition_ref: String,
+    pub(super) project_context_path: String,
+}
 
 pub(super) fn render_environment_inventory_markdown(
     input: &EnvironmentInventoryStructuredInput,
@@ -41,7 +48,7 @@ pub(super) fn render_environment_inventory_markdown(
 
 pub(super) fn preflight_author_environment_inventory(
     repo_root: &Path,
-) -> Result<String, AuthorEnvironmentInventoryRefusal> {
+) -> Result<EnvironmentInventoryUpstreamSelection, AuthorEnvironmentInventoryRefusal> {
     let artifacts = CanonicalArtifacts::load_fixed_siblings(repo_root).map_err(|err| {
         AuthorEnvironmentInventoryRefusal {
             kind: AuthorEnvironmentInventoryRefusalKind::InvalidSystemRoot,
@@ -53,8 +60,15 @@ pub(super) fn preflight_author_environment_inventory(
     })?;
 
     validate_environment_inventory_authoring_preconditions(repo_root, &artifacts)?;
-    required_charter_markdown(&artifacts)?;
-    required_project_context_path(repo_root)
+    let charter = required_selected_charter(repo_root)?;
+    let project_context_path = required_project_context_path(repo_root)?;
+    Ok(EnvironmentInventoryUpstreamSelection {
+        charter_path: charter.canonical_path().to_owned(),
+        charter_source_fingerprint: charter.source_fingerprint().to_string(),
+        charter_promotion_ref: charter.promotion_ref,
+        charter_lifecycle_transition_ref: charter.lifecycle_transition_ref,
+        project_context_path,
+    })
 }
 
 pub(super) fn with_environment_inventory_authoring_lock<T, F>(
@@ -203,51 +217,88 @@ fn validate_environment_inventory_authoring_preconditions(
     Ok(())
 }
 
-fn required_charter_markdown(
-    artifacts: &CanonicalArtifacts,
-) -> Result<String, AuthorEnvironmentInventoryRefusal> {
-    let validation = baseline_artifact_validation(artifacts, CanonicalArtifactKind::Charter)
-        .expect("charter must be part of baseline validation");
+struct SelectedCharterPreflightCarrier {
+    projection: handbook_engine::CanonicalCharterProjection,
+    promotion_ref: String,
+    lifecycle_transition_ref: String,
+}
 
-    match validation.verdict {
-        BaselineArtifactVerdict::Missing => Err(AuthorEnvironmentInventoryRefusal {
-            kind: AuthorEnvironmentInventoryRefusalKind::MissingRequiredCharter,
-            summary:
-                "canonical charter truth is missing; environment inventory authoring requires a completed charter first"
-                    .to_string(),
-            broken_subject: ".handbook/charter/CHARTER.md".to_string(),
-            next_safe_action: "run `handbook author charter --from-inputs <path|->`".to_string(),
-        }),
-        BaselineArtifactVerdict::Empty => Err(AuthorEnvironmentInventoryRefusal {
-            kind: AuthorEnvironmentInventoryRefusalKind::MissingRequiredCharter,
-            summary:
-                "canonical charter truth is empty; environment inventory authoring requires a completed charter first"
-                    .to_string(),
-            broken_subject: ".handbook/charter/CHARTER.md".to_string(),
-            next_safe_action: "run `handbook author charter --from-inputs <path|->`".to_string(),
-        }),
-        BaselineArtifactVerdict::StarterOwned => Err(AuthorEnvironmentInventoryRefusal {
-            kind: AuthorEnvironmentInventoryRefusalKind::MissingRequiredCharter,
-            summary:
-                "canonical charter truth still contains the shipped starter template; environment inventory authoring requires a completed charter first"
-                    .to_string(),
-            broken_subject: ".handbook/charter/CHARTER.md".to_string(),
-            next_safe_action: "run `handbook author charter --from-inputs <path|->`".to_string(),
-        }),
-        BaselineArtifactVerdict::IngestInvalid => Err(invalid_upstream_canonical_truth_refusal(
-            ".handbook/charter/CHARTER.md",
-            "canonical charter truth is unreadable or non-canonical; environment inventory authoring requires valid charter truth".to_string(),
-            "run `handbook setup refresh`".to_string(),
-        )),
-        BaselineArtifactVerdict::SemanticallyInvalid { summary } => {
-            Err(invalid_upstream_canonical_truth_refusal(
-                ".handbook/charter/CHARTER.md",
-                format!("canonical charter truth is invalid: {summary}"),
-                "run `handbook author charter --from-inputs <path|->`".to_string(),
-            ))
-        }
-        BaselineArtifactVerdict::ValidCanonicalTruth { markdown } => Ok(markdown),
+impl SelectedCharterPreflightCarrier {
+    fn canonical_path(&self) -> &str {
+        self.projection.canonical_path()
     }
+
+    fn source_fingerprint(&self) -> &handbook_engine::DefinitionFingerprint {
+        self.projection.source_fingerprint()
+    }
+}
+
+fn required_selected_charter(
+    repo_root: &Path,
+) -> Result<SelectedCharterPreflightCarrier, AuthorEnvironmentInventoryRefusal> {
+    let decisions =
+        handbook_engine::resolve_shipped_profile_decisions(repo_root).map_err(|_| {
+            invalid_upstream_canonical_truth_refusal(
+                ".handbook/project/charter.yaml",
+                "failed to resolve the selected Charter contract".to_owned(),
+                "repair the installed Handbook definition package and retry".to_owned(),
+            )
+        })?;
+    let projection =
+        handbook_engine::load_selected_charter(repo_root, &decisions).map_err(|error| {
+            let kind = if error.status() == handbook_engine::ArtifactInspectionStatus::Missing {
+                AuthorEnvironmentInventoryRefusalKind::MissingRequiredCharter
+            } else {
+                AuthorEnvironmentInventoryRefusalKind::InvalidUpstreamCanonicalTruth
+            };
+            AuthorEnvironmentInventoryRefusal {
+                kind,
+                summary: format!(
+                    "selected canonical Charter is unavailable: {:?}",
+                    error.reason()
+                ),
+                broken_subject: error.canonical_path().to_owned(),
+                next_safe_action:
+                    "author, approve, and promote `.handbook/project/charter.yaml`, then retry"
+                        .to_owned(),
+            }
+        })?;
+    let committed = handbook_engine::CharterAuthorityTransactionServiceV1::new(repo_root)
+        .read_committed_charter()
+        .map_err(|error| {
+            invalid_upstream_canonical_truth_refusal(
+                projection.canonical_path(),
+                format!(
+                    "selected Charter committed-authority read failed: {:?}",
+                    error.kind()
+                ),
+                "repair the Charter promotion journal and retry".to_owned(),
+            )
+        })?
+        .ok_or_else(|| {
+            invalid_upstream_canonical_truth_refusal(
+                projection.canonical_path(),
+                "selected Charter has no committed promotion authority".to_owned(),
+                "approve and promote the selected Charter, then retry".to_owned(),
+            )
+        })?;
+    if committed.canonical_fingerprint != projection.source_fingerprint().as_str() {
+        return Err(invalid_upstream_canonical_truth_refusal(
+            projection.canonical_path(),
+            format!(
+                "selected Charter source fingerprint {} does not match committed authority {}",
+                projection.source_fingerprint(),
+                committed.canonical_fingerprint
+            ),
+            "repair or repromote selected Charter authority, then retry".to_owned(),
+        ));
+    }
+
+    Ok(SelectedCharterPreflightCarrier {
+        projection,
+        promotion_ref: committed.promotion_ref,
+        lifecycle_transition_ref: committed.lifecycle_transition_ref,
+    })
 }
 
 fn required_project_context_path(

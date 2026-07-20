@@ -1,0 +1,130 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T003915Z--HCM-2-2--lineage-promotion-lifecycle-implementation",
+  "created_at_utc": "2026-07-20T00:39:15Z",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "resume_same_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "api-and-interface-design",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": "HCM-2.2",
+  "subject_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "4f6124e859ca036d7dd77899e22b7a5b4142429ac15c1e6d1b5ac74d160515b2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+        "sha256": "afaf40256cc0b9aed8d08a4ef8b689fca7d0e889b46b7c5ea57e4ae45b195d17"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+        "sha256": "ae8ca42931573a88e1e0c26b211853bf9bb00107212fa6d7885eee58523f583e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8"
+  },
+  "active_resolution": {
+    "level": "bounded_authority_transaction_implementation",
+    "scope_horizon": "HCM-2.2-lineage-promotion-lifecycle",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "approved_slice_packet",
+    "memory_horizon": "live_repository_truth",
+    "validation_horizon": "focused_transaction_red_green"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "Acquisition and immutable lineage",
+        "Global authority lock order and retained observations",
+        "Promotion transaction protocol",
+        "Deterministic canonical bytes, renderer, and lifecycle",
+        "API, security, and compatibility posture"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json",
+      "sections": ["all"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/platform-support-matrix-v1.0.json",
+      "sections": ["all"]
+    }
+  ],
+  "repo_truth": "Definition/profile, canonical Charter, intake evaluator, lifecycle state machine, runtime-vector validator, native Windows strict reads, and authenticator/approver security core are present in the shared worktree with focused suites green. This lane owns append-only storage plus transaction/recovery/promotion integration only.",
+  "allowed_scope": [
+    "Add narrowly factored engine modules for trusted append-only content-addressed lineage storage, authority locks, journal intents/commit markers/recovery, approval records, promotion, and lifecycle commit integration.",
+    "Add focused engine tests named hcm_2_2_*transaction*.rs, hcm_2_2_*promotion*.rs, or hcm_2_2_*lineage_store*.rs and use frozen packet vectors directly.",
+    "Coordinate only additive module declarations/reexports in crates/engine/src/lib.rs with the parent. Do not edit parent-owned Charter/intake/lifecycle/authenticator modules without an explicit parent continuation.",
+    "Use RED tests first and run with CARGO_TARGET_DIR=D:\\codex-build\\handbook-hcm22 and TEMP/TMP=D:\\codex-temp\\handbook-hcm22.",
+    "Run GitNexus impact before every existing function/class/method edit; report and pause before HIGH or CRITICAL edits."
+  ],
+  "non_goals": [
+    "Do not edit definitions, schemas, profiles, compiler, flow, CLI, skills, setup, doctor, proof/control, planning, handoff, ledger, or other dispatch files.",
+    "Do not weaken native Windows refusal/identity guarantees, add a fallback lock/write path, delete final content-addressed records, or implement HCM-2.3.",
+    "Do not commit or create handoffs, ledger rows, dispatches, or user-visible task hops."
+  ],
+  "tasks": [
+    "Read the complete dispatch, exact authority sections and vectors, live parent modules, and platform boundaries.",
+    "Write RED tests for create-new-or-equal append-only records, safe refs/bounds, create-null versus mandatory amendment basis equality, recovery-before-intent, raw 72-byte commit markers, total observed-state recovery, partial installs, ABA/substitution, concurrency, and no visible partial authority.",
+    "Implement the smallest fail-closed service that persists exact intake/candidate/approval/promotion/lifecycle records and makes promotion the sole canonical Charter write authority.",
+    "Return exact implemented versus remaining protocol coverage, changed files, RED/GREEN evidence, GitNexus impacts, and parent integration requirements."
+  ],
+  "contracts_and_gates": [
+    "No mutating operation proceeds without a safe native platform path; unsupported paths refuse before directories, locks, intents, semantic records, or platform calls.",
+    "Canonical truth, promotion record, and lifecycle transition become authority-visible through one journal commit point under promotion-then-registry-then-lifecycle lock order.",
+    "Every downstream basis, retained registry pair, declared fingerprint, content-addressed ref basename, and staged byte fingerprint is equal and revalidated at promotion/recovery.",
+    "Final content-addressed records are never deleted during rollback; preexisting equal bytes are reusable and unequal bytes refuse."
+  ],
+  "stop_conditions": [
+    "Stop before any HIGH or CRITICAL existing-symbol edit and return the blast radius to the parent.",
+    "Return blocked if one durable authority-visibility commit cannot be provided on native Windows without a weaker fallback.",
+    "Return blocked if the required record protocol conflicts with frozen vectors or requires HCM-2.3."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "impact_analysis",
+      "validation",
+      "remaining_protocol_work",
+      "parent_disposition"
+    ]
+  }
+}

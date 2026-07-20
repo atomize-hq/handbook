@@ -1,15 +1,20 @@
-use handbook_compiler::{render_next_safe_action_value, resolve, BlockerCategory};
+use handbook_compiler::resolve;
+#[cfg(unix)]
+use handbook_compiler::{render_next_safe_action_value, BlockerCategory};
 #[cfg(unix)]
 use handbook_engine::{
     parse_canonical_project_context, render_project_context_markdown,
     resolve_shipped_profile_decisions,
 };
+#[cfg(unix)]
 use handbook_engine::{setup_starter_template_bytes, CanonicalArtifactKind};
+#[cfg(unix)]
 use handbook_flow::{
-    BudgetDisposition, BudgetPolicy, PacketSectionMode, PacketSelectionStatus, PacketVariant,
-    ReadyPacketNextSafeAction, ResolveRequest,
+    BudgetDisposition, BudgetPolicy, PacketSectionMode, PacketVariant, ReadyPacketNextSafeAction,
 };
+use handbook_flow::{PacketSelectionStatus, ResolveRequest};
 
+#[cfg(unix)]
 fn write_file(path: &std::path::Path, contents: &[u8]) {
     if let Some(parent) = path.parent() {
         std::fs::create_dir_all(parent).expect("mkdirs");
@@ -17,6 +22,7 @@ fn write_file(path: &std::path::Path, contents: &[u8]) {
     std::fs::write(path, contents).expect("write");
 }
 
+#[cfg(unix)]
 fn valid_charter_markdown() -> &'static str {
     "# Engineering Charter — Handbook
 
@@ -66,6 +72,7 @@ Review monthly.
 "
 }
 
+#[cfg(unix)]
 fn valid_project_context_markdown() -> &'static str {
     concat!(
         "schema_id: \"handbook.artifact.project-context\"\n",
@@ -83,6 +90,7 @@ fn valid_project_context_markdown() -> &'static str {
     )
 }
 
+#[cfg(unix)]
 fn valid_environment_inventory_markdown() -> &'static str {
     "# Environment Inventory
 
@@ -124,6 +132,7 @@ Canonical environment and runtime inventory.
 "
 }
 
+#[cfg(unix)]
 fn oversized_valid_environment_inventory_markdown() -> String {
     format!(
         "{}\n{}",
@@ -132,6 +141,7 @@ fn oversized_valid_environment_inventory_markdown() -> String {
     )
 }
 
+#[cfg(unix)]
 fn invalid_optional_project_context_markdown() -> String {
     format!(
         "{}unexpected_field: true\n",
@@ -139,12 +149,14 @@ fn invalid_optional_project_context_markdown() -> String {
     )
 }
 
+#[cfg(unix)]
 fn sha256_hex(bytes: &[u8]) -> String {
     use sha2::{Digest, Sha256};
 
     format!("{:x}", Sha256::digest(bytes))
 }
 
+#[cfg(unix)]
 fn write_valid_project_context(repo_root: &std::path::Path) {
     write_file(
         &repo_root.join(".handbook/project/context.yaml"),
@@ -171,7 +183,7 @@ fn resolver_returns_typed_result_when_system_root_missing() {
 
     let result = resolve(repo_root, ResolveRequest::default()).expect("resolve");
 
-    assert_eq!(result.c04_result_version, "reduced-v1-m8.2");
+    assert_eq!(result.c04_result_version, "reduced-v1-m8.3");
     assert_eq!(result.c03_schema_version, "reduced-v1-m8");
     assert_eq!(result.c03_manifest_generation_version, 1);
     assert_eq!(result.selection.status, PacketSelectionStatus::Blocked);

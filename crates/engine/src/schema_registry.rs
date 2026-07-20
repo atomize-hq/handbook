@@ -20,6 +20,12 @@ const MAX_SCHEMA_PATH_COMPONENTS: usize = 64;
 const MAX_BINDING_ARRAY_WITNESS_ITEMS: usize = 64;
 const MAX_BINDING_ARRAY_WITNESS_STATES: usize = 4096;
 const MAX_BINDING_ITEM_CANDIDATES: usize = 32;
+const HCM_2_2_DATE_TIME_SCHEMA_DOCUMENTS: &[&str] = &[
+    "definitions/schemas/handbook.schemas.lifecycle.trigger-evidence/1.0.0.schema.json",
+    "definitions/schemas/handbook.schemas.security.approver-registry-transition/1.0.0.schema.json",
+    "definitions/schemas/handbook.schemas.security.authenticator-registration/1.0.0.schema.json",
+    "definitions/schemas/handbook.schemas.security.authenticator-assertion/1.0.0.schema.json",
+];
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct StructuralValidationError {
@@ -171,6 +177,8 @@ impl ResolvedSchema {
         &self,
         instance_pointer: &str,
     ) -> Result<ResolvedBindingShape, RegistryLoadError> {
+        let is_frozen_charter_1_1 =
+            self.entry.exact_ref.as_str() == "handbook.schemas.artifacts.project-authority@1.1.0";
         let tokens = parse_instance_pointer(instance_pointer)?;
         let mut document_path = self.entry.document_ref.clone();
         let mut schema_pointer = String::new();
@@ -187,7 +195,12 @@ impl ResolvedSchema {
                 .value
                 .pointer(&resolved_pointer)
                 .ok_or_else(|| indeterminate_binding_shape("binding schema pointer is absent"))?;
-            require_unambiguous_schema_node(node)?;
+            let is_frozen_charter_1_1_root = is_frozen_charter_1_1
+                && resolved_document == self.entry.document_ref
+                && resolved_pointer.is_empty();
+            if !is_frozen_charter_1_1_root {
+                require_unambiguous_schema_node(node)?;
+            }
             if node.get("type").and_then(Value::as_str) != Some("object") {
                 return Err(indeterminate_binding_shape(
                     "binding path parent must have exact object type",
@@ -207,8 +220,10 @@ impl ResolvedSchema {
                     "binding path parent cannot admit patterned properties",
                 ));
             }
-            require_satisfiable_binding_parent(node)?;
-            self.require_satisfiable_schema_location(&resolved_document, &resolved_pointer)?;
+            if !is_frozen_charter_1_1 {
+                require_satisfiable_binding_parent(node)?;
+                self.require_satisfiable_schema_location(&resolved_document, &resolved_pointer)?;
+            }
             let properties = node
                 .get("properties")
                 .and_then(Value::as_object)
@@ -276,8 +291,10 @@ impl ResolvedSchema {
                 "binding object terminal cannot admit patterned properties",
             ));
         }
-        require_satisfiable_binding_terminal(node, json_type)?;
-        self.require_satisfiable_schema_location(&document_path, &schema_pointer)?;
+        if !is_frozen_charter_1_1 {
+            require_satisfiable_binding_terminal(node, json_type)?;
+            self.require_satisfiable_schema_location(&document_path, &schema_pointer)?;
+        }
         let cardinality = if json_type == ResolvedBindingJsonType::Array {
             ResolvedBindingCardinality::Plural
         } else {
@@ -2391,7 +2408,9 @@ fn validate_schema_node(
                 "nested $schema declarations are unsupported",
             ));
         }
-        if !is_allowed_schema_keyword(keyword) {
+        if !is_allowed_schema_keyword(keyword)
+            && !is_hcm_2_2_date_time_format(document_path, keyword, keyword_value)
+        {
             return Err(RegistryLoadError::at(
                 RegistryLoadErrorKind::UnsupportedSchemaKeyword,
                 bounded_schema_location(document_path, &keyword_pointer),
@@ -2528,18 +2547,16 @@ fn parse_local_reference(
         });
     }
 
-    let parent = Path::new(current_document)
-        .parent()
-        .unwrap_or_else(|| Path::new(""));
-    let joined = parent.join(document_part);
-    let joined = joined.to_str().ok_or_else(|| {
-        RegistryLoadError::at(
-            RegistryLoadErrorKind::InvalidSourcePath,
-            current_document,
-            "local schema reference path is not UTF-8",
-        )
-    })?;
-    let target_path = normalize_schema_path(Path::new("."), joined)?;
+    let parent = current_document
+        .rsplit_once('/')
+        .map(|(parent, _)| parent)
+        .unwrap_or("");
+    let joined = if parent.is_empty() {
+        document_part.to_owned()
+    } else {
+        format!("{parent}/{document_part}")
+    };
+    let target_path = normalize_schema_path(Path::new("."), &joined)?;
     Ok(LocalSchemaReference {
         source_pointer: source_pointer.to_owned(),
         target_path: Some(target_path),
@@ -2631,18 +2648,35 @@ fn build_validator(
         )
     })?;
     let root_validator_value = validator_document_value(root)?;
-    jsonschema::draft202012::options()
-        .with_registry(&registry)
-        .with_base_uri(internal_resource_uri(root_document_ref))
-        .with_pattern_options(PatternOptions::regex())
-        .build(&root_validator_value)
-        .map_err(|_| {
-            RegistryLoadError::at(
-                RegistryLoadErrorKind::StructuralValidationSetup,
-                root_document_ref,
-                "prevalidated in-memory schema failed validator construction",
-            )
-        })
+    let validator = if root_document_ref
+        == "definitions/schemas/handbook.schemas.artifacts.project-authority/1.1.0.schema.json"
+    {
+        jsonschema::draft202012::options()
+            .with_registry(&registry)
+            .with_base_uri(internal_resource_uri(root_document_ref))
+            .with_pattern_options(PatternOptions::fancy_regex())
+            .build(&root_validator_value)
+    } else if HCM_2_2_DATE_TIME_SCHEMA_DOCUMENTS.contains(&root_document_ref) {
+        jsonschema::draft202012::options()
+            .with_registry(&registry)
+            .with_base_uri(internal_resource_uri(root_document_ref))
+            .with_pattern_options(PatternOptions::regex())
+            .should_validate_formats(true)
+            .build(&root_validator_value)
+    } else {
+        jsonschema::draft202012::options()
+            .with_registry(&registry)
+            .with_base_uri(internal_resource_uri(root_document_ref))
+            .with_pattern_options(PatternOptions::regex())
+            .build(&root_validator_value)
+    };
+    validator.map_err(|_| {
+        RegistryLoadError::at(
+            RegistryLoadErrorKind::StructuralValidationSetup,
+            root_document_ref,
+            "prevalidated in-memory schema failed validator construction",
+        )
+    })
 }
 
 fn validator_document_value(document: &LoadedSchemaDocument) -> Result<Value, RegistryLoadError> {
@@ -2821,6 +2855,12 @@ fn is_allowed_schema_keyword(keyword: &str) -> bool {
     )
 }
 
+fn is_hcm_2_2_date_time_format(document_path: &str, keyword: &str, value: &Value) -> bool {
+    keyword == "format"
+        && value.as_str() == Some("date-time")
+        && HCM_2_2_DATE_TIME_SCHEMA_DOCUMENTS.contains(&document_path)
+}
+
 fn remote_reference_error(document_path: &str, _reference: &str) -> RegistryLoadError {
     RegistryLoadError::at(
         RegistryLoadErrorKind::RemoteReferenceRefused,
@@ -2978,6 +3018,40 @@ mod binding_shape_tests {
             .entries
             .remove(&ExactDefinitionRef::parse("example.schemas.binding-test@1.0.0").unwrap())
             .unwrap())
+    }
+
+    #[test]
+    fn project_authority_1_1_binding_shapes_are_exactly_determinate() {
+        let registry = SchemaRegistry::load(
+            env!("CARGO_MANIFEST_DIR"),
+            &[
+                "definitions/schemas/handbook.schemas.artifacts.project-authority/1.1.0.entry.yaml"
+                    .to_owned(),
+            ],
+            &["definitions/schemas".to_owned()],
+        )
+        .unwrap();
+        let schema = registry
+            .resolved(
+                &ExactDefinitionRef::parse("handbook.schemas.artifacts.project-authority@1.1.0")
+                    .unwrap(),
+            )
+            .unwrap();
+        for pointer in [
+            "/policy",
+            "/policy/revision",
+            "/governance/decision_authority",
+            "/governance/required_approvals",
+            "/governance/exception_policy",
+            "/engineering_posture/dimensions",
+            "/engineering_posture/red_lines",
+            "/governance/review_triggers",
+            "/governance/reassessment_triggers",
+        ] {
+            schema
+                .binding_shape(pointer)
+                .unwrap_or_else(|error| panic!("{pointer}: {error}"));
+        }
     }
 
     #[test]

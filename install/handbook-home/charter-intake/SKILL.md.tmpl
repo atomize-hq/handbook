@@ -1,18 +1,13 @@
 ---
 name: handbook-charter-intake
-description: "Run the installed Handbook charter intake workflow from inside a real git repository using ~/handbook/bin/handbook and the installed Handbook resource bundle."
+description: "Acquire, approve, promote, or validate a Handbook Charter through the installed native CLI workflow."
 ---
 
 # Handbook Charter Intake
 
-Generated discovery surface for the `Handbook` charter intake workflow. `~/.codex/skills/handbook-charter-intake` is discovery glue only, not the installed home.
+Use this skill only inside a real git work tree. The installed CLI owns immutable lineage, native-authority decisions, promotion, canonical YAML, and rendered review views.
 
-Expected user-global install surfaces:
-
-- `~/handbook/`
-- `~/.codex/skills/handbook-charter-intake`
-
-Use this skill only from inside a real git work tree. Resolve the installed `handbook` home and export `HANDBOOK_HOME` before invoking `~/handbook/bin/handbook` directly:
+Resolve the installed runtime first:
 
 ```bash
 repo_root="$(git rev-parse --show-toplevel 2>/dev/null)" || {
@@ -32,15 +27,29 @@ for required in \
   }
 done
 export HANDBOOK_HOME="$handbook_home"
+cd "$repo_root"
 ```
 
-Workflow:
+Choose exactly one acquisition mode and prepare one closed, typed intake envelope outside the repository. Gather evidenced repository facts; record unknowns and contradictions in the envelope instead of inventing answers. The workflow has no secondary model invocation or CLI questionnaire.
 
-1. Review `$HANDBOOK_HOME/resources/authoring/charter_authoring_method.md` and `$HANDBOOK_HOME/resources/charter/charter_inputs_directive.md`.
-2. Gather concrete repository facts needed to fill the normalized YAML shape from `$HANDBOOK_HOME/resources/charter/CHARTER_INPUTS.yaml.tmpl`; do not run a human interview or invent missing facts.
-3. Write the normalized YAML to a temporary file outside the target repo.
-4. Validate without mutation: `$HANDBOOK_HOME/bin/handbook author charter --validate --from-inputs <path|->`.
-5. Author the charter: `$HANDBOOK_HOME/bin/handbook author charter --from-inputs <path|->`.
-6. Treat `$HANDBOOK_HOME/bin/handbook doctor --json` as the only machine-parsed evidence surface after authoring.
+- `handbook author charter --mode guided-adaptive --from-inputs <path|->`
+- `handbook author charter --mode express --from-inputs <path|->`
+- `handbook author charter --mode agent-assisted --from-inputs <path|->`
 
-Repo-local `.agents/skills/handbook*` trees remain thin generated projections. They are never the runtime payload root.
+Successful acquisition creates immutable intake and candidate lineage only. It does not select canonical truth. Present the candidate reference, fingerprint, rendered review view, unresolved unknowns, contradictions, and required approval classes to the user.
+
+The candidate requires human approval as an explicit later action through native authority:
+
+- `handbook author charter --approve-candidate <candidate-ref> --approval-class <class> --authority-ref <authority-ref>`
+
+After all required approvals exist, promote the exact approved candidate:
+
+- `handbook author charter --promote-candidate <candidate-ref> --approval-ref <approval-ref>`
+
+Validate selected canonical truth without mutation:
+
+- `handbook author charter --validate`
+
+Use `--json` for machine-readable results. Honor every typed refusal and next action. Never edit canonical Charter YAML or rendered Markdown directly, never self-approve, and never infer an authority reference.
+
+Repo-local `.agents/skills/handbook*` trees are generated discovery projections, not the runtime payload root.

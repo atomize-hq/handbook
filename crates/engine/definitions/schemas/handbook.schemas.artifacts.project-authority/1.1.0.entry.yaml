@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.schema-registry-entry",
+  "schema_version": "1.0",
+  "content_schema_id": "handbook.schemas.artifacts.project-authority",
+  "content_schema_version": "1.1.0",
+  "document_ref": "definitions/schemas/handbook.schemas.artifacts.project-authority/1.1.0.schema.json",
+  "document_fingerprint": "sha256:7afabe1e26ea2b56752ca7c23b2d1bfeb0beef89b15dc54f898785d5cc337a33",
+  "closure_fingerprint": "sha256:35758a71494f288b2874065bf1ee2fc7bf71136253c8dfcb28e7025b8e8bf076",
+  "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+  "media_type": "application/schema+json",
+  "compatibility": "exact",
+  "extensions": {},
+  "entry_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836"
+}

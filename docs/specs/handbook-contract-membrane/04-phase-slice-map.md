@@ -11,9 +11,10 @@ review-clean.
 
 HCM-1.1 through HCM-1.4 and HCM-2.1 have landed and closed through separately
 reviewed implementation and parent-handoff subjects. They are completed bounded
-evidence, not continuing implementation authority. HCM-2.2 and every later
-slice remain unauthorized until their own packets are created, reviewed, and
-explicitly selected.
+evidence, not continuing implementation authority. HCM-2.2 was selected and
+reached a non-authoritative implementation checkpoint, then stopped because its
+frozen candidate/validation identity graph is cyclic. It requires an additive
+authority decision before resumption. Every later slice remains unauthorized.
 
 ## Sequencing rule
 
@@ -301,17 +302,20 @@ legacy fixed Markdown path constant and re-exports are removed without an alias.
 
 ### `HCM-2.2` — Constitutional-root artifact
 
-**Planning status:** the planning-only packet at
-[`slices/HCM-2.2/`](slices/HCM-2.2/SPEC.md) freezes the proposed implementation
-boundary and is not runtime authority until fresh independent review returns
-`CLEAN`, the parent closes planning, and a later top-level session explicitly
-selects implementation.
+**Implementation status:** escalation required; non-authoritative blocked
+checkpoint. Fresh Review 2 rejected the complete subject, and bounded remediation
+proved that the frozen final-candidate fingerprint and content-addressed lifecycle
+validation-result ref require one another. No exact pre-finalization candidate
+identity is defined. The checkpoint and proof history at
+[`slices/HCM-2.2/`](slices/HCM-2.2/SPEC.md) are evidence only and grant no
+authority for HCM-2.3 or later work.
 
 - cut the constitutional-root artifact to canonical structured truth;
 - preserve semantic root authority without requiring a literal filename;
 - implement `CharterIntakeDefinition` as the first rich intake coverage contract;
 - support guided-adaptive, express, and agent-assisted acquisition through the skill-directed agent, all targeting the same Charter candidate schema;
 - preserve immutable intake provenance, explicit known unknowns, validation, approval, and promotion without restoring a nested CLI wizard;
+- establish one setup-initialized, engine-owned durable repository identity and engine-allocated bounded operation IDs without widening the frozen CLI grammar or granting adapter authority;
 - render Markdown and any other renderer-derived human-review view only through fixed deterministic, non-Resolution, first-party renderers reading approved canonical Charter YAML;
 - prove reproducible renderer-derived human-review output and lifecycle behavior.
 

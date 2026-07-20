@@ -268,8 +268,8 @@ fn generate_ignores_non_system_handoff_and_derived_files() {
 
     let baseline = run_in(root.as_path(), &["generate"]);
     assert!(
-        baseline.status.success(),
-        "baseline generate should succeed"
+        !baseline.status.success(),
+        "legacy-only baseline generate should refuse"
     );
     let baseline_stdout = String::from_utf8(baseline.stdout).expect("baseline stdout is utf-8");
 
@@ -277,17 +277,17 @@ fn generate_ignores_non_system_handoff_and_derived_files() {
 
     let output = run_in(root.as_path(), &["generate"]);
     assert!(
-        output.status.success(),
-        "generate should ignore non-.handbook noise"
+        !output.status.success(),
+        "generate should retain the selected-Charter refusal"
     );
     let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
 
     assert_eq!(stdout, baseline_stdout);
-    assert!(stdout.contains(".handbook/charter/CHARTER.md"), "{stdout}");
     assert!(
-        stdout.contains(".handbook/feature_spec/FEATURE_SPEC.md"),
+        stdout.contains(".handbook/project/charter.yaml"),
         "{stdout}"
     );
+    assert!(!stdout.contains(".handbook/charter/CHARTER.md"), "{stdout}");
     assert!(
         !stdout.contains("artifacts/feature_spec/FEATURE_SPEC.md"),
         "{stdout}"
@@ -304,20 +304,27 @@ fn inspect_ignores_non_system_handoff_and_derived_files() {
     let (_dir, root) = planning_ready_repo();
 
     let baseline = run_in(root.as_path(), &["inspect"]);
-    assert!(baseline.status.success(), "baseline inspect should succeed");
+    assert!(
+        !baseline.status.success(),
+        "legacy-only baseline inspect should refuse"
+    );
     let baseline_stdout = String::from_utf8(baseline.stdout).expect("baseline stdout is utf-8");
 
     seed_non_canonical_boundary_noise(root.as_path());
 
     let output = run_in(root.as_path(), &["inspect"]);
     assert!(
-        output.status.success(),
-        "inspect should ignore non-.handbook noise"
+        !output.status.success(),
+        "inspect should retain the selected-Charter refusal"
     );
     let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
 
     assert_eq!(stdout, baseline_stdout);
-    assert!(stdout.contains(".handbook/charter/CHARTER.md"), "{stdout}");
+    assert!(
+        stdout.contains(".handbook/project/charter.yaml"),
+        "{stdout}"
+    );
+    assert!(!stdout.contains(".handbook/charter/CHARTER.md"), "{stdout}");
     assert!(
         stdout.contains(".handbook/feature_spec/FEATURE_SPEC.md"),
         "{stdout}"

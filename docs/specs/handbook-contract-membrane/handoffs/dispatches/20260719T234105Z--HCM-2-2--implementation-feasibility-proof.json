@@ -1,0 +1,131 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260719T234105Z--HCM-2-2--implementation-feasibility-proof",
+  "created_at_utc": "2026-07-19T23:41:05Z",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "resume_same_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "proof",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": "HCM-2.2",
+  "subject_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "4f6124e859ca036d7dd77899e22b7a5b4142429ac15c1e6d1b5ac74d160515b2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+        "sha256": "afaf40256cc0b9aed8d08a4ef8b689fca7d0e889b46b7c5ea57e4ae45b195d17"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+        "sha256": "ae8ca42931573a88e1e0c26b211853bf9bb00107212fa6d7885eee58523f583e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8"
+  },
+  "active_resolution": {
+    "level": "implementation_feasibility",
+    "scope_horizon": "HCM-2.2",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "approved_slice_packet",
+    "memory_horizon": "live_repository_truth",
+    "validation_horizon": "pre_implementation_proof"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.2"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Artifact intake definition",
+        "Intake record",
+        "Candidate artifact",
+        "Approval record",
+        "Promotion record",
+        "Charter intake and canonical contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-INTAKE-01",
+        "PG-INTAKE-02",
+        "PG-CHARTER-01",
+        "BR-HCM-2-CHARTER-FLOW-01"
+      ]
+    }
+  ],
+  "repo_truth": "HEAD ab0c2613f215979d9336340e47a2a0e19f00096b is clean and synchronized. The selected v1.2 implementation-packet handoff validates with no blockers. HCM-2.1 is a live reviewed ancestor. Project Authority 1.0 remains released/minimal while legacy Charter structured input and Markdown author/flow paths remain live.",
+  "allowed_scope": [
+    "Read the exact HCM-2.2 packet, authority refs, live definition assets, Cargo manifests, and packet-listed engine/compiler/flow/CLI sources and tests.",
+    "Run read-only GitNexus query/context/impact and read-only tests or metadata inspection.",
+    "Return an ordered implementation map and contradictions or proof gaps to the parent."
+  ],
+  "non_goals": [
+    "Do not edit any repository file.",
+    "Do not implement HCM-2.2 or any sibling slice.",
+    "Do not write a global handoff, ledger row, or another internal dispatch.",
+    "Do not treat Markdown, prompts, or agent output as canonical authority."
+  ],
+  "tasks": [
+    "Independently replay packet authority and identify any contradiction with live HEAD that should stop implementation.",
+    "Map P1 through P7 to exact existing source symbols, new modules/assets, tests, and dependency/API needs.",
+    "Identify all existing functions/classes/methods likely to require pre-edit GitNexus impact analysis.",
+    "Recommend the smallest dependency-respecting RED-to-GREEN implementation sequence and focused validation after each CRITICAL/HIGH edit.",
+    "Return findings first with explicit severity and a parent disposition."
+  ],
+  "contracts_and_gates": [
+    "Uniform exact-definition identity and additive 1.1 closure; no mutation of released 1.0 bytes.",
+    "PG-INTAKE-01, PG-INTAKE-02, and PG-CHARTER-01 only for the exact first-party Charter.",
+    "BR-HCM-2-CHARTER-FLOW-01 may activate only with reviewed implementation proof.",
+    "Trusted repo-relative/no-follow filesystem behavior, deterministic canonical bytes, typed fail-closed refusal, immutable lineage, and atomic recovery remain mandatory."
+  ],
+  "stop_conditions": [
+    "Return blocked if approved packet authority conflicts with live dependency truth.",
+    "Return blocked if implementation requires work outside packet scope or HCM-2.3+.",
+    "Return blocked if required security/proof behavior is not implementable with available repository/dependency boundaries."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

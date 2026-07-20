@@ -257,7 +257,104 @@ fn open_repo_relative_regular_file(
     })
 }
 
-#[cfg(not(unix))]
+#[cfg(windows)]
+fn open_repo_relative_regular_file_strict(
+    repo_root: &Path,
+    relative_path: &Path,
+) -> Result<fs::File, RepoRelativeFileAccessError> {
+    use std::os::windows::fs::{MetadataExt, OpenOptionsExt};
+
+    const FILE_ATTRIBUTE_REPARSE_POINT: u32 = 0x0000_0400;
+    const FILE_SHARE_READ: u32 = 0x0000_0001;
+
+    let root_metadata = fs::symlink_metadata(repo_root).map_err(|source| {
+        RepoRelativeFileAccessError::ReadFailure {
+            path: repo_root.to_path_buf(),
+            source,
+        }
+    })?;
+    if root_metadata.file_type().is_symlink()
+        || root_metadata.file_attributes() & FILE_ATTRIBUTE_REPARSE_POINT != 0
+    {
+        return Err(RepoRelativeFileAccessError::SymlinkNotAllowed(
+            repo_root.to_path_buf(),
+        ));
+    }
+
+    let absolute_path = resolve_repo_relative_regular_file_path(repo_root, relative_path)?;
+    let mut current = repo_root.to_path_buf();
+    for component in relative_path.components() {
+        let Component::Normal(part) = component else {
+            continue;
+        };
+        current.push(part);
+        let metadata = fs::symlink_metadata(&current).map_err(|source| {
+            RepoRelativeFileAccessError::ReadFailure {
+                path: current.clone(),
+                source,
+            }
+        })?;
+        if metadata.file_type().is_symlink()
+            || metadata.file_attributes() & FILE_ATTRIBUTE_REPARSE_POINT != 0
+        {
+            return Err(RepoRelativeFileAccessError::SymlinkNotAllowed(current));
+        }
+    }
+
+    let canonical_root =
+        fs::canonicalize(repo_root).map_err(|source| RepoRelativeFileAccessError::ReadFailure {
+            path: repo_root.to_path_buf(),
+            source,
+        })?;
+    let canonical_target = fs::canonicalize(&absolute_path).map_err(|source| {
+        RepoRelativeFileAccessError::ReadFailure {
+            path: absolute_path.clone(),
+            source,
+        }
+    })?;
+    if canonical_target.strip_prefix(&canonical_root).is_err() {
+        return Err(RepoRelativeFileAccessError::InvalidPath(
+            "repository file resolves outside the repository root".to_string(),
+        ));
+    }
+
+    let file = fs::OpenOptions::new()
+        .read(true)
+        .share_mode(FILE_SHARE_READ)
+        .open(&absolute_path)
+        .map_err(|source| RepoRelativeFileAccessError::ReadFailure {
+            path: absolute_path.clone(),
+            source,
+        })?;
+    let handle_metadata =
+        file.metadata()
+            .map_err(|source| RepoRelativeFileAccessError::ReadFailure {
+                path: absolute_path.clone(),
+                source,
+            })?;
+    let path_metadata = fs::symlink_metadata(&absolute_path).map_err(|source| {
+        RepoRelativeFileAccessError::ReadFailure {
+            path: absolute_path.clone(),
+            source,
+        }
+    })?;
+    if !handle_metadata.is_file() || !path_metadata.is_file() {
+        return Err(RepoRelativeFileAccessError::NotRegularFile(absolute_path));
+    }
+    if path_metadata.file_type().is_symlink()
+        || path_metadata.file_attributes() & FILE_ATTRIBUTE_REPARSE_POINT != 0
+        || handle_metadata.file_size() != path_metadata.file_size()
+        || handle_metadata.creation_time() != path_metadata.creation_time()
+        || handle_metadata.last_write_time() != path_metadata.last_write_time()
+    {
+        return Err(RepoRelativeFileAccessError::InvalidPath(
+            "repository file changed during strict read admission".to_string(),
+        ));
+    }
+    Ok(file)
+}
+
+#[cfg(all(not(unix), not(windows)))]
 fn open_repo_relative_regular_file_strict(
     _repo_root: &Path,
     _relative_path: &Path,
@@ -351,6 +448,24 @@ mod trusted_read_race_tests {
     #[cfg(unix)]
     use super::{open_repo_relative_regular_file_with_hook, TrustedRepoFile};
 
+    #[cfg(windows)]
+    #[test]
+    fn strict_read_accepts_a_regular_repo_relative_file_on_windows() {
+        let repo = tempfile::tempdir().unwrap();
+        std::fs::create_dir_all(repo.path().join("definitions/schemas")).unwrap();
+        std::fs::write(
+            repo.path().join("definitions/schemas/value.json"),
+            b"{\"value\":true}\n",
+        )
+        .unwrap();
+        let relative = NormalizedRepoRelativePath::parse("definitions/schemas/value.json").unwrap();
+
+        let file = super::open_repo_relative_regular_file_strict(repo.path(), relative.as_path())
+            .expect("regular read-only repository file should be admitted on Windows");
+
+        assert!(file.metadata().unwrap().is_file());
+    }
+
     #[cfg(unix)]
     #[test]
     fn trusted_handle_survives_intermediate_and_final_path_substitution() {
@@ -386,7 +501,7 @@ mod trusted_read_race_tests {
         assert_eq!(trusted.read_bytes().unwrap(), b"inside\n");
     }
 
-    #[cfg(not(unix))]
+    #[cfg(all(not(unix), not(windows)))]
     #[test]
     fn legacy_canonical_reads_remain_available_while_strict_registry_reads_fail_closed() {
         use super::CanonicalWorkspace;

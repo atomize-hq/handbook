@@ -36,6 +36,7 @@ use std::path::Path;
 #[derive(Clone, Debug)]
 pub struct ResolvedInstanceProfile {
     layered: LayeredProfile,
+    selected_profile_definition_fingerprint: DefinitionFingerprint,
     stable_role_registry: StableRoleRegistry,
     artifact_kind_registry: ArtifactKindRegistry,
     artifact_instances: ArtifactInstanceRegistry,
@@ -48,6 +49,9 @@ pub struct ResolvedInstanceProfile {
 impl ResolvedInstanceProfile {
     pub fn exact_ref(&self) -> &ExactDefinitionRef {
         self.layered.selected_profile_ref()
+    }
+    pub fn selected_profile_definition_fingerprint(&self) -> &DefinitionFingerprint {
+        &self.selected_profile_definition_fingerprint
     }
     pub fn layer_decisions(&self) -> &[crate::instance_profile::ProfileLayerDecision] {
         self.layered.decisions()
@@ -181,9 +185,14 @@ pub fn resolve_profile_selection(
         .validate_fingerprints()
         .map_err(registry_error)?;
 
-    let validator_refs = BTreeSet::from([exact(
+    let mut validator_refs = BTreeSet::from([exact(
         "handbook.semantic-validation.constitutional-root@1.0.0",
     )?]);
+    if kind_refs.contains(&exact("handbook.artifact-kind.project-authority@1.1.0")?) {
+        validator_refs.insert(exact(
+            "handbook.semantic-validation.constitutional-root@1.1.0",
+        )?);
+    }
     let capability_refs =
         BTreeSet::from([exact("handbook.capabilities.constitutional-root@1.0.0")?]);
     let validator_sources = admitted_for_refs(
@@ -541,8 +550,16 @@ pub fn resolve_profile_selection(
     })
     .map_err(registry_error)?;
 
+    let selected_profile_definition_fingerprint = profile_sources
+        .iter()
+        .find(|source| source.exact_ref() == layered.selected_profile_ref())
+        .expect("layered selected profile came from admitted sources")
+        .profile_fingerprint()
+        .clone();
+
     Ok(ResolvedInstanceProfile {
         layered,
+        selected_profile_definition_fingerprint,
         stable_role_registry,
         artifact_kind_registry: kind_registry,
         artifact_instances,
@@ -891,10 +908,28 @@ fn validate_authored_profile_fingerprints(
             (&left.definition_class, &left.reference)
                 .cmp(&(&right.definition_class, &right.reference))
         });
-        let computed = fingerprint_serializable(&ProfileSourceFingerprintClosure {
-            definition: source.fingerprint_definition(),
-            dependencies,
-        })
+        let computed = if source.exact_ref().as_str() == "handbook.profile.shipped-root@1.1.0" {
+            fingerprint_serializable(&ProfileUniformClosure {
+                definition: source.fingerprint_definition(),
+                resolved_dependencies: SHIPPED_PROFILE_1_1_DEPENDENCIES
+                    .iter()
+                    .map(
+                        |(definition_fingerprint, definition_ref, dependency_role)| {
+                            ProfileUniformDependency {
+                                definition_fingerprint,
+                                definition_ref,
+                                dependency_role,
+                            }
+                        },
+                    )
+                    .collect(),
+            })
+        } else {
+            fingerprint_serializable(&ProfileSourceFingerprintClosure {
+                definition: source.fingerprint_definition(),
+                dependencies,
+            })
+        }
         .map_err(registry_error)?;
         if &computed != source.profile_fingerprint() {
             return Err(ProfileLoadError::new(
@@ -1038,6 +1073,177 @@ struct ProfileSourceFingerprintClosure<'a> {
     definition: &'a Value,
     dependencies: Vec<ProfileDependencyFingerprint>,
 }
+
+#[derive(Serialize)]
+struct ProfileUniformClosure<'a> {
+    definition: &'a Value,
+    resolved_dependencies: Vec<ProfileUniformDependency<'a>>,
+}
+
+#[derive(Serialize)]
+struct ProfileUniformDependency<'a> {
+    definition_fingerprint: &'a str,
+    definition_ref: &'a str,
+    dependency_role: &'a str,
+}
+
+const SHIPPED_PROFILE_1_1_DEPENDENCIES: [(&str, &str, &str); 31] = [
+    (
+        "sha256:7924fc428c9b4e11e4a33fe079c31fe520c42d1d2c2ece13bb95db8a83129fbe",
+        "handbook.artifact-kind.decision-record@1.0.0",
+        "artifact_kind_source",
+    ),
+    (
+        "sha256:23d946423cfae7127331199980dba739cc7e02fdceb327ae1578cc5e399a6228",
+        "handbook.artifact-kind.environment-context@1.0.0",
+        "artifact_kind_source",
+    ),
+    (
+        "sha256:276c9f5a9686f9f8648db829f83d97730245062a5ddc47b6b3eccd087b8ce42b",
+        "handbook.artifact-kind.project-authority@1.0.0",
+        "artifact_kind_source",
+    ),
+    (
+        "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+        "handbook.artifact-kind.project-authority@1.1.0",
+        "artifact_kind_source",
+    ),
+    (
+        "sha256:12d29537b71297b1212dbe5312c71467c973697abba863fdd69b46bc350ed160",
+        "handbook.artifact-kind.project-context@1.0.0",
+        "artifact_kind_source",
+    ),
+    (
+        "sha256:6e5b359bb5f8ae97f0b7675c20b82f9d8165f2b815dae29948d20f8202ae5a02",
+        "handbook.artifact-kind.risk-record@1.0.0",
+        "artifact_kind_source",
+    ),
+    (
+        "sha256:50d4c91df9c67a34c221bcfea3f1f659890be199f23253e625d3f332fbdf3ccf",
+        "handbook.artifact-kind.work-specification@1.0.0",
+        "artifact_kind_source",
+    ),
+    (
+        "sha256:2ae25788c7860f3062f30659a7674c2ccd8f56b0f8809f1134003e04dea20b61",
+        "handbook.condition.project.managed-operational-surface@1.0.0",
+        "condition",
+    ),
+    (
+        "sha256:9e95fdef90b98e28acb60bfe96a72f122418b56b1531eafe8ab6cff3eb7668b4",
+        "handbook.context-resolution.shipped-root@1.0.0",
+        "context_resolution",
+    ),
+    (
+        "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c",
+        "handbook.intake.charter@1.0.0",
+        "intake",
+    ),
+    (
+        "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "lifecycle",
+    ),
+    (
+        "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7",
+        "handbook.renderer.charter-review-markdown@1.0.0",
+        "renderer",
+    ),
+    (
+        "sha256:08875dd868d539f03e31e48e3e8211cbd44d4e32f9d069cb1fcabed6dd2a6c08",
+        "handbook.schemas.artifacts.decision-record@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:632e3e9d35806a88dd8a70c8059f4ac6746b6e49d9d0177f68b13dcc91388ad7",
+        "handbook.schemas.artifacts.environment-context@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:2a4d178686a935d655539df1b36c2e35ab83dcc6fbada7570f17377075029e1c",
+        "handbook.schemas.artifacts.project-authority@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+        "handbook.schemas.artifacts.project-authority@1.1.0",
+        "schema_source",
+    ),
+    (
+        "sha256:792ea38fc2760f90bca9a376182971d44f4ab19107cc7bf88bdf1786c93b4e24",
+        "handbook.schemas.artifacts.project-context@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:8d8dc18add39d768cc6c22416c61db83a0e60004d5539332cdb07797cdf37cd0",
+        "handbook.schemas.artifacts.risk-record@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:cde12216358ff86e3f3cd1364bfd4818cdfcf086645fbdac18556feb70be9747",
+        "handbook.schemas.artifacts.work-specification@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:5c8a1fbc3eac9ff541a70c8c7fd7ba83ea6c19ab54f8f22950f50817839d4532",
+        "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:50af81e84e6134cdad4bffd250c4ac421405aed2415d1a3eae4f3c48e93dccd8",
+        "handbook.schemas.security.approver-admin-api@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:ca2cb1bc9eeeaf5d39a76965cbbecb8c49624c80a7c60f80d9ac036b6228703a",
+        "handbook.schemas.security.approver-registry-transition@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:3d7bcca84a17b6f07defefbb87f4ab6d0fc84aea45403fadd4bcf0cd9aaf7c47",
+        "handbook.schemas.security.approver-registry@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:f87787b7b675484fad8d0136d15097f61fd99a73e524e33d7ae424b6e45bafe0",
+        "handbook.schemas.security.authenticator-assertion@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:0cf273fe522c267fa791c879a312805ca84be80b5568b3bacff599c555e21cb8",
+        "handbook.schemas.security.authenticator-challenge@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:d8c9a89434c513e3ecb301ee0ccb5a8fe219ce262c239ba94cba652b73938768",
+        "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:51ea813057dea7777fccbe63239df09f1d7a4a963b4781b6bebc993d7b50acab",
+        "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:8b8ca6acb8572dff1b311aef58d85b893377ed7c6864af66394a9e27ed1131b6",
+        "handbook.schemas.security.authenticator-registration-request@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:caecd1ff93ea9599f53a3780f76d3d91574ea8c89a3757c80c2a6b9716b785b7",
+        "handbook.schemas.security.authenticator-registration@1.0.0",
+        "schema_source",
+    ),
+    (
+        "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029",
+        "handbook.roles.core@1.1.0",
+        "stable_role_registry",
+    ),
+    (
+        "sha256:69113b1a9271ce207d45bdb91ebae8d6516249e16b59891b292546078364a22b",
+        "handbook.vocabulary.shipped-root@1.0.0",
+        "vocabulary",
+    ),
+];
 
 #[derive(Serialize)]
 struct AncestryMember<'a> {

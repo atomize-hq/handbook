@@ -1,0 +1,41 @@
+{
+  "schema_id":"handbook.internal-dispatch",
+  "schema_version":"1.1",
+  "dispatch_id":"20260720T043544Z--HCM-2-2--product-authority-integration-final",
+  "created_at_utc":"2026-07-20T04:35:44Z",
+  "source_handoff_ids":["20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"],
+  "parent_orchestration_id":"20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision":"proof_or_review_followup",
+  "execution_target":"internal_subagent",
+  "agent_type":"default",
+  "role":"implementation",
+  "fresh_context_required":true,
+  "closeout_owner":"parent_orchestrator",
+  "required_skills":["using-agent-skills","source-driven-development","incremental-implementation","test-driven-development","api-and-interface-design","security-and-hardening","debugging-and-error-recovery"],
+  "phase_id":"HCM-2",
+  "slice_id":"HCM-2.2",
+  "packet_id":"HCM-2.2-product-authority-final",
+  "subject_fingerprint":"sha256:22797a4b58b0c92c066d9525fd2200206217761fced734b7e3171e612596fef5",
+  "subject_manifest":{"algorithm":"sha256","encoding":"repo-path-null-sha256-newline-v1","entries":[
+    {"path":"crates/cli/src/approvers.rs","sha256":"cc64e8c6b3fabf9d0bf525576e24a122f944142bb1df9dd333762e91ed1316d0"},
+    {"path":"crates/cli/tests/hcm_2_2_product_cutover.rs","sha256":"2db951f1653361cf09add50511b11baf8f89ba36f4cddc5abc30382b8684589c"},
+    {"path":"crates/compiler/src/charter_product.rs","sha256":"b2a37523a8bac624c409e36ba8112b194721d3ce5835520b5da6c8976835a566"},
+    {"path":"crates/compiler/tests/hcm_2_2_product_cutover.rs","sha256":"0712c7e232c3ecbca53c15176cd79b82ad920ed73ac604ff29b713f912c93b61"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sha256":"249ee995bc2a980f939e9df8aedf0edbe8c3dfe67a7250bfa2f65e78196f48f9"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-vectors-v1.0.json","sha256":"bf791c17e50e0fa7840b201186e3ce89fb58e53646aa69e96e93fadcb3e252e7"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/repository-invocation-identity-vectors-v1.0.json","sha256":"3eab52f414f0365873500689c6509231f2c03f077723d91f9e5e314ea0e9b0b2"}
+  ],"aggregate_fingerprint":"sha256:22797a4b58b0c92c066d9525fd2200206217761fced734b7e3171e612596fef5"},
+  "active_resolution":{"level":"product_authority_integration","scope_horizon":"HCM-2.2-compiler-cli","detail_resolution":"high","temporal_horizon":"current_orchestration","authority_horizon":"review-clean-identity-contract","memory_horizon":"live_repository_truth","validation_horizon":"focused-real-product-path"},
+  "authority_refs":[
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sections":["Approval authority and bootstrap","Global authority lock order and retained observations","API, security, and compatibility posture"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-vectors-v1.0.json","sections":["all"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/repository-invocation-identity-vectors-v1.0.json","sections":["all"]}
+  ],
+  "repo_truth":"Author and validate are real product paths. Approve, promote, and the four approver-admin CLI forms still project adapter placeholders although engine authority services exist. The retained promotion lane is complete and green. The identity lane has exported the reviewed typed preparation contracts and is completing setup integration in disjoint files; consume those live engine APIs without editing its files.",
+  "allowed_scope":["Edit crates/compiler/src/charter_product.rs and its internal tests; edit crates/compiler/tests/hcm_2_2_product_cutover.rs if the public adapter contract needs focused proof.","Edit crates/cli/src/approvers.rs and crates/cli/tests/hcm_2_2_product_cutover.rs.","Edit compiler or CLI lib/main only if strictly necessary after parent coordination; do not edit engine files or compiler setup/lib while the identity lane is active."],
+  "non_goals":["Do not alter frozen CLI grammar, public engine authority request/result schemas, identity derivation, setup, Flow, doctor, skills, definitions, proof/control/handoff/ledger files, or HCM-2.3.","Do not accept caller repository identity, operation ID, raw authenticator bytes, registration/assertion records, semantic ceremony records, actor identity, timestamps, or transaction identity.","Do not implement native platform transport; production must fail closed through the engine with exact AUTHENTICATOR_UNAVAILABLE until an opaque transport is separately supplied.","Do not commit."],
+  "tasks":["Verify every immutable subject hash and run GitNexus upstream impact before editing existing symbols; report HIGH/CRITICAL and stop at prohibited boundaries.","Write RED tests, then replace approval and promotion placeholders with thin engine calls. Approval must call RepositoryInvocationIdentityServiceV1::prepare_operation for CharterApproval before native authority; promotion takes no caller operation ID and uses the retained atomic workflow.","Replace all four approver-admin placeholders with exact intent parsing, typed identity preparation, closed ApproverAdminRequestV1 construction, and ApproverRegistryServiceV1 bootstrap/add/revoke/update calls. Parse CLI mapping strings only into the exact untrusted class/authority pairs already admitted by the frozen grammar.","Project the engine's normal success/refusal results and the exact preflight/recovery envelopes without inventing fields, identities, retryability, next actions, changed paths, or response semantics. Keep product output closed and operation-appropriate exit codes.","Use a compiler-private injected fake NativeAuthenticatorPortV1 path to prove requests reach real engine services and request/challenge/raw intent/result identities agree. Production port must return exact Unavailable from inside the engine call and prove zero current-operation delta.","Add committed-fixture promotion mapping and approval/admin fail-closed product tests. Prove no adapter/native call occurs for identity preflight or recovery refusal and frozen CLI help/output remains stable.","Run focused compiler/CLI product tests, relevant engine authority tests, cargo check for compiler/CLI, exact-file rustfmt check, and clippy for changed targets."],
+  "contracts_and_gates":["Compiler/CLI remain adapters; engine owns identity allocation, authority, validation, ceremony decoding, semantic records, and transactions.","Approval/admin prepare identity only after mandatory predecessor-ordered recovery and before native invocation. Exact preflight and recovery refusal schemas remain distinct from normal engine results.","Production native unavailability reaches the engine and returns exact AUTHENTICATOR_UNAVAILABLE before current-operation delta.","Promotion accepts one approval anchor while engine discovers and validates the complete committed approval set under retained locks.","The frozen eight product forms and all existing author/validate behavior remain compatible."],
+  "stop_conditions":["Stop before any HIGH/CRITICAL existing-symbol edit, engine/public schema widening, caller-owned identity input, duplicate recovery/authority logic, or overlap with active identity files.","If a public engine accessor or typed projection is insufficient, report the exact missing interface to the parent instead of parsing debug strings or reaching into private state."],
+  "return_contract":{"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"bounded_write","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","changed_files","impact_analysis","validation","remaining_protocol_work","parent_disposition"]}
+}

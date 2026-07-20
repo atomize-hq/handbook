@@ -39,6 +39,7 @@ fn workspace_root() -> PathBuf {
     );
 }
 
+#[cfg(not(windows))]
 fn prepare_fixture_checkout(relative_fixture_root: &str, nested_cwd: &str) -> PreparedCheckout {
     let workspace = workspace_root();
     let script = workspace.join("tools/qa/prepare_fixture_checkout.sh");
@@ -86,16 +87,59 @@ fn prepare_fixture_checkout(relative_fixture_root: &str, nested_cwd: &str) -> Pr
     }
 }
 
-fn run_in(dir: &Path, args: &[&str]) -> String {
+#[cfg(windows)]
+fn prepare_fixture_checkout(relative_fixture_root: &str, nested_cwd: &str) -> PreparedCheckout {
+    let workspace = workspace_root();
+    let fixture_root = workspace.join(relative_fixture_root);
+    let temp_parent = tempfile::tempdir().expect("tempdir").keep();
+    let checkout_root = temp_parent.join("checkout");
+
+    copy_fixture_tree(&fixture_root, &checkout_root);
+    if let Some(preserved_relative) = relative_fixture_root.strip_prefix("tests/fixtures/") {
+        copy_fixture_tree(
+            &fixture_root,
+            &checkout_root
+                .join("tests/fixtures")
+                .join(preserved_relative),
+        );
+    }
+    fs::create_dir_all(checkout_root.join(".git")).expect("git root");
+    let effective_cwd = checkout_root.join(nested_cwd);
+    fs::create_dir_all(&effective_cwd).expect("nested cwd");
+
+    PreparedCheckout {
+        temp_parent,
+        checkout_root,
+        effective_cwd,
+    }
+}
+
+#[cfg(windows)]
+fn copy_fixture_tree(source: &Path, target: &Path) {
+    fs::create_dir_all(target).expect("fixture target");
+    for entry in fs::read_dir(source).expect("fixture source") {
+        let entry = entry.expect("fixture entry");
+        let source_path = entry.path();
+        let target_path = target.join(entry.file_name());
+        if entry.file_type().expect("fixture file type").is_dir() {
+            copy_fixture_tree(&source_path, &target_path);
+        } else {
+            fs::copy(&source_path, &target_path).expect("copy fixture file");
+        }
+    }
+}
+
+fn run_in(dir: &Path, args: &[&str], expected_success: bool) -> String {
     let output = binary()
         .current_dir(dir)
         .args(args)
         .output()
         .unwrap_or_else(|err| panic!("run `{}`: {err}", args.join(" ")));
 
-    assert!(
+    assert_eq!(
         output.status.success(),
-        "`{}` should succeed:\nstdout:\n{}\nstderr:\n{}",
+        expected_success,
+        "`{}` returned an unexpected status:\nstdout:\n{}\nstderr:\n{}",
         args.join(" "),
         String::from_utf8_lossy(&output.stdout),
         String::from_utf8_lossy(&output.stderr)
@@ -125,14 +169,25 @@ fn prepare_fixture_checkout_supports_execution_demo_fixture_root_from_nested_cwd
             "--fixture-set",
             "basic",
         ],
+        false,
     );
-    assert!(generate.contains("OUTCOME: READY"), "{generate}");
+    assert!(generate.contains("OUTCOME: REFUSED"), "{generate}");
     assert!(
         generate.contains("OBJECT: execution.demo.packet"),
         "{generate}"
     );
     assert!(
         generate.contains("FIXTURE BASIS ROOT: tests/fixtures/execution_demo/basic/.handbook/"),
+        "{generate}"
+    );
+    assert!(
+        generate.contains(
+            "BROKEN SUBJECT: canonical artifact Charter at .handbook/project/charter.yaml"
+        ),
+        "{generate}"
+    );
+    assert!(
+        !generate.contains(".handbook/charter/CHARTER.md"),
         "{generate}"
     );
 
@@ -145,14 +200,25 @@ fn prepare_fixture_checkout_supports_execution_demo_fixture_root_from_nested_cwd
             "--fixture-set",
             "basic",
         ],
+        false,
     );
-    assert!(inspect.contains("OUTCOME: READY"), "{inspect}");
+    assert!(inspect.contains("OUTCOME: REFUSED"), "{inspect}");
     assert!(
         inspect.contains("OBJECT: execution.demo.packet"),
         "{inspect}"
     );
     assert!(
         inspect.contains("FIXTURE BASIS ROOT: tests/fixtures/execution_demo/basic/.handbook/"),
+        "{inspect}"
+    );
+    assert!(
+        inspect.contains(
+            "BROKEN SUBJECT: canonical artifact Charter at .handbook/project/charter.yaml"
+        ),
+        "{inspect}"
+    );
+    assert!(
+        !inspect.contains(".handbook/charter/CHARTER.md"),
         "{inspect}"
     );
 }
@@ -176,7 +242,17 @@ fn prepare_fixture_checkout_preserves_repo_shaped_nested_inspect_flow() {
         "expected tests/fixtures/** ancestry to remain available inside the temp checkout"
     );
 
-    let inspect = run_in(&prepared.effective_cwd, &["inspect"]);
-    assert!(inspect.contains("OUTCOME: READY"), "{inspect}");
+    let inspect = run_in(&prepared.effective_cwd, &["inspect"], false);
+    assert!(inspect.contains("OUTCOME: REFUSED"), "{inspect}");
     assert!(inspect.contains("OBJECT: planning.packet"), "{inspect}");
+    assert!(
+        inspect.contains(
+            "BROKEN SUBJECT: canonical artifact Charter at .handbook/project/charter.yaml"
+        ),
+        "{inspect}"
+    );
+    assert!(
+        !inspect.contains(".handbook/charter/CHARTER.md"),
+        "{inspect}"
+    );
 }

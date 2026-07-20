@@ -1,0 +1,95 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T003916Z--HCM-2-2--compiler-cli-skill-cutover-implementation",
+  "created_at_utc": "2026-07-20T00:39:16Z",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "resume_same_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "api-and-interface-design"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": "HCM-2.2",
+  "subject_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sha256": "4f6124e859ca036d7dd77899e22b7a5b4142429ac15c1e6d1b5ac74d160515b2"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sha256": "afaf40256cc0b9aed8d08a4ef8b689fca7d0e889b46b7c5ea57e4ae45b195d17"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "sha256": "ae8ca42931573a88e1e0c26b211853bf9bb00107212fa6d7885eee58523f583e"}
+    ],
+    "aggregate_fingerprint": "sha256:572fd7296480cbee723183232d26259caec737024cb94a117239b6758100fbf8"
+  },
+  "active_resolution": {
+    "level": "bounded_product_adapter_implementation",
+    "scope_horizon": "HCM-2.2-compiler-cli-skill-setup-doctor",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "approved_slice_packet",
+    "memory_horizon": "live_repository_truth",
+    "validation_horizon": "focused_product_path_red_green"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sections": ["Acquisition and immutable lineage", "Product-path cutover", "API, security, and compatibility posture"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sections": ["P6 — Cut author, skill, setup, and doctor paths"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-vectors-v1.0.json", "sections": ["all"]}
+  ],
+  "repo_truth": "The exact shipped profile 1.1, canonical Charter, common intake evaluator, lifecycle core, runtime-vector validator, and authenticator/approver service core are present with focused tests green. A separate concurrent lane owns filesystem promotion transactions. This lane owns thin compiler/CLI/skill/setup/doctor product adapters only.",
+  "allowed_scope": [
+    "Edit compiler, CLI, generated/core/install skill and Charter template assets, setup/doctor adapters, their focused tests and fixtures, and narrowly required public DTO/export surfaces.",
+    "Replace selected legacy Markdown authoring with exact author/approve/promote/validate and approvers grammar while preserving typed fail-closed behavior when a promotion service is unavailable.",
+    "Keep setup non-authoring and derive doctor fields from one retained engine observation; preserve Project Context and unrelated readiness semantics.",
+    "Use RED tests first and run with CARGO_TARGET_DIR=D:\\codex-build\\handbook-hcm22 and TEMP/TMP=D:\\codex-temp\\handbook-hcm22.",
+    "Run GitNexus impact before every existing function/class/method edit; report and pause for parent authorization before HIGH or CRITICAL edits."
+  ],
+  "non_goals": [
+    "Do not edit engine definition/schema/profile/security/transaction internals, flow, Environment Inventory content, proof/control, planning, handoff, ledger, or dispatch files.",
+    "Do not add a nested CLI questionnaire, an LLM/model call, direct canonical YAML/Markdown write, self-approval/promotion, software authenticator fallback, or HCM-2.3.",
+    "Do not commit or create handoffs, ledger rows, dispatches, or user-visible task hops."
+  ],
+  "tasks": [
+    "Read the complete dispatch, exact P6/product/API authority, live compiler/CLI/skill/setup/doctor paths, and engine public APIs.",
+    "Write RED tests for exact command grammar and mappings, JSON/human refused/success projections, validate-only behavior, no selected legacy input, conflicting legacy irrelevance, setup non-authoring, doctor additive observation, and generated/install equality.",
+    "Run and report GitNexus impact for every existing seam; pause on HIGH/CRITICAL before editing.",
+    "After parent authorization, implement the smallest thin adapters and skill changes and return focused GREEN evidence plus any missing transaction API needed from the concurrent lane."
+  ],
+  "contracts_and_gates": [
+    "Compiler/CLI accept caller intent only and never duplicate semantic validation, authority selection, cryptographic verification, or transaction recovery.",
+    "Author produces immutable intake/candidate lineage only; approve and promote cannot silently succeed without native authority and exact transaction services; validate is non-mutating.",
+    "Legacy --from-inputs without --mode, direct Markdown authoring, and interactive wizard behavior refuse with typed next actions and have zero selected-path influence.",
+    "Setup does not author Charter truth; doctor remains additive and uses one retained observation."
+  ],
+  "stop_conditions": [
+    "Pause and report before any HIGH or CRITICAL existing-symbol edit.",
+    "Return blocked rather than inventing missing engine transaction semantics or a weaker fallback.",
+    "Return blocked if installed/core/generated skill equality cannot be preserved within named assets."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "changed_files", "impact_analysis", "validation", "missing_engine_contracts", "parent_disposition"]
+  }
+}

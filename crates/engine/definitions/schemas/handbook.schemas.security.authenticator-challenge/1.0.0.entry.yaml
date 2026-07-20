@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.schema-registry-entry",
+  "schema_version": "1.0",
+  "content_schema_id": "handbook.schemas.security.authenticator-challenge",
+  "content_schema_version": "1.0.0",
+  "document_ref": "definitions/schemas/handbook.schemas.security.authenticator-challenge/1.0.0.schema.json",
+  "document_fingerprint": "sha256:8cb47ee9ca4b975704f782900c3850d29e7bdd6719af193ab0726f37ec311c29",
+  "closure_fingerprint": "sha256:10f0fdde7f5480cca18c7eff2fbf8d57aeffc9b21f1714558f3548e33cee5b62",
+  "meta_schema_ref": "https://json-schema.org/draft/2020-12/schema",
+  "media_type": "application/schema+json",
+  "compatibility": "exact",
+  "extensions": {},
+  "entry_fingerprint": "sha256:0cf273fe522c267fa791c879a312805ca84be80b5568b3bacff599c555e21cb8"
+}

@@ -6,7 +6,7 @@ use crate::{
 use serde::Serialize;
 use std::cmp::Ordering;
 
-pub const C04_RESULT_VERSION: &str = "reduced-v1-m8.2";
+pub const C04_RESULT_VERSION: &str = "reduced-v1-m8.3";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]

@@ -6,6 +6,9 @@ use std::fmt::Write as _;
 // not describe the reusable import-layout contract.
 const CANONICAL_ENVIRONMENT_INVENTORY_PATH: &str =
     ".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md";
+const SELECTED_CHARTER_PATH: &str = ".handbook/project/charter.yaml";
+const SELECTED_CHARTER_EXCEPTION_PROCESS_REF: &str =
+    ".handbook/project/charter.yaml#/governance/exception_process";
 const LEGACY_NON_CANONICAL_PATH_CLAIMS: [&str; 3] = [
     "${repo_root}/ENVIRONMENT_INVENTORY.md",
     "artifacts/foundation/ENVIRONMENT_INVENTORY.md",
@@ -222,6 +225,11 @@ pub fn validate_environment_inventory_structured_input(
         &mut issues,
     );
     require_environment_text("charter_ref", &input.charter_ref, &mut issues);
+    if input.charter_ref.trim() != SELECTED_CHARTER_PATH {
+        issues.push(format!(
+            "charter_ref must be exactly `{SELECTED_CHARTER_PATH}`"
+        ));
+    }
     match &input.project_context_ref {
         Some(project_context_ref) => {
             require_environment_text("project_context_ref", project_context_ref, &mut issues);
@@ -404,6 +412,13 @@ pub fn validate_environment_inventory_structured_input(
         &input.update_contract.exception_record_location,
         &mut issues,
     );
+    if input.update_contract.exception_record_location.trim()
+        != SELECTED_CHARTER_EXCEPTION_PROCESS_REF
+    {
+        issues.push(format!(
+            "update_contract.exception_record_location must be exactly `{SELECTED_CHARTER_EXCEPTION_PROCESS_REF}`"
+        ));
+    }
 
     if input.known_unknowns.is_empty() {
         issues.push(

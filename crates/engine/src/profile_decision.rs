@@ -1,5 +1,6 @@
 use crate::artifact_instance::RequirednessMode;
 use crate::artifact_registry::{ResolvedArtifactInstance, ResolvedArtifactRegistry};
+use crate::charter_definition_registry::load_shipped_charter_definition_registry;
 use crate::definition_identity::{DefinitionFingerprint, ExactDefinitionRef, RegistryLoadError};
 use crate::instance_profile::{
     DefinitionSource, DefinitionSourceBinding, ProfileLoadError, ProfileSelectionRequest,
@@ -139,6 +140,7 @@ impl ArtifactProfileDecision {
 #[derive(Clone, Debug)]
 pub struct ResolvedProfileDecisions {
     registry: ResolvedArtifactRegistry,
+    profile_definition_fingerprint: DefinitionFingerprint,
     condition_evaluations: Vec<ProjectConditionEvaluation>,
     artifact_decisions: Vec<ArtifactProfileDecision>,
     capability_truth: Vec<ProfileCapabilityTruth>,
@@ -161,7 +163,14 @@ pub fn resolve_shipped_profile_decisions(
 ) -> Result<ResolvedProfileDecisions, ShippedProfileDecisionError> {
     let profile = resolve_profile_selection(repo_root, shipped_profile_request())
         .map_err(ShippedProfileDecisionError::Profile)?;
-    ResolvedProfileDecisions::from_profile(&profile).map_err(ShippedProfileDecisionError::Decision)
+    let decisions = ResolvedProfileDecisions::from_profile(&profile)
+        .map_err(ShippedProfileDecisionError::Decision)?;
+    load_shipped_charter_definition_registry()
+        .and_then(|registry| registry.validate_selected_decisions(&decisions))
+        .map_err(|error| {
+            ShippedProfileDecisionError::Decision(ProfileDecisionError::Registry(error))
+        })?;
+    Ok(decisions)
 }
 
 impl ResolvedProfileDecisions {
@@ -196,6 +205,9 @@ impl ResolvedProfileDecisions {
 
         Ok(Self {
             registry,
+            profile_definition_fingerprint: profile
+                .selected_profile_definition_fingerprint()
+                .clone(),
             condition_evaluations,
             artifact_decisions,
             capability_truth,
@@ -207,6 +219,9 @@ impl ResolvedProfileDecisions {
     }
     pub fn profile_fingerprint(&self) -> &DefinitionFingerprint {
         self.registry.profile_fingerprint()
+    }
+    pub fn profile_definition_fingerprint(&self) -> &DefinitionFingerprint {
+        &self.profile_definition_fingerprint
     }
     pub fn stable_role_registry_ref(&self) -> &ExactDefinitionRef {
         self.registry.stable_role_registry_ref()
@@ -293,32 +308,53 @@ fn artifact_decision(
 }
 
 fn shipped_profile_request() -> ProfileSelectionRequest {
-    let artifact_names = [
-        "project-authority",
-        "project-context",
-        "environment-context",
-        "work-specification",
-        "decision-record",
-        "risk-record",
+    let schema_refs = [
+        "handbook.schemas.artifacts.project-authority@1.0.0",
+        "handbook.schemas.artifacts.project-authority@1.1.0",
+        "handbook.schemas.artifacts.project-context@1.0.0",
+        "handbook.schemas.artifacts.environment-context@1.0.0",
+        "handbook.schemas.artifacts.work-specification@1.0.0",
+        "handbook.schemas.artifacts.decision-record@1.0.0",
+        "handbook.schemas.artifacts.risk-record@1.0.0",
+        "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+        "handbook.schemas.security.approver-registry@1.0.0",
+        "handbook.schemas.security.approver-registry-transition@1.0.0",
+        "handbook.schemas.security.authenticator-registration-request@1.0.0",
+        "handbook.schemas.security.authenticator-challenge@1.0.0",
+        "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+        "handbook.schemas.security.authenticator-registration@1.0.0",
+        "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+        "handbook.schemas.security.authenticator-assertion@1.0.0",
+        "handbook.schemas.security.approver-admin-api@1.0.0",
+    ];
+    let kind_refs = [
+        "handbook.artifact-kind.project-authority@1.0.0",
+        "handbook.artifact-kind.project-authority@1.1.0",
+        "handbook.artifact-kind.project-context@1.0.0",
+        "handbook.artifact-kind.environment-context@1.0.0",
+        "handbook.artifact-kind.work-specification@1.0.0",
+        "handbook.artifact-kind.decision-record@1.0.0",
+        "handbook.artifact-kind.risk-record@1.0.0",
     ];
     ProfileSelectionRequest {
-        selected_profile_ref: exact("handbook.profile.shipped-root@1.0.0"),
-        profile_sources: vec![builtin("handbook.profile.shipped-root@1.0.0")],
+        selected_profile_ref: exact("handbook.profile.shipped-root@1.1.0"),
+        profile_sources: vec![builtin("handbook.profile.shipped-root@1.1.0")],
         stable_role_registry_sources: vec![builtin("handbook.roles.core@1.1.0")],
-        schema_entry_sources: artifact_names
+        schema_entry_sources: schema_refs
             .iter()
-            .map(|name| builtin(&format!("handbook.schemas.artifacts.{name}@1.0.0")))
+            .map(|reference| builtin(reference))
             .collect(),
-        artifact_kind_sources: artifact_names
+        artifact_kind_sources: kind_refs
             .iter()
-            .map(|name| builtin(&format!("handbook.artifact-kind.{name}@1.0.0")))
+            .map(|reference| builtin(reference))
             .collect(),
         semantic_capability_sources: vec![builtin(
             "handbook.capabilities.constitutional-root@1.0.0",
         )],
-        semantic_validator_sources: vec![builtin(
-            "handbook.semantic-validation.constitutional-root@1.0.0",
-        )],
+        semantic_validator_sources: vec![
+            builtin("handbook.semantic-validation.constitutional-root@1.0.0"),
+            builtin("handbook.semantic-validation.constitutional-root@1.1.0"),
+        ],
         project_condition_sources: vec![builtin(
             "handbook.condition.project.managed-operational-surface@1.0.0",
         )],

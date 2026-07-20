@@ -1,0 +1,40 @@
+{
+  "schema_id":"handbook.internal-dispatch",
+  "schema_version":"1.1",
+  "dispatch_id":"20260720T041025Z--HCM-2-2--repository-invocation-identity-contract-repair-review-4",
+  "created_at_utc":"2026-07-20T04:10:25Z",
+  "source_handoff_ids":["20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"],
+  "parent_orchestration_id":"20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision":"proof_or_review_followup",
+  "execution_target":"internal_subagent",
+  "agent_type":"default",
+  "role":"review",
+  "fresh_context_required":true,
+  "closeout_owner":"parent_orchestrator",
+  "required_skills":["using-agent-skills","source-driven-development","api-and-interface-design","code-review-and-quality"],
+  "phase_id":"HCM-2",
+  "slice_id":"HCM-2.2",
+  "packet_id":"HCM-2.2-contract-repair-4",
+  "subject_fingerprint":"sha256:25747f640a575a24b96881fe83c3b172555da209ed79dc56482c23dd116f3412",
+  "subject_manifest":{"algorithm":"sha256","encoding":"repo-path-null-sha256-newline-v1","entries":[
+    {"path":"docs/specs/handbook-contract-membrane/03-seam-crosswalk.md","sha256":"22f8e5ea897240f987597f91bd94031c31bef77af761fb264118d23a41947f55"},
+    {"path":"docs/specs/handbook-contract-membrane/04-phase-slice-map.md","sha256":"3d1fa0ab86d00c4b4b1fe3b8599c08cb5d703582be28617a3e6d07a5e06d8344"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sha256":"249ee995bc2a980f939e9df8aedf0edbe8c3dfe67a7250bfa2f65e78196f48f9"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/repository-invocation-identity-vectors-v1.0.json","sha256":"3eab52f414f0365873500689c6509231f2c03f077723d91f9e5e314ea0e9b0b2"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md","sha256":"48085d8754674230c24409e6d9f2b171008d0170dda7f1e3f23288c2cb69a99c"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md","sha256":"088aa557d52be24f91b7b263aeb4795b1ac8246d4b759520e5447e685fad672b"}
+  ],"aggregate_fingerprint":"sha256:25747f640a575a24b96881fe83c3b172555da209ed79dc56482c23dd116f3412"},
+  "active_resolution":{"level":"contract_repair_review_4","scope_horizon":"HCM-2.2-product-authority","detail_resolution":"high","temporal_horizon":"current_orchestration","authority_horizon":"manifest_subject","memory_horizon":"manifest_subject_only","validation_horizon":"pre_behavior_review"},
+  "authority_refs":[
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sections":["Approval authority and bootstrap","Global authority lock order and retained observations","API, security, and compatibility posture","Verification and promotion gates"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-1.0.0.schema.json","sections":["all"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/approver-admin-api-vectors-v1.0.json","sections":["all"]}
+  ],
+  "repo_truth":"The manifest freezes the product-path repository identity, operation allocation, mandatory predecessor recovery, pre-invocation result, and distinct unsafe-recovery refusal contracts before behavior implementation resumes.",
+  "allowed_scope":["Read the exact manifest subject and named authority only.","Independently recompute all manifest/vector values and test each closed result union for injectivity and serialization completeness.","Return findings to the parent without editing."],
+  "non_goals":["Do not implement Rust behavior, edit files, review unrelated implementation, write handoff/ledger/proof, or commit."],
+  "tasks":["Verify `RepositoryInvocationRecoveryRefusalV1` has one exact schema/version, closed field set, five-value operation domain, null identity leaves, empty current-operation paths, stable code/message/retryability/action, and no overlap with preflight or normal results.","Verify unsafe recovery precedence returns that envelope, suppresses identity resolution/preflight/normal execution, performs zero native calls, creates no new operation-owned delta, and permits only separately attributable exact recovery-table effects.","Verify both identity preflight branches, typed operation/token allocation, direct-engine compatibility, correlation continuity, setup-only identity initialization, and all positive/negative vectors remain coherent.","Independently recompute repository identity, every operation ID, JSON/vector invariants, and all manifest hashes.","Return CLEAN only if no valid actionable finding remains; classify every finding."],
+  "contracts_and_gates":["Unsafe recovery has a distinct engine-owned exact envelope; adapters invent no recovery result or detail.","Recovery refusal, identity preflight, setup refusal, and normal engine results are structurally disjoint.","Recovery may perform only prior-transaction effects authorized by the exact tables; refused current operation owns no paths or delta.","Compiler/CLI accept no repository identity, raw token, or operation ID.","Behavior resumes only after this different fresh reviewer returns CLEAN."],
+  "stop_conditions":["Return BLOCKED only for a genuine authority gap outside bounded HCM-2.2 repair.","Do not substitute mutable implementation inspection for contract review."],
+  "return_contract":{"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"read_only","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","vector_recomputation","validation","parent_disposition"]}
+}

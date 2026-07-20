@@ -1,0 +1,117 @@
+{
+  "adapter_overlay_refs": [],
+  "artifact_instances": [
+    {
+      "canonical_path": ".handbook/project/charter.yaml",
+      "capability_refs": [
+        "constitutional_root"
+      ],
+      "depends_on": [],
+      "extensions": {},
+      "id": "project_authority",
+      "intake_definition_ref": "handbook.intake.charter@1.0.0",
+      "kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+      "label": "Charter",
+      "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+      "projection_definition_refs": [],
+      "renderer_definition_refs": [
+        "handbook.renderer.charter-review-markdown@1.0.0"
+      ],
+      "requiredness": {
+        "condition_ref": null,
+        "mode": "always"
+      },
+      "role_ref": "constitutional_authority",
+      "schema_id": "handbook.artifact-instance-descriptor",
+      "schema_version": "1.0",
+      "validation_overlay_refs": []
+    },
+    {
+      "canonical_path": ".handbook/project/context.yaml",
+      "capability_refs": [],
+      "depends_on": [],
+      "extensions": {},
+      "id": "project_context",
+      "intake_definition_ref": null,
+      "kind_ref": "handbook.artifact-kind.project-context@1.0.0",
+      "label": "Project Context",
+      "lifecycle_policy_ref": null,
+      "projection_definition_refs": [],
+      "renderer_definition_refs": [],
+      "requiredness": {
+        "condition_ref": null,
+        "mode": "always"
+      },
+      "role_ref": "project_context",
+      "schema_id": "handbook.artifact-instance-descriptor",
+      "schema_version": "1.0",
+      "validation_overlay_refs": []
+    },
+    {
+      "canonical_path": ".handbook/project/environment.yaml",
+      "capability_refs": [],
+      "depends_on": [],
+      "extensions": {},
+      "id": "environment_context",
+      "intake_definition_ref": null,
+      "kind_ref": "handbook.artifact-kind.environment-context@1.0.0",
+      "label": "Environment Context",
+      "lifecycle_policy_ref": null,
+      "projection_definition_refs": [],
+      "renderer_definition_refs": [],
+      "requiredness": {
+        "condition_ref": "handbook.condition.project.managed-operational-surface@1.0.0",
+        "mode": "conditional"
+      },
+      "role_ref": "environment_context",
+      "schema_id": "handbook.artifact-instance-descriptor",
+      "schema_version": "1.0",
+      "validation_overlay_refs": []
+    }
+  ],
+  "artifact_kind_sources": [
+    "handbook.artifact-kind.project-authority@1.0.0",
+    "handbook.artifact-kind.project-authority@1.1.0",
+    "handbook.artifact-kind.project-context@1.0.0",
+    "handbook.artifact-kind.environment-context@1.0.0",
+    "handbook.artifact-kind.work-specification@1.0.0",
+    "handbook.artifact-kind.decision-record@1.0.0",
+    "handbook.artifact-kind.risk-record@1.0.0"
+  ],
+  "context_resolution_ref": "handbook.context-resolution.shipped-root@1.0.0",
+  "dock_requirement_refs": [],
+  "extends_profile_ref": null,
+  "extensions": {},
+  "posture_evaluation_policy": null,
+  "profile_id": "handbook.profile.shipped-root",
+  "profile_scope": "shipped",
+  "profile_version": "1.1.0",
+  "projection_catalog_refs": [],
+  "schema_id": "handbook.instance-profile",
+  "schema_registry_sources": [
+    "handbook.schemas.artifacts.project-authority@1.0.0",
+    "handbook.schemas.artifacts.project-authority@1.1.0",
+    "handbook.schemas.artifacts.project-context@1.0.0",
+    "handbook.schemas.artifacts.environment-context@1.0.0",
+    "handbook.schemas.artifacts.work-specification@1.0.0",
+    "handbook.schemas.artifacts.decision-record@1.0.0",
+    "handbook.schemas.artifacts.risk-record@1.0.0",
+    "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+    "handbook.schemas.security.approver-registry@1.0.0",
+    "handbook.schemas.security.approver-registry-transition@1.0.0",
+    "handbook.schemas.security.authenticator-registration-request@1.0.0",
+    "handbook.schemas.security.authenticator-challenge@1.0.0",
+    "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+    "handbook.schemas.security.authenticator-registration@1.0.0",
+    "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+    "handbook.schemas.security.authenticator-assertion@1.0.0",
+    "handbook.schemas.security.approver-admin-api@1.0.0"
+  ],
+  "schema_version": "1.0",
+  "stable_role_registry": {
+    "fingerprint": "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029",
+    "ref": "handbook.roles.core@1.1.0"
+  },
+  "vocabulary_ref": "handbook.vocabulary.shipped-root@1.0.0",
+  "profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74"
+}

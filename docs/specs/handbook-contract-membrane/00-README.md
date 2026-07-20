@@ -1,11 +1,11 @@
 # Handbook Contract Membrane Control Pack
 
-**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4 and the bounded HCM-2.1 Project Context canonical-YAML pilot have landed through separately reviewed implementation and closeout commits
+**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4 and the bounded HCM-2.1 Project Context canonical-YAML pilot have landed through separately reviewed implementation and closeout commits; HCM-2.2 is stopped at an authority boundary with a non-authoritative implementation checkpoint
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
-**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; HCM-2.2 has a planning-only packet under review and no implementation authority; later slices remain unauthorized
-**Repo-truth snapshot:** 2026-07-19; re-check live code before every slice
+**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; HCM-2.2 requires an additive frozen-contract decision before implementation may resume, and HCM-2.3 and later slices remain unauthorized
+**Repo-truth snapshot:** 2026-07-20; re-check live code before every slice
 
 ## Purpose
 
@@ -212,7 +212,16 @@ persisting legacy Project Context Markdown. The implementation changed no
 HCM-1 definition/schema/profile/descriptor byte, leaves shipped readiness
 conditional and `INDETERMINATE`, closes `PG-YAML-01` only for this one family,
 and leaves the temporary flow bridge for deletion no later than HCM-2.4.
-HCM-2.2 and all later slices remain future work.
+HCM-2.2 produced a broad implementation candidate for the first-party
+constitutional-root cutover, but it has not landed as authority. Fresh Review 2
+found that the shipped author-to-promote path lacks an engine-owned lifecycle
+validation result and that promotion accepts synthetic refs. Bounded remediation
+then proved the frozen identity graph cyclic: the immutable candidate includes a
+content-addressed validation-result ref while that result is required to bind the
+same final candidate fingerprint. The checkpoint remains non-authoritative, the
+Charter-specific proof gates remain open, and work may resume only after an
+additive authority decision defines an exact acyclic binding. HCM-2.3 and all
+later slices remain future work.
 
 The shipped default artifact set is approved in [`slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md`](slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md)
 and its exact kind, profile, descriptor, and selected-registry data now exist.

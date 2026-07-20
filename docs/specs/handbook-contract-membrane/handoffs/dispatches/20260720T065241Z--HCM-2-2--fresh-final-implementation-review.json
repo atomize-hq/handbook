@@ -1,0 +1,830 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T065241Z--HCM-2-2--fresh-final-implementation-review",
+  "created_at_utc": "2026-07-20T06:52:41Z",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:eec48427216f45719a050ef995f6cbad0f1171f292bfac7d9606b27bceb84ca1",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "Cargo.lock",
+        "sha256": "5e4991cc786d860fcedf415031c56747383a6318e8cfba2368cb7c3a9ce06e36"
+      },
+      {
+        "path": "core/library/authoring/charter_authoring_method.md",
+        "sha256": "79eeefeddc27d974ed45ece4d1b651f7d62bb61a5fc13b5512eff013b2d0c5ed"
+      },
+      {
+        "path": "core/library/charter/CHARTER_INPUTS.yaml.tmpl",
+        "sha256": "1033ffc72cf58063a4e167924151befd9f2dd80cdd4c95b0df0c7162e23051ab"
+      },
+      {
+        "path": "core/library/charter/charter_inputs_directive.md",
+        "sha256": "5ed8a4209a1cfee56b0650a2f2a87451e7bb3235c579a8bf9c70179bd8b8bc43"
+      },
+      {
+        "path": "core/library/charter/charter_synthesize_directive.md",
+        "sha256": "dc3c58799f75f0da3bd08609f24b7396ca00bd0ee2c3bf62f90532d81d3d0289"
+      },
+      {
+        "path": "core/library/environment_inventory/ENVIRONMENT_INVENTORY_INPUTS.yaml.tmpl",
+        "sha256": "d2dcac9ff28824c50603d59f5d9be88ded9559c80bb7675c1319e2253d872e20"
+      },
+      {
+        "path": "core/library/environment_inventory/environment_inventory_directive.md",
+        "sha256": "deef421e9e3e5595b116633f91cb15b2d501d52cfdab0c8191dcce79aee4cde4"
+      },
+      {
+        "path": "crates/cli/src/approvers.rs",
+        "sha256": "64af9c01fe13a7c8f1d434558a5d1aa72d3875e5a7b8b3476e52e432c8c7518b"
+      },
+      {
+        "path": "crates/cli/src/author.rs",
+        "sha256": "43d125c3048c10c32176966fc39feb7b1c7e40a3723dac052a5dbc5a4cbe6202"
+      },
+      {
+        "path": "crates/cli/src/doctor_rendering.rs",
+        "sha256": "bc3796ba654389b657bd5c1d26c4e03947903e9b17a96dc1cb6b9ed473ba5ea3"
+      },
+      {
+        "path": "crates/cli/src/main.rs",
+        "sha256": "70c324c75c441f97bc81a940833cd88196700f9a48ffa6e6a729307b8c986af3"
+      },
+      {
+        "path": "crates/cli/src/setup.rs",
+        "sha256": "71eed0f9509da00987d88cbc0d53862ada77778b5f41b18104e5c48187dd93d1"
+      },
+      {
+        "path": "crates/cli/tests/author_cli.rs",
+        "sha256": "163d4932f9d3cc5e0e6b823b63e777b8333e96e03395029f3cce2f65eb4e6935"
+      },
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "9f88fdf27d5ad7eb2d663899d4766c1b65fb21202a57abe2f6cf6b7a6906c4e6"
+      },
+      {
+        "path": "crates/cli/tests/hcm_2_2_product_cutover.rs",
+        "sha256": "fd589a06a1e02d776f9fed5b453198d863a81814ee134d07caea63be24118e82"
+      },
+      {
+        "path": "crates/cli/tests/hcm_2_2_skill_assets.rs",
+        "sha256": "21cb07e3effcbbb7c2182fb78c1edff941b3fc7951bbac0e22a8eb7a89c4544e"
+      },
+      {
+        "path": "crates/cli/tests/manual_qa_fixture_checkout.rs",
+        "sha256": "40f5d5953e1a6ec5fc15c0cb831bf788c5d7e93c9501fb60591d9098d23cf95e"
+      },
+      {
+        "path": "crates/cli/tests/pipeline_handoff_refusals.rs",
+        "sha256": "44ac5fcc2dde77c582b75a7d52ac8a7cd7481cac8d60651647d10ab3e1762ba0"
+      },
+      {
+        "path": "crates/cli/tests/pipeline_proof_corpus_support.rs",
+        "sha256": "170c67c7f2b880c911a8ffbcbd73ea91b6ab5207512e289b7d917806b2538797"
+      },
+      {
+        "path": "crates/cli/tests/repository_identity_setup.rs",
+        "sha256": "a783132db49258e6363c273e1d4eb06bb35861610e29853e052be9e55c4bd4be"
+      },
+      {
+        "path": "crates/compiler/Cargo.toml",
+        "sha256": "e5657a0059d7db5695c3179f0a2aa799d117f10c020326cb1ef95ebe5c316b15"
+      },
+      {
+        "path": "crates/compiler/src/author/environment_inventory.rs",
+        "sha256": "64dab5a1e9464e0910f748141c8c80a5b29b66214d670806c8eb45d163fa7d29"
+      },
+      {
+        "path": "crates/compiler/src/author/environment_inventory_shell.rs",
+        "sha256": "bc8db82fdddbcd4c6172d27fbb3f54112c16483e31407a62b9099d3269648d82"
+      },
+      {
+        "path": "crates/compiler/src/author/mod.rs",
+        "sha256": "00f1269a3044763a27e259d9dbf8c8de756f9aeb2e0271e3126a5e9fc9c9a6e3"
+      },
+      {
+        "path": "crates/compiler/src/blocker.rs",
+        "sha256": "1221b4bced5d247390e0137725197a03447b20b6cf6d56759043a147992b0c7a"
+      },
+      {
+        "path": "crates/compiler/src/charter_product.rs",
+        "sha256": "238bdb9ffe6122b48e7434f50ab6da00d13680cd4371362e5ea9fadb43e36138"
+      },
+      {
+        "path": "crates/compiler/src/doctor.rs",
+        "sha256": "7c24b6c03a94de64fe77c48c8e139b10e1e2e99b166731eba9c7795dec3a162c"
+      },
+      {
+        "path": "crates/compiler/src/lib.rs",
+        "sha256": "85c51f7fb03b834a6216d6d45b42897d6b35389dfc0636d2d77e24e86b740fe6"
+      },
+      {
+        "path": "crates/compiler/src/repo_file_access.rs",
+        "sha256": "68acb27812b0773aaf5c54203783cebcac369ee5fe3a216d70d02866a91a873f"
+      },
+      {
+        "path": "crates/compiler/src/setup.rs",
+        "sha256": "10194d62f5f9ca995d2cb1fa5c5451ad85cc530706ceb63e10ec3c12bcd1e8a7"
+      },
+      {
+        "path": "crates/compiler/tests/author.rs",
+        "sha256": "c721863ef2adf76ebfd3ddf7458bdb67743d3471b88abc9f03a6ceb57d0b6c2c"
+      },
+      {
+        "path": "crates/compiler/tests/doctor.rs",
+        "sha256": "866b5574c5134ec027883f4a1146f324a33ec6390a44b9b8ac6c3ee2cbda6ac8"
+      },
+      {
+        "path": "crates/compiler/tests/hcm_2_1_c04_version.rs",
+        "sha256": "271dfd0a0f269a4d0de1206b5a2e94843616baa74753214760e8c63569e2c8c1"
+      },
+      {
+        "path": "crates/compiler/tests/hcm_2_2_c04_version.rs",
+        "sha256": "af1786ed8bd88e07cf7a915f0119acfcd0ff1ada411e4d4ec7e1e9484612b1b7"
+      },
+      {
+        "path": "crates/compiler/tests/hcm_2_2_product_cutover.rs",
+        "sha256": "c7c4b43780d90f19f20a2290d6d01344dcbdecde352da939398f08c6b971f4e8"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_state_store.rs",
+        "sha256": "e0e97d369a98c87f48843ccd7c38e7c95875728b0365d9f7d0aa9c92624a2da1"
+      },
+      {
+        "path": "crates/compiler/tests/refusal_mapping.rs",
+        "sha256": "02ac23565894dfb986e5e405dfbc53388f650d44efdd81252bc507e9c8800af0"
+      },
+      {
+        "path": "crates/compiler/tests/rendering_surface.rs",
+        "sha256": "ca44af12622fb7dfdbfee84977dc5b5bba36c4a399a288cca2eb260bd4ab5d37"
+      },
+      {
+        "path": "crates/compiler/tests/resolver_core.rs",
+        "sha256": "9a280bc165a5113efd7d42a04018ffcebed363e75801f317c43fefec403bd86b"
+      },
+      {
+        "path": "crates/compiler/tests/setup.rs",
+        "sha256": "4a5a056d789868e678f8773de47a4e3e52ed5830bb8855136343cba1fa97bd8e"
+      },
+      {
+        "path": "crates/compiler/tests/support/pipeline_proof_corpus_support.rs",
+        "sha256": "392c2e4ea106f9d477da7e680158174001c461359ce869ba5a9d703aedacb27c"
+      },
+      {
+        "path": "crates/engine/Cargo.toml",
+        "sha256": "99360467ca3f3331313e34a724f0e678910bbaea82a475b677f12822ebbcd3f5"
+      },
+      {
+        "path": "crates/engine/definitions/approval-policies/handbook.approval.constitutional-candidate/1.0.0.yaml",
+        "sha256": "9f68b502e759c6b1da32672751435360ef9b086d17ebf8532b8bca6b690c6230"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.project-authority/1.1.0.yaml",
+        "sha256": "cdd03d8bb6a806e64b740b1793cc05ae9acf3369cf787dcb7255cccb2e1e8a09"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.charter/1.0.0.yaml",
+        "sha256": "7ada384e4ff8e7fc627dee47e92e24a5806690688beb2e10747bf35d1cda0f67"
+      },
+      {
+        "path": "crates/engine/definitions/lifecycle-policies/handbook.lifecycle.constitutional-review-lock/1.0.0.yaml",
+        "sha256": "4ee4137128871d9cff0c68143587014db83a193a156bc257a8d82261ebe29a90"
+      },
+      {
+        "path": "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.1.0.yaml",
+        "sha256": "56f92ee105319b609fe21bf299770cd118df121f23e9fcc8c83ebd4b64d66557"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.charter-review-markdown/1.0.0.yaml",
+        "sha256": "3c8c6ebe82f8770bb8a7023dd22ff3538e68dbd025c1896bc8b2b053093865fc"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.project-authority/1.1.0.entry.yaml",
+        "sha256": "4c21f663032dd4741eaa71828a6b4a8f10c987277a8eb0a5aa62de8be7e66866"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.project-authority/1.1.0.schema.json",
+        "sha256": "7afabe1e26ea2b56752ca7c23b2d1bfeb0beef89b15dc54f898785d5cc337a33"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.lifecycle.trigger-evidence/1.0.0.entry.yaml",
+        "sha256": "e9f985b2a2c8203ce8bf9d898760f0d7bdb5354ac3b12d0003727b12d25b9c13"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.lifecycle.trigger-evidence/1.0.0.schema.json",
+        "sha256": "6c158d3f1f047d851e26f46946ecc4e07ef58c8866e89e79da5a9e2c34883af3"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.approver-admin-api/1.0.0.entry.yaml",
+        "sha256": "ea915b65f3347ad1ff04c3d3cdf75aff655915b282fbf34caeffaf61dd09ef82"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.approver-admin-api/1.0.0.schema.json",
+        "sha256": "d9ed6682d66c4417d76df2e376bf8e48b092a28a830eba6f049853791c952228"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.approver-registry-transition/1.0.0.entry.yaml",
+        "sha256": "0ba9f91a8fee8d94d8a4277a3c08ccff5d7fc988617ef4708ec836ffe1f5dadf"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.approver-registry-transition/1.0.0.schema.json",
+        "sha256": "1f329bf80ca875d62bd5016693499d8831f73aa8be242def44a5bb10a400251c"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.approver-registry/1.0.0.entry.yaml",
+        "sha256": "c531f4f6aa6742d9f611d98de0c9fb38f01df8d7d3066e8d41b0ed8343d4f926"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.approver-registry/1.0.0.schema.json",
+        "sha256": "b3dab13ae3a73ecf6512af5f4e3f7857a116370812d0ddf1dd57c6cf10b58464"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-assertion/1.0.0.entry.yaml",
+        "sha256": "2d53cc48b07fa42cd85ab5e47fa442c3c061a31656602836bfd3c276442e9e3c"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-assertion/1.0.0.schema.json",
+        "sha256": "5efb348fdddaa4e290f35251f9f707307215ed8860c3c6357c935212b9f8ac23"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-challenge/1.0.0.entry.yaml",
+        "sha256": "f16e70eef44a5f3efa59ce507ad770bf76df3704b1d1c6f0f1d033549a47dc8c"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-challenge/1.0.0.schema.json",
+        "sha256": "8cb47ee9ca4b975704f782900c3850d29e7bdd6719af193ab0726f37ec311c29"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-get-assertion-response/1.0.0.entry.yaml",
+        "sha256": "01dccb419806174db1bf6efdcdc3129a8b525b6f338b9a244db0d90a6240fb58"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-get-assertion-response/1.0.0.schema.json",
+        "sha256": "7dbed64cc1a2bec3ca3a3348b6c46626d76287f876f4028f81934b6c3dd54be6"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-make-credential-response/1.0.0.entry.yaml",
+        "sha256": "d468d42d8668c3cfebaf815f13194bde6253ae3edb1f698291fda76b873d69dc"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-make-credential-response/1.0.0.schema.json",
+        "sha256": "2dd22f26b5a949a84966f7ffa25c35998b5f0b08664a53937339b6e7ebd620a2"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-registration-request/1.0.0.entry.yaml",
+        "sha256": "d505df1cb962dcc40d0825fbba9ee27847692822b7905c0a1b88411589e5f2e6"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-registration-request/1.0.0.schema.json",
+        "sha256": "f2a352f15cb28f3770666f683b8dbc9f1f1d18f0cedee6d3b95e8241db0c4059"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-registration/1.0.0.entry.yaml",
+        "sha256": "b4a7801fa204d0c5bf7c2b3f5f70a9febb9a2a15cc7bce25e2771bc4d5a51590"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.security.authenticator-registration/1.0.0.schema.json",
+        "sha256": "bb0a3446349c2733376373cd511a46989b30bacd6afb6a9aba98b9bc0a352855"
+      },
+      {
+        "path": "crates/engine/definitions/semantic-validators/handbook.semantic-validation.constitutional-root/1.1.0.yaml",
+        "sha256": "1ad8d1bf9cc8f317592460e3ff3d1b965a27bef18112fcb111b5b45452d69554"
+      },
+      {
+        "path": "crates/engine/definitions/triggers/handbook.intake-trigger.production-posture-changed/1.0.0.yaml",
+        "sha256": "0c9b2ca23fe35c81089f31c2a77d71677a9b52c8cd9d67644370270a40ffaa5d"
+      },
+      {
+        "path": "crates/engine/definitions/triggers/handbook.intake-trigger.trust-boundary-changed/1.0.0.yaml",
+        "sha256": "d8a79aaca7d0da337299ade5cf9133045d2ed2f2532218df91baf7e501e9a9af"
+      },
+      {
+        "path": "crates/engine/definitions/triggers/handbook.lifecycle-trigger.charter-amendment-proposed/1.0.0.yaml",
+        "sha256": "50f920297823a6d0ce71f1b9b4b194a5712ce1f2949deb624c29f4edd76e4255"
+      },
+      {
+        "path": "crates/engine/definitions/waiver-policies/handbook.waiver.constitutional-intake/1.0.0.yaml",
+        "sha256": "013b67ae1efb36e8b5c2197d29910aa58e1b3d3c2b1c506aa42ec6c8f1a6eb98"
+      },
+      {
+        "path": "crates/engine/src/approver_registry.rs",
+        "sha256": "0ccfbd56d23d54fb6065583cf331a17ce74a9cbd20b47b0d7a9f041d1e7a87bc"
+      },
+      {
+        "path": "crates/engine/src/approver_registry_mutation.rs",
+        "sha256": "06048cc8215579f3023827e8d708a0645eaaa915111609432b87ebeca2f19f71"
+      },
+      {
+        "path": "crates/engine/src/approver_registry_observation.rs",
+        "sha256": "8534bbeb56d573945c36042d1be9b25c20a09b318f4a72c006205f466995d6ad"
+      },
+      {
+        "path": "crates/engine/src/artifact_instance.rs",
+        "sha256": "128eab60a3a16f08cd0966f076a62fa6bbbd4df20c9d0f5f6832ec53983bfa1d"
+      },
+      {
+        "path": "crates/engine/src/artifact_kind_registry.rs",
+        "sha256": "d2505d47e41af3557b03f68b37a3e50908c0e9e5e5033ad862fce369ccb33f55"
+      },
+      {
+        "path": "crates/engine/src/author/environment_inventory_core.rs",
+        "sha256": "d306d01ef3ccf7ee08dfe6f0c4c50891d1b843e213134ad27a6d52fc74ab6f55"
+      },
+      {
+        "path": "crates/engine/src/canonical_repo_support.rs",
+        "sha256": "ba4604508cb72fd4e1a238bcb790d2a221ff774bfef32b7b80203f5420c3f563"
+      },
+      {
+        "path": "crates/engine/src/charter_approval_workflow.rs",
+        "sha256": "a6a5770199eae5023efbf74913af9310aa8f05708ce614e59a90f6497c68c64f"
+      },
+      {
+        "path": "crates/engine/src/charter_artifact.rs",
+        "sha256": "2e3690cf48b352869a3c520dec759105999a5289205f893eebac0c907f9d7d0f"
+      },
+      {
+        "path": "crates/engine/src/charter_authenticator.rs",
+        "sha256": "8cd42df2402c0e2af90ff6dc4056af0bc93be07ae6ee707a9ebb772693029afa"
+      },
+      {
+        "path": "crates/engine/src/charter_authority_transaction.rs",
+        "sha256": "f1e2f38d1451b0566c2e53a8eee1e53976aa796d4f515676c9c10291ca885df7"
+      },
+      {
+        "path": "crates/engine/src/charter_authority_workflow.rs",
+        "sha256": "f33f1d209edc5b536e50a3c1b0ce4fb628684ec09bd4bf1c3910cee40542044e"
+      },
+      {
+        "path": "crates/engine/src/charter_definition_registry.rs",
+        "sha256": "b495619cfffbccd6e47e866e466129bdfd212d832a98d25a93767fdde10f2c35"
+      },
+      {
+        "path": "crates/engine/src/charter_intake.rs",
+        "sha256": "9610b7b4534acc29ac478b4efcc8a98539384d04c825310c2f8ecc635efaae2c"
+      },
+      {
+        "path": "crates/engine/src/charter_lifecycle.rs",
+        "sha256": "c5af33d4353b56d7912110bca321ec2555d93bcf02592dce6971dab44a0b2b8a"
+      },
+      {
+        "path": "crates/engine/src/charter_lifecycle_store.rs",
+        "sha256": "df5d3404d673f4c8e5f41fb7622d4d6fd294187eb4bba03259b4c6c9ce2e9aaf"
+      },
+      {
+        "path": "crates/engine/src/charter_lineage_store.rs",
+        "sha256": "3ebdfd367388c6e252742886657122bd4319cf3b54c4e6e0843558782d8719a1"
+      },
+      {
+        "path": "crates/engine/src/charter_observation.rs",
+        "sha256": "482c15fe49a787232d79a7a39cbd6e7877ec8bd74713d8d30ac33e9a5367a62d"
+      },
+      {
+        "path": "crates/engine/src/charter_promotion_workflow.rs",
+        "sha256": "5b26b5f077ada5770040e152e62e09ec36b7d1e49ec9cdfa038155719f15657b"
+      },
+      {
+        "path": "crates/engine/src/charter_runtime_vectors.rs",
+        "sha256": "58a635320b60792d96c7f945b616d4ec792941ef52048e5106563a7185b0393f"
+      },
+      {
+        "path": "crates/engine/src/lib.rs",
+        "sha256": "18ab4c30b81834ed923139464e92b5fa1b579765204d608ebc9f3dcc2e26fe22"
+      },
+      {
+        "path": "crates/engine/src/profile_builtins.rs",
+        "sha256": "e53f709651945bc1ed6064dc7362ef0196bf04f48d0fc21474017ccf0a901eb1"
+      },
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "acc868cba521e3c67b0d264cb91369228b669b2f62cb786c7582614cd40df3db"
+      },
+      {
+        "path": "crates/engine/src/profile_inspection.rs",
+        "sha256": "a6ea334845d80238f9b4b1ec343354ee92a4058919a07edb366a5c7c4f07c6d2"
+      },
+      {
+        "path": "crates/engine/src/profile_selection.rs",
+        "sha256": "d62d32ecc9b7482788d543c9fe71a8efa1dbae441176d57c96842cf2bfb14e63"
+      },
+      {
+        "path": "crates/engine/src/repository_invocation_identity.rs",
+        "sha256": "9696b0d9b26ecdb2d0842cf8da217668ef4b8c5431a52b44489474e6afcd00f5"
+      },
+      {
+        "path": "crates/engine/src/schema_registry.rs",
+        "sha256": "6d77a198f32b543e2e1e25623b46b26999b26ca84f59157ef164fe1a98b86d32"
+      },
+      {
+        "path": "crates/engine/src/semantic_capability_registry.rs",
+        "sha256": "6c7df7d591e464e6cc56cca38a4cd5b2d8d19345e3f0d4727a9c2f20faced536"
+      },
+      {
+        "path": "crates/engine/tests/author_core.rs",
+        "sha256": "8ca708f355ebc2cdad650d2be1a54ca297a90a4209c7f03895ea1996e3a50dc9"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_decisions.rs",
+        "sha256": "b2cf68157a5fee60070f11020874108973ad3a436f294b63cd3fdbdde5eab22f"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_inspection.rs",
+        "sha256": "51a8d7fac6c482fcebc0c48e5db615706e9d69ecac9fab208726c85f8272de83"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_approval_use.rs",
+        "sha256": "68849ba87d835897d41bb1d5ef151017f84adeb3aff7f29e7000f13565b7d968"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_authenticator_security.rs",
+        "sha256": "1671f7d8e540b766f53c8bb26960b770276bb504f7b0034353a4951a8b317f3e"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_authority_workflow.rs",
+        "sha256": "443d01f66726b8c43578572ccfbd7eae3137b8fbdf35ea2ba88c10c2ff3d6356"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_charter.rs",
+        "sha256": "b6b333c982371f47cfd48dfc094cd33ca08b4cbfea0cbc72be6d2a0bbe32a085"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_charter_observation.rs",
+        "sha256": "18d13a2c1a2788481e9ca5dcb365ba9edaf1ec43db245d014a5ff0b26f7364ab"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_definition_profile.rs",
+        "sha256": "b1e0cf17af49637cd09f4607a2c09b34217940226ea2eb1fdc2b55bcd9cc214b"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_definition_registry.rs",
+        "sha256": "8895191283cac2ddbfa7611eb7014d022ad752560c501cb68e15e993508b8ea9"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_intake.rs",
+        "sha256": "7fbe2bd99e1c7c5987288b51d29ee94e1e58e3fe8f001183fa1c152de2da67ec"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_lifecycle.rs",
+        "sha256": "ddee2f6121ca1a11c6082e7c385e6149f8192b716816ca6d5f3356cd8a784bdd"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_lifecycle_store.rs",
+        "sha256": "e14947ffe39ffbaf9191db5225c341e0b90301fdc675ce6db633f020bcb4cafb"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_lineage_store.rs",
+        "sha256": "4b0275ce83eb971ef58248c594816a01ad0d743099876ca1842c790997a380ad"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_promotion_workflow.rs",
+        "sha256": "8c81a7640d57ad799220352a2d583135f8bf4fb7d655fc43fb67022faa0e0bd2"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_runtime_vectors.rs",
+        "sha256": "5239b845522b60c7da5a8332244d4f0fcffd09949240890314b0526d49d8fd2c"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_transaction_promotion.rs",
+        "sha256": "be767f0bee2a29df922a3186610a4889e8e7c7f8e9d7f5d78b101290faa0ecd3"
+      },
+      {
+        "path": "crates/engine/tests/repository_invocation_identity.rs",
+        "sha256": "2af18fd57e5d695554b7cf5753ade40800d4fa8952628aa6308ef0ae907d51b4"
+      },
+      {
+        "path": "crates/engine/tests/support/hcm_2_2_committed_charter.rs",
+        "sha256": "59f91d571b28ef4774ffba928973906a7e3d64571e0aa631734e88de69ad31bd"
+      },
+      {
+        "path": "crates/flow/Cargo.toml",
+        "sha256": "3901e3bfda6abddb1809fdf249cb1fa895948d9aba39f209be89c135b1ef486f"
+      },
+      {
+        "path": "crates/flow/src/resolver.rs",
+        "sha256": "a560d618c3565c76d5db2497c598be125dde0c451226972113143eafa7c6d755"
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "sha256": "41d67d3ec0a5b5999f38cd815dc79814342f61f3e6532a19c6cbab80889bafeb"
+      },
+      {
+        "path": "crates/pipeline/src/repo_file_access.rs",
+        "sha256": "3475aad500d95f7b4899e4a7ef63c0761677e4bc69ddee9daa3a89cd7aa9f42b"
+      },
+      {
+        "path": "crates/pipeline/src/route_state.rs",
+        "sha256": "3991b614c56ecb4625c17d4765e52308f233daa34042daaabfeb636ee02cf0f9"
+      },
+      {
+        "path": "crates/pipeline/tests/pipeline_state_store.rs",
+        "sha256": "a767075a33af252c8ea30f4b52e859acc9ccdf13ce0f4b6ca26f33d4067771ae"
+      },
+      {
+        "path": "crates/pipeline/tests/support/pipeline_proof_corpus_support.rs",
+        "sha256": "392c2e4ea106f9d477da7e680158174001c461359ce869ba5a9d703aedacb27c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "bd809f594e8bee9f0543ef5dac62b90fdb9aed529501d92112d7ab72845fae09"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "4860e2d938e2a05cc0b9e8798b4b4aeaf12e498d74299960bd70f70f98967d9a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "d6dc060b7926e02b5174c9641fb7e2220ea458475b1e105826d615f463e7033d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "fca79c4a85c21d73329d29ccf271a22b131e4294aa7370a5657e46419ee4fb4b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T234105Z--HCM-2-2--implementation-feasibility-proof.json",
+        "sha256": "721eafa84d86db9b7caee9dbc94117a8fef80a392c509e2a1127bf0a15860afe"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260719T235358Z--HCM-2-2--definition-profile-closure-implementation.json",
+        "sha256": "62b2b4e9db114a9f874c091a0023591834284d8ba281ebab5b49dc97d97641e5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T000551Z--HCM-2-2--authenticator-authority-implementation.json",
+        "sha256": "07b27b7c44c515fac854a8aea5911971f43781fa7a4f9b7e2e2192426ef4c74a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T003915Z--HCM-2-2--lineage-promotion-lifecycle-implementation.json",
+        "sha256": "165cef8615f5acee3ef3c83be57f2e97f514736374c8c562bbb6bf8ba1a5d40d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T003916Z--HCM-2-2--compiler-cli-skill-cutover-implementation.json",
+        "sha256": "f91f5c7c4c158eb19a543cbe4260a1042d6796df5a194378186e82a43b832b03"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T005347Z--HCM-2-2--environment-flow-cutover-implementation.json",
+        "sha256": "77131e27803cce376a07646896f1092544a749aadbdc1ff08c339e1be6ebc145"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T012021Z--HCM-2-2--authority-workflow-services-implementation.json",
+        "sha256": "923d8796bf0e5372e7a86db6942fa7108677556e8c414951ebf2d117328b863f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T014415Z--HCM-2-2--approval-use-authority-implementation.json",
+        "sha256": "d4f95ce9f248f44c4932854e41dbe1357d1c8b3f4df1b431ec2e36c6b135ec7b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T014415Z--HCM-2-2--lifecycle-promotion-workflow-implementation.json",
+        "sha256": "9fc4a88c27bf1e4123c016902021d7819b70157f10bd856479cfe522dc2d5cd0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T014415Z--HCM-2-2--registry-mutation-authority-implementation.json",
+        "sha256": "ba74654e4cd1d6381af90cf500973a50644d86d401f7887474e0fae654c89a1d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T024754Z--HCM-2-2--approval-promotion-journal-remediation.json",
+        "sha256": "0e5cb7790353c09f6f19929d77e7444690283a5cacb261a7deffd54716e28ca3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T030617Z--HCM-2-2--product-authority-integration-remediation.json",
+        "sha256": "bf431fd85ab27a334a4a67299e4f90ba96ce50e2f45aa60484bf4e797e641b6c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T031044Z--HCM-2-2--registry-recovery-observation-remediation.json",
+        "sha256": "041fbd6a79d75e0aff7b66a718acd002c0ccf2464f0ad864b3427bdf46ae5d8f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T032348Z--HCM-2-2--repository-invocation-identity-contract-repair-review.json",
+        "sha256": "b5a8536691ed9b8888d12aae79512666e9ed035224c85897e0485ef203baadfe"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T034838Z--HCM-2-2--repository-invocation-identity-contract-repair-review-2.json",
+        "sha256": "57891e20297d97f4369f80b7241bbfbf09838347f3876de5c4a7dca661cacd2b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T035954Z--HCM-2-2--repository-invocation-identity-contract-repair-review-3.json",
+        "sha256": "9ac28b41d12efb90f95d015bd051257377b595699656136dc09323b5f8b3724b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T040313Z--HCM-2-2--retained-authority-promotion-remediation.json",
+        "sha256": "f5f131eebe6b6f4668438568ea4b119d5233dec8278c0947c53cd86af87a6ae1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T041025Z--HCM-2-2--repository-invocation-identity-contract-repair-review-4.json",
+        "sha256": "cbd823dce8654cbadc2e240eb7d2c0f372c7615df7770256608bd43a49c68248"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T041803Z--HCM-2-2--repository-invocation-identity-implementation.json",
+        "sha256": "d9b6b5ef7f5b2c257ca0d022660f9ff5e35fe117768e64b5b95046a1e828595a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T043544Z--HCM-2-2--product-authority-integration-final.json",
+        "sha256": "505acdfc1ee17bab98f41a7d7569ede10f634c1178fb3cdfd3753a7a600e4c40"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T044942Z--HCM-2-2--promotion-product-projection-remediation.json",
+        "sha256": "7cc815e9ed3fdcb51cdb8039be305bba6debaacd7ecb0268573ef84f5a5bc7d2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T045117Z--HCM-2-2--strict-lint-remediation.json",
+        "sha256": "f3b1064cb9137a7d3da8d7414b55e94c99e853c6bad0d3c9ccfe8fbd0e9336c6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T050814Z--HCM-2-2--strict-lint-remediation-2.json",
+        "sha256": "f6a8ff1773b871aa3330374d3360bb4dcfdddb4a13176c8197c9f46a4bb00a6a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T054516Z--HCM-2-2--cli-regression-remediation.json",
+        "sha256": "d276aa163a899d75a8bb1f9758cee43fcca3fc596de36d8787a88099a9addb76"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T054517Z--HCM-2-2--windows-integration-regression-remediation.json",
+        "sha256": "a22396ab9e20217d08f3f5990be085d95f70a6f0aabf46d638b110c6c0018cb0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T054927Z--HCM-2-2--installed-skill-smoke-remediation.json",
+        "sha256": "b926aa37da8bbeec915ae29b587defc2b339d9214d2d71b8e525b83fa92ef08d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "sha256": "e8340207c955b9ea6df91cec6e2a2a4e7193939f5b230512fbe8eacb91121dab"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "226d4cb2e6062465044d5308084976dca7cd783c96fb6953b748b24515bfc462"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/repository-invocation-identity-vectors-v1.0.json",
+        "sha256": "3eab52f414f0365873500689c6509231f2c03f077723d91f9e5e314ea0e9b0b2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T064356Z--implementation-proof-wall.md",
+        "sha256": "c15128a43714991b21ad9738c98e56785fe1976275175df7f6a045e162e46c7b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+        "sha256": "83035a876ad7ed0341610fa1371ddc0756b6ec405c8f35d7afdb9c793c50140c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+        "sha256": "9709f9595c2c60aebbdab1e5e80c7db6a4f73f47b465d6942097acf2e266678c"
+      },
+      {
+        "path": "install/handbook-home/SKILL.md.tmpl",
+        "sha256": "5bf3dd92788cbb16d6274f8398adbb71967eed6fc91b2ce1d1bcb8b60b61ca6a"
+      },
+      {
+        "path": "install/handbook-home/charter-intake/SKILL.md.tmpl",
+        "sha256": "e466980c3cf928ae4c16e8328e64f658fa938792b79ed0a39dc231f0935ebfad"
+      },
+      {
+        "path": "tools/ci/codex-skill-live-smoke.sh",
+        "sha256": "f73d19f50c0591ee46f7a226c9c734f86bc7a5008c6f1cc6b17ab927cd696dc8"
+      },
+      {
+        "path": "tools/fixtures/charter_inputs/brownfield_external_web.yaml",
+        "sha256": "ed4f186082e26d659c0d43305f0669ad69280026bd36a08fdb7e7e1cbfa12e57"
+      },
+      {
+        "path": "tools/fixtures/charter_inputs/greenfield_internal_api.yaml",
+        "sha256": "8e6e3047991eacd0a4c077221f15111de650adde741d1a330ab0e719b70b98f0"
+      },
+      {
+        "path": "tools/fixtures/charter_inputs/runtime_smoke_valid.yaml",
+        "sha256": "b8981bba856e91b3c192387da21c728663ba65e1003cb51ee1fd08331b81cfc3"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:eec48427216f45719a050ef995f6cbad0f1171f292bfac7d9606b27bceb84ca1"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.2 complete constitutional-root implementation and proof subject",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre-primary-commit final review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Phase 5 — Fresh review / remediation loop",
+        "Phase 6 — Full proof wall",
+        "Phase 7 — Control-pack closeout and commit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.2 — Constitutional-root artifact"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "Objective",
+        "Deterministic canonical bytes, renderer, and lifecycle",
+        "Product-path cutover",
+        "API, security, and compatibility posture",
+        "Exact scope",
+        "Verification and promotion gates",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+      "sections": [
+        "P8 — Run the complete proof wall and update truth",
+        "P9 — Fresh review and remediation loop",
+        "P10 — Commit and close parent orchestration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T064356Z--implementation-proof-wall.md",
+      "sections": [
+        "Landed boundary",
+        "Test-first and remediation evidence",
+        "Definition and package preservation",
+        "Final proof replay",
+        "Review and promotion boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.2 constitutional-root implementation proof gate"
+      ]
+    }
+  ],
+  "repo_truth": "The exact 171-path raw-byte subject is the complete HCM-2.2 diff from entry HEAD ab0c2613f215979d9336340e47a2a0e19f00096b before this review dispatch. It contains the additive definition closure, engine authority and durability services, compiler/CLI/flow/skill product cutover, all tests and immutable internal dispatch history, updated control-pack truth, and the complete implementation proof wall. GitNexus reports CRITICAL slice-wide impact: 70 tracked files, 452 indexed symbols, and 52 execution flows. The reviewer must independently establish correctness from authority, live bytes, tests, and proof.",
+  "allowed_scope": [
+    "Remain read-only and replay all 171 manifest hashes plus the aggregate before review.",
+    "Review the complete diff from entry HEAD against the exact HCM-2.2 authority, owner boundaries, security/refusal gates, exact definition closure, maximum proof promotion, and later-slice non-goals.",
+    "Inspect setup repository identity, product operation-ID continuity, native-authenticator authority, approval/registry/promotion/lifecycle recovery, selected Charter author/doctor/Environment Inventory/flow paths, installed-skill smokes, Windows portability, package replay, and control-pack claims.",
+    "Return findings first with exact file/line evidence and the smallest in-scope remediation."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, handoff/ledger writes, or user task hops.",
+    "No HCM-2.3+, generic custom-kind intake, remaining artifact-family conversion, Resolution/Projection/Snapshot/posture-kernel, SDK/Tauri/Substrate/dock/publication work, or adjacent cleanup.",
+    "Do not trust prior implementation or remediation conclusions; independently admit and inspect the exact subject."
+  ],
+  "tasks": [
+    "Invoke the ordered required skills and return BLOCKED on any subject mismatch.",
+    "Admit the exact manifest and independently review correctness, readability, architecture, security, performance, regression coverage, real-path proof, control-pack truth, and scope.",
+    "Reproduce any suspected Critical or Required finding against live code/contracts; do not repair it.",
+    "Return CLEAN only when no Critical or Required finding remains; otherwise return CHANGES_REQUIRED or BLOCKED."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md#verification-and-promotion-gates",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#hcm-22-constitutional-root-implementation-proof-gate"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if any subject path, raw SHA-256, count, order, or aggregate differs.",
+    "Return CHANGES_REQUIRED for any Critical or Required correctness, security, authority, durability, regression, proof, documentation, or scope finding.",
+    "Do not repair the subject or create closeout records."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

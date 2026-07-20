@@ -1,0 +1,31 @@
+{
+  "schema_id":"handbook.internal-dispatch",
+  "schema_version":"1.1",
+  "dispatch_id":"20260720T054927Z--HCM-2-2--installed-skill-smoke-remediation",
+  "created_at_utc":"2026-07-20T05:49:27Z",
+  "source_handoff_ids":["20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"],
+  "parent_orchestration_id":"20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision":"proof_or_review_followup",
+  "execution_target":"internal_subagent",
+  "agent_type":"default",
+  "role":"implementation",
+  "fresh_context_required":true,
+  "closeout_owner":"parent_orchestrator",
+  "required_skills":["using-agent-skills","debugging-and-error-recovery","test-driven-development","code-review-and-quality"],
+  "phase_id":"HCM-2",
+  "slice_id":"HCM-2.2",
+  "packet_id":"HCM-2.2-installed-skill-smoke-remediation",
+  "subject_fingerprint":"sha256:6169f5da4e13db635b66f7bbd8acf31a53a04e45e4599278725c4c451af30c61",
+  "subject_manifest":{"algorithm":"sha256","encoding":"repo-path-null-sha256-newline-v1","entries":[
+    {"path":"tools/ci/codex-skill-live-smoke.sh","sha256":"43559199f2466076b3ca7de629e3d2bbfb84a140b467ad84fd1b41f6a29086c0"}
+  ],"aggregate_fingerprint":"sha256:6169f5da4e13db635b66f7bbd8acf31a53a04e45e4599278725c4c451af30c61"},
+  "active_resolution":{"level":"smoke_remediation","scope_horizon":"HCM-2.2-installed-skill","detail_resolution":"high","temporal_horizon":"current-orchestration","authority_horizon":"approved-slice-packet","memory_horizon":"live-repository-truth","validation_horizon":"installed-real-path-smoke"},
+  "authority_refs":[{"path":"docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md","sections":["Product-path cutover","Verification and promotion gates"]}],
+  "repo_truth":"The installed Codex skill smoke still invokes retired Charter --from-inputs/--validate forms, expects persistent Charter Markdown, and treats authoring as direct canonical mutation. The approved HCM-2.2 product contract requires explicit acquisition mode, immutable candidate creation, native authority fail-closed behavior, selected canonical YAML, and no persisted Markdown.",
+  "allowed_scope":["Edit only tools/ci/codex-skill-live-smoke.sh. Do not edit production code or fixture bytes.","Replace obsolete Charter smoke assertions with exact HCM-2.2 installed-runtime behaviors that can be truthfully exercised without credentials, including candidate creation, explicit mode, validate-only selected-truth refusal, native authority unavailability, zero canonical Markdown, and unchanged Project Context/Environment Inventory proof where reachable."],
+  "non_goals":["Do not fabricate successful native approval/promotion, seed authority by bypass, restore Markdown, weaken fail-closed assertions, skip the skill runtime, or commit.","Do not touch install-smoke.sh, Charter fixtures, product code, docs/control/proof/handoff/ledger."],
+  "tasks":["Verify the subject hash and load required skills.","Audit every obsolete Charter call/path/assertion in the script against the HCM-2.2 CLI contract.","Run GitNexus impact for named shell helpers; if unavailable, report UNKNOWN and keep edits mechanical and bounded.","Remediate the script, run bash syntax, and run the real smoke if the host supports it; otherwise return the exact platform blocker and the strongest executable sub-proof."],
+  "contracts_and_gates":["No selected product path reads/writes legacy Charter Markdown.","The installed binary is invoked with the frozen explicit operation grammar.","Native-authenticator absence is an exact expected fail-closed result, never a fabricated success."],
+  "stop_conditions":["Stop and report if truthful smoke coverage requires a production edit, authority bypass, new fixture outside scope, or weakening a required all-three flow claim."],
+  "return_contract":{"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"bounded_write","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","changed_files","impact_analysis","validation","remaining_protocol_work","parent_disposition"]}
+}

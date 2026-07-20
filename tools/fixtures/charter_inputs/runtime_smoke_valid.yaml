@@ -107,7 +107,7 @@ dimensions:
 exceptions:
   approvers:
     - project_owner
-  record_location: ".handbook/charter/CHARTER.md#exceptions"
+  record_location: ".handbook/project/charter.yaml#/governance/exception_process"
   minimum_fields:
     - what
     - why

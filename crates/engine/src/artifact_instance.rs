@@ -228,34 +228,54 @@ impl ArtifactInstanceRegistry {
                     "descriptor schema version is unsupported",
                 ));
             }
-            for (selected, field) in [
-                (
-                    source.lifecycle_policy_ref.is_some(),
-                    "lifecycle_policy_ref",
-                ),
-                (
-                    source.intake_definition_ref.is_some(),
-                    "intake_definition_ref",
-                ),
-                (
-                    !source.renderer_definition_refs.is_empty(),
-                    "renderer_definition_refs",
-                ),
-                (
-                    !source.projection_definition_refs.is_empty(),
-                    "projection_definition_refs",
-                ),
-                (
-                    !source.validation_overlay_refs.is_empty(),
-                    "validation_overlay_refs",
-                ),
-            ] {
-                if selected {
+            let is_frozen_charter_1_1 = source.id == "project_authority"
+                && source.kind_ref == "handbook.artifact-kind.project-authority@1.1.0";
+            if is_frozen_charter_1_1 {
+                let exact = source.lifecycle_policy_ref.as_deref()
+                    == Some("handbook.lifecycle.constitutional-review-lock@1.0.0")
+                    && source.intake_definition_ref.as_deref()
+                        == Some("handbook.intake.charter@1.0.0")
+                    && source.renderer_definition_refs
+                        == ["handbook.renderer.charter-review-markdown@1.0.0"]
+                    && source.projection_definition_refs.is_empty()
+                    && source.validation_overlay_refs.is_empty();
+                if !exact {
                     return Err(RegistryLoadError::at(
                         RegistryLoadErrorKind::UnsupportedDependency,
-                        format!("artifact_instances/{index}/{field}"),
-                        "descriptor selects a later-owned dependency",
+                        format!("artifact_instances/{index}"),
+                        "Project Authority 1.1 descriptor differs from its frozen dependency closure",
                     ));
+                }
+            } else {
+                for (selected, field) in [
+                    (
+                        source.lifecycle_policy_ref.is_some(),
+                        "lifecycle_policy_ref",
+                    ),
+                    (
+                        source.intake_definition_ref.is_some(),
+                        "intake_definition_ref",
+                    ),
+                    (
+                        !source.renderer_definition_refs.is_empty(),
+                        "renderer_definition_refs",
+                    ),
+                    (
+                        !source.projection_definition_refs.is_empty(),
+                        "projection_definition_refs",
+                    ),
+                    (
+                        !source.validation_overlay_refs.is_empty(),
+                        "validation_overlay_refs",
+                    ),
+                ] {
+                    if selected {
+                        return Err(RegistryLoadError::at(
+                            RegistryLoadErrorKind::UnsupportedDependency,
+                            format!("artifact_instances/{index}/{field}"),
+                            "descriptor selects a later-owned dependency",
+                        ));
+                    }
                 }
             }
             if !source.extensions.is_empty() {
@@ -380,11 +400,31 @@ impl ArtifactInstanceRegistry {
                         })
                     })
                     .collect::<Result<Vec<_>, RegistryLoadError>>()?,
-                lifecycle_policy_ref: None,
-                intake_definition_ref: None,
-                renderer_definition_refs: Vec::new(),
-                projection_definition_refs: Vec::new(),
-                validation_overlay_refs: Vec::new(),
+                lifecycle_policy_ref: source
+                    .lifecycle_policy_ref
+                    .as_deref()
+                    .map(ExactDefinitionRef::parse)
+                    .transpose()?,
+                intake_definition_ref: source
+                    .intake_definition_ref
+                    .as_deref()
+                    .map(ExactDefinitionRef::parse)
+                    .transpose()?,
+                renderer_definition_refs: source
+                    .renderer_definition_refs
+                    .iter()
+                    .map(|reference| ExactDefinitionRef::parse(reference))
+                    .collect::<Result<Vec<_>, _>>()?,
+                projection_definition_refs: source
+                    .projection_definition_refs
+                    .iter()
+                    .map(|reference| ExactDefinitionRef::parse(reference))
+                    .collect::<Result<Vec<_>, _>>()?,
+                validation_overlay_refs: source
+                    .validation_overlay_refs
+                    .iter()
+                    .map(|reference| ExactDefinitionRef::parse(reference))
+                    .collect::<Result<Vec<_>, _>>()?,
                 extensions: BTreeMap::new(),
             };
             if instances.insert(id, descriptor).is_some() {

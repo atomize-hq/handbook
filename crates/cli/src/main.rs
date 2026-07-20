@@ -1,3 +1,4 @@
+mod approvers;
 mod author;
 mod doctor;
 mod doctor_rendering;
@@ -11,7 +12,7 @@ mod request_shared;
 mod setup;
 mod shell_shared;
 
-use clap::{CommandFactory, FromArgMatches, Parser, Subcommand};
+use clap::{CommandFactory, FromArgMatches, Parser, Subcommand, ValueEnum};
 use std::process::ExitCode;
 
 const PACKET_PLANNING_ID: &str = "planning.packet";
@@ -54,6 +55,8 @@ enum Command {
     Setup(SetupArgs),
     /// Deterministic agent-facing baseline authoring from normalized inputs.
     Author(AuthorArgs),
+    /// Manage repository approver credentials through native engine authority.
+    Approvers(ApproversArgs),
     /// Pipeline operator surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations.
     Pipeline(PipelineArgs),
     /// Generate a reduced-v1 packet.
@@ -69,6 +72,7 @@ impl Command {
         match self {
             Command::Setup(args) => setup::run(args),
             Command::Author(args) => author::run(args),
+            Command::Approvers(args) => approvers::run(args),
             Command::Pipeline(args) => pipeline::run(args),
             Command::Generate(args) => generate::run(args),
             Command::Inspect(args) => inspect::run(args),
@@ -109,7 +113,7 @@ struct AuthorArgs {
 
 #[derive(Subcommand, Debug)]
 enum AuthorCommand {
-    /// Deterministically author canonical `.handbook/charter/CHARTER.md`.
+    /// Create, approve, promote, or validate the selected canonical Charter.
     Charter(AuthorCharterArgs),
     /// Deterministically author canonical `.handbook/project/context.yaml`.
     ProjectContext(AuthorProjectContextArgs),
@@ -119,12 +123,98 @@ enum AuthorCommand {
 
 #[derive(clap::Args, Debug)]
 struct AuthorCharterArgs {
-    /// Read normalized structured inputs from a YAML file or `-` for stdin.
+    /// Select the explicit Charter acquisition workflow.
+    #[arg(long, value_enum)]
+    mode: Option<CharterModeArg>,
+    /// Read one typed Charter intake envelope from a YAML file or `-` for stdin.
     #[arg(long = "from-inputs", value_name = "path|-")]
     from_inputs: Option<String>,
-    /// Validate normalized structured inputs and repo write preconditions without mutation.
+    /// Compare an amendment against the exact selected canonical fingerprint.
+    #[arg(long = "expected-current-fingerprint")]
+    expected_current_fingerprint: Option<String>,
+    /// Record one native-authority decision for an immutable candidate.
+    #[arg(long = "approve-candidate")]
+    approve_candidate: Option<String>,
+    /// Select the exact required approval class.
+    #[arg(long = "approval-class")]
+    approval_class: Option<String>,
+    /// Select the exact required authority reference.
+    #[arg(long = "authority-ref")]
+    authority_ref: Option<String>,
+    /// Accept an exact candidate waiver reference.
+    #[arg(long = "accept-waiver-ref")]
+    accept_waiver_refs: Vec<String>,
+    /// Promote one approved immutable candidate.
+    #[arg(long = "promote-candidate")]
+    promote_candidate: Option<String>,
+    /// Supply the exact approval record selected for promotion.
+    #[arg(long = "approval-ref")]
+    approval_ref: Option<String>,
+    /// Validate selected canonical Charter truth without mutation.
     #[arg(long)]
     validate: bool,
+    /// Emit machine-readable JSON.
+    #[arg(long)]
+    json: bool,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, ValueEnum)]
+enum CharterModeArg {
+    GuidedAdaptive,
+    Express,
+    AgentAssisted,
+}
+
+#[derive(clap::Args, Debug)]
+struct ApproversArgs {
+    #[command(subcommand)]
+    command: ApproversCommand,
+}
+
+#[derive(Subcommand, Debug)]
+enum ApproversCommand {
+    /// Bootstrap the immutable repository approver registry.
+    Bootstrap(ApproverBootstrapArgs),
+    /// Enroll a credential and request exact approval mappings.
+    AddCredential(ApproverAddCredentialArgs),
+    /// Revoke one credential by its exact hashed identifier.
+    RevokeCredential(ApproverRevokeCredentialArgs),
+    /// Replace the approval mappings for one credential.
+    UpdateMapping(ApproverUpdateMappingArgs),
+}
+
+#[derive(clap::Args, Debug)]
+struct ApproverBootstrapArgs {
+    #[arg(long = "initial-charter-quorum", required = true)]
+    initial_charter_quorum: Vec<String>,
+    #[arg(long)]
+    json: bool,
+}
+
+#[derive(clap::Args, Debug)]
+struct ApproverAddCredentialArgs {
+    #[arg(long = "approval-mapping", required = true)]
+    approval_mappings: Vec<String>,
+    #[arg(long)]
+    json: bool,
+}
+
+#[derive(clap::Args, Debug)]
+struct ApproverRevokeCredentialArgs {
+    #[arg(long = "credential-id-hash")]
+    credential_id_hash: String,
+    #[arg(long)]
+    json: bool,
+}
+
+#[derive(clap::Args, Debug)]
+struct ApproverUpdateMappingArgs {
+    #[arg(long = "credential-id-hash")]
+    credential_id_hash: String,
+    #[arg(long = "approval-mapping", required = true)]
+    approval_mappings: Vec<String>,
+    #[arg(long)]
+    json: bool,
 }
 
 #[derive(clap::Args, Debug)]
@@ -450,8 +540,17 @@ decision_records:
 
         let rendered = execute_author_charter_command(
             AuthorCharterArgs {
+                mode: None,
                 from_inputs: Some(inputs_path.to_string_lossy().into_owned()),
+                expected_current_fingerprint: None,
+                approve_candidate: None,
+                approval_class: None,
+                authority_ref: None,
+                accept_waiver_refs: Vec::new(),
+                promote_candidate: None,
+                approval_ref: None,
                 validate: false,
+                json: false,
             },
             || Ok(dir.path().to_path_buf()),
             |_, _| Ok(()),

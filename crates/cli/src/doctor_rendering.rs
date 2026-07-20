@@ -38,7 +38,67 @@ pub(crate) fn render_text(report: &handbook_compiler::DoctorReport) -> String {
         )
         .expect("string write");
     }
+    if let Some(charter) = &report.charter {
+        writeln!(&mut output, "## CHARTER").expect("string write");
+        writeln!(
+            &mut output,
+            "PATH: {} DEFINITION CLOSURE: {} STATUS: {} REASON: {} LIFECYCLE: {}",
+            charter.canonical_path,
+            charter_definition_closure_name(charter.definition_closure_status),
+            inspection_status_name(charter.canonical_status),
+            inspection_reason_name(charter.canonical_reason),
+            charter_lifecycle_name(charter.lifecycle_state),
+        )
+        .expect("string write");
+        if let (Some(source), Some(rendered), Some(media_type)) = (
+            &charter.source_fingerprint,
+            &charter.rendered_output_fingerprint,
+            &charter.rendered_media_type,
+        ) {
+            writeln!(
+                &mut output,
+                "SOURCE FINGERPRINT: {source} RENDERED OUTPUT FINGERPRINT: {rendered} MEDIA TYPE: {media_type}"
+            )
+            .expect("string write");
+        }
+        for action in &charter.next_actions {
+            writeln!(
+                &mut output,
+                "NEXT ACTION: {}",
+                charter_next_action_name(*action)
+            )
+            .expect("string write");
+        }
+    }
     output
+}
+
+fn charter_definition_closure_name(
+    status: handbook_compiler::DoctorCharterDefinitionClosureStatus,
+) -> &'static str {
+    match status {
+        handbook_compiler::DoctorCharterDefinitionClosureStatus::Resolved => "resolved",
+        handbook_compiler::DoctorCharterDefinitionClosureStatus::Unavailable => "unavailable",
+    }
+}
+
+fn charter_lifecycle_name(state: handbook_compiler::DoctorCharterLifecycleState) -> &'static str {
+    match state {
+        handbook_compiler::DoctorCharterLifecycleState::Unobserved => "unobserved",
+    }
+}
+
+fn charter_next_action_name(action: handbook_compiler::DoctorCharterNextAction) -> &'static str {
+    match action {
+        handbook_compiler::DoctorCharterNextAction::RunCharterAuthor => "run_charter_author",
+        handbook_compiler::DoctorCharterNextAction::RepairCanonicalCharter => {
+            "repair_canonical_charter"
+        }
+        handbook_compiler::DoctorCharterNextAction::RepairDefinitionClosure => {
+            "repair_definition_closure"
+        }
+        handbook_compiler::DoctorCharterNextAction::ObserveLifecycle => "observe_lifecycle",
+    }
 }
 
 fn applicability_name(applicability: handbook_engine::ArtifactApplicability) -> &'static str {
@@ -128,6 +188,7 @@ mod tests {
             capabilities: vec![],
             artifacts: vec![],
             project_context: None,
+            charter: None,
             status: handbook_compiler::RepositoryReadinessStatus::Ready,
         };
 

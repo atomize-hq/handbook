@@ -1,0 +1,170 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T071718Z--HCM-2-2--promotion-authority-remediation",
+  "created_at_utc": "2026-07-20T07:17:18Z",
+  "source_handoff_ids": [
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved"
+  ],
+  "parent_orchestration_id": "20260719T234105Z--HCM-2-2--orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "remediation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "test-driven-development",
+    "incremental-implementation",
+    "debugging-and-error-recovery",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:bcacc22b07c8d964cdcaff0d25c0a0775d78c0c97d81adca2fd077dc54c2238e",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "9f88fdf27d5ad7eb2d663899d4766c1b65fb21202a57abe2f6cf6b7a6906c4e6"
+      },
+      {
+        "path": "crates/compiler/src/author/environment_inventory_shell.rs",
+        "sha256": "bc8db82fdddbcd4c6172d27fbb3f54112c16483e31407a62b9099d3269648d82"
+      },
+      {
+        "path": "crates/engine/src/charter_authority_transaction.rs",
+        "sha256": "f1e2f38d1451b0566c2e53a8eee1e53976aa796d4f515676c9c10291ca885df7"
+      },
+      {
+        "path": "crates/engine/src/charter_lifecycle_store.rs",
+        "sha256": "df5d3404d673f4c8e5f41fb7622d4d6fd294187eb4bba03259b4c6c9ce2e9aaf"
+      },
+      {
+        "path": "crates/engine/src/charter_promotion_workflow.rs",
+        "sha256": "5b26b5f077ada5770040e152e62e09ec36b7d1e49ec9cdfa038155719f15657b"
+      },
+      {
+        "path": "crates/engine/src/lib.rs",
+        "sha256": "18ab4c30b81834ed923139464e92b5fa1b579765204d608ebc9f3dcc2e26fe22"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_charter_observation.rs",
+        "sha256": "18d13a2c1a2788481e9ca5dcb365ba9edaf1ec43db245d014a5ff0b26f7364ab"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_lifecycle_store.rs",
+        "sha256": "e14947ffe39ffbaf9191db5225c341e0b90301fdc675ce6db633f020bcb4cafb"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_transaction_promotion.rs",
+        "sha256": "be767f0bee2a29df922a3186610a4889e8e7c7f8e9d7f5d78b101290faa0ecd3"
+      },
+      {
+        "path": "crates/engine/tests/support/hcm_2_2_committed_charter.rs",
+        "sha256": "59f91d571b28ef4774ffba928973906a7e3d64571e0aa631734e88de69ad31bd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T065241Z--HCM-2-2--fresh-final-implementation-review.json",
+        "sha256": "e7f15118e0bbb1deab5ecbb6cc63ede1ce5db1e06291fc0dd3db0f0d415d275f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "226d4cb2e6062465044d5308084976dca7cd783c96fb6953b748b24515bfc462"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:bcacc22b07c8d964cdcaff0d25c0a0775d78c0c97d81adca2fd077dc54c2238e"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.2 final-review Critical/Required promotion remediation only",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "post-finding remediation"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T065241Z--HCM-2-2--fresh-final-implementation-review.json",
+      "sections": [
+        "complete rejected review subject"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "Approval and authentic authority",
+        "Promotion transaction and recovery",
+        "Product-path cutover",
+        "API, security, and compatibility posture",
+        "Verification and promotion gates"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Phase 5 — Fresh review / remediation loop"
+      ]
+    }
+  ],
+  "repo_truth": "Fresh final review admitted all 171 subject hashes and returned CHANGES_REQUIRED. It reproduced a public low-level promotion API that commits canonical authority from loose caller-supplied records without committed registry/approval authority, repository identity, exact quorum/pair/waiver checks, or the workflow boundary. It also proved writer/reader use .handbook/state/promotion-transactions instead of the frozen .handbook/state/transactions/promotions path. GitNexus reports LOW symbol-index impact for the low-level service and request, but the demonstrated semantic authority risk is Critical.",
+  "allowed_scope": [
+    "Edit only crates/engine/src/lib.rs, charter_authority_transaction.rs, charter_lifecycle_store.rs, charter_promotion_workflow.rs when required, the exact affected engine integration/support tests, crates/cli/tests/cli_surface.rs, crates/compiler/src/author/environment_inventory_shell.rs, and a new engine unit-test support module if needed.",
+    "Make low-level promotion mutation and forgeable request/fault surfaces inaccessible to external/public callers. Preserve only a safe read-only observation API where compiler consumers require it; all canonical mutation must pass the complete CharterPromotionWorkflowServiceV1 authority checks and retained locks.",
+    "Preserve low-level crash/recovery/atomicity coverage by migrating it to in-crate unit tests or an equally non-public harness; do not add a public/doc-hidden/feature-gated authority bypass.",
+    "Move writer, recovery reader, lifecycle anchor, and exact tests to .handbook/state/transactions/promotions. Refuse or ignore the obsolete development-only path without treating it as authority.",
+    "Add RED then GREEN external/public-API proof that loose/orphan lineage cannot create canonical truth, plus exact frozen-path pending/committed recovery and lifecycle interoperability.",
+    "Run focused engine/compiler/CLI tests, strict Clippy, fmt, and diff checks. Return exact changed files and validation."
+  ],
+  "non_goals": [
+    "No SPEC/control/proof/handoff/ledger/dispatch edits, commits, or user task hops.",
+    "No change to approval/registry cryptography, canonical schema, CLI grammar, later slices, or adjacent cleanup.",
+    "Do not weaken authority checks or expose a test-only production bypass."
+  ],
+  "tasks": [
+    "Read AGENTS and required skills; replay the 12-entry manifest before edits.",
+    "Refresh GitNexus upstream impact for every existing symbol before edit and report any HIGH/CRITICAL result before changing it.",
+    "Write the narrow failing tests for public bypass and exact journal path.",
+    "Implement the smallest sealed owner/API and path repair with preserved read-only observation.",
+    "Run targeted plus affected regression, lint, formatting, and diff gates; return findings/result fields."
+  ],
+  "contracts_and_gates": [
+    "No external/public caller can reach canonical mutation except CharterPromotionWorkflowServiceV1 after complete committed authority validation.",
+    "Promotion journal root is exactly .handbook/state/transactions/promotions for writer, recovery, observation, and lifecycle.",
+    "Low-level atomicity/fault tests remain non-public and complete.",
+    "No current-operation canonical delta on rejected loose/orphan authority."
+  ],
+  "stop_conditions": [
+    "Stop and return BLOCKED if sealing the bypass requires widening beyond the named HCM-2.2 files or changing the frozen public product contract.",
+    "Return findings if a required compiler read-only consumer cannot migrate without a broader public API design.",
+    "Do not create a commit or closeout record."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

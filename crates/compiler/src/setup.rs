@@ -7,7 +7,8 @@ use crate::route_state::{
 };
 use handbook_engine::{
     inspect_profile_repository, resolve_shipped_profile_decisions, ArtifactApplicability,
-    ArtifactInspectionStatus, ResolvedProfileDecisions, ShippedProfileDecisionError,
+    ArtifactInspectionStatus, RepositoryIdentitySetupErrorKindV1,
+    RepositoryInvocationIdentityServiceV1, ResolvedProfileDecisions, ShippedProfileDecisionError,
 };
 use serde::Serialize;
 use std::fs;
@@ -94,6 +95,7 @@ pub enum SetupErrorKind {
     MaterializerUnavailable,
     RuntimeStatePlan,
     RuntimeStateApply,
+    RepositoryIdentity,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -111,6 +113,11 @@ pub enum SetupErrorReasonCode {
     RewriteHasNoMaterializer,
     RuntimeStateTargetUnsafe,
     RuntimeStateMutationFailed,
+    RepositoryAuthorityRecoveryBlocked,
+    RepositoryIdentityUnsafe,
+    RepositoryIdentityMismatch,
+    RepositoryIdentityEntropyUnavailable,
+    RepositoryIdentityPersistenceFailed,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -128,10 +135,15 @@ pub enum SetupErrorCode {
     RewriteHasNoMaterializer,
     RuntimeStateTargetUnsafe,
     RuntimeStateMutationFailed,
+    RepositoryAuthorityRecoveryBlocked,
+    RepositoryIdentityUnsafe,
+    RepositoryIdentityMismatch,
+    RepositoryIdentityEntropyUnavailable,
+    RepositoryIdentityPersistenceFailed,
 }
 
 impl SetupErrorCode {
-    pub const ALL: [Self; 13] = [
+    pub const ALL: [Self; 18] = [
         Self::ShippedProfileUnavailable,
         Self::SelectedProfileDecisionInvalid,
         Self::UnresolvedMode,
@@ -145,6 +157,11 @@ impl SetupErrorCode {
         Self::RewriteHasNoMaterializer,
         Self::RuntimeStateTargetUnsafe,
         Self::RuntimeStateMutationFailed,
+        Self::RepositoryAuthorityRecoveryBlocked,
+        Self::RepositoryIdentityUnsafe,
+        Self::RepositoryIdentityMismatch,
+        Self::RepositoryIdentityEntropyUnavailable,
+        Self::RepositoryIdentityPersistenceFailed,
     ];
 }
 
@@ -185,6 +202,13 @@ impl SetupError {
             SetupErrorCode::RewriteHasNoMaterializer => SetupErrorKind::MaterializerUnavailable,
             SetupErrorCode::RuntimeStateTargetUnsafe => SetupErrorKind::RuntimeStatePlan,
             SetupErrorCode::RuntimeStateMutationFailed => SetupErrorKind::RuntimeStateApply,
+            SetupErrorCode::RepositoryAuthorityRecoveryBlocked
+            | SetupErrorCode::RepositoryIdentityUnsafe
+            | SetupErrorCode::RepositoryIdentityMismatch
+            | SetupErrorCode::RepositoryIdentityEntropyUnavailable
+            | SetupErrorCode::RepositoryIdentityPersistenceFailed => {
+                SetupErrorKind::RepositoryIdentity
+            }
         }
     }
 
@@ -219,6 +243,21 @@ impl SetupError {
             SetupErrorCode::RuntimeStateMutationFailed => {
                 SetupErrorReasonCode::RuntimeStateMutationFailed
             }
+            SetupErrorCode::RepositoryAuthorityRecoveryBlocked => {
+                SetupErrorReasonCode::RepositoryAuthorityRecoveryBlocked
+            }
+            SetupErrorCode::RepositoryIdentityUnsafe => {
+                SetupErrorReasonCode::RepositoryIdentityUnsafe
+            }
+            SetupErrorCode::RepositoryIdentityMismatch => {
+                SetupErrorReasonCode::RepositoryIdentityMismatch
+            }
+            SetupErrorCode::RepositoryIdentityEntropyUnavailable => {
+                SetupErrorReasonCode::RepositoryIdentityEntropyUnavailable
+            }
+            SetupErrorCode::RepositoryIdentityPersistenceFailed => {
+                SetupErrorReasonCode::RepositoryIdentityPersistenceFailed
+            }
         }
     }
 
@@ -232,6 +271,13 @@ impl SetupError {
             | SetupErrorCode::CanonicalRootCreateFailed => Some(".handbook"),
             SetupErrorCode::RuntimeStateTargetUnsafe
             | SetupErrorCode::RuntimeStateMutationFailed => Some(".handbook/state"),
+            SetupErrorCode::RepositoryAuthorityRecoveryBlocked => Some(".handbook/state"),
+            SetupErrorCode::RepositoryIdentityUnsafe
+            | SetupErrorCode::RepositoryIdentityMismatch
+            | SetupErrorCode::RepositoryIdentityEntropyUnavailable
+            | SetupErrorCode::RepositoryIdentityPersistenceFailed => {
+                Some(handbook_engine::REPOSITORY_IDENTITY_REPO_PATH)
+            }
             SetupErrorCode::ShippedProfileUnavailable
             | SetupErrorCode::SelectedProfileDecisionInvalid
             | SetupErrorCode::UnresolvedMode
@@ -455,26 +501,51 @@ fn apply_setup_execution(
     repo_root: &Path,
     execution: SetupExecutionPlan,
 ) -> Result<SetupOutcome, SetupError> {
-    let may_mutate = matches!(
+    let may_reset_runtime_state = matches!(
         execution.status,
         RepositoryReadinessStatus::Ready | RepositoryReadinessStatus::ActionRequired
     );
     let mut reset_applied = false;
-    if may_mutate {
-        if execution.plan.root_action == SetupRootAction::Create {
-            fs::create_dir(repo_root.join(".handbook"))
-                .map_err(|_| SetupError::from_code(SetupErrorCode::CanonicalRootCreateFailed))?;
-        }
+    if execution.plan.root_action == SetupRootAction::Create {
+        fs::create_dir(repo_root.join(".handbook"))
+            .map_err(|_| SetupError::from_code(SetupErrorCode::CanonicalRootCreateFailed))?;
+    }
+    if may_reset_runtime_state {
         if let Some(reset_plan) = &execution.reset_plan {
             apply_runtime_state_reset(reset_plan)
                 .map_err(|_| SetupError::from_code(SetupErrorCode::RuntimeStateMutationFailed))?;
             reset_applied = true;
         }
     }
+    RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup(repo_root)
+        .map_err(map_repository_identity_error)?;
     Ok(SetupOutcome {
         plan: execution.plan,
         status: execution.status,
         reset_applied,
+    })
+}
+
+fn map_repository_identity_error(
+    error: handbook_engine::RepositoryIdentitySetupErrorV1,
+) -> SetupError {
+    SetupError::from_code(match error.kind() {
+        RepositoryIdentitySetupErrorKindV1::AuthorityRecoveryBlocked => {
+            SetupErrorCode::RepositoryAuthorityRecoveryBlocked
+        }
+        RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState => {
+            SetupErrorCode::RepositoryIdentityUnsafe
+        }
+        RepositoryIdentitySetupErrorKindV1::RegistryIdentityMismatch => {
+            SetupErrorCode::RepositoryIdentityMismatch
+        }
+        RepositoryIdentitySetupErrorKindV1::EntropyUnavailable => {
+            SetupErrorCode::RepositoryIdentityEntropyUnavailable
+        }
+        RepositoryIdentitySetupErrorKindV1::PersistenceFailed => {
+            SetupErrorCode::RepositoryIdentityPersistenceFailed
+        }
     })
 }
 
@@ -556,6 +627,31 @@ mod tests {
                 SetupErrorKind::RuntimeStateApply,
                 SetupErrorReasonCode::RuntimeStateMutationFailed,
                 Some(".handbook/state"),
+            ),
+            (
+                SetupErrorKind::RepositoryIdentity,
+                SetupErrorReasonCode::RepositoryAuthorityRecoveryBlocked,
+                Some(".handbook/state"),
+            ),
+            (
+                SetupErrorKind::RepositoryIdentity,
+                SetupErrorReasonCode::RepositoryIdentityUnsafe,
+                Some(handbook_engine::REPOSITORY_IDENTITY_REPO_PATH),
+            ),
+            (
+                SetupErrorKind::RepositoryIdentity,
+                SetupErrorReasonCode::RepositoryIdentityMismatch,
+                Some(handbook_engine::REPOSITORY_IDENTITY_REPO_PATH),
+            ),
+            (
+                SetupErrorKind::RepositoryIdentity,
+                SetupErrorReasonCode::RepositoryIdentityEntropyUnavailable,
+                Some(handbook_engine::REPOSITORY_IDENTITY_REPO_PATH),
+            ),
+            (
+                SetupErrorKind::RepositoryIdentity,
+                SetupErrorReasonCode::RepositoryIdentityPersistenceFailed,
+                Some(handbook_engine::REPOSITORY_IDENTITY_REPO_PATH),
             ),
         ];
         for (code, (kind, reason, path)) in SetupErrorCode::ALL.into_iter().zip(expected) {

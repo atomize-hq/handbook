@@ -1,0 +1,97 @@
+{
+  "amendment_authority": {
+    "approval_classes_pointer": "/governance/required_approvals",
+    "authority_pointer": "/governance/decision_authority"
+  },
+  "approval_class_mapping": {
+    "authority_must_be_current_member": true,
+    "class_match": "exact",
+    "duplicate_pair_counts_once": true,
+    "mapping_shape": "approval_class_authority_ref_pair",
+    "one_fresh_record_per_required_pair": true,
+    "source": "committed_registry_state_and_transition_head"
+  },
+  "approver_admin_api_schema_ref": "handbook.schemas.security.approver-admin-api@1.0.0",
+  "approver_registry_schema_ref": "handbook.schemas.security.approver-registry@1.0.0",
+  "approver_registry_transition_schema_ref": "handbook.schemas.security.approver-registry-transition@1.0.0",
+  "authenticator_assertion_schema_ref": "handbook.schemas.security.authenticator-assertion@1.0.0",
+  "authenticator_challenge_schema_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+  "authenticator_get_assertion_response_schema_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+  "authenticator_make_credential_response_schema_ref": "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+  "authenticator_registration_request_schema_ref": "handbook.schemas.security.authenticator-registration-request@1.0.0",
+  "authenticator_registration_schema_ref": "handbook.schemas.security.authenticator-registration@1.0.0",
+  "authenticator_requirement": {
+    "allow_list_max_items": 64,
+    "allow_list_order": "credential_id_raw_bytes_ascending",
+    "allowed_algorithms": [
+      "ES256"
+    ],
+    "attestation_policy": "none",
+    "attested_credential_data": "forbidden",
+    "authenticator_data_bytes": 37,
+    "authenticator_flags_byte": 5,
+    "challenge_nonce_bytes": 32,
+    "client_data_hash": "sha256_rfc8785_jcs_request",
+    "credential_descriptor": "required_exact_allow_list_member",
+    "ctap_status_mapping_contract": {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/ctap-status-mapping-v1.0.json",
+      "raw_sha256": "sha256:1ea8ebafb6f92ffd7fc7de32788da85520d7791dcc362b4843df5840c7dd70c5"
+    },
+    "eligible_credential_rule": "committed_active_sequence_below_4096_es256_exact_authority_pair",
+    "extensions": "forbidden",
+    "fallback": "forbidden",
+    "final_use_lockout_fixture": {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/final-use-add-lockout-vectors-v1.0.json",
+      "raw_sha256": "sha256:ef971c5ab4112d57669073c5e4fd0d71eeacb7ca6e6b91dd10c5af104e4c8cc4"
+    },
+    "get_assertion_response_keys": [
+      1,
+      2,
+      3
+    ],
+    "get_assertion_success_status": 0,
+    "protocol_id": "fido2-ctap2.1-native",
+    "rp_id": "handbook.local",
+    "signature_encoding": "asn1-der-ecdsa",
+    "signed_preimage": "authenticator_data_concat_client_data_hash",
+    "user_presence": "required",
+    "user_verification": "required"
+  },
+  "basis_artifact_fingerprint_required": true,
+  "candidate_fingerprint_required": true,
+  "decisions": [
+    "approved",
+    "rejected"
+  ],
+  "extensions": {},
+  "identity_assurance": "fido2_user_verified_repository_approver",
+  "initial_creation_authority": {
+    "bootstrap_mapping_source": "engine_union_of_quorum_and_fixed_registry_admin",
+    "caller_bootstrap_mappings": "forbidden",
+    "caller_subset": "forbidden",
+    "nonempty": true,
+    "one_fresh_approval_per_exact_pair": true,
+    "preserved_by_registry_transitions": true,
+    "source": "registry_state_initial_charter_quorum",
+    "target_must_be_absent": true
+  },
+  "policy_id": "handbook.approval.constitutional-candidate",
+  "policy_version": "1.0.0",
+  "registry_anchor": {
+    "amendment": "committed_chain_from_current_promotion_state_and_head",
+    "initial": "committed_bootstrap_transition_with_null_priors",
+    "unsigned_replacement": "forbidden"
+  },
+  "schema_id": "handbook.approval-policy-definition",
+  "schema_version": "1.0",
+  "target_capability_contract_ref": "handbook.capabilities.constitutional-root@1.0.0",
+  "waiver_acceptance": {
+    "all_candidate_waiver_fingerprints_required": true,
+    "approval_entry_order": "waiver_ref_utf8_then_fingerprint_ascii",
+    "challenge_fingerprint_order": "lowercase_ascii",
+    "extra_waiver_fingerprints_forbidden": true,
+    "unique_waiver_fingerprints": true,
+    "unique_waiver_refs": true
+  },
+  "approval_policy_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29"
+}

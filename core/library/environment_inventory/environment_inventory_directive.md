@@ -25,7 +25,7 @@ the canonical `.handbook` file.
 
 Required:
 
-- `CHARTER.md`
+- selected canonical Charter YAML at `.handbook/project/charter.yaml`
 Optional (use if present):
 - `PROJECT_CONTEXT.md`
 - Foundation artifacts if already generated (TECH_ARCH_BRIEF, TEST_STRATEGY_BRIEF, QUALITY_GATES_SPEC)
