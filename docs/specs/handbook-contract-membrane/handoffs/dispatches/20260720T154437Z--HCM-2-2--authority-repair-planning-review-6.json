@@ -1,0 +1,114 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T154437Z--HCM-2-2--authority-repair-planning-review-6",
+  "created_at_utc": "2026-07-20T15:44:37Z",
+  "source_handoff_ids": ["20260720T083855Z--HCM-2-2--orchestration--lifecycle-validation-authority-boundary"],
+  "parent_orchestration_id": "20260720T133841Z--HCM-2-2--authority-repair-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "debugging-and-error-recovery",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:93c40fb952779255e2c8e8e0acd70f2eef0894b94603cc1aa986683558023d78",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/00-README.md", "sha256": "21cbba6af62803042b765648cd5ac79a2995d658c6c09099380eb6a55e3c1af8"},
+      {"path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md", "sha256": "8811c1bb5d13efb4a02c7baee5fb06d3f558e86db8ad8c3168e015cafbe0b974"},
+      {"path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md", "sha256": "b06fdc526ea484c8cd6c63a907369ad797b347665d4c42657998a5fca6fe5b18"},
+      {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sha256": "8969e58833500fdb9674c5dc748f31690c26ab6f06e5b3421ff008a075badb55"},
+      {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sha256": "a8ecab98a20f7214ea86f21150ea73e7968e5b6a89830de4b0debbad5fb89004"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sha256": "461eeeac03930f094730a89346137dacb08193500eadd9fbdbaf0df7a900f83d"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authority-repair-runtime-vectors-v1.0.json", "sha256": "f5b0685de0b6eb84f14245db6b86b9c86a24e9e77139a474573046e04b3a6845"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/lifecycle-validation-result-1.0.0.schema.json", "sha256": "1d7d8733b19599804fcda32fe119766b1b910e2223aa981fcd9eb92cc4d5c03f"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-1.2.0.schema.json", "sha256": "c2f5cf51b833585bc10cfcd5b99ad2a2e2c0e952a79b3f2910ae6afbff746caa"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json", "sha256": "4a1914fafe6f0bd7c1cc5c666928cb3cb879ec28eb5270174795c7eb8957807b"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T133733Z--authority-repair-planning-proof.md", "sha256": "210c63af5c8f9562c1698272a0cb6d675fdb63ce29d27248a4a6ecbd91c436f2"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T140649Z--authority-repair-review-1-remediation-proof.md", "sha256": "5f8f798713fcc381140c2d67739ad0cea2fc575abe5a5854c9f82f845a003a32"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T143647Z--authority-repair-review-2-remediation-proof.md", "sha256": "c533e7578c94500929e8149593779258319c6f519f5e162a82b04515f5473648"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T150541Z--authority-repair-review-3-remediation-proof.md", "sha256": "803c756554c2f6f4722f2a4de67642d5a937f62edf21f94e41e5967505a1d74c"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T152316Z--authority-repair-review-4-remediation-proof.md", "sha256": "f753de651aae71087410863909cc3815295be12ae5652340c342df48a424c5be"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T154251Z--authority-repair-review-5-remediation-proof.md", "sha256": "83be7273fa93c70694d8081e60e73b0ce83fb870f541893cc17f41591269c53d"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/research/lifecycle-validation-authority-options.md", "sha256": "be362bdbf3f558bb136a80be2ea88cf6d919ea42675353e05a7ed903b051e802"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sha256": "c3a5ed5536c38c4eec9112c0416e1371c024612d802f6a2fe2cd2d455f295878"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "sha256": "9aab81506c3ab009870db6b33d0d187934fb2e50f51a0c042356fb67e5a1f68b"}
+    ],
+    "aggregate_fingerprint": "sha256:93c40fb952779255e2c8e8e0acd70f2eef0894b94603cc1aa986683558023d78"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.2-ESC-001 complete five-times-remediated Option 1 planning subject",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre-primary-commit fresh re-review"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260720T083855Z--HCM-2-2--orchestration--lifecycle-validation-authority-boundary.json", "sections": ["complete immutable escalation handoff"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T152442Z--HCM-2-2--authority-repair-planning-review-5.json", "sections": ["complete immutable fifth review dispatch and admitted subject manifest"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T154251Z--authority-repair-review-5-remediation-proof.md", "sections": ["Review result", "Findings and repair", "Remediation validation"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sections": ["HCM-2.2-ESC-001 Option 1 authority repair", "Promotion transaction intent 1.2 and recovery", "Review 2 implementation obligations", "Stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sections": ["HCM-2.2 additive lifecycle-validation authority repair"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sections": ["R0 — Authority-repair planning closeout (current authorized scope)", "P5 — Implement approval, promotion, and lifecycle", "Principal risks"]},
+    {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sections": ["PR-009 — Charter questionnaire-shaped coverage and posture validation", "Open program proof gates", "Greenfield deletion gates", "HCM-2.2 constitutional-root implementation proof gate"]}
+  ],
+  "repo_truth": "The fifth fresh review admitted its exact 18-path subject and returned two Required consistency findings. The parent accepted both without waiver and produced this exact 19-path remediated documentation-only subject. Active observations now copy the immutable committed lifecycle-head event order rather than ref-sorting, with an order-divergent positive and retained-head compatibility. The checklist now selects candidate 1.2 and lifecycle-validation-result 1.0 while candidate 1.0/1.1 remain historical-only. Baseline HEAD remains db503f7a96479775fe25dbb864b9379fd3e61ac8; no Rust, released record, or immutable prior evidence changed.",
+  "allowed_scope": [
+    "Remain read-only and replay all 19 manifest hashes, lexical order, and aggregate before review.",
+    "Read the complete revised subject and independently re-review every Option 1 authority, migration, currentness, status, recovery, and API boundary, not only the fifth-review findings.",
+    "Adversarially verify the order-divergent multi-observation vector, retained-head compatibility, duplicate/reordered/incomplete/excess refusals, and current candidate-version surface, while replaying all forward/rollback crash closure.",
+    "Return findings first with exact file/line evidence, failure mode, smallest documentation repair, and missing validation."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, handoff/ledger writes, or user task hops.",
+    "No Rust or implementation approval/work, released-record rewrite, immutable prior-record edit, HCM-2.3 work, or adjacent cleanup.",
+    "Do not inherit prior conclusions; derive the whole verdict independently."
+  ],
+  "tasks": [
+    "Invoke the ordered required skills and return BLOCKED on any subject-manifest mismatch.",
+    "Determine whether the entire identity graph is acyclic and all result/intent preimages, schema/vector/persistence/currentness/migration/recovery/fault-boundary rules are exact and mutually consistent.",
+    "Verify active-observation order equals the committed lifecycle head without ref sorting and all current tasks select candidate 1.2.",
+    "Verify every forward/rollback crash boundary maps to one recovery class and every collision/non-writer state preserves evidence.",
+    "Return CLEAN only when no Critical, Required, Optional, or Nit finding remains; otherwise return CHANGES_REQUIRED or BLOCKED without repair."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md#hcm-22-esc-001-option-1-authority-repair",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authority-repair-runtime-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#hcm-22-constitutional-root-implementation-proof-gate"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if any subject path, hash, count, order, or aggregate differs.",
+    "Return CHANGES_REQUIRED if any graph, ordering, version, preimage, persistence, currentness, migration, recovery, status, path, or production/test boundary remains implicit or contradictory.",
+    "Do not weaken or waive a finding, repair the subject, create records, authorize implementation, or begin HCM-2.3."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "validation", "parent_disposition"]
+  }
+}

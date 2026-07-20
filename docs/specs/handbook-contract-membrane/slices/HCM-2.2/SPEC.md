@@ -2,12 +2,19 @@
 
 ## Status and authority
 
-This is the frozen, implemented contract for the completed bounded `HCM-2.2`
-slice. The separate implementation selection
-`20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved`
-authorized the exact Rust, product, definition, fixture, template, generated-
-skill, and runtime boundary below. Its reviewed implementation and proof are
-completed evidence, not continuing authority for HCM-2.3 or later work.
+`HCM-2.2` is reopened at escalation `HCM-2.2-ESC-001`. The prior planning
+selection and the implementation present at checkpoint commits
+`684029d4dda0c800fe840a19b54bf7f87fb41123` and
+`db503f7a96479775fe25dbb864b9379fd3e61ac8` are non-authoritative checkpoint
+evidence: fresh implementation Review 2 found a lifecycle-validation identity
+cycle and three additional durability/API findings. They do not establish a
+completed slice or close any Charter proof gate.
+
+This document is the mutable planning subject for the selected additive Option
+1 repair. A fresh CLEAN review over the complete planning subject and a new
+parent planning handoff may authorize a later `HCM-2.2` implementation packet;
+neither this document nor the retained checkpoint implementation authorizes an
+implementation edit by itself. No `HCM-2.3` authority exists.
 
 The packet consumes, without reopening, the reviewed HCM-1 registry/profile
 boundaries and the HCM-2.1 Project Context canonical-YAML pilot. Entry evidence
@@ -25,10 +32,410 @@ is:
   capability `constitutional_root`, and `always` requiredness; and
 - immutable released Project Authority schema/kind/profile `1.0.0` bytes.
 
-The selected handoff is completed dependency and transition evidence. It does
-not select HCM-2.2 implementation, widen the slice, or override the control
-pack. Live source, tests, definition bytes, and Git history at the entry HEAD
-override stale narrative wording.
+The selected historical handoffs remain dependency and transition evidence.
+They do not override this reopened status, select resumed implementation,
+widen the slice, or authorize HCM-2.3. Live source, tests, definition bytes,
+and Git history at the entry HEAD override stale narrative wording.
+
+## HCM-2.2-ESC-001 Option 1 authority repair
+
+This section is additive and controlling for every later repaired HCM-2.2
+candidate, lifecycle-validation result, promotion transaction, recovery path,
+and fault-injection surface. Where the older text below describes candidate
+`1.1`, a validation result that binds the final candidate fingerprint, a
+promotion journal without the fields or terminal states below, destructive
+mismatch recovery, or production-visible fault hooks, that text describes only
+the non-authoritative checkpoint. Released records and the reviewed `1.1`
+fingerprint semantics are not changed.
+
+The normative machine-readable planning contracts are:
+
+- [`contracts/lifecycle-validation-result-1.0.0.schema.json`](contracts/lifecycle-validation-result-1.0.0.schema.json), the closed Draft 2020-12 result schema;
+- [`contracts/authority-repair-runtime-vectors-v1.0.json`](contracts/authority-repair-runtime-vectors-v1.0.json), the exact create/amend identity vectors, definition order, cross-record matrix, and negative matrix;
+- [`contracts/promotion-transaction-intent-1.2.0.schema.json`](contracts/promotion-transaction-intent-1.2.0.schema.json), the closed Draft 2020-12 promotion-intent schema; and
+- [`contracts/promotion-transaction-intent-vectors-v1.0.json`](contracts/promotion-transaction-intent-vectors-v1.0.json), the exact amendment intent/fingerprint/document/marker vector, owned-name grammar, terminal sets, bindings, and negative matrix.
+
+### Additive candidate 1.2 and acyclic identity
+
+The repaired selected path accepts only `handbook.artifact-candidate` version
+`1.2`. Its complete candidate semantic subject is the RFC 8785 JCS object with
+exactly these fields and no others:
+
+1. `schema_id`;
+2. `schema_version`;
+3. `intake_record_ref`;
+4. `target_kind_ref`;
+5. `target_instance_id`;
+6. `target_schema_ref`;
+7. `profile_ref`;
+8. `resolved_profile_fingerprint`;
+9. `normalized_content_ref`;
+10. `field_sources` in candidate order;
+11. `unresolved_coverage_ids` in intake-definition order;
+12. `promotion_eligibility`;
+13. `required_approval_policy_ref`; and
+14. `basis_artifact_fingerprint`.
+
+The `candidate_subject_fingerprint` preimage is that complete object. It
+excludes **exactly** `candidate_id`, `candidate_fingerprint`,
+`candidate_subject_fingerprint`, and `validation_result_refs`; no timestamp,
+implicit engine state, or omitted candidate semantic field exists. The value is
+`sha256:` plus lowercase SHA-256 of its RFC 8785 JCS UTF-8 bytes. It is
+validation-binding identity only. It is not candidate identity, canonical
+authority, an approval target, or a promotion decision.
+
+After lifecycle validation, the final candidate-fingerprint preimage is the
+same fourteen subject fields plus `candidate_subject_fingerprint` and exactly
+one `validation_result_refs` member. It excludes exactly `candidate_id` and
+`candidate_fingerprint`. `candidate_fingerprint` is `sha256:` plus lowercase
+SHA-256 of the RFC 8785 JCS UTF-8 preimage, and `candidate_id` is
+`candidate_<fingerprint-hex>`. The construction order is therefore strictly:
+
+```text
+complete candidate semantic subject
+  -> candidate_subject_fingerprint
+  -> lifecycle-validation result and content-addressed ref
+  -> final candidate_fingerprint and candidate_id
+  -> human approval over the final candidate fingerprint
+  -> promotion
+```
+
+No edge points from the validation result back to the final candidate identity.
+If any implementation requires that edge, the graph is cyclic and work stops.
+
+Candidate versions `1.0` and `1.1`, their approvals, and their content-addressed
+records remain immutable historical/checkpoint evidence. They are not admitted
+by the repaired selected product path. A candidate must be re-authored and
+re-evaluated as `1.2`; it cannot be upgraded by copying an old result ref.
+Approvals must be newly obtained because every approval binds the new final
+candidate fingerprint. There is no implicit `1.1`/`1.2` dual read, fallback,
+automatic migration, checkpoint rewrite, or approval carry-forward.
+
+### Engine-owned lifecycle-validation result 1.0
+
+Only a dedicated engine lifecycle-validation service may construct
+`handbook.lifecycle-validation-result` version `1.0`. A caller supplies the
+candidate subject inputs, never a validation result, validation result ref,
+validation status, definition set, lifecycle binding, currentness observation,
+or validation timestamp. The service resolves and validates all authority,
+constructs the closed record, persists it, and returns its ref. Prefer a
+dedicated result validator/store rather than widening generic lineage
+`validate_record`.
+
+The validation-result fingerprint preimage contains exactly the schema ID and
+version, candidate subject fingerprint, intake ref and fingerprint, normalized
+content ref and fingerprint, target instance and canonical ref, create-only or
+current canonical basis, separately observed current canonical fingerprint,
+profile ref and resolved fingerprint, complete ordered resolved-definition
+bindings, lifecycle policy ref and fingerprint, lifecycle head ref and
+fingerprint, lifecycle state and state fingerprint, complete ordered active
+observations, complete ordered reopened-coverage IDs, and literal status
+`passed`. It excludes exactly `validation_result_id`,
+`validation_result_fingerprint`, and `validated_at_utc`. The ID is
+`lifecycle-validation-result_<fingerprint-hex>`.
+
+`validated_at_utc` is engine-authored audit metadata only and is excluded from
+identity. Before allocating a timestamp, the engine computes the preimage,
+fingerprint, ID, and final ref and checks for an existing record. An existing
+exact schema-valid record whose recomputed preimage, fingerprint, ID, and bytes
+match is returned with its original timestamp. An existing ID with any byte,
+timestamp, preimage, or identity difference refuses; replay never fabricates a
+second timestamp for the same ID.
+
+The only result-ref grammar is
+`lifecycle-validation-results/lifecycle-validation-result_<64 lowercase
+hex>.json`; it resolves beneath
+`.handbook/state/lifecycle-validation-results/` to the same basename. The
+persisted bytes are RFC 8785 JCS of the complete record followed by one LF and
+may not exceed 262,144 bytes including that LF. Every directory component and
+file is opened no-follow and must be the expected directory or regular-file
+type on the same filesystem. For a new ID, the engine writes and fsyncs one
+create-new owned temporary file, installs it with atomic rename-no-replace, and
+fsyncs the store directory. A concurrent/pre-existing destination is success
+only after a bounded no-follow reload proves exact byte equality; otherwise it
+refuses and retains the existing file. The engine never follows a link,
+overwrites, truncates, appends to, or deletes a result. Failed owned temporaries
+may be removed only after the final destination has been classified.
+
+The ordered resolved-definition list has cardinality thirteen and is exactly
+the vector order: approval policy, capability contract, intake definition,
+lifecycle policy, production-posture reassessment trigger, trust-boundary
+reassessment trigger, renderer, amendment review trigger, semantic validator
+`1.0.0`, semantic validator `1.1.0`, target kind, target schema, and waiver
+policy. Active observations are the complete current set, unique by ref and
+fingerprint and ordered exactly as `active_observation_refs` in the current
+committed lifecycle-transition head. That retained head order is the lifecycle
+writer's event-precedence then event-fingerprint order; it is not re-sorted by
+observation ref during validation. Reopened coverage is the complete unique set selected by all active observations, ordered by the
+sixteen-item intake-definition coverage order. Empty arrays are authoritative
+empty sets, not unknown or omitted data. The candidate has exactly one result
+ref; zero, two, duplicate, excess, or reordered refs refuse.
+
+The engine proves these cross-record equalities before it persists the result:
+
+- the recomputed candidate subject fingerprint equals the supplied subject
+  binding;
+- the intake ref equals the candidate ref and the loaded intake ID,
+  fingerprint, target, profile, basis, and exact bytes agree;
+- the normalized-content ref equals the candidate ref and its basename,
+  loaded bytes, content fingerprint, target schema, and semantic validation
+  agree;
+- the canonical basis is literal null only when the selected target is absent;
+  otherwise candidate basis, observed current fingerprint, and current
+  no-follow target bytes/fingerprint are all non-null and equal;
+- profile ref/fingerprint and all thirteen definition ref/fingerprint pairs
+  equal the currently selected exact producers;
+- lifecycle policy, current head, state, state fingerprint, complete active
+  observation set, and complete reopened-coverage set equal the recovered
+  lifecycle authority under its lock; and
+- every reopened coverage ID is present in the new intake evaluation and is
+  satisfied or covered by its exact allowed waiver semantics.
+
+### Promotion-time currentness and refusal boundary
+
+Promotion acquires promotion, registry, and lifecycle locks in that order,
+recovers each domain, and then—before creating a journal, allocating a
+transaction-owned file, invoking an authenticator, or mutating any path—reloads
+the candidate and its sole result and repeats every result-schema, fingerprint,
+ID/ref/basename, subject, intake/content lineage, canonical basis, profile,
+definition, lifecycle-policy, head/state, active-observation, reopened-coverage,
+and approval equality. It recomputes the current complete ordered observation
+and coverage sets rather than checking membership. Approvals must bind the
+exact final `1.2` candidate fingerprint and remain current under the retained
+registry pair.
+
+Missing, caller-authored, forged, stale, duplicate, reordered, incomplete, or
+excess validation authority refuses before mutation. A schema-valid result is
+not sufficient if any current producer or authority byte has drifted. The same
+closed checks run again before a recovery roll-forward; inability to prove
+them preserves the journal and blocks selected reads/writes rather than
+guessing.
+
+### Promotion transaction intent 1.2 and recovery
+
+The repaired writer uses the linked closed schema for
+`handbook.charter-promotion-transaction-intent` version `1.2`. The exact
+top-level keys are `schema_id`, `schema_version`, `transaction_id`,
+`promotion_id`, `mutation_mode`, `target`, `candidate_lineage`,
+`selected_contract`, `human_authority`, `outputs`, `recovery`, and
+`intent_fingerprint`. The closed nested keys are:
+
+| Object | Exact keys |
+|---|---|
+| `target` | `target_instance_id`, `canonical_artifact_ref`, `basis_artifact_fingerprint`, `observed_current_artifact_fingerprint` |
+| `candidate_lineage` | `candidate_ref`, `candidate_fingerprint`, `candidate_subject_fingerprint`, `intake_record_ref`, `intake_record_fingerprint`, `normalized_content_ref`, `normalized_content_fingerprint`, `validation_result_ref`, `validation_result_fingerprint` |
+| `selected_contract` | `profile_ref`, `resolved_profile_fingerprint`, complete ordered `resolved_definitions`, `lifecycle_policy_ref`, `lifecycle_policy_fingerprint`, `prior_lifecycle_head_ref`, `prior_lifecycle_head_fingerprint`, `prior_lifecycle_state`, `prior_lifecycle_state_fingerprint`, complete ordered `active_observations`, complete ordered `reopened_coverage_ids` |
+| each definition | `definition_role`, `definition_ref`, `definition_fingerprint` |
+| each observation | `observation_ref`, `observation_fingerprint` |
+| `human_authority` | complete ordered `approval_bindings`, `approver_registry_state_ref`, `approver_registry_state_fingerprint`, `registry_head_transition_ref`, `registry_head_transition_fingerprint` |
+| each approval | `approval_ref`, `approval_fingerprint`, `approval_class`, `authority_ref` |
+| `outputs` | `new_canonical_fingerprint`, `new_canonical_document_sha256`, `new_canonical_byte_length`, `promotion_record`, `lifecycle_transition` |
+| each output record | `record_ref`, `record_fingerprint`, `document_sha256`, `byte_length` |
+| `recovery` | `old_canonical_status`, `old_canonical_fingerprint`, `old_canonical_document_sha256`, `old_canonical_byte_length` |
+
+Create requires null target basis/current, absent old canonical with three null
+old fields, absent lifecycle head/state fingerprint, and empty observation and
+reopened sets. Amendment requires non-null equal target basis/current, present
+old canonical with non-null fingerprint/document hash/length, and a non-absent
+head/state closure. Every intent binding equals the retained candidate result,
+approval/registry observation, exact output record, and raw output bytes.
+`promotion_id` equals the promotion-record ref basename identity and is derived
+from its record fingerprint. Output semantic fingerprints and raw document
+SHA-256 values are distinct checks; both plus byte length must match.
+
+The `intent_fingerprint` preimage is the complete closed intent object excluding
+**exactly** `intent_fingerprint`; it includes the engine-allocated
+`transaction_id` and contains no timestamp. Its value is RFC 8785
+JCS/SHA-256. `intent.json` is exactly RFC 8785 JCS of the complete record plus
+one LF, bounded to 262,144 bytes. The pending path is exactly
+`.handbook/state/transactions/promotions/<transaction_id>.pending/`. The
+published vector independently freezes the amendment preimage, intent
+fingerprint, complete-document byte length/SHA-256, pending path, and marker
+payload.
+
+The only owned pending names are the vector's fifteen names: `intent.json`,
+`canonical.old`, `canonical.new`, `promotion-record.new`,
+`lifecycle-transition.new`, and the `.tmp`/published pairs for `prepared`,
+`canonical-installed`, `records-installed`, `committed`, and `rolled-back`.
+Unknown names refuse and preserve the directory. Each marker is published by
+create-new `<marker>.tmp`, exact-prefix write, fsync, rename-no-replace to the
+unsuffixed name, and directory fsync. Its complete payload is exactly 72 ASCII
+bytes `sha256:<64 lowercase hex>\n`, hashing the exact persisted
+`intent.json` bytes including LF. A published marker forbids its `.tmp`; a
+partial `.tmp` is permitted only as an exact prefix while the published marker
+is absent. Published forward markers form the prefix `prepared` ->
+`canonical-installed` -> `records-installed` -> `committed`; a gap or optimistic
+marker is mismatch. `rolled-back` never coexists with a forward marker.
+
+`intent.json` is never written partially inside `.pending`. Before that
+directory exists, the writer create-news a scratch file beneath the
+non-authoritative sibling `.intent-staging/` directory using an engine-random
+128-bit lowercase-hex name unrelated to semantic IDs; writes the complete
+self-fingerprinted JCS+LF intent; fsyncs, closes, boundedly reopens no-follow,
+and verifies schema, fingerprint, document SHA-256, byte length, and exact
+bytes, then fsyncs `.intent-staging/`. A crash may orphan that scratch file, but scratch is outside the journal
+scan and can never authorize cleanup, recovery, or a selected read. Optional
+scratch garbage collection is separately authorized and out of scope.
+
+After scratch verification, the writer create-news and fsyncs the empty
+`.pending` directory, then atomically rename-no-replace moves the complete
+scratch file directly to `intent.json` on the same filesystem and fsyncs the
+pending directory, `.intent-staging/`, and transaction parent. A crash exposes either an empty
+pending directory or a complete self-verifying `intent.json`; `intent.tmp`, a
+partial `intent.json`, and any other pending name are mismatch. This removes the
+need to authenticate lost in-process intent bytes during recovery.
+
+`canonical.old`, `canonical.new`, and both record `.new` files may be absent or
+an exact prefix only before their named fsync boundary; after it they are exact
+intent-bound bytes. A partial file that is not an exact prefix, an excess byte,
+wrong type, symlink, or unsafe path is mismatch. Create always forbids
+`canonical.old`; amendment requires it exact before any new-output stage begins.
+
+The writer's ordered transitions are exact and cumulative:
+
+| Boundary | Canonical target | Pending state after directory fsync | Final record state | Published forward markers | Recovery class if the process stops |
+|---|---|---|---|---|---|
+| `W0 admitted` | exact old or absent | directory absent | each output final absent or pre-existing exact-equal | none | no transaction exists |
+| `W1 intent scratch` | old/absent | `.pending` absent; complete verified scratch exists only outside the journal namespace | unchanged | none | no transaction exists; scratch is a non-authoritative orphan |
+| `W2 directory` | old/absent | empty `.pending`; complete verified scratch still outside | unchanged | none | pre-intent cleanup of empty pending only; scratch remains outside authority |
+| `W3 intent published` | old/absent | exact complete `intent.json`; no pending intent temp exists | unchanged | none | rollback terminalization |
+| `W4 old snapshot` | old for amend / absent for create | amend: `canonical.old` exact-prefix then exact+fsynced; create: forbidden | unchanged | none | rollback terminalization |
+| `W5 canonical staged` | old/absent | `canonical.new` exact-prefix then exact+fsynced | unchanged | none | rollback terminalization |
+| `W6 promotion staged` | old/absent | `promotion-record.new` exact-prefix then exact+fsynced | unchanged | none | rollback terminalization |
+| `W7 lifecycle staged` | old/absent | `lifecycle-transition.new` exact-prefix then exact+fsynced; all required staged bytes exact | unchanged | none | rollback terminalization |
+| `W8 prepared` | old/absent | exact staged set; marker temp may be exact-prefix, then `prepared` published | unchanged | `prepared` | rollback terminalization |
+| `W9 canonical installed` | rename may be observed exact old/absent or exact new; after target-parent fsync it is new | `canonical.new` absent when rename is observed new; both record stages exact | unchanged | `prepared` | old/absent rolls back; new rolls forward |
+| `W10 canonical marked` | new | marker temp may be exact-prefix, then marker published | unchanged | through `canonical-installed` | roll forward |
+| `W11 promotion installed` | new | promotion stage is absent after rename, or may coexist exact only while a pre-existing exact final is being classified/deleted; lifecycle stage exact | promotion final exact | through `canonical-installed` | roll forward |
+| `W12 lifecycle installed` | new | each record stage absent, except an exact redundant stage may remain only beside a pre-existing exact final before owned-stage deletion | both finals exact | through `canonical-installed` | roll forward |
+| `W13 records marked` | new | no record stage remains; marker temp may be exact-prefix, then marker published | both finals exact | through `records-installed` | roll forward |
+| `W14 committed` | new | no staged output; commit temp may be exact-prefix, then `committed` published and directory fsynced while suffix remains `.pending` | both finals exact | all four | execute exact committed terminalization |
+| `W15 terminal` | new at commit; later canonical successors are allowed | rename-no-replace `<id>.pending` to `<id>.committed`, fsync the transaction parent, and reverify the exact create/amend terminal name set from the vector | both finals exact | all four | every exact `.committed` observation repeats the transaction-parent fsync, then verifies the immutable committed link; require target-new equality only if this is the selected current promotion head |
+
+At `W5`-`W7`, a crash inside the named write may leave only that file as an
+exact prefix; later staged files are absent. At every marker boundary, a crash
+may leave only the next `.tmp` as an exact prefix. No other partial or marker/
+file combination is writer-reachable. A pre-existing exact final is never
+owned; rename-no-replace failure triggers bounded no-follow exact equality,
+then deletion of only the redundant owned stage. Different final bytes refuse.
+
+Rollback recovery is itself an ordered, cumulative, crash-recoverable writer;
+it is not an indivisible action hidden behind a recovery-table row. From an
+admitted `W3`-`W9` state whose target is still exact old/absent, it executes
+these boundaries while holding the same locks:
+
+| Boundary | Exact action and durable postcondition |
+|---|---|
+| `R0 admitted` | Revalidate one exact `W3`-`W9` rollback origin, including intent, target, allowed final orphans, prefixes, types, paths, and marker causality. No byte is changed. |
+| `R1 snapshot complete` | For amendment, create/complete `canonical.old` only from the retained exact old target, fsync it, and reverify exact fingerprint/document hash/length. Create continues to forbid `canonical.old`. |
+| `R2 prepared temp removed` | If `prepared.tmp` exists as the allowed exact prefix, no-follow reverify and unlink it, then fsync the pending directory; otherwise prove it absent. |
+| `R3 prepared removed` | If `prepared` exists with the exact marker payload, no-follow reverify and unlink it, then fsync the pending directory; otherwise prove it absent. |
+| `R4 lifecycle stage removed` | If `lifecycle-transition.new` exists as its allowed intent-bound exact prefix or complete bytes, no-follow reverify and unlink it, then fsync the pending directory; otherwise prove it absent. |
+| `R5 promotion stage removed` | Apply the same rule to `promotion-record.new`, then fsync the pending directory. |
+| `R6 canonical stage removed` | Apply the same rule to `canonical.new`, then fsync the pending directory. The directory now contains exactly `intent.json` plus exact `canonical.old` for amend, and no other name. |
+| `R7 rollback marker temp` | Create-new `rolled-back.tmp`, write the exact 72-byte marker; any crash may leave an exact prefix from zero through 72 bytes. Append only the missing suffix, fsync, and reverify exact bytes. |
+| `R8 rollback marker published` | Rename-no-replace `rolled-back.tmp` to `rolled-back`, fsync the pending directory, and reverify the exact create/amend rollback terminal payload. |
+| `R9 rollback terminal` | Rename-no-replace `<id>.pending` to `<id>.rolled-back`, fsync the transaction parent, reverify the exact terminal name set, and return non-authority. Every observation of an exact `.rolled-back` terminal repeats the parent-directory fsync before return because a crash cannot reveal whether the prior fsync completed. |
+
+The rollback cleanup list is exactly `prepared.tmp`, `prepared`,
+`lifecycle-transition.new`, `promotion-record.new`, `canonical.new`; no other
+name may be removed. Each unlink is its own reverify/unlink/directory-fsync
+boundary. The admitted rollback-progress family is the union obtained by
+starting from every exact `W3`-`W9` rollback origin, completing `R1`, and
+applying any prefix of that five-name cleanup list; an already-absent listed
+name is an idempotent no-op. This construction preserves forward-marker
+causality because `prepared.tmp` and `prepared` are removed before any staged
+file. A crash before an unlink is durable exposes the preceding member; a crash
+after it exposes the following member. States outside that constructed union
+are not inferred as recovery work and remain evidence-preserving mismatch.
+
+Recovery first validates the complete state grammar above. For each output,
+“accounted” means an exact stage with final absent, an exact final with stage
+absent, or an exact pre-existing final plus redundant exact stage awaiting
+owned-stage deletion. It then applies this exhaustive partition in order:
+
+| Predicate | Required action |
+|---|---|
+| transaction directory suffix is absent | no transaction exists; ignore any non-authoritative sibling scratch and perform no journal mutation |
+| suffix is exactly `.pending`; no `intent.json`; target old/absent; directory is empty | remove only the empty pending directory; no partial intent is an admitted pending state |
+| suffix is exactly `.pending`; valid intent; target old/absent; neither rollback marker name nor `committed` exists; final observations are allowed by the exact origin; and the pending names/bytes belong to the constructed `R0`-`R6` rollback-progress family | resume at the first incomplete `R1`-`R6` boundary, retaining exact final orphans and removing only the fixed cleanup-list names; then begin exact rollback-marker publication |
+| suffix is exactly `.pending`; valid intent; target old/absent; exact `R6` terminal payload plus `rolled-back.tmp` as an exact marker prefix; `rolled-back` and every forward marker/stage are absent | append only the missing marker suffix, fsync/reverify, execute `R8`, then execute `R9` |
+| suffix is exactly `.pending`; valid intent; target old/absent; exact `R8` rollback terminal payload with published matching `rolled-back`, no marker temp, forward marker, or stage | execute `R9`; a destination collision, unsafe destination, or any byte/name mismatch preserves the pending evidence and refuses |
+| suffix is exactly `.pending`; valid intent; target new; no `committed`; both outputs accounted; marker causality valid; and the bound pre-promotion authority is still the authoritative invisible prior state | normalize redundant exact stages, install any staged output create-new-or-equal, publish any missing causal markers in order, publish `committed`, and terminalize `.committed` |
+| suffix is exactly `.pending`; valid intent; target new; matching `committed`; both finals exact; no staged output; and the intended lifecycle transition is the exact committed successor of the bound prior state | reverify the exact pending terminal payload, rename-no-replace to `<id>.committed`, fsync the transaction parent, reverify the exact terminal set, and return committed authority; any pre-existing destination, unsafe destination, simultaneous suffix, or byte/name mismatch preserves the complete pending journal and refuses without mutation. Do not demand that the prior state remain current after its intended transition commits |
+| suffix is exactly `.committed`; terminal directory has exactly its create/amend vector name set and internally matching intent/finals/transition edge | fsync the transaction parent, then return immutable committed history without content mutation; if it is the selected current promotion head require current target equals its new canonical bytes, otherwise require a later committed successor chain whose basis binds this output |
+| suffix is exactly `.rolled-back`; terminal directory has exactly its create/amend vector name set, no forward marker, and matching retained intent/rollback payload | fsync the transaction parent, then return non-authority without content mutation; do not compare it to a target that a later committed transaction may legitimately change |
+| every other Cartesian-product state | mismatch: preserve the complete pending/terminal journal and every final record; perform no mutation and block selected reads/writes |
+
+Before `committed`, “currentness” means the bound pre-promotion profile,
+definitions, registry pair, lifecycle prior head/state/observations, and target
+basis remain authoritative because the new transition is physically possible
+but invisible. At and after `committed`, the intended lifecycle transition is
+the exact successor and the prior head must **not** be required to remain
+current. Later lifecycle events and promotions may advance the chain;
+historical committed/rolled-back journals remain valid evidence through
+successor/basis links rather than permanent equality to the latest target/head.
+
+The conformance test enumerates the finite Cartesian product of directory
+suffix `{absent, pending, committed, rolled_back, other}` and directory kind;
+pending intent `{absent, exact, mismatch}` (partial is always mismatch); target
+`{absent, old, new, other}`; `canonical.old`, `canonical.new`,
+`promotion-record.new`, and `lifecycle-transition.new` each independently
+`{absent, exact_prefix, exact, mismatch}`; promotion and lifecycle finals each
+`{absent, exact, mismatch}`; and every marker independently
+`{absent, tmp_exact_prefix, published, mismatch}`. Scratch is deliberately not
+an authority/recovery axis because it is outside the scanned pending namespace.
+The test additionally enumerates committed-marker-published pending state with
+committed destination `{absent, exact, mismatch, unsafe}` plus terminal rename and
+parent-fsync replay; only absent destination may rename, while every collision
+preserves pending evidence and refuses. It enumerates rollback origin `{W3..W9}`, snapshot prefix
+length, cleanup cursor `{R1..R6}`, rollback-marker prefix length `{0..72}`,
+published rollback marker, terminal rename, and parent-fsync replay. It asserts
+predicate disjointness for the nine non-catch-all rows before
+applying mismatch, exactly one total row per combination, the declared result
+for every `W0`-`W15` and `R0`-`R9` crash state, and mismatch for every
+non-writer state.
+Amendment proof separately enumerates `canonical.old` absence and every prefix
+length from zero through `old_canonical_byte_length`; each recovery attempt must
+end either with another exact prefix after a crash or the exact fsynced snapshot
+and exact `.rolled-back` terminal set. Fault injection stops after every
+rollback reverify, unlink, directory fsync, marker write/fsync/rename, terminal
+rename, and parent fsync, plus the corresponding committed terminal rename and
+parent fsync; repeated recovery must reach the same exact terminal set.
+Simultaneous `.pending`/terminal destinations and crossed/malformed `.pending`,
+`.committed`, and `.rolled-back` suffix/name states always select mismatch.
+
+`committed` remains the sole authority-visibility point. Selected readers expose
+a promotion only from an exact `.committed` journal. No mismatch branch deletes
+or renames the journal, removes a final record, restores canonical bytes, or
+starts a new transaction. Repair of preserved mismatch evidence requires a
+separately authorized forensic procedure outside this packet.
+
+### Review 2 implementation obligations
+
+A later implementation packet must close all four Review 2 findings together:
+
+1. implement the candidate `1.2`/validation-result `1.0` acyclic identity and
+   all cross-record/currentness rules above;
+2. replace the checkpoint promotion intent/recovery behavior with the complete
+   intent `1.2`, marker grammar, persistence rules, and total recovery matrix;
+3. preserve journal evidence and refuse every final-canonical/final-record/
+   intent mismatch exactly as the matrix requires; and
+4. remove public production exposure of fault injection. Injection traits,
+   constructors, fail-point enums, controls, and setters must be module-private
+   and compiled only under `#[cfg(test)]`; no production feature, exported
+   symbol, compiler/CLI option, environment variable, or public DTO may enable
+   them. Unit tests exercise every boundary through that test-only harness,
+   while public-API/rustdoc/all-features proof shows no hook in production.
+
+Before eventual code edits, refresh GitNexus impact for
+`evaluate_charter_intake` (known HIGH), generic lineage `validate_record`
+(known CRITICAL), and the concrete promotion-transaction recovery symbols
+(known HIGH), and warn before any HIGH/CRITICAL edit. The preferred design is a
+dedicated engine-owned lifecycle-validation result/service/store so the repair
+does not unnecessarily expand the generic validator's CRITICAL blast radius.
+Implementation stops if any preimage, persistence/currentness rule, migration,
+recovery row, or production/test API boundary remains implicit.
 
 ## Objective
 
@@ -1629,8 +2036,8 @@ policy ref/fingerprint, instance ID, prior state/fingerprint, ordered new
 observation refs, ordered active observation refs, result state/fingerprint,
 nullable clearance promotion ref, transitioned UTC, and transition fingerprint.
 State fingerprint input is policy ref/fingerprint, instance ID, current
-canonical fingerprint, result state, and sorted active observation
-fingerprints. All record fingerprints use one JCS value and exclude only their
+canonical fingerprint, result state, and active observation fingerprints in
+the exact current committed-head order. All record fingerprints use one JCS value and exclude only their
 own fingerprint except for the class-specific audit fields frozen in the
 runtime fingerprint matrix above.
 
@@ -1692,14 +2099,15 @@ is the authority-visible point for canonical, promotion, and lifecycle state
 together. A standalone event seeing promotion's new head must replay or remain
 invisible; it can never overwrite or fork clearance.
 
-Clearance requires a current lifecycle validation result in the promotion's
-`validation_result_refs`. That result references every active observation,
-proves the candidate intake lineage reevaluated every reopened coverage ID, and
-binds the candidate/current/policy/state fingerprints. The transition names the
-promotion ID; the promotion names the lifecycle validation result, and the
-transaction intent binds both record fingerprints without a cyclic record
-dependency. Recovery installs both before the commit marker. Neither an
-observation, transition,
+Clearance requires the candidate's sole current lifecycle-validation result,
+and the promotion repeats the Option 1 currentness checks above. That result
+references every active observation, proves the candidate intake lineage
+reevaluated every reopened coverage ID, and binds the
+`candidate_subject_fingerprint`—never the final candidate fingerprint—plus the
+current/policy/state fingerprints. The final candidate and promotion name the
+validation result; the transition names the promotion ID; and intent `1.2`
+binds their fingerprints without a cyclic record dependency. Recovery installs
+both final records before the commit marker. Neither an observation, transition,
 renderer output, nor state changes the artifact, posture kernel, approval, or
 policy revision by itself.
 

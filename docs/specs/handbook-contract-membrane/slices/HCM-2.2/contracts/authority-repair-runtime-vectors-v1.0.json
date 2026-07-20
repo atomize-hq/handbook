@@ -1,0 +1,614 @@
+{
+  "schema_id": "hcm-2.2-authority-repair-runtime-vectors",
+  "schema_version": "1.0",
+  "normalization": "RFC8785-JCS-UTF8",
+  "materialization_rule": "Where a vector supplies *_record_additions, form the complete record by a shallow object union of the named fingerprint_preimage and additions; their key sets must be disjoint, no later override is permitted, and the resulting complete object is the schema-validation and persisted-record vector.",
+  "candidate_subject_contract": {
+    "fingerprint_field": "candidate_subject_fingerprint",
+    "excluded_fields_exactly": [
+      "candidate_id",
+      "candidate_fingerprint",
+      "candidate_subject_fingerprint",
+      "validation_result_refs"
+    ],
+    "authority_classification": "validation_binding_identity_only_not_candidate_identity_or_canonical_authority"
+  },
+  "candidate_final_contract": {
+    "fingerprint_field": "candidate_fingerprint",
+    "excluded_fields_exactly": [
+      "candidate_id",
+      "candidate_fingerprint"
+    ],
+    "included_new_fields": [
+      "candidate_subject_fingerprint",
+      "validation_result_refs"
+    ],
+    "id_rule": "candidate_<candidate_fingerprint lowercase hex>"
+  },
+  "validation_result_contract": {
+    "schema_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/lifecycle-validation-result-1.0.0.schema.json",
+    "schema_document_byte_length": 15430,
+    "schema_document_sha256": "1d7d8733b19599804fcda32fe119766b1b910e2223aa981fcd9eb92cc4d5c03f",
+    "schema_id": "handbook.lifecycle-validation-result",
+    "schema_version": "1.0",
+    "fingerprint_field": "validation_result_fingerprint",
+    "excluded_fields_exactly": [
+      "validation_result_id",
+      "validation_result_fingerprint",
+      "validated_at_utc"
+    ],
+    "timestamp_classification": {
+      "validated_at_utc": "engine_authored_audit_only_excluded_from_identity"
+    },
+    "id_rule": "lifecycle-validation-result_<validation_result_fingerprint lowercase hex>",
+    "ref_rule": "lifecycle-validation-results/<validation_result_id>.json",
+    "store_path_rule": ".handbook/state/lifecycle-validation-results/<validation_result_id>.json",
+    "max_persisted_bytes": 262144,
+    "persisted_encoding": "RFC8785-JCS complete record plus one LF"
+  },
+  "active_observation_ordering_vectors": {
+    "ordering_authority": "exact active_observation_refs array order in the current committed lifecycle-transition head",
+    "writer_order_rule": "ascending tuple of lifecycle event precedence then event_fingerprint; validation copies the retained committed-head order without ref sorting",
+    "order_divergent_positive": {
+      "committed_head_entries": [
+        {
+          "event_kind": "production_posture_changed",
+          "event_precedence": 0,
+          "event_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "observation_ref": "lifecycle-observations/lifecycle-observation_ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.json",
+          "observation_fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        {
+          "event_kind": "charter_amendment_proposed",
+          "event_precedence": 1,
+          "event_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+          "observation_ref": "lifecycle-observations/lifecycle-observation_0000000000000000000000000000000000000000000000000000000000000000.json",
+          "observation_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "expected_validation_result_active_observations": [
+        {
+          "observation_ref": "lifecycle-observations/lifecycle-observation_ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.json",
+          "observation_fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        {
+          "observation_ref": "lifecycle-observations/lifecycle-observation_0000000000000000000000000000000000000000000000000000000000000000.json",
+          "observation_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "ref_sorted_wrong_order": [
+        {
+          "observation_ref": "lifecycle-observations/lifecycle-observation_0000000000000000000000000000000000000000000000000000000000000000.json",
+          "observation_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "observation_ref": "lifecycle-observations/lifecycle-observation_ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.json",
+          "observation_fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "expected_ref_sorted_outcome": "refuse_reordered_before_mutation"
+    },
+    "retained_head_compatibility": "Existing immutable multi-observation lifecycle heads remain byte-authoritative in their recorded array order. Candidate 1.2 evaluation copies that order exactly and does not rewrite, migrate, or ref-sort the head. Missing, duplicate, reordered, incomplete, or excess result/intent entries refuse before mutation."
+  },
+  "resolved_definitions": [
+    {
+      "definition_role": "approval_policy",
+      "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+      "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29"
+    },
+    {
+      "definition_role": "capability_contract",
+      "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+      "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998"
+    },
+    {
+      "definition_role": "intake_definition",
+      "definition_ref": "handbook.intake.charter@1.0.0",
+      "definition_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
+    },
+    {
+      "definition_role": "lifecycle_policy",
+      "definition_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+      "definition_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+    },
+    {
+      "definition_role": "reassessment_trigger",
+      "definition_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+      "definition_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6"
+    },
+    {
+      "definition_role": "reassessment_trigger",
+      "definition_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0",
+      "definition_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766"
+    },
+    {
+      "definition_role": "renderer_definition",
+      "definition_ref": "handbook.renderer.charter-review-markdown@1.0.0",
+      "definition_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7"
+    },
+    {
+      "definition_role": "review_trigger",
+      "definition_ref": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+      "definition_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8"
+    },
+    {
+      "definition_role": "semantic_validator",
+      "definition_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+      "definition_fingerprint": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738"
+    },
+    {
+      "definition_role": "semantic_validator",
+      "definition_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+      "definition_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10"
+    },
+    {
+      "definition_role": "target_kind",
+      "definition_ref": "handbook.artifact-kind.project-authority@1.1.0",
+      "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e"
+    },
+    {
+      "definition_role": "target_schema",
+      "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+      "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836"
+    },
+    {
+      "definition_role": "waiver_policy",
+      "definition_ref": "handbook.waiver.constitutional-intake@1.0.0",
+      "definition_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3"
+    }
+  ],
+  "chains": [
+    {
+      "name": "create_only",
+      "supporting_lineage": {
+        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "intake_record_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
+        "normalized_content_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44"
+      },
+      "candidate_subject_preimage": {
+        "basis_artifact_fingerprint": null,
+        "field_sources": [
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/revision"
+          }
+        ],
+        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_eligibility": "requires_approval",
+        "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.2",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+        "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+        "unresolved_coverage_ids": []
+      },
+      "expected_candidate_subject_fingerprint": "sha256:014ede25a7e3ae67be7b38e1e80029037ea0029c6e866e1bd9b6347b818fda83",
+      "validation_result_fingerprint_preimage": {
+        "active_observations": [],
+        "basis_artifact_fingerprint": null,
+        "candidate_subject_fingerprint": "sha256:014ede25a7e3ae67be7b38e1e80029037ea0029c6e866e1bd9b6347b818fda83",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "intake_record_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
+        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "lifecycle_head_fingerprint": null,
+        "lifecycle_head_ref": null,
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "lifecycle_state": "absent",
+        "lifecycle_state_fingerprint": null,
+        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "observed_current_artifact_fingerprint": null,
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "reopened_coverage_ids": [],
+        "resolved_definitions": [
+          {
+            "definition_role": "approval_policy",
+            "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+            "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29"
+          },
+          {
+            "definition_role": "capability_contract",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998"
+          },
+          {
+            "definition_role": "intake_definition",
+            "definition_ref": "handbook.intake.charter@1.0.0",
+            "definition_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
+          },
+          {
+            "definition_role": "lifecycle_policy",
+            "definition_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+            "definition_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+            "definition_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0",
+            "definition_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766"
+          },
+          {
+            "definition_role": "renderer_definition",
+            "definition_ref": "handbook.renderer.charter-review-markdown@1.0.0",
+            "definition_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7"
+          },
+          {
+            "definition_role": "review_trigger",
+            "definition_ref": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+            "definition_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+            "definition_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10"
+          },
+          {
+            "definition_role": "target_kind",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e"
+          },
+          {
+            "definition_role": "target_schema",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836"
+          },
+          {
+            "definition_role": "waiver_policy",
+            "definition_ref": "handbook.waiver.constitutional-intake@1.0.0",
+            "definition_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.lifecycle-validation-result",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority",
+        "validation_status": "passed"
+      },
+      "expected_validation_result_fingerprint": "sha256:9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848",
+      "expected_validation_result_id": "lifecycle-validation-result_9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848",
+      "expected_validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848.json",
+      "validation_result_record_additions": {
+        "validated_at_utc": "2026-07-20T10:00:00Z",
+        "validation_result_fingerprint": "sha256:9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848",
+        "validation_result_id": "lifecycle-validation-result_9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848"
+      },
+      "final_candidate_fingerprint_preimage": {
+        "basis_artifact_fingerprint": null,
+        "candidate_subject_fingerprint": "sha256:014ede25a7e3ae67be7b38e1e80029037ea0029c6e866e1bd9b6347b818fda83",
+        "field_sources": [
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/revision"
+          }
+        ],
+        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_eligibility": "requires_approval",
+        "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.2",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+        "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+        "unresolved_coverage_ids": [],
+        "validation_result_refs": [
+          "lifecycle-validation-results/lifecycle-validation-result_9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848.json"
+        ]
+      },
+      "expected_final_candidate_fingerprint": "sha256:bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa",
+      "expected_final_candidate_id": "candidate_bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa",
+      "final_candidate_record_additions": {
+        "candidate_fingerprint": "sha256:bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa",
+        "candidate_id": "candidate_bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa"
+      }
+    },
+    {
+      "name": "amendment_with_active_reassessment",
+      "supporting_lineage": {
+        "intake_record_fingerprint_preimage": {
+          "acquisition_mode": "guided_adaptive",
+          "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "consumer": {
+            "id": "handbook",
+            "kind": "handbook_skill",
+            "version": "1.0.0"
+          },
+          "coverage_results": [
+            {
+              "applicability": "applicable",
+              "confidence": "high",
+              "contradiction_refs": [],
+              "coverage_id": "operational_reality.production_state",
+              "evaluation": "satisfied",
+              "evidence_refs": [
+                "evidence.production-state.current"
+              ],
+              "freshness": "session",
+              "sensitivity": "internal",
+              "source_kind": "evidenced_inference",
+              "value_ref": "intake-values/operational-reality.production-state.json",
+              "waiver_ref": null
+            }
+          ],
+          "intake_definition_ref": "handbook.intake.charter@1.0.0",
+          "profile_ref": "handbook.profile.shipped-root@1.1.0",
+          "prompt_event_refs": [],
+          "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+          "schema_id": "handbook.artifact-intake-record",
+          "schema_version": "1.1",
+          "target_instance_id": "project_authority",
+          "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0"
+        },
+        "expected_intake_record_fingerprint": "sha256:65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff",
+        "expected_intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "normalized_content_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44"
+      },
+      "candidate_subject_preimage": {
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "field_sources": [
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/in_production_today"
+          }
+        ],
+        "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_eligibility": "requires_approval",
+        "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.2",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+        "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+        "unresolved_coverage_ids": []
+      },
+      "expected_candidate_subject_fingerprint": "sha256:9fbc8c9f4bcdb862b8e2d44415cd8e61338cfa25c7e0d7bb4d7877a3748d04c9",
+      "validation_result_fingerprint_preimage": {
+        "active_observations": [
+          {
+            "observation_fingerprint": "sha256:b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
+            "observation_ref": "lifecycle-observations/lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098.json"
+          }
+        ],
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "candidate_subject_fingerprint": "sha256:9fbc8c9f4bcdb862b8e2d44415cd8e61338cfa25c7e0d7bb4d7877a3748d04c9",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "intake_record_fingerprint": "sha256:65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff",
+        "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "lifecycle_head_fingerprint": "sha256:ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde",
+        "lifecycle_head_ref": "lifecycle-transitions/lifecycle-transition_ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde.json",
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "lifecycle_state": "reassessment_required",
+        "lifecycle_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "observed_current_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "reopened_coverage_ids": [
+          "operational_reality.production_state"
+        ],
+        "resolved_definitions": [
+          {
+            "definition_role": "approval_policy",
+            "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+            "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29"
+          },
+          {
+            "definition_role": "capability_contract",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998"
+          },
+          {
+            "definition_role": "intake_definition",
+            "definition_ref": "handbook.intake.charter@1.0.0",
+            "definition_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
+          },
+          {
+            "definition_role": "lifecycle_policy",
+            "definition_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+            "definition_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+            "definition_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0",
+            "definition_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766"
+          },
+          {
+            "definition_role": "renderer_definition",
+            "definition_ref": "handbook.renderer.charter-review-markdown@1.0.0",
+            "definition_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7"
+          },
+          {
+            "definition_role": "review_trigger",
+            "definition_ref": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+            "definition_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+            "definition_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10"
+          },
+          {
+            "definition_role": "target_kind",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e"
+          },
+          {
+            "definition_role": "target_schema",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836"
+          },
+          {
+            "definition_role": "waiver_policy",
+            "definition_ref": "handbook.waiver.constitutional-intake@1.0.0",
+            "definition_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.lifecycle-validation-result",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority",
+        "validation_status": "passed"
+      },
+      "expected_validation_result_fingerprint": "sha256:654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b",
+      "expected_validation_result_id": "lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b",
+      "expected_validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b.json",
+      "validation_result_record_additions": {
+        "validated_at_utc": "2026-07-20T10:05:00Z",
+        "validation_result_fingerprint": "sha256:654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b",
+        "validation_result_id": "lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b"
+      },
+      "final_candidate_fingerprint_preimage": {
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "candidate_subject_fingerprint": "sha256:9fbc8c9f4bcdb862b8e2d44415cd8e61338cfa25c7e0d7bb4d7877a3748d04c9",
+        "field_sources": [
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/in_production_today"
+          }
+        ],
+        "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_eligibility": "requires_approval",
+        "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.2",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+        "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+        "unresolved_coverage_ids": [],
+        "validation_result_refs": [
+          "lifecycle-validation-results/lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b.json"
+        ]
+      },
+      "expected_final_candidate_fingerprint": "sha256:03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7",
+      "expected_final_candidate_id": "candidate_03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7",
+      "final_candidate_record_additions": {
+        "candidate_fingerprint": "sha256:03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7",
+        "candidate_id": "candidate_03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7"
+      }
+    }
+  ],
+  "cross_record_bindings": [
+    {
+      "source": "candidate.validation_result_refs[0]",
+      "target": "lifecycle-validation-result",
+      "required_equalities": [
+        "ref basename equals validation_result_id",
+        "target ID equals fingerprint-derived ID",
+        "target validation_result_fingerprint recomputes from exact bytes",
+        "candidate_subject_fingerprint equals recomputation from the candidate subject preimage",
+        "exact target bytes validate against lifecycle-validation-result schema 1.0"
+      ]
+    },
+    {
+      "source": "lifecycle-validation-result.intake_record_ref",
+      "target": "artifact-intake-record",
+      "required_equalities": [
+        "ref basename equals intake record ID",
+        "declared intake_record_fingerprint equals recomputed target fingerprint",
+        "candidate intake_record_ref equals validation-result intake_record_ref",
+        "candidate and intake basis/profile/target lineage are exact-equal"
+      ]
+    },
+    {
+      "source": "lifecycle-validation-result.normalized_content_ref",
+      "target": "candidate normalized-content bytes",
+      "required_equalities": [
+        "candidate normalized_content_ref equals validation-result normalized_content_ref",
+        "ref basename carries the lowercase content SHA-256",
+        "declared normalized_content_fingerprint equals exact-byte SHA-256",
+        "bytes structurally and semantically validate under the bound target schema and validators"
+      ]
+    },
+    {
+      "source": "lifecycle-validation-result.lifecycle_head_ref",
+      "target": "committed lifecycle-transition head or exact null create-only state",
+      "required_equalities": [
+        "non-null ref basename equals transition ID",
+        "declared head fingerprint equals recomputed target fingerprint",
+        "state fingerprint and ordered active observations equal the committed head",
+        "null head is permitted only with absent state, null basis/current fingerprints, and empty active/reopened sets"
+      ]
+    },
+    {
+      "source": "lifecycle-validation-result.active_observations[*]",
+      "target": "complete committed active lifecycle-observation set",
+      "required_equalities": [
+        "each ref basename equals observation ID",
+        "each declared fingerprint equals recomputed target fingerprint",
+        "array order exactly equals the committed lifecycle head order",
+        "no missing, duplicate, reordered, or excess entry is admitted"
+      ]
+    }
+  ],
+  "negative_vectors": [
+    {
+      "mutation": "include validation_result_refs in candidate_subject_fingerprint preimage",
+      "expected": "refuse_cycle_guard"
+    },
+    {
+      "mutation": "candidate 1.2 has zero or more than one validation_result_refs entry",
+      "expected": "refuse_exact_cardinality"
+    },
+    {
+      "mutation": "result binds a final candidate fingerprint or candidate ID",
+      "expected": "refuse_forward_identity_edge"
+    },
+    {
+      "mutation": "candidate subject, intake, normalized content, basis, profile, definition, lifecycle head/state, active observation, or reopened coverage binding is missing, forged, stale, duplicate, reordered, incomplete, or excess",
+      "expected": "refuse_before_promotion_mutation"
+    },
+    {
+      "mutation": "active observations are re-sorted by observation_ref instead of copied in the exact committed lifecycle-head order",
+      "expected": "refuse_reordered_before_mutation"
+    },
+    {
+      "mutation": "caller supplies candidate_subject_fingerprint, validation-result bytes, validation_result_id, validation_result_fingerprint, validation_result_refs, or validated_at_utc",
+      "expected": "refuse_caller_authored_validation_authority"
+    },
+    {
+      "mutation": "same content-addressed result path contains bytes other than the exact RFC8785-JCS complete record plus LF",
+      "expected": "refuse_preserve_existing_bytes_no_overwrite"
+    }
+  ]
+}

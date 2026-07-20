@@ -1,0 +1,591 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://handbook.dev/schemas/charter-promotion-transaction-intent/1.2.0.json",
+  "title": "Handbook Charter promotion transaction intent 1.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "transaction_id",
+    "promotion_id",
+    "mutation_mode",
+    "target",
+    "candidate_lineage",
+    "selected_contract",
+    "human_authority",
+    "outputs",
+    "recovery",
+    "intent_fingerprint"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "handbook.charter-promotion-transaction-intent"
+    },
+    "schema_version": {
+      "const": "1.2"
+    },
+    "transaction_id": {
+      "type": "string",
+      "pattern": "^promotion-transaction_[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "promotion_id": {
+      "type": "string",
+      "pattern": "^promotion_[0-9a-f]{64}$"
+    },
+    "mutation_mode": {
+      "enum": [
+        "create",
+        "amend"
+      ]
+    },
+    "target": {
+      "$ref": "#/$defs/target"
+    },
+    "candidate_lineage": {
+      "$ref": "#/$defs/candidateLineage"
+    },
+    "selected_contract": {
+      "$ref": "#/$defs/selectedContract"
+    },
+    "human_authority": {
+      "$ref": "#/$defs/humanAuthority"
+    },
+    "outputs": {
+      "$ref": "#/$defs/outputs"
+    },
+    "recovery": {
+      "$ref": "#/$defs/recovery"
+    },
+    "intent_fingerprint": {
+      "$ref": "#/$defs/fingerprint"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mutation_mode": {
+            "const": "create"
+          }
+        },
+        "required": [
+          "mutation_mode"
+        ]
+      },
+      "then": {
+        "properties": {
+          "target": {
+            "properties": {
+              "basis_artifact_fingerprint": {
+                "type": "null"
+              },
+              "observed_current_artifact_fingerprint": {
+                "type": "null"
+              }
+            }
+          },
+          "selected_contract": {
+            "properties": {
+              "prior_lifecycle_head_ref": {
+                "type": "null"
+              },
+              "prior_lifecycle_head_fingerprint": {
+                "type": "null"
+              },
+              "prior_lifecycle_state": {
+                "const": "absent"
+              },
+              "prior_lifecycle_state_fingerprint": {
+                "type": "null"
+              },
+              "active_observations": {
+                "maxItems": 0
+              },
+              "reopened_coverage_ids": {
+                "maxItems": 0
+              }
+            }
+          },
+          "recovery": {
+            "properties": {
+              "old_canonical_status": {
+                "const": "absent"
+              },
+              "old_canonical_fingerprint": {
+                "type": "null"
+              },
+              "old_canonical_document_sha256": {
+                "type": "null"
+              },
+              "old_canonical_byte_length": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "target": {
+            "properties": {
+              "basis_artifact_fingerprint": {
+                "$ref": "#/$defs/fingerprint"
+              },
+              "observed_current_artifact_fingerprint": {
+                "$ref": "#/$defs/fingerprint"
+              }
+            }
+          },
+          "selected_contract": {
+            "properties": {
+              "prior_lifecycle_head_ref": {
+                "type": "string",
+                "pattern": "^lifecycle-transitions/lifecycle-transition_[0-9a-f]{64}\\.json$"
+              },
+              "prior_lifecycle_head_fingerprint": {
+                "$ref": "#/$defs/fingerprint"
+              },
+              "prior_lifecycle_state": {
+                "enum": [
+                  "current",
+                  "review_required",
+                  "reassessment_required"
+                ]
+              },
+              "prior_lifecycle_state_fingerprint": {
+                "$ref": "#/$defs/fingerprint"
+              }
+            }
+          },
+          "recovery": {
+            "properties": {
+              "old_canonical_status": {
+                "const": "present"
+              },
+              "old_canonical_fingerprint": {
+                "$ref": "#/$defs/fingerprint"
+              },
+              "old_canonical_document_sha256": {
+                "$ref": "#/$defs/fingerprint"
+              },
+              "old_canonical_byte_length": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1048576
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "fingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "nullableFingerprint": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/fingerprint"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_instance_id",
+        "canonical_artifact_ref",
+        "basis_artifact_fingerprint",
+        "observed_current_artifact_fingerprint"
+      ],
+      "properties": {
+        "target_instance_id": {
+          "const": "project_authority"
+        },
+        "canonical_artifact_ref": {
+          "const": ".handbook/project/charter.yaml"
+        },
+        "basis_artifact_fingerprint": {
+          "$ref": "#/$defs/nullableFingerprint"
+        },
+        "observed_current_artifact_fingerprint": {
+          "$ref": "#/$defs/nullableFingerprint"
+        }
+      }
+    },
+    "candidateLineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_ref",
+        "candidate_fingerprint",
+        "candidate_subject_fingerprint",
+        "intake_record_ref",
+        "intake_record_fingerprint",
+        "normalized_content_ref",
+        "normalized_content_fingerprint",
+        "validation_result_ref",
+        "validation_result_fingerprint"
+      ],
+      "properties": {
+        "candidate_ref": {
+          "type": "string",
+          "pattern": "^candidates/candidate_[0-9a-f]{64}\\.json$"
+        },
+        "candidate_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "candidate_subject_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "intake_record_ref": {
+          "type": "string",
+          "pattern": "^intake-records/intake_[0-9a-f]{64}\\.json$"
+        },
+        "intake_record_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "normalized_content_ref": {
+          "type": "string",
+          "pattern": "^candidate-content/charter_[0-9a-f]{64}\\.yaml$"
+        },
+        "normalized_content_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "validation_result_ref": {
+          "type": "string",
+          "pattern": "^lifecycle-validation-results/lifecycle-validation-result_[0-9a-f]{64}\\.json$"
+        },
+        "validation_result_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        }
+      }
+    },
+    "definitionBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "definition_role",
+        "definition_ref",
+        "definition_fingerprint"
+      ],
+      "properties": {
+        "definition_role": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "definition_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "definition_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        }
+      }
+    },
+    "activeObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observation_ref",
+        "observation_fingerprint"
+      ],
+      "properties": {
+        "observation_ref": {
+          "type": "string",
+          "pattern": "^lifecycle-observations/lifecycle-observation_[0-9a-f]{64}\\.json$"
+        },
+        "observation_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        }
+      }
+    },
+    "selectedContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_ref",
+        "resolved_profile_fingerprint",
+        "resolved_definitions",
+        "lifecycle_policy_ref",
+        "lifecycle_policy_fingerprint",
+        "prior_lifecycle_head_ref",
+        "prior_lifecycle_head_fingerprint",
+        "prior_lifecycle_state",
+        "prior_lifecycle_state_fingerprint",
+        "active_observations",
+        "reopened_coverage_ids"
+      ],
+      "properties": {
+        "profile_ref": {
+          "const": "handbook.profile.shipped-root@1.1.0"
+        },
+        "resolved_profile_fingerprint": {
+          "const": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74"
+        },
+        "resolved_definitions": {
+          "type": "array",
+          "minItems": 13,
+          "maxItems": 13,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/definitionBinding"
+          }
+        },
+        "lifecycle_policy_ref": {
+          "const": "handbook.lifecycle.constitutional-review-lock@1.0.0"
+        },
+        "lifecycle_policy_fingerprint": {
+          "const": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+        },
+        "prior_lifecycle_head_ref": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^lifecycle-transitions/lifecycle-transition_[0-9a-f]{64}\\.json$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prior_lifecycle_head_fingerprint": {
+          "$ref": "#/$defs/nullableFingerprint"
+        },
+        "prior_lifecycle_state": {
+          "enum": [
+            "absent",
+            "current",
+            "review_required",
+            "reassessment_required"
+          ]
+        },
+        "prior_lifecycle_state_fingerprint": {
+          "$ref": "#/$defs/nullableFingerprint"
+        },
+        "active_observations": {
+          "type": "array",
+          "maxItems": 256,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/activeObservation"
+          }
+        },
+        "reopened_coverage_ids": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "project_shape.definition",
+              "delivery.constraints",
+              "delivery.default_implications",
+              "operational_reality.production_state",
+              "risk.domains",
+              "engineering_posture.baseline",
+              "policy.authority_and_revision",
+              "governance.decision_authority",
+              "governance.required_approvals",
+              "governance.exception_policy",
+              "engineering_posture.dimensions",
+              "engineering_posture.red_lines",
+              "governance.review_triggers",
+              "governance.reassessment_triggers",
+              "debt.register",
+              "decisions.records"
+            ]
+          }
+        }
+      }
+    },
+    "approvalBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approval_ref",
+        "approval_fingerprint",
+        "approval_class",
+        "authority_ref"
+      ],
+      "properties": {
+        "approval_ref": {
+          "type": "string",
+          "pattern": "^approvals/approval_[0-9a-f]{64}\\.json$"
+        },
+        "approval_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "approval_class": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "authority_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      }
+    },
+    "humanAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approval_bindings",
+        "approver_registry_state_ref",
+        "approver_registry_state_fingerprint",
+        "registry_head_transition_ref",
+        "registry_head_transition_fingerprint"
+      ],
+      "properties": {
+        "approval_bindings": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/approvalBinding"
+          }
+        },
+        "approver_registry_state_ref": {
+          "type": "string",
+          "pattern": "^registry-states/registry-state_[0-9a-f]{64}\\.json$"
+        },
+        "approver_registry_state_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "registry_head_transition_ref": {
+          "type": "string",
+          "pattern": "^registry-transitions/registry-transition_[0-9a-f]{64}\\.json$"
+        },
+        "registry_head_transition_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        }
+      }
+    },
+    "outputRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_ref",
+        "record_fingerprint",
+        "document_sha256",
+        "byte_length"
+      ],
+      "properties": {
+        "record_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "record_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "document_sha256": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "byte_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 262144
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "new_canonical_fingerprint",
+        "new_canonical_document_sha256",
+        "new_canonical_byte_length",
+        "promotion_record",
+        "lifecycle_transition"
+      ],
+      "properties": {
+        "new_canonical_fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "new_canonical_document_sha256": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "new_canonical_byte_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "promotion_record": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/outputRecord"
+            },
+            {
+              "properties": {
+                "record_ref": {
+                  "pattern": "^promotions/promotion_[0-9a-f]{64}\\.json$"
+                }
+              }
+            }
+          ]
+        },
+        "lifecycle_transition": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/outputRecord"
+            },
+            {
+              "properties": {
+                "record_ref": {
+                  "pattern": "^lifecycle-transitions/lifecycle-transition_[0-9a-f]{64}\\.json$"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "old_canonical_status",
+        "old_canonical_fingerprint",
+        "old_canonical_document_sha256",
+        "old_canonical_byte_length"
+      ],
+      "properties": {
+        "old_canonical_status": {
+          "enum": [
+            "absent",
+            "present"
+          ]
+        },
+        "old_canonical_fingerprint": {
+          "$ref": "#/$defs/nullableFingerprint"
+        },
+        "old_canonical_document_sha256": {
+          "$ref": "#/$defs/nullableFingerprint"
+        },
+        "old_canonical_byte_length": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

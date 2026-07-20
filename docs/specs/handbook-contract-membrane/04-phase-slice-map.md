@@ -13,8 +13,12 @@ HCM-1.1 through HCM-1.4 and HCM-2.1 have landed and closed through separately
 reviewed implementation and parent-handoff subjects. They are completed bounded
 evidence, not continuing implementation authority. HCM-2.2 was selected and
 reached a non-authoritative implementation checkpoint, then stopped because its
-frozen candidate/validation identity graph is cyclic. It requires an additive
-authority decision before resumption. Every later slice remains unauthorized.
+frozen candidate/validation identity graph is cyclic. Escalation
+`HCM-2.2-ESC-001` selects additive Option 1 for documentation-only planning:
+candidate `1.2` uses an acyclic subject fingerprint and an engine-owned result,
+with durability/recovery/API repairs. Resumption still requires a fresh CLEAN
+planning review and a separate parent implementation dispatch. Every later
+slice remains unauthorized.
 
 ## Sequencing rule
 
@@ -302,11 +306,14 @@ legacy fixed Markdown path constant and re-exports are removed without an alias.
 
 ### `HCM-2.2` — Constitutional-root artifact
 
-**Implementation status:** escalation required; non-authoritative blocked
-checkpoint. Fresh Review 2 rejected the complete subject, and bounded remediation
-proved that the frozen final-candidate fingerprint and content-addressed lifecycle
-validation-result ref require one another. No exact pre-finalization candidate
-identity is defined. The checkpoint and proof history at
+**Implementation status:** reopened planning repair; non-authoritative blocked
+checkpoint. Fresh Review 2 rejected the complete implementation subject, and
+bounded remediation proved that the frozen final-candidate fingerprint and
+content-addressed lifecycle-validation-result ref require one another. Option 1
+is selected to add candidate `1.2` validation-only subject identity, result
+`1.0`, complete promotion intent/recovery, evidence-preserving mismatch refusal,
+and test-only private fault injection. This is planning authority only; a
+separate dispatch is required before implementation. The checkpoint and proof history at
 [`slices/HCM-2.2/`](slices/HCM-2.2/SPEC.md) are evidence only and grant no
 authority for HCM-2.3 or later work.
 

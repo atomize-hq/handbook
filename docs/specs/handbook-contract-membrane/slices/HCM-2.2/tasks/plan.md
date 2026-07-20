@@ -2,16 +2,24 @@
 
 ## Status
 
-Escalation required; non-authoritative blocked checkpoint. The review-clean
-[`../SPEC.md`](../SPEC.md) packet and separately selected top-level HCM-2.2
-implementation session authorized this plan, but fresh implementation Review 2
-found a missing lifecycle-validation authority path. Bounded remediation proved
-the frozen candidate/validation fingerprints cyclic, so the slice stopped under
-its own closed-graph condition. No HCM-2.3 authority exists.
+Escalation `HCM-2.2-ESC-001` selected Option 1 for a documentation-only
+authority repair. The prior implementation is a non-authoritative blocked
+checkpoint. This revised plan adds candidate `1.2`, an acyclic
+`candidate_subject_fingerprint`, engine-owned lifecycle-validation result `1.0`,
+and complete promotion-journal/API repairs. Implementation remains unauthorized
+until the complete revised planning subject receives fresh CLEAN review and a
+new parent dispatch explicitly selects a later implementation packet. No
+HCM-2.3 authority exists.
+
+The immutable escalation handoff incorrectly cites `status/plan.md` and
+`status/todo.md`. Those paths do not exist; the additive correction is this
+real [`tasks/plan.md`](plan.md) and [`tasks/todo.md`](todo.md) pair. The
+immutable handoff is not edited.
 
 ## Delivery strategy
 
-Land one test-first constitutional-root vertical slice. Preserve every released
+After a separate later implementation selection, land one test-first
+constitutional-root vertical slice. Preserve every released
 definition byte, add the versioned definition closure before selecting it, then
 move intake, promotion, rendering, and consumers in dependency order. Editing
 agents run sequentially where public types overlap. Review agents are fresh,
@@ -20,7 +28,8 @@ isolated, and read-only.
 ## Dependency graph
 
 ```text
-P0 entry + critical impact refresh
+R0 reviewed authority-repair planning dispatch
+  -> P0 entry + HIGH/CRITICAL impact refresh
   -> P1 RED definition/schema/lineage tests
   -> P2 versioned definition registries and selected profile
   -> P3 canonical Charter + fixed renderer
@@ -33,6 +42,43 @@ P0 entry + critical impact refresh
   -> P10 primary commit + parent closeout
 ```
 
+## R0 — Authority-repair planning closeout (current authorized scope)
+
+1. Freeze the exact candidate `1.2` subject/final fingerprint preimages and
+   vector outputs without changing candidate `1.1`.
+2. Freeze lifecycle-validation-result `1.0` schema, identity, result-ref/store
+   grammar, bounded no-follow create-new-or-exact-equal persistence, audit
+   timestamp behavior, result cardinality/order, and cross-record bindings.
+3. Freeze promotion-time recomputation of intake/content, canonical basis,
+   profile/definitions, lifecycle policy/head/state, active observations,
+   reopened coverage, candidate result, and approvals before mutation. Active
+   observations copy the current committed lifecycle-head order exactly; a
+   ref-sorted, duplicate, incomplete, or excess representation refuses.
+4. Freeze additive re-author/re-evaluate/new-approval migration with no
+   checkpoint rewrite, approval carry-forward, or implicit dual-read path.
+5. Freeze complete promotion intent `1.2` with a closed schema, exact amendment
+   fingerprint/document/marker vector, literal nested keys, verified complete
+   intent publication from non-authoritative scratch, fifteen-name owned
+   grammar, ordered cumulative writer boundaries, independent old/new/record-
+   stage and directory-suffix axes, amendment snapshot completion, finite crash-
+   state domain, ordered `R0`-`R9` crash-recoverable rollback cleanup/marker/
+   terminalization boundaries, symmetric rename-no-replace destination-collision
+   refusal and parent-fsync replay for committed/rolled-back terminals,
+   exhaustive disjoint one-row recovery partition,
+   mismatch evidence preservation, and production/test fault-injection
+   separation.
+6. Correct `00`, `03`, `04`, `06`, SPEC, this plan, and the checklist so all
+   classify HCM-2.2 as reopened and non-authoritative.
+7. Validate schemas/vectors, links, matrices, ledgers, immutable-record scope,
+   and the no-Rust boundary; dispatch the complete subject to a fresh isolated
+   reviewer and repair until CLEAN.
+8. Commit the reviewed planning subject, then add a separate parent-owned
+   handoff/ledger closeout authorizing only a later HCM-2.2 implementation
+   packet. Stop before implementation and before HCM-2.3.
+
+**Checkpoint:** CLEAN reviewed acyclic planning authority and two additive
+documentation commits; no implementation mutation.
+
 ## P0 — Revalidate entry and freeze the implementation subject
 
 1. Resolve branch, HEAD, status, exact selected HCM-2.1 handoff, planning
@@ -40,7 +86,11 @@ P0 entry + critical impact refresh
 2. Reread the required skill chain and exact `00`-`08`, HCM-0.6 decision, and
    live definition/source/test sections named by the packet.
 3. Refresh GitNexus and run upstream impact before every existing-symbol edit.
-   Warn explicitly before the known CRITICAL profile-resolver change.
+   At minimum, refresh `evaluate_charter_intake` (known HIGH), generic lineage
+   `validate_record` (known CRITICAL), and the concrete promotion transaction
+   recovery symbols (known HIGH); warn before proceeding with every HIGH or
+   CRITICAL edit. Prefer a dedicated engine-owned lifecycle-validation
+   service/store so generic `validate_record` need not absorb the new record.
 4. Capture the exact old definition/package manifest and selected profile
    decisions. Prove no old definition or generated package byte is staged.
 5. Freeze the exact allowed-path list and current public DTO/version goldens.
@@ -67,7 +117,15 @@ risk acknowledged, and immutable baseline manifest recorded.
    inference/declaration boundaries, unknowns, contradictions, waivers,
    specificity/confidence, leaf-source bijection, value-versus-quality-waiver
    separation, and two targeted triggers.
-4. Add RED immutable additive `1.1` intake/candidate/approval/promotion tests for
+4. Add RED immutable additive `1.1` intake/approval/promotion and additive
+   candidate `1.2`/lifecycle-validation-result `1.0` tests for the exact subject,
+   result, and final preimages; acyclic construction; create/amend vectors;
+   exact one-result cardinality/order; no-follow bounded create-new-or-equal
+   persistence; timestamp replay; cross-record bindings; missing/forged/stale/
+   duplicate/reordered/incomplete/excess refusal. Reproduce the closed promotion
+   intent `1.2` schema and exact intent fingerprint, complete-document hash/
+   length, pending path, marker payload, cross-record equality, and negative
+   vectors; plus
    exact refs, basis propagation, fingerprints, append-only behavior,
    `fido2_user_verified_repository_approver` bootstrap/registry/assertions with
    no hardware-proven or real-world identity claim, exact registration-request/
@@ -159,9 +217,11 @@ and old-definition regression suites pass.
 3. Prove all three modes share one evaluator and candidate builder. Identical
    semantic inputs produce identical normalized candidate bytes/fingerprint;
    mode and prompt events remain intake provenance only.
-4. Finalize immutable intake records and content-addressed candidates with
-   complete field-source maps, gap/eligibility results, and the create-null or
-   mandatory amendment `basis_artifact_fingerprint`.
+4. Finalize immutable intake records, candidate semantic subjects, engine-owned
+   validation results, and final content-addressed candidate `1.2` records in
+   the exact acyclic order. Preserve complete field-source maps, gap/eligibility
+   results, and the create-null or mandatory amendment basis; candidate `1.1`
+   remains immutable checkpoint evidence and is not an admitted fallback.
 5. Use trusted append-only storage with safe refs, bounds, create-new equality,
    and no secrets/unrestricted evidence content.
 
@@ -177,15 +237,47 @@ candidate schema/semantic tests pass; no canonical write exists yet.
    every unattended/file/stdin/software fallback and append one additive `1.1`
    approval per required exact class/authority pair.
 2. Re-resolve profile, kind, schema, intake, renderer, lifecycle, capability,
-   validator, waiver, trigger, candidate, approval, and target state at
-   promotion time.
-3. Implement the exact promotion lock/journal/fsync/rename-no-replace-or-equal/
-   marker/authority-commit-point/recovery protocol and total observed-byte
-   table; add substitution, inode ABA, concurrent readers/writers, replay, and
-   fault injection after every persistence boundary. Require identical basis in
-   intake, candidate, approvals, CLI, intent, promotion, retry, and recovery;
-   install the lifecycle transition in the same authority-visible journal;
-   never delete final content-addressed records during rollback.
+   validator, waiver, trigger, candidate, approval, target state, candidate
+   subject, the sole validation result, complete active-observation set, and
+   complete reopened-coverage set at promotion time before any mutation. Use
+   exact committed lifecycle-head active-observation order and test a retained
+   multi-observation head whose event order deliberately differs from ref order.
+3. Implement closed promotion intent `1.2` from its exact schema/vector,
+   literal nested fields, bounded JCS+LF persistence, complete verified intent
+   scratch outside authority and atomic whole-file publication, fifteen-name
+   pending grammar, ordered `W0`-`W15` no-follow writer transitions, exact-prefix staged
+   crash states, exact 72-byte atomically published marker grammar, authority
+   commit point, terminal `.committed`/`.rolled-back` name sets, and exhaustive
+   recovery partition. Exhaustively enumerate separate `canonical.old`,
+   `canonical.new`, promotion-stage, lifecycle-stage, final, marker, target, and
+   directory-suffix axes; prove all non-catch predicates are disjoint, every
+   state selects exactly one row, every writer boundary selects its declared
+   row, and every unreachable/crossed-suffix state preserves evidence and
+   refuses. Treat rollback recovery as an equally faultable writer: enumerate
+   every `R0`-`R9` boundary from every admitted `W3`-`W9` origin, remove exactly
+   `prepared.tmp`, `prepared`, lifecycle stage, promotion stage, and canonical
+   stage in that order with a directory fsync after each unlink; admit every
+   exact rollback-marker prefix; finalize a published `rolled-back` still under
+   `.pending`; and repeat the parent fsync for an exact terminal. Apply the same
+   terminal contract to a published `committed` under `.pending`: exact payload,
+   rename-no-replace, preserve/refuse every destination collision or simultaneous
+   suffix, parent fsync, terminal reverify, and parent-fsync replay on every
+   exact `.committed` observation. For amendment
+   W3/W4, enumerate absence and every old-snapshot prefix length and prove
+   recovery completes+fsyncs exact `canonical.old` before cleanup/terminal
+   rollback. Add
+   substitution, inode ABA, concurrent readers/writers, replay, and fault
+   injection after every forward-writer and recovery-writer persistence
+   boundary. Require identical basis and
+   result/currentness bindings in intake, candidate, approvals, CLI, intent,
+   promotion, retry, and recovery; install the lifecycle transition in the same
+   authority-visible journal. Any canonical/final-record/intent/path/type/
+   marker/currentness mismatch preserves the pending journal and refuses
+   without mutation. Never delete final content-addressed records.
+   Prove pre-commit recovery requires the bound prior lifecycle state still
+   current, commit makes the intended transition its exact successor, and later
+   valid successors do not invalidate historical committed/rolled-back journal
+   evidence by demanding permanent equality to the latest target/head.
 4. Implement the four exact named registry bootstrap/add/revoke/update engine
    signatures and their exact CLI-to-engine mapping through the closed
    caller-intent-only approver-admin request and operation-by-status/refusal
@@ -217,7 +309,12 @@ candidate schema/semantic tests pass; no canonical write exists yet.
    approval-crash-to-admin/promotion and admin-crash-to-approval/promotion
    recovery, reverse-order refusal, deadlock absence, and concurrent-reader authority
    visibility, and clear only after valid new approved lineage.
-6. Return typed refusals without canonical, record, or lifecycle mutation.
+6. Remove production-visible fault injection. Compile module-private injection
+   traits/constructors/fail points only under `#[cfg(test)]`; expose no feature,
+   public symbol, CLI/compiler option, environment variable, or DTO control.
+   Prove every persistence boundary through the private harness and prove
+   rustdoc/public API/all-features production surfaces contain no hook.
+7. Return typed refusals without canonical, record, or lifecycle mutation.
 
 **Checkpoint:** authority, stale-state, atomicity, recovery, lifecycle, and
 fail-closed matrices pass.
@@ -325,6 +422,10 @@ classifications agree with an exact subject manifest.
 | agent inference becomes constitutional authority | typed source kinds, normative declaration rule, candidate/approval separation, no nested model |
 | immutable records become competing truth | candidate/content store separate from canonical path; promotion is sole authority transition |
 | crash leaves physical partial files | shared-lock readers expose only a matching committed journal; total observed-state rollback/roll-forward and exhaustive fault injection |
+| validation identity becomes cyclic | candidate `1.2` subject identity precedes the engine result; the final candidate alone points to that result |
+| stale or transplanted validation authority promotes | exact one-result cross-record binding plus full promotion-time recomputation before mutation |
+| recovery destroys mismatch evidence | every mismatch preserves the complete pending journal and blocks without mutation |
+| test fail points become production API | module-private `#[cfg(test)]` harness and public-API/all-features absence proof |
 | renderer or Markdown becomes authority | typed canonical-only input, in-memory output, zero persistent write, conflicting-legacy probes |
 | trigger regenerates unrelated policy | exact non-empty coverage mappings, append-only reassessment, approval required for any new promotion |
 | sibling/pipeline scope expands | exact carrier list, regression goldens, stop instead of dual truth or cleanup |

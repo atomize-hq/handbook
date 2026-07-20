@@ -1465,6 +1465,96 @@ Record finalization and lineage are strictly append-only:
 
 Required conformance scenarios include: an empty `target_paths` item refuses in v1; one trigger reopens only its non-empty mapped coverage set; unknown/unmapped triggers refuse; creating a candidate/approval/promotion leaves prior record bytes and fingerprints unchanged; reordered or stale lineage refuses; rejected/wrong-authority approval cannot promote; changing a parent/repository profile layer while retaining the selected `profile_ref` invalidates the old `resolved_profile_fingerprint`; and current candidate/target/fully-resolved-profile/definition fingerprints are required at compare-and-write.
 
+### HCM-2.2 additive lifecycle-validation authority repair
+
+The HCM-2.2 checkpoint does not change the base `1.0` record shapes above or
+the reviewed candidate `1.1` fingerprint semantics. Its repaired selected path
+adds `handbook.artifact-candidate` version `1.2` and
+`handbook.lifecycle-validation-result` version `1.0`. Candidate `1.0`/`1.1`
+records and approvals remain immutable historical evidence and are not read by
+the repaired selected path. They are never rewritten or silently migrated;
+new `1.2` candidates are re-authored/re-evaluated and require new approvals over
+their new final fingerprints. No implicit dual-read path exists.
+
+The exact candidate `1.2` subject is the closed object containing
+`schema_id`, `schema_version`, `intake_record_ref`, `target_kind_ref`,
+`target_instance_id`, `target_schema_ref`, `profile_ref`,
+`resolved_profile_fingerprint`, `normalized_content_ref`, ordered
+`field_sources`, ordered `unresolved_coverage_ids`, `promotion_eligibility`,
+`required_approval_policy_ref`, and `basis_artifact_fingerprint`.
+`candidate_subject_fingerprint` is RFC 8785/SHA-256 over that complete object
+and excludes exactly `candidate_id`, `candidate_fingerprint`,
+`candidate_subject_fingerprint`, and `validation_result_refs`. It is only a
+validation-binding identity: it is neither final candidate identity nor
+canonical authority.
+
+The engine then constructs and persists exactly one closed lifecycle-validation
+result against the subject fingerprint. Only after its content-addressed ref
+exists does the engine compute final candidate identity over the complete
+subject plus `candidate_subject_fingerprint` and the one-element
+`validation_result_refs`; final identity excludes exactly `candidate_id` and
+`candidate_fingerprint`. Human approval binds that final fingerprint. The
+acyclic order is subject -> subject fingerprint -> validation result/ref ->
+final candidate fingerprint/ID -> human approval -> promotion.
+
+The exact result schema and create/amend vectors are
+[`slices/HCM-2.2/contracts/lifecycle-validation-result-1.0.0.schema.json`](slices/HCM-2.2/contracts/lifecycle-validation-result-1.0.0.schema.json)
+and
+[`slices/HCM-2.2/contracts/authority-repair-runtime-vectors-v1.0.json`](slices/HCM-2.2/contracts/authority-repair-runtime-vectors-v1.0.json).
+Its identity preimage includes candidate subject, intake and normalized-content
+lineage, create-only/current canonical basis, selected profile and the complete
+ordered thirteen definition bindings, lifecycle policy, recovered head/state,
+complete ordered active observations, complete ordered reopened coverage, and
+literal `passed`. It excludes exactly result ID/fingerprint and the
+engine-authored audit-only `validated_at_utc`. Existing equal replay returns the
+original timestamp; same-ID unequal bytes refuse.
+
+The result ref is exactly
+`lifecycle-validation-results/lifecycle-validation-result_<64 lowercase
+hex>.json`, stored no-follow beneath
+`.handbook/state/lifecycle-validation-results/`. Complete persisted bytes are
+bounded to 262,144 bytes, canonical JCS plus LF, installed create-new by
+rename-no-replace, fsynced, and reusable only on exact byte equality. The store
+never overwrites or deletes a result. Active observations are the exact unique
+current set in the current committed lifecycle-transition head's retained
+event-precedence/event-fingerprint order, never re-sorted by ref during
+validation; reopened coverage is the exact unique union in intake-definition
+order. The candidate cardinality is exactly one result ref.
+
+Promotion recovers under promotion -> registry -> lifecycle locks, then before
+any new transaction-owned mutation revalidates the candidate subject/result,
+intake/content bytes, create/current canonical basis, current profile and all
+definition producers, lifecycle policy/head/state, complete observation and
+reopened-coverage sets, and new approvals. Missing, forged, stale, duplicate,
+reordered, incomplete, or excess authority refuses before mutation. Caller-
+authored validation results, refs, status, timestamps, definition bindings, and
+lifecycle observations are never authority.
+
+The repaired promotion journal uses closed intent
+`handbook.charter-promotion-transaction-intent` version `1.2`. Its exact schema
+and amendment fingerprint/document/marker vector are
+[`slices/HCM-2.2/contracts/promotion-transaction-intent-1.2.0.schema.json`](slices/HCM-2.2/contracts/promotion-transaction-intent-1.2.0.schema.json)
+and
+[`slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json`](slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json).
+Intent identity excludes exactly its own fingerprint; the persisted document is
+complete JCS plus LF, and every marker hashes those exact bytes. A verified
+complete intent is atomically renamed from non-authoritative sibling scratch so
+the pending namespace exposes only empty or self-verifying complete intent,
+never partial intent bytes. The literal nested fields, fifteen-name pending
+grammar, atomic marker publication, ordered writer boundaries, terminal file
+sets, independent old/new/record-stage axes, suffix-disjoint finite crash-state
+domain, amendment snapshot completion, ordered `R0`-`R9` crash-recoverable
+rollback cleanup/marker/terminalization, symmetric committed/rolled-back
+rename-no-replace collision refusal and parent-fsync replay, and exhaustive recovery partition are in
+[`slices/HCM-2.2/SPEC.md`](slices/HCM-2.2/SPEC.md).
+
+Every canonical/final-record/intent/stage/path/type/marker/currentness mismatch
+preserves the entire journal and refuses without mutation. Exact rollback
+terminalizes retained intent/old-snapshot evidence as `.rolled-back`; exact
+roll-forward terminalizes it as `.committed`; final content-addressed records
+are never removed. Production builds expose no fault-injection API or feature:
+injection exists only in a module-private `#[cfg(test)]` harness.
+
 ## Charter intake and canonical contract
 
 `CharterIntakeDefinition` is the first rich first-party intake definition. Its coverage must account for the historical domains of project shape, delivery constraints, operational reality, posture and delivery implications, risk domains, engineering dimensions, exceptions/governance, debt, and decision records. Research/design may revise questions and branches, but omissions are explicit decisions. This intake contract does not select defaults; the completed HCM-0.6 decision record and exact tables above are the sole shipped kind/instance authority.

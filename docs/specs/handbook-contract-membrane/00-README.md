@@ -1,10 +1,10 @@
 # Handbook Contract Membrane Control Pack
 
-**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4 and the bounded HCM-2.1 Project Context canonical-YAML pilot have landed through separately reviewed implementation and closeout commits; HCM-2.2 is stopped at an authority boundary with a non-authoritative implementation checkpoint
+**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4 and the bounded HCM-2.1 Project Context canonical-YAML pilot have landed through separately reviewed implementation and closeout commits; HCM-2.2 is reopened at `HCM-2.2-ESC-001`, with additive Option 1 authority repair selected for planning and the prior implementation retained only as a non-authoritative checkpoint
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
-**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; HCM-2.2 requires an additive frozen-contract decision before implementation may resume, and HCM-2.3 and later slices remain unauthorized
+**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; the current HCM-2.2 authorization is documentation-only and may produce a reviewed planning handoff for a later implementation packet, but no Rust/implementation resumption occurs without that separate dispatch; HCM-2.3 and later slices remain unauthorized
 **Repo-truth snapshot:** 2026-07-20; re-check live code before every slice
 
 ## Purpose

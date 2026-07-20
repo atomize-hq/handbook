@@ -113,9 +113,16 @@ No lower proof level implies a higher one.
 
 ### `PR-009` — Charter questionnaire-shaped coverage and posture validation
 
-**Current evidence:** HCM-2.2 replaces the questionnaire-shaped precursor on the selected path with one versioned 16-coverage intake definition. Guided-adaptive, express, and agent-assisted acquisition produce the same schema-bound candidate; leaf-source provenance retains declarations, evidence, unknowns, contradictions, waivers, confidence, sensitivity, and approvals; promotion requires authorized immutable lineage; and the fixed renderer emits deterministic review Markdown only from approved canonical YAML.
+**Current evidence:** the HCM-2.2 checkpoint contains a versioned 16-coverage
+intake definition, three acquisition modes, detailed provenance, candidate/
+approval/promotion code, and a deterministic renderer, but fresh Review 2 found
+that its candidate and lifecycle-validation identities are cyclic. Option 1 now
+defines an acyclic additive planning repair; neither the checkpoint nor the
+planning contract is adopted selected-path runtime proof.
 
-**Classification:** `ContractCorrectAndProven` for the exact first-party Charter; not a generic custom-kind intake claim.
+**Classification:** `TargetOnly` for the exact first-party Charter. The
+checkpoint is non-authoritative implementation evidence and does not support a
+generic custom-kind intake claim.
 
 **Must preserve:** the semantic coverage and deterministic validation value unless a Phase 0 decision explicitly removes or replaces an item.
 
@@ -130,11 +137,11 @@ No lower proof level implies a higher one.
 | `PG-KIND-01` | a versioned `ArtifactKindDefinition` resolves a safe canonical schema, validation, optional intake, lifecycle, and projections independently from repository instance state | open; HCM-1.1 proves kind/schema resolution, HCM-1.4 proves selected-instance structural inspection through the bound kind in setup/doctor, and HCM-2.1 consumes the selected Project Context schema for canonical structural validation and deterministic rendering; semantic validation, intake, lifecycle, and Projection coverage remain open |
 | `PG-KIND-02` | repository-defined custom kind registers, passes meta-schema/structural validation, and exercises supplied intake coverage without a new Rust enum variant, executable hook, remote schema fetch, generated CLI command, or pre-Phase-3 generic projection engine | open; HCM-1.1 proves registration/local structural validation and HCM-1.4 proves custom-kind setup/doctor-compatible decision/inspection without enum or command changes, while supplied intake coverage remains open |
 | `PG-ARTIFACT-01` | a profile-selected `ArtifactInstanceDescriptor` binds a kind to path/label/requiredness/dependencies and participates in validation/doctor/flow | open program-wide; HCM-1.4 proves descriptor-owned path/role/requiredness/applicability/capability identity plus structural validation and doctor/setup participation, and HCM-2.1 proves content-authority/author/doctor/flow participation for exact instance `project_context`; remaining families and generic participation remain open |
-| `PG-INTAKE-01` | guided-adaptive, express, and agent-assisted acquisition use one intake definition and produce the same candidate schema while exposing missing coverage | closed for the exact first-party Charter by HCM-2.2 all-mode equivalence, installed-skill, and coverage-refusal proof; generic/custom-kind intake remains open under `PG-KIND-02` |
-| `PG-INTAKE-02` | intake provenance distinguishes user declarations, evidenced inference, defaults, unknowns, contradictions, waivers, and approvals; normative fields cannot be silently inferred into authority | closed for the exact first-party Charter by HCM-2.2 immutable lineage, leaf-source bijection, authority/source-kind, known-unknown, contradiction, waiver, and approval/promotion proof; no generic claim |
-| `PG-CHARTER-01` | `CharterIntakeDefinition` covers approved questionnaire domains, promotes only an approved schema-valid candidate to canonical Charter YAML, and deterministically renders Markdown as a renderer-derived human-review view | closed for the exact first-party Charter by HCM-2.2 definition closure, candidate/approval/promotion/lifecycle, canonical-byte, deterministic-renderer, and real-product-path proof |
+| `PG-INTAKE-01` | guided-adaptive, express, and agent-assisted acquisition use one intake definition and produce the same candidate schema while exposing missing coverage | open; the HCM-2.2 checkpoint is non-authoritative and Option 1 is planning only; later repaired implementation must prove all-mode equivalence, installed-skill behavior, and coverage refusal; generic/custom-kind intake also remains open under `PG-KIND-02` |
+| `PG-INTAKE-02` | intake provenance distinguishes user declarations, evidenced inference, defaults, unknowns, contradictions, waivers, and approvals; normative fields cannot be silently inferred into authority | open; the HCM-2.2 checkpoint's lineage/promotion proof is non-authoritative and later repaired implementation must prove the complete acyclic result/currentness chain; no generic claim |
+| `PG-CHARTER-01` | `CharterIntakeDefinition` covers approved questionnaire domains, promotes only an approved schema-valid candidate to canonical Charter YAML, and deterministically renders Markdown as a renderer-derived human-review view | open; the HCM-2.2 checkpoint failed fresh Review 2, and the Option 1 planning repair requires later complete implementation and fresh CLEAN review |
 | `PG-YAML-01` | one artifact family is canonically YAML, structurally validated, and deterministically rendered | closed for exact shipped instance `project_context` by HCM-2.1; no program-wide or sibling-family claim |
-| `PG-YAML-02` | no dual editable Markdown/YAML truth remains for converted families | open program-wide; HCM-2.1 and HCM-2.2 prove no editable or selected legacy Markdown truth for exact Project Context and Charter families, while unconverted sibling and frozen pipeline surfaces remain |
+| `PG-YAML-02` | no dual editable Markdown/YAML truth remains for converted families | open program-wide; HCM-2.1 proves no editable or selected legacy Markdown truth for exact Project Context, while Charter and unconverted sibling/frozen pipeline surfaces remain open |
 
 | `PG-VOCAB-01` | lexical and structural conflation render correctly without losing stable role resolution | open |
 | `PG-RES-01` | six-dimension envelope validates inheritance, authority, memory, and validation horizons | open |
@@ -163,10 +170,11 @@ No lower proof level implies a higher one.
 | `PG-ORCH-02` | every current internal dispatch declares execution target, parent ID, role, replayable subject manifest/fingerprint, fresh-context requirement, closeout owner, ordered required-skills chain beginning with `using-agent-skills`, and complete structured return contract; unavailable mandatory delegation fails closed | proven by HCM-0.8 current-schema dispatch validation and fail-closed orchestration self-tests |
 | `PG-CATALOG-01` | proposed proof that the frozen HCM-0.4 `05` payload was mechanically decomposed without semantic delta | retired without proof; HCM-0.9 was abandoned after terminal Redesign Review 2 was not CLEAN, no decomposition occurred, and the monolith remains canonical |
 
-The completed bounded HCM-2.2 implementation at
-[`slices/HCM-2.2/`](slices/HCM-2.2/SPEC.md) supplies the exact first-party
-Charter proof that closes `PG-INTAKE-01`, `PG-INTAKE-02`, and `PG-CHARTER-01`
-only for that family. It grants no implementation authority for HCM-2.3.
+The HCM-2.2 checkpoint at
+[`slices/HCM-2.2/`](slices/HCM-2.2/SPEC.md) is non-authoritative evidence. Its
+Option 1 repair is a planning subject only, so `PG-INTAKE-01`, `PG-INTAKE-02`,
+and `PG-CHARTER-01` remain open. It grants no implementation authority for
+HCM-2.3.
 
 ## Greenfield deletion gates
 
@@ -176,7 +184,7 @@ Temporary scaffolding may be introduced only when a row is added here first.
 |---|---|---|---|
 | `BR-SUB-CLI-01` | let Substrate consume the versioned Handbook JSON protocol before the permanent published-Rust boundary is available | may enter the normal path only in HCM-6.1 after `PG-JSON-01`; remains isolated and replaceable until HCM-6.3 | `PG-PUBLISH-01` and `PG-SUB-RUST-01` pass for the replacing exact API/seam; the normal Substrate path no longer spawns/parses the Handbook CLI; bridge-specific dependencies/config/tests are removed; standalone Handbook CLI remains unaffected |
 | `BR-HCM-2-PILOT-FLOW-01` | let the one-family HCM-2.1 flow cutover consume selected canonical Project Context YAML and its in-memory fixed renderer while unconverted Charter, Environment Inventory content authority, and Feature Spec sources remain on the frozen fixed family; Environment Inventory receives only the packet's selected-YAML reference cutover | active only for exact selected instance `project_context`; it does not read or translate legacy Project Context Markdown and must be deleted no later than HCM-2.4 | all shipped families consumed by flow use profile-selected canonical structured truth; the mixed fixed/selected adapter, legacy Project Context output tag exception, and bridge-specific tests are removed; HCM-2.4 proof shows no fixed family/path selector or Project Context Markdown influence remains |
-| `BR-HCM-2-CHARTER-FLOW-01` | let the HCM-2.2 cutover add selected canonical Charter YAML and its in-memory fixed renderer to flow while Environment Inventory content and Feature Spec remain on the frozen fixed family | active only for exact selected instance `project_authority`; reviewed HCM-2.2 proof shows no legacy Charter Markdown/input influence and the bridge must be deleted no later than HCM-2.4 | HCM-2.4 moves all shipped families to selected structured truth and removes this adapter and its tests |
+| `BR-HCM-2-CHARTER-FLOW-01` | proposed bridge for a later repaired HCM-2.2 cutover to add selected canonical Charter YAML and its in-memory fixed renderer to flow while Environment Inventory content and Feature Spec remain on the frozen fixed family | planned only and not active; the non-authoritative checkpoint does not place it on the selected path; if later admitted after complete repaired implementation proof, it is limited to exact instance `project_authority` and must be deleted no later than HCM-2.4 | HCM-2.4 moves all shipped families to selected structured truth and removes this adapter and its tests |
 
 There is no approved user migration tool, legacy importer, dual-read mode, or compatibility profile.
 
@@ -935,6 +943,14 @@ The bounded HCM-2.2 implementation selected at entry HEAD
 rejected the exact implementation subject, and the bounded lifecycle-validation
 remediation proved an authority-boundary blocker recorded in
 [`slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md`](slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md).
+Escalation `HCM-2.2-ESC-001` selects Option 1 for a documentation-only repair:
+candidate `1.2` introduces a validation-only subject fingerprint, lifecycle-
+validation-result `1.0` binds that pre-final identity, the final candidate then
+binds exactly one result, and new human approvals bind the new final
+fingerprint. The same planning repair closes promotion intent/recovery,
+preserves mismatch evidence, and confines fault injection to a private test
+harness. Candidate `1.0`/`1.1`, approvals, released records, and checkpoint code
+remain unchanged evidence; implementation requires a separate later dispatch.
 The following remain exit claims rather than closed proof:
 
 - every released definition byte remains unchanged; the additive `1.1.0`
