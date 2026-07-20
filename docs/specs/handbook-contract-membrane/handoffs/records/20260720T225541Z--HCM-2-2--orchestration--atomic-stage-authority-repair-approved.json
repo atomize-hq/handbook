@@ -1,0 +1,353 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.2",
+  "handoff_id": "20260720T225541Z--HCM-2-2--orchestration--atomic-stage-authority-repair-approved",
+  "created_at_utc": "2026-07-20T22:55:41Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "orchestration_id": "20260720T195957Z--HCM-2-2--atomic-stage-authority-repair-orchestration",
+  "source_handoff_ids": [
+    "20260720T160434Z--HCM-2-2--orchestration--authority-repair-planning-approved"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-20T22:55:41Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T223832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-7.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "atomic-stage-authority-repair-review-1",
+      "dispatch_id": "20260720T202209Z--HCM-2-2--atomic-stage-authority-repair-planning-review-1",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T202209Z--HCM-2-2--atomic-stage-authority-repair-planning-review-1.json",
+      "dispatch_fingerprint": "sha256:63d9c7a13ae62087840b6079914cac046bf79468632e1d193bcd5426ea4ba7ac",
+      "role": "review",
+      "agent_id": "/root/hcm_2_2_atomic_stage_review_1",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "planning-and-task-breakdown", "api-and-interface-design", "security-and-hardening", "debugging-and-error-recovery", "documentation-and-adrs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:2fab38a467cb4831fe0a780430b245db0636d537a3c573ba8677f5b071a140f8",
+      "result_subject_fingerprint": "sha256:2fab38a467cb4831fe0a780430b245db0636d537a3c573ba8677f5b071a140f8",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM-2.2-ASAR-PR1-001", "HCM-2.2-ASAR-PR1-002", "HCM-2.2-ASAR-PR1-003"],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T202209Z--HCM-2-2--atomic-stage-authority-repair-planning-review-1.json"
+      ]
+    },
+    {
+      "run_id": "atomic-stage-authority-repair-review-2",
+      "dispatch_id": "20260720T204719Z--HCM-2-2--atomic-stage-authority-repair-planning-review-2",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T204719Z--HCM-2-2--atomic-stage-authority-repair-planning-review-2.json",
+      "dispatch_fingerprint": "sha256:9a9ba597459f15d2d286e621dbd95f2c39545cf2399e6dadb1843eef7d3fc7d5",
+      "role": "review",
+      "agent_id": "/root/hcm_2_2_atomic_stage_review_2",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "planning-and-task-breakdown", "api-and-interface-design", "security-and-hardening", "debugging-and-error-recovery", "documentation-and-adrs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:34ac6911c66179f56e43adcc5603d049841f65aedcde9303a25e1719fd2eb1aa",
+      "result_subject_fingerprint": "sha256:34ac6911c66179f56e43adcc5603d049841f65aedcde9303a25e1719fd2eb1aa",
+      "review_round": 2,
+      "predecessor_run_id": "atomic-stage-authority-repair-review-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM-2.2-ASAR-PR2-001"],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T204719Z--HCM-2-2--atomic-stage-authority-repair-planning-review-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T204459Z--atomic-stage-review-1-remediation-proof.md"
+      ]
+    },
+    {
+      "run_id": "atomic-stage-authority-repair-review-3",
+      "dispatch_id": "20260720T210619Z--HCM-2-2--atomic-stage-authority-repair-planning-review-3",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T210619Z--HCM-2-2--atomic-stage-authority-repair-planning-review-3.json",
+      "dispatch_fingerprint": "sha256:10ec3824237a6e905886817633cba3c796d6fbbe77f6712f4e105868be2c2c42",
+      "role": "review",
+      "agent_id": "/root/hcm_2_2_atomic_stage_review_3",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "planning-and-task-breakdown", "api-and-interface-design", "security-and-hardening", "debugging-and-error-recovery", "documentation-and-adrs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:029e3d5bb50102f26ca11bf3729a112cbf265f021a139fa109aaf2d91498f12e",
+      "result_subject_fingerprint": "sha256:029e3d5bb50102f26ca11bf3729a112cbf265f021a139fa109aaf2d91498f12e",
+      "review_round": 3,
+      "predecessor_run_id": "atomic-stage-authority-repair-review-2",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM-2.2-ASAR-PR3-001"],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T210619Z--HCM-2-2--atomic-stage-authority-repair-planning-review-3.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T210452Z--atomic-stage-review-2-remediation-proof.md"
+      ]
+    },
+    {
+      "run_id": "atomic-stage-authority-repair-review-4",
+      "dispatch_id": "20260720T212832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-4",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T212832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-4.json",
+      "dispatch_fingerprint": "sha256:8e199cb08ccf40675d1746fa3ba0e54fe67f3e6252192681b498c947009257e9",
+      "role": "review",
+      "agent_id": "/root/hcm_2_2_atomic_stage_review_4",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "planning-and-task-breakdown", "api-and-interface-design", "security-and-hardening", "debugging-and-error-recovery", "documentation-and-adrs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:d4a8560f3bf48c3d4848be5c9ade40964a1a551f5eb4bcd8bef24a2bdaa61374",
+      "result_subject_fingerprint": "sha256:d4a8560f3bf48c3d4848be5c9ade40964a1a551f5eb4bcd8bef24a2bdaa61374",
+      "review_round": 4,
+      "predecessor_run_id": "atomic-stage-authority-repair-review-3",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM-2.2-ASAR-PR4-001", "HCM-2.2-ASAR-PR4-002"],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T212832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-4.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T212648Z--atomic-stage-review-3-remediation-proof.md"
+      ]
+    },
+    {
+      "run_id": "atomic-stage-authority-repair-review-5",
+      "dispatch_id": "20260720T214812Z--HCM-2-2--atomic-stage-authority-repair-planning-review-5",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T214812Z--HCM-2-2--atomic-stage-authority-repair-planning-review-5.json",
+      "dispatch_fingerprint": "sha256:6fbcf7b5f0c4147bdfc8f3d2ea6fcdeef0847f4fdab347a4ec49505baef7b130",
+      "role": "review",
+      "agent_id": "/root/hcm_2_2_atomic_stage_review_5",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "planning-and-task-breakdown", "api-and-interface-design", "security-and-hardening", "debugging-and-error-recovery", "documentation-and-adrs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:20997419cc3a8f789af1e974740930da3ec6ee9fa7ef98f903d1d74c1f18a2f3",
+      "result_subject_fingerprint": "sha256:20997419cc3a8f789af1e974740930da3ec6ee9fa7ef98f903d1d74c1f18a2f3",
+      "review_round": 5,
+      "predecessor_run_id": "atomic-stage-authority-repair-review-4",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM-2.2-ASAR-PR5-001", "HCM-2.2-ASAR-PR5-002"],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T214812Z--HCM-2-2--atomic-stage-authority-repair-planning-review-5.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T214650Z--atomic-stage-review-4-remediation-proof.md"
+      ]
+    },
+    {
+      "run_id": "atomic-stage-authority-repair-review-6",
+      "dispatch_id": "20260720T221650Z--HCM-2-2--atomic-stage-authority-repair-planning-review-6",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T221650Z--HCM-2-2--atomic-stage-authority-repair-planning-review-6.json",
+      "dispatch_fingerprint": "sha256:7b590efaeaa17aa161995f29ea05dd5da3c136017899f4e0c9a2baadc0abfbd5",
+      "role": "review",
+      "agent_id": "/root/hcm_2_2_atomic_stage_review_6",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "planning-and-task-breakdown", "api-and-interface-design", "security-and-hardening", "debugging-and-error-recovery", "documentation-and-adrs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:01f29b0e2b3241393bda1a767e6f508674454b1133c6c79ddea966a041908ead",
+      "result_subject_fingerprint": "sha256:01f29b0e2b3241393bda1a767e6f508674454b1133c6c79ddea966a041908ead",
+      "review_round": 6,
+      "predecessor_run_id": "atomic-stage-authority-repair-review-5",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM-2.2-ASAR-PR6-001"],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T221650Z--HCM-2-2--atomic-stage-authority-repair-planning-review-6.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T221032Z--atomic-stage-review-5-remediation-proof.md"
+      ]
+    },
+    {
+      "run_id": "atomic-stage-authority-repair-review-7",
+      "dispatch_id": "20260720T223832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-7",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T223832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-7.json",
+      "dispatch_fingerprint": "sha256:46113497ff3d961e6be506113d24c708515894f61ddb275c336968f3f89d1e4b",
+      "role": "review",
+      "agent_id": "/root/hcm_2_2_atomic_stage_review_7",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "planning-and-task-breakdown", "api-and-interface-design", "security-and-hardening", "debugging-and-error-recovery", "documentation-and-adrs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:b945dab2c5b61401af4b7289b9d5af063f4066851db40cb342d1885e4934102c",
+      "result_subject_fingerprint": "sha256:b945dab2c5b61401af4b7289b9d5af063f4066851db40cb342d1885e4934102c",
+      "review_round": 7,
+      "predecessor_run_id": "atomic-stage-authority-repair-review-6",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T223832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-7.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T223544Z--atomic-stage-review-6-remediation-proof.md"
+      ]
+    }
+  ],
+  "remediations": [
+    {"remediation_id": "atomic-stage-authority-repair-remediation-1", "finding_run_id": "atomic-stage-authority-repair-review-1", "owner": "parent_orchestrator", "delegated_run_id": null, "re_review_run_id": "atomic-stage-authority-repair-review-2", "status": "completed", "result_subject_fingerprint": "sha256:34ac6911c66179f56e43adcc5603d049841f65aedcde9303a25e1719fd2eb1aa", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T204459Z--atomic-stage-review-1-remediation-proof.md"]},
+    {"remediation_id": "atomic-stage-authority-repair-remediation-2", "finding_run_id": "atomic-stage-authority-repair-review-2", "owner": "parent_orchestrator", "delegated_run_id": null, "re_review_run_id": "atomic-stage-authority-repair-review-3", "status": "completed", "result_subject_fingerprint": "sha256:029e3d5bb50102f26ca11bf3729a112cbf265f021a139fa109aaf2d91498f12e", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T210452Z--atomic-stage-review-2-remediation-proof.md"]},
+    {"remediation_id": "atomic-stage-authority-repair-remediation-3", "finding_run_id": "atomic-stage-authority-repair-review-3", "owner": "parent_orchestrator", "delegated_run_id": null, "re_review_run_id": "atomic-stage-authority-repair-review-4", "status": "completed", "result_subject_fingerprint": "sha256:d4a8560f3bf48c3d4848be5c9ade40964a1a551f5eb4bcd8bef24a2bdaa61374", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T212648Z--atomic-stage-review-3-remediation-proof.md"]},
+    {"remediation_id": "atomic-stage-authority-repair-remediation-4", "finding_run_id": "atomic-stage-authority-repair-review-4", "owner": "parent_orchestrator", "delegated_run_id": null, "re_review_run_id": "atomic-stage-authority-repair-review-5", "status": "completed", "result_subject_fingerprint": "sha256:20997419cc3a8f789af1e974740930da3ec6ee9fa7ef98f903d1d74c1f18a2f3", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T214650Z--atomic-stage-review-4-remediation-proof.md"]},
+    {"remediation_id": "atomic-stage-authority-repair-remediation-5", "finding_run_id": "atomic-stage-authority-repair-review-5", "owner": "parent_orchestrator", "delegated_run_id": null, "re_review_run_id": "atomic-stage-authority-repair-review-6", "status": "completed", "result_subject_fingerprint": "sha256:01f29b0e2b3241393bda1a767e6f508674454b1133c6c79ddea966a041908ead", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T221032Z--atomic-stage-review-5-remediation-proof.md"]},
+    {"remediation_id": "atomic-stage-authority-repair-remediation-6", "finding_run_id": "atomic-stage-authority-repair-review-6", "owner": "parent_orchestrator", "delegated_run_id": null, "re_review_run_id": "atomic-stage-authority-repair-review-7", "status": "completed", "result_subject_fingerprint": "sha256:b945dab2c5b61401af4b7289b9d5af063f4066851db40cb342d1885e4934102c", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T223544Z--atomic-stage-review-6-remediation-proof.md"]}
+  ],
+  "reviewed_state": {
+    "baseline_head": "df5acae4aabd93940786821ec18044b1e0bcf0e6",
+    "subject_fingerprint": "sha256:b945dab2c5b61401af4b7289b9d5af063f4066851db40cb342d1885e4934102c",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T201520Z--atomic-stage-authority-repair-planning-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T204459Z--atomic-stage-review-1-remediation-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T210452Z--atomic-stage-review-2-remediation-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T212648Z--atomic-stage-review-3-remediation-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T214650Z--atomic-stage-review-4-remediation-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T221032Z--atomic-stage-review-5-remediation-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T223544Z--atomic-stage-review-6-remediation-proof.md"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T223832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-7.json"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.2-ESC-002_atomic_stage_authority_repair_completed",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "review_clean_documentation_closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": ["handbook.artifact-kind.project-authority@1.1.0"],
+    "artifact_instance_refs": ["project_authority"],
+    "intake_definition_refs": ["handbook.intake.charter@1.0.0"],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md"
+  },
+  "objective": "Complete the user-selected documentation-only HCM-2.2-ESC-002 atomic whole-file scratch-publication authority repair, preserve the dirty implementation as verified non-authoritative evidence, obtain fresh complete-subject review until CLEAN, land the reviewed documentation in one primary commit, close mechanically in a second commit, and stop without resuming Rust or HCM-2.3.",
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260720T160434Z--HCM-2-2--orchestration--authority-repair-planning-approved.json", "sections": ["entire review-clean Option 1 planning handoff"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sections": ["Status and authority", "Promotion transaction intent 1.2 and recovery", "Promotion transaction protocol", "Stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json", "sections": ["intent_contract", "writer_state_model", "negative_vectors"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sections": ["R-1 — Atomic whole-file stage authority repair (current authorized scope)", "P10 — Commit and close parent orchestration"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "sections": ["Atomic whole-file stage authority repair", "Promotion recovery, tests, and proof obligations"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T223832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-7.json", "sections": ["complete exact 27-path CLEAN subject"]},
+    {"path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "sections": ["Two-commit true-stop closeout", "Required validation"]}
+  ],
+  "repo_state": {
+    "branch": "feat/hcm-2-2-atomic-stage-authority-repair",
+    "head": "df5acae4aabd93940786821ec18044b1e0bcf0e6",
+    "dirty": false,
+    "changed_paths": []
+  },
+  "work_completed": [
+    "Preserved the 13-file dirty implementation at entry HEAD 4e164061e18da17cc24d576a26800ab1ecce69c2 in a verified external archive with SHA-256 29a7863787dc78902a2eb1dd948a2fbc9830b94a85fead40283a8c54d603cb9e and left the original worktree unchanged.",
+    "Kept promotion intent 1.2 byte-for-byte unchanged and froze whole-file publication from purpose-typed non-authoritative sibling scratch into absent-or-exact authoritative pending stages.",
+    "Froze S0-S11 publication, W0-W15 writer, R0-R9 recovery, collision, terminal-fsync replay, mismatch preservation, transaction-keyed path, and exhaustive 36 plus 8 fault grammar.",
+    "Completed seven different fresh isolated complete-subject reviews; Reviews 1-6 returned findings accepted without waiver and repaired by the parent, and Review 7 returned CLEAN.",
+    "Landed only the reviewed documentation/control-pack subject in primary commit df5acae4aabd93940786821ec18044b1e0bcf0e6; no Rust, Cargo, checkpoint, immutable prior evidence, or HCM-2.3 work changed."
+  ],
+  "deliverables": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "status": "completed", "summary": "Review-clean atomic whole-file scratch publication and exact recovery authority."},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json", "status": "completed", "summary": "Machine-closed S0-S11, terminal destination, collision, path, fsync, and negative grammar with unchanged intent 1.2 schema identity."},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/research/promotion-recovery-authentic-byte-source-options.md", "status": "completed", "summary": "Authentic-byte-source analysis selecting atomic whole-file scratch publication."},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "status": "completed", "summary": "Documentation-only repair and later fresh-selection boundary."},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "status": "completed", "summary": "Accurate repair, review, and stopped-implementation checklist state."},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T223832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-7.json", "status": "completed", "summary": "Exact 27-path final CLEAN review subject."},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260720T225541Z--HCM-2-2--orchestration--atomic-stage-authority-repair-approved.json", "status": "completed", "summary": "Parent-owned v1.2 documentation-repair closeout bound to the primary commit and CLEAN review."}
+  ],
+  "decisions": [
+    {"decision_id": "HCM-2.2-ESC-002-D1", "summary": "Authoritative new-output pending stages use atomic whole-file publication from purpose-typed sibling scratch.", "authority_effect": "canonical.new, promotion-record.new, and lifecycle-transition.new are absent or exact; partial bytes remain exclusively non-authoritative scratch and never become recovery authority.", "refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json"]},
+    {"decision_id": "HCM-2.2-ESC-002-D2", "summary": "Promotion transaction intent 1.2 data schema remains unchanged.", "authority_effect": "No additive version, fallback, dual read, or relaxed parser was required; the exact 16,019-byte schema and all intent identities remain frozen.", "refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-1.2.0.schema.json", "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json"]},
+    {"decision_id": "HCM-2.2-ESC-002-D3", "summary": "The preserved dirty implementation and external archive remain checkpoint evidence only.", "authority_effect": "No snapshot byte is imported, committed, discarded, or treated as correctness proof; later implementation must reconcile selectively against this reviewed authority.", "refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T201520Z--atomic-stage-authority-repair-planning-proof.md"]},
+    {"decision_id": "HCM-2.2-ESC-002-D4", "summary": "This closeout does not resume Rust implementation or authorize HCM-2.3.", "authority_effect": "A later bounded HCM-2.2 implementation requires fresh explicit user selection of this completed authority; HCM-2.3 remains prohibited.", "refs": ["git:df5acae4aabd93940786821ec18044b1e0bcf0e6", "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md"]}
+  ],
+  "findings": [
+    {"finding_id": "HCM-2.2-ASAR-PR1-001", "classification": "cross_document_repair", "severity": "major", "summary": "Review 1 required whole-file atomic publication for intent staging instead of a prohibited pending intent temp.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T204459Z--atomic-stage-review-1-remediation-proof.md"]},
+    {"finding_id": "HCM-2.2-ASAR-PR1-002", "classification": "proof_gap", "severity": "major", "summary": "Review 1 required S0 retained-byte acquisition in the machine fault enumeration.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T204459Z--atomic-stage-review-1-remediation-proof.md"]},
+    {"finding_id": "HCM-2.2-ASAR-PR1-003", "classification": "cross_document_repair", "severity": "warning", "summary": "Review 1 corrected research path names.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T204459Z--atomic-stage-review-1-remediation-proof.md"]},
+    {"finding_id": "HCM-2.2-ASAR-PR2-001", "classification": "cross_document_repair", "severity": "major", "summary": "Review 2 required every pending journal path to use transaction_id rather than promotion_id.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T210452Z--atomic-stage-review-2-remediation-proof.md"]},
+    {"finding_id": "HCM-2.2-ASAR-PR3-001", "classification": "proof_gap", "severity": "major", "summary": "Review 3 required pending-directory fsync replay and exact terminal-payload revalidation before terminal directory rename.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T212648Z--atomic-stage-review-3-remediation-proof.md"]},
+    {"finding_id": "HCM-2.2-ASAR-PR4-001", "classification": "proof_gap", "severity": "major", "summary": "Review 4 required symmetric four-state rollback-destination collision coverage.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T214650Z--atomic-stage-review-4-remediation-proof.md"]},
+    {"finding_id": "HCM-2.2-ASAR-PR4-002", "classification": "cross_document_repair", "severity": "warning", "summary": "Review 4 required immutable Git-object support for historical recovery claims.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T214650Z--atomic-stage-review-4-remediation-proof.md"]},
+    {"finding_id": "HCM-2.2-ASAR-PR5-001", "classification": "cross_document_repair", "severity": "warning", "summary": "Review 5 required exact machine-vector terminal destination labels across all mutable normative surfaces.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T221032Z--atomic-stage-review-5-remediation-proof.md"]},
+    {"finding_id": "HCM-2.2-ASAR-PR5-002", "classification": "cross_document_repair", "severity": "warning", "summary": "Review 5 required lifecycle-authority history to cite immutable pre-repair Git objects rather than repaired mutable paths.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T221032Z--atomic-stage-review-5-remediation-proof.md"]},
+    {"finding_id": "HCM-2.2-ASAR-PR6-001", "classification": "cross_document_repair", "severity": "warning", "summary": "Review 6 required review-clean to classify the planning handoff rather than the stopped implementation.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T223544Z--atomic-stage-review-6-remediation-proof.md"]}
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {"command": "strict JSON/JSONL parse and Draft 2020-12 schema wall", "status": "passed", "evidence_ref": "36 parse units and all 13 HCM-2.2 schemas passed."},
+    {"command": "candidate/result/final and intent identity replay", "status": "passed", "evidence_ref": "Intent schema 16,019 bytes, persisted intent 7,607 bytes, and marker 72 bytes reproduced exactly."},
+    {"command": "W0-W15, R0-R9, S0-S11, collision, and fault closure", "status": "passed", "evidence_ref": "15 owned names, 17 axes, 36 scratch pairs, and 8 terminal-marker pairs passed."},
+    {"command": "repository-relative Markdown and immutable Git-object source replay", "status": "passed", "evidence_ref": "108 final-subject links and pinned db503f7a/cfd954c3 history passed before final review."},
+    {"command": "validate_handoffs.py plus both required self-tests", "status": "passed", "evidence_ref": "All three validator modes passed before primary commit and will be replayed for closeout."},
+    {"command": "external implementation snapshot archive and extracted/live hash replay", "status": "passed", "evidence_ref": "Archive SHA-256 and all 13 file hashes remained exact; original HEAD/status and zero deletions were unchanged."},
+    {"command": "scope, secret, machine-path, immutable-history, and whitespace checks", "status": "passed", "evidence_ref": "Documentation-only scope passed with no Rust/Cargo or pre-existing immutable evidence mutation."},
+    {"command": "npx gitnexus detect-changes --scope staged -r handbook", "status": "passed", "evidence_ref": "25 documentation files, 56 symbols, 0 affected processes, LOW risk."},
+    {"command": "fresh complete-subject Review 7", "status": "passed", "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260720T223832Z--HCM-2-2--atomic-stage-authority-repair-planning-review-7.json"},
+    {"command": "primary reviewed documentation commit", "status": "passed", "evidence_ref": "git:df5acae4aabd93940786821ec18044b1e0bcf0e6"}
+  ],
+  "pack_updates": [
+    {"path": "docs/specs/handbook-contract-membrane/00-README.md", "sections": ["HCM phase status"], "reason": "Record the reopened, documentation-repaired HCM-2.2 state.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md", "sections": ["Charter authority seam"], "reason": "Record atomic publication and stopped implementation boundary.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md", "sections": ["HCM-2.2"], "reason": "Record repaired planning authority without slice completion.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sections": ["HCM-2.2 additive lifecycle-validation authority repair"], "reason": "Freeze the exact repaired persistence and recovery contract.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sections": ["HCM-2.2 constitutional-root implementation proof gate"], "reason": "Keep implementation gates open while recording review-clean documentation authority.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sections": ["Status and authority", "Promotion transaction intent 1.2 and recovery"], "reason": "Replace impossible partial pending-stage authority with atomic whole-file publication.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json", "sections": ["writer_state_model", "negative_vectors"], "reason": "Freeze exact state, collision, fsync, and fault grammar.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sections": ["R-1 — Atomic whole-file stage authority repair (current authorized scope)"], "reason": "Record the completed documentation packet and fresh-selection requirement.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "sections": ["Atomic whole-file stage authority repair"], "reason": "Record completed repair and review lineage while implementation remains stopped.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260720T225541Z--HCM-2-2--orchestration--atomic-stage-authority-repair-approved.json", "sections": ["entire handoff record"], "reason": "Record parent completion and the exact reviewed primary commit.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl", "sections": ["deterministic ledger entry"], "reason": "Rebuild the query ledger for this closeout.", "status": "completed"}
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic resume is authorized. A later explicit top-level selection may begin only the bounded HCM-2.2 implementation against this review-clean atomic-stage authority.",
+    "condition": "Only resume when the user explicitly selects PHASE_ID HCM-2, SLICE_ID HCM-2.2, ACTIVE_PACKET none, and HANDOFF_SELECTOR 20260720T225541Z--HCM-2-2--orchestration--atomic-stage-authority-repair-approved from a clean reviewed baseline.",
+    "must_read": [
+      {"path": "docs/specs/handbook-contract-membrane/00-README.md", "sections": ["Authority stack", "Per-slice context assembly protocol"]},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260720T225541Z--HCM-2-2--orchestration--atomic-stage-authority-repair-approved.json", "sections": ["entire handoff record"]},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sections": ["entire specification"]},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sections": ["R-1", "P5", "P8", "P9", "P10"]},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "sections": ["entire checklist"]},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json", "sections": ["entire vector"]}
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not resume HCM-2.2 Rust implementation without a fresh explicit user selection of this handoff.",
+      "Do not treat the dirty implementation, external snapshot, checkpoint commits, or prior approvals as correctness authority.",
+      "Do not widen intent 1.2, add fallback or dual-read behavior, weaken closed validation, or rewrite immutable evidence.",
+      "Do not create, authorize, or begin HCM-2.3 or later work."
+    ],
+    "acceptance_criteria": [
+      "Primary documentation commit df5acae4aabd93940786821ec18044b1e0bcf0e6 exists and is bound to final Review 7 CLEAN subject sha256:b945dab2c5b61401af4b7289b9d5af063f4066851db40cb342d1885e4934102c.",
+      "This v1.2 record and deterministic ledger validate in all three required modes.",
+      "The closeout commit contains only this record and ledger.jsonl, and the documentation branch is clean.",
+      "The original 13-file dirty implementation worktree still matches its verified external snapshot and remains non-authoritative."
+    ],
+    "stop_conditions": [
+      "Stop if any identity, persistence, currentness, migration, writer, recovery, mismatch, or fault rule becomes implicit or cyclic.",
+      "Stop if GitNexus exposes an unaccepted HIGH or CRITICAL expansion beyond the reviewed implementation plan.",
+      "Stop if a later complete implementation review is not CLEAN.",
+      "Stop before any HCM-2.3 work."
+    ]
+  },
+  "supersedes": [
+    "20260720T160434Z--HCM-2-2--orchestration--authority-repair-planning-approved"
+  ],
+  "chat_summary": "HCM-2.2-ESC-002 atomic whole-file scratch-publication authority is review-clean and landed in df5acae4aabd93940786821ec18044b1e0bcf0e6 after Review 7 CLEAN. Intent 1.2 is unchanged; the original 13-file dirty implementation remains verified evidence only. Rust and HCM-2.3 did not resume."
+}
