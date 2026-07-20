@@ -8,13 +8,19 @@ selection and the implementation present at checkpoint commits
 `db503f7a96479775fe25dbb864b9379fd3e61ac8` are non-authoritative checkpoint
 evidence: fresh implementation Review 2 found a lifecycle-validation identity
 cycle and three additional durability/API findings. They do not establish a
-completed slice or close any Charter proof gate.
+completed slice or close any Charter proof gate. The later implementation
+selected from the review-clean Option 1 handoff at entry HEAD
+`4e164061e18da17cc24d576a26800ab1ecce69c2` stopped when the `W5`-`W7`
+exact-prefix grammar proved unrecoverable after process memory loss.
 
-This document is the mutable planning subject for the selected additive Option
-1 repair. A fresh CLEAN review over the complete planning subject and a new
-parent planning handoff may authorize a later `HCM-2.2` implementation packet;
-neither this document nor the retained checkpoint implementation authorizes an
-implementation edit by itself. No `HCM-2.3` authority exists.
+User-selected escalation `HCM-2.2-ESC-002` chooses atomic whole-file scratch
+publication for the three new-output stages. This document is now the mutable
+documentation-only authority-repair subject. Intent `1.2` remains byte-for-byte
+unchanged. No Rust or implementation work may resume until a fresh isolated
+reviewer returns `CLEAN` over the complete repaired persistence/recovery
+subject and a new parent handoff records that reviewed state. The retained dirty
+implementation and its verified recoverable snapshot are checkpoint evidence
+only. No `HCM-2.3` authority exists.
 
 The packet consumes, without reopening, the reviewed HCM-1 registry/profile
 boundaries and the HCM-2.1 Project Context canonical-YAML pilot. Entry evidence
@@ -266,6 +272,12 @@ partial `.tmp` is permitted only as an exact prefix while the published marker
 is absent. Published forward markers form the prefix `prepared` ->
 `canonical-installed` -> `records-installed` -> `committed`; a gap or optimistic
 marker is mismatch. `rolled-back` never coexists with a forward marker.
+Because recovery cannot observe whether a pending-directory fsync completed
+after a terminal-marker rename, every exact published `committed` or
+`rolled-back` observed under `.pending` first repeats the pending-directory
+fsync and then exact-revalidates the complete terminal payload before any
+terminal directory rename. A later transaction-parent fsync cannot substitute
+for this child-directory durability replay.
 
 `intent.json` is never written partially inside `.pending`. Before that
 directory exists, the writer create-news a scratch file beneath the
@@ -285,11 +297,76 @@ pending directory or a complete self-verifying `intent.json`; `intent.tmp`, a
 partial `intent.json`, and any other pending name are mismatch. This removes the
 need to authenticate lost in-process intent bytes during recovery.
 
-`canonical.old`, `canonical.new`, and both record `.new` files may be absent or
-an exact prefix only before their named fsync boundary; after it they are exact
-intent-bound bytes. A partial file that is not an exact prefix, an excess byte,
-wrong type, symlink, or unsafe path is mismatch. Create always forbids
-`canonical.old`; amendment requires it exact before any new-output stage begins.
+The three new outputs use a second non-authoritative sibling scratch root,
+exactly `.handbook/state/transactions/promotions/.output-staging/`, on the same
+filesystem as `.pending`. The engine allocates one independent random 128-bit
+lowercase-hex token for each output and create-news exactly one of
+`<32hex>.canonical`, `<32hex>.promotion-record`, or
+`<32hex>.lifecycle-transition`. Tokens and scratch names are absent from intent
+identity and unrelated to semantic IDs. A create-new collision refuses that
+writer attempt without replacing either file; the already-published journal is
+then handled only by ordinary recovery.
+
+For each output in canonical, promotion-record, lifecycle-transition order, the
+writer writes only to its scratch file, fsyncs and closes it, boundedly reopens
+it no-follow, and proves byte-for-byte equality to the retained engine bytes.
+It also proves the intent-bound document SHA-256 and byte length; canonical
+fingerprint for `canonical`; and closed record schema, semantic fingerprint,
+content-addressed ref, and complete intent/currentness bindings for both record
+outputs. It then fsyncs `.output-staging/`. Any failed check refuses without
+publishing or mutating the named pending stage.
+
+The exact per-output scratch/publication boundaries are:
+
+| Boundary | Required state transition |
+|---|---|
+| `S0` | engine retains the complete expected bytes and all intent/type-specific bindings |
+| `S1` | create-new the independent random purpose-typed scratch file |
+| `S2` | write only scratch; bounded fault fixtures cover every zero-through-complete prefix |
+| `S3` | fsync and close the complete scratch file |
+| `S4` | bounded/no-follow reopen scratch |
+| `S5` | verify exact bytes, document hash/length, and all type-specific bindings |
+| `S6` | fsync `.output-staging/` |
+| `S7` | atomic rename-no-replace scratch to the exact pending stage |
+| `S8` | fsync the pending directory |
+| `S9` | fsync `.output-staging/` after the rename |
+| `S10` | fsync the promotion-transaction parent |
+| `S11` | bounded/no-follow reopen and exact-reverify the pending stage |
+
+No boundary may be collapsed, reordered, or treated as implied by a later
+fsync. The writer starts the next output only after the current output reaches
+`S11`.
+
+Only a closed, complete, verified scratch file may be atomically
+rename-no-replace moved to its exact pending name: `canonical.new`,
+`promotion-record.new`, or `lifecycle-transition.new`. The destination must be
+absent and the move must remain on the same filesystem. After the rename, the
+writer fsyncs the pending directory, `.output-staging/`, and the transaction
+parent in that order, then boundedly reopens the pending stage no-follow and
+reverifies its exact bytes/hash/length and type-specific bindings. A crash
+before the rename exposes the pending stage as absent; a crash at or after the
+rename exposes it only as absent or exact complete bytes. A partial, excess,
+wrong, unsafe, or substituted pending new-output stage is always mismatch even
+when its bytes happen to be a prefix of the intended document.
+
+Partial output writes exist only in `.output-staging/`. Recovery and selected
+readers never scan, classify, compare, delete, or infer authority from either
+scratch sibling. A scratch orphan cannot authorize journal cleanup or
+roll-forward, cannot make an absent pending stage present, and never adds a
+recovery axis. Optional scratch garbage collection remains separately
+authorized and out of scope. `canonical.old` is deliberately different:
+create forbids it, while amendment may retain an absent/exact-prefix/exact
+snapshot because the retained exact old canonical target is its authentic
+completion source. Amendment requires `canonical.old` exact before any
+new-output scratch publication begins.
+
+This repair changes only persistence and recovery grammar. The closed intent
+`1.2` schema remains exactly 16,019 bytes with SHA-256
+`c2f5cf51b833585bc10cfcd5b99ad2a2e2c0e952a79b3f2910ae6afbff746caa`;
+the published amendment intent fingerprint, 7,607-byte document hash, and
+72-byte marker remain unchanged. Any proposed intent field or additive version
+requires a separate planning finding and fresh review; it is not inferred by
+this repair.
 
 The writer's ordered transitions are exact and cumulative:
 
@@ -300,24 +377,27 @@ The writer's ordered transitions are exact and cumulative:
 | `W2 directory` | old/absent | empty `.pending`; complete verified scratch still outside | unchanged | none | pre-intent cleanup of empty pending only; scratch remains outside authority |
 | `W3 intent published` | old/absent | exact complete `intent.json`; no pending intent temp exists | unchanged | none | rollback terminalization |
 | `W4 old snapshot` | old for amend / absent for create | amend: `canonical.old` exact-prefix then exact+fsynced; create: forbidden | unchanged | none | rollback terminalization |
-| `W5 canonical staged` | old/absent | `canonical.new` exact-prefix then exact+fsynced | unchanged | none | rollback terminalization |
-| `W6 promotion staged` | old/absent | `promotion-record.new` exact-prefix then exact+fsynced | unchanged | none | rollback terminalization |
-| `W7 lifecycle staged` | old/absent | `lifecycle-transition.new` exact-prefix then exact+fsynced; all required staged bytes exact | unchanged | none | rollback terminalization |
+| `W5 canonical staged` | old/absent | while scratch is written/verified, `canonical.new` is absent; atomic rename then all three directory fsyncs and stage reverify make it exact | unchanged | none | absent stage selects the preceding rollback origin; exact stage selects W5 rollback terminalization; scratch is ignored |
+| `W6 promotion staged` | old/absent | while scratch is written/verified, `promotion-record.new` is absent; atomic rename then all three directory fsyncs and stage reverify make it exact | unchanged | none | absent stage selects the preceding rollback origin; exact stage selects W6 rollback terminalization; scratch is ignored |
+| `W7 lifecycle staged` | old/absent | while scratch is written/verified, `lifecycle-transition.new` is absent; atomic rename then all three directory fsyncs and stage reverify make it exact; all required pending stages are exact | unchanged | none | absent stage selects the preceding rollback origin; exact stage selects W7 rollback terminalization; scratch is ignored |
 | `W8 prepared` | old/absent | exact staged set; marker temp may be exact-prefix, then `prepared` published | unchanged | `prepared` | rollback terminalization |
 | `W9 canonical installed` | rename may be observed exact old/absent or exact new; after target-parent fsync it is new | `canonical.new` absent when rename is observed new; both record stages exact | unchanged | `prepared` | old/absent rolls back; new rolls forward |
 | `W10 canonical marked` | new | marker temp may be exact-prefix, then marker published | unchanged | through `canonical-installed` | roll forward |
 | `W11 promotion installed` | new | promotion stage is absent after rename, or may coexist exact only while a pre-existing exact final is being classified/deleted; lifecycle stage exact | promotion final exact | through `canonical-installed` | roll forward |
 | `W12 lifecycle installed` | new | each record stage absent, except an exact redundant stage may remain only beside a pre-existing exact final before owned-stage deletion | both finals exact | through `canonical-installed` | roll forward |
 | `W13 records marked` | new | no record stage remains; marker temp may be exact-prefix, then marker published | both finals exact | through `records-installed` | roll forward |
-| `W14 committed` | new | no staged output; commit temp may be exact-prefix, then `committed` published and directory fsynced while suffix remains `.pending` | both finals exact | all four | execute exact committed terminalization |
+| `W14 committed` | new | no staged output; commit temp may be exact-prefix, then `committed` published; fsync the pending directory and exact-revalidate the complete pending terminal payload while suffix remains `.pending`; recovery repeats both steps before terminal rename | both finals exact | all four | execute exact committed terminalization only after the replayed pending-directory fsync and payload revalidation |
 | `W15 terminal` | new at commit; later canonical successors are allowed | rename-no-replace `<id>.pending` to `<id>.committed`, fsync the transaction parent, and reverify the exact create/amend terminal name set from the vector | both finals exact | all four | every exact `.committed` observation repeats the transaction-parent fsync, then verifies the immutable committed link; require target-new equality only if this is the selected current promotion head |
 
-At `W5`-`W7`, a crash inside the named write may leave only that file as an
-exact prefix; later staged files are absent. At every marker boundary, a crash
-may leave only the next `.tmp` as an exact prefix. No other partial or marker/
-file combination is writer-reachable. A pre-existing exact final is never
-owned; rename-no-replace failure triggers bounded no-follow exact equality,
-then deletion of only the redundant owned stage. Different final bytes refuse.
+At `W5`-`W7`, every partial file and every complete-but-not-yet-published file
+is outside the journal in `.output-staging/`; the named pending stage remains
+absent. Atomic rename may be observed only as absent or exact complete stage.
+At every marker boundary, a crash may still leave only the next `.tmp` as an
+exact prefix because its complete expected payload is recoverable from
+`intent.json`. No partial pending new-output stage is writer-reachable. A
+pre-existing exact final is never owned; rename-no-replace failure triggers
+bounded no-follow exact equality, then deletion of only the redundant owned
+stage. Different final bytes refuse.
 
 Rollback recovery is itself an ordered, cumulative, crash-recoverable writer;
 it is not an indivisible action hidden behind a recovery-table row. From an
@@ -326,15 +406,15 @@ these boundaries while holding the same locks:
 
 | Boundary | Exact action and durable postcondition |
 |---|---|
-| `R0 admitted` | Revalidate one exact `W3`-`W9` rollback origin, including intent, target, allowed final orphans, prefixes, types, paths, and marker causality. No byte is changed. |
+| `R0 admitted` | Revalidate one exact `W3`-`W9` rollback origin, including intent, target, allowed final orphans, absent-or-exact new-output stages, the independently allowed `canonical.old`/marker prefixes, types, paths, and marker causality. Scratch is not inspected and no byte is changed. |
 | `R1 snapshot complete` | For amendment, create/complete `canonical.old` only from the retained exact old target, fsync it, and reverify exact fingerprint/document hash/length. Create continues to forbid `canonical.old`. |
 | `R2 prepared temp removed` | If `prepared.tmp` exists as the allowed exact prefix, no-follow reverify and unlink it, then fsync the pending directory; otherwise prove it absent. |
 | `R3 prepared removed` | If `prepared` exists with the exact marker payload, no-follow reverify and unlink it, then fsync the pending directory; otherwise prove it absent. |
-| `R4 lifecycle stage removed` | If `lifecycle-transition.new` exists as its allowed intent-bound exact prefix or complete bytes, no-follow reverify and unlink it, then fsync the pending directory; otherwise prove it absent. |
-| `R5 promotion stage removed` | Apply the same rule to `promotion-record.new`, then fsync the pending directory. |
-| `R6 canonical stage removed` | Apply the same rule to `canonical.new`, then fsync the pending directory. The directory now contains exactly `intent.json` plus exact `canonical.old` for amend, and no other name. |
+| `R4 lifecycle stage removed` | If `lifecycle-transition.new` exists, no-follow reverify its exact complete intent-bound bytes/hash/length/schema/ref/fingerprint/bindings, unlink it, then fsync the pending directory; otherwise prove it absent. Any partial or mismatch is preserved and refuses. |
+| `R5 promotion stage removed` | Apply the same exact-complete-or-absent rule to `promotion-record.new`, then fsync the pending directory. |
+| `R6 canonical stage removed` | Apply the same exact-complete-or-absent rule to `canonical.new`, then fsync the pending directory. The directory now contains exactly `intent.json` plus exact `canonical.old` for amend, and no other name. |
 | `R7 rollback marker temp` | Create-new `rolled-back.tmp`, write the exact 72-byte marker; any crash may leave an exact prefix from zero through 72 bytes. Append only the missing suffix, fsync, and reverify exact bytes. |
-| `R8 rollback marker published` | Rename-no-replace `rolled-back.tmp` to `rolled-back`, fsync the pending directory, and reverify the exact create/amend rollback terminal payload. |
+| `R8 rollback marker published` | Rename-no-replace `rolled-back.tmp` to `rolled-back`, fsync the pending directory, and reverify the exact create/amend rollback terminal payload. Every recovery observation of published `rolled-back` under `.pending` repeats that pending-directory fsync and payload revalidation before `R9`. |
 | `R9 rollback terminal` | Rename-no-replace `<id>.pending` to `<id>.rolled-back`, fsync the transaction parent, reverify the exact terminal name set, and return non-authority. Every observation of an exact `.rolled-back` terminal repeats the parent-directory fsync before return because a crash cannot reveal whether the prior fsync completed. |
 
 The rollback cleanup list is exactly `prepared.tmp`, `prepared`,
@@ -356,13 +436,13 @@ owned-stage deletion. It then applies this exhaustive partition in order:
 
 | Predicate | Required action |
 |---|---|
-| transaction directory suffix is absent | no transaction exists; ignore any non-authoritative sibling scratch and perform no journal mutation |
+| transaction directory suffix is absent | no transaction exists; ignore every non-authoritative `.intent-staging/` or `.output-staging/` scratch orphan and perform no journal mutation |
 | suffix is exactly `.pending`; no `intent.json`; target old/absent; directory is empty | remove only the empty pending directory; no partial intent is an admitted pending state |
 | suffix is exactly `.pending`; valid intent; target old/absent; neither rollback marker name nor `committed` exists; final observations are allowed by the exact origin; and the pending names/bytes belong to the constructed `R0`-`R6` rollback-progress family | resume at the first incomplete `R1`-`R6` boundary, retaining exact final orphans and removing only the fixed cleanup-list names; then begin exact rollback-marker publication |
 | suffix is exactly `.pending`; valid intent; target old/absent; exact `R6` terminal payload plus `rolled-back.tmp` as an exact marker prefix; `rolled-back` and every forward marker/stage are absent | append only the missing marker suffix, fsync/reverify, execute `R8`, then execute `R9` |
-| suffix is exactly `.pending`; valid intent; target old/absent; exact `R8` rollback terminal payload with published matching `rolled-back`, no marker temp, forward marker, or stage | execute `R9`; a destination collision, unsafe destination, or any byte/name mismatch preserves the pending evidence and refuses |
+| suffix is exactly `.pending`; valid intent; target old/absent; exact `R8` rollback terminal payload with published matching `rolled-back`, no marker temp, forward marker, or stage | repeat the pending-directory fsync, exact-revalidate the rollback terminal payload, then execute `R9`; a destination collision, unsafe destination, or any byte/name mismatch preserves the pending evidence and refuses |
 | suffix is exactly `.pending`; valid intent; target new; no `committed`; both outputs accounted; marker causality valid; and the bound pre-promotion authority is still the authoritative invisible prior state | normalize redundant exact stages, install any staged output create-new-or-equal, publish any missing causal markers in order, publish `committed`, and terminalize `.committed` |
-| suffix is exactly `.pending`; valid intent; target new; matching `committed`; both finals exact; no staged output; and the intended lifecycle transition is the exact committed successor of the bound prior state | reverify the exact pending terminal payload, rename-no-replace to `<id>.committed`, fsync the transaction parent, reverify the exact terminal set, and return committed authority; any pre-existing destination, unsafe destination, simultaneous suffix, or byte/name mismatch preserves the complete pending journal and refuses without mutation. Do not demand that the prior state remain current after its intended transition commits |
+| suffix is exactly `.pending`; valid intent; target new; matching `committed`; both finals exact; no staged output; and the intended lifecycle transition is the exact committed successor of the bound prior state | repeat the pending-directory fsync, exact-revalidate the complete pending terminal payload, rename-no-replace to `<id>.committed`, fsync the transaction parent, reverify the exact terminal set, and return committed authority; any pre-existing destination, unsafe destination, simultaneous suffix, or byte/name mismatch preserves the complete pending journal and refuses without mutation. Do not demand that the prior state remain current after its intended transition commits |
 | suffix is exactly `.committed`; terminal directory has exactly its create/amend vector name set and internally matching intent/finals/transition edge | fsync the transaction parent, then return immutable committed history without content mutation; if it is the selected current promotion head require current target equals its new canonical bytes, otherwise require a later committed successor chain whose basis binds this output |
 | suffix is exactly `.rolled-back`; terminal directory has exactly its create/amend vector name set, no forward marker, and matching retained intent/rollback payload | fsync the transaction parent, then return non-authority without content mutation; do not compare it to a target that a later committed transaction may legitimately change |
 | every other Cartesian-product state | mismatch: preserve the complete pending/terminal journal and every final record; perform no mutation and block selected reads/writes |
@@ -379,18 +459,24 @@ successor/basis links rather than permanent equality to the latest target/head.
 The conformance test enumerates the finite Cartesian product of directory
 suffix `{absent, pending, committed, rolled_back, other}` and directory kind;
 pending intent `{absent, exact, mismatch}` (partial is always mismatch); target
-`{absent, old, new, other}`; `canonical.old`, `canonical.new`,
-`promotion-record.new`, and `lifecycle-transition.new` each independently
-`{absent, exact_prefix, exact, mismatch}`; promotion and lifecycle finals each
-`{absent, exact, mismatch}`; and every marker independently
+`{absent, old, new, other}`; `canonical.old`
+`{absent, exact_prefix, exact, mismatch}`; each of `canonical.new`,
+`promotion-record.new`, and `lifecycle-transition.new` independently
+`{absent, exact, mismatch}`; promotion and lifecycle finals each `{absent,
+exact, mismatch}`; and every marker independently
 `{absent, tmp_exact_prefix, published, mismatch}`. Scratch is deliberately not
 an authority/recovery axis because it is outside the scanned pending namespace.
-The test additionally enumerates committed-marker-published pending state with
-committed destination `{absent, exact, mismatch, unsafe}` plus terminal rename and
-parent-fsync replay; only absent destination may rename, while every collision
-preserves pending evidence and refuses. It enumerates rollback origin `{W3..W9}`, snapshot prefix
-length, cleanup cursor `{R1..R6}`, rollback-marker prefix length `{0..72}`,
-published rollback marker, terminal rename, and parent-fsync replay. It asserts
+The test additionally crosses terminal-marker-published pending kind
+`{committed, rolled_back}` with its corresponding destination independently in
+`{absent, exact_pre_existing, mismatching, unsafe}`, plus terminal rename and
+parent-fsync replay. Only an absent destination may rename for either terminal
+kind; `exact_pre_existing`, `mismatching`, `unsafe`, or simultaneous-suffix
+destination state preserves the
+complete pending evidence and refuses without replacement or cleanup. It
+enumerates rollback origin `{W3..W9}`, snapshot prefix length, cleanup cursor
+`{R1..R6}`, rollback-marker prefix length `{0..72}`, published rollback marker,
+all four `.rolled-back` destination states, terminal rename, and parent-fsync
+replay. It asserts
 predicate disjointness for the nine non-catch-all rows before
 applying mismatch, exactly one total row per combination, the declared result
 for every `W0`-`W15` and `R0`-`R9` crash state, and mismatch for every
@@ -399,9 +485,16 @@ Amendment proof separately enumerates `canonical.old` absence and every prefix
 length from zero through `old_canonical_byte_length`; each recovery attempt must
 end either with another exact prefix after a crash or the exact fsynced snapshot
 and exact `.rolled-back` terminal set. Fault injection stops after every
-rollback reverify, unlink, directory fsync, marker write/fsync/rename, terminal
-rename, and parent fsync, plus the corresponding committed terminal rename and
-parent fsync; repeated recovery must reach the same exact terminal set.
+output scratch create-new, each scratch write prefix in the bounded fault
+fixture, file fsync, close, no-follow reopen, exact byte/hash/length/type/binding
+verification, scratch-directory fsync, atomic stage rename, pending-directory
+fsync, post-rename scratch-directory fsync, transaction-parent fsync, and exact
+pending-stage reverify. Every pre-rename fault leaves the authoritative stage
+absent; every post-rename observation is absent or exact; scratch contents never
+select a recovery row. Injection also stops after every rollback reverify,
+unlink, directory fsync, marker write/fsync/rename, terminal rename, and parent
+fsync, plus the corresponding committed terminal rename and parent fsync;
+repeated recovery must reach the same exact terminal set.
 Simultaneous `.pending`/terminal destinations and crossed/malformed `.pending`,
 `.committed`, and `.rolled-back` suffix/name states always select mismatch.
 
@@ -1805,34 +1898,52 @@ global order above, retains the exact registry pair used by approvals, and
 holds all three through the authority commit and finalization. The writer uses
 one filesystem beneath
 `.handbook`, rejects cross-device paths, symlinks, and non-regular state, and
-executes:
+executes the exact `W0`-`W15` state machine above. Its operational expansion is:
 
-1. create `.handbook/state/transactions/promotions/<promotion-id>.pending/`
-   with create-new/no-follow semantics;
-2. create-new `intent.tmp`, write and fsync it, atomically rename it to
-   `intent.json`, and fsync the pending directory. The intent binds target path,
-   create-only null or mandatory exact old
-   fingerprint, candidate/profile/definition/approval fingerprints, new
-   canonical fingerprint, final promotion-record and lifecycle-transition
-   paths/fingerprints, and transaction ID;
-3. write and fsync `canonical.new`, `promotion-record.new`, and
-   `lifecycle-transition.new`, verify their exact hashes, then fsync the pending
-   directory (`prepared` boundary);
-4. if replacing truth, copy the retained old bytes to `canonical.old`, fsync,
+1. retain the complete self-fingerprinted JCS+LF intent bytes, create-new
+   `.handbook/state/transactions/promotions/.intent-staging/<32hex>.intent`,
+   write only that non-authoritative scratch file, fsync and close it, bounded/
+   no-follow reopen and verify its exact bytes/fingerprint/schema/bindings, then
+   fsync `.intent-staging/`. The intent binds target path, create-only null or
+   mandatory exact old fingerprint, candidate/profile/definition/approval
+   fingerprints, new canonical fingerprint, final promotion-record and
+   lifecycle-transition paths/fingerprints, and transaction ID;
+2. create and fsync the exact empty
+   `.handbook/state/transactions/promotions/<transaction_id>.pending/` directory
+   with create-new/no-follow semantics, atomically rename-no-replace the
+   complete verified intent scratch directly to `intent.json`, fsync the
+   pending directory, `.intent-staging/`, and transaction parent in that order,
+   then bounded/no-follow reverify exact `intent.json`. The pending namespace
+   contains no `intent.tmp` and never exposes partial intent bytes;
+3. if replacing truth, copy the retained old bytes to `canonical.old`, fsync,
    and verify the old fingerprint; creation records explicit absence;
-5. atomically rename `canonical.new` over the selected target, fsync the target
-   parent, then create-new `canonical-installed` and fsync the pending directory;
-6. install `promotion-record.new` and `lifecycle-transition.new` at their
+4. for each of canonical, promotion record, and lifecycle transition in that
+   order, retain the exact complete engine-owned output bytes, create one
+   independent purpose-typed 128-bit random create-new file beneath the sibling
+   `.output-staging/`, write only that scratch file, fsync and close it, bounded/
+   no-follow reopen it, prove exact byte equality plus the intent-bound document
+   hash/length and type-specific fingerprint/schema/ref/currentness bindings,
+   fsync the scratch directory, atomically rename-no-replace it to
+   `canonical.new`, `promotion-record.new`, or `lifecycle-transition.new`, fsync
+   the pending, scratch, and transaction-parent directories in that order, then
+   bounded/no-follow reverify the pending stage as exact. Before the rename the
+   pending stage is absent; after the rename it is exact. No partial pending
+   new-output stage is writer-reachable;
+5. publish the exact `prepared` marker by its frozen temporary-marker grammar;
+6. atomically rename `canonical.new` over the selected target, fsync the target
+   parent, then publish exact `canonical-installed` by the same marker grammar;
+7. install `promotion-record.new` and `lifecycle-transition.new` at their
    content-addressed final paths with create-new/no-follow semantics and fsync
    both parents. If a final path already exists with exact intended bytes,
    reuse it without assigning transaction ownership; if bytes differ, refuse and
-   retain the journal. Then create-new `records-installed` and fsync;
-7. create-new `committed.tmp`, write exactly the 72 ASCII bytes
+   retain the journal. Then publish exact `records-installed` by the marker
+   grammar;
+8. create-new `committed.tmp`, write exactly the 72 ASCII bytes
    `sha256:<64 lowercase hex>\n`, where the hex is SHA-256 of the exact raw
    `intent.json` bytes, fsync it, atomically rename it to `committed`, and fsync
    the pending directory; the
    durable `committed` rename is the authority commit point; and
-8. verify target, record, markers, and fingerprints, rename the directory from
+9. verify target, records, markers, and fingerprints, rename the directory from
    `.pending` to `.committed`, fsync its parent, release the lock, and report
    success.
 
@@ -1842,43 +1953,48 @@ recovers first, and includes records/index entries only through a matching
 committed journal. The authority guarantee is therefore all-or-neither
 *visibility*, not impossible multi-file physical atomicity.
 
-Recovery ignores progress-marker optimism and derives state from `intent.json`
-plus exact observed bytes. An exact empty pending directory, or one containing
-only an owned partial `intent.tmp`, is the sole pre-intent state and is deleted;
-any other state without a complete valid `intent.json` refuses and preserves
-evidence. With a valid intent, recovery validates the transaction ID, all safe
-paths, intended fingerprints, old-target snapshot or create-only absence, and
-commit marker payload. Partial diagnostic markers and `committed.tmp` are not
-authority and are removed only as part of the selected rollback/roll-forward
-row. Any unowned/mismatched byte refuses. Otherwise this total precedence table
-applies under the lock:
+Recovery uses only the exact ordered `R0`-`R9` rollback machine and the exact
+suffix-disjoint recovery partition above; this section defines no alternate
+coarser table. It ignores progress-marker optimism and derives state from the
+closed validated `intent.json` plus exact observed authoritative bytes. An
+exact empty pending directory is the sole pre-intent state and is deleted; an
+`intent.tmp`, partial `intent.json`, other name, or any other state without a
+complete valid `intent.json` refuses and preserves evidence. With a valid
+intent, recovery validates the transaction ID, all safe paths, intended
+fingerprints, old-target snapshot or create-only absence, and commit-marker
+payload. It independently classifies `canonical.old`, every pending new-output
+stage, every final record, every marker temporary/published pair, and the
+target. New-output pending stages are only absent or exact in the writer
+closure; any observed partial or otherwise mismatched stage is preserved and
+refuses. `.intent-staging/` and `.output-staging/` are never scanned,
+classified, deleted, or used to derive authority. Partial diagnostic markers
+and `committed.tmp` are not authority and are removed only by the selected
+exact rollback/roll-forward state. Any unowned/mismatched byte refuses.
 
-| Observed authoritative bytes | Commit marker | Required recovery |
-|---|---|---|
-| target is old/absent; neither final record exists | absent | delete transaction-owned staged/temp/diagnostic files and pending directory |
-| target is old/absent; one or both exact final records exist | absent | leave final content-addressed records as invisible orphans and delete only owned staged/journal state |
-| target is new; neither or only one exact final record exists | absent | restore exact `canonical.old` or remove the create-only target; leave final content-addressed records invisible; fsync parents; then delete staged state |
-| target is new; both exact final records exist | absent | verify approvals/definitions again, create+fsync `committed`, and roll forward |
-| target is old/absent; both exact final records exist | absent | leave both final records invisible and roll back only staged/journal state |
-| target is new; both exact final records exist | matching | verify all bytes and finalize `.pending` to `.committed` |
-| target is old/absent; both exact final records exist | matching | refuse as a durability-contract violation; the target-parent fsync precedes the durable commit marker, so no admitted crash state can produce this observation |
-| any other target/record bytes, nonmatching marker, unsafe path/type, or intent/hash disagreement | either | refuse every selected read/write and retain the journal for repair |
-
-This table covers a crash after canonical rename but before
-`canonical-installed`, after either partial record install, and after commit but
-before directory rename. Rollback never deletes a final content-addressed
-record, whether created by this transaction or already present equal. Authority
-indexes make every uncommitted record invisible. Optional non-authoritative
-garbage collection is out of scope and may remove only records proven
-unreachable from every committed journal. Roll-forward never overwrites a final record. Cleanup is
-idempotent; missing already-cleaned transaction-owned files are success only
-when all remaining observed bytes match the selected row. A matching committed
+The exact recovery partition covers crashes before and after every atomic
+new-output publication, after canonical rename but before
+`canonical-installed`, after either record install, and after commit but before
+directory rename. Rollback never deletes a final content-addressed record,
+whether created by this transaction or already present equal. Authority indexes
+make every uncommitted record invisible. Scratch/orphan garbage collection is a
+separate non-authoritative operation outside this slice; recovery does not
+perform it. Roll-forward never overwrites a final record. Cleanup is idempotent;
+missing already-cleaned transaction-owned files are success only when all
+remaining observed bytes match the selected predicate. A matching committed
 journal must match target and both final records before any reader returns.
 Derived promotion/lifecycle indexes include only matching committed journals;
 either final record alone is never authority.
 
-Crash injection is required after every create/write/fsync/rename/marker step,
-plus concurrent readers/writers and replay from every state. On native Windows,
+Crash injection is required after each `committed` and `rolled-back` marker
+rename before its original pending-directory fsync, after that original fsync,
+after recovery's replayed pending-directory fsync, and after the following
+terminal-payload revalidation. Every retry must replay the pending-directory
+fsync before terminal rename and converge to the exact immutable terminal set.
+Crash injection is also required at every frozen `S0`-`S11` boundary for each of the
+three output purposes, including `S0` before scratch creation, every bounded
+scratch-write prefix fixture, and every
+remaining create/write/fsync/rename/marker step, plus concurrent readers/
+writers and replay from every state. On native Windows,
 mutation refuses before creating the transaction directory unless the same
 no-follow, atomic-replace, durable-flush, lock, directory-flush, and recovery
 contract is proven; read-only validate remains supported. No weaker fallback

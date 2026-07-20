@@ -15,7 +15,12 @@
     "marker_payload_rule": "ASCII sha256:<SHA-256 hex of exact persisted intent.json bytes including LF> followed by one LF",
     "scratch_path_rule": ".handbook/state/transactions/promotions/.intent-staging/<32 lowercase hex random token>.intent",
     "scratch_authority": "non_authoritative_not_scanned_by_journal_recovery_or_selected_readers",
-    "pending_path_rule": ".handbook/state/transactions/promotions/<transaction_id>.pending/"
+    "output_scratch_root": ".handbook/state/transactions/promotions/.output-staging/",
+    "output_scratch_name_grammar": "exactly one engine-random 128-bit lowercase-hex token followed by exactly one purpose suffix: <32hex>.canonical, <32hex>.promotion-record, or <32hex>.lifecycle-transition",
+    "output_scratch_authority": "non_authoritative_not_scanned_compared_deleted_or_used_by_journal_recovery_or_selected_readers",
+    "intent_1_2_data_schema_change": "none; promotion-transaction-intent-1.2.0.schema.json remains byte-for-byte 16019 bytes with sha256:c2f5cf51b833585bc10cfcd5b99ad2a2e2c0e952a79b3f2910ae6afbff746caa",
+    "pending_path_rule": ".handbook/state/transactions/promotions/<transaction_id>.pending/",
+    "pending_path_identity_rule": "Every writer, discovery, recovery, and finalization path is derived solely from the validated intent-bound transaction_id. promotion_id is a distinct promotion-record identity and is forbidden as a pending-directory key; the amendment positive intentionally uses unequal transaction_id and promotion_id values."
   },
   "amendment_positive": {
     "intent_fingerprint_preimage": {
@@ -176,6 +181,54 @@
   },
   "writer_state_model": {
     "intent_publication": "Write, fsync, close, reopen, and verify the complete self-fingerprinted JCS+LF intent in the non-authoritative sibling .intent-staging directory before the pending directory exists; then create+fsync an empty pending directory and atomically rename the complete scratch file directly to intent.json. The pending namespace exposes only empty or complete intent, never intent.tmp or partial intent bytes.",
+    "output_publication_order": [
+      "canonical.new",
+      "promotion-record.new",
+      "lifecycle-transition.new"
+    ],
+    "output_scratch_publication_boundaries_exact": [
+      "S0_engine_retains_complete_expected_bytes_and_intent_bindings",
+      "S1_create_new_random_purpose_typed_scratch",
+      "S2_write_only_scratch_zero_through_complete_prefix",
+      "S3_file_fsync_and_close",
+      "S4_bounded_no_follow_reopen",
+      "S5_exact_bytes_hash_length_and_type_specific_bindings_verified",
+      "S6_output_staging_directory_fsynced",
+      "S7_atomic_rename_no_replace_to_named_pending_stage",
+      "S8_pending_directory_fsynced",
+      "S9_output_staging_directory_fsynced_after_rename",
+      "S10_transaction_parent_fsynced",
+      "S11_pending_stage_bounded_no_follow_exact_reverify"
+    ],
+    "output_scratch_publication_rule": "For each output in output_publication_order, create-new only its random purpose-typed scratch on the same filesystem; write/fsync/close; boundedly reopen no-follow and verify byte equality, document SHA-256, byte length, and the canonical fingerprint or closed record schema/ref/fingerprint/intent bindings; fsync .output-staging; atomically rename-no-replace to the exact pending stage; fsync pending, .output-staging, and transaction parent in that order; then boundedly reopen no-follow and reverify the exact pending stage. Destination collision or any verification/path/type mismatch refuses without replacement.",
+    "output_scratch_crash_rule": "A crash at S0 occurs after the engine retained complete expected bytes and bindings but before scratch creation; no scratch exists and the named pending stage remains absent. A crash at S1-S6 may orphan any zero-through-complete scratch prefix while the named pending stage remains absent. A crash at S7-S11 exposes the pending stage only as absent or exact complete bytes. Scratch is never a recovery axis or authority input and optional garbage collection is separately authorized.",
+    "output_scratch_fault_enumeration": "For each of the three purpose suffixes, inject after S0, after S1, after every zero-through-complete S2 scratch prefix in bounded fixtures, and after every S3-S11 boundary. The required Cartesian product contains every label in {S0,...,S11} exactly once per purpose in addition to the bounded S2 prefix fixtures; a missing or duplicate purpose/boundary pair fails conformance. Assert that pre-rename faults leave the pending stage absent, post-rename observations are absent or exact, scratch substitution never changes recovery selection, and retry/recovery never scans or deletes scratch.",
+    "output_scratch_vectors": [
+      {
+        "purpose_suffix": ".canonical",
+        "pending_stage": "canonical.new",
+        "complete_binding_source": "outputs.new_canonical_fingerprint + outputs.new_canonical_document_sha256 + outputs.new_canonical_byte_length + retained exact canonical bytes",
+        "pre_rename_faults_S0_S6": "at S0 no scratch exists; at S1-S6 scratch may be any 0..complete prefix and is ignored; pending stage is absent throughout",
+        "post_rename_faults_S7_S11": "pending stage absent or exact complete; partial pending stage impossible",
+        "positive_terminal": "S11 exact bounded no-follow reverify passed"
+      },
+      {
+        "purpose_suffix": ".promotion-record",
+        "pending_stage": "promotion-record.new",
+        "complete_binding_source": "outputs.promotion_record ref + semantic fingerprint + document SHA-256 + byte length + retained exact record bytes",
+        "pre_rename_faults_S0_S6": "at S0 no scratch exists; at S1-S6 scratch may be any 0..complete prefix and is ignored; pending stage is absent throughout",
+        "post_rename_faults_S7_S11": "pending stage absent or exact complete; partial pending stage impossible",
+        "positive_terminal": "S11 exact bounded no-follow schema/ref/fingerprint/document reverify passed"
+      },
+      {
+        "purpose_suffix": ".lifecycle-transition",
+        "pending_stage": "lifecycle-transition.new",
+        "complete_binding_source": "outputs.lifecycle_transition ref + semantic fingerprint + document SHA-256 + byte length + retained exact record bytes including audit-only transitioned_at_utc",
+        "pre_rename_faults_S0_S6": "at S0 no scratch exists; at S1-S6 scratch may be any 0..complete prefix and is ignored; pending stage is absent throughout",
+        "post_rename_faults_S7_S11": "pending stage absent or exact complete; partial pending stage impossible",
+        "positive_terminal": "S11 exact bounded no-follow schema/ref/fingerprint/document reverify passed"
+      }
+    ],
     "owned_names_exact": [
       "intent.json",
       "canonical.old",
@@ -200,7 +253,7 @@
       "committed"
     ],
     "marker_publication": "For marker M, only M.tmp may contain an exact prefix before M exists; write+fsync the 72-byte payload, rename-no-replace M.tmp to M, then fsync the directory. M present requires M.tmp absent. Later markers require every earlier marker.",
-    "staged_file_partial_rule": "Before its fsync boundary, each of canonical.old, canonical.new, promotion-record.new, and lifecycle-transition.new may independently be absent or an exact prefix of its intent-bound complete bytes. After its boundary it must be exact complete. intent.json is never partial. Any non-prefix, excess, wrong-type, or unsafe-path byte is mismatch.",
+    "pending_stage_state_rule": "canonical.old alone may be absent, an exact prefix, or exact because amendment retains the authentic old target for completion; create forbids it. canonical.new, promotion-record.new, and lifecycle-transition.new are each independently absent or exact complete. Any partial pending new-output stage is mismatch even when it is an exact prefix; excess, substituted, wrong-type, symlink, or unsafe path is also mismatch.",
     "amendment_rollback_snapshot_completion": "With exact old target retained under locks, absent canonical.old is create-new copied from target; an exact-prefix canonical.old is completed only by appending the missing target suffix; recovery fsyncs and reverifies exact fingerprint, document SHA-256, and byte length before publishing rolled-back. A crash leaves another exact prefix and retries. Create forbids canonical.old.",
     "rollback_cleanup_order_exact": [
       "prepared.tmp",
@@ -209,10 +262,11 @@
       "promotion-record.new",
       "canonical.new"
     ],
-    "rollback_cleanup_boundary_rule": "From each exact W3-W9 rollback origin with target old/absent, first complete and fsync canonical.old for amend, then process rollback_cleanup_order_exact left-to-right. For each present name, no-follow reverify its admitted exact-prefix or exact bytes, unlink it, and fsync the pending directory before advancing; absence is an idempotent no-op. Only names in this list may be removed. A crash exposes exactly a member of the union generated by every origin and every cleanup-list prefix.",
+    "rollback_cleanup_boundary_rule": "From each exact W3-W9 rollback origin with target old/absent, first complete and fsync canonical.old for amend, then process rollback_cleanup_order_exact left-to-right. prepared.tmp may be an exact marker prefix and prepared must be exact. Each present new-output stage must be exact complete intent-bound bytes under no-follow revalidation before unlink; a partial stage is preserved mismatch. Fsync the pending directory after every unlink; absence is an idempotent no-op. Only names in this list may be removed. A crash exposes exactly a member of the union generated by every origin and every cleanup-list prefix.",
     "rollback_marker_continuation": "Only after cleanup reaches the exact create/amend rollback base may rolled-back.tmp be create-new. Every zero-through-72-byte exact prefix is writer-reachable; recovery appends only the missing suffix, fsyncs and reverifies, rename-no-replace publishes rolled-back, and fsyncs the pending directory. Published rolled-back requires its tmp, every forward marker, and every staged file absent.",
-    "pending_commit_finalization": "With matching committed published under .pending, exact finals, no staged output, and the intended lifecycle successor committed, reverify the exact pending terminal payload; rename-no-replace <id>.pending to <id>.committed; fsync the transaction parent; and reverify the exact terminal set. Any exact, mismatching, unsafe, or otherwise pre-existing destination, simultaneous suffix, or byte/name mismatch preserves the complete pending journal and refuses without mutation. Every exact .committed observation repeats the parent fsync before returning because prior fsync completion is not observable.",
-    "pending_rollback_finalization": "An exact .pending rollback terminal payload is writer-reachable after rolled-back publication. Recovery rename-no-replace moves it to .rolled-back, fsyncs the transaction parent, and reverifies the exact terminal set. Destination collision or mismatch preserves evidence and refuses. Every exact .rolled-back observation repeats the parent fsync before returning because prior fsync completion is not observable.",
+    "pending_commit_finalization": "With matching committed published under .pending, exact finals, no staged output, and the intended lifecycle successor committed, recovery first repeats the pending-directory fsync because the post-marker-rename fsync is not observable, then exact-revalidates the complete pending terminal payload; only then rename-no-replace <id>.pending to <id>.committed, fsync the transaction parent, and reverify the exact terminal set. Any exact, mismatching, unsafe, or otherwise pre-existing destination, simultaneous suffix, or byte/name mismatch preserves the complete pending journal and refuses without mutation. Every exact .committed observation repeats the parent fsync before returning because prior parent-fsync completion is not observable.",
+    "pending_rollback_finalization": "An exact .pending rollback terminal payload is writer-reachable after rolled-back publication. Recovery first repeats the pending-directory fsync because the post-marker-rename fsync is not observable, then exact-revalidates the complete rollback terminal payload; only then may an absent destination permit rename-no-replace to .rolled-back, transaction-parent fsync, and exact terminal-set reverify. Every exact-pre-existing, mismatching, unsafe, or simultaneous-suffix .rolled-back destination preserves the complete pending evidence and refuses without replacement or cleanup. Every exact .rolled-back terminal observation repeats the parent fsync before returning because prior parent-fsync completion is not observable.",
+    "terminal_marker_pending_fsync_replay_faults": "For each terminal marker in {committed, rolled-back}, inject after marker rename but before the writer's pending-directory fsync, after the writer's pending-directory fsync, after recovery's mandatory repeated pending-directory fsync, and after exact terminal-payload revalidation. Recovery must repeat the pending-directory fsync before terminal directory rename in every published-marker observation and converge to the exact immutable .committed or .rolled-back terminal set.",
     "rollback_recovery_boundaries_exact": [
       "R0_admitted_W3_W9_origin",
       "R1_snapshot_complete",
@@ -225,14 +279,23 @@
       "R8_rollback_marker_published_pending",
       "R9_directory_renamed_and_parent_fsynced"
     ],
-    "rollback_fault_enumeration": "Inject after every R0-R9 reverify, unlink, directory fsync, marker create/write/fsync/rename, terminal directory rename, and parent fsync. Repeated recovery must select exactly one predicate and reach the exact immutable terminal set; every state outside the constructed writer/recovery closure selects preserved mismatch.",
-    "terminal_destination_axis_exact": [
-      "absent",
-      "exact_pre_existing",
-      "mismatching",
-      "unsafe"
-    ],
-    "recovery_suffix_partition": "No-directory, .pending, .committed, and .rolled-back predicates are disjoint. Only .pending may clean up, roll back, roll forward, or finalize a just-published marker. Exact terminal suffixes receive content-read-only verification and repeat the transaction-parent fsync. Every simultaneous, crossed, or other suffix/name state is mismatch and is preserved.",
+    "rollback_fault_enumeration": "Inject after every R0-R9 reverify, unlink, directory fsync, marker create/write/fsync/rename, the mandatory repeated pending-directory fsync and terminal-payload revalidation after published rolled-back, terminal directory rename, and parent fsync. The symmetric committed path injects at the same terminal-marker replay boundaries. Repeated recovery must select exactly one predicate and reach the exact immutable terminal set; every partial pending new-output stage and every state outside the constructed writer/recovery closure selects preserved mismatch. Scratch contents never change the selected predicate.",
+    "terminal_destination_axes_exact": {
+      "committed_destination": [
+        "absent",
+        "exact_pre_existing",
+        "mismatching",
+        "unsafe"
+      ],
+      "rolled_back_destination": [
+        "absent",
+        "exact_pre_existing",
+        "mismatching",
+        "unsafe"
+      ]
+    },
+    "terminal_destination_cross_product_rule": "Cross each published terminal marker under .pending independently with all four states of its corresponding destination axis. Only {committed_marker: published, committed_destination: absent} and {rolled_back_marker: published, rolled_back_destination: absent} may perform terminal rename-no-replace. Every exact-pre-existing, mismatching, unsafe, or simultaneous-suffix destination preserves the complete pending journal and refuses without replacement or cleanup.",
+    "recovery_suffix_partition": "No-directory, .pending, .committed, and .rolled-back predicates are disjoint. Only .pending may clean up, roll back, roll forward, or finalize a just-published marker. Every published committed or rolled-back marker under .pending first repeats the pending-directory fsync and exact terminal-payload revalidation before terminal directory rename. Exact terminal suffixes receive content-read-only verification and repeat the transaction-parent fsync. Every simultaneous, crossed, or other suffix/name state is mismatch and is preserved.",
     "state_axes_exact": [
       "directory_suffix",
       "directory_kind",
@@ -248,8 +311,34 @@
       "canonical_installed_marker",
       "records_installed_marker",
       "committed_marker",
-      "rolled_back_marker"
+      "rolled_back_marker",
+      "committed_destination",
+      "rolled_back_destination"
     ],
+    "stage_axis_values_exact": {
+      "canonical.old": [
+        "absent",
+        "exact_prefix",
+        "exact",
+        "mismatch"
+      ],
+      "canonical.new": [
+        "absent",
+        "exact",
+        "mismatch"
+      ],
+      "promotion-record.new": [
+        "absent",
+        "exact",
+        "mismatch"
+      ],
+      "lifecycle-transition.new": [
+        "absent",
+        "exact",
+        "mismatch"
+      ]
+    },
+    "scratch_axis_rule": ".intent-staging and .output-staging are deliberately excluded from state_axes_exact; no scratch name, byte, type, count, or collision can select or alter a journal recovery predicate",
     "terminal_committed_names_create": [
       "intent.json",
       "prepared",
@@ -285,17 +374,21 @@
   ],
   "negative_vectors": [
     "unknown or missing intent field",
+    "writer, discovery, recovery, or finalization derives the pending directory from promotion_id or any value other than the validated intent-bound transaction_id; the negative remains required when transaction_id and promotion_id differ",
     "intent_fingerprint included in its own preimage",
     "pending directory contains intent.tmp or a partial intent.json rather than only empty or one atomically published complete self-verifying intent.json",
     "create with any non-null old/current/basis binding or amendment with any null old/current/basis binding",
     "definition, observation, coverage, or approval set missing, duplicate, reordered, incomplete, or excess",
     "record ref basename, semantic fingerprint, raw document SHA-256, or byte length mismatch",
     "marker gap, marker optimism, marker payload mismatch, final marker with matching tmp, or unknown pending-directory name",
-    "staged file is not absent, exact expected bytes, or an exact prefix at the one permitted pre-fsync writer boundary",
+    "canonical.old is outside its allowed absent/exact-prefix/exact amendment snapshot grammar, or a create contains canonical.old",
+    "canonical.new, promotion-record.new, or lifecycle-transition.new is present but not exact complete intent-bound bytes; every partial pending stage is mismatch even when it is a correct prefix",
+    "output scratch is treated as journal authority, scanned or deleted by recovery, placed on another filesystem, published without exact verification, renamed with replacement, or followed by a missing/out-of-order pending/scratch/transaction-parent fsync or stage reverify",
     "rollback cleanup state is not generated by an admitted W3-W9 origin and a prefix of the exact cleanup order, or cleanup would remove a name outside that list",
     "rolled-back.tmp appears before the exact rollback base, is not an exact 0..72-byte marker prefix, or coexists with rolled-back",
     "published rolled-back coexists with any forward marker/stage, has a mismatching payload, or appears under a suffix other than exact pending/rolled-back finalization",
-    "published committed pending payload encounters any pre-existing or unsafe .committed destination, simultaneous pending/terminal suffix, or terminal byte/name mismatch",
+    "published committed pending payload encounters an exact-pre-existing, mismatching, or unsafe .committed destination, simultaneous pending/terminal suffix, or terminal byte/name mismatch",
+    "published rolled-back pending payload encounters an exact-pre-existing, mismatching, or unsafe .rolled-back destination, simultaneous pending/terminal suffix, or terminal byte/name mismatch",
     "canonical target is neither exact old/absent nor exact new, or currentness cannot be revalidated"
   ]
 }

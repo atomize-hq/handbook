@@ -108,22 +108,27 @@ code edit:
    checkpoint only as non-authoritative evidence and add no dual-read selected
    product path.
 
-The authority revision should also correct the stale `SPEC` status text that
-currently calls HCM-2.2 completed ([`SPEC`, lines 3-10](../SPEC.md#status-and-authority));
-the later slice-local stop proof and program status say it is incomplete and
-non-authoritative. Existing handoff and proof records remain immutable.
+The authority revision also had to correct the stale `SPEC` status text present
+at immutable pre-repair commit
+`db503f7a96479775fe25dbb864b9379fd3e61ac8`: `SPEC.md` lines 3-10 called
+HCM-2.2 completed, while the later slice-local stop proof and program status
+said it was incomplete and non-authoritative. Reproduce that historical source
+with `git show db503f7a96479775fe25dbb864b9379fd3e61ac8:docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md`.
+The mutable [`SPEC`](../SPEC.md#status-and-authority) now records the repaired
+status. Existing handoff and proof records remain immutable.
 
 Two more control-pack truth repairs belong in the same planning subject:
 
-- The proof ledger's summary still classifies `PR-009` as
-  `ContractCorrectAndProven`, closes `PG-INTAKE-01`, `PG-INTAKE-02`, and
-  `PG-CHARTER-01`, and calls HCM-2.2 completed
-  ([`06`, lines 114-169](../../../06-proof-and-regression-ledger.md#open-program-proof-gates)).
-  Its later authoritative gate section correctly says the slice is incomplete
-  and those gates remain open
-  ([`06`, lines 931-988](../../../06-proof-and-regression-ledger.md#hcm-22-constitutional-root-implementation-proof-gate)).
-  The optimistic summary rows must be reverted; otherwise the pack exposes two
-  incompatible gate states.
+- At immutable pre-repair commit
+  `db503f7a96479775fe25dbb864b9379fd3e61ac8`, the proof ledger summary at lines
+  114-169 classifies `PR-009` as `ContractCorrectAndProven`, closes
+  `PG-INTAKE-01`, `PG-INTAKE-02`, and `PG-CHARTER-01`, and calls HCM-2.2
+  completed. The same Git object at lines 931-988 correctly says the slice is
+  incomplete and those gates remain open. Reproduce both historical ranges with
+  `git show db503f7a96479775fe25dbb864b9379fd3e61ac8:docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md`.
+  The mutable [`06`](../../../06-proof-and-regression-ledger.md#open-program-proof-gates)
+  now contains the repaired summary. The optimistic historical summary rows
+  had to be reverted so the pack exposed one gate state.
 - The immutable escalation handoff's `pack_updates` names nonexistent
   `slices/HCM-2.2/status/plan.md` and `status/todo.md` paths
   ([handoff `pack_updates`, lines 453-501](../../../handoffs/records/20260720T083855Z--HCM-2-2--orchestration--lifecycle-validation-authority-boundary.json));

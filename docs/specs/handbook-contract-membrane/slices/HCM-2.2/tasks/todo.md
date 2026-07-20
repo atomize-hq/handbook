@@ -1,14 +1,92 @@
 # HCM-2.2 Implementation Checklist
 
-**Status:** escalation `HCM-2.2-ESC-001` Option 1 selected for a
-documentation-only authority repair. The implementation checkpoint remains
-non-authoritative. A later implementation packet requires fresh CLEAN review of
-this complete repaired planning subject and a new parent dispatch. Do not mark
-implementation items complete or start HCM-2.3.
+**Status:** the implementation selected from the review-clean `HCM-2.2-ESC-001`
+Option 1 planning handoff stopped at the unauthenticatable `W5`-`W7` exact-
+prefix recovery boundary. User-selected
+`HCM-2.2-ESC-002` authorizes only a documentation repair selecting atomic
+whole-file scratch publication. The dirty implementation is preserved in a
+verified recoverable snapshot and remains non-authoritative evidence. Do not
+resume Rust, mark implementation items complete, or start HCM-2.3 until the
+complete repaired recovery subject receives fresh `CLEAN` review and parent
+closeout.
 
 The immutable escalation handoff's `status/plan.md` and `status/todo.md` names
 are erroneous. The authoritative mutable paths are this `tasks/todo.md` and
 [`tasks/plan.md`](plan.md); the immutable record remains unchanged.
+
+## Atomic whole-file stage authority repair
+
+- [x] Inventory the exact dirty worktree at entry HEAD
+  `4e164061e18da17cc24d576a26800ab1ecce69c2`; verify no deletions; archive all
+  13 modified/untracked paths outside the repository; verify archive SHA-256
+  `29a7863787dc78902a2eb1dd948a2fbc9830b94a85fead40283a8c54d603cb9e`
+  and extracted-byte equality; leave the dirty worktree untouched.
+- [x] Preserve the authentic-byte-source research note as non-authoritative
+  decision input and select Option A without importing Rust into this clean
+  authority-repair worktree.
+- [x] Keep `promotion-transaction-intent` `1.2` schema byte-for-byte unchanged;
+  reproduce its exact 16,019 bytes/SHA-256 plus the unchanged amendment intent
+  fingerprint, 7,607-byte document SHA-256, and 72-byte marker.
+- [x] Freeze exact `.output-staging/` path, 128-bit random purpose-typed scratch
+  names, same-filesystem/create-new/no-follow/bounded-byte rules, retained exact-
+  byte and type-specific verification, atomic rename-no-replace, ordered
+  pending/scratch/transaction-parent fsyncs, and pending-stage reverify.
+- [x] Replace only `canonical.new`, `promotion-record.new`, and
+  `lifecycle-transition.new` authoritative states with
+  `{absent, exact, mismatch}`; partial pending stages always preserve/refuse.
+  Retain `canonical.old` and marker-temp prefix rules because each has an
+  authentic complete source.
+- [x] Repair `W5`-`W7`, `R0`/`R4`-`R6`, rollback-progress construction,
+  recovery partition, state axes, negative vectors, and mismatch wording so
+  scratch is never scanned, classified, deleted, or used as authority. Prove
+  every writer/discovery/recovery/finalization pending path uses only the
+  validated `transaction_id`, including unequal-`promotion_id` refusal.
+- [x] Freeze the exact three-purpose by `S0`-through-`S11` fault Cartesian
+  product, rejecting every missing or duplicate pair, plus crash injection
+  after retained-byte/binding acquisition, every scratch create, bounded write
+  prefix, file fsync, close, no-follow
+  reopen, exact verification, scratch-dir fsync, atomic rename, pending-dir
+  fsync, post-rename scratch-dir fsync, transaction-parent fsync, and exact stage
+  reverify. Assert pre-rename stage absence and post-rename absent-or-exact.
+- [x] Update the coupled `00`, `03`, `04`, `05`, `06`, SPEC, vector, plan,
+  checklist, research, and additive proof surfaces only; preserve all immutable
+  handoffs/dispatches/reviews/proofs and every Rust/test byte.
+- [x] Validate JSON/Draft 2020-12, unchanged intent identity, matrix closure,
+  links, handoffs/self-tests, whitespace, secrets, and documentation-only scope.
+- [x] Dispatch the first exact 21-path subject to a fresh isolated reviewer;
+  accept both Required findings and the Nit without waiver; repair promotion
+  intent publication, `S0` fault closure, and research paths; record the
+  additive Review 1 remediation proof.
+- [x] Dispatch the Review 1-remediated exact 22-path subject to a different
+  fresh isolated reviewer; accept its Required pending-path identity finding
+  without waiver; repair the sole stale promotion-ID placeholder, add the
+  unequal-ID negative, and record the additive Review 2 remediation proof.
+- [x] Dispatch the Review 2-remediated exact 23-path subject to a third
+  different fresh isolated reviewer; accept its Required terminal-marker
+  durability finding without waiver; add symmetric pending-directory-fsync/
+  payload-revalidation replay and eight crash pairs; record the additive
+  Review 3 remediation proof.
+- [x] Dispatch the Review 3-remediated exact 24-path subject to a fourth
+  different fresh isolated reviewer; accept its Required rollback-destination
+  and Nit source-integrity findings without waiver; add symmetric four-state
+  terminal destination axes/negatives, cite immutable pre-repair evidence, and
+  record the additive Review 4 remediation proof.
+- [x] Dispatch the Review 4-remediated exact 25-path subject to a fifth
+  different fresh isolated reviewer; accept both terminal-label and historical-
+  citation Nits without waiver; normalize every mutable normative terminal axis
+  to the machine labels, pin lifecycle-authority research to immutable pre-
+  repair Git objects, and record the additive Review 5 remediation proof.
+- [x] Dispatch the Review 5-remediated exact 26-path subject to a sixth
+  different fresh isolated reviewer; accept its planning-versus-implementation
+  status Nit without waiver; attach `review-clean` only to the Option 1 planning
+  handoff, keep the stopped implementation explicitly non-clean, and record the
+  additive Review 6 remediation proof.
+- [ ] Create an immutable exact-subject review dispatch and obtain fresh
+  isolated read-only review. Accept findings without waiver and obtain a
+  different-fresh re-review after every repair until `CLEAN`.
+- [ ] After `CLEAN`, create the reviewed documentation-only primary commit and
+  separate parent handoff/ledger closeout commit. Do not resume Rust or HCM-2.3
+  in this orchestration.
 
 ## Authority-repair planning packet
 
@@ -34,7 +112,9 @@ are erroneous. The authoritative mutable paths are this `tasks/todo.md` and
   re-author/re-evaluate and new approvals; admit no implicit dual read.
 - [ ] Freeze complete promotion intent `1.2` closed schema and exact amendment
   fingerprint/document/marker vector, literal nested keys, whole-file intent
-  publication from non-authoritative scratch, fifteen-name pending grammar,
+  publication from non-authoritative scratch, separate atomic whole-file
+  canonical/promotion/lifecycle stage publication from `.output-staging/`,
+  absent-or-exact authoritative new-output stages, fifteen-name pending grammar,
   ordered `W0`-`W15` cumulative writer boundaries, terminal name sets,
   independent canonical-old/new/record-stage and suffix axes, amendment prefix
   completion, finite crash-state domain, ordered `R0`-`R9` rollback-recovery
@@ -75,7 +155,11 @@ are erroneous. The authoritative mutable paths are this `tasks/todo.md` and
 - [ ] Add all-mode equivalence and sixteen-item non-overlapping coverage/source/bijection/unknown/contradiction/waiver RED tests.
 - [ ] Add additive intake/approval/promotion `1.1`, candidate `1.2`, and lifecycle-validation-result `1.0` basis lineage plus exact ES256/`fmt: none` authenticator bootstrap/registry/UV/UP/assertion/class/revocation, distinct add-enrollment credential and P-256 keypair, real registry-resolved DER signature verification, exact `AUTHENTICATOR_UNAVAILABLE` fail-before-delta result, caller-intent-only request DTOs, operation-by-status/refusal result DTOs and mandatory crossed-state rejections, forged mapping, stale authority, replay, and ABA RED tests; mechanically prove every current task names candidate `1.2` and treats candidate `1.0`/`1.1` as historical-only.
 - [ ] Add a retained lifecycle-head positive with at least two observations whose event-precedence order differs from ref order, plus ref-sorted/reordered, duplicate, incomplete, excess, and retained-head rewrite negatives.
-- [ ] Add create-null versus mandatory-amendment-basis equality at every lineage stage plus the exact observed-state promotion recovery table, partial record install, preexisting-equal reuse, commit-marker, concurrent-reader, and no-visible-partial-authority RED tests.
+- [ ] Add create-null versus mandatory-amendment-basis equality at every lineage
+  stage plus the exact observed-state promotion recovery table, partial scratch
+  writes with absent authoritative stage, partial pending-stage mismatch
+  preservation, atomic exact record install, preexisting-equal reuse, commit-
+  marker, concurrent-reader, and no-visible-partial-authority RED tests.
 - [ ] Add literal canonical YAML/Markdown fixtures, independent emitter/renderer, and fingerprint RED goldens.
 - [ ] Add lifecycle review/reassessment total-transition/precedence/fingerprint/targeted-reopen/no-auto-regeneration RED tests.
 - [ ] Add compiler/CLI/skill/setup/doctor/Environment Inventory/flow/legacy-irrelevance RED tests.
@@ -113,18 +197,30 @@ are erroneous. The authoritative mutable paths are this `tasks/todo.md` and
 - [ ] Implement exact recovery-before-intent lock/journal/fsync/create-new-or-
   equal protocols, closed promotion intent `1.2` schema/vector, JCS+LF identity,
   complete scratch verification plus atomic whole-intent publication, fifteen-
-  name grammar, `W0`-`W15` writer order, atomically published exact 72-byte raw-
+  name grammar, complete verified atomic canonical/promotion/lifecycle
+  publication from non-authoritative `.output-staging/`, absent-or-exact pending
+  new-output stages, `W0`-`W15` writer order, atomically published exact 72-byte raw-
   intent-hash markers, and exhaustive suffix-disjoint Cartesian-product crash-
-  state proof with separate old/new/promotion/lifecycle stage axes and exactly
+  state proof with `canonical.old` prefix states, separate absent/exact/mismatch
+  new/promotion/lifecycle stage axes, and exactly
   one recovery row per state; enumerate every amendment old-snapshot prefix and
   prove exact snapshot completion before rollback; enumerate every `R0`-`R9`
   crash from every admitted `W3`-`W9` origin, the exact five-name cleanup order
   with per-unlink directory fsync, all 0..72 rollback-marker prefixes, published
-  rollback under `.pending`, terminal rename, and repeated parent fsync; prove
+  rollback under `.pending`, mandatory pending-directory-fsync replay plus
+  terminal-payload revalidation before terminal rename, and repeated parent
+  fsync; cross `.rolled-back` destination
+  `{absent, exact_pre_existing, mismatching, unsafe}`, permit rename only for
+  absent, and prove
+  every collision/unsafe/simultaneous suffix preserves pending evidence and
+  refuses; prove
   retry reaches the exact `.rolled-back` terminal and every state outside the
   constructed closure preserves mismatch; enumerate published `committed` under
-  `.pending` across absent/exact/mismatching/unsafe destinations, simultaneous
-  suffixes, terminal rename, parent fsync, and exact `.committed` replay; only an
+  `.pending` across `{absent, exact_pre_existing, mismatching, unsafe}`
+  destinations, simultaneous
+  suffixes, mandatory pending-directory-fsync replay plus terminal-payload
+  revalidation before terminal rename, parent fsync, and exact `.committed`
+  replay; only an
   absent destination may rename and every collision must preserve pending
   evidence and refuse; preserve all 17 fixture-bound
   content-addressed ref-basename/target-ID/
@@ -135,6 +231,11 @@ are erroneous. The authoritative mutable paths are this `tasks/todo.md` and
   addressed records rather than deleting them, and prove end-to-end basis,
   validation-result, registry-pair, ABA, crash, concurrent-reader, and replay
   equality.
+- [ ] Prove output scratch path/type/random-name/create-new/no-follow/same-
+  filesystem rules and every S0-S11 boundary for all three purposes; enumerate
+  all bounded-fixture scratch prefixes; prove recovery/selected reads ignore and
+  never delete scratch; prove every partial authoritative output stage preserves
+  the complete journal and refuses without mutation.
 - [ ] Prove pre-commit recovery requires the exact bound prior lifecycle state,
   commit advances to the intent-bound successor, and later committed successors
   preserve historical journal validity without requiring old target/head bytes

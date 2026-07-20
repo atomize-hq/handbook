@@ -2,14 +2,19 @@
 
 ## Status
 
-Escalation `HCM-2.2-ESC-001` selected Option 1 for a documentation-only
-authority repair. The prior implementation is a non-authoritative blocked
-checkpoint. This revised plan adds candidate `1.2`, an acyclic
+Escalation `HCM-2.2-ESC-001` selected Option 1 and received a review-clean
+planning closeout. Its later explicitly selected implementation stopped when
+the `W5`-`W7` pending-stage exact-prefix grammar proved unauthenticatable after
+process memory loss. User-selected escalation `HCM-2.2-ESC-002` authorizes only
+this atomic whole-file scratch-publication documentation repair. The current
+dirty implementation is preserved in a verified recoverable snapshot and
+remains non-authoritative checkpoint evidence. This revised plan retains
+candidate `1.2`, an acyclic
 `candidate_subject_fingerprint`, engine-owned lifecycle-validation result `1.0`,
-and complete promotion-journal/API repairs. Implementation remains unauthorized
-until the complete revised planning subject receives fresh CLEAN review and a
-new parent dispatch explicitly selects a later implementation packet. No
-HCM-2.3 authority exists.
+and complete promotion-journal/API repairs while replacing only the impossible
+new-output partial-stage grammar. Rust implementation remains stopped until the
+complete repaired recovery subject receives fresh CLEAN review and a new parent
+handoff records that reviewed authority. No HCM-2.3 authority exists.
 
 The immutable escalation handoff incorrectly cites `status/plan.md` and
 `status/todo.md`. Those paths do not exist; the additive correction is this
@@ -28,7 +33,8 @@ isolated, and read-only.
 ## Dependency graph
 
 ```text
-R0 reviewed authority-repair planning dispatch
+R-1 reviewed atomic whole-file stage authority repair
+  -> R0 reviewed Option 1 authority-repair planning dispatch
   -> P0 entry + HIGH/CRITICAL impact refresh
   -> P1 RED definition/schema/lineage tests
   -> P2 versioned definition registries and selected profile
@@ -41,6 +47,65 @@ R0 reviewed authority-repair planning dispatch
   -> P9 fresh review/remediation loop
   -> P10 primary commit + parent closeout
 ```
+
+## R-1 — Atomic whole-file stage authority repair (current authorized scope)
+
+1. Preserve the dirty Rust/test/checklist/research worktree at exact entry HEAD
+   in a verified recoverable external snapshot; record every path, no-deletion
+   status, archive SHA-256, and extracted-byte equality. Do not stage, commit,
+   reset, discard, or import those bytes into the authority-only subject.
+2. Keep intent `1.2`'s closed schema and exact amendment
+   fingerprint/document/marker vector unchanged. Reproduce the schema's exact
+   16,019 bytes/SHA-256 and intent's exact 7,607 bytes/SHA-256/72-byte marker.
+   An additive intent version is permitted only if fresh planning review proves
+   the selected persistence-only repair insufficient.
+3. Freeze `.output-staging/` as a same-filesystem non-authoritative sibling with
+   independent engine-random 128-bit purpose-typed scratch names, create-new/
+   no-follow/bounded writes, file fsync+close, exact reopen verification,
+   scratch-directory fsync, atomic rename-no-replace to the named pending stage,
+   ordered pending/scratch/transaction-parent fsyncs, and final exact stage
+   reverify.
+4. Change only `canonical.new`, `promotion-record.new`, and
+   `lifecycle-transition.new` pending axes to `{absent, exact, mismatch}`. Keep
+   every partial write exclusively in ignored scratch. Preserve
+   `canonical.old` `{absent, exact_prefix, exact, mismatch}` because the retained
+   exact old target is its authentic completion source; preserve marker temp
+   exact-prefix grammar because its complete payload is derivable from intent.
+5. Repair `W5`-`W7`, `R0`/`R4`-`R6`, rollback-progress construction, total
+   recovery partition, negative matrix, and Cartesian/fault domain so every
+   partial pending new-output stage is evidence-preserving mismatch and no
+   scratch byte can authorize, block, or alter recovery. Assert every writer,
+   discovery, recovery, and finalization pending path is derived only from the
+   validated intent-bound `transaction_id`; the distinct `promotion_id` is
+   never a journal key.
+   Cross published `committed` and published `rolled-back` independently with
+   destination `{absent, exact_pre_existing, mismatching, unsafe}`. Only absent
+   may terminal-rename; every collision/unsafe/simultaneous suffix preserves
+   and refuses.
+6. Freeze the exact Cartesian product of every output purpose with `S0` through
+   `S11`, rejecting a missing or duplicate purpose/boundary pair. Inject after
+   retained-byte/binding acquisition before scratch creation, every scratch
+   create/write prefix/file fsync/
+   close/reopen/verification/scratch-dir fsync/atomic rename/pending-dir fsync/
+   post-rename scratch-dir fsync/transaction-parent fsync/stage reverify for
+   all three outputs. Pre-rename faults expose the pending stage absent; post-
+   rename observations expose only absent or exact.
+7. Update only coupled mutable control/spec/vector/plan/checklist/research/proof
+   surfaces. Validate schemas, unchanged identity vectors, JSON, links,
+   whitespace, immutable history, exact documentation-only scope, and the
+   preserved dirty snapshot.
+8. Dispatch the complete repaired persistence/recovery subject to one fresh
+   isolated read-only reviewer. Accept every finding without waiver, repair,
+   and use a different fresh reviewer until CLEAN. Do not resume Rust or begin
+   HCM-2.3 during this packet.
+9. After CLEAN only, commit the reviewed documentation subject, then create and
+   commit the separate parent handoff/ledger closeout. The handoff records the
+   repaired planning authority but does not itself resume Rust; a later bounded
+   HCM-2.2 implementation requires fresh explicit user selection.
+
+**Checkpoint:** exact absent-or-complete pending-stage authority is review-clean
+and committed in two documentation-only commits; the dirty implementation
+snapshot remains evidence only and HCM-2.3 remains unauthorized.
 
 ## R0 — Authority-repair planning closeout (current authorized scope)
 
@@ -242,15 +307,22 @@ candidate schema/semantic tests pass; no canonical write exists yet.
    complete reopened-coverage set at promotion time before any mutation. Use
    exact committed lifecycle-head active-observation order and test a retained
    multi-observation head whose event order deliberately differs from ref order.
-3. Implement closed promotion intent `1.2` from its exact schema/vector,
-   literal nested fields, bounded JCS+LF persistence, complete verified intent
-   scratch outside authority and atomic whole-file publication, fifteen-name
-   pending grammar, ordered `W0`-`W15` no-follow writer transitions, exact-prefix staged
-   crash states, exact 72-byte atomically published marker grammar, authority
+3. Implement closed promotion intent `1.2` from its exact unchanged schema/
+   identity vector, literal nested fields, bounded JCS+LF persistence, complete
+   verified intent scratch outside authority, and atomic whole-file publication.
+   Implement the separate `.output-staging/` protocol for canonical, promotion,
+   and lifecycle outputs: create-new random purpose-typed scratch, exact retained-
+   byte/hash/length/type/binding verification, atomic rename-no-replace, ordered
+   pending/scratch/transaction-parent fsyncs, and exact pending-stage reverify.
+   Keep the fifteen-name pending grammar and ordered `W0`-`W15` transitions;
+   authoritative new-output stages are only absent or exact, while partial bytes
+   remain ignored scratch. Preserve the exact 72-byte atomically published
+   marker grammar, authority
    commit point, terminal `.committed`/`.rolled-back` name sets, and exhaustive
    recovery partition. Exhaustively enumerate separate `canonical.old`,
    `canonical.new`, promotion-stage, lifecycle-stage, final, marker, target, and
-   directory-suffix axes; prove all non-catch predicates are disjoint, every
+   directory-suffix axes, with `canonical.old` retaining its independently
+   authentic exact-prefix axis; prove all non-catch predicates are disjoint, every
    state selects exactly one row, every writer boundary selects its declared
    row, and every unreachable/crossed-suffix state preserves evidence and
    refuses. Treat rollback recovery as an equally faultable writer: enumerate
@@ -258,17 +330,27 @@ candidate schema/semantic tests pass; no canonical write exists yet.
    `prepared.tmp`, `prepared`, lifecycle stage, promotion stage, and canonical
    stage in that order with a directory fsync after each unlink; admit every
    exact rollback-marker prefix; finalize a published `rolled-back` still under
-   `.pending`; and repeat the parent fsync for an exact terminal. Apply the same
-   terminal contract to a published `committed` under `.pending`: exact payload,
-   rename-no-replace, preserve/refuse every destination collision or simultaneous
+   `.pending` only after repeating the pending-directory fsync and exact
+   terminal-payload revalidation; and repeat the parent fsync for an exact
+   terminal. Apply the same terminal contract to a published `committed` under
+   `.pending`: repeat the pending-directory fsync, exact-revalidate the payload,
+   rename-no-replace, preserve/refuse every `.committed` destination collision or simultaneous
    suffix, parent fsync, terminal reverify, and parent-fsync replay on every
-   exact `.committed` observation. For amendment
+   exact `.committed` observation. Cross the identical four destination states
+   for `.rolled-back`; only `absent` may rename, and `exact_pre_existing`,
+   `mismatching`, and `unsafe` all preserve the complete pending journal and
+   refuse. For amendment
    W3/W4, enumerate absence and every old-snapshot prefix length and prove
    recovery completes+fsyncs exact `canonical.old` before cleanup/terminal
-   rollback. Add
-   substitution, inode ABA, concurrent readers/writers, replay, and fault
-   injection after every forward-writer and recovery-writer persistence
-   boundary. Require identical basis and
+   rollback. Add substitution, inode ABA, concurrent readers/writers, replay,
+   partial-pending-stage mismatch preservation, and fault injection after every
+   output scratch create/write/fsync/close/reopen/verification/directory-fsync/
+   rename/stage-fsync/reverify plus every forward-writer and recovery-writer
+   persistence boundary, including after each terminal-marker rename before
+   the original pending-directory fsync, after that fsync, after recovery's
+   replayed fsync, and after payload revalidation. Prove scratch orphans are
+   never scanned, deleted, or
+   used to select recovery. Require identical basis and
    result/currentness bindings in intake, candidate, approvals, CLI, intent,
    promotion, retry, and recovery; install the lifecycle transition in the same
    authority-visible journal. Any canonical/final-record/intent/path/type/
@@ -421,7 +503,7 @@ classifications agree with an exact subject manifest.
 | critical profile resolver widens across product paths | RED version-selection tests first; additive minimal edit; immediate replay of five processes; stop on wider impact |
 | agent inference becomes constitutional authority | typed source kinds, normative declaration rule, candidate/approval separation, no nested model |
 | immutable records become competing truth | candidate/content store separate from canonical path; promotion is sole authority transition |
-| crash leaves physical partial files | shared-lock readers expose only a matching committed journal; total observed-state rollback/roll-forward and exhaustive fault injection |
+| crash leaves physical partial files | partial intent/new-output bytes exist only in non-authoritative sibling scratch; pending intent/new-output stages are absent or exact; markers and amendment old snapshot retain only their separately authentic prefixes; exhaustive fault injection proves selected readers and recovery ignore scratch |
 | validation identity becomes cyclic | candidate `1.2` subject identity precedes the engine result; the final candidate alone points to that result |
 | stale or transplanted validation authority promotes | exact one-result cross-record binding plus full promotion-time recomputation before mutation |
 | recovery destroys mismatch evidence | every mismatch preserves the complete pending journal and blocks without mutation |

@@ -1545,8 +1545,32 @@ grammar, atomic marker publication, ordered writer boundaries, terminal file
 sets, independent old/new/record-stage axes, suffix-disjoint finite crash-state
 domain, amendment snapshot completion, ordered `R0`-`R9` crash-recoverable
 rollback cleanup/marker/terminalization, symmetric committed/rolled-back
+terminal-marker pending-directory-fsync/payload-revalidation replay,
 rename-no-replace collision refusal and parent-fsync replay, and exhaustive recovery partition are in
 [`slices/HCM-2.2/SPEC.md`](slices/HCM-2.2/SPEC.md).
+
+Escalation `HCM-2.2-ESC-002` repairs only the `W5`-`W7` persistence grammar;
+intent `1.2` remains byte-for-byte unchanged. `canonical.new`,
+`promotion-record.new`, and `lifecycle-transition.new` are constructed in the
+same-filesystem non-authoritative sibling `.output-staging/` namespace under
+independent engine-random 128-bit purpose-typed names. Each scratch file is
+create-new, fully written, fsynced, closed, boundedly reopened no-follow, and
+verified against the retained exact bytes plus intent-bound hash/length and
+type-specific canonical/record identity. Only then may atomic
+rename-no-replace publish it to the named pending stage, followed in exact order
+by pending-directory, scratch-directory, and transaction-parent fsync and an
+exact bounded no-follow stage reverify.
+
+Recovery and selected readers never scan, classify, delete, or derive authority
+from scratch. Crashes before atomic rename expose the pending stage absent;
+crashes at or after rename expose it only absent or exact complete. Therefore
+the three new-output pending axes are `{absent, exact, mismatch}`, and every
+partial pending stage preserves the journal and refuses even if it is a correct
+prefix. `canonical.old` alone retains absent/exact-prefix/exact amendment
+snapshot states because the retained exact old target is its authentic
+completion source; marker temp prefixes remain valid because their complete
+payload is derived from exact `intent.json`. Scratch garbage collection is not
+part of recovery and remains separately authorized.
 
 Every canonical/final-record/intent/stage/path/type/marker/currentness mismatch
 preserves the entire journal and refuses without mutation. Exact rollback

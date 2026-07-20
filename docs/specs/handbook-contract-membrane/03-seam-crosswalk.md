@@ -4,12 +4,16 @@
 
 This document separates current artifacts from target semantics. Re-check the live tree before each slice and update affected rows when their classification changes.
 
-HCM-2.2 escalation `HCM-2.2-ESC-001` selects additive Option 1 as planning
+HCM-2.2 escalation `HCM-2.2-ESC-001` selected additive Option 1 planning
 authority: candidate `1.2` gains an acyclic validation-only subject fingerprint
-and an engine-owned lifecycle-validation result. The prior implementation stays
-non-authoritative checkpoint evidence. Every Charter row below remains
-`TargetOnly` until a separately dispatched implementation completes fresh CLEAN
-review; the planning repair does not adopt a product path or authorize HCM-2.3.
+and an engine-owned lifecycle-validation result. Its selected implementation
+then stopped at an unauthenticatable partial-stage recovery rule.
+`HCM-2.2-ESC-002` now selects a documentation-only atomic whole-file output-
+stage repair: partial bytes remain only in ignored sibling scratch, and pending
+new-output stages are absent or exact. Intent `1.2` is unchanged. Every prior or
+dirty implementation stays non-authoritative checkpoint evidence. Every Charter
+row below remains `TargetOnly` until repaired implementation later completes
+fresh CLEAN review; this repair adopts no product path and authorizes no HCM-2.3.
 
 ## Classification rules
 

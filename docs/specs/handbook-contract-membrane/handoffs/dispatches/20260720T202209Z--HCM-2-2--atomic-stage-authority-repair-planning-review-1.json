@@ -1,0 +1,118 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260720T202209Z--HCM-2-2--atomic-stage-authority-repair-planning-review-1",
+  "created_at_utc": "2026-07-20T20:22:09Z",
+  "source_handoff_ids": ["20260720T160434Z--HCM-2-2--orchestration--authority-repair-planning-approved"],
+  "parent_orchestration_id": "20260720T195957Z--HCM-2-2--atomic-stage-authority-repair-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "debugging-and-error-recovery",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:2fab38a467cb4831fe0a780430b245db0636d537a3c573ba8677f5b071a140f8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/00-README.md", "sha256": "2e47ba70daaf453b8f477b70e2b191033aada1f88866aaa34565ceb9ae0dd80c"},
+      {"path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md", "sha256": "0adb58e45dad490ddbd3315c9c59206bb0deedb64aed2e2c33d467265863583c"},
+      {"path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md", "sha256": "8c7bc5585ab803930c068fbeefc5c3767d45b6f4c3babb143c6855fce8c70d0b"},
+      {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sha256": "e0e73e2dca402bd3b0b7ba29ceb5fa5ab27242e71d295cba993c35a8cdd0a529"},
+      {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sha256": "fa960e923106da34028d636b54dc41178e7cecb56a1ef208f20d8bc6bec9c52c"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sha256": "44846eb263f4a49298641d94e96a3b11284674bb56ee7c2ddcb926824ef10ec5"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authority-repair-runtime-vectors-v1.0.json", "sha256": "f5b0685de0b6eb84f14245db6b86b9c86a24e9e77139a474573046e04b3a6845"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/lifecycle-validation-result-1.0.0.schema.json", "sha256": "1d7d8733b19599804fcda32fe119766b1b910e2223aa981fcd9eb92cc4d5c03f"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-1.2.0.schema.json", "sha256": "c2f5cf51b833585bc10cfcd5b99ad2a2e2c0e952a79b3f2910ae6afbff746caa"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json", "sha256": "eaac424829c3382a0874101065b91f1e9328c09c9e7e197a967197b792297674"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T133733Z--authority-repair-planning-proof.md", "sha256": "210c63af5c8f9562c1698272a0cb6d675fdb63ce29d27248a4a6ecbd91c436f2"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T140649Z--authority-repair-review-1-remediation-proof.md", "sha256": "5f8f798713fcc381140c2d67739ad0cea2fc575abe5a5854c9f82f845a003a32"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T143647Z--authority-repair-review-2-remediation-proof.md", "sha256": "c533e7578c94500929e8149593779258319c6f519f5e162a82b04515f5473648"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T150541Z--authority-repair-review-3-remediation-proof.md", "sha256": "803c756554c2f6f4722f2a4de67642d5a937f62edf21f94e41e5967505a1d74c"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T152316Z--authority-repair-review-4-remediation-proof.md", "sha256": "f753de651aae71087410863909cc3815295be12ae5652340c342df48a424c5be"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T154251Z--authority-repair-review-5-remediation-proof.md", "sha256": "83be7273fa93c70694d8081e60e73b0ce83fb870f541893cc17f41591269c53d"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T201520Z--atomic-stage-authority-repair-planning-proof.md", "sha256": "e2a0e71bda1b963f3d585e801f81f88730f33819d83c50e16fc52abddc1f96e0"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/research/lifecycle-validation-authority-options.md", "sha256": "be362bdbf3f558bb136a80be2ea88cf6d919ea42675353e05a7ed903b051e802"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/research/promotion-recovery-authentic-byte-source-options.md", "sha256": "721447c1867d8ed96e169081db9b1e8ec9915f40250ad49f44eebbe3f3fb2915"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sha256": "491361c57f4b252b9f6319b66e207d8ac93e890b68b38929c8964cae472c2b88"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "sha256": "9ddf34b6ce63102e1d6465fd4e8129ba92710053b3f46e34a84a997f8d7f9909"}
+    ],
+    "aggregate_fingerprint": "sha256:2fab38a467cb4831fe0a780430b245db0636d537a3c573ba8677f5b071a140f8"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.2-ESC-002 complete atomic whole-file output-stage authority repair",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre-primary-commit fresh complete-subject review"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260720T160434Z--HCM-2-2--orchestration--authority-repair-planning-approved.json", "sections": ["complete immutable review-clean Option 1 planning handoff and reviewed-state manifest"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/research/promotion-recovery-authentic-byte-source-options.md", "sections": ["Problem statement", "Decision matrix", "Selected repair surface"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T201520Z--atomic-stage-authority-repair-planning-proof.md", "sections": ["Scope and authority", "Preserved implementation snapshot", "Frozen repair", "Mechanical validation before review"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sections": ["Promotion transaction intent 1.2 and recovery", "Promotion transaction protocol", "Review 2 implementation obligations", "Stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json", "sections": ["intent_contract", "writer_state_model", "negative_vectors"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sections": ["R-1 — Atomic whole-file stage authority repair (current authorized scope)", "P5 — Implement approval, promotion, and lifecycle", "Principal risks"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "sections": ["Atomic whole-file stage authority repair", "Promotion recovery, tests, and proof obligations"]},
+    {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sections": ["PR-009 — Charter questionnaire-shaped coverage and posture validation", "Open program proof gates", "HCM-2.2 constitutional-root implementation proof gate"]}
+  ],
+  "repo_truth": "The review-clean HCM-2.2 Option 1 identity/currentness/intent planning subject was selected for implementation at entry HEAD 4e164061e18da17cc24d576a26800ab1ecce69c2. That uncommitted implementation stopped because the former W5-W7 exact-prefix pending-output recovery grammar could not authenticate partial bytes after process-memory loss. The user selected this documentation-only Option A repair. The original 13-path dirty worktree is unchanged and preserved in a verified external snapshot. This exact 21-path subject keeps intent 1.2 and every identity value unchanged; it requires complete output bytes to be written, fsynced, closed, bounded/no-follow reopened, and exactly verified in independent same-filesystem non-authoritative .output-staging scratch before atomic rename-no-replace to absent-or-exact pending stages, followed by ordered directory fsyncs and exact stage reverify. Scratch is never recovery authority or a state axis. No Rust, immutable prior evidence, or HCM-2.3 surface changed.",
+  "allowed_scope": [
+    "Remain read-only and replay all 21 manifest hashes, lexical order, and aggregate before review.",
+    "Read the entire exact subject and independently review the complete acyclic identity, persistence, promotion-currentness, W0-W15 writer, S0-S11 scratch-publication, R0-R9 recovery, collision, mismatch-preservation, and fault-test authority, not only changed paragraphs.",
+    "Adversarially verify that partial bytes exist only in ignored scratch; pending new-output stages are absent or exact in writer/recovery closure; intent 1.2 is unchanged; canonical.old and marker-prefix exceptions have authentic complete sources; and no scratch state can authorize, block, select, or alter recovery.",
+    "Return findings first with exact file/line evidence, concrete failure mode, smallest bounded documentation repair, and missing validation."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, handoff/ledger writes, snapshot mutation, or user task hops.",
+    "No Rust/test work, implementation resumption, intent-schema widening, legacy fallback, dual read, relaxed validation, immutable prior-record rewrite, HCM-2.3 work, or adjacent cleanup.",
+    "Do not inherit the parent's or prior reviewers' conclusions; derive the whole verdict independently."
+  ],
+  "tasks": [
+    "Invoke the ordered required skills and return BLOCKED on any subject-manifest mismatch.",
+    "Determine whether the complete identity graph remains acyclic and every result/intent preimage, schema/vector/persistence/currentness/migration rule remains exact and mutually consistent after the recovery repair.",
+    "Prove every S0-S11 crash boundary for all three purposes maps to pending-stage absent or exact, every W0-W15/R0-R9 state is complete and suffix-disjoint, every partial/mismatched pending stage preserves evidence and refuses, and scratch can never enter the recovery partition.",
+    "Verify collision, no-follow, bounded-byte, exact-equal, atomic-rename, ordered file/directory-fsync, terminalization, replay, orphan, mismatch-preservation, and fault-matrix grammar, including the independent canonical.old and marker-prefix rules.",
+    "Return CLEAN only when no Critical, Required, Optional, or Nit finding remains; otherwise return CHANGES_REQUIRED or BLOCKED without repair."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md#promotion-transaction-intent-12-and-recovery",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-1.2.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260720T201520Z--atomic-stage-authority-repair-planning-proof.md",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#hcm-22-constitutional-root-implementation-proof-gate"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if any subject path, hash, count, order, aggregate, required authority ref, or reviewed-state prerequisite differs.",
+    "Return CHANGES_REQUIRED if any scratch, verification, rename, fsync, recovery, mismatch, collision, currentness, identity, migration, or fault-test rule remains missing, ambiguous, contradictory, or broader than the bounded repair.",
+    "Do not weaken or waive a finding, repair the subject, create records, authorize or resume implementation, or begin HCM-2.3."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "validation", "parent_disposition"]
+  }
+}

@@ -1,10 +1,10 @@
 # Handbook Contract Membrane Control Pack
 
-**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4 and the bounded HCM-2.1 Project Context canonical-YAML pilot have landed through separately reviewed implementation and closeout commits; HCM-2.2 is reopened at `HCM-2.2-ESC-001`, with additive Option 1 authority repair selected for planning and the prior implementation retained only as a non-authoritative checkpoint
+**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4 and the bounded HCM-2.1 Project Context canonical-YAML pilot have landed through separately reviewed implementation and closeout commits; HCM-2.2 is stopped at `HCM-2.2-ESC-002` while a documentation-only atomic whole-file output-stage repair receives fresh review; every prior or dirty implementation remains non-authoritative checkpoint evidence
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
-**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; the current HCM-2.2 authorization is documentation-only and may produce a reviewed planning handoff for a later implementation packet, but no Rust/implementation resumption occurs without that separate dispatch; HCM-2.3 and later slices remain unauthorized
+**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; current HCM-2.2 authority is documentation-only, keeps intent `1.2` unchanged, and may freeze absent-or-exact pending output stages through non-authoritative sibling scratch; no Rust resumes before the complete repaired recovery subject is fresh-review `CLEAN` and parent-closed; HCM-2.3 and later slices remain unauthorized
 **Repo-truth snapshot:** 2026-07-20; re-check live code before every slice
 
 ## Purpose
@@ -213,15 +213,18 @@ HCM-1 definition/schema/profile/descriptor byte, leaves shipped readiness
 conditional and `INDETERMINATE`, closes `PG-YAML-01` only for this one family,
 and leaves the temporary flow bridge for deletion no later than HCM-2.4.
 HCM-2.2 produced a broad implementation candidate for the first-party
-constitutional-root cutover, but it has not landed as authority. Fresh Review 2
-found that the shipped author-to-promote path lacks an engine-owned lifecycle
-validation result and that promotion accepts synthetic refs. Bounded remediation
-then proved the frozen identity graph cyclic: the immutable candidate includes a
-content-addressed validation-result ref while that result is required to bind the
-same final candidate fingerprint. The checkpoint remains non-authoritative, the
-Charter-specific proof gates remain open, and work may resume only after an
-additive authority decision defines an exact acyclic binding. HCM-2.3 and all
-later slices remain future work.
+constitutional-root cutover, but it has not landed as authority. Option 1
+repaired the candidate/result identity cycle and received a clean planning
+review. Its later implementation stopped because `W5`-`W7` allowed partial
+pending output stages whose complete bytes cannot be authenticated after
+process memory loss. `HCM-2.2-ESC-002` selects atomic whole-file publication
+from same-filesystem non-authoritative `.output-staging/`: authoritative
+`canonical.new`, `promotion-record.new`, and `lifecycle-transition.new` are
+absent or exact, while partial scratch is ignored by recovery. Intent `1.2`
+remains unchanged. The dirty implementation is preserved only as recoverable
+checkpoint evidence; Rust remains stopped until the complete repaired recovery
+subject is fresh-review `CLEAN`. Charter proof gates remain open, and HCM-2.3
+and all later slices remain future work.
 
 The shipped default artifact set is approved in [`slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md`](slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md)
 and its exact kind, profile, descriptor, and selected-registry data now exist.
