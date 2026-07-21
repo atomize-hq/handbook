@@ -163,16 +163,7 @@ fn author_intent_is_evaluated_but_fails_closed_without_lineage_persistence() {
         None,
     )
     .unwrap();
-    let expected_intake_ref = bundle.candidate.intake_record_ref.clone();
-    let expected_candidate_ref = format!("candidates/{}.json", bundle.candidate.candidate_id);
-    let expected_paths = serde_json::json!([
-        format!(
-            ".handbook/state/{}",
-            bundle.candidate.normalized_content_ref
-        ),
-        format!(".handbook/state/{expected_intake_ref}"),
-        format!(".handbook/state/{expected_candidate_ref}"),
-    ]);
+    let expected_intake_ref = bundle.candidate_subject.intake_record_ref.clone();
 
     let output = run(
         repo.path(),
@@ -196,11 +187,37 @@ fn author_intent_is_evaluated_but_fails_closed_without_lineage_persistence() {
         value["intake_fingerprint"],
         bundle.intake.record_fingerprint
     );
-    assert_eq!(value["candidate_ref"], expected_candidate_ref);
+    let candidate_ref = value["candidate_ref"].as_str().unwrap();
+    let candidate: serde_json::Value = serde_json::from_slice(
+        &fs::read(
+            repo.path()
+                .join(".handbook/evidence/charter")
+                .join(candidate_ref),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    assert_eq!(candidate["schema_version"], "1.3");
     assert_eq!(
         value["candidate_fingerprint"],
-        bundle.candidate.candidate_fingerprint
+        candidate["candidate_fingerprint"]
     );
+    assert_eq!(
+        candidate["candidate_subject_fingerprint"],
+        bundle.candidate_subject.candidate_subject_fingerprint
+    );
+    let validation_result_ref = candidate["validation_result_binding"]["validation_result_ref"]
+        .as_str()
+        .unwrap();
+    let expected_paths = serde_json::json!([
+        format!(
+            ".handbook/state/{}",
+            bundle.candidate_subject.normalized_content_ref
+        ),
+        format!(".handbook/state/{expected_intake_ref}"),
+        format!(".handbook/state/{validation_result_ref}"),
+        format!(".handbook/evidence/charter/{candidate_ref}"),
+    ]);
     assert_eq!(value["changed_paths"], expected_paths);
     assert!(value["refusal"].is_null());
     assert!(!value["next_actions"].as_array().unwrap().is_empty());

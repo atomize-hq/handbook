@@ -1,7 +1,11 @@
 use handbook_engine::{
-    encode_get_assertion_request, resolve_shipped_profile_decisions, ApproverAdminRequestV1,
-    ApproverRegistryServiceV1, CharterApprovalRequestV1, CharterApprovalResultV1,
-    CharterApprovalServiceV1, LineageRecordClassV1, NativeAuthenticatorPortErrorV1,
+    encode_get_assertion_request, parse_definition_yaml, resolve_shipped_profile_decisions,
+    ApproverAdminRequestV1, ApproverRegistryServiceV1, CharterAcquisitionMode,
+    CharterApprovalRequestV1, CharterApprovalResultV1, CharterApprovalServiceV1,
+    CharterAuthorPersistenceServiceV1, CharterAuthorityTransactionServiceV1,
+    CharterCoverageSubmission, CharterIntakeConsumer, CharterIntakeEnvelope,
+    CharterIntakeSourceKind, CharterPromotionIntentV1, CharterPromotionWorkflowServiceV1,
+    DefinitionFingerprint, LineageRecordClassV1, NativeAuthenticatorPortErrorV1,
     NativeAuthenticatorPortV1, TrustedLineageStoreV1, AUTHENTICATOR_RP_ID,
 };
 use p256::ecdsa::{signature::Signer, Signature, SigningKey};
@@ -24,6 +28,10 @@ const ADMIN_VECTORS: &[u8] = include_bytes!(concat!(
 const RUNTIME_VECTORS: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
     "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json"
+));
+const CANONICAL_CHARTER: &[u8] = include_bytes!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
 ));
 
 #[derive(Default)]
@@ -126,11 +134,176 @@ fn seed_runtime_candidate(repo_root: &Path) -> (String, String) {
         .find(|row| row["record_class"] == "candidate")
         .unwrap()["record"]
         .clone();
+    let validation = fixture["vectors"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|row| row["record_class"] == "lifecycle-validation-result")
+        .unwrap()["record"]
+        .clone();
+    let validation_ref = candidate["validation_result_binding"]["validation_result_ref"]
+        .as_str()
+        .unwrap();
+    let validation_path = repo_root.join(".handbook/state").join(validation_ref);
+    std::fs::create_dir_all(validation_path.parent().unwrap()).unwrap();
+    let mut validation_bytes = serde_json_canonicalizer::to_vec(&validation).unwrap();
+    validation_bytes.push(b'\n');
+    assert_eq!(
+        candidate["validation_result_binding"]["result_document_sha256"],
+        DefinitionFingerprint::from_bytes(&validation_bytes).to_string()
+    );
+    assert_eq!(
+        candidate["validation_result_binding"]["result_byte_length"],
+        validation_bytes.len()
+    );
+    std::fs::write(validation_path, validation_bytes).unwrap();
+    let content_ref = candidate["normalized_content_ref"].as_str().unwrap();
+    let content_path = repo_root.join(".handbook/state").join(content_ref);
+    std::fs::create_dir_all(content_path.parent().unwrap()).unwrap();
+    assert_eq!(
+        content_ref,
+        format!(
+            "candidate-content/charter_{}.yaml",
+            DefinitionFingerprint::from_bytes(CANONICAL_CHARTER)
+                .to_string()
+                .strip_prefix("sha256:")
+                .unwrap()
+        )
+    );
+    std::fs::write(content_path, CANONICAL_CHARTER).unwrap();
     let bytes = serde_json_canonicalizer::to_vec(&candidate).unwrap();
     let persisted = TrustedLineageStoreV1::new(repo_root)
         .append_record(LineageRecordClassV1::Candidate, &bytes)
         .unwrap();
     (persisted.relative_ref, persisted.fingerprint)
+}
+
+fn install_historical_candidate(repo_root: &Path, current: &Value, version: &str) -> String {
+    let result_ref = current["validation_result_binding"]["validation_result_ref"].clone();
+    let mut candidate = current.clone();
+    candidate["schema_version"] = Value::String(version.to_owned());
+    candidate
+        .as_object_mut()
+        .unwrap()
+        .remove("validation_result_binding");
+    candidate["validation_result_refs"] = if version == "1.2" {
+        Value::Array(vec![result_ref])
+    } else {
+        Value::Array(vec![Value::String("validation_001".to_owned())])
+    };
+    if version == "1.2" {
+        let mut subject = candidate.clone();
+        for field in [
+            "candidate_id",
+            "candidate_fingerprint",
+            "candidate_subject_fingerprint",
+            "validation_result_refs",
+        ] {
+            subject.as_object_mut().unwrap().remove(field);
+        }
+        candidate["candidate_subject_fingerprint"] = Value::String(
+            DefinitionFingerprint::from_json_value(&subject)
+                .unwrap()
+                .to_string(),
+        );
+    } else {
+        candidate["normalized_content_ref"] = Value::String("candidates/candidate.yaml".to_owned());
+        candidate
+            .as_object_mut()
+            .unwrap()
+            .remove("candidate_subject_fingerprint");
+        if version == "1.0" {
+            candidate
+                .as_object_mut()
+                .unwrap()
+                .remove("basis_artifact_fingerprint");
+        }
+    }
+    candidate.as_object_mut().unwrap().remove("candidate_id");
+    candidate
+        .as_object_mut()
+        .unwrap()
+        .remove("candidate_fingerprint");
+    let fingerprint = DefinitionFingerprint::from_json_value(&candidate)
+        .unwrap()
+        .to_string();
+    let id = format!("candidate_{}", fingerprint.strip_prefix("sha256:").unwrap());
+    candidate["candidate_id"] = Value::String(id.clone());
+    candidate["candidate_fingerprint"] = Value::String(fingerprint);
+    let path = repo_root
+        .join(".handbook/evidence/charter/candidates")
+        .join(format!("{id}.json"));
+    std::fs::write(path, serde_json_canonicalizer::to_vec(&candidate).unwrap()).unwrap();
+    format!("candidates/{id}.json")
+}
+
+fn promotion_author_envelope(
+    revision: &str,
+    finalized_at_utc: &str,
+    expected_current_fingerprint: Option<String>,
+) -> CharterIntakeEnvelope {
+    let observational = [
+        "project_shape.definition",
+        "delivery.constraints",
+        "operational_reality.production_state",
+        "risk.domains",
+        "debt.register",
+    ];
+    let normative = [
+        "delivery.default_implications",
+        "engineering_posture.baseline",
+        "policy.authority_and_revision",
+        "governance.decision_authority",
+        "governance.required_approvals",
+        "governance.exception_policy",
+        "engineering_posture.dimensions",
+        "engineering_posture.red_lines",
+        "governance.review_triggers",
+        "governance.reassessment_triggers",
+        "decisions.records",
+    ];
+    let mut coverage = Vec::new();
+    for coverage_id in observational {
+        coverage.push(CharterCoverageSubmission {
+            coverage_id: coverage_id.to_owned(),
+            source_kind: CharterIntakeSourceKind::EvidencedInference,
+            value_ref: format!("intake-values/{coverage_id}.json"),
+            evidence_refs: vec![format!("evidence.{coverage_id}")],
+            confidence: "high".to_owned(),
+            freshness: Some("session".to_owned()),
+            sensitivity: "internal".to_owned(),
+            contradiction_refs: vec![],
+            waiver_ref: None,
+        });
+    }
+    for coverage_id in normative {
+        coverage.push(CharterCoverageSubmission {
+            coverage_id: coverage_id.to_owned(),
+            source_kind: CharterIntakeSourceKind::UserDeclaration,
+            value_ref: format!("intake-values/{coverage_id}.json"),
+            evidence_refs: vec![],
+            confidence: "high".to_owned(),
+            freshness: None,
+            sensitivity: "internal".to_owned(),
+            contradiction_refs: vec![],
+            waiver_ref: None,
+        });
+    }
+    let mut content = parse_definition_yaml(CANONICAL_CHARTER).unwrap();
+    content["policy"]["revision"] = Value::String(revision.to_owned());
+    CharterIntakeEnvelope {
+        mode: CharterAcquisitionMode::Express,
+        content,
+        coverage,
+        consumer: CharterIntakeConsumer {
+            kind: "handbook_skill".to_owned(),
+            id: "handbook".to_owned(),
+            version: "1.1".to_owned(),
+        },
+        prompt_event_refs: vec![],
+        finalized_at_utc: finalized_at_utc.to_owned(),
+        expected_current_fingerprint,
+    }
 }
 
 fn make_credential_response(key: &SigningKey, credential_id: &[u8]) -> Vec<u8> {
@@ -280,6 +453,104 @@ fn dynamic_es256_approval_commits_exact_fake_port_request_and_journal_authority(
         format!("sha256:{:x}\n", Sha256::digest(intent)).into_bytes()
     );
     assert_eq!(candidate_fingerprint.len(), 71);
+}
+
+#[test]
+fn product_authority_create_then_amend_revalidates_every_current_head() {
+    let temp = tempfile::tempdir().unwrap();
+    let decisions = resolve_shipped_profile_decisions(Path::new(env!("CARGO_MANIFEST_DIR")))
+        .expect("shipped Charter decisions");
+    let authored_create = CharterAuthorPersistenceServiceV1::new(temp.path())
+        .persist(
+            &decisions,
+            promotion_author_envelope("1", "2026-07-20T17:00:00Z", None),
+            None,
+        )
+        .expect("author create candidate");
+
+    let mut registry =
+        ApproverRegistryServiceV1::for_repository(temp.path(), DynamicApprovalPort::new());
+    assert_eq!(
+        registry
+            .bootstrap_approver_registry(bootstrap_request())
+            .to_json_value()
+            .unwrap()["status"],
+        "succeeded"
+    );
+    let mut approvals = CharterApprovalServiceV1::new(temp.path(), registry.into_port());
+    let create_approval = approvals.approve_candidate(
+        &decisions,
+        CharterApprovalRequestV1 {
+            operation_id: "product-create-approval".to_owned(),
+            candidate_ref: authored_create.candidate_ref.clone(),
+            approval_class: "Project owner approval".to_owned(),
+            authority_ref: "Project owner".to_owned(),
+            accepted_waiver_refs: vec![],
+        },
+    );
+    let CharterApprovalResultV1::Succeeded(create_approval) = create_approval else {
+        panic!("create approval must succeed: {create_approval:?}")
+    };
+    let create_commit = CharterPromotionWorkflowServiceV1::new(temp.path())
+        .promote(CharterPromotionIntentV1 {
+            candidate_ref: authored_create.candidate_ref,
+            approval_ref: create_approval.approval_ref,
+            expected_current_fingerprint: None,
+        })
+        .expect("create promotion must commit");
+    let observed_create = CharterAuthorityTransactionServiceV1::new(temp.path())
+        .read_committed_charter()
+        .unwrap()
+        .expect("create canonical authority");
+    assert_eq!(
+        observed_create.canonical_fingerprint,
+        create_commit.canonical_fingerprint
+    );
+
+    let authored_amend = CharterAuthorPersistenceServiceV1::new(temp.path())
+        .persist(
+            &decisions,
+            promotion_author_envelope(
+                "2",
+                "2026-07-20T17:02:00Z",
+                Some(create_commit.canonical_fingerprint.clone()),
+            ),
+            Some(&DefinitionFingerprint::parse(&create_commit.canonical_fingerprint).unwrap()),
+        )
+        .expect("author amendment candidate");
+    let amend_approval = approvals.approve_candidate(
+        &decisions,
+        CharterApprovalRequestV1 {
+            operation_id: "product-amend-approval".to_owned(),
+            candidate_ref: authored_amend.candidate_ref.clone(),
+            approval_class: "Project owner approval".to_owned(),
+            authority_ref: "Project owner".to_owned(),
+            accepted_waiver_refs: vec![],
+        },
+    );
+    let CharterApprovalResultV1::Succeeded(amend_approval) = amend_approval else {
+        panic!("amend approval must succeed: {amend_approval:?}")
+    };
+    let amend_commit = CharterPromotionWorkflowServiceV1::new(temp.path())
+        .promote(CharterPromotionIntentV1 {
+            candidate_ref: authored_amend.candidate_ref,
+            approval_ref: amend_approval.approval_ref,
+            expected_current_fingerprint: Some(create_commit.canonical_fingerprint.clone()),
+        })
+        .expect("amend promotion must commit");
+    let observed_amend = CharterAuthorityTransactionServiceV1::new(temp.path())
+        .read_committed_charter()
+        .unwrap()
+        .expect("amended canonical authority");
+    assert_eq!(
+        observed_amend.canonical_fingerprint,
+        amend_commit.canonical_fingerprint
+    );
+    assert_ne!(
+        observed_amend.canonical_fingerprint,
+        create_commit.canonical_fingerprint
+    );
+    assert_eq!(approvals.into_port().get_calls.len(), 2);
 }
 
 #[test]
@@ -538,6 +809,265 @@ fn stale_candidate_presence_refuses_before_native_io() {
     assert_eq!(refusal.code.as_str(), "stale_basis");
     assert!(refusal.semantic_identities_are_null());
     assert!(service.into_port().get_calls.is_empty());
+}
+
+#[test]
+fn historical_candidate_versions_are_approval_ineligible_before_native_io() {
+    let temp = tempfile::tempdir().unwrap();
+    let decisions = resolve_shipped_profile_decisions(Path::new(env!("CARGO_MANIFEST_DIR")))
+        .expect("shipped Charter decisions");
+    let mut registry =
+        ApproverRegistryServiceV1::for_repository(temp.path(), DynamicApprovalPort::new());
+    assert_eq!(
+        registry
+            .bootstrap_approver_registry(bootstrap_request())
+            .to_json_value()
+            .unwrap()["status"],
+        "succeeded"
+    );
+    let (current_ref, _) = seed_runtime_candidate(temp.path());
+    let current: Value = serde_json::from_slice(
+        &std::fs::read(
+            temp.path()
+                .join(".handbook/evidence/charter")
+                .join(current_ref),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let mut service = CharterApprovalServiceV1::new(temp.path(), registry.into_port());
+
+    for version in ["1.0", "1.1", "1.2"] {
+        let candidate_ref = install_historical_candidate(temp.path(), &current, version);
+        let result = service.approve_candidate(
+            &decisions,
+            CharterApprovalRequestV1 {
+                operation_id: format!("historical-{version}"),
+                candidate_ref,
+                approval_class: "Project owner approval".to_owned(),
+                authority_ref: "Project owner".to_owned(),
+                accepted_waiver_refs: vec![],
+            },
+        );
+        let CharterApprovalResultV1::Refused(refusal) = result else {
+            panic!("historical candidate approval must refuse")
+        };
+        assert_eq!(refusal.code.as_str(), "lineage_violation");
+        assert!(refusal.semantic_identities_are_null());
+    }
+    assert!(service.into_port().get_calls.is_empty());
+}
+
+#[test]
+fn approval_recomputes_semantic_result_authority_before_native_io() {
+    let temp = tempfile::tempdir().unwrap();
+    let decisions = resolve_shipped_profile_decisions(Path::new(env!("CARGO_MANIFEST_DIR")))
+        .expect("shipped Charter decisions");
+    let mut registry =
+        ApproverRegistryServiceV1::for_repository(temp.path(), DynamicApprovalPort::new());
+    assert_eq!(
+        registry
+            .bootstrap_approver_registry(bootstrap_request())
+            .to_json_value()
+            .unwrap()["status"],
+        "succeeded"
+    );
+    let (current_ref, _) = seed_runtime_candidate(temp.path());
+    let current_path = temp
+        .path()
+        .join(".handbook/evidence/charter")
+        .join(current_ref);
+    let mut candidate: Value =
+        serde_json::from_slice(&std::fs::read(current_path).unwrap()).unwrap();
+    let old_result_ref = candidate["validation_result_binding"]["validation_result_ref"]
+        .as_str()
+        .unwrap();
+    let mut result: Value = serde_json::from_slice(
+        &std::fs::read(temp.path().join(".handbook/state").join(old_result_ref)).unwrap(),
+    )
+    .unwrap();
+    let zero = "0".repeat(64);
+    let fingerprint = Value::String(format!("sha256:{zero}"));
+    result["basis_artifact_fingerprint"] = fingerprint.clone();
+    result["observed_current_artifact_fingerprint"] = fingerprint.clone();
+    result["lifecycle_head_ref"] = Value::String(format!(
+        "lifecycle-transitions/lifecycle-transition_{zero}.json"
+    ));
+    result["lifecycle_head_fingerprint"] = fingerprint.clone();
+    result["lifecycle_state"] = Value::String("review_required".to_owned());
+    result["lifecycle_state_fingerprint"] = fingerprint;
+    let mut result_preimage = result.clone();
+    for field in [
+        "validation_result_id",
+        "validation_result_fingerprint",
+        "validated_at_utc",
+    ] {
+        result_preimage.as_object_mut().unwrap().remove(field);
+    }
+    let result_fingerprint = DefinitionFingerprint::from_json_value(&result_preimage)
+        .unwrap()
+        .to_string();
+    let result_id = format!(
+        "lifecycle-validation-result_{}",
+        result_fingerprint.strip_prefix("sha256:").unwrap()
+    );
+    result["validation_result_id"] = Value::String(result_id.clone());
+    result["validation_result_fingerprint"] = Value::String(result_fingerprint.clone());
+    let result_ref = format!("lifecycle-validation-results/{result_id}.json");
+    let mut result_bytes = serde_json_canonicalizer::to_vec(&result).unwrap();
+    result_bytes.push(b'\n');
+    candidate["validation_result_binding"] = serde_json::json!({
+        "validation_result_ref": result_ref,
+        "validation_result_fingerprint": result_fingerprint,
+        "result_document_sha256": DefinitionFingerprint::from_bytes(&result_bytes).to_string(),
+        "result_byte_length": result_bytes.len(),
+    });
+    candidate.as_object_mut().unwrap().remove("candidate_id");
+    candidate
+        .as_object_mut()
+        .unwrap()
+        .remove("candidate_fingerprint");
+    let candidate_fingerprint = DefinitionFingerprint::from_json_value(&candidate)
+        .unwrap()
+        .to_string();
+    let candidate_id = format!(
+        "candidate_{}",
+        candidate_fingerprint.strip_prefix("sha256:").unwrap()
+    );
+    candidate["candidate_id"] = Value::String(candidate_id.clone());
+    candidate["candidate_fingerprint"] = Value::String(candidate_fingerprint);
+    let candidate_bytes = serde_json_canonicalizer::to_vec(&candidate).unwrap();
+    let candidate_ref = format!("candidates/{candidate_id}.json");
+    let candidate_path = temp
+        .path()
+        .join(".handbook/evidence/charter")
+        .join(&candidate_ref);
+    let result_path = temp.path().join(".handbook/state").join(
+        candidate["validation_result_binding"]["validation_result_ref"]
+            .as_str()
+            .unwrap(),
+    );
+    std::fs::write(&candidate_path, &candidate_bytes).unwrap();
+    std::fs::write(&result_path, &result_bytes).unwrap();
+    let mut service = CharterApprovalServiceV1::new(temp.path(), registry.into_port());
+
+    let approval = service.approve_candidate(
+        &decisions,
+        CharterApprovalRequestV1 {
+            operation_id: "stale-semantic-result".to_owned(),
+            candidate_ref,
+            approval_class: "Project owner approval".to_owned(),
+            authority_ref: "Project owner".to_owned(),
+            accepted_waiver_refs: vec![],
+        },
+    );
+    let CharterApprovalResultV1::Refused(refusal) = approval else {
+        panic!("stale semantic result authority must refuse")
+    };
+    assert_eq!(refusal.code.as_str(), "lineage_violation");
+    assert!(refusal.semantic_identities_are_null());
+    assert!(service.into_port().get_calls.is_empty());
+    assert_eq!(std::fs::read(candidate_path).unwrap(), candidate_bytes);
+    assert_eq!(std::fs::read(result_path).unwrap(), result_bytes);
+}
+
+#[test]
+fn coherent_exact_result_rewrite_requires_a_new_candidate_approval() {
+    let temp = tempfile::tempdir().unwrap();
+    let decisions = resolve_shipped_profile_decisions(Path::new(env!("CARGO_MANIFEST_DIR")))
+        .expect("shipped Charter decisions");
+    let mut registry =
+        ApproverRegistryServiceV1::for_repository(temp.path(), DynamicApprovalPort::new());
+    assert_eq!(
+        registry
+            .bootstrap_approver_registry(bootstrap_request())
+            .to_json_value()
+            .unwrap()["status"],
+        "succeeded"
+    );
+    let (candidate_ref, _) = seed_runtime_candidate(temp.path());
+    let mut approval_service = CharterApprovalServiceV1::new(temp.path(), registry.into_port());
+    let approval = approval_service.approve_candidate(
+        &decisions,
+        CharterApprovalRequestV1 {
+            operation_id: "approval-before-exact-rewrite".to_owned(),
+            candidate_ref: candidate_ref.clone(),
+            approval_class: "Project owner approval".to_owned(),
+            authority_ref: "Project owner".to_owned(),
+            accepted_waiver_refs: vec![],
+        },
+    );
+    let CharterApprovalResultV1::Succeeded(approval) = approval else {
+        panic!("original exact candidate approval must succeed")
+    };
+    let approval_path = temp
+        .path()
+        .join(".handbook/state")
+        .join(&approval.approval_ref);
+    let approval_bytes = std::fs::read(&approval_path).unwrap();
+
+    let candidate_path = temp
+        .path()
+        .join(".handbook/evidence/charter")
+        .join(&candidate_ref);
+    let mut candidate: Value =
+        serde_json::from_slice(&std::fs::read(candidate_path).unwrap()).unwrap();
+    let result_ref = candidate["validation_result_binding"]["validation_result_ref"]
+        .as_str()
+        .unwrap()
+        .to_owned();
+    let result_path = temp.path().join(".handbook/state").join(&result_ref);
+    let mut result: Value = serde_json::from_slice(&std::fs::read(&result_path).unwrap()).unwrap();
+    result["validated_at_utc"] = Value::String("2037-08-09T10:11:12Z".to_owned());
+    let mut rewritten_result_bytes = serde_json_canonicalizer::to_vec(&result).unwrap();
+    rewritten_result_bytes.push(b'\n');
+    candidate["validation_result_binding"]["result_document_sha256"] =
+        Value::String(DefinitionFingerprint::from_bytes(&rewritten_result_bytes).to_string());
+    candidate["validation_result_binding"]["result_byte_length"] =
+        Value::from(rewritten_result_bytes.len());
+    candidate.as_object_mut().unwrap().remove("candidate_id");
+    candidate
+        .as_object_mut()
+        .unwrap()
+        .remove("candidate_fingerprint");
+    let rewritten_candidate_fingerprint = DefinitionFingerprint::from_json_value(&candidate)
+        .unwrap()
+        .to_string();
+    let rewritten_candidate_id = format!(
+        "candidate_{}",
+        rewritten_candidate_fingerprint
+            .strip_prefix("sha256:")
+            .unwrap()
+    );
+    candidate["candidate_id"] = Value::String(rewritten_candidate_id.clone());
+    candidate["candidate_fingerprint"] = Value::String(rewritten_candidate_fingerprint.clone());
+    let rewritten_candidate_bytes = serde_json_canonicalizer::to_vec(&candidate).unwrap();
+    let rewritten_candidate_ref = format!("candidates/{rewritten_candidate_id}.json");
+    let rewritten_candidate_path = temp
+        .path()
+        .join(".handbook/evidence/charter")
+        .join(&rewritten_candidate_ref);
+    std::fs::write(&result_path, &rewritten_result_bytes).unwrap();
+    std::fs::write(&rewritten_candidate_path, &rewritten_candidate_bytes).unwrap();
+
+    let promotion = CharterPromotionWorkflowServiceV1::new(temp.path())
+        .promote(CharterPromotionIntentV1 {
+            candidate_ref: rewritten_candidate_ref,
+            approval_ref: approval.approval_ref,
+            expected_current_fingerprint: None,
+        })
+        .expect_err("approval for the old final candidate identity must not carry forward");
+    assert_eq!(
+        promotion.kind(),
+        handbook_engine::CharterPromotionWorkflowErrorKindV1::ApprovalRefused
+    );
+    assert_eq!(std::fs::read(approval_path).unwrap(), approval_bytes);
+    assert_eq!(std::fs::read(result_path).unwrap(), rewritten_result_bytes);
+    assert_eq!(
+        std::fs::read(rewritten_candidate_path).unwrap(),
+        rewritten_candidate_bytes
+    );
+    assert!(!temp.path().join(".handbook/project/charter.yaml").exists());
 }
 
 #[test]

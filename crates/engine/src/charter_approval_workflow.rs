@@ -4,9 +4,9 @@
 )]
 
 use crate::approver_registry_observation::{
-    observe_committed_approver_registry, ApproverAuthorityPairV1,
+    observe_committed_approver_registry_locked, ApproverAuthorityPairV1,
     ApproverRegistryObservationErrorKindV1, ApproverRegistryObservationErrorV1,
-    CommittedApproverCredentialV1, CommittedApproverRegistryObservationV1,
+    CommittedApproverCredentialV1, RetainedApproverRegistryObservationV1,
 };
 use crate::canonical_repo_support::{CanonicalWorkspace, RepoRelativeFileAccessError};
 use crate::charter_artifact::{parse_canonical_charter, CanonicalCharter};
@@ -16,7 +16,12 @@ use crate::charter_authenticator::{
     CredentialSelectionCandidateV1, CtapRefusalCodeV1, GetAssertionResponseV1,
     NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1, AUTHENTICATOR_RP_ID,
 };
+use crate::charter_authority_transaction::CharterAuthorityTransactionServiceV1;
 use crate::charter_definition_registry::load_shipped_charter_definition_registry;
+use crate::charter_lifecycle_store::CharterLifecycleStoreV1;
+use crate::charter_lifecycle_validation::{
+    validate_candidate_exact_result_authority, CharterLifecycleValidationServiceV1,
+};
 use crate::charter_lineage_store::{
     create_new_file, create_safe_directories, reject_reparse_or_symlink, sync_directory,
     validate_record, LineageRecordClassV1, LineageStoreErrorV1, TrustedLineageStoreV1,
@@ -198,13 +203,6 @@ impl<P: NativeAuthenticatorPortV1> CharterApprovalServiceV1<P> {
                 )
             })?;
 
-        // This observation acquires promotion then registry locks, recovers the
-        // committed registry domain, and privately retains both lock files. Keep it
-        // alive through the platform call and durable approval marker.
-        let authority = observe_committed_approver_registry(&self.repo_root)
-            .map_err(map_observation_refusal)?;
-        recover_approval_authority(&self.repo_root)?;
-
         let lineage = TrustedLineageStoreV1::new(&self.repo_root);
         let candidate_fingerprint = fingerprint_from_ref(&request.candidate_ref, "candidate")?;
         let candidate_bytes = lineage
@@ -223,8 +221,97 @@ impl<P: NativeAuthenticatorPortV1> CharterApprovalServiceV1<P> {
             )
         })?;
         validate_candidate_currentness(decisions, &candidate)?;
-
+        validate_candidate_exact_result_authority(&self.repo_root, &candidate).map_err(
+            |failure| {
+                refused(
+                    CharterApprovalRefusalCodeV1::LineageViolation,
+                    format!(
+                        "candidate exact lifecycle-validation authority refused: {}",
+                        failure.detail()
+                    ),
+                    false,
+                    "preserve the candidate/result evidence and reauthor candidate 1.3",
+                )
+            },
+        )?;
         let canonical = observe_candidate_basis(&self.repo_root, decisions, &candidate)?;
+
+        // Retain promotion, registry, and lifecycle authority through the native
+        // assertion and durable approval marker. This also makes candidate-result
+        // semantic currentness one atomic observation domain.
+        let transaction = CharterAuthorityTransactionServiceV1::new(&self.repo_root);
+        let retained = transaction.begin_retained_authority().map_err(|failure| {
+            refused(
+                CharterApprovalRefusalCodeV1::TransactionConflict,
+                format!(
+                    "complete retained authority recovery refused: {}",
+                    failure.detail()
+                ),
+                false,
+                "preserve the retained journals and repair the complete authority domain",
+            )
+        })?;
+        let authority = observe_committed_approver_registry_locked(&self.repo_root)
+            .map_err(map_observation_refusal)?;
+        recover_approval_authority(&self.repo_root)?;
+
+        let normalized_content_ref =
+            candidate["normalized_content_ref"]
+                .as_str()
+                .ok_or_else(|| {
+                    refused(
+                        CharterApprovalRefusalCodeV1::LineageViolation,
+                        "candidate normalized-content reference is not a string",
+                        false,
+                        "recreate the candidate through Charter intake",
+                    )
+                })?;
+        let normalized_content = lineage
+            .read_candidate_content(normalized_content_ref)
+            .map_err(map_lineage_refusal)?;
+        let current = retained.read_committed_charter().map_err(|failure| {
+            refused(
+                CharterApprovalRefusalCodeV1::TransactionConflict,
+                format!(
+                    "committed Charter authority observation refused: {}",
+                    failure.detail()
+                ),
+                false,
+                "repair retained promotion authority before approval",
+            )
+        })?;
+        let lifecycle = CharterLifecycleStoreV1::new(&self.repo_root)
+            .observe_retained_locked()
+            .map_err(|failure| {
+                refused(
+                    CharterApprovalRefusalCodeV1::LineageViolation,
+                    format!(
+                        "retained lifecycle authority observation refused: {}",
+                        failure.detail()
+                    ),
+                    false,
+                    "repair retained lifecycle authority before approval",
+                )
+            })?;
+        CharterLifecycleValidationServiceV1::new(&self.repo_root)
+            .validate_current_retained(
+                decisions,
+                &candidate,
+                &normalized_content,
+                current.as_ref(),
+                &lifecycle,
+            )
+            .map_err(|failure| {
+                refused(
+                    CharterApprovalRefusalCodeV1::LineageViolation,
+                    format!(
+                        "candidate semantic lifecycle-validation authority refused: {}",
+                        failure.detail()
+                    ),
+                    false,
+                    "preserve the evidence and reauthor candidate 1.3 against current authority",
+                )
+            })?;
         let required_pairs = required_approval_pairs(&authority, canonical.record.as_ref())?;
         let requested_pair = ApproverAuthorityPairV1 {
             approval_class: request.approval_class.clone(),
@@ -381,7 +468,7 @@ impl<P: NativeAuthenticatorPortV1> CharterApprovalServiceV1<P> {
             &canonical,
             records,
         )?;
-        drop(authority);
+        drop(retained);
         Ok(success)
     }
 }
@@ -463,7 +550,7 @@ struct ApprovalIntentV1 {
 
 impl ApprovalIntentV1 {
     fn from_records(
-        authority: &CommittedApproverRegistryObservationV1,
+        authority: &RetainedApproverRegistryObservationV1,
         credential: &CommittedApproverCredentialV1,
         records: &ApprovalRecords,
     ) -> Result<Self, CharterApprovalRefusalV1> {
@@ -1314,7 +1401,7 @@ fn validate_use_chain(
 fn ensure_retained_authority_stable(
     repo_root: &Path,
     lineage_store: &TrustedLineageStoreV1,
-    authority: &CommittedApproverRegistryObservationV1,
+    authority: &RetainedApproverRegistryObservationV1,
     credential: &CommittedApproverCredentialV1,
     candidate_bytes: &[u8],
     candidate_ref: &str,
@@ -1362,7 +1449,7 @@ fn ensure_retained_authority_stable(
 fn commit_approval_transaction(
     repo_root: &Path,
     _lineage_store: &TrustedLineageStoreV1,
-    authority: &CommittedApproverRegistryObservationV1,
+    authority: &RetainedApproverRegistryObservationV1,
     credential: &CommittedApproverCredentialV1,
     _candidate_bytes: &[u8],
     _canonical: &CanonicalBasisObservation,
@@ -2078,7 +2165,7 @@ fn validate_candidate_currentness(
 ) -> Result<(), CharterApprovalRefusalV1> {
     let exact = candidate.get("schema_id").and_then(Value::as_str)
         == Some("handbook.artifact-candidate")
-        && candidate.get("schema_version").and_then(Value::as_str) == Some("1.1")
+        && candidate.get("schema_version").and_then(Value::as_str) == Some("1.3")
         && candidate.get("target_instance_id").and_then(Value::as_str) == Some("project_authority")
         && candidate.get("target_kind_ref").and_then(Value::as_str)
             == Some("handbook.artifact-kind.project-authority@1.1.0")
@@ -2185,7 +2272,7 @@ fn observe_candidate_basis(
 }
 
 fn required_approval_pairs(
-    authority: &CommittedApproverRegistryObservationV1,
+    authority: &RetainedApproverRegistryObservationV1,
     current: Option<&CanonicalCharter>,
 ) -> Result<Vec<ApproverAuthorityPairV1>, CharterApprovalRefusalV1> {
     let mut pairs = Vec::new();
@@ -2285,7 +2372,7 @@ fn resolve_accepted_waivers(
 }
 
 fn eligible_credentials<'a>(
-    authority: &'a CommittedApproverRegistryObservationV1,
+    authority: &'a RetainedApproverRegistryObservationV1,
     requested_pair: &ApproverAuthorityPairV1,
     current_required_pairs: &[ApproverAuthorityPairV1],
 ) -> Result<Vec<&'a CommittedApproverCredentialV1>, CharterApprovalRefusalV1> {
@@ -2360,7 +2447,7 @@ fn build_approval_challenge(
     request: &CharterApprovalRequestV1,
     candidate_fingerprint: &str,
     basis: &Value,
-    authority: &CommittedApproverRegistryObservationV1,
+    authority: &RetainedApproverRegistryObservationV1,
     accepted_waivers: &[AcceptedWaiver],
     nonce: [u8; 32],
 ) -> Result<ApprovalChallenge, CharterApprovalRefusalV1> {
@@ -2601,7 +2688,7 @@ fn build_approval_records(
     request: &CharterApprovalRequestV1,
     candidate: &Value,
     candidate_fingerprint: &str,
-    authority: &CommittedApproverRegistryObservationV1,
+    authority: &RetainedApproverRegistryObservationV1,
     credential: &CommittedApproverCredentialV1,
     accepted_waivers: &[AcceptedWaiver],
     challenge: &ApprovalChallenge,

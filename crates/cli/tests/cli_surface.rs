@@ -1,3 +1,5 @@
+#[path = "../../engine/tests/support/hcm_2_2_committed_charter.rs"]
+mod hcm_2_2_committed_charter;
 mod pipeline_proof_corpus_support;
 
 use std::collections::BTreeSet;
@@ -10,11 +12,6 @@ const CANONICAL_CHARTER_YAML: &str = include_str!(concat!(
     env!("CARGO_MANIFEST_DIR"),
     "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
 ));
-const RUNTIME_RECORD_VECTORS: &[u8] = include_bytes!(concat!(
-    env!("CARGO_MANIFEST_DIR"),
-    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json"
-));
-
 #[derive(Debug)]
 struct ConsumerHarnessRun {
     feature_id: String,
@@ -527,159 +524,10 @@ fn write_valid_selected_project_context(root: &std::path::Path) {
 }
 
 fn write_valid_selected_charter(root: &std::path::Path) {
-    let vector = |record_class: &str| {
-        let fixture: serde_json::Value =
-            serde_json::from_slice(RUNTIME_RECORD_VECTORS).expect("runtime record vectors");
-        fixture["vectors"]
-            .as_array()
-            .expect("runtime vector array")
-            .iter()
-            .find(|row| row["record_class"] == record_class)
-            .unwrap_or_else(|| panic!("missing runtime record vector {record_class}"))["record"]
-            .clone()
-    };
-    let canonical = |value: &serde_json::Value| {
-        serde_json::to_vec(value).expect("canonical test record serialization")
-    };
-    let resign = |value: &mut serde_json::Value,
-                  id_field: &str,
-                  fingerprint_field: &str,
-                  prefix: &str,
-                  audit_only: &[&str]| {
-        let mut preimage = value.clone();
-        let object = preimage.as_object_mut().expect("runtime record object");
-        object.remove(id_field);
-        object.remove(fingerprint_field);
-        for field in audit_only {
-            object.remove(*field);
-        }
-        let fingerprint = handbook_engine::DefinitionFingerprint::from_json_value(&preimage)
-            .expect("runtime record fingerprint")
-            .to_string();
-        let id = format!(
-            "{prefix}_{}",
-            fingerprint
-                .strip_prefix("sha256:")
-                .expect("sha256 fingerprint")
-        );
-        value[id_field] = serde_json::Value::String(id);
-        value[fingerprint_field] = serde_json::Value::String(fingerprint);
-    };
-
-    let store = handbook_engine::TrustedLineageStoreV1::new(root);
-    for (class, vector_name) in [
-        (
-            handbook_engine::LineageRecordClassV1::AuthenticatorMakeCredentialResponse,
-            "authenticator-make-credential-response",
-        ),
-        (
-            handbook_engine::LineageRecordClassV1::AuthenticatorRegistration,
-            "authenticator-registration",
-        ),
-        (
-            handbook_engine::LineageRecordClassV1::RegistryState,
-            "registry-state",
-        ),
-        (
-            handbook_engine::LineageRecordClassV1::RegistryTransition,
-            "registry-transition",
-        ),
-        (
-            handbook_engine::LineageRecordClassV1::AuthenticatorGetAssertionResponse,
-            "authenticator-get-assertion-response",
-        ),
-        (
-            handbook_engine::LineageRecordClassV1::AuthenticatorAssertion,
-            "authenticator-assertion",
-        ),
-        (handbook_engine::LineageRecordClassV1::Intake, "intake"),
-        (
-            handbook_engine::LineageRecordClassV1::Candidate,
-            "candidate",
-        ),
-        (handbook_engine::LineageRecordClassV1::Approval, "approval"),
-    ] {
-        store
-            .append_record(class, &canonical(&vector(vector_name)))
-            .expect("seed retained Charter lineage");
-    }
-    write_file(
-        &root.join(".handbook/state/candidates/candidate.yaml"),
+    hcm_2_2_committed_charter::promote_committed_charter(
+        root,
         CANONICAL_CHARTER_YAML.as_bytes(),
-    );
-
-    let canonical_fingerprint =
-        handbook_engine::DefinitionFingerprint::from_bytes(CANONICAL_CHARTER_YAML.as_bytes())
-            .to_string();
-    let mut promotion = vector("promotion");
-    promotion["canonical_artifact_fingerprint"] =
-        serde_json::Value::String(canonical_fingerprint.clone());
-    resign(
-        &mut promotion,
-        "promotion_id",
-        "promotion_fingerprint",
-        "promotion",
-        &[],
-    );
-    let promotion_id = promotion["promotion_id"]
-        .as_str()
-        .expect("promotion id")
-        .to_owned();
-
-    let mut lifecycle = vector("lifecycle-transition");
-    lifecycle["new_observation_refs"] = serde_json::Value::Array(Vec::new());
-    lifecycle["active_observation_refs"] = serde_json::Value::Array(Vec::new());
-    lifecycle["result_state"] = serde_json::Value::String("current".to_owned());
-    lifecycle["clearance_promotion_ref"] =
-        serde_json::Value::String(format!("promotions/{promotion_id}.json"));
-    resign(
-        &mut lifecycle,
-        "transition_id",
-        "transition_fingerprint",
-        "lifecycle-transition",
-        &["transitioned_at_utc"],
-    );
-
-    let promotion = store
-        .append_record(
-            handbook_engine::LineageRecordClassV1::Promotion,
-            &canonical(&promotion),
-        )
-        .expect("promotion fixture record");
-    let lifecycle = store
-        .append_record(
-            handbook_engine::LineageRecordClassV1::LifecycleTransition,
-            &canonical(&lifecycle),
-        )
-        .expect("lifecycle fixture record");
-    let intent = serde_json::json!({
-        "schema_id": "handbook.promotion-transaction-intent",
-        "schema_version": "1.0",
-        "transaction_id": "cli-surface-ready-charter",
-        "canonical_artifact_ref": ".handbook/project/charter.yaml",
-        "canonical_fingerprint": canonical_fingerprint,
-        "expected_current_artifact_fingerprint": null,
-        "had_old_canonical": false,
-        "promotion_ref": promotion.relative_ref,
-        "promotion_fingerprint": promotion.fingerprint,
-        "lifecycle_transition_ref": lifecycle.relative_ref,
-        "lifecycle_transition_fingerprint": lifecycle.fingerprint,
-    });
-    let intent_bytes = canonical(&intent);
-    let marker = format!(
-        "{}\n",
-        handbook_engine::DefinitionFingerprint::from_bytes(&intent_bytes)
-    );
-    let committed =
-        root.join(".handbook/state/transactions/promotions/cli-surface-ready-charter.committed");
-    std::fs::create_dir_all(&committed).expect("committed promotion fixture journal");
-    std::fs::write(committed.join("intent.json"), intent_bytes)
-        .expect("committed promotion fixture intent");
-    std::fs::write(committed.join("committed"), marker.as_bytes())
-        .expect("committed promotion fixture marker");
-    write_file(
-        &root.join(".handbook/project/charter.yaml"),
-        CANONICAL_CHARTER_YAML.as_bytes(),
+        "cli-surface-ready-charter",
     );
 }
 

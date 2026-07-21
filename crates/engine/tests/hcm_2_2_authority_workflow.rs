@@ -161,7 +161,7 @@ fn author_service_persists_exact_intake_candidate_and_normalized_content() {
         .is_file());
     assert!(temp
         .path()
-        .join(".handbook/state")
+        .join(".handbook/evidence/charter")
         .join(&result.candidate_ref)
         .is_file());
     assert!(temp

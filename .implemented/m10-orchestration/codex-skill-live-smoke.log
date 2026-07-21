@@ -1,0 +1,17 @@
+==> install current handbook binary
+  Installing handbook-cli v0.1.0 (/mnt/c/hcm22ar-doc-repair/crates/cli)
+    Updating crates.io index
+   Compiling handbook-engine v0.1.1 (/mnt/c/hcm22ar-doc-repair/crates/engine)
+   Compiling handbook-pipeline v0.1.2 (/mnt/c/hcm22ar-doc-repair/crates/pipeline)
+   Compiling handbook-flow v0.1.1 (/mnt/c/hcm22ar-doc-repair/crates/flow)
+   Compiling handbook-compiler v0.1.0 (/mnt/c/hcm22ar-doc-repair/crates/compiler)
+   Compiling handbook-cli v0.1.0 (/mnt/c/hcm22ar-doc-repair/crates/cli)
+    Finished `release` profile [optimized] target(s) in 1m 11s
+   Replacing /home/spenser/.cargo/bin/handbook
+    Replaced package `handbook-cli v0.1.0 (/mnt/c/hcm22ar-doc-repair/crates/cli)` with `handbook-cli v0.1.0 (/mnt/c/hcm22ar-doc-repair/crates/cli)` (executable `handbook`)
+==> install generated codex skill assets
+==> explicit-mode immutable candidate smoke against installed runtime
+==> credential-free integration ceiling without Codex or native credentials
+==> outside-git-repo refusal smoke
+==> missing installed binary refusal smoke
+OK

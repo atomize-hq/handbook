@@ -1,11 +1,11 @@
 use handbook_engine::{
-    evaluate_charter_intake, load_selected_charter, resolve_shipped_profile_decisions,
-    ApproverAdminRequestV1, ApproverAdminResultV1, ApproverRegistryObservationErrorKindV1,
-    ApproverRegistryServiceV1, ArtifactInspectionReason, ArtifactInspectionStatus,
-    CharterAcquisitionMode, CharterApprovalRequestV1, CharterApprovalResultV1,
-    CharterApprovalServiceV1, CharterIntakeEnvelope, CharterPromotionIntentV1,
-    CharterPromotionWorkflowCommitV1, CharterPromotionWorkflowErrorV1,
-    CharterPromotionWorkflowServiceV1, NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1,
+    load_selected_charter, resolve_shipped_profile_decisions, ApproverAdminRequestV1,
+    ApproverAdminResultV1, ApproverRegistryObservationErrorKindV1, ApproverRegistryServiceV1,
+    ArtifactInspectionReason, ArtifactInspectionStatus, CharterAcquisitionMode,
+    CharterApprovalRequestV1, CharterApprovalResultV1, CharterApprovalServiceV1,
+    CharterIntakeEnvelope, CharterPromotionIntentV1, CharterPromotionWorkflowCommitV1,
+    CharterPromotionWorkflowErrorV1, CharterPromotionWorkflowServiceV1,
+    NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1,
     RepositoryInvocationIdentityServiceV1, RepositoryInvocationOperationV1,
     RepositoryInvocationPreparationFailureV1,
 };
@@ -191,29 +191,27 @@ fn execute_charter_command_with_port<P: NativeAuthenticatorPortV1>(
                 }
                 Err(error) => return selected_charter_refused(CharterOperation::Author, &error),
             };
-            let bundle = match evaluate_charter_intake(&decisions, envelope, current.as_ref()) {
-                Ok(bundle) => bundle,
-                Err(error) => return refused_charter(
-                    CharterOperation::Author,
-                    charter_intake_error_code(error.kind()),
-                    error.detail(),
-                    false,
-                    "repair the Charter intake against the selected engine definitions, then retry",
-                ),
-            };
-            let persistence = match handbook_engine::TrustedLineageStoreV1::new(repo_root)
-                .persist_candidate_bundle(&bundle)
+            let persistence = match handbook_engine::CharterAuthorPersistenceServiceV1::new(
+                repo_root,
+            )
+            .persist(&decisions, envelope, current.as_ref())
             {
                 Ok(persistence) => persistence,
-                Err(error) => {
-                    return refused_charter(
-                        CharterOperation::Author,
-                        "lineage_persistence_refused",
-                        error.detail(),
-                        error.kind() == handbook_engine::LineageStoreErrorKindV1::IoFailure,
-                        "repair the immutable lineage store refusal and retry the same intake",
-                    )
-                }
+                Err(error) => return refused_charter(
+                    CharterOperation::Author,
+                    match error.kind() {
+                        handbook_engine::CharterAuthorPersistenceErrorKindV1::IntakeRefused => {
+                            "charter_intake_refused"
+                        }
+                        handbook_engine::CharterAuthorPersistenceErrorKindV1::PersistenceRefused => {
+                            "lineage_persistence_refused"
+                        }
+                    },
+                    error.detail(),
+                    error.kind()
+                        == handbook_engine::CharterAuthorPersistenceErrorKindV1::PersistenceRefused,
+                    "repair the refused Charter authority input or retained state, then retry",
+                ),
             };
             CharterOperationResult {
                 schema_id: CHARTER_OPERATION_RESULT_SCHEMA_ID.to_owned(),
@@ -224,9 +222,9 @@ fn execute_charter_command_with_port<P: NativeAuthenticatorPortV1>(
                 source_fingerprint: None,
                 rendered_output_fingerprint: None,
                 intake_ref: Some(persistence.intake_ref.clone()),
-                intake_fingerprint: Some(bundle.intake.record_fingerprint),
+                intake_fingerprint: Some(persistence.intake_fingerprint.clone()),
                 candidate_ref: Some(persistence.candidate_ref.clone()),
-                candidate_fingerprint: Some(bundle.candidate.candidate_fingerprint),
+                candidate_fingerprint: Some(persistence.candidate_fingerprint.clone()),
                 approval_ref: None,
                 approval_fingerprint: None,
                 promotion_ref: None,
@@ -234,7 +232,11 @@ fn execute_charter_command_with_port<P: NativeAuthenticatorPortV1>(
                 changed_paths: vec![
                     format!(".handbook/state/{}", persistence.normalized_content_ref),
                     format!(".handbook/state/{}", persistence.intake_ref),
-                    format!(".handbook/state/{}", persistence.candidate_ref),
+                    format!(
+                        ".handbook/state/{}",
+                        persistence.lifecycle_validation_result_ref
+                    ),
+                    format!(".handbook/evidence/charter/{}", persistence.candidate_ref),
                 ],
                 refusal: None,
                 next_actions: vec![
@@ -545,24 +547,6 @@ fn profile_refused(operation: CharterOperation) -> CharterOperationResult {
         false,
         "repair selected profile definitions and retry",
     )
-}
-
-fn charter_intake_error_code(kind: handbook_engine::CharterIntakeErrorKind) -> &'static str {
-    match kind {
-        handbook_engine::CharterIntakeErrorKind::CoverageMismatch => "coverage_mismatch",
-        handbook_engine::CharterIntakeErrorKind::SourceAuthorityMismatch => {
-            "source_authority_mismatch"
-        }
-        handbook_engine::CharterIntakeErrorKind::UnknownOrContradictedCoverage => {
-            "unknown_or_contradicted_coverage"
-        }
-        handbook_engine::CharterIntakeErrorKind::WaiverMismatch => "waiver_mismatch",
-        handbook_engine::CharterIntakeErrorKind::BasisMismatch => "basis_mismatch",
-        handbook_engine::CharterIntakeErrorKind::CandidateContentInvalid => {
-            "candidate_content_invalid"
-        }
-        handbook_engine::CharterIntakeErrorKind::FingerprintFailed => "fingerprint_failed",
-    }
 }
 
 pub fn legacy_charter_input_refusal() -> CharterOperationResult {

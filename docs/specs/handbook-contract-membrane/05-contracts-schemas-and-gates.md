@@ -1592,7 +1592,7 @@ exact result binding before roll-forward.
 Concrete runtime vectors resolve fresh create assertion/approval/promotion
 fingerprints `sha256:2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a`,
 `sha256:ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2`,
-and `sha256:8a1e5d73ac0163f4eb0acc53d39dbb4c7a027c5c2cae0cf3d80fd249733e1e63`.
+and `sha256:48081ceb3d4ea4ed19bb32866faa5595ba86974cbf19df6db89b19179fb48900`.
 The amendment chain resolves fresh assertion, approval, promotion, and
 clearance-transition fingerprints
 `sha256:6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce`,

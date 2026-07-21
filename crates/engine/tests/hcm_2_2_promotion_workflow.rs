@@ -51,14 +51,11 @@ fn frozen_promotion_intent_uses_one_approval_anchor_and_no_caller_transaction_id
 fn promotion_intent_refuses_an_unbounded_singular_approval_anchor_before_io() {
     let repo = tempfile::tempdir().expect("repository");
     let error = CharterPromotionWorkflowServiceV1::new(repo.path())
-        .promote_at_for_testing(
-            CharterPromotionIntentV1 {
-                candidate_ref: "candidates/candidate_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json".to_owned(),
-                approval_ref: "x".repeat(MAX_LINEAGE_REFERENCE_BYTES + 1),
-                expected_current_fingerprint: None,
-            },
-            "2026-07-20T02:31:00Z",
-        )
+        .promote(CharterPromotionIntentV1 {
+            candidate_ref: "candidates/candidate_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json".to_owned(),
+            approval_ref: "x".repeat(MAX_LINEAGE_REFERENCE_BYTES + 1),
+            expected_current_fingerprint: None,
+        })
         .expect_err("unbounded approval anchor must refuse");
     assert_eq!(
         error.kind(),
@@ -294,14 +291,11 @@ fn every_workflow_error_kind_has_one_engine_owned_product_refusal_projection() {
 fn workflow_error_product_refusal_preserves_the_original_detail_message() {
     let repo = tempfile::tempdir().expect("repository");
     let error = CharterPromotionWorkflowServiceV1::new(repo.path())
-        .promote_at_for_testing(
-            CharterPromotionIntentV1 {
-                candidate_ref: String::new(),
-                approval_ref: String::new(),
-                expected_current_fingerprint: None,
-            },
-            "2026-07-20T02:31:00Z",
-        )
+        .promote(CharterPromotionIntentV1 {
+            candidate_ref: String::new(),
+            approval_ref: String::new(),
+            expected_current_fingerprint: None,
+        })
         .expect_err("empty refs must refuse");
     let detail = error.detail().to_owned();
     let refusal = error.product_refusal();

@@ -185,8 +185,8 @@
     {
       "name": "create_only",
       "supporting_lineage": {
-        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
-        "intake_record_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
+        "intake_record_ref": "intake-records/intake_680b82e17d097e08e189ce1a985e0200ce21c87700dd89dbbdb375231303204a.json",
+        "intake_record_fingerprint": "sha256:680b82e17d097e08e189ce1a985e0200ce21c87700dd89dbbdb375231303204a",
         "normalized_content_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml",
         "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
         "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44"
@@ -195,12 +195,572 @@
         "basis_artifact_fingerprint": null,
         "field_sources": [
           {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/labels/0"
+          },
+          {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/review_cadence"
+          },
+          {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/system"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/enabled"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/format"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/path"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/blast_radius"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/constraints/0"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/name"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/touches/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.red_lines",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.red_lines",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/red_lines/1"
+          },
+          {
+            "coverage_id": "governance.decision_authority",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/decision_authority/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_policy"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/approvers/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/1"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/2"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/record_location"
+          },
+          {
+            "coverage_id": "governance.reassessment_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/reassessment_triggers/0"
+          },
+          {
+            "coverage_id": "governance.reassessment_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/reassessment_triggers/1"
+          },
+          {
+            "coverage_id": "governance.required_approvals",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/required_approvals/0"
+          },
+          {
+            "coverage_id": "governance.review_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/review_triggers/0"
+          },
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/authority_statement"
+          },
+          {
             "coverage_id": "policy.authority_and_revision",
             "source_kind": "user_declaration",
             "target_path": "/policy/revision"
+          },
+          {
+            "coverage_id": "engineering_posture.baseline",
+            "source_kind": "user_declaration",
+            "target_path": "/posture/baseline_level"
+          },
+          {
+            "coverage_id": "engineering_posture.baseline",
+            "source_kind": "user_declaration",
+            "target_path": "/posture/baseline_rationale/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/classification"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/budget"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/deadline"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/experience_notes"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/must_use_tech"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/backward_compatibility"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/deprecation_policy"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/migration_planning"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/observability_threshold"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/rollout_controls"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/expected_lifetime"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/name"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/external_contracts_to_preserve"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/in_production_today"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/prod_users_or_data"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/uptime_expectations"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/runtime_environments/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/runtime_environments/1"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/surfaces/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/surfaces/1"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/team_size"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/users"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/record_id"
           }
         ],
-        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "intake_record_ref": "intake-records/intake_680b82e17d097e08e189ce1a985e0200ce21c87700dd89dbbdb375231303204a.json",
         "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
         "profile_ref": "handbook.profile.shipped-root@1.1.0",
         "promotion_eligibility": "requires_approval",
@@ -213,14 +773,14 @@
         "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
         "unresolved_coverage_ids": []
       },
-      "expected_candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
+      "expected_candidate_subject_fingerprint": "sha256:b5cc35cb20e82beab56bad776b81917552d2105a093f4054007ce59f9585e0f6",
       "validation_result_fingerprint_preimage": {
         "active_observations": [],
         "basis_artifact_fingerprint": null,
-        "candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
+        "candidate_subject_fingerprint": "sha256:b5cc35cb20e82beab56bad776b81917552d2105a093f4054007ce59f9585e0f6",
         "canonical_artifact_ref": ".handbook/project/charter.yaml",
-        "intake_record_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
-        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "intake_record_fingerprint": "sha256:680b82e17d097e08e189ce1a985e0200ce21c87700dd89dbbdb375231303204a",
+        "intake_record_ref": "intake-records/intake_680b82e17d097e08e189ce1a985e0200ce21c87700dd89dbbdb375231303204a.json",
         "lifecycle_head_fingerprint": null,
         "lifecycle_head_ref": null,
         "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
@@ -305,24 +865,584 @@
         "target_instance_id": "project_authority",
         "validation_status": "passed"
       },
-      "expected_validation_result_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
-      "expected_validation_result_id": "lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
-      "expected_validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json",
+      "expected_validation_result_fingerprint": "sha256:dc04ab36cfa3bc0392311d7abb1dca2899d94c0cae4b830d30787fb11891878a",
+      "expected_validation_result_id": "lifecycle-validation-result_dc04ab36cfa3bc0392311d7abb1dca2899d94c0cae4b830d30787fb11891878a",
+      "expected_validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_dc04ab36cfa3bc0392311d7abb1dca2899d94c0cae4b830d30787fb11891878a.json",
       "validation_result_record_additions": {
         "validated_at_utc": "2026-07-20T10:00:00Z",
-        "validation_result_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
-        "validation_result_id": "lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8"
+        "validation_result_fingerprint": "sha256:dc04ab36cfa3bc0392311d7abb1dca2899d94c0cae4b830d30787fb11891878a",
+        "validation_result_id": "lifecycle-validation-result_dc04ab36cfa3bc0392311d7abb1dca2899d94c0cae4b830d30787fb11891878a"
       },
       "final_candidate_fingerprint_preimage": {
         "basis_artifact_fingerprint": null,
         "field_sources": [
           {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/labels/0"
+          },
+          {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/review_cadence"
+          },
+          {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/system"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/enabled"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/format"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/path"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/blast_radius"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/constraints/0"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/name"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/touches/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.red_lines",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.red_lines",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/red_lines/1"
+          },
+          {
+            "coverage_id": "governance.decision_authority",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/decision_authority/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_policy"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/approvers/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/1"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/2"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/record_location"
+          },
+          {
+            "coverage_id": "governance.reassessment_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/reassessment_triggers/0"
+          },
+          {
+            "coverage_id": "governance.reassessment_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/reassessment_triggers/1"
+          },
+          {
+            "coverage_id": "governance.required_approvals",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/required_approvals/0"
+          },
+          {
+            "coverage_id": "governance.review_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/review_triggers/0"
+          },
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/authority_statement"
+          },
+          {
             "coverage_id": "policy.authority_and_revision",
             "source_kind": "user_declaration",
             "target_path": "/policy/revision"
+          },
+          {
+            "coverage_id": "engineering_posture.baseline",
+            "source_kind": "user_declaration",
+            "target_path": "/posture/baseline_level"
+          },
+          {
+            "coverage_id": "engineering_posture.baseline",
+            "source_kind": "user_declaration",
+            "target_path": "/posture/baseline_rationale/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/classification"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/budget"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/deadline"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/experience_notes"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/must_use_tech"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/backward_compatibility"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/deprecation_policy"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/migration_planning"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/observability_threshold"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/rollout_controls"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/expected_lifetime"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/name"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/external_contracts_to_preserve"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/in_production_today"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/prod_users_or_data"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/uptime_expectations"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/runtime_environments/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/runtime_environments/1"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/surfaces/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/surfaces/1"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/team_size"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/users"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/record_id"
           }
         ],
-        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "intake_record_ref": "intake-records/intake_680b82e17d097e08e189ce1a985e0200ce21c87700dd89dbbdb375231303204a.json",
         "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
         "profile_ref": "handbook.profile.shipped-root@1.1.0",
         "promotion_eligibility": "requires_approval",
@@ -334,22 +1454,22 @@
         "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
         "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
         "unresolved_coverage_ids": [],
-        "candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
+        "candidate_subject_fingerprint": "sha256:b5cc35cb20e82beab56bad776b81917552d2105a093f4054007ce59f9585e0f6",
         "validation_result_binding": {
           "result_byte_length": 4334,
-          "result_document_sha256": "sha256:c6696b0f9e8a8e3d1acf3fe916a3e18922869bf2cb9b2bee5457955a9488d538",
-          "validation_result_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
-          "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json"
+          "result_document_sha256": "sha256:4553e217992d0278b49ae3227c50486af1dda90a450c9bfc1c86e2d130d1d43b",
+          "validation_result_fingerprint": "sha256:dc04ab36cfa3bc0392311d7abb1dca2899d94c0cae4b830d30787fb11891878a",
+          "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_dc04ab36cfa3bc0392311d7abb1dca2899d94c0cae4b830d30787fb11891878a.json"
         }
       },
-      "expected_final_candidate_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
-      "expected_final_candidate_id": "candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+      "expected_final_candidate_fingerprint": "sha256:973962444e5dbb0a34177837bdb6da1170f37566fa6d7c8882389132124edb8a",
+      "expected_final_candidate_id": "candidate_973962444e5dbb0a34177837bdb6da1170f37566fa6d7c8882389132124edb8a",
       "final_candidate_record_additions": {
-        "candidate_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
-        "candidate_id": "candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961"
+        "candidate_fingerprint": "sha256:973962444e5dbb0a34177837bdb6da1170f37566fa6d7c8882389132124edb8a",
+        "candidate_id": "candidate_973962444e5dbb0a34177837bdb6da1170f37566fa6d7c8882389132124edb8a"
       },
       "expected_validation_result_document_byte_length": 4334,
-      "expected_validation_result_document_sha256": "sha256:c6696b0f9e8a8e3d1acf3fe916a3e18922869bf2cb9b2bee5457955a9488d538"
+      "expected_validation_result_document_sha256": "sha256:4553e217992d0278b49ae3227c50486af1dda90a450c9bfc1c86e2d130d1d43b"
     },
     {
       "name": "amendment_with_active_reassessment",
@@ -392,15 +1512,577 @@
         "expected_intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
         "normalized_content_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml",
         "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
-        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44"
+        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "intake_record_fingerprint": "sha256:65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff"
       },
       "candidate_subject_preimage": {
         "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
         "field_sources": [
           {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/labels/0"
+          },
+          {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/review_cadence"
+          },
+          {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/system"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/enabled"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/format"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/path"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/blast_radius"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/constraints/0"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/name"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/touches/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.red_lines",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.red_lines",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/red_lines/1"
+          },
+          {
+            "coverage_id": "governance.decision_authority",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/decision_authority/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_policy"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/approvers/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/1"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/2"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/record_location"
+          },
+          {
+            "coverage_id": "governance.reassessment_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/reassessment_triggers/0"
+          },
+          {
+            "coverage_id": "governance.reassessment_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/reassessment_triggers/1"
+          },
+          {
+            "coverage_id": "governance.required_approvals",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/required_approvals/0"
+          },
+          {
+            "coverage_id": "governance.review_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/review_triggers/0"
+          },
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/authority_statement"
+          },
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/revision"
+          },
+          {
+            "coverage_id": "engineering_posture.baseline",
+            "source_kind": "user_declaration",
+            "target_path": "/posture/baseline_level"
+          },
+          {
+            "coverage_id": "engineering_posture.baseline",
+            "source_kind": "user_declaration",
+            "target_path": "/posture/baseline_rationale/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/classification"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/budget"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/deadline"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/experience_notes"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/must_use_tech"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/backward_compatibility"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/deprecation_policy"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/migration_planning"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/observability_threshold"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/rollout_controls"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/expected_lifetime"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/name"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/external_contracts_to_preserve"
+          },
+          {
             "coverage_id": "operational_reality.production_state",
             "source_kind": "evidenced_inference",
             "target_path": "/project/operational_reality/in_production_today"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/prod_users_or_data"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/uptime_expectations"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/runtime_environments/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/runtime_environments/1"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/surfaces/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/surfaces/1"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/team_size"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/users"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/record_id"
           }
         ],
         "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
@@ -416,7 +2098,7 @@
         "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
         "unresolved_coverage_ids": []
       },
-      "expected_candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
+      "expected_candidate_subject_fingerprint": "sha256:1c011460da297f6526c1c6eebeca48825095f335128f6aea0a6761caa7fe94cf",
       "validation_result_fingerprint_preimage": {
         "active_observations": [
           {
@@ -425,7 +2107,7 @@
           }
         ],
         "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
-        "candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
+        "candidate_subject_fingerprint": "sha256:1c011460da297f6526c1c6eebeca48825095f335128f6aea0a6761caa7fe94cf",
         "canonical_artifact_ref": ".handbook/project/charter.yaml",
         "intake_record_fingerprint": "sha256:65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff",
         "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
@@ -515,21 +2197,581 @@
         "target_instance_id": "project_authority",
         "validation_status": "passed"
       },
-      "expected_validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
-      "expected_validation_result_id": "lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
-      "expected_validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json",
+      "expected_validation_result_fingerprint": "sha256:47bd94b6b0dcfc43d50c077459717c93febdbebeaa3de1960fc3677a1b589bb9",
+      "expected_validation_result_id": "lifecycle-validation-result_47bd94b6b0dcfc43d50c077459717c93febdbebeaa3de1960fc3677a1b589bb9",
+      "expected_validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_47bd94b6b0dcfc43d50c077459717c93febdbebeaa3de1960fc3677a1b589bb9.json",
       "validation_result_record_additions": {
         "validated_at_utc": "2026-07-20T10:05:00Z",
-        "validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
-        "validation_result_id": "lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad"
+        "validation_result_fingerprint": "sha256:47bd94b6b0dcfc43d50c077459717c93febdbebeaa3de1960fc3677a1b589bb9",
+        "validation_result_id": "lifecycle-validation-result_47bd94b6b0dcfc43d50c077459717c93febdbebeaa3de1960fc3677a1b589bb9"
       },
       "final_candidate_fingerprint_preimage": {
         "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
         "field_sources": [
           {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/labels/0"
+          },
+          {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/review_cadence"
+          },
+          {
+            "coverage_id": "debt.register",
+            "source_kind": "evidenced_inference",
+            "target_path": "/debt/system"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/enabled"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/format"
+          },
+          {
+            "coverage_id": "decisions.records",
+            "source_kind": "user_declaration",
+            "target_path": "/decision_records/path"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/blast_radius"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/constraints/0"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/name"
+          },
+          {
+            "coverage_id": "risk.domains",
+            "source_kind": "evidenced_inference",
+            "target_path": "/domains/0/touches/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/0/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/1/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/2/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/3/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/4/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/domain_overrides/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/5/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/6/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/7/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/allowed_shortcuts/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/default_stance"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/dimension_id"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/domain_overrides"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/level_override"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/raise_the_bar_triggers/0"
+          },
+          {
+            "coverage_id": "engineering_posture.dimensions",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/dimensions/8/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.red_lines",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/red_lines/0"
+          },
+          {
+            "coverage_id": "engineering_posture.red_lines",
+            "source_kind": "user_declaration",
+            "target_path": "/engineering_posture/red_lines/1"
+          },
+          {
+            "coverage_id": "governance.decision_authority",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/decision_authority/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_policy"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/approvers/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/0"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/1"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/minimum_fields/2"
+          },
+          {
+            "coverage_id": "governance.exception_policy",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/exception_process/record_location"
+          },
+          {
+            "coverage_id": "governance.reassessment_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/reassessment_triggers/0"
+          },
+          {
+            "coverage_id": "governance.reassessment_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/reassessment_triggers/1"
+          },
+          {
+            "coverage_id": "governance.required_approvals",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/required_approvals/0"
+          },
+          {
+            "coverage_id": "governance.review_triggers",
+            "source_kind": "user_declaration",
+            "target_path": "/governance/review_triggers/0"
+          },
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/authority_statement"
+          },
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/revision"
+          },
+          {
+            "coverage_id": "engineering_posture.baseline",
+            "source_kind": "user_declaration",
+            "target_path": "/posture/baseline_level"
+          },
+          {
+            "coverage_id": "engineering_posture.baseline",
+            "source_kind": "user_declaration",
+            "target_path": "/posture/baseline_rationale/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/classification"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/budget"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/deadline"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/experience_notes"
+          },
+          {
+            "coverage_id": "delivery.constraints",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/constraints/must_use_tech"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/backward_compatibility"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/deprecation_policy"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/migration_planning"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/observability_threshold"
+          },
+          {
+            "coverage_id": "delivery.default_implications",
+            "source_kind": "user_declaration",
+            "target_path": "/project/default_implications/rollout_controls"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/expected_lifetime"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/name"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/external_contracts_to_preserve"
+          },
+          {
             "coverage_id": "operational_reality.production_state",
             "source_kind": "evidenced_inference",
             "target_path": "/project/operational_reality/in_production_today"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/prod_users_or_data"
+          },
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/uptime_expectations"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/runtime_environments/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/runtime_environments/1"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/surfaces/0"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/surfaces/1"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/team_size"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/users"
+          },
+          {
+            "coverage_id": "project_shape.definition",
+            "source_kind": "evidenced_inference",
+            "target_path": "/record_id"
           }
         ],
         "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
@@ -544,22 +2786,22 @@
         "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
         "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
         "unresolved_coverage_ids": [],
-        "candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
+        "candidate_subject_fingerprint": "sha256:1c011460da297f6526c1c6eebeca48825095f335128f6aea0a6761caa7fe94cf",
         "validation_result_binding": {
           "result_byte_length": 5009,
-          "result_document_sha256": "sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f",
-          "validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
-          "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json"
+          "result_document_sha256": "sha256:b7e69936018d5e02205ecbe2ea74956f207e73a03df5180e748570db1f5564fc",
+          "validation_result_fingerprint": "sha256:47bd94b6b0dcfc43d50c077459717c93febdbebeaa3de1960fc3677a1b589bb9",
+          "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_47bd94b6b0dcfc43d50c077459717c93febdbebeaa3de1960fc3677a1b589bb9.json"
         }
       },
-      "expected_final_candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
-      "expected_final_candidate_id": "candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+      "expected_final_candidate_fingerprint": "sha256:63eb8a7bafc34b83d71c36681f2e1e0270117341c932c99ba85530819f945656",
+      "expected_final_candidate_id": "candidate_63eb8a7bafc34b83d71c36681f2e1e0270117341c932c99ba85530819f945656",
       "final_candidate_record_additions": {
-        "candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
-        "candidate_id": "candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99"
+        "candidate_fingerprint": "sha256:63eb8a7bafc34b83d71c36681f2e1e0270117341c932c99ba85530819f945656",
+        "candidate_id": "candidate_63eb8a7bafc34b83d71c36681f2e1e0270117341c932c99ba85530819f945656"
       },
       "expected_validation_result_document_byte_length": 5009,
-      "expected_validation_result_document_sha256": "sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f"
+      "expected_validation_result_document_sha256": "sha256:b7e69936018d5e02205ecbe2ea74956f207e73a03df5180e748570db1f5564fc"
     }
   ],
   "cross_record_bindings": [

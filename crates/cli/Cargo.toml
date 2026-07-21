@@ -16,4 +16,5 @@ handbook-flow = { path = "../flow" }
 handbook-pipeline = { path = "../pipeline" }
 
 [dev-dependencies]
+serde_json_canonicalizer = "0.3.2"
 tempfile = "3"

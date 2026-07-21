@@ -1,3 +1,6 @@
 # HCM proof walls use Markdown two-space hard breaks intentionally.
 docs/specs/handbook-contract-membrane/slices/HCM-1.1/proof/*.md whitespace=-trailing-space
+docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/*.md whitespace=-trailing-space
+# The runtime-embedded result schema preserves the reviewed terminal LF.
+crates/engine/src/contracts/lifecycle-validation-result-1.0.0.schema.json whitespace=-blank-at-eof
 crates/engine/definitions/** text eol=lf

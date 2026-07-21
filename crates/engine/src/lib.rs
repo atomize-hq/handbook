@@ -21,8 +21,10 @@ pub mod charter_definition_registry;
 pub mod charter_intake;
 pub mod charter_lifecycle;
 pub mod charter_lifecycle_store;
+mod charter_lifecycle_validation;
 pub mod charter_lineage_store;
 pub mod charter_observation;
+mod charter_promotion_intent_v12;
 pub mod charter_promotion_workflow;
 pub mod charter_runtime_vectors;
 pub mod context_resolution_registry;
@@ -131,7 +133,8 @@ pub use charter_definition_registry::{
     load_shipped_charter_definition_registry, CharterDefinitionRecord, CharterDefinitionRegistry,
 };
 pub use charter_intake::{
-    evaluate_charter_intake, CharterAcquisitionMode, CharterCandidateBundle, CharterCandidateV11,
+    evaluate_charter_intake, CharterAcquisitionMode, CharterCandidateBundle,
+    CharterCandidateEvaluationV12, CharterCandidateSubjectV12, CharterCandidateV12,
     CharterCoverageResult, CharterCoverageSubmission, CharterFieldSource, CharterIntakeConsumer,
     CharterIntakeEnvelope, CharterIntakeError, CharterIntakeErrorKind, CharterIntakeRecordV11,
     CharterIntakeSourceKind,
@@ -145,9 +148,13 @@ pub use charter_lifecycle_store::{
     charter_lifecycle_event_commit_marker, charter_lifecycle_state_fingerprint,
     classify_lifecycle_recovery, CharterLifecycleAuthorityV1, CharterLifecycleEventCommitV1,
     CharterLifecycleEventDispositionV1, CharterLifecycleEventIntentV1,
-    CharterLifecycleFaultPointV1, CharterLifecycleRecoveryActionV1,
-    CharterLifecycleRecoveryInputsV1, CharterLifecycleStoreErrorKindV1,
-    CharterLifecycleStoreErrorV1, CharterLifecycleStoreV1,
+    CharterLifecycleRecoveryActionV1, CharterLifecycleRecoveryInputsV1,
+    CharterLifecycleStoreErrorKindV1, CharterLifecycleStoreErrorV1, CharterLifecycleStoreV1,
+};
+pub use charter_lifecycle_validation::{
+    CharterLifecycleValidationResultV10, LifecycleActiveObservationV10,
+    LifecycleDefinitionBindingV10, LifecycleValidationErrorKindV1, LifecycleValidationErrorV1,
+    MAX_LIFECYCLE_VALIDATION_RESULT_BYTES,
 };
 pub use charter_lineage_store::{
     AppendDispositionV1, CandidateBundlePersistenceV1, LineageAppendResultV1, LineageRecordClassV1,

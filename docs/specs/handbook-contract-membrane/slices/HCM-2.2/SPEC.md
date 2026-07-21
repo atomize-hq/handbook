@@ -25,7 +25,10 @@ result are evidence only.
 
 User-selected escalation `HCM-2.2-ESC-003` chooses additive candidate `1.3` as
 the independent downstream exact-document anchor for lifecycle-validation
-result `1.0`. This document is the mutable documentation-only repair subject.
+result `1.0`. The later exact-result implementation selector authorizes the
+complete bounded implementation from clean reviewed baseline
+`f676ea59bbbbcdd0ecc3475bbf2dabd80f5c9d4d`; this document is part of that
+proof-complete fresh-review subject.
 The result `1.0` and promotion-intent `1.2` schemas remain byte-for-byte
 unchanged. The rejected implementation worktree remains untouched at
 `486458acfe8373a977e595a4854ac786166e3e76`; its 1,464 tracked, 13 ordinary-
@@ -34,10 +37,29 @@ complete deterministic manifest SHA-256
 `cbcb29fe7ef50184cbc2efcaa9489d07c99d0d4b51c7e92836e7e2cc3d1cf44a`
 and 30,789,857,280-byte archive SHA-256
 `46dbed286dba9b3b6cedf7ef13340c43dcd56e068a5efa9af1deba0cabadd33d`,
-with all 26,712 files extracted byte-equal and source inventory stable. No Rust or
-implementation work may resume until a fresh isolated reviewer returns
-`CLEAN` over this complete repaired identity, persistence, replay, orphan,
-migration, and recovery subject and a new parent handoff selects that reviewed
+with all 26,712 files extracted byte-equal and source inventory stable. The
+authorized implementation now covers the complete repaired identity,
+persistence, replay, orphan, migration, recovery, lifecycle, atomicity, and
+selected product path. Fresh isolated implementation Review 1 returned three
+Required findings: full frozen result-`1.0` schema enforcement, exact approval-
+quorum replay, and exact resolved-definition closure. All three are repaired
+with focused RED/GREEN regressions and a complete proof replay. The subject
+then received one Required finding in fresh implementation Review 2: historical
+candidate inventory validation conflated the base `1.0` shape with additive
+`1.1` and did not compare stored `candidate_id` to the derived identity.
+Distinct closed `1.0`/`1.1`/`1.2` validators, full ref/fingerprint/source-
+map/result semantics, exact internal-ID equality, genuine per-version fixtures,
+and public replay preservation/refusal tests repair it. The subject remains
+unlanded. Fresh implementation Review 3 then returned Required finding
+`R3-001`: candidate `1.3` provenance could be coherently resigned because
+selected gates did not reconstruct `field_sources` from retained authority. A
+central exact ordered populated-leaf bijection now derives from retained intake
+and normalized content before persistence and at author inventory, approval,
+promotion, and recovery. Eight coherent-forgery variants are GREEN at all four
+runtime seams, and both normative chains now contain all sixteen coverage rows
+and 113 exact source rows. A different fresh isolated reviewer must return
+`CLEAN` before the
+reviewed primary commit is created, and a new parent handoff closes that exact
 state. No `HCM-2.3` authority exists.
 
 The packet consumes, without reopening, the reviewed HCM-1 registry/profile
@@ -295,21 +317,21 @@ mutation.
 The concrete create chain uses fresh authenticator assertion
 `sha256:2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a`,
 approval
-`sha256:ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2`,
+`sha256:820868d3c0066c69eb7643cbab6fb12fe8d32b0c2a65a224e8c48546dde69992`,
 and promotion
-`sha256:8a1e5d73ac0163f4eb0acc53d39dbb4c7a027c5c2cae0cf3d80fd249733e1e63`.
+`sha256:df1828939888358b9c0bc6b8a60ed2a14cf07aa08853efc5cb17cb6fd7014bf0`.
 The amendment chain independently resolves candidate
-`sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99`,
+`sha256:63eb8a7bafc34b83d71c36681f2e1e0270117341c932c99ba85530819f945656`,
 result
-`sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad`,
+`sha256:47bd94b6b0dcfc43d50c077459717c93febdbebeaa3de1960fc3677a1b589bb9`,
 fresh assertion
 `sha256:6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce`,
 new approval
-`sha256:eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f`,
+`sha256:75aef860aa2d67c146a8818c1891e74d20f641f785b41754872f563a5314f298`,
 promotion
-`sha256:0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038`,
+`sha256:fae45da33b50acb6e77408eb6bd8e58aa9d1bbd335315d2d50c464f1dc4c0b03`,
 and clearance transition
-`sha256:5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7`.
+`sha256:6383b554a18f16b0ae158d0fb14a9b49492f504e2f1a34676ad7f1eacf6cf469`.
 No candidate-dependent selected authority equals the historical candidate-
 `1.2` intent vector; the retained registry state/transition may be reused only
 because their exact current records are candidate-independent and revalidated.

@@ -9,17 +9,33 @@ the complete subject under `HCM-2.2-AR3-001`: result, witness, and mutable
 sidecar binding bytes could be coherently rewritten without changing semantic
 result or candidate `1.2` identity.
 
-User-selected escalation `HCM-2.2-ESC-003` authorizes only this
-documentation/control-pack repair selecting additive candidate `1.3` as the
-independent downstream exact-result-document anchor. The rejected worktree is
+User-selected escalation `HCM-2.2-ESC-003` repaired the documentation/control-
+pack authority by selecting additive candidate `1.3` as the independent
+downstream exact-result-document anchor. The later exact-result implementation
+selector authorizes this complete bounded plan from clean reviewed baseline
+`f676ea59bbbbcdd0ecc3475bbf2dabd80f5c9d4d`. The rejected worktree is
 preserved untouched at
 `486458acfe8373a977e595a4854ac786166e3e76` in archive
 `46dbed286dba9b3b6cedf7ef13340c43dcd56e068a5efa9af1deba0cabadd33d`;
-the repair runs in a separate clean worktree at that exact HEAD. Result `1.0`
-and promotion-intent `1.2` schemas remain unchanged. Rust implementation stays
-stopped until the complete repaired identity, persistence, replay, orphan,
-migration, and recovery subject is fresh-review `CLEAN` and a new parent
-handoff records the exact selector. No HCM-2.3 authority exists.
+the repair runs in a separate clean worktree from the later reviewed baseline.
+Result `1.0` and promotion-intent `1.2` schemas remain unchanged. The complete
+repaired identity, persistence, replay, orphan, migration, recovery, lifecycle,
+atomicity, and product-cutover implementation is proof-complete. Fresh
+implementation Review 1 required complete frozen result-schema enforcement,
+exact approval-quorum replay, and exact resolved-definition closure. Those
+three findings are repaired test-first and the complete proof wall has been
+replayed. Fresh implementation Review 2 then found historical candidate
+admission was not version-exact: base `1.0` incorrectly used the additive
+`1.1` field set and stored candidate IDs were not compared with derived
+identity. Distinct closed `1.0`/`1.1`/`1.2` validation and public replay
+preservation/refusal tests repair that finding. Fresh implementation Review 3
+then returned Required finding `R3-001`: selected candidate `1.3` gates did not
+reconstruct the exact provenance map. One central retained-intake/normalized-
+content populated-leaf bijection now gates persistence, both author inventory
+scans, approval, promotion, and recovery; eight coherent-resigning variants at
+all four runtime seams are proof-complete. The subject remains unlanded
+until a different-fresh review returns `CLEAN`, the primary commit is created,
+and a new parent handoff closes the slice. No HCM-2.3 authority exists.
 
 The immutable escalation handoff incorrectly cites `status/plan.md` and
 `status/todo.md`. Those paths do not exist; the additive correction is this
@@ -28,7 +44,7 @@ immutable handoff is not edited.
 
 ## Delivery strategy
 
-After a separate later implementation selection, land one test-first
+Under the exact-result implementation selector, land one test-first
 constitutional-root vertical slice. Preserve every released
 definition byte, add the versioned definition closure before selecting it, then
 move intake, promotion, rendering, and consumers in dependency order. Editing
@@ -544,6 +560,24 @@ and exact DTO/version/budget/freshness bytes.
 classifications agree with an exact subject manifest.
 
 ## P9 — Fresh review and remediation loop
+
+Fresh Review 1 completed over its exact 41-path subject and returned three
+Required findings. The parent accepted all three without waiver, preserved the
+dispatch and original proof bytes, added focused RED regressions, repaired the
+subject, and replayed the complete wall. The next dispatch therefore goes to a
+different fresh reviewer over a new exact manifest. Review 2 completed over
+that exact 46-path subject and returned one Required historical-admission
+finding. The parent accepted it without waiver, reproduced all three public
+replay counterexamples RED, installed version-exact validation, and replayed
+the complete wall. Review 3 therefore used another different fresh reviewer.
+
+Review 3 admitted the exact 48-path subject and returned Required finding
+`R3-001`. The parent accepted it without waiver, reproduced the eight coherent
+provenance resigning variants RED through author inventory, approval, and
+promotion, added the same eight-case pending-recovery preservation matrix,
+installed the central exact populated-leaf bijection gate, regenerated both
+normative chains, and replayed the complete proof wall. Review 4 therefore uses
+another different fresh reviewer over a new exact manifest.
 
 1. Write an immutable schema-valid final review dispatch bound to the complete
    subject/proof manifest.

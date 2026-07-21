@@ -6,6 +6,9 @@ use crate::charter_authenticator::{
     NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1, AUTHENTICATOR_RP_ID,
 };
 use crate::charter_intake::{evaluate_charter_intake, CharterIntakeEnvelope, CharterIntakeError};
+use crate::charter_lifecycle_validation::{
+    CharterLifecycleValidationServiceV1, LifecycleValidationErrorV1,
+};
 use crate::charter_lineage_store::{
     create_new_file, create_safe_directories, reject_reparse_or_symlink, sync_directory,
     LineageRecordClassV1, LineageStoreErrorV1, TrustedLineageStoreV1,
@@ -74,12 +77,23 @@ impl From<LineageStoreErrorV1> for CharterAuthorPersistenceErrorV1 {
     }
 }
 
+impl From<LifecycleValidationErrorV1> for CharterAuthorPersistenceErrorV1 {
+    fn from(error: LifecycleValidationErrorV1) -> Self {
+        Self {
+            kind: CharterAuthorPersistenceErrorKindV1::PersistenceRefused,
+            detail: error.detail().to_owned(),
+        }
+    }
+}
+
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct CharterAuthorPersistenceResultV1 {
     pub intake_ref: String,
+    pub intake_fingerprint: String,
     pub candidate_ref: String,
     pub candidate_fingerprint: String,
     pub normalized_content_ref: String,
+    pub lifecycle_validation_result_ref: String,
 }
 
 #[derive(Clone, Debug)]
@@ -100,14 +114,26 @@ impl CharterAuthorPersistenceServiceV1 {
         envelope: CharterIntakeEnvelope,
         observed_current_fingerprint: Option<&DefinitionFingerprint>,
     ) -> Result<CharterAuthorPersistenceResultV1, CharterAuthorPersistenceErrorV1> {
-        let bundle = evaluate_charter_intake(decisions, envelope, observed_current_fingerprint)?;
+        let evaluation =
+            evaluate_charter_intake(decisions, envelope, observed_current_fingerprint)?;
+        let publication = CharterLifecycleValidationServiceV1::new(self.lineage.repo_root())
+            .finalize(decisions, evaluation)?;
+        let bundle = publication.bundle;
+        let intake_fingerprint = bundle.intake.record_fingerprint.clone();
         let candidate_fingerprint = bundle.candidate.candidate_fingerprint.clone();
-        let persisted = self.lineage.persist_candidate_bundle(&bundle)?;
+        let lifecycle_validation_result_ref = bundle
+            .candidate
+            .validation_result_binding
+            .validation_result_ref
+            .clone();
+        let persisted = publication.persistence;
         Ok(CharterAuthorPersistenceResultV1 {
             intake_ref: persisted.intake_ref,
+            intake_fingerprint,
             candidate_ref: persisted.candidate_ref,
             candidate_fingerprint,
             normalized_content_ref: persisted.normalized_content_ref,
+            lifecycle_validation_result_ref,
         })
     }
 }

@@ -39,6 +39,12 @@ struct Fixture {
     cross_record_bindings: Vec<CrossRecordBinding>,
     external_reference_contract: Value,
     external_reference_bindings: Vec<ExternalReferenceBinding>,
+    candidate_1_3_exact_result_contract: Value,
+    historical_candidate_1_2_contract: Value,
+    exact_result_negative_vectors: Value,
+    candidate_1_3_amendment_chain_contract: Value,
+    author_inventory_contract: Value,
+    author_inventory_boundary_vectors: Value,
 }
 
 #[derive(Deserialize)]
@@ -54,6 +60,10 @@ struct RecordVector {
     expected_id: String,
     fingerprint_preimage: Value,
     record: Value,
+    candidate_subject_fingerprint_preimage: Option<Value>,
+    expected_candidate_subject_fingerprint: Option<String>,
+    expected_document_byte_length: Option<usize>,
+    expected_document_sha256: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -66,6 +76,11 @@ struct CrossRecordBinding {
     declared_fingerprint_field: Option<String>,
     expected_target_id: String,
     expected_target_fingerprint: String,
+    declared_document_sha256_field: Option<String>,
+    expected_target_document_sha256: Option<String>,
+    declared_byte_length_field: Option<String>,
+    expected_target_byte_length: Option<usize>,
+    transitive_exact_document_authority: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -93,6 +108,12 @@ pub fn validate_runtime_record_fingerprint_vectors(
         || fixture.id_rule.trim().is_empty()
         || !fixture.cross_record_contract.is_object()
         || !fixture.external_reference_contract.is_object()
+        || !fixture.candidate_1_3_exact_result_contract.is_object()
+        || !fixture.historical_candidate_1_2_contract.is_object()
+        || !fixture.exact_result_negative_vectors.is_array()
+        || !fixture.candidate_1_3_amendment_chain_contract.is_object()
+        || !fixture.author_inventory_contract.is_object()
+        || !fixture.author_inventory_boundary_vectors.is_array()
     {
         return Err(RuntimeRecordVectorError::new(
             "runtime vector fixture identity or contract metadata is invalid",
@@ -186,6 +207,76 @@ fn validate_vector(vector: &RecordVector) -> Result<(), RuntimeRecordVectorError
             vector.record_class
         )));
     }
+    match (
+        &vector.candidate_subject_fingerprint_preimage,
+        &vector.expected_candidate_subject_fingerprint,
+    ) {
+        (Some(preimage), Some(expected))
+            if matches!(
+                vector.record_class.as_str(),
+                "candidate" | "candidate-amendment"
+            ) =>
+        {
+            let observed = DefinitionFingerprint::from_json_value(preimage)
+                .map_err(|_| {
+                    RuntimeRecordVectorError::new(
+                        "candidate subject preimage cannot be canonicalized",
+                    )
+                })?
+                .to_string();
+            if observed != *expected
+                || field(&vector.record, "candidate_subject_fingerprint").and_then(Value::as_str)
+                    != Some(expected.as_str())
+            {
+                return Err(RuntimeRecordVectorError::new(
+                    "candidate subject fingerprint witness does not recompute",
+                ));
+            }
+        }
+        (None, None)
+            if !matches!(
+                vector.record_class.as_str(),
+                "candidate" | "candidate-amendment"
+            ) => {}
+        _ => {
+            return Err(RuntimeRecordVectorError::new(
+                "candidate subject witness presence is not class-exact",
+            ))
+        }
+    }
+    match (
+        vector.expected_document_byte_length,
+        &vector.expected_document_sha256,
+    ) {
+        (Some(expected_length), Some(expected_sha256))
+            if matches!(
+                vector.record_class.as_str(),
+                "lifecycle-validation-result" | "lifecycle-validation-result-amendment"
+            ) =>
+        {
+            let mut document = serde_json_canonicalizer::to_vec(&vector.record).map_err(|_| {
+                RuntimeRecordVectorError::new("runtime result document cannot be canonicalized")
+            })?;
+            document.push(b'\n');
+            if document.len() != expected_length
+                || DefinitionFingerprint::from_bytes(&document).as_str() != expected_sha256
+            {
+                return Err(RuntimeRecordVectorError::new(
+                    "runtime result exact JCS-plus-LF witness does not recompute",
+                ));
+            }
+        }
+        (None, None)
+            if !matches!(
+                vector.record_class.as_str(),
+                "lifecycle-validation-result" | "lifecycle-validation-result-amendment"
+            ) => {}
+        _ => {
+            return Err(RuntimeRecordVectorError::new(
+                "exact result document witness presence is not class-exact",
+            ))
+        }
+    }
     Ok(())
 }
 
@@ -227,6 +318,41 @@ fn validate_cross_binding(
                 "cross-record declared fingerprint disagrees",
             ));
         }
+    }
+    match (
+        &binding.declared_document_sha256_field,
+        &binding.expected_target_document_sha256,
+        &binding.declared_byte_length_field,
+        binding.expected_target_byte_length,
+    ) {
+        (Some(digest_field), Some(expected_digest), Some(length_field), Some(expected_length)) => {
+            if field(&source.record, digest_field).and_then(Value::as_str)
+                != Some(expected_digest.as_str())
+                || field(&source.record, length_field).and_then(Value::as_u64)
+                    != Some(expected_length as u64)
+                || target.expected_document_sha256.as_deref() != Some(expected_digest.as_str())
+                || target.expected_document_byte_length != Some(expected_length)
+            {
+                return Err(RuntimeRecordVectorError::new(
+                    "cross-record exact result document binding disagrees",
+                ));
+            }
+        }
+        (None, None, None, None) => {}
+        _ => {
+            return Err(RuntimeRecordVectorError::new(
+                "cross-record exact result document witness is incomplete",
+            ))
+        }
+    }
+    if binding
+        .transitive_exact_document_authority
+        .as_ref()
+        .is_some_and(|description| description.trim().is_empty())
+    {
+        return Err(RuntimeRecordVectorError::new(
+            "transitive exact-document authority description is empty",
+        ));
     }
     Ok(())
 }

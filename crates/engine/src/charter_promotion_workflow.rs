@@ -12,6 +12,9 @@ use crate::charter_lifecycle_store::{
     finalize_content_addressed_record, CharterLifecycleAuthorityV1, CharterLifecycleStoreErrorV1,
     CharterLifecycleStoreV1, CHARTER_LIFECYCLE_POLICY_REF,
 };
+use crate::charter_lifecycle_validation::{
+    definition_bindings, CharterLifecycleValidationServiceV1,
+};
 use crate::charter_lineage_store::{
     string_field, LineageRecordClassV1, LineageStoreErrorV1, TrustedLineageStoreV1,
 };
@@ -117,6 +120,16 @@ fn amendment_pairs(
     normalize_required_approval_pairs(pairs)
 }
 
+pub(crate) fn required_approval_pairs_for_authority(
+    registry_state: &Value,
+    current: Option<&crate::CanonicalCharter>,
+) -> Result<Vec<ApproverAuthorityPairV1>, CharterPromotionWorkflowErrorV1> {
+    match current {
+        Some(current) => amendment_pairs(current),
+        None => initial_quorum_pairs(registry_state),
+    }
+}
+
 fn ensure_registry_pair_coverage(
     credentials: &[crate::CommittedApproverCredentialV1],
     required_pairs: &[ApproverAuthorityPairV1],
@@ -212,7 +225,7 @@ fn validate_candidate_contract(
     Ok(())
 }
 
-fn resolved_definition_bindings(
+pub(crate) fn resolved_definition_bindings(
     candidate: &Value,
     decisions: &crate::ResolvedProfileDecisions,
     definitions: &crate::CharterDefinitionRegistry,
@@ -225,25 +238,37 @@ fn resolved_definition_bindings(
         .registry()
         .kind(&kind_ref)
         .ok_or_else(|| definition_drift("candidate kind is absent from selected registry"))?;
-    let mut bindings = vec![json!({
-        "definition_ref": kind_ref.as_str(),
-        "definition_fingerprint": kind.definition_fingerprint().as_str(),
-    })];
+    let expected = definition_bindings();
+    if !expected.iter().any(|binding| {
+        binding.definition_ref == kind_ref.as_str()
+            && binding.definition_fingerprint == kind.definition_fingerprint().as_str()
+    }) {
+        return Err(definition_drift(
+            "selected target kind does not equal the frozen lifecycle-result closure",
+        ));
+    }
     for reference in definitions.refs() {
-        let record = definitions
+        let current = definitions
             .record(reference)
             .expect("registry refs remain resolvable");
-        bindings.push(json!({
-            "definition_ref": reference.as_str(),
-            "definition_fingerprint": record.definition_fingerprint().as_str(),
-        }));
+        if !expected.iter().any(|binding| {
+            binding.definition_ref == reference.as_str()
+                && binding.definition_fingerprint == current.definition_fingerprint().as_str()
+        }) {
+            return Err(definition_drift(
+                "selected shipped definition is absent or stale in the frozen lifecycle-result closure",
+            ));
+        }
     }
-    bindings.sort_by(|left, right| {
-        left["definition_ref"]
-            .as_str()
-            .cmp(&right["definition_ref"].as_str())
-    });
-    Ok(bindings)
+    Ok(expected
+        .into_iter()
+        .map(|binding| {
+            json!({
+                "definition_ref": binding.definition_ref,
+                "definition_fingerprint": binding.definition_fingerprint,
+            })
+        })
+        .collect())
 }
 
 fn validate_basis(
@@ -290,23 +315,6 @@ fn validate_intent(
         ));
     }
     Ok(())
-}
-
-fn string_array(
-    value: &Value,
-    field: &str,
-) -> Result<Vec<String>, CharterPromotionWorkflowErrorV1> {
-    value
-        .get(field)
-        .and_then(Value::as_array)
-        .ok_or_else(|| candidate_refused(format!("candidate `{field}` must be an array")))?
-        .iter()
-        .map(|item| {
-            item.as_str()
-                .map(str::to_owned)
-                .ok_or_else(|| candidate_refused(format!("candidate `{field}` item is invalid")))
-        })
-        .collect()
 }
 
 fn fingerprint_from_ref(reference: &str) -> Option<String> {
@@ -712,15 +720,6 @@ impl CharterPromotionWorkflowServiceV1 {
         self.promote_at(intent, &current_audit_utc())
     }
 
-    #[doc(hidden)]
-    pub fn promote_at_for_testing(
-        &self,
-        intent: CharterPromotionIntentV1,
-        transitioned_at_utc: &str,
-    ) -> Result<CharterPromotionWorkflowCommitV1, CharterPromotionWorkflowErrorV1> {
-        self.promote_at(intent, transitioned_at_utc)
-    }
-
     fn promote_at(
         &self,
         intent: CharterPromotionIntentV1,
@@ -798,6 +797,30 @@ impl CharterPromotionWorkflowServiceV1 {
             ));
         }
 
+        let retained_lifecycle = self
+            .lifecycle
+            .observe_retained_locked()
+            .map_err(map_lifecycle)?;
+        if retained_lifecycle.canonical_bytes.as_deref()
+            != current
+                .as_ref()
+                .map(|authority| authority.canonical_bytes.as_slice())
+        {
+            return Err(workflow_error(
+                CharterPromotionWorkflowErrorKindV1::LifecycleClearanceIncomplete,
+                "canonical basis and lifecycle retained bytes disagree",
+            ));
+        }
+        let retained_validation = CharterLifecycleValidationServiceV1::new(&self.repo_root)
+            .validate_current_retained(
+                &decisions,
+                &candidate,
+                &canonical_bytes,
+                current.as_ref(),
+                &retained_lifecycle,
+            )
+            .map_err(|failure| candidate_refused(failure.detail()))?;
+
         let committed_approval_refs = observe_committed_candidate_approval_refs_locked(
             &self.repo_root,
             &intent.candidate_ref,
@@ -813,30 +836,17 @@ impl CharterPromotionWorkflowServiceV1 {
                     failure.detail(),
                 )
             })?;
-        let retained_lifecycle = self
-            .lifecycle
-            .observe_retained_locked()
-            .map_err(map_lifecycle)?;
-        if retained_lifecycle.canonical_bytes.as_deref()
-            != current
-                .as_ref()
-                .map(|authority| authority.canonical_bytes.as_slice())
-        {
-            return Err(workflow_error(
-                CharterPromotionWorkflowErrorKindV1::LifecycleClearanceIncomplete,
-                "canonical basis and lifecycle retained bytes disagree",
-            ));
-        }
         let lifecycle = retained_lifecycle.authority.as_ref();
         let registry_state_ref = registry.state_ref.clone();
         let registry_state_fingerprint = registry.state_fingerprint.clone();
         let registry_head_ref = registry.head_transition_ref.clone();
         let registry_head_fingerprint = registry.head_transition_fingerprint.clone();
-        let required_pairs = if current.is_none() {
-            initial_quorum_pairs(&registry.state)?
-        } else {
-            amendment_pairs(&charter_for_current(&current, &decisions)?)?
-        };
+        let current_charter = current
+            .as_ref()
+            .map(|_| charter_for_current(&current, &decisions))
+            .transpose()?;
+        let required_pairs =
+            required_approval_pairs_for_authority(&registry.state, current_charter.as_ref())?;
         ensure_registry_pair_coverage(&registry.credentials, &required_pairs)?;
         let ordered_approval_refs = self.validate_approvals(
             &intent.candidate_ref,
@@ -894,12 +904,7 @@ impl CharterPromotionWorkflowServiceV1 {
         .map_err(map_lifecycle)?;
         let resolved_definitions =
             resolved_definition_bindings(&candidate, &decisions, &definitions)?;
-        let validation_result_refs = string_array(&candidate, "validation_result_refs")?;
-        if validation_result_refs.is_empty() {
-            return Err(candidate_refused(
-                "promotion candidate has no current validation result",
-            ));
-        }
+        let validation_result_refs = vec![retained_validation.relative_ref.clone()];
         let authorized_by_ref = required_pairs
             .first()
             .expect("required pairs are non-empty")
@@ -956,6 +961,11 @@ impl CharterPromotionWorkflowServiceV1 {
             .map_err(|_| candidate_refused("lifecycle transition canonicalization failed"))?;
         let mut retained_records = vec![
             RetainedAuthorityRecordV1 {
+                label: "lifecycle validation result".to_owned(),
+                relative_ref: retained_validation.relative_ref,
+                bytes: retained_validation.bytes,
+            },
+            RetainedAuthorityRecordV1 {
                 label: "registry state".to_owned(),
                 relative_ref: registry_state_ref.clone(),
                 bytes: registry.state_bytes.clone(),
@@ -998,7 +1008,6 @@ impl CharterPromotionWorkflowServiceV1 {
         let transaction = retained_transaction
             .promote_retained(
                 CharterPromotionRequestV1 {
-                    transaction_id: promotion_id.to_owned(),
                     canonical_bytes,
                     promotion_record_bytes: promotion_bytes,
                     lifecycle_transition_bytes: lifecycle_bytes,

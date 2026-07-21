@@ -96,13 +96,16 @@ fn all_three_acquisition_modes_produce_identical_candidate_content_and_identity(
     for bundle in &bundles[1..] {
         assert_eq!(bundle.normalized_content, bundles[0].normalized_content);
         assert_eq!(
-            bundle.candidate.field_sources,
-            bundles[0].candidate.field_sources
+            bundle.candidate_subject.field_sources,
+            bundles[0].candidate_subject.field_sources
         );
     }
     assert_eq!(bundles[0].intake.coverage_results.len(), 16);
-    assert_eq!(bundles[0].candidate.field_sources.len(), 113);
-    assert!(bundles[0].candidate.unresolved_coverage_ids.is_empty());
+    assert_eq!(bundles[0].candidate_subject.field_sources.len(), 113);
+    assert!(bundles[0]
+        .candidate_subject
+        .unresolved_coverage_ids
+        .is_empty());
 }
 
 #[test]

@@ -13,7 +13,7 @@ const CHARTER_SCHEMA_REF: &str = "handbook.schemas.artifacts.project-authority@1
 const CHARTER_INTAKE_REF: &str = "handbook.intake.charter@1.0.0";
 const CHARTER_APPROVAL_POLICY_REF: &str = "handbook.approval.constitutional-candidate@1.0.0";
 
-const COVERAGE_ORDER: [&str; 16] = [
+pub(crate) const COVERAGE_ORDER: [&str; 16] = [
     "project_shape.definition",
     "delivery.constraints",
     "delivery.default_implications",
@@ -146,7 +146,8 @@ pub struct CharterIntakeRecordV11 {
     pub record_fingerprint: String,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct CharterFieldSource {
     pub target_path: String,
     pub coverage_id: String,
@@ -154,7 +155,36 @@ pub struct CharterFieldSource {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
-pub struct CharterCandidateV11 {
+pub struct CharterCandidateSubjectV12 {
+    pub schema_id: String,
+    pub schema_version: String,
+    pub intake_record_ref: String,
+    pub target_kind_ref: String,
+    pub target_instance_id: String,
+    pub target_schema_ref: String,
+    pub profile_ref: String,
+    pub resolved_profile_fingerprint: String,
+    pub basis_artifact_fingerprint: Option<String>,
+    pub normalized_content_ref: String,
+    pub field_sources: Vec<CharterFieldSource>,
+    pub unresolved_coverage_ids: Vec<String>,
+    pub promotion_eligibility: String,
+    pub required_approval_policy_ref: String,
+    pub candidate_subject_fingerprint: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct CharterValidationResultBindingV13 {
+    pub validation_result_ref: String,
+    pub validation_result_fingerprint: String,
+    pub result_document_sha256: String,
+    pub result_byte_length: usize,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct CharterCandidateV12 {
     pub schema_id: String,
     pub schema_version: String,
     pub candidate_id: String,
@@ -167,17 +197,26 @@ pub struct CharterCandidateV11 {
     pub basis_artifact_fingerprint: Option<String>,
     pub normalized_content_ref: String,
     pub field_sources: Vec<CharterFieldSource>,
-    pub validation_result_refs: Vec<String>,
     pub unresolved_coverage_ids: Vec<String>,
     pub promotion_eligibility: String,
     pub required_approval_policy_ref: String,
+    pub candidate_subject_fingerprint: String,
+    pub validation_result_binding: CharterValidationResultBindingV13,
     pub candidate_fingerprint: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct CharterCandidateEvaluationV12 {
+    pub intake: CharterIntakeRecordV11,
+    pub candidate_subject: CharterCandidateSubjectV12,
+    pub normalized_content: Vec<u8>,
+    pub charter: CanonicalCharter,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct CharterCandidateBundle {
     pub intake: CharterIntakeRecordV11,
-    pub candidate: CharterCandidateV11,
+    pub candidate: CharterCandidateV12,
     pub normalized_content: Vec<u8>,
     pub charter: CanonicalCharter,
 }
@@ -229,7 +268,7 @@ pub fn evaluate_charter_intake(
     decisions: &ResolvedProfileDecisions,
     envelope: CharterIntakeEnvelope,
     observed_current_fingerprint: Option<&DefinitionFingerprint>,
-) -> Result<CharterCandidateBundle, CharterIntakeError> {
+) -> Result<CharterCandidateEvaluationV12, CharterIntakeError> {
     let basis = validate_basis(
         envelope.expected_current_fingerprint.as_deref(),
         observed_current_fingerprint,
@@ -291,9 +330,9 @@ pub fn evaluate_charter_intake(
     let intake_id = format!("intake_{}", fingerprint_hex(&intake_identity));
     let intake_record_ref = format!("intake-records/{intake_id}.json");
 
-    let candidate_identity = fingerprint_value(serde_json::json!({
+    let candidate_subject_fingerprint = fingerprint_value(serde_json::json!({
         "schema_id": "handbook.artifact-candidate",
-        "schema_version": "1.1",
+        "schema_version": "1.3",
         "intake_record_ref": intake_record_ref.clone(),
         "target_kind_ref": CHARTER_KIND_REF,
         "target_instance_id": CHARTER_INSTANCE_ID,
@@ -303,13 +342,10 @@ pub fn evaluate_charter_intake(
         "basis_artifact_fingerprint": basis.clone(),
         "normalized_content_ref": normalized_content_ref.clone(),
         "field_sources": field_sources.clone(),
-        "validation_result_refs": [],
         "unresolved_coverage_ids": [],
         "promotion_eligibility": "requires_approval",
         "required_approval_policy_ref": CHARTER_APPROVAL_POLICY_REF,
     }))?;
-    let candidate_hex = fingerprint_hex(&candidate_identity);
-    let candidate_id = format!("candidate_{candidate_hex}");
     let intake = CharterIntakeRecordV11 {
         schema_id: "handbook.artifact-intake-record".to_owned(),
         schema_version: "1.1".to_owned(),
@@ -327,10 +363,9 @@ pub fn evaluate_charter_intake(
         finalized_at_utc: envelope.finalized_at_utc,
         record_fingerprint: intake_identity.to_string(),
     };
-    let candidate = CharterCandidateV11 {
+    let candidate_subject = CharterCandidateSubjectV12 {
         schema_id: "handbook.artifact-candidate".to_owned(),
-        schema_version: "1.1".to_owned(),
-        candidate_id,
+        schema_version: "1.3".to_owned(),
         intake_record_ref,
         target_kind_ref: CHARTER_KIND_REF.to_owned(),
         target_instance_id: CHARTER_INSTANCE_ID.to_owned(),
@@ -340,16 +375,15 @@ pub fn evaluate_charter_intake(
         basis_artifact_fingerprint: basis,
         normalized_content_ref,
         field_sources,
-        validation_result_refs: Vec::new(),
         unresolved_coverage_ids: Vec::new(),
         promotion_eligibility: "requires_approval".to_owned(),
         required_approval_policy_ref: CHARTER_APPROVAL_POLICY_REF.to_owned(),
-        candidate_fingerprint: candidate_identity.to_string(),
+        candidate_subject_fingerprint: candidate_subject_fingerprint.to_string(),
     };
 
-    Ok(CharterCandidateBundle {
+    Ok(CharterCandidateEvaluationV12 {
         intake,
-        candidate,
+        candidate_subject,
         normalized_content,
         charter,
     })
@@ -484,6 +518,17 @@ fn field_sources(
     content: &Value,
     submissions: &BTreeMap<usize, &CharterCoverageSubmission>,
 ) -> Result<Vec<CharterFieldSource>, CharterIntakeError> {
+    let source_kinds = submissions
+        .values()
+        .map(|submission| (submission.coverage_id.clone(), submission.source_kind))
+        .collect::<BTreeMap<_, _>>();
+    field_sources_from_source_kinds(content, &source_kinds)
+}
+
+fn field_sources_from_source_kinds(
+    content: &Value,
+    source_kinds: &BTreeMap<String, CharterIntakeSourceKind>,
+) -> Result<Vec<CharterFieldSource>, CharterIntakeError> {
     let mut leaves = Vec::new();
     collect_leaves(content, "", &mut leaves);
     leaves.retain(|path| {
@@ -500,19 +545,111 @@ fn field_sources(
                 format!("candidate leaf `{path}` has no Charter coverage owner"),
             )
         })?;
-        let index = COVERAGE_ORDER
-            .iter()
-            .position(|candidate| *candidate == coverage_id)
-            .expect("closed coverage ID has an index");
-        let submission = submissions[&index];
+        let source_kind = source_kinds.get(coverage_id).ok_or_else(|| {
+            CharterIntakeError::new(
+                CharterIntakeErrorKind::CoverageMismatch,
+                format!("candidate leaf `{path}` has no retained intake source"),
+            )
+        })?;
         sources.push(CharterFieldSource {
             target_path: path,
             coverage_id: coverage_id.to_owned(),
-            source_kind: submission.source_kind,
+            source_kind: *source_kind,
         });
     }
     sources.sort_by(|left, right| left.target_path.cmp(&right.target_path));
     Ok(sources)
+}
+
+pub(crate) fn validate_candidate_field_source_bijection(
+    candidate: &Value,
+    intake: &Value,
+    normalized_content: &[u8],
+) -> Result<(), CharterIntakeError> {
+    let content = crate::parse_definition_yaml(normalized_content).map_err(|_| {
+        CharterIntakeError::new(
+            CharterIntakeErrorKind::CandidateContentInvalid,
+            "retained normalized candidate content cannot be parsed for provenance replay",
+        )
+    })?;
+    let coverage = intake
+        .get("coverage_results")
+        .and_then(Value::as_array)
+        .ok_or_else(|| {
+            CharterIntakeError::new(
+                CharterIntakeErrorKind::CoverageMismatch,
+                "retained intake coverage_results are absent",
+            )
+        })?;
+    if coverage.len() != COVERAGE_ORDER.len() {
+        return Err(CharterIntakeError::new(
+            CharterIntakeErrorKind::CoverageMismatch,
+            "retained intake does not contain the exact closed coverage set",
+        ));
+    }
+    let mut source_kinds = BTreeMap::new();
+    for (expected_coverage_id, row) in COVERAGE_ORDER.iter().zip(coverage) {
+        let coverage_id = row
+            .get("coverage_id")
+            .and_then(Value::as_str)
+            .ok_or_else(|| {
+                CharterIntakeError::new(
+                    CharterIntakeErrorKind::CoverageMismatch,
+                    "retained intake coverage ID is absent or invalid",
+                )
+            })?;
+        if coverage_id != *expected_coverage_id {
+            return Err(CharterIntakeError::new(
+                CharterIntakeErrorKind::CoverageMismatch,
+                "retained intake coverage order or identity is not exact",
+            ));
+        }
+        let source_kind = serde_json::from_value::<CharterIntakeSourceKind>(
+            row.get("source_kind").cloned().ok_or_else(|| {
+                CharterIntakeError::new(
+                    CharterIntakeErrorKind::SourceAuthorityMismatch,
+                    "retained intake source kind is absent",
+                )
+            })?,
+        )
+        .map_err(|_| {
+            CharterIntakeError::new(
+                CharterIntakeErrorKind::SourceAuthorityMismatch,
+                "retained intake source kind is outside the closed enum",
+            )
+        })?;
+        if source_kinds
+            .insert(coverage_id.to_owned(), source_kind)
+            .is_some()
+        {
+            return Err(CharterIntakeError::new(
+                CharterIntakeErrorKind::CoverageMismatch,
+                "retained intake contains duplicate coverage authority",
+            ));
+        }
+    }
+    let expected = field_sources_from_source_kinds(&content, &source_kinds)?;
+    let observed = serde_json::from_value::<Vec<CharterFieldSource>>(
+        candidate.get("field_sources").cloned().ok_or_else(|| {
+            CharterIntakeError::new(
+                CharterIntakeErrorKind::CoverageMismatch,
+                "candidate field_sources are absent",
+            )
+        })?,
+    )
+    .map_err(|_| {
+        CharterIntakeError::new(
+            CharterIntakeErrorKind::CoverageMismatch,
+            "candidate field_sources violate their exact closed shape",
+        )
+    })?;
+    if observed != expected {
+        return Err(CharterIntakeError::new(
+            CharterIntakeErrorKind::CoverageMismatch,
+            "candidate field_sources do not exactly equal the retained populated-leaf provenance bijection",
+        ));
+    }
+    Ok(())
 }
 
 fn validate_audit_fields(envelope: &CharterIntakeEnvelope) -> Result<(), CharterIntakeError> {

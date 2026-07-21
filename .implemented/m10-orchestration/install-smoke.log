@@ -1,0 +1,19 @@
+==> cargo install (crates/cli)
+  Installing handbook-cli v0.1.0 (/mnt/c/hcm22ar-doc-repair/crates/cli)
+    Updating crates.io index
+    Finished `release` profile [optimized] target(s) in 4.31s
+   Replacing /home/spenser/.cargo/bin/handbook
+    Replaced package `handbook-cli v0.1.0 (/mnt/c/hcm22ar-doc-repair/crates/cli)` with `handbook-cli v0.1.0 (/mnt/c/hcm22ar-doc-repair/crates/cli)` (executable `handbook`)
+==> help smoke
+==> generator/install smoke
+==> reinstall smoke
+==> dev-setup symlink smoke
+==> install-mode crossover smoke
+==> public install wrapper smoke
+[handbook-install] Downloading handbook-v0.7.2.0-linux_x86_64.tar.gz
+[handbook-install] Downloading SHA256SUMS
+[handbook-install] Extracting release bundle
+[handbook-install] Installed handbook 0.7.2.0 to /tmp/handbook-release-home.kanJwr/handbook
+[handbook-install] Codex discovery links refreshed under /tmp/handbook-release-home.kanJwr/.codex/skills
+[handbook-install] Optional PATH entry: /tmp/handbook-release-home.kanJwr/handbook/bin
+OK

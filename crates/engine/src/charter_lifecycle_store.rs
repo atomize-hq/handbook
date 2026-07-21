@@ -1,5 +1,5 @@
 use crate::canonical_repo_support::{CanonicalWorkspace, RepoRelativeFileAccessError};
-use crate::charter_authority_transaction::charter_promotion_commit_marker;
+use crate::charter_authority_transaction::CharterAuthorityTransactionServiceV1;
 use crate::charter_lifecycle::{
     apply_charter_lifecycle_events, CharterLifecycleEvent, CharterLifecycleEventKind,
     CharterLifecycleObservation, CharterLifecycleState,
@@ -20,7 +20,7 @@ use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
 use std::fs::{self, File, OpenOptions};
-use std::io::Write;
+use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 
 pub const CHARTER_LIFECYCLE_POLICY_REF: &str =
@@ -101,6 +101,7 @@ pub enum CharterLifecycleStoreErrorKindV1 {
     Conflict,
     UnsupportedPlatform,
     IoFailure,
+    #[cfg(test)]
     InjectedFault,
 }
 
@@ -135,12 +136,49 @@ impl fmt::Display for CharterLifecycleStoreErrorV1 {
 
 impl std::error::Error for CharterLifecycleStoreErrorV1 {}
 
+#[cfg(test)]
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub enum CharterLifecycleFaultPointV1 {
-    AfterIntent,
-    AfterPrepared,
-    AfterObservationInstalled,
-    AfterRecordsInstalled,
+enum CharterLifecycleFaultPointV1 {
+    Intent,
+    Prepared,
+    ObservationInstalled,
+    RecordsInstalled,
+}
+
+#[cfg(test)]
+std::thread_local! {
+    static SELECTED_LIFECYCLE_FAULT_V1: std::cell::Cell<Option<CharterLifecycleFaultPointV1>> =
+        const { std::cell::Cell::new(None) };
+}
+
+#[cfg(test)]
+struct ScopedLifecycleFaultV1(Option<CharterLifecycleFaultPointV1>);
+
+#[cfg(test)]
+impl ScopedLifecycleFaultV1 {
+    fn select(fault: CharterLifecycleFaultPointV1) -> Self {
+        let previous = SELECTED_LIFECYCLE_FAULT_V1.with(|selected| selected.replace(Some(fault)));
+        Self(previous)
+    }
+}
+
+#[cfg(test)]
+impl Drop for ScopedLifecycleFaultV1 {
+    fn drop(&mut self) {
+        SELECTED_LIFECYCLE_FAULT_V1.with(|selected| selected.set(self.0));
+    }
+}
+
+#[cfg(test)]
+fn inject_lifecycle_fault(
+    boundary: CharterLifecycleFaultPointV1,
+    detail: &'static str,
+) -> Result<(), CharterLifecycleStoreErrorV1> {
+    let selected = SELECTED_LIFECYCLE_FAULT_V1.with(std::cell::Cell::get);
+    if selected == Some(boundary) {
+        return Err(injected(detail));
+    }
+    Ok(())
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -211,16 +249,15 @@ pub fn charter_lifecycle_state_fingerprint(
             "lifecycle state target instance must be project_authority",
         ));
     }
-    let mut active = active_observation_fingerprints.to_vec();
-    for fingerprint in &active {
+    let mut unique = BTreeSet::new();
+    for fingerprint in active_observation_fingerprints {
         DefinitionFingerprint::parse(fingerprint)
             .map_err(|_| invalid_event("active observation fingerprint is invalid"))?;
-    }
-    active.sort();
-    if active.windows(2).any(|window| window[0] == window[1]) {
-        return Err(invalid_event(
-            "active lifecycle observation fingerprints must be unique",
-        ));
+        if !unique.insert(fingerprint) {
+            return Err(invalid_event(
+                "active lifecycle observation fingerprints must be unique",
+            ));
+        }
     }
     let value = json!({
         "lifecycle_policy_ref": policy_ref.as_str(),
@@ -228,7 +265,7 @@ pub fn charter_lifecycle_state_fingerprint(
         "target_instance_id": target_instance_id,
         "current_canonical_fingerprint": current_canonical_fingerprint,
         "result_state": result_state,
-        "active_observation_fingerprints": active,
+        "active_observation_fingerprints": active_observation_fingerprints,
     });
     let bytes = canonical_json_bytes(&value).map_err(|_| {
         CharterLifecycleStoreErrorV1::new(
@@ -268,16 +305,17 @@ impl CharterLifecycleStoreV1 {
         &self,
         intent: CharterLifecycleEventIntentV1,
     ) -> Result<CharterLifecycleEventCommitV1, CharterLifecycleStoreErrorV1> {
-        self.record_event_inner(intent, None)
+        self.record_event_inner(intent)
     }
 
-    #[doc(hidden)]
-    pub fn record_event_with_fault_for_testing(
+    #[cfg(test)]
+    fn record_event_with_fault_for_testing(
         &self,
         intent: CharterLifecycleEventIntentV1,
         fault: CharterLifecycleFaultPointV1,
     ) -> Result<CharterLifecycleEventCommitV1, CharterLifecycleStoreErrorV1> {
-        self.record_event_inner(intent, Some(fault))
+        let _fault = ScopedLifecycleFaultV1::select(fault);
+        self.record_event_inner(intent)
     }
 
     pub fn recover(&self) -> Result<(), CharterLifecycleStoreErrorV1> {
@@ -302,6 +340,22 @@ impl CharterLifecycleStoreV1 {
                 records: Vec::new(),
             });
         };
+        self.retain_loaded_authority(loaded)
+    }
+
+    pub(crate) fn observe_canonical_bytes_retained_locked(
+        &self,
+        canonical_bytes: &[u8],
+    ) -> Result<RetainedLifecycleAuthorityV1, CharterLifecycleStoreErrorV1> {
+        ensure_supported_platform()?;
+        let loaded = self.load_canonical_bytes_locked(canonical_bytes.to_vec())?;
+        self.retain_loaded_authority(loaded)
+    }
+
+    fn retain_loaded_authority(
+        &self,
+        loaded: LoadedLifecycleAuthority,
+    ) -> Result<RetainedLifecycleAuthorityV1, CharterLifecycleStoreErrorV1> {
         let mut records = Vec::with_capacity(1 + loaded.active_observation_refs.len());
         records.push(RetainedLifecycleRecordV1 {
             relative_ref: loaded.lifecycle_transition_ref.clone(),
@@ -342,7 +396,6 @@ impl CharterLifecycleStoreV1 {
     fn record_event_inner(
         &self,
         intent: CharterLifecycleEventIntentV1,
-        fault: Option<CharterLifecycleFaultPointV1>,
     ) -> Result<CharterLifecycleEventCommitV1, CharterLifecycleStoreErrorV1> {
         ensure_supported_platform()?;
         let _lock = LifecycleLock::acquire(&self.repo_root)?;
@@ -504,31 +557,37 @@ impl CharterLifecycleStoreV1 {
             &pending.join("intent.json"),
             &pending,
         )?;
-        if fault == Some(CharterLifecycleFaultPointV1::AfterIntent) {
-            return Err(injected("injected fault after lifecycle intent"));
-        }
+        #[cfg(test)]
+        inject_lifecycle_fault(
+            CharterLifecycleFaultPointV1::Intent,
+            "injected fault after lifecycle intent",
+        )?;
         write_new_durable(&pending.join("observation.new"), &observation_bytes)?;
         write_new_durable(&pending.join("transition.new"), &transition_bytes)?;
-        if fault == Some(CharterLifecycleFaultPointV1::AfterPrepared) {
-            return Err(injected("injected fault after lifecycle staging"));
-        }
+        #[cfg(test)]
+        inject_lifecycle_fault(
+            CharterLifecycleFaultPointV1::Prepared,
+            "injected fault after lifecycle staging",
+        )?;
         self.lineage
             .append_record(
                 LineageRecordClassV1::LifecycleObservation,
                 &observation_bytes,
             )
             .map_err(map_lineage)?;
-        if fault == Some(CharterLifecycleFaultPointV1::AfterObservationInstalled) {
-            return Err(injected(
-                "injected fault after lifecycle observation install",
-            ));
-        }
+        #[cfg(test)]
+        inject_lifecycle_fault(
+            CharterLifecycleFaultPointV1::ObservationInstalled,
+            "injected fault after lifecycle observation install",
+        )?;
         self.lineage
             .append_record(LineageRecordClassV1::LifecycleTransition, &transition_bytes)
             .map_err(map_lineage)?;
-        if fault == Some(CharterLifecycleFaultPointV1::AfterRecordsInstalled) {
-            return Err(injected("injected fault after lifecycle record install"));
-        }
+        #[cfg(test)]
+        inject_lifecycle_fault(
+            CharterLifecycleFaultPointV1::RecordsInstalled,
+            "injected fault after lifecycle record install",
+        )?;
         self.commit_and_finalize(&pending, &committed, &intent_bytes)?;
         Ok(CharterLifecycleEventCommitV1 {
             disposition: CharterLifecycleEventDispositionV1::Committed,
@@ -826,6 +885,13 @@ impl CharterLifecycleStoreV1 {
             }
             return Ok(None);
         };
+        self.load_canonical_bytes_locked(canonical_bytes).map(Some)
+    }
+
+    fn load_canonical_bytes_locked(
+        &self,
+        canonical_bytes: Vec<u8>,
+    ) -> Result<LoadedLifecycleAuthority, CharterLifecycleStoreErrorV1> {
         let canonical_fingerprint = DefinitionFingerprint::from_bytes(&canonical_bytes).to_string();
         let promotion = self.current_promotion_anchor(&canonical_fingerprint)?;
         let mut transition_ref = promotion.lifecycle_transition_ref;
@@ -943,7 +1009,7 @@ impl CharterLifecycleStoreV1 {
             .collect::<BTreeSet<_>>()
             .into_iter()
             .collect();
-        Ok(Some(LoadedLifecycleAuthority {
+        Ok(LoadedLifecycleAuthority {
             canonical_bytes,
             canonical_fingerprint,
             lifecycle_transition_ref: transition_ref,
@@ -954,68 +1020,26 @@ impl CharterLifecycleStoreV1 {
             active_observation_fingerprints: active_fingerprints,
             active_observations,
             reopened_coverage_ids,
-        }))
+        })
     }
 
     fn current_promotion_anchor(
         &self,
         canonical_fingerprint: &str,
     ) -> Result<PromotionLifecycleAnchor, CharterLifecycleStoreErrorV1> {
-        let root = self
-            .repo_root
-            .join(".handbook/state/transactions/promotions");
-        if !root.exists() {
-            return Err(durability(
-                "canonical Charter exists without promotion transaction authority",
-            ));
-        }
-        reject_reparse_or_symlink(&root, true).map_err(map_lineage)?;
-        let mut matches = Vec::new();
-        for committed in transaction_directories(&root, ".committed")? {
-            let intent_bytes = read_bounded_regular(&committed.join("intent.json"), 64 * 1024)?;
-            let intent = parse_schema_json(&intent_bytes)
-                .map_err(|_| durability("promotion intent is not closed JSON"))?;
-            if canonical_json_bytes(&intent)
-                .map_err(|_| durability("promotion intent cannot be canonicalized"))?
-                != intent_bytes
-            {
-                return Err(durability("promotion intent is not exact JCS"));
-            }
-            if intent.get("canonical_fingerprint").and_then(Value::as_str)
-                != Some(canonical_fingerprint)
-            {
-                continue;
-            }
-            let marker = read_bounded_regular(&committed.join("committed"), 72)?;
-            if marker != charter_promotion_commit_marker(&intent_bytes) {
-                return Err(durability(
-                    "promotion marker does not bind raw intent bytes",
-                ));
-            }
-            let reference = string_field(&intent, "lifecycle_transition_ref")
-                .map_err(map_lineage)?
-                .to_owned();
-            let fingerprint = string_field(&intent, "lifecycle_transition_fingerprint")
-                .map_err(map_lineage)?
-                .to_owned();
-            self.lineage
-                .read_record(
-                    LineageRecordClassV1::LifecycleTransition,
-                    &reference,
-                    &fingerprint,
-                )
-                .map_err(map_lineage)?;
-            matches.push(PromotionLifecycleAnchor {
-                lifecycle_transition_ref: reference,
-                lifecycle_transition_fingerprint: fingerprint,
-            });
-        }
-        if matches.len() != 1 {
-            return Err(durability(
-                "current canonical Charter must match exactly one committed promotion",
-            ));
-        }
-        Ok(matches.remove(0))
+        let intent = CharterAuthorityTransactionServiceV1::new(&self.repo_root)
+            .current_committed_intent_locked(canonical_fingerprint)
+            .map_err(|failure| {
+                durability(format!(
+                    "promotion terminal history refused: {}",
+                    failure.detail()
+                ))
+            })?;
+        let output = intent.record.outputs.lifecycle_transition;
+        Ok(PromotionLifecycleAnchor {
+            lifecycle_transition_ref: output.record_ref,
+            lifecycle_transition_fingerprint: output.record_fingerprint,
+        })
     }
 
     fn commit_and_finalize(
@@ -1737,11 +1761,40 @@ fn read_bounded_regular(
     limit: usize,
 ) -> Result<Vec<u8>, CharterLifecycleStoreErrorV1> {
     reject_reparse_or_symlink(path, false).map_err(map_lineage)?;
-    let metadata = fs::metadata(path).map_err(|_| io_error("lifecycle file metadata failed"))?;
+    let mut options = OpenOptions::new();
+    options.read(true);
+    #[cfg(windows)]
+    {
+        use std::os::windows::fs::OpenOptionsExt;
+        const FILE_FLAG_OPEN_REPARSE_POINT: u32 = 0x0020_0000;
+        options.custom_flags(FILE_FLAG_OPEN_REPARSE_POINT);
+    }
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::OpenOptionsExt;
+        options.custom_flags(rustix::fs::OFlags::NOFOLLOW.bits() as i32);
+    }
+    let file = options
+        .open(path)
+        .map_err(|_| io_error("lifecycle file no-follow open failed"))?;
+    let metadata = file
+        .metadata()
+        .map_err(|_| io_error("lifecycle file metadata failed"))?;
+    #[cfg(windows)]
+    {
+        use std::os::windows::fs::MetadataExt;
+        const FILE_ATTRIBUTE_REPARSE_POINT: u32 = 0x0000_0400;
+        if metadata.file_attributes() & FILE_ATTRIBUTE_REPARSE_POINT != 0 {
+            return Err(unsafe_error("lifecycle file is a reparse point"));
+        }
+    }
     if !metadata.is_file() || metadata.len() > limit as u64 {
         return Err(durability("lifecycle file is not a bounded regular file"));
     }
-    let bytes = fs::read(path).map_err(|_| io_error("lifecycle file read failed"))?;
+    let mut bytes = Vec::new();
+    file.take(limit as u64 + 1)
+        .read_to_end(&mut bytes)
+        .map_err(|_| io_error("lifecycle file read failed"))?;
     if bytes.len() > limit {
         return Err(durability("lifecycle file exceeds its admission bound"));
     }
@@ -1906,6 +1959,393 @@ fn map_lineage(source: LineageStoreErrorV1) -> CharterLifecycleStoreErrorV1 {
     )
 }
 
+#[cfg(test)]
+#[allow(
+    clippy::items_after_test_module,
+    reason = "the focused promotion-anchor fixtures stay adjacent to the parser they exercise"
+)]
+mod promotion_anchor_v12_tests {
+    use super::*;
+    use crate::charter_promotion_intent_v12::promotion_intent_marker_v12;
+
+    const RUNTIME_VECTORS: &[u8] = include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json"
+    ));
+    const INTENT_VECTORS: &[u8] = include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json"
+    ));
+
+    fn runtime_record(class: &str) -> Value {
+        let vectors: Value = serde_json::from_slice(RUNTIME_VECTORS).unwrap();
+        vectors["vectors"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|row| row["record_class"] == class)
+            .unwrap()["record"]
+            .clone()
+    }
+
+    fn resign_record(
+        value: &mut Value,
+        id_field: &str,
+        fingerprint_field: &str,
+        prefix: &str,
+        audit_only: &[&str],
+    ) {
+        let mut preimage = value.clone();
+        let object = preimage.as_object_mut().unwrap();
+        object.remove(id_field);
+        object.remove(fingerprint_field);
+        for field in audit_only {
+            object.remove(*field);
+        }
+        let fingerprint = DefinitionFingerprint::from_json_value(&preimage)
+            .unwrap()
+            .to_string();
+        value[id_field] = Value::String(format!(
+            "{prefix}_{}",
+            fingerprint.strip_prefix("sha256:").unwrap()
+        ));
+        value[fingerprint_field] = Value::String(fingerprint);
+    }
+
+    fn valid_intent(repo: &Path, mode: &str, transaction_id: &str) -> (Value, Vec<u8>) {
+        let vectors: Value = serde_json::from_slice(INTENT_VECTORS).unwrap();
+        let mut intent = vectors["amendment_positive"]["intent_fingerprint_preimage"].clone();
+        intent["transaction_id"] = Value::String(transaction_id.to_owned());
+        if mode == "create" {
+            intent["mutation_mode"] = Value::String("create".to_owned());
+            intent["target"]["basis_artifact_fingerprint"] = Value::Null;
+            intent["target"]["observed_current_artifact_fingerprint"] = Value::Null;
+            intent["selected_contract"]["prior_lifecycle_head_ref"] = Value::Null;
+            intent["selected_contract"]["prior_lifecycle_head_fingerprint"] = Value::Null;
+            intent["selected_contract"]["prior_lifecycle_state"] =
+                Value::String("absent".to_owned());
+            intent["selected_contract"]["prior_lifecycle_state_fingerprint"] = Value::Null;
+            intent["selected_contract"]["active_observations"] = Value::Array(Vec::new());
+            intent["selected_contract"]["reopened_coverage_ids"] = Value::Array(Vec::new());
+            intent["recovery"]["old_canonical_status"] = Value::String("absent".to_owned());
+            intent["recovery"]["old_canonical_fingerprint"] = Value::Null;
+            intent["recovery"]["old_canonical_document_sha256"] = Value::Null;
+            intent["recovery"]["old_canonical_byte_length"] = Value::Null;
+        }
+
+        let mut promotion = runtime_record("promotion");
+        promotion["candidate_ref"] = intent["candidate_lineage"]["candidate_ref"].clone();
+        promotion["candidate_fingerprint"] =
+            intent["candidate_lineage"]["candidate_fingerprint"].clone();
+        promotion["canonical_artifact_ref"] = intent["target"]["canonical_artifact_ref"].clone();
+        promotion["canonical_artifact_fingerprint"] =
+            intent["outputs"]["new_canonical_fingerprint"].clone();
+        promotion["target_instance_id"] = intent["target"]["target_instance_id"].clone();
+        promotion["basis_artifact_fingerprint"] =
+            intent["target"]["basis_artifact_fingerprint"].clone();
+        promotion["expected_current_artifact_fingerprint"] =
+            intent["target"]["observed_current_artifact_fingerprint"].clone();
+        promotion["profile_ref"] = intent["selected_contract"]["profile_ref"].clone();
+        promotion["resolved_profile_fingerprint"] =
+            intent["selected_contract"]["resolved_profile_fingerprint"].clone();
+        promotion["resolved_definitions"] = Value::Array(
+            intent["selected_contract"]["resolved_definitions"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .map(|binding| {
+                    json!({
+                        "definition_ref": binding["definition_ref"],
+                        "definition_fingerprint": binding["definition_fingerprint"],
+                    })
+                })
+                .collect(),
+        );
+        promotion["approval_refs"] = Value::Array(
+            intent["human_authority"]["approval_bindings"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .map(|binding| binding["approval_ref"].clone())
+                .collect(),
+        );
+        promotion["validation_result_refs"] = Value::Array(vec![intent["candidate_lineage"]
+            ["validation_result_ref"]
+            .clone()]);
+        for field in [
+            "approver_registry_state_ref",
+            "approver_registry_state_fingerprint",
+            "registry_head_transition_ref",
+            "registry_head_transition_fingerprint",
+        ] {
+            promotion[field] = intent["human_authority"][field].clone();
+        }
+        promotion["decision"] = Value::String("approved".to_owned());
+        resign_record(
+            &mut promotion,
+            "promotion_id",
+            "promotion_fingerprint",
+            "promotion",
+            &[],
+        );
+        let promotion_bytes = serde_json_canonicalizer::to_vec(&promotion).unwrap();
+        let promotion = TrustedLineageStoreV1::new(repo)
+            .append_record(LineageRecordClassV1::Promotion, &promotion_bytes)
+            .unwrap();
+        intent["promotion_id"] = Value::String(
+            promotion
+                .relative_ref
+                .strip_prefix("promotions/")
+                .unwrap()
+                .strip_suffix(".json")
+                .unwrap()
+                .to_owned(),
+        );
+        intent["outputs"]["promotion_record"] = json!({
+            "record_ref": promotion.relative_ref,
+            "record_fingerprint": promotion.fingerprint,
+            "document_sha256": DefinitionFingerprint::from_bytes(&promotion_bytes).to_string(),
+            "byte_length": promotion_bytes.len() as u64,
+        });
+
+        let mut lifecycle = runtime_record("lifecycle-transition");
+        lifecycle["lifecycle_policy_ref"] =
+            intent["selected_contract"]["lifecycle_policy_ref"].clone();
+        lifecycle["lifecycle_policy_fingerprint"] =
+            intent["selected_contract"]["lifecycle_policy_fingerprint"].clone();
+        lifecycle["target_instance_id"] = intent["target"]["target_instance_id"].clone();
+        lifecycle["new_observation_refs"] = Value::Array(Vec::new());
+        lifecycle["active_observation_refs"] = Value::Array(Vec::new());
+        lifecycle["result_state"] = Value::String("current".to_owned());
+        let result_state_fingerprint = charter_lifecycle_state_fingerprint(
+            intent["selected_contract"]["lifecycle_policy_ref"]
+                .as_str()
+                .unwrap(),
+            intent["selected_contract"]["lifecycle_policy_fingerprint"]
+                .as_str()
+                .unwrap(),
+            "project_authority",
+            intent["outputs"]["new_canonical_fingerprint"]
+                .as_str()
+                .unwrap(),
+            CharterLifecycleState::Current,
+            &[],
+        )
+        .unwrap();
+        lifecycle["prior_state"] = if mode == "create" {
+            Value::String("current".to_owned())
+        } else {
+            intent["selected_contract"]["prior_lifecycle_state"].clone()
+        };
+        lifecycle["prior_state_fingerprint"] = if mode == "create" {
+            Value::String(result_state_fingerprint.clone())
+        } else {
+            intent["selected_contract"]["prior_lifecycle_state_fingerprint"].clone()
+        };
+        lifecycle["result_state_fingerprint"] = Value::String(result_state_fingerprint);
+        lifecycle["clearance_promotion_ref"] =
+            intent["outputs"]["promotion_record"]["record_ref"].clone();
+        resign_record(
+            &mut lifecycle,
+            "transition_id",
+            "transition_fingerprint",
+            "lifecycle-transition",
+            &["transitioned_at_utc"],
+        );
+        let lifecycle_bytes = serde_json_canonicalizer::to_vec(&lifecycle).unwrap();
+        let lifecycle = TrustedLineageStoreV1::new(repo)
+            .append_record(LineageRecordClassV1::LifecycleTransition, &lifecycle_bytes)
+            .unwrap();
+        intent["outputs"]["lifecycle_transition"] = json!({
+            "record_ref": lifecycle.relative_ref,
+            "record_fingerprint": lifecycle.fingerprint,
+            "document_sha256": DefinitionFingerprint::from_bytes(&lifecycle_bytes).to_string(),
+            "byte_length": lifecycle_bytes.len() as u64,
+        });
+        let mut preimage = intent.clone();
+        preimage
+            .as_object_mut()
+            .unwrap()
+            .remove("intent_fingerprint");
+        intent["intent_fingerprint"] = Value::String(
+            DefinitionFingerprint::from_json_value(&preimage)
+                .unwrap()
+                .to_string(),
+        );
+        let mut bytes = serde_json_canonicalizer::to_vec(&intent).unwrap();
+        bytes.push(b'\n');
+        (intent, bytes)
+    }
+
+    fn publish_committed(repo: &Path, transaction_id: &str, bytes: &[u8]) {
+        let directory = repo
+            .join(".handbook/state/transactions/promotions")
+            .join(format!("{transaction_id}.committed"));
+        fs::create_dir_all(&directory).unwrap();
+        fs::write(directory.join("intent.json"), bytes).unwrap();
+        let marker = promotion_intent_marker_v12(bytes);
+        for name in [
+            "prepared",
+            "canonical-installed",
+            "records-installed",
+            "committed",
+        ] {
+            fs::write(directory.join(name), &marker).unwrap();
+        }
+    }
+
+    fn resign_intent(intent: &mut Value) -> Vec<u8> {
+        let mut preimage = intent.clone();
+        preimage
+            .as_object_mut()
+            .unwrap()
+            .remove("intent_fingerprint");
+        intent["intent_fingerprint"] = Value::String(
+            DefinitionFingerprint::from_json_value(&preimage)
+                .unwrap()
+                .to_string(),
+        );
+        let mut bytes = serde_json_canonicalizer::to_vec(intent).unwrap();
+        bytes.push(b'\n');
+        bytes
+    }
+
+    #[test]
+    fn valid_create_anchor_reads_only_exact_terminal_intent_1_2_outputs() {
+        let mode = "create";
+        let repo = tempfile::tempdir().unwrap();
+        let transaction_id = format!("promotion-transaction_{mode}");
+        let (intent, bytes) = valid_intent(repo.path(), mode, &transaction_id);
+        publish_committed(repo.path(), &transaction_id, &bytes);
+        let expected_fingerprint = intent["outputs"]["new_canonical_fingerprint"]
+            .as_str()
+            .unwrap();
+        let anchor = CharterLifecycleStoreV1::new(repo.path())
+            .current_promotion_anchor(expected_fingerprint)
+            .expect("valid nested intent 1.2 anchor");
+        assert_eq!(
+            anchor.lifecycle_transition_ref,
+            intent["outputs"]["lifecycle_transition"]["record_ref"]
+        );
+        assert_eq!(
+            anchor.lifecycle_transition_fingerprint,
+            intent["outputs"]["lifecycle_transition"]["record_fingerprint"]
+        );
+    }
+
+    #[test]
+    fn legacy_shape_wrong_schema_fingerprint_marker_and_nested_record_refuse() {
+        for case in [
+            "legacy",
+            "schema",
+            "version",
+            "fingerprint",
+            "marker",
+            "nested",
+        ] {
+            let repo = tempfile::tempdir().unwrap();
+            let transaction_id = format!("promotion-transaction_{case}");
+            let (mut intent, mut bytes) = valid_intent(repo.path(), "create", &transaction_id);
+            match case {
+                "legacy" => {
+                    intent["canonical_fingerprint"] =
+                        intent["outputs"]["new_canonical_fingerprint"].clone();
+                    bytes = resign_intent(&mut intent);
+                }
+                "schema" => {
+                    intent["schema_id"] =
+                        Value::String("handbook.promotion-transaction-intent".to_owned());
+                    bytes = resign_intent(&mut intent);
+                }
+                "version" => {
+                    intent["schema_version"] = Value::String("1.0".to_owned());
+                    bytes = resign_intent(&mut intent);
+                }
+                "fingerprint" => {
+                    intent["intent_fingerprint"] =
+                        Value::String(format!("sha256:{}", "0".repeat(64)));
+                    bytes = {
+                        let mut value = serde_json_canonicalizer::to_vec(&intent).unwrap();
+                        value.push(b'\n');
+                        value
+                    };
+                }
+                "nested" => {
+                    intent["outputs"]["lifecycle_transition"]["document_sha256"] =
+                        Value::String(format!("sha256:{}", "0".repeat(64)));
+                    bytes = resign_intent(&mut intent);
+                }
+                "marker" => {}
+                _ => unreachable!(),
+            }
+            publish_committed(repo.path(), &transaction_id, &bytes);
+            if case == "marker" {
+                fs::write(
+                    repo.path()
+                        .join(".handbook/state/transactions/promotions")
+                        .join(format!("{transaction_id}.committed/committed")),
+                    format!("sha256:{}\n", "0".repeat(64)),
+                )
+                .unwrap();
+            }
+            let fingerprint = intent["outputs"]["new_canonical_fingerprint"]
+                .as_str()
+                .unwrap();
+            assert!(
+                CharterLifecycleStoreV1::new(repo.path())
+                    .current_promotion_anchor(fingerprint)
+                    .is_err(),
+                "{case} must refuse"
+            );
+        }
+    }
+
+    #[test]
+    fn duplicate_matching_intent_1_2_transactions_refuse_exactly_one_anchor() {
+        let repo = tempfile::tempdir().unwrap();
+        let mut fingerprint = String::new();
+        for suffix in ["one", "two"] {
+            let transaction_id = format!("promotion-transaction_duplicate-{suffix}");
+            let (intent, bytes) = valid_intent(repo.path(), "create", &transaction_id);
+            fingerprint = intent["outputs"]["new_canonical_fingerprint"]
+                .as_str()
+                .unwrap()
+                .to_owned();
+            publish_committed(repo.path(), &transaction_id, &bytes);
+        }
+        assert!(CharterLifecycleStoreV1::new(repo.path())
+            .current_promotion_anchor(&fingerprint)
+            .is_err());
+    }
+}
+
+#[cfg(test)]
+mod lifecycle_fault_control_tests {
+    use super::*;
+
+    #[test]
+    fn every_lifecycle_fault_boundary_is_module_local_and_exactly_selected() {
+        let _private_hook = CharterLifecycleStoreV1::record_event_with_fault_for_testing;
+        for selected in [
+            CharterLifecycleFaultPointV1::Intent,
+            CharterLifecycleFaultPointV1::Prepared,
+            CharterLifecycleFaultPointV1::ObservationInstalled,
+            CharterLifecycleFaultPointV1::RecordsInstalled,
+        ] {
+            let _guard = ScopedLifecycleFaultV1::select(selected);
+            for observed in [
+                CharterLifecycleFaultPointV1::Intent,
+                CharterLifecycleFaultPointV1::Prepared,
+                CharterLifecycleFaultPointV1::ObservationInstalled,
+                CharterLifecycleFaultPointV1::RecordsInstalled,
+            ] {
+                let result = inject_lifecycle_fault(observed, "test-only lifecycle fault");
+                assert_eq!(result.is_err(), observed == selected);
+            }
+        }
+    }
+}
+
 fn error(
     kind: CharterLifecycleStoreErrorKindV1,
     detail: impl Into<String>,
@@ -1936,6 +2376,7 @@ fn io_error(detail: impl Into<String>) -> CharterLifecycleStoreErrorV1 {
     error(CharterLifecycleStoreErrorKindV1::IoFailure, detail)
 }
 
+#[cfg(test)]
 fn injected(detail: impl Into<String>) -> CharterLifecycleStoreErrorV1 {
     error(CharterLifecycleStoreErrorKindV1::InjectedFault, detail)
 }

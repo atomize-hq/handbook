@@ -66,33 +66,50 @@ fn author_persists_exact_immutable_bundle_without_selecting_canonical_truth() {
         },
     );
 
-    let expected_candidate_ref = format!("candidates/{}.json", expected.candidate.candidate_id);
     assert_eq!(result.status, AdapterOperationStatus::Succeeded);
     assert_eq!(
         result.intake_ref.as_deref(),
-        Some(expected.candidate.intake_record_ref.as_str())
+        Some(expected.candidate_subject.intake_record_ref.as_str())
     );
     assert_eq!(
         result.intake_fingerprint.as_deref(),
         Some(expected.intake.record_fingerprint.as_str())
     );
+    let candidate_ref = result.candidate_ref.as_deref().expect("candidate ref");
+    let candidate: serde_json::Value = serde_json::from_slice(
+        &std::fs::read(
+            repo.path()
+                .join(".handbook/evidence/charter")
+                .join(candidate_ref),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    assert_eq!(candidate["schema_version"], "1.3");
     assert_eq!(
-        result.candidate_ref.as_deref(),
-        Some(expected_candidate_ref.as_str())
+        candidate["candidate_subject_fingerprint"],
+        expected.candidate_subject.candidate_subject_fingerprint
     );
     assert_eq!(
-        result.candidate_fingerprint.as_deref(),
-        Some(expected.candidate.candidate_fingerprint.as_str())
+        candidate["candidate_fingerprint"].as_str(),
+        result.candidate_fingerprint.as_deref()
     );
+    let validation_result_ref = candidate["validation_result_binding"]["validation_result_ref"]
+        .as_str()
+        .expect("validation-result ref");
     assert_eq!(
         result.changed_paths,
         vec![
             format!(
                 ".handbook/state/{}",
-                expected.candidate.normalized_content_ref
+                expected.candidate_subject.normalized_content_ref
             ),
-            format!(".handbook/state/{}", expected.candidate.intake_record_ref),
-            format!(".handbook/state/{expected_candidate_ref}"),
+            format!(
+                ".handbook/state/{}",
+                expected.candidate_subject.intake_record_ref
+            ),
+            format!(".handbook/state/{validation_result_ref}"),
+            format!(".handbook/evidence/charter/{candidate_ref}"),
         ]
     );
     assert!(result.refusal.is_none());
@@ -111,7 +128,7 @@ fn author_persistence_collision_refuses_without_publishing_semantic_refs() {
     let collision = repo
         .path()
         .join(".handbook/state")
-        .join(&expected.candidate.normalized_content_ref);
+        .join(&expected.candidate_subject.normalized_content_ref);
     std::fs::create_dir_all(collision.parent().unwrap()).unwrap();
     std::fs::write(&collision, b"unequal existing candidate content").unwrap();
 
@@ -137,7 +154,7 @@ fn author_persistence_collision_refuses_without_publishing_semantic_refs() {
     assert!(!repo
         .path()
         .join(".handbook/state")
-        .join(&expected.candidate.intake_record_ref)
+        .join(&expected.candidate_subject.intake_record_ref)
         .exists());
 }
 

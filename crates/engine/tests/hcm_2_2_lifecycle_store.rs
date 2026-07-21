@@ -4,9 +4,9 @@ mod hcm_2_2_committed_charter;
 use handbook_engine::{
     charter_lifecycle_event_commit_marker, charter_lifecycle_state_fingerprint,
     classify_lifecycle_recovery, CharterLifecycleEventDispositionV1, CharterLifecycleEventIntentV1,
-    CharterLifecycleFaultPointV1, CharterLifecycleRecoveryActionV1,
-    CharterLifecycleRecoveryInputsV1, CharterLifecycleState, CharterLifecycleStoreErrorKindV1,
-    CharterLifecycleStoreV1, DefinitionFingerprint, LineageRecordClassV1, TrustedLineageStoreV1,
+    CharterLifecycleRecoveryActionV1, CharterLifecycleRecoveryInputsV1, CharterLifecycleState,
+    CharterLifecycleStoreErrorKindV1, CharterLifecycleStoreV1, DefinitionFingerprint,
+    LineageRecordClassV1, TrustedLineageStoreV1,
 };
 use serde_json::Value;
 
@@ -97,7 +97,7 @@ fn committed_repo() -> tempfile::TempDir {
 }
 
 #[test]
-fn lifecycle_state_fingerprint_uses_the_exact_sorted_authority_preimage() {
+fn lifecycle_state_fingerprint_preserves_the_exact_committed_head_order() {
     let forward = charter_lifecycle_state_fingerprint(
         "handbook.lifecycle.constitutional-review-lock@1.0.0",
         &fingerprint('a'),
@@ -116,7 +116,7 @@ fn lifecycle_state_fingerprint_uses_the_exact_sorted_authority_preimage() {
         &[fingerprint('c'), fingerprint('d')],
     )
     .expect("state fingerprint");
-    assert_eq!(forward, reversed);
+    assert_ne!(forward, reversed);
 }
 
 #[test]
@@ -230,36 +230,5 @@ fn stale_basis_and_unknown_standalone_trigger_refuse_closed() {
             .expect_err("unknown trigger")
             .kind(),
         CharterLifecycleStoreErrorKindV1::UnknownTrigger
-    );
-}
-
-#[test]
-fn prepared_lifecycle_event_rolls_forward_before_observation() {
-    let repo = committed_repo();
-    let lifecycle = CharterLifecycleStoreV1::new(repo.path());
-    let initial = lifecycle.observe().unwrap().unwrap();
-    let (evidence_ref, evidence_fingerprint) = seed_trigger_evidence(
-        repo.path(),
-        &initial.canonical_fingerprint,
-        "trust_boundary_changed",
-    );
-    let error = lifecycle
-        .record_event_with_fault_for_testing(
-            CharterLifecycleEventIntentV1::TriggerEvidence {
-                evidence_ref,
-                evidence_fingerprint,
-            },
-            CharterLifecycleFaultPointV1::AfterPrepared,
-        )
-        .expect_err("fault injection");
-    assert_eq!(
-        error.kind(),
-        CharterLifecycleStoreErrorKindV1::InjectedFault
-    );
-    let recovered = lifecycle.observe().expect("recovery").expect("authority");
-    assert_eq!(recovered.state, CharterLifecycleState::ReassessmentRequired);
-    assert_eq!(
-        recovered.reopened_coverage_ids,
-        ["governance.exception_policy"]
     );
 }

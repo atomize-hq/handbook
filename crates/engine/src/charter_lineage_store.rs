@@ -1,5 +1,7 @@
 use crate::canonical_repo_support::{CanonicalWorkspace, RepoRelativeFileAccessError};
-use crate::charter_intake::CharterCandidateBundle;
+use crate::charter_intake::{
+    validate_candidate_field_source_bijection, CharterCandidateBundle, CharterFieldSource,
+};
 use crate::definition_identity::canonical_json_bytes;
 use crate::{parse_schema_json, DefinitionFingerprint};
 use serde_json::Value;
@@ -118,7 +120,7 @@ impl TrustedLineageStoreV1 {
         declared_fingerprint: &str,
     ) -> Result<Vec<u8>, LineageStoreErrorV1> {
         let identity = validate_reference(class, relative_ref, declared_fingerprint)?;
-        let repo_relative = format!(".handbook/state/{relative_ref}");
+        let repo_relative = record_repo_relative(class, relative_ref);
         let workspace = CanonicalWorkspace::new(&self.repo_root);
         let normalized = workspace
             .normalize_repo_relative(&repo_relative)
@@ -153,7 +155,7 @@ impl TrustedLineageStoreV1 {
         Ok(bytes)
     }
 
-    pub fn persist_candidate_bundle(
+    pub(crate) fn persist_candidate_bundle(
         &self,
         bundle: &CharterCandidateBundle,
     ) -> Result<CandidateBundlePersistenceV1, LineageStoreErrorV1> {
@@ -186,6 +188,20 @@ impl TrustedLineageStoreV1 {
             .map_err(|_| io_error("candidate record canonicalization failed"))?;
         let intake = validate_record(LineageRecordClassV1::Intake, &intake_bytes)?;
         let candidate = validate_record(LineageRecordClassV1::Candidate, &candidate_bytes)?;
+        validate_candidate_field_source_bijection(
+            &candidate.value,
+            &intake.value,
+            &bundle.normalized_content,
+        )
+        .map_err(|failure| {
+            LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::InvalidRecord,
+                format!(
+                    "candidate populated-leaf provenance replay refused: {}",
+                    failure.detail()
+                ),
+            )
+        })?;
         if candidate
             .value
             .get("intake_record_ref")
@@ -207,12 +223,14 @@ impl TrustedLineageStoreV1 {
             &bundle.normalized_content,
             MAX_CANDIDATE_CONTENT_BYTES,
         )?;
-        self.preflight_create_new_or_equal(
+        self.preflight_record_destination(
+            LineageRecordClassV1::Intake,
             &intake.relative_ref,
             &intake_bytes,
             MAX_LINEAGE_RECORD_BYTES,
         )?;
-        self.preflight_create_new_or_equal(
+        self.preflight_record_destination(
+            LineageRecordClassV1::Candidate,
             &candidate.relative_ref,
             &candidate_bytes,
             MAX_LINEAGE_RECORD_BYTES,
@@ -246,7 +264,12 @@ impl TrustedLineageStoreV1 {
     ) -> Result<(), LineageStoreErrorV1> {
         let identity = validate_record(class, bytes)?;
         self.validate_immediate_lineage(class, &identity.value)?;
-        self.preflight_create_new_or_equal(&identity.relative_ref, bytes, MAX_LINEAGE_RECORD_BYTES)
+        self.preflight_record_destination(
+            class,
+            &identity.relative_ref,
+            bytes,
+            MAX_LINEAGE_RECORD_BYTES,
+        )
     }
 
     pub(crate) fn read_candidate_content(
@@ -294,7 +317,7 @@ impl TrustedLineageStoreV1 {
         let identity = validate_record(class, bytes)?;
         self.validate_immediate_lineage(class, &identity.value)?;
 
-        let final_path = self.state_path(&identity.relative_ref)?;
+        let final_path = self.record_path(class, &identity.relative_ref)?;
         let parent = final_path.parent().ok_or_else(|| {
             LineageStoreErrorV1::new(
                 LineageStoreErrorKindV1::UnsafeReference,
@@ -318,7 +341,7 @@ impl TrustedLineageStoreV1 {
                 })
             }
             Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => {
-                let repo_relative = format!(".handbook/state/{}", identity.relative_ref);
+                let repo_relative = record_repo_relative(class, &identity.relative_ref);
                 let workspace = CanonicalWorkspace::new(&self.repo_root);
                 let normalized =
                     workspace
@@ -401,6 +424,63 @@ impl TrustedLineageStoreV1 {
             Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(()),
             Err(_) => Err(io_error("append-only destination metadata failed")),
         }
+    }
+
+    fn preflight_record_destination(
+        &self,
+        class: LineageRecordClassV1,
+        relative_ref: &str,
+        expected: &[u8],
+        limit: usize,
+    ) -> Result<(), LineageStoreErrorV1> {
+        let final_path = self.record_path(class, relative_ref)?;
+        match fs::symlink_metadata(&final_path) {
+            Ok(metadata) => {
+                if metadata.file_type().is_symlink() || !metadata.is_file() {
+                    return Err(LineageStoreErrorV1::new(
+                        LineageStoreErrorKindV1::UnsafeFilesystem,
+                        "preexisting append-only record is not a safe regular file",
+                    ));
+                }
+                let repo_relative = record_repo_relative(class, relative_ref);
+                let workspace = CanonicalWorkspace::new(&self.repo_root);
+                let normalized =
+                    workspace
+                        .normalize_repo_relative(&repo_relative)
+                        .map_err(|_| {
+                            LineageStoreErrorV1::new(
+                                LineageStoreErrorKindV1::UnsafeReference,
+                                "append-only record destination is not normalized",
+                            )
+                        })?;
+                let file = workspace
+                    .trusted_read_strict(&normalized)
+                    .map_err(map_read_error)?;
+                let (observed, exceeded) = file
+                    .read_bytes_bounded(limit)
+                    .map_err(|_| io_error("append-only record preflight read failed"))?;
+                if exceeded || observed != expected {
+                    return Err(LineageStoreErrorV1::new(
+                        LineageStoreErrorKindV1::ExistingBytesMismatch,
+                        "preexisting append-only record has unequal bytes",
+                    ));
+                }
+                Ok(())
+            }
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(()),
+            Err(_) => Err(io_error("append-only record destination metadata failed")),
+        }
+    }
+
+    fn record_path(
+        &self,
+        class: LineageRecordClassV1,
+        relative_ref: &str,
+    ) -> Result<PathBuf, LineageStoreErrorV1> {
+        validate_relative_path(relative_ref)?;
+        Ok(self
+            .repo_root
+            .join(record_repo_relative(class, relative_ref)))
     }
 
     fn append_exact_blob(
@@ -489,6 +569,14 @@ impl TrustedLineageStoreV1 {
     }
 }
 
+fn record_repo_relative(class: LineageRecordClassV1, relative_ref: &str) -> String {
+    if class == LineageRecordClassV1::Candidate {
+        format!(".handbook/evidence/charter/{relative_ref}")
+    } else {
+        format!(".handbook/state/{relative_ref}")
+    }
+}
+
 #[derive(Debug)]
 pub(crate) struct ValidatedRecord {
     pub(crate) value: Value,
@@ -527,8 +615,14 @@ pub(crate) fn validate_record(
     }
 
     let contract = class.contract();
+    let expected_schema_version = if class == LineageRecordClassV1::Candidate {
+        validate_candidate_v13(&value)?;
+        "1.3"
+    } else {
+        contract.schema_version
+    };
     if string_field(&value, "schema_id")? != contract.schema_id
-        || string_field(&value, "schema_version")? != contract.schema_version
+        || string_field(&value, "schema_version")? != expected_schema_version
     {
         return Err(LineageStoreErrorV1::new(
             LineageStoreErrorKindV1::InvalidRecord,
@@ -584,6 +678,280 @@ pub(crate) fn validate_record(
         record_id,
         fingerprint,
     })
+}
+
+fn validate_candidate_v13(value: &Value) -> Result<(), LineageStoreErrorV1> {
+    const KEYS: [&str; 18] = [
+        "schema_id",
+        "schema_version",
+        "candidate_id",
+        "intake_record_ref",
+        "target_kind_ref",
+        "target_instance_id",
+        "target_schema_ref",
+        "profile_ref",
+        "resolved_profile_fingerprint",
+        "basis_artifact_fingerprint",
+        "normalized_content_ref",
+        "field_sources",
+        "unresolved_coverage_ids",
+        "promotion_eligibility",
+        "required_approval_policy_ref",
+        "candidate_subject_fingerprint",
+        "validation_result_binding",
+        "candidate_fingerprint",
+    ];
+    let object = value.as_object().ok_or_else(|| {
+        LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::InvalidRecord,
+            "candidate 1.3 must have an object root",
+        )
+    })?;
+    if object.len() != KEYS.len() || KEYS.iter().any(|key| !object.contains_key(*key)) {
+        return Err(LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::InvalidRecord,
+            "candidate 1.3 does not have its exact closed field set",
+        ));
+    }
+    if string_field(value, "schema_id")? != "handbook.artifact-candidate"
+        || string_field(value, "schema_version")? != "1.3"
+        || string_field(value, "target_kind_ref")?
+            != "handbook.artifact-kind.project-authority@1.1.0"
+        || string_field(value, "target_instance_id")? != "project_authority"
+        || string_field(value, "target_schema_ref")?
+            != "handbook.schemas.artifacts.project-authority@1.1.0"
+        || string_field(value, "profile_ref")? != "handbook.profile.shipped-root@1.1.0"
+        || string_field(value, "promotion_eligibility")? != "requires_approval"
+        || string_field(value, "required_approval_policy_ref")?
+            != "handbook.approval.constitutional-candidate@1.0.0"
+    {
+        return Err(LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::InvalidRecord,
+            "candidate 1.3 constants do not match the selected Charter contract",
+        ));
+    }
+    for field in [
+        "resolved_profile_fingerprint",
+        "candidate_subject_fingerprint",
+        "candidate_fingerprint",
+    ] {
+        DefinitionFingerprint::parse(string_field(value, field)?).map_err(|_| {
+            LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::IdentityMismatch,
+                format!("candidate 1.3 `{field}` is not lowercase SHA-256"),
+            )
+        })?;
+    }
+    match object.get("basis_artifact_fingerprint") {
+        Some(Value::Null) => {}
+        Some(Value::String(fingerprint)) => {
+            DefinitionFingerprint::parse(fingerprint).map_err(|_| {
+                LineageStoreErrorV1::new(
+                    LineageStoreErrorKindV1::IdentityMismatch,
+                    "candidate 1.3 basis fingerprint is not lowercase SHA-256",
+                )
+            })?;
+        }
+        _ => {
+            return Err(LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::InvalidRecord,
+                "candidate 1.3 basis must be null or a lowercase SHA-256 fingerprint",
+            ))
+        }
+    }
+    validate_content_addressed_ref(
+        string_field(value, "intake_record_ref")?,
+        "intake-records/intake_",
+        ".json",
+        "candidate 1.3 intake ref",
+    )?;
+    validate_content_addressed_ref(
+        string_field(value, "normalized_content_ref")?,
+        "candidate-content/charter_",
+        ".yaml",
+        "candidate 1.3 normalized-content ref",
+    )?;
+    let binding = object
+        .get("validation_result_binding")
+        .and_then(Value::as_object)
+        .ok_or_else(|| {
+            LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::InvalidRecord,
+                "candidate 1.3 validation_result_binding must be one closed object",
+            )
+        })?;
+    const BINDING_KEYS: [&str; 4] = [
+        "validation_result_ref",
+        "validation_result_fingerprint",
+        "result_document_sha256",
+        "result_byte_length",
+    ];
+    if binding.len() != BINDING_KEYS.len()
+        || BINDING_KEYS.iter().any(|key| !binding.contains_key(*key))
+    {
+        return Err(LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::InvalidRecord,
+            "candidate 1.3 validation_result_binding is not exact-closed",
+        ));
+    }
+    let validation_ref = binding
+        .get("validation_result_ref")
+        .and_then(Value::as_str)
+        .ok_or_else(|| {
+            LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::InvalidRecord,
+                "candidate 1.3 validation-result ref must be a string",
+            )
+        })?;
+    validate_content_addressed_ref(
+        validation_ref,
+        "lifecycle-validation-results/lifecycle-validation-result_",
+        ".json",
+        "candidate 1.3 validation-result ref",
+    )?;
+    let semantic_fingerprint = binding
+        .get("validation_result_fingerprint")
+        .and_then(Value::as_str)
+        .ok_or_else(|| {
+            LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::InvalidRecord,
+                "candidate 1.3 validation-result fingerprint must be a string",
+            )
+        })?;
+    let document_sha256 = binding
+        .get("result_document_sha256")
+        .and_then(Value::as_str)
+        .ok_or_else(|| {
+            LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::InvalidRecord,
+                "candidate 1.3 result-document digest must be a string",
+            )
+        })?;
+    for fingerprint in [semantic_fingerprint, document_sha256] {
+        DefinitionFingerprint::parse(fingerprint).map_err(|_| {
+            LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::IdentityMismatch,
+                "candidate 1.3 result binding contains a noncanonical SHA-256 fingerprint",
+            )
+        })?;
+    }
+    if fingerprint_from_reference(validation_ref).as_deref() != Some(semantic_fingerprint) {
+        return Err(LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::IdentityMismatch,
+            "candidate 1.3 semantic result ref and fingerprint disagree",
+        ));
+    }
+    if !binding
+        .get("result_byte_length")
+        .and_then(Value::as_u64)
+        .is_some_and(|length| (1..=262_144).contains(&length))
+    {
+        return Err(LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::BoundExceeded,
+            "candidate 1.3 result byte length is outside 1..=262144",
+        ));
+    }
+    if !object
+        .get("unresolved_coverage_ids")
+        .and_then(Value::as_array)
+        .is_some_and(Vec::is_empty)
+    {
+        return Err(LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::InvalidRecord,
+            "candidate 1.3 is only persistable with no unresolved coverage",
+        ));
+    }
+    let field_sources = object
+        .get("field_sources")
+        .and_then(Value::as_array)
+        .ok_or_else(|| {
+            LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::InvalidRecord,
+                "candidate 1.3 field_sources must be an array",
+            )
+        })?;
+    if field_sources.is_empty() {
+        return Err(LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::InvalidRecord,
+            "candidate 1.3 field_sources must be nonempty",
+        ));
+    }
+    for source in field_sources {
+        let Some(source_object) = source.as_object() else {
+            return Err(LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::InvalidRecord,
+                "candidate 1.3 field source must be an object",
+            ));
+        };
+        if source_object.len() != 3
+            || !source_object.contains_key("target_path")
+            || !source_object.contains_key("coverage_id")
+            || !source_object.contains_key("source_kind")
+            || source_object.values().any(|entry| !entry.is_string())
+        {
+            return Err(LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::InvalidRecord,
+                "candidate 1.3 field source does not have its exact closed shape",
+            ));
+        }
+        serde_json::from_value::<CharterFieldSource>(source.clone()).map_err(|_| {
+            LineageStoreErrorV1::new(
+                LineageStoreErrorKindV1::InvalidRecord,
+                "candidate 1.3 field_sources contain an invalid path, coverage ID, or source kind",
+            )
+        })?;
+    }
+
+    let mut subject_preimage = value.clone();
+    let subject = subject_preimage
+        .as_object_mut()
+        .expect("validated candidate object");
+    for field in [
+        "candidate_id",
+        "candidate_fingerprint",
+        "candidate_subject_fingerprint",
+        "validation_result_binding",
+    ] {
+        subject.remove(field);
+    }
+    let computed = DefinitionFingerprint::from_json_value(&subject_preimage)
+        .map_err(|_| io_error("candidate 1.3 subject preimage could not be canonicalized"))?
+        .to_string();
+    if computed != string_field(value, "candidate_subject_fingerprint")? {
+        return Err(LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::IdentityMismatch,
+            "candidate 1.3 subject fingerprint does not match its exact fourteen-field preimage",
+        ));
+    }
+    Ok(())
+}
+
+fn validate_content_addressed_ref(
+    value: &str,
+    prefix: &str,
+    suffix: &str,
+    label: &str,
+) -> Result<(), LineageStoreErrorV1> {
+    let Some(hex) = value
+        .strip_prefix(prefix)
+        .and_then(|rest| rest.strip_suffix(suffix))
+    else {
+        return Err(LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::UnsafeReference,
+            format!("{label} has an invalid partition/basename"),
+        ));
+    };
+    if hex.len() != 64
+        || !hex
+            .bytes()
+            .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
+    {
+        return Err(LineageStoreErrorV1::new(
+            LineageStoreErrorKindV1::UnsafeReference,
+            format!("{label} does not carry lowercase SHA-256"),
+        ));
+    }
+    Ok(())
 }
 
 #[derive(Clone, Copy)]

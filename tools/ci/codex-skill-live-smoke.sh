@@ -361,6 +361,7 @@ assert_candidate_contract() {
   local repo_root="$2"
 
   python3 - "$output_path" "$repo_root" <<'PY'
+import hashlib
 import json
 import pathlib
 import sys
@@ -381,14 +382,71 @@ for field in ("intake_fingerprint", "candidate_fingerprint"):
     if not data[field].startswith("sha256:"):
         raise SystemExit(f"non-SHA-256 candidate field: {field}")
 changed_paths = data.get("changed_paths")
-if not isinstance(changed_paths, list) or len(changed_paths) != 3:
+if not isinstance(changed_paths, list) or len(changed_paths) != 4:
     raise SystemExit(f"unexpected candidate changed paths: {changed_paths}")
+expected_parents = {
+    ".handbook/state/candidate-content",
+    ".handbook/state/intake-records",
+    ".handbook/state/lifecycle-validation-results",
+    ".handbook/evidence/charter/candidates",
+}
+actual_parents = {str(pathlib.PurePosixPath(path).parent) for path in changed_paths}
+if actual_parents != expected_parents:
+    raise SystemExit(f"unexpected candidate path partitions: {actual_parents}")
 repo_root = pathlib.Path(sys.argv[2])
 for changed_path in changed_paths:
-    if not changed_path.startswith(".handbook/state/"):
+    if not (
+        changed_path.startswith(".handbook/state/")
+        or changed_path.startswith(".handbook/evidence/charter/candidates/")
+    ):
         raise SystemExit(f"candidate write escaped immutable state: {changed_path}")
     if not (repo_root / changed_path).is_file():
         raise SystemExit(f"candidate path missing: {changed_path}")
+candidate_path = next(
+    path
+    for path in changed_paths
+    if path.startswith(".handbook/evidence/charter/candidates/")
+)
+validation_path = next(
+    path
+    for path in changed_paths
+    if path.startswith(".handbook/state/lifecycle-validation-results/")
+)
+with open(repo_root / candidate_path, encoding="utf-8") as handle:
+    candidate = json.load(handle)
+if candidate.get("schema_version") != "1.3":
+    raise SystemExit(f"unexpected candidate version: {candidate.get('schema_version')}")
+binding = candidate.get("validation_result_binding")
+expected_binding_fields = {
+    "validation_result_ref",
+    "validation_result_fingerprint",
+    "result_document_sha256",
+    "result_byte_length",
+}
+if not isinstance(binding, dict) or set(binding) != expected_binding_fields:
+    raise SystemExit(f"candidate validation binding is not closed: {binding}")
+if binding["validation_result_ref"] != validation_path.removeprefix(".handbook/state/"):
+    raise SystemExit(f"candidate semantic result reference mismatch: {binding}")
+validation_bytes = (repo_root / validation_path).read_bytes()
+if not validation_bytes.endswith(b"\n") or validation_bytes[:-1].endswith(b"\n"):
+    raise SystemExit("lifecycle-validation result is not exact JCS-plus-LF")
+expected_digest = "sha256:" + hashlib.sha256(validation_bytes).hexdigest()
+if binding["result_document_sha256"] != expected_digest:
+    raise SystemExit(f"candidate exact result digest mismatch: {binding}")
+if binding["result_byte_length"] != len(validation_bytes):
+    raise SystemExit(f"candidate exact result byte length mismatch: {binding}")
+validation = json.loads(validation_bytes)
+if (
+    validation.get("schema_id") != "handbook.lifecycle-validation-result"
+    or validation.get("schema_version") != "1.0"
+):
+    raise SystemExit("unexpected lifecycle-validation result identity")
+if validation.get("validation_result_fingerprint") != binding["validation_result_fingerprint"]:
+    raise SystemExit("candidate and validation semantic result identities differ")
+if validation.get("candidate_subject_fingerprint") != candidate.get(
+    "candidate_subject_fingerprint"
+):
+    raise SystemExit("candidate and validation subject identities differ")
 if data.get("canonical_path") is not None:
     raise SystemExit("candidate acquisition projected selected canonical truth")
 if data.get("refusal") is not None:

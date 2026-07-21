@@ -1,7 +1,8 @@
 use handbook_engine::{
-    evaluate_charter_intake, parse_definition_yaml, resolve_shipped_profile_decisions,
-    AppendDispositionV1, CharterAcquisitionMode, CharterCoverageSubmission, CharterIntakeConsumer,
-    CharterIntakeEnvelope, CharterIntakeSourceKind, LineageRecordClassV1, LineageStoreErrorKindV1,
+    parse_definition_yaml, resolve_shipped_profile_decisions, AppendDispositionV1,
+    CharterAcquisitionMode, CharterAuthorPersistenceErrorKindV1, CharterAuthorPersistenceServiceV1,
+    CharterCoverageSubmission, CharterIntakeConsumer, CharterIntakeEnvelope,
+    CharterIntakeSourceKind, DefinitionFingerprint, LineageRecordClassV1, LineageStoreErrorKindV1,
     TrustedLineageStoreV1, MAX_LINEAGE_RECORD_BYTES,
 };
 use serde_json::Value;
@@ -32,7 +33,7 @@ fn canonical(value: &Value) -> Vec<u8> {
 }
 
 #[test]
-fn frozen_intake_and_candidate_are_create_new_or_exact_equal() {
+fn frozen_intake_and_candidate_1_3_are_create_new_or_exact_replay() {
     let repo = tempfile::tempdir().unwrap();
     let store = TrustedLineageStoreV1::new(repo.path());
     let intake = canonical(&vector("intake"));
@@ -44,7 +45,7 @@ fn frozen_intake_and_candidate_are_create_new_or_exact_equal() {
     assert_eq!(created.disposition, AppendDispositionV1::Created);
     assert_eq!(
         created.relative_ref,
-        "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json"
+        "intake-records/intake_680b82e17d097e08e189ce1a985e0200ce21c87700dd89dbbdb375231303204a.json"
     );
 
     let replay = store
@@ -52,10 +53,22 @@ fn frozen_intake_and_candidate_are_create_new_or_exact_equal() {
         .expect("exact replay is idempotent");
     assert_eq!(replay.disposition, AppendDispositionV1::ReusedEqual);
 
-    let candidate = store
+    let candidate_created = store
         .append_record(LineageRecordClassV1::Candidate, &candidate)
-        .expect("candidate resolves its intake lineage");
-    assert_eq!(candidate.disposition, AppendDispositionV1::Created);
+        .expect("candidate 1.3 is selected immutable product authority");
+    assert_eq!(candidate_created.disposition, AppendDispositionV1::Created);
+    assert!(repo
+        .path()
+        .join(".handbook/evidence/charter")
+        .join(&candidate_created.relative_ref)
+        .is_file());
+    let candidate_replay = store
+        .append_record(LineageRecordClassV1::Candidate, &candidate)
+        .expect("candidate 1.3 exact replay is idempotent");
+    assert_eq!(
+        candidate_replay.disposition,
+        AppendDispositionV1::ReusedEqual
+    );
 }
 
 #[test]
@@ -101,14 +114,37 @@ fn unsafe_refs_oversize_records_and_changed_bytes_fail_closed() {
 #[test]
 fn candidate_basis_must_equal_its_retained_intake_basis() {
     let repo = tempfile::tempdir().unwrap();
-    let store = TrustedLineageStoreV1::new(repo.path());
-    let intake = canonical(&vector("intake"));
-    store
-        .append_record(LineageRecordClassV1::Intake, &intake)
+    let decisions =
+        resolve_shipped_profile_decisions(Path::new(env!("CARGO_MANIFEST_DIR"))).unwrap();
+    let persisted = CharterAuthorPersistenceServiceV1::new(repo.path())
+        .persist(&decisions, author_envelope(), None)
         .unwrap();
-
-    let mut candidate = vector("candidate");
+    let store = TrustedLineageStoreV1::new(repo.path());
+    let mut candidate: Value = serde_json::from_slice(
+        &std::fs::read(
+            repo.path()
+                .join(".handbook/evidence/charter")
+                .join(persisted.candidate_ref),
+        )
+        .unwrap(),
+    )
+    .unwrap();
     candidate["basis_artifact_fingerprint"] = Value::String(format!("sha256:{}", "1".repeat(64)));
+    let mut subject_preimage = candidate.clone();
+    let subject = subject_preimage.as_object_mut().unwrap();
+    for field in [
+        "candidate_id",
+        "candidate_fingerprint",
+        "candidate_subject_fingerprint",
+        "validation_result_binding",
+    ] {
+        subject.remove(field);
+    }
+    candidate["candidate_subject_fingerprint"] = Value::String(
+        DefinitionFingerprint::from_json_value(&subject_preimage)
+            .unwrap()
+            .to_string(),
+    );
     resign(
         &mut candidate,
         "candidate_id",
@@ -127,14 +163,10 @@ fn author_bundle_persists_content_then_intake_then_candidate_idempotently() {
     let repo = tempfile::tempdir().unwrap();
     let decisions =
         resolve_shipped_profile_decisions(Path::new(env!("CARGO_MANIFEST_DIR"))).unwrap();
-    let bundle = evaluate_charter_intake(&decisions, author_envelope(), None).unwrap();
-    let store = TrustedLineageStoreV1::new(repo.path());
-
-    let created = store.persist_candidate_bundle(&bundle).unwrap();
-    assert_eq!(
-        created.normalized_content_ref,
-        bundle.candidate.normalized_content_ref
-    );
+    let service = CharterAuthorPersistenceServiceV1::new(repo.path());
+    let created = service
+        .persist(&decisions, author_envelope(), None)
+        .unwrap();
     assert_eq!(
         std::fs::read(
             repo.path()
@@ -142,9 +174,14 @@ fn author_bundle_persists_content_then_intake_then_candidate_idempotently() {
                 .join(&created.normalized_content_ref)
         )
         .unwrap(),
-        bundle.normalized_content
+        CANONICAL_CHARTER
     );
-    assert_eq!(store.persist_candidate_bundle(&bundle).unwrap(), created);
+    assert_eq!(
+        service
+            .persist(&decisions, author_envelope(), None)
+            .unwrap(),
+        created
+    );
 
     std::fs::write(
         repo.path()
@@ -154,8 +191,11 @@ fn author_bundle_persists_content_then_intake_then_candidate_idempotently() {
     )
     .unwrap();
     assert_eq!(
-        store.persist_candidate_bundle(&bundle).unwrap_err().kind(),
-        LineageStoreErrorKindV1::ExistingBytesMismatch
+        service
+            .persist(&decisions, author_envelope(), None)
+            .unwrap_err()
+            .kind(),
+        CharterAuthorPersistenceErrorKindV1::PersistenceRefused
     );
 }
 

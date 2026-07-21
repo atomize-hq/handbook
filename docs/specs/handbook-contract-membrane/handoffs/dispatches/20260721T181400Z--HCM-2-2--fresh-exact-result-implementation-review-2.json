@@ -1,0 +1,182 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260721T181400Z--HCM-2-2--fresh-exact-result-implementation-review-2",
+  "created_at_utc": "2026-07-21T18:14:00Z",
+  "source_handoff_ids": [
+    "20260721T143023Z--HCM-2-2--orchestration--exact-result-authority-repair-approved"
+  ],
+  "parent_orchestration_id": "20260721T121830Z--HCM-2-2--exact-result-authority-repair-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:d32031c5cb3e68298293e0da03c5103da8b4439c67755d27c05a191b725db13d",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": ".implemented/m10-orchestration/codex-skill-live-smoke.log", "sha256": "89ddaa6aa0b3a620641712955f5cb84f3536b433d195434864d14cd84196f2ea"},
+      {"path": ".implemented/m10-orchestration/install-smoke.log", "sha256": "b7b5e834ea9eeefe4c9290268c9673b157df28cf7923645de90b8fabdef69705"},
+      {"path": "Cargo.lock", "sha256": "7168413347933003fc9872011987085ad0ca44eaea5e7ec464c62bbff2ca13d4"},
+      {"path": "crates/cli/Cargo.toml", "sha256": "1b693d214a043c155ed938437b90885eb22a5bf2ce1b309ce093f4f9d576040e"},
+      {"path": "crates/cli/tests/cli_surface.rs", "sha256": "55c271d2f31a149c242421dbc1ded6e4b1fb33f7d9e44b0932abe716c10f5325"},
+      {"path": "crates/cli/tests/hcm_2_2_product_cutover.rs", "sha256": "4fffd4f358ef6018f69b9e4b86859ac1a11646f19778a8add8ea2fa903dd6e13"},
+      {"path": "crates/compiler/src/charter_product.rs", "sha256": "1d05242a7895381380a8b0051f4add1166695f957ddc6dbe352aae4349b3b7b4"},
+      {"path": "crates/compiler/tests/hcm_2_2_product_cutover.rs", "sha256": "a05a306155d9091d97846ae7e3991ea01b0292d2a21e64bdc5f40e5edfb34b0b"},
+      {"path": "crates/engine/Cargo.toml", "sha256": "a2b222acdd12c547d54337d641280d259788ff8fc1536b3c241b2fef47663893"},
+      {"path": "crates/engine/src/charter_approval_workflow.rs", "sha256": "ce042bef54f901b2938bc743e554fd8fe18bb19336dd78820b059e4b61438540"},
+      {"path": "crates/engine/src/charter_atomic_stage_tests.rs", "sha256": "e2025eb820f42637bbbd67a8e3ce4400eb1259f3c2f75858198f9601ba65dc47"},
+      {"path": "crates/engine/src/charter_authority_transaction.rs", "sha256": "d297de11bfcbbd7b63698a2edfbdba576b4489abd8f24a6118dfec023176c75d"},
+      {"path": "crates/engine/src/charter_authority_transaction_tests.rs", "sha256": "635f05f0386ebf20d6a82812b462674812ac607bee8d636e0d33327b29c46b37"},
+      {"path": "crates/engine/src/charter_authority_workflow.rs", "sha256": "433a1c7f070f73d892623ac42faa93a4b23dc145087dae7a8378a7407cc8ea5e"},
+      {"path": "crates/engine/src/charter_intake.rs", "sha256": "bd08d5aacce1eb94bd1e73add177b552a1fdae98a0222238f14013b60921c4eb"},
+      {"path": "crates/engine/src/charter_lifecycle_store.rs", "sha256": "b37bd1aad28fe3c6e89b3e926303eaa529a7b2722fbb88020f7c660ce2c73d50"},
+      {"path": "crates/engine/src/charter_lifecycle_validation.rs", "sha256": "1638a42965c959208fabee2d9171433a3a2e9e0d3ab869c8ba7869167af0ac5c"},
+      {"path": "crates/engine/src/charter_lineage_store.rs", "sha256": "16a190b741fb8eed499e9fdb16bfaa520a63f4b57256c579388d9c032fe64c40"},
+      {"path": "crates/engine/src/charter_promotion_intent_v12.rs", "sha256": "738d0ae66a304881a01f1d3da456ef095465218a3ce44a1ae52e90be8bdb31eb"},
+      {"path": "crates/engine/src/charter_promotion_workflow.rs", "sha256": "62ae717ceb2785098fe18703b5757303078ff4e2319b51eb18d604af142a908c"},
+      {"path": "crates/engine/src/charter_runtime_vectors.rs", "sha256": "fd33ddc44a63d2270a36c4f306b654cded1ab5777ea5dc9f941dfaed8790847a"},
+      {"path": "crates/engine/src/contracts/lifecycle-validation-result-1.0.0.schema.json", "sha256": "19476eefeafb9261dddfebf819c3694ce280032c7da14a336331cf614ab6f1fa"},
+      {"path": "crates/engine/src/lib.rs", "sha256": "c02022fd6bf9da7d9e18d3659ad9aa5cc36ffab5a769eaf17cfaf11a21d39591"},
+      {"path": "crates/engine/tests/hcm_2_2_approval_use.rs", "sha256": "1698d740ed66e79748b5da4e754e8a610e183fabce2bc068ce1e4896208f146d"},
+      {"path": "crates/engine/tests/hcm_2_2_authority_repair.rs", "sha256": "3417ec6df3d591074ae3b6ec39fbc992c7c7e84d97ed49d8bd12738951a1666b"},
+      {"path": "crates/engine/tests/hcm_2_2_authority_workflow.rs", "sha256": "bec76e6bafb673d39edca3b869344af98b376efe91dccf3b76cd89a34826314b"},
+      {"path": "crates/engine/tests/hcm_2_2_intake.rs", "sha256": "4c7a1353eac83977d1f052167c5c3a7de14d3c58ae68005695d397745f3c788e"},
+      {"path": "crates/engine/tests/hcm_2_2_lifecycle_store.rs", "sha256": "082a447e8fdef8c1f0433d4719367514044fd21fe2bbb7c64f94020a4e858e69"},
+      {"path": "crates/engine/tests/hcm_2_2_lineage_store.rs", "sha256": "57a7ad52311c14f49b8308e061a00f2b4725466b054d2a7abda469560b7bca16"},
+      {"path": "crates/engine/tests/hcm_2_2_promotion_workflow.rs", "sha256": "b09947ffcd7587a80cc07249ee15d187f5f6e4fde4c0f6af9092100df07fb352"},
+      {"path": "crates/engine/tests/hcm_2_2_runtime_vectors.rs", "sha256": "aee6ad9fdd052bf637ffdd1716b3ad62dac5d884cc56be3502b752f58d0f4c30"},
+      {"path": "crates/engine/tests/hcm_2_2_test_surface.rs", "sha256": "a6ed81f0a4c1578d4d78609e7d16e83f0cbed4025d8109fcb0cf7bc57931f540"},
+      {"path": "crates/engine/tests/support/hcm_2_2_committed_charter.rs", "sha256": "327a0d9a1b58447aca58bc641f1f9b9bbca7725ff4d9d833daae2f5b9255b189"},
+      {"path": "docs/specs/handbook-contract-membrane/00-README.md", "sha256": "0f0484617bd0a35ff7c1ac99ca13ffa5de8127f62c3acd957a2ca962e09f1b5c"},
+      {"path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md", "sha256": "69b35f44ed04450a14ae0e33c04e225b668dac170c7cf45a9343de4521a66688"},
+      {"path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md", "sha256": "9d5717afb6d60da98e82f6b06fa584dee9f3a9cc299d86977afa3607c0e49057"},
+      {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sha256": "fea4a1231ecfbf87cf1a20fe59f903b6ce4e79a0633cdd5611ed10d850fc38ea"},
+      {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sha256": "ec5739ac710326fa834df709951233340485df52f7718fdfa309b91ff0a90b63"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T165500Z--HCM-2-2--fresh-exact-result-implementation-review-1.json", "sha256": "5999c065d1a4d22dd6c69d0b58bb27215f5a70c61954f3890d070934dc38c9e6"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md", "sha256": "de7883dc41192d07504eb061c6e0a472ff6bcfa259aaabe23aa09363f59ecd29"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json", "sha256": "4aa1fee5c9e65ef719ebc2e18d4155de9985dbb535ef5cf8feaa3fc392d3b4ab"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T165009Z--exact-result-authority-repair-implementation-proof-wall.md", "sha256": "ddb12bd3dbbd9e8aab89677be63e0114ca7a840122a115943fe7407ab7e98e76"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T181132Z--exact-result-implementation-review-1-remediation.md", "sha256": "1262422aeb3f3479fec55628266d91b67d858291b3d95d4d5bac2dfde626a984"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md", "sha256": "63a6a0735683c7e25a12637de19c40730f53f212d75fb5fc35a78c3b8ec330f7"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md", "sha256": "777e70bb052bf8d5d8ae071ec7a6f92539a8fbe1deafc48a8b7019178f2371f5"},
+      {"path": "tools/ci/codex-skill-live-smoke.sh", "sha256": "d73df09e574ffa929d8d7bd364afccdbd3b7c3b238c148623049589caca81e16"}
+    ],
+    "aggregate_fingerprint": "sha256:d32031c5cb3e68298293e0da03c5103da8b4439c67755d27c05a191b725db13d"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre-primary-commit fresh complete-subject Review 2 after accepted Review 1 remediation"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260721T143023Z--HCM-2-2--orchestration--exact-result-authority-repair-approved.json",
+      "sections": ["entire selected implementation handoff"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/decision/validation-result-exact-document-anchor-decision.md",
+      "sections": ["entire exact-document anchor decision"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": ["entire specification"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+      "sections": ["implementation and review sections"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+      "sections": ["current implementation and proof checklist"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T165500Z--HCM-2-2--fresh-exact-result-implementation-review-1.json",
+      "sections": ["entire immutable Review 1 dispatch and exact original subject"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T181132Z--exact-result-implementation-review-1-remediation.md",
+      "sections": ["entire accepted Review 1 remediation and proof replay"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T050717Z--HCM-2-2--fresh-atomic-stage-implementation-review-3.json",
+      "sections": ["entire rejected Review 3 dispatch and exact prior attack subject"]
+    }
+  ],
+  "repo_truth": "The exact 46-path raw-byte subject is the complete bounded HCM-2.2 candidate-1.3 exact-result implementation after all three fresh implementation Review 1 Required findings were accepted and repaired test-first. The repair adds full frozen result-1.0 schema enforcement, exact current approval-quorum replay, and exact ordered thirteen-definition closure without changing the lifecycle-validation-result 1.0 or promotion-intent 1.2 schema documents. Native workspace, focused RED/GREEN, W/R/S recovery, Linux installed-runtime, package, schema, archive, handoff, link, scope, secret, formatting, Clippy, docs, and frozen-byte proofs pass. Independently establish correctness; this summary and all earlier verdicts are non-authoritative.",
+  "allowed_scope": [
+    "Remain read-only and replay all 46 manifest hashes, sorted order, and aggregate before review.",
+    "Read AGENTS.md, the selected handoff, exact-document decision, complete SPEC, implementation/review plan, current checklist, both implementation proof files, Review 1 dispatch, rejected Review 3 dispatch, and every manifest path.",
+    "Review the complete HCM-2.2 implementation for correctness, identity acyclicity, exact-byte authority, stable replay, evidence preservation, exact approval quorum, exact definition closure, atomicity, recovery, lifecycle, product cutover, tests, documentation truth, and bounded scope.",
+    "Independently reproduce and audit every accepted Review 1 finding and its test-first remediation.",
+    "Attempt to falsify every required coherent rewrite, timestamp rewrite, wrong digest/length, semantic/raw crossing, forged/multiple candidate, zero/one/many discovery, missing/orphan, unsafe store, historical-version, stale-authority, W0-W15, R0-R9, and S0-S11 case.",
+    "Return Critical, Required, Optional, and Nit findings first with exact file/line evidence, reproduction where possible, and smallest bounded remediation."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, handoff/ledger writes, branch changes, preservation-root mutation, or user task hops.",
+    "No HCM-2.3, generic custom-kind intake, remaining artifact conversion, Resolution/Projection/Snapshot/posture-kernel, SDK/Tauri/Substrate/dock/publication work, or unrelated cleanup.",
+    "Do not rely on the proof summary, Review 1 conclusions, rejected checkpoint behavior, parent conclusions, or success-asserting documentation as authority."
+  ],
+  "tasks": [
+    "Invoke the ordered required skills and return BLOCKED on any subject path, hash, order, count, or aggregate mismatch.",
+    "Admit the exact 46-path subject and read the full diff plus relevant surrounding code before commenting.",
+    "Independently audit the candidate-subject/result/final-candidate/approval/promotion/intent graph for cycles, implicit bindings, self-authentication, copied authority, or currentness gaps.",
+    "Audit the complete frozen lifecycle-result 1.0 schema enforcement, exact-byte and semantic result admission, and every added malformed-ref/timestamp/cardinality regression.",
+    "Audit author-lock double inventory, zero/one/many/orphan/missing behavior, approval quorum derivation and lexical closure, exact resolved-definition projection, and fail-before-delta preservation.",
+    "Audit promotion and recovery against semantic/exact result authority, create/amend basis, canonical/policy/lifecycle/observation/coverage/registry authority, and retained historical-head currentness.",
+    "Audit every W0-W15, R0-R9, and S0-S11 atomic publication/recovery boundary for unauthenticated mutation, evidence loss, partial authority, or unsupported completion.",
+    "Audit historical candidate 1.0/1.1/1.2 refusal, candidate 1.3 fresh approval, compiler/CLI/runtime vectors/live smoke assertions, frozen schemas, test-only hooks, package/platform behavior, control-pack truth, and HCM-2.3 exclusion.",
+    "Return CLEAN only when no Critical, Required, Optional, or Nit finding remains; otherwise return CHANGES_REQUIRED or BLOCKED without repairing the subject."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md#verification-and-promotion-gates",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#hcm-22-constitutional-root-implementation-proof-gate"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if any subject path, raw SHA-256, count, order, or aggregate differs.",
+    "Return CHANGES_REQUIRED for any Critical, Required, Optional, or Nit correctness, security, identity, durability, replay, orphan, quorum, definition-closure, recovery, product, proof, documentation, or scope finding.",
+    "Stop on any implicit, self-referential, or cyclic identity; unauthenticated exact result; ambiguous stable replay/orphan state; expanded elevated path; frozen result/intent schema change; or HCM-2.3 work.",
+    "Do not repair the subject or create closeout records."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
