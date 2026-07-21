@@ -2,19 +2,24 @@
 
 ## Status
 
-Escalation `HCM-2.2-ESC-001` selected Option 1 and received a review-clean
-planning closeout. Its later explicitly selected implementation stopped when
-the `W5`-`W7` pending-stage exact-prefix grammar proved unauthenticatable after
-process memory loss. User-selected escalation `HCM-2.2-ESC-002` authorizes only
-this atomic whole-file scratch-publication documentation repair. The current
-dirty implementation is preserved in a verified recoverable snapshot and
-remains non-authoritative checkpoint evidence. This revised plan retains
-candidate `1.2`, an acyclic
-`candidate_subject_fingerprint`, engine-owned lifecycle-validation result `1.0`,
-and complete promotion-journal/API repairs while replacing only the impossible
-new-output partial-stage grammar. Rust implementation remains stopped until the
-complete repaired recovery subject receives fresh CLEAN review and a new parent
-handoff records that reviewed authority. No HCM-2.3 authority exists.
+Escalations `HCM-2.2-ESC-001` and `HCM-2.2-ESC-002` produced review-clean
+planning authority for candidate `1.2` and atomic whole-file promotion staging.
+The later explicitly selected implementation reached Review 3, which rejected
+the complete subject under `HCM-2.2-AR3-001`: result, witness, and mutable
+sidecar binding bytes could be coherently rewritten without changing semantic
+result or candidate `1.2` identity.
+
+User-selected escalation `HCM-2.2-ESC-003` authorizes only this
+documentation/control-pack repair selecting additive candidate `1.3` as the
+independent downstream exact-result-document anchor. The rejected worktree is
+preserved untouched at
+`486458acfe8373a977e595a4854ac786166e3e76` in archive
+`46dbed286dba9b3b6cedf7ef13340c43dcd56e068a5efa9af1deba0cabadd33d`;
+the repair runs in a separate clean worktree at that exact HEAD. Result `1.0`
+and promotion-intent `1.2` schemas remain unchanged. Rust implementation stays
+stopped until the complete repaired identity, persistence, replay, orphan,
+migration, and recovery subject is fresh-review `CLEAN` and a new parent
+handoff records the exact selector. No HCM-2.3 authority exists.
 
 The immutable escalation handoff incorrectly cites `status/plan.md` and
 `status/todo.md`. Those paths do not exist; the additive correction is this
@@ -33,7 +38,8 @@ isolated, and read-only.
 ## Dependency graph
 
 ```text
-R-1 reviewed atomic whole-file stage authority repair
+R-2 reviewed candidate 1.3 exact-result authority repair
+  -> R-1 retained atomic whole-file stage authority repair
   -> R0 reviewed Option 1 authority-repair planning dispatch
   -> P0 entry + HIGH/CRITICAL impact refresh
   -> P1 RED definition/schema/lineage tests
@@ -48,15 +54,78 @@ R-1 reviewed atomic whole-file stage authority repair
   -> P10 primary commit + parent closeout
 ```
 
-## R-1 — Atomic whole-file stage authority repair (current authorized scope)
+## R-2 — Candidate 1.3 exact-result authority repair (current authorized scope)
+
+1. Inventory all 1,464 tracked, 13 ordinary-untracked, and 25,235 ignored-
+   untracked paths at exact rejected baseline `486458ac`; preserve all 26,712
+   files outside the worktree under a deterministic byte manifest and
+   recoverable archive; extract and verify every source entry byte-equal;
+   record manifest and archive SHA-256; leave source HEAD, files, index,
+   staging, and status untouched.
+2. Work only in a separate clean branch/worktree from that exact HEAD. Import
+   the immutable implementation proof wall, Review 1--3 dispatches, Review 1/2
+   remediation proofs and Review 3 stop proof byte-for-byte. Preserve the
+   original non-authoritative research-note bytes in the complete archive; the
+   documentation copy may receive only an additive provenance/link repair. Do
+   not import or edit Rust, Cargo, or rejected mutable status bytes as
+   implementation authority.
+3. Freeze candidate `1.3` with the unchanged complete fourteen-field subject
+   shape and a subject fingerprint that excludes the exact-result binding.
+   Add exactly one required closed `validation_result_binding` with semantic
+   result ref/fingerprint plus SHA-256 and LF-inclusive byte length of exact
+   persisted result `1.0` JCS+LF bytes. Include the complete binding in final
+   candidate identity; add no result self-hash or mutable companion authority.
+4. Prove the strict acyclic order subject -> subject fingerprint -> result
+   semantic identity -> exact result bytes -> candidate binding -> final
+   candidate -> new approval -> promotion/intent. Keep result `1.0` binding
+   only subject identity. Keep approval binding final candidate. Keep promotion
+   and intent `1.2` transitively binding final candidate without widening either
+   unchanged schema.
+5. Freeze author replay under the author lock: independently recompute subject
+   and expected semantic result authority without `validated_at_utc`; discover
+   candidate `1.3` by their pair; define zero/no-result first authoring,
+   exactly-one exact replay, more-than-one refusal, missing result, and orphan
+   result rows. Twice inventory every immediate entry in the exact candidate/
+   result roots under fixed name/count/per-file/aggregate-byte bounds and no-
+   follow rules; refuse overflow, unsafe/unowned entries, or any scan change.
+6. Preserve every orphan and refusal byte. Never adopt, overwrite, repair,
+   wrap, rename, or delete an orphan. If automatic result-to-candidate crash
+   completion is desired, stop for a separately reviewed author-publication
+   transaction; do not infer recovery, sidecar, receipt, or cleanup authority.
+7. Freeze migration: preserve candidate `1.0`, `1.1`, and `1.2` plus approvals
+   as immutable history; require candidate `1.3` reauthoring, result
+   recomputation, and new approval; permit no dual read, upgrade, result-ref
+   copy, approval carry-forward, or selected-product fallback.
+8. Update SPEC, `05`, authority-repair/runtime/intent vectors, exact
+   cross-record and negative matrices, this plan/checklist, mutable `00`/`03`/
+   `04`/`06` status surfaces, and additive decision/proof/review/handoff
+   records. Preserve every immutable prior handoff, dispatch, review, and proof.
+9. Prove coherent companion rewrite, timestamp-only rewrite, forged second
+   candidate, zero/one/many, orphan, missing result, wrong digest/length,
+   semantic/raw crossing, unsafe entries, candidate `1.2` fallback, approval
+   carry-forward, and zero mutation/evidence deletion on refusal.
+10. Submit the complete subject to a different fresh isolated read-only
+    reviewer. Accept every finding without waiver, repair additively, and use a
+    different fresh reviewer until `CLEAN`.
+11. After `CLEAN`, run all documentation/schema/vector/link/handoff/GitNexus
+    gates; create one scoped authority-repair commit, then add only the parent
+    handoff and deterministic ledger in a separate closeout commit. Report the
+    exact new implementation selector and stop before Rust and HCM-2.3.
+
+**Checkpoint:** candidate `1.3` exact-result authority is review-clean and
+selected by a parent handoff in two documentation-only commits; the rejected
+implementation remains preserved evidence and no code has resumed.
+
+## R-1 — Retained atomic whole-file stage authority repair
 
 1. Preserve the dirty Rust/test/checklist/research worktree at exact entry HEAD
    in a verified recoverable external snapshot; record every path, no-deletion
    status, archive SHA-256, and extracted-byte equality. Do not stage, commit,
    reset, discard, or import those bytes into the authority-only subject.
-2. Keep intent `1.2`'s closed schema and exact amendment
-   fingerprint/document/marker vector unchanged. Reproduce the schema's exact
-   16,019 bytes/SHA-256 and intent's exact 7,607 bytes/SHA-256/72-byte marker.
+2. Keep intent `1.2`'s closed schema unchanged. Preserve the candidate-`1.2`
+   amendment fingerprint/document/marker vector as immutable historical
+   evidence, and freeze the selected candidate-`1.3` amendment intent at the
+   exact 16,019-byte schema, 7,591-byte document/SHA-256, and 72-byte marker.
    An additive intent version is permitted only if fresh planning review proves
    the selected persistence-only repair insufficient.
 3. Freeze `.output-staging/` as a same-filesystem non-authoritative sibling with
@@ -107,7 +176,7 @@ R-1 reviewed atomic whole-file stage authority repair
 and committed in two documentation-only commits; the dirty implementation
 snapshot remains evidence only and HCM-2.3 remains unauthorized.
 
-## R0 — Authority-repair planning closeout (current authorized scope)
+## R0 — Retained Option 1 authority-repair planning closeout
 
 1. Freeze the exact candidate `1.2` subject/final fingerprint preimages and
    vector outputs without changing candidate `1.1`.
@@ -183,12 +252,15 @@ risk acknowledged, and immutable baseline manifest recorded.
    specificity/confidence, leaf-source bijection, value-versus-quality-waiver
    separation, and two targeted triggers.
 4. Add RED immutable additive `1.1` intake/approval/promotion and additive
-   candidate `1.2`/lifecycle-validation-result `1.0` tests for the exact subject,
-   result, and final preimages; acyclic construction; create/amend vectors;
-   exact one-result cardinality/order; no-follow bounded create-new-or-equal
-   persistence; timestamp replay; cross-record bindings; missing/forged/stale/
-   duplicate/reordered/incomplete/excess refusal. Reproduce the closed promotion
-   intent `1.2` schema and exact intent fingerprint, complete-document hash/
+   candidate `1.3`/lifecycle-validation-result `1.0` tests for exact subject,
+   semantic result, exact result document, and final preimages; acyclic
+   construction; create/amend vectors; exact binding cardinality; zero/one/many
+   author discovery; orphan/missing-result refusal; no-follow bounded
+   create-new persistence; exact replay; coherent and timestamp-only rewrite;
+   wrong digest/length; semantic/raw crossing; cross-record bindings; missing/
+   forged/stale/duplicate/reordered/incomplete/excess refusal and evidence
+   preservation. Reproduce the closed promotion intent `1.2` schema and exact
+   intent fingerprint, complete-document hash/
    length, pending path, marker payload, cross-record equality, and negative
    vectors; plus
    exact refs, basis propagation, fingerprints, append-only behavior,
@@ -283,10 +355,11 @@ and old-definition regression suites pass.
    semantic inputs produce identical normalized candidate bytes/fingerprint;
    mode and prompt events remain intake provenance only.
 4. Finalize immutable intake records, candidate semantic subjects, engine-owned
-   validation results, and final content-addressed candidate `1.2` records in
+   validation results, and final content-addressed candidate `1.3` records in
    the exact acyclic order. Preserve complete field-source maps, gap/eligibility
-   results, and the create-null or mandatory amendment basis; candidate `1.1`
-   remains immutable checkpoint evidence and is not an admitted fallback.
+   results, create-null or mandatory amendment basis, and the sole closed exact-
+   result binding; candidates `1.0`, `1.1`, and `1.2` remain immutable
+   checkpoint evidence with no fallback, result copy, or approval carry-forward.
 5. Use trusted append-only storage with safe refs, bounds, create-new equality,
    and no secrets/unrestricted evidence content.
 
@@ -504,8 +577,10 @@ classifications agree with an exact subject manifest.
 | agent inference becomes constitutional authority | typed source kinds, normative declaration rule, candidate/approval separation, no nested model |
 | immutable records become competing truth | candidate/content store separate from canonical path; promotion is sole authority transition |
 | crash leaves physical partial files | partial intent/new-output bytes exist only in non-authoritative sibling scratch; pending intent/new-output stages are absent or exact; markers and amendment old snapshot retain only their separately authentic prefixes; exhaustive fault injection proves selected readers and recovery ignore scratch |
-| validation identity becomes cyclic | candidate `1.2` subject identity precedes the engine result; the final candidate alone points to that result |
-| stale or transplanted validation authority promotes | exact one-result cross-record binding plus full promotion-time recomputation before mutation |
+| validation identity becomes cyclic | candidate `1.3` subject identity precedes result `1.0`; exact result bytes feed only the downstream final candidate binding, and no result edge points back |
+| result audit bytes are coherently rewritten | final candidate `1.3` independently binds exact result JCS+LF digest/length; timestamp-only and coherent companion rewrites fail before mutation |
+| stale or transplanted validation authority promotes | exact semantic and raw-document cross-record binding plus full promotion-time recomputation before mutation |
+| author crash leaves a result orphan | preserve and refuse; automatic completion requires a separately reviewed author-publication transaction |
 | recovery destroys mismatch evidence | every mismatch preserves the complete pending journal and blocks without mutation |
 | test fail points become production API | module-private `#[cfg(test)]` harness and public-API/all-features absence proof |
 | renderer or Markdown becomes authority | typed canonical-only input, in-memory output, zero persistent write, conflicting-legacy probes |

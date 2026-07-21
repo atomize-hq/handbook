@@ -2,8 +2,8 @@
 
 ## Status and authority
 
-`HCM-2.2` is reopened at escalation `HCM-2.2-ESC-001`. The prior planning
-selection and the implementation present at checkpoint commits
+`HCM-2.2` remains reopened. The prior planning selection and the implementation
+present at checkpoint commits
 `684029d4dda0c800fe840a19b54bf7f87fb41123` and
 `db503f7a96479775fe25dbb864b9379fd3e61ac8` are non-authoritative checkpoint
 evidence: fresh implementation Review 2 found a lifecycle-validation identity
@@ -13,14 +13,32 @@ selected from the review-clean Option 1 handoff at entry HEAD
 `4e164061e18da17cc24d576a26800ab1ecce69c2` stopped when the `W5`-`W7`
 exact-prefix grammar proved unrecoverable after process memory loss.
 
-User-selected escalation `HCM-2.2-ESC-002` chooses atomic whole-file scratch
-publication for the three new-output stages. This document is now the mutable
-documentation-only authority-repair subject. Intent `1.2` remains byte-for-byte
-unchanged. No Rust or implementation work may resume until a fresh isolated
-reviewer returns `CLEAN` over the complete repaired persistence/recovery
-subject and a new parent handoff records that reviewed state. The retained dirty
-implementation and its verified recoverable snapshot are checkpoint evidence
-only. No `HCM-2.3` authority exists.
+Escalation `HCM-2.2-ESC-002` selected atomic whole-file scratch publication for
+the three new-output stages and produced a later implementation subject at
+clean baseline `486458acfe8373a977e595a4854ac786166e3e76`. Fresh isolated
+implementation Review 3 admitted that exact subject and returned Required
+finding `HCM-2.2-AR3-001`: lifecycle-result, witness, and sidecar binding bytes
+could be coherently rewritten while semantic result and candidate `1.2`
+identity stayed unchanged. That complete implementation subject is rejected.
+Its immutable Review 1--3 dispatches, remediation proofs, stop proof, and RED
+result are evidence only.
+
+User-selected escalation `HCM-2.2-ESC-003` chooses additive candidate `1.3` as
+the independent downstream exact-document anchor for lifecycle-validation
+result `1.0`. This document is the mutable documentation-only repair subject.
+The result `1.0` and promotion-intent `1.2` schemas remain byte-for-byte
+unchanged. The rejected implementation worktree remains untouched at
+`486458acfe8373a977e595a4854ac786166e3e76`; its 1,464 tracked, 13 ordinary-
+untracked, and 25,235 ignored-untracked files are preserved externally under
+complete deterministic manifest SHA-256
+`cbcb29fe7ef50184cbc2efcaa9489d07c99d0d4b51c7e92836e7e2cc3d1cf44a`
+and 30,789,857,280-byte archive SHA-256
+`46dbed286dba9b3b6cedf7ef13340c43dcd56e068a5efa9af1deba0cabadd33d`,
+with all 26,712 files extracted byte-equal and source inventory stable. No Rust or
+implementation work may resume until a fresh isolated reviewer returns
+`CLEAN` over this complete repaired identity, persistence, replay, orphan,
+migration, and recovery subject and a new parent handoff selects that reviewed
+state. No `HCM-2.3` authority exists.
 
 The packet consumes, without reopening, the reviewed HCM-1 registry/profile
 boundaries and the HCM-2.1 Project Context canonical-YAML pilot. Entry evidence
@@ -43,11 +61,336 @@ They do not override this reopened status, select resumed implementation,
 widen the slice, or authorize HCM-2.3. Live source, tests, definition bytes,
 and Git history at the entry HEAD override stale narrative wording.
 
-## HCM-2.2-ESC-001 Option 1 authority repair
+## HCM-2.2-ESC-003 candidate 1.3 exact-result authority repair
 
-This section is additive and controlling for every later repaired HCM-2.2
-candidate, lifecycle-validation result, promotion transaction, recovery path,
-and fault-injection surface. Where the older text below describes candidate
+This section is additive and controlling for candidate identity, exact
+lifecycle-validation-result selection, author replay, orphan handling,
+migration, promotion currentness, and transaction recovery. The retained
+`HCM-2.2-ESC-001`/`002` text below continues to control result `1.0` semantic
+validation and persistence, intent `1.2`, atomic output staging, and promotion
+recovery except where this section explicitly replaces candidate `1.2`, its
+semantic-ref-only result binding, or its replay/migration rules.
+
+The normative machine-readable repair contracts are:
+
+- [`contracts/authority-repair-runtime-vectors-v1.0.json`](contracts/authority-repair-runtime-vectors-v1.0.json), which freezes candidate `1.3`, the exact-result binding, create/amend identities, author discovery, zero/one/many replay, orphan/refusal behavior, the acyclic graph, migration, and all required negatives;
+- [`contracts/runtime-record-fingerprint-vectors-v1.0.json`](contracts/runtime-record-fingerprint-vectors-v1.0.json), which freezes the exact result/candidate/approval/promotion chain and cross-record raw-document bindings;
+- [`contracts/lifecycle-validation-result-1.0.0.schema.json`](contracts/lifecycle-validation-result-1.0.0.schema.json), the unchanged 15,430-byte result schema with SHA-256 `1d7d8733b19599804fcda32fe119766b1b910e2223aa981fcd9eb92cc4d5c03f`; and
+- [`contracts/promotion-transaction-intent-1.2.0.schema.json`](contracts/promotion-transaction-intent-1.2.0.schema.json) and [`contracts/promotion-transaction-intent-vectors-v1.0.json`](contracts/promotion-transaction-intent-vectors-v1.0.json), the unchanged intent data schema and the candidate-`1.3` transitive-binding vector.
+
+### Candidate 1.3 subject and exact-result binding
+
+The selected product path accepts only `handbook.artifact-candidate` version
+`1.3`. Its complete candidate-subject fingerprint preimage remains independent
+of every result binding. It is the closed RFC 8785 JCS object containing exactly
+these fourteen fields and no others:
+
+1. `schema_id`;
+2. `schema_version`;
+3. `intake_record_ref`;
+4. `target_kind_ref`;
+5. `target_instance_id`;
+6. `target_schema_ref`;
+7. `profile_ref`;
+8. `resolved_profile_fingerprint`;
+9. `normalized_content_ref`;
+10. `field_sources` in candidate order;
+11. `unresolved_coverage_ids` in intake-definition order;
+12. `promotion_eligibility`;
+13. `required_approval_policy_ref`; and
+14. `basis_artifact_fingerprint`.
+
+The `candidate_subject_fingerprint` excludes exactly `candidate_id`,
+`candidate_fingerprint`, `candidate_subject_fingerprint`, and
+`validation_result_binding`. It is `sha256:` plus lowercase SHA-256 of the
+complete subject JCS UTF-8 bytes. It is validation-binding identity only, not
+final candidate identity, approval authority, or canonical authority. The
+result binding cannot influence this computation directly or indirectly.
+
+After the engine has persisted and exactly reread result `1.0`, candidate `1.3`
+contains exactly one required field named `validation_result_binding`. It is a
+single closed object, not an optional field or array, with exactly these keys:
+
+| Key | Exact meaning |
+|---|---|
+| `validation_result_ref` | the independently recomputed semantic result ref `lifecycle-validation-results/lifecycle-validation-result_<64 lowercase hex>.json` |
+| `validation_result_fingerprint` | the independently recomputed result `1.0` semantic fingerprint |
+| `result_document_sha256` | `sha256:` plus lowercase SHA-256 of the exact persisted complete result RFC 8785 JCS UTF-8 bytes followed by one LF |
+| `result_byte_length` | exact persisted byte count of the same document, including the LF, from 1 through 262,144 |
+
+No fifth key, second binding, `validation_result_refs` compatibility field,
+embedded result document, witness ref, binding ref, receipt ref, or sidecar ref
+is admitted. The final `candidate_fingerprint` preimage is the complete
+fourteen-field subject plus `candidate_subject_fingerprint` and the complete
+four-field `validation_result_binding`. It excludes exactly `candidate_id` and
+`candidate_fingerprint`. `candidate_id` is
+`candidate_<candidate_fingerprint lowercase hex>`.
+
+Result `1.0` keeps its existing semantic preimage and binds only
+`candidate_subject_fingerprint`; it never binds final candidate fingerprint,
+candidate ID, exact-document digest, or result self-hash. Its semantic
+fingerprint still excludes exactly `validation_result_id`,
+`validation_result_fingerprint`, and audit-only `validated_at_utc`. The result
+schema therefore does not select among semantic-equal timestamp variants. The
+downstream final candidate `1.3` is the sole independent authority selecting
+the exact persisted audit-byte variant.
+
+The construction graph is exactly:
+
+```text
+complete candidate 1.3 subject
+  -> candidate_subject_fingerprint
+  -> lifecycle-validation result 1.0 semantic fingerprint/ref
+  -> exact persisted result JCS+LF bytes and their SHA-256/length
+  -> candidate 1.3 exact-result binding
+  -> final candidate_fingerprint and candidate_id
+  -> new human approval over the final candidate fingerprint
+  -> promotion record
+  -> promotion transaction intent 1.2
+```
+
+Every arrow moves strictly forward. Result `1.0` has no field naming the final
+candidate or exact binding, candidate-subject identity excludes the binding,
+and no exact-byte digest feeds back into result semantic identity. The graph is
+therefore acyclic. A result self-hash is prohibited: excluding a self-hash field
+would remain coherently recomputable, while including it in its own preimage is
+circular. A mutable witness, binding, receipt, or sidecar is never independent
+authority, whether or not it is self-fingerprinted or content-addressed.
+
+The published create vector is exact:
+
+| Identity | Exact value |
+|---|---|
+| candidate subject fingerprint | `sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281` |
+| semantic result fingerprint | `sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8` |
+| semantic result ref | `lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json` |
+| result document SHA-256 | `sha256:c6696b0f9e8a8e3d1acf3fe916a3e18922869bf2cb9b2bee5457955a9488d538` |
+| result byte length including LF | `4334` |
+| final candidate fingerprint | `sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961` |
+
+The amendment vector similarly freezes subject
+`sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747`,
+result
+`sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad`,
+exact result document
+`sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f`
+at 5,009 bytes including LF, and final candidate
+`sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99`.
+
+### Freeze-author replay and cardinality
+
+The engine holds the author lock throughout inventory, recomputation,
+classification, and any permitted first-authoring publication. Before
+allocating `validated_at_utc`, creating a file, or changing any byte, it must:
+
+1. independently reconstruct the complete candidate `1.3` subject and
+   recompute `candidate_subject_fingerprint` without a result binding;
+2. no-follow load and validate the retained intake/content, canonical basis,
+   selected profile, all thirteen definitions, lifecycle policy/head/state,
+   complete ordered active observations, and complete ordered reopened
+   coverage under the retained authority locks;
+3. independently construct the expected result `1.0` semantic preimage and
+   recompute its expected fingerprint, ID, and ref while excluding
+   `validated_at_utc`; and
+4. perform two complete bounded no-follow reads of every immediate entry in
+   `.handbook/evidence/charter/candidates/` and
+   `.handbook/state/lifecycle-validation-results/`, classifying
+   every entry before mutation and requiring identical scan tuples.
+
+Each root permits at most 4,096 immediate entries, 262,144 bytes per regular
+file, 1,073,741,824 aggregate file bytes, and 128 UTF-8 filename bytes. The
+only owned names are exact ASCII
+`candidate_[0-9a-f]{64}.json` (79 bytes) and
+`lifecycle-validation-result_[0-9a-f]{64}.json` (97 bytes). Arithmetic
+overflow refuses. The root itself and every entry are opened no-follow with
+link/reparse/non-regular/nested-directory rejection; enumeration never filters
+by a discovery glob. Every file uses a duplicate-key-rejecting bounded parse,
+closed-schema validation, and independently recomputed ID/fingerprint.
+
+Each scan records root file identity plus the raw filename, file identity,
+byte length, and SHA-256 of every sorted entry. The two complete tuple vectors
+must be byte-identical under the same author lock. Any add, remove, rename,
+root replacement, identity/length/hash change, count/per-file/aggregate/name
+overflow, unowned name, or unsafe/malformed entry refuses before timestamp
+allocation or mutation. Safe candidate `1.0`/`1.1`/`1.2` records are historical
+nonmatches; safe nonmatching candidate `1.3` and nonexpected result `1.0`
+records are retained unrelated evidence. Unsafe or malformed entries of any
+version refuse even when historical or otherwise unrelated. The exact filename
+below/at/above rows, admitted 79-byte candidate and 97-byte result owned-name
+rows, all other limit boundaries, and stable/changed scan rows are normative in
+both runtime vectors.
+
+Candidate discovery uses exactly the pair:
+
+```text
+(
+  recomputed candidate_subject_fingerprint,
+  recomputed validation_result_ref + validation_result_fingerprint
+)
+```
+
+A candidate matches only when it is safe, schema-valid candidate `1.3`, its
+subject fingerprint independently recomputes, and both semantic fields in its
+closed exact-result binding equal the expected pair. Byte-identical candidate
+copies under distinct entries count separately. A candidate with the subject
+but another semantic result, or the semantic result with another subject, is
+crossed evidence and refuses; it does not reduce the match count or enable first
+authoring.
+
+The complete replay partition is:
+
+| Matching candidate `1.3` count | Expected semantic result state | Outcome before mutation |
+|---|---|---|
+| zero | absent | first authoring may proceed after every other authority and store entry is safe and exact |
+| exactly one | safe exact bytes | replay only after candidate ID/fingerprint and result semantic ref/fingerprint plus candidate-bound JCS+LF SHA-256/length all pass |
+| more than one | any | refuse as duplicate/forged candidate authority and preserve every byte |
+| zero | present | classify the result as an orphan; preserve and refuse |
+| exactly one | absent | refuse missing result and preserve the candidate |
+| exactly one | present but unsafe, rewritten, semantically unequal, wrong digest, wrong length, or crossed | preserve and refuse |
+
+“Safe exact bytes” requires: no-follow expected regular file and directory
+types; bounded complete load; unchanged schema `1.0`; recomputed semantic
+preimage/fingerprint/ID/ref/basename; candidate-subject equality; exact RFC 8785
+JCS plus one LF; and SHA-256 and length equality to the candidate binding. An
+audit timestamp change alone changes the raw digest and refuses even when
+semantic fingerprint/ref remain unchanged.
+
+The inventory is fail-closed. Any missing, unsafe, linked, non-regular,
+malformed, rewritten, duplicate, mismatching, or crossed relevant candidate or
+result entry refuses before timestamp allocation or mutation. Refusal never
+adopts, overwrites, repairs, renames, truncates, appends, cleans, or deletes any
+candidate, result, witness, binding, receipt, sidecar, temporary, or orphan.
+
+### First authoring, orphan boundary, and crash recovery
+
+Only the zero-candidate/no-result row permits first authoring. After the
+complete read-only preflight, the engine constructs result `1.0`, publishes it
+through the retained create-new/no-replace/no-follow/fsync protocol, rereads and
+proves its exact JCS+LF bytes, computes digest and length, constructs final
+candidate `1.3`, then create-new publishes that candidate. A candidate
+destination collision or any post-result failure preserves all bytes and
+refuses. Existing exact result replay is not used to continue this sequence
+because a result without a matching candidate is already an orphan.
+
+An orphan result is evidence, never candidate or recovery authority. The
+engine may not adopt its ref, create a candidate around it, overwrite it,
+repair it, delete it, or infer that a prior author intended publication. The
+minimal authorized behavior is preserve-and-refuse pending a separately
+authorized forensic procedure. If automatic completion after the result-to-
+candidate crash window is desired, work must stop and a closed, independently
+reviewed author-publication transaction must be specified. This repair does
+not invent a journal, recovery marker, sidecar, receipt, timeout, cleanup rule,
+or orphan-adoption protocol.
+
+### Approval, promotion, and intent 1.2 transitivity
+
+Every candidate `1.3` approval binds the exact final candidate ref and
+`candidate_fingerprint`, after the complete result binding is included. No
+approval binds only the subject fingerprint. Promotion records bind that same
+final candidate, their semantic validation-result ref equals the candidate
+binding, and promotion currentness reloads the exact result bytes and proves
+candidate-bound digest/length before any journal, authenticator call, or
+mutation.
+
+The concrete create chain uses fresh authenticator assertion
+`sha256:2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a`,
+approval
+`sha256:ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2`,
+and promotion
+`sha256:8a1e5d73ac0163f4eb0acc53d39dbb4c7a027c5c2cae0cf3d80fd249733e1e63`.
+The amendment chain independently resolves candidate
+`sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99`,
+result
+`sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad`,
+fresh assertion
+`sha256:6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce`,
+new approval
+`sha256:eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f`,
+promotion
+`sha256:0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038`,
+and clearance transition
+`sha256:5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7`.
+No candidate-dependent selected authority equals the historical candidate-
+`1.2` intent vector; the retained registry state/transition may be reused only
+because their exact current records are candidate-independent and revalidated.
+
+Promotion transaction intent `1.2` remains closed and unchanged. Its
+`candidate_lineage` directly binds the final candidate ref/fingerprint,
+candidate-subject fingerprint, and semantic result ref/fingerprint. Because the
+final candidate fingerprint includes the complete exact-result binding, intent
+`1.2` transitively binds exact result JCS+LF SHA-256/length without a new intent
+field. Recovery must reload candidate `1.3`, recompute its final identity, and
+prove its exact result binding before any roll-forward mutation. It may not use
+a witness, sidecar, or the intent's semantic result fields as a substitute for
+the candidate-bound raw-document checks.
+
+The intent `1.2` schema remains exactly 16,019 bytes with SHA-256
+`c2f5cf51b833585bc10cfcd5b99ad2a2e2c0e952a79b3f2910ae6afbff746caa`.
+The selected candidate-`1.3` amendment vector has intent fingerprint
+`sha256:a6743e191fc72bee7b2a1a54e85b957a242f019033992d595941663392dd9037`
+and a 7,591-byte JCS+LF document with SHA-256
+`sha256:1f93f81c116f546fd026a07c3d11d79ff8441d273e4259e01f166cc0122a4d38`;
+the marker remains exactly 72 ASCII bytes containing that document digest plus
+LF. It uses fresh transaction ID `promotion-transaction_0000000000000003` and
+the corresponding `.pending/` directory; the historical candidate-`1.2`
+transaction `promotion-transaction_0000000000000002` is never reused. Its
+2,068-byte promotion output has exact JCS+LF SHA-256
+`sha256:e8bd5b7e12f5c05e49c5964771b4fa6a87791bc2769eb66f40539bd557b7701c`,
+and its 978-byte lifecycle-transition output has exact JCS+LF SHA-256
+`sha256:373767a345b92e5bd1e6422a7e5dbd6111877660df7b8c4af79d8c5a0a832a22`.
+The prior candidate-`1.2` amendment vector remains preserved in the vector file
+as historical checkpoint evidence, not selected-product authority.
+
+### Migration and historical evidence
+
+Candidate `1.0`, `1.1`, and `1.2` records, their approvals, the rejected Review
+3 implementation, and its result/witness/binding sidecars remain immutable
+historical/checkpoint evidence. The selected path reads only candidate `1.3`.
+Every active lineage must be re-authored as `1.3`; because `schema_version` is
+inside the complete subject, its candidate-subject fingerprint and semantic
+result identity are recomputed, not copied. The exact result binding is then
+constructed from newly persisted result bytes, and new human approvals bind
+the new final candidate fingerprint.
+
+There is no dual read, automatic upgrade, result-ref copying, approval
+carry-forward, selected-product fallback, mutable sidecar promotion, or
+historical record rewrite. The unchanged result `1.0` schema and unchanged
+promotion-intent `1.2` schema do not authorize reuse of a candidate `1.2` result
+or approval. Any implementation branch that accepts candidate `1.2`, maps its
+`validation_result_refs` into the new binding, or treats old approvals as
+current fails closed before mutation.
+
+### Mandatory negative and refusal proof
+
+The implementation packet must begin RED and keep every refusal
+evidence-preserving. At minimum it must independently prove:
+
+- coherent result/witness/binding or other mutable-companion rewrite refuses;
+- timestamp-only exact-byte rewrite refuses despite unchanged semantic ref;
+- a coherently rewritten candidate binding changes final candidate identity and
+  invalidates every old approval;
+- forged second candidate and zero/one/many discovery select the exact rows;
+- result orphan and matching-candidate/missing-result states preserve/refuse;
+- wrong digest, wrong LF-inclusive length, and semantic-ref/raw-document
+  crossing preserve/refuse;
+- unsafe candidate/result entries refuse before mutation;
+- candidate `1.2` fallback and approval carry-forward refuse;
+- no refusal path mutates or deletes evidence; and
+- result self-hash and mutable witness/binding/receipt/sidecar authority are
+  structurally absent.
+
+The complete currentness, cross-record, migration, replay, orphan, and negative
+matrices in the two runtime vector files are normative. An implementation stops
+if any selector, path grammar, inventory scope, lock, recomputation, exact-byte
+check, cardinality row, refusal outcome, migration rule, transaction-recovery
+check, or evidence-preservation rule remains implicit.
+
+## HCM-2.2-ESC-001/002 retained authority
+
+This section remains controlling for result `1.0` semantic validation,
+promotion intent/recovery, output persistence, and fault-injection surfaces
+except where `HCM-2.2-ESC-003` above replaces candidate `1.2`, exact-result
+selection, replay, orphan, or migration authority. Where the older text below describes candidate
 `1.1`, a validation result that binds the final candidate fingerprint, a
 promotion journal without the fields or terminal states below, destructive
 mismatch recovery, or production-visible fault hooks, that text describes only
@@ -61,10 +404,13 @@ The normative machine-readable planning contracts are:
 - [`contracts/promotion-transaction-intent-1.2.0.schema.json`](contracts/promotion-transaction-intent-1.2.0.schema.json), the closed Draft 2020-12 promotion-intent schema; and
 - [`contracts/promotion-transaction-intent-vectors-v1.0.json`](contracts/promotion-transaction-intent-vectors-v1.0.json), the exact amendment intent/fingerprint/document/marker vector, owned-name grammar, terminal sets, bindings, and negative matrix.
 
-### Additive candidate 1.2 and acyclic identity
+### Historical additive candidate 1.2 and acyclic semantic identity
 
-The repaired selected path accepts only `handbook.artifact-candidate` version
-`1.2`. Its complete candidate semantic subject is the RFC 8785 JCS object with
+The `HCM-2.2-ESC-001`/`002` checkpoint path accepted only
+`handbook.artifact-candidate` version `1.2`. That historical contract is
+preserved here to classify existing bytes; it is not selected-product fallback
+authority after `HCM-2.2-ESC-003`. Its complete candidate semantic subject is
+the RFC 8785 JCS object with
 exactly these fields and no others:
 
 1. `schema_id`;
@@ -109,13 +455,12 @@ complete candidate semantic subject
 No edge points from the validation result back to the final candidate identity.
 If any implementation requires that edge, the graph is cyclic and work stops.
 
-Candidate versions `1.0` and `1.1`, their approvals, and their content-addressed
-records remain immutable historical/checkpoint evidence. They are not admitted
-by the repaired selected product path. A candidate must be re-authored and
-re-evaluated as `1.2`; it cannot be upgraded by copying an old result ref.
-Approvals must be newly obtained because every approval binds the new final
-candidate fingerprint. There is no implicit `1.1`/`1.2` dual read, fallback,
-automatic migration, checkpoint rewrite, or approval carry-forward.
+Candidate versions `1.0`, `1.1`, and `1.2`, their approvals, and their
+content-addressed records remain immutable historical/checkpoint evidence. None
+is admitted by the `HCM-2.2-ESC-003` selected product path. Candidate `1.3`
+must be independently re-authored and re-evaluated; no old result ref or
+approval may be copied. There is no implicit dual read, fallback, automatic
+migration, checkpoint rewrite, or approval carry-forward.
 
 ### Engine-owned lifecycle-validation result 1.0
 
@@ -202,13 +547,13 @@ The engine proves these cross-record equalities before it persists the result:
 Promotion acquires promotion, registry, and lifecycle locks in that order,
 recovers each domain, and then—before creating a journal, allocating a
 transaction-owned file, invoking an authenticator, or mutating any path—reloads
-the candidate and its sole result and repeats every result-schema, fingerprint,
-ID/ref/basename, subject, intake/content lineage, canonical basis, profile,
-definition, lifecycle-policy, head/state, active-observation, reopened-coverage,
-and approval equality. It recomputes the current complete ordered observation
-and coverage sets rather than checking membership. Approvals must bind the
-exact final `1.2` candidate fingerprint and remain current under the retained
-registry pair.
+candidate `1.3` and its exact-result binding and repeats every result-schema,
+semantic fingerprint, ID/ref/basename, exact JCS+LF digest/length, subject,
+intake/content lineage, canonical basis, profile, definition, lifecycle-policy,
+head/state, active-observation, reopened-coverage, and approval equality. It
+recomputes the current complete ordered observation and coverage sets rather
+than checking membership. Approvals must bind the exact final `1.3` candidate
+fingerprint and remain current under the retained registry pair.
 
 Missing, caller-authored, forged, stale, duplicate, reordered, incomplete, or
 excess validation authority refuses before mutation. A schema-valid result is
@@ -360,13 +705,16 @@ snapshot because the retained exact old canonical target is its authentic
 completion source. Amendment requires `canonical.old` exact before any
 new-output scratch publication begins.
 
-This repair changes only persistence and recovery grammar. The closed intent
-`1.2` schema remains exactly 16,019 bytes with SHA-256
-`c2f5cf51b833585bc10cfcd5b99ad2a2e2c0e952a79b3f2910ae6afbff746caa`;
-the published amendment intent fingerprint, 7,607-byte document hash, and
-72-byte marker remain unchanged. Any proposed intent field or additive version
-requires a separate planning finding and fresh review; it is not inferred by
-this repair.
+Escalation `HCM-2.2-ESC-002` changed only persistence and recovery grammar.
+Escalation `HCM-2.2-ESC-003` still leaves the closed intent `1.2` schema exactly
+16,019 bytes with SHA-256
+`c2f5cf51b833585bc10cfcd5b99ad2a2e2c0e952a79b3f2910ae6afbff746caa`.
+Its selected amendment vector necessarily has a new fingerprint/document hash
+because `candidate_lineage` now binds final candidate `1.3`; the exact values
+are frozen in the controlling section above. The old candidate-`1.2` amendment
+vector remains historical evidence. Any proposed intent field or additive
+version requires a separate planning finding and fresh review; it is not
+inferred by either repair.
 
 The writer's ordered transitions are exact and cumulative:
 
@@ -504,9 +852,11 @@ or renames the journal, removes a final record, restores canonical bytes, or
 starts a new transaction. Repair of preserved mismatch evidence requires a
 separately authorized forensic procedure outside this packet.
 
-### Review 2 implementation obligations
+### Historical Review 2 obligations and Review 3 disposition
 
-A later implementation packet must close all four Review 2 findings together:
+The rejected implementation packet attempted to close the four Review 2
+findings below. This list remains immutable obligation history, not current
+candidate `1.2` implementation authority:
 
 1. implement the candidate `1.2`/validation-result `1.0` acyclic identity and
    all cross-record/currentness rules above;
@@ -520,6 +870,13 @@ A later implementation packet must close all four Review 2 findings together:
    symbol, compiler/CLI option, environment variable, or public DTO may enable
    them. Unit tests exercise every boundary through that test-only harness,
    while public-API/rustdoc/all-features proof shows no hook in production.
+
+Implementation Reviews 1 and 2 added bounded repairs, but Review 3 proved
+`HCM-2.2-AR3-001`: its result/witness/sidecar-binding set remained coherently
+rewritable because no independent authority selected exact result bytes. The
+entire implementation subject is rejected. A later implementation must instead
+implement the controlling candidate `1.3` repair above and every retained
+result/promotion/recovery obligation together.
 
 Before eventual code edits, refresh GitNexus impact for
 `evaluate_charter_intake` (known HIGH), generic lineage `validate_record`
@@ -2215,17 +2572,18 @@ is the authority-visible point for canonical, promotion, and lifecycle state
 together. A standalone event seeing promotion's new head must replay or remain
 invisible; it can never overwrite or fork clearance.
 
-Clearance requires the candidate's sole current lifecycle-validation result,
-and the promotion repeats the Option 1 currentness checks above. That result
+Clearance requires candidate `1.3`'s sole closed exact-result binding, and the
+promotion repeats the controlling currentness checks above. That result
 references every active observation, proves the candidate intake lineage
 reevaluated every reopened coverage ID, and binds the
 `candidate_subject_fingerprint`—never the final candidate fingerprint—plus the
-current/policy/state fingerprints. The final candidate and promotion name the
-validation result; the transition names the promotion ID; and intent `1.2`
-binds their fingerprints without a cyclic record dependency. Recovery installs
-both final records before the commit marker. Neither an observation, transition,
-renderer output, nor state changes the artifact, posture kernel, approval, or
-policy revision by itself.
+current/policy/state fingerprints. The final candidate binds the semantic result
+ref/fingerprint and exact JCS+LF digest/length; approval, promotion, and intent
+`1.2` bind that final candidate transitively. The transition names the promotion
+ID without a cyclic record dependency. Recovery installs both final records
+before the commit marker. Neither an observation, transition, renderer output,
+nor state changes the artifact, posture kernel, approval, or policy revision by
+itself.
 
 ## Product-path cutover
 

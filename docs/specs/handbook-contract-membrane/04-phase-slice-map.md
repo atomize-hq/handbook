@@ -12,14 +12,15 @@ review-clean.
 HCM-1.1 through HCM-1.4 and HCM-2.1 have landed and closed through separately
 reviewed implementation and parent-handoff subjects. They are completed bounded
 evidence, not continuing implementation authority. `HCM-2.2-ESC-001` repaired
-the candidate/result identity cycle and received a clean planning review, but
-its selected implementation stopped when `W5`-`W7` partial pending stages
-proved unauthenticatable after process memory loss. User-selected
-`HCM-2.2-ESC-002` authorizes only a documentation repair: each complete output
-is verified in same-filesystem non-authoritative scratch and atomically
-published, so the pending stage is absent or exact. Intent `1.2` remains
-unchanged. Rust resumption requires fresh CLEAN review of the complete repaired
-recovery subject and a new parent handoff. Every later slice remains
+the candidate/result semantic identity cycle and `HCM-2.2-ESC-002` repaired
+partial pending output publication. The later implementation reached fresh
+Review 3 and was rejected under `HCM-2.2-AR3-001` because result, witness, and
+mutable binding audit bytes remained coherently rewritable under candidate
+`1.2`. User-selected `HCM-2.2-ESC-003` authorizes only a documentation repair:
+candidate `1.3` independently anchors semantic result ref/fingerprint and exact
+persisted result JCS+LF SHA-256/length. Result `1.0` and intent `1.2` schemas
+remain unchanged. Rust resumption requires fresh `CLEAN` review of the complete
+candidate-`1.3` subject and a new parent handoff. Every later slice remains
 unauthorized.
 
 ## Sequencing rule
@@ -308,15 +309,18 @@ legacy fixed Markdown path constant and re-exports are removed without an alias.
 
 ### `HCM-2.2` — Constitutional-root artifact
 
-**Implementation status:** stopped for atomic-stage authority repair;
-non-authoritative checkpoint only. Option 1 adds candidate `1.2` validation-only
-subject identity, result `1.0`, complete promotion intent/recovery, evidence-
-preserving mismatch refusal, and test-only private fault injection. The current
-`HCM-2.2-ESC-002` documentation repair keeps intent `1.2` unchanged and replaces
-the impossible partial pending `W5`-`W7` states with verified complete output
-scratch plus atomic rename, leaving new-output stages absent or exact. Rust may
-resume only after the complete repaired recovery subject receives fresh CLEAN
-review and parent closeout. The checkpoint and proof history at
+**Implementation status:** stopped after fresh Review 3; every implementation
+subject is a non-authoritative checkpoint. Option 1 added candidate `1.2`
+validation-only subject identity and result `1.0`; atomic staging repaired
+`W5`-`W7`. Review 3 then proved the result/witness/mutable-binding audit bytes
+coherently rewritable without changing candidate `1.2` identity.
+`HCM-2.2-ESC-003` now selects documentation-only candidate `1.3` with a
+result-independent subject fingerprint and a final-candidate exact result ref,
+semantic fingerprint, JCS+LF SHA-256, and LF-inclusive length binding. New
+approval binds final candidate, and promotion/intent `1.2` bind it transitively;
+result `1.0` and intent `1.2` schemas stay unchanged. Rust may resume only after
+the complete repaired identity/replay/orphan/migration/recovery subject receives
+fresh `CLEAN` review and parent closeout. The checkpoint and proof history at
 [`slices/HCM-2.2/`](slices/HCM-2.2/SPEC.md) are evidence only and grant no
 authority for HCM-2.3 or later work.
 

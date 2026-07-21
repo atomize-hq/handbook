@@ -25,49 +25,49 @@
   "amendment_positive": {
     "intent_fingerprint_preimage": {
       "candidate_lineage": {
-        "candidate_fingerprint": "sha256:03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7",
-        "candidate_ref": "candidates/candidate_03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7.json",
-        "candidate_subject_fingerprint": "sha256:9fbc8c9f4bcdb862b8e2d44415cd8e61338cfa25c7e0d7bb4d7877a3748d04c9",
+        "candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+        "candidate_ref": "candidates/candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99.json",
+        "candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
         "intake_record_fingerprint": "sha256:65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff",
         "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
         "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
         "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
-        "validation_result_fingerprint": "sha256:654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b",
-        "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b.json"
+        "validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+        "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json"
       },
       "human_authority": {
         "approval_bindings": [
           {
-            "approval_class": "charter_amendment",
-            "approval_fingerprint": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
-            "approval_ref": "approvals/approval_4444444444444444444444444444444444444444444444444444444444444444.json",
-            "authority_ref": "charter.governance.project_owner"
+            "approval_class": "Project owner approval",
+            "approval_fingerprint": "sha256:eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f",
+            "approval_ref": "approvals/approval_eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f.json",
+            "authority_ref": "Project owner"
           }
         ],
-        "approver_registry_state_fingerprint": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
-        "approver_registry_state_ref": "registry-states/registry-state_5555555555555555555555555555555555555555555555555555555555555555.json",
-        "registry_head_transition_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
-        "registry_head_transition_ref": "registry-transitions/registry-transition_6666666666666666666666666666666666666666666666666666666666666666.json"
+        "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json"
       },
       "mutation_mode": "amend",
       "outputs": {
         "lifecycle_transition": {
-          "byte_length": 2048,
-          "document_sha256": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-          "record_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "record_ref": "lifecycle-transitions/lifecycle-transition_cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.json"
+          "byte_length": 978,
+          "document_sha256": "sha256:373767a345b92e5bd1e6422a7e5dbd6111877660df7b8c4af79d8c5a0a832a22",
+          "record_fingerprint": "sha256:5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7",
+          "record_ref": "lifecycle-transitions/lifecycle-transition_5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7.json"
         },
-        "new_canonical_byte_length": 16384,
+        "new_canonical_byte_length": 5405,
         "new_canonical_document_sha256": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
         "new_canonical_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
         "promotion_record": {
-          "byte_length": 4096,
-          "document_sha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-          "record_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "record_ref": "promotions/promotion_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json"
+          "byte_length": 2068,
+          "document_sha256": "sha256:e8bd5b7e12f5c05e49c5964771b4fa6a87791bc2769eb66f40539bd557b7701c",
+          "record_fingerprint": "sha256:0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038",
+          "record_ref": "promotions/promotion_0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038.json"
         }
       },
-      "promotion_id": "promotion_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "promotion_id": "promotion_0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038",
       "recovery": {
         "old_canonical_byte_length": 8192,
         "old_canonical_document_sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
@@ -168,16 +168,16 @@
         "observed_current_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
         "target_instance_id": "project_authority"
       },
-      "transaction_id": "promotion-transaction_0000000000000002"
+      "transaction_id": "promotion-transaction_0000000000000003"
     },
-    "expected_intent_fingerprint": "sha256:d7f3c3a9ee860288f0ed52c83254044d67828d2499909633584290d8ec265830",
+    "expected_intent_fingerprint": "sha256:a6743e191fc72bee7b2a1a54e85b957a242f019033992d595941663392dd9037",
     "intent_record_additions": {
-      "intent_fingerprint": "sha256:d7f3c3a9ee860288f0ed52c83254044d67828d2499909633584290d8ec265830"
+      "intent_fingerprint": "sha256:a6743e191fc72bee7b2a1a54e85b957a242f019033992d595941663392dd9037"
     },
-    "expected_intent_document_byte_length": 7607,
-    "expected_intent_document_sha256": "sha256:ad48fe8c0be1d3ee72888a6409d7e9ef3278623bf2c68c5cb199a3db18a08654",
-    "expected_marker_payload": "sha256:ad48fe8c0be1d3ee72888a6409d7e9ef3278623bf2c68c5cb199a3db18a08654\n",
-    "expected_pending_directory": ".handbook/state/transactions/promotions/promotion-transaction_0000000000000002.pending/"
+    "expected_intent_document_byte_length": 7591,
+    "expected_intent_document_sha256": "sha256:1f93f81c116f546fd026a07c3d11d79ff8441d273e4259e01f166cc0122a4d38",
+    "expected_marker_payload": "sha256:1f93f81c116f546fd026a07c3d11d79ff8441d273e4259e01f166cc0122a4d38\n",
+    "expected_pending_directory": ".handbook/state/transactions/promotions/promotion-transaction_0000000000000003.pending/"
   },
   "writer_state_model": {
     "intent_publication": "Write, fsync, close, reopen, and verify the complete self-fingerprinted JCS+LF intent in the non-authoritative sibling .intent-staging directory before the pending directory exists; then create+fsync an empty pending directory and atomically rename the complete scratch file directly to intent.json. The pending namespace exposes only empty or complete intent, never intent.tmp or partial intent bytes.",
@@ -366,6 +366,8 @@
   },
   "cross_record_bindings": [
     "promotion_id equals outputs.promotion_record record_ref basename ID and record_fingerprint-derived ID",
+    "candidate_lineage candidate ref/fingerprint equals final candidate 1.3 whose fingerprint includes the complete exact-result binding",
+    "candidate_lineage validation-result ref/fingerprint equals candidate 1.3 validation_result_binding and the loaded result exact JCS+LF SHA-256/length equal that candidate binding",
     "candidate, intake, normalized-content, validation-result, profile, definition, lifecycle, observation, coverage, approval, registry, and target bindings equal the retained promotion-time observations",
     "outputs record_fingerprint equals each loaded record identity while document_sha256 and byte_length equal its exact persisted bytes",
     "lifecycle-transition bytes bind the selected_contract prior head/state, promotion_id, validation result, and intended resulting head/state; after commit that transition is the successor rather than requiring the prior head to remain current",
@@ -390,5 +392,187 @@
     "published committed pending payload encounters an exact-pre-existing, mismatching, or unsafe .committed destination, simultaneous pending/terminal suffix, or terminal byte/name mismatch",
     "published rolled-back pending payload encounters an exact-pre-existing, mismatching, or unsafe .rolled-back destination, simultaneous pending/terminal suffix, or terminal byte/name mismatch",
     "canonical target is neither exact old/absent nor exact new, or currentness cannot be revalidated"
-  ]
+  ],
+  "historical_candidate_1_2_amendment_positive": {
+    "intent_fingerprint_preimage": {
+      "candidate_lineage": {
+        "candidate_fingerprint": "sha256:03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7",
+        "candidate_ref": "candidates/candidate_03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7.json",
+        "candidate_subject_fingerprint": "sha256:9fbc8c9f4bcdb862b8e2d44415cd8e61338cfa25c7e0d7bb4d7877a3748d04c9",
+        "intake_record_fingerprint": "sha256:65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff",
+        "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "validation_result_fingerprint": "sha256:654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b",
+        "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b.json"
+      },
+      "human_authority": {
+        "approval_bindings": [
+          {
+            "approval_class": "charter_amendment",
+            "approval_fingerprint": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+            "approval_ref": "approvals/approval_4444444444444444444444444444444444444444444444444444444444444444.json",
+            "authority_ref": "charter.governance.project_owner"
+          }
+        ],
+        "approver_registry_state_fingerprint": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+        "approver_registry_state_ref": "registry-states/registry-state_5555555555555555555555555555555555555555555555555555555555555555.json",
+        "registry_head_transition_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "registry_head_transition_ref": "registry-transitions/registry-transition_6666666666666666666666666666666666666666666666666666666666666666.json"
+      },
+      "mutation_mode": "amend",
+      "outputs": {
+        "lifecycle_transition": {
+          "byte_length": 2048,
+          "document_sha256": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "record_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "record_ref": "lifecycle-transitions/lifecycle-transition_cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.json"
+        },
+        "new_canonical_byte_length": 16384,
+        "new_canonical_document_sha256": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "new_canonical_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "promotion_record": {
+          "byte_length": 4096,
+          "document_sha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "record_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "record_ref": "promotions/promotion_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json"
+        }
+      },
+      "promotion_id": "promotion_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "recovery": {
+        "old_canonical_byte_length": 8192,
+        "old_canonical_document_sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "old_canonical_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "old_canonical_status": "present"
+      },
+      "schema_id": "handbook.charter-promotion-transaction-intent",
+      "schema_version": "1.2",
+      "selected_contract": {
+        "active_observations": [
+          {
+            "observation_fingerprint": "sha256:b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
+            "observation_ref": "lifecycle-observations/lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098.json"
+          }
+        ],
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "prior_lifecycle_head_fingerprint": "sha256:ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde",
+        "prior_lifecycle_head_ref": "lifecycle-transitions/lifecycle-transition_ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde.json",
+        "prior_lifecycle_state": "reassessment_required",
+        "prior_lifecycle_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "reopened_coverage_ids": [
+          "operational_reality.production_state"
+        ],
+        "resolved_definitions": [
+          {
+            "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29",
+            "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+            "definition_role": "approval_policy"
+          },
+          {
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "definition_role": "capability_contract"
+          },
+          {
+            "definition_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c",
+            "definition_ref": "handbook.intake.charter@1.0.0",
+            "definition_role": "intake_definition"
+          },
+          {
+            "definition_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+            "definition_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+            "definition_role": "lifecycle_policy"
+          },
+          {
+            "definition_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6",
+            "definition_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+            "definition_role": "reassessment_trigger"
+          },
+          {
+            "definition_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766",
+            "definition_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0",
+            "definition_role": "reassessment_trigger"
+          },
+          {
+            "definition_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7",
+            "definition_ref": "handbook.renderer.charter-review-markdown@1.0.0",
+            "definition_role": "renderer_definition"
+          },
+          {
+            "definition_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8",
+            "definition_ref": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+            "definition_role": "review_trigger"
+          },
+          {
+            "definition_fingerprint": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "definition_role": "semantic_validator"
+          },
+          {
+            "definition_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+            "definition_role": "semantic_validator"
+          },
+          {
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "definition_role": "target_kind"
+          },
+          {
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "definition_role": "target_schema"
+          },
+          {
+            "definition_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3",
+            "definition_ref": "handbook.waiver.constitutional-intake@1.0.0",
+            "definition_role": "waiver_policy"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74"
+      },
+      "target": {
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "observed_current_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "target_instance_id": "project_authority"
+      },
+      "transaction_id": "promotion-transaction_0000000000000002"
+    },
+    "expected_intent_fingerprint": "sha256:d7f3c3a9ee860288f0ed52c83254044d67828d2499909633584290d8ec265830",
+    "intent_record_additions": {
+      "intent_fingerprint": "sha256:d7f3c3a9ee860288f0ed52c83254044d67828d2499909633584290d8ec265830"
+    },
+    "expected_intent_document_byte_length": 7607,
+    "expected_intent_document_sha256": "sha256:ad48fe8c0be1d3ee72888a6409d7e9ef3278623bf2c68c5cb199a3db18a08654",
+    "expected_marker_payload": "sha256:ad48fe8c0be1d3ee72888a6409d7e9ef3278623bf2c68c5cb199a3db18a08654\n",
+    "expected_pending_directory": ".handbook/state/transactions/promotions/promotion-transaction_0000000000000002.pending/"
+  },
+  "candidate_1_3_transitive_binding_contract": {
+    "schema_change": false,
+    "candidate_ref": "candidates/candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99.json",
+    "candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+    "candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
+    "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json",
+    "validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+    "candidate_bound_result_document_sha256": "sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f",
+    "candidate_bound_result_byte_length": 5009,
+    "rule": "Intent 1.2 directly binds final candidate 1.3 and semantic result identity. Because final candidate identity includes the complete exact-result binding, intent transitively binds exact JCS+LF digest and length without adding an intent field.",
+    "approval_ref": "approvals/approval_eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f.json",
+    "approval_fingerprint": "sha256:eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f",
+    "promotion_ref": "promotions/promotion_0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038.json",
+    "promotion_fingerprint": "sha256:0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038",
+    "promotion_document_sha256": "sha256:e8bd5b7e12f5c05e49c5964771b4fa6a87791bc2769eb66f40539bd557b7701c",
+    "promotion_byte_length": 2068,
+    "lifecycle_transition_ref": "lifecycle-transitions/lifecycle-transition_5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7.json",
+    "lifecycle_transition_fingerprint": "sha256:5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7",
+    "lifecycle_transition_document_sha256": "sha256:373767a345b92e5bd1e6422a7e5dbd6111877660df7b8c4af79d8c5a0a832a22",
+    "lifecycle_transition_byte_length": 978,
+    "transaction_id": "promotion-transaction_0000000000000003",
+    "pending_directory": ".handbook/state/transactions/promotions/promotion-transaction_0000000000000003.pending/",
+    "historical_candidate_1_2_transaction_id": "promotion-transaction_0000000000000002",
+    "fresh_authority_rule": "Every candidate-dependent selected authority is concrete and differs from historical_candidate_1_2_amendment_positive; no approval, promotion, lifecycle output, transaction ID, or pending directory is carried forward."
+  }
 }

@@ -1,0 +1,339 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260721T140542Z--HCM-2-2--fresh-exact-result-authority-repair-review-3",
+  "created_at_utc": "2026-07-21T14:05:42Z",
+  "source_handoff_ids": [
+    "20260720T225541Z--HCM-2-2--orchestration--atomic-stage-authority-repair-approved"
+  ],
+  "parent_orchestration_id": "20260721T121830Z--HCM-2-2--exact-result-authority-repair-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "debugging-and-error-recovery",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.2",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:58042931cae58d505e12d753c6c67d4a8689423aefe576ae0927d15b387a0644",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "AGENTS.md",
+        "sha256": "80b2fadc37be924f6a6ec33fbc19366861695e7b194713b32ce95511c627e9e9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "2e76bc24dc75e4dc5371e2f28987c951c35de756786127ed405802d8a0f9d0b7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "6f0032d6d308f840acddf41c0f72c0447c39132bd121272e27643a8e68e3ae20"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "fe5e0e1137cf4a46bc3bd3c051cec6a30d15deeaca0ae0fedd82f517ff67c946"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "bd8b7ef0d867d27ace603c851a1fa25940d20c4d0a03fd4ad0e2d1d9fbe92d9e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "e761ebf95d43ec664cea3969c48c9ceefba68d8e6566920eb44c1447c21acec0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T022507Z--HCM-2-2--fresh-atomic-stage-implementation-review-1.json",
+        "sha256": "cc44cd92e057d2b0f23efc3f91e3f4b34fea1689e9e33ed0a6c2202563c76912"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T035019Z--HCM-2-2--fresh-atomic-stage-implementation-review-2.json",
+        "sha256": "540d59bc3fb39d7b62b367aff625aea136d9020dd5444550ec30ca9672f037bc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T050717Z--HCM-2-2--fresh-atomic-stage-implementation-review-3.json",
+        "sha256": "64d55cf30ac3b69b4bbf22c1087f30bbf99240f9671cba97fe020fdfb9cf8c1d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T124756Z--HCM-2-2--fresh-exact-result-authority-repair-review-1.json",
+        "sha256": "27ed7ebdd271fa81996574ace26186e97b3077cdd557e2e403108f42c8907413"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T133346Z--HCM-2-2--fresh-exact-result-authority-repair-review-2.json",
+        "sha256": "3da8bbb0f51d5be4cab2b1c404193e67bdbb2b9bedfb0dd767dc921694ee60ee"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260720T225541Z--HCM-2-2--orchestration--atomic-stage-authority-repair-approved.json",
+        "sha256": "e548c9837e602dc3b18c3a9119d53b869d361ed76f71fcb3dab84297a3a76b24"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "884ac72047727597949282acdad368f35e5ebf3b0171f17d303ef383217cc3d5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authority-repair-runtime-vectors-v1.0.json",
+        "sha256": "e9769a346eb2dd9b8a355990e22dbb487fe5b7a62d4d9a4855f896f51098cd97"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/lifecycle-validation-result-1.0.0.schema.json",
+        "sha256": "1d7d8733b19599804fcda32fe119766b1b910e2223aa981fcd9eb92cc4d5c03f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-1.2.0.schema.json",
+        "sha256": "c2f5cf51b833585bc10cfcd5b99ad2a2e2c0e952a79b3f2910ae6afbff746caa"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json",
+        "sha256": "9b698b080dda05a623586896811be43933fe39412613e2c3b3ddf30c4f6af58b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json",
+        "sha256": "397156b15219b0e0a73043cde6520bcb079e5f89cc23067338eb1b9647305247"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/decision/validation-result-exact-document-anchor-decision.md",
+        "sha256": "cfb2e8569aaf1f50734d1b597fd03043a3e7701bbbe99a05ebe54ed6b2de1782"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T021542Z--atomic-stage-implementation-proof-wall.md",
+        "sha256": "a6338068aaf7bb27b0a5311ec535e324a7731285c15626c4c92e6ebf86fdd73e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T034629Z--atomic-stage-implementation-review-1-remediation.md",
+        "sha256": "2fe336e91551a8f74357d96049c51a40be5d9a65cc32dda56bdc21c973f907a6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T050448Z--atomic-stage-implementation-review-2-remediation.md",
+        "sha256": "daa5cca52de325d7a1f78f5a66a198a66265a0d8d28bc5be80bfe6d0e766a18a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T053136Z--atomic-stage-implementation-review-3-stop.md",
+        "sha256": "031ada5265b95c28f859a67839c943ae6a993f9b1787e4774e309adc52ffccde"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T123500Z--exact-result-authority-repair-planning-proof.md",
+        "sha256": "aba11419e6ee107a05e7610e8bb283a04fecc418e6fd1fcc134bcf749f82f1cc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T133158Z--exact-result-authority-repair-review-1-remediation.md",
+        "sha256": "f02d0d4c990ffa8c73310ebf9617984daf3c7b6f728572d21f3b5d2836de6194"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T140344Z--exact-result-authority-repair-review-2-remediation.md",
+        "sha256": "2f1effd953f832a0e0484ba81a01d862ecc97defbafe1eefa78bf8110606f2ec"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/research/lifecycle-validation-authority-options.md",
+        "sha256": "8945aea4ffae606ddf4a57d62953eb7223ad5c7aea0cc2803a0eb0708c43848d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/research/promotion-recovery-authentic-byte-source-options.md",
+        "sha256": "973f6851ed3a8137da4c2a79bb3752404a00a226c607ef4b0c482da330f26b1b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/research/validation-result-exact-document-anchor-options.md",
+        "sha256": "b3b77ee05cd8d31281d94666338548e0de51d1f5e0254f398e9dac06246804c8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+        "sha256": "1fa14fa189774d569844090d912bdf26b76d07ade342f61950d4bfa1d12820d1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+        "sha256": "91a3c71d61a23b1a04478e766623e8c2b0aa4b73e96dcf235d0cb8001caddefa"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:58042931cae58d505e12d753c6c67d4a8689423aefe576ae0927d15b387a0644"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.2-ESC-003 candidate 1.3 exact-result authority repair",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre-primary-commit fresh complete-subject review 3 after accepted Review 2 remediation"
+  },
+  "authority_refs": [
+    {
+      "path": "AGENTS.md",
+      "sections": [
+        "complete repository instructions and GitNexus requirements"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260720T225541Z--HCM-2-2--orchestration--atomic-stage-authority-repair-approved.json",
+      "sections": [
+        "complete immutable prior selected handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T050717Z--HCM-2-2--fresh-atomic-stage-implementation-review-3.json",
+      "sections": [
+        "complete immutable Review 3 dispatch and HCM-2.2-AR3-001"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T053136Z--atomic-stage-implementation-review-3-stop.md",
+      "sections": [
+        "complete immutable Review 3 stop proof and coherent-rewrite RED"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/research/validation-result-exact-document-anchor-options.md",
+      "sections": [
+        "complete non-authoritative research note"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "HCM-2.2-ESC-003 candidate 1.3 exact-result authority repair",
+        "retained identity, promotion, persistence, recovery, and stop obligations"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "HCM-2.2-ESC-003 candidate 1.3 selected contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authority-repair-runtime-vectors-v1.0.json",
+      "sections": [
+        "complete exact candidate/result authority vectors"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json",
+      "sections": [
+        "complete candidate/result/approval/promotion runtime identity vectors"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json",
+      "sections": [
+        "candidate_1_3_transitive_binding_contract",
+        "amendment_positive",
+        "retained recovery model"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/decision/validation-result-exact-document-anchor-decision.md",
+      "sections": [
+        "complete HCM-2.2-ESC-003-D1 decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/plan.md",
+      "sections": [
+        "R-2 current documentation-only scope",
+        "later implementation boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/tasks/todo.md",
+      "sections": [
+        "Candidate 1.3 exact-result authority repair"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T124756Z--HCM-2-2--fresh-exact-result-authority-repair-review-1.json",
+      "sections": [
+        "complete immutable Review 1 dispatch and exact reviewed subject"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T133158Z--exact-result-authority-repair-review-1-remediation.md",
+      "sections": [
+        "complete accepted Review 1 findings and additive remediation proof",
+        "fresh authority lineage, bounded stable inventory, and research provenance correction"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T133346Z--HCM-2-2--fresh-exact-result-authority-repair-review-2.json",
+      "sections": [
+        "complete immutable Review 2 dispatch and exact reviewed subject"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T140344Z--exact-result-authority-repair-review-2-remediation.md",
+      "sections": [
+        "complete accepted Review 2 findings and additive remediation proof",
+        "authoritative result-store alignment, exact intent outputs, fresh transaction namespace, and complete filename boundaries"
+      ]
+    }
+  ],
+  "repo_truth": "The rejected Review 3 implementation remains untouched at exact HEAD 486458acfe8373a977e595a4854ac786166e3e76 and is preserved in an externally verified archive. This separate clean worktree contains only a documentation/control-pack repair. Candidate 1.3, not candidate 1.2, independently selects exact persisted lifecycle-validation result JCS+LF bytes while preserving the result 1.0 and intent 1.2 schemas byte-for-byte. No Rust or HCM-2.3 work is authorized.",
+  "allowed_scope": [
+    "Remain read-only and replay all 31 manifest hashes, sorted order, and aggregate before review.",
+    "Independently review the complete candidate 1.3 subject/final identity, exact result binding, result 1.0 semantic identity and persisted bytes, approval/promotion/intent transitivity, and topological acyclicity.",
+    "Adversarially review freeze-author locking, independent recomputation, bounded no-follow discovery, zero/one/many cardinality, exact replay equality, orphan classification, missing/unsafe/crossed/mismatching refusal, evidence preservation, and no automatic crash completion.",
+    "Review migration for immutable candidate 1.0/1.1/1.2 evidence, mandatory 1.3 reauthoring/new approval, no dual read/upgrade/ref copy/fallback/carry-forward, and unchanged result/intent schemas.",
+    "Verify all required negative vectors, retained atomic promotion recovery obligations, cross-document status truth, and documentation-only scope.",
+    "Independently verify HCM-2.2-ERAR-R1-001 through R1-003 are completely remediated without waiver, including registry-key verification of both new ES256 assertion chains and the all-files preservation correction.",
+    "Independently verify HCM-2.2-ERAR-R2-001 through R2-004 are completely remediated without waiver: result inventory/store identity, every selected intent output JCS+LF hash/length, fresh transaction namespace, and all 21 mirrored inventory rows."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, handoff/ledger writes, archive/source-worktree mutation, or user task hop.",
+    "No Rust/test implementation, implementation resumption, result 1.0 or intent 1.2 schema change, fallback/dual read, immutable evidence rewrite, HCM-2.3 work, or adjacent cleanup.",
+    "Do not inherit Review 1-3 or parent conclusions; derive the entire result independently."
+  ],
+  "tasks": [
+    "Invoke the ordered review disciplines and return BLOCKED on any manifest mismatch.",
+    "Review the immutable Review 1 dispatch and additive remediation proof, then independently reproduce each accepted finding and verify its smallest repair is complete.",
+    "Review the immutable Review 2 dispatch and additive Review 2 remediation proof; reproduce all four findings and verify the current authority is exact and non-colliding.",
+    "Replay every JCS fingerprint plus exact JCS+LF SHA-256/length, schema identity, cross-vector binding, and candidate-subject/result/final separation independently.",
+    "Prove the graph is acyclic and that result binds subject only, final candidate binds the full exact-result tuple, approval binds final candidate, and promotion/intent 1.2 bind it transitively.",
+    "Exercise the required coherent rewrite, timestamp rewrite, forged second candidate, zero/one/many, orphan, missing, wrong digest/length, semantic/raw crossing, unsafe entries, candidate 1.2 fallback, approval carry-forward, and refusal mutation/deletion negatives.",
+    "Return CLEAN only with no Critical, Required, Optional, or Nit finding; otherwise CHANGES_REQUIRED or BLOCKED with exact evidence, failure mode, smallest repair, and missing validation."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md#hcm-22-esc-003-candidate-13-exact-result-authority-repair",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#hcm-22-esc-003-candidate-13-selected-contract",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/authority-repair-runtime-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/runtime-record-fingerprint-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/promotion-transaction-intent-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.2/proof/20260721T123500Z--exact-result-authority-repair-planning-proof.md",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#hcm-22-constitutional-root-implementation-proof-gate"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED on any subject or authority mismatch.",
+    "Return CHANGES_REQUIRED if any identity, exact-byte selection, persistence, replay, orphan, migration, recovery, refusal, evidence-preservation, negative, schema, or cross-document rule is incomplete, ambiguous, contradictory, cyclic, or broader than selected candidate 1.3.",
+    "Do not waive or repair findings, create records, resume implementation, or begin HCM-2.3.",
+    "Return CHANGES_REQUIRED if any Review 1 finding is only partially remediated or if any selected candidate-1.3 authority remains copied from candidate 1.2.",
+    "Return CHANGES_REQUIRED if result discovery differs from the authoritative state store, any selected intent exact output differs from its runtime record, transaction 0002 is reused, or filename below/at/above and owned-name positives are incomplete."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

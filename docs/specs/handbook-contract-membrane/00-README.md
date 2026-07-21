@@ -1,11 +1,11 @@
 # Handbook Contract Membrane Control Pack
 
-**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4 and the bounded HCM-2.1 Project Context canonical-YAML pilot have landed through separately reviewed implementation and closeout commits; HCM-2.2 is stopped at `HCM-2.2-ESC-002` while a documentation-only atomic whole-file output-stage repair receives fresh review; every prior or dirty implementation remains non-authoritative checkpoint evidence
+**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4 and the bounded HCM-2.1 Project Context canonical-YAML pilot have landed through separately reviewed implementation and closeout commits; HCM-2.2 is stopped at `HCM-2.2-ESC-003` while candidate `1.3` exact-result authority receives documentation-only fresh review after Review 3 rejected the implementation under `HCM-2.2-AR3-001`; every implementation subject remains non-authoritative checkpoint evidence
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
-**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; current HCM-2.2 authority is documentation-only, keeps intent `1.2` unchanged, and may freeze absent-or-exact pending output stages through non-authoritative sibling scratch; no Rust resumes before the complete repaired recovery subject is fresh-review `CLEAN` and parent-closed; HCM-2.3 and later slices remain unauthorized
-**Repo-truth snapshot:** 2026-07-20; re-check live code before every slice
+**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; current HCM-2.2 authority is documentation-only, selects candidate `1.3` as the independent downstream exact-result JCS+LF anchor, keeps result `1.0` and intent `1.2` schemas unchanged, preserves the rejected worktree untouched at `486458ac`, and requires fresh `CLEAN` review plus parent closeout before any Rust resumes; HCM-2.3 and later slices remain unauthorized
+**Repo-truth snapshot:** 2026-07-21; re-check live code before every slice
 
 ## Purpose
 
@@ -212,19 +212,23 @@ persisting legacy Project Context Markdown. The implementation changed no
 HCM-1 definition/schema/profile/descriptor byte, leaves shipped readiness
 conditional and `INDETERMINATE`, closes `PG-YAML-01` only for this one family,
 and leaves the temporary flow bridge for deletion no later than HCM-2.4.
-HCM-2.2 produced a broad implementation candidate for the first-party
+HCM-2.2 produced a broad implementation subject for the first-party
 constitutional-root cutover, but it has not landed as authority. Option 1
-repaired the candidate/result identity cycle and received a clean planning
-review. Its later implementation stopped because `W5`-`W7` allowed partial
-pending output stages whose complete bytes cannot be authenticated after
-process memory loss. `HCM-2.2-ESC-002` selects atomic whole-file publication
-from same-filesystem non-authoritative `.output-staging/`: authoritative
-`canonical.new`, `promotion-record.new`, and `lifecycle-transition.new` are
-absent or exact, while partial scratch is ignored by recovery. Intent `1.2`
-remains unchanged. The dirty implementation is preserved only as recoverable
-checkpoint evidence; Rust remains stopped until the complete repaired recovery
-subject is fresh-review `CLEAN`. Charter proof gates remain open, and HCM-2.3
-and all later slices remain future work.
+repaired the candidate/result identity cycle; `HCM-2.2-ESC-002` then selected
+atomic whole-file output staging. Fresh implementation Review 3 rejected the
+result under `HCM-2.2-AR3-001`: semantic-equal result, witness, and mutable
+sidecar-binding audit bytes could be coherently rewritten because candidate
+`1.2` selected only semantic result identity. `HCM-2.2-ESC-003` now selects
+candidate `1.3` as the independent downstream anchor containing semantic result
+ref/fingerprint and exact persisted result JCS+LF SHA-256/length in final
+candidate identity. Candidate-subject identity stays result-independent;
+result `1.0` binds only that subject; new approval binds final candidate; and
+promotion/intent `1.2` bind it transitively without schema changes. Candidate
+`1.0`/`1.1`/`1.2` and approvals remain immutable history with no fallback or
+carry-forward. The rejected worktree is preserved untouched at `486458ac` in a
+verified external archive. Rust remains stopped until the complete repair is
+fresh-review `CLEAN` and parent-closed. Charter proof gates remain open, and
+HCM-2.3 and all later slices remain future work.
 
 The shipped default artifact set is approved in [`slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md`](slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md)
 and its exact kind, profile, descriptor, and selected-registry data now exist.

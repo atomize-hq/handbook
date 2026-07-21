@@ -1,20 +1,89 @@
 # HCM-2.2 Implementation Checklist
 
-**Status:** the implementation selected from the review-clean `HCM-2.2-ESC-001`
-Option 1 planning handoff stopped at the unauthenticatable `W5`-`W7` exact-
-prefix recovery boundary. User-selected
-`HCM-2.2-ESC-002` authorizes only a documentation repair selecting atomic
-whole-file scratch publication. The dirty implementation is preserved in a
-verified recoverable snapshot and remains non-authoritative evidence. Do not
-resume Rust, mark implementation items complete, or start HCM-2.3 until the
-complete repaired recovery subject receives fresh `CLEAN` review and parent
-closeout.
+**Status:** the atomic-stage implementation selected from prior review-clean
+planning authority reached fresh Review 3 and was rejected under
+`HCM-2.2-AR3-001` because result, witness, and mutable sidecar binding bytes
+could be coherently rewritten without changing candidate `1.2` identity.
+User-selected `HCM-2.2-ESC-003` authorizes only a documentation/control-pack
+repair selecting candidate `1.3` as the independent downstream exact-result
+anchor. The rejected implementation is preserved untouched at
+`486458acfe8373a977e595a4854ac786166e3e76` and remains non-authoritative
+evidence. Do not resume Rust, mark implementation items complete, or start
+HCM-2.3 until this complete repaired subject receives fresh `CLEAN` review and
+parent closeout.
 
 The immutable escalation handoff's `status/plan.md` and `status/todo.md` names
 are erroneous. The authoritative mutable paths are this `tasks/todo.md` and
 [`tasks/plan.md`](plan.md); the immutable record remains unchanged.
 
-## Atomic whole-file stage authority repair
+## Candidate 1.3 exact-result authority repair
+
+- [x] Inventory all 1,464 tracked, 13 ordinary-untracked, and 25,235 ignored-
+  untracked paths in
+  `C:\hcm22ar` at exact HEAD
+  `486458acfe8373a977e595a4854ac786166e3e76`; preserve all 26,712 files in a
+  deterministic manifest and external recoverable archive; verify every
+  extracted source entry byte-equal and source inventory stable.
+- [x] Record manifest SHA-256
+  `cbcb29fe7ef50184cbc2efcaa9489d07c99d0d4b51c7e92836e7e2cc3d1cf44a`
+  and archive SHA-256
+  `46dbed286dba9b3b6cedf7ef13340c43dcd56e068a5efa9af1deba0cabadd33d`;
+  leave the rejected worktree HEAD/files/index/staging/status untouched.
+- [x] Create clean worktree `C:\hcm22ar-doc-repair` and branch
+  `codex/hcm-2-2-exact-result-authority-repair` from the exact baseline.
+- [x] Preserve byte-for-byte the implementation proof wall, Review 1--3
+  dispatches, Review 1/2 remediation proofs, Review 3 stop proof,
+  `HCM-2.2-AR3-001` coherent-rewrite RED result, and the original non-
+  authoritative anchor research note in the complete archive. Permit only the
+  reviewed provenance/link correction in the documentation copy; do not
+  rewrite immutable handoffs, dispatches, reviews, or proofs.
+- [x] Select `HCM-2.2-ESC-003-D1`: candidate `1.3` keeps the complete
+  fourteen-field subject fingerprint independent of result binding and adds one
+  closed final-identity binding with exact result ref, semantic fingerprint,
+  exact persisted JCS+LF SHA-256, and LF-inclusive byte length.
+- [x] Keep result `1.0` binding only candidate-subject fingerprint; include the
+  complete exact-result binding in final candidate identity; bind new approval
+  to final candidate; bind promotion and intent `1.2` transitively; prove the
+  topological graph is acyclic; add no result self-hash or mutable companion
+  authority.
+- [x] Freeze author-lock replay: independently recompute subject and expected
+  semantic result authority without `validated_at_utc`; discover by their pair;
+  admit zero/no-result first authoring; admit exactly-one only after candidate
+  identity and exact digest/length; refuse more-than-one, unsafe, crossed,
+  malformed, missing, rewritten, or mismatching authority before mutation.
+- [x] Bound replay inventory to the exact candidate/result roots, 4,096
+  immediate entries per root, 262,144 bytes per file, 1,073,741,824 aggregate
+  bytes per root, 128 UTF-8 filename bytes, exact 79/97-byte ASCII grammars,
+  and two equal complete no-follow scan tuple vectors; refuse every overflow,
+  unsafe/unowned entry, or scan change before mutation.
+- [x] Classify result-without-matching-candidate as an orphan; preserve and
+  refuse; permit no adoption, overwrite, repair, wrapper, result-ref copy,
+  deletion, or automatic crash completion. Require a separately reviewed
+  author-publication transaction if automatic completion is later desired.
+- [x] Freeze migration preserving candidate `1.0`, `1.1`, and `1.2` plus their
+  approvals as immutable evidence while requiring `1.3` reauthoring, result
+  recomputation, and new approvals; admit no dual read, upgrade, fallback,
+  result-ref copy, or approval carry-forward.
+- [x] Update authority-repair, runtime-record, and promotion-intent vectors with
+  exact candidate/result/approval/promotion/intent identities, raw-document
+  bindings, zero/one/many/orphan/migration matrices, and every required
+  negative while keeping result `1.0` and intent `1.2` schemas byte-unchanged.
+- [x] Add the exact decision and planning proof, and update SPEC, `05`, plan,
+  checklist, and necessary mutable `00`/`03`/`04`/`06` surfaces without Rust or
+  HCM-2.3 edits.
+- [x] Freeze the review protocol: each immutable exact-subject dispatch goes to
+  a different fresh isolated read-only reviewer over identity, persistence,
+  replay, orphan, migration, promotion, recovery, vectors, negatives, and
+  control-pack truth; accept every finding without waiver and use a different
+  fresh reviewer after every remediation until `CLEAN`. The final dispatch and
+  parent handoff, rather than this mutable checklist, record the outcome.
+- [x] Freeze the closeout order: only after `CLEAN`, run all documentation/
+  schema/vector/link/handoff/GitNexus/scope gates; create the scoped authority-
+  repair commit; then add only the parent handoff and deterministic ledger in a
+  separate closeout commit. Report the exact implementation selector and stop
+  before Rust and HCM-2.3.
+
+## Retained atomic whole-file stage authority repair
 
 - [x] Inventory the exact dirty worktree at entry HEAD
   `4e164061e18da17cc24d576a26800ab1ecce69c2`; verify no deletions; archive all
@@ -25,8 +94,9 @@ are erroneous. The authoritative mutable paths are this `tasks/todo.md` and
   decision input and select Option A without importing Rust into this clean
   authority-repair worktree.
 - [x] Keep `promotion-transaction-intent` `1.2` schema byte-for-byte unchanged;
-  reproduce its exact 16,019 bytes/SHA-256 plus the unchanged amendment intent
-  fingerprint, 7,607-byte document SHA-256, and 72-byte marker.
+  preserve the candidate-`1.2` amendment intent vector as historical evidence,
+  and freeze the selected candidate-`1.3` amendment intent fingerprint,
+  7,591-byte document SHA-256, and 72-byte marker.
 - [x] Freeze exact `.output-staging/` path, 128-bit random purpose-typed scratch
   names, same-filesystem/create-new/no-follow/bounded-byte rules, retained exact-
   byte and type-specific verification, atomic rename-no-replace, ordered
@@ -88,7 +158,11 @@ are erroneous. The authoritative mutable paths are this `tasks/todo.md` and
   separate parent handoff/ledger closeout commit. Do not resume Rust or HCM-2.3
   in this orchestration.
 
-## Authority-repair planning packet
+## Retained candidate 1.2 authority-repair planning packet
+
+The unchecked boxes in this retained section describe the historical packet as
+it appeared before its later review/implementation sequence. They are not
+current candidate `1.3` work and do not authorize candidate `1.2` fallback.
 
 - [ ] Freeze candidate `1.2` with the complete fourteen-field subject preimage,
   exclusions exactly `{candidate_id, candidate_fingerprint,
@@ -153,7 +227,7 @@ are erroneous. The authoritative mutable paths are this `tasks/todo.md` and
 - [ ] Reproduce every literal schema document, normalized-JCS line, length, expected definition/profile fingerprint, old-byte closure, exact dependency ref/current-producer equality, acyclic graph, descriptor-only intake selection, package, and selected-profile vector before implementation.
 - [ ] Add complete live-field crosswalk and canonical Charter schema/typed/capability positive and exhaustive negative tests.
 - [ ] Add all-mode equivalence and sixteen-item non-overlapping coverage/source/bijection/unknown/contradiction/waiver RED tests.
-- [ ] Add additive intake/approval/promotion `1.1`, candidate `1.2`, and lifecycle-validation-result `1.0` basis lineage plus exact ES256/`fmt: none` authenticator bootstrap/registry/UV/UP/assertion/class/revocation, distinct add-enrollment credential and P-256 keypair, real registry-resolved DER signature verification, exact `AUTHENTICATOR_UNAVAILABLE` fail-before-delta result, caller-intent-only request DTOs, operation-by-status/refusal result DTOs and mandatory crossed-state rejections, forged mapping, stale authority, replay, and ABA RED tests; mechanically prove every current task names candidate `1.2` and treats candidate `1.0`/`1.1` as historical-only.
+- [ ] Add additive intake/approval/promotion `1.1`, candidate `1.3`, and lifecycle-validation-result `1.0` basis lineage plus exact result-document binding/replay/orphan closure and exact ES256/`fmt: none` authenticator bootstrap/registry/UV/UP/assertion/class/revocation, distinct add-enrollment credential and P-256 keypair, real registry-resolved DER signature verification, exact `AUTHENTICATOR_UNAVAILABLE` fail-before-delta result, caller-intent-only request DTOs, operation-by-status/refusal result DTOs and mandatory crossed-state rejections, forged mapping, stale authority, replay, and ABA RED tests; mechanically prove every current implementation task names candidate `1.3` and treats candidate `1.0`/`1.1`/`1.2` as historical-only.
 - [ ] Add a retained lifecycle-head positive with at least two observations whose event-precedence order differs from ref order, plus ref-sorted/reordered, duplicate, incomplete, excess, and retained-head rewrite negatives.
 - [ ] Add create-null versus mandatory-amendment-basis equality at every lineage
   stage plus the exact observed-state promotion recovery table, partial scratch
@@ -183,9 +257,10 @@ are erroneous. The authoritative mutable paths are this `tasks/todo.md` and
 - [ ] Preserve declarations, evidence, defaults, unknowns, contradictions, waivers, prompt events, and mode as typed provenance.
 - [ ] Prove guided-adaptive, express, and agent-assisted produce the same candidate schema and equivalent bytes for identical inputs.
 - [ ] Append additive `1.1` immutable intake records, then construct candidate
-  `1.2` subject, engine-owned lifecycle-validation result `1.0`, and final
-  content-addressed candidate in the exact acyclic order with complete field-
-  source mappings and frozen create/amend basis.
+  `1.3` subject, engine-owned lifecycle-validation result `1.0`, exact persisted
+  result JCS+LF binding, and final content-addressed candidate in the exact
+  acyclic order with complete field-source mappings and frozen create/amend
+  basis; admit no candidate `1.2` fallback or result-ref copy.
 - [ ] Bootstrap and maintain immutable acyclic registry state/transition chains only through exact native CTAP2.1 registration-request/challenge/transcript contracts; validate the three closed challenge branches plus both crossed create/amend basis negatives before native I/O; freeze one non-empty quorum CLI grammar, require untrusted class+authority selectors for one typed `1.1` approval per exact pair, and reject unattended, file/stdin, caller-identity, unsigned, replayed, wrong-RP, or weaker fallback paths.
 - [ ] Expose the four exact named bootstrap/add/revoke/update engine signatures and CLI-to-engine mappings through caller-intent-only requests, including a bootstrap branch with quorum but no caller mappings, an engine-owned opaque-CBOR `NativeAuthenticatorPortV1` transport, exact GetAssertion request key `2` equality to each current challenge JCS hash, byte-closed status-plus-canonical-CBOR response decoding with exact 37-byte `0x05` authenticator data, a source-audited total disjoint `0x01..0xff` status-to-refusal/retryability/non-empty exact-next-action mapping and Admin projection, deterministic eligible-credential filtering/raw-ID ordering/descriptor selection, and the operation-by-status/refusal closed JSON schema with thirteen positive and seventeen mandatory rejection vectors; bind bootstrap transition to its coherent decoded make-credential response/registration, bind add to its distinct enrolled credential and later transitions to fresh decoded GetAssertion response/admin assertion pairs, permit no caller/adaptor-supplied ceremony record/ref or bootstrap mapping, and refuse result states that lose final usable admin or required-pair coverage.
 - [ ] Implement the exact repository-fingerprint-to-user-handle derivation vectors, all 33 first-admission collection/raw-input groups and exact/changed/one-over rejections, unique/canonical waiver-ref/fingerprint ordering and duplicate refusal, and the shared per-credential bounded authenticator-use head/transition chain across approval and registry-admin operations, including zero/nonzero sign-count rules, sequence-4095 final-use replacement/no-lockout behavior with exact add `lockout_refused` and byte-identical refusal pre/post authority, non-adjacent replay refusal, fixed complete-domain registry-then-approval discovery, predecessor-ordered cross-family advanced-head/fork recovery, approval-crash-to-admin/promotion and admin-crash-to-approval/promotion proof.

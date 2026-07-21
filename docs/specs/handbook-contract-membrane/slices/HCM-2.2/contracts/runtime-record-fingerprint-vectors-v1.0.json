@@ -85,8 +85,8 @@
     },
     {
       "audit_only_excluded_fields": [],
-      "expected_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
-      "expected_id": "candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
+      "expected_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+      "expected_id": "candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
       "fingerprint_field": "candidate_fingerprint",
       "fingerprint_preimage": {
         "basis_artifact_fingerprint": null,
@@ -98,27 +98,29 @@
           }
         ],
         "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
-        "normalized_content_ref": "candidates/candidate.yaml",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
         "profile_ref": "handbook.profile.shipped-root@1.1.0",
         "promotion_eligibility": "requires_approval",
         "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
         "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
         "schema_id": "handbook.artifact-candidate",
-        "schema_version": "1.1",
+        "schema_version": "1.3",
         "target_instance_id": "project_authority",
         "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
         "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
         "unresolved_coverage_ids": [],
-        "validation_result_refs": [
-          "validation_001"
-        ]
+        "candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
+        "validation_result_binding": {
+          "result_byte_length": 4334,
+          "result_document_sha256": "sha256:c6696b0f9e8a8e3d1acf3fe916a3e18922869bf2cb9b2bee5457955a9488d538",
+          "validation_result_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+          "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json"
+        }
       },
       "id_field": "candidate_id",
       "id_location": "record",
       "record": {
         "basis_artifact_fingerprint": null,
-        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
-        "candidate_id": "candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
         "field_sources": [
           {
             "coverage_id": "policy.authority_and_revision",
@@ -127,28 +129,256 @@
           }
         ],
         "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
-        "normalized_content_ref": "candidates/candidate.yaml",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
         "profile_ref": "handbook.profile.shipped-root@1.1.0",
         "promotion_eligibility": "requires_approval",
         "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
         "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
         "schema_id": "handbook.artifact-candidate",
-        "schema_version": "1.1",
+        "schema_version": "1.3",
         "target_instance_id": "project_authority",
         "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
         "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
         "unresolved_coverage_ids": [],
-        "validation_result_refs": [
-          "validation_001"
-        ]
+        "candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
+        "validation_result_binding": {
+          "result_byte_length": 4334,
+          "result_document_sha256": "sha256:c6696b0f9e8a8e3d1acf3fe916a3e18922869bf2cb9b2bee5457955a9488d538",
+          "validation_result_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+          "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json"
+        },
+        "candidate_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+        "candidate_id": "candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961"
       },
       "record_class": "candidate",
-      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields"
+      "schema_contract": "HCM-2.2 additive candidate 1.3 with complete independent downstream exact-result binding",
+      "candidate_subject_fingerprint_preimage": {
+        "basis_artifact_fingerprint": null,
+        "field_sources": [
+          {
+            "coverage_id": "policy.authority_and_revision",
+            "source_kind": "user_declaration",
+            "target_path": "/policy/revision"
+          }
+        ],
+        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_eligibility": "requires_approval",
+        "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.3",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+        "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+        "unresolved_coverage_ids": []
+      },
+      "expected_candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281"
+    },
+    {
+      "audit_only_excluded_fields": [
+        "validated_at_utc"
+      ],
+      "expected_document_byte_length": 4334,
+      "expected_document_sha256": "sha256:c6696b0f9e8a8e3d1acf3fe916a3e18922869bf2cb9b2bee5457955a9488d538",
+      "expected_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+      "expected_id": "lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+      "fingerprint_field": "validation_result_fingerprint",
+      "fingerprint_preimage": {
+        "active_observations": [],
+        "basis_artifact_fingerprint": null,
+        "candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "intake_record_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
+        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "lifecycle_head_fingerprint": null,
+        "lifecycle_head_ref": null,
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "lifecycle_state": "absent",
+        "lifecycle_state_fingerprint": null,
+        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "observed_current_artifact_fingerprint": null,
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "reopened_coverage_ids": [],
+        "resolved_definitions": [
+          {
+            "definition_role": "approval_policy",
+            "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+            "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29"
+          },
+          {
+            "definition_role": "capability_contract",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998"
+          },
+          {
+            "definition_role": "intake_definition",
+            "definition_ref": "handbook.intake.charter@1.0.0",
+            "definition_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
+          },
+          {
+            "definition_role": "lifecycle_policy",
+            "definition_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+            "definition_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+            "definition_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0",
+            "definition_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766"
+          },
+          {
+            "definition_role": "renderer_definition",
+            "definition_ref": "handbook.renderer.charter-review-markdown@1.0.0",
+            "definition_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7"
+          },
+          {
+            "definition_role": "review_trigger",
+            "definition_ref": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+            "definition_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+            "definition_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10"
+          },
+          {
+            "definition_role": "target_kind",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e"
+          },
+          {
+            "definition_role": "target_schema",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836"
+          },
+          {
+            "definition_role": "waiver_policy",
+            "definition_ref": "handbook.waiver.constitutional-intake@1.0.0",
+            "definition_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.lifecycle-validation-result",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority",
+        "validation_status": "passed"
+      },
+      "id_field": "validation_result_id",
+      "id_location": "record",
+      "record": {
+        "active_observations": [],
+        "basis_artifact_fingerprint": null,
+        "candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "intake_record_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
+        "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
+        "lifecycle_head_fingerprint": null,
+        "lifecycle_head_ref": null,
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "lifecycle_state": "absent",
+        "lifecycle_state_fingerprint": null,
+        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "observed_current_artifact_fingerprint": null,
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "reopened_coverage_ids": [],
+        "resolved_definitions": [
+          {
+            "definition_role": "approval_policy",
+            "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+            "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29"
+          },
+          {
+            "definition_role": "capability_contract",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998"
+          },
+          {
+            "definition_role": "intake_definition",
+            "definition_ref": "handbook.intake.charter@1.0.0",
+            "definition_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
+          },
+          {
+            "definition_role": "lifecycle_policy",
+            "definition_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+            "definition_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+            "definition_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0",
+            "definition_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766"
+          },
+          {
+            "definition_role": "renderer_definition",
+            "definition_ref": "handbook.renderer.charter-review-markdown@1.0.0",
+            "definition_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7"
+          },
+          {
+            "definition_role": "review_trigger",
+            "definition_ref": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+            "definition_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+            "definition_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10"
+          },
+          {
+            "definition_role": "target_kind",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e"
+          },
+          {
+            "definition_role": "target_schema",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836"
+          },
+          {
+            "definition_role": "waiver_policy",
+            "definition_ref": "handbook.waiver.constitutional-intake@1.0.0",
+            "definition_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.lifecycle-validation-result",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority",
+        "validation_status": "passed",
+        "validated_at_utc": "2026-07-20T10:00:00Z",
+        "validation_result_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+        "validation_result_id": "lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8"
+      },
+      "record_class": "lifecycle-validation-result",
+      "schema_contract": "unchanged closed lifecycle-validation-result 1.0 schema; exact document selected by candidate 1.3"
     },
     {
       "audit_only_excluded_fields": [],
-      "expected_fingerprint": "sha256:09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1",
-      "expected_id": "approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1",
+      "expected_fingerprint": "sha256:ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2",
+      "expected_id": "approval_ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2",
       "fingerprint_field": "approval_fingerprint",
       "fingerprint_preimage": {
         "accepted_waivers": [],
@@ -157,14 +387,14 @@
         "approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
         "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
         "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
-        "authenticator_assertion_fingerprint": "sha256:229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
-        "authenticator_assertion_ref": "authenticator-assertions/authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf.json",
+        "authenticator_assertion_fingerprint": "sha256:2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a",
+        "authenticator_assertion_ref": "authenticator-assertions/authenticator-assertion_2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a.json",
         "authority_ref": "Project owner",
         "basis_artifact_fingerprint": null,
-        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
-        "candidate_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+        "candidate_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+        "candidate_ref": "candidates/candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961.json",
         "conditions": [],
-        "decided_at_utc": "2026-07-19T16:01:00Z",
+        "decided_at_utc": "2026-07-21T13:20:00Z",
         "decision": "approved",
         "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
         "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
@@ -177,43 +407,43 @@
         "accepted_waivers": [],
         "actor_ref": "credential:sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
         "approval_class": "Project owner approval",
-        "approval_fingerprint": "sha256:09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1",
-        "approval_id": "approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1",
         "approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
         "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
         "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
-        "authenticator_assertion_fingerprint": "sha256:229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
-        "authenticator_assertion_ref": "authenticator-assertions/authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf.json",
+        "authenticator_assertion_fingerprint": "sha256:2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a",
+        "authenticator_assertion_ref": "authenticator-assertions/authenticator-assertion_2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a.json",
         "authority_ref": "Project owner",
         "basis_artifact_fingerprint": null,
-        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
-        "candidate_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+        "candidate_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+        "candidate_ref": "candidates/candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961.json",
         "conditions": [],
-        "decided_at_utc": "2026-07-19T16:01:00Z",
+        "decided_at_utc": "2026-07-21T13:20:00Z",
         "decision": "approved",
         "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
         "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
         "schema_id": "handbook.artifact-approval-record",
-        "schema_version": "1.1"
+        "schema_version": "1.1",
+        "approval_fingerprint": "sha256:ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2",
+        "approval_id": "approval_ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2"
       },
       "record_class": "approval",
-      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields"
+      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields; new candidate 1.3 approval"
     },
     {
       "audit_only_excluded_fields": [],
-      "expected_fingerprint": "sha256:9bbd10e6e762618c58ae369dbaaef70c6dbc79da02b4155c09979d5ab7237b7a",
-      "expected_id": "promotion_9bbd10e6e762618c58ae369dbaaef70c6dbc79da02b4155c09979d5ab7237b7a",
+      "expected_fingerprint": "sha256:8a1e5d73ac0163f4eb0acc53d39dbb4c7a027c5c2cae0cf3d80fd249733e1e63",
+      "expected_id": "promotion_8a1e5d73ac0163f4eb0acc53d39dbb4c7a027c5c2cae0cf3d80fd249733e1e63",
       "fingerprint_field": "promotion_fingerprint",
       "fingerprint_preimage": {
         "approval_refs": [
-          "approvals/approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1.json"
+          "approvals/approval_ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2.json"
         ],
         "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
         "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
         "authorized_by_ref": "Project owner",
         "basis_artifact_fingerprint": null,
-        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
-        "candidate_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+        "candidate_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+        "candidate_ref": "candidates/candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961.json",
         "canonical_artifact_fingerprint": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
         "canonical_artifact_ref": ".handbook/project/charter.yaml",
         "decision": "approved",
@@ -232,28 +462,26 @@
         "schema_version": "1.1",
         "target_instance_id": "project_authority",
         "validation_result_refs": [
-          "validation_001"
+          "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json"
         ]
       },
       "id_field": "promotion_id",
       "id_location": "record",
       "record": {
         "approval_refs": [
-          "approvals/approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1.json"
+          "approvals/approval_ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2.json"
         ],
         "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
         "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
         "authorized_by_ref": "Project owner",
         "basis_artifact_fingerprint": null,
-        "candidate_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
-        "candidate_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+        "candidate_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+        "candidate_ref": "candidates/candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961.json",
         "canonical_artifact_fingerprint": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
         "canonical_artifact_ref": ".handbook/project/charter.yaml",
         "decision": "approved",
         "expected_current_artifact_fingerprint": null,
         "profile_ref": "handbook.profile.shipped-root@1.1.0",
-        "promotion_fingerprint": "sha256:9bbd10e6e762618c58ae369dbaaef70c6dbc79da02b4155c09979d5ab7237b7a",
-        "promotion_id": "promotion_9bbd10e6e762618c58ae369dbaaef70c6dbc79da02b4155c09979d5ab7237b7a",
         "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
         "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
         "resolved_definitions": [
@@ -267,11 +495,13 @@
         "schema_version": "1.1",
         "target_instance_id": "project_authority",
         "validation_result_refs": [
-          "validation_001"
-        ]
+          "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json"
+        ],
+        "promotion_fingerprint": "sha256:8a1e5d73ac0163f4eb0acc53d39dbb4c7a027c5c2cae0cf3d80fd249733e1e63",
+        "promotion_id": "promotion_8a1e5d73ac0163f4eb0acc53d39dbb4c7a027c5c2cae0cf3d80fd249733e1e63"
       },
       "record_class": "promotion",
-      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields"
+      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields; candidate 1.3 create chain"
     },
     {
       "audit_only_excluded_fields": [],
@@ -563,12 +793,10 @@
       "schema_contract": "closed published schema"
     },
     {
-      "record_class": "authenticator-get-assertion-response",
-      "schema_contract": "closed decoded status-plus-canonical-CBOR GetAssertion response",
       "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228",
+      "expected_id": "authenticator-get-assertion-response_e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228",
       "fingerprint_field": "response_fingerprint",
-      "id_field": "response_id",
-      "id_location": "record",
       "fingerprint_preimage": {
         "schema_id": "handbook.authenticator-get-assertion-response",
         "schema_version": "1.0",
@@ -583,21 +811,20 @@
         "flags_byte": 5,
         "user_present": true,
         "user_verified": true,
-        "sign_count": 7,
-        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABw==",
+        "sign_count": 8,
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACA==",
         "algorithm": "ES256",
         "signature_encoding": "asn1-der-ecdsa",
-        "signature_base64": "MEYCIQCKnf4uWM6StCqRq06Md5FPN0BjziIlxNsBF8cI7YI3DAIhAMX4sCac/8NJvjFBgh03m2Sm0nZkDGKSnQKcKkpt4SQI",
-        "raw_response_base64": "AKMBomJpZFgg7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75pkdHlwZWpwdWJsaWMta2V5AlglHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABwNYSDBGAiEAip3+LljOkrQqkatOjHeRTzdAY84iJcTbARfHCO2CNwwCIQDF+LAmnP/DSb4xQYIdN5tkptJ2ZAxikp0CnCpKbeEkCA==",
+        "signature_base64": "MEQCIFw1+3WZtoMTqquUFKaRQcjq1iOUZp/fRF7wmNM5JTT5AiAa73UitDRRJp6TATPG1Tl41XPvZg2yynwq19CoRyr3lw==",
+        "raw_response_base64": "AKMBomJpZFgg7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75pkdHlwZWpwdWJsaWMta2V5AlglHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACANYRjBEAiBcNft1mbaDE6qrlBSmkUHI6tYjlGaf30Re8JjTOSU0+QIgGu91IrQ0USaekwEzxtU5eNVz72YNssp8KtfQqEcq95c=",
         "attested_credential_data_included": false,
         "extensions_included": false
       },
-      "expected_fingerprint": "sha256:dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
-      "expected_id": "authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+      "id_field": "response_id",
+      "id_location": "record",
       "record": {
         "schema_id": "handbook.authenticator-get-assertion-response",
         "schema_version": "1.0",
-        "response_id": "authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
         "protocol_id": "fido2-ctap2.1-native",
         "status_byte": 0,
         "credential_descriptor": {
@@ -609,44 +836,47 @@
         "flags_byte": 5,
         "user_present": true,
         "user_verified": true,
-        "sign_count": 7,
-        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABw==",
+        "sign_count": 8,
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACA==",
         "algorithm": "ES256",
         "signature_encoding": "asn1-der-ecdsa",
-        "signature_base64": "MEYCIQCKnf4uWM6StCqRq06Md5FPN0BjziIlxNsBF8cI7YI3DAIhAMX4sCac/8NJvjFBgh03m2Sm0nZkDGKSnQKcKkpt4SQI",
-        "raw_response_base64": "AKMBomJpZFgg7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75pkdHlwZWpwdWJsaWMta2V5AlglHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABwNYSDBGAiEAip3+LljOkrQqkatOjHeRTzdAY84iJcTbARfHCO2CNwwCIQDF+LAmnP/DSb4xQYIdN5tkptJ2ZAxikp0CnCpKbeEkCA==",
-        "response_fingerprint": "sha256:dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+        "signature_base64": "MEQCIFw1+3WZtoMTqquUFKaRQcjq1iOUZp/fRF7wmNM5JTT5AiAa73UitDRRJp6TATPG1Tl41XPvZg2yynwq19CoRyr3lw==",
+        "raw_response_base64": "AKMBomJpZFgg7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75pkdHlwZWpwdWJsaWMta2V5AlglHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACANYRjBEAiBcNft1mbaDE6qrlBSmkUHI6tYjlGaf30Re8JjTOSU0+QIgGu91IrQ0USaekwEzxtU5eNVz72YNssp8KtfQqEcq95c=",
         "attested_credential_data_included": false,
-        "extensions_included": false
-      }
+        "extensions_included": false,
+        "response_fingerprint": "sha256:e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228",
+        "response_id": "authenticator-get-assertion-response_e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228"
+      },
+      "record_class": "authenticator-get-assertion-response",
+      "schema_contract": "closed decoded status-plus-canonical-CBOR GetAssertion response for fresh candidate 1.3 approval"
     },
     {
       "audit_only_excluded_fields": [
         "verified_at_utc"
       ],
-      "expected_fingerprint": "sha256:229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
-      "expected_id": "authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
+      "expected_fingerprint": "sha256:2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a",
+      "expected_id": "authenticator-assertion_2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a",
       "fingerprint_field": "assertion_fingerprint",
       "fingerprint_preimage": {
         "algorithm": "ES256",
-        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABw==",
-        "challenge_fingerprint": "sha256:2f1ef052391f0121251e99c520edf2e9dc55690104e475dc8766d33b49e78dff",
-        "challenge_jcs_base64": "eyIkc2NoZW1hIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAyMC0xMi9zY2hlbWEiLCJhY2NlcHRlZF93YWl2ZXJfZmluZ2VycHJpbnRzIjpbXSwiYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXBwcm92ZXJfcmVnaXN0cnlfc3RhdGVfZmluZ2VycHJpbnQiOiJzaGEyNTY6NzhmZDZiMDQ1MDVhNGZlMzQ1MWE5OWE5OGNhNTcwMGE0NGJjYjlkMjE2YzQ3YzJjZTUwMTI4OGQwYTQwNzhlMiIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIiwiYmFzaXNfYXJ0aWZhY3RfZmluZ2VycHJpbnQiOm51bGwsImNhbmRpZGF0ZV9maW5nZXJwcmludCI6InNoYTI1NjpiMTRjOWY4OWFiYzRlNTg5MmE4Y2U3NzU3YWUzZTFmYjc0MDhjOGIzMWRiYzk4ODMxNDdmNzcyODgxYzA3MGE4IiwiY2FuZGlkYXRlX3JlZiI6ImNhbmRpZGF0ZXMvY2FuZGlkYXRlX2IxNGM5Zjg5YWJjNGU1ODkyYThjZTc3NTdhZTNlMWZiNzQwOGM4YjMxZGJjOTg4MzE0N2Y3NzI4ODFjMDcwYTguanNvbiIsIm5vbmNlX2Jhc2U2NCI6IkFBRUNBd1FGQmdjSUNRb0xEQTBPRHhBUkVoTVVGUllYR0JrYUd4d2RIaDg9Iiwib3BlcmF0aW9uIjoiaW5pdGlhbF9jaGFydGVyX2FwcHJvdmFsIiwib3BlcmF0aW9uX2lkIjoiaW5pdGlhbC1hcHByb3ZhbC0wMDEiLCJyZWdpc3RyeV9oZWFkX3RyYW5zaXRpb25fZmluZ2VycHJpbnQiOiJzaGEyNTY6YTZmNjUxMmNlOGY3YzkzZDk4YzZhMmM5NDQ5MTE5MjU0MzAyODFhNDEwZDdmMTgxYTVlMGU4OTM4Yzg2YmRmZCIsInJlcG9zaXRvcnlfaWRlbnRpdHlfZmluZ2VycHJpbnQiOiJzaGEyNTY6MTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMSIsInNjaGVtYV9pZCI6ImhhbmRib29rLmF1dGhlbnRpY2F0b3ItY2hhbGxlbmdlIiwic2NoZW1hX3ZlcnNpb24iOiIxLjAifQ==",
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACA==",
+        "challenge_fingerprint": "sha256:c519c443436f74602f4ed62387b7c5c75a010e4f94065ee07cedeed9987f8e9d",
+        "challenge_jcs_base64": "eyIkc2NoZW1hIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAyMC0xMi9zY2hlbWEiLCJhY2NlcHRlZF93YWl2ZXJfZmluZ2VycHJpbnRzIjpbXSwiYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXBwcm92ZXJfcmVnaXN0cnlfc3RhdGVfZmluZ2VycHJpbnQiOiJzaGEyNTY6NzhmZDZiMDQ1MDVhNGZlMzQ1MWE5OWE5OGNhNTcwMGE0NGJjYjlkMjE2YzQ3YzJjZTUwMTI4OGQwYTQwNzhlMiIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIiwiYmFzaXNfYXJ0aWZhY3RfZmluZ2VycHJpbnQiOm51bGwsImNhbmRpZGF0ZV9maW5nZXJwcmludCI6InNoYTI1NjpmMmU4YzM3MzZjMzljMzhlMmYxYjQxYmJiYWM3Y2RkODM5ZWUxZmM5NTRlNzdmZTE1ZTQ5MDk4NDFjZGE0OTYxIiwiY2FuZGlkYXRlX3JlZiI6ImNhbmRpZGF0ZXMvY2FuZGlkYXRlX2YyZThjMzczNmMzOWMzOGUyZjFiNDFiYmJhYzdjZGQ4MzllZTFmYzk1NGU3N2ZlMTVlNDkwOTg0MWNkYTQ5NjEuanNvbiIsIm5vbmNlX2Jhc2U2NCI6IkFBRUNBd1FGQmdjSUNRb0xEQTBPRHhBUkVoTVVGUllYR0JrYUd4d2RIaDg9Iiwib3BlcmF0aW9uIjoiaW5pdGlhbF9jaGFydGVyX2FwcHJvdmFsIiwib3BlcmF0aW9uX2lkIjoiY2FuZGlkYXRlLTEtMy1jcmVhdGUtYXBwcm92YWwtMDAxIiwicmVnaXN0cnlfaGVhZF90cmFuc2l0aW9uX2ZpbmdlcnByaW50Ijoic2hhMjU2OmE2ZjY1MTJjZThmN2M5M2Q5OGM2YTJjOTQ0OTExOTI1NDMwMjgxYTQxMGQ3ZjE4MWE1ZTBlODkzOGM4NmJkZmQiLCJyZXBvc2l0b3J5X2lkZW50aXR5X2ZpbmdlcnByaW50Ijoic2hhMjU2OjExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTEiLCJzY2hlbWFfaWQiOiJoYW5kYm9vay5hdXRoZW50aWNhdG9yLWNoYWxsZW5nZSIsInNjaGVtYV92ZXJzaW9uIjoiMS4wIn0=",
         "challenge_schema_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
-        "client_data_hash": "sha256:2f1ef052391f0121251e99c520edf2e9dc55690104e475dc8766d33b49e78dff",
+        "client_data_hash": "sha256:c519c443436f74602f4ed62387b7c5c75a010e4f94065ee07cedeed9987f8e9d",
         "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
         "protocol_id": "fido2-ctap2.1-native",
         "rp_id": "handbook.local",
         "schema_id": "handbook.authenticator-assertion",
         "schema_version": "1.0",
-        "sign_count": 7,
-        "signature_base64": "MEYCIQCKnf4uWM6StCqRq06Md5FPN0BjziIlxNsBF8cI7YI3DAIhAMX4sCac/8NJvjFBgh03m2Sm0nZkDGKSnQKcKkpt4SQI",
-        "signed_preimage_sha256": "sha256:67c7382635e687abdf7d7932cdd6824ce609c712e4a68d2af5ec6ad696ae49bd",
+        "sign_count": 8,
+        "signature_base64": "MEQCIFw1+3WZtoMTqquUFKaRQcjq1iOUZp/fRF7wmNM5JTT5AiAa73UitDRRJp6TATPG1Tl41XPvZg2yynwq19CoRyr3lw==",
+        "signed_preimage_sha256": "sha256:b5899ab373998391209fd26024165b38e4d98dc015e2ddc89a9266e9543a4f26",
         "user_present": true,
         "user_verified": true,
         "decoded_response_schema_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
-        "decoded_response_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29.json",
-        "decoded_response_fingerprint": "sha256:dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+        "decoded_response_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228.json",
+        "decoded_response_fingerprint": "sha256:e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228",
         "flags_byte": 5,
         "attested_credential_data_included": false,
         "extensions_included": false
@@ -655,33 +885,33 @@
       "id_location": "record",
       "record": {
         "algorithm": "ES256",
-        "assertion_fingerprint": "sha256:229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
-        "assertion_id": "authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
-        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAABw==",
-        "challenge_fingerprint": "sha256:2f1ef052391f0121251e99c520edf2e9dc55690104e475dc8766d33b49e78dff",
-        "challenge_jcs_base64": "eyIkc2NoZW1hIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAyMC0xMi9zY2hlbWEiLCJhY2NlcHRlZF93YWl2ZXJfZmluZ2VycHJpbnRzIjpbXSwiYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXBwcm92ZXJfcmVnaXN0cnlfc3RhdGVfZmluZ2VycHJpbnQiOiJzaGEyNTY6NzhmZDZiMDQ1MDVhNGZlMzQ1MWE5OWE5OGNhNTcwMGE0NGJjYjlkMjE2YzQ3YzJjZTUwMTI4OGQwYTQwNzhlMiIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIiwiYmFzaXNfYXJ0aWZhY3RfZmluZ2VycHJpbnQiOm51bGwsImNhbmRpZGF0ZV9maW5nZXJwcmludCI6InNoYTI1NjpiMTRjOWY4OWFiYzRlNTg5MmE4Y2U3NzU3YWUzZTFmYjc0MDhjOGIzMWRiYzk4ODMxNDdmNzcyODgxYzA3MGE4IiwiY2FuZGlkYXRlX3JlZiI6ImNhbmRpZGF0ZXMvY2FuZGlkYXRlX2IxNGM5Zjg5YWJjNGU1ODkyYThjZTc3NTdhZTNlMWZiNzQwOGM4YjMxZGJjOTg4MzE0N2Y3NzI4ODFjMDcwYTguanNvbiIsIm5vbmNlX2Jhc2U2NCI6IkFBRUNBd1FGQmdjSUNRb0xEQTBPRHhBUkVoTVVGUllYR0JrYUd4d2RIaDg9Iiwib3BlcmF0aW9uIjoiaW5pdGlhbF9jaGFydGVyX2FwcHJvdmFsIiwib3BlcmF0aW9uX2lkIjoiaW5pdGlhbC1hcHByb3ZhbC0wMDEiLCJyZWdpc3RyeV9oZWFkX3RyYW5zaXRpb25fZmluZ2VycHJpbnQiOiJzaGEyNTY6YTZmNjUxMmNlOGY3YzkzZDk4YzZhMmM5NDQ5MTE5MjU0MzAyODFhNDEwZDdmMTgxYTVlMGU4OTM4Yzg2YmRmZCIsInJlcG9zaXRvcnlfaWRlbnRpdHlfZmluZ2VycHJpbnQiOiJzaGEyNTY6MTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMSIsInNjaGVtYV9pZCI6ImhhbmRib29rLmF1dGhlbnRpY2F0b3ItY2hhbGxlbmdlIiwic2NoZW1hX3ZlcnNpb24iOiIxLjAifQ==",
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACA==",
+        "challenge_fingerprint": "sha256:c519c443436f74602f4ed62387b7c5c75a010e4f94065ee07cedeed9987f8e9d",
+        "challenge_jcs_base64": "eyIkc2NoZW1hIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAyMC0xMi9zY2hlbWEiLCJhY2NlcHRlZF93YWl2ZXJfZmluZ2VycHJpbnRzIjpbXSwiYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXBwcm92ZXJfcmVnaXN0cnlfc3RhdGVfZmluZ2VycHJpbnQiOiJzaGEyNTY6NzhmZDZiMDQ1MDVhNGZlMzQ1MWE5OWE5OGNhNTcwMGE0NGJjYjlkMjE2YzQ3YzJjZTUwMTI4OGQwYTQwNzhlMiIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIiwiYmFzaXNfYXJ0aWZhY3RfZmluZ2VycHJpbnQiOm51bGwsImNhbmRpZGF0ZV9maW5nZXJwcmludCI6InNoYTI1NjpmMmU4YzM3MzZjMzljMzhlMmYxYjQxYmJiYWM3Y2RkODM5ZWUxZmM5NTRlNzdmZTE1ZTQ5MDk4NDFjZGE0OTYxIiwiY2FuZGlkYXRlX3JlZiI6ImNhbmRpZGF0ZXMvY2FuZGlkYXRlX2YyZThjMzczNmMzOWMzOGUyZjFiNDFiYmJhYzdjZGQ4MzllZTFmYzk1NGU3N2ZlMTVlNDkwOTg0MWNkYTQ5NjEuanNvbiIsIm5vbmNlX2Jhc2U2NCI6IkFBRUNBd1FGQmdjSUNRb0xEQTBPRHhBUkVoTVVGUllYR0JrYUd4d2RIaDg9Iiwib3BlcmF0aW9uIjoiaW5pdGlhbF9jaGFydGVyX2FwcHJvdmFsIiwib3BlcmF0aW9uX2lkIjoiY2FuZGlkYXRlLTEtMy1jcmVhdGUtYXBwcm92YWwtMDAxIiwicmVnaXN0cnlfaGVhZF90cmFuc2l0aW9uX2ZpbmdlcnByaW50Ijoic2hhMjU2OmE2ZjY1MTJjZThmN2M5M2Q5OGM2YTJjOTQ0OTExOTI1NDMwMjgxYTQxMGQ3ZjE4MWE1ZTBlODkzOGM4NmJkZmQiLCJyZXBvc2l0b3J5X2lkZW50aXR5X2ZpbmdlcnByaW50Ijoic2hhMjU2OjExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTEiLCJzY2hlbWFfaWQiOiJoYW5kYm9vay5hdXRoZW50aWNhdG9yLWNoYWxsZW5nZSIsInNjaGVtYV92ZXJzaW9uIjoiMS4wIn0=",
         "challenge_schema_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
-        "client_data_hash": "sha256:2f1ef052391f0121251e99c520edf2e9dc55690104e475dc8766d33b49e78dff",
+        "client_data_hash": "sha256:c519c443436f74602f4ed62387b7c5c75a010e4f94065ee07cedeed9987f8e9d",
         "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
         "protocol_id": "fido2-ctap2.1-native",
         "rp_id": "handbook.local",
         "schema_id": "handbook.authenticator-assertion",
         "schema_version": "1.0",
-        "sign_count": 7,
-        "signature_base64": "MEYCIQCKnf4uWM6StCqRq06Md5FPN0BjziIlxNsBF8cI7YI3DAIhAMX4sCac/8NJvjFBgh03m2Sm0nZkDGKSnQKcKkpt4SQI",
-        "signed_preimage_sha256": "sha256:67c7382635e687abdf7d7932cdd6824ce609c712e4a68d2af5ec6ad696ae49bd",
+        "sign_count": 8,
+        "signature_base64": "MEQCIFw1+3WZtoMTqquUFKaRQcjq1iOUZp/fRF7wmNM5JTT5AiAa73UitDRRJp6TATPG1Tl41XPvZg2yynwq19CoRyr3lw==",
+        "signed_preimage_sha256": "sha256:b5899ab373998391209fd26024165b38e4d98dc015e2ddc89a9266e9543a4f26",
         "user_present": true,
         "user_verified": true,
-        "verified_at_utc": "2026-07-19T16:04:00Z",
         "decoded_response_schema_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
-        "decoded_response_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29.json",
-        "decoded_response_fingerprint": "sha256:dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
+        "decoded_response_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228.json",
+        "decoded_response_fingerprint": "sha256:e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228",
         "flags_byte": 5,
         "attested_credential_data_included": false,
-        "extensions_included": false
+        "extensions_included": false,
+        "verified_at_utc": "2026-07-21T13:20:01Z",
+        "assertion_fingerprint": "sha256:2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a",
+        "assertion_id": "authenticator-assertion_2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a"
       },
       "record_class": "authenticator-assertion",
-      "schema_contract": "closed published schema"
+      "schema_contract": "closed published schema; challenge independently binds the fresh candidate 1.3 final fingerprint"
     },
     {
       "audit_only_excluded_fields": [],
@@ -811,13 +1041,612 @@
       },
       "record_class": "trigger-evidence",
       "schema_contract": "closed published schema"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+      "expected_id": "candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+      "fingerprint_field": "candidate_fingerprint",
+      "fingerprint_preimage": {
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "field_sources": [
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/in_production_today"
+          }
+        ],
+        "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_eligibility": "requires_approval",
+        "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.3",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+        "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+        "unresolved_coverage_ids": [],
+        "candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
+        "validation_result_binding": {
+          "result_byte_length": 5009,
+          "result_document_sha256": "sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f",
+          "validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+          "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json"
+        }
+      },
+      "id_field": "candidate_id",
+      "id_location": "record",
+      "record": {
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "field_sources": [
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/in_production_today"
+          }
+        ],
+        "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_eligibility": "requires_approval",
+        "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.3",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+        "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+        "unresolved_coverage_ids": [],
+        "candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
+        "validation_result_binding": {
+          "result_byte_length": 5009,
+          "result_document_sha256": "sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f",
+          "validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+          "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json"
+        },
+        "candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+        "candidate_id": "candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99"
+      },
+      "record_class": "candidate-amendment",
+      "schema_contract": "HCM-2.2 additive candidate 1.3 amendment with complete independent downstream exact-result binding",
+      "candidate_subject_fingerprint_preimage": {
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "field_sources": [
+          {
+            "coverage_id": "operational_reality.production_state",
+            "source_kind": "evidenced_inference",
+            "target_path": "/project/operational_reality/in_production_today"
+          }
+        ],
+        "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "promotion_eligibility": "requires_approval",
+        "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.3",
+        "target_instance_id": "project_authority",
+        "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+        "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+        "unresolved_coverage_ids": []
+      },
+      "expected_candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747"
+    },
+    {
+      "audit_only_excluded_fields": [
+        "validated_at_utc"
+      ],
+      "expected_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+      "expected_id": "lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+      "fingerprint_field": "validation_result_fingerprint",
+      "fingerprint_preimage": {
+        "active_observations": [
+          {
+            "observation_fingerprint": "sha256:b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
+            "observation_ref": "lifecycle-observations/lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098.json"
+          }
+        ],
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "intake_record_fingerprint": "sha256:65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff",
+        "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "lifecycle_head_fingerprint": "sha256:ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde",
+        "lifecycle_head_ref": "lifecycle-transitions/lifecycle-transition_ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde.json",
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "lifecycle_state": "reassessment_required",
+        "lifecycle_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "observed_current_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "reopened_coverage_ids": [
+          "operational_reality.production_state"
+        ],
+        "resolved_definitions": [
+          {
+            "definition_role": "approval_policy",
+            "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+            "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29"
+          },
+          {
+            "definition_role": "capability_contract",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998"
+          },
+          {
+            "definition_role": "intake_definition",
+            "definition_ref": "handbook.intake.charter@1.0.0",
+            "definition_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
+          },
+          {
+            "definition_role": "lifecycle_policy",
+            "definition_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+            "definition_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+            "definition_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0",
+            "definition_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766"
+          },
+          {
+            "definition_role": "renderer_definition",
+            "definition_ref": "handbook.renderer.charter-review-markdown@1.0.0",
+            "definition_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7"
+          },
+          {
+            "definition_role": "review_trigger",
+            "definition_ref": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+            "definition_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+            "definition_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10"
+          },
+          {
+            "definition_role": "target_kind",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e"
+          },
+          {
+            "definition_role": "target_schema",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836"
+          },
+          {
+            "definition_role": "waiver_policy",
+            "definition_ref": "handbook.waiver.constitutional-intake@1.0.0",
+            "definition_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.lifecycle-validation-result",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority",
+        "validation_status": "passed"
+      },
+      "id_field": "validation_result_id",
+      "id_location": "record",
+      "record": {
+        "active_observations": [
+          {
+            "observation_fingerprint": "sha256:b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
+            "observation_ref": "lifecycle-observations/lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098.json"
+          }
+        ],
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "intake_record_fingerprint": "sha256:65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff",
+        "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
+        "lifecycle_head_fingerprint": "sha256:ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde",
+        "lifecycle_head_ref": "lifecycle-transitions/lifecycle-transition_ac0611e8feef3d631d74e5fb02ea72372cb966823ccdbec10f023d97c3540fde.json",
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "lifecycle_state": "reassessment_required",
+        "lifecycle_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "normalized_content_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "normalized_content_ref": "candidate-content/charter_36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44.yaml",
+        "observed_current_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "reopened_coverage_ids": [
+          "operational_reality.production_state"
+        ],
+        "resolved_definitions": [
+          {
+            "definition_role": "approval_policy",
+            "definition_ref": "handbook.approval.constitutional-candidate@1.0.0",
+            "definition_fingerprint": "sha256:67466e0c26e48e7e25705b6a601e487b74923371d886d759fcd9face2e793c29"
+          },
+          {
+            "definition_role": "capability_contract",
+            "definition_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:1d4a1c2f85158c14524559e6846bf805eff4e531d8a78ac5c4890e2a4c0b0998"
+          },
+          {
+            "definition_role": "intake_definition",
+            "definition_ref": "handbook.intake.charter@1.0.0",
+            "definition_fingerprint": "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
+          },
+          {
+            "definition_role": "lifecycle_policy",
+            "definition_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+            "definition_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.production-posture-changed@1.0.0",
+            "definition_fingerprint": "sha256:35df6e191f201517abd07f428b87b9e3970117fb70110b801947116cb04c69f6"
+          },
+          {
+            "definition_role": "reassessment_trigger",
+            "definition_ref": "handbook.intake-trigger.trust-boundary-changed@1.0.0",
+            "definition_fingerprint": "sha256:12950ab5172acce8b0b944f630791a4ffda4960095248fa3b5bea833f7fa4766"
+          },
+          {
+            "definition_role": "renderer_definition",
+            "definition_ref": "handbook.renderer.charter-review-markdown@1.0.0",
+            "definition_fingerprint": "sha256:68f6fceedaab6133364d18a2b474694d1b44b91d73c05d0af65db1aa58e80fa7"
+          },
+          {
+            "definition_role": "review_trigger",
+            "definition_ref": "handbook.lifecycle-trigger.charter-amendment-proposed@1.0.0",
+            "definition_fingerprint": "sha256:9672246337ff266fc07f67053ca053736cb0650d2ad5e053e4a19304acd48ed8"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "definition_fingerprint": "sha256:be0fb9fd4ee98e9fc1c384b710d61198e103f2bca6ac6ef2bbe14957808c9738"
+          },
+          {
+            "definition_role": "semantic_validator",
+            "definition_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+            "definition_fingerprint": "sha256:10703119fbb0a4cfcab3fcdc4c618df269933591caf653786fdd8fee8cfc3c10"
+          },
+          {
+            "definition_role": "target_kind",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e"
+          },
+          {
+            "definition_role": "target_schema",
+            "definition_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "definition_fingerprint": "sha256:7420efe464c45e17319c56a233f9a54960c52f81b502ed4ffb59a479474f9836"
+          },
+          {
+            "definition_role": "waiver_policy",
+            "definition_ref": "handbook.waiver.constitutional-intake@1.0.0",
+            "definition_fingerprint": "sha256:704acdfe61b4d76ece2ceac72eb99df65dff2d2998b876990f24c3410fc317e3"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.lifecycle-validation-result",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority",
+        "validation_status": "passed",
+        "validated_at_utc": "2026-07-20T10:05:00Z",
+        "validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+        "validation_result_id": "lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad"
+      },
+      "record_class": "lifecycle-validation-result-amendment",
+      "schema_contract": "unchanged closed lifecycle-validation-result 1.0 schema; exact amendment document selected by candidate 1.3",
+      "expected_document_byte_length": 5009,
+      "expected_document_sha256": "sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6",
+      "expected_id": "authenticator-get-assertion-response_3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6",
+      "fingerprint_field": "response_fingerprint",
+      "fingerprint_preimage": {
+        "schema_id": "handbook.authenticator-get-assertion-response",
+        "schema_version": "1.0",
+        "protocol_id": "fido2-ctap2.1-native",
+        "status_byte": 0,
+        "credential_descriptor": {
+          "type": "public-key",
+          "credential_id_base64": "7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75o=",
+          "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd"
+        },
+        "rp_id_hash": "sha256:1efff55eb078be3aa99e9510cdb3134ece04b5891c2a6c11fc884a7f7598f849",
+        "flags_byte": 5,
+        "user_present": true,
+        "user_verified": true,
+        "sign_count": 9,
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACQ==",
+        "algorithm": "ES256",
+        "signature_encoding": "asn1-der-ecdsa",
+        "signature_base64": "MEUCIQDykJbWBhx0D8sOF8jIQOzk45ffooPv2u1sGW6oHDa1zgIgH3OUQScuujQ8vqLNdYKA6gnnxSPkU0tZnll5A3QsIyk=",
+        "raw_response_base64": "AKMBomJpZFgg7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75pkdHlwZWpwdWJsaWMta2V5AlglHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACQNYRzBFAiEA8pCW1gYcdA/LDhfIyEDs5OOX36KD79rtbBluqBw2tc4CIB9zlEEnLro0PL6izXWCgOoJ58Uj5FNLWZ5ZeQN0LCMp",
+        "attested_credential_data_included": false,
+        "extensions_included": false
+      },
+      "id_field": "response_id",
+      "id_location": "record",
+      "record": {
+        "schema_id": "handbook.authenticator-get-assertion-response",
+        "schema_version": "1.0",
+        "protocol_id": "fido2-ctap2.1-native",
+        "status_byte": 0,
+        "credential_descriptor": {
+          "type": "public-key",
+          "credential_id_base64": "7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75o=",
+          "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd"
+        },
+        "rp_id_hash": "sha256:1efff55eb078be3aa99e9510cdb3134ece04b5891c2a6c11fc884a7f7598f849",
+        "flags_byte": 5,
+        "user_present": true,
+        "user_verified": true,
+        "sign_count": 9,
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACQ==",
+        "algorithm": "ES256",
+        "signature_encoding": "asn1-der-ecdsa",
+        "signature_base64": "MEUCIQDykJbWBhx0D8sOF8jIQOzk45ffooPv2u1sGW6oHDa1zgIgH3OUQScuujQ8vqLNdYKA6gnnxSPkU0tZnll5A3QsIyk=",
+        "raw_response_base64": "AKMBomJpZFgg7FDsH7TutBXBdPlGWqQ4WKVRqtHI0P26/oDLtNPN75pkdHlwZWpwdWJsaWMta2V5AlglHv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACQNYRzBFAiEA8pCW1gYcdA/LDhfIyEDs5OOX36KD79rtbBluqBw2tc4CIB9zlEEnLro0PL6izXWCgOoJ58Uj5FNLWZ5ZeQN0LCMp",
+        "attested_credential_data_included": false,
+        "extensions_included": false,
+        "response_fingerprint": "sha256:3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6",
+        "response_id": "authenticator-get-assertion-response_3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6"
+      },
+      "record_class": "authenticator-get-assertion-response-amendment",
+      "schema_contract": "closed decoded status-plus-canonical-CBOR GetAssertion response for fresh candidate 1.3 approval"
+    },
+    {
+      "audit_only_excluded_fields": [
+        "verified_at_utc"
+      ],
+      "expected_fingerprint": "sha256:6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce",
+      "expected_id": "authenticator-assertion_6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce",
+      "fingerprint_field": "assertion_fingerprint",
+      "fingerprint_preimage": {
+        "algorithm": "ES256",
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACQ==",
+        "challenge_fingerprint": "sha256:81d07aeac372383c471576e832ab8bf610230bec0d4940f3392f921157fcfa77",
+        "challenge_jcs_base64": "eyIkc2NoZW1hIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAyMC0xMi9zY2hlbWEiLCJhY2NlcHRlZF93YWl2ZXJfZmluZ2VycHJpbnRzIjpbXSwiYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXBwcm92ZXJfcmVnaXN0cnlfc3RhdGVfZmluZ2VycHJpbnQiOiJzaGEyNTY6NzhmZDZiMDQ1MDVhNGZlMzQ1MWE5OWE5OGNhNTcwMGE0NGJjYjlkMjE2YzQ3YzJjZTUwMTI4OGQwYTQwNzhlMiIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIiwiYmFzaXNfYXJ0aWZhY3RfZmluZ2VycHJpbnQiOiJzaGEyNTY6MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMiIsImNhbmRpZGF0ZV9maW5nZXJwcmludCI6InNoYTI1Njo3MjNhYTQ0YzNhOTA2NTExZjZkYzhjMDg5ODRiOTllODllNTgxYzUzMDNlMTI1YjYwMjA1OWFiMWJmMGZmZTk5IiwiY2FuZGlkYXRlX3JlZiI6ImNhbmRpZGF0ZXMvY2FuZGlkYXRlXzcyM2FhNDRjM2E5MDY1MTFmNmRjOGMwODk4NGI5OWU4OWU1ODFjNTMwM2UxMjViNjAyMDU5YWIxYmYwZmZlOTkuanNvbiIsIm5vbmNlX2Jhc2U2NCI6IklDRWlJeVFsSmljb0tTb3JMQzB1THpBeE1qTTBOVFkzT0RrNk96dzlQajg9Iiwib3BlcmF0aW9uIjoiYW1lbmRtZW50X2FwcHJvdmFsIiwib3BlcmF0aW9uX2lkIjoiY2FuZGlkYXRlLTEtMy1hbWVuZG1lbnQtYXBwcm92YWwtMDAxIiwicmVnaXN0cnlfaGVhZF90cmFuc2l0aW9uX2ZpbmdlcnByaW50Ijoic2hhMjU2OmE2ZjY1MTJjZThmN2M5M2Q5OGM2YTJjOTQ0OTExOTI1NDMwMjgxYTQxMGQ3ZjE4MWE1ZTBlODkzOGM4NmJkZmQiLCJyZXBvc2l0b3J5X2lkZW50aXR5X2ZpbmdlcnByaW50Ijoic2hhMjU2OjExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTEiLCJzY2hlbWFfaWQiOiJoYW5kYm9vay5hdXRoZW50aWNhdG9yLWNoYWxsZW5nZSIsInNjaGVtYV92ZXJzaW9uIjoiMS4wIn0=",
+        "challenge_schema_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+        "client_data_hash": "sha256:81d07aeac372383c471576e832ab8bf610230bec0d4940f3392f921157fcfa77",
+        "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "protocol_id": "fido2-ctap2.1-native",
+        "rp_id": "handbook.local",
+        "schema_id": "handbook.authenticator-assertion",
+        "schema_version": "1.0",
+        "sign_count": 9,
+        "signature_base64": "MEUCIQDykJbWBhx0D8sOF8jIQOzk45ffooPv2u1sGW6oHDa1zgIgH3OUQScuujQ8vqLNdYKA6gnnxSPkU0tZnll5A3QsIyk=",
+        "signed_preimage_sha256": "sha256:457e4b5f7b13a110713379882785754cb8dadb77ec3698d7c7134a4985add819",
+        "user_present": true,
+        "user_verified": true,
+        "decoded_response_schema_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+        "decoded_response_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6.json",
+        "decoded_response_fingerprint": "sha256:3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6",
+        "flags_byte": 5,
+        "attested_credential_data_included": false,
+        "extensions_included": false
+      },
+      "id_field": "assertion_id",
+      "id_location": "record",
+      "record": {
+        "algorithm": "ES256",
+        "authenticator_data_base64": "Hv/1XrB4vjqpnpUQzbMTTs4EtYkcKmwR/IhKf3WY+EkFAAAACQ==",
+        "challenge_fingerprint": "sha256:81d07aeac372383c471576e832ab8bf610230bec0d4940f3392f921157fcfa77",
+        "challenge_jcs_base64": "eyIkc2NoZW1hIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAyMC0xMi9zY2hlbWEiLCJhY2NlcHRlZF93YWl2ZXJfZmluZ2VycHJpbnRzIjpbXSwiYXBwcm92YWxfY2xhc3MiOiJQcm9qZWN0IG93bmVyIGFwcHJvdmFsIiwiYXBwcm92ZXJfcmVnaXN0cnlfc3RhdGVfZmluZ2VycHJpbnQiOiJzaGEyNTY6NzhmZDZiMDQ1MDVhNGZlMzQ1MWE5OWE5OGNhNTcwMGE0NGJjYjlkMjE2YzQ3YzJjZTUwMTI4OGQwYTQwNzhlMiIsImF1dGhvcml0eV9yZWYiOiJQcm9qZWN0IG93bmVyIiwiYmFzaXNfYXJ0aWZhY3RfZmluZ2VycHJpbnQiOiJzaGEyNTY6MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMiIsImNhbmRpZGF0ZV9maW5nZXJwcmludCI6InNoYTI1Njo3MjNhYTQ0YzNhOTA2NTExZjZkYzhjMDg5ODRiOTllODllNTgxYzUzMDNlMTI1YjYwMjA1OWFiMWJmMGZmZTk5IiwiY2FuZGlkYXRlX3JlZiI6ImNhbmRpZGF0ZXMvY2FuZGlkYXRlXzcyM2FhNDRjM2E5MDY1MTFmNmRjOGMwODk4NGI5OWU4OWU1ODFjNTMwM2UxMjViNjAyMDU5YWIxYmYwZmZlOTkuanNvbiIsIm5vbmNlX2Jhc2U2NCI6IklDRWlJeVFsSmljb0tTb3JMQzB1THpBeE1qTTBOVFkzT0RrNk96dzlQajg9Iiwib3BlcmF0aW9uIjoiYW1lbmRtZW50X2FwcHJvdmFsIiwib3BlcmF0aW9uX2lkIjoiY2FuZGlkYXRlLTEtMy1hbWVuZG1lbnQtYXBwcm92YWwtMDAxIiwicmVnaXN0cnlfaGVhZF90cmFuc2l0aW9uX2ZpbmdlcnByaW50Ijoic2hhMjU2OmE2ZjY1MTJjZThmN2M5M2Q5OGM2YTJjOTQ0OTExOTI1NDMwMjgxYTQxMGQ3ZjE4MWE1ZTBlODkzOGM4NmJkZmQiLCJyZXBvc2l0b3J5X2lkZW50aXR5X2ZpbmdlcnByaW50Ijoic2hhMjU2OjExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTEiLCJzY2hlbWFfaWQiOiJoYW5kYm9vay5hdXRoZW50aWNhdG9yLWNoYWxsZW5nZSIsInNjaGVtYV92ZXJzaW9uIjoiMS4wIn0=",
+        "challenge_schema_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+        "client_data_hash": "sha256:81d07aeac372383c471576e832ab8bf610230bec0d4940f3392f921157fcfa77",
+        "credential_id_hash": "sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "protocol_id": "fido2-ctap2.1-native",
+        "rp_id": "handbook.local",
+        "schema_id": "handbook.authenticator-assertion",
+        "schema_version": "1.0",
+        "sign_count": 9,
+        "signature_base64": "MEUCIQDykJbWBhx0D8sOF8jIQOzk45ffooPv2u1sGW6oHDa1zgIgH3OUQScuujQ8vqLNdYKA6gnnxSPkU0tZnll5A3QsIyk=",
+        "signed_preimage_sha256": "sha256:457e4b5f7b13a110713379882785754cb8dadb77ec3698d7c7134a4985add819",
+        "user_present": true,
+        "user_verified": true,
+        "decoded_response_schema_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+        "decoded_response_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6.json",
+        "decoded_response_fingerprint": "sha256:3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6",
+        "flags_byte": 5,
+        "attested_credential_data_included": false,
+        "extensions_included": false,
+        "verified_at_utc": "2026-07-21T13:21:01Z",
+        "assertion_fingerprint": "sha256:6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce",
+        "assertion_id": "authenticator-assertion_6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce"
+      },
+      "record_class": "authenticator-assertion-amendment",
+      "schema_contract": "closed published schema; challenge independently binds the fresh candidate 1.3 final fingerprint"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f",
+      "expected_id": "approval_eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f",
+      "fingerprint_field": "approval_fingerprint",
+      "fingerprint_preimage": {
+        "accepted_waivers": [],
+        "actor_ref": "credential:sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "approval_class": "Project owner approval",
+        "approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "authenticator_assertion_fingerprint": "sha256:6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce",
+        "authenticator_assertion_ref": "authenticator-assertions/authenticator-assertion_6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce.json",
+        "authority_ref": "Project owner",
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+        "candidate_ref": "candidates/candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99.json",
+        "conditions": [],
+        "decided_at_utc": "2026-07-21T13:21:00Z",
+        "decision": "approved",
+        "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+        "schema_id": "handbook.artifact-approval-record",
+        "schema_version": "1.1"
+      },
+      "id_field": "approval_id",
+      "id_location": "record",
+      "record": {
+        "accepted_waivers": [],
+        "actor_ref": "credential:sha256:c80dc9bb4d3ce83b91ea39ec7ca0a1001648db1745f32596fa3c82a2b8815ebd",
+        "approval_class": "Project owner approval",
+        "approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
+        "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "authenticator_assertion_fingerprint": "sha256:6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce",
+        "authenticator_assertion_ref": "authenticator-assertions/authenticator-assertion_6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce.json",
+        "authority_ref": "Project owner",
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+        "candidate_ref": "candidates/candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99.json",
+        "conditions": [],
+        "decided_at_utc": "2026-07-21T13:21:00Z",
+        "decision": "approved",
+        "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+        "schema_id": "handbook.artifact-approval-record",
+        "schema_version": "1.1",
+        "approval_fingerprint": "sha256:eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f",
+        "approval_id": "approval_eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f"
+      },
+      "record_class": "approval-amendment",
+      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields; new candidate 1.3 approval"
+    },
+    {
+      "audit_only_excluded_fields": [],
+      "expected_fingerprint": "sha256:0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038",
+      "expected_id": "promotion_0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038",
+      "fingerprint_field": "promotion_fingerprint",
+      "fingerprint_preimage": {
+        "approval_refs": [
+          "approvals/approval_eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f.json"
+        ],
+        "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "authorized_by_ref": "Project owner",
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+        "candidate_ref": "candidates/candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99.json",
+        "canonical_artifact_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "decision": "approved",
+        "expected_current_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+        "resolved_definitions": [
+          {
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-promotion-record",
+        "schema_version": "1.1",
+        "target_instance_id": "project_authority",
+        "validation_result_refs": [
+          "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json"
+        ]
+      },
+      "id_field": "promotion_id",
+      "id_location": "record",
+      "record": {
+        "approval_refs": [
+          "approvals/approval_eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f.json"
+        ],
+        "approver_registry_state_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+        "approver_registry_state_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+        "authorized_by_ref": "Project owner",
+        "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+        "candidate_ref": "candidates/candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99.json",
+        "canonical_artifact_fingerprint": "sha256:36d607d2aa8dd5b433ce79fcb106ff2fa2a2fe291509b4ec874d349866226e44",
+        "canonical_artifact_ref": ".handbook/project/charter.yaml",
+        "decision": "approved",
+        "expected_current_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "profile_ref": "handbook.profile.shipped-root@1.1.0",
+        "registry_head_transition_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+        "registry_head_transition_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+        "resolved_definitions": [
+          {
+            "definition_fingerprint": "sha256:3b3d0b353d9c45c20781c3f4b79e30cc27847fb168d1860115f2f941b8bbef0e",
+            "definition_ref": "handbook.artifact-kind.project-authority@1.1.0"
+          }
+        ],
+        "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+        "schema_id": "handbook.artifact-promotion-record",
+        "schema_version": "1.1",
+        "target_instance_id": "project_authority",
+        "validation_result_refs": [
+          "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json"
+        ],
+        "promotion_fingerprint": "sha256:0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038",
+        "promotion_id": "promotion_0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038"
+      },
+      "record_class": "promotion-amendment",
+      "schema_contract": "retained 05 base plus HCM-2.2 exact additive fields; candidate 1.3 amendment chain"
+    },
+    {
+      "audit_only_excluded_fields": [
+        "transitioned_at_utc"
+      ],
+      "expected_fingerprint": "sha256:5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7",
+      "expected_id": "lifecycle-transition_5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7",
+      "fingerprint_field": "transition_fingerprint",
+      "fingerprint_preimage": {
+        "active_observation_refs": [],
+        "clearance_promotion_ref": "promotions/promotion_0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038.json",
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "new_observation_refs": [],
+        "prior_state": "reassessment_required",
+        "prior_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_state": "current",
+        "result_state_fingerprint": "sha256:79f0e86e4f967260723528e7e4c45bdfc5e34e96de8d907876af449a1f72f402",
+        "schema_id": "handbook.lifecycle-transition",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority"
+      },
+      "id_field": "transition_id",
+      "id_location": "record",
+      "record": {
+        "active_observation_refs": [],
+        "clearance_promotion_ref": "promotions/promotion_0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038.json",
+        "lifecycle_policy_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+        "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+        "new_observation_refs": [],
+        "prior_state": "reassessment_required",
+        "prior_state_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "result_state": "current",
+        "result_state_fingerprint": "sha256:79f0e86e4f967260723528e7e4c45bdfc5e34e96de8d907876af449a1f72f402",
+        "schema_id": "handbook.lifecycle-transition",
+        "schema_version": "1.0",
+        "target_instance_id": "project_authority",
+        "transitioned_at_utc": "2026-07-21T13:22:00Z",
+        "transition_fingerprint": "sha256:5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7",
+        "transition_id": "lifecycle-transition_5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7"
+      },
+      "record_class": "lifecycle-transition-amendment",
+      "schema_contract": "exact promotion-clearance transition for the candidate 1.3 amendment chain"
     }
   ],
   "cross_record_contract": {
     "reference_rule": "partition path basename without .json equals the exact target expected_id",
     "fingerprint_rule": "every declared target fingerprint equals target expected_fingerprint",
     "target_rule": "target record independently recomputes both expected_id and expected_fingerprint from exact fingerprint_preimage bytes",
-    "external_non_record_refs": "definition, profile, policy, canonical-artifact, value, validation-result, prompt-event, and raw evidence refs are outside this content-addressed semantic-record graph"
+    "external_non_record_refs": "definition, profile, policy, canonical-artifact, value, prompt-event, and raw evidence refs are outside this content-addressed semantic-record graph",
+    "exact_document_rule": "candidate 1.3 additionally binds the lifecycle-validation result's exact persisted JCS+LF SHA-256 and byte length; semantic fingerprint equality alone is insufficient"
   },
   "cross_record_bindings": [
     {
@@ -830,13 +1659,26 @@
       "expected_target_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e"
     },
     {
+      "source_record_class": "candidate",
+      "source_field": "validation_result_binding.validation_result_ref",
+      "target_record_class": "lifecycle-validation-result",
+      "expected_ref": "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json",
+      "declared_fingerprint_field": "validation_result_binding.validation_result_fingerprint",
+      "expected_target_id": "lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+      "expected_target_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+      "declared_document_sha256_field": "validation_result_binding.result_document_sha256",
+      "expected_target_document_sha256": "sha256:c6696b0f9e8a8e3d1acf3fe916a3e18922869bf2cb9b2bee5457955a9488d538",
+      "declared_byte_length_field": "validation_result_binding.result_byte_length",
+      "expected_target_byte_length": 4334
+    },
+    {
       "source_record_class": "approval",
       "source_field": "candidate_ref",
       "target_record_class": "candidate",
-      "expected_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+      "expected_ref": "candidates/candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961.json",
       "declared_fingerprint_field": "candidate_fingerprint",
-      "expected_target_id": "candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
-      "expected_target_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8"
+      "expected_target_id": "candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+      "expected_target_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961"
     },
     {
       "source_record_class": "approval",
@@ -860,28 +1702,38 @@
       "source_record_class": "approval",
       "source_field": "authenticator_assertion_ref",
       "target_record_class": "authenticator-assertion",
-      "expected_ref": "authenticator-assertions/authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf.json",
+      "expected_ref": "authenticator-assertions/authenticator-assertion_2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a.json",
       "declared_fingerprint_field": "authenticator_assertion_fingerprint",
-      "expected_target_id": "authenticator-assertion_229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf",
-      "expected_target_fingerprint": "sha256:229c68d9f374d381753955668a1d487b4207e22b09e14e218265e9d34b3edacf"
+      "expected_target_id": "authenticator-assertion_2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a",
+      "expected_target_fingerprint": "sha256:2401b384b7fe9fce718095147b1612ff00eef030ffa4794c4dbe27f8181a7d2a"
     },
     {
       "source_record_class": "promotion",
       "source_field": "candidate_ref",
       "target_record_class": "candidate",
-      "expected_ref": "candidates/candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8.json",
+      "expected_ref": "candidates/candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961.json",
       "declared_fingerprint_field": "candidate_fingerprint",
-      "expected_target_id": "candidate_b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8",
-      "expected_target_fingerprint": "sha256:b14c9f89abc4e5892a8ce7757ae3e1fb7408c8b31dbc9883147f772881c070a8"
+      "expected_target_id": "candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+      "expected_target_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961"
+    },
+    {
+      "source_record_class": "promotion",
+      "source_field": "validation_result_refs[0]",
+      "target_record_class": "lifecycle-validation-result",
+      "expected_ref": "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json",
+      "declared_fingerprint_field": null,
+      "expected_target_id": "lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+      "expected_target_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+      "transitive_exact_document_authority": "promotion candidate_fingerprint resolves candidate 1.3 and therefore binds the target exact document SHA-256 and byte length"
     },
     {
       "source_record_class": "promotion",
       "source_field": "approval_refs[0]",
       "target_record_class": "approval",
-      "expected_ref": "approvals/approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1.json",
+      "expected_ref": "approvals/approval_ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2.json",
       "declared_fingerprint_field": null,
-      "expected_target_id": "approval_09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1",
-      "expected_target_fingerprint": "sha256:09c994a38a5dceae408fa6da9af71a2dcc2e0c8ce4e0bf5e43af3de2b43b65f1"
+      "expected_target_id": "approval_ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2",
+      "expected_target_fingerprint": "sha256:ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2"
     },
     {
       "source_record_class": "promotion",
@@ -941,10 +1793,10 @@
       "source_record_class": "authenticator-assertion",
       "source_field": "decoded_response_ref",
       "target_record_class": "authenticator-get-assertion-response",
-      "expected_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29.json",
+      "expected_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228.json",
       "declared_fingerprint_field": "decoded_response_fingerprint",
-      "expected_target_id": "authenticator-get-assertion-response_dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29",
-      "expected_target_fingerprint": "sha256:dbc838f6ce5d5283eb2bdb67a4ae466310951bd91bae60075f0f0a954bf1df29"
+      "expected_target_id": "authenticator-get-assertion-response_e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228",
+      "expected_target_fingerprint": "sha256:e706b48812252b4f155dc0cb4f9ba0a7c9904689d171a6f682e527c7b576d228"
     },
     {
       "source_record_class": "lifecycle-observation",
@@ -972,6 +1824,119 @@
       "declared_fingerprint_field": null,
       "expected_target_id": "lifecycle-observation_b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098",
       "expected_target_fingerprint": "sha256:b7cb3bb356586564cf2dd2895f72d8644d820fd44e9454caa3d11a8861ffe098"
+    },
+    {
+      "source_record_class": "candidate-amendment",
+      "source_field": "validation_result_binding.validation_result_ref",
+      "target_record_class": "lifecycle-validation-result-amendment",
+      "expected_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json",
+      "declared_fingerprint_field": "validation_result_binding.validation_result_fingerprint",
+      "expected_target_id": "lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+      "expected_target_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+      "declared_document_sha256_field": "validation_result_binding.result_document_sha256",
+      "expected_target_document_sha256": "sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f",
+      "declared_byte_length_field": "validation_result_binding.result_byte_length",
+      "expected_target_byte_length": 5009
+    },
+    {
+      "source_record_class": "authenticator-assertion-amendment",
+      "source_field": "decoded_response_ref",
+      "target_record_class": "authenticator-get-assertion-response-amendment",
+      "expected_ref": "authenticator-get-assertion-responses/authenticator-get-assertion-response_3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6.json",
+      "declared_fingerprint_field": "decoded_response_fingerprint",
+      "expected_target_id": "authenticator-get-assertion-response_3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6",
+      "expected_target_fingerprint": "sha256:3ac9067f11c034ffbfd5c76d727b1dc833e2bccefa53b986f8a74b7da7aa19d6"
+    },
+    {
+      "source_record_class": "approval-amendment",
+      "source_field": "candidate_ref",
+      "target_record_class": "candidate-amendment",
+      "expected_ref": "candidates/candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99.json",
+      "declared_fingerprint_field": "candidate_fingerprint",
+      "expected_target_id": "candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+      "expected_target_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99"
+    },
+    {
+      "source_record_class": "approval-amendment",
+      "source_field": "authenticator_assertion_ref",
+      "target_record_class": "authenticator-assertion-amendment",
+      "expected_ref": "authenticator-assertions/authenticator-assertion_6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce.json",
+      "declared_fingerprint_field": "authenticator_assertion_fingerprint",
+      "expected_target_id": "authenticator-assertion_6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce",
+      "expected_target_fingerprint": "sha256:6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce"
+    },
+    {
+      "source_record_class": "approval-amendment",
+      "source_field": "approver_registry_state_ref",
+      "target_record_class": "registry-state",
+      "expected_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+      "declared_fingerprint_field": "approver_registry_state_fingerprint",
+      "expected_target_id": "registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+      "expected_target_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2"
+    },
+    {
+      "source_record_class": "approval-amendment",
+      "source_field": "registry_head_transition_ref",
+      "target_record_class": "registry-transition",
+      "expected_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+      "declared_fingerprint_field": "registry_head_transition_fingerprint",
+      "expected_target_id": "registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+      "expected_target_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd"
+    },
+    {
+      "source_record_class": "promotion-amendment",
+      "source_field": "candidate_ref",
+      "target_record_class": "candidate-amendment",
+      "expected_ref": "candidates/candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99.json",
+      "declared_fingerprint_field": "candidate_fingerprint",
+      "expected_target_id": "candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+      "expected_target_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99"
+    },
+    {
+      "source_record_class": "promotion-amendment",
+      "source_field": "validation_result_refs[0]",
+      "target_record_class": "lifecycle-validation-result-amendment",
+      "expected_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json",
+      "declared_fingerprint_field": null,
+      "expected_target_id": "lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+      "expected_target_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+      "transitive_exact_document_authority": "promotion candidate_fingerprint resolves candidate 1.3 and therefore binds exact result SHA-256/length"
+    },
+    {
+      "source_record_class": "promotion-amendment",
+      "source_field": "approval_refs[0]",
+      "target_record_class": "approval-amendment",
+      "expected_ref": "approvals/approval_eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f.json",
+      "declared_fingerprint_field": null,
+      "expected_target_id": "approval_eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f",
+      "expected_target_fingerprint": "sha256:eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f"
+    },
+    {
+      "source_record_class": "promotion-amendment",
+      "source_field": "approver_registry_state_ref",
+      "target_record_class": "registry-state",
+      "expected_ref": "registry-states/registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2.json",
+      "declared_fingerprint_field": "approver_registry_state_fingerprint",
+      "expected_target_id": "registry-state_78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2",
+      "expected_target_fingerprint": "sha256:78fd6b04505a4fe3451a99a98ca5700a44bcb9d216c47c2ce501288d0a4078e2"
+    },
+    {
+      "source_record_class": "promotion-amendment",
+      "source_field": "registry_head_transition_ref",
+      "target_record_class": "registry-transition",
+      "expected_ref": "registry-transitions/registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd.json",
+      "declared_fingerprint_field": "registry_head_transition_fingerprint",
+      "expected_target_id": "registry-transition_a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd",
+      "expected_target_fingerprint": "sha256:a6f6512ce8f7c93d98c6a2c944911925430281a410d7f181a5e0e8938c86bdfd"
+    },
+    {
+      "source_record_class": "lifecycle-transition-amendment",
+      "source_field": "clearance_promotion_ref",
+      "target_record_class": "promotion-amendment",
+      "expected_ref": "promotions/promotion_0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038.json",
+      "declared_fingerprint_field": null,
+      "expected_target_id": "promotion_0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038",
+      "expected_target_fingerprint": "sha256:0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038"
     }
   ],
   "external_reference_contract": {
@@ -1120,6 +2085,332 @@
       "producer_kind": "definition",
       "expected_producer_fingerprint": "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
       "declared_fingerprint_field": "lifecycle_policy_fingerprint"
+    }
+  ],
+  "candidate_1_3_exact_result_contract": {
+    "candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
+    "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json",
+    "validation_result_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+    "result_document_sha256": "sha256:c6696b0f9e8a8e3d1acf3fe916a3e18922869bf2cb9b2bee5457955a9488d538",
+    "result_byte_length": 4334,
+    "final_candidate_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+    "final_candidate_ref": "candidates/candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961.json",
+    "approval_fingerprint": "sha256:ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2",
+    "approval_ref": "approvals/approval_ff88731faf9b327da39f9330dd71598ec22dd972f9126822b202db9d035e12f2.json",
+    "promotion_fingerprint": "sha256:8a1e5d73ac0163f4eb0acc53d39dbb4c7a027c5c2cae0cf3d80fd249733e1e63",
+    "promotion_ref": "promotions/promotion_8a1e5d73ac0163f4eb0acc53d39dbb4c7a027c5c2cae0cf3d80fd249733e1e63.json",
+    "acyclic_rule": "Every dependency advances through the declared topological order; the result record contains no final-candidate field or back-reference, while final candidate identity intentionally depends on the exact-result binding."
+  },
+  "historical_candidate_1_2_contract": {
+    "status": "immutable_historical_checkpoint_evidence_only",
+    "selected_product_read": false,
+    "subject_fields": [
+      "schema_id",
+      "schema_version",
+      "intake_record_ref",
+      "target_kind_ref",
+      "target_instance_id",
+      "target_schema_ref",
+      "profile_ref",
+      "resolved_profile_fingerprint",
+      "normalized_content_ref",
+      "field_sources",
+      "unresolved_coverage_ids",
+      "promotion_eligibility",
+      "required_approval_policy_ref",
+      "basis_artifact_fingerprint"
+    ],
+    "subject_excluded_fields_exactly": [
+      "candidate_id",
+      "candidate_fingerprint",
+      "candidate_subject_fingerprint",
+      "validation_result_refs"
+    ],
+    "final_additions": [
+      "candidate_subject_fingerprint",
+      "validation_result_refs"
+    ],
+    "validation_result_cardinality": "one semantic ref",
+    "chain_identities": [
+      {
+        "name": "create_only",
+        "candidate_subject_fingerprint": "sha256:014ede25a7e3ae67be7b38e1e80029037ea0029c6e866e1bd9b6347b818fda83",
+        "validation_result_fingerprint": "sha256:9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848",
+        "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848.json",
+        "candidate_fingerprint": "sha256:bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa",
+        "candidate_id": "candidate_bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa"
+      },
+      {
+        "name": "amendment_with_active_reassessment",
+        "candidate_subject_fingerprint": "sha256:9fbc8c9f4bcdb862b8e2d44415cd8e61338cfa25c7e0d7bb4d7877a3748d04c9",
+        "validation_result_fingerprint": "sha256:654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b",
+        "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b.json",
+        "candidate_fingerprint": "sha256:03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7",
+        "candidate_id": "candidate_03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7"
+      }
+    ],
+    "migration_rule": "Preserve every candidate 1.0, 1.1, and 1.2 record and approval byte; never copy its result ref or approval into candidate 1.3 authority."
+  },
+  "exact_result_negative_vectors": [
+    {
+      "vector_id": "NEG-EXACT-001",
+      "mutation": "include validation_result_binding in candidate_subject_fingerprint preimage",
+      "expected": "refuse_cycle_or_subject_identity_violation"
+    },
+    {
+      "vector_id": "NEG-EXACT-002",
+      "mutation": "candidate 1.3 omits validation_result_binding or represents zero or many bindings",
+      "expected": "refuse_exact_cardinality"
+    },
+    {
+      "vector_id": "NEG-EXACT-003",
+      "mutation": "result binds a final candidate fingerprint, candidate ID, raw-document digest, or self-hash",
+      "expected": "refuse_forward_or_cyclic_identity_edge"
+    },
+    {
+      "vector_id": "NEG-EXACT-004",
+      "mutation": "coherently rewrite result, witness, mutable binding/receipt/sidecar, and any non-candidate companion",
+      "expected": "refuse_candidate_bound_exact_document_mismatch_preserve_all_evidence"
+    },
+    {
+      "vector_id": "NEG-EXACT-005",
+      "mutation": "rewrite only validated_at_utc while retaining semantic result fingerprint and ref",
+      "expected": "refuse_result_document_sha256_or_length_mismatch"
+    },
+    {
+      "vector_id": "NEG-EXACT-006",
+      "mutation": "rewrite result bytes and candidate binding coherently while retaining an old approval",
+      "expected": "refuse_final_candidate_and_approval_mismatch"
+    },
+    {
+      "vector_id": "NEG-EXACT-007",
+      "mutation": "forge a second candidate entry matching the discovery selector pair",
+      "expected": "refuse_many_preserve_all_evidence"
+    },
+    {
+      "vector_id": "NEG-EXACT-008",
+      "mutation": "zero matching candidates and absent result",
+      "expected": "admit_first_authoring_only_after_complete_preflight"
+    },
+    {
+      "vector_id": "NEG-EXACT-009",
+      "mutation": "exactly one matching candidate with exact candidate identity and exact result digest/length",
+      "expected": "admit_read_only_replay"
+    },
+    {
+      "vector_id": "NEG-EXACT-010",
+      "mutation": "more than one matching candidate",
+      "expected": "refuse_many_preserve_all_evidence"
+    },
+    {
+      "vector_id": "NEG-EXACT-011",
+      "mutation": "expected result exists with no matching candidate 1.3",
+      "expected": "refuse_orphan_no_adopt_overwrite_repair_or_delete"
+    },
+    {
+      "vector_id": "NEG-EXACT-012",
+      "mutation": "matching candidate exists but result is missing",
+      "expected": "refuse_missing_result_preserve_candidate"
+    },
+    {
+      "vector_id": "NEG-EXACT-013",
+      "mutation": "candidate binding has wrong result_document_sha256",
+      "expected": "refuse_before_mutation"
+    },
+    {
+      "vector_id": "NEG-EXACT-014",
+      "mutation": "candidate binding has wrong result_byte_length including LF",
+      "expected": "refuse_before_mutation"
+    },
+    {
+      "vector_id": "NEG-EXACT-015",
+      "mutation": "semantic ref/fingerprint from one result are crossed with raw digest/length from another",
+      "expected": "refuse_semantic_raw_document_crossing"
+    },
+    {
+      "vector_id": "NEG-EXACT-016",
+      "mutation": "candidate or result store contains unsafe, rewritten, duplicate, mismatching, non-regular, linked, malformed, or crossed relevant entry",
+      "expected": "refuse_before_mutation_preserve_all_evidence"
+    },
+    {
+      "vector_id": "NEG-EXACT-017",
+      "mutation": "selected read or author falls back to candidate 1.2",
+      "expected": "refuse_historical_candidate_fallback"
+    },
+    {
+      "vector_id": "NEG-EXACT-018",
+      "mutation": "candidate 1.0, 1.1, or 1.2 approval is carried forward",
+      "expected": "refuse_approval_carry_forward"
+    },
+    {
+      "vector_id": "NEG-EXACT-019",
+      "mutation": "refusal branch mutates, cleans, adopts, overwrites, or deletes any candidate, result, witness, binding, receipt, sidecar, or orphan",
+      "expected": "fail_test_evidence_must_remain_byte_exact"
+    }
+  ],
+  "candidate_1_3_amendment_chain_contract": {
+    "candidate_ref": "candidates/candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99.json",
+    "candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+    "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json",
+    "validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+    "result_document_sha256": "sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f",
+    "result_byte_length": 5009,
+    "authenticator_assertion_ref": "authenticator-assertions/authenticator-assertion_6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce.json",
+    "authenticator_assertion_fingerprint": "sha256:6078c9eeb4da6b62091ac5c2d4c1a806366be8958b30f45c208373ec636f8cce",
+    "approval_ref": "approvals/approval_eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f.json",
+    "approval_fingerprint": "sha256:eb437b1d85559a73cf77d5e0be2ec3ddb6aea3ef78884e58ecce03fc72d8f26f",
+    "promotion_ref": "promotions/promotion_0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038.json",
+    "promotion_fingerprint": "sha256:0385ccc7138543dbbd598bf43b947e881ddf0f3869dc2af784cae0356072b038",
+    "lifecycle_transition_ref": "lifecycle-transitions/lifecycle-transition_5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7.json",
+    "lifecycle_transition_fingerprint": "sha256:5ece901327bae501487cf36c834bcc73f04601360950b1ba3cb039823de4ead7",
+    "freshness_rule": "No candidate-dependent ref/fingerprint/assertion/approval/promotion/transition equals the historical candidate 1.2 amendment vector."
+  },
+  "author_inventory_contract": {
+    "author_lock_scope": "one exclusive repository-identity plus target-instance author lock spans both complete scans, classification, and any permitted first-authoring publication",
+    "roots": {
+      "candidate_store": ".handbook/evidence/charter/candidates/",
+      "validation_result_store": ".handbook/state/lifecycle-validation-results/"
+    },
+    "store_alignment_rule": "validation_result_store is exactly the directory parent of the unchanged lifecycle-validation-result 1.0 store_path_rule; semantic result refs resolve to the same basename in that authoritative store, and no evidence-root alias exists",
+    "filename_grammars": {
+      "candidate_store": "candidate_[0-9a-f]{64}.json; exactly 79 ASCII bytes",
+      "validation_result_store": "lifecycle-validation-result_[0-9a-f]{64}.json; exactly 97 ASCII bytes"
+    },
+    "limits_per_root": {
+      "max_immediate_entries": 4096,
+      "max_entry_bytes": 262144,
+      "max_aggregate_bytes": 1073741824,
+      "max_filename_utf8_bytes": 128
+    },
+    "enumeration": "Open each exact root no-follow with reparse/link rejection; enumerate every immediate entry without glob filtering; sort by raw ASCII filename bytes; reject nested directories and every non-regular entry; duplicate-key parse and closed-schema validate every bounded file.",
+    "classification": {
+      "safe_candidate_1.0_1.1_1.2": "historical evidence; never a match or fallback",
+      "safe_candidate_1.3_nonmatching_pair": "unrelated retained candidate; never a match",
+      "safe_result_1.0_nonexpected_semantic_ref": "unrelated retained result; never an orphan for this request",
+      "matching_candidate_1.3": "count by independently recomputed subject plus semantic-result ref/fingerprint pair",
+      "expected_semantic_result": "classify absent, safe exact, or present-not-exact",
+      "unsafe_or_malformed_any_version_or_unowned_name": "refuse before mutation even when historical or otherwise unrelated"
+    },
+    "stable_scan": "Perform two complete bounded reads under the author lock. Each scan records root file identity plus every (raw filename bytes, file identity, byte length, SHA-256) tuple. Require byte-identical tuple vectors and revalidated record identities; any add/remove/rename/identity/length/hash/root change refuses before mutation.",
+    "overflow": "Count, per-file, aggregate-byte, filename-byte, arithmetic-overflow, or second-scan mismatch refuses before timestamp allocation or filesystem mutation and preserves every entry."
+  },
+  "author_inventory_boundary_vectors": [
+    {
+      "case_id": "candidate_count_below",
+      "candidate_entries": 4095,
+      "result_entries": 0,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "candidate_count_at",
+      "candidate_entries": 4096,
+      "result_entries": 0,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "candidate_count_above",
+      "candidate_entries": 4097,
+      "result_entries": 0,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "result_count_below",
+      "candidate_entries": 0,
+      "result_entries": 4095,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "result_count_at",
+      "candidate_entries": 0,
+      "result_entries": 4096,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "result_count_above",
+      "candidate_entries": 0,
+      "result_entries": 4097,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "entry_bytes_below",
+      "byte_length": 262143,
+      "outcome": "admit_entry"
+    },
+    {
+      "case_id": "entry_bytes_at",
+      "byte_length": 262144,
+      "outcome": "admit_entry"
+    },
+    {
+      "case_id": "entry_bytes_above",
+      "byte_length": 262145,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "aggregate_bytes_below",
+      "byte_length": 1073741823,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "aggregate_bytes_at",
+      "byte_length": 1073741824,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "aggregate_bytes_above",
+      "byte_length": 1073741825,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "filename_bytes_below",
+      "byte_length": 127,
+      "grammar": "unowned",
+      "outcome": "refuse_unowned_name_preserve"
+    },
+    {
+      "case_id": "filename_bytes_at",
+      "byte_length": 128,
+      "grammar": "unowned",
+      "outcome": "refuse_unowned_name_preserve"
+    },
+    {
+      "case_id": "filename_bytes_above",
+      "byte_length": 129,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "owned_candidate_filename",
+      "byte_length": 79,
+      "grammar": "candidate_[0-9a-f]{64}.json",
+      "outcome": "admit_owned_name"
+    },
+    {
+      "case_id": "owned_validation_result_filename",
+      "byte_length": 97,
+      "grammar": "lifecycle-validation-result_[0-9a-f]{64}.json",
+      "outcome": "admit_owned_name"
+    },
+    {
+      "case_id": "unsafe_historical_candidate",
+      "version": "1.2",
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "malformed_unrelated_result",
+      "semantic_match": false,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "stable_scan_equal",
+      "scan_1": "exact_tuple_vector",
+      "scan_2": "exact_tuple_vector",
+      "outcome": "continue_classification"
+    },
+    {
+      "case_id": "stable_scan_changed",
+      "scan_1": "exact_tuple_vector",
+      "scan_2": "any_difference",
+      "outcome": "refuse_preserve"
     }
   ]
 }

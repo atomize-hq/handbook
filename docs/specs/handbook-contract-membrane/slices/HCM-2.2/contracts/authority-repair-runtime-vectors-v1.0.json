@@ -4,16 +4,37 @@
   "normalization": "RFC8785-JCS-UTF8",
   "materialization_rule": "Where a vector supplies *_record_additions, form the complete record by a shallow object union of the named fingerprint_preimage and additions; their key sets must be disjoint, no later override is permitted, and the resulting complete object is the schema-validation and persisted-record vector.",
   "candidate_subject_contract": {
+    "schema_id": "handbook.artifact-candidate",
+    "schema_version": "1.3",
     "fingerprint_field": "candidate_subject_fingerprint",
+    "required_fields_exactly": [
+      "schema_id",
+      "schema_version",
+      "intake_record_ref",
+      "target_kind_ref",
+      "target_instance_id",
+      "target_schema_ref",
+      "profile_ref",
+      "resolved_profile_fingerprint",
+      "normalized_content_ref",
+      "field_sources",
+      "unresolved_coverage_ids",
+      "promotion_eligibility",
+      "required_approval_policy_ref",
+      "basis_artifact_fingerprint"
+    ],
     "excluded_fields_exactly": [
       "candidate_id",
       "candidate_fingerprint",
       "candidate_subject_fingerprint",
-      "validation_result_refs"
+      "validation_result_binding"
     ],
+    "result_binding_independence": "The complete fourteen-field subject fingerprint is computed before and without the exact-result binding.",
     "authority_classification": "validation_binding_identity_only_not_candidate_identity_or_canonical_authority"
   },
   "candidate_final_contract": {
+    "schema_id": "handbook.artifact-candidate",
+    "schema_version": "1.3",
     "fingerprint_field": "candidate_fingerprint",
     "excluded_fields_exactly": [
       "candidate_id",
@@ -21,9 +42,10 @@
     ],
     "included_new_fields": [
       "candidate_subject_fingerprint",
-      "validation_result_refs"
+      "validation_result_binding"
     ],
-    "id_rule": "candidate_<candidate_fingerprint lowercase hex>"
+    "id_rule": "candidate_<candidate_fingerprint lowercase hex>",
+    "approval_rule": "Every new approval binds the final candidate 1.3 ref and candidate_fingerprint after the complete exact-result binding is included."
   },
   "validation_result_contract": {
     "schema_contract_path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/lifecycle-validation-result-1.0.0.schema.json",
@@ -44,7 +66,9 @@
     "ref_rule": "lifecycle-validation-results/<validation_result_id>.json",
     "store_path_rule": ".handbook/state/lifecycle-validation-results/<validation_result_id>.json",
     "max_persisted_bytes": 262144,
-    "persisted_encoding": "RFC8785-JCS complete record plus one LF"
+    "persisted_encoding": "RFC8785-JCS complete record plus one LF",
+    "exact_document_identity": "No result self-hash exists. Exact result bytes are selected only by the downstream candidate 1.3 validation_result_binding.",
+    "schema_change_for_candidate_1_3": false
   },
   "active_observation_ordering_vectors": {
     "ordering_authority": "exact active_observation_refs array order in the current committed lifecycle-transition head",
@@ -88,7 +112,7 @@
       ],
       "expected_ref_sorted_outcome": "refuse_reordered_before_mutation"
     },
-    "retained_head_compatibility": "Existing immutable multi-observation lifecycle heads remain byte-authoritative in their recorded array order. Candidate 1.2 evaluation copies that order exactly and does not rewrite, migrate, or ref-sort the head. Missing, duplicate, reordered, incomplete, or excess result/intent entries refuse before mutation."
+    "retained_head_compatibility": "Existing immutable multi-observation lifecycle heads remain byte-authoritative in their recorded array order. Candidate 1.3 evaluation copies that order exactly and does not rewrite, migrate, or ref-sort the head. Missing, duplicate, reordered, incomplete, or excess result or intent entries refuse before mutation."
   },
   "resolved_definitions": [
     {
@@ -183,17 +207,17 @@
         "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
         "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
         "schema_id": "handbook.artifact-candidate",
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "target_instance_id": "project_authority",
         "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
         "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
         "unresolved_coverage_ids": []
       },
-      "expected_candidate_subject_fingerprint": "sha256:014ede25a7e3ae67be7b38e1e80029037ea0029c6e866e1bd9b6347b818fda83",
+      "expected_candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
       "validation_result_fingerprint_preimage": {
         "active_observations": [],
         "basis_artifact_fingerprint": null,
-        "candidate_subject_fingerprint": "sha256:014ede25a7e3ae67be7b38e1e80029037ea0029c6e866e1bd9b6347b818fda83",
+        "candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
         "canonical_artifact_ref": ".handbook/project/charter.yaml",
         "intake_record_fingerprint": "sha256:4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e",
         "intake_record_ref": "intake-records/intake_4a989d5e72724fbdf99a4298bf1afafad39378bf7a115f4ddb814cd9cf5aad0e.json",
@@ -281,17 +305,16 @@
         "target_instance_id": "project_authority",
         "validation_status": "passed"
       },
-      "expected_validation_result_fingerprint": "sha256:9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848",
-      "expected_validation_result_id": "lifecycle-validation-result_9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848",
-      "expected_validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848.json",
+      "expected_validation_result_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+      "expected_validation_result_id": "lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+      "expected_validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json",
       "validation_result_record_additions": {
         "validated_at_utc": "2026-07-20T10:00:00Z",
-        "validation_result_fingerprint": "sha256:9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848",
-        "validation_result_id": "lifecycle-validation-result_9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848"
+        "validation_result_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+        "validation_result_id": "lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8"
       },
       "final_candidate_fingerprint_preimage": {
         "basis_artifact_fingerprint": null,
-        "candidate_subject_fingerprint": "sha256:014ede25a7e3ae67be7b38e1e80029037ea0029c6e866e1bd9b6347b818fda83",
         "field_sources": [
           {
             "coverage_id": "policy.authority_and_revision",
@@ -306,21 +329,27 @@
         "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
         "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
         "schema_id": "handbook.artifact-candidate",
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "target_instance_id": "project_authority",
         "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
         "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
         "unresolved_coverage_ids": [],
-        "validation_result_refs": [
-          "lifecycle-validation-results/lifecycle-validation-result_9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848.json"
-        ]
+        "candidate_subject_fingerprint": "sha256:846ddf4906a093f26472cefc0e671587dd7da1e08bb781efd02cea96f3640281",
+        "validation_result_binding": {
+          "result_byte_length": 4334,
+          "result_document_sha256": "sha256:c6696b0f9e8a8e3d1acf3fe916a3e18922869bf2cb9b2bee5457955a9488d538",
+          "validation_result_fingerprint": "sha256:e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8",
+          "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_e10efe2f45b808d48b3b399649c9e585727b56ea793a1948894d4265d032d9b8.json"
+        }
       },
-      "expected_final_candidate_fingerprint": "sha256:bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa",
-      "expected_final_candidate_id": "candidate_bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa",
+      "expected_final_candidate_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+      "expected_final_candidate_id": "candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
       "final_candidate_record_additions": {
-        "candidate_fingerprint": "sha256:bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa",
-        "candidate_id": "candidate_bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa"
-      }
+        "candidate_fingerprint": "sha256:f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961",
+        "candidate_id": "candidate_f2e8c3736c39c38e2f1b41bbbac7cdd839ee1fc954e77fe15e4909841cda4961"
+      },
+      "expected_validation_result_document_byte_length": 4334,
+      "expected_validation_result_document_sha256": "sha256:c6696b0f9e8a8e3d1acf3fe916a3e18922869bf2cb9b2bee5457955a9488d538"
     },
     {
       "name": "amendment_with_active_reassessment",
@@ -381,13 +410,13 @@
         "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
         "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
         "schema_id": "handbook.artifact-candidate",
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "target_instance_id": "project_authority",
         "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
         "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
         "unresolved_coverage_ids": []
       },
-      "expected_candidate_subject_fingerprint": "sha256:9fbc8c9f4bcdb862b8e2d44415cd8e61338cfa25c7e0d7bb4d7877a3748d04c9",
+      "expected_candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
       "validation_result_fingerprint_preimage": {
         "active_observations": [
           {
@@ -396,7 +425,7 @@
           }
         ],
         "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
-        "candidate_subject_fingerprint": "sha256:9fbc8c9f4bcdb862b8e2d44415cd8e61338cfa25c7e0d7bb4d7877a3748d04c9",
+        "candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
         "canonical_artifact_ref": ".handbook/project/charter.yaml",
         "intake_record_fingerprint": "sha256:65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff",
         "intake_record_ref": "intake-records/intake_65cf5ee7b93007a4988bcd77389033252f30a84bccac563d4f27906b575469ff.json",
@@ -486,17 +515,16 @@
         "target_instance_id": "project_authority",
         "validation_status": "passed"
       },
-      "expected_validation_result_fingerprint": "sha256:654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b",
-      "expected_validation_result_id": "lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b",
-      "expected_validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b.json",
+      "expected_validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+      "expected_validation_result_id": "lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+      "expected_validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json",
       "validation_result_record_additions": {
         "validated_at_utc": "2026-07-20T10:05:00Z",
-        "validation_result_fingerprint": "sha256:654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b",
-        "validation_result_id": "lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b"
+        "validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+        "validation_result_id": "lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad"
       },
       "final_candidate_fingerprint_preimage": {
         "basis_artifact_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
-        "candidate_subject_fingerprint": "sha256:9fbc8c9f4bcdb862b8e2d44415cd8e61338cfa25c7e0d7bb4d7877a3748d04c9",
         "field_sources": [
           {
             "coverage_id": "operational_reality.production_state",
@@ -511,33 +539,41 @@
         "required_approval_policy_ref": "handbook.approval.constitutional-candidate@1.0.0",
         "resolved_profile_fingerprint": "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
         "schema_id": "handbook.artifact-candidate",
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "target_instance_id": "project_authority",
         "target_kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
         "target_schema_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
         "unresolved_coverage_ids": [],
-        "validation_result_refs": [
-          "lifecycle-validation-results/lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b.json"
-        ]
+        "candidate_subject_fingerprint": "sha256:8c87c62c7e95fafa12a307eadce3505d7974d97a80ea347f01fd0d1337b54747",
+        "validation_result_binding": {
+          "result_byte_length": 5009,
+          "result_document_sha256": "sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f",
+          "validation_result_fingerprint": "sha256:08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad",
+          "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_08f67bbe6634d34aeaa07012353c50e73364079237036ab68413a8b0456a2aad.json"
+        }
       },
-      "expected_final_candidate_fingerprint": "sha256:03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7",
-      "expected_final_candidate_id": "candidate_03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7",
+      "expected_final_candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+      "expected_final_candidate_id": "candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
       "final_candidate_record_additions": {
-        "candidate_fingerprint": "sha256:03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7",
-        "candidate_id": "candidate_03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7"
-      }
+        "candidate_fingerprint": "sha256:723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99",
+        "candidate_id": "candidate_723aa44c3a906511f6dc8c08984b99e89e581c5303e125b602059ab1bf0ffe99"
+      },
+      "expected_validation_result_document_byte_length": 5009,
+      "expected_validation_result_document_sha256": "sha256:ce59629275937486506b3cc532bac5005a1f3ee93a7b0c4b277fc0d262b1fe0f"
     }
   ],
   "cross_record_bindings": [
     {
-      "source": "candidate.validation_result_refs[0]",
+      "source": "candidate.validation_result_binding",
       "target": "lifecycle-validation-result",
       "required_equalities": [
-        "ref basename equals validation_result_id",
-        "target ID equals fingerprint-derived ID",
-        "target validation_result_fingerprint recomputes from exact bytes",
-        "candidate_subject_fingerprint equals recomputation from the candidate subject preimage",
-        "exact target bytes validate against lifecycle-validation-result schema 1.0"
+        "binding has exactly validation_result_ref, validation_result_fingerprint, result_document_sha256, and result_byte_length",
+        "ref basename equals validation_result_id and target ID equals fingerprint-derived ID",
+        "declared semantic fingerprint equals recomputation from the result 1.0 preimage excluding ID, fingerprint, and validated_at_utc",
+        "result candidate_subject_fingerprint equals independent recomputation from the complete candidate 1.3 subject",
+        "result_document_sha256 equals SHA-256 of the exact persisted complete target JCS+LF bytes",
+        "result_byte_length equals exact persisted target length including LF",
+        "exact target bytes validate against unchanged lifecycle-validation-result schema 1.0"
       ]
     },
     {
@@ -579,36 +615,478 @@
         "array order exactly equals the committed lifecycle head order",
         "no missing, duplicate, reordered, or excess entry is admitted"
       ]
+    },
+    {
+      "source": "artifact-approval-record.candidate_ref and candidate_fingerprint",
+      "target": "final candidate 1.3",
+      "required_equalities": [
+        "approval candidate ref basename equals final candidate ID",
+        "approval candidate_fingerprint equals the candidate fingerprint including the complete exact-result binding",
+        "candidate 1.0, 1.1, or 1.2 approval never satisfies candidate 1.3"
+      ]
+    },
+    {
+      "source": "artifact-promotion-record candidate and validation-result bindings",
+      "target": "final candidate 1.3 and its exact result",
+      "required_equalities": [
+        "promotion candidate ref/fingerprint equals final candidate 1.3",
+        "promotion semantic result ref equals the candidate exact-result binding",
+        "promotion reload proves candidate-bound exact result SHA-256 and byte length before mutation"
+      ]
+    },
+    {
+      "source": "promotion-transaction-intent 1.2 candidate_lineage",
+      "target": "final candidate 1.3 and its exact result",
+      "required_equalities": [
+        "intent candidate ref/fingerprint equals final candidate 1.3",
+        "intent candidate_subject_fingerprint equals candidate 1.3 subject fingerprint",
+        "intent semantic result ref/fingerprint equals candidate validation_result_binding",
+        "candidate fingerprint transitively binds result_document_sha256 and result_byte_length without widening intent 1.2 schema"
+      ]
     }
   ],
   "negative_vectors": [
     {
-      "mutation": "include validation_result_refs in candidate_subject_fingerprint preimage",
-      "expected": "refuse_cycle_guard"
+      "vector_id": "NEG-EXACT-001",
+      "mutation": "include validation_result_binding in candidate_subject_fingerprint preimage",
+      "expected": "refuse_cycle_or_subject_identity_violation"
     },
     {
-      "mutation": "candidate 1.2 has zero or more than one validation_result_refs entry",
+      "vector_id": "NEG-EXACT-002",
+      "mutation": "candidate 1.3 omits validation_result_binding or represents zero or many bindings",
       "expected": "refuse_exact_cardinality"
     },
     {
-      "mutation": "result binds a final candidate fingerprint or candidate ID",
-      "expected": "refuse_forward_identity_edge"
+      "vector_id": "NEG-EXACT-003",
+      "mutation": "result binds a final candidate fingerprint, candidate ID, raw-document digest, or self-hash",
+      "expected": "refuse_forward_or_cyclic_identity_edge"
     },
     {
-      "mutation": "candidate subject, intake, normalized content, basis, profile, definition, lifecycle head/state, active observation, or reopened coverage binding is missing, forged, stale, duplicate, reordered, incomplete, or excess",
-      "expected": "refuse_before_promotion_mutation"
+      "vector_id": "NEG-EXACT-004",
+      "mutation": "coherently rewrite result, witness, mutable binding/receipt/sidecar, and any non-candidate companion",
+      "expected": "refuse_candidate_bound_exact_document_mismatch_preserve_all_evidence"
     },
     {
-      "mutation": "active observations are re-sorted by observation_ref instead of copied in the exact committed lifecycle-head order",
-      "expected": "refuse_reordered_before_mutation"
+      "vector_id": "NEG-EXACT-005",
+      "mutation": "rewrite only validated_at_utc while retaining semantic result fingerprint and ref",
+      "expected": "refuse_result_document_sha256_or_length_mismatch"
     },
     {
-      "mutation": "caller supplies candidate_subject_fingerprint, validation-result bytes, validation_result_id, validation_result_fingerprint, validation_result_refs, or validated_at_utc",
-      "expected": "refuse_caller_authored_validation_authority"
+      "vector_id": "NEG-EXACT-006",
+      "mutation": "rewrite result bytes and candidate binding coherently while retaining an old approval",
+      "expected": "refuse_final_candidate_and_approval_mismatch"
     },
     {
-      "mutation": "same content-addressed result path contains bytes other than the exact RFC8785-JCS complete record plus LF",
-      "expected": "refuse_preserve_existing_bytes_no_overwrite"
+      "vector_id": "NEG-EXACT-007",
+      "mutation": "forge a second candidate entry matching the discovery selector pair",
+      "expected": "refuse_many_preserve_all_evidence"
+    },
+    {
+      "vector_id": "NEG-EXACT-008",
+      "mutation": "zero matching candidates and absent result",
+      "expected": "admit_first_authoring_only_after_complete_preflight"
+    },
+    {
+      "vector_id": "NEG-EXACT-009",
+      "mutation": "exactly one matching candidate with exact candidate identity and exact result digest/length",
+      "expected": "admit_read_only_replay"
+    },
+    {
+      "vector_id": "NEG-EXACT-010",
+      "mutation": "more than one matching candidate",
+      "expected": "refuse_many_preserve_all_evidence"
+    },
+    {
+      "vector_id": "NEG-EXACT-011",
+      "mutation": "expected result exists with no matching candidate 1.3",
+      "expected": "refuse_orphan_no_adopt_overwrite_repair_or_delete"
+    },
+    {
+      "vector_id": "NEG-EXACT-012",
+      "mutation": "matching candidate exists but result is missing",
+      "expected": "refuse_missing_result_preserve_candidate"
+    },
+    {
+      "vector_id": "NEG-EXACT-013",
+      "mutation": "candidate binding has wrong result_document_sha256",
+      "expected": "refuse_before_mutation"
+    },
+    {
+      "vector_id": "NEG-EXACT-014",
+      "mutation": "candidate binding has wrong result_byte_length including LF",
+      "expected": "refuse_before_mutation"
+    },
+    {
+      "vector_id": "NEG-EXACT-015",
+      "mutation": "semantic ref/fingerprint from one result are crossed with raw digest/length from another",
+      "expected": "refuse_semantic_raw_document_crossing"
+    },
+    {
+      "vector_id": "NEG-EXACT-016",
+      "mutation": "candidate or result store contains unsafe, rewritten, duplicate, mismatching, non-regular, linked, malformed, or crossed relevant entry",
+      "expected": "refuse_before_mutation_preserve_all_evidence"
+    },
+    {
+      "vector_id": "NEG-EXACT-017",
+      "mutation": "selected read or author falls back to candidate 1.2",
+      "expected": "refuse_historical_candidate_fallback"
+    },
+    {
+      "vector_id": "NEG-EXACT-018",
+      "mutation": "candidate 1.0, 1.1, or 1.2 approval is carried forward",
+      "expected": "refuse_approval_carry_forward"
+    },
+    {
+      "vector_id": "NEG-EXACT-019",
+      "mutation": "refusal branch mutates, cleans, adopts, overwrites, or deletes any candidate, result, witness, binding, receipt, sidecar, or orphan",
+      "expected": "fail_test_evidence_must_remain_byte_exact"
+    }
+  ],
+  "candidate_exact_result_binding_contract": {
+    "field": "validation_result_binding",
+    "cardinality": "exactly_one_required_closed_object_not_an_array",
+    "required_fields_exactly": [
+      "validation_result_ref",
+      "validation_result_fingerprint",
+      "result_document_sha256",
+      "result_byte_length"
+    ],
+    "additional_fields": false,
+    "semantic_binding": "validation_result_ref and validation_result_fingerprint identify the independently recomputed lifecycle-validation result 1.0 semantic record",
+    "exact_document_binding": "result_document_sha256 is SHA-256 of the exact persisted complete result RFC8785-JCS UTF-8 bytes plus one LF; result_byte_length counts every byte including that LF",
+    "authority_classification": "final_candidate_1.3_is_the_independent_downstream_exact_document_anchor",
+    "forbidden_authority": [
+      "result self-hash",
+      "witness",
+      "binding sidecar",
+      "receipt",
+      "mutable companion"
+    ]
+  },
+  "historical_candidate_1_2_contract": {
+    "status": "immutable_historical_checkpoint_evidence_only",
+    "selected_product_read": false,
+    "subject_fields": [
+      "schema_id",
+      "schema_version",
+      "intake_record_ref",
+      "target_kind_ref",
+      "target_instance_id",
+      "target_schema_ref",
+      "profile_ref",
+      "resolved_profile_fingerprint",
+      "normalized_content_ref",
+      "field_sources",
+      "unresolved_coverage_ids",
+      "promotion_eligibility",
+      "required_approval_policy_ref",
+      "basis_artifact_fingerprint"
+    ],
+    "subject_excluded_fields_exactly": [
+      "candidate_id",
+      "candidate_fingerprint",
+      "candidate_subject_fingerprint",
+      "validation_result_refs"
+    ],
+    "final_additions": [
+      "candidate_subject_fingerprint",
+      "validation_result_refs"
+    ],
+    "validation_result_cardinality": "one semantic ref",
+    "chain_identities": [
+      {
+        "name": "create_only",
+        "candidate_subject_fingerprint": "sha256:014ede25a7e3ae67be7b38e1e80029037ea0029c6e866e1bd9b6347b818fda83",
+        "validation_result_fingerprint": "sha256:9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848",
+        "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_9c09c0020337ba8896987c868cfa446010673b11244df4509da7c5fee76e5848.json",
+        "candidate_fingerprint": "sha256:bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa",
+        "candidate_id": "candidate_bbed52263f4d3f588aab3e450af98f95ee017ee0cd30c3bd8dced6516f10beaa"
+      },
+      {
+        "name": "amendment_with_active_reassessment",
+        "candidate_subject_fingerprint": "sha256:9fbc8c9f4bcdb862b8e2d44415cd8e61338cfa25c7e0d7bb4d7877a3748d04c9",
+        "validation_result_fingerprint": "sha256:654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b",
+        "validation_result_ref": "lifecycle-validation-results/lifecycle-validation-result_654a3b58453f8acb0f32a91241ed7c9d2e41ebca26c4e4b17cbf0ae822a9ea4b.json",
+        "candidate_fingerprint": "sha256:03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7",
+        "candidate_id": "candidate_03bc3889203a5833edef36d2bb75e98065d743ecc34eb84c9a37784faa6f1ae7"
+      }
+    ],
+    "migration_rule": "Preserve every candidate 1.0, 1.1, and 1.2 record and approval byte; never copy its result ref or approval into candidate 1.3 authority."
+  },
+  "identity_graph": {
+    "topological_order": [
+      "complete_candidate_1.3_subject",
+      "candidate_subject_fingerprint",
+      "lifecycle_validation_result_1.0_semantic_preimage",
+      "validation_result_fingerprint_and_ref",
+      "exact_persisted_result_JCS_plus_LF_bytes",
+      "candidate_1.3_exact_result_binding",
+      "final_candidate_1.3_fingerprint_and_id",
+      "new_human_approval",
+      "promotion_record",
+      "promotion_transaction_intent_1.2"
+    ],
+    "edges": [
+      "candidate subject -> candidate_subject_fingerprint",
+      "candidate_subject_fingerprint -> lifecycle-validation result semantic identity",
+      "result semantic identity plus engine audit timestamp -> exact persisted result JCS+LF bytes",
+      "result ref/fingerprint and exact bytes hash/length -> candidate 1.3 exact-result binding",
+      "candidate subject plus subject fingerprint plus complete exact-result binding -> final candidate fingerprint/ID",
+      "final candidate fingerprint -> approval",
+      "final candidate fingerprint -> promotion",
+      "final candidate fingerprint and semantic result ref/fingerprint -> intent 1.2 candidate_lineage"
+    ],
+    "forbidden_edges": [
+      "lifecycle-validation result record -> final candidate fingerprint field or candidate ID back-reference",
+      "result document self-hash -> result identity",
+      "mutable witness/binding/receipt/sidecar -> independent authority"
+    ],
+    "acyclic_proof": "Every dependency advances strictly through topological_order. Exact result bytes intentionally feed the candidate 1.3 binding and final identity, but the result 1.0 record itself contains only candidate_subject_fingerprint and no final-candidate field or back-reference."
+  },
+  "author_replay_contract": {
+    "lock": "Hold the author lock for the complete read-only inventory, recomputation, classification, and any permitted first-authoring publication.",
+    "recomputation_order": [
+      "independently recompute the complete candidate 1.3 subject fingerprint without any result binding",
+      "resolve current profile, all definitions, intake/content, canonical basis, lifecycle policy/head/state, active observations, and reopened coverage",
+      "independently recompute the expected lifecycle-validation result 1.0 semantic fingerprint and ref without validated_at_utc",
+      "perform the exact two-pass bounded no-follow candidate/result inventory in author_inventory_contract before mutation"
+    ],
+    "discovery_selector_pair": [
+      "candidate_subject_fingerprint",
+      "validation_result_binding.validation_result_ref plus validation_result_binding.validation_result_fingerprint"
+    ],
+    "discovery_scope_rule": "Classify every immediate entry in both owned roots under author_inventory_contract. Count only safe schema-valid candidate 1.3 records matching the recomputed pair; safe historical/nonmatching records are retained nonmatches, while any unsafe/malformed/unowned entry or stable-scan disagreement refuses before mutation.",
+    "cases": [
+      {
+        "case_id": "zero_matching_candidates_and_no_expected_result",
+        "candidate_match_count": 0,
+        "expected_result": "absent",
+        "outcome": "first_authoring_may_publish_result_then_candidate",
+        "mutation": "only_create_new_no_replace_after_complete_preflight"
+      },
+      {
+        "case_id": "exactly_one_matching_candidate_and_exact_result",
+        "candidate_match_count": 1,
+        "expected_result": "safe_exact",
+        "outcome": "replay_only_after_candidate_identity_and_exact_result_digest_length_equality",
+        "mutation": "none"
+      },
+      {
+        "case_id": "more_than_one_matching_candidate",
+        "candidate_match_count": "more_than_one",
+        "expected_result": "any",
+        "outcome": "refuse_forged_or_duplicate_candidate_preserve_all_evidence",
+        "mutation": "none"
+      },
+      {
+        "case_id": "result_without_matching_candidate",
+        "candidate_match_count": 0,
+        "expected_result": "present",
+        "outcome": "refuse_orphan_preserve_all_evidence",
+        "mutation": "none"
+      },
+      {
+        "case_id": "matching_candidate_without_result",
+        "candidate_match_count": 1,
+        "expected_result": "absent",
+        "outcome": "refuse_missing_result_preserve_candidate",
+        "mutation": "none"
+      },
+      {
+        "case_id": "matching_pair_with_digest_length_or_identity_mismatch",
+        "candidate_match_count": 1,
+        "expected_result": "present_but_not_exact",
+        "outcome": "refuse_preserve_all_evidence",
+        "mutation": "none"
+      }
+    ],
+    "refusal_rule": "Missing, unsafe, rewritten, duplicate, mismatching, semantically crossed, or raw-document-crossed authority refuses before any timestamp allocation, create-new, overwrite, repair, adoption, deletion, or cleanup."
+  },
+  "orphan_and_recovery_contract": {
+    "publication_order": "After complete preflight, first authoring publishes the immutable result create-new, reopens and computes its exact JCS+LF SHA-256/length, constructs final candidate 1.3, then publishes the candidate create-new.",
+    "orphan_definition": "The expected semantic result exists but no candidate 1.3 matches the independently recomputed candidate-subject and semantic-result pair.",
+    "orphan_authority": false,
+    "automatic_actions_forbidden": [
+      "adopt",
+      "overwrite",
+      "repair",
+      "delete",
+      "copy result ref",
+      "author candidate"
+    ],
+    "minimal_recovery": "Preserve every byte and refuse. Resolution requires a separately authorized forensic procedure.",
+    "automatic_crash_completion": "Out of scope. If desired, stop and specify a separately reviewed author-publication transaction; no recovery protocol is inferred here."
+  },
+  "migration_contract": {
+    "preserve_immutable_versions": [
+      "candidate 1.0",
+      "candidate 1.1",
+      "candidate 1.2",
+      "their approvals"
+    ],
+    "selected_candidate_version": "1.3",
+    "required_actions": [
+      "reauthor candidate 1.3",
+      "recompute result 1.0 from candidate 1.3 subject",
+      "obtain new approvals"
+    ],
+    "forbidden": [
+      "dual read",
+      "automatic upgrade",
+      "result-ref copying",
+      "approval carry-forward",
+      "selected-product fallback to candidate 1.2",
+      "historical record rewrite"
+    ],
+    "lifecycle_validation_result_schema_change": false,
+    "promotion_transaction_intent_1.2_schema_change": false
+  },
+  "author_inventory_contract": {
+    "author_lock_scope": "one exclusive repository-identity plus target-instance author lock spans both complete scans, classification, and any permitted first-authoring publication",
+    "roots": {
+      "candidate_store": ".handbook/evidence/charter/candidates/",
+      "validation_result_store": ".handbook/state/lifecycle-validation-results/"
+    },
+    "store_alignment_rule": "validation_result_store is exactly the directory parent of the unchanged lifecycle-validation-result 1.0 store_path_rule; semantic result refs resolve to the same basename in that authoritative store, and no evidence-root alias exists",
+    "filename_grammars": {
+      "candidate_store": "candidate_[0-9a-f]{64}.json; exactly 79 ASCII bytes",
+      "validation_result_store": "lifecycle-validation-result_[0-9a-f]{64}.json; exactly 97 ASCII bytes"
+    },
+    "limits_per_root": {
+      "max_immediate_entries": 4096,
+      "max_entry_bytes": 262144,
+      "max_aggregate_bytes": 1073741824,
+      "max_filename_utf8_bytes": 128
+    },
+    "enumeration": "Open each exact root no-follow with reparse/link rejection; enumerate every immediate entry without glob filtering; sort by raw ASCII filename bytes; reject nested directories and every non-regular entry; duplicate-key parse and closed-schema validate every bounded file.",
+    "classification": {
+      "safe_candidate_1.0_1.1_1.2": "historical evidence; never a match or fallback",
+      "safe_candidate_1.3_nonmatching_pair": "unrelated retained candidate; never a match",
+      "safe_result_1.0_nonexpected_semantic_ref": "unrelated retained result; never an orphan for this request",
+      "matching_candidate_1.3": "count by independently recomputed subject plus semantic-result ref/fingerprint pair",
+      "expected_semantic_result": "classify absent, safe exact, or present-not-exact",
+      "unsafe_or_malformed_any_version_or_unowned_name": "refuse before mutation even when historical or otherwise unrelated"
+    },
+    "stable_scan": "Perform two complete bounded reads under the author lock. Each scan records root file identity plus every (raw filename bytes, file identity, byte length, SHA-256) tuple. Require byte-identical tuple vectors and revalidated record identities; any add/remove/rename/identity/length/hash/root change refuses before mutation.",
+    "overflow": "Count, per-file, aggregate-byte, filename-byte, arithmetic-overflow, or second-scan mismatch refuses before timestamp allocation or filesystem mutation and preserves every entry."
+  },
+  "author_inventory_boundary_vectors": [
+    {
+      "case_id": "candidate_count_below",
+      "candidate_entries": 4095,
+      "result_entries": 0,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "candidate_count_at",
+      "candidate_entries": 4096,
+      "result_entries": 0,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "candidate_count_above",
+      "candidate_entries": 4097,
+      "result_entries": 0,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "result_count_below",
+      "candidate_entries": 0,
+      "result_entries": 4095,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "result_count_at",
+      "candidate_entries": 0,
+      "result_entries": 4096,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "result_count_above",
+      "candidate_entries": 0,
+      "result_entries": 4097,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "entry_bytes_below",
+      "byte_length": 262143,
+      "outcome": "admit_entry"
+    },
+    {
+      "case_id": "entry_bytes_at",
+      "byte_length": 262144,
+      "outcome": "admit_entry"
+    },
+    {
+      "case_id": "entry_bytes_above",
+      "byte_length": 262145,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "aggregate_bytes_below",
+      "byte_length": 1073741823,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "aggregate_bytes_at",
+      "byte_length": 1073741824,
+      "outcome": "admit_inventory"
+    },
+    {
+      "case_id": "aggregate_bytes_above",
+      "byte_length": 1073741825,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "filename_bytes_below",
+      "byte_length": 127,
+      "grammar": "unowned",
+      "outcome": "refuse_unowned_name_preserve"
+    },
+    {
+      "case_id": "filename_bytes_at",
+      "byte_length": 128,
+      "grammar": "unowned",
+      "outcome": "refuse_unowned_name_preserve"
+    },
+    {
+      "case_id": "filename_bytes_above",
+      "byte_length": 129,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "owned_candidate_filename",
+      "byte_length": 79,
+      "grammar": "candidate_[0-9a-f]{64}.json",
+      "outcome": "admit_owned_name"
+    },
+    {
+      "case_id": "owned_validation_result_filename",
+      "byte_length": 97,
+      "grammar": "lifecycle-validation-result_[0-9a-f]{64}.json",
+      "outcome": "admit_owned_name"
+    },
+    {
+      "case_id": "unsafe_historical_candidate",
+      "version": "1.2",
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "malformed_unrelated_result",
+      "semantic_match": false,
+      "outcome": "refuse_preserve"
+    },
+    {
+      "case_id": "stable_scan_equal",
+      "scan_1": "exact_tuple_vector",
+      "scan_2": "exact_tuple_vector",
+      "outcome": "continue_classification"
+    },
+    {
+      "case_id": "stable_scan_changed",
+      "scan_1": "exact_tuple_vector",
+      "scan_2": "any_difference",
+      "outcome": "refuse_preserve"
     }
   ]
 }
