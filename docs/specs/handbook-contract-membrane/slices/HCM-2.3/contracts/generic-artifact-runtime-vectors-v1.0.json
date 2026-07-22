@@ -1,0 +1,431 @@
+{
+  "schema_id": "handbook.hcm-2-3-generic-runtime-vectors",
+  "schema_version": "1.0",
+  "runtime_schema": "generic-artifact-runtime-records-1.0.0.schema.json",
+  "value_objects": [
+    {
+      "value": "Registry Brief Proof",
+      "ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04.json",
+      "fingerprint": "sha256:3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04"
+    },
+    {
+      "value": "A reusable registry brief",
+      "ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f.json",
+      "fingerprint": "sha256:03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f"
+    }
+  ],
+  "normalized_content": {
+    "value": {
+      "summary": "A reusable registry brief",
+      "title": "Registry Brief Proof"
+    },
+    "ref": ".handbook/evidence/artifacts/registry_brief/content/content_3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad.json",
+    "fingerprint": "sha256:3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad",
+    "persisted_document_sha256": "sha256:2ec116836cad6829ae5159e48c6e147e23639ef92570dd4ee0a92217bd96a7a1",
+    "byte_length": 71
+  },
+  "records": [
+    {
+      "record_class": "intake-1.2",
+      "identity_excludes": [
+        "intake_record_id",
+        "record_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.artifact-intake-record",
+        "schema_version": "1.2",
+        "intake_definition_ref": "example.intake.registry-brief@1.0.0",
+        "intake_definition_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "acquisition_mode": "express",
+        "target_kind_ref": "example.artifact-kind.registry-brief@1.0.0",
+        "target_instance_id": "registry_brief",
+        "target_schema_ref": "example.schemas.registry-brief@1.0.0",
+        "profile_ref": "example.profile.registry-root@1.1.0",
+        "resolved_profile_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operation_context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8",
+        "consumer": {
+          "kind": "handbook_cli",
+          "id": "handbook",
+          "version": "1.0.0"
+        },
+        "coverage_results": [
+          {
+            "coverage_id": "registry_brief.title",
+            "applicability": "applicable",
+            "source_kind": "user_declaration",
+            "value_ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04.json",
+            "value_fingerprint": "sha256:3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04",
+            "evidence_refs": [],
+            "confidence": "high",
+            "freshness": null,
+            "sensitivity": "internal",
+            "evaluation": "satisfied",
+            "contradiction_refs": [],
+            "waiver_ref": null
+          },
+          {
+            "coverage_id": "registry_brief.summary",
+            "applicability": "applicable",
+            "source_kind": "user_declaration",
+            "value_ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f.json",
+            "value_fingerprint": "sha256:03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f",
+            "evidence_refs": [],
+            "confidence": "high",
+            "freshness": null,
+            "sensitivity": "internal",
+            "evaluation": "satisfied",
+            "contradiction_refs": [],
+            "waiver_ref": null
+          }
+        ],
+        "basis_artifact_fingerprint": null,
+        "prompt_event_refs": [],
+        "finalized_at_utc": "2026-07-21T00:00:00Z",
+        "intake_record_id": "intake_b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c",
+        "record_fingerprint": "sha256:b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c"
+      }
+    },
+    {
+      "record_class": "validation-result-1.0",
+      "identity_excludes": [
+        "validation_result_id",
+        "validation_result_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.artifact-validation-result",
+        "schema_version": "1.0",
+        "target_kind_ref": "example.artifact-kind.registry-brief@1.0.0",
+        "target_instance_id": "registry_brief",
+        "target_schema_ref": "example.schemas.registry-brief@1.0.0",
+        "profile_ref": "example.profile.registry-root@1.1.0",
+        "resolved_profile_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operation_context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8",
+        "intake_record_ref": ".handbook/state/artifacts/registry_brief/intake-records/intake_b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c.json",
+        "intake_record_fingerprint": "sha256:b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c",
+        "normalized_content_ref": ".handbook/evidence/artifacts/registry_brief/content/content_3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad.json",
+        "normalized_content_fingerprint": "sha256:3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad",
+        "basis_artifact_fingerprint": null,
+        "layers": {
+          "source": {
+            "status": "pass"
+          },
+          "registration": {
+            "status": "pass"
+          },
+          "canonical_syntax": {
+            "status": "pass"
+          },
+          "structural": {
+            "status": "pass",
+            "schema_ref": "example.schemas.registry-brief@1.0.0",
+            "schema_closure_fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+          },
+          "semantic": {
+            "status": "not_applicable",
+            "reason": "no_semantic_validator"
+          },
+          "intake": {
+            "status": "pass",
+            "intake_definition_ref": "example.intake.registry-brief@1.0.0",
+            "intake_definition_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "approval": {
+            "status": "not_applicable",
+            "reason": "null_approval_policy"
+          },
+          "external_evidence": {
+            "status": "not_applicable",
+            "reason": "not_selected"
+          }
+        },
+        "outcome": "valid",
+        "validation_result_id": "validation_f6395dd6b06c2016c37e5393c09fb6ba63bf8fdc60a223d1a1727bccd4357e6e",
+        "validation_result_fingerprint": "sha256:f6395dd6b06c2016c37e5393c09fb6ba63bf8fdc60a223d1a1727bccd4357e6e"
+      }
+    },
+    {
+      "record_class": "candidate-1.4",
+      "identity_excludes": [
+        "candidate_id",
+        "candidate_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.artifact-candidate",
+        "schema_version": "1.4",
+        "intake_record_ref": ".handbook/state/artifacts/registry_brief/intake-records/intake_b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c.json",
+        "intake_record_fingerprint": "sha256:b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c",
+        "target_kind_ref": "example.artifact-kind.registry-brief@1.0.0",
+        "target_instance_id": "registry_brief",
+        "target_schema_ref": "example.schemas.registry-brief@1.0.0",
+        "profile_ref": "example.profile.registry-root@1.1.0",
+        "resolved_profile_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operation_context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8",
+        "normalized_content_ref": ".handbook/evidence/artifacts/registry_brief/content/content_3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad.json",
+        "normalized_content_fingerprint": "sha256:3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad",
+        "field_sources": [
+          {
+            "target_path": "/title",
+            "coverage_id": "registry_brief.title",
+            "source_kind": "user_declaration",
+            "value_ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04.json",
+            "value_fingerprint": "sha256:3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04"
+          },
+          {
+            "target_path": "/summary",
+            "coverage_id": "registry_brief.summary",
+            "source_kind": "user_declaration",
+            "value_ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f.json",
+            "value_fingerprint": "sha256:03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f"
+          }
+        ],
+        "validation_result_refs": [
+          ".handbook/evidence/artifacts/registry_brief/validation-results/validation_f6395dd6b06c2016c37e5393c09fb6ba63bf8fdc60a223d1a1727bccd4357e6e.json"
+        ],
+        "unresolved_coverage_ids": [],
+        "promotion_eligibility": "eligible_without_approval",
+        "required_approval_policy_ref": null,
+        "basis_artifact_fingerprint": null,
+        "candidate_id": "candidate_dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c",
+        "candidate_fingerprint": "sha256:dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c"
+      }
+    },
+    {
+      "record_class": "promotion-1.2",
+      "identity_excludes": [
+        "promotion_id",
+        "promotion_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.artifact-promotion-record",
+        "schema_version": "1.2",
+        "candidate_ref": ".handbook/evidence/artifacts/registry_brief/candidates/candidate_dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c.json",
+        "candidate_fingerprint": "sha256:dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c",
+        "target_instance_id": "registry_brief",
+        "expected_current_artifact_fingerprint": null,
+        "profile_ref": "example.profile.registry-root@1.1.0",
+        "resolved_profile_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operation_context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8",
+        "resolved_definitions": [
+          {
+            "definition_ref": "example.artifact-kind.registry-brief@1.0.0",
+            "definition_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+          },
+          {
+            "definition_ref": "example.intake.registry-brief@1.0.0",
+            "definition_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          {
+            "definition_ref": "example.profile.registry-root@1.1.0",
+            "definition_fingerprint": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+          },
+          {
+            "definition_ref": "example.schemas.registry-brief@1.0.0",
+            "definition_fingerprint": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+          }
+        ],
+        "approval_refs": [],
+        "validation_result_refs": [
+          ".handbook/evidence/artifacts/registry_brief/validation-results/validation_f6395dd6b06c2016c37e5393c09fb6ba63bf8fdc60a223d1a1727bccd4357e6e.json"
+        ],
+        "decision": "not_required",
+        "authorized_by_ref": null,
+        "canonical_artifact_ref": ".handbook/project/registry-brief.yaml",
+        "canonical_artifact_fingerprint": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d",
+        "promotion_id": "promotion_d3dfb97fa1e24ac8a16651fa733cf60d83bdae4ecdcaddce1c73c263146ff8ae",
+        "promotion_fingerprint": "sha256:d3dfb97fa1e24ac8a16651fa733cf60d83bdae4ecdcaddce1c73c263146ff8ae"
+      }
+    }
+  ],
+  "canonical_yaml": {
+    "bytes_utf8_lf": "summary: \"A reusable registry brief\"\ntitle: \"Registry Brief Proof\"\n",
+    "sha256": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d",
+    "byte_length": 67
+  },
+  "negative_vectors": [
+    {
+      "vector_id": "old-version-new-field",
+      "mutation": "add operation_context_fingerprint to intake 1.0",
+      "expected": "unknown_field"
+    },
+    {
+      "vector_id": "governed-null-eligibility",
+      "mutation": "use candidate 1.4 under Charter instance",
+      "expected": "record_family_mismatch"
+    },
+    {
+      "vector_id": "approval-injection",
+      "mutation": "add approval ref or approved decision",
+      "expected": "unknown_or_closed_value"
+    },
+    {
+      "vector_id": "rewritten-validation",
+      "mutation": "change one validation layer without updating candidate",
+      "expected": "validation_result_fingerprint_mismatch"
+    },
+    {
+      "vector_id": "candidate-without-validation",
+      "mutation": "empty validation_result_refs",
+      "expected": "cardinality"
+    },
+    {
+      "vector_id": "cross-context-result",
+      "mutation": "replace validation operation_context_fingerprint",
+      "expected": "stale_operation_context"
+    },
+    {
+      "vector_id": "duplicate-field-source-identity",
+      "mutation": "repeat a candidate field_sources target_pointer or coverage_id with different companion values",
+      "expected": "duplicate_field_source"
+    },
+    {
+      "vector_id": "duplicate-resolved-definition-identity",
+      "mutation": "repeat a promotion resolved_definitions definition_ref with a different fingerprint",
+      "expected": "duplicate_definition_identity"
+    },
+    {
+      "vector_id": "cross-suite-operation-context-divergence",
+      "mutation": "replace one runtime record operation_context_fingerprint with another valid SHA-256 and recompute its lineage",
+      "expected": "stale_operation_context"
+    },
+    {
+      "vector_id": "promotion-current-definitions-mismatch",
+      "mutation": "change any promotion resolved definition ref or fingerprint while retaining the cited operation context",
+      "expected": "operation_context_definition_mismatch"
+    },
+    {
+      "vector_id": "promotion-current-definitions-reordered",
+      "mutation": "reorder the exact promotion resolved definitions away from the operation-context UTF-8 projection and recompute only promotion identity",
+      "expected": "operation_context_definition_order_mismatch"
+    }
+  ],
+  "schema_rejection_vectors": [
+    {
+      "vector_id": "runtime-one-segment-exact-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/intake_definition_ref",
+      "replacement": "badref@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-underscore-exact-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/intake_definition_ref",
+      "replacement": "bad_ref.value@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-repeated-hyphen-exact-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/intake_definition_ref",
+      "replacement": "bad--ref.value@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-noncanonical-semver",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/intake_definition_ref",
+      "replacement": "bad.ref@01.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-dot-segment-safe-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/coverage_results/0/value_ref",
+      "replacement": ".handbook/./evidence/value.json",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-trailing-slash-safe-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/coverage_results/0/value_ref",
+      "replacement": ".handbook/evidence/",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-over-component-safe-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/coverage_results/0/value_ref",
+      "replacement": "x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-over-byte-safe-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/coverage_results/0/value_ref",
+      "replacement": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-over-segment-exact-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/intake_definition_ref",
+      "replacement": "a111111111111111111111111111111111111111111111111111111111111111.value@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-over-identity-exact-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/intake_definition_ref",
+      "replacement": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-final-line-terminator-exact-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/intake_definition_ref",
+      "replacement": "example.intake.registry-brief@1.0.0\n",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-final-line-terminator-safe-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/coverage_results/0/value_ref",
+      "replacement": ".handbook/evidence/value.json\n",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-final-line-terminator-sha256",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/operation_context_fingerprint",
+      "replacement": "sha256:1111111111111111111111111111111111111111111111111111111111111111\n",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "runtime-final-line-terminator-record-id",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/intake_record_id",
+      "replacement": "intake_1111111111111111111111111111111111111111111111111111111111111111\n",
+      "expected": "schema_rejection"
+    }
+  ],
+  "schema_acceptance_vectors": [
+    {
+      "vector_id": "runtime-canonical-prerelease-build-exact-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/intake_definition_ref",
+      "replacement": "valid.value@1.0.0-alpha.1+build.2",
+      "expected": "schema_acceptance"
+    },
+    {
+      "vector_id": "runtime-63-byte-segment-exact-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/intake_definition_ref",
+      "replacement": "a11111111111111111111111111111111111111111111111111111111111111.value@1.0.0",
+      "expected": "schema_acceptance"
+    },
+    {
+      "vector_id": "runtime-64-component-safe-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/coverage_results/0/value_ref",
+      "replacement": "x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x",
+      "expected": "schema_acceptance"
+    },
+    {
+      "vector_id": "runtime-1024-byte-safe-ref",
+      "base_record_class": "intake-1.2",
+      "json_pointer": "/coverage_results/0/value_ref",
+      "replacement": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "expected": "schema_acceptance"
+    }
+  ]
+}

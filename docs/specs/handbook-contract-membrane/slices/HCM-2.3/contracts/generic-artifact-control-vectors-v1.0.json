@@ -1,0 +1,1596 @@
+{
+  "schema_id": "handbook.hcm-2-3-generic-control-vectors",
+  "schema_version": "1.0",
+  "control_schema": "generic-artifact-control-records-1.0.0.schema.json",
+  "fingerprint_rule": "RFC8785/SHA-256 over the complete record after removing only the terminal fingerprint named by identity_excludes",
+  "persisted_bytes_rule": "Every intent bytes_sha256 and byte_length names the exact UTF-8 persisted bytes: scalar JCS plus LF for intake values, complete record JCS plus LF for semantic records, normalized content JSON plus LF, or canonical YAML bytes exactly as declared by the runtime vectors.",
+  "positive_vectors": [
+    {
+      "vector_id": "operation-context",
+      "identity_excludes": [
+        "context_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.artifact-operation-context",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "selection_fingerprint": "sha256:3a5c945e68c29fa765bc4568ff4eae1eacbd84a9f90a71a00a56bb5d04cc82c9",
+        "profile_ref": "example.profile.registry-root@1.1.0",
+        "resolved_profile_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kind_ref": "example.artifact-kind.registry-brief@1.0.0",
+        "kind_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "instance_id": "registry_brief",
+        "descriptor_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "schema_ref": "example.schemas.registry-brief@1.0.0",
+        "schema_entry_fingerprint": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "schema_document_fingerprint": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+        "intake_definition_ref": "example.intake.registry-brief@1.0.0",
+        "intake_definition_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "resolved_definitions": [
+          {
+            "definition_ref": "example.artifact-kind.registry-brief@1.0.0",
+            "definition_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+          },
+          {
+            "definition_ref": "example.intake.registry-brief@1.0.0",
+            "definition_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          {
+            "definition_ref": "example.profile.registry-root@1.1.0",
+            "definition_fingerprint": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+          },
+          {
+            "definition_ref": "example.schemas.registry-brief@1.0.0",
+            "definition_fingerprint": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+          }
+        ],
+        "context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8"
+      }
+    },
+    {
+      "vector_id": "coverage-evaluation",
+      "identity_excludes": [
+        "evaluation_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.intake-coverage-evaluation",
+        "schema_version": "1.0",
+        "operation_context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8",
+        "acquisition_mode": "express",
+        "basis_artifact_fingerprint": null,
+        "coverage_results": [
+          {
+            "coverage_id": "registry_brief.title",
+            "state": "supplied",
+            "source_kind": "user_declaration",
+            "value": "Registry Brief Proof",
+            "specificity": "exact",
+            "confidence": "high",
+            "contradiction_refs": [],
+            "evaluation": "satisfied"
+          },
+          {
+            "coverage_id": "registry_brief.summary",
+            "state": "supplied",
+            "source_kind": "user_declaration",
+            "value": "A reusable registry brief",
+            "specificity": "concrete",
+            "confidence": "high",
+            "contradiction_refs": [],
+            "evaluation": "satisfied"
+          }
+        ],
+        "normalized_content": {
+          "summary": "A reusable registry brief",
+          "title": "Registry Brief Proof"
+        },
+        "field_sources": [
+          {
+            "target_pointer": "/title",
+            "coverage_id": "registry_brief.title",
+            "source_kind": "user_declaration"
+          },
+          {
+            "target_pointer": "/summary",
+            "coverage_id": "registry_brief.summary",
+            "source_kind": "user_declaration"
+          }
+        ],
+        "outcome": "complete",
+        "evaluation_fingerprint": "sha256:3b0ffbcf03b592aa9b3c883723fa054bd28794caa6b1eb2224675c9317594a7a"
+      }
+    },
+    {
+      "vector_id": "intake-domain-mutation-request",
+      "identity_excludes": [
+        "request_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-mutation-request",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "domain_mutation_key_fingerprint": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "request_subject": {
+          "operation_id": "intake.record.append",
+          "kind_ref": "example.artifact-kind.registry-brief@1.0.0",
+          "instance_id": "registry_brief",
+          "acquisition_mode": "express",
+          "expected_current_artifact_fingerprint": null,
+          "coverage_input_fingerprint": "sha256:8888888888888888888888888888888888888888888888888888888888888888"
+        },
+        "request_fingerprint": "sha256:38ad05066cbf811739b45f1c311ea4884e6e9b16ab9bbb5486254cad636f6abb"
+      }
+    },
+    {
+      "vector_id": "intake-transaction-intent",
+      "identity_excludes": [
+        "intent_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-transaction-intent",
+        "schema_version": "1.0",
+        "transaction_id": "intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "intake.record.append",
+        "domain_mutation_key_fingerprint": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "request_fingerprint": "sha256:38ad05066cbf811739b45f1c311ea4884e6e9b16ab9bbb5486254cad636f6abb",
+        "operation_context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8",
+        "expected_basis_fingerprint": null,
+        "sampled_finalized_at_utc": "2026-07-21T00:00:00Z",
+        "outputs": [
+          {
+            "ordinal": 0,
+            "token": "title-value",
+            "authority_class": "subordinate_closure",
+            "final_ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04.json",
+            "bytes_sha256": "sha256:49f5c34d7b957af39cefd0769b451e96114517a3938c90976b6fb280b1627471",
+            "byte_length": 23,
+            "install_mode": "create_new",
+            "receipt_class": null
+          },
+          {
+            "ordinal": 1,
+            "token": "summary-value",
+            "authority_class": "subordinate_closure",
+            "final_ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f.json",
+            "bytes_sha256": "sha256:64e46d8559a68c5ee0747cd42dc662fa1f6a1ec3a774271e90e434cf4b571d89",
+            "byte_length": 28,
+            "install_mode": "create_new",
+            "receipt_class": null
+          },
+          {
+            "ordinal": 2,
+            "token": "intake-record",
+            "authority_class": "semantic_record",
+            "final_ref": ".handbook/state/artifacts/registry_brief/intake-records/intake_b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c.json",
+            "bytes_sha256": "sha256:82e97318e65dcec95162ae32ac13dbc78f08e2bf680281e278301e4dc23e6e16",
+            "byte_length": 2052,
+            "install_mode": "create_new",
+            "receipt_class": "semantic_record"
+          }
+        ],
+        "intent_fingerprint": "sha256:93f858b1fe51c554cbad908a45e5b72d75b66c36a7007a95aafe81a3382648f2",
+        "planned_outcome": "commit",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "intake-transaction-intent-replay",
+      "identity_excludes": [
+        "intent_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-transaction-intent",
+        "schema_version": "1.0",
+        "transaction_id": "intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "intake.record.append",
+        "domain_mutation_key_fingerprint": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "request_fingerprint": "sha256:38ad05066cbf811739b45f1c311ea4884e6e9b16ab9bbb5486254cad636f6abb",
+        "operation_context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8",
+        "expected_basis_fingerprint": null,
+        "sampled_finalized_at_utc": "2026-07-21T00:00:00Z",
+        "outputs": [
+          {
+            "ordinal": 0,
+            "token": "title-value",
+            "authority_class": "subordinate_closure",
+            "final_ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04.json",
+            "bytes_sha256": "sha256:49f5c34d7b957af39cefd0769b451e96114517a3938c90976b6fb280b1627471",
+            "byte_length": 23,
+            "install_mode": "create_new",
+            "receipt_class": null
+          },
+          {
+            "ordinal": 1,
+            "token": "summary-value",
+            "authority_class": "subordinate_closure",
+            "final_ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f.json",
+            "bytes_sha256": "sha256:64e46d8559a68c5ee0747cd42dc662fa1f6a1ec3a774271e90e434cf4b571d89",
+            "byte_length": 28,
+            "install_mode": "create_new",
+            "receipt_class": null
+          },
+          {
+            "ordinal": 2,
+            "token": "intake-record",
+            "authority_class": "semantic_record",
+            "final_ref": ".handbook/state/artifacts/registry_brief/intake-records/intake_b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c.json",
+            "bytes_sha256": "sha256:82e97318e65dcec95162ae32ac13dbc78f08e2bf680281e278301e4dc23e6e16",
+            "byte_length": 2052,
+            "install_mode": "create_new",
+            "receipt_class": "semantic_record"
+          }
+        ],
+        "intent_fingerprint": "sha256:93f858b1fe51c554cbad908a45e5b72d75b66c36a7007a95aafe81a3382648f2",
+        "planned_outcome": "commit",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "intake-verified-stage",
+      "identity_excludes": [
+        "verified_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-verified-stage",
+        "schema_version": "1.0",
+        "transaction_id": "intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05",
+        "intent_fingerprint": "sha256:93f858b1fe51c554cbad908a45e5b72d75b66c36a7007a95aafe81a3382648f2",
+        "verification_basis": "staging",
+        "staged_outputs": [
+          {
+            "ordinal": 0,
+            "staged_ref": "staged/0-title-value.bin",
+            "bytes_sha256": "sha256:49f5c34d7b957af39cefd0769b451e96114517a3938c90976b6fb280b1627471",
+            "byte_length": 23
+          },
+          {
+            "ordinal": 1,
+            "staged_ref": "staged/1-summary-value.bin",
+            "bytes_sha256": "sha256:64e46d8559a68c5ee0747cd42dc662fa1f6a1ec3a774271e90e434cf4b571d89",
+            "byte_length": 28
+          },
+          {
+            "ordinal": 2,
+            "staged_ref": "staged/2-intake-record.bin",
+            "bytes_sha256": "sha256:82e97318e65dcec95162ae32ac13dbc78f08e2bf680281e278301e4dc23e6e16",
+            "byte_length": 2052
+          }
+        ],
+        "verified_fingerprint": "sha256:9929efa2dd1cb0b028237ff1d4e37a8af5d31a3ab2436c0d98f36b73347e47c7",
+        "planned_outcome": "commit",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "intake-installed-complete-stage",
+      "identity_excludes": [
+        "verified_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-verified-stage",
+        "schema_version": "1.0",
+        "transaction_id": "intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05",
+        "intent_fingerprint": "sha256:93f858b1fe51c554cbad908a45e5b72d75b66c36a7007a95aafe81a3382648f2",
+        "verification_basis": "installed_complete",
+        "staged_outputs": [
+          {
+            "ordinal": 0,
+            "staged_ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04.json",
+            "bytes_sha256": "sha256:49f5c34d7b957af39cefd0769b451e96114517a3938c90976b6fb280b1627471",
+            "byte_length": 23
+          },
+          {
+            "ordinal": 1,
+            "staged_ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f.json",
+            "bytes_sha256": "sha256:64e46d8559a68c5ee0747cd42dc662fa1f6a1ec3a774271e90e434cf4b571d89",
+            "byte_length": 28
+          },
+          {
+            "ordinal": 2,
+            "staged_ref": ".handbook/state/artifacts/registry_brief/intake-records/intake_b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c.json",
+            "bytes_sha256": "sha256:82e97318e65dcec95162ae32ac13dbc78f08e2bf680281e278301e4dc23e6e16",
+            "byte_length": 2052
+          }
+        ],
+        "verified_fingerprint": "sha256:f97b26adf4adfc1a4725fe96ce3092f8370785c87924793c64bd1a1bdd1003b0",
+        "planned_outcome": "commit",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "intake-commit-marker",
+      "identity_excludes": [
+        "marker_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-commit-marker",
+        "schema_version": "1.0",
+        "transaction_id": "intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05",
+        "intent_fingerprint": "sha256:93f858b1fe51c554cbad908a45e5b72d75b66c36a7007a95aafe81a3382648f2",
+        "verified_fingerprint": "sha256:9929efa2dd1cb0b028237ff1d4e37a8af5d31a3ab2436c0d98f36b73347e47c7",
+        "authoritative_outputs": [
+          {
+            "authority_class": "semantic_record",
+            "ref": ".handbook/state/artifacts/registry_brief/intake-records/intake_b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c.json",
+            "fingerprint": "sha256:b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c"
+          }
+        ],
+        "subordinate_outputs": [
+          {
+            "ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04.json",
+            "fingerprint": "sha256:3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04"
+          },
+          {
+            "ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f.json",
+            "fingerprint": "sha256:03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f"
+          }
+        ],
+        "marker_fingerprint": "sha256:73364cdb4cee186fbfc97c94039a4836ed17b7ee71838676d0df7e25ada5a286",
+        "outcome": "committed",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "intake-internal-transaction-evidence",
+      "identity_excludes": [
+        "evidence_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-internal-transaction-evidence",
+        "schema_version": "1.0",
+        "transaction_id": "intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05",
+        "operation_id": "intake.record.append",
+        "request_fingerprint": "sha256:38ad05066cbf811739b45f1c311ea4884e6e9b16ab9bbb5486254cad636f6abb",
+        "intent_fingerprint": "sha256:93f858b1fe51c554cbad908a45e5b72d75b66c36a7007a95aafe81a3382648f2",
+        "verified_fingerprint": "sha256:9929efa2dd1cb0b028237ff1d4e37a8af5d31a3ab2436c0d98f36b73347e47c7",
+        "marker_fingerprint": "sha256:73364cdb4cee186fbfc97c94039a4836ed17b7ee71838676d0df7e25ada5a286",
+        "authoritative_outputs": [
+          {
+            "authority_class": "semantic_record",
+            "ref": ".handbook/state/artifacts/registry_brief/intake-records/intake_b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c.json",
+            "fingerprint": "sha256:b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c"
+          }
+        ],
+        "subordinate_outputs": [
+          {
+            "ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04.json",
+            "fingerprint": "sha256:3bc11615b084f9ebe091808cd631a7cf579db11d43b8d589d773688fefd74b04"
+          },
+          {
+            "ref": ".handbook/evidence/artifacts/registry_brief/intake-values/value_03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f.json",
+            "fingerprint": "sha256:03c4dd06e8ce5fad5577c71f1961406939ebe65ff536d783c49a67fcd836530f"
+          }
+        ],
+        "atomic_group": "intake_record_append",
+        "evidence_fingerprint": "sha256:ab9e279cce08db08210084f570c631a29f431801b77da9ffbf7eb8f2a74fd695",
+        "outcome": "committed",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "intake-domain-mutation-result",
+      "identity_excludes": [
+        "result_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-mutation-result",
+        "schema_version": "1.0",
+        "operation_id": "intake.record.append",
+        "transaction_id": "intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05",
+        "request_fingerprint": "sha256:38ad05066cbf811739b45f1c311ea4884e6e9b16ab9bbb5486254cad636f6abb",
+        "outcome": "committed",
+        "authoritative_outputs": [
+          {
+            "authority_class": "semantic_record",
+            "ref": ".handbook/state/artifacts/registry_brief/intake-records/intake_b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c.json",
+            "fingerprint": "sha256:b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c"
+          }
+        ],
+        "internal_transaction_evidence_ref": ".handbook/state/transactions/intake-records/intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05.committed/evidence.json",
+        "internal_transaction_evidence_fingerprint": "sha256:ab9e279cce08db08210084f570c631a29f431801b77da9ffbf7eb8f2a74fd695",
+        "result_fingerprint": "sha256:387cd5fa62771c148a23a0b8a87ea5e906bf2e65762ae0874ff2c71a549a3496",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "intake-ledger-active-hold",
+      "identity_excludes": [
+        "entry_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-ledger-entry",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "intake.record.append",
+        "domain_mutation_key_fingerprint": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "request_fingerprint": "sha256:38ad05066cbf811739b45f1c311ea4884e6e9b16ab9bbb5486254cad636f6abb",
+        "state": "active_hold",
+        "transaction_id": "intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05",
+        "result_ref": null,
+        "result_fingerprint": null,
+        "retained_until_utc": null,
+        "entry_fingerprint": "sha256:86c3287b9e0dc4f6287a8a33e1247878eef9df38fad1f6de5b9afd9e865bb126"
+      }
+    },
+    {
+      "vector_id": "intake-ledger-retained-result",
+      "identity_excludes": [
+        "entry_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-ledger-entry",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "intake.record.append",
+        "domain_mutation_key_fingerprint": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "request_fingerprint": "sha256:38ad05066cbf811739b45f1c311ea4884e6e9b16ab9bbb5486254cad636f6abb",
+        "state": "retained_result",
+        "transaction_id": "intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05",
+        "result_ref": ".handbook/state/idempotency/generic-artifact-operations/results/intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05.json",
+        "result_fingerprint": "sha256:387cd5fa62771c148a23a0b8a87ea5e906bf2e65762ae0874ff2c71a549a3496",
+        "retained_until_utc": "2026-08-20T00:00:00Z",
+        "entry_fingerprint": "sha256:78780eb9780cd416688032540a3dc3b38e7951dae9a8754f7313ff2a902cceb3"
+      }
+    },
+    {
+      "vector_id": "intake-ledger-tombstone",
+      "identity_excludes": [
+        "entry_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-ledger-entry",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "intake.record.append",
+        "domain_mutation_key_fingerprint": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "request_fingerprint": "sha256:38ad05066cbf811739b45f1c311ea4884e6e9b16ab9bbb5486254cad636f6abb",
+        "state": "tombstone",
+        "transaction_id": "intake_record_append_c2a3ea68ced7387648d38511de17e0b2b440b2a1780664956698164d448b6b05",
+        "result_ref": null,
+        "result_fingerprint": null,
+        "retained_until_utc": null,
+        "entry_fingerprint": "sha256:94bab62123f2a840c0270057e083badb60959255b56738607ab149a24ee089a5"
+      }
+    },
+    {
+      "vector_id": "candidate-domain-mutation-request",
+      "identity_excludes": [
+        "request_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-mutation-request",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "domain_mutation_key_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "request_subject": {
+          "operation_id": "artifact.candidate.append",
+          "kind_ref": "example.artifact-kind.registry-brief@1.0.0",
+          "instance_id": "registry_brief",
+          "intake_record_ref": ".handbook/state/artifacts/registry_brief/intake-records/intake_b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c.json",
+          "intake_record_fingerprint": "sha256:b88c7d71baafeef02f379be8e317df15d9ad77d6b8cc7599ce3b25a6b69d684c",
+          "expected_candidate_fingerprint": "sha256:dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c"
+        },
+        "request_fingerprint": "sha256:7b1a1668837919e29321011e4f682a9c3f7cf61d6d06c1de3dcfeb45ba31dbc0"
+      }
+    },
+    {
+      "vector_id": "candidate-transaction-intent",
+      "identity_excludes": [
+        "intent_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-transaction-intent",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_append_833235ab63600dfd586cf6cafcd4ef2a238871c86776763b3e3eea1e4ceb9feb",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "artifact.candidate.append",
+        "domain_mutation_key_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "request_fingerprint": "sha256:7b1a1668837919e29321011e4f682a9c3f7cf61d6d06c1de3dcfeb45ba31dbc0",
+        "operation_context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8",
+        "expected_basis_fingerprint": null,
+        "sampled_finalized_at_utc": null,
+        "outputs": [
+          {
+            "ordinal": 0,
+            "token": "normalized-content",
+            "authority_class": "subordinate_closure",
+            "final_ref": ".handbook/evidence/artifacts/registry_brief/content/content_3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad.json",
+            "bytes_sha256": "sha256:2ec116836cad6829ae5159e48c6e147e23639ef92570dd4ee0a92217bd96a7a1",
+            "byte_length": 71,
+            "install_mode": "create_new",
+            "receipt_class": null
+          },
+          {
+            "ordinal": 1,
+            "token": "validation-result",
+            "authority_class": "subordinate_closure",
+            "final_ref": ".handbook/evidence/artifacts/registry_brief/validation-results/validation_f6395dd6b06c2016c37e5393c09fb6ba63bf8fdc60a223d1a1727bccd4357e6e.json",
+            "bytes_sha256": "sha256:f03a701c5fb30f8a70ce9ae63795566439c46d08d9e6416f6b99756ea8954cfd",
+            "byte_length": 1982,
+            "install_mode": "create_new",
+            "receipt_class": null
+          },
+          {
+            "ordinal": 2,
+            "token": "candidate-record",
+            "authority_class": "semantic_record",
+            "final_ref": ".handbook/evidence/artifacts/registry_brief/candidates/candidate_dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c.json",
+            "bytes_sha256": "sha256:448683872456a2a472b50f442abf9abf3c68b90f6c243b3cfa048e61c037f0f9",
+            "byte_length": 2221,
+            "install_mode": "create_new",
+            "receipt_class": "semantic_record"
+          }
+        ],
+        "intent_fingerprint": "sha256:54662542ced4efa75af01a92443846623ce64ce6ecb112c5cf360351d141eb1e",
+        "planned_outcome": "commit",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "candidate-verified-stage",
+      "identity_excludes": [
+        "verified_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-verified-stage",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_append_833235ab63600dfd586cf6cafcd4ef2a238871c86776763b3e3eea1e4ceb9feb",
+        "intent_fingerprint": "sha256:54662542ced4efa75af01a92443846623ce64ce6ecb112c5cf360351d141eb1e",
+        "verification_basis": "staging",
+        "staged_outputs": [
+          {
+            "ordinal": 0,
+            "staged_ref": "staged/0-normalized-content.bin",
+            "bytes_sha256": "sha256:2ec116836cad6829ae5159e48c6e147e23639ef92570dd4ee0a92217bd96a7a1",
+            "byte_length": 71
+          },
+          {
+            "ordinal": 1,
+            "staged_ref": "staged/1-validation-result.bin",
+            "bytes_sha256": "sha256:f03a701c5fb30f8a70ce9ae63795566439c46d08d9e6416f6b99756ea8954cfd",
+            "byte_length": 1982
+          },
+          {
+            "ordinal": 2,
+            "staged_ref": "staged/2-candidate-record.bin",
+            "bytes_sha256": "sha256:448683872456a2a472b50f442abf9abf3c68b90f6c243b3cfa048e61c037f0f9",
+            "byte_length": 2221
+          }
+        ],
+        "verified_fingerprint": "sha256:7160d1688bf9975557454b711e30e806f5928cf6efb9aac3ebc3d62f356e13e3",
+        "planned_outcome": "commit",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "candidate-installed-complete-stage",
+      "identity_excludes": [
+        "verified_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-verified-stage",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_append_833235ab63600dfd586cf6cafcd4ef2a238871c86776763b3e3eea1e4ceb9feb",
+        "intent_fingerprint": "sha256:54662542ced4efa75af01a92443846623ce64ce6ecb112c5cf360351d141eb1e",
+        "verification_basis": "installed_complete",
+        "staged_outputs": [
+          {
+            "ordinal": 0,
+            "staged_ref": ".handbook/evidence/artifacts/registry_brief/content/content_3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad.json",
+            "bytes_sha256": "sha256:2ec116836cad6829ae5159e48c6e147e23639ef92570dd4ee0a92217bd96a7a1",
+            "byte_length": 71
+          },
+          {
+            "ordinal": 1,
+            "staged_ref": ".handbook/evidence/artifacts/registry_brief/validation-results/validation_f6395dd6b06c2016c37e5393c09fb6ba63bf8fdc60a223d1a1727bccd4357e6e.json",
+            "bytes_sha256": "sha256:f03a701c5fb30f8a70ce9ae63795566439c46d08d9e6416f6b99756ea8954cfd",
+            "byte_length": 1982
+          },
+          {
+            "ordinal": 2,
+            "staged_ref": ".handbook/evidence/artifacts/registry_brief/candidates/candidate_dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c.json",
+            "bytes_sha256": "sha256:448683872456a2a472b50f442abf9abf3c68b90f6c243b3cfa048e61c037f0f9",
+            "byte_length": 2221
+          }
+        ],
+        "verified_fingerprint": "sha256:6311d4e1d9de5f37b6c92dd8dc377564c6d700d5a23b885cd28bee3d6a4f8b82",
+        "planned_outcome": "commit",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "candidate-commit-marker",
+      "identity_excludes": [
+        "marker_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-commit-marker",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_append_833235ab63600dfd586cf6cafcd4ef2a238871c86776763b3e3eea1e4ceb9feb",
+        "intent_fingerprint": "sha256:54662542ced4efa75af01a92443846623ce64ce6ecb112c5cf360351d141eb1e",
+        "verified_fingerprint": "sha256:7160d1688bf9975557454b711e30e806f5928cf6efb9aac3ebc3d62f356e13e3",
+        "authoritative_outputs": [
+          {
+            "authority_class": "semantic_record",
+            "ref": ".handbook/evidence/artifacts/registry_brief/candidates/candidate_dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c.json",
+            "fingerprint": "sha256:dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c"
+          }
+        ],
+        "subordinate_outputs": [
+          {
+            "ref": ".handbook/evidence/artifacts/registry_brief/content/content_3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad.json",
+            "fingerprint": "sha256:3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad"
+          },
+          {
+            "ref": ".handbook/evidence/artifacts/registry_brief/validation-results/validation_f6395dd6b06c2016c37e5393c09fb6ba63bf8fdc60a223d1a1727bccd4357e6e.json",
+            "fingerprint": "sha256:f6395dd6b06c2016c37e5393c09fb6ba63bf8fdc60a223d1a1727bccd4357e6e"
+          }
+        ],
+        "marker_fingerprint": "sha256:64068a8139a1e52d007f67c9c88ccd57b50973b4aecef267ab98910b77b01798",
+        "outcome": "committed",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "candidate-internal-transaction-evidence",
+      "identity_excludes": [
+        "evidence_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-internal-transaction-evidence",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_append_833235ab63600dfd586cf6cafcd4ef2a238871c86776763b3e3eea1e4ceb9feb",
+        "operation_id": "artifact.candidate.append",
+        "request_fingerprint": "sha256:7b1a1668837919e29321011e4f682a9c3f7cf61d6d06c1de3dcfeb45ba31dbc0",
+        "intent_fingerprint": "sha256:54662542ced4efa75af01a92443846623ce64ce6ecb112c5cf360351d141eb1e",
+        "verified_fingerprint": "sha256:7160d1688bf9975557454b711e30e806f5928cf6efb9aac3ebc3d62f356e13e3",
+        "marker_fingerprint": "sha256:64068a8139a1e52d007f67c9c88ccd57b50973b4aecef267ab98910b77b01798",
+        "authoritative_outputs": [
+          {
+            "authority_class": "semantic_record",
+            "ref": ".handbook/evidence/artifacts/registry_brief/candidates/candidate_dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c.json",
+            "fingerprint": "sha256:dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c"
+          }
+        ],
+        "subordinate_outputs": [
+          {
+            "ref": ".handbook/evidence/artifacts/registry_brief/content/content_3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad.json",
+            "fingerprint": "sha256:3bafada1258dd97943fde6e70f1e68cab2ac65979424a4e20dda7580a1dbd8ad"
+          },
+          {
+            "ref": ".handbook/evidence/artifacts/registry_brief/validation-results/validation_f6395dd6b06c2016c37e5393c09fb6ba63bf8fdc60a223d1a1727bccd4357e6e.json",
+            "fingerprint": "sha256:f6395dd6b06c2016c37e5393c09fb6ba63bf8fdc60a223d1a1727bccd4357e6e"
+          }
+        ],
+        "atomic_group": "artifact_candidate_append",
+        "evidence_fingerprint": "sha256:9b6cae14e8b00afd17b196aed4730ea38df8032f432d2feb7268308224c52199",
+        "outcome": "committed",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "candidate-domain-mutation-result",
+      "identity_excludes": [
+        "result_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-mutation-result",
+        "schema_version": "1.0",
+        "operation_id": "artifact.candidate.append",
+        "transaction_id": "artifact_candidate_append_833235ab63600dfd586cf6cafcd4ef2a238871c86776763b3e3eea1e4ceb9feb",
+        "request_fingerprint": "sha256:7b1a1668837919e29321011e4f682a9c3f7cf61d6d06c1de3dcfeb45ba31dbc0",
+        "outcome": "committed",
+        "authoritative_outputs": [
+          {
+            "authority_class": "semantic_record",
+            "ref": ".handbook/evidence/artifacts/registry_brief/candidates/candidate_dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c.json",
+            "fingerprint": "sha256:dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c"
+          }
+        ],
+        "internal_transaction_evidence_ref": ".handbook/state/transactions/artifact-candidates/artifact_candidate_append_833235ab63600dfd586cf6cafcd4ef2a238871c86776763b3e3eea1e4ceb9feb.committed/evidence.json",
+        "internal_transaction_evidence_fingerprint": "sha256:9b6cae14e8b00afd17b196aed4730ea38df8032f432d2feb7268308224c52199",
+        "result_fingerprint": "sha256:432a11d3fd06da9858facae4405a7705f5a266cf3e768360d72f990aebb28f04",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "candidate-ledger-retained-result",
+      "identity_excludes": [
+        "entry_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-ledger-entry",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "artifact.candidate.append",
+        "domain_mutation_key_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "request_fingerprint": "sha256:7b1a1668837919e29321011e4f682a9c3f7cf61d6d06c1de3dcfeb45ba31dbc0",
+        "state": "retained_result",
+        "transaction_id": "artifact_candidate_append_833235ab63600dfd586cf6cafcd4ef2a238871c86776763b3e3eea1e4ceb9feb",
+        "result_ref": ".handbook/state/idempotency/generic-artifact-operations/results/artifact_candidate_append_833235ab63600dfd586cf6cafcd4ef2a238871c86776763b3e3eea1e4ceb9feb.json",
+        "result_fingerprint": "sha256:432a11d3fd06da9858facae4405a7705f5a266cf3e768360d72f990aebb28f04",
+        "retained_until_utc": "2026-08-20T00:00:00Z",
+        "entry_fingerprint": "sha256:af8bbbcacfe873863f4b9642c225091d6a928d31fe03279152e0a4a4ce28f20e"
+      }
+    },
+    {
+      "vector_id": "promotion-domain-mutation-request",
+      "identity_excludes": [
+        "request_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-mutation-request",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "domain_mutation_key_fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_subject": {
+          "operation_id": "artifact.candidate.promote",
+          "kind_ref": "example.artifact-kind.registry-brief@1.0.0",
+          "instance_id": "registry_brief",
+          "candidate_ref": ".handbook/evidence/artifacts/registry_brief/candidates/candidate_dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c.json",
+          "candidate_fingerprint": "sha256:dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c",
+          "expected_current_artifact_fingerprint": null
+        },
+        "request_fingerprint": "sha256:3ff1c5fe4a3822a32d189e2219a19c27f50923d48a6bfa0e5928296c765ba8ec"
+      }
+    },
+    {
+      "vector_id": "promotion-transaction-intent",
+      "identity_excludes": [
+        "intent_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-transaction-intent",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_promote_ffa78e307c40870966685815e476f05c15302c6fae968e8459d71e8e96d6d22b",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "artifact.candidate.promote",
+        "domain_mutation_key_fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_fingerprint": "sha256:3ff1c5fe4a3822a32d189e2219a19c27f50923d48a6bfa0e5928296c765ba8ec",
+        "operation_context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8",
+        "expected_basis_fingerprint": null,
+        "sampled_finalized_at_utc": null,
+        "outputs": [
+          {
+            "ordinal": 0,
+            "token": "canonical-artifact",
+            "authority_class": "canonical_truth",
+            "final_ref": ".handbook/project/registry-brief.yaml",
+            "bytes_sha256": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d",
+            "byte_length": 67,
+            "install_mode": "replace_if_current",
+            "receipt_class": "canonical_truth"
+          },
+          {
+            "ordinal": 1,
+            "token": "promotion-record",
+            "authority_class": "semantic_record",
+            "final_ref": ".handbook/state/artifacts/registry_brief/promotion-records/promotion_d3dfb97fa1e24ac8a16651fa733cf60d83bdae4ecdcaddce1c73c263146ff8ae.json",
+            "bytes_sha256": "sha256:233ddaaefe0464d88426d23eeee81802def07e043d9d48f7bd0c83df1d71e26f",
+            "byte_length": 1933,
+            "install_mode": "create_new",
+            "receipt_class": "semantic_record"
+          }
+        ],
+        "intent_fingerprint": "sha256:f04f164e6d1cc50bf0b40c9fe3b0372f618f4f89df3de3e3081507665d7ae31f",
+        "planned_outcome": "commit",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "promotion-verified-stage",
+      "identity_excludes": [
+        "verified_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-verified-stage",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_promote_ffa78e307c40870966685815e476f05c15302c6fae968e8459d71e8e96d6d22b",
+        "intent_fingerprint": "sha256:f04f164e6d1cc50bf0b40c9fe3b0372f618f4f89df3de3e3081507665d7ae31f",
+        "verification_basis": "staging",
+        "staged_outputs": [
+          {
+            "ordinal": 0,
+            "staged_ref": "staged/0-canonical-artifact.bin",
+            "bytes_sha256": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d",
+            "byte_length": 67
+          },
+          {
+            "ordinal": 1,
+            "staged_ref": "staged/1-promotion-record.bin",
+            "bytes_sha256": "sha256:233ddaaefe0464d88426d23eeee81802def07e043d9d48f7bd0c83df1d71e26f",
+            "byte_length": 1933
+          }
+        ],
+        "verified_fingerprint": "sha256:4ea350fdc047f07e69087322eb1829fc2da4f8badcdf7656d8ee8f2d424dd233",
+        "planned_outcome": "commit",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "promotion-installed-complete-stage",
+      "identity_excludes": [
+        "verified_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-verified-stage",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_promote_ffa78e307c40870966685815e476f05c15302c6fae968e8459d71e8e96d6d22b",
+        "intent_fingerprint": "sha256:f04f164e6d1cc50bf0b40c9fe3b0372f618f4f89df3de3e3081507665d7ae31f",
+        "verification_basis": "installed_complete",
+        "staged_outputs": [
+          {
+            "ordinal": 0,
+            "staged_ref": ".handbook/project/registry-brief.yaml",
+            "bytes_sha256": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d",
+            "byte_length": 67
+          },
+          {
+            "ordinal": 1,
+            "staged_ref": ".handbook/state/artifacts/registry_brief/promotion-records/promotion_d3dfb97fa1e24ac8a16651fa733cf60d83bdae4ecdcaddce1c73c263146ff8ae.json",
+            "bytes_sha256": "sha256:233ddaaefe0464d88426d23eeee81802def07e043d9d48f7bd0c83df1d71e26f",
+            "byte_length": 1933
+          }
+        ],
+        "verified_fingerprint": "sha256:59837bdc6f5b705273fe577dd4d2f21fab433947ead9f39c9f10d2979aecd8e8",
+        "planned_outcome": "commit",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "promotion-commit-marker",
+      "identity_excludes": [
+        "marker_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-commit-marker",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_promote_ffa78e307c40870966685815e476f05c15302c6fae968e8459d71e8e96d6d22b",
+        "intent_fingerprint": "sha256:f04f164e6d1cc50bf0b40c9fe3b0372f618f4f89df3de3e3081507665d7ae31f",
+        "verified_fingerprint": "sha256:4ea350fdc047f07e69087322eb1829fc2da4f8badcdf7656d8ee8f2d424dd233",
+        "authoritative_outputs": [
+          {
+            "authority_class": "canonical_truth",
+            "ref": ".handbook/project/registry-brief.yaml",
+            "fingerprint": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d"
+          },
+          {
+            "authority_class": "semantic_record",
+            "ref": ".handbook/state/artifacts/registry_brief/promotion-records/promotion_d3dfb97fa1e24ac8a16651fa733cf60d83bdae4ecdcaddce1c73c263146ff8ae.json",
+            "fingerprint": "sha256:d3dfb97fa1e24ac8a16651fa733cf60d83bdae4ecdcaddce1c73c263146ff8ae"
+          }
+        ],
+        "subordinate_outputs": [],
+        "marker_fingerprint": "sha256:13d0d2169c12f681d0b4877773c5fdecd9ccdabe2c197c0d529d878f74b32d01",
+        "outcome": "committed",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "promotion-internal-transaction-evidence",
+      "identity_excludes": [
+        "evidence_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-internal-transaction-evidence",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_promote_ffa78e307c40870966685815e476f05c15302c6fae968e8459d71e8e96d6d22b",
+        "operation_id": "artifact.candidate.promote",
+        "request_fingerprint": "sha256:3ff1c5fe4a3822a32d189e2219a19c27f50923d48a6bfa0e5928296c765ba8ec",
+        "intent_fingerprint": "sha256:f04f164e6d1cc50bf0b40c9fe3b0372f618f4f89df3de3e3081507665d7ae31f",
+        "verified_fingerprint": "sha256:4ea350fdc047f07e69087322eb1829fc2da4f8badcdf7656d8ee8f2d424dd233",
+        "marker_fingerprint": "sha256:13d0d2169c12f681d0b4877773c5fdecd9ccdabe2c197c0d529d878f74b32d01",
+        "authoritative_outputs": [
+          {
+            "authority_class": "canonical_truth",
+            "ref": ".handbook/project/registry-brief.yaml",
+            "fingerprint": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d"
+          },
+          {
+            "authority_class": "semantic_record",
+            "ref": ".handbook/state/artifacts/registry_brief/promotion-records/promotion_d3dfb97fa1e24ac8a16651fa733cf60d83bdae4ecdcaddce1c73c263146ff8ae.json",
+            "fingerprint": "sha256:d3dfb97fa1e24ac8a16651fa733cf60d83bdae4ecdcaddce1c73c263146ff8ae"
+          }
+        ],
+        "subordinate_outputs": [],
+        "atomic_group": "artifact_candidate_promote",
+        "evidence_fingerprint": "sha256:ccbf263155a0f3d651e602768df379c25178b6258727282eef7c644603226379",
+        "outcome": "committed",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "promotion-domain-mutation-result",
+      "identity_excludes": [
+        "result_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-mutation-result",
+        "schema_version": "1.0",
+        "operation_id": "artifact.candidate.promote",
+        "transaction_id": "artifact_candidate_promote_ffa78e307c40870966685815e476f05c15302c6fae968e8459d71e8e96d6d22b",
+        "request_fingerprint": "sha256:3ff1c5fe4a3822a32d189e2219a19c27f50923d48a6bfa0e5928296c765ba8ec",
+        "outcome": "committed",
+        "authoritative_outputs": [
+          {
+            "authority_class": "canonical_truth",
+            "ref": ".handbook/project/registry-brief.yaml",
+            "fingerprint": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d"
+          },
+          {
+            "authority_class": "semantic_record",
+            "ref": ".handbook/state/artifacts/registry_brief/promotion-records/promotion_d3dfb97fa1e24ac8a16651fa733cf60d83bdae4ecdcaddce1c73c263146ff8ae.json",
+            "fingerprint": "sha256:d3dfb97fa1e24ac8a16651fa733cf60d83bdae4ecdcaddce1c73c263146ff8ae"
+          }
+        ],
+        "internal_transaction_evidence_ref": ".handbook/state/transactions/artifact-promotions/artifact_candidate_promote_ffa78e307c40870966685815e476f05c15302c6fae968e8459d71e8e96d6d22b.committed/evidence.json",
+        "internal_transaction_evidence_fingerprint": "sha256:ccbf263155a0f3d651e602768df379c25178b6258727282eef7c644603226379",
+        "result_fingerprint": "sha256:c50ae16d857167e3a9cb1a67b816907ff5c29c497f94907f6c97a958488df85c",
+        "refusal": null
+      }
+    },
+    {
+      "vector_id": "promotion-ledger-retained-result",
+      "identity_excludes": [
+        "entry_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-ledger-entry",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "artifact.candidate.promote",
+        "domain_mutation_key_fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_fingerprint": "sha256:3ff1c5fe4a3822a32d189e2219a19c27f50923d48a6bfa0e5928296c765ba8ec",
+        "state": "retained_result",
+        "transaction_id": "artifact_candidate_promote_ffa78e307c40870966685815e476f05c15302c6fae968e8459d71e8e96d6d22b",
+        "result_ref": ".handbook/state/idempotency/generic-artifact-operations/results/artifact_candidate_promote_ffa78e307c40870966685815e476f05c15302c6fae968e8459d71e8e96d6d22b.json",
+        "result_fingerprint": "sha256:c50ae16d857167e3a9cb1a67b816907ff5c29c497f94907f6c97a958488df85c",
+        "retained_until_utc": "2026-08-20T00:00:00Z",
+        "entry_fingerprint": "sha256:ea3ec3945c0aec76d1b70cee6f12032a8131a3aebcaa016d986d56292dbaa73b"
+      }
+    },
+    {
+      "vector_id": "refused-promotion-domain-mutation-request",
+      "identity_excludes": [
+        "request_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-mutation-request",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "domain_mutation_key_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "request_subject": {
+          "operation_id": "artifact.candidate.promote",
+          "kind_ref": "example.artifact-kind.registry-brief@1.0.0",
+          "instance_id": "registry_brief",
+          "candidate_ref": ".handbook/evidence/artifacts/registry_brief/candidates/candidate_dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c.json",
+          "candidate_fingerprint": "sha256:dad8bb3c473f18ea28d6fd006f98a43d8574b5c031c05d0c6f2b14fcdf21d57c",
+          "expected_current_artifact_fingerprint": null
+        },
+        "request_fingerprint": "sha256:7dff956440b77ffcab2ecd55c4d59aa72e23e9ce3b35ac5b7b091f9fb3d12fc9"
+      }
+    },
+    {
+      "vector_id": "refused-promotion-transaction-intent",
+      "identity_excludes": [
+        "intent_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-transaction-intent",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "artifact.candidate.promote",
+        "domain_mutation_key_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "request_fingerprint": "sha256:7dff956440b77ffcab2ecd55c4d59aa72e23e9ce3b35ac5b7b091f9fb3d12fc9",
+        "operation_context_fingerprint": "sha256:6247735430f2296162010902e7f6e1e20403f67ab6de7a4e4cc7fcdf9bd466c8",
+        "expected_basis_fingerprint": null,
+        "sampled_finalized_at_utc": null,
+        "planned_outcome": "refuse",
+        "refusal": {
+          "code": "stale_current_artifact",
+          "layer": "currentness",
+          "expected_fingerprint": null,
+          "observed_fingerprint": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d"
+        },
+        "outputs": [],
+        "intent_fingerprint": "sha256:329d38ed473f8de47c98daffa26ba200c35051f542d437eeb1d63b53b7532e8b"
+      }
+    },
+    {
+      "vector_id": "refused-promotion-verified-stage",
+      "identity_excludes": [
+        "verified_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-verified-stage",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901",
+        "intent_fingerprint": "sha256:329d38ed473f8de47c98daffa26ba200c35051f542d437eeb1d63b53b7532e8b",
+        "planned_outcome": "refuse",
+        "refusal": {
+          "code": "stale_current_artifact",
+          "layer": "currentness",
+          "expected_fingerprint": null,
+          "observed_fingerprint": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d"
+        },
+        "verification_basis": "refusal_decision",
+        "staged_outputs": [],
+        "verified_fingerprint": "sha256:ba226d06355bc618a46c72bfb83b1ba0d84ecb2bfe5d8502dfb2654c54b0267b"
+      }
+    },
+    {
+      "vector_id": "refused-promotion-commit-marker",
+      "identity_excludes": [
+        "marker_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-commit-marker",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901",
+        "intent_fingerprint": "sha256:329d38ed473f8de47c98daffa26ba200c35051f542d437eeb1d63b53b7532e8b",
+        "verified_fingerprint": "sha256:ba226d06355bc618a46c72bfb83b1ba0d84ecb2bfe5d8502dfb2654c54b0267b",
+        "outcome": "refused",
+        "refusal": {
+          "code": "stale_current_artifact",
+          "layer": "currentness",
+          "expected_fingerprint": null,
+          "observed_fingerprint": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d"
+        },
+        "authoritative_outputs": [],
+        "subordinate_outputs": [],
+        "marker_fingerprint": "sha256:ecd62ece4f4eaeaf423a1423943ca84313c013bd1ba319080cb2275eecb8de62"
+      }
+    },
+    {
+      "vector_id": "refused-promotion-internal-transaction-evidence",
+      "identity_excludes": [
+        "evidence_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-internal-transaction-evidence",
+        "schema_version": "1.0",
+        "transaction_id": "artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901",
+        "operation_id": "artifact.candidate.promote",
+        "request_fingerprint": "sha256:7dff956440b77ffcab2ecd55c4d59aa72e23e9ce3b35ac5b7b091f9fb3d12fc9",
+        "intent_fingerprint": "sha256:329d38ed473f8de47c98daffa26ba200c35051f542d437eeb1d63b53b7532e8b",
+        "verified_fingerprint": "sha256:ba226d06355bc618a46c72bfb83b1ba0d84ecb2bfe5d8502dfb2654c54b0267b",
+        "marker_fingerprint": "sha256:ecd62ece4f4eaeaf423a1423943ca84313c013bd1ba319080cb2275eecb8de62",
+        "outcome": "refused",
+        "refusal": {
+          "code": "stale_current_artifact",
+          "layer": "currentness",
+          "expected_fingerprint": null,
+          "observed_fingerprint": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d"
+        },
+        "authoritative_outputs": [],
+        "subordinate_outputs": [],
+        "atomic_group": "artifact_candidate_promote",
+        "evidence_fingerprint": "sha256:dd85621bc3048964c5b81eeec5c42913559324b6ac5ca99bf6dd9470edf2e304"
+      }
+    },
+    {
+      "vector_id": "refused-promotion-domain-mutation-result",
+      "identity_excludes": [
+        "result_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-mutation-result",
+        "schema_version": "1.0",
+        "operation_id": "artifact.candidate.promote",
+        "transaction_id": "artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901",
+        "request_fingerprint": "sha256:7dff956440b77ffcab2ecd55c4d59aa72e23e9ce3b35ac5b7b091f9fb3d12fc9",
+        "outcome": "refused",
+        "refusal": {
+          "code": "stale_current_artifact",
+          "layer": "currentness",
+          "expected_fingerprint": null,
+          "observed_fingerprint": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d"
+        },
+        "authoritative_outputs": [],
+        "internal_transaction_evidence_ref": ".handbook/state/transactions/artifact-promotions/artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901.committed/evidence.json",
+        "internal_transaction_evidence_fingerprint": "sha256:dd85621bc3048964c5b81eeec5c42913559324b6ac5ca99bf6dd9470edf2e304",
+        "result_fingerprint": "sha256:a8e9c2104b4e653bb090329c1adeb4024d3caab5fb45fae3d8789115d6396549"
+      }
+    },
+    {
+      "vector_id": "refused-promotion-domain-mutation-result-replay",
+      "identity_excludes": [
+        "result_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-mutation-result",
+        "schema_version": "1.0",
+        "operation_id": "artifact.candidate.promote",
+        "transaction_id": "artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901",
+        "request_fingerprint": "sha256:7dff956440b77ffcab2ecd55c4d59aa72e23e9ce3b35ac5b7b091f9fb3d12fc9",
+        "outcome": "refused",
+        "refusal": {
+          "code": "stale_current_artifact",
+          "layer": "currentness",
+          "expected_fingerprint": null,
+          "observed_fingerprint": "sha256:698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d"
+        },
+        "authoritative_outputs": [],
+        "internal_transaction_evidence_ref": ".handbook/state/transactions/artifact-promotions/artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901.committed/evidence.json",
+        "internal_transaction_evidence_fingerprint": "sha256:dd85621bc3048964c5b81eeec5c42913559324b6ac5ca99bf6dd9470edf2e304",
+        "result_fingerprint": "sha256:a8e9c2104b4e653bb090329c1adeb4024d3caab5fb45fae3d8789115d6396549"
+      }
+    },
+    {
+      "vector_id": "refused-promotion-ledger-active-hold",
+      "identity_excludes": [
+        "entry_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-ledger-entry",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "artifact.candidate.promote",
+        "domain_mutation_key_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "request_fingerprint": "sha256:7dff956440b77ffcab2ecd55c4d59aa72e23e9ce3b35ac5b7b091f9fb3d12fc9",
+        "transaction_id": "artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901",
+        "state": "active_hold",
+        "result_ref": null,
+        "result_fingerprint": null,
+        "retained_until_utc": null,
+        "entry_fingerprint": "sha256:5d2ab3784b4d069a4fdbf5fae24e50d4428f1591c5d3385c32eb72992cd54c3a"
+      }
+    },
+    {
+      "vector_id": "refused-promotion-ledger-retained-result",
+      "identity_excludes": [
+        "entry_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-ledger-entry",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "artifact.candidate.promote",
+        "domain_mutation_key_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "request_fingerprint": "sha256:7dff956440b77ffcab2ecd55c4d59aa72e23e9ce3b35ac5b7b091f9fb3d12fc9",
+        "transaction_id": "artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901",
+        "state": "retained_result",
+        "result_ref": ".handbook/state/idempotency/generic-artifact-operations/results/artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901.json",
+        "result_fingerprint": "sha256:a8e9c2104b4e653bb090329c1adeb4024d3caab5fb45fae3d8789115d6396549",
+        "retained_until_utc": "2026-08-21T00:00:00Z",
+        "entry_fingerprint": "sha256:1d3df0e8a6c6a49c55c7c31eaf35601bad006d8b5e26d5c532df2b2596738b7e"
+      }
+    },
+    {
+      "vector_id": "refused-promotion-ledger-tombstone",
+      "identity_excludes": [
+        "entry_fingerprint"
+      ],
+      "record": {
+        "schema_id": "handbook.generic-domain-ledger-entry",
+        "schema_version": "1.0",
+        "repository_identity_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "owner_contract_ref": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0",
+        "owner_contract_subject_fingerprint": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "operation_id": "artifact.candidate.promote",
+        "domain_mutation_key_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "request_fingerprint": "sha256:7dff956440b77ffcab2ecd55c4d59aa72e23e9ce3b35ac5b7b091f9fb3d12fc9",
+        "transaction_id": "artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901",
+        "state": "tombstone",
+        "result_ref": null,
+        "result_fingerprint": null,
+        "retained_until_utc": null,
+        "entry_fingerprint": "sha256:03ebf8cc1e96b2de3b3b15b650b5f35ffefdf2fd50173f1023e351675b058f4d"
+      }
+    }
+  ],
+  "semantic_state_rules": [
+    "active_hold requires null result_ref, result_fingerprint, and retained_until_utc",
+    "retained_result requires non-null result_ref, result_fingerprint, and retained_until_utc",
+    "tombstone requires null result_ref, result_fingerprint, and retained_until_utc and is non-expiring",
+    "operation-context resolved_definitions are unique by definition_ref and sorted by UTF-8 exact_ref bytes",
+    "coverage_results are definition order; field_sources are target-pointer order and unique by target_pointer and coverage_id",
+    "transaction IDs reproduce the operation-discriminated preimage in the runtime contract",
+    "each operation has the exact ordered intent, stage, marker, evidence, result, and ledger mapping closed by the control schema",
+    "intent outputs and staged outputs use contiguous ordinal order and agree exactly in digest and length",
+    "marker and evidence authoritative/subordinate outputs agree exactly with the intent and installed semantic fingerprints",
+    "exact refs use lowercase dot-separated identity segments with no empty, doubled-hyphen, leading-hyphen, or trailing-hyphen segment; safe refs use nonempty slash-separated local segments with no absolute, dot, dot-dot, backslash, colon, empty, or oversized segment path",
+    "no raw idempotency key is persisted in any control record",
+    "domain results and internal evidence are not canonical Phase-4 WriteReceipt records",
+    "staging verification uses only the exact ordered staged/<ordinal>-<token>.bin refs; installed_complete verification uses only the exact ordered intent final refs, and both bases agree with intent digest and length",
+    "intake append samples one non-null finalized_at_utc in the durable intent and exact replay retains it; candidate append and promotion are timestamp-free and require sampled_finalized_at_utc null",
+    "operation-context resolved_definitions must equal their UTF-8 definition_ref-sorted projection before context fingerprint admission",
+    "operation context, coverage evaluation, all four runtime records, and all three transaction intents bind the same exact context_fingerprint",
+    "a new key is pre-establishment until repository identity, exact operation context, and deterministic evaluation produce either a closed commit plan or one establishedRefusal; pre-establishment failures create no ledger, journal, evidence, result, or artifact bytes",
+    "establishment atomically publishes exactly one fingerprint-valid intent at the recognized establishing path; active_hold is its exact logical projection before or after byte-preserving move to pending intent.json and is never separately persisted; an established refusal uses planned_outcome refuse, the identical closed refusal at every journal/result layer, zero artifact outputs, and non-null internal evidence",
+    "the only refusal journal prefixes are active_hold+intent, +verified refusal_decision, +refused marker, +evidence, +result, +retained_result ledger, and +committed rename; exact prefixes resume the missing suffix and every mismatch or non-prefix state refuses without mutation",
+    "an exact retained refused result replays byte-identically despite later context or artifact drift; same-key different request conflicts; its tombstone returns idempotency_expired for the exact request and idempotency_conflict for a different request",
+    "established refusal recovery never creates, replaces, adopts, deletes, or exposes canonical, semantic-record, or subordinate-closure output bytes",
+    "stale_basis repeats non-null unequal expected/observed basis fingerprints; stale_current_artifact repeats the exact nullable request expectation and locked nullable observation and requires them to differ; every other established refusal has both fingerprint fields null",
+    "promotion resolved_definitions equal the cited operation-context resolved_definitions byte-for-byte, including UTF-8 exact_ref order",
+    "every domain-result evidence ref uses the operation-discriminated transaction family and its identical transaction_id; no family alias is admitted",
+    "establishment crash states are only no file, non-authoritative .intent.writing, established .intent with no shell, established .intent with its exact empty pending shell, or pending intent.json with no establishing file; every transition preserves identical intent bytes and all dual, extra, nonempty-shell, retained/tombstone overlap, path, key, transaction, or fingerprint mismatch states refuse"
+  ],
+  "negative_vectors": [
+    {
+      "vector_id": "operation-context-duplicate-definition-ref",
+      "mutation": "repeat a definition_ref with another fingerprint",
+      "expected": "duplicate_definition_identity"
+    },
+    {
+      "vector_id": "coverage-duplicate-target",
+      "mutation": "repeat one field_sources target_pointer with another coverage_id",
+      "expected": "duplicate_field_source"
+    },
+    {
+      "vector_id": "exact-ref-uppercase",
+      "mutation": "capitalize one exact-ref identity segment",
+      "expected": "invalid_exact_ref"
+    },
+    {
+      "vector_id": "exact-ref-double-hyphen",
+      "mutation": "use an empty hyphen component in an exact-ref identity segment",
+      "expected": "invalid_exact_ref"
+    },
+    {
+      "vector_id": "safe-ref-double-slash",
+      "mutation": "insert an empty path segment",
+      "expected": "unsafe_ref"
+    },
+    {
+      "vector_id": "safe-ref-dot-segment",
+      "mutation": "insert a dot or dot-dot path segment",
+      "expected": "unsafe_ref"
+    },
+    {
+      "vector_id": "raw-key-persistence",
+      "mutation": "add idempotency_key to request, ledger, journal, result, or evidence",
+      "expected": "unknown_field"
+    },
+    {
+      "vector_id": "active-hold-with-result",
+      "mutation": "set active_hold result_ref/result_fingerprint",
+      "expected": "invalid_ledger_state"
+    },
+    {
+      "vector_id": "retained-result-without-deadline",
+      "mutation": "set retained_result retained_until_utc null",
+      "expected": "invalid_ledger_state"
+    },
+    {
+      "vector_id": "tombstone-with-result",
+      "mutation": "set tombstone result_ref",
+      "expected": "invalid_ledger_state"
+    },
+    {
+      "vector_id": "operation-output-cardinality",
+      "mutation": "remove or add an operation-specific intent, marker, evidence, or result output",
+      "expected": "operation_output_cardinality"
+    },
+    {
+      "vector_id": "operation-output-class",
+      "mutation": "replace the required authoritative or subordinate class for one operation",
+      "expected": "operation_output_class"
+    },
+    {
+      "vector_id": "transaction-family-mismatch",
+      "mutation": "pair an operation_id with another operation token or staged-output tuple",
+      "expected": "transaction_family_mismatch"
+    },
+    {
+      "vector_id": "atomic-group-mismatch",
+      "mutation": "pair an operation with another atomic_group",
+      "expected": "atomic_group_mismatch"
+    },
+    {
+      "vector_id": "intent-ordinal-gap",
+      "mutation": "start outputs at ordinal 1",
+      "expected": "invalid_output_order"
+    },
+    {
+      "vector_id": "stage-intent-disagreement",
+      "mutation": "change staged digest, byte length, or ordinal",
+      "expected": "staged_output_mismatch"
+    },
+    {
+      "vector_id": "marker-intent-disagreement",
+      "mutation": "change one marker ref, authority class, or fingerprint relative to intent",
+      "expected": "installed_output_mismatch"
+    },
+    {
+      "vector_id": "canonical-write-receipt-lookalike",
+      "mutation": "add condition, authority_class, atomic_group, or receipt_fingerprint to a domain result",
+      "expected": "unknown_field"
+    },
+    {
+      "vector_id": "subordinate-as-authority",
+      "mutation": "place subordinate_closure in authoritative_outputs",
+      "expected": "closed_value"
+    },
+    {
+      "vector_id": "installed-complete-with-staging-ref",
+      "mutation": "set verification_basis installed_complete while retaining staged/<ordinal>-<token>.bin refs",
+      "expected": "verification_basis_ref_mismatch"
+    },
+    {
+      "vector_id": "staging-with-final-ref",
+      "mutation": "set verification_basis staging while citing final installed refs",
+      "expected": "verification_basis_ref_mismatch"
+    },
+    {
+      "vector_id": "installed-complete-reordered-ref",
+      "mutation": "reorder two installed_complete final refs while retaining ordinals",
+      "expected": "invalid_output_order"
+    },
+    {
+      "vector_id": "installed-complete-intent-ref-disagreement",
+      "mutation": "replace one installed_complete final ref with another schema-valid content-addressed ref not named by intent",
+      "expected": "installed_output_mismatch"
+    },
+    {
+      "vector_id": "intake-null-sampled-time",
+      "mutation": "set intake append sampled_finalized_at_utc null",
+      "expected": "missing_intake_identity_time"
+    },
+    {
+      "vector_id": "candidate-nonnull-time",
+      "mutation": "set candidate append sampled_finalized_at_utc to a date-time",
+      "expected": "unexpected_transaction_time"
+    },
+    {
+      "vector_id": "promotion-nonnull-time",
+      "mutation": "set promotion sampled_finalized_at_utc to a date-time",
+      "expected": "unexpected_transaction_time"
+    },
+    {
+      "vector_id": "intake-time-resampled-on-replay",
+      "mutation": "change the durable intake sampled_finalized_at_utc during replay",
+      "expected": "request_replay_mismatch"
+    },
+    {
+      "vector_id": "operation-context-reordered-definition",
+      "mutation": "move one resolved_definitions binding out of UTF-8 definition_ref order and recompute the terminal fingerprint",
+      "expected": "invalid_definition_order"
+    },
+    {
+      "vector_id": "cross-suite-operation-context-divergence",
+      "mutation": "replace one coverage, runtime, or transaction-intent operation-context fingerprint with another valid SHA-256",
+      "expected": "stale_operation_context"
+    },
+    {
+      "vector_id": "pre-establishment-failure-persisted",
+      "mutation": "persist any active_hold, intent, evidence, result, or output for a request rejected before exact context and deterministic operation evaluation complete",
+      "expected": "pre_establishment_write_forbidden"
+    },
+    {
+      "vector_id": "established-refusal-artifact-output",
+      "mutation": "add an output descriptor, staged byte, authoritative output, or subordinate output to an established refusal",
+      "expected": "refusal_output_forbidden"
+    },
+    {
+      "vector_id": "established-refusal-evidence-missing",
+      "mutation": "retain a refused result with null, absent, or mismatched internal evidence",
+      "expected": "refusal_evidence_required"
+    },
+    {
+      "vector_id": "established-refusal-binding-mismatch",
+      "mutation": "change operation, transaction, request, context, intent, verified, marker, refusal, or evidence binding at any refusal prefix",
+      "expected": "conflicting_refusal_state"
+    },
+    {
+      "vector_id": "established-refusal-code-layer-mismatch",
+      "mutation": "pair a refusal code with a non-authorized layer or fingerprint nullability",
+      "expected": "invalid_established_refusal"
+    },
+    {
+      "vector_id": "established-refusal-equal-currentness",
+      "mutation": "use equal expected and observed fingerprints for stale_basis or stale_current_artifact",
+      "expected": "invalid_established_refusal"
+    },
+    {
+      "vector_id": "established-refusal-non-prefix-crash-state",
+      "mutation": "recover result without evidence, ledger without result, committed rename without ledger, or any other non-prefix refusal state",
+      "expected": "conflicting_refusal_state"
+    },
+    {
+      "vector_id": "established-refusal-same-key-different-request",
+      "mutation": "submit a different request under the active or retained refusal key",
+      "expected": "idempotency_conflict"
+    },
+    {
+      "vector_id": "established-refusal-replay-changed",
+      "mutation": "re-evaluate or change a retained refusal after operation-context or canonical-artifact drift",
+      "expected": "retained_result_mismatch"
+    },
+    {
+      "vector_id": "established-refusal-tombstone-exact-request",
+      "mutation": "attempt to establish or re-evaluate the exact request after refused-result retention becomes a tombstone",
+      "expected": "idempotency_expired"
+    },
+    {
+      "vector_id": "established-refusal-tombstone-different-request",
+      "mutation": "submit a different request under the refused-result tombstone key",
+      "expected": "idempotency_conflict"
+    },
+    {
+      "vector_id": "domain-result-wrong-evidence-family",
+      "mutation": "replace intake-records, artifact-candidates, or artifact-promotions in a committed or refused result evidence ref with another or shortened family",
+      "expected": "operation_transaction_family_mismatch"
+    },
+    {
+      "vector_id": "domain-result-evidence-transaction-mismatch",
+      "mutation": "retain the right evidence family but change the transaction token or digest in the evidence ref",
+      "expected": "operation_transaction_identity_mismatch"
+    },
+    {
+      "vector_id": "separately-persisted-active-hold",
+      "mutation": "persist an active_hold ledger record as separate authority bytes rather than deriving it from the one established intent",
+      "expected": "duplicate_hold_authority"
+    },
+    {
+      "vector_id": "conflicting-establishment-state",
+      "mutation": "create dual established/pending intent, nonempty shell, multiple scratch files, retained or tombstone overlap, or any path/key/transaction/fingerprint mismatch",
+      "expected": "conflicting_establishment_state"
+    }
+  ],
+  "schema_rejection_vectors": [
+    {
+      "vector_id": "control-one-segment-exact-ref",
+      "base_vector_id": "operation-context",
+      "json_pointer": "/kind_ref",
+      "replacement": "badref@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-underscore-exact-ref",
+      "base_vector_id": "operation-context",
+      "json_pointer": "/kind_ref",
+      "replacement": "bad_ref.value@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-repeated-hyphen-exact-ref",
+      "base_vector_id": "operation-context",
+      "json_pointer": "/kind_ref",
+      "replacement": "bad--ref.value@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-noncanonical-semver",
+      "base_vector_id": "operation-context",
+      "json_pointer": "/kind_ref",
+      "replacement": "bad.ref@01.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-committed-result-wrong-evidence-family",
+      "base_vector_id": "promotion-domain-mutation-result",
+      "json_pointer": "/internal_transaction_evidence_ref",
+      "replacement": ".handbook/state/transactions/promotions/artifact_candidate_promote_ffa78e307c40870966685815e476f05c15302c6fae968e8459d71e8e96d6d22b.committed/evidence.json",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-refused-result-wrong-evidence-family",
+      "base_vector_id": "refused-promotion-domain-mutation-result",
+      "json_pointer": "/internal_transaction_evidence_ref",
+      "replacement": ".handbook/state/transactions/promotions/artifact_candidate_promote_af1b9d68d5a96e43264f40cd70a18c4e3e539950468ffb3e17ef2204ff7d4901.committed/evidence.json",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-dot-segment-safe-ref",
+      "base_vector_id": "promotion-ledger-retained-result",
+      "json_pointer": "/result_ref",
+      "replacement": ".handbook/./state/result.json",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-over-component-safe-ref",
+      "base_vector_id": "promotion-ledger-retained-result",
+      "json_pointer": "/result_ref",
+      "replacement": "x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-final-line-terminator-exact-ref",
+      "base_vector_id": "operation-context",
+      "json_pointer": "/kind_ref",
+      "replacement": "example.artifact-kind.registry-brief@1.0.0\n",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-final-line-terminator-safe-ref",
+      "base_vector_id": "promotion-ledger-retained-result",
+      "json_pointer": "/result_ref",
+      "replacement": ".handbook/state/result.json\n",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-final-line-terminator-sha256",
+      "base_vector_id": "operation-context",
+      "json_pointer": "/repository_identity_fingerprint",
+      "replacement": "sha256:1111111111111111111111111111111111111111111111111111111111111111\n",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-final-line-terminator-transaction-id",
+      "base_vector_id": "promotion-domain-mutation-result",
+      "json_pointer": "/transaction_id",
+      "replacement": "artifact_candidate_promote_1111111111111111111111111111111111111111111111111111111111111111\n",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-final-line-terminator-instance-id",
+      "base_vector_id": "operation-context",
+      "json_pointer": "/instance_id",
+      "replacement": "registry_brief\n",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "control-final-line-terminator-output-token",
+      "base_vector_id": "promotion-transaction-intent",
+      "json_pointer": "/outputs/0/token",
+      "replacement": "canonical-artifact\n",
+      "expected": "schema_rejection"
+    }
+  ],
+  "schema_acceptance_vectors": [
+    {
+      "vector_id": "control-canonical-prerelease-build-exact-ref",
+      "base_vector_id": "operation-context",
+      "json_pointer": "/kind_ref",
+      "replacement": "valid.value@1.0.0-alpha.1+build.2",
+      "expected": "schema_acceptance"
+    },
+    {
+      "vector_id": "control-63-byte-segment-exact-ref",
+      "base_vector_id": "operation-context",
+      "json_pointer": "/kind_ref",
+      "replacement": "a11111111111111111111111111111111111111111111111111111111111111.value@1.0.0",
+      "expected": "schema_acceptance"
+    },
+    {
+      "vector_id": "control-64-component-safe-ref",
+      "base_vector_id": "promotion-ledger-retained-result",
+      "json_pointer": "/result_ref",
+      "replacement": "x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x",
+      "expected": "schema_acceptance"
+    },
+    {
+      "vector_id": "control-1024-byte-safe-ref",
+      "base_vector_id": "promotion-ledger-retained-result",
+      "json_pointer": "/result_ref",
+      "replacement": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "expected": "schema_acceptance"
+    }
+  ]
+}

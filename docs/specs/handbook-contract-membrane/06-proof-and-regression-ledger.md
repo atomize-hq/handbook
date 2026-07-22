@@ -952,8 +952,14 @@ remained separately gated; the next section records the later selected result.
 
 ## HCM-2.2 constitutional-root implementation proof gate
 
-The bounded HCM-2.2 implementation selected at entry HEAD
-`ab0c2613f215979d9336340e47a2a0e19f00096b` is not complete. Fresh Review 2
+HCM-2.2 is completed and review-clean at primary implementation commit
+`6766d3ed4894aad6598faaa7c4a54b493f92c1f6` and parent closeout
+`5c31eeefb5adf71d75ec3059b1b6947025d2fd6b`. Final Review 5 binds the exact
+53-path subject at
+`sha256:62c9fdae649a31d1538ec7770b0f8ce5b2cc0686cb33535fe8747bbe2ddc80ad`.
+The following chronology retains the rejected boundaries and repairs that led
+to that result. The first bounded HCM-2.2 implementation selected at entry HEAD
+`ab0c2613f215979d9336340e47a2a0e19f00096b` was not complete. Fresh Review 2
 rejected the exact implementation subject, and the bounded lifecycle-validation
 remediation proved an authority-boundary blocker recorded in
 [`slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md`](slices/HCM-2.2/proof/20260720T083550Z--authority-boundary-stop.md).
@@ -1026,16 +1032,15 @@ result-ref copy, approval carry-forward, or selected-product fallback. Result
 `1.0` and intent `1.2` schemas remain byte-unchanged. The later exact-result
 implementation selector authorized the complete bounded subject from baseline
 `f676ea59bbbbcdd0ecc3475bbf2dabd80f5c9d4d`; its immutable implementation proof
-wall records the following completed evidence. Adoption still requires fresh
-review `CLEAN`, the primary commit, and parent closeout:
+wall and final review chain record the following completed evidence:
 
 Fresh implementation Review 1 returned three Required findings. The repaired
 subject now validates lifecycle-result bytes against the complete frozen `1.0`
 schema, recomputes the exact current approval quorum and lexical order during
 promotion recovery, and requires the exact ordered thirteen-definition output
 closure. Focused tests first reproduced each admitted counterexample, then the
-complete proof wall replayed green. A different fresh exact-subject re-review
-is still required; no current `CLEAN` result is claimed here.
+complete proof wall replayed green. Later fresh Reviews 4 and 5 confirmed the
+remediated exact subject `CLEAN`.
 
 Fresh implementation Review 2 admitted the Review 1-remediated exact subject
 and returned one Required finding. Historical candidate inventory validation
@@ -1045,8 +1050,8 @@ closed `1.0`, `1.1`, and `1.2` shapes; validates their refs, fingerprints,
 basis, source maps, gaps, result refs, final fingerprints, and `1.2` subject;
 and requires the stored ID plus filename to equal the derived identity. Public
 author replay retains valid history while refusing wrong-ID and malformed
-records before mutation. A different fresh exact-subject review remains
-required; no current `CLEAN` result is claimed here.
+records before mutation. Later fresh Reviews 4 and 5 confirmed the remediated
+exact subject `CLEAN`.
 
 Fresh implementation Review 3 admitted the exact 48-path Review 2-remediated
 subject and returned Required finding `R3-001`. Candidate `1.3` source maps were
@@ -1058,9 +1063,10 @@ from retained intake plus normalized content and requires exact equality before
 candidate persistence, during both author inventory scans, and throughout
 approval, promotion, and pending-transaction recovery. Eight empty/missing/
 reordered/duplicate/unsafe/wrong-coverage/unsupported/source-free variants pass
-at all four runtime seams and preserve every forged byte on refusal. A
-different fresh exact-subject review remains required; no current `CLEAN`
-result is claimed here.
+at all four runtime seams and preserve every forged byte on refusal. Fresh
+Review 4 returned `CLEAN` over the complete remediated subject; fresh Review 5
+independently returned `CLEAN` over the final exact 53-path subject at
+`sha256:62c9fdae649a31d1538ec7770b0f8ce5b2cc0686cb33535fe8747bbe2ddc80ad`.
 
 - every released definition byte remains unchanged; the additive `1.1.0`
   Project Authority schema/kind/profile and intake, renderer, lifecycle,
@@ -1110,17 +1116,21 @@ result is claimed here.
   all-target/all-feature tests, strict Clippy, rustdoc/doc-tests, formatting,
   package/replay, Linux installed-skill real-path smoke, archive/handoff/link/
   secret/scope/diff gates, and repository change detection pass; and
-- a fresh isolated read-only built-in `default` reviewer returns `CLEAN` over
-  the exact complete implementation subject. The primary reviewed
-  implementation commit is followed only by the parent-owned v1.2 handoff and
-  deterministic ledger closeout commit; no HCM-2.3 work begins.
+- fresh isolated read-only built-in `default` Reviews 4 and 5 returned `CLEAN`
+  over the exact complete implementation subject; the primary reviewed
+  implementation commit `6766d3ed4894aad6598faaa7c4a54b493f92c1f6` was
+  followed only by parent-owned v1.2 handoff/ledger closeout commit
+  `5c31eeefb5adf71d75ec3059b1b6947025d2fd6b`.
 
 `PG-INTAKE-01`, `PG-INTAKE-02`, and `PG-CHARTER-01` are therefore supported for
 closure only for the exact first-party Charter. `PG-YAML-02` extends through
 the exact Project Context and Charter families but remains open program-wide.
 The HCM-2.2 subject does not close
 `PG-KIND-01`, `PG-ARTIFACT-01`, `PG-KIND-02`, or program-wide `PG-YAML-02`,
-and it grants no later-slice authority.
+and it grants no later-slice implementation authority. HCM-2.3 planning is now
+explicitly selected, but HCM-2.3 implementation remains unauthorized until its
+new packet is `CLEAN`, its planning closeout exists, and a separate exact
+implementation selector is explicitly selected.
 
 ## Control-pack orchestration-repair proof gate
 

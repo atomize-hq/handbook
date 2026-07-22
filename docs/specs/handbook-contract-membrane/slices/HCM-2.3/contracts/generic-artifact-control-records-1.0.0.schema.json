@@ -1,0 +1,355 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://handbook.example/contracts/hcm-2.3/generic-artifact-control-records-1.0.0.schema.json",
+  "title": "HCM-2.3 closed generic artifact control records",
+  "oneOf": [
+    {"$ref": "#/$defs/operationContext"},
+    {"$ref": "#/$defs/coverageEvaluation"},
+    {"$ref": "#/$defs/domainMutationRequest"},
+    {"$ref": "#/$defs/domainMutationResult"},
+    {"$ref": "#/$defs/domainLedgerEntry"},
+    {"$ref": "#/$defs/transactionIntent"},
+    {"$ref": "#/$defs/verifiedStage"},
+    {"$ref": "#/$defs/commitMarker"},
+    {"$ref": "#/$defs/internalTransactionEvidence"}
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$(?![\\s\\S])"},
+    "exactRef": {"type": "string", "minLength": 7, "maxLength": 512, "pattern": "^(?=.{3,255}@)(?:(?=[^.@]{1,63}\\.)[a-z][a-z0-9]*(?:-[a-z0-9]+)*\\.)+(?=[^@]{1,63}@)[a-z][a-z0-9]*(?:-[a-z0-9]+)*@(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$(?![\\s\\S])"},
+    "safeRef": {"type": "string", "minLength": 1, "maxLength": 1024, "pattern": "^(?=.{1,1024}$)(?:(?!\\.{1,2}(?:/|$))[A-Za-z0-9._-]+/){0,63}(?!\\.{1,2}$)[A-Za-z0-9._-]+$(?![\\s\\S])"},
+    "transactionId": {"type": "string", "pattern": "^(intake_record_append|artifact_candidate_append|artifact_candidate_promote)_[0-9a-f]{64}$(?![\\s\\S])"},
+    "operationId": {"enum": ["intake.record.append", "artifact.candidate.append", "artifact.candidate.promote"]},
+    "nullableSha256": {"oneOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+    "establishedRefusal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "layer", "expected_fingerprint", "observed_fingerprint"],
+      "properties": {
+        "code": {"enum": ["canonical_syntax_invalid", "structural_validation_failed", "intake_coverage_blocked", "stale_basis", "stale_current_artifact", "operation_ineligible"]},
+        "layer": {"enum": ["canonical_syntax", "structural", "intake", "currentness", "eligibility"]},
+        "expected_fingerprint": {"$ref": "#/$defs/nullableSha256"},
+        "observed_fingerprint": {"$ref": "#/$defs/nullableSha256"}
+      },
+      "allOf": [
+        {"if": {"properties": {"code": {"const": "canonical_syntax_invalid"}}, "required": ["code"]}, "then": {"properties": {"layer": {"const": "canonical_syntax"}, "expected_fingerprint": {"type": "null"}, "observed_fingerprint": {"type": "null"}}}},
+        {"if": {"properties": {"code": {"const": "structural_validation_failed"}}, "required": ["code"]}, "then": {"properties": {"layer": {"const": "structural"}, "expected_fingerprint": {"type": "null"}, "observed_fingerprint": {"type": "null"}}}},
+        {"if": {"properties": {"code": {"const": "intake_coverage_blocked"}}, "required": ["code"]}, "then": {"properties": {"layer": {"const": "intake"}, "expected_fingerprint": {"type": "null"}, "observed_fingerprint": {"type": "null"}}}},
+        {"if": {"properties": {"code": {"const": "stale_basis"}}, "required": ["code"]}, "then": {"properties": {"layer": {"const": "currentness"}, "expected_fingerprint": {"$ref": "#/$defs/sha256"}, "observed_fingerprint": {"$ref": "#/$defs/sha256"}}}},
+        {"if": {"properties": {"code": {"const": "stale_current_artifact"}}, "required": ["code"]}, "then": {"properties": {"layer": {"const": "currentness"}}}},
+        {"if": {"properties": {"code": {"const": "operation_ineligible"}}, "required": ["code"]}, "then": {"properties": {"layer": {"const": "eligibility"}, "expected_fingerprint": {"type": "null"}, "observed_fingerprint": {"type": "null"}}}}
+      ]
+    },
+    "definitionBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["definition_ref", "definition_fingerprint"],
+      "properties": {
+        "definition_ref": {"$ref": "#/$defs/exactRef"},
+        "definition_fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "authoritativeOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority_class", "ref", "fingerprint"],
+      "properties": {
+        "authority_class": {"enum": ["semantic_record", "canonical_truth"]},
+        "ref": {"$ref": "#/$defs/safeRef"},
+        "fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "subordinateOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref", "fingerprint"],
+      "properties": {
+        "ref": {"$ref": "#/$defs/safeRef"},
+        "fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "intakeAuthoritativeOutput": {
+      "allOf": [
+        {"$ref": "#/$defs/authoritativeOutput"},
+        {"properties": {"authority_class": {"const": "semantic_record"}, "ref": {"type": "string", "pattern": "^\\.handbook/state/artifacts/registry_brief/intake-records/intake_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}
+      ]
+    },
+    "candidateAuthoritativeOutput": {
+      "allOf": [
+        {"$ref": "#/$defs/authoritativeOutput"},
+        {"properties": {"authority_class": {"const": "semantic_record"}, "ref": {"type": "string", "pattern": "^\\.handbook/evidence/artifacts/registry_brief/candidates/candidate_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}
+      ]
+    },
+    "canonicalTruthOutput": {
+      "allOf": [
+        {"$ref": "#/$defs/authoritativeOutput"},
+        {"properties": {"authority_class": {"const": "canonical_truth"}, "ref": {"const": ".handbook/project/registry-brief.yaml"}}}
+      ]
+    },
+    "promotionAuthoritativeOutput": {
+      "allOf": [
+        {"$ref": "#/$defs/authoritativeOutput"},
+        {"properties": {"authority_class": {"const": "semantic_record"}, "ref": {"type": "string", "pattern": "^\\.handbook/state/artifacts/registry_brief/promotion-records/promotion_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}
+      ]
+    },
+    "intakeValueSubordinateOutput": {
+      "allOf": [
+        {"$ref": "#/$defs/subordinateOutput"},
+        {"properties": {"ref": {"type": "string", "pattern": "^\\.handbook/evidence/artifacts/registry_brief/intake-values/value_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}
+      ]
+    },
+    "contentSubordinateOutput": {
+      "allOf": [
+        {"$ref": "#/$defs/subordinateOutput"},
+        {"properties": {"ref": {"type": "string", "pattern": "^\\.handbook/evidence/artifacts/registry_brief/content/content_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}
+      ]
+    },
+    "validationSubordinateOutput": {
+      "allOf": [
+        {"$ref": "#/$defs/subordinateOutput"},
+        {"properties": {"ref": {"type": "string", "pattern": "^\\.handbook/evidence/artifacts/registry_brief/validation-results/validation_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}
+      ]
+    },
+    "operationContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "repository_identity_fingerprint", "selection_fingerprint", "profile_ref", "resolved_profile_fingerprint", "kind_ref", "kind_fingerprint", "instance_id", "descriptor_fingerprint", "schema_ref", "schema_entry_fingerprint", "schema_document_fingerprint", "intake_definition_ref", "intake_definition_fingerprint", "resolved_definitions", "context_fingerprint"],
+      "properties": {
+        "schema_id": {"const": "handbook.artifact-operation-context"},
+        "schema_version": {"const": "1.0"},
+        "repository_identity_fingerprint": {"$ref": "#/$defs/sha256"},
+        "selection_fingerprint": {"$ref": "#/$defs/sha256"},
+        "profile_ref": {"$ref": "#/$defs/exactRef"},
+        "resolved_profile_fingerprint": {"$ref": "#/$defs/sha256"},
+        "kind_ref": {"$ref": "#/$defs/exactRef"},
+        "kind_fingerprint": {"$ref": "#/$defs/sha256"},
+        "instance_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$(?![\\s\\S])"},
+        "descriptor_fingerprint": {"$ref": "#/$defs/sha256"},
+        "schema_ref": {"$ref": "#/$defs/exactRef"},
+        "schema_entry_fingerprint": {"$ref": "#/$defs/sha256"},
+        "schema_document_fingerprint": {"$ref": "#/$defs/sha256"},
+        "intake_definition_ref": {"oneOf": [{"$ref": "#/$defs/exactRef"}, {"type": "null"}]},
+        "intake_definition_fingerprint": {"$ref": "#/$defs/nullableSha256"},
+        "resolved_definitions": {"type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/definitionBinding"}},
+        "context_fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "coverageResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coverage_id", "state", "source_kind", "value", "specificity", "confidence", "contradiction_refs", "evaluation"],
+      "properties": {
+        "coverage_id": {"enum": ["registry_brief.title", "registry_brief.summary"]},
+        "state": {"enum": ["supplied", "known_unknown", "contradicted"]},
+        "source_kind": {"const": "user_declaration"},
+        "value": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 4096}, {"type": "null"}]},
+        "specificity": {"enum": ["concrete", "exact"]},
+        "confidence": {"const": "high"},
+        "contradiction_refs": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/safeRef"}},
+        "evaluation": {"enum": ["satisfied", "blocking_unknown", "blocking_contradiction"]}
+      }
+    },
+    "fieldSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_pointer", "coverage_id", "source_kind"],
+      "properties": {
+        "target_pointer": {"enum": ["/title", "/summary"]},
+        "coverage_id": {"enum": ["registry_brief.title", "registry_brief.summary"]},
+        "source_kind": {"const": "user_declaration"}
+      }
+    },
+    "coverageEvaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "operation_context_fingerprint", "acquisition_mode", "basis_artifact_fingerprint", "coverage_results", "normalized_content", "field_sources", "outcome", "evaluation_fingerprint"],
+      "properties": {
+        "schema_id": {"const": "handbook.intake-coverage-evaluation"},
+        "schema_version": {"const": "1.0"},
+        "operation_context_fingerprint": {"$ref": "#/$defs/sha256"},
+        "acquisition_mode": {"enum": ["guided_adaptive", "express", "agent_assisted"]},
+        "basis_artifact_fingerprint": {"$ref": "#/$defs/nullableSha256"},
+        "coverage_results": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/coverageResult"}},
+        "normalized_content": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["summary", "title"],
+          "properties": {"summary": {"type": "string", "minLength": 1}, "title": {"type": "string", "minLength": 3}}
+        },
+        "field_sources": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/fieldSource"}},
+        "outcome": {"enum": ["complete", "blocked"]},
+        "evaluation_fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "requestSubject": {
+      "oneOf": [
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["operation_id", "kind_ref", "instance_id", "acquisition_mode", "expected_current_artifact_fingerprint", "coverage_input_fingerprint"],
+          "properties": {
+            "operation_id": {"const": "intake.record.append"}, "kind_ref": {"$ref": "#/$defs/exactRef"}, "instance_id": {"const": "registry_brief"},
+            "acquisition_mode": {"enum": ["guided_adaptive", "express", "agent_assisted"]}, "expected_current_artifact_fingerprint": {"$ref": "#/$defs/nullableSha256"}, "coverage_input_fingerprint": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["operation_id", "kind_ref", "instance_id", "intake_record_ref", "intake_record_fingerprint", "expected_candidate_fingerprint"],
+          "properties": {
+            "operation_id": {"const": "artifact.candidate.append"}, "kind_ref": {"$ref": "#/$defs/exactRef"}, "instance_id": {"const": "registry_brief"},
+            "intake_record_ref": {"$ref": "#/$defs/safeRef"}, "intake_record_fingerprint": {"$ref": "#/$defs/sha256"}, "expected_candidate_fingerprint": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["operation_id", "kind_ref", "instance_id", "candidate_ref", "candidate_fingerprint", "expected_current_artifact_fingerprint"],
+          "properties": {
+            "operation_id": {"const": "artifact.candidate.promote"}, "kind_ref": {"$ref": "#/$defs/exactRef"}, "instance_id": {"const": "registry_brief"},
+            "candidate_ref": {"$ref": "#/$defs/safeRef"}, "candidate_fingerprint": {"$ref": "#/$defs/sha256"}, "expected_current_artifact_fingerprint": {"$ref": "#/$defs/nullableSha256"}
+          }
+        }
+      ]
+    },
+    "domainMutationRequest": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "repository_identity_fingerprint", "owner_contract_ref", "owner_contract_subject_fingerprint", "domain_mutation_key_fingerprint", "request_subject", "request_fingerprint"],
+      "properties": {
+        "schema_id": {"const": "handbook.generic-domain-mutation-request"}, "schema_version": {"const": "1.0"},
+        "repository_identity_fingerprint": {"$ref": "#/$defs/sha256"}, "owner_contract_ref": {"const": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0"},
+        "owner_contract_subject_fingerprint": {"$ref": "#/$defs/sha256"}, "domain_mutation_key_fingerprint": {"$ref": "#/$defs/sha256"},
+        "request_subject": {"$ref": "#/$defs/requestSubject"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "domainMutationResult": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "operation_id", "transaction_id", "request_fingerprint", "outcome", "refusal", "authoritative_outputs", "internal_transaction_evidence_ref", "internal_transaction_evidence_fingerprint", "result_fingerprint"],
+      "properties": {
+        "schema_id": {"const": "handbook.generic-domain-mutation-result"}, "schema_version": {"const": "1.0"}, "operation_id": {"$ref": "#/$defs/operationId"},
+        "transaction_id": {"$ref": "#/$defs/transactionId"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}, "outcome": {"enum": ["committed", "refused"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]},
+        "authoritative_outputs": {"type": "array", "minItems": 0, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/authoritativeOutput"}},
+        "internal_transaction_evidence_ref": {"oneOf": [{"$ref": "#/$defs/safeRef"}, {"type": "null"}]}, "internal_transaction_evidence_fingerprint": {"$ref": "#/$defs/nullableSha256"},
+        "result_fingerprint": {"$ref": "#/$defs/sha256"}
+      },
+      "allOf": [
+        {"if": {"properties": {"outcome": {"const": "committed"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"type": "null"}, "authoritative_outputs": {"minItems": 1}, "internal_transaction_evidence_ref": {"$ref": "#/$defs/safeRef"}, "internal_transaction_evidence_fingerprint": {"$ref": "#/$defs/sha256"}}}},
+        {"if": {"properties": {"outcome": {"const": "refused"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/establishedRefusal"}, "authoritative_outputs": {"maxItems": 0}, "internal_transaction_evidence_ref": {"$ref": "#/$defs/safeRef"}, "internal_transaction_evidence_fingerprint": {"$ref": "#/$defs/sha256"}}}},
+        {"if": {"properties": {"operation_id": {"const": "intake.record.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^intake_record_append_[0-9a-f]{64}$(?![\\s\\S])"}, "internal_transaction_evidence_ref": {"type": "string", "pattern": "^\\.handbook/state/transactions/intake-records/intake_record_append_[0-9a-f]{64}\\.committed/evidence\\.json$(?![\\s\\S])"}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_[0-9a-f]{64}$(?![\\s\\S])"}, "internal_transaction_evidence_ref": {"type": "string", "pattern": "^\\.handbook/state/transactions/artifact-candidates/artifact_candidate_append_[0-9a-f]{64}\\.committed/evidence\\.json$(?![\\s\\S])"}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_[0-9a-f]{64}$(?![\\s\\S])"}, "internal_transaction_evidence_ref": {"type": "string", "pattern": "^\\.handbook/state/transactions/artifact-promotions/artifact_candidate_promote_[0-9a-f]{64}\\.committed/evidence\\.json$(?![\\s\\S])"}}}},
+        {"if": {"properties": {"outcome": {"const": "committed"}, "operation_id": {"const": "intake.record.append"}}, "required": ["outcome", "operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^intake_record_append_[0-9a-f]{64}$(?![\\s\\S])"}, "authoritative_outputs": {"minItems": 1, "maxItems": 1, "prefixItems": [{"$ref": "#/$defs/intakeAuthoritativeOutput"}], "items": false}}}},
+        {"if": {"properties": {"outcome": {"const": "committed"}, "operation_id": {"const": "artifact.candidate.append"}}, "required": ["outcome", "operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_[0-9a-f]{64}$(?![\\s\\S])"}, "authoritative_outputs": {"minItems": 1, "maxItems": 1, "prefixItems": [{"$ref": "#/$defs/candidateAuthoritativeOutput"}], "items": false}}}},
+        {"if": {"properties": {"outcome": {"const": "committed"}, "operation_id": {"const": "artifact.candidate.promote"}}, "required": ["outcome", "operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_[0-9a-f]{64}$(?![\\s\\S])"}, "authoritative_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/canonicalTruthOutput"}, {"$ref": "#/$defs/promotionAuthoritativeOutput"}], "items": false}}}}
+      ]
+    },
+    "domainLedgerEntry": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "repository_identity_fingerprint", "owner_contract_ref", "owner_contract_subject_fingerprint", "operation_id", "domain_mutation_key_fingerprint", "request_fingerprint", "state", "transaction_id", "result_ref", "result_fingerprint", "retained_until_utc", "entry_fingerprint"],
+      "properties": {
+        "schema_id": {"const": "handbook.generic-domain-ledger-entry"}, "schema_version": {"const": "1.0"}, "repository_identity_fingerprint": {"$ref": "#/$defs/sha256"},
+        "owner_contract_ref": {"const": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0"}, "owner_contract_subject_fingerprint": {"$ref": "#/$defs/sha256"}, "operation_id": {"$ref": "#/$defs/operationId"},
+        "domain_mutation_key_fingerprint": {"$ref": "#/$defs/sha256"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}, "state": {"enum": ["active_hold", "retained_result", "tombstone"]},
+        "transaction_id": {"$ref": "#/$defs/transactionId"}, "result_ref": {"oneOf": [{"$ref": "#/$defs/safeRef"}, {"type": "null"}]}, "result_fingerprint": {"$ref": "#/$defs/nullableSha256"},
+        "retained_until_utc": {"oneOf": [{"type": "string", "format": "date-time"}, {"type": "null"}]}, "entry_fingerprint": {"$ref": "#/$defs/sha256"}
+      },
+      "allOf": [
+        {"if": {"properties": {"state": {"const": "active_hold"}}}, "then": {"properties": {"result_ref": {"type": "null"}, "result_fingerprint": {"type": "null"}, "retained_until_utc": {"type": "null"}}}},
+        {"if": {"properties": {"state": {"const": "retained_result"}}}, "then": {"properties": {"result_ref": {"$ref": "#/$defs/safeRef"}, "result_fingerprint": {"$ref": "#/$defs/sha256"}, "retained_until_utc": {"type": "string", "format": "date-time"}}}},
+        {"if": {"properties": {"state": {"const": "tombstone"}}}, "then": {"properties": {"result_ref": {"type": "null"}, "result_fingerprint": {"type": "null"}, "retained_until_utc": {"type": "null"}}}},
+        {"if": {"properties": {"operation_id": {"const": "intake.record.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^intake_record_append_[0-9a-f]{64}$(?![\\s\\S])"}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_[0-9a-f]{64}$(?![\\s\\S])"}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_[0-9a-f]{64}$(?![\\s\\S])"}}}}
+      ]
+    },
+    "outputDescriptor": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ordinal", "token", "authority_class", "final_ref", "bytes_sha256", "byte_length", "install_mode", "receipt_class"],
+      "properties": {
+        "ordinal": {"type": "integer", "minimum": 0, "maximum": 15}, "token": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$(?![\\s\\S])"},
+        "authority_class": {"enum": ["subordinate_closure", "semantic_record", "canonical_truth"]}, "final_ref": {"$ref": "#/$defs/safeRef"}, "bytes_sha256": {"$ref": "#/$defs/sha256"},
+        "byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576}, "install_mode": {"enum": ["create_new", "replace_if_current"]},
+        "receipt_class": {"oneOf": [{"enum": ["semantic_record", "canonical_truth"]}, {"type": "null"}]}
+      }
+    },
+    "transactionIntent": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "transaction_id", "repository_identity_fingerprint", "owner_contract_ref", "owner_contract_subject_fingerprint", "operation_id", "domain_mutation_key_fingerprint", "request_fingerprint", "operation_context_fingerprint", "expected_basis_fingerprint", "sampled_finalized_at_utc", "planned_outcome", "refusal", "outputs", "intent_fingerprint"],
+      "properties": {
+        "schema_id": {"const": "handbook.generic-transaction-intent"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"},
+        "repository_identity_fingerprint": {"$ref": "#/$defs/sha256"}, "owner_contract_ref": {"const": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0"}, "owner_contract_subject_fingerprint": {"$ref": "#/$defs/sha256"},
+        "operation_id": {"$ref": "#/$defs/operationId"}, "domain_mutation_key_fingerprint": {"$ref": "#/$defs/sha256"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}, "operation_context_fingerprint": {"$ref": "#/$defs/sha256"},
+        "expected_basis_fingerprint": {"$ref": "#/$defs/nullableSha256"}, "sampled_finalized_at_utc": {"oneOf": [{"type": "string", "format": "date-time"}, {"type": "null"}]},
+        "planned_outcome": {"enum": ["commit", "refuse"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]},
+        "outputs": {"type": "array", "minItems": 0, "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/outputDescriptor"}}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}
+      },
+      "allOf": [
+        {"if": {"properties": {"planned_outcome": {"const": "commit"}}, "required": ["planned_outcome"]}, "then": {"properties": {"refusal": {"type": "null"}}}},
+        {"if": {"properties": {"planned_outcome": {"const": "refuse"}}, "required": ["planned_outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/establishedRefusal"}, "sampled_finalized_at_utc": {"type": "null"}, "outputs": {"maxItems": 0}}}},
+        {"if": {"properties": {"operation_id": {"const": "intake.record.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^intake_record_append_[0-9a-f]{64}$(?![\\s\\S])"}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_[0-9a-f]{64}$(?![\\s\\S])"}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_[0-9a-f]{64}$(?![\\s\\S])"}}}},
+        {"if": {"properties": {"operation_id": {"const": "intake.record.append"}, "planned_outcome": {"const": "commit"}}, "required": ["operation_id", "planned_outcome"]}, "then": {"properties": {"sampled_finalized_at_utc": {"type": "string", "format": "date-time"}, "outputs": {"minItems": 3, "maxItems": 3, "prefixItems": [
+          {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 0}, "token": {"const": "title-value"}, "authority_class": {"const": "subordinate_closure"}, "final_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/intake-values/value_[0-9a-f]{64}\\.json$(?![\\s\\S])"}, "install_mode": {"const": "create_new"}, "receipt_class": {"type": "null"}}}]},
+          {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 1}, "token": {"const": "summary-value"}, "authority_class": {"const": "subordinate_closure"}, "final_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/intake-values/value_[0-9a-f]{64}\\.json$(?![\\s\\S])"}, "install_mode": {"const": "create_new"}, "receipt_class": {"type": "null"}}}]},
+          {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 2}, "token": {"const": "intake-record"}, "authority_class": {"const": "semantic_record"}, "final_ref": {"pattern": "^\\.handbook/state/artifacts/registry_brief/intake-records/intake_[0-9a-f]{64}\\.json$(?![\\s\\S])"}, "install_mode": {"const": "create_new"}, "receipt_class": {"const": "semantic_record"}}}]}
+        ], "items": false}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.append"}, "planned_outcome": {"const": "commit"}}, "required": ["operation_id", "planned_outcome"]}, "then": {"properties": {"sampled_finalized_at_utc": {"type": "null"}, "outputs": {"minItems": 3, "maxItems": 3, "prefixItems": [
+          {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 0}, "token": {"const": "normalized-content"}, "authority_class": {"const": "subordinate_closure"}, "final_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/content/content_[0-9a-f]{64}\\.json$(?![\\s\\S])"}, "install_mode": {"const": "create_new"}, "receipt_class": {"type": "null"}}}]},
+          {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 1}, "token": {"const": "validation-result"}, "authority_class": {"const": "subordinate_closure"}, "final_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/validation-results/validation_[0-9a-f]{64}\\.json$(?![\\s\\S])"}, "install_mode": {"const": "create_new"}, "receipt_class": {"type": "null"}}}]},
+          {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 2}, "token": {"const": "candidate-record"}, "authority_class": {"const": "semantic_record"}, "final_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/candidates/candidate_[0-9a-f]{64}\\.json$(?![\\s\\S])"}, "install_mode": {"const": "create_new"}, "receipt_class": {"const": "semantic_record"}}}]}
+        ], "items": false}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "planned_outcome": {"const": "commit"}}, "required": ["operation_id", "planned_outcome"]}, "then": {"properties": {"sampled_finalized_at_utc": {"type": "null"}, "outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [
+          {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 0}, "token": {"const": "canonical-artifact"}, "authority_class": {"const": "canonical_truth"}, "final_ref": {"const": ".handbook/project/registry-brief.yaml"}, "install_mode": {"const": "replace_if_current"}, "receipt_class": {"const": "canonical_truth"}}}]},
+          {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 1}, "token": {"const": "promotion-record"}, "authority_class": {"const": "semantic_record"}, "final_ref": {"pattern": "^\\.handbook/state/artifacts/registry_brief/promotion-records/promotion_[0-9a-f]{64}\\.json$(?![\\s\\S])"}, "install_mode": {"const": "create_new"}, "receipt_class": {"const": "semantic_record"}}}]}
+        ], "items": false}}}}
+      ]
+    },
+    "stagedOutput": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ordinal", "staged_ref", "bytes_sha256", "byte_length"],
+      "properties": {"ordinal": {"type": "integer", "minimum": 0, "maximum": 15}, "staged_ref": {"$ref": "#/$defs/safeRef"}, "bytes_sha256": {"$ref": "#/$defs/sha256"}, "byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576}}
+    },
+    "verifiedStage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "transaction_id", "intent_fingerprint", "planned_outcome", "refusal", "verification_basis", "staged_outputs", "verified_fingerprint"],
+      "properties": {"schema_id": {"const": "handbook.generic-verified-stage"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}, "planned_outcome": {"enum": ["commit", "refuse"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]}, "verification_basis": {"enum": ["staging", "installed_complete", "refusal_decision"]}, "staged_outputs": {"type": "array", "minItems": 0, "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/stagedOutput"}}, "verified_fingerprint": {"$ref": "#/$defs/sha256"}},
+      "allOf": [
+        {"if": {"properties": {"planned_outcome": {"const": "commit"}}, "required": ["planned_outcome"]}, "then": {"properties": {"refusal": {"type": "null"}, "verification_basis": {"enum": ["staging", "installed_complete"]}}}},
+        {"if": {"properties": {"planned_outcome": {"const": "refuse"}}, "required": ["planned_outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/establishedRefusal"}, "verification_basis": {"const": "refusal_decision"}, "staged_outputs": {"maxItems": 0}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^intake_record_append_"}, "planned_outcome": {"const": "commit"}}, "required": ["transaction_id", "planned_outcome"]}, "then": {"properties": {"staged_outputs": {"minItems": 3, "maxItems": 3, "prefixItems": [{"properties": {"ordinal": {"const": 0}}}, {"properties": {"ordinal": {"const": 1}}}, {"properties": {"ordinal": {"const": 2}}}], "items": false}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_"}, "planned_outcome": {"const": "commit"}}, "required": ["transaction_id", "planned_outcome"]}, "then": {"properties": {"staged_outputs": {"minItems": 3, "maxItems": 3, "prefixItems": [{"properties": {"ordinal": {"const": 0}}}, {"properties": {"ordinal": {"const": 1}}}, {"properties": {"ordinal": {"const": 2}}}], "items": false}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "planned_outcome": {"const": "commit"}}, "required": ["transaction_id", "planned_outcome"]}, "then": {"properties": {"staged_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"properties": {"ordinal": {"const": 0}}}, {"properties": {"ordinal": {"const": 1}}}], "items": false}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^intake_record_append_"}, "planned_outcome": {"const": "commit"}, "verification_basis": {"const": "staging"}}, "required": ["transaction_id", "planned_outcome", "verification_basis"]}, "then": {"properties": {"staged_outputs": {"prefixItems": [{"properties": {"staged_ref": {"const": "staged/0-title-value.bin"}}}, {"properties": {"staged_ref": {"const": "staged/1-summary-value.bin"}}}, {"properties": {"staged_ref": {"const": "staged/2-intake-record.bin"}}}]}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_"}, "planned_outcome": {"const": "commit"}, "verification_basis": {"const": "staging"}}, "required": ["transaction_id", "planned_outcome", "verification_basis"]}, "then": {"properties": {"staged_outputs": {"prefixItems": [{"properties": {"staged_ref": {"const": "staged/0-normalized-content.bin"}}}, {"properties": {"staged_ref": {"const": "staged/1-validation-result.bin"}}}, {"properties": {"staged_ref": {"const": "staged/2-candidate-record.bin"}}}]}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "planned_outcome": {"const": "commit"}, "verification_basis": {"const": "staging"}}, "required": ["transaction_id", "planned_outcome", "verification_basis"]}, "then": {"properties": {"staged_outputs": {"prefixItems": [{"properties": {"staged_ref": {"const": "staged/0-canonical-artifact.bin"}}}, {"properties": {"staged_ref": {"const": "staged/1-promotion-record.bin"}}}]}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^intake_record_append_"}, "planned_outcome": {"const": "commit"}, "verification_basis": {"const": "installed_complete"}}, "required": ["transaction_id", "planned_outcome", "verification_basis"]}, "then": {"properties": {"staged_outputs": {"prefixItems": [{"properties": {"staged_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/intake-values/value_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}, {"properties": {"staged_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/intake-values/value_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}, {"properties": {"staged_ref": {"pattern": "^\\.handbook/state/artifacts/registry_brief/intake-records/intake_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}]}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_"}, "planned_outcome": {"const": "commit"}, "verification_basis": {"const": "installed_complete"}}, "required": ["transaction_id", "planned_outcome", "verification_basis"]}, "then": {"properties": {"staged_outputs": {"prefixItems": [{"properties": {"staged_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/content/content_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}, {"properties": {"staged_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/validation-results/validation_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}, {"properties": {"staged_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/candidates/candidate_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}]}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "planned_outcome": {"const": "commit"}, "verification_basis": {"const": "installed_complete"}}, "required": ["transaction_id", "planned_outcome", "verification_basis"]}, "then": {"properties": {"staged_outputs": {"prefixItems": [{"properties": {"staged_ref": {"const": ".handbook/project/registry-brief.yaml"}}}, {"properties": {"staged_ref": {"pattern": "^\\.handbook/state/artifacts/registry_brief/promotion-records/promotion_[0-9a-f]{64}\\.json$(?![\\s\\S])"}}}]}}}}
+      ]
+    },
+    "commitMarker": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "transaction_id", "intent_fingerprint", "verified_fingerprint", "outcome", "refusal", "authoritative_outputs", "subordinate_outputs", "marker_fingerprint"],
+      "properties": {"schema_id": {"const": "handbook.generic-commit-marker"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}, "verified_fingerprint": {"$ref": "#/$defs/sha256"}, "outcome": {"enum": ["committed", "refused"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]}, "authoritative_outputs": {"type": "array", "minItems": 0, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/authoritativeOutput"}}, "subordinate_outputs": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/subordinateOutput"}}, "marker_fingerprint": {"$ref": "#/$defs/sha256"}},
+      "allOf": [
+        {"if": {"properties": {"outcome": {"const": "refused"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/establishedRefusal"}, "authoritative_outputs": {"maxItems": 0}, "subordinate_outputs": {"maxItems": 0}}}},
+        {"if": {"properties": {"outcome": {"const": "committed"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"type": "null"}, "authoritative_outputs": {"minItems": 1}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^intake_record_append_"}, "outcome": {"const": "committed"}}, "required": ["transaction_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 1, "maxItems": 1, "prefixItems": [{"$ref": "#/$defs/intakeAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/intakeValueSubordinateOutput"}, {"$ref": "#/$defs/intakeValueSubordinateOutput"}], "items": false}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_"}, "outcome": {"const": "committed"}}, "required": ["transaction_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 1, "maxItems": 1, "prefixItems": [{"$ref": "#/$defs/candidateAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/contentSubordinateOutput"}, {"$ref": "#/$defs/validationSubordinateOutput"}], "items": false}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "outcome": {"const": "committed"}}, "required": ["transaction_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/canonicalTruthOutput"}, {"$ref": "#/$defs/promotionAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"maxItems": 0}}}}
+      ]
+    },
+    "internalTransactionEvidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "transaction_id", "operation_id", "request_fingerprint", "intent_fingerprint", "verified_fingerprint", "marker_fingerprint", "outcome", "refusal", "authoritative_outputs", "subordinate_outputs", "atomic_group", "evidence_fingerprint"],
+      "properties": {"schema_id": {"const": "handbook.generic-internal-transaction-evidence"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"}, "operation_id": {"$ref": "#/$defs/operationId"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}, "verified_fingerprint": {"$ref": "#/$defs/sha256"}, "marker_fingerprint": {"$ref": "#/$defs/sha256"}, "outcome": {"enum": ["committed", "refused"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]}, "authoritative_outputs": {"type": "array", "minItems": 0, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/authoritativeOutput"}}, "subordinate_outputs": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/subordinateOutput"}}, "atomic_group": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$(?![\\s\\S])"}, "evidence_fingerprint": {"$ref": "#/$defs/sha256"}},
+      "allOf": [
+        {"if": {"properties": {"outcome": {"const": "refused"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/establishedRefusal"}, "authoritative_outputs": {"maxItems": 0}, "subordinate_outputs": {"maxItems": 0}}}},
+        {"if": {"properties": {"outcome": {"const": "committed"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"type": "null"}, "authoritative_outputs": {"minItems": 1}}}},
+        {"if": {"properties": {"operation_id": {"const": "intake.record.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^intake_record_append_[0-9a-f]{64}$(?![\\s\\S])"}, "atomic_group": {"const": "intake_record_append"}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_[0-9a-f]{64}$(?![\\s\\S])"}, "atomic_group": {"const": "artifact_candidate_append"}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_[0-9a-f]{64}$(?![\\s\\S])"}, "atomic_group": {"const": "artifact_candidate_promote"}}}},
+        {"if": {"properties": {"operation_id": {"const": "intake.record.append"}, "outcome": {"const": "committed"}}, "required": ["operation_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 1, "maxItems": 1, "prefixItems": [{"$ref": "#/$defs/intakeAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/intakeValueSubordinateOutput"}, {"$ref": "#/$defs/intakeValueSubordinateOutput"}], "items": false}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.append"}, "outcome": {"const": "committed"}}, "required": ["operation_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 1, "maxItems": 1, "prefixItems": [{"$ref": "#/$defs/candidateAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/contentSubordinateOutput"}, {"$ref": "#/$defs/validationSubordinateOutput"}], "items": false}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "outcome": {"const": "committed"}}, "required": ["operation_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/canonicalTruthOutput"}, {"$ref": "#/$defs/promotionAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"maxItems": 0}}}}
+      ]
+    }
+  }
+}

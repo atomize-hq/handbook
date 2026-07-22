@@ -1,0 +1,825 @@
+{
+  "schema_id": "handbook.repository-profile-selection-vectors",
+  "schema_version": "1.0",
+  "selection_schema": "repository-profile-selection-1.0.0.schema.json",
+  "normalization": {
+    "source_arrays": "sort every *_sources array by UTF-8 exact_ref bytes after semantic duplicate/class admission",
+    "allowed_schema_roots": "sort by UTF-8 bytes",
+    "other_values": "unchanged",
+    "fingerprint": "sha256 of RFC8785 complete normalized record bytes without LF"
+  },
+  "positive_vectors": [
+    {
+      "vector_id": "all-source-classes-and-both-effects",
+      "record": {
+        "schema_id": "handbook.repository-profile-selection",
+        "schema_version": "1.0",
+        "selected_profile_ref": "example.profile.registry-root@1.1.0",
+        "profile_sources": [
+          {
+            "exact_ref": "handbook.profile.shipped-root@1.1.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "example.profile.registry-root@1.1.0",
+            "source": {
+              "kind": "repository_path",
+              "path": ".handbook/definitions/profiles/registry-root-1.1.0.yaml"
+            }
+          }
+        ],
+        "stable_role_registry_sources": [
+          {
+            "exact_ref": "handbook.roles.core@1.1.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "schema_entry_sources": [
+          {
+            "exact_ref": "handbook.schemas.artifacts.project-authority@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.project-context@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.environment-context@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.work-specification@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.decision-record@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.risk-record@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.approver-registry@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.approver-registry-transition@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-registration-request@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-registration@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-assertion@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.approver-admin-api@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "example.schemas.registry-brief@1.0.0",
+            "source": {
+              "kind": "repository_path",
+              "path": ".handbook/definitions/schemas/registry-brief-1.0.0.entry.yaml"
+            }
+          }
+        ],
+        "artifact_kind_sources": [
+          {
+            "exact_ref": "handbook.artifact-kind.project-authority@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.project-context@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.environment-context@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.work-specification@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.decision-record@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.risk-record@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "example.artifact-kind.registry-brief@1.0.0",
+            "source": {
+              "kind": "repository_path",
+              "path": ".handbook/definitions/artifact-kinds/registry-brief-1.0.0.yaml"
+            }
+          }
+        ],
+        "semantic_capability_sources": [
+          {
+            "exact_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "semantic_validator_sources": [
+          {
+            "exact_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "project_condition_sources": [
+          {
+            "exact_ref": "handbook.condition.project.managed-operational-surface@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "vocabulary_sources": [
+          {
+            "exact_ref": "handbook.vocabulary.shipped-root@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "context_resolution_sources": [
+          {
+            "exact_ref": "handbook.context-resolution.shipped-root@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "context_resolution_policy_sources": [
+          {
+            "exact_ref": "handbook.mutation-matcher.core@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.resolution-escalation.core@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.memory-promotion.core@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "intake_definition_sources": [
+          {
+            "exact_ref": "handbook.intake.charter@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "example.intake.registry-brief@1.0.0",
+            "source": {
+              "kind": "repository_path",
+              "path": ".handbook/definitions/intakes/registry-brief-1.0.0.yaml"
+            }
+          }
+        ],
+        "allowed_schema_roots": [
+          ".handbook/definitions/schemas"
+        ],
+        "extensions": {}
+      },
+      "expected_typed_mapping": {
+        "built_in_source": "DefinitionSource::BuiltIn(binding.exact_ref)",
+        "repository_path_source": "DefinitionSource::RepositoryPath(source.path)",
+        "intake_field": "ProfileSelectionRequest.intake_definition_sources",
+        "source_array_order_semantic": false,
+        "complete_source_counts": {
+          "profiles": 2,
+          "stable_role_registries": 1,
+          "schema_entries": 18,
+          "artifact_kinds": 8,
+          "semantic_capabilities": 1,
+          "semantic_validators": 2,
+          "project_conditions": 1,
+          "vocabularies": 1,
+          "context_resolution_definitions": 1,
+          "context_resolution_policies": 3,
+          "intake_definitions": 2
+        },
+        "selected_profile_complete_replacements": {
+          "schema_registry_refs": [
+            "handbook.schemas.artifacts.project-authority@1.0.0",
+            "handbook.schemas.artifacts.project-authority@1.1.0",
+            "handbook.schemas.artifacts.project-context@1.0.0",
+            "handbook.schemas.artifacts.environment-context@1.0.0",
+            "handbook.schemas.artifacts.work-specification@1.0.0",
+            "handbook.schemas.artifacts.decision-record@1.0.0",
+            "handbook.schemas.artifacts.risk-record@1.0.0",
+            "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+            "handbook.schemas.security.approver-registry@1.0.0",
+            "handbook.schemas.security.approver-registry-transition@1.0.0",
+            "handbook.schemas.security.authenticator-registration-request@1.0.0",
+            "handbook.schemas.security.authenticator-challenge@1.0.0",
+            "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+            "handbook.schemas.security.authenticator-registration@1.0.0",
+            "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+            "handbook.schemas.security.authenticator-assertion@1.0.0",
+            "handbook.schemas.security.approver-admin-api@1.0.0",
+            "example.schemas.registry-brief@1.0.0"
+          ],
+          "artifact_kind_refs": [
+            "handbook.artifact-kind.project-authority@1.0.0",
+            "handbook.artifact-kind.project-authority@1.1.0",
+            "handbook.artifact-kind.project-context@1.0.0",
+            "handbook.artifact-kind.environment-context@1.0.0",
+            "handbook.artifact-kind.work-specification@1.0.0",
+            "handbook.artifact-kind.decision-record@1.0.0",
+            "handbook.artifact-kind.risk-record@1.0.0",
+            "example.artifact-kind.registry-brief@1.0.0"
+          ],
+          "artifact_instance_ids": [
+            "project_authority",
+            "project_context",
+            "environment_context",
+            "registry_brief"
+          ]
+        }
+      },
+      "expected_normalized_fingerprint": "sha256:3a5c945e68c29fa765bc4568ff4eae1eacbd84a9f90a71a00a56bb5d04cc82c9"
+    }
+  ],
+  "negative_vectors": [
+    {
+      "vector_id": "duplicate-top-level-key",
+      "mutation": "repeat selected_profile_ref in source JSON",
+      "expected": "duplicate_key"
+    },
+    {
+      "vector_id": "unknown-top-level-key",
+      "mutation": "add discovery_roots",
+      "expected": "unknown_field"
+    },
+    {
+      "vector_id": "missing-source-class",
+      "mutation": "remove intake_definition_sources",
+      "expected": "missing_field"
+    },
+    {
+      "vector_id": "duplicate-binding",
+      "mutation": "repeat one exact binding in a source class",
+      "expected": "duplicate_source_binding"
+    },
+    {
+      "vector_id": "duplicate-ref-different-source",
+      "mutation": "repeat one exact_ref with a different source object in the same source class",
+      "expected": "duplicate_source_identity"
+    },
+    {
+      "vector_id": "duplicate-ref-across-class",
+      "mutation": "bind one exact_ref in a definition class other than its declared class",
+      "expected": "definition_class_mismatch"
+    },
+    {
+      "vector_id": "incomplete-shipped-closure",
+      "mutation": "remove one built-in schema, kind, intake, or inherited definition required by the selected profile",
+      "expected": "missing_exact_dependency"
+    },
+    {
+      "vector_id": "incomplete-profile-replacement",
+      "mutation": "remove one shipped ref from a selected-profile replacement list while leaving its source bound",
+      "expected": "incomplete_profile_replacement"
+    },
+    {
+      "vector_id": "built-in-extra-path",
+      "mutation": "add path to built_in source",
+      "expected": "unknown_field"
+    },
+    {
+      "vector_id": "repository-path-missing-path",
+      "mutation": "remove path",
+      "expected": "missing_field"
+    },
+    {
+      "vector_id": "escaping-path",
+      "mutation": "set path to ../outside.yaml",
+      "expected": "unsafe_repository_path"
+    },
+    {
+      "vector_id": "backslash-path",
+      "mutation": "set path to .handbook\\definitions\\x.yaml",
+      "expected": "unsafe_repository_path"
+    },
+    {
+      "vector_id": "binding-ref-mismatch",
+      "mutation": "source bytes derive another exact ref",
+      "expected": "bound_ref_mismatch"
+    },
+    {
+      "vector_id": "caller-override",
+      "mutation": "supply profile fields outside selected profile source",
+      "expected": "unknown_field"
+    },
+    {
+      "vector_id": "ambient-discovery",
+      "mutation": "omit binding while matching file exists conventionally",
+      "expected": "missing_exact_dependency"
+    }
+  ],
+  "equivalence_vectors": [
+    {
+      "vector_id": "reordered-source-arrays",
+      "transformation": "every source array is concretely reversed",
+      "record": {
+        "schema_id": "handbook.repository-profile-selection",
+        "schema_version": "1.0",
+        "selected_profile_ref": "example.profile.registry-root@1.1.0",
+        "profile_sources": [
+          {
+            "exact_ref": "example.profile.registry-root@1.1.0",
+            "source": {
+              "kind": "repository_path",
+              "path": ".handbook/definitions/profiles/registry-root-1.1.0.yaml"
+            }
+          },
+          {
+            "exact_ref": "handbook.profile.shipped-root@1.1.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "stable_role_registry_sources": [
+          {
+            "exact_ref": "handbook.roles.core@1.1.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "schema_entry_sources": [
+          {
+            "exact_ref": "example.schemas.registry-brief@1.0.0",
+            "source": {
+              "kind": "repository_path",
+              "path": ".handbook/definitions/schemas/registry-brief-1.0.0.entry.yaml"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.approver-admin-api@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-assertion@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-registration@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-challenge@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.authenticator-registration-request@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.approver-registry-transition@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.security.approver-registry@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.risk-record@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.decision-record@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.work-specification@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.environment-context@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.project-context@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.project-authority@1.1.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.schemas.artifacts.project-authority@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "artifact_kind_sources": [
+          {
+            "exact_ref": "example.artifact-kind.registry-brief@1.0.0",
+            "source": {
+              "kind": "repository_path",
+              "path": ".handbook/definitions/artifact-kinds/registry-brief-1.0.0.yaml"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.risk-record@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.decision-record@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.work-specification@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.environment-context@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.project-context@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.project-authority@1.1.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.artifact-kind.project-authority@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "semantic_capability_sources": [
+          {
+            "exact_ref": "handbook.capabilities.constitutional-root@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "semantic_validator_sources": [
+          {
+            "exact_ref": "handbook.semantic-validation.constitutional-root@1.1.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.semantic-validation.constitutional-root@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "project_condition_sources": [
+          {
+            "exact_ref": "handbook.condition.project.managed-operational-surface@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "vocabulary_sources": [
+          {
+            "exact_ref": "handbook.vocabulary.shipped-root@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "context_resolution_sources": [
+          {
+            "exact_ref": "handbook.context-resolution.shipped-root@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "context_resolution_policy_sources": [
+          {
+            "exact_ref": "handbook.memory-promotion.core@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.resolution-escalation.core@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          },
+          {
+            "exact_ref": "handbook.mutation-matcher.core@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "intake_definition_sources": [
+          {
+            "exact_ref": "example.intake.registry-brief@1.0.0",
+            "source": {
+              "kind": "repository_path",
+              "path": ".handbook/definitions/intakes/registry-brief-1.0.0.yaml"
+            }
+          },
+          {
+            "exact_ref": "handbook.intake.charter@1.0.0",
+            "source": {
+              "kind": "built_in"
+            }
+          }
+        ],
+        "allowed_schema_roots": [
+          ".handbook/definitions/schemas"
+        ],
+        "extensions": {}
+      },
+      "expected_normalized_fingerprint": "sha256:3a5c945e68c29fa765bc4568ff4eae1eacbd84a9f90a71a00a56bb5d04cc82c9",
+      "expected": "same_typed_registry_and_fingerprints"
+    }
+  ],
+  "schema_rejection_vectors": [
+    {
+      "vector_id": "selection-one-segment-exact-ref",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/selected_profile_ref",
+      "replacement": "badref@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-underscore-exact-ref",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/selected_profile_ref",
+      "replacement": "bad_ref.value@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-repeated-hyphen-exact-ref",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/selected_profile_ref",
+      "replacement": "bad--ref.value@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-noncanonical-semver",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/selected_profile_ref",
+      "replacement": "bad.ref@01.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-dot-segment-path",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/profile_sources/1/source/path",
+      "replacement": ".handbook/./definitions/profiles/registry-root-1.1.0.yaml",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-trailing-slash-path",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/profile_sources/1/source/path",
+      "replacement": ".handbook/definitions/profiles/",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-over-component-path",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/profile_sources/1/source/path",
+      "replacement": "x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-over-byte-path",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/profile_sources/1/source/path",
+      "replacement": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-over-segment-exact-ref",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/selected_profile_ref",
+      "replacement": "a111111111111111111111111111111111111111111111111111111111111111.value@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-over-identity-exact-ref",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/selected_profile_ref",
+      "replacement": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@1.0.0",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-final-line-terminator-exact-ref",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/selected_profile_ref",
+      "replacement": "example.profile.registry-root@1.1.0\n",
+      "expected": "schema_rejection"
+    },
+    {
+      "vector_id": "selection-final-line-terminator-path",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/profile_sources/1/source/path",
+      "replacement": ".handbook/definitions/profiles/registry-root-1.1.0.yaml\n",
+      "expected": "schema_rejection"
+    }
+  ],
+  "schema_acceptance_vectors": [
+    {
+      "vector_id": "selection-canonical-prerelease-build-exact-ref",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/selected_profile_ref",
+      "replacement": "valid.value@1.0.0-alpha.1+build.2",
+      "expected": "schema_acceptance"
+    },
+    {
+      "vector_id": "selection-63-byte-segment-exact-ref",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/selected_profile_ref",
+      "replacement": "a11111111111111111111111111111111111111111111111111111111111111.value@1.0.0",
+      "expected": "schema_acceptance"
+    },
+    {
+      "vector_id": "selection-64-component-path",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/profile_sources/1/source/path",
+      "replacement": "x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x/x",
+      "expected": "schema_acceptance"
+    },
+    {
+      "vector_id": "selection-1024-byte-path",
+      "base_vector_id": "all-source-classes-and-both-effects",
+      "json_pointer": "/profile_sources/1/source/path",
+      "replacement": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "expected": "schema_acceptance"
+    }
+  ]
+}

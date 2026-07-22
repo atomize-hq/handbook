@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://handbook.dev/schemas/repository-profile-selection/1.0.0.json",
+  "title": "Handbook repository profile selection record 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "selected_profile_ref",
+    "profile_sources",
+    "stable_role_registry_sources",
+    "schema_entry_sources",
+    "artifact_kind_sources",
+    "semantic_capability_sources",
+    "semantic_validator_sources",
+    "project_condition_sources",
+    "vocabulary_sources",
+    "context_resolution_sources",
+    "context_resolution_policy_sources",
+    "intake_definition_sources",
+    "allowed_schema_roots",
+    "extensions"
+  ],
+  "properties": {
+    "schema_id": {"const": "handbook.repository-profile-selection"},
+    "schema_version": {"const": "1.0"},
+    "selected_profile_ref": {"$ref": "#/$defs/exactRef"},
+    "profile_sources": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/sourceBinding"}
+    },
+    "stable_role_registry_sources": {"$ref": "#/$defs/definitionSourceArray"},
+    "schema_entry_sources": {"$ref": "#/$defs/definitionSourceArray"},
+    "artifact_kind_sources": {"$ref": "#/$defs/definitionSourceArray"},
+    "semantic_capability_sources": {"$ref": "#/$defs/definitionSourceArray"},
+    "semantic_validator_sources": {"$ref": "#/$defs/definitionSourceArray"},
+    "project_condition_sources": {"$ref": "#/$defs/definitionSourceArray"},
+    "vocabulary_sources": {"$ref": "#/$defs/definitionSourceArray"},
+    "context_resolution_sources": {"$ref": "#/$defs/definitionSourceArray"},
+    "context_resolution_policy_sources": {"$ref": "#/$defs/definitionSourceArray"},
+    "intake_definition_sources": {"$ref": "#/$defs/definitionSourceArray"},
+    "allowed_schema_roots": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/repositoryPath"}
+    },
+    "extensions": {"type": "object", "maxProperties": 0}
+  },
+  "$defs": {
+    "exactRef": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 512,
+      "pattern": "^(?=.{3,255}@)(?:(?=[^.@]{1,63}\\.)[a-z][a-z0-9]*(?:-[a-z0-9]+)*\\.)+(?=[^@]{1,63}@)[a-z][a-z0-9]*(?:-[a-z0-9]+)*@(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$(?![\\s\\S])"
+    },
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^(?=.{1,1024}$)(?:(?!\\.{1,2}(?:/|$))[A-Za-z0-9._-]+/){0,63}(?!\\.{1,2}$)[A-Za-z0-9._-]+$(?![\\s\\S])"
+    },
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exact_ref", "source"],
+      "properties": {
+        "exact_ref": {"$ref": "#/$defs/exactRef"},
+        "source": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind"],
+              "properties": {"kind": {"const": "built_in"}}
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "path"],
+              "properties": {
+                "kind": {"const": "repository_path"},
+                "path": {"$ref": "#/$defs/repositoryPath"}
+              }
+            }
+          ]
+        }
+      }
+    },
+    "definitionSourceArray": {
+      "type": "array",
+      "maxItems": 512,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/sourceBinding"}
+    }
+  }
+}

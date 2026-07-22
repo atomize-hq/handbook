@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://handbook.dev/schemas/hcm-2.3/generic-artifact-runtime-records/1.0.0.json",
+  "title": "HCM-2.3 generic artifact runtime records",
+  "oneOf": [
+    {"$ref": "#/$defs/intakeRecordV12"},
+    {"$ref": "#/$defs/validationResultV10"},
+    {"$ref": "#/$defs/candidateV14"},
+    {"$ref": "#/$defs/promotionV12"}
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$(?![\\s\\S])"
+    },
+    "exactRef": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 512,
+      "pattern": "^(?=.{3,255}@)(?:(?=[^.@]{1,63}\\.)[a-z][a-z0-9]*(?:-[a-z0-9]+)*\\.)+(?=[^@]{1,63}@)[a-z][a-z0-9]*(?:-[a-z0-9]+)*@(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$(?![\\s\\S])"
+    },
+    "symbolicId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z][a-z0-9_]*(?:[.-][a-z0-9_]+)*$(?![\\s\\S])"
+    },
+    "safeRef": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^(?=.{1,1024}$)(?:(?!\\.{1,2}(?:/|$))[A-Za-z0-9._-]+/){0,63}(?!\\.{1,2}$)[A-Za-z0-9._-]+$(?![\\s\\S])"
+    },
+    "fingerprintOrNull": {
+      "oneOf": [
+        {"$ref": "#/$defs/sha256"},
+        {"type": "null"}
+      ]
+    },
+    "consumer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "version"],
+      "properties": {
+        "kind": {"const": "handbook_cli"},
+        "id": {"const": "handbook"},
+        "version": {"type": "string", "minLength": 1, "maxLength": 64}
+      }
+    },
+    "coverageResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coverage_id",
+        "applicability",
+        "source_kind",
+        "value_ref",
+        "value_fingerprint",
+        "evidence_refs",
+        "confidence",
+        "freshness",
+        "sensitivity",
+        "evaluation",
+        "contradiction_refs",
+        "waiver_ref"
+      ],
+      "properties": {
+        "coverage_id": {"$ref": "#/$defs/symbolicId"},
+        "applicability": {"const": "applicable"},
+        "source_kind": {"const": "user_declaration"},
+        "value_ref": {"$ref": "#/$defs/safeRef"},
+        "value_fingerprint": {"$ref": "#/$defs/sha256"},
+        "evidence_refs": {"type": "array", "maxItems": 0},
+        "confidence": {"const": "high"},
+        "freshness": {"type": "null"},
+        "sensitivity": {"const": "internal"},
+        "evaluation": {"const": "satisfied"},
+        "contradiction_refs": {"type": "array", "maxItems": 0},
+        "waiver_ref": {"type": "null"}
+      }
+    },
+    "fieldSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_path", "coverage_id", "source_kind", "value_ref", "value_fingerprint"],
+      "properties": {
+        "target_path": {"type": "string", "pattern": "^/(?:[^~/]|~0|~1)+(?:/(?:[^~/]|~0|~1)+)*$(?![\\s\\S])"},
+        "coverage_id": {"$ref": "#/$defs/symbolicId"},
+        "source_kind": {"const": "user_declaration"},
+        "value_ref": {"$ref": "#/$defs/safeRef"},
+        "value_fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "resolvedDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["definition_ref", "definition_fingerprint"],
+      "properties": {
+        "definition_ref": {"$ref": "#/$defs/exactRef"},
+        "definition_fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "layerPass": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {"status": {"const": "pass"}}
+    },
+    "validationLayers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "registration", "canonical_syntax", "structural", "semantic", "intake", "approval", "external_evidence"],
+      "properties": {
+        "source": {"$ref": "#/$defs/layerPass"},
+        "registration": {"$ref": "#/$defs/layerPass"},
+        "canonical_syntax": {"$ref": "#/$defs/layerPass"},
+        "structural": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "schema_ref", "schema_closure_fingerprint"],
+          "properties": {
+            "status": {"const": "pass"},
+            "schema_ref": {"$ref": "#/$defs/exactRef"},
+            "schema_closure_fingerprint": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        "semantic": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": {"const": "not_applicable"},
+            "reason": {"const": "no_semantic_validator"}
+          }
+        },
+        "intake": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "intake_definition_ref", "intake_definition_fingerprint"],
+          "properties": {
+            "status": {"const": "pass"},
+            "intake_definition_ref": {"$ref": "#/$defs/exactRef"},
+            "intake_definition_fingerprint": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        "approval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": {"const": "not_applicable"},
+            "reason": {"const": "null_approval_policy"}
+          }
+        },
+        "external_evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": {"const": "not_applicable"},
+            "reason": {"const": "not_selected"}
+          }
+        }
+      }
+    },
+    "intakeRecordV12": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_id", "schema_version", "intake_record_id", "intake_definition_ref",
+        "intake_definition_fingerprint", "acquisition_mode", "target_kind_ref",
+        "target_instance_id", "target_schema_ref", "profile_ref",
+        "resolved_profile_fingerprint", "operation_context_fingerprint", "consumer",
+        "coverage_results", "basis_artifact_fingerprint", "prompt_event_refs",
+        "finalized_at_utc", "record_fingerprint"
+      ],
+      "properties": {
+        "schema_id": {"const": "handbook.artifact-intake-record"},
+        "schema_version": {"const": "1.2"},
+        "intake_record_id": {"type": "string", "pattern": "^intake_[0-9a-f]{64}$(?![\\s\\S])"},
+        "intake_definition_ref": {"$ref": "#/$defs/exactRef"},
+        "intake_definition_fingerprint": {"$ref": "#/$defs/sha256"},
+        "acquisition_mode": {"enum": ["guided_adaptive", "express", "agent_assisted"]},
+        "target_kind_ref": {"$ref": "#/$defs/exactRef"},
+        "target_instance_id": {"$ref": "#/$defs/symbolicId"},
+        "target_schema_ref": {"$ref": "#/$defs/exactRef"},
+        "profile_ref": {"$ref": "#/$defs/exactRef"},
+        "resolved_profile_fingerprint": {"$ref": "#/$defs/sha256"},
+        "operation_context_fingerprint": {"$ref": "#/$defs/sha256"},
+        "consumer": {"$ref": "#/$defs/consumer"},
+        "coverage_results": {"type": "array", "minItems": 1, "maxItems": 256, "items": {"$ref": "#/$defs/coverageResult"}},
+        "basis_artifact_fingerprint": {"$ref": "#/$defs/fingerprintOrNull"},
+        "prompt_event_refs": {"type": "array", "maxItems": 0},
+        "finalized_at_utc": {"type": "string", "format": "date-time"},
+        "record_fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "validationResultV10": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_id", "schema_version", "validation_result_id", "target_kind_ref",
+        "target_instance_id", "target_schema_ref", "profile_ref",
+        "resolved_profile_fingerprint", "operation_context_fingerprint",
+        "intake_record_ref", "intake_record_fingerprint", "normalized_content_ref",
+        "normalized_content_fingerprint", "basis_artifact_fingerprint", "layers",
+        "outcome", "validation_result_fingerprint"
+      ],
+      "properties": {
+        "schema_id": {"const": "handbook.artifact-validation-result"},
+        "schema_version": {"const": "1.0"},
+        "validation_result_id": {"type": "string", "pattern": "^validation_[0-9a-f]{64}$(?![\\s\\S])"},
+        "target_kind_ref": {"$ref": "#/$defs/exactRef"},
+        "target_instance_id": {"$ref": "#/$defs/symbolicId"},
+        "target_schema_ref": {"$ref": "#/$defs/exactRef"},
+        "profile_ref": {"$ref": "#/$defs/exactRef"},
+        "resolved_profile_fingerprint": {"$ref": "#/$defs/sha256"},
+        "operation_context_fingerprint": {"$ref": "#/$defs/sha256"},
+        "intake_record_ref": {"$ref": "#/$defs/safeRef"},
+        "intake_record_fingerprint": {"$ref": "#/$defs/sha256"},
+        "normalized_content_ref": {"$ref": "#/$defs/safeRef"},
+        "normalized_content_fingerprint": {"$ref": "#/$defs/sha256"},
+        "basis_artifact_fingerprint": {"$ref": "#/$defs/fingerprintOrNull"},
+        "layers": {"$ref": "#/$defs/validationLayers"},
+        "outcome": {"const": "valid"},
+        "validation_result_fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "candidateV14": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_id", "schema_version", "candidate_id", "intake_record_ref",
+        "intake_record_fingerprint", "target_kind_ref", "target_instance_id",
+        "target_schema_ref", "profile_ref", "resolved_profile_fingerprint",
+        "operation_context_fingerprint", "normalized_content_ref",
+        "normalized_content_fingerprint", "field_sources", "validation_result_refs",
+        "unresolved_coverage_ids", "promotion_eligibility",
+        "required_approval_policy_ref", "basis_artifact_fingerprint", "candidate_fingerprint"
+      ],
+      "properties": {
+        "schema_id": {"const": "handbook.artifact-candidate"},
+        "schema_version": {"const": "1.4"},
+        "candidate_id": {"type": "string", "pattern": "^candidate_[0-9a-f]{64}$(?![\\s\\S])"},
+        "intake_record_ref": {"$ref": "#/$defs/safeRef"},
+        "intake_record_fingerprint": {"$ref": "#/$defs/sha256"},
+        "target_kind_ref": {"$ref": "#/$defs/exactRef"},
+        "target_instance_id": {"$ref": "#/$defs/symbolicId"},
+        "target_schema_ref": {"$ref": "#/$defs/exactRef"},
+        "profile_ref": {"$ref": "#/$defs/exactRef"},
+        "resolved_profile_fingerprint": {"$ref": "#/$defs/sha256"},
+        "operation_context_fingerprint": {"$ref": "#/$defs/sha256"},
+        "normalized_content_ref": {"$ref": "#/$defs/safeRef"},
+        "normalized_content_fingerprint": {"$ref": "#/$defs/sha256"},
+        "field_sources": {"type": "array", "minItems": 1, "maxItems": 1024, "items": {"$ref": "#/$defs/fieldSource"}},
+        "validation_result_refs": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/safeRef"}},
+        "unresolved_coverage_ids": {"type": "array", "maxItems": 0},
+        "promotion_eligibility": {"const": "eligible_without_approval"},
+        "required_approval_policy_ref": {"type": "null"},
+        "basis_artifact_fingerprint": {"$ref": "#/$defs/fingerprintOrNull"},
+        "candidate_fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "promotionV12": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_id", "schema_version", "promotion_id", "candidate_ref",
+        "candidate_fingerprint", "target_instance_id", "expected_current_artifact_fingerprint",
+        "profile_ref", "resolved_profile_fingerprint", "operation_context_fingerprint",
+        "resolved_definitions", "approval_refs", "validation_result_refs", "decision",
+        "authorized_by_ref", "canonical_artifact_ref", "canonical_artifact_fingerprint",
+        "promotion_fingerprint"
+      ],
+      "properties": {
+        "schema_id": {"const": "handbook.artifact-promotion-record"},
+        "schema_version": {"const": "1.2"},
+        "promotion_id": {"type": "string", "pattern": "^promotion_[0-9a-f]{64}$(?![\\s\\S])"},
+        "candidate_ref": {"$ref": "#/$defs/safeRef"},
+        "candidate_fingerprint": {"$ref": "#/$defs/sha256"},
+        "target_instance_id": {"$ref": "#/$defs/symbolicId"},
+        "expected_current_artifact_fingerprint": {"$ref": "#/$defs/fingerprintOrNull"},
+        "profile_ref": {"$ref": "#/$defs/exactRef"},
+        "resolved_profile_fingerprint": {"$ref": "#/$defs/sha256"},
+        "operation_context_fingerprint": {"$ref": "#/$defs/sha256"},
+        "resolved_definitions": {"type": "array", "minItems": 4, "maxItems": 64, "items": {"$ref": "#/$defs/resolvedDefinition"}},
+        "approval_refs": {"type": "array", "maxItems": 0},
+        "validation_result_refs": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/safeRef"}},
+        "decision": {"const": "not_required"},
+        "authorized_by_ref": {"type": "null"},
+        "canonical_artifact_ref": {"$ref": "#/$defs/safeRef"},
+        "canonical_artifact_fingerprint": {"$ref": "#/$defs/sha256"},
+        "promotion_fingerprint": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

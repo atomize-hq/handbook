@@ -1,10 +1,10 @@
 # Handbook Contract Membrane Control Pack
 
-**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4 and the bounded HCM-2.1 Project Context canonical-YAML pilot have landed through separately reviewed implementation and closeout commits; the explicitly selected HCM-2.2 candidate-`1.3` exact-result implementation is proof-complete after repairing `HCM-2.2-AR3-001`, all three fresh implementation Review 1 findings, Review 2's version-exact historical-candidate finding, and Review 3's exact provenance-bijection finding; it remains unlanded pending a different-fresh exact-subject `CLEAN` re-review, the primary commit, and parent closeout
+**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4, the bounded HCM-2.1 Project Context pilot, and HCM-2.2 candidate-`1.3` exact-result authority have landed through separately reviewed implementation and closeout commits; HCM-2.2 is review-clean at primary commit `6766d3ed4894aad6598faaa7c4a54b493f92c1f6`, closeout commit `5c31eeefb5adf71d75ec3059b1b6947025d2fd6b`, and final Review 5 subject `sha256:62c9fdae649a31d1538ec7770b0f8ce5b2cc0686cb33535fe8747bbe2ddc80ad`; HCM-2.3 planning is explicitly selected for the current documentation subject
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
-**Implementation authorization:** HCM-1.1 through HCM-1.4 and HCM-2.1 are completed bounded evidence, not continuing authority; current HCM-2.2 authority is limited to the reviewed candidate-`1.3` exact-result implementation plan, keeps result `1.0` and intent `1.2` schemas unchanged, preserves the rejected worktree untouched at `486458ac`, and requires fresh `CLEAN` review plus the prescribed two-commit closeout before the implementation is adopted; HCM-2.3 and later slices remain unauthorized
+**Implementation authorization:** HCM-1.1 through HCM-2.2 are completed bounded evidence, not continuing authority; HCM-2.2 keeps result `1.0` and intent `1.2` schemas unchanged and preserves the rejected worktree/archive evidence at `486458ac`; current authority is HCM-2.3 documentation, specification, planning, and implementation-authority preparation only; HCM-2.3 implementation remains unauthorized until its complete packet is `CLEAN`, its planning closeout exists, and a separate exact implementation handoff is explicitly selected; later slices remain unauthorized
 **Repo-truth snapshot:** 2026-07-21; re-check live code before every slice
 
 ## Purpose
@@ -212,7 +212,7 @@ persisting legacy Project Context Markdown. The implementation changed no
 HCM-1 definition/schema/profile/descriptor byte, leaves shipped readiness
 conditional and `INDETERMINATE`, closes `PG-YAML-01` only for this one family,
 and leaves the temporary flow bridge for deletion no later than HCM-2.4.
-HCM-2.2 produced a broad implementation subject for the first-party
+HCM-2.2 produced the broad implementation subject for the first-party
 constitutional-root cutover. Option 1
 repaired the candidate/result identity cycle; `HCM-2.2-ESC-002` then selected
 atomic whole-file output staging. Fresh implementation Review 3 rejected the
@@ -226,16 +226,19 @@ result `1.0` binds only that subject; new approval binds final candidate; and
 promotion/intent `1.2` bind it transitively without schema changes. Candidate
 `1.0`/`1.1`/`1.2` and approvals remain immutable history with no fallback or
 carry-forward. The rejected worktree is preserved untouched at `486458ac` in a
-verified external archive. The newly authorized implementation now supplies
+verified external archive. The completed implementation supplies
 the candidate `1.3` binding, stable locked replay, orphan refusal, independent
 approval/promotion currentness, atomic publication/recovery proof, and selected
 product cutover as one proof-complete subject. Fresh exact-result implementation
 Review 3 required every current candidate gate to recompute the exact ordered
 populated-leaf provenance bijection from retained intake and normalized content;
-the author, approval, promotion, recovery, and normative-vector repair is now
-proof-complete. Adoption still requires exact-
-subject fresh-review `CLEAN`, the primary implementation commit, and parent
-closeout. HCM-2.3 and all later slices remain future work.
+the author, approval, promotion, recovery, and normative-vector repair is
+proof-complete. Fresh Reviews 4 and 5 returned `CLEAN`; the exact Review 5
+53-path subject is `sha256:62c9fdae649a31d1538ec7770b0f8ce5b2cc0686cb33535fe8747bbe2ddc80ad`,
+the primary implementation is `6766d3ed4894aad6598faaa7c4a54b493f92c1f6`,
+and parent closeout is `5c31eeefb5adf71d75ec3059b1b6947025d2fd6b`.
+HCM-2.3 planning is now explicitly selected; its implementation and all later
+slices remain unauthorized pending their own review-clean packet and selector.
 
 The shipped default artifact set is approved in [`slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md`](slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md)
 and its exact kind, profile, descriptor, and selected-registry data now exist.

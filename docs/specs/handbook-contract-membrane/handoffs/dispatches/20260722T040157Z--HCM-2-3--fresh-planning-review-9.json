@@ -1,0 +1,463 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260722T040157Z--HCM-2-3--fresh-planning-review-9",
+  "created_at_utc": "2026-07-22T04:01:57Z",
+  "source_handoff_ids": [
+    "20260721T215654Z--HCM-2-2--orchestration--exact-result-authority-repair-landed"
+  ],
+  "parent_orchestration_id": "20260721T215654Z--HCM-2-3--planning-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:97b4890e687c66ef3cb7e9471a8866dce094b3dff25be6aa779404d40e3748b9",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "56964e753f57e68fd0d6dd8bb1c7debf39fdfdb517cad39bf54b651b1ac27b96"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "1a3d2b7588ed47e954534113901f9abe9f4650b42c93571656f52a01000cd2f2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "94772e56d07d12b307e6f91b31927f4c54a39cd63dc30506a58d46b604075437"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "8bd12f7aa44fb45f76a47bb6b30a88c706791619fafb565aab295cb8fb35e107"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T234549Z--HCM-2-3--fresh-planning-review-1.json",
+        "sha256": "137e41f95fcae71b0be9eda7768d1e03987a922a094af34c4d49495b2ed48ef6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T002551Z--HCM-2-3--fresh-planning-review-2.json",
+        "sha256": "45e72b261db95bde0f33eca1dd8f968864de56d7fb681dfc7eb37c7b3a77966a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T010936Z--HCM-2-3--fresh-planning-review-3.json",
+        "sha256": "2c85cb41393c8e3c8767451a9efea7d812d82c16ef1ef28704f3b51bf7aa5d30"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T015749Z--HCM-2-3--fresh-planning-review-4.json",
+        "sha256": "d8c360028b255e48713509e5aa9a08d98184a6e7d60190ea5e2fc418d413ccff"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T021833Z--HCM-2-3--fresh-planning-review-5.json",
+        "sha256": "fe9f8838e3346173c8f8679654c3e9ab5d0a52e90f3447177726ceb5fa080279"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T023726Z--HCM-2-3--fresh-planning-review-6.json",
+        "sha256": "0a90c382220479184b41fcc36e24221c3ac0bc6d47792c23b14ffa36b0252066"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T030848Z--HCM-2-3--fresh-planning-review-7.json",
+        "sha256": "49cdd3952f8affc4bd8ea6b5fc751f57eaeca995978bc553a18a88f456e81843"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T034053Z--HCM-2-3--fresh-planning-review-8.json",
+        "sha256": "37c4a6deca6ec652a446f15d7f7bc2c6ad45d5564ac540163e94e683c6c10766"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+        "sha256": "1365ebc27caab63e751701800c3bb399c9234d158546932655aa1422b2d1876c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+        "sha256": "2fb982341d8f831e6a8a5490d231ad4fd897165dc6dd5307eb17fef397570aac"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+        "sha256": "d6f0780a1eb6c0d3d404258e8cb5840adb4a01a7b640ddf6709f55da8c6179f8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+        "sha256": "e0d19036a23e84ad5bf1f38ff177d64b7912f79fed1e43ce0764e7e4dcd52030"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-records-1.0.0.schema.json",
+        "sha256": "e3ecc30f0de205dccc02c8a145f20e4f4a06befd7319f0d52024fe23007a4a86"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-vectors-v1.0.json",
+        "sha256": "83a98aaebd9367b432bdbc2dd02e980ad349602bb6111822d104293c23a06347"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/repository-profile-selection-1.0.0.schema.json",
+        "sha256": "87b878eb3449f976bfa9783234d85f8bf4cd21394f76da40723ec1c46949114d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/repository-profile-selection-vectors-v1.0.json",
+        "sha256": "7e0eff90fb63a6581abb7071cad507172c451693bda7d43e990feb3cee86f049"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/decision/generic-source-selection-and-phase4-boundary.md",
+        "sha256": "bd1f3693757d02fa285feb17804d75a7e1676505a7299caba1088064ae217cee"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260721T234342Z--planning-proof-wall.md",
+        "sha256": "6f8f2d531dc00b3f178af7bff948c8281ce6e9f3d3b279476d4c7135d70b56a1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T002314Z--planning-review-1-remediation.md",
+        "sha256": "6dda5d3cc7aa0ccceb024bb16c7c2a2673761c396934ffb83bed1600c9c25ac3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T010815Z--planning-review-2-remediation.md",
+        "sha256": "d2a6703b8cf45ec11a47f3fb074b0ebddcc63e7f398a914abbf6df814337090b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T015512Z--planning-review-3-remediation.md",
+        "sha256": "b592cdc83b013d764a286d5150fe61691bb7c29d4c5756b1a2ad987e4046fb3b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T021802Z--planning-review-4-remediation.md",
+        "sha256": "35e4b29702cb893def7db3d33d6d702ac3e73d67eb53db1a68ba1069e4dcc501"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T023648Z--planning-review-5-remediation.md",
+        "sha256": "a80d9f7abedd2659f7f9113d44b31c8f8844ec6ed684c95bb595087b36445363"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T030739Z--planning-review-6-remediation.md",
+        "sha256": "0cc21954718752d5ba2eb40d104d40ac36c8b2a9c64ad5acbd15c10cda921ee6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T034013Z--planning-review-7-remediation.md",
+        "sha256": "5bdebb098ef7afef874f31f30ae0e8c914f9e1e5b0b49fc921376ab8a2619507"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T040126Z--planning-review-8-remediation.md",
+        "sha256": "a1055aef51e63c524d2025322e845b57abaf7676585a80b50037a6b5eabb48d5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+        "sha256": "43788d012775bd37caf61d79067f7fd2131916b48f15489849394534b9bb40ff"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+        "sha256": "a1dbee53b8476a35b13da1deaabbd5c240b87a13668eda4dc3ebb73a369b9683"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:97b4890e687c66ef3cb7e9471a8866dce094b3dff25be6aa779404d40e3748b9"
+  },
+  "active_resolution": {
+    "level": "authority_planning",
+    "scope_horizon": "slice",
+    "detail_resolution": "implementation_grade",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.3 planning only; implementation unauthorized",
+    "memory_horizon": "selected HCM-2.2 dependency plus complete Review 1 through Review 8 audit chain",
+    "validation_horizon": "pre-primary-commit different-fresh complete-subject Review 9"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260721T215654Z--HCM-2-2--orchestration--exact-result-authority-repair-landed.json",
+      "sections": [
+        "complete immutable dependency handoff",
+        "HCM-2.3 authority boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260721T234549Z--HCM-2-3--fresh-planning-review-1.json",
+      "sections": [
+        "complete Review 1 dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T002551Z--HCM-2-3--fresh-planning-review-2.json",
+      "sections": [
+        "complete Review 2 dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T010936Z--HCM-2-3--fresh-planning-review-3.json",
+      "sections": [
+        "complete Review 3 dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T015749Z--HCM-2-3--fresh-planning-review-4.json",
+      "sections": [
+        "complete Review 4 dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T002314Z--planning-review-1-remediation.md",
+      "sections": [
+        "complete Review 1 remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T010815Z--planning-review-2-remediation.md",
+      "sections": [
+        "complete Review 2 remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T015512Z--planning-review-3-remediation.md",
+      "sections": [
+        "complete Review 3 remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T021802Z--planning-review-4-remediation.md",
+      "sections": [
+        "complete Review 4 remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Owner split",
+        "Canonical artifacts",
+        "Intake",
+        "CLI and SDK ownership",
+        "Invariants"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Schema registry",
+        "ArtifactKindDefinition",
+        "ArtifactInstanceDescriptor",
+        "Custom artifacts",
+        "ArtifactIntakeDefinition",
+        "Intake records, candidates, and promotion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Classification rules",
+        "Current-to-target crosswalk"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Sequencing rule",
+        "HCM-2.3",
+        "Phase 2 exit gate",
+        "Slice decomposition rules",
+        "Per-slice packet layout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Schema registry contract",
+        "Artifact kind contract",
+        "Instance profile contract",
+        "Artifact intake definition",
+        "Intake record and artifact candidate contracts",
+        "Ordinary operation catalog",
+        "Mutation and idempotency contracts",
+        "WriteReceipt"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-KIND-01",
+        "PG-KIND-02",
+        "PG-ARTIFACT-01",
+        "Permanent regression rule",
+        "HCM-2.2 constitutional-root implementation proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.1/SPEC.md",
+      "sections": [
+        "safe schema and kind source admission precedent"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-1.3/SPEC.md",
+      "sections": [
+        "repository-defined registry-brief lineage"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.1/SPEC.md",
+      "sections": [
+        "descriptor-selected canonical YAML precedent"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "immutable Charter record, candidate, result, intent, approval, promotion, and recovery authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+      "sections": [
+        "complete proposed authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+      "sections": [
+        "complete owner runtime contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+      "sections": [
+        "complete outcome/refusal- and operation-discriminated control-record schema"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+      "sections": [
+        "complete 39-record commit/refusal/recovery/replay oracle plus executable schema boundaries"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/repository-profile-selection-vectors-v1.0.json",
+      "sections": [
+        "complete normalized selection and reversed equivalence oracles"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+      "sections": [
+        "complete implementation plan and closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+      "sections": [
+        "complete implementation todo"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T021833Z--HCM-2-3--fresh-planning-review-5.json",
+      "sections": [
+        "complete Review 5 dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T023648Z--planning-review-5-remediation.md",
+      "sections": [
+        "complete Review 5 remediation and regenerated context lineage"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T023726Z--HCM-2-3--fresh-planning-review-6.json",
+      "sections": [
+        "complete Review 6 dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T030739Z--planning-review-6-remediation.md",
+      "sections": [
+        "complete Review 6 remediation and established-refusal authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T030848Z--HCM-2-3--fresh-planning-review-7.json",
+      "sections": [
+        "complete Review 7 dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T034013Z--planning-review-7-remediation.md",
+      "sections": [
+        "complete Review 7 remediation, regenerated promotion lineage, schema boundaries, and establishment hardening"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T034053Z--HCM-2-3--fresh-planning-review-8.json",
+      "sections": [
+        "complete Review 8 dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T040126Z--planning-review-8-remediation.md",
+      "sections": [
+        "complete Review 8 remediation, phase-boundary repair, and final-line-terminator schema hardening"
+      ]
+    }
+  ],
+  "repo_truth": "Eight prior fresh reviews returned findings over earlier immutable subjects. The parent recorded remediations and now submits a 32-path subject that includes all eight prior dispatches and all eight remediation records. This dispatch states no conclusion about whether those findings are closed or whether the current subject is implementation-grade.",
+  "allowed_scope": [
+    "Remain read-only and replay all 32 manifest hashes, Python-ordinal order, aggregate, dispatch schema, HCM-2.2 handoff, and review ancestry before review.",
+    "Review the complete documentation subject and all coupled status corrections, not merely prior findings.",
+    "Independently validate all three Draft 2020-12 schemas, six duplicate-safe JSON artifacts, normalized selection equivalence, all runtime/control positives, semantic uniqueness/cross-record rules, links, fingerprints, and cross-document consistency.",
+    "Return evidence-backed findings ordered Critical, Required, Optional, Nit with exact evidence, failure mode, smallest authority-preserving repair, and missing validation."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, handoff/ledger writes, branch changes, preservation access, or user task hops.",
+    "No Rust, Cargo, runtime tests, production assets, CLI/SDK implementation, HCM-2.2 reinterpretation, HCM-2.4, Phase 3+, or Phase 4 implementation.",
+    "Do not accept remediation prose as a success conclusion; test every disposition independently."
+  ],
+  "tasks": [
+    "Invoke required skills, read AGENTS.md, and return BLOCKED on manifest or authority mismatch.",
+    "Verify all eight prior review/remediation rounds independently, including selection normalization, persisted bytes, operation mappings, Phase 4 boundary, installed_complete recovery, timestamp identity, definition/context ordering, established-refusal persistence/replay, promotion current-definition closure, operation-family evidence refs, exact-ref/path schema boundaries, atomic establishment authority, and live planning-status wording.",
+    "Replay every schema acceptance/rejection JSON-Pointer mutation and require the declared Draft 2020-12 result; independently probe inherited exact-ref/SemVer and normalized path boundaries, including final line terminators at every string-grammar class.",
+    "Verify promotion resolved_definitions equal the cited operation-context projection byte-for-byte and replay the regenerated promotion runtime/persisted-byte/control lineage.",
+    "Verify every committed/refused result evidence ref uses its sole operation-discriminated transaction family and identical transaction ID, including schema rejection of both wrong-family promotion cases.",
+    "Verify active_hold is only the logical projection of one established intent and that writing/established/pending intent crash states, byte-preserving moves, scratch cleanup, and all conflict states form an explicit acyclic persistence graph.",
+    "Verify HCM-2.3 owns only engine typed operations and stable generic CLI commands while SDK composition/publication remains Phase 4; reject any contradictory CLI/SDK claim.",
+    "Verify all positive/negative schema and semantic oracles, recovery/replay/currentness/retention rules, source/path/ref safety, classification ceiling, Phase 4 boundary, HCM-2.2 compatibility, and implementation-grade completeness without invented authority.",
+    "Verify final-review/primary-commit inventory includes every prior dispatch/remediation artifact and excludes only the active dispatch.",
+    "Return CLEAN only with zero Critical, Required, Optional, and Nit findings; otherwise CHANGES_REQUIRED or BLOCKED without repair."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/repository-profile-selection-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/repository-profile-selection-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED on any subject-fingerprint, source-handoff, review-chain, or authority mismatch.",
+    "Return CHANGES_REQUIRED if implementation must invent an identity, schema field/value, source closure, authority edge, operation order, persisted bytes, verified basis, timestamp, write/result/evidence mapping, idempotency/replay rule, recovery state, test oracle, or Phase 4 boundary.",
+    "Return CHANGES_REQUIRED on stale status, shipped-default mutation, HCM-2.2 reinterpretation, unauthorized classification/gate movement, manifest omission/self-reference, or scope expansion.",
+    "Do not waive or repair findings and do not create a global handoff."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
