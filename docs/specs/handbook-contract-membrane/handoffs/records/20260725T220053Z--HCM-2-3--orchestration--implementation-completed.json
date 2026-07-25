@@ -1,0 +1,466 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.2",
+  "handoff_id": "20260725T220053Z--HCM-2-3--orchestration--implementation-completed",
+  "created_at_utc": "2026-07-25T22:00:53Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-implementation-closeout-reconciliation-whitespace-rereview",
+  "orchestration_id": "20260725T211014Z--HCM-2-3--closeout-reconciliation-orchestration",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-25T22:00:53Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "implementation-closeout-reconciliation-review-4",
+      "dispatch_id": "20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview.json",
+      "dispatch_fingerprint": "sha256:3c6bbc18951bca1c78a72b9cd0f341031b1c1c8aa3b95f64e3b7252f2daf658b",
+      "role": "review",
+      "agent_id": "/root/hcm_2_3_closeout_review_4",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88",
+      "result_subject_fingerprint": "sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "failed",
+      "verdict": "blocked",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview.json"
+      ]
+    },
+    {
+      "run_id": "implementation-closeout-reconciliation-review-5",
+      "dispatch_id": "20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview.json",
+      "dispatch_fingerprint": "sha256:3c6bbc18951bca1c78a72b9cd0f341031b1c1c8aa3b95f64e3b7252f2daf658b",
+      "role": "review",
+      "agent_id": "/root/hcm_2_3_closeout_review_5",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88",
+      "result_subject_fingerprint": "sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88",
+      "review_round": 2,
+      "predecessor_run_id": "implementation-closeout-reconciliation-review-4",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview.json"
+      ]
+    }
+  ],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "34b718e181aedcabb1058b402db1a75ef543aba5",
+    "subject_fingerprint": "sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T152135Z--59-surface-successor-implementation-proof-wall.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T152312Z--HCM-2-3--fresh-59-surface-complete-subject-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview.json"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview.json"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "HCM-2.3 implementation-closeout reconciliation",
+    "detail_resolution": "high",
+    "temporal_horizon": "completed_orchestration",
+    "authority_horizon": "bounded landed-evidence reconciliation and formal parent closeout",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "review_clean_two_commit_closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [
+      "example.artifact-kind.registry-brief@1.0.0"
+    ],
+    "artifact_instance_refs": [
+      "registry_brief"
+    ],
+    "intake_definition_refs": [
+      "example.intake.registry-brief@1.0.0"
+    ],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [
+      ".handbook/project/registry-brief.yaml"
+    ],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Complete the bounded documentation-only HCM-2.3 implementation-closeout reconciliation, promote only the exact Increment 14 registry-brief classifications and proof subsets already earned by landed evidence, preserve later work as unauthorized, create the parent-owned v1.2 result, and stop before HCM-2.4.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260722T042100Z--HCM-2-3--orchestration--planning-completed.json",
+      "sections": [
+        "dependency and resume context"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+      "sections": [
+        "Increment 14 — Full regression wall and evidence-backed status",
+        "Increment 15 — Fresh complete-subject review loop",
+        "Increment 16 — Primary reviewed implementation commit",
+        "Increment 17 — Parent closeout and separate commit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview.json",
+      "sections": [
+        "exact final six-path reviewed reconciliation subject"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Two-commit true-stop closeout",
+        "Required validation"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "34b718e181aedcabb1058b402db1a75ef543aba5",
+    "dirty": false,
+    "changed_paths": []
+  },
+  "work_completed": [
+    "Replayed implementation commit 628b672ef33326e87e4fb30be13489e8af04b38c, final review-artifact commit 746fff667f6fbe0270182a467285d60394362530, compatibility-boundary commit 7b3b5454ef363d08e4c6c78e6a201d8c36c10c5c, and the exact 111-path fingerprint sha256:d510e94e5b47db209022927bc4afa74b8820e27cd645123cc1cdc3aa5f72fdef.",
+    "Reconciled 00, 03, 04, 06, and the HCM-2.3 todo with landed authority while preserving the exact Increment 14 classification ceiling and all explicit non-goals.",
+    "Recorded handbook-engine 0.2.0 only as the accepted public-enum compatibility boundary, with no tag, publication, or downstream-adoption claim.",
+    "Created the bounded reconciliation proof and immutable four-dispatch review lineage; remediated all valid findings, corrected the authority boundary, and recovered from the failed reviewer attempt.",
+    "Obtained final different-fresh CLEAN review over exact six-path subject sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88.",
+    "Created reviewed primary reconciliation commit 34b718e181aedcabb1058b402db1a75ef543aba5 without changing production, tests, Cargo, schemas, vectors, assets, or preservation branches."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "status": "completed",
+      "summary": "Current HCM-2.3 status, exact bounded authorization, compatibility boundary, and later-slice prohibition."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "status": "completed",
+      "summary": "Exact registry-brief kind/schema and intake subsets promoted to RealPathAdopted with broader intake unchanged."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "status": "completed",
+      "summary": "HCM-2.3 factual completion recorded without authorizing HCM-2.4."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "status": "completed",
+      "summary": "Exact PG-KIND-01 and PG-ARTIFACT-01 subset evidence plus path-bounded PG-KIND-02 closure recorded."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+      "status": "completed",
+      "summary": "Landed implementation, Checkpoint C, review, and primary commit reconciled; mechanical parent closeout intentionally left to this record."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md",
+      "status": "completed",
+      "summary": "Bounded landed-evidence and classification reconciliation proof."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview.json",
+      "status": "completed",
+      "summary": "Final exact six-path review subject and different-fresh CLEAN result envelope."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260725T220053Z--HCM-2-3--orchestration--implementation-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned v1.2 implementation-completed true-stop record."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.3-CLOSEOUT-D1",
+      "summary": "Promote only the exact registry-brief subsets of Artifact kind/schema registry and Charter intake coverage to RealPathAdopted.",
+      "authority_effect": "First-party Charter stays ContractCorrectAndProven; broader generic/custom-kind intake stays TargetOnly.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.3-CLOSEOUT-D2",
+      "summary": "Close PG-KIND-02 only for the proven repository-defined registry-brief path and add only its exact subsets to PG-KIND-01 and PG-ARTIFACT-01.",
+      "authority_effect": "No program-wide generic custom-kind, SDK, transport, Projection, remote-schema, generated-command, shipped-default, or broader-family claim is created.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.3-CLOSEOUT-D3",
+      "summary": "Accept handbook-engine 0.2.0 as the public-enum compatibility boundary for the landed implementation.",
+      "authority_effect": "No tag, publication, or downstream adoption is implied.",
+      "refs": [
+        "git:7b3b5454ef363d08e4c6c78e6a201d8c36c10c5c"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.3-CLOSEOUT-D4",
+      "summary": "HCM-2.3 closes at reviewed primary reconciliation commit 34b718e181aedcabb1058b402db1a75ef543aba5 and this mechanical handoff/ledger commit.",
+      "authority_effect": "HCM-2.4 and all later phases remain unauthorized until separately selected.",
+      "refs": [
+        "git:34b718e181aedcabb1058b402db1a75ef543aba5"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-2.3-CLOSEOUT-R1-001",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "summary": "The first reconciliation proof incorrectly described the historical 111-path manifest as matching the live current tree rather than the entry-HEAD tree.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.3-CLOSEOUT-R1-002",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "summary": "The first checklist wording attributed a CLEAN verdict to the dispatch envelope rather than to the fresh reviewer.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.3-CLOSEOUT-R2-001",
+      "classification": "resolution_escalation",
+      "severity": "warning",
+      "summary": "The second reviewer requested reopening the operator-frozen historical implementation review; the parent corrected the review authority boundary without changing subject bytes.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T213101Z--HCM-2-3--implementation-closeout-reconciliation-authority-rereview.json"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "landed commit ancestry and final 111-path manifest replay",
+      "status": "passed",
+      "evidence_ref": "628b672ef33326e87e4fb30be13489e8af04b38c -> 746fff667f6fbe0270182a467285d60394362530 -> 7b3b5454ef363d08e4c6c78e6a201d8c36c10c5c; sha256:d510e94e5b47db209022927bc4afa74b8820e27cd645123cc1cdc3aa5f72fdef"
+    },
+    {
+      "command": "final six-path reconciliation subject replay",
+      "status": "passed",
+      "evidence_ref": "sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88"
+    },
+    {
+      "command": "fresh different-review loop",
+      "status": "passed",
+      "evidence_ref": "/root/hcm_2_3_closeout_review_5 returned CLEAN with zero findings after the final whitespace remediation."
+    },
+    {
+      "command": "validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "Normal schema, dispatch, record, ledger parity, and deterministic rebuild validation passed."
+    },
+    {
+      "command": "validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "Historical v1 admission self-test passed."
+    },
+    {
+      "command": "validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "Orchestration contract self-test passed."
+    },
+    {
+      "command": "changed-document relative-link and reference validation",
+      "status": "passed",
+      "evidence_ref": "All relative links in the six changed Markdown documents resolve."
+    },
+    {
+      "command": "git diff --check and explicit new-file trailing-whitespace scan",
+      "status": "passed",
+      "evidence_ref": "Staged subject passed; the prior untracked-file validation gap was corrected and re-reviewed."
+    },
+    {
+      "command": "npx gitnexus detect-changes --scope all --repo . --limit 500",
+      "status": "passed",
+      "evidence_ref": "Low risk; six documentation symbols and zero affected execution processes."
+    },
+    {
+      "command": "documentation-only scope and preservation verification",
+      "status": "passed",
+      "evidence_ref": "No Rust, tests, Cargo, schemas, vectors, production assets, preservation branches, or HCM-2.4 paths changed."
+    },
+    {
+      "command": "primary reconciliation commit",
+      "status": "passed",
+      "evidence_ref": "git:34b718e181aedcabb1058b402db1a75ef543aba5"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Implementation authorization",
+        "Initial program conclusion"
+      ],
+      "reason": "Replace stale pre-implementation authority with bounded landed evidence.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Artifact kind/schema registry",
+        "Charter intake coverage"
+      ],
+      "reason": "Apply only the exact Increment 14 classification promotions.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.3 — Generic custom-kind registration, intake, and validation proof"
+      ],
+      "reason": "Record bounded HCM-2.3 completion and preserve later-slice prohibition.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "HCM-2.3 exact custom-kind candidate proof gate"
+      ],
+      "reason": "Record exact earned gate evidence and path-bounded closure.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+      "sections": [
+        "Persistence and concurrency",
+        "Regression, review, and commits"
+      ],
+      "reason": "Reconcile landed work while preserving mechanical closeout protocol.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md",
+      "sections": [
+        "entire reconciliation proof"
+      ],
+      "reason": "Preserve bounded reconciliation evidence.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260725T220053Z--HCM-2-3--orchestration--implementation-completed.json",
+      "sections": [
+        "entire handoff record"
+      ],
+      "reason": "Record parent-owned completed true stop.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger for this closeout.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "HCM-2.3 is complete. HCM-2.4 planning may be separately selected; do not start it automatically.",
+    "condition": "Only a new explicit user selection of a separately approved HCM-2.4 planning handoff may authorize later work.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sections": [
+          "Authority stack",
+          "Implementation authorization"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260725T220053Z--HCM-2-3--orchestration--implementation-completed.json",
+        "sections": [
+          "entire completed handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md",
+        "sections": [
+          "entire reconciliation proof"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview.json",
+        "sections": [
+          "final exact six-path reviewed subject"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not modify or reinterpret completed HCM-2.3 authority without a separately reviewed additive repair.",
+      "Do not claim program-wide generic custom-kind completion, shipped-default expansion, SDK/transport support, Projection support, remote schema fetching, generated commands, or broader artifact-family conversion.",
+      "Do not modify, merge, bundle, push, or delete the three preservation branches named by this orchestration.",
+      "Do not create, authorize, or begin HCM-2.4 or later work automatically."
+    ],
+    "acceptance_criteria": [
+      "Primary reconciliation commit 34b718e181aedcabb1058b402db1a75ef543aba5 replays final reviewed subject sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88.",
+      "This v1.2 record and deterministic ledger pass normal validation and both required self-tests.",
+      "The separate mechanical closeout commit contains only this record and ledger/index artifacts.",
+      "The canonical branch is pushed without force and all three preservation refs remain unchanged."
+    ],
+    "stop_conditions": [
+      "Stop if later work would exceed Increment 14's classification ceiling without separately reviewed authority.",
+      "Stop on unrelated repository drift or any required production/test/schema/vector/Cargo change.",
+      "Stop before HCM-2.4 work."
+    ]
+  },
+  "supersedes": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "chat_summary": "HCM-2.3 landed implementation authority is reconciled at reviewed primary commit 34b718e181aedcabb1058b402db1a75ef543aba5. Final documentation review is CLEAN over six paths at sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88. Only exact registry-brief subsets promote; HCM-2.4 remains unauthorized."
+}
