@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## Unreleased
+
+### Changed
+- Advanced `handbook-engine` to `0.2.0` and updated workspace dependency constraints after HCM-2.3 added the public `EstablishedRefusalCodeV1::PublicationBasisConflict` and `GenericRefusalLayerV1::Publication` variants.
+- Documented the exhaustive-match and wire-value migration requirements in `docs/migrations/handbook-engine-0.2.0.md`. No tag, package publication, or remote push is part of this compatibility boundary.
+
 ## [0.7.1.0] - 2026-04-29
 
 ### Added

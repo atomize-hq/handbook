@@ -1,6 +1,6 @@
 [package]
 name = "handbook-engine"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2021"
 description = "Canonical artifact, freshness, and structured authoring core for Handbook."
 repository = "https://github.com/atomize-hq/system.git"
