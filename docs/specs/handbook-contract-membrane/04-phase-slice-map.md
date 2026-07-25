@@ -38,9 +38,14 @@ runtime seam. Fresh Reviews 4 and 5 returned `CLEAN`; Review 5 binds the exact
 `sha256:62c9fdae649a31d1538ec7770b0f8ce5b2cc0686cb33535fe8747bbe2ddc80ad`.
 HCM-2.2 landed at primary commit `6766d3ed4894aad6598faaa7c4a54b493f92c1f6`
 and parent closeout `5c31eeefb5adf71d75ec3059b1b6947025d2fd6b`.
-HCM-2.3 planning is explicitly selected for documentation and authority
-preparation only. HCM-2.3 implementation and every later slice remain
-unauthorized until their own review-clean packet and separate exact selector.
+HCM-2.3 atomic-publication documentation authority is reviewable, but the
+current registry-brief production implementation is known non-authoritative
+verify-then-unconditional-rename code and cannot be classified, committed, or
+used to close `PG-KIND-02`. The ordered documentation review, sixteen-surface
+authorization, selector, atomic implementation, Checkpoint C/full proof,
+GitNexus, and different-fresh complete implementation review gates remain
+mandatory. HCM-2.4 and every later slice remain unauthorized until their own
+review-clean packet and separate exact selector.
 
 ## Sequencing rule
 
@@ -357,11 +362,19 @@ authority for HCM-2.3 or later work.
 
 ### `HCM-2.3` — Generic custom-kind registration, intake, and validation proof
 
-**Planning status:** explicitly selected for the current planning and fresh-
-review subject at
-[`slices/HCM-2.3/`](slices/HCM-2.3/SPEC.md). Implementation remains
-unauthorized until the completed planning handoff exists and its separate exact
-implementation selector is explicitly selected.
+**Implementation status:** the exact review-clean planning handoff was selected,
+and the HCM-2.3 atomic-publication documentation authority at
+[`slices/HCM-2.3/`](slices/HCM-2.3/SPEC.md) is reviewable. The current
+registry-brief production implementation is nevertheless known
+non-authoritative verify-then-unconditional-rename code. It cannot be
+classified, committed, or used to close `PG-KIND-02`. In order, HCM-2.3 still
+requires a different-fresh CLEAN documentation review, explicit operator
+authorization of all sixteen CRITICAL production surfaces, a bounded
+implementation selector, implementation of `atomic-displaced-basis-v1`,
+re-completed Checkpoint C and the full proof wall, GitNexus change detection,
+and a later different-fresh complete implementation CLEAN review before any
+classification, `PG-KIND-02` closure, or primary commit. It does not authorize
+HCM-2.4 or a later phase.
 
 - register one repository-defined kind/schema without kind-specific Handbook
   code changes;

@@ -1,17 +1,26 @@
-#![forbid(unsafe_code)]
+#![cfg_attr(not(windows), forbid(unsafe_code))]
+#![cfg_attr(windows, deny(unsafe_code))]
 
 pub mod approver_registry;
 pub mod approver_registry_mutation;
 pub mod approver_registry_observation;
 pub mod artifact_instance;
+pub mod artifact_intake;
+pub mod artifact_intake_registry;
 pub mod artifact_kind_registry;
+mod artifact_lineage_store;
 pub mod artifact_manifest;
+pub mod artifact_mutation;
+pub mod artifact_operation_context;
+pub mod artifact_operations;
 pub mod artifact_registry;
+pub mod artifact_repository;
 pub mod author;
 pub mod baseline_validation;
 pub mod canonical_artifacts;
 mod canonical_paths;
 mod canonical_repo_support;
+pub mod canonical_yaml;
 pub mod charter_approval_workflow;
 pub mod charter_artifact;
 pub mod charter_authenticator;

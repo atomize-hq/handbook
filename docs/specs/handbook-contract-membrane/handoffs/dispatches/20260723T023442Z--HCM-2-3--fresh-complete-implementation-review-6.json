@@ -1,0 +1,373 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260723T023442Z--HCM-2-3--fresh-complete-implementation-review-6",
+  "created_at_utc": "2026-07-23T02:34:42Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3",
+  "subject_fingerprint": "sha256:8bfd470d9630d6baf316a5fbbd6d4e26d4704751f8006b224fccc2098acfbffe",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/src/artifact.rs",
+        "sha256": "cc8dcc802f620fe9bb6fb114322b895285969530d33f484237e13af4abe21c6f"
+      },
+      {
+        "path": "crates/cli/src/main.rs",
+        "sha256": "5eebe57fe56b458255df78752ace9c80c9f43a8c22422e67610eaf8d2c31531e"
+      },
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "e932da36f6a16bd345a1c075adb29defbffab2e07ce445da5231a8e3d9e61589"
+      },
+      {
+        "path": "crates/cli/tests/hcm_2_3_artifact_cli.rs",
+        "sha256": "1bce2f5006d2351d0b4c84dd721dcd779f062ed343ae5950cb4c05c35ee60ebf"
+      },
+      {
+        "path": "crates/compiler/tests/setup.rs",
+        "sha256": "80f691f1a138801fdf9ed1ff0fa22baad1c587dec125d28c2b3d1ef40249a333"
+      },
+      {
+        "path": "crates/engine/src/artifact_instance.rs",
+        "sha256": "311e5a172e07d6e3ade5f6f38651f50f1607d533950f003796790672159bb34f"
+      },
+      {
+        "path": "crates/engine/src/artifact_intake.rs",
+        "sha256": "96ac896bc3cc94a6b2439cdde52be6d20e6b562da51c417a12d77bbf0e1906d8"
+      },
+      {
+        "path": "crates/engine/src/artifact_intake_registry.rs",
+        "sha256": "a0a4dd13f5619a1e425c454349d202fa91d2854fb827a7a1677d2ccea067b2dd"
+      },
+      {
+        "path": "crates/engine/src/artifact_lineage_store.rs",
+        "sha256": "b39c3d73c6a59ee698183e9e263480df369dc99e7f762b3af1a614a7aefcf541"
+      },
+      {
+        "path": "crates/engine/src/artifact_mutation.rs",
+        "sha256": "62f7cee533b8ecc0ee6734e102bffa1bf49bebb575a035c291d06f73d8fd0a18"
+      },
+      {
+        "path": "crates/engine/src/artifact_operation_context.rs",
+        "sha256": "6475ededa3768d491ba71c0b47c771432ad68c1212e482b086990888af0eb44e"
+      },
+      {
+        "path": "crates/engine/src/artifact_operations.rs",
+        "sha256": "09f84564bc1646b443614e3815fcf46ad2611dfe5a28422b552ba03e64659470"
+      },
+      {
+        "path": "crates/engine/src/artifact_registry.rs",
+        "sha256": "a28037e54128bf95aa64fec0a647390cd523bd7a74b6f46715f21e882cfd02c6"
+      },
+      {
+        "path": "crates/engine/src/artifact_repository.rs",
+        "sha256": "57661be7616681954a58bf25b8f5ccb39b71ad5e5c811071b8b7e7f9193afd5a"
+      },
+      {
+        "path": "crates/engine/src/canonical_repo_support.rs",
+        "sha256": "31ff288697926fe957e7ad128d95e57ed44acfdeab15fdf49cb99daa1602f635"
+      },
+      {
+        "path": "crates/engine/src/canonical_yaml.rs",
+        "sha256": "1e8e793b5360ccfdca9854c0b165148a94e1e632b3feda8f0b66e3911ae25e83"
+      },
+      {
+        "path": "crates/engine/src/instance_profile.rs",
+        "sha256": "73959cd321d4d0ca06c5b6f0e460bfe81b2686a959116a18a9e0b68efb6e0bf7"
+      },
+      {
+        "path": "crates/engine/src/lib.rs",
+        "sha256": "ce7063bb2ae88936a675ff7511635cbb76f595010bb9ecbc670d15e3b7d367e9"
+      },
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "a26f0f841ae574e8ca82476a398b76ef4b48a893790f118ed46a1b222c1fc7f1"
+      },
+      {
+        "path": "crates/engine/src/profile_selection.rs",
+        "sha256": "69ba71515367845685ef6f8b65321e69d5a5ee3ab08ca9409c0844d219f9bc42"
+      },
+      {
+        "path": "crates/engine/src/schema_registry.rs",
+        "sha256": "12270721ca0b895f8793bf68dfcfeed04a489297148281f608ea1364b4ac4e67"
+      },
+      {
+        "path": "crates/engine/src/stable_role_registry.rs",
+        "sha256": "2db22812888ff3c63867f688713d07a880495b09d6143d59aebfb3573d07d7ac"
+      },
+      {
+        "path": "crates/engine/tests/artifact_instances.rs",
+        "sha256": "9636ffac1bb1c022039e8e0f5c9abed62a1ce202e65e0d10e55a7fbce88d598d"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_3_generic_custom_kind/.handbook/definitions/artifact-kinds/registry-brief-1.0.0.yaml",
+        "sha256": "5c9a0fe58e01efe6a47cce90a729ac7b3a815726c897ae3494e7c1aaa1df9bca"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_3_generic_custom_kind/.handbook/definitions/intakes/registry-brief-1.0.0.yaml",
+        "sha256": "2df18156574bbdd23107f6e6b3cec6f56202df237dd5860ffc12bfdf7c5a34e9"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_3_generic_custom_kind/.handbook/definitions/profiles/registry-root-1.1.0.yaml",
+        "sha256": "39526f2f85a8568e4cccd4460194343b361de5bf187289965f40732504b248d8"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_3_generic_custom_kind/.handbook/definitions/schemas/registry-brief-1.0.0.entry.yaml",
+        "sha256": "478d8e8d501118768f7568e2e6300a6d84348512b97762636d0d1a35cd52617f"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_3_generic_custom_kind/.handbook/definitions/schemas/registry-brief-1.0.0.schema.json",
+        "sha256": "12bf28ee0374037d16d515ab4066dbfe3ff152475dcc3a48e4eecad628394e02"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_3_generic_custom_kind/.handbook/profile-selection.json",
+        "sha256": "f86f667b2759ecaed7c716a7b2250431dfb7d5256c902984f4ecd3d3290ef13a"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_3_generic_custom_kind/.handbook/project/registry-brief.yaml",
+        "sha256": "698d2414185110592a993896e8239f4a324a41e6293a3f77b1ec7538436ab63d"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_3_artifact_registry.rs",
+        "sha256": "5c39d183710986efae425fe0cc1f7d0bf15f27cfb2eb9858cd4ac17dd389ee72"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_decisions.rs",
+        "sha256": "a97de004f1c462b7e3fdb316d329e503018f39f35a709152b62b5c1c64c82add"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_inspection.rs",
+        "sha256": "4c3f2756410b0652b636077833b919efc40ac83691280647f0404427bc3df79d"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_3_generic_lineage.rs",
+        "sha256": "18c4d70baec0451ae2429718abe626db2ec1cc61a35bcd2186d25786e8f9faaa"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_3_registration_kernel.rs",
+        "sha256": "86e6e98fe8fad63578be3d157d3a836c4bfe3a4dc7aa49f1ff41d87e33b61629"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_3_selection_request.rs",
+        "sha256": "757ffc75c44319eb1dde126916b8b423482d65d31490484d67dd6d974b8e74a4"
+      },
+      {
+        "path": "crates/engine/tests/profile_selection.rs",
+        "sha256": "415ce6d805d61d5e31310a9c97496618e18f518e61a914b325675ae626532e47"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "816e6c9bb8e8afc78e2d82100093028a714ecd7051198b306d6d7fb7fd99529f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "acd6d78be975e9c5a1539efe8062817c93f63022a289b5755d3ecb5cf8fb8f7d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "2b8591f883c337857801d73e4aa322704e7ad31cf0cdad62f075f20a88eaaa43"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "af6afe5919c83b3d00320e8749a43fd1146803d869327cd6b1bd33b9da332846"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T123845Z--HCM-2-3--registration-kernel-implementation.json",
+        "sha256": "b74235d5ca04eb6037dccab7bfd8bda9bb5dfcc8fd1e7a8b3a657e32fa1d97e0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T123846Z--HCM-2-3--generic-lineage-implementation.json",
+        "sha256": "0fcf695e6c6d339ddb80322524925d6528ea091ec404b110536b77452657485d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T155754Z--HCM-2-3--fresh-complete-implementation-review-1.json",
+        "sha256": "9a265fc4e9211512db07b5d7c4a452625197b3b02d2647dc9f77ab9dc50ec0c3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T175647Z--HCM-2-3--fresh-complete-implementation-review-2.json",
+        "sha256": "340e3f1c16e469033a5b1bab7d24c1b0cf24a87344d4f45bfd0d01bb6cd991f8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T202942Z--HCM-2-3--fresh-complete-implementation-review-3.json",
+        "sha256": "dd41b587ee046697104471de88a9934ad3b6152b90533be99d2122d4de116cc2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260722T223824Z--HCM-2-3--fresh-complete-implementation-review-4.json",
+        "sha256": "8d7669fd79de7d95b0e9f73a860cf4f627bc4758420f14a90cb10eb5b6491b7c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260723T001130Z--HCM-2-3--fresh-complete-implementation-review-5.json",
+        "sha256": "52a2b2076493420381b81d194d393d9db80c12c5a83639cd990194aad7797ca9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+        "sha256": "69ae1fdbdc7b8a5423638884387b196168a5bac3253ddfbcf6df16e6e37fbab8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+        "sha256": "535d241db7b48b91cb9ee191f6b5208f2955b1abe3f41e77c8a93dcb3edd4a00"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+        "sha256": "2d37ce13daefe68a48b0460d492ad110e5f64b9fa6294d79aea091341e57bd8b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+        "sha256": "20b0c5a3cc0f732c42b81962ca1e5d09f4ea3988bb6243b3818e2d6b2fba882a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T123845Z--implementation-proof-wall.md",
+        "sha256": "a3b5b87d42ea580f73b6bd26def3a585742afe223e548615cb87ba84aef3b758"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T155754Z--implementation-review-1-remediation.md",
+        "sha256": "ef0f5f437f60d96196ffc5f9f9da8b53ad07d604d405b8177585aa59838c8c3f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T195055Z--implementation-review-2-remediation.md",
+        "sha256": "7a675002abc5adf618fe756b7f9c17bfd9a19a98d896ef7e51f37352ef7a576c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T215228Z--implementation-review-3-remediation.md",
+        "sha256": "a75dd1ebc78934a137903f5d3814795694f33962200de71ce3a2e3c83bf14f30"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T000600Z--implementation-review-4-remediation.md",
+        "sha256": "e66d3d81397d6aace32796759adb096d5e889d631a5e89ac88f22d28ce51832d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T013000Z--implementation-review-5-remediation.md",
+        "sha256": "930dcfcf6907b80b4234c536732432db632b6d64bc9f5c637094af3eac3cd28d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+        "sha256": "883054e8d01c980b91ed41a10c569f6ff3c16aa699c7e7e1db77ba7c466bf893"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:8bfd470d9630d6baf316a5fbbd6d4e26d4704751f8006b224fccc2098acfbffe"
+  },
+  "active_resolution": {
+    "level": "implementation_review",
+    "scope_horizon": "complete HCM-2.3 registry-brief implementation subject",
+    "detail_resolution": "implementation_grade",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "selected HCM-2.3 handoff plus explicit CRITICAL schema-root separation",
+    "memory_horizon": "fresh isolated review of the complete immutable 59-path subject",
+    "validation_horizon": "pre-primary-commit complete-subject review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260722T042100Z--HCM-2-3--orchestration--planning-completed.json",
+      "sections": [
+        "complete selected implementation authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+      "sections": [
+        "complete bounded implementation contract and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+      "sections": [
+        "complete runtime authority including Review 5 remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260722T123845Z--implementation-proof-wall.md",
+      "sections": [
+        "complete implementation and proof-wall evidence through Increment 27"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T013000Z--implementation-review-5-remediation.md",
+      "sections": [
+        "accepted Review 5 findings, exact impact, RED, repair, and complete GREEN wall without a CLEAN conclusion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T000600Z--implementation-review-4-remediation.md",
+      "sections": [
+        "prior accepted Review 4 findings and remediation chain"
+      ]
+    }
+  ],
+  "repo_truth": "The parent submits an immutable 59-path HCM-2.3 implementation subject after remediating every Review 5 finding and completing the engine, CLI, workspace, HCM-2.2, cross-platform, validation, packaging, preservation, and GitNexus proof walls. The dispatch excludes itself and asserts no CLEAN conclusion, commit, closeout, or broader authority.",
+  "allowed_scope": [
+    "Remain read-only; replay all 59 hashes, ordering, aggregate fingerprint, dispatch self-exclusion, branch codex/hcm-2-3-planning, HEAD 3c49fa2c6d653f4b1a703d1d5c5196147b003533, and selected-handoff authority before review.",
+    "Review every production, test, fixture, contract, proof, and prior-dispatch entry against complete HCM-2.3 authority, including correctness, security, recovery, retained-handle native filesystem safety, strict fresh/recovery separation, reverse reachability, shared byte bounds, engine-owned release identity, schema source-kind containment, concurrency, exact inventories, CLI behavior, and HCM-2.2 preservation.",
+    "Return findings first, ordered Critical, Required, Optional, Nit, with exact file/line evidence, violated invariant, failure mode, smallest bounded repair, and missing verification."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, handoff/ledger writes, branch changes, preservation/archive access, or user task hops.",
+    "No HCM-2.4, Phase 3+, Phase 4 SDK/transport, Cargo/package/dependency changes, resolver redesign, built-in namespace expansion, repository authority widening, or HCM-2.2 reinterpretation.",
+    "Do not accept tests or proof prose as a success conclusion; verify implementation and regressions independently."
+  ],
+  "tasks": [
+    "Invoke the required skills, read repository AGENTS.md and this complete dispatch, and return BLOCKED on any manifest, branch, HEAD, handoff, dispatch-exclusion, or authority mismatch.",
+    "Review tests first and map every mandatory HCM-2.3 behavior and explicit schema-root authorization to an effective regression.",
+    "Re-audit all Review 5 findings: final post-hook canonical fingerprint/native-version revalidation on fresh and recovery paths; pre-mutation reverse reachability and direct committed-chain replay/expiry proof; and strict fresh CreateNew absence/exclusive creation versus exact established-intent recovery.",
+    "Test adversarial changed/deleted/same-byte-restored-mtime canonical publication, orphan tombstone/ledger/result/artifact controls, malformed valid-name records, duplicate citations, equal/unequal closure and semantic residue, and zero-delta refusal.",
+    "Re-audit Review 4 retained-handle/path identity, scratch source separation, engine-owned consumer version, and shared exact 1 MiB document bounds.",
+    "Audit BuiltIn fixed definitions/schemas containment and allowlist-only bytes; Repository request-root-only containment; cache/error precedence; the sole HCM-2.3 request root; and the unchanged high-level schema resolver.",
+    "Audit recovery-first authority, complete request/plan revalidation, native identity/version binding, symlink/hard-link/non-regular/mutation/traversal refusal, exact inventory bounds, crash prefixes, idempotency, races, durability, and zero-mutation refusal.",
+    "Audit generic registration, selection closure, operation context, canonical YAML, intake evaluation, lineage persistence, refusal tuples, ledger/tombstone closure, and every direct read/replay path.",
+    "Audit the actual CLI boundary for ten fixed commands, explicit authority, stable exits, shared bounded input, human/JSON rendering, cwd/path/stdin handling, fresh-process recovery, and no per-kind dispatch.",
+    "Verify control-pack status is no broader than executable evidence and no forbidden path or authority entered the subject.",
+    "Return CLEAN only with zero Critical, Required, Optional, and Nit findings; otherwise return CHANGES_REQUIRED or BLOCKED and do not repair files."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/repository-profile-selection-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/repository-profile-selection-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED on any subject fingerprint, dispatch exclusion, selected handoff, branch/HEAD, or authority mismatch.",
+    "Return CHANGES_REQUIRED if correctness requires broader resolver redesign, a new high-level CRITICAL edit, Cargo/package changes, ambient authority, weakened repository safety, HCM-2.2 reinterpretation, HCM-2.4, or later-phase work; identify the conflict without widening scope.",
+    "Return CHANGES_REQUIRED on any finding, untested mandatory vector, partial persistence authority, unsafe filesystem access, stale or overbroad classification, manifest omission/self-reference, or unsupported proof claim.",
+    "Do not waive or repair findings and do not create a global handoff."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

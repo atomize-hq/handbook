@@ -1,0 +1,130 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260722T123846Z--HCM-2-3--generic-lineage-implementation",
+  "created_at_utc": "2026-07-22T12:38:46Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "resume_same_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "source-driven-development",
+    "spec-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "api-and-interface-design",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3",
+  "subject_fingerprint": "sha256:de116ba4567332ff9a3e9b5da11320987f04b7b87241f5d9e3b6fb2e19042ba1",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+        "sha256": "1365ebc27caab63e751701800c3bb399c9234d158546932655aa1422b2d1876c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+        "sha256": "43788d012775bd37caf61d79067f7fd2131916b48f15489849394534b9bb40ff"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+        "sha256": "a1dbee53b8476a35b13da1deaabbd5c240b87a13668eda4dc3ebb73a369b9683"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:de116ba4567332ff9a3e9b5da11320987f04b7b87241f5d9e3b6fb2e19042ba1"
+  },
+  "active_resolution": {
+    "level": "engine_generic_lineage_store",
+    "scope_horizon": "HCM-2.3-increments-8-through-10",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "approved_slice_packet",
+    "memory_horizon": "live_repository_truth",
+    "validation_horizon": "focused_lineage_recovery_red_green"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+      "sections": [
+        "Generic runtime lineage",
+        "Domain idempotency ledger",
+        "Generic lineage transaction and recovery",
+        "Non-governed promotion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+      "sections": ["all"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-vectors-v1.0.json",
+      "sections": ["all"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+      "sections": ["all"]
+    }
+  ],
+  "repo_truth": "HCM-2.2 Charter persistence is frozen and must not be reused as generic authority. HCM-2.3 requires a separate generic store with exact intake/candidate/promotion record versions, one coarse lock, recovery-first visibility, hash-only domain idempotency, and total refusal/recovery states.",
+  "allowed_scope": [
+    "Add crates/engine/src/artifact_lineage_store.rs and focused tests in a new HCM-2.3 lineage test file.",
+    "Use private test fault injection inside the new module/test only and model packet-specified paths, write sets, recovery, inventory, replay, tombstones, and compare-and-write promotion.",
+    "Leave lib.rs exports and operation-service integration to the parent."
+  ],
+  "non_goals": [
+    "Do not edit any existing production source, Cargo file, HCM-2.2 Charter store/workflow, CLI file, control pack, proof ledger, handoff, or other dispatch.",
+    "Do not construct Phase 4 WriteReceipt/SDK/transport values, delete authority, adopt unknown state, persist raw idempotency keys, or add a second lock owner.",
+    "Do not commit or create handoffs, ledger rows, or user-visible task hops."
+  ],
+  "tasks": [
+    "Read the complete dispatch, HCM-2.3 packet, exact runtime contract, runtime/control schemas and vectors, plus the live HCM-2.2 store only as a native durability precedent.",
+    "Add RED tests that freeze pre-establishment zero-write behavior, established success/refusal prefixes, exact authoritative outputs, all legal installed subsets, ambiguous-state refusal, restart/replay/tombstone, inventory bounds, and compare-and-write promotion.",
+    "Implement the smallest separate generic lineage store that makes the focused matrix GREEN without importing Charter semantics or Phase 4 transport authority.",
+    "Return exact changed files, RED/GREEN evidence, public integration signatures, and any bounded gaps."
+  ],
+  "contracts_and_gates": [
+    "One coarse ordered generic lock protects recovery, ledger lookup, currentness checks, establishment, staging, install, marker, result, and rename.",
+    "Validate/evaluate have zero durable delta; intake append realizes one authoritative output; candidate append realizes content, validation result, and candidate atomically; promotion realizes canonical content and promotion atomically.",
+    "Only hashes of 16-128-byte raw keys persist; exact retained results expire after 30 days into non-expiring tombstones; lookup precedes current-context evaluation.",
+    "No product-visible partial write set, subordinate authority, output-bearing refusal, recovery deletion, or Charter path/version is permitted."
+  ],
+  "stop_conditions": [
+    "Stop before editing any existing function, class, method, module declaration, Cargo file, HCM-2.2 source, or CLI source.",
+    "Return blocked if strong native no-follow/durability/serializability cannot be expressed with existing dependencies or if lock order would invert HCM-2.2.",
+    "Return bounded gaps rather than weakening total recovery or widening into CLI, HCM-2.4, Phase 3+, or Phase 4."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "impact_analysis",
+      "validation",
+      "remaining_protocol_work",
+      "product_integration",
+      "parent_disposition"
+    ]
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260725T020152Z--HCM-2-3--atomic-publication-implementation-fifth-superseding-selector",
+  "created_at_utc": "2026-07-25T02:01:52Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "source-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-atomic-publication-remediation-fifth-superseding-selector",
+  "subject_fingerprint": "sha256:c6fe91a698b263e75b3cfe7e0cc233ed64b1ee247faf3394cfbb1d0eb8f63f07",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/artifact_lineage_store.rs", "sha256": "887854d522bff23c697e9ef8eda0c5465ef11b764337df21e35c000d49b45db1"},
+      {"path": "crates/engine/src/artifact_operations.rs", "sha256": "09f84564bc1646b443614e3815fcf46ad2611dfe5a28422b552ba03e64659470"},
+      {"path": "crates/engine/src/lib.rs", "sha256": "ce7063bb2ae88936a675ff7511635cbb76f595010bb9ecbc670d15e3b7d367e9"},
+      {"path": "crates/engine/tests/hcm_2_3_generic_lineage.rs", "sha256": "7fb4ead31bd6c2cfdbdcb530c7f0bbb91d5a5ad9096ef5cde6ca1c3841e9c577"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260723T154328Z--HCM-2-3--fresh-atomic-publication-documentation-review-10.json", "sha256": "8a593688c1573cc62b4ee21b8fa279edf03b74b2b65a08f2f9eded060f355921"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T002758Z--HCM-2-3--atomic-publication-implementation-fourth-superseding-selector.json", "sha256": "cf7f8189330cf8d246457a758ae0298f211011f48b17cd725c2581f0ebd3f243"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T003047Z--HCM-2-3--fresh-fourth-selector-closure-review.json", "sha256": "856281b015ebbaeb509ae921b134851a43d253821553cf77c9ec2f6351633487"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T003048Z--HCM-2-3--fresh-fourth-selector-api-compatibility-review.json", "sha256": "9e87cf761873dcd80a2630391cb28b905b62d1e3e23847d11888742a21757f2f"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json", "sha256": "ab76b68e46b5d5bf4a3ace006562564e55574dd42f88d2f6df660996016000bd"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json", "sha256": "c3822e1bb5a17877a05feccbea93f4413010eb0cee3b0e246d2955b50b644b07"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md", "sha256": "1000c55e608fec884ad7eaef03255d9d4bb2a906f0bec385de8d171170c8ee25"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T041308Z--atomic-canonical-publication-authority-repair.md", "sha256": "d8d183f0f121123326eeefa38e51821c7e14b8d3e5fea66d37a7a422fee3015f"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md", "sha256": "9ebb0e0d60ce77c2c741fac0c44c1026ef1f8685b68ec4c8b55084b8bc61a9b5"}
+    ],
+    "aggregate_fingerprint": "sha256:c6fe91a698b263e75b3cfe7e0cc233ed64b1ee247faf3394cfbb1d0eb8f63f07"
+  },
+  "active_resolution": {
+    "level": "atomic_publication_implementation",
+    "scope_horizon": "complete HCM-2.3 selector with 42 predecessor code surfaces, two deletion surfaces, and one crate-policy surface",
+    "detail_resolution": "implementation_grade",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "operator-authorized exact immutable selector union with accepted CRITICAL deletion impacts",
+    "memory_horizon": "frozen Review 10 authority, five immutable predecessor selectors, prior admission verdicts, and live dirty worktree",
+    "validation_horizon": "fresh selector-closure and API CLEAN reviews before deletion or further implementation, then complete proof wall, GitNexus change detection, and fresh complete-subject review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T002758Z--HCM-2-3--atomic-publication-implementation-fourth-superseding-selector.json",
+      "sections": [
+        "immutable predecessor 42-code-plus-one-policy selector",
+        "exact target-conditional unsafe policy and four item-scoped Windows exceptions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T003047Z--HCM-2-3--fresh-fourth-selector-closure-review.json",
+      "sections": [
+        "superseded closure-review subject and reopened CHANGES_REQUIRED findings for two obsolete private helpers"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T003048Z--HCM-2-3--fresh-fourth-selector-api-compatibility-review.json",
+      "sections": [
+        "CLEAN API subject, four-item unsafe boundary, and deferred handbook-engine 0.2.0 consequence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260723T154328Z--HCM-2-3--fresh-atomic-publication-documentation-review-10.json",
+      "sections": [
+        "frozen 82-path Review 10 authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+      "sections": [
+        "retained-handle USN observation",
+        "transaction-specific replacement candidate recovery",
+        "atomic-displaced-basis-v1 Windows and Unix protocol"
+      ]
+    }
+  ],
+  "repo_truth": "This fifth selector supersedes without modifying any predecessor. It retains the fourth selector's exact 42 code surfaces and one crate-policy surface and adds exactly two deletion surfaces: windows_file_usn and open_existing_replacement_scratch. Both are private and have no pub declaration or re-export. Each currently has exactly one caller, and both callers are already selected: native_metadata_subjects calls windows_file_usn and GenericArtifactLineageStoreV1::install_descriptor calls open_existing_replacement_scratch. The operator requires those selected callers to move to retained-handle USN observation and transaction-specific recovery candidates, respectively; caller searches must then reach zero before either definition is deleted. The operator accepts windows_file_usn CRITICAL impact of 18 upstream symbols, one direct caller, five processes, and two modules, and open_existing_replacement_scratch CRITICAL impact of 9 upstream symbols, one direct caller, five processes, and two modules. No replacement helper, unrelated cleanup, dependency, Cargo edit, global, public API, limit, stage-order, or version change is authorized. Branch codex/hcm-2-3-planning, HEAD 3c49fa2c6d653f4b1a703d1d5c5196147b003533, zero staged paths, the frozen Review 10 aggregate sha256:8dac11d067a4fba0efea04a3ae1435ae1fa9c8a82307171676380e9aa8f1413a, all predecessor hashes, and current GitNexus index were verified before creation. Keep handbook-engine 0.2.0 deferred to consolidation.",
+  "allowed_scope": [
+    "Retain exactly the 42 code surfaces and one non-symbol crate-policy surface authorized by the fourth selector.",
+    "Add exactly two existing private deletion surfaces: windows_file_usn and open_existing_replacement_scratch.",
+    "In selected native_metadata_subjects, replace the windows_file_usn path/fsutil call with exact retained-handle USN observation owned inside that already-authorized item.",
+    "In selected GenericArtifactLineageStoreV1::install_descriptor, recover the exact transaction-specific candidate bound by native-publication.json without calling open_existing_replacement_scratch and without adding a replacement helper.",
+    "After rewiring, prove both obsolete symbols have zero live callers and remain unexported, then delete exactly their complete definitions.",
+    "Preserve the exact crate policy #![cfg_attr(not(windows), forbid(unsafe_code))] followed by #![cfg_attr(windows, deny(unsafe_code))] and item-scoped Windows unsafe only in native_metadata_subjects, publish_replacement, open_retained_parent_relative_nt, and query_object_id_absence_nt.",
+    "Complete every regression, proof-wall, GitNexus change-detection, and fresh complete-subject review obligation from the predecessor selectors.",
+    "Keep handbook-engine 0.2.0 deferred; do not edit Cargo or package versions."
+  ],
+  "non_goals": [
+    "Do not delete, rename, or clean up any other symbol, dead code, import, warning, compatibility wrapper, or adjacent implementation.",
+    "Do not add a helper to replace either deleted symbol, add a third native helper, or permit unsafe in a fifth item.",
+    "Do not add a dependency, Cargo/build-script/generated-native edit, global/static/thread-local state, public API, byte/inventory limit, stage-order change, or package-version change.",
+    "Do not modify any production symbol outside the exact predecessor 42 plus these two deletion surfaces, including resolve_profile_selection.",
+    "Do not weaken retained-handle authority, structured observation, no-replace publication, output requirements, committed reachability, reader withholding, evidence retention, or fail-closed behavior.",
+    "Do not stage, commit, push, create a global handoff, update the global ledger, or promote classification before all gates and operator confirmation."
+  ],
+  "tasks": [
+    "Replay this selector, all immutable predecessors and verdicts, the frozen Review 10 subject, branch, HEAD, zero staged state, and GitNexus freshness before production writes.",
+    "Obtain fresh read-only selector-closure and API-compatibility reviews of the exact 42-plus-two-deletions-plus-one-policy union. Proceed only if both return CLEAN.",
+    "Apply RED/GREEN increments: exact unsafe policy; retained-handle metadata and USN; transaction-specific recovery candidate; zero-caller proof and two exact deletions; native observation/result and terminal-conflict completion; all remaining predecessor obligations.",
+    "Run focused regressions after every increment and then the complete HCM-2.3 proof wall, workspace checks, formatting, lint, schema/vector/checker, Markdown, handoff, preservation, diff, and scope gates.",
+    "Run GitNexus detect-changes and obtain a fresh findings-first complete-subject review with zero findings.",
+    "Stop with zero staged paths, report deferred handbook-engine 0.2.0 and merge readiness, and request operator confirmation before commit."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T041308Z--atomic-canonical-publication-authority-repair.md",
+    "crates/engine/src/artifact_lineage_store.rs",
+    "crates/engine/src/lib.rs",
+    "crates/engine/tests/hcm_2_3_generic_lineage.rs"
+  ],
+  "stop_conditions": [
+    "Stop before deletion or further production/test edits unless both fresh admission reviews are CLEAN with zero findings.",
+    "Stop and request separate authorization if correctness requires any production or non-symbol surface outside this exact union, another helper, wrapper, dependency/Cargo/package-version edit, global, public API, fifth unsafe item, limit, stage-order change, or unrelated cleanup.",
+    "Stop if either deletion target is exported or has any live caller after its selected caller is rewired.",
+    "Stop on any branch, HEAD, staged-state, selected-handoff, Review 10, predecessor, selector-manifest, native-authority, preservation, or proof-wall mismatch.",
+    "Do not waive findings, stage, commit, push, create a global handoff, or update the global ledger."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "impact_analysis",
+      "validation",
+      "remaining_protocol_work",
+      "release_versioning_consequence",
+      "parent_disposition"
+    ]
+  }
+}

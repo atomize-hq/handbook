@@ -1,0 +1,12 @@
+schema_id: handbook.schema-registry-entry
+schema_version: "1.0"
+content_schema_id: example.schemas.registry-brief
+content_schema_version: 1.0.0
+document_ref: .handbook/definitions/schemas/registry-brief-1.0.0.schema.json
+document_fingerprint: sha256:12bf28ee0374037d16d515ab4066dbfe3ff152475dcc3a48e4eecad628394e02
+closure_fingerprint: sha256:5f5c653b6a3cd6bacd4ff87fa7ab8d48e93141c82e8598eda406571e5e85891b
+meta_schema_ref: https://json-schema.org/draft/2020-12/schema
+media_type: application/schema+json
+compatibility: exact
+extensions: {}
+entry_fingerprint: sha256:d0f39babea8f3ecf2cc3bdaab120972ac840446176ee156a9129220600f372a3

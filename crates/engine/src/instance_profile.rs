@@ -82,6 +82,7 @@ pub struct ProfileSelectionRequest {
     pub vocabulary_sources: Vec<DefinitionSourceBinding>,
     pub context_resolution_sources: Vec<DefinitionSourceBinding>,
     pub context_resolution_policy_sources: Vec<DefinitionSourceBinding>,
+    pub intake_definition_sources: Vec<DefinitionSourceBinding>,
     pub allowed_schema_roots: Vec<String>,
 }
 
@@ -974,6 +975,7 @@ mod request_admission_tests {
             vocabulary_sources: Vec::new(),
             context_resolution_sources: Vec::new(),
             context_resolution_policy_sources: Vec::new(),
+            intake_definition_sources: Vec::new(),
             allowed_schema_roots: Vec::new(),
         }
     }

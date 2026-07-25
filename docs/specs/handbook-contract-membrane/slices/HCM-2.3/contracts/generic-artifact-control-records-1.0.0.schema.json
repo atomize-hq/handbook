@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://handbook.example/contracts/hcm-2.3/generic-artifact-control-records-1.0.0.schema.json",
   "title": "HCM-2.3 closed generic artifact control records",
+  "$comment": "This schema admits one control record at a time. Cross-record publication authority additionally requires the deterministic atomic_publication_matrix_checker, publication_chain_contracts, windows_ntcreatefile_relative_open_contract, and windows_ntfscontrolfile_object_id_contract in generic-artifact-control-vectors-v1.0.json; schema-valid records without those exact matrix, chain, ABI, fingerprint, and semantic validations are non-authoritative.",
   "oneOf": [
     {"$ref": "#/$defs/operationContext"},
     {"$ref": "#/$defs/coverageEvaluation"},
@@ -9,6 +10,8 @@
     {"$ref": "#/$defs/domainMutationResult"},
     {"$ref": "#/$defs/domainLedgerEntry"},
     {"$ref": "#/$defs/transactionIntent"},
+    {"$ref": "#/$defs/nativePublicationObservation"},
+    {"$ref": "#/$defs/nativePublicationResult"},
     {"$ref": "#/$defs/verifiedStage"},
     {"$ref": "#/$defs/commitMarker"},
     {"$ref": "#/$defs/internalTransactionEvidence"}
@@ -20,6 +23,110 @@
     "transactionId": {"type": "string", "pattern": "^(intake_record_append|artifact_candidate_append|artifact_candidate_promote)_[0-9a-f]{64}$(?![\\s\\S])"},
     "operationId": {"enum": ["intake.record.append", "artifact.candidate.append", "artifact.candidate.promote"]},
     "nullableSha256": {"oneOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+    "nativeVersionToken": {"type": "string", "pattern": "^native-version-v1:[0-9a-f]{64}$(?![\\s\\S])"},
+    "nativeIdentityToken": {"type": "string", "pattern": "^native-id-v1:[0-9a-f]{64}$(?![\\s\\S])"},
+    "nullableNativeVersionToken": {"oneOf": [{"$ref": "#/$defs/nativeVersionToken"}, {"type": "null"}]},
+    "nullableNativeIdentityToken": {"oneOf": [{"$ref": "#/$defs/nativeIdentityToken"}, {"type": "null"}]},
+    "nativeTimestamp": {
+      "type": "object", "additionalProperties": false,
+      "required": ["seconds", "nanoseconds"],
+      "properties": {
+        "seconds": {"type": "string", "pattern": "^-?(?:0|[1-9][0-9]*)$(?![\\s\\S])"},
+        "nanoseconds": {"type": "integer", "minimum": 0, "maximum": 999999999}
+      }
+    },
+    "unixXattrEntry": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name_base64", "value_byte_length", "value_sha256"],
+      "properties": {
+        "name_base64": {"type": "string", "minLength": 4, "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$(?![\\s\\S])"},
+        "value_byte_length": {"type": "integer", "minimum": 0},
+        "value_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "unixXattrObservation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["entries", "entries_digest"],
+      "properties": {
+        "entries": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/unixXattrEntry"}},
+        "entries_digest": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "unixNativeObservation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["platform_family", "file_type", "device_id", "inode", "byte_length", "link_count", "mode_octal", "uid", "gid", "mtime", "ctime", "xattrs"],
+      "properties": {
+        "platform_family": {"const": "unix"}, "file_type": {"const": "regular"},
+        "device_id": {"type": "string", "pattern": "^(?:0|[1-9][0-9]*)$(?![\\s\\S])"},
+        "inode": {"type": "string", "pattern": "^(?:0|[1-9][0-9]*)$(?![\\s\\S])"},
+        "byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576},
+        "link_count": {"const": 1},
+        "mode_octal": {"type": "string", "pattern": "^0[0-7]{3,6}$(?![\\s\\S])"},
+        "uid": {"type": "string", "pattern": "^(?:0|[1-9][0-9]*)$(?![\\s\\S])"},
+        "gid": {"type": "string", "pattern": "^(?:0|[1-9][0-9]*)$(?![\\s\\S])"},
+        "mtime": {"$ref": "#/$defs/nativeTimestamp"}, "ctime": {"$ref": "#/$defs/nativeTimestamp"},
+        "xattrs": {"$ref": "#/$defs/unixXattrObservation"}
+      }
+    },
+    "windowsDaclObservation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["owner_sid", "group_sid", "security_descriptor_control_hex", "dacl_present", "dacl_byte_length", "dacl_sha256", "descriptor_digest"],
+      "properties": {
+        "owner_sid": {"type": "string", "pattern": "^S-[0-9]+(?:-[0-9]+)+$(?![\\s\\S])"},
+        "group_sid": {"type": "string", "pattern": "^S-[0-9]+(?:-[0-9]+)+$(?![\\s\\S])"},
+        "security_descriptor_control_hex": {"type": "string", "pattern": "^0x[0-9A-F]{4}$(?![\\s\\S])"},
+        "dacl_present": {"type": "boolean"},
+        "dacl_byte_length": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "null"}]},
+        "dacl_sha256": {"$ref": "#/$defs/nullableSha256"},
+        "descriptor_digest": {"$ref": "#/$defs/sha256"}
+      },
+      "allOf": [
+        {"if": {"properties": {"dacl_present": {"const": true}}, "required": ["dacl_present"]}, "then": {"properties": {"dacl_byte_length": {"type": "integer"}, "dacl_sha256": {"$ref": "#/$defs/sha256"}}}},
+        {"if": {"properties": {"dacl_present": {"const": false}}, "required": ["dacl_present"]}, "then": {"properties": {"dacl_byte_length": {"type": "null"}, "dacl_sha256": {"type": "null"}}}}
+      ]
+    },
+    "windowsStreamEntry": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "byte_length", "allocation_byte_length"],
+      "properties": {
+        "name": {"type": "string", "minLength": 7},
+        "byte_length": {"type": "string", "pattern": "^(?:0|[1-9][0-9]*)$(?![\\s\\S])"},
+        "allocation_byte_length": {"type": "string", "pattern": "^(?:0|[1-9][0-9]*)$(?![\\s\\S])"}
+      }
+    },
+    "windowsStreamObservation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["entries", "non_default_stream_count", "entries_digest"],
+      "properties": {
+        "entries": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/windowsStreamEntry"}},
+        "non_default_stream_count": {"const": 0},
+        "entries_digest": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "windowsNativeObservation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["platform_family", "file_type", "reparse_point", "reparse_tag_hex", "volume_serial_number_hex", "file_id_hex", "object_id_query", "byte_length", "link_count", "creation_time_100ns", "last_write_time_100ns", "change_time_100ns", "file_attributes_hex", "security", "sacl_policy", "streams", "usn"],
+      "properties": {
+        "platform_family": {"const": "windows"}, "file_type": {"const": "regular"}, "reparse_point": {"const": false}, "reparse_tag_hex": {"type": "null"},
+        "volume_serial_number_hex": {"type": "string", "pattern": "^0x[0-9A-F]{16}$(?![\\s\\S])"},
+        "file_id_hex": {"type": "string", "pattern": "^0x[0-9A-F]{32}$(?![\\s\\S])", "not": {"enum": ["0x00000000000000000000000000000000", "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"]}},
+        "object_id_query": {
+          "const": "absent_status_objectid_not_found",
+          "$comment": "This summary is admissible only when the exact private synchronous NtFsControlFile ABI/trace contract proves one of three exact absence traces: immediate raw STATUS_OBJECTID_NOT_FOUND with the complete IO_STATUS_BLOCK unchanged at its initialized STATUS_UNSUCCESSFUL/ULONG_PTR_MAX sentinel; matching raw/final STATUS_OBJECTID_NOT_FOUND with zero Information; or raw STATUS_PENDING completed through IO_STATUS_BLOCK as STATUS_OBJECTID_NOT_FOUND with zero Information. Pending with either sentinel unchanged, every other sentinel or disagreement, DeviceIoControl/GetLastError, success/present output, or any other status is non-authoritative and fails closed."
+        },
+        "byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576}, "link_count": {"const": 1},
+        "creation_time_100ns": {"type": "string", "pattern": "^-?(?:0|[1-9][0-9]*)$(?![\\s\\S])"},
+        "last_write_time_100ns": {"type": "string", "pattern": "^-?(?:0|[1-9][0-9]*)$(?![\\s\\S])"},
+        "change_time_100ns": {"type": "string", "pattern": "^-?(?:0|[1-9][0-9]*)$(?![\\s\\S])"},
+        "file_attributes_hex": {"type": "string", "pattern": "^0x[0-9A-F]{8}$(?![\\s\\S])"},
+        "security": {"$ref": "#/$defs/windowsDaclObservation"},
+        "sacl_policy": {"const": "excluded_not_observed_not_trusted"},
+        "streams": {"$ref": "#/$defs/windowsStreamObservation"},
+        "usn": {"type": "string", "pattern": "^(?:0|[1-9][0-9]*)$(?![\\s\\S])"}
+      }
+    },
+    "nativePlatformObservation": {"oneOf": [{"$ref": "#/$defs/unixNativeObservation"}, {"$ref": "#/$defs/windowsNativeObservation"}]},
+    "nullableNativePlatformObservation": {"oneOf": [{"$ref": "#/$defs/nativePlatformObservation"}, {"type": "null"}]},
     "establishedRefusal": {
       "type": "object",
       "additionalProperties": false,
@@ -37,6 +144,23 @@
         {"if": {"properties": {"code": {"const": "stale_basis"}}, "required": ["code"]}, "then": {"properties": {"layer": {"const": "currentness"}, "expected_fingerprint": {"$ref": "#/$defs/sha256"}, "observed_fingerprint": {"$ref": "#/$defs/sha256"}}}},
         {"if": {"properties": {"code": {"const": "stale_current_artifact"}}, "required": ["code"]}, "then": {"properties": {"layer": {"const": "currentness"}}}},
         {"if": {"properties": {"code": {"const": "operation_ineligible"}}, "required": ["code"]}, "then": {"properties": {"layer": {"const": "eligibility"}, "expected_fingerprint": {"type": "null"}, "observed_fingerprint": {"type": "null"}}}}
+      ]
+    },
+    "publicationConflictRefusal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "layer", "expected_fingerprint", "observed_fingerprint"],
+      "properties": {
+        "code": {"const": "publication_basis_conflict"},
+        "layer": {"const": "publication"},
+        "expected_fingerprint": {"$ref": "#/$defs/nullableSha256"},
+        "observed_fingerprint": {"$ref": "#/$defs/nullableSha256"}
+      }
+    },
+    "terminalRefusal": {
+      "oneOf": [
+        {"$ref": "#/$defs/establishedRefusal"},
+        {"$ref": "#/$defs/publicationConflictRefusal"}
       ]
     },
     "definitionBinding": {
@@ -184,26 +308,26 @@
       "oneOf": [
         {
           "type": "object", "additionalProperties": false,
-          "required": ["operation_id", "kind_ref", "instance_id", "acquisition_mode", "expected_current_artifact_fingerprint", "coverage_input_fingerprint"],
+          "required": ["operation_id", "kind_ref", "instance_id", "acquisition_mode", "expected_current_artifact_fingerprint", "coverage_input_fingerprint", "operation_context_fingerprint"],
           "properties": {
             "operation_id": {"const": "intake.record.append"}, "kind_ref": {"$ref": "#/$defs/exactRef"}, "instance_id": {"const": "registry_brief"},
-            "acquisition_mode": {"enum": ["guided_adaptive", "express", "agent_assisted"]}, "expected_current_artifact_fingerprint": {"$ref": "#/$defs/nullableSha256"}, "coverage_input_fingerprint": {"$ref": "#/$defs/sha256"}
+            "acquisition_mode": {"enum": ["guided_adaptive", "express", "agent_assisted"]}, "expected_current_artifact_fingerprint": {"$ref": "#/$defs/nullableSha256"}, "coverage_input_fingerprint": {"$ref": "#/$defs/sha256"}, "operation_context_fingerprint": {"$ref": "#/$defs/sha256"}
           }
         },
         {
           "type": "object", "additionalProperties": false,
-          "required": ["operation_id", "kind_ref", "instance_id", "intake_record_ref", "intake_record_fingerprint", "expected_candidate_fingerprint"],
+          "required": ["operation_id", "kind_ref", "instance_id", "intake_record_ref", "intake_record_fingerprint", "expected_candidate_fingerprint", "operation_context_fingerprint"],
           "properties": {
             "operation_id": {"const": "artifact.candidate.append"}, "kind_ref": {"$ref": "#/$defs/exactRef"}, "instance_id": {"const": "registry_brief"},
-            "intake_record_ref": {"$ref": "#/$defs/safeRef"}, "intake_record_fingerprint": {"$ref": "#/$defs/sha256"}, "expected_candidate_fingerprint": {"$ref": "#/$defs/sha256"}
+            "intake_record_ref": {"$ref": "#/$defs/safeRef"}, "intake_record_fingerprint": {"$ref": "#/$defs/sha256"}, "expected_candidate_fingerprint": {"$ref": "#/$defs/sha256"}, "operation_context_fingerprint": {"$ref": "#/$defs/sha256"}
           }
         },
         {
           "type": "object", "additionalProperties": false,
-          "required": ["operation_id", "kind_ref", "instance_id", "candidate_ref", "candidate_fingerprint", "expected_current_artifact_fingerprint"],
+          "required": ["operation_id", "kind_ref", "instance_id", "candidate_ref", "candidate_fingerprint", "expected_current_artifact_fingerprint", "operation_context_fingerprint", "canonical_artifact_ref"],
           "properties": {
             "operation_id": {"const": "artifact.candidate.promote"}, "kind_ref": {"$ref": "#/$defs/exactRef"}, "instance_id": {"const": "registry_brief"},
-            "candidate_ref": {"$ref": "#/$defs/safeRef"}, "candidate_fingerprint": {"$ref": "#/$defs/sha256"}, "expected_current_artifact_fingerprint": {"$ref": "#/$defs/nullableSha256"}
+            "candidate_ref": {"$ref": "#/$defs/safeRef"}, "candidate_fingerprint": {"$ref": "#/$defs/sha256"}, "expected_current_artifact_fingerprint": {"$ref": "#/$defs/nullableSha256"}, "operation_context_fingerprint": {"$ref": "#/$defs/sha256"}, "canonical_artifact_ref": {"$ref": "#/$defs/safeRef"}
           }
         }
       ]
@@ -223,14 +347,14 @@
       "required": ["schema_id", "schema_version", "operation_id", "transaction_id", "request_fingerprint", "outcome", "refusal", "authoritative_outputs", "internal_transaction_evidence_ref", "internal_transaction_evidence_fingerprint", "result_fingerprint"],
       "properties": {
         "schema_id": {"const": "handbook.generic-domain-mutation-result"}, "schema_version": {"const": "1.0"}, "operation_id": {"$ref": "#/$defs/operationId"},
-        "transaction_id": {"$ref": "#/$defs/transactionId"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}, "outcome": {"enum": ["committed", "refused"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]},
+        "transaction_id": {"$ref": "#/$defs/transactionId"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}, "outcome": {"enum": ["committed", "refused"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/terminalRefusal"}, {"type": "null"}]},
         "authoritative_outputs": {"type": "array", "minItems": 0, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/authoritativeOutput"}},
         "internal_transaction_evidence_ref": {"oneOf": [{"$ref": "#/$defs/safeRef"}, {"type": "null"}]}, "internal_transaction_evidence_fingerprint": {"$ref": "#/$defs/nullableSha256"},
         "result_fingerprint": {"$ref": "#/$defs/sha256"}
       },
       "allOf": [
         {"if": {"properties": {"outcome": {"const": "committed"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"type": "null"}, "authoritative_outputs": {"minItems": 1}, "internal_transaction_evidence_ref": {"$ref": "#/$defs/safeRef"}, "internal_transaction_evidence_fingerprint": {"$ref": "#/$defs/sha256"}}}},
-        {"if": {"properties": {"outcome": {"const": "refused"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/establishedRefusal"}, "authoritative_outputs": {"maxItems": 0}, "internal_transaction_evidence_ref": {"$ref": "#/$defs/safeRef"}, "internal_transaction_evidence_fingerprint": {"$ref": "#/$defs/sha256"}}}},
+        {"if": {"properties": {"outcome": {"const": "refused"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/terminalRefusal"}, "authoritative_outputs": {"maxItems": 0}, "internal_transaction_evidence_ref": {"$ref": "#/$defs/safeRef"}, "internal_transaction_evidence_fingerprint": {"$ref": "#/$defs/sha256"}}}},
         {"if": {"properties": {"operation_id": {"const": "intake.record.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^intake_record_append_[0-9a-f]{64}$(?![\\s\\S])"}, "internal_transaction_evidence_ref": {"type": "string", "pattern": "^\\.handbook/state/transactions/intake-records/intake_record_append_[0-9a-f]{64}\\.committed/evidence\\.json$(?![\\s\\S])"}}}},
         {"if": {"properties": {"operation_id": {"const": "artifact.candidate.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_[0-9a-f]{64}$(?![\\s\\S])"}, "internal_transaction_evidence_ref": {"type": "string", "pattern": "^\\.handbook/state/transactions/artifact-candidates/artifact_candidate_append_[0-9a-f]{64}\\.committed/evidence\\.json$(?![\\s\\S])"}}}},
         {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_[0-9a-f]{64}$(?![\\s\\S])"}, "internal_transaction_evidence_ref": {"type": "string", "pattern": "^\\.handbook/state/transactions/artifact-promotions/artifact_candidate_promote_[0-9a-f]{64}\\.committed/evidence\\.json$(?![\\s\\S])"}}}},
@@ -270,12 +394,12 @@
     },
     "transactionIntent": {
       "type": "object", "additionalProperties": false,
-      "required": ["schema_id", "schema_version", "transaction_id", "repository_identity_fingerprint", "owner_contract_ref", "owner_contract_subject_fingerprint", "operation_id", "domain_mutation_key_fingerprint", "request_fingerprint", "operation_context_fingerprint", "expected_basis_fingerprint", "sampled_finalized_at_utc", "planned_outcome", "refusal", "outputs", "intent_fingerprint"],
+      "required": ["schema_id", "schema_version", "transaction_id", "repository_identity_fingerprint", "owner_contract_ref", "owner_contract_subject_fingerprint", "operation_id", "domain_mutation_key_fingerprint", "request_fingerprint", "request_subject", "operation_context_fingerprint", "expected_basis_fingerprint", "sampled_finalized_at_utc", "planned_outcome", "refusal", "outputs", "intent_fingerprint"],
       "properties": {
         "schema_id": {"const": "handbook.generic-transaction-intent"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"},
         "repository_identity_fingerprint": {"$ref": "#/$defs/sha256"}, "owner_contract_ref": {"const": "handbook.hcm-2-3.generic-artifact-owner-contract@1.0.0"}, "owner_contract_subject_fingerprint": {"$ref": "#/$defs/sha256"},
-        "operation_id": {"$ref": "#/$defs/operationId"}, "domain_mutation_key_fingerprint": {"$ref": "#/$defs/sha256"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}, "operation_context_fingerprint": {"$ref": "#/$defs/sha256"},
-        "expected_basis_fingerprint": {"$ref": "#/$defs/nullableSha256"}, "sampled_finalized_at_utc": {"oneOf": [{"type": "string", "format": "date-time"}, {"type": "null"}]},
+        "operation_id": {"$ref": "#/$defs/operationId"}, "domain_mutation_key_fingerprint": {"$ref": "#/$defs/sha256"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}, "request_subject": {"$ref": "#/$defs/requestSubject"}, "operation_context_fingerprint": {"$ref": "#/$defs/sha256"},
+        "expected_basis_fingerprint": {"$ref": "#/$defs/nullableSha256"}, "expected_basis_byte_length": {"oneOf": [{"type": "integer", "minimum": 1, "maximum": 1048576}, {"type": "null"}]}, "expected_basis_presence": {"enum": ["absent", "present"]}, "expected_basis_identity_token": {"$ref": "#/$defs/nullableNativeIdentityToken"}, "expected_basis_version_token": {"$ref": "#/$defs/nullableNativeVersionToken"}, "sampled_finalized_at_utc": {"oneOf": [{"type": "string", "format": "date-time"}, {"type": "null"}]},
         "planned_outcome": {"enum": ["commit", "refuse"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]},
         "outputs": {"type": "array", "minItems": 0, "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/outputDescriptor"}}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}
       },
@@ -295,10 +419,140 @@
           {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 1}, "token": {"const": "validation-result"}, "authority_class": {"const": "subordinate_closure"}, "final_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/validation-results/validation_[0-9a-f]{64}\\.json$(?![\\s\\S])"}, "install_mode": {"const": "create_new"}, "receipt_class": {"type": "null"}}}]},
           {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 2}, "token": {"const": "candidate-record"}, "authority_class": {"const": "semantic_record"}, "final_ref": {"pattern": "^\\.handbook/evidence/artifacts/registry_brief/candidates/candidate_[0-9a-f]{64}\\.json$(?![\\s\\S])"}, "install_mode": {"const": "create_new"}, "receipt_class": {"const": "semantic_record"}}}]}
         ], "items": false}}}},
-        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "planned_outcome": {"const": "commit"}}, "required": ["operation_id", "planned_outcome"]}, "then": {"properties": {"sampled_finalized_at_utc": {"type": "null"}, "outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "planned_outcome": {"const": "commit"}}, "required": ["operation_id", "planned_outcome"]}, "then": {"required": ["expected_basis_presence", "expected_basis_byte_length", "expected_basis_identity_token", "expected_basis_version_token"], "properties": {"sampled_finalized_at_utc": {"type": "null"}, "outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [
           {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 0}, "token": {"const": "canonical-artifact"}, "authority_class": {"const": "canonical_truth"}, "final_ref": {"const": ".handbook/project/registry-brief.yaml"}, "install_mode": {"const": "replace_if_current"}, "receipt_class": {"const": "canonical_truth"}}}]},
           {"allOf": [{"$ref": "#/$defs/outputDescriptor"}, {"properties": {"ordinal": {"const": 1}, "token": {"const": "promotion-record"}, "authority_class": {"const": "semantic_record"}, "final_ref": {"pattern": "^\\.handbook/state/artifacts/registry_brief/promotion-records/promotion_[0-9a-f]{64}\\.json$(?![\\s\\S])"}, "install_mode": {"const": "create_new"}, "receipt_class": {"const": "semantic_record"}}}]}
-        ], "items": false}}}}
+        ], "items": false}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "planned_outcome": {"const": "commit"}, "expected_basis_presence": {"const": "absent"}}, "required": ["operation_id", "planned_outcome", "expected_basis_presence"]}, "then": {"properties": {"expected_basis_fingerprint": {"type": "null"}, "expected_basis_byte_length": {"type": "null"}, "expected_basis_identity_token": {"type": "null"}, "expected_basis_version_token": {"type": "null"}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "planned_outcome": {"const": "commit"}, "expected_basis_presence": {"const": "present"}}, "required": ["operation_id", "planned_outcome", "expected_basis_presence"]}, "then": {"properties": {"expected_basis_fingerprint": {"$ref": "#/$defs/sha256"}, "expected_basis_byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576}, "expected_basis_identity_token": {"$ref": "#/$defs/nativeIdentityToken"}, "expected_basis_version_token": {"$ref": "#/$defs/nativeVersionToken"}}}},
+        {"if": {"not": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "planned_outcome": {"const": "commit"}}, "required": ["operation_id", "planned_outcome"]}}, "then": {"not": {"anyOf": [{"required": ["expected_basis_presence"]}, {"required": ["expected_basis_byte_length"]}, {"required": ["expected_basis_identity_token"]}, {"required": ["expected_basis_version_token"]}]}}}
+      ]
+    },
+    "nativePublicationObservation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "transaction_id", "intent_fingerprint", "protocol_id", "continuity_protocol", "platform_family", "platform_primitive", "expected_basis_presence", "expected_basis_fingerprint", "expected_basis_byte_length", "expected_basis_identity_token", "expected_basis_version_token", "expected_basis_platform_observation", "expected_basis_backup_ref", "expected_basis_backup_bytes_sha256", "expected_basis_backup_byte_length", "expected_basis_backup_metadata_fingerprint", "canonical_ref", "candidate_ref", "displaced_ref", "replacement_bytes_sha256", "replacement_byte_length", "replacement_identity_token", "replacement_version_token", "replacement_platform_observation", "observation_fingerprint"],
+      "properties": {
+        "schema_id": {"const": "handbook.generic-native-publication-observation"}, "schema_version": {"const": "1.0"},
+        "transaction_id": {"pattern": "^artifact_candidate_promote_[0-9a-f]{64}$(?![\\s\\S])"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"},
+        "protocol_id": {"const": "atomic-displaced-basis-v1"}, "continuity_protocol": {"const": "retained-live-handle-v1"}, "platform_family": {"enum": ["unix", "windows"]}, "platform_primitive": {"enum": ["renameat2_noreplace_retained_dirfds", "renameat2_claim_publish_retained_dirfds", "setfileinformationbyhandle_filerenameinfo_noreplace", "setfileinformationbyhandle_filerenameinfo_claim_publish"]},
+        "expected_basis_presence": {"enum": ["absent", "present"]}, "expected_basis_fingerprint": {"$ref": "#/$defs/nullableSha256"}, "expected_basis_byte_length": {"oneOf": [{"type": "integer", "minimum": 1, "maximum": 1048576}, {"type": "null"}]}, "expected_basis_identity_token": {"$ref": "#/$defs/nullableNativeIdentityToken"}, "expected_basis_version_token": {"$ref": "#/$defs/nullableNativeVersionToken"}, "expected_basis_platform_observation": {"$ref": "#/$defs/nullableNativePlatformObservation"},
+        "expected_basis_backup_ref": {"oneOf": [{"type": "string", "pattern": "^\\.handbook/state/transactions/artifact-promotions/artifact_candidate_promote_[0-9a-f]{64}\\.pending/expected-basis\\.backup$(?![\\s\\S])"}, {"type": "null"}]},
+        "expected_basis_backup_bytes_sha256": {"$ref": "#/$defs/nullableSha256"}, "expected_basis_backup_byte_length": {"oneOf": [{"type": "integer", "minimum": 1, "maximum": 1048576}, {"type": "null"}]}, "expected_basis_backup_metadata_fingerprint": {"$ref": "#/$defs/nullableSha256"},
+        "canonical_ref": {"const": ".handbook/project/registry-brief.yaml"},
+        "candidate_ref": {"type": "string", "pattern": "^\\.handbook/project/\\.registry-brief\\.yaml\\.generic-publish-artifact_candidate_promote_[0-9a-f]{64}\\.candidate$(?![\\s\\S])"},
+        "displaced_ref": {"type": "string", "pattern": "^\\.handbook/project/\\.registry-brief\\.yaml\\.generic-publish-artifact_candidate_promote_[0-9a-f]{64}\\.displaced$(?![\\s\\S])"},
+        "replacement_bytes_sha256": {"$ref": "#/$defs/sha256"}, "replacement_byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576},
+        "replacement_identity_token": {"$ref": "#/$defs/nativeIdentityToken"}, "replacement_version_token": {"$ref": "#/$defs/nativeVersionToken"}, "replacement_platform_observation": {"$ref": "#/$defs/nativePlatformObservation"},
+        "observation_fingerprint": {"$ref": "#/$defs/sha256"}
+      },
+      "allOf": [
+        {"if": {"properties": {"expected_basis_presence": {"const": "absent"}}, "required": ["expected_basis_presence"]}, "then": {"properties": {"expected_basis_fingerprint": {"type": "null"}, "expected_basis_byte_length": {"type": "null"}, "expected_basis_identity_token": {"type": "null"}, "expected_basis_version_token": {"type": "null"}, "expected_basis_platform_observation": {"type": "null"}, "expected_basis_backup_ref": {"type": "null"}, "expected_basis_backup_bytes_sha256": {"type": "null"}, "expected_basis_backup_byte_length": {"type": "null"}, "expected_basis_backup_metadata_fingerprint": {"type": "null"}, "platform_primitive": {"enum": ["renameat2_noreplace_retained_dirfds", "setfileinformationbyhandle_filerenameinfo_noreplace"]}}}},
+        {"if": {"properties": {"expected_basis_presence": {"const": "present"}}, "required": ["expected_basis_presence"]}, "then": {"properties": {"expected_basis_fingerprint": {"$ref": "#/$defs/sha256"}, "expected_basis_byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576}, "expected_basis_identity_token": {"$ref": "#/$defs/nativeIdentityToken"}, "expected_basis_version_token": {"$ref": "#/$defs/nativeVersionToken"}, "expected_basis_platform_observation": {"$ref": "#/$defs/nativePlatformObservation"}, "expected_basis_backup_ref": {"type": "string", "pattern": "^\\.handbook/state/transactions/artifact-promotions/artifact_candidate_promote_[0-9a-f]{64}\\.pending/expected-basis\\.backup$(?![\\s\\S])"}, "expected_basis_backup_bytes_sha256": {"$ref": "#/$defs/sha256"}, "expected_basis_backup_byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576}, "expected_basis_backup_metadata_fingerprint": {"$ref": "#/$defs/sha256"}, "platform_primitive": {"enum": ["renameat2_claim_publish_retained_dirfds", "setfileinformationbyhandle_filerenameinfo_claim_publish"]}}}},
+        {"if": {"properties": {"platform_family": {"const": "unix"}}, "required": ["platform_family"]}, "then": {"properties": {"platform_primitive": {"enum": ["renameat2_noreplace_retained_dirfds", "renameat2_claim_publish_retained_dirfds"]}}}},
+        {"if": {"properties": {"platform_family": {"const": "windows"}}, "required": ["platform_family"]}, "then": {"properties": {"platform_primitive": {"enum": ["setfileinformationbyhandle_filerenameinfo_noreplace", "setfileinformationbyhandle_filerenameinfo_claim_publish"]}}}}
+      ]
+    },
+    "nativePathObservation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["presence", "semantic_binding", "identity_token", "version_token", "version_transition", "bytes_sha256", "byte_length", "link_count", "platform_observation"],
+      "properties": {
+        "presence": {"enum": ["absent", "regular"]}, "semantic_binding": {"enum": ["absent", "expected_basis", "replacement", "unexpected_basis"]}, "identity_token": {"$ref": "#/$defs/nullableNativeIdentityToken"}, "version_token": {"$ref": "#/$defs/nullableNativeVersionToken"}, "version_transition": {"enum": ["not_applicable", "unchanged_before_first_move", "primitive_mutated_same_object", "external_change", "external_object"]},
+        "bytes_sha256": {"$ref": "#/$defs/nullableSha256"}, "byte_length": {"oneOf": [{"type": "integer", "minimum": 1, "maximum": 1048576}, {"type": "null"}]}, "link_count": {"oneOf": [{"type": "integer", "const": 1}, {"type": "null"}]}, "platform_observation": {"$ref": "#/$defs/nullableNativePlatformObservation"}
+      },
+      "allOf": [
+        {"if": {"properties": {"presence": {"const": "absent"}}, "required": ["presence"]}, "then": {"properties": {"semantic_binding": {"const": "absent"}, "identity_token": {"type": "null"}, "version_token": {"type": "null"}, "version_transition": {"const": "not_applicable"}, "bytes_sha256": {"type": "null"}, "byte_length": {"type": "null"}, "link_count": {"type": "null"}, "platform_observation": {"type": "null"}}}},
+        {"if": {"properties": {"presence": {"const": "regular"}}, "required": ["presence"]}, "then": {"properties": {"semantic_binding": {"enum": ["expected_basis", "replacement", "unexpected_basis"]}, "identity_token": {"$ref": "#/$defs/nativeIdentityToken"}, "version_token": {"$ref": "#/$defs/nativeVersionToken"}, "version_transition": {"enum": ["unchanged_before_first_move", "primitive_mutated_same_object", "external_change", "external_object"]}, "bytes_sha256": {"$ref": "#/$defs/sha256"}, "byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576}, "link_count": {"const": 1}, "platform_observation": {"$ref": "#/$defs/nativePlatformObservation"}}}},
+        {"if": {"properties": {"semantic_binding": {"enum": ["expected_basis", "replacement"]}}, "required": ["semantic_binding"]}, "then": {"properties": {"version_transition": {"enum": ["unchanged_before_first_move", "primitive_mutated_same_object"]}}}},
+        {"if": {"properties": {"semantic_binding": {"const": "unexpected_basis"}}, "required": ["semantic_binding"]}, "then": {"properties": {"version_transition": {"enum": ["primitive_mutated_same_object", "external_change", "external_object"]}}}}
+      ]
+    },
+    "nativeTupleObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical", "candidate", "displaced"],
+      "properties": {
+        "canonical": {"$ref": "#/$defs/nativePathObservation"},
+        "candidate": {"$ref": "#/$defs/nativePathObservation"},
+        "displaced": {"$ref": "#/$defs/nativePathObservation"}
+      }
+    },
+    "nativeMoveContinuityProof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocol", "platform_family", "source_handle_retained_through_destination_observation", "source_identity_reverified_from_retained_handle", "source_parent_handle_retained", "destination_parent_handle_retained", "destination_opened_from_retained_parent", "destination_child_name", "continuity_outcome", "same_live_object_verified", "numeric_identity_only", "ancestor_chain_binding", "platform_binding"],
+      "properties": {
+        "protocol": {"const": "retained-live-handle-v1"},
+        "platform_family": {"enum": ["unix", "windows"]},
+        "source_handle_retained_through_destination_observation": {"const": true},
+        "source_identity_reverified_from_retained_handle": {"const": true},
+        "source_parent_handle_retained": {"const": true},
+        "destination_parent_handle_retained": {"const": true},
+        "destination_opened_from_retained_parent": {"const": true},
+        "destination_child_name": {"type": "string", "minLength": 1, "maxLength": 255, "pattern": "^(?!\\.\\.?$)[^/\\\\]+$(?![\\s\\S])"},
+        "continuity_outcome": {"enum": ["destination_is_same_live_source_object", "move_not_observed_source_remained_live"]},
+        "same_live_object_verified": {"type": "boolean"},
+        "numeric_identity_only": {"const": false},
+        "ancestor_chain_binding": {"enum": ["unix_openat2_beneath_retained_dirfds_no_symlinks", "windows_retained_ancestors_no_share_delete_enumerated_child_ids_no_reparse"]},
+        "platform_binding": {"enum": ["renameat2_retained_source_and_parent_dirfds", "setfileinformationbyhandle_filerenameinfo_rootdirectory_simple_child_replace_false"]}
+      },
+      "allOf": [
+        {"if": {"properties": {"platform_family": {"const": "unix"}}, "required": ["platform_family"]}, "then": {"properties": {"ancestor_chain_binding": {"const": "unix_openat2_beneath_retained_dirfds_no_symlinks"}, "platform_binding": {"const": "renameat2_retained_source_and_parent_dirfds"}}}},
+        {"if": {"properties": {"platform_family": {"const": "windows"}}, "required": ["platform_family"]}, "then": {"properties": {"ancestor_chain_binding": {"const": "windows_retained_ancestors_no_share_delete_enumerated_child_ids_no_reparse"}, "platform_binding": {"const": "setfileinformationbyhandle_filerenameinfo_rootdirectory_simple_child_replace_false"}}}}
+      ]
+    },
+    "nativeCallStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ordinal", "action", "outcome", "error_code", "before", "after", "continuity_proof"],
+      "properties": {
+        "ordinal": {"type": "integer", "minimum": 0, "maximum": 2},
+        "action": {"enum": ["claim_canonical_to_displaced", "publish_replacement_to_canonical", "restore_displaced_to_canonical"]},
+        "outcome": {"enum": ["success", "error"]},
+        "error_code": {"oneOf": [{"type": "integer", "minimum": 1, "maximum": 4294967295}, {"type": "null"}]},
+        "before": {"$ref": "#/$defs/nativeTupleObservation"},
+        "after": {"$ref": "#/$defs/nativeTupleObservation"},
+        "continuity_proof": {"$ref": "#/$defs/nativeMoveContinuityProof"}
+      },
+      "allOf": [
+        {"if": {"properties": {"outcome": {"const": "error"}}, "required": ["outcome"]}, "then": {"properties": {"error_code": {"type": "integer", "minimum": 1}, "continuity_proof": {"properties": {"continuity_outcome": {"const": "move_not_observed_source_remained_live"}, "same_live_object_verified": {"const": false}}}}}},
+        {"if": {"properties": {"outcome": {"const": "success"}}, "required": ["outcome"]}, "then": {"properties": {"error_code": {"type": "null"}, "continuity_proof": {"properties": {"continuity_outcome": {"const": "destination_is_same_live_source_object"}, "same_live_object_verified": {"const": true}}}}}}
+      ]
+    },
+    "nativePublicationResult": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "transaction_id", "intent_fingerprint", "observation_fingerprint", "verified_fingerprint", "continuity_protocol", "continuity_completion", "platform_family", "platform_primitive", "expected_basis_presence", "expected_basis_fingerprint", "expected_basis_byte_length", "expected_basis_identity_token", "expected_basis_version_token", "expected_basis_platform_observation", "expected_basis_backup_ref", "expected_basis_backup_bytes_sha256", "expected_basis_backup_byte_length", "expected_basis_backup_metadata_fingerprint", "replacement_bytes_sha256", "replacement_byte_length", "replacement_identity_token", "replacement_version_token", "replacement_platform_observation", "native_call_trace", "canonical_observation", "candidate_observation", "displaced_observation", "basis_disposition", "publication_disposition", "reader_authority", "cleanup_authority", "result_fingerprint"],
+      "properties": {
+        "schema_id": {"const": "handbook.generic-native-publication-result"}, "schema_version": {"const": "1.0"},
+        "transaction_id": {"pattern": "^artifact_candidate_promote_[0-9a-f]{64}$(?![\\s\\S])"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}, "observation_fingerprint": {"$ref": "#/$defs/sha256"}, "verified_fingerprint": {"$ref": "#/$defs/sha256"},
+        "continuity_protocol": {"const": "retained-live-handle-v1"}, "continuity_completion": {"enum": ["all_native_moves_proved_while_source_handles_live", "no_native_move_invoked"]},
+        "platform_family": {"enum": ["unix", "windows"]}, "platform_primitive": {"$comment": "The setfileinformationbyhandle_filerenameinfo_* values are frozen compatibility identifiers for the two Windows retained-handle no-replace modes. They do not authorize or name the current FFI; the native adapter uses local NtSetInformationFile(FileRenameInformation) inside publish_replacement.", "enum": ["renameat2_noreplace_retained_dirfds", "renameat2_claim_publish_retained_dirfds", "setfileinformationbyhandle_filerenameinfo_noreplace", "setfileinformationbyhandle_filerenameinfo_claim_publish"]},
+        "expected_basis_presence": {"enum": ["absent", "present"]}, "expected_basis_fingerprint": {"$ref": "#/$defs/nullableSha256"}, "expected_basis_byte_length": {"oneOf": [{"type": "integer", "minimum": 1, "maximum": 1048576}, {"type": "null"}]}, "expected_basis_identity_token": {"$ref": "#/$defs/nullableNativeIdentityToken"}, "expected_basis_version_token": {"$ref": "#/$defs/nullableNativeVersionToken"}, "expected_basis_platform_observation": {"$ref": "#/$defs/nullableNativePlatformObservation"},
+        "expected_basis_backup_ref": {"oneOf": [{"type": "string", "pattern": "^\\.handbook/state/transactions/artifact-promotions/artifact_candidate_promote_[0-9a-f]{64}\\.pending/expected-basis\\.backup$(?![\\s\\S])"}, {"type": "null"}]},
+        "expected_basis_backup_bytes_sha256": {"$ref": "#/$defs/nullableSha256"}, "expected_basis_backup_byte_length": {"oneOf": [{"type": "integer", "minimum": 1, "maximum": 1048576}, {"type": "null"}]}, "expected_basis_backup_metadata_fingerprint": {"$ref": "#/$defs/nullableSha256"},
+        "replacement_bytes_sha256": {"$ref": "#/$defs/sha256"}, "replacement_byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576}, "replacement_identity_token": {"$ref": "#/$defs/nativeIdentityToken"}, "replacement_version_token": {"$ref": "#/$defs/nativeVersionToken"}, "replacement_platform_observation": {"$ref": "#/$defs/nativePlatformObservation"},
+        "native_call_trace": {"type": "array", "minItems": 0, "maxItems": 3, "uniqueItems": true, "items": {"$ref": "#/$defs/nativeCallStep"}},
+        "canonical_observation": {"$ref": "#/$defs/nativePathObservation"}, "candidate_observation": {"$ref": "#/$defs/nativePathObservation"}, "displaced_observation": {"$ref": "#/$defs/nativePathObservation"},
+        "basis_disposition": {"enum": ["expected_absent_confirmed", "expected_basis_displaced", "expected_basis_restored", "expected_basis_deleted", "competing_basis_preserved", "replacement_source_deleted", "replacement_source_substitution_preserved"]},
+        "publication_disposition": {"enum": ["authorized", "refused_basis_conflict"]},
+        "reader_authority": {"const": "withheld_until_commit_marker"}, "cleanup_authority": {"const": "forbidden"}, "result_fingerprint": {"$ref": "#/$defs/sha256"}
+      },
+      "allOf": [
+        {"if": {"properties": {"expected_basis_presence": {"const": "absent"}}, "required": ["expected_basis_presence"]}, "then": {"properties": {"expected_basis_fingerprint": {"type": "null"}, "expected_basis_byte_length": {"type": "null"}, "expected_basis_identity_token": {"type": "null"}, "expected_basis_version_token": {"type": "null"}, "expected_basis_platform_observation": {"type": "null"}, "expected_basis_backup_ref": {"type": "null"}, "expected_basis_backup_bytes_sha256": {"type": "null"}, "expected_basis_backup_byte_length": {"type": "null"}, "expected_basis_backup_metadata_fingerprint": {"type": "null"}, "platform_primitive": {"enum": ["renameat2_noreplace_retained_dirfds", "setfileinformationbyhandle_filerenameinfo_noreplace"]}, "native_call_trace": {"maxItems": 1, "prefixItems": [{"properties": {"ordinal": {"const": 0}, "action": {"const": "publish_replacement_to_canonical"}}}], "items": false}}}},
+        {"if": {"properties": {"expected_basis_presence": {"const": "present"}}, "required": ["expected_basis_presence"]}, "then": {"properties": {"expected_basis_fingerprint": {"$ref": "#/$defs/sha256"}, "expected_basis_byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576}, "expected_basis_identity_token": {"$ref": "#/$defs/nativeIdentityToken"}, "expected_basis_version_token": {"$ref": "#/$defs/nativeVersionToken"}, "expected_basis_platform_observation": {"$ref": "#/$defs/nativePlatformObservation"}, "expected_basis_backup_ref": {"type": "string", "pattern": "^\\.handbook/state/transactions/artifact-promotions/artifact_candidate_promote_[0-9a-f]{64}\\.pending/expected-basis\\.backup$(?![\\s\\S])"}, "expected_basis_backup_bytes_sha256": {"$ref": "#/$defs/sha256"}, "expected_basis_backup_byte_length": {"type": "integer", "minimum": 1, "maximum": 1048576}, "expected_basis_backup_metadata_fingerprint": {"$ref": "#/$defs/sha256"}, "platform_primitive": {"enum": ["renameat2_claim_publish_retained_dirfds", "setfileinformationbyhandle_filerenameinfo_claim_publish"]}, "native_call_trace": {"prefixItems": [{"properties": {"ordinal": {"const": 0}, "action": {"const": "claim_canonical_to_displaced"}}}]}}}},
+        {"if": {"properties": {"platform_family": {"const": "unix"}}, "required": ["platform_family"]}, "then": {"properties": {"platform_primitive": {"enum": ["renameat2_noreplace_retained_dirfds", "renameat2_claim_publish_retained_dirfds"]}}}},
+        {"if": {"properties": {"platform_family": {"const": "windows"}}, "required": ["platform_family"]}, "then": {"properties": {"platform_primitive": {"enum": ["setfileinformationbyhandle_filerenameinfo_noreplace", "setfileinformationbyhandle_filerenameinfo_claim_publish"]}}}},
+        {"if": {"properties": {"native_call_trace": {"maxItems": 0}}, "required": ["native_call_trace"]}, "then": {"properties": {"continuity_completion": {"const": "no_native_move_invoked"}}}},
+        {"if": {"properties": {"native_call_trace": {"minItems": 1}}, "required": ["native_call_trace"]}, "then": {"properties": {"continuity_completion": {"const": "all_native_moves_proved_while_source_handles_live"}}}},
+        {"if": {"properties": {"publication_disposition": {"const": "authorized"}, "expected_basis_presence": {"const": "absent"}}, "required": ["publication_disposition", "expected_basis_presence"]}, "then": {"properties": {"basis_disposition": {"const": "expected_absent_confirmed"}, "native_call_trace": {"minItems": 1}, "canonical_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "replacement"}, "version_transition": {"const": "primitive_mutated_same_object"}}}, "candidate_observation": {"properties": {"presence": {"const": "absent"}}}, "displaced_observation": {"properties": {"presence": {"const": "absent"}}}}}},
+        {"if": {"properties": {"publication_disposition": {"const": "authorized"}, "expected_basis_presence": {"const": "present"}}, "required": ["publication_disposition", "expected_basis_presence"]}, "then": {"properties": {"basis_disposition": {"const": "expected_basis_displaced"}, "native_call_trace": {"minItems": 2, "maxItems": 2, "prefixItems": [{"properties": {"ordinal": {"const": 0}, "action": {"const": "claim_canonical_to_displaced"}}}, {"properties": {"ordinal": {"const": 1}, "action": {"const": "publish_replacement_to_canonical"}}}], "items": false}, "canonical_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "replacement"}, "version_transition": {"const": "primitive_mutated_same_object"}}}, "candidate_observation": {"properties": {"presence": {"const": "absent"}}}, "displaced_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "expected_basis"}, "version_transition": {"const": "primitive_mutated_same_object"}}}}}},
+        {"if": {"properties": {"publication_disposition": {"const": "refused_basis_conflict"}}, "required": ["publication_disposition"]}, "then": {"properties": {"basis_disposition": {"enum": ["expected_basis_restored", "expected_basis_deleted", "competing_basis_preserved", "replacement_source_deleted", "replacement_source_substitution_preserved"]}}}},
+        {"if": {"properties": {"basis_disposition": {"const": "expected_basis_restored"}}, "required": ["basis_disposition"]}, "then": {"properties": {"native_call_trace": {"minItems": 3, "maxItems": 3, "prefixItems": [{"properties": {"ordinal": {"const": 0}, "action": {"const": "claim_canonical_to_displaced"}}}, {"properties": {"ordinal": {"const": 1}, "action": {"const": "publish_replacement_to_canonical"}}}, {"properties": {"ordinal": {"const": 2}, "action": {"const": "restore_displaced_to_canonical"}}}], "items": false}, "canonical_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "expected_basis"}, "version_transition": {"const": "primitive_mutated_same_object"}}}, "candidate_observation": {"oneOf": [{"properties": {"presence": {"const": "absent"}}, "required": ["presence"]}, {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "unexpected_basis"}}, "required": ["presence", "semantic_binding"]}]}, "displaced_observation": {"properties": {"presence": {"const": "absent"}}}}}},
+        {"if": {"properties": {"basis_disposition": {"const": "expected_basis_deleted"}}, "required": ["basis_disposition"]}, "then": {"properties": {"native_call_trace": {"maxItems": 1, "prefixItems": [{"properties": {"ordinal": {"const": 0}, "action": {"const": "claim_canonical_to_displaced"}}}], "items": false}, "canonical_observation": {"properties": {"presence": {"const": "absent"}}}, "candidate_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "replacement"}, "version_transition": {"const": "unchanged_before_first_move"}}}, "displaced_observation": {"properties": {"presence": {"const": "absent"}}}}}},
+        {"if": {"properties": {"basis_disposition": {"const": "competing_basis_preserved"}, "expected_basis_presence": {"const": "absent"}}, "required": ["basis_disposition", "expected_basis_presence"]}, "then": {"properties": {"canonical_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "unexpected_basis"}, "version_transition": {"const": "external_object"}}}, "candidate_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "replacement"}, "version_transition": {"const": "unchanged_before_first_move"}}}, "displaced_observation": {"properties": {"presence": {"const": "absent"}}}}}},
+        {"if": {"properties": {"basis_disposition": {"const": "competing_basis_preserved"}, "expected_basis_presence": {"const": "present"}}, "required": ["basis_disposition", "expected_basis_presence"]}, "then": {"properties": {"native_call_trace": {"minItems": 2, "maxItems": 2, "prefixItems": [{"properties": {"ordinal": {"const": 0}, "action": {"const": "claim_canonical_to_displaced"}}}, {"properties": {"ordinal": {"const": 1}, "action": {"const": "publish_replacement_to_canonical"}}}], "items": false}, "canonical_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "unexpected_basis"}, "version_transition": {"const": "external_object"}}}, "candidate_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "replacement"}, "version_transition": {"const": "unchanged_before_first_move"}}}, "displaced_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "expected_basis"}, "version_transition": {"const": "primitive_mutated_same_object"}}}}}},
+        {"if": {"properties": {"basis_disposition": {"const": "replacement_source_deleted"}}, "required": ["basis_disposition"]}, "then": {"properties": {"expected_basis_presence": {"const": "absent"}, "canonical_observation": {"properties": {"presence": {"const": "absent"}}}, "candidate_observation": {"properties": {"presence": {"const": "absent"}}}, "displaced_observation": {"properties": {"presence": {"const": "absent"}}}}}},
+        {"if": {"properties": {"basis_disposition": {"const": "replacement_source_substitution_preserved"}}, "required": ["basis_disposition"]}, "then": {"properties": {"expected_basis_presence": {"const": "absent"}, "canonical_observation": {"oneOf": [{"properties": {"presence": {"const": "absent"}}, "required": ["presence"]}, {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "unexpected_basis"}}, "required": ["presence", "semantic_binding"]}]}, "candidate_observation": {"oneOf": [{"properties": {"presence": {"const": "absent"}}, "required": ["presence"]}, {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "unexpected_basis"}}, "required": ["presence", "semantic_binding"]}]}, "displaced_observation": {"properties": {"presence": {"const": "absent"}}}}}},
+        {"if": {"properties": {"basis_disposition": {"const": "replacement_source_substitution_preserved"}}, "required": ["basis_disposition"]}, "then": {"oneOf": [{"properties": {"canonical_observation": {"properties": {"presence": {"const": "absent"}}}, "candidate_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "unexpected_basis"}}}}}, {"properties": {"canonical_observation": {"properties": {"presence": {"const": "regular"}, "semantic_binding": {"const": "unexpected_basis"}}}, "candidate_observation": {"properties": {"presence": {"const": "absent"}}}}}]}}
       ]
     },
     "stagedOutput": {
@@ -309,13 +563,14 @@
     "verifiedStage": {
       "type": "object", "additionalProperties": false,
       "required": ["schema_id", "schema_version", "transaction_id", "intent_fingerprint", "planned_outcome", "refusal", "verification_basis", "staged_outputs", "verified_fingerprint"],
-      "properties": {"schema_id": {"const": "handbook.generic-verified-stage"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}, "planned_outcome": {"enum": ["commit", "refuse"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]}, "verification_basis": {"enum": ["staging", "installed_complete", "refusal_decision"]}, "staged_outputs": {"type": "array", "minItems": 0, "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/stagedOutput"}}, "verified_fingerprint": {"$ref": "#/$defs/sha256"}},
+      "properties": {"schema_id": {"const": "handbook.generic-verified-stage"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}, "publication_observation_fingerprint": {"$ref": "#/$defs/sha256"}, "planned_outcome": {"enum": ["commit", "refuse"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]}, "verification_basis": {"enum": ["staging", "installed_complete", "refusal_decision"]}, "staged_outputs": {"type": "array", "minItems": 0, "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/stagedOutput"}}, "verified_fingerprint": {"$ref": "#/$defs/sha256"}},
       "allOf": [
         {"if": {"properties": {"planned_outcome": {"const": "commit"}}, "required": ["planned_outcome"]}, "then": {"properties": {"refusal": {"type": "null"}, "verification_basis": {"enum": ["staging", "installed_complete"]}}}},
         {"if": {"properties": {"planned_outcome": {"const": "refuse"}}, "required": ["planned_outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/establishedRefusal"}, "verification_basis": {"const": "refusal_decision"}, "staged_outputs": {"maxItems": 0}}}},
         {"if": {"properties": {"transaction_id": {"pattern": "^intake_record_append_"}, "planned_outcome": {"const": "commit"}}, "required": ["transaction_id", "planned_outcome"]}, "then": {"properties": {"staged_outputs": {"minItems": 3, "maxItems": 3, "prefixItems": [{"properties": {"ordinal": {"const": 0}}}, {"properties": {"ordinal": {"const": 1}}}, {"properties": {"ordinal": {"const": 2}}}], "items": false}}}},
         {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_"}, "planned_outcome": {"const": "commit"}}, "required": ["transaction_id", "planned_outcome"]}, "then": {"properties": {"staged_outputs": {"minItems": 3, "maxItems": 3, "prefixItems": [{"properties": {"ordinal": {"const": 0}}}, {"properties": {"ordinal": {"const": 1}}}, {"properties": {"ordinal": {"const": 2}}}], "items": false}}}},
-        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "planned_outcome": {"const": "commit"}}, "required": ["transaction_id", "planned_outcome"]}, "then": {"properties": {"staged_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"properties": {"ordinal": {"const": 0}}}, {"properties": {"ordinal": {"const": 1}}}], "items": false}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "planned_outcome": {"const": "commit"}}, "required": ["transaction_id", "planned_outcome"]}, "then": {"required": ["publication_observation_fingerprint"], "properties": {"staged_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"properties": {"ordinal": {"const": 0}}}, {"properties": {"ordinal": {"const": 1}}}], "items": false}}}},
+        {"if": {"not": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "planned_outcome": {"const": "commit"}}, "required": ["transaction_id", "planned_outcome"]}}, "then": {"not": {"required": ["publication_observation_fingerprint"]}}},
         {"if": {"properties": {"transaction_id": {"pattern": "^intake_record_append_"}, "planned_outcome": {"const": "commit"}, "verification_basis": {"const": "staging"}}, "required": ["transaction_id", "planned_outcome", "verification_basis"]}, "then": {"properties": {"staged_outputs": {"prefixItems": [{"properties": {"staged_ref": {"const": "staged/0-title-value.bin"}}}, {"properties": {"staged_ref": {"const": "staged/1-summary-value.bin"}}}, {"properties": {"staged_ref": {"const": "staged/2-intake-record.bin"}}}]}}}},
         {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_"}, "planned_outcome": {"const": "commit"}, "verification_basis": {"const": "staging"}}, "required": ["transaction_id", "planned_outcome", "verification_basis"]}, "then": {"properties": {"staged_outputs": {"prefixItems": [{"properties": {"staged_ref": {"const": "staged/0-normalized-content.bin"}}}, {"properties": {"staged_ref": {"const": "staged/1-validation-result.bin"}}}, {"properties": {"staged_ref": {"const": "staged/2-candidate-record.bin"}}}]}}}},
         {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "planned_outcome": {"const": "commit"}, "verification_basis": {"const": "staging"}}, "required": ["transaction_id", "planned_outcome", "verification_basis"]}, "then": {"properties": {"staged_outputs": {"prefixItems": [{"properties": {"staged_ref": {"const": "staged/0-canonical-artifact.bin"}}}, {"properties": {"staged_ref": {"const": "staged/1-promotion-record.bin"}}}]}}}},
@@ -327,28 +582,32 @@
     "commitMarker": {
       "type": "object", "additionalProperties": false,
       "required": ["schema_id", "schema_version", "transaction_id", "intent_fingerprint", "verified_fingerprint", "outcome", "refusal", "authoritative_outputs", "subordinate_outputs", "marker_fingerprint"],
-      "properties": {"schema_id": {"const": "handbook.generic-commit-marker"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}, "verified_fingerprint": {"$ref": "#/$defs/sha256"}, "outcome": {"enum": ["committed", "refused"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]}, "authoritative_outputs": {"type": "array", "minItems": 0, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/authoritativeOutput"}}, "subordinate_outputs": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/subordinateOutput"}}, "marker_fingerprint": {"$ref": "#/$defs/sha256"}},
+      "properties": {"schema_id": {"const": "handbook.generic-commit-marker"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}, "verified_fingerprint": {"$ref": "#/$defs/sha256"}, "publication_result_fingerprint": {"$ref": "#/$defs/sha256"}, "outcome": {"enum": ["committed", "refused"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/terminalRefusal"}, {"type": "null"}]}, "authoritative_outputs": {"type": "array", "minItems": 0, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/authoritativeOutput"}}, "subordinate_outputs": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/subordinateOutput"}}, "marker_fingerprint": {"$ref": "#/$defs/sha256"}},
       "allOf": [
-        {"if": {"properties": {"outcome": {"const": "refused"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/establishedRefusal"}, "authoritative_outputs": {"maxItems": 0}, "subordinate_outputs": {"maxItems": 0}}}},
+        {"if": {"properties": {"outcome": {"const": "refused"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/terminalRefusal"}, "authoritative_outputs": {"maxItems": 0}, "subordinate_outputs": {"maxItems": 0}}}},
         {"if": {"properties": {"outcome": {"const": "committed"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"type": "null"}, "authoritative_outputs": {"minItems": 1}}}},
         {"if": {"properties": {"transaction_id": {"pattern": "^intake_record_append_"}, "outcome": {"const": "committed"}}, "required": ["transaction_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 1, "maxItems": 1, "prefixItems": [{"$ref": "#/$defs/intakeAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/intakeValueSubordinateOutput"}, {"$ref": "#/$defs/intakeValueSubordinateOutput"}], "items": false}}}},
         {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_"}, "outcome": {"const": "committed"}}, "required": ["transaction_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 1, "maxItems": 1, "prefixItems": [{"$ref": "#/$defs/candidateAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/contentSubordinateOutput"}, {"$ref": "#/$defs/validationSubordinateOutput"}], "items": false}}}},
-        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "outcome": {"const": "committed"}}, "required": ["transaction_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/canonicalTruthOutput"}, {"$ref": "#/$defs/promotionAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"maxItems": 0}}}}
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "outcome": {"const": "committed"}}, "required": ["transaction_id", "outcome"]}, "then": {"required": ["publication_result_fingerprint"], "properties": {"authoritative_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/canonicalTruthOutput"}, {"$ref": "#/$defs/promotionAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"maxItems": 0}}}},
+        {"if": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "outcome": {"const": "refused"}, "refusal": {"properties": {"code": {"const": "publication_basis_conflict"}}, "required": ["code"]}}, "required": ["transaction_id", "outcome", "refusal"]}, "then": {"required": ["publication_result_fingerprint"]}},
+        {"if": {"not": {"anyOf": [{"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "outcome": {"const": "committed"}}, "required": ["transaction_id", "outcome"]}, {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_"}, "outcome": {"const": "refused"}, "refusal": {"properties": {"code": {"const": "publication_basis_conflict"}}, "required": ["code"]}}, "required": ["transaction_id", "outcome", "refusal"]}]}}, "then": {"not": {"required": ["publication_result_fingerprint"]}}}
       ]
     },
     "internalTransactionEvidence": {
       "type": "object", "additionalProperties": false,
       "required": ["schema_id", "schema_version", "transaction_id", "operation_id", "request_fingerprint", "intent_fingerprint", "verified_fingerprint", "marker_fingerprint", "outcome", "refusal", "authoritative_outputs", "subordinate_outputs", "atomic_group", "evidence_fingerprint"],
-      "properties": {"schema_id": {"const": "handbook.generic-internal-transaction-evidence"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"}, "operation_id": {"$ref": "#/$defs/operationId"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}, "verified_fingerprint": {"$ref": "#/$defs/sha256"}, "marker_fingerprint": {"$ref": "#/$defs/sha256"}, "outcome": {"enum": ["committed", "refused"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/establishedRefusal"}, {"type": "null"}]}, "authoritative_outputs": {"type": "array", "minItems": 0, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/authoritativeOutput"}}, "subordinate_outputs": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/subordinateOutput"}}, "atomic_group": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$(?![\\s\\S])"}, "evidence_fingerprint": {"$ref": "#/$defs/sha256"}},
+      "properties": {"schema_id": {"const": "handbook.generic-internal-transaction-evidence"}, "schema_version": {"const": "1.0"}, "transaction_id": {"$ref": "#/$defs/transactionId"}, "operation_id": {"$ref": "#/$defs/operationId"}, "request_fingerprint": {"$ref": "#/$defs/sha256"}, "intent_fingerprint": {"$ref": "#/$defs/sha256"}, "verified_fingerprint": {"$ref": "#/$defs/sha256"}, "publication_result_fingerprint": {"$ref": "#/$defs/sha256"}, "marker_fingerprint": {"$ref": "#/$defs/sha256"}, "outcome": {"enum": ["committed", "refused"]}, "refusal": {"oneOf": [{"$ref": "#/$defs/terminalRefusal"}, {"type": "null"}]}, "authoritative_outputs": {"type": "array", "minItems": 0, "maxItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/authoritativeOutput"}}, "subordinate_outputs": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/subordinateOutput"}}, "atomic_group": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$(?![\\s\\S])"}, "evidence_fingerprint": {"$ref": "#/$defs/sha256"}},
       "allOf": [
-        {"if": {"properties": {"outcome": {"const": "refused"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/establishedRefusal"}, "authoritative_outputs": {"maxItems": 0}, "subordinate_outputs": {"maxItems": 0}}}},
+        {"if": {"properties": {"outcome": {"const": "refused"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"$ref": "#/$defs/terminalRefusal"}, "authoritative_outputs": {"maxItems": 0}, "subordinate_outputs": {"maxItems": 0}}}},
         {"if": {"properties": {"outcome": {"const": "committed"}}, "required": ["outcome"]}, "then": {"properties": {"refusal": {"type": "null"}, "authoritative_outputs": {"minItems": 1}}}},
         {"if": {"properties": {"operation_id": {"const": "intake.record.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^intake_record_append_[0-9a-f]{64}$(?![\\s\\S])"}, "atomic_group": {"const": "intake_record_append"}}}},
         {"if": {"properties": {"operation_id": {"const": "artifact.candidate.append"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_append_[0-9a-f]{64}$(?![\\s\\S])"}, "atomic_group": {"const": "artifact_candidate_append"}}}},
         {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}}, "required": ["operation_id"]}, "then": {"properties": {"transaction_id": {"pattern": "^artifact_candidate_promote_[0-9a-f]{64}$(?![\\s\\S])"}, "atomic_group": {"const": "artifact_candidate_promote"}}}},
         {"if": {"properties": {"operation_id": {"const": "intake.record.append"}, "outcome": {"const": "committed"}}, "required": ["operation_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 1, "maxItems": 1, "prefixItems": [{"$ref": "#/$defs/intakeAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/intakeValueSubordinateOutput"}, {"$ref": "#/$defs/intakeValueSubordinateOutput"}], "items": false}}}},
         {"if": {"properties": {"operation_id": {"const": "artifact.candidate.append"}, "outcome": {"const": "committed"}}, "required": ["operation_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 1, "maxItems": 1, "prefixItems": [{"$ref": "#/$defs/candidateAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/contentSubordinateOutput"}, {"$ref": "#/$defs/validationSubordinateOutput"}], "items": false}}}},
-        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "outcome": {"const": "committed"}}, "required": ["operation_id", "outcome"]}, "then": {"properties": {"authoritative_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/canonicalTruthOutput"}, {"$ref": "#/$defs/promotionAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"maxItems": 0}}}}
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "outcome": {"const": "committed"}}, "required": ["operation_id", "outcome"]}, "then": {"required": ["publication_result_fingerprint"], "properties": {"authoritative_outputs": {"minItems": 2, "maxItems": 2, "prefixItems": [{"$ref": "#/$defs/canonicalTruthOutput"}, {"$ref": "#/$defs/promotionAuthoritativeOutput"}], "items": false}, "subordinate_outputs": {"maxItems": 0}}}},
+        {"if": {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "outcome": {"const": "refused"}, "refusal": {"properties": {"code": {"const": "publication_basis_conflict"}}, "required": ["code"]}}, "required": ["operation_id", "outcome", "refusal"]}, "then": {"required": ["publication_result_fingerprint"]}},
+        {"if": {"not": {"anyOf": [{"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "outcome": {"const": "committed"}}, "required": ["operation_id", "outcome"]}, {"properties": {"operation_id": {"const": "artifact.candidate.promote"}, "outcome": {"const": "refused"}, "refusal": {"properties": {"code": {"const": "publication_basis_conflict"}}, "required": ["code"]}}, "required": ["operation_id", "outcome", "refusal"]}]}}, "then": {"not": {"required": ["publication_result_fingerprint"]}}}
       ]
     }
   }

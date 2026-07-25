@@ -170,6 +170,34 @@ fn descriptor_public_api_preserves_typed_metadata_without_inventing_a_label_limi
 }
 
 #[test]
+fn non_charter_descriptor_accepts_only_a_typed_generic_intake_reference() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR"));
+    let condition = ProjectConditionDefinition::load(
+        root,
+        "definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml",
+    )
+    .unwrap();
+    let mut values = shipped_root_artifact_instance_values();
+    values[1]["intake_definition_ref"] = serde_json::json!("example.intake.registry-brief@1.0.0");
+
+    let registry = ArtifactInstanceRegistry::resolve(&values, &kinds(), &[&condition]).unwrap();
+    let descriptor = registry
+        .instance(&SymbolicId::parse("project_context").unwrap())
+        .unwrap();
+
+    assert_eq!(
+        descriptor
+            .intake_definition_ref()
+            .map(ExactDefinitionRef::as_str),
+        Some("example.intake.registry-brief@1.0.0")
+    );
+    assert_eq!(descriptor.lifecycle_policy_ref(), None);
+    assert!(descriptor.renderer_definition_refs().is_empty());
+    assert!(descriptor.projection_definition_refs().is_empty());
+    assert!(descriptor.validation_overlay_refs().is_empty());
+}
+
+#[test]
 fn every_explicitly_nullable_descriptor_member_must_be_present() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR"));
     let condition = ProjectConditionDefinition::load(

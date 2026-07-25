@@ -1,0 +1,147 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260725T033702Z--HCM-2-3--atomic-publication-implementation-sixth-superseding-selector",
+  "created_at_utc": "2026-07-25T03:37:02Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "source-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-atomic-publication-remediation-sixth-superseding-selector",
+  "subject_fingerprint": "sha256:c9249769e8421ec71518080d4f7a47a9c8b7598bf890d4ba06274baa78ce22d7",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/artifact_lineage_store.rs", "sha256": "64016b53794f7c8abfd11d5269009f7170bf82fddc44dfa0822aa8c6063e15ac"},
+      {"path": "crates/engine/src/artifact_operations.rs", "sha256": "09f84564bc1646b443614e3815fcf46ad2611dfe5a28422b552ba03e64659470"},
+      {"path": "crates/engine/src/lib.rs", "sha256": "c14a73d723f5c85a67067f160c92a5e92e05db7804b80048be9274c79c2a9fb2"},
+      {"path": "crates/engine/tests/hcm_2_3_generic_lineage.rs", "sha256": "f7ff8306114212581a5ba0880ac2318c17110bec2cee2e60ca8c0a64013db5fb"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260723T154328Z--HCM-2-3--fresh-atomic-publication-documentation-review-10.json", "sha256": "8a593688c1573cc62b4ee21b8fa279edf03b74b2b65a08f2f9eded060f355921"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T020152Z--HCM-2-3--atomic-publication-implementation-fifth-superseding-selector.json", "sha256": "b40e37886fc9c6c4df5849d34e5b5048bb88f089c000811627fc634641f1aafb"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T020441Z--HCM-2-3--fresh-fifth-selector-closure-review.json", "sha256": "025c197146387f78d86e2a109442d13637aa608c3fbcd1b854eb6ef2c0462b2b"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T020442Z--HCM-2-3--fresh-fifth-selector-api-compatibility-review.json", "sha256": "0f866f4bf44047e00256a00be257b10682f5a0e4df27563a71a650c7d3b20156"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T033051Z--HCM-2-3--fresh-review-10-contract-correction-successor.json", "sha256": "9e3e5966ca0ec3ced877d12b2fcec71bdf5c3a11c0c55f9d81ca7dd7ad5cb975"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md", "sha256": "23065130f6787b68a8567f80a1c8be7f9e43e4f32d0c14857a8fdb3a2c7b2f16"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json", "sha256": "3480b8480a0fa3b4cb93c4769fe3f9b91f4378465c9e3c0b13990ab0a48ccc26"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json", "sha256": "67a7cbd247f4dc1db6dce76eff45c3efc21bd1c215bf7217366631b74a6655e5"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md", "sha256": "e0676417e5480439bd6fad0157bb0894b3d976d518fa30b514464e044be6864c"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T032102Z--review-10-contract-correction-successor.md", "sha256": "f9142c2e3cf62907c0a096678800cd3987ea690e88762648c3d74cf97ec9d4b6"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md", "sha256": "84b72d8aef22fda8ecb6bdd0df425ba84a74a3c552b860395f37d8872580c4c8"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md", "sha256": "8225fd2a8b976d258207f6aa6616c65b6970c19fb98034170b52d6ba02e8ad68"}
+    ],
+    "aggregate_fingerprint": "sha256:c9249769e8421ec71518080d4f7a47a9c8b7598bf890d4ba06274baa78ce22d7"
+  },
+  "active_resolution": {
+    "level": "atomic_publication_implementation",
+    "scope_horizon": "the fifth selector's immutable implementation union plus two corrections inside already-selected symbols only",
+    "detail_resolution": "implementation_grade",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "operator-authorized bounded successor to frozen Review 10",
+    "memory_horizon": "immutable Review 10, CLEAN 99-path successor, and all predecessor selectors",
+    "validation_horizon": "fresh selector-closure and API CLEAN reviews, then implementation proof wall and GitNexus change detection"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T020152Z--HCM-2-3--atomic-publication-implementation-fifth-superseding-selector.json",
+      "sections": [
+        "immutable 42-code-plus-two-deletion-plus-one-policy union",
+        "four-item Windows unsafe boundary",
+        "proof-wall obligations"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T033051Z--HCM-2-3--fresh-review-10-contract-correction-successor.json",
+      "sections": [
+        "CLEAN 99-path corrected subject",
+        "two exact contract corrections",
+        "Review 10 preservation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T032102Z--review-10-contract-correction-successor.md",
+      "sections": [
+        "object-ID completion authority",
+        "parent-relative replacement",
+        "executable matrix evidence"
+      ]
+    }
+  ],
+  "repo_truth": "This sixth selector supersedes without modifying the fifth selector or any earlier artifact. The fresh corrected 99-path documentation subject is CLEAN at sha256:a71018c79c777d3b3875c83e437ec5378d872184efef379da3eedd31db8b96e9, its review artifact is sha256:9e3e5966ca0ec3ced877d12b2fcec71bdf5c3a11c0c55f9d81ca7dd7ad5cb975, and frozen Review 10 remains byte-exact at sha256:8a593688c1573cc62b4ee21b8fa279edf03b74b2b65a08f2f9eded060f355921 with historical aggregate sha256:8dac11d067a4fba0efea04a3ae1435ae1fa9c8a82307171676380e9aa8f1413a. The fifth selector's complete union remains authoritative. This successor authorizes no new production symbol: it corrects only query_object_id_absence_nt and publish_replacement, both already selected and already within the four-item Windows unsafe boundary. Persisted setfileinformationbyhandle_filerenameinfo_* values remain compatibility identifiers. Branch codex/hcm-2-3-planning, HEAD 3c49fa2c6d653f4b1a703d1d5c5196147b003533, and zero staged paths were verified before creation. handbook-engine remains 0.1.1.",
+  "allowed_scope": [
+    "Retain the fifth selector's exact immutable 42-code-plus-two-deletion-plus-one-policy union and all predecessor obligations.",
+    "Inside existing query_object_id_absence_nt only, accept immediate raw STATUS_OBJECTID_NOT_FOUND when the IO_STATUS_BLOCK remains exactly STATUS_UNSUCCESSFUL and ULONG_PTR_MAX; require STATUS_PENDING to complete through the IO_STATUS_BLOCK; retain the existing completed STATUS_OBJECTID_NOT_FOUND path; fail closed for every other combination.",
+    "Inside existing publish_replacement only, replace SetFileInformationByHandle(FileRenameInfo) with local NtSetInformationFile(FileRenameInformation), using the retained parent handle and counted replacement leaf name.",
+    "Keep every FFI declaration, ABI type, constant, buffer construction, and unsafe operation introduced by the replacement local to publish_replacement.",
+    "Keep stable persisted setfileinformationbyhandle_filerenameinfo_* values unchanged as compatibility labels.",
+    "Complete the proof wall, a fresh complete-subject review, and GitNexus change detection with zero staged paths."
+  ],
+  "non_goals": [
+    "No additional production symbol, helper, wrapper, dependency, Cargo/build-script/generated-native edit, global/static/thread-local state, public API, fallback publication primitive, fifth unsafe item, or broader completion rule.",
+    "No rename or migration of persisted setfileinformationbyhandle_filerenameinfo_* compatibility identifiers.",
+    "No change to any production symbol beyond the fifth selector union and, for these corrections, beyond query_object_id_absence_nt and publish_replacement.",
+    "No rewrite of Review 10 or any prior proof, review, selector, or dispatch artifact.",
+    "No stage, commit, merge, push, global handoff, ledger update, or handbook-engine version change."
+  ],
+  "tasks": [
+    "Replay this selector, the immutable fifth selector, the CLEAN corrected documentation successor, branch, HEAD, zero staged state, and Review 10 hashes before production writes.",
+    "Obtain fresh read-only closure and API-compatibility reviews of this exact selector. Proceed only if both return CLEAN.",
+    "Refresh GitNexus, run upstream impact analysis for query_object_id_absence_nt and publish_replacement, and warn before edits on HIGH or CRITICAL risk.",
+    "Implement only the two corrections in their existing local unsafe items; stop if another symbol or unsafe item becomes necessary.",
+    "Run focused regressions and the complete HCM-2.3 proof wall, then GitNexus detect-changes and a fresh findings-first complete-subject review."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T032102Z--review-10-contract-correction-successor.md",
+    "crates/engine/src/artifact_lineage_store.rs",
+    "crates/engine/src/lib.rs",
+    "crates/engine/tests/hcm_2_3_generic_lineage.rs"
+  ],
+  "stop_conditions": [
+    "Stop before production edits unless both fresh selector reviews are CLEAN with zero findings.",
+    "Stop and report if correctness requires another production symbol, unsafe item, helper, dependency, Cargo/version edit, global, public API, fallback primitive, or broader completion rule.",
+    "Stop on any branch, HEAD, staged-state, Review 10, successor-review, predecessor-selector, or subject-manifest mismatch.",
+    "Do not waive findings, stage, commit, merge, push, create a global handoff, or update the global ledger."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "impact_analysis",
+      "validation",
+      "remaining_protocol_work",
+      "release_versioning_consequence",
+      "parent_disposition"
+    ]
+  }
+}

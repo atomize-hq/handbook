@@ -1,0 +1,131 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260722T123845Z--HCM-2-3--registration-kernel-implementation",
+  "created_at_utc": "2026-07-22T12:38:45Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "resume_same_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "source-driven-development",
+    "spec-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "api-and-interface-design",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3",
+  "subject_fingerprint": "sha256:de116ba4567332ff9a3e9b5da11320987f04b7b87241f5d9e3b6fb2e19042ba1",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+        "sha256": "1365ebc27caab63e751701800c3bb399c9234d158546932655aa1422b2d1876c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+        "sha256": "43788d012775bd37caf61d79067f7fd2131916b48f15489849394534b9bb40ff"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+        "sha256": "a1dbee53b8476a35b13da1deaabbd5c240b87a13668eda4dc3ebb73a369b9683"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:de116ba4567332ff9a3e9b5da11320987f04b7b87241f5d9e3b6fb2e19042ba1"
+  },
+  "active_resolution": {
+    "level": "engine_registration_and_pure_kernel",
+    "scope_horizon": "HCM-2.3-increments-1-through-7",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "approved_slice_packet",
+    "memory_horizon": "live_repository_truth",
+    "validation_horizon": "focused_registration_kernel_red_green"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+      "sections": [
+        "Repository selection record",
+        "Generic operation context",
+        "Generic artifact intake",
+        "Canonical YAML",
+        "Stable engine operation IDs"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/repository-profile-selection-vectors-v1.0.json",
+      "sections": ["all"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-vectors-v1.0.json",
+      "sections": ["all"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+      "sections": ["operation context and coverage subsets"]
+    }
+  ],
+  "repo_truth": "HCM-1.3 supplies the generic schema/kind/instance registries and structural validator; HCM-2.2 supplies Charter-only authority. No HCM-2.3 package default or production module exists. The selected review-clean packet authorizes only one repository-defined registry-brief kind through a separate generic path.",
+  "allowed_scope": [
+    "Add crates/engine/src/artifact_intake_registry.rs, artifact_operation_context.rs, artifact_operations.rs, artifact_intake.rs, and canonical_yaml.rs.",
+    "Add focused HCM-2.3 engine tests and the repository fixture tree under crates/engine/tests/fixtures/hcm_2_3_generic_custom_kind/.",
+    "Use RED tests first, reuse existing identity/safe-reader/schema/kind validation, and leave integration edits to lib.rs, artifact_instance.rs, profile_selection.rs, and CLI to the parent."
+  ],
+  "non_goals": [
+    "Do not edit any existing production source, Cargo file, package definition, shipped profile, HCM-2.2 source, CLI file, control pack, proof ledger, handoff, or other dispatch.",
+    "Do not implement persistence, Phase 4 SDK/transport DTOs, generic Projection, ambient discovery, executable hooks, remote sources, or per-kind dispatch.",
+    "Do not commit or create handoffs, ledger rows, or user-visible task hops."
+  ],
+  "tasks": [
+    "Read the complete dispatch, HCM-2.3 packet, runtime contract, three schemas/vectors, and live HCM-1.3 registry APIs.",
+    "Add focused RED tests for the fixed selection record, typed source admission, intake registry, operation context, generic read/validate/intake behavior, and deterministic canonical YAML.",
+    "Implement the smallest closed typed registry/context/pure-kernel modules that make those tests GREEN without changing existing owner algorithms or accepting unresolved definitions.",
+    "Return exact changed files, RED/GREEN evidence, API integration steps for the parent, and any bounded gaps."
+  ],
+  "contracts_and_gates": [
+    "The fixed selection record is the only source-selection effect; every class is explicit and arrays normalize by exact ref plus source identity.",
+    "The existing resolved-profile fingerprint is unchanged; additive operation context binds the selected profile, kind, instance, schema, intake, and ordered resolved definitions.",
+    "Generic validation consumes the existing ResolvedArtifactRegistry validator and branches only on stable operation ID, never the example kind or filename.",
+    "Pure evaluation performs no I/O and never supplies defaults, inference, waivers, approval, or Charter semantics."
+  ],
+  "stop_conditions": [
+    "Stop before editing any existing function, class, method, module declaration, Cargo file, package definition, shipped profile, or HCM-2.2 path.",
+    "Return blocked if the packet requires a new dependency, ambient discovery, arbitrary schema bytes, per-kind code, or a change to an existing fingerprint algorithm.",
+    "Return bounded gaps rather than widening into persistence, CLI, HCM-2.4, Phase 3+, or Phase 4."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "impact_analysis",
+      "validation",
+      "remaining_protocol_work",
+      "product_integration",
+      "parent_disposition"
+    ]
+  }
+}

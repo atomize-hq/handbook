@@ -1,0 +1,160 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260724T195447Z--HCM-2-3--fresh-public-enum-api-compatibility-review",
+  "created_at_utc": "2026-07-24T19:54:47Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "api-and-interface-design",
+    "code-review-and-quality",
+    "source-driven-development",
+    "security-and-hardening",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-fresh-public-enum-api-compatibility-review",
+  "subject_fingerprint": "sha256:537a72caabb16f5889eb1c02106835bac319d9ab73f45fc4e8daeca8c6c75055",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "Cargo.lock",
+        "sha256": "7168413347933003fc9872011987085ad0ca44eaea5e7ec464c62bbff2ca13d4"
+      },
+      {
+        "path": "Cargo.toml",
+        "sha256": "5e649b23d70726b023ea4a16ba7b608a735b8d023fa240ef1ec7fcfaf41a34dd"
+      },
+      {
+        "path": "crates/engine/Cargo.toml",
+        "sha256": "a2b222acdd12c547d54337d641280d259788ff8fc1536b3c241b2fef47663893"
+      },
+      {
+        "path": "crates/engine/src/artifact_lineage_store.rs",
+        "sha256": "b39c3d73c6a59ee698183e9e263480df369dc99e7f762b3af1a614a7aefcf541"
+      },
+      {
+        "path": "crates/engine/src/artifact_operations.rs",
+        "sha256": "09f84564bc1646b443614e3815fcf46ad2611dfe5a28422b552ba03e64659470"
+      },
+      {
+        "path": "crates/engine/src/lib.rs",
+        "sha256": "ce7063bb2ae88936a675ff7511635cbb76f595010bb9ecbc670d15e3b7d367e9"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_3_generic_lineage.rs",
+        "sha256": "18c4d70baec0451ae2429718abe626db2ec1cc61a35bcd2186d25786e8f9faaa"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T194923Z--HCM-2-3--atomic-publication-implementation-second-superseding-selector.json",
+        "sha256": "1bbbc662d3480a724fdfbc97df14792a4bed3a2bb4e5a4e33ee4f6e8635096d0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+        "sha256": "ab76b68e46b5d5bf4a3ace006562564e55574dd42f88d2f6df660996016000bd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+        "sha256": "c3822e1bb5a17877a05feccbea93f4413010eb0cee3b0e246d2955b50b644b07"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+        "sha256": "1000c55e608fec884ad7eaef03255d9d4bb2a906f0bec385de8d171170c8ee25"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:537a72caabb16f5889eb1c02106835bac319d9ab73f45fc4e8daeca8c6c75055"
+  },
+  "active_resolution": {
+    "level": "public_api_compatibility_review",
+    "scope_horizon": "two exact public Rust enum variants and their terminal-refusal use",
+    "detail_resolution": "source, serialization, downstream-match, and release-versioning compatibility",
+    "temporal_horizon": "current orchestration",
+    "authority_horizon": "read-only API verdict; accepted exhaustive-match risk but no other public API authority",
+    "memory_horizon": "fresh isolated review of pinned code, contract, selector, and package metadata",
+    "validation_horizon": "CLEAN plus the parallel selector-closure CLEAN verdict is the production/test edit admission gate"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T194923Z--HCM-2-3--atomic-publication-implementation-second-superseding-selector.json",
+      "sections": [
+        "EstablishedRefusalCodeV1 and GenericRefusalLayerV1 exact variant authority",
+        "unchanged EstablishedRefusalV1/public API boundary",
+        "accepted exhaustive-match and deferred release-versioning consequence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+      "sections": [
+        "publicationConflictRefusal and terminalRefusal schema"
+      ]
+    }
+  ],
+  "repo_truth": "The operator expressly accepts the Rust exhaustive-match source-compatibility risk of adding exactly PublicationBasisConflict and Publication because the frozen HCM-2.3 contract, schema, and vectors already require publication_basis_conflict/publication. No EstablishedRefusalV1 field, other public API, package version, Cargo manifest, dependency, wrapper, or stage order may change. GitNexus reports exact LOW 0/0 indexed upstream impact for each enum, but the review must independently inspect workspace and public re-export/match/serde behavior rather than treating zero graph edges as semantic compatibility proof. The release/version consequence must be recorded for later consolidation/merge; this remediation must not bump versions.",
+  "allowed_scope": [
+    "Remain strictly read-only and validate the exact 11-entry subject and selector hash.",
+    "Verify existing serde rename_all snake_case produces exactly publication_basis_conflict and publication with no aliases or representation change.",
+    "Inspect every workspace construction, match, deserialize/serialize, re-export, CLI/result projection, and test use of EstablishedRefusalCodeV1, GenericRefusalLayerV1, EstablishedRefusalV1, and GenericDomainMutationResultV1.",
+    "Verify adding only the two enum variants while leaving EstablishedRefusalV1 and all other public fields/types unchanged can represent and replay the schema's terminal publication conflict.",
+    "Verify pre-publication intents remain limited to establishedRefusal while terminal results/markers/evidence may use publicationConflictRefusal through selected validators.",
+    "Classify the accepted exhaustive-match consequence and recommend its later merge/release treatment without editing any package version now.",
+    "Return CLEAN only if no additional public/private production symbol, public API, wrapper, dependency, package version, or contract change is required."
+  ],
+  "non_goals": [
+    "No edits, staging, commit, push, selector/handoff/ledger write, implementation, test change, version bump, deprecation shim, non_exhaustive annotation, alias, new terminal-refusal type, or user task hop.",
+    "Do not waive findings merely because the operator accepted the two exact enum-variant risk."
+  ],
+  "tasks": [
+    "Invoke required skills and verify the immutable subject; return BLOCKED on any mismatch.",
+    "Audit source compatibility, serde wire compatibility, schema alignment, replay behavior, stage-specific validation, and public exposure.",
+    "Determine the smallest correct later release-versioning treatment and whether the bounded implementation can proceed without another API change.",
+    "Return findings first with identity/status/verdict, exact evidence, compatibility assessment, validation, release-versioning consequence, and parent disposition. Do not repair."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T194923Z--HCM-2-3--atomic-publication-implementation-second-superseding-selector.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+    "crates/engine/src/artifact_lineage_store.rs",
+    "crates/engine/src/artifact_operations.rs",
+    "crates/engine/src/lib.rs",
+    "Cargo.toml",
+    "crates/engine/Cargo.toml"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED on any immutable gate mismatch.",
+    "Return CHANGES_REQUIRED if any public API beyond the two variants, any unselected production symbol, any wrapper/dependency/package-version edit, or any contract/schema/vector change is required.",
+    "Return CHANGES_REQUIRED if terminal-only refusal cannot be enforced within selected validators while preserving existing established refusal behavior.",
+    "Do not waive, repair, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "compatibility_assessment",
+      "validation",
+      "release_versioning_consequence",
+      "parent_disposition"
+    ]
+  }
+}

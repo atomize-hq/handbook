@@ -1,0 +1,151 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260724T225058Z--HCM-2-3--fresh-third-selector-api-compatibility-review",
+  "created_at_utc": "2026-07-24T22:50:58Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "api-and-interface-design",
+    "code-review-and-quality",
+    "source-driven-development"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-fresh-third-selector-api-compatibility-review",
+  "subject_fingerprint": "sha256:351bbf0a605cad4a3091b3385223ea57c404970894cafa267a2486d907c6ec54",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "Cargo.lock",
+        "sha256": "7168413347933003fc9872011987085ad0ca44eaea5e7ec464c62bbff2ca13d4"
+      },
+      {
+        "path": "Cargo.toml",
+        "sha256": "5e649b23d70726b023ea4a16ba7b608a735b8d023fa240ef1ec7fcfaf41a34dd"
+      },
+      {
+        "path": "crates/engine/Cargo.toml",
+        "sha256": "a2b222acdd12c547d54337d641280d259788ff8fc1536b3c241b2fef47663893"
+      },
+      {
+        "path": "crates/engine/src/artifact_lineage_store.rs",
+        "sha256": "b39c3d73c6a59ee698183e9e263480df369dc99e7f762b3af1a614a7aefcf541"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_3_generic_lineage.rs",
+        "sha256": "18c4d70baec0451ae2429718abe626db2ec1cc61a35bcd2186d25786e8f9faaa"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T195447Z--HCM-2-3--fresh-public-enum-api-compatibility-review.json",
+        "sha256": "a9f4a0f83f4322d3c64206712d2c032bc8ba578dda96a30b5e74dbb47e333629"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T224629Z--HCM-2-3--atomic-publication-implementation-third-superseding-selector.json",
+        "sha256": "46e79658185649e9217565556752ae29eee563ccdb05ecde2c8a55b53a502a7d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+        "sha256": "ab76b68e46b5d5bf4a3ace006562564e55574dd42f88d2f6df660996016000bd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+        "sha256": "c3822e1bb5a17877a05feccbea93f4413010eb0cee3b0e246d2955b50b644b07"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+        "sha256": "1000c55e608fec884ad7eaef03255d9d4bb2a906f0bec385de8d171170c8ee25"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:351bbf0a605cad4a3091b3385223ea57c404970894cafa267a2486d907c6ec54"
+  },
+  "active_resolution": {
+    "level": "api_compatibility_review",
+    "scope_horizon": "complete third-selector public API delta before implementation",
+    "detail_resolution": "serialized and Rust source compatibility",
+    "temporal_horizon": "current orchestration",
+    "authority_horizon": "read-only compatibility verdict; no implementation authority",
+    "memory_horizon": "fresh isolated review of pinned selector, prior compatibility review, code, manifests, schema, and vectors",
+    "validation_horizon": "CLEAN plus the parallel selector-closure CLEAN verdict is the production/test edit admission gate"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T224629Z--HCM-2-3--atomic-publication-implementation-third-superseding-selector.json",
+      "sections": [
+        "two exact public enum variants",
+        "unchanged EstablishedRefusalV1 fields and other public APIs",
+        "private committed-reachability amendment",
+        "deferred handbook-engine 0.2.0 recommendation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T195447Z--HCM-2-3--fresh-public-enum-api-compatibility-review.json",
+      "sections": [
+        "prior CLEAN enum compatibility verdict and release consequence"
+      ]
+    }
+  ],
+  "repo_truth": "Fresh read-only API-compatibility review of the third selector. The only authorized public API additions remain EstablishedRefusalCodeV1::PublicationBasisConflict serialized as publication_basis_conflict and GenericRefusalLayerV1::Publication serialized as publication; the operator accepts Rust exhaustive-match risk. GenericArtifactLineageStoreV1::validate_committed_reachability is private and its amendment must not widen the public API. EstablishedRefusalV1 fields, every other public type/signature, dependencies, Cargo manifests, and package versions are frozen. handbook-engine 0.2.0 is recorded only as the recommended later consolidation boundary. No production or test byte has changed since the prior CLEAN compatibility review.",
+  "allowed_scope": [
+    "Remain strictly read-only and validate all subject hashes, the exact third selector, code, manifests, schema, vectors, and prior API review.",
+    "Reconfirm the exact serde spellings, all exhaustive production matches, downstream source/deserialization compatibility consequences, and whether validate_committed_reachability remains private.",
+    "Identify any unavoidable public field, variant, signature, wrapper, dependency, manifest, package-version, or migration change beyond the two authorized variants.",
+    "Return CLEAN only if the implementation can remain within the selector and the release consequence is fully represented by the deferred handbook-engine 0.2.0 consolidation recommendation."
+  ],
+  "non_goals": [
+    "No edits, staging, commit, push, selector/handoff creation, ledger write, implementation, tests, package-version change, or user task hop.",
+    "No waiver or inference of authority for another public API, wrapper, dependency, limit, or stage-order change."
+  ],
+  "tasks": [
+    "Invoke required skills and validate the immutable subject; return BLOCKED on any mismatch.",
+    "Falsify the public/private boundary, serde behavior, exhaustive matches, old-reader behavior, and semantic-version consequence.",
+    "Return findings first with identity/status/verdict, exact evidence, compatibility assessment, recommended consolidation version, validation, and parent disposition. Do not repair."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T224629Z--HCM-2-3--atomic-publication-implementation-third-superseding-selector.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+    "crates/engine/src/artifact_lineage_store.rs",
+    "crates/engine/Cargo.toml",
+    "Cargo.toml",
+    "Cargo.lock"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED on any immutable gate mismatch.",
+    "Return CHANGES_REQUIRED if implementation requires any additional public API, field, variant, wrapper, dependency, manifest, package-version, limit, or stage-order change.",
+    "Return CHANGES_REQUIRED if the two exact serialized values or deferred 0.2.0 consequence are not sufficient.",
+    "Do not waive, repair, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "compatibility_assessment",
+      "release_versioning_consequence",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

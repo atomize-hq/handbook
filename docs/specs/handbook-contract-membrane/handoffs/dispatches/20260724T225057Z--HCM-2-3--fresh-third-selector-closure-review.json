@@ -1,0 +1,166 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260724T225057Z--HCM-2-3--fresh-third-selector-closure-review",
+  "created_at_utc": "2026-07-24T22:50:57Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "source-driven-development",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-fresh-third-selector-closure-review",
+  "subject_fingerprint": "sha256:a09be42801826c228ce7513848c6c84a73cd307f9ad986582a1dd21b23f56b57",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/src/artifact_lineage_store.rs",
+        "sha256": "b39c3d73c6a59ee698183e9e263480df369dc99e7f762b3af1a614a7aefcf541"
+      },
+      {
+        "path": "crates/engine/src/artifact_operations.rs",
+        "sha256": "09f84564bc1646b443614e3815fcf46ad2611dfe5a28422b552ba03e64659470"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_3_generic_lineage.rs",
+        "sha256": "18c4d70baec0451ae2429718abe626db2ec1cc61a35bcd2186d25786e8f9faaa"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260723T154328Z--HCM-2-3--fresh-atomic-publication-documentation-review-10.json",
+        "sha256": "8a593688c1573cc62b4ee21b8fa279edf03b74b2b65a08f2f9eded060f355921"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T195446Z--HCM-2-3--fresh-second-selector-closure-review.json",
+        "sha256": "eee998cafb7007159224822ef6a511a53a676e7e08dac70d9e0ef9744f45f49b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T195447Z--HCM-2-3--fresh-public-enum-api-compatibility-review.json",
+        "sha256": "a9f4a0f83f4322d3c64206712d2c032bc8ba578dda96a30b5e74dbb47e333629"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T224629Z--HCM-2-3--atomic-publication-implementation-third-superseding-selector.json",
+        "sha256": "46e79658185649e9217565556752ae29eee563ccdb05ecde2c8a55b53a502a7d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+        "sha256": "ab76b68e46b5d5bf4a3ace006562564e55574dd42f88d2f6df660996016000bd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+        "sha256": "c3822e1bb5a17877a05feccbea93f4413010eb0cee3b0e246d2955b50b644b07"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+        "sha256": "1000c55e608fec884ad7eaef03255d9d4bb2a906f0bec385de8d171170c8ee25"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T041308Z--atomic-canonical-publication-authority-repair.md",
+        "sha256": "d8d183f0f121123326eeefa38e51821c7e14b8d3e5fea66d37a7a422fee3015f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+        "sha256": "9ebb0e0d60ce77c2c741fac0c44c1026ef1f8685b68ec4c8b55084b8bc61a9b5"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:a09be42801826c228ce7513848c6c84a73cd307f9ad986582a1dd21b23f56b57"
+  },
+  "active_resolution": {
+    "level": "implementation_selector_closure_review",
+    "scope_horizon": "corrected complete 42-item HCM-2.3 selector before any production or test edit",
+    "detail_resolution": "symbol-and-call-path closure",
+    "temporal_horizon": "current orchestration",
+    "authority_horizon": "read-only closure verdict; no implementation authority",
+    "memory_horizon": "fresh isolated review of pinned selector, code, contract, proof, and prior reviews",
+    "validation_horizon": "CLEAN plus the parallel API-compatibility CLEAN verdict is the production/test edit admission gate"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T224629Z--HCM-2-3--atomic-publication-implementation-third-superseding-selector.json",
+      "sections": [
+        "exact 42-surface union",
+        "narrow committed-reachability exception",
+        "corrected five-field intent and native-publication observation boundaries"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T195446Z--HCM-2-3--fresh-second-selector-closure-review.json",
+      "sections": [
+        "authoritative prior CHANGES_REQUIRED committed-reachability finding"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+      "sections": [
+        "transaction grammar",
+        "atomic canonical publication",
+        "terminal conflict",
+        "recovery and committed reader state tables"
+      ]
+    }
+  ],
+  "repo_truth": "Fresh read-only closure review of the exact third superseding 42-surface selector before any Rust or test edit. The prior closure identified only GenericArtifactLineageStoreV1::validate_committed_reachability as additionally required; the operator authorized its exact CRITICAL impact of 15 production and 27 with tests. The added contract is narrow: only an exact commit-planned promotion with a validated terminal publication_basis_conflict/native-result-bound outputless refused suffix may omit create-new outputs; successful publication and every other refusal/path remain strict. The deduplicated union is exactly 42 unique surfaces, comprising 40 existing production symbols and two named private helpers. Branch codex/hcm-2-3-planning, HEAD 3c49fa2c6d653f4b1a703d1d5c5196147b003533, zero staged paths, all 82 Review 10 hashes, all predecessor hashes, the third selector manifest, and GitNexus freshness were verified. No production or test byte has changed since Review 10.",
+  "allowed_scope": [
+    "Remain strictly read-only and replay every subject hash/aggregate, branch, HEAD, zero staged paths, nested Review 10 manifest, predecessor hashes, and third-selector hash.",
+    "Reconcile the selector as exactly 42 unique surfaces and reject any hidden helper, wrapper, type, dependency, limit, stage-order, or public API requirement.",
+    "Trace fresh execution, five-field basis capture, structured native observation/result construction, authorized publication, stable outputless conflict, markerless ambiguity, crash recovery, committed verification/replay, and authorized canonical reads end to end.",
+    "Falsify whether validate_committed_reachability can recognize only the exact result-authenticated outputless conflict using already selected validators/builders and without weakening any other create-new output requirement.",
+    "Return CLEAN only if all required production edit owners are in the exact selector and no further production symbol/type/helper/wrapper/dependency/public API/limit/stage-order change is required."
+  ],
+  "non_goals": [
+    "No edits, staging, commit, push, selector/handoff creation, ledger write, implementation, tests, preservation/archive access, or user task hop.",
+    "No waiver, inferred authorization, dependency, cleanup widening, package version change, public API expansion beyond the two exact enum variants, or stage-order change."
+  ],
+  "tasks": [
+    "Invoke required skills and validate the immutable subject; return BLOCKED on any mismatch.",
+    "Construct and falsify the complete symbol-level implementation map, with special attention to committed/recovery reachability and terminal-only conflict authentication.",
+    "Use read-only GitNexus context/query/impact and direct source inspection to identify every unavoidable edit owner.",
+    "Return findings first with identity/status/verdict, exact evidence, 42-item reconciliation, validation, and parent disposition. Do not repair."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T224629Z--HCM-2-3--atomic-publication-implementation-third-superseding-selector.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+    "crates/engine/src/artifact_lineage_store.rs",
+    "crates/engine/tests/hcm_2_3_generic_lineage.rs"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED on any immutable gate mismatch.",
+    "Return CHANGES_REQUIRED if any production symbol/type/helper/wrapper/dependency/public API/limit/stage-order change outside the exact selector is required.",
+    "Return CHANGES_REQUIRED on any incomplete fresh/recovery/reader path, generalized reachability relaxation, or contract/schema/vector disagreement.",
+    "Do not waive, repair, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "selector_reconciliation",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

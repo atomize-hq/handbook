@@ -217,7 +217,7 @@ pub(crate) fn read_trusted_repo_source(
         })?;
     let remaining = budget.remaining_bytes();
     let maximum = remaining.min(MAX_SOURCE_DOCUMENT_BYTES);
-    let (bytes, exceeded) = trusted.read_bytes_bounded(maximum).map_err(|_| {
+    let (bytes, exceeded) = trusted.read_bytes_bounded_stable(maximum).map_err(|_| {
         RegistryLoadError::at(
             RegistryLoadErrorKind::SourceReadFailure,
             &normalized_path,
@@ -385,5 +385,19 @@ mod tests {
             }
             Err(error) => panic!("FIFO result channel failed: {error}"),
         }
+    }
+
+    #[test]
+    fn trusted_sources_reject_hard_link_aliases_on_supported_platforms() {
+        let repo = tempfile::tempdir().unwrap();
+        let target = repo.path().join("target.yaml");
+        let alias = repo.path().join("alias.yaml");
+        std::fs::write(&target, b"value: stable\n").unwrap();
+        std::fs::hard_link(&target, &alias).unwrap();
+
+        let error =
+            read_trusted_repo_source(repo.path(), "alias.yaml", &mut SourceByteBudget::default())
+                .expect_err("hard-linked source must fail closed");
+        assert_eq!(error.kind(), RegistryLoadErrorKind::SourceReadFailure);
     }
 }

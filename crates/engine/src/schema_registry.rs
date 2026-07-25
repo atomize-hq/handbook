@@ -33,9 +33,9 @@ pub struct StructuralValidationError {
     schema_location: String,
 }
 
-#[allow(dead_code)] // Consumed by the Task 7 capability-binding increment.
+#[doc(hidden)]
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub(crate) enum ResolvedBindingJsonType {
+pub enum ResolvedBindingJsonType {
     Object,
     Array,
     String,
@@ -170,6 +170,128 @@ impl ResolvedSchema {
         } else {
             Err(errors)
         }
+    }
+
+    pub(crate) fn coverage_leaf_shapes(
+        &self,
+    ) -> Result<BTreeMap<String, ResolvedBindingJsonType>, RegistryLoadError> {
+        let mut leaves = BTreeMap::new();
+        let mut active = BTreeSet::new();
+        self.collect_coverage_leaf_shapes(
+            &self.entry.document_ref,
+            "",
+            "",
+            &mut active,
+            &mut leaves,
+        )?;
+        if leaves.is_empty() {
+            return Err(indeterminate_binding_shape(
+                "candidate schema has no finitely enumerable coverage leaves",
+            ));
+        }
+        Ok(leaves)
+    }
+
+    fn collect_coverage_leaf_shapes(
+        &self,
+        document_path: &str,
+        schema_pointer: &str,
+        instance_pointer: &str,
+        active: &mut BTreeSet<SchemaLocation>,
+        leaves: &mut BTreeMap<String, ResolvedBindingJsonType>,
+    ) -> Result<(), RegistryLoadError> {
+        let mut references = BindingReferenceTraversal::default();
+        let (document_path, schema_pointer) =
+            self.resolve_schema_reference(document_path, schema_pointer, &mut references)?;
+        let location = SchemaLocation {
+            document_path: document_path.clone(),
+            pointer: schema_pointer.clone(),
+        };
+        if !active.insert(location.clone()) {
+            return Err(indeterminate_binding_shape(
+                "candidate schema coverage contains a reference cycle",
+            ));
+        }
+        let result = (|| {
+            let document = self.documents.get(&document_path).ok_or_else(|| {
+                indeterminate_binding_shape("candidate schema document is absent")
+            })?;
+            let node = document
+                .value
+                .pointer(&schema_pointer)
+                .ok_or_else(|| indeterminate_binding_shape("candidate schema pointer is absent"))?;
+            require_unambiguous_schema_node(node)?;
+            match node.get("type").and_then(Value::as_str) {
+                Some("object") => {
+                    if node.get("additionalProperties").and_then(Value::as_bool) != Some(false)
+                        || node
+                            .get("patternProperties")
+                            .and_then(Value::as_object)
+                            .is_some_and(|patterns| !patterns.is_empty())
+                    {
+                        return Err(indeterminate_binding_shape(
+                            "candidate coverage requires closed object schemas",
+                        ));
+                    }
+                    let properties = node
+                        .get("properties")
+                        .and_then(Value::as_object)
+                        .ok_or_else(|| {
+                            indeterminate_binding_shape(
+                                "candidate coverage object must declare properties",
+                            )
+                        })?;
+                    if properties.is_empty() {
+                        if instance_pointer.is_empty() {
+                            return Err(indeterminate_binding_shape(
+                                "candidate root cannot be an empty object terminal",
+                            ));
+                        }
+                        leaves.insert(instance_pointer.to_owned(), ResolvedBindingJsonType::Object);
+                        return Ok(());
+                    }
+                    for property in properties.keys() {
+                        let child_schema_pointer = format!(
+                            "{schema_pointer}/properties/{}",
+                            escape_json_pointer_token(property)
+                        );
+                        let child_instance_pointer =
+                            format!("{instance_pointer}/{}", escape_json_pointer_token(property));
+                        self.collect_coverage_leaf_shapes(
+                            &document_path,
+                            &child_schema_pointer,
+                            &child_instance_pointer,
+                            active,
+                            leaves,
+                        )?;
+                    }
+                    Ok(())
+                }
+                Some("array") => {
+                    if instance_pointer.is_empty() {
+                        return Err(indeterminate_binding_shape(
+                            "candidate root must be an object",
+                        ));
+                    }
+                    leaves.insert(instance_pointer.to_owned(), ResolvedBindingJsonType::Array);
+                    Ok(())
+                }
+                Some("string") => {
+                    if instance_pointer.is_empty() {
+                        return Err(indeterminate_binding_shape(
+                            "candidate root must be an object",
+                        ));
+                    }
+                    leaves.insert(instance_pointer.to_owned(), ResolvedBindingJsonType::String);
+                    Ok(())
+                }
+                _ => Err(indeterminate_binding_shape(
+                    "candidate coverage leaf has an unsupported or indeterminate JSON type",
+                )),
+            }
+        })();
+        active.remove(&location);
+        result
     }
 
     #[allow(dead_code)] // Consumed by the Task 7 capability-binding increment.
@@ -2040,6 +2162,8 @@ struct ClosureLoader<'a> {
     documents: BTreeMap<String, LoadedSchemaDocument>,
 }
 
+const BUILTIN_SCHEMA_ROOT: &str = "definitions/schemas";
+
 impl<'a> ClosureLoader<'a> {
     fn new(
         repo_root: &'a Path,
@@ -2275,11 +2399,16 @@ impl<'a> ClosureLoader<'a> {
     }
 
     fn require_allowed_root(&self, normalized_path: &str) -> Result<(), RegistryLoadError> {
-        if self
-            .allowed_roots
-            .iter()
-            .any(|root| normalized_path == root || normalized_path.starts_with(&format!("{root}/")))
-        {
+        let allowed = match self.source_kind {
+            SchemaSourceKind::BuiltIn => {
+                path_is_within_schema_root(normalized_path, BUILTIN_SCHEMA_ROOT)
+            }
+            SchemaSourceKind::Repository => self
+                .allowed_roots
+                .iter()
+                .any(|root| path_is_within_schema_root(normalized_path, root)),
+        };
+        if allowed {
             return Ok(());
         }
         Err(RegistryLoadError::at(
@@ -2288,6 +2417,13 @@ impl<'a> ClosureLoader<'a> {
             "schema document is outside every explicitly allowed schema root",
         ))
     }
+}
+
+fn path_is_within_schema_root(path: &str, root: &str) -> bool {
+    path == root
+        || path
+            .strip_prefix(root)
+            .is_some_and(|suffix| suffix.starts_with('/'))
 }
 
 #[derive(Clone, Debug)]
@@ -4568,6 +4704,209 @@ mod shared_profile_budget_tests {
             .kind(),
             RegistryLoadErrorKind::AggregateLimitExceeded
         );
+    }
+}
+
+#[cfg(test)]
+mod schema_source_domain_tests {
+    use super::{ClosureLoader, RequestSchemaState, SchemaSourceKind, DRAFT_2020_12};
+    use crate::{RegistryLoadError, RegistryLoadErrorKind, SourceByteBudget};
+    use std::path::Path;
+
+    const BUILTIN_DOCUMENT: &str =
+        "definitions/schemas/handbook.schemas.artifacts.decision-record/1.0.0.schema.json";
+    const REPOSITORY_ROOT: &str = ".handbook/definitions/schemas";
+
+    fn schema_bytes() -> &'static [u8] {
+        br#"{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object"}"#
+    }
+
+    fn write_schema(repo: &Path, path: &str) {
+        let absolute = repo.join(path);
+        std::fs::create_dir_all(absolute.parent().expect("schema parent")).unwrap();
+        std::fs::write(absolute, schema_bytes()).unwrap();
+    }
+
+    fn load_one(
+        repo: &Path,
+        source_kind: SchemaSourceKind,
+        allowed_roots: &[String],
+        path: &str,
+    ) -> Result<(), RegistryLoadError> {
+        let mut budget = SourceByteBudget::default();
+        let mut state = RequestSchemaState::default();
+        ClosureLoader::new(repo, allowed_roots, &mut budget, &mut state, source_kind)
+            .load_document(path)
+    }
+
+    #[test]
+    fn built_in_containment_uses_only_the_fixed_package_schema_root() {
+        let repo = tempfile::tempdir().unwrap();
+        let request_roots = [REPOSITORY_ROOT.to_string()];
+        let shadow = format!("{REPOSITORY_ROOT}/shadow.schema.json");
+        write_schema(repo.path(), &shadow);
+
+        load_one(
+            repo.path(),
+            SchemaSourceKind::BuiltIn,
+            &request_roots,
+            BUILTIN_DOCUMENT,
+        )
+        .expect("allowlisted built-in descendant");
+
+        let root = load_one(
+            repo.path(),
+            SchemaSourceKind::BuiltIn,
+            &request_roots,
+            "definitions/schemas",
+        )
+        .expect_err("the built-in root is contained but is not an allowlisted document");
+        assert_eq!(root.kind(), RegistryLoadErrorKind::LocalReferenceMissing);
+
+        for path in [
+            REPOSITORY_ROOT,
+            shadow.as_str(),
+            "definitions/schemas-collision/shadow.schema.json",
+            "other/schemas/shadow.schema.json",
+        ] {
+            let error = load_one(repo.path(), SchemaSourceKind::BuiltIn, &request_roots, path)
+                .expect_err(path);
+            assert_eq!(
+                error.kind(),
+                RegistryLoadErrorKind::LocalReferenceOutsideRoot,
+                "{path}"
+            );
+        }
+
+        let error = load_one(
+            repo.path(),
+            SchemaSourceKind::BuiltIn,
+            &request_roots,
+            "definitions/schemas/not-allowlisted.schema.json",
+        )
+        .expect_err("absent built-in allowlist key");
+        assert_eq!(error.kind(), RegistryLoadErrorKind::LocalReferenceMissing);
+    }
+
+    #[test]
+    fn repository_containment_uses_only_request_authorized_roots() {
+        let request_roots = [REPOSITORY_ROOT.to_string()];
+
+        let root_repo = tempfile::tempdir().unwrap();
+        write_schema(root_repo.path(), REPOSITORY_ROOT);
+        load_one(
+            root_repo.path(),
+            SchemaSourceKind::Repository,
+            &request_roots,
+            REPOSITORY_ROOT,
+        )
+        .expect("repository root document");
+
+        let repo = tempfile::tempdir().unwrap();
+        let descendant = format!("{REPOSITORY_ROOT}/nested/value.schema.json");
+        write_schema(repo.path(), &descendant);
+        write_schema(repo.path(), BUILTIN_DOCUMENT);
+        load_one(
+            repo.path(),
+            SchemaSourceKind::Repository,
+            &request_roots,
+            &descendant,
+        )
+        .expect("repository descendant document");
+
+        for path in [
+            BUILTIN_DOCUMENT,
+            ".handbook/definitions/schemas-collision/value.schema.json",
+            "outside/value.schema.json",
+        ] {
+            let error = load_one(
+                repo.path(),
+                SchemaSourceKind::Repository,
+                &request_roots,
+                path,
+            )
+            .expect_err(path);
+            assert_eq!(
+                error.kind(),
+                RegistryLoadErrorKind::LocalReferenceOutsideRoot,
+                "{path}"
+            );
+        }
+    }
+
+    #[test]
+    fn containment_precedes_cache_reuse_and_repository_filesystem_access() {
+        let repo = tempfile::tempdir().unwrap();
+        write_schema(repo.path(), BUILTIN_DOCUMENT);
+        let broad_roots = ["definitions/schemas".to_string()];
+        let narrow_roots = [REPOSITORY_ROOT.to_string()];
+        let mut budget = SourceByteBudget::default();
+        let mut state = RequestSchemaState::default();
+
+        ClosureLoader::new(
+            repo.path(),
+            &broad_roots,
+            &mut budget,
+            &mut state,
+            SchemaSourceKind::Repository,
+        )
+        .load_document(BUILTIN_DOCUMENT)
+        .expect("prime repository cache");
+
+        let error = ClosureLoader::new(
+            repo.path(),
+            &narrow_roots,
+            &mut budget,
+            &mut state,
+            SchemaSourceKind::Repository,
+        )
+        .load_document(BUILTIN_DOCUMENT)
+        .expect_err("cached document outside the current root");
+        assert_eq!(
+            error.kind(),
+            RegistryLoadErrorKind::LocalReferenceOutsideRoot
+        );
+
+        let missing = format!("{REPOSITORY_ROOT}/missing.schema.json");
+        let error = load_one(
+            repo.path(),
+            SchemaSourceKind::Repository,
+            &narrow_roots,
+            &missing,
+        )
+        .expect_err("contained missing repository document");
+        assert_eq!(error.kind(), RegistryLoadErrorKind::LocalReferenceMissing);
+    }
+
+    #[test]
+    fn repository_unsafe_traversal_and_non_regular_sources_still_refuse() {
+        let repo = tempfile::tempdir().unwrap();
+        let request_roots = [REPOSITORY_ROOT.to_string()];
+        std::fs::create_dir_all(repo.path().join(REPOSITORY_ROOT).join("directory")).unwrap();
+
+        let traversal = load_one(
+            repo.path(),
+            SchemaSourceKind::Repository,
+            &request_roots,
+            ".handbook/definitions/schemas/../escape.schema.json",
+        )
+        .expect_err("traversal");
+        assert_eq!(traversal.kind(), RegistryLoadErrorKind::InvalidSourcePath);
+
+        let non_regular = load_one(
+            repo.path(),
+            SchemaSourceKind::Repository,
+            &request_roots,
+            ".handbook/definitions/schemas/directory",
+        )
+        .expect_err("non-regular source");
+        assert_eq!(non_regular.kind(), RegistryLoadErrorKind::NonRegularSource);
+    }
+
+    #[test]
+    fn schema_test_fixture_uses_the_expected_dialect_constant() {
+        let value: serde_json::Value = serde_json::from_slice(schema_bytes()).unwrap();
+        assert_eq!(value["$schema"], DRAFT_2020_12);
     }
 }
 

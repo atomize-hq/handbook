@@ -1,0 +1,214 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260725T144741Z--HCM-2-3--atomic-publication-implementation-59-surface-successor-selector",
+  "created_at_utc": "2026-07-25T14:47:41Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "source-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-atomic-publication-remediation-59-surface-successor-selector",
+  "subject_fingerprint": "sha256:b4d791cbe368c59e6e45e12426a4eae7b4bb2f0b456c8e3cbbf0dc44359c976e",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/src/artifact_lineage_store.rs",
+        "sha256": "464a75a4ac5dd35360da3f5a9e0c3412dd725006c3c6da9efee039b62db15473"
+      },
+      {
+        "path": "crates/engine/src/artifact_operations.rs",
+        "sha256": "09f84564bc1646b443614e3815fcf46ad2611dfe5a28422b552ba03e64659470"
+      },
+      {
+        "path": "crates/engine/src/lib.rs",
+        "sha256": "c14a73d723f5c85a67067f160c92a5e92e05db7804b80048be9274c79c2a9fb2"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_3_generic_lineage.rs",
+        "sha256": "be94760f8b57ddd6e8fb2f9127486e86687f539f60c46c9f27d4ae3ba853efef"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260723T154328Z--HCM-2-3--fresh-atomic-publication-documentation-review-10.json",
+        "sha256": "8a593688c1573cc62b4ee21b8fa279edf03b74b2b65a08f2f9eded060f355921"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T020152Z--HCM-2-3--atomic-publication-implementation-fifth-superseding-selector.json",
+        "sha256": "b40e37886fc9c6c4df5849d34e5b5048bb88f089c000811627fc634641f1aafb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T033051Z--HCM-2-3--fresh-review-10-contract-correction-successor.json",
+        "sha256": "9e3e5966ca0ec3ced877d12b2fcec71bdf5c3a11c0c55f9d81ca7dd7ad5cb975"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T033702Z--HCM-2-3--atomic-publication-implementation-sixth-superseding-selector.json",
+        "sha256": "85f3bc83dc95cf722199f0930c2e4cbb0a999c34d087b641f57baf37d44aaa0a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T131224Z--HCM-2-3--atomic-publication-implementation-final-successor-selector.json",
+        "sha256": "fa5e76c979d01fb9baaac282cc602ca65127bcbe9298c11fc016a939973be0ac"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T131914Z--HCM-2-3--fresh-final-successor-selector-closure-review.json",
+        "sha256": "4210f73c73f42ef17a04e5331eb2564e11d2db2da3d437bf5cecec069afcd4e9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T131915Z--HCM-2-3--fresh-final-successor-selector-api-compatibility-review.json",
+        "sha256": "e4bd0a3977c50a7e10986b638daad3ae5d179760d20d90ca189a971829ab9a18"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+        "sha256": "23065130f6787b68a8567f80a1c8be7f9e43e4f32d0c14857a8fdb3a2c7b2f16"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+        "sha256": "3480b8480a0fa3b4cb93c4769fe3f9b91f4378465c9e3c0b13990ab0a48ccc26"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+        "sha256": "67a7cbd247f4dc1db6dce76eff45c3efc21bd1c215bf7217366631b74a6655e5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+        "sha256": "e0676417e5480439bd6fad0157bb0894b3d976d518fa30b514464e044be6864c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T032102Z--review-10-contract-correction-successor.md",
+        "sha256": "f9142c2e3cf62907c0a096678800cd3987ea690e88762648c3d74cf97ec9d4b6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T041100Z--review-10-contract-correction-implementation-proof-wall.md",
+        "sha256": "e78f3ae278b0b6f0cdd67515206ca01e083f9e948316f2bcc570d562264569e6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+        "sha256": "84b72d8aef22fda8ecb6bdd0df425ba84a74a3c552b860395f37d8872580c4c8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+        "sha256": "8225fd2a8b976d258207f6aa6616c65b6970c19fb98034170b52d6ba02e8ad68"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b4d791cbe368c59e6e45e12426a4eae7b4bb2f0b456c8e3cbbf0dc44359c976e"
+  },
+  "active_resolution": {
+    "level": "atomic_publication_implementation",
+    "scope_horizon": "exact 59-code-surface union plus the existing crate-policy surface",
+    "detail_resolution": "implementation_grade",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "operator-authorized 59-surface successor selector and test-only delta",
+    "memory_horizon": "immutable Review 10, its corrected successor, and all predecessor selectors and reviews",
+    "validation_horizon": "fresh selector-closure and API CLEAN reviews, full proof wall, GitNexus change detection, and fresh complete-subject CLEAN review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T131224Z--HCM-2-3--atomic-publication-implementation-final-successor-selector.json",
+      "sections": [
+        "immutable 58-code-plus-one-policy union",
+        "implementation and proof-wall obligations"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T131914Z--HCM-2-3--fresh-final-successor-selector-closure-review.json",
+      "sections": [
+        "immutable historical review evidence",
+        "closure conclusion superseded by the post-review subset counterexample"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T033051Z--HCM-2-3--fresh-review-10-contract-correction-successor.json",
+      "sections": [
+        "CLEAN corrected documentation subject",
+        "Review 10 preservation",
+        "contract correction authority"
+      ]
+    }
+  ],
+  "repo_truth": "This selector supersedes without modifying the 58-surface selector or either of its reviews. The prior closure review remains immutable historical evidence, but its closure conclusion is superseded because every_installed_subset_recovers_the_exact_missing_complement exposed one stale test expectation after production behavior was implemented: promotion subsets 1 and 3 move the candidate while omitting durable native-publication-result.json and therefore must refuse mutation-free with ConflictingTransactionState. Required GitNexus upstream impact analysis for that test returned LOW with zero affected callers, symbols, processes, and modules. The exact successor union is 59 code surfaces plus the existing crate-policy surface: the prior immutable 58 surfaces plus only every_installed_subset_recovers_the_exact_missing_complement. No production behavior, install_subset behavior, continuity-evidence synthesis, public API, unsafe scope, dependency, Cargo surface, strict-reader behavior, or sharing-security behavior is added. Branch codex/hcm-2-3-planning, HEAD 3c49fa2c6d653f4b1a703d1d5c5196147b003533, zero staged paths, current GitNexus index, frozen Review 10 sha256:8a593688c1573cc62b4ee21b8fa279edf03b74b2b65a08f2f9eded060f355921 with historical aggregate sha256:8dac11d067a4fba0efea04a3ae1435ae1fa9c8a82307171676380e9aa8f1413a, and handbook-engine 0.1.1 were verified before creation.",
+  "allowed_scope": [
+    "Retain exactly the immutable 42 symbols: validate_request_subject; validate_output_ref_binding; validate_persisted_intent_authority; ArtifactRepositoryV1::open_under_authority#2; ArtifactIntakeRegistry::load_with_builtin_compatibility#2; validate_transaction_inventory; GenericArtifactLineageStoreV1::recover_pending#1; GenericArtifactLineageStoreV1::verify_committed#1; native_bound_tokens; native_path_tokens; native_metadata_subjects; observe_retained_regular_file; same_native_metadata; validate_native_publication_observation; rename_store_path; publish_replacement; verify_compare_and_write_path; require_installed_guards_unchanged; observe_installed_output; observe_prepared_replacement; require_prepared_replacement_unchanged; ArtifactRepositoryV1::open#1; ArtifactIntakeRegistry::load#1; open_retained_parent_relative_nt; query_object_id_absence_nt; build_intent; build_marker; build_evidence; build_result; validate_intent; validate_verified; validate_marker; GenericArtifactLineageStoreV1::verify_installed_outputs#4; GenericArtifactLineageStoreV1::install_descriptor#5; build_native_publication_observation; GenericArtifactLineageStoreV1::commit_new_locked#6; GenericArtifactLineageStoreV1::install_output#7; GenericArtifactLineageStoreV1::execute_inner#8; validate_established_refusal; EstablishedRefusalCodeV1; GenericRefusalLayerV1; GenericArtifactLineageStoreV1::validate_committed_reachability.",
+    "Retain the existing crate-policy surface and item-scoped Windows unsafe allowance exactly as authorized by the sixth selector.",
+    "Retain exactly the two previously authorized deletion surfaces windows_file_usn and open_existing_replacement_scratch.",
+    "Retain exactly the three private/helper surfaces: create_replacement_scratch; replace_durable; install_subset.",
+    "Retain the eleven exact test surfaces from the prior selector: final_publication_hook_rechecks_canonical_basis_for_fresh_and_recovery_paths; canonical_identity_substitution_after_installed_verification_refuses; canonical_scratch_resume_rechecks_the_basis_immediately_before_publication; canonical_basis_same_bytes_aba_with_restored_mtime_refuses_without_store_mutation; canonical_scratch_identity_substitution_after_basis_verification_refuses; fresh_promotion_refuses_preexisting_replacement_scratch_without_mutation; promotion_intent_persists_only_the_five_exact_basis_fields; recovery_refuses_an_incomplete_deterministic_canonical_scratch_without_mutation; retained_basis_handle_denies_same_byte_path_substitution_on_windows; same_byte_scratch_substitution_immediately_before_publication_refuses_without_canonical_delta; same_byte_basis_substitution_between_retained_read_and_identity_refuses.",
+    "Add only the fifty-ninth code surface every_installed_subset_recovers_the_exact_missing_complement.",
+    "Within every_installed_subset_recovers_the_exact_missing_complement only, leave intake and candidate subsets unchanged; keep promotion subsets 0 and 2 expecting successful recovery; and make promotion subsets 1 and 3 expect mutation-free ConflictingTransactionState because the moved candidate lacks durable native-publication-result.json.",
+    "Do not synthesize continuity evidence and do not alter install_subset for the fifty-ninth-surface case.",
+    "Keep read_bounded_regular and open_repo_relative_regular_file_strict outside the selector and unchanged.",
+    "Run fresh selector-closure and API-compatibility reviews before the fifty-ninth-surface edit, then finish all twelve authorized test edits and the full test, Clippy, formatting, schema, handoff, proof-wall, GitNexus change-detection, and fresh complete-subject review suite.",
+    "Stop before staging or committing and report merge readiness; keep handbook-engine 0.2.0 consolidation deferred."
+  ],
+  "non_goals": [
+    "No production behavior change is authorized by this successor.",
+    "No install_subset change for the newly authorized subset expectation and no synthesized native-publication-result.json or other continuity evidence.",
+    "No symbol beyond the exact 59-code-surface union, helper, wrapper, dependency, Cargo/build-script/generated-native edit, global/static/thread-local state, public API, fallback primitive, fifth unsafe item, or broader completion rule.",
+    "No strict-reader admission, control-flow, error-category, sharing-security, or open_repo_relative_regular_file_strict change.",
+    "No rewrite of Review 10 or any prior proof, review, selector, or dispatch artifact.",
+    "No stage, commit, merge, push, global handoff, ledger update, or handbook-engine version change."
+  ],
+  "tasks": [
+    "Replay this selector, all immutable predecessors and verdicts, branch, HEAD, zero staged state, Review 10 hashes, and GitNexus freshness before code writes.",
+    "Obtain fresh read-only selector-closure and API-compatibility reviews of this exact 59-code-plus-one-policy union. Proceed only if both return CLEAN.",
+    "Preserve the recorded LOW, zero-caller GitNexus impact result for every_installed_subset_recovers_the_exact_missing_complement and run any other required pre-edit impact checks.",
+    "Implement only the authorized test expectation and the remaining prior-selector test edits; stop if another production, helper, test, unsafe, public, dependency, Cargo, sharing-security, or completion-rule surface becomes necessary.",
+    "Run the complete proof wall, GitNexus detect-changes, and a fresh findings-first complete-subject review with zero findings."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T144741Z--HCM-2-3--atomic-publication-implementation-59-surface-successor-selector.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T131224Z--HCM-2-3--atomic-publication-implementation-final-successor-selector.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T033702Z--HCM-2-3--atomic-publication-implementation-sixth-superseding-selector.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T033051Z--HCM-2-3--fresh-review-10-contract-correction-successor.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+    "crates/engine/src/artifact_lineage_store.rs",
+    "crates/engine/src/lib.rs",
+    "crates/engine/tests/hcm_2_3_generic_lineage.rs"
+  ],
+  "stop_conditions": [
+    "Stop before the fifty-ninth-surface code edit unless both fresh selector reviews are CLEAN with zero findings.",
+    "Stop if impact analysis reveals a production caller or unexpected HIGH or CRITICAL test impact for every_installed_subset_recovers_the_exact_missing_complement.",
+    "Stop and report if correctness requires another production symbol, helper, test function, unsafe item, dependency, Cargo/version edit, global, public API, strict-reader/share-security change, fallback primitive, or broader completion rule.",
+    "Stop on any branch, HEAD, staged-state, Review 10, predecessor-selector, restored-reader, or subject-manifest mismatch.",
+    "Do not waive findings, stage, commit, merge, push, create a global handoff, or update the global ledger."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "impact_analysis",
+      "validation",
+      "remaining_protocol_work",
+      "release_versioning_consequence",
+      "parent_disposition"
+    ]
+  }
+}

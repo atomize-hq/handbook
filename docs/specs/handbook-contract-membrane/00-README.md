@@ -1,10 +1,10 @@
 # Handbook Contract Membrane Control Pack
 
-**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4, the bounded HCM-2.1 Project Context pilot, and HCM-2.2 candidate-`1.3` exact-result authority have landed through separately reviewed implementation and closeout commits; HCM-2.2 is review-clean at primary commit `6766d3ed4894aad6598faaa7c4a54b493f92c1f6`, closeout commit `5c31eeefb5adf71d75ec3059b1b6947025d2fd6b`, and final Review 5 subject `sha256:62c9fdae649a31d1538ec7770b0f8ce5b2cc0686cb33535fe8747bbe2ddc80ad`; HCM-2.3 planning is explicitly selected for the current documentation subject
+**Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4, the bounded HCM-2.1 Project Context pilot, and HCM-2.2 candidate-`1.3` exact-result authority have landed; HCM-2.2 is review-clean at primary commit `6766d3ed4894aad6598faaa7c4a54b493f92c1f6`, closeout commit `5c31eeefb5adf71d75ec3059b1b6947025d2fd6b`, and final Review 5 subject `sha256:62c9fdae649a31d1538ec7770b0f8ce5b2cc0686cb33535fe8747bbe2ddc80ad`; HCM-2.3 atomic-publication documentation authority is reviewable, but the current repository-defined registry-brief production implementation is known non-authoritative and cannot be classified, committed, or used to close `PG-KIND-02`
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
-**Implementation authorization:** HCM-1.1 through HCM-2.2 are completed bounded evidence, not continuing authority; HCM-2.2 keeps result `1.0` and intent `1.2` schemas unchanged and preserves the rejected worktree/archive evidence at `486458ac`; current authority is HCM-2.3 documentation, specification, planning, and implementation-authority preparation only; HCM-2.3 implementation remains unauthorized until its complete packet is `CLEAN`, its planning closeout exists, and a separate exact implementation handoff is explicitly selected; later slices remain unauthorized
+**Implementation authorization:** HCM-1.1 through HCM-2.2 are completed bounded evidence, not continuing authority; HCM-2.2 keeps result `1.0` and intent `1.2` schemas unchanged and preserves the rejected worktree/archive evidence at `486458ac`; HCM-2.3 production, selectors, classification, `PG-KIND-02` closure, staging, and primary commit remain frozen. In order, HCM-2.3 requires a different-fresh CLEAN documentation review, explicit operator authorization of all sixteen CRITICAL production surfaces, a bounded implementation selector, implementation of `atomic-displaced-basis-v1`, re-completed Checkpoint C and the full proof wall, GitNexus change detection, and a later different-fresh complete implementation CLEAN review before any classification, `PG-KIND-02` closure, or primary commit; HCM-2.3 adds no shipped kind, SDK, transport catalog, Projection engine, or later-slice authority; HCM-2.4 and every later slice remain unauthorized
 **Repo-truth snapshot:** 2026-07-21; re-check live code before every slice
 
 ## Purpose
@@ -237,8 +237,17 @@ proof-complete. Fresh Reviews 4 and 5 returned `CLEAN`; the exact Review 5
 53-path subject is `sha256:62c9fdae649a31d1538ec7770b0f8ce5b2cc0686cb33535fe8747bbe2ddc80ad`,
 the primary implementation is `6766d3ed4894aad6598faaa7c4a54b493f92c1f6`,
 and parent closeout is `5c31eeefb5adf71d75ec3059b1b6947025d2fd6b`.
-HCM-2.3 planning is now explicitly selected; its implementation and all later
-slices remain unauthorized pending their own review-clean packet and selector.
+The HCM-2.3 atomic-publication documentation authority is reviewable, but the
+current repository-defined registry-brief production implementation remains
+known non-authoritative verify-then-unconditional-rename code. It cannot be
+classified, committed, or used to close `PG-KIND-02`. HCM-2.3 must complete,
+in order, a different-fresh CLEAN documentation review; explicit operator
+authorization of all sixteen CRITICAL production surfaces; a bounded
+implementation selector; implementation of `atomic-displaced-basis-v1`;
+re-completed Checkpoint C and the full proof wall; GitNexus change detection;
+and a later different-fresh complete implementation CLEAN review. Only then
+may classification, `PG-KIND-02` closure, or the primary commit occur. HCM-2.4
+and all later slices remain unauthorized pending their own packet and selector.
 
 The shipped default artifact set is approved in [`slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md`](slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md)
 and its exact kind, profile, descriptor, and selected-registry data now exist.

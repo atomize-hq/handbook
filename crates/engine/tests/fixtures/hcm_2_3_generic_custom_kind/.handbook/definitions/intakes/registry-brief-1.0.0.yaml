@@ -1,0 +1,55 @@
+schema_id: handbook.artifact-intake-definition
+schema_version: "1.0"
+intake_id: example.intake.registry-brief
+intake_version: 1.0.0
+artifact_kind_ref: example.artifact-kind.registry-brief@1.0.0
+candidate_schema_ref: example.schemas.registry-brief@1.0.0
+supported_modes:
+  - guided_adaptive
+  - express
+  - agent_assisted
+coverage:
+  - coverage_id: registry_brief.title
+    target_paths:
+      - /title
+    applicability: always
+    authority_class: observational
+    acquisition:
+      inferable: false
+      user_declaration_required: true
+      evidence_kinds: []
+      freshness: null
+      sensitivity: internal
+      deterministic_default: null
+    evaluation:
+      required: true
+      minimum_specificity: concrete
+      minimum_confidence: high
+      unknown_policy: block
+      contradiction_policy: block
+      waiver_policy_ref: null
+    prompt_guidance_refs: []
+  - coverage_id: registry_brief.summary
+    target_paths:
+      - /summary
+    applicability: always
+    authority_class: observational
+    acquisition:
+      inferable: false
+      user_declaration_required: true
+      evidence_kinds: []
+      freshness: null
+      sensitivity: internal
+      deterministic_default: null
+    evaluation:
+      required: true
+      minimum_specificity: concrete
+      minimum_confidence: high
+      unknown_policy: block
+      contradiction_policy: block
+      waiver_policy_ref: null
+    prompt_guidance_refs: []
+approval_policy_ref: null
+reassessment_triggers: []
+extensions: {}
+intake_definition_fingerprint: sha256:4a77946420bd64e97ff001875cc6d3fc5aea9c62008f595ee7b2b3c23b6b5ee3

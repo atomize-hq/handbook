@@ -1,0 +1,169 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260724T195446Z--HCM-2-3--fresh-second-selector-closure-review",
+  "created_at_utc": "2026-07-24T19:54:46Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "source-driven-development",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-fresh-second-selector-closure-review",
+  "subject_fingerprint": "sha256:109d51840db64e81511f4c4c50cc201788c105fbdc415568709f0ca99d2ad56d",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/src/artifact_intake_registry.rs",
+        "sha256": "a0a4dd13f5619a1e425c454349d202fa91d2854fb827a7a1677d2ccea067b2dd"
+      },
+      {
+        "path": "crates/engine/src/artifact_lineage_store.rs",
+        "sha256": "b39c3d73c6a59ee698183e9e263480df369dc99e7f762b3af1a614a7aefcf541"
+      },
+      {
+        "path": "crates/engine/src/artifact_repository.rs",
+        "sha256": "57661be7616681954a58bf25b8f5ccb39b71ad5e5c811071b8b7e7f9193afd5a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260723T154328Z--HCM-2-3--fresh-atomic-publication-documentation-review-10.json",
+        "sha256": "8a593688c1573cc62b4ee21b8fa279edf03b74b2b65a08f2f9eded060f355921"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T162526Z--HCM-2-3--atomic-publication-implementation-superseding-selector.json",
+        "sha256": "c07302a0f3b2c5e06be18f2d7cc88f00be1fb57b237ff46b1456638cdb229196"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T162843Z--HCM-2-3--fresh-atomic-publication-selector-closure-review.json",
+        "sha256": "f548d9f98ea1438477463ca63402af8f3203465d55b8f5dfb2f97bf23df7f9a0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T194923Z--HCM-2-3--atomic-publication-implementation-second-superseding-selector.json",
+        "sha256": "1bbbc662d3480a724fdfbc97df14792a4bed3a2bb4e5a4e33ee4f6e8635096d0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+        "sha256": "ab76b68e46b5d5bf4a3ace006562564e55574dd42f88d2f6df660996016000bd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+        "sha256": "c3822e1bb5a17877a05feccbea93f4413010eb0cee3b0e246d2955b50b644b07"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+        "sha256": "1000c55e608fec884ad7eaef03255d9d4bb2a906f0bec385de8d171170c8ee25"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T041308Z--atomic-canonical-publication-authority-repair.md",
+        "sha256": "d8d183f0f121123326eeefa38e51821c7e14b8d3e5fea66d37a7a422fee3015f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+        "sha256": "9ebb0e0d60ce77c2c741fac0c44c1026ef1f8685b68ec4c8b55084b8bc61a9b5"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:109d51840db64e81511f4c4c50cc201788c105fbdc415568709f0ca99d2ad56d"
+  },
+  "active_resolution": {
+    "level": "implementation_selector_closure_review",
+    "scope_horizon": "corrected complete 41-item HCM-2.3 selector before any production or test edit",
+    "detail_resolution": "symbol-and-call-path closure",
+    "temporal_horizon": "current orchestration",
+    "authority_horizon": "read-only closure verdict; no implementation authority",
+    "memory_horizon": "fresh isolated review of pinned selector, code, contract, proof, and prior closure",
+    "validation_horizon": "CLEAN plus the parallel API-compatibility CLEAN verdict is the production/test edit admission gate"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T194923Z--HCM-2-3--atomic-publication-implementation-second-superseding-selector.json",
+      "sections": [
+        "exact 41-item selector union",
+        "corrected five-field intent contract",
+        "new execution/validator/enum authority and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T162843Z--HCM-2-3--fresh-atomic-publication-selector-closure-review.json",
+      "sections": [
+        "authoritative prior closure subject and CHANGES_REQUIRED seams"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+      "sections": [
+        "transaction grammar",
+        "atomic canonical publication protocol",
+        "final-boundary conflict",
+        "authorized-reader boundary and recovery state tables"
+      ]
+    }
+  ],
+  "repo_truth": "Fresh read-only closure review of the exact corrected 41-item selector before any Rust or test edit. The latest prior closure identified execute_inner, validate_established_refusal, and two public enum variants; the operator authorized exactly those and corrected build_intent to the schema's five basis fields while keeping complete structured observation in native-publication.json. The union is exactly 25 + 12 + 4 = 41 unique items: 39 existing production symbols and two new private helpers. Branch codex/hcm-2-3-planning, HEAD 3c49fa2c6d653f4b1a703d1d5c5196147b003533, zero staged paths, all 82 Review 10 hashes, both predecessor selectors, the prior closure dispatch, and GitNexus freshness were verified. Newly added exact production-only / with-test impacts are execute_inner LOW/MEDIUM 9/50, validate_established_refusal CRITICAL 30/60, and both enums LOW 0/0. No production or test byte has changed since Review 10.",
+  "allowed_scope": [
+    "Remain strictly read-only and replay every subject hash/aggregate, branch, HEAD, zero staged paths, nested Review 10 manifest, predecessor-selector hashes, and second-selector hash.",
+    "Reconcile exactly 41 unique items and the corrected replacement of the predecessor build_intent overreach.",
+    "Trace fresh execution, five-field basis capture, native observation/result construction, authorized publication, stable outputless conflict, markerless ambiguity, crash recovery, committed verification/replay, and authorized canonical reads end to end.",
+    "Determine whether execute_inner can derive the five intent fields using only already selected functions/data without editing RetainedBasisObservation, TrustedRepoFile, another helper/type, stage order, or public API.",
+    "Determine whether commit_new_locked and execute_inner can convey the existing committed/refused disposition without editing GenericExecutionDispositionV1 or another unselected type.",
+    "Determine whether the selected builder/validator/recovery/reader surfaces can keep PublicationBasisConflict terminal-only while reusing EstablishedRefusalV1 unchanged.",
+    "Return CLEAN only if no production symbol/type/helper/wrapper/dependency/public API/limit/stage-order owner outside the exact selector is required."
+  ],
+  "non_goals": [
+    "No edits, staging, commit, push, selector/handoff creation, ledger write, implementation, tests, preservation/archive access, or user task hop.",
+    "No waiver, inferred authorization, package version change, dependency, cleanup widening, public API expansion beyond the two exact enum variants, or stage-order change."
+  ],
+  "tasks": [
+    "Invoke required skills and validate the immutable subject; return BLOCKED on any mismatch.",
+    "Construct and falsify the complete symbol-level implementation map, emphasizing every datum and return value crossing the newly selected seams.",
+    "Use read-only GitNexus context/query/impact and direct source inspection to identify every unavoidable edit owner.",
+    "Return findings first with identity/status/verdict, exact evidence, 41-item reconciliation, validation, and parent disposition. Do not repair."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T194923Z--HCM-2-3--atomic-publication-implementation-second-superseding-selector.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+    "crates/engine/src/artifact_lineage_store.rs",
+    "crates/engine/src/artifact_repository.rs",
+    "crates/engine/src/artifact_intake_registry.rs"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED on any immutable gate mismatch.",
+    "Return CHANGES_REQUIRED if any production symbol/type/helper/wrapper/dependency/public API/limit/stage-order change outside the exact selector is required.",
+    "Return CHANGES_REQUIRED on any incomplete fresh/recovery/reader path or contract/schema/vector disagreement.",
+    "Do not waive, repair, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "selector_reconciliation",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -147,9 +147,9 @@ closeout. This does not support a generic custom-kind intake claim.
 |---|---|---|
 | `PG-PROFILE-01` | selected profile resolves complete artifact/vocabulary/Resolution truth with deterministic fingerprint | open; HCM-1.4 proves deterministic selected-profile decision/readiness adoption in setup and doctor, while vocabulary/Resolution application, condition evaluation, and remaining consumers are open |
 | `PG-DEFAULT-01` | focused research plus a user brainstorming/decision session explicitly approve the shipped kind set, default instances, and requiredness; examples/current enums do not count | closed for the HCM-0.6 documentation decision by its exact approved record, final proof wall, clean independent review, and two-commit closeout; no runtime/profile publication proof |
-| `PG-KIND-01` | a versioned `ArtifactKindDefinition` resolves a safe canonical schema, validation, optional intake, lifecycle, and projections independently from repository instance state | open; HCM-1.1 proves kind/schema resolution, HCM-1.4 proves selected-instance structural inspection through the bound kind in setup/doctor, and HCM-2.1 consumes the selected Project Context schema for canonical structural validation and deterministic rendering; semantic validation, intake, lifecycle, and Projection coverage remain open |
-| `PG-KIND-02` | repository-defined custom kind registers, passes meta-schema/structural validation, and exercises supplied intake coverage without a new Rust enum variant, executable hook, remote schema fetch, generated CLI command, or pre-Phase-3 generic projection engine | open; HCM-1.1 proves registration/local structural validation and HCM-1.4 proves custom-kind setup/doctor-compatible decision/inspection without enum or command changes, while supplied intake coverage remains open |
-| `PG-ARTIFACT-01` | a profile-selected `ArtifactInstanceDescriptor` binds a kind to path/label/requiredness/dependencies and participates in validation/doctor/flow | open program-wide; HCM-1.4 proves descriptor-owned path/role/requiredness/applicability/capability identity plus structural validation and doctor/setup participation, and HCM-2.1 proves content-authority/author/doctor/flow participation for exact instance `project_context`; remaining families and generic participation remain open |
+| `PG-KIND-01` | a versioned `ArtifactKindDefinition` resolves a safe canonical schema, validation, optional intake, lifecycle, and projections independently from repository instance state | open program-wide; HCM-1.1 proves kind/schema resolution, HCM-1.4 proves selected-instance structural inspection through the bound kind in setup/doctor, and HCM-2.1 consumes the selected Project Context schema. HCM-2.3 documentation defines target registry-brief schema/intake/candidate/promotion proof, but its known non-authoritative production implementation adds no candidate evidence until every ordered implementation gate passes; lifecycle, Projection, semantic-validator, and remaining-kind coverage stay open |
+| `PG-KIND-02` | repository-defined custom kind registers, passes meta-schema/structural validation, and exercises supplied intake coverage without a new Rust enum variant, executable hook, remote schema fetch, generated CLI command, or pre-Phase-3 generic projection engine | open; HCM-2.3 atomic-publication documentation authority is reviewable, but the current registry-brief production implementation is known non-authoritative and cannot close this gate. In order, closure requires different-fresh CLEAN documentation review; explicit operator authorization of all sixteen CRITICAL surfaces; a bounded implementation selector; `atomic-displaced-basis-v1` implementation; re-completed Checkpoint C and the full proof wall; GitNexus change detection; and a later different-fresh complete implementation CLEAN review before classification, this gate's closure, or primary commit |
+| `PG-ARTIFACT-01` | a profile-selected `ArtifactInstanceDescriptor` binds a kind to path/label/requiredness/dependencies and participates in validation/doctor/flow | open program-wide; HCM-1.4 proves descriptor-owned path/role/requiredness/applicability/capability identity plus structural validation and doctor/setup participation, and HCM-2.1 proves content-authority/author/doctor/flow participation for exact instance `project_context`. HCM-2.3 documentation defines target registry-brief descriptor and generic-operation proof, but its known non-authoritative production implementation adds no candidate evidence until every ordered implementation gate passes; remaining families and broader product consumers remain open |
 | `PG-INTAKE-01` | guided-adaptive, express, and agent-assisted acquisition use one intake definition and produce the same candidate schema while exposing missing coverage | closed for the exact first-party Charter by HCM-2.2 all-mode, coverage-refusal, stable-replay, orphan-refusal, and installed-skill proof; generic/custom-kind intake remains open under `PG-KIND-02` |
 | `PG-INTAKE-02` | intake provenance distinguishes user declarations, evidenced inference, defaults, unknowns, contradictions, waivers, and approvals; normative fields cannot be silently inferred into authority | closed for the exact first-party Charter by the complete acyclic candidate-`1.3` semantic/exact-result/currentness chain, typed provenance, zero/one/many discovery, historical/orphan refusal, and retained recovery proof; no generic claim |
 | `PG-CHARTER-01` | `CharterIntakeDefinition` covers approved questionnaire domains, promotes only an approved schema-valid candidate to canonical Charter YAML, and deterministically renders Markdown as a renderer-derived human-review view | closed for the exact first-party Charter by candidate `1.3` exact-result authority, new approval, atomic promotion/lifecycle proof, canonical YAML, deterministic Markdown, and real product-path evidence |
@@ -1127,10 +1127,56 @@ closure only for the exact first-party Charter. `PG-YAML-02` extends through
 the exact Project Context and Charter families but remains open program-wide.
 The HCM-2.2 subject does not close
 `PG-KIND-01`, `PG-ARTIFACT-01`, `PG-KIND-02`, or program-wide `PG-YAML-02`,
-and it grants no later-slice implementation authority. HCM-2.3 planning is now
-explicitly selected, but HCM-2.3 implementation remains unauthorized until its
-new packet is `CLEAN`, its planning closeout exists, and a separate exact
-implementation selector is explicitly selected.
+and it grants no later-slice implementation authority.
+
+## HCM-2.3 exact custom-kind candidate proof gate
+
+The HCM-2.3 atomic-publication documentation authority is reviewable, and the
+current exact registry-brief subset remains at its pre-implementation
+`TargetOnly` baseline. The current production implementation is known
+non-authoritative verify-then-unconditional-rename code. It cannot move to
+`RealPathAdopted`, be committed, add candidate evidence to `PG-KIND-01` or
+`PG-ARTIFACT-01`, or close `PG-KIND-02`. In order, HCM-2.3 must obtain a
+different-fresh CLEAN
+documentation review; explicit operator authorization of all sixteen CRITICAL
+production surfaces; a bounded implementation selector; implementation of
+`atomic-displaced-basis-v1`; re-completed Checkpoint C and the full proof wall;
+GitNexus change detection; and a later different-fresh complete implementation
+CLEAN review. Only then may the exact registry-brief lineage apply its frozen
+future `TargetOnly -> RealPathAdopted` diff, close `PG-KIND-02`, or enter the
+primary commit.
+
+The reviewed documentation defines the following required target proof, not
+current production evidence:
+
+- the fixed repository selection record carries complete typed source classes
+  and resolves one repository-defined profile, kind, schema, intake, and
+  descriptor without adding a shipped default or Rust kind enum variant;
+- built-in schema documents and local refs remain beneath compile-time package
+  root `definitions/schemas` and retain the existing built-in byte allowlist,
+  while repository schema documents and local refs remain beneath the request's
+  sole `.handbook/definitions/schemas` authority root;
+- generic engine operations list, read, structurally validate, and purely
+  evaluate the descriptor-selected canonical artifact; all three intake modes
+  converge on equal content, and explicit stale currentness refuses;
+- the separate generic lineage store retains JCS+LF intake `1.2`, validation
+  result `1.0`, candidate `1.4`, and promotion `1.2` closure with bounded
+  inventory, exact idempotent replay, retained refusal, crash-complement,
+  compare-and-write, and same-request concurrency proof;
+- the actual `handbook artifact` binary completes repository setup, selection,
+  validation, path/stdin evaluation, intake append, zero-write candidate
+  validation, candidate append, promotion, fresh-process validation, committed
+  replay, and refused-result replay while retaining the same exact kind and
+  instance identities and persisting no raw idempotency key; and
+- shipped definition/package bytes, HCM-2.2 candidate/result/intent/approval/
+  promotion authority, setup/doctor/flow/compiler behavior, SDK/transport
+  surfaces, HCM-2.4, and Phase 3+ remain unchanged or explicitly outside scope.
+
+The current exact HCM-2.3 registry-brief subset and the broader generic/custom
+intake classification remain `TargetOnly`; no landed evidence exists and no
+SDK, public
+transport envelope, dynamic command, renderer/Projection engine, remote schema
+fetch, or general custom-kind publication claim is earned here.
 
 ## Control-pack orchestration-repair proof gate
 

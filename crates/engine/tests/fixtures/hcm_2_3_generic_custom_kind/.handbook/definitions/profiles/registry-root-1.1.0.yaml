@@ -1,0 +1,129 @@
+{
+  "schema_id": "handbook.instance-profile",
+  "schema_version": "1.0",
+  "profile_id": "example.profile.registry-root",
+  "profile_version": "1.1.0",
+  "profile_scope": "repository",
+  "extends_profile_ref": "handbook.profile.shipped-root@1.1.0",
+  "schema_registry_sources": [
+    "handbook.schemas.artifacts.project-authority@1.0.0",
+    "handbook.schemas.artifacts.project-authority@1.1.0",
+    "handbook.schemas.artifacts.project-context@1.0.0",
+    "handbook.schemas.artifacts.environment-context@1.0.0",
+    "handbook.schemas.artifacts.work-specification@1.0.0",
+    "handbook.schemas.artifacts.decision-record@1.0.0",
+    "handbook.schemas.artifacts.risk-record@1.0.0",
+    "handbook.schemas.lifecycle.trigger-evidence@1.0.0",
+    "handbook.schemas.security.approver-registry@1.0.0",
+    "handbook.schemas.security.approver-registry-transition@1.0.0",
+    "handbook.schemas.security.authenticator-registration-request@1.0.0",
+    "handbook.schemas.security.authenticator-challenge@1.0.0",
+    "handbook.schemas.security.authenticator-make-credential-response@1.0.0",
+    "handbook.schemas.security.authenticator-registration@1.0.0",
+    "handbook.schemas.security.authenticator-get-assertion-response@1.0.0",
+    "handbook.schemas.security.authenticator-assertion@1.0.0",
+    "handbook.schemas.security.approver-admin-api@1.0.0",
+    "example.schemas.registry-brief@1.0.0"
+  ],
+  "artifact_kind_sources": [
+    "handbook.artifact-kind.project-authority@1.0.0",
+    "handbook.artifact-kind.project-authority@1.1.0",
+    "handbook.artifact-kind.project-context@1.0.0",
+    "handbook.artifact-kind.environment-context@1.0.0",
+    "handbook.artifact-kind.work-specification@1.0.0",
+    "handbook.artifact-kind.decision-record@1.0.0",
+    "handbook.artifact-kind.risk-record@1.0.0",
+    "example.artifact-kind.registry-brief@1.0.0"
+  ],
+  "artifact_instances": [
+    {
+      "canonical_path": ".handbook/project/charter.yaml",
+      "capability_refs": [
+        "constitutional_root"
+      ],
+      "depends_on": [],
+      "extensions": {},
+      "id": "project_authority",
+      "intake_definition_ref": "handbook.intake.charter@1.0.0",
+      "kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+      "label": "Charter",
+      "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+      "projection_definition_refs": [],
+      "renderer_definition_refs": [
+        "handbook.renderer.charter-review-markdown@1.0.0"
+      ],
+      "requiredness": {
+        "condition_ref": null,
+        "mode": "always"
+      },
+      "role_ref": "constitutional_authority",
+      "schema_id": "handbook.artifact-instance-descriptor",
+      "schema_version": "1.0",
+      "validation_overlay_refs": []
+    },
+    {
+      "canonical_path": ".handbook/project/context.yaml",
+      "capability_refs": [],
+      "depends_on": [],
+      "extensions": {},
+      "id": "project_context",
+      "intake_definition_ref": null,
+      "kind_ref": "handbook.artifact-kind.project-context@1.0.0",
+      "label": "Project Context",
+      "lifecycle_policy_ref": null,
+      "projection_definition_refs": [],
+      "renderer_definition_refs": [],
+      "requiredness": {
+        "condition_ref": null,
+        "mode": "always"
+      },
+      "role_ref": "project_context",
+      "schema_id": "handbook.artifact-instance-descriptor",
+      "schema_version": "1.0",
+      "validation_overlay_refs": []
+    },
+    {
+      "canonical_path": ".handbook/project/environment.yaml",
+      "capability_refs": [],
+      "depends_on": [],
+      "extensions": {},
+      "id": "environment_context",
+      "intake_definition_ref": null,
+      "kind_ref": "handbook.artifact-kind.environment-context@1.0.0",
+      "label": "Environment Context",
+      "lifecycle_policy_ref": null,
+      "projection_definition_refs": [],
+      "renderer_definition_refs": [],
+      "requiredness": {
+        "condition_ref": "handbook.condition.project.managed-operational-surface@1.0.0",
+        "mode": "conditional"
+      },
+      "role_ref": "environment_context",
+      "schema_id": "handbook.artifact-instance-descriptor",
+      "schema_version": "1.0",
+      "validation_overlay_refs": []
+    },
+    {
+      "schema_id": "handbook.artifact-instance-descriptor",
+      "schema_version": "1.0",
+      "id": "registry_brief",
+      "kind_ref": "example.artifact-kind.registry-brief@1.0.0",
+      "role_ref": "project_context",
+      "capability_refs": [],
+      "label": "Registry Brief",
+      "canonical_path": ".handbook/project/registry-brief.yaml",
+      "requiredness": {
+        "mode": "always",
+        "condition_ref": null
+      },
+      "depends_on": [],
+      "lifecycle_policy_ref": null,
+      "intake_definition_ref": "example.intake.registry-brief@1.0.0",
+      "renderer_definition_refs": [],
+      "projection_definition_refs": [],
+      "validation_overlay_refs": [],
+      "extensions": {}
+    }
+  ],
+  "profile_fingerprint": "sha256:66d9840d3f5d0e28d9b70f8e821baee743aa60ff711021cdb354cd3e8eb65f6d"
+}

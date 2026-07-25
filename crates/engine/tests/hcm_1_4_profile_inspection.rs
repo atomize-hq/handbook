@@ -1077,6 +1077,7 @@ mod unix {
                     builtin("handbook.resolution-escalation.core@1.0.0"),
                     builtin("handbook.memory-promotion.core@1.0.0"),
                 ],
+                intake_definition_sources: vec![],
                 allowed_schema_roots: vec!["definitions/schemas".to_owned()],
             },
         )
@@ -1125,6 +1126,7 @@ mod unix {
                     builtin("handbook.resolution-escalation.core@1.0.0"),
                     builtin("handbook.memory-promotion.core@1.0.0"),
                 ],
+                intake_definition_sources: vec![],
                 allowed_schema_roots: vec!["definitions/schemas".to_owned()],
             },
         )

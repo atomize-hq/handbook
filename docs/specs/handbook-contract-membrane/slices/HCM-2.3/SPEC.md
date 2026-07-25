@@ -2,19 +2,26 @@
 
 ## Status and authority
 
-This packet is the planning authority for HCM-2.3. It was prepared from the
-explicit HCM-2.3 documentation selector at HCM-2.2 closeout HEAD
+This packet historically froze a bounded implementation contract for HCM-2.3.
+It was prepared from the explicit HCM-2.3 documentation selector at
+HCM-2.2 closeout HEAD
 `5c31eeefb5adf71d75ec3059b1b6947025d2fd6b`. HCM-2.2 is a completed,
 review-clean dependency: its primary implementation commit is
 `6766d3ed4894aad6598faaa7c4a54b493f92c1f6`, its closeout commit is the entry
 HEAD above, and its final Review 5 subject fingerprint is
 `sha256:62c9fdae649a31d1538ec7770b0f8ce5b2cc0686cb33535fe8747bbe2ddc80ad`.
 
-This documentation session does not authorize Rust, Cargo, runtime, test,
-asset, CLI, SDK, or behavior changes. A later implementation may begin only
-after this complete planning subject is review-clean, committed, closed by one
-parent-owned handoff, and that exact implementation handoff is explicitly
-selected by the user. No packet or handoff authorizes itself.
+The review-clean planning subject was committed and closed by parent handoff
+`20260722T042100Z--HCM-2-3--orchestration--planning-completed`. Historical
+planning text recorded selection of a bounded implementation and one CRITICAL
+source-kind schema-root separation, but the current orchestration supersedes
+that text as operative authority: this is a documentation-only atomic
+publication repair. All production and selectors remain frozen. A
+different-fresh complete-subject CLEAN review must precede explicit operator
+authorization of all sixteen CRITICAL surfaces; only then may a later
+implementation selector be created. No current packet or handoff authorizes
+Rust, HCM-2.4, Phase 3+, Phase 4 SDK/transport work, or preservation/archive
+changes.
 
 The approved HCM-2.2 candidate `1.3`, lifecycle-validation result `1.0`,
 promotion intent `1.2`, exact-result binding, Charter lineage, approval,
@@ -463,7 +470,9 @@ recomputing only the promotion fingerprint cannot authorize it.
 The exact generic record specialization is:
 
 - intake `consumer` is `{kind: handbook_cli, id: handbook, version:
-  <current-release>}` for the CLI proof, `prompt_event_refs` is `[]`, every
+  <current-release>}` where `<current-release>` is frozen by the engine from
+  the repository `VERSION`; no public intake request or caller supplies that
+  value. `prompt_event_refs` is `[]`, every
   satisfied coverage result carries a content-addressed `value_ref`, empty
   `evidence_refs`, `confidence: high`, `freshness: null`,
   `sensitivity: internal`, `evaluation: satisfied`, empty contradiction refs,
@@ -641,7 +650,13 @@ fingerprint exclusions, IDs, refs, and exact canonical YAML.
 
 Every generic read or write takes the single repository-scoped generic-artifact
 lock, recovers first, retains handles/metadata across inventory/open/decode/hash,
-and validates the exact current operation context. The established order is
+and validates the exact current operation context. The raw journal/store module
+is private; public repository reads expose only owned DTOs through this same
+recovery-first authority path. Persisted intents retain their complete typed
+request subject, and recovery validates both journal and staged/installed
+runtime bytes against the current selected instance, schema closure, intake
+binding, definition set, and canonical authority before mutation or return. The
+established order is
 repository identity/authority locks, HCM-2.2 recovery locks, then this generic
 lock. Reverse acquisition or shared Charter mutation is a stop.
 
@@ -687,6 +702,146 @@ request loses by typed conflict. Equivalent concurrent requests yield one
 commit and replay; a same key and different request conflicts. There is no
 last-writer-wins, dual-read, fallback, migration, silent upgrade, pre-existing
 state adoption, authority-record deletion, or automatic cleanup promise.
+Canonical replace-if-current is the closed `atomic-displaced-basis-v1`
+protocol in the runtime contract. Every promotion binds the canonical path `C`,
+transaction-unique candidate `R`, and transaction-unique displaced-basis path
+`D` plus the expected nullable basis and replacement bytes, length, native
+identity, complete structured platform observation, and digest-derived pre-call
+native version. Expected-present publication also creates
+`.handbook/state/transactions/artifact-promotions/<transaction-id>.pending/expected-basis.backup`
+by copying from the retained source handle before the native boundary. The
+backup binds exact bytes, length, and complete structured metadata fingerprint.
+It is evidence only: never a restoration source, canonical output, cleanup
+target, or permission to infer publication.
+
+`native-publication.json` is durable before the first native move.
+`native-publication-result.json` is durable only after the exact ordered native
+trace and retained-handle continuity proof reaches a stable row. Each successful
+move must prove, while the source handle remains live, that the destination
+opened relative to the retained destination parent is the same live kernel
+object. Numeric identity and permitted native-version deltas corroborate this
+proof but never replace it. Native return codes remain diagnostic.
+
+Both adapters are no-replace and parent anchored. Unix invokes
+`renameat2(..., RENAME_NOREPLACE)` relative to retained source and destination
+parent directory descriptors, retains the source descriptor and both parents
+through destination observation, then syncs the parent directory. Windows uses
+a private `#[cfg(windows)]` `ntdll!NtCreateFile` `extern "system"` helper for
+every child/component open and the post-rename destination rebound. Its
+`OBJECT_ATTRIBUTES.RootDirectory` is the non-null retained parent handle;
+`ObjectName` is a validated one-component `UNICODE_STRING` backed by one
+non-null, unterminated counted UTF-16 buffer: `Length` is even, nonzero, and at
+most 65534 bytes, `MaximumLength == Length`, and the buffer is exactly `Length`
+bytes with no terminator. Attributes are
+`OBJ_CASE_INSENSITIVE | OBJ_DONT_REPARSE`; disposition is `FILE_OPEN`.
+Retained-directory options are exactly
+`FILE_OPEN_REPARSE_POINT | FILE_SYNCHRONOUS_IO_NONALERT` (`0x00200020`), without
+`FILE_DIRECTORY_FILE`; post-open handle observations must prove directory type
+and reject every reparse point or tag before authority. Source-file,
+enumerated-child, and rebound-observation options additionally include
+`FILE_NON_DIRECTORY_FILE` (`0x00200060`). Those roles use their frozen
+read/attribute/control access, the source additionally has `DELETE`, and all
+retained ancestors/sources/parents omit `FILE_SHARE_DELETE`. Every returned
+`NTSTATUS` and `IO_STATUS_BLOCK.Status` must be `STATUS_SUCCESS`, and
+`IO_STATUS_BLOCK.Information` must be `FILE_OPENED`, before the handle has
+authority. The adapter enumerates each next child from that retained parent,
+requires the enumerated and opened child `FILE_ID_INFORMATION` to agree, and
+rejects reparse substitution. `CreateFileW` may acquire only the initial
+already-authorized root/volume where no retained parent exists; it cannot prove
+a child open and is forbidden as fallback.
+It invokes local `ntdll!NtSetInformationFile` with
+`FileRenameInformation` on the DELETE-capable retained source handle,
+`ReplaceIfExists=FALSE`, the retained destination parent as
+`FILE_RENAME_INFORMATION.RootDirectory`, and the replacement leaf as one simple
+counted child name. The FFI declarations, native layouts, counted buffer, and
+unsafe call remain inside `publish_replacement`; no helper, dependency, global,
+fallback primitive, or public API is added. Source and destination-parent
+handles remain live through post-move destination observation. Path-based
+`MoveFileExW`, `SetFileInformationByHandle(FileRenameInfo)`, and
+ordinary-rename fallback are forbidden.
+
+Expected absent moves the retained-handle-bound `R` to absent `C`. Expected
+present first moves retained-handle-bound `C` to absent `D`; only after live
+continuity proves `D` is that source may retained-handle-bound `R` move to
+absent `C`. If a source or ancestor/parent binding cannot be proved unchanged,
+no call is permitted. An unauthenticated `D=X` is mutation-free
+`refused_ambiguous`: no restoration, adoption, deletion, cleanup, marker, or
+result.
+
+`native-version-v1` is SHA-256 of the RFC 8785 canonical complete platform
+observation; an opaque writer-selected token has no authority. Unix persists
+device/inode, regular type, length, link count, mode, uid/gid, mtime, ctime, and
+the complete raw-name-sorted no-follow xattr name/value-digest set. Windows
+persists volume/file identity, regular/reparse status, length, link count,
+creation/last-write/change time, attributes, owner/group/DACL digest, exact
+named-stream inventory, and USN. Windows additionally requires a complete
+128-bit `FILE_ID_INFORMATION` value that is neither all zero nor all one, and
+one private synchronous `ntdll!NtFsControlFile` `extern "system"` helper to
+issue `FSCTL_GET_OBJECT_ID` on the retained regular-file handle. Its exact
+ten-parameter ABI uses null `Event`, `ApcRoutine`, and `ApcContext`, null/zero
+input, a non-null exact 64-byte `FILE_OBJECTID_BUFFER` output, and an initialized
+`IO_STATUS_BLOCK` sentinel. An immediate raw
+`STATUS_OBJECTID_NOT_FOUND` (`0xC00002F0`) is authoritative absence when the
+entire I/O status block remains exactly at its initialized
+`Status = STATUS_UNSUCCESSFUL` and `Information = ULONG_PTR_MAX` sentinel. The
+previous matching raw/final `STATUS_OBJECTID_NOT_FOUND` plus zero
+`Information` completion remains authoritative. `STATUS_PENDING`
+(`0x00000103`) is authoritative only after the I/O status block completes to
+`STATUS_OBJECTID_NOT_FOUND` with zero `Information`; a pending call that leaves
+either sentinel unchanged is incomplete and fails closed. Exact dual success
+with `Information == 64` means present and refuses. Every other sentinel,
+raw/final disagreement, status, or length fails closed.
+`DeviceIoControl`/`GetLastError` cannot serve as raw-NTSTATUS authority and no
+fallback is allowed. A non-default stream refuses, and SACL remains excluded
+from observation and authority. Required fields are captured through
+retained-handle APIs in two identical complete passes. Unsupported, unreadable,
+incomplete, or unstable observation fails closed. The future private
+`NtCreateFile` and `NtFsControlFile` helpers are unauthorized children of the
+existing sixteen CRITICAL boundaries, not independent seventeenth surfaces;
+they add no dependency, public API, global, or thread-local state.
+
+After a successful move, Unix may change only ctime; Windows may change only
+change time and USN. Every other structured component is a move invariant.
+Neither USN nor a reusable numeric identity is causal proof: only the exact
+successful trace, live retained-source-to-destination continuity, and equality
+of all move invariants permits the delta. Same-ID ABA, arbitrary tokens, and
+metadata, xattr, DACL, attribute, last-write, or named-stream changes are
+outputless and mutation-free.
+
+Fresh execution may construct the native result and committed marker only while
+the complete live-handle continuity chain exists. Recovery may resume only from
+a durable completed continuity record already bound into that exact
+result/marker chain. A crash, missing result, missing completed proof,
+numeric-identity-only reconstruction, or attempt to reopen and infer continuity
+is outputless markerless `refused_ambiguous`; recovery performs no further move,
+restoration, adoption, or cleanup. Commit requires `C` to be the exact
+live-handle-proved replacement and, for expected present, `D` to be the exact
+persisted basis while `R` is absent. A pre-call deleted or substituted source
+can be a stable outputless `publication_basis_conflict`; any post-call state
+lacking completed live continuity is ambiguous even when identity, bytes, and
+permitted version deltas appear equal.
+
+`ReplaceFileW` remains rejected because its sharing and metadata/stream merge
+semantics are outside the slice. Reader authority remains journal-backed. A
+promotion-installed value requires the exact committed chain through both
+native records, marker, evidence, result, and retained ledger plus a final
+no-follow bytes/identity/path-to-handle recheck. Markerless, pending, ambiguous,
+or unresolved promotion bytes are never returned. `R`, `D`, and
+`expected-basis.backup` are retained evidence with no automatic deletion
+promise.
+
+The exact 81-row, 162-cell matrix and four complete chains remain machine
+authority. The vectors and executable checker cover Unix/Windows same-ID ABA,
+Windows ancestor/parent rename and junction races, zero/all-ones file IDs,
+invalid `NtCreateFile` ABI/role/RootDirectory/name/attributes/disposition/
+options/access/share/status/`IO_STATUS_BLOCK` traces, directory type/reparse
+post-open traces, and exact `NtFsControlFile` ABI/synchronous-call/raw-plus-final
+status/length traces, object-ID presence/query failure or mutation, backup
+preservation, and crashes around every move and durability boundary. They reject
+any crash recovery without a completed continuity record, any pathname Windows
+primitive, any missing retained-parent/source proof, any unauthenticated
+readable `C/R/D`, and every declared schema or semantic rejection that was not
+executed.
 
 ## Product real-path proof
 
@@ -744,14 +899,79 @@ results identify these CRITICAL stop/review surfaces:
 | `ArtifactInstanceRegistry::resolve` | CRITICAL; 427 impacted, 8 direct, 37 processes, 20 modules | expected narrow intake-selection change; warn and re-confirm exact blast radius before edit |
 | `resolve_profile_selection` | CRITICAL; 458 impacted, 21 direct, 31 processes, 20 modules | consume unchanged; expansion is a stop |
 | `ResolvedArtifactRegistry::validate_json` | CRITICAL; 351 impacted, 6 direct, 38 processes, 20 modules | consume unchanged; no duplicate validator |
+| `validate_transaction_inventory` | CRITICAL at depth 3; UID `Function:crates/engine/src/artifact_lineage_store.rs:validate_transaction_inventory`; 2 direct, 16 affected without tests / 28 with tests, 7 processes, 2 modules | current allowlist rejects required `native-publication-result.json`; stop for explicit operator authorization before any edit or selector |
+| `GenericArtifactLineageStoreV1::recover_pending` | CRITICAL at depth 3; UID `Function:crates/engine/src/artifact_lineage_store.rs:GenericArtifactLineageStoreV1.recover_pending#1`; 1 direct, 9 affected without tests / 21 with tests, 5 processes, 2 modules | coupled recovery consumer; stop for explicit operator authorization before any edit or selector |
+| `GenericArtifactLineageStoreV1::verify_committed` | CRITICAL at depth 3; UID `Function:crates/engine/src/artifact_lineage_store.rs:GenericArtifactLineageStoreV1.verify_committed#1`; 3 direct, 12 affected without tests / 24 with tests, 5 processes, 2 modules | coupled committed-read verifier; stop for explicit operator authorization before any edit or selector |
+| `native_bound_tokens` | CRITICAL exact at depth 3; UID `Function:crates/engine/src/artifact_lineage_store.rs:native_bound_tokens`; 5 direct, 23 affected without or with tests, 6 processes, 2 modules | structured observation construction is newly required; no implementation authority |
+| `native_path_tokens` | CRITICAL exact at depth 3; UID `Function:crates/engine/src/artifact_lineage_store.rs:native_path_tokens`; 1 direct, 17 affected without or with tests, 5 processes, 2 modules | path-bound component construction is newly required; no implementation authority |
+| `native_metadata_subjects` | CRITICAL exact at depth 3; UID `Function:crates/engine/src/artifact_lineage_store.rs:native_metadata_subjects`; 1 direct, 17 affected without or with tests, 5 processes, 2 modules | retained-handle component capture is newly required; no implementation authority |
+| `observe_retained_regular_file` | CRITICAL exact at depth 3; UID `Function:crates/engine/src/artifact_lineage_store.rs:observe_retained_regular_file`; 5 direct, 18 affected without tests / 20 with tests, 6 processes, 2 modules | complete metadata/xattr/security/stream capture is newly required; no implementation authority |
+| `same_native_metadata` | CRITICAL exact at depth 3; UID `Function:crates/engine/src/artifact_lineage_store.rs:same_native_metadata`; 5 direct, 22 affected without or with tests, 6 processes, 2 modules | move-invariant structured comparison is newly required; no implementation authority |
+| `validate_native_publication_observation` | CRITICAL exact at depth 3; UID `Function:crates/engine/src/artifact_lineage_store.rs:validate_native_publication_observation`; 2 direct, 13 affected without or with tests, 5 processes, 2 modules | persisted component/digest validation is newly required; no implementation authority |
+| `rename_store_path` | CRITICAL exact at depth 4; UID `Function:crates/engine/src/artifact_lineage_store.rs:rename_store_path`; 6 direct, 28 affected without tests / 59 with tests, 8 processes, 2 modules | parent-anchored retained-handle rename is newly required; no implementation authority |
+| `publish_replacement` | CRITICAL exact at depth 4; UID `Function:crates/engine/src/artifact_lineage_store.rs:publish_replacement`; 3 direct, 17 affected without tests / 19 with tests, 6 processes, 2 modules | live continuity publication is newly required; no implementation authority |
+| `verify_compare_and_write_path` | CRITICAL exact at depth 4; UID `Function:crates/engine/src/artifact_lineage_store.rs:verify_compare_and_write_path`; 4 direct, 22 affected without tests / 52 with tests, 6 processes, 2 modules | retained-path guard verification is newly required; no implementation authority |
+| `require_installed_guards_unchanged` | CRITICAL exact at depth 4; UID `Function:crates/engine/src/artifact_lineage_store.rs:require_installed_guards_unchanged`; 3 direct, 22 affected without tests / 53 with tests, 7 processes, 2 modules | installed live-object guard is newly required; no implementation authority |
+| `observe_installed_output` | CRITICAL exact at depth 4; UID `Function:crates/engine/src/artifact_lineage_store.rs:observe_installed_output`; 3 direct, 21 affected without or with tests, 6 processes, 2 modules | destination observation from retained parent is newly required; no implementation authority |
+| `observe_prepared_replacement` | CRITICAL exact at depth 4; UID `Function:crates/engine/src/artifact_lineage_store.rs:observe_prepared_replacement`; 2 direct, 13 affected without tests / 15 with tests, 6 processes, 2 modules | retained replacement/source observation is newly required; no implementation authority |
+| `require_prepared_replacement_unchanged` | CRITICAL exact at depth 4; UID `Function:crates/engine/src/artifact_lineage_store.rs:require_prepared_replacement_unchanged`; 2 direct, 13 affected without tests / 15 with tests, 6 processes, 2 modules | pre-boundary live-source guard is newly required; no implementation authority |
 
-The only anticipated CRITICAL edit is the narrow removal of the blanket
+The planning-approved CRITICAL edit was the narrow removal of the blanket
 non-Charter `intake_definition_ref` rejection in
 `ArtifactInstanceRegistry::resolve`, while retaining rejection of lifecycle,
 renderer, Projection, and overlay dependencies and retaining the exact frozen
 Charter `1.1` dependency closure. The new operation-context resolver must close
 the admitted intake ref before content use. If live analysis requires any other
-CRITICAL edit, or widens the listed processes, stop for explicit review.
+CRITICAL edit, or widens the listed processes, stop for explicit review. The
+inventory, recovery, committed-read, six structured-observation, and seven
+retained-handle publication surfaces above remain separate explicit stops. All
+sixteen require operator authorization before Rust or an implementation
+selector; partial authorization is insufficient.
+
+The exact include-test evidence commands (also run without `--include-tests`)
+are:
+
+```text
+npx gitnexus impact validate_transaction_inventory --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --summary-only --repo C:\hcm22ar-doc-repair
+npx gitnexus impact validate_transaction_inventory --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --include-tests --summary-only --repo C:\hcm22ar-doc-repair
+npx gitnexus impact recover_pending --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --summary-only --repo C:\hcm22ar-doc-repair
+npx gitnexus impact recover_pending --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --include-tests --summary-only --repo C:\hcm22ar-doc-repair
+npx gitnexus impact verify_committed --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --summary-only --repo C:\hcm22ar-doc-repair
+npx gitnexus impact verify_committed --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --include-tests --summary-only --repo C:\hcm22ar-doc-repair
+npx gitnexus impact native_bound_tokens --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact native_bound_tokens --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact native_path_tokens --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact native_path_tokens --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact native_metadata_subjects --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact native_metadata_subjects --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact observe_retained_regular_file --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact observe_retained_regular_file --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact same_native_metadata --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact same_native_metadata --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact validate_native_publication_observation --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact validate_native_publication_observation --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 3 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact rename_store_path --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact rename_store_path --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact publish_replacement --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact publish_replacement --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact verify_compare_and_write_path --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact verify_compare_and_write_path --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact require_installed_guards_unchanged --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact require_installed_guards_unchanged --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact observe_installed_output --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact observe_installed_output --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact observe_prepared_replacement --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact observe_prepared_replacement --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --include-tests --repo C:\hcm22ar-doc-repair
+npx gitnexus impact require_prepared_replacement_unchanged --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --repo C:\hcm22ar-doc-repair
+npx gitnexus impact require_prepared_replacement_unchanged --direction upstream --file crates/engine/src/artifact_lineage_store.rs --depth 4 --include-tests --repo C:\hcm22ar-doc-repair
+```
+
+Future authorization, if granted, is limited to admitting
+`native-publication-result.json` for an exact promotion-commit transaction after
+its native observation exists and while all transaction/result/trace bindings
+validate. Admission in another operation/state is forbidden. This
+documentation repair grants none of the sixteen CRITICAL authorities and selects
+no implementation.
 
 Required positive, negative, and attack proof includes:
 
@@ -809,6 +1029,13 @@ boundary, whitespace, all HCM-1.1 through HCM-2.2 focused regressions, native
 Windows mutation/refusal proof, and the full workspace wall. GitNexus change
 detection must show only expected implementation symbols and flows before each
 commit.
+
+Every engine-owned byte-document entry point for intake evaluation, intake
+append, candidate append, and promotion enforces one shared 1 MiB limit before
+parsing. Exactly 1 MiB is admitted to parsing; 1 MiB + 1 byte is an
+`InvalidInputDocument`/`InvalidRequest` refusal before repository or journal
+mutation. The CLI retains the same bound as defense in depth by importing the
+engine-owned constant.
 
 ## Expected implementation structure and style
 
@@ -887,7 +1114,7 @@ bounded result.
 
 ## Exit gate
 
-Implementation authority is sufficiently frozen only when this packet:
+Documentation authority is sufficiently frozen only when this packet:
 
 - names every exact proof identity, source, owner, operation, persistence path,
   refusal, currentness rule, and test class above;
@@ -897,8 +1124,10 @@ Implementation authority is sufficiently frozen only when this packet:
 - passes documentation/fingerprint/scope/archive/handoff/change-detection gates;
 - receives a fresh isolated complete-subject review, remediation of every valid
   finding, and a different fresh CLEAN re-review; and
-- lands as one reviewed planning commit followed by one parent-owned handoff/
-  ledger-only closeout commit that still says implementation is unauthorized.
+- reaches a different-fresh complete-subject CLEAN review and any parent-owned
+  documentation closeout still says implementation is unauthorized. Explicit
+  operator approval of all sixteen CRITICAL surfaces and a later selector remain
+  separate prerequisites to implementation.
 
 ## Stop conditions
 

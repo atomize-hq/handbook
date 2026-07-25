@@ -253,10 +253,6 @@ impl ArtifactInstanceRegistry {
                         "lifecycle_policy_ref",
                     ),
                     (
-                        source.intake_definition_ref.is_some(),
-                        "intake_definition_ref",
-                    ),
-                    (
                         !source.renderer_definition_refs.is_empty(),
                         "renderer_definition_refs",
                     ),

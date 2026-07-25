@@ -1,0 +1,116 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260725T131915Z--HCM-2-3--fresh-final-successor-selector-api-compatibility-review",
+  "created_at_utc": "2026-07-25T13:19:15Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "agent-api-and-interface-design",
+    "code-review-and-quality",
+    "source-driven-development"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-fresh-final-successor-selector-api-compatibility-review",
+  "subject_fingerprint": "sha256:e6f883a4c50432e78b493a3677bff1fe6514bb199ecadcf4858fa6cdc7e0c06d",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/artifact_lineage_store.rs", "sha256": "98cbf055ce888ef65da5f44a0ac540b28457ea13eee8d36e692551d6c0017628"},
+      {"path": "crates/engine/src/artifact_operations.rs", "sha256": "09f84564bc1646b443614e3815fcf46ad2611dfe5a28422b552ba03e64659470"},
+      {"path": "crates/engine/src/lib.rs", "sha256": "c14a73d723f5c85a67067f160c92a5e92e05db7804b80048be9274c79c2a9fb2"},
+      {"path": "crates/engine/tests/hcm_2_3_generic_lineage.rs", "sha256": "d12cafbbff2c56042d07b52e23b47afc46691c004c02fa4b954df22ba730189d"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260723T154328Z--HCM-2-3--fresh-atomic-publication-documentation-review-10.json", "sha256": "8a593688c1573cc62b4ee21b8fa279edf03b74b2b65a08f2f9eded060f355921"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T020152Z--HCM-2-3--atomic-publication-implementation-fifth-superseding-selector.json", "sha256": "b40e37886fc9c6c4df5849d34e5b5048bb88f089c000811627fc634641f1aafb"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T033051Z--HCM-2-3--fresh-review-10-contract-correction-successor.json", "sha256": "9e3e5966ca0ec3ced877d12b2fcec71bdf5c3a11c0c55f9d81ca7dd7ad5cb975"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T033702Z--HCM-2-3--atomic-publication-implementation-sixth-superseding-selector.json", "sha256": "85f3bc83dc95cf722199f0930c2e4cbb0a999c34d087b641f57baf37d44aaa0a"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T034017Z--HCM-2-3--fresh-sixth-selector-closure-review.json", "sha256": "0822a3da7e6966619252bc16b29235f2cdc455572a4d2f076ddfd976535ab224"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T034018Z--HCM-2-3--fresh-sixth-selector-api-compatibility-review.json", "sha256": "5e34a9d2dc59b1e025233e1f8b6768865c792453281eb6a2de0c7f2d52a8da6c"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T131224Z--HCM-2-3--atomic-publication-implementation-final-successor-selector.json", "sha256": "fa5e76c979d01fb9baaac282cc602ca65127bcbe9298c11fc016a939973be0ac"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md", "sha256": "23065130f6787b68a8567f80a1c8be7f9e43e4f32d0c14857a8fdb3a2c7b2f16"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json", "sha256": "3480b8480a0fa3b4cb93c4769fe3f9b91f4378465c9e3c0b13990ab0a48ccc26"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json", "sha256": "67a7cbd247f4dc1db6dce76eff45c3efc21bd1c215bf7217366631b74a6655e5"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md", "sha256": "e0676417e5480439bd6fad0157bb0894b3d976d518fa30b514464e044be6864c"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T032102Z--review-10-contract-correction-successor.md", "sha256": "f9142c2e3cf62907c0a096678800cd3987ea690e88762648c3d74cf97ec9d4b6"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T041100Z--review-10-contract-correction-implementation-proof-wall.md", "sha256": "e78f3ae278b0b6f0cdd67515206ca01e083f9e948316f2bcc570d562264569e6"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md", "sha256": "84b72d8aef22fda8ecb6bdd0df425ba84a74a3c552b860395f37d8872580c4c8"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md", "sha256": "8225fd2a8b976d258207f6aa6616c65b6970c19fb98034170b52d6ba02e8ad68"}
+    ],
+    "aggregate_fingerprint": "sha256:e6f883a4c50432e78b493a3677bff1fe6514bb199ecadcf4858fa6cdc7e0c06d"
+  },
+  "active_resolution": {
+    "level": "implementation_selector_api_compatibility_review",
+    "scope_horizon": "the final successor selector's exact private production, helper, and test deltas",
+    "detail_resolution": "Rust visibility, re-export, persisted-enum, schema, dependency, package, unsafe-boundary, and native-ABI compatibility",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "read-only API verdict",
+    "memory_horizon": "fresh pinned final-successor selector subject",
+    "validation_horizon": "CLEAN plus closure CLEAN is the implementation gate"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T131224Z--HCM-2-3--atomic-publication-implementation-final-successor-selector.json",
+      "sections": [
+        "private and test-only deltas",
+        "no public or persisted change",
+        "no version change"
+      ]
+    }
+  ],
+  "repo_truth": "Fresh findings-first API-compatibility review result: CLEAN with zero findings. GenericArtifactLineageStoreV1::verify_committed, native_metadata_subjects, open_retained_parent_relative_nt, replace_durable, create_replacement_scratch, and install_subset are private or test-only and unexported. The eleven test functions are not library API. The verifier predicate, one local share-mask term, behavior-neutral numeric comparison, test-only ledger rewrite, private deletion, and fixture/test corrections change no public Rust declaration, re-export, serialized field, persisted enum or compatibility identifier, JSON Schema shape, vector contract, dependency, Cargo metadata, package version, or crate unsafe policy. The Windows share addition stays inside an already-authorized item-scoped unsafe function and adds no ABI declaration or unsafe block. handbook-engine remains 0.1.1 and 0.2.0 remains deferred.",
+  "allowed_scope": [
+    "Remain read-only and validate the 19 subject hashes, aggregate, branch, HEAD, zero staged state, Review 10, predecessor selectors, restored reader hash, and handbook-engine 0.1.1.",
+    "Search declarations, re-exports, serialized names, schemas, vectors, Cargo manifests, lockfile, crate policy, and local FFI for compatibility consequences.",
+    "Return CLEAN only with zero public, persisted, dependency, Cargo, package-version, or unsafe-boundary expansion."
+  ],
+  "non_goals": [
+    "No edits, repair, staging, commit, merge, push, public API, persisted-label migration, dependency, Cargo/package-version change, helper, global, strict-reader/share-security change, fallback primitive, or extra unsafe item."
+  ],
+  "tasks": [
+    "Validate the immutable subject and return BLOCKED on mismatch.",
+    "Falsify public, persisted, dependency, versioning, crate-policy, and unsafe-boundary compatibility across the exact 58-code-plus-one-policy selector.",
+    "Return findings first with identity, status, verdict, compatibility assessment, validation, and parent disposition."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T131224Z--HCM-2-3--atomic-publication-implementation-final-successor-selector.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "crates/engine/src/artifact_lineage_store.rs",
+    "crates/engine/src/lib.rs",
+    "crates/engine/tests/hcm_2_3_generic_lineage.rs"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED on any immutable-subject, Review 10, branch, HEAD, staged-state, restored-reader, or aggregate mismatch.",
+    "Return CHANGES_REQUIRED on any public API, persisted-label, dependency, Cargo/package-version, crate-policy, helper, global, strict-reader/share-security, fallback, or additional unsafe-item consequence.",
+    "Do not waive or repair findings, stage, commit, merge, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "subject_identity",
+      "compatibility_assessment",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

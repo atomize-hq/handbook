@@ -1,4 +1,5 @@
 mod approvers;
+mod artifact;
 mod author;
 mod doctor;
 mod doctor_rendering;
@@ -57,6 +58,8 @@ enum Command {
     Author(AuthorArgs),
     /// Manage repository approver credentials through native engine authority.
     Approvers(ApproversArgs),
+    /// Operate on repository-selected artifact kinds through the generic engine path.
+    Artifact(artifact::ArtifactArgs),
     /// Pipeline operator surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations.
     Pipeline(PipelineArgs),
     /// Generate a reduced-v1 packet.
@@ -73,6 +76,7 @@ impl Command {
             Command::Setup(args) => setup::run(args),
             Command::Author(args) => author::run(args),
             Command::Approvers(args) => approvers::run(args),
+            Command::Artifact(args) => artifact::run(args),
             Command::Pipeline(args) => pipeline::run(args),
             Command::Generate(args) => generate::run(args),
             Command::Inspect(args) => inspect::run(args),

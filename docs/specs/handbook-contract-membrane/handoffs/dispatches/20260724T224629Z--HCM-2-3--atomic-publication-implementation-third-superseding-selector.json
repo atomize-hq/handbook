@@ -1,0 +1,197 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260724T224629Z--HCM-2-3--atomic-publication-implementation-third-superseding-selector",
+  "created_at_utc": "2026-07-24T22:46:29Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260722T123845Z--HCM-2-3--orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "source-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-atomic-publication-remediation-third-superseding-selector",
+  "subject_fingerprint": "sha256:7448dad5b85b94cc1bb7fc4d67ae4551b230c8258c355ba2f976a015afbcdd2e",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260723T154328Z--HCM-2-3--fresh-atomic-publication-documentation-review-10.json",
+        "sha256": "8a593688c1573cc62b4ee21b8fa279edf03b74b2b65a08f2f9eded060f355921"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T194923Z--HCM-2-3--atomic-publication-implementation-second-superseding-selector.json",
+        "sha256": "1bbbc662d3480a724fdfbc97df14792a4bed3a2bb4e5a4e33ee4f6e8635096d0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T195446Z--HCM-2-3--fresh-second-selector-closure-review.json",
+        "sha256": "eee998cafb7007159224822ef6a511a53a676e7e08dac70d9e0ef9744f45f49b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T195447Z--HCM-2-3--fresh-public-enum-api-compatibility-review.json",
+        "sha256": "a9f4a0f83f4322d3c64206712d2c032bc8ba578dda96a30b5e74dbb47e333629"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+        "sha256": "ab76b68e46b5d5bf4a3ace006562564e55574dd42f88d2f6df660996016000bd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+        "sha256": "c3822e1bb5a17877a05feccbea93f4413010eb0cee3b0e246d2955b50b644b07"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+        "sha256": "1000c55e608fec884ad7eaef03255d9d4bb2a906f0bec385de8d171170c8ee25"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T041308Z--atomic-canonical-publication-authority-repair.md",
+        "sha256": "d8d183f0f121123326eeefa38e51821c7e14b8d3e5fea66d37a7a422fee3015f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+        "sha256": "9ebb0e0d60ce77c2c741fac0c44c1026ef1f8685b68ec4c8b55084b8bc61a9b5"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:7448dad5b85b94cc1bb7fc4d67ae4551b230c8258c355ba2f976a015afbcdd2e"
+  },
+  "active_resolution": {
+    "level": "atomic_publication_implementation",
+    "scope_horizon": "corrected complete 42-item HCM-2.3 atomic-displaced-basis-v1 implementation selector",
+    "detail_resolution": "implementation_grade",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "operator-authorized exact 42-item production selector with accepted public-enum compatibility risk",
+    "memory_horizon": "frozen Review 10 authority, three immutable predecessor selectors/reviews, and live dirty worktree",
+    "validation_horizon": "fresh selector-closure and API-compatibility CLEAN reviews before production or test edits, then the complete HCM-2.3 proof wall, GitNexus change detection, and fresh complete-subject review before commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T194923Z--HCM-2-3--atomic-publication-implementation-second-superseding-selector.json",
+      "sections": [
+        "immutable predecessor 41-item selector and all previously authorized implementation surfaces"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T195446Z--HCM-2-3--fresh-second-selector-closure-review.json",
+      "sections": [
+        "authoritative CHANGES_REQUIRED closure subject and exact missing committed-reachability seam"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260724T195447Z--HCM-2-3--fresh-public-enum-api-compatibility-review.json",
+      "sections": [
+        "CLEAN enum API-compatibility subject and handbook-engine 0.2.0 consolidation recommendation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260723T154328Z--HCM-2-3--fresh-atomic-publication-documentation-review-10.json",
+      "sections": [
+        "frozen 82-path Review 10 subject and complete atomic-publication authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+      "sections": [
+        "transactionIntent five-field promotion basis",
+        "publicationConflictRefusal and terminalRefusal"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+      "sections": [
+        "transaction grammar and native-publication result chain",
+        "atomic-displaced-basis-v1 protocol",
+        "final-boundary publication conflict",
+        "authorized-reader boundary and recovery tables"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+      "sections": [
+        "Increment 10 atomic publication authority and GitNexus stops",
+        "Checkpoint C persistence, concurrency, proof, and review gates"
+      ]
+    }
+  ],
+  "repo_truth": "This selector supersedes without modifying or replacing 20260724T152017Z--HCM-2-3--atomic-publication-implementation, 20260724T162526Z--HCM-2-3--atomic-publication-implementation-superseding-selector, or 20260724T194923Z--HCM-2-3--atomic-publication-implementation-second-superseding-selector. The latest fresh closure verdict is authoritative and returned CHANGES_REQUIRED for exactly one unselected existing production symbol, GenericArtifactLineageStoreV1::validate_committed_reachability. The operator authorizes that symbol and accepts its exact depth-four CRITICAL upstream impact of 15 production and 27 with tests, one direct caller, five processes, and two modules. The reconciled deduplicated union is exactly 42 unique surfaces: 40 existing production symbols, including only the two reviewed compatibility wrappers and two public enums, plus exactly two new private native helpers. The newly authorized change is limited to allowing an exact commit-planned publication_basis_conflict to complete with an outputless refused suffix; successful create-new publication and every other refusal/path retain their output and reachability requirements. Branch codex/hcm-2-3-planning, HEAD 3c49fa2c6d653f4b1a703d1d5c5196147b003533, zero staged paths, all 82 frozen Review 10 hashes and aggregate sha256:8dac11d067a4fba0efea04a3ae1435ae1fa9c8a82307171676380e9aa8f1413a, all predecessor hashes, and a current GitNexus index were verified before selector creation. build_intent carries only expected_basis_presence, expected_basis_fingerprint, expected_basis_byte_length, expected_basis_identity_token, and expected_basis_version_token; complete structured platform observation remains exclusively in native-publication.json through build_native_publication_observation. No package version changes are authorized. Record handbook-engine 0.2.0 as the recommended consolidation release boundary for the accepted public-enum exhaustive-match and deserialization compatibility consequence.",
+  "allowed_scope": [
+    "The exact 42 unique authorized surfaces are: validate_request_subject; validate_output_ref_binding; validate_persisted_intent_authority; ArtifactRepositoryV1::open_under_authority#2; ArtifactIntakeRegistry::load_with_builtin_compatibility#2; validate_transaction_inventory; GenericArtifactLineageStoreV1::recover_pending#1; GenericArtifactLineageStoreV1::verify_committed#1; native_bound_tokens; native_path_tokens; native_metadata_subjects; observe_retained_regular_file; same_native_metadata; validate_native_publication_observation; rename_store_path; publish_replacement; verify_compare_and_write_path; require_installed_guards_unchanged; observe_installed_output; observe_prepared_replacement; require_prepared_replacement_unchanged; ArtifactRepositoryV1::open#1; ArtifactIntakeRegistry::load#1; open_retained_parent_relative_nt; query_object_id_absence_nt; build_intent; build_marker; build_evidence; build_result; validate_intent; validate_verified; validate_marker; GenericArtifactLineageStoreV1::verify_installed_outputs#4; GenericArtifactLineageStoreV1::install_descriptor#5; build_native_publication_observation; GenericArtifactLineageStoreV1::commit_new_locked#6; GenericArtifactLineageStoreV1::install_output#7; GenericArtifactLineageStoreV1::execute_inner#8; validate_established_refusal; EstablishedRefusalCodeV1; GenericRefusalLayerV1; GenericArtifactLineageStoreV1::validate_committed_reachability.",
+    "Preserve public compatibility only through the already reviewed ArtifactRepositoryV1::open#1 and ArtifactIntakeRegistry::load#1 wrappers; their signatures and external behavior may not widen.",
+    "Add exactly two new private production helpers inside crates/engine/src/artifact_lineage_store.rs: open_retained_parent_relative_nt for NtCreateFile and query_object_id_absence_nt for NtFsControlFile. Treat both as CRITICAL and do not export them.",
+    "Implement every previously selected contract delta exactly as recorded by the immutable second superseding selector, except that its closure block is resolved only by the committed-reachability rule below.",
+    "GenericArtifactLineageStoreV1::validate_committed_reachability: admit missing create-new outputs only when the validated transaction family contains the exact commit-planned promotion and the exact terminal publication_basis_conflict/publication refusal, native-result binding, refused marker, evidence, result, ledger, and committed suffix required by the frozen contract. Keep successful publication and every other operation, refusal, missing native result, malformed/partial suffix, and ambiguous publication state subject to the existing strict output/reachability requirements.",
+    "build_intent: for a promotion commit, persist exactly the five schema-authorized basis fields expected_basis_presence, expected_basis_fingerprint, expected_basis_byte_length, expected_basis_identity_token, and expected_basis_version_token; do not persist any structured platform observation in intent.",
+    "build_native_publication_observation: construct the exact closed atomic-displaced-basis-v1 native-publication.json record, including the complete expected-basis and replacement structured platform observations.",
+    "EstablishedRefusalCodeV1 adds only PublicationBasisConflict serialized as publication_basis_conflict; GenericRefusalLayerV1 adds only Publication serialized as publication; EstablishedRefusalV1 fields do not change.",
+    "Add or update only focused HCM-2.3 regression tests and proof evidence necessary to prove the exact selected schema/vector/runtime contract, crash/recovery, concurrency, reader-withholding, evidence-retention, native ABI, native result chain, enum serialization, and outputless terminal publication conflict.",
+    "Record handbook-engine 0.2.0 as the recommended later consolidation release change; do not modify any package version or Cargo manifest in this remediation."
+  ],
+  "non_goals": [
+    "Do not modify or add resolve_profile_selection or any existing production function, class, method, type, helper, wrapper, dependency, public API, limit, or stage-order rule outside the exact 42-surface union.",
+    "Do not change EstablishedRefusalV1 fields, GenericDomainMutationResultV1 fields, GenericExecutionDispositionV1 variants, any other public API/signature, any dependency, any byte/inventory limit, any package version, or any Cargo manifest.",
+    "Do not add a third private helper, another compatibility wrapper, or generally weaken create-new committed-reachability validation.",
+    "Do not place complete structured platform observation in intent; it belongs only to native-publication.json.",
+    "Do not widen cleanup, evidence deletion, ambient authority, native fallback, last-writer-wins, ordinary replace-after-check, unsupported migration/adoption, restoration, or cooperating-lock-holder assumptions.",
+    "Do not enter HCM-2.2, HCM-2.4, Phase 3+, Phase 4 SDK/transport, Charter workflow, preservation/archive locations, or another task.",
+    "Do not stage, commit, push, close PG-KIND-02, or promote classification before both admission reviews, the complete proof wall, GitNexus change detection, fresh complete-subject CLEAN review, and operator confirmation."
+  ],
+  "tasks": [
+    "Replay this selector, all immutable predecessor selectors and review verdicts, the frozen Review 10 subject, operator authorization, branch, HEAD, zero staged state, and exact dual-mode GitNexus impact before production writes.",
+    "Obtain different-fresh read-only selector-closure and API-compatibility reviews of the complete 42-item union and corrected contract. Proceed only if both return CLEAN with zero findings.",
+    "Write RED regressions first for the five-field intent, structured native publication observation, native result chain, outputless terminal publication conflict, strict committed reachability for every other path, enum serialization, and all reviewed Unix/Windows/crash/recovery/concurrency cases.",
+    "Implement the smallest selected-symbol repair in testable increments without adding any production symbol beyond the two named private native helpers.",
+    "Run staged focused regressions after each increment and then the complete HCM-2.3 proof wall, workspace regressions, formatting, lint, duplicate-safe JSON/schema/vector/checker, Markdown, handoff, preservation, diff, and scope gates.",
+    "Run GitNexus detect-changes and obtain a different-fresh complete-subject findings-first review. Return CLEAN only with zero Critical, Required, Optional, and Nit findings.",
+    "Stop with all paths unstaged, report the handbook-engine 0.2.0 consolidation recommendation, recommend the merge point, and request operator confirmation before any commit."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-runtime-contract-v1.0.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-records-1.0.0.schema.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/contracts/generic-artifact-control-vectors-v1.0.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T041308Z--atomic-canonical-publication-authority-repair.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260723T032758Z--implementation-review-6-remediation.md"
+  ],
+  "stop_conditions": [
+    "Stop before production or test edits unless both fresh admission reviews are CLEAN with zero findings.",
+    "Stop and request separate operator authorization if correctness requires any production symbol outside the exact 42-item union, a third helper, another wrapper, dependency/Cargo/package-version edit, EstablishedRefusalV1 or other public API change, limit change, or stage-order change.",
+    "Stop on any branch, HEAD, staged-state, selected-handoff, Review 10 fingerprint, predecessor hash, selector-manifest, preservation, native-authority, or proof-wall mismatch.",
+    "Do not waive findings, stage, commit, push, create a global handoff, or update the global ledger before operator confirmation."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "impact_analysis",
+      "validation",
+      "remaining_protocol_work",
+      "release_versioning_consequence",
+      "parent_disposition"
+    ]
+  }
+}

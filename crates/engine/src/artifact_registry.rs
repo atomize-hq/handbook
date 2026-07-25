@@ -5,7 +5,7 @@ use crate::definition_identity::{
 };
 use crate::instance_profile::SymbolicId;
 use crate::profile_selection::ResolvedInstanceProfile;
-use crate::schema_registry::StructuralValidationError;
+use crate::schema_registry::{ResolvedBindingJsonType, StructuralValidationError};
 use crate::semantic_capability_registry::{
     AllowedInstanceCardinality, SemanticValidationProfileDefinition,
 };
@@ -282,6 +282,24 @@ impl ResolvedArtifactRegistry {
         self.kind_registry
             .validate_json(&instance.kind_ref, value)
             .map_err(ArtifactRegistryValidationError::Structural)
+    }
+
+    #[doc(hidden)]
+    pub fn intake_schema_leaf_shapes(
+        &self,
+        schema_ref: &ExactDefinitionRef,
+    ) -> Result<BTreeMap<String, ResolvedBindingJsonType>, RegistryLoadError> {
+        self.kind_registry
+            .schema_registry()
+            .resolved(schema_ref)
+            .ok_or_else(|| {
+                RegistryLoadError::at(
+                    RegistryLoadErrorKind::UnsupportedDependency,
+                    schema_ref.as_str(),
+                    "intake candidate schema is absent from the resolved registry",
+                )
+            })?
+            .coverage_leaf_shapes()
     }
 }
 

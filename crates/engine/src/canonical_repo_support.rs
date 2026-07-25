@@ -77,15 +77,18 @@ impl<'a> CanonicalWorkspace<'a> {
         relative_path: &NormalizedRepoRelativePath,
     ) -> Result<TrustedRepoFile, RepoRelativeFileAccessError> {
         let file = open_repo_relative_regular_file(self.repo_root, relative_path.as_path())?;
-        Ok(TrustedRepoFile { file })
+        Ok(TrustedRepoFile {
+            file,
+            target_path: self.absolute_path(relative_path),
+            _directory_guards: Vec::new(),
+        })
     }
 
     pub(crate) fn trusted_read_strict(
         &self,
         relative_path: &NormalizedRepoRelativePath,
     ) -> Result<TrustedRepoFile, RepoRelativeFileAccessError> {
-        let file = open_repo_relative_regular_file_strict(self.repo_root, relative_path.as_path())?;
-        Ok(TrustedRepoFile { file })
+        open_repo_relative_regular_file_strict(self.repo_root, relative_path.as_path())
     }
 
     fn absolute_path(&self, relative_path: &NormalizedRepoRelativePath) -> PathBuf {
@@ -96,6 +99,8 @@ impl<'a> CanonicalWorkspace<'a> {
 #[derive(Debug)]
 pub(crate) struct TrustedRepoFile {
     file: fs::File,
+    target_path: PathBuf,
+    _directory_guards: Vec<fs::File>,
 }
 
 #[cfg(unix)]
@@ -106,6 +111,10 @@ pub(crate) struct TrustedRepoFileIdentity {
 }
 
 impl TrustedRepoFile {
+    pub(crate) fn metadata(&self) -> Result<fs::Metadata, std::io::Error> {
+        self.file.metadata()
+    }
+
     #[cfg(unix)]
     pub(crate) fn identity(&self) -> Result<TrustedRepoFileIdentity, std::io::Error> {
         use std::os::unix::fs::MetadataExt;
@@ -136,6 +145,154 @@ impl TrustedRepoFile {
         }
         Ok((bytes, exceeded))
     }
+
+    pub(crate) fn read_bytes_bounded_stable(
+        &self,
+        maximum_bytes: usize,
+    ) -> Result<(Vec<u8>, bool), std::io::Error> {
+        self.read_bytes_bounded_stable_with(maximum_bytes, || {})
+    }
+
+    #[cfg(test)]
+    pub(crate) fn read_bytes_bounded_stable_with_hook(
+        &self,
+        maximum_bytes: usize,
+        hook: impl FnOnce(),
+    ) -> Result<(Vec<u8>, bool), std::io::Error> {
+        self.read_bytes_bounded_stable_with(maximum_bytes, hook)
+    }
+
+    fn read_bytes_bounded_stable_with(
+        &self,
+        maximum_bytes: usize,
+        hook: impl FnOnce(),
+    ) -> Result<(Vec<u8>, bool), std::io::Error> {
+        let before = self.file.metadata()?;
+        if !metadata_has_single_stable_identity(&before) || !path_has_single_link(&self.target_path)
+        {
+            return Err(std::io::Error::other(
+                "repository file does not have one stable regular-file identity",
+            ));
+        }
+        hook();
+        let observed = self.read_bytes_bounded(maximum_bytes)?;
+        let after = self.file.metadata()?;
+        let length_matches_observation = if observed.1 {
+            after.len() > observed.0.len() as u64
+        } else {
+            after.len() == observed.0.len() as u64
+        };
+        if !same_stable_file_observation(&before, &after) || !length_matches_observation {
+            return Err(std::io::Error::other(
+                "repository file changed during retained-handle observation",
+            ));
+        }
+        Ok(observed)
+    }
+}
+
+#[cfg(unix)]
+fn metadata_has_single_stable_identity(metadata: &fs::Metadata) -> bool {
+    use std::os::unix::fs::MetadataExt;
+
+    metadata.is_file() && metadata.nlink() == 1
+}
+
+#[cfg(unix)]
+fn path_has_single_link(_path: &Path) -> bool {
+    true
+}
+
+#[cfg(windows)]
+fn metadata_has_single_stable_identity(metadata: &fs::Metadata) -> bool {
+    metadata.is_file()
+}
+
+#[cfg(windows)]
+pub(crate) fn path_has_single_link(path: &Path) -> bool {
+    let Some(system_root) = std::env::var_os("SystemRoot") else {
+        return false;
+    };
+    let system_root = PathBuf::from(system_root);
+    let fsutil = system_root.join("System32/fsutil.exe");
+    let mut extended = std::ffi::OsString::from(r"\\?\");
+    extended.push(path.as_os_str());
+    if let Some(single_link) = [path.as_os_str(), extended.as_os_str()]
+        .into_iter()
+        .find_map(|candidate| {
+            std::process::Command::new(&fsutil)
+                .arg("hardlink")
+                .arg("list")
+                .arg(candidate)
+                .output()
+                .ok()
+                .filter(|output| output.status.success())
+                .map(|output| {
+                    String::from_utf8_lossy(&output.stdout)
+                        .lines()
+                        .filter(|line| !line.trim().is_empty())
+                        .count()
+                        == 1
+                })
+        })
+    {
+        return single_link;
+    }
+
+    // `fsutil hardlink list` does not accept extended-length paths. The
+    // Windows PowerShell file-system provider obtains the same native link
+    // identity for those paths. Any missing provider, ambiguous link type, or
+    // command failure remains fail-closed.
+    let powershell = system_root.join("System32/WindowsPowerShell/v1.0/powershell.exe");
+    std::process::Command::new(powershell)
+        .args([
+            "-NoLogo",
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "try { $item = Get-Item -LiteralPath $env:HANDBOOK_STRICT_READ_PATH -Force -ErrorAction Stop; if ([string]::IsNullOrEmpty([string]$item.LinkType)) { exit 0 }; exit 1 } catch { exit 2 }",
+        ])
+        .env("HANDBOOK_STRICT_READ_PATH", extended)
+        .status()
+        .is_ok_and(|status| status.success())
+}
+
+#[cfg(all(not(unix), not(windows)))]
+fn metadata_has_single_stable_identity(_metadata: &fs::Metadata) -> bool {
+    false
+}
+
+#[cfg(all(not(unix), not(windows)))]
+fn path_has_single_link(_path: &Path) -> bool {
+    false
+}
+
+#[cfg(unix)]
+fn same_stable_file_observation(before: &fs::Metadata, after: &fs::Metadata) -> bool {
+    use std::os::unix::fs::MetadataExt;
+
+    before.dev() == after.dev()
+        && before.ino() == after.ino()
+        && before.nlink() == after.nlink()
+        && before.len() == after.len()
+        && before.mtime() == after.mtime()
+        && before.mtime_nsec() == after.mtime_nsec()
+        && before.ctime() == after.ctime()
+        && before.ctime_nsec() == after.ctime_nsec()
+}
+
+#[cfg(windows)]
+fn same_stable_file_observation(before: &fs::Metadata, after: &fs::Metadata) -> bool {
+    use std::os::windows::fs::MetadataExt;
+
+    before.file_size() == after.file_size()
+        && before.creation_time() == after.creation_time()
+        && before.last_write_time() == after.last_write_time()
+}
+
+#[cfg(all(not(unix), not(windows)))]
+fn same_stable_file_observation(_before: &fs::Metadata, _after: &fs::Metadata) -> bool {
+    false
 }
 
 #[cfg(unix)]
@@ -143,15 +300,20 @@ fn open_repo_relative_regular_file(
     repo_root: &Path,
     relative_path: &Path,
 ) -> Result<fs::File, RepoRelativeFileAccessError> {
-    open_repo_relative_regular_file_strict(repo_root, relative_path)
+    open_repo_relative_regular_file_with_hook(repo_root, relative_path, |_, _| {})
 }
 
 #[cfg(unix)]
 fn open_repo_relative_regular_file_strict(
     repo_root: &Path,
     relative_path: &Path,
-) -> Result<fs::File, RepoRelativeFileAccessError> {
-    open_repo_relative_regular_file_with_hook(repo_root, relative_path, |_, _| {})
+) -> Result<TrustedRepoFile, RepoRelativeFileAccessError> {
+    let file = open_repo_relative_regular_file_with_hook(repo_root, relative_path, |_, _| {})?;
+    Ok(TrustedRepoFile {
+        file,
+        target_path: repo_root.join(relative_path),
+        _directory_guards: Vec::new(),
+    })
 }
 
 #[cfg(unix)]
@@ -261,11 +423,14 @@ fn open_repo_relative_regular_file(
 fn open_repo_relative_regular_file_strict(
     repo_root: &Path,
     relative_path: &Path,
-) -> Result<fs::File, RepoRelativeFileAccessError> {
+) -> Result<TrustedRepoFile, RepoRelativeFileAccessError> {
     use std::os::windows::fs::{MetadataExt, OpenOptionsExt};
 
     const FILE_ATTRIBUTE_REPARSE_POINT: u32 = 0x0000_0400;
     const FILE_SHARE_READ: u32 = 0x0000_0001;
+    const FILE_SHARE_WRITE: u32 = 0x0000_0002;
+    const FILE_FLAG_BACKUP_SEMANTICS: u32 = 0x0200_0000;
+    const FILE_FLAG_OPEN_REPARSE_POINT: u32 = 0x0020_0000;
 
     let root_metadata = fs::symlink_metadata(repo_root).map_err(|source| {
         RepoRelativeFileAccessError::ReadFailure {
@@ -281,24 +446,87 @@ fn open_repo_relative_regular_file_strict(
         ));
     }
 
-    let absolute_path = resolve_repo_relative_regular_file_path(repo_root, relative_path)?;
-    let mut current = repo_root.to_path_buf();
-    for component in relative_path.components() {
-        let Component::Normal(part) = component else {
-            continue;
-        };
-        current.push(part);
-        let metadata = fs::symlink_metadata(&current).map_err(|source| {
-            RepoRelativeFileAccessError::ReadFailure {
-                path: current.clone(),
-                source,
-            }
+    let absolute_path = repo_root.join(relative_path);
+    let mut directory_guards = Vec::new();
+    let root_handle = fs::OpenOptions::new()
+        .read(true)
+        .share_mode(FILE_SHARE_READ | FILE_SHARE_WRITE)
+        .custom_flags(FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT)
+        .open(repo_root)
+        .map_err(|source| RepoRelativeFileAccessError::ReadFailure {
+            path: repo_root.to_path_buf(),
+            source,
         })?;
-        if metadata.file_type().is_symlink()
-            || metadata.file_attributes() & FILE_ATTRIBUTE_REPARSE_POINT != 0
-        {
+    if !root_handle
+        .metadata()
+        .map_err(|source| RepoRelativeFileAccessError::ReadFailure {
+            path: repo_root.to_path_buf(),
+            source,
+        })?
+        .is_dir()
+    {
+        return Err(RepoRelativeFileAccessError::NotRegularFile(
+            repo_root.to_path_buf(),
+        ));
+    }
+    directory_guards.push(root_handle);
+    let mut current = repo_root.to_path_buf();
+    let components = relative_path
+        .components()
+        .filter_map(|component| match component {
+            Component::Normal(part) => Some(part),
+            _ => None,
+        })
+        .collect::<Vec<_>>();
+    for part in components.iter().take(components.len().saturating_sub(1)) {
+        current.push(part);
+        let directory = fs::OpenOptions::new()
+            .read(true)
+            .share_mode(FILE_SHARE_READ | FILE_SHARE_WRITE)
+            .custom_flags(FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT)
+            .open(&current)
+            .map_err(|source| {
+                if source.kind() == std::io::ErrorKind::NotFound {
+                    RepoRelativeFileAccessError::Missing(current.clone())
+                } else {
+                    RepoRelativeFileAccessError::ReadFailure {
+                        path: current.clone(),
+                        source,
+                    }
+                }
+            })?;
+        let metadata =
+            directory
+                .metadata()
+                .map_err(|source| RepoRelativeFileAccessError::ReadFailure {
+                    path: current.clone(),
+                    source,
+                })?;
+        if !metadata.is_dir() || metadata.file_attributes() & FILE_ATTRIBUTE_REPARSE_POINT != 0 {
             return Err(RepoRelativeFileAccessError::SymlinkNotAllowed(current));
         }
+        directory_guards.push(directory);
+    }
+
+    let target_path_metadata = fs::symlink_metadata(&absolute_path).map_err(|source| {
+        if source.kind() == std::io::ErrorKind::NotFound {
+            RepoRelativeFileAccessError::Missing(absolute_path.clone())
+        } else {
+            RepoRelativeFileAccessError::ReadFailure {
+                path: absolute_path.clone(),
+                source,
+            }
+        }
+    })?;
+    if target_path_metadata.file_type().is_symlink()
+        || target_path_metadata.file_attributes() & FILE_ATTRIBUTE_REPARSE_POINT != 0
+    {
+        return Err(RepoRelativeFileAccessError::SymlinkNotAllowed(
+            absolute_path,
+        ));
+    }
+    if !target_path_metadata.is_file() {
+        return Err(RepoRelativeFileAccessError::NotRegularFile(absolute_path));
     }
 
     let canonical_root =
@@ -307,9 +535,13 @@ fn open_repo_relative_regular_file_strict(
             source,
         })?;
     let canonical_target = fs::canonicalize(&absolute_path).map_err(|source| {
-        RepoRelativeFileAccessError::ReadFailure {
-            path: absolute_path.clone(),
-            source,
+        if source.kind() == std::io::ErrorKind::NotFound {
+            RepoRelativeFileAccessError::Missing(absolute_path.clone())
+        } else {
+            RepoRelativeFileAccessError::ReadFailure {
+                path: absolute_path.clone(),
+                source,
+            }
         }
     })?;
     if canonical_target.strip_prefix(&canonical_root).is_err() {
@@ -322,9 +554,15 @@ fn open_repo_relative_regular_file_strict(
         .read(true)
         .share_mode(FILE_SHARE_READ)
         .open(&absolute_path)
-        .map_err(|source| RepoRelativeFileAccessError::ReadFailure {
-            path: absolute_path.clone(),
-            source,
+        .map_err(|source| {
+            if source.kind() == std::io::ErrorKind::NotFound {
+                RepoRelativeFileAccessError::Missing(absolute_path.clone())
+            } else {
+                RepoRelativeFileAccessError::ReadFailure {
+                    path: absolute_path.clone(),
+                    source,
+                }
+            }
         })?;
     let handle_metadata =
         file.metadata()
@@ -351,14 +589,18 @@ fn open_repo_relative_regular_file_strict(
             "repository file changed during strict read admission".to_string(),
         ));
     }
-    Ok(file)
+    Ok(TrustedRepoFile {
+        file,
+        target_path: absolute_path,
+        _directory_guards: directory_guards,
+    })
 }
 
 #[cfg(all(not(unix), not(windows)))]
 fn open_repo_relative_regular_file_strict(
     _repo_root: &Path,
     _relative_path: &Path,
-) -> Result<fs::File, RepoRelativeFileAccessError> {
+) -> Result<TrustedRepoFile, RepoRelativeFileAccessError> {
     Err(RepoRelativeFileAccessError::InvalidPath(
         "descriptor-relative no-follow access is unavailable on this platform".to_string(),
     ))
@@ -463,7 +705,35 @@ mod trusted_read_race_tests {
         let file = super::open_repo_relative_regular_file_strict(repo.path(), relative.as_path())
             .expect("regular read-only repository file should be admitted on Windows");
 
-        assert!(file.metadata().unwrap().is_file());
+        assert!(file.file.metadata().unwrap().is_file());
+        assert!(std::fs::OpenOptions::new()
+            .write(true)
+            .open(repo.path().join("definitions/schemas/value.json"))
+            .is_err());
+        assert!(std::fs::rename(
+            repo.path().join("definitions"),
+            repo.path().join("definitions-renamed")
+        )
+        .is_err());
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn retained_windows_handle_blocks_same_size_mutation_during_stable_read() {
+        let repo = tempfile::tempdir().unwrap();
+        let path = repo.path().join("value.yaml");
+        std::fs::write(&path, b"before\n").unwrap();
+        let relative = NormalizedRepoRelativePath::parse("value.yaml").unwrap();
+        let file = super::open_repo_relative_regular_file_strict(repo.path(), relative.as_path())
+            .expect("strict handle");
+
+        let (bytes, exceeded) = file
+            .read_bytes_bounded_stable_with_hook(1024, || {
+                assert!(std::fs::write(&path, b"after!\n").is_err());
+            })
+            .expect("retained handle keeps one stable observation");
+        assert!(!exceeded);
+        assert_eq!(bytes, b"before\n");
     }
 
     #[cfg(unix)]
@@ -489,7 +759,11 @@ mod trusted_read_race_tests {
             },
         )
         .unwrap();
-        let trusted = TrustedRepoFile { file };
+        let trusted = TrustedRepoFile {
+            file,
+            target_path: repo.path().join("original/sub/value.yaml"),
+            _directory_guards: Vec::new(),
+        };
 
         std::fs::rename(
             repo.path().join("original/sub/value.yaml"),
@@ -499,6 +773,40 @@ mod trusted_read_race_tests {
         std::fs::write(repo.path().join("original/sub/value.yaml"), b"replaced\n").unwrap();
 
         assert_eq!(trusted.read_bytes().unwrap(), b"inside\n");
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn stable_read_rejects_same_size_mutation_with_restored_mtime() {
+        let repo = tempfile::tempdir().unwrap();
+        let path = repo.path().join("value.yaml");
+        let timestamp = repo.path().join("timestamp.reference");
+        std::fs::write(&path, b"before\n").unwrap();
+        std::fs::write(&timestamp, b"reference\n").unwrap();
+        assert!(std::process::Command::new("touch")
+            .args(["-r"])
+            .arg(&path)
+            .arg(&timestamp)
+            .status()
+            .unwrap()
+            .success());
+        let relative = NormalizedRepoRelativePath::parse("value.yaml").unwrap();
+        let file = super::open_repo_relative_regular_file_strict(repo.path(), relative.as_path())
+            .expect("strict handle");
+
+        let error = file
+            .read_bytes_bounded_stable_with_hook(1024, || {
+                std::fs::write(&path, b"after!\n").unwrap();
+                assert!(std::process::Command::new("touch")
+                    .args(["-r"])
+                    .arg(&timestamp)
+                    .arg(&path)
+                    .status()
+                    .unwrap()
+                    .success());
+            })
+            .expect_err("ctime identity must expose restored-mtime mutation");
+        assert_eq!(error.kind(), std::io::ErrorKind::Other);
     }
 
     #[cfg(all(not(unix), not(windows)))]
