@@ -323,7 +323,7 @@ acceptance and verification evidence exists.
     production, test, fixture, top-level phase, prior proof/dispatch, selector,
     preservation/archive, staging, commit, or push.
 
-- [ ] Replace verify-then-unconditional-rename with the reviewed atomic protocol.
+- [x] Replace verify-then-unconditional-rename with the reviewed atomic protocol.
   - Acceptance: Unix uses retained source and parent dirfds with
     `renameat2(..., RENAME_NOREPLACE)`; Windows uses only the retained-handle
     `FileRenameInfo` form above. Expected present claims `C -> D`, proves live
@@ -350,13 +350,20 @@ acceptance and verification evidence exists.
     after a fresh review accepts the documentation repair and the operator
     authorizes all sixteen CRITICAL record-chain, structured-observation, and
     retained-handle publication surfaces named in the SPEC and authority proof.
+  - Result: landed in implementation commit
+    `628b672ef33326e87e4fb30be13489e8af04b38c`; the final implementation proof
+    records the atomic publication, recovery, refusal, crash, restart, and
+    native-platform evidence.
 
-- [ ] Re-complete Checkpoint C after atomic-publication implementation.
+- [x] Re-complete Checkpoint C after atomic-publication implementation.
   - Acceptance: persistent operations are serializable and recoverable; no
     orphan/partial/markerless authority is visible; all HCM-2.2 regressions
     remain green.
   - Verify: native Unix/Windows proof, engine tests, format, Clippy, graph and
     diff after the replacement implementation.
+  - Result: the final implementation proof wall records Checkpoint C complete
+    with workspace tests, strict Clippy, formatting, schemas, handoffs,
+    platform proof, and GitNexus detection passing.
 
 ## Stable CLI and real path
 
@@ -429,41 +436,27 @@ acceptance and verification evidence exists.
   - Result: Review 1 admitted the 43-path subject and returned three Critical
     plus ten Required findings; no finding was waived.
 
-- [ ] Remediate every valid finding and obtain a different-fresh CLEAN review.
+- [x] Remediate every valid finding and obtain a different-fresh CLEAN review.
   - Acceptance: no waiver; behavior remedies return to RED; full proof reruns;
     final reviewer is distinct and exact final subject is CLEAN.
   - Verify: immutable remediation proof/dispatch chain and final fingerprint.
-  - Current blocker: atomic-publication documentation Reviews 1-9 are the
-    current review lineage. Every finding is repaired only in documentation
-    authority, including Review 9's six Required ABI/authority/coverage defects
-    and one Nit; a different-fresh CLEAN documentation review remains required.
-    Production remains known non-authoritative and all sixteen GitNexus
-    `CRITICAL` surfaces remain independent
-    operator-authorization stops:
-    - record chain: `validate_transaction_inventory`, `recover_pending`, and
-      `verify_committed`;
-    - structured observation: `native_bound_tokens`, `native_path_tokens`,
-      `native_metadata_subjects`, `observe_retained_regular_file`,
-      `same_native_metadata`, and
-      `validate_native_publication_observation`;
-    - retained-handle publication: `rename_store_path`,
-      `publish_replacement`, `verify_compare_and_write_path`,
-      `require_installed_guards_unchanged`, `observe_installed_output`,
-      `observe_prepared_replacement`, and
-      `require_prepared_replacement_unchanged`.
-    `publish_replacement` is expressly unauthorized until the operator approves
-    the complete sixteen-surface set; partial approval is insufficient.
-  - Ordered unblock gates: different-fresh CLEAN documentation review; explicit
-    operator authorization of all sixteen surfaces; bounded implementation
-    selector; `atomic-displaced-basis-v1` implementation; re-completed
-    Checkpoint C and full proof wall; GitNexus change detection; and a later
-    different-fresh complete implementation CLEAN review. Only then may
-    classification, `PG-KIND-02` closure, or the primary commit occur.
+  - Result: all review findings were remediated without waiver. The fresh
+    built-in reviewer returned `CLEAN` over the exact 111-path subject
+    `sha256:d510e94e5b47db209022927bc4afa74b8820e27cd645123cc1cdc3aa5f72fdef`
+    bound by the immutable dispatch
+    `handoffs/dispatches/20260725T152312Z--HCM-2-3--fresh-59-surface-complete-subject-review.json`.
+    Commit `746fff667f6fbe0270182a467285d60394362530` preserves the
+    dispatch artifact; the parent closeout records delegated reviewer identity,
+    status, and result separately.
 
-- [ ] Create the primary implementation commit from unchanged CLEAN bytes.
+- [x] Create the primary implementation commit from unchanged CLEAN bytes.
   - Acceptance: staged subject exactly replays final manifest; all gates and
     preservation checks pass; handoff/ledger closeout is excluded.
   - Verify: staged diff/manifest, GitNexus detect-changes, commit inspection.
+  - Result: implementation commit
+    `628b672ef33326e87e4fb30be13489e8af04b38c` is an ancestor of the final
+    review artifact commit and the current canonical branch head; the final
+    111-path manifest replays byte-identically.
 
 - [ ] Create the parent-owned completed handoff and deterministic ledger-only
       closeout commit.
@@ -472,3 +465,9 @@ acceptance and verification evidence exists.
     handoff/ledger/index closeout files enter commit two.
   - Verify: all three handoff modes, ledger rebuild equality, ancestry, final
     clean status, preservation equality, and exact handoff parse command.
+  - Current status: intentionally pending in this reviewed checklist. Protocol
+    `08` requires the reviewed reconciliation commit to exist before its hash
+    can become both `repo_state.head` and `reviewed_state.baseline_head` in the
+    parent-owned v1.2 handoff. The subsequent mechanical commit records
+    completion through that immutable handoff and rebuilt ledger; it does not
+    rewrite this reviewed subject.

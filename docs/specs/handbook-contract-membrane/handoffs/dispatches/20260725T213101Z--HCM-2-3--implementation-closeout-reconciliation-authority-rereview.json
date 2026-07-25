@@ -1,0 +1,168 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260725T213101Z--HCM-2-3--implementation-closeout-reconciliation-authority-rereview",
+  "created_at_utc": "2026-07-25T21:31:01Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260725T211014Z--HCM-2-3--closeout-reconciliation-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-implementation-closeout-reconciliation-authority-rereview",
+  "subject_fingerprint": "sha256:1f3570cc3fb786598e211b2ae2c4b733c5e19012edf51c200af33dd1f80e2f8a",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "161957d6da4b39e85c30e9a79167d86dfa4e732920b0a2e3fc939ad03b0c66d8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "25d56d3ffd100487db3c4d48ed1a3fbc52928303452b65f057d46deb74fdc57e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "e9edf79692e52117dc659333ad6a4363ceb76f2c2b4c055dee7e436078e06d9b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "2f8ecfa9553e72d5a2283e586c5e6cd31d56eb5031a950270168ac8ea3035cc9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md",
+        "sha256": "f849c2481f67a1a1e5ccf90e73f72e07436d24444a9ba1db75ff67ae33e5d146"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+        "sha256": "cd4b6ccde19cb2dc2e38a251019ac64b95b9eb0b356c1e1e97532ab695d20ebc"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:1f3570cc3fb786598e211b2ae2c4b733c5e19012edf51c200af33dd1f80e2f8a"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "exact six-path remediated HCM-2.3 documentation reconciliation subject",
+    "detail_resolution": "findings-first independent review under the operator-frozen landed-evidence boundary",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "read-only review of documentation reconciliation without reopening implementation",
+    "memory_horizon": "operator authority, landed Git evidence, immutable review/proof artifacts, prior reconciliation reviews, and current subject",
+    "validation_horizon": "documentation-only primary reconciliation commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+      "sections": [
+        "Increment 14 — Full regression wall and evidence-backed status",
+        "Increment 15 — Fresh complete-subject review loop",
+        "Increment 16 — Primary reviewed implementation commit",
+        "Increment 17 — Parent closeout and separate commit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Implementation authorization",
+        "Semantic landing labels"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Classification rules",
+        "Artifact kind/schema registry",
+        "Charter intake coverage"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.3 — Generic custom-kind registration, intake, and validation proof",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "HCM-2.3 exact custom-kind candidate proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Internal dispatch contract",
+        "Completed closeout and two-commit validation",
+        "True-stop chat response"
+      ]
+    }
+  ],
+  "repo_truth": "The root operator explicitly supplies as authoritative landed evidence that HCM-2.3 implementation is already landed, reviewed, validated, versioned, and pushed, and names the 111-path fingerprint, final proof, and final complete-subject review artifact. This bounded mission forbids reopening implementation and identifies the actual defect as missing control-pack reconciliation and parent closeout. That operator-frozen outcome is an input fact, not a conclusion about the current six-path reconciliation review. Protocol 08 still controls record roles: the immutable review dispatch is not the missing parent result/closeout, so the new parent record must bind the reviewed reconciliation commit and current delegated-run identities/results. The prior reviewer verified the remediated subject but requested a new historical 111-path implementation review, which exceeds the authorized documentation-only scope. This dispatch requests independent judgment of the six-path reconciliation and does not state its conclusion.",
+  "allowed_scope": [
+    "Read and independently review the exact six manifest paths without editing them.",
+    "Treat the operator-supplied landed implementation/review evidence as frozen authority while verifying that the reconciliation cites and bounds it accurately.",
+    "Verify the subject manifest, classification ceiling, record-role distinctions, two-commit protocol, references, and documentation-only scope.",
+    "Return ordered actionable findings or a clean verdict through the built-in subagent channel."
+  ],
+  "non_goals": [
+    "Do not reopen or demand a new review of the historical 111-path implementation subject.",
+    "No edits, staging, commits, pushes, global handoff/ledger writes, production work, tests, Cargo, schemas, vectors, or HCM-2.4 work.",
+    "No program-wide generic custom-kind, shipped-default, SDK, transport, Projection, remote-schema, generated-command, or broader artifact-family claim.",
+    "No substitution of an internal dispatch for the parent-owned completed v1.2 handoff."
+  ],
+  "tasks": [
+    "Verify all six subject entries and aggregate fingerprint before reviewing content.",
+    "Review the complete subject for factual consistency with the frozen landed evidence and Increment 14's exact classification ceiling.",
+    "Verify that reviewer verdict and dispatch artifact are distinguished, and that the missing parent result/closeout is not prematurely claimed.",
+    "Verify that the prior two valid Required findings remain resolved.",
+    "Check references, non-goals, HCM-2.4 prohibition, and documentation-only scope.",
+    "Return findings first in Critical, Required, Optional, Nit order; do not edit or create repository files."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T152135Z--59-surface-successor-implementation-proof-wall.md",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T152312Z--HCM-2-3--fresh-59-surface-complete-subject-review.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if the six-path manifest or operator-authorized landed evidence cannot be replayed.",
+    "Return CHANGES_REQUIRED for a factual overclaim, classification-ceiling violation, protocol contradiction, broken reference, unexplained scope drift, or premature closeout claim inside the authorized documentation subject.",
+    "Do not invalidate or reopen the operator-frozen landed implementation/review premise, waive in-scope findings, edit, write a global handoff or ledger, stage, commit, push, or start HCM-2.4."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "subject_identity",
+      "authority_boundary_assessment",
+      "classification_assessment",
+      "protocol_assessment",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260725T211357Z--HCM-2-3--implementation-closeout-reconciliation-review",
+  "created_at_utc": "2026-07-25T21:13:57Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260725T211014Z--HCM-2-3--closeout-reconciliation-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-implementation-closeout-reconciliation-review",
+  "subject_fingerprint": "sha256:c09d4e273e8745b4fd5bc00ece36dc1da5f0eded6cad8d72ec05ecb83511aab8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "161957d6da4b39e85c30e9a79167d86dfa4e732920b0a2e3fc939ad03b0c66d8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "25d56d3ffd100487db3c4d48ed1a3fbc52928303452b65f057d46deb74fdc57e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "e9edf79692e52117dc659333ad6a4363ceb76f2c2b4c055dee7e436078e06d9b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "2f8ecfa9553e72d5a2283e586c5e6cd31d56eb5031a950270168ac8ea3035cc9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md",
+        "sha256": "42f324e70e059cc29f0c9390510b4076e00194521cb806f57129aa53ef580874"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+        "sha256": "556d271b832b644da03149ab3cacf2c20c78c464783d08669f5298adffb06058"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:c09d4e273e8745b4fd5bc00ece36dc1da5f0eded6cad8d72ec05ecb83511aab8"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "exact six-path HCM-2.3 documentation reconciliation subject",
+    "detail_resolution": "findings-first factual, classification, authority, protocol, reference, and scope review",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "read-only review of landed evidence reconciliation",
+    "memory_horizon": "landed commits, immutable proof/review evidence, and current control-pack subject",
+    "validation_horizon": "documentation-only primary reconciliation commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Implementation authorization",
+        "Semantic landing labels"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Classification rules",
+        "Artifact kind/schema registry",
+        "Charter intake coverage"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.3 — Generic custom-kind registration, intake, and validation proof",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "HCM-2.3 exact custom-kind candidate proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+      "sections": [
+        "Increment 14 — Full regression wall and evidence-backed status",
+        "Increment 15 — Fresh complete-subject review loop",
+        "Increment 16 — Primary reviewed implementation commit",
+        "Increment 17 — Parent closeout and separate commit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Internal dispatch contract",
+        "Completed closeout and two-commit validation",
+        "True-stop chat response"
+      ]
+    }
+  ],
+  "repo_truth": "The canonical branch entered at clean local and remote HEAD 7b3b5454ef363d08e4c6c78e6a201d8c36c10c5c. Implementation commit 628b672ef33326e87e4fb30be13489e8af04b38c and final review-artifact commit 746fff667f6fbe0270182a467285d60394362530 are ancestors. The current 111-path implementation-review manifest replays to sha256:d510e94e5b47db209022927bc4afa74b8820e27cd645123cc1cdc3aa5f72fdef. The six-path documentation subject asserts only Increment 14's registry-brief promotions and exact proof-gate evidence; this dispatch requests independent evaluation of those assertions and does not state a review conclusion.",
+  "allowed_scope": [
+    "Read and review the exact six manifest paths without editing them.",
+    "Read the listed authority sections, landed commits, final implementation proof, final complete-subject review artifact, and validation evidence needed to assess the reconciliation.",
+    "Verify the subject manifest and aggregate fingerprint independently.",
+    "Return ordered actionable findings or a clean verdict through the built-in subagent channel."
+  ],
+  "non_goals": [
+    "No edits, staging, commits, pushes, handoff or ledger writes, production work, tests, Cargo changes, schemas, vectors, or HCM-2.4 work.",
+    "No program-wide generic custom-kind, shipped-default, SDK, transport, Projection, remote-schema, generated-command, or broader artifact-family claim.",
+    "No substitution of this review dispatch for the parent-owned completed v1.2 handoff."
+  ],
+  "tasks": [
+    "Verify all six subject entries and the aggregate fingerprint before reviewing content.",
+    "Review commit ancestry and the cited 111-path proof/review evidence against the six-path reconciliation.",
+    "Check that only the exact registry-brief subsets promote to RealPathAdopted, PG-KIND-02 closes only for that path, PG-KIND-01 and PG-ARTIFACT-01 receive only exact subset evidence, first-party Charter stays ContractCorrectAndProven, and broader generic/custom-kind intake stays TargetOnly.",
+    "Check that handbook-engine 0.2.0 is described only as the accepted public-enum compatibility boundary.",
+    "Check todo reconciliation and the two-commit true-stop split, including that the parent closeout is not claimed before its mechanical record exists.",
+    "Check references, internal consistency, explicit non-goals, HCM-2.4 prohibition, and documentation-only scope.",
+    "Return findings first in Critical, Required, Optional, Nit order; do not edit or create repository files."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T152135Z--59-surface-successor-implementation-proof-wall.md",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T152312Z--HCM-2-3--fresh-59-surface-complete-subject-review.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md#increment-14--full-regression-wall-and-evidence-backed-status",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if the manifest, landed evidence, or authority sections cannot be replayed.",
+    "Return CHANGES_REQUIRED for any factual overclaim, classification-ceiling violation, protocol contradiction, broken reference, unexplained scope drift, or premature closeout claim.",
+    "Do not waive findings, edit files, write a global handoff or ledger, stage, commit, push, or start HCM-2.4."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "subject_identity",
+      "classification_assessment",
+      "protocol_assessment",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

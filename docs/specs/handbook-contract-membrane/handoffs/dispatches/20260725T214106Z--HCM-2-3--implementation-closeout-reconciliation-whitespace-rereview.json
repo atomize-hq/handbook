@@ -1,0 +1,166 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260725T214106Z--HCM-2-3--implementation-closeout-reconciliation-whitespace-rereview",
+  "created_at_utc": "2026-07-25T21:41:06Z",
+  "source_handoff_ids": [
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260725T211014Z--HCM-2-3--closeout-reconciliation-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.3",
+  "packet_id": "HCM-2.3-implementation-closeout-reconciliation-whitespace-rereview",
+  "subject_fingerprint": "sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "161957d6da4b39e85c30e9a79167d86dfa4e732920b0a2e3fc939ad03b0c66d8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "25d56d3ffd100487db3c4d48ed1a3fbc52928303452b65f057d46deb74fdc57e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "e9edf79692e52117dc659333ad6a4363ceb76f2c2b4c055dee7e436078e06d9b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "2f8ecfa9553e72d5a2283e586c5e6cd31d56eb5031a950270168ac8ea3035cc9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md",
+        "sha256": "787fa068ccd3953f1677085aefdb111cc9165e1de63132a6e1f49a14e4e45b20"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/todo.md",
+        "sha256": "cd4b6ccde19cb2dc2e38a251019ac64b95b9eb0b356c1e1e97532ab695d20ebc"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b4e0f7e5f72c6bf512f76bacbeac48db4189fc627436340be06c40aad776ab88"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "exact six-path HCM-2.3 documentation reconciliation after whitespace remediation",
+    "detail_resolution": "findings-first complete re-review under operator-frozen landed-evidence authority",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "read-only documentation reconciliation review",
+    "memory_horizon": "landed evidence, prior review lineage, whitespace failure, and final subject bytes",
+    "validation_horizon": "documentation-only primary reconciliation commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Implementation authorization",
+        "Semantic landing labels"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Classification rules",
+        "Artifact kind/schema registry",
+        "Charter intake coverage"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.3 — Generic custom-kind registration, intake, and validation proof",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "HCM-2.3 exact custom-kind candidate proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.3/tasks/plan.md",
+      "sections": [
+        "Increment 14 — Full regression wall and evidence-backed status",
+        "Increment 15 — Fresh complete-subject review loop",
+        "Increment 16 — Primary reviewed implementation commit",
+        "Increment 17 — Parent closeout and separate commit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Internal dispatch contract",
+        "Completed closeout and two-commit validation",
+        "True-stop chat response"
+      ]
+    }
+  ],
+  "repo_truth": "The prior authority-bounded reviewer returned CLEAN over subject sha256:1f3570cc3fb786598e211b2ae2c4b733c5e19012edf51c200af33dd1f80e2f8a. Subsequent staged git diff --check correctly exposed four trailing-space defects in the previously untracked new reconciliation proof, so that review subject is invalidated for commit. The parent removed only those four trailing spaces, unstaged the attempted subject, and recomputed this six-path fingerprint. The root operator's landed implementation/review evidence remains frozen and may not be reopened. This dispatch requests a different-fresh complete review of the new bytes and does not state its conclusion.",
+  "allowed_scope": [
+    "Read and independently review the exact six manifest paths without editing them.",
+    "Verify the new subject manifest, the four-space-only remediation, full content, classification ceiling, record roles, two-commit protocol, references, and documentation-only scope.",
+    "Treat the operator-supplied landed implementation/review evidence as frozen authority.",
+    "Return ordered actionable findings or a clean verdict through the built-in subagent channel."
+  ],
+  "non_goals": [
+    "Do not reopen the historical 111-path implementation review.",
+    "No edits, staging, commits, pushes, global handoff/ledger writes, production work, tests, Cargo, schemas, vectors, or HCM-2.4 work.",
+    "No broader custom-kind, shipped-default, SDK, transport, Projection, remote-schema, generated-command, or artifact-family claim."
+  ],
+  "tasks": [
+    "Verify all six subject entries and aggregate fingerprint before reviewing content.",
+    "Verify the only delta from subject sha256:1f3570cc3fb786598e211b2ae2c4b733c5e19012edf51c200af33dd1f80e2f8a removes four trailing spaces in the proof heading metadata.",
+    "Review the complete subject, not only the whitespace delta, for factual, classification, protocol, reference, and scope correctness.",
+    "Verify all prior valid findings remain resolved and the parent closeout remains pending.",
+    "Return findings first in Critical, Required, Optional, Nit order; do not edit or create repository files."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T152135Z--59-surface-successor-implementation-proof-wall.md",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260725T152312Z--HCM-2-3--fresh-59-surface-complete-subject-review.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.3/proof/20260725T211014Z--implementation-closeout-reconciliation-proof.md",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if the manifest, four-space delta, or operator-authorized evidence cannot be replayed.",
+    "Return CHANGES_REQUIRED for any whitespace defect, factual overclaim, classification-ceiling violation, protocol contradiction, broken reference, unexplained scope drift, or premature closeout claim.",
+    "Do not invalidate the frozen landed-evidence premise, waive in-scope findings, edit, write a global handoff or ledger, stage, commit, push, or start HCM-2.4."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "subject_identity",
+      "whitespace_remediation_assessment",
+      "classification_assessment",
+      "protocol_assessment",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
