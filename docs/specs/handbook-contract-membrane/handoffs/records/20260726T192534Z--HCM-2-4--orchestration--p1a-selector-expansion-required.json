@@ -1,0 +1,460 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required",
+  "created_at_utc": "2026-07-26T19:25:34Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "orchestration_id": "20260726T161851Z--HCM-2-4--implementation-orchestration",
+  "source_handoff_ids": [
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-26T19:25:34Z",
+    "evidence_ref": "Built-in spawn, wait/status, message, and structured result transport completed 12 isolated default-agent runs; the final packet-neutral stop-proof run was /root/hcm_2_4_p1a_authority_stop_proof."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "p1a-authority-stop-proof",
+      "dispatch_id": "20260726T191635Z--HCM-2-4--p1a-authority-stop-proof",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json",
+      "dispatch_fingerprint": "sha256:8d22bd266bb4b70f5b0e31427d42fc48ab908b0b75441a7df9a418f9448f8bf8",
+      "role": "proof",
+      "agent_id": "/root/hcm_2_4_p1a_authority_stop_proof",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "debugging-and-error-recovery",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:1273c8610dd0815987749b6351b3301420a31690806c7b37a514c23f05655b9a",
+      "result_subject_fingerprint": "sha256:1273c8610dd0815987749b6351b3301420a31690806c7b37a514c23f05655b9a",
+      "review_round": null,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "blocked",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1A-definition-support.md",
+        "crates/engine/tests/hcm_2_4_definition_runtime.rs"
+      ]
+    }
+  ],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "0b177ef9415e942cde763fcb086cec546a9a24f3",
+    "subject_fingerprint": "sha256:1273c8610dd0815987749b6351b3301420a31690806c7b37a514c23f05655b9a",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P0-inventory-lock.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1A-definition-support.md",
+      "worktree:uncommitted-HCM-2.4-P1A-checkpoint"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json"
+  },
+  "active_resolution": {
+    "level": "authority",
+    "scope_horizon": "HCM-2.4 P1A repository-open admission boundary",
+    "detail_resolution": "exact fifth-symbol selector decision",
+    "temporal_horizon": "current orchestration stop",
+    "authority_horizon": "approved four-symbol P1A remediation selector",
+    "memory_horizon": "parent handoff record plus immutable internal dispatches",
+    "validation_horizon": "fresh packet-neutral authority-stop proof"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.decision-record/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.environment-context/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.project-context/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.risk-record/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.work-specification/1.1.0.yaml"
+    ],
+    "artifact_instance_refs": [
+      "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml"
+    ],
+    "intake_definition_refs": [
+      "crates/engine/definitions/intakes/handbook.intake.decision-record/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.environment-context/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.project-context/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.risk-record/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.work-specification/1.0.0.yaml"
+    ],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Preserve the uncommitted HCM-2.4 P0/P1A checkpoint without promotion and request exact authority to add one production symbol to the P1A remediation selector.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed.json",
+      "sections": [
+        "entire selected resume handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 row",
+        "Reviewability indicators"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1A — Catalog publication and admission closure",
+        "Exact implementation surface selectors",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+      "sections": [
+        "Decision",
+        "Atomicity and reviewability",
+        "Consequences"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T184338Z--HCM-2-4--p1a-remediation.json",
+      "sections": [
+        "Allowed scope",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json",
+      "sections": [
+        "entire stop-proof dispatch and structured result"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "0b177ef9415e942cde763fcb086cec546a9a24f3",
+    "dirty": true,
+    "changed_paths": [
+      "crates/engine/src/artifact_instance.rs",
+      "crates/engine/src/artifact_intake_registry.rs",
+      "crates/engine/src/artifact_kind_registry.rs",
+      "crates/engine/src/artifact_repository.rs",
+      "crates/engine/src/profile_builtins.rs",
+      "crates/engine/src/profile_selection.rs",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.decision-record/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.environment-context/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.project-context/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.risk-record/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.work-specification/1.1.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.decision-record/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.environment-context/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.project-context/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.risk-record/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.work-specification/1.0.0.yaml",
+      "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml",
+      "crates/engine/definitions/renderers/handbook.renderer.decision-record-review-markdown/1.0.0.yaml",
+      "crates/engine/definitions/renderers/handbook.renderer.environment-context-review-markdown/1.0.0.yaml",
+      "crates/engine/definitions/renderers/handbook.renderer.project-context-review-markdown/1.0.0.yaml",
+      "crates/engine/definitions/renderers/handbook.renderer.risk-record-review-markdown/1.0.0.yaml",
+      "crates/engine/definitions/renderers/handbook.renderer.work-specification-review-markdown/1.0.0.yaml",
+      "crates/engine/tests/hcm_2_4_definition_runtime.rs",
+      "crates/engine/tests/hcm_2_4_definition_support.rs",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T162140Z--HCM-2-4--p0-selector-repair-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T162911Z--HCM-2-4--p0-selector-repair-closure-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T164140Z--HCM-2-4--p0-path-manifest-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T164958Z--HCM-2-4--p0-path-manifest-closure-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T165827Z--HCM-2-4--p0-evidence-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T171625Z--HCM-2-4--p0-evidence-closure-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T172336Z--HCM-2-4--p1a-definition-support-implementation.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T180638Z--HCM-2-4--p1a-definition-support-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T182250Z--HCM-2-4--p1a-selector-correction-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T183702Z--HCM-2-4--p1a-selector-correction-closure-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T184338Z--HCM-2-4--p1a-remediation.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/definition-support-vectors-v1.0.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-selector-correction.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P0-inventory-lock.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1A-definition-support.md",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required.json",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl"
+    ]
+  },
+  "work_completed": [
+    "Completed read-only P0 inventory lock, corrected the P2 selector contradiction, froze the exact implementation path manifest, and obtained different-fresh CLEAN closure reviews for selector, manifest, and evidence packets.",
+    "Implemented the bounded P1A definition-support checkpoint test-first; the initial 13-target packet wall passed 66/66 before fresh discovery review exposed typed-closure and real-admission gaps.",
+    "Fresh P1A discovery review /root/hcm_2_4_p1a_review returned p1a-discovery-P2-1 and p1a-discovery-P2-2; no P3/P4 advisories intersected the subject.",
+    "Repaired and fresh-reviewed the exact four-symbol typed-closure selector; /root/hcm_2_4_p1a_selector_closure returned CLEAN at sha256:e9988a33e3278ea908a5114bca8c8ffb75e8301358ca7410b246cda473cfba5c.",
+    "Bounded remediation /root/hcm_2_4_p1a_remediation closed p1a-discovery-P2-1 at 12/12 and stopped on p1a-discovery-P2-2 with the real repository-open wall at 5/6.",
+    "Fresh packet-neutral proof /root/hcm_2_4_p1a_authority_stop_proof replayed sha256:1273c8610dd0815987749b6351b3301420a31690806c7b37a514c23f05655b9a and independently confirmed that both valid corrections exceed current authority.",
+    "Prior proof-relevant built-in runs were: p0 selector review/closure, p0 manifest review/closure, p0 evidence review/closure, P1A implementation, P1A discovery review, selector-correction review/closure, and P1A remediation; their immutable dispatch IDs and results remain in this handoff's changed-path inventory and proof refs.",
+    "Preserved all unrelated work, made no sibling-slice changes, staged no partial implementation, and asserted no HCM-2.4 completion or proof promotion."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P0-inventory-lock.md",
+      "status": "completed",
+      "summary": "Review-clean P0 dependency, selector, impact, and proof-command lock."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1A-definition-support.md",
+      "status": "partial",
+      "summary": "P1A checkpoint evidence; typed closure is GREEN but real repository-open admission is not."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json",
+      "status": "completed",
+      "summary": "Fresh read-only proof of the exact root cause, authority boundary, options, and resumption condition."
+    },
+    {
+      "path": "worktree:uncommitted-HCM-2.4-P1A-checkpoint",
+      "status": "blocked",
+      "summary": "Safe partial implementation preserved unstaged and uncommitted; it is not accepted authority."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-DEC-STOP-001",
+      "summary": "Stop at the P1A authority boundary instead of editing a fifth production symbol or released schemas.",
+      "authority_effect": "P1A and HCM-2.4 remain incomplete; no runtime, schema, default-set, or sibling-slice promotion is asserted.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T184338Z--HCM-2-4--p1a-remediation.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-DEC-PRESERVE-001",
+      "summary": "Preserve the current remediation bytes unchanged and uncommitted pending authority.",
+      "authority_effect": "The checkpoint remains diagnostic evidence only and must be revalidated after any authorized selector correction.",
+      "refs": [
+        "worktree:uncommitted-HCM-2.4-P1A-checkpoint"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-DEC-CLOSEOUT-LINEAGE-001",
+      "summary": "Use one packet-neutral fresh proof run as the typed v1.3 stop lineage while preserving the earlier packet-specific dispatches and outcomes as evidence.",
+      "authority_effect": "No immutable packet dispatch was rewritten and no handoff-validator cross-packet rule was weakened.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json",
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-P1A-P2-2",
+      "classification": "authority",
+      "summary": "Required real-path proof remains open: ArtifactRepositoryV1::open rejects all five new intakes because const-only schema_id/schema_version leaves are indeterminate to coverage-shape collection. The only valid corrections mutate released schema bytes or add an unauthorized fifth production symbol.",
+      "resume_condition": "A human explicitly authorizes one exact correction. Recommended: add only ResolvedSchema::collect_coverage_leaf_shapes to the P1A selector for string-valued const-only leaf classification, preserve every other indeterminate refusal, and stop on any further production surface.",
+      "owner": "human authority"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-2.4-ESC-P1A-SELECTOR-001",
+      "trigger": "The required positive repository-open test fails after typed-closure remediation, and the approved packet stops if correctness requires a fifth production symbol or released-definition mutation.",
+      "current_resolution": "Exact four-symbol P1A remediation selector; released schemas immutable.",
+      "target_resolution": "Exact five-symbol P1A selector limited to const-only string leaf classification in ResolvedSchema::collect_coverage_leaf_shapes.",
+      "decision_required": "Approve the recommended exact fifth-symbol selector expansion, choose released-schema mutation instead, or defer HCM-2.4.",
+      "options": [
+        "Recommended: authorize only ResolvedSchema::collect_coverage_leaf_shapes to infer string type from string-valued const leaves; fresh upstream impact is LOW/1 with one direct caller, zero indexed processes, and one module.",
+        "Authorize adding explicit string types to ten const-only leaves across five released schema documents and recompute the immutable fingerprint graph; this mutates released bytes and has the larger authority footprint.",
+        "Defer HCM-2.4 and retain the unstaged checkpoint without promotion."
+      ],
+      "recommendation": "Approve the exact fifth-symbol option because it preserves released schema bytes, has the smallest measured blast radius, and fixes the failing coverage-shape boundary directly.",
+      "affected_refs": [
+        "crates/engine/src/schema_registry.rs",
+        "crates/engine/tests/hcm_2_4_definition_runtime.rs",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T184338Z--HCM-2-4--p1a-remediation.json"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "Human approval names the exact fifth symbol, branch-local const-string behavior, unchanged released schemas, unchanged risk ceiling, required repository-open positive/negative proof, and a stop on any sixth symbol or broader semantic change."
+    }
+  ],
+  "validation": [
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json",
+      "status": "passed",
+      "evidence_ref": "sha256:1273c8610dd0815987749b6351b3301420a31690806c7b37a514c23f05655b9a replayed before and after the fresh proof run"
+    },
+    {
+      "command": "cargo test -p handbook-engine --test hcm_2_4_definition_support",
+      "status": "passed",
+      "evidence_ref": "12 passed, 0 failed after typed-closure remediation"
+    },
+    {
+      "command": "cargo test -p handbook-engine --test hcm_2_4_definition_runtime -- --nocapture",
+      "status": "failed",
+      "evidence_ref": "5 passed, 1 failed; only artifact_repository_open_semantically_admits_all_p1a_intakes remains blocked"
+    },
+    {
+      "command": "npx gitnexus impact collect_coverage_leaf_shapes --direction upstream",
+      "status": "passed",
+      "evidence_ref": "LOW/1, one direct caller, zero indexed processes, one module; exact current index"
+    },
+    {
+      "command": "cargo fmt --all -- --check and git diff --check",
+      "status": "passed",
+      "evidence_ref": "No formatting or whitespace failure at the remediation stop"
+    },
+    {
+      "command": "SHA-256 crates/engine/tests/hcm_2_3_registration_kernel.rs",
+      "status": "passed",
+      "evidence_ref": "Frozen hash remained 86e6e98fe8fad63578be3d157d3a836c4bfe3a4dc7aa49f1ff41d87e33b61629"
+    },
+    {
+      "command": "Complete HCM-2.4 final convergence proof wall",
+      "status": "not_run",
+      "evidence_ref": "Correctly stopped before the full wall because required real-path proof and selector authority remain open"
+    },
+    {
+      "command": "python3 validate_handoffs.py normal plus both self-tests without dependency injection",
+      "status": "failed",
+      "evidence_ref": "All three exact invocations stopped at import with ModuleNotFoundError: jsonschema; the dependency-complete uv --with jsonschema==4.25.1 equivalents passed"
+    },
+    {
+      "command": "npx gitnexus detect-changes",
+      "status": "passed",
+      "evidence_ref": "Current dirty HCM-2.4 checkpoint: 9 indexed files, 31 symbols, zero affected processes, LOW aggregate risk"
+    },
+    {
+      "command": "validate_handoffs.py normal plus self-test-v1-admission plus self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "Final parent handoff, deterministic ledger parity, historical admission, and orchestration contract validated before closeout commit"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/",
+      "sections": [
+        "SPEC",
+        "tasks",
+        "contracts",
+        "decision",
+        "proof"
+      ],
+      "reason": "Preserve the P0 and partial P1A checkpoint plus exact selector corrections.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/",
+      "sections": [
+        "12 HCM-2.4 internal v1.3 dispatches from P0 through authority-stop proof"
+      ],
+      "reason": "Preserve immutable execution, review, remediation, and stop-proof envelopes.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Record the single parent-owned true stop and exact human authority decision.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger from canonical records.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Choose whether to authorize the exact fifth-symbol P1A selector correction, authorize released-schema mutation, or defer HCM-2.4.",
+    "condition": "Resume implementation only after explicit human authority names one option. For the recommended option, approval must name ResolvedSchema::collect_coverage_leaf_shapes, const-only string leaf classification, unchanged released schemas, and no additional production symbol.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required.json",
+        "sections": [
+          "entire authority-boundary handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T191635Z--HCM-2-4--p1a-authority-stop-proof.json",
+        "sections": [
+          "entire stop-proof packet"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sections": [
+          "P1A",
+          "Exact implementation surface selectors",
+          "Stop conditions"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+        "sections": [
+          "entire decision"
+        ]
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_definition_runtime.rs",
+        "sections": [
+          "positive repository-open admission and five refusal tests"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Human selection among the three recorded escalation options.",
+      "After recommended approval, the parent may write a superseding same-scope selector correction and replacement remediation dispatch adding only ResolvedSchema::collect_coverage_leaf_shapes.",
+      "Re-run fresh impact, focused RED/GREEN proof, complete P1A wall, fresh independent review, and the remaining HCM-2.4 loop without starting another slice."
+    ],
+    "prohibited_scope": [
+      "Do not edit any partial P1A file before explicit authority.",
+      "Do not stage or commit the partial implementation as accepted slice work.",
+      "Do not mutate released schemas under the recommended option.",
+      "Do not add a sixth production symbol, widen generic schema semantics beyond string-valued const-only leaves, change public API/dependencies/Cargo/unsafe policy, or begin P1B-P7 or another slice."
+    ],
+    "acceptance_criteria": [
+      "The selected option is explicit and its exact authority boundary is recorded before edits.",
+      "For the recommended option, fresh impact remains within LOW/1 or any expansion triggers a new stop.",
+      "All six hcm_2_4_definition_runtime tests pass without weakening the five refusals.",
+      "The full affected proof wall passes, GitNexus change detection is scoped, and a fresh independent review is CLEAN before any primary slice commit."
+    ],
+    "stop_conditions": [
+      "Stop if approval is absent or ambiguous.",
+      "Stop if the fix requires released-schema mutation under option 1, a sixth production symbol, broader const inference, public API/dependency/Cargo/unsafe change, or sibling-slice work.",
+      "Stop if real repository-open admission or any existing negative case remains failing.",
+      "Stop on materially wider HIGH/CRITICAL impact or unavailable required proof."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-2.4 stopped at P1A with typed closure GREEN (12/12) but real repository-open proof 5/6. Fresh proof confirms both valid fixes exceed the exact selector. Recommended authority: add only ResolvedSchema::collect_coverage_leaf_shapes for string-valued const-only leaves; keep released schemas immutable. Partial work remains unstaged and uncommitted."
+}

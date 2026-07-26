@@ -1,0 +1,182 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T191635Z--HCM-2-4--p1a-authority-stop-proof",
+  "created_at_utc": "2026-07-26T19:16:35Z",
+  "source_handoff_ids": [
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed"
+  ],
+  "parent_orchestration_id": "20260726T161851Z--HCM-2-4--implementation-orchestration",
+  "orchestration_decision": "resolution_escalation",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "proof",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "debugging-and-error-recovery",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:1273c8610dd0815987749b6351b3301420a31690806c7b37a514c23f05655b9a",
+  "review_cycle": null,
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.decision-record/1.0.0.schema.json",
+        "sha256": "097b4897abce697634429680ec3ee26b780048c039ded5b7cc214eb91f7d2a8e"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.environment-context/1.0.0.schema.json",
+        "sha256": "43499e8530e72db3809034edc1874994d1ed1f57e3c6afae11c6534d7f6206de"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.project-context/1.0.0.schema.json",
+        "sha256": "033943e504d56d50368e6e50ea7a113baa11eaa5ee52e4989dca8d5c4bea1961"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.risk-record/1.0.0.schema.json",
+        "sha256": "df90eec6f85652603c19e56c92870b77599b59a7011110cab91b443d6eb2b01c"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.work-specification/1.0.0.schema.json",
+        "sha256": "c4c6f489ff20c022538ae2e3512cf62f8559d8d9409944ab13e8f138cb2d5985"
+      },
+      {
+        "path": "crates/engine/src/artifact_intake_registry.rs",
+        "sha256": "1b57d353c4fa004baf9d5e1abf0c73eb9dd233bc376d53e1573893e3928bb0e9"
+      },
+      {
+        "path": "crates/engine/src/artifact_repository.rs",
+        "sha256": "bdb005abb2ab1d9689ca00c5db4a0c419949d9e8d1046ab474e0a9d35d07c8ad"
+      },
+      {
+        "path": "crates/engine/src/schema_registry.rs",
+        "sha256": "12270721ca0b895f8793bf68dfcfeed04a489297148281f608ea1364b4ac4e67"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_definition_runtime.rs",
+        "sha256": "d68193e63ab1495242525bc46b410c5c9cc62a22635d195b1480e8ecd0fe7fe0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T184338Z--HCM-2-4--p1a-remediation.json",
+        "sha256": "4aaeacba0b403292dc75ea72516ca4aea001543873efbd46e604769cc4405612"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "59c1c11f7ded7f6040639b3a99a67cb557ae38d2adbbfe92c9048b0e860d4b01"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+        "sha256": "27bc4555665b3cc5bc20aa831b395f23cba444848cb951ac90fc4bcbff92fc3f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1A-definition-support.md",
+        "sha256": "4159471b2a020d1ee4848a4e6d02b5484a2d2397826069536fee26658aae89bc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "180414191756c9e67f118fced01076de0967c8e3dcd452c6b3acd8ab866fee90"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:1273c8610dd0815987749b6351b3301420a31690806c7b37a514c23f05655b9a"
+  },
+  "active_resolution": {
+    "level": "authority",
+    "scope_horizon": "P1A repository-open admission boundary",
+    "detail_resolution": "exact failing call path and selector alternatives",
+    "temporal_horizon": "current_orchestration_stop",
+    "authority_horizon": "approved four-symbol P1A selector",
+    "memory_horizon": "parent handoff record",
+    "validation_horizon": "authority-stop proof"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1A — Catalog publication and admission closure",
+        "Exact implementation surface selectors",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+      "sections": [
+        "Decision",
+        "Atomicity and reviewability",
+        "Consequences"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T184338Z--HCM-2-4--p1a-remediation.json",
+      "sections": [
+        "Allowed scope",
+        "Stop conditions"
+      ]
+    }
+  ],
+  "repo_truth": "The bounded P1A remediation closed typed dependency-closure proof at 12/12. The actual ArtifactRepositoryV1::open proof remains 5/6 because ResolvedSchema::collect_coverage_leaf_shapes rejects const-only /schema_id and /schema_version leaves as indeterminate before intake coverage comparison. The approved remediation selector permits four production symbols and explicitly stops if correctness needs a fifth symbol or released-definition mutation. Fresh GitNexus upstream impact for collect_coverage_leaf_shapes is LOW/1, one direct caller, zero indexed processes, one module.",
+  "allowed_scope": [
+    "Read and replay only the 14-entry subject manifest.",
+    "Run the focused hcm_2_4_definition_runtime test or narrower read-only diagnostics.",
+    "Validate whether the failure is caused by const-only schema leaves before coverage comparison.",
+    "Validate whether either correction alternative exceeds the immutable P1A remediation selector.",
+    "Return the exact authority decision, safe preservation posture, and resumption condition."
+  ],
+  "non_goals": [
+    "No file edits, formatting rewrites, generated fingerprint updates, staging, commit, handoff, ledger, or new dispatch.",
+    "Do not select an alternative, weaken the positive repository-open proof, change released schemas, or edit collect_coverage_leaf_shapes.",
+    "Do not claim P1A or HCM-2.4 completed or review-clean."
+  ],
+  "tasks": [
+    "Replay the manifest and confirm the selector and frozen stop condition.",
+    "Trace the actual failing repository-open path through intake admission and schema coverage.",
+    "Confirm the five negative refusal tests and the one blocked positive test from live evidence.",
+    "Compare the two smallest correction alternatives: released-schema mutation versus exact fifth-symbol selector expansion.",
+    "Return findings first with a recommendation and precise human approval/resume condition."
+  ],
+  "contracts_and_gates": [
+    "Actual ArtifactRepositoryV1::open admission must pass for every new package intake.",
+    "Released schema bytes remain immutable absent explicit authority.",
+    "The approved four-symbol remediation selector is exact and closed.",
+    "No P1A completion or proof promotion while the positive real-path test fails."
+  ],
+  "stop_conditions": [
+    "Stop and report blocked if either valid correction exceeds the approved selector.",
+    "Stop on any manifest mismatch, unexpected dirty overlap, or broader runtime cause.",
+    "Do not perform remediation or create closeout artifacts."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "root_cause",
+      "live_proof",
+      "authority_boundary",
+      "options",
+      "recommendation",
+      "preserve_current_work",
+      "resume_condition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
