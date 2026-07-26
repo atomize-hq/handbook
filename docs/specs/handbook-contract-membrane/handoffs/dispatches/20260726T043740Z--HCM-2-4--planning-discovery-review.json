@@ -1,0 +1,144 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.2",
+  "dispatch_id": "20260726T043740Z--HCM-2-4--planning-discovery-review",
+  "created_at_utc": "2026-07-26T04:37:40Z",
+  "source_handoff_ids": [
+    "20260725T220053Z--HCM-2-3--orchestration--implementation-completed",
+    "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed"
+  ],
+  "parent_orchestration_id": "20260726T040154Z--HCM-2-4--planning-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "planning-and-task-breakdown"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:a49bb62cf5826d819fe94cdf29003e4dac0ca07c88a2d8a7f60b7e3957bbd57f",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "5c67e43a32d097ba94cb9f24cca4cd31ef114c6b38c93acdf97e7f477ffaa15e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T043650Z--planning-proof-wall.md",
+        "sha256": "a27d5e5701c769babe9ac2d4579a5b6326cdc7bcd997c6a34379514f4de771ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "a7a5e15fd83e60b14e9633c9cc6f10be9d6616f578e3741921ea634a5a7891ec"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "318f95f6a598ba9b9f449f44a07e9cda52d97d2809ddf434b4ee64221d2e369c"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:a49bb62cf5826d819fe94cdf29003e4dac0ca07c88a2d8a7f60b7e3957bbd57f"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "phase_exit",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "complete_subject_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — convert the remaining shipped artifact families",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Artifact kind catalog",
+        "Shipped root artifact profile",
+        "Intake and renderer obligations"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "Phase 2 bridges",
+        "HCM-2.3 evidence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "At clean synchronized baseline commit 2b7ab4e14467800e5f0ecaa19561a1dd5d84ee48, Stage A's causal-cascade amendment is landed and reviewed CLEAN. The frozen HCM-2.4 planning subject contains four Markdown files only. It inventories exactly six shipped first-party kinds plus HCM-2.3 registry-brief preservation; classifies canonical YAML, derived Markdown, and non-HCM outputs; splits exact version publication, CRITICAL shipped-root adoption, Environment Context, Work Specification, Decision Record, Risk Record, HIGH aggregate flow deletion, and Phase 2 closeout; records HIGH/CRITICAL/UNKNOWN GitNexus results; and prohibits implementation and all declared non-goals.",
+  "allowed_scope": [
+    "Replay the four-entry subject manifest and aggregate fingerprint before reviewing.",
+    "Review completeness and correctness of the six-family inventory and pre-Phase-3 output classifications.",
+    "Review that each targeted family has exactly one editable canonical YAML truth and every retained Markdown surface is renderer-only with zero authority influence.",
+    "Review preservation of Charter, Project Context, the exact three-instance shipped-root profile, and HCM-2.3 registry-brief authority.",
+    "Review exact bridge/helper deletion triggers, source-compatible treatment of exported fixed-layout shells, packet decomposition, dependency order, selectors, and atomicity claims.",
+    "Review GitNexus blast-radius recording and whether HIGH, CRITICAL, incomplete, and UNKNOWN results produce proportionate packet isolation and stop behavior.",
+    "Review proof-wall and Phase 2 exit mapping, causal-cascade review budget, explicit non-goals, authority stops, and implementation-entry acceptance criteria.",
+    "Apply the integrated-outcome P1/P2/P3/P4 rubric and return all complete-subject discovery findings in one consolidated response."
+  ],
+  "non_goals": [
+    "No implementation edits, test edits, definition publication, schema changes, template changes, staging, commits, pushes, handoffs, ledger writes, or delegation.",
+    "No HCM-3.x Context Resolution, capitalized Projection, generic custom Projection, SDK, transport, remote schema, generated command, dynamic path, migration, dual-read, dependency, Cargo, unsafe-policy, package-boundary, or public API work.",
+    "No open-ended adversarial discovery beyond whether this frozen plan can meet the selected HCM-2.4 and Phase 2 exit outcomes.",
+    "No demand for speculative hardening as P1/P2 without a demonstrated selected-outcome failure."
+  ],
+  "tasks": [
+    "Verify exact subject identity and planning-only scope.",
+    "Read the four subject files plus only the cited authority needed to test a claimed obligation.",
+    "Identify contradictions, missing family/selector/proof/authority decisions, infeasible packet boundaries, or non-goal leaks that would prevent implementation from satisfying HCM-2.4.",
+    "Consolidate every demonstrated P1/P2 with stable IDs, exact evidence, supported or repository-reachable failure state, and bounded remediation.",
+    "List P3/P4 separately with canonical-inventory disposition; return CLEAN only if no P1/P2 exists."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#hcm-24--convert-the-remaining-shipped-artifact-families",
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#phase-2-exit-gate",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#open-program-proof-gates",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#priority-decision-matrix"
+  ],
+  "stop_conditions": [
+    "Return blocked if the subject fingerprint cannot be replayed or cited authority is unavailable.",
+    "Return any demonstrated P1/P2 to the parent without editing; do not widen implementation scope or risk ceiling.",
+    "Do not delegate, implement, create another dispatch, write a handoff, or modify the ledger."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

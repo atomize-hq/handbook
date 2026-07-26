@@ -1,0 +1,136 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.2",
+  "dispatch_id": "20260726T045330Z--HCM-2-4--planning-causal-closure-1",
+  "created_at_utc": "2026-07-26T04:53:30Z",
+  "source_handoff_ids": [
+    "20260725T220053Z--HCM-2-3--orchestration--implementation-completed",
+    "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed"
+  ],
+  "parent_orchestration_id": "20260726T040154Z--HCM-2-4--planning-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "planning-and-task-breakdown"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:8b3e1b6a390314cda7a8c45e2ee7a954a99deb23db6c24942a214ef57026bcd5",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "f1c3bedcb4a914c6c49d97363d0a8770fdf0a9533669732538805c3b714c529e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T043650Z--planning-proof-wall.md",
+        "sha256": "a27d5e5701c769babe9ac2d4579a5b6326cdc7bcd997c6a34379514f4de771ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T044702Z--planning-discovery-remediation.md",
+        "sha256": "024a1c934a9d1023633d2dca876a114c940e2db008872a779650f456df4313c7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T045301Z--planning-supplemental-causal-remediation-1.md",
+        "sha256": "30d4f70909b25496813397b9fd67a0bb09a5b7639eaa77a3bc4df04a92164e3c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "825a65196c4938bc02ea0c576b60e5e936c761947ecaa4d2359bfb607d3c9084"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "8bdb86de829a13389ec16736cb6b249dabd3ec348cf092c996112676dab63125"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:8b3e1b6a390314cda7a8c45e2ee7a954a99deb23db6c24942a214ef57026bcd5"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "causal_remediation_delta",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "phase_exit",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "supplemental_causal_closure_1"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T044730Z--HCM-2-4--planning-closure-review.json",
+      "sections": [
+        "first delta-focused closure contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T045301Z--planning-supplemental-causal-remediation-1.md",
+      "sections": [
+        "Causal finding",
+        "Bounded remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The first delta closure replayed sha256:15e618577d9b784de4b6ff23e6170c9a8b6ceff0a7ebef06aa4de3754ad38d59 and found one P2 directly unmasked by the preceding descriptor remediation: the plan's non-Charter instance guard admitted Project Context and Environment Context but not the newly frozen Work Specification descriptor, which the existing guard would reject before Stage 10 proof. Supplemental causal remediation 1 adds only exact fail-closed admission and unit proof for that third frozen row while retaining every mismatch and unrelated later-owned refusal. The six-file result remains planning-only.",
+  "allowed_scope": [
+    "Replay the six-entry manifest and aggregate fingerprint before review.",
+    "Compare only the delta from fingerprint sha256:15e618577d9b784de4b6ff23e6170c9a8b6ceff0a7ebef06aa4de3754ad38d59.",
+    "Verify the frozen Work Specification descriptor now has exact P1A instance-guard admission and negative mismatch/later-owned refusal proof before P3 real-path exercise.",
+    "Verify the correction does not add a shipped-root instance, generic renderer/Projection authority, command/path inference, public API, dependency, Cargo/package, unsafe, or HCM-3.x scope.",
+    "Check only for valid P1/P2 directly caused or unmasked by this supplemental remediation; do not reopen discovery.",
+    "Apply the integrated-outcome rubric and list P3/P4 separately."
+  ],
+  "non_goals": [
+    "No general discovery or review of untouched planning choices.",
+    "No edits, implementation, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "No new artifact family, root membership, generic custom renderer/Projection engine, SDK/transport, remote schema, generated command, dynamic path, migration/dual-read, dependency, Cargo, unsafe-policy, package-boundary, or public API work."
+  ],
+  "tasks": [
+    "Verify exact subject identity and the causal lineage from the first closure finding.",
+    "Confirm the Work Specification admission gap is closed in SPEC, plan, and checklist with exact fail-closed proof.",
+    "Return CLEAN when the causal P2 is closed and no directly caused/unmasked P1/P2 remains.",
+    "If another P1/P2 exists, show direct causal or unmasking lineage, a supported/repository-reachable selected-outcome failure, and a bounded same-scope remediation."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#priority-decision-matrix",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return blocked if the subject fingerprint or causal predecessor cannot be established.",
+    "Do not reopen discovery; report only the causal finding's closure or a directly caused/unmasked P1/P2.",
+    "Do not delegate, edit, implement, create another dispatch, write a handoff, or modify the ledger."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

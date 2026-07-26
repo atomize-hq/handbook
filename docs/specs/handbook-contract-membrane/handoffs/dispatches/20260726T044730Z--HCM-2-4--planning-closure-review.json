@@ -1,0 +1,134 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.2",
+  "dispatch_id": "20260726T044730Z--HCM-2-4--planning-closure-review",
+  "created_at_utc": "2026-07-26T04:47:30Z",
+  "source_handoff_ids": [
+    "20260725T220053Z--HCM-2-3--orchestration--implementation-completed",
+    "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed"
+  ],
+  "parent_orchestration_id": "20260726T040154Z--HCM-2-4--planning-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "planning-and-task-breakdown"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:15e618577d9b784de4b6ff23e6170c9a8b6ceff0a7ebef06aa4de3754ad38d59",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "df50f0635d170f82cda5e088a50191b245e6988646eda3d540275a28b9d03d2d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T043650Z--planning-proof-wall.md",
+        "sha256": "a27d5e5701c769babe9ac2d4579a5b6326cdc7bcd997c6a34379514f4de771ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T044702Z--planning-discovery-remediation.md",
+        "sha256": "024a1c934a9d1023633d2dca876a114c940e2db008872a779650f456df4313c7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "3e82c416fc8067fccaf4f51b1c4e1a6ea643e4acc52db297019e4eae02f6ad51"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "b82fea86d6d009cde1a5a38ff0e16cbddbd764a93bcbc192a82b8cfb06272391"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:15e618577d9b784de4b6ff23e6170c9a8b6ceff0a7ebef06aa4de3754ad38d59"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "remediation_delta",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "phase_exit",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "delta_focused_closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T043740Z--HCM-2-4--planning-discovery-review.json",
+      "sections": [
+        "frozen discovery subject and review contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T044702Z--planning-discovery-remediation.md",
+      "sections": [
+        "HCM-2.4-DISC-001",
+        "HCM-2.4-DISC-002",
+        "Scope and causal disposition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery review /root/hcm24_planning_discovery_review replayed fingerprint sha256:a49bb62cf5826d819fe94cdf29003e4dac0ca07c88a2d8a7f60b7e3957bbd57f and returned exactly two P2 findings: a cyclic implementation-entry/P0 gate and missing exact descriptor selection for Project Context, Environment Context, and the Work Specification real-path proof. The parent consolidated both in one planning-only remediation. The new five-file subject explicitly makes post-selection P0 read-only before edits, freezes shipped-root intake/renderer rows, freezes an admitted Work Specification repository-profile descriptor and fixture, and adds RED/GREEN/selector proof. No implementation or unrelated scope was added.",
+  "allowed_scope": [
+    "Replay the five-entry manifest and aggregate fingerprint before reviewing.",
+    "Review the delta from discovery fingerprint sha256:a49bb62cf5826d819fe94cdf29003e4dac0ca07c88a2d8a7f60b7e3957bbd57f to this subject.",
+    "Verify HCM-2.4-DISC-001 is closed without weakening the implementation gate: selection authorizes only read-only P0, and edits remain blocked until P0 passes.",
+    "Verify HCM-2.4-DISC-002 is closed: Project Context and Environment Context have exact selected intake/renderer refs, and Work Specification has an exact admitted repository-profile descriptor, source, path, intake, renderer, and selection proof.",
+    "Check the complete resulting subject only for contradictions or valid P1/P2 directly caused or unmasked by this remediation.",
+    "Apply the integrated-outcome rubric; list P3/P4 separately without opening another general discovery pass."
+  ],
+  "non_goals": [
+    "No new general discovery, architecture redesign, speculative robustness campaign, or review of untouched planning choices.",
+    "No edits, implementation, test/definition/schema/template changes, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "No HCM-3.x, Projection, SDK/transport, remote schema, generated command, dynamic path, migration/dual-read, dependency, Cargo, unsafe-policy, package-boundary, or public API work."
+  ],
+  "tasks": [
+    "Verify exact subject identity and planning-only boundary.",
+    "Compare the original and remediated subject using the two finding statements as the delta lenses.",
+    "Return CLEAN if both P2 findings are closed and no remediation-caused/unmasked P1/P2 exists.",
+    "If a P1/P2 exists, demonstrate direct causal or unmasking lineage to the remediation, exact selected-outcome failure, and bounded same-scope fix.",
+    "Return P3/P4 only with a canonical-inventory disposition."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#priority-decision-matrix",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return blocked if either subject fingerprint cannot be established or cited remediation evidence is unavailable.",
+    "Do not reopen general discovery; report only unresolved original findings or directly caused/unmasked P1/P2.",
+    "Do not delegate, edit, implement, create another dispatch, write a handoff, or modify the ledger."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
