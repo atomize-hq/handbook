@@ -1,0 +1,533 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260726T050447Z--HCM-2-4--orchestration--planning-completed",
+  "created_at_utc": "2026-07-26T05:04:47Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "orchestration_id": "20260726T040154Z--HCM-2-4--planning-orchestration",
+  "source_handoff_ids": [
+    "20260725T220053Z--HCM-2-3--orchestration--implementation-completed",
+    "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-26T05:04:47Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T045815Z--HCM-2-4--planning-causal-closure-2.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "planning-discovery-review",
+      "dispatch_id": "20260726T043740Z--HCM-2-4--planning-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T043740Z--HCM-2-4--planning-discovery-review.json",
+      "dispatch_fingerprint": "sha256:98d50c156ce7b81c24aa05fe93990b0892d3308200a8a27ee49b228ee94c13b7",
+      "role": "review",
+      "agent_id": "/root/hcm24_planning_discovery_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "planning-and-task-breakdown"
+      ],
+      "subject_fingerprint": "sha256:a49bb62cf5826d819fe94cdf29003e4dac0ca07c88a2d8a7f60b7e3957bbd57f",
+      "result_subject_fingerprint": "sha256:a49bb62cf5826d819fe94cdf29003e4dac0ca07c88a2d8a7f60b7e3957bbd57f",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-2.4-DISC-001",
+        "HCM-2.4-DISC-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T043740Z--HCM-2-4--planning-discovery-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T043650Z--planning-proof-wall.md"
+      ]
+    },
+    {
+      "run_id": "planning-closure-review",
+      "dispatch_id": "20260726T044730Z--HCM-2-4--planning-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T044730Z--HCM-2-4--planning-closure-review.json",
+      "dispatch_fingerprint": "sha256:f5db0aa241179630d5ad9eebb3a1f0b601161317f6ddf8e55caf8070fee3117f",
+      "role": "review",
+      "agent_id": "/root/hcm24_planning_closure_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "planning-and-task-breakdown"
+      ],
+      "subject_fingerprint": "sha256:15e618577d9b784de4b6ff23e6170c9a8b6ceff0a7ebef06aa4de3754ad38d59",
+      "result_subject_fingerprint": "sha256:15e618577d9b784de4b6ff23e6170c9a8b6ceff0a7ebef06aa4de3754ad38d59",
+      "review_round": 2,
+      "predecessor_run_id": "planning-discovery-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-2.4-CL1-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T044730Z--HCM-2-4--planning-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T044702Z--planning-discovery-remediation.md"
+      ]
+    },
+    {
+      "run_id": "planning-causal-closure-1",
+      "dispatch_id": "20260726T045330Z--HCM-2-4--planning-causal-closure-1",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T045330Z--HCM-2-4--planning-causal-closure-1.json",
+      "dispatch_fingerprint": "sha256:6895e47ae4919a30b026ee5c7257ecd0980af337af074d01ece0ef82ce233057",
+      "role": "review",
+      "agent_id": "/root/hcm24_planning_causal_closure_1",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "planning-and-task-breakdown"
+      ],
+      "subject_fingerprint": "sha256:8b3e1b6a390314cda7a8c45e2ee7a954a99deb23db6c24942a214ef57026bcd5",
+      "result_subject_fingerprint": "sha256:8b3e1b6a390314cda7a8c45e2ee7a954a99deb23db6c24942a214ef57026bcd5",
+      "review_round": 3,
+      "predecessor_run_id": "planning-closure-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T045330Z--HCM-2-4--planning-causal-closure-1.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T045301Z--planning-supplemental-causal-remediation-1.md"
+      ]
+    },
+    {
+      "run_id": "planning-causal-closure-2",
+      "dispatch_id": "20260726T045815Z--HCM-2-4--planning-causal-closure-2",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T045815Z--HCM-2-4--planning-causal-closure-2.json",
+      "dispatch_fingerprint": "sha256:541583b49352167d0b75d548c7570d4c28661b3108e196de4fd4b2fba71fc5dd",
+      "role": "review",
+      "agent_id": "/root/hcm24_planning_causal_closure_2",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "planning-and-task-breakdown"
+      ],
+      "subject_fingerprint": "sha256:adcdcb783b34d9b18e8bfce50dda73bfc0d7e7cd5613e1cae3179b324888afa2",
+      "result_subject_fingerprint": "sha256:adcdcb783b34d9b18e8bfce50dda73bfc0d7e7cd5613e1cae3179b324888afa2",
+      "review_round": 4,
+      "predecessor_run_id": "planning-causal-closure-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T045815Z--HCM-2-4--planning-causal-closure-2.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T045751Z--planning-supplemental-causal-remediation-2.md"
+      ]
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "planning-discovery-remediation",
+      "finding_run_id": "planning-discovery-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-closure-review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:15e618577d9b784de4b6ff23e6170c9a8b6ceff0a7ebef06aa4de3754ad38d59",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T044702Z--planning-discovery-remediation.md"
+      ]
+    },
+    {
+      "remediation_id": "planning-supplemental-causal-remediation-1",
+      "finding_run_id": "planning-closure-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-causal-closure-1",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:8b3e1b6a390314cda7a8c45e2ee7a954a99deb23db6c24942a214ef57026bcd5",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T045301Z--planning-supplemental-causal-remediation-1.md"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "6774b1d231d605566c492ce97913a67ec979215f",
+    "subject_fingerprint": "sha256:adcdcb783b34d9b18e8bfce50dda73bfc0d7e7cd5613e1cae3179b324888afa2",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T045815Z--HCM-2-4--planning-causal-closure-2.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T043650Z--planning-proof-wall.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T044702Z--planning-discovery-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T045301Z--planning-supplemental-causal-remediation-1.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T045751Z--planning-supplemental-causal-remediation-2.md",
+      "git:6774b1d231d605566c492ce97913a67ec979215f"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T045815Z--HCM-2-4--planning-causal-closure-2.json"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.4_planning_completed_implementation_unauthorized",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "review_clean_planning_closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [
+      "handbook.artifact-kind.project-authority@1.1.0",
+      "handbook.artifact-kind.project-context@1.1.0",
+      "handbook.artifact-kind.environment-context@1.1.0",
+      "handbook.artifact-kind.work-specification@1.1.0",
+      "handbook.artifact-kind.decision-record@1.1.0",
+      "handbook.artifact-kind.risk-record@1.1.0",
+      "example.artifact-kind.registry-brief@1.0.0"
+    ],
+    "artifact_instance_refs": [
+      "project_authority",
+      "project_context",
+      "environment_context",
+      "work_specification",
+      "decision_record",
+      "risk_record",
+      "registry_brief"
+    ],
+    "intake_definition_refs": [
+      "handbook.intake.charter@1.0.0",
+      "handbook.intake.project-context@1.0.0",
+      "handbook.intake.environment-context@1.0.0",
+      "handbook.intake.work-specification@1.0.0",
+      "handbook.intake.decision-record@1.0.0",
+      "handbook.intake.risk-record@1.0.0"
+    ],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md"
+  },
+  "objective": "Land the reviewed causal-cascade amendment, complete review-clean HCM-2.4 planning for all remaining shipped artifact families and Phase 2 exit, create a parent-owned two-commit closeout, push cleanly, and stop before implementation.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260725T220053Z--HCM-2-3--orchestration--implementation-completed.json",
+      "sections": [
+        "completed HCM-2.3 implementation authority and registry-brief preservation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "complete review-clean HCM-2.4 planning authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P0 through P7 implementation order and true stop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "implementation checklist"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T045815Z--HCM-2-4--planning-causal-closure-2.json",
+      "sections": [
+        "exact seven-file final CLEAN subject"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Two-commit true-stop closeout",
+        "Required validation"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "6774b1d231d605566c492ce97913a67ec979215f",
+    "dirty": false,
+    "changed_paths": []
+  },
+  "work_completed": [
+    "Verified and landed the seven-file causal-cascade calibration amendment as documentation commit 2b7ab4e14467800e5f0ecaa19561a1dd5d84ee48 after a fingerprint-bound different-fresh CLEAN review.",
+    "Inventoried exactly six shipped first-party artifact families plus HCM-2.3 registry-brief preservation and classified every relevant pre-Phase-3 Markdown output as renderer-only, superseded authority, or non-HCM output.",
+    "Created SPEC, implementation plan, checklist, exact canonical-source/view matrix, bridge/helper deletion inventory, packet dependencies, selector ceilings, GitNexus impact record, proof wall, Phase 2 exit map, causal review budget, non-goals, stops, and implementation-entry criteria.",
+    "Recorded HIGH flow and CRITICAL shipped-profile/pipeline handoff blast radii and made unresolved GitNexus UNKNOWN a pre-edit stop.",
+    "Completed one discovery review, one remediation, one delta closure, and both permitted supplemental causal closure cycles. All reviewer findings were remediated; the final different-fresh verdict is CLEAN.",
+    "Identified and closed the final same-guard Decision/Risk descriptor gap under supplemental causal allowance 2 before the final CLEAN review.",
+    "Committed only the reviewed 11-file documentation/dispatch planning subject as 6774b1d231d605566c492ce97913a67ec979215f. No HCM-2.4 runtime, test, schema, definition, template, Cargo, dependency, package, unsafe-policy, or public API change was made."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "status": "completed",
+      "summary": "Review-clean HCM-2.4 artifact-family, authority, selector, impact, proof, and implementation-entry specification."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "status": "completed",
+      "summary": "Ordered read-only P0, P1A/P1B, family conversion, bridge deletion, proof, review, and closeout plan."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "status": "completed",
+      "summary": "Executable implementation checklist with exact entry, proof, and stop gates."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/",
+      "status": "completed",
+      "summary": "Planning proof wall plus discovery and supplemental causal remediation evidence."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T045815Z--HCM-2-4--planning-causal-closure-2.json",
+      "status": "completed",
+      "summary": "Final exact seven-file CLEAN subject manifest at the exhausted causal allowance."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T050447Z--HCM-2-4--orchestration--planning-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned v1.3 completed planning handoff and sole future implementation selector."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-D1",
+      "summary": "The Phase 2 catalog contains exactly six first-party kinds; registry-brief remains custom HCM-2.3 preservation evidence.",
+      "authority_effect": "No seventh first-party kind or reinterpretation of registry-brief is authorized.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-D2",
+      "summary": "Every selected artifact has one editable YAML truth; retained Markdown is fixed deterministic human-review output with zero canonical influence.",
+      "authority_effect": "Environment Inventory and fixed flow Feature Spec Markdown authority are removed; generic Projection and Resolution remain deferred.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-D3",
+      "summary": "The shipped-root successor remains exactly three descriptors with exact Project Context and Environment Context intake/renderer bindings.",
+      "authority_effect": "Work Specification, Decision Record, and Risk Record receive repository-profile proofs only and no root defaults.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-D4",
+      "summary": "Definition publication, CRITICAL shipped-root adoption, Environment, Work, Decision, Risk, HIGH aggregate bridge deletion, and Phase 2 exit are independently gated packets.",
+      "authority_effect": "Both bridges and fixed selectors are deleted only after every exact replacement proof is green.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-D5",
+      "summary": "This completed planning handoff does not authorize implementation.",
+      "authority_effect": "A fresh explicit top-level selection of this exact handoff may enter read-only P0 only; implementation edits remain blocked until P0 passes.",
+      "refs": [
+        "git:6774b1d231d605566c492ce97913a67ec979215f",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260726T050447Z--HCM-2-4--orchestration--planning-completed.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-2.4-DISC-001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "planning-discovery-review",
+      "summary": "The implementation-entry gate was cyclic because it required P0 outputs before P0 was authorized; selection now permits read-only P0 and no edits until its live gate passes.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T044702Z--planning-discovery-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.4-DISC-002",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "planning-discovery-review",
+      "summary": "Selected intake/renderer fields and the Work Specification descriptor were under-specified; the exact shipped-root rows and repository-profile proof are now frozen.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T044702Z--planning-discovery-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.4-CL1-001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "planning-closure-review",
+      "summary": "The first remediation froze a Work Specification renderer-selected descriptor without admitting it through the non-Charter guard; exact fail-closed admission now precedes real-path proof.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T045301Z--planning-supplemental-causal-remediation-1.md"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "causal-cascade amendment proof wall and different-fresh review",
+      "status": "passed",
+      "evidence_ref": "git:2b7ab4e14467800e5f0ecaa19561a1dd5d84ee48"
+    },
+    {
+      "command": "final seven-file subject manifest replay",
+      "status": "passed",
+      "evidence_ref": "sha256:adcdcb783b34d9b18e8bfce50dda73bfc0d7e7cd5613e1cae3179b324888afa2"
+    },
+    {
+      "command": "complete-subject discovery, delta closure, and two supplemental causal closures",
+      "status": "passed",
+      "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T045815Z--HCM-2-4--planning-causal-closure-2.json"
+    },
+    {
+      "command": "UTF-8, Markdown fences, relative links, dispatch JSON, scope, and git diff --check",
+      "status": "passed",
+      "evidence_ref": "11 reviewed documentation/dispatch paths; no production or test path"
+    },
+    {
+      "command": "validate_handoffs.py normal plus both required self-tests",
+      "status": "passed",
+      "evidence_ref": "54 pre-closeout records, 336 current dispatches, historical admission and orchestration contract self-tests passed"
+    },
+    {
+      "command": "GitNexus architecture, upstream impact, and staged detect-changes",
+      "status": "passed",
+      "evidence_ref": "HIGH/CRITICAL/UNKNOWN planning impacts recorded; staged documentation subject reported no indexed execution-flow changes"
+    },
+    {
+      "command": "primary reviewed planning commit",
+      "status": "passed",
+      "evidence_ref": "git:6774b1d231d605566c492ce97913a67ec979215f"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/",
+      "sections": [
+        "SPEC",
+        "tasks",
+        "proof"
+      ],
+      "reason": "Freeze complete review-clean HCM-2.4 planning authority.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/",
+      "sections": [
+        "four HCM-2.4 planning review manifests"
+      ],
+      "reason": "Preserve immutable discovery, closure, and supplemental causal review lineage.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T050447Z--HCM-2-4--orchestration--planning-completed.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Record parent planning completion and the sole future implementation selector.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger for the completed planning handoff.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic resume is authorized. A later explicit top-level HCM-2.4 implementation selection may use HANDOFF_SELECTOR 20260726T050447Z--HCM-2-4--orchestration--planning-completed and enter read-only P0 only.",
+    "condition": "Only a fresh explicit user instruction selecting this exact completed handoff on a clean synchronized descendant of 6774b1d231d605566c492ce97913a67ec979215f may start read-only P0; implementation edits require P0 acceptance.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T050447Z--HCM-2-4--orchestration--planning-completed.json",
+        "sections": [
+          "entire completed planning handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sections": [
+          "entire specification"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sections": [
+          "entire implementation plan"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sections": [
+          "entire checklist"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Read-only P0 baseline, exact selector manifest, GitNexus UID/impact, and proof-command lock after explicit selection.",
+      "P1A through P7 only after P0 acceptance and within the exact reviewed selector/risk ceilings."
+    ],
+    "prohibited_scope": [
+      "Do not begin HCM-2.4 implementation automatically from this planning closeout.",
+      "Do not change HCM-2.2 Charter authority, HCM-2.1 Project Context canonical behavior, or HCM-2.3 registry-brief authority.",
+      "Do not add Work/Decision/Risk to the shipped-root profile or retain Environment Inventory/Feature Spec Markdown as editable authority.",
+      "Do not begin HCM-3.x Context Resolution or capitalized Projection, generic custom Projections, SDK/transport, remote schema, generated commands, dynamic filename/command dispatch, migration, or dual reads.",
+      "Do not change dependencies, Cargo, unsafe policy, package boundaries/metadata, release versions, or public APIs."
+    ],
+    "acceptance_criteria": [
+      "Primary planning commit 6774b1d231d605566c492ce97913a67ec979215f remains bound to final CLEAN subject sha256:adcdcb783b34d9b18e8bfce50dda73bfc0d7e7cd5613e1cae3179b324888afa2.",
+      "The completed v1.3 handoff and deterministic ledger validate in all three modes.",
+      "A fresh implementation selection enters read-only P0 and freezes exact live manifests/UID impacts before any edit.",
+      "All six family rows, exact descriptor bindings, bridge deletion triggers, proof mapping, non-goals, and stop gates remain accepted without unresolved authority."
+    ],
+    "stop_conditions": [
+      "Stop on unresolved GitNexus UNKNOWN or materially wider HIGH/CRITICAL impact.",
+      "Stop if any family needs a public API, dependency, Cargo, unsafe, package, SDK/transport, remote-schema, generated-command, dynamic-path, migration, dual-read, Projection, or HCM-3.x expansion.",
+      "Stop if Charter, Project Context, registry-brief, three-instance shipped-root, or one-editable-truth preservation proof fails.",
+      "Stop before bridge deletion unless every exact family replacement proof is green."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-2.4 planning is final CLEAN at sha256:adcdcb783b34d9b18e8bfce50dda73bfc0d7e7cd5613e1cae3179b324888afa2 and primary commit 6774b1d231d605566c492ce97913a67ec979215f. It covers all six shipped kinds, exact renderer/intake/profile authority, Environment/Work conversion, Decision/Risk proofs, both bridge deletions, HIGH/CRITICAL gates, and Phase 2 exit. Implementation has not begun and requires fresh explicit selection."
+}
