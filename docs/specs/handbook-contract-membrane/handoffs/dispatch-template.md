@@ -3,7 +3,7 @@
 This Markdown file is explanatory guidance, not a machine dispatch and not a
 schema-valid example. The only normative current machine template is
 `internal-dispatch-template.json`; validate instantiated JSON dispatches against
-`internal-dispatch.v1.1.schema.json`. Do not add front matter that claims a
+`internal-dispatch.v1.2.schema.json`. Do not add front matter that claims a
 machine schema identity here, and do not copy retired legacy fields into a
 current dispatch.
 
@@ -41,8 +41,16 @@ Return to the parent:
 - commands/checks and raw-result references;
 - findings first, ordered by severity, for review/proof roles;
 - each finding's file/line, violated contract/gate, reasoning, smallest remediation, and missing proof;
+- P1/P2 blocking disposition and P3/P4 fix, inventory, or duplicate disposition
+  under `../09-review-finding-inventory.md`;
 - blockers/escalations and exact resume condition;
 - recommended parent disposition.
+
+For review roles, `verdict: findings` means at least one valid P1/P2.
+`verdict: clean` means no valid P1/P2 and may include P3/P4 advisories. Identify
+findings independently before comparing P3/P4 with the inventory; cite the
+existing finding ID instead of creating a duplicate when its comparison key and
+underlying defect match.
 
 Do not write a canonical handoff or global ledger entry for an internal delegated run.
 

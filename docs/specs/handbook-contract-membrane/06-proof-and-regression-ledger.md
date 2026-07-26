@@ -225,14 +225,14 @@ Every implementation slice must preserve applicable baselines:
 17. posture recommendations remain advisory and cannot auto-mutate Charter policy.
 18. internal delegated agents do not write canonical handoffs or append the global ledger;
 19. writing an internal dispatch is not orchestration completion and does not create an ordinary user task hop;
-20. implementation/documentation agents cannot self-review; valid findings require remediation and a different fresh reviewer;
+20. implementation/documentation agents cannot self-review; valid P1/P2 findings require remediation and a different fresh reviewer, while valid unfixed P3/P4 are inventoried;
 21. mandatory built-in delegation cannot be replaced by shell-launched agents, external Codex processes, temporary-file transport, or filesystem polling.
 22. completed orchestration cannot use a queue-shaped `review_required` stop or a stop/status/resume combination inconsistent with the true boundary;
-23. findings close only through typed successful parent/delegated remediation followed by a different fresh review of the remediation result fingerprint;
+23. P1/P2 findings close only through typed successful parent/delegated remediation followed by a different fresh review of the remediation result fingerprint;
 24. final review evidence binds a replayable sorted repository-path/SHA-256 subject manifest, not a free-form fingerprint string.
 25. completed two-commit closeout replays the final review manifest against the primary reviewed commit while validating the mechanically rebuilt post-closeout ledger separately.
 26. unavailable mandatory delegation maps only to `capability_unavailable`/`blocked`/`top_level_resume`, and that mapping is enforced in both directions.
-27. a completed closeout records every findings -> remediation -> completed fresh re-review edge, permits a re-review to discover another remediated round, and requires the final completed review to be clean.
+27. a completed closeout records every P1/P2 findings -> remediation -> completed fresh re-review edge, permits a re-review to discover another remediated round, and requires the final completed review to be clean.
 28. for completed closeout, `reviewed_state.baseline_head` equals `repo_state.head`; a valid manifest from another commit cannot authorize an unreviewed primary slice commit.
 29. schema, kind, capability, capability-dependency contract, intake, renderer, profile-parent, vocabulary, posture, and other HCM-0.2 definition refs derive mechanically as `identity@version`; every referenced definition has a recomputable uniform fingerprint producer, the graph is acyclic with intake compatibility owned only intake -> kind, and range/latest/ambient/bare-ref fallback is refused.
 30. a resolved artifact instance has one concrete safe repo-relative canonical path; templates and absolute paths do not survive resolution.
@@ -286,6 +286,15 @@ Every implementation slice must preserve applicable baselines:
 78. `handbook.dock.json-schema@1.0.0` remains the bounded future first proof target for one exact offline Draft 2020-12 schema/ref closure; remote refs, executable hooks, ambient schemas, unsupported dialects, and fingerprint mismatch refuse, and the design selection does not prove `PG-DOCK-01`.
 79. HCM-0.5 ordinary operations preserve frozen HCM-0.4 owners, DTOs, transports, idempotency, write-set/receipt semantics, and publication rules; `dock.run` writes exactly one operational record for an admitted run, candidate admission is a separate exactly-one evidence append, and verdict/gate evaluation remains read-only until later approved persistence authority exists.
 80. the HCM-0.5 documentation freeze keeps canonical `05` monolithic, adds no catalog leaves/schema/runtime/Rust/Cargo/CLI/Tauri/Substrate/HCM-0.6 work, and leaves `PG-CONTRACT-01`, `PG-DOCK-01`, and `PG-GATE-01` open.
+81. Critical/P1 and Required/P2 review findings remain blocking; Optional/P3 and Nit/P4 findings are non-blocking only when validated and recorded or deduplicated through `09-review-finding-inventory.md`.
+82. a clean review means no unresolved valid P1/P2; it may retain explicit P3/P4 advisory refs without creating findings-remediation-re-review lineage.
+83. an existing advisory inventory entry cannot waive or downgrade a new P1/P2, and duplicate comparison uses owner/seam, surface, contract/gate, and failure mode rather than wording alone.
+84. only material deltas require another independent review; a mechanical-only formatting, generated fingerprint/manifest/ledger, or exact advisory-inventory delta is deterministically proved and recorded separately.
+85. large or multi-risk work is decomposed under the `04` reviewability indicators unless indivisibility is documented and independently accepted; final closeout still reviews the aggregate final subject.
+86. same-subject review bursts may batch independent lenses before one consolidated remediation pass; each reviewer remains fresh, read-only, isolated, and fingerprint-bound.
+87. verification is tiered: focused checks during editing, affected packet/crate/schema checks at packet boundaries, and one complete proof wall after material convergence; a material remediation reruns affected proof and the final complete wall before closeout.
+88. an ancillary selector allowance admits only its exact operator-approved private/test scope and budget after fresh impact analysis; public/API/dependency/unsafe-policy/authority/schema/new-module or unexpected HIGH/CRITICAL expansion still stops.
+89. the default automatic review budget is one complete-subject discovery review or same-fingerprint burst, one consolidated remediation pass, and one different-fresh delta-focused closure review; budget exhaustion preserves valid P1/P2 as a bounded non-completed stop instead of silently waiving them or starting another automatic churn loop, and P2 requires a demonstrated effect on the selected integrated outcome rather than an isolated redundant-defense disagreement.
 
 ## Slice closeout evidence record
 
@@ -298,6 +307,7 @@ When a slice closes, update only the affected rows and cite:
 - negative/fail-closed proof;
 - published/downstream evidence when required;
 - independent review result;
+- unresolved advisory finding IDs from `09`, or an explicit statement that none intersect the closed subject;
 - handoff record ID.
 
 Do not replace evidence refs with “all tests passed.”

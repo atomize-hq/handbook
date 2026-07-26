@@ -122,7 +122,8 @@ PHASE 0 — PREFLIGHT
    - .agents/skills/using-agent-skills/SKILL.md;
    - the exact skills required by this slice;
    - docs/specs/handbook-contract-membrane/00-README.md;
-   - docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md.
+   - docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md;
+   - docs/specs/handbook-contract-membrane/09-review-finding-inventory.md.
 3. Record branch, HEAD, status, staged/unstaged/untracked paths, and recent
    relevant commits.
 4. Preserve unrelated work. Stop if overlapping uncommitted changes cannot be
@@ -196,6 +197,7 @@ EXPLICIT NON-GOALS:
 APPLICABLE CONTRACTS / PROOF GATES:
 REQUIRED SKILL CHAIN:
 KNOWN CORRECTIONS OR CONFLICTS:
+KNOWN P3/P4 ADVISORIES:
 MAXIMUM PERMITTED CLASSIFICATION / PROOF CHANGE:
 EXIT PROOF:
 STOP CONDITIONS:
@@ -220,6 +222,18 @@ Before implementation:
 4. update coupled crosswalk, phase, contract, and proof authority together when
    semantics change;
 5. do not mark the parent complete because a child packet was created.
+
+Apply the `04` reviewability indicators before implementation. If one packet
+would exceed the hand-written line, production-symbol, multi-risk, file-size,
+or focused-context indicators, split it unless the packet documents an atomic
+indivisibility argument that fresh review accepts.
+
+Before freezing a contract that depends on a native/platform/external
+primitive or another uncertain feasibility premise, run the smallest
+non-production feasibility probe allowed by the slice. Record the observed
+behavior and discard the probe unless the packet separately authorizes it as a
+proof asset. Primary documentation alone does not prove local runtime
+feasibility.
 
 If the canonical contract is contradictory, pause behavior-changing
 implementation, perform the smallest cross-document repair, verify it, and send
@@ -250,6 +264,14 @@ fresh built-in subagent. The child returns structured results to this parent. It
 does not write a global handoff, append ledger.jsonl, declare the parent slice
 complete, or require the user to start another task.
 
+An implementation selector may include an explicitly operator-approved
+ancillary surface allowance. It must name exact paths/modules, private/test
+surface kinds, count budget, and risk ceiling. Freshly impact-analyze and record
+every admitted surface. Stop for any public API, dependency, Cargo/version,
+unsafe-policy, authority/schema, new module/process, or unexpected
+HIGH/CRITICAL expansion. Without that explicit allowance, the selector is
+exact and closed.
+
 Implementation/documentation children that may edit overlapping files run
 sequentially. Parallel editing is allowed only when file ownership and
 integration order are demonstrably disjoint. Reviewers are always read-only.
@@ -279,13 +301,28 @@ After every meaningful packet:
 Use debugging-and-error-recovery for failures. Establish root cause before
 patching symptoms.
 
+Use three verification tiers:
+
+1. edit loop — the smallest focused positive/negative test plus format/diff;
+2. packet boundary — affected crate/schema/checker and packet regression wall;
+3. final convergence — the complete applicable workspace/proof wall.
+
+Do not rerun an unchanged full workspace wall after every local edit. After a
+material remediation, rerun the affected proof and then the complete wall once
+the material subject has converged.
+
 PHASE 5 — FRESH REVIEW / REMEDIATION LOOP
 
 Every material change requires independent review. The parent cannot review its
-own work for this gate.
+own work for this gate. A mechanical-only delta is limited to deterministically
+proved whitespace/formatting, generated fingerprint/manifest/ledger bytes, or
+exact P3/P4 inventory transcription. Record and validate such a delta without
+spawning another reviewer; any uncertainty makes it material.
 
-Write/assemble a review dispatch, then spawn a fresh read-only built-in default
-subagent with isolated context. Give it only:
+Write/assemble a review dispatch, then spawn one fresh read-only built-in
+default subagent with isolated context. For a high-risk packet, the parent may
+instead dispatch a bounded same-fingerprint review burst with disjoint lenses
+and consolidate every result before remediation. Give each reviewer only:
 
 - repository root;
 - PHASE_ID / SLICE_ID / ACTIVE_PACKET;
@@ -300,6 +337,11 @@ subagent with isolated context. Give it only:
 Do not give the reviewer implementation reasoning, remediation discussion,
 prior reviewer conclusions, or a success-asserting summary.
 
+Require the reviewer to identify findings independently before comparing P3/P4
+candidates with the selected-scope entries in
+`09-review-finding-inventory.md`. Existing entries prevent duplicate advisory
+rows, not fresh P1/P2 reporting.
+
 Require findings first, ordered Critical, Required, Optional, Nit, with:
 
 - severity;
@@ -309,24 +351,46 @@ Require findings first, ordered Critical, Required, Optional, Nit, with:
 - smallest valid remediation;
 - missing verification.
 
-The parent validates every finding against live truth.
+The parent validates every finding against live truth and maps it through `09`:
 
-- CLEAN: proceed to the full proof wall.
-- ACTIONABLE FINDINGS: repair in the parent or dispatch a fresh remediation
-  agent; record typed successful parent/delegated remediation and its result
-  fingerprint; rerun verification; spawn a different fresh reviewer that has
-  not seen the remediation discussion.
-- INVALID/OPTIONAL FINDING: record the evidence-based disposition without
-  weakening Critical/Required gates.
+- P1 CRITICAL / P2 REQUIRED: verdict `findings`; consolidate the complete
+  same-subject review burst, then repair in the parent or dispatch a fresh
+  remediation agent; record typed successful parent/delegated remediation and
+  its result fingerprint; rerun verification; spawn a different fresh reviewer
+  that has not seen the remediation discussion.
+- P3 OPTIONAL / P4 NIT: verdict may remain `clean`; repair only when it
+  materially improves the selected subject, otherwise schedule exact inventory
+  registration or deduplicate against an existing entry. P3/P4 alone do not
+  require remediation or re-review.
+- INVALID FINDING: record the evidence-based disposition without weakening
+  P1/P2 gates.
+- CLEAN: no unresolved valid P1/P2; proceed to the full proof wall even when
+  validated P3/P4 advisories are scheduled for inventory.
 - BLOCKED: stop only when the block meets a genuine top-level stop condition.
 
-Repeat until no valid actionable finding remains. Never reuse the same reviewer
-after remediation and never treat a subagent's own self-review as independent.
+The default automatic budget is one complete-subject discovery review or
+same-fingerprint burst, one consolidated remediation pass, and one
+different-fresh delta-focused closure review. Never reuse the same reviewer
+after material remediation and never treat a subagent's own self-review as
+independent. A closure review does not restart open-ended discovery: it verifies
+the known remediation, affected contracts/call paths/proof, subject identity,
+and absence of remediation-caused regression. A newly observed issue outside
+that boundary is P3 unless the parent can demonstrate a P1/P2 effect on the
+selected integrated outcome under `09`.
+
+If a valid P1/P2 remains or is introduced when the declared review budget is
+exhausted, stop with a bounded partial/blocked result and request explicit
+scope/priority authority. Do not silently waive it and do not begin another
+automatic implement-review-fix cycle.
 
 For a multi-packet slice, packet reviewers may review bounded intermediate
 subjects. Final slice closeout must use a different fresh reviewer over the
 complete final subject and proof wall. For a single-packet slice, one review may
 serve both purposes only when its dispatch covers the complete final state.
+Remediation re-review focuses on the material delta, affected call
+paths/contracts, invalidated proof, and aggregate subject identity while
+retaining a replayable complete-subject manifest. It is the closure review for
+the declared budget, not a second unbounded discovery pass.
 
 PHASE 6 — FULL PROOF WALL
 
@@ -356,8 +420,10 @@ After verification and fresh review are clean:
 
 1. inspect final status and diff;
 2. stage only selected-slice files;
-3. commit with a scoped Conventional Commit message;
-4. do not start another slice automatically.
+3. for a multi-packet slice, permit a reviewed packet-commit stack whose final
+   primary tip represents the aggregate reviewed subject;
+4. otherwise commit with a scoped Conventional Commit message;
+5. do not start another slice automatically.
 
 PHASE 8 — TRUE-STOP HANDOFF
 
@@ -381,6 +447,8 @@ The handoff records:
   type, fresh-context flag, required skills, final status, verdict, and refs;
 - selected scope, repo state, work, decisions, findings, proof, and next resume
   boundary;
+- unresolved P1/P2 blockers and P3/P4 inventory IDs, or an explicit statement
+  that none intersect the selected subject;
 - snapshots/deltas and semantic refs when applicable;
 - supersedes only for prior recommendations/facts actually replaced.
 
@@ -391,8 +459,9 @@ python3 docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --se
 python3 docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract
 
 After validation, commit only the mechanical handoff/ledger closeout artifacts
-in a second commit. The handoff references the primary reviewed-slice commit;
-the chat closeout reports both hashes.
+and exact `09` P3/P4 inventory registrations in a second commit. The handoff
+references the final primary reviewed-slice tip; the chat closeout reports the
+reviewed commit or stack and the closeout hash.
 
 MANDATORY STOP CONDITIONS
 

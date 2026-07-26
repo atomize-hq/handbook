@@ -23,11 +23,13 @@ A dispatch is an execution/audit envelope. Creating an internal dispatch is not 
 handoffs/
 ├── handoff-record.schema.json          # immutable v1.0 historical schema
 ├── handoff-record.v1.1.schema.json     # immutable v1.1 historical schema
-├── handoff-record.v1.2.schema.json     # current parent-closeout schema
+├── handoff-record.v1.2.schema.json     # immutable predecessor schema
+├── handoff-record.v1.3.schema.json     # current parent-closeout schema
 ├── ledger-entry.schema.json
 ├── internal-dispatch.schema.json       # hash-admitted v1.0 first-review schema
-├── internal-dispatch.v1.1.schema.json  # current replayable-subject envelope
-├── handoff-template.json               # current v1.2 parent template
+├── internal-dispatch.v1.1.schema.json  # immutable predecessor envelope
+├── internal-dispatch.v1.2.schema.json  # current advisory-aware envelope
+├── handoff-template.json               # current v1.3 parent template
 ├── internal-dispatch-template.json     # current internal JSON dispatch template
 ├── dispatch-template.md                # human-readable field/instruction guide
 ├── validate_handoffs.py
@@ -48,12 +50,15 @@ handoffs/
 - Handoffs reference snapshots/deltas and semantic records; they do not duplicate or change those records' authority.
 - Internal JSON dispatches are immutable bounded execution envelopes.
 - The eight pre-correction Markdown dispatches remain immutable evidence of the user-routed workflow defect; they are not migrated into the current internal format.
-- Existing v1.0 and v1.1 records remain immutable historical evidence and are never rewritten into v1.2.
+- Existing v1.0 through v1.2 records remain immutable evidence and are never rewritten into v1.3.
 - The first HCM-0.8 internal-dispatch v1.0 review remains hash-admitted evidence of the findings that required v1.1; it is not rewritten.
 
 validate_handoffs.py hash-admits the exact historical v1.0/v1.1 record filenames, IDs, versions, and bytes plus the exact eight legacy Markdown dispatch filenames and bytes. Unknown new historical-version records, missing history, or byte changes fail closed.
 
-New v1.2 records and current internal-dispatch v1.1 JSON are validated against their schemas, replayable subjects, identities, cross-record lineage, and Git-reviewed diffs. Once committed, they are immutable and corrections are additive.
+New v1.3 records and current internal-dispatch v1.2 JSON are validated against
+their schemas, replayable subjects, identities, cross-record lineage,
+structured finding disposition, and Git-reviewed diffs. Once committed, they
+are immutable and corrections are additive.
 
 ## Handoff schema routing
 
@@ -63,33 +68,47 @@ handbook.session-handoff records route only by top-level schema_version:
 |---|---|---|
 | 1.0 | handoff-record.schema.json | Historical-only exact admission; never create. |
 | 1.1 | handoff-record.v1.1.schema.json | Historical-only exact admission; never create. |
-| 1.2 | handoff-record.v1.2.schema.json | Required for every new top-level closeout. |
+| 1.2 | handoff-record.v1.2.schema.json | Immutable predecessor; validate but never create. |
+| 1.3 | handoff-record.v1.3.schema.json | Required for every new top-level closeout. |
 
-V1.2 requires:
+V1.3 requires:
 
 - session.kind=orchestration;
 - orchestration_id and source_handoff_ids;
 - stop_reason and delegation-capability evidence;
 - reviewed-state fingerprint/proof refs;
 - proof-relevant delegated_runs, typed parent/delegated remediations, and their lineage;
+- structured finding priority, status, and source-review-run linkage;
 - snapshot_refs and semantic_refs;
 - resume rather than the historical queue-shaped next_session object.
 
-A completed v1.2 record requires stop_reason=completed, available built-in delegation, a completed clean review, and resume.execution_target=none. capability_unavailable requires status=blocked.
+A completed v1.3 record requires stop_reason=completed, available built-in
+delegation, a completed clean review, no unresolved P1/P2, registered P3/P4,
+and resume.execution_target=none. capability_unavailable requires
+status=blocked.
+A clean review may carry validated P3/P4 advisory refs under
+`09-review-finding-inventory.md`; it carries no unresolved P1/P2.
 
 ## Dispatch routing
 
-The first HCM-0.8 review used hash-admitted handbook.internal-dispatch v1.0. Current internal dispatches use handbook.internal-dispatch v1.1 JSON and internal-dispatch-template.json.
+The first HCM-0.8 review used hash-admitted handbook.internal-dispatch v1.0.
+Replayable-subject dispatch v1.1 remains immutable predecessor evidence.
+Current internal dispatches use handbook.internal-dispatch v1.2 JSON and
+internal-dispatch-template.json.
 
 The schema requires:
 
 - parent orchestration, phase, slice, packet, and subject fingerprint;
-- a sorted repository-relative path/SHA-256 manifest whose aggregate is always recomputed, whose entries are checked against live files when executed, and whose final clean subject is replayed from the primary `reviewed_state.baseline_head` at completed closeout;
+- a sorted canonical repository-relative path/SHA-256 manifest whose forward-slash entries exclude drive, UNC, absolute, backslash, embedded-NUL, empty, dot, dot-dot, and trailing-separator forms, resolve beneath the repository root, have an aggregate that is always recomputed, are checked against live files when executed, and whose final clean subject is replayed from the primary `reviewed_state.baseline_head` at completed closeout;
 - execution_target=internal_subagent;
 - agent_type=default and fresh_context_required=true;
 - closeout_owner=parent_orchestrator;
 - ordered required_skills beginning with using-agent-skills;
 - exact authority, repo truth, allowed scope, non-goals, tasks, gates, and stop conditions;
+- review-result P1-P4 classification plus P3/P4 fix, inventory, or duplicate
+  disposition;
+- review dispatches require `advisory_disposition` in their structured return
+  field set;
 - built_in_subagent result transport;
 - explicit prohibition of global handoff, ledger write, and user task hop.
 
@@ -144,6 +163,10 @@ Do not use completed to claim a broader phase/seam than the selected packet prov
 
 ## Finding and escalation behavior
 
+P1-P4 priority determines whether the current subject may close; the
+classification below determines the parent's action. See
+`09-review-finding-inventory.md`.
+
 | Classification | Parent behavior |
 |---|---|
 | local_remediation | Fix within current authority, verify, and obtain fresh review. |
@@ -177,19 +200,66 @@ Forbidden reviewer transports include shell-managed agents, codex exec, another 
 
 Review agents are read-only, fresh, and isolated from implementation reasoning and earlier conclusions. Their dispatch requires code-review-and-quality and binds the exact subject fingerprint.
 
-Findings are ordered Critical, Required, Optional, Nit and include file/line, violated contract/gate, reason, smallest valid remediation, and missing proof.
+Findings are ordered Critical, Required, Optional, Nit and include file/line,
+violated contract/gate, reason, smallest valid remediation, and missing proof.
+`09-review-finding-inventory.md` maps them to P1, P2, P3, and P4.
 
-When findings are valid:
+- A review uses `verdict: findings` when it contains at least one valid P1/P2.
+- A review with no valid P1/P2 uses `verdict: clean`; it may retain P3/P4 IDs
+  in `finding_refs`.
+- Every valid unfixed P3/P4 is added to or deduplicated against `09` during
+  true-stop closeout. P3/P4 alone creates no remediation lineage.
+- An existing inventory entry never waives a new P1/P2.
 
-1. the parent repairs them or spawns a fresh bounded remediation agent;
-2. the remediation run names the findings review in remediation_for_run_ids;
-3. verification reruns;
-4. a different fresh reviewer receives the new subject fingerprint;
-5. the loop repeats until clean or genuinely blocked.
+When P1/P2 findings are valid:
 
-A completed v1.2 record fails semantic validation when a findings review lacks typed successful parent/delegated remediation, delegated remediation is failed/wrong-role, remediation lacks a completed different-fresh re-review of its result fingerprint, a reviewer is reused after remediation, dispatch/result lineage mismatches, the final completed review is not clean, or the final clean review does not bind the replayable reviewed-state manifest/fingerprint. A re-review may discover another findings round; that round must have its own remediation and later fresh re-review before the final clean verdict.
+1. the parent consolidates all same-subject review-burst results;
+2. the parent repairs them or spawns a fresh bounded remediation agent;
+3. the remediation run names every applicable findings review in
+   remediation_for_run_ids;
+4. affected verification reruns;
+5. a different fresh reviewer receives the new subject fingerprint and may
+   focus on the material delta plus affected contracts/call paths/proof;
+6. the default automatic budget ends after that closure review: CLEAN proceeds,
+   while any remaining or newly demonstrated P1/P2 records a bounded
+   partial/blocked stop for explicit scope/priority adjudication rather than
+   starting another automatic loop.
 
-For multi-packet slices, perform bounded packet review as needed and use a different fresh agent for final slice closeout. A single-packet review may serve as final closeout review only when its dispatch covers the full final subject and proof wall.
+A bounded review burst may use multiple fresh read-only agents with disjoint
+lenses against one identical subject fingerprint. Consolidation happens before
+remediation so independently discoverable issues are fixed in one pass.
+Unless the selected plan explicitly authorizes otherwise, the review budget is
+one such discovery review/burst, one consolidated remediation, and one
+different-fresh delta-focused closure review. Budget exhaustion never converts
+a valid P1/P2 into accepted debt.
+
+A completed v1.3 record fails semantic validation when a P1/P2 findings review
+lacks typed successful parent/delegated remediation, delegated remediation is
+failed/wrong-role, remediation lacks a completed different-fresh re-review of
+its result fingerprint, a reviewer is reused after remediation, dispatch/result
+lineage mismatches, the final completed review is not clean, or the final clean
+review does not bind the replayable reviewed-state manifest/fingerprint. A
+closure re-review may identify another P1/P2, but the default budget then
+requires a bounded non-completed stop. Continuing with another remediation and
+fresh review requires explicit additional authority and a recorded budget
+extension; it is not automatic.
+It also fails when a finding lacks exact source-run linkage, a clean review
+carries P1/P2, a `findings` verdict carries no P1/P2, a blocking finding is not
+resolved/remediated, or an advisory remains open rather than inventoried or
+otherwise disposed. An `inventoried` P3/P4 must use an `HCM-RF-####` ID and
+priority that match a durable row in `09-review-finding-inventory.md`; the
+status word alone is not registration evidence.
+
+For multi-packet slices, perform bounded packet review as needed and use a
+different fresh agent for final slice closeout. A single-packet review may serve
+as final closeout review only when its dispatch covers the full final subject
+and proof wall.
+
+Only material changes invalidate independent review. A mechanical-only delta is
+limited to deterministically proved whitespace/formatting, generated
+fingerprint/manifest/ledger bytes, or exact P3/P4 inventory transcription. The
+parent records the diff and deterministic checks; any semantic uncertainty
+makes it material and requires review.
 
 ## Resolution escalation record
 
@@ -213,14 +283,23 @@ A handoff cannot contain the hash of the commit that contains itself. Use a deli
 
 1. Finish implementation/documentation, verification, fresh review, remediation/re-review, proof, and control-pack updates.
 2. Run final scoped change detection and diff checks for the reviewed slice state.
-3. Commit the reviewed slice state. This is the primary slice commit.
-4. Capture/verify the top-level end state and use the same primary slice commit as both `repo_state.head` and `reviewed_state.baseline_head`; completed validation rejects mismatched commit identities.
-5. Create one v1.2 parent handoff. Record the final reviewed subject fingerprint, delegated runs, stop reason, proof refs, and source/supersession truth.
-6. Rebuild ledger.jsonl from canonical records.
-7. Run all handoff/internal-dispatch schemas, historical admission checks, cross-record semantics, ledger parity, and self-tests.
-8. Run git diff --check and scoped change detection for the mechanical closeout artifacts.
-9. Commit only the new handoff, ledger entry, and any directly required closeout index artifact in a second closeout commit.
-10. Report both commit hashes in chat. Do not start the next slice.
+3. Commit the reviewed slice state. A multi-packet slice may use a reviewed
+   commit stack; its final primary tip represents the aggregate reviewed state.
+4. Capture/verify the top-level end state and use the final primary tip as both
+   `repo_state.head` and `reviewed_state.baseline_head`; completed validation
+   rejects mismatched commit identities.
+5. Create one v1.3 parent handoff. Record the final reviewed subject
+   fingerprint, delegated runs, structured finding dispositions, stop reason,
+   proof refs, and source/supersession truth.
+6. Register or deduplicate validated unfixed P3/P4 advisories in
+   `09-review-finding-inventory.md`.
+7. Rebuild ledger.jsonl from canonical records.
+8. Run all handoff/internal-dispatch schemas, historical admission checks, cross-record semantics, ledger parity, and self-tests.
+9. Run git diff --check and scoped change detection for the mechanical closeout artifacts.
+10. Commit only the new handoff, ledger entry, directly required closeout index
+    artifacts, and exact advisory inventory registrations in a second closeout
+    commit.
+11. Report the reviewed commit/stack and closeout hash in chat. Do not start the next slice.
 
 The final dispatch may include the pre-closeout `ledger.jsonl` because that file
 is part of the reviewed primary state. Completed-record validation replays the
@@ -228,9 +307,12 @@ manifest from `reviewed_state.baseline_head`, not from the post-closeout working
 tree; exact record/index parity independently validates the rebuilt ledger after
 the parent record is added.
 
-For a blocked/partial stop, commit only safe reviewed work when appropriate, then create and commit the handoff separately. Never label an unreviewed or failed state completed.
+For a blocked/partial stop, commit only safe reviewed work when appropriate,
+then create and commit the handoff separately. Open P1/P2 may also be
+registered in `09` as blockers for comparison/resumption, never as accepted
+debt. Never label an unreviewed or failed state completed.
 
-## Create a v1.2 parent handoff
+## Create a v1.3 parent handoff
 
 1. Copy handoff-template.json to a correctly named records/YYYYMMDDTHHMMSSZ--<phase-or-slice>--orchestration--<slug>.json file.
 2. Fill every field; remove placeholders.
@@ -240,9 +322,11 @@ For a blocked/partial stop, commit only safe reviewed work when appropriate, the
 6. Record built-in delegation-capability evidence.
 7. Record only proof-relevant delegated runs and exact JSON dispatch refs/fingerprints.
 8. Bind the final clean review to reviewed_state.subject_fingerprint.
-9. Reference snapshots, semantic records, and long evidence rather than embedding content.
-10. Prefer repository-relative refs.
-11. Rebuild and validate the ledger.
+9. Record unresolved advisory IDs or state that none intersect the closed
+   subject.
+10. Reference snapshots, semantic records, and long evidence rather than embedding content.
+11. Prefer repository-relative refs.
+12. Rebuild and validate the ledger.
 
 A jq syntax check is optional and never substitutes for schema/semantic validation.
 
@@ -311,9 +395,11 @@ The normal command validates:
 
 - all Draft 2020-12 handoff/internal-dispatch schemas and current templates;
 - exact immutable v1.0/v1.1 and legacy-dispatch admission;
-- all canonical records, the hash-admitted internal-dispatch v1.0 review, and current v1.1 JSON dispatches;
-- v1.2 source/supersession and delegated-run/dispatch lineage;
-- clean-review/finding-remediation/fresh-re-review semantics;
+- all canonical records, the hash-admitted internal-dispatch v1.0 review,
+  immutable v1.1 JSON dispatches, and current v1.2 JSON dispatches;
+- v1.2/v1.3 source/supersession and delegated-run/dispatch lineage;
+- clean-review/finding-priority/disposition/remediation/fresh-re-review
+  semantics;
 - record/index identity and parity;
 - a byte-identical deterministic ledger rebuild.
 
@@ -364,11 +450,12 @@ The parent:
 6. performs or internally delegates the selected work;
 7. verifies every packet;
 8. executes fresh built-in review and waits for results;
-9. validates/remediates findings and executes different-fresh re-review;
+9. consolidates same-subject review bursts, remediates P1/P2, inventories
+   unfixed P3/P4, and executes different-fresh re-review after material repair;
 10. runs the full proof wall and updates canonical pack truth;
-11. commits the reviewed slice state;
-12. writes one v1.2 handoff only at a true stop;
-13. commits the mechanical closeout record/index;
+11. commits the reviewed slice state or reviewed multi-packet commit stack;
+12. writes one v1.3 handoff only at a true stop;
+13. commits the mechanical closeout record/index/advisory inventory;
 14. returns a short durable closeout.
 
 If selected handoff facts are stale, do not edit the record. Name it in source_handoff_ids and supersedes only when the new record actually replaces its recommendation/facts.
@@ -396,10 +483,16 @@ Include DISPATCH only for top_level_resume or human_interactive. Never return an
 - If a reviewer is slow, continue bounded built-in waits; slowness is not capability failure.
 - If an internal subagent attempts a global handoff/ledger write, reject that result and remediate the dispatch boundary.
 - If an immutable historical record/legacy dispatch is missing or byte-modified, fail closed; never repair by rewriting history or its admission hash without explicit historical-integrity authority.
-- If a current JSON dispatch or v1.2 record fails schema/semantic lineage, the top-level run is not closed.
+- If a current JSON dispatch or v1.3 record fails schema/semantic lineage, the top-level run is not closed.
 - If ledger and records disagree, rebuild the ledger from canonical records.
 - If a snapshot is unstable, retry or record the bounded blocker; do not ground promotion on it.
 - If projection exposes sensitive/out-of-Resolution state, omit it and record the omission.
 - If scope must broaden beyond current authority, stop at an authority boundary rather than completing extra work.
 - If a contract contradiction can be repaired inside current authority, repair/review it internally; do not create a user task hop.
+- If a known P3/P4 recurs unchanged, update its occurrence evidence rather than
+  create a duplicate or force remediation; if new evidence makes it P1/P2,
+  treat it as blocking.
+- If a supposedly mechanical delta changes behavior, authority, contract
+  meaning, proof, API/scope, tests, or user-facing semantics, classify it as
+  material and obtain independent review.
 - If the record cannot be written, report the complete closeout in chat as a fallback and state that durable closeout failed.

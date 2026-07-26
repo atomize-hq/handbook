@@ -66,6 +66,7 @@ A temporary internal bridge is allowed only when it has a concrete architectural
 | [`06-proof-and-regression-ledger.md`](06-proof-and-regression-ledger.md) | reviewing, validating, closing, or preserving known behavior | current proof tiers, open proof gaps, permanent guard rails, cutover-deletion gates |
 | [`07-orchestration-onboarding-prompt.md`](07-orchestration-onboarding-prompt.md) | starting or resuming a top-level phase/slice orchestration run | long-lived slice runner, selective onboarding, built-in delegation, review/remediation/re-review, proof, commit, and true-stop closeout |
 | [`08-handoff-ledger-and-escalation-protocol.md`](08-handoff-ledger-and-escalation-protocol.md) | stopping top-level orchestration, reporting a genuine external/authority boundary, or resuming later | parent-owned durable records, internal delegated-run results, status/stop model, ledger validation, and short chat closeout |
+| [`09-review-finding-inventory.md`](09-review-finding-inventory.md) | classifying, deferring, comparing, or resolving review findings | P1-P4 blocking/advisory rubric, duplicate comparison, and the single durable review-debt inventory |
 
 Corrective slice [`HCM-0.9`](slices/HCM-0.9/SPEC.md) is abandoned. Terminal Redesign Review 2 was not CLEAN, so no decomposition is authorized and the monolithic [`05-contracts-schemas-and-gates.md`](05-contracts-schemas-and-gates.md) remains canonical. The rejected planning subjects and review dispatches are immutable historical evidence only. Reviving decomposition requires a new explicit human decision, a new plan, and a new review budget; no automatic semantic routing engine is authorized.
 
@@ -109,7 +110,8 @@ Assemble three bounded packets:
    - targeted tests;
    - negative/fail-closed cases;
    - required CLI, downstream, dock, or runtime evidence;
-   - the single classification change the evidence may support.
+   - the single classification change the evidence may support;
+   - only the `09` finding entries whose affected scope intersects the packet.
 
 Target fewer than 2,000 focused lines per implementation or review task. Load sections, not entire archives.
 
@@ -131,6 +133,7 @@ APPLICABLE CONTRACTS / PROOF GATES:
 BUILT-IN DELEGATION CAPABILITY / ACTIVE RUNS:
 REVIEW ROUND / SUBJECT FINGERPRINT:
 KNOWN CORRECTIONS OR CONFLICTS:
+KNOWN P3/P4 ADVISORIES:
 HANDOFF RECORD TO RESUME, IF ANY:
 EXIT PROOF / STOP CONDITIONS:
 ```
@@ -178,16 +181,21 @@ user starts top-level orchestrator with explicit phase/slice
   -> capture/revalidate current state and assemble bounded context
   -> specify/plan/repair the active packet
   -> parent executes work or immediately delegates an internal dispatch
-  -> parent verifies and waits for a fresh built-in review subagent
-  -> valid findings: parent remediates or delegates a fresh fix subagent
-  -> another fresh reviewer checks the remediated state
-  -> repeat until clean or genuinely blocked
+  -> parent verifies and executes one fresh review or a bounded same-subject review burst
+  -> valid P1/P2 findings: parent consolidates and remediates or delegates a fresh fix subagent
+  -> valid unfixed P3/P4 findings: parent schedules exact `09` inventory registration
+  -> one different-fresh closure reviewer checks the remediated material delta
+  -> clean: continue; remaining P1/P2 at the declared review-budget boundary:
+     bounded non-completed stop for explicit scope/priority adjudication
   -> run proof wall, update control-pack truth, and commit reviewed slice state
   -> write one parent-owned durable handoff only when orchestration stops
-  -> validate and commit the mechanical handoff/ledger closeout separately
+  -> validate and commit the mechanical handoff/ledger/advisory closeout separately
 ```
 
 Escalation is a normal resolution transition, not a failure. Silent scope widening and user-mediated hopping between otherwise delegable internal rounds are failures.
+The default automatic review budget is one discovery review/burst, one
+consolidated remediation, and one delta-focused closure review; extending it
+requires explicit authority rather than another automatic loop.
 
 ## Initial program conclusion
 

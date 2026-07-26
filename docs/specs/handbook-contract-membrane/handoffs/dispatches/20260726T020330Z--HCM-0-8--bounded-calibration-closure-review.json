@@ -1,0 +1,202 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.2",
+  "dispatch_id": "20260726T020330Z--HCM-0-8--bounded-calibration-closure-review",
+  "created_at_utc": "2026-07-26T02:03:30Z",
+  "source_handoff_ids": [
+    "20260725T220053Z--HCM-2-3--orchestration--implementation-completed"
+  ],
+  "parent_orchestration_id": "20260726T000121Z--HCM-0-8--control-pack-calibration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:e730375583686b957fdd8403e58d1bd733dc4695d323d7af7eaae3d235077965",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "ce6064024b14f5f8537a730f81d0877ee5c3c72dbf7e89b051ce4b0fdcf1a27d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "e08038a40ad60f818098dd64582185166059e66d71333d0cee1c5db4eb00f7eb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "2b2f56b948354f084f8ae5e614ef62504bd53187054dd10f29d4bc748e01b6b1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "6c8f3e4d37010e0c995c39c109ab427b9e808eb0f533049f58488cc0c19538ad"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sha256": "a7a77d015bb58f9b6a1f32c7d086b551ab2480b9bbdee695f91fd4340a5aff36"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "34db8821c615c733a198e76016ee969d70bf0b264de6ac724bdff37fab85c3e4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "d30f5a70fc532fc3c76f08eafe10a51ef2b5c947326febb95a0bf88bea7f4af8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatch-template.md",
+        "sha256": "71e72a95bcfb5352c8eba83d9b5d1623cf8600e68efa26e37627233e1e1b2142"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T000121Z--HCM-0-8--fresh-review-process-calibration.json",
+        "sha256": "57338a2cd230d1f2f4ce928a5f37a515042831fc7b1f647f588d474b9b55231f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T003008Z--HCM-0-8--fresh-calibration-remediation-review.json",
+        "sha256": "494371f5c010ac92bdb88304bf95a08fb7ba35a7bafd1df51b087ec73f736851"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T004240Z--HCM-0-8--fresh-calibration-closure-review.json",
+        "sha256": "f4aa01ff8aa53b44faf8dae3701107d72d2f096df1daa6e774ac31e87d951ee0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T010420Z--HCM-0-8--fresh-calibration-final-review.json",
+        "sha256": "75ec6d730927f89cc90f19e974c8cb72940b10f3a3a07811eebda61457d8d131"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T012107Z--HCM-0-8--fresh-calibration-clean-review.json",
+        "sha256": "9c295002b4cb4a61c508a514903f254a92a64a810990d3b7cd8fe2d34eee259b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T013844Z--HCM-0-8--fresh-calibration-final-clean-review.json",
+        "sha256": "63e38813a50160705987cac1396e3e3926f3e4cdefd304ca8df461977efb79ed"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T015351Z--HCM-0-8--fresh-calibration-seventh-review.json",
+        "sha256": "7d6a6690db72453d9e5dca3f2f11c6891a08c1bdbb561d125609a1edec34fe27"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.3.schema.json",
+        "sha256": "4cf8a65b53692b9222f780d60a3b6aff6e89b7c4ef9865ee95d6e23c7c41218b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-template.json",
+        "sha256": "41ff0c03a5245cb9b2ed9b340106b25d063f3aa4cf63cc3b50112757c4bc6197"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch-template.json",
+        "sha256": "7a029fb67af105a6dbb4dbc6053fb37261a98894dfc26bbeb7ae413ed044aacd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.2.schema.json",
+        "sha256": "487e6100fc55f6b6a7a6d19cfd6e875b11c7ea264c54d8957858c0952b8a107b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "sha256": "ec58e5a9b1ce57fe128895587036f6e9adeec3b5137819702541292e9d930986"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:e730375583686b957fdd8403e58d1bd733dc4695d323d7af7eaae3d235077965"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "control_pack",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "bounded_closure_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T013844Z--HCM-0-8--fresh-calibration-final-clean-review.json",
+      "sections": [
+        "Sixth complete-subject findings review"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Decision and retained rigor",
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Required validation"
+      ]
+    }
+  ],
+  "repo_truth": "Six complete-subject reviews exposed repeated validator hardening edges and demonstrated that the draft calibration still allowed open-ended severity inflation. The parent stopped the seventh open-ended review before completion. It then added the missing terminal rule: the default automatic budget is one discovery review/burst, one consolidated remediation, and one different-fresh delta-focused closure review; P2 requires a demonstrated effect on the selected integrated outcome; budget exhaustion preserves a real blocker but returns it for explicit adjudication instead of auto-looping. All six prior P2 rounds are remediated, including the sixth review's NUL, literal-dot, and Inventory-section findings. The full validator and both self-tests pass. This is the single bounded closure review. The exact complete current subject is the twenty-path manifest above at baseline HEAD 2f9b3cc17bc194461f88b17177e8f2e31ce92626.",
+  "allowed_scope": [
+    "Verify all twenty frozen hashes and aggregate subject identity.",
+    "Verify the sixth review's three known P2 remediations: NUL is controlled-rejected by schema and semantics, literal dot is semantic-rejected, and only the unique canonical Inventory section can register rows.",
+    "Verify the new review-budget and outcome-linked priority language is coherent across 00, 04, 05, 06, 07, 08, and 09 and preserves genuine P1/P2 blocking quality.",
+    "Run the existing handoff validator, both self-tests, changed-document link/format checks, and git diff whitespace checks.",
+    "Return a bounded closure verdict. Report a P1/P2 only with evidence of failure in the selected integrated calibration outcome; disposition defense-in-depth, malformed-input hardening, speculative robustness, and unrelated discovery as P3/P4 inventory candidates."
+  ],
+  "non_goals": [
+    "No new open-ended adversarial discovery campaign and no attempt to enumerate every possible malformed path, Markdown shape, or redundant-defense disagreement.",
+    "No edits, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "No Rust, product runtime, test, dependency, Cargo, package, version, HCM-2.4 planning, or unrelated control-pack changes.",
+    "No automatic recommendation for another review/remediation loop."
+  ],
+  "tasks": [
+    "Replay the complete subject fingerprint before review.",
+    "Reproduce the three sixth-review failures and confirm each now rejects in the integrated gate with controlled behavior.",
+    "Check the review-budget, P2/P3 boundary, CLEAN meaning, advisory inventory, and bounded-stop rules for direct contradictions.",
+    "Confirm all prior blocking findings are remediated and no supported/repository-reachable state defeats the selected calibration outcome.",
+    "Run the bounded validation wall named in allowed_scope.",
+    "Return findings first with stable comparison keys. CLEAN means no unresolved demonstrated P1/P2 under the calibrated integrated-outcome rubric; list any P3/P4 advisory with an inventory disposition."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#priority-decision-matrix",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#cross-cutting-regression-rules"
+  ],
+  "stop_conditions": [
+    "Return blocked if required files, exact hashes, or validation infrastructure are unavailable.",
+    "If a demonstrated P1/P2 remains, return the exact bounded blocker for user adjudication; do not recommend or begin another automatic loop.",
+    "Do not widen into unrelated robustness discovery, edit any file, or delegate."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

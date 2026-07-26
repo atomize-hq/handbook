@@ -10,7 +10,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from jsonschema import Draft202012Validator, FormatChecker
@@ -23,14 +23,19 @@ DISPATCHES_DIR = ROOT / "dispatches"
 LEDGER_PATH = ROOT / "ledger.jsonl"
 TEMPLATE_PATH = ROOT / "handoff-template.json"
 INTERNAL_DISPATCH_TEMPLATE_PATH = ROOT / "internal-dispatch-template.json"
+REVIEW_FINDING_INVENTORY_PATH = REPO_ROOT / (
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md"
+)
 RECORD_SCHEMA_PATHS = {
     "1.0": ROOT / "handoff-record.schema.json",
     "1.1": ROOT / "handoff-record.v1.1.schema.json",
     "1.2": ROOT / "handoff-record.v1.2.schema.json",
+    "1.3": ROOT / "handoff-record.v1.3.schema.json",
 }
 INTERNAL_DISPATCH_SCHEMA_PATHS = {
     "1.0": ROOT / "internal-dispatch.schema.json",
     "1.1": ROOT / "internal-dispatch.v1.1.schema.json",
+    "1.2": ROOT / "internal-dispatch.v1.2.schema.json",
 }
 LEDGER_SCHEMA_PATH = ROOT / "ledger-entry.schema.json"
 HISTORICAL_V1_0_ADMISSION = {
@@ -144,6 +149,135 @@ def load_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValidationFailure(f"{path}: expected a JSON object")
     return value
+
+
+def load_review_inventory_entries(path: Path) -> dict[str, str]:
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError as error:
+        raise ValidationFailure(
+            f"{path}: cannot read review finding inventory: {error}"
+        ) from error
+
+    def split_row(line: str, line_number: int) -> list[str]:
+        if not line.startswith("|") or not line.rstrip().endswith("|"):
+            raise ValidationFailure(
+                f"{path}:{line_number}: malformed review inventory table row"
+            )
+        cells: list[str] = []
+        current: list[str] = []
+        body = line.strip()[1:-1]
+        index = 0
+        while index < len(body):
+            if body[index : index + 2] == r"\|":
+                current.append("|")
+                index += 2
+                continue
+            if body[index] == "|":
+                cells.append("".join(current).strip().strip("`"))
+                current = []
+            else:
+                current.append(body[index])
+            index += 1
+        cells.append("".join(current).strip().strip("`"))
+        return cells
+
+    expected_header = [
+        "Finding ID",
+        "Priority",
+        "Status",
+        "Comparison key",
+        "Summary",
+        "Source",
+        "Evidence refs",
+        "Affected scope",
+        "Disposition",
+        "Target",
+        "Occurrences",
+        "Resolution refs",
+    ]
+    inventory_heading_indexes = [
+        index for index, line in enumerate(lines) if line.strip() == "## Inventory"
+    ]
+    if len(inventory_heading_indexes) != 1:
+        raise ValidationFailure(
+            f"{path}: expected exactly one canonical Inventory section"
+        )
+    inventory_heading_index = inventory_heading_indexes[0]
+    section_end_index = next(
+        (
+            index
+            for index in range(inventory_heading_index + 1, len(lines))
+            if lines[index].lstrip().startswith("#")
+            and len(lines[index].lstrip()) > 1
+            and lines[index].lstrip().split(maxsplit=1)[0].strip("#") == ""
+        ),
+        len(lines),
+    )
+    header_index = None
+    for index in range(inventory_heading_index + 1, section_end_index):
+        line = lines[index]
+        if not line.startswith("|"):
+            continue
+        cells = split_row(line, index + 1)
+        if cells == expected_header:
+            header_index = index
+            break
+    if header_index is None or header_index + 1 >= len(lines):
+        raise ValidationFailure(f"{path}: missing canonical Inventory table")
+    separator = split_row(lines[header_index + 1], header_index + 2)
+    if len(separator) != len(expected_header) or any(
+        len(cell.strip(":")) < 3 or set(cell.strip(":")) != {"-"}
+        for cell in separator
+    ):
+        raise ValidationFailure(
+            f"{path}:{header_index + 2}: malformed Inventory table separator"
+        )
+
+    entries: dict[str, str] = {}
+    allowed_statuses = {"open", "accepted", "scheduled", "resolved", "superseded"}
+    for index in range(header_index + 2, len(lines)):
+        line = lines[index]
+        line_number = index + 1
+        if not line.strip() or not line.startswith("|"):
+            break
+        cells = split_row(line, line_number)
+        if len(cells) != len(expected_header) or any(not cell for cell in cells):
+            raise ValidationFailure(
+                f"{path}:{line_number}: inventory row must contain all "
+                "12 canonical fields"
+            )
+        finding_id = cells[0]
+        suffix = finding_id.removeprefix("HCM-RF-")
+        if (
+            not finding_id.startswith("HCM-RF-")
+            or len(suffix) != 4
+            or not suffix.isascii()
+            or not suffix.isdigit()
+        ):
+            raise ValidationFailure(
+                f"{path}:{line_number}: malformed review inventory ID"
+            )
+        priority = cells[1]
+        if priority not in {"P1", "P2", "P3", "P4"}:
+            raise ValidationFailure(
+                f"{path}:{line_number}: invalid review inventory priority"
+            )
+        if cells[2] not in allowed_statuses:
+            raise ValidationFailure(
+                f"{path}:{line_number}: invalid review inventory status"
+            )
+        comparison_parts = [part.strip() for part in cells[3].split("|")]
+        if len(comparison_parts) != 4 or any(not part for part in comparison_parts):
+            raise ValidationFailure(
+                f"{path}:{line_number}: invalid review inventory comparison key"
+            )
+        if finding_id in entries:
+            raise ValidationFailure(
+                f"{path}:{line_number}: duplicate review inventory ID {finding_id!r}"
+            )
+        entries[finding_id] = priority
+    return entries
 
 
 def validate_instance(
@@ -300,9 +434,41 @@ def validate_subject_manifest(
             )
     encoded: list[str] = []
     for entry in entries:
+        entry_path = entry["path"]
+        relative_path = PurePosixPath(entry_path)
+        if (
+            relative_path.is_absolute()
+            or not relative_path.parts
+            or "\0" in entry_path
+            or "\\" in entry_path
+            or ":" in entry_path
+            or any(part in {"", ".", ".."} for part in relative_path.parts)
+            or relative_path.as_posix() != entry_path
+        ):
+            raise ValidationFailure(
+                f"{dispatch_path}: subject manifest path is not canonical "
+                f"repository-relative: {entry_path!r}"
+            )
+        try:
+            resolved_repo_root = repo_root.resolve()
+            resolved_subject_path = (
+                resolved_repo_root / Path(*relative_path.parts)
+            ).resolve()
+        except (OSError, ValueError) as error:
+            raise ValidationFailure(
+                f"{dispatch_path}: subject manifest path cannot be resolved: "
+                f"{entry_path!r}"
+            ) from error
+        try:
+            resolved_subject_path.relative_to(resolved_repo_root)
+        except ValueError as error:
+            raise ValidationFailure(
+                f"{dispatch_path}: subject manifest path escapes repository: "
+                f"{entry_path!r}"
+            ) from error
         if baseline_head is not None:
             result = subprocess.run(
-                ["git", "cat-file", "blob", f"{baseline_head}:{entry['path']}"],
+                ["git", "cat-file", "blob", f"{baseline_head}:{entry_path}"],
                 cwd=repo_root,
                 capture_output=True,
                 check=False,
@@ -310,26 +476,26 @@ def validate_subject_manifest(
             if result.returncode != 0:
                 raise ValidationFailure(
                     f"{dispatch_path}: subject manifest path is absent from "
-                    f"reviewed baseline {baseline_head}: {entry['path']}"
+                    f"reviewed baseline {baseline_head}: {entry_path}"
                 )
             actual_sha256 = hashlib.sha256(result.stdout).hexdigest()
             if actual_sha256 != entry["sha256"]:
                 raise ValidationFailure(
                     f"{dispatch_path}: reviewed baseline SHA-256 mismatch: "
-                    f"{entry['path']}"
+                    f"{entry_path}"
                 )
         elif verify_live_files:
-            subject_path = repo_root / entry["path"]
+            subject_path = resolved_subject_path
             if not subject_path.is_file():
                 raise ValidationFailure(
-                    f"{dispatch_path}: subject manifest path is missing: {entry['path']}"
+                    f"{dispatch_path}: subject manifest path is missing: {entry_path}"
                 )
             actual_sha256 = hashlib.sha256(subject_path.read_bytes()).hexdigest()
             if actual_sha256 != entry["sha256"]:
                 raise ValidationFailure(
-                    f"{dispatch_path}: subject file SHA-256 mismatch: {entry['path']}"
+                    f"{dispatch_path}: subject file SHA-256 mismatch: {entry_path}"
                 )
-        encoded.append(f"{entry['path']}\0{entry['sha256']}\n")
+        encoded.append(f"{entry_path}\0{entry['sha256']}\n")
     aggregate = "sha256:" + hashlib.sha256("".join(encoded).encode()).hexdigest()
     if manifest["aggregate_fingerprint"] != aggregate:
         raise ValidationFailure(
@@ -348,6 +514,7 @@ def validate_v1_2_semantics(
     dispatches: dict[str, tuple[Path, dict[str, Any], str]],
     *,
     verify_final_subject_baseline: bool = False,
+    review_inventory_entries: dict[str, str] | None = None,
 ) -> None:
     for source_id in [*record["source_handoff_ids"], *record["supersedes"]]:
         if source_id not in all_record_ids:
@@ -492,6 +659,100 @@ def validate_v1_2_semantics(
     findings_reviews = [
         run for run in runs if run["role"] == "review" and run["verdict"] == "findings"
     ]
+    if record["schema_version"] == "1.3":
+        findings_by_id: dict[str, dict[str, Any]] = {}
+        findings_by_run: dict[str, list[dict[str, Any]]] = {}
+        expected_severity = {
+            "P1": "critical",
+            "P2": "major",
+            "P3": "warning",
+            "P4": "info",
+        }
+        for finding in record["findings"]:
+            finding_id = finding["finding_id"]
+            if finding_id in findings_by_id:
+                raise ValidationFailure(
+                    f"{record_path}: duplicate finding_id {finding_id!r}"
+                )
+            findings_by_id[finding_id] = finding
+            if finding["severity"] != expected_severity[finding["priority"]]:
+                raise ValidationFailure(
+                    f"{record_path}: finding {finding_id!r} priority/severity mismatch"
+                )
+            source_run = run_by_id.get(finding["source_run_id"])
+            if (
+                source_run is None
+                or source_run["role"] != "review"
+                or finding_id not in source_run["finding_refs"]
+            ):
+                raise ValidationFailure(
+                    f"{record_path}: finding {finding_id!r} lacks exact review-run linkage"
+                )
+            findings_by_run.setdefault(source_run["run_id"], []).append(finding)
+
+        for run in runs:
+            if run["role"] != "review":
+                continue
+            for finding_id in run["finding_refs"]:
+                if finding_id not in findings_by_id:
+                    raise ValidationFailure(
+                        f"{record_path}: review run {run['run_id']!r} references "
+                        f"unknown finding {finding_id!r}"
+                    )
+                if findings_by_id[finding_id]["source_run_id"] != run["run_id"]:
+                    raise ValidationFailure(
+                        f"{record_path}: review run {run['run_id']!r} references "
+                        f"finding {finding_id!r} owned by a different run"
+                    )
+            linked_findings = findings_by_run.get(run["run_id"], [])
+            has_blocking = any(
+                finding["priority"] in {"P1", "P2"}
+                for finding in linked_findings
+            )
+            if run["verdict"] == "clean" and has_blocking:
+                raise ValidationFailure(
+                    f"{record_path}: clean review run {run['run_id']!r} carries "
+                    "a P1/P2 finding"
+                )
+            if run["verdict"] == "findings" and not has_blocking:
+                raise ValidationFailure(
+                    f"{record_path}: findings review run {run['run_id']!r} "
+                    "has no P1/P2 finding"
+                )
+
+        if record["status"] == "completed":
+            if review_inventory_entries is None:
+                review_inventory_entries = load_review_inventory_entries(
+                    REVIEW_FINDING_INVENTORY_PATH
+                )
+            for finding in record["findings"]:
+                if finding["priority"] in {"P1", "P2"}:
+                    if finding["status"] not in {"remediated", "resolved"}:
+                        raise ValidationFailure(
+                            f"{record_path}: completed closeout leaves blocking "
+                            f"finding {finding['finding_id']!r} unresolved"
+                        )
+                    if finding["source_run_id"] not in remediations_by_finding:
+                        raise ValidationFailure(
+                            f"{record_path}: completed closeout leaves blocking "
+                            f"finding {finding['finding_id']!r} without typed remediation"
+                        )
+                elif finding["status"] == "open":
+                    raise ValidationFailure(
+                        f"{record_path}: completed closeout leaves advisory finding "
+                        f"{finding['finding_id']!r} unregistered"
+                    )
+                elif finding["status"] == "inventoried":
+                    inventory_priority = review_inventory_entries.get(
+                        finding["finding_id"]
+                    )
+                    if inventory_priority != finding["priority"]:
+                        raise ValidationFailure(
+                            f"{record_path}: inventoried advisory "
+                            f"{finding['finding_id']!r} lacks a matching durable "
+                            "inventory row"
+                        )
+
     if record["status"] == "completed":
         for finding_run in findings_reviews:
             if finding_run["run_id"] not in remediations_by_finding:
@@ -528,9 +789,13 @@ def validate_v1_2_semantics(
                 f"{record_path}: reviewed_state does not reference final review manifest"
             )
         final_dispatch_path, final_dispatch, _ = dispatches[final_review["dispatch_id"]]
-        if final_dispatch["schema_version"] != "1.1":
+        expected_dispatch_version = (
+            "1.2" if record["schema_version"] == "1.3" else "1.1"
+        )
+        if final_dispatch["schema_version"] != expected_dispatch_version:
             raise ValidationFailure(
-                f"{record_path}: final clean review lacks replayable v1.1 subject manifest"
+                f"{record_path}: final clean review lacks replayable "
+                f"v{expected_dispatch_version} subject manifest"
             )
         if verify_final_subject_baseline:
             validate_subject_manifest(
@@ -543,18 +808,34 @@ def validate_v1_2_semantics(
 def isolate_historical_admission_fixture(temp_root: Path) -> None:
     """Remove current-protocol artifacts from an immutable-history fixture.
 
-    The admission self-test copies only the handoff subtree. Current v1.1
-    dispatches intentionally bind a replayable manifest that reaches the wider
+    The admission self-test copies only the handoff subtree. Replayable v1.1
+    and v1.2 dispatches intentionally bind manifests that reach the wider
     repository, so they cannot be validated inside that reduced fixture. The
     test is about byte admission for historical records and dispatches; remove
-    current v1.2 records and current v1.1 dispatches before exercising it.
+    v1.2/v1.3 records and v1.1/v1.2 dispatches before exercising it.
     """
     for path in (temp_root / "records").glob("*.json"):
-        if load_json(path).get("schema_version") == "1.2":
+        if load_json(path).get("schema_version") in {"1.2", "1.3"}:
             path.unlink()
     for path in (temp_root / "dispatches").glob("*.json"):
-        if load_json(path).get("schema_version") == "1.1":
+        if load_json(path).get("schema_version") in {"1.1", "1.2"}:
             path.unlink()
+    remaining_record_versions = {
+        load_json(path).get("schema_version")
+        for path in (temp_root / "records").glob("*.json")
+    }
+    remaining_dispatch_versions = {
+        load_json(path).get("schema_version")
+        for path in (temp_root / "dispatches").glob("*.json")
+    }
+    if remaining_record_versions & {"1.2", "1.3"}:
+        raise ValidationFailure(
+            "historical admission fixture retained a current-protocol record"
+        )
+    if remaining_dispatch_versions & {"1.1", "1.2"}:
+        raise ValidationFailure(
+            "historical admission fixture retained a current-protocol dispatch"
+        )
 
 
 def run_historical_v1_0_admission_self_test() -> int:
@@ -574,7 +855,26 @@ def run_historical_v1_0_admission_self_test() -> int:
                 / "handoffs"
             )
             shutil.copytree(ROOT, temp_root)
+            current_record_sentinel = (
+                temp_root / "records" / "self-test-current-v1.3.json"
+            )
+            current_record_sentinel.write_text(
+                json.dumps({"schema_version": "1.3"}) + "\n"
+            )
+            current_dispatch_sentinel = (
+                temp_root / "dispatches" / "self-test-current-v1.2.json"
+            )
+            current_dispatch_sentinel.write_text(
+                json.dumps({"schema_version": "1.2"}) + "\n"
+            )
             isolate_historical_admission_fixture(temp_root)
+            if current_record_sentinel.exists() or current_dispatch_sentinel.exists():
+                print(
+                    "historical v1.0 admission self-test failed: current-version "
+                    "sentinel survived fixture isolation",
+                    file=sys.stderr,
+                )
+                return 1
             temp_records = temp_root / "records"
             if scenario == "unknown":
                 source = temp_records / next(iter(HISTORICAL_V1_0_ADMISSION))
@@ -739,14 +1039,15 @@ def run_historical_v1_0_admission_self_test() -> int:
         "unknown v1.0 record rejected; byte-modified admitted v1.0 record rejected; "
         "deleted admitted v1.0 record rejected; unknown/modified v1.1 history "
         "rejected; deleted/modified legacy and internal v1.0 dispatches rejected; "
+        "current record/dispatch sentinels isolated; "
         "exact ledger rebuilt for every record scenario"
     )
     return 0
 
 
 def run_orchestration_contract_self_test() -> int:
-    handoff_schema = load_json(RECORD_SCHEMA_PATHS["1.2"])
-    dispatch_schema = load_json(INTERNAL_DISPATCH_SCHEMA_PATHS["1.1"])
+    handoff_schema = load_json(RECORD_SCHEMA_PATHS["1.3"])
+    dispatch_schema = load_json(INTERNAL_DISPATCH_SCHEMA_PATHS["1.2"])
     template = load_json(TEMPLATE_PATH)
     dispatch_template = load_json(INTERNAL_DISPATCH_TEMPLATE_PATH)
     validate_instance(template, handoff_schema, "v1.2 handoff template")
@@ -818,6 +1119,11 @@ def run_orchestration_contract_self_test() -> int:
     case = copy.deepcopy(dispatch_template)
     case["return_contract"]["required_result_fields"].remove("verdict")
     dispatch_cases.append(("dispatch-missing-result-field", case))
+    case = copy.deepcopy(dispatch_template)
+    case["return_contract"]["required_result_fields"].remove(
+        "advisory_disposition"
+    )
+    dispatch_cases.append(("dispatch-missing-advisory-disposition", case))
     case = copy.deepcopy(dispatch_template)
     case["subject_fingerprint"] = "not-a-hash"
     dispatch_cases.append(("dispatch-invalid-subject-fingerprint", case))
@@ -927,7 +1233,7 @@ def run_orchestration_contract_self_test() -> int:
             "remediation_for_run_ids": remediation_for or [],
             "final_status": final_status,
             "verdict": verdict,
-            "finding_refs": ["required-lineage-finding"] if verdict == "findings" else [],
+            "finding_refs": [f"{run_id}-finding"] if verdict == "findings" else [],
             "evidence_refs": ["self-test-evidence"],
         }
 
@@ -961,6 +1267,7 @@ def run_orchestration_contract_self_test() -> int:
         "clean",
         3,
     )
+    clean_run["finding_refs"] = ["HCM-RF-9000"]
     valid_parent_record = copy.deepcopy(template)
     valid_parent_record["status"] = "completed"
     valid_parent_record["stop_reason"] = "completed"
@@ -992,6 +1299,38 @@ def run_orchestration_contract_self_test() -> int:
             "evidence_refs": ["parent-remediation-proof-round-2"],
         }
     ]
+    valid_parent_record["findings"] = [
+        {
+            "finding_id": "findings-review-finding",
+            "classification": "local_remediation",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "findings-review",
+            "summary": "First self-test blocking finding.",
+            "evidence_refs": ["parent-remediation-proof-round-1"],
+        },
+        {
+            "finding_id": "mid-findings-review-finding",
+            "classification": "local_remediation",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "mid-findings-review",
+            "summary": "Second self-test blocking finding.",
+            "evidence_refs": ["parent-remediation-proof-round-2"],
+        },
+        {
+            "finding_id": "HCM-RF-9000",
+            "classification": "future_program",
+            "severity": "warning",
+            "priority": "P3",
+            "status": "inventoried",
+            "source_run_id": "clean-review",
+            "summary": "Self-test advisory retained without blocking CLEAN.",
+            "evidence_refs": ["advisory-inventory-proof"],
+        },
+    ]
     valid_parent_record["reviewed_state"]["subject_fingerprint"] = repaired_subject
     valid_parent_record["reviewed_state"]["subject_manifest_ref"] = clean_run[
         "dispatch_ref"
@@ -999,13 +1338,261 @@ def run_orchestration_contract_self_test() -> int:
     valid_parent_record["repo_state"]["head"] = valid_parent_record[
         "reviewed_state"
     ]["baseline_head"]
+    with tempfile.TemporaryDirectory(prefix="hcm-review-inventory-") as temp_dir:
+        inventory_header = (
+            "| Finding ID | Priority | Status | Comparison key | Summary | "
+            "Source | Evidence refs | Affected scope | Disposition | Target | "
+            "Occurrences | Resolution refs |"
+        )
+        inventory_separator = (
+            "|---|---|---|---|---|---|---|---|---|---|---|---|"
+        )
+        valid_inventory_row = (
+            "| HCM-RF-9000 | P3 | accepted | "
+            r"validator \| inventory \| registration \| self-test"
+            " | Self-test advisory | self-test review | self-test evidence | "
+            "handoff validator | retained for parser proof | unassigned | "
+            "none | none |"
+        )
+        self_test_inventory_path = Path(temp_dir) / "inventory.md"
+        self_test_inventory_path.write_text(
+            "## Inventory\n\n"
+            f"{inventory_header}\n"
+            f"{inventory_separator}\n"
+            f"{valid_inventory_row}\n"
+        )
+        self_test_inventory_entries = load_review_inventory_entries(
+            self_test_inventory_path
+        )
+        invalid_inventory_rows = {
+            "short": "| HCM-RF-9000 | P3 |",
+            "empty-field": valid_inventory_row.replace(
+                "Self-test advisory", ""
+            ),
+            "malformed-id": valid_inventory_row.replace(
+                "HCM-RF-9000", "HCM-RF-90"
+            ),
+            "arabic-indic-id": valid_inventory_row.replace(
+                "HCM-RF-9000", "HCM-RF-١٢٣٤"
+            ),
+            "fullwidth-id": valid_inventory_row.replace(
+                "HCM-RF-9000", "HCM-RF-１２３４"
+            ),
+            "superscript-id": valid_inventory_row.replace(
+                "HCM-RF-9000", "HCM-RF-¹²³⁴"
+            ),
+            "duplicate-id": f"{valid_inventory_row}\n{valid_inventory_row}",
+            "invalid-status": valid_inventory_row.replace(
+                "| accepted |", "| deferred |"
+            ),
+            "unescaped-comparison-key": valid_inventory_row.replace(
+                r"validator \| inventory \| registration \| self-test",
+                "validator | inventory | registration | self-test",
+            ),
+        }
+        for label, rows in invalid_inventory_rows.items():
+            invalid_path = Path(temp_dir) / f"{label}.md"
+            invalid_path.write_text(
+                "## Inventory\n\n"
+                f"{inventory_header}\n"
+                f"{inventory_separator}\n"
+                f"{rows}\n",
+                encoding="utf-8",
+            )
+            try:
+                load_review_inventory_entries(invalid_path)
+            except ValidationFailure:
+                pass
+            else:
+                print(
+                    "orchestration contract self-test failed: malformed "
+                    f"inventory case {label!r} unexpectedly parsed",
+                    file=sys.stderr,
+                )
+                return 1
+
+        later_section_path = Path(temp_dir) / "later-section.md"
+        later_section_path.write_text(
+            "## Inventory\n\n"
+            "No unresolved findings.\n\n"
+            "## Appendix\n\n"
+            f"{inventory_header}\n"
+            f"{inventory_separator}\n"
+            f"{valid_inventory_row}\n",
+            encoding="utf-8",
+        )
+        duplicate_section_path = Path(temp_dir) / "duplicate-section.md"
+        duplicate_section_path.write_text(
+            "## Inventory\n\n"
+            f"{inventory_header}\n"
+            f"{inventory_separator}\n"
+            f"{valid_inventory_row}\n\n"
+            "## Inventory\n\n"
+            f"{inventory_header}\n"
+            f"{inventory_separator}\n",
+            encoding="utf-8",
+        )
+        for label, invalid_path in {
+            "later-section-table": later_section_path,
+            "duplicate-inventory-heading": duplicate_section_path,
+        }.items():
+            try:
+                load_review_inventory_entries(invalid_path)
+            except ValidationFailure:
+                pass
+            else:
+                print(
+                    "orchestration contract self-test failed: canonical "
+                    f"Inventory boundary case {label!r} unexpectedly parsed",
+                    file=sys.stderr,
+                )
+                return 1
+
+        orphan_path = Path(temp_dir) / "orphan.md"
+        orphan_path.write_text(
+            f"{valid_inventory_row}\n\n"
+            "## Inventory\n\n"
+            f"{inventory_header}\n"
+            f"{inventory_separator}\n"
+        )
+        if load_review_inventory_entries(orphan_path):
+            print(
+                "orchestration contract self-test failed: orphan inventory "
+                "row unexpectedly parsed",
+                file=sys.stderr,
+            )
+            return 1
+
+        priority_mismatch_path = Path(temp_dir) / "priority-mismatch.md"
+        priority_mismatch_path.write_text(
+            "## Inventory\n\n"
+            f"{inventory_header}\n"
+            f"{inventory_separator}\n"
+            f"{valid_inventory_row.replace('| P3 |', '| P4 |')}\n"
+        )
+        priority_mismatch_entries = load_review_inventory_entries(
+            priority_mismatch_path
+        )
     validate_instance(valid_parent_record, handoff_schema, "parent remediation positive")
     validate_v1_2_semantics(
         valid_parent_record,
         RECORDS_DIR / "self-test-parent-remediation.json",
         set(),
         dispatch_data,
+        review_inventory_entries=self_test_inventory_entries,
     )
+
+    fabricated_inventory_record = copy.deepcopy(valid_parent_record)
+    fabricated_inventory_record["delegated_runs"][-1]["finding_refs"] = [
+        "HCM-RF-9999"
+    ]
+    fabricated_inventory_record["findings"][-1]["finding_id"] = "HCM-RF-9999"
+    validate_instance(
+        fabricated_inventory_record,
+        handoff_schema,
+        "fabricated inventoried advisory schema shape",
+    )
+    try:
+        validate_v1_2_semantics(
+            fabricated_inventory_record,
+            RECORDS_DIR / "self-test-fabricated-inventoried-advisory.json",
+            set(),
+            dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
+        )
+    except ValidationFailure:
+        pass
+    else:
+        print(
+            "orchestration contract self-test failed: fabricated inventoried "
+            "advisory unexpectedly validated",
+            file=sys.stderr,
+        )
+        return 1
+
+    try:
+        validate_v1_2_semantics(
+            valid_parent_record,
+            RECORDS_DIR / "self-test-inventory-priority-mismatch.json",
+            set(),
+            dispatch_data,
+            review_inventory_entries=priority_mismatch_entries,
+        )
+    except ValidationFailure:
+        pass
+    else:
+        print(
+            "orchestration contract self-test failed: mismatched inventory "
+            "priority unexpectedly validated",
+            file=sys.stderr,
+        )
+        return 1
+
+    blocking_clean_record = copy.deepcopy(valid_parent_record)
+    blocking_clean_record["delegated_runs"][-1]["finding_refs"].append(
+        "clean-review-blocking-finding"
+    )
+    blocking_clean_record["findings"].append(
+        {
+            "finding_id": "clean-review-blocking-finding",
+            "classification": "proof_gap",
+            "severity": "major",
+            "priority": "P2",
+            "status": "open",
+            "source_run_id": "clean-review",
+            "summary": "A clean verdict must not carry an unresolved P2.",
+            "evidence_refs": ["negative-self-test"],
+        }
+    )
+    validate_instance(
+        blocking_clean_record,
+        handoff_schema,
+        "clean review with unresolved P2 schema shape",
+    )
+    try:
+        validate_v1_2_semantics(
+            blocking_clean_record,
+            RECORDS_DIR / "self-test-clean-with-blocking-finding.json",
+            set(),
+            dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
+        )
+    except ValidationFailure:
+        pass
+    else:
+        print(
+            "orchestration contract self-test failed: clean review with "
+            "unresolved P2 unexpectedly validated",
+            file=sys.stderr,
+        )
+        return 1
+
+    cross_run_blocking_record = copy.deepcopy(valid_parent_record)
+    cross_run_blocking_record["delegated_runs"][-1]["finding_refs"].append(
+        "findings-review-finding"
+    )
+    validate_instance(
+        cross_run_blocking_record,
+        handoff_schema,
+        "clean review with cross-run P2 reference schema shape",
+    )
+    try:
+        validate_v1_2_semantics(
+            cross_run_blocking_record,
+            RECORDS_DIR / "self-test-clean-with-cross-run-blocking-ref.json",
+            set(),
+            dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
+        )
+    except ValidationFailure:
+        pass
+    else:
+        print(
+            "orchestration contract self-test failed: clean review with "
+            "cross-run P2 reference unexpectedly validated",
+            file=sys.stderr,
+        )
+        return 1
 
     wrong_primary_record = copy.deepcopy(valid_parent_record)
     wrong_primary_record["repo_state"]["head"] = "different-unreviewed-commit"
@@ -1015,6 +1602,7 @@ def run_orchestration_contract_self_test() -> int:
             RECORDS_DIR / "self-test-wrong-primary-commit.json",
             set(),
             dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
         )
     except ValidationFailure:
         pass
@@ -1064,6 +1652,7 @@ def run_orchestration_contract_self_test() -> int:
             RECORDS_DIR / "self-test-failed-remediation.json",
             set(),
             dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
         )
     except ValidationFailure:
         pass
@@ -1102,6 +1691,58 @@ def run_orchestration_contract_self_test() -> int:
             file=sys.stderr,
         )
         return 1
+
+    unsafe_manifest_paths = {
+        "windows-drive": r"C:\Windows\win.ini",
+        "windows-unc": r"\\server\share\subject.txt",
+        "backslash-traversal": r"..\outside.txt",
+        "posix-traversal": "../outside.txt",
+        "absolute": "/absolute.txt",
+        "literal-dot": ".",
+        "embedded-nul": "a\0b",
+        "repeated-separator": "a//b.txt",
+        "current-directory": "a/./b.txt",
+        "embedded-traversal": "a/../b.txt",
+        "trailing-separator": "a/",
+    }
+    for label, unsafe_path in unsafe_manifest_paths.items():
+        unsafe_manifest = copy.deepcopy(manifest_dispatch)
+        unsafe_manifest["subject_manifest"]["entries"][0]["path"] = unsafe_path
+        unsafe_aggregate = "sha256:" + hashlib.sha256(
+            f"{unsafe_path}\0{manifest_sha256}\n".encode()
+        ).hexdigest()
+        unsafe_manifest["subject_manifest"]["aggregate_fingerprint"] = (
+            unsafe_aggregate
+        )
+        unsafe_manifest["subject_fingerprint"] = unsafe_aggregate
+        try:
+            validate_instance(
+                unsafe_manifest,
+                dispatch_schema,
+                f"unsafe manifest path {label}",
+            )
+        except ValidationFailure:
+            pass
+        else:
+            print(
+                "orchestration contract self-test failed: non-repository "
+                f"manifest path {label!r} unexpectedly passed schema validation",
+                file=sys.stderr,
+            )
+            return 1
+        try:
+            validate_subject_manifest(
+                unsafe_manifest, INTERNAL_DISPATCH_TEMPLATE_PATH
+            )
+        except ValidationFailure:
+            pass
+        else:
+            print(
+                "orchestration contract self-test failed: non-repository "
+                f"manifest path {label!r} unexpectedly passed semantic validation",
+                file=sys.stderr,
+            )
+            return 1
 
     with tempfile.TemporaryDirectory(prefix="hcm-two-commit-") as temp_dir:
         temp_repo = Path(temp_dir)
@@ -1177,11 +1818,17 @@ def run_orchestration_contract_self_test() -> int:
     print(
         "orchestration contract self-test passed: child handoff, non-default/fresh "
         "agents, stop/status/resume mismatches, incomplete completion, capability "
-        "mislabeling, missing skills/results, invalid fingerprints, forbidden global "
+        "mislabeling, missing skills/results/advisory disposition, invalid "
+        "fingerprints, forbidden global "
         "handoff, external transport, and failed/wrong-role remediation all fail "
-        "closed; chained findings/remediation/re-review, direct parent remediation, "
-        "reviewed-baseline/primary-commit identity, and two-commit ledger mutation "
-        "validate"
+        "closed; clean review with direct or cross-run P1/P2, malformed/orphan "
+        "inventory rows, cross-section/duplicate Inventory tables, non-ASCII "
+        "digit IDs, fabricated IDs, priority mismatch, and non-repository "
+        "manifest paths fail closed; "
+        "chained findings/remediation/re-review, clean review with a complete "
+        "durable P3/P4 inventory row, direct parent remediation, "
+        "reviewed-baseline/primary-commit identity, and two-commit ledger "
+        "mutation validate"
     )
     return 0
 
@@ -1223,9 +1870,9 @@ def main() -> int:
 
         template = load_json(TEMPLATE_PATH)
         template_version = template.get("schema_version")
-        if template_version != "1.2":
+        if template_version != "1.3":
             raise ValidationFailure(
-                f"{TEMPLATE_PATH}: new-record template must route to schema_version 1.2"
+                f"{TEMPLATE_PATH}: new-record template must route to schema_version 1.3"
             )
         validate_instance(template, record_schemas[template_version], str(TEMPLATE_PATH))
 
@@ -1233,10 +1880,10 @@ def main() -> int:
         internal_dispatch_template_version = internal_dispatch_template.get(
             "schema_version"
         )
-        if internal_dispatch_template_version != "1.1":
+        if internal_dispatch_template_version != "1.2":
             raise ValidationFailure(
                 f"{INTERNAL_DISPATCH_TEMPLATE_PATH}: current internal dispatch "
-                "template must route to schema_version 1.1"
+                "template must route to schema_version 1.2"
             )
         validate_instance(
             internal_dispatch_template,
@@ -1343,7 +1990,7 @@ def main() -> int:
             records.append((path, record))
 
         for path, record in records:
-            if record["schema_version"] == "1.2":
+            if record["schema_version"] in {"1.2", "1.3"}:
                 validate_v1_2_semantics(
                     record,
                     path,

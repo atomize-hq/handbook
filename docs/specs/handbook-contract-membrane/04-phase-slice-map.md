@@ -614,6 +614,10 @@ Classify each finding as one of:
 6. `proof_gap` — implementation may exist, but required evidence is missing;
 7. `future_program` — valuable but outside this program's approved target.
 
+This action classification is independent from the P1-P4 priority in
+`09-review-finding-inventory.md`. Priority decides whether the current subject
+may close; classification decides what the parent does with the finding.
+
 The active top-level orchestrator revalidates each finding against pack and live truth, then applies the classification without silently widening:
 
 - `local_remediation` — repair inside the current parent loop, then verify and obtain fresh review;
@@ -627,6 +631,38 @@ The active top-level orchestrator revalidates each finding against pack and live
 Local remediation, child decomposition, proof gaps, and cross-document repair do not by themselves justify returning an internal dispatch to the user as a new task.
 
 Only the top-level orchestration/design authority may promote a discovered child packet into the active slice plan. Implementation output alone does not change program scope, and creating the child does not mark the parent complete.
+
+## Reviewability and packet sizing calibration
+
+Decompose before implementation or before the next material review when one
+logical packet exceeds any reviewability indicator below:
+
+- roughly 1,000 hand-written changed lines, excluding generated vectors and
+  complete deletions that are mechanically checked;
+- roughly 20 changed production symbols;
+- more than one independent HIGH/CRITICAL subsystem, platform primitive, or
+  state machine;
+- one source file growing materially beyond roughly 1,500 lines;
+- more than 2,000 focused authority/repo/proof context lines for one agent; or
+- a reviewer cannot evaluate the subject without loading sibling/future scope.
+
+These are decomposition triggers, not automatic defect classifications. A
+packet may remain whole only when its plan explains why splitting would break
+one atomic invariant and a fresh reviewer accepts that reviewability argument.
+
+A multi-packet slice may land a stack of independently verified and reviewed
+packet commits. Each commit must be internally valid, remain within the parent
+slice, and preserve the open parent status. The final parent review covers the
+aggregate final subject and proof wall; the final primary tip, rather than a
+requirement for one giant commit, anchors completed closeout.
+
+For a high-risk packet, the parent may dispatch a bounded same-fingerprint
+review burst with disjoint lenses such as correctness/recovery,
+contract/schema, platform/security, and API/scope. Findings are consolidated
+before one remediation pass. The default budget then permits one
+different-fresh delta-focused closure review; a remaining demonstrated P1/P2
+stops non-completed unless explicit authority extends the budget. Review bursts
+do not replace aggregate subject-identity and proof verification.
 
 ## Slice packet layout
 

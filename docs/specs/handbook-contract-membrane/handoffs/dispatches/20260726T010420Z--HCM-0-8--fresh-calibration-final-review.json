@@ -1,0 +1,191 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.2",
+  "dispatch_id": "20260726T010420Z--HCM-0-8--fresh-calibration-final-review",
+  "created_at_utc": "2026-07-26T01:04:20Z",
+  "source_handoff_ids": [
+    "20260725T220053Z--HCM-2-3--orchestration--implementation-completed"
+  ],
+  "parent_orchestration_id": "20260726T000121Z--HCM-0-8--control-pack-calibration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:da01bc6c21a2e835903771b995e55c04b423caaa87ddabb4f9fe535a971c3245",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "15ef6974aef513ee91a9ab35f78776269d98f2296022a720ee1fe10fd5959f16"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "de457029760185e99732d83784a509445845768a7eb0cd62e4d7148e02004ec6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "52d4f09388d8bd6195ab66d4cebb55fea80b97c963ef34e7ce95e5128c70be11"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "2ea27f0bdec2ce0b49cf9c999b657b905c208149ff88b57acb326cbc87db0a14"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sha256": "7993857ab2e2290971381830242c1e792f67aa2ac0c331bf81c05db2ade9a990"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "93dc4647dfed2f0cc5172d0e2e3365a6e85951df2cd43574937f4eabf1fd268d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "19dcd1af4f5dc3c1477da89caac47246ec62fcb4995119b4f767419783e9fb71"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatch-template.md",
+        "sha256": "71e72a95bcfb5352c8eba83d9b5d1623cf8600e68efa26e37627233e1e1b2142"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T000121Z--HCM-0-8--fresh-review-process-calibration.json",
+        "sha256": "57338a2cd230d1f2f4ce928a5f37a515042831fc7b1f647f588d474b9b55231f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T003008Z--HCM-0-8--fresh-calibration-remediation-review.json",
+        "sha256": "494371f5c010ac92bdb88304bf95a08fb7ba35a7bafd1df51b087ec73f736851"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T004240Z--HCM-0-8--fresh-calibration-closure-review.json",
+        "sha256": "f4aa01ff8aa53b44faf8dae3701107d72d2f096df1daa6e774ac31e87d951ee0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.3.schema.json",
+        "sha256": "4cf8a65b53692b9222f780d60a3b6aff6e89b7c4ef9865ee95d6e23c7c41218b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-template.json",
+        "sha256": "41ff0c03a5245cb9b2ed9b340106b25d063f3aa4cf63cc3b50112757c4bc6197"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch-template.json",
+        "sha256": "7a029fb67af105a6dbb4dbc6053fb37261a98894dfc26bbeb7ae413ed044aacd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.2.schema.json",
+        "sha256": "7e551bd602b7104273bade4fdc9cb237c236a4ba66c20b2414acf63826fb97f6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "sha256": "5ffa116ad8fd826de4483bbb58bac88f1d99dd7d211b7622db937de90a5aa72b"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:da01bc6c21a2e835903771b995e55c04b423caaa87ddabb4f9fe535a971c3245"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "control_pack",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "slice_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T004240Z--HCM-0-8--fresh-calibration-closure-review.json",
+      "sections": [
+        "Entire immutable third-review dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Handoff schema routing",
+        "Dispatch routing",
+        "Review lineage",
+        "Required validation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Canonical entry shape",
+        "Admission and duplicate rules",
+        "Registration and review-subject boundary",
+        "Inventory"
+      ]
+    }
+  ],
+  "repo_truth": "The third different-fresh GPT-5.6 Sol High review replayed the fifteen-path fingerprint sha256:70f75326207b008d0f9da90dc3b26d316fd95ab9188927152fc4ed018c3a5e76 and returned one P2 with no P1/P3/P4. Parent remediation now loads the canonical Markdown inventory deterministically, rejects malformed/duplicate HCM-RF IDs, and requires every completed P3/P4 marked inventoried to match an actual HCM-RF-#### row with the same priority. The orchestration self-test proves a fabricated inventory ID fails and a parsed durable P3 row passes. All earlier P2 probes remain green. The exact complete current subject is the sixteen-path manifest above at baseline HEAD 2f9b3cc17bc194461f88b17177e8f2e31ce92626.",
+  "allowed_scope": [
+    "Read every path in subject_manifest and any unchanged control-pack authority needed to assess consistency.",
+    "Replay the exact subject manifest and run read-only schema, semantic, inventory, historical-admission, template, link, formatting, Git, and adversarial checks.",
+    "Return findings and advisory disposition only; do not edit, stage, commit, push, create a handoff, append the ledger, or create another dispatch."
+  ],
+  "non_goals": [
+    "No Rust, product runtime, test, dependency, Cargo, package, or version changes.",
+    "No rewriting any immutable handoff record, earlier dispatch, or ledger entry.",
+    "No implementation or planning work for HCM-2.4.",
+    "No reuse of an earlier reviewer or conclusion as authority.",
+    "No further scope expansion unless a new P1/P2 proves it necessary."
+  ],
+  "tasks": [
+    "Verify all sixteen manifest hashes and the aggregate fingerprint before reviewing.",
+    "Independently review the complete calibration and all three remediation rounds without relying on parent or earlier-review conclusions.",
+    "Reproduce all prior P2 probes: missing advisory disposition; direct and cross-run CLEAN plus P1/P2; first-v1.3 fixture contamination; and fabricated inventoried advisory ID.",
+    "Verify a real parsed HCM-RF row with matching P3/P4 priority passes, while absent, malformed, duplicate, or priority-mismatched rows fail.",
+    "Verify structured priority/status/source-run linkage, typed P1/P2 remediation, current schema routing, immutable predecessor admission, and documentation agree exactly.",
+    "Review the original calibration controls: decomposition, review bursts, reviewed commit stacks, tiered verification, mechanical-only deltas, ancillary allowances, P1/P2 gates, and P3/P4 inventory/deduplication.",
+    "Run the handoff validator and both self-tests, Draft 2020-12 schema checks, changed-Markdown relative links, JSON parsing, Python AST parsing without retained bytecode, and git diff whitespace checks.",
+    "Return findings first. Classify every valid finding P1/P2/P3/P4 with precise file/line, violated contract/gate, smallest remediation, missing proof, and stable comparison key. CLEAN means no unresolved valid P1/P2 and may include explicitly dispositioned P3/P4."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#development-orchestration-contracts",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#open-program-proof-gates",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#handoff-schema-routing",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#dispatch-routing",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
+  ],
+  "stop_conditions": [
+    "Return blocked if required files, exact hashes, validation infrastructure, or delegated capability are unavailable.",
+    "Return P1/P2 findings rather than widening scope when a blocking defect requires edits.",
+    "Do not edit, stage, commit, push, create a handoff, append the ledger, or create another dispatch."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

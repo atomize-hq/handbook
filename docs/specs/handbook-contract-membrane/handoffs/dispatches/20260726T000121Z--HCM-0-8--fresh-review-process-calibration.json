@@ -1,0 +1,180 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.1",
+  "dispatch_id": "20260726T000121Z--HCM-0-8--fresh-review-process-calibration",
+  "created_at_utc": "2026-07-26T00:01:21Z",
+  "source_handoff_ids": [
+    "20260725T220053Z--HCM-2-3--orchestration--implementation-completed"
+  ],
+  "parent_orchestration_id": "20260726T000121Z--HCM-0-8--control-pack-calibration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:1a1239a039deb48d448f6381c6450e86d5665ea3b4b9af3c25aa051152308373",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "15ef6974aef513ee91a9ab35f78776269d98f2296022a720ee1fe10fd5959f16"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "de457029760185e99732d83784a509445845768a7eb0cd62e4d7148e02004ec6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "564aad818e24b6a140ffe8b3f16ba700e82e36f3cd6e5a31605069aef9856fd4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "2ea27f0bdec2ce0b49cf9c999b657b905c208149ff88b57acb326cbc87db0a14"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sha256": "7993857ab2e2290971381830242c1e792f67aa2ac0c331bf81c05db2ade9a990"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "e941c277b37196d06722664ff8d23dd1ca7b7e9feb0bfd34a34e682e9bf20391"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "f80b24a7e1cbbd52ad88ffc2012869811d8655ce758e12e1b9bb31b068ca9914"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatch-template.md",
+        "sha256": "74407c9ff20c2a22c0983111939affaf4381089a261f213bc32aef15904a165d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch-template.json",
+        "sha256": "4b62b697d203a6011d863397fe8e6eaf5e9283899817f07113cf7743137d262e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:1a1239a039deb48d448f6381c6450e86d5665ea3b4b9af3c25aa051152308373"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "control_pack",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "slice_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Review finding inventory",
+        "Orchestration loop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Reviewability and decomposition indicators",
+        "Reviewed packet commit stacks"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Regression rules"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Entire top-level slice runner"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Parent-owned review lineage",
+        "Review verdict and finding disposition",
+        "Two-commit true-stop closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority and disposition matrix",
+        "Duplicate comparison rules",
+        "Registration boundary"
+      ]
+    }
+  ],
+  "repo_truth": "HCM-2.3 is closed and synchronized. Before HCM-2.4 planning begins, the parent prepared a bounded documentation-only HCM-0.8 calibration intended to reduce unnecessary review churn without weakening proof, impact, compatibility, or complete-subject review. The exact dirty subject is the nine-path manifest above at baseline HEAD 2f9b3cc17bc194461f88b17177e8f2e31ce92626. No production code, tests, Cargo files, schemas, immutable handoff records, ledger entries, staging, commits, or pushes are part of the reviewed subject.",
+  "allowed_scope": [
+    "Read every path in subject_manifest and any unchanged control-pack authority needed to assess consistency.",
+    "Replay the exact subject manifest and run read-only documentation, schema, template, handoff, link, formatting, and Git checks.",
+    "Return findings and advisory disposition only; do not edit, stage, commit, push, create a handoff, append the ledger, or create another dispatch."
+  ],
+  "non_goals": [
+    "No Rust, test, dependency, Cargo, version, schema, handoff-record, or ledger changes.",
+    "No reduction of required impact analysis, compatibility review, security review, proof-wall, or final aggregate-review quality.",
+    "No automatic waiver of a new P1 or P2 because a similar P3 or P4 inventory item exists.",
+    "No implementation or planning work for HCM-2.4.",
+    "No reuse of a prior reviewer or its conclusions as authority."
+  ],
+  "tasks": [
+    "Verify all nine manifest hashes and the aggregate fingerprint before reviewing.",
+    "Independently review whether the P1 through P4 rubric, CLEAN semantics, advisory inventory, and duplicate-comparison rules are internally consistent and fail closed for blocking findings.",
+    "Verify reviewability decomposition, same-fingerprint review bursts, reviewed packet commit stacks, tiered verification, mechanical-only deltas, and bounded ancillary-surface allowances preserve the existing quality gates.",
+    "Check that ancillary allowances cannot authorize public API, dependency, Cargo or version, unsafe-policy, authority or schema, new-module or process, or unexpected HIGH or CRITICAL scope.",
+    "Check that intermediate delta review and mechanical closeout cannot bypass a final fresh complete-subject or aggregate review.",
+    "Check the new inventory is usable as a single durable backlog for P3 and P4 findings, while open P1 and P2 entries remain blockers rather than accepted debt.",
+    "Run the handoff validator and both self-tests, template/schema validation, relative-link checks for the changed Markdown files, JSON parsing, and git diff whitespace checks.",
+    "Return findings first. Classify every valid finding as P1, P2, P3, or P4; include exact file and line, violated contract or gate, smallest remediation, missing proof, and a stable comparison key. A CLEAN verdict means no unresolved valid P1 or P2 and may include explicitly inventoried P3 or P4 advisories."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#development-orchestration-contracts",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#open-program-proof-gates",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#duplicate-comparison-rules"
+  ],
+  "stop_conditions": [
+    "Return blocked if required files, exact hashes, validation infrastructure, or the requested model capability are unavailable.",
+    "Return P1 or P2 findings rather than widening scope when a blocking defect requires edits.",
+    "Do not edit, stage, commit, push, create a handoff, append the ledger, or create another dispatch."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

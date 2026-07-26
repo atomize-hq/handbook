@@ -1,6 +1,6 @@
 {
   "schema_id": "handbook.internal-dispatch",
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "dispatch_id": "YYYYMMDDTHHMMSSZ--HCM-X-Y--short-slug",
   "created_at_utc": "2026-07-14T00:00:00Z",
   "source_handoff_ids": [],
@@ -60,7 +60,8 @@
   ],
   "contracts_and_gates": [
     "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#development-orchestration-contracts",
-    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#open-program-proof-gates"
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#open-program-proof-gates",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
   ],
   "stop_conditions": [
     "Return to the parent if broader authority or unavailable proof is encountered."
@@ -78,6 +79,7 @@
       "final_status",
       "verdict",
       "findings",
+      "advisory_disposition",
       "validation",
       "parent_disposition"
     ]

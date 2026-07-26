@@ -3347,7 +3347,7 @@ These contracts govern development of Handbook through this control pack. They d
 
 The only normative current machine example is
 `handoffs/internal-dispatch-template.json`. It is validated against
-`handoffs/internal-dispatch.v1.1.schema.json` by `validate_handoffs.py`; do not
+`handoffs/internal-dispatch.v1.2.schema.json` by `validate_handoffs.py`; do not
 maintain a second partial YAML shape that can drift from the schema. Every
 current internal dispatch includes the complete identity and timing fields,
 parent and source lineage, execution contract, ordered skill chain, explicit
@@ -3367,8 +3367,19 @@ Rules:
 2. Every dispatch declares an ordered `required_skills` chain beginning with `using-agent-skills`; the resolved skill workflows are mandatory, not advisory labels.
 3. Review agents are read-only and receive authority, diff/evidence, gates, and non-goals without implementation reasoning or prior reviewer conclusions.
 4. Internal agents return structured results to the parent and never append the global handoff ledger.
-5. The parent validates findings against live truth, remediates valid findings directly or through a fresh fix agent, reruns verification, and sends the resulting state to a different fresh reviewer.
+5. The parent validates findings against live truth, remediates valid P1/P2 directly or through a fresh fix agent, reruns affected verification, and sends the resulting state to a different fresh reviewer; valid unfixed P3/P4 are inventoried rather than converted into blockers.
 6. The parent owns integration, control-pack truth, final proof, commit, and top-level closeout.
+
+An implementation dispatch may contain an operator-approved bounded ancillary
+surface allowance inside its existing `allowed_scope`, `tasks`, and stop
+conditions. The allowance states exact paths/modules, permitted private or
+test-only surface kinds, maximum additional surface count, and risk ceiling.
+Every admitted ancillary surface still receives fresh impact analysis and is
+recorded in the result. The allowance never admits a public API, dependency,
+Cargo/package/version change, unsafe-policy expansion, new authority/schema,
+new module/process, or an unexpected HIGH/CRITICAL blast radius. Those remain
+separate authorization boundaries. Without an explicit allowance, the exact
+selector remains closed.
 
 ### Parent-owned delegated-run evidence
 
@@ -3397,32 +3408,83 @@ New top-level handoffs record each proof-relevant built-in delegation:
 }
 ```
 
-Handoff schema v1.2 adds required `orchestration_id`, `source_handoff_ids`, `delegation_capability`, `delegated_runs`, typed `remediations`, `reviewed_state`, `stop_reason`, and `resume`. `stop_reason` is one of `completed`, `human_input`, `external_blocker`, `authority_boundary`, `context_boundary`, or `capability_unavailable`.
+Handoff schema v1.3 retains the v1.2 parent-orchestration envelope and requires
+each recorded review finding to carry `priority`, `status`, and
+`source_run_id`. `stop_reason` is one of `completed`, `human_input`,
+`external_blocker`, `authority_boundary`, `context_boundary`, or
+`capability_unavailable`.
 
-A v1.2 handoff with `status: completed` must use `stop_reason: completed`, contain a completed clean fresh review run bound to `reviewed_state.subject_fingerprint` and its replayable manifest, and require no top-level resume. Human, external, authority, context, and capability stop reasons map to explicit permitted status/resume targets; v1.2 cannot emit historical `review_required`. A `capability_unavailable` stop is `blocked`. Dispatch/result parent, slice, packet, role, skills, and subject fingerprints must match. Earlier records and schemas remain immutable historical evidence.
+A v1.3 handoff with `status: completed` must use `stop_reason: completed`,
+contain a completed clean fresh review run bound to
+`reviewed_state.subject_fingerprint` and its replayable manifest, and require
+no top-level resume. Human, external, authority, context, and capability stop
+reasons map to explicit permitted status/resume targets; v1.3 cannot emit
+historical `review_required`. A `capability_unavailable` stop is `blocked`.
+Dispatch/result parent, slice, packet, role, skills, and subject fingerprints
+must match. Earlier records and schemas remain immutable historical evidence.
 
-The subject manifest sorts repository-relative paths and encodes each entry as `path + NUL + lowercase SHA-256 + newline`; the aggregate is SHA-256 over the concatenated encoded entries. Dispatch validation always recomputes the aggregate from the stored entries. At execution, the parent and reviewer verify every entry against the live subject. A completed v1.2 closeout verifies the final clean manifest against `reviewed_state.baseline_head`, the primary reviewed commit, while ledger parity is validated separately against the post-closeout record set. This preserves exact review binding even when the mechanical second commit adds the parent record and rebuilds `ledger.jsonl`. Earlier review manifests remain immutable identities of superseded pre-remediation subjects and are not incorrectly compared with the later repaired tree.
+The subject manifest sorts canonical repository-relative paths and encodes each entry as `path + NUL + lowercase SHA-256 + newline`; the aggregate is SHA-256 over the concatenated encoded entries. A canonical manifest path uses forward slashes, has no drive, UNC, absolute, backslash, embedded-NUL, empty, dot, dot-dot, or trailing-separator form, and resolves beneath the repository root. Dispatch validation always recomputes the aggregate from the stored entries. At execution, the parent and reviewer verify every entry against the live subject. A completed v1.3 closeout verifies the final clean manifest against `reviewed_state.baseline_head`, the primary reviewed commit, while ledger parity is validated separately against the post-closeout record set. This preserves exact review binding even when the mechanical second commit adds the parent record and rebuilds `ledger.jsonl`. Earlier review manifests remain immutable identities of superseded pre-remediation subjects and are not incorrectly compared with the later repaired tree.
 
 `delegation_capability.status: unavailable` and `stop_reason: capability_unavailable` are bidirectionally coupled. Unavailable mandatory delegation cannot be hidden under a human, external, authority, or context stop reason.
 
-Every findings review in a completed closeout has a typed remediation record. Its owner is either `parent_orchestrator` with durable evidence or a completed delegated `remediation` run. The remediation names the findings run, result fingerprint, and different-fresh completed re-review run. That re-review may itself report findings; if it does, it receives its own typed remediation and another different fresh review. The last completed review must be clean. Failed or wrong-role work cannot satisfy remediation lineage.
+Every P1/P2 `verdict: findings` review in a completed closeout has a typed
+remediation record. Its owner is either `parent_orchestrator` with durable
+evidence or a completed delegated `remediation` run. The remediation names the
+findings run, result fingerprint, and different-fresh completed re-review run.
+The default automatic budget is one discovery review/burst, one consolidated
+remediation, and one different-fresh delta-focused closure review. If that
+closure review reports a demonstrated P1/P2, the record stops non-completed
+unless explicit additional scope/priority authority extends the budget. The
+last review in a completed record must be clean. Failed or wrong-role work
+cannot satisfy remediation lineage.
+Every v1.3 finding ID must also resolve through its `source_run_id` to that
+review run's `finding_refs`. Priority/severity pairs are exact. A clean review
+cannot carry P1/P2; a `findings` review must carry at least one P1/P2.
+Completed P1/P2 entries are remediated or resolved and have typed remediation
+lineage. Completed P3/P4 entries may be inventoried without becoming blockers
+only when their `HCM-RF-####` ID and priority match a durable row in
+`09-review-finding-inventory.md`.
 
 ### Review choreography
+
+[`09-review-finding-inventory.md`](09-review-finding-inventory.md) owns the
+review-priority and durable-advisory contract:
+
+- Critical maps to P1 and Required maps to P2; either makes the review verdict
+  `findings` and blocks completion until remediation plus different-fresh
+  re-review, or a genuine top-level stop;
+- Optional maps to P3 and Nit maps to P4; they are non-blocking advisories, and
+  a review with only P3/P4 uses verdict `clean`;
+- every valid unfixed P3/P4 is added to or deduplicated against the single
+  inventory at true-stop closeout;
+- an inventory entry never waives, downgrades, or hides a later P1/P2.
 
 ```text
 implement or document
   -> verify
-  -> fresh read-only reviewer
-      -> clean: proof wall and closeout
-      -> actionable findings:
-           validate findings
-           -> parent repair or fresh remediation agent
-           -> verify
-           -> different fresh reviewer
-           -> repeat until clean or genuinely blocked
+  -> one fresh read-only reviewer or bounded same-subject review burst
+      -> no P1/P2:
+           validate and register unfixed P3/P4 advisories
+           -> proof wall and closeout
+      -> P1/P2 findings:
+           validate and consolidate findings
+           -> one parent repair pass or bounded remediation work
+           -> verify the material delta and affected proof
+           -> different fresh delta-focused closure reviewer
+           -> CLEAN: close
+           -> P1/P2: bounded non-completed stop unless review budget is
+              explicitly extended
 ```
 
 The orchestrator may not self-approve. A dispatch artifact proves a bounded job was specified; only captured built-in agent identity/status plus reconciled results prove that the job was executed.
+
+A material change alters behavior, authority, contract meaning, proof
+classification, API/scope, tests, or user-facing semantics. It requires
+independent review. A mechanical-only delta is limited to deterministically
+proved whitespace/formatting, generated fingerprint/manifest/ledger bytes, or
+exact P3/P4 inventory transcription. It does not invalidate a clean material
+review when the parent records the mechanical diff and runs its applicable
+deterministic checks. Any uncertainty makes the delta material.
 
 ## HCM-0.4 crate ownership and dependency contract
 
