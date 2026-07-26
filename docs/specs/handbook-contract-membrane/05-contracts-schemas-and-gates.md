@@ -3347,13 +3347,21 @@ These contracts govern development of Handbook through this control pack. They d
 
 The only normative current machine example is
 `handoffs/internal-dispatch-template.json`. It is validated against
-`handoffs/internal-dispatch.v1.2.schema.json` by `validate_handoffs.py`; do not
+`handoffs/internal-dispatch.v1.3.schema.json` by `validate_handoffs.py`; do not
 maintain a second partial YAML shape that can drift from the schema. Every
 current internal dispatch includes the complete identity and timing fields,
 parent and source lineage, execution contract, ordered skill chain, explicit
 phase/slice/packet authority, replayable subject manifest, active Resolution,
 authority and repo-truth statements, bounded scope/tasks/gates/stops, and the
-complete structured return contract.
+complete structured return contract. V1.3 also declares the closed
+`subject_hygiene.whitespace_policy`; review dispatches carry a typed
+`review_cycle`, while every non-review dispatch carries `review_cycle: null`.
+The exact 339-file v1.1/v1.2 predecessor dispatch corpus is admitted only by
+its frozen aggregate fingerprint for existing immutable closeouts. New
+execution verification and new v1.3 closeout lineage reject every predecessor
+dispatch version. The exact 35-file handoff-record v1.2 corpus is likewise
+frozen by filename and aggregate byte fingerprint; no new v1.2 closeout is
+admitted.
 
 `execution_target` is one of:
 
@@ -3366,9 +3374,10 @@ Rules:
 1. `internal_subagent` uses the built-in fresh `default` agent capability with isolated context; shell-launched Codex processes, background jobs, temporary-file reviewer transport, and filesystem polling do not satisfy it.
 2. Every dispatch declares an ordered `required_skills` chain beginning with `using-agent-skills`; the resolved skill workflows are mandatory, not advisory labels.
 3. Review agents are read-only and receive authority, diff/evidence, gates, and non-goals without implementation reasoning or prior reviewer conclusions.
-4. Internal agents return structured results to the parent and never append the global handoff ledger.
-5. The parent validates findings against live truth, remediates valid P1/P2 directly or through a fresh fix agent, reruns affected verification, and sends the resulting state to a different fresh reviewer; valid unfixed P3/P4 are inventoried rather than converted into blockers.
-6. The parent owns integration, control-pack truth, final proof, commit, and top-level closeout.
+4. Before a reviewer is spawned, the parent runs `uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <repo-relative-dispatch-path>`; this dependency-complete command schema-validates the v1.3 envelope, replays every live manifest hash, and rejects trailing spaces or tabs in every UTF-8 text subject.
+5. Internal agents return structured results to the parent and never append the global handoff ledger.
+6. The parent validates findings against live truth, remediates valid P1/P2 directly or through a fresh fix agent, reruns affected verification, and sends the resulting state to a different fresh reviewer; valid unfixed P3/P4 are inventoried rather than converted into blockers.
+7. The parent owns integration, control-pack truth, final proof, commit, and top-level closeout.
 
 An implementation dispatch may contain an operator-approved bounded ancillary
 surface allowance inside its existing `allowed_scope`, `tasks`, and stop
@@ -3440,6 +3449,16 @@ reopen general discovery. An unrelated blocker, material expansion, or
 exhausted allowance stops non-completed unless explicit authority extends the
 budget. The last review in a completed record must be clean. Failed or
 wrong-role work cannot satisfy remediation lineage.
+Internal-dispatch v1.3 makes that budget machine-auditable: `discovery` has no
+trigger; `closure` names exactly the preceding discovery findings runs and
+their P1/P2 IDs; each `supplemental_causal` cycle names exactly the immediately
+preceding findings runs and P1/P2 IDs; and no more than two supplementals are
+admitted. A CLEAN cycle cannot trigger another cycle. Mechanical closeout is
+not a review cycle and cannot consume or reset this budget. Every typed
+remediation must cross from its findings cycle into the immediately following
+review cycle, and that cycle must bind a changed subject fingerprint; a later
+CLEAN member of the same burst or an unchanged adjacent cycle cannot launder a
+finding.
 Every v1.3 finding ID must also resolve through its `source_run_id` to that
 review run's `finding_refs`. Priority/severity pairs are exact. A clean review
 cannot carry P1/P2; a `findings` review must carry at least one P1/P2.

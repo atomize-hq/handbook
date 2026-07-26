@@ -198,7 +198,11 @@ consolidated remediation, one delta-focused closure review, and at most two
 supplemental causal remediation/closure cycles for P1/P2s directly caused or
 unmasked by the preceding remediation. Unrelated blockers, material scope/risk
 expansion, or exhaustion stop non-completed for explicit authority rather than
-restarting open-ended discovery.
+restarting open-ended discovery. Current dispatches type those cycle reasons;
+the validator rejects a post-CLEAN trigger, inexact causal lineage, or a third
+supplemental. Before each review cycle begins, the frozen dispatch is replayed
+against every live manifest entry and all UTF-8 text entries are checked for
+trailing spaces or tabs.
 
 ## Initial program conclusion
 

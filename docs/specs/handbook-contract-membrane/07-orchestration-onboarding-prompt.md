@@ -247,9 +247,12 @@ declares:
 
 - source_handoff_ids and parent_orchestration_id;
 - replayable sorted path/SHA-256 subject manifest and aggregate fingerprint;
+- subject_hygiene.whitespace_policy=text-files-no-trailing-whitespace-v1;
 - execution_target;
 - built-in agent_type=default;
 - role;
+- review_cycle with kind, stable cycle_id, causal trigger_run_ids, and
+  finding_refs for review work, or review_cycle=null for non-review work;
 - fresh_context_required=true;
 - closeout_owner=parent_orchestrator;
 - ordered required_skills;
@@ -319,10 +322,24 @@ proved whitespace/formatting, generated fingerprint/manifest/ledger bytes, or
 exact P3/P4 inventory transcription. Record and validate such a delta without
 spawning another reviewer; any uncertainty makes it material.
 
-Write/assemble a review dispatch, then spawn one fresh read-only built-in
+Write/assemble a review dispatch. Before spawning its reviewer, run:
+
+```text
+uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <repo-relative-dispatch-path>
+```
+
+This dependency-complete command is a hard pre-review gate. It admits only
+internal-dispatch v1.3, schema-validates the typed cycle, replays every live
+manifest hash, and rejects trailing spaces or tabs in every UTF-8 text manifest
+entry. The frozen v1.1/v1.2 corpus remains historical evidence and cannot
+supply new execution or closeout lineage; the exact frozen 35-file
+handoff-record v1.2 corpus cannot be extended. Only after the gate passes,
+spawn one fresh read-only built-in
 default subagent with isolated context. For a high-risk packet, the parent may
-instead dispatch a bounded same-fingerprint review burst with disjoint lenses
-and consolidate every result before remediation. Give each reviewer only:
+instead dispatch a bounded same-fingerprint review burst with disjoint lenses;
+each dispatch uses the same cycle ID and subject fingerprint, passes the same
+pre-review gate, and is consolidated before remediation. Give each reviewer
+only:
 
 - repository root;
 - PHASE_ID / SLICE_ID / ACTIVE_PACKET;
@@ -378,6 +395,16 @@ and absence of remediation-caused regression. A newly observed issue outside
 that boundary is P3 unless the parent can demonstrate a P1/P2 effect on the
 selected integrated outcome under `09`.
 
+The dispatch types the first cycle as `discovery` with empty trigger and
+finding arrays. A post-remediation `closure` names exactly the immediately
+preceding discovery findings runs and their P1/P2 IDs. Each later
+`supplemental_causal` cycle names exactly the immediately preceding findings
+runs and their P1/P2 IDs. The validator rejects mixed typed/untyped review
+lineage, non-contiguous burst IDs, a cycle after CLEAN, inexact triggers, wrong
+ordering, same-cycle findings-to-CLEAN remediation laundering, and a third
+supplemental cycle. Every remediation re-review belongs to the immediately
+following cycle and binds a changed post-remediation subject fingerprint.
+
 When a closure review demonstrates a P1/P2 directly caused or unmasked by the
 preceding remediation, the parent may use up to two supplemental causal
 remediation/closure cycles without returning to the user, provided scope,
@@ -386,6 +413,9 @@ related finding in each cycle and keep its re-review delta-focused. Stop with a
 bounded partial/blocked result when the blocker is unrelated, requires material
 scope/risk expansion, or remains after the two supplemental cycles. Do not
 silently waive it or restart open-ended discovery.
+
+Deterministic mechanical closeout is not a review cycle. It cannot consume,
+create, or reset a discovery, closure, or supplemental allowance.
 
 For a multi-packet slice, packet reviewers may review bounded intermediate
 subjects. Final slice closeout must use a different fresh reviewer over the

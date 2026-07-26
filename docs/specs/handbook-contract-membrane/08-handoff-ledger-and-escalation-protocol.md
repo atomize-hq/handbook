@@ -28,7 +28,8 @@ handoffs/
 ├── ledger-entry.schema.json
 ├── internal-dispatch.schema.json       # hash-admitted v1.0 first-review schema
 ├── internal-dispatch.v1.1.schema.json  # immutable predecessor envelope
-├── internal-dispatch.v1.2.schema.json  # current advisory-aware envelope
+├── internal-dispatch.v1.2.schema.json  # immutable advisory-aware predecessor
+├── internal-dispatch.v1.3.schema.json  # current typed-cycle/hygiene envelope
 ├── handoff-template.json               # current v1.3 parent template
 ├── internal-dispatch-template.json     # current internal JSON dispatch template
 ├── dispatch-template.md                # human-readable field/instruction guide
@@ -51,11 +52,13 @@ handoffs/
 - Internal JSON dispatches are immutable bounded execution envelopes.
 - The eight pre-correction Markdown dispatches remain immutable evidence of the user-routed workflow defect; they are not migrated into the current internal format.
 - Existing v1.0 through v1.2 records remain immutable evidence and are never rewritten into v1.3.
+- The exact 35-file v1.2 record corpus is admitted by frozen filenames and one
+  aggregate byte fingerprint; any new, missing, or modified v1.2 record fails.
 - The first HCM-0.8 internal-dispatch v1.0 review remains hash-admitted evidence of the findings that required v1.1; it is not rewritten.
 
 validate_handoffs.py hash-admits the exact historical v1.0/v1.1 record filenames, IDs, versions, and bytes plus the exact eight legacy Markdown dispatch filenames and bytes. Unknown new historical-version records, missing history, or byte changes fail closed.
 
-New v1.3 records and current internal-dispatch v1.2 JSON are validated against
+New v1.3 records and current internal-dispatch v1.3 JSON are validated against
 their schemas, replayable subjects, identities, cross-record lineage,
 structured finding disposition, and Git-reviewed diffs. Once committed, they
 are immutable and corrections are additive.
@@ -93,13 +96,24 @@ A clean review may carry validated P3/P4 advisory refs under
 
 The first HCM-0.8 review used hash-admitted handbook.internal-dispatch v1.0.
 Replayable-subject dispatch v1.1 remains immutable predecessor evidence.
-Current internal dispatches use handbook.internal-dispatch v1.2 JSON and
+Advisory-aware v1.2 remains immutable predecessor evidence. Current internal
+dispatches use handbook.internal-dispatch v1.3 JSON and
 internal-dispatch-template.json.
+The exact 339-file v1.1/v1.2 JSON corpus is admitted by one frozen
+filename/byte aggregate fingerprint, and only the three exact immutable v1.3
+closeouts that predate dispatch v1.3 may retain predecessor lineage. A new
+dispatch execution or new v1.3 closeout using any predecessor version fails.
 
 The schema requires:
 
 - parent orchestration, phase, slice, packet, and subject fingerprint;
 - a sorted canonical repository-relative path/SHA-256 manifest whose forward-slash entries exclude drive, UNC, absolute, backslash, embedded-NUL, empty, dot, dot-dot, and trailing-separator forms, resolve beneath the repository root, have an aggregate that is always recomputed, are checked against live files when executed, and whose final clean subject is replayed from the primary `reviewed_state.baseline_head` at completed closeout;
+- `subject_hygiene.whitespace_policy=text-files-no-trailing-whitespace-v1`,
+  which rejects trailing spaces or tabs in every UTF-8 text manifest entry
+  during live execution and baseline replay;
+- a typed review cycle (`discovery`, `closure`, or `supplemental_causal`) with
+  stable cycle ID and exact causal run/finding refs, or explicit null for
+  non-review work;
 - execution_target=internal_subagent;
 - agent_type=default and fresh_context_required=true;
 - closeout_owner=parent_orchestrator;
@@ -184,15 +198,18 @@ Creating a child packet does not complete its parent. An internal agent cannot p
 For every proof-relevant internal run, the parent:
 
 1. creates a schema-valid immutable JSON dispatch;
-2. fingerprints the dispatch and subject state;
-3. spawns a fresh built-in default subagent with isolated context;
-4. supplies the exact bounded packet directly through the built-in spawn message;
-5. waits using built-in wait/status operations;
-6. closes completed or abandoned agents through built-in capabilities when exposed;
-7. records agent ID/canonical task name and final built-in status;
-8. validates results/findings against live truth;
-9. reconciles edits or evidence into the active slice;
-10. continues without asking the user to launch the internal dispatch.
+2. runs `uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <repo-relative-dispatch-path>`
+   as the dependency-complete v1.3 schema and live-subject replay before
+   execution;
+3. fingerprints the dispatch and subject state;
+4. spawns a fresh built-in default subagent with isolated context;
+5. supplies the exact bounded packet directly through the built-in spawn message;
+6. waits using built-in wait/status operations;
+7. closes completed or abandoned agents through built-in capabilities when exposed;
+8. records agent ID/canonical task name and final built-in status;
+9. validates results/findings against live truth;
+10. reconciles edits or evidence into the active slice;
+11. continues without asking the user to launch the internal dispatch.
 
 Forbidden reviewer transports include shell-managed agents, codex exec, another Codex CLI, background/PTY agents, temporary-file prompt/output transport, filesystem identities, and filesystem polling.
 
@@ -235,6 +252,18 @@ causal remediation/closure cycles. Each supplemental cycle stays within the
 selected scope, authority, and risk ceiling, consolidates causally related
 findings, and does not reopen general discovery. Budget exhaustion never
 converts a valid P1/P2 into accepted debt.
+
+Internal-dispatch v1.3 makes each cycle reason explicit. `discovery` has empty
+causal arrays. `closure` names exactly the immediately preceding discovery
+findings runs and their P1/P2 IDs. Each `supplemental_causal` cycle names
+exactly the immediately preceding findings runs and their P1/P2 IDs. All
+members of a same-subject burst share a contiguous cycle ID, kind, causal
+arrays, and subject fingerprint. Semantic validation rejects mixed
+typed/untyped review lineage, a cycle after CLEAN, inexact lineage, invalid
+ordering, remediation that stays within one same-subject burst, and a third
+supplemental. Every remediation re-review belongs to the immediately following
+cycle and binds a changed post-remediation subject fingerprint. Mechanical
+closeout is not a review cycle and neither consumes nor resets the budget.
 
 A completed v1.3 record fails semantic validation when a P1/P2 findings review
 lacks typed successful parent/delegated remediation, delegated remediation is

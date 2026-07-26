@@ -1,0 +1,162 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T151816Z--HCM-0-8--review-cycle-hardening-closure-review",
+  "created_at_utc": "2026-07-26T15:18:16Z",
+  "source_handoff_ids": [
+    "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed"
+  ],
+  "parent_orchestration_id": "20260726T145726Z--HCM-0-8--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:6323173d1cb4ded2516fe134027bac3d30c67de35fc3bf1737deab06345d20e4",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "review-cycle-hardening-closure-1",
+    "trigger_run_ids": [
+      "review-cycle-hardening-standards",
+      "review-cycle-hardening-spec"
+    ],
+    "finding_refs": [
+      "review-cycle-hardening-standards-P2-1",
+      "review-cycle-hardening-spec-P1-1",
+      "review-cycle-hardening-spec-P2-1"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "12fcf6a8babdd0992dd64687950e99b7361804ab5307414b5bb53340e123e35c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "5d990e8b102502e8dcf1484f469c201fc2abbecd0f3ba7d05de5e6ddca39e88c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "560341350e9b1974117f41bf231594d498a9e38b5265292a6ccb607f143ec3cd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sha256": "2e5451ecd283ab04d6c0786385da46c701711404331f598b63ed94595d067197"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "ee89529655e082a1f64ba7214ad7b96188cb60798f58a026fe521c2c727b0ba3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "09a631548ca8d973c7cd25fd5335d02fa44da12b32956857d429f20fdc16fb9d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatch-template.md",
+        "sha256": "39ecac9755e4d878154255f878419590bd5917fc894e720ea2c826a78d8f3808"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch-template.json",
+        "sha256": "08dbc948d58ed400f4331915689dd4330787d6b78a80b93451a08cfa90833aa0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.3.schema.json",
+        "sha256": "c6a34eff02419320422e142ab67e102ae632080cd41cd08136cf3c96a1b68499"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "sha256": "de4efd81bc78472bff53266fc7df70124aee44e3ac9d8b5540f9e9b556dd0440"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:6323173d1cb4ded2516fe134027bac3d30c67de35fc3bf1737deab06345d20e4"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "normal",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "slice_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage"
+      ]
+    }
+  ],
+  "repo_truth": "Branch feat/handbook-contract-membrane remains at baseline 2540cbe2b365fb1cb759e9db1ffe877d56cd0545; the remediated ten-file subject is bound by this new fingerprint.",
+  "allowed_scope": [
+    "Read-only closure review of the exact ten-entry subject manifest.",
+    "Verify the three discovery findings, their affected control paths, and absence of remediation-caused regressions."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery or propose unrelated cleanup.",
+    "Do not redesign the accepted bounded review policy or widen HCM-0.8 authority.",
+    "Do not create a global handoff, ledger entry, or user task hop."
+  ],
+  "tasks": [
+    "Verify that newly authored v1.1/v1.2 dispatch execution and all-untyped new closeout lineage now fail while the exact committed predecessor corpus and three historical closeouts remain valid.",
+    "Verify that later-entry trailing spaces and tabs fail through the public --verify-dispatch path.",
+    "Verify that the documented pre-review command is dependency-complete and succeeds exactly as written.",
+    "Check the same-cycle remediation guard, causal budget ceilings, schema compatibility, and the complete final subject for remediation-caused regressions."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#development-orchestration-contracts",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#cross-cutting-regression-rules",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#decision-and-retained-rigor"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if the exact manifest cannot be replayed or broader authority is required.",
+    "Remain read-only and return the result to the parent."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

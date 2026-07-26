@@ -3,7 +3,7 @@
 This Markdown file is explanatory guidance, not a machine dispatch and not a
 schema-valid example. The only normative current machine template is
 `internal-dispatch-template.json`; validate instantiated JSON dispatches against
-`internal-dispatch.v1.2.schema.json`. Do not add front matter that claims a
+`internal-dispatch.v1.3.schema.json`. Do not add front matter that claims a
 machine schema identity here, and do not copy retired legacy fields into a
 current dispatch.
 
@@ -21,6 +21,9 @@ For execution_target=internal_subagent, return the result to the active parent t
 - Parent orchestration ID:
 - Built-in agent type: default
 - Role: implementation | documentation | review | proof | remediation
+- Review cycle: discovery | closure | supplemental_causal, stable cycle ID,
+  exact causal run/finding refs | null for non-review
+- Subject hygiene: text-files-no-trailing-whitespace-v1
 - Fresh isolated context required: true
 - Closeout owner: parent_orchestrator
 - Ordered required skills:
@@ -57,6 +60,17 @@ Do not write a canonical handoff or global ledger entry for an internal delegate
 ## Replayable Subject Manifest
 
 Current internal JSON dispatches record sorted repository-relative paths and each file's lowercase SHA-256. Encode each entry as path, NUL, SHA-256, newline; hash the concatenated bytes for subject_fingerprint. The reviewer and validator must be able to reconstruct the exact subject rather than trust a free-form fingerprint.
+
+Before any reviewer is spawned, validate and replay its frozen dispatch:
+
+```text
+uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <repo-relative-dispatch-path>
+```
+
+The dependency-complete command admits only v1.3 and verifies its schema, all
+live manifest hashes, aggregate fingerprint, and trailing-space/tab hygiene
+across every UTF-8 text manifest entry. V1.1/v1.2 are immutable predecessor
+evidence and cannot be used for new execution or closeout lineage.
 
 ## Active Context Resolution
 

@@ -36,6 +36,7 @@ INTERNAL_DISPATCH_SCHEMA_PATHS = {
     "1.0": ROOT / "internal-dispatch.schema.json",
     "1.1": ROOT / "internal-dispatch.v1.1.schema.json",
     "1.2": ROOT / "internal-dispatch.v1.2.schema.json",
+    "1.3": ROOT / "internal-dispatch.v1.3.schema.json",
 }
 LEDGER_SCHEMA_PATH = ROOT / "ledger-entry.schema.json"
 HISTORICAL_V1_0_ADMISSION = {
@@ -134,6 +135,65 @@ IMMUTABLE_INTERNAL_DISPATCH_V1_1_MANIFEST_ORDER_ADMISSION = {
     "20260719T011843Z--HCM-2-1--fresh-implementation-review-1.json": (
         "7e72338480ec262014c06e6b8661d2ffd578368c3c6c4029458366bdc83b700f"
     )
+}
+IMMUTABLE_PREDECESSOR_DISPATCH_COUNT = 339
+IMMUTABLE_PREDECESSOR_DISPATCH_CORPUS_FINGERPRINT = (
+    "sha256:e20c957d98d94d09a6df8fc6ff8cb188dbc2e92d06af041807022eb467dada49"
+)
+IMMUTABLE_V1_2_RECORD_COUNT = 35
+IMMUTABLE_V1_2_RECORD_CORPUS_FINGERPRINT = (
+    "sha256:6d3e52cd295f827b18eb33b42ca8aee51cd2fc9a8ddd790a9f6a3f1505c8a228"
+)
+IMMUTABLE_V1_2_RECORD_FILENAMES = {
+    "20260714T150800Z--HCM-0-8--orchestration--internal-delegation-control-plane-closed.json",
+    "20260714T173436Z--HCM-0-2--orchestration--semantic-contracts-frozen.json",
+    "20260714T221404Z--HCM-0-3--orchestration--resolution-snapshot-projection-contracts-frozen.json",
+    "20260715T024728Z--HCM-0-4--orchestration--fresh-review-capability-blocked.json",
+    "20260715T044452Z--HCM-0-4--orchestration--live-agent-registry-capacity-blocked.json",
+    "20260715T141656Z--HCM-0-4--orchestration--sdk-transport-contracts-frozen.json",
+    "20260715T164439Z--HCM-0-9--orchestration--planning-review-budget-exhausted.json",
+    "20260715T181543Z--HCM-0-9--orchestration--continuation-review-2-not-clean.json",
+    "20260715T191048Z--HCM-0-9--orchestration--decomposition-abandoned.json",
+    "20260715T202049Z--HCM-0-5--orchestration--planning-review-budget-exhausted.json",
+    "20260715T215528Z--HCM-0-5--orchestration--continuation-review-2-not-clean.json",
+    "20260715T230600Z--HCM-0-5--orchestration--packet-approved-design-freeze-entry.json",
+    "20260716T015949Z--HCM-0-5--orchestration--contract-dock-design-frozen.json",
+    "20260716T030358Z--HCM-0-6--orchestration--default-set-decision-input-required.json",
+    "20260716T153303Z--HCM-0-6--orchestration--shipped-defaults-frozen.json",
+    "20260716T181353Z--HCM-0-7--orchestration--implementation-program-approved.json",
+    "20260716T222906Z--HCM-1-1--orchestration--registry-boundary-landed.json",
+    "20260717T012715Z--HCM-1-2--orchestration--implementation-packet-approved.json",
+    "20260717T125103Z--HCM-1-2--orchestration--profile-boundary-landed.json",
+    "20260717T163627Z--HCM-1-3--orchestration--implementation-packet-approved.json",
+    "20260717T183202Z--HCM-1-3--orchestration--artifact-registry-landed.json",
+    "20260718T133219Z--HCM-1-4--orchestration--implementation-packet-approved.json",
+    "20260718T134551Z--HCM-1-4--orchestration--windows-runtime-blocked.json",
+    "20260718T191425Z--HCM-1-4--orchestration--profile-aware-setup-doctor-landed.json",
+    "20260718T224708Z--HCM-2-1--orchestration--implementation-packet-approved.json",
+    "20260718T231105Z--HCM-2-1--orchestration--windows-runtime-blocked.json",
+    "20260719T104915Z--HCM-2-1--orchestration--project-context-canonical-yaml-landed.json",
+    "20260719T230914Z--HCM-2-2--orchestration--implementation-packet-approved.json",
+    "20260720T083855Z--HCM-2-2--orchestration--lifecycle-validation-authority-boundary.json",
+    "20260720T160434Z--HCM-2-2--orchestration--authority-repair-planning-approved.json",
+    "20260720T225541Z--HCM-2-2--orchestration--atomic-stage-authority-repair-approved.json",
+    "20260721T143023Z--HCM-2-2--orchestration--exact-result-authority-repair-approved.json",
+    "20260721T215654Z--HCM-2-2--orchestration--exact-result-authority-repair-landed.json",
+    "20260722T042100Z--HCM-2-3--orchestration--planning-completed.json",
+    "20260725T220053Z--HCM-2-3--orchestration--implementation-completed.json",
+}
+PRE_V1_3_DISPATCH_CLOSEOUT_ADMISSION = {
+    "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed.json": (
+        "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed",
+        "1daecaefebe880af5c86b5bb08e6dd67c4e6859592eefbd56b10f4c8478733ae",
+    ),
+    "20260726T050447Z--HCM-2-4--orchestration--planning-completed.json": (
+        "20260726T050447Z--HCM-2-4--orchestration--planning-completed",
+        "fd4f633eb74915c781e622f53670d69b43bcbe86f0233b51a2079e0ec1d9f550",
+    ),
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed.json": (
+        "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed",
+        "f71a077f822bce165ffdf670fbe6c6d9ce681f0a28ed215711df8c247eb87a8a",
+    ),
 }
 
 
@@ -392,6 +452,106 @@ def validate_historical_internal_dispatch_v1_0_admission(
         )
 
 
+def validate_immutable_predecessor_dispatch_corpus(
+    dispatches: dict[str, tuple[Path, dict[str, Any], str]],
+) -> None:
+    entries = sorted(
+        (path.name, dispatch_sha256)
+        for path, dispatch, dispatch_sha256 in dispatches.values()
+        if dispatch["schema_version"] in {"1.1", "1.2"}
+    )
+    aggregate = "sha256:" + hashlib.sha256(
+        "".join(
+            f"{filename}\0{dispatch_sha256}\n"
+            for filename, dispatch_sha256 in entries
+        ).encode()
+    ).hexdigest()
+    if (
+        len(entries) != IMMUTABLE_PREDECESSOR_DISPATCH_COUNT
+        or aggregate != IMMUTABLE_PREDECESSOR_DISPATCH_CORPUS_FINGERPRINT
+    ):
+        raise ValidationFailure(
+            "immutable internal-dispatch v1.1/v1.2 corpus mismatch: "
+            f"count={len(entries)}, fingerprint={aggregate}"
+        )
+
+
+def validate_immutable_v1_2_record_corpus(
+    records: list[tuple[Path, dict[str, Any]]],
+) -> None:
+    entries = sorted(
+        (path.name, hashlib.sha256(path.read_bytes()).hexdigest())
+        for path, record in records
+        if record.get("schema_version") == "1.2"
+    )
+    actual_names = {filename for filename, _ in entries}
+    if actual_names != IMMUTABLE_V1_2_RECORD_FILENAMES:
+        missing = sorted(IMMUTABLE_V1_2_RECORD_FILENAMES - actual_names)
+        extra = sorted(actual_names - IMMUTABLE_V1_2_RECORD_FILENAMES)
+        raise ValidationFailure(
+            "immutable handoff-record v1.2 filename set mismatch: "
+            f"missing={missing}, extra={extra}"
+        )
+    aggregate = "sha256:" + hashlib.sha256(
+        "".join(
+            f"{filename}\0{record_sha256}\n"
+            for filename, record_sha256 in entries
+        ).encode()
+    ).hexdigest()
+    if (
+        len(entries) != IMMUTABLE_V1_2_RECORD_COUNT
+        or aggregate != IMMUTABLE_V1_2_RECORD_CORPUS_FINGERPRINT
+    ):
+        raise ValidationFailure(
+            "immutable handoff-record v1.2 corpus mismatch: "
+            f"count={len(entries)}, fingerprint={aggregate}"
+        )
+
+
+def validate_pre_v1_3_dispatch_closeout_admission(
+    record: dict[str, Any],
+    record_path: Path,
+) -> bool:
+    admitted = PRE_V1_3_DISPATCH_CLOSEOUT_ADMISSION.get(record_path.name)
+    if admitted is None:
+        return False
+    expected_id, expected_sha256 = admitted
+    if record.get("handoff_id") != expected_id or record_path.stem != expected_id:
+        raise ValidationFailure(
+            f"{record_path}: predecessor-dispatch closeout identity mismatch"
+        )
+    actual_sha256 = hashlib.sha256(record_path.read_bytes()).hexdigest()
+    if actual_sha256 != expected_sha256:
+        raise ValidationFailure(
+            f"{record_path}: predecessor-dispatch closeout SHA-256 mismatch; "
+            "immutable bytes changed"
+        )
+    return True
+
+
+def validate_subject_whitespace(
+    subject_bytes: bytes,
+    entry_path: str,
+    dispatch_path: Path,
+) -> None:
+    if b"\0" in subject_bytes:
+        return
+    try:
+        subject_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        return
+    for line_number, raw_line in enumerate(
+        subject_bytes.splitlines(keepends=True),
+        start=1,
+    ):
+        content = raw_line.rstrip(b"\r\n")
+        if content.endswith((b" ", b"\t")):
+            raise ValidationFailure(
+                f"{dispatch_path}: subject manifest text has trailing "
+                f"whitespace: {entry_path}:{line_number}"
+            )
+
+
 def validate_subject_manifest(
     dispatch: dict[str, Any],
     dispatch_path: Path,
@@ -435,6 +595,7 @@ def validate_subject_manifest(
     encoded: list[str] = []
     for entry in entries:
         entry_path = entry["path"]
+        subject_bytes: bytes | None = None
         relative_path = PurePosixPath(entry_path)
         if (
             relative_path.is_absolute()
@@ -478,7 +639,8 @@ def validate_subject_manifest(
                     f"{dispatch_path}: subject manifest path is absent from "
                     f"reviewed baseline {baseline_head}: {entry_path}"
                 )
-            actual_sha256 = hashlib.sha256(result.stdout).hexdigest()
+            subject_bytes = result.stdout
+            actual_sha256 = hashlib.sha256(subject_bytes).hexdigest()
             if actual_sha256 != entry["sha256"]:
                 raise ValidationFailure(
                     f"{dispatch_path}: reviewed baseline SHA-256 mismatch: "
@@ -490,11 +652,23 @@ def validate_subject_manifest(
                 raise ValidationFailure(
                     f"{dispatch_path}: subject manifest path is missing: {entry_path}"
                 )
-            actual_sha256 = hashlib.sha256(subject_path.read_bytes()).hexdigest()
+            subject_bytes = subject_path.read_bytes()
+            actual_sha256 = hashlib.sha256(subject_bytes).hexdigest()
             if actual_sha256 != entry["sha256"]:
                 raise ValidationFailure(
                     f"{dispatch_path}: subject file SHA-256 mismatch: {entry_path}"
                 )
+        if (
+            subject_bytes is not None
+            and dispatch.get("schema_version") == "1.3"
+            and dispatch.get("subject_hygiene", {}).get("whitespace_policy")
+            == "text-files-no-trailing-whitespace-v1"
+        ):
+            validate_subject_whitespace(
+                subject_bytes,
+                entry_path,
+                dispatch_path,
+            )
         encoded.append(f"{entry_path}\0{entry['sha256']}\n")
     aggregate = "sha256:" + hashlib.sha256("".join(encoded).encode()).hexdigest()
     if manifest["aggregate_fingerprint"] != aggregate:
@@ -507,6 +681,201 @@ def validate_subject_manifest(
         )
 
 
+def validate_review_cycles(
+    record_path: Path,
+    runs: list[dict[str, Any]],
+    run_by_id: dict[str, dict[str, Any]],
+    run_order: dict[str, int],
+    dispatch_by_run_id: dict[str, dict[str, Any]],
+    findings_by_id: dict[str, dict[str, Any]],
+    remediations: list[dict[str, Any]],
+    *,
+    require_typed: bool,
+) -> None:
+    review_runs = [run for run in runs if run["role"] == "review"]
+    typed_review_runs = [
+        run
+        for run in review_runs
+        if "review_cycle" in dispatch_by_run_id[run["run_id"]]
+    ]
+    if not typed_review_runs:
+        if require_typed and review_runs:
+            raise ValidationFailure(
+                f"{record_path}: new v1.3 closeout requires typed v1.3 "
+                "review-cycle lineage"
+            )
+        return
+    if len(typed_review_runs) != len(review_runs):
+        raise ValidationFailure(
+            f"{record_path}: typed review-cycle lineage cannot mix typed and "
+            "untyped review dispatches"
+        )
+
+    cycles: list[dict[str, Any]] = []
+    cycle_by_id: dict[str, dict[str, Any]] = {}
+    closed_cycle_ids: set[str] = set()
+    active_cycle_id: str | None = None
+    for run in review_runs:
+        cycle = dispatch_by_run_id[run["run_id"]]["review_cycle"]
+        cycle_id = cycle["cycle_id"]
+        if cycle_id != active_cycle_id:
+            if cycle_id in closed_cycle_ids:
+                raise ValidationFailure(
+                    f"{record_path}: review cycle {cycle_id!r} is not contiguous"
+                )
+            if active_cycle_id is not None:
+                closed_cycle_ids.add(active_cycle_id)
+            active_cycle_id = cycle_id
+            cycle_entry = {
+                "cycle_id": cycle_id,
+                "kind": cycle["kind"],
+                "trigger_run_ids": cycle["trigger_run_ids"],
+                "finding_refs": cycle["finding_refs"],
+                "subject_fingerprint": run["subject_fingerprint"],
+                "runs": [run],
+            }
+            cycles.append(cycle_entry)
+            cycle_by_id[cycle_id] = cycle_entry
+            continue
+        cycle_entry = cycle_by_id[cycle_id]
+        expected = (
+            cycle_entry["kind"],
+            cycle_entry["trigger_run_ids"],
+            cycle_entry["finding_refs"],
+            cycle_entry["subject_fingerprint"],
+        )
+        actual = (
+            cycle["kind"],
+            cycle["trigger_run_ids"],
+            cycle["finding_refs"],
+            run["subject_fingerprint"],
+        )
+        if actual != expected:
+            raise ValidationFailure(
+                f"{record_path}: review cycle {cycle_id!r} has inconsistent "
+                "kind, trigger, findings, or subject"
+            )
+        cycle_entry["runs"].append(run)
+
+    kinds = [cycle["kind"] for cycle in cycles]
+    if not kinds or kinds[0] != "discovery":
+        raise ValidationFailure(
+            f"{record_path}: typed review lineage must begin with discovery"
+        )
+    if kinds.count("discovery") != 1 or kinds.count("closure") > 1:
+        raise ValidationFailure(
+            f"{record_path}: typed review lineage permits one discovery and "
+            "at most one closure cycle"
+        )
+    if "closure" in kinds and kinds.index("closure") != 1:
+        raise ValidationFailure(
+            f"{record_path}: closure must immediately follow discovery"
+        )
+    supplemental_count = kinds.count("supplemental_causal")
+    if supplemental_count > 2:
+        raise ValidationFailure(
+            f"{record_path}: typed review lineage exceeds two supplemental "
+            "causal cycles"
+        )
+    allowed_kinds = ["discovery"]
+    if len(kinds) > 1:
+        allowed_kinds.append("closure")
+    allowed_kinds.extend(["supplemental_causal"] * max(0, len(kinds) - 2))
+    if kinds != allowed_kinds:
+        raise ValidationFailure(
+            f"{record_path}: invalid typed review-cycle order {kinds!r}"
+        )
+
+    remediation_by_finding_run: dict[str, list[dict[str, Any]]] = {}
+    for remediation in remediations:
+        remediation_by_finding_run.setdefault(
+            remediation["finding_run_id"], []
+        ).append(remediation)
+    cycle_index_by_run_id = {
+        run["run_id"]: cycle_index
+        for cycle_index, cycle in enumerate(cycles)
+        for run in cycle["runs"]
+    }
+    for remediation in remediations:
+        finding_cycle_index = cycle_index_by_run_id[
+            remediation["finding_run_id"]
+        ]
+        re_review_cycle_index = cycle_index_by_run_id[
+            remediation["re_review_run_id"]
+        ]
+        if re_review_cycle_index != finding_cycle_index + 1:
+            raise ValidationFailure(
+                f"{record_path}: remediation {remediation['remediation_id']!r} "
+                "must cross into the immediately following review cycle"
+            )
+
+    for cycle_index, cycle in enumerate(cycles):
+        if cycle["kind"] == "discovery":
+            if cycle["trigger_run_ids"] or cycle["finding_refs"]:
+                raise ValidationFailure(
+                    f"{record_path}: discovery cycle cannot claim causal triggers"
+                )
+            continue
+
+        prior_cycle = cycles[cycle_index - 1]
+        if (
+            cycle["subject_fingerprint"]
+            == prior_cycle["subject_fingerprint"]
+        ):
+            raise ValidationFailure(
+                f"{record_path}: review cycle {cycle['cycle_id']!r} must "
+                "bind a changed post-remediation subject"
+            )
+        expected_trigger_ids = [
+            run["run_id"]
+            for run in prior_cycle["runs"]
+            if run["verdict"] == "findings"
+        ]
+        if cycle["trigger_run_ids"] != expected_trigger_ids:
+            raise ValidationFailure(
+                f"{record_path}: review cycle {cycle['cycle_id']!r} must name "
+                "exactly the preceding findings review runs"
+            )
+        if not expected_trigger_ids:
+            raise ValidationFailure(
+                f"{record_path}: review cycle {cycle['cycle_id']!r} cannot "
+                "follow a CLEAN cycle"
+            )
+        expected_finding_refs = sorted(
+            finding_id
+            for finding_id, finding in findings_by_id.items()
+            if finding["source_run_id"] in expected_trigger_ids
+            and finding["priority"] in {"P1", "P2"}
+        )
+        if sorted(cycle["finding_refs"]) != expected_finding_refs:
+            raise ValidationFailure(
+                f"{record_path}: review cycle {cycle['cycle_id']!r} must name "
+                "exactly the triggering P1/P2 findings"
+            )
+        current_run_ids = {run["run_id"] for run in cycle["runs"]}
+        for trigger_run_id in expected_trigger_ids:
+            trigger_run = run_by_id[trigger_run_id]
+            if (
+                run_order[trigger_run_id]
+                >= min(run_order[run_id] for run_id in current_run_ids)
+                or trigger_run["verdict"] != "findings"
+            ):
+                raise ValidationFailure(
+                    f"{record_path}: review cycle {cycle['cycle_id']!r} has an "
+                    "invalid causal trigger"
+                )
+            if not any(
+                remediation["re_review_run_id"] in current_run_ids
+                for remediation in remediation_by_finding_run.get(
+                    trigger_run_id, []
+                )
+            ):
+                raise ValidationFailure(
+                    f"{record_path}: review cycle {cycle['cycle_id']!r} lacks "
+                    f"typed remediation linkage for {trigger_run_id!r}"
+                )
+
+
 def validate_v1_2_semantics(
     record: dict[str, Any],
     record_path: Path,
@@ -516,6 +885,17 @@ def validate_v1_2_semantics(
     verify_final_subject_baseline: bool = False,
     review_inventory_entries: dict[str, str] | None = None,
 ) -> None:
+    if (
+        record["schema_version"] == "1.2"
+        and record_path.name not in IMMUTABLE_V1_2_RECORD_FILENAMES
+    ):
+        raise ValidationFailure(
+            f"{record_path}: handoff-record v1.2 is immutable predecessor "
+            "evidence and cannot be newly created"
+        )
+    legacy_predecessor_closeout = (
+        record_path.name in PRE_V1_3_DISPATCH_CLOSEOUT_ADMISSION
+    )
     for source_id in [*record["source_handoff_ids"], *record["supersedes"]]:
         if source_id not in all_record_ids:
             raise ValidationFailure(
@@ -525,6 +905,7 @@ def validate_v1_2_semantics(
     runs = record["delegated_runs"]
     run_by_id: dict[str, dict[str, Any]] = {}
     run_order: dict[str, int] = {}
+    dispatch_by_run_id: dict[str, dict[str, Any]] = {}
     for index, run in enumerate(runs):
         run_id = run["run_id"]
         if run_id in run_by_id:
@@ -539,6 +920,16 @@ def validate_v1_2_semantics(
                 f"{dispatch_id!r}"
             )
         dispatch_path, dispatch, dispatch_sha256 = dispatches[dispatch_id]
+        dispatch_by_run_id[run_id] = dispatch
+        if (
+            record["schema_version"] == "1.3"
+            and not legacy_predecessor_closeout
+            and dispatch["schema_version"] != "1.3"
+        ):
+            raise ValidationFailure(
+                f"{record_path}: new v1.3 closeout run {run_id!r} must use "
+                "internal-dispatch v1.3"
+            )
         expected_ref = dispatch_path.relative_to(REPO_ROOT).as_posix()
         if run["dispatch_ref"] != expected_ref:
             raise ValidationFailure(
@@ -720,6 +1111,17 @@ def validate_v1_2_semantics(
                     "has no P1/P2 finding"
                 )
 
+        validate_review_cycles(
+            record_path,
+            runs,
+            run_by_id,
+            run_order,
+            dispatch_by_run_id,
+            findings_by_id,
+            remediations,
+            require_typed=not legacy_predecessor_closeout,
+        )
+
         if record["status"] == "completed":
             if review_inventory_entries is None:
                 review_inventory_entries = load_review_inventory_entries(
@@ -790,7 +1192,12 @@ def validate_v1_2_semantics(
             )
         final_dispatch_path, final_dispatch, _ = dispatches[final_review["dispatch_id"]]
         expected_dispatch_version = (
-            "1.2" if record["schema_version"] == "1.3" else "1.1"
+            "1.2"
+            if legacy_predecessor_closeout
+            and record["schema_version"] == "1.3"
+            else "1.3"
+            if record["schema_version"] == "1.3"
+            else "1.1"
         )
         if final_dispatch["schema_version"] != expected_dispatch_version:
             raise ValidationFailure(
@@ -809,16 +1216,16 @@ def isolate_historical_admission_fixture(temp_root: Path) -> None:
     """Remove current-protocol artifacts from an immutable-history fixture.
 
     The admission self-test copies only the handoff subtree. Replayable v1.1
-    and v1.2 dispatches intentionally bind manifests that reach the wider
+    through v1.3 dispatches intentionally bind manifests that reach the wider
     repository, so they cannot be validated inside that reduced fixture. The
     test is about byte admission for historical records and dispatches; remove
-    v1.2/v1.3 records and v1.1/v1.2 dispatches before exercising it.
+    v1.2/v1.3 records and v1.1/v1.2/v1.3 dispatches before exercising it.
     """
     for path in (temp_root / "records").glob("*.json"):
         if load_json(path).get("schema_version") in {"1.2", "1.3"}:
             path.unlink()
     for path in (temp_root / "dispatches").glob("*.json"):
-        if load_json(path).get("schema_version") in {"1.1", "1.2"}:
+        if load_json(path).get("schema_version") in {"1.1", "1.2", "1.3"}:
             path.unlink()
     remaining_record_versions = {
         load_json(path).get("schema_version")
@@ -862,10 +1269,10 @@ def run_historical_v1_0_admission_self_test() -> int:
                 json.dumps({"schema_version": "1.3"}) + "\n"
             )
             current_dispatch_sentinel = (
-                temp_root / "dispatches" / "self-test-current-v1.2.json"
+                temp_root / "dispatches" / "self-test-current-v1.3.json"
             )
             current_dispatch_sentinel.write_text(
-                json.dumps({"schema_version": "1.2"}) + "\n"
+                json.dumps({"schema_version": "1.3"}) + "\n"
             )
             isolate_historical_admission_fixture(temp_root)
             if current_record_sentinel.exists() or current_dispatch_sentinel.exists():
@@ -925,7 +1332,11 @@ def run_historical_v1_0_admission_self_test() -> int:
             )
 
             result = subprocess.run(
-                [sys.executable, str(temp_root / "validate_handoffs.py")],
+                [
+                    sys.executable,
+                    str(temp_root / "validate_handoffs.py"),
+                    "--validate-historical-fixture",
+                ],
                 cwd=temp_repo,
                 capture_output=True,
                 text=True,
@@ -1019,7 +1430,11 @@ def run_historical_v1_0_admission_self_test() -> int:
                 )
             )
             result = subprocess.run(
-                [sys.executable, str(temp_root / "validate_handoffs.py")],
+                [
+                    sys.executable,
+                    str(temp_root / "validate_handoffs.py"),
+                    "--validate-historical-fixture",
+                ],
                 cwd=temp_repo,
                 capture_output=True,
                 text=True,
@@ -1047,10 +1462,10 @@ def run_historical_v1_0_admission_self_test() -> int:
 
 def run_orchestration_contract_self_test() -> int:
     handoff_schema = load_json(RECORD_SCHEMA_PATHS["1.3"])
-    dispatch_schema = load_json(INTERNAL_DISPATCH_SCHEMA_PATHS["1.2"])
+    dispatch_schema = load_json(INTERNAL_DISPATCH_SCHEMA_PATHS["1.3"])
     template = load_json(TEMPLATE_PATH)
     dispatch_template = load_json(INTERNAL_DISPATCH_TEMPLATE_PATH)
-    validate_instance(template, handoff_schema, "v1.2 handoff template")
+    validate_instance(template, handoff_schema, "v1.3 handoff template")
     validate_instance(
         dispatch_template, dispatch_schema, "internal dispatch template"
     )
@@ -1127,6 +1542,19 @@ def run_orchestration_contract_self_test() -> int:
     case = copy.deepcopy(dispatch_template)
     case["subject_fingerprint"] = "not-a-hash"
     dispatch_cases.append(("dispatch-invalid-subject-fingerprint", case))
+    case = copy.deepcopy(dispatch_template)
+    case["review_cycle"] = None
+    dispatch_cases.append(("dispatch-review-without-cycle", case))
+    case = copy.deepcopy(dispatch_template)
+    case["review_cycle"]["trigger_run_ids"] = ["prior-review-run"]
+    case["review_cycle"]["finding_refs"] = ["prior-review-run:P1-1"]
+    dispatch_cases.append(("dispatch-discovery-with-causal-trigger", case))
+    case = copy.deepcopy(dispatch_template)
+    case["role"] = "implementation"
+    dispatch_cases.append(("dispatch-non-review-with-cycle", case))
+    case = copy.deepcopy(dispatch_template)
+    del case["subject_hygiene"]
+    dispatch_cases.append(("dispatch-missing-subject-hygiene", case))
 
     for label, candidate in [
         *[(name, value) for name, value in handoff_cases],
@@ -1162,6 +1590,8 @@ def run_orchestration_contract_self_test() -> int:
                 "using-agent-skills",
                 "code-review-and-quality",
             ]
+        else:
+            value["review_cycle"] = None
         return value
 
     old_subject = "sha256:" + "1" * 64
@@ -1170,20 +1600,85 @@ def run_orchestration_contract_self_test() -> int:
     finding_dispatch = self_test_dispatch(
         "self-test-findings-review", "review", old_subject
     )
+    finding_dispatch["review_cycle"] = {
+        "kind": "discovery",
+        "cycle_id": "self-test-discovery",
+        "trigger_run_ids": [],
+        "finding_refs": [],
+    }
+    same_cycle_clean_dispatch = self_test_dispatch(
+        "self-test-same-cycle-clean-review",
+        "review",
+        old_subject,
+    )
+    same_cycle_clean_dispatch["review_cycle"] = copy.deepcopy(
+        finding_dispatch["review_cycle"]
+    )
     remediation_dispatch = self_test_dispatch(
         "self-test-bad-remediation", "implementation", old_subject
     )
     mid_findings_dispatch = self_test_dispatch(
         "self-test-mid-findings-review", "review", mid_subject
     )
+    mid_findings_dispatch["review_cycle"] = {
+        "kind": "closure",
+        "cycle_id": "self-test-closure",
+        "trigger_run_ids": ["findings-review"],
+        "finding_refs": ["findings-review-finding"],
+    }
     clean_dispatch = self_test_dispatch(
         "self-test-clean-review", "review", repaired_subject
     )
+    clean_dispatch["review_cycle"] = {
+        "kind": "supplemental_causal",
+        "cycle_id": "self-test-supplemental-1",
+        "trigger_run_ids": ["mid-findings-review"],
+        "finding_refs": ["mid-findings-review-finding"],
+    }
+    post_clean_subject = "sha256:" + "4" * 64
+    post_clean_dispatch = self_test_dispatch(
+        "self-test-post-clean-review", "review", post_clean_subject
+    )
+    post_clean_dispatch["review_cycle"] = {
+        "kind": "supplemental_causal",
+        "cycle_id": "self-test-supplemental-2",
+        "trigger_run_ids": ["clean-review"],
+        "finding_refs": [],
+    }
+    supplemental_two_subject = "sha256:" + "5" * 64
+    supplemental_two_dispatch = self_test_dispatch(
+        "self-test-supplemental-two-review",
+        "review",
+        supplemental_two_subject,
+    )
+    supplemental_two_dispatch["review_cycle"] = {
+        "kind": "supplemental_causal",
+        "cycle_id": "self-test-supplemental-2",
+        "trigger_run_ids": ["clean-review"],
+        "finding_refs": ["clean-review-finding"],
+    }
+    supplemental_three_subject = "sha256:" + "6" * 64
+    supplemental_three_dispatch = self_test_dispatch(
+        "self-test-supplemental-three-review",
+        "review",
+        supplemental_three_subject,
+    )
+    supplemental_three_dispatch["review_cycle"] = {
+        "kind": "supplemental_causal",
+        "cycle_id": "self-test-supplemental-3",
+        "trigger_run_ids": ["supplemental-two-review"],
+        "finding_refs": ["supplemental-two-review-finding"],
+    }
     dispatch_data = {
         "self-test-findings-review": (
             DISPATCHES_DIR / "self-test-findings-review.json",
             finding_dispatch,
             "a" * 64,
+        ),
+        "self-test-same-cycle-clean-review": (
+            DISPATCHES_DIR / "self-test-same-cycle-clean-review.json",
+            same_cycle_clean_dispatch,
+            "9" * 64,
         ),
         "self-test-bad-remediation": (
             DISPATCHES_DIR / "self-test-bad-remediation.json",
@@ -1199,6 +1694,21 @@ def run_orchestration_contract_self_test() -> int:
             DISPATCHES_DIR / "self-test-clean-review.json",
             clean_dispatch,
             "c" * 64,
+        ),
+        "self-test-post-clean-review": (
+            DISPATCHES_DIR / "self-test-post-clean-review.json",
+            post_clean_dispatch,
+            "e" * 64,
+        ),
+        "self-test-supplemental-two-review": (
+            DISPATCHES_DIR / "self-test-supplemental-two-review.json",
+            supplemental_two_dispatch,
+            "f" * 64,
+        ),
+        "self-test-supplemental-three-review": (
+            DISPATCHES_DIR / "self-test-supplemental-three-review.json",
+            supplemental_three_dispatch,
+            "0" * 64,
         ),
     }
 
@@ -1247,6 +1757,17 @@ def run_orchestration_contract_self_test() -> int:
         "findings",
         1,
     )
+    same_cycle_clean_run = self_test_run(
+        "same-cycle-clean-review",
+        "self-test-same-cycle-clean-review",
+        "review",
+        "reviewer-b",
+        old_subject,
+        old_subject,
+        "clean",
+        2,
+    )
+    same_cycle_clean_run["predecessor_run_id"] = "findings-review"
     mid_findings_run = self_test_run(
         "mid-findings-review",
         "self-test-mid-findings-review",
@@ -1481,6 +2002,298 @@ def run_orchestration_contract_self_test() -> int:
         dispatch_data,
         review_inventory_entries=self_test_inventory_entries,
     )
+
+    same_cycle_laundering_record = copy.deepcopy(valid_parent_record)
+    same_cycle_laundering_record["delegated_runs"] = [
+        findings_run,
+        same_cycle_clean_run,
+    ]
+    same_cycle_laundering_record["remediations"] = [
+        {
+            "remediation_id": "same-cycle-fix",
+            "finding_run_id": "findings-review",
+            "owner": "parent_orchestrator",
+            "delegated_run_id": None,
+            "re_review_run_id": "same-cycle-clean-review",
+            "status": "completed",
+            "result_subject_fingerprint": old_subject,
+            "evidence_refs": ["same-cycle-remediation-proof"],
+        }
+    ]
+    same_cycle_laundering_record["findings"] = [
+        {
+            "finding_id": "findings-review-finding",
+            "classification": "local_remediation",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "findings-review",
+            "summary": "Same-cycle laundering must fail.",
+            "evidence_refs": ["same-cycle-remediation-proof"],
+        }
+    ]
+    same_cycle_laundering_record["reviewed_state"][
+        "subject_fingerprint"
+    ] = old_subject
+    same_cycle_laundering_record["reviewed_state"]["subject_manifest_ref"] = (
+        same_cycle_clean_run["dispatch_ref"]
+    )
+    try:
+        validate_v1_2_semantics(
+            same_cycle_laundering_record,
+            RECORDS_DIR / "self-test-same-cycle-remediation.json",
+            set(),
+            dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
+        )
+    except ValidationFailure:
+        pass
+    else:
+        print(
+            "orchestration contract self-test failed: same-cycle findings-to-clean "
+            "remediation laundering unexpectedly validated",
+            file=sys.stderr,
+        )
+        return 1
+
+    unchanged_cycle_dispatch_data = copy.deepcopy(dispatch_data)
+    unchanged_cycle_dispatch_data["self-test-mid-findings-review"][1][
+        "subject_fingerprint"
+    ] = old_subject
+    unchanged_cycle_record = copy.deepcopy(valid_parent_record)
+    unchanged_cycle_record["delegated_runs"][1][
+        "subject_fingerprint"
+    ] = old_subject
+    unchanged_cycle_record["delegated_runs"][1][
+        "result_subject_fingerprint"
+    ] = old_subject
+    unchanged_cycle_record["remediations"][0][
+        "result_subject_fingerprint"
+    ] = old_subject
+    try:
+        validate_v1_2_semantics(
+            unchanged_cycle_record,
+            RECORDS_DIR / "self-test-unchanged-causal-cycle.json",
+            set(),
+            unchanged_cycle_dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
+        )
+    except ValidationFailure:
+        pass
+    else:
+        print(
+            "orchestration contract self-test failed: adjacent causal cycles "
+            "with an unchanged subject fingerprint unexpectedly validated",
+            file=sys.stderr,
+        )
+        return 1
+
+    untyped_dispatch_data = copy.deepcopy(dispatch_data)
+    for _, dispatch, _ in untyped_dispatch_data.values():
+        if dispatch["role"] == "review":
+            dispatch["schema_version"] = "1.2"
+            del dispatch["review_cycle"]
+            del dispatch["subject_hygiene"]
+    try:
+        validate_v1_2_semantics(
+            valid_parent_record,
+            RECORDS_DIR / "self-test-new-untyped-review-lineage.json",
+            set(),
+            untyped_dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
+        )
+    except ValidationFailure:
+        pass
+    else:
+        print(
+            "orchestration contract self-test failed: newly authored all-untyped "
+            "review lineage unexpectedly validated",
+            file=sys.stderr,
+        )
+        return 1
+
+    new_v1_2_record = copy.deepcopy(valid_parent_record)
+    new_v1_2_record["schema_version"] = "1.2"
+    try:
+        validate_v1_2_semantics(
+            new_v1_2_record,
+            RECORDS_DIR / "self-test-new-v1-2-closeout.json",
+            set(),
+            dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
+        )
+    except ValidationFailure:
+        pass
+    else:
+        print(
+            "orchestration contract self-test failed: newly authored "
+            "handoff-record v1.2 unexpectedly validated",
+            file=sys.stderr,
+        )
+        return 1
+
+    post_clean_run = self_test_run(
+        "post-clean-review",
+        "self-test-post-clean-review",
+        "review",
+        "reviewer-d",
+        post_clean_subject,
+        post_clean_subject,
+        "clean",
+        4,
+    )
+    post_clean_run["predecessor_run_id"] = "clean-review"
+    invalid_post_clean_record = copy.deepcopy(valid_parent_record)
+    invalid_post_clean_record["delegated_runs"].append(post_clean_run)
+    invalid_post_clean_record["reviewed_state"]["subject_fingerprint"] = (
+        post_clean_subject
+    )
+    invalid_post_clean_record["reviewed_state"]["subject_manifest_ref"] = (
+        post_clean_run["dispatch_ref"]
+    )
+    try:
+        validate_v1_2_semantics(
+            invalid_post_clean_record,
+            RECORDS_DIR / "self-test-post-clean-supplemental-review.json",
+            set(),
+            dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
+        )
+    except ValidationFailure:
+        pass
+    else:
+        print(
+            "orchestration contract self-test failed: supplemental review "
+            "triggered by CLEAN unexpectedly validated",
+            file=sys.stderr,
+        )
+        return 1
+
+    max_budget_record = copy.deepcopy(valid_parent_record)
+    max_budget_record["delegated_runs"][-1]["verdict"] = "findings"
+    max_budget_record["delegated_runs"][-1]["finding_refs"].append(
+        "clean-review-finding"
+    )
+    max_budget_record["findings"].append(
+        {
+            "finding_id": "clean-review-finding",
+            "classification": "proof_gap",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "clean-review",
+            "summary": "First supplemental review exposes a causal P2.",
+            "evidence_refs": ["supplemental-two-remediation-proof"],
+        }
+    )
+    supplemental_two_run = self_test_run(
+        "supplemental-two-review",
+        "self-test-supplemental-two-review",
+        "review",
+        "reviewer-d",
+        supplemental_two_subject,
+        supplemental_two_subject,
+        "clean",
+        4,
+    )
+    supplemental_two_run["predecessor_run_id"] = "clean-review"
+    max_budget_record["delegated_runs"].append(supplemental_two_run)
+    max_budget_record["remediations"].append(
+        {
+            "remediation_id": "parent-fix-supplemental-2",
+            "finding_run_id": "clean-review",
+            "owner": "parent_orchestrator",
+            "delegated_run_id": None,
+            "re_review_run_id": "supplemental-two-review",
+            "status": "completed",
+            "result_subject_fingerprint": supplemental_two_subject,
+            "evidence_refs": ["supplemental-two-remediation-proof"],
+        }
+    )
+    max_budget_record["reviewed_state"]["subject_fingerprint"] = (
+        supplemental_two_subject
+    )
+    max_budget_record["reviewed_state"]["subject_manifest_ref"] = (
+        supplemental_two_run["dispatch_ref"]
+    )
+    validate_instance(
+        max_budget_record,
+        handoff_schema,
+        "two supplemental causal cycles schema shape",
+    )
+    validate_v1_2_semantics(
+        max_budget_record,
+        RECORDS_DIR / "self-test-two-supplemental-reviews.json",
+        set(),
+        dispatch_data,
+        review_inventory_entries=self_test_inventory_entries,
+    )
+
+    over_budget_record = copy.deepcopy(max_budget_record)
+    over_budget_record["delegated_runs"][-1]["verdict"] = "findings"
+    over_budget_record["delegated_runs"][-1]["finding_refs"] = [
+        "supplemental-two-review-finding"
+    ]
+    supplemental_three_run = self_test_run(
+        "supplemental-three-review",
+        "self-test-supplemental-three-review",
+        "review",
+        "reviewer-e",
+        supplemental_three_subject,
+        supplemental_three_subject,
+        "clean",
+        5,
+    )
+    supplemental_three_run["predecessor_run_id"] = "supplemental-two-review"
+    supplemental_three_run["finding_refs"] = []
+    over_budget_record["delegated_runs"].append(supplemental_three_run)
+    over_budget_record["findings"].append(
+        {
+            "finding_id": "supplemental-two-review-finding",
+            "classification": "proof_gap",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "supplemental-two-review",
+            "summary": "Second supplemental review exposes another causal P2.",
+            "evidence_refs": ["supplemental-three-remediation-proof"],
+        }
+    )
+    over_budget_record["remediations"].append(
+        {
+            "remediation_id": "parent-fix-supplemental-3",
+            "finding_run_id": "supplemental-two-review",
+            "owner": "parent_orchestrator",
+            "delegated_run_id": None,
+            "re_review_run_id": "supplemental-three-review",
+            "status": "completed",
+            "result_subject_fingerprint": supplemental_three_subject,
+            "evidence_refs": ["supplemental-three-remediation-proof"],
+        }
+    )
+    over_budget_record["reviewed_state"]["subject_fingerprint"] = (
+        supplemental_three_subject
+    )
+    over_budget_record["reviewed_state"]["subject_manifest_ref"] = (
+        supplemental_three_run["dispatch_ref"]
+    )
+    try:
+        validate_v1_2_semantics(
+            over_budget_record,
+            RECORDS_DIR / "self-test-excess-supplemental-review.json",
+            set(),
+            dispatch_data,
+            review_inventory_entries=self_test_inventory_entries,
+        )
+    except ValidationFailure:
+        pass
+    else:
+        print(
+            "orchestration contract self-test failed: third supplemental "
+            "causal review unexpectedly validated",
+            file=sys.stderr,
+        )
+        return 1
 
     fabricated_inventory_record = copy.deepcopy(valid_parent_record)
     fabricated_inventory_record["delegated_runs"][-1]["finding_refs"] = [
@@ -1744,6 +2557,120 @@ def run_orchestration_contract_self_test() -> int:
             )
             return 1
 
+    with tempfile.TemporaryDirectory(prefix="hcm-manifest-whitespace-") as temp_dir:
+        temp_repo = Path(temp_dir)
+        temp_dispatches = temp_repo / "dispatches"
+        temp_dispatches.mkdir()
+        clean_path = "subjects/a-clean.md"
+        dirty_path = "subjects/b-dirty.md"
+        clean_subject = temp_repo / clean_path
+        dirty_subject = temp_repo / dirty_path
+        clean_subject.parent.mkdir()
+
+        for label, dirty_bytes in {
+            "space": b"later manifest entry has trailing space \n",
+            "tab": b"later manifest entry has trailing tab\t\n",
+        }.items():
+            clean_subject.write_bytes(b"clean first manifest entry\n")
+            dirty_subject.write_bytes(dirty_bytes)
+            entries = [
+                {
+                    "path": subject_path,
+                    "sha256": hashlib.sha256(
+                        (temp_repo / subject_path).read_bytes()
+                    ).hexdigest(),
+                }
+                for subject_path in [clean_path, dirty_path]
+            ]
+            aggregate = "sha256:" + hashlib.sha256(
+                "".join(
+                    f"{entry['path']}\0{entry['sha256']}\n"
+                    for entry in entries
+                ).encode()
+            ).hexdigest()
+            whitespace_dispatch = copy.deepcopy(dispatch_template)
+            whitespace_dispatch["dispatch_id"] = (
+                f"self-test-manifest-whitespace-{label}"
+            )
+            whitespace_dispatch["subject_manifest"]["entries"] = entries
+            whitespace_dispatch["subject_manifest"][
+                "aggregate_fingerprint"
+            ] = aggregate
+            whitespace_dispatch["subject_fingerprint"] = aggregate
+            dispatch_relative = (
+                f"dispatches/{whitespace_dispatch['dispatch_id']}.json"
+            )
+            (temp_repo / dispatch_relative).write_text(
+                json.dumps(whitespace_dispatch) + "\n",
+                encoding="utf-8",
+            )
+            if (
+                verify_dispatch_file(
+                    dispatch_relative,
+                    repo_root=temp_repo,
+                    dispatches_dir=temp_dispatches,
+                    quiet=True,
+                )
+                != 1
+            ):
+                print(
+                    "orchestration contract self-test failed: later-entry "
+                    f"trailing {label} unexpectedly passed public dispatch "
+                    "verification",
+                    file=sys.stderr,
+                )
+                return 1
+
+        clean_subject.write_bytes(b"clean first manifest entry\n")
+        dirty_subject.write_bytes(b"clean later manifest entry\n")
+        predecessor_entries = [
+            {
+                "path": subject_path,
+                "sha256": hashlib.sha256(
+                    (temp_repo / subject_path).read_bytes()
+                ).hexdigest(),
+            }
+            for subject_path in [clean_path, dirty_path]
+        ]
+        predecessor_aggregate = "sha256:" + hashlib.sha256(
+            "".join(
+                f"{entry['path']}\0{entry['sha256']}\n"
+                for entry in predecessor_entries
+            ).encode()
+        ).hexdigest()
+        predecessor_dispatch = copy.deepcopy(dispatch_template)
+        predecessor_dispatch["schema_version"] = "1.2"
+        predecessor_dispatch["dispatch_id"] = "self-test-new-v1-2-dispatch"
+        del predecessor_dispatch["review_cycle"]
+        del predecessor_dispatch["subject_hygiene"]
+        predecessor_dispatch["subject_manifest"]["entries"] = predecessor_entries
+        predecessor_dispatch["subject_manifest"][
+            "aggregate_fingerprint"
+        ] = predecessor_aggregate
+        predecessor_dispatch["subject_fingerprint"] = predecessor_aggregate
+        predecessor_relative = (
+            f"dispatches/{predecessor_dispatch['dispatch_id']}.json"
+        )
+        (temp_repo / predecessor_relative).write_text(
+            json.dumps(predecessor_dispatch) + "\n",
+            encoding="utf-8",
+        )
+        if (
+            verify_dispatch_file(
+                predecessor_relative,
+                repo_root=temp_repo,
+                dispatches_dir=temp_dispatches,
+                quiet=True,
+            )
+            != 1
+        ):
+            print(
+                "orchestration contract self-test failed: newly authored "
+                "predecessor dispatch unexpectedly passed execution verification",
+                file=sys.stderr,
+            )
+            return 1
+
     with tempfile.TemporaryDirectory(prefix="hcm-two-commit-") as temp_dir:
         temp_repo = Path(temp_dir)
         subprocess.run(["git", "init", "-q"], cwd=temp_repo, check=True)
@@ -1819,29 +2746,87 @@ def run_orchestration_contract_self_test() -> int:
         "orchestration contract self-test passed: child handoff, non-default/fresh "
         "agents, stop/status/resume mismatches, incomplete completion, capability "
         "mislabeling, missing skills/results/advisory disposition, invalid "
-        "fingerprints, forbidden global "
+        "fingerprints, missing/invalid typed review cycles or subject hygiene, "
+        "forbidden global "
         "handoff, external transport, and failed/wrong-role remediation all fail "
         "closed; clean review with direct or cross-run P1/P2, malformed/orphan "
         "inventory rows, cross-section/duplicate Inventory tables, non-ASCII "
         "digit IDs, fabricated IDs, priority mismatch, and non-repository "
-        "manifest paths fail closed; "
-        "chained findings/remediation/re-review, clean review with a complete "
-        "durable P3/P4 inventory row, direct parent remediation, "
+        "manifest paths fail closed; new predecessor dispatch/record use, "
+        "all-untyped lineage, same/unchanged-cycle remediation laundering, "
+        "post-CLEAN and over-budget causal review cycles, plus later-entry "
+        "trailing spaces/tabs fail closed; "
+        "chained findings/remediation/re-review, exactly two supplemental "
+        "causal cycles, clean review with a complete durable P3/P4 inventory "
+        "row, direct parent remediation, "
         "reviewed-baseline/primary-commit identity, and two-commit ledger "
         "mutation validate"
     )
     return 0
 
 
+def verify_dispatch_file(
+    dispatch_argument: str,
+    *,
+    repo_root: Path = REPO_ROOT,
+    dispatches_dir: Path = DISPATCHES_DIR,
+    quiet: bool = False,
+) -> int:
+    try:
+        dispatch_path = (repo_root / dispatch_argument).resolve()
+        dispatch_path.relative_to(dispatches_dir.resolve())
+        if dispatch_path.suffix != ".json" or not dispatch_path.is_file():
+            raise ValidationFailure(
+                f"{dispatch_argument}: expected an existing JSON dispatch"
+            )
+        dispatch = load_json(dispatch_path)
+        version = dispatch.get("schema_version")
+        schema_path = INTERNAL_DISPATCH_SCHEMA_PATHS.get(version)
+        if schema_path is None:
+            raise ValidationFailure(
+                f"{dispatch_path}: unsupported internal dispatch "
+                f"schema_version {version!r}"
+            )
+        if version != "1.3":
+            raise ValidationFailure(
+                f"{dispatch_path}: internal-dispatch {version} is immutable "
+                "predecessor evidence and cannot be executed"
+            )
+        schema = load_json(schema_path)
+        validate_instance(dispatch, schema, str(dispatch_path))
+        validate_subject_manifest(
+            dispatch,
+            dispatch_path,
+            verify_live_files=True,
+            repo_root=repo_root,
+        )
+    except (OSError, ValueError, KeyError, ValidationFailure) as error:
+        if not quiet:
+            print(f"dispatch verification failed: {error}", file=sys.stderr)
+        return 1
+    if not quiet:
+        print(
+            "dispatch verification passed: "
+            f"{dispatch['dispatch_id']} {dispatch['subject_fingerprint']}"
+        )
+    return 0
+
+
 def main() -> int:
+    historical_fixture_validation = sys.argv[1:] == [
+        "--validate-historical-fixture"
+    ]
     if sys.argv[1:] == ["--self-test-v1-admission"]:
         return run_historical_v1_0_admission_self_test()
     if sys.argv[1:] == ["--self-test-orchestration-contract"]:
         return run_orchestration_contract_self_test()
-    if sys.argv[1:]:
+    if len(sys.argv) == 3 and sys.argv[1] == "--verify-dispatch":
+        return verify_dispatch_file(sys.argv[2])
+    if sys.argv[1:] and not historical_fixture_validation:
         print(
             "usage: validate_handoffs.py "
-            "[--self-test-v1-admission|--self-test-orchestration-contract]",
+            "[--self-test-v1-admission|--self-test-orchestration-contract|"
+            "--verify-dispatch <repo-relative-json-path>]",
             file=sys.stderr,
         )
         return 2
@@ -1880,10 +2865,10 @@ def main() -> int:
         internal_dispatch_template_version = internal_dispatch_template.get(
             "schema_version"
         )
-        if internal_dispatch_template_version != "1.2":
+        if internal_dispatch_template_version != "1.3":
             raise ValidationFailure(
                 f"{INTERNAL_DISPATCH_TEMPLATE_PATH}: current internal dispatch "
-                "template must route to schema_version 1.2"
+                "template must route to schema_version 1.3"
             )
         validate_instance(
             internal_dispatch_template,
@@ -1928,9 +2913,35 @@ def main() -> int:
                 "historical internal-dispatch v1.0 filename set mismatch: "
                 f"missing={missing}, extra={extra}"
             )
+        if not historical_fixture_validation:
+            validate_immutable_predecessor_dispatch_corpus(dispatches)
 
         record_paths = sorted(RECORDS_DIR.glob("*.json"))
         loaded_records = [(path, load_json(path)) for path in record_paths]
+        if not historical_fixture_validation:
+            validate_immutable_v1_2_record_corpus(loaded_records)
+            present_pre_v1_3_closeouts = {
+                path.name
+                for path, _ in loaded_records
+                if path.name in PRE_V1_3_DISPATCH_CLOSEOUT_ADMISSION
+            }
+            expected_pre_v1_3_closeouts = set(
+                PRE_V1_3_DISPATCH_CLOSEOUT_ADMISSION
+            )
+            if present_pre_v1_3_closeouts != expected_pre_v1_3_closeouts:
+                missing = sorted(
+                    expected_pre_v1_3_closeouts - present_pre_v1_3_closeouts
+                )
+                extra = sorted(
+                    present_pre_v1_3_closeouts - expected_pre_v1_3_closeouts
+                )
+                raise ValidationFailure(
+                    "pre-v1.3-dispatch closeout admission mismatch: "
+                    f"missing={missing}, extra={extra}"
+                )
+            for path, record in loaded_records:
+                if path.name in PRE_V1_3_DISPATCH_CLOSEOUT_ADMISSION:
+                    validate_pre_v1_3_dispatch_closeout_admission(record, path)
         present_v1_0_filenames = {
             path.name
             for path, record in loaded_records

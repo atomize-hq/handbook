@@ -43,6 +43,20 @@ Unrelated P1/P2, material scope/risk expansion, or exhaustion of the two-cycle
 allowance returns a bounded partial/blocked result for explicit adjudication.
 No budget limit waives a valid P1/P2.
 
+Current dispatches make that budget typed and replayable. A `discovery` cycle
+has no causal trigger; `closure` and `supplemental_causal` cycles name exactly
+the immediately preceding findings runs and their P1/P2 IDs. The validator
+rejects a cycle after CLEAN, non-contiguous same-cycle bursts, inexact lineage,
+invalid ordering, mixed typed/untyped review runs, same-cycle remediation
+laundering, and a third supplemental. A remediation re-review must occur in
+the immediately following cycle with a changed subject fingerprint.
+Only v1.3 may supply new execution or closeout lineage; the exact frozen
+v1.1/v1.2 dispatch corpus and 35-file handoff-record v1.2 corpus remain
+validation-only predecessor evidence.
+Mechanical closeout is outside the review-cycle budget. Before any reviewer is
+spawned, its dispatch must pass live manifest replay, including the
+manifest-wide no-trailing-whitespace policy for UTF-8 text.
+
 Rejected alternatives are eliminating independent review, treating failing
 selected proof as backlog, allowing self-approval, or automatically waiving a
 finding because similar debt already exists.

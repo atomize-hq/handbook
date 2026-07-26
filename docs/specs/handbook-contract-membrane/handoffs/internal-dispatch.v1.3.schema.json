@@ -1,0 +1,561 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://handbook.dev/schemas/internal-dispatch/v1.3.json",
+  "title": "Handbook Internal Subagent Dispatch v1.3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "dispatch_id",
+    "created_at_utc",
+    "source_handoff_ids",
+    "parent_orchestration_id",
+    "orchestration_decision",
+    "execution_target",
+    "agent_type",
+    "role",
+    "fresh_context_required",
+    "closeout_owner",
+    "required_skills",
+    "phase_id",
+    "slice_id",
+    "packet_id",
+    "subject_fingerprint",
+    "subject_manifest",
+    "review_cycle",
+    "subject_hygiene",
+    "active_resolution",
+    "authority_refs",
+    "repo_truth",
+    "allowed_scope",
+    "non_goals",
+    "tasks",
+    "contracts_and_gates",
+    "stop_conditions",
+    "return_contract"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "handbook.internal-dispatch"
+    },
+    "schema_version": {
+      "const": "1.3"
+    },
+    "dispatch_id": {
+      "type": "string",
+      "minLength": 8,
+      "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "created_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_handoff_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 8
+      },
+      "uniqueItems": true
+    },
+    "parent_orchestration_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "orchestration_decision": {
+      "enum": [
+        "resume_same_packet",
+        "local_remediation_packet",
+        "child_packet_required",
+        "cross_document_repair",
+        "resolution_escalation",
+        "external_blocker_followup",
+        "proof_or_review_followup",
+        "advance_to_next_slice",
+        "defer_future_program"
+      ]
+    },
+    "execution_target": {
+      "const": "internal_subagent"
+    },
+    "agent_type": {
+      "const": "default"
+    },
+    "role": {
+      "enum": [
+        "implementation",
+        "documentation",
+        "review",
+        "proof",
+        "remediation"
+      ]
+    },
+    "fresh_context_required": {
+      "const": true
+    },
+    "closeout_owner": {
+      "const": "parent_orchestrator"
+    },
+    "required_skills": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "prefixItems": [
+        {
+          "const": "using-agent-skills"
+        }
+      ],
+      "minItems": 1,
+      "uniqueItems": true,
+      "allOf": [
+        {
+          "contains": {
+            "const": "using-agent-skills"
+          },
+          "minContains": 1
+        }
+      ]
+    },
+    "phase_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slice_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "packet_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "subject_fingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "review_cycle": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "cycle_id",
+            "trigger_run_ids",
+            "finding_refs"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "discovery",
+                "closure",
+                "supplemental_causal"
+              ]
+            },
+            "cycle_id": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9._-]+$"
+            },
+            "trigger_run_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "finding_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "const": "discovery"
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "trigger_run_ids": {
+                    "maxItems": 0
+                  },
+                  "finding_refs": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "closure",
+                      "supplemental_causal"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "trigger_run_ids": {
+                    "minItems": 1
+                  },
+                  "finding_refs": {
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "subject_hygiene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "whitespace_policy"
+      ],
+      "properties": {
+        "whitespace_policy": {
+          "const": "text-files-no-trailing-whitespace-v1"
+        }
+      }
+    },
+    "active_resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "scope_horizon",
+        "detail_resolution",
+        "temporal_horizon",
+        "authority_horizon",
+        "memory_horizon",
+        "validation_horizon"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope_horizon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detail_resolution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "temporal_horizon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_horizon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "memory_horizon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validation_horizon": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "authority_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pathSections"
+      },
+      "minItems": 1
+    },
+    "repo_truth": {
+      "type": "string",
+      "minLength": 1
+    },
+    "allowed_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "non_goals": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "contracts_and_gates": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "stop_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "return_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transport",
+        "findings_first",
+        "include_agent_identity_and_status",
+        "edit_scope",
+        "global_handoff",
+        "ledger_write",
+        "user_task_hop",
+        "required_result_fields"
+      ],
+      "properties": {
+        "transport": {
+          "const": "built_in_subagent"
+        },
+        "findings_first": {
+          "type": "boolean"
+        },
+        "include_agent_identity_and_status": {
+          "const": true
+        },
+        "edit_scope": {
+          "enum": [
+            "read_only",
+            "bounded_write"
+          ]
+        },
+        "global_handoff": {
+          "const": "forbidden"
+        },
+        "ledger_write": {
+          "const": "forbidden"
+        },
+        "user_task_hop": {
+          "const": "forbidden"
+        },
+        "required_result_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "allOf": [
+            {
+              "contains": {
+                "const": "agent_id"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "const": "final_status"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "const": "verdict"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "const": "findings"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "const": "validation"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "const": "parent_disposition"
+              },
+              "minContains": 1
+            }
+          ]
+        }
+      }
+    },
+    "subject_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "encoding",
+        "entries",
+        "aggregate_fingerprint"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "encoding": {
+          "const": "repo-path-null-sha256-newline-v1"
+        },
+        "entries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*:)(?!.*\\/$)[^\\u0000\\r\\n]+$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        },
+        "aggregate_fingerprint": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "role": {
+            "const": "review"
+          }
+        },
+        "required": [
+          "role"
+        ]
+      },
+      "then": {
+        "properties": {
+          "review_cycle": {
+            "type": "object"
+          },
+          "required_skills": {
+            "contains": {
+              "const": "code-review-and-quality"
+            },
+            "minContains": 1
+          },
+          "return_contract": {
+            "properties": {
+              "findings_first": {
+                "const": true
+              },
+              "edit_scope": {
+                "const": "read_only"
+              },
+              "required_result_fields": {
+                "contains": {
+                  "const": "advisory_disposition"
+                },
+                "minContains": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "role": {
+            "not": {
+              "const": "review"
+            }
+          }
+        },
+        "required": [
+          "role"
+        ]
+      },
+      "then": {
+        "properties": {
+          "review_cycle": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "pathSections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sections"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

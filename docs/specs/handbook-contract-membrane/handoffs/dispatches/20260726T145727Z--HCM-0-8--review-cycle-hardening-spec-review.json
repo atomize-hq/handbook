@@ -1,0 +1,155 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T145727Z--HCM-0-8--review-cycle-hardening-spec-review",
+  "created_at_utc": "2026-07-26T14:57:27Z",
+  "source_handoff_ids": [
+    "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed"
+  ],
+  "parent_orchestration_id": "20260726T145726Z--HCM-0-8--orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:e6cd731c0bbc62b5270f7842c944cd3af46f39ed13f85ea976e4c8595091056e",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "review-cycle-hardening-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "12fcf6a8babdd0992dd64687950e99b7361804ab5307414b5bb53340e123e35c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "f1bf0e8d04301d4df31ffd22d7180faf93cca0bf0c3a68545ebea5f52daa7092"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "5245be3471c3036e7a8ac752ee15d36dc18228f02476b3343027b1a2abd18625"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sha256": "91dffa63a4f2278c864858a2e97384a4d1694a5fdea04756c7ff103dc3cf833c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "4bc59a3dcdd784621423849306d94a49d6acef9732ef8bfa68df0057b5369b06"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "3f05c2ad8d80a219b388e541fbaedde2baac27137bdcb27a6f525bae3a5f58e7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatch-template.md",
+        "sha256": "f0cba6b2244373fbe1c462a38f32ec58ead54fcad51d46bd41fd1e43e48ccb26"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch-template.json",
+        "sha256": "08dbc948d58ed400f4331915689dd4330787d6b78a80b93451a08cfa90833aa0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.3.schema.json",
+        "sha256": "c6a34eff02419320422e142ab67e102ae632080cd41cd08136cf3c96a1b68499"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "sha256": "2bd0c85e7e10f3d134612f0759fa0a0d95e0e7e79c334ee00d7fc7761ed99890"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:e6cd731c0bbc62b5270f7842c944cd3af46f39ed13f85ea976e4c8595091056e"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "normal",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "slice_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Initial program conclusion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "Cross-cutting regression rules"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Decision and retained rigor",
+        "Review priority rubric"
+      ]
+    }
+  ],
+  "repo_truth": "Branch feat/handbook-contract-membrane is at baseline 2540cbe2b365fb1cb759e9db1ffe877d56cd0545; the uncommitted ten-file subject is bound by this dispatch fingerprint.",
+  "allowed_scope": [
+    "Read-only review of the exact ten-entry subject manifest.",
+    "Evaluate whether the implementation exactly satisfies the requested typed reasons, causal budget enforcement, and pre-review manifest-wide whitespace gate."
+  ],
+  "non_goals": [
+    "Do not edit files or propose unrelated cleanup.",
+    "Do not redesign the accepted bounded review policy or widen HCM-0.8 authority.",
+    "Do not create a global handoff, ledger entry, or user task hop."
+  ],
+  "tasks": [
+    "Review the complete diff from baseline 2540cbe2b365fb1cb759e9db1ffe877d56cd0545 against the three requested hardening outcomes.",
+    "Check that positive, negative, compatibility, execution-path, and documentation proofs cover the exact requested behavior without circular review expansion.",
+    "Return findings first with exact file and line evidence; distinguish P1/P2 blockers from P3/P4 advisories."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#development-orchestration-contracts",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#cross-cutting-regression-rules",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#decision-and-retained-rigor"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if the exact manifest cannot be replayed or broader authority is required.",
+    "Remain read-only and return the result to the parent."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
