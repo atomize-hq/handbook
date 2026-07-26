@@ -1,0 +1,136 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.2",
+  "dispatch_id": "20260726T130037Z--HCM-2-4--planning-amendment-causal-closure-1",
+  "created_at_utc": "2026-07-26T13:00:37Z",
+  "source_handoff_ids": [
+    "20260726T050447Z--HCM-2-4--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260726T122626Z--HCM-2-4--planning-amendment-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "planning-and-task-breakdown"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:9385fbd3b7d1112791a5cf0674a32ad45456b9b776988316b68dd4c802ade74e",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "4b27c134d708e098a5cba99a52090ff3f24bc76e0803f62b1f62975842d16eeb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T122626Z--planning-charter-compatibility-amendment.md",
+        "sha256": "67a03ae5118b339053b68e3188fe4970e16e159e1a7115459580ed1a990ccaf4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T124918Z--planning-amendment-review-1-remediation.md",
+        "sha256": "151e2907730a97d81fa3543a10d04f1b50b056c7cbe9b63837c1ab321cdf8164"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md",
+        "sha256": "4f7b0958cd0c317ae7986b72eeb54e8d8a48f4f8d63a41f295aa87eb1c58f25a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "198db320eb4d3a1f4a1ca8211045c0d6b868a0ad493cd7c56785222ef5ebc917"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "e707c4b016ad6a7ad9a16e489660c8e067b10fa116607a394c628ddc6ad7db3e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:9385fbd3b7d1112791a5cf0674a32ad45456b9b776988316b68dd4c802ade74e"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "causal_remediation_delta",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "phase_exit",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "supplemental_causal_closure_1"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T125058Z--HCM-2-4--planning-amendment-closure-review.json",
+      "sections": [
+        "different-fresh closure contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md",
+      "sections": [
+        "Live evidence",
+        "Consolidated correction"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "Closure review proved compiler doctor_report_from_inspection is the sixth existing registry caller omitted from the first inventory. Supplemental remediation now freezes six existing callers, evaluate_charter_intake as the sole seventh edge, an eighth as RED, compiler doctor as a HIGH read/proof anchor, and exact doctor preservation commands. The one-snapshot P2 correction remains closed.",
+  "allowed_scope": [
+    "Replay the six-entry manifest and aggregate fingerprint before review.",
+    "Compare the complete remediated subject with fingerprint sha256:2f1ab30e763da83e2d405be3d7e00fcf6e478a92f256fbee2016dc7ae609d6e4 and the supplemental proof.",
+    "Independently verify the repository-wide six existing validate_selected_decisions call sites and the exact doctor_report_from_inspection UID/HIGH impact.",
+    "Verify every subject file now freezes six existing callers, intake as the sole seventh, eighth RED, compiler doctor read/proof-only, and exact doctor tests.",
+    "Verify HCM-2.4-AMEND-REV1-002 remains closed and all Charter compatibility/non-goal constraints remain unchanged.",
+    "Check only P1/P2 directly caused or unmasked by this supplemental caller-inventory remediation; do not reopen unrelated discovery."
+  ],
+  "non_goals": [
+    "No general review of untouched HCM-2.4 decisions.",
+    "No implementation, edits, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "No compiler production edit, migration, fallback, dual read, loose version acceptance, public API, package, runtime, or HCM-3.x expansion."
+  ],
+  "tasks": [
+    "Verify exact subject identity and causal review lineage.",
+    "Confirm the six-plus-one registry caller contract is complete and consistent.",
+    "Confirm compiler doctor is exact read/proof preservation and no compiler edit is authorized.",
+    "Return CLEAN only when the directly unmasked caller-inventory P2 is closed and no remediation-caused/unmasked P1/P2 remains.",
+    "If a P1/P2 remains, report exact evidence and causal lineage for parent disposition."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#priority-decision-matrix",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return blocked if the exact fingerprint, predecessor review, or supplemental causal lineage cannot be established.",
+    "Report rather than repair any remaining directly caused/unmasked P1/P2.",
+    "Do not delegate, edit, implement, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

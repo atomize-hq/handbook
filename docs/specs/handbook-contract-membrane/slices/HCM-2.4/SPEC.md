@@ -2,7 +2,17 @@
 
 Status: planning subject; implementation is not authorized.
 
-Planning baseline: `2b7ab4e14467800e5f0ecaa19561a1dd5d84ee48`
+Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
+
+Selected predecessor handoff:
+`20260726T050447Z--HCM-2-4--orchestration--planning-completed`
+
+Amendment evidence:
+[proof/20260726T122626Z--planning-charter-compatibility-amendment.md](proof/20260726T122626Z--planning-charter-compatibility-amendment.md)
+and
+[proof/20260726T124918Z--planning-amendment-review-1-remediation.md](proof/20260726T124918Z--planning-amendment-review-1-remediation.md)
+and
+[proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md](proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md)
 
 ## Objective and completion boundary
 
@@ -33,8 +43,11 @@ below:
    `handbook.artifact-kind.project-authority@1.1.0`,
    `handbook.intake.charter@1.0.0`, and
    `handbook.renderer.charter-review-markdown@1.0.0`. Candidate, result,
-   promotion, approval, lineage, lifecycle, and committed-authority boundaries
-   from HCM-2.2 are not reopened.
+   promotion, promotion-intent, approval, lineage, lifecycle, transaction,
+   fingerprint, and committed-authority boundaries from HCM-2.2 are not
+   reopened. Shipped-root 1.2 may enter that boundary only through the exact
+   versioned compatibility membrane defined below; Charter records retain the
+   released 1.1 profile ref and fingerprint.
 2. Project Context remains selected at `.handbook/project/context.yaml`; the
    HCM-2.1 canonical bytes and renderer behavior remain regression anchors.
 3. `handbook.profile.shipped-root@1.1.0` remains immutable. Its successor may
@@ -48,6 +61,60 @@ below:
 5. Existing released schema, kind, profile, intake, and renderer definition
    bytes are immutable. HCM-2.4 uses additive exact-version successors where a
    definition must gain references.
+
+## Versioned Charter compatibility membrane
+
+The HCM-2.4 profile successor must not change the Charter authority selected by
+HCM-2.2. The only authorized compatibility boundary is the existing
+`CharterDefinitionRegistry::validate_selected_decisions` function, with its
+signature and public API unchanged.
+
+That boundary admits exactly two ref/fingerprint tuples:
+
+1. `handbook.profile.shipped-root@1.1.0` with
+   `sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74`;
+   and
+2. `handbook.profile.shipped-root@1.2.0` with the one literal authored profile
+   fingerprint produced by P1A and frozen in its immutable definition vector
+   before P1B begins.
+
+There is no placeholder at P1B entry. No semver range, “newer than 1.1,” string
+prefix, generic compatibility promise, repository-selected substitute, second
+profile resolution, fallback, migration, alias, or dual-read behavior is
+allowed.
+
+For either tuple the resolved `project_authority` descriptor must equal the
+HCM-2.2 closure exactly:
+
+- closed descriptor schema `handbook.artifact-instance-descriptor@1.0`;
+- id `project_authority`;
+- kind `handbook.artifact-kind.project-authority@1.1.0`;
+- role `constitutional_authority`;
+- capabilities exactly [`constitutional_root`];
+- label `Charter`;
+- path `.handbook/project/charter.yaml`;
+- requiredness `always` with null condition;
+- no dependencies;
+- lifecycle
+  `handbook.lifecycle.constitutional-review-lock@1.0.0`;
+- intake `handbook.intake.charter@1.0.0`;
+- renderers exactly
+  [`handbook.renderer.charter-review-markdown@1.0.0`];
+- no Projections, validation overlays, or extensions; and
+- exact subordinate definition presence in the released Charter registry.
+
+The closed artifact-instance loader remains authoritative for descriptor schema
+id/version and unknown-field refusal; the compatibility boundary compares every
+resolved field. Any tuple, fingerprint, descriptor, subordinate definition, or
+cardinality mismatch is rejected.
+
+Generic selected decisions remain shipped-root 1.2 for HCM-2.4 consumers.
+Charter intake/candidate/result/promotion/currentness/transaction producers
+continue to emit and compare the released HCM-2.2 1.1 ref/fingerprint pair.
+Candidate/result separation, promotion intent, approval, lineage, lifecycle,
+recovery, replay, committed authority, and every HCM-2.2 negative case remain
+unchanged. `validate_candidate_v13` and `validate_promotion_intent_v12` are
+explicit no-edit anchors.
 
 ## Exact shipped artifact-family inventory
 
@@ -129,6 +196,12 @@ retains the existing conditional requiredness and exact condition ref. All three
 keep empty Projection refs. No profile field may remain null/empty where this
 table names an intake or renderer.
 
+P1A must prove that the 1.2 `project_authority` row is byte-for-byte equal to
+the released 1.1 row and must freeze the completed 1.2 profile's literal
+authored fingerprint in the HCM-2.4 definition vector. P1B cannot begin while
+that literal is absent, provisional, recomputed from an unreviewed definition,
+or inconsistent with the typed dependency closure.
+
 The Work Specification real-path proof is also frozen:
 
 - fixture root:
@@ -205,16 +278,20 @@ generic path does not consult them.
 
 ## Implementation packet decomposition
 
-The executable order is P0 → P1A → P1B → (P2, P3, P4, P5) → P6 → P7.
+The executable order is P0 → P1A → P1B → P1C → (P2, P3, P4, P5) → P6 → P7.
 P2–P5 are semantically independent and separately reviewable, but an
 orchestrator must land them serially when they touch shared registries,
 fixtures, or proof files.
 
 ### P0 — Baseline and inventory lock
 
-Freeze the six-family matrix, released definition fingerprints, three-instance
-root profile, legacy selector inventory, HCM-2.1–HCM-2.3 preservation vectors,
-and per-symbol GitNexus impacts. No production change is allowed in P0.
+Freeze the six-family matrix, released definition fingerprints, both exact
+shipped-root profile definitions, three-instance root descriptors, the complete
+shipped-root-to-Charter validation call path, every HCM-2.2 Charter record
+identity producer/currentness consumer, legacy selector inventory,
+HCM-2.1–HCM-2.3 preservation vectors, and per-symbol GitNexus impacts. Include
+the exact P2 CLI help/snapshot correction and the complete HCM-2.2 focused
+command wall in the live manifest. No production change is allowed in P0.
 Separate implementation selection authorizes this read-only preflight only.
 Production, test, definition, template, and documentation edits remain blocked
 until P0 records its exact live manifests/UIDs and passes its gate.
@@ -232,18 +309,43 @@ capability ceilings unchanged. Add exact built-in source mappings. Prove
 duplicate-safe parsing, exact fingerprints, schema coverage, renderer
 determinism, and unchanged discovery boundaries. P1A does not add
 Work/Decision/Risk to the shipped-root profile and does not change public APIs.
+It also proves the 1.2 `project_authority` descriptor is exactly the released
+HCM-2.2 row and freezes the literal authored 1.2 profile fingerprint in an
+immutable HCM-2.4 vector.
 
-### P1B — Shipped-root successor adoption
+### P1B — Versioned Charter compatibility foundation
 
-Admit and select `handbook.profile.shipped-root@1.2.0` through the existing
-built-in profile request, adding only the exact kind, intake, and renderer
-sources from P1A. Preserve exactly three root instances and all existing
-condition, vocabulary, and Context Resolution sources. This packet is isolated
-because `shipped_profile_request` and `resolve_shipped_profile_decisions` are
+While the shipped request still selects 1.1, extend only
+`CharterDefinitionRegistry::validate_selected_decisions` to admit the two exact
+ref/fingerprint tuples and complete Project Authority descriptor closure frozen
+above. Preserve `validate_selected_profile` as 1.1-only. Make the existing
+HCM-2.2 Charter profile identity constants crate-visible without changing their
+values, and update only the listed Charter record producers/currentness checks
+to continue emitting and comparing that exact identity after the compatibility
+gate passes.
+
+P1B is GREEN only when direct 1.1 and explicit 1.2 decisions produce identical
+Charter authority bytes/fingerprints, every descriptor-field and tuple mutation
+is rejected, all HCM-2.2 negative cases pass unchanged, and the live shipped
+selection remains 1.1. It may not edit candidate/result/promotion-intent
+validators, schemas, vectors, lineage formats, lifecycle formats, approval
+semantics, or committed-authority behavior.
+
+### P1C — Shipped-root successor adoption
+
+Only after P1B is green, select
+`handbook.profile.shipped-root@1.2.0` through the existing built-in profile
+request, adding only the exact kind, intake, and renderer sources from P1A.
+Preserve exactly three root instances and all existing condition, vocabulary,
+and Context Resolution sources. This packet is isolated because
+`shipped_profile_request` and `resolve_shipped_profile_decisions` are
 CRITICAL-risk shared roots.
+
 Resolve and assert the three exact descriptor rows above; non-null intake refs
 and singleton renderer refs for Project Context and Environment Context are
-required GREEN evidence, not publication-only metadata.
+required GREEN evidence, not publication-only metadata. The real shipped path
+must show generic selected decisions at 1.2 while every Charter record and
+HCM-2.2 validation path retains the exact 1.1 authority pair.
 
 ### P2 — Environment Context vertical
 
@@ -279,7 +381,7 @@ accepts a written indivisibility rationale before implementation.
 
 ### P6 — Aggregate flow and fixed-selector deletion
 
-After P1A–P5 are green, replace the mixed fixed/bridge flow with one
+After P1A–P1C and P2–P5 are green, replace the mixed fixed/bridge flow with one
 descriptor-selected artifact collection, then remove both bridge IDs, bridge
 types, fixed enum/order/path selection, legacy exceptions, and bridge-only
 tests. Preserve packet order, budget outcomes, source summaries, fixture
@@ -300,9 +402,10 @@ same-scope correction after fresh impact analysis.
 
 | Packet | Production/definition selectors | Test/proof selectors | Documentation selectors |
 | --- | --- | --- | --- |
-| P1A | exact new version files under `crates/engine/definitions/{artifact-kinds,intakes,renderers,profiles}/`; `crates/engine/src/profile_builtins.rs`; exact later-owned dependency guards in `crates/engine/src/{artifact_kind_registry,artifact_instance}.rs`; `artifact_intake_registry.rs` and `artifact_repository.rs` are proof/read surfaces unless P0 proves a minimal edit is necessary | `crates/engine/tests/{hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile}.rs`; exact new vectors under `slices/HCM-2.4/contracts/` | HCM-2.4 packet only until P7 |
-| P1B | `crates/engine/src/profile_decision.rs` exact `shipped_profile_request` source list and selected profile ref; no signature/public type changes | `crates/engine/tests/{hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile}.rs` and all CRITICAL upstream preservation tests | packet proof only |
-| P2 | `crates/engine/src/author/environment_inventory_core.rs`; `crates/compiler/src/author/{environment_inventory,environment_inventory_shell,mod}.rs`; `crates/compiler/src/layout.rs`; `crates/cli/src/author.rs`; three files under `core/library/environment_inventory/`; exact setup/doctor adapters resolved in P0 | `crates/engine/tests/author_core.rs`; Environment Inventory cases in `crates/compiler/tests/author.rs` and `crates/cli/tests/author_cli.rs`; affected canonical ingest/freshness/manifest suites; native Windows mutation/refusal cases | packet proof only |
+| P1A | exact new version files under `crates/engine/definitions/{artifact-kinds,intakes,renderers,profiles}/`; `crates/engine/src/profile_builtins.rs`; exact later-owned dependency guards in `crates/engine/src/{artifact_kind_registry,artifact_instance}.rs`; `artifact_intake_registry.rs` and `artifact_repository.rs` are proof/read surfaces unless P0 proves a minimal edit is necessary | `crates/engine/tests/{hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile}.rs`; exact new vectors under `slices/HCM-2.4/contracts/`, including the literal 1.2 profile fingerprint and full Project Authority descriptor | HCM-2.4 packet only until P7 |
+| P1B | `crates/engine/src/charter_definition_registry.rs` exact `CharterDefinitionRegistry.validate_selected_decisions#1`; `crates/engine/src/charter_lifecycle_validation.rs` exact `SELECTED_PROFILE_REF`, `SELECTED_PROFILE_FINGERPRINT`, `build_result`, and `validate_definition_authority`; `crates/engine/src/charter_intake.rs` exact `evaluate_charter_intake`; `crates/engine/src/charter_approval_workflow.rs` exact `validate_candidate_currentness`; `crates/engine/src/charter_promotion_workflow.rs` exact `validate_candidate_contract` and `CharterPromotionWorkflowServiceV1.promote_at#2`; `crates/engine/src/charter_authority_transaction.rs` exact `CharterAuthorityTransactionServiceV1.preflight#1`; `crates/compiler/src/doctor.rs` exact `doctor_report_from_inspection` is a read/proof anchor and is not edited; no signature/public type/schema/vector change | exact new `crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs`, including `invalid_compatible_profile_decisions_cannot_produce_charter_intake`; every `crates/engine/tests/hcm_2_2_*.rs`; exact compiler doctor unit and CLI doctor/profile test commands from the proof; HCM-2.2 compiler/CLI product-cutover/version/skill tests; all direct HIGH/CRITICAL upstream tests; exact 1.1/1.2 equality and per-field negative vectors | packet proof only |
+| P1C | `crates/engine/src/profile_decision.rs` exact `shipped_profile_request` source list and selected profile ref; `resolve_shipped_profile_decisions` is a read/proof anchor and is not edited; no signature/public type changes | `crates/engine/tests/{hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile}.rs`; the P1B compatibility target; every CRITICAL upstream preservation test | packet proof only |
+| P2 | `crates/engine/src/author/environment_inventory_core.rs`; `crates/compiler/src/author/{environment_inventory,environment_inventory_shell,mod}.rs`; `crates/compiler/src/layout.rs`; `crates/cli/src/author.rs`; `crates/cli/src/main.rs` exact `AuthorCommand::EnvironmentInventory` help text; three files under `core/library/environment_inventory/`; exact setup/doctor adapters resolved in P0 | `crates/engine/tests/author_core.rs`; Environment Inventory cases in `crates/compiler/tests/author.rs` and `crates/cli/tests/author_cli.rs`; `crates/cli/tests/cli_surface.rs` exact inline `author_help_matches_snapshot` and snapshot-consuming `author_environment_inventory_help_matches_snapshot`; exact consumed `crates/cli/tests/snapshots/handbook-author-environment-inventory-help.txt`; affected canonical ingest/freshness/manifest suites; native Windows mutation/refusal cases | packet proof only |
 | P3 | `core/stages/10_feature_spec.md`; two files under `core/library/feature_spec/`; `core/schemas/feature_spec.yaml`; `core/pipelines/{default,foundation_inputs}.yaml`; `crates/pipeline/src/{pipeline_capture,stage_10_feature_spec_provenance,pipeline_handoff}.rs`; exact fixed path/layout constants | `crates/pipeline/tests/{pipeline_capture,pipeline_handoff}.rs`; CLI handoff refusal tests; new exact fixture root `crates/engine/tests/fixtures/hcm_2_4_work_specification/`; exact mirrors under `tests/fixtures/pipeline_proof_corpus/foundation_inputs/` and `tests/fixtures/foundation_flow_demo/`; real-binary descriptor-selected capture/handoff proof | packet proof only |
 | P4 | additive Decision Record definitions from P1A plus unchanged generic artifact runtime consumption | exact new fixture root `crates/engine/tests/fixtures/hcm_2_4_decision_record/` and a named HCM-2.4 integration test selected in P0 | packet proof only |
 | P5 | additive Risk Record definitions from P1A plus unchanged generic artifact runtime consumption | exact new fixture root `crates/engine/tests/fixtures/hcm_2_4_risk_record/` and a named HCM-2.4 integration test selected in P0 | packet proof only |
@@ -314,11 +417,14 @@ each glob into an exact file manifest before its packet edits begin.
 
 ## GitNexus architecture and impact record
 
-The index was refreshed at `2b7ab4e14467800e5f0ecaa19561a1dd5d84ee48`.
-Full-text query is degraded because the local FTS extension cannot load;
-context, direct source inspection, and upstream impact are the required
-fallback. An UNKNOWN result is not “low risk”: implementation must resolve it
-by UID/context or stop.
+The amendment index was current at
+`fa31f65fddd678b33ea89d6b7e41201240254986`. Full-text query is degraded
+because the local FTS extension cannot load; exact context, direct source
+inspection, and upstream impact are the required fallback. The original
+non-amendment rows below retain their reviewed planning evidence and their P0
+refresh gates. Every newly proposed compatibility/P2 symbol was resolved
+exactly with no UNKNOWN. An UNKNOWN result is not “low risk”: implementation
+must resolve it by UID/context or stop.
 
 | Proposed symbol/surface | Upstream result | Planning consequence |
 | --- | --- | --- |
@@ -331,8 +437,21 @@ by UID/context or stop.
 | `CanonicalLayoutContract` struct UID | LOW; graph reports no upstream edges | Same incomplete-type-edge caveat; delete fixed fields only in P6 |
 | `emit_pipeline_handoff_bundle_with_storage_layout` | CRITICAL; 259 impacted, 2 direct, 51 processes, 20 modules | P3 may make only the minimum canonical-source substitution and must replay all pipeline handoff, trust, route, and workspace tests |
 | `validate_pipeline_handoff_bundle_with_storage_layout` | CRITICAL; 669 impacted, 1 direct, 51 processes, 20 modules | Treat emitted and validated bundle formats as frozen unless the packet proves an exact versioned internal successor without public API change |
-| `shipped_profile_request` | CRITICAL; 404 impacted, 1 direct, 51 processes, 20 modules | Isolate exact source-list/profile-ref adoption in P1B and replay every selected-profile, Charter, authoring, flow, pipeline, and generic-operation consumer |
-| `resolve_shipped_profile_decisions` | CRITICAL; 443 impacted, 39 direct, 51 processes, 20 modules | Preserve signature and decision semantics; P1B changes only its request's immutable source closure |
+| `Function:crates/engine/src/profile_decision.rs:shipped_profile_request` | CRITICAL; 155 impacted, 1 direct, 7 processes, 10 modules | P1C changes only the exact source list/profile ref after P1B is green |
+| `Function:crates/engine/src/profile_decision.rs:resolve_shipped_profile_decisions` | CRITICAL; 219 impacted, 74 direct, 8 processes, 13 modules | Read/proof anchor only; preserve signature, resolution semantics, and immediate registry validation |
+| `Function:crates/engine/src/charter_definition_registry.rs:CharterDefinitionRegistry.validate_selected_decisions#1` | LOW graph result; 0 impacted, 0 processes/modules | Treat as an incomplete edge: live source proves six current production callers; P1B adds exactly one seventh caller from `evaluate_charter_intake` and changes only the exact tuple/full-descriptor boundary |
+| `Const:crates/engine/src/charter_lifecycle_validation.rs:SELECTED_PROFILE_REF` and `Const:crates/engine/src/charter_lifecycle_validation.rs:SELECTED_PROFILE_FINGERPRINT` | LOW; 0 impacted each | Values are immutable; only crate visibility may change so all Charter producers share the released pair |
+| `Function:crates/engine/src/charter_intake.rs:evaluate_charter_intake` | HIGH; 42 impacted, 6 direct, 1 process, 4 modules | Add compatibility validation and preserve HCM-2.2 output identity |
+| `Function:crates/engine/src/charter_approval_workflow.rs:validate_candidate_currentness` | HIGH; 17 impacted, 1 direct, 1 process, 3 modules | Compare only with the frozen HCM-2.2 record pair after caller validation |
+| `Function:crates/engine/src/charter_promotion_workflow.rs:validate_candidate_contract` | LOW; 2 impacted, 1 direct, 1 process, 1 module | Preserve frozen candidate identity |
+| `Function:crates/engine/src/charter_promotion_workflow.rs:CharterPromotionWorkflowServiceV1.promote_at#2` | LOW; 1 impacted, 1 direct, 0 processes, 1 module | Replace the false selected-profile-1.1 gate with exact registry validation and emit the frozen record pair |
+| `Function:crates/engine/src/charter_lifecycle_validation.rs:build_result` | LOW; 1 impacted, 1 direct, 1 process, 1 module | Preserve frozen lifecycle-result identity |
+| `Function:crates/engine/src/charter_lifecycle_validation.rs:validate_definition_authority` | LOW; 2 impacted, 2 direct, 1 process, 1 module | Replace its direct selected-profile-1.1 gate only with the exact registry boundary |
+| `Function:crates/engine/src/charter_authority_transaction.rs:CharterAuthorityTransactionServiceV1.preflight#1` | HIGH; 27 impacted, 2 direct, 1 process, 3 modules | Preserve frozen promotion/candidate identity after registry validation |
+| `Function:crates/compiler/src/doctor.rs:doctor_report_from_inspection` | HIGH; 12 impacted, 2 direct, 1 process, 3 modules | Existing sixth registry caller; read/proof-only, retain exact definition-closure reporting under direct 1.1 and selected 1.2 |
+| `Function:crates/engine/src/charter_lineage_store.rs:validate_candidate_v13` | CRITICAL preservation anchor; 43 impacted, 14 processes | No edit; exact HCM-2.2 record validation and negatives remain unchanged |
+| `Function:crates/engine/src/charter_promotion_intent_v12.rs:validate_promotion_intent_v12` | HIGH preservation anchor; 18 impacted, 3 processes | No edit; exact promotion-intent authority remains unchanged |
+| `Enum:crates/cli/src/main.rs:AuthorCommand` | LOW graph result; 0 impacted | P2 changes only the `EnvironmentInventory` help path; one inline CLI assertion and one consumed subcommand snapshot prove the otherwise-missing edge |
 | `derive_feature_id` | CRITICAL; 409 impacted, 1 direct, 51 processes, 20 modules | P3 must derive the same external identity from canonical Work Specification fields/bytes and replay all handoff consumers |
 | `profile_builtins::definition` | LOW; graph reports no upstream edges | Treat as an incomplete dynamic-source edge; prove every predecessor/new exact ref and full shipped profile closure |
 | `validate_later_owned_dependencies` | UNKNOWN by method name | Resolve its method UID before P1A; change only exact first-party renderer-ref admission and retain every other later-owned dependency refusal |
@@ -345,11 +464,22 @@ Every packet repeats impact analysis at its actual baseline. HIGH or CRITICAL
 results are reported before editing; a materially wider result stops that
 packet.
 
+For the compatibility amendment, the recorded process/module counts are hard
+production ceilings. Live source has six existing registry callers, including
+compiler `doctor_report_from_inspection`. P1B explicitly adds one seventh
+`validate_selected_decisions` production caller from
+`evaluate_charter_intake`; no other new production caller is allowed. P0/P1B
+may also add only exact manifested test callers. An eighth production caller,
+another process/module/authority class/public surface, or an increase not wholly
+explained by the one planned intake edge and those test UIDs is materially
+wider and stops the packet. The zero-edge registry and CLI enum results are
+never authority to skip their source-proved callers or focused tests.
+
 ## Proof wall and Phase 2 exit mapping
 
 ### Per-family proof
 
-Every P1A–P5 family row must prove:
+Every P1A and P2–P5 family row must prove:
 
 1. exact definition and schema refs, immutable predecessor bytes, canonical
    fingerprint replay, duplicate-key refusal, and unknown-field behavior;
@@ -366,13 +496,31 @@ Every P1A–P5 family row must prove:
 6. real-path selected-descriptor proof, not only unit construction; and
 7. native Windows and Unix-safe behavior for any mutation path.
 
+Before P2–P5, P1B/P1C additionally prove:
+
+1. released shipped-root 1.1 bytes/fingerprint and valid acceptance are
+   unchanged;
+2. shipped-root 1.2 is accepted only as the one literal ref/fingerprint tuple
+   after every Project Authority descriptor field equals the HCM-2.2 closure;
+3. each descriptor field, tuple member, subordinate definition, unlisted
+   version, range/prefix, fallback, and second-read mutation is rejected;
+4. direct 1.1 and compatible selected 1.2 decisions produce byte-identical
+   Charter intake, candidate, lifecycle result, approval, promotion, intent,
+   lineage, transaction, recovery/replay, and committed authority;
+5. the real shipped resolver selects 1.2 for generic consumers while every
+   Charter record retains the released 1.1 pair; and
+6. all HCM-2.2 engine integration targets, engine lib/all-features matrices,
+   compiler version/product-cutover targets, CLI product-cutover/skill targets,
+   and HCM-2.1/HCM-2.3 regressions pass without deleting or weakening a
+   negative.
+
 ### Phase 2 exit map
 
 | Exit obligation | Required HCM-2.4 evidence |
 | --- | --- |
 | One editable canonical truth per targeted artifact | Six-family matrix plus per-family canonical/view and legacy-influence tests |
 | Intakes converge on kind-selected schema and expose missing coverage | Five new intake definitions, coverage vectors, and guided/express/agent-assisted equality/refusal proof; preserve Charter |
-| Charter boundary remains auditable and non-competing | HCM-2.2 focused regressions plus P6 common-loader proof against retained committed authority |
+| Charter boundary remains auditable and non-competing | Exact P1B/P1C compatibility membrane proof, byte-identical 1.1 record identity under selected 1.2, unchanged HCM-2.2 negatives, and P6 common-loader proof against retained committed authority |
 | Custom kind works without enum or generated command | Replay the exact HCM-2.3 registry-brief real-binary, replay, and concurrency proof |
 | Derived views are fixed deterministic first-party renderers only | Six renderer rows, exact goldens, null Resolution input, and no Projection definitions |
 | Generic custom-kind Projection/Resolution stays deferred | Negative surface scan and unchanged HCM-3.2/HCM-3.3 authority |
@@ -392,6 +540,9 @@ P7 must run, record, and keep green:
 - native Windows refusal/mutation tests;
 - HCM-2.1 Project Context, HCM-2.2 Charter, and HCM-2.3 registry-brief focused
   regressions;
+- direct shipped-root 1.1 acceptance, exact shipped-root 1.2 compatibility,
+  full Project Authority descriptor-mutation refusal, and real-path 1.2
+  selection with byte-identical HCM-2.2 Charter record proof;
 - bridge ID, fixed path, legacy Markdown influence, generated command, dynamic
   dispatch, Projection, and Resolution negative scans;
 - changed-document links, anchors, fences, JSON, Markdown, formatting, secret,
@@ -439,6 +590,9 @@ HCM-2.4 does not authorize:
 - adding Work Specification, Decision Record, or Risk Record to the shipped
   root profile;
 - reinterpretation of Charter authority or HCM-2.3 registry-brief semantics; or
+- open-ended profile-version acceptance, a loose string exception, a changed
+  HCM-2.2 Charter record identity, migration, fallback, or dual-read behavior;
+  or
 - automatic start of implementation after planning closeout.
 
 Stop the active implementation packet and return to the parent when:
@@ -450,8 +604,13 @@ Stop the active implementation packet and return to the parent when:
 - a renderer needs Resolution input or becomes a generic Projection;
 - a family needs filename discovery, a generated command, root-profile
   expansion, migration, or dual reads;
+- the P1A literal 1.2 fingerprint is absent or changes after compatibility
+  review, any Project Authority descriptor field differs, any HCM-2.2 record
+  byte/fingerprint changes, or `validate_candidate_v13` /
+  `validate_promotion_intent_v12` would need an edit;
 - Charter or registry-brief preservation proof fails; or
-- bridge deletion begins before all P1A–P5 replacement proofs are green.
+- bridge deletion begins before P1A–P1C and all P2–P5 replacement proofs are
+  green.
 
 ## Implementation-entry acceptance criteria
 
@@ -459,13 +618,17 @@ Implementation may be separately selected only when all of the following are
 true:
 
 - the completed HCM-2.4 planning handoff explicitly identifies the reviewed
-  planning commit and exact final subject fingerprint;
+  amended planning commit, exact final subject fingerprint, and predecessor
+  handoff `20260726T050447Z--HCM-2-4--orchestration--planning-completed`;
 - the branch is clean and synchronized, and the reviewed planning commit is an
   ancestor of the selected implementation baseline;
 - all six first-party families plus registry-brief preservation have complete
   source/view/intake/renderer/deletion/proof rows with no undecided authority;
 - released HCM-2.1–HCM-2.3 bytes and the exact three-instance root profile are
   frozen;
+- the exact versioned Charter compatibility membrane, P1A literal-fingerprint
+  prerequisite, HCM-2.2 record-identity preservation, and P2 CLI help/snapshot
+  correction are present;
 - this reviewed plan freezes selector ceilings, dependencies, RED/GREEN checks,
   proof, rollback/stop conditions, and reviewable packet sizes;
 - separate implementation selection enters read-only P0; P0 then freezes exact

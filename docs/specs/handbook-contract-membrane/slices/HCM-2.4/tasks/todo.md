@@ -19,10 +19,24 @@ implementation is separately selected.
 - [ ] Replay exact fingerprints for all six shipped kinds and schemas, both
       root profiles, existing Charter intake/renderer, and HCM-2.3 registry brief.
 - [ ] Freeze the exact three selected root descriptors.
+- [ ] Freeze the complete
+      `shipped_profile_request` → `resolve_shipped_profile_decisions` →
+      `CharterDefinitionRegistry::validate_selected_decisions` path and every
+      HCM-2.2 record producer/currentness consumer.
+- [ ] Freeze the released HCM-2.2 Charter profile ref/fingerprint pair and the
+      full Project Authority descriptor field table.
 - [ ] Freeze every fixed family/path/bridge/helper/test selector and packet file
       manifest.
+- [ ] Add the exact P2 `crates/cli/src/main.rs`, two named `cli_surface.rs`
+      tests, and the one consumed environment-inventory help snapshot to the
+      live manifest.
 - [ ] Freeze focused HCM-2.1, HCM-2.2, HCM-2.3, flow, pipeline, package, and
       archive proof commands.
+- [ ] Resolve every exact P1B/P1C UID, inventory compiler
+      `doctor_report_from_inspection` as the sixth existing registry caller,
+      and confirm only the planned seventh caller from
+      `evaluate_charter_intake`, with no eighth caller or new process/module
+      beyond the SPEC impact ceilings.
 - [ ] Record status/evidence: pending.
 
 ## P1A — Definition support and admission
@@ -32,6 +46,9 @@ implementation is separately selected.
 - [ ] Add one schema-backed first-party intake and fixed deterministic renderer
       for each.
 - [ ] Add the exact three-instance root profile successor.
+- [ ] Prove its `project_authority` row equals the released 1.1 descriptor in
+      every field and freeze the literal authored 1.2 profile fingerprint in an
+      immutable HCM-2.4 vector.
 - [ ] Add exact built-in sources and admit only exact package-owned first-party
       renderer refs while retaining all other later-owned dependency refusals.
 - [ ] Admit only the five exact frozen Project Context, Environment Context,
@@ -44,7 +61,41 @@ implementation is separately selected.
 - [ ] Prove no public API/Cargo/external-dependency/package-boundary change.
 - [ ] Record status/evidence: pending.
 
-## P1B — Shipped-root adoption
+## P1B — Charter compatibility foundation
+
+- [ ] Keep `shipped_profile_request` selecting 1.1 throughout P1B.
+- [ ] Extend only
+      `CharterDefinitionRegistry::validate_selected_decisions` to accept the
+      exact released 1.1 tuple and the exact P1A-authored 1.2 tuple.
+- [ ] Compare every Project Authority id/kind/role/capability/label/path/
+      requiredness/condition/dependency/lifecycle/intake/renderer/Projection/
+      overlay/extension field and exact subordinate definition.
+- [ ] Reject wrong fingerprints, unlisted versions, range/prefix acceptance,
+      descriptor mutations, missing definitions, fallback, second resolution,
+      migration, and dual reads.
+- [ ] Make the existing HCM-2.2 profile identity constants crate-visible
+      without changing either value.
+- [ ] Update only the exact registry, intake, approval-currentness,
+      promotion, lifecycle-result/authority, and transaction-preflight symbols
+      listed in SPEC so Charter records retain the HCM-2.2 pair.
+- [ ] Keep compiler `doctor_report_from_inspection` read/proof-only and prove
+      its exact Charter definition closure remains resolved for direct 1.1 and
+      selected 1.2 decisions.
+- [ ] Add exact
+      `crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs` and prove
+      `invalid_compatible_profile_decisions_cannot_produce_charter_intake`
+      refuses before any intake/candidate record is produced.
+- [ ] Do not edit `validate_candidate_v13`,
+      `validate_promotion_intent_v12`, candidate/result schemas or vectors,
+      approval/lineage/lifecycle formats, committed authority, or public APIs.
+- [ ] Prove direct 1.1 and compatible 1.2 decisions produce byte/fingerprint
+      identical intake, candidate, result, approval, promotion, intent, lineage,
+      transaction, recovery/replay, and committed authority.
+- [ ] Replay every HCM-2.2 negative unchanged and all HIGH/CRITICAL callers.
+- [ ] Confirm the shipped resolver still selects 1.1 at P1B exit.
+- [ ] Record status/evidence: pending.
+
+## P1C — Shipped-root adoption
 
 - [ ] Select only the new shipped-root profile ref and exact P1A source closure
       in `shipped_profile_request`.
@@ -52,8 +103,11 @@ implementation is separately selected.
       both `project_context` and `environment_context`.
 - [ ] Preserve exactly three root descriptors, Charter authority, condition
       semantics, vocabulary, and Context Resolution sources.
-- [ ] Replay all CRITICAL upstream flows and prove Work/Decision/Risk remain
-      unselected.
+- [ ] Prove the real resolver returns generic shipped-root 1.2 decisions,
+      immediately passes the exact Charter membrane, and every Charter record
+      still carries the released 1.1 pair.
+- [ ] Replay all CRITICAL upstream flows, the complete HCM-2.2 wall, and prove
+      Work/Decision/Risk remain unselected.
 - [ ] Record status/evidence: pending.
 
 ## P2 — Environment Context
@@ -61,6 +115,10 @@ implementation is separately selected.
 - [ ] Establish a focused RED proving Markdown is currently authoritative.
 - [ ] Write only selected `.handbook/project/environment.yaml` canonical bytes.
 - [ ] Cut CLI/setup/doctor/compiler/flow reads to selected retained YAML.
+- [ ] Update only `AuthorCommand::EnvironmentInventory` help,
+      `author_help_matches_snapshot`,
+      `author_environment_inventory_help_matches_snapshot`, and the one consumed
+      subcommand snapshot added by the amended manifest.
 - [ ] Render Markdown only from canonical bytes.
 - [ ] Remove legacy Environment Inventory authority helpers/templates/fallbacks.
 - [ ] Prove condition, schema, safe path, no-follow, atomicity, retained
@@ -111,7 +169,7 @@ implementation is separately selected.
 
 ## P6 — Aggregate cleanup
 
-- [ ] Confirm P1A–P5 are independently green.
+- [ ] Confirm P1A–P1C and P2–P5 are independently green.
 - [ ] Replace fixed/bridge flow input collection with admitted selected
       descriptors and retained canonical bytes.
 - [ ] Preserve Charter authority, Project Context behavior, registry brief,
@@ -126,6 +184,10 @@ implementation is separately selected.
 ## P7 — Proof, review, and closeout
 
 - [ ] Run every per-family proof and exact Phase 2 exit mapping.
+- [ ] Replay exact 1.1 acceptance, exact 1.2 compatibility, every
+      Project-Authority-field negative, real-path 1.2 selection, byte-identical
+      HCM-2.2 records, and all unchanged HCM-2.2 negative/atomic/recovery
+      matrices.
 - [ ] Run formatting, strict lint, focused crates, full workspace, feature tree,
       package/archive, native Windows, documents, handoff modes, diff check, and
       GitNexus change detection.
@@ -141,3 +203,5 @@ implementation is separately selected.
 - [ ] Commit the mechanical closeout separately, push without force, and verify
       clean origin 0/0.
 - [ ] Stop before HCM-3.x or any automatically inferred implementation.
+- [ ] State in the completed handoff that implementation requires a new explicit
+      top-level selection of that exact handoff and enters read-only P0 first.

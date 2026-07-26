@@ -1,0 +1,127 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.2",
+  "dispatch_id": "20260726T131028Z--HCM-2-4--planning-amendment-causal-closure-2",
+  "created_at_utc": "2026-07-26T13:10:28Z",
+  "source_handoff_ids": [
+    "20260726T050447Z--HCM-2-4--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260726T122626Z--HCM-2-4--planning-amendment-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "planning-and-task-breakdown"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:8c538375d3808bea0d9f3d247a22294a33c31dd7cb44b1de2e03ce8f09fab0b8",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "4b27c134d708e098a5cba99a52090ff3f24bc76e0803f62b1f62975842d16eeb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T122626Z--planning-charter-compatibility-amendment.md",
+        "sha256": "e54f32757aa7f25b64e9f85f7760a8e1ba0906c32d9958c5bc5943146d944216"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T124918Z--planning-amendment-review-1-remediation.md",
+        "sha256": "bdd4f21eb140ec4f23c561f3ad47c9ef2a6b46048b7572f96487c6af6754c4ea"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md",
+        "sha256": "99840ff7dfd7732198d7cec48a236854fcef12f001f7cd5e94f2917ff1494159"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "198db320eb4d3a1f4a1ca8211045c0d6b868a0ad493cd7c56785222ef5ebc917"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "e707c4b016ad6a7ad9a16e489660c8e067b10fa116607a394c628ddc6ad7db3e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:8c538375d3808bea0d9f3d247a22294a33c31dd7cb44b1de2e03ce8f09fab0b8"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "causal_remediation_delta",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "phase_exit",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "supplemental_causal_closure_2"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T130037Z--HCM-2-4--planning-amendment-causal-closure-1.json",
+      "sections": [
+        "different-fresh CLEAN causal closure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The first causal closure returned CLEAN on the complete amendment. Parent staged validation then unmasked only trailing Markdown hard-break spaces in three proof headers. The final supplemental remediation removes those spaces without changing planning meaning, compatibility authority, manifests, selectors, proof commands, impact ceilings, RED/GREEN conditions, or stop gates.",
+  "allowed_scope": [
+    "Replay the six-entry manifest and aggregate fingerprint before review.",
+    "Compare the complete subject with the prior CLEAN fingerprint sha256:9385fbd3b7d1112791a5cf0674a32ad45456b9b776988316b68dd4c802ade74e and verify the only byte delta is removal of the recorded trailing spaces.",
+    "Review the entire exact amended SPEC, plan, todo, and three proof records for remaining P1/P2 defects.",
+    "Verify the exact Charter compatibility boundary, six existing callers plus sole seventh intake caller, eighth-caller RED stop, compiler doctor preservation, P2 manifest correction, and implementation true stop remain unchanged.",
+    "Verify git diff --check is clean for the complete staged planning subject.",
+    "Check only P1/P2 directly caused or unmasked by this final bounded supplemental remediation; do not reopen unrelated discovery."
+  ],
+  "non_goals": [
+    "No implementation, edits, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "No migration, fallback, dual read, loose profile-version acceptance, public API, package, runtime, or HCM-3.x expansion."
+  ],
+  "tasks": [
+    "Verify exact subject identity, predecessor CLEAN review, and final causal lineage.",
+    "Confirm the whitespace-only delta and a clean complete diff check.",
+    "Independently review the full amended planning subject and return CLEAN only if no P1/P2 remains.",
+    "If a P1/P2 remains, report exact evidence and causal lineage for parent disposition."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#priority-decision-matrix",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return blocked if the exact fingerprint, predecessor review, or final supplemental causal lineage cannot be established.",
+    "Report rather than repair any remaining directly caused/unmasked P1/P2.",
+    "Do not delegate, edit, implement, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

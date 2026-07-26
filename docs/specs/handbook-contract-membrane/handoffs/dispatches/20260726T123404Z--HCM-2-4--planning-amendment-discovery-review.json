@@ -1,0 +1,131 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.2",
+  "dispatch_id": "20260726T123404Z--HCM-2-4--planning-amendment-discovery-review",
+  "created_at_utc": "2026-07-26T12:34:04Z",
+  "source_handoff_ids": [
+    "20260726T050447Z--HCM-2-4--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260726T122626Z--HCM-2-4--planning-amendment-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "planning-and-task-breakdown"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:86a23488bb5c6556f38bc14dcb43a115371e424aa2588cc4ffc4544552711d92",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "a66a5d40958ef42e234d0c16d0706435cae25cdcf147cc204f7f82d1715cf270"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T122626Z--planning-charter-compatibility-amendment.md",
+        "sha256": "175795f6ad48dc48427cfb656d1f6eabc3f93eee26efa12184a9f58fb5148fe8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "c436488e8fc2160b0c7745afd8d0a11959ba3654e201f661f6dfdd075807fe53"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "527830e8bdfb51f670983334ec6a9072b818407d7271a5c5844a4d8f654d84c0"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:86a23488bb5c6556f38bc14dcb43a115371e424aa2588cc4ffc4544552711d92"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "phase_exit",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "planning_amendment_discovery_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T050447Z--HCM-2-4--orchestration--planning-completed.json",
+      "sections": [
+        "selected completed planning authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T122626Z--planning-charter-compatibility-amendment.md",
+      "sections": [
+        "Independently reproduced P0 stop",
+        "Selected compatibility design",
+        "Exact live production symbols and impacts",
+        "Bounded P2 selector correction"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "At fa31f65f, resolve_shipped_profile_decisions immediately validates shipped_profile_request decisions through the Charter registry, whose selected-decisions boundary accepts only shipped-root 1.1. The amended plan inserts an exact fail-closed Charter compatibility foundation before shipped-root 1.2 adoption, preserves all HCM-2.2 record identities and validators, and adds only the live-proved missing P2 CLI help/snapshot selectors.",
+  "allowed_scope": [
+    "Replay the four-entry manifest and aggregate fingerprint before review.",
+    "Independently inspect the complete amended SPEC, plan, checklist, proof, selected predecessor handoff, live Rust call path, released 1.1 profile, and exact P2 CLI help evidence.",
+    "Use fresh GitNexus context and upstream impact to validate every amendment symbol, HIGH/CRITICAL warning, no-edit anchor, and production ceiling.",
+    "Review the entire amendment for P1/P2 correctness, internal consistency, implementability, fail-closed behavior, selector completeness, proof sufficiency, and preservation of all unchanged HCM-2.4 decisions.",
+    "Verify the design admits only the exact 1.2 ref/literal fingerprint/full Project Authority descriptor while keeping all HCM-2.2 record identity, candidate/result separation, promotion intent, approval, lineage, lifecycle, recovery, fingerprints, and committed authority unchanged.",
+    "Verify P1A then P1B compatibility then P1C adoption is a causal executable order and the P2 correction is limited to the exact live files/symbols/tests."
+  ],
+  "non_goals": [
+    "No implementation, source/test/definition/template/schema/Cargo/package/runtime/public-API edit, migration, fallback, or dual-read design.",
+    "No edits, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "No reopening of unrelated HCM-2.4 P2-P7 decisions unless a demonstrated P1/P2 inconsistency is caused by this amendment."
+  ],
+  "tasks": [
+    "Verify subject identity and independently reproduce the P0 causal stop from live code and GitNexus.",
+    "Find every actionable P1/P2 in the entire amendment and report findings first with exact file/line evidence.",
+    "Test the proposed compatibility membrane against loose-version, wrong-fingerprint, descriptor-drift, record-identity, lifecycle/lineage, and public-surface failure modes.",
+    "Verify exact selector/test/proof/RED/GREEN/stop-gate consistency across SPEC, plan, checklist, and amendment proof.",
+    "Verify the bounded P2 production/test/snapshot correction from live code.",
+    "Return CLEAN only if no P1/P2 remains; keep P3/P4 advisory and deduplicated."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#priority-decision-matrix",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return blocked if the exact subject fingerprint or selected predecessor cannot be established.",
+    "Report rather than repair any mismatch, unresolved UNKNOWN, wider authority, public API, package, runtime, migration, fallback, dual-read, or HCM-3.x requirement.",
+    "Do not delegate, edit, implement, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

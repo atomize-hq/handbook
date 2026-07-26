@@ -8,14 +8,15 @@ selection.
 ```text
 P0 baseline/inventory
   -> P1A catalog publication/admission
-       -> P1B shipped-root adoption
-       -> P2 environment context --------\
-       -> P3 work specification ----------+-> P6 aggregate flow cleanup -> P7 exit proof
-       -> P4 decision record -------------+
-       -> P5 risk record -----------------/
+       -> P1B Charter compatibility foundation
+            -> P1C shipped-root adoption
+                 -> P2 environment context --------\
+                 -> P3 work specification ----------+-> P6 aggregate flow cleanup -> P7 exit proof
+                 -> P4 decision record -------------+
+                 -> P5 risk record -----------------/
 ```
 
-P2–P5 may be prepared independently after P1B but must land serially when shared registry,
+P2–P5 may be prepared independently after P1C but must land serially when shared registry,
 fixture, proof, or generated inventory files overlap. P6 cannot start until all
 four are committed, clean, and independently green.
 
@@ -38,6 +39,15 @@ For each packet:
 UNKNOWN impact, a legacy fallback, or an unselected dynamic path is a RED stop,
 not an invitation to improvise.
 
+For P1B, the exact production process/module counts in SPEC are ceilings. Live
+source has six existing callers, including compiler
+`doctor_report_from_inspection`. Exactly one seventh
+`validate_selected_decisions` production caller from
+`evaluate_charter_intake` is planned so public intake fails closed. New
+manifested test callers are also allowed. An eighth production caller, another
+process/module/authority class/public surface, or an unexplained larger
+HIGH/CRITICAL result is a parent stop.
+
 ## P0 — Baseline and inventory lock
 
 Entry: separately selected implementation, reviewed planning handoff, clean
@@ -51,17 +61,27 @@ Work:
 
 - replay every existing kind/schema/profile/renderer/intake fingerprint;
 - enumerate exact files and symbols for P1A–P7 from the SPEC selector ceilings;
-- capture the three root descriptors and every existing fixed
+- capture both exact shipped-root definitions, the three root descriptors, the
+  complete shipped-root-to-Charter registry path, every Charter profile-identity
+  producer/currentness consumer, and every existing fixed
   enum/path/bridge/helper/test selector;
 - resolve the current GitNexus UID and impact for every intended symbol edit;
 - freeze HCM-2.1, HCM-2.2, HCM-2.3, flow budget, pipeline handoff, and
-  package/archive preservation commands.
+  package/archive preservation commands;
+- manifest every `hcm_2_2_*` engine integration target, engine lib/all-features
+  matrices, compiler/CLI Charter targets, and the two no-edit
+  `validate_candidate_v13` / `validate_promotion_intent_v12` anchors; and
+- add the exact P2 CLI main/help/snapshot files and named tests from SPEC.
 
 Acceptance:
 
 - no undecided family, source, view, deletion, or proof row;
 - exact file manifests replace every planning glob;
 - HIGH/CRITICAL and UNKNOWN dispositions are explicit; and
+- all compatibility symbols match the exact UIDs/ceilings in SPEC, inventorying
+  compiler doctor as the sixth existing caller, allowing only the planned
+  seventh intake caller, and permitting no other new production
+  caller/process/module or authority class; and
 - no production/test edit has occurred.
 
 ## P1A — Catalog publication and admission closure
@@ -94,13 +114,18 @@ Work:
   SPEC, including kind, intake, singleton renderer, role/path, requiredness,
   and empty later-owned fields; retain lifecycle, Projection, overlay,
   extension, missing, extra, and mismatched dependency refusal;
-- leave loader signatures and public APIs unchanged.
+- leave loader signatures and public APIs unchanged; and
+- prove the 1.2 `project_authority` descriptor equals the released 1.1 row in
+  every field and freeze the completed 1.2 profile's literal authored
+  fingerprint in the immutable HCM-2.4 definition vector.
 
 GREEN:
 
 - exact fingerprint and duplicate-safe validation passes;
 - all five kinds resolve their first-party intake and renderer;
 - the root profile successor has exactly three instances;
+- the literal 1.2 fingerprint is replayable from the complete typed dependency
+  closure and no placeholder remains;
 - inline/unit admission proof accepts exactly the five frozen non-Charter
   descriptor rows and rejects every field mismatch before P3 exercises the Work
   Specification real repository path;
@@ -110,12 +135,72 @@ GREEN:
 Stop if definition admission cannot remain exact-ref, fail-closed, and
 package-owned without a forbidden surface change.
 
-## P1B — Shipped-root successor adoption
+## P1B — Versioned Charter compatibility foundation
 
-Entry: P1A accepted; CRITICAL impact warning acknowledged.
+Entry: P1A accepted; its literal 1.2 fingerprint and exact Project Authority
+descriptor are frozen; all HIGH/CRITICAL warnings are acknowledged.
+
+RED:
+
+- exact 1.2 decisions are rejected by
+  `CharterDefinitionRegistry::validate_selected_decisions`;
+- changing the shipped request alone would fail immediately in
+  `resolve_shipped_profile_decisions`; and
+- Charter record producers currently copy the generic selected profile identity,
+  so accepting 1.2 without a membrane would rewrite protected HCM-2.2 records.
+
+Work:
+
+- keep the shipped request on 1.1 for the entire packet;
+- in the existing `validate_selected_decisions` symbol, admit only the exact
+  1.1 ref/fingerprint tuple and the exact P1A-authored 1.2 tuple;
+- compare every Project Authority descriptor field and subordinate definition
+  from SPEC for both tuples, rejecting all other tuple/version/field shapes;
+- leave `validate_selected_profile` 1.1-only and unchanged;
+- make the existing HCM-2.2 profile ref/fingerprint constants `pub(crate)`
+  without changing their values;
+- update only `evaluate_charter_intake`,
+  `validate_candidate_currentness`, `validate_candidate_contract`,
+  `CharterPromotionWorkflowServiceV1::promote_at`, `build_result`,
+  `validate_definition_authority`, and
+  `CharterAuthorityTransactionServiceV1::preflight` so their Charter records
+  and comparisons retain the HCM-2.2 pair after exact registry validation;
+- retain compiler `doctor_report_from_inspection` as an unchanged sixth-caller
+  read/proof anchor and prove its Charter definition closure remains resolved
+  under direct 1.1 and selected 1.2;
+- add exact
+  `crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs`, including
+  `invalid_compatible_profile_decisions_cannot_produce_charter_intake`, so the
+  new public intake edge rejects an invalid 1.2 tuple before producing records;
+- do not edit candidate/result/promotion-intent validators, schemas, contracts,
+  approval semantics, lineage/lifecycle formats, fingerprints, committed
+  authority, or public signatures; and
+- replay the complete HCM-2.2 wall and all direct HIGH/CRITICAL callers.
+
+GREEN:
+
+- direct 1.1 acceptance and released bytes/fingerprint are unchanged;
+- explicit exact 1.2 decisions pass only the versioned membrane;
+- every tuple, version, descriptor field, subordinate-definition,
+  range/prefix, fallback, and second-read mutation fails closed;
+- direct 1.1 and compatible 1.2 decisions produce byte/fingerprint-identical
+  HCM-2.2 intake, candidate, lifecycle result, approval, promotion, intent,
+  lineage, transaction, recovery/replay, and committed authority;
+- every existing HCM-2.2 negative passes unchanged;
+- the shipped request still resolves 1.1; and
+- GitNexus change detection reports only the exact P1B symbols.
+
+Stop if the 1.2 literal is absent or changes, any Project Authority field
+differs, any HCM-2.2 record byte changes, a no-edit validator must change, or the
+recorded production process/module ceiling is exceeded or an eighth production
+caller appears.
+
+## P1C — Shipped-root successor adoption
+
+Entry: P1B accepted; CRITICAL request/resolver warnings acknowledged.
 
 RED: the built-in request still selects `handbook.profile.shipped-root@1.1.0`
-and omits all P1A successor sources.
+and omits the P1A successor sources.
 
 Work:
 
@@ -129,23 +214,26 @@ Work:
   `handbook.renderer.environment-context-review-markdown@1.0.0`;
 - preserve its three descriptors, condition handling, stable roles,
   vocabularies, Context Resolution sources, and every public signature;
-- replay all 51 affected flows and the exact HCM-2.2/HCM-2.3 preservation wall.
+- prove `resolve_shipped_profile_decisions` still immediately applies the
+  Charter membrane; and
+- replay the complete selected-profile and HCM-2.1–HCM-2.3 preservation wall.
 
 GREEN:
 
 - exactly three root descriptors resolve with identical Charter authority and
   condition semantics;
+- generic consumers observe exact shipped-root 1.2;
+- every Charter record and validator observes the frozen HCM-2.2 1.1 pair;
 - neither Project Context nor Environment Context has a null intake or empty,
   extra, or mismatched renderer selection;
 - Work/Decision/Risk remain source-available but unselected;
-- no outcome changes outside the intended Project Context/Environment support
+- no outcome changes outside intended Project Context/Environment support
   refs; and
-- GitNexus change detection reports only the declared request/admission/source
-  closure.
+- GitNexus change detection reports only the declared request/source closure.
 
 ## P2 — Environment Context vertical
 
-Entry: P1B accepted; Environment Context impact UIDs resolved.
+Entry: P1C accepted; Environment Context impact UIDs resolved.
 
 RED:
 
@@ -159,6 +247,10 @@ Work:
 - validate and atomically write `.handbook/project/environment.yaml` only when
   the selected descriptor condition applies;
 - route CLI, setup, doctor, compiler, manifest, and flow reads to retained YAML;
+- update `AuthorCommand::EnvironmentInventory` help in `crates/cli/src/main.rs`
+  and only the exact inline `author_help_matches_snapshot`, the
+  snapshot-consuming `author_environment_inventory_help_matches_snapshot`, and
+  the one consumed subcommand snapshot listed in SPEC;
 - render human-review Markdown from retained canonical bytes;
 - remove Environment Inventory Markdown templates, authority writers, validators,
   fallback reads, and output-tag exceptions once their replacement tests pass.
@@ -173,7 +265,7 @@ GREEN:
 
 ## P3 — Work Specification / Stage 10 vertical
 
-Entry: P1B accepted; exact pipeline UIDs resolved; CRITICAL warning acknowledged
+Entry: P1C accepted; exact pipeline UIDs resolved; CRITICAL warning acknowledged
 within the implementation selection.
 
 RED:
@@ -214,7 +306,7 @@ API change is a stop, not a packet extension.
 
 ## P4 — Decision Record support proof
 
-Entry: P1B accepted.
+Entry: P1C accepted.
 
 RED: no repository-selected real-path intake/render proof exists.
 
@@ -235,7 +327,7 @@ retained observation, and negative-surface tests pass independently.
 
 ## P5 — Risk Record support proof
 
-Entry: P1B accepted.
+Entry: P1C accepted.
 
 Select `example.profile.hcm-2-4-risk-record@1.0.0` from
 `crates/engine/tests/fixtures/hcm_2_4_risk_record/.handbook/definitions/profiles/risk-record-root-1.0.0.yaml`
@@ -248,7 +340,8 @@ before edits by a fresh reviewer.
 
 ## P6 — Aggregate flow and fixed-selector deletion
 
-Entry: P1A–P5 individually committed and green; no bridge deletion has occurred.
+Entry: P1A–P1C and P2–P5 individually committed and green; no bridge deletion
+has occurred.
 
 RED:
 
@@ -286,6 +379,10 @@ Entry: P6 accepted.
 Work:
 
 - run the SPEC full proof wall and exact Phase 2 exit map;
+- replay direct 1.1 acceptance, exact 1.2 compatibility, every
+  Project-Authority-field negative, real shipped 1.2 selection, byte-identical
+  HCM-2.2 record identity, and all unchanged HCM-2.2 negative/atomic/recovery
+  matrices;
 - update only earned bridge/gate/control-pack rows;
 - run one complete-subject discovery review or bounded same-fingerprint burst;
 - consolidate all P1/P2, remediate once, and obtain a different-fresh
@@ -303,3 +400,7 @@ Exit:
 - every Phase 2 exit row is proven;
 - the branch is clean and synchronized; and
 - stop before HCM-3.x or any other implementation.
+
+Planning completion does not authorize this plan. A later implementation
+session must explicitly select the new exact completed amended-planning
+handoff, and that selection again enters read-only P0 before any edit.

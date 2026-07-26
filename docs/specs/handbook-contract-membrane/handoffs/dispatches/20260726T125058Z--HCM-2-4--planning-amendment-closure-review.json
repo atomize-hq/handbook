@@ -1,0 +1,133 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.2",
+  "dispatch_id": "20260726T125058Z--HCM-2-4--planning-amendment-closure-review",
+  "created_at_utc": "2026-07-26T12:50:58Z",
+  "source_handoff_ids": [
+    "20260726T050447Z--HCM-2-4--orchestration--planning-completed"
+  ],
+  "parent_orchestration_id": "20260726T122626Z--HCM-2-4--planning-amendment-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "planning-and-task-breakdown"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:2f1ab30e763da83e2d405be3d7e00fcf6e478a92f256fbee2016dc7ae609d6e4",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "54880d7cb4271dfea5238ab90090a516e02fc9603d4442b3c607ca02caf1cf53"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T122626Z--planning-charter-compatibility-amendment.md",
+        "sha256": "a80ba0966c8169285c06eb13d5d0aa044f6c2b621ae13c980dfbb11c85e64599"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T124918Z--planning-amendment-review-1-remediation.md",
+        "sha256": "0931c3efa7f45c3344743b3ce1a0a9d0270b7d3c785f82d24695742ffd0b8fec"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "b5757a347739796aa3017d6125dfcd69acf5c3801ed88382260979e331fe45c1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "442eccd717d5ef79e3b6b8e7b83c7565e96ad092d92176dcce987cc99498afad"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:2f1ab30e763da83e2d405be3d7e00fcf6e478a92f256fbee2016dc7ae609d6e4"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "causal_remediation_delta",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "phase_exit",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "planning_amendment_closure_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T123404Z--HCM-2-4--planning-amendment-discovery-review.json",
+      "sections": [
+        "complete amendment discovery review contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T124918Z--planning-amendment-review-1-remediation.md",
+      "sections": [
+        "HCM-2.4-AMEND-REV1-001",
+        "HCM-2.4-AMEND-REV1-002",
+        "Review disposition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery review found two bounded P2 inconsistencies. The remediated subject now authorizes exactly one sixth registry caller from evaluate_charter_intake with a named invalid-1.2 negative test, and limits P2 CLI proof to one inline help assertion plus the one actually consumed subcommand snapshot. No other amendment decision changed.",
+  "allowed_scope": [
+    "Replay the five-entry manifest and aggregate fingerprint before review.",
+    "Use the discovery dispatch and remediation proof to verify both accepted P2 findings are closed consistently in the complete SPEC, plan, checklist, and causal proof.",
+    "Inspect the complete remediated subject, not only prose excerpts, for contradictions caused or unmasked by the remediation.",
+    "Verify exactly six registry callers are planned, with evaluate_charter_intake as the only new production edge, a named invalid-1.2 intake negative, and a seventh caller/new process/module as RED.",
+    "Verify the P2 selector includes main.rs, both exact cli_surface tests, and only handbook-author-environment-inventory-help.txt.",
+    "Verify the exact compatibility command wall and all original HCM-2.2/Charter preservation constraints remain intact."
+  ],
+  "non_goals": [
+    "No general reopening of unrelated unchanged HCM-2.4 planning decisions.",
+    "No implementation, edits, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "No migration, fallback, dual read, loose profile version acceptance, public API, package, runtime, or HCM-3.x expansion."
+  ],
+  "tasks": [
+    "Verify exact remediated subject identity and discovery-review lineage.",
+    "Confirm HCM-2.4-AMEND-REV1-001 is closed by the exact sixth-caller ceiling and negative test across all five subject files.",
+    "Confirm HCM-2.4-AMEND-REV1-002 is closed by the live-consumed one-snapshot selector across all five subject files.",
+    "Return CLEAN only when no remediation-caused or unmasked P1/P2 remains.",
+    "If a P1/P2 remains, report exact evidence and causal lineage for parent disposition."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#priority-decision-matrix",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return blocked if the exact remediated fingerprint or discovery lineage cannot be established.",
+    "Report rather than repair any remaining P1/P2 or wider authority requirement.",
+    "Do not delegate, edit, implement, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
