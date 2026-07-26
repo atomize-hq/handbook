@@ -1,0 +1,457 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260726T153435Z--HCM-0-8--orchestration--review-cycle-hardening-completed",
+  "created_at_utc": "2026-07-26T15:34:35Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": null,
+  "orchestration_id": "20260726T145726Z--HCM-0-8--orchestration",
+  "source_handoff_ids": [
+    "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-26T15:34:35Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T152756Z--HCM-0-8--review-cycle-hardening-supplemental-review.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "review-cycle-hardening-standards",
+      "dispatch_id": "20260726T145726Z--HCM-0-8--review-cycle-hardening-standards-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T145726Z--HCM-0-8--review-cycle-hardening-standards-review.json",
+      "dispatch_fingerprint": "sha256:133254331898a2f476e83db5e893dc2abbdaebe2c4c0ea8b2c85e039eafd190f",
+      "role": "review",
+      "agent_id": "/root/review_cycle_hardening_standards",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:e6cd731c0bbc62b5270f7842c944cd3af46f39ed13f85ea976e4c8595091056e",
+      "result_subject_fingerprint": "sha256:e6cd731c0bbc62b5270f7842c944cd3af46f39ed13f85ea976e4c8595091056e",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "review-cycle-hardening-standards-P2-1"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T145726Z--HCM-0-8--review-cycle-hardening-standards-review.json"
+      ]
+    },
+    {
+      "run_id": "review-cycle-hardening-spec",
+      "dispatch_id": "20260726T145727Z--HCM-0-8--review-cycle-hardening-spec-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T145727Z--HCM-0-8--review-cycle-hardening-spec-review.json",
+      "dispatch_fingerprint": "sha256:653b99b63f749911289647c46c3a4126c00916c4e5d0e76201c283317f2bfb80",
+      "role": "review",
+      "agent_id": "/root/review_cycle_hardening_spec",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:e6cd731c0bbc62b5270f7842c944cd3af46f39ed13f85ea976e4c8595091056e",
+      "result_subject_fingerprint": "sha256:e6cd731c0bbc62b5270f7842c944cd3af46f39ed13f85ea976e4c8595091056e",
+      "review_round": 1,
+      "predecessor_run_id": "review-cycle-hardening-standards",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "review-cycle-hardening-spec-P1-1",
+        "review-cycle-hardening-spec-P2-1"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T145727Z--HCM-0-8--review-cycle-hardening-spec-review.json"
+      ]
+    },
+    {
+      "run_id": "review-cycle-hardening-closure",
+      "dispatch_id": "20260726T151816Z--HCM-0-8--review-cycle-hardening-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T151816Z--HCM-0-8--review-cycle-hardening-closure-review.json",
+      "dispatch_fingerprint": "sha256:8ad815ec94760951b08a644aaf2458975b854f8b9953cabf3b2bc19a911c599e",
+      "role": "review",
+      "agent_id": "/root/review_cycle_hardening_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:6323173d1cb4ded2516fe134027bac3d30c67de35fc3bf1737deab06345d20e4",
+      "result_subject_fingerprint": "sha256:6323173d1cb4ded2516fe134027bac3d30c67de35fc3bf1737deab06345d20e4",
+      "review_round": 2,
+      "predecessor_run_id": "review-cycle-hardening-spec",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "review-cycle-hardening-closure-P1-1",
+        "review-cycle-hardening-closure-P1-2"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T151816Z--HCM-0-8--review-cycle-hardening-closure-review.json"
+      ]
+    },
+    {
+      "run_id": "review-cycle-hardening-supplemental",
+      "dispatch_id": "20260726T152756Z--HCM-0-8--review-cycle-hardening-supplemental-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T152756Z--HCM-0-8--review-cycle-hardening-supplemental-review.json",
+      "dispatch_fingerprint": "sha256:d666b6dd7ef34c84c955d2a4a85dd8396aa39766a90a23ebd24c976c6d5d9915",
+      "role": "review",
+      "agent_id": "/root/review_cycle_hardening_supplemental",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:bf84dbff468643c075db052762ff0068dbddb756fabc1d2087a53855e6166d46",
+      "result_subject_fingerprint": "sha256:bf84dbff468643c075db052762ff0068dbddb756fabc1d2087a53855e6166d46",
+      "review_round": 3,
+      "predecessor_run_id": "review-cycle-hardening-closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T152756Z--HCM-0-8--review-cycle-hardening-supplemental-review.json"
+      ]
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "review-cycle-hardening-standards-remediation",
+      "finding_run_id": "review-cycle-hardening-standards",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-cycle-hardening-closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:6323173d1cb4ded2516fe134027bac3d30c67de35fc3bf1737deab06345d20e4",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "remediation_id": "review-cycle-hardening-spec-remediation",
+      "finding_run_id": "review-cycle-hardening-spec",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-cycle-hardening-closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:6323173d1cb4ded2516fe134027bac3d30c67de35fc3bf1737deab06345d20e4",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "remediation_id": "review-cycle-hardening-closure-remediation",
+      "finding_run_id": "review-cycle-hardening-closure",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "review-cycle-hardening-supplemental",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:bf84dbff468643c075db052762ff0068dbddb756fabc1d2087a53855e6166d46",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "cf9fbe88a70ec46cfbfdd32e9113ea1592b9d36b",
+    "subject_fingerprint": "sha256:bf84dbff468643c075db052762ff0068dbddb756fabc1d2087a53855e6166d46",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T152756Z--HCM-0-8--review-cycle-hardening-supplemental-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T152756Z--HCM-0-8--review-cycle-hardening-supplemental-review.json"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "slice",
+    "detail_resolution": "normal",
+    "temporal_horizon": "current_session",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "slice_closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Harden bounded HCM review loops with typed cycle reasons, validator-enforced causal budgets, exact predecessor admission, and manifest-wide pre-review whitespace verification without changing product runtime behavior.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "cf9fbe88a70ec46cfbfdd32e9113ea1592b9d36b",
+    "dirty": false,
+    "changed_paths": []
+  },
+  "work_completed": [
+    "Added internal-dispatch v1.3 with typed discovery, closure, and supplemental-causal review cycles plus mandatory subject hygiene.",
+    "Enforced exact causal triggers, adjacent-cycle remediation, changed post-remediation fingerprints, CLEAN terminality, and a two-supplemental ceiling.",
+    "Froze predecessor dispatch and handoff-record corpora while rejecting new predecessor execution or closeout lineage.",
+    "Added a pinned dependency-complete live dispatch verifier that checks every manifest entry for hashes and trailing spaces or tabs.",
+    "Obtained bounded two-axis discovery review, different-fresh closure review, causal supplemental remediation, and final CLEAN review."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.3.schema.json",
+      "status": "completed",
+      "summary": "Current typed-cycle and subject-hygiene internal dispatch schema."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "completed",
+      "summary": "Fail-closed cycle, predecessor-corpus, live-manifest, whitespace, and adversarial self-test enforcement."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "status": "completed",
+      "summary": "Dependency-complete pre-review gate and exact bounded causal-cycle operating rules."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T152756Z--HCM-0-8--review-cycle-hardening-supplemental-review.json",
+      "status": "completed",
+      "summary": "Final CLEAN supplemental causal review over the exact remediated subject."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-0.8-RCH-D1",
+      "summary": "Every new review uses an internal-dispatch v1.3 typed cycle; predecessor versions are immutable validation-only evidence.",
+      "authority_effect": "New execution and closeout lineage cannot bypass cycle reasons or subject hygiene through an older schema version.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.3.schema.json",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.8-RCH-D2",
+      "summary": "Causal remediation crosses into the immediately following cycle with a changed subject fingerprint.",
+      "authority_effect": "A CLEAN peer in the same burst or an unchanged adjacent cycle cannot launder a blocking finding.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.8-RCH-D3",
+      "summary": "Every reviewer launch uses the pinned dependency-complete live dispatch verification command.",
+      "authority_effect": "The manifest-wide whitespace and hash gate is executable before review rather than deferred to closeout.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "review-cycle-hardening-standards-P2-1",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "review-cycle-hardening-standards",
+      "summary": "The documented plain-Python pre-review command lacked the required jsonschema dependency.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md"
+      ]
+    },
+    {
+      "finding_id": "review-cycle-hardening-spec-P1-1",
+      "classification": "local_remediation",
+      "severity": "critical",
+      "priority": "P1",
+      "status": "remediated",
+      "source_run_id": "review-cycle-hardening-spec",
+      "summary": "New predecessor dispatches and all-untyped new lineage could bypass the v1.3 controls.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "review-cycle-hardening-spec-P2-1",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "review-cycle-hardening-spec",
+      "summary": "The manifest-wide negative proof checked only one entry and only trailing spaces.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "review-cycle-hardening-closure-P1-1",
+      "classification": "local_remediation",
+      "severity": "critical",
+      "priority": "P1",
+      "status": "remediated",
+      "source_run_id": "review-cycle-hardening-closure",
+      "summary": "A newly created handoff-record v1.2 could still bypass typed-cycle enforcement.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "review-cycle-hardening-closure-P1-2",
+      "classification": "local_remediation",
+      "severity": "critical",
+      "priority": "P1",
+      "status": "remediated",
+      "source_run_id": "review-cycle-hardening-closure",
+      "summary": "An adjacent causal review cycle could retain the unchanged pre-remediation subject fingerprint.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T152756Z--HCM-0-8--review-cycle-hardening-supplemental-review.json",
+      "status": "passed",
+      "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T152756Z--HCM-0-8--review-cycle-hardening-supplemental-review.json"
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+    },
+    {
+      "command": "npx gitnexus detect-changes --scope staged --repo handbook --limit 200",
+      "status": "passed",
+      "evidence_ref": "MEDIUM risk; 14 files, 45 symbols, 4 affected validation flows; no HIGH or CRITICAL result"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence_ref": null
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ],
+      "reason": "Freeze the v1.3 dispatch, causal-cycle, predecessor-corpus, and executable pre-review contracts.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "Regression rules"
+      ],
+      "reason": "Record typed-cycle, whitespace, predecessor, and causal-budget regression gates.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+      ],
+      "reason": "Make the bounded loop and dependency-complete pre-review gate operational.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage"
+      ],
+      "reason": "Define immutable predecessor admission and exact typed causal lineage.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Decision and retained rigor"
+      ],
+      "reason": "Keep inventory semantics aligned with machine-enforced cycle boundaries.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No continuation is required for the HCM-0.8 review-cycle hardening.",
+    "condition": "Completed and CLEAN.",
+    "must_read": [],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not infer authority to implement HCM-2.4 from this control-plane closeout."
+    ],
+    "acceptance_criteria": [
+      "Reviewed primary commit and mechanical closeout commit remain synchronized."
+    ],
+    "stop_conditions": []
+  },
+  "supersedes": [],
+  "chat_summary": "Completed HCM-0.8 review-cycle hardening: typed v1.3 cycles, exact causal budgets, immutable predecessor corpora, dependency-complete live manifest/whitespace verification, and adversarial self-tests. Bounded supplemental review was CLEAN with no unresolved findings."
+}
