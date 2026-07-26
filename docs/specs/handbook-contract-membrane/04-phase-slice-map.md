@@ -660,9 +660,11 @@ For a high-risk packet, the parent may dispatch a bounded same-fingerprint
 review burst with disjoint lenses such as correctness/recovery,
 contract/schema, platform/security, and API/scope. Findings are consolidated
 before one remediation pass. The default budget then permits one
-different-fresh delta-focused closure review; a remaining demonstrated P1/P2
-stops non-completed unless explicit authority extends the budget. Review bursts
-do not replace aggregate subject-identity and proof verification.
+different-fresh delta-focused closure review plus at most two supplemental
+causal remediation/closure cycles for P1/P2s directly caused or unmasked by the
+preceding remediation. Unrelated blockers, material scope/risk expansion, or an
+exhausted allowance stop non-completed. Review bursts do not replace aggregate
+subject-identity and proof verification.
 
 ## Slice packet layout
 

@@ -220,18 +220,21 @@ When P1/P2 findings are valid:
 4. affected verification reruns;
 5. a different fresh reviewer receives the new subject fingerprint and may
    focus on the material delta plus affected contracts/call paths/proof;
-6. the default automatic budget ends after that closure review: CLEAN proceeds,
-   while any remaining or newly demonstrated P1/P2 records a bounded
-   partial/blocked stop for explicit scope/priority adjudication rather than
-   starting another automatic loop.
+6. CLEAN proceeds; a P1/P2 directly caused or unmasked by the preceding
+   remediation may use one of at most two supplemental causal
+   remediation/closure cycles, while an unrelated blocker, material scope/risk
+   expansion, or exhausted allowance records a bounded partial/blocked stop.
 
 A bounded review burst may use multiple fresh read-only agents with disjoint
 lenses against one identical subject fingerprint. Consolidation happens before
 remediation so independently discoverable issues are fixed in one pass.
 Unless the selected plan explicitly authorizes otherwise, the review budget is
 one such discovery review/burst, one consolidated remediation, and one
-different-fresh delta-focused closure review. Budget exhaustion never converts
-a valid P1/P2 into accepted debt.
+different-fresh delta-focused closure review plus at most two supplemental
+causal remediation/closure cycles. Each supplemental cycle stays within the
+selected scope, authority, and risk ceiling, consolidates causally related
+findings, and does not reopen general discovery. Budget exhaustion never
+converts a valid P1/P2 into accepted debt.
 
 A completed v1.3 record fails semantic validation when a P1/P2 findings review
 lacks typed successful parent/delegated remediation, delegated remediation is
@@ -240,9 +243,10 @@ its result fingerprint, a reviewer is reused after remediation, dispatch/result
 lineage mismatches, the final completed review is not clean, or the final clean
 review does not bind the replayable reviewed-state manifest/fingerprint. A
 closure re-review may identify another P1/P2, but the default budget then
-requires a bounded non-completed stop. Continuing with another remediation and
-fresh review requires explicit additional authority and a recorded budget
-extension; it is not automatic.
+admits another remediation and fresh closure review only when the blocker was
+directly caused or unmasked by the preceding remediation and a supplemental
+causal cycle remains. Otherwise the record stops non-completed; continuing
+requires explicit additional authority and a recorded budget extension.
 It also fails when a finding lacks exact source-run linkage, a clean review
 carries P1/P2, a `findings` verdict carries no P1/P2, a blocking finding is not
 resolved/remediated, or an advisory remains open rather than inventoried or

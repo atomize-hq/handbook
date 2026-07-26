@@ -194,8 +194,11 @@ user starts top-level orchestrator with explicit phase/slice
 
 Escalation is a normal resolution transition, not a failure. Silent scope widening and user-mediated hopping between otherwise delegable internal rounds are failures.
 The default automatic review budget is one discovery review/burst, one
-consolidated remediation, and one delta-focused closure review; extending it
-requires explicit authority rather than another automatic loop.
+consolidated remediation, one delta-focused closure review, and at most two
+supplemental causal remediation/closure cycles for P1/P2s directly caused or
+unmasked by the preceding remediation. Unrelated blockers, material scope/risk
+expansion, or exhaustion stop non-completed for explicit authority rather than
+restarting open-ended discovery.
 
 ## Initial program conclusion
 

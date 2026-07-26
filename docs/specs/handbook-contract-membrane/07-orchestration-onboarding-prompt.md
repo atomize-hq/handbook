@@ -378,10 +378,14 @@ and absence of remediation-caused regression. A newly observed issue outside
 that boundary is P3 unless the parent can demonstrate a P1/P2 effect on the
 selected integrated outcome under `09`.
 
-If a valid P1/P2 remains or is introduced when the declared review budget is
-exhausted, stop with a bounded partial/blocked result and request explicit
-scope/priority authority. Do not silently waive it and do not begin another
-automatic implement-review-fix cycle.
+When a closure review demonstrates a P1/P2 directly caused or unmasked by the
+preceding remediation, the parent may use up to two supplemental causal
+remediation/closure cycles without returning to the user, provided scope,
+authority, and risk ceiling remain unchanged. Consolidate every causally
+related finding in each cycle and keep its re-review delta-focused. Stop with a
+bounded partial/blocked result when the blocker is unrelated, requires material
+scope/risk expansion, or remains after the two supplemental cycles. Do not
+silently waive it or restart open-ended discovery.
 
 For a multi-packet slice, packet reviewers may review bounded intermediate
 subjects. Final slice closeout must use a different fresh reviewer over the

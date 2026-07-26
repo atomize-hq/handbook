@@ -33,10 +33,15 @@ quality standard:
 
 The default automatic review budget is one complete-subject discovery review
 or same-fingerprint burst, one consolidated remediation pass, and one
-different-fresh delta-focused closure review. The selected plan or dispatch may
-declare a smaller or explicitly approved larger budget. Exhausting that budget
-does not waive a valid P1/P2: it ends automatic churn and returns a bounded
-partial/blocked result for parent or human scope/priority adjudication.
+different-fresh delta-focused closure review. If that closure reveals a valid
+P1/P2 directly caused or unmasked by the preceding remediation, the parent may
+run at most two supplemental causal remediation/closure cycles without new
+human authority, provided the work remains inside the selected scope,
+authority, and risk ceiling. Each cycle consolidates all causally related
+findings and remains delta-focused; it does not reopen general discovery.
+Unrelated P1/P2, material scope/risk expansion, or exhaustion of the two-cycle
+allowance returns a bounded partial/blocked result for explicit adjudication.
+No budget limit waives a valid P1/P2.
 
 Rejected alternatives are eliminating independent review, treating failing
 selected proof as backlog, allowing self-approval, or automatically waiving a

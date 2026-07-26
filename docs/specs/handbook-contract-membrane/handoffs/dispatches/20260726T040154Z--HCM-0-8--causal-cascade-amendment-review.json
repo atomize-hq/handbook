@@ -1,0 +1,150 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.2",
+  "dispatch_id": "20260726T040154Z--HCM-0-8--causal-cascade-amendment-review",
+  "created_at_utc": "2026-07-26T04:01:54Z",
+  "source_handoff_ids": [
+    "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed"
+  ],
+  "parent_orchestration_id": "20260726T040154Z--HCM-2-4--planning-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:82f0d2334f4988c0dfb28fbdd96a66e359269e3d661a8fe984e2a42e8e40e437",
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "2005dc1a3926344bbe6cba4eb6cbf9ff73f8b99e15959c21742f800cf18c4385"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "9fc9813cf2897fadb7ab3b570baf6b7d0123810b5e5003b636b26466f35789ca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "f8b6d66da274635ba6802720055f3559150f937c229cb89786e531625bb88f65"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "19435b66c33fc2276becea3fa1a5c687dfa1a5deba619347b7e9d45dc07b4391"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sha256": "ba782942702d55ffbb7c45b8eb48c6149be9e66eef6b4ab9b1a5a8b7815dc16b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "763b20a010b28f4de243283075202f196d1ffe1c2e38dc2ea190a5fa0d0b9bb5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "69cac23128688d1259f559b097f4fecf21a21b2b07c141369c8e60987de34ce5"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:82f0d2334f4988c0dfb28fbdd96a66e359269e3d661a8fe984e2a42e8e40e437"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "amendment",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "control_pack",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "complete_subject_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed.json",
+      "sections": [
+        "Completed bounded-review calibration closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage"
+      ]
+    }
+  ],
+  "repo_truth": "At synchronized baseline HEAD 2b56b33941d5bd70acbe6b2c2cf897502d424e1e, exactly seven authorized Markdown control-pack files carry a 52-insertion/30-deletion causal-cascade amendment. The amendment retains one complete-subject discovery review or same-fingerprint burst, one consolidated remediation, and one different-fresh delta-focused closure review, then permits at most two supplemental causal remediation/closure cycles only for valid P1/P2 findings directly caused or unmasked by the preceding remediation. Supplemental cycles remain within selected scope, authority, and risk ceiling, consolidate causally related findings, and never reopen general discovery. Unrelated blockers, material expansion, or exhausted allowance stop non-completed; no budget limit waives a valid P1/P2. No schema, validator, template, ledger, handoff record, Rust, test, Cargo, dependency, package, or version file is in the frozen subject.",
+  "allowed_scope": [
+    "Replay the seven-entry manifest and exact aggregate fingerprint before reviewing.",
+    "Review cross-document consistency of the causal-cascade allowance across the seven frozen Markdown files.",
+    "Verify preservation of demonstrated P1/P2 blocking rigor under the integrated-outcome rubric.",
+    "Verify that supplemental cycles require direct causal or unmasking lineage to the preceding remediation, retain selected scope/authority/risk ceilings, consolidate causally related findings, and remain delta-focused.",
+    "Verify correct bounded non-completed terminal behavior for unrelated blockers, material scope/risk expansion, and allowance exhaustion.",
+    "Verify the diff contains no schema, validator, code, test, dependency, package, version, or unrelated semantic change.",
+    "Run the existing handoff validator, both handoff self-tests, changed-document link/format checks, and git diff whitespace checks."
+  ],
+  "non_goals": [
+    "No open-ended adversarial discovery or general robustness campaign.",
+    "No edits, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "No HCM-2.4 planning or implementation review.",
+    "No schema, validator, template, ledger, handoff-record, Rust, test, Cargo, dependency, package, version, public API, unsafe-policy, or unrelated control-pack change.",
+    "No recommendation to waive a demonstrated P1/P2 because of budget."
+  ],
+  "tasks": [
+    "Verify subject identity and compare the complete seven-file diff against baseline HEAD.",
+    "Apply the integrated-outcome P1/P2/P3/P4 rubric from 09 exactly.",
+    "Check each allowed review lens without widening beyond the frozen amendment.",
+    "Return findings first with evidence and stable IDs; P1/P2 must demonstrate failure of the selected amendment outcome under a supported or repository-reachable state.",
+    "Return CLEAN only when no unresolved demonstrated P1/P2 remains; keep any P3/P4 visible with a canonical-inventory disposition."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#priority-decision-matrix",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#cross-cutting-regression-rules"
+  ],
+  "stop_conditions": [
+    "Return blocked if the exact subject manifest cannot be replayed or required validation infrastructure is unavailable.",
+    "Return any demonstrated P1/P2 to the parent with exact causal and outcome evidence; do not edit or widen scope.",
+    "Do not investigate unrelated robustness, begin HCM-2.4 work, or delegate."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

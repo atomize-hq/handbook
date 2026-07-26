@@ -3432,11 +3432,14 @@ remediation record. Its owner is either `parent_orchestrator` with durable
 evidence or a completed delegated `remediation` run. The remediation names the
 findings run, result fingerprint, and different-fresh completed re-review run.
 The default automatic budget is one discovery review/burst, one consolidated
-remediation, and one different-fresh delta-focused closure review. If that
-closure review reports a demonstrated P1/P2, the record stops non-completed
-unless explicit additional scope/priority authority extends the budget. The
-last review in a completed record must be clean. Failed or wrong-role work
-cannot satisfy remediation lineage.
+remediation, and one different-fresh delta-focused closure review, followed by
+at most two supplemental causal remediation/closure cycles for demonstrated
+P1/P2s directly caused or unmasked by the preceding remediation. Supplemental
+cycles remain inside the selected scope, authority, and risk ceiling and do not
+reopen general discovery. An unrelated blocker, material expansion, or
+exhausted allowance stops non-completed unless explicit authority extends the
+budget. The last review in a completed record must be clean. Failed or
+wrong-role work cannot satisfy remediation lineage.
 Every v1.3 finding ID must also resolve through its `source_run_id` to that
 review run's `finding_refs`. Priority/severity pairs are exact. A clean review
 cannot carry P1/P2; a `findings` review must carry at least one P1/P2.
@@ -3472,8 +3475,9 @@ implement or document
            -> verify the material delta and affected proof
            -> different fresh delta-focused closure reviewer
            -> CLEAN: close
-           -> P1/P2: bounded non-completed stop unless review budget is
-              explicitly extended
+           -> causally revealed P1/P2: at most two supplemental
+              remediation/closure cycles inside unchanged authority
+           -> unrelated/expanded/exhausted P1/P2: bounded non-completed stop
 ```
 
 The orchestrator may not self-approve. A dispatch artifact proves a bounded job was specified; only captured built-in agent identity/status plus reconciled results prove that the job was executed.
