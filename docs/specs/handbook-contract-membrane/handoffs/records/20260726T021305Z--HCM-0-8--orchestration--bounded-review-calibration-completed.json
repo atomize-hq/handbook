@@ -1,0 +1,784 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed",
+  "created_at_utc": "2026-07-26T02:13:05Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": null,
+  "orchestration_id": "20260726T000121Z--HCM-0-8--control-pack-calibration",
+  "source_handoff_ids": [
+    "20260714T150800Z--HCM-0-8--orchestration--internal-delegation-control-plane-closed",
+    "20260725T220053Z--HCM-2-3--orchestration--implementation-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-26T02:13:05Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T020330Z--HCM-0-8--bounded-calibration-closure-review.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "calibration-review-1",
+      "dispatch_id": "20260726T000121Z--HCM-0-8--fresh-review-process-calibration",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T000121Z--HCM-0-8--fresh-review-process-calibration.json",
+      "dispatch_fingerprint": "sha256:57338a2cd230d1f2f4ce928a5f37a515042831fc7b1f647f588d474b9b55231f",
+      "role": "review",
+      "agent_id": "/root/control_pack_calibration_review_56",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "documentation-and-adrs"
+      ],
+      "subject_fingerprint": "sha256:1a1239a039deb48d448f6381c6450e86d5665ea3b4b9af3c25aa051152308373",
+      "result_subject_fingerprint": "sha256:1a1239a039deb48d448f6381c6450e86d5665ea3b4b9af3c25aa051152308373",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.8-CAL-R1-001",
+        "HCM-0.8-CAL-R1-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T000121Z--HCM-0-8--fresh-review-process-calibration.json"
+      ]
+    },
+    {
+      "run_id": "calibration-review-2",
+      "dispatch_id": "20260726T003008Z--HCM-0-8--fresh-calibration-remediation-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T003008Z--HCM-0-8--fresh-calibration-remediation-review.json",
+      "dispatch_fingerprint": "sha256:494371f5c010ac92bdb88304bf95a08fb7ba35a7bafd1df51b087ec73f736851",
+      "role": "review",
+      "agent_id": "/root/control_pack_calibration_rereview_56",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "documentation-and-adrs"
+      ],
+      "subject_fingerprint": "sha256:3cfeff7a246ab856f15a2e6dfd21b1c6212abaa5cb89b7b671ce57abf3439451",
+      "result_subject_fingerprint": "sha256:3cfeff7a246ab856f15a2e6dfd21b1c6212abaa5cb89b7b671ce57abf3439451",
+      "review_round": 2,
+      "predecessor_run_id": "calibration-review-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.8-CAL-R2-001",
+        "HCM-0.8-CAL-R2-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T003008Z--HCM-0-8--fresh-calibration-remediation-review.json"
+      ]
+    },
+    {
+      "run_id": "calibration-review-3",
+      "dispatch_id": "20260726T004240Z--HCM-0-8--fresh-calibration-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T004240Z--HCM-0-8--fresh-calibration-closure-review.json",
+      "dispatch_fingerprint": "sha256:f4aa01ff8aa53b44faf8dae3701107d72d2f096df1daa6e774ac31e87d951ee0",
+      "role": "review",
+      "agent_id": "/root/control_pack_calibration_closure_review_56",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "documentation-and-adrs"
+      ],
+      "subject_fingerprint": "sha256:70f75326207b008d0f9da90dc3b26d316fd95ab9188927152fc4ed018c3a5e76",
+      "result_subject_fingerprint": "sha256:70f75326207b008d0f9da90dc3b26d316fd95ab9188927152fc4ed018c3a5e76",
+      "review_round": 3,
+      "predecessor_run_id": "calibration-review-2",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.8-CAL-R3-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T004240Z--HCM-0-8--fresh-calibration-closure-review.json"
+      ]
+    },
+    {
+      "run_id": "calibration-review-4",
+      "dispatch_id": "20260726T010420Z--HCM-0-8--fresh-calibration-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T010420Z--HCM-0-8--fresh-calibration-final-review.json",
+      "dispatch_fingerprint": "sha256:75ec6d730927f89cc90f19e974c8cb72940b10f3a3a07811eebda61457d8d131",
+      "role": "review",
+      "agent_id": "/root/control_pack_calibration_final_review_56",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "documentation-and-adrs"
+      ],
+      "subject_fingerprint": "sha256:da01bc6c21a2e835903771b995e55c04b423caaa87ddabb4f9fe535a971c3245",
+      "result_subject_fingerprint": "sha256:da01bc6c21a2e835903771b995e55c04b423caaa87ddabb4f9fe535a971c3245",
+      "review_round": 4,
+      "predecessor_run_id": "calibration-review-3",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.8-CAL-R4-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T010420Z--HCM-0-8--fresh-calibration-final-review.json"
+      ]
+    },
+    {
+      "run_id": "calibration-review-5",
+      "dispatch_id": "20260726T012107Z--HCM-0-8--fresh-calibration-clean-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T012107Z--HCM-0-8--fresh-calibration-clean-review.json",
+      "dispatch_fingerprint": "sha256:9c295002b4cb4a61c508a514903f254a92a64a810990d3b7cd8fe2d34eee259b",
+      "role": "review",
+      "agent_id": "/root/control_pack_calibration_clean_review_56",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "documentation-and-adrs"
+      ],
+      "subject_fingerprint": "sha256:c1b7b5dfe61fc1f85280f514adda81688e5b7f0e750130997e871da1813e444a",
+      "result_subject_fingerprint": "sha256:c1b7b5dfe61fc1f85280f514adda81688e5b7f0e750130997e871da1813e444a",
+      "review_round": 5,
+      "predecessor_run_id": "calibration-review-4",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.8-CAL-R5-001",
+        "HCM-0.8-CAL-R5-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T012107Z--HCM-0-8--fresh-calibration-clean-review.json"
+      ]
+    },
+    {
+      "run_id": "calibration-review-6",
+      "dispatch_id": "20260726T013844Z--HCM-0-8--fresh-calibration-final-clean-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T013844Z--HCM-0-8--fresh-calibration-final-clean-review.json",
+      "dispatch_fingerprint": "sha256:63e38813a50160705987cac1396e3e3926f3e4cdefd304ca8df461977efb79ed",
+      "role": "review",
+      "agent_id": "/root/control_pack_calibration_sixth_review_56",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "documentation-and-adrs"
+      ],
+      "subject_fingerprint": "sha256:60ce437de331ef2fe820e1382ed0ef7300f289dcfc42e82d28af5f164652289d",
+      "result_subject_fingerprint": "sha256:60ce437de331ef2fe820e1382ed0ef7300f289dcfc42e82d28af5f164652289d",
+      "review_round": 6,
+      "predecessor_run_id": "calibration-review-5",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.8-CAL-R6-001",
+        "HCM-0.8-CAL-R6-002",
+        "HCM-0.8-CAL-R6-003"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T013844Z--HCM-0-8--fresh-calibration-final-clean-review.json"
+      ]
+    },
+    {
+      "run_id": "calibration-review-7-interrupted",
+      "dispatch_id": "20260726T015351Z--HCM-0-8--fresh-calibration-seventh-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T015351Z--HCM-0-8--fresh-calibration-seventh-review.json",
+      "dispatch_fingerprint": "sha256:7d6a6690db72453d9e5dca3f2f11c6891a08c1bdbb561d125609a1edec34fe27",
+      "role": "review",
+      "agent_id": "/root/control_pack_calibration_seventh_review_56",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "documentation-and-adrs"
+      ],
+      "subject_fingerprint": "sha256:b3c3b5ce1987a3a4d881c2ad5aa344f098f512061110419d778a9529d48d571d",
+      "result_subject_fingerprint": "sha256:b3c3b5ce1987a3a4d881c2ad5aa344f098f512061110419d778a9529d48d571d",
+      "review_round": 7,
+      "predecessor_run_id": "calibration-review-6",
+      "remediation_for_run_ids": [],
+      "final_status": "interrupted",
+      "verdict": "blocked",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T015351Z--HCM-0-8--fresh-calibration-seventh-review.json"
+      ]
+    },
+    {
+      "run_id": "calibration-bounded-closure-review",
+      "dispatch_id": "20260726T020330Z--HCM-0-8--bounded-calibration-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T020330Z--HCM-0-8--bounded-calibration-closure-review.json",
+      "dispatch_fingerprint": "sha256:6ee8d988dc7ce9651d01e589ba61e16cceb55cf239fbce8de581a6e8c1ec549f",
+      "role": "review",
+      "agent_id": "/root/control_pack_bounded_closure_56",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "documentation-and-adrs"
+      ],
+      "subject_fingerprint": "sha256:e730375583686b957fdd8403e58d1bd733dc4695d323d7af7eaae3d235077965",
+      "result_subject_fingerprint": "sha256:e730375583686b957fdd8403e58d1bd733dc4695d323d7af7eaae3d235077965",
+      "review_round": 8,
+      "predecessor_run_id": "calibration-review-7-interrupted",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T020330Z--HCM-0-8--bounded-calibration-closure-review.json"
+      ]
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "HCM-0.8-CAL-REM-1",
+      "finding_run_id": "calibration-review-1",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "calibration-review-2",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:3cfeff7a246ab856f15a2e6dfd21b1c6212abaa5cb89b7b671ce57abf3439451",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.2.schema.json",
+        "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.3.schema.json"
+      ]
+    },
+    {
+      "remediation_id": "HCM-0.8-CAL-REM-2",
+      "finding_run_id": "calibration-review-2",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "calibration-review-3",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:70f75326207b008d0f9da90dc3b26d316fd95ab9188927152fc4ed018c3a5e76",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "remediation_id": "HCM-0.8-CAL-REM-3",
+      "finding_run_id": "calibration-review-3",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "calibration-review-4",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:da01bc6c21a2e835903771b995e55c04b423caaa87ddabb4f9fe535a971c3245",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "remediation_id": "HCM-0.8-CAL-REM-4",
+      "finding_run_id": "calibration-review-4",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "calibration-review-5",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:c1b7b5dfe61fc1f85280f514adda81688e5b7f0e750130997e871da1813e444a",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "remediation_id": "HCM-0.8-CAL-REM-5",
+      "finding_run_id": "calibration-review-5",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "calibration-review-6",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:60ce437de331ef2fe820e1382ed0ef7300f289dcfc42e82d28af5f164652289d",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.2.schema.json",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "remediation_id": "HCM-0.8-CAL-REM-6",
+      "finding_run_id": "calibration-review-6",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "calibration-bounded-closure-review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:e730375583686b957fdd8403e58d1bd733dc4695d323d7af7eaae3d235077965",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.2.schema.json",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "b8d07ce711b8bc3cae66b8d20da05cddcee2cdff",
+    "subject_fingerprint": "sha256:e730375583686b957fdd8403e58d1bd733dc4695d323d7af7eaae3d235077965",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T020330Z--HCM-0-8--bounded-calibration-closure-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T020330Z--HCM-0-8--bounded-calibration-closure-review.json"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "HCM-0.8 review-process calibration",
+    "detail_resolution": "high",
+    "temporal_horizon": "completed_orchestration",
+    "authority_horizon": "documentation-only control-pack calibration",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "bounded_clean_two_commit_closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Calibrate the HCM control-pack review workflow so quality remains fail-closed while advisory findings stop causing mandatory churn, automatic review has a terminal budget, P2 requires demonstrated selected-outcome impact, and HCM-2.4 can start under the bounded flow.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Decision and retained rigor",
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "b8d07ce711b8bc3cae66b8d20da05cddcee2cdff",
+    "dirty": false,
+    "changed_paths": []
+  },
+  "work_completed": [
+    "Established P1/P2 blocking and P3/P4 advisory inventory semantics with exact severity mapping, comparison keys, and durable registration.",
+    "Added same-subject review bursts, delta-focused re-review, tiered verification, mechanical-only deltas, and bounded ancillary-surface guidance.",
+    "Added current internal-dispatch v1.2 and handoff-record v1.3 schemas plus fail-closed semantic validation and adversarial self-tests.",
+    "Closed all six findings rounds, stopped the accidental open-ended seventh review, and added the terminal automatic review budget plus integrated-outcome P2 threshold.",
+    "Obtained bounded different-fresh CLEAN review with zero findings/advisories over the exact twenty-path subject sha256:e730375583686b957fdd8403e58d1bd733dc4695d323d7af7eaae3d235077965.",
+    "Created reviewed primary calibration commit b8d07ce711b8bc3cae66b8d20da05cddcee2cdff."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "status": "completed",
+      "summary": "Canonical P1-P4 rubric, durable advisory inventory, integrated-outcome priority rule, and terminal review budget."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "status": "completed",
+      "summary": "Revised orchestration flow with bounded discovery, consolidated remediation, delta-focused closure, and no automatic loop after budget exhaustion."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.3.schema.json",
+      "status": "completed",
+      "summary": "Current closeout schema with exact priority, status, source-run, remediation, and final-clean linkage."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.2.schema.json",
+      "status": "completed",
+      "summary": "Current review/advisory-aware replayable-subject dispatch schema."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "completed",
+      "summary": "Schema routing, semantic lineage, canonical inventory admission, manifest-path validation, and negative self-tests."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T020330Z--HCM-0-8--bounded-calibration-closure-review.json",
+      "status": "completed",
+      "summary": "Final twenty-path bounded closure review subject and CLEAN result envelope."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned v1.3 completed calibration closeout."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-0.8-CAL-D1",
+      "summary": "CLEAN means no unresolved valid P1/P2; P3/P4 remain visible, durable, non-blocking advisories.",
+      "authority_effect": "Quality gates remain blocking for demonstrated selected-outcome defects without converting optional improvements into mandatory loops.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.8-CAL-D2",
+      "summary": "Default automatic review is limited to one discovery review/burst, one consolidated remediation, and one different-fresh delta-focused closure review.",
+      "authority_effect": "A remaining demonstrated P1/P2 stops non-completed for explicit adjudication; it is neither waived nor automatically fed into another loop.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.8-CAL-D3",
+      "summary": "P2 requires demonstrated impact on the selected integrated outcome under a supported or repository-reachable state.",
+      "authority_effect": "Defense-in-depth disagreement, malformed-input hardening, and speculative robustness are P3 unless they bypass authority or defeat an explicitly independent gate.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-0.8-CAL-R1-001",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-1",
+      "summary": "Review dispatches required advisory disposition but the then-current schema did not enforce it.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.2.schema.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-CAL-R1-002",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-1",
+      "summary": "The first v1.3 draft did not bind finding priority, status, source review, and remediation lineage.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.3.schema.json",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-CAL-R2-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-2",
+      "summary": "A clean run could reference an earlier run's blocking finding and bypass exact source-run ownership.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-CAL-R2-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-2",
+      "summary": "The historical-admission self-test did not initially isolate both new current schema versions.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-CAL-R3-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-3",
+      "summary": "An inventoried advisory status could be asserted without a matching durable inventory row.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-CAL-R4-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-4",
+      "summary": "Malformed or orphan partial inventory rows could be mistaken for canonical registration.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-CAL-R5-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-5",
+      "summary": "Unicode numeric lookalikes could pass the four-digit HCM-RF suffix check.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-CAL-R5-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-5",
+      "summary": "Manifest paths initially admitted Windows drive, UNC, backslash, and traversal forms.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.2.schema.json",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-CAL-R6-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-6",
+      "summary": "An embedded NUL manifest path reached resolution and raised an uncontrolled exception.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.2.schema.json",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-CAL-R6-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-6",
+      "summary": "Literal dot was schema-rejected but initially passed the direct semantic path check.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-CAL-R6-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "calibration-review-6",
+      "summary": "A table in a later section or duplicated Inventory section could be mistaken for canonical advisory registration.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "bounded final subject replay",
+      "status": "passed",
+      "evidence_ref": "20/20 paths; sha256:e730375583686b957fdd8403e58d1bd733dc4695d323d7af7eaae3d235077965"
+    },
+    {
+      "command": "bounded different-fresh closure review",
+      "status": "passed",
+      "evidence_ref": "/root/control_pack_bounded_closure_56 returned CLEAN with zero findings and zero advisories."
+    },
+    {
+      "command": "validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "4 record schemas, 3 dispatch schemas, 2 templates, 53 pre-closeout records, 331 dispatches, 8 legacy dispatches, and 53 pre-closeout ledger entries."
+    },
+    {
+      "command": "validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "Historical admission self-test passed."
+    },
+    {
+      "command": "validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "Orchestration contract self-test passed, including inventory, Unicode-ID, path, and two-commit negatives."
+    },
+    {
+      "command": "changed JSON, Python AST, Markdown link, and whitespace checks",
+      "status": "passed",
+      "evidence_ref": "All changed artifacts parsed; 35 relative links resolved; git diff --check passed."
+    },
+    {
+      "command": "node .gitnexus/run.cjs detect-changes --scope all --limit 500",
+      "status": "passed",
+      "evidence_ref": "MEDIUM; 15 validator/control-plane symbols, 4 validation flows, no unexpected production surface."
+    },
+    {
+      "command": "reviewed primary calibration commit",
+      "status": "passed",
+      "evidence_ref": "git:b8d07ce711b8bc3cae66b8d20da05cddcee2cdff"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Orchestration loop"
+      ],
+      "reason": "Make the terminal review-budget behavior visible at control-pack entry.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Reviewability and packetization guidance"
+      ],
+      "reason": "Bind review bursts to one consolidated remediation and bounded closure review.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ],
+      "reason": "Record current schema routing, lineage, inventory, path, and budget contracts.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Cross-cutting regression rules"
+      ],
+      "reason": "Add review, advisory, tiered verification, ancillary scope, and terminal budget regressions.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+      ],
+      "reason": "Make bounded review behavior the default for HCM-2.4 and later sessions.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Handoff schema routing",
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ],
+      "reason": "Advance current record/dispatch versions and exact closeout semantics.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "entire document"
+      ],
+      "reason": "Create the canonical severity rubric and durable advisory inventory.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed.json",
+      "sections": [
+        "entire handoff record"
+      ],
+      "reason": "Record the parent-owned completed true stop.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger for this closeout.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "The review-process calibration is complete. HCM-2.4 planning may be separately selected under the bounded review flow; do not start it automatically.",
+    "condition": "Only a new explicit user selection of HCM-2.4 planning authorizes later work.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sections": [
+          "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sections": [
+          "Decision and retained rigor",
+          "Review priority rubric",
+          "Priority decision matrix"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T021305Z--HCM-0-8--orchestration--bounded-review-calibration-completed.json",
+        "sections": [
+          "entire completed handoff"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not automatically begin HCM-2.4 or later work.",
+      "Do not restart this calibration review loop without explicit authority.",
+      "Do not downgrade a demonstrated selected-outcome P1/P2 into accepted debt.",
+      "Do not delete or modify preservation branches through this closeout."
+    ],
+    "acceptance_criteria": [
+      "Reviewed primary commit b8d07ce711b8bc3cae66b8d20da05cddcee2cdff replays final subject sha256:e730375583686b957fdd8403e58d1bd733dc4695d323d7af7eaae3d235077965.",
+      "This v1.3 record and deterministic ledger pass normal validation and both self-tests.",
+      "The separate mechanical closeout commit contains only this record and ledger.",
+      "The canonical branch is pushed without force."
+    ],
+    "stop_conditions": [
+      "Stop if a later session attempts another automatic review loop after the declared budget.",
+      "Stop if a reviewer priority lacks demonstrated integrated selected-outcome evidence.",
+      "Stop before HCM-2.4 until separately selected."
+    ]
+  },
+  "supersedes": [
+    "20260714T150800Z--HCM-0-8--orchestration--internal-delegation-control-plane-closed"
+  ],
+  "chat_summary": "HCM review calibration is complete at b8d07ce with bounded CLEAN review over 20 paths. P1/P2 remain real blockers; P3/P4 are durable advisories. Default automatic review is one discovery burst, one remediation, and one delta-focused closure review, then a bounded stop rather than another loop."
+}
