@@ -1,0 +1,509 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed",
+  "created_at_utc": "2026-07-26T13:18:57Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "orchestration_id": "20260726T122626Z--HCM-2-4--planning-amendment-orchestration",
+  "source_handoff_ids": [
+    "20260726T050447Z--HCM-2-4--orchestration--planning-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-26T13:18:57Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T131028Z--HCM-2-4--planning-amendment-causal-closure-2.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "planning-amendment-discovery-review",
+      "dispatch_id": "20260726T123404Z--HCM-2-4--planning-amendment-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T123404Z--HCM-2-4--planning-amendment-discovery-review.json",
+      "dispatch_fingerprint": "sha256:373921df389026aa47ac4c68b0939d56e5f01d1a8391fd4c7585062a96287cec",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_amendment_review_1",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "planning-and-task-breakdown"
+      ],
+      "subject_fingerprint": "sha256:86a23488bb5c6556f38bc14dcb43a115371e424aa2588cc4ffc4544552711d92",
+      "result_subject_fingerprint": "sha256:86a23488bb5c6556f38bc14dcb43a115371e424aa2588cc4ffc4544552711d92",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-2.4-AMEND-REV1-001",
+        "HCM-2.4-AMEND-REV1-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T123404Z--HCM-2-4--planning-amendment-discovery-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T122626Z--planning-charter-compatibility-amendment.md"
+      ]
+    },
+    {
+      "run_id": "planning-amendment-closure-review",
+      "dispatch_id": "20260726T125058Z--HCM-2-4--planning-amendment-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T125058Z--HCM-2-4--planning-amendment-closure-review.json",
+      "dispatch_fingerprint": "sha256:8269147189d46624a872807e75da06464ee1aba930345a030d92d8d3aa03162b",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_amendment_review_2",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "planning-and-task-breakdown"
+      ],
+      "subject_fingerprint": "sha256:2f1ab30e763da83e2d405be3d7e00fcf6e478a92f256fbee2016dc7ae609d6e4",
+      "result_subject_fingerprint": "sha256:2f1ab30e763da83e2d405be3d7e00fcf6e478a92f256fbee2016dc7ae609d6e4",
+      "review_round": 2,
+      "predecessor_run_id": "planning-amendment-discovery-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-2.4-AMEND-REV2-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T125058Z--HCM-2-4--planning-amendment-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T124918Z--planning-amendment-review-1-remediation.md"
+      ]
+    },
+    {
+      "run_id": "planning-amendment-causal-closure-1",
+      "dispatch_id": "20260726T130037Z--HCM-2-4--planning-amendment-causal-closure-1",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T130037Z--HCM-2-4--planning-amendment-causal-closure-1.json",
+      "dispatch_fingerprint": "sha256:c90afbc39db9552782bbdeb0e44374844c97ce67b48ad0c23d9ec0b444609046",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_amendment_review_3",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "planning-and-task-breakdown"
+      ],
+      "subject_fingerprint": "sha256:9385fbd3b7d1112791a5cf0674a32ad45456b9b776988316b68dd4c802ade74e",
+      "result_subject_fingerprint": "sha256:9385fbd3b7d1112791a5cf0674a32ad45456b9b776988316b68dd4c802ade74e",
+      "review_round": 3,
+      "predecessor_run_id": "planning-amendment-closure-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T130037Z--HCM-2-4--planning-amendment-causal-closure-1.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md"
+      ]
+    },
+    {
+      "run_id": "planning-amendment-causal-closure-2",
+      "dispatch_id": "20260726T131028Z--HCM-2-4--planning-amendment-causal-closure-2",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T131028Z--HCM-2-4--planning-amendment-causal-closure-2.json",
+      "dispatch_fingerprint": "sha256:78688ec5e166ed544aeb6800810a788409e283ca7f702f8db714df0c1c9e9480",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_amendment_review_4",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality",
+        "planning-and-task-breakdown"
+      ],
+      "subject_fingerprint": "sha256:8c538375d3808bea0d9f3d247a22294a33c31dd7cb44b1de2e03ce8f09fab0b8",
+      "result_subject_fingerprint": "sha256:8c538375d3808bea0d9f3d247a22294a33c31dd7cb44b1de2e03ce8f09fab0b8",
+      "review_round": 4,
+      "predecessor_run_id": "planning-amendment-causal-closure-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T131028Z--HCM-2-4--planning-amendment-causal-closure-2.json"
+      ]
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "planning-amendment-review-1-remediation",
+      "finding_run_id": "planning-amendment-discovery-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-amendment-closure-review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:2f1ab30e763da83e2d405be3d7e00fcf6e478a92f256fbee2016dc7ae609d6e4",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T124918Z--planning-amendment-review-1-remediation.md"
+      ]
+    },
+    {
+      "remediation_id": "planning-amendment-supplemental-causal-remediation-1",
+      "finding_run_id": "planning-amendment-closure-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "planning-amendment-causal-closure-1",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:9385fbd3b7d1112791a5cf0674a32ad45456b9b776988316b68dd4c802ade74e",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "ea6d733a2c38f462f5c4de083568c9b23f9f2aa0",
+    "subject_fingerprint": "sha256:8c538375d3808bea0d9f3d247a22294a33c31dd7cb44b1de2e03ce8f09fab0b8",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T131028Z--HCM-2-4--planning-amendment-causal-closure-2.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T122626Z--planning-charter-compatibility-amendment.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T124918Z--planning-amendment-review-1-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md",
+      "git:ea6d733a2c38f462f5c4de083568c9b23f9f2aa0"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T131028Z--HCM-2-4--planning-amendment-causal-closure-2.json"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "slice",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "HCM-2.4_planning_amendment_completed_implementation_unauthorized",
+    "memory_horizon": "program_transition",
+    "validation_horizon": "review_clean_planning_amendment_closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [
+      "handbook.artifact-kind.project-authority@1.1.0"
+    ],
+    "artifact_instance_refs": [
+      "project_authority"
+    ],
+    "intake_definition_refs": [
+      "handbook.intake.charter@1.0.0"
+    ],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md"
+  },
+  "objective": "Amend, review, commit, and close HCM-2.4 planning with an exact fail-closed shipped-root 1.2 Charter compatibility boundary and corrected P2 manifest, then stop before implementation.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T050447Z--HCM-2-4--orchestration--planning-completed.json",
+      "sections": [
+        "source HCM-2.4 planning authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Charter compatibility contract",
+        "implementation surface selectors"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P0 through P7 order",
+        "true stop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "amended implementation checklist"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T131028Z--HCM-2-4--planning-amendment-causal-closure-2.json",
+      "sections": [
+        "exact final CLEAN subject"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Two-commit true-stop closeout",
+        "Required validation"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "ea6d733a2c38f462f5c4de083568c9b23f9f2aa0",
+    "dirty": false,
+    "changed_paths": []
+  },
+  "work_completed": [
+    "Reproduced the read-only P0 stop from live source and traced shipped-root resolution through all six existing Charter registry callers.",
+    "Recorded every newly proposed exact symbol UID and fresh upstream impact, including all HIGH/CRITICAL warnings and stop gates.",
+    "Amended the packet to require exact versioned 1.1/1.2 tuple admission with full Project Authority descriptor equality and unchanged HCM-2.2 approval, lineage, lifecycle, intent, fingerprint, and negative-case authority.",
+    "Split compatibility foundation from shipped-root adoption so P1B precedes P1C, corrected the P1B false single-function ceiling, and added exact positive, negative, real-path, preservation, and regression proofs.",
+    "Corrected P2 to the live CLI help enum, two exact tests, and the sole consumed Environment Inventory snapshot while leaving P2 through P7 otherwise unchanged.",
+    "Completed four different-fresh reviews across the bounded causal cycles, remediated all P2 findings, and received final CLEAN on sha256:8c538375d3808bea0d9f3d247a22294a33c31dd7cb44b1de2e03ce8f09fab0b8.",
+    "Committed only planning, proof, and immutable review artifacts as ea6d733a2c38f462f5c4de083568c9b23f9f2aa0. No implementation began."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "status": "completed",
+      "summary": "Review-clean exact Charter compatibility amendment and bounded P2 correction."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "status": "completed",
+      "summary": "Amended P0/P1B/P1C ordering, selectors, ceilings, proofs, and stop gates."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "status": "completed",
+      "summary": "Executable checklist aligned with the amended compatibility contract."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/",
+      "status": "completed",
+      "summary": "Live causal proof and bounded remediation evidence."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T131028Z--HCM-2-4--planning-amendment-causal-closure-2.json",
+      "status": "completed",
+      "summary": "Final exact six-file CLEAN subject manifest."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned completed planning-amendment handoff and sole future selector."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-AMEND-D1",
+      "summary": "Shipped-root 1.1 remains immutable; 1.2 is admitted only as an exact fingerprint-bound tuple with full HCM-2.2-approved Project Authority descriptor equality.",
+      "authority_effect": "No ranges, prefix acceptance, loose string exceptions, fallback, migration, dual reads, or generic compatibility promises are authorized.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-AMEND-D2",
+      "summary": "P1B establishes and proves compatibility while shipped selection remains 1.1; P1C alone adopts shipped-root 1.2.",
+      "authority_effect": "The compatibility foundation must pass before the CRITICAL shipped selector change.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-AMEND-D3",
+      "summary": "The registry has six existing production callers; P1B may add only evaluate_charter_intake as the seventh, and an eighth is RED.",
+      "authority_effect": "Compiler doctor remains a HIGH read/proof-only preservation anchor and no new process, module, authority class, or public surface is authorized.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-AMEND-D4",
+      "summary": "P2 corrects the stale Environment Inventory help surface through the exact live enum, two tests, and one consumed snapshot only.",
+      "authority_effect": "The unused parent-help snapshot is excluded; P2 through P7 and the Phase 2 exit boundary are otherwise unchanged.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-AMEND-D5",
+      "summary": "This completed handoff closes planning only and does not authorize implementation.",
+      "authority_effect": "A later implementation session requires explicit top-level selection of this exact handoff and must enter read-only P0 first.",
+      "refs": [
+        "git:ea6d733a2c38f462f5c4de083568c9b23f9f2aa0",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-2.4-AMEND-REV1-001",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "planning-amendment-discovery-review",
+      "summary": "The first amendment both required fail-closed public intake validation and forbade the production caller needed to enforce it; the exact bounded caller contract and negative intake proof are now frozen.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T124918Z--planning-amendment-review-1-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.4-AMEND-REV1-002",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "planning-amendment-discovery-review",
+      "summary": "P2 selected an unused parent-help snapshot; the live manifest now contains the inline parent-help test, the snapshot-consuming Environment Inventory test, and only its consumed snapshot.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T124918Z--planning-amendment-review-1-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.4-AMEND-REV2-001",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "planning-amendment-closure-review",
+      "summary": "The first remediation omitted compiler doctor as the sixth existing registry caller; the synchronized packet now names six existing callers, intake as the sole seventh, and an eighth as RED.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "final six-file subject manifest replay from primary commit",
+      "status": "passed",
+      "evidence_ref": "sha256:8c538375d3808bea0d9f3d247a22294a33c31dd7cb44b1de2e03ce8f09fab0b8"
+    },
+    {
+      "command": "four different-fresh review rounds with bounded remediation and final CLEAN closure",
+      "status": "passed",
+      "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T131028Z--HCM-2-4--planning-amendment-causal-closure-2.json"
+    },
+    {
+      "command": "UTF-8, Markdown fences, relative links, JSON, scope, staged and unstaged git diff --check",
+      "status": "passed",
+      "evidence_ref": "10 reviewed documentation and immutable dispatch paths; no production or test path"
+    },
+    {
+      "command": "validate_handoffs.py normal plus both required self-tests before primary commit",
+      "status": "passed",
+      "evidence_ref": "55 records, 340 current dispatches; historical admission and orchestration contract self-tests passed"
+    },
+    {
+      "command": "GitNexus fresh impacts and staged detect-changes",
+      "status": "passed",
+      "evidence_ref": "all HIGH/CRITICAL planning impacts warned; staged documentation subject reported no indexed execution-flow changes"
+    },
+    {
+      "command": "primary reviewed planning amendment commit",
+      "status": "passed",
+      "evidence_ref": "git:ea6d733a2c38f462f5c4de083568c9b23f9f2aa0"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/",
+      "sections": [
+        "SPEC",
+        "tasks",
+        "proof"
+      ],
+      "reason": "Freeze the review-clean Charter compatibility and P2 planning amendment.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/",
+      "sections": [
+        "four HCM-2.4 planning-amendment review manifests"
+      ],
+      "reason": "Preserve immutable discovery, closure, and both causal closure subjects.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Record parent-owned amendment completion and the sole future implementation selector.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger for the completed planning-amendment handoff.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic resume is authorized. A later explicit top-level HCM-2.4 implementation selection may use HANDOFF_SELECTOR 20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed and enter read-only P0 only.",
+    "condition": "Only a fresh explicit top-level instruction selecting this exact completed handoff on a clean synchronized descendant of ea6d733a2c38f462f5c4de083568c9b23f9f2aa0 may start read-only P0; implementation edits require P0 acceptance.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed.json",
+        "sections": [
+          "entire completed planning-amendment handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sections": [
+          "entire amended specification"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sections": [
+          "entire amended implementation plan"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sections": [
+          "entire amended checklist"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Read-only P0 baseline, exact caller and surface manifest, GitNexus UID/impact, and proof-command lock after explicit selection.",
+      "P1A through P7 only after P0 acceptance and within the exact amended selectors and risk ceilings."
+    ],
+    "prohibited_scope": [
+      "Do not begin HCM-2.4 implementation automatically from this planning closeout.",
+      "Do not weaken HCM-2.2 Charter validation or change candidate/result separation, intent, approval, lineage, lifecycle, fingerprints, committed authority, or negative cases.",
+      "Do not admit open-ended profile versions, loose string exceptions, fallback, migration, dual reads, or generic compatibility promises.",
+      "Do not change dependencies, Cargo, unsafe policy, packages, runtime behavior, public APIs, or HCM-3.x scope."
+    ],
+    "acceptance_criteria": [
+      "Primary planning amendment commit ea6d733a2c38f462f5c4de083568c9b23f9f2aa0 remains bound to final CLEAN subject sha256:8c538375d3808bea0d9f3d247a22294a33c31dd7cb44b1de2e03ce8f09fab0b8.",
+      "The completed v1.3 handoff and deterministic ledger validate in normal, historical-admission, and orchestration-contract modes.",
+      "A fresh implementation selection enters read-only P0 and freezes exact live manifests and UID impacts before any edit.",
+      "The exact two-tuple Charter boundary, seven-caller ceiling, P2 correction, proof wall, non-goals, and stop gates remain accepted."
+    ],
+    "stop_conditions": [
+      "Stop on unresolved GitNexus UNKNOWN or materially wider HIGH/CRITICAL impact.",
+      "Stop if compatibility cannot remain an exact fingerprint-bound two-tuple with full Project Authority descriptor equality.",
+      "Stop if any HCM-2.2 Charter preservation proof fails or an eighth production registry caller appears.",
+      "Stop on any public API, dependency, Cargo, unsafe, package, migration, dual-read, runtime, or HCM-3.x expansion."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-2.4 planning amendment is final CLEAN at sha256:8c538375d3808bea0d9f3d247a22294a33c31dd7cb44b1de2e03ce8f09fab0b8 and primary commit ea6d733a2c38f462f5c4de083568c9b23f9f2aa0. Charter 1.2 compatibility is exact and fail-closed; P2 is corrected. Implementation has not begun and requires explicit selection plus read-only P0."
+}
