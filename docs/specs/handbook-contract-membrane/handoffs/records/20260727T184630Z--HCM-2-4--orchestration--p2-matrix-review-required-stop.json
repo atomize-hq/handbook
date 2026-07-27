@@ -1,0 +1,455 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260727T184630Z--HCM-2-4--orchestration--p2-matrix-review-required-stop",
+  "created_at_utc": "2026-07-27T18:46:30Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2-transaction-store-matrix-planning-repair",
+  "orchestration_id": "20260727T183535Z--HCM-2-4--matrix-repair-orchestration",
+  "source_handoff_ids": [
+    "20260727T165925Z--HCM-2-4--orchestration--p2-review-budget-exhausted"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-27T18:46:30Z",
+    "evidence_ref": "One proof-relevant fresh isolated built-in default-agent P2 matrix discovery review completed through spawn/wait/result transport. The reviewer returned one Required finding, exhausting the exact user-authorized one-review budget."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "p2-transaction-store-matrix-repair-discovery-1",
+      "dispatch_id": "20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review.json",
+      "dispatch_fingerprint": "sha256:ed4c9ffff908c4c620cc84dfb627010e4c4086d22adf3b56bdb0ef99d3570596",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_p2_matrix_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:55f708cef1762bd5be9059f9376fa1c943720ec0503db119be5e05a7287afec7",
+      "result_subject_fingerprint": "sha256:55f708cef1762bd5be9059f9376fa1c943720ec0503db119be5e05a7287afec7",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "p2-transaction-store-matrix-repair-discovery-1-P2-1"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review.json"
+      ]
+    }
+  ],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "00dde0162fcb15576c83b6ed40ab7286488d0890",
+    "subject_fingerprint": "sha256:00c19024eeb94a2e93263489fd255f0ea47c3730bfc34da2e9cf6a054de1e5b9",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T151507Z--HCM-2-4--p4-p5-token-implementation-supplemental-causal-review.json",
+    "proof_refs": [
+      "git:6f1c1ed44322c8a3194198846171a94bff2d1989",
+      "git:00dde0162fcb15576c83b6ed40ab7286488d0890",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T151507Z--HCM-2-4--p4-p5-token-implementation-supplemental-causal-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md"
+    ]
+  },
+  "active_resolution": {
+    "level": "authority",
+    "scope_horizon": "HCM-2.4 P2 transaction-store matrix planning-only repair",
+    "detail_resolution": "bounded over-limit observation and closure-fingerprint semantics",
+    "temporal_horizon": "current orchestration true stop after the single authorized review",
+    "authority_horizon": "P2 planning amendment remains uncommitted and not review-clean",
+    "memory_horizon": "parent handoff plus immutable dispatch and dirty-worktree subject",
+    "validation_horizon": "one-review-budget-exhausted bounded stop"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [
+      "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml"
+    ],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+    ],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "crates/engine/definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml"
+  },
+  "objective": "Repair only the six-row HCM-2.4 P2 transaction-store planning matrix, obtain exactly one fresh complete-subject review, and stop without remediation or a planning commit if that review reports a valid P1/P2.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T165925Z--HCM-2-4--orchestration--p2-review-budget-exhausted.json",
+      "sections": [
+        "entire selected resume authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review.json",
+      "sections": [
+        "complete repaired P2 planning subject manifest",
+        "matrix-only discovery review cycle",
+        "verification and stop gates"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "Normative transaction-store failure matrix",
+        "Fingerprinted evaluation closure",
+        "Exact proof selectors"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "HCM-RF-0001 non-intersection"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "3a8020c6da72bb9df149a1c54c7d4cf0ae5d5f0c",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T162710Z--HCM-2-4--p2-evidence-evaluator-planning-closure-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164201Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164915Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-2-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260727T184630Z--HCM-2-4--orchestration--p2-matrix-review-required-stop.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md"
+    ]
+  },
+  "work_completed": [
+    "Revalidated the selected handoff, HCM-2.4 dependency/authority boundary, current repository state, and planning-only prohibition before edits.",
+    "Applied the required skill chain and repaired only the six transaction-store matrix rows and coupled planning/control-pack status surfaces; no runtime, schema, definition, P4 proof, P6, or sibling-slice work was performed.",
+    "Defined exact absent, unsafe, unreadable, invalid-entry, alias, and over-limit observation tuples, store errors, first-row fixtures, and closure rules, then recomputed all supplied canonical hashes.",
+    "Created and hard-validated one internal-dispatch v1.3 matrix-only discovery review over the replayable 23-path complete P2 planning subject.",
+    "Executed exactly one fresh isolated built-in default reviewer. It independently reproduced the supplied fixtures and returned one valid P2 because the over-limit row requires a complete directory envelope that cannot fit the frozen 131072-byte observation bound for all legal stores.",
+    "Stopped without remediation, re-review, planning amendment commit, P2S/P2A approval request, runtime implementation, or proof promotion, as the user-authorized one-review budget required.",
+    "Preserved all unrelated and pre-existing dirty-worktree changes."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review.json",
+      "status": "completed",
+      "summary": "Hard-validated immutable matrix-only discovery review dispatch; the fresh built-in reviewer completed with one Required finding."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "status": "blocked",
+      "summary": "Uncommitted planning-only matrix repair; over-limit totality and bounded-observation semantics are not review-clean."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T184630Z--HCM-2-4--orchestration--p2-matrix-review-required-stop.json",
+      "status": "completed",
+      "summary": "Parent-owned bounded true-stop record preserving the valid P2, exact review budget, and unchanged runtime boundary."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-DEC-P2-MATRIX-REVIEW-STOP-001",
+      "summary": "Treat the fresh review's over-limit totality finding as valid P2 and stop without another repair or review loop.",
+      "authority_effect": "The repaired planning subject remains unstaged, uncommitted, and not eligible for P2S/P2A approval; the shipped resolver remains unresolved/EvidenceContractUnavailable.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-DEC-P2-MATRIX-RUNTIME-BOUNDARY-001",
+      "summary": "Preserve the planning-only ceiling and make no runtime, schema, definition, P4 proof, P6, or sibling-seam change.",
+      "authority_effect": "No classification or proof promotion is supported by this stopped run.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "p2-transaction-store-matrix-repair-discovery-1-P2-1",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "open",
+      "source_run_id": "p2-transaction-store-matrix-repair-discovery-1",
+      "summary": "The over-limit row is not total under its complete-directory-envelope rule: legal stores with more than 4096 entries can exceed the frozen 131072-byte canonical observation bound, so the specified observed byte_count/fingerprint tuple and closure fingerprint cannot always be represented.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review.json"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-P2-MATRIX-OVER-LIMIT-TOTALITY",
+      "classification": "authority",
+      "summary": "The single authorized review found that complete over-limit directory envelopes are unbounded while the frozen observation byte limit is 131072.",
+      "resume_condition": "A human explicitly authorizes a new planning-only budget to define bounded over-limit observation semantics, including entry-4097 termination, exact non-envelope tuple/closure behavior, and long-name/arbitrarily-large-store proof, plus a fresh independent review.",
+      "owner": "human authority"
+    },
+    {
+      "blocker_id": "HCM-2.4-P4-NEGATIVE-SURFACE-PROOF",
+      "classification": "authority",
+      "summary": "P4's separate five-part negative-surface/path proof remains outside this matrix-only selector.",
+      "resume_condition": "A human separately approves an exact test/proof-only selector for that P4 gate.",
+      "owner": "human authority"
+    },
+    {
+      "blocker_id": "HCM-2.4-P6-ENTRY",
+      "classification": "proof",
+      "summary": "P6 cannot begin until P2 and the remaining P4 gate are independently review-clean.",
+      "resume_condition": "P2 and P4 complete their separately authorized proof packets; P6 remains otherwise prohibited.",
+      "owner": "HCM-2.4 parent orchestrator"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-2.4-ESC-P2-MATRIX-OVER-LIMIT-001",
+      "trigger": "The exactly one authorized fresh matrix review returned a valid P2 over-limit totality finding.",
+      "current_resolution": "The matrix amendment and coupled planning/control-pack edits remain unstaged and uncommitted; no runtime or proof status changed.",
+      "target_resolution": "Define a bounded over-limit observation that stops at entry 4097 and has an exact non-envelope tuple and closure rule, while complete envelopes remain limited to stores with at most 4096 entries.",
+      "decision_required": "Authorize one new top-level planning-only bounded-over-limit repair/re-review budget, or defer P2.",
+      "options": [
+        "Recommended: authorize only the bounded-over-limit planning repair, long-name/arbitrary-size proof vectors, and one fresh complete-subject review.",
+        "Defer P2 and preserve the current uncommitted planning subject without runtime work."
+      ],
+      "recommendation": "Keep the next selector planning-only and matrix-local; do not bundle P2S/P2A approval, runtime/schema/definition implementation, P4 proof, P6, or another slice.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review.json"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "The next user selection explicitly names this handoff and authorizes only the bounded-over-limit planning repair plus a fresh complete-subject review."
+    }
+  ],
+  "validation": [
+    {
+      "command": "deterministic six-row fixture verifier",
+      "status": "passed",
+      "evidence_ref": "6 logical rows, 9 exact platform fixtures, and all 6 supplied platform hashes recomputed from the documented canonical JSON."
+    },
+    {
+      "command": "planning/control-pack scope and local-link verifier",
+      "status": "passed",
+      "evidence_ref": "All coupled planning markers and 10 referenced local links across 7 edited documents passed; no runtime/schema/definition/test/Cargo/core path was edited."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review.json",
+      "status": "passed",
+      "evidence_ref": "Internal-dispatch v1.3 schema, typed discovery cycle, all 23 replayed manifest hashes, aggregate fingerprint sha256:55f708cef1762bd5be9059f9376fa1c943720ec0503db119be5e05a7287afec7, and text hygiene passed before spawn."
+    },
+    {
+      "command": "fresh built-in independent matrix review",
+      "status": "failed",
+      "evidence_ref": "/root/hcm_2_4_p2_matrix_review returned one P2/Required over-limit totality finding; no remediation or second review was authorized."
+    },
+    {
+      "command": "reviewer long-name counterexample",
+      "status": "failed",
+      "evidence_ref": "A legal 4097-entry fixture with distinct 32-character names canonicalizes to 192599 bytes on Unix and 372878 bytes on Windows, exceeding the 131072-byte bound; arbitrary larger stores are unbounded."
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence_ref": "The uncommitted planning subject and mechanical closeout contain no whitespace errors."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "All 4 record schemas, 4 internal-dispatch schemas, 2 templates, 61 records, 402 current internal dispatches, 8 admitted legacy dispatches, and 61 ledger entries passed schema, lineage, hygiene, and byte-parity validation."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "Historical v1.0/v1.1 record and dispatch admission, immutable-byte, deletion, sentinel-isolation, and exact-ledger-rebuild fail-closed cases passed."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "Delegation, status/stop/resume, review-lineage, remediation, inventory, manifest, whitespace, reviewed-baseline, and two-commit closeout fail-closed contract cases passed."
+    },
+    {
+      "command": "P3/P4 selected-scope inventory comparison",
+      "status": "passed",
+      "evidence_ref": "The review stopped on P2 and reported no P3/P4 advisory; existing HCM-RF-0001 remains unrelated."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 current boundary"
+      ],
+      "reason": "Uncommitted matrix-planning status text is not review-clean.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.4 P2 planning proof boundary"
+      ],
+      "reason": "Uncommitted matrix-planning proof text is not review-clean.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P2",
+        "packet selector table"
+      ],
+      "reason": "Uncommitted P2 matrix authority text remains blocked by the Required finding.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P2 decomposition and review state"
+      ],
+      "reason": "Pending newly authorized bounded-over-limit planning repair/re-review.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "P2 checklist"
+      ],
+      "reason": "Pending newly authorized bounded-over-limit planning repair/re-review.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T184630Z--HCM-2-4--orchestration--p2-matrix-review-required-stop.json",
+      "sections": [
+        "entire parent-owned true-stop record"
+      ],
+      "reason": "Record the matrix repair, exact independent review result, valid P2, and bounded resume authority.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministically rebuilt query index"
+      ],
+      "reason": "Index the canonical parent-owned true-stop record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "If newly authorized, repair and freshly review only the bounded over-limit semantics in the complete HCM-2.4 P2 planning subject; otherwise defer P2.",
+    "condition": "A human explicitly selects this handoff and authorizes one new planning-only bounded-over-limit repair/re-review budget.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T184630Z--HCM-2-4--orchestration--p2-matrix-review-required-stop.json",
+        "sections": [
+          "entire current handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T183535Z--HCM-2-4--p2-transaction-store-matrix-review.json",
+        "sections": [
+          "subject manifest",
+          "review cycle",
+          "tasks and gates"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "sections": [
+          "Normative transaction-store failure matrix",
+          "Fingerprinted evaluation closure",
+          "Exact proof selectors"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sections": [
+          "HCM-RF-0001 non-intersection"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Replace only the over-limit row's unbounded complete-envelope rule with bounded entry-4097 observation semantics and exact tuple/closure behavior.",
+      "Add deterministic legal long-name and arbitrarily-larger-directory planning proof vectors.",
+      "Update only directly coupled P2 planning/control-pack status text and obtain one fresh independent complete-subject review.",
+      "Preserve reviewed commit 00dde01, closeout commit 3a8020c, and all unrelated work."
+    ],
+    "prohibited_scope": [
+      "No P2 Rust, schema, definition, producer, native adapter, CLI/compiler, Environment Context, or runtime edit.",
+      "No P2S/P2A human packet approval until the complete planning subject is review-clean.",
+      "No P4 negative-proof packet, P6, bridge deletion, Phase 2 exit, HCM-3.x, other slice, unrelated cleanup, reset, checkout, stash, or overwrite."
+    ],
+    "acceptance_criteria": [
+      "The over-limit row is total and bounded for every legal transaction-store directory size and filename length.",
+      "Entry-4097 termination and every non-envelope observation/fingerprint/nullability/closure field are exact.",
+      "Long-name and arbitrarily-large-store vectors prove the 131072-byte observation bound cannot be exceeded by the chosen representation.",
+      "A fresh isolated built-in default reviewer returns CLEAN over the complete changed P2 planning subject.",
+      "Only after review-clean planning may the parent commit it and stop for separate human P2S/P2A approval."
+    ],
+    "stop_conditions": [
+      "Stop on any runtime or schema/definition edit request in the P2 planning packet.",
+      "Stop on another valid P1/P2 after any newly and explicitly authorized fresh review budget.",
+      "Stop on P4/P6/sibling-slice expansion or any need to weaken the frozen observation bound without new authority.",
+      "Stop if unrelated work cannot remain preserved."
+    ]
+  },
+  "supersedes": [
+    "20260727T165925Z--HCM-2-4--orchestration--p2-review-budget-exhausted"
+  ],
+  "chat_summary": "HCM-2.4 P2 matrix repair remains planning-only and uncommitted. The exactly one authorized fresh review returned a valid P2: the over-limit complete-directory envelope is unbounded against the frozen 131072-byte observation limit. No repair, re-review, runtime work, or P2S/P2A approval was attempted."
+}
