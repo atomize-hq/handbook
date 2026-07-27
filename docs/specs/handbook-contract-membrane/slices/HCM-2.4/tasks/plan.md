@@ -1,7 +1,8 @@
 # HCM-2.4 implementation plan
 
-Status: reviewed planning input only; do not execute without a separate user
-selection.
+Status: partially executed under separate user selections. P0/P1A/P1B/P1C and
+P3/P3B are review-clean and committed. P2 and P4/P5 are authority-blocked, so
+P6 and the Phase 2 exit remain closed.
 
 ## Dependency graph
 
@@ -19,6 +20,13 @@ P0 baseline/inventory
 P2–P5 may be prepared independently after P1C but must land serially when shared registry,
 fixture, proof, or generated inventory files overlap. P6 cannot start until all
 four are committed, clean, and independently green.
+
+Current boundary: commits `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`
+and `5a2ccf6939be0e549e7e7355a245c7511c271eef` contain only the completed
+reviewed packets. P2 requires condition-evaluator authority; P4/P5 require a
+coverage-token derivation selector. Those blockers keep P6 and full P7
+ineligible. The current P7 activity is limited to a reviewed partial
+control-pack record and one parent-owned true-stop handoff.
 
 ## Standing rules
 
@@ -586,7 +594,13 @@ custom configured renderers or Projections generic.
 
 ## P7 — Phase 2 exit and true stop
 
-Entry: P6 accepted.
+Completion entry: P6 accepted.
+
+Current entry result: not satisfied. The parent may update only earned
+partial-boundary truth, obtain fresh aggregate review, commit that reviewed
+control-pack subject, and create one parent-owned blocked/partial true-stop
+handoff. It may not check the full P7 exit items, delete either bridge, or use a
+partial handoff to claim Phase 2 exit.
 
 Work:
 

@@ -1,11 +1,13 @@
 # HCM-2.4 — Remaining shipped artifact-family conversion
 
-Status: planning subject; implementation is not authorized.
+Status: partially implemented. P0/P1A/P1B/P1C and P3/P3B are review-clean and
+committed; P2 and P4/P5 are authority-blocked; P6 and Phase 2 exit are not
+earned.
 
 Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
 
-Selected predecessor handoff:
-`20260726T050447Z--HCM-2-4--orchestration--planning-completed`
+Selected resume lineage:
+`20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required`
 
 Amendment evidence:
 [proof/20260726T122626Z--planning-charter-compatibility-amendment.md](proof/20260726T122626Z--planning-charter-compatibility-amendment.md)
@@ -29,8 +31,10 @@ end:
 - the exact Phase 2 exit proofs are replayed without weakening the completed
   Charter, Project Context, or HCM-2.3 registry-brief authority.
 
-This document freezes implementation packets and proof obligations. It does not
-authorize production, test, definition, template, or package edits.
+This document freezes implementation packets and proof obligations. Runtime
+work was authorized only through the exact selectors recorded by the
+parent-owned orchestration. The completed partial packets do not authorize P2,
+P4/P5 remediation, P6, Phase 2 exit, or another slice.
 
 ## Authority and preserved decisions
 
@@ -480,6 +484,11 @@ proof. This is the HIGH-risk flow choke point and must be one focused packet.
 Run the complete proof wall, prove every Phase 2 exit row, update only earned
 gate/bridge rows, perform the declared review flow, and produce the separate
 implementation handoff/ledger closeout. P7 may not begin HCM-3.x.
+
+The current parent may perform only a truthful partial control-pack and
+true-stop closeout. It must preserve the open Phase 2 exit rows and both bridge
+IDs, cite the exact P2 and P4/P5 authority blockers, and must not represent the
+partial reviewed commits as P7 or slice completion.
 
 ## Exact implementation surface selectors
 

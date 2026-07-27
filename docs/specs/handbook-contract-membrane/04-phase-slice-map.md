@@ -46,8 +46,9 @@ binds the exact 111-path subject
 The exact registry-brief kind/schema and intake subsets are
 `RealPathAdopted`, while broader generic/custom-kind intake remains
 `TargetOnly`. `handbook-engine` `0.2.0` is the accepted public-enum
-compatibility boundary. HCM-2.4 and every later slice remain unauthorized
-until their own review-clean packet and separate exact selector.
+compatibility boundary. At the HCM-2.3 closeout, HCM-2.4 and every later slice
+remained unauthorized until its own review-clean packet and separate exact
+selector.
 
 ## Sequencing rule
 
@@ -393,6 +394,27 @@ does not authorize HCM-2.4 or a later phase.
 - convert remaining first-party artifacts that need structured manipulation;
 - decide explicitly which pre-Phase-3 outputs are renderer-derived human-review views only;
 - remove superseded Markdown-authority helpers.
+
+Current partial implementation boundary at commits
+`5cf41d2f64d68cb7f78abb5eccab9acf307089d3` and
+`5a2ccf6939be0e549e7e7355a245c7511c271eef`:
+
+- P0, P1A, P1B, and P1C are review-clean. Shipped-root `1.2` is selected with
+  exactly three root instances, released Charter authority remains on its
+  HCM-2.2 `1.1` identity pair, and the five exact successor kind/intake/
+  renderer definition closures are package-admitted without changing released
+  schemas or public APIs.
+- P3 and its P3B CLI/evidence integration are review-clean. Stage 10 now binds
+  capture, provenance, feature identity, and handoff authority to canonical
+  Work Specification YAML while Feature Spec Markdown is a deterministic
+  human-review view.
+- P2 is blocked on a separately approved condition-evidence/evaluator
+  contract. P4 and P5 are blocked on a separately approved generic
+  coverage-token derivation selector. Their retained partial fixtures and
+  negative proof do not establish positive mutation/promotion.
+- P6 has not begun, both temporary flow bridges remain active, and the Phase 2
+  exit gate below is not closed. This partial boundary authorizes neither
+  HCM-3.x nor another slice.
 
 ### Phase 2 exit gate
 

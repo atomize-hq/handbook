@@ -1,6 +1,12 @@
 # HCM-2.4 P1A definition-support implementation proof
 
-Status: implementation complete; parent-owned independent review and closeout pending
+Status: **implemented and closure-review CLEAN**
+
+Different-fresh closure dispatch:
+`20260726T205749Z--HCM-2-4--p1a-complete-subject-closure-review`;
+subject
+`sha256:1bdb1bd3a912f590ab9af31586afbca4acb538235e26146ddd7a17efecdd8ad9`.
+The closure resolved the discovery P2 findings with no unresolved P1/P2.
 
 ## Immutable input replay
 
@@ -219,10 +225,9 @@ descriptor set beyond three, execute P2-P5 vertical behavior, add generic
 Projection/Resolution, or change any released schema, public API, Cargo,
 dependency, package, command, or sibling-slice surface.
 
-## Parent-owned remaining work
+## Closeout
 
-- different-fresh complete-subject P1A closure review and finding disposition;
-- affected-workspace and final slice proof walls;
-- P1B-P7 execution in the frozen dependency order;
-- commit/stage/push decisions and the single parent-owned slice handoff/ledger
-  closeout.
+P1A is included in reviewed checkpoint commit
+`5cf41d2f64d68cb7f78abb5eccab9acf307089d3`. Later packets do not widen its
+exact const-string predicate, change a released schema, or add a sixth
+production symbol.

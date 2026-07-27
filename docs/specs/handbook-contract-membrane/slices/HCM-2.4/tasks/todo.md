@@ -1,141 +1,151 @@
 # HCM-2.4 implementation checklist
 
-Status: planning only. These boxes remain unchecked until HCM-2.4
-implementation is separately selected.
+Status: partial implementation. P0/P1A/P1B/P1C and P3/P3B are review-clean;
+P2 and P4/P5 are authority-blocked; P6 and Phase 2 exit remain incomplete.
 
 ## Entry
 
-- [ ] Verify the completed HCM-2.4 planning handoff, reviewed planning commit,
+- [x] Verify the completed HCM-2.4 planning handoff, reviewed planning commit,
       final subject fingerprint, clean worktree, and origin 0/0.
-- [ ] Confirm implementation authority repeats all SPEC non-goals and stops.
-- [ ] Treat selection as read-only P0 authority only; do not edit any
+- [x] Confirm implementation authority repeats all SPEC non-goals and stops.
+- [x] Treat selection as read-only P0 authority only; do not edit any
       implementation surface until P0 freezes and passes its exact live gate.
-- [ ] Refresh GitNexus and replace every UNKNOWN/intended symbol with an exact
+- [x] Refresh GitNexus and replace every UNKNOWN/intended symbol with an exact
       UID upstream impact result.
-- [ ] Report every HIGH/CRITICAL result before editing.
+- [x] Report every HIGH/CRITICAL result before editing.
 
 ## P0 — Inventory lock
 
-- [ ] Replay exact fingerprints for all six shipped kinds and schemas, both
+- [x] Replay exact fingerprints for all six shipped kinds and schemas, both
       root profiles, existing Charter intake/renderer, and HCM-2.3 registry brief.
-- [ ] Freeze the exact three selected root descriptors.
-- [ ] Freeze the complete
+- [x] Freeze the exact three selected root descriptors.
+- [x] Freeze the complete
       `shipped_profile_request` → `resolve_shipped_profile_decisions` →
       `CharterDefinitionRegistry::validate_selected_decisions` path and every
       HCM-2.2 record producer/currentness consumer.
-- [ ] Freeze the released HCM-2.2 Charter profile ref/fingerprint pair and the
+- [x] Freeze the released HCM-2.2 Charter profile ref/fingerprint pair and the
       full Project Authority descriptor field table.
-- [ ] Freeze every fixed family/path/bridge/helper/test selector and packet file
+- [x] Freeze every fixed family/path/bridge/helper/test selector and packet file
       manifest.
-- [ ] Add the exact P2 `crates/cli/src/main.rs`, two named `cli_surface.rs`
+- [x] Add the exact P2 `crates/cli/src/main.rs`, two named `cli_surface.rs`
       tests, and the one consumed environment-inventory help snapshot to the
       live manifest.
-- [ ] Freeze focused HCM-2.1, HCM-2.2, HCM-2.3, flow, pipeline, package, and
+- [x] Freeze focused HCM-2.1, HCM-2.2, HCM-2.3, flow, pipeline, package, and
       archive proof commands.
-- [ ] Resolve every exact P1B/P1C UID, inventory compiler
+- [x] Resolve every exact P1B/P1C UID, inventory compiler
       `doctor_report_from_inspection` as the sixth existing registry caller,
       and confirm only the planned seventh caller from
       `evaluate_charter_intake`, with no eighth caller or new process/module
       beyond the SPEC impact ceilings.
-- [ ] Record status/evidence: pending.
+- [x] Record status/evidence:
+      `proof/implementation/P0-inventory-lock.md`; independent evidence closure
+      review CLEAN.
 
 ## P1A — Definition support and admission
 
-- [ ] Add immutable exact-version successors for Project Context, Environment
+- [x] Add immutable exact-version successors for Project Context, Environment
       Context, Work Specification, Decision Record, and Risk Record.
-- [ ] Add one schema-backed first-party intake and fixed deterministic renderer
+- [x] Add one schema-backed first-party intake and fixed deterministic renderer
       for each.
-- [ ] Add the exact three-instance root profile successor.
-- [ ] Prove its `project_authority` row equals the released 1.1 descriptor in
+- [x] Add the exact three-instance root profile successor.
+- [x] Prove its `project_authority` row equals the released 1.1 descriptor in
       every field and freeze the literal authored 1.2 profile fingerprint in an
       immutable HCM-2.4 vector.
-- [ ] Add exact built-in sources and admit only exact package-owned first-party
+- [x] Add exact built-in sources and admit only exact package-owned first-party
       renderer refs while retaining all other later-owned dependency refusals.
-- [ ] Admit only the five exact frozen Project Context, Environment Context,
+- [x] Admit only the five exact frozen Project Context, Environment Context,
       Work Specification, Decision Record, and Risk Record descriptor rows,
       including kind, intake, singleton renderer, role/path, requiredness, and
       empty later-owned fields; retain lifecycle/Projection/overlay and every
       mismatched dependency refusal.
-- [ ] Prove duplicate-safe parsing, coverage, fingerprints, exact refs, null
+- [x] Prove duplicate-safe parsing, coverage, fingerprints, exact refs, null
       Resolution input, and full-byte render goldens.
-- [ ] Classify only a type-absent, string-valued `const` coverage leaf as
+- [x] Classify only a type-absent, string-valued `const` coverage leaf as
       String in `ResolvedSchema::collect_coverage_leaf_shapes`; prove every
       other indeterminate case remains refused, including string `const` with
       an unsupported explicit type, and stop on a sixth production symbol or
       broader inference.
-- [ ] Prove no public API/Cargo/external-dependency/package-boundary change.
-- [ ] Record status/evidence: pending.
+- [x] Prove no public API/Cargo/external-dependency/package-boundary change.
+- [x] Record status/evidence:
+      `proof/implementation/P1A-definition-support.md`; different-fresh closure
+      review CLEAN at dispatch
+      `20260726T205749Z--HCM-2-4--p1a-complete-subject-closure-review`.
 
 ## P1B — Charter compatibility foundation
 
-- [ ] Keep `shipped_profile_request` selecting 1.1 throughout P1B.
-- [ ] Extend only
+- [x] Keep `shipped_profile_request` selecting 1.1 throughout P1B.
+- [x] Extend only
       `CharterDefinitionRegistry::validate_selected_decisions` to accept the
       exact released 1.1 tuple and the exact P1A-authored 1.2 tuple.
-- [ ] Compare every Project Authority id/kind/role/capability/label/path/
+- [x] Compare every Project Authority id/kind/role/capability/label/path/
       requiredness/condition/dependency/lifecycle/intake/renderer/Projection/
       overlay/extension field and exact subordinate definition.
-- [ ] Reject wrong fingerprints, unlisted versions, range/prefix acceptance,
+- [x] Reject wrong fingerprints, unlisted versions, range/prefix acceptance,
       descriptor mutations, missing definitions, fallback, second resolution,
       migration, and dual reads.
-- [ ] Make the existing HCM-2.2 profile identity constants crate-visible
+- [x] Make the existing HCM-2.2 profile identity constants crate-visible
       without changing either value.
-- [ ] Update only the exact registry, intake, approval-currentness,
+- [x] Update only the exact registry, intake, approval-currentness,
       promotion, lifecycle-result/authority, and transaction-preflight symbols
       listed in SPEC so Charter records retain the HCM-2.2 pair.
-- [ ] Keep compiler `doctor_report_from_inspection` read/proof-only and prove
+- [x] Keep compiler `doctor_report_from_inspection` read/proof-only and prove
       its exact Charter definition closure remains resolved for direct 1.1 and
       selected 1.2 decisions.
-- [ ] Add exact
+- [x] Add exact
       `crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs` and prove
       `invalid_compatible_profile_decisions_cannot_produce_charter_intake`
       refuses before any intake/candidate record is produced.
-- [ ] Do not edit `validate_candidate_v13`,
+- [x] Do not edit `validate_candidate_v13`,
       `validate_promotion_intent_v12`, candidate/result schemas or vectors,
       approval/lineage/lifecycle formats, committed authority, or public APIs.
-- [ ] Prove direct 1.1 and compatible 1.2 decisions produce byte/fingerprint
+- [x] Prove direct 1.1 and compatible 1.2 decisions produce byte/fingerprint
       identical intake, candidate, result, approval, promotion, intent, lineage,
       transaction, recovery/replay, and committed authority.
-- [ ] Replay every HCM-2.2 negative unchanged and all HIGH/CRITICAL callers.
-- [ ] Confirm the shipped resolver still selects 1.1 at P1B exit.
-- [ ] Record status/evidence: pending.
+- [x] Replay every HCM-2.2 negative unchanged and all HIGH/CRITICAL callers.
+- [x] Confirm the shipped resolver still selects 1.1 at P1B exit.
+- [x] Record status/evidence:
+      `proof/implementation/P1B-charter-compatibility.md`; different-fresh
+      closure review CLEAN.
 
 ## P1C — Shipped-root adoption
 
-- [ ] Select only the new shipped-root profile ref and exact P1A source closure
+- [x] Select only the new shipped-root profile ref and exact P1A source closure
       in `shipped_profile_request`.
-- [ ] Admit only exact Project Context kind `1.0` or `1.1` through the existing
+- [x] Admit only exact Project Context kind `1.0` or `1.1` through the existing
       private `selected_contract_matches` predicate while preserving the
       unchanged schema `1.0`, canonical path, equality checks, and every other
       mismatch refusal.
-- [ ] Before editing the predicate, prove RED for exact `1.1`; retain exact
+- [x] Before editing the predicate, prove RED for exact `1.1`; retain exact
       `1.0`; then prove both positives plus crossed directions, unrelated
       identity, unlisted version, prefix, range, `latest`, bare/fallback, wrong
       schema, and wrong path refusals in the existing unit test.
-- [ ] Assert non-null exact intake refs and singleton exact renderer refs for
+- [x] Assert non-null exact intake refs and singleton exact renderer refs for
       both `project_context` and `environment_context`.
-- [ ] Preserve exactly three root descriptors, Charter authority, condition
+- [x] Preserve exactly three root descriptors, Charter authority, condition
       semantics, vocabulary, and Context Resolution sources.
-- [ ] Prove the real resolver returns generic shipped-root 1.2 decisions,
+- [x] Prove the real resolver returns generic shipped-root 1.2 decisions,
       immediately passes the exact Charter membrane, and every Charter record
       still carries the released 1.1 pair.
-- [ ] In Unix compiler test
+- [x] In Unix compiler test
       `doctor_api_projects_the_exact_stable_project_context_row`, change only
       report schema expectation `1.1.0` to `1.2.0` and Project Context kind
       expectation `1.0.0` to `1.1.0`.
-- [ ] In Unix CLI test `doctor_reports_ready_when_required_artifacts_present`,
+- [x] In Unix CLI test `doctor_reports_ready_when_required_artifacts_present`,
       replace only its obsolete inline Charter schema `1.0` setup with the
       existing `write_valid_selected_charter` helper and change only its
       Project Context kind expectation `1.0.0` to `1.1.0`; do not edit the
       helper, fixture assets, another assertion, or production code.
-- [ ] In WSL with an isolated Linux target directory, run those two exact
+- [x] In WSL with an isolated Linux target directory, run those two exact
       Unix projection tests plus
       `doctor::tests::doctor_nulls_project_context_and_is_invalid_after_substitution_or_inode_aba`.
-- [ ] Replay the selected-profile targets, P1B compatibility target, unchanged
+- [x] Replay the selected-profile targets, P1B compatibility target, unchanged
       HCM-2.1 integration target at 12/12, complete HCM-2.2 wall, HCM-2.3
       preservation wall, and all CRITICAL upstream flows; prove
       Work/Decision/Risk remain unselected.
-- [ ] Record status/evidence: pending.
+- [x] Record status/evidence:
+      `proof/implementation/P1C-shipped-root-adoption.md`; different-fresh
+      closure review CLEAN at dispatch
+      `20260726T235106Z--HCM-2-4--p1c-shipped-root-adoption-closure-review`.
 
 ## P2 — Environment Context
 

@@ -1,0 +1,834 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T064246Z--HCM-2-4--partial-control-pack-complete-subject-review",
+  "created_at_utc": "2026-07-27T06:42:46Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P7-partial-control-pack-closeout",
+  "subject_fingerprint": "sha256:8e2f246b9739e1d0bafe125d5408d44e2f0eb3d7e6708dbdba7a9f8f71acbf43",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-2-4-partial-closeout-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "81fbbaf7cfd5d84141cdbb98c338fb40e37fd13c16d916df9ef463fdb694b74e"
+      },
+      {
+        "path": "core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "adbc65bd50111c5cd75e61b02361023023adcd99b0512ec713c36137fcd767be"
+      },
+      {
+        "path": "core/pipelines/default.yaml",
+        "sha256": "fa37d97d8a5e3426199be4198591bc9bd08564270572b88d91a05d2ea33838f9"
+      },
+      {
+        "path": "core/schemas/feature_spec.yaml",
+        "sha256": "4629ff274f0f34eded6f1c64c28071616baea96328b411bd1243f9ef991dab18"
+      },
+      {
+        "path": "core/stages/10_feature_spec.md",
+        "sha256": "09992027838be50c146460c8c17b8e3c1aab98dfca844f747e60af13ab0c0301"
+      },
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "5a0913f09bf63ac7f2a06d3ac2b45f17c773124bca49a50906db3097956b0ddf"
+      },
+      {
+        "path": "crates/cli/tests/feature_spec_contract.rs",
+        "sha256": "73921eae9a2bfdf63911f7cefb2439ef9fd9b57136bfaffdba02fba2c930a3a6"
+      },
+      {
+        "path": "crates/cli/tests/pipeline_handoff_refusals.rs",
+        "sha256": "c237b81cbdd2248602f7b39b516235036eb42ba149a2191bba2b485ecc34ebca"
+      },
+      {
+        "path": "crates/compiler/src/layout.rs",
+        "sha256": "6aa0fc546729f30317e5cde5aa4fb2d4d049b403ca8e7e2a6179f38836ba6ee8"
+      },
+      {
+        "path": "crates/compiler/tests/doctor.rs",
+        "sha256": "86d1c58d532dbc368cd40a6c4cafc7cc50edfc0d35a6b9d95faae6af57dc0ace"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_capture.rs",
+        "sha256": "d8bc29f62505808532263aa946261b7685a399bad01e45aa125ebd7c86bc8878"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_handoff.rs",
+        "sha256": "78f12e351696f0e151c85e137bf1c815e4370185fa4b3186a93ba257fcb2e92f"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.decision-record/1.1.0.yaml",
+        "sha256": "b71e7e848c968dd86829ad320285af270ca913c977065172c374392fdbb4822c"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.environment-context/1.1.0.yaml",
+        "sha256": "ad2ec5856cc62e824471a566548e45c268c66f1ccd73a8faab7edeafeaf6b104"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.project-context/1.1.0.yaml",
+        "sha256": "12236bb9d831b4f38b6e09f6f08cca78ec01c78c9d71605c3f549ed5bc5b75cc"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.risk-record/1.1.0.yaml",
+        "sha256": "999d61024c0c5d06b97af9c0d552896d885d77c5de608182beaedd8856240e71"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.work-specification/1.1.0.yaml",
+        "sha256": "5dd585d5812bbdb5c02f9ec56f0536a4ecd855f1b66f728bee3bf9bd4cd35af5"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.decision-record/1.0.0.yaml",
+        "sha256": "54e7a91749e028e0ef8fb7a6070744c4c79d4e64aa038a7fe2cfcdc437edddfb"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.environment-context/1.0.0.yaml",
+        "sha256": "d108021f3e7811c3a213f28927738926656fd93574e40ff5416a740c4c8c9f71"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.project-context/1.0.0.yaml",
+        "sha256": "0243de3a5a69f066858451c2ea5ff6fcec0d6e3b6ce13a5acaea1d6e561e144a"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.risk-record/1.0.0.yaml",
+        "sha256": "b1c82ffcd75a79c8f25a1b0962dfb0e9ccf1b4a58c69c6fbcd297a8dede6d445"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.work-specification/1.0.0.yaml",
+        "sha256": "7a15bd5db5f77e2c31b5379675b0d4c4476b6c5a1af2d00dca105cea7255b4a0"
+      },
+      {
+        "path": "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml",
+        "sha256": "1d8fe627cf097a5f1fa17baa0be349d7d9d6caabbe97a39318d1dbbcf62d972f"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.decision-record-review-markdown/1.0.0.yaml",
+        "sha256": "7038f538e7c3280f4acf1878d9d91c3957a879004079cde1fe345baa5fe03e2c"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.environment-context-review-markdown/1.0.0.yaml",
+        "sha256": "4237c2b2b1bcff3b27458992ff1e431f2f6b48494be0cba72f534dba64a27d35"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.project-context-review-markdown/1.0.0.yaml",
+        "sha256": "51314f78fe6ebed5b1ead2b6329dd020a1155e43122d50f074bce6837af84441"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.risk-record-review-markdown/1.0.0.yaml",
+        "sha256": "1aafd5bc4e890d7cba1b82624801a4a127eca0238612ff1c630002fd77b6e7c8"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.work-specification-review-markdown/1.0.0.yaml",
+        "sha256": "94652999c19105c18a29a94f4401e5663f849c2ebb37a4a274aa309c727bf484"
+      },
+      {
+        "path": "crates/engine/src/artifact_instance.rs",
+        "sha256": "c850df3fa1914765434a598a9efe6c2a43cc1f7799827ffe5a852f70d679f680"
+      },
+      {
+        "path": "crates/engine/src/artifact_intake_registry.rs",
+        "sha256": "8b7aa1ffa9e3b50222d98e8eef29939356adf0fcd3f1511482d4f330608d639e"
+      },
+      {
+        "path": "crates/engine/src/artifact_kind_registry.rs",
+        "sha256": "92c62711079f4e5b1e4b4e7b94c91751af2181639e73961a1596abd9de2fe836"
+      },
+      {
+        "path": "crates/engine/src/artifact_repository.rs",
+        "sha256": "1d6e30b0001c658d79cf2e942817a2d5513b59756c8e41f2c27bf2dfdb1a92ac"
+      },
+      {
+        "path": "crates/engine/src/charter_approval_workflow.rs",
+        "sha256": "11127b89402730c80bc770d715525d97692b2c5c45384618be9bf3e86e963aea"
+      },
+      {
+        "path": "crates/engine/src/charter_authority_transaction.rs",
+        "sha256": "a7dc1be73d610b9ea2060205f351e372391b8c141cc391c781193ff514aad600"
+      },
+      {
+        "path": "crates/engine/src/charter_definition_registry.rs",
+        "sha256": "69b6229aeffe2d60b0594bca550e0a823bddae390849e60ac839761ccaa51e90"
+      },
+      {
+        "path": "crates/engine/src/charter_intake.rs",
+        "sha256": "78fcf80e36c2ec58a94d9e47b9b852ecc46a05752d471b04b47184a8750462ae"
+      },
+      {
+        "path": "crates/engine/src/charter_lifecycle_validation.rs",
+        "sha256": "83b9aaa0318db3805a94cd0e72851d15e4fd8c6f2feb93bbd6683f1045872af3"
+      },
+      {
+        "path": "crates/engine/src/charter_promotion_workflow.rs",
+        "sha256": "37591b0716fc1fec0164ef880a187effd48e7bb05e8e89b844c8a0b3017196ba"
+      },
+      {
+        "path": "crates/engine/src/profile_builtins.rs",
+        "sha256": "039d857acb028f87d31f77d38e960360f37573cd7a0b16825fbb9f4f4dcbe870"
+      },
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "25daa5f5dc304d26ff70cbe633e5bc79d20079ee11048f3123a3f33d38d8c1f2"
+      },
+      {
+        "path": "crates/engine/src/profile_selection.rs",
+        "sha256": "1642391638f266aeb63865c37aa370b7a9c3be4ed3bc91615dc246ff9343224e"
+      },
+      {
+        "path": "crates/engine/src/project_context_artifact.rs",
+        "sha256": "a25b26e67ad7557ce6cbc63f7e814dd989238b4a870621bab36d22134f9a2dcf"
+      },
+      {
+        "path": "crates/engine/src/schema_registry.rs",
+        "sha256": "7234acb847bcc1ef97274887a899e92c76269baee76a0d56722fb973708f4920"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_decision_record/.handbook/definitions/profiles/decision-record-root-1.0.0.yaml",
+        "sha256": "f7ba8e5060372cc42fb674a3eb0212b8d605915f49b4ed073cdf0cd2ba6718c2"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_decision_record/.handbook/profile-selection.json",
+        "sha256": "d9b41722794c0fca3198cedf8be008bcf7e3dee5a99046354cb7a406420c7e46"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_decision_record/.handbook/records/decision.yaml",
+        "sha256": "4f9703bb54dd7d2cfc17e35fe54db9dfb460525821f54c56b35cbb6ae2cd836a"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_risk_record/.handbook/definitions/profiles/risk-record-root-1.0.0.yaml",
+        "sha256": "3fb2cafe53bdf852f42878f97838268a25a4c53907246c03c4f90d840582172a"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_risk_record/.handbook/profile-selection.json",
+        "sha256": "ec6ee2a95976f1b69c608699f1b3764aa1f2e1d3286e4923077720cdcf91a1c4"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_risk_record/.handbook/records/risk.yaml",
+        "sha256": "b5977c4d6f8e263866fbedfe78c6727252b204d8a09f2a45afdfcbbb781f51a6"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_work_specification/.handbook/definitions/profiles/work-specification-root-1.0.0.yaml",
+        "sha256": "6a357001ea823d1de1d6219753d733d2aaad8081ebad1ee6de81183c98cc5509"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_work_specification/.handbook/profile-selection.json",
+        "sha256": "3b9c4a1480cf676f0448cafbfb2f4e563b9e4b31b959bf9840bfd05e9f477c7f"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_work_specification/artifacts/feature_spec/FEATURE_SPEC.md",
+        "sha256": "e06ee5ac1c33fbbb1b9792bbf546755167a209f6250f58b0b14573f21a20cefb"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_work_specification/artifacts/work-specification/work-specification.yaml",
+        "sha256": "aee00789586f221d7887721648df23810406163b8b937fc89ca24d1355cd04c2"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_decisions.rs",
+        "sha256": "9a4f73561196482a65800a3813b76755c19e34b2d06d4e560a7b72f65e0bf363"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_definition_profile.rs",
+        "sha256": "b5651c334ad2744b067b06db8a5032905a5ce1114ed58e4a87d4adf498be5077"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs",
+        "sha256": "faa8dc4fe340efdb166263b319d4707a53e0d2757489ddf485a1830542723979"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_decision_record.rs",
+        "sha256": "81167586764922e9bb2232d5a51c20f1f492b5beb10e2a640fb7770a0a6c8f64"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_definition_runtime.rs",
+        "sha256": "1ca641aeedf4d6cd28626ddb85d36c61e2f07858be36ee9f25fbd55eeeb32137"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_definition_support.rs",
+        "sha256": "1542362d37110a590666793a94ac065b5594dd3ca75d7c9936934be922e3f1a9"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_risk_record.rs",
+        "sha256": "0bd8f9168a6ef83c63cfdd3f5caeb55b1fa275e935c673ff633adfb8172e4ccf"
+      },
+      {
+        "path": "crates/pipeline/src/pipeline_capture.rs",
+        "sha256": "8b5e78f61ee084fbad57487c0f631c77ce5a9ad595f0d73c7d7760fcf8c3e0bb"
+      },
+      {
+        "path": "crates/pipeline/src/pipeline_handoff.rs",
+        "sha256": "cf653b7394d7fce60b788ab8ff2921cf1c02e3955edc77254067aa7acafe8cad"
+      },
+      {
+        "path": "crates/pipeline/src/stage_10_feature_spec_provenance.rs",
+        "sha256": "543d86dba5b613ad0d307c710a0a75a87a9753572234fd3b799043bab97b8cf7"
+      },
+      {
+        "path": "crates/pipeline/tests/pipeline_capture.rs",
+        "sha256": "d1c4e89237ad64d8ccbef29a85c88b6e18973777ea326ddf70b6ef70e43592ff"
+      },
+      {
+        "path": "crates/pipeline/tests/pipeline_handoff.rs",
+        "sha256": "694f6b407fbe863805634772e521e53dd54097549c5378ffeb8ba7ad96071a15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "8a157c90f4a053cf67adbe04c8a7eadf21b901afbf9b3610baef853f124d3cca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "7f72e8cbc5378272084c5eb4eb7315b1546aa78172a5c5c8b540f977a87a3820"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "6b6ba29754032b7f393bd46fd1b69943c1d7eb4b5e1de7e21bf9ef5c3ee51d25"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T162140Z--HCM-2-4--p0-selector-repair-review.json",
+        "sha256": "cce37f895b6144605718ee2917e60fe4f541b880990bb9344031aebafb1b391f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T162911Z--HCM-2-4--p0-selector-repair-closure-review.json",
+        "sha256": "3a994f8464582b5a376010a485863bf387bdf1ca981153749ad0938efb6af1ec"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T164140Z--HCM-2-4--p0-path-manifest-review.json",
+        "sha256": "758b6238cb8f1cec574dcb0536450215deeeca1c3e6d6c48c4fcd5fcba2a1ee5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T164958Z--HCM-2-4--p0-path-manifest-closure-review.json",
+        "sha256": "9379f155f5e48f684e62b0a416806275e152322460081cc36e26e4b0d1864652"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T165827Z--HCM-2-4--p0-evidence-review.json",
+        "sha256": "f53cab907fdab9e04df5ac495118cf896bf46d2d600e9aa6d711c04f3c077973"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T171625Z--HCM-2-4--p0-evidence-closure-review.json",
+        "sha256": "d6944c1066bdb32aeea0fd742df47cdb53ed98b237f5671b7ff24b917dd658d2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T172336Z--HCM-2-4--p1a-definition-support-implementation.json",
+        "sha256": "d42d7620cfc1e438f64677c58cb5b47dbc3e0d1dbce52fdf55f7e76c25654145"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T180638Z--HCM-2-4--p1a-definition-support-review.json",
+        "sha256": "856325da8ec085a5210fa7dfabbcf97573e29474053d68cd41cc51d0e68acc28"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T182250Z--HCM-2-4--p1a-selector-correction-review.json",
+        "sha256": "1e1ae39fb69fcfef76396cd972cc897d83501c43d55839f8e0dd2b7312b57af9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T183702Z--HCM-2-4--p1a-selector-correction-closure-review.json",
+        "sha256": "d146427a79743f23901ff6a82841d2e2c803302df14829c4f3064d1f6c239aee"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T184338Z--HCM-2-4--p1a-remediation.json",
+        "sha256": "4aaeacba0b403292dc75ea72516ca4aea001543873efbd46e604769cc4405612"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T195640Z--HCM-2-4--p1a-const-string-selector-review.json",
+        "sha256": "1ef06efe915b3c76968acd7a6b4ea1122ca184f92645f6b63c8c78df3c57cb83"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T200624Z--HCM-2-4--p1a-const-string-selector-closure-review.json",
+        "sha256": "bbfce473c4acbbf44d678017690531c02581e61f294b373c3efacc843b7295e7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T202434Z--HCM-2-4--p1a-complete-subject-review.json",
+        "sha256": "15ffdebe214a2d76185a8f24405e472e4922e7f39354309273966845ea0a6e1b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T205749Z--HCM-2-4--p1a-complete-subject-closure-review.json",
+        "sha256": "a1621128ea8d701e5c98fcaaeb80bb62c8907a151dabe16d075bcdeb64e9a9d6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T213335Z--HCM-2-4--p1b-charter-compatibility-review.json",
+        "sha256": "77c2cddb16a133dd38cf97a0988d222a43e800b254eea2b3f239f0e0bdc58cd2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T215251Z--HCM-2-4--p1b-charter-compatibility-closure-review.json",
+        "sha256": "cc6b0e4d5d2abbed3c1b1d3ceba9365659e3042ee381f9c1dc807c7a06b70d9b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T221831Z--HCM-2-4--p1c-project-context-selector-repair-review.json",
+        "sha256": "891e3113204b3857834a2685fe9f26b582a785e0540329ae9a4540abb9847935"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T222942Z--HCM-2-4--p1c-project-context-selector-repair-closure-review.json",
+        "sha256": "177bb343b855013eb570811619fecd96269be6a6c5f27461eb5eb7b827cb86ff"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T230549Z--HCM-2-4--p1c-shipped-root-adoption-review.json",
+        "sha256": "0f4ac9107e31a7501a8f03ea6ec99511ceb7c510ed72b78611e276a3343f02fb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T232442Z--HCM-2-4--p1c-unix-proof-selector-repair-review.json",
+        "sha256": "1457d14ff7469f51a28867506b53d455862fb604e3f6fa523925a9a7c9c6519c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T233334Z--HCM-2-4--p1c-unix-proof-selector-repair-closure-review.json",
+        "sha256": "766c554dbef9568264df938aa9062106861f3416fed4311265b6bcb8a5590d83"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T235106Z--HCM-2-4--p1c-shipped-root-adoption-closure-review.json",
+        "sha256": "6470324a001f7ddef19a467afc6b91d9837d1c162b76075448e4351c5a625ee3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T000736Z--HCM-2-4--p2-condition-authority-stop-review.json",
+        "sha256": "6de52b35c510c274094f1b0d222ccbbf334a31ccbd045522c6cbc07febd8f438"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T001100Z--HCM-2-4--p4-decision-record-implementation.json",
+        "sha256": "414f29a35fee81ee6f44909d9443bdea777bbe5af5c6af224e91659e84187180"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T001101Z--HCM-2-4--p5-risk-record-implementation.json",
+        "sha256": "787cc4dfba1105132030a627567ced0fdfa9d95066dac1de85035583e9a6c874"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T002052Z--HCM-2-4--p3-work-specification-implementation.json",
+        "sha256": "b5abb54166618d704abf9f123da73d836f2232883493b37a34afb49e0970b716"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T004037Z--HCM-2-4--p4-decision-record-stop-review.json",
+        "sha256": "4f7f26990516b11eb3224ce6eaac909c0be8be7a88234b05313bb870414339fc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T004038Z--HCM-2-4--p5-risk-record-stop-review.json",
+        "sha256": "02b513dc3d1415563c7be1f680f82dfe45638bb9b35674f05f53b8866d47340e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T011941Z--HCM-2-4--p3-work-specification-discovery-review.json",
+        "sha256": "cfbab41002f43020b2358619a913cc569f9ad3dd4e7fe23c54f8f820db1356d6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T014349Z--HCM-2-4--p3-work-specification-closure-review.json",
+        "sha256": "41a9e063158e508fcad961afae78b866eb16cfb551326a81855af0e838a53537"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T015728Z--HCM-2-4--p4-p5-authority-stop-review.json",
+        "sha256": "70aa74470079eb4ad9e0e649b43234d4d8374483b7003b4034a51b33871059fb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T021420Z--HCM-2-4--p3b-cli-proof-selector-review.json",
+        "sha256": "13931836c2522b2820f905de61ed8d12318a8fd6ac526bd75d81b7535e283f02"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T022852Z--HCM-2-4--p1c-checkpoint-proof-gap-review.json",
+        "sha256": "9770ef1801eb41fb969834682d96a7720f88cb84ed3431ab996c349657c53323"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T024357Z--HCM-2-4--p3b-fixture-selector-repair-review.json",
+        "sha256": "8fd299367dccd54ed9bd11d2bf33951ca6b940d4c3161927e03b22195effda1b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T025857Z--HCM-2-4--p3b-repository-identity-selector-review.json",
+        "sha256": "33aab2363179404eb5a45cf39facb72a1ae3e4b581de8c02e96f05da5c11c1a1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T031327Z--HCM-2-4--p3b-foundation-feature-identity-selector-review.json",
+        "sha256": "00b6de42c1f28a8aeadfa6dc03f8898c319708aaed028022bef24956e42b7d54"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T032325Z--HCM-2-4--p3b-foundation-feature-identity-selector-closure-review.json",
+        "sha256": "bac24aa80769152ae332061f1465f9c52ccf31f0b6f7baa2009ef37729fbfcde"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T033427Z--HCM-2-4--p3b-m5-canonical-consumer-selector-review.json",
+        "sha256": "309f9790d2b3d3d12031c7e6fb76f36e50567d45f3896a69c2e69b756fbd85b7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T035245Z--HCM-2-4--p3b-shared-compile-golden-selector-review.json",
+        "sha256": "1f9a4290f6ecc453f6fd20b49ba29237adb8b4ec201bddf3cda3f8321cba2d49"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T040149Z--HCM-2-4--p3b-shared-compile-golden-selector-closure-review.json",
+        "sha256": "f9d65a42d693d22ddf268daf0f1fe74ba0c8531dbc68f18016e6f86d4d1b2b46"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T041756Z--HCM-2-4--p3b-negative-fixture-selector-review.json",
+        "sha256": "de119d9480aefed55f3fa6f91a3ab2ea45e242d4e167625e24b1152ff64c8a44"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T042545Z--HCM-2-4--p3b-negative-fixture-selector-closure-review.json",
+        "sha256": "2d06fbbaabed41afc56df3567f8b7ff7706bf9557d10d9e544569271ff12c146"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T044013Z--HCM-2-4--p3b-feature-spec-contract-selector-review.json",
+        "sha256": "2a7b4bc5feff5b088fd21357667a89bec3c178cb065074af5c3501d16bed10c7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T051215Z--HCM-2-4--p3b-cli-surface-final-implementation-review.json",
+        "sha256": "0efa58fb5317ea8cb9e2bb276f7cf91b7e3aeac3832f3aca95163b83a4296a02"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T061322Z--HCM-2-4--p3b-cli-surface-closure-review.json",
+        "sha256": "58179da7414d73b29b6a4fad0fc572a876bdce98502476f5c92bae0361eb343b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "5ede2a5006db6221fd7716e0a29963114422fdb754b3de7fa123f8b0f366044e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/definition-support-vectors-v1.0.json",
+        "sha256": "b1c6280ea37585dac45061275c85f88f12648da76e3d8fc785da8bd89a21ca79"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "3fdd4f2f8e2f1a55261ed06518e8b51d2fee1a0681d638d50319423442497726"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+        "sha256": "6aa2edab2f7d1f9279ff5bcba9114a80f708a0ecfeb097d6cac49a31593b16af"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-const-string-coverage-selector-approval.md",
+        "sha256": "1a642abf92ed869070b3e03707c20b2f92255eb7ae6fb412d9c76ae5ceb765fc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+        "sha256": "27bc4555665b3cc5bc20aa831b395f23cba444848cb951ac90fc4bcbff92fc3f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1c-project-context-kind-compatibility.md",
+        "sha256": "8be2b1f029f9a8be529ac57b7b8dd9fb4e10e0f5e28e4fd5773bf5e598642bb7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-condition-evaluator-authority-stop.md",
+        "sha256": "3cf486a6a918273a9b5ba297bc8f010faa1eb89eb51b2b54e054c57eb82c8b89"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-selector-correction.md",
+        "sha256": "83ce6d25b6cc7965e41c0bbb2d1723b657c93c332e7cfbb668f503b87e26275e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-cli-surface-proof-selector-repair.md",
+        "sha256": "884b844a48fe279d22dca1b2f2a5f2b704ea7f0cf1a3207f7c094a732366b4d0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-feature-spec-contract-selector-repair.md",
+        "sha256": "1d09ff2d3a3bcc72612ac1b8486195c90a1c7d199ed4e6d41d55393015834c2a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-fixture-contract-selector-repair.md",
+        "sha256": "211c2d32bddf5bf8dc7139975bc4f3820e412164a656b47f23b66f97f7d2ea30"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-foundation-feature-identity-selector-repair.md",
+        "sha256": "408bdf8b1622e34547466a60045de1a9cc23ebaba68e13fe77b1987d20b54932"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-m5-canonical-consumer-selector-repair.md",
+        "sha256": "8efdfae89766aac45f47553d1a72da995b8928138d16171a46d4b90c8cfa1b4b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-negative-fixture-independence-selector-repair.md",
+        "sha256": "3b392d36e43c05d6bd21edfd3fe1e97ddd0c648bd3c5ee3033a425dc0defe41e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md",
+        "sha256": "ad94e0f7003a7ab54c78f3a445dfd83a7568c2bf54dfce9a8ba3854beee4effe"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-shared-compile-golden-selector-repair.md",
+        "sha256": "d5566ba762c9de18168e3e942d6f7e3639415788428d72700900f0e81bee505d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "sha256": "c266416872c44be7bc1acf556aca465f4d0b216d99c9c8f0ea6d502fd8faae51"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P0-inventory-lock.md",
+        "sha256": "52623ac94d5c3ea8b16220fb6a61523de1ad363bf021e1e732941a4133e3b3c9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1A-definition-support.md",
+        "sha256": "0419a5a8b49782b9e50273031c5a7a849126e1af0cec62b6069100fe12016246"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1B-charter-compatibility.md",
+        "sha256": "f78c7fcb574951404b16adcbdf9b8491087fa69ad0e539ad489b04911b782d47"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1C-shipped-root-adoption.md",
+        "sha256": "b9b95e2438d0194b53b20c294e7ead51d0c27501d6a8b4fe4cf3161f8441bee4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md",
+        "sha256": "fa01c18b9ea5e110bc63e1770aa80d1e623f01834af0a41847aef51e5845e62b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3B-cli-surface-proof.md",
+        "sha256": "cf4ddd315f497f4fed44cc48fcc07db5c365f15086891c67bf18ddbd475f8fe6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3B-post-review-mechanical-delta.md",
+        "sha256": "4ed6295e5dcc22c6fb22f38296402a271120c43fd01b6343dcda8e40d996d9b0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sha256": "73d66c6cb1ae0556ba62d044754391454e03750af943cf049a242c437e099888"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "88e7971d937299983c45dff7fbc2233f59f739b341cca55aabe5f8c134c55ff3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+        "sha256": "6c14b06210e03ec060c6d4e94787674f2b829bd5dbc719c07a3f3f0389daac1f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "f45a7d3779f1bc37eccf9f29a9b56451b74331d3f061799e4d3ddb8091664c34"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "10db644309a1faa7ed9b3171ede2800bbd97a1d282688b54bcaaaae9f40fa5e9"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/evidence/happy_path.transcript.txt",
+        "sha256": "49df11333a35ca092a098e5fcdb3046f9ada437306efb48cccf7248280e875c8"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/evidence/m5_handoff_scorecard.md",
+        "sha256": "39bb055c205db752e8d0a6e85c59488aaf4a988507d56490a5a3fedc81ba7040"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/evidence/skip_path.transcript.txt",
+        "sha256": "39897da29d98b7c4a16480ef18e1c99042a0207f97114a940de2e9eab60db98f"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/happy_path/SLICE_PLAN.md",
+        "sha256": "991daaad3c053b7935ed549b5d912943e01e1dac32ab4625945d9e9875c36683"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/happy_path/final_feature_spec.md",
+        "sha256": "618d38aad59004de1fca9d82558f719535d1c844c330e96bd2a21402ba33b757"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/skip_path/final_feature_spec.md",
+        "sha256": "618d38aad59004de1fca9d82558f719535d1c844c330e96bd2a21402ba33b757"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/happy_path/stage_10_feature_spec.md",
+        "sha256": "1868e192b3df4058a57900c2a4ad16dd0947c0e583f548a083944dc1d3f3862f"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/skip_path/stage_10_feature_spec.md",
+        "sha256": "1868e192b3df4058a57900c2a4ad16dd0947c0e583f548a083944dc1d3f3862f"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/.handbook/definitions/profiles/work-specification-root-1.0.0.yaml",
+        "sha256": "6a357001ea823d1de1d6219753d733d2aaad8081ebad1ee6de81183c98cc5509"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/.handbook/profile-selection.json",
+        "sha256": "3b9c4a1480cf676f0448cafbfb2f4e563b9e4b31b959bf9840bfd05e9f477c7f"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "81fbbaf7cfd5d84141cdbb98c338fb40e37fd13c16d916df9ef463fdb694b74e"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "adbc65bd50111c5cd75e61b02361023023adcd99b0512ec713c36137fcd767be"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/core/stages/10_feature_spec.md",
+        "sha256": "09992027838be50c146460c8c17b8e3c1aab98dfca844f747e60af13ab0c0301"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/capture.apply.stage_10_feature_spec.txt",
+        "sha256": "03ec7cfcca2d30a6966ec18a878e9760a8845ff4c27b1871c9e8b170ba24d540"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/capture.preview.stage_10_feature_spec.txt",
+        "sha256": "af4b4a6955411669de7100eb6066e528ad0fc8038686b734a81eba28a123c67c"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/capture.refused.stage_10_raw_compile_payload.txt",
+        "sha256": "ddb6c4ad0be1f2c60d0d5796ce77c8f6cae2544e72653e2484260b6fd5315d29"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/compile.stage_10_feature_spec.explain.full_context.txt",
+        "sha256": "5909a824919daee58d372500c5cd0cee0424a8fcc6562c259f5355b49cb79767"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/compile.stage_10_feature_spec.payload.full_context.txt",
+        "sha256": "61a4fcbdf862ba64105f2660ba687073f73166b4aae88552add5147a6ccc75cb"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/model_outputs/stage_10_feature_spec.md",
+        "sha256": "aee00789586f221d7887721648df23810406163b8b937fc89ca24d1355cd04c2"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/.handbook/definitions/profiles/work-specification-root-1.0.0.yaml",
+        "sha256": "6a357001ea823d1de1d6219753d733d2aaad8081ebad1ee6de81183c98cc5509"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/.handbook/profile-selection.json",
+        "sha256": "3b9c4a1480cf676f0448cafbfb2f4e563b9e4b31b959bf9840bfd05e9f477c7f"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "81fbbaf7cfd5d84141cdbb98c338fb40e37fd13c16d916df9ef463fdb694b74e"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "adbc65bd50111c5cd75e61b02361023023adcd99b0512ec713c36137fcd767be"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/stages/10_feature_spec.md",
+        "sha256": "09992027838be50c146460c8c17b8e3c1aab98dfca844f747e60af13ab0c0301"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:8e2f246b9739e1d0bafe125d5408d44e2f0eb3d7e6708dbdba7a9f8f71acbf43"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "complete_hcm_2_4_partial_subject",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "partial_true_stop_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Canonical artifact identities",
+        "Artifact kind/schema registry",
+        "Instance profile and descriptor selection",
+        "Shipped default artifact set",
+        "Structured authoring",
+        "Markdown validation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 \u2014 Remaining shipped artifact families",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "Greenfield deletion gates",
+        "HCM-2.4 partial implementation evidence boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Objective and completion boundary",
+        "Implementation packet decomposition",
+        "Exact implementation surface selectors",
+        "Proof wall and Phase 2 exit mapping"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+      "sections": [
+        "Reviewed implementation boundary",
+        "Earned truth",
+        "Blocked and unearned truth",
+        "Control-pack delta",
+        "Verification carried forward",
+        "Advisory disposition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "Review baseline is 8c16a90657a787e95d55c856fac3d8d45d9e68be. The integrated subject consists of committed checkpoints 5cf41d2f64d68cb7f78abb5eccab9acf307089d3 and 5a2ccf6939be0e549e7e7355a245c7511c271eef plus the live ten-path documentation/control-pack delta. The manifest excludes the eight unrelated pre-existing .claude/AGENTS.md/CLAUDE.md changes. P2 has no approved condition-evidence/evaluator contract; P4/P5 have no approved generic coverage-token derivation selector; P6 has not begun and both HCM-2 bridge IDs remain live. Raw proof and command results are in the manifested packet proof files, including the final 273-test P3/P3B wall, complete workspace result, affected strict clippy/fmt/archive/diff checks, and pre-P3B-commit GitNexus LOW/zero-process result.",
+  "allowed_scope": [
+    "Read-only review of the complete 168-path HCM-2.4 partial subject against baseline 8c16a90657a787e95d55c856fac3d8d45d9e68be.",
+    "Verify artifact existence, semantic correctness, owner-boundary correctness, real-path adoption, runtime proof, control-pack status, and review cleanliness as separate questions.",
+    "Confirm P1A adds only the approved ResolvedSchema::collect_coverage_leaf_shapes const-string predicate and no sixth production symbol or broader inference.",
+    "Confirm the exact maximum promotion: five package-admitted successor definition closures, shipped-root 1.2 with three instances, and the exact Work Specification Stage 10 real path.",
+    "Confirm Environment Context, Decision/Risk positive mutation, P6 bridge deletion, Phase 2 exit, program-wide YAML closure, and HCM-3.x remain unearned.",
+    "Verify the two committed checkpoint boundaries and live documentation delta preserve unrelated work and contain no transient fixture outputs."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No P2 evaluator design, P4/P5 token-derivation design, P6 implementation, Phase 2 completion claim, or HCM-3.x work.",
+    "No open-ended redesign of already packet-reviewed implementation; report only demonstrated P1/P2 effects on the integrated selected outcome, with P3/P4 for useful non-blocking coverage or wording.",
+    "Do not compare against or adopt conclusions from prior reviewers before independently identifying findings."
+  ],
+  "tasks": [
+    "Replay all manifest hashes, aggregate fingerprint, and text hygiene; confirm the eight unrelated paths and transient fixture outputs are absent from the subject.",
+    "Inspect the baseline-to-subject integration across P1A/P1B/P1C/P3/P3B and the exact stop evidence for P2/P4/P5.",
+    "Verify the control-pack and slice-status delta neither over-promotes earned seams nor understates committed real-path proof.",
+    "Verify both bridge rows and every unearned Phase 2 exit condition remain explicitly open.",
+    "Verify recorded proof supports every claimed exact promotion and that unavailable/blocked proof is stated honestly.",
+    "Identify findings independently, then compare only P3/P4 candidates with the selected-scope inventory.",
+    "Return findings first in Critical, Required, Optional, Nit order with severity, exact file/line, violated contract or gate, why wrong, smallest valid remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "No unresolved valid P1/P2 may remain in the committed partial subject or material control-pack delta.",
+    "P1A permits no released-schema change, sixth production symbol, or inference beyond a type-absent string-valued const leaf.",
+    "Unit/component proof cannot promote a seam whose real path bypasses the target owner.",
+    "P2 and P4/P5 authority prerequisites cannot be treated as completed proof or waived debt.",
+    "P6 and Phase 2 exit require P2-P5 independently green; both bridge deletion rows remain open.",
+    "P3/P4 advisories may remain clean only with exact disposition under 09."
+  ],
+  "stop_conditions": [
+    "Return blocked if complete subject identity, baseline comparison, or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Stop review rather than infer missing authority or broaden beyond HCM-2.4."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

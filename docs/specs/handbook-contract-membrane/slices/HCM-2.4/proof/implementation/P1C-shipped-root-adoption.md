@@ -1,7 +1,13 @@
 # HCM-2.4 P1C shipped-root adoption proof
 
-Status: discovery remediation and complete packet proof are green;
-different-fresh implementation closure review is pending.
+Status: **implemented and closure-review CLEAN**
+
+Different-fresh closure dispatch:
+`20260726T235106Z--HCM-2-4--p1c-shipped-root-adoption-closure-review`;
+subject
+`sha256:c727993311cf34fed1d0add17dbe01806524a54a2983a8805c2061ae048c4e09`.
+The closure found no unresolved P1/P2. P1C is included in reviewed checkpoint
+commit `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`.
 
 ## Entry and authority
 
