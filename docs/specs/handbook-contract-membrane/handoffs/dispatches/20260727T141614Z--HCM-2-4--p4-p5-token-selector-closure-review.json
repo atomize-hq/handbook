@@ -1,0 +1,193 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T141614Z--HCM-2-4--p4-p5-token-selector-closure-review",
+  "created_at_utc": "2026-07-27T14:16:14Z",
+  "source_handoff_ids": [
+    "20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required"
+  ],
+  "parent_orchestration_id": "20260727T135500Z--HCM-2-4--authority-prerequisites-resume-orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs",
+    "test-driven-development",
+    "code-review-and-quality",
+    "debugging-and-error-recovery"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P4-P5-coverage-token-selector",
+  "subject_fingerprint": "sha256:5f2909db89e6725bf36ba47e1f0965e1bfe51437d297e3234e4d4ad77919b506",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p4-p5-coverage-token-selector-closure-1",
+    "trigger_run_ids": [
+      "p4-p5-coverage-token-selector-discovery-1"
+    ],
+    "finding_refs": [
+      "p4-p5-coverage-token-selector-discovery-1-P2-1"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/src/artifact_mutation.rs",
+        "sha256": "62f7cee533b8ecc0ee6734e102bffa1bf49bebb575a035c291d06f73d8fd0a18"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_decision_record.rs",
+        "sha256": "81167586764922e9bb2232d5a51c20f1f492b5beb10e2a640fb7770a0a6c8f64"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_risk_record.rs",
+        "sha256": "0bd8f9168a6ef83c63cfdd3f5caeb55b1fa275e935c673ff633adfb8172e4ccf"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "7f72e8cbc5378272084c5eb4eb7315b1546aa78172a5c5c8b540f977a87a3820"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "7448815d0335167581b646eff2d16080991059bec1182e422f61cc4e4b3856e0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "e1e7247787cd684bdd5f8fcb5768bdadc1ad51e810e49f093610c8f8bbddcaaa"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+        "sha256": "e967c13c28d0c532e10d1c37c2f04033a7ca0453697477267d4df98d76d32b09"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "sha256": "c266416872c44be7bc1acf556aca465f4d0b216d99c9c8f0ea6d502fd8faae51"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sha256": "73d66c6cb1ae0556ba62d044754391454e03750af943cf049a242c437e099888"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "88e7971d937299983c45dff7fbc2233f59f739b341cca55aabe5f8c134c55ff3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "64d635c00b9d03543bc2075446bf0d972c05c56cb527e9cb6a8214bf1995ad95"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "94c7f70810c0df31b171bff18196281d8a1bca0c185c0c3ef1f4c471ba3526ab"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:5f2909db89e6725bf36ba47e1f0965e1bfe51437d297e3234e4d4ad77919b506"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "selector_status_and_ceiling_remediation",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local_operator_selection",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "post_remediation_pre_implementation_closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+      "sections": [
+        "Exact production selector",
+        "Exact RED/GREEN proof selector",
+        "Impact and reviewability ceiling",
+        "Non-goals and exit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P4 — Decision Record support proof",
+        "P5 — Risk Record support proof",
+        "Exact implementation surface selectors"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "Status",
+        "Dependency graph",
+        "P4 — Decision Record support proof",
+        "P5 — Risk Record support proof"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery run p4-p5-coverage-token-selector-discovery-1 returned P2 p4-p5-coverage-token-selector-discovery-1-P2-1 because the plan and todo status summaries still called P4/P5 authority-blocked and the plan said they required a selector. The parent changed only those summaries and the plan boundary to distinguish P2 runtime authority-blocking from the operator-approved P4/P5 selector awaiting review and RED/GREEN implementation. The parent also accepted the discovery P4 wording advisory and removed the stray sixth-production-symbol phrase; the exact one-production/four-test ceiling is otherwise unchanged. No production or test byte changed.",
+  "allowed_scope": [
+    "Read-only replay of the 12 post-remediation manifest entries and exact remediation diff.",
+    "Confirm P2 p4-p5-coverage-token-selector-discovery-1-P2-1 is closed across SPEC, decision, plan, and todo current-truth summaries.",
+    "Confirm removing the stray phrase leaves the one-production/four-test impact ceiling exact and unchanged.",
+    "Check only for remediation-caused P1/P2 regression in selector coherence, reviewability, preserved boundaries, or impact ceiling."
+  ],
+  "non_goals": [
+    "No open-ended discovery beyond the known remediation and directly affected selector boundary.",
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No implementation review or approval of future production/test bytes.",
+    "No released definition, fingerprint, public API, dependency, Cargo/version, schema inference, P2 runtime, P6, bridge deletion, or sibling-slice change."
+  ],
+  "tasks": [
+    "Verify the complete changed subject identity and exact remediation delta.",
+    "Confirm P2 p4-p5-coverage-token-selector-discovery-1-P2-1 is closed.",
+    "Confirm the P4 wording advisory is corrected without weakening the ceiling.",
+    "Confirm no directly caused or unmasked P1/P2 affects the selected integrated outcome.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "P2 runtime remains authority-blocked while P4/P5 have an operator-approved selector requiring clean review and RED/GREEN implementation",
+    "Only Function:crates/engine/src/artifact_mutation.rs:intake_commit_plan may change in production after selector closure",
+    "Exactly four existing test functions may change for the selected proof",
+    "Impact ceiling remains LOW, 3 impacted, 1 direct caller, 0 processes, 2 modules",
+    "No production or test byte has changed during selector review/remediation",
+    "P6 remains forbidden"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
