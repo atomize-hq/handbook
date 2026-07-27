@@ -1,0 +1,341 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed",
+  "created_at_utc": "2026-07-27T21:51:33Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2-bounded-over-limit-planning-repair",
+  "orchestration_id": "20260727T214043Z--HCM-2-4--dual-ceiling-planning-orchestration",
+  "source_handoff_ids": [
+    "20260727T204619Z--HCM-2-4--orchestration--p2-unadmitted-discovery-required-stop"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-27T21:51:33Z",
+    "evidence_ref": "Fresh built-in reviewer /root/hcm_2_4_p2_dual_ceiling_review completed the prevalidated immutable dispatch with CLEAN."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "p2-dual-ceiling-planning-repair-discovery-1",
+      "dispatch_id": "20260727T214043Z--HCM-2-4--p2-dual-ceiling-planning-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T214043Z--HCM-2-4--p2-dual-ceiling-planning-review.json",
+      "dispatch_fingerprint": "sha256:2f06956ff3ba8568730e5b9ba3c0159da461f8a283bb3947057f733ba030c7cb",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_p2_dual_ceiling_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:0108c07a1e32cabebe8c9abc509c83d60fd2cfb2488abc14e056a701e821ff53",
+      "result_subject_fingerprint": "sha256:0108c07a1e32cabebe8c9abc509c83d60fd2cfb2488abc14e056a701e821ff53",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T214043Z--HCM-2-4--p2-dual-ceiling-planning-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "git:68ea22e11920b5d25262af8bdae0b067d689b587"
+      ]
+    }
+  ],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "68ea22e11920b5d25262af8bdae0b067d689b587",
+    "subject_fingerprint": "sha256:0108c07a1e32cabebe8c9abc509c83d60fd2cfb2488abc14e056a701e821ff53",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T214043Z--HCM-2-4--p2-dual-ceiling-planning-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "git:68ea22e11920b5d25262af8bdae0b067d689b587"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T214043Z--HCM-2-4--p2-dual-ceiling-planning-review.json"
+  },
+  "active_resolution": {
+    "level": "architecture",
+    "scope_horizon": "HCM-2.4 P2 dual-ceiling planning repair",
+    "detail_resolution": "exact transaction-store count and canonical-envelope observation limits",
+    "temporal_horizon": "reviewed planning completion and mechanical closeout",
+    "authority_horizon": "planning committed; P2S and P2A approval remain distinct human decisions",
+    "memory_horizon": "selected true stop, immutable dispatch, reviewer result, and primary commit",
+    "validation_horizon": "two-commit planning closeout only"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [
+      "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml"
+    ],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+    ],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "crates/engine/definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml"
+  },
+  "objective": "Repair only the transaction-store observation contract with exact checked count and canonical-envelope ceilings, obtain one prevalidated fresh independent review, commit CLEAN planning, close mechanically, and stop before P2S/P2A approval.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T204619Z--HCM-2-4--orchestration--p2-unadmitted-discovery-required-stop.json",
+      "sections": [
+        "entire selected true-stop record"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "Fingerprinted evaluation closure",
+        "Normative transaction-store failure matrix",
+        "Exact proof selectors",
+        "Discovery-review remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Built-in delegated-run protocol",
+        "Two-commit true-stop closeout",
+        "Deterministic ledger rebuild"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "68ea22e11920b5d25262af8bdae0b067d689b587",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Resumed only from the explicitly selected 20260727T204619Z true stop and preserved all unrelated dirty-worktree bytes.",
+    "Replaced count-only entry-4097 semantics with strict checked dual ceilings: candidate count greater than 4096 or projected canonical envelope greater than 131072 bytes.",
+    "Replaced entry_limit_exceeded with directory_limit_exceeded while preserving the five-null tuple and transaction_store_over_limit.",
+    "Required checked exact RFC 8785 projection, offender non-retention, zero partial envelope/fingerprint, complete bounded-envelope fingerprints, one fixed over-limit closure, and limit precedence over alias/invalid validation.",
+    "Froze and independently recomputed count 4096/4097, Unix 1101/1102, Windows 557/558, exact 131072/131073-byte, long-name, and arbitrary-suffix vectors.",
+    "Created and passed --verify-dispatch for the immutable 23-path subject before spawning exactly one fresh isolated read-only reviewer.",
+    "Reviewer /root/hcm_2_4_p2_dual_ceiling_review returned CLEAN with no P3/P4 advisories after independently replaying the manifest, arithmetic, envelope hashes, closure rules, and authority boundary.",
+    "Committed the exact reviewed planning and immutable dispatch evidence as 68ea22e11920b5d25262af8bdae0b067d689b587. No runtime, schema, definition, P2S/P2A approval, P4 proof, P6, or sibling work occurred."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "status": "completed",
+      "summary": "Review-clean exact dual-ceiling transaction-store observation contract and proof vectors."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T214043Z--HCM-2-4--p2-dual-ceiling-planning-review.json",
+      "status": "completed",
+      "summary": "Prevalidated immutable 23-path CLEAN review dispatch."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned planning completion and distinct-approval stop record."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "status": "completed",
+      "summary": "Deterministically rebuilt query ledger containing this planning completion."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-DEC-P2-DUAL-CEILING-001",
+      "summary": "Transaction-store over-limit is selected when candidate count exceeds 4096 or exact projected RFC 8785 directory-envelope size exceeds 131072 bytes.",
+      "authority_effect": "Every size operation is checked; an offending entry is not retained or serialized; complete bounded directories retain their exact envelope fingerprints.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-DEC-P2-FIXED-LIMIT-CLOSURE-002",
+      "summary": "Count, byte, and checked-arithmetic failures use directory_limit_exceeded, the five-null tuple, and transaction_store_over_limit.",
+      "authority_effect": "No selected ceiling, count, projected size, offending name, partial envelope, or partial fingerprint enters the closure; all limit failures intentionally share one fixed closure and precede alias/invalid validation.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-DEC-P2-PLANNING-CLEAN-003",
+      "summary": "The exact 23-path planning subject is independently CLEAN and committed at 68ea22e11920b5d25262af8bdae0b067d689b587.",
+      "authority_effect": "Planning completion permits presentation for distinct human P2S/P2A approval only; it grants no runtime, schema, definition, P4, P6, or sibling authority.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T214043Z--HCM-2-4--p2-dual-ceiling-planning-review.json",
+        "git:68ea22e11920b5d25262af8bdae0b067d689b587"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "deterministic dual-ceiling fixture verifier",
+      "status": "passed",
+      "evidence_ref": "Count 4096/4097, Unix 1101/1102, Windows 557/558, exact 131072/131073-byte, long-name, arbitrary-suffix, and all bounded-envelope SHA-256 values recomputed."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T214043Z--HCM-2-4--p2-dual-ceiling-planning-review.json",
+      "status": "passed",
+      "evidence_ref": "Internal-dispatch v1.3 schema, live 23-path manifest, aggregate sha256:0108c07a1e32cabebe8c9abc509c83d60fd2cfb2488abc14e056a701e821ff53, and text hygiene passed before spawn and again before primary commit."
+    },
+    {
+      "command": "fresh built-in independent complete-subject review",
+      "status": "passed",
+      "evidence_ref": "/root/hcm_2_4_p2_dual_ceiling_review returned completed/CLEAN with zero findings and zero P3/P4 advisories."
+    },
+    {
+      "command": "validate_handoffs.py normal plus both required self-tests before primary commit",
+      "status": "passed",
+      "evidence_ref": "All record/dispatch schemas, historical admission, orchestration contract, manifest, hygiene, lineage, and deterministic ledger checks passed."
+    },
+    {
+      "command": "git diff --cached --check and GitNexus detect-changes --scope staged",
+      "status": "passed",
+      "evidence_ref": "Staged planning/evidence bytes had no whitespace errors; GitNexus reported no indexed symbol or execution-flow changes."
+    },
+    {
+      "command": "primary reviewed planning commit",
+      "status": "passed",
+      "evidence_ref": "git:68ea22e11920b5d25262af8bdae0b067d689b587"
+    },
+    {
+      "command": "post-record normal validation, both required self-tests, diff checks, and staged GitNexus change detection",
+      "status": "passed",
+      "evidence_ref": "Mechanical handoff/ledger closeout validates independently from the reviewed planning commit."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/",
+      "sections": [
+        "P2 planning amendment",
+        "SPEC",
+        "tasks",
+        "preserved partial control-pack status"
+      ],
+      "reason": "Freeze and commit the review-clean dual-ceiling planning state.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/",
+      "sections": [
+        "five predecessor P2 planning review dispatches",
+        "one new prevalidated dual-ceiling review dispatch"
+      ],
+      "reason": "Preserve immutable review lineage and the final CLEAN subject.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed.json",
+      "sections": [
+        "entire completed planning handoff"
+      ],
+      "reason": "Bind the primary commit, reviewer result, exact planning authority, and distinct approval stop.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministically rebuilt query index"
+      ],
+      "reason": "Index the canonical completed planning handoff.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "Stop now. A later explicit human decision may separately approve P2S and the non-production P2A feasibility selector; no automatic continuation is authorized.",
+    "condition": "A human explicitly selects this exact completed handoff and grants distinct P2S and/or P2A authority.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed.json",
+        "sections": [
+          "entire completed planning handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "sections": [
+          "entire review-clean planning amendment"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sections": [
+          "P2 — Environment Context vertical"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sections": [
+          "P2 — Environment Context"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Distinct human review and approval decision for P2S, which adds only the frozen schemas and evaluator definition.",
+      "Distinct human review and approval decision for the non-production P2A native-feasibility selector.",
+      "After explicit approval, only the separately bounded packet selected by that approval."
+    ],
+    "prohibited_scope": [
+      "No automatic P2S/P2A approval or implementation from this closeout.",
+      "No P2 Rust, schema, definition, producer, native adapter, evaluator, CLI/compiler, Environment Context, or runtime work without a new exact approval.",
+      "No P4 proof, P6, Phase 2 exit, sibling work, reset, stash, or unrelated cleanup."
+    ],
+    "acceptance_criteria": [
+      "Primary planning commit 68ea22e11920b5d25262af8bdae0b067d689b587 remains bound to CLEAN subject sha256:0108c07a1e32cabebe8c9abc509c83d60fd2cfb2488abc14e056a701e821ff53.",
+      "The completed v1.3 handoff and deterministic ledger validate in normal, historical-admission, and orchestration-contract modes.",
+      "Any next P2 packet begins only after a distinct human approval that names its exact selector and preserves the dual-ceiling contract.",
+      "All unrelated dirty-worktree paths remain preserved."
+    ],
+    "stop_conditions": [
+      "Stop if no distinct P2S/P2A approval is supplied.",
+      "Stop on any request to infer runtime or schema/definition authority from planning CLEAN.",
+      "Stop on any change that weakens the count/byte ceilings, fixed closure, offender non-retention, complete bounded fingerprints, or over-limit precedence.",
+      "Stop on P4/P6/sibling expansion or any inability to preserve unrelated work."
+    ]
+  },
+  "supersedes": [
+    "20260727T204619Z--HCM-2-4--orchestration--p2-unadmitted-discovery-required-stop"
+  ],
+  "chat_summary": "HCM-2.4 P2 dual-ceiling planning is CLEAN at sha256:0108c07a...ff53 and committed as 68ea22e. Count >4096 or projected canonical envelope >131072 now shares one fixed over-limit closure with exact boundary vectors. No runtime or approval occurred; stop for distinct P2S/P2A human approval."
+}
