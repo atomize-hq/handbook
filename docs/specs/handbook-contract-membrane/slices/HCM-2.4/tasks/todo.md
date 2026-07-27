@@ -58,6 +58,11 @@ implementation is separately selected.
       mismatched dependency refusal.
 - [ ] Prove duplicate-safe parsing, coverage, fingerprints, exact refs, null
       Resolution input, and full-byte render goldens.
+- [ ] Classify only a type-absent, string-valued `const` coverage leaf as
+      String in `ResolvedSchema::collect_coverage_leaf_shapes`; prove every
+      other indeterminate case remains refused, including string `const` with
+      an unsupported explicit type, and stop on a sixth production symbol or
+      broader inference.
 - [ ] Prove no public API/Cargo/external-dependency/package-boundary change.
 - [ ] Record status/evidence: pending.
 
@@ -99,6 +104,14 @@ implementation is separately selected.
 
 - [ ] Select only the new shipped-root profile ref and exact P1A source closure
       in `shipped_profile_request`.
+- [ ] Admit only exact Project Context kind `1.0` or `1.1` through the existing
+      private `selected_contract_matches` predicate while preserving the
+      unchanged schema `1.0`, canonical path, equality checks, and every other
+      mismatch refusal.
+- [ ] Before editing the predicate, prove RED for exact `1.1`; retain exact
+      `1.0`; then prove both positives plus crossed directions, unrelated
+      identity, unlisted version, prefix, range, `latest`, bare/fallback, wrong
+      schema, and wrong path refusals in the existing unit test.
 - [ ] Assert non-null exact intake refs and singleton exact renderer refs for
       both `project_context` and `environment_context`.
 - [ ] Preserve exactly three root descriptors, Charter authority, condition
@@ -106,12 +119,32 @@ implementation is separately selected.
 - [ ] Prove the real resolver returns generic shipped-root 1.2 decisions,
       immediately passes the exact Charter membrane, and every Charter record
       still carries the released 1.1 pair.
-- [ ] Replay all CRITICAL upstream flows, the complete HCM-2.2 wall, and prove
+- [ ] In Unix compiler test
+      `doctor_api_projects_the_exact_stable_project_context_row`, change only
+      report schema expectation `1.1.0` to `1.2.0` and Project Context kind
+      expectation `1.0.0` to `1.1.0`.
+- [ ] In Unix CLI test `doctor_reports_ready_when_required_artifacts_present`,
+      replace only its obsolete inline Charter schema `1.0` setup with the
+      existing `write_valid_selected_charter` helper and change only its
+      Project Context kind expectation `1.0.0` to `1.1.0`; do not edit the
+      helper, fixture assets, another assertion, or production code.
+- [ ] In WSL with an isolated Linux target directory, run those two exact
+      Unix projection tests plus
+      `doctor::tests::doctor_nulls_project_context_and_is_invalid_after_substitution_or_inode_aba`.
+- [ ] Replay the selected-profile targets, P1B compatibility target, unchanged
+      HCM-2.1 integration target at 12/12, complete HCM-2.2 wall, HCM-2.3
+      preservation wall, and all CRITICAL upstream flows; prove
       Work/Decision/Risk remain unselected.
 - [ ] Record status/evidence: pending.
 
 ## P2 — Environment Context
 
+- [ ] BLOCKED: obtain a separately approved, fingerprinted
+      managed-operational-surface condition evidence/evaluator contract and an
+      exact reviewed implementation selector, or prove that dependency
+      complete. Do not use structured Environment Context input,
+      `applicability_basis`, profile opt-in, artifact presence, or
+      `indeterminate` coercion as condition evidence.
 - [ ] Establish a focused RED proving Markdown is currently authoritative.
 - [ ] Write only selected `.handbook/project/environment.yaml` canonical bytes.
 - [ ] Cut CLI/setup/doctor/compiler/flow reads to selected retained YAML.
@@ -127,49 +160,166 @@ implementation is separately selected.
 
 ## P3 — Work Specification
 
-- [ ] Establish focused RED for authoritative `FEATURE_SPEC.md`.
-- [ ] Capture schema-valid fixed-path Work Specification YAML.
-- [ ] Add/select the exact
+- [x] Establish focused RED for authoritative `FEATURE_SPEC.md`.
+- [x] Capture schema-valid fixed-path Work Specification YAML.
+- [x] Add/select the exact
       `example.profile.hcm-2-4-work-specification@1.0.0` fixture profile and
       frozen `work_specification`/`delivery_unit` descriptor before capture.
-- [ ] Bind Stage 10 provenance, identity, trust, and handoff decisions to YAML.
-- [ ] Generate the fixed Feature Spec Markdown view deterministically and reject
+- [x] Bind Stage 10 provenance, identity, trust, and handoff decisions to YAML.
+- [x] Generate the fixed Feature Spec Markdown view deterministically and reject
       it as canonical input.
-- [ ] Replay capture/cache/rollback/provenance and every affected handoff
+- [x] Replay capture/cache/rollback/provenance and every affected handoff
       emit/validate process.
-- [ ] Prove descriptor selection rather than equality with a hard-coded path.
-- [ ] Prove no public bundle/API, command, dynamic path, or package change.
-- [ ] Record status/evidence: pending.
+- [x] Prove descriptor selection rather than equality with a hard-coded path.
+- [x] Prove no public bundle/API, command, dynamic path, or package change.
+- [x] Record status/evidence:
+      `proof/implementation/P3-work-specification.md`; closure reviewer
+      `/root/hcm_2_4_p3_closure_review` returned CLEAN.
+
+## P3B — CLI surface proof integration
+
+- [x] Record the eight-test workspace-wall RED and exact test-only selector in
+      `decision/20260727-p3b-cli-surface-proof-selector-repair.md`.
+- [x] Obtain fresh built-in review of the first exact selector; reviewer
+      `/root/hcm_2_4_p3b_selector_review` returned CLEAN.
+- [x] Establish focused RED showing the recursively copied fixture stage still
+      declares the superseded single Markdown output.
+- [x] Record the exact additive fixture-only selector in
+      `decision/20260727-p3b-fixture-contract-selector-repair.md`.
+- [x] Obtain fresh built-in review of the additive fixture selector before
+      editing any fixture authority input; reviewer
+      `/root/hcm_2_4_p3b_fixture_selector_review` returned CLEAN.
+- [x] Synchronize only the ten selected fixture-authority inputs; do not commit
+      generated fixture-repo outputs.
+- [x] Establish focused RED showing synchronized fixture authority reaches the
+      existing durable repository-identity prerequisite and refuses before
+      authoring.
+- [x] Prove with the existing engine repository-open test that a fresh
+      setup-owned identity can coexist with repository profile selection.
+- [x] Record the exact test-only prerequisite amendment in
+      `decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md`.
+- [x] Obtain fresh built-in review of the repository-identity prerequisite
+      amendment before implementation resumes; reviewer
+      `/root/hcm_2_4_p3b_identity_selector_review` returned CLEAN.
+- [x] Establish focused GREEN for standalone Stage 10 preview/apply and raw
+      compile-payload refusal after fresh temporary-repository identity setup.
+- [x] Establish focused RED showing the foundation-flow Work Specification
+      inputs would replace the preserved M4 handoff feature ID with
+      `example-record-work`.
+- [x] Record the exact two-fixture identity repair in
+      `decision/20260727-p3b-foundation-feature-identity-selector-repair.md`.
+- [x] Obtain fresh built-in discovery review of the exact two-fixture identity
+      amendment; reviewer
+      `/root/hcm_2_4_p3b_feature_identity_selector_review` returned one
+      P2/Required schema-pattern finding.
+- [x] Remediate
+      `p3b-foundation-feature-identity-selector-repair-discovery-1-P2-1` by
+      using schema-valid `fs.m4.foundation.journey-2026-04`, which preserves
+      the required slug.
+- [x] Obtain different-fresh closure review of the remediated two-fixture
+      selector before changing either model output; reviewer
+      `/root/hcm_2_4_p3b_feature_identity_selector_closure` returned CLEAN and
+      closed the discovery P2.
+- [x] Establish focused RED showing the M5 test consumer still requests the
+      generated Markdown view as an authoritative handoff input.
+- [x] Record the exact canonical-YAML consumer/evidence selector in
+      `decision/20260727-p3b-m5-canonical-consumer-selector-repair.md`.
+- [x] Obtain fresh built-in review of the M5 canonical-consumer selector before
+      editing the three helpers or newly selected evidence paths; reviewer
+      `/root/hcm_2_4_p3b_m5_consumer_selector_review` returned CLEAN.
+- [x] Run the complete CLI surface and isolate the remaining 3/98 failures to
+      the paired shared compile payload/explain goldens.
+- [x] Record the exact two-golden repair in
+      `decision/20260727-p3b-shared-compile-golden-selector-repair.md`.
+- [x] Obtain fresh built-in discovery review before regenerating either shared
+      golden; reviewer `/root/hcm_2_4_p3b_compile_golden_selector_review`
+      returned one P2/Required missing-consumer finding.
+- [x] Remediate
+      `p3b-shared-compile-golden-selector-repair-discovery-1-P2-1` by adding
+      `crates/pipeline/tests/pipeline_compile.rs` as a read/proof-only consumer.
+- [x] Obtain different-fresh closure review before regenerating either shared
+      golden; reviewer
+      `/root/hcm_2_4_p3b_compile_golden_selector_closure` returned CLEAN and
+      closed the discovery P2.
+- [x] Repair only Stage 10 setup/assertions in `crates/cli/tests/cli_surface.rs`.
+- [x] Regenerate only the happy/skip journey transcript proof bytes.
+- [x] Remove transient fixture-repository outputs before packet verification.
+- [x] Establish packet-wall RED showing the missing-Work-Specification refusal
+      test depended on an untracked generated YAML file before product
+      execution.
+- [x] Record the exact one-assertion test-only selector in
+      `decision/20260727-p3b-negative-fixture-independence-selector-repair.md`.
+- [x] Obtain fresh built-in selector review; discovery reviewer
+      `/root/hcm_2_4_p3b_negative_fixture_selector_review` returned one P2
+      selector-coherence finding, and different-fresh reviewer
+      `/root/hcm_2_4_p3b_negative_fixture_selector_closure` returned CLEAN
+      after the exact SPEC-row remediation.
+- [x] Replace only the fallible deletion with an explicit committed-fixture
+      absence assertion and preserve all refusal assertions.
+- [x] Establish packet-wall RED showing `feature_spec_contract` compares the
+      rich M4 view to a distinct minimal renderer fixture.
+- [x] Record the exact cross-case test-only selector in
+      `decision/20260727-p3b-feature-spec-contract-selector-repair.md`.
+- [x] Obtain fresh built-in selector review; reviewer
+      `/root/hcm_2_4_p3b_feature_spec_contract_selector_review` returned CLEAN
+      with one P4 proof-source-attribution wording nit, corrected locally.
+- [x] Replace only the stale cross-fixture equality with exact happy/skip
+      canonical-input and generated-view equality.
+- [x] Run the full CLI surface, 273-test P3/P3B packet wall, strict clippy,
+      archive boundary/self-test, diff hygiene, and complete workspace wall.
+- [x] Obtain complete-subject discovery review; reviewer
+      `/root/hcm_2_4_p3b_final_implementation_review` returned one P2 semantic
+      objective finding and one P4 proof-count nit.
+- [x] Remediate `p3b-final-implementation-review-P2-1` in both canonical model
+      outputs, dependent generated views/plan, the selector record, and one
+      focused semantic assertion; correct `p3b-final-implementation-review-P4-1`.
+- [x] Rerun focused M4/M5/semantic proof, the 273-test P3/P3B wall, strict
+      clippy, archive/diff checks, and the complete workspace wall after
+      remediation.
+- [x] Obtain different-fresh closure review; reviewer
+      `/root/hcm_2_4_p3b_final_implementation_closure` returned CLEAN with no
+      new finding or advisory and closed the discovery P2/P4.
+- [x] Obtain different-fresh implementation review and record
+      `proof/implementation/P3B-cli-surface-proof.md`.
 
 ## P4 — Decision Record
 
-- [ ] Select `example.profile.hcm-2-4-decision-record@1.0.0` from the exact
+- [x] Select `example.profile.hcm-2-4-decision-record@1.0.0` from the exact
       decision fixture profile and add only `decision_record` at
       `.handbook/records/decision.yaml` with the frozen null-role/intake/renderer
       closure.
-- [ ] Exercise intake, generic mutation/read/validate, and renderer against real
-      canonical bytes.
+- [ ] BLOCKED: positive generic mutation/promotion proof against real canonical
+      bytes requires a separately approved coverage-token derivation selector.
+      The default-green target retains intake/read/validate proof and an exact
+      negative regression; the positive test remains executable with
+      `--ignored`.
 - [ ] Prove no root default, generated command, inferred filename, Projection,
       or persistent view.
-- [ ] Record status/evidence: pending.
+- [x] Record bounded-stop evidence:
+      `proof/implementation/P4-decision-record.md` and
+      `decision/20260727-p4-p5-generic-mutation-token-authority-stop.md`.
 
 ## P5 — Risk Record
 
-- [ ] Select `example.profile.hcm-2-4-risk-record@1.0.0` from the exact risk
+- [x] Select `example.profile.hcm-2-4-risk-record@1.0.0` from the exact risk
       fixture profile and add only `risk_record` at
       `.handbook/records/risk.yaml` with the frozen null-role/intake/renderer
       closure.
-- [ ] Exercise intake, generic mutation/read/validate, and renderer against real
-      canonical bytes.
-- [ ] Prove no root default, generated command, inferred filename, Projection,
+- [ ] BLOCKED: positive generic mutation/promotion proof requires the same
+      separately approved coverage-token derivation prerequisite. The
+      default-green target retains the exact negative regression; the positive
+      test remains executable with `--ignored`.
+- [x] Prove no root default, generated command, inferred filename, Projection,
       or persistent view.
-- [ ] Keep evidence independent from Decision Record or record an accepted
+- [x] Keep evidence independent from Decision Record or record an accepted
       pre-edit atomicity rationale.
-- [ ] Record status/evidence: pending.
+- [x] Record bounded-stop evidence:
+      `proof/implementation/P5-risk-record.md` and
+      `decision/20260727-p4-p5-generic-mutation-token-authority-stop.md`.
 
 ## P6 — Aggregate cleanup
 
-- [ ] Confirm P1A–P1C and P2–P5 are independently green.
+- [ ] BLOCKED: P2, P4, and P5 are not independently green.
 - [ ] Replace fixed/bridge flow input collection with admitted selected
       descriptors and retained canonical bytes.
 - [ ] Preserve Charter authority, Project Context behavior, registry brief,

@@ -1,0 +1,236 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T033427Z--HCM-2-4--p3b-m5-canonical-consumer-selector-review",
+  "created_at_utc": "2026-07-27T03:34:27Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P3B-m5-canonical-consumer-selector-repair",
+  "subject_fingerprint": "sha256:bccfea3e2ad19ece1556c08958f11cc081ffbcd6c8ca2daa359077bc9734a1c1",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p3b-m5-canonical-consumer-selector-repair-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/Cargo.toml",
+        "sha256": "1b693d214a043c155ed938437b90885eb22a5bf2ce1b309ce093f4f9d576040e"
+      },
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "5e00e1a5405c38598ee4f91d599f8826e3c0ef62f03e3986b09cc54851e731da"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.work-specification/1.0.0.schema.json",
+        "sha256": "c4c6f489ff20c022538ae2e3512cf62f8559d8d9409944ab13e8f138cb2d5985"
+      },
+      {
+        "path": "crates/pipeline/src/pipeline_capture.rs",
+        "sha256": "8b5e78f61ee084fbad57487c0f631c77ce5a9ad595f0d73c7d7760fcf8c3e0bb"
+      },
+      {
+        "path": "crates/pipeline/src/pipeline_handoff.rs",
+        "sha256": "cf653b7394d7fce60b788ab8ff2921cf1c02e3955edc77254067aa7acafe8cad"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "9fc9813cf2897fadb7ab3b570baf6b7d0123810b5e5003b636b26466f35789ca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "17b6dbb0b68a967f82096acfa393cfa377dde7f88fdd56fcf88fc7c0969489d3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "fec262b2b418b6fe7a9e42f53842f745da13455b523c2aca8ee81af1edc81fad"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "896bda9ed3692e25e9af30c74edd34b568d039e920cc7a92a3f76dcbac4e1fbc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-cli-surface-proof-selector-repair.md",
+        "sha256": "de5db77fac05ac7067fe41df4543f7d4751ff883f77da3d742e6ba3fef24bd11"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-fixture-contract-selector-repair.md",
+        "sha256": "211c2d32bddf5bf8dc7139975bc4f3820e412164a656b47f23b66f97f7d2ea30"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-foundation-feature-identity-selector-repair.md",
+        "sha256": "408bdf8b1622e34547466a60045de1a9cc23ebaba68e13fe77b1987d20b54932"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-m5-canonical-consumer-selector-repair.md",
+        "sha256": "cf26f49ebcdaa2b138365288bfb6060ef88b2d0daad0e7ca4af658c41109abcf"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md",
+        "sha256": "ad94e0f7003a7ab54c78f3a445dfd83a7568c2bf54dfce9a8ba3854beee4effe"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md",
+        "sha256": "fa01c18b9ea5e110bc63e1770aa80d1e623f01834af0a41847aef51e5845e62b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "ccdd21fc132ff0b54e4bd6167cda542e8df5c7ccfbacb296b638ebe6bf61f43d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "dab96994830f36aa9fadba989b9ea1f3b8e7d93533fd13fbd2d0b04871ad432d"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/evidence/happy_path.transcript.txt",
+        "sha256": "046b0428ffd8ebe4e641a81d8b795467de8b3ff3ae3dbd95cdbed92fcf7b959c"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/evidence/m5_handoff_scorecard.md",
+        "sha256": "f32abb9219d73bfec06729b347c120b92847f95dd3fa5397c87f98c7f4f70710"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/evidence/skip_path.transcript.txt",
+        "sha256": "bea55a11f979dc9789f61d17ef5a5919171327eac80b0d5572df49ecc9e17916"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/happy_path/SLICE_PLAN.md",
+        "sha256": "09c39d9342b8ee90d12403e9e674eef64e437f7bd3c9db06b37fb76c8221c256"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/happy_path/final_feature_spec.md",
+        "sha256": "e06ee5ac1c33fbbb1b9792bbf546755167a209f6250f58b0b14573f21a20cefb"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/skip_path/final_feature_spec.md",
+        "sha256": "e06ee5ac1c33fbbb1b9792bbf546755167a209f6250f58b0b14573f21a20cefb"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/happy_path/stage_10_feature_spec.md",
+        "sha256": "1dace183773cf6f696337897c35f35ddb7c7eab18814b1be55882100faac57b5"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/skip_path/stage_10_feature_spec.md",
+        "sha256": "1dace183773cf6f696337897c35f35ddb7c7eab18814b1be55882100faac57b5"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:bccfea3e2ad19ece1556c08958f11cc081ffbcd6c8ca2daa359077bc9734a1c1"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "bounded_test_evidence_consumer_selector",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre_consumer_and_evidence_edit_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-m5-canonical-consumer-selector-repair.md",
+      "sections": [
+        "Trigger",
+        "Exact selector amendment",
+        "Reviewability and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md",
+      "sections": [
+        "Runtime path",
+        "Proof"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Packet reviewability indicators",
+        "HCM-2.4"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The reviewed identity and feature-ID repairs make six focused Stage 10 behaviors pass. M5 emits and validates the correct fs-m4-foundation-journey-2026-04 bundle, then its private consumer fails because it requests artifacts/feature_spec/FEATURE_SPEC.md, which P3 correctly excludes as a generated view. The authoritative bundle input is artifacts/work-specification/work-specification.yaml. The current two foundation-flow Work Specification inputs contain only generic objective/scope/acceptance content apart from the reviewed record_id. No production failure is observed.",
+  "allowed_scope": [
+    "Read-only replay of all 25 manifest entries and the exact selector-amendment diff.",
+    "Trace the private M5 repo-baseline and bundle-only consumer paths, canonical YAML parser, renderer, and scorecard inputs.",
+    "Validate the proposed exact M4 Work Specification record against the selected schema and current P3 contract.",
+    "Determine whether the three private helper edits, two input fixtures, two generated views, expected plan, scorecard, and already selected transcripts are necessary, sufficient, minimal, and independently reviewable.",
+    "Validate that no Cargo, support-module, production, runtime, handoff, renderer, schema, shared-corpus, or sibling change is required.",
+    "Apply the 04 reviewability indicators and identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No production/runtime, handoff input/logic, renderer, schema, released definition, shared pipeline corpus, foundation-flow stage 04-07 input, public API, dependency, Cargo/version, unsafe-policy, P2, P4, P5, P6, or sibling-slice change.",
+    "Do not review or approve future helper, fixture, expected, scorecard, transcript, or broader P3B implementation bytes."
+  ],
+  "tasks": [
+    "Verify complete subject identity and inspect the exact selector-amendment delta.",
+    "Reproduce or trace the M5 missing-view-input failure and confirm canonical YAML is the only authoritative replacement.",
+    "Validate the proposed M4 Work Specification fields, record identity, schema admission, generated-view implications, and planning-consumer mapping.",
+    "Determine whether all selected helper/evidence paths are necessary and whether any unlisted material path is required.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "P3 canonical Work Specification YAML is authoritative and the Markdown view is generated/non-authoritative",
+    "M5 repo-baseline and bundle-only consumers must plan from the same canonical bytes",
+    "M4 feature identity remains fs-m4-foundation-journey-2026-04",
+    "Only the exact private helpers and test/evidence paths may change",
+    "No production symbol, Cargo change, or broader schema inference is authorized"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

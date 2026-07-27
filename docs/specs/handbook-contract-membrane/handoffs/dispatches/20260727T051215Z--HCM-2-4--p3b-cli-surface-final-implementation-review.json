@@ -1,0 +1,355 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T051215Z--HCM-2-4--p3b-cli-surface-final-implementation-review",
+  "created_at_utc": "2026-07-27T05:12:15Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P3B-cli-surface-proof-integration",
+  "subject_fingerprint": "sha256:d09980fd22af6ec255196a1d0d1452609c8d0aff7fd61745d080efe0e19c3491",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p3b-cli-surface-proof-implementation-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "5a0913f09bf63ac7f2a06d3ac2b45f17c773124bca49a50906db3097956b0ddf"
+      },
+      {
+        "path": "crates/cli/tests/feature_spec_contract.rs",
+        "sha256": "beb9d61690de74d910e965d5e6e3a1fb8f591c817a5a0c121cd8648cc21a6ab7"
+      },
+      {
+        "path": "crates/cli/tests/pipeline_handoff_refusals.rs",
+        "sha256": "c237b81cbdd2248602f7b39b516235036eb42ba149a2191bba2b485ecc34ebca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T021420Z--HCM-2-4--p3b-cli-proof-selector-review.json",
+        "sha256": "13931836c2522b2820f905de61ed8d12318a8fd6ac526bd75d81b7535e283f02"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T024357Z--HCM-2-4--p3b-fixture-selector-repair-review.json",
+        "sha256": "8fd299367dccd54ed9bd11d2bf33951ca6b940d4c3161927e03b22195effda1b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T025857Z--HCM-2-4--p3b-repository-identity-selector-review.json",
+        "sha256": "33aab2363179404eb5a45cf39facb72a1ae3e4b581de8c02e96f05da5c11c1a1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T031327Z--HCM-2-4--p3b-foundation-feature-identity-selector-review.json",
+        "sha256": "00b6de42c1f28a8aeadfa6dc03f8898c319708aaed028022bef24956e42b7d54"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T032325Z--HCM-2-4--p3b-foundation-feature-identity-selector-closure-review.json",
+        "sha256": "bac24aa80769152ae332061f1465f9c52ccf31f0b6f7baa2009ef37729fbfcde"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T033427Z--HCM-2-4--p3b-m5-canonical-consumer-selector-review.json",
+        "sha256": "309f9790d2b3d3d12031c7e6fb76f36e50567d45f3896a69c2e69b756fbd85b7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T035245Z--HCM-2-4--p3b-shared-compile-golden-selector-review.json",
+        "sha256": "1f9a4290f6ecc453f6fd20b49ba29237adb8b4ec201bddf3cda3f8321cba2d49"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T040149Z--HCM-2-4--p3b-shared-compile-golden-selector-closure-review.json",
+        "sha256": "f9d65a42d693d22ddf268daf0f1fe74ba0c8531dbc68f18016e6f86d4d1b2b46"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T041756Z--HCM-2-4--p3b-negative-fixture-selector-review.json",
+        "sha256": "de119d9480aefed55f3fa6f91a3ab2ea45e242d4e167625e24b1152ff64c8a44"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T042545Z--HCM-2-4--p3b-negative-fixture-selector-closure-review.json",
+        "sha256": "2d06fbbaabed41afc56df3567f8b7ff7706bf9557d10d9e544569271ff12c146"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T044013Z--HCM-2-4--p3b-feature-spec-contract-selector-review.json",
+        "sha256": "2a7b4bc5feff5b088fd21357667a89bec3c178cb065074af5c3501d16bed10c7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "c91fce83fdb55d7b2adea38e6b199203c3d30c29452a0f30847a0fe4244b8526"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "3fdd4f2f8e2f1a55261ed06518e8b51d2fee1a0681d638d50319423442497726"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-cli-surface-proof-selector-repair.md",
+        "sha256": "de5db77fac05ac7067fe41df4543f7d4751ff883f77da3d742e6ba3fef24bd11"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-feature-spec-contract-selector-repair.md",
+        "sha256": "1d09ff2d3a3bcc72612ac1b8486195c90a1c7d199ed4e6d41d55393015834c2a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-fixture-contract-selector-repair.md",
+        "sha256": "211c2d32bddf5bf8dc7139975bc4f3820e412164a656b47f23b66f97f7d2ea30"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-foundation-feature-identity-selector-repair.md",
+        "sha256": "408bdf8b1622e34547466a60045de1a9cc23ebaba68e13fe77b1987d20b54932"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-m5-canonical-consumer-selector-repair.md",
+        "sha256": "cf26f49ebcdaa2b138365288bfb6060ef88b2d0daad0e7ca4af658c41109abcf"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-negative-fixture-independence-selector-repair.md",
+        "sha256": "3b392d36e43c05d6bd21edfd3fe1e97ddd0c648bd3c5ee3033a425dc0defe41e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md",
+        "sha256": "ad94e0f7003a7ab54c78f3a445dfd83a7568c2bf54dfce9a8ba3854beee4effe"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-shared-compile-golden-selector-repair.md",
+        "sha256": "d5566ba762c9de18168e3e942d6f7e3639415788428d72700900f0e81bee505d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3B-cli-surface-proof.md",
+        "sha256": "078c08bc5521b8575f422791cb8c1b985819f26360ceb010cec06695de3e152f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "6939f78c5768e064e40bcf1413adaf17e6f9dfddbb0f27c3d2f831a12430b7f8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "4fb9b3f6ea1a81a6031459f3e65a744b85a281295aff607820df98ee4b761db4"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/evidence/happy_path.transcript.txt",
+        "sha256": "49df11333a35ca092a098e5fcdb3046f9ada437306efb48cccf7248280e875c8"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/evidence/m5_handoff_scorecard.md",
+        "sha256": "39bb055c205db752e8d0a6e85c59488aaf4a988507d56490a5a3fedc81ba7040"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/evidence/skip_path.transcript.txt",
+        "sha256": "39897da29d98b7c4a16480ef18e1c99042a0207f97114a940de2e9eab60db98f"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/happy_path/SLICE_PLAN.md",
+        "sha256": "aaaf7351e558d1b6715b69dae7f5729fc0b0ff09f3bf13963479d15fdf29ae71"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/happy_path/final_feature_spec.md",
+        "sha256": "56253c780789b9c120103a32cabcd578744e78cfcf16bd2bdb6073f8a3738e84"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/skip_path/final_feature_spec.md",
+        "sha256": "56253c780789b9c120103a32cabcd578744e78cfcf16bd2bdb6073f8a3738e84"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/happy_path/stage_10_feature_spec.md",
+        "sha256": "32c53aba8df501a73ecc8bf20cc3915fc7ff821f84b1bbb50fa32bea8bec9cd8"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/skip_path/stage_10_feature_spec.md",
+        "sha256": "32c53aba8df501a73ecc8bf20cc3915fc7ff821f84b1bbb50fa32bea8bec9cd8"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/.handbook/definitions/profiles/work-specification-root-1.0.0.yaml",
+        "sha256": "49a8af149798276570fba8a5feaa78da8419cc22f95474bd885a6037b24a636c"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/.handbook/profile-selection.json",
+        "sha256": "a348bc24536feb858f1b15f8e2a5e667d5cf026bdea5d8ca210591cfd551faa7"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "81fbbaf7cfd5d84141cdbb98c338fb40e37fd13c16d916df9ef463fdb694b74e"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "adbc65bd50111c5cd75e61b02361023023adcd99b0512ec713c36137fcd767be"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/core/stages/10_feature_spec.md",
+        "sha256": "09992027838be50c146460c8c17b8e3c1aab98dfca844f747e60af13ab0c0301"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/compile.stage_10_feature_spec.explain.full_context.txt",
+        "sha256": "5909a824919daee58d372500c5cd0cee0424a8fcc6562c259f5355b49cb79767"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/compile.stage_10_feature_spec.payload.full_context.txt",
+        "sha256": "61a4fcbdf862ba64105f2660ba687073f73166b4aae88552add5147a6ccc75cb"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/.handbook/definitions/profiles/work-specification-root-1.0.0.yaml",
+        "sha256": "49a8af149798276570fba8a5feaa78da8419cc22f95474bd885a6037b24a636c"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/.handbook/profile-selection.json",
+        "sha256": "a348bc24536feb858f1b15f8e2a5e667d5cf026bdea5d8ca210591cfd551faa7"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "81fbbaf7cfd5d84141cdbb98c338fb40e37fd13c16d916df9ef463fdb694b74e"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "adbc65bd50111c5cd75e61b02361023023adcd99b0512ec713c36137fcd767be"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/stages/10_feature_spec.md",
+        "sha256": "09992027838be50c146460c8c17b8e3c1aab98dfca844f747e60af13ab0c0301"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:d09980fd22af6ec255196a1d0d1452609c8d0aff7fd61745d080efe0e19c3491"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "complete_p3b_cli_surface_proof_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "complete_subject_pre_commit_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Frozen HCM-2.4 artifact-family contracts",
+        "Exact implementation surface selectors",
+        "P3B"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Canonical artifact identities",
+        "Shipped default artifact set",
+        "Canonical layout",
+        "Structured authoring",
+        "Markdown validation",
+        "Pipeline work levels"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Packet reviewability indicators",
+        "HCM-2.4",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Artifact kind definition contract",
+        "Artifact instance descriptor contract",
+        "Lifecycle, support, and derived-view constraints",
+        "Artifact intake definition contract",
+        "Artifact validation layers",
+        "Review choreography"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Proof levels",
+        "PR-003 — Deterministic Markdown rendering",
+        "PR-004 — Trusted repo-relative artifact access",
+        "Regression rules",
+        "HCM-2.3 exact custom-kind candidate proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix",
+        "Finding inventory"
+      ]
+    }
+  ],
+  "repo_truth": "Review the exact 47-file working-tree subject against reviewed baseline commit 5cf41d2f64d68cb7f78abb5eccab9acf307089d3. The subject contains no production/library file. Its three Rust files are CLI integration tests; remaining files are exact fixture authority inputs, generated proof bytes, selector/dispatch lineage, and slice-local specification/plan/proof records. Parent command evidence to verify independently: complete P3/P3B packet wall 273 tests with no failure; cargo test --workspace --quiet exit 0 after 812 seconds with two platform-marked ignores; cargo fmt --all -- --check exit 0; strict clippy for pipeline/compiler/cli all targets exit 0; archive boundary normal/self-test exit 0; git diff --check exit 0. Four named transient post-capture outputs are absent. Eight unrelated pre-existing .claude/**, AGENTS.md, and CLAUDE.md paths are outside the subject. No classification or proof-level promotion is requested in P3B.",
+  "allowed_scope": [
+    "Replay all 47 manifest hashes and compare the complete subject with baseline 5cf41d2f64d68cb7f78abb5eccab9acf307089d3.",
+    "Review the three test deltas, fixture-authority mirrors, profile inputs, rich Work Specification identity, canonical-YAML consumers, generated views, transcript/scorecard/plan bytes, and paired compile goldens.",
+    "Trace real Stage 10 preview/apply, canonical YAML persistence, generated Markdown view, handoff identity, and M5 planning consumption through the named tests and existing production call paths.",
+    "Verify every selector and immutable dispatch stays within P3B, that transient generated outputs and repository identity are absent, and that no sibling seam or production symbol changed.",
+    "Verify the reported targeted, negative, workspace, lint, archive, and diff proof from live repository truth as needed.",
+    "Identify findings independently before comparing only P3/P4 candidates with the selected-scope entries in 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No P1A, P1B, P1C, P2, P4, P5, P6, P7, sibling-slice, production/runtime, schema/definition, public API, dependency, Cargo/version, unsafe-policy, release, or migration work.",
+    "No classification or proof-level promotion; P3B may prove only CLI/test integration of the already-reviewed P3 Work Specification boundary.",
+    "Do not accept generated Markdown as canonical authority, committed fixture identity, committed post-capture output, dynamic schema inference, or changes to any indeterminate refusal."
+  ],
+  "tasks": [
+    "Verify complete subject identity, whitespace hygiene, exact baseline diff, and the absence of out-of-scope or generated debris.",
+    "Review correctness of the three CLI test changes and trace their affected real call paths without relying on parent implementation rationale.",
+    "Validate the ten fixture-authority inputs, pairwise mirror equality, rich M4 canonical input/feature identity, canonical M5 consumer, deterministic views/evidence, and both shared compile goldens.",
+    "Validate positive, negative, fail-closed, real-path, workspace, lint, archive, and diff proof; report any missing or misleading evidence.",
+    "Check selector/dispatch/proof lineage, reviewability, sibling non-widening, and the zero-promotion ceiling.",
+    "Return findings first in Critical, Required, Optional, Nit order with severity, file and line, violated contract/invariant/gate, why wrong, smallest valid remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Canonical Stage 10 authority is artifacts/work-specification/work-specification.yaml; artifacts/feature_spec/FEATURE_SPEC.md is generated and non-authoritative",
+    "All supported intake/validation paths retain the exact released Work Specification schema and every other fail-closed refusal",
+    "Fresh test repositories use setup-owned identity without committing identity bytes",
+    "Foundation happy/skip paths preserve feature identity fs-m4-foundation-journey-2026-04 and consume canonical YAML for M5 planning",
+    "Fixture authority mirrors and profile inputs are pairwise byte-identical; generated post-capture outputs remain absent",
+    "Shared compile goldens are deterministic across all eleven CLI/compiler/pipeline consumers",
+    "No production symbol, released schema/definition, public API, Cargo/dependency, sibling seam, classification, or proof-level change is permitted",
+    "No unresolved valid P1/P2 may remain before commit"
+  ],
+  "stop_conditions": [
+    "Return blocked if complete subject identity, baseline diff, or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

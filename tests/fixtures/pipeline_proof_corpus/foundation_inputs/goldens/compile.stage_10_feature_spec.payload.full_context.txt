@@ -1,6 +1,6 @@
-# stage.10_feature_spec - Feature Specification
+# stage.10_feature_spec - Work Specification
 
-Produces a single FEATURE_SPEC.md for one feature, aligned with the project Charter and Foundation Pack.
+Produces descriptor-selected canonical Work Specification YAML and a deterministic Markdown review view.
 
 ## Run Variables
 - runner: codex-cli
@@ -256,10 +256,10 @@ If you cannot run commands:
 ## Library Inputs
 
 ### core/library/feature_spec/feature_spec_architect_directive.md
-You are the Feature Spec Architect.
+You are the Work Specification Architect.
 
 ## Purpose
-Produce a complete, implementation-ready Feature Specification that will be used as the contract for phase decomposition and slicing.
+Produce a complete Work Specification YAML record that will be used as the contract for phase decomposition and slicing.
 
 ## Inputs (must be provided)
 - Project Charter (CHARTER.md): posture, constraints, standards, risk tolerance.
@@ -270,7 +270,9 @@ Produce a complete, implementation-ready Feature Specification that will be used
 1) No guessing: If essential details are missing, ask clarifying questions.
 2) Keep it minimal but sufficient: include only what is needed to build, test, and ship.
 3) Traceability: Every requirement must map to acceptance criteria.
-4) Design must be explicit: include a proposed approach AND at least 1 credible alternative with trade-offs.
+4) Design must be explicit: state the proposed approach and at least one credible
+   alternative with trade-offs inside `objective`; do not add fields beyond the
+   exact output contract.
 5) Do not bake in stack commands: reference “profile-defined commands” generically where needed.
 
 ## Interview Mode (default)
@@ -279,202 +281,30 @@ Ask one question at a time. Stop when the spec can be completed confidently.
 - If the user says “generate” or “go ahead”, produce the final spec immediately.
 
 ## Output Contract
-When generating the final document, output ONLY the completed `FEATURE_SPEC.md` (using the provided template).
+When generating the final document, output ONLY one YAML object using the provided template. It must contain exactly `schema_id`, `schema_version`, `record_id`, `objective`, `scope`, `non_goals`, `acceptance_criteria`, and `status`. Do not emit Markdown, code fences, FILE wrappers, or commentary.
 
-## Required Content (must appear in the final spec)
-- Problem + context
-- Goals and non-goals
-- Scope (in/out)
-- Stakeholders/users (who this is for)
-- Acceptance criteria (testable; include IDs)
-- Non-functional requirements (security, performance, reliability, compatibility, etc.)
-- Technical design (high-level architecture + integration touchpoints)
-- Alternatives considered (with reasons rejected)
-- Testing strategy (what to test + where; reference profile commands generically)
-- Rollout plan (flags, migration, backward compatibility, monitoring)
-- Risks + open questions
+## Required Content
+- A stable dotted `record_id`.
+- One concrete objective.
+- At least one in-scope item.
+- Zero or more explicit non-goals.
+- At least one objectively testable acceptance criterion.
+- One status from `draft`, `review_ready`, `approved`, `active`, `completed`, or `cancelled`.
 
 ## Spec Quality Gate (self-check before final output)
-Before outputting the final spec, verify:
-- Every goal has ≥1 acceptance criterion.
-- Every acceptance criterion is objectively testable.
-- At least one alternative is documented.
-- NFRs include security + performance + reliability (or explicitly “not applicable” with reason).
-- Integration touchpoints are named (files/modules/APIs) or clearly scoped as TBD.
+Before outputting the final spec, verify that it is one duplicate-free YAML object, has exactly the eight required fields, and contains no unresolved template markers.
 
 ### core/library/feature_spec/FEATURE_SPEC.md.tmpl
-# {{FEATURE_TITLE}} — Feature Specification
-- Spec ID: {{SPEC_ID}}
-- Date (UTC): {{NOW_UTC}}
-- Owner: {{OWNER}}
-- Team: {{TEAM}}
-- Repo / Project Ref: {{REPO_OR_PROJECT_REF}}
-- Charter Ref: {{CHARTER_REF}}  <!-- e.g., link or section reference -->
-
-## 0) Charter Alignment
-- Charter Ref: {{CHARTER_REF}}
-- Baseline posture (from Charter): Level {{CHARTER_BASELINE_LEVEL}} — {{CHARTER_BASELINE_LABEL}}
-- Feature risk delta vs Charter context snapshot: {{RISK_DELTA_NONE_OR_LIST}}
-
-### Dimension alignment
-> Inherit by default. Only override when this feature triggers “raise-the-bar” conditions.
-
-| Dimension | Charter default level | Feature stance (inherit/raise/lower) | Reason |
-|---|---:|---|---|
-| Speed vs Quality |  |  |  |
-| Type safety / static analysis |  |  |  |
-| Testing rigor |  |  |  |
-| Scalability & performance |  |  |  |
-| Reliability & operability |  |  |  |
-| Security & privacy |  |  |  |
-| Observability |  |  |  |
-| DX & automation |  |  |  |
-| UX polish / API usability |  |  |  |
-
-### Charter red lines check
-- Global red lines touched? {{YES_NO}}
-- Dimension red lines touched? {{YES_NO}}
-- Notes / impacted areas: {{REDLINES_NOTES_OR_NONE}}
-
-## 1) Summary
-One paragraph describing what will be built and why.
-
-## 2) Problem & Context
-- Current state:
-- Pain / opportunity:
-- Background / constraints from Charter:
-- Related links:
-
-## 3) Goals
-- G1:
-- G2:
-
-## 4) Non-Goals
-- NG1:
-- NG2:
-
-## 5) Users & Stakeholders
-- Primary users:
-- Secondary users:
-- Stakeholders:
-
-## 6) Scope
-### In Scope
-- S1:
-- S2:
-
-### Out of Scope
-- O1:
-- O2:
-
-## 7) Requirements
-### Functional Requirements
-- R1:
-- R2:
-
-### Non-Functional Requirements (NFRs)
-- Security (Charter target: {{LVL_SECURITY}}):
-- Performance (Charter target: {{LVL_PERFORMANCE}}):
-- Reliability (Charter target: {{LVL_RELIABILITY}}):
-- Observability (Charter target: {{LVL_OBSERVABILITY}}):
-- Compatibility / Portability:
-- Maintainability:
-- Compliance (if any):
-
-## 8) Acceptance Criteria (testable)
-Provide IDs and objective checks.
-
-- AC-001: …
-- AC-002: …
-- AC-003: …
-
-## 9) Technical Design
-### Proposed Approach (recommended)
-- Overview:
-- Key components:
-- Data flow / control flow:
-- Interfaces (APIs, CLI commands, library calls, events):
-- Storage / persistence (if any):
-- Error handling expectations:
-- Integration touchpoints (files/modules/services):
-  - Touchpoint 1:
-  - Touchpoint 2:
-
-### Data Model (if applicable)
-- Entities:
-- Schemas:
-- Migrations:
-
-### Security Considerations
-- Threats:
-- Mitigations:
-- Secrets handling:
-
-### Observability
-- Signals (logs/metrics/traces):
-- Key dashboards/alerts (conceptual):
-
-## 10) Alternatives Considered
-- Alt A: …
-  - Pros:
-  - Cons:
-  - Why not chosen:
-- Alt B: …
-
-## 11) Testing Strategy
-(Do not hardcode tool commands; reference profile-defined gates generically.)
-- Unit tests: what modules/behaviors
-- Integration tests: what boundaries
-- E2E tests (if applicable): what workflows
-- Negative tests: failure modes
-- Performance tests (if applicable):
-
-## 12) Rollout Plan
-- Rollout strategy (flags, staged release, canary):
-- Rollout strategy appropriate for Charter reliability level:
-- Monitoring/alerts appropriate for Charter observability level:
-- Backward compatibility:
-- Migration plan:
-- Monitoring during rollout:
-- Rollback plan:
-
-## 13) Risks & Mitigations
-- Risk 1 → mitigation
-- Risk 2 → mitigation
-
-## 14) Open Questions
-- Q1:
-- Q2:
-
-## 15) Traceability Map
-- Goals → Acceptance Criteria:
-  - G1 → AC-…
-  - G2 → AC-…
-- Requirements → Acceptance Criteria:
-  - R1 → AC-…
-  - R2 → AC-…
-- Charter constraints referenced:
-  - …
-
-## X) Exceptions (if any)
-If any charter red line would be violated, document an exception proposal:
-- What:
-- Why:
-- Scope:
-- Risk:
-- Expiry / revisit date:
-- Owner:
-- Approver:
-- Record location:
-
-## Y) Debt Tracking (Charter-aligned)
-- Expected debt introduced by this feature: {{NONE_OR_LIST}}
-- Where tracked: {{DEBT_TRACKER_REF}}
-- When paid down: {{TIMELINE_OR_TRIGGER}}
-
-## Appendix (optional)
-- Glossary:
-- Diagrams (links):
+schema_id: handbook.artifact.work-specification
+schema_version: "1.0"
+record_id: {{RECORD_ID}}
+objective: {{OBJECTIVE}}
+scope:
+  - {{SCOPE_ITEM}}
+non_goals: []
+acceptance_criteria:
+  - {{ACCEPTANCE_CRITERION}}
+status: draft
 
 ## Artifact Inputs
 
@@ -690,10 +520,10 @@ gates:
 ## Outputs
 
 ### Artifacts
-- artifacts/feature_spec/FEATURE_SPEC.md
+- artifacts/work-specification/work-specification.yaml
 
 ### Repo Files
-(none declared)
+- ${repo_root}/artifacts/feature_spec/FEATURE_SPEC.md
 
 ## Gating
 mode: strict
@@ -701,8 +531,8 @@ fail_on:
 - missing_required_inputs
 - output_missing
 notes:
-- Output must be ONLY the completed FEATURE_SPEC.md (no extra commentary).
-- NFRs and rollout/testing sections must explicitly reference Charter posture and Foundation Pack defaults (if present).
+- Capture input must be ONLY one completed Work Specification YAML document (no wrappers or commentary).
+- The Markdown view is derived deterministically during capture and is never authoritative.
 
 ## Stage Body
 # core/stages/10_feature_spec.md

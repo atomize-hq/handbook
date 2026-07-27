@@ -210,8 +210,12 @@ fn seed_non_canonical_boundary_noise(root: &Path) {
 #[test]
 fn pipeline_handoff_emit_refuses_when_feature_spec_artifact_is_missing() {
     let (_dir, root) = foundation_inputs_repo();
-    std::fs::remove_file(root.join("artifacts/work-specification/work-specification.yaml"))
-        .expect("remove canonical Work Specification fixture");
+    assert!(
+        !root
+            .join("artifacts/work-specification/work-specification.yaml")
+            .is_file(),
+        "committed fixture must not seed canonical Work Specification output"
+    );
     prepare_foundation_inputs_full_context_route_basis(root.as_path());
 
     let output = run_in(

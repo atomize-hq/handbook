@@ -53,9 +53,14 @@ HIGH/CRITICAL result is a parent stop.
 Entry: separately selected implementation, reviewed planning handoff, clean
 synchronized branch.
 
-This entry authorizes read-only P0 discovery only. It does not authorize any
-production, test, definition, template, or documentation edit. Editing authority
-starts only after P0 freezes and passes the exact live manifest/impact gate.
+This entry starts with read-only P0 discovery. It does not authorize any
+production, test, definition, or template edit. Once discovery establishes the
+exact evidence, P0 may write only the manifested slice-local inventory/proof
+records and the smallest coupled SPEC/plan/todo correction needed to resolve a
+demonstrated contradiction. Those documentation changes must complete fresh
+internal review and any required different-fresh closure before P0 passes.
+Runtime editing authority starts only after P0 freezes and passes the exact
+live manifest/impact gate.
 
 Work:
 
@@ -103,7 +108,28 @@ Work:
 - make intake coverage exhaustive against each canonical schema and explicit
   about unknown/required values;
 - make each renderer fixed, deterministic, schema-bound, and Resolution-free;
+- recompute every intake, renderer, successor-kind, and profile `1.2`
+  fingerprint from the uniform exact typed dependency closure established by
+  HCM-2.2, including subordinate kind/schema/renderer/intake/lifecycle
+  fingerprints rather than authored content alone;
 - add exact built-in source mappings for the new definitions;
+- route exactly the five new package intakes through full semantic admission
+  with modes and coverage retained while preserving identity-only compatibility
+  for the released Charter intake;
+- constrain remediation to
+  `ArtifactIntakeDefinitionV1::parse`,
+  `AuthoredArtifactKindDefinition::validate`,
+  `validate_authored_profile_fingerprints`, and
+  `load_repository_intakes`, plus the operator-approved exact
+  type-absent/string-valued-`const` branch in
+  `ResolvedSchema::collect_coverage_leaf_shapes`; do not edit
+  `ArtifactIntakeRegistry::load_with_builtin_compatibility` or
+  `resolve_profile_selection`;
+- preserve indeterminate refusal for every non-string `const`, type-absent
+  `enum`/default/examples/annotation, composite, unsupported explicit type,
+  open object, cycle, pointer, and reference case; do not edit released schema
+  bytes or infer any other shape, and prove a string `const` paired with an
+  unsupported explicit type remains refused;
 - replace the Project-Authority-only renderer-ref exception in
   `validate_later_owned_dependencies` with exact admitted first-party renderer
   dependency validation, while continuing to refuse Projection, lifecycle,
@@ -129,11 +155,31 @@ GREEN:
 - inline/unit admission proof accepts exactly the five frozen non-Charter
   descriptor rows and rejects every field mismatch before P3 exercises the Work
   Specification real repository path;
+- direct `artifact_kind_registry`, `artifact_instances`, schema-family,
+  profile-selection, HCM-2.3 registration, and HCM-2.4 definition-support and
+  runtime targets replay every accepted and refused admission branch;
+- actual `ArtifactRepositoryV1::open` proof admits each exact new package
+  intake and refuses stale dependency fingerprints, wrong kind/schema binding,
+  missing coverage, unsupported mode, and accidental Charter compatibility
+  expansion;
+- the unchanged HCM-2.3 registration target retains exact SHA-256
+  `86e6e98fe8fad63578be3d157d3a836c4bfe3a4dc7aa49f1ff41d87e33b61629`
+  before and after remediation;
 - no public API, Cargo, package metadata, external dependency, command, or
   Projection change.
 
 Stop if definition admission cannot remain exact-ref, fail-closed, and
 package-owned without a forbidden surface change.
+
+Fresh depth-3 tests-included impact before selector closure is LOW/11 for the
+intake parser, LOW/0 for the kind validator with incomplete graph edges,
+CRITICAL/130 for the profile fingerprint validator, and CRITICAL/44 for the
+repository intake loader. The two CRITICAL results are accepted only for the
+exact branch-local correction above; any broader changed symbol, process,
+module, public caller, or generic behavior stops remediation. Fresh
+resumed-baseline impact for
+`ResolvedSchema::collect_coverage_leaf_shapes` is LOW/1 with no indexed process;
+it is the fifth and final production symbol, and needing a sixth stops P1A.
 
 ## P1B — Versioned Charter compatibility foundation
 
@@ -199,13 +245,30 @@ caller appears.
 
 Entry: P1B accepted; CRITICAL request/resolver warnings acknowledged.
 
-RED: the built-in request still selects `handbook.profile.shipped-root@1.1.0`
-and omits the P1A successor sources.
+RED: the built-in request now selects the exact successor and the P1C
+compatibility target passes 9/9, but the unchanged HCM-2.1 target passes only
+3/12 because `selected_contract_matches` refuses the selected Project Context
+kind `1.1`. Before editing the predicate, extend its existing unit test so the
+exact `1.1` positive fails while the exact `1.0` positive remains green. After
+that predicate repair, the discovery review also identified two Unix-only
+projection assertions that remain RED because they expect the superseded
+selected kind `1.0`. Direct WSL RED proof then found two preceding stale
+expectations: the compiler test still expects doctor report schema `1.1.0`,
+and the CLI test installs an obsolete inline Charter schema `1.0` instead of
+the existing valid selected-Charter helper.
 
 Work:
 
 - update only `shipped_profile_request`'s selected exact profile and immutable
   schema/kind/intake/renderer source closure;
+- extend only Project Context's existing private `selected_contract_matches`
+  predicate so exact kind `1.0` and exact kind `1.1` are compatible over the
+  unchanged schema `1.0` and canonical path; retain equality between decision
+  and instance refs, all mismatch refusals, and add no production symbol or
+  generic fallback;
+- prove both exact positives and refuse both crossed `1.0`/`1.1` directions,
+  unrelated identity, unlisted version, prefix, range, `latest`, bare/fallback,
+  wrong schema, and wrong path values in the existing predicate unit test;
 - require the resolved `project_context` descriptor to select
   `handbook.intake.project-context@1.0.0` and exactly
   `handbook.renderer.project-context-review-markdown@1.0.0`;
@@ -216,6 +279,19 @@ Work:
   vocabularies, Context Resolution sources, and every public signature;
 - prove `resolve_shipped_profile_decisions` still immediately applies the
   Charter membrane; and
+- in Unix compiler test
+  `crates/compiler/tests/doctor.rs::doctor_api_projects_the_exact_stable_project_context_row`,
+  update only report schema expectation `1.1.0` to `1.2.0` and Project Context
+  kind expectation `1.0.0` to `1.1.0`;
+- in Unix CLI test
+  `crates/cli/tests/cli_surface.rs::doctor_reports_ready_when_required_artifacts_present`,
+  replace only its obsolete inline Charter schema `1.0` setup with the existing
+  `write_valid_selected_charter` helper and update only its Project Context
+  kind expectation `1.0.0` to `1.1.0`; do not edit that helper, fixture assets,
+  any other assertion, or any production surface;
+- run both exact Unix projection tests and
+  `doctor::tests::doctor_nulls_project_context_and_is_invalid_after_substitution_or_inode_aba`
+  through WSL with an isolated Linux target directory; and
 - replay the complete selected-profile and HCM-2.1–HCM-2.3 preservation wall.
 
 GREEN:
@@ -226,14 +302,42 @@ GREEN:
 - every Charter record and validator observes the frozen HCM-2.2 1.1 pair;
 - neither Project Context nor Environment Context has a null intake or empty,
   extra, or mismatched renderer selection;
+- both Unix doctor projections expose exact selected Project Context kind
+  `handbook.artifact-kind.project-context@1.1.0`, compiler report schema
+  `1.2.0`, released valid Charter setup, and the Unix substitution/ABA refusal
+  remains green;
 - Work/Decision/Risk remain source-available but unselected;
 - no outcome changes outside intended Project Context/Environment support
   refs; and
-- GitNexus change detection reports only the declared request/source closure.
+- GitNexus change detection and scoped diff report exactly
+  `shipped_profile_request`, `selected_contract_matches`, its existing in-file
+  unit test, the three exact Unix-only assertion literals, and the one exact
+  existing-helper setup substitution, with every read/proof anchor unchanged.
 
 ## P2 — Environment Context vertical
 
-Entry: P1C accepted; Environment Context impact UIDs resolved.
+Entry: P1C accepted; Environment Context impact UIDs resolved; runtime entry is
+blocked on the exact condition-evidence/evaluator authority described below.
+
+Authority gate:
+
+- HCM-0.6 deliberately leaves the condition record schema, exact input
+  bindings, admitted evidence types, precedence, freshness thresholds, and
+  evaluator implementation undecided;
+- the live shipped resolver consequently returns only `unresolved` /
+  `EvidenceContractUnavailable` and `indeterminate` for the selected
+  Environment Context descriptor;
+- P2 does not select `crates/engine/src/profile_decision.rs`, a new evaluator,
+  or any evidence-contract surface; and
+- structured Environment Context input, `applicability_basis`, profile opt-in,
+  or mere artifact presence cannot authorize itself or be coerced to
+  condition `true`/`false`.
+
+Do not begin the RED-to-GREEN runtime loop until a separately approved,
+fingerprinted condition-evidence/evaluator contract either enters HCM-2.4 with
+an exact reviewed selector or is completed as a proven dependency. This gate
+does not block the semantically independent P3–P5 packets, but P6 still waits
+for P2–P5 GREEN replacement proof.
 
 RED:
 
@@ -247,6 +351,10 @@ Work:
 - validate and atomically write `.handbook/project/environment.yaml` only when
   the selected descriptor condition applies;
 - route CLI, setup, doctor, compiler, manifest, and flow reads to retained YAML;
+- use only the exact Environment Inventory branches in the P2 selector,
+  including the fixed canonical/baseline and flow adapters required to make
+  legacy Markdown non-authoritative; leave aggregate bridge-type and
+  fixed-selector deletion to P6;
 - update `AuthorCommand::EnvironmentInventory` help in `crates/cli/src/main.rs`
   and only the exact inline `author_help_matches_snapshot`, the
   snapshot-consuming `author_environment_inventory_help_matches_snapshot`, and
@@ -260,8 +368,15 @@ GREEN:
 - condition true/false, malformed/duplicate/oversize, no-follow, atomic refusal,
   retained observation, and ABA/concurrency proofs pass;
 - renderer full-byte golden and fingerprint pass;
+- engine and compiler manifest generation prove the selected Environment
+  Context identity/fingerprint, conditional absence, and zero influence from
+  legacy Markdown mutation or deletion;
 - legacy Markdown deletion or mutation has no outcome effect;
 - Charter and Project Context focused regressions remain green.
+
+Stop rather than weakening this packet if condition `true`/`false` would
+require inference, an unchecked declaration, a self-referential Environment
+Context field, `indeterminate` coercion, or an unselected evaluator edit.
 
 ## P3 — Work Specification / Stage 10 vertical
 
@@ -304,6 +419,82 @@ GREEN:
 Because handoff emit/validate are CRITICAL, any required public bundle schema or
 API change is a stop, not a packet extension.
 
+## P3B — CLI surface proof integration
+
+Entry: P3 closure review CLEAN. The first exact selector review was CLEAN, but
+the first focused test demonstrated that the recursively copied fixture
+repositories retained the pre-P3 Stage 10 contract. The additive fixture-only
+selector repair was reviewed CLEAN before fixture synchronization. The next
+focused preview advanced to the HCM-2.2 durable repository-identity
+prerequisite. The exact test-only initialization amendment in
+`decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md`
+was reviewed CLEAN. The next journey wall showed that the two foundation-flow
+Work Specification inputs still carry a generic record ID instead of the
+preserved M4 feature identity. The exact two-fixture amendment in
+`decision/20260727-p3b-foundation-feature-identity-selector-repair.md` requires
+fresh review before those lines change. Its corrected selector closed review
+CLEAN, but the M5 test then exposed a test-only consumer that still treats the
+generated Markdown view as bundle authority. The exact canonical-YAML consumer
+and evidence repair is frozen in
+`decision/20260727-p3b-m5-canonical-consumer-selector-repair.md` and requires
+fresh review before implementation. After that repair, the full CLI wall
+isolated only the paired shared compile goldens. Their exact proof-only update
+is frozen in
+`decision/20260727-p3b-shared-compile-golden-selector-repair.md`. Removing all
+transient fixture outputs before the complete P3 wall then exposed one negative
+CLI test that tried to delete an untracked canonical output before invoking the
+product. Its exact one-assertion repair is frozen in
+`decision/20260727-p3b-negative-fixture-independence-selector-repair.md`.
+After that negative suite passed, the next P3 gate exposed one stale
+`feature_spec_contract` equality between the rich M4 generated view and an
+unchanged minimal renderer fixture for different canonical input. Its exact
+cross-case test repair is frozen in
+`decision/20260727-p3b-feature-spec-contract-selector-repair.md`.
+
+RED: `cargo test --workspace` isolates eight Stage 10 failures in
+`handbook-cli --test cli_surface`. After removing seeded outputs and repairing
+the first assertions, the first focused preview still refuses because the
+recursively copied fixture stage declares only the superseded
+`FEATURE_SPEC.md` output. After synchronizing the reviewed fixture inputs, the
+preview reaches artifact-repository admission and refuses because the
+temporary repository has no setup-owned durable identity.
+
+Work:
+
+- edit only the exact paths and Stage 10 assertions frozen in
+  `decision/20260727-p3b-cli-surface-proof-selector-repair.md` and
+  `decision/20260727-p3b-fixture-contract-selector-repair.md`;
+- synchronize only the ten selected fixture-authority inputs, keeping the six
+  canonical `core/` mirrors byte-identical to P3 and the two profile-file pairs
+  byte-identical across fixture roots;
+- initialize one fresh setup-owned repository identity inside each selected
+  temporary Stage 10 test repository through the existing engine service;
+  never commit or inject a fixture identity;
+- change only the `record_id` in the two foundation-flow Work Specification
+  model outputs so the existing stable M4 feature identity remains the handoff
+  and downstream planning identity;
+- make the M5 test consumer read and parse canonical Work Specification YAML
+  from the repo baseline and emitted bundle, then refresh only the exact
+  generated views, plan, scorecard, and transcripts selected by the M5 repair;
+- mechanically regenerate only the paired shared Stage 10 compile payload and
+  explain goldens after fresh selector review, then replay the complete CLI,
+  compiler, and pipeline direct-consumer suites;
+- make the missing-Work-Specification refusal test assert that a freshly copied
+  committed fixture starts without the canonical output instead of depending
+  on untracked generated output solely so setup can delete it;
+- replace the stale rich-view-to-minimal-fixture equality in
+  `feature_spec_contract` with exact happy/skip canonical-input and
+  generated-view equality while retaining every schema/template assertion and
+  the real-path CLI renderer proof;
+- remove only the two seeded post-capture outputs from Stage 10 test repos;
+- update refusal, canonical-path, generated-view, and handoff assertions to the
+  already reviewed P3 contract; and
+- regenerate only the two exact journey transcripts from current deterministic
+  CLI output.
+
+GREEN: the eight failures, full 98-test CLI surface, complete P3 wall, and
+workspace wall pass without a production or public-contract change.
+
 ## P4 — Decision Record support proof
 
 Entry: P1C accepted.
@@ -325,6 +516,13 @@ Work:
 GREEN: exact schema/coverage, generic-operation, renderer golden, safe path,
 retained observation, and negative-surface tests pass independently.
 
+Current bounded result: selection, descriptor/intake coverage, retained
+read/validate, and the exact negative token-refusal regression pass. The
+positive generic mutation test remains ignored-by-default and fails when run
+with `--ignored` because planner-derived underscore-bearing coverage tokens
+violate the unchanged lineage token grammar. P4 remains incomplete under
+`decision/20260727-p4-p5-generic-mutation-token-authority-stop.md`.
+
 ## P5 — Risk Record support proof
 
 Entry: P1C accepted.
@@ -338,10 +536,20 @@ golden, and evidence. Shared generic code is permitted; merged review evidence
 is not. A combined P4/P5 commit requires a written atomicity rationale accepted
 before edits by a fresh reviewer.
 
+Current bounded result: the independently selected Risk Record fixture,
+coverage/intake, renderer, read/validate, and negative surface pass. The
+positive generic mutation test remains ignored-by-default and reproduces the
+same Store refusal under `--ignored`. P5 remains incomplete under the shared
+authority-stop decision; no generic runtime or released-definition correction
+is selected.
+
 ## P6 — Aggregate flow and fixed-selector deletion
 
 Entry: P1A–P1C and P2–P5 individually committed and green; no bridge deletion
 has occurred.
+
+Current entry result: not satisfied. P2 lacks condition-evaluator authority,
+and P4/P5 lack authorized positive generic mutation proof. Do not begin P6.
 
 RED:
 
@@ -353,6 +561,10 @@ Work:
 
 - collect flow inputs from admitted profile/instance selection with stable
   ordering and retained bytes;
+- treat deletion of `CanonicalArtifactKind` and `CanonicalLayoutContract` as
+  one atomic compile closure across every exact textual consumer named in the
+  P6 selector; the indivisibility is type removal only and does not authorize
+  unrelated behavior in those files;
 - select renderers through exact kind/instance refs;
 - preserve committed Charter evidence and Project Context rendering;
 - preserve packet disposition, budgets, summaries, fixture sources, blockers,
@@ -384,6 +596,9 @@ Work:
   HCM-2.2 record identity, and all unchanged HCM-2.2 negative/atomic/recovery
   matrices;
 - update only earned bridge/gate/control-pack rows;
+- limit closeout edits to the exact P7 paths in the reviewed manifest: affected
+  `03`, `04`, `06`, and `09` rows, HCM-2.4 SPEC/plan/todo status and evidence,
+  and new P7 proof/review records;
 - run one complete-subject discovery review or bounded same-fingerprint burst;
 - consolidate all P1/P2, remediate once, and obtain a different-fresh
   delta-focused closure review;

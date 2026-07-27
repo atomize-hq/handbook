@@ -45,18 +45,22 @@ fn foundation_flow_demo_feature_specs_match_directive_and_template_contract() {
             .any(|line| line.starts_with(&format!("{field}:"))));
     }
 
-    let renderer_golden = fs::read_to_string(
-        workspace_root().join(
-            "crates/engine/tests/fixtures/hcm_2_4_work_specification/artifacts/feature_spec/FEATURE_SPEC.md",
-        ),
-    )
-    .expect("renderer golden");
+    let mut first_model_output = None;
+    let mut first_generated_view = None;
     for case in ["happy_path", "skip_path"] {
         let yaml_path = root
             .join("model_outputs")
             .join(case)
             .join("stage_10_feature_spec.md");
         let bytes = fs::read(&yaml_path).expect("Work Specification model output");
+        if let Some(first) = &first_model_output {
+            assert_eq!(
+                &bytes, first,
+                "happy and skip paths must use the same Work Specification input"
+            );
+        } else {
+            first_model_output = Some(bytes.clone());
+        }
         let content = parse_canonical_yaml(&bytes).expect("duplicate-safe Work Specification YAML");
         assert_eq!(
             canonical_yaml_bytes(&content).expect("canonical Work Specification YAML"),
@@ -66,6 +70,17 @@ fn foundation_flow_demo_feature_specs_match_directive_and_template_contract() {
         assert_eq!(object.len(), 8);
         assert_eq!(object["schema_id"], "handbook.artifact.work-specification");
         assert_eq!(object["schema_version"], "1.0");
+        let objective = object["objective"].as_str().expect("objective");
+        for required_objective_clause in [
+            "using staged external model output, canonical Work Specification YAML capture, and a deterministic Markdown view",
+            "A credible alternative is to retain Markdown as Stage 10 authority",
+            "but forfeits schema-selected validation, stable canonical identity, and byte-exact handoff provenance",
+        ] {
+            assert!(
+                objective.contains(required_objective_clause),
+                "objective must preserve the directive-required approach, alternative, and trade-off clause `{required_objective_clause}`"
+            );
+        }
         assert!(!object["scope"].as_array().expect("scope").is_empty());
         assert!(!object["acceptance_criteria"]
             .as_array()
@@ -78,6 +93,13 @@ fn foundation_flow_demo_feature_specs_match_directive_and_template_contract() {
                 .join("final_feature_spec.md"),
         )
         .expect("generated Markdown view");
-        assert_eq!(expected, renderer_golden);
+        if let Some(first) = &first_generated_view {
+            assert_eq!(
+                &expected, first,
+                "happy and skip paths must expect the same generated Markdown view"
+            );
+        } else {
+            first_generated_view = Some(expected);
+        }
     }
 }

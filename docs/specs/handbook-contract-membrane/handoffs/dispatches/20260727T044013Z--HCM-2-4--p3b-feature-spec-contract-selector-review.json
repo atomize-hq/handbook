@@ -1,0 +1,204 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T044013Z--HCM-2-4--p3b-feature-spec-contract-selector-review",
+  "created_at_utc": "2026-07-27T04:40:13Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P3B-feature-spec-contract-selector-repair",
+  "subject_fingerprint": "sha256:0f94db2f0faf90f293d9d4bc5fc21f6f358865bccaff9148b3c7d715c1ef43bb",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p3b-feature-spec-contract-selector-repair-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "5a0913f09bf63ac7f2a06d3ac2b45f17c773124bca49a50906db3097956b0ddf"
+      },
+      {
+        "path": "crates/cli/tests/feature_spec_contract.rs",
+        "sha256": "2a21bc5e34d5f85dfdc735665d4703bcadfbb34014da1eeedb77335da2440432"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_work_specification/artifacts/feature_spec/FEATURE_SPEC.md",
+        "sha256": "e06ee5ac1c33fbbb1b9792bbf546755167a209f6250f58b0b14573f21a20cefb"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_work_specification/artifacts/work-specification/work-specification.yaml",
+        "sha256": "aee00789586f221d7887721648df23810406163b8b937fc89ca24d1355cd04c2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "9fc9813cf2897fadb7ab3b570baf6b7d0123810b5e5003b636b26466f35789ca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "17b6dbb0b68a967f82096acfa393cfa377dde7f88fdd56fcf88fc7c0969489d3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "c91fce83fdb55d7b2adea38e6b199203c3d30c29452a0f30847a0fe4244b8526"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "3fdd4f2f8e2f1a55261ed06518e8b51d2fee1a0681d638d50319423442497726"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+        "sha256": "6aa2edab2f7d1f9279ff5bcba9114a80f708a0ecfeb097d6cac49a31593b16af"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-feature-spec-contract-selector-repair.md",
+        "sha256": "789c3a4a919bb3cb4b33002aea22c890160f00b2262f3afa4108de8babe1dd51"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md",
+        "sha256": "fa01c18b9ea5e110bc63e1770aa80d1e623f01834af0a41847aef51e5845e62b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "6939f78c5768e064e40bcf1413adaf17e6f9dfddbb0f27c3d2f831a12430b7f8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "677aea97cc440ba04018c4835d7ef1dea9be0ba10927f295f9cd2e0719718554"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/happy_path/final_feature_spec.md",
+        "sha256": "56253c780789b9c120103a32cabcd578744e78cfcf16bd2bdb6073f8a3738e84"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/skip_path/final_feature_spec.md",
+        "sha256": "56253c780789b9c120103a32cabcd578744e78cfcf16bd2bdb6073f8a3738e84"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/happy_path/stage_10_feature_spec.md",
+        "sha256": "32c53aba8df501a73ecc8bf20cc3915fc7ff821f84b1bbb50fa32bea8bec9cd8"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/skip_path/stage_10_feature_spec.md",
+        "sha256": "32c53aba8df501a73ecc8bf20cc3915fc7ff821f84b1bbb50fa32bea8bec9cd8"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:0f94db2f0faf90f293d9d4bc5fc21f6f358865bccaff9148b3c7d715c1ef43bb"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "one_contract_test_cross_fixture_assertion",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre_contract_test_edit_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-feature-spec-contract-selector-repair.md",
+      "sections": [
+        "Trigger",
+        "Exact selector amendment",
+        "Reviewability and non-goals",
+        "Entry and exit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Exact implementation surface selectors",
+        "P3B"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md",
+      "sections": [
+        "Authority switch",
+        "Validation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "After the negative-fixture repair, eight P3 suites pass (174 tests). handbook-cli --test feature_spec_contract fails its only test because both selected rich M4 expected views are compared to the unchanged minimal engine renderer fixture for a different canonical input. The two rich canonical model outputs are byte-identical and the two rich expected views are byte-identical. The 98-test cli_surface suite already passed its real Stage 10 happy/skip capture assertions against those exact expected bytes. The minimal engine YAML, minimal renderer fixture, and frozen renderer-goldens vector remain unchanged. GitNexus cannot resolve the isolated test symbol and reports UNKNOWN with zero impacts.",
+  "allowed_scope": [
+    "Read-only replay of all 17 manifest entries and the exact selector-amendment diff.",
+    "Trace the one feature_spec_contract test, the distinct minimal engine fixture pair, the rich happy/skip input/view pairs, and the real cli_surface view assertions.",
+    "Determine whether replacing only the stale cross-fixture equality with happy/skip canonical-input and generated-view equality is necessary, sufficient, minimal, and independently reviewable.",
+    "Confirm all other schema/template/canonical assertions remain unchanged and no fixture, renderer, helper, production path, or broader test needs editing.",
+    "Apply the 04 reviewability indicators and identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No production/runtime, renderer, renderer vector, minimal engine fixture, rich foundation input/view, support helper, schema, public API, dependency, Cargo/version, unsafe-policy, P2, P4, P5, P6, or sibling-slice change.",
+    "Do not review or approve future implementation bytes or broader P3B work."
+  ],
+  "tasks": [
+    "Verify complete subject identity and inspect the exact selector-amendment delta.",
+    "Confirm the failure compares distinct canonical inputs rather than exposing renderer drift.",
+    "Assess whether the proposed pairwise input/view equality preserves useful contract proof while exact rich bytes remain covered by real cli_surface capture assertions and minimal bytes remain frozen elsewhere.",
+    "Determine whether any unlisted material path or behavior change is required.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Released renderer definition, minimal canonical fixture, minimal renderer golden, and renderer vector remain unchanged",
+    "Happy and skip foundation journeys use byte-identical rich canonical inputs and generated views",
+    "Real-path cli_surface capture continues to prove each rich generated view byte-exactly",
+    "Only the exact one-test stale cross-fixture assertion and slice-local selector records may change",
+    "No production symbol, Cargo change, public contract change, or broader schema inference is authorized"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

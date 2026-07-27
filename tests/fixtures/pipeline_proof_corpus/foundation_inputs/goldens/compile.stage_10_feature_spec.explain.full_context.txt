@@ -68,10 +68,11 @@ DOCUMENTS:
   18. artifact | artifacts/foundation/quality_gates.yaml | required=false | status=present
   19. artifact | artifacts/foundation/ENVIRONMENT_INVENTORY.md | required=false | status=present
 OUTPUTS:
-  artifact | artifacts/feature_spec/FEATURE_SPEC.md
+  artifact | artifacts/work-specification/work-specification.yaml
+  repo_file | ${repo_root}/artifacts/feature_spec/FEATURE_SPEC.md
 GATING:
   mode = strict
   fail_on = missing_required_inputs, output_missing
-  note = Output must be ONLY the completed FEATURE_SPEC.md (no extra commentary).
-  note = NFRs and rollout/testing sections must explicitly reference Charter posture and Foundation Pack defaults (if present).
+  note = Capture input must be ONLY one completed Work Specification YAML document (no wrappers or commentary).
+  note = The Markdown view is derived deterministically during capture and is never authoritative.
 STAGE BODY: present

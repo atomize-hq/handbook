@@ -1,0 +1,234 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T024357Z--HCM-2-4--p3b-fixture-selector-repair-review",
+  "created_at_utc": "2026-07-27T02:43:57Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P3B-fixture-contract-selector-repair",
+  "subject_fingerprint": "sha256:57df6e6edbe273618bf6a00f8f2d50bbea28f225489fa017d2711eaf6dd89b58",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p3b-fixture-selector-repair-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "81fbbaf7cfd5d84141cdbb98c338fb40e37fd13c16d916df9ef463fdb694b74e"
+      },
+      {
+        "path": "core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "adbc65bd50111c5cd75e61b02361023023adcd99b0512ec713c36137fcd767be"
+      },
+      {
+        "path": "core/stages/10_feature_spec.md",
+        "sha256": "09992027838be50c146460c8c17b8e3c1aab98dfca844f747e60af13ab0c0301"
+      },
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "ce5f68a91bb2475a67feec8947e5725e6d12328ff3f6163ee8462f2f425a40dc"
+      },
+      {
+        "path": "crates/cli/tests/pipeline_proof_corpus_support.rs",
+        "sha256": "170c67c7f2b880c911a8ffbcbd73ea91b6ab5207512e289b7d917806b2538797"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "9fc9813cf2897fadb7ab3b570baf6b7d0123810b5e5003b636b26466f35789ca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "17b6dbb0b68a967f82096acfa393cfa377dde7f88fdd56fcf88fc7c0969489d3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "7a97477fe1dfc0a1b1fa639ae5a2ad8a93faacf035657be31760bf970bb16af0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "ef88e1d4f9d3fffad12c23a18eb97f1a7bfd3c1a76d1156dba3e3a8b8056b177"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-cli-surface-proof-selector-repair.md",
+        "sha256": "de5db77fac05ac7067fe41df4543f7d4751ff883f77da3d742e6ba3fef24bd11"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-fixture-contract-selector-repair.md",
+        "sha256": "211c2d32bddf5bf8dc7139975bc4f3820e412164a656b47f23b66f97f7d2ea30"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md",
+        "sha256": "fa01c18b9ea5e110bc63e1770aa80d1e623f01834af0a41847aef51e5845e62b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "63d38aac11eae2f04f7c30edfcfa135900dfa54651c64a1d0a6e28873100c395"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "44cebf269131d89b20b3a76298f30eb5546197627863e32283302181658d3893"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/.handbook/definitions/profiles/work-specification-root-1.0.0.yaml",
+        "sha256": "49a8af149798276570fba8a5feaa78da8419cc22f95474bd885a6037b24a636c"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/.handbook/profile-selection.json",
+        "sha256": "a348bc24536feb858f1b15f8e2a5e667d5cf026bdea5d8ca210591cfd551faa7"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "ed2260883039e5079eba085be3577aa8b3385972ca1b33a176e5d673e38a02e1"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "45fca4350d4fd9b9ccb2ec3da4cab7e9f2ea86b3be53f1d5ea0ae40c574a730e"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/core/stages/10_feature_spec.md",
+        "sha256": "2af19bf565ffdc35ed80473e12febaa5ac036e577c208e57fcc557ef1e42d1c1"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/.handbook/definitions/profiles/work-specification-root-1.0.0.yaml",
+        "sha256": "49a8af149798276570fba8a5feaa78da8419cc22f95474bd885a6037b24a636c"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/.handbook/profile-selection.json",
+        "sha256": "a348bc24536feb858f1b15f8e2a5e667d5cf026bdea5d8ca210591cfd551faa7"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "ed2260883039e5079eba085be3577aa8b3385972ca1b33a176e5d673e38a02e1"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "45fca4350d4fd9b9ccb2ec3da4cab7e9f2ea86b3be53f1d5ea0ae40c574a730e"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/stages/10_feature_spec.md",
+        "sha256": "2af19bf565ffdc35ed80473e12febaa5ac036e577c208e57fcc557ef1e42d1c1"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:57df6e6edbe273618bf6a00f8f2d50bbea28f225489fa017d2711eaf6dd89b58"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "bounded_fixture_selector",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre_fixture_edit_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-fixture-contract-selector-repair.md",
+      "sections": [
+        "Trigger",
+        "Exact additive fixture selector",
+        "Reviewability and non-goals",
+        "Entry and exit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-cli-surface-proof-selector-repair.md",
+      "sections": [
+        "Exact P3B selector",
+        "Entry and exit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Packet reviewability indicators",
+        "HCM-2.4"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The original P3B selector was independently CLEAN, but its first focused preview still refused because the recursively copied pipeline fixture stage declares only the old FEATURE_SPEC.md output. Both fixture roots have three stale Stage 10 core assets and currently untracked, byte-identical candidate repository-profile files selecting only Work Specification over shipped-root 1.2. The partial cli_surface delta changes only Stage 10 proof setup/assertions. No fixture authority input or production file has been edited after the refusal.",
+  "allowed_scope": [
+    "Read-only replay of all 24 manifest entries and the exact selector-repair diff.",
+    "Trace both CLI fixture installers to recursive fixture-root copy behavior.",
+    "Verify the refusal is caused by stale committed fixture authority, not production.",
+    "Validate that the ten additive fixture paths are sufficient and minimal for clean-checkout Stage 10 compile/capture proof.",
+    "Validate byte-identity requirements for the six core mirrors and two fixture-profile pairs.",
+    "Inspect the candidate fixture profile/selection semantics and ensure they select only Work Specification over shipped-root 1.2.",
+    "Apply the 04 reviewability indicators and identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No production/runtime, released profile/schema/definition, public API, dependency, Cargo/version, unsafe-policy, support helper, generated output, P2, P4, P5, P6, or sibling-slice change.",
+    "Do not treat current untracked fixture profile files as committed clean-checkout proof."
+  ],
+  "tasks": [
+    "Verify complete subject identity and inspect the exact selector-repair delta.",
+    "Reproduce or trace the focused preview refusal through recursive fixture copy and stale output declarations.",
+    "Determine whether all ten additive fixture paths are necessary and whether any unlisted path is required.",
+    "Validate the candidate repository profile/selection exactness, cross-fixture byte identity, and absence of runtime widening.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "P3 canonical Work Specification YAML and generated Markdown-view authority remain unchanged",
+    "CLI fixture roots must reproduce P3 from a clean checkout",
+    "Only the exact ten additive fixture-authority paths may be synchronized",
+    "Generated fixture-repo outputs remain transient and uncommitted",
+    "No production symbol, support helper, or broader schema inference is authorized"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

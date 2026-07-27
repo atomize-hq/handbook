@@ -195,10 +195,31 @@ fn foundation_flow_demo_evidence_root() -> std::path::PathBuf {
     foundation_flow_demo_root().join("evidence")
 }
 
+fn remove_stage_10_capture_outputs(root: &std::path::Path) {
+    for relative_path in [
+        "artifacts/work-specification/work-specification.yaml",
+        "artifacts/feature_spec/FEATURE_SPEC.md",
+    ] {
+        match std::fs::remove_file(root.join(relative_path)) {
+            Ok(()) => {}
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}
+            Err(error) => panic!("remove seeded stage-10 output {relative_path}: {error}"),
+        }
+    }
+}
+
+fn initialize_stage_10_test_repository_identity(root: &std::path::Path) {
+    handbook_engine::RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup(root)
+        .expect("initialize fresh Stage 10 test repository identity");
+}
+
 fn install_foundation_flow_demo_repo() -> (tempfile::TempDir, std::path::PathBuf) {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path().to_path_buf();
     copy_tree(&foundation_flow_demo_root().join("repo"), &root);
+    initialize_stage_10_test_repository_identity(root.as_path());
+    remove_stage_10_capture_outputs(root.as_path());
     (dir, root)
 }
 
@@ -923,6 +944,8 @@ fn prepare_stage_07_capture_ready_route_basis(root: &std::path::Path) {
 
 fn prepare_stage_10_capture_ready_route_basis(root: &std::path::Path) {
     prepare_foundation_inputs_full_context_route_basis(root);
+    initialize_stage_10_test_repository_identity(root);
+    remove_stage_10_capture_outputs(root);
 }
 
 fn stage_04_capture_input(root: &std::path::Path) -> String {
@@ -1215,10 +1238,10 @@ fn collect_repo_reread_planning_inputs(
         "trust matrix should keep repo reread fallback disabled"
     );
 
-    let feature_spec = read_repo_text(
+    let work_specification = read_repo_text(
         repo_root,
         repo_rereads,
-        "artifacts/feature_spec/FEATURE_SPEC.md",
+        "artifacts/work-specification/work-specification.yaml",
     );
     let foundation_strategy = read_repo_text(
         repo_root,
@@ -1244,7 +1267,7 @@ fn collect_repo_reread_planning_inputs(
 
     build_planning_inputs(
         &manifest,
-        &feature_spec,
+        &work_specification,
         &foundation_strategy,
         &tech_arch_brief,
         &quality_gates_spec,
@@ -1253,22 +1276,44 @@ fn collect_repo_reread_planning_inputs(
 
 fn build_planning_inputs(
     manifest: &handbook_pipeline::pipeline_handoff::PipelineHandoffManifest,
-    feature_spec: &str,
+    work_specification: &str,
     foundation_strategy: &str,
     tech_arch_brief: &str,
     quality_gates_spec: &str,
 ) -> PlanningInputs {
-    let summary = markdown_section_body(feature_spec, "## 1) Summary")
-        .lines()
-        .find(|line| !line.trim().is_empty())
-        .map(str::trim)
-        .unwrap_or_else(|| panic!("feature spec summary should not be empty"))
+    let work_specification =
+        handbook_engine::canonical_yaml::parse_canonical_yaml(work_specification.as_bytes())
+            .expect("canonical Work Specification YAML");
+    let work_specification = work_specification
+        .as_object()
+        .expect("Work Specification object");
+    let summary = work_specification
+        .get("objective")
+        .and_then(serde_json::Value::as_str)
+        .expect("Work Specification objective")
         .to_string();
-    let goals = markdown_bullet_lines(&markdown_section_body(feature_spec, "## 3) Goals"));
-    let acceptance_criteria = markdown_bullet_lines(&markdown_section_body(
-        feature_spec,
-        "## 8) Acceptance Criteria (testable)",
-    ));
+    let goals = work_specification
+        .get("scope")
+        .and_then(serde_json::Value::as_array)
+        .expect("Work Specification scope")
+        .iter()
+        .map(|item| {
+            item.as_str()
+                .expect("Work Specification scope item")
+                .to_string()
+        })
+        .collect();
+    let acceptance_criteria = work_specification
+        .get("acceptance_criteria")
+        .and_then(serde_json::Value::as_array)
+        .expect("Work Specification acceptance criteria")
+        .iter()
+        .map(|item| {
+            item.as_str()
+                .expect("Work Specification acceptance criterion")
+                .to_string()
+        })
+        .collect();
     let strategy_pillars = markdown_numbered_lines(&markdown_section_body(
         foundation_strategy,
         "## Strategy Pillars",
@@ -1453,12 +1498,15 @@ fn run_bundle_only_feature_slice_consumer_harness(
         "bundle-only harness requires reread fallback disabled"
     );
 
-    let feature_spec = read_bundle_text(
+    let work_specification = read_bundle_text(
         repo_root,
         bundle_root,
         &allow_read_paths,
         &mut bundle_reads,
-        &bundle_path_for_source_path(&manifest, "artifacts/feature_spec/FEATURE_SPEC.md"),
+        &bundle_path_for_source_path(
+            &manifest,
+            "artifacts/work-specification/work-specification.yaml",
+        ),
     );
     let foundation_strategy = read_bundle_text(
         repo_root,
@@ -1484,7 +1532,7 @@ fn run_bundle_only_feature_slice_consumer_harness(
 
     let inputs = build_planning_inputs(
         &manifest,
-        &feature_spec,
+        &work_specification,
         &foundation_strategy,
         &tech_arch_brief,
         &quality_gates_spec,
@@ -2375,9 +2423,8 @@ fn pipeline_capture_preview_stage_10_matches_shared_golden() {
         ],
         &stage_10_completed_feature_spec_input(),
     );
-    assert!(output.status.success(), "preview should succeed");
-
     let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
+    assert!(output.status.success(), "preview should succeed: {stdout}");
     pipeline_proof_corpus_support::assert_matches_golden_with_explicit_placeholders(
         &normalize_capture_id(&stdout),
         &[],
@@ -2514,7 +2561,7 @@ fn pipeline_capture_preview_stage_10_refuses_file_wrapper() {
     let (_dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
     prepare_stage_10_capture_ready_route_basis(root.as_path());
     let wrapped = format!(
-        "--- FILE: artifacts/feature_spec/FEATURE_SPEC.md ---\n{}",
+        "--- FILE: artifacts/work-specification/work-specification.yaml ---\n{}",
         stage_10_completed_feature_spec_input()
     );
 
@@ -2708,9 +2755,8 @@ fn pipeline_capture_apply_stage_10_matches_shared_golden() {
         ],
         &stage_10_completed_feature_spec_input(),
     );
-    assert!(output.status.success(), "capture should succeed");
-
     let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
+    assert!(output.status.success(), "capture should succeed: {stdout}");
     pipeline_proof_corpus_support::assert_matches_golden_with_explicit_placeholders(
         &stdout,
         &[],
@@ -2744,12 +2790,18 @@ fn pipeline_capture_stage_10_refuses_raw_compile_payload() {
     assert_pipeline_capture_refusal(
         &stdout,
         "stage.10_feature_spec",
-        "invalid_capture_input: stage.10_feature_spec capture must receive a completed FEATURE_SPEC.md body, not raw `pipeline compile` payload",
-        "run the stage-10 compile payload through an external operator or model runner, then retry `pipeline capture` with the completed `FEATURE_SPEC.md`",
+        "invalid_capture_input: stage.10_feature_spec capture must receive Work Specification YAML, not raw `pipeline compile` payload",
+        "run the stage-10 compile payload through an external operator or model runner, then retry `pipeline capture` with one duplicate-free Work Specification YAML document",
+    );
+    assert!(
+        !root
+            .join("artifacts/work-specification/work-specification.yaml")
+            .exists(),
+        "raw compile payload refusal must not create the canonical Work Specification"
     );
     assert!(
         !root.join("artifacts/feature_spec/FEATURE_SPEC.md").exists(),
-        "raw compile payload refusal must not create the feature-spec artifact"
+        "raw compile payload refusal must not create the generated Markdown view"
     );
 }
 
@@ -2892,13 +2944,13 @@ fn pipeline_foundation_inputs_m4_happy_path_proves_real_stage_10_handoff() {
 
     let stage_10_payload = stage_10_compile_payload(root.as_path());
     assert!(
-        stage_10_payload.starts_with("# stage.10_feature_spec - Feature Specification"),
+        stage_10_payload.starts_with("# stage.10_feature_spec - Work Specification"),
         "stage-10 compile should remain payload-only stage input: {stage_10_payload}"
     );
-    let completed_feature_spec =
+    let work_specification =
         read_foundation_flow_demo_model_output("happy_path", "stage_10_feature_spec.md");
     assert_ne!(
-        stage_10_payload, completed_feature_spec,
+        stage_10_payload, work_specification,
         "stage-10 compile payload must stay distinct from completed external model output"
     );
     let raw_stage_10 = run_in_with_input(
@@ -2922,12 +2974,18 @@ fn pipeline_foundation_inputs_m4_happy_path_proves_real_stage_10_handoff() {
     assert_pipeline_capture_refusal(
         &raw_stage_10_stdout,
         "stage.10_feature_spec",
-        "invalid_capture_input: stage.10_feature_spec capture must receive a completed FEATURE_SPEC.md body, not raw `pipeline compile` payload",
-        "run the stage-10 compile payload through an external operator or model runner, then retry `pipeline capture` with the completed `FEATURE_SPEC.md`",
+        "invalid_capture_input: stage.10_feature_spec capture must receive Work Specification YAML, not raw `pipeline compile` payload",
+        "run the stage-10 compile payload through an external operator or model runner, then retry `pipeline capture` with one duplicate-free Work Specification YAML document",
+    );
+    assert!(
+        !root
+            .join("artifacts/work-specification/work-specification.yaml")
+            .exists(),
+        "raw stage-10 compile payload refusal must not create the canonical Work Specification"
     );
     assert!(
         !root.join("artifacts/feature_spec/FEATURE_SPEC.md").exists(),
-        "raw stage-10 compile payload refusal must not create the feature-spec artifact"
+        "raw stage-10 compile payload refusal must not create the generated Markdown view"
     );
     let stage_10 = run_in_with_input(
         root.as_path(),
@@ -2939,12 +2997,19 @@ fn pipeline_foundation_inputs_m4_happy_path_proves_real_stage_10_handoff() {
             "--stage",
             "stage.10_feature_spec",
         ],
-        &completed_feature_spec,
+        &work_specification,
     );
     assert!(stage_10.status.success(), "stage 10 capture should succeed");
     assert_eq!(
+        std::fs::read_to_string(root.join("artifacts/work-specification/work-specification.yaml"))
+            .expect("canonical Work Specification"),
+        work_specification
+    );
+    let generated_view =
         std::fs::read_to_string(root.join("artifacts/feature_spec/FEATURE_SPEC.md"))
-            .expect("feature spec artifact"),
+            .expect("generated Markdown view");
+    assert_eq!(
+        generated_view,
         read_foundation_flow_demo_expected("happy_path", "final_feature_spec.md")
     );
 }
@@ -3144,8 +3209,9 @@ fn pipeline_foundation_inputs_m5_happy_path_emits_valid_bundle_and_produces_slic
         baseline_run.plan_body, bundle_only_run.plan_body,
         "scorecard should compare the same downstream plan"
     );
+    let scorecard = render_m5_handoff_scorecard(&baseline_run, &bundle_only_run);
     assert_eq!(
-        render_m5_handoff_scorecard(&baseline_run, &bundle_only_run),
+        scorecard,
         read_foundation_flow_demo_evidence("m5_handoff_scorecard.md")
     );
 }
@@ -3258,13 +3324,13 @@ fn pipeline_foundation_inputs_m4_skip_path_skips_stage_06_when_both_route_predic
 
     let stage_10_payload = stage_10_compile_payload(root.as_path());
     assert!(
-        stage_10_payload.starts_with("# stage.10_feature_spec - Feature Specification"),
+        stage_10_payload.starts_with("# stage.10_feature_spec - Work Specification"),
         "stage-10 compile should remain payload-only stage input: {stage_10_payload}"
     );
-    let completed_feature_spec =
+    let work_specification =
         read_foundation_flow_demo_model_output("skip_path", "stage_10_feature_spec.md");
     assert_ne!(
-        stage_10_payload, completed_feature_spec,
+        stage_10_payload, work_specification,
         "stage-10 compile payload must stay distinct from completed external model output"
     );
     let raw_stage_10 = run_in_with_input(
@@ -3288,12 +3354,18 @@ fn pipeline_foundation_inputs_m4_skip_path_skips_stage_06_when_both_route_predic
     assert_pipeline_capture_refusal(
         &raw_stage_10_stdout,
         "stage.10_feature_spec",
-        "invalid_capture_input: stage.10_feature_spec capture must receive a completed FEATURE_SPEC.md body, not raw `pipeline compile` payload",
-        "run the stage-10 compile payload through an external operator or model runner, then retry `pipeline capture` with the completed `FEATURE_SPEC.md`",
+        "invalid_capture_input: stage.10_feature_spec capture must receive Work Specification YAML, not raw `pipeline compile` payload",
+        "run the stage-10 compile payload through an external operator or model runner, then retry `pipeline capture` with one duplicate-free Work Specification YAML document",
+    );
+    assert!(
+        !root
+            .join("artifacts/work-specification/work-specification.yaml")
+            .exists(),
+        "raw stage-10 compile payload refusal must not create the canonical Work Specification"
     );
     assert!(
         !root.join("artifacts/feature_spec/FEATURE_SPEC.md").exists(),
-        "raw stage-10 compile payload refusal must not create the feature-spec artifact"
+        "raw stage-10 compile payload refusal must not create the generated Markdown view"
     );
     let stage_10 = run_in_with_input(
         root.as_path(),
@@ -3305,20 +3377,28 @@ fn pipeline_foundation_inputs_m4_skip_path_skips_stage_06_when_both_route_predic
             "--stage",
             "stage.10_feature_spec",
         ],
-        &completed_feature_spec,
+        &work_specification,
     );
     assert!(stage_10.status.success(), "stage 10 capture should succeed");
     assert_eq!(
+        std::fs::read_to_string(root.join("artifacts/work-specification/work-specification.yaml"))
+            .expect("canonical Work Specification"),
+        work_specification
+    );
+    let generated_view =
         std::fs::read_to_string(root.join("artifacts/feature_spec/FEATURE_SPEC.md"))
-            .expect("feature spec artifact"),
+            .expect("generated Markdown view");
+    assert_eq!(
+        generated_view,
         read_foundation_flow_demo_expected("skip_path", "final_feature_spec.md")
     );
 }
 
 #[test]
 fn pipeline_foundation_inputs_m4_happy_path_matches_committed_evidence_bundle() {
+    let transcript = happy_path_evidence_transcript();
     assert_eq!(
-        happy_path_evidence_transcript(),
+        transcript,
         read_foundation_flow_demo_evidence("happy_path.transcript.txt"),
         "happy-path evidence transcript drifted; update the committed bundle under tests/fixtures/foundation_flow_demo/evidence/ if intentional"
     );
@@ -3326,8 +3406,9 @@ fn pipeline_foundation_inputs_m4_happy_path_matches_committed_evidence_bundle() 
 
 #[test]
 fn pipeline_foundation_inputs_m4_skip_path_matches_committed_evidence_bundle() {
+    let transcript = skip_path_evidence_transcript();
     assert_eq!(
-        skip_path_evidence_transcript(),
+        transcript,
         read_foundation_flow_demo_evidence("skip_path.transcript.txt"),
         "skip-path evidence transcript drifted; update the committed bundle under tests/fixtures/foundation_flow_demo/evidence/ if intentional"
     );

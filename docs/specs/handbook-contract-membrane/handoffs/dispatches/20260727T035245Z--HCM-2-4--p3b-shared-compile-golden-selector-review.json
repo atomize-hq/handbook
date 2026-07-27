@@ -1,0 +1,198 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T035245Z--HCM-2-4--p3b-shared-compile-golden-selector-review",
+  "created_at_utc": "2026-07-27T03:52:45Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P3B-shared-compile-golden-selector-repair",
+  "subject_fingerprint": "sha256:d00d360a554a0c0cf58adf5af817bd6e3b03159747e318f6387002d241fa8cdd",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p3b-shared-compile-golden-selector-repair-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "5a0913f09bf63ac7f2a06d3ac2b45f17c773124bca49a50906db3097956b0ddf"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_compile.rs",
+        "sha256": "a7fb47bb0ed2c3a6ae7483286fe5a2fc51024560e10b017027209a578e137d91"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "9fc9813cf2897fadb7ab3b570baf6b7d0123810b5e5003b636b26466f35789ca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "17b6dbb0b68a967f82096acfa393cfa377dde7f88fdd56fcf88fc7c0969489d3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "5e30586bb8013f92a4cf671d8c334ecb0cead4f92847e89a0c9c089fd8ede84b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "5d1c16572306557b68485895baae6848f8191be2f9b103c1d8c7e17277374b79"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-fixture-contract-selector-repair.md",
+        "sha256": "211c2d32bddf5bf8dc7139975bc4f3820e412164a656b47f23b66f97f7d2ea30"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-shared-compile-golden-selector-repair.md",
+        "sha256": "9410b88f39faa7eaf9f0dd355b3b3a5168fe3930762fc9448454d9d448d0d5ac"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md",
+        "sha256": "fa01c18b9ea5e110bc63e1770aa80d1e623f01834af0a41847aef51e5845e62b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "15493cbc4465662d246d95d095d3e9fd6c824998e3c0f0948ad00449c5c7b979"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "627d21680e1cb73e669744ac958616724496e3e3aa9a23d4f97953239aee6612"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/compile.stage_10_feature_spec.explain.full_context.txt",
+        "sha256": "319dd4d8e394e212d4126e6c37eb612afed413d1636ac3dfa3dee65b8c3c6d14"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/compile.stage_10_feature_spec.payload.full_context.txt",
+        "sha256": "ab6387a2ef2a492f779e2fc4a1536e5d5e272e001b2bc0409626af2ab09c820c"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "81fbbaf7cfd5d84141cdbb98c338fb40e37fd13c16d916df9ef463fdb694b74e"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "adbc65bd50111c5cd75e61b02361023023adcd99b0512ec713c36137fcd767be"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/core/stages/10_feature_spec.md",
+        "sha256": "09992027838be50c146460c8c17b8e3c1aab98dfca844f747e60af13ab0c0301"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:d00d360a554a0c0cf58adf5af817bd6e3b03159747e318f6387002d241fa8cdd"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "bounded_shared_golden_selector",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre_golden_regeneration_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-shared-compile-golden-selector-repair.md",
+      "sections": [
+        "Trigger",
+        "Exact additive selector",
+        "Boundary and exit proof"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md",
+      "sections": [
+        "Runtime path",
+        "Proof"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Packet reviewability indicators",
+        "HCM-2.4"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The complete cli_surface wall passes 95/98. The remaining three failures compare only the two named shared compile goldens after the fixture core was synchronized to reviewed P3 Work Specification authority. Two CLI tests reuse the payload golden and one uses the explain golden. Existing compiler pipeline_compile tests consume the same two files. No production or assertion failure is observed.",
+  "allowed_scope": [
+    "Read-only replay of all 16 manifest entries and the exact selector-amendment diff.",
+    "Trace all CLI and compiler consumers of the paired shared goldens.",
+    "Validate that actual output is determined by the synchronized reviewed fixture core and fixed clock/path normalization.",
+    "Determine whether the exact two files are necessary, sufficient, minimal, and mechanical, with no unlisted source/assertion/fixture edit.",
+    "Apply the 04 reviewability indicators and identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No production/runtime, CLI/compiler source or assertion, schema, released definition, profile, shared fixture input, public API, dependency, Cargo/version, unsafe-policy, P2, P4, P5, P6, or sibling-slice change.",
+    "Do not approve future regenerated golden bytes or the broader P3B implementation delta."
+  ],
+  "tasks": [
+    "Verify complete subject identity and inspect the exact selector-amendment delta.",
+    "Reproduce or trace the 95/98 wall and identify every consumer of both shared goldens.",
+    "Validate that only deterministic golden regeneration is required and that the unrelated-malformed-stage negative remains meaningful.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "P3 Work Specification compile output and synchronized fixture authority remain unchanged",
+    "Payload/explain CLI and compiler consumers share exact deterministic golden bytes",
+    "Malformed unrelated stage remains ignored without altering compiled payload",
+    "Only the exact two golden files may change",
+    "No production symbol or broader schema inference is authorized"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -19,7 +19,7 @@
   - read_allowlist.json
   - trust_matrix.md
 - Repo rereads:
-  - artifacts/feature_spec/FEATURE_SPEC.md
+  - artifacts/work-specification/work-specification.yaml
   - artifacts/foundation/FOUNDATION_STRATEGY.md
   - artifacts/foundation/TECH_ARCH_BRIEF.md
   - artifacts/foundation/QUALITY_GATES_SPEC.md
@@ -31,7 +31,7 @@
   - handoff_manifest.json
   - read_allowlist.json
   - trust_matrix.md
-  - inputs/external_manual_derived/artifacts/feature_spec/FEATURE_SPEC.md
+  - inputs/external_manual_derived/artifacts/work-specification/work-specification.yaml
   - inputs/compiler_derived/artifacts/foundation/FOUNDATION_STRATEGY.md
   - inputs/compiler_derived/artifacts/foundation/TECH_ARCH_BRIEF.md
   - inputs/compiler_derived/artifacts/foundation/QUALITY_GATES_SPEC.md

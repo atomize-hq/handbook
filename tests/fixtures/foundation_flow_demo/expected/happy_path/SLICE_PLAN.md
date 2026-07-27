@@ -5,13 +5,13 @@
 - Repo Reread Fallback: disabled
 
 ## Planning Intent
-Build the `M4` proof wedge that demonstrates one realistic `pipeline.foundation_inputs` journey from charter inputs to a captured `FEATURE_SPEC.md`, with stage 10 explicitly split into compile payload generation and external model output capture.
+Build the M4 proof wedge for one pipeline.foundation_inputs journey using staged external model output, canonical Work Specification YAML capture, and a deterministic Markdown view. A credible alternative is to retain Markdown as Stage 10 authority; that is simpler for manual editing but forfeits schema-selected validation, stable canonical identity, and byte-exact handoff provenance.
 
 ## Evidence Pack
 - Goals:
   - G1: Prove a believable happy path that reaches stage 10 only after stage 06 and stage 07 complete.
   - G2: Prove a believable skip path that leaves stage 06 skipped because both activation predicates are false.
-  - G3: Lock docs/help/tests to the same stage-10 external-model handoff contract.
+  - G3: Lock docs and proof to the same canonical Work Specification handoff contract.
 - Strategy pillars:
   - Keep the M4 demo corpus separate from the shared proof corpus and from `execution_demo`.
   - Preserve deterministic evidence surfaces for reruns by fixing `now_utc` and normalizing capture ids.
@@ -30,8 +30,8 @@ Build the `M4` proof wedge that demonstrates one realistic `pipeline.foundation_
 ### Slice 1: Route Journey Proof
 - Objective: G1: Prove a believable happy path that reaches stage 10 only after stage 06 and stage 07 complete.
 - Acceptance:
-  - AC-001: A CLI happy-path test resolves, captures stages 04/05/06/07, compiles stage 10, captures stage 10 from external completed output, and writes `artifacts/feature_spec/FEATURE_SPEC.md`.
-  - AC-003: A CLI skip-path test proves stage 06 is skipped because `needs_project_context=false` and `charter_gaps_detected=false`.
+  - AC-001: A CLI happy-path test resolves, captures stages 04/05/06/07, compiles stage 10, captures one completed Work Specification YAML document, and writes the canonical YAML plus deterministic Markdown view.
+  - AC-003: A CLI skip-path test proves stage 06 is skipped because needs_project_context=false and charter_gaps_detected=false.
 - Grounding:
   - Manual state handoff sets `needs_project_context=true`, then resolve activates stage 06.
   - targeted CLI journey tests for happy and skip paths
@@ -39,9 +39,9 @@ Build the `M4` proof wedge that demonstrates one realistic `pipeline.foundation_
 - Deliverable: keep the happy path and skip path evidence truthful through stage 07 before the external-model boundary.
 
 ### Slice 2: Stage-10 Handoff Boundary
-- Objective: G3: Lock docs/help/tests to the same stage-10 external-model handoff contract.
+- Objective: G3: Lock docs and proof to the same canonical Work Specification handoff contract.
 - Acceptance:
-  - AC-002: The happy-path final `FEATURE_SPEC.md` exactly matches the committed completed stage-10 fixture body.
+  - AC-002: The happy-path canonical Work Specification YAML exactly matches the admitted external model output and its Markdown view exactly matches the committed renderer golden.
   - AC-004: No stage-10 success-path test captures raw compile payload.
 - Grounding:
   - Stage 10 compile produces payload for an external model.
@@ -52,7 +52,7 @@ Build the `M4` proof wedge that demonstrates one realistic `pipeline.foundation_
 ### Slice 3: Deterministic Downstream Adoption
 - Objective: turn the emitted bundle into a bounded planning artifact without repo rereads.
 - Acceptance:
-  - AC-005: Docs/help drift checks fail if stage 10 is described as direct `compile | capture`.
+  - AC-005: Docs and proof drift checks fail if stage 10 is described as direct compile-to-capture.
 - Grounding:
   - Preserve deterministic evidence surfaces for reruns by fixing `now_utc` and normalizing capture ids.
   - Keep operator-facing docs aligned with the shipped handoff contract.

@@ -293,8 +293,13 @@ HCM-2.1–HCM-2.3 preservation vectors, and per-symbol GitNexus impacts. Include
 the exact P2 CLI help/snapshot correction and the complete HCM-2.2 focused
 command wall in the live manifest. No production change is allowed in P0.
 Separate implementation selection authorizes this read-only preflight only.
-Production, test, definition, template, and documentation edits remain blocked
-until P0 records its exact live manifests/UIDs and passes its gate.
+Production, test, definition, and template edits remain blocked until P0
+records its exact live manifests/UIDs and passes its gate. After read-only
+discovery establishes the exact evidence, P0 may write only its manifested
+slice-local control records and the smallest coupled SPEC/plan/todo correction
+needed to resolve a demonstrated contradiction. Those documentation changes
+must pass the declared fresh internal review/remediation loop before P0 is
+accepted; they do not authorize runtime work.
 
 ### P1A — Catalog publication and admission closure
 
@@ -312,6 +317,25 @@ Work/Decision/Risk to the shipped-root profile and does not change public APIs.
 It also proves the 1.2 `project_authority` descriptor is exactly the released
 HCM-2.2 row and freezes the literal authored 1.2 profile fingerprint in an
 immutable HCM-2.4 vector.
+
+The exact fingerprints use the uniform HCM-2.2 typed-closure envelope, not
+authored-content-only hashing:
+
+- each intake includes the exact selected artifact-kind and candidate-schema
+  fingerprints;
+- each renderer includes its exact input-schema fingerprint;
+- each successor kind includes stable-role, canonical-schema entry/closure, and
+  singleton renderer fingerprints; and
+- profile `1.2` includes every exact kind, descriptor-registry, intake,
+  renderer, lifecycle, condition, schema, stable-role, vocabulary, and Context
+  Resolution dependency selected by the three-instance profile.
+
+The exact five new package intakes must take the full semantic admission path
+with retained modes and coverage. The released Charter intake alone retains its
+existing identity-only compatibility path. P1A must prove this distinction
+through the actual `ArtifactRepositoryV1::open` path, including stale
+subordinate fingerprints, wrong kind/schema binding, missing coverage, and
+unsupported mode refusal.
 
 ### P1B — Versioned Charter compatibility foundation
 
@@ -341,6 +365,14 @@ and Context Resolution sources. This packet is isolated because
 `shipped_profile_request` and `resolve_shipped_profile_decisions` are
 CRITICAL-risk shared roots.
 
+The successor selects Project Context kind `1.1` over the unchanged Project
+Context schema `1.0` and canonical path. Preserve the HCM-2.1 runtime by
+extending only the existing private `selected_contract_matches` predicate to
+admit exact kind `1.0` or exact kind `1.1` when decision and instance refs are
+equal and the schema/path remain the frozen HCM-2.1 values. This is a
+version-compatibility membrane, not generic inference: no other kind, schema,
+path, fallback, public signature, or production symbol is authorized.
+
 Resolve and assert the three exact descriptor rows above; non-null intake refs
 and singleton renderer refs for Project Context and Environment Context are
 required GREEN evidence, not publication-only metadata. The real shipped path
@@ -355,6 +387,26 @@ conditional absence, schema parity, atomic safe write, retained observation,
 full-byte rendering, and zero legacy influence. Leave aggregate bridges intact
 until P6.
 
+P2 runtime work has an unmet authority prerequisite. The frozen HCM-0.6
+condition decision leaves the condition record schema, exact input bindings,
+admitted evidence types, precedence, freshness thresholds, and evaluator
+implementation undecided. The live shipped resolver therefore returns only
+`unresolved` / `EvidenceContractUnavailable` and `indeterminate` for the
+selected Environment Context descriptor. Neither
+`crates/engine/src/profile_decision.rs` nor a new evaluator surface is in the
+P2 selector.
+
+The condition-true/false and write-only-when-applicable clauses remain exit
+requirements; they are not authority to invent an evaluator, coerce
+`indeterminate`, treat structured Environment Context input or its
+`applicability_basis` as independent condition evidence, make profile selection
+an applicability flag, or write while applicability is unresolved. P2
+behavior-changing work must remain paused until a separately approved,
+fingerprinted condition-evidence/evaluator contract either enters this slice
+with an exact reviewed selector or is completed as a proven dependency. P3–P5
+remain semantically independent and may proceed serially, but P6 cannot begin
+while P2 is blocked.
+
 ### P3 — Work Specification / Stage 10 vertical
 
 Make the fixed Stage 10 capture output schema-valid Work Specification YAML,
@@ -363,6 +415,32 @@ Feature Spec Markdown only as a view. Preserve frozen pipeline command names,
 selectors, route-basis semantics, trust classes, and handoff contracts. This
 packet is isolated because pipeline handoff emit/validate surfaces are
 CRITICAL-risk.
+
+The final workspace wall exposed a test/proof integration omission rather than
+a runtime defect. P3B began with the CLI-surface proof repair frozen in
+`decision/20260727-p3b-cli-surface-proof-selector-repair.md`. Its first focused
+test then proved that both recursively copied CLI fixture repositories still
+carried the pre-P3 Stage 10 contract. The exact additive fixture-only repair is
+frozen in `decision/20260727-p3b-fixture-contract-selector-repair.md`. After
+that selector was reviewed CLEAN and synchronized, the next focused test proved
+that Stage 10 authoring also requires the existing HCM-2.2 durable
+repository-identity prerequisite. The exact test-only, fresh-per-temporary-repo
+initialization amendment is frozen in
+`decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md`.
+The next journey wall proved that the two foundation-flow Work Specification
+inputs still used a generic record ID that would replace the preserved M4
+handoff feature identity. The exact two-line input repair is frozen in
+`decision/20260727-p3b-foundation-feature-identity-selector-repair.md`. After
+that repair, M5 proved its test-only consumer still treated the generated
+Markdown view as bundle authority. The bounded canonical-YAML consumer and
+evidence repair is frozen in
+`decision/20260727-p3b-m5-canonical-consumer-selector-repair.md`. The resulting
+full CLI wall then isolated only the paired shared compile goldens still
+describing the old Markdown-only output; their exact proof-only repair is
+frozen in `decision/20260727-p3b-shared-compile-golden-selector-repair.md`.
+P3B may edit only those named CLI/fixture paths, deterministic golden and
+journey transcript bytes, and its proof record. It cannot commit a fixture
+identity, change production behavior, or reopen P3 discovery.
 
 ### P4 — Decision Record support proof
 
@@ -378,6 +456,15 @@ Record schema and kind. P4 and P5 may share permanent generic implementation
 code, but their fixtures, schema coverage, renderer goldens, and acceptance
 evidence remain separate. Combining them is allowed only if a fresh reviewer
 accepts a written indivisibility rationale before implementation.
+
+P4 and P5 are currently bounded incomplete. Their exact selected fixtures,
+read/validate paths, intake coverage, and available renderer/negative evidence
+are retained, but the unchanged generic mutation path rejects the
+planner-generated underscore-bearing intake-value tokens before establishment.
+The accepted stop and separately selectable prerequisite are frozen in
+`decision/20260727-p4-p5-generic-mutation-token-authority-stop.md`. This record
+does not authorize token normalization, token-grammar widening, a released
+coverage-ID edit, or completion/promotion of either packet.
 
 ### P6 — Aggregate flow and fixed-selector deletion
 
@@ -402,18 +489,45 @@ same-scope correction after fresh impact analysis.
 
 | Packet | Production/definition selectors | Test/proof selectors | Documentation selectors |
 | --- | --- | --- | --- |
-| P1A | exact new version files under `crates/engine/definitions/{artifact-kinds,intakes,renderers,profiles}/`; `crates/engine/src/profile_builtins.rs`; exact later-owned dependency guards in `crates/engine/src/{artifact_kind_registry,artifact_instance}.rs`; `artifact_intake_registry.rs` and `artifact_repository.rs` are proof/read surfaces unless P0 proves a minimal edit is necessary | `crates/engine/tests/{hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile}.rs`; exact new vectors under `slices/HCM-2.4/contracts/`, including the literal 1.2 profile fingerprint and full Project Authority descriptor | HCM-2.4 packet only until P7 |
+| P1A | exact new version files under `crates/engine/definitions/{artifact-kinds,intakes,renderers,profiles}/`; `crates/engine/src/profile_builtins.rs`; exact `AuthoredArtifactKindDefinition::validate` and later-owned dependency branches in `artifact_kind_registry.rs`; the exact frozen-row branch in `artifact_instance.rs`; exact P1A typed-closure branch in `ArtifactIntakeDefinitionV1::parse`; exact shipped-root `1.2` branch in `validate_authored_profile_fingerprints`; exact Charter-only compatibility selection in `load_repository_intakes`; exact type-absent string-valued `const` branch in `ResolvedSchema::collect_coverage_leaf_shapes`; `ArtifactIntakeRegistry::load_with_builtin_compatibility` and `resolve_profile_selection` remain unchanged; no public signature or other generic repository-definition behavior change beyond the exact approved string-`const` predicate | editable `crates/engine/tests/{artifact_instances,artifact_kind_registry,profile_artifact_schemas,profile_context_schemas,profile_selection,profile_work_decision_schemas,profile_risk_schema,hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile,hcm_2_4_definition_support,hcm_2_4_definition_runtime}.rs` plus test-only assertions inside `crates/engine/src/schema_registry.rs`; read/proof-only `hcm_2_3_registration_kernel.rs` with zero-byte delta; exact new vectors under `slices/HCM-2.4/contracts/`, including the literal typed-closure 1.2 profile fingerprint, full Project Authority descriptor, and renderer goldens | HCM-2.4 packet only until P7 |
 | P1B | `crates/engine/src/charter_definition_registry.rs` exact `CharterDefinitionRegistry.validate_selected_decisions#1`; `crates/engine/src/charter_lifecycle_validation.rs` exact `SELECTED_PROFILE_REF`, `SELECTED_PROFILE_FINGERPRINT`, `build_result`, and `validate_definition_authority`; `crates/engine/src/charter_intake.rs` exact `evaluate_charter_intake`; `crates/engine/src/charter_approval_workflow.rs` exact `validate_candidate_currentness`; `crates/engine/src/charter_promotion_workflow.rs` exact `validate_candidate_contract` and `CharterPromotionWorkflowServiceV1.promote_at#2`; `crates/engine/src/charter_authority_transaction.rs` exact `CharterAuthorityTransactionServiceV1.preflight#1`; `crates/compiler/src/doctor.rs` exact `doctor_report_from_inspection` is a read/proof anchor and is not edited; no signature/public type/schema/vector change | exact new `crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs`, including `invalid_compatible_profile_decisions_cannot_produce_charter_intake`; every `crates/engine/tests/hcm_2_2_*.rs`; exact compiler doctor unit and CLI doctor/profile test commands from the proof; HCM-2.2 compiler/CLI product-cutover/version/skill tests; all direct HIGH/CRITICAL upstream tests; exact 1.1/1.2 equality and per-field negative vectors | packet proof only |
-| P1C | `crates/engine/src/profile_decision.rs` exact `shipped_profile_request` source list and selected profile ref; `resolve_shipped_profile_decisions` is a read/proof anchor and is not edited; no signature/public type changes | `crates/engine/tests/{hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile}.rs`; the P1B compatibility target; every CRITICAL upstream preservation test | packet proof only |
-| P2 | `crates/engine/src/author/environment_inventory_core.rs`; `crates/compiler/src/author/{environment_inventory,environment_inventory_shell,mod}.rs`; `crates/compiler/src/layout.rs`; `crates/cli/src/author.rs`; `crates/cli/src/main.rs` exact `AuthorCommand::EnvironmentInventory` help text; three files under `core/library/environment_inventory/`; exact setup/doctor adapters resolved in P0 | `crates/engine/tests/author_core.rs`; Environment Inventory cases in `crates/compiler/tests/author.rs` and `crates/cli/tests/author_cli.rs`; `crates/cli/tests/cli_surface.rs` exact inline `author_help_matches_snapshot` and snapshot-consuming `author_environment_inventory_help_matches_snapshot`; exact consumed `crates/cli/tests/snapshots/handbook-author-environment-inventory-help.txt`; affected canonical ingest/freshness/manifest suites; native Windows mutation/refusal cases | packet proof only |
+| P1C | `crates/engine/src/profile_decision.rs` exact `shipped_profile_request` source list and selected profile ref; `crates/engine/src/project_context_artifact.rs` exact existing `selected_contract_matches` predicate and its existing unit test only, admitting the exact Project Context kind `1.0`/`1.1` pair over the unchanged schema `1.0` and canonical path without adding a production symbol or fallback; `resolve_shipped_profile_decisions` is a read/proof anchor and is not edited; no signature/public type changes | editable `crates/engine/tests/{hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile}.rs` and P1B compatibility target; in Unix compiler test `doctor_api_projects_the_exact_stable_project_context_row`, only report schema-version expectation `1.1.0` to `1.2.0` and Project Context kind expectation `1.0.0` to selected `1.1.0`; in Unix CLI test `doctor_reports_ready_when_required_artifacts_present`, only replace its obsolete inline Charter 1.0 setup with the existing `write_valid_selected_charter` helper and change the Project Context kind expectation `1.0.0` to selected `1.1.0`; no helper implementation, fixture asset, or other assertion edit; `crates/engine/tests/hcm_2_1_project_context.rs` is read/proof-only with required zero-byte delta and 12/12 pass; every CRITICAL upstream preservation test | packet proof only |
+| P2 | `crates/engine/src/author/environment_inventory_core.rs`; exact Environment Inventory branches in `crates/engine/src/{baseline_validation,canonical_artifacts,canonical_paths,lib}.rs`; `crates/compiler/src/author/{environment_inventory,environment_inventory_shell,mod}.rs`; `crates/compiler/src/layout.rs`; exact Environment Inventory branches in `crates/compiler/src/{baseline_validation,template_library,lib}.rs`; `crates/flow/src/resolver.rs` exact Environment Inventory validation/load/budget branches; `crates/cli/src/author.rs`; `crates/cli/src/main.rs` exact `AuthorCommand::EnvironmentInventory` help text; `crates/cli/src/rendering.rs` exact Environment Inventory labels only when required to preserve the existing public result shape; `core/library/environment_inventory/{ENVIRONMENT_INVENTORY_INPUTS.yaml.tmpl,environment_inventory_directive.md,ENVIRONMENT_INVENTORY.md.tmpl}`; exact setup/doctor adapters resolved in P0; P6 retains ownership of aggregate bridge-type and fixed-selector deletion | `crates/engine/tests/author_core.rs`; Environment Inventory cases in `crates/compiler/tests/author.rs` and `crates/cli/tests/author_cli.rs`; `crates/cli/tests/cli_surface.rs` exact inline `author_help_matches_snapshot` and snapshot-consuming `author_environment_inventory_help_matches_snapshot`; exact consumed `crates/cli/tests/snapshots/handbook-author-environment-inventory-help.txt`; `crates/engine/tests/{artifact_manifest_interface,baseline_validation,canonical_artifacts_ingest,freshness_computation}.rs`; `crates/compiler/tests/{artifact_manifest_interface,canonical_artifacts_ingest,freshness_computation,rendering_surface,resolver_core,setup,doctor}.rs`; `crates/flow/tests/resolver_core.rs`; native Windows mutation/refusal cases | packet proof only |
 | P3 | `core/stages/10_feature_spec.md`; two files under `core/library/feature_spec/`; `core/schemas/feature_spec.yaml`; `core/pipelines/{default,foundation_inputs}.yaml`; `crates/pipeline/src/{pipeline_capture,stage_10_feature_spec_provenance,pipeline_handoff}.rs`; exact fixed path/layout constants | `crates/pipeline/tests/{pipeline_capture,pipeline_handoff}.rs`; CLI handoff refusal tests; new exact fixture root `crates/engine/tests/fixtures/hcm_2_4_work_specification/`; exact mirrors under `tests/fixtures/pipeline_proof_corpus/foundation_inputs/` and `tests/fixtures/foundation_flow_demo/`; real-binary descriptor-selected capture/handoff proof | packet proof only |
+| P3B | no runtime or library edits | `crates/cli/tests/cli_surface.rs`, including only the private fresh repository-identity prerequisite helper and two invocation points frozen by `decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md` plus the three private canonical-consumer helpers frozen by `decision/20260727-p3b-m5-canonical-consumer-selector-repair.md`; exact `pipeline_handoff_emit_refuses_when_feature_spec_artifact_is_missing` setup assertion in `crates/cli/tests/pipeline_handoff_refusals.rs` frozen by `decision/20260727-p3b-negative-fixture-independence-selector-repair.md`; exact `foundation_flow_demo_feature_specs_match_directive_and_template_contract` cross-case assertion in `crates/cli/tests/feature_spec_contract.rs` frozen by `decision/20260727-p3b-feature-spec-contract-selector-repair.md`; exact `tests/fixtures/foundation_flow_demo/evidence/{happy_path,skip_path}.transcript.txt` bytes and selected M5 scorecard; the ten exact Stage 10 fixture-authority paths named by `decision/20260727-p3b-fixture-contract-selector-repair.md`; the two foundation-flow Work Specification inputs and exact generated-view/slice-plan evidence named by the two feature-identity/M5 decisions; the paired shared compile payload/explain goldens named by `decision/20260727-p3b-shared-compile-golden-selector-repair.md`; generated fixture-repo outputs remain transient and no fixture identity may be committed | P3B proof record and eight exact selector decisions only |
 | P4 | additive Decision Record definitions from P1A plus unchanged generic artifact runtime consumption | exact new fixture root `crates/engine/tests/fixtures/hcm_2_4_decision_record/` and a named HCM-2.4 integration test selected in P0 | packet proof only |
 | P5 | additive Risk Record definitions from P1A plus unchanged generic artifact runtime consumption | exact new fixture root `crates/engine/tests/fixtures/hcm_2_4_risk_record/` and a named HCM-2.4 integration test selected in P0 | packet proof only |
-| P6 | `crates/engine/src/{canonical_artifacts,canonical_paths,artifact_manifest}.rs`; `crates/compiler/src/layout.rs` plus exact fixed-sibling adapter; `crates/flow/src/{resolver,budget,packet_result}.rs`; only directly affected setup/doctor consumers | `crates/engine/tests/{canonical_artifacts_ingest,artifact_manifest_interface}.rs` and affected baseline/freshness suites; `crates/flow/tests/{resolver_core,budget_domains}.rs`; `crates/compiler/tests/rendering_surface.rs`; affected CLI tests | bridge rows and earned proof rows only in P7 |
-| P7 | no new runtime behavior | full workspace wall and all focused regressions | `04-phase-slice-map.md`, `06-proof-and-regression-ledger.md`, `09-review-finding-inventory.md` only as earned; HCM-2.4 proof/review records |
+| P6 | atomic compile closure for bridge-type deletion: `crates/engine/src/{artifact_manifest,baseline_validation,canonical_artifacts,canonical_paths,freshness,lib}.rs`; `crates/compiler/src/author/{charter_shell,environment_inventory_shell,mod}.rs`; `crates/compiler/src/{baseline_validation,blocker,layout,lib,refusal}.rs`; `crates/compiler/src/rendering/{markdown,shared}.rs`; `crates/flow/src/{resolver,budget,packet_result}.rs`; `crates/cli/src/rendering.rs`; only the bridge/fixed-family branches in these files are editable | `crates/engine/tests/{artifact_manifest_interface,baseline_validation,canonical_artifacts_ingest,freshness_computation,hcm_1_1_custom_kind,hcm_2_1_project_context}.rs`; `crates/compiler/tests/{artifact_manifest_interface,author,canonical_artifacts_ingest,freshness_computation,refusal_mapping,rendering_surface,resolver_core}.rs`; `crates/flow/tests/{resolver_core,budget_domains}.rs`; `crates/cli/tests/{author_cli,cli_surface,feature_spec_contract,pipeline_handoff_refusals}.rs` | bridge rows and earned proof rows only in P7 |
+| P7 | no new runtime behavior | full workspace wall and all focused regressions | `03-seam-crosswalk.md`, `04-phase-slice-map.md`, `06-proof-and-regression-ledger.md`, `09-review-finding-inventory.md`, exact HCM-2.4 `SPEC.md`/plan/todo status and evidence, and new P7 proof/review records only as earned |
 
 The selector table does not authorize blanket directory rewrites. P0 must turn
 each glob into an exact file manifest before its packet edits begin.
+
+The P1A typed-closure/runtime-admission correction is atomic for reviewability:
+the five intake fingerprints cannot be changed to include their kind/schema
+dependencies while the actual package-intake loader continues trusting those
+fingerprints and discarding coverage, and profile `1.2` cannot freeze until the
+same intake, renderer, kind, and descriptor fingerprints converge. The
+correction is limited to the exact private functions named above, one new
+runtime-proof target, and unchanged HCM-2.3 registration regression proof.
+The operator-approved coverage correction adds only
+`ResolvedSchema::collect_coverage_leaf_shapes`: after the existing reference
+resolution and ambiguity checks, a type-absent leaf with a string-valued
+`const` is classified as String. Non-string `const`, `enum`, default, examples,
+annotations, composites, unsupported explicit types, and every other
+indeterminate shape remain refused. Released schema bytes remain unchanged,
+and a sixth production symbol or any broader inference stops P1A.
+Fresh depth-3 tests-included impact at the correction baseline is LOW/11 for
+`ArtifactIntakeDefinitionV1::parse`, LOW/0 for
+`AuthoredArtifactKindDefinition::validate` with an incomplete-edge caveat,
+CRITICAL/130 across 8 processes and 10 modules for
+`validate_authored_profile_fingerprints`, and CRITICAL/44 across 7 processes
+and 11 modules for `load_repository_intakes`; fresh resumed-baseline impact is
+LOW/1 with no indexed process for
+`ResolvedSchema::collect_coverage_leaf_shapes`. Those CRITICAL results authorize
+only the exact P1A/1.2 branches above; any public caller, changed process/module
+contract, or edit to `load_with_builtin_compatibility` /
+`resolve_profile_selection` stops the packet.
 
 ## GitNexus architecture and impact record
 
@@ -431,8 +545,8 @@ must resolve it by UID/context or stop.
 | `rendered_projection_for_path` | HIGH; 10 impacted with tests, 2 direct, 3 modules; direct consumers are `packet_artifact_plans_for` and `present_fixture_sources_for` | Isolate in P6 and replay flow packet, fixture, budget, and resolver tests before deletion |
 | `resolve_with_contract` | MEDIUM; 5 direct test consumers | P6 must preserve its public behavior and may not expand its API |
 | `baseline_artifact_validations` | LOW; 6 impacted with tests | Rewrite only after selected artifact validation exists |
-| `packet_artifact_plans_for` | LOW; 2 upstream (`resolve_with_contract`, `resolve`) without test expansion | Preserve packet order and disposition goldens |
-| `present_fixture_sources_for` | LOW; 4 upstream through fixture/build/resolve | Preserve fixture-source identity and ordering |
+| `packet_artifact_plans_for` | LOW; 6 impacted with tests, 1 direct, 1 module | Preserve packet order and disposition goldens |
+| `present_fixture_sources_for` | LOW; 3 impacted with tests, 1 direct, 2 modules | Preserve fixture-source identity and ordering |
 | `CanonicalArtifactKind` enum UID | LOW; graph reports no upstream edges | Treat graph as incomplete because textual/type usage exists; use compiler/test wall, not the zero count, as authority |
 | `CanonicalLayoutContract` struct UID | LOW; graph reports no upstream edges | Same incomplete-type-edge caveat; delete fixed fields only in P6 |
 | `emit_pipeline_handoff_bundle_with_storage_layout` | CRITICAL; 259 impacted, 2 direct, 51 processes, 20 modules | P3 may make only the minimum canonical-source substitution and must replay all pipeline handoff, trust, route, and workspace tests |
@@ -604,6 +718,12 @@ Stop the active implementation packet and return to the parent when:
 - a renderer needs Resolution input or becomes a generic Projection;
 - a family needs filename discovery, a generated command, root-profile
   expansion, migration, or dual reads;
+- P2 would need to infer, coerce, or self-authorize Environment Context
+  applicability, or edit the unselected condition evaluator before its exact
+  evidence/evaluator contract is approved;
+- P4 or P5 would require generic coverage-token derivation normalization,
+  lineage token-grammar widening, or a released intake-definition edit before
+  a separately approved and impacted runtime selector exists;
 - the P1A literal 1.2 fingerprint is absent or changes after compatibility
   review, any Project Authority descriptor field differs, any HCM-2.2 record
   byte/fingerprint changes, or `validate_candidate_v13` /

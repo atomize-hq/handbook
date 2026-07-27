@@ -1,0 +1,196 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T025857Z--HCM-2-4--p3b-repository-identity-selector-review",
+  "created_at_utc": "2026-07-27T02:58:57Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P3B-repository-identity-prerequisite-selector-repair",
+  "subject_fingerprint": "sha256:4893176164dac820f10ef4a43359c6ddd939b2c88675622cf36f6a4c034cd576",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p3b-repository-identity-selector-repair-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/Cargo.toml",
+        "sha256": "1b693d214a043c155ed938437b90885eb22a5bf2ce1b309ce093f4f9d576040e"
+      },
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "ce5f68a91bb2475a67feec8947e5725e6d12328ff3f6163ee8462f2f425a40dc"
+      },
+      {
+        "path": "crates/engine/src/repository_invocation_identity.rs",
+        "sha256": "9696b0d9b26ecdb2d0842cf8da217668ef4b8c5431a52b44489474e6afcd00f5"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_definition_runtime.rs",
+        "sha256": "1ca641aeedf4d6cd28626ddb85d36c61e2f07858be36ee9f25fbd55eeeb32137"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "9fc9813cf2897fadb7ab3b570baf6b7d0123810b5e5003b636b26466f35789ca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "17b6dbb0b68a967f82096acfa393cfa377dde7f88fdd56fcf88fc7c0969489d3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+        "sha256": "0bf3efd57a01314b4e661ec4c19b01583c6b0347350faa9298743771547aef62"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "e999d09402153b1ed3c78e1b11489ca9e98ba1bb61d3ea3645bda15560876288"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "70365b56e9d52ebc60ae94bec4d8b8ddd342cf682d96b187ae21566082fd91f1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-cli-surface-proof-selector-repair.md",
+        "sha256": "de5db77fac05ac7067fe41df4543f7d4751ff883f77da3d742e6ba3fef24bd11"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-fixture-contract-selector-repair.md",
+        "sha256": "211c2d32bddf5bf8dc7139975bc4f3820e412164a656b47f23b66f97f7d2ea30"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md",
+        "sha256": "ad94e0f7003a7ab54c78f3a445dfd83a7568c2bf54dfce9a8ba3854beee4effe"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md",
+        "sha256": "fa01c18b9ea5e110bc63e1770aa80d1e623f01834af0a41847aef51e5845e62b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "ae71c9f069480f6b57f9095adafc3085403f59e4fdf3bb7e25dda75f81104fd9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "4df0924d0867e1f8aae0cf0a66e44a76987fe38b8cfe2fe599e1b2061fde4be0"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:4893176164dac820f10ef4a43359c6ddd939b2c88675622cf36f6a4c034cd576"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "bounded_test_prerequisite_selector",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre_helper_edit_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md",
+      "sections": [
+        "Trigger",
+        "Feasibility evidence",
+        "Exact selector amendment",
+        "Non-goals and exit proof"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "Engine-owned identity and operation-ID authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Packet reviewability indicators",
+        "HCM-2.4"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The first P3B selector and additive fixture selector were independently CLEAN. After the ten fixture inputs were synchronized, the focused Stage 10 preview advanced past profile and output admission and refused because the temporary repository lacks the HCM-2.2 durable identity prerequisite. The existing engine feasibility test passes after profile selection plus initialize_for_setup. A committed fixture identity would wrongly alias every recursive copy. The current partial cli_surface delta does not yet initialize identity.",
+  "allowed_scope": [
+    "Read-only replay of all 15 manifest entries and the exact selector-amendment diff.",
+    "Trace the Stage 10 CLI temporary-repository setup and repository-identity admission path.",
+    "Validate that one private cli_surface test helper plus the exact two invocation points is sufficient and minimal.",
+    "Validate that every temporary repository obtains a fresh setup-owned identity and that no fixture identity, runtime change, or support-module edit is required.",
+    "Validate the feasibility command and existing engine-test precedent.",
+    "Apply the 04 reviewability indicators and identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No committed repository identity, injected deterministic identity, production/runtime, setup behavior, released definition, schema, public API, dependency, Cargo/version, unsafe-policy, support-module, P2, P4, P5, P6, or sibling-slice change.",
+    "Do not review or approve future helper bytes or the current broader P3B implementation delta."
+  ],
+  "tasks": [
+    "Verify complete subject identity and inspect the exact selector-amendment delta.",
+    "Trace the focused refusal to the durable repository-identity prerequisite.",
+    "Determine whether the exact private helper and two invocation points are necessary, sufficient, and minimal without weakening HCM-2.2 authority.",
+    "Validate that a committed fixture identity is prohibited and that fresh initialization cannot make evidence nondeterministic in an unnormalized proof field.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "HCM-2.2 setup-owned durable repository identity remains unchanged",
+    "Each temporary Stage 10 repository receives a fresh identity; no fixture value is committed or injected",
+    "P3 canonical Work Specification YAML and generated Markdown-view authority remain unchanged",
+    "Only the existing cli_surface path receives the private helper and exact two invocations",
+    "No production symbol, support-module edit, or broader schema inference is authorized"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
