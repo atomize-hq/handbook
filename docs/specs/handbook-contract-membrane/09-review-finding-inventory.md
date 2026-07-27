@@ -171,8 +171,6 @@ automatically rise in priority merely because time passed.
 
 ## Inventory
 
-No unresolved advisory finding has been registered under this calibrated
-policy yet.
-
 | Finding ID | Priority | Status | Comparison key | Summary | Source | Evidence refs | Affected scope | Disposition | Target | Occurrences | Resolution refs |
 |---|---|---|---|---|---|---|---|---|---|---|---|
+| `HCM-RF-0001` | `P3` | `scheduled` | `handbook-pipeline \| pipeline handoff view-independence proof \| HCM-2.4 P3 view non-authority gate \| feature-id and bundle-root cross-case assertions absent` | The Markdown-view mutation/deletion test does not explicitly compare `manifest.feature_id` or emitted bundle root across its two cases. | HCM-2.4; `20260727T014349Z--HCM-2-4--p3-work-specification-closure-review`; `/root/hcm_2_4_p3_closure_review` | `crates/pipeline/tests/pipeline_handoff.rs:406`; `docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md`; `docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T014349Z--HCM-2-4--p3-work-specification-closure-review.json` | Test-only assertions in `handoff_ignores_persisted_markdown_view_mutation_and_deletion`; no runtime surface | Runtime behavior and the selected gate are proven by canonical-byte/input-SHA equality, view exclusion, and validated-manifest equality; explicit feature-ID and bundle-root cross-case assertions are useful defense-in-depth coverage. | HCM-2.4 follow-up proof packet | `20260727T064246Z--HCM-2-4--partial-control-pack-complete-subject-review`; `/root/hcm_2_4_partial_closeout_review` | none |

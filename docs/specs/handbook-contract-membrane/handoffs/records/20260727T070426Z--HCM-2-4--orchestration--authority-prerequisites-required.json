@@ -1,0 +1,505 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required",
+  "created_at_utc": "2026-07-27T07:04:26Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P7-partial-control-pack-closeout",
+  "orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-27T07:04:26Z",
+    "evidence_ref": "Built-in isolated default-agent review /root/hcm_2_4_partial_closeout_review completed through spawn/wait/result transport; earlier P1/P3 packet review lineage remains in the manifested dispatch/proof corpus."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm-2-4-partial-closeout-review",
+      "dispatch_id": "20260727T064246Z--HCM-2-4--partial-control-pack-complete-subject-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T064246Z--HCM-2-4--partial-control-pack-complete-subject-review.json",
+      "dispatch_fingerprint": "sha256:57eb7c0fa5fc0574e325cd4df08f4354cf254e11d32bcb697239a271ed907583",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_partial_closeout_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "code-review-and-quality",
+        "documentation-and-adrs"
+      ],
+      "subject_fingerprint": "sha256:8e2f246b9739e1d0bafe125d5408d44e2f0eb3d7e6708dbdba7a9f8f71acbf43",
+      "result_subject_fingerprint": "sha256:8e2f246b9739e1d0bafe125d5408d44e2f0eb3d7e6708dbdba7a9f8f71acbf43",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [
+        "HCM-RF-0001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T064246Z--HCM-2-4--partial-control-pack-complete-subject-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+        "git:201eaef090dd0f286cea110acff0fd4d7f59f5b1"
+      ]
+    }
+  ],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "201eaef090dd0f286cea110acff0fd4d7f59f5b1",
+    "subject_fingerprint": "sha256:8e2f246b9739e1d0bafe125d5408d44e2f0eb3d7e6708dbdba7a9f8f71acbf43",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T064246Z--HCM-2-4--partial-control-pack-complete-subject-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3B-cli-surface-proof.md",
+      "git:5cf41d2f64d68cb7f78abb5eccab9acf307089d3",
+      "git:5a2ccf6939be0e549e7e7355a245c7511c271eef",
+      "git:201eaef090dd0f286cea110acff0fd4d7f59f5b1"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T064246Z--HCM-2-4--partial-control-pack-complete-subject-review.json"
+  },
+  "active_resolution": {
+    "level": "authority",
+    "scope_horizon": "HCM-2.4 blocked P2 and P4/P5 prerequisites",
+    "detail_resolution": "exact condition-evaluator and coverage-token selector decisions",
+    "temporal_horizon": "current orchestration true stop",
+    "authority_horizon": "review-clean P0/P1/P3 boundary only",
+    "memory_horizon": "parent handoff plus immutable dispatch/proof corpus",
+    "validation_horizon": "review-clean partial closeout and resume authority"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.project-context/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.environment-context/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.work-specification/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.decision-record/1.1.0.yaml",
+      "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.risk-record/1.1.0.yaml"
+    ],
+    "artifact_instance_refs": [
+      "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml",
+      "crates/engine/tests/fixtures/hcm_2_4_work_specification/repo/.handbook/profile-selection.json",
+      "crates/engine/tests/fixtures/hcm_2_4_decision_record/repo/.handbook/profile-selection.json",
+      "crates/engine/tests/fixtures/hcm_2_4_risk_record/repo/.handbook/profile-selection.json"
+    ],
+    "intake_definition_refs": [
+      "crates/engine/definitions/intakes/handbook.intake.project-context/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.environment-context/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.work-specification/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.decision-record/1.0.0.yaml",
+      "crates/engine/definitions/intakes/handbook.intake.risk-record/1.0.0.yaml"
+    ],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [
+      "core/stages/10_feature_spec.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md"
+    ],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#hcm-24--remaining-shipped-artifact-families"
+  },
+  "objective": "Close the currently authorized HCM-2.4 partial implementation review-clean without claiming Phase 2 exit, preserve all unrelated work, and stop for the two missing behavior authorities required by P2 and P4/P5.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required.json",
+      "sections": [
+        "entire selected resume handoff and superseded P1A recommendation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.4 partial implementation evidence boundary",
+        "Open program proof gates",
+        "Greenfield deletion gates"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P2 — Environment Context vertical",
+        "P4 — Decision Record support proof",
+        "P5 — Risk Record support proof",
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "P7 — Phase 2 exit proof and control-pack closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-condition-evaluator-authority-stop.md",
+      "sections": [
+        "entire authority stop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+      "sections": [
+        "entire authority stop"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "201eaef090dd0f286cea110acff0fd4d7f59f5b1",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required.json",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl"
+    ]
+  },
+  "work_completed": [
+    "Applied the user-approved P1A fifth-symbol selector only in ResolvedSchema::collect_coverage_leaf_shapes: a type-absent string-valued const leaf classifies as String; every other indeterminate refusal and all released schemas remain unchanged; no sixth production symbol was added.",
+    "Completed and independently reviewed P0, P1A, P1B, P1C, P3, and P3B; retained truthful reviewed stop evidence for P2 and P4/P5; did not begin P6.",
+    "Created checkpoint commit 5cf41d2f64d68cb7f78abb5eccab9acf307089d3 containing only independently review-clean HCM-2.4 work and immutable proof/dispatch artifacts.",
+    "Created separate P3B commit 5a2ccf6939be0e549e7e7355a245c7511c271eef after discovery remediation and different-fresh CLEAN closure review.",
+    "Updated only earned control-pack and slice-status truth, then obtained fresh complete-subject CLEAN review over 168 paths and committed it at 201eaef090dd0f286cea110acff0fd4d7f59f5b1.",
+    "Validated and fixed the aggregate review's exact P4 malformed-status nit; registered its independently corroborated P3 coverage advisory as HCM-RF-0001.",
+    "Preserved eight unrelated pre-existing .claude/AGENTS.md/CLAUDE.md changes and excluded all transient fixture-repository outputs from every commit.",
+    "Did not claim HCM-2.4 completion, Phase 2 exit, bridge deletion, program-wide YAML closure, or HCM-3.x authority."
+  ],
+  "deliverables": [
+    {
+      "path": "git:5cf41d2f64d68cb7f78abb5eccab9acf307089d3",
+      "status": "completed",
+      "summary": "Reviewed P0/P1/P3 checkpoint plus truthful P2/P4/P5 stop evidence."
+    },
+    {
+      "path": "git:5a2ccf6939be0e549e7e7355a245c7511c271eef",
+      "status": "completed",
+      "summary": "Review-clean P3B test/evidence-only CLI integration packet."
+    },
+    {
+      "path": "git:201eaef090dd0f286cea110acff0fd4d7f59f5b1",
+      "status": "completed",
+      "summary": "Freshly reviewed HCM-2.4 partial control-pack closeout."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+      "status": "completed",
+      "summary": "Exact earned/unearned boundary, proof wall, review result, and advisory disposition."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+      "status": "blocked",
+      "summary": "Decision Record fixture/read/validate/negative proof retained; positive mutation requires authority."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+      "status": "blocked",
+      "summary": "Risk Record fixture/read/validate/negative proof retained; positive mutation requires authority."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-DEC-P1A-CONST-STRING-001",
+      "summary": "Use only the approved const-string coverage predicate and preserve every released schema and other indeterminate refusal.",
+      "authority_effect": "P1A closes without a sixth production symbol or broader schema inference.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-const-string-coverage-selector-approval.md",
+        "git:5cf41d2f64d68cb7f78abb5eccab9acf307089d3"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-DEC-INCREMENTAL-COMMITS-001",
+      "summary": "Split review-clean checkpoint, P3B, control-pack, and mechanical handoff boundaries instead of carrying one large dirty worktree.",
+      "authority_effect": "Each primary commit contains only reviewed HCM-2.4 work; unrelated and generated paths remain excluded.",
+      "refs": [
+        "git:5cf41d2f64d68cb7f78abb5eccab9acf307089d3",
+        "git:5a2ccf6939be0e549e7e7355a245c7511c271eef",
+        "git:201eaef090dd0f286cea110acff0fd4d7f59f5b1"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-DEC-PARTIAL-STOP-001",
+      "summary": "Stop before P6 and Phase 2 exit because P2 and P4/P5 lack required behavior authority.",
+      "authority_effect": "Both HCM-2 bridge IDs, fixed-family/path selection, and all unearned gates remain open.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-condition-evaluator-authority-stop.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-DEC-ADVISORY-001",
+      "summary": "Schedule the corroborated P3 handoff-view assertion gap as HCM-RF-0001 and fix the aggregate review's P4 malformed status sentence locally.",
+      "authority_effect": "No P1/P2 is waived and no runtime or classification changes.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-RF-0001",
+      "classification": "proof_gap",
+      "severity": "warning",
+      "priority": "P3",
+      "status": "inventoried",
+      "source_run_id": "hcm-2-4-partial-closeout-review",
+      "summary": "The Markdown-view mutation/deletion test does not explicitly compare manifest.feature_id or emitted bundle root across cases.",
+      "evidence_refs": [
+        "crates/pipeline/tests/pipeline_handoff.rs:406",
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T064246Z--HCM-2-4--partial-control-pack-complete-subject-review.json"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-P2-CONDITION-AUTHORITY",
+      "classification": "authority",
+      "summary": "P2 cannot prove true/false applicability or write-only-when-applicable behavior because the managed-operational-surface condition record, evidence bindings, precedence, freshness, and evaluator remain undecided.",
+      "resume_condition": "A human approves an exact fingerprinted condition-evidence/evaluator contract and reviewed HCM-2.4 selector, or a separately completed dependency proves that same contract.",
+      "owner": "human authority"
+    },
+    {
+      "blocker_id": "HCM-2.4-P4-P5-TOKEN-AUTHORITY",
+      "classification": "authority",
+      "summary": "The unchanged generic mutation path rejects planner-derived underscore-bearing coverage-value tokens, so P4/P5 positive canonical mutation/promotion is not proven.",
+      "resume_condition": "A human approves an exact generic coverage-token derivation selector preserving released coverage IDs and all existing negative/refusal behavior, or explicitly chooses a larger versioned contract change.",
+      "owner": "human authority"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-2.4-ESC-P2-CONDITION-001",
+      "trigger": "P2 requires condition true/false proof, but live resolution remains unresolved/EvidenceContractUnavailable and indeterminate.",
+      "current_resolution": "No evaluator or admitted evidence contract is selected; P2 behavior edits are prohibited.",
+      "target_resolution": "One fingerprinted condition record/evidence/evaluator contract with exact input bindings, precedence, freshness, and fail-closed semantics.",
+      "decision_required": "Authorize an exact HCM-2.4 P2 contract/selector, prove the prerequisite completed elsewhere, or defer P2.",
+      "options": [
+        "Authorize an exact condition-evidence/evaluator contract and bounded P2 selector.",
+        "Provide proof that an independently completed dependency supplies the frozen contract.",
+        "Defer P2 and retain the current partial HCM-2.4 boundary."
+      ],
+      "recommendation": "Resume P2 only with an explicit fingerprinted contract and selector; do not infer applicability from profile selection, artifact presence, or Environment Context content.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-condition-evaluator-authority-stop.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "The selected option names exact authority, paths/symbols, positive/negative proof, and a stop on broader condition semantics."
+    },
+    {
+      "escalation_id": "HCM-2.4-ESC-P4-P5-TOKEN-001",
+      "trigger": "P4/P5 real positive mutation reaches the generic Store path but fails before establishment because derived subordinate tokens contain underscores.",
+      "current_resolution": "Released coverage IDs and the generic token grammar remain unchanged; positive tests stay ignored and packets remain incomplete.",
+      "target_resolution": "An exact reviewed token-derivation contract that maps released coverage IDs to valid retained-value tokens without weakening identity, replay, or refusal semantics.",
+      "decision_required": "Authorize the narrow generic derivation selector, authorize a larger versioned coverage-ID/grammar change, or defer P4/P5.",
+      "options": [
+        "Recommended: authorize only the exact generic token-derivation selector with unchanged released coverage IDs and preserved negative cases.",
+        "Authorize a versioned released coverage-ID or token-grammar change with its larger compatibility and proof surface.",
+        "Defer P4/P5 and retain their fixture/read/validate/negative evidence only."
+      ],
+      "recommendation": "Use the narrow generic derivation selector only after fresh impact and selector review; stop on public API, released-definition, grammar-wide, or sibling-slice expansion.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "The selected option freezes exact derivation semantics, selector paths/symbols, independent Decision/Risk proof, and stop conditions."
+    }
+  ],
+  "validation": [
+    {
+      "command": "cargo test -p handbook-pipeline/handbook-compiler/handbook-cli exact P3/P3B packet wall",
+      "status": "passed",
+      "evidence_ref": "273 passed, 0 failed after final P3B remediation"
+    },
+    {
+      "command": "cargo test --workspace --quiet",
+      "status": "passed",
+      "evidence_ref": "Fingerprint-bound P3B proof: exit 0 after 717 seconds with two platform-marked ignores"
+    },
+    {
+      "command": "Fresh aggregate read-only review focused verification",
+      "status": "passed",
+      "evidence_ref": "/root/hcm_2_4_partial_closeout_review: 319 passed, two expected ignored; independent 273-test wall passed"
+    },
+    {
+      "command": "cargo fmt --all -- --check; affected strict cargo clippy -D warnings; archive boundary and self-test; git diff --check",
+      "status": "passed",
+      "evidence_ref": "All packet and control-pack hygiene gates passed"
+    },
+    {
+      "command": "npx gitnexus detect-changes --scope staged --repo handbook --limit 200",
+      "status": "passed",
+      "evidence_ref": "Documentation-only control-pack stage: no indexed code changes; P3B staged packet previously reported LOW risk, two symbols, zero affected processes"
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python validate_handoffs.py --verify-dispatch 20260727T064246Z--HCM-2-4--partial-control-pack-complete-subject-review.json",
+      "status": "passed",
+      "evidence_ref": "168 live paths and sha256:8e2f246b9739e1d0bafe125d5408d44e2f0eb3d7e6708dbdba7a9f8f71acbf43 replayed before reviewer spawn"
+    },
+    {
+      "command": "python3 validate_handoffs.py; --self-test-v1-admission; --self-test-orchestration-contract",
+      "status": "failed",
+      "evidence_ref": "The exact bare Python invocation stopped before validation with ModuleNotFoundError: jsonschema; no schema or lineage check ran."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python validate_handoffs.py; --self-test-v1-admission; --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "Pinned dependency-complete runs passed normal validation for 59 records/392 current dispatches/59 ledger entries, historical v1 admission, and the orchestration contract self-test."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "exact HCM-2.4-affected seam rows"
+      ],
+      "reason": "Record only exact definition/profile and Work Specification promotions while preserving blocked siblings.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families",
+        "Phase 2 exit gate"
+      ],
+      "reason": "Record the partial boundary and keep Phase 2 exit open.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.4 partial implementation evidence boundary",
+        "affected proof and bridge rows"
+      ],
+      "reason": "Bind earned proof without deleting either bridge or promoting unproven behavior.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "HCM-RF-0001"
+      ],
+      "reason": "Register the validated unfixed P3 advisory exactly once.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required.json",
+      "sections": [
+        "entire parent-owned true-stop record"
+      ],
+      "reason": "Record the review-clean partial boundary and two exact human authority decisions.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministically rebuilt query index"
+      ],
+      "reason": "Index the canonical true-stop record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Choose whether and how HCM-2.4 may resume P2 and/or P4/P5; do not begin P6 or another slice.",
+    "condition": "A human explicitly authorizes an exact fingerprinted P2 condition-evaluator contract/selector, an exact P4/P5 coverage-token derivation selector, or defers either prerequisite.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required.json",
+        "sections": [
+          "entire current handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sections": [
+          "P2",
+          "P4",
+          "P5",
+          "P6",
+          "Exact implementation surface selectors"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-condition-evaluator-authority-stop.md",
+        "sections": [
+          "entire authority stop"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "sections": [
+          "entire authority stop"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+        "sections": [
+          "Earned truth",
+          "Blocked and unearned truth",
+          "Fresh aggregate review"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Human selection of the P2 and/or P4/P5 escalation options recorded here.",
+      "After exact approval, resume only the selected HCM-2.4 packet with fresh context, impact analysis, TDD, verification, and independent review.",
+      "P6 may begin only after P2, P4, and P5 are independently green."
+    ],
+    "prohibited_scope": [
+      "Do not reopen or widen P1A; no sixth production symbol, released-schema change, or broader const inference.",
+      "Do not infer P2 applicability or coerce indeterminate.",
+      "Do not normalize tokens, widen grammar, or edit released coverage IDs without explicit selected authority.",
+      "Do not delete bridges, claim Phase 2 exit, begin HCM-3.x, clean unrelated files, or start another slice."
+    ],
+    "acceptance_criteria": [
+      "The human decision names exact contract/selector authority and one bounded packet.",
+      "Every selected packet has positive, negative, fail-closed, real-path, and regression proof.",
+      "All existing refusals and released identities remain unchanged unless explicitly versioned by the selected authority.",
+      "P6 remains blocked until P2-P5 are independently review-clean."
+    ],
+    "stop_conditions": [
+      "Stop on absent or ambiguous authority.",
+      "Stop on public API/dependency/Cargo/unsafe/released-definition/sibling-slice expansion not explicitly authorized.",
+      "Stop if required runtime/platform proof is unavailable.",
+      "Stop if an independently reviewable packet cannot be preserved."
+    ]
+  },
+  "supersedes": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "chat_summary": "HCM-2.4 P0/P1/P3/P3B are review-clean in three primary commits. P2 and P4/P5 remain authority-blocked, so P6, both bridge deletions, and Phase 2 exit remain open. HCM-RF-0001 records the sole scheduled advisory; eight unrelated worktree changes are preserved."
+}
