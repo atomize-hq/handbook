@@ -1,0 +1,738 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260727T165925Z--HCM-2-4--orchestration--p2-review-budget-exhausted",
+  "created_at_utc": "2026-07-27T16:59:25Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2-managed-operational-surface-planning-amendment",
+  "orchestration_id": "20260727T135500Z--HCM-2-4--authority-prerequisites-resume-orchestration",
+  "source_handoff_ids": [
+    "20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-27T16:59:25Z",
+    "evidence_ref": "Four proof-relevant fresh isolated built-in default-agent P2 planning reviews completed through spawn/wait/result transport; the final reviewer returned one unresolved Required finding after the second supplemental causal cycle. Five earlier P4/P5 reviews remain preserved by their immutable dispatches, proof artifacts, and reviewed commits."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "p2-evidence-evaluator-planning-discovery-1",
+      "dispatch_id": "20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json",
+      "dispatch_fingerprint": "sha256:e2272948eeb7ab4ce21f1fcf6992a8fcf13ce0ff42e54aa50ab964b769282f57",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_p2_planning_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:c31d775fe1381461a7740c08d1efb88baeb3c84ce7ffde525f7ccd04c60475b4",
+      "result_subject_fingerprint": "sha256:c31d775fe1381461a7740c08d1efb88baeb3c84ce7ffde525f7ccd04c60475b4",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "p2-evidence-evaluator-planning-discovery-1-P2-1",
+        "p2-evidence-evaluator-planning-discovery-1-P2-2",
+        "p2-evidence-evaluator-planning-discovery-1-P2-3",
+        "p2-evidence-evaluator-planning-discovery-1-P2-4",
+        "p2-evidence-evaluator-planning-discovery-1-P2-5",
+        "p2-evidence-evaluator-planning-discovery-1-P2-6",
+        "p2-evidence-evaluator-planning-discovery-1-P2-7"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json"
+      ]
+    },
+    {
+      "run_id": "p2-evidence-evaluator-planning-closure-1",
+      "dispatch_id": "20260727T162710Z--HCM-2-4--p2-evidence-evaluator-planning-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T162710Z--HCM-2-4--p2-evidence-evaluator-planning-closure-review.json",
+      "dispatch_fingerprint": "sha256:922f3805e5f75883c1b73b02b467a91ef544abc3fe384f3a7f7ebebb397d53f3",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_p2_planning_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:0b10551c4d2f0b33778d2ba9de9b313db6f64bd39862820ce43e83fbf0236474",
+      "result_subject_fingerprint": "sha256:0b10551c4d2f0b33778d2ba9de9b313db6f64bd39862820ce43e83fbf0236474",
+      "review_round": 2,
+      "predecessor_run_id": "p2-evidence-evaluator-planning-discovery-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "p2-evidence-evaluator-planning-closure-1-P2-1",
+        "p2-evidence-evaluator-planning-closure-1-P2-2"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T162710Z--HCM-2-4--p2-evidence-evaluator-planning-closure-review.json"
+      ]
+    },
+    {
+      "run_id": "p2-evidence-evaluator-planning-supplemental-causal-1",
+      "dispatch_id": "20260727T164201Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164201Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-review.json",
+      "dispatch_fingerprint": "sha256:37946ba163b5a34750fd1dc08a4bb1b18fd6dae1baac88de6789b61d983a96e0",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_p2_planning_supplemental_1",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:0dd4af5a9b077c73c3159566041e745e74db786e75a141e60556ae0f199cd88c",
+      "result_subject_fingerprint": "sha256:0dd4af5a9b077c73c3159566041e745e74db786e75a141e60556ae0f199cd88c",
+      "review_round": 3,
+      "predecessor_run_id": "p2-evidence-evaluator-planning-closure-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "p2-evidence-evaluator-planning-supplemental-causal-1-P2-1"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164201Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-review.json"
+      ]
+    },
+    {
+      "run_id": "p2-evidence-evaluator-planning-supplemental-causal-2",
+      "dispatch_id": "20260727T164915Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-2-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164915Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-2-review.json",
+      "dispatch_fingerprint": "sha256:a906374ff7129106fcd77b07d959d9f21d566768993ef1cf4833497f30f85dc7",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_p2_planning_supplemental_2",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:6f8064784a5ce0943cf1fa946880caca647044d849d381ed964e57fe5399bfb5",
+      "result_subject_fingerprint": "sha256:6f8064784a5ce0943cf1fa946880caca647044d849d381ed964e57fe5399bfb5",
+      "review_round": 4,
+      "predecessor_run_id": "p2-evidence-evaluator-planning-supplemental-causal-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "p2-evidence-evaluator-planning-supplemental-causal-2-P2-1"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164915Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-2-review.json"
+      ]
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "p2-planning-parent-remediation-1",
+      "finding_run_id": "p2-evidence-evaluator-planning-discovery-1",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "p2-evidence-evaluator-planning-closure-1",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:0b10551c4d2f0b33778d2ba9de9b313db6f64bd39862820ce43e83fbf0236474",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T162710Z--HCM-2-4--p2-evidence-evaluator-planning-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "p2-planning-parent-remediation-2",
+      "finding_run_id": "p2-evidence-evaluator-planning-closure-1",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "p2-evidence-evaluator-planning-supplemental-causal-1",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:0dd4af5a9b077c73c3159566041e745e74db786e75a141e60556ae0f199cd88c",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164201Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-review.json"
+      ]
+    },
+    {
+      "remediation_id": "p2-planning-parent-remediation-3",
+      "finding_run_id": "p2-evidence-evaluator-planning-supplemental-causal-1",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "p2-evidence-evaluator-planning-supplemental-causal-2",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:6f8064784a5ce0943cf1fa946880caca647044d849d381ed964e57fe5399bfb5",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164915Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-2-review.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "00dde0162fcb15576c83b6ed40ab7286488d0890",
+    "subject_fingerprint": "sha256:00c19024eeb94a2e93263489fd255f0ea47c3730bfc34da2e9cf6a054de1e5b9",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T151507Z--HCM-2-4--p4-p5-token-implementation-supplemental-causal-review.json",
+    "proof_refs": [
+      "git:6f1c1ed44322c8a3194198846171a94bff2d1989",
+      "git:00dde0162fcb15576c83b6ed40ab7286488d0890",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T151507Z--HCM-2-4--p4-p5-token-implementation-supplemental-causal-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md"
+    ]
+  },
+  "active_resolution": {
+    "level": "authority",
+    "scope_horizon": "HCM-2.4 P2 planning-only repair and open P4 negative-surface proof",
+    "detail_resolution": "exact transaction-store error/nullability matrix and fresh review authority",
+    "temporal_horizon": "current orchestration true stop after final supplemental review",
+    "authority_horizon": "P4/P5 token implementation reviewed; P2 planning amendment not review-clean",
+    "memory_horizon": "parent handoff plus immutable dispatch and dirty-worktree subject",
+    "validation_horizon": "review-budget-exhausted bounded stop"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [
+      "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml"
+    ],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+    ],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "crates/engine/definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml"
+  },
+  "objective": "Resume HCM-2.4, implement only the approved P4/P5 token derivation, and produce a review-clean P2 planning amendment without beginning P2 runtime or P6.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required.json",
+      "sections": [
+        "entire selected resume authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+      "sections": [
+        "exact operator-approved P4/P5 token selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "complete uncommitted P2 planning subject and final unresolved matrix gap"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "HCM-RF-0001 non-intersection"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "00dde0162fcb15576c83b6ed40ab7286488d0890",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T162710Z--HCM-2-4--p2-evidence-evaluator-planning-closure-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164201Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164915Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-2-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260727T165925Z--HCM-2-4--orchestration--p2-review-budget-exhausted.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md"
+    ]
+  },
+  "work_completed": [
+    "Created review-clean checkpoint commit 6f1c1ed44322c8a3194198846171a94bff2d1989 containing only the two independently reviewed P4/P5 selector dispatches.",
+    "Implemented exactly one production-symbol edit in intake_commit_plan: derive each token from the final coverage-ID segment by replacing ASCII underscore with hyphen and appending the unchanged -value suffix.",
+    "Converted exactly the two named blocker refusals to token-list proofs and activated exactly the two named positives; preserved released schemas, coverage IDs, fingerprints, grammar, collision/uniqueness handling, lineage validation, and unrelated negative cases.",
+    "Verified 4/4 Decision, 13/13 Risk, and 54/54 generic-lineage tests with zero ignored selected cases; fresh different-agent supplemental causal review returned CLEAN.",
+    "Committed the review-clean P4/P5 token packet at 00dde0162fcb15576c83b6ed40ab7286488d0890.",
+    "Drafted a documentation-only P2 evidence/evaluator amendment and ran discovery, closure, and two supplemental causal review cycles. No P2 runtime/schema/definition file was created or edited.",
+    "Closed the first ten P2 Required findings across the review lineage. The final reviewer left one exact P2 matrix finding open after the review budget was exhausted.",
+    "Left all 15 P2 planning/dispatch/control-pack paths unstaged and uncommitted rather than laundering an unreviewed subject.",
+    "Preserved eight unrelated .claude/AGENTS.md/CLAUDE.md changes and found no transient generated test output.",
+    "Did not begin P6, the separate P4 negative-surface/path proof, Phase 2 exit, HCM-3.x, or another slice."
+  ],
+  "deliverables": [
+    {
+      "path": "git:6f1c1ed44322c8a3194198846171a94bff2d1989",
+      "status": "completed",
+      "summary": "Review-clean P4/P5 selector checkpoint."
+    },
+    {
+      "path": "git:00dde0162fcb15576c83b6ed40ab7286488d0890",
+      "status": "completed",
+      "summary": "Review-clean exact P4/P5 token derivation implementation."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "status": "blocked",
+      "summary": "Uncommitted planning-only subject; one Required exact error/nullability matrix finding remains."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T165925Z--HCM-2-4--orchestration--p2-review-budget-exhausted.json",
+      "status": "completed",
+      "summary": "Parent-owned bounded true-stop record preserving reviewed and unreviewed boundaries."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-DEC-P4-P5-TOKEN-DERIVATION-001",
+      "summary": "Use only final coverage-ID segment ASCII underscore-to-hyphen replacement before the existing -value suffix.",
+      "authority_effect": "P4/P5 token prerequisite and positive Decision/Risk mutation paths are review-clean at 00dde01 without another production symbol.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+        "git:00dde0162fcb15576c83b6ed40ab7286488d0890"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-DEC-P2-PLANNING-ONLY-001",
+      "summary": "Keep all P2 work documentation-only and require a review-clean versioned evidence/evaluator amendment plus later human packet approvals before runtime.",
+      "authority_effect": "The shipped resolver remains unresolved/EvidenceContractUnavailable; no P2 runtime authority is inferred.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-DEC-P2-REVIEW-BUDGET-STOP-001",
+      "summary": "Stop after closure plus two supplemental causal cycles left one Required finding; do not patch, restart discovery, commit, or present the amendment as review-clean.",
+      "authority_effect": "A new explicit top-level planning-only repair/re-review authorization is required.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164915Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-2-review.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "p2-evidence-evaluator-planning-discovery-1-P2-1",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p2-evidence-evaluator-planning-discovery-1",
+      "summary": "The first planning subject did not close rollback resistance for versioned evidence heads.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "finding_id": "p2-evidence-evaluator-planning-discovery-1-P2-2",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p2-evidence-evaluator-planning-discovery-1",
+      "summary": "Admitted-source identity was not bound to a deterministic source fingerprint.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "finding_id": "p2-evidence-evaluator-planning-discovery-1-P2-3",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p2-evidence-evaluator-planning-discovery-1",
+      "summary": "The proposed evidence records were not defined as closed versioned schemas.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "finding_id": "p2-evidence-evaluator-planning-discovery-1-P2-4",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p2-evidence-evaluator-planning-discovery-1",
+      "summary": "Freshness was not defined per admitted evidence source.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "finding_id": "p2-evidence-evaluator-planning-discovery-1-P2-5",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p2-evidence-evaluator-planning-discovery-1",
+      "summary": "The outcome precedence contained an unreachable branch.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "finding_id": "p2-evidence-evaluator-planning-discovery-1-P2-6",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p2-evidence-evaluator-planning-discovery-1",
+      "summary": "The evaluator API did not preserve the required compatibility boundary.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "finding_id": "p2-evidence-evaluator-planning-discovery-1-P2-7",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p2-evidence-evaluator-planning-discovery-1",
+      "summary": "The proposed runtime work was not decomposed into independently approvable packets with exact symbols and ceilings.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "finding_id": "p2-evidence-evaluator-planning-closure-1-P2-1",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p2-evidence-evaluator-planning-closure-1",
+      "summary": "The first closure subject still permitted a simultaneous two-head rollback condition.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T162710Z--HCM-2-4--p2-evidence-evaluator-planning-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "finding_id": "p2-evidence-evaluator-planning-closure-1-P2-2",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p2-evidence-evaluator-planning-closure-1",
+      "summary": "Dependency byte observations were incomplete for deterministic evidence closure.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T162710Z--HCM-2-4--p2-evidence-evaluator-planning-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "finding_id": "p2-evidence-evaluator-planning-supplemental-causal-1-P2-1",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p2-evidence-evaluator-planning-supplemental-causal-1",
+      "summary": "Transaction-store failures before sequence-bearing rows lacked a store-level observation contract.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164201Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "finding_id": "p2-evidence-evaluator-planning-supplemental-causal-2-P2-1",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "open",
+      "source_run_id": "p2-evidence-evaluator-planning-supplemental-causal-2",
+      "summary": "The six transaction-store failure cases lack a normative one-to-one matrix for exact observation kind, nullability, store-specific error, expected first-row fixture, and closure fingerprint.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164915Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-2-review.json"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-P2-PLANNING-REVIEW-BUDGET",
+      "classification": "authority",
+      "summary": "One P2/Required planning-contract finding remains after the permitted closure and two supplemental causal cycles.",
+      "resume_condition": "A human explicitly authorizes a fresh top-level planning-only repair/re-review cycle limited to the six-row transaction-store error/nullability/fixture matrix.",
+      "owner": "human authority"
+    },
+    {
+      "blocker_id": "HCM-2.4-P4-NEGATIVE-SURFACE-PROOF",
+      "classification": "authority",
+      "summary": "The token prerequisite is complete, but P4's separate no-root/generated-command/inferred-filename/Projection/persistent-view proof remains outside the approved selector.",
+      "resume_condition": "A human separately approves an exact test/proof-only selector for that five-part P4 gate.",
+      "owner": "human authority"
+    },
+    {
+      "blocker_id": "HCM-2.4-P6-ENTRY",
+      "classification": "proof",
+      "summary": "P6 cannot begin until P2 and the remaining P4 gate are independently review-clean.",
+      "resume_condition": "P2 and P4 complete their exact approved proof packets; P6 remains otherwise prohibited.",
+      "owner": "HCM-2.4 parent orchestrator"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-2.4-ESC-P2-MATRIX-001",
+      "trigger": "Final supplemental causal review found one exact deterministic matrix gap after the automatic review budget was exhausted.",
+      "current_resolution": "The planning subject and four P2 review dispatches remain unstaged/uncommitted; runtime remains unchanged and prohibited.",
+      "target_resolution": "Add one six-row normative matrix mapping absent, unsafe, unreadable, invalid-entry, alias, and over-limit transaction stores to exact observation tuples, errors, fixtures, and closure fingerprints, then obtain a fresh clean review.",
+      "decision_required": "Authorize one new top-level planning-only repair/re-review cycle limited to that matrix, or defer P2.",
+      "options": [
+        "Recommended: authorize the exact six-row planning-only matrix repair and one fresh independent review cycle.",
+        "Defer P2 and preserve the current unstaged planning subject without runtime work."
+      ],
+      "recommendation": "Authorize only the exact matrix repair; do not authorize P2 runtime, schemas, definitions, native adapter, Environment Context, or P6 in the same selector.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164915Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-2-review.json"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "The next user selection explicitly names this handoff and authorizes only the matrix repair plus fresh review."
+    },
+    {
+      "escalation_id": "HCM-2.4-ESC-P4-NEGATIVE-PROOF-001",
+      "trigger": "The user-approved P4/P5 token selector explicitly excluded P4's separate five-part negative-surface/path proof.",
+      "current_resolution": "Token derivation and positive mutation are review-clean; the separate P4 proof gate remains open.",
+      "target_resolution": "One exact test/proof-only selector for no root default, generated command, inferred filename, Projection authority, or persistent Markdown view.",
+      "decision_required": "Authorize that exact P4 proof packet separately or defer it.",
+      "options": [
+        "Authorize a bounded test/proof-only P4 selector with zero production symbols.",
+        "Defer the P4 proof and keep P6 blocked."
+      ],
+      "recommendation": "Keep this decision separate from the P2 matrix repair so both packets remain independently reviewable.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "A later user selection names exact test paths, assertions, proof gates, and zero-production-symbol ceiling."
+    }
+  ],
+  "validation": [
+    {
+      "command": "cargo test -p handbook-engine --test hcm_2_4_decision_record",
+      "status": "passed",
+      "evidence_ref": "4 passed, 0 failed, 0 ignored"
+    },
+    {
+      "command": "cargo test -p handbook-engine --test hcm_2_4_risk_record",
+      "status": "passed",
+      "evidence_ref": "13 passed, 0 failed, 0 ignored"
+    },
+    {
+      "command": "complete generic mutation lineage regression wall",
+      "status": "passed",
+      "evidence_ref": "54 passed, 0 failed, 0 ignored"
+    },
+    {
+      "command": "cargo test -p handbook-engine --test hcm_2_2_authenticator_security",
+      "status": "passed",
+      "evidence_ref": "9 passed; codec/ES256/refusal feasibility only, not a production native port"
+    },
+    {
+      "command": "npx gitnexus detect-changes --scope staged --repo handbook --limit 200 before 00dde01",
+      "status": "passed",
+      "evidence_ref": "LOW; only intake_commit_plan production impact, 0 processes; documentation/tests otherwise"
+    },
+    {
+      "command": "hard dispatch verification for P2 discovery, closure, supplemental causal 1, and supplemental causal 2",
+      "status": "passed",
+      "evidence_ref": "All four internal-dispatch v1.3 manifests, aggregate hashes, typed lineage, and whitespace policies replayed before spawn"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence_ref": "Current uncommitted P2/control-pack subject has no whitespace errors"
+    },
+    {
+      "command": "fresh final supplemental P2 review",
+      "status": "failed",
+      "evidence_ref": "/root/hcm_2_4_p2_planning_supplemental_2 returned one P2/Required exact matrix finding; no P3/P4 advisories"
+    },
+    {
+      "command": "P3/P4 selected-scope inventory comparison",
+      "status": "passed",
+      "evidence_ref": "No P3/P4 advisory intersects the P2/P4-P5 token subject; existing HCM-RF-0001 remains unrelated"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 current boundary"
+      ],
+      "reason": "Uncommitted P2 planning/status subject remains pending because review is not clean.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P2",
+        "P4",
+        "P5",
+        "P6",
+        "packet selector table"
+      ],
+      "reason": "Uncommitted planning subject preserves exact reviewed/unreviewed boundaries.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P2 decomposition and review state"
+      ],
+      "reason": "Pending final P2 matrix repair/re-review.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "P2 checklist"
+      ],
+      "reason": "Pending final P2 matrix repair/re-review.",
+      "status": "deferred"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T165925Z--HCM-2-4--orchestration--p2-review-budget-exhausted.json",
+      "sections": [
+        "entire parent-owned true-stop record"
+      ],
+      "reason": "Record the reviewed P4/P5 tip, unstaged P2 subject, final finding, and exact resume authority.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministically rebuilt query index"
+      ],
+      "reason": "Index the canonical parent-owned true-stop record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Repair and freshly review only the exact P2 transaction-store six-row error/nullability/fixture matrix, or separately select the open P4 negative-surface proof; do not begin runtime or P6.",
+    "condition": "A human explicitly selects this handoff and authorizes one exact planning-only P2 matrix repair/re-review cycle and/or a separately bounded P4 test/proof selector.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T165925Z--HCM-2-4--orchestration--p2-review-budget-exhausted.json",
+        "sections": [
+          "entire current handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T164915Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-2-review.json",
+        "sections": [
+          "subject manifest",
+          "review cycle",
+          "tasks and gates"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "sections": [
+          "Fingerprinted evaluation closure",
+          "Exact proof selectors",
+          "Discovery-review remediation"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sections": [
+          "remaining negative-surface/path gate"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "P2 option: add only the six-row normative transaction-store matrix and exact expected first-row/closure fixtures in planning documents, then obtain a fresh independent review.",
+      "P4 option: in a separate packet, freeze and review an exact zero-production-symbol selector for the five open negative-surface/path proofs.",
+      "Preserve commit 00dde01 and all unrelated work."
+    ],
+    "prohibited_scope": [
+      "No P2 Rust, schema, definition, producer, native adapter, CLI/compiler, Environment Context, or runtime edit.",
+      "No additional P2 amendment design beyond the exact matrix finding unless fresh review proves a causal P1/P2 and authority is expanded.",
+      "No P4 production edit, P6, bridge deletion, Phase 2 exit, HCM-3.x, other slice, unrelated cleanup, reset, checkout, stash, or overwrite."
+    ],
+    "acceptance_criteria": [
+      "The matrix maps each of six store failures to one exact observation kind, nullability tuple, store-specific error, expected first-row fixture, and closure fingerprint.",
+      "A fresh isolated built-in default reviewer returns CLEAN over the complete changed P2 planning subject.",
+      "Only after review-clean planning may the parent commit it and return for separate human P2S/P2A approval.",
+      "P4 negative proof, if selected, remains a separate independently reviewed test/proof-only commit."
+    ],
+    "stop_conditions": [
+      "Stop on any runtime or schema/definition edit request in the P2 planning packet.",
+      "Stop on another unresolved P1/P2 after the explicitly authorized fresh review budget.",
+      "Stop on P4 production-symbol need or any P6/sibling-slice expansion.",
+      "Stop if unrelated work cannot remain preserved."
+    ]
+  },
+  "supersedes": [
+    "20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required"
+  ],
+  "chat_summary": "HCM-2.4 P4/P5 token derivation is review-clean and committed at 00dde01. P2 remains planning-only and uncommitted: final supplemental review left one exact matrix finding after the review budget was exhausted. P4's separate five-part negative proof and P6 remain open; no P3/P4 advisory intersects this subject."
+}
