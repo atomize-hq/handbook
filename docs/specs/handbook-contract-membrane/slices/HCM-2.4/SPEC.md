@@ -1,13 +1,16 @@
 # HCM-2.4 — Remaining shipped artifact-family conversion
 
 Status: partially implemented. P0/P1A/P1B/P1C and P3/P3B are review-clean and
-committed; P2 and P4/P5 are authority-blocked; P6 and Phase 2 exit are not
-earned.
+committed; the exact P4/P5 coverage-token prerequisite is implemented and
+packet-verified pending supplemental causal closure review and commit. P4's
+separate negative-surface/path proof remains open. P2 runtime remains
+authority-blocked pending a review-clean planning amendment and human approval;
+P6 and Phase 2 exit are not earned.
 
 Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
 
 Selected resume lineage:
-`20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required`
+`20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required`
 
 Amendment evidence:
 [proof/20260726T122626Z--planning-charter-compatibility-amendment.md](proof/20260726T122626Z--planning-charter-compatibility-amendment.md)
@@ -33,8 +36,9 @@ end:
 
 This document freezes implementation packets and proof obligations. Runtime
 work was authorized only through the exact selectors recorded by the
-parent-owned orchestration. The completed partial packets do not authorize P2,
-P4/P5 remediation, P6, Phase 2 exit, or another slice.
+parent-owned orchestration. The current operator selection authorizes only the
+exact P4/P5 derivation selector below and a P2 planning amendment. It does not
+authorize P2 runtime work, P6, Phase 2 exit, or another slice.
 
 ## Authority and preserved decisions
 
@@ -461,14 +465,22 @@ code, but their fixtures, schema coverage, renderer goldens, and acceptance
 evidence remain separate. Combining them is allowed only if a fresh reviewer
 accepts a written indivisibility rationale before implementation.
 
-P4 and P5 are currently bounded incomplete. Their exact selected fixtures,
-read/validate paths, intake coverage, and available renderer/negative evidence
-are retained, but the unchanged generic mutation path rejects the
-planner-generated underscore-bearing intake-value tokens before establishment.
-The accepted stop and separately selectable prerequisite are frozen in
-`decision/20260727-p4-p5-generic-mutation-token-authority-stop.md`. This record
-does not authorize token normalization, token-grammar widening, a released
-coverage-ID edit, or completion/promotion of either packet.
+The shared P4/P5 token prerequisite completed the CLEAN selector review and
+exact bounded RED/GREEN implementation. Discovery and closure review identified
+documentation-only current-truth findings; supplemental causal closure remains
+pending. Only
+`intake_commit_plan` changed: each token derives from the final coverage-ID
+segment, replaces ASCII `_` with `-`, then appends `-value`. No other
+normalization occurred. The existing token grammar, collision/uniqueness
+handling, lineage-store validation, released coverage IDs, definitions,
+fingerprints, and every unrelated negative remain unchanged. The historical
+authority-stop record is the reproduced RED evidence. No second production
+symbol, broader inference, P2 runtime work, or P6 work is authorized.
+
+This token prerequisite does not complete P4. Its no-root, generated-command,
+inferred-filename, Projection, and persistent-view proof remains open and was
+not authorized for expansion by the token selector. P5's shared prerequisite
+also remains unaccepted until supplemental closure and commit.
 
 ### P6 — Aggregate flow and fixed-selector deletion
 
@@ -487,8 +499,9 @@ implementation handoff/ledger closeout. P7 may not begin HCM-3.x.
 
 The current parent may perform only a truthful partial control-pack and
 true-stop closeout. It must preserve the open Phase 2 exit rows and both bridge
-IDs, cite the exact P2 and P4/P5 authority blockers, and must not represent the
-partial reviewed commits as P7 or slice completion.
+IDs, cite the exact P2 runtime authority blocker, P4's open negative-surface
+proof, and the P4/P5 supplemental-review/commit boundary, and must not represent
+the partial reviewed commits as P7 or slice completion.
 
 ## Exact implementation surface selectors
 
@@ -504,8 +517,8 @@ same-scope correction after fresh impact analysis.
 | P2 | `crates/engine/src/author/environment_inventory_core.rs`; exact Environment Inventory branches in `crates/engine/src/{baseline_validation,canonical_artifacts,canonical_paths,lib}.rs`; `crates/compiler/src/author/{environment_inventory,environment_inventory_shell,mod}.rs`; `crates/compiler/src/layout.rs`; exact Environment Inventory branches in `crates/compiler/src/{baseline_validation,template_library,lib}.rs`; `crates/flow/src/resolver.rs` exact Environment Inventory validation/load/budget branches; `crates/cli/src/author.rs`; `crates/cli/src/main.rs` exact `AuthorCommand::EnvironmentInventory` help text; `crates/cli/src/rendering.rs` exact Environment Inventory labels only when required to preserve the existing public result shape; `core/library/environment_inventory/{ENVIRONMENT_INVENTORY_INPUTS.yaml.tmpl,environment_inventory_directive.md,ENVIRONMENT_INVENTORY.md.tmpl}`; exact setup/doctor adapters resolved in P0; P6 retains ownership of aggregate bridge-type and fixed-selector deletion | `crates/engine/tests/author_core.rs`; Environment Inventory cases in `crates/compiler/tests/author.rs` and `crates/cli/tests/author_cli.rs`; `crates/cli/tests/cli_surface.rs` exact inline `author_help_matches_snapshot` and snapshot-consuming `author_environment_inventory_help_matches_snapshot`; exact consumed `crates/cli/tests/snapshots/handbook-author-environment-inventory-help.txt`; `crates/engine/tests/{artifact_manifest_interface,baseline_validation,canonical_artifacts_ingest,freshness_computation}.rs`; `crates/compiler/tests/{artifact_manifest_interface,canonical_artifacts_ingest,freshness_computation,rendering_surface,resolver_core,setup,doctor}.rs`; `crates/flow/tests/resolver_core.rs`; native Windows mutation/refusal cases | packet proof only |
 | P3 | `core/stages/10_feature_spec.md`; two files under `core/library/feature_spec/`; `core/schemas/feature_spec.yaml`; `core/pipelines/{default,foundation_inputs}.yaml`; `crates/pipeline/src/{pipeline_capture,stage_10_feature_spec_provenance,pipeline_handoff}.rs`; exact fixed path/layout constants | `crates/pipeline/tests/{pipeline_capture,pipeline_handoff}.rs`; CLI handoff refusal tests; new exact fixture root `crates/engine/tests/fixtures/hcm_2_4_work_specification/`; exact mirrors under `tests/fixtures/pipeline_proof_corpus/foundation_inputs/` and `tests/fixtures/foundation_flow_demo/`; real-binary descriptor-selected capture/handoff proof | packet proof only |
 | P3B | no runtime or library edits | `crates/cli/tests/cli_surface.rs`, including only the private fresh repository-identity prerequisite helper and two invocation points frozen by `decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md` plus the three private canonical-consumer helpers frozen by `decision/20260727-p3b-m5-canonical-consumer-selector-repair.md`; exact `pipeline_handoff_emit_refuses_when_feature_spec_artifact_is_missing` setup assertion in `crates/cli/tests/pipeline_handoff_refusals.rs` frozen by `decision/20260727-p3b-negative-fixture-independence-selector-repair.md`; exact `foundation_flow_demo_feature_specs_match_directive_and_template_contract` cross-case assertion in `crates/cli/tests/feature_spec_contract.rs` frozen by `decision/20260727-p3b-feature-spec-contract-selector-repair.md`; exact `tests/fixtures/foundation_flow_demo/evidence/{happy_path,skip_path}.transcript.txt` bytes and selected M5 scorecard; the ten exact Stage 10 fixture-authority paths named by `decision/20260727-p3b-fixture-contract-selector-repair.md`; the two foundation-flow Work Specification inputs and exact generated-view/slice-plan evidence named by the two feature-identity/M5 decisions; the paired shared compile payload/explain goldens named by `decision/20260727-p3b-shared-compile-golden-selector-repair.md`; generated fixture-repo outputs remain transient and no fixture identity may be committed | P3B proof record and eight exact selector decisions only |
-| P4 | additive Decision Record definitions from P1A plus unchanged generic artifact runtime consumption | exact new fixture root `crates/engine/tests/fixtures/hcm_2_4_decision_record/` and a named HCM-2.4 integration test selected in P0 | packet proof only |
-| P5 | additive Risk Record definitions from P1A plus unchanged generic artifact runtime consumption | exact new fixture root `crates/engine/tests/fixtures/hcm_2_4_risk_record/` and a named HCM-2.4 integration test selected in P0 | packet proof only |
+| P4 | additive Decision Record definitions from P1A plus only `Function:crates/engine/src/artifact_mutation.rs:intake_commit_plan`, shared atomically with P5 for the exact final-segment ASCII `_` to `-` derivation before appending `-value`; no other production symbol or normalization | exact fixture root `crates/engine/tests/fixtures/hcm_2_4_decision_record/`; convert only the named blocker refusal into exact committed token-list proof and activate only the named positive mutation test in `crates/engine/tests/hcm_2_4_decision_record.rs`; preserve every other test | packet proof only |
+| P5 | additive Risk Record definitions from P1A plus the same single `intake_commit_plan` expression selected atomically by P4; no second production edit | exact fixture root `crates/engine/tests/fixtures/hcm_2_4_risk_record/`; convert only the named blocker refusal into exact committed token-list proof and activate only the named positive mutation test in `crates/engine/tests/hcm_2_4_risk_record.rs`; preserve every other test | packet proof only |
 | P6 | atomic compile closure for bridge-type deletion: `crates/engine/src/{artifact_manifest,baseline_validation,canonical_artifacts,canonical_paths,freshness,lib}.rs`; `crates/compiler/src/author/{charter_shell,environment_inventory_shell,mod}.rs`; `crates/compiler/src/{baseline_validation,blocker,layout,lib,refusal}.rs`; `crates/compiler/src/rendering/{markdown,shared}.rs`; `crates/flow/src/{resolver,budget,packet_result}.rs`; `crates/cli/src/rendering.rs`; only the bridge/fixed-family branches in these files are editable | `crates/engine/tests/{artifact_manifest_interface,baseline_validation,canonical_artifacts_ingest,freshness_computation,hcm_1_1_custom_kind,hcm_2_1_project_context}.rs`; `crates/compiler/tests/{artifact_manifest_interface,author,canonical_artifacts_ingest,freshness_computation,refusal_mapping,rendering_surface,resolver_core}.rs`; `crates/flow/tests/{resolver_core,budget_domains}.rs`; `crates/cli/tests/{author_cli,cli_surface,feature_spec_contract,pipeline_handoff_refusals}.rs` | bridge rows and earned proof rows only in P7 |
 | P7 | no new runtime behavior | full workspace wall and all focused regressions | `03-seam-crosswalk.md`, `04-phase-slice-map.md`, `06-proof-and-regression-ledger.md`, `09-review-finding-inventory.md`, exact HCM-2.4 `SPEC.md`/plan/todo status and evidence, and new P7 proof/review records only as earned |
 
@@ -574,6 +587,7 @@ must resolve it by UID/context or stop.
 | `Function:crates/compiler/src/doctor.rs:doctor_report_from_inspection` | HIGH; 12 impacted, 2 direct, 1 process, 3 modules | Existing sixth registry caller; read/proof-only, retain exact definition-closure reporting under direct 1.1 and selected 1.2 |
 | `Function:crates/engine/src/charter_lineage_store.rs:validate_candidate_v13` | CRITICAL preservation anchor; 43 impacted, 14 processes | No edit; exact HCM-2.2 record validation and negatives remain unchanged |
 | `Function:crates/engine/src/charter_promotion_intent_v12.rs:validate_promotion_intent_v12` | HIGH preservation anchor; 18 impacted, 3 processes | No edit; exact promotion-intent authority remains unchanged |
+| `Function:crates/engine/src/artifact_mutation.rs:intake_commit_plan` | LOW; 3 impacted, 1 direct caller, 0 indexed processes, 2 modules | P4/P5 may change only final coverage-ID segment derivation by replacing ASCII `_` with `-` before appending `-value`; any wider impact or other production symbol stops |
 | `Enum:crates/cli/src/main.rs:AuthorCommand` | LOW graph result; 0 impacted | P2 changes only the `EnvironmentInventory` help path; one inline CLI assertion and one consumed subcommand snapshot prove the otherwise-missing edge |
 | `derive_feature_id` | CRITICAL; 409 impacted, 1 direct, 51 processes, 20 modules | P3 must derive the same external identity from canonical Work Specification fields/bytes and replay all handoff consumers |
 | `profile_builtins::definition` | LOW; graph reports no upstream edges | Treat as an incomplete dynamic-source edge; prove every predecessor/new exact ref and full shipped profile closure |
@@ -730,9 +744,9 @@ Stop the active implementation packet and return to the parent when:
 - P2 would need to infer, coerce, or self-authorize Environment Context
   applicability, or edit the unselected condition evaluator before its exact
   evidence/evaluator contract is approved;
-- P4 or P5 would require generic coverage-token derivation normalization,
-  lineage token-grammar widening, or a released intake-definition edit before
-  a separately approved and impacted runtime selector exists;
+- P4 or P5 would require any coverage-token normalization beyond the approved
+  final-segment ASCII `_` to `-` derivation, lineage token-grammar widening, a
+  released intake-definition edit, another production symbol, or wider impact;
 - the P1A literal 1.2 fingerprint is absent or changes after compatibility
   review, any Project Authority descriptor field differs, any HCM-2.2 record
   byte/fingerprint changes, or `validate_candidate_v13` /

@@ -1606,7 +1606,7 @@ fn intake_commit_plan(
             .coverage_id
             .rsplit('.')
             .next()
-            .map(|suffix| format!("{suffix}-value"))
+            .map(|suffix| format!("{}-value", suffix.replace('_', "-")))
             .ok_or_else(|| control_error("coverage ID token is absent"))?;
         if !emitted_tokens.insert(token.clone()) {
             token = format!("coverage-{:04}-value", outputs.len());

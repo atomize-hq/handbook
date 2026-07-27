@@ -1,0 +1,227 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T151507Z--HCM-2-4--p4-p5-token-implementation-supplemental-causal-review",
+  "created_at_utc": "2026-07-27T15:15:07Z",
+  "source_handoff_ids": [
+    "20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required"
+  ],
+  "parent_orchestration_id": "20260727T135500Z--HCM-2-4--authority-prerequisites-resume-orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P4-P5-coverage-token-implementation",
+  "subject_fingerprint": "sha256:00c19024eeb94a2e93263489fd255f0ea47c3730bfc34da2e9cf6a054de1e5b9",
+  "review_cycle": {
+    "kind": "supplemental_causal",
+    "cycle_id": "p4-p5-token-implementation-supplemental-causal-1",
+    "trigger_run_ids": [
+      "p4-p5-token-implementation-closure-1"
+    ],
+    "finding_refs": [
+      "p4-p5-token-implementation-closure-1-P2-1",
+      "p4-p5-token-implementation-closure-1-P2-2"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/src/artifact_mutation.rs",
+        "sha256": "799489b97a71d7a4ed8c9d6e559892950919b0ba544001a00c7616be7502a29f"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_decision_record.rs",
+        "sha256": "6a831a828073dddfd4c5537cd518a0eb881e3283d9f66bd3f58e465d5aef210a"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_risk_record.rs",
+        "sha256": "2c5e925560d47db269de9a12b8a06fe70c9c1db98b7567de92900e6e9bbccad9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "7f72e8cbc5378272084c5eb4eb7315b1546aa78172a5c5c8b540f977a87a3820"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "4929ac054f7ceffb10d959246bdc1d9ec6d0bc6e023f22fc5f61ba918f0315ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "7448815d0335167581b646eff2d16080991059bec1182e422f61cc4e4b3856e0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T140703Z--HCM-2-4--p4-p5-token-selector-review.json",
+        "sha256": "38a52284e4c1394f219f0e6061cae2d711c87054f494136896184969742c6a91"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T141614Z--HCM-2-4--p4-p5-token-selector-closure-review.json",
+        "sha256": "5dff0b65bd5dbc1d14d89edacb8ddd96c31c029bef13ec315b990573c6ffd070"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T144014Z--HCM-2-4--p4-p5-token-implementation-review.json",
+        "sha256": "18527dad7189f818c250a716661e740bc03f6986424e66864dcd0e29c826069a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T145858Z--HCM-2-4--p4-p5-token-implementation-closure-review.json",
+        "sha256": "27c247a1a26821a61cb5c71bf6db4d70d0ba603aca091d7bd53149a5c476bfd5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "53e18f9264b9de342ef96941dc3bcb14126c6cd6306b0d5034028e06c57fe14d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+        "sha256": "ee833640d744221f6d8e7fbdedb4af8ac1391b7422abadf43d37f340a97101ea"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "sha256": "2480a2aa4b4c8db67a0d5b20c0b06fc5c0391be51689f80f78a29db8c2939adb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sha256": "b8a648e82f8e87f540865e325db2b27a3841700729779db351a0a2f5006c9551"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "682675a2a664bdf6dd9023469e1a7056ce78107f108646c4d1ae78763fe2f997"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "3e44dfe894d026ae16ad4ab72b92bf828203e76009b3337d26b9e756c0125650"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "0dbe3f851e4a944b71c586139cd45187317909343cd81c0f5d7d85fff4addd65"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:00c19024eeb94a2e93263489fd255f0ea47c3730bfc34da2e9cf6a054de1e5b9"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "closure_documentation_findings_only",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "operator_selected_p4_p5_token_packet",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "post_closure_remediation_supplemental_causal_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+      "sections": [
+        "Trigger and authority",
+        "Exact production selector",
+        "Exact RED/GREEN proof selector",
+        "Impact and reviewability ceiling",
+        "Non-goals and exit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+      "sections": [
+        "Decision",
+        "Historical contract mismatch",
+        "Historical proof posture",
+        "Superseded prerequisite recommendation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P4 — Decision Record support proof",
+        "P5 — Risk Record support proof",
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "P4 — Decision Record",
+        "P5 — Risk Record",
+        "P6 — Aggregate cleanup"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The subject contains one production expression and four selected test-function changes. Targeted Decision, Risk, and generic-lineage tests are GREEN at 4/4, 13/13, and 54/54 with zero ignores. Formatting and diff hygiene pass. The closure remediation changes documentation only: it marks the old authority stop historical/superseded and states that the selected token prerequisite does not satisfy P4's separate no-root, generated-command, inferred-filename, Projection, and persistent-view proof gate. No production or test byte changed during this remediation. Commit 6f1c1ed44322c8a3194198846171a94bff2d1989 records only the two earlier selector-review dispatches.",
+  "allowed_scope": [
+    "Read-only replay of the 17-entry complete subject manifest and the documentation delta from the immediately preceding closure subject.",
+    "Verify closure findings p4-p5-token-implementation-closure-1-P2-1 and p4-p5-token-implementation-closure-1-P2-2 only.",
+    "Confirm every old ignored or refusal claim is explicitly historical and the superseded authority-stop record no longer asserts a live runtime prohibition.",
+    "Confirm current SPEC, selector, plan, todo, and proof records preserve P4's open negative-surface/path gate while accurately describing the bounded P4/P5 token prerequisite.",
+    "Check for remediation-caused P1/P2 regression in the selected production expression, four selected tests, current authority boundary, impact ceiling, or P6 prohibition."
+  ],
+  "non_goals": [
+    "No open-ended discovery beyond the two immediately preceding closure findings and directly affected contracts.",
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No new tests or proof implementation for P4's open negative-surface/path gate.",
+    "No P2 runtime, P6, bridge deletion, released definition, fingerprint, token grammar, public API, dependency, Cargo/version, schema inference, other production symbol, or sibling-slice change.",
+    "Do not include unrelated .claude paths, AGENTS.md, or CLAUDE.md in the subject."
+  ],
+  "tasks": [
+    "Verify all manifest hashes, aggregate subject identity, and the documentation-only remediation delta.",
+    "Verify p4-p5-token-implementation-closure-1-P2-1 is closed by historically qualified stop/ignored/refusal claims.",
+    "Verify p4-p5-token-implementation-closure-1-P2-2 is closed by explicit, consistent preservation of P4's unproved negative-surface/path gate.",
+    "Confirm no production or selected test byte changed after the preceding closure subject.",
+    "Confirm no remediation-caused P1/P2 affects the exact token derivation, active proofs, impact ceiling, or P6 prohibition.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Only Function:crates/engine/src/artifact_mutation.rs:intake_commit_plan changed in production",
+    "Derivation is final coverage-ID segment, ASCII underscore-to-hyphen replacement only, then unchanged -value suffix",
+    "Exactly two blocker-specific tests are exact token-list proofs and exactly two formerly ignored positives are active",
+    "Existing token grammar, collision/uniqueness, lineage validation, released IDs/definitions/fingerprints, and unrelated negatives are preserved",
+    "Impact remains LOW, 3 impacted, 1 direct caller, 0 processes, 2 modules",
+    "Historical stop claims are provenance, not current prohibition",
+    "P4's no-root, generated-command, inferred-filename, Projection, and persistent-view proof remains an explicit open gate outside this selector",
+    "P2 runtime and P6 remain forbidden"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not reopen discovery or classify an unrelated issue as causal without demonstrating a P1/P2 effect on this selected integrated outcome.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

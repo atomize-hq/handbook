@@ -1,6 +1,61 @@
-# P5 Risk Record implementation proof — bounded stop
+# HCM-2.4 P5 Risk Record implementation proof
 
-## Packet identity
+Status: **TOKEN PREREQUISITE IMPLEMENTED AND VERIFIED — supplemental causal
+closure pending**
+
+The historical bounded stop below was resolved only by the exact
+operator-approved selector in
+`decision/20260727-p4-p5-coverage-token-derivation-selector.md`. Its discovery
+review found one P2 documentation inconsistency and one P4 wording advisory;
+after parent remediation, different-fresh reviewer
+`/root/hcm_2_4_p4_p5_token_selector_closure` returned CLEAN over
+`sha256:5f2909db89e6725bf36ba47e1f0965e1bfe51437d297e3234e4d4ad77919b506`.
+The token prerequisite remains unaccepted until supplemental causal closure and
+commit.
+
+## Authorized resolution and current proof
+
+The shared production change is limited to
+`artifact_mutation::intake_commit_plan`: replace ASCII `_` with `-` in only
+the final dot-delimited coverage-ID segment before the unchanged `-value`
+suffix. No token grammar, collision/uniqueness, distinct-value, lineage-store,
+released coverage-ID, definition, or fingerprint behavior changed.
+
+Before the production edit, both selected active Risk tests established RED
+while all eleven unrelated target tests remained GREEN:
+
+```text
+cargo test -p handbook-engine --test hcm_2_4_risk_record
+test result: FAILED. 11 passed; 2 failed; 0 ignored
+generic_risk_record_mutation_derives_exact_coverage_tokens:
+  generic lineage store refused: intake output tuple is not exact or unique
+generic_mutation_promotes_then_reads_and_validates_new_real_bytes:
+  generic lineage store refused: intake output tuple is not exact or unique
+```
+
+After the exact expression change, the complete target passed:
+
+```text
+cargo test -p handbook-engine --test hcm_2_4_risk_record
+test result: ok. 13 passed; 0 failed; 0 ignored
+```
+
+`generic_risk_record_mutation_derives_exact_coverage_tokens` reads the
+committed intake transaction intent and proves the complete ordered tokens:
+`schema-id-value`, `schema-version-value`, `record-id-value`,
+`uncertainty-value`, `evidence-refs-value`, `owner-value`,
+`treatment-value`, `status-value`, `review-basis-value`, and
+`intake-record`. The activated end-to-end test proves intake, candidate
+validation/append, promotion, byte-exact canonical replacement, read, and
+validate.
+
+The affected generic-lineage wall passed 54/54. Formatting and diff hygiene
+passed. Strict Clippy for this Risk target passed with only
+`clippy::needless-as-bytes` allowed because the one reported occurrence is an
+unchanged pre-existing renderer assertion at HEAD, outside the four selected
+test functions. No other warning remained.
+
+## Historical packet identity
 
 - Dispatch:
   `20260727T001101Z--HCM-2-4--p5-risk-record-implementation`
@@ -74,7 +129,7 @@ The profile's complete typed-closure fingerprint was independently replayed as
 `sha256:8fc23836913d053e2ca1a765ac30dbf1711ffbea8ecffb80f9c7ef7558ba30e4`.
 The generic selector then admitted the exact fixture without a runtime edit.
 
-## Available GREEN proof
+## Historical available bounded GREEN proof
 
 The exact fixture selects
 `example.profile.hcm-2-4-risk-record@1.0.0`, extends
@@ -123,10 +178,11 @@ test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 `cargo fmt --all -- --check` passed.
 
-## Unavailable mutation proof and exact stop reason
+## Historical unavailable mutation proof and exact stop reason
 
-The positive mutation proof remains intentionally unavailable and is ignored
-by the default target. Its exact explicit command remains red:
+At that historical baseline, the positive mutation proof was intentionally
+unavailable and ignored by the default target. Its exact explicit command was
+red:
 
 ```text
 $env:CARGO_TARGET_DIR='target/hcm-2-4-p4-p5-stop'; cargo test -p handbook-engine --test hcm_2_4_risk_record -- --ignored --exact generic_mutation_promotes_then_reads_and_validates_new_real_bytes --nocapture
@@ -151,10 +207,10 @@ The failure is deterministic and independent of fixture values:
    `risk_record.record_id`, `risk_record.evidence_refs`, and
    `risk_record.review_basis`
    (`crates/engine/definitions/intakes/handbook.intake.risk-record/1.0.0.yaml:10-18`).
-2. `intake_commit_plan` derives retained-value tokens by taking the coverage ID
+2. `intake_commit_plan` derived retained-value tokens by taking the coverage ID
    suffix and appending `-value`
    (`crates/engine/src/artifact_mutation.rs:1605-1610`).
-3. The generated tokens therefore include `schema_id-value`,
+3. The generated tokens therefore included `schema_id-value`,
    `schema_version-value`, and other underscore-bearing values.
 4. `valid_intake_value_token` permits only ASCII lowercase letters, digits,
    and hyphens (`crates/engine/src/artifact_lineage_store.rs:1500-1508`).
@@ -166,21 +222,18 @@ coverage IDs would edit a released P1A intake definition and break its
 fingerprint. Making the existing planner normalize token suffixes, or widening
 the lineage-store token grammar, is a production/runtime edit outside P5.
 
-Therefore the dispatch stop condition is met: the unchanged generic HCM-2.3
-path cannot complete Risk Record mutation for the exact admitted fixture.
-Candidate append, promotion, post-mutation retained bytes, read, and validate
-remain unavailable until parent authority dispatches and accepts a separate
-runtime prerequisite.
+Therefore the historical dispatch stop condition was met at that baseline.
+The later operator-approved selector and current GREEN proof above resolve only
+that prerequisite.
 
-The default target locks that boundary with
+The historical default target locked that boundary with
 `generic_risk_record_mutation_refuses_invalid_coverage_token_derivation`. The
-ignored positive test is still executable and is not counted as satisfied
-proof.
+ignored positive test remained executable and was not counted as satisfied
+proof at that baseline.
 
 ## Scope disposition
 
-The shared authority disposition is
-`decision/20260727-p4-p5-generic-mutation-token-authority-stop.md`. This record
-does not claim P5 completion or slice completion. No production/library source,
-released definition, schema, Cargo file, command, public API, or sibling
-packet was changed.
+The historical shared authority disposition remains provenance. This record
+does not claim P5 acceptance, commit, P6 authority, or slice completion until
+supplemental causal closure and commit. No released definition, schema, Cargo
+file, command, public API, or sibling packet changed.

@@ -1,8 +1,11 @@
 # HCM-2.4 implementation plan
 
 Status: partially executed under separate user selections. P0/P1A/P1B/P1C and
-P3/P3B are review-clean and committed. P2 and P4/P5 are authority-blocked, so
-P6 and the Phase 2 exit remain closed.
+P3/P3B are review-clean and committed. P2 runtime remains authority-blocked.
+The P4/P5 token prerequisite completed the CLEAN selector review and RED/GREEN
+implementation; supplemental causal closure and commit remain pending. P4's
+separate negative-surface/path proof remains open. P6 and the Phase 2 exit
+remain closed.
 
 ## Dependency graph
 
@@ -23,10 +26,14 @@ four are committed, clean, and independently green.
 
 Current boundary: commits `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`
 and `5a2ccf6939be0e549e7e7355a245c7511c271eef` contain only the completed
-reviewed packets. P2 requires condition-evaluator authority; P4/P5 require a
-coverage-token derivation selector. Those blockers keep P6 and full P7
-ineligible. The current P7 activity is limited to a reviewed partial
-control-pack record and one parent-owned true-stop handoff.
+reviewed packets. P2 requires approved condition-evaluator runtime authority.
+P4/P5 have the exact operator-approved derivation selector frozen in
+`decision/20260727-p4-p5-coverage-token-derivation-selector.md`; selector
+review and RED/GREEN are complete, but supplemental causal closure and commit
+must close the shared token prerequisite. P4 also retains an open
+negative-surface/path proof outside that selector. Those incomplete
+prerequisites keep P6 and full P7 ineligible. The current P7 activity is limited
+to reviewed partial control-pack records and parent-owned true-stop handoffs.
 
 ## Standing rules
 
@@ -524,12 +531,29 @@ Work:
 GREEN: exact schema/coverage, generic-operation, renderer golden, safe path,
 retained observation, and negative-surface tests pass independently.
 
-Current bounded result: selection, descriptor/intake coverage, retained
-read/validate, and the exact negative token-refusal regression pass. The
-positive generic mutation test remains ignored-by-default and fails when run
-with `--ignored` because planner-derived underscore-bearing coverage tokens
-violate the unchanged lineage token grammar. P4 remains incomplete under
-`decision/20260727-p4-p5-generic-mutation-token-authority-stop.md`.
+Implementation result:
+
+- freeze the operator-approved contract in
+  `decision/20260727-p4-p5-coverage-token-derivation-selector.md`;
+- convert only the Decision blocker refusal into
+  `generic_decision_record_mutation_derives_exact_coverage_tokens`;
+- remove `#[ignore]` only from
+  `generic_decision_record_mutation_retains_real_bytes_and_rejects_stale_basis`;
+- RED was 2 passed/2 exact Store failures with zero ignores before production;
+- only `intake_commit_plan` changed so the final coverage-ID segment replaces
+  ASCII `_` with `-` before the unchanged `-value` suffix; and
+- GREEN is 4/4 Decision tests plus the complete 54-test generic-lineage wall.
+
+GREEN retains the existing token grammar, collision/uniqueness and
+lineage-store validation, released IDs/definitions/fingerprints, stale-basis
+refusal, canonical bytes, and every unrelated negative. Fresh impact is LOW/3,
+1 direct caller, 0 processes, 2 modules; another production symbol or wider
+impact stops the packet.
+
+This result closes only the selected token prerequisite. The P4 no-root,
+generated-command, inferred-filename, Projection, and persistent-view proof
+remains open; the current selector does not authorize additional test or proof
+implementation for that gate.
 
 ## P5 — Risk Record support proof
 
@@ -544,20 +568,26 @@ golden, and evidence. Shared generic code is permitted; merged review evidence
 is not. A combined P4/P5 commit requires a written atomicity rationale accepted
 before edits by a fresh reviewer.
 
-Current bounded result: the independently selected Risk Record fixture,
-coverage/intake, renderer, read/validate, and negative surface pass. The
-positive generic mutation test remains ignored-by-default and reproduces the
-same Store refusal under `--ignored`. P5 remains incomplete under the shared
-authority-stop decision; no generic runtime or released-definition correction
-is selected.
+Implementation result: P5 atomically shares only P4's one-expression
+`intake_commit_plan` change. Only
+`generic_risk_record_mutation_derives_exact_coverage_tokens` replaced the
+blocker refusal with the exact committed Risk token-list proof and only
+`generic_mutation_promotes_then_reads_and_validates_new_real_bytes` was
+activated. RED was 11 passed/2 exact Store failures; GREEN is 13/13 with zero
+ignores. Separate fixture and acceptance evidence remain independent; no
+generic token grammar, definition, fingerprint, or unrelated negative changed.
+Supplemental causal closure and commit remain pending.
 
 ## P6 — Aggregate flow and fixed-selector deletion
 
 Entry: P1A–P1C and P2–P5 individually committed and green; no bridge deletion
 has occurred.
 
-Current entry result: not satisfied. P2 lacks condition-evaluator authority,
-and P4/P5 lack authorized positive generic mutation proof. Do not begin P6.
+Current entry result: not satisfied. P2 lacks approved runtime
+condition-evaluator authority. The P4/P5 token prerequisite completed its
+approved selector and RED/GREEN implementation but still requires supplemental
+closure and commit; P4's separate negative-surface/path proof also remains open.
+Do not begin P6.
 
 RED:
 

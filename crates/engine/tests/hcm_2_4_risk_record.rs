@@ -457,7 +457,7 @@ fn generic_read_and_validate_retain_the_exact_canonical_source_bytes() {
 }
 
 #[test]
-fn generic_risk_record_mutation_refuses_invalid_coverage_token_derivation() {
+fn generic_risk_record_mutation_derives_exact_coverage_tokens() {
     let (repo, repository) = open_fixture_repository();
     let target = risk_target();
     let current = repository
@@ -483,26 +483,47 @@ fn generic_risk_record_mutation_refuses_invalid_coverage_token_derivation() {
     }))
     .expect("intake request");
 
-    let error = handbook_engine::artifact_mutation::ArtifactMutationServiceV1::intake_append(
+    let intake = handbook_engine::artifact_mutation::ArtifactMutationServiceV1::intake_append(
         repo.path(),
         KIND_REF,
         "risk_record",
         &intake_request,
     )
-    .expect_err("underscore-bearing coverage token derivation must refuse");
-
+    .expect("underscore-bearing coverage IDs derive exact lineage tokens");
+    let intent_path = repo
+        .path()
+        .join(".handbook/state/transactions/intake-records")
+        .join(format!(
+            "{}.committed/intent.json",
+            intake.result.transaction_id
+        ));
+    let intent: Value =
+        serde_json::from_slice(&fs::read(intent_path).expect("committed Risk intake intent"))
+            .expect("parse committed Risk intake intent");
+    let tokens = intent["outputs"]
+        .as_array()
+        .expect("Risk intake outputs")
+        .iter()
+        .map(|output| output["token"].as_str().expect("Risk output token"))
+        .collect::<Vec<_>>();
     assert_eq!(
-        error.kind(),
-        handbook_engine::artifact_mutation::ArtifactMutationErrorKindV1::Store
-    );
-    assert_eq!(
-        error.detail(),
-        "generic lineage store refused: intake output tuple is not exact or unique"
+        tokens,
+        vec![
+            "schema-id-value",
+            "schema-version-value",
+            "record-id-value",
+            "uncertainty-value",
+            "evidence-refs-value",
+            "owner-value",
+            "treatment-value",
+            "status-value",
+            "review-basis-value",
+            "intake-record",
+        ]
     );
 }
 
 #[test]
-#[ignore = "requires separately authorized generic coverage-token normalization"]
 fn generic_mutation_promotes_then_reads_and_validates_new_real_bytes() {
     let (repo, repository) = open_fixture_repository();
     let target = risk_target();

@@ -1,7 +1,10 @@
 # HCM-2.4 implementation checklist
 
 Status: partial implementation. P0/P1A/P1B/P1C and P3/P3B are review-clean;
-P2 and P4/P5 are authority-blocked; P6 and Phase 2 exit remain incomplete.
+P2 runtime remains authority-blocked. The P4/P5 token prerequisite completed
+the CLEAN selector review and RED/GREEN implementation; supplemental causal
+closure and commit remain pending. P4's separate negative-surface/path proof
+remains open. P6 and Phase 2 exit remain incomplete.
 
 ## Entry
 
@@ -298,13 +301,20 @@ P2 and P4/P5 are authority-blocked; P6 and Phase 2 exit remain incomplete.
       decision fixture profile and add only `decision_record` at
       `.handbook/records/decision.yaml` with the frozen null-role/intake/renderer
       closure.
-- [ ] BLOCKED: positive generic mutation/promotion proof against real canonical
-      bytes requires a separately approved coverage-token derivation selector.
-      The default-green target retains intake/read/validate proof and an exact
-      negative regression; the positive test remains executable with
-      `--ignored`.
+- [x] Obtain fresh independent review of
+      `decision/20260727-p4-p5-coverage-token-derivation-selector.md`.
+- [x] Convert only the named Decision blocker refusal into exact committed
+      token-list proof and activate only the named positive mutation test.
+- [x] Capture RED, make the one-expression `intake_commit_plan` edit, and prove
+      Decision intake/candidate/promotion/read/validate plus stale-basis and all
+      unrelated negative cases GREEN.
+- [ ] Obtain fresh independent implementation review and commit the reviewed
+      P4/P5 packet.
 - [ ] Prove no root default, generated command, inferred filename, Projection,
-      or persistent view.
+       or persistent view.
+      This broader P4 gate is outside the approved token selector and remains
+      outstanding for separate authority; token prerequisite closure does not
+      satisfy it.
 - [x] Record bounded-stop evidence:
       `proof/implementation/P4-decision-record.md` and
       `decision/20260727-p4-p5-generic-mutation-token-authority-stop.md`.
@@ -315,10 +325,11 @@ P2 and P4/P5 are authority-blocked; P6 and Phase 2 exit remain incomplete.
       fixture profile and add only `risk_record` at
       `.handbook/records/risk.yaml` with the frozen null-role/intake/renderer
       closure.
-- [ ] BLOCKED: positive generic mutation/promotion proof requires the same
-      separately approved coverage-token derivation prerequisite. The
-      default-green target retains the exact negative regression; the positive
-      test remains executable with `--ignored`.
+- [x] Convert only the named Risk blocker refusal into exact committed
+      token-list proof and activate only the named positive mutation test.
+- [x] Share only the reviewed P4 production expression, capture RED/GREEN, and
+      prove Risk intake/candidate/promotion/read/validate plus every unrelated
+      negative case.
 - [x] Prove no root default, generated command, inferred filename, Projection,
       or persistent view.
 - [x] Keep evidence independent from Decision Record or record an accepted
@@ -329,7 +340,9 @@ P2 and P4/P5 are authority-blocked; P6 and Phase 2 exit remain incomplete.
 
 ## P6 — Aggregate cleanup
 
-- [ ] BLOCKED: P2, P4, and P5 are not independently green.
+- [ ] BLOCKED: P2 lacks runtime authority; the P4/P5 token prerequisite
+      requires supplemental closure and commit, and P4's separate
+      negative-surface/path proof remains open.
 - [ ] Replace fixed/bridge flow input collection with admitted selected
       descriptors and retained canonical bytes.
 - [ ] Preserve Charter authority, Project Context behavior, registry brief,

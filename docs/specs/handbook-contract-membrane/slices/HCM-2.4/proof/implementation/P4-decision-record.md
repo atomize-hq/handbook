@@ -1,19 +1,81 @@
 # HCM-2.4 P4 Decision Record implementation proof
 
-Status: **STOPPED — runtime authority required**
+Status: **TOKEN PREREQUISITE IMPLEMENTED AND VERIFIED — P4
+negative-surface/path proof remains open**
 
-The bounded stop was independently reproduced by
+The historical bounded stop was independently reproduced by
 `/root/hcm_2_4_p4_stop_review` from dispatch
 `20260727T004037Z--HCM-2-4--p4-decision-record-stop-review`. The reviewer
-returned one Required runtime-prerequisite finding; P4 remains incomplete.
+returned one Required runtime-prerequisite finding; P4 remained incomplete at
+that baseline.
 
-Dispatch:
+That historical stop was resolved only by the operator-approved selector in
+`decision/20260727-p4-p5-coverage-token-derivation-selector.md`. Discovery
+reviewer `/root/hcm_2_4_p4_p5_token_selector_review` returned one P2
+cross-document finding and one P4 wording advisory. After parent remediation,
+different-fresh reviewer `/root/hcm_2_4_p4_p5_token_selector_closure` returned
+CLEAN over subject
+`sha256:5f2909db89e6725bf36ba47e1f0965e1bfe51437d297e3234e4d4ad77919b506`.
+The token prerequisite remains unaccepted until supplemental causal closure and
+commit. P4 remains incomplete independently because its no-root,
+generated-command, inferred-filename, Projection, and persistent-view proof is
+still open.
+
+## Authorized resolution and current proof
+
+Only `artifact_mutation::intake_commit_plan` changed in production. It still
+selects the final dot-delimited coverage-ID segment and appends `-value`, but
+now replaces ASCII `_` with `-` inside that final segment first. The token
+grammar, collision/uniqueness fallback, distinct-value suppression,
+lineage-store validation, released coverage IDs, definitions, and fingerprints
+are unchanged.
+
+Before the production edit, the two selected active Decision tests established
+RED at the reproduced Store boundary:
+
+```text
+cargo test -p handbook-engine --test hcm_2_4_decision_record
+test result: FAILED. 2 passed; 2 failed; 0 ignored
+generic_decision_record_mutation_derives_exact_coverage_tokens:
+  generic lineage store refused: intake output tuple is not exact or unique
+generic_decision_record_mutation_retains_real_bytes_and_rejects_stale_basis:
+  generic lineage store refused: intake output tuple is not exact or unique
+```
+
+After the one-expression edit, the same complete target was GREEN:
+
+```text
+cargo test -p handbook-engine --test hcm_2_4_decision_record
+test result: ok. 4 passed; 0 failed; 0 ignored
+```
+
+`generic_decision_record_mutation_derives_exact_coverage_tokens` reads the
+committed intake transaction intent and proves the complete ordered tokens:
+`schema-id-value`, `schema-version-value`, `record-id-value`,
+`context-value`, `decision-value`, `status-value`,
+`consequences-value`, `supersedes-value`, and `intake-record`. The activated
+end-to-end test proves intake, candidate validation/append, promotion,
+byte-exact canonical replacement, read/validate, and stale-basis refusal.
+
+The affected generic-lineage preservation wall passed:
+
+```text
+cargo test -p handbook-engine --test hcm_2_3_generic_lineage
+test result: ok. 54 passed; 0 failed; 0 ignored
+```
+
+`cargo fmt --all -- --check` and `git diff --check` passed. Strict Clippy
+passed for the engine library and this Decision target. The all-target command
+is blocked only by two pre-existing `needless_as_bytes` warnings whose exact
+bytes are present at HEAD; neither intersects an authorized function.
+
+Historical dispatch:
 `20260727T001100Z--HCM-2-4--p4-decision-record-implementation`
 
-Subject:
+Historical subject:
 `sha256:778464084def625c25ec95f2a1268c1793ed71e9138ff213f363e9043ddd3161`
 
-## Scope and baseline
+## Historical scope and baseline
 
 The exact P4 path manifest controls this packet. The packet created only the
 three named fixture files, the named integration target, and this proof record.
@@ -43,7 +105,7 @@ message: "The system cannot find the path specified." }
 test result: FAILED. 0 passed; 1 failed
 ```
 
-## Successful bounded proof
+## Historical successful bounded proof
 
 The fixture selects
 `example.profile.hcm-2-4-decision-record@1.0.0`, extends
@@ -95,7 +157,7 @@ CARGO_TARGET_DIR=target/hcm-2-4-p4 cargo test -p handbook-engine --test hcm_2_3_
 test result: ok. 1 passed; 0 failed; 53 filtered out
 ```
 
-## Stop-condition proof
+## Historical stop-condition proof
 
 Exact failing command:
 
@@ -129,30 +191,26 @@ failure:
    tuple before establishment
    (`crates/engine/src/artifact_lineage_store.rs:630`).
 
-Correcting the mismatch requires a production/runtime token derivation or
-validation change. That surface is forbidden by this dispatch, so the packet
-stopped without a workaround.
+At that baseline, correcting the mismatch required a production/runtime token
+derivation or validation change. That surface was forbidden by the historical
+dispatch, so the packet stopped without a workaround.
 
-The default target now locks the refusal with
+The historical default target locked the refusal with
 `generic_decision_record_mutation_refuses_invalid_coverage_token_derivation`.
-The positive end-to-end mutation test is ignored by default, remains
-executable with `--ignored`, and is not counted as satisfied proof.
+The positive end-to-end mutation test was ignored by default, remained
+executable with `--ignored`, and was not counted as satisfied proof.
 
-## Unavailable proof and required disposition
+## Historical unavailable-proof disposition
 
-Because mutation cannot establish an intake record unchanged, P4 cannot yet
-prove candidate append, promotion, post-promotion read/validate, stale-basis
-refusal, or atomic retained-byte replacement for this family. Renderer
-definition/golden and the remaining negative-surface/path cases were not
-expanded after the mandatory stop.
+At the historical baseline, mutation could not establish an intake record, so
+P4 could not prove candidate append, promotion, post-promotion read/validate,
+stale-basis refusal, or atomic retained-byte replacement for this family.
+Renderer definition/golden and the remaining negative-surface/path cases were
+not expanded after the mandatory stop.
 
-The parent must either:
-
-1. authorize a fresh, separately impacted same-scope runtime correction for
-   generic intake-value token derivation/validation and redispatch P4; or
-2. accept that the exact Decision Record intake is not currently supported by
-   the unchanged generic HCM-2.3 mutation path.
-
-The shared authority disposition is
-`decision/20260727-p4-p5-generic-mutation-token-authority-stop.md`. This record
-does not claim P4 completion or slice completion.
+The parent selected the first historical option through the later exact
+operator authorization. The current GREEN proof above replaces only the prior
+unavailable-proof recommendation. It does not claim P4 acceptance, commit,
+P6 authority, or slice completion. Supplemental causal closure and commit
+remain pending for the token prerequisite, and the separate P4
+negative-surface/path gate remains outstanding.

@@ -1,0 +1,196 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T145858Z--HCM-2-4--p4-p5-token-implementation-closure-review",
+  "created_at_utc": "2026-07-27T14:58:58Z",
+  "source_handoff_ids": [
+    "20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required"
+  ],
+  "parent_orchestration_id": "20260727T135500Z--HCM-2-4--authority-prerequisites-resume-orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "code-review-and-quality",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P4-P5-coverage-token-implementation",
+  "subject_fingerprint": "sha256:c968ef25e1c7ecd2c5adf78123e226778a3329a20cc927b03ee0799783740c5c",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p4-p5-token-implementation-closure-1",
+    "trigger_run_ids": [
+      "p4-p5-token-implementation-discovery-1"
+    ],
+    "finding_refs": [
+      "p4-p5-token-implementation-discovery-1-P2-1"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/src/artifact_mutation.rs",
+        "sha256": "799489b97a71d7a4ed8c9d6e559892950919b0ba544001a00c7616be7502a29f"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_decision_record.rs",
+        "sha256": "6a831a828073dddfd4c5537cd518a0eb881e3283d9f66bd3f58e465d5aef210a"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_risk_record.rs",
+        "sha256": "2c5e925560d47db269de9a12b8a06fe70c9c1db98b7567de92900e6e9bbccad9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "7f72e8cbc5378272084c5eb4eb7315b1546aa78172a5c5c8b540f977a87a3820"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "4929ac054f7ceffb10d959246bdc1d9ec6d0bc6e023f22fc5f61ba918f0315ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "7448815d0335167581b646eff2d16080991059bec1182e422f61cc4e4b3856e0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T140703Z--HCM-2-4--p4-p5-token-selector-review.json",
+        "sha256": "38a52284e4c1394f219f0e6061cae2d711c87054f494136896184969742c6a91"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T141614Z--HCM-2-4--p4-p5-token-selector-closure-review.json",
+        "sha256": "5dff0b65bd5dbc1d14d89edacb8ddd96c31c029bef13ec315b990573c6ffd070"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T144014Z--HCM-2-4--p4-p5-token-implementation-review.json",
+        "sha256": "18527dad7189f818c250a716661e740bc03f6986424e66864dcd0e29c826069a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "abbb25fae133cc3a156db30450eaf64c6e96af974bae76b7fe56b70074eeaf60"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+        "sha256": "f05feaebc96dc727bfcdae406baf0dcc77da1ed66bb5794b44440bc77f4d92c4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "sha256": "c266416872c44be7bc1acf556aca465f4d0b216d99c9c8f0ea6d502fd8faae51"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sha256": "ed11a0d33fc75da44a5524bfb2871abc8400f618be9d58bbcf23db11b976533d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "f4dd1023cc1471f792988a96d8c1be3a000b7cc180c47387edde5ed8c6ed0339"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "b2bc6ee06b97eb6e7156c56c103bae1154c159ed652bf7d7d495e3dcda546de0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "ca6d2d1ad2d79c41871abfa464a952230088722979646cb49385a241353690ec"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:c968ef25e1c7ecd2c5adf78123e226778a3329a20cc927b03ee0799783740c5c"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "proof_current_truth_remediation",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local_operator_selection",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "post_remediation_pre_commit_closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+      "sections": [
+        "Exact production selector",
+        "Exact RED/GREEN proof selector",
+        "Impact and reviewability ceiling"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P4 — Decision Record support proof",
+        "P5 — Risk Record support proof",
+        "P7 — Phase 2 exit proof and control-pack closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery run p4-p5-token-implementation-discovery-1 returned P2 p4-p5-token-implementation-discovery-1-P2-1: old bounded-stop packet identities, blocker test names, ignored/red claims, and P6 summaries were not consistently distinguished from current GREEN implementation truth. The parent changed documentation only. Old packet IDs/results and old test names remain only under headings or prose explicitly labeled historical; current selector/plan use the renamed active proof functions. P6 now states that P2 lacks runtime authority while P4/P5 have completed selector and RED/GREEN but still require review and commit. Production/test bytes and raw proof results are unchanged.",
+  "allowed_scope": [
+    "Read-only replay of all 16 post-remediation manifest entries and exact documentation-only remediation delta.",
+    "Confirm P2 p4-p5-token-implementation-discovery-1-P2-1 is closed across both proof records, SPEC, plan, todo, and selector decision.",
+    "Confirm old function names and old ignored/red results occur only in explicitly historical evidence.",
+    "Confirm no remediation-caused P1/P2 affects code, tests, scope, impact, proof, or P6 boundary."
+  ],
+  "non_goals": [
+    "No open-ended discovery beyond the known remediation and directly affected current-truth boundary.",
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No P2 runtime, P6, released definition/schema/fingerprint, public API, dependency, Cargo/version, or sibling-slice change."
+  ],
+  "tasks": [
+    "Verify complete subject identity and exact remediation delta.",
+    "Confirm P2 p4-p5-token-implementation-discovery-1-P2-1 is closed.",
+    "Confirm historical/current truth is unambiguous and review/commit are the only P4/P5 remaining gates.",
+    "Check for directly caused or unmasked P1/P2 regression.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Production and test bytes are unchanged from the reviewed implementation subject",
+    "Historical bounded-stop evidence remains provenance and is explicitly labeled historical",
+    "Current proof records show all four tests active and current GREEN results",
+    "P4/P5 require only fresh closure and commit; P2 runtime and P6 remain forbidden",
+    "Impact ceiling remains LOW, 3 impacted, 1 direct caller, 0 processes, 2 modules"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
