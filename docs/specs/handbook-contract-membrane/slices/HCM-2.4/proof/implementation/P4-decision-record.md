@@ -1,6 +1,6 @@
 # HCM-2.4 P4 Decision Record implementation proof
 
-Status: **TOKEN PREREQUISITE IMPLEMENTED AND VERIFIED — P4
+Status: **TOKEN PREREQUISITE REVIEW-CLEAN AND COMMITTED — P4
 negative-surface/path proof remains open**
 
 The historical bounded stop was independently reproduced by
@@ -16,10 +16,12 @@ cross-document finding and one P4 wording advisory. After parent remediation,
 different-fresh reviewer `/root/hcm_2_4_p4_p5_token_selector_closure` returned
 CLEAN over subject
 `sha256:5f2909db89e6725bf36ba47e1f0965e1bfe51437d297e3234e4d4ad77919b506`.
-The token prerequisite remains unaccepted until supplemental causal closure and
-commit. P4 remains incomplete independently because its no-root,
-generated-command, inferred-filename, Projection, and persistent-view proof is
-still open.
+Different-fresh supplemental causal reviewer
+`/root/hcm_2_4_p4_p5_token_impl_supplemental_1` returned CLEAN over
+`sha256:00c19024eeb94a2e93263489fd255f0ea47c3730bfc34da2e9cf6a054de1e5b9`;
+the token prerequisite is committed at `00dde01`. P4 remains incomplete
+independently because its no-root, generated-command, inferred-filename,
+Projection, and persistent-view proof is still open.
 
 ## Authorized resolution and current proof
 
@@ -211,6 +213,5 @@ not expanded after the mandatory stop.
 The parent selected the first historical option through the later exact
 operator authorization. The current GREEN proof above replaces only the prior
 unavailable-proof recommendation. It does not claim P4 acceptance, commit,
-P6 authority, or slice completion. Supplemental causal closure and commit
-remain pending for the token prerequisite, and the separate P4
-negative-surface/path gate remains outstanding.
+P6 authority, or slice completion. The token prerequisite is review-clean and
+committed; the separate P4 negative-surface/path gate remains outstanding.

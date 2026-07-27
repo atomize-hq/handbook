@@ -1,7 +1,6 @@
 # HCM-2.4 P5 Risk Record implementation proof
 
-Status: **TOKEN PREREQUISITE IMPLEMENTED AND VERIFIED — supplemental causal
-closure pending**
+Status: **TOKEN PREREQUISITE REVIEW-CLEAN AND COMMITTED**
 
 The historical bounded stop below was resolved only by the exact
 operator-approved selector in
@@ -10,8 +9,10 @@ review found one P2 documentation inconsistency and one P4 wording advisory;
 after parent remediation, different-fresh reviewer
 `/root/hcm_2_4_p4_p5_token_selector_closure` returned CLEAN over
 `sha256:5f2909db89e6725bf36ba47e1f0965e1bfe51437d297e3234e4d4ad77919b506`.
-The token prerequisite remains unaccepted until supplemental causal closure and
-commit.
+Different-fresh supplemental causal reviewer
+`/root/hcm_2_4_p4_p5_token_impl_supplemental_1` returned CLEAN over
+`sha256:00c19024eeb94a2e93263489fd255f0ea47c3730bfc34da2e9cf6a054de1e5b9`;
+the token prerequisite is committed at `00dde01`.
 
 ## Authorized resolution and current proof
 
@@ -234,6 +235,6 @@ proof at that baseline.
 ## Scope disposition
 
 The historical shared authority disposition remains provenance. This record
-does not claim P5 acceptance, commit, P6 authority, or slice completion until
-supplemental causal closure and commit. No released definition, schema, Cargo
-file, command, public API, or sibling packet changed.
+does not claim P6 authority or slice completion. The selected P5 token
+prerequisite is review-clean and committed. No released definition, schema,
+Cargo file, command, public API, or sibling packet changed.

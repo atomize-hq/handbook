@@ -1,0 +1,246 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T155905Z--HCM-2-4--p2-evidence-evaluator-planning-review",
+  "created_at_utc": "2026-07-27T15:59:05Z",
+  "source_handoff_ids": [
+    "20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required"
+  ],
+  "parent_orchestration_id": "20260727T135500Z--HCM-2-4--authority-prerequisites-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2-managed-operational-surface-planning-amendment",
+  "subject_fingerprint": "sha256:c31d775fe1381461a7740c08d1efb88baeb3c84ce7ffde525f7ccd04c60475b4",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p2-evidence-evaluator-planning-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/compiler/src/charter_product.rs",
+        "sha256": "1d05242a7895381380a8b0051f4add1166695f957ddc6dbe352aae4349b3b7b4"
+      },
+      {
+        "path": "crates/engine/definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml",
+        "sha256": "6bd1570e5279e68013130736ba88af23fc773cf41f3d771cfd3e13943706a483"
+      },
+      {
+        "path": "crates/engine/src/approver_registry_observation.rs",
+        "sha256": "8534bbeb56d573945c36042d1be9b25c20a09b318f4a72c006205f466995d6ad"
+      },
+      {
+        "path": "crates/engine/src/charter_approval_workflow.rs",
+        "sha256": "11127b89402730c80bc770d715525d97692b2c5c45384618be9bf3e86e963aea"
+      },
+      {
+        "path": "crates/engine/src/charter_authenticator.rs",
+        "sha256": "8cd42df2402c0e2af90ff6dc4056af0bc93be07ae6ee707a9ebb772693029afa"
+      },
+      {
+        "path": "crates/engine/src/lib.rs",
+        "sha256": "c14a73d723f5c85a67067f160c92a5e92e05db7804b80048be9274c79c2a9fb2"
+      },
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "25daa5f5dc304d26ff70cbe633e5bc79d20079ee11048f3123a3f33d38d8c1f2"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_decisions.rs",
+        "sha256": "9a4f73561196482a65800a3813b76755c19e34b2d06d4e560a7b72f65e0bf363"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_inspection.rs",
+        "sha256": "4c3f2756410b0652b636077833b919efc40ac83691280647f0404427bc3df79d"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_authenticator_security.rs",
+        "sha256": "1671f7d8e540b766f53c8bb26960b770276bb504f7b0034353a4951a8b317f3e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "2c2c508c57fab654c65c304087c2dccdccaaa8a8dbdbedab36681986ba30e2c3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "4929ac054f7ceffb10d959246bdc1d9ec6d0bc6e023f22fc5f61ba918f0315ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "2032ade1643a5456bad734d297093846565c2e9f36838cb6ac7d5beff23f119a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "7448815d0335167581b646eff2d16080991059bec1182e422f61cc4e4b3856e0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "7a97e56488e2398ac8e94771d358e5aa4c306e1ccb5c1b81285c2cfcdbe8b8e1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "sha256": "8404d588dacb4905884db598d9916e483396efb827535b76c03cac46b4f60430"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+        "sha256": "0238b720f7c02fa972616f6091bc1d05c8c94a08e332ea7636cb77aa2efaeb14"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "sha256": "085d3f6962c629ad751a6bbc08d591f7c6ebb81294d64676b833b405451ca7a2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sha256": "7942a08ca38c3713ce3565e8b7f48b263d6bfc6a9a9234fce86c3ed5eab34bd3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "5b772177a0409375b2cbc01f359b1285b503a4e8eb206d2aed4714b7b75c3af8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+        "sha256": "73abf88107d558f918a0ef505f23180194a24be221986df5ad17a1757bed444d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "5997565afb609ea5a21e538e389fc98265864028665facbafadff52053b6218c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "e00fe2806aeaa2252a8f7a678f89af9b93075fa2299708c9a04e0e657f7ff18f"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:c31d775fe1381461a7740c08d1efb88baeb3c84ce7ffde525f7ccd04c60475b4"
+  },
+  "active_resolution": {
+    "level": "architecture",
+    "scope_horizon": "p2_condition_evidence_evaluator_planning_only",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "human_approval_required_before_runtime",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "planning_amendment_discovery_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Shipped root-profile artifact instances",
+        "Managed-operational-surface condition policy"
+      ]
+    },
+    {
+      "path": "crates/engine/definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml",
+      "sections": [
+        "complete exact definition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "Decision boundary",
+        "Exact versioned records and schemas",
+        "Fingerprints",
+        "Producer-verification boundary",
+        "Freshness basis",
+        "Outcome and reason precedence",
+        "Evaluator owner, API, and transport",
+        "Exact future symbol and file selector",
+        "Fresh impact and hard ceilings",
+        "Exact proof selector",
+        "Feasibility evidence and remaining approval gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families",
+        "Reviewability and packet sizing calibration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "At commit 00dde0162fcb15576c83b6ed40ab7286488d0890 the shipped resolver still emits only unresolved/EvidenceContractUnavailable for the selected managed-operational-surface condition. The released condition definition has six outcomes, two accepted input classes, explicit freshness, one minimum independent current basis, Environment Context self-reference exclusion, and frozen precedence. Existing production compiler transport exposes only UnavailableNativeAuthenticatorPortV1; the non-production authenticator-security target passes 9/9. Fresh GitNexus impact is CRITICAL/220 for resolve_shipped_profile_decisions, CRITICAL/156 for ResolvedProfileDecisions::from_profile, CRITICAL/77 for artifact_decision, and LOW/0 with incomplete type edges for ProjectConditionDecisionReason. The planning subject changes documentation only.",
+  "allowed_scope": [
+    "Read-only replay of the 23-entry manifest and exact documentation diff.",
+    "Review the candidate P2 evidence/evaluator contract for semantic completeness, internal consistency, fail-closed behavior, security/producer verification, freshness determinism, owner/API/transport clarity, reviewability, testability, and exact scope.",
+    "Verify current P4/P5/control-pack status transcription against commit 00dde01 without reopening the reviewed implementation.",
+    "Independently identify findings before comparing P3/P4 candidates with selected-scope entries in 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No approval or implementation of P2 runtime, schema, definition, producer, native adapter, CLI/compiler surface, Environment Context authoring, or P6.",
+    "No changes to released condition/profile/artifact/authenticator definitions or fingerprints.",
+    "No P4 negative-surface implementation and no another-slice work.",
+    "Do not include unrelated .claude paths, AGENTS.md, or CLAUDE.md in the subject."
+  ],
+  "tasks": [
+    "Verify subject identity and the released condition definition/current resolver truth.",
+    "Check that the versioned record/schema, every closed field and fingerprint preimage, admitted V1 inputs, freshness basis, outcome/reason precedence, and closure fingerprint are exact and non-circular.",
+    "Check producer verification against live approver-registry/authenticator primitives, rollback/replay/authority drift, safe storage, and the explicit unavailable production native adapter.",
+    "Check evaluator ownership, fixed transport, API boundary, existing fallback preservation, future symbol selector, CRITICAL ceilings, and packet decomposition.",
+    "Check positive, negative, fail-closed, real-path, and unavailable-proof selectors are sufficient without implying runtime authority.",
+    "Check affected 04/06/SPEC/plan/todo/proof status is current, evidence-backed, and does not promote P4, P6, Phase 2, or HCM-3.x.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Planning/documentation only; no P2 runtime authorization",
+    "Released managed-operational-surface definition and fingerprint remain unchanged",
+    "Environment Context, profile flags, applicability_basis, artifact presence, ambient state, and model judgment never establish condition truth",
+    "V1 admitted input, producer assertion closure, freshness interval, outcome precedence, and evaluation closure are exact and fail closed",
+    "No production native adapter is claimed available",
+    "Human approval remains mandatory before every planned runtime/schema/definition edit",
+    "Future runtime stops on any wider impact, another existing production symbol, public from_profile signature/fallback change, or unapproved CLI/compiler adapter",
+    "P4's separate negative-surface gate, P6, Phase 2 exit, and HCM-3.x remain open/forbidden"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

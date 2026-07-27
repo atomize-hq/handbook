@@ -72,11 +72,12 @@ It required any later selector to:
 5. obtain fresh independent implementation review.
 
 The later operator-approved selector selected and implemented only that token
-prerequisite. The exact token RED/GREEN proofs are active; supplemental causal
-closure review and commit remain pending. P4's separate no-root,
-generated-command, inferred-filename, Projection, and persistent-view proof
-gate remains outstanding and outside that token selector. This historical
-record therefore does not establish P4 completion or P6 authority.
+prerequisite. The exact token RED/GREEN proofs are active, different-fresh
+supplemental causal closure returned CLEAN, and the reviewed packet is
+committed at `00dde01`. P4's separate no-root, generated-command,
+inferred-filename, Projection, and persistent-view proof gate remains
+outstanding and outside that token selector. This historical record therefore
+does not establish P4 completion or P6 authority.
 
 ## Evidence
 

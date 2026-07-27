@@ -1,0 +1,244 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T164201Z--HCM-2-4--p2-evidence-evaluator-planning-supplemental-causal-review",
+  "created_at_utc": "2026-07-27T16:42:01Z",
+  "source_handoff_ids": [
+    "20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required"
+  ],
+  "parent_orchestration_id": "20260727T135500Z--HCM-2-4--authority-prerequisites-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2-managed-operational-surface-planning-amendment",
+  "subject_fingerprint": "sha256:0dd4af5a9b077c73c3159566041e745e74db786e75a141e60556ae0f199cd88c",
+  "review_cycle": {
+    "kind": "supplemental_causal",
+    "cycle_id": "p2-evidence-evaluator-planning-supplemental-causal-1",
+    "trigger_run_ids": [
+      "p2-evidence-evaluator-planning-closure-1"
+    ],
+    "finding_refs": [
+      "p2-evidence-evaluator-planning-closure-1-P2-1",
+      "p2-evidence-evaluator-planning-closure-1-P2-2"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/compiler/src/charter_product.rs",
+        "sha256": "1d05242a7895381380a8b0051f4add1166695f957ddc6dbe352aae4349b3b7b4"
+      },
+      {
+        "path": "crates/engine/definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml",
+        "sha256": "6bd1570e5279e68013130736ba88af23fc773cf41f3d771cfd3e13943706a483"
+      },
+      {
+        "path": "crates/engine/src/approver_registry_observation.rs",
+        "sha256": "8534bbeb56d573945c36042d1be9b25c20a09b318f4a72c006205f466995d6ad"
+      },
+      {
+        "path": "crates/engine/src/charter_approval_workflow.rs",
+        "sha256": "11127b89402730c80bc770d715525d97692b2c5c45384618be9bf3e86e963aea"
+      },
+      {
+        "path": "crates/engine/src/charter_authenticator.rs",
+        "sha256": "8cd42df2402c0e2af90ff6dc4056af0bc93be07ae6ee707a9ebb772693029afa"
+      },
+      {
+        "path": "crates/engine/src/lib.rs",
+        "sha256": "c14a73d723f5c85a67067f160c92a5e92e05db7804b80048be9274c79c2a9fb2"
+      },
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "25daa5f5dc304d26ff70cbe633e5bc79d20079ee11048f3123a3f33d38d8c1f2"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_decisions.rs",
+        "sha256": "9a4f73561196482a65800a3813b76755c19e34b2d06d4e560a7b72f65e0bf363"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_inspection.rs",
+        "sha256": "4c3f2756410b0652b636077833b919efc40ac83691280647f0404427bc3df79d"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_authenticator_security.rs",
+        "sha256": "1671f7d8e540b766f53c8bb26960b770276bb504f7b0034353a4951a8b317f3e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "c6a69860486fc1ed57735c2b1c396797772ea3cbed3ec5109b42d82917c99193"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "4929ac054f7ceffb10d959246bdc1d9ec6d0bc6e023f22fc5f61ba918f0315ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "2032ade1643a5456bad734d297093846565c2e9f36838cb6ac7d5beff23f119a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "7448815d0335167581b646eff2d16080991059bec1182e422f61cc4e4b3856e0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "ddf1ff58eb47066bd0cf181d78838077cfa2d457a768e2e5c3d0478147f74132"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "sha256": "9378f0a728b7d9cd6b149c3bae610bea56a15f7c0dc10b0f6de8f50e12651d68"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+        "sha256": "0238b720f7c02fa972616f6091bc1d05c8c94a08e332ea7636cb77aa2efaeb14"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "sha256": "085d3f6962c629ad751a6bbc08d591f7c6ebb81294d64676b833b405451ca7a2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sha256": "7942a08ca38c3713ce3565e8b7f48b263d6bfc6a9a9234fce86c3ed5eab34bd3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "5b772177a0409375b2cbc01f359b1285b503a4e8eb206d2aed4714b7b75c3af8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+        "sha256": "ba8378bbc15b22521e7e15f6937d3602e8832e2466c1fb815d5daf42a4906d4c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "4700ab23ff0e5415b3c4091231df5e98e11ef1f39f5fd93c9b778b1e5df14830"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "672f0586ef2ba85a8dc8542ff727cd7e7243ef371f07e6ee08440a217bb8dda3"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:0dd4af5a9b077c73c3159566041e745e74db786e75a141e60556ae0f199cd88c"
+  },
+  "active_resolution": {
+    "level": "architecture",
+    "scope_horizon": "p2_condition_evidence_evaluator_planning_only",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "human_approval_required_before_runtime",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "planning_amendment_supplemental_causal_closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Managed-operational-surface condition policy"
+      ]
+    },
+    {
+      "path": "crates/engine/definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml",
+      "sections": [
+        "complete exact definition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "Evidence record and monotonic head",
+        "Producer API and transaction boundary",
+        "Fingerprinted evaluation closure",
+        "Evaluator owner, compatibility API, and transport",
+        "Evaluator definition",
+        "Reviewable runtime packets after human approval",
+        "Exact proof selectors",
+        "Discovery-review remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families",
+        "Reviewability and packet sizing calibration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "Closure run p2-evidence-evaluator-planning-closure-1 closed discovery findings P2-2 and P2-4 through P2-7, but returned two causal P2 findings. The parent added an eighth closed transaction schema, safely bounded enumeration of a unique maximal immutable transaction chain, exact binding from that tip to both mutable heads and the current record, simultaneous-head rollback proof, and ordered closed dependency observations binding exact retained bytes/errors for every dependency class. Production/test bytes remain unchanged at 00dde01. P2 runtime, P4's separate negative-surface proof, P6, Phase 2 exit, and HCM-3.x remain closed.",
+  "allowed_scope": [
+    "Read-only replay of the complete 23-entry post-supplemental manifest and comparison with closure subject 0b10551c.",
+    "Delta-focused closure of exactly p2-evidence-evaluator-planning-closure-1-P2-1 and P2-2.",
+    "Verify the unique maximal immutable transaction selector detects simultaneous mutable-head rollback while newer transactions remain.",
+    "Verify ordered dependency observations bind every attempted dependency's exact retained bytes or exact no-byte failure into the closure fingerprint.",
+    "Report a directly caused or unmasked P1/P2 inside those two remediations; no open-ended discovery."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No approval or implementation of P2 runtime/schema/definition/native adapter/Environment Context or P6.",
+    "No reopening the five discovery findings already closed by the preceding reviewer absent a demonstrated remediation-caused P1/P2.",
+    "No P4 negative-surface work and no unrelated .claude, AGENTS.md, or CLAUDE.md paths."
+  ],
+  "tasks": [
+    "Verify manifest and post-remediation aggregate identity.",
+    "Confirm P2-1 closure: exact immutable transaction schema/ref/preimage, strict bounded directory enumeration, unique maximal chain, head/record/use-head equality, journal receipt ordering/recovery, and simultaneous-head rollback/fork/gap/cycle proofs.",
+    "Confirm P2-2 closure: exact dependency-kind enum/order/row fields/nullability/error grammar and binding for head, transactions, records, sources, definitions, identity, registry, credential, use head, challenge, response, assertion, and transition.",
+    "Check coupled 04/SPEC/plan/todo/P7 status and eight-schema/P2S/P2P/P2R selectors agree without runtime promotion.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Planning/documentation only; no runtime authorization",
+    "Unique maximal immutable transaction tip is the live-store rollback selector and both mutable heads must match it",
+    "Every attempted dependency observation binds exact retained raw bytes or exact no-byte failure",
+    "Full external snapshot rollback with deletion of all newer immutable transactions is explicitly outside claimed local proof",
+    "Released definitions/fingerprints and production/test bytes remain unchanged",
+    "P2A still requires non-production feasibility and a second human production-adapter decision",
+    "P4 negative-surface proof and P6 remain open/forbidden"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

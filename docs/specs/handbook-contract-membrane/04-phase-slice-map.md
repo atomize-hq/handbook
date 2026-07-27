@@ -396,8 +396,9 @@ does not authorize HCM-2.4 or a later phase.
 - remove superseded Markdown-authority helpers.
 
 Current partial implementation boundary at commits
-`5cf41d2f64d68cb7f78abb5eccab9acf307089d3` and
-`5a2ccf6939be0e549e7e7355a245c7511c271eef`:
+`5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
+`5a2ccf6939be0e549e7e7355a245c7511c271eef`, and
+`00dde0162fcb15576c83b6ed40ab7286488d0890`:
 
 - P0, P1A, P1B, and P1C are review-clean. Shipped-root `1.2` is selected with
   exactly three root instances, released Charter authority remains on its
@@ -408,10 +409,18 @@ Current partial implementation boundary at commits
   capture, provenance, feature identity, and handoff authority to canonical
   Work Specification YAML while Feature Spec Markdown is a deterministic
   human-review view.
-- P2 is blocked on a separately approved condition-evidence/evaluator
-  contract. P4 and P5 are blocked on a separately approved generic
-  coverage-token derivation selector. Their retained partial fixtures and
-  negative proof do not establish positive mutation/promotion.
+- P2 runtime is blocked. The condition-evidence/evaluator amendment includes
+  the exact six-row transaction-store failure matrix with checked 4096-entry
+  and 131072-byte canonical-envelope ceilings and one intentionally shared
+  fixed over-limit closure under one
+  human-authorized fresh review gate: a valid P1/P2 stops without repair, while
+  CLEAN permits only presentation for distinct P2S and non-production P2A
+  human approval. Production adapter authority or a proven completed producer
+  dependency remains a later explicit gate before P2P.
+- The shared P4/P5 coverage-token prerequisite is review-clean and committed.
+  Exact Decision and Risk generic mutation/promotion paths are GREEN. P4's
+  separate no-root/generated-command/inferred-filename/Projection/
+  persistent-view proof remains open; the token selector did not authorize it.
 - P6 has not begun, both temporary flow bridges remain active, and the Phase 2
   exit gate below is not closed. This partial boundary authorizes neither
   HCM-3.x nor another slice.

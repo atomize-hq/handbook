@@ -1,7 +1,7 @@
 # P4/P5 coverage-token derivation selector
 
-Status: operator-approved selector; selector review CLEAN and RED/GREEN
-implementation complete; supplemental causal closure pending.
+Status: operator-approved selector; implementation review CLEAN after
+supplemental causal closure; committed at `00dde01`.
 
 Date: 2026-07-27
 

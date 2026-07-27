@@ -1,0 +1,262 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T162710Z--HCM-2-4--p2-evidence-evaluator-planning-closure-review",
+  "created_at_utc": "2026-07-27T16:27:10Z",
+  "source_handoff_ids": [
+    "20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required"
+  ],
+  "parent_orchestration_id": "20260727T135500Z--HCM-2-4--authority-prerequisites-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2-managed-operational-surface-planning-amendment",
+  "subject_fingerprint": "sha256:0b10551c4d2f0b33778d2ba9de9b313db6f64bd39862820ce43e83fbf0236474",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p2-evidence-evaluator-planning-closure-1",
+    "trigger_run_ids": [
+      "p2-evidence-evaluator-planning-discovery-1"
+    ],
+    "finding_refs": [
+      "p2-evidence-evaluator-planning-discovery-1-P2-1",
+      "p2-evidence-evaluator-planning-discovery-1-P2-2",
+      "p2-evidence-evaluator-planning-discovery-1-P2-3",
+      "p2-evidence-evaluator-planning-discovery-1-P2-4",
+      "p2-evidence-evaluator-planning-discovery-1-P2-5",
+      "p2-evidence-evaluator-planning-discovery-1-P2-6",
+      "p2-evidence-evaluator-planning-discovery-1-P2-7"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/compiler/src/charter_product.rs",
+        "sha256": "1d05242a7895381380a8b0051f4add1166695f957ddc6dbe352aae4349b3b7b4"
+      },
+      {
+        "path": "crates/engine/definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml",
+        "sha256": "6bd1570e5279e68013130736ba88af23fc773cf41f3d771cfd3e13943706a483"
+      },
+      {
+        "path": "crates/engine/src/approver_registry_observation.rs",
+        "sha256": "8534bbeb56d573945c36042d1be9b25c20a09b318f4a72c006205f466995d6ad"
+      },
+      {
+        "path": "crates/engine/src/charter_approval_workflow.rs",
+        "sha256": "11127b89402730c80bc770d715525d97692b2c5c45384618be9bf3e86e963aea"
+      },
+      {
+        "path": "crates/engine/src/charter_authenticator.rs",
+        "sha256": "8cd42df2402c0e2af90ff6dc4056af0bc93be07ae6ee707a9ebb772693029afa"
+      },
+      {
+        "path": "crates/engine/src/lib.rs",
+        "sha256": "c14a73d723f5c85a67067f160c92a5e92e05db7804b80048be9274c79c2a9fb2"
+      },
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "25daa5f5dc304d26ff70cbe633e5bc79d20079ee11048f3123a3f33d38d8c1f2"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_decisions.rs",
+        "sha256": "9a4f73561196482a65800a3813b76755c19e34b2d06d4e560a7b72f65e0bf363"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_inspection.rs",
+        "sha256": "4c3f2756410b0652b636077833b919efc40ac83691280647f0404427bc3df79d"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_authenticator_security.rs",
+        "sha256": "1671f7d8e540b766f53c8bb26960b770276bb504f7b0034353a4951a8b317f3e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "829be18f87b43c583ae96c0cb220a8ea9fbcb10c0862398b6e4f413bc8e816f9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "4929ac054f7ceffb10d959246bdc1d9ec6d0bc6e023f22fc5f61ba918f0315ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "2032ade1643a5456bad734d297093846565c2e9f36838cb6ac7d5beff23f119a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "7448815d0335167581b646eff2d16080991059bec1182e422f61cc4e4b3856e0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "0d3b493e9349cccef2a3a888f829e3aad75ce9f90ff3c5d36a4ba3f8e9912135"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "sha256": "d62ebbe59fb288fab4302599c879bcd5212b05762f925d7b84885c833924476b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-coverage-token-derivation-selector.md",
+        "sha256": "0238b720f7c02fa972616f6091bc1d05c8c94a08e332ea7636cb77aa2efaeb14"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "sha256": "085d3f6962c629ad751a6bbc08d591f7c6ebb81294d64676b833b405451ca7a2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sha256": "7942a08ca38c3713ce3565e8b7f48b263d6bfc6a9a9234fce86c3ed5eab34bd3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "5b772177a0409375b2cbc01f359b1285b503a4e8eb206d2aed4714b7b75c3af8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-partial-control-pack-closeout.md",
+        "sha256": "dba04269fca0e32edb3997416b87925f2e972abb3f4beddeb112e7df4c0c0b21"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "85f70d8a2a52c3b4784d09798f8a292a274c892f6effa81fbb034e29e3052b18"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "a55fcaae1c1acaf4c1aed84934e79f1fda4f6c5283f4399184eb69d1d904b2ed"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:0b10551c4d2f0b33778d2ba9de9b313db6f64bd39862820ce43e83fbf0236474"
+  },
+  "active_resolution": {
+    "level": "architecture",
+    "scope_horizon": "p2_condition_evidence_evaluator_planning_only",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "human_approval_required_before_runtime",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "planning_amendment_delta_closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Shipped root-profile artifact instances",
+        "Managed-operational-surface condition policy"
+      ]
+    },
+    {
+      "path": "crates/engine/definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml",
+      "sections": [
+        "complete exact definition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "Decision boundary",
+        "Closed schema set and common scalar grammar",
+        "Admitted source record",
+        "Evidence record and monotonic head",
+        "Challenge, assertion, and producer verification",
+        "Producer API and transaction boundary",
+        "Freshness basis",
+        "Total outcome and reason precedence",
+        "Fingerprinted evaluation closure",
+        "Evaluator owner, compatibility API, and transport",
+        "Reviewable runtime packets after human approval",
+        "Future selectors and impact ceilings",
+        "Exact proof selectors",
+        "Feasibility evidence and human gate",
+        "Discovery-review remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families",
+        "Reviewability and packet sizing calibration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery run p2-evidence-evaluator-planning-discovery-1 returned seven P2 findings: rollback resistance, constructible source fingerprints, closed supporting schemas/closure binding, per-input freshness, reachable precedence, API compatibility, and reviewable decomposition. The parent remediated only the documentation/control-pack subject. It now binds an immutable evidence chain and mutable evidence head to the credential's current authenticator-use head; derives retained source records/fingerprints inside the producer; closes all new records, preimages, observation/nullability rules, and freshness rows; removes the unreachable V1 authoritative-fact branch; selects an evaluator-owned result plus exact compatibility constructor/reason variants; and splits P2S/P2A/P2P/P2R/P2I/P2V. Production remains unchanged at 00dde01, only UnavailableNativeAuthenticatorPortV1 is available in the production compiler path, P4's separate negative-surface gate remains open, and P6 remains forbidden.",
+  "allowed_scope": [
+    "Read-only replay of the complete 23-entry post-remediation manifest and comparison with discovery subject c31d775f.",
+    "Delta-focused closure of exactly the seven listed P2 findings across the amendment and coupled 04/SPEC/plan/todo/P7 truth.",
+    "Verify affected contracts, producer/evaluator boundaries, compatibility posture, proof selectors, subject identity, and absence of remediation-caused regression.",
+    "Independently report a directly caused or unmasked P1/P2 inside the remediation boundary before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No open-ended second discovery pass and no issue outside the seven remediations unless it demonstrably has a P1/P2 effect on the selected integrated planning outcome.",
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No approval or implementation of P2 runtime, schema, definition, producer, native adapter, CLI/compiler surface, Environment Context authoring, P4 negative-surface proof, or P6.",
+    "No changes to released condition/profile/artifact/authenticator definitions or fingerprints.",
+    "Do not include unrelated .claude paths, AGENTS.md, or CLAUDE.md in the subject."
+  ],
+  "tasks": [
+    "Verify the complete post-remediation subject identity and exact delta from discovery fingerprint c31d775f.",
+    "Confirm p2-evidence-evaluator-planning-discovery-1-P2-1 is closed by the current authenticator-use-head binding, immutable sequence chain, atomic two-head recovery, and rollback/fork/replay proofs.",
+    "Confirm P2-2 is closed by the exact retained source schema/preimage/ref and producer API that cannot accept supplied fingerprints.",
+    "Confirm P2-3 is closed by exact challenge/assertion/use-transition/verification fields and complete raw-observation closure nullability/preimages.",
+    "Confirm P2-4 is closed by per-source observed/verified/valid freshness rows, mixed-staleness semantics, and rollback/skew proofs.",
+    "Confirm P2-5 is closed by removing the unreachable authoritative-fact adapter branch while preserving all six released outcomes.",
+    "Confirm P2-6 is closed by the evaluator-owned return, exact crate-private constructor, exact reason variants, explicit enum compatibility gate, and preserved direct fallback.",
+    "Confirm P2-7 is closed by reconciled P2S/P2A/P2P/P2R/P2I/P2V selectors, dependencies, tests, impact ceilings, and review walls.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Planning/documentation only; no P2 runtime authorization",
+    "Released managed-operational-surface definition and every existing fingerprint remain unchanged",
+    "Environment Context, profile flags, applicability_basis, artifact presence, ambient state, and model judgment never establish condition truth",
+    "Producer-derived source authority, current-head rollback resistance, per-source freshness, total precedence, and raw-observation closure remain exact and fail closed",
+    "No production native adapter is claimed available; P2A returns for a second human decision",
+    "Public from_profile signature/fallback and existing serialized reason remain unchanged; public reason-enum additions require explicit human compatibility approval",
+    "Future runtime stops on wider impact, another existing production symbol, or unapproved dependency/Cargo/unsafe/process/platform expansion",
+    "P4's separate negative-surface gate, P6, Phase 2 exit, and HCM-3.x remain open/forbidden"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

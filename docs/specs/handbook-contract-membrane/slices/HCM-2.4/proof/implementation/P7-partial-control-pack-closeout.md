@@ -40,7 +40,7 @@ unrelated/pre-existing paths remained changed.
   packet wall and complete workspace wall, and ended with a different-fresh
   CLEAN closure review.
 
-## Blocked and unearned truth
+## Historical blocked and unearned truth at that closeout
 
 - P2 is blocked on a separately approved, fingerprinted condition-evidence/
   evaluator contract and exact implementation selector. `indeterminate`
@@ -53,6 +53,17 @@ unrelated/pre-existing paths remained changed.
   gates remain live.
 - The Phase 2 exit gate, program-wide `PG-YAML-02`, HCM-2.4 completion, and all
   HCM-3.x work remain unearned.
+
+The later operator-approved P4/P5 selector superseded only that historical
+token blocker. Commit `00dde0162fcb15576c83b6ed40ab7286488d0890` now proves
+the shared token prerequisite and exact positive Decision/Risk mutation paths;
+P4's separate negative-surface/path gate remains open. P2 now has a remediated
+exact planning amendment with a six-row matrix, count-only entry-4097
+termination, one intentionally shared bounded over-limit closure, and one
+fresh review gate, but remains runtime-blocked. CLEAN permits only distinct
+human approval of P2S/P2A feasibility; a later explicit production adapter or
+completed-producer decision is still required. P6, Phase 2 exit, and HCM-3.x
+remain unearned.
 
 ## Control-pack delta
 
@@ -104,9 +115,9 @@ selected proof wall. The parent will register this exact advisory as
 `HCM-RF-0001` in the mechanical handoff/ledger closeout commit; it is not part
 of the material control-pack review subject.
 
-No unresolved P1/P2 intersects the reviewed P0/P1/P3 subjects. The authority
-prerequisites blocking P2 and P4/P5 are top-level resume conditions, not
-waived review findings.
+No unresolved P1/P2 intersected the reviewed P0/P1/P3 subjects at that
+closeout. The then-current authority prerequisites blocking P2 and P4/P5 were
+top-level resume conditions, not waived review findings.
 
 ## Fresh aggregate review
 

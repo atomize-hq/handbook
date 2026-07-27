@@ -1,10 +1,15 @@
 # HCM-2.4 implementation checklist
 
-Status: partial implementation. P0/P1A/P1B/P1C and P3/P3B are review-clean;
-P2 runtime remains authority-blocked. The P4/P5 token prerequisite completed
-the CLEAN selector review and RED/GREEN implementation; supplemental causal
-closure and commit remain pending. P4's separate negative-surface/path proof
-remains open. P6 and Phase 2 exit remain incomplete.
+Status: partial implementation. P0/P1A/P1B/P1C and P3/P3B are review-clean.
+The P2 planning amendment freezes the six-row transaction-store matrix,
+checked 4096-entry and 131072-byte canonical-envelope ceilings, and one
+intentionally shared fixed over-limit closure under one fresh independent
+review gate; CLEAN permits only
+distinct human P2S/P2A approval and a valid P1/P2 stops without remediation.
+Runtime remains authority-blocked.
+The P4/P5 token prerequisite is review-clean and committed at `00dde01`; P4's
+separate negative-surface/path proof remains open. P6 and Phase 2 exit remain
+incomplete.
 
 ## Entry
 
@@ -152,10 +157,63 @@ remains open. P6 and Phase 2 exit remain incomplete.
 
 ## P2 — Environment Context
 
+- [x] Draft the exact planning-only evidence/evaluator amendment:
+      `decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md`.
+- [x] Rebuild GitNexus at `00dde01`, record the three CRITICAL resolver
+      ceilings and the incomplete-edge LOW reason-enum result, and run the
+      9/9 non-production authenticator-security feasibility probe.
+- [x] Obtain fresh discovery review of the planning amendment; reviewer
+      `/root/hcm_2_4_p2_planning_review` returned seven P2/Required findings
+      covering rollback, source fingerprints, closed schemas, freshness,
+      outcome reachability, API compatibility, and packet decomposition.
+- [x] Remediate all seven findings in the planning/control-pack subject by
+      adding the monotonic evidence/authenticator head boundary, retained
+      source schema and preimage, total closed records/closure, per-source
+      freshness, reachable precedence, exact compatibility API, and separate
+      P2S/P2A/P2P/P2R/P2I/P2V packets.
+- [x] Obtain different-fresh closure review; reviewer
+      `/root/hcm_2_4_p2_planning_closure` closed five findings and returned two
+      causal P2/Required gaps for simultaneous two-head rollback and incomplete
+      dependency-byte observation binding.
+- [x] Remediate both causal findings with a safely enumerated unique maximal
+      immutable transaction chain and ordered closed observation rows for every
+      attempted dependency class.
+- [x] Obtain supplemental causal review 1; reviewer
+      `/root/hcm_2_4_p2_planning_supplemental_1` closed rollback resistance and
+      returned one causal P2 for transaction-directory failures that precede a
+      sequence-bearing observation row.
+- [x] Remediate that finding with an exact first
+      `evidence_transaction_store` row, canonical raw-filename inventory
+      fingerprint, closed error codes, and six store-level proof vectors.
+- [x] Record supplemental causal review 2's final P2: the six store failures
+      lacked a normative one-to-one observation/nullability/error/fixture/
+      closure matrix.
+- [x] Repair only that gap with exact absent, unsafe, unreadable,
+      invalid-entry, alias, and over-limit rows plus deterministic Unix/Windows
+      first-row fixtures.
+- [x] Freeze the one-review rule: start a new matrix-only discovery lineage,
+      not a third supplemental cycle; any valid P1/P2 stops without another
+      repair, while CLEAN permits the reviewed planning commit and human
+      approval request only.
+- [x] Record the matrix-only discovery review's P2: a complete over-limit
+      directory envelope is unbounded against the frozen 131072-byte ceiling.
+- [x] Record the later unadmitted discovery signal: exact transaction names
+      first exceed 131072 bytes at Unix entry 1102 and Windows entry 558, before
+      the count ceiling; the signal did not enter a review gate.
+- [x] Repair only the newly authorized gap with checked 4096-entry and
+      131072-byte projected canonical-envelope ceilings, exact
+      `directory_limit_exceeded` nullability/error/first-row/closure semantics,
+      one fixed closure for all count/byte/arithmetic over-limit stores, and
+      count 4096/4097, Unix 1101/1102, Windows 557/558, exact
+      131072/131073-byte, long-name, and arbitrary-suffix vectors.
+- [ ] Obtain exactly one fresh complete-subject review; any valid P1/P2 stops
+      without remediation, while CLEAN permits only the reviewed planning
+      commit, separate mechanical closeout, and distinct P2S/P2A approval.
 - [ ] BLOCKED: obtain a separately approved, fingerprinted
       managed-operational-surface condition evidence/evaluator contract and an
-      exact reviewed implementation selector, or prove that dependency
-      complete. Do not use structured Environment Context input,
+      exact reviewed implementation selector, plus either an approved bounded
+      producer/native-adapter packet or a proven completed producer dependency.
+      Do not use structured Environment Context input,
       `applicability_basis`, profile opt-in, artifact presence, or
       `indeterminate` coercion as condition evidence.
 - [ ] Establish a focused RED proving Markdown is currently authoritative.
@@ -308,8 +366,9 @@ remains open. P6 and Phase 2 exit remain incomplete.
 - [x] Capture RED, make the one-expression `intake_commit_plan` edit, and prove
       Decision intake/candidate/promotion/read/validate plus stale-basis and all
       unrelated negative cases GREEN.
-- [ ] Obtain fresh independent implementation review and commit the reviewed
-      P4/P5 packet.
+- [x] Obtain fresh independent implementation review, remediate both closure
+      findings, obtain different-fresh supplemental causal review CLEAN, and
+      commit the reviewed P4/P5 token packet at `00dde01`.
 - [ ] Prove no root default, generated command, inferred filename, Projection,
        or persistent view.
       This broader P4 gate is outside the approved token selector and remains
@@ -340,9 +399,9 @@ remains open. P6 and Phase 2 exit remain incomplete.
 
 ## P6 — Aggregate cleanup
 
-- [ ] BLOCKED: P2 lacks runtime authority; the P4/P5 token prerequisite
-      requires supplemental closure and commit, and P4's separate
-      negative-surface/path proof remains open.
+- [ ] BLOCKED: P2 lacks runtime authority and P4's separate
+      negative-surface/path proof remains open. The P4/P5 token prerequisite
+      is review-clean and committed.
 - [ ] Replace fixed/bridge flow input collection with admitted selected
       descriptors and retained canonical bytes.
 - [ ] Preserve Charter authority, Project Context behavior, registry brief,

@@ -1,11 +1,14 @@
 # HCM-2.4 implementation plan
 
 Status: partially executed under separate user selections. P0/P1A/P1B/P1C and
-P3/P3B are review-clean and committed. P2 runtime remains authority-blocked.
-The P4/P5 token prerequisite completed the CLEAN selector review and RED/GREEN
-implementation; supplemental causal closure and commit remain pending. P4's
-separate negative-surface/path proof remains open. P6 and the Phase 2 exit
-remain closed.
+P3/P3B are review-clean and committed. The P2 planning amendment freezes the
+six-row transaction-store matrix, checked 4096-entry and 131072-byte canonical-
+envelope ceilings, and one intentionally shared fixed over-limit closure under
+one fresh independent
+review gate; CLEAN permits only distinct human P2S/P2A approval and a valid
+P1/P2 stops without remediation. Runtime remains authority-blocked. The P4/P5 token prerequisite
+is review-clean and committed at `00dde01`. P4's separate negative-surface/path
+proof remains open. P6 and the Phase 2 exit remain closed.
 
 ## Dependency graph
 
@@ -24,16 +27,17 @@ P2–P5 may be prepared independently after P1C but must land serially when shar
 fixture, proof, or generated inventory files overlap. P6 cannot start until all
 four are committed, clean, and independently green.
 
-Current boundary: commits `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`
-and `5a2ccf6939be0e549e7e7355a245c7511c271eef` contain only the completed
-reviewed packets. P2 requires approved condition-evaluator runtime authority.
+Current boundary: commits `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
+`5a2ccf6939be0e549e7e7355a245c7511c271eef`, and
+`00dde0162fcb15576c83b6ed40ab7286488d0890` contain completed reviewed
+packets. P2 requires approved condition-evaluator and producer runtime
+authority.
 P4/P5 have the exact operator-approved derivation selector frozen in
 `decision/20260727-p4-p5-coverage-token-derivation-selector.md`; selector
-review and RED/GREEN are complete, but supplemental causal closure and commit
-must close the shared token prerequisite. P4 also retains an open
-negative-surface/path proof outside that selector. Those incomplete
-prerequisites keep P6 and full P7 ineligible. The current P7 activity is limited
-to reviewed partial control-pack records and parent-owned true-stop handoffs.
+review, RED/GREEN, supplemental causal closure, and commit are complete. P4
+retains an open negative-surface/path proof outside that selector. P2 and that
+P4 gate keep P6 and full P7 ineligible. The current P7 activity is limited to
+reviewed partial control-pack records and parent-owned true-stop handoffs.
 
 ## Standing rules
 
@@ -332,27 +336,79 @@ GREEN:
 ## P2 — Environment Context vertical
 
 Entry: P1C accepted; Environment Context impact UIDs resolved; runtime entry is
-blocked on the exact condition-evidence/evaluator authority described below.
+blocked on independent review and human approval of the exact
+condition-evidence/evaluator authority described below.
 
 Authority gate:
 
 - HCM-0.6 deliberately leaves the condition record schema, exact input
   bindings, admitted evidence types, precedence, freshness thresholds, and
-  evaluator implementation undecided;
+  evaluator implementation outside its released contract;
+- the remediated planning amendment
+  `decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md`
+  freezes eight exact schemas, retained admitted sources, immutable record/
+  transaction chains, the unique maximal transaction and two-head boundary,
+  producer verification/transaction, per-source freshness, total precedence,
+  ordered dependency-observation closure fingerprints, the six-row exact store
+  observation/nullability/error/fixture matrix with checked 4096-entry and
+  131072-byte canonical-envelope ceilings, no offending-entry retention, and
+  no over-limit envelope or fingerprint, owner/API/transport,
+  future symbols/tests, and impact ceilings without runtime authority;
 - the live shipped resolver consequently returns only `unresolved` /
   `EvidenceContractUnavailable` and `indeterminate` for the selected
   Environment Context descriptor;
-- P2 does not select `crates/engine/src/profile_decision.rs`, a new evaluator,
-  or any evidence-contract surface; and
+- this run does not select `crates/engine/src/profile_decision.rs`, a new
+  evaluator/producer, a schema/definition, or any evidence-contract runtime
+  surface; and
 - structured Environment Context input, `applicability_basis`, profile opt-in,
   or mere artifact presence cannot authorize itself or be coerced to
   condition `true`/`false`.
 
-Do not begin the RED-to-GREEN runtime loop until a separately approved,
-fingerprinted condition-evidence/evaluator contract either enters HCM-2.4 with
-an exact reviewed selector or is completed as a proven dependency. This gate
-does not block the semantically independent P3–P5 packets, but P6 still waits
-for P2–P5 GREEN replacement proof.
+Do not begin the RED-to-GREEN runtime loop. The dual-ceiling over-limit repair
+receives exactly one fresh complete-subject review; a valid P1/P2 stops without
+remediation,
+while CLEAN permits only a distinct human decision on P2S plus the
+non-production P2A native-feasibility selector. P2A must return observed
+behavior for a second human decision before an exact production adapter or
+completed producer dependency can authorize P2P. The 9/9
+authenticator-security probe proves codec/verification feasibility but not a
+production native port or the new producer transaction. This gate does not
+block semantically independent P3–P5 packets, but P6 still waits for P2–P5
+GREEN replacement proof.
+
+Planned decomposition after approval:
+
+1. P2S adds only the eight closed schemas and evaluator definition, with
+   closed-field/preimage/nullability vectors and no Rust production edit.
+2. P2A runs a non-production native-platform feasibility probe. It stops for a
+   second human decision before any production adapter, dependency, Cargo,
+   unsafe-policy, process, or platform-module edit.
+3. P2P adds only the new evidence producer module/service and proves its
+   source/challenge/assertion/use-chain/record/two-head/immutable-transaction
+   transaction, unavailable-port zero-write, recovery, simultaneous-head
+   rollback, fork, replay, and cross-family refusal.
+4. P2R adds only the evaluator in that module and proves bounded maximal-
+   transaction/fixed-head transport, ordered dependency-observation closure
+   replay, per-source freshness, and every reachable precedence branch.
+5. P2I edits only the exact `profile_decision.rs` enum/constructor/resolver/
+   private-helper/consumer selectors, preserves the direct public fallback,
+   and proves the explicit public-enum compatibility decision plus the
+   CRITICAL flow wall.
+6. Only after P2S/P2A/P2P/P2R/P2I are independently review-clean may P2V run
+   the existing Environment Context author/consumer vertical.
+
+Every packet has a separate immutable subject, RED/GREEN wall, independent
+review, and reviewed commit. Creating a child packet does not complete P2.
+
+Fresh exact impact ceilings at commit
+`00dde0162fcb15576c83b6ed40ab7286488d0890` are CRITICAL/220 with 75 direct,
+8 processes, and 13 modules for `resolve_shipped_profile_decisions`;
+CRITICAL/156 with 1 direct, 7 processes, and 10 modules for
+`ResolvedProfileDecisions::from_profile`; CRITICAL/77 with 1 direct,
+6 processes, and 10 modules for `artifact_decision`; and LOW/0 for
+`ProjectConditionDecisionReason` with an incomplete type-edge caveat. Any wider
+fresh result, another existing production symbol, public `from_profile`
+signature/fallback change, or unapproved CLI/compiler adapter stops.
 
 RED:
 
@@ -576,7 +632,8 @@ blocker refusal with the exact committed Risk token-list proof and only
 activated. RED was 11 passed/2 exact Store failures; GREEN is 13/13 with zero
 ignores. Separate fixture and acceptance evidence remain independent; no
 generic token grammar, definition, fingerprint, or unrelated negative changed.
-Supplemental causal closure and commit remain pending.
+Different-fresh supplemental causal review returned CLEAN and the shared token
+prerequisite is committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`.
 
 ## P6 — Aggregate flow and fixed-selector deletion
 
@@ -584,10 +641,9 @@ Entry: P1A–P1C and P2–P5 individually committed and green; no bridge deletio
 has occurred.
 
 Current entry result: not satisfied. P2 lacks approved runtime
-condition-evaluator authority. The P4/P5 token prerequisite completed its
-approved selector and RED/GREEN implementation but still requires supplemental
-closure and commit; P4's separate negative-surface/path proof also remains open.
-Do not begin P6.
+condition-evaluator/producer authority. The P4/P5 token prerequisite is
+review-clean and committed, but P4's separate negative-surface/path proof
+remains open. Do not begin P6.
 
 RED:
 
