@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.renderer-definition",
+  "schema_version": "1.0",
+  "renderer_id": "handbook.renderer.risk-record-review-markdown",
+  "renderer_version": "1.0.0",
+  "input_schema_ref": "handbook.schemas.artifacts.risk-record@1.0.0",
+  "output_media_type": "text/markdown",
+  "implementation_id": "risk-record-review-markdown-v1",
+  "determinism_profile": "closed-risk-record-review-markdown-v1",
+  "required_capability_contract_ref": null,
+  "resolution_input": null,
+  "extensions": {},
+  "renderer_fingerprint": "sha256:5cd8a531cfe8d83c078362ed2336d36eb87ee9b6715a364f19211026c6ee274c"
+}

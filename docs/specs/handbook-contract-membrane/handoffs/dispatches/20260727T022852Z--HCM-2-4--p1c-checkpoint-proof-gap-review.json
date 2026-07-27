@@ -1,0 +1,160 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T022852Z--HCM-2-4--p1c-checkpoint-proof-gap-review",
+  "created_at_utc": "2026-07-27T02:28:52Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "debugging-and-error-recovery"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1C-checkpoint-proof-gap",
+  "subject_fingerprint": "sha256:e598cf6fc104d238b99584afec30a2ab436fa62b7409297fc6f77f8a4c032cc5",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p1c-checkpoint-proof-gap-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "25daa5f5dc304d26ff70cbe633e5bc79d20079ee11048f3123a3f33d38d8c1f2"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_definition_support.rs",
+        "sha256": "1542362d37110a590666793a94ac065b5594dd3ca75d7c9936934be922e3f1a9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "9fc9813cf2897fadb7ab3b570baf6b7d0123810b5e5003b636b26466f35789ca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "17b6dbb0b68a967f82096acfa393cfa377dde7f88fdd56fcf88fc7c0969489d3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T235106Z--HCM-2-4--p1c-shipped-root-adoption-closure-review.json",
+        "sha256": "6470324a001f7ddef19a467afc6b91d9837d1c162b76075448e4351c5a625ee3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1c-project-context-kind-compatibility.md",
+        "sha256": "dd4e860cbf8d4f36e82032b013784776ec062cb476c677a6c235ffffc2e58d82"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1A-definition-support.md",
+        "sha256": "1615128b5fc3a843359350e4bf1df718908796579101a8a11a4aed8317864cc4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1C-shipped-root-adoption.md",
+        "sha256": "f9d14ac7da632d7e03d7b04261803e8c7476801fbd8d5d0f8f35626c4900303a"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:e598cf6fc104d238b99584afec30a2ab436fa62b7409297fc6f77f8a4c032cc5"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "checkpoint_proof_gap",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "incremental_commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1C-shipped-root-adoption.md",
+      "sections": [
+        "Entry and authority",
+        "TDD and implementation",
+        "Packet proof wall",
+        "Boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1c-project-context-kind-compatibility.md",
+      "sections": [
+        "Decision",
+        "Exact selector",
+        "Non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The P1C authority and reviewed production path intentionally select shipped-root 1.2 as the default. During the incremental checkpoint wall, one P1A definition-support test failed because its assertion and name still claimed the default remained 1.1. The parent changed only that test name and exact expected profile reference to 1.2. The renamed exact test passes; the complete five-target HCM-2.4 engine packet passes 44 tests with the two already-authorized positive mutation proofs ignored; formatting and cached diff checks pass.",
+  "allowed_scope": [
+    "Read-only replay of all eight manifest entries and the exact two-line semantic test correction.",
+    "Verify live P1C authority requires shipped-root 1.2 as the default.",
+    "Verify the pre-correction failure was a stale proof assertion rather than a production regression.",
+    "Verify the renamed test and exact assertion now prove the intended selected-default contract without weakening any negative.",
+    "Replay the exact test and five-target HCM-2.4 engine wall as needed.",
+    "Identify findings independently before comparing P3/P4 advisory candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No production, schema, profile, definition, public API, dependency, Cargo/version, unsafe-policy, P3B, P2, P4, P5, P6, or sibling-slice change.",
+    "Do not reopen the prior P1C production discovery cycle; review only this newly observed checkpoint proof gap."
+  ],
+  "tasks": [
+    "Verify subject identity and inspect the exact test-only delta.",
+    "Trace shipped_profile_request through resolve_shipped_profile_decisions and compare it with the P1C authority/proof.",
+    "Validate that changing the assertion from 1.1 to 1.2 and naming the test accordingly is the smallest correct repair.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "P1C selects shipped-root 1.2 as the default",
+    "Released Charter profile 1.1 record identity remains unchanged",
+    "The checkpoint repair is test-only and changes no runtime behavior",
+    "Exact test and HCM-2.4 engine packet wall remain green",
+    "No P3B implementation is present"
+  ],
+  "stop_conditions": [
+    "Return blocked if subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

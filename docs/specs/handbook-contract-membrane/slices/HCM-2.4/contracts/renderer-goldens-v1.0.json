@@ -1,0 +1,140 @@
+{
+  "schema_id": "hcm-2.4-renderer-goldens",
+  "schema_version": "1.0",
+  "encoding": "UTF-8 with LF line endings",
+  "external_inputs": [],
+  "goldens": [
+    {
+      "renderer_ref": "handbook.renderer.project-context-review-markdown@1.0.0",
+      "renderer_fingerprint": "sha256:5c855e2a1948533dca326dd9964a3e9bd8fc6d395a2b8906fc7c57290d8cb39c",
+      "input_schema_ref": "handbook.schemas.artifacts.project-context@1.0.0",
+      "implementation_id": "project-context-review-markdown-v1",
+      "determinism_profile": "closed-project-context-review-markdown-v1",
+      "resolution_input": null,
+      "canonical_input": {
+        "schema_id": "handbook.artifact.project-context",
+        "schema_version": "1.0",
+        "record_id": "handbook.project-context",
+        "summary": "Coordinates \"alpha\"\nboundary #1.",
+        "system_boundaries": [
+          "API -> worker",
+          "No <external> writes"
+        ],
+        "ownership": [
+          "Platform/Ops"
+        ],
+        "authoritative_references": [
+          "handbook.project-context@1.0.0"
+        ],
+        "known_unknowns": [
+          "Which region?\tOwner TBD"
+        ]
+      },
+      "expected_markdown_utf8": "# Project Context\n\n## Summary\n\nCoordinates \\\"alpha\\\" boundary \\#1\\.\n\n## System Boundaries\n\n- API \\-\\> worker\n- No \\<external\\> writes\n\n## Ownership\n\n- Platform\\/Ops\n\n## Authoritative References\n\n- handbook\\.project\\-context\\@1\\.0\\.0\n\n## Known Unknowns\n\n- Which region\\? Owner TBD\n",
+      "expected_byte_length": 280,
+      "expected_sha256": "sha256:4f2142970b3e0462a2a00eda8b3c87727ce049afaf161c3e56a0977d2dead933"
+    },
+    {
+      "renderer_ref": "handbook.renderer.environment-context-review-markdown@1.0.0",
+      "renderer_fingerprint": "sha256:f1702eed916e5a0c7a58828a0060370436b2bbd8fb216b43ecfb7fc97408a635",
+      "input_schema_ref": "handbook.schemas.artifacts.environment-context@1.0.0",
+      "implementation_id": "environment-context-review-markdown-v1",
+      "determinism_profile": "closed-environment-context-review-markdown-v1",
+      "resolution_input": null,
+      "canonical_input": {
+        "schema_id": "handbook.artifact.environment-context",
+        "schema_version": "1.0",
+        "record_id": "example.record.environment-context",
+        "applicability_basis": [
+          "example.reference.basis"
+        ],
+        "operational_surfaces": [
+          "Production"
+        ],
+        "runtime_dependencies": [
+          "Database"
+        ],
+        "safe_configuration_references": [
+          "example.configuration.name"
+        ],
+        "authoritative_references": [],
+        "known_unknowns": []
+      },
+      "expected_markdown_utf8": "# Environment Context\n\n## Applicability Basis\n\n- example.reference.basis\n\n## Operational Surfaces\n\n- Production\n\n## Runtime Dependencies\n\n- Database\n\n## Safe Configuration References\n\n- example.configuration.name\n\n## Authoritative References\n\n_None._\n\n## Known Unknowns\n\n_None._\n",
+      "expected_byte_length": 279,
+      "expected_sha256": "sha256:4597311e53004b1231fae96b86877c83a16e5faf68247a51c906a69049abcab0"
+    },
+    {
+      "renderer_ref": "handbook.renderer.work-specification-review-markdown@1.0.0",
+      "renderer_fingerprint": "sha256:ba5c014da3aea7930236629b0dd96537a735db113e2c38744598a3d808b8f117",
+      "input_schema_ref": "handbook.schemas.artifacts.work-specification@1.0.0",
+      "implementation_id": "work-specification-review-markdown-v1",
+      "determinism_profile": "closed-work-specification-review-markdown-v1",
+      "resolution_input": null,
+      "canonical_input": {
+        "schema_id": "handbook.artifact.work-specification",
+        "schema_version": "1.0",
+        "record_id": "example.record.work",
+        "objective": "Ship safely",
+        "scope": [
+          "Engine"
+        ],
+        "non_goals": [],
+        "acceptance_criteria": [
+          "Tests pass"
+        ],
+        "status": "approved"
+      },
+      "expected_markdown_utf8": "# Work Specification\n\n## Objective\n\nShip safely\n\n## Scope\n\n- Engine\n\n## Non-Goals\n\n_None._\n\n## Acceptance Criteria\n\n- Tests pass\n\n## Status\n\napproved\n",
+      "expected_byte_length": 150,
+      "expected_sha256": "sha256:e06ee5ac1c33fbbb1b9792bbf546755167a209f6250f58b0b14573f21a20cefb"
+    },
+    {
+      "renderer_ref": "handbook.renderer.decision-record-review-markdown@1.0.0",
+      "renderer_fingerprint": "sha256:81f616aeecb1eac6c5c9207bcd2eb82c8e79ee159d57b97e2f15492a6d6a12b3",
+      "input_schema_ref": "handbook.schemas.artifacts.decision-record@1.0.0",
+      "implementation_id": "decision-record-review-markdown-v1",
+      "determinism_profile": "closed-decision-record-review-markdown-v1",
+      "resolution_input": null,
+      "canonical_input": {
+        "schema_id": "handbook.artifact.decision-record",
+        "schema_version": "1.0",
+        "record_id": "example.record.decision",
+        "context": "A choice exists",
+        "decision": "Choose safety",
+        "status": "accepted",
+        "consequences": [
+          "More checks"
+        ],
+        "supersedes": []
+      },
+      "expected_markdown_utf8": "# Decision Record\n\n## Context\n\nA choice exists\n\n## Decision\n\nChoose safety\n\n## Status\n\naccepted\n\n## Consequences\n\n- More checks\n\n## Supersedes\n\n_None._\n",
+      "expected_byte_length": 152,
+      "expected_sha256": "sha256:5296400baf82eda7d22c2d1d754af0c25081516b876a9bf511a87f210adf378e"
+    },
+    {
+      "renderer_ref": "handbook.renderer.risk-record-review-markdown@1.0.0",
+      "renderer_fingerprint": "sha256:5cd8a531cfe8d83c078362ed2336d36eb87ee9b6715a364f19211026c6ee274c",
+      "input_schema_ref": "handbook.schemas.artifacts.risk-record@1.0.0",
+      "implementation_id": "risk-record-review-markdown-v1",
+      "determinism_profile": "closed-risk-record-review-markdown-v1",
+      "resolution_input": null,
+      "canonical_input": {
+        "schema_id": "handbook.artifact.risk-record",
+        "schema_version": "1.0",
+        "record_id": "example.record.risk",
+        "uncertainty": "Delivery may slip",
+        "evidence_refs": [],
+        "owner": "Team",
+        "treatment": "Track and mitigate",
+        "status": "open",
+        "review_basis": [
+          "example.reference.review"
+        ]
+      },
+      "expected_markdown_utf8": "# Risk Record\n\n## Uncertainty\n\nDelivery may slip\n\n## Evidence References\n\n_None._\n\n## Owner\n\nTeam\n\n## Treatment\n\nTrack and mitigate\n\n## Status\n\nopen\n\n## Review Basis\n\n- example.reference.review\n",
+      "expected_byte_length": 194,
+      "expected_sha256": "sha256:ef70b7da4100eded757fa53dfd574fdcf28709b3166f9e8408fa0658876698a7"
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T180638Z--HCM-2-4--p1a-definition-support-review",
+  "created_at_utc": "2026-07-26T18:06:38Z",
+  "source_handoff_ids": [
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed"
+  ],
+  "parent_orchestration_id": "20260726T161851Z--HCM-2-4--implementation-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "context-engineering",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1A-definition-support",
+  "subject_fingerprint": "sha256:4edbc4fe580a3c819fcdac64bd83623d09ebc2337f0d3c170d8f7d0ecd927865",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p1a-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.decision-record/1.1.0.yaml",
+        "sha256": "3c8a7233d90d4698ff46964f4e3077f12d0fd6bf8386edc8fb58053c47733db1"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.environment-context/1.1.0.yaml",
+        "sha256": "70646ba08e9781b9e64cea24eb9fce5ce76fcfebc3bb0b513ca5b15e571efd99"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.project-context/1.1.0.yaml",
+        "sha256": "19c1de5af8a863405b41f107587575c1aa952cf5eedc2ac9ab38a4efdba3fc6a"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.risk-record/1.1.0.yaml",
+        "sha256": "8e9b995fa5d8a003282fbc4806fe9a1c2d74ea522aad912a7eb1a6ce67323c8a"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.work-specification/1.1.0.yaml",
+        "sha256": "2ac9d742a8d57e4a2338823fa7241712df549122fad8e1510c6d11efe4b8d621"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.decision-record/1.0.0.yaml",
+        "sha256": "a2ee9a3cf01ddbe5964cb40a79e89adaeef6919655592f9f4d49b1bf33a527d5"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.environment-context/1.0.0.yaml",
+        "sha256": "b70522a29874a688b957548076de7444e91d42adbda2599dd87d5d9f02747262"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.project-context/1.0.0.yaml",
+        "sha256": "f8ba938b7eaf61ac18375546d53883837939a4445d910abefff763c0180bb43a"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.risk-record/1.0.0.yaml",
+        "sha256": "7573466a6016eb2cfcfe8c2838f5179576d98a4b1e4d5fe9fecb7eecabca9bc7"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.work-specification/1.0.0.yaml",
+        "sha256": "c6cb48a1b19691872b76616a32793ee8e948aeaa6a576a9ff45da1480cb28e4e"
+      },
+      {
+        "path": "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml",
+        "sha256": "a4a7ce2d338e3eeaaf7ae60d1c75096af1e347609c2dbe1fb258e0f90aa04e36"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.decision-record-review-markdown/1.0.0.yaml",
+        "sha256": "560d0e4f9b7c28c8453056e96ca8317f1826c7daa0655110b133525c0c5350f7"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.environment-context-review-markdown/1.0.0.yaml",
+        "sha256": "9d81123677e312f6f51c1dff76a9147ba878599a2cc6feffae37c9e539c033b5"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.project-context-review-markdown/1.0.0.yaml",
+        "sha256": "8fa10891c40c240cd7ad0e51a7b2c58ee59def8b909ea7098d8c5367892539b6"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.risk-record-review-markdown/1.0.0.yaml",
+        "sha256": "bf7bdf9dbe8e23eacfe2115f8d520ce78fa6453d85f3e58f27c9f3281b76a43a"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.work-specification-review-markdown/1.0.0.yaml",
+        "sha256": "6250f1a8861040b8202b4faa0adc5dba4745b15e720abdb8e23e647ca4785234"
+      },
+      {
+        "path": "crates/engine/src/artifact_instance.rs",
+        "sha256": "c850df3fa1914765434a598a9efe6c2a43cc1f7799827ffe5a852f70d679f680"
+      },
+      {
+        "path": "crates/engine/src/artifact_kind_registry.rs",
+        "sha256": "3f0b28ff00d43ff7a4d99c1307a8cf34123b69dcac0dfe9a5f7e7f8c63d881ff"
+      },
+      {
+        "path": "crates/engine/src/profile_builtins.rs",
+        "sha256": "039d857acb028f87d31f77d38e960360f37573cd7a0b16825fbb9f4f4dcbe870"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_definition_support.rs",
+        "sha256": "24ae3ae6cb7011a1bb873e0e53f5b4399e1f2318297a8988556b774ab86c6e2e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T162140Z--HCM-2-4--p0-selector-repair-review.json",
+        "sha256": "cce37f895b6144605718ee2917e60fe4f541b880990bb9344031aebafb1b391f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T162911Z--HCM-2-4--p0-selector-repair-closure-review.json",
+        "sha256": "3a994f8464582b5a376010a485863bf387bdf1ca981153749ad0938efb6af1ec"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T164140Z--HCM-2-4--p0-path-manifest-review.json",
+        "sha256": "758b6238cb8f1cec574dcb0536450215deeeca1c3e6d6c48c4fcd5fcba2a1ee5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T164958Z--HCM-2-4--p0-path-manifest-closure-review.json",
+        "sha256": "9379f155f5e48f684e62b0a416806275e152322460081cc36e26e4b0d1864652"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T165827Z--HCM-2-4--p0-evidence-review.json",
+        "sha256": "f53cab907fdab9e04df5ac495118cf896bf46d2d600e9aa6d711c04f3c077973"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T171625Z--HCM-2-4--p0-evidence-closure-review.json",
+        "sha256": "d6944c1066bdb32aeea0fd742df47cdb53ed98b237f5671b7ff24b917dd658d2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T172336Z--HCM-2-4--p1a-definition-support-implementation.json",
+        "sha256": "d42d7620cfc1e438f64677c58cb5b47dbc3e0d1dbce52fdf55f7e76c25654145"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "8a14c93e41f59414236fa84ac2808d5f33f35766b5ed32288f3efe1b2d0cb3ea"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/definition-support-vectors-v1.0.json",
+        "sha256": "e6cf4326a28fe3f7825c40f8d2e7e92662f8fe48c0e644b9b0a30aae9f332f0f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "9e986ca2db06e8c60f45e93dd5b05ee16b4fa703cbedac5f7082462926ea6258"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+        "sha256": "e470da0cb00243a501b15f5aad87b3f1a5716b37b6488f7d2a93ee28ff11fc98"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-selector-correction.md",
+        "sha256": "83ce6d25b6cc7965e41c0bbb2d1723b657c93c332e7cfbb668f503b87e26275e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P0-inventory-lock.md",
+        "sha256": "52623ac94d5c3ea8b16220fb6a61523de1ad363bf021e1e732941a4133e3b3c9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1A-definition-support.md",
+        "sha256": "4159471b2a020d1ee4848a4e6d02b5484a2d2397826069536fee26658aae89bc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "a1f897b9f39c10105de69f7ac49c2ba3f340c7ec8c2a3d19ee9b071178eb58ec"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:4edbc4fe580a3c819fcdac64bd83623d09ebc2337f0d3c170d8f7d0ecd927865"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "complete_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Artifact authority and renderer boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Artifact kind",
+        "Artifact instance",
+        "Renderer-derived view"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Artifact kind and instance contracts",
+        "Fixed renderer contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Proof levels",
+        "Regression rules"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1A — Catalog publication and admission closure",
+        "Exact implementation surface selectors",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "Standing rules",
+        "P1A — Catalog publication and admission closure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The complete current 35-path dirty subject is sha256:4edbc4fe580a3c819fcdac64bd83623d09ebc2337f0d3c170d8f7d0ecd927865 against baseline HEAD 0b177ef9415e942cde763fcb086cec546a9a24f3. P1A changes three runtime files, adds 16 immutable definitions, one integration target, two immutable vector/golden assets, and one proof record; remaining paths are P0 authority and prior internal dispatch evidence. Parent replay recorded 66 passing tests across the exact 13 targets, cargo fmt and git diff checks passing, and GitNexus change detection LOW with zero affected processes. Generic execution of the new package built-in intakes is known unavailable because the existing compatibility loader strips modes and coverage; no broader execution or seam promotion is claimed.",
+  "allowed_scope": [
+    "Replay the exact 35-entry subject manifest, baseline diff, and aggregate fingerprint.",
+    "Review the P1A definitions, three runtime guard/mapping edits, integration test, vectors/goldens, and proof against exact P1A authority.",
+    "Verify all five kind/intake/renderer rows and the three-instance 1.2 profile are exact, immutable, fingerprint-correct, duplicate-safe, schema-bound, deterministic, Resolution-free, and fail closed on every forbidden near miss.",
+    "Verify the released 1.1 Project Authority descriptor is preserved field-for-field in 1.2 and the shipped request remains 1.1.",
+    "Trace the two changed guard call paths, the CRITICAL resolver boundary, built-in resolution, and all positive/negative proof without assuming test assertions are correct.",
+    "Assess whether the known unavailable generic built-in intake execution is honestly outside P1A or violates an exact P1A acceptance gate.",
+    "Identify findings independently before comparing P3/P4 candidates with the selected-scope inventory."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "Do not review P1B-P7 implementation or propose cleanup unrelated to the integrated P1A outcome.",
+    "No HCM-3.x, Resolution, Projection, generic renderer engine, dynamic command, migration, dual-read, public API, dependency, Cargo, package, version, unsafe, module/process, or sibling-slice expansion.",
+    "Do not promote any seam or proof classification; P1A may establish only static package publication, exact frozen admission, and its named proof."
+  ],
+  "tasks": [
+    "Verify exact subject identity, no hidden changed path, and P1A selector compliance.",
+    "Review correctness and security of all three runtime edits, including exact-ref admission, missing/extra/mismatch/later-owned refusal, duplicate and cardinality handling, and dynamic built-in mapping completeness.",
+    "Independently verify definition and profile fingerprints, Project Authority row preservation, renderer goldens, schema/intake coverage, and default-profile non-switch.",
+    "Review test adequacy for positive, negative, fail-closed, regression, and CRITICAL-radius behavior, including whether the large new integration test can mask a wrong implementation.",
+    "Validate the proof record and known unavailable proof against live code.",
+    "Return findings first in Critical, Required, Optional, Nit order with severity, file and line, violated contract or gate, impact, smallest valid remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#p1a-catalog-publication-and-admission-closure",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md#p1a-catalog-publication-and-admission-closure",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+    "Exact five kind/intake/renderer/profile fingerprints and duplicate-safe validation",
+    "Exact positive admission and fail-closed missing, extra, mismatched, later-owned, Projection, lifecycle, trigger, capability, extension, dependency, and cardinality proof",
+    "No public API, Cargo, package, dependency, command, Resolution, Projection, sibling-scope, or seam-promotion change"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity, baseline diff, or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

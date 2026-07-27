@@ -1,8 +1,11 @@
 use crate::charter_artifact::{
     serialize_canonical_charter, CanonicalCharter, CharterArtifactError,
 };
+use crate::charter_lifecycle_validation::{SELECTED_PROFILE_FINGERPRINT, SELECTED_PROFILE_REF};
 use crate::definition_identity::canonical_json_bytes;
-use crate::{DefinitionFingerprint, ResolvedProfileDecisions};
+use crate::{
+    load_shipped_charter_definition_registry, DefinitionFingerprint, ResolvedProfileDecisions,
+};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::{BTreeMap, BTreeSet};
@@ -269,6 +272,14 @@ pub fn evaluate_charter_intake(
     envelope: CharterIntakeEnvelope,
     observed_current_fingerprint: Option<&DefinitionFingerprint>,
 ) -> Result<CharterCandidateEvaluationV12, CharterIntakeError> {
+    load_shipped_charter_definition_registry()
+        .and_then(|registry| registry.validate_selected_decisions(decisions))
+        .map_err(|_| {
+            CharterIntakeError::new(
+                CharterIntakeErrorKind::SourceAuthorityMismatch,
+                "selected Charter profile tuple or definition closure is not exact",
+            )
+        })?;
     let basis = validate_basis(
         envelope.expected_current_fingerprint.as_deref(),
         observed_current_fingerprint,
@@ -307,8 +318,8 @@ pub fn evaluate_charter_intake(
         })
         .collect::<Vec<_>>();
 
-    let profile_ref = decisions.profile_ref().as_str().to_owned();
-    let profile_fingerprint = decisions.profile_definition_fingerprint().to_string();
+    let profile_ref = SELECTED_PROFILE_REF.to_owned();
+    let profile_fingerprint = SELECTED_PROFILE_FINGERPRINT.to_owned();
     let normalized_content_ref = format!(
         "candidate-content/charter_{}.yaml",
         fingerprint_hex(&normalized_content_fingerprint)
@@ -320,8 +331,8 @@ pub fn evaluate_charter_intake(
         "acquisition_mode": envelope.mode,
         "target_kind_ref": CHARTER_KIND_REF,
         "target_instance_id": CHARTER_INSTANCE_ID,
-        "profile_ref": decisions.profile_ref().as_str(),
-        "resolved_profile_fingerprint": decisions.profile_definition_fingerprint().to_string(),
+        "profile_ref": SELECTED_PROFILE_REF,
+        "resolved_profile_fingerprint": SELECTED_PROFILE_FINGERPRINT,
         "basis_artifact_fingerprint": basis.clone(),
         "consumer": envelope.consumer.clone(),
         "coverage_results": coverage_results.clone(),
@@ -354,8 +365,8 @@ pub fn evaluate_charter_intake(
         acquisition_mode: envelope.mode,
         target_kind_ref: CHARTER_KIND_REF.to_owned(),
         target_instance_id: CHARTER_INSTANCE_ID.to_owned(),
-        profile_ref: decisions.profile_ref().as_str().to_owned(),
-        resolved_profile_fingerprint: decisions.profile_definition_fingerprint().to_string(),
+        profile_ref: SELECTED_PROFILE_REF.to_owned(),
+        resolved_profile_fingerprint: SELECTED_PROFILE_FINGERPRINT.to_owned(),
         basis_artifact_fingerprint: basis.clone(),
         consumer: envelope.consumer,
         coverage_results,
@@ -370,8 +381,8 @@ pub fn evaluate_charter_intake(
         target_kind_ref: CHARTER_KIND_REF.to_owned(),
         target_instance_id: CHARTER_INSTANCE_ID.to_owned(),
         target_schema_ref: CHARTER_SCHEMA_REF.to_owned(),
-        profile_ref: decisions.profile_ref().as_str().to_owned(),
-        resolved_profile_fingerprint: decisions.profile_definition_fingerprint().to_string(),
+        profile_ref: SELECTED_PROFILE_REF.to_owned(),
+        resolved_profile_fingerprint: SELECTED_PROFILE_FINGERPRINT.to_owned(),
         basis_artifact_fingerprint: basis,
         normalized_content_ref,
         field_sources,

@@ -13,7 +13,9 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::path::Path;
 
-pub(crate) const FEATURE_SPEC_ARTIFACT_PATH: &str = "artifacts/feature_spec/FEATURE_SPEC.md";
+pub(crate) const WORK_SPECIFICATION_ARTIFACT_PATH: &str =
+    "artifacts/work-specification/work-specification.yaml";
+pub(crate) const FEATURE_SPEC_VIEW_PATH: &str = "artifacts/feature_spec/FEATURE_SPEC.md";
 pub(crate) const STAGE_10_FEATURE_SPEC_CAPTURE_PROVENANCE_SCHEMA_VERSION: &str =
     "m5-stage-10-feature-spec-capture-provenance-v1";
 
@@ -58,7 +60,7 @@ pub(crate) fn build_stage_10_feature_spec_capture_provenance(
         schema_version: STAGE_10_FEATURE_SPEC_CAPTURE_PROVENANCE_SCHEMA_VERSION.to_string(),
         pipeline_id: compile_result.target.pipeline_id.clone(),
         stage_id: compile_result.target.stage_id.clone(),
-        feature_spec_path: FEATURE_SPEC_ARTIFACT_PATH.to_string(),
+        feature_spec_path: WORK_SPECIFICATION_ARTIFACT_PATH.to_string(),
         feature_spec_sha256: feature_spec_sha256.to_string(),
         route_basis_state_revision: compile_provenance.route_basis_state_revision,
         route_basis_fingerprint_sha256: compile_provenance.route_basis_fingerprint_sha256,
@@ -117,7 +119,7 @@ pub(crate) fn validate_stage_10_feature_spec_capture_provenance_match(
     }
     if stored.feature_spec_sha256 != current.feature_spec_sha256 {
         return Err(format!(
-            "stage-10 capture provenance feature_spec_sha256 `{}` does not match current FEATURE_SPEC.md `{}`",
+            "stage-10 capture provenance feature_spec_sha256 `{}` does not match current canonical Work Specification YAML `{}`",
             stored.feature_spec_sha256, current.feature_spec_sha256
         ));
     }
@@ -279,10 +281,10 @@ fn validate_stage_10_capture_provenance(
         ));
     }
     validate_stage_10_supported_target(registry, &provenance.pipeline_id, &provenance.stage_id)?;
-    if provenance.feature_spec_path != FEATURE_SPEC_ARTIFACT_PATH {
+    if provenance.feature_spec_path != WORK_SPECIFICATION_ARTIFACT_PATH {
         return Err(format!(
             "stage-10 capture provenance feature_spec_path `{}` does not match expected `{}`",
-            provenance.feature_spec_path, FEATURE_SPEC_ARTIFACT_PATH
+            provenance.feature_spec_path, WORK_SPECIFICATION_ARTIFACT_PATH
         ));
     }
     Ok(())

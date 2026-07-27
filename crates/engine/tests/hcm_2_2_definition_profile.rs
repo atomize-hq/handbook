@@ -196,12 +196,12 @@ fn uniform_definition_identities_match_every_published_vector() {
 }
 
 #[test]
-fn shipped_profile_1_1_selects_the_critical_charter_closure_additively() {
+fn shipped_profile_1_2_preserves_the_critical_charter_closure_additively() {
     let decisions = resolve_shipped_profile_decisions(env!("CARGO_MANIFEST_DIR"))
-        .expect("shipped profile 1.1 decisions");
+        .expect("shipped profile 1.2 decisions");
     assert_eq!(
         decisions.profile_ref(),
-        &exact("handbook.profile.shipped-root@1.1.0")
+        &exact("handbook.profile.shipped-root@1.2.0")
     );
 
     let registry = decisions.registry();
@@ -265,11 +265,11 @@ fn shipped_profile_1_1_selects_the_critical_charter_closure_additively() {
     let expected_other_kinds = BTreeMap::from([
         (
             "project_context",
-            "handbook.artifact-kind.project-context@1.0.0",
+            "handbook.artifact-kind.project-context@1.1.0",
         ),
         (
             "environment_context",
-            "handbook.artifact-kind.environment-context@1.0.0",
+            "handbook.artifact-kind.environment-context@1.1.0",
         ),
     ]);
     for (id, reference) in expected_other_kinds {

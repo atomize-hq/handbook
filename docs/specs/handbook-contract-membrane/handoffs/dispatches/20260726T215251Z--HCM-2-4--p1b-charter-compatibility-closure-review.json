@@ -1,0 +1,213 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T215251Z--HCM-2-4--p1b-charter-compatibility-closure-review",
+  "created_at_utc": "2026-07-26T21:52:51Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1B-charter-compatibility",
+  "subject_fingerprint": "sha256:ce1c35b3a2bda3121667c1765dce49ad49b827e6dbcaced72d75da7f041daa32",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p1b-charter-compatibility-closure-1",
+    "trigger_run_ids": [
+      "p1b-charter-compatibility-discovery"
+    ],
+    "finding_refs": [
+      "p1b-charter-compatibility-discovery-P2-1",
+      "p1b-charter-compatibility-discovery-P2-2"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml",
+        "sha256": "1d8fe627cf097a5f1fa17baa0be349d7d9d6caabbe97a39318d1dbbcf62d972f"
+      },
+      {
+        "path": "crates/engine/src/charter_approval_workflow.rs",
+        "sha256": "11127b89402730c80bc770d715525d97692b2c5c45384618be9bf3e86e963aea"
+      },
+      {
+        "path": "crates/engine/src/charter_authority_transaction.rs",
+        "sha256": "a7dc1be73d610b9ea2060205f351e372391b8c141cc391c781193ff514aad600"
+      },
+      {
+        "path": "crates/engine/src/charter_definition_registry.rs",
+        "sha256": "69b6229aeffe2d60b0594bca550e0a823bddae390849e60ac839761ccaa51e90"
+      },
+      {
+        "path": "crates/engine/src/charter_intake.rs",
+        "sha256": "78fcf80e36c2ec58a94d9e47b9b852ecc46a05752d471b04b47184a8750462ae"
+      },
+      {
+        "path": "crates/engine/src/charter_lifecycle_validation.rs",
+        "sha256": "83b9aaa0318db3805a94cd0e72851d15e4fd8c6f2feb93bbd6683f1045872af3"
+      },
+      {
+        "path": "crates/engine/src/charter_promotion_workflow.rs",
+        "sha256": "37591b0716fc1fec0164ef880a187effd48e7bb05e8e89b844c8a0b3017196ba"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs",
+        "sha256": "0720d267c323838793cb21bc9b9034a441c62b791977ece313d68b15f1c328f5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "47fba0dacc47db3e881e58805e9fc88a0744eaad1a204e19ecece1487e0c35f6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/definition-support-vectors-v1.0.json",
+        "sha256": "b1c6280ea37585dac45061275c85f88f12648da76e3d8fc785da8bd89a21ca79"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "a2a9fc793383ed21bba13a43ffa4c06f8eb1e0df254b63de2d1b72125b5a5748"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1B-charter-compatibility.md",
+        "sha256": "ff5796112e79c29605f68a3802caea3242df1bc2f70f2cbbd81c49bf4eae6396"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "3921583356983d2fe87fedc5f5a62088d1066db033b9724d149fae4bc9d41cbd"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:ce1c35b3a2bda3121667c1765dce49ad49b827e6dbcaced72d75da7f041daa32"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "complete_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Normative ownership model",
+        "Mandatory invariants"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4",
+        "Reviewability and packet sizing calibration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity",
+        "Artifact intake definition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Proof levels",
+        "HCM-2.2 gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Versioned Charter compatibility membrane",
+        "P1B — Versioned Charter compatibility foundation",
+        "Exact implementation surface selectors",
+        "GitNexus architecture and impact record",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The P1B discovery run found two P2 issues: promotion construction emitted the generic selected pair, and the negative proof matrix was incomplete. The parent changed that construction to the released constants and added public-path exactness, crossed-source, package-rebinding, duplicate-source, near-version, fresh second-read descriptor, subordinate-cardinality, and fingerprint refusals. The complete 13-entry post-remediation subject is sha256:ce1c35b3a2bda3121667c1765dce49ad49b827e6dbcaced72d75da7f041daa32. Raw verification: P1B target 8 passed; immutable HCM-2.2 engine plus P1B wall 97 passed; compiler anchors 11 passed; CLI anchors 108 passed; cargo fmt check, git diff check, and no-edit anchor diff exit 0; GitNexus aggregate open-slice detection reports LOW, 16 tracked files, 12 indexed symbols, and zero affected processes. The live shipped request remains profile 1.1 and exactly seven production registry callers remain.",
+  "allowed_scope": [
+    "Replay all 13 manifest entries and verify the aggregate post-remediation fingerprint.",
+    "Verify P2-1 only: promotion record construction emits the released constants and still traverses registry validation before record construction.",
+    "Verify P2-2 only: the new public-path negative matrix closes exact selector/source, descriptor, subordinate-cardinality, fingerprint, and second-read gaps without bypasses.",
+    "Trace the affected released-identity call path through promotion and transaction preflight.",
+    "Confirm the remediation added no production symbol, public API, live profile selection, schema inference, eighth registry caller, or sibling scope.",
+    "Replay the named verification commands when useful and check for remediation-caused regression.",
+    "Identify any directly caused or unmasked P1/P2 within this causal boundary before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No open-ended rediscovery and no review of unrelated P1A implementation.",
+    "No P1C-P7 implementation or live shipped-root 1.2 selection.",
+    "No public API/signature/type, schema, vector, dependency, Cargo/package/version, unsafe, command, migration, Resolution, Projection, or sibling-slice expansion.",
+    "Do not use the prior review conclusion as proof that remediation is correct."
+  ],
+  "tasks": [
+    "Verify subject identity and inspect the exact post-discovery remediation delta plus affected complete-subject context.",
+    "Validate the promotion construction constant pair and source guard against generic selected decisions.",
+    "Validate the exact selector/source refusal table and the fresh second-read descriptor mutation table against the public resolver.",
+    "Confirm every Project Authority descriptor/subordinate predicate remains exact and the unchanged custom profile first read succeeds before every mutated second read refuses.",
+    "Verify the 97-engine, 11-compiler, 108-CLI, formatting, diff, no-edit, caller-ceiling, live-selection, and GitNexus evidence.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Discovery P2-1: released profile pair in every promotion record",
+    "Discovery P2-2: fail-closed exact tuple, source, descriptor, subordinate, and second-read proof",
+    "Exact 1.1 and P1A-authored 1.2 tuple admission only",
+    "Complete Project Authority descriptor and subordinate-definition equality",
+    "Released HCM-2.2 record identity and behavior preservation",
+    "Seven production registry callers; no eighth caller or new production symbol",
+    "Live shipped selection remains 1.1"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

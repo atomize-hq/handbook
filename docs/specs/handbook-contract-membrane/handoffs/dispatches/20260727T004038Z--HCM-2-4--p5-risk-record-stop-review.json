@@ -1,0 +1,196 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T004038Z--HCM-2-4--p5-risk-record-stop-review",
+  "created_at_utc": "2026-07-27T00:40:38Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P5-risk-record",
+  "subject_fingerprint": "sha256:95dc1a7fe947a85e9c24bee92d61400e3c10a69a1aaa2165c45e57d8b891af91",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p5-risk-record-stop-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.risk-record/1.1.0.yaml",
+        "sha256": "999d61024c0c5d06b97af9c0d552896d885d77c5de608182beaedd8856240e71"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.risk-record/1.0.0.yaml",
+        "sha256": "b1c82ffcd75a79c8f25a1b0962dfb0e9ccf1b4a58c69c6fbcd297a8dede6d445"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.risk-record-review-markdown/1.0.0.yaml",
+        "sha256": "1aafd5bc4e890d7cba1b82624801a4a127eca0238612ff1c630002fd77b6e7c8"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.risk-record/1.0.0.schema.json",
+        "sha256": "df90eec6f85652603c19e56c92870b77599b59a7011110cab91b443d6eb2b01c"
+      },
+      {
+        "path": "crates/engine/src/artifact_lineage_store.rs",
+        "sha256": "12e4dff7be28a4e3ba51f295509d070aaf27bb0f07aa3117aeb234941fe09b22"
+      },
+      {
+        "path": "crates/engine/src/artifact_mutation.rs",
+        "sha256": "62f7cee533b8ecc0ee6734e102bffa1bf49bebb575a035c291d06f73d8fd0a18"
+      },
+      {
+        "path": "crates/engine/src/artifact_repository.rs",
+        "sha256": "1d6e30b0001c658d79cf2e942817a2d5513b59756c8e41f2c27bf2dfdb1a92ac"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_risk_record/.handbook/definitions/profiles/risk-record-root-1.0.0.yaml",
+        "sha256": "3fb2cafe53bdf852f42878f97838268a25a4c53907246c03c4f90d840582172a"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_risk_record/.handbook/profile-selection.json",
+        "sha256": "ec6ee2a95976f1b69c608699f1b3764aa1f2e1d3286e4923077720cdcf91a1c4"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_risk_record/.handbook/records/risk.yaml",
+        "sha256": "b5977c4d6f8e263866fbedfe78c6727252b204d8a09f2a45afdfcbbb781f51a6"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_risk_record.rs",
+        "sha256": "38a931e1d3b0367a65ae82bd769c853fbfb9a0889282f69ca348eab28b2a5750"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "17b6dbb0b68a967f82096acfa393cfa377dde7f88fdd56fcf88fc7c0969489d3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "6d66d9b6af0953fbfe4d1f90a7568d748b3e5c737b9fe25b4a280c5f9655d2d4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "383b688b73bc2cf0315ad595fb331e694faeac85d94b520f9de24f9e209b2eef"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+        "sha256": "6aa2edab2f7d1f9279ff5bcba9114a80f708a0ecfeb097d6cac49a31593b16af"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "030122d3faa6e8bdd8de34f3bc2cbc7407f6aff55439938b81f97002d1c895ca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "a401df977b81b836a9ff71ec0e11483d6e37a3ea2d89f8374fa9dd31f7ac47b0"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:95dc1a7fe947a85e9c24bee92d61400e3c10a69a1aaa2165c45e57d8b891af91"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "complete_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P5 — Risk Record support proof",
+        "Exact implementation surface selectors",
+        "Per-family proof",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P5 — Risk Record support proof"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The P5 child created only three exact fixture files, one named test, and one proof record. Parent replay: bounded selection/profile/descriptor/intake/renderer/read/validate/negative subset is 11 passed. The exact mutation test fails deterministically before establishment with ArtifactMutationErrorV1 Store: generic lineage store refused: intake output tuple is not exact or unique. Live code derives underscore-bearing tokens such as schema_id-value from released coverage IDs while the lineage token grammar forbids underscores. No production code was edited. The claimed stop requires independent validation; P5 completion is not asserted.",
+  "allowed_scope": [
+    "Read-only replay of all 17 manifest entries and exact five-file P5 material subject.",
+    "Independently validate exact fixture/profile/descriptor/source fingerprints and the 11 successful selection/intake/renderer/read/validate/negative proofs.",
+    "Independently reproduce and trace the mutation refusal from released coverage IDs through intake_commit_plan token derivation into valid_intake_value_token and validate_output_contract.",
+    "Determine whether any in-selector fixture/test correction could make mutation valid without altering a released definition or production runtime.",
+    "Assess proof-document accuracy, selector compliance, preservation of negative cases, and whether the stop is a genuine authority boundary.",
+    "Identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No runtime fix, token normalization, token-grammar widening, released-definition edit, P3/P4/P6 work, or claim that P5 is complete.",
+    "Do not rely on the implementation agent's conclusion; establish the stop independently."
+  ],
+  "tasks": [
+    "Verify complete subject identity and inspect the exact five P5 additions.",
+    "Replay the bounded green command and the exact failing mutation command.",
+    "Trace the failure to exact live code and determine whether the required correction is outside the P5 selector.",
+    "Validate that the partial proof states unavailable evidence honestly and does not promote Risk Record support.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Exact repository-selected Risk Record descriptor and definition closure",
+    "Unchanged generic HCM-2.3 mutation/read/validate requirement",
+    "No runtime or released-definition edit in P5",
+    "Truthful partial proof and no unsupported classification promotion",
+    "Independent P5 evidence"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

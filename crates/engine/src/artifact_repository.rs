@@ -711,10 +711,18 @@ fn load_repository_intakes(
                         "a built-in intake definition is absent from the compile-time allowlist",
                     )
                 })?;
-                builtin_compatibility_refs.insert(binding.definition_ref.clone());
+                if binding.definition_ref.as_str() == "handbook.intake.charter@1.0.0" {
+                    builtin_compatibility_refs.insert(binding.definition_ref.clone());
+                }
                 bytes.bytes.to_vec()
             }
             DefinitionSource::RepositoryPath(path) => {
+                if crate::profile_builtins::definition(&binding.definition_ref).is_some() {
+                    return Err(repository_error(
+                        ArtifactRepositoryErrorKindV1::IntakeSourceRead,
+                        "a package-owned intake definition must use its built-in source",
+                    ));
+                }
                 let (_, bytes) =
                     read_trusted_repo_source(repo_root, path, source_budget).map_err(|_| {
                         repository_error(

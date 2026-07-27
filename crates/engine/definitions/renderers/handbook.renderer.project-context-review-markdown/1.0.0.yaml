@@ -1,0 +1,14 @@
+{
+  "schema_id": "handbook.renderer-definition",
+  "schema_version": "1.0",
+  "renderer_id": "handbook.renderer.project-context-review-markdown",
+  "renderer_version": "1.0.0",
+  "input_schema_ref": "handbook.schemas.artifacts.project-context@1.0.0",
+  "output_media_type": "text/markdown",
+  "implementation_id": "project-context-review-markdown-v1",
+  "determinism_profile": "closed-project-context-review-markdown-v1",
+  "required_capability_contract_ref": null,
+  "resolution_input": null,
+  "extensions": {},
+  "renderer_fingerprint": "sha256:5c855e2a1948533dca326dd9964a3e9bd8fc6d395a2b8906fc7c57290d8cb39c"
+}

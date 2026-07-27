@@ -1,0 +1,348 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T011941Z--HCM-2-4--p3-work-specification-discovery-review",
+  "created_at_utc": "2026-07-27T01:19:41Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P3-work-specification",
+  "subject_fingerprint": "sha256:5ddd1836be899a4e6ae9a8c3ba9db9cf465515934811334ddd73d837595c49be",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p3-work-specification-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "81fbbaf7cfd5d84141cdbb98c338fb40e37fd13c16d916df9ef463fdb694b74e"
+      },
+      {
+        "path": "core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "49272a01d8121dd8d0e7510049524cbcae5f50a89722c598a6381a3f7765c03a"
+      },
+      {
+        "path": "core/pipelines/default.yaml",
+        "sha256": "fa37d97d8a5e3426199be4198591bc9bd08564270572b88d91a05d2ea33838f9"
+      },
+      {
+        "path": "core/pipelines/foundation_inputs.yaml",
+        "sha256": "1a6fb478c3b0ad36707f57716fb601f3b6a5323e2987309e32618a50c1e1b5c8"
+      },
+      {
+        "path": "core/schemas/feature_spec.yaml",
+        "sha256": "4629ff274f0f34eded6f1c64c28071616baea96328b411bd1243f9ef991dab18"
+      },
+      {
+        "path": "core/stages/10_feature_spec.md",
+        "sha256": "09992027838be50c146460c8c17b8e3c1aab98dfca844f747e60af13ab0c0301"
+      },
+      {
+        "path": "crates/cli/tests/feature_spec_contract.rs",
+        "sha256": "2a21bc5e34d5f85dfdc735665d4703bcadfbb34014da1eeedb77335da2440432"
+      },
+      {
+        "path": "crates/cli/tests/pipeline_handoff_refusals.rs",
+        "sha256": "7274dff5b2eb77665711b919e06bc39641a21e58d42cd312ed9ebc5e09b94f8f"
+      },
+      {
+        "path": "crates/compiler/src/layout.rs",
+        "sha256": "6aa0fc546729f30317e5cde5aa4fb2d4d049b403ca8e7e2a6179f38836ba6ee8"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_capture.rs",
+        "sha256": "d8bc29f62505808532263aa946261b7685a399bad01e45aa125ebd7c86bc8878"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_handoff.rs",
+        "sha256": "78f12e351696f0e151c85e137bf1c815e4370185fa4b3186a93ba257fcb2e92f"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.work-specification/1.1.0.yaml",
+        "sha256": "5dd585d5812bbdb5c02f9ec56f0536a4ecd855f1b66f728bee3bf9bd4cd35af5"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.work-specification/1.0.0.yaml",
+        "sha256": "7a15bd5db5f77e2c31b5379675b0d4c4476b6c5a1af2d00dca105cea7255b4a0"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.work-specification-review-markdown/1.0.0.yaml",
+        "sha256": "94652999c19105c18a29a94f4401e5663f849c2ebb37a4a274aa309c727bf484"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.work-specification/1.0.0.schema.json",
+        "sha256": "c4c6f489ff20c022538ae2e3512cf62f8559d8d9409944ab13e8f138cb2d5985"
+      },
+      {
+        "path": "crates/engine/src/artifact_repository.rs",
+        "sha256": "1d6e30b0001c658d79cf2e942817a2d5513b59756c8e41f2c27bf2dfdb1a92ac"
+      },
+      {
+        "path": "crates/engine/src/canonical_yaml.rs",
+        "sha256": "1e8e793b5360ccfdca9854c0b165148a94e1e632b3feda8f0b66e3911ae25e83"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_work_specification/.handbook/definitions/profiles/work-specification-root-1.0.0.yaml",
+        "sha256": "6a357001ea823d1de1d6219753d733d2aaad8081ebad1ee6de81183c98cc5509"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_work_specification/.handbook/profile-selection.json",
+        "sha256": "3b9c4a1480cf676f0448cafbfb2f4e563b9e4b31b959bf9840bfd05e9f477c7f"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_work_specification/artifacts/feature_spec/FEATURE_SPEC.md",
+        "sha256": "e06ee5ac1c33fbbb1b9792bbf546755167a209f6250f58b0b14573f21a20cefb"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_work_specification/artifacts/work-specification/work-specification.yaml",
+        "sha256": "aee00789586f221d7887721648df23810406163b8b937fc89ca24d1355cd04c2"
+      },
+      {
+        "path": "crates/pipeline/src/layout.rs",
+        "sha256": "9c3f7e1815dcfd5ea7527497851b00781d3acc3084cce3a6d9c74b3e71491c5d"
+      },
+      {
+        "path": "crates/pipeline/src/pipeline_capture.rs",
+        "sha256": "5ae7393c8aa59157d981ffcf4e024902d9726f1326d0f1afbf68ad8c77864592"
+      },
+      {
+        "path": "crates/pipeline/src/pipeline_handoff.rs",
+        "sha256": "cf653b7394d7fce60b788ab8ff2921cf1c02e3955edc77254067aa7acafe8cad"
+      },
+      {
+        "path": "crates/pipeline/src/stage_10_feature_spec_provenance.rs",
+        "sha256": "543d86dba5b613ad0d307c710a0a75a87a9753572234fd3b799043bab97b8cf7"
+      },
+      {
+        "path": "crates/pipeline/tests/pipeline_capture.rs",
+        "sha256": "f3c1f11d5764e1203f6448ce91c25a289c8d4d32495c6ba85535250c70d1c565"
+      },
+      {
+        "path": "crates/pipeline/tests/pipeline_handoff.rs",
+        "sha256": "e72b1713b443dcaa12172d6e4a5fbd20ab38962d6e3ca083212ec69dc9d443dc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "9fc9813cf2897fadb7ab3b570baf6b7d0123810b5e5003b636b26466f35789ca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "4929ac054f7ceffb10d959246bdc1d9ec6d0bc6e023f22fc5f61ba918f0315ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "bfaccd4de3a284873bfbc4d9fcc3816aec6527763dd034ad7eedb945a7b9feab"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "17b6dbb0b68a967f82096acfa393cfa377dde7f88fdd56fcf88fc7c0969489d3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "6d66d9b6af0953fbfe4d1f90a7568d748b3e5c737b9fe25b4a280c5f9655d2d4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "383b688b73bc2cf0315ad595fb331e694faeac85d94b520f9de24f9e209b2eef"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+        "sha256": "6aa2edab2f7d1f9279ff5bcba9114a80f708a0ecfeb097d6cac49a31593b16af"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P3-work-specification.md",
+        "sha256": "88e045930e30cac087650c125bdfc123fa7c7410b556ea228ce4b56d08da720f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "a401df977b81b836a9ff71ec0e11483d6e37a3ea2d89f8374fa9dd31f7ac47b0"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/happy_path/final_feature_spec.md",
+        "sha256": "e06ee5ac1c33fbbb1b9792bbf546755167a209f6250f58b0b14573f21a20cefb"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/expected/skip_path/final_feature_spec.md",
+        "sha256": "e06ee5ac1c33fbbb1b9792bbf546755167a209f6250f58b0b14573f21a20cefb"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/happy_path/stage_10_feature_spec.md",
+        "sha256": "aee00789586f221d7887721648df23810406163b8b937fc89ca24d1355cd04c2"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/skip_path/stage_10_feature_spec.md",
+        "sha256": "aee00789586f221d7887721648df23810406163b8b937fc89ca24d1355cd04c2"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/.handbook/definitions/profiles/work-specification-root-1.0.0.yaml",
+        "sha256": "49a8af149798276570fba8a5feaa78da8419cc22f95474bd885a6037b24a636c"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/.handbook/profile-selection.json",
+        "sha256": "a348bc24536feb858f1b15f8e2a5e667d5cf026bdea5d8ca210591cfd551faa7"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/artifacts/feature_spec/FEATURE_SPEC.md",
+        "sha256": "e06ee5ac1c33fbbb1b9792bbf546755167a209f6250f58b0b14573f21a20cefb"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/repo/artifacts/work-specification/work-specification.yaml",
+        "sha256": "aee00789586f221d7887721648df23810406163b8b937fc89ca24d1355cd04c2"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/capture.apply.stage_10_feature_spec.txt",
+        "sha256": "03ec7cfcca2d30a6966ec18a878e9760a8845ff4c27b1871c9e8b170ba24d540"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/capture.preview.stage_10_feature_spec.txt",
+        "sha256": "af4b4a6955411669de7100eb6066e528ad0fc8038686b734a81eba28a123c67c"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/goldens/capture.refused.stage_10_raw_compile_payload.txt",
+        "sha256": "ddb6c4ad0be1f2c60d0d5796ce77c8f6cae2544e72653e2484260b6fd5315d29"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/model_outputs/stage_10_feature_spec.md",
+        "sha256": "aee00789586f221d7887721648df23810406163b8b937fc89ca24d1355cd04c2"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/.handbook/definitions/profiles/work-specification-root-1.0.0.yaml",
+        "sha256": "49a8af149798276570fba8a5feaa78da8419cc22f95474bd885a6037b24a636c"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/.handbook/profile-selection.json",
+        "sha256": "a348bc24536feb858f1b15f8e2a5e667d5cf026bdea5d8ca210591cfd551faa7"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/artifacts/feature_spec/FEATURE_SPEC.md",
+        "sha256": "e06ee5ac1c33fbbb1b9792bbf546755167a209f6250f58b0b14573f21a20cefb"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/repo/artifacts/work-specification/work-specification.yaml",
+        "sha256": "aee00789586f221d7887721648df23810406163b8b937fc89ca24d1355cd04c2"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:5ddd1836be899a4e6ae9a8c3ba9db9cf465515934811334ddd73d837595c49be"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "complete_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Work Specification real-path proof",
+        "Canonical-source and view classification",
+        "P3 — Work Specification / Stage 10 vertical",
+        "Exact implementation surface selectors",
+        "Impact-analysis gate",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P3 — Work Specification / Stage 10 vertical"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+      "sections": [
+        "P3 — Work Specification / Stage 10 vertical"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The 52-entry manifest is the complete current P3 subject. Its scoped diff is against baseline HEAD 8c16a90657a787e95d55c856fac3d8d45d9e68be. Recorded command results are: handbook-pipeline library 26 passed; pipeline capture 44 passed; pipeline handoff 9 passed; compiler capture 39 passed; compiler handoff 8 passed; pipeline compile 20 passed; compiler compile 20 passed; CLI handoff refusals 4 passed; CLI feature-spec contract 1 passed; clippy for handbook-pipeline, handbook-compiler, and handbook-cli with all targets and -D warnings exited 0; cargo fmt --all -- --check exited 0; git diff --check exited 0. These results are evidence to replay or inspect, not a parent verdict.",
+  "allowed_scope": [
+    "Read-only replay of all 52 manifest entries and the P3 scoped diff from baseline HEAD 8c16a90657a787e95d55c856fac3d8d45d9e68be.",
+    "Independently verify repository-selected Work Specification descriptor resolution before mutation, duplicate-safe YAML parse, exact eight-field intake, Complete normalized content, and deterministic canonical YAML.",
+    "Independently verify that artifacts/feature_spec/FEATURE_SPEC.md is only a deterministic review view and is never capture, provenance, feature-identity, fingerprint, or handoff authority.",
+    "Independently verify that provenance, handoff copy/fingerprint, and feature identity bind the canonical YAML while public provenance fields/schema/API, route-basis semantics, command/stage selectors, and ExternalManualDerived trust remain unchanged.",
+    "Inspect the exact positive, negative, stale-provenance, missing/incorrect descriptor, malformed/duplicate/unknown/schema-invalid YAML, and view-tamper proofs.",
+    "Assess exact selector compliance, sibling-seam preservation, proof accuracy, and whether any runtime path bypasses the target boundary.",
+    "Identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No engine runtime or released-definition edit, root-profile default, generic renderer engine, dynamic filename, lifecycle, Projection, overlay, migration, compatibility fallback, public handoff schema/API change, trust promotion, route-basis change, P1/P2/P4/P5/P6/P7 work, or sibling-slice work.",
+    "Do not rely on any implementation-agent or parent conclusion; establish findings independently."
+  ],
+  "tasks": [
+    "Verify complete subject identity and inspect the P3 scoped diff against the declared baseline.",
+    "Trace the complete Stage 10 capture, provenance, feature-identity, and handoff call paths through the canonical Work Specification YAML and generated Markdown view.",
+    "Replay the smallest sufficient positive and negative commands and inspect the remaining recorded command evidence.",
+    "Validate exact descriptor selection, schema/intake enforcement, canonicalization, view determinism, public-contract preservation, and fail-closed behavior.",
+    "Validate proof-document accuracy and ensure the subject does not promote a seam beyond its real path.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Exact descriptor-selected Work Specification profile and canonical path before mutation",
+    "Duplicate-safe parse, selected intake Complete outcome, exact schema-valid normalized content, and deterministic canonical YAML bytes",
+    "Deterministic fixed Markdown review view that is never authority",
+    "Canonical YAML-bound provenance, feature identity, handoff copy/fingerprint, and ExternalManualDerived trust",
+    "Frozen public handoff schema/API, command/stage selectors, route basis, refusal classifications, and sibling seams",
+    "Positive/negative real-path P3 proof with no root default or schema/runtime widening",
+    "No unresolved valid P1/P2 finding for a clean verdict"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not edit, delegate, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

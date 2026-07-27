@@ -1,0 +1,146 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T162140Z--HCM-2-4--p0-selector-repair-review",
+  "created_at_utc": "2026-07-26T16:21:40Z",
+  "source_handoff_ids": [
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed"
+  ],
+  "parent_orchestration_id": "20260726T161851Z--HCM-2-4--implementation-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "spec-driven-development",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P0-selector-repair",
+  "subject_fingerprint": "sha256:155881b4485ac22c9014eb7e4740802b31ddfb11c0501febf6580f5e0fb82618",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p0-selector-repair-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "0a060dd5403c370c3df7acc1eb5037815b04a76a0a266815928751fb9da11715"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-selector-correction.md",
+        "sha256": "b42a19ad28081347b3b86e81a2afe10cba2e5e3420cd3f4a7e81611dfe61a8ea"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "e4fda7de1bc3a411dcbb38a22e5019afc3ea0e470fb874e29325b218a8e93eda"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:155881b4485ac22c9014eb7e4740802b31ddfb11c0501febf6580f5e0fb82618"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "single_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Objective and completion boundary",
+        "Canonical-source and view classification",
+        "P2 — Environment Context vertical",
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P2 — Environment Context vertical",
+        "P6 — Aggregate flow and fixed-selector deletion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped kinds and removal of temporary flow bridges",
+        "Reviewability indicators"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "At baseline 0b177ef9415e942cde763fcb086cec546a9a24f3, P2's behavior contract names Environment Context authoring plus compiler, setup, doctor, manifest, and flow reads; P6 separately owns aggregate bridge and fixed-selector deletion. Review the three-entry selector-repair subject against that live source boundary and the unchanged non-goals.",
+  "allowed_scope": [
+    "Replay the exact three-entry manifest and aggregate fingerprint before review.",
+    "Review the scoped working-tree diff from 0b177ef9415e942cde763fcb086cec546a9a24f3 to the manifested subject.",
+    "Read only the named authority sections and the exact existing Environment Inventory branches needed to validate selector completeness and ownership.",
+    "Check that every newly admitted production path is necessary for P2's existing RED/GREEN conditions and that P6 retains aggregate deletion ownership.",
+    "Check exact test coverage, packet reviewability, public-API and dependency stops, and sibling-scope containment.",
+    "Identify findings independently before comparing any P3/P4 candidate with the selected-scope rows in 09-review-finding-inventory.md."
+  ],
+  "non_goals": [
+    "No implementation, edits, formatting, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or further delegation.",
+    "No HCM-3.x, Resolution, Projection, public API, dependency, Cargo, package, transport, SDK, migration, dual-read, dynamic command, or sibling-slice expansion.",
+    "No review of unrelated repository changes or prior reviewer conclusions."
+  ],
+  "tasks": [
+    "Verify the manifested subject identity and inspect the scoped diff.",
+    "Review the selector repair independently for authority consistency, minimality, exact path completeness, packet ordering, and proof sufficiency.",
+    "Return findings first, ordered Critical, Required, Optional, Nit; each finding must include severity, file and line, violated contract or gate, boundary/proof failure, smallest valid remediation, and missing verification.",
+    "Return CLEAN only when no valid P1/P2 remains; separately list any validated P3/P4 advisory or its exact inventory deduplication."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#exact-implementation-surface-selectors",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#explicit-non-goals-and-authority-stops",
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#finding-decomposition-and-execution-packet-formation",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
+  ],
+  "stop_conditions": [
+    "Return blocked if the manifest or aggregate fingerprint cannot be replayed.",
+    "Report rather than repair any defect, scope expansion, unavailable proof, or authority conflict.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

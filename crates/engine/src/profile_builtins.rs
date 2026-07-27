@@ -22,6 +22,9 @@ pub(crate) fn definition(reference: &ExactDefinitionRef) -> Option<BuiltInSource
         "handbook.profile.shipped-root@1.1.0" => {
             source!("profiles/handbook.profile.shipped-root/1.1.0.yaml")
         }
+        "handbook.profile.shipped-root@1.2.0" => {
+            source!("profiles/handbook.profile.shipped-root/1.2.0.yaml")
+        }
         "handbook.roles.core@1.0.0" => {
             source!("stable-roles/handbook.roles.core/1.0.0.yaml")
         }
@@ -88,17 +91,32 @@ pub(crate) fn definition(reference: &ExactDefinitionRef) -> Option<BuiltInSource
         "handbook.artifact-kind.project-context@1.0.0" => {
             source!("artifact-kinds/handbook.artifact-kind.project-context/1.0.0.yaml")
         }
+        "handbook.artifact-kind.project-context@1.1.0" => {
+            source!("artifact-kinds/handbook.artifact-kind.project-context/1.1.0.yaml")
+        }
         "handbook.artifact-kind.environment-context@1.0.0" => {
             source!("artifact-kinds/handbook.artifact-kind.environment-context/1.0.0.yaml")
+        }
+        "handbook.artifact-kind.environment-context@1.1.0" => {
+            source!("artifact-kinds/handbook.artifact-kind.environment-context/1.1.0.yaml")
         }
         "handbook.artifact-kind.work-specification@1.0.0" => {
             source!("artifact-kinds/handbook.artifact-kind.work-specification/1.0.0.yaml")
         }
+        "handbook.artifact-kind.work-specification@1.1.0" => {
+            source!("artifact-kinds/handbook.artifact-kind.work-specification/1.1.0.yaml")
+        }
         "handbook.artifact-kind.decision-record@1.0.0" => {
             source!("artifact-kinds/handbook.artifact-kind.decision-record/1.0.0.yaml")
         }
+        "handbook.artifact-kind.decision-record@1.1.0" => {
+            source!("artifact-kinds/handbook.artifact-kind.decision-record/1.1.0.yaml")
+        }
         "handbook.artifact-kind.risk-record@1.0.0" => {
             source!("artifact-kinds/handbook.artifact-kind.risk-record/1.0.0.yaml")
+        }
+        "handbook.artifact-kind.risk-record@1.1.0" => {
+            source!("artifact-kinds/handbook.artifact-kind.risk-record/1.1.0.yaml")
         }
         "handbook.capabilities.constitutional-root@1.0.0" => {
             source!("semantic-capabilities/handbook.capabilities.constitutional-root/1.0.0.yaml")
@@ -127,11 +145,41 @@ pub(crate) fn definition(reference: &ExactDefinitionRef) -> Option<BuiltInSource
         "handbook.renderer.charter-review-markdown@1.0.0" => source!(
             "renderers/handbook.renderer.charter-review-markdown/1.0.0.yaml"
         ),
+        "handbook.renderer.project-context-review-markdown@1.0.0" => source!(
+            "renderers/handbook.renderer.project-context-review-markdown/1.0.0.yaml"
+        ),
+        "handbook.renderer.environment-context-review-markdown@1.0.0" => source!(
+            "renderers/handbook.renderer.environment-context-review-markdown/1.0.0.yaml"
+        ),
+        "handbook.renderer.work-specification-review-markdown@1.0.0" => source!(
+            "renderers/handbook.renderer.work-specification-review-markdown/1.0.0.yaml"
+        ),
+        "handbook.renderer.decision-record-review-markdown@1.0.0" => source!(
+            "renderers/handbook.renderer.decision-record-review-markdown/1.0.0.yaml"
+        ),
+        "handbook.renderer.risk-record-review-markdown@1.0.0" => source!(
+            "renderers/handbook.renderer.risk-record-review-markdown/1.0.0.yaml"
+        ),
         "handbook.lifecycle.constitutional-review-lock@1.0.0" => source!(
             "lifecycle-policies/handbook.lifecycle.constitutional-review-lock/1.0.0.yaml"
         ),
         "handbook.intake.charter@1.0.0" => {
             source!("intakes/handbook.intake.charter/1.0.0.yaml")
+        }
+        "handbook.intake.project-context@1.0.0" => {
+            source!("intakes/handbook.intake.project-context/1.0.0.yaml")
+        }
+        "handbook.intake.environment-context@1.0.0" => {
+            source!("intakes/handbook.intake.environment-context/1.0.0.yaml")
+        }
+        "handbook.intake.work-specification@1.0.0" => {
+            source!("intakes/handbook.intake.work-specification/1.0.0.yaml")
+        }
+        "handbook.intake.decision-record@1.0.0" => {
+            source!("intakes/handbook.intake.decision-record/1.0.0.yaml")
+        }
+        "handbook.intake.risk-record@1.0.0" => {
+            source!("intakes/handbook.intake.risk-record/1.0.0.yaml")
         }
         "handbook.condition.project.managed-operational-surface@1.0.0" => source!(
             "project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml"

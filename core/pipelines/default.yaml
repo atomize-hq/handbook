@@ -17,7 +17,7 @@ defaults:
 artifacts:
   charter: artifacts/charter/CHARTER.md
   project_context: artifacts/project_context/PROJECT_CONTEXT.md
-  feature_spec: artifacts/feature_spec/FEATURE_SPEC.md
+  feature_spec: artifacts/work-specification/work-specification.yaml
 stages:
   - id: stage.00_base
     file: core/stages/00_base.md

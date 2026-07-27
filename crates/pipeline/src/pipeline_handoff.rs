@@ -25,8 +25,9 @@ use crate::stage_10_feature_spec_provenance::{
     build_stage_10_feature_spec_capture_provenance, load_stage_10_feature_spec_capture_provenance,
     route_basis_fingerprint_sha256, sha256_hex,
     validate_stage_10_feature_spec_capture_provenance_match, Stage10FeatureSpecCaptureProvenance,
-    FEATURE_SPEC_ARTIFACT_PATH, STAGE_10_FEATURE_SPEC_CAPTURE_PROVENANCE_SCHEMA_VERSION,
+    STAGE_10_FEATURE_SPEC_CAPTURE_PROVENANCE_SCHEMA_VERSION, WORK_SPECIFICATION_ARTIFACT_PATH,
 };
+use handbook_engine::canonical_yaml::parse_canonical_yaml;
 use handbook_engine::{ArtifactManifest, ArtifactPresence, ManifestInputs};
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
@@ -261,11 +262,11 @@ pub fn emit_pipeline_handoff_bundle_with_storage_layout(
         request.consumer_selector.trim(),
     )?;
 
-    let feature_spec_body = read_repo_relative_string(repo_root, FEATURE_SPEC_ARTIFACT_PATH)
+    let feature_spec_body = read_repo_relative_string(repo_root, WORK_SPECIFICATION_ARTIFACT_PATH)
         .map_err(|err| PipelineHandoffRefusal {
             classification: PipelineHandoffRefusalClassification::MissingRequiredInput,
             summary: format!(
-                "required handoff source `{FEATURE_SPEC_ARTIFACT_PATH}` is unavailable: {}",
+                "required handoff source `{WORK_SPECIFICATION_ARTIFACT_PATH}` is unavailable: {}",
                 format_repo_file_access_error(&err)
             ),
             pipeline_id: Some(compile_result.target.pipeline_id.clone()),
@@ -275,19 +276,21 @@ pub fn emit_pipeline_handoff_bundle_with_storage_layout(
                 supported_target.stage_id
             ),
         })?;
-    let feature_spec_sha256 = sha256_repo_relative_file(repo_root, FEATURE_SPEC_ARTIFACT_PATH)
-        .map_err(|err| PipelineHandoffRefusal {
-            classification: PipelineHandoffRefusalClassification::MissingRequiredInput,
-            summary: format!(
-                "required handoff source `{FEATURE_SPEC_ARTIFACT_PATH}` is unavailable: {}",
+    let feature_spec_sha256 =
+        sha256_repo_relative_file(repo_root, WORK_SPECIFICATION_ARTIFACT_PATH).map_err(|err| {
+            PipelineHandoffRefusal {
+                classification: PipelineHandoffRefusalClassification::MissingRequiredInput,
+                summary: format!(
+                "required handoff source `{WORK_SPECIFICATION_ARTIFACT_PATH}` is unavailable: {}",
                 format_repo_file_access_error(&err)
             ),
-            pipeline_id: Some(compile_result.target.pipeline_id.clone()),
-            consumer_id: Some(supported_target.consumer_id.clone()),
-            recovery: format!(
-                "capture `{}` output before retrying `pipeline handoff emit`",
-                supported_target.stage_id
-            ),
+                pipeline_id: Some(compile_result.target.pipeline_id.clone()),
+                consumer_id: Some(supported_target.consumer_id.clone()),
+                recovery: format!(
+                    "capture `{}` output before retrying `pipeline handoff emit`",
+                    supported_target.stage_id
+                ),
+            }
         })?;
     let current_capture_provenance = build_stage_10_feature_spec_capture_provenance(
         repo_root,
@@ -529,10 +532,10 @@ fn load_stage_10_feature_spec_capture_provenance_for_storage_layout(
             provenance.pipeline_id, provenance.stage_id, pipeline_id, stage_id
         ));
     }
-    if provenance.feature_spec_path != FEATURE_SPEC_ARTIFACT_PATH {
+    if provenance.feature_spec_path != WORK_SPECIFICATION_ARTIFACT_PATH {
         return Err(format!(
             "stage-10 capture provenance feature_spec_path `{}` does not match expected `{}`",
-            provenance.feature_spec_path, FEATURE_SPEC_ARTIFACT_PATH
+            provenance.feature_spec_path, WORK_SPECIFICATION_ARTIFACT_PATH
         ));
     }
     Ok(provenance)
@@ -1086,11 +1089,11 @@ fn build_input_copy_plans(
 
     let feature_spec_bytes = feature_spec_body.as_bytes().to_vec();
     plans.push(InputCopyPlan {
-        source_path: FEATURE_SPEC_ARTIFACT_PATH.to_string(),
+        source_path: WORK_SPECIFICATION_ARTIFACT_PATH.to_string(),
         bundle_path: format!(
             "inputs/{}/{}",
             PipelineHandoffTrustClass::ExternalManualDerived.bundle_segment(),
-            FEATURE_SPEC_ARTIFACT_PATH
+            WORK_SPECIFICATION_ARTIFACT_PATH
         ),
         trust_class: PipelineHandoffTrustClass::ExternalManualDerived,
         sha256: sha256_hex(&feature_spec_bytes),
@@ -1117,7 +1120,7 @@ fn expected_trust_class_for_source(source_path: &str) -> Result<PipelineHandoffT
     if is_canonical_declarative_path(source_path) {
         return Ok(PipelineHandoffTrustClass::Canonical);
     }
-    if source_path == FEATURE_SPEC_ARTIFACT_PATH {
+    if source_path == WORK_SPECIFICATION_ARTIFACT_PATH {
         return Ok(PipelineHandoffTrustClass::ExternalManualDerived);
     }
     if source_path.starts_with("artifacts/") {
@@ -1479,30 +1482,16 @@ fn stage_10_provenance_recovery(stage_id: &str) -> String {
 }
 
 fn derive_feature_id(feature_spec_body: &str, feature_spec_sha256: &str) -> String {
-    if let Some(spec_id) = feature_spec_body
-        .lines()
-        .map(str::trim)
-        .find_map(|line| line.strip_prefix("- Spec ID:"))
-        .map(str::trim)
-        .filter(|value| !value.is_empty() && !value.contains('{') && !value.contains('}'))
+    if let Some(record_id) = parse_canonical_yaml(feature_spec_body.as_bytes())
+        .ok()
+        .and_then(|value| {
+            value
+                .get("record_id")
+                .and_then(|record_id| record_id.as_str())
+                .map(str::to_string)
+        })
     {
-        let slug = slugify(spec_id);
-        if !slug.is_empty() {
-            return slug;
-        }
-    }
-
-    if let Some(heading) = feature_spec_body
-        .lines()
-        .map(str::trim)
-        .find(|line| line.starts_with("# "))
-    {
-        let title = heading.trim_start_matches("# ").trim();
-        let normalized = title
-            .trim_end_matches("— Feature Specification")
-            .trim_end_matches("- Feature Specification")
-            .trim();
-        let slug = slugify(normalized);
+        let slug = slugify(&record_id);
         if !slug.is_empty() {
             return slug;
         }
@@ -1619,8 +1608,7 @@ mod tests {
 
     #[test]
     fn derive_feature_id_prefers_spec_id_when_present() {
-        let feature_spec =
-            "# Ignore Me — Feature Specification\n- Spec ID: FEAT-127 Primary Journey\n";
+        let feature_spec = "record_id: \"feat.127-primary-journey\"\n";
         assert_eq!(
             derive_feature_id(
                 feature_spec,
@@ -1638,7 +1626,7 @@ mod tests {
                 feature_spec,
                 "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
             ),
-            "pipeline-foundation-journey"
+            "feature-0123456789ab"
         );
     }
 
@@ -1666,7 +1654,8 @@ mod tests {
             PipelineHandoffTrustClass::CompilerDerived
         );
         assert_eq!(
-            expected_trust_class_for_source("artifacts/feature_spec/FEATURE_SPEC.md").unwrap(),
+            expected_trust_class_for_source("artifacts/work-specification/work-specification.yaml")
+                .unwrap(),
             PipelineHandoffTrustClass::ExternalManualDerived
         );
     }

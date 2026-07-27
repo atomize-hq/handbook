@@ -1,0 +1,20 @@
+{
+  "schema_id": "handbook.instance-profile",
+  "schema_version": "1.0",
+  "profile_id": "example.profile.hcm-2-4-work-specification",
+  "profile_version": "1.0.0",
+  "profile_scope": "repository",
+  "extends_profile_ref": "handbook.profile.shipped-root@1.2.0",
+  "artifact_instances": [
+    {"canonical_path":".handbook/project/charter.yaml","capability_refs":["constitutional_root"],"depends_on":[],"extensions":{},"id":"project_authority","intake_definition_ref":"handbook.intake.charter@1.0.0","kind_ref":"handbook.artifact-kind.project-authority@1.1.0","label":"Charter","lifecycle_policy_ref":"handbook.lifecycle.constitutional-review-lock@1.0.0","projection_definition_refs":[],"renderer_definition_refs":["handbook.renderer.charter-review-markdown@1.0.0"],"requiredness":{"condition_ref":null,"mode":"always"},"role_ref":"constitutional_authority","schema_id":"handbook.artifact-instance-descriptor","schema_version":"1.0","validation_overlay_refs":[]},
+    {"canonical_path":".handbook/project/context.yaml","capability_refs":[],"depends_on":[],"extensions":{},"id":"project_context","intake_definition_ref":"handbook.intake.project-context@1.0.0","kind_ref":"handbook.artifact-kind.project-context@1.1.0","label":"Project Context","lifecycle_policy_ref":null,"projection_definition_refs":[],"renderer_definition_refs":["handbook.renderer.project-context-review-markdown@1.0.0"],"requiredness":{"condition_ref":null,"mode":"always"},"role_ref":"project_context","schema_id":"handbook.artifact-instance-descriptor","schema_version":"1.0","validation_overlay_refs":[]},
+    {"canonical_path":".handbook/project/environment.yaml","capability_refs":[],"depends_on":[],"extensions":{},"id":"environment_context","intake_definition_ref":"handbook.intake.environment-context@1.0.0","kind_ref":"handbook.artifact-kind.environment-context@1.1.0","label":"Environment Context","lifecycle_policy_ref":null,"projection_definition_refs":[],"renderer_definition_refs":["handbook.renderer.environment-context-review-markdown@1.0.0"],"requiredness":{"condition_ref":"handbook.condition.project.managed-operational-surface@1.0.0","mode":"conditional"},"role_ref":"environment_context","schema_id":"handbook.artifact-instance-descriptor","schema_version":"1.0","validation_overlay_refs":[]},
+    {"canonical_path":"artifacts/work-specification/work-specification.yaml","capability_refs":[],"depends_on":[],"extensions":{},"id":"work_specification","intake_definition_ref":"handbook.intake.work-specification@1.0.0","kind_ref":"handbook.artifact-kind.work-specification@1.1.0","label":"Work Specification","lifecycle_policy_ref":null,"projection_definition_refs":[],"renderer_definition_refs":["handbook.renderer.work-specification-review-markdown@1.0.0"],"requiredness":{"condition_ref":null,"mode":"always"},"role_ref":"delivery_unit","schema_id":"handbook.artifact-instance-descriptor","schema_version":"1.0","validation_overlay_refs":[]}
+  ],
+  "projection_catalog_refs": [],
+  "posture_evaluation_policy": null,
+  "dock_requirement_refs": [],
+  "adapter_overlay_refs": [],
+  "extensions": {},
+  "profile_fingerprint": "sha256:56a7e3f389c092d4b06ee8140e29e541da7832641719636cc7610fd621bb8038"
+}

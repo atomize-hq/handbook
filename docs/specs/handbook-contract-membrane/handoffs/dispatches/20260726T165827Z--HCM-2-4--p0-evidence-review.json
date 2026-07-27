@@ -1,0 +1,162 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T165827Z--HCM-2-4--p0-evidence-review",
+  "created_at_utc": "2026-07-26T16:58:27Z",
+  "source_handoff_ids": [
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed"
+  ],
+  "parent_orchestration_id": "20260726T161851Z--HCM-2-4--implementation-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "context-engineering",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P0-evidence",
+  "subject_fingerprint": "sha256:62bdf485707df6a816eb94bf82da75d24b5df7e0d3b0acbb49761fb24a6173e0",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p0-evidence-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "092e4c5565c704689abbf6e1368a2aa188afc4a453eaa9356c1bcf0871b2750b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "9e986ca2db06e8c60f45e93dd5b05ee16b4fa703cbedac5f7082462926ea6258"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-selector-correction.md",
+        "sha256": "83ce6d25b6cc7965e41c0bbb2d1723b657c93c332e7cfbb668f503b87e26275e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P0-inventory-lock.md",
+        "sha256": "5450391e0e78256fa21627d06db1a439caaa7f37218f4101112ea0240d72727f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "a1f897b9f39c10105de69f7ac49c2ba3f340c7ec8c2a3d19ee9b071178eb58ec"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:62bdf485707df6a816eb94bf82da75d24b5df7e0d3b0acbb49761fb24a6173e0"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "complete_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4",
+        "Packet reviewability indicators"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-gates.md",
+      "sections": [
+        "HCM-2.4 proof and regression gates"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P0 — Baseline and inventory lock",
+        "Implementation packet decomposition",
+        "Exact implementation surface selectors",
+        "Acceptance criteria"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P0 — Inventory lock",
+        "Proof strategy",
+        "Plan definition of done"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The material P0 review subject is the five-entry manifest at sha256:62bdf485707df6a816eb94bf82da75d24b5df7e0d3b0acbb49761fb24a6173e0. Runtime, tests, definition fixtures, template fixtures, and canonical control-pack rows have not been edited in this orchestration. The reviewer must establish every baseline, inventory, hash, impact, selector, and test claim directly from live repository truth.",
+  "allowed_scope": [
+    "Replay the exact five-entry subject manifest and aggregate fingerprint.",
+    "Read the cited HCM-2.4 authority and only the live files, tests, definitions, templates, Git history, and GitNexus evidence needed to verify the P0 claims.",
+    "Verify selected-handoff validity, dependency and authorization proof, current repository state, immutable input hashes and semantic identities, implementation path closure, packet reviewability, baseline test results, and recorded impact classifications.",
+    "Verify P0 changed only evidence-established slice-local control records and the smallest coupled contract repair, with no runtime or sibling-slice widening.",
+    "Identify findings independently before comparing any P3/P4 candidate with the selected-scope review inventory."
+  ],
+  "non_goals": [
+    "No implementation, edits, formatting, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "Do not review or redesign future packet implementation that is not needed to judge P0 entry correctness.",
+    "No HCM-3.x, Resolution, Projection, public API, dependency, Cargo, package, migration, dual-read, dynamic-command, or sibling-slice expansion.",
+    "Do not accept proof-file assertions, prior reviewer conclusions, or handoff claims without direct live validation."
+  ],
+  "tasks": [
+    "Verify exact subject identity, subject hygiene, and scoped repository state.",
+    "Audit every factual assertion in P0-inventory-lock.md against current live evidence, including the six production registry callers, planned seventh intake caller, immutable input hashes, selector closure, GitNexus risk ledger, and baseline commands.",
+    "Verify the SPEC, plan, selector decision, path manifest, and P0 proof are mutually consistent and sufficient to freeze the packet sequence without circular authority or hidden runtime widening.",
+    "Check applicable HCM-2.4 P0 contracts and proof gates, including negative or fail-closed readiness where P0 claims it.",
+    "Return findings first in Critical, Required, Optional, Nit order with severity, file and line, violated contract or gate, boundary/proof impact, smallest valid remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#hcm-2-4",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-gates.md#hcm-2-4",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#p0-baseline-and-inventory-lock",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#exact-implementation-surface-selectors",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md#p0-inventory-lock",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity, current repository truth, or required read-only evidence cannot be established.",
+    "Report rather than repair any P1/P2.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

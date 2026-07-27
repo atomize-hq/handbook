@@ -924,6 +924,97 @@ fn validate_authored_profile_fingerprints(
                     )
                     .collect(),
             })
+        } else if source.exact_ref().as_str() == "handbook.profile.shipped-root@1.2.0" {
+            let mut resolved = BTreeMap::<(String, String), String>::new();
+            for dependency in &dependencies {
+                let dependency_role = match dependency.definition_class {
+                    "artifact_kind" => "artifact_kind_source",
+                    "schema_entry" => "schema_source",
+                    other => other,
+                };
+                resolved.insert(
+                    (dependency_role.to_owned(), dependency.reference.clone()),
+                    dependency.fingerprint.clone(),
+                );
+            }
+            let mut add_builtin_dependency = |dependency_role: &str,
+                                              reference: &str,
+                                              fingerprint_field: &'static str|
+             -> Result<(), ProfileLoadError> {
+                let exact_ref = ExactDefinitionRef::parse(reference).map_err(registry_error)?;
+                let built_in = crate::profile_builtins::definition(&exact_ref)
+                    .ok_or_else(|| missing("profile exact built-in dependency"))?;
+                let definition =
+                    crate::parse_definition_yaml(built_in.bytes).map_err(registry_error)?;
+                let fingerprint_value =
+                    definition
+                        .get(fingerprint_field)
+                        .and_then(Value::as_str)
+                        .ok_or_else(|| missing("profile exact dependency fingerprint"))?;
+                let parsed_fingerprint =
+                    DefinitionFingerprint::parse(fingerprint_value).map_err(registry_error)?;
+                let key = (dependency_role.to_owned(), reference.to_owned());
+                if resolved
+                    .insert(key, parsed_fingerprint.as_str().to_owned())
+                    .is_some_and(|prior| prior != parsed_fingerprint.as_str())
+                {
+                    return Err(fingerprint("profile duplicate exact dependency"));
+                }
+                Ok(())
+            };
+            for descriptor in source
+                .field(ProfileField::ArtifactInstances)
+                .and_then(Value::as_array)
+                .ok_or_else(|| missing("profile artifact descriptor definitions"))?
+            {
+                if let Some(reference) = descriptor
+                    .get("requiredness")
+                    .and_then(|requiredness| requiredness.get("condition_ref"))
+                    .and_then(Value::as_str)
+                {
+                    add_builtin_dependency("condition", reference, "definition_fingerprint")?;
+                }
+                if let Some(reference) = descriptor
+                    .get("intake_definition_ref")
+                    .and_then(Value::as_str)
+                {
+                    add_builtin_dependency("intake", reference, "intake_definition_fingerprint")?;
+                }
+                if let Some(reference) = descriptor
+                    .get("lifecycle_policy_ref")
+                    .and_then(Value::as_str)
+                {
+                    add_builtin_dependency("lifecycle", reference, "lifecycle_fingerprint")?;
+                }
+                for reference in descriptor
+                    .get("renderer_definition_refs")
+                    .and_then(Value::as_array)
+                    .ok_or_else(|| missing("profile renderer dependency list"))?
+                {
+                    add_builtin_dependency(
+                        "renderer",
+                        reference
+                            .as_str()
+                            .ok_or_else(|| missing("profile renderer dependency ref"))?,
+                        "renderer_fingerprint",
+                    )?;
+                }
+            }
+            fingerprint_serializable(&ProfileUniformClosure {
+                definition: source.fingerprint_definition(),
+                resolved_dependencies: resolved
+                    .iter()
+                    .map(
+                        |((dependency_role, definition_ref), definition_fingerprint)| {
+                            ProfileUniformDependency {
+                                definition_fingerprint,
+                                definition_ref,
+                                dependency_role,
+                            }
+                        },
+                    )
+                    .collect(),
+            })
         } else {
             fingerprint_serializable(&ProfileSourceFingerprintClosure {
                 definition: source.fingerprint_definition(),

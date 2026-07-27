@@ -246,6 +246,89 @@ impl ArtifactInstanceRegistry {
                         "Project Authority 1.1 descriptor differs from its frozen dependency closure",
                     ));
                 }
+            } else if let Some((
+                expected_id,
+                expected_role,
+                expected_label,
+                expected_path,
+                expected_mode,
+                expected_condition,
+                expected_intake,
+                expected_renderer,
+            )) = match source.kind_ref.as_str() {
+                "handbook.artifact-kind.project-context@1.1.0" => Some((
+                    "project_context",
+                    Some("project_context"),
+                    "Project Context",
+                    ".handbook/project/context.yaml",
+                    RequirednessMode::Always,
+                    None,
+                    "handbook.intake.project-context@1.0.0",
+                    "handbook.renderer.project-context-review-markdown@1.0.0",
+                )),
+                "handbook.artifact-kind.environment-context@1.1.0" => Some((
+                    "environment_context",
+                    Some("environment_context"),
+                    "Environment Context",
+                    ".handbook/project/environment.yaml",
+                    RequirednessMode::Conditional,
+                    Some("handbook.condition.project.managed-operational-surface@1.0.0"),
+                    "handbook.intake.environment-context@1.0.0",
+                    "handbook.renderer.environment-context-review-markdown@1.0.0",
+                )),
+                "handbook.artifact-kind.work-specification@1.1.0" => Some((
+                    "work_specification",
+                    Some("delivery_unit"),
+                    "Work Specification",
+                    "artifacts/work-specification/work-specification.yaml",
+                    RequirednessMode::Always,
+                    None,
+                    "handbook.intake.work-specification@1.0.0",
+                    "handbook.renderer.work-specification-review-markdown@1.0.0",
+                )),
+                "handbook.artifact-kind.decision-record@1.1.0" => Some((
+                    "decision_record",
+                    None,
+                    "Decision Record",
+                    ".handbook/records/decision.yaml",
+                    RequirednessMode::Always,
+                    None,
+                    "handbook.intake.decision-record@1.0.0",
+                    "handbook.renderer.decision-record-review-markdown@1.0.0",
+                )),
+                "handbook.artifact-kind.risk-record@1.1.0" => Some((
+                    "risk_record",
+                    None,
+                    "Risk Record",
+                    ".handbook/records/risk.yaml",
+                    RequirednessMode::Always,
+                    None,
+                    "handbook.intake.risk-record@1.0.0",
+                    "handbook.renderer.risk-record-review-markdown@1.0.0",
+                )),
+                _ => None,
+            } {
+                let exact = source.id == expected_id
+                    && source.role_ref.as_deref() == expected_role
+                    && source.capability_refs.is_empty()
+                    && source.label == expected_label
+                    && source.canonical_path == expected_path
+                    && source.requiredness.mode == expected_mode
+                    && source.requiredness.condition_ref.as_deref() == expected_condition
+                    && source.depends_on.is_empty()
+                    && source.lifecycle_policy_ref.is_none()
+                    && source.intake_definition_ref.as_deref() == Some(expected_intake)
+                    && source.renderer_definition_refs == [expected_renderer]
+                    && source.projection_definition_refs.is_empty()
+                    && source.validation_overlay_refs.is_empty()
+                    && source.extensions.is_empty();
+                if !exact {
+                    return Err(RegistryLoadError::at(
+                        RegistryLoadErrorKind::UnsupportedDependency,
+                        format!("artifact_instances/{index}"),
+                        "first-party successor descriptor differs from its frozen closure",
+                    ));
+                }
             } else {
                 for (selected, field) in [
                     (

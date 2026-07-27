@@ -1,0 +1,9 @@
+consequences:
+  - "More checks"
+context: "A choice exists"
+decision: "Choose safety"
+record_id: "example.record.decision"
+schema_id: "handbook.artifact.decision-record"
+schema_version: "1.0"
+status: "accepted"
+supersedes: []

@@ -27,9 +27,17 @@ use crate::route_state::{
 use crate::stage_10_feature_spec_provenance::{
     build_stage_10_feature_spec_capture_provenance,
     persist_stage_10_feature_spec_capture_provenance, sha256_hex,
-    Stage10FeatureSpecCaptureProvenance, FEATURE_SPEC_ARTIFACT_PATH,
+    Stage10FeatureSpecCaptureProvenance, FEATURE_SPEC_VIEW_PATH, WORK_SPECIFICATION_ARTIFACT_PATH,
 };
+use handbook_engine::artifact_intake::{
+    CoverageConfidenceV1, CoverageEvaluationOutcomeV1, CoverageSourceKindV1, CoverageSpecificityV1,
+    CoverageSubmissionStateV1, CoverageSubmissionV1,
+};
+use handbook_engine::artifact_intake_registry::AcquisitionModeV1;
+use handbook_engine::artifact_repository::{ArtifactRepositoryV1, ArtifactTargetV1};
+use handbook_engine::canonical_yaml::{canonical_yaml_bytes, parse_canonical_yaml};
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
@@ -37,31 +45,11 @@ use std::fs;
 use std::io::Write;
 use std::path::{Component, Path, PathBuf};
 
-const REQUIRED_STAGE_10_FEATURE_SPEC_HEADINGS: [&str; 23] = [
-    "## 0) Charter Alignment",
-    "### Dimension alignment",
-    "### Charter red lines check",
-    "## 1) Summary",
-    "## 2) Problem & Context",
-    "## 3) Goals",
-    "## 4) Non-Goals",
-    "## 5) Users & Stakeholders",
-    "## 6) Scope",
-    "### In Scope",
-    "### Out of Scope",
-    "## 7) Requirements",
-    "### Functional Requirements",
-    "### Non-Functional Requirements (NFRs)",
-    "## 8) Acceptance Criteria (testable)",
-    "## 9) Technical Design",
-    "### Proposed Approach (recommended)",
-    "## 10) Alternatives Considered",
-    "## 11) Testing Strategy",
-    "## 12) Rollout Plan",
-    "## 13) Risks & Mitigations",
-    "## 15) Traceability Map",
-    "## Y) Debt Tracking (Charter-aligned)",
-];
+const WORK_SPECIFICATION_PROFILE_REF: &str = "example.profile.hcm-2-4-work-specification@1.0.0";
+const WORK_SPECIFICATION_KIND_REF: &str = "handbook.artifact-kind.work-specification@1.1.0";
+const WORK_SPECIFICATION_INSTANCE_ID: &str = "work_specification";
+const WORK_SPECIFICATION_INTAKE_REF: &str = "handbook.intake.work-specification@1.0.0";
+const WORK_SPECIFICATION_SCHEMA_REF: &str = "handbook.schemas.artifacts.work-specification@1.0.0";
 const CAPTURE_CACHE_SCHEMA_VERSION: &str = "m3-capture-cache-v1";
 const CAPTURE_UNKNOWN_MARKERS: [&str; 5] = ["TBD", "UNKNOWN", "Unknown", "TODO", "??"];
 pub const PIPELINE_CAPTURE_CACHE_SCHEMA_VERSION: &str = CAPTURE_CACHE_SCHEMA_VERSION;
@@ -171,7 +159,7 @@ enum CaptureInputParseError {
     InvalidSingleFileWrapper,
     EmptySingleFileBody,
     RawStage10CompilePayload,
-    InvalidStage10FeatureSpecBody,
+    InvalidStage10WorkSpecificationBody,
     InvalidMultifilePrefix,
     EmptyDeclaredBlock(String),
     DuplicateBlock(String),
@@ -558,7 +546,7 @@ fn build_capture_plan(
             }
         })?;
 
-    let artifact_contents = if artifact_paths.len() == 1 {
+    let mut artifact_contents = if artifact_paths.len() == 1 {
         parse_single_file_capture_input(
             &stage_definition.id,
             &registry.compile_target().stage.id,
@@ -586,7 +574,25 @@ fn build_capture_plan(
     }
     .map_err(|err| classify_capture_input_refusal(err, &pipeline.header.id, &stage_id))?;
 
-    let repo_mirror_writes = build_repo_mirror_writes(&artifact_contents, &repo_paths).map_err(
+    let is_stage_10 = stage_definition.id == registry.compile_target().stage.id;
+    let repo_mirror_writes = if is_stage_10 {
+        let (canonical_artifacts, rendered_views) = canonicalize_stage_10_capture_writes(
+            repo_root,
+            &artifact_contents,
+            &artifact_paths,
+            &repo_paths,
+        )
+        .map_err(|summary| PipelineCaptureRefusal {
+            classification: PipelineCaptureRefusalClassification::InvalidCaptureInput,
+            summary,
+            pipeline_id: Some(pipeline.header.id.clone()),
+            stage_id: Some(stage_id.clone()),
+            recovery: "provide one duplicate-free Work Specification YAML document that completes the descriptor-selected intake and retry `pipeline capture`".to_string(),
+        })?;
+        artifact_contents = canonical_artifacts;
+        rendered_views
+    } else {
+        build_repo_mirror_writes(&artifact_contents, &repo_paths).map_err(
         |summary| PipelineCaptureRefusal {
             classification: PipelineCaptureRefusalClassification::InvalidCaptureInput,
             summary,
@@ -596,7 +602,8 @@ fn build_capture_plan(
                 "emit the declared artifact outputs only and let `pipeline capture` derive repo-file mirrors"
                     .to_string(),
         },
-    )?;
+    )?
+    };
     validate_write_targets(
         repo_root,
         &artifact_contents,
@@ -855,11 +862,11 @@ fn build_stage_10_capture_provenance_for_apply(
     let feature_spec_write = plan
         .artifact_writes
         .iter()
-        .find(|write| write.path == FEATURE_SPEC_ARTIFACT_PATH)
+        .find(|write| write.path == WORK_SPECIFICATION_ARTIFACT_PATH)
         .ok_or_else(|| PipelineCaptureRefusal {
             classification: PipelineCaptureRefusalClassification::InvalidState,
             summary: format!(
-                "stage `{}` capture is missing required artifact write `{FEATURE_SPEC_ARTIFACT_PATH}`",
+                "stage `{}` capture is missing required artifact write `{WORK_SPECIFICATION_ARTIFACT_PATH}`",
                 plan.target.stage_id
             ),
             pipeline_id: Some(plan.target.pipeline_id.clone()),
@@ -940,7 +947,7 @@ fn canonicalize_capture_plan_for_apply(
             stage_id: Some(plan.target.stage_id.clone()),
             recovery: "fix the declared output targets and retry `pipeline capture`".to_string(),
         })?;
-    let artifact_writes =
+    let mut artifact_writes =
         canonicalize_cached_artifact_writes(plan, &artifact_paths).map_err(|summary| {
             PipelineCaptureRefusal {
                 classification: PipelineCaptureRefusalClassification::TamperedCaptureCache,
@@ -952,7 +959,26 @@ fn canonicalize_capture_plan_for_apply(
                         .to_string(),
             }
         })?;
-    let repo_mirror_writes =
+    let is_stage_10 = stage_definition.id
+        == load_capture_target_registry(
+            repo_root,
+            Some(&plan.target.pipeline_id),
+            Some(&plan.target.stage_id),
+        )?
+        .compile_target()
+        .stage
+        .id;
+    let repo_mirror_writes = if is_stage_10 {
+        let (canonical_artifacts, rendered_views) = canonicalize_stage_10_capture_writes(
+            repo_root,
+            &artifact_writes,
+            &artifact_paths,
+            &repo_paths,
+        )
+        .map_err(|summary| tampered_capture_cache_refusal(plan, summary))?;
+        artifact_writes = canonical_artifacts;
+        rendered_views
+    } else {
         build_repo_mirror_writes(&artifact_writes, &repo_paths).map_err(|summary| {
             PipelineCaptureRefusal {
                 classification: PipelineCaptureRefusalClassification::InvalidWriteTarget,
@@ -962,7 +988,8 @@ fn canonicalize_capture_plan_for_apply(
                 recovery: "fix the declared output targets and retry `pipeline capture`"
                     .to_string(),
             }
-        })?;
+        })?
+    };
     validate_write_targets(
         repo_root,
         &artifact_writes,
@@ -1585,8 +1612,11 @@ fn validate_single_file_capture_content(
         if is_raw_stage_10_compile_payload(stage_id, content) {
             return Err(CaptureInputParseError::RawStage10CompilePayload);
         }
-        if !is_completed_stage_10_feature_spec_body(content) {
-            return Err(CaptureInputParseError::InvalidStage10FeatureSpecBody);
+        if !matches!(
+            parse_canonical_yaml(content.as_bytes()),
+            Ok(Value::Object(_))
+        ) {
+            return Err(CaptureInputParseError::InvalidStage10WorkSpecificationBody);
         }
     }
     Ok(())
@@ -1594,7 +1624,10 @@ fn validate_single_file_capture_content(
 
 fn is_raw_stage_10_compile_payload(stage_id: &str, content: &str) -> bool {
     let mut lines = content.lines();
-    if lines.next() != Some(format!("# {stage_id} - Feature Specification").as_str()) {
+    if !lines
+        .next()
+        .is_some_and(|line| line.starts_with(format!("# {stage_id} - ").as_str()))
+    {
         return false;
     }
 
@@ -1608,60 +1641,243 @@ fn is_raw_stage_10_compile_payload(stage_id: &str, content: &str) -> bool {
     .all(|marker| content.contains(marker))
 }
 
-fn is_completed_stage_10_feature_spec_body(content: &str) -> bool {
-    let Some(first_line) = content.lines().next() else {
-        return false;
-    };
-    if !first_line.starts_with("# ") || !first_line.contains("Feature Specification") {
-        return false;
-    }
-    if REQUIRED_STAGE_10_FEATURE_SPEC_HEADINGS
-        .iter()
-        .any(|heading| !content.contains(heading))
-    {
-        return false;
-    }
-    if content.contains("{{") || content.contains("}}") || content.contains('\u{2026}') {
-        return false;
-    }
-    if !content
-        .lines()
-        .any(|line| line.trim_start().starts_with("- G") && line.contains(':'))
-    {
-        return false;
-    }
-    if !content
-        .lines()
-        .any(|line| line.trim_start().starts_with("- AC-") && line.contains(':'))
-    {
-        return false;
-    }
-    if !content
-        .lines()
-        .any(|line| line.trim_start().starts_with("- Alt "))
-    {
-        return false;
-    }
-    for prefix in ["- Security", "- Performance", "- Reliability"] {
-        if !content.lines().any(|line| {
-            let trimmed = line.trim_start();
-            trimmed.starts_with(prefix) && trimmed.contains(':')
-        }) {
-            return false;
-        }
-    }
-    content.lines().any(|line| {
-        let trimmed = line.trim_start();
-        trimmed.starts_with("- R") && trimmed.contains("-> AC-")
-    })
-}
-
 fn normalize_declared_block_content(
     path: &str,
     input: &str,
 ) -> Result<String, CaptureInputParseError> {
     normalize_nonempty_capture_content(input)
         .ok_or_else(|| CaptureInputParseError::EmptyDeclaredBlock(path.to_string()))
+}
+
+#[derive(Debug)]
+struct AdmittedWorkSpecification {
+    canonical_yaml: String,
+    markdown_view: String,
+}
+
+fn canonicalize_stage_10_capture_writes(
+    repo_root: &Path,
+    artifact_writes: &[PipelineCaptureWriteIntent],
+    artifact_paths: &[String],
+    repo_paths: &[String],
+) -> Result<
+    (
+        Vec<PipelineCaptureWriteIntent>,
+        Vec<PipelineCaptureWriteIntent>,
+    ),
+    String,
+> {
+    if artifact_paths != [WORK_SPECIFICATION_ARTIFACT_PATH]
+        || repo_paths != [FEATURE_SPEC_VIEW_PATH]
+        || artifact_writes.len() != 1
+        || artifact_writes[0].path != WORK_SPECIFICATION_ARTIFACT_PATH
+    {
+        return Err(
+            "Stage 10 outputs must declare the descriptor-selected Work Specification YAML and its deterministic Markdown view"
+                .to_string(),
+        );
+    }
+    let admitted = admit_work_specification(repo_root, artifact_writes[0].content.as_bytes())?;
+    Ok((
+        vec![PipelineCaptureWriteIntent {
+            path: WORK_SPECIFICATION_ARTIFACT_PATH.to_string(),
+            content: admitted.canonical_yaml,
+        }],
+        vec![PipelineCaptureWriteIntent {
+            path: FEATURE_SPEC_VIEW_PATH.to_string(),
+            content: admitted.markdown_view,
+        }],
+    ))
+}
+
+fn admit_work_specification(
+    repo_root: &Path,
+    input_bytes: &[u8],
+) -> Result<AdmittedWorkSpecification, String> {
+    let repository = ArtifactRepositoryV1::open(repo_root).map_err(|err| {
+        format!("Work Specification repository authority was not admitted: {err}")
+    })?;
+    let target =
+        ArtifactTargetV1::parse(WORK_SPECIFICATION_KIND_REF, WORK_SPECIFICATION_INSTANCE_ID)
+            .map_err(|err| format!("Work Specification target was not admitted: {err}"))?;
+    let canonical_path = repository
+        .canonical_path(&target)
+        .map_err(|err| format!("Work Specification canonical path did not resolve: {err}"))?;
+    if canonical_path != WORK_SPECIFICATION_ARTIFACT_PATH {
+        return Err(format!(
+            "descriptor-selected Work Specification path `{canonical_path}` does not match required `{WORK_SPECIFICATION_ARTIFACT_PATH}`"
+        ));
+    }
+
+    let context = repository
+        .operation_context(target.kind_ref(), target.instance_id())
+        .map_err(|err| format!("Work Specification operation context did not resolve: {err}"))?;
+    if context.profile_ref().as_str() != WORK_SPECIFICATION_PROFILE_REF
+        || context.kind_ref().as_str() != WORK_SPECIFICATION_KIND_REF
+        || context.instance_id().as_str() != WORK_SPECIFICATION_INSTANCE_ID
+        || context.schema_ref().as_str() != WORK_SPECIFICATION_SCHEMA_REF
+        || context
+            .intake_definition_ref()
+            .map(|reference| reference.as_str())
+            != Some(WORK_SPECIFICATION_INTAKE_REF)
+    {
+        return Err(
+            "Work Specification operation context does not match the exact selected profile, kind, instance, schema, and intake"
+                .to_string(),
+        );
+    }
+    let intake = repository
+        .intake_definition(&target)
+        .map_err(|err| format!("Work Specification intake did not resolve: {err}"))?;
+    if intake.exact_ref().as_str() != WORK_SPECIFICATION_INTAKE_REF
+        || intake.artifact_kind_ref().as_str() != WORK_SPECIFICATION_KIND_REF
+        || intake.candidate_schema_ref().as_str() != WORK_SPECIFICATION_SCHEMA_REF
+        || !intake
+            .supported_modes()
+            .contains(&AcquisitionModeV1::Express)
+    {
+        return Err(
+            "Work Specification intake does not match the exact selected contract".to_string(),
+        );
+    }
+
+    let parsed = parse_canonical_yaml(input_bytes).map_err(|err| {
+        format!("Work Specification input is not one duplicate-free YAML document: {err}")
+    })?;
+    let object = parsed.as_object().ok_or_else(|| {
+        "Work Specification input must be one YAML object with exactly eight fields".to_string()
+    })?;
+    let fields = [
+        ("schema_id", CoverageSpecificityV1::Exact),
+        ("schema_version", CoverageSpecificityV1::Exact),
+        ("record_id", CoverageSpecificityV1::Exact),
+        ("objective", CoverageSpecificityV1::Concrete),
+        ("scope", CoverageSpecificityV1::Concrete),
+        ("non_goals", CoverageSpecificityV1::Concrete),
+        ("acceptance_criteria", CoverageSpecificityV1::Concrete),
+        ("status", CoverageSpecificityV1::Exact),
+    ];
+    if object.len() != fields.len() {
+        return Err(
+            "Work Specification input must contain exactly the eight intake fields".to_string(),
+        );
+    }
+    let submissions = fields
+        .into_iter()
+        .map(|(field, specificity)| {
+            object
+                .get(field)
+                .cloned()
+                .map(|value| CoverageSubmissionV1 {
+                    coverage_id: format!("work_specification.{field}"),
+                    state: CoverageSubmissionStateV1::Supplied,
+                    source_kind: CoverageSourceKindV1::UserDeclaration,
+                    value: Some(value),
+                    specificity,
+                    confidence: CoverageConfidenceV1::High,
+                    contradiction_refs: Vec::new(),
+                })
+                .ok_or_else(|| {
+                    format!("Work Specification input is missing required field `{field}`")
+                })
+        })
+        .collect::<Result<Vec<_>, _>>()?;
+    let evaluation = repository
+        .evaluate_intake(
+            target.kind_ref(),
+            target.instance_id(),
+            AcquisitionModeV1::Express,
+            None,
+            &submissions,
+        )
+        .map_err(|err| format!("Work Specification intake refused the input: {err}"))?;
+    if evaluation.outcome != CoverageEvaluationOutcomeV1::Complete {
+        return Err("Work Specification intake did not complete".to_string());
+    }
+    if evaluation.normalized_content != parsed {
+        return Err(
+            "Work Specification intake normalization did not preserve the exact admitted fields"
+                .to_string(),
+        );
+    }
+    let canonical_yaml = String::from_utf8(
+        canonical_yaml_bytes(&evaluation.normalized_content)
+            .map_err(|err| format!("Work Specification YAML canonicalization failed: {err}"))?,
+    )
+    .map_err(|_| "Work Specification canonical YAML was not UTF-8".to_string())?;
+    let markdown_view = render_work_specification_markdown(&evaluation.normalized_content)?;
+    Ok(AdmittedWorkSpecification {
+        canonical_yaml,
+        markdown_view,
+    })
+}
+
+fn render_work_specification_markdown(content: &Value) -> Result<String, String> {
+    let object = content
+        .as_object()
+        .ok_or_else(|| "admitted Work Specification content must remain an object".to_string())?;
+    let objective = controlled_markdown_text(
+        object
+            .get("objective")
+            .and_then(Value::as_str)
+            .ok_or_else(|| "admitted Work Specification objective is unavailable".to_string())?,
+    )?;
+    let scope = controlled_markdown_list(object.get("scope"), "scope")?;
+    let non_goals = controlled_markdown_list(object.get("non_goals"), "non_goals")?;
+    let acceptance =
+        controlled_markdown_list(object.get("acceptance_criteria"), "acceptance_criteria")?;
+    let status = controlled_markdown_text(
+        object
+            .get("status")
+            .and_then(Value::as_str)
+            .ok_or_else(|| "admitted Work Specification status is unavailable".to_string())?,
+    )?;
+    Ok(format!(
+        "# Work Specification\n\n## Objective\n\n{objective}\n\n## Scope\n\n{scope}\n\n## Non-Goals\n\n{non_goals}\n\n## Acceptance Criteria\n\n{acceptance}\n\n## Status\n\n{status}\n"
+    ))
+}
+
+fn controlled_markdown_list(value: Option<&Value>, field: &str) -> Result<String, String> {
+    let values = value
+        .and_then(Value::as_array)
+        .ok_or_else(|| format!("admitted Work Specification `{field}` must remain a list"))?;
+    if values.is_empty() {
+        return Ok("_None._".to_string());
+    }
+    values
+        .iter()
+        .map(|value| {
+            value
+                .as_str()
+                .ok_or_else(|| {
+                    format!("admitted Work Specification `{field}` entries must remain strings")
+                })
+                .and_then(controlled_markdown_text)
+                .map(|value| format!("- {value}"))
+        })
+        .collect::<Result<Vec<_>, _>>()
+        .map(|items| items.join("\n"))
+}
+
+fn controlled_markdown_text(value: &str) -> Result<String, String> {
+    let normalized = value.split_whitespace().collect::<Vec<_>>().join(" ");
+    let mut escaped = String::with_capacity(normalized.len());
+    for character in normalized.chars() {
+        if character.is_control() {
+            for escaped_control in character.escape_default() {
+                if escaped_control.is_ascii_punctuation() {
+                    escaped.push('\\');
+                }
+                escaped.push(escaped_control);
+            }
+        } else {
+            if character.is_ascii_punctuation() {
+                escaped.push('\\');
+            }
+            escaped.push(character);
+        }
+    }
+    Ok(escaped)
 }
 
 fn build_repo_mirror_writes(
@@ -2004,20 +2220,20 @@ fn classify_capture_input_refusal(
         CaptureInputParseError::RawStage10CompilePayload => PipelineCaptureRefusal {
             classification: PipelineCaptureRefusalClassification::InvalidCaptureInput,
             summary: format!(
-                "{stage_id} capture must receive a completed FEATURE_SPEC.md body, not raw `pipeline compile` payload"
+                "{stage_id} capture must receive Work Specification YAML, not raw `pipeline compile` payload"
             ),
             pipeline_id: Some(pipeline_id.to_string()),
             stage_id: Some(stage_id.to_string()),
-            recovery: "run the stage-10 compile payload through an external operator or model runner, then retry `pipeline capture` with the completed `FEATURE_SPEC.md`".to_string(),
+            recovery: "run the stage-10 compile payload through an external operator or model runner, then retry `pipeline capture` with one duplicate-free Work Specification YAML document".to_string(),
         },
-        CaptureInputParseError::InvalidStage10FeatureSpecBody => PipelineCaptureRefusal {
+        CaptureInputParseError::InvalidStage10WorkSpecificationBody => PipelineCaptureRefusal {
             classification: PipelineCaptureRefusalClassification::InvalidCaptureInput,
             summary: format!(
-                "{stage_id} capture must receive a completed FEATURE_SPEC.md body that satisfies the shipped feature-spec contract"
+                "{stage_id} capture must receive one duplicate-free Work Specification YAML object"
             ),
             pipeline_id: Some(pipeline_id.to_string()),
             stage_id: Some(stage_id.to_string()),
-            recovery: "provide only the completed `FEATURE_SPEC.md` body, with the shipped headings and filled content, then retry `pipeline capture`".to_string(),
+            recovery: "provide only the completed Work Specification YAML document and retry `pipeline capture`".to_string(),
         },
         CaptureInputParseError::InvalidMultifilePrefix => PipelineCaptureRefusal {
             classification: PipelineCaptureRefusalClassification::InvalidCaptureInput,

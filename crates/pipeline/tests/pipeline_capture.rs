@@ -135,7 +135,68 @@ fn stage_10_compile_explain(repo_root: &Path) -> String {
 }
 
 fn stage_10_completed_feature_spec_input() -> String {
-    pipeline_proof_corpus_support::read_committed_model_output("stage_10_feature_spec.md")
+    fs::read_to_string(
+        Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../engine/tests/fixtures/hcm_2_4_work_specification")
+            .join("artifacts/work-specification/work-specification.yaml"),
+    )
+    .expect("canonical Work Specification fixture")
+}
+
+fn stage_10_generated_markdown_view() -> String {
+    fs::read_to_string(
+        Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../engine/tests/fixtures/hcm_2_4_work_specification")
+            .join("artifacts/feature_spec/FEATURE_SPEC.md"),
+    )
+    .expect("generated Work Specification Markdown fixture")
+}
+
+fn install_stage_10_work_specification_ready_repo() -> (tempfile::TempDir, PathBuf) {
+    let (dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    for relative_path in [
+        "artifacts/work-specification/work-specification.yaml",
+        "artifacts/feature_spec/FEATURE_SPEC.md",
+    ] {
+        let seeded_output = repo_root.join(relative_path);
+        if seeded_output.exists() {
+            fs::remove_file(&seeded_output)
+                .unwrap_or_else(|err| panic!("remove seeded `{relative_path}`: {err}"));
+        }
+    }
+    let fixture_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../engine/tests/fixtures/hcm_2_4_work_specification");
+    fs::copy(
+        fixture_root.join(".handbook/profile-selection.json"),
+        repo_root.join(".handbook/profile-selection.json"),
+    )
+    .expect("copy Work Specification profile selection");
+    let profile_target =
+        repo_root.join(".handbook/definitions/profiles/work-specification-root-1.0.0.yaml");
+    fs::create_dir_all(profile_target.parent().expect("profile parent"))
+        .expect("create profile parent");
+    fs::copy(
+        fixture_root.join(".handbook/definitions/profiles/work-specification-root-1.0.0.yaml"),
+        profile_target,
+    )
+    .expect("copy Work Specification profile");
+    let source_core = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../core");
+    for relative_path in [
+        "stages/10_feature_spec.md",
+        "library/feature_spec/feature_spec_architect_directive.md",
+        "library/feature_spec/FEATURE_SPEC.md.tmpl",
+    ] {
+        fs::copy(
+            source_core.join(relative_path),
+            repo_root.join("core").join(relative_path),
+        )
+        .unwrap_or_else(|err| panic!("copy current Stage 10 `{relative_path}`: {err}"));
+    }
+    let _ = pipeline_proof_corpus_support::persist_foundation_inputs_route_basis(&repo_root);
+    handbook_engine::RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup(&repo_root)
+        .expect("initialize repository invocation identity");
+    (dir, repo_root)
 }
 
 fn custom_storage_layout() -> PipelineStorageLayoutContract {
@@ -378,7 +439,7 @@ fn capture_preview_foundation_pack_matches_shared_golden() {
 
 #[test]
 fn capture_preview_feature_spec_matches_shared_golden_from_completed_external_output() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let compile_payload = stage_10_compile_payload(&repo_root);
     let completed_output = stage_10_completed_feature_spec_input();
     assert_ne!(
@@ -395,6 +456,202 @@ fn capture_preview_feature_spec_matches_shared_golden_from_completed_external_ou
         &[],
         "capture.preview.stage_10_feature_spec.txt",
     );
+}
+
+#[test]
+fn capture_preview_stage_10_rejects_markdown_as_canonical_input() {
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
+
+    let refusal = preview_pipeline_capture(
+        &repo_root,
+        &stage_10_request(stage_10_generated_markdown_view()),
+    )
+    .expect_err("Stage 10 must reject the generated Markdown view as canonical input");
+
+    assert_eq!(
+        refusal.classification,
+        PipelineCaptureRefusalClassification::InvalidCaptureInput
+    );
+    assert!(
+        refusal.summary.contains("Work Specification YAML"),
+        "unexpected refusal: {}",
+        refusal.summary
+    );
+    assert_no_capture_cache_entries(&repo_root);
+}
+
+#[test]
+fn capture_preview_stage_10_rejects_duplicate_yaml_keys() {
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
+    let duplicate = format!(
+        "{}status: \"approved\"\n",
+        stage_10_completed_feature_spec_input()
+    );
+
+    let refusal = preview_pipeline_capture(&repo_root, &stage_10_request(duplicate))
+        .expect_err("duplicate YAML keys must refuse");
+
+    assert_eq!(
+        refusal.classification,
+        PipelineCaptureRefusalClassification::InvalidCaptureInput
+    );
+    assert!(refusal.summary.contains("duplicate-free"));
+    assert_no_capture_cache_entries(&repo_root);
+}
+
+#[test]
+fn capture_preview_stage_10_rejects_incomplete_intake() {
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
+    let incomplete = stage_10_completed_feature_spec_input()
+        .lines()
+        .filter(|line| !line.starts_with("status:"))
+        .collect::<Vec<_>>()
+        .join("\n");
+
+    let refusal =
+        preview_pipeline_capture(&repo_root, &stage_10_request(format!("{incomplete}\n")))
+            .expect_err("incomplete intake must refuse");
+
+    assert_eq!(
+        refusal.classification,
+        PipelineCaptureRefusalClassification::InvalidCaptureInput
+    );
+    assert!(
+        refusal.summary.contains("exactly the eight intake fields")
+            || refusal.summary.contains("missing required field")
+    );
+    assert_no_capture_cache_entries(&repo_root);
+}
+
+#[test]
+fn capture_preview_stage_10_requires_the_selected_work_specification_descriptor() {
+    for case in ["missing-selection", "wrong-selected-profile"] {
+        let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
+        let selection_path = repo_root.join(".handbook/profile-selection.json");
+        match case {
+            "missing-selection" => {
+                fs::remove_file(&selection_path).expect("remove repository profile selection");
+            }
+            "wrong-selected-profile" => {
+                let mut selection: serde_json::Value = serde_json::from_str(
+                    &fs::read_to_string(&selection_path)
+                        .expect("read repository profile selection"),
+                )
+                .expect("parse repository profile selection");
+                selection["selected_profile_ref"] =
+                    serde_json::json!("handbook.profile.shipped-root@1.2.0");
+                selection["profile_sources"] = serde_json::json!([{
+                    "exact_ref": "handbook.profile.shipped-root@1.2.0",
+                    "source": {"kind": "built_in"}
+                }]);
+                fs::write(
+                    &selection_path,
+                    serde_json::to_vec_pretty(&selection).expect("serialize profile selection"),
+                )
+                .expect("write repository profile selection");
+            }
+            _ => unreachable!("unexpected case"),
+        }
+
+        let refusal = preview_pipeline_capture(
+            &repo_root,
+            &stage_10_request(stage_10_completed_feature_spec_input()),
+        )
+        .expect_err("Stage 10 must require the selected Work Specification descriptor");
+
+        assert_eq!(
+            refusal.classification,
+            PipelineCaptureRefusalClassification::InvalidCaptureInput
+        );
+        assert!(
+            refusal.summary.contains("profile selection")
+                || refusal.summary.contains("work_specification")
+                || refusal.summary.contains("Work Specification"),
+            "{case}: {}",
+            refusal.summary
+        );
+        assert_no_capture_cache_entries(&repo_root);
+    }
+}
+
+#[test]
+fn capture_preview_stage_10_rejects_unknown_and_schema_invalid_fields() {
+    let base = stage_10_completed_feature_spec_input();
+    let cases = [
+        ("unknown-field", format!("{base}unexpected_field: true\n")),
+        (
+            "wrong-typed-scope",
+            base.replace("scope:\n  - \"Engine\"", "scope: \"Engine\""),
+        ),
+    ];
+
+    for (case, input) in cases {
+        let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
+        let refusal = preview_pipeline_capture(&repo_root, &stage_10_request(input))
+            .expect_err("unknown or schema-invalid Work Specification must refuse");
+
+        assert_eq!(
+            refusal.classification,
+            PipelineCaptureRefusalClassification::InvalidCaptureInput
+        );
+        assert!(
+            refusal.summary.contains("exactly the eight intake fields")
+                || refusal.summary.contains("schema")
+                || refusal.summary.contains("intake"),
+            "{case}: {}",
+            refusal.summary
+        );
+        assert_no_capture_cache_entries(&repo_root);
+    }
+}
+
+#[test]
+fn capture_apply_stage_10_renders_schema_valid_multiline_and_tab_text() {
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
+    let input = stage_10_completed_feature_spec_input()
+        .replace(
+            r#"objective: "Ship safely""#,
+            r#"objective: "Ship\n\tsafely""#,
+        )
+        .replace(r#"- "Engine""#, r#"- "Engine\n\tAPI""#);
+
+    capture_pipeline_output(&repo_root, &stage_10_request(input))
+        .expect("schema-valid multiline and tab text must capture");
+
+    let view = fs::read_to_string(repo_root.join("artifacts/feature_spec/FEATURE_SPEC.md"))
+        .expect("generated Markdown view");
+    assert!(view.contains("Ship safely"), "{view}");
+    assert!(view.contains("- Engine API"), "{view}");
+}
+
+#[test]
+fn capture_apply_stage_10_rejects_tampered_generated_view() {
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
+    let preview = preview_pipeline_capture(
+        &repo_root,
+        &stage_10_request(stage_10_completed_feature_spec_input()),
+    )
+    .expect("preview");
+    let tampered_capture_id =
+        rewrite_tampered_capture_cache(&repo_root, &preview.plan.capture_id, |entry| {
+            entry.plan.repo_mirror_writes[0]
+                .content
+                .push_str("\n# tampered\n")
+        });
+
+    let refusal = apply_pipeline_capture(&repo_root, &tampered_capture_id)
+        .expect_err("tampered generated view must refuse");
+
+    assert_eq!(
+        refusal.classification,
+        PipelineCaptureRefusalClassification::TamperedCaptureCache
+    );
+    assert!(!repo_root
+        .join("artifacts/work-specification/work-specification.yaml")
+        .exists());
+    assert!(!repo_root
+        .join("artifacts/feature_spec/FEATURE_SPEC.md")
+        .exists());
 }
 
 #[test]
@@ -519,7 +776,7 @@ fn capture_apply_foundation_pack_matches_shared_golden_and_uses_cached_preview()
 
 #[test]
 fn capture_apply_stage_10_matches_shared_golden_from_completed_external_output() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let compile_payload = stage_10_compile_payload(&repo_root);
     let input = stage_10_completed_feature_spec_input();
     assert_ne!(
@@ -536,9 +793,14 @@ fn capture_apply_stage_10_matches_shared_golden_from_completed_external_output()
         "capture.apply.stage_10_feature_spec.txt",
     );
     assert_eq!(
-        fs::read_to_string(repo_root.join("artifacts/feature_spec/FEATURE_SPEC.md"))
-            .expect("artifact"),
+        fs::read_to_string(repo_root.join("artifacts/work-specification/work-specification.yaml"))
+            .expect("canonical Work Specification artifact"),
         input
+    );
+    assert_eq!(
+        fs::read_to_string(repo_root.join("artifacts/feature_spec/FEATURE_SPEC.md"))
+            .expect("generated Markdown view"),
+        stage_10_generated_markdown_view()
     );
     let provenance: serde_json::Value = serde_json::from_str(
         &fs::read_to_string(repo_root.join(STAGE_10_CAPTURE_PROVENANCE_PATH))
@@ -558,7 +820,7 @@ fn capture_apply_stage_10_matches_shared_golden_from_completed_external_output()
     assert_eq!(provenance["stage_id"], STAGE_10_ID);
     assert_eq!(
         provenance["feature_spec_path"],
-        "artifacts/feature_spec/FEATURE_SPEC.md"
+        "artifacts/work-specification/work-specification.yaml"
     );
     assert_eq!(
         provenance["feature_spec_sha256"],
@@ -640,7 +902,7 @@ fn capture_refuses_stage_06_single_file_with_file_wrapper() {
 
 #[test]
 fn capture_refuses_stage_10_single_file_with_file_wrapper() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let input = stage_10_completed_feature_spec_input();
     let wrapped = format!("--- FILE: artifacts/feature_spec/FEATURE_SPEC.md ---\n{input}",);
     let refusal =
@@ -658,7 +920,7 @@ fn capture_refuses_stage_10_single_file_with_file_wrapper() {
 
 #[test]
 fn capture_preview_stage_10_refuses_raw_compile_payload_without_side_effects() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let initial_state = load_route_state(&repo_root);
     let compile_payload = stage_10_compile_payload(&repo_root);
     assert!(
@@ -692,7 +954,7 @@ fn capture_preview_stage_10_refuses_raw_compile_payload_without_side_effects() {
 
 #[test]
 fn capture_preview_stage_10_refuses_compile_explain_output_without_side_effects() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let initial_state = load_route_state(&repo_root);
     let explain_output = stage_10_compile_explain(&repo_root);
     assert!(
@@ -711,7 +973,7 @@ fn capture_preview_stage_10_refuses_compile_explain_output_without_side_effects(
     );
     assert_eq!(
         refusal.summary,
-        "stage.10_feature_spec capture must receive a completed FEATURE_SPEC.md body that satisfies the shipped feature-spec contract"
+        "stage.10_feature_spec capture must receive one duplicate-free Work Specification YAML object"
     );
     assert!(
         !repo_root
@@ -821,7 +1083,7 @@ fn capture_preview_stage_06_refuses_empty_single_file_body_without_side_effects(
 
 #[test]
 fn capture_preview_stage_10_refuses_empty_single_file_body_without_side_effects() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let initial_state = load_route_state(&repo_root);
     assert!(
         !repo_root
@@ -884,7 +1146,7 @@ fn capture_apply_refuses_empty_single_file_body_without_side_effects() {
 
 #[test]
 fn capture_apply_stage_10_refuses_raw_compile_payload_without_side_effects() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let initial_state = load_route_state(&repo_root);
     let compile_payload = stage_10_compile_payload(&repo_root);
     assert!(
@@ -918,7 +1180,7 @@ fn capture_apply_stage_10_refuses_raw_compile_payload_without_side_effects() {
 
 #[test]
 fn capture_apply_stage_10_refuses_invalid_feature_spec_body_without_side_effects() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let initial_state = load_route_state(&repo_root);
     let refusal = capture_pipeline_output(&repo_root, &stage_10_request("hello\n".to_string()))
         .expect_err("invalid feature spec body should refuse");
@@ -929,7 +1191,7 @@ fn capture_apply_stage_10_refuses_invalid_feature_spec_body_without_side_effects
     );
     assert_eq!(
         refusal.summary,
-        "stage.10_feature_spec capture must receive a completed FEATURE_SPEC.md body that satisfies the shipped feature-spec contract"
+        "stage.10_feature_spec capture must receive one duplicate-free Work Specification YAML object"
     );
     assert!(
         !repo_root

@@ -449,6 +449,24 @@ impl AuthoredArtifactKindDefinition {
         }
 
         let supplied = DefinitionFingerprint::parse(&self.definition_fingerprint)?;
+        let p1a_renderer_ref = match exact_ref.as_str() {
+            "handbook.artifact-kind.project-context@1.1.0" => {
+                Some("handbook.renderer.project-context-review-markdown@1.0.0")
+            }
+            "handbook.artifact-kind.environment-context@1.1.0" => {
+                Some("handbook.renderer.environment-context-review-markdown@1.0.0")
+            }
+            "handbook.artifact-kind.work-specification@1.1.0" => {
+                Some("handbook.renderer.work-specification-review-markdown@1.0.0")
+            }
+            "handbook.artifact-kind.decision-record@1.1.0" => {
+                Some("handbook.renderer.decision-record-review-markdown@1.0.0")
+            }
+            "handbook.artifact-kind.risk-record@1.1.0" => {
+                Some("handbook.renderer.risk-record-review-markdown@1.0.0")
+            }
+            _ => None,
+        };
         let computed = if exact_ref.as_str() == "handbook.artifact-kind.project-authority@1.1.0" {
             fingerprint_serializable(&ArtifactKindUniformClosure {
                 definition: &self,
@@ -495,6 +513,87 @@ impl AuthoredArtifactKindDefinition {
                     },
                 ],
             })?
+        } else if let Some(renderer_ref) = p1a_renderer_ref {
+            let renderer_exact_ref = ExactDefinitionRef::parse(renderer_ref)?;
+            let renderer_source = crate::profile_builtins::definition(&renderer_exact_ref)
+                .ok_or_else(|| {
+                    RegistryLoadError::at(
+                        RegistryLoadErrorKind::MissingSchema,
+                        "renderer_definition_refs",
+                        "first-party renderer definition is absent from the package",
+                    )
+                })?;
+            let mut renderer = parse_definition_yaml(renderer_source.bytes)?;
+            let renderer_fingerprint = renderer
+                .as_object_mut()
+                .and_then(|object| object.remove("renderer_fingerprint"))
+                .and_then(|value| value.as_str().map(ToOwned::to_owned))
+                .ok_or_else(|| {
+                    RegistryLoadError::at(
+                        RegistryLoadErrorKind::UnsupportedDependency,
+                        "renderer_definition_refs",
+                        "first-party renderer fingerprint is absent",
+                    )
+                })?;
+            let renderer_id = renderer_ref.strip_suffix("@1.0.0").ok_or_else(|| {
+                RegistryLoadError::at(
+                    RegistryLoadErrorKind::UnsupportedDependency,
+                    "renderer_definition_refs",
+                    "first-party renderer ref is not frozen at 1.0.0",
+                )
+            })?;
+            if renderer.get("schema_id").and_then(Value::as_str)
+                != Some("handbook.renderer-definition")
+                || renderer.get("schema_version").and_then(Value::as_str) != Some("1.0")
+                || renderer.get("renderer_id").and_then(Value::as_str) != Some(renderer_id)
+                || renderer.get("renderer_version").and_then(Value::as_str) != Some("1.0.0")
+                || renderer.get("input_schema_ref").and_then(Value::as_str)
+                    != Some(canonical_schema_ref.as_str())
+            {
+                return Err(RegistryLoadError::at(
+                    RegistryLoadErrorKind::UnsupportedDependency,
+                    "renderer_definition_refs",
+                    "first-party renderer identity/schema binding differs from its frozen closure",
+                ));
+            }
+            let computed_renderer = fingerprint_serializable(&serde_json::json!({
+                "definition": renderer,
+                "resolved_dependencies": [
+                    {
+                        "definition_fingerprint": schema_entry.entry_fingerprint().as_str(),
+                        "definition_ref": canonical_schema_ref.as_str(),
+                        "dependency_role": "input_schema",
+                    },
+                ],
+            }))?;
+            if renderer_fingerprint != computed_renderer.as_str() {
+                return Err(RegistryLoadError::at(
+                    RegistryLoadErrorKind::FingerprintMismatch,
+                    "renderer_definition_refs",
+                    "first-party renderer fingerprint does not match its exact typed closure",
+                ));
+            }
+            fingerprint_serializable(&serde_json::json!({
+                "definition": &self,
+                "resolved_dependencies": [
+                    {
+                        "definition_fingerprint": schema_entry.entry_fingerprint().as_str(),
+                        "definition_ref": canonical_schema_ref.as_str(),
+                        "dependency_role": "canonical_schema",
+                        "schema_closure_fingerprint": schema_entry.closure_fingerprint().as_str(),
+                    },
+                    {
+                        "definition_fingerprint": computed_renderer.as_str(),
+                        "definition_ref": renderer_ref,
+                        "dependency_role": "renderer",
+                    },
+                    {
+                        "definition_fingerprint": stable_role_registry.fingerprint().as_str(),
+                        "definition_ref": stable_role_registry.exact_ref().as_str(),
+                        "dependency_role": "stable_role_registry",
+                    },
+                ],
+            }))?
         } else if semantic_capabilities.is_empty() {
             fingerprint_serializable(&ArtifactKindFingerprintClosure {
                 definition: &self,
@@ -568,6 +667,39 @@ impl AuthoredArtifactKindDefinition {
             return Err(RegistryLoadError::new(
                 RegistryLoadErrorKind::UnsupportedDependency,
                 "Project Authority 1.1 later-owned dependencies differ from the frozen closure",
+            ));
+        }
+        let first_party_renderer = match exact_ref.as_str() {
+            "handbook.artifact-kind.project-context@1.1.0" => {
+                Some("handbook.renderer.project-context-review-markdown@1.0.0")
+            }
+            "handbook.artifact-kind.environment-context@1.1.0" => {
+                Some("handbook.renderer.environment-context-review-markdown@1.0.0")
+            }
+            "handbook.artifact-kind.work-specification@1.1.0" => {
+                Some("handbook.renderer.work-specification-review-markdown@1.0.0")
+            }
+            "handbook.artifact-kind.decision-record@1.1.0" => {
+                Some("handbook.renderer.decision-record-review-markdown@1.0.0")
+            }
+            "handbook.artifact-kind.risk-record@1.1.0" => {
+                Some("handbook.renderer.risk-record-review-markdown@1.0.0")
+            }
+            _ => None,
+        };
+        if let Some(renderer_ref) = first_party_renderer {
+            let exact = self.renderer_definition_refs == [renderer_ref]
+                && self.projection_definition_refs.is_empty()
+                && self.lifecycle_policy_ref.is_null()
+                && self.review_triggers.is_empty()
+                && self.required_capabilities.is_empty()
+                && self.extensions.is_empty();
+            if exact {
+                return Ok(());
+            }
+            return Err(RegistryLoadError::new(
+                RegistryLoadErrorKind::UnsupportedDependency,
+                "first-party successor kind later-owned dependencies differ from the frozen closure",
             ));
         }
         let refused = !self.renderer_definition_refs.is_empty()

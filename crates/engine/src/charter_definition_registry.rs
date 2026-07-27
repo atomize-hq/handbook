@@ -119,10 +119,23 @@ impl CharterDefinitionRegistry {
         &self,
         decisions: &ResolvedProfileDecisions,
     ) -> Result<(), RegistryLoadError> {
-        if decisions.profile_ref().as_str() != "handbook.profile.shipped-root@1.1.0" {
+        let profile_tuple_is_exact = matches!(
+            (
+                decisions.profile_ref().as_str(),
+                decisions.profile_definition_fingerprint().as_str(),
+            ),
+            (
+                "handbook.profile.shipped-root@1.1.0",
+                "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
+            ) | (
+                "handbook.profile.shipped-root@1.2.0",
+                "sha256:63cd999c95efc3fe65ae3514c2915b5d1457290211cf6da7b57b2cd75bafaf83",
+            )
+        );
+        if !profile_tuple_is_exact {
             return Err(RegistryLoadError::new(
                 RegistryLoadErrorKind::UnsupportedDependency,
-                "Charter definition closure requires shipped profile decisions 1.1",
+                "Charter definition closure requires an exact compatible shipped profile tuple",
             ));
         }
         let charter_id = SymbolicId::parse("project_authority").map_err(|_| {
@@ -137,7 +150,20 @@ impl CharterDefinitionRegistry {
                 "selected Charter decision instance is absent",
             )
         })?;
-        let exact = charter.kind_ref().as_str() == "handbook.artifact-kind.project-authority@1.1.0"
+        let exact = charter.id().as_str() == "project_authority"
+            && charter.kind_ref().as_str() == "handbook.artifact-kind.project-authority@1.1.0"
+            && charter
+                .role()
+                .is_some_and(|role| role.role_id() == "constitutional_authority")
+            && charter.capabilities().len() == 1
+            && charter.capabilities()[0].capability_id().as_str() == "constitutional_root"
+            && charter.capabilities()[0].contract_ref().as_str()
+                == "handbook.capabilities.constitutional-root@1.0.0"
+            && charter.label() == "Charter"
+            && charter.canonical_path() == ".handbook/project/charter.yaml"
+            && charter.requiredness_mode() == crate::artifact_instance::RequirednessMode::Always
+            && charter.condition_ref().is_none()
+            && charter.dependencies().is_empty()
             && charter.intake_definition_ref().is_some_and(|reference| {
                 reference.as_str() == "handbook.intake.charter@1.0.0"
                     && self.records.contains_key(reference)
@@ -151,7 +177,10 @@ impl CharterDefinitionRegistry {
                 == "handbook.renderer.charter-review-markdown@1.0.0"
             && self
                 .records
-                .contains_key(&charter.renderer_definition_refs()[0]);
+                .contains_key(&charter.renderer_definition_refs()[0])
+            && charter.projection_definition_refs().is_empty()
+            && charter.validation_overlay_refs().is_empty()
+            && charter.extensions().is_empty();
         if exact {
             Ok(())
         } else {

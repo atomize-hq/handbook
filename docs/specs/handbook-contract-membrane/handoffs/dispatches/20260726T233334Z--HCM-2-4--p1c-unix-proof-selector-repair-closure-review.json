@@ -1,0 +1,161 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T233334Z--HCM-2-4--p1c-unix-proof-selector-repair-closure-review",
+  "created_at_utc": "2026-07-26T23:33:34Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs",
+    "code-review-and-quality",
+    "test-driven-development"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1C-shipped-root-adoption",
+  "subject_fingerprint": "sha256:6910cdfab15a33c627c7b8f48116dcdce84bebca2bafd6622cc7270d563db080",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p1c-unix-proof-selector-repair-closure-1",
+    "trigger_run_ids": [
+      "p1c-unix-proof-selector-repair-discovery"
+    ],
+    "finding_refs": [
+      "p1c-unix-proof-selector-repair-discovery-P2-1",
+      "p1c-unix-proof-selector-repair-discovery-P2-2"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "c1cc766ce4cc8a870126ce880cbab3ad4f02f8c61e29090ab426ba337453a14f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "4cdffb1afef98d4f8d41f4588fe8f3f881239e578f6a8f2e5b9bbfadecfb38cc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1c-project-context-kind-compatibility.md",
+        "sha256": "dd4e860cbf8d4f36e82032b013784776ec062cb476c677a6c235ffffc2e58d82"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "57b3398f90a7687c37587e8c482f260f944c12ebd1811d9539cbe3da9bd84579"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "78dd6f68e0b3b20168b9d9299898f5d6c15dc3a037a818949337443622c9f327"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:6910cdfab15a33c627c7b8f48116dcdce84bebca2bafd6622cc7270d563db080"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "single_contract_repair",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre_implementation_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4",
+        "Reviewability and packet sizing calibration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.1 gate",
+        "HCM-2.4 gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1C — Shipped-root successor adoption",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The Unix selector discovery review returned two P2 findings. Exact WSL compiler proof fails first because report.schema_version expects 1.1.0 while the live report is 1.2.0. Exact WSL CLI proof fails first because profile_ready_repo writes an obsolete inline Charter schema 1.0 and doctor returns INVALID before reaching the stale kind assertion. The parent changed only the same five authority documents. The compiler allowance is now exactly schema expectation 1.1.0 to 1.2.0 plus kind 1.0.0 to 1.1.0. The CLI allowance is now exactly replacing obsolete inline Charter setup with the already-existing write_valid_selected_charter helper plus kind 1.0.0 to 1.1.0. Helper implementation, fixture assets, every other assertion/setup, and all production surfaces remain closed. The two test files remain unedited.",
+  "allowed_scope": [
+    "Replay the five-entry post-remediation subject and validate only the two discovery P2 repairs.",
+    "Confirm the compiler allowance contains exactly the two demonstrated stale assertion literals.",
+    "Confirm the CLI allowance contains exactly the existing-helper setup substitution and one demonstrated stale kind literal.",
+    "Confirm no helper implementation, fixture asset, other setup/assertion, production symbol, public API, schema, profile, definition, dependency, Cargo, or sibling scope is authorized.",
+    "Check remediation-caused P1/P2 only; compare any P3/P4 with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No open-ended rediscovery and no review of the still-unimplemented test delta.",
+    "No new production behavior and no P2-P7 implementation.",
+    "Do not require GREEN before authority is accepted; the tests are intentionally still RED and unedited."
+  ],
+  "tasks": [
+    "Verify post-remediation subject identity and inspect the five-document causal delta.",
+    "Close or retain discovery P2-1 and P2-2 against exact live text and raw WSL failures.",
+    "Validate parity among SPEC, plan, todo, path manifest, and decision record.",
+    "Confirm the repaired selector is independently implementable and remains exact test-only scope.",
+    "Return findings first with exact file/line, violated gate, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Discovery P2-1: compiler report schema 1.2 plus Project Context kind 1.1 assertions",
+    "Discovery P2-2: existing valid Charter helper setup plus CLI Project Context kind 1.1 assertion",
+    "Exact Unix compiler, CLI, and substitution/ABA proof after implementation",
+    "No helper implementation, fixture, other assertion/setup, production, public surface, fallback, inference, or sibling widening",
+    "No test edit before clean closure review"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

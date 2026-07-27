@@ -1,0 +1,10 @@
+schema_id: handbook.artifact.risk-record
+schema_version: "1.0"
+record_id: example.record.risk
+uncertainty: "Delivery may slip"
+evidence_refs: []
+owner: "Team"
+treatment: "Track and mitigate"
+status: open
+review_basis:
+  - example.reference.review

@@ -1,5 +1,5 @@
 OUTCOME: REFUSED
 PIPELINE: pipeline.foundation_inputs
 STAGE: stage.10_feature_spec
-REASON: invalid_capture_input: stage.10_feature_spec capture must receive a completed FEATURE_SPEC.md body, not raw `pipeline compile` payload
-NEXT SAFE ACTION: run the stage-10 compile payload through an external operator or model runner, then retry `pipeline capture` with the completed `FEATURE_SPEC.md`
+REASON: invalid_capture_input: stage.10_feature_spec capture must receive Work Specification YAML, not raw `pipeline compile` payload
+NEXT SAFE ACTION: run the stage-10 compile payload through an external operator or model runner, then retry `pipeline capture` with one duplicate-free Work Specification YAML document

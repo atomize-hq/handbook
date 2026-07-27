@@ -753,8 +753,159 @@ impl ArtifactIntakeDefinitionV1 {
                     "intake definition fingerprint is required",
                 )
             })?;
+        let string = |name: &'static str| {
+            value.get(name).and_then(Value::as_str).ok_or_else(|| {
+                registration_error(
+                    ArtifactRegistrationErrorKindV1::InvalidRecord,
+                    name,
+                    "intake definition identity field is absent",
+                )
+            })
+        };
+        let p1a_ref = ExactDefinitionRef::new(string("intake_id")?, string("intake_version")?)
+            .map_err(|_| {
+                registration_error(
+                    ArtifactRegistrationErrorKindV1::InvalidExactRef,
+                    "intake_definition_ref",
+                    "intake identity/version is not an exact definition ref",
+                )
+            })?;
+        let p1a_dependencies = match p1a_ref.as_str() {
+            "handbook.intake.project-context@1.0.0" => Some((
+                "handbook.artifact-kind.project-context@1.1.0",
+                "handbook.schemas.artifacts.project-context@1.0.0",
+                include_bytes!(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/definitions/artifact-kinds/handbook.artifact-kind.project-context/1.1.0.yaml"
+                ))
+                .as_slice(),
+                include_bytes!(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/definitions/schemas/handbook.schemas.artifacts.project-context/1.0.0.entry.yaml"
+                ))
+                .as_slice(),
+            )),
+            "handbook.intake.environment-context@1.0.0" => Some((
+                "handbook.artifact-kind.environment-context@1.1.0",
+                "handbook.schemas.artifacts.environment-context@1.0.0",
+                include_bytes!(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/definitions/artifact-kinds/handbook.artifact-kind.environment-context/1.1.0.yaml"
+                ))
+                .as_slice(),
+                include_bytes!(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/definitions/schemas/handbook.schemas.artifacts.environment-context/1.0.0.entry.yaml"
+                ))
+                .as_slice(),
+            )),
+            "handbook.intake.work-specification@1.0.0" => Some((
+                "handbook.artifact-kind.work-specification@1.1.0",
+                "handbook.schemas.artifacts.work-specification@1.0.0",
+                include_bytes!(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/definitions/artifact-kinds/handbook.artifact-kind.work-specification/1.1.0.yaml"
+                ))
+                .as_slice(),
+                include_bytes!(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/definitions/schemas/handbook.schemas.artifacts.work-specification/1.0.0.entry.yaml"
+                ))
+                .as_slice(),
+            )),
+            "handbook.intake.decision-record@1.0.0" => Some((
+                "handbook.artifact-kind.decision-record@1.1.0",
+                "handbook.schemas.artifacts.decision-record@1.0.0",
+                include_bytes!(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/definitions/artifact-kinds/handbook.artifact-kind.decision-record/1.1.0.yaml"
+                ))
+                .as_slice(),
+                include_bytes!(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/definitions/schemas/handbook.schemas.artifacts.decision-record/1.0.0.entry.yaml"
+                ))
+                .as_slice(),
+            )),
+            "handbook.intake.risk-record@1.0.0" => Some((
+                "handbook.artifact-kind.risk-record@1.1.0",
+                "handbook.schemas.artifacts.risk-record@1.0.0",
+                include_bytes!(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/definitions/artifact-kinds/handbook.artifact-kind.risk-record/1.1.0.yaml"
+                ))
+                .as_slice(),
+                include_bytes!(concat!(
+                    env!("CARGO_MANIFEST_DIR"),
+                    "/definitions/schemas/handbook.schemas.artifacts.risk-record/1.0.0.entry.yaml"
+                ))
+                .as_slice(),
+            )),
+            _ => None,
+        };
         let computed_fingerprint =
-            DefinitionFingerprint::from_json_value(&value).map_err(|_| {
+            if let Some((kind_ref, schema_ref, kind_bytes, schema_bytes)) = p1a_dependencies {
+                if string("artifact_kind_ref")? != kind_ref
+                    || string("candidate_schema_ref")? != schema_ref
+                {
+                    return Err(registration_error(
+                        ArtifactRegistrationErrorKindV1::IncompatibleBinding,
+                        "intake_definition",
+                        "P1A intake kind/schema binding differs from its frozen closure",
+                    ));
+                }
+                let dependency_fingerprint =
+                    |bytes: &[u8],
+                     field: &'static str|
+                     -> Result<String, ArtifactRegistrationErrorV1> {
+                        let dependency = parse_definition_yaml(bytes).map_err(|_| {
+                            registration_error(
+                                ArtifactRegistrationErrorKindV1::InvalidRecord,
+                                "intake_definition",
+                                "P1A intake dependency is not duplicate-safe closed YAML",
+                            )
+                        })?;
+                        let fingerprint = dependency
+                            .get(field)
+                            .and_then(Value::as_str)
+                            .ok_or_else(|| {
+                                registration_error(
+                                    ArtifactRegistrationErrorKindV1::MissingDependency,
+                                    "intake_definition",
+                                    "P1A intake dependency fingerprint is absent",
+                                )
+                            })?;
+                        DefinitionFingerprint::parse(fingerprint).map_err(|_| {
+                            registration_error(
+                                ArtifactRegistrationErrorKindV1::InvalidRecord,
+                                "intake_definition",
+                                "P1A intake dependency fingerprint grammar is invalid",
+                            )
+                        })?;
+                        Ok(fingerprint.to_owned())
+                    };
+                let kind_fingerprint =
+                    dependency_fingerprint(kind_bytes, "definition_fingerprint")?;
+                let schema_fingerprint = dependency_fingerprint(schema_bytes, "entry_fingerprint")?;
+                DefinitionFingerprint::from_json_value(&serde_json::json!({
+                    "definition": value,
+                    "resolved_dependencies": [
+                        {
+                            "definition_fingerprint": kind_fingerprint,
+                            "definition_ref": kind_ref,
+                            "dependency_role": "artifact_kind",
+                        },
+                        {
+                            "definition_fingerprint": schema_fingerprint,
+                            "definition_ref": schema_ref,
+                            "dependency_role": "candidate_schema",
+                        },
+                    ],
+                }))
+            } else {
+                DefinitionFingerprint::from_json_value(&value)
+            }
+            .map_err(|_| {
                 registration_error(
                     ArtifactRegistrationErrorKindV1::InvalidRecord,
                     "intake_definition",

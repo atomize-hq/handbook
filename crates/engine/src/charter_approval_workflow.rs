@@ -21,6 +21,7 @@ use crate::charter_definition_registry::load_shipped_charter_definition_registry
 use crate::charter_lifecycle_store::CharterLifecycleStoreV1;
 use crate::charter_lifecycle_validation::{
     validate_candidate_exact_result_authority, CharterLifecycleValidationServiceV1,
+    SELECTED_PROFILE_FINGERPRINT, SELECTED_PROFILE_REF,
 };
 use crate::charter_lineage_store::{
     create_new_file, create_safe_directories, reject_reparse_or_symlink, sync_directory,
@@ -2160,7 +2161,7 @@ fn durability(message: impl Into<String>) -> CharterApprovalRefusalV1 {
 }
 
 fn validate_candidate_currentness(
-    decisions: &ResolvedProfileDecisions,
+    _decisions: &ResolvedProfileDecisions,
     candidate: &Value,
 ) -> Result<(), CharterApprovalRefusalV1> {
     let exact = candidate.get("schema_id").and_then(Value::as_str)
@@ -2175,12 +2176,11 @@ fn validate_candidate_currentness(
             .get("required_approval_policy_ref")
             .and_then(Value::as_str)
             == Some(APPROVAL_POLICY_REF)
-        && candidate.get("profile_ref").and_then(Value::as_str)
-            == Some(decisions.profile_ref().as_str())
+        && candidate.get("profile_ref").and_then(Value::as_str) == Some(SELECTED_PROFILE_REF)
         && candidate
             .get("resolved_profile_fingerprint")
             .and_then(Value::as_str)
-            == Some(decisions.profile_definition_fingerprint().as_str());
+            == Some(SELECTED_PROFILE_FINGERPRINT);
     if !exact {
         return Err(refused(
             CharterApprovalRefusalCodeV1::LineageViolation,

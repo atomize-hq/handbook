@@ -1,0 +1,197 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T221831Z--HCM-2-4--p1c-project-context-selector-repair-review",
+  "created_at_utc": "2026-07-26T22:18:31Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs",
+    "code-review-and-quality",
+    "test-driven-development"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1C-shipped-root-adoption",
+  "subject_fingerprint": "sha256:c63344aa1a8f9a40a9d211d8144a25f6e4d8b0086c5a4c58819a449e2f027e54",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p1c-project-context-selector-repair-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "25daa5f5dc304d26ff70cbe633e5bc79d20079ee11048f3123a3f33d38d8c1f2"
+      },
+      {
+        "path": "crates/engine/src/project_context_artifact.rs",
+        "sha256": "f1c670f61b98ad8052cc647b0adab2b34723fa007bf0f56a699a920c924940c6"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_1_project_context.rs",
+        "sha256": "45d45622aca10d1c13d0df395957dc5100ae6b645c63d48cb3bd7b05f6da9599"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs",
+        "sha256": "faa8dc4fe340efdb166263b319d4707a53e0d2757489ddf485a1830542723979"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "ae747de0cd7ada22d51d7bbafef9b9a1c1c5572e1a3bab9bd0370d408a7b829e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "8b2846c8eee9aa1357e378d9f9c7ad781783db80ea7df000de7a3e57452917ab"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1c-project-context-kind-compatibility.md",
+        "sha256": "e40453029cee21c12f6b2f43ca7909d863b01b09c1cf154a3e25fbedf18762c4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "2112b43fd746d02dc82c323a33f606c4291390fe25eb6ee8dd005eff2f556fc2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "4e24d00adcd22b4bee9a48f18dc745551f4dd27cc8965732016a16d642b370fa"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:c63344aa1a8f9a40a9d211d8144a25f6e4d8b0086c5a4c58819a449e2f027e54"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "single_contract_repair",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre_implementation_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Mandatory invariants",
+        "Versioned compatibility"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4",
+        "Reviewability and packet sizing calibration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.1 gate",
+        "HCM-2.4 gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1C — Shipped-root successor adoption",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.1/SPEC.md",
+      "sections": [
+        "Status and authority",
+        "Objective"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "P1B is different-fresh closure-clean. P1C changed only shipped_profile_request and its selected tests so the live resolver selects the exact 1.2 profile. The new P1C test passes and the compatibility target passes 9/9. The first preservation wall then passed engine library tests 154/154 but failed hcm_2_1_project_context 9/12: every failure is SelectedContractMismatch because project_context_artifact::selected_contract_matches admits only kind 1.0 while the immutable successor descriptor selects kind 1.1 over the unchanged schema 1.0 and path. The predicate remains unedited. The original P1C selector included only profile_decision.rs, making the mandated HCM-2.1 preservation gate impossible. The five documentation artifacts propose the smallest authority repair. GitNexus cannot resolve the private predicate but reports its owning file at exact LOW: 8 impacted, 3 direct, zero processes/modules. Formatting and diff checks pass.",
+  "allowed_scope": [
+    "Review only whether the five documentation changes correctly repair the contradictory P1C authority.",
+    "Use the four live source/test entries only to validate the conflict and proposed boundary; do not approve their implementation correctness.",
+    "Validate that exact Project Context kind 1.0/1.1 compatibility over unchanged schema 1.0 and canonical path is the smallest same-slice repair.",
+    "Confirm the repair preserves decision-instance equality and every unrelated kind/schema/path/prefix/range/fallback refusal.",
+    "Confirm no public signature/type, schema/profile/definition, dependency, Cargo surface, new production symbol, sibling slice, or generic inference is authorized.",
+    "Identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "Do not review or approve P1C implementation; the predicate is intentionally still unchanged.",
+    "No HCM-2.1 spec rewrite and no P2-P7 implementation.",
+    "No Project Context schema/path change, dynamic compatibility, version range, or fallback.",
+    "Do not use the parent diagnosis as proof; reproduce the live conflict."
+  ],
+  "tasks": [
+    "Replay the nine-entry subject identity and inspect the exact documentation delta.",
+    "Reproduce or statically validate that live shipped 1.2 selects Project Context kind 1.1 while selected_contract_matches permits only 1.0.",
+    "Determine whether the mandated HCM-2.1 preservation wall is impossible under the prior exact P1C selector.",
+    "Validate the repaired SPEC, plan, todo, path manifest, and decision record for parity and closed scope.",
+    "Check the proposed positive and crossed/unrelated/schema/path negative proof is sufficient before implementation.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "P1C live shipped-root 1.2 selection",
+    "HCM-2.1 Project Context behavior preservation",
+    "Exact decision/instance kind equality",
+    "Exact Project Context kind 1.0/1.1 compatibility only",
+    "Unchanged schema 1.0 and canonical path",
+    "No new production symbol, public surface, fallback, inference, or sibling-slice widening",
+    "Fresh clean contract review before predicate implementation"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

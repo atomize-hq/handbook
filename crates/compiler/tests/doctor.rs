@@ -64,9 +64,9 @@ fn doctor_api_projects_the_exact_stable_project_context_row() {
         .project_context
         .expect("non-null Project Context row");
 
-    assert_eq!(report.schema_version, "1.1.0");
+    assert_eq!(report.schema_version, "1.2.0");
     assert_eq!(row.instance_id, "project_context");
-    assert_eq!(row.kind_ref, "handbook.artifact-kind.project-context@1.0.0");
+    assert_eq!(row.kind_ref, "handbook.artifact-kind.project-context@1.1.0");
     assert_eq!(row.canonical_path, ".handbook/project/context.yaml");
     assert_eq!(
         row.source_fingerprint,

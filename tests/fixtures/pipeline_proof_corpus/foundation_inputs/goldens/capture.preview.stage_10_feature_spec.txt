@@ -4,7 +4,8 @@ STAGE: stage.10_feature_spec
 CAPTURE ID: {{CAPTURE_ID}}
 ROUTE BASIS REVISION: 6
 WRITE PLAN:
-  - artifact: artifacts/feature_spec/FEATURE_SPEC.md
+  - artifact: artifacts/work-specification/work-specification.yaml
+  - repo_file: artifacts/feature_spec/FEATURE_SPEC.md
 POST-CAPTURE STATE UPDATES:
   <none>
 NEXT SAFE ACTION: run `handbook pipeline capture apply --capture-id {{CAPTURE_ID}}`

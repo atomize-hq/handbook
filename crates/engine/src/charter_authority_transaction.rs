@@ -8,7 +8,7 @@ use crate::charter_lifecycle_store::{
 };
 use crate::charter_lifecycle_validation::{
     validate_candidate_exact_result_authority, validate_result_bytes,
-    CharterLifecycleValidationResultV10,
+    CharterLifecycleValidationResultV10, SELECTED_PROFILE_FINGERPRINT, SELECTED_PROFILE_REF,
 };
 use crate::charter_lineage_store::{
     create_new_file, create_safe_directories, reject_reparse_or_symlink, string_field,
@@ -921,15 +921,11 @@ impl CharterAuthorityTransactionServiceV1 {
                     "selected decisions do not retain the shipped Charter definition closure",
                 )
             })?;
-        require_equal_string(
-            &promotion.value,
-            "profile_ref",
-            decisions.profile_ref().as_str(),
-        )?;
+        require_equal_string(&promotion.value, "profile_ref", SELECTED_PROFILE_REF)?;
         require_equal_string(
             &promotion.value,
             "resolved_profile_fingerprint",
-            decisions.profile_definition_fingerprint().as_str(),
+            SELECTED_PROFILE_FINGERPRINT,
         )?;
         self.validate_resolved_definitions(
             &promotion.value,

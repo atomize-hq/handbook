@@ -13,7 +13,8 @@ use crate::charter_lifecycle_store::{
     CharterLifecycleStoreV1, CHARTER_LIFECYCLE_POLICY_REF,
 };
 use crate::charter_lifecycle_validation::{
-    definition_bindings, CharterLifecycleValidationServiceV1,
+    definition_bindings, CharterLifecycleValidationServiceV1, SELECTED_PROFILE_FINGERPRINT,
+    SELECTED_PROFILE_REF,
 };
 use crate::charter_lineage_store::{
     string_field, LineageRecordClassV1, LineageStoreErrorV1, TrustedLineageStoreV1,
@@ -33,7 +34,6 @@ const CANONICAL_REF: &str = ".handbook/project/charter.yaml";
 const TARGET_INSTANCE_ID: &str = "project_authority";
 const SELECTED_KIND_REF: &str = "handbook.artifact-kind.project-authority@1.1.0";
 const SELECTED_SCHEMA_REF: &str = "handbook.schemas.artifacts.project-authority@1.1.0";
-const SELECTED_PROFILE_REF: &str = "handbook.profile.shipped-root@1.1.0";
 const APPROVAL_POLICY_REF: &str = "handbook.approval.constitutional-candidate@1.0.0";
 const MAX_APPROVAL_REFS: usize = 64;
 
@@ -184,7 +184,7 @@ fn validate_candidate_contract(
         }
     }
     if string_field(candidate, "resolved_profile_fingerprint").map_err(map_lineage_candidate)?
-        != decisions.profile_definition_fingerprint().as_str()
+        != SELECTED_PROFILE_FINGERPRINT
     {
         return Err(definition_drift(
             "candidate retained profile fingerprint is stale",
@@ -736,11 +736,6 @@ impl CharterPromotionWorkflowServiceV1 {
                 "selected shipped profile could not be re-resolved",
             )
         })?;
-        if decisions.profile_ref().as_str() != SELECTED_PROFILE_REF {
-            return Err(definition_drift(
-                "promotion requires the selected shipped profile 1.1",
-            ));
-        }
         let definitions = load_shipped_charter_definition_registry().map_err(|_| {
             definition_drift("shipped Charter definition closure could not be reloaded")
         })?;
@@ -918,8 +913,8 @@ impl CharterPromotionWorkflowServiceV1 {
             "target_instance_id": TARGET_INSTANCE_ID,
             "basis_artifact_fingerprint": intent.expected_current_fingerprint,
             "expected_current_artifact_fingerprint": intent.expected_current_fingerprint,
-            "profile_ref": decisions.profile_ref().as_str(),
-            "resolved_profile_fingerprint": decisions.profile_definition_fingerprint().as_str(),
+            "profile_ref": SELECTED_PROFILE_REF,
+            "resolved_profile_fingerprint": SELECTED_PROFILE_FINGERPRINT,
             "resolved_definitions": resolved_definitions,
             "approval_refs": ordered_approval_refs,
             "validation_result_refs": validation_result_refs,

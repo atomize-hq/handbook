@@ -1,0 +1,255 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T002052Z--HCM-2-4--p3-work-specification-implementation",
+  "created_at_utc": "2026-07-27T00:20:52Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P3-work-specification",
+  "subject_fingerprint": "sha256:0fc78eefdb5ba2b01e7068c0b52c844f9e6cc1b7d733d4fdea0834b1e9c9839e",
+  "review_cycle": null,
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "core/library/feature_spec/FEATURE_SPEC.md.tmpl",
+        "sha256": "ed2260883039e5079eba085be3577aa8b3385972ca1b33a176e5d673e38a02e1"
+      },
+      {
+        "path": "core/library/feature_spec/feature_spec_architect_directive.md",
+        "sha256": "45fca4350d4fd9b9ccb2ec3da4cab7e9f2ea86b3be53f1d5ea0ae40c574a730e"
+      },
+      {
+        "path": "core/pipelines/default.yaml",
+        "sha256": "1d47f90852733c14495cd146a7a2dc597dff6c78c565c0f02de4f9db2ce15eeb"
+      },
+      {
+        "path": "core/pipelines/foundation_inputs.yaml",
+        "sha256": "1a6fb478c3b0ad36707f57716fb601f3b6a5323e2987309e32618a50c1e1b5c8"
+      },
+      {
+        "path": "core/schemas/feature_spec.yaml",
+        "sha256": "9ef8c506b56a9b8791ef2f00bc49dc958b556921490bbd2cb6e2cb4648df08ab"
+      },
+      {
+        "path": "core/stages/10_feature_spec.md",
+        "sha256": "2af19bf565ffdc35ed80473e12febaa5ac036e577c208e57fcc557ef1e42d1c1"
+      },
+      {
+        "path": "crates/cli/tests/feature_spec_contract.rs",
+        "sha256": "4ec231e8c02dc965eeecee9dfb36af091b141e9eda5de67d36c80ca358d9f0f4"
+      },
+      {
+        "path": "crates/cli/tests/pipeline_handoff_refusals.rs",
+        "sha256": "44ac5fcc2dde77c582b75a7d52ac8a7cd7481cac8d60651647d10ab3e1762ba0"
+      },
+      {
+        "path": "crates/compiler/src/layout.rs",
+        "sha256": "5be6621b9953f130901e09539851f3e8c866b7b95e348c549d99b39c3e79f05b"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_capture.rs",
+        "sha256": "010ff483cada7bececaf5bd114f2b769fc8cef64db7481efd868cebee2de401b"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_handoff.rs",
+        "sha256": "769442096cb41fb48234dcddfc0992cf08c6281048ffc3dfb3d56ecbcb4cedfc"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.work-specification/1.1.0.yaml",
+        "sha256": "5dd585d5812bbdb5c02f9ec56f0536a4ecd855f1b66f728bee3bf9bd4cd35af5"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.work-specification/1.0.0.yaml",
+        "sha256": "7a15bd5db5f77e2c31b5379675b0d4c4476b6c5a1af2d00dca105cea7255b4a0"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.work-specification-review-markdown/1.0.0.yaml",
+        "sha256": "94652999c19105c18a29a94f4401e5663f849c2ebb37a4a274aa309c727bf484"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.artifacts.work-specification/1.0.0.schema.json",
+        "sha256": "c4c6f489ff20c022538ae2e3512cf62f8559d8d9409944ab13e8f138cb2d5985"
+      },
+      {
+        "path": "crates/engine/src/artifact_repository.rs",
+        "sha256": "1d6e30b0001c658d79cf2e942817a2d5513b59756c8e41f2c27bf2dfdb1a92ac"
+      },
+      {
+        "path": "crates/engine/src/canonical_yaml.rs",
+        "sha256": "1e8e793b5360ccfdca9854c0b165148a94e1e632b3feda8f0b66e3911ae25e83"
+      },
+      {
+        "path": "crates/pipeline/src/layout.rs",
+        "sha256": "9c3f7e1815dcfd5ea7527497851b00781d3acc3084cce3a6d9c74b3e71491c5d"
+      },
+      {
+        "path": "crates/pipeline/src/pipeline_capture.rs",
+        "sha256": "d35d3ea6ea45bbbca765fd3985ebb1370d280ca088a73f020dfacdd216c76671"
+      },
+      {
+        "path": "crates/pipeline/src/pipeline_handoff.rs",
+        "sha256": "bf58bfba79a567f66d6e16796feec2b31e4a0d129de1228d393382b50730512f"
+      },
+      {
+        "path": "crates/pipeline/src/stage_10_feature_spec_provenance.rs",
+        "sha256": "a2d229bc8f4ef74f9fe9314c3d5b2c315260f8706ea72e9c841dc1541943e746"
+      },
+      {
+        "path": "crates/pipeline/tests/pipeline_capture.rs",
+        "sha256": "d99607cd1571bfd0d0678317143cff533e55b63d709e3f26c1c6c813b5410330"
+      },
+      {
+        "path": "crates/pipeline/tests/pipeline_handoff.rs",
+        "sha256": "8aa9ad52cd7df90a060bf0405bb1d7976be153abcc6244d216cd170332414928"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "6d66d9b6af0953fbfe4d1f90a7568d748b3e5c737b9fe25b4a280c5f9655d2d4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "383b688b73bc2cf0315ad595fb331e694faeac85d94b520f9de24f9e209b2eef"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+        "sha256": "6aa2edab2f7d1f9279ff5bcba9114a80f708a0ecfeb097d6cac49a31593b16af"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "a401df977b81b836a9ff71ec0e11483d6e37a3ea2d89f8374fa9dd31f7ac47b0"
+      },
+      {
+        "path": "tests/fixtures/foundation_flow_demo/model_outputs/happy_path/stage_10_feature_spec.md",
+        "sha256": "2381c36f82c1c955b6b1fc21d5a56931c855b3f3a4957347546bf0fb384c6557"
+      },
+      {
+        "path": "tests/fixtures/pipeline_proof_corpus/foundation_inputs/model_outputs/stage_10_feature_spec.md",
+        "sha256": "2381c36f82c1c955b6b1fc21d5a56931c855b3f3a4957347546bf0fb384c6557"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:0fc78eefdb5ba2b01e7068c0b52c844f9e6cc1b7d733d4fdea0834b1e9c9839e"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "single_family_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_boundary"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Work Specification real-path proof",
+        "Canonical-source and view classification",
+        "P3 — Work Specification / Stage 10 vertical",
+        "Exact implementation surface selectors",
+        "Impact-analysis gate",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P3 — Work Specification / Stage 10 vertical"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+      "sections": [
+        "P3 — Work Specification / Stage 10 vertical"
+      ]
+    }
+  ],
+  "repo_truth": "P1A-P1C are independently review-clean. The approved work-specification 1.1 kind, 1.0 schema/intake/renderer, exact descriptor-row admission, schema coverage, renderer golden, and public HCM-2.3 repository/intake APIs already exist. Stage 10 still captures artifacts/feature_spec/FEATURE_SPEC.md as authority and handoff identity/provenance source. P3 must switch only that Stage 10 vertical to descriptor-selected canonical Work Specification YAML and a deterministic disposable Markdown view. P2 is independently paused on condition-evaluator authority and does not overlap P3.",
+  "allowed_scope": [
+    "Edit only the exact P3 runtime/library/test/fixture/proof paths enumerated by the P3 implementation packet path manifest; do not use its directory descriptions as wildcards.",
+    "Change Stage 10's declared canonical output to artifacts/work-specification/work-specification.yaml and retain artifacts/feature_spec/FEATURE_SPEC.md only as a deterministic generated repo-file view.",
+    "Create the exact repository profile fixture example.profile.hcm-2-4-work-specification@1.0.0 extending handbook.profile.shipped-root@1.2.0 and adding only work_specification / handbook.artifact-kind.work-specification@1.1.0 / delivery_unit / always / artifacts/work-specification/work-specification.yaml / handbook.intake.work-specification@1.0.0 / singleton handbook.renderer.work-specification-review-markdown@1.0.0.",
+    "Before capture mutation, resolve the repository-selected descriptor through unchanged public HCM-2.3 APIs, require its exact canonical path and intake contract, duplicate-safely parse the YAML, submit its eight fields through the exact selected intake, require Complete normalized content, and canonicalize the admitted value with handbook_engine::canonical_yaml.",
+    "Generate the fixed Feature Spec Markdown view deterministically from the admitted canonical value with the exact work-specification renderer golden shape. The view may never be read as capture, provenance, fingerprint, feature identity, or handoff authority.",
+    "Bind Stage 10 capture provenance and handoff reads, fingerprints, copy plans, and identity to canonical Work Specification YAML while retaining the frozen public provenance record fields, schema version, handoff bundle schema/API, route-basis semantics, and ExternalManualDerived trust class.",
+    "Derive the same stable external feature identity from the canonical Work Specification record_id, falling back only to the existing canonical-byte hash behavior when no valid identity can be derived.",
+    "Preserve fixed command/stage selectors and all existing refusal classes; add exact negative proof for Markdown-as-input, missing/incorrect profile selection or descriptor, malformed/duplicate/unknown-field/schema-invalid YAML, stale provenance, and view tampering not affecting canonical authority.",
+    "Use RED-GREEN-REFACTOR and a packet-specific CARGO_TARGET_DIR; record the first focused failure and final raw commands in P3-work-specification.md.",
+    "Immediately before each production function/method edit, run exact upstream GitNexus impact. The parent already observed CRITICAL build_repo_mirror_writes (12 impacted, two processes) and HIGH derive_feature_id, validate_single_file_capture_content, and build_stage_10_capture_provenance_for_apply; do not widen beyond the recorded processes."
+  ],
+  "non_goals": [
+    "No edit to engine runtime, released schema/kind/intake/renderer definitions, shipped-root profile, Cargo files, dependencies, versions, public handoff bundle schema/API, public pipeline command, generic HCM-2.3 mutation runtime, P1/P2/P4/P5/P6/P7, or a sibling slice.",
+    "No sixth P1A production symbol, broader schema inference, root-profile Work Specification default, generated artifact command, dynamic filename, lifecycle, Projection, overlay, extension, migration, compatibility fallback, or Markdown authority.",
+    "No rename of public provenance fields, trust-class promotion, route-basis change, stage-selector change, bundle-format change, or classification promotion beyond the descriptor-selected Stage 10 path.",
+    "No stage, commit, push, global handoff, ledger write, dispatch creation, independent-review claim, slice-complete claim, or user task hop."
+  ],
+  "tasks": [
+    "Replay the 29-entry baseline subject and confirm every proposed edit is within the exact P3 selector and disjoint from active P4/P5 test-only paths.",
+    "Read the exact P3 authority, renderer golden, public ArtifactRepositoryV1/canonical_yaml APIs, current Stage 10 capture/provenance/handoff code, and only the selected tests/fixtures.",
+    "Run fresh exact GitNexus impacts for every existing production function/method before editing it and stop on any unrecorded HIGH/CRITICAL expansion.",
+    "Add focused RED tests proving schema-valid YAML capture, exact descriptor selection, deterministic Markdown view, canonical-byte provenance/handoff identity, and the frozen negatives before production edits.",
+    "Implement the minimum Stage 10 substitution incrementally; do not create a general renderer engine or change the public handoff contract.",
+    "Update only the exact fixture mirrors/goldens whose bytes necessarily change and preserve unrelated foundation-flow semantics.",
+    "Run cargo fmt --check, targeted pipeline/compiler/CLI tests, real-binary fixture capture/handoff proof, relevant unchanged handoff/trust/route regressions, git diff --check, and scoped diff inspection.",
+    "Return structured results to the parent; leave independent review, finding disposition, commit, global handoff, and ledger closeout to the parent."
+  ],
+  "contracts_and_gates": [
+    "Exact descriptor-selected Work Specification profile and canonical path before mutation",
+    "Duplicate-safe parse, selected intake Complete outcome, exact schema-valid normalized content, and deterministic canonical YAML bytes",
+    "Deterministic fixed Markdown review view that is never authority",
+    "Canonical YAML-bound provenance, feature identity, handoff copy/fingerprint, and ExternalManualDerived trust",
+    "Frozen public handoff schema/API, command/stage selectors, route basis, refusal classifications, and sibling seams",
+    "Positive/negative real-path P3 proof with no root default or schema/runtime widening"
+  ],
+  "stop_conditions": [
+    "Stop on any subject-manifest mismatch or overlap outside exact P3 paths.",
+    "Stop if correctness requires an engine runtime edit, public API/schema, dependency/Cargo/version, unsafe policy, root-profile addition, general renderer engine, generic HCM-2.3 change, sixth P1A symbol, broader schema inference, or any path outside P3.",
+    "Stop if exact descriptor selection and schema/intake validation cannot occur before mutation through the unchanged public runtime.",
+    "Stop on any unrecorded HIGH/CRITICAL impact expansion, public bundle incompatibility, trust/route change, or inability to preserve an existing negative.",
+    "Do not waive a failing negative, stage, commit, push, create a handoff, modify the ledger, or claim independent review."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": false,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "red_proof",
+      "impact_analysis",
+      "validation",
+      "unavailable_proof",
+      "remaining_protocol_work",
+      "parent_disposition"
+    ]
+  }
+}

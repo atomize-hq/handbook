@@ -1,0 +1,163 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T195640Z--HCM-2-4--p1a-const-string-selector-review",
+  "created_at_utc": "2026-07-26T19:56:40Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "context-engineering",
+    "documentation-and-adrs",
+    "planning-and-task-breakdown"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:63e83aa96616b1c1ba0f41544e4afb4e53f6bbf0dad9ba4ac86f6d68b4936f67",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p1a-const-string-selector-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "386dafdb657c3ad2674fa6d004e27d30c0c4be6ee887c642852ff9c945f8f061"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "03964ab050c6e3b9b2d0d6f26e6ca3f1d907b776e19f833f5530eef1b25fa08f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-const-string-coverage-selector-approval.md",
+        "sha256": "560253c023a7fa6d25e68176517fb5ac155675d97061e97a1b9c48dfeb2b231f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "993a0f0c646ddcc38e02a67fe32a72a7a0c16b6b12ac8afc63309d5af2d0f680"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "3459155ec3da303e9724ff34a1f7ffa412b0142f3863925d96c2fd125707d3ce"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:63e83aa96616b1c1ba0f41544e4afb4e53f6bbf0dad9ba4ac86f6d68b4936f67"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "complete_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4",
+        "Packet reviewability indicators"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Schema registry entry",
+        "Artifact intake definition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1A — Catalog publication and admission closure",
+        "Exact implementation surface selectors",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-const-string-coverage-selector-approval.md",
+      "sections": [
+        "Decision",
+        "Preserved refusal boundary",
+        "Proof",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The five-entry documentation selector amendment is sha256:63e83aa96616b1c1ba0f41544e4afb4e53f6bbf0dad9ba4ac86f6d68b4936f67. The real ArtifactRepositoryV1::open proof is 5/6: only package-intake admission fails because the five released schemas expose type-absent string-valued const leaves for schema_id and schema_version. Fresh upstream impact for ResolvedSchema::collect_coverage_leaf_shapes is LOW/1 with one direct caller and no indexed process. No schema_registry.rs production edit has occurred in this resumed run.",
+  "allowed_scope": [
+    "Replay the exact five-entry amendment manifest and inspect its correction-only diff.",
+    "Inspect ResolvedSchema::collect_coverage_leaf_shapes and the released candidate schema leaves only as read-only feasibility evidence.",
+    "Verify the amendment authorizes exactly the type-absent string-valued const predicate in the named private method.",
+    "Verify every other type-absent, non-string, composite, reference, object, pointer, and unsupported-type refusal remains frozen.",
+    "Verify the test and real-path proof can distinguish the admitted predicate from broader inference.",
+    "Apply the 04 reviewability indicators and identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No runtime, schema, definition, vector, test, proof, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation change.",
+    "Do not reopen the four-symbol typed-closure correction or review P1A generally.",
+    "No sixth production symbol, schema-byte change, enum/default/examples/object inference, compatibility-loader edit, public API, dependency, Cargo/package/version, unsafe, module/process, sibling packet, or HCM-3.x expansion."
+  ],
+  "tasks": [
+    "Verify exact subject identity and amendment-only diff.",
+    "Verify the predicate is sufficient for the observed released-schema leaves and no broader than the operator authority.",
+    "Verify the decision, SPEC, plan, todo, and path manifest state the same production-symbol and preserved-refusal ceiling.",
+    "Verify the focused negative proof explicitly covers non-string const and type-absent string enum while the real repository path remains the positive acceptance proof.",
+    "Return findings first in Critical, Required, Optional, Nit order with complete evidence and the smallest remediation."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#schema-registry-entry",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#artifact-intake-definition",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#exact-implementation-surface-selectors",
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#packet-reviewability-indicators",
+    "Exact fifth-symbol ceiling and no broader schema inference"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

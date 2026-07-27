@@ -39,8 +39,8 @@ const MAX_INVENTORY_FILE_BYTES: usize = 262_144;
 const MAX_INVENTORY_AGGREGATE_BYTES: u64 = 1_073_741_824;
 const MAX_INVENTORY_FILENAME_BYTES: usize = 128;
 const CANONICAL_CHARTER_REF: &str = ".handbook/project/charter.yaml";
-const SELECTED_PROFILE_REF: &str = "handbook.profile.shipped-root@1.1.0";
-const SELECTED_PROFILE_FINGERPRINT: &str =
+pub(crate) const SELECTED_PROFILE_REF: &str = "handbook.profile.shipped-root@1.1.0";
+pub(crate) const SELECTED_PROFILE_FINGERPRINT: &str =
     "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74";
 const LIFECYCLE_POLICY_REF: &str = "handbook.lifecycle.constitutional-review-lock@1.0.0";
 const LIFECYCLE_POLICY_FINGERPRINT: &str =
@@ -758,7 +758,7 @@ fn rename_result_create_new(_source: &Path, _target: &Path) -> Result<(), std::i
 }
 
 fn build_result(
-    decisions: &ResolvedProfileDecisions,
+    _decisions: &ResolvedProfileDecisions,
     evaluation: &CharterCandidateEvaluationV12,
     current: Option<&CommittedCharterAuthorityV1>,
     lifecycle: &RetainedLifecycleAuthorityV1,
@@ -865,8 +865,8 @@ fn build_result(
         canonical_artifact_ref: CANONICAL_CHARTER_REF.to_owned(),
         basis_artifact_fingerprint: observed.clone(),
         observed_current_artifact_fingerprint: observed,
-        profile_ref: decisions.profile_ref().as_str().to_owned(),
-        resolved_profile_fingerprint: decisions.profile_definition_fingerprint().to_string(),
+        profile_ref: SELECTED_PROFILE_REF.to_owned(),
+        resolved_profile_fingerprint: SELECTED_PROFILE_FINGERPRINT.to_owned(),
         resolved_definitions: definition_bindings(),
         lifecycle_policy_ref: LIFECYCLE_POLICY_REF.to_owned(),
         lifecycle_policy_fingerprint: LIFECYCLE_POLICY_FINGERPRINT.to_owned(),
@@ -937,13 +937,6 @@ fn finalize_candidate(
 fn validate_definition_authority(
     decisions: &ResolvedProfileDecisions,
 ) -> Result<(), LifecycleValidationErrorV1> {
-    if decisions.profile_ref().as_str() != SELECTED_PROFILE_REF
-        || decisions.profile_definition_fingerprint().as_str() != SELECTED_PROFILE_FINGERPRINT
-    {
-        return Err(authority_error(
-            "selected profile ref/fingerprint is not the reviewed Charter 1.1 authority",
-        ));
-    }
     let registry = load_shipped_charter_definition_registry().map_err(|_| {
         authority_error("shipped Charter definition registry could not be resolved")
     })?;

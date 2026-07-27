@@ -1,0 +1,148 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T164958Z--HCM-2-4--p0-path-manifest-closure-review",
+  "created_at_utc": "2026-07-26T16:49:58Z",
+  "source_handoff_ids": [
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed"
+  ],
+  "parent_orchestration_id": "20260726T161851Z--HCM-2-4--implementation-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "context-engineering",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P0-path-manifest",
+  "subject_fingerprint": "sha256:73815f5b699360724f2c2c9698c313bef6502fdbe255fbbec9e5f915697e2c4c",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p0-path-manifest-closure-1",
+    "trigger_run_ids": [
+      "p0-path-manifest-discovery"
+    ],
+    "finding_refs": [
+      "p0-path-manifest-discovery-P2-1",
+      "p0-path-manifest-discovery-P2-2",
+      "p0-path-manifest-discovery-P2-3"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "092e4c5565c704689abbf6e1368a2aa188afc4a453eaa9356c1bcf0871b2750b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "9e986ca2db06e8c60f45e93dd5b05ee16b4fa703cbedac5f7082462926ea6258"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-selector-correction.md",
+        "sha256": "83ce6d25b6cc7965e41c0bbb2d1723b657c93c332e7cfbb668f503b87e26275e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "a1f897b9f39c10105de69f7ac49c2ba3f340c7ec8c2a3d19ee9b071178eb58ec"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:73815f5b699360724f2c2c9698c313bef6502fdbe255fbbec9e5f915697e2c4c"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "causal_remediation_delta",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P0 — Baseline and inventory lock",
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "P7 — Phase 2 exit proof and control-pack closeout",
+        "Exact implementation surface selectors"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P0 — Inventory lock",
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "P7 — Phase 2 exit and true stop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The four-entry P0 subject changed from sha256:859a7cd0389468d737505da9f00fb90c6145ed9b7cfb823dfcc3b30ee156ab64 to sha256:73815f5b699360724f2c2c9698c313bef6502fdbe255fbbec9e5f915697e2c4c. The closure boundary is exact P0 record authority, the hcm_2_1_project_context fixed-loader consumer, exact P7 write ownership, and remediation-caused regression only.",
+  "allowed_scope": [
+    "Replay the exact changed four-entry manifest and aggregate fingerprint.",
+    "Compare the changed subject with discovery fingerprint sha256:859a7cd0389468d737505da9f00fb90c6145ed9b7cfb823dfcc3b30ee156ab64.",
+    "Verify P0 starts read-only and permits only evidence-established slice-local control records/coupled contradiction repair before reviewed acceptance.",
+    "Verify P6 selects crates/engine/tests/hcm_2_1_project_context.rs and covers both fixed-loader calls without widening sibling semantics.",
+    "Verify P7 editable and read-only paths are exact subsets of the corrected selector and protocol exception.",
+    "Check the complete subject only for these causal findings, subject identity, and remediation-caused regression."
+  ],
+  "non_goals": [
+    "Do not reopen general path-manifest discovery or propose unrelated cleanup.",
+    "No implementation, edits, formatting, staging, commits, pushes, handoffs, ledger writes, dispatch creation, or delegation.",
+    "No HCM-3.x, Resolution, Projection, public API, dependency, Cargo, package, migration, dual-read, dynamic-command, or sibling-slice expansion."
+  ],
+  "tasks": [
+    "Verify exact subject identity and post-remediation delta.",
+    "Verify p0-path-manifest-discovery-P2-1 through P2-3 are closed at their cited authority boundaries.",
+    "Verify no remediation-caused P1/P2 and no newly editable path outside the corrected packet selectors.",
+    "Return findings first. Return CLEAN only when all three known findings are closed."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#implementation-packet-decomposition",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#exact-implementation-surface-selectors",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
+  ],
+  "stop_conditions": [
+    "Return blocked if the changed manifest, causal findings, or immediate lineage cannot be established.",
+    "Report rather than repair any remaining causal P1/P2.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

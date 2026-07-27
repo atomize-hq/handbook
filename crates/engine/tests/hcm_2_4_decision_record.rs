@@ -1,0 +1,610 @@
+use handbook_engine::artifact_intake::{
+    CoverageConfidenceV1, CoverageEvaluationOutcomeV1, CoverageSourceKindV1, CoverageSpecificityV1,
+    CoverageSubmissionStateV1, CoverageSubmissionV1,
+};
+use handbook_engine::artifact_intake_registry::{AcquisitionModeV1, RepositoryProfileSelectionV1};
+use handbook_engine::artifact_repository::{
+    ArtifactRepositoryErrorKindV1, ArtifactRepositoryV1, ArtifactTargetV1,
+};
+use handbook_engine::canonical_yaml::canonical_yaml_bytes;
+use handbook_engine::{
+    parse_definition_yaml, resolve_profile_selection, ArtifactInstanceRegistry,
+    DefinitionFingerprint, ExactDefinitionRef, RepositoryInvocationIdentityServiceV1, SymbolicId,
+};
+use serde_json::{json, Value};
+use std::fs;
+use std::path::Path;
+
+const DECISION_KIND_REF: &str = "handbook.artifact-kind.decision-record@1.1.0";
+const DECISION_INSTANCE_ID: &str = "decision_record";
+const DECISION_PROFILE_REF: &str = "example.profile.hcm-2-4-decision-record@1.0.0";
+const DECISION_PROFILE_FINGERPRINT: &str =
+    "sha256:09517ce70b7563be1eba9065794c1839d9b3a5902b648a6e247e8e451fd913dd";
+
+fn decision_record_fixture_root() -> std::path::PathBuf {
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/hcm_2_4_decision_record")
+}
+
+fn copy_decision_record_fixture_tree(source: &Path, target: &Path) {
+    fs::create_dir_all(target).expect("fixture directory");
+    for entry in fs::read_dir(source).expect("fixture tree") {
+        let entry = entry.expect("fixture entry");
+        let source_path = entry.path();
+        let target_path = target.join(entry.file_name());
+        if source_path.is_dir() {
+            copy_decision_record_fixture_tree(&source_path, &target_path);
+        } else {
+            fs::copy(source_path, target_path).expect("copy fixture file");
+        }
+    }
+}
+
+fn open_decision_record_fixture_repository() -> (tempfile::TempDir, ArtifactRepositoryV1) {
+    let repo = tempfile::tempdir().expect("repository root");
+    copy_decision_record_fixture_tree(&decision_record_fixture_root(), repo.path());
+    RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup(repo.path())
+        .expect("repository identity");
+    let repository =
+        ArtifactRepositoryV1::open(repo.path()).expect("Decision Record repository session");
+    (repo, repository)
+}
+
+fn decision_target() -> ArtifactTargetV1 {
+    ArtifactTargetV1::parse(DECISION_KIND_REF, DECISION_INSTANCE_ID)
+        .expect("Decision Record target")
+}
+
+fn decision_record_candidate_content() -> Value {
+    json!({
+        "schema_id": "handbook.artifact.decision-record",
+        "schema_version": "1.0",
+        "record_id": "example.record.decision",
+        "context": "The generic path must stay bounded",
+        "decision": "Use the admitted descriptor",
+        "status": "accepted",
+        "consequences": ["The canonical YAML remains authoritative"],
+        "supersedes": []
+    })
+}
+
+fn decision_record_coverage_submissions() -> Vec<CoverageSubmissionV1> {
+    [
+        (
+            "decision_record.schema_id",
+            json!("handbook.artifact.decision-record"),
+            CoverageSpecificityV1::Exact,
+        ),
+        (
+            "decision_record.schema_version",
+            json!("1.0"),
+            CoverageSpecificityV1::Exact,
+        ),
+        (
+            "decision_record.record_id",
+            json!("example.record.decision"),
+            CoverageSpecificityV1::Exact,
+        ),
+        (
+            "decision_record.context",
+            json!("The generic path must stay bounded"),
+            CoverageSpecificityV1::Concrete,
+        ),
+        (
+            "decision_record.decision",
+            json!("Use the admitted descriptor"),
+            CoverageSpecificityV1::Concrete,
+        ),
+        (
+            "decision_record.status",
+            json!("accepted"),
+            CoverageSpecificityV1::Exact,
+        ),
+        (
+            "decision_record.consequences",
+            json!(["The canonical YAML remains authoritative"]),
+            CoverageSpecificityV1::Concrete,
+        ),
+        (
+            "decision_record.supersedes",
+            json!([]),
+            CoverageSpecificityV1::Exact,
+        ),
+    ]
+    .into_iter()
+    .map(|(coverage_id, value, specificity)| CoverageSubmissionV1 {
+        coverage_id: coverage_id.to_owned(),
+        state: CoverageSubmissionStateV1::Supplied,
+        source_kind: CoverageSourceKindV1::UserDeclaration,
+        value: Some(value),
+        specificity,
+        confidence: CoverageConfidenceV1::High,
+        contradiction_refs: Vec::new(),
+    })
+    .collect()
+}
+
+fn decision_record_fixture_profile_fingerprint(
+    fixture_root: &Path,
+    selection_bytes: &[u8],
+) -> DefinitionFingerprint {
+    let mut root_selection: Value =
+        serde_json::from_slice(selection_bytes).expect("selection JSON");
+    root_selection["selected_profile_ref"] = json!("handbook.profile.shipped-root@1.2.0");
+    root_selection["profile_sources"] = json!([{
+        "exact_ref": "handbook.profile.shipped-root@1.2.0",
+        "source": {"kind": "built_in"}
+    }]);
+    let root_selection = RepositoryProfileSelectionV1::from_json_bytes(
+        &serde_json::to_vec(&root_selection).expect("root selection JSON"),
+    )
+    .expect("root selection");
+    let root = resolve_profile_selection(fixture_root, root_selection.profile_request())
+        .expect("shipped-root 1.2 closure");
+
+    let profile_path =
+        fixture_root.join(".handbook/definitions/profiles/decision-record-root-1.0.0.yaml");
+    let mut definition =
+        parse_definition_yaml(&fs::read(profile_path).expect("Decision Record profile bytes"))
+            .expect("Decision Record profile");
+    let supplied = definition
+        .as_object_mut()
+        .expect("profile object")
+        .remove("profile_fingerprint")
+        .expect("profile fingerprint");
+    let condition_ref =
+        ExactDefinitionRef::parse("handbook.condition.project.managed-operational-surface@1.0.0")
+            .expect("condition ref");
+    let condition = root
+        .project_condition_registry()
+        .definition(&condition_ref)
+        .expect("condition definition");
+    let descriptors = ArtifactInstanceRegistry::resolve(
+        definition["artifact_instances"]
+            .as_array()
+            .expect("artifact instances"),
+        root.artifact_kind_registry(),
+        &[condition],
+    )
+    .expect("descriptor closure");
+    let computed = DefinitionFingerprint::from_json_value(&json!({
+        "definition": definition,
+        "dependencies": [
+            {
+                "definition_class": "artifact_instance_registry",
+                "reference": "example.profile.hcm-2-4-decision-record@1.0.0",
+                "fingerprint": descriptors.fingerprint().as_str()
+            },
+            {
+                "definition_class": "profile",
+                "reference": "handbook.profile.shipped-root@1.2.0",
+                "fingerprint": root.selected_profile_definition_fingerprint().as_str()
+            }
+        ]
+    }))
+    .expect("profile fingerprint");
+    assert_eq!(supplied, json!(computed.as_str()));
+    computed
+}
+
+#[test]
+fn repository_selected_decision_record_fixture_resolves_and_reads_real_bytes() {
+    let fixture_root = decision_record_fixture_root();
+    let selection_path = fixture_root.join(".handbook/profile-selection.json");
+    let selection_bytes =
+        fs::read(&selection_path).expect("Decision Record selection fixture must exist");
+    assert_eq!(
+        decision_record_fixture_profile_fingerprint(&fixture_root, &selection_bytes).as_str(),
+        DECISION_PROFILE_FINGERPRINT
+    );
+    let selection = RepositoryProfileSelectionV1::from_json_bytes(&selection_bytes)
+        .expect("Decision Record selection fixture must decode");
+    let profile = resolve_profile_selection(&fixture_root, selection.profile_request())
+        .expect("Decision Record profile must resolve");
+    assert_eq!(profile.exact_ref().as_str(), DECISION_PROFILE_REF);
+
+    let decision_id = SymbolicId::parse(DECISION_INSTANCE_ID).expect("Decision Record instance");
+    let descriptor = profile
+        .artifact_instances()
+        .instance(&decision_id)
+        .expect("selected Decision Record descriptor");
+    assert_eq!(descriptor.kind_ref().as_str(), DECISION_KIND_REF);
+    assert_eq!(descriptor.role_ref(), None);
+    assert_eq!(
+        descriptor.canonical_path(),
+        ".handbook/records/decision.yaml"
+    );
+    assert_eq!(
+        descriptor
+            .intake_definition_ref()
+            .expect("Decision Record intake")
+            .as_str(),
+        "handbook.intake.decision-record@1.0.0"
+    );
+    assert_eq!(
+        descriptor
+            .renderer_definition_refs()
+            .iter()
+            .map(ExactDefinitionRef::as_str)
+            .collect::<Vec<_>>(),
+        ["handbook.renderer.decision-record-review-markdown@1.0.0"]
+    );
+    assert!(descriptor.capability_refs().is_empty());
+    assert!(descriptor.dependencies().is_empty());
+    assert!(descriptor.lifecycle_policy_ref().is_none());
+    assert!(descriptor.projection_definition_refs().is_empty());
+    assert!(descriptor.validation_overlay_refs().is_empty());
+    assert!(descriptor.extensions().is_empty());
+
+    let (repo, repository) = open_decision_record_fixture_repository();
+    let canonical_path = repo.path().join(".handbook/records/decision.yaml");
+    let retained_bytes = fs::read(&canonical_path).expect("retained Decision Record bytes");
+    let expected_content = json!({
+        "schema_id": "handbook.artifact.decision-record",
+        "schema_version": "1.0",
+        "record_id": "example.record.decision",
+        "context": "A choice exists",
+        "decision": "Choose safety",
+        "status": "accepted",
+        "consequences": ["More checks"],
+        "supersedes": []
+    });
+    assert_eq!(
+        canonical_yaml_bytes(&expected_content).expect("canonical Decision Record"),
+        retained_bytes
+    );
+    let read = repository
+        .read(
+            &ExactDefinitionRef::parse(DECISION_KIND_REF).expect("kind ref"),
+            &decision_id,
+        )
+        .expect("descriptor-selected safe read");
+    assert_eq!(read.canonical_path, ".handbook/records/decision.yaml");
+    assert_eq!(read.content, expected_content);
+    assert_eq!(
+        read.artifact_fingerprint,
+        DefinitionFingerprint::from_bytes(&retained_bytes)
+    );
+
+    let context = repository
+        .operation_context(
+            &ExactDefinitionRef::parse(DECISION_KIND_REF).expect("kind ref"),
+            &decision_id,
+        )
+        .expect("Decision Record operation context");
+    assert_eq!(context.profile_ref().as_str(), DECISION_PROFILE_REF);
+    assert_eq!(context.kind_ref().as_str(), DECISION_KIND_REF);
+    assert_eq!(
+        context.schema_ref().as_str(),
+        "handbook.schemas.artifacts.decision-record@1.0.0"
+    );
+    assert_eq!(
+        context
+            .intake_definition_ref()
+            .expect("selected intake")
+            .as_str(),
+        "handbook.intake.decision-record@1.0.0"
+    );
+    assert!(context.resolved_definitions().iter().any(|binding| {
+        binding.definition_ref.as_str() == DECISION_PROFILE_REF
+            && binding.definition_fingerprint.as_str() == DECISION_PROFILE_FINGERPRINT
+    }));
+    repository
+        .validate(
+            &ExactDefinitionRef::parse(DECISION_KIND_REF).expect("kind ref"),
+            &decision_id,
+        )
+        .expect("selected schema validation");
+    assert_eq!(
+        repository
+            .current_artifact_fingerprint(&decision_target())
+            .expect("current fingerprint"),
+        Some(DefinitionFingerprint::from_bytes(&retained_bytes))
+    );
+}
+
+#[test]
+fn decision_record_intake_modes_share_the_selected_schema_and_closed_coverage() {
+    let (_repo, repository) = open_decision_record_fixture_repository();
+    let target = decision_target();
+    let definition = repository
+        .intake_definition(&target)
+        .expect("selected Decision Record intake");
+    assert_eq!(
+        definition.exact_ref().as_str(),
+        "handbook.intake.decision-record@1.0.0"
+    );
+    assert_eq!(definition.artifact_kind_ref().as_str(), DECISION_KIND_REF);
+    assert_eq!(
+        definition.candidate_schema_ref().as_str(),
+        "handbook.schemas.artifacts.decision-record@1.0.0"
+    );
+    assert_eq!(
+        definition.supported_modes(),
+        [
+            AcquisitionModeV1::GuidedAdaptive,
+            AcquisitionModeV1::Express,
+            AcquisitionModeV1::AgentAssisted
+        ]
+    );
+    assert_eq!(definition.coverage().len(), 8);
+
+    let current = repository
+        .current_artifact_fingerprint(&target)
+        .expect("current artifact")
+        .expect("fixture artifact");
+    let submissions = decision_record_coverage_submissions();
+    for mode in [
+        AcquisitionModeV1::GuidedAdaptive,
+        AcquisitionModeV1::Express,
+        AcquisitionModeV1::AgentAssisted,
+    ] {
+        let evaluation = repository
+            .evaluate_intake(
+                target.kind_ref(),
+                target.instance_id(),
+                mode,
+                Some(current.clone()),
+                &submissions,
+            )
+            .expect("schema-backed Decision Record intake");
+        assert_eq!(evaluation.outcome, CoverageEvaluationOutcomeV1::Complete);
+        assert_eq!(
+            evaluation.normalized_content,
+            decision_record_candidate_content()
+        );
+        assert_eq!(evaluation.basis_artifact_fingerprint, Some(current.clone()));
+        assert_eq!(evaluation.coverage_results.len(), 8);
+    }
+
+    let mut missing = submissions.clone();
+    missing.pop();
+    assert_eq!(
+        repository
+            .evaluate_intake(
+                target.kind_ref(),
+                target.instance_id(),
+                AcquisitionModeV1::Express,
+                Some(current.clone()),
+                &missing,
+            )
+            .expect_err("missing coverage")
+            .kind(),
+        ArtifactRepositoryErrorKindV1::IntakeEvaluation
+    );
+
+    let mut duplicate = submissions.clone();
+    duplicate.push(submissions[0].clone());
+    assert_eq!(
+        repository
+            .evaluate_intake(
+                target.kind_ref(),
+                target.instance_id(),
+                AcquisitionModeV1::Express,
+                Some(current.clone()),
+                &duplicate,
+            )
+            .expect_err("duplicate coverage")
+            .kind(),
+        ArtifactRepositoryErrorKindV1::IntakeEvaluation
+    );
+
+    let mut unknown = submissions.clone();
+    unknown[0].coverage_id = "decision_record.unknown".to_owned();
+    assert_eq!(
+        repository
+            .evaluate_intake(
+                target.kind_ref(),
+                target.instance_id(),
+                AcquisitionModeV1::Express,
+                Some(current.clone()),
+                &unknown,
+            )
+            .expect_err("unknown coverage")
+            .kind(),
+        ArtifactRepositoryErrorKindV1::IntakeEvaluation
+    );
+
+    let mut wrong_typed = submissions;
+    wrong_typed[3].value = Some(json!(7));
+    assert_eq!(
+        repository
+            .evaluate_intake(
+                target.kind_ref(),
+                target.instance_id(),
+                AcquisitionModeV1::Express,
+                Some(current),
+                &wrong_typed,
+            )
+            .expect_err("schema-invalid coverage")
+            .kind(),
+        ArtifactRepositoryErrorKindV1::StructuralValidation
+    );
+}
+
+#[test]
+fn generic_decision_record_mutation_refuses_invalid_coverage_token_derivation() {
+    let (repo, _repository) = open_decision_record_fixture_repository();
+    let retained_fixture_bytes =
+        fs::read(repo.path().join(".handbook/records/decision.yaml")).expect("fixture bytes");
+    let intake_request = serde_json::to_vec(&json!({
+        "idempotency_key": "decision_record_blocker_000001",
+        "acquisition_mode": "express",
+        "expected_current_artifact_fingerprint":
+            DefinitionFingerprint::from_bytes(&retained_fixture_bytes).as_str(),
+        "coverage_submissions": decision_record_coverage_submissions()
+    }))
+    .expect("intake request");
+
+    let error = handbook_engine::artifact_mutation::ArtifactMutationServiceV1::intake_append(
+        repo.path(),
+        DECISION_KIND_REF,
+        DECISION_INSTANCE_ID,
+        &intake_request,
+    )
+    .expect_err("underscore-bearing coverage token derivation must refuse");
+
+    assert_eq!(
+        error.kind(),
+        handbook_engine::artifact_mutation::ArtifactMutationErrorKindV1::Store
+    );
+    assert_eq!(
+        error.detail(),
+        "generic lineage store refused: intake output tuple is not exact or unique"
+    );
+}
+
+#[test]
+#[ignore = "requires separately authorized generic coverage-token normalization"]
+fn generic_decision_record_mutation_retains_real_bytes_and_rejects_stale_basis() {
+    let (repo, repository) = open_decision_record_fixture_repository();
+    let target = decision_target();
+    let canonical_path = repo.path().join(".handbook/records/decision.yaml");
+    let retained_fixture_bytes = fs::read(&canonical_path).expect("retained fixture bytes");
+    let initial_fingerprint = DefinitionFingerprint::from_bytes(&retained_fixture_bytes);
+    let intake_request = serde_json::to_vec(&json!({
+        "idempotency_key": "decision_record_intake_000001",
+        "acquisition_mode": "express",
+        "expected_current_artifact_fingerprint": initial_fingerprint.as_str(),
+        "coverage_submissions": decision_record_coverage_submissions()
+    }))
+    .expect("intake request");
+    let intake = handbook_engine::artifact_mutation::ArtifactMutationServiceV1::intake_append(
+        repo.path(),
+        DECISION_KIND_REF,
+        DECISION_INSTANCE_ID,
+        &intake_request,
+    )
+    .expect("generic intake append");
+    assert_eq!(
+        fs::read(&canonical_path).expect("canonical after intake"),
+        retained_fixture_bytes
+    );
+    let intake_output = intake
+        .result
+        .authoritative_outputs
+        .first()
+        .expect("intake record");
+
+    let preview =
+        handbook_engine::artifact_mutation::ArtifactMutationServiceV1::candidate_validate(
+            repo.path(),
+            DECISION_KIND_REF,
+            DECISION_INSTANCE_ID,
+            &intake_output.relative_ref,
+            &intake_output.fingerprint,
+            Some(initial_fingerprint.as_str()),
+        )
+        .expect("candidate validation");
+    let candidate_request = serde_json::to_vec(&json!({
+        "idempotency_key": "decision_record_candidate_0001",
+        "intake_record_ref": intake_output.relative_ref,
+        "intake_record_fingerprint": intake_output.fingerprint,
+        "expected_candidate_fingerprint": preview.candidate_fingerprint
+    }))
+    .expect("candidate request");
+    let candidate =
+        handbook_engine::artifact_mutation::ArtifactMutationServiceV1::candidate_append(
+            repo.path(),
+            DECISION_KIND_REF,
+            DECISION_INSTANCE_ID,
+            &candidate_request,
+        )
+        .expect("generic candidate append");
+    assert_eq!(
+        fs::read(&canonical_path).expect("canonical after candidate"),
+        retained_fixture_bytes
+    );
+    let candidate_output = candidate
+        .result
+        .authoritative_outputs
+        .first()
+        .expect("candidate record");
+    let promotion_request = serde_json::to_vec(&json!({
+        "idempotency_key": "decision_record_promotion_0001",
+        "candidate_ref": candidate_output.relative_ref,
+        "candidate_fingerprint": candidate_output.fingerprint,
+        "expected_current_artifact_fingerprint": initial_fingerprint.as_str()
+    }))
+    .expect("promotion request");
+    handbook_engine::artifact_mutation::ArtifactMutationServiceV1::promote(
+        repo.path(),
+        DECISION_KIND_REF,
+        DECISION_INSTANCE_ID,
+        &promotion_request,
+    )
+    .expect("generic Decision Record promotion");
+
+    let expected_content = decision_record_candidate_content();
+    let expected_bytes =
+        canonical_yaml_bytes(&expected_content).expect("promoted canonical Decision Record");
+    assert_eq!(
+        fs::read(&canonical_path).expect("promoted canonical bytes"),
+        expected_bytes
+    );
+    let read = repository
+        .read(target.kind_ref(), target.instance_id())
+        .expect("read promoted Decision Record");
+    assert_eq!(read.content, expected_content);
+    assert_eq!(
+        read.artifact_fingerprint,
+        DefinitionFingerprint::from_bytes(&expected_bytes)
+    );
+    let validation = repository
+        .validate(target.kind_ref(), target.instance_id())
+        .expect("validate promoted Decision Record");
+    assert!(validation.structural_errors.is_empty());
+    assert_eq!(validation.content, read.content);
+    assert_eq!(
+        repository
+            .read(target.kind_ref(), target.instance_id())
+            .expect("stable second observation")
+            .artifact_fingerprint,
+        read.artifact_fingerprint
+    );
+
+    let stale_request = serde_json::to_vec(&json!({
+        "idempotency_key": "decision_record_stale_intake_0001",
+        "acquisition_mode": "express",
+        "expected_current_artifact_fingerprint": initial_fingerprint.as_str(),
+        "coverage_submissions": decision_record_coverage_submissions()
+    }))
+    .expect("stale intake request");
+    let stale = handbook_engine::artifact_mutation::ArtifactMutationServiceV1::intake_append(
+        repo.path(),
+        DECISION_KIND_REF,
+        DECISION_INSTANCE_ID,
+        &stale_request,
+    )
+    .expect("stale mutation establishes a refusal");
+    assert_eq!(stale.result.outcome, "refused");
+    assert_eq!(
+        stale.result.refusal.as_ref().expect("stale refusal").code,
+        handbook_engine::artifact_mutation::EstablishedRefusalCodeV1::StaleCurrentArtifact
+    );
+    assert!(stale.result.authoritative_outputs.is_empty());
+    assert_eq!(
+        fs::read(&canonical_path).expect("canonical after stale refusal"),
+        expected_bytes
+    );
+
+    let mut unknown_request: Value =
+        serde_json::from_slice(&intake_request).expect("intake request JSON");
+    unknown_request["unexpected"] = json!(true);
+    let error = handbook_engine::artifact_mutation::ArtifactMutationServiceV1::intake_append(
+        repo.path(),
+        DECISION_KIND_REF,
+        DECISION_INSTANCE_ID,
+        &serde_json::to_vec(&unknown_request).expect("unknown-field request"),
+    )
+    .expect_err("unknown mutation request field");
+    assert_eq!(
+        error.kind(),
+        handbook_engine::artifact_mutation::ArtifactMutationErrorKindV1::InvalidRequest
+    );
+    assert_eq!(
+        fs::read(&canonical_path).expect("canonical after malformed request"),
+        expected_bytes
+    );
+    assert!(!repo.path().join(".handbook/records/decision.md").exists());
+}

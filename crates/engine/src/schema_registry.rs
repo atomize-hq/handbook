@@ -221,7 +221,11 @@ impl ResolvedSchema {
                 .pointer(&schema_pointer)
                 .ok_or_else(|| indeterminate_binding_shape("candidate schema pointer is absent"))?;
             require_unambiguous_schema_node(node)?;
-            match node.get("type").and_then(Value::as_str) {
+            let coverage_type = node.get("type").and_then(Value::as_str).or_else(|| {
+                (node.get("type").is_none() && node.get("const").is_some_and(Value::is_string))
+                    .then_some("string")
+            });
+            match coverage_type {
                 Some("object") => {
                     if node.get("additionalProperties").and_then(Value::as_bool) != Some(false)
                         || node
@@ -3154,6 +3158,63 @@ mod binding_shape_tests {
             .entries
             .remove(&ExactDefinitionRef::parse("example.schemas.binding-test@1.0.0").unwrap())
             .unwrap())
+    }
+
+    #[test]
+    fn coverage_leaf_shapes_admit_type_absent_string_const_leaves() {
+        let resolved = load_binding_schema(json!({
+            "$schema": super::DRAFT_2020_12,
+            "type": "object",
+            "properties": {
+                "schema_id": {"const": "example.record"},
+                "title": {"type": "string"}
+            },
+            "required": ["schema_id", "title"],
+            "additionalProperties": false
+        }));
+
+        let leaves = resolved.coverage_leaf_shapes().unwrap();
+        assert_eq!(
+            leaves.get("/schema_id"),
+            Some(&ResolvedBindingJsonType::String)
+        );
+        assert_eq!(leaves.get("/title"), Some(&ResolvedBindingJsonType::String));
+    }
+
+    #[test]
+    fn coverage_leaf_shapes_preserve_other_indeterminate_refusals() {
+        for (case, terminal) in [
+            ("null const", json!({"const": null})),
+            ("boolean const", json!({"const": true})),
+            ("number const", json!({"const": 7})),
+            ("array const", json!({"const": ["fixed"]})),
+            ("object const", json!({"const": {"fixed": true}})),
+            ("string enum", json!({"enum": ["fixed"]})),
+            ("string default", json!({"default": "fixed"})),
+            ("string examples", json!({"examples": ["fixed"]})),
+            ("annotation only", json!({"description": "fixed"})),
+            (
+                "unsupported explicit type with string const",
+                json!({"type": "integer", "const": "fixed"}),
+            ),
+            (
+                "ambiguous composite",
+                json!({"oneOf": [{"const": "fixed"}, {"type": "string"}]}),
+            ),
+        ] {
+            let resolved = load_binding_schema(json!({
+                "$schema": super::DRAFT_2020_12,
+                "type": "object",
+                "properties": {"candidate": terminal},
+                "required": ["candidate"],
+                "additionalProperties": false
+            }));
+
+            assert!(
+                resolved.coverage_leaf_shapes().is_err(),
+                "{case} must remain indeterminate"
+            );
+        }
     }
 
     #[test]

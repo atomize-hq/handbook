@@ -1,0 +1,158 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T182250Z--HCM-2-4--p1a-selector-correction-review",
+  "created_at_utc": "2026-07-26T18:22:50Z",
+  "source_handoff_ids": [
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed"
+  ],
+  "parent_orchestration_id": "20260726T161851Z--HCM-2-4--implementation-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "context-engineering",
+    "documentation-and-adrs",
+    "planning-and-task-breakdown"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1A-selector-correction",
+  "subject_fingerprint": "sha256:411595c6f4f1b19010f0ea37d73fb72caac5d219fdf6e4a49b7c08c971ddc5a0",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p1a-selector-correction-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "995287f3e996b1e6545cb4dcc3ab96cc6241461f5f781fc0a3849dc90a2bca93"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "252daaa7c15a46f6dbd6bc9ad1b65bae2815647e39bb799ef8458f813768ee74"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+        "sha256": "ded469f5af2d5cfdf0feaeae38b5d8ec7a205a8a5075e613e97f9d9cc2c7435f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "b34259ff876874f12bc6b71aecbd52a66eafb11e71965d46e6acaa6a6987687c"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:411595c6f4f1b19010f0ea37d73fb72caac5d219fdf6e4a49b7c08c971ddc5a0"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "complete_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4",
+        "Packet reviewability indicators"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity",
+        "Instance profile contract",
+        "Artifact intake definition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1A — Catalog publication and admission closure",
+        "Exact implementation surface selectors",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "Standing rules",
+        "P1A — Catalog publication and admission closure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The four-entry documentation correction subject is sha256:411595c6f4f1b19010f0ea37d73fb72caac5d219fdf6e4a49b7c08c971ddc5a0. Runtime remediation is paused. Live code shows generic intake parse validates modes/coverage but computes authored-content fingerprints; built-in compatibility parse trusts supplied fingerprints and discards modes/coverage; repository loading currently classifies every built-in intake as compatibility; kind validation has an established HCM-2.2 uniform closure special case; profile validation has an established shipped-root 1.1 uniform dependency closure.",
+  "allowed_scope": [
+    "Replay the exact four-entry correction subject and baseline diff.",
+    "Inspect only the live fingerprint/admission producers and HCM-2.2 precedent needed to judge selector sufficiency, minimality, and atomicity.",
+    "Verify the correction names every required production symbol/path and focused proof path without authorizing generic or sibling behavior.",
+    "Verify the corrected contract requires actual repository-path intake admission and stale subordinate dependency refusal.",
+    "Apply the 04 reviewability indicators and test the atomic-indivisibility argument.",
+    "Identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No runtime, definition, vector, test, proof, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation change.",
+    "Do not review the already implemented P1A subject except as live feasibility evidence for this selector.",
+    "No P1B-P7, HCM-3.x, public API, dependency, Cargo/package/version, unsafe, command, Resolution, Projection, migration, dual-read, module/process, or sibling-slice expansion."
+  ],
+  "tasks": [
+    "Verify exact subject identity and correction-only diff.",
+    "Trace typed intake, renderer, kind, descriptor, and profile fingerprint producers and confirm the corrected selector is complete but no broader than necessary.",
+    "Trace actual ArtifactRepositoryV1 built-in intake admission and confirm the Charter-only compatibility boundary is implementable without public or generic behavior change.",
+    "Verify the test selectors can prove wrong kind/schema/fingerprint/mode/coverage refusal through the real repository path and preserve HCM-2.3.",
+    "Return findings first in Critical, Required, Optional, Nit order with complete evidence and smallest remediation."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#uniform-exact-definition-identity",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#p1a-catalog-publication-and-admission-closure",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#exact-implementation-surface-selectors",
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#packet-reviewability-indicators",
+    "No public/generic/sibling behavior expansion"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

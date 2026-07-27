@@ -2,6 +2,7 @@ OUTCOME: CAPTURED
 PIPELINE: pipeline.foundation_inputs
 STAGE: stage.10_feature_spec
 WRITTEN FILES:
+  - artifacts/work-specification/work-specification.yaml
   - artifacts/feature_spec/FEATURE_SPEC.md
 STATE UPDATES:
   <none>

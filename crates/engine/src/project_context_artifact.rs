@@ -180,8 +180,11 @@ fn selected_contract_matches(
     schema_ref: &str,
     canonical_path: &str,
 ) -> bool {
-    decision_kind_ref == PROJECT_CONTEXT_KIND_REF
-        && instance_kind_ref == PROJECT_CONTEXT_KIND_REF
+    decision_kind_ref == instance_kind_ref
+        && matches!(
+            decision_kind_ref,
+            PROJECT_CONTEXT_KIND_REF | "handbook.artifact-kind.project-context@1.1.0"
+        )
         && schema_ref == PROJECT_CONTEXT_SCHEMA_REF
         && canonical_path == SELECTED_PROJECT_CONTEXT_CANONICAL_PATH
 }
@@ -375,14 +378,31 @@ mod tests {
 
     #[test]
     fn selected_contract_binding_refuses_each_kind_schema_and_path_mismatch() {
-        assert!(selected_contract_matches(
+        for kind_ref in [
             PROJECT_CONTEXT_KIND_REF,
-            PROJECT_CONTEXT_KIND_REF,
-            PROJECT_CONTEXT_SCHEMA_REF,
-            SELECTED_PROJECT_CONTEXT_CANONICAL_PATH,
-        ));
+            "handbook.artifact-kind.project-context@1.1.0",
+        ] {
+            assert!(selected_contract_matches(
+                kind_ref,
+                kind_ref,
+                PROJECT_CONTEXT_SCHEMA_REF,
+                SELECTED_PROJECT_CONTEXT_CANONICAL_PATH,
+            ));
+        }
 
         for (decision_kind, instance_kind, schema, path) in [
+            (
+                PROJECT_CONTEXT_KIND_REF,
+                "handbook.artifact-kind.project-context@1.1.0",
+                PROJECT_CONTEXT_SCHEMA_REF,
+                SELECTED_PROJECT_CONTEXT_CANONICAL_PATH,
+            ),
+            (
+                "handbook.artifact-kind.project-context@1.1.0",
+                PROJECT_CONTEXT_KIND_REF,
+                PROJECT_CONTEXT_SCHEMA_REF,
+                SELECTED_PROJECT_CONTEXT_CANONICAL_PATH,
+            ),
             (
                 "handbook.artifact-kind.other@1.0.0",
                 PROJECT_CONTEXT_KIND_REF,
@@ -392,6 +412,36 @@ mod tests {
             (
                 PROJECT_CONTEXT_KIND_REF,
                 "handbook.artifact-kind.other@1.0.0",
+                PROJECT_CONTEXT_SCHEMA_REF,
+                SELECTED_PROJECT_CONTEXT_CANONICAL_PATH,
+            ),
+            (
+                "handbook.artifact-kind.project-context@1.2.0",
+                "handbook.artifact-kind.project-context@1.2.0",
+                PROJECT_CONTEXT_SCHEMA_REF,
+                SELECTED_PROJECT_CONTEXT_CANONICAL_PATH,
+            ),
+            (
+                "handbook.artifact-kind.project-context@1.1",
+                "handbook.artifact-kind.project-context@1.1",
+                PROJECT_CONTEXT_SCHEMA_REF,
+                SELECTED_PROJECT_CONTEXT_CANONICAL_PATH,
+            ),
+            (
+                "handbook.artifact-kind.project-context@>=1.0.0",
+                "handbook.artifact-kind.project-context@>=1.0.0",
+                PROJECT_CONTEXT_SCHEMA_REF,
+                SELECTED_PROJECT_CONTEXT_CANONICAL_PATH,
+            ),
+            (
+                "handbook.artifact-kind.project-context@latest",
+                "handbook.artifact-kind.project-context@latest",
+                PROJECT_CONTEXT_SCHEMA_REF,
+                SELECTED_PROJECT_CONTEXT_CANONICAL_PATH,
+            ),
+            (
+                "handbook.artifact-kind.project-context",
+                "handbook.artifact-kind.project-context",
                 PROJECT_CONTEXT_SCHEMA_REF,
                 SELECTED_PROJECT_CONTEXT_CANONICAL_PATH,
             ),

@@ -331,14 +331,19 @@ fn shipped_profile_request() -> ProfileSelectionRequest {
         "handbook.artifact-kind.project-authority@1.0.0",
         "handbook.artifact-kind.project-authority@1.1.0",
         "handbook.artifact-kind.project-context@1.0.0",
+        "handbook.artifact-kind.project-context@1.1.0",
         "handbook.artifact-kind.environment-context@1.0.0",
+        "handbook.artifact-kind.environment-context@1.1.0",
         "handbook.artifact-kind.work-specification@1.0.0",
+        "handbook.artifact-kind.work-specification@1.1.0",
         "handbook.artifact-kind.decision-record@1.0.0",
+        "handbook.artifact-kind.decision-record@1.1.0",
         "handbook.artifact-kind.risk-record@1.0.0",
+        "handbook.artifact-kind.risk-record@1.1.0",
     ];
     ProfileSelectionRequest {
-        selected_profile_ref: exact("handbook.profile.shipped-root@1.1.0"),
-        profile_sources: vec![builtin("handbook.profile.shipped-root@1.1.0")],
+        selected_profile_ref: exact("handbook.profile.shipped-root@1.2.0"),
+        profile_sources: vec![builtin("handbook.profile.shipped-root@1.2.0")],
         stable_role_registry_sources: vec![builtin("handbook.roles.core@1.1.0")],
         schema_entry_sources: schema_refs
             .iter()

@@ -1,0 +1,31 @@
+{
+  "schema_id": "handbook.artifact-kind-definition",
+  "schema_version": "1.0",
+  "kind_id": "handbook.artifact-kind.work-specification",
+  "kind_version": "1.1.0",
+  "compatibility": "exact",
+  "stable_role_registry": {
+    "ref": "handbook.roles.core@1.1.0",
+    "fingerprint": "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029"
+  },
+  "canonical_schema_ref": "handbook.schemas.artifacts.work-specification@1.0.0",
+  "supported_role_refs": [
+    "atomic_action",
+    "coordination_horizon",
+    "delivery_unit",
+    "execution_envelope",
+    "implementation_unit"
+  ],
+  "semantic_capabilities": [],
+  "structural_validation_profile_ref": "json-schema.draft-2020-12",
+  "semantic_validation_profile_refs": [],
+  "renderer_definition_refs": [
+    "handbook.renderer.work-specification-review-markdown@1.0.0"
+  ],
+  "projection_definition_refs": [],
+  "lifecycle_policy_ref": null,
+  "review_triggers": [],
+  "required_capabilities": [],
+  "extensions": {},
+  "definition_fingerprint": "sha256:2bbf982521b06fdacd5bf94aa2d74d0ec3744e9c77b5cfb326449d0399d8e33a"
+}

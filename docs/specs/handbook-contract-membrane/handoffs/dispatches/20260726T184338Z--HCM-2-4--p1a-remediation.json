@@ -1,0 +1,294 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T184338Z--HCM-2-4--p1a-remediation",
+  "created_at_utc": "2026-07-26T18:43:38Z",
+  "source_handoff_ids": [
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed"
+  ],
+  "parent_orchestration_id": "20260726T161851Z--HCM-2-4--implementation-orchestration",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "remediation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "debugging-and-error-recovery",
+    "incremental-implementation",
+    "test-driven-development",
+    "security-and-hardening"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1A-definition-support-remediation",
+  "subject_fingerprint": "sha256:0717385e0fd7adeb8f380479e7a06b0a3a6535e00cde4005f5a75040d76b1d35",
+  "review_cycle": null,
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.decision-record/1.1.0.yaml",
+        "sha256": "3c8a7233d90d4698ff46964f4e3077f12d0fd6bf8386edc8fb58053c47733db1"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.environment-context/1.1.0.yaml",
+        "sha256": "70646ba08e9781b9e64cea24eb9fce5ce76fcfebc3bb0b513ca5b15e571efd99"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.project-context/1.1.0.yaml",
+        "sha256": "19c1de5af8a863405b41f107587575c1aa952cf5eedc2ac9ab38a4efdba3fc6a"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.risk-record/1.1.0.yaml",
+        "sha256": "8e9b995fa5d8a003282fbc4806fe9a1c2d74ea522aad912a7eb1a6ce67323c8a"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.work-specification/1.1.0.yaml",
+        "sha256": "2ac9d742a8d57e4a2338823fa7241712df549122fad8e1510c6d11efe4b8d621"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.decision-record/1.0.0.yaml",
+        "sha256": "a2ee9a3cf01ddbe5964cb40a79e89adaeef6919655592f9f4d49b1bf33a527d5"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.environment-context/1.0.0.yaml",
+        "sha256": "b70522a29874a688b957548076de7444e91d42adbda2599dd87d5d9f02747262"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.project-context/1.0.0.yaml",
+        "sha256": "f8ba938b7eaf61ac18375546d53883837939a4445d910abefff763c0180bb43a"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.risk-record/1.0.0.yaml",
+        "sha256": "7573466a6016eb2cfcfe8c2838f5179576d98a4b1e4d5fe9fecb7eecabca9bc7"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.work-specification/1.0.0.yaml",
+        "sha256": "c6cb48a1b19691872b76616a32793ee8e948aeaa6a576a9ff45da1480cb28e4e"
+      },
+      {
+        "path": "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml",
+        "sha256": "a4a7ce2d338e3eeaaf7ae60d1c75096af1e347609c2dbe1fb258e0f90aa04e36"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.decision-record-review-markdown/1.0.0.yaml",
+        "sha256": "560d0e4f9b7c28c8453056e96ca8317f1826c7daa0655110b133525c0c5350f7"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.environment-context-review-markdown/1.0.0.yaml",
+        "sha256": "9d81123677e312f6f51c1dff76a9147ba878599a2cc6feffae37c9e539c033b5"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.project-context-review-markdown/1.0.0.yaml",
+        "sha256": "8fa10891c40c240cd7ad0e51a7b2c58ee59def8b909ea7098d8c5367892539b6"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.risk-record-review-markdown/1.0.0.yaml",
+        "sha256": "bf7bdf9dbe8e23eacfe2115f8d520ce78fa6453d85f3e58f27c9f3281b76a43a"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.work-specification-review-markdown/1.0.0.yaml",
+        "sha256": "6250f1a8861040b8202b4faa0adc5dba4745b15e720abdb8e23e647ca4785234"
+      },
+      {
+        "path": "crates/engine/src/artifact_instance.rs",
+        "sha256": "c850df3fa1914765434a598a9efe6c2a43cc1f7799827ffe5a852f70d679f680"
+      },
+      {
+        "path": "crates/engine/src/artifact_kind_registry.rs",
+        "sha256": "3f0b28ff00d43ff7a4d99c1307a8cf34123b69dcac0dfe9a5f7e7f8c63d881ff"
+      },
+      {
+        "path": "crates/engine/src/profile_builtins.rs",
+        "sha256": "039d857acb028f87d31f77d38e960360f37573cd7a0b16825fbb9f4f4dcbe870"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_definition_support.rs",
+        "sha256": "24ae3ae6cb7011a1bb873e0e53f5b4399e1f2318297a8988556b774ab86c6e2e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T162140Z--HCM-2-4--p0-selector-repair-review.json",
+        "sha256": "cce37f895b6144605718ee2917e60fe4f541b880990bb9344031aebafb1b391f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T162911Z--HCM-2-4--p0-selector-repair-closure-review.json",
+        "sha256": "3a994f8464582b5a376010a485863bf387bdf1ca981153749ad0938efb6af1ec"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T164140Z--HCM-2-4--p0-path-manifest-review.json",
+        "sha256": "758b6238cb8f1cec574dcb0536450215deeeca1c3e6d6c48c4fcd5fcba2a1ee5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T164958Z--HCM-2-4--p0-path-manifest-closure-review.json",
+        "sha256": "9379f155f5e48f684e62b0a416806275e152322460081cc36e26e4b0d1864652"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T165827Z--HCM-2-4--p0-evidence-review.json",
+        "sha256": "f53cab907fdab9e04df5ac495118cf896bf46d2d600e9aa6d711c04f3c077973"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T171625Z--HCM-2-4--p0-evidence-closure-review.json",
+        "sha256": "d6944c1066bdb32aeea0fd742df47cdb53ed98b237f5671b7ff24b917dd658d2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T172336Z--HCM-2-4--p1a-definition-support-implementation.json",
+        "sha256": "d42d7620cfc1e438f64677c58cb5b47dbc3e0d1dbce52fdf55f7e76c25654145"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T180638Z--HCM-2-4--p1a-definition-support-review.json",
+        "sha256": "856325da8ec085a5210fa7dfabbcf97573e29474053d68cd41cc51d0e68acc28"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T182250Z--HCM-2-4--p1a-selector-correction-review.json",
+        "sha256": "1e1ae39fb69fcfef76396cd972cc897d83501c43d55839f8e0dd2b7312b57af9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260726T183702Z--HCM-2-4--p1a-selector-correction-closure-review.json",
+        "sha256": "d146427a79743f23901ff6a82841d2e2c803302df14829c4f3064d1f6c239aee"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "59c1c11f7ded7f6040639b3a99a67cb557ae38d2adbbfe92c9048b0e860d4b01"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/definition-support-vectors-v1.0.json",
+        "sha256": "e6cf4326a28fe3f7825c40f8d2e7e92662f8fe48c0e644b9b0a30aae9f332f0f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "0b57d08465b2863a24496f75cd056a6ccc87992e88b48dca15ba693b542fa072"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+        "sha256": "e470da0cb00243a501b15f5aad87b3f1a5716b37b6488f7d2a93ee28ff11fc98"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+        "sha256": "27bc4555665b3cc5bc20aa831b395f23cba444848cb951ac90fc4bcbff92fc3f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-selector-correction.md",
+        "sha256": "83ce6d25b6cc7965e41c0bbb2d1723b657c93c332e7cfbb668f503b87e26275e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P0-inventory-lock.md",
+        "sha256": "52623ac94d5c3ea8b16220fb6a61523de1ad363bf021e1e732941a4133e3b3c9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1A-definition-support.md",
+        "sha256": "4159471b2a020d1ee4848a4e6d02b5484a2d2397826069536fee26658aae89bc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "180414191756c9e67f118fced01076de0967c8e3dcd452c6b3acd8ab866fee90"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:0717385e0fd7adeb8f380479e7a06b0a3a6535e00cde4005f5a75040d76b1d35"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "causal_remediation_delta",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity",
+        "Instance profile contract",
+        "Artifact intake definition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1A — Catalog publication and admission closure",
+        "Exact implementation surface selectors"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P1A — Catalog publication and admission closure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+      "sections": [
+        "Decision",
+        "Atomicity and reviewability",
+        "Consequences"
+      ]
+    }
+  ],
+  "repo_truth": "P1A discovery subject sha256:4edbc4fe580a3c819fcdac64bd83623d09ebc2337f0d3c170d8f7d0ecd927865 returned p1a-discovery-P2-1 and P2-2. The cross-document correction is CLEAN at sha256:e9988a33e3278ea908a5114bca8c8ffb75e8301358ca7410b246cda473cfba5c. This complete 39-path remediation baseline is sha256:0717385e0fd7adeb8f380479e7a06b0a3a6535e00cde4005f5a75040d76b1d35. Fresh exact impacts are LOW/11 for ArtifactIntakeDefinitionV1::parse, LOW/0 for AuthoredArtifactKindDefinition::validate, CRITICAL/130 for validate_authored_profile_fingerprints, and CRITICAL/44 for load_repository_intakes. The CRITICAL radius is accepted only for exact P1A/1.2 branches.",
+  "allowed_scope": [
+    "Replay the exact 39-entry baseline and the clean selector-correction dispatch before edits.",
+    "Write only the five intake, five renderer, five kind successor definitions, shipped-root 1.2 definition, artifact_kind_registry.rs, artifact_intake_registry.rs, artifact_repository.rs, profile_selection.rs, hcm_2_4_definition_support.rs, new hcm_2_4_definition_runtime.rs, definition-support vectors, renderer goldens, and P1A proof.",
+    "In ArtifactIntakeDefinitionV1::parse, compute the exact five P1A intake fingerprints from authored definition plus typed kind/schema dependencies while preserving every other intake path.",
+    "In AuthoredArtifactKindDefinition::validate, compute the exact five successor kind fingerprints from typed stable-role, schema entry/closure, and renderer dependencies while preserving every other kind path.",
+    "In validate_authored_profile_fingerprints, add only the shipped-root 1.2 uniform dependency closure using the established HCM-2.2 envelope.",
+    "In load_repository_intakes, retain only handbook.intake.charter@1.0.0 on built-in compatibility and route exactly the five P1A intakes through full semantic parse/admission.",
+    "Use RED-GREEN-REFACTOR to prove each stale subordinate fingerprint and real repository-path failure before correction.",
+    "Run the exact 13-target P1A wall plus hcm_2_4_definition_runtime and unchanged hcm_2_3_registration_kernel; preserve the HCM-2.3 file hash exactly."
+  ],
+  "non_goals": [
+    "Do not edit artifact_instance.rs, profile_builtins.rs, load_with_builtin_compatibility, resolve_profile_selection, hcm_2_3_registration_kernel.rs, selector correction docs, P0 proof, prior dispatches, or released definitions.",
+    "No P1B-P7, public API/signature, generic repository-definition behavior, dependency, Cargo/package/version, unsafe, command, module/process contract, Resolution, Projection, migration, dual-read, shipped-default switch, sibling-slice change, staging, commit, push, handoff, ledger, dispatch, or independent-review claim."
+  ],
+  "tasks": [
+    "Replay the baseline, clean selector correction, frozen HCM-2.3 hash, and all four fresh exact impacts.",
+    "Add focused failing proof for both discovery findings before remediation.",
+    "Implement the smallest exact typed-closure and Charter-only compatibility branches.",
+    "Recompute all affected immutable fingerprints/vectors and the literal profile 1.2 fingerprint from the complete dependency graph.",
+    "Prove actual ArtifactRepositoryV1::open admission for every new package intake plus wrong/stale/missing/mode/coverage refusal and no Charter compatibility expansion.",
+    "Run focused, packet, formatting, diff, scoped-path, and GitNexus change-detection checks; return exact results to the parent."
+  ],
+  "contracts_and_gates": [
+    "p1a-discovery-P2-1: uniform exact typed dependency closure",
+    "p1a-discovery-P2-2: actual full semantic package-intake admission",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#uniform-exact-definition-identity",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#p1a-catalog-publication-and-admission-closure",
+    "Exact four-symbol changed set and two explicit exclusions",
+    "Frozen HCM-2.3 registration bytes and behavior"
+  ],
+  "stop_conditions": [
+    "Stop on any baseline mismatch, unexpected dirty overlap, frozen HCM-2.3 hash change, or selector-doc change.",
+    "Stop if correctness requires a fifth production symbol, load_with_builtin_compatibility, resolve_profile_selection, artifact_instance, profile_builtins, a public/generic/sibling surface, or a larger CRITICAL process/module contract.",
+    "Stop on any new UNKNOWN/HIGH/CRITICAL symbol outside the accepted four.",
+    "Do not waive a negative case, stage, commit, push, create a dispatch/global handoff, modify the ledger, or claim independent review."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": false,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "red_proof",
+      "impact_analysis",
+      "validation",
+      "unavailable_proof",
+      "remaining_protocol_work",
+      "parent_disposition"
+    ]
+  }
+}

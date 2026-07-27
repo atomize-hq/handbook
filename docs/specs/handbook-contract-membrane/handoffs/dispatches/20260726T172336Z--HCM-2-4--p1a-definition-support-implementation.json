@@ -1,0 +1,249 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T172336Z--HCM-2-4--p1a-definition-support-implementation",
+  "created_at_utc": "2026-07-26T17:23:36Z",
+  "source_handoff_ids": [
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed"
+  ],
+  "parent_orchestration_id": "20260726T161851Z--HCM-2-4--implementation-orchestration",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1A-definition-support",
+  "subject_fingerprint": "sha256:5354e3a5458438ecdf7c0024cfb946abe473c5408f276eff36588086ee040a24",
+  "review_cycle": null,
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.decision-record/1.0.0.yaml",
+        "sha256": "6e39319c6099b9eca13fcd98c2ec9cd5bf0d1d5fc745a1250d7983cc1f4a2a79"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.environment-context/1.0.0.yaml",
+        "sha256": "bff4e8dcedd4b1b95ea4cc690ba9681ac948aed3a12e8224fa220ab83cac15d0"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.project-context/1.0.0.yaml",
+        "sha256": "fa69328ee78dd0fb3532df56bcaf36938249ea2e06418071f636ca2bd02b1ddd"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.risk-record/1.0.0.yaml",
+        "sha256": "49d1fe1ba4ebae4eb7d3466bd5815cfe96501a8397263f25b53ee5eee485a4d1"
+      },
+      {
+        "path": "crates/engine/definitions/artifact-kinds/handbook.artifact-kind.work-specification/1.0.0.yaml",
+        "sha256": "a02908172ee2cc4254bf41685e4f551d60e98f0e30e6f03c0764051aa228d2e6"
+      },
+      {
+        "path": "crates/engine/definitions/intakes/handbook.intake.charter/1.0.0.yaml",
+        "sha256": "7ada384e4ff8e7fc627dee47e92e24a5806690688beb2e10747bf35d1cda0f67"
+      },
+      {
+        "path": "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.1.0.yaml",
+        "sha256": "56f92ee105319b609fe21bf299770cd118df121f23e9fcc8c83ebd4b64d66557"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.charter-review-markdown/1.0.0.yaml",
+        "sha256": "3c8c6ebe82f8770bb8a7023dd22ff3538e68dbd025c1896bc8b2b053093865fc"
+      },
+      {
+        "path": "crates/engine/src/artifact_instance.rs",
+        "sha256": "311e5a172e07d6e3ade5f6f38651f50f1607d533950f003796790672159bb34f"
+      },
+      {
+        "path": "crates/engine/src/artifact_kind_registry.rs",
+        "sha256": "d2505d47e41af3557b03f68b37a3e50908c0e9e5e5033ad862fce369ccb33f55"
+      },
+      {
+        "path": "crates/engine/src/profile_builtins.rs",
+        "sha256": "e53f709651945bc1ed6064dc7362ef0196bf04f48d0fc21474017ccf0a901eb1"
+      },
+      {
+        "path": "crates/engine/tests/artifact_instances.rs",
+        "sha256": "9636ffac1bb1c022039e8e0f5c9abed62a1ce202e65e0d10e55a7fbce88d598d"
+      },
+      {
+        "path": "crates/engine/tests/artifact_kind_registry.rs",
+        "sha256": "41c5088cc000ee242535ac40484e487d22d6b392a4869576ddb0f1b40b1cb94d"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_2_selected_kinds.rs",
+        "sha256": "c73ad5bb65643a6705b670fdda919456c7cea181faf6221a85675d792bb0b4f4"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_2_unselected_kinds.rs",
+        "sha256": "a705afa43845a6744ca309bed9e1fd8fd18474a9fd178fa02d4e4520a519c69d"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_decisions.rs",
+        "sha256": "a97de004f1c462b7e3fdb316d329e503018f39f35a709152b62b5c1c64c82add"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_inspection.rs",
+        "sha256": "4c3f2756410b0652b636077833b919efc40ac83691280647f0404427bc3df79d"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_definition_profile.rs",
+        "sha256": "b1e0cf17af49637cd09f4607a2c09b34217940226ea2eb1fdc2b55bcd9cc214b"
+      },
+      {
+        "path": "crates/engine/tests/profile_artifact_schemas.rs",
+        "sha256": "716039a9b90311dc9473d643eaba83b931caae03867437719c489ec1e8979d34"
+      },
+      {
+        "path": "crates/engine/tests/profile_context_schemas.rs",
+        "sha256": "270ea2af077ad762a115de8aec688aaf147b4fbc208bf4c68682c2431ee1b47a"
+      },
+      {
+        "path": "crates/engine/tests/profile_risk_schema.rs",
+        "sha256": "340858e94c80012ec81a42d97f605bd3e56640487282f3fae313050c688425a4"
+      },
+      {
+        "path": "crates/engine/tests/profile_selection.rs",
+        "sha256": "415ce6d805d61d5e31310a9c97496618e18f518e61a914b325675ae626532e47"
+      },
+      {
+        "path": "crates/engine/tests/profile_work_decision_schemas.rs",
+        "sha256": "8d2aace0998b0cd6fb2f3ca216c269de9167d71e005f2b761a331a252e74fa0a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "8a14c93e41f59414236fa84ac2808d5f33f35766b5ed32288f3efe1b2d0cb3ea"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "9e986ca2db06e8c60f45e93dd5b05ee16b4fa703cbedac5f7082462926ea6258"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P0-inventory-lock.md",
+        "sha256": "52623ac94d5c3ea8b16220fb6a61523de1ad363bf021e1e732941a4133e3b3c9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "a1f897b9f39c10105de69f7ac49c2ba3f340c7ec8c2a3d19ee9b071178eb58ec"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:5354e3a5458438ecdf7c0024cfb946abe473c5408f276eff36588086ee040a24"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "complete_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1A — Catalog publication and admission closure",
+        "Exact implementation surface selectors",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "Standing rules",
+        "P1A — Catalog publication and admission closure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+      "sections": [
+        "P1A — Definition support and admission"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P0-inventory-lock.md",
+      "sections": [
+        "Immutable input replay",
+        "Exact symbol impact ledger",
+        "Baseline proof"
+      ]
+    }
+  ],
+  "repo_truth": "P0 is independently closed at subject sha256:b6848e0c5d42037a43a0c2edc8f665d34cec68805bc0aad7736f06e412fa03da. Immediately before dispatch, exact upstream impact is LOW/1 for AuthoredArtifactKindDefinition.validate_later_owned_dependencies#1, CRITICAL/149 with 19 direct, 8 processes, and 10 modules for ArtifactInstanceRegistry.resolve#3, and LOW/0 for profile_builtins::definition with acknowledged dynamic-edge incompleteness. The CRITICAL radius is expressly accepted only for the five frozen descriptor rows. Existing released definitions and the 1.1 shipped-root profile are immutable. No P1B or later packet is open.",
+  "allowed_scope": [
+    "Create only the five exact artifact-kind 1.1.0 successors, five intake 1.0.0 definitions, five fixed renderer 1.0.0 definitions, and shipped-root profile 1.2.0 enumerated in the P1A path manifest.",
+    "Edit only crates/engine/src/profile_builtins.rs, crates/engine/src/artifact_kind_registry.rs, and crates/engine/src/artifact_instance.rs, preserving public signatures and limiting admission to the exact five frozen non-Charter rows.",
+    "Edit only the twelve existing P1A test files enumerated in the path manifest and create only crates/engine/tests/hcm_2_4_definition_support.rs.",
+    "Create only definition-support-vectors-v1.0.json, renderer-goldens-v1.0.json, and proof/implementation/P1A-definition-support.md under the exact HCM-2.4 paths.",
+    "Use RED-GREEN-REFACTOR: first add focused failing proof for missing definitions and refused exact renderer dependencies/non-Charter rows; retain the RED command and failure reason; then make the smallest implementation pass.",
+    "Intakes must cover their canonical schemas exhaustively and explicitly distinguish required and unknown values. Renderers must be fixed, deterministic, schema-bound, and Resolution-free.",
+    "The 1.2 project_authority descriptor must be byte-for-field equivalent to the released 1.1 row. Freeze the literal complete 1.2 authored fingerprint in the immutable definition-support vector.",
+    "Run focused positive and fail-closed cases, all named P1A test targets, cargo fmt --check, git diff --check, scoped diff inspection, and report raw results to the parent."
+  ],
+  "non_goals": [
+    "No edit to any released definition, schema, intake, renderer, or shipped-root 1.0/1.1 profile.",
+    "No P1B Charter compatibility, shipped-root switch, P2-P7, Resolution, Projection, generic renderer engine, dynamic command, discovery, migration, dual read, sibling slice, public API, dependency, Cargo, package, version, unsafe, or module/process expansion.",
+    "No edit outside the exact P1A paths in implementation-packet-path-manifest-v1.0.md.",
+    "No stage, commit, push, global handoff, ledger write, dispatch creation, independent-review claim, slice-complete claim, or user task hop."
+  ],
+  "tasks": [
+    "Replay the 27-entry baseline subject and confirm no overlapping uncommitted runtime/test/definition work.",
+    "Read the exact P1A contract, existing definition schemas and precedents, and establish the smallest focused RED proof before production changes.",
+    "Add immutable definitions and exact built-in mappings, then replace only the two frozen refusal branches with exact-ref fail-closed admission for the five rows.",
+    "Add exhaustive positive/negative proof, renderer goldens, definition vector, and the P1A proof record without modifying P0 or control-pack truth.",
+    "Run packet verification in edit-loop and packet-boundary tiers. Use debugging-and-error-recovery to establish root cause before any correction.",
+    "Return the structured result to the parent; leave independent review, finding disposition, commit, global handoff, and ledger closeout to the parent."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#p1a-catalog-publication-and-admission-closure",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md#p1a-catalog-publication-and-admission-closure",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md#p1a-definition-support-and-admission",
+    "Exact five-kind/intake/renderer/profile fingerprints and duplicate-safe validation",
+    "Exact renderer-dependency and descriptor-row positive admission with missing, extra, mismatched, later-owned, Projection, lifecycle, trigger, capability, extension, and cardinality refusal",
+    "No public API, Cargo, package, dependency, command, Projection, or sibling-scope change"
+  ],
+  "stop_conditions": [
+    "Stop on any subject-manifest mismatch or overlapping runtime/test/definition work.",
+    "Stop if correctness requires a path outside P1A, a sixth row, a public API/signature, dependency, Cargo/package/version, unsafe, command, module/process, Resolution, Projection, migration, discovery, or dual-read change.",
+    "Stop if the fresh CRITICAL ArtifactInstanceRegistry radius expands beyond the accepted exact P1A contract or a new UNKNOWN/HIGH/CRITICAL symbol appears.",
+    "Stop if an existing released byte, project_authority descriptor field, HCM-2.2 record identity, or no-edit anchor would change.",
+    "Do not waive a failing negative case, stage, commit, push, create a global handoff, modify the ledger, or claim independent review."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": false,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "red_proof",
+      "impact_analysis",
+      "validation",
+      "unavailable_proof",
+      "remaining_protocol_work",
+      "parent_disposition"
+    ]
+  }
+}

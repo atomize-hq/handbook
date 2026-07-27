@@ -2,10 +2,10 @@
 kind: stage
 id: stage.10_feature_spec
 version: 0.1.0
-title: "Feature Specification"
+title: "Work Specification"
 work_level: L1
 description: >
-  Produces a single FEATURE_SPEC.md for one feature, aligned with the project Charter and Foundation Pack.
+  Produces descriptor-selected canonical Work Specification YAML and a deterministic Markdown review view.
 
 includes:
   - core/rules/p0_absolute.md
@@ -55,7 +55,10 @@ inputs:
 
 outputs:
   artifacts:
-    - path: artifacts/feature_spec/FEATURE_SPEC.md
+    - path: artifacts/work-specification/work-specification.yaml
+  repo_files:
+    - path: ${repo_root}/artifacts/feature_spec/FEATURE_SPEC.md
+      required: true
 
 gating:
   mode: strict
@@ -63,11 +66,11 @@ gating:
     - missing_required_inputs
     - output_missing
   notes:
-    - Output must be ONLY the completed FEATURE_SPEC.md (no extra commentary).
-    - NFRs and rollout/testing sections must explicitly reference Charter posture and Foundation Pack defaults (if present).
+    - Capture input must be ONLY one completed Work Specification YAML document (no wrappers or commentary).
+    - The Markdown view is derived deterministically during capture and is never authoritative.
 
 tags:
-  - feature-spec
+  - work-specification
   - planning
 ---
 

@@ -70,13 +70,62 @@ fn install_canonical_inputs(repo_root: &Path) {
     );
 }
 
+fn work_specification_input() -> String {
+    fs::read_to_string(
+        Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../engine/tests/fixtures/hcm_2_4_work_specification")
+            .join("artifacts/work-specification/work-specification.yaml"),
+    )
+    .expect("canonical Work Specification fixture")
+}
+
+fn configure_work_specification_repository(repo_root: &Path) {
+    let fixture_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../engine/tests/fixtures/hcm_2_4_work_specification");
+    fs::create_dir_all(repo_root.join(".handbook")).expect("create repository authority directory");
+    fs::copy(
+        fixture_root.join(".handbook/profile-selection.json"),
+        repo_root.join(".handbook/profile-selection.json"),
+    )
+    .expect("copy Work Specification profile selection");
+    let profile_target =
+        repo_root.join(".handbook/definitions/profiles/work-specification-root-1.0.0.yaml");
+    fs::create_dir_all(profile_target.parent().expect("profile parent"))
+        .expect("create profile parent");
+    fs::copy(
+        fixture_root.join(".handbook/definitions/profiles/work-specification-root-1.0.0.yaml"),
+        profile_target,
+    )
+    .expect("copy Work Specification profile");
+    let source_core = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../core");
+    for relative_path in [
+        "stages/10_feature_spec.md",
+        "library/feature_spec/feature_spec_architect_directive.md",
+        "library/feature_spec/FEATURE_SPEC.md.tmpl",
+    ] {
+        fs::copy(
+            source_core.join(relative_path),
+            repo_root.join("core").join(relative_path),
+        )
+        .unwrap_or_else(|err| panic!("copy current Stage 10 `{relative_path}`: {err}"));
+    }
+    handbook_engine::RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup(repo_root)
+        .expect("initialize repository invocation identity");
+}
+
+fn install_work_specification_handoff_repo() -> (tempfile::TempDir, PathBuf) {
+    let (dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    configure_work_specification_repository(&repo_root);
+    let _ = pipeline_proof_corpus_support::persist_foundation_inputs_route_basis(&repo_root);
+    (dir, repo_root)
+}
+
 fn capture_feature_spec(repo_root: &Path) {
     let request = PipelineCaptureRequest {
         pipeline_selector: PIPELINE_ID.to_string(),
         stage_selector: STAGE_ID.to_string(),
-        input: pipeline_proof_corpus_support::read_committed_model_output(
-            "stage_10_feature_spec.md",
-        ),
+        input: work_specification_input(),
     };
     handbook_pipeline::pipeline_capture::capture_pipeline_output(repo_root, &request)
         .expect("capture feature spec");
@@ -234,7 +283,7 @@ fn prepare_emitted_bundle_repo() -> (
     PipelineHandoffValidatedBundle,
     PipelineHandoffManifest,
 ) {
-    let (dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (dir, repo_root) = install_work_specification_handoff_repo();
     install_canonical_inputs(&repo_root);
     capture_feature_spec(&repo_root);
     let (bundle_root, validated, manifest) = emit_valid_bundle(&repo_root);
@@ -320,7 +369,7 @@ fn handoff_validation_refuses_stale_canonical_provenance() {
 
 #[test]
 fn handoff_emit_refuses_stale_stage_10_feature_spec_capture_provenance() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_work_specification_handoff_repo();
     install_canonical_inputs(&repo_root);
     capture_feature_spec(&repo_root);
 
@@ -354,10 +403,55 @@ fn handoff_emit_refuses_stale_stage_10_feature_spec_capture_provenance() {
 }
 
 #[test]
+fn handoff_ignores_persisted_markdown_view_mutation_and_deletion() {
+    let mut observed_source_sha256 = Vec::new();
+    for case in ["mutated", "deleted"] {
+        let (_dir, repo_root) = install_work_specification_handoff_repo();
+        install_canonical_inputs(&repo_root);
+        capture_feature_spec(&repo_root);
+        let canonical_path = repo_root.join("artifacts/work-specification/work-specification.yaml");
+        let canonical_before = fs::read(&canonical_path).expect("canonical Work Specification");
+        let view_path = repo_root.join("artifacts/feature_spec/FEATURE_SPEC.md");
+        match case {
+            "mutated" => write_file(&view_path, "# unrelated disposable view\n"),
+            "deleted" => fs::remove_file(&view_path).expect("delete disposable view"),
+            _ => unreachable!("unexpected case"),
+        }
+
+        let (_bundle_root, validated, manifest) = emit_valid_bundle(&repo_root);
+        assert_eq!(
+            fs::read(&canonical_path).expect("canonical Work Specification after handoff"),
+            canonical_before,
+            "{case}"
+        );
+        let input = manifest
+            .inputs
+            .iter()
+            .find(|input| {
+                input.source_path == "artifacts/work-specification/work-specification.yaml"
+            })
+            .expect("canonical Work Specification handoff input");
+        assert_eq!(
+            input.trust_class,
+            PipelineHandoffTrustClass::ExternalManualDerived
+        );
+        assert!(
+            !manifest
+                .inputs
+                .iter()
+                .any(|input| input.source_path == "artifacts/feature_spec/FEATURE_SPEC.md"),
+            "{case}"
+        );
+        assert_eq!(validated.manifest, manifest, "{case}");
+        observed_source_sha256.push(input.sha256.clone());
+    }
+    assert_eq!(observed_source_sha256[0], observed_source_sha256[1]);
+}
+
+#[test]
 fn handoff_emit_refuses_missing_or_corrupt_stage_10_capture_provenance() {
     for case in ["missing", "corrupt"] {
-        let (_dir, repo_root) =
-            pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+        let (_dir, repo_root) = install_work_specification_handoff_repo();
         install_canonical_inputs(&repo_root);
         capture_feature_spec(&repo_root);
 
@@ -552,6 +646,7 @@ fn test_consumer_refuses_undeclared_repo_reread_outside_bundle_allowlist() {
 fn custom_storage_layout_emit_and_validate_use_public_handoff_facade() {
     let (_dir, repo_root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
     let storage_layout = custom_storage_layout();
+    configure_work_specification_repository(&repo_root);
     install_canonical_inputs(&repo_root);
     persist_custom_stage_10_route_basis(&repo_root, storage_layout);
 
@@ -560,9 +655,7 @@ fn custom_storage_layout_emit_and_validate_use_public_handoff_facade() {
         &PipelineCaptureRequest {
             pipeline_selector: PIPELINE_ID.to_string(),
             stage_selector: STAGE_ID.to_string(),
-            input: pipeline_proof_corpus_support::read_committed_model_output(
-                "stage_10_feature_spec.md",
-            ),
+            input: work_specification_input(),
         },
         storage_layout,
     )

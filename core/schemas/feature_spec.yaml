@@ -1,239 +1,56 @@
-# core/schemas/feature_spec.yaml
 $schema: "https://json-schema.org/draft/2020-12/schema"
-title: FeatureSpec
+title: WorkSpecification
 type: object
 required:
-  - meta
-  - summary
-  - problem
-  - goals
-  - non_goals
+  - schema_id
+  - schema_version
+  - record_id
+  - objective
   - scope
-  - requirements
+  - non_goals
   - acceptance_criteria
-  - design
-  - alternatives
-  - testing
-  - rollout
-  - risks
-  - open_questions
-  - traceability
+  - status
 properties:
-  meta:
-    type: object
-    required:
-      [
-        spec_id,
-        feature_title,
-        now_utc,
-        owner,
-        team,
-        repo_or_project_ref,
-        charter_ref,
-      ]
-    properties:
-      spec_id: { type: string }
-      feature_title: { type: string }
-      now_utc: { type: string }
-      owner: { type: string }
-      team: { type: string }
-      repo_or_project_ref: { type: string }
-      charter_ref: { type: string }
-      roadmap_ref: { type: string }
-      profile_id: { type: string }
-  summary:
+  schema_id:
+    const: handbook.artifact.work-specification
+  schema_version:
+    const: "1.0"
+  record_id:
     type: string
-    minLength: 20
-  problem:
-    type: object
-    required: [current_state, pain_or_opportunity]
-    properties:
-      current_state: { type: string }
-      pain_or_opportunity: { type: string }
-      context: { type: string }
-      constraints_from_charter:
-        type: array
-        items: { type: string }
-      links:
-        type: array
-        items: { type: string }
-  goals:
+    minLength: 3
+    maxLength: 255
+    pattern: "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*(?:\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*)+$"
+  objective:
+    type: string
+    minLength: 1
+    maxLength: 8192
+  scope:
     type: array
     minItems: 1
+    maxItems: 64
+    uniqueItems: true
     items:
-      type: object
-      required: [id, text]
-      properties:
-        id: { type: string, pattern: "^G[0-9]+$" }
-        text: { type: string }
+      type: string
+      minLength: 1
+      maxLength: 256
   non_goals:
     type: array
+    maxItems: 64
+    uniqueItems: true
     items:
-      type: object
-      required: [id, text]
-      properties:
-        id: { type: string, pattern: "^NG[0-9]+$" }
-        text: { type: string }
-  stakeholders:
-    type: object
-    properties:
-      primary_users: { type: array, items: { type: string } }
-      secondary_users: { type: array, items: { type: string } }
-      stakeholders: { type: array, items: { type: string } }
-  scope:
-    type: object
-    required: [in_scope, out_of_scope]
-    properties:
-      in_scope: { type: array, minItems: 1, items: { type: string } }
-      out_of_scope: { type: array, items: { type: string } }
-  requirements:
-    type: object
-    required: [functional, non_functional]
-    properties:
-      functional:
-        type: array
-        minItems: 1
-        items:
-          type: object
-          required: [id, text]
-          properties:
-            id: { type: string, pattern: "^R[0-9]+$" }
-            text: { type: string }
-      non_functional:
-        type: object
-        required: [security, performance, reliability]
-        properties:
-          security: { type: string }
-          performance: { type: string }
-          reliability: { type: string }
-          observability: { type: string }
-          compatibility: { type: string }
-          maintainability: { type: string }
-          compliance: { type: string }
+      type: string
+      minLength: 1
+      maxLength: 256
   acceptance_criteria:
     type: array
     minItems: 1
+    maxItems: 64
+    uniqueItems: true
     items:
-      type: object
-      required: [id, text, test_method]
-      properties:
-        id: { type: string, pattern: "^AC-[0-9]{3}$" }
-        text: { type: string }
-        test_method:
-          type: string
-          enum:
-            ["unit", "integration", "e2e", "manual", "performance", "security"]
-        notes: { type: string }
-  design:
-    type: object
-    required: [proposed, integration_touchpoints]
-    properties:
-      proposed:
-        type: object
-        required: [overview, components]
-        properties:
-          overview: { type: string }
-          components: { type: array, items: { type: string } }
-          data_flow: { type: string }
-          interfaces: { type: array, items: { type: string } }
-          error_handling: { type: string }
-          security_considerations: { type: string }
-          observability: { type: string }
-      integration_touchpoints:
-        type: array
-        minItems: 1
-        items:
-          type: object
-          required: [name, kind]
-          properties:
-            name: { type: string } # file/module/service/api name
-            kind:
-              type: string
-              enum:
-                [
-                  "file",
-                  "module",
-                  "service",
-                  "api",
-                  "cli",
-                  "db",
-                  "event",
-                  "other",
-                ]
-            notes: { type: string }
-      data_model:
-        type: object
-        properties:
-          entities: { type: array, items: { type: string } }
-          migrations: { type: string }
-  alternatives:
-    type: array
-    minItems: 1
-    items:
-      type: object
-      required: [name, pros, cons, decision]
-      properties:
-        name: { type: string }
-        pros: { type: array, items: { type: string } }
-        cons: { type: array, items: { type: string } }
-        decision: { type: string } # why accepted/rejected
-  testing:
-    type: object
-    required: [unit, integration]
-    properties:
-      unit: { type: string }
-      integration: { type: string }
-      e2e: { type: string }
-      negative: { type: string }
-      performance: { type: string }
-      notes: { type: string }
-  rollout:
-    type: object
-    required: [strategy, rollback]
-    properties:
-      strategy: { type: string }
-      backward_compatibility: { type: string }
-      migration: { type: string }
-      monitoring: { type: string }
-      rollback: { type: string }
-  risks:
-    type: array
-    items:
-      type: object
-      required: [risk, mitigation]
-      properties:
-        risk: { type: string }
-        mitigation: { type: string }
-  open_questions:
-    type: array
-    items: { type: string }
-  traceability:
-    type: object
-    required: [goals_to_acceptance, requirements_to_acceptance]
-    properties:
-      goals_to_acceptance:
-        type: array
-        items:
-          type: object
-          required: [goal_id, ac_ids]
-          properties:
-            goal_id: { type: string, pattern: "^G[0-9]+$" }
-            ac_ids:
-              type: array
-              minItems: 1
-              items: { type: string, pattern: "^AC-[0-9]{3}$" }
-      requirements_to_acceptance:
-        type: array
-        items:
-          type: object
-          required: [req_id, ac_ids]
-          properties:
-            req_id: { type: string, pattern: "^R[0-9]+$" }
-            ac_ids:
-              type: array
-              minItems: 1
-              items: { type: string, pattern: "^AC-[0-9]{3}$" }
-      charter_constraints_referenced:
-        type: array
-        items: { type: string }
+      type: string
+      minLength: 1
+      maxLength: 256
+  status:
+    enum: [draft, review_ready, approved, active, completed, cancelled]
 additionalProperties: false
+unevaluatedProperties: false

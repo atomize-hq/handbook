@@ -1,0 +1,160 @@
+{
+  "schema_id": "hcm-2.4-definition-support-vectors",
+  "schema_version": "1.0",
+  "normalization_contract": {
+    "encoding": "RFC8785-JCS-UTF8",
+    "hash": "lowercase sha256 with sha256 prefix",
+    "definition_preimage": "HCM-2.2 uniform closure: authored record with only its own fingerprint field removed plus resolved_dependencies",
+    "dependency_order": "dependency_role then exact definition_ref; canonical schema dependency also binds schema_closure_fingerprint"
+  },
+  "profile": {
+    "exact_ref": "handbook.profile.shipped-root@1.2.0",
+    "expected_fingerprint": "sha256:63cd999c95efc3fe65ae3514c2915b5d1457290211cf6da7b57b2cd75bafaf83",
+    "expected_instance_ids": [
+      "project_authority",
+      "project_context",
+      "environment_context"
+    ],
+    "project_authority_descriptor": {
+      "canonical_path": ".handbook/project/charter.yaml",
+      "capability_refs": [
+        "constitutional_root"
+      ],
+      "depends_on": [],
+      "extensions": {},
+      "id": "project_authority",
+      "intake_definition_ref": "handbook.intake.charter@1.0.0",
+      "kind_ref": "handbook.artifact-kind.project-authority@1.1.0",
+      "label": "Charter",
+      "lifecycle_policy_ref": "handbook.lifecycle.constitutional-review-lock@1.0.0",
+      "projection_definition_refs": [],
+      "renderer_definition_refs": [
+        "handbook.renderer.charter-review-markdown@1.0.0"
+      ],
+      "requiredness": {
+        "condition_ref": null,
+        "mode": "always"
+      },
+      "role_ref": "constitutional_authority",
+      "schema_id": "handbook.artifact-instance-descriptor",
+      "schema_version": "1.0",
+      "validation_overlay_refs": []
+    }
+  },
+  "families": {
+    "project-context": {
+      "kind_ref": "handbook.artifact-kind.project-context@1.1.0",
+      "kind_fingerprint": "sha256:16526ff8179adf1c0e72fb6980800ea4756c919f5b1499cb97227d7727517fba",
+      "schema_ref": "handbook.schemas.artifacts.project-context@1.0.0",
+      "intake_ref": "handbook.intake.project-context@1.0.0",
+      "intake_fingerprint": "sha256:b81c9bb206d58f10973e1308c6c68708e668f2ebf3643ed68f132c171eb75d28",
+      "coverage_paths": [
+        "/schema_id",
+        "/schema_version",
+        "/record_id",
+        "/summary",
+        "/system_boundaries",
+        "/ownership",
+        "/authoritative_references",
+        "/known_unknowns"
+      ],
+      "renderer_ref": "handbook.renderer.project-context-review-markdown@1.0.0",
+      "renderer_fingerprint": "sha256:5c855e2a1948533dca326dd9964a3e9bd8fc6d395a2b8906fc7c57290d8cb39c"
+    },
+    "environment-context": {
+      "kind_ref": "handbook.artifact-kind.environment-context@1.1.0",
+      "kind_fingerprint": "sha256:81382d62b492b8837d876775e8e20b12a55d35894d5d3832450fe3a067f23f6f",
+      "schema_ref": "handbook.schemas.artifacts.environment-context@1.0.0",
+      "intake_ref": "handbook.intake.environment-context@1.0.0",
+      "intake_fingerprint": "sha256:468c95518601d5e687c0d96314f5aa5120a7dd3546a5e728f7470fb50d805b1d",
+      "coverage_paths": [
+        "/schema_id",
+        "/schema_version",
+        "/record_id",
+        "/applicability_basis",
+        "/operational_surfaces",
+        "/runtime_dependencies",
+        "/safe_configuration_references",
+        "/authoritative_references",
+        "/known_unknowns"
+      ],
+      "renderer_ref": "handbook.renderer.environment-context-review-markdown@1.0.0",
+      "renderer_fingerprint": "sha256:f1702eed916e5a0c7a58828a0060370436b2bbd8fb216b43ecfb7fc97408a635"
+    },
+    "work-specification": {
+      "kind_ref": "handbook.artifact-kind.work-specification@1.1.0",
+      "kind_fingerprint": "sha256:2bbf982521b06fdacd5bf94aa2d74d0ec3744e9c77b5cfb326449d0399d8e33a",
+      "schema_ref": "handbook.schemas.artifacts.work-specification@1.0.0",
+      "intake_ref": "handbook.intake.work-specification@1.0.0",
+      "intake_fingerprint": "sha256:114977cc9c42e6c02fd25f8b034d9c54ae951e182cec181dfa6f90226da351fa",
+      "coverage_paths": [
+        "/schema_id",
+        "/schema_version",
+        "/record_id",
+        "/objective",
+        "/scope",
+        "/non_goals",
+        "/acceptance_criteria",
+        "/status"
+      ],
+      "renderer_ref": "handbook.renderer.work-specification-review-markdown@1.0.0",
+      "renderer_fingerprint": "sha256:ba5c014da3aea7930236629b0dd96537a735db113e2c38744598a3d808b8f117"
+    },
+    "decision-record": {
+      "kind_ref": "handbook.artifact-kind.decision-record@1.1.0",
+      "kind_fingerprint": "sha256:fb2e24beadb8255b9dea01906dc2e46494ba230c5771d90235c90728496d27b5",
+      "schema_ref": "handbook.schemas.artifacts.decision-record@1.0.0",
+      "intake_ref": "handbook.intake.decision-record@1.0.0",
+      "intake_fingerprint": "sha256:60f4d995f9772ff66dca1d63b07f0f9f571cfa52d9846acf84c2ad15b589886a",
+      "coverage_paths": [
+        "/schema_id",
+        "/schema_version",
+        "/record_id",
+        "/context",
+        "/decision",
+        "/status",
+        "/consequences",
+        "/supersedes"
+      ],
+      "renderer_ref": "handbook.renderer.decision-record-review-markdown@1.0.0",
+      "renderer_fingerprint": "sha256:81f616aeecb1eac6c5c9207bcd2eb82c8e79ee159d57b97e2f15492a6d6a12b3"
+    },
+    "risk-record": {
+      "kind_ref": "handbook.artifact-kind.risk-record@1.1.0",
+      "kind_fingerprint": "sha256:e30bea03a5d3d7b14f56da8f7ce62eb0dfbfe040fccd79782e0d36004d79dd5a",
+      "schema_ref": "handbook.schemas.artifacts.risk-record@1.0.0",
+      "intake_ref": "handbook.intake.risk-record@1.0.0",
+      "intake_fingerprint": "sha256:5bdce9d0a7688ace79b2467f70e7ab7b5b82548cc7bb55695ceca37c550319d4",
+      "coverage_paths": [
+        "/schema_id",
+        "/schema_version",
+        "/record_id",
+        "/uncertainty",
+        "/evidence_refs",
+        "/owner",
+        "/treatment",
+        "/status",
+        "/review_basis"
+      ],
+      "renderer_ref": "handbook.renderer.risk-record-review-markdown@1.0.0",
+      "renderer_fingerprint": "sha256:5cd8a531cfe8d83c078362ed2336d36eb87ee9b6715a364f19211026c6ee274c"
+    }
+  },
+  "negative_admission_matrix": [
+    "missing_renderer",
+    "mismatched_renderer",
+    "extra_renderer",
+    "mismatched_kind",
+    "mismatched_intake",
+    "mismatched_role",
+    "mismatched_path",
+    "mismatched_requiredness",
+    "nonempty_dependency",
+    "lifecycle",
+    "projection",
+    "validation_overlay",
+    "review_trigger",
+    "required_capability",
+    "extension"
+  ]
+}

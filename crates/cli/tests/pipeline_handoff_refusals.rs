@@ -55,7 +55,49 @@ fn planning_ready_repo() -> (tempfile::TempDir, std::path::PathBuf) {
 }
 
 fn foundation_inputs_repo() -> (tempfile::TempDir, std::path::PathBuf) {
-    pipeline_proof_corpus_support::install_foundation_inputs_repo()
+    let (dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let fixture_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../engine/tests/fixtures/hcm_2_4_work_specification");
+    std::fs::create_dir_all(root.join(".handbook")).expect("create authority directory");
+    std::fs::copy(
+        fixture_root.join(".handbook/profile-selection.json"),
+        root.join(".handbook/profile-selection.json"),
+    )
+    .expect("copy Work Specification profile selection");
+    let profile_target =
+        root.join(".handbook/definitions/profiles/work-specification-root-1.0.0.yaml");
+    std::fs::create_dir_all(profile_target.parent().expect("profile parent"))
+        .expect("create profile parent");
+    std::fs::copy(
+        fixture_root.join(".handbook/definitions/profiles/work-specification-root-1.0.0.yaml"),
+        profile_target,
+    )
+    .expect("copy Work Specification profile");
+    let source_core = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../core");
+    for relative_path in [
+        "stages/10_feature_spec.md",
+        "library/feature_spec/feature_spec_architect_directive.md",
+        "library/feature_spec/FEATURE_SPEC.md.tmpl",
+    ] {
+        std::fs::copy(
+            source_core.join(relative_path),
+            root.join("core").join(relative_path),
+        )
+        .unwrap_or_else(|err| panic!("copy current Stage 10 `{relative_path}`: {err}"));
+    }
+    handbook_engine::RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup(&root)
+        .expect("initialize repository invocation identity");
+    (dir, root)
+}
+
+fn work_specification_input() -> String {
+    std::fs::read_to_string(
+        Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../engine/tests/fixtures/hcm_2_4_work_specification")
+            .join("artifacts/work-specification/work-specification.yaml"),
+    )
+    .expect("canonical Work Specification fixture")
 }
 
 fn prepare_foundation_inputs_full_context_route_basis(root: &Path) {
@@ -168,6 +210,8 @@ fn seed_non_canonical_boundary_noise(root: &Path) {
 #[test]
 fn pipeline_handoff_emit_refuses_when_feature_spec_artifact_is_missing() {
     let (_dir, root) = foundation_inputs_repo();
+    std::fs::remove_file(root.join("artifacts/work-specification/work-specification.yaml"))
+        .expect("remove canonical Work Specification fixture");
     prepare_foundation_inputs_full_context_route_basis(root.as_path());
 
     let output = run_in(
@@ -196,7 +240,7 @@ fn pipeline_handoff_emit_refuses_when_feature_spec_artifact_is_missing() {
     );
     assert!(
         stdout.contains(
-            "REASON: missing_required_input: required handoff source `artifacts/feature_spec/FEATURE_SPEC.md` is unavailable"
+            "REASON: missing_required_input: required handoff source `artifacts/work-specification/work-specification.yaml` is unavailable"
         ),
         "{stdout}"
     );
@@ -224,7 +268,7 @@ fn pipeline_handoff_emit_refuses_when_stage_10_capture_provenance_is_stale() {
             "--stage",
             "stage.10_feature_spec",
         ],
-        &pipeline_proof_corpus_support::read_committed_model_output("stage_10_feature_spec.md"),
+        &work_specification_input(),
     );
     assert!(capture.status.success(), "stage 10 capture should succeed");
 

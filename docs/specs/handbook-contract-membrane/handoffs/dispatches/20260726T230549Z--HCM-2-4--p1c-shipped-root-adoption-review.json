@@ -1,0 +1,206 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T230549Z--HCM-2-4--p1c-shipped-root-adoption-review",
+  "created_at_utc": "2026-07-26T23:05:49Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1C-shipped-root-adoption",
+  "subject_fingerprint": "sha256:b2ee0d58ba4e5a8a7352a727308ff01b3cf83dbf148735d98411c4463e0fb250",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p1c-shipped-root-adoption-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml",
+        "sha256": "1d8fe627cf097a5f1fa17baa0be349d7d9d6caabbe97a39318d1dbbcf62d972f"
+      },
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "25daa5f5dc304d26ff70cbe633e5bc79d20079ee11048f3123a3f33d38d8c1f2"
+      },
+      {
+        "path": "crates/engine/src/project_context_artifact.rs",
+        "sha256": "a25b26e67ad7557ce6cbc63f7e814dd989238b4a870621bab36d22134f9a2dcf"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_decisions.rs",
+        "sha256": "9a4f73561196482a65800a3813b76755c19e34b2d06d4e560a7b72f65e0bf363"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_1_project_context.rs",
+        "sha256": "45d45622aca10d1c13d0df395957dc5100ae6b645c63d48cb3bd7b05f6da9599"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_definition_profile.rs",
+        "sha256": "b5651c334ad2744b067b06db8a5032905a5ce1114ed58e4a87d4adf498be5077"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs",
+        "sha256": "faa8dc4fe340efdb166263b319d4707a53e0d2757489ddf485a1830542723979"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "be0f7907d01b50346f8e91dede1b6015d24e7d73bcec607f863033689bb32804"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "5b0b0c780e2be60caa9d89edbe39ef54244b74ac917f0562ca6b56b89568320e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1c-project-context-kind-compatibility.md",
+        "sha256": "ff940522632b54e90f9c56fd5c7c793c686089f36c48bac53fb900da9c501307"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1C-shipped-root-adoption.md",
+        "sha256": "96366f192b89080d071f3078a1e8b83a7a55c6183e0d502a6a6ab1a53f8517e7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "aa7e75a3b04b0535b57e2512bdff3d6fc73937aa64bec1d490eb14a66b185df1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "d498ad0fbd253f397189552a92ccaede8f75bf53ec7d5420652bbde572a0b44f"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b2ee0d58ba4e5a8a7352a727308ff01b3cf83dbf148735d98411c4463e0fb250"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "complete_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Mandatory invariants",
+        "Versioned compatibility"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4",
+        "Reviewability and packet sizing calibration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.1 gate",
+        "HCM-2.2 gate",
+        "HCM-2.3 gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1C — Shipped-root successor adoption",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "P1C complete subject contains 13 entries at sha256:b2ee0d58ba4e5a8a7352a727308ff01b3cf83dbf148735d98411c4463e0fb250. Exact production diff is shipped_profile_request plus project_context_artifact::selected_contract_matches; existing predicate unit test and three selected P1C integration targets changed, while hcm_2_1_project_context is byte-identical. Live generic decisions select exact profile 1.2 and three root instances; Charter records retain released 1.1. Raw evidence: engine 343 passed; compiler 9 available Windows targets passed; CLI 19 passed; HCM-2.1 12/12; P1B 9/9; format, diff, no-edit anchors exit 0; GitNexus aggregate open slice LOW, 20 tracked files, zero processes. The compiler doctor substitution/ABA unit is cfg unix and unavailable on Windows.",
+  "allowed_scope": [
+    "Replay all 13 manifest entries and inspect only the exact P1C diff against HEAD.",
+    "Validate exact shipped_profile_request 1.2 selection and source closure, exactly three selected instances, and Work/Decision/Risk remaining unselected.",
+    "Validate exact Project Context kind 1.0/1.1 compatibility with decision-instance equality, unchanged schema/path, and the complete refusal matrix.",
+    "Trace resolve_shipped_profile_decisions immediately through the Charter membrane and verify every Charter record remains released 1.1.",
+    "Confirm HCM-2.1 integration and all named no-edit anchors have zero-byte delta.",
+    "Validate the engine/compiler/CLI proof and honestly unavailable Unix-only proof.",
+    "Assess correctness, security, deterministic behavior, owner boundaries, scope, and regression sufficiency.",
+    "Identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No P2-P7 behavior, Environment writer, Work pipeline, Decision/Risk proof, aggregate-flow deletion, schema/profile/definition change, public API, dependency, Cargo, unsafe, fallback, or generic version inference.",
+    "Do not rely on prior review conclusions or implementation reasoning."
+  ],
+  "tasks": [
+    "Verify subject identity and exact production/test/doc selector compliance.",
+    "Independently trace the live profile 1.2 selection, three descriptors, and subordinate intake/renderer bindings.",
+    "Validate Project Context exact two-version predicate positives and every negative category.",
+    "Trace the Charter compatibility path through released record emission and transaction preflight.",
+    "Verify HCM-2.1 zero-byte preservation, HCM-2.2 negatives, HCM-2.3 walls, and named proof results.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Exact shipped-root 1.2 selection and immutable source closure",
+    "Exactly three selected root instances",
+    "Exact Project Context kind 1.0/1.1 compatibility only",
+    "Unchanged Project Context schema 1.0 and canonical path",
+    "Released Charter 1.1 record identity",
+    "HCM-2.1 zero-byte 12/12 preservation",
+    "Complete HCM-2.2 and HCM-2.3 preservation",
+    "No new production symbol, public surface, fallback, or generic inference"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

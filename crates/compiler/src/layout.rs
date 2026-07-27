@@ -10,7 +10,7 @@ pub(crate) const CANONICAL_PROJECT_CONTEXT_RELATIVE_PATH: &str =
 pub(crate) const CANONICAL_ENVIRONMENT_INVENTORY_RELATIVE_PATH: &str =
     ".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md";
 pub(crate) const CANONICAL_FEATURE_SPEC_RELATIVE_PATH: &str =
-    ".handbook/feature_spec/FEATURE_SPEC.md";
+    "artifacts/work-specification/work-specification.yaml";
 
 #[allow(dead_code)]
 const AUTHORING_LOCK_ROOT_RELATIVE: &str = ".handbook/state/authoring";

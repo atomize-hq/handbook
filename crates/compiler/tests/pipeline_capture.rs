@@ -2,7 +2,7 @@
 mod pipeline_proof_corpus_support;
 
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use handbook_pipeline::{
     pipeline_capture::{
@@ -129,7 +129,68 @@ fn stage_10_compile_explain(repo_root: &Path) -> String {
 }
 
 fn stage_10_completed_feature_spec_input() -> String {
-    pipeline_proof_corpus_support::read_committed_model_output("stage_10_feature_spec.md")
+    fs::read_to_string(
+        Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../engine/tests/fixtures/hcm_2_4_work_specification")
+            .join("artifacts/work-specification/work-specification.yaml"),
+    )
+    .expect("canonical Work Specification fixture")
+}
+
+fn stage_10_generated_markdown_view() -> String {
+    fs::read_to_string(
+        Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../engine/tests/fixtures/hcm_2_4_work_specification")
+            .join("artifacts/feature_spec/FEATURE_SPEC.md"),
+    )
+    .expect("generated Markdown fixture")
+}
+
+fn install_stage_10_work_specification_ready_repo() -> (tempfile::TempDir, PathBuf) {
+    let (dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    for relative_path in [
+        "artifacts/work-specification/work-specification.yaml",
+        "artifacts/feature_spec/FEATURE_SPEC.md",
+    ] {
+        let seeded_output = repo_root.join(relative_path);
+        if seeded_output.exists() {
+            fs::remove_file(&seeded_output)
+                .unwrap_or_else(|err| panic!("remove seeded `{relative_path}`: {err}"));
+        }
+    }
+    let fixture_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../engine/tests/fixtures/hcm_2_4_work_specification");
+    fs::copy(
+        fixture_root.join(".handbook/profile-selection.json"),
+        repo_root.join(".handbook/profile-selection.json"),
+    )
+    .expect("copy Work Specification profile selection");
+    let profile_target =
+        repo_root.join(".handbook/definitions/profiles/work-specification-root-1.0.0.yaml");
+    fs::create_dir_all(profile_target.parent().expect("profile parent"))
+        .expect("create profile parent");
+    fs::copy(
+        fixture_root.join(".handbook/definitions/profiles/work-specification-root-1.0.0.yaml"),
+        profile_target,
+    )
+    .expect("copy Work Specification profile");
+    let source_core = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../core");
+    for relative_path in [
+        "stages/10_feature_spec.md",
+        "library/feature_spec/feature_spec_architect_directive.md",
+        "library/feature_spec/FEATURE_SPEC.md.tmpl",
+    ] {
+        fs::copy(
+            source_core.join(relative_path),
+            repo_root.join("core").join(relative_path),
+        )
+        .unwrap_or_else(|err| panic!("copy current Stage 10 `{relative_path}`: {err}"));
+    }
+    let _ = pipeline_proof_corpus_support::persist_foundation_inputs_route_basis(&repo_root);
+    handbook_engine::RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup(&repo_root)
+        .expect("initialize repository invocation identity");
+    (dir, repo_root)
 }
 
 fn normalize_capture_id(output: &str, capture_id: &str) -> String {
@@ -318,7 +379,7 @@ fn capture_preview_foundation_pack_matches_shared_golden() {
 
 #[test]
 fn capture_preview_feature_spec_matches_shared_golden_from_completed_external_output() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let compile_payload = stage_10_compile_payload(&repo_root);
     let completed_output = stage_10_completed_feature_spec_input();
     assert_ne!(
@@ -459,7 +520,7 @@ fn capture_apply_foundation_pack_matches_shared_golden_and_uses_cached_preview()
 
 #[test]
 fn capture_apply_stage_10_matches_shared_golden_from_completed_external_output() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let compile_payload = stage_10_compile_payload(&repo_root);
     let input = stage_10_completed_feature_spec_input();
     assert_ne!(
@@ -476,9 +537,14 @@ fn capture_apply_stage_10_matches_shared_golden_from_completed_external_output()
         "capture.apply.stage_10_feature_spec.txt",
     );
     assert_eq!(
-        fs::read_to_string(repo_root.join("artifacts/feature_spec/FEATURE_SPEC.md"))
-            .expect("artifact"),
+        fs::read_to_string(repo_root.join("artifacts/work-specification/work-specification.yaml"))
+            .expect("canonical Work Specification"),
         input
+    );
+    assert_eq!(
+        fs::read_to_string(repo_root.join("artifacts/feature_spec/FEATURE_SPEC.md"))
+            .expect("generated Markdown view"),
+        stage_10_generated_markdown_view()
     );
     let provenance: serde_json::Value = serde_json::from_str(
         &fs::read_to_string(repo_root.join(STAGE_10_CAPTURE_PROVENANCE_PATH))
@@ -498,7 +564,7 @@ fn capture_apply_stage_10_matches_shared_golden_from_completed_external_output()
     assert_eq!(provenance["stage_id"], STAGE_10_ID);
     assert_eq!(
         provenance["feature_spec_path"],
-        "artifacts/feature_spec/FEATURE_SPEC.md"
+        "artifacts/work-specification/work-specification.yaml"
     );
     assert_eq!(
         provenance["feature_spec_sha256"],
@@ -580,7 +646,7 @@ fn capture_refuses_stage_06_single_file_with_file_wrapper() {
 
 #[test]
 fn capture_refuses_stage_10_single_file_with_file_wrapper() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let input = stage_10_completed_feature_spec_input();
     let wrapped = format!("--- FILE: artifacts/feature_spec/FEATURE_SPEC.md ---\n{input}",);
     let refusal =
@@ -598,7 +664,7 @@ fn capture_refuses_stage_10_single_file_with_file_wrapper() {
 
 #[test]
 fn capture_preview_stage_10_refuses_raw_compile_payload_without_side_effects() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let initial_state = load_route_state(&repo_root);
     let compile_payload = stage_10_compile_payload(&repo_root);
     assert!(
@@ -632,7 +698,7 @@ fn capture_preview_stage_10_refuses_raw_compile_payload_without_side_effects() {
 
 #[test]
 fn capture_preview_stage_10_refuses_compile_explain_output_without_side_effects() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let initial_state = load_route_state(&repo_root);
     let explain_output = stage_10_compile_explain(&repo_root);
     assert!(
@@ -651,7 +717,7 @@ fn capture_preview_stage_10_refuses_compile_explain_output_without_side_effects(
     );
     assert_eq!(
         refusal.summary,
-        "stage.10_feature_spec capture must receive a completed FEATURE_SPEC.md body that satisfies the shipped feature-spec contract"
+        "stage.10_feature_spec capture must receive one duplicate-free Work Specification YAML object"
     );
     assert!(
         !repo_root
@@ -761,7 +827,7 @@ fn capture_preview_stage_06_refuses_empty_single_file_body_without_side_effects(
 
 #[test]
 fn capture_preview_stage_10_refuses_empty_single_file_body_without_side_effects() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let initial_state = load_route_state(&repo_root);
     assert!(
         !repo_root
@@ -824,7 +890,7 @@ fn capture_apply_refuses_empty_single_file_body_without_side_effects() {
 
 #[test]
 fn capture_apply_stage_10_refuses_raw_compile_payload_without_side_effects() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let initial_state = load_route_state(&repo_root);
     let compile_payload = stage_10_compile_payload(&repo_root);
     assert!(
@@ -858,7 +924,7 @@ fn capture_apply_stage_10_refuses_raw_compile_payload_without_side_effects() {
 
 #[test]
 fn capture_apply_stage_10_refuses_invalid_feature_spec_body_without_side_effects() {
-    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_10_capture_ready_repo();
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
     let initial_state = load_route_state(&repo_root);
     let refusal = capture_pipeline_output(&repo_root, &stage_10_request("hello\n".to_string()))
         .expect_err("invalid feature spec body should refuse");
@@ -869,7 +935,7 @@ fn capture_apply_stage_10_refuses_invalid_feature_spec_body_without_side_effects
     );
     assert_eq!(
         refusal.summary,
-        "stage.10_feature_spec capture must receive a completed FEATURE_SPEC.md body that satisfies the shipped feature-spec contract"
+        "stage.10_feature_spec capture must receive one duplicate-free Work Specification YAML object"
     );
     assert!(
         !repo_root

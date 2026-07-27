@@ -1,0 +1,183 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T000736Z--HCM-2-4--p2-condition-authority-stop-review",
+  "created_at_utc": "2026-07-27T00:07:36Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2-environment-context",
+  "subject_fingerprint": "sha256:fc3c32c3e64c321faaecbcc3b98da9bb2f8f679e8882054d35753713a2e1b76d",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p2-condition-authority-stop-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "25daa5f5dc304d26ff70cbe633e5bc79d20079ee11048f3123a3f33d38d8c1f2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "sha256": "2dd65f901a7ce58cebc256a2217eb102933e3a6ccacc10fd49232a73632b9b9a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "6d66d9b6af0953fbfe4d1f90a7568d748b3e5c737b9fe25b4a280c5f9655d2d4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "383b688b73bc2cf0315ad595fb331e694faeac85d94b520f9de24f9e209b2eef"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-condition-evaluator-authority-stop.md",
+        "sha256": "a1acc49473e7adffe1c7fe962eef343bb267a8322a7f8cca1513cf8d5d938d9a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "a401df977b81b836a9ff71ec0e11483d6e37a3ea2d89f8374fa9dd31f7ac47b0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "bf2ba9348616fca2e65980cf084f9c531f45b1e1a106323bcefe287f3c88d6ed"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:fc3c32c3e64c321faaecbcc3b98da9bb2f8f679e8882054d35753713a2e1b76d"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "single_contract_repair",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local_with_frozen_dependency",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "pre_implementation_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Artifact instances and profiles",
+        "Approved HCM-0.6 shipped defaults"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+      "sections": [
+        "Environment Context",
+        "Exact condition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Canonical-source and view classification",
+        "P2 — Environment Context vertical",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P2 — Environment Context vertical"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+      "sections": [
+        "P2 — Environment Context vertical"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "P1C is different-fresh closure-clean. HCM-0.6 defines the managed-operational-surface condition's six outcome meanings while leaving its record schema, exact input bindings, admitted evidence types, precedence, freshness thresholds, evaluator implementation, transport, and migration undecided. The live conditional branch in profile_decision.rs emits Unresolved, EvidenceContractUnavailable, and Indeterminate. The current Environment Inventory author path resolves shipped decisions and has no separately resolved applicability parameter. The reviewed P2 production selector does not name profile_decision.rs or a condition evidence/evaluator surface. The five HCM-2.4 documentation changes record a runtime entry gate while retaining the prior P2 exit requirements. No P2 production, test, template, schema, profile, or released-definition byte was edited. git diff --check exited 0.",
+  "allowed_scope": [
+    "Review only whether the five HCM-2.4 documentation changes correctly reconcile P2 with frozen HCM-0.6 condition authority and live resolver truth.",
+    "Use profile_decision.rs, the semantic model, and the HCM-0.6 decision only as read-only current/frozen truth.",
+    "Determine independently whether current P2 authority permits any valid route to condition true/false or write-only-when-applicable proof.",
+    "Validate that the repair preserves P2 exit requirements, fail-closed six-outcome semantics, P3-P5 independence, and the P6 dependency gate.",
+    "Confirm no production, public API, schema, profile, dependency, Cargo, package, evidence-evaluator, sibling-slice, migration, fallback, or self-authorizing inference is approved.",
+    "Identify findings independently before comparing P3/P4 candidates with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "Do not design or implement the missing condition evidence/evaluator contract.",
+    "Do not review P1A-P1C implementation or approve P2 runtime behavior.",
+    "No weakening of condition true/false, conditional absence, or write-only-when-applicable proof.",
+    "No authorization to use Environment Context input, applicability_basis, profile opt-in, artifact presence, or silence as condition evidence."
+  ],
+  "tasks": [
+    "Replay the seven-entry subject identity and inspect the exact documentation delta.",
+    "Read the exact HCM-0.6 condition freeze and reproduce or statically validate the live conditional decision behavior.",
+    "Determine whether the pre-repair P2 runtime contract is executable inside the reviewed selector without violating frozen authority.",
+    "Validate SPEC, plan, todo, path-manifest, and decision-record parity and the exact resume prerequisite.",
+    "Check that P3-P5 may remain independent while P6 and slice closeout remain blocked on P2.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "HCM-0.6 exact six-outcome managed-operational-surface condition",
+    "No Environment Context self-applicability",
+    "No unchecked profile opt-in or silence coercion",
+    "P2 write only when selected condition is true",
+    "P2 true/false and conditional-absence proof remain required",
+    "P2 selector remains closed",
+    "P3-P5 semantic independence",
+    "P6 requires P2-P5 GREEN replacement proof",
+    "Fresh clean cross-document review before any P2 runtime resumption"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity or required read-only authority cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

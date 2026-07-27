@@ -1,0 +1,215 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T235106Z--HCM-2-4--p1c-shipped-root-adoption-closure-review",
+  "created_at_utc": "2026-07-26T23:51:06Z",
+  "source_handoff_ids": [
+    "20260726T192534Z--HCM-2-4--orchestration--p1a-selector-expansion-required"
+  ],
+  "parent_orchestration_id": "20260726T195633Z--HCM-2-4--implementation-resume-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "test-driven-development",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1C-shipped-root-adoption",
+  "subject_fingerprint": "sha256:c727993311cf34fed1d0add17dbe01806524a54a2983a8805c2061ae048c4e09",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p1c-shipped-root-adoption-closure-1",
+    "trigger_run_ids": [
+      "p1c-shipped-root-adoption-discovery"
+    ],
+    "finding_refs": [
+      "p1c-shipped-root-adoption-discovery-P2-1"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "0a3882ffd7ad1a31f35da3f9b5e95c65e52a40d1f8864133599618e757b42b09"
+      },
+      {
+        "path": "crates/compiler/tests/doctor.rs",
+        "sha256": "86d1c58d532dbc368cd40a6c4cafc7cc50edfc0d35a6b9d95faae6af57dc0ace"
+      },
+      {
+        "path": "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml",
+        "sha256": "1d8fe627cf097a5f1fa17baa0be349d7d9d6caabbe97a39318d1dbbcf62d972f"
+      },
+      {
+        "path": "crates/engine/src/profile_decision.rs",
+        "sha256": "25daa5f5dc304d26ff70cbe633e5bc79d20079ee11048f3123a3f33d38d8c1f2"
+      },
+      {
+        "path": "crates/engine/src/project_context_artifact.rs",
+        "sha256": "a25b26e67ad7557ce6cbc63f7e814dd989238b4a870621bab36d22134f9a2dcf"
+      },
+      {
+        "path": "crates/engine/tests/hcm_1_4_profile_decisions.rs",
+        "sha256": "9a4f73561196482a65800a3813b76755c19e34b2d06d4e560a7b72f65e0bf363"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_1_project_context.rs",
+        "sha256": "45d45622aca10d1c13d0df395957dc5100ae6b645c63d48cb3bd7b05f6da9599"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_2_definition_profile.rs",
+        "sha256": "b5651c334ad2744b067b06db8a5032905a5ce1114ed58e4a87d4adf498be5077"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs",
+        "sha256": "faa8dc4fe340efdb166263b319d4707a53e0d2757489ddf485a1830542723979"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "c1cc766ce4cc8a870126ce880cbab3ad4f02f8c61e29090ab426ba337453a14f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "4cdffb1afef98d4f8d41f4588fe8f3f881239e578f6a8f2e5b9bbfadecfb38cc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1c-project-context-kind-compatibility.md",
+        "sha256": "dd4e860cbf8d4f36e82032b013784776ec062cb476c677a6c235ffffc2e58d82"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1C-shipped-root-adoption.md",
+        "sha256": "f9d14ac7da632d7e03d7b04261803e8c7476801fbd8d5d0f8f35626c4900303a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "57b3398f90a7687c37587e8c482f260f944c12ebd1811d9539cbe3da9bd84579"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "78dd6f68e0b3b20168b9d9299898f5d6c15dc3a037a818949337443622c9f327"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:c727993311cf34fed1d0add17dbe01806524a54a2983a8805c2061ae048c4e09"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "complete_packet",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Mandatory invariants",
+        "Versioned compatibility"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4",
+        "Reviewability and packet sizing calibration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.1 gate",
+        "HCM-2.2 gate",
+        "HCM-2.3 gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1C — Shipped-root successor adoption",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "Post-remediation P1C complete subject contains 15 entries at sha256:c727993311cf34fed1d0add17dbe01806524a54a2983a8805c2061ae048c4e09. The complete production subject is unchanged from discovery: shipped_profile_request selects exact profile 1.2 and source closure; selected_contract_matches admits only exact Project Context kind 1.0 or 1.1 with decision-instance equality over unchanged schema/path. Discovery finding P2-1 concerned omitted Unix projections. The causal delta is test/control-pack only: compiler projection expects report 1.2 and Project Context kind 1.1; CLI projection uses the existing valid selected-Charter helper and expects kind 1.1. Raw post-remediation proof: exact WSL compiler projection 1/1, CLI projection 1/1, substitution/ABA 1/1; engine 343/343; Windows compiler preservation 9/9; CLI preservation 19/19; HCM-2.1 12/12; P1B 9/9; format, diff, no-edit anchors exit 0; GitNexus LOW, 22 tracked files, zero affected processes.",
+  "allowed_scope": [
+    "Replay all 15 manifest entries and inspect the causal delta from discovery plus complete aggregate identity.",
+    "Verify discovery P2-1 is closed by the exact compiler and CLI Unix projection changes and WSL proof.",
+    "Confirm compiler schema 1.2 and Project Context kind 1.1 projections follow live selected decisions.",
+    "Confirm the CLI setup uses only the existing valid selected-Charter helper and preserves INDETERMINATE conditional Environment Context behavior.",
+    "Confirm substitution/ABA refusal, HCM-2.1 zero-byte preservation, HCM-2.2 negatives, and HCM-2.3 walls remain green.",
+    "Check only remediation-caused P1/P2 across affected contracts/call paths and complete subject identity; compare any P3/P4 with 09."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation.",
+    "No open-ended discovery and no reuse of the discovery reviewer.",
+    "No P2-P7 behavior, schema/profile/definition change, public API, dependency, Cargo, unsafe, fallback, or generic inference.",
+    "No requirement to change helper implementation, fixtures, other assertions/setup, production, or sibling scope."
+  ],
+  "tasks": [
+    "Verify complete post-remediation subject identity and exact causal delta.",
+    "Close or retain discovery P2-1 against live compiler/CLI projections and raw WSL evidence.",
+    "Trace the affected doctor call paths to selected report schema and Project Context kind.",
+    "Validate unchanged production identity and complete preservation proof.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, why wrong, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Discovery P2-1: Unix doctor projections match shipped-root 1.2 decisions",
+    "Compiler report schema 1.2 and Project Context kind 1.1",
+    "CLI released valid Charter setup, INDETERMINATE behavior, and Project Context kind 1.1",
+    "Unix substitution/ABA refusal",
+    "Exact shipped-root 1.2, three selected root instances, and released Charter 1.1 record identity",
+    "HCM-2.1 zero-byte 12/12, complete HCM-2.2, and HCM-2.3 preservation",
+    "No new production symbol, public surface, fallback, or generic inference"
+  ],
+  "stop_conditions": [
+    "Return blocked if exact subject identity or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

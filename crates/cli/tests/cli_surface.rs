@@ -535,27 +535,7 @@ fn write_valid_selected_charter(root: &std::path::Path) {
 fn profile_ready_repo() -> tempfile::TempDir {
     let dir = tempfile::tempdir().expect("tempdir");
     std::fs::create_dir_all(dir.path().join(".git")).expect("git root");
-    write_file(
-        &dir.path().join(".handbook/project/charter.yaml"),
-        br#"{
-  "schema_id": "handbook.artifact.project-authority",
-  "schema_version": "1.0",
-  "record_id": "handbook.project-authority",
-  "policy": {"revision": "1", "authority_statement": "The project authority is explicit."},
-  "governance": {
-    "decision_authority": ["Owner"],
-    "required_approvals": ["Owner"],
-    "exception_policy": "Exceptions require explicit approval.",
-    "review_triggers": ["Authority changes"],
-    "reassessment_triggers": ["Scope changes"]
-  },
-  "engineering_posture": {
-    "dimensions": ["Reliability"],
-    "red_lines": ["No silent authority mutation"]
-  }
-}
-"#,
-    );
+    write_valid_selected_charter(dir.path());
     write_valid_selected_project_context(dir.path());
     write_file(
         &dir.path().join(".handbook/project/environment.yaml"),
@@ -6258,7 +6238,7 @@ fn doctor_reports_ready_when_required_artifacts_present() {
     assert_eq!(value["project_context"]["instance_id"], "project_context");
     assert_eq!(
         value["project_context"]["kind_ref"],
-        "handbook.artifact-kind.project-context@1.0.0"
+        "handbook.artifact-kind.project-context@1.1.0"
     );
     assert_eq!(
         value["project_context"]["canonical_path"],

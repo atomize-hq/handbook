@@ -10,7 +10,7 @@ use handbook_engine::{
 use std::path::Path;
 
 #[test]
-fn shipped_profile_registry_retains_exact_six_kind_refs() {
+fn shipped_profile_registry_retains_the_exact_versioned_kind_closure() {
     let decisions = resolve_shipped_profile_decisions(Path::new(env!("CARGO_MANIFEST_DIR")))
         .expect("shipped decisions");
     let actual = decisions
@@ -23,12 +23,17 @@ fn shipped_profile_registry_retains_exact_six_kind_refs() {
         actual,
         [
             "handbook.artifact-kind.decision-record@1.0.0",
+            "handbook.artifact-kind.decision-record@1.1.0",
             "handbook.artifact-kind.environment-context@1.0.0",
+            "handbook.artifact-kind.environment-context@1.1.0",
             "handbook.artifact-kind.project-authority@1.0.0",
             "handbook.artifact-kind.project-authority@1.1.0",
             "handbook.artifact-kind.project-context@1.0.0",
+            "handbook.artifact-kind.project-context@1.1.0",
             "handbook.artifact-kind.risk-record@1.0.0",
+            "handbook.artifact-kind.risk-record@1.1.0",
             "handbook.artifact-kind.work-specification@1.0.0",
+            "handbook.artifact-kind.work-specification@1.1.0",
         ]
     );
 }
@@ -56,7 +61,7 @@ fn shipped_profile_artifact_rows_match_exact_selected_fields() {
         [
             (
                 "environment_context",
-                "handbook.artifact-kind.environment-context@1.0.0",
+                "handbook.artifact-kind.environment-context@1.1.0",
                 Some("environment_context"),
                 ".handbook/project/environment.yaml",
                 RequirednessMode::Conditional,
@@ -72,7 +77,7 @@ fn shipped_profile_artifact_rows_match_exact_selected_fields() {
             ),
             (
                 "project_context",
-                "handbook.artifact-kind.project-context@1.0.0",
+                "handbook.artifact-kind.project-context@1.1.0",
                 Some("project_context"),
                 ".handbook/project/context.yaml",
                 RequirednessMode::Always,
@@ -171,7 +176,7 @@ fn shipped_profile_decisions_are_complete_ordered_and_evidence_free() {
 
     assert_eq!(
         decisions.profile_ref().as_str(),
-        "handbook.profile.shipped-root@1.1.0"
+        "handbook.profile.shipped-root@1.2.0"
     );
     assert!(!decisions.artifact_decisions().is_empty());
     assert!(decisions

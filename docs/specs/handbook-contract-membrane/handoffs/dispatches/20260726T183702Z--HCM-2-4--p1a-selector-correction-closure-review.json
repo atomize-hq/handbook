@@ -1,0 +1,159 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260726T183702Z--HCM-2-4--p1a-selector-correction-closure-review",
+  "created_at_utc": "2026-07-26T18:37:02Z",
+  "source_handoff_ids": [
+    "20260726T131857Z--HCM-2-4--orchestration--planning-amendment-completed"
+  ],
+  "parent_orchestration_id": "20260726T161851Z--HCM-2-4--implementation-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality",
+    "context-engineering",
+    "documentation-and-adrs",
+    "planning-and-task-breakdown"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P1A-selector-correction",
+  "subject_fingerprint": "sha256:e9988a33e3278ea908a5114bca8c8ffb75e8301358ca7410b246cda473cfba5c",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p1a-selector-correction-closure-1",
+    "trigger_run_ids": [
+      "p1a-selector-correction-discovery"
+    ],
+    "finding_refs": [
+      "p1a-selector-correction-discovery-P2-1",
+      "p1a-selector-correction-discovery-P2-2"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "59c1c11f7ded7f6040639b3a99a67cb557ae38d2adbbfe92c9048b0e860d4b01"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/implementation-packet-path-manifest-v1.0.md",
+        "sha256": "0b57d08465b2863a24496f75cd056a6ccc87992e88b48dca15ba693b542fa072"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p1a-typed-closure-selector-correction.md",
+        "sha256": "27bc4555665b3cc5bc20aa831b395f23cba444848cb951ac90fc4bcbff92fc3f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "180414191756c9e67f118fced01076de0967c8e3dcd452c6b3acd8ab866fee90"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:e9988a33e3278ea908a5114bca8c8ffb75e8301358ca7410b246cda473cfba5c"
+  },
+  "active_resolution": {
+    "level": "coordination",
+    "scope_horizon": "causal_remediation_delta",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4",
+        "Packet reviewability indicators"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Uniform exact-definition identity",
+        "Instance profile contract",
+        "Artifact intake definition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P1A — Catalog publication and admission closure",
+        "Exact implementation surface selectors"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P1A — Catalog publication and admission closure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "The four-entry selector-correction subject changed from sha256:411595c6f4f1b19010f0ea37d73fb72caac5d219fdf6e4a49b7c08c971ddc5a0 to sha256:e9988a33e3278ea908a5114bca8c8ffb75e8301358ca7410b246cda473cfba5c. The causal delta reclassifies hcm_2_3_registration_kernel.rs as immutable proof-only, names exactly four editable production symbols, excludes the two generic/public callers, and records fresh LOW/CRITICAL impacts and stop ceilings. Runtime remediation remains paused.",
+  "allowed_scope": [
+    "Replay the exact changed four-entry manifest and aggregate fingerprint.",
+    "Compare it with discovery fingerprint sha256:411595c6f4f1b19010f0ea37d73fb72caac5d219fdf6e4a49b7c08c971ddc5a0.",
+    "Verify hcm_2_3_registration_kernel.rs is read/proof-only at its frozen hash and cannot be edited.",
+    "Verify all selector surfaces name the exact four production symbols, exclude load_with_builtin_compatibility and resolve_profile_selection, and record the correct fresh impacts and CRITICAL disposition.",
+    "Check only the causal findings, subject identity, and remediation-caused regression."
+  ],
+  "non_goals": [
+    "Do not reopen general selector discovery or review the implementation subject.",
+    "No runtime, definition, vector, test, proof, formatting, staging, commit, push, handoff, ledger, dispatch, or delegation change.",
+    "No P1B-P7, HCM-3.x, public API, dependency, Cargo/package/version, unsafe, command, Resolution, Projection, migration, dual-read, module/process, or sibling-slice expansion."
+  ],
+  "tasks": [
+    "Verify exact post-remediation subject identity and delta.",
+    "Verify p1a-selector-correction-discovery-P2-1 and P2-2 are closed at their cited authority boundaries.",
+    "Verify no remediation-caused P1/P2 and no broader editable symbol/path.",
+    "Return findings first and CLEAN only when both causal findings are closed."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#packet-reviewability-indicators",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#uniform-exact-definition-identity",
+    "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md#exact-implementation-surface-selectors",
+    "Exact four-symbol selector and immutable HCM-2.3 regression",
+    "No public/generic/sibling behavior expansion"
+  ],
+  "stop_conditions": [
+    "Return blocked if the changed manifest, causal findings, or immediate lineage cannot be established.",
+    "Report rather than repair any remaining causal P1/P2.",
+    "Do not delegate, edit, create another dispatch, write a handoff, modify the ledger, stage, commit, or push."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
