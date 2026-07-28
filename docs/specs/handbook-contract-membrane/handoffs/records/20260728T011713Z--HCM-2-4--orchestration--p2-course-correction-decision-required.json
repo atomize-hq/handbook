@@ -1,0 +1,385 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required",
+  "created_at_utc": "2026-07-28T01:17:13Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2-architecture-reassessment",
+  "orchestration_id": "20260728T011713Z--HCM-2-4--p2-architecture-reassessment-orchestration",
+  "source_handoff_ids": [
+    "20260728T003503Z--HCM-2-4--orchestration--p2s-p2a-reviewed-native-adapter-decision-required"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-28T01:17:13Z",
+    "evidence_ref": "Fresh isolated read-only agents reconstructed released authority, causal growth, and burden, then performed discovery and different-fresh closure assessment. No immutable review dispatch was created because this run authorized only the parent assessment handoff and deterministic ledger as durable artifacts; the agents are not claimed as an admitted implementation review gate."
+  },
+  "delegated_runs": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "dd2f808d2a397e7771b349cffc6fe7bfecc3d0ba",
+    "subject_fingerprint": "sha256:b1b3da976b2c951a69e784c40d267beda274d01bd6f7fc3f0320fdb53e565a3e",
+    "proof_refs": [
+      "git:755acc56fad6cc99c016dc58f94d310c84f98c58",
+      "sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2S-schema-semantic-freeze.md",
+      "git:dd2f808d2a397e7771b349cffc6fe7bfecc3d0ba",
+      "sha256:b1b3da976b2c951a69e784c40d267beda274d01bd6f7fc3f0320fdb53e565a3e",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T002229Z--HCM-2-4--p2a-native-feasibility-evidence-review.json"
+  },
+  "active_resolution": {
+    "level": "authority",
+    "scope_horizon": "HCM-2.4 P2 read-only architecture and planning reassessment",
+    "detail_resolution": "released product outcome, planning-introduced native scope, correction options, and downstream gates",
+    "temporal_horizon": "assessment and mechanical true-stop closeout only",
+    "authority_horizon": "no native adapter, runtime packet, or planning amendment is authorized",
+    "memory_horizon": "selected P2S/P2A handoff, released HCM-0.6 and HCM-2.2 authority, HCM-2.4 planning, live code, and current proof",
+    "validation_horizon": "live-source reconstruction, fresh GitNexus impact, independent read-only assessment, handoff validation, and ledger parity"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/charter-intake-definition-1.0.0.yaml"
+    ],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2S-schema-semantic-freeze.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md"
+    ],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md"
+  },
+  "objective": "Assess whether HCM-2.4 P2 became materially overengineered, identify the smallest safe course correction, and stop without implementation or planning amendment.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T003503Z--HCM-2-4--orchestration--p2s-p2a-reviewed-native-adapter-decision-required.json",
+      "sections": [
+        "Decisions",
+        "Blockers",
+        "Escalations",
+        "Resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+      "sections": [
+        "Environment-context ownership and condition-evaluation closure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.2/SPEC.md",
+      "sections": [
+        "Native authenticator scope",
+        "Charter approval and approver-registry verification"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Status and authority",
+        "P2 — Environment Context vertical",
+        "Packet ownership and proof matrix"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "Decision boundary",
+        "Native assertion and producer contract",
+        "Future implementation selectors and human gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md",
+      "sections": [
+        "Observed result matrix",
+        "Feasibility conclusion",
+        "Exact second human decision"
+      ]
+    },
+    {
+      "path": "crates/engine/src/charter_authenticator.rs",
+      "sections": [
+        "NativeAuthenticatorPortV1",
+        "CTAP request encoding",
+        "strict response verification"
+      ]
+    },
+    {
+      "path": "crates/compiler/src/charter_product.rs",
+      "sections": [
+        "production native-authenticator injection"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "1c63d98434792d56623889df5aae97db2f36ae30",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required.json"
+    ]
+  },
+  "work_completed": [
+    "Reconstructed P2's released product outcome as a deterministic condition-gated Environment Context authority cutover, not a native authenticator ceremony.",
+    "Separated HCM-0.6 requirements for independently authoritative admitted evidence and fail-closed condition outcomes from HCM-2.4 choices of evidence schemas, transport, producer, transaction chain, and native assertion.",
+    "Confirmed that HCM-2.2 scopes native CTAP2.1 behavior to Charter approval and approver-registry operations, does not claim hardware provenance, and ships production with an unavailable native-authenticator port.",
+    "Traced the planning growth from a Markdown-to-YAML vertical into eight schemas, native assertion production, challenge/assertion/use transitions, a transaction journal, dual ceilings, and six P2 packets.",
+    "Quantified the narrow P2 artifact inventory at 20 files and 6064 lines, including 3439 inserted P2S lines and a 126434-byte schema/test core; P2S/P2A added no production adapter, Cargo/lockfile delta, or adapter-specific unsafe code.",
+    "Confirmed no production native adapter or direct WebAuthn, FIDO, CTAP transport, USB/HID, or device-enumeration binding exists in live source or Cargo metadata.",
+    "Found a semantic input/preimage contract mismatch between NativeAuthenticatorPortV1's CTAP-CBOR-only input and Windows WebAuthn's requirement for original clientDataJSON; fresh upstream GitNexus impact for changing the port is CRITICAL with 123 impacted symbols, 11 direct callers, 47 processes, and 20 modules.",
+    "Compared native continuation, verifier-only evidence consumption, fail-closed deferral, and narrow reuse of existing Charter operational-reality authority.",
+    "Preserved all P2S/P2A commits, immutable records, proof, and eight unrelated dirty paths without modifying SPEC.md, plan.md, todo.md, runtime, tests, schemas, definitions, Cargo files, or public APIs."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required.json",
+      "status": "completed",
+      "summary": "Parent-owned read-only architecture reassessment and exact human course-correction gate."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "status": "completed",
+      "summary": "Deterministically rebuilt query index for the assessment handoff."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-P2-ASSESS-OUTCOME-001",
+      "summary": "The released P2 outcome is deterministic, fail-closed Environment Context authority selected by condition evidence; it does not require HCM-2.4 to own a native ceremony.",
+      "authority_effect": "Native WebAuthn, CTAP transport, hardware-backed approval, in-process credential ceremony, OS UI ownership, HRESULT mapping, USB/HID, and device enumeration are not released P2 must-haves.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2-ASSESS-NATIVE-002",
+      "summary": "Do not continue the native adapter under the current HCM-2.4 direction.",
+      "authority_effect": "The mechanism is planning-introduced, materially dominates the product outcome, remains unproven, conflicts with current dependency/unsafe/package boundaries, and encounters a CRITICAL-radius semantic preimage mismatch on Windows.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md",
+        "crates/engine/src/charter_authenticator.rs",
+        "crates/compiler/src/charter_product.rs"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2-ASSESS-VERIFY-003",
+      "summary": "Prefer verifier-only P2 only if a specific existing trusted external or already-owned evidence authority can be named.",
+      "authority_effect": "A versioned successor to immutable P2S 1.0 must freeze authority and issuer scope, key and rotation/revocation, repository and condition subject, complete qualifying-surface coverage including false, exact positive/negative semantics, canonicalization, anti-replay/current-head, freshness, contradiction precedence, and closure fingerprint. No new trust system may be invented merely to avoid native work.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2-ASSESS-DEFER-004",
+      "summary": "If no exact existing authority is named, retain P2 fail-closed and amend sequencing rather than pretending P2 is GREEN.",
+      "authority_effect": "Current unresolved/indeterminate behavior remains security-correct; P2 availability, P6, P7, and Phase 2 exit remain blocked. P4 may proceed only under its own later exact selector.",
+      "refs": [
+        "crates/engine/src/profile_decision.rs",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2-ASSESS-SALVAGE-005",
+      "summary": "Preserve P2S/P2A as immutable historical and reusable evidence without treating them as a commitment to native runtime selection.",
+      "authority_effect": "P2S 1.0 remains immutable and unselected if superseded; reusable outcome, freshness, closure, ceiling, and failure lessons may inform a versioned successor. P2A remains evidence against inferring native availability.",
+      "refs": [
+        "git:755acc56fad6cc99c016dc58f94d310c84f98c58",
+        "git:dd2f808d2a397e7771b349cffc6fe7bfecc3d0ba"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2-ASSESS-CHARTER-006",
+      "summary": "Existing HCM-2.2 operational-reality authority is only a narrow positive-evidence option, not a complete P2 substitute.",
+      "authority_effect": "It is usable only through the complete current Charter promotion, result, coverage-evidence, and currentness chain; raw Charter bytes or approval are insufficient, and it cannot prove global absence of qualifying surfaces.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/charter-intake-definition-1.0.0.yaml"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-P2-COURSE-CORRECTION-AUTHORITY-001",
+      "classification": "authority",
+      "summary": "No exact external or already-owned evidence authority has been selected, and this assessment did not authorize a planning amendment.",
+      "resume_condition": "The human authorizes either a planning-only verifier successor naming the complete trust and coverage envelope or a planning-only fail-closed deferral and sequencing amendment.",
+      "owner": "user"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-2.4-P2-COURSE-CORRECTION-001",
+      "trigger": "P2A showed only conditional platform feasibility, while released P2 authority does not require a native ceremony and live analysis exposed disproportionate platform burden plus a CRITICAL-radius semantic input mismatch.",
+      "current_resolution": "Stop the native direction. P2S/P2A remain preserved; no adapter, P2 runtime packet, or planning amendment is authorized.",
+      "target_resolution": "A small review-clean planning amendment selects either an exact verifier-only successor backed by an existing named authority or explicit fail-closed deferral and honest sequencing.",
+      "decision_required": "Choose planning-only Option B if an exact existing authority and full trust/coverage envelope can be named; otherwise choose planning-only Option C.",
+      "options": [
+        "B — Authorize only a planning amendment for a versioned verifier-only P2 successor backed by a named existing external or already-owned authority and the complete frozen trust/coverage contract.",
+        "C — Authorize only a planning amendment that keeps P2 fail-closed and revises sequencing so independently authorized work may proceed without marking P2 GREEN.",
+        "A — Continue native adapter work; not recommended and not authorized by this handoff.",
+        "D — Use current Charter operational-reality evidence only for narrow positive facts; insufficient as the complete P2 answer."
+      ],
+      "recommendation": "Choose B only when the authority already exists and every trust, subject, complete-coverage, negative-semantics, freshness, replay, contradiction, and closure rule can be frozen. Otherwise choose C.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "The user explicitly selects this handoff and authorizes one planning-only option. No implementation is implied."
+    }
+  ],
+  "validation": [
+    {
+      "command": "git branch, HEAD, status, origin ahead/behind, and protected-path SHA-256 inventory",
+      "status": "passed",
+      "evidence_ref": "feat/handbook-contract-membrane at 1c63d98434792d56623889df5aae97db2f36ae30 before closeout; origin 0 behind and 15 ahead; exactly eight unrelated protected modifications preserved."
+    },
+    {
+      "command": "live authority and call-path reconstruction",
+      "status": "passed",
+      "evidence_ref": "Released HCM-0.6 condition-evidence authority, HCM-2.2 Charter-only native scope, HCM-2.4 planning additions, live unavailable-port injection, and strict verifier exports were traced directly."
+    },
+    {
+      "command": "fresh GitNexus upstream impact for NativeAuthenticatorPortV1",
+      "status": "passed",
+      "evidence_ref": "CRITICAL: 123 impacted symbols, 11 direct callers, 47 processes, and 20 modules. This assessment made no symbol edit."
+    },
+    {
+      "command": "repository and Cargo inventory for native adapter work",
+      "status": "passed",
+      "evidence_ref": "P2S/P2A added no production adapter, Cargo/lockfile delta, or adapter-specific unsafe code; no direct WebAuthn/FIDO/HID dependency is selected."
+    },
+    {
+      "command": "fresh isolated read-only discovery assessment",
+      "status": "passed",
+      "evidence_ref": "One Required correction was incorporated: verifier-only authority must freeze the complete trust and qualifying-surface coverage envelope, especially for false; terminology and unsafe-scope wording were also corrected."
+    },
+    {
+      "command": "different-fresh delta-focused closure assessment",
+      "status": "passed",
+      "evidence_ref": "CLEAN after the discovery corrections; advisory assessment only, not an admitted implementation review gate."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required.json",
+      "sections": [
+        "complete parent-owned assessment record"
+      ],
+      "reason": "Record the released-authority reassessment, course-correction recommendation, and exact human planning gate.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministically rebuilt query index"
+      ],
+      "reason": "Index the canonical assessment record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Choose the smallest planning-only P2 course correction without authorizing implementation.",
+    "condition": "Resume only when the user explicitly selects this handoff and authorizes Option B or Option C as planning-only work.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required.json",
+        "sections": [
+          "Decisions",
+          "Blockers",
+          "Escalations",
+          "Resume"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+        "sections": [
+          "Environment-context ownership and condition-evaluation closure"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "sections": [
+          "Decision boundary",
+          "Native assertion and producer contract"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sections": [
+          "P2",
+          "P4",
+          "P6",
+          "P7"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Option B: amend planning only to define a versioned verifier-only successor backed by one exact existing authority and the complete frozen trust/coverage envelope.",
+      "Option C: amend planning only to retain fail-closed P2 and revise sequencing without marking P2 GREEN.",
+      "Under either option, preserve immutable P2S/P2A artifacts and obtain fresh independent review of the planning amendment."
+    ],
+    "prohibited_scope": [
+      "No native WebAuthn, FIDO, CTAP, USB/HID, platform-authenticator, production adapter, live ceremony, temporary probe, Cargo, dependency, unsafe, runtime, schema, definition, test, or public-API implementation.",
+      "Do not begin P2P, P2R, P2I, P2V, P4, P6, P7, Phase 2 exit, or another slice under this handoff.",
+      "Do not invent a trust system, accept unsigned or incomplete evidence, weaken fail-closed behavior, rewrite immutable records, or mark P2 GREEN while deferred.",
+      "Do not modify, stage, commit, reset, stash, or check out AGENTS.md, CLAUDE.md, or the six protected GitNexus skill files."
+    ],
+    "acceptance_criteria": [
+      "The human explicitly chooses Option B or Option C and authorizes planning-only amendment work.",
+      "Option B names an existing authority and freezes the full trust, subject, complete-coverage, semantics, replay, freshness, contradiction, and closure contract in a versioned successor.",
+      "Option C preserves unresolved/indeterminate behavior and records that P6, P7, and Phase 2 exit remain blocked.",
+      "The planning amendment is independently review-clean and stops before implementation."
+    ],
+    "stop_conditions": [
+      "Stop if no exact authority can support Option B; recommend Option C instead of inventing one.",
+      "Stop if planning would weaken fail-closed evidence admission or claim complete absence from incomplete coverage.",
+      "Stop on any implementation request or scope expansion beyond the separately selected planning amendment.",
+      "Stop if protected unrelated modifications cannot remain untouched."
+    ]
+  },
+  "supersedes": [
+    "20260728T003503Z--HCM-2-4--orchestration--p2s-p2a-reviewed-native-adapter-decision-required"
+  ],
+  "chat_summary": "Read-only reassessment: released P2 authority requires fail-closed authoritative condition evidence, not a native ceremony. Do not continue the adapter. Prefer a versioned verifier-only successor only if an exact existing authority and complete trust/coverage contract can be named; otherwise defer P2 fail-closed. P6/P7 remain blocked."
+}
