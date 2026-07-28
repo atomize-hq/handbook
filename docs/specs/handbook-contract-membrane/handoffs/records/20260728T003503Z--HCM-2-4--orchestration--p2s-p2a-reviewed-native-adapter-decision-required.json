@@ -1,0 +1,482 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.3",
+  "handoff_id": "20260728T003503Z--HCM-2-4--orchestration--p2s-p2a-reviewed-native-adapter-decision-required",
+  "created_at_utc": "2026-07-28T00:35:03Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2A",
+  "orchestration_id": "20260727T230000Z--HCM-2-4--p2s-p2a-orchestration",
+  "source_handoff_ids": [
+    "20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": null
+  },
+  "status": "partial",
+  "stop_reason": "human_input",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-28T00:35:03Z",
+    "evidence_ref": "Fresh built-in reviewers /root/hcm_2_4_p2s_review, /root/hcm_2_4_p2s_closure, and /root/hcm_2_4_p2a_review completed three prevalidated immutable review dispatches."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm-2-4-p2a-evidence-discovery-1",
+      "dispatch_id": "20260728T002229Z--HCM-2-4--p2a-native-feasibility-evidence-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T002229Z--HCM-2-4--p2a-native-feasibility-evidence-review.json",
+      "dispatch_fingerprint": "sha256:95ad24142f145f9bc6409ac38a9b8a998212536de28d0bc6116516737317bb59",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_p2a_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:b1b3da976b2c951a69e784c40d267beda274d01bd6f7fc3f0320fdb53e565a3e",
+      "result_subject_fingerprint": "sha256:b1b3da976b2c951a69e784c40d267beda274d01bd6f7fc3f0320fdb53e565a3e",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T002229Z--HCM-2-4--p2a-native-feasibility-evidence-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md",
+        "git:dd2f808d2a397e7771b349cffc6fe7bfecc3d0ba"
+      ]
+    }
+  ],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "dd2f808d2a397e7771b349cffc6fe7bfecc3d0ba",
+    "subject_fingerprint": "sha256:b1b3da976b2c951a69e784c40d267beda274d01bd6f7fc3f0320fdb53e565a3e",
+    "proof_refs": [
+      "git:755acc56fad6cc99c016dc58f94d310c84f98c58",
+      "sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T000558Z--HCM-2-4--p2s-schema-semantic-freeze-closure-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2S-schema-semantic-freeze.md",
+      "git:dd2f808d2a397e7771b349cffc6fe7bfecc3d0ba",
+      "sha256:b1b3da976b2c951a69e784c40d267beda274d01bd6f7fc3f0320fdb53e565a3e",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T002229Z--HCM-2-4--p2a-native-feasibility-evidence-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T002229Z--HCM-2-4--p2a-native-feasibility-evidence-review.json"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "HCM-2.4 P2S implementation and P2A non-production feasibility",
+    "detail_resolution": "review-clean frozen schemas and evaluator plus observed local native-platform behavior",
+    "temporal_horizon": "reviewed packet commits and true-stop closeout",
+    "authority_horizon": "P2S and P2A completed; production adapter and P2P require new human authority",
+    "memory_horizon": "selected planning handoff, immutable dispatches, proof records, packet commits, and parent closeout",
+    "validation_horizon": "separate packet reviews, deterministic handoff, and ledger parity"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [
+      "crates/engine/definitions/project-condition-evaluators/handbook.condition-evaluator.managed-operational-surface/1.0.0.yaml",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2S-schema-semantic-freeze.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md"
+    ],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Implement and independently review the frozen P2S schema/evaluator contract, run and independently review only the bounded P2A non-production native-platform feasibility probe, then stop before any production adapter or P2P work.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed.json",
+      "sections": [
+        "Objective",
+        "Authority refs",
+        "Resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "Decision boundary",
+        "Closed schema set and common scalar grammar",
+        "Evaluator definition",
+        "Exact proof selectors",
+        "Future implementation selectors and human gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Status and authority",
+        "P2 — Environment Context vertical",
+        "Packet ownership and proof matrix"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "Status",
+        "P2 — Environment Context vertical"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "Status",
+        "P2 — Environment Context"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Two-commit true-stop closeout",
+        "Deterministic ledger rebuild",
+        "Required validation"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "dd2f808d2a397e7771b349cffc6fe7bfecc3d0ba",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260728T003503Z--HCM-2-4--orchestration--p2s-p2a-reviewed-native-adapter-decision-required.json"
+    ]
+  },
+  "work_completed": [
+    "Validated the selected completed P2 planning handoff, reviewed planning commit and fingerprint, baseline branch and head, ahead/behind state, and the exact eight unrelated protected modifications.",
+    "Implemented exactly eight new closed project-condition evidence schemas, one frozen managed-operational-surface evaluator definition, one dedicated integration test, and one P2S proof record without changing production Rust, Cargo files, released schemas/definitions, runtime behavior, public APIs, or existing fingerprints.",
+    "Accepted three P2S discovery-review findings, applied one consolidated packet-local remediation, passed 15/15 schema/evaluator tests, and obtained a different-fresh CLEAN closure review over sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04.",
+    "Committed the exact reviewed P2S subject as 755acc56fad6cc99c016dc58f94d310c84f98c58.",
+    "Ran the smallest permitted read-only and temporary non-production P2A probe, retained only its evidence/status artifacts, discarded the temporary test, and obtained a fresh CLEAN review over sha256:b1b3da976b2c951a69e784c40d267beda274d01bd6f7fc3f0320fdb53e565a3e.",
+    "Committed the exact reviewed P2A evidence subject as dd2f808d2a397e7771b349cffc6fe7bfecc3d0ba and stopped before a production adapter, P2P, P2R, P2I, P2V, P4, P6, Phase 2 exit, or another slice."
+  ],
+  "deliverables": [
+    {
+      "path": "git:755acc56fad6cc99c016dc58f94d310c84f98c58",
+      "status": "completed",
+      "summary": "Review-clean P2S packet containing only the eight frozen schemas, evaluator definition, dedicated integration test, proof record, and immutable review dispatches."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2S-schema-semantic-freeze.md",
+      "status": "completed",
+      "summary": "Replayable P2S schema/definition semantic-freeze proof with one consolidated remediation and CLEAN closure subject sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04."
+    },
+    {
+      "path": "git:dd2f808d2a397e7771b349cffc6fe7bfecc3d0ba",
+      "status": "completed",
+      "summary": "Review-clean durable P2A feasibility evidence and directly coupled HCM-2.4 status updates."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md",
+      "status": "completed",
+      "summary": "Exact local observed-result matrix, supporting 9/9 wall, discarded temporary 1/1 zero-write probe, feasibility conclusion, and second human decision."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T003503Z--HCM-2-4--orchestration--p2s-p2a-reviewed-native-adapter-decision-required.json",
+      "status": "completed",
+      "summary": "Parent-owned true-stop continuation record sourced from the completed P2 planning handoff."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-P2S-REVIEWED-001",
+      "summary": "Accept the eight schemas and managed-operational-surface evaluator definition as review-clean schema/definition proof only.",
+      "authority_effect": "P2S is complete at commit 755acc56fad6cc99c016dc58f94d310c84f98c58 with reviewed subject fingerprint sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04; no runtime consumer or production registration is authorized.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T000558Z--HCM-2-4--p2s-schema-semantic-freeze-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2S-schema-semantic-freeze.md",
+        "git:755acc56fad6cc99c016dc58f94d310c84f98c58"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2A-OBSERVED-001",
+      "summary": "Record the P2A result as conditionally feasible, presently blocked.",
+      "authority_effect": "Windows exposes a plausible native WebAuthn API and assertion-material shape, but no approved safe binding/live transport, device ceremony, native cancellation/HRESULT mapping, native credential selection, or UP/UV observation was demonstrated; no production adapter is proven or authorized.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T002229Z--HCM-2-4--p2a-native-feasibility-evidence-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md",
+        "git:dd2f808d2a397e7771b349cffc6fe7bfecc3d0ba"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2-TRUE-STOP-001",
+      "summary": "Stop for the exact second human adapter/dependency decision.",
+      "authority_effect": "No production adapter or P2P may begin. Even authorization of a separately bounded adapter packet does not authorize P2P; P2P requires a later explicit selector after the adapter is independently review-clean.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md#exact-second-human-decision"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-P2-NATIVE-ADAPTER-DECISION-001",
+      "classification": "authority",
+      "summary": "The production native-authenticator boundary is unselected and unauthorized; safe binding/transport, live device ceremony, native cancellation/HRESULT mapping, credential-selection behavior, and UP/UV behavior remain unproven.",
+      "resume_condition": "The human makes the exact second decision recorded in P2A evidence, choosing either a fully named separately bounded adapter approach or an already completed independently reviewed producer/native-adapter dependency.",
+      "owner": "user"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-2.4-P2-ADAPTER-DECISION-001",
+      "trigger": "P2S and P2A are independently review-clean, but P2A found only platform/API-shape feasibility and the frozen plan reserves production-native authority to a second human decision.",
+      "current_resolution": "P2A is conditionally feasible, presently blocked. Windows WebAuthn appears architecturally plausible, but the current selector has no approved safe binding, live transport, or observed native behavior.",
+      "target_resolution": "A fingerprinted human decision identifying the exact approved production-native dependency or a separately bounded production-adapter packet with all frozen boundary choices named.",
+      "decision_required": "Either (1) authorize a separately bounded production-native-adapter packet and name the exact platform approach, safe binding/dependency with version/features, Cargo/lockfile permissions, UI/window owner, cancellation contract, HRESULT/native-status mapping, credential-selection rule, supported-device matrix, and unsafe-code policy; or (2) name an already completed, independently reviewed producer/native-adapter dependency satisfying those contracts.",
+      "options": [
+        "Authorize a separately bounded adapter packet using an exact Windows WebAuthn semantic-translation or direct CTAP2.1 approach and explicitly name every required dependency, UI, cancellation, error, selection, device, and unsafe-policy boundary.",
+        "Name an already completed and independently reviewed producer/native-adapter dependency that satisfies the same contracts."
+      ],
+      "recommendation": "Do not infer availability from API presence. Select the smallest safe Windows WebAuthn semantic-translation packet only if its exact binding, version/features, UI/window owner, cancellation/error contracts, device matrix, Cargo/lock changes, and unsafe policy can be explicitly authorized and independently reviewed.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "The user supplies one of the two exact decisions. Option 1 authorizes only the bounded adapter packet; P2P still waits for a new explicit selector after review-clean adapter completion."
+    }
+  ],
+  "validation": [
+    {
+      "command": "cargo test -p handbook-engine --test hcm_2_4_project_condition_evidence_schemas -- --nocapture",
+      "status": "passed",
+      "evidence_ref": "15 passed; 0 failed; complete frozen P2S schema/evaluator contract and semantic vectors."
+    },
+    {
+      "command": "cargo test -p handbook-engine --test definitions_registry -- --nocapture",
+      "status": "passed",
+      "evidence_ref": "6 passed; 0 failed."
+    },
+    {
+      "command": "cargo test -p handbook-engine --test schema_meta -- --nocapture",
+      "status": "passed",
+      "evidence_ref": "8 passed; 0 failed."
+    },
+    {
+      "command": "Initial immutable P2S discovery dispatch verification before delegation",
+      "status": "passed",
+      "evidence_ref": "Dispatch subject sha256:fed0f1b588828d9bc21b4fa52baeb686ca125e25dd11365f02d2318f1e2d48a1 verified before the bounded remediation changed the subject."
+    },
+    {
+      "command": "Immutable P2S closure dispatch replay and different-fresh independent review",
+      "status": "passed",
+      "evidence_ref": "CLEAN; subject sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04; no advisories."
+    },
+    {
+      "command": "cargo test -p handbook-engine --test hcm_2_2_authenticator_security -- --nocapture",
+      "status": "passed",
+      "evidence_ref": "9 passed; 0 failed; supporting evidence only, not production-native proof."
+    },
+    {
+      "command": "cargo test -p handbook-compiler --test hcm_2_4_p2a_temporary_native_probe -- --nocapture",
+      "status": "passed",
+      "evidence_ref": "1 passed; 0 failed; proved unavailable-port zero-write behavior, then the temporary test was discarded."
+    },
+    {
+      "command": "Immutable P2A evidence dispatch replay and fresh independent review",
+      "status": "passed",
+      "evidence_ref": "CLEAN; subject sha256:b1b3da976b2c951a69e784c40d267beda274d01bd6f7fc3f0320fdb53e565a3e; no P1-P4 findings."
+    },
+    {
+      "command": "GitNexus detect_changes for staged packet subjects",
+      "status": "passed",
+      "evidence_ref": "P2S introduced no indexed production-symbol/process change; P2A changed two documentation symbols, zero processes, LOW risk."
+    },
+    {
+      "command": "validate_handoffs.py plus --self-test-v1-admission and --self-test-orchestration-contract after deterministic ledger rebuild",
+      "status": "passed",
+      "evidence_ref": "All handoff/internal-dispatch schemas, history admission, orchestration semantics, negative self-tests, and exact ledger parity passed."
+    },
+    {
+      "command": "git diff --cached --check plus exact two-path mechanical closeout scope",
+      "status": "passed",
+      "evidence_ref": "Only the parent handoff and deterministic ledger entry are staged for the closeout commit; all eight protected paths remain unstaged and byte-identical."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence*/1.0.0.schema.json",
+      "sections": [
+        "Eight exact frozen schemas"
+      ],
+      "reason": "P2S frozen schema contract.",
+      "status": "completed"
+    },
+    {
+      "path": "crates/engine/definitions/project-condition-evaluators/handbook.condition-evaluator.managed-operational-surface/1.0.0.yaml",
+      "sections": [
+        "Complete definition"
+      ],
+      "reason": "P2S frozen evaluator definition.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2S-schema-semantic-freeze.md",
+      "sections": [
+        "Complete document"
+      ],
+      "reason": "Review-clean P2S proof record.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md",
+      "sections": [
+        "Complete document"
+      ],
+      "reason": "Review-clean P2A observed evidence and authority gate.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Status and authority",
+        "P2 — Environment Context vertical"
+      ],
+      "reason": "Directly coupled P2S/P2A status.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "Status",
+        "P2 — Environment Context vertical"
+      ],
+      "reason": "Directly coupled packet status and next authority gate.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "Status",
+        "P2 — Environment Context"
+      ],
+      "reason": "Mark P2S/P2A complete and preserve the second-decision blocker.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T003503Z--HCM-2-4--orchestration--p2s-p2a-reviewed-native-adapter-decision-required.json",
+      "sections": [
+        "Complete record"
+      ],
+      "reason": "Parent-owned true-stop closeout and exact continuation authority.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "Deterministic entry"
+      ],
+      "reason": "Rebuilt query index for canonical handoff parity.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Obtain the exact second human production-native-adapter/dependency decision without beginning implementation or P2P.",
+    "condition": "Resume when the user either authorizes a fully specified separately bounded adapter packet or names an already completed independently reviewed producer/native-adapter dependency.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T003503Z--HCM-2-4--orchestration--p2s-p2a-reviewed-native-adapter-decision-required.json",
+        "sections": [
+          "Decisions",
+          "Blockers",
+          "Escalations",
+          "Resume"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md",
+        "sections": [
+          "Observed result matrix",
+          "Feasibility conclusion",
+          "Exact second human decision",
+          "True stop"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "sections": [
+          "Future implementation selectors and human gate"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sections": [
+          "Status and authority",
+          "P2 — Environment Context vertical"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sections": [
+          "Status",
+          "P2 — Environment Context vertical"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sections": [
+          "Status",
+          "P2 — Environment Context"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Record one explicit fingerprinted human decision choosing either a fully specified separately bounded production adapter packet or an already completed independently reviewed producer/native-adapter dependency.",
+      "If option 1 is chosen, name the exact platform approach, safe binding/dependency and version/features, Cargo/lockfile permissions, UI/window owner, cancellation contract, HRESULT/native-status mapping, credential-selection rule, supported-device matrix, and unsafe-code policy.",
+      "After an option-1 decision, create only a new explicitly authorized bounded adapter selector; after its independent review-clean completion, stop again for a separate P2P selector."
+    ],
+    "prohibited_scope": [
+      "Do not infer a production adapter from Windows WebAuthn DLL/header presence, API shape, the supporting 9/9 test, or the discarded 1/1 zero-write probe.",
+      "Do not add dependencies, edit Cargo/lockfiles, introduce unsafe code/policy, or implement a production module/process without the exact second human decision.",
+      "Do not begin P2P, P2R, P2I, P2V, P4, P6, Phase 2 exit, or another slice.",
+      "Do not modify, stage, commit, reset, stash, or check out AGENTS.md, CLAUDE.md, or the six protected GitNexus skill files."
+    ],
+    "acceptance_criteria": [
+      "The human explicitly chooses option 1 or option 2 and supplies every required exact boundary named by that option.",
+      "The decision is fingerprinted and recorded before any production change.",
+      "Option 1 authorizes only the separately bounded adapter packet; P2P remains blocked pending review-clean adapter completion and another explicit selector."
+    ],
+    "stop_conditions": [
+      "Stop if the human decision is absent, incomplete, or does not name every required production boundary.",
+      "Stop if implementation would require authority outside the chosen adapter selector or would alter protected unrelated paths.",
+      "Stop after a review-clean adapter packet; do not infer or begin P2P."
+    ]
+  },
+  "supersedes": [
+    "20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed"
+  ],
+  "chat_summary": "P2S is review-clean at 755acc56 with subject sha256:7b1d0d...c5f04. P2A is review-clean at dd2f808d and returned conditionally feasible, presently blocked: Windows WebAuthn is plausible, but no approved safe binding/live native behavior exists. Stop for the exact adapter/dependency decision; no production adapter or P2P is authorized."
+}
