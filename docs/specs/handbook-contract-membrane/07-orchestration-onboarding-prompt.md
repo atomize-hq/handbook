@@ -253,6 +253,15 @@ declares:
 - role;
 - review_cycle with kind, stable cycle_id, causal trigger_run_ids, and
   finding_refs for review work, or review_cycle=null for non-review work;
+- one parent-level causal_outcome_registry frozen before review, with sorted
+  authorized integrated outcomes, packet IDs, authority refs, and fingerprint;
+- causal_control with the parent/outcome-derived causal_budget_id, integrated
+  outcome, matching registry fingerprint, typed monotonic review stage,
+  explicit transition, typed event reason, and immediate causal predecessor;
+- pre_review_convergence for review work, or null for non-review work;
+- ancillary_allowance=none unless exact test/proof-only paths, kinds,
+  Git baseline, mechanically observed path/changed-line counts, and risk
+  ceiling are explicitly authorized;
 - fresh_context_required=true;
 - closeout_owner=parent_orchestrator;
 - ordered required_skills;
@@ -301,6 +310,13 @@ After every meaningful packet:
 5. confirm no sibling-scope widening;
 6. preserve raw command/result refs for the final proof wall.
 
+Before the first discovery review in each planning, implementation, proof, or
+final-closeout stage, converge the complete applicable packet wall, recursively
+inventory fixture copies and all consumers, replay the complete manifest, and
+pass formatting plus whitespace checks. Record those five raw-result refs in
+the dispatch. Do not begin discovery from a partial wall and relabel later
+test/proof/manifest failures as new discovery subjects.
+
 Use debugging-and-error-recovery for failures. Establish root cause before
 patching symptoms.
 
@@ -329,11 +345,14 @@ uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/ha
 ```
 
 This dependency-complete command is a hard pre-review gate. It admits only
-internal-dispatch v1.3, schema-validates the typed cycle, replays every live
-manifest hash, and rejects trailing spaces or tabs in every UTF-8 text manifest
-entry. The frozen v1.1/v1.2 corpus remains historical evidence and cannot
-supply new execution or closeout lineage; the exact frozen 35-file
-handoff-record v1.2 corpus cannot be extended. Only after the gate passes,
+internal-dispatch v1.4, schema-validates the causal budget, stage, event,
+frozen outcome registry, convergence, ancillary allowance and baseline diff,
+and typed cycle, replays every live manifest hash, and rejects trailing spaces
+or tabs in every UTF-8 text manifest entry.
+The frozen v1.1/v1.2/v1.3 corpus remains historical evidence and cannot supply
+new execution or closeout lineage; the exact frozen 35-file handoff-record
+v1.2, 66-file v1.3 dispatch, and 12-file v1.3 record corpora cannot be changed
+or extended. Only after the gate passes,
 spawn one fresh read-only built-in
 default subagent with isolated context. For a high-risk packet, the parent may
 instead dispatch a bounded same-fingerprint review burst with disjoint lenses;
@@ -386,8 +405,10 @@ The parent validates every finding against live truth and maps it through `09`:
 - BLOCKED: stop only when the block meets a genuine top-level stop condition.
 
 The default automatic budget is one complete-subject discovery review or
-same-fingerprint burst, one consolidated remediation pass, and one
-different-fresh delta-focused closure review. Never reuse the same reviewer
+same-fingerprint burst per typed stage, one consolidated remediation pass, and
+one different-fresh delta-focused closure review. The budget ID is derived from
+the parent orchestration and integrated outcome, so packet, selector, cycle, or
+fingerprint renaming cannot reset it. Never reuse the same reviewer
 after material remediation and never treat a subagent's own self-review as
 independent. A closure review does not restart open-ended discovery: it verifies
 the known remediation, affected contracts/call paths/proof, subject identity,
@@ -405,14 +426,15 @@ ordering, same-cycle findings-to-CLEAN remediation laundering, and a third
 supplemental cycle. Every remediation re-review belongs to the immediately
 following cycle and binds a changed post-remediation subject fingerprint.
 
-When a closure review demonstrates a P1/P2 directly caused or unmasked by the
-preceding remediation, the parent may use up to two supplemental causal
-remediation/closure cycles without returning to the user, provided scope,
-authority, and risk ceiling remain unchanged. Consolidate every causally
-related finding in each cycle and keep its re-review delta-focused. Stop with a
-bounded partial/blocked result when the blocker is unrelated, requires material
-scope/risk expansion, or remains after the two supplemental cycles. Do not
-silently waive it or restart open-ended discovery.
+When remediation or its converged packet wall reveals a related test failure,
+proof gap, or manifest/scope omission, record that typed causal reason and use
+the immediately next closure/supplemental allowance. It cannot become a new
+discovery subject. A closure review may use up to two supplemental causal
+remediation/closure cycles without returning to the user when the P1/P2 was
+directly caused or unmasked by the preceding remediation and scope, authority,
+and risk ceiling remain unchanged. Stop with a bounded partial/blocked result
+when the blocker is unrelated, requires material expansion, or remains after
+the two supplementals.
 
 Deterministic mechanical closeout is not a review cycle. It cannot consume,
 create, or reset a discovery, closure, or supplemental allowance.
@@ -477,8 +499,13 @@ The handoff records:
 
 - orchestration_id and source_handoff_ids;
 - stop_reason;
-- proof-relevant delegated_runs with dispatch ID, role, built-in agent identity,
-  type, fresh-context flag, required skills, final status, verdict, and refs;
+- every dispatch for the parent through closeout, mechanically reconciled in
+  dispatch_population and delegated_runs, including completed, failed, blocked,
+  abandoned, or deliberately non-executed work with dispatch ID, role, built-in
+  agent identity when any, required skills, status, verdict, and refs;
+- canonical UTC-second `Z` timestamps and parsed-instant population ordering;
+- exact ancillary baseline/path/kind/count observations recomputed against the
+  primary commit;
 - selected scope, repo state, work, decisions, findings, proof, and next resume
   boundary;
 - unresolved P1/P2 blockers and P3/P4 inventory IDs, or an explicit statement
@@ -488,9 +515,9 @@ The handoff records:
 
 Run:
 
-python3 docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py
-python3 docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission
-python3 docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract
+uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py
+uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission
+uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract
 
 After validation, commit only the mechanical handoff/ledger closeout artifacts
 and exact `09` P3/P4 inventory registrations in a second commit. The handoff

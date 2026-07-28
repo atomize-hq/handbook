@@ -3347,21 +3347,33 @@ These contracts govern development of Handbook through this control pack. They d
 
 The only normative current machine example is
 `handoffs/internal-dispatch-template.json`. It is validated against
-`handoffs/internal-dispatch.v1.3.schema.json` by `validate_handoffs.py`; do not
+`handoffs/internal-dispatch.v1.4.schema.json` by `validate_handoffs.py`; do not
 maintain a second partial YAML shape that can drift from the schema. Every
 current internal dispatch includes the complete identity and timing fields,
 parent and source lineage, execution contract, ordered skill chain, explicit
 phase/slice/packet authority, replayable subject manifest, active Resolution,
 authority and repo-truth statements, bounded scope/tasks/gates/stops, and the
-complete structured return contract. V1.3 also declares the closed
+complete structured return contract. V1.4 also declares the closed
 `subject_hygiene.whitespace_policy`; review dispatches carry a typed
 `review_cycle`, while every non-review dispatch carries `review_cycle: null`.
+Its parent-level causal outcome registry is frozen before review, binds exact
+integrated outcomes to authorized packet IDs and authority refs, and is
+fingerprinted into every current dispatch. Its `causal_control` derives one
+orchestration-wide budget from the immutable parent orchestration and a
+registry-authorized integrated outcome, types the monotonic planning,
+implementation, proof, or final-closeout stage and causal event, and names the
+immediate predecessor. Its pre-review convergence gate records the complete
+packet wall, recursive fixture/consumer inventory, manifest replay, formatting,
+and whitespace evidence before review. Its ancillary allowance is either zero
+or exact test/proof-only paths, kinds, a Git baseline, mechanically observed
+line/path ceilings, and risk ceiling.
 The exact 339-file v1.1/v1.2 predecessor dispatch corpus is admitted only by
 its frozen aggregate fingerprint for existing immutable closeouts. New
-execution verification and new v1.3 closeout lineage reject every predecessor
-dispatch version. The exact 35-file handoff-record v1.2 corpus is likewise
-frozen by filename and aggregate byte fingerprint; no new v1.2 closeout is
-admitted.
+execution verification and new v1.4 closeout lineage reject every predecessor
+dispatch version. Frozen v1.3 records/dispatches remain valid immutable
+evidence through exact 66-dispatch and 12-record aggregate fingerprints. The
+exact 35-file handoff-record v1.2 corpus is likewise frozen by
+filename and aggregate byte fingerprint; no new v1.2 closeout is admitted.
 
 `execution_target` is one of:
 
@@ -3374,15 +3386,21 @@ Rules:
 1. `internal_subagent` uses the built-in fresh `default` agent capability with isolated context; shell-launched Codex processes, background jobs, temporary-file reviewer transport, and filesystem polling do not satisfy it.
 2. Every dispatch declares an ordered `required_skills` chain beginning with `using-agent-skills`; the resolved skill workflows are mandatory, not advisory labels.
 3. Review agents are read-only and receive authority, diff/evidence, gates, and non-goals without implementation reasoning or prior reviewer conclusions.
-4. Before a reviewer is spawned, the parent runs `uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <repo-relative-dispatch-path>`; this dependency-complete command schema-validates the v1.3 envelope, replays every live manifest hash, and rejects trailing spaces or tabs in every UTF-8 text subject.
+4. Before a reviewer is spawned, the parent runs `uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <repo-relative-dispatch-path>`; this dependency-complete command schema-validates the v1.4 envelope and causal/pre-review/ancillary controls, replays every live manifest hash, and rejects trailing spaces or tabs in every UTF-8 text subject.
 5. Internal agents return structured results to the parent and never append the global handoff ledger.
 6. The parent validates findings against live truth, remediates valid P1/P2 directly or through a fresh fix agent, reruns affected verification, and sends the resulting state to a different fresh reviewer; valid unfixed P3/P4 are inventoried rather than converted into blockers.
 7. The parent owns integration, control-pack truth, final proof, commit, and top-level closeout.
 
-An implementation dispatch may contain an operator-approved bounded ancillary
-surface allowance inside its existing `allowed_scope`, `tasks`, and stop
-conditions. The allowance states exact paths/modules, permitted private or
-test-only surface kinds, maximum additional surface count, and risk ceiling.
+An implementation dispatch may contain an operator-approved
+`ancillary_allowance`. The allowance states exact paths, one of the closed
+fixture/copied-authority/golden/assertion kinds, maximum path and changed-line
+counts, an immutable Git baseline, and a `test_proof_only` risk ceiling. Live
+dispatch verification recomputes each path's addition-plus-deletion count.
+The parent handoff repeats the final baseline/path/kind/count observations, and
+closeout recomputes them against the recorded primary commit. The applicable
+allowance population freezes at the final clean-review dispatch; a later
+mechanical or non-review dispatch cannot introduce or enlarge a baseline,
+path, per-path count, path-count ceiling, or aggregate ceiling.
 Every admitted ancillary surface still receives fresh impact analysis and is
 recorded in the result. The allowance never admits a public API, dependency,
 Cargo/package/version change, unsafe-policy expansion, new authority/schema,
@@ -3417,22 +3435,31 @@ New top-level handoffs record each proof-relevant built-in delegation:
 }
 ```
 
-Handoff schema v1.3 retains the v1.2 parent-orchestration envelope and requires
+Handoff schema v1.4 retains the v1.3 parent-orchestration envelope and requires
 each recorded review finding to carry `priority`, `status`, and
 `source_run_id`. `stop_reason` is one of `completed`, `human_input`,
 `external_blocker`, `authority_boundary`, `context_boundary`, or
 `capability_unavailable`.
 
-A v1.3 handoff with `status: completed` must use `stop_reason: completed`,
+A v1.4 handoff with `status: completed` must use `stop_reason: completed`,
 contain a completed clean fresh review run bound to
 `reviewed_state.subject_fingerprint` and its replayable manifest, and require
 no top-level resume. Human, external, authority, context, and capability stop
-reasons map to explicit permitted status/resume targets; v1.3 cannot emit
+reasons map to explicit permitted status/resume targets; v1.4 cannot emit
 historical `review_required`. A `capability_unavailable` stop is `blocked`.
-Dispatch/result parent, slice, packet, role, skills, and subject fingerprints
-must match. Earlier records and schemas remain immutable historical evidence.
+Dispatch/result parent, slice, role, skills, and subject fingerprints must
+match. Packet IDs may differ only where the complete parent population retains
+one shared integrated outcome/budget or declares a legitimate separate budget.
+The handoff's `dispatch_population` must enumerate every v1.4 dispatch for the
+parent through the handoff time, including failed, blocked, abandoned, and
+deliberately non-executed work, and must match the deterministic aggregate.
+All control timestamps use canonical UTC seconds with `Z`; parsed UTC instants,
+not lexical RFC 3339 strings, govern ordering. Its ancillary observations must
+also reconcile exactly with bounded dispatch scope frozen at the final clean
+review and with the primary commit.
+Earlier records and schemas remain immutable historical evidence.
 
-The subject manifest sorts canonical repository-relative paths and encodes each entry as `path + NUL + lowercase SHA-256 + newline`; the aggregate is SHA-256 over the concatenated encoded entries. A canonical manifest path uses forward slashes, has no drive, UNC, absolute, backslash, embedded-NUL, empty, dot, dot-dot, or trailing-separator form, and resolves beneath the repository root. Dispatch validation always recomputes the aggregate from the stored entries. At execution, the parent and reviewer verify every entry against the live subject. A completed v1.3 closeout verifies the final clean manifest against `reviewed_state.baseline_head`, the primary reviewed commit, while ledger parity is validated separately against the post-closeout record set. This preserves exact review binding even when the mechanical second commit adds the parent record and rebuilds `ledger.jsonl`. Earlier review manifests remain immutable identities of superseded pre-remediation subjects and are not incorrectly compared with the later repaired tree.
+The subject manifest sorts canonical repository-relative paths and encodes each entry as `path + NUL + lowercase SHA-256 + newline`; the aggregate is SHA-256 over the concatenated encoded entries. A canonical manifest path uses forward slashes, has no drive, UNC, absolute, backslash, embedded-NUL, empty, dot, dot-dot, or trailing-separator form, and resolves beneath the repository root. Dispatch validation always recomputes the aggregate from the stored entries. At execution, the parent and reviewer verify every entry against the live subject. A completed v1.4 closeout verifies the final clean manifest against `reviewed_state.baseline_head`, the primary reviewed commit, while ledger parity is validated separately against the post-closeout record set. This preserves exact review binding even when the mechanical second commit adds the parent record and rebuilds `ledger.jsonl`. Earlier review manifests remain immutable identities of superseded pre-remediation subjects and are not incorrectly compared with the later repaired tree.
 
 `delegation_capability.status: unavailable` and `stop_reason: capability_unavailable` are bidirectionally coupled. Unavailable mandatory delegation cannot be hidden under a human, external, authority, or context stop reason.
 
@@ -3449,17 +3476,26 @@ reopen general discovery. An unrelated blocker, material expansion, or
 exhausted allowance stops non-completed unless explicit authority extends the
 budget. The last review in a completed record must be clean. Failed or
 wrong-role work cannot satisfy remediation lineage.
-Internal-dispatch v1.3 makes that budget machine-auditable: `discovery` has no
+Internal-dispatch v1.4 makes that budget machine-auditable across the complete
+parent population, not only the runs a closeout happens to declare:
+`discovery` has no
 trigger; `closure` names exactly the preceding discovery findings runs and
 their P1/P2 IDs; each `supplemental_causal` cycle names exactly the immediately
 preceding findings runs and P1/P2 IDs; and no more than two supplementals are
-admitted. A CLEAN cycle cannot trigger another cycle. Mechanical closeout is
+admitted per stage. One causal budget admits one discovery lineage per stage,
+and stage entry/continuation is explicit and monotonic. Renaming a packet,
+selector, cycle, subject fingerprint, or undeclared integrated outcome does not
+change the derived budget; the frozen parent registry rejects undeclared
+outcome/packet pairs.
+Remediation-unmasked test failures, proof gaps, and manifest/scope omissions
+after remediation consume the next causal cycle rather than becoming a new
+discovery. A CLEAN cycle cannot trigger another cycle. Mechanical closeout is
 not a review cycle and cannot consume or reset this budget. Every typed
 remediation must cross from its findings cycle into the immediately following
 review cycle, and that cycle must bind a changed subject fingerprint; a later
 CLEAN member of the same burst or an unchanged adjacent cycle cannot launder a
 finding.
-Every v1.3 finding ID must also resolve through its `source_run_id` to that
+Every v1.4 finding ID must also resolve through its `source_run_id` to that
 review run's `finding_refs`. Priority/severity pairs are exact. A clean review
 cannot carry P1/P2; a `findings` review must carry at least one P1/P2.
 Completed P1/P2 entries are remediated or resolved and have typed remediation

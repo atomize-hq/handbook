@@ -43,19 +43,21 @@ Unrelated P1/P2, material scope/risk expansion, or exhaustion of the two-cycle
 allowance returns a bounded partial/blocked result for explicit adjudication.
 No budget limit waives a valid P1/P2.
 
-Current dispatches make that budget typed and replayable. A `discovery` cycle
+Current v1.4 dispatches freeze the authorized outcome/packet registry before
+review and make that budget typed and replayable across the parent
+orchestration and registered integrated outcome. An undeclared outcome cannot
+create another budget. A `discovery` cycle
 has no causal trigger; `closure` and `supplemental_causal` cycles name exactly
 the immediately preceding findings runs and their P1/P2 IDs. The validator
 rejects a cycle after CLEAN, non-contiguous same-cycle bursts, inexact lineage,
 invalid ordering, mixed typed/untyped review runs, same-cycle remediation
 laundering, and a third supplemental. A remediation re-review must occur in
 the immediately following cycle with a changed subject fingerprint.
-Only v1.3 may supply new execution or closeout lineage; the exact frozen
-v1.1/v1.2 dispatch corpus and 35-file handoff-record v1.2 corpus remain
-validation-only predecessor evidence.
+Only v1.4 may supply new execution or closeout lineage; frozen v1.1/v1.2/v1.3
+dispatches and records remain validation-only predecessor evidence.
 Mechanical closeout is outside the review-cycle budget. Before any reviewer is
-spawned, its dispatch must pass live manifest replay, including the
-manifest-wide no-trailing-whitespace policy for UTF-8 text.
+spawned, its dispatch must pass the complete packet/fixture-consumer/manifest/
+formatting/whitespace convergence gate and live manifest replay.
 
 Rejected alternatives are eliminating independent review, treating failing
 selected proof as backlog, allowing self-approval, or automatically waiving a
@@ -65,7 +67,7 @@ finding because similar debt already exists.
 
 Reviewer labels map to inventory priorities exactly:
 
-| Priority | Reviewer label | V1.3 finding severity | Closeout effect | Required disposition |
+| Priority | Reviewer label | V1.4 finding severity | Closeout effect | Required disposition |
 |---|---|---|---|---|
 | `P1` | Critical | `critical` | blocking | Repair and obtain different-fresh re-review, or stop at a genuine authority/external boundary. A P1 cannot be deferred into this inventory as the reason to complete the current subject. |
 | `P2` | Required | `major` | blocking | Repair and obtain different-fresh re-review, or stop at a genuine authority/external boundary. A P2 cannot be deferred into this inventory as the reason to complete the current subject. |
@@ -73,7 +75,7 @@ Reviewer labels map to inventory priorities exactly:
 | `P4` | Nit | `info` | non-blocking advisory | Repair only when it is safe and local; otherwise add or update one inventory entry before true-stop closeout. |
 
 `CLEAN` means there is no unresolved valid P1 or P2 finding. A clean review may
-return P3/P4 advisories. In v1.3 delegated-run evidence, such a run uses
+return P3/P4 advisories. In v1.4 delegated-run evidence, such a run uses
 `verdict: clean`; its advisory IDs may appear in `finding_refs`.
 `verdict: findings` is reserved for a review containing at least one valid P1
 or P2 and therefore retains the existing mandatory remediation and

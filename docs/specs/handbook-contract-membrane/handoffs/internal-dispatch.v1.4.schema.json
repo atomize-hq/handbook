@@ -1,0 +1,852 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://handbook.dev/schemas/internal-dispatch/v1.4.json",
+  "title": "Handbook Internal Subagent Dispatch v1.4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "dispatch_id",
+    "created_at_utc",
+    "source_handoff_ids",
+    "parent_orchestration_id",
+    "orchestration_decision",
+    "execution_target",
+    "agent_type",
+    "role",
+    "fresh_context_required",
+    "closeout_owner",
+    "required_skills",
+    "phase_id",
+    "slice_id",
+    "packet_id",
+    "subject_fingerprint",
+    "subject_manifest",
+    "review_cycle",
+    "causal_control",
+    "pre_review_convergence",
+    "ancillary_allowance",
+    "subject_hygiene",
+    "active_resolution",
+    "authority_refs",
+    "repo_truth",
+    "allowed_scope",
+    "non_goals",
+    "tasks",
+    "contracts_and_gates",
+    "stop_conditions",
+    "return_contract"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "handbook.internal-dispatch"
+    },
+    "schema_version": {
+      "const": "1.4"
+    },
+    "dispatch_id": {
+      "type": "string",
+      "minLength": 8,
+      "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "created_at_utc": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    },
+    "source_handoff_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 8
+      },
+      "uniqueItems": true
+    },
+    "parent_orchestration_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "orchestration_decision": {
+      "enum": [
+        "resume_same_packet",
+        "local_remediation_packet",
+        "child_packet_required",
+        "cross_document_repair",
+        "resolution_escalation",
+        "external_blocker_followup",
+        "proof_or_review_followup",
+        "advance_to_next_slice",
+        "defer_future_program"
+      ]
+    },
+    "execution_target": {
+      "const": "internal_subagent"
+    },
+    "agent_type": {
+      "const": "default"
+    },
+    "role": {
+      "enum": [
+        "implementation",
+        "documentation",
+        "review",
+        "proof",
+        "remediation"
+      ]
+    },
+    "fresh_context_required": {
+      "const": true
+    },
+    "closeout_owner": {
+      "const": "parent_orchestrator"
+    },
+    "required_skills": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "prefixItems": [
+        {
+          "const": "using-agent-skills"
+        }
+      ],
+      "minItems": 1,
+      "uniqueItems": true,
+      "allOf": [
+        {
+          "contains": {
+            "const": "using-agent-skills"
+          },
+          "minContains": 1
+        }
+      ]
+    },
+    "phase_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slice_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "packet_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "subject_fingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "review_cycle": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "cycle_id",
+            "trigger_run_ids",
+            "finding_refs"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "discovery",
+                "closure",
+                "supplemental_causal"
+              ]
+            },
+            "cycle_id": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9._-]+$"
+            },
+            "trigger_run_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "finding_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "const": "discovery"
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "trigger_run_ids": {
+                    "maxItems": 0
+                  },
+                  "finding_refs": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "closure",
+                      "supplemental_causal"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "trigger_run_ids": {
+                    "minItems": 1
+                  },
+                  "finding_refs": {
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "causal_outcome_registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "declared_at_utc",
+        "algorithm",
+        "encoding",
+        "outcomes",
+        "fingerprint"
+      ],
+      "properties": {
+        "declared_at_utc": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+        },
+        "algorithm": {
+          "const": "sha256"
+        },
+        "encoding": {
+          "const": "canonical-json-newline-v1"
+        },
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "integrated_outcome_id",
+              "packet_ids",
+              "authority_ref"
+            ],
+            "properties": {
+              "integrated_outcome_id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9._-]+$"
+              },
+              "packet_ids": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "authority_ref": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "fingerprint": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "causal_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "causal_budget_id",
+        "integrated_outcome_id",
+        "review_stage",
+        "stage_transition",
+        "event_reason",
+        "causal_predecessor_dispatch_id"
+      ],
+      "properties": {
+        "causal_budget_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "integrated_outcome_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9._-]+$"
+        },
+        "outcome_registry_fingerprint": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "review_stage": {
+          "enum": [
+            "planning",
+            "implementation",
+            "proof",
+            "final_closeout"
+          ]
+        },
+        "stage_transition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "from_stage"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "enter",
+                "continue"
+              ]
+            },
+            "from_stage": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                null,
+                "planning",
+                "implementation",
+                "proof",
+                "final_closeout"
+              ]
+            }
+          }
+        },
+        "event_reason": {
+          "enum": [
+            "initial_stage_review",
+            "planned_stage_transition",
+            "reviewer_finding",
+            "remediation_unmasked_test_failure",
+            "proof_gap",
+            "manifest_scope_omission",
+            "authority_expansion",
+            "external_blocker",
+            "remediation",
+            "mechanical_closeout"
+          ]
+        },
+        "causal_predecessor_dispatch_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      }
+    },
+    "pre_review_convergence": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "gate_id",
+            "completed_at_utc",
+            "checks"
+          ],
+          "properties": {
+            "gate_id": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9._-]+$"
+            },
+            "completed_at_utc": {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+            },
+            "checks": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "status",
+                  "command",
+                  "evidence_ref"
+                ],
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "complete_packet_wall",
+                      "recursive_fixture_consumer_inventory",
+                      "manifest_replay",
+                      "formatting",
+                      "whitespace"
+                    ]
+                  },
+                  "status": {
+                    "const": "passed"
+                  },
+                  "command": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "evidence_ref": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ancillary_allowance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "risk_ceiling",
+        "max_paths",
+        "max_changed_lines",
+        "entries"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "none",
+            "bounded_test_support"
+          ]
+        },
+        "risk_ceiling": {
+          "enum": [
+            "no_ancillary_surface",
+            "test_proof_only"
+          ]
+        },
+        "baseline_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "max_paths": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 24
+        },
+        "max_changed_lines": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1200
+        },
+        "entries": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "path_kind",
+              "changed_lines"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^(?![A-Za-z]:)(?!/)(?!//)(?!.*\\\\)(?!.*\\u0000)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//$).+$"
+              },
+              "path_kind": {
+                "enum": [
+                  "test_fixture",
+                  "copied_fixture_authority",
+                  "deterministic_golden",
+                  "test_assertion"
+                ]
+              },
+              "changed_lines": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "subject_hygiene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "whitespace_policy"
+      ],
+      "properties": {
+        "whitespace_policy": {
+          "const": "text-files-no-trailing-whitespace-v1"
+        }
+      }
+    },
+    "active_resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "scope_horizon",
+        "detail_resolution",
+        "temporal_horizon",
+        "authority_horizon",
+        "memory_horizon",
+        "validation_horizon"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope_horizon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detail_resolution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "temporal_horizon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_horizon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "memory_horizon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validation_horizon": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "authority_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pathSections"
+      },
+      "minItems": 1
+    },
+    "repo_truth": {
+      "type": "string",
+      "minLength": 1
+    },
+    "allowed_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "non_goals": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "contracts_and_gates": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "stop_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "return_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transport",
+        "findings_first",
+        "include_agent_identity_and_status",
+        "edit_scope",
+        "global_handoff",
+        "ledger_write",
+        "user_task_hop",
+        "required_result_fields"
+      ],
+      "properties": {
+        "transport": {
+          "const": "built_in_subagent"
+        },
+        "findings_first": {
+          "type": "boolean"
+        },
+        "include_agent_identity_and_status": {
+          "const": true
+        },
+        "edit_scope": {
+          "enum": [
+            "read_only",
+            "bounded_write"
+          ]
+        },
+        "global_handoff": {
+          "const": "forbidden"
+        },
+        "ledger_write": {
+          "const": "forbidden"
+        },
+        "user_task_hop": {
+          "const": "forbidden"
+        },
+        "required_result_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "allOf": [
+            {
+              "contains": {
+                "const": "agent_id"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "const": "final_status"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "const": "verdict"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "const": "findings"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "const": "validation"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "const": "parent_disposition"
+              },
+              "minContains": 1
+            }
+          ]
+        }
+      }
+    },
+    "subject_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "encoding",
+        "entries",
+        "aggregate_fingerprint"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "encoding": {
+          "const": "repo-path-null-sha256-newline-v1"
+        },
+        "entries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*:)(?!.*\\/$)[^\\u0000\\r\\n]+$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        },
+        "aggregate_fingerprint": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "role": {
+            "const": "review"
+          }
+        },
+        "required": [
+          "role"
+        ]
+      },
+      "then": {
+        "properties": {
+          "review_cycle": {
+            "type": "object"
+          },
+          "required_skills": {
+            "contains": {
+              "const": "code-review-and-quality"
+            },
+            "minContains": 1
+          },
+          "return_contract": {
+            "properties": {
+              "findings_first": {
+                "const": true
+              },
+              "edit_scope": {
+                "const": "read_only"
+              },
+              "required_result_fields": {
+                "contains": {
+                  "const": "advisory_disposition"
+                },
+                "minContains": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "role": {
+            "not": {
+              "const": "review"
+            }
+          }
+        },
+        "required": [
+          "role"
+        ]
+      },
+      "then": {
+        "properties": {
+          "review_cycle": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "pathSections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sections"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

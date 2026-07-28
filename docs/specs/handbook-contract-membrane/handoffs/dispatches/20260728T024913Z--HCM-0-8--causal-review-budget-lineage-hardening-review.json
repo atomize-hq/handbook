@@ -1,0 +1,232 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260728T024913Z--HCM-0-8--causal-review-budget-lineage-hardening-review",
+  "created_at_utc": "2026-07-28T02:49:13Z",
+  "source_handoff_ids": [
+    "20260726T153435Z--HCM-0-8--orchestration--review-cycle-hardening-completed"
+  ],
+  "parent_orchestration_id": "20260728T024900Z--HCM-0-8--causal-review-budget-and-lineage-hardening-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "causal-review-budget-and-lineage-hardening",
+  "subject_fingerprint": "sha256:b4562be95112b35b40cef4e4fb3adf66d374d29e449a369935be756ea4746335",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "causal-review-budget-lineage-hardening-final-closeout-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:c33c47797db78db93c2daded2c89fddf33df2ae13f319ef67a64c22978284d27",
+    "integrated_outcome_id": "causal-review-budget-and-lineage-hardening",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "causal-review-budget-lineage-hardening-convergence-1",
+    "completed_at_utc": "2026-07-28T02:48:42Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run ordinary handoff validation, historical v1 admission, orchestration-contract self-test, and Python syntax check",
+        "evidence_ref": "parent terminal output at 2026-07-28T02:47Z: all commands exited 0"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory changed paths recursively and assert no HCM runtime, product, Cargo, product test, HCM-2.4, fixture, or golden path changed",
+        "evidence_ref": "parent terminal output at 2026-07-28T02:48Z: forbidden_scope_changes=0 and subject contains no fixture/golden path"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted 12-entry path-NUL-SHA256-newline subject manifest",
+        "evidence_ref": "subject_manifest below: aggregate sha256:b4562be95112b35b40cef4e4fb3adf66d374d29e449a369935be756ea4746335"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "parse changed JSON, compile validator syntax without execution, and check changed Markdown fences and relative links",
+        "evidence_ref": "parent terminal output at 2026-07-28T02:48Z: 16 links across 7 Markdown files and zero errors"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output at 2026-07-28T02:47Z: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "064e2c84a0cef16f01ceab0152a4775f19fa9865b9391fc83c6557a3de57f49f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "0035ad33adcda8ac6bd0101d2b339d6a96a7392b09d7067ed08d373543722fa0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sha256": "7e084b5b521f38dd1af1769f0c45bc8fe3552cdd3146da080ed166a6e3bc7528"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "a7e5663cf9ac00d80ebbfc2c81f852f9bb424ad2c5d92054cc2eb3a859ffc8c4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "7188381928ea6c1bc675801aae986f3779b7f80f4a75046bb183bc55fa514772"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+        "sha256": "89a99109aa348242d2cee092c988e47190e3c5cdd91ee5d25eb9fa2112233a3f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatch-template.md",
+        "sha256": "2643cce066b52aaa827c6241e70a0d1a0202cb7b1ee0863b3ab2da66703e2e6c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.4.schema.json",
+        "sha256": "1109d1b2166a7cce921ace844e3095cc1ed778de2061bfc73ed8be04caedb3f8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-template.json",
+        "sha256": "2ceb1f5b1fcc5dda7235a4e1881daab7fe788cd6e62e44c20fc1c09f3845ce8c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch-template.json",
+        "sha256": "ed4396bc4a6024c9c88abd17098c300193626acd7dc05fff12c78f056407814b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.4.schema.json",
+        "sha256": "f55697bbf23604c1d3f3450ab2aa060019c97e300e41e5e1cded2778f53839db"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "sha256": "51ed5c9eed8eaed912ccc683ff0bf6038d907166563a00b1f7c8b0494415802a"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b4562be95112b35b40cef4e4fb3adf66d374d29e449a369935be756ea4746335"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "HCM-0.8 orchestration control repair",
+    "detail_resolution": "successor schemas, validator semantics, deterministic self-tests, and protocol documentation",
+    "temporal_horizon": "current repair plus immutable P3B/P2 evidence",
+    "authority_horizon": "orchestration-control materials only",
+    "memory_horizon": "frozen review subject and raw-result references",
+    "validation_horizon": "primary repair commit before mechanical handoff and ledger closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+      "sections": [
+        "Authority boundary",
+        "Evidence and reproduction",
+        "Decision",
+        "Deterministic proof"
+      ]
+    }
+  ],
+  "repo_truth": "Branch feat/handbook-contract-membrane at baseline 6734e525342139456c8c1c195697c0ffa4b34049, with the 12-file orchestration-control subject above. Eight pre-existing unrelated .claude/AGENTS.md/CLAUDE.md modifications remain excluded and unchanged. HCM-2.4 is evidence only.",
+  "allowed_scope": [
+    "Read the complete 12-file frozen subject manifest.",
+    "Read immutable P3B dispatches from 20260727T021420Z through 20260727T061322Z and the named P3B/P2 handoffs as evidence.",
+    "Run read-only validation and diff commands.",
+    "Return findings to the parent through the built-in subagent channel."
+  ],
+  "non_goals": [
+    "Do not edit any file.",
+    "Do not resume or plan HCM-2.4.",
+    "Do not select, source, supersede, or amend the immutable HCM-2.4 P2 course-correction handoff.",
+    "Do not create a handoff, ledger entry, commit, or user task hop."
+  ],
+  "tasks": [
+    "Independently review successor schema minimality and versioning without relying on implementation rationale.",
+    "Verify causal budget, stage, event-reason, complete-population, abandoned/non-executed, ancillary, and convergence controls fail closed.",
+    "Verify every mandatory regression is deterministic and the historical corpus remains admitted.",
+    "Inspect the observed P3B and bounded P2 evidence against the successor semantics.",
+    "Return findings first with exact P1/P2 disposition, then P3/P4 advisories and a clean-or-findings verdict."
+  ],
+  "contracts_and_gates": [
+    "Every proof-relevant dispatch for the parent must reconcile mechanically at closeout.",
+    "One parent/outcome budget permits one discovery lineage per monotonic stage.",
+    "Remediation-unmasked test/proof/manifest failures consume the existing causal allowance or stop.",
+    "Legitimate separate integrated outcomes remain representable without packet-name budget resets.",
+    "Ancillary authority is bounded test/proof support only and cannot authorize runtime, API, dependency, schema, or authority expansion.",
+    "Frozen v1.1/v1.2/v1.3 records and dispatches remain valid and byte-unchanged.",
+    "No valid P1/P2 may remain unresolved for completion."
+  ],
+  "stop_conditions": [
+    "Stop and report if any subject hash differs from the manifest.",
+    "Stop and report any missing mandatory regression or fail-open population/budget path.",
+    "Stop and report any required repair outside the declared orchestration-control authority."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

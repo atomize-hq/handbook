@@ -24,13 +24,15 @@ handoffs/
 ├── handoff-record.schema.json          # immutable v1.0 historical schema
 ├── handoff-record.v1.1.schema.json     # immutable v1.1 historical schema
 ├── handoff-record.v1.2.schema.json     # immutable predecessor schema
-├── handoff-record.v1.3.schema.json     # current parent-closeout schema
+├── handoff-record.v1.3.schema.json     # immutable predecessor schema
+├── handoff-record.v1.4.schema.json     # current parent-closeout schema
 ├── ledger-entry.schema.json
 ├── internal-dispatch.schema.json       # hash-admitted v1.0 first-review schema
 ├── internal-dispatch.v1.1.schema.json  # immutable predecessor envelope
 ├── internal-dispatch.v1.2.schema.json  # immutable advisory-aware predecessor
-├── internal-dispatch.v1.3.schema.json  # current typed-cycle/hygiene envelope
-├── handoff-template.json               # current v1.3 parent template
+├── internal-dispatch.v1.3.schema.json  # immutable typed-cycle predecessor
+├── internal-dispatch.v1.4.schema.json  # current causal-budget envelope
+├── handoff-template.json               # current v1.4 parent template
 ├── internal-dispatch-template.json     # current internal JSON dispatch template
 ├── dispatch-template.md                # human-readable field/instruction guide
 ├── validate_handoffs.py
@@ -51,17 +53,21 @@ handoffs/
 - Handoffs reference snapshots/deltas and semantic records; they do not duplicate or change those records' authority.
 - Internal JSON dispatches are immutable bounded execution envelopes.
 - The eight pre-correction Markdown dispatches remain immutable evidence of the user-routed workflow defect; they are not migrated into the current internal format.
-- Existing v1.0 through v1.2 records remain immutable evidence and are never rewritten into v1.3.
+- Existing v1.0 through v1.3 records remain immutable evidence and are never rewritten into v1.4.
 - The exact 35-file v1.2 record corpus is admitted by frozen filenames and one
   aggregate byte fingerprint; any new, missing, or modified v1.2 record fails.
+- The exact 66-file internal-dispatch v1.3 and 12-file handoff-record v1.3
+  corpora are admitted by aggregate filename/byte fingerprints; any addition,
+  deletion, or byte change fails.
 - The first HCM-0.8 internal-dispatch v1.0 review remains hash-admitted evidence of the findings that required v1.1; it is not rewritten.
 
 validate_handoffs.py hash-admits the exact historical v1.0/v1.1 record filenames, IDs, versions, and bytes plus the exact eight legacy Markdown dispatch filenames and bytes. Unknown new historical-version records, missing history, or byte changes fail closed.
 
-New v1.3 records and current internal-dispatch v1.3 JSON are validated against
-their schemas, replayable subjects, identities, cross-record lineage,
-structured finding disposition, and Git-reviewed diffs. Once committed, they
-are immutable and corrections are additive.
+New v1.4 records and current internal-dispatch v1.4 JSON are validated against
+their schemas, replayable subjects, orchestration-wide causal budgets, monotonic
+review stages, complete parent dispatch populations, structured finding
+disposition, and Git-reviewed diffs. Once committed, they are immutable and
+corrections are additive.
 
 ## Handoff schema routing
 
@@ -72,20 +78,28 @@ handbook.session-handoff records route only by top-level schema_version:
 | 1.0 | handoff-record.schema.json | Historical-only exact admission; never create. |
 | 1.1 | handoff-record.v1.1.schema.json | Historical-only exact admission; never create. |
 | 1.2 | handoff-record.v1.2.schema.json | Immutable predecessor; validate but never create. |
-| 1.3 | handoff-record.v1.3.schema.json | Required for every new top-level closeout. |
+| 1.3 | handoff-record.v1.3.schema.json | Immutable predecessor; validate but never create. |
+| 1.4 | handoff-record.v1.4.schema.json | Required for every new top-level closeout. |
 
-V1.3 requires:
+V1.4 requires:
 
 - session.kind=orchestration;
 - orchestration_id and source_handoff_ids;
 - stop_reason and delegation-capability evidence;
 - reviewed-state fingerprint/proof refs;
 - proof-relevant delegated_runs, typed parent/delegated remediations, and their lineage;
+- deterministic reconciliation of delegated_runs with every v1.4 dispatch for
+  the parent through closeout, including failed, blocked, abandoned, and
+  deliberately non-executed dispatches;
+- canonical UTC-second `Z` timestamps, parsed-instant population ordering, and
+  exact ancillary baseline/path/kind/count observations against the primary
+  commit, bounded by the allowance population frozen at the final clean-review
+  dispatch;
 - structured finding priority, status, and source-review-run linkage;
 - snapshot_refs and semantic_refs;
 - resume rather than the historical queue-shaped next_session object.
 
-A completed v1.3 record requires stop_reason=completed, available built-in
+A completed v1.4 record requires stop_reason=completed, available built-in
 delegation, a completed clean review, no unresolved P1/P2, registered P3/P4,
 and resume.execution_target=none. capability_unavailable requires
 status=blocked.
@@ -96,13 +110,13 @@ A clean review may carry validated P3/P4 advisory refs under
 
 The first HCM-0.8 review used hash-admitted handbook.internal-dispatch v1.0.
 Replayable-subject dispatch v1.1 remains immutable predecessor evidence.
-Advisory-aware v1.2 remains immutable predecessor evidence. Current internal
-dispatches use handbook.internal-dispatch v1.3 JSON and
+Advisory-aware v1.2 and typed-cycle v1.3 remain immutable predecessor evidence.
+Current internal dispatches use handbook.internal-dispatch v1.4 JSON and
 internal-dispatch-template.json.
 The exact 339-file v1.1/v1.2 JSON corpus is admitted by one frozen
 filename/byte aggregate fingerprint, and only the three exact immutable v1.3
 closeouts that predate dispatch v1.3 may retain predecessor lineage. A new
-dispatch execution or new v1.3 closeout using any predecessor version fails.
+dispatch execution or new v1.4 closeout using any predecessor version fails.
 
 The schema requires:
 
@@ -114,6 +128,20 @@ The schema requires:
 - a typed review cycle (`discovery`, `closure`, or `supplemental_causal`) with
   stable cycle ID and exact causal run/finding refs, or explicit null for
   non-review work;
+- a parent-level causal outcome registry frozen before review, fingerprinted,
+  and limited to exact authorized integrated-outcome/packet/authority tuples;
+- `causal_control`, whose budget ID is derived from the parent orchestration and
+  registry-authorized integrated outcome, whose registry fingerprint matches,
+  whose planning/implementation/proof/final-closeout stage transition is
+  explicit and monotonic, and whose event reason is one of the closed
+  initial/finding/remediation-unmasked-test/proof-gap/manifest-scope/authority/
+  external/remediation/mechanical reasons;
+- a pre-review convergence record for the complete packet wall, recursive
+  fixture/consumer inventory, manifest replay, formatting, and whitespace;
+- an exact zero or bounded test/proof-only ancillary allowance with path kind,
+  Git baseline, mechanically replayed path/changed-line count, and risk
+  ceilings; after the final clean review, no later dispatch may introduce or
+  enlarge that authority;
 - execution_target=internal_subagent;
 - agent_type=default and fresh_context_required=true;
 - closeout_owner=parent_orchestrator;
@@ -199,7 +227,8 @@ For every proof-relevant internal run, the parent:
 
 1. creates a schema-valid immutable JSON dispatch;
 2. runs `uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <repo-relative-dispatch-path>`
-   as the dependency-complete v1.3 schema and live-subject replay before
+   as the dependency-complete v1.4 schema, causal/convergence/ancillary check,
+   and live-subject replay before
    execution;
 3. fingerprints the dispatch and subject state;
 4. spawns a fresh built-in default subagent with isolated context;
@@ -253,7 +282,7 @@ selected scope, authority, and risk ceiling, consolidates causally related
 findings, and does not reopen general discovery. Budget exhaustion never
 converts a valid P1/P2 into accepted debt.
 
-Internal-dispatch v1.3 makes each cycle reason explicit. `discovery` has empty
+Internal-dispatch v1.4 makes each cycle reason explicit. `discovery` has empty
 causal arrays. `closure` names exactly the immediately preceding discovery
 findings runs and their P1/P2 IDs. Each `supplemental_causal` cycle names
 exactly the immediately preceding findings runs and their P1/P2 IDs. All
@@ -265,7 +294,19 @@ supplemental. Every remediation re-review belongs to the immediately following
 cycle and binds a changed post-remediation subject fingerprint. Mechanical
 closeout is not a review cycle and neither consumes nor resets the budget.
 
-A completed v1.3 record fails semantic validation when a P1/P2 findings review
+The budget spans every packet that contributes to one integrated outcome under
+the same parent. It permits one discovery lineage per explicit stage. Renaming
+a packet, selector, cycle, fingerprint, or undeclared outcome does not change
+the derived budget because every outcome/packet pair must resolve through the
+frozen registry.
+Planning may advance to implementation, then proof and final closeout, only
+through an explicit monotonic transition. A remediation-unmasked test failure,
+proof gap, or manifest/scope omission after remediation consumes the next
+causal cycle or stops; it cannot be relabeled as discovery. Legitimate separate
+integrated outcomes receive separate derived budgets and remain independently
+reviewable.
+
+A completed v1.4 record fails semantic validation when a P1/P2 findings review
 lacks typed successful parent/delegated remediation, delegated remediation is
 failed/wrong-role, remediation lacks a completed different-fresh re-review of
 its result fingerprint, a reviewer is reused after remediation, dispatch/result
@@ -321,7 +362,8 @@ A handoff cannot contain the hash of the commit that contains itself. Use a deli
 4. Capture/verify the top-level end state and use the final primary tip as both
    `repo_state.head` and `reviewed_state.baseline_head`; completed validation
    rejects mismatched commit identities.
-5. Create one v1.3 parent handoff. Record the final reviewed subject
+5. Create one v1.4 parent handoff. Record the final reviewed subject,
+   the complete deterministic parent dispatch population,
    fingerprint, delegated runs, structured finding dispositions, stop reason,
    proof refs, and source/supersession truth.
 6. Register or deduplicate validated unfixed P3/P4 advisories in
@@ -345,7 +387,7 @@ then create and commit the handoff separately. Open P1/P2 may also be
 registered in `09` as blockers for comparison/resumption, never as accepted
 debt. Never label an unreviewed or failed state completed.
 
-## Create a v1.3 parent handoff
+## Create a v1.4 parent handoff
 
 1. Copy handoff-template.json to a correctly named records/YYYYMMDDTHHMMSSZ--<phase-or-slice>--orchestration--<slug>.json file.
 2. Fill every field; remove placeholders.
@@ -353,7 +395,8 @@ debt. Never label an unreviewed or failed state completed.
 4. Use supersedes only when replacing prior recommendations/facts.
 5. Record the true stop_reason.
 6. Record built-in delegation-capability evidence.
-7. Record only proof-relevant delegated runs and exact JSON dispatch refs/fingerprints.
+7. Record every dispatch in the deterministic parent population and exact JSON
+   refs/fingerprints, including explicit non-completion dispositions.
 8. Bind the final clean review to reviewed_state.subject_fingerprint.
 9. Record unresolved advisory IDs or state that none intersect the closed
    subject.
@@ -419,9 +462,9 @@ python3 "$root/validate_handoffs.py"
 ## Required validation
 
 ~~~bash
-python3 docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py
-python3 docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission
-python3 docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract
+uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py
+uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission
+uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract
 ~~~
 
 The normal command validates:
@@ -429,8 +472,13 @@ The normal command validates:
 - all Draft 2020-12 handoff/internal-dispatch schemas and current templates;
 - exact immutable v1.0/v1.1 and legacy-dispatch admission;
 - all canonical records, the hash-admitted internal-dispatch v1.0 review,
-  immutable v1.1 JSON dispatches, and current v1.2 JSON dispatches;
-- v1.2/v1.3 source/supersession and delegated-run/dispatch lineage;
+  immutable v1.1/v1.2 JSON dispatches, and the exact frozen v1.3 dispatch and
+  record corpora;
+- v1.2/v1.3/v1.4 source/supersession and delegated-run/dispatch lineage;
+- v1.4 budget derivation, stage monotonicity, typed causal reasons, pre-review
+  convergence, frozen outcome registries, canonical timestamp ordering,
+  mechanically observed ancillary ceilings, and complete parent-population
+  parity;
 - clean-review/finding-priority/disposition/remediation/fresh-re-review
   semantics;
 - record/index identity and parity;
@@ -487,7 +535,7 @@ The parent:
    unfixed P3/P4, and executes different-fresh re-review after material repair;
 10. runs the full proof wall and updates canonical pack truth;
 11. commits the reviewed slice state or reviewed multi-packet commit stack;
-12. writes one v1.3 handoff only at a true stop;
+12. writes one v1.4 handoff only at a true stop;
 13. commits the mechanical closeout record/index/advisory inventory;
 14. returns a short durable closeout.
 
@@ -516,7 +564,8 @@ Include DISPATCH only for top_level_resume or human_interactive. Never return an
 - If a reviewer is slow, continue bounded built-in waits; slowness is not capability failure.
 - If an internal subagent attempts a global handoff/ledger write, reject that result and remediate the dispatch boundary.
 - If an immutable historical record/legacy dispatch is missing or byte-modified, fail closed; never repair by rewriting history or its admission hash without explicit historical-integrity authority.
-- If a current JSON dispatch or v1.3 record fails schema/semantic lineage, the top-level run is not closed.
+- If a current JSON dispatch or v1.4 record fails schema/semantic lineage or
+  complete parent-population reconciliation, the top-level run is not closed.
 - If ledger and records disagree, rebuild the ledger from canonical records.
 - If a snapshot is unstable, retry or record the bounded blocker; do not ground promotion on it.
 - If projection exposes sensitive/out-of-Resolution state, omit it and record the omission.

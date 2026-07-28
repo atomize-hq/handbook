@@ -3,7 +3,7 @@
 This Markdown file is explanatory guidance, not a machine dispatch and not a
 schema-valid example. The only normative current machine template is
 `internal-dispatch-template.json`; validate instantiated JSON dispatches against
-`internal-dispatch.v1.3.schema.json`. Do not add front matter that claims a
+`internal-dispatch.v1.4.schema.json`. Do not add front matter that claims a
 machine schema identity here, and do not copy retired legacy fields into a
 current dispatch.
 
@@ -23,6 +23,23 @@ For execution_target=internal_subagent, return the result to the active parent t
 - Role: implementation | documentation | review | proof | remediation
 - Review cycle: discovery | closure | supplemental_causal, stable cycle ID,
   exact causal run/finding refs | null for non-review
+- Parent outcome registry: frozen before review, sorted authorized integrated
+  outcomes, packet IDs, authority refs, and canonical fingerprint
+- Causal budget: deterministic SHA-256 of parent orchestration ID, NUL,
+  registry-authorized integrated outcome ID, newline
+- Review stage: planning | implementation | proof | final_closeout
+- Stage transition: enter from the exact prior stage | continue the current stage
+- Causal event reason: initial stage review | planned stage transition |
+  reviewer finding | remediation-unmasked test failure | proof gap |
+  manifest/scope omission | authority expansion | external blocker |
+  remediation | mechanical closeout
+- Causal predecessor dispatch: exact immediately preceding dispatch in this
+  causal budget | null only for the first stage entry
+- Pre-review convergence: complete packet wall, recursive fixture/consumer
+  inventory, manifest replay, formatting, and whitespace checks
+- Ancillary allowance: none | exact bounded test fixture/golden/assertion paths,
+  Git baseline, mechanically observed changed-line ceiling, and test/proof-only
+  risk ceiling
 - Subject hygiene: text-files-no-trailing-whitespace-v1
 - Fresh isolated context required: true
 - Closeout owner: parent_orchestrator
@@ -67,10 +84,19 @@ Before any reviewer is spawned, validate and replay its frozen dispatch:
 uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <repo-relative-dispatch-path>
 ```
 
-The dependency-complete command admits only v1.3 and verifies its schema, all
-live manifest hashes, aggregate fingerprint, and trailing-space/tab hygiene
-across every UTF-8 text manifest entry. V1.1/v1.2 are immutable predecessor
-evidence and cannot be used for new execution or closeout lineage.
+The dependency-complete command admits only v1.4 and verifies its schema, all
+live manifest hashes, aggregate fingerprint, trailing-space/tab hygiene across
+every UTF-8 text manifest entry, and the complete causal prefix for the parent.
+V1.1/v1.2/v1.3 are immutable predecessor evidence and cannot be mixed into a
+new v1.4 parent orchestration.
+
+Before the first discovery review in a stage, finish all five pre-review
+convergence checks and record concise raw-result references. Follow-up review
+dispatches retain the same causal budget and stage. Renaming a packet, selector,
+cycle, fingerprint, or undeclared outcome does not create another discovery
+allowance. All timestamps use canonical UTC seconds with `Z`. A related
+failure unmasked by remediation advances to the next causal cycle with
+`remediation_unmasked_test_failure`; it does not become a discovery.
 
 ## Active Context Resolution
 

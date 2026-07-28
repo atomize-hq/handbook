@@ -1,0 +1,263 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260728T035843Z--HCM-0-8--causal-review-budget-lineage-hardening-final-supplemental-review",
+  "created_at_utc": "2026-07-28T03:58:43Z",
+  "source_handoff_ids": [
+    "20260726T153435Z--HCM-0-8--orchestration--review-cycle-hardening-completed"
+  ],
+  "parent_orchestration_id": "20260728T024900Z--HCM-0-8--causal-review-budget-and-lineage-hardening-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "causal-review-budget-and-lineage-hardening",
+  "subject_fingerprint": "sha256:f0312d3624889c523e50b743fd87e849be3efff322a2e7e861024c0cebe8e278",
+  "review_cycle": {
+    "kind": "supplemental_causal",
+    "cycle_id": "causal-review-budget-lineage-hardening-final-closeout-supplemental-2",
+    "trigger_run_ids": [
+      "causal-control-supplemental-review-1"
+    ],
+    "finding_refs": [
+      "HCM-CRBL-P2-04-C1-S1"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-28T03:23:50Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "causal-review-budget-and-lineage-hardening",
+        "packet_ids": [
+          "causal-review-budget-and-lineage-hardening"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md#decision"
+      }
+    ],
+    "fingerprint": "sha256:20ebc6b954aeab426d50e7f159212a6e5cb2c953bf71e40ab0316a666801a60a"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:c33c47797db78db93c2daded2c89fddf33df2ae13f319ef67a64c22978284d27",
+    "integrated_outcome_id": "causal-review-budget-and-lineage-hardening",
+    "outcome_registry_fingerprint": "sha256:20ebc6b954aeab426d50e7f159212a6e5cb2c953bf71e40ab0316a666801a60a",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "final_closeout"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260728T034100Z--HCM-0-8--causal-review-budget-lineage-hardening-supplemental-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "causal-review-budget-lineage-hardening-convergence-4",
+    "completed_at_utc": "2026-07-28T03:58:40Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run ordinary handoff validation, historical v1 admission, orchestration-contract self-test, and focused Python lint",
+        "evidence_ref": "parent terminal output at 2026-07-28T03:58Z: all commands exited 0"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory every causal registry, ancillary observation, allowance, schema, template, documentation, and validator consumer recursively",
+        "evidence_ref": "parent terminal output at 2026-07-28T03:58Z: 15 control consumers and forbidden_scope_changes=0"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted 15-entry path-NUL-SHA256-newline subject manifest",
+        "evidence_ref": "subject_manifest below: aggregate sha256:f0312d3624889c523e50b743fd87e849be3efff322a2e7e861024c0cebe8e278"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "parse changed JSON and Python AST, run focused E9/F lint, and check changed Markdown fences and relative links",
+        "evidence_ref": "parent terminal output at 2026-07-28T03:58Z: 7 JSON, 7 Markdown, 16 links, Python AST, and focused lint all passed"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output at 2026-07-28T03:58Z: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "f93e24d598ddacb4270928beec1c882b82e1b802f25afa853b01e2565e5e91c8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "a92b45ba3117a1b42d1debec332ca26a0e93048d204d7634cb133bba67cc7f33"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sha256": "b063ac16be9efece28f1ba90c7b5a4af01b20d388b34027e0268a0a6aca3fa0a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "194016b268c0595a95b0ac4c91977d11a8f053d4faf8e00571d344af95f0e26a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "c33b7de512eac8c48c4a2b353c145ae1360ff96ab29c3f23fbd4cc1a945430ae"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+        "sha256": "15faa06e6782a33a088ee5f107f389f24b4b38d09f98e7f3012104b6eb50d7c6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatch-template.md",
+        "sha256": "acd36cf2a36018d927e87ff4b1734a30de76076d104f0fb3146e55f1605217a5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T024913Z--HCM-0-8--causal-review-budget-lineage-hardening-review.json",
+        "sha256": "65221cfb4fba822b47305f11b92524d419d3698dc853aef08d7573750a828e99"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T032400Z--HCM-0-8--causal-review-budget-lineage-hardening-closure-review.json",
+        "sha256": "951982cbc323c65983a9844e058dc7ed420c7ce9dccfbee44198ee51e20b76fa"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T034100Z--HCM-0-8--causal-review-budget-lineage-hardening-supplemental-review.json",
+        "sha256": "d2236cfd42f78e46879170d104f1236305c8b902559b94809fd0ec804488a04c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.4.schema.json",
+        "sha256": "4d3ff154a8e3781b3f164c93488d20cacc9c28c1cbf242e52566472945730dd1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-template.json",
+        "sha256": "36faa27bed2b40d234fbde11b4bfcb0544f4da684074994c3783960ccc190db0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch-template.json",
+        "sha256": "9eaa5442eab51a66f5a56160060d3148223acd0233af5fb3d21eb43a65bbd543"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.4.schema.json",
+        "sha256": "20b837a9b62da958123950764ae669cd7199d5265f05ac18d43dc1c66994e552"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "sha256": "fd1e42141a738f81a509b4cf14d7132619d5f61aaa1c710c52069be522b851fd"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:f0312d3624889c523e50b743fd87e849be3efff322a2e7e861024c0cebe8e278"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "HCM-0.8 orchestration control repair final supplemental closure",
+    "detail_resolution": "final-clean-review ancillary cutoff and exact mechanical-widening regression",
+    "temporal_horizon": "first-supplemental P2 remediation through final allowed supplemental closure",
+    "authority_horizon": "orchestration-control materials only",
+    "memory_horizon": "three immutable prior review dispatches, structured finding, and remediated subject",
+    "validation_horizon": "different-fresh clean final supplemental review before primary commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch record",
+        "Delegation workflow"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+      "sections": [
+        "Decision",
+        "Deterministic proof",
+        "Independent review remediation"
+      ]
+    }
+  ],
+  "repo_truth": "The 15-file final-supplemental subject is the remediated orchestration-control repair on feat/handbook-contract-membrane at baseline 6734e525342139456c8c1c195697c0ffa4b34049. It includes all three immutable prior review dispatches and excludes eight pre-existing unrelated modifications. No HCM-2.4 implementation or planning file changed.",
+  "allowed_scope": [
+    "Read the complete 15-file frozen subject manifest.",
+    "Read the immutable first supplemental dispatch and independently verify HCM-CRBL-P2-04-C1-S1 is closed.",
+    "Run read-only validation and the exact post-clean mechanical-widening adversarial check.",
+    "Return findings to the parent through the built-in subagent channel."
+  ],
+  "non_goals": [
+    "Do not edit any file.",
+    "Do not reopen general discovery beyond regressions caused or unmasked by the final-clean-review cutoff remediation.",
+    "Do not resume or plan HCM-2.4.",
+    "Do not create a handoff, ledger entry, commit, or user task hop."
+  ],
+  "tasks": [
+    "Verify ancillary authority is derived only from dispatches at or before the final clean review.",
+    "Verify any later non-zero allowance fails even when it is a schema-valid mechanical/non-review dispatch and Git-derived observations are exact.",
+    "Verify unchanged within-ceiling ancillary closeout remains representable.",
+    "Verify no prior P2 remediation regressed and return a clean verdict only if no remediation-unmasked P1/P2 remains."
+  ],
+  "contracts_and_gates": [
+    "This final supplemental review is causally limited to HCM-CRBL-P2-04-C1-S1 and defects unmasked by its remediation.",
+    "This is supplemental cycle two; a further supplemental cycle is forbidden.",
+    "The parent/outcome registry and causal budget remain unchanged.",
+    "No post-clean dispatch may introduce or widen ancillary authority.",
+    "No valid P1/P2 may remain unresolved for completion."
+  ],
+  "stop_conditions": [
+    "Stop and report if any subject hash differs from the manifest.",
+    "Stop and report if a post-clean dispatch can widen ancillary authority.",
+    "Stop and report any P1/P2 unmasked by the bounded remediation.",
+    "Stop and report any required repair outside declared orchestration-control authority."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
