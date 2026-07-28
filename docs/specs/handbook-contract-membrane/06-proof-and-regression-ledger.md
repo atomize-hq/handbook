@@ -1220,6 +1220,18 @@ independently reviewed, committed partial boundary consists of:
   ASCII `_` with `-` in the final coverage-ID segment before the unchanged
   `-value` suffix, and the Decision/Risk/generic-lineage walls passed 4/4,
   13/13, and 54/54 with zero ignores;
+- P2S commit `755acc56fad6cc99c016dc58f94d310c84f98c58`,
+  whose different-fresh closure review returned CLEAN over the exact
+  schema/definition subject
+  `sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04`;
+  it adds eight unregistered closed schemas, one unregistered evaluator
+  definition, and schema/definition proof only, with 15/15 focused and 6/6
+  registry-preservation tests;
+- bounded P2A non-production evidence proving the existing unavailable native
+  port leaves a prepared repository byte-identical, while recording that the
+  local Windows WebAuthn DLL/header exist but no approved safe binding, live
+  CTAP2.1 transport/device ceremony, or native cancellation/HRESULT mapping is
+  available under current authority;
 - exact package admission of five successor kind/intake/fixed-renderer
   closures, live shipped-root `1.2` selection with exactly three root
   descriptors, and byte/fingerprint-preserved HCM-2.2 Charter authority; and
@@ -1227,11 +1239,13 @@ independently reviewed, committed partial boundary consists of:
   feature-identity, and handoff authority, with deterministic Feature Spec
   Markdown retained only as a human-review view.
 
-The maximum earned promotion is the exact definition/profile boundary above
-and the exact Work Specification, Decision mutation/promotion, and Risk
-mutation/promotion real paths. Environment Context remains unconverted because
-the condition evidence/evaluator amendment is planning-only and its schemas,
-evaluator, producer, and integration are not authorized.
+The maximum earned promotion is the exact definition/profile boundary above,
+the additive P2S schema/evaluator-definition freeze, and the exact Work
+Specification, Decision mutation/promotion, and Risk mutation/promotion real
+paths. Environment Context remains unconverted: no P2 producer, production
+native adapter, evaluator runtime, resolver integration, or Environment
+Context writer is authorized. P2A is conditionally feasible but presently
+blocked on an exact second human adapter/dependency decision.
 P4's no-root/generated-command/inferred-filename/Projection/persistent-view
 proof remains open even though its token prerequisite and positive mutation
 path are GREEN. P6 is therefore ineligible, both

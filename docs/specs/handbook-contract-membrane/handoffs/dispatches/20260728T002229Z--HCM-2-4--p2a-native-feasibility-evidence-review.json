@@ -1,0 +1,170 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260728T002229Z--HCM-2-4--p2a-native-feasibility-evidence-review",
+  "created_at_utc": "2026-07-28T00:22:29Z",
+  "source_handoff_ids": [
+    "20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed"
+  ],
+  "parent_orchestration_id": "20260727T230000Z--HCM-2-4--p2s-p2a-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2A",
+  "subject_fingerprint": "sha256:b1b3da976b2c951a69e784c40d267beda274d01bd6f7fc3f0320fdb53e565a3e",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-2-4-p2a-evidence-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "8cdf7a44c0a65ca9149d75bcafdcb8a3c00c42b0724127ccde447cc1fa65fc25"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "a8a26f54a70f95956ec7737faaf8b53ecf94e0ef26959539648fb5239c699f03"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2A-native-feasibility.md",
+        "sha256": "f37e3f088caf81021afc67faf15f4ed5af1ef6a3b33871c37a1a2c3ee9f30525"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "c8ce856a2eefba0db35e1fd0be0e7f0b9a7cac89f4ff612bad73c8165cdf55fc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "a30d515696dd9c7ae3ef409f2b6a82a13beff575cacafaf5c8378367df0b7498"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b1b3da976b2c951a69e784c40d267beda274d01bd6f7fc3f0320fdb53e565a3e"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "p2a_nonproduction_native_feasibility",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "packet_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "Decision boundary",
+        "Reviewable runtime packets after human approval",
+        "Future selectors and impact ceilings",
+        "Feasibility evidence and human gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P2 — Environment Context vertical",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P2 — Environment Context vertical"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "P2 — Environment Context"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.4 partial implementation evidence boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "P2S is review-clean and committed at 755acc56fad6cc99c016dc58f94d310c84f98c58 with subject fingerprint sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04. The authorized P2A probe ran on Windows NT 10.0.26200.0. webauthn.dll and the SDK assertion/cancellation declarations are present, but the workspace has no approved safe WebAuthn/FIDO/CTAP/HID binding, the production compiler still injects only UnavailableNativeAuthenticatorPortV1, no matching present FIDO/security-key PnP entity was found, and no live ceremony was invoked. The existing hcm_2_2_authenticator_security wall passes 9/9. A temporary compiler integration test passed 1/1 and proved the default unavailable port left a prepared repository byte-identical; that test file was discarded. The durable conclusion is conditionally feasible, presently blocked, with no production adapter or P2P authority.",
+  "allowed_scope": [
+    "Read-only review of the exact five-path durable P2A evidence/status subject.",
+    "Replay the subject manifest and independently verify local OS DLL/header/dependency/device observations without invoking a user ceremony.",
+    "Run the existing 9/9 authenticator-security wall and inspect existing public adapter/port code to assess the recorded zero-write conclusion.",
+    "Distinguish codec/verifier evidence, API-shape feasibility, and unobserved live-native behavior for every required P2A question.",
+    "Verify the exact second human decision and true-stop language preserve P2P and production-adapter authority."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger write, dispatch creation, or delegation.",
+    "No dependency installation, Cargo/lockfile edit, P/Invoke/FFI, unsafe code/policy, live authenticator ceremony, user prompt, or device mutation.",
+    "No production adapter, P2P, P2R, P2I, P2V, P4, P6, Phase 2 exit, or another slice.",
+    "Do not touch the eight unrelated pre-existing modified paths or reopen P2S."
+  ],
+  "tasks": [
+    "Verify the dispatch, all five subject hashes, aggregate fingerprint, and text hygiene.",
+    "Independently recheck webauthn.dll/header presence, dependency graph, current production unavailable-port injection, and read-only PnP result.",
+    "Run hcm_2_2_authenticator_security and map its exact 9 tests to transport codec, selection, UP/UV, cancellation/status, malformed response, ES256, and unavailable evidence.",
+    "Inspect the public compiler adapter and temporary-probe description to determine whether byte-identical unavailable-port zero-write is credibly and narrowly recorded.",
+    "Audit the result matrix so no offline transcript or API declaration is mislabeled as live native behavior.",
+    "Verify the feasibility conclusion, unresolved findings, exact second human decision, and true stop are complete and do not authorize P2P.",
+    "Return findings first in Critical, Required, Optional, Nit order with exact file/line, violated contract, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "P2A may report success, failure, or unavailable behavior, but must not infer a production adapter from the supporting 9/9 wall.",
+    "Every requested observation must distinguish directly observed local behavior from codec/verifier/API-shape evidence and unavailable live behavior.",
+    "No dependency, Cargo, unsafe, production module/process, compiler/runtime source, or persistent probe material may remain.",
+    "The second human decision must name an exact adapter/dependency boundary before P2P and must not itself silently authorize P2P.",
+    "No valid P1/P2 may remain before durable P2A evidence is committed.",
+    "P3/P4 advisories may remain clean only with exact inventory or explicit disposition under 09."
+  ],
+  "stop_conditions": [
+    "Return blocked if the subject cannot replay or local read-only observations materially contradict the evidence.",
+    "Report rather than repair any finding.",
+    "Stop rather than invoke a user ceremony, add a dependency, use FFI/unsafe code, or widen into a production packet."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

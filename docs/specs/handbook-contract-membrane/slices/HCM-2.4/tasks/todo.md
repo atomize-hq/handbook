@@ -1,12 +1,9 @@
 # HCM-2.4 implementation checklist
 
 Status: partial implementation. P0/P1A/P1B/P1C and P3/P3B are review-clean.
-The P2 planning amendment freezes the six-row transaction-store matrix,
-checked 4096-entry and 131072-byte canonical-envelope ceilings, and one
-intentionally shared fixed over-limit closure under one fresh independent
-review gate; CLEAN permits only
-distinct human P2S/P2A approval and a valid P1/P2 stops without remediation.
-Runtime remains authority-blocked.
+P2S is review-clean and committed at `755acc56`; P2A returned conditionally
+feasible, presently blocked non-production evidence. Runtime and P2P remain
+authority-blocked pending the exact second human adapter/dependency decision.
 The P4/P5 token prerequisite is review-clean and committed at `00dde01`; P4's
 separate negative-surface/path proof remains open. P6 and Phase 2 exit remain
 incomplete.
@@ -206,14 +203,24 @@ incomplete.
       one fixed closure for all count/byte/arithmetic over-limit stores, and
       count 4096/4097, Unix 1101/1102, Windows 557/558, exact
       131072/131073-byte, long-name, and arbitrary-suffix vectors.
-- [ ] Obtain exactly one fresh complete-subject review; any valid P1/P2 stops
+- [x] Obtain exactly one fresh complete-subject review; any valid P1/P2 stops
       without remediation, while CLEAN permits only the reviewed planning
       commit, separate mechanical closeout, and distinct P2S/P2A approval.
-- [ ] BLOCKED: obtain a separately approved, fingerprinted
-      managed-operational-surface condition evidence/evaluator contract and an
-      exact reviewed implementation selector, plus either an approved bounded
-      producer/native-adapter packet or a proven completed producer dependency.
-      Do not use structured Environment Context input,
+- [x] Implement and independently review the eight P2S schemas, exact evaluator
+      definition, semantic/preimage/nullability/dual-ceiling vectors, and
+      registration-absence proof without a Rust production edit; commit
+      `755acc56`, reviewed subject `sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04`.
+- [x] Run the bounded P2A non-production probe: preserve the supporting 9/9
+      authenticator-security wall, prove unavailable-port filesystem
+      zero-write 1/1 with discarded temporary material, and record the
+      present Windows WebAuthn surface plus unavailable safe binding/live
+      transport/cancellation behavior.
+- [ ] BLOCKED: obtain the exact second human decision that either authorizes a
+      separately bounded production adapter with named platform,
+      dependency/version/features, Cargo/lockfile and unsafe-policy authority,
+      cancellation/error/selection contracts and device matrix, or names a
+      completed independently reviewed producer/native dependency. Do not use
+      structured Environment Context input,
       `applicability_basis`, profile opt-in, artifact presence, or
       `indeterminate` coercion as condition evidence.
 - [ ] Establish a focused RED proving Markdown is currently authoritative.

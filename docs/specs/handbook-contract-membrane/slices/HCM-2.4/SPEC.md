@@ -3,10 +3,12 @@
 Status: partially implemented. P0/P1A/P1B/P1C and P3/P3B are review-clean and
 committed; the exact P4/P5 coverage-token prerequisite is review-clean and
 committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`. P4's separate
-negative-surface/path proof remains open. P2 runtime remains authority-blocked.
-Its planning amendment freezes the six-row transaction-store matrix under one
-fresh review gate; CLEAN permits only distinct human approval of P2S and
-non-production P2A feasibility. P6 and Phase 2 exit are not earned.
+negative-surface/path proof remains open. P2S is review-clean and committed at
+`755acc56fad6cc99c016dc58f94d310c84f98c58`. The P2A non-production probe
+found Windows WebAuthn present but no approved safe workspace binding or live
+CTAP2.1 transport; its exact result is conditionally feasible and presently
+blocked on a second human decision. No production adapter or P2P began. P6 and
+Phase 2 exit are not earned.
 
 Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
 
@@ -431,6 +433,17 @@ then receive separate human approval for an exact production adapter or name a
 completed producer dependency before P2P. P2R, P2I, and P2V remain closed
 behind their exact predecessors. P3–P5 remain semantically independent, but P6
 cannot begin while P2 is blocked.
+
+That bounded decision has now been exercised only through P2S and P2A. P2S is
+review-clean at `755acc56fad6cc99c016dc58f94d310c84f98c58` with reviewed
+subject
+`sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04`.
+P2A observed an installed Windows WebAuthn surface and compatible assertion
+shape, but no approved safe binding, live CTAP2.1 transport/device ceremony,
+or native cancellation/error mapping. It proved the default unavailable port
+performs zero repository writes and returned conditionally feasible,
+presently blocked. A second human decision must select and authorize an exact
+adapter/dependency boundary before P2P can be considered.
 
 ### P3 — Work Specification / Stage 10 vertical
 

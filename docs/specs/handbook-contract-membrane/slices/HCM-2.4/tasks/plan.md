@@ -1,14 +1,14 @@
 # HCM-2.4 implementation plan
 
 Status: partially executed under separate user selections. P0/P1A/P1B/P1C and
-P3/P3B are review-clean and committed. The P2 planning amendment freezes the
-six-row transaction-store matrix, checked 4096-entry and 131072-byte canonical-
-envelope ceilings, and one intentionally shared fixed over-limit closure under
-one fresh independent
-review gate; CLEAN permits only distinct human P2S/P2A approval and a valid
-P1/P2 stops without remediation. Runtime remains authority-blocked. The P4/P5 token prerequisite
-is review-clean and committed at `00dde01`. P4's separate negative-surface/path
-proof remains open. P6 and the Phase 2 exit remain closed.
+P3/P3B are review-clean and committed. P2S is review-clean and committed at
+`755acc56fad6cc99c016dc58f94d310c84f98c58`. P2A found the native Windows
+surface conditionally feasible but unavailable through an approved safe
+workspace binding or live transport; production remains blocked on the exact
+second human decision recorded in its evidence. The P4/P5 token prerequisite
+is review-clean and committed at `00dde01`. P4's separate
+negative-surface/path proof remains open. P6 and the Phase 2 exit remain
+closed.
 
 ## Dependency graph
 
@@ -335,9 +335,10 @@ GREEN:
 
 ## P2 — Environment Context vertical
 
-Entry: P1C accepted; Environment Context impact UIDs resolved; runtime entry is
-blocked on independent review and human approval of the exact
-condition-evidence/evaluator authority described below.
+Entry: P1C accepted; Environment Context impact UIDs resolved; P2S
+schema/definition freeze and P2A non-production feasibility are complete.
+Runtime entry remains blocked on a second human decision selecting an exact
+production native-adapter/dependency boundary.
 
 Authority gate:
 
@@ -380,9 +381,12 @@ Planned decomposition after approval:
 
 1. P2S adds only the eight closed schemas and evaluator definition, with
    closed-field/preimage/nullability vectors and no Rust production edit.
+   **Complete and review-clean at `755acc56`.**
 2. P2A runs a non-production native-platform feasibility probe. It stops for a
    second human decision before any production adapter, dependency, Cargo,
-   unsafe-policy, process, or platform-module edit.
+   unsafe-policy, process, or platform-module edit. **Complete with
+   conditionally feasible, presently blocked evidence; no durable probe
+   material remains.**
 3. P2P adds only the new evidence producer module/service and proves its
    source/challenge/assertion/use-chain/record/two-head/immutable-transaction
    transaction, unavailable-port zero-write, recovery, simultaneous-head
