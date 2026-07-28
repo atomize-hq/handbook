@@ -1,0 +1,28 @@
+schema_id: handbook.project-condition-evaluator-definition
+schema_version: '1.0'
+evaluator_id: handbook.condition-evaluator.managed-operational-surface
+evaluator_version: 1.0.0
+condition_ref: handbook.condition.project.managed-operational-surface@1.0.0
+condition_definition_fingerprint: sha256:2ae25788c7860f3062f30659a7674c2ccd8f56b0f8809f1134003e04dea20b61
+source_schema_ref: handbook.schemas.project-condition-admitted-evidence-source@1.0.0
+evidence_schema_ref: handbook.schemas.project-condition-evidence@1.0.0
+head_schema_ref: handbook.schemas.project-condition-evidence-head@1.0.0
+transaction_schema_ref: handbook.schemas.project-condition-evidence-transaction@1.0.0
+challenge_schema_ref: handbook.schemas.project-condition-evidence-challenge@1.0.0
+assertion_schema_ref: handbook.schemas.project-condition-evidence-assertion@1.0.0
+use_transition_schema_ref: handbook.schemas.project-condition-evidence-use-transition@1.0.0
+closure_schema_ref: handbook.schemas.project-condition-evidence-evaluation-closure@1.0.0
+admitted_input_classes:
+- admitted_evidence_ref
+maximum_validity_seconds: 2592000
+outcome_precedence:
+- refused
+- unresolved
+- stale
+- unknown
+- 'false'
+- 'true'
+owner_module: handbook_engine::project_condition_evidence
+transport: bounded_transaction_tip_fixed_head_and_retained_refs
+extensions: {}
+definition_fingerprint: sha256:ca19395c8ef27aa353dc5918c43b6f3522ee365e204f25ba66f2a22aa793f105

@@ -1,0 +1,205 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260728T000558Z--HCM-2-4--p2s-schema-semantic-freeze-closure-review",
+  "created_at_utc": "2026-07-28T00:05:58Z",
+  "source_handoff_ids": [
+    "20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed"
+  ],
+  "parent_orchestration_id": "20260727T230000Z--HCM-2-4--p2s-p2a-orchestration",
+  "orchestration_decision": "cross_document_repair",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2S",
+  "subject_fingerprint": "sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-2-4-p2s-closure-1",
+    "trigger_run_ids": [
+      "hcm-2-4-p2s-discovery-1"
+    ],
+    "finding_refs": [
+      "hcm-2-4-p2s-discovery-1-P2-1",
+      "hcm-2-4-p2s-discovery-1-P2-2",
+      "hcm-2-4-p2s-discovery-1-P2-3"
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/definitions/project-condition-evaluators/handbook.condition-evaluator.managed-operational-surface/1.0.0.yaml",
+        "sha256": "71d6b986c265bbe277926c8b60c84220d2d7095ab4675d06a1ec571a7a346bdd"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-admitted-evidence-source/1.0.0.schema.json",
+        "sha256": "7067d2bcc7a54e708838718c94b0f69ff1cb2054969afb989d85b0d706eeb1f1"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-assertion/1.0.0.schema.json",
+        "sha256": "e42e6deb444765e10f4879c4110960d6c43b0c454957059ecb4cd8e3904d3413"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-challenge/1.0.0.schema.json",
+        "sha256": "44c180bc4c022df6a3c7abc9862049f0988af2bda264840711b3674105f130f1"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-evaluation-closure/1.0.0.schema.json",
+        "sha256": "627f776df1ca85b21e553f4dbb38ed35a15ac397e09f7c64aed1eed8b2a1887a"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-head/1.0.0.schema.json",
+        "sha256": "e0336932b65ba8915d544b19eb17425d755702be2b91ed866e610296871bebe1"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-transaction/1.0.0.schema.json",
+        "sha256": "0bede804327d0d37e52505cca6eacc8a2173c3dcd758d838264fdec17a100722"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-use-transition/1.0.0.schema.json",
+        "sha256": "3e909f3c1f4ff4636bfff5c4b97561cfde2dd02bab4129dcf7b59500b231dd2d"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence/1.0.0.schema.json",
+        "sha256": "6db2be0361f203e3b41f2209733ab85baff5259c44bba415ad01aa1a43439b97"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_project_condition_evidence_schemas.rs",
+        "sha256": "fb6484e5a4b79637d88968f17b7b19e56c23145d34468bdd5bb3136e40be65b2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260727T235001Z--HCM-2-4--p2s-schema-semantic-freeze-review.json",
+        "sha256": "321367148f9955498104f5524babd5110c740c134bd9b6348206d850bfa128bc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2S-schema-semantic-freeze.md",
+        "sha256": "32f74b72e6a5b58cab51eb7f6ccf6ceb5f796db5070f14aa4df754f036d5f119"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "p2s_discovery_remediation_delta",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "packet_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "Closed schema set and common scalar grammar",
+        "Evidence record and monotonic head",
+        "Fingerprinted evaluation closure",
+        "Evaluator definition",
+        "Reviewable runtime packets after human approval",
+        "Exact proof selectors"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P2 — Environment Context",
+        "Exact implementation surface selectors",
+        "Review budget",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Schema lifecycle and compatibility policy",
+        "Managed project-condition decisions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Proof levels",
+        "Open program proof gates",
+        "HCM-2.4 partial implementation evidence boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "Fresh discovery reviewer /root/hcm_2_4_p2s_review replayed subject sha256:fed0f1b588828d9bc21b4fa52baeb686ca125e25dd11365f02d2318f1e2d48a1 and returned three P2 findings: store-only errors admitted on non-store observations, out-of-range transaction sequences admitted in refs, and incomplete executable proof behind the proof matrix. One consolidated in-scope remediation now makes store/non-store errors disjoint, bounds transaction refs to zero-padded 0001 through 4096 with N-1 vectors, and expands the proof to 15/15 with every distinct nested required key, a frozen 197-row semantic keyword inventory, operational pattern/enum negatives, 2592000/2592001 validity, exact count/byte/long-name/arbitrary-suffix early-termination vectors, and executable production-registration absence. Eight schemas meta-validate, registry preservation passes 6/6, fmt/diff checks pass, and no path outside the original P2S selector plus its immutable dispatch changed.",
+  "allowed_scope": [
+    "Read-only, different-fresh, delta-focused closure review of the exact 12-path remediated subject.",
+    "Verify closure of all three named discovery findings and detect only defects directly caused or unmasked by this remediation.",
+    "Replay the full manifest, focused tests, schema meta-validation, evaluator definition fingerprint, and counterexample negatives.",
+    "Read the complete amendment and original immutable discovery dispatch as authority and finding context.",
+    "Return P1/P2 closure findings or a clean verdict with exact P3/P4 disposition."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger write, dispatch creation, or delegation.",
+    "No reopened broad discovery outside the three remediated findings and directly caused or unmasked effects.",
+    "No P2A, production adapter, P2P, P2R, P2I, P2V, P4, P6, Phase 2 exit, registration, or runtime implementation.",
+    "Do not touch the eight unrelated pre-existing modified paths."
+  ],
+  "tasks": [
+    "Verify the closure dispatch and exact remediated subject fingerprint.",
+    "Reproduce the original non-store/store counterexamples and confirm every cross-kind store-only error is refused.",
+    "Verify transaction-ref grammar accepts only exact zero-padded 1 through 4096 values and that N-1 correspondence is frozen semantically.",
+    "Audit the expanded proof for all distinct nested required keys, every semantic keyword, operational regex/enum negatives, validity boundaries, count/byte/early-termination vectors, and registration absence.",
+    "Run 15/15 P2S tests, 6/6 registry preservation, meta-validation, fmt, and diff checks.",
+    "Return findings first with exact file/line, violated contract, causal relation, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "All three discovery P2 findings must be demonstrably closed without broadening the selected P2S path or behavior boundary.",
+    "No store-only error may validate on a non-store observation, and no non-store error may validate on the store row.",
+    "Transaction refs must encode only 0001 through 4096 and semantic vectors must bind a successor to N-1.",
+    "The proof record must not claim coverage absent from executable tests.",
+    "No valid P1/P2 may remain before the parent commits P2S or begins P2A.",
+    "P3/P4 advisories may remain clean only with exact inventory or explicit disposition under 09."
+  ],
+  "stop_conditions": [
+    "Return blocked if the remediated manifest cannot replay or a named finding cannot be rechecked.",
+    "Report rather than repair any finding.",
+    "Stop rather than infer broader registration, runtime, dependency, unsafe-code, or packet authority."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

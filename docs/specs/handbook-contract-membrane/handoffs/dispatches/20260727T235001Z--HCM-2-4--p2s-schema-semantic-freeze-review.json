@@ -1,0 +1,212 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.3",
+  "dispatch_id": "20260727T235001Z--HCM-2-4--p2s-schema-semantic-freeze-review",
+  "created_at_utc": "2026-07-27T23:50:01Z",
+  "source_handoff_ids": [
+    "20260727T215133Z--HCM-2-4--orchestration--p2-dual-ceiling-planning-completed"
+  ],
+  "parent_orchestration_id": "20260727T230000Z--HCM-2-4--p2s-p2a-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "test-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P2S",
+  "subject_fingerprint": "sha256:fed0f1b588828d9bc21b4fa52baeb686ca125e25dd11365f02d2318f1e2d48a1",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-2-4-p2s-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/definitions/project-condition-evaluators/handbook.condition-evaluator.managed-operational-surface/1.0.0.yaml",
+        "sha256": "71d6b986c265bbe277926c8b60c84220d2d7095ab4675d06a1ec571a7a346bdd"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-admitted-evidence-source/1.0.0.schema.json",
+        "sha256": "7067d2bcc7a54e708838718c94b0f69ff1cb2054969afb989d85b0d706eeb1f1"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-assertion/1.0.0.schema.json",
+        "sha256": "e42e6deb444765e10f4879c4110960d6c43b0c454957059ecb4cd8e3904d3413"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-challenge/1.0.0.schema.json",
+        "sha256": "44c180bc4c022df6a3c7abc9862049f0988af2bda264840711b3674105f130f1"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-evaluation-closure/1.0.0.schema.json",
+        "sha256": "46c5f696667f17ffd3de1a080e7ed9565191dd5cba2b98063a8f43c430cd71a7"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-head/1.0.0.schema.json",
+        "sha256": "e0336932b65ba8915d544b19eb17425d755702be2b91ed866e610296871bebe1"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-transaction/1.0.0.schema.json",
+        "sha256": "3ab9c648f5cc0b1cb91ac34e124712bbf48899cabb92bb2b213130c79cdd51bc"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence-use-transition/1.0.0.schema.json",
+        "sha256": "3e909f3c1f4ff4636bfff5c4b97561cfde2dd02bab4129dcf7b59500b231dd2d"
+      },
+      {
+        "path": "crates/engine/definitions/schemas/handbook.schemas.project-condition-evidence/1.0.0.schema.json",
+        "sha256": "6db2be0361f203e3b41f2209733ab85baff5259c44bba415ad01aa1a43439b97"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_project_condition_evidence_schemas.rs",
+        "sha256": "2667ac1d9d16065d15764aec0799c9aa91d6aaf88570fb695c33070e5a2cc6a9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2S-schema-semantic-freeze.md",
+        "sha256": "d04e313986a41211247ed60feded2a6ac11c3237573c3cbe8bf29d626472a313"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:fed0f1b588828d9bc21b4fa52baeb686ca125e25dd11365f02d2318f1e2d48a1"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "p2s_schema_semantic_freeze",
+    "detail_resolution": "high",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "packet_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "packet_review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+      "sections": [
+        "Decision boundary",
+        "Closed schema set and common scalar grammar",
+        "Admitted source record",
+        "Evidence record and monotonic head",
+        "Challenge, assertion, and producer verification",
+        "Freshness basis",
+        "Total outcome and reason precedence",
+        "Fingerprinted evaluation closure",
+        "Evaluator definition",
+        "Exact proof selectors"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P2 — Environment Context",
+        "Exact implementation surface selectors",
+        "Review budget",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P2 — Environment Context"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "P2 — Environment Context"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Schema lifecycle and compatibility policy",
+        "Managed project-condition decisions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Proof levels",
+        "Open program proof gates",
+        "HCM-2.4 partial implementation evidence boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "The P2 planning amendment is review-clean at commit 68ea22e11920b5d25262af8bdae0b067d689b587 with subject fingerprint sha256:0108c07a1e32cabebe8c9abc509c83d60fd2cfb2488abc14e056a701e821ff53. The human authorized exactly P2S schema/definition implementation and P2A non-production feasibility. This P2S subject is additive: eight new unregistered schemas, one new unregistered evaluator definition, one integration test, and one proof. Focused tests pass 14/14, project-condition registry preservation passes 6/6, fmt and diff checks pass, and no production source, Cargo file, existing released definition, runtime behavior, public API, registration, or existing fingerprint changed. The eight unrelated pre-existing AGENTS.md, CLAUDE.md, and GitNexus skill changes are excluded and must remain untouched.",
+  "allowed_scope": [
+    "Read-only review of the exact 11-path P2S subject manifest.",
+    "Recompute every manifest hash, aggregate fingerprint, schema meta-validation result, evaluator definition fingerprint, and content-addressed preimage vector.",
+    "Compare every schema key, constant, enum, regex, bound, cross-field rule, nullability branch, fingerprint rule, count/byte ceiling, semantic annotation, and rejection vector against the complete frozen planning amendment.",
+    "Run focused tests and read existing registry/source code only to verify non-registration and preservation.",
+    "Classify findings under the HCM review rubric and return them to the parent."
+  ],
+  "non_goals": [
+    "No edits, formatting, staging, commit, push, handoff, ledger write, dispatch creation, or delegation.",
+    "No P2A feasibility probe, production native adapter, P2P, P2R, P2I, P2V, P4, P6, Phase 2 exit, or another slice.",
+    "No registration or runtime design proposal beyond reporting a demonstrated P1/P2 contract defect.",
+    "Do not inspect or modify the eight unrelated pre-existing modified paths.",
+    "Do not adopt prior implementation conclusions before independently reviewing the frozen subject."
+  ],
+  "tasks": [
+    "Verify the dispatch manifest and subject hygiene, then independently read the complete planning amendment and all manifested files.",
+    "Build an amendment-to-schema field matrix and identify omissions, additions, incompatible constraints, open nested objects, or incorrect scalar grammars.",
+    "Recompute every declared preimage and definition fingerprint, including the closure prefix nullability and content-addressed ref rules.",
+    "Audit test completeness for every P2S proof obligation, including required and unknown-field rejection, cross-field branches, all bounds/enums/regexes, and count/byte-ceiling annotations.",
+    "Confirm the new refs are deliberately unregistered and can remain so without loading or production changes.",
+    "Run the focused P2S and registry-preservation tests and report exact results.",
+    "Return findings first in Critical, Required, Optional, Nit order, each with exact file/line, violated contract, reasoning, smallest remediation, and missing verification."
+  ],
+  "contracts_and_gates": [
+    "Every listed record key is required and every object is closed with both additionalProperties:false and unevaluatedProperties:false where the amendment requires them.",
+    "All eight schemas and the one 21-key evaluator definition reproduce the complete frozen P2S contract without inventing a production behavior or narrowing the admitted contract beyond authority.",
+    "Every constant, bound, enum, regex, cross-field rule, preimage, nullability branch, fingerprint/ref rule, count ceiling, byte ceiling, and unknown-field rejection has replayable schema/definition proof.",
+    "The definition fingerprint uses the existing uniform canonical fingerprint rule and all existing released bytes/fingerprints remain unchanged.",
+    "No valid P1/P2 may remain before the parent commits P2S or begins P2A.",
+    "P3/P4 advisories may remain clean only with exact inventory or explicit disposition under 09."
+  ],
+  "stop_conditions": [
+    "Return blocked if the dispatch cannot replay or the complete frozen amendment cannot be compared to the manifested subject.",
+    "Report rather than repair any finding.",
+    "Stop rather than infer registration, runtime, dependency, unsafe-code, or broader packet authority."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
