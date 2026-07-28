@@ -1,0 +1,575 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260728T144118Z--HCM-2-4--orchestration--p2-option-c-containment-product-decision-required",
+  "created_at_utc": "2026-07-28T14:41:18Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "p2-option-c-containment-and-product-reassessment",
+  "orchestration_id": "20260728T133751Z--HCM-2-4--p2-option-c-course-correction-orchestration",
+  "source_handoff_ids": [
+    "20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required",
+    "20260728T041820Z--HCM-0-8--orchestration--causal-review-budget-lineage-hardening-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "partial",
+  "stop_reason": "human_input",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-28T14:41:18Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T142927Z--HCM-2-4--p2-option-c-integrated-closeout-closure-review.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "option-c-containment-review",
+      "dispatch_id": "20260728T134152Z--HCM-2-4--p2-option-c-containment-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T134152Z--HCM-2-4--p2-option-c-containment-review.json",
+      "dispatch_fingerprint": "sha256:55214f8bb538f5d5450bc64d874d44b7f3955ae2c16c20664cfbd648406f1d23",
+      "role": "review",
+      "agent_id": "/root/option_c_containment_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:7413549014a20f86e7e4527ed96f2c539a94c698399365ad204d7fc8bf331d9c",
+      "result_subject_fingerprint": "sha256:7413549014a20f86e7e4527ed96f2c539a94c698399365ad204d7fc8bf331d9c",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T134152Z--HCM-2-4--p2-option-c-containment-review.json"
+      ]
+    },
+    {
+      "run_id": "product-decision-analysis-review",
+      "dispatch_id": "20260728T135058Z--HCM-2-4--p2-product-decision-reassessment-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T135058Z--HCM-2-4--p2-product-decision-reassessment-review.json",
+      "dispatch_fingerprint": "sha256:0678ec61ae43e2186ab05566967e2d2bf3b3dcb88b654209a91f838d86dd486c",
+      "role": "review",
+      "agent_id": "/root/product_decision_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:b7222ca507ac43c38e09193ddeddaee65688f26404cf880b00f5fae0e1327d91",
+      "result_subject_fingerprint": "sha256:b7222ca507ac43c38e09193ddeddaee65688f26404cf880b00f5fae0e1327d91",
+      "review_round": 2,
+      "predecessor_run_id": "option-c-containment-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "PRODUCT-STATUS-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T135058Z--HCM-2-4--p2-product-decision-reassessment-review.json"
+      ]
+    },
+    {
+      "run_id": "product-decision-analysis-closure-review",
+      "dispatch_id": "20260728T140357Z--HCM-2-4--p2-product-decision-reassessment-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T140357Z--HCM-2-4--p2-product-decision-reassessment-closure-review.json",
+      "dispatch_fingerprint": "sha256:35d46683d0c6824b0fc0ebdea3f5cc881d216fadd402c7419a46f76bcecaf22b",
+      "role": "review",
+      "agent_id": "/root/product_decision_closure_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:a2e794763aba1eab59c997376792d084591a16c79db3f55609dd7bea11407960",
+      "result_subject_fingerprint": "sha256:a2e794763aba1eab59c997376792d084591a16c79db3f55609dd7bea11407960",
+      "review_round": 3,
+      "predecessor_run_id": "product-decision-analysis-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T140357Z--HCM-2-4--p2-product-decision-reassessment-closure-review.json"
+      ]
+    },
+    {
+      "run_id": "integrated-closeout-review",
+      "dispatch_id": "20260728T141458Z--HCM-2-4--p2-option-c-integrated-closeout-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T141458Z--HCM-2-4--p2-option-c-integrated-closeout-review.json",
+      "dispatch_fingerprint": "sha256:eeecb0c562fb0d6a45feccfda93f56fc31a6d774449f1fdb634c5c867b93c9d3",
+      "role": "review",
+      "agent_id": "/root/integrated_closeout_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:f3c92cffe58428e53b4c0b404e268966fb949629988cd0dcbbe3712802f5a653",
+      "result_subject_fingerprint": "sha256:f3c92cffe58428e53b4c0b404e268966fb949629988cd0dcbbe3712802f5a653",
+      "review_round": 4,
+      "predecessor_run_id": "product-decision-analysis-closure-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "INTEGRATED-STATUS-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T141458Z--HCM-2-4--p2-option-c-integrated-closeout-review.json"
+      ]
+    },
+    {
+      "run_id": "integrated-closeout-closure-review",
+      "dispatch_id": "20260728T142927Z--HCM-2-4--p2-option-c-integrated-closeout-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T142927Z--HCM-2-4--p2-option-c-integrated-closeout-closure-review.json",
+      "dispatch_fingerprint": "sha256:ff98c8e962d7d98cd770b90c50cdf16e9ccd02e7b05f73043fb39e5050b6de53",
+      "role": "review",
+      "agent_id": "/root/integrated_closeout_closure_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:8fa5398d6f3236fa653e5e62307d4d821c12e7667c43f455ed01321a4cf4339e",
+      "result_subject_fingerprint": "sha256:8fa5398d6f3236fa653e5e62307d4d821c12e7667c43f455ed01321a4cf4339e",
+      "review_round": 5,
+      "predecessor_run_id": "integrated-closeout-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T142927Z--HCM-2-4--p2-option-c-integrated-closeout-closure-review.json"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-07-28T14:41:18Z",
+    "dispatch_count": 5,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:c472b2edc5593595a0e2932da2c7217b5cd3e143166f8c5a3a9392a5282c81f5"
+    ],
+    "aggregate_fingerprint": "sha256:a095cee54a9b147edd28aa18560ed63fee583563a7b1ef00a98d4dcbd0f207ba"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "product-status-001-remediation",
+      "finding_run_id": "product-decision-analysis-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "product-decision-analysis-closure-review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:a2e794763aba1eab59c997376792d084591a16c79db3f55609dd7bea11407960",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T140357Z--HCM-2-4--p2-product-decision-reassessment-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "integrated-status-001-remediation",
+      "finding_run_id": "integrated-closeout-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "integrated-closeout-closure-review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:8fa5398d6f3236fa653e5e62307d4d821c12e7667c43f455ed01321a4cf4339e",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T142927Z--HCM-2-4--p2-option-c-integrated-closeout-closure-review.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "3098390b00aa111db83173cbe4998f6620929d94",
+    "subject_fingerprint": "sha256:8fa5398d6f3236fa653e5e62307d4d821c12e7667c43f455ed01321a4cf4339e",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T142927Z--HCM-2-4--p2-option-c-integrated-closeout-closure-review.json"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T142927Z--HCM-2-4--p2-option-c-integrated-closeout-closure-review.json"
+  },
+  "active_resolution": {
+    "level": "planning",
+    "scope_horizon": "HCM-2.4 P2 course correction",
+    "detail_resolution": "Option C containment plus bounded A-E product-decision reassessment",
+    "temporal_horizon": "selected course-correction handoff through reviewed planning commit",
+    "authority_horizon": "planning-only; no new applicability authority selected",
+    "memory_horizon": "five review dispatches, two remediated findings, primary commit, and parent handoff",
+    "validation_horizon": "human product decision before any successor planning or implementation"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md"
+  },
+  "objective": "Land review-clean course-correction Option C containment, document the exact user-visible readiness impact, compare bounded product alternatives, and request the next explicit human product decision without authorizing implementation.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required.json",
+      "sections": [
+        "Decisions",
+        "Blockers",
+        "Resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+      "sections": [
+        "Environment-context ownership and condition-evaluation closure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+      "sections": [
+        "Baseline verified",
+        "Independent product-path trace",
+        "Option C containment decision",
+        "Product-decision reassessment",
+        "Review and proof record"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+      "sections": [
+        "Comparison",
+        "Recommendation"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "3098390b00aa111db83173cbe4998f6620929d94",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md"
+    ]
+  },
+  "work_completed": [
+    "Verified the released HCM-0.6 fail-closed condition authority and traced artifact_decision through readiness, setup action, rendering, and exit policy.",
+    "Landed course-correction Option C in HCM-2.4 SPEC, plan, todo, and planning proof while preserving immutable P2S/P2A history.",
+    "Superseded future native-adapter selection and froze runtime, schema, native, unsafe, Cargo, dependency, P4, P6, and P7 authority stops.",
+    "Produced the bounded A-E product analysis and recommended an additive default-profile successor without selecting it.",
+    "Obtained isolated containment, product-analysis, and final integrated reviews; remediated both P2 findings and obtained different-fresh CLEAN closures."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "status": "completed",
+      "summary": "Course-correction Option C authority and program gates."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "status": "completed",
+      "summary": "Superseded native path and product-decision gate."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "status": "completed",
+      "summary": "Truthful containment, analysis, and blocked-next-decision checklist."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+      "status": "completed",
+      "summary": "Authority, baseline, user-visible path, containment, and review proof."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+      "status": "completed",
+      "summary": "Evidence-backed comparison of alternatives A-E and recommendation B."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-P2-COURSE-CORRECTION-D1",
+      "summary": "Course-correction Option C is completed planning containment only.",
+      "authority_effect": "Future native-adapter selection is superseded; P2 remains unresolved, fail-closed, and not GREEN.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2-COURSE-CORRECTION-D2",
+      "summary": "Recommend an additive default-profile successor that postpones Environment Context.",
+      "authority_effect": "Recommendation only; shipped-root 1.1/1.2 remain immutable and no profile successor or gate amendment is selected.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2-COURSE-CORRECTION-D3",
+      "summary": "Keep P4 separately selectable only under a later exact selector and keep P6/P7/Phase 2 blocked.",
+      "authority_effect": "P6 still requires genuinely GREEN P2 and P4; P7 and Phase 2 exit remain behind P6.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "PRODUCT-STATUS-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "product-decision-analysis-review",
+      "summary": "The initial analysis overstated all shipped-root 1.2 states as INDETERMINATE instead of preserving INVALID precedence.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T140357Z--HCM-2-4--p2-product-decision-reassessment-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "INTEGRATED-STATUS-001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "integrated-closeout-review",
+      "summary": "The integrated proof cited profile_readiness under the wrong crate and overstated Windows test coverage.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T142927Z--HCM-2-4--p2-option-c-integrated-closeout-closure-review.json"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-P2-PRODUCT-DECISION-001",
+      "classification": "authority",
+      "summary": "No product direction has been selected to replace temporary containment; current shipped-root 1.2 cannot reach READY.",
+      "resume_condition": "The human explicitly selects a product direction and authorizes its smallest planning-only next packet.",
+      "owner": "user"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-2.4-P2-PRODUCT-DIRECTION-001",
+      "trigger": "Option C containment is review-clean but is not a product-complete release state.",
+      "current_resolution": "P2 remains fail-closed; missing/structurally-valid repositories are INDETERMINATE, invalid inputs are INVALID, all applicable CLI paths exit nonzero, and no shipped-root 1.2 repository reaches READY.",
+      "target_resolution": "A human-selected versioned product direction that can reach usable READY without weakening fail-closed authority.",
+      "decision_required": "Choose whether to postpone Environment Context in a new default profile or select a complete authoritative evidence model.",
+      "options": [
+        "A: retain indefinite fail-closed behavior as a baseline/non-solution.",
+        "B: add an exact default-profile successor that preserves Charter and Project Context and postpones Environment Context.",
+        "C: explicitly admit a complete current project-owner declaration authority.",
+        "D: name a real existing external/already-owned issuer and complete verifier-only contract.",
+        "E: admit current Charter operational-reality evidence as positive support only, accepting that it cannot prove global absence."
+      ],
+      "recommendation": "Select B as the simplest usable direction, then freeze the exact successor ref/fingerprint, 1.1/1.2 compatibility boundary, and amended P2/P6/P7/Phase 2 gates in a planning-only packet.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "Resume only after an explicit human product selection; do not infer implementation authority from that selection."
+    }
+  ],
+  "validation": [
+    {
+      "command": "cargo test -p handbook-cli --test cli_surface profile_setup_and_doctor_use_typed_rows_json_and_exit_policy -- --exact",
+      "status": "passed",
+      "evidence_ref": "1 passed; missing-path INDETERMINATE rendering and nonzero exit"
+    },
+    {
+      "command": "cargo test -p handbook-engine --test profile_selection --test hcm_1_4_profile_decisions --test hcm_1_4_profile_inspection",
+      "status": "passed",
+      "evidence_ref": "25 passed, 0 failed; one Windows-gated target had zero runnable tests"
+    },
+    {
+      "command": "assert source order in crates/compiler/src/profile_readiness.rs::classify_readiness",
+      "status": "passed",
+      "evidence_ref": "Invalid return offset 6071 precedes Indeterminate return offset 6255"
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py plus both self-test modes",
+      "status": "passed",
+      "evidence_ref": "ordinary validation, historical admission, v1.4 causal contract, and orchestration contract passed"
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T142927Z--HCM-2-4--p2-option-c-integrated-closeout-closure-review.json",
+      "status": "passed",
+      "evidence_ref": "sha256:8fa5398d6f3236fa653e5e62307d4d821c12e7667c43f455ed01321a4cf4339e"
+    },
+    {
+      "command": "check five Markdown files for required clauses, nine relative links, balanced fences, and trailing whitespace",
+      "status": "passed",
+      "evidence_ref": "all integrated and closure assertions passed"
+    },
+    {
+      "command": "git diff --cached --check",
+      "status": "passed",
+      "evidence_ref": "primary commit staged subject exited 0"
+    },
+    {
+      "command": "node .gitnexus/run.cjs detect-changes --scope staged --repo handbook --limit 200",
+      "status": "passed",
+      "evidence_ref": "10 expected planning/review files and 18 Markdown symbols; CRITICAL/257 flow mapping is documentation-association contamination, with zero runtime/code paths changed"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "Status",
+        "P2 — Environment Context vertical",
+        "Exact implementation surface selectors"
+      ],
+      "reason": "Freeze course-correction Option C and the later product-decision gate.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P2 — Environment Context vertical",
+        "P2 course-correction product gate",
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "P7 — Phase 2 exit and true stop"
+      ],
+      "reason": "Supersede the native path and preserve downstream blocks.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "P2 — Environment Context",
+        "P6 — Aggregate cleanup",
+        "P7 — Proof, review, and closeout"
+      ],
+      "reason": "Record completed containment/analysis and the human product-decision blocker.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+      "sections": [
+        "Independent product-path trace",
+        "Option C containment decision",
+        "Product-decision reassessment",
+        "Review and proof record"
+      ],
+      "reason": "Record exact evidence and review-clean planning proof.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+      "sections": [
+        "Comparison",
+        "Recommendation"
+      ],
+      "reason": "Preserve the bounded A-E decision analysis without selecting authority.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Select the next product direction for Environment Context applicability.",
+    "condition": "Resume only when the human explicitly selects this handoff and chooses a product direction for a new planning-only packet.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T144118Z--HCM-2-4--orchestration--p2-option-c-containment-product-decision-required.json",
+        "sections": [
+          "Decisions",
+          "Blockers",
+          "Escalations",
+          "Resume"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+        "sections": [
+          "Comparison",
+          "Recommendation"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+        "sections": [
+          "Environment-context ownership and condition-evaluation closure"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+        "sections": [
+          "Baseline verified",
+          "Independent product-path trace",
+          "Option C containment decision"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Planning-only selection of one exact product direction.",
+      "For recommended B, freeze an additive exact profile successor, compatibility boundary, and explicit P2/P6/P7/Phase 2 gate amendments.",
+      "For C or D, name an exact existing authority and freeze complete identity, subject, positive/negative, freshness, revocation, contradiction, replay/current-head, and closure semantics.",
+      "For E, prove the exact positive Charter chain and preserve the inability to prove global absence."
+    ],
+    "prohibited_scope": [
+      "No runtime, profile publication, schema/definition, verifier, evaluator, producer, native adapter, WebAuthn/FIDO/CTAP, USB/HID, device, platform UI, unsafe, Cargo, dependency, P4, P6, or P7 implementation.",
+      "Do not mutate shipped-root 1.1 or 1.2, P2S/P2A history, or unrelated dirty paths.",
+      "Do not infer Environment Context applicability, treat silence as false, invent an issuer/key/trust system, or let the artifact prove itself.",
+      "Do not claim P2, HCM-2.4, P7, or Phase 2 completion."
+    ],
+    "acceptance_criteria": [
+      "The human explicitly selects one product direction.",
+      "The next packet remains planning-only and freezes exact released-authority/versioning/gate changes.",
+      "Shipped-root 1.1/1.2 and P2S/P2A remain immutable.",
+      "The selected planning amendment receives fresh independent review and stops before implementation."
+    ],
+    "stop_conditions": [
+      "Stop if the selected direction requires an unnamed authority, incomplete negative coverage, self-declaration, or silent fail-open behavior.",
+      "Stop if exact versioning or compatibility implications remain undecided.",
+      "Stop on any implementation request not separately and explicitly authorized.",
+      "Stop if protected unrelated modifications cannot remain untouched."
+    ]
+  },
+  "supersedes": [
+    "20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required"
+  ],
+  "chat_summary": "Course-correction Option C planning containment is review-clean and committed at 3098390b00aa111db83173cbe4998f6620929d94. P2 remains unresolved/not GREEN; shipped-root 1.2 cannot reach READY. The A-E analysis recommends an additive default-profile successor but selects no authority. Human product decision required; HCM-2.4 and Phase 2 remain incomplete."
+}
