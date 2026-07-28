@@ -1,0 +1,517 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260728T041820Z--HCM-0-8--orchestration--causal-review-budget-lineage-hardening-completed",
+  "created_at_utc": "2026-07-28T04:18:20Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "causal-review-budget-and-lineage-hardening",
+  "orchestration_id": "20260728T024900Z--HCM-0-8--causal-review-budget-and-lineage-hardening-orchestration",
+  "source_handoff_ids": [
+    "20260726T153435Z--HCM-0-8--orchestration--review-cycle-hardening-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-28T04:18:20Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T035843Z--HCM-0-8--causal-review-budget-lineage-hardening-final-supplemental-review.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "causal-control-discovery-review",
+      "dispatch_id": "20260728T024913Z--HCM-0-8--causal-review-budget-lineage-hardening-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T024913Z--HCM-0-8--causal-review-budget-lineage-hardening-review.json",
+      "dispatch_fingerprint": "sha256:65221cfb4fba822b47305f11b92524d419d3698dc853aef08d7573750a828e99",
+      "role": "review",
+      "agent_id": "/root/causal_control_independent_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:b4562be95112b35b40cef4e4fb3adf66d374d29e449a369935be756ea4746335",
+      "result_subject_fingerprint": "sha256:b4562be95112b35b40cef4e4fb3adf66d374d29e449a369935be756ea4746335",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-CRBL-P2-01",
+        "HCM-CRBL-P2-02",
+        "HCM-CRBL-P2-03",
+        "HCM-CRBL-P2-04"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T024913Z--HCM-0-8--causal-review-budget-lineage-hardening-review.json"
+      ]
+    },
+    {
+      "run_id": "causal-control-closure-review",
+      "dispatch_id": "20260728T032400Z--HCM-0-8--causal-review-budget-lineage-hardening-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T032400Z--HCM-0-8--causal-review-budget-lineage-hardening-closure-review.json",
+      "dispatch_fingerprint": "sha256:951982cbc323c65983a9844e058dc7ed420c7ce9dccfbee44198ee51e20b76fa",
+      "role": "review",
+      "agent_id": "/root/causal_control_closure_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:792c15958386689c66781d0f3e51c1f77196ab4929a0fe4a373e77cc359da64d",
+      "result_subject_fingerprint": "sha256:792c15958386689c66781d0f3e51c1f77196ab4929a0fe4a373e77cc359da64d",
+      "review_round": 2,
+      "predecessor_run_id": "causal-control-discovery-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-CRBL-P2-04-C1"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T032400Z--HCM-0-8--causal-review-budget-lineage-hardening-closure-review.json"
+      ]
+    },
+    {
+      "run_id": "causal-control-supplemental-review-1",
+      "dispatch_id": "20260728T034100Z--HCM-0-8--causal-review-budget-lineage-hardening-supplemental-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T034100Z--HCM-0-8--causal-review-budget-lineage-hardening-supplemental-review.json",
+      "dispatch_fingerprint": "sha256:d2236cfd42f78e46879170d104f1236305c8b902559b94809fd0ec804488a04c",
+      "role": "review",
+      "agent_id": "/root/causal_control_supplemental_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:e87e4eda2c6a7692343484b2f27624fa9e245ca83762ccaf0ab01d9b1bdb7822",
+      "result_subject_fingerprint": "sha256:e87e4eda2c6a7692343484b2f27624fa9e245ca83762ccaf0ab01d9b1bdb7822",
+      "review_round": 3,
+      "predecessor_run_id": "causal-control-closure-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-CRBL-P2-04-C1-S1"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T034100Z--HCM-0-8--causal-review-budget-lineage-hardening-supplemental-review.json"
+      ]
+    },
+    {
+      "run_id": "causal-control-final-supplemental-review",
+      "dispatch_id": "20260728T035843Z--HCM-0-8--causal-review-budget-lineage-hardening-final-supplemental-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T035843Z--HCM-0-8--causal-review-budget-lineage-hardening-final-supplemental-review.json",
+      "dispatch_fingerprint": "sha256:14c85d18073fadff6d9c8423a2d6a8f62e8b93200ceab3a0aeca95597a040df6",
+      "role": "review",
+      "agent_id": "/root/causal_control_final_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:f0312d3624889c523e50b743fd87e849be3efff322a2e7e861024c0cebe8e278",
+      "result_subject_fingerprint": "sha256:f0312d3624889c523e50b743fd87e849be3efff322a2e7e861024c0cebe8e278",
+      "review_round": 4,
+      "predecessor_run_id": "causal-control-supplemental-review-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T035843Z--HCM-0-8--causal-review-budget-lineage-hardening-final-supplemental-review.json"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-07-28T04:18:20Z",
+    "dispatch_count": 4,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:c33c47797db78db93c2daded2c89fddf33df2ae13f319ef67a64c22978284d27"
+    ],
+    "aggregate_fingerprint": "sha256:cab5365d4e29348ef5f3640107da54a0d2013015909b87b2a50452e1d3613091"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "causal-control-discovery-remediation",
+      "finding_run_id": "causal-control-discovery-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "causal-control-closure-review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:792c15958386689c66781d0f3e51c1f77196ab4929a0fe4a373e77cc359da64d",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "remediation_id": "causal-control-closure-remediation",
+      "finding_run_id": "causal-control-closure-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "causal-control-supplemental-review-1",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:e87e4eda2c6a7692343484b2f27624fa9e245ca83762ccaf0ab01d9b1bdb7822",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "remediation_id": "causal-control-supplemental-remediation",
+      "finding_run_id": "causal-control-supplemental-review-1",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "causal-control-final-supplemental-review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:f0312d3624889c523e50b743fd87e849be3efff322a2e7e861024c0cebe8e278",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "4e6a9243aa0e64a8c8edee5b345b5cdd2c1fa7df",
+    "subject_fingerprint": "sha256:f0312d3624889c523e50b743fd87e849be3efff322a2e7e861024c0cebe8e278",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T035843Z--HCM-0-8--causal-review-budget-lineage-hardening-final-supplemental-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T035843Z--HCM-0-8--causal-review-budget-lineage-hardening-final-supplemental-review.json"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "HCM-0.8 orchestration control repair",
+    "detail_resolution": "versioned causal-budget, stage, complete-dispatch, convergence, and ancillary-ceiling controls",
+    "temporal_horizon": "diagnosis through separate mechanical closeout",
+    "authority_horizon": "orchestration-control materials only",
+    "memory_horizon": "immutable evidence, four dispatches, primary commit, and completed parent handoff",
+    "validation_horizon": "clean independent final supplemental review and complete proof replay"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Diagnose, repair, independently review, commit, and close the P3B causal-review budget and dispatch-lineage control bypass without changing or selecting HCM-2.4 work.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch record",
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+      "sections": [
+        "Authority boundary",
+        "Decision",
+        "Deterministic proof",
+        "Independent review remediation"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "4e6a9243aa0e64a8c8edee5b345b5cdd2c1fa7df",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md"
+    ]
+  },
+  "work_completed": [
+    "Reproduced all five P3B bypass mechanisms from the immutable 13-dispatch population and contrasted them with the bounded P2 lineage.",
+    "Added v1.4 dispatch and handoff successors with a parent/outcome causal budget, monotonic typed stages, typed causal reasons, complete dispatch reconciliation, and a five-part convergence gate.",
+    "Added Git-derived bounded ancillary allowance enforcement, final-clean-review cutoff preservation, and exact negative regressions for renamed discovery, post-CLEAN discovery, remediation-unmasked failures, excess cycles, omissions, mechanical reset, observed P3B subdivision, and post-clean allowance widening.",
+    "Preserved v1.1, v1.2, and v1.3 historical corpus admission and immutable HCM-2.4 evidence.",
+    "Obtained discovery, closure, and two bounded supplemental reviews; the different-fresh final reviewer returned CLEAN."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.4.schema.json",
+      "status": "completed",
+      "summary": "Current causal-budget, typed-stage, convergence, and ancillary internal-dispatch contract."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.4.schema.json",
+      "status": "completed",
+      "summary": "Current complete parent-population reconciliation and primary-commit closeout contract."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "completed",
+      "summary": "Fail-closed v1.4 semantics, immutable predecessor admission, live verification, and deterministic regressions."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+      "status": "completed",
+      "summary": "Authority boundary, evidence-only reproduction, control decision, proof, and review-remediation record."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T035843Z--HCM-0-8--causal-review-budget-lineage-hardening-final-supplemental-review.json",
+      "status": "completed",
+      "summary": "Different-fresh CLEAN review over the exact final 15-file subject."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-0.8-CRBL-D1",
+      "summary": "Use additive v1.4 successors; retain predecessor records as frozen validation-only evidence.",
+      "authority_effect": "Historical P2 and HCM-2.4 truth remains immutable while new orchestration must use the hardened contract.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.4.schema.json",
+        "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.4.schema.json"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.8-CRBL-D2",
+      "summary": "Bind one causal budget to the parent orchestration and registry-authorized integrated outcome across explicit monotonic stages.",
+      "authority_effect": "Selector, packet, cycle, fingerprint, and outcome renaming cannot manufacture discovery authority.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.8-CRBL-D3",
+      "summary": "Reconcile every parent dispatch mechanically and freeze ancillary authority at the final clean review.",
+      "authority_effect": "Omitted dispatches and post-review mechanical allowance widening fail closed.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-CRBL-P2-01",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "causal-control-discovery-review",
+      "summary": "Self-asserted integrated outcome IDs could manufacture new causal budgets.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-CRBL-P2-02",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "causal-control-discovery-review",
+      "summary": "The v1.3 dispatch and record corpora lacked exact aggregate byte freezing.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-CRBL-P2-03",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "causal-control-discovery-review",
+      "summary": "RFC 3339 offsets could evade a lexically compared dispatch-population cutoff.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-CRBL-P2-04",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "causal-control-discovery-review",
+      "summary": "Ancillary changed-line counts were self-declared instead of derived from Git.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-CRBL-P2-04-C1",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "causal-control-closure-review",
+      "summary": "Primary-commit ancillary observations were not compared with reviewed per-path, path-count, and aggregate ceilings.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    },
+    {
+      "finding_id": "HCM-CRBL-P2-04-C1-S1",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "causal-control-supplemental-review-1",
+      "summary": "A later non-review mechanical dispatch could widen the clean review's ancillary ceilings.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "ordinary validation: five record schemas, five dispatch schemas, two templates, 65 records, 410 current dispatches, eight legacy dispatches, and 65 ledger entries"
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "historical admission mutation, deletion, addition, isolation, and exact-ledger cases passed"
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "v1.4 causal and predecessor orchestration regressions passed"
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T035843Z--HCM-0-8--causal-review-budget-lineage-hardening-final-supplemental-review.json",
+      "status": "passed",
+      "evidence_ref": "sha256:f0312d3624889c523e50b743fd87e849be3efff322a2e7e861024c0cebe8e278"
+    },
+    {
+      "command": "parse eight changed JSON files, Python AST, seven Markdown fence sets, and 16 relative links; run focused Ruff E9/F",
+      "status": "passed",
+      "evidence_ref": "parent terminal output before primary commit"
+    },
+    {
+      "command": "git diff --cached --check",
+      "status": "passed",
+      "evidence_ref": null
+    },
+    {
+      "command": "node .gitnexus/run.cjs detect-changes --scope staged --repo handbook --limit 200",
+      "status": "passed",
+      "evidence_ref": "16 expected control files and 56 indexed symbols; reported CRITICAL flow mapping was contaminated by unrelated Rust associations, while exact forbidden product/HCM-2.4 scope remained zero"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ],
+      "reason": "Freeze v1.4 causal-budget, stage, convergence, ancillary, and population contracts.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates"
+      ],
+      "reason": "Record deterministic v1.4 regression gates.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Internal dispatch fields",
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+      ],
+      "reason": "Make convergence, live verification, and complete closeout operational.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch record",
+        "Handoff schema routing",
+        "Two-commit true-stop closeout"
+      ],
+      "reason": "Define complete dispatch reconciliation and final-review ancillary cutoff.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic resume; this orchestration-control repair is complete.",
+    "condition": "A separately authorized future control change may source this completed handoff.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+        "sections": [
+          "Authority boundary",
+          "Decision",
+          "Deterministic proof"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not treat this control handoff as selection, source, supersession, amendment, or resume authority for HCM-2.4."
+    ],
+    "acceptance_criteria": [],
+    "stop_conditions": []
+  },
+  "supersedes": [],
+  "chat_summary": "Completed the v1.4 causal-budget and dispatch-lineage repair under HCM-0.8. Four immutable review dispatches reconcile one parent/outcome budget; the final different-fresh review is CLEAN at sha256:f0312d3624889c523e50b743fd87e849be3efff322a2e7e861024c0cebe8e278. HCM-2.4 remains immutable evidence only."
+}
