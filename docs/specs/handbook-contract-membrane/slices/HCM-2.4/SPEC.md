@@ -1,26 +1,36 @@
 # HCM-2.4 — Remaining shipped artifact-family conversion
 
-Status: partially implemented. P0/P1A/P1B/P1C and P3/P3B are review-clean and
-committed; the exact P4/P5 coverage-token prerequisite is review-clean and
-committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`. P4's separate
+Status: partially implemented under Option C planning containment. P0/P1A/P1B/
+P1C and P3/P3B are review-clean and committed; the exact P4/P5 coverage-token
+prerequisite is review-clean and committed at
+`00dde0162fcb15576c83b6ed40ab7286488d0890`. P4's separate
 negative-surface/path proof remains open. P2S is review-clean and committed at
-`755acc56fad6cc99c016dc58f94d310c84f98c58`. The P2A non-production probe
-found Windows WebAuthn present but no approved safe workspace binding or live
-CTAP2.1 transport; its exact result is conditionally feasible and presently
-blocked on a second human decision. No production adapter or P2P began. P6 and
-Phase 2 exit are not earned.
+`755acc56fad6cc99c016dc58f94d310c84f98c58`; P2A is retained as immutable
+non-production feasibility evidence. Future native-adapter selection is
+superseded. P2 remains unresolved, fail-closed, and not GREEN. No production
+adapter or P2P began. P6, P7, HCM-2.4 completion, and Phase 2 exit are not
+earned.
 
 Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
 
 Selected resume lineage:
-`20260727T070426Z--HCM-2-4--orchestration--authority-prerequisites-required`
+`20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required`
+
+Orchestration-control repair lineage:
+`20260728T041820Z--HCM-0-8--orchestration--causal-review-budget-lineage-hardening-completed`;
+primary repair commit
+`4e6a9243aa0e64a8c8edee5b345b5cdd2c1fa7df`; mechanical closeout
+`b770a20b2e8ff8c96c60caf928f91691ee4bdd54`.
 
 Amendment evidence:
 [proof/20260726T122626Z--planning-charter-compatibility-amendment.md](proof/20260726T122626Z--planning-charter-compatibility-amendment.md)
 and
 [proof/20260726T124918Z--planning-amendment-review-1-remediation.md](proof/20260726T124918Z--planning-amendment-review-1-remediation.md)
 and
-[proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md](proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md)
+[proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md](proof/20260726T125938Z--planning-amendment-supplemental-causal-remediation-1.md),
+[proof/20260728T133751Z--p2-option-c-containment-planning-proof.md](proof/20260728T133751Z--p2-option-c-containment-planning-proof.md),
+and
+[decision/20260728-p2-product-decision-reassessment.md](decision/20260728-p2-product-decision-reassessment.md)
 
 ## Objective and completion boundary
 
@@ -38,10 +48,11 @@ end:
   Charter, Project Context, or HCM-2.3 registry-brief authority.
 
 This document freezes implementation packets and proof obligations. Runtime
-work was authorized only through the exact selectors recorded by the
-parent-owned orchestration. The current operator selection authorizes only the
-exact P4/P5 derivation selector below and a P2 planning amendment. It does not
-authorize P2 runtime work, P6, Phase 2 exit, or another slice.
+work is authorized only through exact selectors recorded by parent-owned
+orchestration. The current selection authorizes only Option C containment
+planning and a product-decision reassessment. It does not authorize runtime,
+schema/definition, Cargo/dependency, native integration, P4, P6, P7, Phase 2
+exit, or another slice.
 
 ## Authority and preserved decisions
 
@@ -427,23 +438,47 @@ an applicability flag, or write while applicability is unresolved. P2
  behavior-changing work must remain paused. The dual-ceiling over-limit repair
  receives exactly one fresh complete-subject review; a valid P1/P2 stops without
  remediation,
-while CLEAN permits only a distinct human decision on P2S plus the
-non-production P2A native-feasibility selector. The observed P2A result must
-then receive separate human approval for an exact production adapter or name a
-completed producer dependency before P2P. P2R, P2I, and P2V remain closed
-behind their exact predecessors. P3–P5 remain semantically independent, but P6
-cannot begin while P2 is blocked.
+while CLEAN permits only the reviewed planning amendment and a later explicit
+human product decision. P2R, P2I, and P2V remain closed behind their exact
+predecessors. Independently authorized P4 or unrelated work may proceed only
+under its own later exact selector, but P6 cannot begin until both P2 and P4 are
+genuinely GREEN.
 
-That bounded decision has now been exercised only through P2S and P2A. P2S is
+That bounded decision was exercised only through P2S and P2A. P2S is
 review-clean at `755acc56fad6cc99c016dc58f94d310c84f98c58` with reviewed
 subject
 `sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04`.
 P2A observed an installed Windows WebAuthn surface and compatible assertion
 shape, but no approved safe binding, live CTAP2.1 transport/device ceremony,
 or native cancellation/error mapping. It proved the default unavailable port
-performs zero repository writes and returned conditionally feasible,
-presently blocked. A second human decision must select and authorize an exact
-adapter/dependency boundary before P2P can be considered.
+performs zero repository writes. P2S schemas/evaluator and P2A feasibility
+records remain immutable historical evidence; they do not authorize or imply a
+production path.
+
+Option C now supersedes every future native-adapter selection in this plan.
+No WebAuthn/FIDO/CTAP ceremony, USB/HID or device access, platform UI,
+cancellation/error integration, unsafe code, Cargo/lockfile change, or
+dependency work is authorized. Under the current released contract,
+Environment Context applicability remains explicitly unresolved and
+fail-closed: it may not be inferred, coerced, self-declared, or established by
+creating the artifact or toggling a profile flag. Option C is temporary
+containment, not a product-complete state and not a GREEN result for P2.
+
+The product-decision reassessment compares indefinite fail-closed behavior, a
+new default-profile successor without Environment Context, an explicit
+project-owner declaration, a named existing external/already-owned authority,
+and narrow positive-only Charter evidence. It recommends the additive profile
+successor as the smallest product direction that can restore a usable READY
+path while leaving shipped-root 1.1 and 1.2 immutable. The recommendation is
+not selected authority. A later human packet must freeze the exact successor
+version/fingerprint, amend the HCM-0.6 three-instance default decision, and
+explicitly rebaseline P2/P6/P7/Phase 2 gates before any implementation packet
+can exist.
+
+Until then, the missing or structurally valid shipped-root 1.2 baseline remains
+`INDETERMINATE`; invalid, unsafe, or unreadable selected artifacts take the
+higher-precedence `INVALID` path. Both outcomes exit nonzero, and neither can
+reach READY.
 
 ### P3 — Work Specification / Stage 10 vertical
 
@@ -535,9 +570,11 @@ completion.
 
 ## Exact implementation surface selectors
 
-These selectors are the maximum planned implementation surface. A packet must
-stop if it needs a surface outside its row unless the parent accepts a
-same-scope correction after fresh impact analysis.
+These selectors record the historical maximum planned implementation surface.
+A packet must stop if it needs a surface outside its row unless the parent
+accepts a same-scope correction after fresh impact analysis. The P2A/P2P/P2R/
+P2I/P2V rows are non-executable historical planning under Option C; they confer
+no present or future native-adapter authority.
 
 | Packet | Production/definition selectors | Test/proof selectors | Documentation selectors |
 | --- | --- | --- | --- |
@@ -545,7 +582,7 @@ same-scope correction after fresh impact analysis.
 | P1B | `crates/engine/src/charter_definition_registry.rs` exact `CharterDefinitionRegistry.validate_selected_decisions#1`; `crates/engine/src/charter_lifecycle_validation.rs` exact `SELECTED_PROFILE_REF`, `SELECTED_PROFILE_FINGERPRINT`, `build_result`, and `validate_definition_authority`; `crates/engine/src/charter_intake.rs` exact `evaluate_charter_intake`; `crates/engine/src/charter_approval_workflow.rs` exact `validate_candidate_currentness`; `crates/engine/src/charter_promotion_workflow.rs` exact `validate_candidate_contract` and `CharterPromotionWorkflowServiceV1.promote_at#2`; `crates/engine/src/charter_authority_transaction.rs` exact `CharterAuthorityTransactionServiceV1.preflight#1`; `crates/compiler/src/doctor.rs` exact `doctor_report_from_inspection` is a read/proof anchor and is not edited; no signature/public type/schema/vector change | exact new `crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs`, including `invalid_compatible_profile_decisions_cannot_produce_charter_intake`; every `crates/engine/tests/hcm_2_2_*.rs`; exact compiler doctor unit and CLI doctor/profile test commands from the proof; HCM-2.2 compiler/CLI product-cutover/version/skill tests; all direct HIGH/CRITICAL upstream tests; exact 1.1/1.2 equality and per-field negative vectors | packet proof only |
 | P1C | `crates/engine/src/profile_decision.rs` exact `shipped_profile_request` source list and selected profile ref; `crates/engine/src/project_context_artifact.rs` exact existing `selected_contract_matches` predicate and its existing unit test only, admitting the exact Project Context kind `1.0`/`1.1` pair over the unchanged schema `1.0` and canonical path without adding a production symbol or fallback; `resolve_shipped_profile_decisions` is a read/proof anchor and is not edited; no signature/public type changes | editable `crates/engine/tests/{hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile}.rs` and P1B compatibility target; in Unix compiler test `doctor_api_projects_the_exact_stable_project_context_row`, only report schema-version expectation `1.1.0` to `1.2.0` and Project Context kind expectation `1.0.0` to selected `1.1.0`; in Unix CLI test `doctor_reports_ready_when_required_artifacts_present`, only replace its obsolete inline Charter 1.0 setup with the existing `write_valid_selected_charter` helper and change the Project Context kind expectation `1.0.0` to selected `1.1.0`; no helper implementation, fixture asset, or other assertion edit; `crates/engine/tests/hcm_2_1_project_context.rs` is read/proof-only with required zero-byte delta and 12/12 pass; every CRITICAL upstream preservation test | packet proof only |
 | P2S | eight exact new project-condition evidence schema files and one exact new evaluator definition named by the planning amendment; no Rust production edit | schema/definition vectors covering every constant, bound, enum, regex, preimage, closed-key refusal, and closure nullability branch | packet proof only; human approval required |
-| P2A | non-production native-platform feasibility probe only; a production `PlatformNativeAuthenticatorPortV1` requires a later exact compiler/platform selector after observed behavior | local primitive, cancellation, status/error mapping, user-presence/verification, and zero-write unavailability proof | stop and return for authority before production adapter |
+| P2A | completed non-production native-platform feasibility probe only; immutable historical evidence; no production `PlatformNativeAuthenticatorPortV1` or later native selector is authorized | retained local primitive and zero-write unavailability proof; no new device, cancellation, status/error, or ceremony work | superseded by Option C; do not resume native-adapter selection |
 | P2P | new `crates/engine/src/project_condition_evidence.rs` producer/service surface plus `crates/engine/src/lib.rs` module exposure; no profile, CLI/compiler caller, or Environment Context edit | new `hcm_2_4_project_condition_evidence_producer.rs`: source/challenge/assertion/use-chain/record/two-head/immutable-transaction transaction, interruption/recovery, simultaneous-head rollback/fork/replay/cross-family, and unavailable-port zero-write | packet proof only |
 | P2R | evaluator functions in the same new engine module; no shipped resolver or Environment Context edit | new `hcm_2_4_project_condition_evidence_evaluator.rs`: bounded maximal-transaction/fixed-head transport, ordered dependency-observation closure replay, mixed freshness, all reachable precedence branches, and zero self-reference influence | packet proof only |
 | P2I | `profile_decision.rs` only: exact reason-enum additions, new crate-private `ProjectConditionEvaluation::evaluated`, `resolve_shipped_profile_decisions`, unchanged-body extraction through new private `from_profile_with_condition_evaluations`, and `artifact_decision`; no other existing production symbol | condition-specific cases in `hcm_1_4_profile_decisions.rs` and `hcm_1_4_profile_inspection.rs`; direct public fallback, serialized existing reason, downstream compile, exact outcome/applicability, and CRITICAL flow walls | packet proof only; explicit public-enum compatibility approval required |

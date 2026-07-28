@@ -1,12 +1,12 @@
 # HCM-2.4 implementation checklist
 
-Status: partial implementation. P0/P1A/P1B/P1C and P3/P3B are review-clean.
-P2S is review-clean and committed at `755acc56`; P2A returned conditionally
-feasible, presently blocked non-production evidence. Runtime and P2P remain
-authority-blocked pending the exact second human adapter/dependency decision.
-The P4/P5 token prerequisite is review-clean and committed at `00dde01`; P4's
-separate negative-surface/path proof remains open. P6 and Phase 2 exit remain
-incomplete.
+Status: partial implementation under Option C planning containment.
+P0/P1A/P1B/P1C and P3/P3B are review-clean. P2S is review-clean and committed
+at `755acc56`; P2A is immutable non-production feasibility evidence. Future
+native-adapter selection is superseded. P2 remains unresolved, fail-closed, and
+not GREEN. The P4/P5 token prerequisite is review-clean and committed at
+`00dde01`; P4's separate negative-surface/path proof remains open. P6, P7, and
+Phase 2 exit remain incomplete.
 
 ## Entry
 
@@ -215,14 +215,37 @@ incomplete.
       zero-write 1/1 with discarded temporary material, and record the
       present Windows WebAuthn surface plus unavailable safe binding/live
       transport/cancellation behavior.
-- [ ] BLOCKED: obtain the exact second human decision that either authorizes a
-      separately bounded production adapter with named platform,
-      dependency/version/features, Cargo/lockfile and unsafe-policy authority,
-      cancellation/error/selection contracts and device matrix, or names a
-      completed independently reviewed producer/native dependency. Do not use
-      structured Environment Context input,
-      `applicability_basis`, profile opt-in, artifact presence, or
-      `indeterminate` coercion as condition evidence.
+- [x] Select Option C planning containment: supersede future production
+      native-adapter selection and preserve P2S/P2A as immutable historical
+      evidence.
+- [x] Freeze the containment boundary: no WebAuthn/FIDO/CTAP, USB/HID, device,
+      platform UI, cancellation/error, unsafe, Cargo/lockfile, dependency,
+      producer, evaluator, resolver, or native integration work is authorized.
+- [x] Preserve the released fail-closed result: no structured Environment
+      Context input, `applicability_basis`, profile toggle, artifact presence,
+      or `indeterminate` coercion can establish applicability.
+- [x] Trace `artifact_decision` through inspection/readiness classification,
+      setup action selection, doctor/setup rendering, and CLI exit policy.
+      Record the missing/structurally-valid `INDETERMINATE` path, the
+      higher-precedence invalid/unsafe/unreadable `INVALID` path, nonzero exit,
+      and the invariant that shipped-root 1.2 cannot reach READY.
+- [x] Record the bounded A–E product analysis in
+      `decision/20260728-p2-product-decision-reassessment.md`, including all
+      requested experience, security, burden, contract, versioning, program,
+      READY, and next-packet dimensions.
+- [x] Recommend, without selecting, an additive default-profile successor that
+      temporarily postpones Environment Context, preserves Charter and Project
+      Context authority, and leaves shipped-root 1.1/1.2 immutable.
+- [x] Obtain isolated Option C containment review: dispatch
+      `20260728T134152Z--HCM-2-4--p2-option-c-containment-review` returned CLEAN
+      with no findings.
+- [x] Obtain isolated product-analysis discovery review, remediate
+      `PRODUCT-STATUS-001` by recording `INVALID` precedence, and obtain
+      different-fresh CLEAN closure at dispatch
+      `20260728T140357Z--HCM-2-4--p2-product-decision-reassessment-closure-review`.
+- [ ] BLOCKED: obtain a later explicit human product decision selecting a
+      released-authority direction. Option C itself does not select an
+      authority model or authorize implementation.
 - [ ] Establish a focused RED proving Markdown is currently authoritative.
 - [ ] Write only selected `.handbook/project/environment.yaml` canonical bytes.
 - [ ] Cut CLI/setup/doctor/compiler/flow reads to selected retained YAML.
@@ -406,7 +429,7 @@ incomplete.
 
 ## P6 — Aggregate cleanup
 
-- [ ] BLOCKED: P2 lacks runtime authority and P4's separate
+- [ ] BLOCKED: P2 is unresolved/not GREEN and P4's separate
       negative-surface/path proof remains open. The P4/P5 token prerequisite
       is review-clean and committed.
 - [ ] Replace fixed/bridge flow input collection with admitted selected
@@ -422,6 +445,8 @@ incomplete.
 
 ## P7 — Proof, review, and closeout
 
+- [ ] BLOCKED: P7 cannot begin until P6 is accepted; Phase 2 exit cannot be
+      claimed from Option C containment.
 - [ ] Run every per-family proof and exact Phase 2 exit mapping.
 - [ ] Replay exact 1.1 acceptance, exact 1.2 compatibility, every
       Project-Authority-field negative, real-path 1.2 selection, byte-identical

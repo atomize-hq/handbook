@@ -1,0 +1,214 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260728T135058Z--HCM-2-4--p2-product-decision-reassessment-review",
+  "created_at_utc": "2026-07-28T13:50:58Z",
+  "source_handoff_ids": [
+    "20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required",
+    "20260728T041820Z--HCM-0-8--orchestration--causal-review-budget-lineage-hardening-completed"
+  ],
+  "parent_orchestration_id": "20260728T133751Z--HCM-2-4--p2-option-c-course-correction-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "p2-product-decision-reassessment",
+  "subject_fingerprint": "sha256:b7222ca507ac43c38e09193ddeddaee65688f26404cf880b00f5fae0e1327d91",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p2-product-decision-reassessment-proof-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-28T13:37:51Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2-4-p2-option-c-course-correction",
+        "packet_ids": [
+          "p2-integrated-closeout",
+          "p2-option-c-containment",
+          "p2-product-decision-reassessment"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md#option-c-containment-decision"
+      }
+    ],
+    "fingerprint": "sha256:fb3188068df0d0b69ebe3769be87574d8b8534c13f4de02c905cf0c88ea47f86"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:c472b2edc5593595a0e2932da2c7217b5cd3e143166f8c5a3a9392a5282c81f5",
+    "integrated_outcome_id": "hcm-2-4-p2-option-c-course-correction",
+    "outcome_registry_fingerprint": "sha256:fb3188068df0d0b69ebe3769be87574d8b8534c13f4de02c905cf0c88ea47f86",
+    "review_stage": "proof",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": "20260728T134152Z--HCM-2-4--p2-option-c-containment-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p2-product-decision-reassessment-convergence-1",
+    "completed_at_utc": "2026-07-28T13:50:57Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "assert the complete A-E field matrix and run cargo test -p handbook-engine --test profile_selection --test hcm_1_4_profile_decisions --test hcm_1_4_profile_inspection",
+        "evidence_ref": "parent terminal output at 2026-07-28T13:48Z and 13:50Z: every required option field appears five times; engine wall passed 25 tests, 0 failed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory the product-analysis subject and its cited profile/readiness consumers; verify the subject contains no runtime, profile, definition, fixture, Cargo, lockfile, P2S, or P2A edit",
+        "evidence_ref": "parent terminal output at 2026-07-28T13:50Z: subject is exactly one new decision-analysis Markdown file"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the one-entry path-NUL-SHA256-newline subject manifest",
+        "evidence_ref": "subject_manifest below: aggregate sha256:b7222ca507ac43c38e09193ddeddaee65688f26404cf880b00f5fae0e1327d91"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "check the decision analysis for all five option headings, all eight required per-option dimensions, authority boundaries, and balanced Markdown fences",
+        "evidence_ref": "parent terminal output at 2026-07-28T13:50Z: option field matrix, authority boundaries, and Markdown fences passed"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "scan the new decision analysis for trailing whitespace",
+        "evidence_ref": "parent terminal output at 2026-07-28T13:50Z: zero trailing-whitespace matches"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+        "sha256": "6a83231b727351d208d14d851fed3642cee0e7eb120207e6eb091090f2e0eac5"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b7222ca507ac43c38e09193ddeddaee65688f26404cf880b00f5fae0e1327d91"
+  },
+  "active_resolution": {
+    "level": "planning",
+    "scope_horizon": "HCM-2.4 P2 product-decision reassessment",
+    "detail_resolution": "bounded A-E evidence-backed comparison and recommendation",
+    "temporal_horizon": "current planning analysis only",
+    "authority_horizon": "recommendation without authority-model selection",
+    "memory_horizon": "frozen one-file analysis and raw-result references",
+    "validation_horizon": "later final integrated closeout review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required.json",
+      "sections": [
+        "active_resolution",
+        "next_action",
+        "resume_instructions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md",
+      "sections": [
+        "Decision",
+        "Conditionality and fail-closed semantics"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Artifact-definition and profile contracts",
+        "Development orchestration contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+      "sections": [
+        "Decision boundary",
+        "Current product experience",
+        "Comparison",
+        "Recommendation"
+      ]
+    }
+  ],
+  "repo_truth": "Branch feat/handbook-contract-membrane remains at baseline b770a20b2e8ff8c96c60caf928f91691ee4bdd54, ahead 18 of origin. Option C containment received a CLEAN isolated review under the causal predecessor dispatch. The product-analysis subject is exactly one new Markdown decision file; all runtime, profiles, definitions, Cargo/lockfile, P2S/P2A, and eight unrelated dirty paths remain unchanged.",
+  "allowed_scope": [
+    "Read the complete frozen decision-analysis file.",
+    "Read released HCM-0.6 authority, exact profile contracts, shipped profile definitions, live product-path sources, and current tests as evidence.",
+    "Run read-only validation and diff commands.",
+    "Return findings to the parent through the built-in subagent channel."
+  ],
+  "non_goals": [
+    "Do not edit any file.",
+    "Do not select Option B or any new authority model.",
+    "Do not invent an issuer, key, owner identity, evidence source, or trust system.",
+    "Do not authorize or implement a profile successor, evaluator, verifier, producer, native adapter, runtime, schema/definition, Cargo/dependency, P4, P6, or P7 change.",
+    "Do not create a handoff, ledger entry, commit, or user task hop."
+  ],
+  "tasks": [
+    "Verify the exact current user-visible setup/doctor/readiness/exit behavior.",
+    "Verify every option A-E covers product experience, fail-closed posture, burden, released-contract changes, migration/versioning, program effects, READY reachability, and the smallest next packet.",
+    "Verify Option B can preserve existing Charter and Project Context authority only through an additive exact successor without mutating 1.1/1.2.",
+    "Verify Option C defines identity, subject binding, true/false, currentness, revocation, contradiction, audit/fingerprint, and the hardware limitation without inventing authority.",
+    "Verify Option D requires a real exact issuer/key and complete positive/negative closure, and Option E remains positive-only through released Charter currentness.",
+    "Verify the recommendation is the simplest direction but not a selected authority or implementation.",
+    "Return findings first with exact P1/P2 disposition, followed by P3/P4 advisories and a clean-or-findings verdict."
+  ],
+  "contracts_and_gates": [
+    "HCM-0.6 remains fail-closed and Environment Context cannot prove its own applicability.",
+    "Shipped-root 1.1 and 1.2 are immutable exact definitions.",
+    "No new trust system or evidence authority may be invented.",
+    "A recommendation cannot amend released authority or authorize implementation.",
+    "No valid P1/P2 may remain unresolved for planning closeout."
+  ],
+  "stop_conditions": [
+    "Stop and report if the subject hash differs from the manifest.",
+    "Stop and report any claimed READY path that relies on self-declaration, silence-as-false, an unnamed authority, or mutation of shipped-root 1.1/1.2.",
+    "Stop and report any wording that selects an authority model or implementation.",
+    "Stop and report any required repair outside the declared one-file planning-analysis authority."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

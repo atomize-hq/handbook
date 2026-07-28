@@ -1,0 +1,215 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260728T134152Z--HCM-2-4--p2-option-c-containment-review",
+  "created_at_utc": "2026-07-28T13:41:52Z",
+  "source_handoff_ids": [
+    "20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required",
+    "20260728T041820Z--HCM-0-8--orchestration--causal-review-budget-lineage-hardening-completed"
+  ],
+  "parent_orchestration_id": "20260728T133751Z--HCM-2-4--p2-option-c-course-correction-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "p2-option-c-containment",
+  "subject_fingerprint": "sha256:7413549014a20f86e7e4527ed96f2c539a94c698399365ad204d7fc8bf331d9c",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p2-option-c-containment-planning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-28T13:37:51Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2-4-p2-option-c-course-correction",
+        "packet_ids": [
+          "p2-integrated-closeout",
+          "p2-option-c-containment",
+          "p2-product-decision-reassessment"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md#option-c-containment-decision"
+      }
+    ],
+    "fingerprint": "sha256:fb3188068df0d0b69ebe3769be87574d8b8534c13f4de02c905cf0c88ea47f86"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:c472b2edc5593595a0e2932da2c7217b5cd3e143166f8c5a3a9392a5282c81f5",
+    "integrated_outcome_id": "hcm-2-4-p2-option-c-course-correction",
+    "outcome_registry_fingerprint": "sha256:fb3188068df0d0b69ebe3769be87574d8b8534c13f4de02c905cf0c88ea47f86",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "p2-option-c-containment-convergence-1",
+    "completed_at_utc": "2026-07-28T13:41:50Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "assert required Option C clauses and run cargo test -p handbook-cli --test cli_surface profile_setup_and_doctor_use_typed_rows_json_and_exit_policy -- --exact",
+        "evidence_ref": "parent terminal output at 2026-07-28T13:40Z: containment assertions passed; focused CLI path proof 1 passed, 0 failed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory the complete planning subject and verify no runtime, schema, fixture, golden, Cargo, lockfile, P2S, or P2A path changed",
+        "evidence_ref": "parent terminal output at 2026-07-28T13:41Z: exactly SPEC, plan, todo, and the new containment proof are present"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinally sorted 4-entry path-NUL-SHA256-newline subject manifest",
+        "evidence_ref": "subject_manifest below: aggregate sha256:7413549014a20f86e7e4527ed96f2c539a94c698399365ad204d7fc8bf331d9c"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "check Markdown fence balance and every relative Markdown link in the four-file subject",
+        "evidence_ref": "parent terminal output at 2026-07-28T13:41Z: Markdown links and fences passed"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- <four-file subject>",
+        "evidence_ref": "parent terminal output at 2026-07-28T13:41Z: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "522dcc992c296d2db070ed372be180c69744b25a6121c52fa7a4adc27827da18"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+        "sha256": "797704605d38fcb0f22423bf27bb150f022c68cc5f556102502b2adba49cb310"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "8c899a7abcf6e60991f3c774b96a3615e8a41bd8dcb217b30475c10958a99b85"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "6fc49bb25ea0dc0cc9e0e1d9dbd8e82e7d2f082505f44ba584fc504f401fead2"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:7413549014a20f86e7e4527ed96f2c539a94c698399365ad204d7fc8bf331d9c"
+  },
+  "active_resolution": {
+    "level": "planning",
+    "scope_horizon": "HCM-2.4 P2 Option C containment",
+    "detail_resolution": "SPEC, plan, todo, and planning proof only",
+    "temporal_horizon": "current planning amendment",
+    "authority_horizon": "selected planning-only course-correction handoff",
+    "memory_horizon": "frozen four-file review subject and raw-result references",
+    "validation_horizon": "separate product-analysis and final integrated review stages"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required.json",
+      "sections": [
+        "active_resolution",
+        "next_action",
+        "resume_instructions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Development orchestration contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md",
+      "sections": [
+        "Authority",
+        "Baseline verified",
+        "Option C containment decision"
+      ]
+    }
+  ],
+  "repo_truth": "Branch feat/handbook-contract-membrane at baseline b770a20b2e8ff8c96c60caf928f91691ee4bdd54, ahead 18 of origin, with only the frozen four-file planning subject added to eight pre-existing unrelated dirty .claude/AGENTS.md/CLAUDE.md paths. No runtime, schema, definition, Cargo, lockfile, P2S, or P2A path changed.",
+  "allowed_scope": [
+    "Read the complete four-file frozen subject manifest.",
+    "Read the selected course-correction handoff, released HCM-0.6 condition decision, immutable P2S/P2A evidence, and live product-path sources as evidence.",
+    "Run read-only validation and diff commands.",
+    "Return findings to the parent through the built-in subagent channel."
+  ],
+  "non_goals": [
+    "Do not edit any file.",
+    "Do not select a replacement applicability authority.",
+    "Do not authorize or implement runtime, schema/definition, native, Cargo, dependency, P4, P6, P7, HCM-2.4 completion, or Phase 2 exit work.",
+    "Do not edit historical P2S/P2A evidence or unrelated dirty paths.",
+    "Do not create a handoff, ledger entry, commit, or user task hop."
+  ],
+  "tasks": [
+    "Verify Option C is stated consistently across SPEC, plan, todo, and proof.",
+    "Verify future native-adapter work is superseded without rewriting P2S/P2A history.",
+    "Verify P2 remains unresolved, fail-closed, not GREEN, and not self-authorizable.",
+    "Verify P4 requires a separate later selector and P6/P7/Phase 2 stay blocked.",
+    "Verify planning closeout cannot be mistaken for P2 or HCM-2.4 completion.",
+    "Return findings first with exact P1/P2 disposition, followed by P3/P4 advisories and a clean-or-findings verdict."
+  ],
+  "contracts_and_gates": [
+    "The selected handoff authorizes planning containment and product reassessment only.",
+    "P2S/P2A are immutable historical evidence.",
+    "Environment Context cannot prove its own applicability.",
+    "No valid P1/P2 may remain unresolved for planning closeout.",
+    "The stable causal budget and frozen outcome registry govern all three declared review stages."
+  ],
+  "stop_conditions": [
+    "Stop and report if any subject hash differs from the manifest.",
+    "Stop and report any wording that authorizes native/runtime work or claims P2/HCM-2.4 completion.",
+    "Stop and report any required repair outside the declared planning-document authority."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

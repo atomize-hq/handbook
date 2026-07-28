@@ -1,14 +1,12 @@
 # HCM-2.4 implementation plan
 
-Status: partially executed under separate user selections. P0/P1A/P1B/P1C and
-P3/P3B are review-clean and committed. P2S is review-clean and committed at
-`755acc56fad6cc99c016dc58f94d310c84f98c58`. P2A found the native Windows
-surface conditionally feasible but unavailable through an approved safe
-workspace binding or live transport; production remains blocked on the exact
-second human decision recorded in its evidence. The P4/P5 token prerequisite
-is review-clean and committed at `00dde01`. P4's separate
-negative-surface/path proof remains open. P6 and the Phase 2 exit remain
-closed.
+Status: partially executed under Option C planning containment. P0/P1A/P1B/P1C
+and P3/P3B are review-clean and committed. P2S is review-clean and committed at
+`755acc56fad6cc99c016dc58f94d310c84f98c58`; P2A is immutable historical
+feasibility evidence. Future native-adapter selection is superseded. P2
+remains unresolved, fail-closed, and not GREEN. The P4/P5 token prerequisite is
+review-clean and committed at `00dde01`; P4's separate negative-surface/path
+proof remains open. P6, P7, and Phase 2 exit remain closed.
 
 ## Dependency graph
 
@@ -23,15 +21,16 @@ P0 baseline/inventory
                  -> P5 risk record -----------------/
 ```
 
-P2–P5 may be prepared independently after P1C but must land serially when shared registry,
-fixture, proof, or generated inventory files overlap. P6 cannot start until all
-four are committed, clean, and independently green.
+P2–P5 may be prepared independently after P1C only under their own exact later
+selectors and must land serially when shared registry, fixture, proof, or
+generated inventory files overlap. Option C does not authorize P4 or unrelated
+work. P6 cannot start until P2 and P4, plus every other required predecessor,
+are committed, clean, and independently GREEN.
 
 Current boundary: commits `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
 `5a2ccf6939be0e549e7e7355a245c7511c271eef`, and
 `00dde0162fcb15576c83b6ed40ab7286488d0890` contain completed reviewed
-packets. P2 requires approved condition-evaluator and producer runtime
-authority.
+packets. P2 has no approved applicability authority and remains fail-closed.
 P4/P5 have the exact operator-approved derivation selector frozen in
 `decision/20260727-p4-p5-coverage-token-derivation-selector.md`; selector
 review, RED/GREEN, supplemental causal closure, and commit are complete. P4
@@ -336,9 +335,9 @@ GREEN:
 ## P2 — Environment Context vertical
 
 Entry: P1C accepted; Environment Context impact UIDs resolved; P2S
-schema/definition freeze and P2A non-production feasibility are complete.
-Runtime entry remains blocked on a second human decision selecting an exact
-production native-adapter/dependency boundary.
+schema/definition freeze and P2A non-production feasibility are complete and
+immutable historical evidence. Option C supersedes the planned
+native-adapter/dependency selection. Runtime entry is closed.
 
 Authority gate:
 
@@ -365,19 +364,18 @@ Authority gate:
   or mere artifact presence cannot authorize itself or be coerced to
   condition `true`/`false`.
 
-Do not begin the RED-to-GREEN runtime loop. The dual-ceiling over-limit repair
-receives exactly one fresh complete-subject review; a valid P1/P2 stops without
-remediation,
-while CLEAN permits only a distinct human decision on P2S plus the
-non-production P2A native-feasibility selector. P2A must return observed
-behavior for a second human decision before an exact production adapter or
-completed producer dependency can authorize P2P. The 9/9
-authenticator-security probe proves codec/verification feasibility but not a
-production native port or the new producer transaction. This gate does not
-block semantically independent P3–P5 packets, but P6 still waits for P2–P5
-GREEN replacement proof.
+Do not begin the RED-to-GREEN runtime loop. The prior review-clean P2S result
+and P2A observations remain historical evidence only. No future
+WebAuthn/FIDO/CTAP ceremony, USB/HID or device access, platform UI,
+cancellation/error integration, unsafe code, Cargo/lockfile change, dependency,
+native port, producer, evaluator, or resolver work is authorized by this plan.
+The 9/9 authenticator-security probe proves only bounded feasibility. A later
+human product decision may select a new authority model or a versioned profile
+direction, but it may not infer implementation authority from this
+containment. Separately authorized P4 or unrelated work requires its own exact
+selector. P6 still waits for P2 and P4 to become genuinely GREEN.
 
-Planned decomposition after approval:
+Superseded historical decomposition:
 
 1. P2S adds only the eight closed schemas and evaluator definition, with
    closed-field/preimage/nullability vectors and no Rust production edit.
@@ -387,19 +385,54 @@ Planned decomposition after approval:
    unsafe-policy, process, or platform-module edit. **Complete with
    conditionally feasible, presently blocked evidence; no durable probe
    material remains.**
-3. P2P adds only the new evidence producer module/service and proves its
+3. P2P would have added the new evidence producer module/service and proved its
    source/challenge/assertion/use-chain/record/two-head/immutable-transaction
    transaction, unavailable-port zero-write, recovery, simultaneous-head
    rollback, fork, replay, and cross-family refusal.
-4. P2R adds only the evaluator in that module and proves bounded maximal-
+4. P2R would have added only the evaluator in that module and proved bounded maximal-
    transaction/fixed-head transport, ordered dependency-observation closure
    replay, per-source freshness, and every reachable precedence branch.
-5. P2I edits only the exact `profile_decision.rs` enum/constructor/resolver/
+5. P2I would have edited only the exact `profile_decision.rs` enum/constructor/resolver/
    private-helper/consumer selectors, preserves the direct public fallback,
    and proves the explicit public-enum compatibility decision plus the
    CRITICAL flow wall.
-6. Only after P2S/P2A/P2P/P2R/P2I are independently review-clean may P2V run
-   the existing Environment Context author/consumer vertical.
+6. P2V would have run only after the predecessors were independently
+   review-clean. It is not authorized.
+
+Items 3–6 are frozen historical planning, not an executable queue. No
+Environment Context applicability is inferred, coerced, or self-declared under
+the released contract. Creating `.handbook/project/environment.yaml`, changing
+its `applicability_basis`, or toggling profile state cannot change the
+condition outcome.
+
+### P2 course-correction product gate
+
+The bounded reassessment is recorded in
+[`decision/20260728-p2-product-decision-reassessment.md`](../decision/20260728-p2-product-decision-reassessment.md).
+It compares five product directions:
+
+1. indefinite fail-closed behavior, retained only as the safe baseline and not
+   a release solution;
+2. an additive exact default-profile successor that preserves Charter and
+   Project Context but postpones Environment Context;
+3. an explicit project-owner declaration with exact identity, subject,
+   true/false, freshness, revocation, contradiction, and audit semantics;
+4. a verifier-only successor for a named real external or already-owned
+   issuer/key with complete positive and negative coverage; and
+5. current Charter operational-reality evidence as positive support only,
+   never proof of global absence.
+
+The planning recommendation is direction 2 because it is the smallest route to
+a usable READY repository without a new trust system, evidence producer, or
+native ceremony. It is not selected. Shipped-root 1.1 and 1.2 remain immutable;
+a later human decision must choose the exact successor version/fingerprint,
+approve the changed HCM-0.6 default, and explicitly amend the P2/P6/P7/Phase 2
+gates. Option C containment remains active until that decision.
+
+For status precision, invalid, unsafe, or unreadable selected artifacts produce
+`INVALID` before the resolver's indeterminate applicability is classified.
+Missing or structurally valid Environment Context remains `INDETERMINATE`.
+Neither state can reach READY under the current shipped-root 1.2 selector.
 
 Every packet has a separate immutable subject, RED/GREEN wall, independent
 review, and reviewed commit. Creating a child packet does not complete P2.
@@ -644,8 +677,8 @@ prerequisite is committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`.
 Entry: P1A–P1C and P2–P5 individually committed and green; no bridge deletion
 has occurred.
 
-Current entry result: not satisfied. P2 lacks approved runtime
-condition-evaluator/producer authority. The P4/P5 token prerequisite is
+Current entry result: not satisfied. P2 remains unresolved and not GREEN. The
+P4/P5 token prerequisite is
 review-clean and committed, but P4's separate negative-surface/path proof
 remains open. Do not begin P6.
 
@@ -686,7 +719,7 @@ custom configured renderers or Projections generic.
 
 Completion entry: P6 accepted.
 
-Current entry result: not satisfied. The parent may update only earned
+Current entry result: not satisfied. P7 remains blocked behind P6. The parent may update only earned
 partial-boundary truth, obtain fresh aggregate review, commit that reviewed
 control-pack subject, and create one parent-owned blocked/partial true-stop
 handoff. It may not check the full P7 exit items, delete either bridge, or use a

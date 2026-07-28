@@ -1,0 +1,205 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260728T140357Z--HCM-2-4--p2-product-decision-reassessment-closure-review",
+  "created_at_utc": "2026-07-28T14:03:57Z",
+  "source_handoff_ids": [
+    "20260728T011713Z--HCM-2-4--orchestration--p2-course-correction-decision-required",
+    "20260728T041820Z--HCM-0-8--orchestration--causal-review-budget-lineage-hardening-completed"
+  ],
+  "parent_orchestration_id": "20260728T133751Z--HCM-2-4--p2-option-c-course-correction-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "p2-product-decision-reassessment",
+  "subject_fingerprint": "sha256:a2e794763aba1eab59c997376792d084591a16c79db3f55609dd7bea11407960",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p2-product-decision-reassessment-proof-closure",
+    "trigger_run_ids": [
+      "product-decision-analysis-review"
+    ],
+    "finding_refs": [
+      "PRODUCT-STATUS-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-28T13:37:51Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2-4-p2-option-c-course-correction",
+        "packet_ids": [
+          "p2-integrated-closeout",
+          "p2-option-c-containment",
+          "p2-product-decision-reassessment"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/20260728T133751Z--p2-option-c-containment-planning-proof.md#option-c-containment-decision"
+      }
+    ],
+    "fingerprint": "sha256:fb3188068df0d0b69ebe3769be87574d8b8534c13f4de02c905cf0c88ea47f86"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:c472b2edc5593595a0e2932da2c7217b5cd3e143166f8c5a3a9392a5282c81f5",
+    "integrated_outcome_id": "hcm-2-4-p2-option-c-course-correction",
+    "outcome_registry_fingerprint": "sha256:fb3188068df0d0b69ebe3769be87574d8b8534c13f4de02c905cf0c88ea47f86",
+    "review_stage": "proof",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "proof"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260728T135058Z--HCM-2-4--p2-product-decision-reassessment-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p2-product-decision-reassessment-convergence-2",
+    "completed_at_utc": "2026-07-28T14:03:56Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "assert PRODUCT-STATUS-001 wording is closed and run cargo test -p handbook-cli --test cli_surface profile_setup_and_doctor_use_typed_rows_json_and_exit_policy -- --exact",
+        "evidence_ref": "parent terminal output at 2026-07-28T14:03Z: INVALID-precedence and no-READY assertions passed; focused CLI path proof 1 passed, 0 failed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "re-inventory the one-file analysis and exact profile_readiness invalid-before-indeterminate consumer path; verify no implementation or test file changed",
+        "evidence_ref": "parent terminal output at 2026-07-28T14:03Z: only the decision-analysis Markdown file changed for remediation"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the one-entry path-NUL-SHA256-newline remediated subject manifest",
+        "evidence_ref": "subject_manifest below: aggregate sha256:a2e794763aba1eab59c997376792d084591a16c79db3f55609dd7bea11407960"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "verify the missing/structurally-valid INDETERMINATE boundary, INVALID precedence, and no-READY invariant; reject the two overbroad phrases",
+        "evidence_ref": "parent terminal output at 2026-07-28T14:03Z: remediation assertions passed"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "scan the remediated analysis for trailing whitespace",
+        "evidence_ref": "parent terminal output at 2026-07-28T14:03Z: zero trailing-whitespace matches"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+        "sha256": "2f515b94a768e4ec21108125f81ce2675e255da4ad7f8a72dc5873a088858a1a"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:a2e794763aba1eab59c997376792d084591a16c79db3f55609dd7bea11407960"
+  },
+  "active_resolution": {
+    "level": "planning",
+    "scope_horizon": "PRODUCT-STATUS-001 closure",
+    "detail_resolution": "readiness status precedence wording only",
+    "temporal_horizon": "discovery finding through remediated closure",
+    "authority_horizon": "one-file product-analysis remediation",
+    "memory_horizon": "immutable discovery dispatch, one finding, and remediated subject",
+    "validation_horizon": "different-fresh closure before final integrated review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260728T135058Z--HCM-2-4--p2-product-decision-reassessment-review.json",
+      "sections": [
+        "review_cycle",
+        "tasks",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "crates/compiler/src/profile_readiness.rs",
+      "sections": [
+        "classify_readiness"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+      "sections": [
+        "Current product experience",
+        "A. Keep indefinite fail-closed indeterminate behavior",
+        "Recommendation"
+      ]
+    }
+  ],
+  "repo_truth": "The product-analysis discovery review returned one P2, PRODUCT-STATUS-001: INVALID readiness precedes indeterminate applicability. The one-file remediation now distinguishes missing/structurally-valid INDETERMINATE from invalid/unsafe/unreadable INVALID while preserving the invariant that shipped-root 1.2 cannot reach READY. No code, test, profile, schema, P2S/P2A, or unrelated dirty path changed.",
+  "allowed_scope": [
+    "Read the complete remediated one-file subject.",
+    "Read the immutable discovery dispatch and reviewer finding.",
+    "Read exact profile_readiness, setup/doctor rendering, and exit-policy sources/tests as evidence.",
+    "Run read-only validation and diff commands.",
+    "Return findings to the parent through the built-in subagent channel."
+  ],
+  "non_goals": [
+    "Do not edit any file.",
+    "Do not reopen general product-option discovery beyond PRODUCT-STATUS-001 or a defect directly unmasked by its remediation.",
+    "Do not select or implement any option.",
+    "Do not create a handoff, ledger entry, commit, or user task hop."
+  ],
+  "tasks": [
+    "Verify PRODUCT-STATUS-001 is fully closed: INVALID precedes INDETERMINATE for malformed, unsafe, or unreadable selected artifacts.",
+    "Verify the missing and structurally valid Environment Context baselines remain INDETERMINATE.",
+    "Verify every current shipped-root 1.2 state remains unable to reach READY.",
+    "Verify the remediation did not alter the A-E authority analysis or recommendation-only boundary.",
+    "Return CLEAN only if the finding is closed and no directly remediation-unmasked P1/P2 remains."
+  ],
+  "contracts_and_gates": [
+    "This closure is causally limited to PRODUCT-STATUS-001 and defects directly unmasked by its remediation.",
+    "Readiness precedence is INVALID, then INDETERMINATE, then ACTION_REQUIRED, then READY.",
+    "The resolver applicability remains unresolved/indeterminate even when repository readiness is INVALID.",
+    "No valid P1/P2 may remain unresolved for planning closeout."
+  ],
+  "stop_conditions": [
+    "Stop and report if the subject hash differs from the manifest.",
+    "Stop and report if any overbroad always-INDETERMINATE wording remains.",
+    "Stop and report any required repair outside the one-file causal boundary."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
