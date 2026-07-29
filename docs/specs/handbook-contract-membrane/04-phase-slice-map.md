@@ -400,7 +400,8 @@ Current partial implementation boundary at commits
 `5a2ccf6939be0e549e7e7355a245c7511c271eef`, and
 `00dde0162fcb15576c83b6ed40ab7286488d0890`, plus bounded P2 implementation
 commit `9b3edf2745054872939ad48abad50ae5c2d97f9a` and authority commit
-`f62141b358239e15f106f04034131202e9db1cac`:
+`f62141b358239e15f106f04034131202e9db1cac`, and P4 negative-proof commit
+`158115daa2b85d41663b79dc677fce69e59fd1e2`:
 
 - P0, P1A, P1B, and P1C are review-clean. Shipped-root `1.2` is selected with
   exactly three root instances, released Charter authority remains on its
@@ -417,15 +418,18 @@ commit `9b3edf2745054872939ad48abad50ae5c2d97f9a` and authority commit
   use, generic safe mutation, deterministic rendering, and non-blocking
   setup/doctor status. Task-gate runtime is deferred to the later
   implementation-contract slice under its explicit GREEN gate.
-- The shared P4/P5 coverage-token prerequisite is review-clean and committed.
-  Exact Decision and Risk generic mutation/promotion paths are GREEN. P4's
-  separate no-root/generated-command/inferred-filename/Projection/
-  persistent-view proof remains open; the token selector did not authorize it.
+- The shared P4/P5 coverage-token prerequisite is review-clean and committed at
+  `00dde0162fcb15576c83b6ed40ab7286488d0890`; P5 is GREEN and accepted. P4's
+  separately authorized no-root/generated-command/inferred-filename/Projection/
+  persistent-view proof is review-clean and committed at
+  `158115daa2b85d41663b79dc677fce69e59fd1e2`. P4 is GREEN and completed.
 - P2 owns removal of legacy Environment Inventory authority and influence.
   P6 retains its original aggregate-flow and fixed-selector/bridge deletion
-  gate. P2's prerequisite is satisfied; P6 remains blocked until P4 and every
-  other remaining exact predecessor are independently GREEN. Phase 2 and
-  HCM-3.x are not authorized merely by P2 completion.
+  gate. P1A-P1C and P2-P5 prerequisites are satisfied, but no P6 selector,
+  entry review, or explicit operator selection exists; P6 remains unselected
+  and unauthorized pending fresh entry authority. P7 remains blocked behind
+  accepted P6. Full HCM-2.4 and Phase 2 remain incomplete, and neither HCM-3.x
+  work nor automatic continuation is authorized.
 
 ### Phase 2 exit gate
 

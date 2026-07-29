@@ -1,0 +1,259 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260729T202827Z--HCM-2-4--p4-control-plane-status-aggregate-review",
+  "created_at_utc": "2026-07-29T20:28:27Z",
+  "source_handoff_ids": [
+    "20260729T160402Z--HCM-2-4--orchestration--bounded-p2-control-plane-completed"
+  ],
+  "parent_orchestration_id": "20260729T202746Z--HCM-2-4--p4-control-plane-closeout-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P4-control-plane-status-closeout",
+  "subject_fingerprint": "sha256:b74c3ff9adafeba8a5cfdf8395fceff9b8730274520d810f6032a44175543855",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p4-control-plane-status-aggregate-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-29T20:27:46Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p4-control-plane-closeout",
+        "packet_ids": [
+          "P4-control-plane-status-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md#p7--phase-2-exit-and-true-stop"
+      }
+    ],
+    "fingerprint": "sha256:17f1891f21e4af504450f7d5c57cb7f93b9911a4c34ef70500a07869af3a116c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:846cda13e6b7de84375f7a3baa70c1e1bd87c6a78b12e430ad4049a3988d252b",
+    "integrated_outcome_id": "hcm-2.4-p4-control-plane-closeout",
+    "outcome_registry_fingerprint": "sha256:17f1891f21e4af504450f7d5c57cb7f93b9911a4c34ef70500a07869af3a116c",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "p4-control-plane-status-aggregate-convergence-1",
+    "completed_at_utc": "2026-07-29T20:28:22Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "compare the five-file control-plane delta against HCM-2.4 SPEC, plan, checklist, P4/P5 proof records, four P4 review dispatches, and the bounded-P2 handoff",
+        "evidence_ref": "parent read and reconciled the 15-path review subject; only five Markdown authority paths changed and no runtime, test, schema, definition, profile, fixture, or product-semantics path changed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "scan active HCM-2.4 authority for stale current P4-open claims and claims that P6 still waits on P4",
+        "evidence_ref": "parent scan found only three explicitly historical P4-incomplete statements in P4-decision-record.md and zero P6-waits-on-P4 matches"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinally sorted 15-entry path-NUL-SHA256-newline control-pack status manifest",
+        "evidence_ref": "subject_manifest below: sha256:b74c3ff9adafeba8a5cfdf8395fceff9b8730274520d810f6032a44175543855"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "inspect the changed Markdown headings, tables, bullets, and authority wording against the live control-pack structure",
+        "evidence_ref": "parent diff inspection found the four program summaries and two minimal plan phrases structurally intact"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "49b1fefcd69146308b46e2d45d2fc99bcc44c03a022732afc70f6987e0b3ada4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "4645bbe4d64227ba246db2ec258179d6af83cb8aa4e3667f182b25904fb75b50"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "5c38c22ea2e9c62c67b80e91c5ee53f0a62206ece40b092e2a5e1951501c0dcb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "7e2aabd0dee9c6e86068a8c71e916d25042b9e1b59f27dbd029b2bf4f0b100e7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T164759Z--HCM-2-4--p4-negative-proof-selector-review.json",
+        "sha256": "c7d4e0f478abfaa6b7ccfe99961909fbc198abba1f3a23b82c01baa52f8a2420"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T171423Z--HCM-2-4--p4-negative-proof-implementation-spec-review.json",
+        "sha256": "a378903f335dede31618b7c9c706d6830337bf4cc7c8ee6d63c9bd78a48365bc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T171424Z--HCM-2-4--p4-negative-proof-implementation-standards-review.json",
+        "sha256": "d013489dea0ae960fc897173f6448556c387c59f3c155430a9d7f1fd27ad6441"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T172756Z--HCM-2-4--p4-negative-proof-implementation-closure-review.json",
+        "sha256": "5e056d1cff0baf7871409862b9996b72a6de187ba69f639beffc06fdb1ee01e0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260729T160402Z--HCM-2-4--orchestration--bounded-p2-control-plane-completed.json",
+        "sha256": "d50146e07dc6df63ff536f55f91c8fa3accec33d126a312c32c801f751dc7017"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "2fdb8f3ee68295d164c860b677a2cad72d34e18112b4614dcf0416952254ebd0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p4-decision-record-negative-proof-selector.md",
+        "sha256": "40df1b54153dc4855b701050adc00b2c79eadc0077a536bed0496de686becebd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sha256": "36e83092ed93bd3f35fd94b880c9780967471f7d2b79b962e8f505294346ebd0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "5b772177a0409375b2cbc01f359b1285b503a4e8eb206d2aed4714b7b75c3af8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "a3217f52caac9442aedf39e94a869b9b61c283d663ffcef34a0c816c5ad259c5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "44f89a1d10ac1fcf35f331c293a734e6fe8e25e5770cfc0574b7c274d4dc8e10"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b74c3ff9adafeba8a5cfdf8395fceff9b8730274520d810f6032a44175543855"
+  },
+  "active_resolution": {
+    "level": "proof",
+    "scope_horizon": "bounded HCM-2.4 P4 control-plane status correction and true-stop authority",
+    "detail_resolution": "program-summary consistency against completed P2, P3/P3B, GREEN P4, accepted P5, and unselected P6/P7 boundaries",
+    "temporal_horizon": "post-P4 negative-proof commit aggregate closeout review",
+    "authority_horizon": "P4 status closeout only; no P6 selection, P7 acceptance, Phase 2 exit, HCM-3.x, or continuation authority",
+    "memory_horizon": "bounded-P2 handoff, P4/P5 prerequisite, P4 selector, discovery/remediation/closure lineage, and live slice authority",
+    "validation_horizon": "fresh aggregate CLEAN review with every valid P1/P2 remediated before the status commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "Current boundary",
+        "P4 — Decision Record support proof",
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "P7 — Phase 2 exit and true stop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+      "sections": [
+        "Current bounded negative-proof candidate (2026-07-29)",
+        "Authorized resolution and current proof"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+      "sections": [
+        "Current proof status"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "At HEAD 158115daa2b85d41663b79dc677fce69e59fd1e2, the bounded P4 negative proof is GREEN and review-clean, P5 is accepted through 00dde0162fcb15576c83b6ed40ab7286488d0890, and five Markdown authority paths carry the pending program-level status correction. P6 has no selector, entry review, or explicit operator selection; P7, full HCM-2.4, Phase 2, HCM-3.x, and automatic continuation remain open or unauthorized.",
+  "allowed_scope": [
+    "Review the exact 15-path subject for internal consistency and evidence-bounded P4/P5 status claims.",
+    "Verify the five changed Markdown paths remove current P4-open claims without altering runtime, tests, schemas, definitions, profiles, fixtures, or product semantics.",
+    "Verify P1A-P1C and P2-P5 are stated only as satisfied P6 prerequisites, not as P6 selection or entry authority.",
+    "Verify P6 remains unselected and unauthorized, P7 remains blocked behind accepted P6, and full HCM-2.4 and Phase 2 remain incomplete."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, push, write a handoff or ledger entry, create another dispatch, or delegate.",
+    "Do not reopen P4 runtime proof or broaden the earned evidence beyond 00dde01 and 158115d.",
+    "Do not select or authorize P6, close P7 or Phase 2, authorize HCM-3.x, or imply automatic continuation."
+  ],
+  "tasks": [
+    "Replay the exact subject manifest and read the complete changed statements in their surrounding authority context.",
+    "Trace each new P4/P5 assertion to the immutable selector, proof, and review-dispatch evidence.",
+    "Look specifically for stale current P4-open language, unsupported completion claims, and accidental P6/P7/Phase 2 authorization.",
+    "Return findings first with P1-P4 priority and explicit advisory disposition; report rather than repair any finding."
+  ],
+  "contracts_and_gates": [
+    "P2 and P3/P3B completed; P4 GREEN and completed; P5 GREEN and accepted",
+    "P1A-P1C and P2-P5 prerequisites for P6 satisfied without selecting or authorizing P6",
+    "P7 blocked behind accepted P6; full HCM-2.4 and Phase 2 incomplete",
+    "Future implementation-task gate runtime deferred; no HCM-3.x or automatic continuation authority",
+    "No runtime, test, schema, definition, profile, fixture, or product-semantics change"
+  ],
+  "stop_conditions": [
+    "Return blocked if any subject hash, authority source, review lineage, or required read-only evidence cannot be established.",
+    "Report any P1/P2 inconsistency for parent remediation and different-fresh closure review.",
+    "Stop on any need for broader implementation or operator authority."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

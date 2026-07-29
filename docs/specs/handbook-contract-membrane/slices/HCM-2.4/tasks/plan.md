@@ -7,7 +7,7 @@ committed. P2S, P2A, and Option C are historical evidence, not active
 architecture. The P4/P5 token prerequisite is review-clean and committed at
 `00dde01`; P4's separate five-part negative-surface/path proof is review-clean
 and GREEN. P6 and P7 remain unselected and blocked; HCM-2.4 completion and
-Phase 2 exit remain closed.
+Phase 2 exit remain incomplete.
 
 ## Dependency graph
 
@@ -25,8 +25,9 @@ P0 baseline/inventory
 P2–P5 may be prepared independently after P1C only under their own exact later
 selectors and must land serially when shared registry, fixture, proof, or
 generated inventory files overlap. The greenfield P2 correction does not
-authorize P4 or unrelated work. P6 cannot start until P2 and P4, plus every
-other required predecessor, are committed, clean, and independently GREEN.
+authorize P4 or unrelated work. P1A-P1C and P2-P5 prerequisites for P6 are now
+committed, clean, and independently GREEN, but P6 cannot start without its own
+selector, entry review, and explicit operator selection.
 
 Current boundary: commits `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
 `5a2ccf6939be0e549e7e7355a245c7511c271eef`, and
