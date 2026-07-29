@@ -1,10 +1,12 @@
 # HCM-2.4 implementation plan
 
-Status: active greenfield P2 correction. P0/P1A/P1B/P1C and P3/P3B are
-review-clean and committed. P2S, P2A, and Option C are historical evidence,
-not active architecture. The P4/P5 token prerequisite is review-clean and
-committed at `00dde01`; P4's separate negative-surface/path proof remains
-open. P6, P7, and Phase 2 exit remain closed.
+Status: the bounded greenfield P2 correction is GREEN, independently
+review-clean, and locally committed at implementation commit `9b3edf2` with
+authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean and
+committed. P2S, P2A, and Option C are historical evidence, not active
+architecture. The P4/P5 token prerequisite is review-clean and committed at
+`00dde01`; P4's separate negative-surface/path proof remains open. P6, P7,
+HCM-2.4 completion, and Phase 2 exit remain closed.
 
 ## Dependency graph
 
@@ -28,13 +30,15 @@ other required predecessor, are committed, clean, and independently GREEN.
 Current boundary: commits `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
 `5a2ccf6939be0e549e7e7355a245c7511c271eef`, and
 `00dde0162fcb15576c83b6ed40ab7286488d0890` contain completed reviewed
-packets. P2 now has approved greenfield Environment Context semantics; this
-packet must still pass verification and review before it is GREEN. P4/P5 have
-the exact operator-approved derivation selector frozen in
+packets. The bounded P2 implementation is GREEN, independently review-clean,
+and locally committed at `9b3edf2745054872939ad48abad50ae5c2d97f9a` with
+authority commit `f62141b358239e15f106f04034131202e9db1cac`. P4/P5 have the
+exact operator-approved derivation selector frozen in
 `decision/20260727-p4-p5-coverage-token-derivation-selector.md`; selector
 review, RED/GREEN, supplemental causal closure, and commit are complete. P4
-retains an open negative-surface/path proof outside that selector. P2 and that
-P4 gate keep P6 and full P7 ineligible. The current P7 activity is limited to
+retains an open negative-surface/path proof outside that selector. That P4 gate
+and all other existing P6 prerequisites keep P6 and full P7 ineligible. The
+current P7 activity is limited to
 reviewed partial control-pack records and parent-owned true-stop handoffs.
 
 ## Standing rules
@@ -578,11 +582,14 @@ prerequisite is committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`.
 Entry: P1A–P1C and P2–P5 individually committed and green; no bridge deletion
 has occurred.
 
-Current entry result: not satisfied. This P2 correction is not GREEN until
-its verification, independent review, and local landing complete. The P4/P5
-token prerequisite is
-review-clean and committed, but P4's separate negative-surface/path proof
-remains open. Do not begin P6.
+Current entry result: not satisfied. The bounded greenfield P2 correction is
+GREEN, independently review-clean, and locally committed at implementation
+commit `9b3edf2745054872939ad48abad50ae5c2d97f9a` with authority commit
+`f62141b358239e15f106f04034131202e9db1cac`; its P6 prerequisite is satisfied.
+The P4/P5 token prerequisite is review-clean and committed, but P4's separate
+negative-surface/path proof remains open, so P4 is not GREEN. No bridge deletion
+has occurred, and every other P6 entry prerequisite remains required. Do not
+begin P6.
 
 RED:
 

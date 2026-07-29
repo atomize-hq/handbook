@@ -398,7 +398,9 @@ does not authorize HCM-2.4 or a later phase.
 Current partial implementation boundary at commits
 `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
 `5a2ccf6939be0e549e7e7355a245c7511c271eef`, and
-`00dde0162fcb15576c83b6ed40ab7286488d0890`:
+`00dde0162fcb15576c83b6ed40ab7286488d0890`, plus bounded P2 implementation
+commit `9b3edf2745054872939ad48abad50ae5c2d97f9a` and authority commit
+`f62141b358239e15f106f04034131202e9db1cac`:
 
 - P0, P1A, P1B, and P1C are review-clean. Shipped-root `1.2` is selected with
   exactly three root instances, released Charter authority remains on its
@@ -409,11 +411,11 @@ Current partial implementation boundary at commits
   capture, provenance, feature identity, and handoff authority to canonical
   Work Specification YAML while Feature Spec Markdown is a deterministic
   human-review view.
-- P2 is rebaselined by the accepted greenfield Environment Context/task-gate
-  decision. The P2S/P2A evaluator/native material is historical only and has no
-  active runtime prerequisite. Current implementation owns optional canonical
-  YAML, advisory use, generic safe mutation, deterministic rendering, and
-  non-blocking setup/doctor status. Task-gate runtime is deferred to the later
+- The bounded P2 correction is GREEN, independently review-clean, and locally
+  committed. The P2S/P2A evaluator/native material is historical only and has
+  no active runtime prerequisite. P2 owns optional canonical YAML, advisory
+  use, generic safe mutation, deterministic rendering, and non-blocking
+  setup/doctor status. Task-gate runtime is deferred to the later
   implementation-contract slice under its explicit GREEN gate.
 - The shared P4/P5 coverage-token prerequisite is review-clean and committed.
   Exact Decision and Risk generic mutation/promotion paths are GREEN. P4's
@@ -421,9 +423,9 @@ Current partial implementation boundary at commits
   persistent-view proof remains open; the token selector did not authorize it.
 - P2 owns removal of legacy Environment Inventory authority and influence.
   P6 retains its original aggregate-flow and fixed-selector/bridge deletion
-  gate and remains blocked until P2, P4, and every other exact predecessor are
-  independently GREEN. Phase 2 and HCM-3.x are not authorized merely by P2
-  completion.
+  gate. P2's prerequisite is satisfied; P6 remains blocked until P4 and every
+  other remaining exact predecessor are independently GREEN. Phase 2 and
+  HCM-3.x are not authorized merely by P2 completion.
 
 ### Phase 2 exit gate
 

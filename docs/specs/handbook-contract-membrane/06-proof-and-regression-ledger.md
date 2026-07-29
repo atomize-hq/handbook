@@ -1228,6 +1228,11 @@ rewriting their immutable proof records. The corrected boundary consists of:
   immutable historical feasibility/design evidence only; their unconsumed
   evaluator/schemas are removed from the active tree and no native work is
   selected;
+- bounded greenfield P2 implementation commit
+  `9b3edf2745054872939ad48abad50ae5c2d97f9a` and authority commit
+  `f62141b358239e15f106f04034131202e9db1cac` are independently review-clean
+  and GREEN; they land optional canonical/advisory Environment Context while
+  deferring future task-gate runtime;
 - exact package admission of five successor kind/intake/fixed-renderer
   closures, live shipped-root `1.2` selection with exactly three root
   descriptors, and byte/fingerprint-preserved HCM-2.2 Charter authority; and

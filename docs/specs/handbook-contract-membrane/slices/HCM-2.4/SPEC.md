@@ -1,11 +1,15 @@
 # HCM-2.4 — Remaining shipped artifact-family conversion
 
-Status: active greenfield P2 correction. P0/P1A/P1B/P1C and P3/P3B are
+Status: the bounded greenfield P2 correction is GREEN, independently
+review-clean, and locally committed at implementation commit
+`9b3edf2745054872939ad48abad50ae5c2d97f9a` with authority commit
+`f62141b358239e15f106f04034131202e9db1cac`. P0/P1A/P1B/P1C and P3/P3B are
 review-clean and committed; the P4/P5 token prerequisite is accepted at
 `00dde0162fcb15576c83b6ed40ab7286488d0890`, P4's separate
 negative-surface/path proof remains open, and P5 remains accepted. P6, P7,
-HCM-2.4 completion, and Phase 2 exit remain unearned. P2S/P2A/Option C are
-historical evidence only under the 2026-07-28 greenfield decision.
+HCM-2.4 completion, and Phase 2 exit remain unearned. Future task-gate runtime
+remains deferred; P2S/P2A/Option C are historical evidence only under the
+2026-07-28 greenfield decision.
 
 Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
 

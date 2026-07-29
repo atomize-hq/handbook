@@ -1,10 +1,12 @@
 # HCM-2.4 implementation checklist
 
-Status: active greenfield P2 correction. P0/P1A/P1B/P1C and P3/P3B are
-review-clean. P2S, P2A, and Option C are historical evidence, not active
-architecture. The P4/P5 token prerequisite is review-clean and committed at
-`00dde01`; P4's separate negative-surface/path proof remains open. P6, P7,
-and Phase 2 exit remain incomplete.
+Status: the bounded greenfield P2 correction is GREEN, independently
+review-clean, and locally committed at implementation commit `9b3edf2` with
+authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean. P2S,
+P2A, and Option C are historical evidence, not active architecture. The P4/P5
+token prerequisite is review-clean and committed at `00dde01`; P4's separate
+negative-surface/path proof remains open. HCM-2.4, P6, P7, and Phase 2 exit
+remain incomplete; future task-gate runtime remains deferred.
 
 ## Entry
 
@@ -357,9 +359,11 @@ and Phase 2 exit remain incomplete.
 
 ## P6 — Aggregate cleanup
 
-- [ ] BLOCKED: this P2 correction is not yet review-clean/GREEN and P4's
-      separate negative-surface/path proof remains open. The P4/P5 token prerequisite
-      is review-clean and committed.
+- [ ] BLOCKED: the bounded P2 prerequisite is satisfied at implementation
+      commit `9b3edf2` with authority commit `f62141b`, but P4's separate
+      negative-surface/path proof remains open and all other P6 entry
+      prerequisites remain required. The P4/P5 token prerequisite is
+      review-clean and committed.
 - [ ] Replace fixed/bridge flow input collection with admitted selected
       descriptors and retained canonical bytes.
 - [ ] Preserve Charter authority, Project Context behavior, registry brief,
@@ -407,7 +411,7 @@ and Phase 2 exit remain incomplete.
 - [x] Rerun forbidden-influence scans after review remediation.
 - [x] Fresh independent review is clean and all P1/P2 findings are closed.
 - [x] Rerun GitNexus compare-to-main change detection after review remediation.
-- [ ] Atomic local commits created; nothing pushed.
+- [x] Atomic local commits created; nothing pushed.
 - [x] All eight original protected dirty paths and the concurrent
       `docs/ideas/intent-to-outcome-fidelity.md` path remain untouched,
       unstaged, and uncommitted.
