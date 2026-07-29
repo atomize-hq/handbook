@@ -1,5 +1,5 @@
 OUTCOME: REFUSED
 PIPELINE: pipeline.foundation_inputs
 STAGE: stage.07_foundation_pack
-REASON: invalid_capture_input: declared artifact block `artifacts/foundation/ENVIRONMENT_INVENTORY.md` must contain a non-empty body
+REASON: invalid_capture_input: declared artifact block `artifacts/foundation/TEST_STRATEGY_BRIEF.md` must contain a non-empty body
 NEXT SAFE ACTION: emit every declared artifact FILE block with a non-empty body and retry `pipeline capture`

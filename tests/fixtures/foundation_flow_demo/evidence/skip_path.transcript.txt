@@ -94,7 +94,6 @@ WRITTEN FILES:
   - artifacts/foundation/TEST_STRATEGY_BRIEF.md
   - artifacts/foundation/QUALITY_GATES_SPEC.md
   - artifacts/foundation/quality_gates.yaml
-  - artifacts/foundation/ENVIRONMENT_INVENTORY.md
 STATE UPDATES:
   <none>
 NEXT SAFE ACTION: <none>
@@ -134,8 +133,7 @@ This runner assumes the agent can:
 - Prefer minimal diffs.
 - Keep changes within slice scope.
 - If a change introduces/changes env vars, services, ports, or runtime assumptions:
-  - update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
-  - if the current work also changes the stage-07 foundation artifact, keep `artifacts/foundation/ENVIRONMENT_INVENTORY.md` aligned with the canonical inventory
+  - add new named environments or capabilities to `.handbook/project/environment.yaml` before a work contract references them
 
 ## Output discipline
 - For “document stages”, output only the document content (no extra commentary).
@@ -273,8 +271,7 @@ Only include scoped blocks when the current stage `work_level` matches.
 ## P0-ABSOLUTE: Change Discipline
 - Keep changes minimal and reversible when touching contracts or production systems.
 - If a change introduces/changes env vars, services, ports, or runtime assumptions:
-  - update the canonical inventory at `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.
-  - keep `artifacts/foundation/ENVIRONMENT_INVENTORY.md` aligned only when the current stage/output contract requires that artifact.
+  - add new named environments or capabilities to `.handbook/project/environment.yaml` before a work contract references them.
 
 
 
@@ -566,24 +563,6 @@ gates:
     category: regression
     requirement: required
     description: Keep the skip-path proof stable across reruns.
-
-### artifacts/foundation/ENVIRONMENT_INVENTORY.md
-# Environment Inventory
-
-## Toolchains
-- Rust stable toolchain
-- Cargo for focused local tests
-
-## Runtime Assumptions
-- local filesystem only
-- no network calls
-- committed text fixtures represent external model output
-
-## Important Paths
-- `core/pipelines/foundation_inputs.yaml`
-- `core/stages/06_project_context_interview.md`
-- `core/stages/10_feature_spec.md`
-- `tests/fixtures/foundation_flow_demo`
 
 ## Outputs
 

@@ -177,9 +177,8 @@ fn repository_defined_custom_kind_loads_without_a_product_path_variant() {
     let fixed_product_kinds = [
         CanonicalArtifactKind::Charter,
         CanonicalArtifactKind::ProjectContext,
-        CanonicalArtifactKind::EnvironmentInventory,
         CanonicalArtifactKind::FeatureSpec,
     ];
-    assert_eq!(fixed_product_kinds.len(), 4);
+    assert_eq!(fixed_product_kinds.len(), 3);
     assert!(!format!("{fixed_product_kinds:?}").contains("HcmIncident"));
 }

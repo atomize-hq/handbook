@@ -42,7 +42,6 @@ fn manifest_artifacts_are_in_contract_order() {
         vec![
             CanonicalArtifactKind::Charter,
             CanonicalArtifactKind::ProjectContext,
-            CanonicalArtifactKind::EnvironmentInventory,
             CanonicalArtifactKind::FeatureSpec,
         ]
     );

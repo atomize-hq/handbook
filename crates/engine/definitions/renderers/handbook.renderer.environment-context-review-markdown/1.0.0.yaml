@@ -3,12 +3,12 @@
   "schema_version": "1.0",
   "renderer_id": "handbook.renderer.environment-context-review-markdown",
   "renderer_version": "1.0.0",
-  "input_schema_ref": "handbook.schemas.artifacts.environment-context@1.0.0",
+  "input_schema_ref": "handbook.schemas.artifacts.environment-context@1.1.0",
   "output_media_type": "text/markdown",
   "implementation_id": "environment-context-review-markdown-v1",
   "determinism_profile": "closed-environment-context-review-markdown-v1",
   "required_capability_contract_ref": null,
   "resolution_input": null,
   "extensions": {},
-  "renderer_fingerprint": "sha256:f1702eed916e5a0c7a58828a0060370436b2bbd8fb216b43ecfb7fc97408a635"
+  "renderer_fingerprint": "sha256:d557ed9b5f47a2fdf435bc6a45843252eeec8492205e25deba0077881bd2f3f7"
 }

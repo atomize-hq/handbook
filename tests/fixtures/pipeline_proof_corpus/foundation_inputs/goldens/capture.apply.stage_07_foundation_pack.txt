@@ -7,7 +7,6 @@ WRITTEN FILES:
   - artifacts/foundation/TEST_STRATEGY_BRIEF.md
   - artifacts/foundation/QUALITY_GATES_SPEC.md
   - artifacts/foundation/quality_gates.yaml
-  - artifacts/foundation/ENVIRONMENT_INVENTORY.md
 STATE UPDATES:
   <none>
 NEXT SAFE ACTION: <none>

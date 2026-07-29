@@ -30,7 +30,6 @@ pub struct CanonicalLayoutContract {
     system_root_relative: &'static str,
     charter: CanonicalArtifactPathContract,
     project_context: CanonicalArtifactPathContract,
-    environment_inventory: CanonicalArtifactPathContract,
     feature_spec: CanonicalArtifactPathContract,
 }
 
@@ -39,27 +38,22 @@ impl CanonicalLayoutContract {
         system_root_relative: &'static str,
         charter: CanonicalArtifactPathContract,
         project_context: CanonicalArtifactPathContract,
-        environment_inventory: CanonicalArtifactPathContract,
         feature_spec: CanonicalArtifactPathContract,
     ) -> Self {
         Self {
             system_root_relative,
             charter,
             project_context,
-            environment_inventory,
             feature_spec,
         }
     }
 
-    #[allow(clippy::too_many_arguments)]
     pub const fn from_paths(
         system_root_relative: &'static str,
         charter_namespace_dir: &'static str,
         charter_relative_path: &'static str,
         project_context_namespace_dir: &'static str,
         project_context_relative_path: &'static str,
-        environment_inventory_namespace_dir: &'static str,
-        environment_inventory_relative_path: &'static str,
         feature_spec_namespace_dir: &'static str,
         feature_spec_relative_path: &'static str,
     ) -> Self {
@@ -69,10 +63,6 @@ impl CanonicalLayoutContract {
             CanonicalArtifactPathContract::new(
                 project_context_namespace_dir,
                 project_context_relative_path,
-            ),
-            CanonicalArtifactPathContract::new(
-                environment_inventory_namespace_dir,
-                environment_inventory_relative_path,
             ),
             CanonicalArtifactPathContract::new(
                 feature_spec_namespace_dir,
@@ -89,7 +79,11 @@ impl CanonicalLayoutContract {
         match kind {
             CanonicalArtifactKind::Charter => self.charter,
             CanonicalArtifactKind::ProjectContext => self.project_context,
-            CanonicalArtifactKind::EnvironmentInventory => self.environment_inventory,
+            CanonicalArtifactKind::EnvironmentContext => CanonicalArtifactPathContract {
+                namespace_dir: ".handbook/project",
+                relative_path:
+                    crate::environment_context_artifact::ENVIRONMENT_CONTEXT_CANONICAL_PATH,
+            },
             CanonicalArtifactKind::FeatureSpec => self.feature_spec,
         }
     }
@@ -112,10 +106,6 @@ pub(crate) const DEFAULT_CANONICAL_LAYOUT_CONTRACT: CanonicalLayoutContract =
             ".handbook/project_context/PROJECT_CONTEXT.md",
         ),
         CanonicalArtifactPathContract::new(
-            ".handbook/environment_inventory",
-            ".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-        ),
-        CanonicalArtifactPathContract::new(
             ".handbook/feature_spec",
             ".handbook/feature_spec/FEATURE_SPEC.md",
         ),
@@ -125,9 +115,6 @@ pub(crate) const CANONICAL_CHARTER_RELATIVE_PATH: &str =
     DEFAULT_CANONICAL_LAYOUT_CONTRACT.artifact_relative_path(CanonicalArtifactKind::Charter);
 pub(crate) const CANONICAL_PROJECT_CONTEXT_RELATIVE_PATH: &str =
     DEFAULT_CANONICAL_LAYOUT_CONTRACT.artifact_relative_path(CanonicalArtifactKind::ProjectContext);
-pub(crate) const CANONICAL_ENVIRONMENT_INVENTORY_RELATIVE_PATH: &str =
-    DEFAULT_CANONICAL_LAYOUT_CONTRACT
-        .artifact_relative_path(CanonicalArtifactKind::EnvironmentInventory);
 pub(crate) const CANONICAL_FEATURE_SPEC_RELATIVE_PATH: &str =
     DEFAULT_CANONICAL_LAYOUT_CONTRACT.artifact_relative_path(CanonicalArtifactKind::FeatureSpec);
 
@@ -135,8 +122,6 @@ pub(crate) const CANONICAL_CHARTER_NAMESPACE_DIR: &str =
     DEFAULT_CANONICAL_LAYOUT_CONTRACT.namespace_dir(CanonicalArtifactKind::Charter);
 pub(crate) const CANONICAL_PROJECT_CONTEXT_NAMESPACE_DIR: &str =
     DEFAULT_CANONICAL_LAYOUT_CONTRACT.namespace_dir(CanonicalArtifactKind::ProjectContext);
-pub(crate) const CANONICAL_ENVIRONMENT_INVENTORY_NAMESPACE_DIR: &str =
-    DEFAULT_CANONICAL_LAYOUT_CONTRACT.namespace_dir(CanonicalArtifactKind::EnvironmentInventory);
 pub(crate) const CANONICAL_FEATURE_SPEC_NAMESPACE_DIR: &str =
     DEFAULT_CANONICAL_LAYOUT_CONTRACT.namespace_dir(CanonicalArtifactKind::FeatureSpec);
 
@@ -150,7 +135,6 @@ fn validate_canonical_layout_contract(contract: CanonicalLayoutContract) -> Resu
     for kind in [
         CanonicalArtifactKind::Charter,
         CanonicalArtifactKind::ProjectContext,
-        CanonicalArtifactKind::EnvironmentInventory,
         CanonicalArtifactKind::FeatureSpec,
     ] {
         let artifact = contract.artifact(kind);
@@ -241,8 +225,6 @@ mod tests {
             ".custom_handbook/charter/CHARTER.md",
             ".custom_handbook/project_context",
             ".custom_handbook/project_context/PROJECT_CONTEXT.md",
-            ".custom_handbook/environment_inventory",
-            ".custom_handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
             ".custom_handbook/feature_spec",
             ".custom_handbook/feature_spec/FEATURE_SPEC.md",
         );

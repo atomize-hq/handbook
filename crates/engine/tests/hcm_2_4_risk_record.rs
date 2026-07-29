@@ -180,24 +180,15 @@ fn risk_record_profile_fingerprint_replays_its_complete_typed_closure() {
     let definitions = profile["artifact_instances"]
         .as_array()
         .expect("artifact instances");
-    let condition = shipped
-        .project_condition_registry()
-        .definition(&exact(
-            "handbook.condition.project.managed-operational-surface@1.0.0",
-        ))
-        .expect("selected project condition");
-    let descriptors = ArtifactInstanceRegistry::resolve(
-        definitions,
-        shipped.artifact_kind_registry(),
-        &[condition],
-    )
-    .expect("exact descriptor closure");
+    let descriptors =
+        ArtifactInstanceRegistry::resolve(definitions, shipped.artifact_kind_registry(), &[])
+            .expect("exact descriptor closure");
 
     let mut dependencies = vec![
         json!({
             "definition_class": "profile",
             "reference": "handbook.profile.shipped-root@1.2.0",
-            "fingerprint": "sha256:63cd999c95efc3fe65ae3514c2915b5d1457290211cf6da7b57b2cd75bafaf83",
+            "fingerprint": "sha256:40c5fdb8a6ea42cf0f5f2c5cac8306ec7ad3a238c341653947f85abc93d72c40",
         }),
         json!({
             "definition_class": "artifact_instance_registry",
@@ -686,13 +677,6 @@ fn every_risk_descriptor_widening_is_refused_by_the_existing_registry() {
         .expect("P5 profile"),
     )
     .expect("P5 profile JSON");
-    let condition = shipped
-        .project_condition_registry()
-        .definition(&exact(
-            "handbook.condition.project.managed-operational-surface@1.0.0",
-        ))
-        .expect("selected project condition");
-
     for (name, mutation) in [
         ("role", ("role_ref", json!("project_context"))),
         ("path", ("canonical_path", json!("../risk.yaml"))),
@@ -730,12 +714,8 @@ fn every_risk_descriptor_widening_is_refused_by_the_existing_registry() {
             .expect("Risk Record descriptor");
         risk[mutation.0] = mutation.1;
         assert!(
-            ArtifactInstanceRegistry::resolve(
-                &descriptors,
-                shipped.artifact_kind_registry(),
-                &[condition],
-            )
-            .is_err(),
+            ArtifactInstanceRegistry::resolve(&descriptors, shipped.artifact_kind_registry(), &[],)
+                .is_err(),
             "{name} widening must be refused"
         );
     }
@@ -752,12 +732,8 @@ fn every_risk_descriptor_widening_is_refused_by_the_existing_registry() {
             .clone(),
     );
     assert!(
-        ArtifactInstanceRegistry::resolve(
-            &duplicate,
-            shipped.artifact_kind_registry(),
-            &[condition],
-        )
-        .is_err(),
+        ArtifactInstanceRegistry::resolve(&duplicate, shipped.artifact_kind_registry(), &[],)
+            .is_err(),
         "duplicate descriptor must be refused"
     );
 
@@ -770,8 +746,7 @@ fn every_risk_descriptor_widening_is_refused_by_the_existing_registry() {
         .find(|descriptor| descriptor["id"] == "risk_record")
         .expect("Risk Record descriptor")["unknown_field"] = json!(true);
     assert!(
-        ArtifactInstanceRegistry::resolve(&unknown, shipped.artifact_kind_registry(), &[condition])
-            .is_err(),
+        ArtifactInstanceRegistry::resolve(&unknown, shipped.artifact_kind_registry(), &[]).is_err(),
         "unknown descriptor field must be refused"
     );
 }
@@ -904,7 +879,7 @@ fn fixed_renderer_definition_and_golden_are_exact_resolution_free_bytes() {
         .as_str()
         .expect("golden Markdown");
     assert_eq!(
-        markdown.as_bytes().len() as u64,
+        markdown.len() as u64,
         golden["expected_byte_length"]
             .as_u64()
             .expect("byte length")

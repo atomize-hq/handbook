@@ -14,6 +14,7 @@
     {"exact_ref":"handbook.schemas.artifacts.project-authority@1.1.0","source":{"kind":"built_in"}},
     {"exact_ref":"handbook.schemas.artifacts.project-context@1.0.0","source":{"kind":"built_in"}},
     {"exact_ref":"handbook.schemas.artifacts.environment-context@1.0.0","source":{"kind":"built_in"}},
+    {"exact_ref":"handbook.schemas.artifacts.environment-context@1.1.0","source":{"kind":"built_in"}},
     {"exact_ref":"handbook.schemas.artifacts.work-specification@1.0.0","source":{"kind":"built_in"}},
     {"exact_ref":"handbook.schemas.artifacts.decision-record@1.0.0","source":{"kind":"built_in"}},
     {"exact_ref":"handbook.schemas.artifacts.risk-record@1.0.0","source":{"kind":"built_in"}},
@@ -49,9 +50,7 @@
     {"exact_ref":"handbook.semantic-validation.constitutional-root@1.0.0","source":{"kind":"built_in"}},
     {"exact_ref":"handbook.semantic-validation.constitutional-root@1.1.0","source":{"kind":"built_in"}}
   ],
-  "project_condition_sources": [
-    {"exact_ref":"handbook.condition.project.managed-operational-surface@1.0.0","source":{"kind":"built_in"}}
-  ],
+  "project_condition_sources": [],
   "vocabulary_sources": [
     {"exact_ref":"handbook.vocabulary.shipped-root@1.0.0","source":{"kind":"built_in"}}
   ],

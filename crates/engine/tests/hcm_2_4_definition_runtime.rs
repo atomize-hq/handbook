@@ -42,6 +42,7 @@ fn p1a_selection_record() -> Value {
         "handbook.schemas.artifacts.project-authority@1.1.0",
         "handbook.schemas.artifacts.project-context@1.0.0",
         "handbook.schemas.artifacts.environment-context@1.0.0",
+        "handbook.schemas.artifacts.environment-context@1.1.0",
         "handbook.schemas.artifacts.work-specification@1.0.0",
         "handbook.schemas.artifacts.decision-record@1.0.0",
         "handbook.schemas.artifacts.risk-record@1.0.0",
@@ -74,9 +75,6 @@ fn p1a_selection_record() -> Value {
         "handbook.intake.charter@1.0.0",
         "handbook.intake.project-context@1.0.0",
         "handbook.intake.environment-context@1.0.0",
-        "handbook.intake.work-specification@1.0.0",
-        "handbook.intake.decision-record@1.0.0",
-        "handbook.intake.risk-record@1.0.0",
     ];
 
     json!({
@@ -94,9 +92,7 @@ fn p1a_selection_record() -> Value {
             built_in("handbook.semantic-validation.constitutional-root@1.0.0"),
             built_in("handbook.semantic-validation.constitutional-root@1.1.0")
         ],
-        "project_condition_sources": [
-            built_in("handbook.condition.project.managed-operational-surface@1.0.0")
-        ],
+        "project_condition_sources": [],
         "vocabulary_sources": [built_in("handbook.vocabulary.shipped-root@1.0.0")],
         "context_resolution_sources": [
             built_in("handbook.context-resolution.shipped-root@1.0.0")
@@ -184,18 +180,19 @@ fn load_project_context_intake(
 
 #[test]
 fn artifact_repository_open_semantically_admits_all_p1a_intakes() {
-    for slug in [
-        "project-context",
-        "environment-context",
-        "work-specification",
-        "decision-record",
-        "risk-record",
+    for (slug, version) in [
+        ("project-context", "1.0.0"),
+        ("environment-context", "1.0.0"),
+        ("work-specification", "1.0.0"),
+        ("decision-record", "1.0.0"),
+        ("risk-record", "1.0.0"),
     ] {
-        let definition_ref = ExactDefinitionRef::parse(&format!("handbook.intake.{slug}@1.0.0"))
-            .expect("intake ref");
+        let definition_ref =
+            ExactDefinitionRef::parse(&format!("handbook.intake.{slug}@{version}"))
+                .expect("intake ref");
         let bytes = fs::read(format!(
-            "{}/definitions/intakes/handbook.intake.{slug}/1.0.0.yaml",
-            env!("CARGO_MANIFEST_DIR")
+            "{}/definitions/intakes/handbook.intake.{slug}/{version}.yaml",
+            env!("CARGO_MANIFEST_DIR"),
         ))
         .expect("intake bytes");
         ArtifactIntakeRegistry::load(&[ArtifactIntakeSourceV1 {
@@ -217,7 +214,7 @@ fn artifact_repository_open_semantically_admits_all_p1a_intakes() {
         (
             "handbook.artifact-kind.environment-context@1.1.0",
             "environment_context",
-            9,
+            6,
         ),
     ] {
         let target = ArtifactTargetV1::parse(kind_ref, instance_id).expect("artifact target");

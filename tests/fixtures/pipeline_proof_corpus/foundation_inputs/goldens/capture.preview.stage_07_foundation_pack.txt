@@ -9,7 +9,6 @@ WRITE PLAN:
   - artifact: artifacts/foundation/TEST_STRATEGY_BRIEF.md
   - artifact: artifacts/foundation/QUALITY_GATES_SPEC.md
   - artifact: artifacts/foundation/quality_gates.yaml
-  - artifact: artifacts/foundation/ENVIRONMENT_INVENTORY.md
 POST-CAPTURE STATE UPDATES:
   <none>
 NEXT SAFE ACTION: run `handbook pipeline capture apply --capture-id {{CAPTURE_ID}}`

@@ -2,8 +2,8 @@ use handbook_engine::{
     load_artifact_kind_registry, parse_definition_yaml, ArtifactInstanceRegistry,
     ArtifactKindRegistry, ArtifactKindRegistryLoadRequest, ContextResolutionPolicyRegistry,
     ContextResolutionStackDefinition, DefinitionFingerprint, DefinitionSource,
-    DefinitionSourceBinding, ExactDefinitionRef, ProfileSelectionRequest,
-    ProjectConditionDefinition, SchemaRegistry, VocabularyDefinition,
+    DefinitionSourceBinding, ExactDefinitionRef, ProfileSelectionRequest, SchemaRegistry,
+    VocabularyDefinition,
 };
 use serde_json::Value;
 use std::fs;
@@ -101,9 +101,9 @@ const RENDERER_GOLDEN_PATH: &str = concat!(
     env!("CARGO_MANIFEST_DIR"),
     "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json"
 );
-const P1A_PROOF_PATH: &str = concat!(
+const CORRECTION_PROOF_PATH: &str = concat!(
     env!("CARGO_MANIFEST_DIR"),
-    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P1A-definition-support.md"
+    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2-greenfield-environment-context-correction.md"
 );
 
 fn exact_successor_kind_registry() -> ArtifactKindRegistry {
@@ -119,7 +119,7 @@ fn exact_successor_kind_registry() -> ArtifactKindRegistry {
     let schema_versions = [
         ("project-authority", "1.1.0"),
         ("project-context", "1.0.0"),
-        ("environment-context", "1.0.0"),
+        ("environment-context", "1.1.0"),
         ("work-specification", "1.0.0"),
         ("decision-record", "1.0.0"),
         ("risk-record", "1.0.0"),
@@ -173,6 +173,7 @@ fn shipped_profile_1_2_request() -> ProfileSelectionRequest {
         "handbook.schemas.artifacts.project-authority@1.1.0",
         "handbook.schemas.artifacts.project-context@1.0.0",
         "handbook.schemas.artifacts.environment-context@1.0.0",
+        "handbook.schemas.artifacts.environment-context@1.1.0",
         "handbook.schemas.artifacts.work-specification@1.0.0",
         "handbook.schemas.artifacts.decision-record@1.0.0",
         "handbook.schemas.artifacts.risk-record@1.0.0",
@@ -221,9 +222,7 @@ fn shipped_profile_1_2_request() -> ProfileSelectionRequest {
             builtin("handbook.semantic-validation.constitutional-root@1.0.0"),
             builtin("handbook.semantic-validation.constitutional-root@1.1.0"),
         ],
-        project_condition_sources: vec![builtin(
-            "handbook.condition.project.managed-operational-surface@1.0.0",
-        )],
+        project_condition_sources: Vec::new(),
         vocabulary_sources: vec![builtin("handbook.vocabulary.shipped-root@1.0.0")],
         context_resolution_sources: vec![builtin("handbook.context-resolution.shipped-root@1.0.0")],
         context_resolution_policy_sources: vec![
@@ -267,31 +266,31 @@ fn intake_and_renderer_fingerprints_cover_exact_authored_content() {
     let definition_root = Path::new(env!("CARGO_MANIFEST_DIR")).join("definitions");
     let mut mismatches = Vec::new();
 
-    for slug in [
-        "project-context",
-        "environment-context",
-        "work-specification",
-        "decision-record",
-        "risk-record",
+    for (slug, schema_version, kind_version, intake_version, renderer_version) in [
+        ("project-context", "1.0.0", "1.1.0", "1.0.0", "1.0.0"),
+        ("environment-context", "1.1.0", "1.1.0", "1.0.0", "1.0.0"),
+        ("work-specification", "1.0.0", "1.1.0", "1.0.0", "1.0.0"),
+        ("decision-record", "1.0.0", "1.1.0", "1.0.0", "1.0.0"),
+        ("risk-record", "1.0.0", "1.1.0", "1.0.0", "1.0.0"),
     ] {
-        let schema_ref = format!("handbook.schemas.artifacts.{slug}@1.0.0");
-        let kind_ref = format!("handbook.artifact-kind.{slug}@1.1.0");
+        let schema_ref = format!("handbook.schemas.artifacts.{slug}@{schema_version}");
+        let kind_ref = format!("handbook.artifact-kind.{slug}@{kind_version}");
         let schema = parse_definition_yaml(
             &fs::read(definition_root.join(format!(
-                "schemas/handbook.schemas.artifacts.{slug}/1.0.0.entry.yaml"
+                "schemas/handbook.schemas.artifacts.{slug}/{schema_version}.entry.yaml"
             )))
             .expect("read schema entry"),
         )
         .expect("parse schema entry");
         let kind = parse_definition_yaml(
             &fs::read(definition_root.join(format!(
-                "artifact-kinds/handbook.artifact-kind.{slug}/1.1.0.yaml"
+                "artifact-kinds/handbook.artifact-kind.{slug}/{kind_version}.yaml"
             )))
             .expect("read kind"),
         )
         .expect("parse kind");
 
-        let intake_path = format!("intakes/handbook.intake.{slug}/1.0.0.yaml");
+        let intake_path = format!("intakes/handbook.intake.{slug}/{intake_version}.yaml");
         let mut intake = parse_definition_yaml(
             &fs::read(definition_root.join(&intake_path)).expect("read intake"),
         )
@@ -323,7 +322,7 @@ fn intake_and_renderer_fingerprints_cover_exact_authored_content() {
         }
 
         let renderer_path =
-            format!("renderers/handbook.renderer.{slug}-review-markdown/1.0.0.yaml");
+            format!("renderers/handbook.renderer.{slug}-review-markdown/{renderer_version}.yaml");
         let mut renderer = parse_definition_yaml(
             &fs::read(definition_root.join(&renderer_path)).expect("read renderer"),
         )
@@ -374,23 +373,23 @@ fn intakes_exhaustively_cover_schema_fields_and_block_unknown_values() {
         "extensions",
         "intake_definition_fingerprint",
     ]);
-    for slug in [
-        "project-context",
-        "environment-context",
-        "work-specification",
-        "decision-record",
-        "risk-record",
+    for (slug, schema_version, kind_version, intake_version) in [
+        ("project-context", "1.0.0", "1.1.0", "1.0.0"),
+        ("environment-context", "1.1.0", "1.1.0", "1.0.0"),
+        ("work-specification", "1.0.0", "1.1.0", "1.0.0"),
+        ("decision-record", "1.0.0", "1.1.0", "1.0.0"),
+        ("risk-record", "1.0.0", "1.1.0", "1.0.0"),
     ] {
         let schema: Value = serde_json::from_slice(
             &fs::read(repository_root.join(format!(
-                "definitions/schemas/handbook.schemas.artifacts.{slug}/1.0.0.schema.json"
+                "definitions/schemas/handbook.schemas.artifacts.{slug}/{schema_version}.schema.json"
             )))
             .expect("read schema"),
         )
         .expect("parse schema");
         let intake = parse_definition_yaml(
             &fs::read(repository_root.join(format!(
-                "definitions/intakes/handbook.intake.{slug}/1.0.0.yaml"
+                "definitions/intakes/handbook.intake.{slug}/{intake_version}.yaml"
             )))
             .expect("read intake"),
         )
@@ -407,11 +406,11 @@ fn intakes_exhaustively_cover_schema_fields_and_block_unknown_values() {
         );
         assert_eq!(
             intake["artifact_kind_ref"],
-            format!("handbook.artifact-kind.{slug}@1.1.0")
+            format!("handbook.artifact-kind.{slug}@{kind_version}")
         );
         assert_eq!(
             intake["candidate_schema_ref"],
-            format!("handbook.schemas.artifacts.{slug}@1.0.0")
+            format!("handbook.schemas.artifacts.{slug}@{schema_version}")
         );
         assert_eq!(
             intake["supported_modes"],
@@ -480,28 +479,45 @@ fn successor_kind_fingerprints_cover_their_resolved_schema_closures() {
         (
             "project-context",
             "handbook.schemas.artifacts.project-context@1.0.0",
+            "1.0.0",
+            "1.1.0",
+            "1.0.0",
         ),
         (
             "environment-context",
-            "handbook.schemas.artifacts.environment-context@1.0.0",
+            "handbook.schemas.artifacts.environment-context@1.1.0",
+            "1.1.0",
+            "1.1.0",
+            "1.0.0",
         ),
         (
             "work-specification",
             "handbook.schemas.artifacts.work-specification@1.0.0",
+            "1.0.0",
+            "1.1.0",
+            "1.0.0",
         ),
         (
             "decision-record",
             "handbook.schemas.artifacts.decision-record@1.0.0",
+            "1.0.0",
+            "1.1.0",
+            "1.0.0",
         ),
         (
             "risk-record",
             "handbook.schemas.artifacts.risk-record@1.0.0",
+            "1.0.0",
+            "1.1.0",
+            "1.0.0",
         ),
     ];
     let entry_paths = cases
         .iter()
-        .map(|(slug, _)| {
-            format!("definitions/schemas/handbook.schemas.artifacts.{slug}/1.0.0.entry.yaml")
+        .map(|(slug, _, schema_version, _, _)| {
+            format!(
+                "definitions/schemas/handbook.schemas.artifacts.{slug}/{schema_version}.entry.yaml"
+            )
         })
         .collect::<Vec<_>>();
     let schemas = SchemaRegistry::load(
@@ -512,9 +528,9 @@ fn successor_kind_fingerprints_cover_their_resolved_schema_closures() {
     .expect("load exact schema closure");
     let mut mismatches = Vec::new();
 
-    for (slug, schema_ref) in cases {
+    for (slug, schema_ref, _schema_version, kind_version, renderer_version) in cases {
         let relative_path =
-            format!("definitions/artifact-kinds/handbook.artifact-kind.{slug}/1.1.0.yaml");
+            format!("definitions/artifact-kinds/handbook.artifact-kind.{slug}/{kind_version}.yaml");
         let bytes = fs::read(repository_root.join(&relative_path)).expect("read kind");
         let mut definition = parse_definition_yaml(&bytes).expect("parse kind");
         let supplied = definition
@@ -525,10 +541,10 @@ fn successor_kind_fingerprints_cover_their_resolved_schema_closures() {
         let schema = schemas
             .entry(&ExactDefinitionRef::parse(schema_ref).expect("schema ref"))
             .expect("schema entry");
-        let renderer_ref = format!("handbook.renderer.{slug}-review-markdown@1.0.0");
+        let renderer_ref = format!("handbook.renderer.{slug}-review-markdown@{renderer_version}");
         let renderer = parse_definition_yaml(
             &fs::read(repository_root.join(format!(
-                "definitions/renderers/handbook.renderer.{slug}-review-markdown/1.0.0.yaml"
+                "definitions/renderers/handbook.renderer.{slug}-review-markdown/{renderer_version}.yaml"
             )))
             .expect("read renderer"),
         )
@@ -572,33 +588,33 @@ fn successor_kind_fingerprints_cover_their_resolved_schema_closures() {
 #[test]
 fn exact_successor_kind_renderer_pairs_are_admitted() {
     let repository_root = Path::new(env!("CARGO_MANIFEST_DIR"));
-    let slugs = [
-        "project-context",
-        "environment-context",
-        "work-specification",
-        "decision-record",
-        "risk-record",
+    let families = [
+        ("project-context", "1.0.0", "1.1.0"),
+        ("environment-context", "1.1.0", "1.1.0"),
+        ("work-specification", "1.0.0", "1.1.0"),
+        ("decision-record", "1.0.0", "1.1.0"),
+        ("risk-record", "1.0.0", "1.1.0"),
     ];
     let request = ArtifactKindRegistryLoadRequest::new(
         ExactDefinitionRef::parse("handbook.roles.core@1.1.0").expect("role registry ref"),
-        slugs
+        families
             .iter()
-            .map(|slug| {
-                format!("definitions/schemas/handbook.schemas.artifacts.{slug}/1.0.0.entry.yaml")
+            .map(|(slug, schema_version, _)| {
+                format!("definitions/schemas/handbook.schemas.artifacts.{slug}/{schema_version}.entry.yaml")
             })
             .collect(),
         vec!["definitions/schemas".to_owned()],
-        slugs
+        families
             .iter()
-            .map(|slug| {
-                format!("definitions/artifact-kinds/handbook.artifact-kind.{slug}/1.1.0.yaml")
+            .map(|(slug, _, kind_version)| {
+                format!("definitions/artifact-kinds/handbook.artifact-kind.{slug}/{kind_version}.yaml")
             })
             .collect(),
     );
 
     let registry =
         load_artifact_kind_registry(repository_root, request).expect("load exact successor kinds");
-    assert_eq!(registry.kind_refs().len(), slugs.len());
+    assert_eq!(registry.kind_refs().len(), families.len());
 }
 
 #[test]
@@ -608,30 +624,43 @@ fn successor_kind_dependency_near_misses_remain_fail_closed() {
         (
             "project-context",
             "handbook.renderer.project-context-review-markdown@1.0.0",
+            "1.0.0",
+            "1.1.0",
         ),
         (
             "environment-context",
             "handbook.renderer.environment-context-review-markdown@1.0.0",
+            "1.1.0",
+            "1.1.0",
         ),
         (
             "work-specification",
             "handbook.renderer.work-specification-review-markdown@1.0.0",
+            "1.0.0",
+            "1.1.0",
         ),
         (
             "decision-record",
             "handbook.renderer.decision-record-review-markdown@1.0.0",
+            "1.0.0",
+            "1.1.0",
         ),
         (
             "risk-record",
             "handbook.renderer.risk-record-review-markdown@1.0.0",
+            "1.0.0",
+            "1.1.0",
         ),
     ];
 
-    for (slug, expected_renderer) in cases {
+    for (slug, expected_renderer, schema_version, kind_version) in cases {
         let fixture = tempfile::tempdir().expect("fixture root");
         let schema_directory = format!("definitions/schemas/handbook.schemas.artifacts.{slug}");
         fs::create_dir_all(fixture.path().join(&schema_directory)).expect("schema directory");
-        for suffix in ["1.0.0.entry.yaml", "1.0.0.schema.json"] {
+        for suffix in [
+            format!("{schema_version}.entry.yaml"),
+            format!("{schema_version}.schema.json"),
+        ] {
             fs::copy(
                 repository_root.join(format!("{schema_directory}/{suffix}")),
                 fixture.path().join(format!("{schema_directory}/{suffix}")),
@@ -643,7 +672,7 @@ fn successor_kind_dependency_near_misses_remain_fail_closed() {
             .expect("kind directory");
         let original = parse_definition_yaml(
             &fs::read(repository_root.join(format!(
-                "definitions/artifact-kinds/handbook.artifact-kind.{slug}/1.1.0.yaml"
+                "definitions/artifact-kinds/handbook.artifact-kind.{slug}/{kind_version}.yaml"
             )))
             .expect("read successor kind"),
         )
@@ -671,7 +700,7 @@ fn successor_kind_dependency_near_misses_remain_fail_closed() {
                 fixture.path(),
                 ArtifactKindRegistryLoadRequest::new(
                     ExactDefinitionRef::parse("handbook.roles.core@1.1.0").expect("role registry"),
-                    vec![format!("{schema_directory}/1.0.0.entry.yaml")],
+                    vec![format!("{schema_directory}/{schema_version}.entry.yaml")],
                     vec!["definitions/schemas".to_owned()],
                     vec![kind_path.clone()],
                 ),
@@ -721,7 +750,7 @@ fn successor_kind_dependency_near_misses_remain_fail_closed() {
                 fixture.path(),
                 ArtifactKindRegistryLoadRequest::new(
                     ExactDefinitionRef::parse("handbook.roles.core@1.1.0").expect("role registry"),
-                    vec![format!("{schema_directory}/1.0.0.entry.yaml")],
+                    vec![format!("{schema_directory}/{schema_version}.entry.yaml")],
                     vec!["definitions/schemas".to_owned()],
                     vec![kind_path.clone()],
                 ),
@@ -808,20 +837,11 @@ fn exact_first_party_descriptor_rows_are_admitted_and_near_misses_refused() {
             "extensions": {}
         }),
     ];
-    let condition = ProjectConditionDefinition::load(
-        repository_root,
-        "definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml",
-    )
-    .expect("load project condition");
     let kinds = exact_successor_kind_registry();
 
     for descriptor in descriptors {
-        ArtifactInstanceRegistry::resolve(
-            &[charter.clone(), descriptor.clone()],
-            &kinds,
-            &[&condition],
-        )
-        .expect("admit exact first-party descriptor row");
+        ArtifactInstanceRegistry::resolve(&[charter.clone(), descriptor.clone()], &kinds, &[])
+            .expect("admit exact first-party descriptor row");
 
         let renderer = descriptor["renderer_definition_refs"][0].clone();
         let mismatches = [
@@ -895,12 +915,8 @@ fn exact_first_party_descriptor_rows_are_admitted_and_near_misses_refused() {
                 .pointer_mut(pointer)
                 .expect("descriptor mutation pointer") = mismatch;
             assert!(
-                ArtifactInstanceRegistry::resolve(
-                    &[charter.clone(), near_miss],
-                    &kinds,
-                    &[&condition],
-                )
-                .is_err(),
+                ArtifactInstanceRegistry::resolve(&[charter.clone(), near_miss], &kinds, &[],)
+                    .is_err(),
                 "refuse descriptor mismatch at {pointer}"
             );
         }
@@ -911,12 +927,8 @@ fn exact_first_party_descriptor_rows_are_admitted_and_near_misses_refused() {
             let mut near_miss = descriptor.clone();
             near_miss["renderer_definition_refs"] = renderers;
             assert!(
-                ArtifactInstanceRegistry::resolve(
-                    &[charter.clone(), near_miss],
-                    &kinds,
-                    &[&condition],
-                )
-                .is_err(),
+                ArtifactInstanceRegistry::resolve(&[charter.clone(), near_miss], &kinds, &[],)
+                    .is_err(),
                 "refuse mismatched or extra renderer cardinality"
             );
         }
@@ -1007,17 +1019,12 @@ fn shipped_profile_1_2_fingerprint_covers_the_complete_typed_closure() {
         ),
     )
     .expect("load profile kinds");
-    let condition = ProjectConditionDefinition::load(
-        repository_root,
-        "definitions/project-conditions/handbook.condition.project.managed-operational-surface/1.0.0.yaml",
-    )
-    .expect("load condition");
     let instances = ArtifactInstanceRegistry::resolve(
         profile["artifact_instances"]
             .as_array()
             .expect("artifact instances"),
         &kinds,
-        &[&condition],
+        &[],
     )
     .expect("resolve descriptor closure");
     let vocabulary = VocabularyDefinition::load(
@@ -1049,12 +1056,6 @@ fn shipped_profile_1_2_fingerprint_covers_the_complete_typed_closure() {
             "definition_fingerprint": instances.fingerprint().as_str(),
             "definition_ref": "handbook.profile.shipped-root@1.2.0",
             "dependency_role": "artifact_instance_registry",
-        }),
-        serde_json::json!({
-            "definition_fingerprint": condition.definition_fingerprint().as_str(),
-            "definition_ref":
-                "handbook.condition.project.managed-operational-surface@1.0.0",
-            "dependency_role": "condition",
         }),
         serde_json::json!({
             "definition_fingerprint": context.definition_fingerprint().as_str(),
@@ -1226,23 +1227,34 @@ fn immutable_definition_vector_replays_authored_records_and_released_charter_row
     );
 
     for (slug, family) in vector["families"].as_object().expect("definition families") {
+        let version = |field: &str| {
+            family[field]
+                .as_str()
+                .expect("exact family ref")
+                .split_once('@')
+                .expect("versioned family ref")
+                .1
+        };
         let kind = parse_definition_yaml(
             &fs::read(repository_root.join(format!(
-                "definitions/artifact-kinds/handbook.artifact-kind.{slug}/1.1.0.yaml"
+                "definitions/artifact-kinds/handbook.artifact-kind.{slug}/{}.yaml",
+                version("kind_ref")
             )))
             .expect("read kind"),
         )
         .expect("parse kind");
         let intake = parse_definition_yaml(
             &fs::read(repository_root.join(format!(
-                "definitions/intakes/handbook.intake.{slug}/1.0.0.yaml"
+                "definitions/intakes/handbook.intake.{slug}/{}.yaml",
+                version("intake_ref")
             )))
             .expect("read intake"),
         )
         .expect("parse intake");
         let renderer = parse_definition_yaml(
             &fs::read(repository_root.join(format!(
-                "definitions/renderers/handbook.renderer.{slug}-review-markdown/1.0.0.yaml"
+                "definitions/renderers/handbook.renderer.{slug}-review-markdown/{}.yaml",
+                version("renderer_ref")
             )))
             .expect("read renderer"),
         )
@@ -1288,18 +1300,18 @@ fn immutable_definition_vector_replays_authored_records_and_released_charter_row
 }
 
 #[test]
-fn p1a_proof_freezes_the_exact_profile_vector_fingerprint() {
+fn correction_proof_freezes_the_exact_profile_vector_fingerprint() {
     let vector: Value =
         serde_json::from_slice(&fs::read(DEFINITION_VECTOR_PATH).expect("definition vector"))
             .expect("parse definition vector");
     let expected = vector["profile"]["expected_fingerprint"]
         .as_str()
         .expect("profile fingerprint");
-    let proof = fs::read_to_string(P1A_PROOF_PATH).expect("P1A proof");
+    let proof = fs::read_to_string(CORRECTION_PROOF_PATH).expect("correction proof");
 
     assert!(
         proof.contains(expected),
-        "P1A proof must freeze the immutable vector fingerprint {expected}"
+        "correction proof must freeze the active vector fingerprint {expected}"
     );
 }
 
@@ -1311,13 +1323,15 @@ fn renderer_goldens_are_schema_valid_fixed_bytes_and_resolution_free() {
             .expect("parse renderer goldens");
     assert_eq!(vector["external_inputs"], serde_json::json!([]));
     let schema_paths = [
-        "project-context",
-        "environment-context",
-        "work-specification",
-        "decision-record",
-        "risk-record",
+        ("project-context", "1.0.0"),
+        ("environment-context", "1.1.0"),
+        ("work-specification", "1.0.0"),
+        ("decision-record", "1.0.0"),
+        ("risk-record", "1.0.0"),
     ]
-    .map(|slug| format!("definitions/schemas/handbook.schemas.artifacts.{slug}/1.0.0.entry.yaml"));
+    .map(|(slug, version)| {
+        format!("definitions/schemas/handbook.schemas.artifacts.{slug}/{version}.entry.yaml")
+    });
     let schemas = SchemaRegistry::load(
         repository_root,
         &schema_paths,
@@ -1368,7 +1382,7 @@ fn renderer_goldens_are_schema_valid_fixed_bytes_and_resolution_free() {
             .as_str()
             .expect("golden Markdown");
         assert_eq!(
-            markdown.as_bytes().len() as u64,
+            markdown.len() as u64,
             golden["expected_byte_length"]
                 .as_u64()
                 .expect("byte length")
@@ -1386,6 +1400,15 @@ fn renderer_goldens_are_schema_valid_fixed_bytes_and_resolution_free() {
             assert_eq!(
                 handbook_engine::render_project_context_markdown(&input)
                     .expect("existing deterministic renderer"),
+                markdown.as_bytes()
+            );
+        } else if slug == "environment-context" {
+            let input: handbook_engine::CanonicalEnvironmentContext =
+                serde_json::from_value(golden["canonical_input"].clone())
+                    .expect("typed Environment Context");
+            assert_eq!(
+                handbook_engine::render_environment_context_markdown(&input)
+                    .expect("deterministic Environment Context renderer"),
                 markdown.as_bytes()
             );
         }

@@ -1,5 +1,5 @@
 OUTCOME: REFUSED
 PIPELINE: pipeline.foundation_inputs
 STAGE: stage.07_foundation_pack
-REASON: invalid_capture_input: declared artifact block `artifacts/foundation/ENVIRONMENT_INVENTORY.md` is missing from the capture input
+REASON: invalid_capture_input: declared artifact block `artifacts/foundation/quality_gates.yaml` is missing from the capture input
 NEXT SAFE ACTION: emit every declared artifact FILE block exactly once and retry `pipeline capture`

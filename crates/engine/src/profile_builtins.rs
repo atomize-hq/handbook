@@ -73,6 +73,9 @@ pub(crate) fn definition(reference: &ExactDefinitionRef) -> Option<BuiltInSource
         "handbook.schemas.artifacts.environment-context@1.0.0" => {
             source!("schemas/handbook.schemas.artifacts.environment-context/1.0.0.entry.yaml")
         }
+        "handbook.schemas.artifacts.environment-context@1.1.0" => {
+            source!("schemas/handbook.schemas.artifacts.environment-context/1.1.0.entry.yaml")
+        }
         "handbook.schemas.artifacts.work-specification@1.0.0" => {
             source!("schemas/handbook.schemas.artifacts.work-specification/1.0.0.entry.yaml")
         }
@@ -246,6 +249,9 @@ pub(crate) fn schema_document(package_path: &str) -> Option<&'static [u8]> {
         ),
         "definitions/schemas/handbook.schemas.artifacts.environment-context/1.0.0.schema.json" => include_bytes!(
             "../definitions/schemas/handbook.schemas.artifacts.environment-context/1.0.0.schema.json"
+        ),
+        "definitions/schemas/handbook.schemas.artifacts.environment-context/1.1.0.schema.json" => include_bytes!(
+            "../definitions/schemas/handbook.schemas.artifacts.environment-context/1.1.0.schema.json"
         ),
         "definitions/schemas/handbook.schemas.artifacts.work-specification/1.0.0.schema.json" => include_bytes!(
             "../definitions/schemas/handbook.schemas.artifacts.work-specification/1.0.0.schema.json"

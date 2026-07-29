@@ -49,10 +49,7 @@
       "lifecycle_policy_ref": null,
       "projection_definition_refs": [],
       "renderer_definition_refs": ["handbook.renderer.environment-context-review-markdown@1.0.0"],
-      "requiredness": {
-        "condition_ref": "handbook.condition.project.managed-operational-surface@1.0.0",
-        "mode": "conditional"
-      },
+      "requiredness": {"condition_ref": null, "mode": "optional"},
       "role_ref": "environment_context",
       "schema_id": "handbook.artifact-instance-descriptor",
       "schema_version": "1.0",
@@ -88,6 +85,7 @@
     "handbook.schemas.artifacts.project-authority@1.1.0",
     "handbook.schemas.artifacts.project-context@1.0.0",
     "handbook.schemas.artifacts.environment-context@1.0.0",
+    "handbook.schemas.artifacts.environment-context@1.1.0",
     "handbook.schemas.artifacts.work-specification@1.0.0",
     "handbook.schemas.artifacts.decision-record@1.0.0",
     "handbook.schemas.artifacts.risk-record@1.0.0",
@@ -108,5 +106,5 @@
     "ref": "handbook.roles.core@1.1.0"
   },
   "vocabulary_ref": "handbook.vocabulary.shipped-root@1.0.0",
-  "profile_fingerprint": "sha256:63cd999c95efc3fe65ae3514c2915b5d1457290211cf6da7b57b2cd75bafaf83"
+  "profile_fingerprint": "sha256:40c5fdb8a6ea42cf0f5f2c5cac8306ec7ad3a238c341653947f85abc93d72c40"
 }

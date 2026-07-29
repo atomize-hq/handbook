@@ -3153,7 +3153,7 @@ mod tests {
                 "artifacts/foundation/FOUNDATION_STRATEGY.md",
                 "strategy\n",
             )],
-            &["ENVIRONMENT_INVENTORY.md".to_string()],
+            &["DUPLICATE_BASENAME.md".to_string()],
         )
         .expect_err("missing basename match should refuse");
 
@@ -3167,10 +3167,10 @@ mod tests {
     fn build_repo_mirror_writes_refuses_ambiguous_basename_match() {
         let err = build_repo_mirror_writes(
             &[
-                write_intent("artifacts/a/ENVIRONMENT_INVENTORY.md", "first\n"),
-                write_intent("artifacts/b/ENVIRONMENT_INVENTORY.md", "second\n"),
+                write_intent("artifacts/a/DUPLICATE_BASENAME.md", "first\n"),
+                write_intent("artifacts/b/DUPLICATE_BASENAME.md", "second\n"),
             ],
-            &["ENVIRONMENT_INVENTORY.md".to_string()],
+            &["DUPLICATE_BASENAME.md".to_string()],
         )
         .expect_err("ambiguous basename match should refuse");
 

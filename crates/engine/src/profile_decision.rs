@@ -313,6 +313,7 @@ fn shipped_profile_request() -> ProfileSelectionRequest {
         "handbook.schemas.artifacts.project-authority@1.1.0",
         "handbook.schemas.artifacts.project-context@1.0.0",
         "handbook.schemas.artifacts.environment-context@1.0.0",
+        "handbook.schemas.artifacts.environment-context@1.1.0",
         "handbook.schemas.artifacts.work-specification@1.0.0",
         "handbook.schemas.artifacts.decision-record@1.0.0",
         "handbook.schemas.artifacts.risk-record@1.0.0",
@@ -360,9 +361,7 @@ fn shipped_profile_request() -> ProfileSelectionRequest {
             builtin("handbook.semantic-validation.constitutional-root@1.0.0"),
             builtin("handbook.semantic-validation.constitutional-root@1.1.0"),
         ],
-        project_condition_sources: vec![builtin(
-            "handbook.condition.project.managed-operational-surface@1.0.0",
-        )],
+        project_condition_sources: Vec::new(),
         vocabulary_sources: vec![builtin("handbook.vocabulary.shipped-root@1.0.0")],
         context_resolution_sources: vec![builtin("handbook.context-resolution.shipped-root@1.0.0")],
         context_resolution_policy_sources: vec![

@@ -320,7 +320,7 @@ pub fn render_canonical_artifact_kind(kind: CanonicalArtifactKind) -> &'static s
     match kind {
         CanonicalArtifactKind::Charter => "Charter",
         CanonicalArtifactKind::ProjectContext => "ProjectContext",
-        CanonicalArtifactKind::EnvironmentInventory => "EnvironmentInventory",
+        CanonicalArtifactKind::EnvironmentContext => "EnvironmentContext",
         CanonicalArtifactKind::FeatureSpec => "FeatureSpec",
     }
 }
@@ -400,9 +400,6 @@ mod recovery_shell {
             NextSafeAction::RunAuthorProjectContext => {
                 "run `handbook author project-context --from-inputs <path|->`".to_string()
             }
-            NextSafeAction::RunAuthorEnvironmentInventory => {
-                "run `handbook author environment-inventory --from-inputs <path|->`".to_string()
-            }
             NextSafeAction::CreateSystemRoot {
                 canonical_repo_relative_path,
             } => format!("create canonical .handbook root at {canonical_repo_relative_path}"),
@@ -455,7 +452,7 @@ mod recovery_shell {
         match kind {
             CanonicalArtifactKind::Charter => "Charter",
             CanonicalArtifactKind::ProjectContext => "ProjectContext",
-            CanonicalArtifactKind::EnvironmentInventory => "EnvironmentInventory",
+            CanonicalArtifactKind::EnvironmentContext => "EnvironmentContext",
             CanonicalArtifactKind::FeatureSpec => "FeatureSpec",
         }
     }

@@ -186,7 +186,7 @@ fn render_canonical_artifact_kind(kind: CanonicalArtifactKind) -> &'static str {
     match kind {
         CanonicalArtifactKind::Charter => "Charter",
         CanonicalArtifactKind::ProjectContext => "ProjectContext",
-        CanonicalArtifactKind::EnvironmentInventory => "EnvironmentInventory",
+        CanonicalArtifactKind::EnvironmentContext => "EnvironmentContext",
         CanonicalArtifactKind::FeatureSpec => "FeatureSpec",
     }
 }

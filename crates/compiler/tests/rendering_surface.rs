@@ -92,48 +92,6 @@ fn valid_project_context_markdown() -> &'static str {
 }
 
 #[cfg(unix)]
-fn valid_environment_inventory_markdown() -> &'static str {
-    "# Environment Inventory
-
-> **Canonical File:** `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
-> **Project Context Ref:** `.handbook/project/context.yaml`
-
-## What this is
-Canonical environment and runtime inventory.
-
-## How to use
-- Update this file when runtime assumptions change.
-
-## 1) Environment Variables (Inventory)
-- None yet.
-
-## 2) External Services / Infrastructure Dependencies
-- None yet.
-
-## 3) Runtime Assumptions (Ports, Paths, Storage, Limits)
-- None yet.
-
-## 4) Local Development Requirements
-- None yet.
-
-## 5) CI Requirements
-- None yet.
-
-## 6) Production / Deployment Requirements (even if not live yet)
-- None yet.
-
-## 7) Dependency & Tooling Inventory (project-specific)
-- None yet.
-
-## 8) Update Contract (non-negotiable)
-- Update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.
-
-## 9) Known Unknowns
-- None yet.
-"
-}
-
-#[cfg(unix)]
 fn assert_in_order(haystack: &str, needles: &[&str]) {
     let mut last = 0;
     for needle in needles {
@@ -454,10 +412,6 @@ fn render_markdown_includes_execution_demo_fixture_context_and_ready_next_action
         valid_project_context_markdown().as_bytes(),
     );
     write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
-    write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"demo feature",
     );
@@ -488,8 +442,7 @@ fn render_markdown_includes_execution_demo_fixture_context_and_ready_next_action
         &[
             "1. Charter [.handbook/charter/CHARTER.md]",
             "2. ProjectContext [.handbook/project/context.yaml]",
-            "3. EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]",
-            "4. FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]",
+            "3. FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]",
         ],
     );
     assert!(rendered.contains("### CHARTER (.handbook/charter/CHARTER.md)"));
@@ -511,10 +464,6 @@ fn render_json_preserves_execution_demo_fixture_lineage_order() {
         valid_project_context_markdown().as_bytes(),
     );
     write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
-    write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"demo feature",
     );
@@ -532,7 +481,6 @@ fn render_json_preserves_execution_demo_fixture_lineage_order() {
         &[
             "\"canonical_repo_relative_path\": \".handbook/charter/CHARTER.md\"",
             "\"canonical_repo_relative_path\": \".handbook/project/context.yaml\"",
-            "\"canonical_repo_relative_path\": \".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md\"",
             "\"canonical_repo_relative_path\": \".handbook/feature_spec/FEATURE_SPEC.md\"",
         ],
     );

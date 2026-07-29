@@ -64,7 +64,7 @@ Chosen profile: {{PROFILE_ID_OR_TBD}}
 - If Greenfield and nothing is live: migration/back-compat sections should be “Not applicable” unless explicitly introduced.
 - If Brownfield: any behavior changes must include compatibility + rollout notes.
 - If Integrations exist: every feature spec must name integration touchpoints and failure modes.
-- No invented environment: any env var/service/port/runtime assumption must already exist in ENVIRONMENT_INVENTORY.md or be explicitly proposed and recorded as a planned addition.
+- No invented environment: named environments and capabilities must already exist in `.handbook/project/environment.yaml` or be added there first.
 - If risk flags include auth/payments/PII/regulated data: security gates are mandatory and stricter.
 
 ## 7) Context pack policy (what every task gets)
@@ -75,7 +75,6 @@ Required baseline context pack includes:
 - TECH_ARCH_BRIEF.md
 - TEST_STRATEGY_BRIEF.md
 - QUALITY_GATES_SPEC.md
-- ENVIRONMENT_INVENTORY.md
 - quality_gates.yaml (for automation)
 
 Optional context pack additions (only when relevant):

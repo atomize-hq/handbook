@@ -32,8 +32,7 @@ This runner assumes the agent can:
 - Prefer minimal diffs.
 - Keep changes within slice scope.
 - If a change introduces/changes env vars, services, ports, or runtime assumptions:
-  - update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
-  - if the current work also changes the stage-07 foundation artifact, keep `artifacts/foundation/ENVIRONMENT_INVENTORY.md` aligned with the canonical inventory
+  - add new named environments or capabilities to `.handbook/project/environment.yaml` before a work contract references them
 
 ## Output discipline
 - For “document stages”, output only the document content (no extra commentary).
@@ -171,8 +170,7 @@ Only include scoped blocks when the current stage `work_level` matches.
 ## P0-ABSOLUTE: Change Discipline
 - Keep changes minimal and reversible when touching contracts or production systems.
 - If a change introduces/changes env vars, services, ports, or runtime assumptions:
-  - update the canonical inventory at `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.
-  - keep `artifacts/foundation/ENVIRONMENT_INVENTORY.md` aligned only when the current stage/output contract requires that artifact.
+  - add new named environments or capabilities to `.handbook/project/environment.yaml` before a work contract references them.
 
 
 
@@ -499,23 +497,6 @@ gates:
     required: true
     scope: docs
     notes: Help text and docs must describe the same supported compile surface.
-
-### artifacts/foundation/ENVIRONMENT_INVENTORY.md
-# Environment Inventory
-
-## Toolchains
-- Rust stable toolchain for workspace builds and tests
-- Cargo for compile/CLI test execution
-
-## Runtime Assumptions
-- local filesystem access for reading canonical repo metadata and proof-corpus fixtures
-- no network dependency for compile-path tests
-- route basis state stored in a repo-local state file written by `pipeline resolve`
-
-## Important Paths
-- `core/pipelines/foundation_inputs.yaml`
-- `core/stages/10_feature_spec.md`
-- `tests/fixtures/pipeline_proof_corpus/foundation_inputs`
 
 ## Outputs
 

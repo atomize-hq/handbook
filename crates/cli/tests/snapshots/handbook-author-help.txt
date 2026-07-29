@@ -5,7 +5,6 @@ Usage: handbook author [COMMAND]
 Commands:
   charter                Deterministically author canonical `.handbook/charter/CHARTER.md`
   project-context        Deterministically author canonical `.handbook/project/context.yaml`
-  environment-inventory  Deterministically author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
 
 Options:
   -h, --help  Print help

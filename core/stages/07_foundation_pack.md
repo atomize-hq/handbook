@@ -31,10 +31,6 @@ inputs:
     required: true
   - path: core/library/foundation_pack/quality_gates.yaml.tmpl
     required: true
-  - path: core/library/environment_inventory/environment_inventory_directive.md
-    required: true
-  - path: core/library/environment_inventory/ENVIRONMENT_INVENTORY.md.tmpl
-    required: true
   artifacts:
   - path: artifacts/charter/CHARTER.md
     required: true
@@ -57,7 +53,6 @@ outputs:
   - path: artifacts/foundation/TEST_STRATEGY_BRIEF.md
   - path: artifacts/foundation/QUALITY_GATES_SPEC.md
   - path: artifacts/foundation/quality_gates.yaml
-  - path: artifacts/foundation/ENVIRONMENT_INVENTORY.md
 gating:
   mode: strict
   fail_on:

@@ -22,7 +22,7 @@ ROUTE BASIS:
   runner:
     id = codex-cli
     file = core/runners/codex-cli.md
-    file_sha256 = 559d1f329fbaf149a1da49256a765b22813630a97ab3aed2072700136e03323e
+    file_sha256 = 1fddabe5ffc28eb23e1ff63ef0f7082454fad2bce8285832c6c2fb65d4ed3997
   profile:
     id = python-uv
     profile.yaml.sha256 = 88a0080f75a7660944df592783c266af9f124565ac06bde3985ea63da0ccfb53
@@ -66,7 +66,6 @@ DOCUMENTS:
   16. artifact | artifacts/foundation/TEST_STRATEGY_BRIEF.md | required=false | status=present
   17. artifact | artifacts/foundation/QUALITY_GATES_SPEC.md | required=false | status=present
   18. artifact | artifacts/foundation/quality_gates.yaml | required=false | status=present
-  19. artifact | artifacts/foundation/ENVIRONMENT_INVENTORY.md | required=false | status=present
 OUTPUTS:
   artifact | artifacts/work-specification/work-specification.yaml
   repo_file | ${repo_root}/artifacts/feature_spec/FEATURE_SPEC.md

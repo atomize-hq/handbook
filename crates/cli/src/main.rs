@@ -42,8 +42,8 @@ fn main() -> ExitCode {
     name = "handbook",
     version = RELEASE_VERSION,
     disable_help_subcommand = true,
-    about = "Rust CLI for the reduced v1 handbook: `setup` initializes or refreshes canonical repo-local `.handbook/` inputs, `author` is the baseline authoring surface for charter, project context, and environment inventory, `pipeline` is the orchestration surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations, planning packet generation uses canonical repo-local `.handbook/` inputs, fixture-backed execution demo flows through `execution.demo.packet`, live execution is explicitly refused, `inspect` is the packet proof surface, and `doctor` is the recovery surface.",
-    long_about = "Rust CLI for the reduced v1 handbook. `setup` initializes or refreshes canonical repo-local `.handbook/` inputs. `author` is the baseline authoring surface for charter, project context, and environment inventory. `pipeline` is the orchestration surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations. planning packet generation uses canonical repo-local `.handbook/` inputs. fixture-backed execution demo flows through `execution.demo.packet`. live execution is explicitly refused. `inspect` is the packet proof surface. `doctor` is the recovery surface."
+    about = "Rust CLI for the reduced v1 handbook: `setup` initializes or refreshes canonical repo-local `.handbook/` inputs, `author` is the baseline authoring surface for charter and project context, `pipeline` is the orchestration surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations, planning packet generation uses canonical repo-local `.handbook/` inputs, fixture-backed execution demo flows through `execution.demo.packet`, live execution is explicitly refused, `inspect` is the packet proof surface, and `doctor` is the recovery surface.",
+    long_about = "Rust CLI for the reduced v1 handbook. `setup` initializes or refreshes canonical repo-local `.handbook/` inputs. `author` is the baseline authoring surface for charter and project context. `pipeline` is the orchestration surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations. planning packet generation uses canonical repo-local `.handbook/` inputs. fixture-backed execution demo flows through `execution.demo.packet`. live execution is explicitly refused. `inspect` is the packet proof surface. `doctor` is the recovery surface."
 )]
 struct Cli {
     #[command(subcommand)]
@@ -121,8 +121,6 @@ enum AuthorCommand {
     Charter(AuthorCharterArgs),
     /// Deterministically author canonical `.handbook/project/context.yaml`.
     ProjectContext(AuthorProjectContextArgs),
-    /// Deterministically author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`.
-    EnvironmentInventory(AuthorEnvironmentInventoryArgs),
 }
 
 #[derive(clap::Args, Debug)]
@@ -227,16 +225,6 @@ struct AuthorProjectContextArgs {
     #[arg(long = "from-inputs", value_name = "path|-")]
     from_inputs: Option<String>,
     /// Validate canonical YAML input and fixed-view rendering without mutation.
-    #[arg(long)]
-    validate: bool,
-}
-
-#[derive(clap::Args, Debug)]
-struct AuthorEnvironmentInventoryArgs {
-    /// Read normalized structured inputs from a YAML file or `-` for stdin.
-    #[arg(long = "from-inputs", value_name = "path|-")]
-    from_inputs: Option<String>,
-    /// Validate normalized structured inputs and repo write preconditions without mutation.
     #[arg(long)]
     validate: bool,
 }
@@ -398,182 +386,3 @@ const _: () = {
         std::mem::size_of::<handbook_compiler::Refusal>(),
     );
 };
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use crate::author::execute_author_charter_command;
-    use std::{cell::Cell, fs};
-
-    fn valid_structured_inputs_yaml() -> &'static str {
-        r#"schema_version: "0.1.0"
-project:
-  name: "Handbook"
-  classification: greenfield
-  team_size: 2
-  users: internal
-  expected_lifetime: months
-  surfaces:
-    - cli
-    - api
-  runtime_environments:
-    - server
-  constraints:
-    deadline: ""
-    budget: ""
-    experience_notes: "small team"
-    must_use_tech:
-      - rust
-  operational_reality:
-    in_production_today: false
-    prod_users_or_data: ""
-    external_contracts_to_preserve: []
-    uptime_expectations: "best effort"
-  default_implications:
-    backward_compatibility: not_required
-    migration_planning: not_required
-    rollout_controls: lightweight
-    deprecation_policy: not_required_yet
-    observability_threshold: standard
-posture:
-  rubric_scale: "1-5"
-  baseline_level: 3
-  baseline_rationale:
-    - "internal operators"
-    - "moderate blast radius"
-domains:
-  - name: "planning"
-    blast_radius: "medium"
-    touches:
-      - "internal operators"
-    constraints:
-      - "preserve trust boundaries"
-dimensions:
-  - name: speed_vs_quality
-    level: 3
-    default_stance: "optimize for durability over shortcuts"
-    raise_the_bar_triggers: ["production data"]
-    allowed_shortcuts: ["time-boxed exploration"]
-    red_lines: ["ship without review"]
-    domain_overrides: []
-  - name: type_safety_static_analysis
-    level: 3
-    default_stance: "type-safe by default"
-    raise_the_bar_triggers: ["cross-boundary interfaces"]
-    allowed_shortcuts: ["fixture-backed exploration"]
-    red_lines: ["unchecked public contracts"]
-    domain_overrides: []
-  - name: testing_rigor
-    level: 3
-    default_stance: "test the shipped path"
-    raise_the_bar_triggers: ["regression risk"]
-    allowed_shortcuts: ["manual validation for throwaway work"]
-    red_lines: ["merge without exercising the path"]
-    domain_overrides: []
-  - name: scalability_performance
-    level: 3
-    default_stance: "track obvious bottlenecks"
-    raise_the_bar_triggers: ["user-visible latency"]
-    allowed_shortcuts: ["defer micro-optimizations"]
-    red_lines: ["ignore known load cliffs"]
-    domain_overrides: []
-  - name: reliability_operability
-    level: 3
-    default_stance: "prefer recoverable changes"
-    raise_the_bar_triggers: ["long-lived state changes"]
-    allowed_shortcuts: ["local-only iteration"]
-    red_lines: ["unrecoverable migrations without a plan"]
-    domain_overrides: []
-  - name: security_privacy
-    level: 3
-    default_stance: "protect boundaries by default"
-    raise_the_bar_triggers: ["credentials or user data"]
-    allowed_shortcuts: ["synthetic data in local dev"]
-    red_lines: ["plaintext secrets"]
-    domain_overrides: []
-  - name: observability
-    level: 3
-    default_stance: "emit enough proof to debug production issues"
-    raise_the_bar_triggers: ["background jobs"]
-    allowed_shortcuts: ["manual logs for local-only work"]
-    red_lines: ["silent failures"]
-    domain_overrides: []
-  - name: dx_tooling_automation
-    level: 3
-    default_stance: "prefer automation that pays for itself"
-    raise_the_bar_triggers: ["frequent repeated workflows"]
-    allowed_shortcuts: ["temporary local scripts"]
-    red_lines: ["manual-only release steps"]
-    domain_overrides: []
-  - name: ux_polish_api_usability
-    level: 3
-    default_stance: "clear operator and API ergonomics"
-    raise_the_bar_triggers: ["external users"]
-    allowed_shortcuts: ["rough internal copy while iterating"]
-    red_lines: ["unclear operator failure modes"]
-    domain_overrides: []
-exceptions:
-  approvers:
-    - project_owner
-  record_location: ".handbook/charter/CHARTER.md#exceptions"
-  minimum_fields:
-    - what
-    - why
-    - scope
-    - risk
-    - owner
-    - expiry_or_revisit_date
-debt_tracking:
-  system: "issues"
-  labels:
-    - debt
-  review_cadence: "monthly"
-decision_records:
-  enabled: false
-  path: ""
-  format: ""
-"#
-    }
-
-    #[test]
-    fn execute_author_charter_command_renders_file_success_with_injected_author() {
-        let dir = tempfile::tempdir().expect("tempdir");
-        let inputs_path = dir.path().join("charter-inputs.yaml");
-        fs::write(&inputs_path, valid_structured_inputs_yaml()).expect("write inputs");
-        let author_called = Cell::new(false);
-
-        let rendered = execute_author_charter_command(
-            AuthorCharterArgs {
-                mode: None,
-                from_inputs: Some(inputs_path.to_string_lossy().into_owned()),
-                expected_current_fingerprint: None,
-                approve_candidate: None,
-                approval_class: None,
-                authority_ref: None,
-                accept_waiver_refs: Vec::new(),
-                promote_candidate: None,
-                approval_ref: None,
-                validate: false,
-                json: false,
-            },
-            || Ok(dir.path().to_path_buf()),
-            |_, _| Ok(()),
-            |repo_root, input| {
-                author_called.set(true);
-                assert_eq!(repo_root, dir.path());
-                assert_eq!(input.project.name, "Handbook");
-                Ok(handbook_compiler::AuthorCharterResult {
-                    canonical_repo_relative_path: ".handbook/charter/CHARTER.md",
-                    bytes_written: 24,
-                })
-            },
-        );
-
-        assert!(author_called.get(), "authoring closure should be called");
-        assert_eq!(rendered.exit_code, ExitCode::SUCCESS);
-        assert!(rendered.output.contains("MODE: structured_inputs_file"));
-        assert!(rendered
-            .output
-            .contains(&format!("SOURCE: {}", inputs_path.display())));
-    }
-}

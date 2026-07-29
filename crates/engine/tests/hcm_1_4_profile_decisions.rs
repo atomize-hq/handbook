@@ -64,8 +64,8 @@ fn shipped_profile_artifact_rows_match_exact_selected_fields() {
                 "handbook.artifact-kind.environment-context@1.1.0",
                 Some("environment_context"),
                 ".handbook/project/environment.yaml",
-                RequirednessMode::Conditional,
-                ArtifactApplicability::Indeterminate,
+                RequirednessMode::Optional,
+                ArtifactApplicability::Optional,
             ),
             (
                 "project_authority",
@@ -107,48 +107,21 @@ fn always_requiredness_maps_to_required_without_condition_truth() {
 }
 
 #[test]
-fn conditional_requiredness_binds_exact_unresolved_definition_truth() {
+fn optional_requiredness_has_no_condition_or_evidence_truth() {
     let decisions = resolve_shipped_profile_decisions(Path::new(env!("CARGO_MANIFEST_DIR")))
         .expect("shipped decisions");
     let decision = decisions
         .artifact_decisions()
         .iter()
         .find(|decision| decision.instance_id().as_str() == "environment_context")
-        .expect("conditional decision");
-    assert_eq!(decision.requiredness_mode(), RequirednessMode::Conditional);
-    assert_eq!(
-        decision.condition_ref().map(|reference| reference.as_str()),
-        Some("handbook.condition.project.managed-operational-surface@1.0.0")
-    );
-    assert_eq!(
-        decision.condition_outcome(),
-        Some(ProjectConditionOutcome::Unresolved)
-    );
-    assert_eq!(
-        decision.condition_reason(),
-        Some(ProjectConditionDecisionReason::EvidenceContractUnavailable)
-    );
-    assert_eq!(
-        decision.applicability(),
-        ArtifactApplicability::Indeterminate
-    );
+        .expect("optional decision");
+    assert_eq!(decision.requiredness_mode(), RequirednessMode::Optional);
+    assert_eq!(decision.condition_ref(), None);
+    assert_eq!(decision.condition_outcome(), None);
+    assert_eq!(decision.condition_reason(), None);
+    assert_eq!(decision.applicability(), ArtifactApplicability::Optional);
     assert!(decision.evidence_closure_fingerprint().is_none());
-
-    let evaluation = decisions.condition_evaluations().first().unwrap();
-    assert_eq!(
-        evaluation.condition_ref().as_str(),
-        "handbook.condition.project.managed-operational-surface@1.0.0"
-    );
-    assert_eq!(
-        evaluation.condition_definition_fingerprint().as_str(),
-        "sha256:2ae25788c7860f3062f30659a7674c2ccd8f56b0f8809f1134003e04dea20b61"
-    );
-    assert_eq!(evaluation.outcome(), ProjectConditionOutcome::Unresolved);
-    assert_eq!(
-        evaluation.reason(),
-        ProjectConditionDecisionReason::EvidenceContractUnavailable
-    );
-    assert!(evaluation.evidence_closure_fingerprint().is_none());
+    assert!(decisions.condition_evaluations().is_empty());
 }
 
 #[test]

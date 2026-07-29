@@ -129,7 +129,7 @@ impl CharterDefinitionRegistry {
                 "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74",
             ) | (
                 "handbook.profile.shipped-root@1.2.0",
-                "sha256:63cd999c95efc3fe65ae3514c2915b5d1457290211cf6da7b57b2cd75bafaf83",
+                "sha256:40c5fdb8a6ea42cf0f5f2c5cac8306ec7ad3a238c341653947f85abc93d72c40",
             )
         );
         if !profile_tuple_is_exact {

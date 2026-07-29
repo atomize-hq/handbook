@@ -9,7 +9,7 @@
   },
   "profile": {
     "exact_ref": "handbook.profile.shipped-root@1.2.0",
-    "expected_fingerprint": "sha256:63cd999c95efc3fe65ae3514c2915b5d1457290211cf6da7b57b2cd75bafaf83",
+    "expected_fingerprint": "sha256:40c5fdb8a6ea42cf0f5f2c5cac8306ec7ad3a238c341653947f85abc93d72c40",
     "expected_instance_ids": [
       "project_authority",
       "project_context",
@@ -63,23 +63,20 @@
     },
     "environment-context": {
       "kind_ref": "handbook.artifact-kind.environment-context@1.1.0",
-      "kind_fingerprint": "sha256:81382d62b492b8837d876775e8e20b12a55d35894d5d3832450fe3a067f23f6f",
-      "schema_ref": "handbook.schemas.artifacts.environment-context@1.0.0",
+      "kind_fingerprint": "sha256:7702ac15b3e65192b044e565f2cf18b062ce5b89b92d74bcd0b71df8abd81a9f",
+      "schema_ref": "handbook.schemas.artifacts.environment-context@1.1.0",
       "intake_ref": "handbook.intake.environment-context@1.0.0",
-      "intake_fingerprint": "sha256:468c95518601d5e687c0d96314f5aa5120a7dd3546a5e728f7470fb50d805b1d",
+      "intake_fingerprint": "sha256:3c0cd26ea1e13c96721ba72f0837c7db5bbdf75e229e6cae87916174ea83ccd0",
       "coverage_paths": [
         "/schema_id",
         "/schema_version",
         "/record_id",
-        "/applicability_basis",
-        "/operational_surfaces",
-        "/runtime_dependencies",
-        "/safe_configuration_references",
+        "/environments",
         "/authoritative_references",
         "/known_unknowns"
       ],
       "renderer_ref": "handbook.renderer.environment-context-review-markdown@1.0.0",
-      "renderer_fingerprint": "sha256:f1702eed916e5a0c7a58828a0060370436b2bbd8fb216b43ecfb7fc97408a635"
+      "renderer_fingerprint": "sha256:d557ed9b5f47a2fdf435bc6a45843252eeec8492205e25deba0077881bd2f3f7"
     },
     "work-specification": {
       "kind_ref": "handbook.artifact-kind.work-specification@1.1.0",

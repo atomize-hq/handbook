@@ -108,7 +108,7 @@ fn render_canonical_artifact_kind(kind: handbook_engine::CanonicalArtifactKind) 
     match kind {
         handbook_engine::CanonicalArtifactKind::Charter => "Charter",
         handbook_engine::CanonicalArtifactKind::ProjectContext => "ProjectContext",
-        handbook_engine::CanonicalArtifactKind::EnvironmentInventory => "EnvironmentInventory",
+        handbook_engine::CanonicalArtifactKind::EnvironmentContext => "EnvironmentContext",
         handbook_engine::CanonicalArtifactKind::FeatureSpec => "FeatureSpec",
     }
 }
@@ -619,9 +619,6 @@ fn render_next_safe_action_value(action: &handbook_compiler::NextSafeAction) -> 
         handbook_compiler::NextSafeAction::RunAuthorProjectContext => {
             "run `handbook author project-context --from-inputs <path|->`".to_string()
         }
-        handbook_compiler::NextSafeAction::RunAuthorEnvironmentInventory => {
-            "run `handbook author environment-inventory --from-inputs <path|->`".to_string()
-        }
         handbook_compiler::NextSafeAction::CreateSystemRoot {
             canonical_repo_relative_path,
         } => format!("create canonical .handbook root at {canonical_repo_relative_path}"),
@@ -958,9 +955,6 @@ fn flow_next_safe_action_for_rendering(
         }
         handbook_flow::ResolverNextSafeAction::RunAuthorProjectContext => {
             handbook_compiler::NextSafeAction::RunAuthorProjectContext
-        }
-        handbook_flow::ResolverNextSafeAction::RunAuthorEnvironmentInventory => {
-            handbook_compiler::NextSafeAction::RunAuthorEnvironmentInventory
         }
         handbook_flow::ResolverNextSafeAction::CreateSystemRoot {
             canonical_repo_relative_path,

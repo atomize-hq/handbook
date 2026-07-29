@@ -78,21 +78,3 @@ gates:
     category: regression
     requirement: required
     description: Keep the skip-path proof stable across reruns.
-
---- FILE: artifacts/foundation/ENVIRONMENT_INVENTORY.md ---
-# Environment Inventory
-
-## Toolchains
-- Rust stable toolchain
-- Cargo for focused local tests
-
-## Runtime Assumptions
-- local filesystem only
-- no network calls
-- committed text fixtures represent external model output
-
-## Important Paths
-- `core/pipelines/foundation_inputs.yaml`
-- `core/stages/06_project_context_interview.md`
-- `core/stages/10_feature_spec.md`
-- `tests/fixtures/foundation_flow_demo`

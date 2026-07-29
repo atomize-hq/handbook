@@ -36,33 +36,43 @@
     },
     {
       "renderer_ref": "handbook.renderer.environment-context-review-markdown@1.0.0",
-      "renderer_fingerprint": "sha256:f1702eed916e5a0c7a58828a0060370436b2bbd8fb216b43ecfb7fc97408a635",
-      "input_schema_ref": "handbook.schemas.artifacts.environment-context@1.0.0",
+      "renderer_fingerprint": "sha256:d557ed9b5f47a2fdf435bc6a45843252eeec8492205e25deba0077881bd2f3f7",
+      "input_schema_ref": "handbook.schemas.artifacts.environment-context@1.1.0",
       "implementation_id": "environment-context-review-markdown-v1",
       "determinism_profile": "closed-environment-context-review-markdown-v1",
       "resolution_input": null,
       "canonical_input": {
         "schema_id": "handbook.artifact.environment-context",
-        "schema_version": "1.0",
-        "record_id": "example.record.environment-context",
-        "applicability_basis": [
-          "example.reference.basis"
+        "schema_version": "1.1",
+        "record_id": "handbook.environment-context",
+        "environments": [
+          {
+            "environment_id": "local-dev",
+            "description": "Local development and focused tests.",
+            "capabilities": [
+              "rust.stable",
+              "filesystem.workspace-write"
+            ]
+          },
+          {
+            "environment_id": "ci-linux",
+            "description": "Linux completion target.",
+            "capabilities": [
+              "rust.stable",
+              "os.linux"
+            ]
+          }
         ],
-        "operational_surfaces": [
-          "Production"
+        "authoritative_references": [
+          "handbook.project.environments@1.0.0"
         ],
-        "runtime_dependencies": [
-          "Database"
-        ],
-        "safe_configuration_references": [
-          "example.configuration.name"
-        ],
-        "authoritative_references": [],
-        "known_unknowns": []
+        "known_unknowns": [
+          "Windows cross-target proof remains pending."
+        ]
       },
-      "expected_markdown_utf8": "# Environment Context\n\n## Applicability Basis\n\n- example.reference.basis\n\n## Operational Surfaces\n\n- Production\n\n## Runtime Dependencies\n\n- Database\n\n## Safe Configuration References\n\n- example.configuration.name\n\n## Authoritative References\n\n_None._\n\n## Known Unknowns\n\n_None._\n",
-      "expected_byte_length": 279,
-      "expected_sha256": "sha256:4597311e53004b1231fae96b86877c83a16e5faf68247a51c906a69049abcab0"
+      "expected_markdown_utf8": "# Environment Context\n\n## local\\-dev\n\nLocal development and focused tests\\.\n\n### Capabilities\n\n- `rust.stable`\n- `filesystem.workspace-write`\n\n## ci\\-linux\n\nLinux completion target\\.\n\n### Capabilities\n\n- `rust.stable`\n- `os.linux`\n\n## Authoritative References\n\n- `handbook.project.environments@1.0.0`\n\n## Known Unknowns\n\n- Windows cross\\-target proof remains pending\\.\n",
+      "expected_byte_length": 369,
+      "expected_sha256": "sha256:40599b6315c2b4395b978e0693afe4275ecca228f8bb2e4623c19ef896658475"
     },
     {
       "renderer_ref": "handbook.renderer.work-specification-review-markdown@1.0.0",

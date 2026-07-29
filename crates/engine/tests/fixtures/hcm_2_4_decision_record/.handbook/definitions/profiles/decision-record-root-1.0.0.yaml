@@ -54,10 +54,7 @@
       "lifecycle_policy_ref": null,
       "projection_definition_refs": [],
       "renderer_definition_refs": ["handbook.renderer.environment-context-review-markdown@1.0.0"],
-      "requiredness": {
-        "condition_ref": "handbook.condition.project.managed-operational-surface@1.0.0",
-        "mode": "conditional"
-      },
+      "requiredness": {"condition_ref": null, "mode": "optional"},
       "role_ref": "environment_context",
       "schema_id": "handbook.artifact-instance-descriptor",
       "schema_version": "1.0",
@@ -87,5 +84,5 @@
   "dock_requirement_refs": [],
   "adapter_overlay_refs": [],
   "extensions": {},
-  "profile_fingerprint": "sha256:09517ce70b7563be1eba9065794c1839d9b3a5902b648a6e247e8e451fd913dd"
+  "profile_fingerprint": "sha256:2c2d744185a63c328d1363d0df3f50d8a1e3cff0e86f9575e39f69c9a7dba37b"
 }

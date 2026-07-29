@@ -787,7 +787,7 @@ impl ArtifactIntakeDefinitionV1 {
             )),
             "handbook.intake.environment-context@1.0.0" => Some((
                 "handbook.artifact-kind.environment-context@1.1.0",
-                "handbook.schemas.artifacts.environment-context@1.0.0",
+                "handbook.schemas.artifacts.environment-context@1.1.0",
                 include_bytes!(concat!(
                     env!("CARGO_MANIFEST_DIR"),
                     "/definitions/artifact-kinds/handbook.artifact-kind.environment-context/1.1.0.yaml"
@@ -795,7 +795,7 @@ impl ArtifactIntakeDefinitionV1 {
                 .as_slice(),
                 include_bytes!(concat!(
                     env!("CARGO_MANIFEST_DIR"),
-                    "/definitions/schemas/handbook.schemas.artifacts.environment-context/1.0.0.entry.yaml"
+                    "/definitions/schemas/handbook.schemas.artifacts.environment-context/1.1.0.entry.yaml"
                 ))
                 .as_slice(),
             )),

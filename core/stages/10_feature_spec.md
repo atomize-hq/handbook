@@ -40,8 +40,6 @@ inputs:
       required: false
     - path: artifacts/foundation/quality_gates.yaml
       required: false
-    - path: artifacts/foundation/ENVIRONMENT_INVENTORY.md
-      required: false
   variables:
     - runner
     - profile

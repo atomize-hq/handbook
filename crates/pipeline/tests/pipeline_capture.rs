@@ -103,7 +103,6 @@ fn stage_07_capture_input() -> String {
         "artifacts/foundation/TEST_STRATEGY_BRIEF.md",
         "artifacts/foundation/QUALITY_GATES_SPEC.md",
         "artifacts/foundation/quality_gates.yaml",
-        "artifacts/foundation/ENVIRONMENT_INVENTORY.md",
     ];
     let mut out = String::new();
     for path in outputs {
@@ -738,7 +737,7 @@ fn capture_apply_stage_06_matches_shared_golden_and_updates_project_context_ref(
 fn capture_apply_foundation_pack_matches_shared_golden_and_uses_cached_preview() {
     let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_07_capture_ready_repo();
     assert!(
-        !repo_root.join("ENVIRONMENT_INVENTORY.md").exists(),
+        !repo_root.join("TEST_STRATEGY_BRIEF.md").exists(),
         "stage-07 capture-ready fixture should not pre-create the repo-root inventory"
     );
     let preview = preview_pipeline_capture(&repo_root, &stage_07_request(stage_07_capture_input()))
@@ -762,14 +761,14 @@ fn capture_apply_foundation_pack_matches_shared_golden_and_uses_cached_preview()
         "successful apply should clear cached preview"
     );
     assert_eq!(
-        fs::read_to_string(repo_root.join("artifacts/foundation/ENVIRONMENT_INVENTORY.md"))
+        fs::read_to_string(repo_root.join("artifacts/foundation/TEST_STRATEGY_BRIEF.md"))
             .expect("artifact"),
         pipeline_proof_corpus_support::read_committed_fixture(
-            "artifacts/foundation/ENVIRONMENT_INVENTORY.md"
+            "artifacts/foundation/TEST_STRATEGY_BRIEF.md"
         )
     );
     assert!(
-        !repo_root.join("ENVIRONMENT_INVENTORY.md").exists(),
+        !repo_root.join("TEST_STRATEGY_BRIEF.md").exists(),
         "stage-07 apply must not materialize a repo-root inventory mirror"
     );
 }
@@ -1211,7 +1210,6 @@ fn capture_refuses_missing_declared_block() {
         "artifacts/foundation/TECH_ARCH_BRIEF.md",
         "artifacts/foundation/TEST_STRATEGY_BRIEF.md",
         "artifacts/foundation/QUALITY_GATES_SPEC.md",
-        "artifacts/foundation/quality_gates.yaml",
     ]
     .into_iter()
     .map(|path| {
@@ -1235,23 +1233,23 @@ fn capture_refuses_missing_declared_block() {
 fn capture_preview_refuses_empty_declared_block_without_side_effects() {
     let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_07_capture_ready_repo();
     let initial_artifact =
-        fs::read_to_string(repo_root.join("artifacts/foundation/ENVIRONMENT_INVENTORY.md"))
+        fs::read_to_string(repo_root.join("artifacts/foundation/TEST_STRATEGY_BRIEF.md"))
             .expect("artifact");
     let initial_state = load_route_state(&repo_root);
     assert!(
-        !repo_root.join("ENVIRONMENT_INVENTORY.md").exists(),
+        !repo_root.join("TEST_STRATEGY_BRIEF.md").exists(),
         "empty-body refusal fixture should not pre-create the repo-root inventory"
     );
     let mut input = stage_07_capture_input();
     let target_block = format!(
-        "--- FILE: artifacts/foundation/ENVIRONMENT_INVENTORY.md ---\n{}",
+        "--- FILE: artifacts/foundation/TEST_STRATEGY_BRIEF.md ---\n{}",
         pipeline_proof_corpus_support::read_committed_fixture(
-            "artifacts/foundation/ENVIRONMENT_INVENTORY.md"
+            "artifacts/foundation/TEST_STRATEGY_BRIEF.md"
         )
     );
     input = input.replace(
         &target_block,
-        "--- FILE: artifacts/foundation/ENVIRONMENT_INVENTORY.md ---\n",
+        "--- FILE: artifacts/foundation/TEST_STRATEGY_BRIEF.md ---\n",
     );
 
     let refusal =
@@ -1267,12 +1265,12 @@ fn capture_preview_refuses_empty_declared_block_without_side_effects() {
         "capture.refused.empty_declared_block.txt",
     );
     assert_eq!(
-        fs::read_to_string(repo_root.join("artifacts/foundation/ENVIRONMENT_INVENTORY.md"))
+        fs::read_to_string(repo_root.join("artifacts/foundation/TEST_STRATEGY_BRIEF.md"))
             .expect("artifact"),
         initial_artifact
     );
     assert!(
-        !repo_root.join("ENVIRONMENT_INVENTORY.md").exists(),
+        !repo_root.join("TEST_STRATEGY_BRIEF.md").exists(),
         "empty-body refusal must not create the repo-root inventory"
     );
     assert_eq!(load_route_state(&repo_root), initial_state);
@@ -1283,23 +1281,23 @@ fn capture_preview_refuses_empty_declared_block_without_side_effects() {
 fn capture_apply_refuses_empty_declared_block_without_side_effects() {
     let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_07_capture_ready_repo();
     let initial_artifact =
-        fs::read_to_string(repo_root.join("artifacts/foundation/ENVIRONMENT_INVENTORY.md"))
+        fs::read_to_string(repo_root.join("artifacts/foundation/TEST_STRATEGY_BRIEF.md"))
             .expect("artifact");
     let initial_state = load_route_state(&repo_root);
     assert!(
-        !repo_root.join("ENVIRONMENT_INVENTORY.md").exists(),
+        !repo_root.join("TEST_STRATEGY_BRIEF.md").exists(),
         "empty-body refusal fixture should not pre-create the repo-root inventory"
     );
     let mut input = stage_07_capture_input();
     let target_block = format!(
-        "--- FILE: artifacts/foundation/ENVIRONMENT_INVENTORY.md ---\n{}",
+        "--- FILE: artifacts/foundation/TEST_STRATEGY_BRIEF.md ---\n{}",
         pipeline_proof_corpus_support::read_committed_fixture(
-            "artifacts/foundation/ENVIRONMENT_INVENTORY.md"
+            "artifacts/foundation/TEST_STRATEGY_BRIEF.md"
         )
     );
     input = input.replace(
         &target_block,
-        "--- FILE: artifacts/foundation/ENVIRONMENT_INVENTORY.md ---\r\n",
+        "--- FILE: artifacts/foundation/TEST_STRATEGY_BRIEF.md ---\r\n",
     );
 
     let refusal =
@@ -1311,15 +1309,15 @@ fn capture_apply_refuses_empty_declared_block_without_side_effects() {
     );
     assert_eq!(
         refusal.summary,
-        "declared artifact block `artifacts/foundation/ENVIRONMENT_INVENTORY.md` must contain a non-empty body"
+        "declared artifact block `artifacts/foundation/TEST_STRATEGY_BRIEF.md` must contain a non-empty body"
     );
     assert_eq!(
-        fs::read_to_string(repo_root.join("artifacts/foundation/ENVIRONMENT_INVENTORY.md"))
+        fs::read_to_string(repo_root.join("artifacts/foundation/TEST_STRATEGY_BRIEF.md"))
             .expect("artifact"),
         initial_artifact
     );
     assert!(
-        !repo_root.join("ENVIRONMENT_INVENTORY.md").exists(),
+        !repo_root.join("TEST_STRATEGY_BRIEF.md").exists(),
         "empty-body refusal must not create the repo-root inventory"
     );
     assert_eq!(load_route_state(&repo_root), initial_state);
@@ -1331,9 +1329,9 @@ fn capture_refuses_duplicate_declared_block() {
     let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_07_capture_ready_repo();
     let mut input = stage_07_capture_input();
     input.push_str(&format!(
-        "--- FILE: artifacts/foundation/ENVIRONMENT_INVENTORY.md ---\n{}",
+        "--- FILE: artifacts/foundation/TEST_STRATEGY_BRIEF.md ---\n{}",
         pipeline_proof_corpus_support::read_committed_fixture(
-            "artifacts/foundation/ENVIRONMENT_INVENTORY.md"
+            "artifacts/foundation/TEST_STRATEGY_BRIEF.md"
         )
     ));
     let refusal =

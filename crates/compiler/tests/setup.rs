@@ -5,22 +5,22 @@ use handbook_compiler::{
     SetupArtifactActionKind, SetupErrorCode, SetupErrorKind, SetupErrorReasonCode, SetupMode,
     SetupRequest, SetupRootAction,
 };
-use handbook_engine::{resolve_shipped_profile_decisions, REPOSITORY_IDENTITY_REPO_PATH};
+use handbook_engine::{
+    resolve_shipped_profile_decisions, ResolvedProfileDecisions, REPOSITORY_IDENTITY_REPO_PATH,
+};
 use std::fs;
+use std::path::Path;
 use tempfile::tempdir;
 
-#[cfg(unix)]
 use handbook_compiler::doctor_with_decisions;
 #[cfg(unix)]
 use handbook_engine::{
     resolve_profile_selection, shipped_root_artifact_instance_values, ArtifactInstanceRegistry,
     DefinitionFingerprint, DefinitionSource, DefinitionSourceBinding, ExactDefinitionRef,
-    ProfileSelectionRequest, ResolvedProfileDecisions,
+    ProfileSelectionRequest,
 };
 #[cfg(unix)]
 use serde_json::{json, Value};
-#[cfg(unix)]
-use std::path::Path;
 
 #[test]
 fn setup_modes_serialize_to_the_frozen_wire_values() {
@@ -509,17 +509,17 @@ fn setup_and_doctor_cover_all_statuses_with_exact_action_precedence() {
         ],
     );
 
-    let indeterminate_repo = tempdir().unwrap();
-    fs::create_dir_all(indeterminate_repo.path().join(".handbook/project")).unwrap();
-    let indeterminate = resolve_shipped_profile_decisions(indeterminate_repo.path()).unwrap();
+    let action_required_repo = tempdir().unwrap();
+    fs::create_dir_all(action_required_repo.path().join(".handbook/project")).unwrap();
+    let action_required = resolve_shipped_profile_decisions(action_required_repo.path()).unwrap();
     assert_setup_doctor_status_and_actions(
-        indeterminate_repo.path(),
-        &indeterminate,
-        RepositoryReadinessStatus::Indeterminate,
+        action_required_repo.path(),
+        &action_required,
+        RepositoryReadinessStatus::ActionRequired,
         &[
             (
                 "environment_context",
-                SetupArtifactActionKind::ConditionIndeterminate,
+                SetupArtifactActionKind::OptionalAbsent,
             ),
             ("project_authority", SetupArtifactActionKind::AuthorRequired),
             ("project_context", SetupArtifactActionKind::AuthorRequired),
@@ -541,7 +541,7 @@ fn setup_and_doctor_cover_all_statuses_with_exact_action_precedence() {
         &[
             (
                 "environment_context",
-                SetupArtifactActionKind::ConditionIndeterminate,
+                SetupArtifactActionKind::OptionalAbsent,
             ),
             ("project_authority", SetupArtifactActionKind::Invalid),
             ("project_context", SetupArtifactActionKind::AuthorRequired),
@@ -549,7 +549,48 @@ fn setup_and_doctor_cover_all_statuses_with_exact_action_precedence() {
     );
 }
 
-#[cfg(unix)]
+#[test]
+fn shipped_optional_environment_is_nonblocking_for_setup_and_doctor() {
+    let missing_repo = tempdir().unwrap();
+    fs::create_dir_all(missing_repo.path().join(".handbook/project")).unwrap();
+    let missing = resolve_shipped_profile_decisions(missing_repo.path()).unwrap();
+    assert_setup_doctor_status_and_actions(
+        missing_repo.path(),
+        &missing,
+        RepositoryReadinessStatus::ActionRequired,
+        &[
+            (
+                "environment_context",
+                SetupArtifactActionKind::OptionalAbsent,
+            ),
+            ("project_authority", SetupArtifactActionKind::AuthorRequired),
+            ("project_context", SetupArtifactActionKind::AuthorRequired),
+        ],
+    );
+
+    let invalid_repo = tempdir().unwrap();
+    fs::create_dir_all(invalid_repo.path().join(".handbook/project")).unwrap();
+    fs::write(
+        invalid_repo.path().join(".handbook/project/charter.yaml"),
+        b"schema_id: wrong\n",
+    )
+    .unwrap();
+    let invalid = resolve_shipped_profile_decisions(invalid_repo.path()).unwrap();
+    assert_setup_doctor_status_and_actions(
+        invalid_repo.path(),
+        &invalid,
+        RepositoryReadinessStatus::Invalid,
+        &[
+            (
+                "environment_context",
+                SetupArtifactActionKind::OptionalAbsent,
+            ),
+            ("project_authority", SetupArtifactActionKind::Invalid),
+            ("project_context", SetupArtifactActionKind::AuthorRequired),
+        ],
+    );
+}
+
 fn assert_setup_doctor_status_and_actions(
     repo: &Path,
     decisions: &ResolvedProfileDecisions,
@@ -564,8 +605,16 @@ fn assert_setup_doctor_status_and_actions(
     let setup = run_setup_with_decisions(repo, &request, decisions).unwrap();
     let doctor = doctor_with_decisions(repo, decisions).unwrap();
 
-    assert_eq!(setup.status, expected_status);
-    assert_eq!(doctor.status, expected_status);
+    assert_eq!(
+        setup.status, expected_status,
+        "setup rows: {:#?}",
+        setup.plan.artifacts
+    );
+    assert_eq!(
+        doctor.status, expected_status,
+        "doctor rows: {:#?}",
+        doctor.artifacts
+    );
     for (instance_id, expected_action) in expected_actions {
         let row = setup
             .plan
@@ -897,7 +946,7 @@ fn builtin(value: &str) -> DefinitionSourceBinding {
 fn windows_profile_inspection_refusal_prevents_setup_mutation() {
     let repo = tempdir().unwrap();
     let outcome = run_setup(repo.path(), &SetupRequest::default()).unwrap();
-    assert_eq!(outcome.status, RepositoryReadinessStatus::Indeterminate);
+    assert_eq!(outcome.status, RepositoryReadinessStatus::ActionRequired);
     assert!(repo.path().join(".handbook").is_dir());
     let identity = fs::read(repo.path().join(REPOSITORY_IDENTITY_REPO_PATH)).unwrap();
     assert_eq!(identity.len(), 71);

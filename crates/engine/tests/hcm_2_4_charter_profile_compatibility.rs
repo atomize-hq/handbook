@@ -21,7 +21,7 @@ const RELEASED_PROFILE_FINGERPRINT: &str =
     "sha256:6a7b41befa77b999b9ee20f513636051726a8401a81bf2f369501e8f3dd4fa74";
 const SUCCESSOR_PROFILE_REF: &str = "handbook.profile.shipped-root@1.2.0";
 const SUCCESSOR_PROFILE_FINGERPRINT: &str =
-    "sha256:63cd999c95efc3fe65ae3514c2915b5d1457290211cf6da7b57b2cd75bafaf83";
+    "sha256:40c5fdb8a6ea42cf0f5f2c5cac8306ec7ad3a238c341653947f85abc93d72c40";
 const BOUNDARY_YAML: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
     "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
@@ -218,6 +218,7 @@ fn successor_request() -> ProfileSelectionRequest {
         "handbook.schemas.artifacts.project-authority@1.1.0",
         "handbook.schemas.artifacts.project-context@1.0.0",
         "handbook.schemas.artifacts.environment-context@1.0.0",
+        "handbook.schemas.artifacts.environment-context@1.1.0",
         "handbook.schemas.artifacts.work-specification@1.0.0",
         "handbook.schemas.artifacts.decision-record@1.0.0",
         "handbook.schemas.artifacts.risk-record@1.0.0",
@@ -265,9 +266,7 @@ fn successor_request() -> ProfileSelectionRequest {
             builtin("handbook.semantic-validation.constitutional-root@1.0.0"),
             builtin("handbook.semantic-validation.constitutional-root@1.1.0"),
         ],
-        project_condition_sources: vec![builtin(
-            "handbook.condition.project.managed-operational-surface@1.0.0",
-        )],
+        project_condition_sources: vec![],
         vocabulary_sources: vec![builtin("handbook.vocabulary.shipped-root@1.0.0")],
         context_resolution_sources: vec![builtin("handbook.context-resolution.shipped-root@1.0.0")],
         context_resolution_policy_sources: vec![
@@ -285,9 +284,16 @@ fn released_request() -> ProfileSelectionRequest {
     request.selected_profile_ref = exact(RELEASED_PROFILE_REF);
     request.profile_sources = vec![builtin(RELEASED_PROFILE_REF)];
     request.artifact_kind_sources.retain(|binding| {
-        !binding.definition_ref.as_str().ends_with("@1.1.0")
-            || binding.definition_ref.as_str() == "handbook.artifact-kind.project-authority@1.1.0"
+        (!binding.definition_ref.as_str().ends_with("@1.1.0")
+            || binding.definition_ref.as_str() == "handbook.artifact-kind.project-authority@1.1.0")
+            && !binding.definition_ref.as_str().ends_with("@1.2.0")
     });
+    request.schema_entry_sources.retain(|binding| {
+        binding.definition_ref.as_str() != "handbook.schemas.artifacts.environment-context@1.1.0"
+    });
+    request.project_condition_sources = vec![builtin(
+        "handbook.condition.project.managed-operational-surface@1.0.0",
+    )];
     request
 }
 

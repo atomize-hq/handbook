@@ -48,7 +48,6 @@ stages:
       - artifacts/foundation/TEST_STRATEGY_BRIEF.md
       - artifacts/foundation/QUALITY_GATES_SPEC.md
       - artifacts/foundation/quality_gates.yaml
-      - artifacts/foundation/ENVIRONMENT_INVENTORY.md
   - id: stage.10_feature_spec
     file: core/stages/10_feature_spec.md
     inputs:

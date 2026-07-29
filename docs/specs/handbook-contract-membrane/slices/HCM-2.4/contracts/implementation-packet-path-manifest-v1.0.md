@@ -1,6 +1,14 @@
 # HCM-2.4 exact implementation packet path manifest v1.0
 
-Status: proposed P0 inventory lock
+Status: superseded historical planning manifest
+
+The accepted 2026-07-28 greenfield Environment Context correction supersedes
+this manifest as active path authority. The active bounded packet is
+`../tasks/plan.md`, governed by
+`../decision/20260728-p2-greenfield-environment-context-and-task-gate.md`.
+The paths below preserve the earlier packet's history and do not require
+retaining its Environment Inventory authoring or managed-operational-surface
+evidence machinery.
 
 This manifest converts the implementation selector wildcards in `SPEC.md` into
 exact repository-relative paths. It is a maximum surface, not a requirement to

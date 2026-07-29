@@ -8,15 +8,17 @@ use crate::packet_result::{
     ReadyPacketNextSafeAction,
 };
 use handbook_engine::{
-    baseline_artifact_validation_for_path, default_canonical_layout_contract,
-    load_selected_charter, load_selected_project_context, resolve_shipped_profile_decisions,
-    validate_environment_inventory_markdown, ArtifactIngestIssueKind, ArtifactInspectionReason,
+    baseline_artifact_validation_for_path, compute_freshness, default_canonical_layout_contract,
+    load_selected_charter, load_selected_environment_context, load_selected_project_context,
+    resolve_shipped_profile_decisions, ArtifactIngestIssueKind, ArtifactInspectionReason,
     ArtifactInspectionStatus, ArtifactManifest, ArtifactPresence, BaselineArtifactValidation,
     BaselineArtifactVerdict, CanonicalArtifact, CanonicalArtifactIdentity, CanonicalArtifactKind,
-    CanonicalArtifacts, CanonicalCharterProjection, CanonicalLayoutContract,
-    CanonicalProjectContextProjection, CharterAuthorityTransactionServiceV1,
-    CharterPromotionErrorKindV1, FreshnessIssueKind, FreshnessStatus, ManifestError,
-    ManifestInputs, SelectedCharterLoadError, SelectedProjectContextLoadError, SystemRootStatus,
+    CanonicalArtifacts, CanonicalCharterProjection, CanonicalEnvironmentContextProjection,
+    CanonicalLayoutContract, CanonicalProjectContextProjection,
+    CharterAuthorityTransactionServiceV1, CharterPromotionErrorKindV1,
+    EnvironmentContextArtifactError, EnvironmentContextArtifactErrorKind, FreshnessIssueKind,
+    FreshnessStatus, ManifestError, ManifestInputs, SelectedCharterLoadError,
+    SelectedProjectContextLoadError, SystemRootStatus, ENVIRONMENT_CONTEXT_CANONICAL_PATH,
 };
 use std::cmp::Ordering;
 use std::path::Path;
@@ -322,10 +324,118 @@ impl ProjectContextFlowBridge {
     }
 }
 
+#[derive(Debug)]
+struct EnvironmentContextFlowBridge {
+    projection: Option<CanonicalEnvironmentContextProjection>,
+    failure: Option<EnvironmentContextArtifactError>,
+}
+
+impl EnvironmentContextFlowBridge {
+    fn load(repo_root: &Path) -> Result<Self, ManifestError> {
+        let decisions = resolve_shipped_profile_decisions(repo_root).map_err(|error| {
+            ManifestError::ProfileDecision(format!(
+                "failed to resolve shipped profile decisions for Environment Context: {error:?}"
+            ))
+        })?;
+        match load_selected_environment_context(repo_root, &decisions) {
+            Ok(projection) => Ok(Self {
+                projection: Some(projection),
+                failure: None,
+            }),
+            Err(failure) => Ok(Self {
+                projection: None,
+                failure: Some(failure),
+            }),
+        }
+    }
+
+    fn canonical_artifact(&self) -> CanonicalArtifact {
+        let (presence, byte_len, content_sha256) = match self.projection.as_ref() {
+            Some(projection) => (
+                ArtifactPresence::PresentNonEmpty,
+                Some(projection.source_byte_length() as u64),
+                Some(fingerprint_hex(projection.source_fingerprint().as_str())),
+            ),
+            None => {
+                let presence = match self.failure.as_ref().map(|failure| failure.kind()) {
+                    Some(EnvironmentContextArtifactErrorKind::Missing) => ArtifactPresence::Missing,
+                    _ => ArtifactPresence::PresentNonEmpty,
+                };
+                (presence, None, None)
+            }
+        };
+
+        CanonicalArtifact {
+            identity: CanonicalArtifactIdentity {
+                kind: CanonicalArtifactKind::EnvironmentContext,
+                relative_path: ENVIRONMENT_CONTEXT_CANONICAL_PATH.to_owned(),
+                packet_required: false,
+                baseline_required: false,
+                setup_scaffolded: false,
+                presence,
+                byte_len,
+                content_sha256,
+                matches_setup_starter_template: false,
+            },
+            bytes: None,
+        }
+    }
+
+    fn projection_for_path(
+        &self,
+        canonical_repo_relative_path: &str,
+    ) -> Option<&CanonicalEnvironmentContextProjection> {
+        if canonical_repo_relative_path != ENVIRONMENT_CONTEXT_CANONICAL_PATH {
+            return None;
+        }
+        self.projection.as_ref()
+    }
+
+    fn baseline_validation(&self) -> BaselineArtifactValidation {
+        let verdict = match (&self.projection, &self.failure) {
+            (Some(projection), None) => BaselineArtifactVerdict::ValidCanonicalTruth {
+                markdown: String::from_utf8(projection.rendered_bytes().to_vec())
+                    .expect("fixed Environment Context renderer emits UTF-8"),
+            },
+            (None, Some(failure))
+                if failure.kind() == EnvironmentContextArtifactErrorKind::Missing =>
+            {
+                BaselineArtifactVerdict::Missing
+            }
+            (_, Some(failure)) => BaselineArtifactVerdict::SemanticallyInvalid {
+                summary: failure.detail().to_owned(),
+            },
+            (None, None) => BaselineArtifactVerdict::SemanticallyInvalid {
+                summary: "selected Environment Context observation unavailable".to_owned(),
+            },
+        };
+        BaselineArtifactValidation {
+            kind: CanonicalArtifactKind::EnvironmentContext,
+            canonical_repo_relative_path: ENVIRONMENT_CONTEXT_CANONICAL_PATH.to_owned(),
+            packet_required: false,
+            verdict,
+        }
+    }
+
+    fn budget_effective_bytes(&self) -> Vec<BudgetEffectiveBytes> {
+        self.projection
+            .as_ref()
+            .map(|projection| {
+                vec![BudgetEffectiveBytes {
+                    canonical_repo_relative_path: ENVIRONMENT_CONTEXT_CANONICAL_PATH.to_owned(),
+                    byte_len: projection.rendered_bytes().len() as u64,
+                    byte_domain: BudgetByteDomain::RenderedOutput,
+                }]
+            })
+            .unwrap_or_default()
+    }
+}
+
 #[derive(Debug, Clone, Copy)]
 enum RenderedArtifactProjection<'a> {
     Charter(&'a CanonicalCharterProjection),
     ProjectContext(&'a CanonicalProjectContextProjection),
+    EnvironmentContext(&'a CanonicalEnvironmentContextProjection),
 }
 
 impl<'a> RenderedArtifactProjection<'a> {
@@ -333,6 +443,7 @@ impl<'a> RenderedArtifactProjection<'a> {
         match self {
             Self::Charter(projection) => projection.source_fingerprint().as_str(),
             Self::ProjectContext(projection) => projection.source_fingerprint().as_str(),
+            Self::EnvironmentContext(projection) => projection.source_fingerprint().as_str(),
         }
     }
 
@@ -340,6 +451,7 @@ impl<'a> RenderedArtifactProjection<'a> {
         match self {
             Self::Charter(projection) => projection.rendered_bytes(),
             Self::ProjectContext(projection) => projection.rendered_bytes(),
+            Self::EnvironmentContext(projection) => projection.rendered_bytes(),
         }
     }
 
@@ -347,6 +459,7 @@ impl<'a> RenderedArtifactProjection<'a> {
         match self {
             Self::Charter(projection) => projection.rendered_byte_length(),
             Self::ProjectContext(projection) => projection.rendered_byte_length(),
+            Self::EnvironmentContext(projection) => projection.rendered_bytes().len(),
         }
     }
 
@@ -354,6 +467,9 @@ impl<'a> RenderedArtifactProjection<'a> {
         match self {
             Self::Charter(projection) => projection.rendered_output_fingerprint().as_str(),
             Self::ProjectContext(projection) => projection.rendered_output_fingerprint().as_str(),
+            Self::EnvironmentContext(projection) => {
+                projection.rendered_output_fingerprint().as_str()
+            }
         }
     }
 }
@@ -361,6 +477,7 @@ impl<'a> RenderedArtifactProjection<'a> {
 fn rendered_projection_for_path<'a>(
     charter_bridge: &'a CharterFlowBridge,
     project_context_bridge: &'a ProjectContextFlowBridge,
+    environment_context_bridge: &'a EnvironmentContextFlowBridge,
     canonical_repo_relative_path: &str,
 ) -> Option<RenderedArtifactProjection<'a>> {
     charter_bridge
@@ -370,6 +487,11 @@ fn rendered_projection_for_path<'a>(
             project_context_bridge
                 .projection_for_path(canonical_repo_relative_path)
                 .map(RenderedArtifactProjection::ProjectContext)
+        })
+        .or_else(|| {
+            environment_context_bridge
+                .projection_for_path(canonical_repo_relative_path)
+                .map(RenderedArtifactProjection::EnvironmentContext)
         })
 }
 
@@ -412,39 +534,17 @@ fn artifact_inspection_reason_name(reason: ArtifactInspectionReason) -> &'static
     }
 }
 
-fn validate_artifact_markdown(kind: CanonicalArtifactKind, markdown: &str) -> Result<(), String> {
-    match kind {
-        CanonicalArtifactKind::Charter => {
-            Err("selected Charter validation is owned by BR-HCM-2-CHARTER-FLOW-01".to_owned())
-        }
-        CanonicalArtifactKind::ProjectContext => {
-            Err("selected Project Context validation is owned by BR-HCM-2-PILOT-FLOW-01".to_owned())
-        }
-        CanonicalArtifactKind::EnvironmentInventory => {
-            validate_environment_inventory_markdown(markdown)
-        }
-        CanonicalArtifactKind::FeatureSpec => {
-            Err("feature spec is not part of baseline validation".to_string())
-        }
-    }
-}
-
 fn baseline_artifact_validations(
-    artifacts: &CanonicalArtifacts,
+    _artifacts: &CanonicalArtifacts,
     charter_bridge: &CharterFlowBridge,
     project_context_bridge: &ProjectContextFlowBridge,
+    environment_context_bridge: &EnvironmentContextFlowBridge,
 ) -> Vec<BaselineArtifactValidation> {
-    let mut validations = Vec::new();
-    validations.push(charter_bridge.baseline_validation());
-    validations.push(project_context_bridge.baseline_validation());
-    if let Some(validation) = handbook_engine::baseline_validation::baseline_artifact_validation(
-        artifacts,
-        CanonicalArtifactKind::EnvironmentInventory,
-        validate_artifact_markdown,
-    ) {
-        validations.push(validation);
-    }
-    validations
+    vec![
+        charter_bridge.baseline_validation(),
+        project_context_bridge.baseline_validation(),
+        environment_context_bridge.baseline_validation(),
+    ]
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -485,7 +585,6 @@ pub enum ResolverNextSafeAction {
     RunSetupRefresh,
     RunAuthorCharter,
     RunAuthorProjectContext,
-    RunAuthorEnvironmentInventory,
     CreateSystemRoot {
         canonical_repo_relative_path: String,
     },
@@ -564,8 +663,10 @@ fn author_or_fill_next_safe_action(
     match kind {
         CanonicalArtifactKind::Charter => ResolverNextSafeAction::RunAuthorCharter,
         CanonicalArtifactKind::ProjectContext => ResolverNextSafeAction::RunAuthorProjectContext,
-        CanonicalArtifactKind::EnvironmentInventory => {
-            ResolverNextSafeAction::RunAuthorEnvironmentInventory
+        CanonicalArtifactKind::EnvironmentContext => {
+            ResolverNextSafeAction::CreateCanonicalArtifact {
+                canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
+            }
         }
         CanonicalArtifactKind::FeatureSpec => ResolverNextSafeAction::FillCanonicalArtifact {
             canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
@@ -810,7 +911,7 @@ fn canonical_artifact_kind_priority(kind: CanonicalArtifactKind) -> u8 {
     match kind {
         CanonicalArtifactKind::Charter => 0,
         CanonicalArtifactKind::ProjectContext => 1,
-        CanonicalArtifactKind::EnvironmentInventory => 2,
+        CanonicalArtifactKind::EnvironmentContext => 2,
         CanonicalArtifactKind::FeatureSpec => 3,
     }
 }
@@ -878,15 +979,35 @@ pub fn resolve_with_contract(
             .map_err(ManifestError::Ingest)?;
     let charter_bridge = CharterFlowBridge::load(repo_root)?;
     let project_context_bridge = ProjectContextFlowBridge::load(repo_root)?;
+    let environment_context_bridge = EnvironmentContextFlowBridge::load(repo_root)?;
+    let environment_context_artifact = environment_context_bridge.canonical_artifact();
     canonical_artifacts.charter = charter_bridge.canonical_artifact();
     canonical_artifacts.project_context = project_context_bridge.canonical_artifact();
+    let packet_artifact_inputs = PacketArtifactInputs {
+        canonical_artifacts: &canonical_artifacts,
+        environment_context_artifact: &environment_context_artifact,
+        charter_bridge: &charter_bridge,
+        project_context_bridge: &project_context_bridge,
+        environment_context_bridge: &environment_context_bridge,
+    };
 
-    let manifest =
+    let mut manifest =
         ArtifactManifest::from_canonical_artifacts(&canonical_artifacts, ManifestInputs::default());
+    let environment_context_position = manifest
+        .artifacts
+        .iter()
+        .position(|artifact| artifact.kind == CanonicalArtifactKind::FeatureSpec)
+        .unwrap_or(manifest.artifacts.len());
+    manifest.artifacts.insert(
+        environment_context_position,
+        environment_context_artifact.identity.clone(),
+    );
+    manifest.freshness = compute_freshness(&manifest.artifacts, &[], &[]);
     let baseline_validations = baseline_artifact_validations(
         &canonical_artifacts,
         &charter_bridge,
         &project_context_bridge,
+        &environment_context_bridge,
     );
 
     let mut decision_log_entries = Vec::new();
@@ -932,6 +1053,15 @@ pub fn resolve_with_contract(
                 projection.rendered_output_fingerprint().as_str()
             ));
         }
+        if let Some(projection) =
+            environment_context_bridge.projection_for_path(artifact.relative_path.as_str())
+        {
+            decision_log_entries.push(format!(
+                "hcm2.environment_context advisory=true rendered_byte_len={} rendered_sha256={} media_type=text/markdown",
+                projection.rendered_bytes().len(),
+                projection.rendered_output_fingerprint().as_str()
+            ));
+        }
     }
     if let Some(authority) = charter_bridge.authority.as_ref() {
         decision_log_entries.push(format!(
@@ -971,6 +1101,7 @@ pub fn resolve_with_contract(
 
     let mut budget_effective_bytes = charter_bridge.budget_effective_bytes();
     budget_effective_bytes.extend(project_context_bridge.budget_effective_bytes());
+    budget_effective_bytes.extend(environment_context_bridge.budget_effective_bytes());
     let budget_outcome = evaluate_budget_with_effective_bytes(
         &manifest.artifacts,
         &budget_effective_bytes,
@@ -978,11 +1109,9 @@ pub fn resolve_with_contract(
     );
     let packet_artifact_plans = packet_artifact_plans_for(
         &manifest,
-        &canonical_artifacts,
         &baseline_validations,
         &budget_outcome,
-        &charter_bridge,
-        &project_context_bridge,
+        packet_artifact_inputs,
     );
     decision_log_entries.push(format!(
         "budget disposition={:?} reason={:?} targets={} next_safe_action={}",
@@ -1049,7 +1178,7 @@ pub fn resolve_with_contract(
         repo_root,
         contract,
         request: &request,
-        artifacts: &canonical_artifacts,
+        packet_artifact_inputs,
         manifest: &manifest,
         packet_artifact_plans: &packet_artifact_plans,
         baseline_validations: &baseline_validations,
@@ -1058,8 +1187,6 @@ pub fn resolve_with_contract(
         refusal: refusal.as_ref(),
         blockers: &blockers,
         decision_log_entries: decision_log_entries.len(),
-        charter_bridge: &charter_bridge,
-        project_context_bridge: &project_context_bridge,
     });
 
     Ok(ResolverResult {
@@ -1083,7 +1210,7 @@ struct BuildPacketResultInput<'a> {
     repo_root: &'a Path,
     contract: CanonicalLayoutContract,
     request: &'a ResolveRequest,
-    artifacts: &'a CanonicalArtifacts,
+    packet_artifact_inputs: PacketArtifactInputs<'a>,
     manifest: &'a ArtifactManifest,
     packet_artifact_plans: &'a [PacketArtifactPlan<'a>],
     baseline_validations: &'a [BaselineArtifactValidation],
@@ -1092,8 +1219,6 @@ struct BuildPacketResultInput<'a> {
     refusal: Option<&'a ResolverRefusal>,
     blockers: &'a [ResolverBlocker],
     decision_log_entries: usize,
-    charter_bridge: &'a CharterFlowBridge,
-    project_context_bridge: &'a ProjectContextFlowBridge,
 }
 
 fn build_packet_result(input: BuildPacketResultInput<'_>) -> PacketResult {
@@ -1101,7 +1226,7 @@ fn build_packet_result(input: BuildPacketResultInput<'_>) -> PacketResult {
         repo_root,
         contract,
         request,
-        artifacts,
+        packet_artifact_inputs,
         manifest,
         packet_artifact_plans,
         baseline_validations,
@@ -1110,8 +1235,6 @@ fn build_packet_result(input: BuildPacketResultInput<'_>) -> PacketResult {
         refusal,
         blockers,
         decision_log_entries,
-        charter_bridge,
-        project_context_bridge,
     } = input;
 
     let variant = packet_variant_for(request.packet_id);
@@ -1133,11 +1256,9 @@ fn build_packet_result(input: BuildPacketResultInput<'_>) -> PacketResult {
     let fixture_context = fixture_context_for(
         repo_root,
         request.packet_id,
-        artifacts,
+        packet_artifact_inputs,
         baseline_validations,
         contract,
-        charter_bridge,
-        project_context_bridge,
     );
 
     let summary_line = if selection_status == PacketSelectionStatus::Selected {
@@ -1225,35 +1346,54 @@ struct PacketArtifactPlan<'a> {
     rendered_projection: Option<RenderedArtifactProjection<'a>>,
 }
 
-fn packet_artifact_plans_for<'a>(
-    manifest: &ArtifactManifest,
-    artifacts: &'a CanonicalArtifacts,
-    baseline_validations: &[BaselineArtifactValidation],
-    budget_outcome: &BudgetOutcome,
+#[derive(Clone, Copy)]
+struct PacketArtifactInputs<'a> {
+    canonical_artifacts: &'a CanonicalArtifacts,
+    environment_context_artifact: &'a CanonicalArtifact,
     charter_bridge: &'a CharterFlowBridge,
     project_context_bridge: &'a ProjectContextFlowBridge,
+    environment_context_bridge: &'a EnvironmentContextFlowBridge,
+}
+
+fn packet_artifact_plans_for<'a>(
+    manifest: &ArtifactManifest,
+    baseline_validations: &[BaselineArtifactValidation],
+    budget_outcome: &BudgetOutcome,
+    inputs: PacketArtifactInputs<'a>,
 ) -> Vec<PacketArtifactPlan<'a>> {
     [
-        (&artifacts.charter, "CHARTER"),
-        (&artifacts.project_context, "PROJECT_CONTEXT"),
-        (&artifacts.environment_inventory, "ENVIRONMENT_INVENTORY"),
-        (&artifacts.feature_spec, "FEATURE_SPEC"),
+        (&inputs.canonical_artifacts.charter, "CHARTER"),
+        (
+            &inputs.canonical_artifacts.project_context,
+            "PROJECT_CONTEXT",
+        ),
+        (inputs.environment_context_artifact, "ENVIRONMENT_CONTEXT"),
+        (&inputs.canonical_artifacts.feature_spec, "FEATURE_SPEC"),
     ]
     .into_iter()
-    .map(|(artifact, title)| PacketArtifactPlan {
-        artifact,
-        title,
-        disposition: packet_artifact_disposition_for(
+    .map(|(artifact, title)| {
+        let disposition = packet_artifact_disposition_for(
             manifest,
             baseline_validations,
             artifact,
             budget_outcome,
-        ),
-        rendered_projection: rendered_projection_for_path(
-            charter_bridge,
-            project_context_bridge,
-            artifact.identity.relative_path.as_str(),
-        ),
+        );
+        let rendered_projection = (disposition == PacketArtifactDisposition::IncludedVerbatim)
+            .then(|| {
+                rendered_projection_for_path(
+                    inputs.charter_bridge,
+                    inputs.project_context_bridge,
+                    inputs.environment_context_bridge,
+                    artifact.identity.relative_path.as_str(),
+                )
+            })
+            .flatten();
+        PacketArtifactPlan {
+            artifact,
+            title,
+            disposition,
+            rendered_projection,
+        }
     })
     .collect()
 }
@@ -1338,16 +1478,14 @@ fn included_sources_for(plans: &[PacketArtifactPlan<'_>]) -> Vec<PacketSourceSum
 }
 
 fn present_fixture_sources_for(
-    artifacts: &CanonicalArtifacts,
+    inputs: PacketArtifactInputs<'_>,
     baseline_validations: &[BaselineArtifactValidation],
-    charter_bridge: &CharterFlowBridge,
-    project_context_bridge: &ProjectContextFlowBridge,
 ) -> Vec<PacketSourceSummary> {
     [
-        &artifacts.charter.identity,
-        &artifacts.project_context.identity,
-        &artifacts.environment_inventory.identity,
-        &artifacts.feature_spec.identity,
+        &inputs.canonical_artifacts.charter.identity,
+        &inputs.canonical_artifacts.project_context.identity,
+        &inputs.environment_context_artifact.identity,
+        &inputs.canonical_artifacts.feature_spec.identity,
     ]
     .into_iter()
     .filter_map(|identity| {
@@ -1376,8 +1514,9 @@ fn present_fixture_sources_for(
         }
 
         let projection = rendered_projection_for_path(
-            charter_bridge,
-            project_context_bridge,
+            inputs.charter_bridge,
+            inputs.project_context_bridge,
+            inputs.environment_context_bridge,
             identity.relative_path.as_str(),
         );
         Some(PacketSourceSummary {
@@ -1612,11 +1751,9 @@ fn fixture_basis_root_for(contract: CanonicalLayoutContract, fixture_set_id: &st
 fn fixture_context_for(
     repo_root: &Path,
     packet_id: &str,
-    artifacts: &CanonicalArtifacts,
+    inputs: PacketArtifactInputs<'_>,
     baseline_validations: &[BaselineArtifactValidation],
     contract: CanonicalLayoutContract,
-    charter_bridge: &CharterFlowBridge,
-    project_context_bridge: &ProjectContextFlowBridge,
 ) -> Option<PacketFixtureContext> {
     if packet_variant_for(packet_id) != PacketVariant::ExecutionDemo {
         return None;
@@ -1643,12 +1780,7 @@ fn fixture_context_for(
     Some(PacketFixtureContext {
         fixture_basis_root: fixture_basis_root_for(contract, fixture_set_id.as_str()),
         fixture_set_id,
-        fixture_lineage: present_fixture_sources_for(
-            artifacts,
-            baseline_validations,
-            charter_bridge,
-            project_context_bridge,
-        ),
+        fixture_lineage: present_fixture_sources_for(inputs, baseline_validations),
     })
 }
 

@@ -14,5 +14,5 @@ These are reusable patterns stages may reference.
 - Run gates via profile commands.
 - Record evidence in execution/quality gate reports.
 
-## Pattern: Inventory updates
-- Any change to env vars/services/ports must update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`.
+## Pattern: Environment Context updates
+- New named environments or capabilities must be added to `.handbook/project/environment.yaml` before work contracts reference them.

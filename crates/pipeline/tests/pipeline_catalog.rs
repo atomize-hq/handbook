@@ -346,18 +346,8 @@ fn stage_library_inputs_remain_the_authoritative_declarative_source() {
     assert!(foundation_pack_stage
         .inputs
         .library
-        .contains(&CompileStageInput {
-            path: "core/library/environment_inventory/environment_inventory_directive.md"
-                .to_string(),
-            required: true,
-        }));
-    assert!(foundation_pack_stage
-        .inputs
-        .library
-        .contains(&CompileStageInput {
-            path: "core/library/environment_inventory/ENVIRONMENT_INVENTORY.md.tmpl".to_string(),
-            required: true,
-        }));
+        .iter()
+        .all(|input| !input.path.contains("environment_inventory")));
 }
 
 #[test]

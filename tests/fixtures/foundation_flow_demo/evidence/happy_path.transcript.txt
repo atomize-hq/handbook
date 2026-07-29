@@ -127,7 +127,6 @@ WRITTEN FILES:
   - artifacts/foundation/TEST_STRATEGY_BRIEF.md
   - artifacts/foundation/QUALITY_GATES_SPEC.md
   - artifacts/foundation/quality_gates.yaml
-  - artifacts/foundation/ENVIRONMENT_INVENTORY.md
 STATE UPDATES:
   <none>
 NEXT SAFE ACTION: <none>
@@ -167,8 +166,7 @@ This runner assumes the agent can:
 - Prefer minimal diffs.
 - Keep changes within slice scope.
 - If a change introduces/changes env vars, services, ports, or runtime assumptions:
-  - update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
-  - if the current work also changes the stage-07 foundation artifact, keep `artifacts/foundation/ENVIRONMENT_INVENTORY.md` aligned with the canonical inventory
+  - add new named environments or capabilities to `.handbook/project/environment.yaml` before a work contract references them
 
 ## Output discipline
 - For “document stages”, output only the document content (no extra commentary).
@@ -306,8 +304,7 @@ Only include scoped blocks when the current stage `work_level` matches.
 ## P0-ABSOLUTE: Change Discipline
 - Keep changes minimal and reversible when touching contracts or production systems.
 - If a change introduces/changes env vars, services, ports, or runtime assumptions:
-  - update the canonical inventory at `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.
-  - keep `artifacts/foundation/ENVIRONMENT_INVENTORY.md` aligned only when the current stage/output contract requires that artifact.
+  - add new named environments or capabilities to `.handbook/project/environment.yaml` before a work contract references them.
 
 
 
@@ -588,7 +585,7 @@ Deliver `M4` as one believable journey proof:
 3. Stage 05 capture writes `CHARTER.md`.
 4. Manual state handoff sets `needs_project_context=true`, then resolve activates stage 06.
 5. Stage 06 capture writes `PROJECT_CONTEXT.md`.
-6. Stage 07 capture writes the foundation pack and environment inventory.
+6. Stage 07 capture writes the foundation pack.
 7. Stage 10 compile produces payload for an external model.
 8. Stage 10 capture writes `FEATURE_SPEC.md` only after a completed external response exists.
 
@@ -655,23 +652,6 @@ gates:
     category: regression
     requirement: required
     description: Keep fixed timestamp and normalized capture-id proof stable across reruns.
-
-### artifacts/foundation/ENVIRONMENT_INVENTORY.md
-# Environment Inventory
-
-## Toolchains
-- Rust stable toolchain for CLI and compiler tests
-- Cargo for focused proof execution
-
-## Runtime Assumptions
-- local filesystem access for repo-truth stage metadata and fixture content
-- no network dependency for journey proof tests
-- external model output is represented by committed markdown fixtures
-
-## Important Paths
-- `core/pipelines/foundation_inputs.yaml`
-- `core/stages/10_feature_spec.md`
-- `tests/fixtures/foundation_flow_demo`
 
 ## Outputs
 
@@ -741,7 +721,6 @@ WRITTEN FILES:
   - artifacts/handoff/feature_slice/fs-m4-foundation-journey-2026-04/inputs/compiler_derived/artifacts/foundation/TEST_STRATEGY_BRIEF.md
   - artifacts/handoff/feature_slice/fs-m4-foundation-journey-2026-04/inputs/compiler_derived/artifacts/foundation/QUALITY_GATES_SPEC.md
   - artifacts/handoff/feature_slice/fs-m4-foundation-journey-2026-04/inputs/compiler_derived/artifacts/foundation/quality_gates.yaml
-  - artifacts/handoff/feature_slice/fs-m4-foundation-journey-2026-04/inputs/compiler_derived/artifacts/foundation/ENVIRONMENT_INVENTORY.md
   - artifacts/handoff/feature_slice/fs-m4-foundation-journey-2026-04/inputs/external_manual_derived/artifacts/work-specification/work-specification.yaml
   - artifacts/handoff/feature_slice/fs-m4-foundation-journey-2026-04/handoff_manifest.json
   - artifacts/handoff/feature_slice/fs-m4-foundation-journey-2026-04/trust_matrix.md
@@ -755,8 +734,8 @@ PIPELINE: pipeline.foundation_inputs
 CONSUMER: feature-slice-decomposer
 FEATURE ID: fs-m4-foundation-journey-2026-04
 BUNDLE ROOT: artifacts/handoff/feature_slice/fs-m4-foundation-journey-2026-04
-INPUT COUNT: 20
-ALLOW READ PATH COUNT: 24
+INPUT COUNT: 19
+ALLOW READ PATH COUNT: 23
 REPO REREAD FALLBACK: disabled
 
 $ test-only: consume emitted bundle into artifacts/planning/feature_slice/fs-m4-foundation-journey-2026-04/SLICE_PLAN.md

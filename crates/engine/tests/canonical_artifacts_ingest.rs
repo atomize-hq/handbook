@@ -17,8 +17,6 @@ fn custom_layout_contract() -> CanonicalLayoutContract {
         ".custom_handbook/charter/CHARTER.md",
         ".custom_handbook/project_context",
         ".custom_handbook/project_context/PROJECT_CONTEXT.md",
-        ".custom_handbook/environment_inventory",
-        ".custom_handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
         ".custom_handbook/feature_spec",
         ".custom_handbook/feature_spec/FEATURE_SPEC.md",
     )
@@ -123,25 +121,6 @@ fn feature_spec_namespace_directory_establishes_partial_canonical_root() {
     );
     assert_eq!(
         artifacts.feature_spec.identity.presence,
-        ArtifactPresence::Missing
-    );
-}
-
-#[test]
-fn environment_inventory_namespace_directory_establishes_partial_canonical_root() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let repo_root = dir.path();
-
-    std::fs::create_dir_all(repo_root.join(".handbook/environment_inventory")).expect("mkdirs");
-
-    let artifacts = CanonicalArtifacts::load(repo_root).expect("load");
-    assert_eq!(artifacts.system_root_status, SystemRootStatus::Ok);
-    assert_eq!(
-        artifacts.charter.identity.presence,
-        ArtifactPresence::Missing
-    );
-    assert_eq!(
-        artifacts.environment_inventory.identity.presence,
         ArtifactPresence::Missing
     );
 }

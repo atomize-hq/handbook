@@ -6,7 +6,6 @@ use std::path::Path;
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TemplateLibraryRequest {
     CharterAuthoring,
-    EnvironmentInventoryAuthoring,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -40,7 +39,6 @@ impl TemplateLibraryResolveRequest {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum TemplateLibraryOverrideRequest {
     Charter(CharterTemplateLibraryOverride),
-    EnvironmentInventory(EnvironmentInventoryTemplateLibraryOverride),
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
@@ -83,43 +81,11 @@ impl CharterTemplateLibraryOverride {
     }
 }
 
-#[derive(Debug, Clone, Default, PartialEq, Eq)]
-pub struct EnvironmentInventoryTemplateLibraryOverride {
-    synthesize_directive_repo_relative_path: Option<String>,
-    template_repo_relative_path: Option<String>,
-}
-
-impl EnvironmentInventoryTemplateLibraryOverride {
-    pub fn new() -> Self {
-        Self::default()
-    }
-
-    pub fn with_synthesize_directive_repo_relative_path(mut self, path: impl Into<String>) -> Self {
-        self.synthesize_directive_repo_relative_path = Some(path.into());
-        self
-    }
-
-    pub fn with_template_repo_relative_path(mut self, path: impl Into<String>) -> Self {
-        self.template_repo_relative_path = Some(path.into());
-        self
-    }
-
-    pub fn synthesize_directive_repo_relative_path(&self) -> Option<&str> {
-        self.synthesize_directive_repo_relative_path.as_deref()
-    }
-
-    pub fn template_repo_relative_path(&self) -> Option<&str> {
-        self.template_repo_relative_path.as_deref()
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TemplateLibraryAsset {
     CharterAuthoringMethod,
     CharterSynthesizeDirective,
     CharterTemplate,
-    EnvironmentInventorySynthesizeDirective,
-    EnvironmentInventoryTemplate,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -185,25 +151,8 @@ impl CharterTemplateLibrarySelection {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct EnvironmentInventoryTemplateLibrarySelection {
-    synthesize_directive: TemplateLibraryDocument,
-    template: TemplateLibraryDocument,
-}
-
-impl EnvironmentInventoryTemplateLibrarySelection {
-    pub fn synthesize_directive(&self) -> &TemplateLibraryDocument {
-        &self.synthesize_directive
-    }
-
-    pub fn template(&self) -> &TemplateLibraryDocument {
-        &self.template
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum TemplateLibrarySelection {
     Charter(CharterTemplateLibrarySelection),
-    EnvironmentInventory(EnvironmentInventoryTemplateLibrarySelection),
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -245,29 +194,6 @@ pub fn resolve_template_library(
         ) => Ok(TemplateLibrarySelection::Charter(
             resolve_charter_selection(&workspace, overrides)?,
         )),
-        (
-            TemplateLibraryRequest::CharterAuthoring,
-            Some(TemplateLibraryOverrideRequest::EnvironmentInventory(_)),
-        ) => Err(override_family_mismatch(
-            TemplateLibraryRequest::CharterAuthoring,
-            TemplateLibraryRequest::EnvironmentInventoryAuthoring,
-        )),
-        (TemplateLibraryRequest::EnvironmentInventoryAuthoring, None) => Ok(
-            resolve_shipped_template_library(TemplateLibraryRequest::EnvironmentInventoryAuthoring),
-        ),
-        (
-            TemplateLibraryRequest::EnvironmentInventoryAuthoring,
-            Some(TemplateLibraryOverrideRequest::EnvironmentInventory(overrides)),
-        ) => Ok(TemplateLibrarySelection::EnvironmentInventory(
-            resolve_environment_inventory_selection(&workspace, overrides)?,
-        )),
-        (
-            TemplateLibraryRequest::EnvironmentInventoryAuthoring,
-            Some(TemplateLibraryOverrideRequest::Charter(_)),
-        ) => Err(override_family_mismatch(
-            TemplateLibraryRequest::EnvironmentInventoryAuthoring,
-            TemplateLibraryRequest::CharterAuthoring,
-        )),
     }
 }
 
@@ -284,16 +210,6 @@ pub fn resolve_shipped_template_library(
                 template: TemplateLibraryDocument::shipped(CHARTER_TEMPLATE),
             })
         }
-        TemplateLibraryRequest::EnvironmentInventoryAuthoring => {
-            TemplateLibrarySelection::EnvironmentInventory(
-                EnvironmentInventoryTemplateLibrarySelection {
-                    synthesize_directive: TemplateLibraryDocument::shipped(
-                        ENVIRONMENT_INVENTORY_SYNTHESIZE_DIRECTIVE,
-                    ),
-                    template: TemplateLibraryDocument::shipped(ENVIRONMENT_INVENTORY_TEMPLATE),
-                },
-            )
-        }
     }
 }
 
@@ -301,13 +217,8 @@ fn resolve_charter_selection(
     workspace: &CompilerWorkspace<'_>,
     overrides: &CharterTemplateLibraryOverride,
 ) -> Result<CharterTemplateLibrarySelection, TemplateLibraryResolveError> {
-    let mut selection =
-        match resolve_shipped_template_library(TemplateLibraryRequest::CharterAuthoring) {
-            TemplateLibrarySelection::Charter(selection) => selection,
-            TemplateLibrarySelection::EnvironmentInventory(_) => {
-                unreachable!("charter shipped-default selection must remain typed")
-            }
-        };
+    let TemplateLibrarySelection::Charter(mut selection) =
+        resolve_shipped_template_library(TemplateLibraryRequest::CharterAuthoring);
 
     if let Some(path) = overrides.authoring_method_repo_relative_path() {
         selection.authoring_method = load_override_document(
@@ -326,37 +237,6 @@ fn resolve_charter_selection(
     if let Some(path) = overrides.template_repo_relative_path() {
         selection.template =
             load_override_document(workspace, TemplateLibraryAsset::CharterTemplate, path)?;
-    }
-
-    Ok(selection)
-}
-
-fn resolve_environment_inventory_selection(
-    workspace: &CompilerWorkspace<'_>,
-    overrides: &EnvironmentInventoryTemplateLibraryOverride,
-) -> Result<EnvironmentInventoryTemplateLibrarySelection, TemplateLibraryResolveError> {
-    let mut selection = match resolve_shipped_template_library(
-        TemplateLibraryRequest::EnvironmentInventoryAuthoring,
-    ) {
-        TemplateLibrarySelection::EnvironmentInventory(selection) => selection,
-        TemplateLibrarySelection::Charter(_) => {
-            unreachable!("environment inventory shipped-default selection must remain typed")
-        }
-    };
-
-    if let Some(path) = overrides.synthesize_directive_repo_relative_path() {
-        selection.synthesize_directive = load_override_document(
-            workspace,
-            TemplateLibraryAsset::EnvironmentInventorySynthesizeDirective,
-            path,
-        )?;
-    }
-    if let Some(path) = overrides.template_repo_relative_path() {
-        selection.template = load_override_document(
-            workspace,
-            TemplateLibraryAsset::EnvironmentInventoryTemplate,
-            path,
-        )?;
     }
 
     Ok(selection)
@@ -478,38 +358,11 @@ fn invalid_override_path(
     }
 }
 
-fn override_family_mismatch(
-    selection: TemplateLibraryRequest,
-    override_family: TemplateLibraryRequest,
-) -> TemplateLibraryResolveError {
-    TemplateLibraryResolveError {
-        kind: TemplateLibraryResolveErrorKind::OverrideFamilyMismatch,
-        summary: format!(
-            "override family `{}` does not match resolver request `{}`",
-            request_label(override_family),
-            request_label(selection)
-        ),
-        asset: None,
-        repo_relative_path: None,
-    }
-}
-
 fn asset_label(asset: TemplateLibraryAsset) -> &'static str {
     match asset {
         TemplateLibraryAsset::CharterAuthoringMethod => "charter authoring method",
         TemplateLibraryAsset::CharterSynthesizeDirective => "charter synthesize directive",
         TemplateLibraryAsset::CharterTemplate => "charter template",
-        TemplateLibraryAsset::EnvironmentInventorySynthesizeDirective => {
-            "environment-inventory synthesize directive"
-        }
-        TemplateLibraryAsset::EnvironmentInventoryTemplate => "environment-inventory template",
-    }
-}
-
-fn request_label(request: TemplateLibraryRequest) -> &'static str {
-    match request {
-        TemplateLibraryRequest::CharterAuthoring => "charter authoring",
-        TemplateLibraryRequest::EnvironmentInventoryAuthoring => "environment-inventory authoring",
     }
 }
 
@@ -531,16 +384,6 @@ fn override_rule(asset: TemplateLibraryAsset) -> TemplateLibraryOverrideRule {
         },
         TemplateLibraryAsset::CharterTemplate => TemplateLibraryOverrideRule {
             allowed_prefixes: &["core/library/charter/"],
-            required_extension: ".tmpl",
-        },
-        TemplateLibraryAsset::EnvironmentInventorySynthesizeDirective => {
-            TemplateLibraryOverrideRule {
-                allowed_prefixes: &["core/library/environment_inventory/"],
-                required_extension: ".md",
-            }
-        }
-        TemplateLibraryAsset::EnvironmentInventoryTemplate => TemplateLibraryOverrideRule {
-            allowed_prefixes: &["core/library/environment_inventory/"],
             required_extension: ".tmpl",
         },
     }
@@ -572,21 +415,3 @@ const CHARTER_TEMPLATE: TemplateLibraryDocumentDescriptor = TemplateLibraryDocum
     repo_relative_path: "core/library/charter/charter.md.tmpl",
     contents: include_str!("../../../core/library/charter/charter.md.tmpl"),
 };
-
-const ENVIRONMENT_INVENTORY_SYNTHESIZE_DIRECTIVE: TemplateLibraryDocumentDescriptor =
-    TemplateLibraryDocumentDescriptor {
-        asset: TemplateLibraryAsset::EnvironmentInventorySynthesizeDirective,
-        repo_relative_path: "core/library/environment_inventory/environment_inventory_directive.md",
-        contents: include_str!(
-            "../../../core/library/environment_inventory/environment_inventory_directive.md"
-        ),
-    };
-
-const ENVIRONMENT_INVENTORY_TEMPLATE: TemplateLibraryDocumentDescriptor =
-    TemplateLibraryDocumentDescriptor {
-        asset: TemplateLibraryAsset::EnvironmentInventoryTemplate,
-        repo_relative_path: "core/library/environment_inventory/ENVIRONMENT_INVENTORY.md.tmpl",
-        contents: include_str!(
-            "../../../core/library/environment_inventory/ENVIRONMENT_INVENTORY.md.tmpl"
-        ),
-    };

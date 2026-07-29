@@ -2,7 +2,7 @@ pub use handbook_engine::baseline_validation::{
     BaselineArtifactValidation, BaselineArtifactVerdict,
 };
 
-use crate::author::{validate_charter_markdown, validate_environment_inventory_markdown};
+use crate::author::validate_charter_markdown;
 use crate::canonical_artifacts::{CanonicalArtifactKind, CanonicalArtifacts};
 
 pub fn baseline_artifact_validations(
@@ -31,8 +31,8 @@ fn validate_artifact_markdown(kind: CanonicalArtifactKind, markdown: &str) -> Re
         CanonicalArtifactKind::ProjectContext => {
             Err("selected Project Context YAML is validated through profile inspection".to_owned())
         }
-        CanonicalArtifactKind::EnvironmentInventory => {
-            validate_environment_inventory_markdown(markdown).map_err(|err| err.summary)
+        CanonicalArtifactKind::EnvironmentContext => {
+            Err("Environment Context is validated from selected canonical YAML".to_owned())
         }
         CanonicalArtifactKind::FeatureSpec => {
             Err("feature spec is not part of baseline validation".to_string())

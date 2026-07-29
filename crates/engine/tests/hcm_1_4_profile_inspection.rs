@@ -47,6 +47,14 @@ mod unix {
     }
 
     fn authority() -> serde_json::Value {
+        serde_yaml_bw::from_slice(include_bytes!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
+        )))
+        .expect("canonical Charter 1.1 fixture")
+    }
+
+    fn authority_v1_0() -> serde_json::Value {
         json!({
             "schema_id": "handbook.artifact.project-authority",
             "schema_version": "1.0",
@@ -72,10 +80,13 @@ mod unix {
 
     fn environment_context() -> serde_json::Value {
         json!({
-            "schema_id":"handbook.artifact.environment-context", "schema_version":"1.0",
-            "record_id":"example.record.environment-context", "applicability_basis":["example.reference.basis"],
-            "operational_surfaces":["Production"], "runtime_dependencies":["Database"],
-            "safe_configuration_references":["example.configuration.name"],
+            "schema_id":"handbook.artifact.environment-context", "schema_version":"1.1",
+            "record_id":"example.record.environment-context",
+            "environments":[{
+                "environment_id":"local-dev",
+                "description":"Local development and focused tests.",
+                "capabilities":["rust.stable", "filesystem.workspace-write"]
+            }],
             "authoritative_references":[], "known_unknowns":[]
         })
     }
@@ -142,7 +153,7 @@ mod unix {
     }
 
     #[test]
-    fn conditional_path_missing_row_is_exact() {
+    fn shipped_optional_environment_path_missing_row_is_exact() {
         let repo = tempdir().unwrap();
         let report = inspect_profile_repository(repo.path(), &resolved_decisions(repo.path()));
         assert_eq!(
@@ -151,8 +162,8 @@ mod unix {
                 row(&report, "environment_context").reason(),
             ),
             (
-                ArtifactInspectionStatus::NotInspected,
-                ArtifactInspectionReason::ConditionalEvidenceUnavailablePathMissing,
+                ArtifactInspectionStatus::Missing,
+                ArtifactInspectionReason::OptionalPathMissing,
             )
         );
     }
@@ -182,7 +193,7 @@ mod unix {
         write_yaml(
             repo.path(),
             decisions.artifact_decisions()[0].canonical_path(),
-            authority(),
+            authority_v1_0(),
         );
         let report = inspect_profile_repository(repo.path(), &decisions);
         assert_eq!(
@@ -198,7 +209,7 @@ mod unix {
     }
 
     #[test]
-    fn conditional_structurally_valid_row_is_exact() {
+    fn shipped_optional_environment_structurally_valid_row_is_exact() {
         let repo = tempdir().unwrap();
         let decisions = resolved_decisions(repo.path());
         write_yaml(
@@ -214,7 +225,7 @@ mod unix {
             ),
             (
                 ArtifactInspectionStatus::StructurallyValid,
-                ArtifactInspectionReason::ConditionalEvidenceUnavailablePathPresent,
+                ArtifactInspectionReason::PresentAndStructurallyValid,
             )
         );
     }
@@ -388,8 +399,8 @@ mod unix {
                 row(&missing, "environment_context").reason()
             ),
             (
-                ArtifactInspectionStatus::NotInspected,
-                ArtifactInspectionReason::ConditionalEvidenceUnavailablePathMissing
+                ArtifactInspectionStatus::Missing,
+                ArtifactInspectionReason::OptionalPathMissing
             )
         );
 
@@ -422,7 +433,7 @@ mod unix {
             ),
             (
                 ArtifactInspectionStatus::StructurallyValid,
-                ArtifactInspectionReason::ConditionalEvidenceUnavailablePathPresent
+                ArtifactInspectionReason::PresentAndStructurallyValid
             )
         );
     }
@@ -510,7 +521,7 @@ mod unix {
             decision.kind_ref().as_str(),
             "example.artifact-kind.bulk-record@1.0.0"
         );
-        write_yaml(repo.path(), decision.canonical_path(), authority());
+        write_yaml(repo.path(), decision.canonical_path(), authority_v1_0());
 
         let report = inspect_profile_repository(repo.path(), &decisions);
         assert_eq!(report.artifacts().len(), 2);
@@ -569,13 +580,30 @@ mod unix {
             exact_decisions.artifact_decisions().len() * MAX_SOURCE_DOCUMENT_BYTES,
             MAX_TOTAL_SOURCE_BYTES
         );
-        assert!(exact_report
+        let exact_reasons = exact_report
             .artifacts()
             .iter()
-            .all(|artifact| { artifact.reason() == ArtifactInspectionReason::DocumentNotObject }));
+            .map(|artifact| (artifact.instance_id().as_str(), artifact.reason()))
+            .collect::<Vec<_>>();
+        assert_eq!(
+            exact_reasons,
+            [
+                ("bulk_00", ArtifactInspectionReason::DocumentNotObject),
+                ("bulk_01", ArtifactInspectionReason::DocumentNotObject),
+                ("bulk_02", ArtifactInspectionReason::DocumentNotObject),
+                ("bulk_03", ArtifactInspectionReason::DocumentNotObject),
+                ("bulk_04", ArtifactInspectionReason::DocumentNotObject),
+                ("bulk_05", ArtifactInspectionReason::DocumentNotObject),
+                ("bulk_06", ArtifactInspectionReason::DocumentNotObject),
+                (
+                    "project_authority",
+                    ArtifactInspectionReason::StructuralValidationFailed,
+                ),
+            ]
+        );
 
         let exceeded = tempdir().unwrap();
-        let exceeded_decisions = custom_decisions(exceeded.path(), 8, RequirednessMode::Always);
+        let exceeded_decisions = custom_decisions(exceeded.path(), 9, RequirednessMode::Always);
         for (index, decision) in exceeded_decisions.artifact_decisions().iter().enumerate() {
             let size = match index {
                 0..=6 => MAX_SOURCE_DOCUMENT_BYTES,
@@ -588,9 +616,12 @@ mod unix {
             );
         }
         let exceeded_report = inspect_profile_repository(exceeded.path(), &exceeded_decisions);
-        assert_eq!(
-            exceeded_report.artifacts()[8].reason(),
-            ArtifactInspectionReason::AggregateReadLimitExceeded
+        assert!(
+            exceeded_report.artifacts()[8..].iter().all(|artifact| {
+                artifact.reason() == ArtifactInspectionReason::AggregateReadLimitExceeded
+            }),
+            "aggregate-exceeded rows: {:?}",
+            &exceeded_report.artifacts()[8..]
         );
     }
 

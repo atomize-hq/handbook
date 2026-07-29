@@ -55,9 +55,9 @@ pub(crate) fn author_or_fill_next_safe_action(
     match kind {
         CanonicalArtifactKind::Charter => NextSafeAction::RunAuthorCharter,
         CanonicalArtifactKind::ProjectContext => NextSafeAction::RunAuthorProjectContext,
-        CanonicalArtifactKind::EnvironmentInventory => {
-            NextSafeAction::RunAuthorEnvironmentInventory
-        }
+        CanonicalArtifactKind::EnvironmentContext => NextSafeAction::FillCanonicalArtifact {
+            canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
+        },
         CanonicalArtifactKind::FeatureSpec => NextSafeAction::FillCanonicalArtifact {
             canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
         },
@@ -310,7 +310,7 @@ fn canonical_artifact_kind_priority(kind: CanonicalArtifactKind) -> u8 {
     match kind {
         CanonicalArtifactKind::Charter => 0,
         CanonicalArtifactKind::ProjectContext => 1,
-        CanonicalArtifactKind::EnvironmentInventory => 2,
+        CanonicalArtifactKind::EnvironmentContext => 2,
         CanonicalArtifactKind::FeatureSpec => 3,
     }
 }

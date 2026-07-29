@@ -91,57 +91,6 @@ fn valid_project_context_markdown() -> &'static str {
 }
 
 #[cfg(unix)]
-fn valid_environment_inventory_markdown() -> &'static str {
-    "# Environment Inventory
-
-> **Canonical File:** `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
-> **Project Context Ref:** `.handbook/project/context.yaml`
-
-## What this is
-Canonical environment and runtime inventory.
-
-## How to use
-- Update this file when runtime assumptions change.
-
-## 1) Environment Variables (Inventory)
-- None yet.
-
-## 2) External Services / Infrastructure Dependencies
-- None yet.
-
-## 3) Runtime Assumptions (Ports, Paths, Storage, Limits)
-- None yet.
-
-## 4) Local Development Requirements
-- None yet.
-
-## 5) CI Requirements
-- None yet.
-
-## 6) Production / Deployment Requirements (even if not live yet)
-- None yet.
-
-## 7) Dependency & Tooling Inventory (project-specific)
-- None yet.
-
-## 8) Update Contract (non-negotiable)
-- Update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.
-
-## 9) Known Unknowns
-- None yet.
-"
-}
-
-#[cfg(unix)]
-fn oversized_valid_environment_inventory_markdown() -> String {
-    format!(
-        "{}\n{}",
-        valid_environment_inventory_markdown(),
-        "x".repeat(256)
-    )
-}
-
-#[cfg(unix)]
 fn invalid_optional_project_context_markdown() -> String {
     format!(
         "{}unexpected_field: true\n",
@@ -259,31 +208,6 @@ fn missing_optional_project_context_emits_omission_note() {
         handbook_compiler::RefusalCategory::RequiredArtifactInvalid
     );
     assert!(refusal.summary.contains("required_path_missing"));
-}
-
-#[cfg(unix)]
-#[test]
-fn missing_optional_environment_inventory_emits_omission_note() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let repo_root = dir.path();
-
-    write_file(
-        &repo_root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &repo_root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature",
-    );
-    write_valid_project_context(repo_root);
-
-    let result = resolve(repo_root, ResolveRequest::default()).expect("resolve");
-
-    assert_eq!(result.selection.status, PacketSelectionStatus::Selected);
-    assert!(result.packet_result.notes.iter().any(|note| {
-        note.text
-            == "optional source omitted: .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"
-    }));
 }
 
 #[cfg(unix)]
@@ -524,62 +448,6 @@ fn budget_summarize_replaces_optional_body_with_summary() {
 
 #[cfg(unix)]
 #[test]
-fn budget_summarize_replaces_environment_inventory_body_with_summary() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let repo_root = dir.path();
-
-    write_file(
-        &repo_root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &repo_root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature",
-    );
-    write_valid_project_context(repo_root);
-    write_file(
-        &repo_root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        oversized_valid_environment_inventory_markdown().as_bytes(),
-    );
-
-    let summarize_req = ResolveRequest {
-        budget_policy: BudgetPolicy {
-            max_total_bytes: None,
-            max_per_artifact_bytes: Some(valid_charter_markdown().len() as u64),
-        },
-        ..ResolveRequest::default()
-    };
-    let result = resolve(repo_root, summarize_req).expect("resolve summarize");
-
-    assert_eq!(
-        result.budget_outcome.disposition,
-        BudgetDisposition::Summarize
-    );
-    let summarized_section = result
-        .packet_result
-        .sections
-        .iter()
-        .find(|section| section.title == "ENVIRONMENT_INVENTORY")
-        .expect("environment inventory section");
-    assert_eq!(summarized_section.mode, PacketSectionMode::Summary);
-    assert!(
-        summarized_section
-            .contents
-            .contains("budget summary: full contents omitted"),
-        "expected budget summary stub: {:?}",
-        summarized_section.contents
-    );
-    assert!(result.packet_result.notes.iter().any(|note| {
-        note.text
-            == format!(
-                "optional source summarized due to budget: .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md ({} bytes [source])",
-                oversized_valid_environment_inventory_markdown().len()
-            )
-    }));
-}
-
-#[cfg(unix)]
-#[test]
 fn budget_exclude_removes_optional_body_from_packet() {
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
@@ -631,67 +499,6 @@ fn budget_exclude_removes_optional_body_from_packet() {
         "excluded optional section should be absent from packet body: {:?}",
         result.packet_result.sections
     );
-}
-
-#[cfg(unix)]
-#[test]
-fn budget_exclude_removes_environment_inventory_from_packet() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let repo_root = dir.path();
-
-    write_file(
-        &repo_root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &repo_root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature",
-    );
-    write_valid_project_context(repo_root);
-    write_file(
-        &repo_root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        oversized_valid_environment_inventory_markdown().as_bytes(),
-    );
-
-    let exclude_req = ResolveRequest {
-        budget_policy: BudgetPolicy {
-            max_total_bytes: Some(required_budget_bytes(repo_root)),
-            max_per_artifact_bytes: None,
-        },
-        ..ResolveRequest::default()
-    };
-    let result = resolve(repo_root, exclude_req).expect("resolve exclude");
-
-    assert_eq!(
-        result.budget_outcome.disposition,
-        BudgetDisposition::Exclude
-    );
-    assert!(
-        result
-            .packet_result
-            .included_sources
-            .iter()
-            .all(|source| source.canonical_repo_relative_path
-                != ".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        "excluded sources should not be listed as included: {:?}",
-        result.packet_result.included_sources
-    );
-    assert!(
-        result
-            .packet_result
-            .sections
-            .iter()
-            .all(|section| section.title != "ENVIRONMENT_INVENTORY"),
-        "excluded optional section should be absent from packet body: {:?}",
-        result.packet_result.sections
-    );
-    assert!(result.packet_result.notes.iter().any(|note| {
-        note.text
-            == format!(
-                "optional source excluded due to budget: .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md ({} bytes [source])",
-                oversized_valid_environment_inventory_markdown().len()
-            )
-    }));
 }
 
 #[cfg(unix)]
@@ -756,44 +563,6 @@ fn resolver_builds_typed_packet_body_for_planning_packet() {
 
 #[cfg(unix)]
 #[test]
-fn resolver_includes_environment_inventory_in_ready_planning_packets() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature spec body",
-    );
-
-    let result = resolve(root, ResolveRequest::default()).expect("resolve");
-
-    assert!(result.packet_result.is_ready());
-    assert_eq!(result.packet_result.included_sources.len(), 4);
-    assert_eq!(result.packet_result.sections.len(), 4);
-    assert_eq!(
-        result.packet_result.sections[2].title,
-        "ENVIRONMENT_INVENTORY"
-    );
-    assert_eq!(
-        result.packet_result.sections[2].contents,
-        valid_environment_inventory_markdown()
-    );
-}
-
-#[cfg(unix)]
-#[test]
 fn ready_packet_sections_match_included_source_metadata() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
@@ -852,10 +621,6 @@ fn resolver_builds_fixture_context_for_execution_demo_packets() {
         valid_project_context_markdown().as_bytes(),
     );
     write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
-    write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"demo feature body",
     );
@@ -879,7 +644,7 @@ fn resolver_builds_fixture_context_for_execution_demo_packets() {
         fixture_context.fixture_basis_root,
         "tests/fixtures/execution_demo/basic/.handbook/"
     );
-    assert_eq!(fixture_context.fixture_lineage.len(), 4);
+    assert_eq!(fixture_context.fixture_lineage.len(), 3);
     assert_eq!(
         fixture_context.fixture_lineage[0].canonical_repo_relative_path,
         ".handbook/charter/CHARTER.md"
@@ -890,10 +655,6 @@ fn resolver_builds_fixture_context_for_execution_demo_packets() {
     );
     assert_eq!(
         fixture_context.fixture_lineage[2].canonical_repo_relative_path,
-        ".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"
-    );
-    assert_eq!(
-        fixture_context.fixture_lineage[3].canonical_repo_relative_path,
         ".handbook/feature_spec/FEATURE_SPEC.md"
     );
     assert_eq!(

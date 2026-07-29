@@ -1,9 +1,6 @@
 pub mod charter;
 mod charter_core;
 mod charter_shell;
-pub mod environment_inventory;
-mod environment_inventory_core;
-mod environment_inventory_shell;
 pub mod project_context;
 #[cfg(unix)]
 mod project_context_shell;
@@ -23,18 +20,6 @@ pub use charter::{
     CharterProjectInput, CharterRequiredness, CharterRolloutControls, CharterRuntimeEnvironment,
     CharterStructuredInput, CharterSurface, CANONICAL_CHARTER_REPO_PATH,
     DEFAULT_EXCEPTION_RECORD_LOCATION,
-};
-pub use environment_inventory::{
-    author_environment_inventory_from_input, parse_environment_inventory_structured_input_yaml,
-    preflight_author_environment_inventory, preflight_author_environment_inventory_from_input,
-    render_environment_inventory_markdown, validate_environment_inventory_markdown,
-    validate_environment_inventory_structured_input, AuthorEnvironmentInventoryRefusal,
-    AuthorEnvironmentInventoryRefusalKind, AuthorEnvironmentInventoryResult, EnvironmentCiInput,
-    EnvironmentExternalServiceInput, EnvironmentInventoryStructuredInput,
-    EnvironmentKnownUnknownInput, EnvironmentLocalDevelopmentInput, EnvironmentProductionInput,
-    EnvironmentRuntimeAssumptionsInput, EnvironmentSecretHandlingInput, EnvironmentToolingInput,
-    EnvironmentUpdateContractInput, EnvironmentVariableInput,
-    CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH,
 };
 pub use project_context::{
     author_project_context, author_project_context_from_input, parse_project_context_input_yaml,
@@ -102,7 +87,9 @@ fn canonical_artifact(
     match kind {
         CanonicalArtifactKind::Charter => &artifacts.charter,
         CanonicalArtifactKind::ProjectContext => &artifacts.project_context,
-        CanonicalArtifactKind::EnvironmentInventory => &artifacts.environment_inventory,
+        CanonicalArtifactKind::EnvironmentContext => {
+            panic!("Environment Context is not owned by fixed-sibling authoring")
+        }
         CanonicalArtifactKind::FeatureSpec => &artifacts.feature_spec,
     }
 }

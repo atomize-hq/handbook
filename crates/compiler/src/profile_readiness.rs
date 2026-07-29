@@ -148,12 +148,13 @@ pub(crate) fn project_profile_readiness(
 
 fn classify_readiness(artifacts: &[ProfileArtifactRow]) -> RepositoryReadinessStatus {
     if artifacts.iter().any(|artifact| {
-        matches!(
-            artifact.inspection_status,
-            ArtifactInspectionStatus::StructurallyInvalid
-                | ArtifactInspectionStatus::UnsafePath
-                | ArtifactInspectionStatus::Unreadable
-        )
+        !is_unselected_environment_context_advisory(artifact)
+            && matches!(
+                artifact.inspection_status,
+                ArtifactInspectionStatus::StructurallyInvalid
+                    | ArtifactInspectionStatus::UnsafePath
+                    | ArtifactInspectionStatus::Unreadable
+            )
     }) {
         return RepositoryReadinessStatus::Invalid;
     }
@@ -170,4 +171,81 @@ fn classify_readiness(artifacts: &[ProfileArtifactRow]) -> RepositoryReadinessSt
         return RepositoryReadinessStatus::ActionRequired;
     }
     RepositoryReadinessStatus::Ready
+}
+
+fn is_unselected_environment_context_advisory(artifact: &ProfileArtifactRow) -> bool {
+    artifact.instance_id == "environment_context"
+        && artifact.kind_ref == "handbook.artifact-kind.environment-context@1.1.0"
+        && artifact.requiredness == RequirednessMode::Optional
+        && artifact.condition_ref.is_none()
+        && artifact.applicability == ArtifactApplicability::Optional
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn row(
+        applicability: ArtifactApplicability,
+        inspection_status: ArtifactInspectionStatus,
+    ) -> ProfileArtifactRow {
+        ProfileArtifactRow {
+            instance_id: "environment_context".to_owned(),
+            kind_ref: "handbook.artifact-kind.environment-context@1.1.0".to_owned(),
+            role_id: Some("environment_context".to_owned()),
+            capability_ids: Vec::new(),
+            canonical_path: ".handbook/project/environment.yaml".to_owned(),
+            requiredness: RequirednessMode::Optional,
+            condition_ref: None,
+            condition_outcome: None,
+            condition_reason: None,
+            evidence_closure_fingerprint: None,
+            applicability,
+            inspection_status,
+            inspection_reason: ArtifactInspectionReason::StructuralValidationFailed,
+        }
+    }
+
+    #[test]
+    fn invalid_optional_context_is_non_blocking_without_a_selected_gate() {
+        let artifacts = [row(
+            ArtifactApplicability::Optional,
+            ArtifactInspectionStatus::StructurallyInvalid,
+        )];
+
+        assert_eq!(
+            classify_readiness(&artifacts),
+            RepositoryReadinessStatus::Ready
+        );
+    }
+
+    #[test]
+    fn invalid_required_artifact_remains_blocking() {
+        let artifacts = [row(
+            ArtifactApplicability::Required,
+            ArtifactInspectionStatus::StructurallyInvalid,
+        )];
+
+        assert_eq!(
+            classify_readiness(&artifacts),
+            RepositoryReadinessStatus::Invalid
+        );
+    }
+
+    #[test]
+    fn invalid_optional_non_advisory_artifact_remains_blocking() {
+        let mut artifact = row(
+            ArtifactApplicability::Optional,
+            ArtifactInspectionStatus::StructurallyInvalid,
+        );
+        artifact.instance_id = "optional_release_notes".to_owned();
+        artifact.kind_ref = "example.artifact-kind.release-notes@1.0.0".to_owned();
+        artifact.role_id = None;
+        artifact.canonical_path = ".handbook/project/release-notes.yaml".to_owned();
+
+        assert_eq!(
+            classify_readiness(&[artifact]),
+            RepositoryReadinessStatus::Invalid
+        );
+    }
 }

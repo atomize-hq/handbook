@@ -1,5 +1,4 @@
 pub mod charter_core;
-pub mod environment_inventory_core;
 
 pub use charter_core::{
     compiler_owned_charter_markdown, find_charter_template_scaffold_line,
@@ -16,18 +15,4 @@ pub use charter_core::{
     CharterProjectConstraintsInput, CharterProjectInput, CharterRequiredness,
     CharterRolloutControls, CharterRuntimeEnvironment, CharterStructuredInput, CharterSurface,
     DEFAULT_EXCEPTION_RECORD_LOCATION,
-};
-#[allow(deprecated)]
-pub use environment_inventory_core::{
-    parse_environment_inventory_structured_input_yaml, render_environment_inventory_markdown,
-    validate_environment_inventory_markdown, validate_environment_inventory_structured_input,
-    validate_required_heading_order_result as validate_environment_inventory_heading_order_result,
-    validate_synthesized_environment_inventory_markdown, EnvironmentCiInput,
-    EnvironmentExternalServiceInput, EnvironmentInventoryCoreError,
-    EnvironmentInventoryCoreErrorKind, EnvironmentInventoryStructuredInput,
-    EnvironmentInventoryValidationExpectations, EnvironmentKnownUnknownInput,
-    EnvironmentLocalDevelopmentInput, EnvironmentProductionInput,
-    EnvironmentRuntimeAssumptionsInput, EnvironmentSecretHandlingInput, EnvironmentToolingInput,
-    EnvironmentUpdateContractInput, EnvironmentVariableInput,
-    REQUIRED_ENVIRONMENT_INVENTORY_HEADINGS,
 };

@@ -354,48 +354,9 @@ fn repair_to_ready(root: &std::path::Path) {
     write_valid_selected_charter(root);
     write_valid_selected_project_context(root);
     write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
-    write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"feature",
     );
-}
-
-#[cfg(any())]
-fn assert_doctor_empty_baseline_invalid(
-    empty_path: &str,
-    expected_next_safe_action: &str,
-    expected_checklist_line: &str,
-) {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
-        valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
-    write_file(&root.join(empty_path), b"");
-
-    let output = run_in(root, &["doctor"]);
-    assert!(
-        !output.status.success(),
-        "doctor should block on empty baseline"
-    );
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert!(stdout.contains("INVALID_BASELINE"), "{stdout}");
-    assert!(stdout.contains(expected_next_safe_action), "{stdout}");
-    assert!(stdout.contains(expected_checklist_line), "{stdout}");
 }
 
 #[cfg(any())]
@@ -407,12 +368,6 @@ fn partial_system_repo() -> tempfile::TempDir {
     let dir = tempfile::tempdir().expect("tempdir");
     write_valid_selected_charter(dir.path());
     write_valid_selected_project_context(dir.path());
-    write_file(
-        dir.path()
-            .join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md")
-            .as_path(),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
     dir
 }
 
@@ -552,7 +507,6 @@ fn write_valid_selected_charter(root: &std::path::Path) {
     );
 }
 
-#[cfg(unix)]
 fn profile_ready_repo() -> tempfile::TempDir {
     let dir = tempfile::tempdir().expect("tempdir");
     std::fs::create_dir_all(dir.path().join(".git")).expect("git root");
@@ -560,17 +514,18 @@ fn profile_ready_repo() -> tempfile::TempDir {
     write_valid_selected_project_context(dir.path());
     write_file(
         &dir.path().join(".handbook/project/environment.yaml"),
-        br#"{
-  "schema_id": "handbook.artifact.environment-context",
-  "schema_version": "1.0",
-  "record_id": "handbook.environment-context",
-  "applicability_basis": ["handbook.project-context"],
-  "operational_surfaces": ["Production"],
-  "runtime_dependencies": ["Database"],
-  "safe_configuration_references": ["handbook.configuration.production"],
-  "authoritative_references": [],
-  "known_unknowns": []
-}
+        br#"authoritative_references: []
+environments:
+  -
+    capabilities:
+      - "rust.stable"
+      - "filesystem.workspace-write"
+    description: "Local development and focused tests."
+    environment_id: "local-dev"
+known_unknowns: []
+record_id: "handbook.environment-context"
+schema_id: "handbook.artifact.environment-context"
+schema_version: "1.1"
 "#,
     );
     dir
@@ -584,47 +539,6 @@ fn legacy_placeholder_project_context_markdown() -> String {
             "- Operations.",
             "- Unknown from local repo inspection; confirm before planning live changes.",
         )
-}
-
-fn valid_environment_inventory_markdown() -> &'static str {
-    "# Environment Inventory
-
-> **Canonical File:** `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
-> **Project Context Ref:** `.handbook/project/context.yaml`
-
-## What this is
-Canonical environment and runtime inventory.
-
-## How to use
-- Update this file when runtime assumptions change.
-
-## 1) Environment Variables (Inventory)
-- None yet.
-
-## 2) External Services / Infrastructure Dependencies
-- None yet.
-
-## 3) Runtime Assumptions (Ports, Paths, Storage, Limits)
-- None yet.
-
-## 4) Local Development Requirements
-- None yet.
-
-## 5) CI Requirements
-- None yet.
-
-## 6) Production / Deployment Requirements (even if not live yet)
-- None yet.
-
-## 7) Dependency & Tooling Inventory (project-specific)
-- None yet.
-
-## 8) Update Contract (non-negotiable)
-- Update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.
-
-## 9) Known Unknowns
-- None yet.
-"
 }
 
 fn malformed_optional_project_context_repo() -> tempfile::TempDir {
@@ -969,7 +883,6 @@ fn stage_07_capture_input(root: &std::path::Path) -> String {
         "artifacts/foundation/TEST_STRATEGY_BRIEF.md",
         "artifacts/foundation/QUALITY_GATES_SPEC.md",
         "artifacts/foundation/quality_gates.yaml",
-        "artifacts/foundation/ENVIRONMENT_INVENTORY.md",
     ];
     let mut out = String::new();
     for path in outputs {
@@ -4737,9 +4650,8 @@ fn author_help_matches_snapshot() {
         &rendered,
         &[
             "Usage: handbook author [COMMAND]",
-            "charter                Create, approve, promote, or validate the selected canonical Charter",
-            "project-context        Deterministically author canonical `.handbook/project/context.yaml`",
-            "environment-inventory  Deterministically author canonical `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`",
+            "charter          Create, approve, promote, or validate the selected canonical Charter",
+            "project-context  Deterministically author canonical `.handbook/project/context.yaml`",
         ],
     );
     assert!(!rendered.contains(".handbook/charter/CHARTER.md"));
@@ -4782,19 +4694,11 @@ fn author_project_context_help_matches_snapshot() {
 }
 
 #[test]
-fn author_environment_inventory_help_matches_snapshot() {
-    assert_help_snapshot(
-        &["author", "environment-inventory", "--help"],
-        "handbook-author-environment-inventory-help.txt",
-    );
-}
-
-#[test]
 fn profile_setup_and_doctor_use_typed_rows_json_and_exit_policy() {
     let (outcome, reason, json_status) = (
-        "OUTCOME: INDETERMINATE",
-        "REASON: conditional_evidence_unavailable_path_missing",
-        "indeterminate",
+        "OUTCOME: ACTION_REQUIRED",
+        "environment_context [.handbook/project/environment.yaml] ACTION: optional_absent STATUS: missing REASON: optional_path_missing",
+        "action_required",
     );
 
     let setup_repo = tempfile::tempdir().expect("tempdir");
@@ -4821,7 +4725,7 @@ fn profile_setup_and_doctor_use_typed_rows_json_and_exit_policy() {
     let text = run_in(doctor_repo.path(), &["doctor"]);
     assert!(!text.status.success());
     let text_stdout = String::from_utf8(text.stdout).expect("doctor stdout utf-8");
-    assert!(text_stdout.contains("APPLICABILITY: indeterminate STATUS: not_inspected REASON: conditional_evidence_unavailable_path_missing"), "{text_stdout}");
+    assert!(text_stdout.contains("environment_context [.handbook/project/environment.yaml] APPLICABILITY: optional STATUS: missing REASON: optional_path_missing"), "{text_stdout}");
 
     let json = run_in(doctor_repo.path(), &["doctor", "--json"]);
     assert!(!json.status.success());
@@ -4894,7 +4798,7 @@ fn profile_setup_auto_refresh_preserves_existing_root_without_artifact_writes() 
 
     assert!(!output.status.success());
     let stdout = String::from_utf8(output.stdout).expect("stdout utf-8");
-    assert!(stdout.contains("OUTCOME: INDETERMINATE"), "{stdout}");
+    assert!(stdout.contains("OUTCOME: ACTION_REQUIRED"), "{stdout}");
     assert!(stdout.contains("MODE: refresh"), "{stdout}");
     assert!(stdout.contains("ROOT ACTION: preserve"), "{stdout}");
     assert_eq!(
@@ -4920,12 +4824,9 @@ fn shipped_indeterminate_reset_request_mutates_no_runtime_state() {
 
     assert!(!output.status.success());
     let stdout = String::from_utf8(output.stdout).expect("stdout utf-8");
-    assert!(stdout.contains("OUTCOME: INDETERMINATE"), "{stdout}");
-    assert!(stdout.contains("RESET APPLIED: no"), "{stdout}");
-    assert_eq!(
-        std::fs::read(repo.path().join(".handbook/state/a.yaml")).expect("state file"),
-        b"a: 1\n"
-    );
+    assert!(stdout.contains("OUTCOME: ACTION_REQUIRED"), "{stdout}");
+    assert!(stdout.contains("RESET APPLIED: yes"), "{stdout}");
+    assert!(!repo.path().join(".handbook/state/a.yaml").exists());
 }
 
 #[cfg(unix)]
@@ -4954,217 +4855,6 @@ fn profile_reset_symlink_refusal_is_fail_safe() {
         b"a: 1\n"
     );
     assert!(repo.path().join(".handbook/state/z_link").exists());
-}
-
-#[test]
-#[cfg(any())]
-fn bare_setup_routes_to_init_on_uninitialized_repo() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    let output = run_in(root, &["setup"]);
-    assert!(output.status.success(), "setup should succeed");
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_setup_success(
-        &stdout,
-        SetupSuccessExpectation {
-            outcome: "OUTCOME: SCAFFOLDED",
-            object: "setup init",
-            next_safe_action: "NEXT SAFE ACTION: run `handbook doctor`",
-            root_status: "STATUS: established canonical `.handbook/` root",
-            starter_actions: &[
-                "created .handbook/charter/CHARTER.md",
-                "created .handbook/project_context/PROJECT_CONTEXT.md",
-                "created .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-            ],
-            state_updates: &[],
-            scaffold_guidance: true,
-            routed_command: Some("handbook setup init"),
-        },
-    );
-
-    for path in [
-        ".handbook/charter/CHARTER.md",
-        ".handbook/project_context/PROJECT_CONTEXT.md",
-        ".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-    ] {
-        assert_eq!(
-            std::fs::read(root.join(path)).expect("starter bytes"),
-            starter_template_bytes_for_path(path),
-        );
-    }
-    assert!(!root.join(".handbook/feature_spec/FEATURE_SPEC.md").exists());
-}
-
-#[test]
-#[cfg(any())]
-fn bare_setup_repairs_file_backed_invalid_system_root() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-    write_file(&root.join(".handbook"), b"not a directory\n");
-
-    let output = run_in(root, &["setup"]);
-    assert!(output.status.success(), "setup should repair invalid root");
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_setup_success(
-        &stdout,
-        SetupSuccessExpectation {
-            outcome: "OUTCOME: SCAFFOLDED",
-            object: "setup init",
-            next_safe_action: "NEXT SAFE ACTION: run `handbook doctor`",
-            root_status: "STATUS: established canonical `.handbook/` root",
-            starter_actions: &[
-                "created .handbook/charter/CHARTER.md",
-                "created .handbook/project_context/PROJECT_CONTEXT.md",
-                "created .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-            ],
-            state_updates: &[],
-            scaffold_guidance: true,
-            routed_command: Some("handbook setup init"),
-        },
-    );
-    assert!(root.join(".handbook/charter/CHARTER.md").is_file());
-}
-
-#[cfg(unix)]
-#[test]
-#[cfg(any())]
-fn bare_setup_repairs_symlinked_invalid_system_root() {
-    use std::os::unix::fs::symlink;
-
-    let dir = tempfile::tempdir().expect("tempdir");
-    let external = tempfile::tempdir().expect("external tempdir");
-    let root = dir.path();
-    symlink(external.path(), root.join(".handbook")).expect("system symlink");
-
-    let output = run_in(root, &["setup"]);
-    assert!(
-        output.status.success(),
-        "setup should repair symlinked root"
-    );
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_setup_success(
-        &stdout,
-        SetupSuccessExpectation {
-            outcome: "OUTCOME: SCAFFOLDED",
-            object: "setup init",
-            next_safe_action: "NEXT SAFE ACTION: run `handbook doctor`",
-            root_status: "STATUS: established canonical `.handbook/` root",
-            starter_actions: &[
-                "created .handbook/charter/CHARTER.md",
-                "created .handbook/project_context/PROJECT_CONTEXT.md",
-                "created .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-            ],
-            state_updates: &[],
-            scaffold_guidance: true,
-            routed_command: Some("handbook setup init"),
-        },
-    );
-    assert!(
-        external
-            .path()
-            .read_dir()
-            .expect("external dir")
-            .next()
-            .is_none(),
-        "repair must unlink the blocking symlink without touching the target"
-    );
-    assert!(root.join(".handbook/charter/CHARTER.md").is_file());
-}
-
-#[test]
-#[cfg(any())]
-fn bare_setup_routes_to_refresh_on_initialized_repo() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        b"custom charter\n",
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"custom feature\n",
-    );
-    write_file(
-        &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
-        b"custom context\n",
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        b"custom inventory\n",
-    );
-
-    let output = run_in(root, &["setup"]);
-    assert!(output.status.success(), "setup should succeed");
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_setup_success(
-        &stdout,
-        SetupSuccessExpectation {
-            outcome: "OUTCOME: READY",
-            object: "setup refresh",
-            next_safe_action: "NEXT SAFE ACTION: run `handbook doctor`",
-            root_status: "STATUS: reused canonical `.handbook/` root",
-            starter_actions: &[
-                "preserved .handbook/charter/CHARTER.md",
-                "preserved .handbook/project_context/PROJECT_CONTEXT.md",
-                "preserved .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-            ],
-            state_updates: &[],
-            scaffold_guidance: false,
-            routed_command: Some("handbook setup refresh"),
-        },
-    );
-
-    assert_eq!(
-        fs::read(root.join(".handbook/charter/CHARTER.md")).expect("charter"),
-        b"custom charter\n"
-    );
-    assert_eq!(
-        fs::read(root.join(".handbook/feature_spec/FEATURE_SPEC.md")).expect("feature"),
-        b"custom feature\n"
-    );
-    assert_eq!(
-        fs::read(root.join(".handbook/project_context/PROJECT_CONTEXT.md")).expect("context"),
-        b"custom context\n"
-    );
-    assert_eq!(
-        fs::read(root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"))
-            .expect("inventory"),
-        b"custom inventory\n"
-    );
-}
-
-#[test]
-#[cfg(any())]
-fn setup_init_creates_scaffold_and_starter_files_and_ends_with_system_doctor() {
-    let dir = tempfile::tempdir().expect("tempdir");
-
-    let output = run_in(dir.path(), &["setup", "init"]);
-    assert!(output.status.success(), "setup init should succeed");
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_setup_success(
-        &stdout,
-        SetupSuccessExpectation {
-            outcome: "OUTCOME: SCAFFOLDED",
-            object: "setup init",
-            next_safe_action: "NEXT SAFE ACTION: run `handbook doctor`",
-            root_status: "STATUS: established canonical `.handbook/` root",
-            starter_actions: &[
-                "created .handbook/charter/CHARTER.md",
-                "created .handbook/project_context/PROJECT_CONTEXT.md",
-                "created .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-            ],
-            state_updates: &[],
-            scaffold_guidance: true,
-            routed_command: None,
-        },
-    );
 }
 
 #[test]
@@ -5202,324 +4892,6 @@ fn setup_init_refuses_when_canonical_system_already_exists() {
         stdout.contains("BROKEN SUBJECT: canonical `.handbook` root"),
         "{stdout}"
     );
-}
-
-#[test]
-#[cfg(any())]
-fn setup_refresh_default_preserves_canonical_files_by_default() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        b"keep charter\n",
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"keep feature\n",
-    );
-    write_file(
-        &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
-        b"keep context\n",
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        b"keep inventory\n",
-    );
-
-    let output = run_in(root, &["setup", "refresh"]);
-    assert!(output.status.success(), "setup refresh should succeed");
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_setup_success(
-        &stdout,
-        SetupSuccessExpectation {
-            outcome: "OUTCOME: READY",
-            object: "setup refresh",
-            next_safe_action: "NEXT SAFE ACTION: run `handbook doctor`",
-            root_status: "STATUS: reused canonical `.handbook/` root",
-            starter_actions: &[
-                "preserved .handbook/charter/CHARTER.md",
-                "preserved .handbook/project_context/PROJECT_CONTEXT.md",
-                "preserved .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-            ],
-            state_updates: &[],
-            scaffold_guidance: false,
-            routed_command: None,
-        },
-    );
-}
-
-#[test]
-#[cfg(any())]
-fn setup_refresh_rewrite_rewrites_only_setup_owned_starter_files() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        b"custom charter\n",
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"custom feature\n",
-    );
-    write_file(
-        &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
-        b"custom context\n",
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        b"custom inventory\n",
-    );
-    write_file(
-        &root.join(".handbook/state/pipeline/pipeline.foundation_inputs.yaml"),
-        b"state: keep\n",
-    );
-    write_file(&root.join(".handbook/custom/KEEP.md"), b"keep me\n");
-
-    let state_before =
-        fs::read(root.join(".handbook/state/pipeline/pipeline.foundation_inputs.yaml"))
-            .expect("state before");
-    let custom_before = fs::read(root.join(".handbook/custom/KEEP.md")).expect("custom before");
-
-    let output = run_in(root, &["setup", "refresh", "--rewrite"]);
-    assert!(
-        output.status.success(),
-        "setup refresh --rewrite should succeed"
-    );
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_setup_success(
-        &stdout,
-        SetupSuccessExpectation {
-            outcome: "OUTCOME: SCAFFOLDED",
-            object: "setup refresh",
-            next_safe_action: "NEXT SAFE ACTION: run `handbook doctor`",
-            root_status: "STATUS: reused canonical `.handbook/` root",
-            starter_actions: &[
-                "rewritten .handbook/charter/CHARTER.md",
-                "rewritten .handbook/project_context/PROJECT_CONTEXT.md",
-                "rewritten .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-            ],
-            state_updates: &[],
-            scaffold_guidance: true,
-            routed_command: None,
-        },
-    );
-
-    assert_ne!(
-        fs::read(root.join(".handbook/charter/CHARTER.md")).expect("charter after"),
-        b"custom charter\n"
-    );
-    assert_eq!(
-        fs::read(root.join(".handbook/feature_spec/FEATURE_SPEC.md")).expect("feature after"),
-        b"custom feature\n"
-    );
-    assert_ne!(
-        fs::read(root.join(".handbook/project_context/PROJECT_CONTEXT.md")).expect("context after"),
-        b"custom context\n"
-    );
-    assert_ne!(
-        fs::read(root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"))
-            .expect("inventory after"),
-        b"custom inventory\n"
-    );
-    assert_eq!(
-        fs::read(root.join(".handbook/state/pipeline/pipeline.foundation_inputs.yaml"))
-            .expect("state after"),
-        state_before
-    );
-    assert_eq!(
-        fs::read(root.join(".handbook/custom/KEEP.md")).expect("custom after"),
-        custom_before
-    );
-}
-
-#[test]
-#[cfg(any())]
-fn setup_refresh_reset_state_mutates_only_system_state() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    write_file(&root.join(".handbook/charter/CHARTER.md"), b"charter\n");
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature\n",
-    );
-    write_file(
-        &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
-        b"context\n",
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        b"inventory\n",
-    );
-    write_file(
-        &root.join(".handbook/state/pipeline/pipeline.foundation_inputs.yaml"),
-        b"pipeline state\n",
-    );
-    write_file(
-        &root.join(".handbook/state/pipeline/capture/cache.yaml"),
-        b"capture state\n",
-    );
-    write_file(&root.join(".handbook/custom/KEEP.md"), b"keep me\n");
-
-    let output = run_in(root, &["setup", "refresh", "--reset-state"]);
-    assert!(
-        output.status.success(),
-        "setup refresh --reset-state should succeed"
-    );
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_setup_success(
-        &stdout,
-        SetupSuccessExpectation {
-            outcome: "OUTCOME: READY",
-            object: "setup refresh",
-            next_safe_action: "NEXT SAFE ACTION: run `handbook doctor`",
-            root_status: "STATUS: reused canonical `.handbook/` root",
-            starter_actions: &[
-                "preserved .handbook/charter/CHARTER.md",
-                "preserved .handbook/project_context/PROJECT_CONTEXT.md",
-                "preserved .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-            ],
-            state_updates: &[
-                "reset .handbook/state/pipeline",
-                "reset .handbook/state/pipeline/capture",
-                "reset .handbook/state/pipeline/capture/cache.yaml",
-                "reset .handbook/state/pipeline/pipeline.foundation_inputs.yaml",
-            ],
-            scaffold_guidance: false,
-            routed_command: None,
-        },
-    );
-
-    assert_eq!(
-        fs::read(root.join(".handbook/charter/CHARTER.md")).expect("charter"),
-        b"charter\n"
-    );
-    assert_eq!(
-        fs::read(root.join(".handbook/feature_spec/FEATURE_SPEC.md")).expect("feature"),
-        b"feature\n"
-    );
-    assert_eq!(
-        fs::read(root.join(".handbook/project_context/PROJECT_CONTEXT.md")).expect("context"),
-        b"context\n"
-    );
-    assert_eq!(
-        fs::read(root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"))
-            .expect("inventory"),
-        b"inventory\n"
-    );
-    assert_eq!(
-        fs::read(root.join(".handbook/custom/KEEP.md")).expect("custom"),
-        b"keep me\n"
-    );
-    assert!(!root
-        .join(".handbook/state/pipeline/pipeline.foundation_inputs.yaml")
-        .exists());
-    assert!(!root
-        .join(".handbook/state/pipeline/capture/cache.yaml")
-        .exists());
-}
-
-#[cfg(unix)]
-#[test]
-#[cfg(any())]
-fn setup_refresh_reset_state_refusal_is_fail_safe() {
-    use std::os::unix::fs::symlink;
-
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    write_file(&root.join(".handbook/charter/CHARTER.md"), b"charter\n");
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature\n",
-    );
-    write_file(
-        &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
-        b"context\n",
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        b"inventory\n",
-    );
-    write_file(&root.join(".handbook/state/a.yaml"), b"a: 1\n");
-    let external = tempfile::tempdir().expect("external tempdir");
-    symlink(external.path(), root.join(".handbook/state/z_symlink")).expect("state symlink");
-
-    let output = run_in(root, &["setup", "refresh", "--reset-state"]);
-    assert!(
-        !output.status.success(),
-        "setup refresh --reset-state should refuse on symlink"
-    );
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_first_three_lines(
-        &stdout,
-        [
-            "OUTCOME: BLOCKED",
-            "OBJECT: setup",
-            "NEXT SAFE ACTION: repair the blocked target and rerun `handbook setup refresh`",
-        ],
-    );
-    assert!(stdout.contains("CATEGORY: MutationRefused"), "{stdout}");
-    assert!(
-        stdout.contains(
-            "SUMMARY: runtime state path `.handbook/state/z_symlink` cannot be reset through symlink"
-        ),
-        "{stdout}"
-    );
-    assert!(
-        root.join(".handbook/state/a.yaml").is_file(),
-        "preflight refusal must leave earlier files intact"
-    );
-}
-
-#[test]
-#[cfg(any())]
-fn bare_setup_respects_nested_git_root_boundary() {
-    let (_dir, nested) = nested_git_repo_inside_managed_parent_with_nested_cwd();
-    let child_root = nested.join("../..");
-
-    let output = binary_in(&nested)
-        .arg("setup")
-        .output()
-        .expect("setup should run");
-
-    assert!(output.status.success(), "setup should succeed");
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_setup_success(
-        &stdout,
-        SetupSuccessExpectation {
-            outcome: "OUTCOME: SCAFFOLDED",
-            object: "setup init",
-            next_safe_action: "NEXT SAFE ACTION: run `handbook doctor`",
-            root_status: "STATUS: established canonical `.handbook/` root",
-            starter_actions: &[
-                "created .handbook/charter/CHARTER.md",
-                "created .handbook/project_context/PROJECT_CONTEXT.md",
-                "created .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-            ],
-            state_updates: &[],
-            scaffold_guidance: true,
-            routed_command: Some("handbook setup init"),
-        },
-    );
-
-    assert!(child_root.join(".handbook/charter/CHARTER.md").is_file());
-    assert!(child_root
-        .join(".handbook/project_context/PROJECT_CONTEXT.md")
-        .is_file());
-    assert!(child_root
-        .join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md")
-        .is_file());
-    assert!(!child_root
-        .join(".handbook/feature_spec/FEATURE_SPEC.md")
-        .exists());
 }
 
 #[test]
@@ -5605,95 +4977,6 @@ fn inspect_retry_after_repair_clears_missing_root_refusal() {
 
 #[test]
 #[cfg(any())]
-fn doctor_retry_after_repair_reports_ready_after_repair() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    let first = run_in(root, &["doctor"]);
-    assert!(!first.status.success(), "initial doctor should fail");
-    let first_stdout = String::from_utf8(first.stdout).expect("stdout is utf-8");
-    assert!(first_stdout.contains("SCAFFOLDED"));
-    assert!(first_stdout.contains("ROOT STATUS: MISSING"));
-    assert!(first_stdout.contains("NEXT SAFE ACTION: run `handbook setup`"));
-
-    repair_to_ready(root);
-
-    let second = run_in(root, &["doctor"]);
-    assert!(
-        second.status.success(),
-        "doctor should succeed after repair"
-    );
-    let second_stdout = String::from_utf8(second.stdout).expect("stdout is utf-8");
-    assert!(
-        second_stdout.contains("BASELINE_COMPLETE"),
-        "{second_stdout}"
-    );
-    assert!(
-        second_stdout.contains("## BASELINE CHECKLIST"),
-        "{second_stdout}"
-    );
-    assert!(second_stdout.contains("ROOT STATUS: OK"), "{second_stdout}");
-    assert!(
-        second_stdout.contains("NEXT SAFE ACTION: <none>"),
-        "{second_stdout}"
-    );
-    assert!(
-        second_stdout.contains(
-            "CHARTER [.handbook/charter/CHARTER.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author charter --from-inputs <path|->`"
-        ),
-        "{second_stdout}"
-    );
-    assert!(
-        second_stdout.contains(
-            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author project-context --from-inputs <path|->`"
-        ),
-        "{second_stdout}"
-    );
-    assert!(
-        second_stdout.contains(
-            "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author environment-inventory --from-inputs <path|->`"
-        ),
-        "{second_stdout}"
-    );
-}
-
-#[test]
-#[cfg(any())]
-fn doctor_rejects_legacy_placeholder_project_context_truth() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
-        legacy_placeholder_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
-
-    let output = run_in(root, &["doctor"]);
-    assert!(
-        !output.status.success(),
-        "doctor should reject legacy placeholder project context"
-    );
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert!(stdout.contains("INVALID_BASELINE"), "{stdout}");
-    assert!(
-        stdout.contains(
-            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: INVALID ACTION: run `handbook author project-context --from-inputs <path|->`"
-        ),
-        "{stdout}"
-    );
-}
-
-#[test]
-#[cfg(any())]
 fn doctor_marks_empty_charter_as_invalid_baseline() {
     assert_doctor_empty_baseline_invalid(
         ".handbook/charter/CHARTER.md",
@@ -5709,16 +4992,6 @@ fn doctor_marks_empty_project_context_as_invalid_baseline() {
         ".handbook/project_context/PROJECT_CONTEXT.md",
         "NEXT SAFE ACTION: run `handbook author project-context --from-inputs <path|->`",
         "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: EMPTY ACTION: run `handbook author project-context --from-inputs <path|->`",
-    );
-}
-
-#[test]
-#[cfg(any())]
-fn doctor_marks_empty_environment_inventory_as_invalid_baseline() {
-    assert_doctor_empty_baseline_invalid(
-        ".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-        "NEXT SAFE ACTION: run `handbook author environment-inventory --from-inputs <path|->`",
-        "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: EMPTY ACTION: run `handbook author environment-inventory --from-inputs <path|->`",
     );
 }
 
@@ -5755,43 +5028,6 @@ fn generate_refuses_semantically_invalid_required_project_context() {
 }
 
 #[test]
-fn inspect_omits_semantically_invalid_optional_environment_inventory_but_stays_ready() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    write_valid_selected_charter(root);
-    write_valid_selected_project_context(root);
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        b"# Environment Inventory\n\nlegacy repo/project root claim\n",
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature-body",
-    );
-
-    let output = run_in(root, &["inspect"]);
-    assert!(output.status.success(), "inspect should succeed");
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert_first_three_lines(
-        &stdout,
-        [
-            "OUTCOME: READY",
-            "OBJECT: planning.packet",
-            "NEXT SAFE ACTION: run `handbook generate --packet planning.packet`",
-        ],
-    );
-    assert!(stdout.contains(
-        "optional source omitted: .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md (invalid canonical truth)"
-    ));
-    assert!(!stdout.contains("### ENVIRONMENT_INVENTORY"));
-    assert!(!stdout.contains(
-        "EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]"
-    ));
-}
-
-#[test]
 fn generate_blocks_invalid_required_charter_with_required_artifact_invalid() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
@@ -5816,128 +5052,6 @@ fn generate_blocks_invalid_required_charter_with_required_artifact_invalid() {
     );
     assert!(stdout.contains("CATEGORY: RequiredArtifactInvalid"));
     assert!(stdout.contains("required canonical artifact is invalid"));
-}
-
-#[test]
-#[cfg(any())]
-fn workspace_root_does_not_ship_canonical_scaffold_and_doctor_points_to_setup() {
-    let (_dir, root) = tracked_workspace_checkout();
-
-    for path in [
-        ".handbook/charter/CHARTER.md",
-        ".handbook/project_context/PROJECT_CONTEXT.md",
-        ".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-    ] {
-        assert!(
-            !root.join(path).exists(),
-            "workspace root should not ship committed scaffold file {path}"
-        );
-    }
-
-    let output = run_in(root.as_path(), &["doctor"]);
-    assert!(
-        !output.status.success(),
-        "doctor should stay blocked in the checked-in workspace root"
-    );
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert!(stdout.contains("SCAFFOLDED"), "{stdout}");
-    assert!(stdout.contains("ROOT STATUS: MISSING"), "{stdout}");
-    assert!(
-        stdout.contains("NEXT SAFE ACTION: run `handbook setup`"),
-        "{stdout}"
-    );
-}
-
-#[test]
-#[cfg(any())]
-fn setup_scaffold_does_not_satisfy_doctor_or_generate_until_required_truth_is_replaced() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    let setup = run_in(root, &["setup"]);
-    assert!(setup.status.success(), "setup should succeed");
-    let setup_stdout = String::from_utf8(setup.stdout).expect("stdout is utf-8");
-    assert_setup_success(
-        &setup_stdout,
-        SetupSuccessExpectation {
-            outcome: "OUTCOME: SCAFFOLDED",
-            object: "setup init",
-            next_safe_action: "NEXT SAFE ACTION: run `handbook doctor`",
-            root_status: "STATUS: established canonical `.handbook/` root",
-            starter_actions: &[
-                "created .handbook/charter/CHARTER.md",
-                "created .handbook/project_context/PROJECT_CONTEXT.md",
-                "created .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
-            ],
-            state_updates: &[],
-            scaffold_guidance: true,
-            routed_command: Some("handbook setup init"),
-        },
-    );
-
-    let doctor_after_setup = run_in(root, &["doctor"]);
-    assert!(
-        !doctor_after_setup.status.success(),
-        "doctor should stay blocked on shipped starter templates"
-    );
-    let doctor_stdout = String::from_utf8(doctor_after_setup.stdout).expect("stdout is utf-8");
-    assert!(doctor_stdout.contains("SCAFFOLDED"), "{doctor_stdout}");
-    assert!(
-        doctor_stdout.contains("## BASELINE CHECKLIST"),
-        "{doctor_stdout}"
-    );
-    assert!(doctor_stdout.contains("ROOT STATUS: OK"), "{doctor_stdout}");
-    assert!(
-        doctor_stdout.contains(
-            "CHARTER [.handbook/charter/CHARTER.md] STATUS: STARTER_OWNED ACTION: run `handbook author charter --from-inputs <path|->`"
-        ),
-        "{doctor_stdout}"
-    );
-    assert!(
-        doctor_stdout.contains(
-            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: STARTER_OWNED ACTION: run `handbook author project-context --from-inputs <path|->`"
-        ),
-        "{doctor_stdout}"
-    );
-    assert!(
-        doctor_stdout.contains(
-            "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: STARTER_OWNED ACTION: run `handbook author environment-inventory --from-inputs <path|->`"
-        ),
-        "{doctor_stdout}"
-    );
-
-    let generate_after_setup = run_in(root, &["generate"]);
-    assert!(
-        !generate_after_setup.status.success(),
-        "generate should refuse on shipped starter templates"
-    );
-    let generate_stdout = String::from_utf8(generate_after_setup.stdout).expect("stdout is utf-8");
-    assert_first_three_lines(
-        &generate_stdout,
-        [
-            "OUTCOME: REFUSED",
-            "OBJECT: planning.packet",
-            "NEXT SAFE ACTION: run `handbook author charter --from-inputs <path|->`",
-        ],
-    );
-    assert!(generate_stdout.contains("CATEGORY: RequiredArtifactStarterTemplate"));
-
-    repair_to_ready(root);
-
-    let doctor_after_repair = run_in(root, &["doctor"]);
-    assert!(
-        doctor_after_repair.status.success(),
-        "doctor should report ready once required truth is replaced"
-    );
-    let doctor_after_repair_stdout =
-        String::from_utf8(doctor_after_repair.stdout).expect("stdout is utf-8");
-    assert!(doctor_after_repair_stdout.contains("BASELINE_COMPLETE"));
-
-    let generate_after_repair = run_in(root, &["generate"]);
-    assert!(
-        generate_after_repair.status.success(),
-        "generate should succeed once required truth is replaced"
-    );
 }
 
 #[test]
@@ -6179,10 +5293,6 @@ fn doctor_does_not_cross_nested_git_repo_boundary_into_parent_system_root() {
 #[test]
 fn generate_emits_real_packet_body_when_ready() {
     let (_dir, root) = planning_ready_repo();
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
 
     let output = binary_in(&root)
         .arg("generate")
@@ -6241,10 +5351,6 @@ fn generate_emits_real_packet_body_when_ready() {
         "expected committed charter fixture contents: {stdout}"
     );
     assert!(
-        stdout.contains("### ENVIRONMENT_INVENTORY"),
-        "expected environment inventory body section: {stdout}"
-    );
-    assert!(
         stdout.contains("### FEATURE_SPEC"),
         "expected feature body section: {stdout}"
     );
@@ -6289,33 +5395,28 @@ fn generate_succeeds_from_nested_directory_inside_ready_repo() {
 }
 
 #[test]
-#[cfg(unix)]
 fn doctor_reports_ready_when_required_artifacts_present() {
     let dir = profile_ready_repo();
     let root = dir.path();
 
     let output = run_in(root, &["doctor"]);
 
-    // HCM-1.4 deliberately leaves the shipped conditional Environment Context
-    // indeterminate until the separately owned condition evaluator lands. This
-    // positive content proof must preserve that exit/status contract while
-    // proving the selected Project Context row is complete and non-null.
-    assert!(!output.status.success());
+    assert!(output.status.success());
 
     let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert!(stdout.starts_with("OUTCOME: INDETERMINATE\n"), "{stdout}");
+    assert!(stdout.starts_with("OUTCOME: READY\n"), "{stdout}");
     assert!(stdout.contains("## PROJECT CONTEXT\n"), "{stdout}");
     assert!(stdout.contains("PATH: .handbook/project/context.yaml SOURCE FINGERPRINT: sha256:c8646d5821d80fe8e0eeade2713fc63f6e91b2cbb64f6832b5a1f178b810d02f RENDERED OUTPUT FINGERPRINT: sha256:9502d897dc9542a492fdc50ca9ebb2340ac59be25b37a615ea6cb842387641fd MEDIA TYPE: text/markdown\n"), "{stdout}");
 
     let json_output = run_in(root, &["doctor", "--json"]);
-    assert!(!json_output.status.success());
+    assert!(json_output.status.success());
     let json_stdout = String::from_utf8(json_output.stdout).expect("doctor JSON is utf-8");
     assert!(json_stdout.ends_with('\n'));
     assert!(!json_stdout.ends_with("\n\n"));
     let value: serde_json::Value = serde_json::from_str(&json_stdout).expect("doctor JSON");
     assert_eq!(value["schema_id"], "handbook.repository-doctor-report");
     assert_eq!(value["schema_version"], "1.2.0");
-    assert_eq!(value["status"], "indeterminate");
+    assert_eq!(value["status"], "ready");
     assert_eq!(value["project_context"]["instance_id"], "project_context");
     assert_eq!(
         value["project_context"]["kind_ref"],
@@ -6759,10 +5860,6 @@ fn inspect_preserves_full_execution_demo_fixture_lineage_order() {
         valid_selected_project_context_yaml().as_bytes(),
     );
     write_file(
-        &fixture_root.join("environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
-    write_file(
         &fixture_root.join("feature_spec/FEATURE_SPEC.md"),
         b"demo feature",
     );
@@ -6789,8 +5886,7 @@ fn inspect_preserves_full_execution_demo_fixture_lineage_order() {
         &[
             "1. Charter [.handbook/project/charter.yaml]",
             "2. ProjectContext [.handbook/project/context.yaml]",
-            "3. EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]",
-            "4. FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]",
+            "3. FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]",
         ],
     );
 
@@ -6800,7 +5896,6 @@ fn inspect_preserves_full_execution_demo_fixture_lineage_order() {
         &[
             "\"canonical_repo_relative_path\": \".handbook/project/charter.yaml\"",
             "\"canonical_repo_relative_path\": \".handbook/project/context.yaml\"",
-            "\"canonical_repo_relative_path\": \".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md\"",
             "\"canonical_repo_relative_path\": \".handbook/feature_spec/FEATURE_SPEC.md\"",
         ],
     );
@@ -6816,10 +5911,6 @@ fn generate_non_ready_execution_demo_preserves_fixture_backed_labeling() {
     write_file(
         &fixture_root.join("project/context.yaml"),
         valid_selected_project_context_yaml().as_bytes(),
-    );
-    write_file(
-        &fixture_root.join("environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
     );
     write_file(
         &fixture_root.join("feature_spec/FEATURE_SPEC.md"),
@@ -6867,86 +5958,10 @@ fn generate_non_ready_execution_demo_preserves_fixture_backed_labeling() {
         &stdout,
         &[
             "1. ProjectContext [.handbook/project/context.yaml]",
-            "2. EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]",
+            "2. FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]",
         ],
     );
     assert!(stdout.contains("document_not_object"), "{stdout}");
-    assert!(
-        !stdout.contains(
-            "tests/fixtures/execution_demo/non-ready/.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"
-        ),
-        "expected typed lineage rendering instead of ad hoc filesystem-derived entries: {stdout}"
-    );
-}
-
-#[test]
-fn inspect_non_ready_execution_demo_preserves_environment_inventory_in_fixture_lineage() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-    let fixture_root = root.join("tests/fixtures/execution_demo/non-ready/.handbook");
-
-    write_file(&fixture_root.join("project/charter.yaml"), b"");
-    write_file(
-        &fixture_root.join("project/context.yaml"),
-        valid_selected_project_context_yaml().as_bytes(),
-    );
-    write_file(
-        &fixture_root.join("environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
-    write_file(
-        &fixture_root.join("feature_spec/FEATURE_SPEC.md"),
-        b"demo feature",
-    );
-
-    let output = binary_in(root)
-        .args([
-            "inspect",
-            "--packet",
-            "execution.demo.packet",
-            "--fixture-set",
-            "non-ready",
-        ])
-        .output()
-        .expect("inspect should run");
-
-    assert!(
-        !output.status.success(),
-        "inspect should be non-zero when the execution demo fixture is not ready: {}",
-        String::from_utf8_lossy(&output.stdout)
-    );
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    let fixture_section_start = stdout
-        .find("MODE: fixture-backed execution demo")
-        .expect("fixture-backed label should be injected near the top");
-    let decision_log_start = stdout.find("## DECISION LOG").expect("decision log");
-    assert!(
-        fixture_section_start < decision_log_start,
-        "expected fixture section before decision log for non-ready inspect output: {stdout}"
-    );
-    assert!(
-        stdout.contains("FIXTURE SET: non-ready"),
-        "expected fixture set id: {stdout}"
-    );
-    assert!(
-        stdout.contains("FIXTURE LINEAGE:"),
-        "expected fixture lineage list: {stdout}"
-    );
-    assert_in_order(
-        &stdout,
-        &[
-            "1. ProjectContext [.handbook/project/context.yaml]",
-            "2. EnvironmentInventory [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md]",
-        ],
-    );
-    assert!(stdout.contains("document_not_object"), "{stdout}");
-    assert!(
-        !stdout.contains(
-            "tests/fixtures/execution_demo/non-ready/.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"
-        ),
-        "expected typed lineage rendering instead of ad hoc filesystem-derived entries: {stdout}"
-    );
 }
 
 #[test]
@@ -7279,41 +6294,6 @@ fn inspect_refuses_when_required_project_context_path_is_malformed() {
     assert!(stdout.contains("non_regular_file_refused"));
     assert!(stdout.contains("## JSON FALLBACK"));
     assert!(!stdout.contains("## PACKET BODY"));
-}
-
-#[test]
-#[cfg(any())]
-fn doctor_blocks_when_optional_project_context_path_is_malformed() {
-    let dir = malformed_optional_project_context_repo();
-
-    let output = run_in(dir.path(), &["doctor"]);
-    assert!(!output.status.success(), "doctor should return nonzero");
-
-    let stdout = String::from_utf8(output.stdout).expect("stdout is utf-8");
-    assert!(stdout.contains("INVALID_BASELINE"), "{stdout}");
-    assert!(stdout.contains("ROOT STATUS: OK"), "{stdout}");
-    assert!(
-        stdout.contains("NEXT SAFE ACTION: run `handbook setup refresh`"),
-        "{stdout}"
-    );
-    assert!(
-        stdout.contains(
-            "PROJECT_CONTEXT [.handbook/project_context/PROJECT_CONTEXT.md] STATUS: INVALID ACTION: run `handbook author project-context --from-inputs <path|->`"
-        ),
-        "{stdout}"
-    );
-    assert!(
-        stdout.contains(
-            "CHARTER [.handbook/charter/CHARTER.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author charter --from-inputs <path|->`"
-        ),
-        "{stdout}"
-    );
-    assert!(
-        stdout.contains(
-            "ENVIRONMENT_INVENTORY [.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md] STATUS: VALID_CANONICAL_TRUTH ACTION: run `handbook author environment-inventory --from-inputs <path|->`"
-        ),
-        "{stdout}"
-    );
 }
 
 fn command_section_lines(help: &str) -> Vec<&str> {

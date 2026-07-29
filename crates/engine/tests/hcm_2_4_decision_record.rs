@@ -19,7 +19,7 @@ const DECISION_KIND_REF: &str = "handbook.artifact-kind.decision-record@1.1.0";
 const DECISION_INSTANCE_ID: &str = "decision_record";
 const DECISION_PROFILE_REF: &str = "example.profile.hcm-2-4-decision-record@1.0.0";
 const DECISION_PROFILE_FINGERPRINT: &str =
-    "sha256:09517ce70b7563be1eba9065794c1839d9b3a5902b648a6e247e8e451fd913dd";
+    "sha256:2c2d744185a63c328d1363d0df3f50d8a1e3cff0e86f9575e39f69c9a7dba37b";
 
 fn decision_record_fixture_root() -> std::path::PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/hcm_2_4_decision_record")
@@ -152,19 +152,12 @@ fn decision_record_fixture_profile_fingerprint(
         .expect("profile object")
         .remove("profile_fingerprint")
         .expect("profile fingerprint");
-    let condition_ref =
-        ExactDefinitionRef::parse("handbook.condition.project.managed-operational-surface@1.0.0")
-            .expect("condition ref");
-    let condition = root
-        .project_condition_registry()
-        .definition(&condition_ref)
-        .expect("condition definition");
     let descriptors = ArtifactInstanceRegistry::resolve(
         definition["artifact_instances"]
             .as_array()
             .expect("artifact instances"),
         root.artifact_kind_registry(),
-        &[condition],
+        &[],
     )
     .expect("descriptor closure");
     let computed = DefinitionFingerprint::from_json_value(&json!({

@@ -1,76 +1,31 @@
-#[cfg(unix)]
-use std::panic::{catch_unwind, resume_unwind, AssertUnwindSafe};
 use std::path::Path;
-#[cfg(unix)]
-use std::sync::{Mutex, OnceLock};
 
+#[cfg(unix)]
+use handbook_compiler::preflight_author_project_context;
 use handbook_compiler::{
-    author_charter, author_environment_inventory_from_input, author_project_context_from_input,
-    parse_charter_structured_input_yaml, parse_environment_inventory_structured_input_yaml,
+    author_charter, author_project_context_from_input, parse_charter_structured_input_yaml,
     parse_project_context_input_yaml, preflight_author_charter,
-    preflight_author_charter_from_input, preflight_author_environment_inventory,
-    preflight_author_environment_inventory_from_input, render_charter_markdown,
-    render_project_context_markdown, resolve_shipped_template_library, resolve_template_library,
-    validate_charter_structured_input, validate_environment_inventory_markdown,
-    validate_project_context_input, AuthorCharterRefusalKind,
-    AuthorEnvironmentInventoryRefusalKind, AuthorProjectContextRefusalKind, CanonicalArtifactKind,
-    CanonicalProjectContext, CharterAudience, CharterBackwardCompatibility,
+    preflight_author_charter_from_input, render_charter_markdown, render_project_context_markdown,
+    resolve_shipped_template_library, resolve_template_library, validate_charter_structured_input,
+    validate_project_context_input, AuthorCharterRefusalKind, AuthorProjectContextRefusalKind,
+    CanonicalArtifactKind, CanonicalProjectContext, CharterAudience, CharterBackwardCompatibility,
     CharterDebtTrackingInput, CharterDecisionRecordsInput, CharterDefaultImplicationsInput,
     CharterDeprecationPolicy, CharterDimensionInput, CharterDimensionName, CharterDomainInput,
     CharterExceptionsInput, CharterExpectedLifetime, CharterObservabilityThreshold,
     CharterOperationalRealityInput, CharterPostureInput, CharterProjectClassification,
     CharterProjectConstraintsInput, CharterProjectInput, CharterRequiredness,
     CharterRolloutControls, CharterRuntimeEnvironment, CharterStructuredInput, CharterSurface,
-    CharterTemplateLibraryOverride, EnvironmentInventoryStructuredInput,
-    EnvironmentInventoryTemplateLibraryOverride, TemplateLibraryAsset,
-    TemplateLibraryOverrideRequest, TemplateLibraryRequest, TemplateLibraryResolveErrorKind,
-    TemplateLibraryResolveRequest, TemplateLibrarySelection,
-    CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH, DEFAULT_EXCEPTION_RECORD_LOCATION,
-};
-#[cfg(unix)]
-use handbook_compiler::{
-    preflight_author_project_context, render_environment_inventory_markdown,
-    validate_environment_inventory_structured_input,
+    CharterTemplateLibraryOverride, TemplateLibraryAsset, TemplateLibraryOverrideRequest,
+    TemplateLibraryRequest, TemplateLibraryResolveErrorKind, TemplateLibraryResolveRequest,
+    TemplateLibrarySelection, DEFAULT_EXCEPTION_RECORD_LOCATION,
 };
 use handbook_engine::{canonical_artifact_descriptors, setup_starter_template_bytes};
-
-#[path = "../../engine/tests/support/hcm_2_2_committed_charter.rs"]
-mod hcm_2_2_committed_charter;
-
-#[cfg(unix)]
-const AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR: &str =
-    "HANDBOOK_AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC";
 
 fn write_file(path: &Path, contents: &[u8]) {
     if let Some(parent) = path.parent() {
         std::fs::create_dir_all(parent).expect("mkdirs");
     }
     std::fs::write(path, contents).expect("write");
-}
-
-#[cfg(unix)]
-fn author_runtime_lock() -> &'static Mutex<()> {
-    static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
-    LOCK.get_or_init(|| Mutex::new(()))
-}
-
-#[cfg(unix)]
-fn with_environment_inventory_now_utc<T>(value: &str, action: impl FnOnce() -> T) -> T {
-    let _guard = author_runtime_lock().lock().expect("author runtime lock");
-    let previous = std::env::var_os(AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR);
-    std::env::set_var(AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR, value);
-
-    let result = catch_unwind(AssertUnwindSafe(action));
-
-    match previous {
-        Some(previous) => std::env::set_var(AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR, previous),
-        None => std::env::remove_var(AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC_ENV_VAR),
-    }
-
-    match result {
-        Ok(value) => value,
-        Err(payload) => resume_unwind(payload),
-    }
 }
 
 fn valid_input() -> CharterStructuredInput {
@@ -183,15 +138,6 @@ fn valid_project_context_input() -> CanonicalProjectContext {
     }
 }
 
-fn write_valid_selected_project_context(repo_root: &std::path::Path) {
-    let yaml = handbook_engine::serialize_canonical_project_context(
-        &handbook_engine::resolve_shipped_profile_decisions(".").unwrap(),
-        &valid_project_context_input(),
-    )
-    .expect("serialize selected Project Context");
-    write_file(&repo_root.join(".handbook/project/context.yaml"), &yaml);
-}
-
 fn expected_project_context_markdown() -> String {
     String::from_utf8(
         render_project_context_markdown(&valid_project_context_input())
@@ -202,118 +148,6 @@ fn expected_project_context_markdown() -> String {
 
 fn legacy_placeholder_project_context_markdown() -> String {
     "legacy Project Context Markdown is not canonical YAML\n".to_owned()
-}
-
-fn valid_environment_inventory_input() -> EnvironmentInventoryStructuredInput {
-    parse_environment_inventory_structured_input_yaml(
-        r#"
-schema_version: "0.1.0"
-project_name: "Handbook"
-owner: "compiler-team"
-team: "System"
-repo_or_project_ref: "handbook"
-charter_ref: ".handbook/project/charter.yaml"
-project_context_ref: ".handbook/project/context.yaml"
-environment_variables: []
-secret_handling:
-  charter_posture: "never store real credentials in repository artifacts"
-  storage_locations: ["operator secret store"]
-  rotation_expectations: "follow the owning provider policy"
-external_services: []
-runtime_assumptions:
-  listening_ports: "None"
-  filesystem_requirements: "write access to the managed repository"
-  persistent_storage: "repository-local canonical artifacts"
-  network_assumptions: "Unknown for future hosted use; offline authoring requires none"
-  performance_budgets: "normal CLI latency"
-local_development:
-  prerequisites: ["Rust stable toolchain"]
-  works_on_my_machine_prevention: "run workspace tests and install smoke"
-  environment_file_pattern: "None"
-ci:
-  system: "GitHub Actions"
-  required_secret_names: ["None"]
-  services: ["None"]
-  artifacts: ["test output"]
-production:
-  exists_today: false
-  hosting_model: "Not applicable"
-  runtime_environments: ["local CLI"]
-  required_secret_names: ["None"]
-  observability: "command output and CI logs"
-  backup_and_disaster_recovery: "git history"
-tooling:
-  primary_language_runtime: "Rust stable"
-  package_manager_build_system: "Cargo"
-  lockfiles: ["Cargo.lock"]
-  lint_type_test_tools: ["rustfmt", "clippy", "cargo test"]
-  minimum_versions: ["Rust 2021 edition"]
-update_contract:
-  exception_record_location: ".handbook/project/charter.yaml#/governance/exception_process"
-known_unknowns:
-  - item: "future hosted runtime requirements"
-    owner: "project owner"
-    revisit_trigger: "before adding a hosted deployment"
-"#,
-    )
-    .expect("valid environment-inventory input")
-}
-
-fn expected_environment_inventory_markdown(project_context_ref: &str) -> String {
-    format!(
-        "# Environment Inventory - Handbook\n\n> **Canonical File:** `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`\n> **Project Context Ref:** {project_context_ref}\n\n## What this is\nCanonical environment and runtime inventory.\n\n## How to use\n- Update this file when runtime assumptions change.\n\n## 1) Environment Variables (Inventory)\n- None yet.\n\n## 2) External Services / Infrastructure Dependencies\n- None yet.\n\n## 3) Runtime Assumptions (Ports, Paths, Storage, Limits)\n- None yet.\n\n## 4) Local Development Requirements\n- None yet.\n\n## 5) CI Requirements\n- None yet.\n\n## 6) Production / Deployment Requirements (even if not live yet)\n- None yet.\n\n## 7) Dependency & Tooling Inventory (project-specific)\n- None yet.\n\n## 8) Update Contract (non-negotiable)\n- Update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.\n\n## 9) Known Unknowns\n- None yet.\n"
-    )
-    .trim_end()
-    .to_string()
-}
-
-fn valid_charter_markdown() -> &'static str {
-    "# Engineering Charter — Handbook
-
-## What this is
-Body.
-
-## How to use this charter
-Use it.
-
-## Rubric: 1–5 rigor levels
-Levels.
-
-## Project baseline posture
-Baseline.
-
-## Domains / areas (optional overrides)
-None.
-
-## Posture at a glance (quick scan)
-Snapshot.
-
-## Dimensions (details + guardrails)
-Details.
-
-## Cross-cutting red lines (global non-negotiables)
-- Keep trust boundaries intact.
-
-## Exceptions / overrides process
-- **Approvers:** project_owner
-- **Record location:** docs/exceptions.md
-- **Minimum required fields:**
-  - what
-  - why
-  - scope
-  - risk
-  - owner
-  - expiry_or_revisit_date
-
-## Debt tracking expectations
-Tracked in issues.
-
-## Decision Records (ADRs): how to use this charter
-Use ADRs.
-
-## Review & updates
-Review monthly.
-"
 }
 
 fn required_headings() -> [&'static str; 12] {
@@ -543,10 +377,7 @@ fn author_charter_is_deterministic_and_does_not_invoke_codex() {
 #[test]
 fn shipped_template_library_resolver_exposes_canonical_repo_relative_authoring_assets() {
     let TemplateLibrarySelection::Charter(charter) =
-        resolve_shipped_template_library(TemplateLibraryRequest::CharterAuthoring)
-    else {
-        panic!("expected charter template-library selection");
-    };
+        resolve_shipped_template_library(TemplateLibraryRequest::CharterAuthoring);
 
     assert_eq!(
         charter.authoring_method().asset(),
@@ -572,35 +403,6 @@ fn shipped_template_library_resolver_exposes_canonical_repo_relative_authoring_a
         charter.template().repo_relative_path(),
         "core/library/charter/charter.md.tmpl"
     );
-
-    let TemplateLibrarySelection::EnvironmentInventory(environment_inventory) =
-        resolve_shipped_template_library(TemplateLibraryRequest::EnvironmentInventoryAuthoring)
-    else {
-        panic!("expected environment-inventory template-library selection");
-    };
-
-    assert_eq!(
-        environment_inventory.synthesize_directive().asset(),
-        TemplateLibraryAsset::EnvironmentInventorySynthesizeDirective
-    );
-    assert_eq!(
-        environment_inventory
-            .synthesize_directive()
-            .repo_relative_path(),
-        "core/library/environment_inventory/environment_inventory_directive.md"
-    );
-    assert_eq!(
-        environment_inventory.template().asset(),
-        TemplateLibraryAsset::EnvironmentInventoryTemplate
-    );
-    assert_eq!(
-        environment_inventory.template().repo_relative_path(),
-        "core/library/environment_inventory/ENVIRONMENT_INVENTORY.md.tmpl"
-    );
-    assert!(environment_inventory
-        .template()
-        .contents()
-        .contains("# Environment Inventory"));
 }
 
 #[test]
@@ -622,16 +424,6 @@ fn template_library_resolver_accepts_valid_overrides_for_approved_asset_families
         b"alt charter template
 ",
     );
-    write_file(
-        &root.join("core/library/environment_inventory/environment_inventory_directive_alt.md"),
-        b"alt environment inventory directive
-",
-    );
-    write_file(
-        &root.join("core/library/environment_inventory/ENVIRONMENT_INVENTORY_ALT.md.tmpl"),
-        b"alt environment inventory template
-",
-    );
 
     let charter_request = TemplateLibraryResolveRequest::new(
         TemplateLibraryRequest::CharterAuthoring,
@@ -647,10 +439,7 @@ fn template_library_resolver_accepts_valid_overrides_for_approved_asset_families
             .with_template_repo_relative_path("core/library/charter/charter_alt.md.tmpl"),
     ));
     let TemplateLibrarySelection::Charter(charter) =
-        resolve_template_library(root, &charter_request).expect("charter overrides")
-    else {
-        panic!("expected charter selection");
-    };
+        resolve_template_library(root, &charter_request).expect("charter overrides");
     assert_eq!(
         charter.authoring_method().repo_relative_path(),
         "core/library/authoring/charter_authoring_method_alt.md"
@@ -676,44 +465,6 @@ fn template_library_resolver_accepts_valid_overrides_for_approved_asset_families
     assert_eq!(
         charter.template().contents(),
         "alt charter template
-"
-    );
-
-    let environment_request =
-        TemplateLibraryResolveRequest::new(TemplateLibraryRequest::EnvironmentInventoryAuthoring)
-            .with_override(TemplateLibraryOverrideRequest::EnvironmentInventory(
-                EnvironmentInventoryTemplateLibraryOverride::new()
-                    .with_synthesize_directive_repo_relative_path(
-                        "core/library/environment_inventory/environment_inventory_directive_alt.md",
-                    )
-                    .with_template_repo_relative_path(
-                        "core/library/environment_inventory/ENVIRONMENT_INVENTORY_ALT.md.tmpl",
-                    ),
-            ));
-    let TemplateLibrarySelection::EnvironmentInventory(environment_inventory) =
-        resolve_template_library(root, &environment_request)
-            .expect("environment inventory overrides")
-    else {
-        panic!("expected environment inventory selection");
-    };
-    assert_eq!(
-        environment_inventory
-            .synthesize_directive()
-            .repo_relative_path(),
-        "core/library/environment_inventory/environment_inventory_directive_alt.md"
-    );
-    assert_eq!(
-        environment_inventory.synthesize_directive().contents(),
-        "alt environment inventory directive
-"
-    );
-    assert_eq!(
-        environment_inventory.template().repo_relative_path(),
-        "core/library/environment_inventory/ENVIRONMENT_INVENTORY_ALT.md.tmpl"
-    );
-    assert_eq!(
-        environment_inventory.template().contents(),
-        "alt environment inventory template
 "
     );
 }
@@ -773,7 +524,7 @@ fn template_library_resolver_refuses_unsafe_override_paths_and_missing_files() {
 }
 
 #[test]
-fn template_library_resolver_refuses_override_family_and_asset_kind_mismatches() {
+fn template_library_resolver_refuses_asset_kind_mismatches() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
     write_file(
@@ -781,24 +532,6 @@ fn template_library_resolver_refuses_override_family_and_asset_kind_mismatches()
         b"alt charter directive
 ",
     );
-
-    let family_mismatch_request = TemplateLibraryResolveRequest::new(
-        TemplateLibraryRequest::CharterAuthoring,
-    )
-    .with_override(TemplateLibraryOverrideRequest::EnvironmentInventory(
-        EnvironmentInventoryTemplateLibraryOverride::new().with_template_repo_relative_path(
-            "core/library/environment_inventory/ENVIRONMENT_INVENTORY_ALT.md.tmpl",
-        ),
-    ));
-    let family_mismatch_err = resolve_template_library(root, &family_mismatch_request)
-        .expect_err("override family mismatch should refuse");
-    assert_eq!(
-        family_mismatch_err.kind,
-        TemplateLibraryResolveErrorKind::OverrideFamilyMismatch
-    );
-    assert!(family_mismatch_err
-        .summary
-        .contains("does not match resolver request"));
 
     let asset_kind_mismatch_request = TemplateLibraryResolveRequest::new(
         TemplateLibraryRequest::CharterAuthoring,
@@ -1224,469 +957,4 @@ fn project_context_legacy_starter_is_not_selected_canonical_truth() {
     legacy_authoring_fixture_repo(dir.path());
 
     assert!(!dir.path().join(".handbook/project/context.yaml").exists());
-}
-
-#[test]
-fn parse_environment_inventory_inputs_maps_malformed_yaml_refusal() {
-    let error = parse_environment_inventory_structured_input_yaml("project_name: [")
-        .expect_err("malformed input must refuse");
-    assert_eq!(
-        error.kind,
-        AuthorEnvironmentInventoryRefusalKind::MalformedStructuredInput
-    );
-}
-
-#[cfg(unix)]
-#[test]
-fn preflight_environment_inventory_from_input_is_non_mutating() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_valid_selected_project_context(dir.path());
-    let canonical = dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH);
-    let before = std::fs::read(&canonical).expect("starter inventory");
-    let input = valid_environment_inventory_input();
-
-    validate_environment_inventory_structured_input(&input).expect("valid input");
-    preflight_author_environment_inventory_from_input(dir.path(), &input)
-        .expect("preflight should succeed");
-
-    assert_eq!(
-        std::fs::read(&canonical).expect("inventory after preflight"),
-        before
-    );
-    assert!(!dir
-        .path()
-        .join(".handbook/state/authoring/environment-inventory.lock")
-        .exists());
-}
-
-#[cfg(unix)]
-#[test]
-fn environment_inventory_preflight_ignores_retired_project_context_non_regular_sentinel() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    let retired = dir
-        .path()
-        .join(".handbook/project_context/PROJECT_CONTEXT.md");
-    std::fs::remove_file(&retired).expect("remove retired starter");
-    std::fs::create_dir(&retired).expect("install non-regular retired sentinel");
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_valid_selected_project_context(dir.path());
-    let inventory = dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH);
-    let before = std::fs::read(&inventory).expect("inventory before preflight");
-
-    preflight_author_environment_inventory_from_input(
-        dir.path(),
-        &valid_environment_inventory_input(),
-    )
-    .expect("retired Project Context member is outside selected preflight reads");
-
-    assert_eq!(std::fs::read(&inventory).unwrap(), before);
-    assert!(retired.is_dir());
-}
-
-#[test]
-fn environment_inventory_input_refuses_missing_ref_when_project_context_exists() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_valid_selected_project_context(dir.path());
-    let mut input = valid_environment_inventory_input();
-    input.project_context_ref = None;
-
-    let err = preflight_author_environment_inventory_from_input(dir.path(), &input)
-        .expect_err("project-context reference must match canonical truth");
-
-    assert_eq!(
-        err.kind,
-        AuthorEnvironmentInventoryRefusalKind::IncompleteStructuredInput
-    );
-    assert!(err
-        .summary
-        .contains("project_context_ref must be exactly `.handbook/project/context.yaml`"));
-}
-
-#[test]
-fn environment_inventory_input_refuses_ref_when_project_context_is_absent() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    let mut input = valid_environment_inventory_input();
-    input.project_context_ref = Some(".handbook/project_context/PROJECT_CONTEXT.md".to_string());
-
-    let err = preflight_author_environment_inventory_from_input(dir.path(), &input)
-        .expect_err("project-context reference must match canonical truth");
-
-    assert_eq!(
-        err.kind,
-        AuthorEnvironmentInventoryRefusalKind::IncompleteStructuredInput
-    );
-    assert!(err
-        .summary
-        .contains("project_context_ref must be exactly `.handbook/project/context.yaml`"));
-}
-
-#[cfg(unix)]
-#[test]
-fn author_environment_inventory_from_input_writes_deterministically_without_prompt_capture() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_valid_selected_project_context(dir.path());
-    let input = valid_environment_inventory_input();
-    let expected = with_environment_inventory_now_utc("2026-07-10T12:34:56Z", || {
-        render_environment_inventory_markdown(&input).expect("render expected inventory")
-    });
-
-    let result = with_environment_inventory_now_utc("2026-07-10T12:34:56Z", || {
-        author_environment_inventory_from_input(dir.path(), &input)
-            .expect("deterministic environment authoring")
-    });
-
-    assert_eq!(
-        result.canonical_repo_relative_path,
-        CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH
-    );
-    assert_eq!(
-        std::fs::read_to_string(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
-            .expect("canonical inventory"),
-        expected
-    );
-}
-
-#[cfg(unix)]
-#[test]
-fn author_environment_inventory_from_input_repairs_semantically_invalid_truth() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_valid_selected_project_context(dir.path());
-    write_file(
-        &dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH),
-        b"invalid environment inventory\n",
-    );
-    let input = valid_environment_inventory_input();
-
-    with_environment_inventory_now_utc("2026-07-10T12:34:56Z", || {
-        author_environment_inventory_from_input(dir.path(), &input)
-            .expect("invalid truth should be repairable");
-    });
-
-    let markdown =
-        std::fs::read_to_string(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
-            .expect("repaired inventory");
-    assert!(markdown.starts_with("# Environment Inventory — Handbook"));
-}
-
-#[test]
-fn validate_environment_inventory_markdown_accepts_canonical_document() {
-    validate_environment_inventory_markdown(&expected_environment_inventory_markdown("None"))
-        .expect("canonical environment inventory markdown should validate");
-}
-
-#[test]
-fn validate_environment_inventory_markdown_refuses_legacy_non_canonical_path_claims() {
-    let err = validate_environment_inventory_markdown(
-        &expected_environment_inventory_markdown("None").replace(
-            "`.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`",
-            "`${repo_root}/ENVIRONMENT_INVENTORY.md`",
-        ),
-    )
-    .expect_err("legacy canonical path claim should be rejected");
-
-    assert_eq!(
-        err.kind,
-        AuthorEnvironmentInventoryRefusalKind::SynthesisFailed
-    );
-    assert!(
-        err.summary.contains("legacy non-canonical path claims"),
-        "unexpected summary: {}",
-        err.summary
-    );
-}
-
-#[test]
-fn author_environment_inventory_refuses_when_non_starter_canonical_truth_exists() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH),
-        expected_environment_inventory_markdown("None").as_bytes(),
-    );
-
-    let err =
-        author_environment_inventory_from_input(dir.path(), &valid_environment_inventory_input())
-            .expect_err("existing environment inventory truth should refuse");
-
-    assert_eq!(
-        err.kind,
-        AuthorEnvironmentInventoryRefusalKind::ExistingCanonicalTruth
-    );
-    assert_eq!(
-        std::fs::read_to_string(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
-            .expect("existing environment inventory"),
-        expected_environment_inventory_markdown("None")
-    );
-}
-
-#[test]
-fn preflight_author_environment_inventory_refuses_when_non_starter_canonical_truth_exists() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH),
-        expected_environment_inventory_markdown("None").as_bytes(),
-    );
-
-    let err = preflight_author_environment_inventory(dir.path())
-        .expect_err("existing environment inventory truth should refuse during preflight");
-
-    assert_eq!(
-        err.kind,
-        AuthorEnvironmentInventoryRefusalKind::ExistingCanonicalTruth
-    );
-    assert!(err
-        .summary
-        .contains("canonical environment inventory truth already exists"));
-}
-
-#[test]
-fn preflight_author_environment_inventory_routes_ingest_invalid_target_to_setup_refresh() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    std::fs::remove_file(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
-        .expect("remove environment inventory");
-    std::fs::create_dir_all(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
-        .expect("environment inventory target directory");
-
-    let err = preflight_author_environment_inventory(dir.path())
-        .expect_err("ingest-invalid environment inventory target should block authoring");
-
-    assert_eq!(
-        err.kind,
-        AuthorEnvironmentInventoryRefusalKind::MutationRefused
-    );
-    assert_eq!(err.next_safe_action, "run `handbook setup refresh`");
-    assert!(err.summary.contains("handbook setup refresh"));
-}
-
-#[test]
-fn author_environment_inventory_refuses_when_upstream_charter_is_semantically_invalid() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        b"# Engineering Charter - Example\n\n## Rules\n\n- Keep secrets out of git.\n",
-    );
-    let before = std::fs::read(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
-        .expect("starter environment inventory bytes");
-    let err =
-        author_environment_inventory_from_input(dir.path(), &valid_environment_inventory_input())
-            .expect_err("invalid upstream charter should refuse before rendering");
-
-    assert_eq!(
-        err.kind,
-        AuthorEnvironmentInventoryRefusalKind::MissingRequiredCharter
-    );
-    assert!(err
-        .summary
-        .contains("selected canonical Charter is unavailable"));
-    assert_eq!(
-        std::fs::read(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
-            .expect("environment inventory after refusal"),
-        before
-    );
-}
-
-#[cfg(unix)]
-#[test]
-fn author_environment_inventory_refuses_when_optional_project_context_is_semantically_invalid() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &dir.path().join(".handbook/project/context.yaml"),
-        legacy_placeholder_project_context_markdown().as_bytes(),
-    );
-    let before = std::fs::read(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
-        .expect("starter environment inventory bytes");
-    let err =
-        author_environment_inventory_from_input(dir.path(), &valid_environment_inventory_input())
-            .expect_err("invalid optional project context should refuse before rendering");
-
-    assert_eq!(
-        err.kind,
-        AuthorEnvironmentInventoryRefusalKind::InvalidUpstreamCanonicalTruth
-    );
-    assert_eq!(
-        err.summary,
-        "selected canonical Project Context is unavailable: DocumentNotObject"
-    );
-    assert_eq!(err.broken_subject, ".handbook/project/context.yaml");
-    assert_eq!(
-        std::fs::read(dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH))
-            .expect("environment inventory after refusal"),
-        before
-    );
-}
-
-#[cfg(all(not(unix), not(windows)))]
-#[test]
-fn environment_inventory_author_refuses_before_mutation_without_strict_read_support() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    let target = dir.path().join(CANONICAL_ENVIRONMENT_INVENTORY_REPO_PATH);
-    let before = std::fs::read(&target).expect("starter environment inventory bytes");
-
-    let err =
-        author_environment_inventory_from_input(dir.path(), &valid_environment_inventory_input())
-            .expect_err("strict selected Project Context read must refuse on this platform");
-
-    assert_eq!(
-        err.kind,
-        AuthorEnvironmentInventoryRefusalKind::InvalidUpstreamCanonicalTruth
-    );
-    assert_eq!(err.broken_subject, ".handbook/project/context.yaml");
-    assert!(err.summary.contains("UnsupportedPlatformStrictRead"));
-    assert_eq!(
-        std::fs::read(&target).expect("environment inventory after refusal"),
-        before
-    );
-}
-
-const HCM_2_2_SELECTED_CHARTER_YAML: &str = include_str!(concat!(
-    env!("CARGO_MANIFEST_DIR"),
-    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
-));
-
-fn hcm_2_2_with_environment_inventory_now_utc<T>(value: &str, action: impl FnOnce() -> T) -> T {
-    static LOCK: std::sync::OnceLock<std::sync::Mutex<()>> = std::sync::OnceLock::new();
-    let _guard = LOCK
-        .get_or_init(|| std::sync::Mutex::new(()))
-        .lock()
-        .expect("environment inventory clock lock");
-    let variable = "HANDBOOK_AUTHOR_ENVIRONMENT_INVENTORY_NOW_UTC";
-    let previous = std::env::var_os(variable);
-    std::env::set_var(variable, value);
-    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(action));
-    match previous {
-        Some(previous) => std::env::set_var(variable, previous),
-        None => std::env::remove_var(variable),
-    }
-    match result {
-        Ok(value) => value,
-        Err(payload) => std::panic::resume_unwind(payload),
-    }
-}
-
-#[test]
-fn hcm_2_2_environment_inventory_input_rejects_legacy_charter_reference() {
-    let mut input = valid_environment_inventory_input();
-    input.charter_ref = ".handbook/charter/CHARTER.md".to_owned();
-
-    let error = handbook_compiler::validate_environment_inventory_structured_input(&input)
-        .expect_err("legacy Charter reference must be rejected");
-
-    assert_eq!(
-        error.kind,
-        AuthorEnvironmentInventoryRefusalKind::IncompleteStructuredInput
-    );
-    assert!(error
-        .summary
-        .contains("charter_ref must be exactly `.handbook/project/charter.yaml`"));
-}
-
-#[test]
-fn hcm_2_2_environment_inventory_preflight_uses_only_selected_charter_truth() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    hcm_2_2_committed_charter::promote_committed_charter(
-        dir.path(),
-        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
-        "hcm-2-2-environment-preflight",
-    );
-    write_file(
-        &dir.path().join(".handbook/charter/CHARTER.md"),
-        b"conflicting legacy Charter Markdown must be ignored\n",
-    );
-    write_valid_selected_project_context(dir.path());
-    let mut input = valid_environment_inventory_input();
-    input.charter_ref = ".handbook/project/charter.yaml".to_owned();
-    input.update_contract.exception_record_location =
-        ".handbook/project/charter.yaml#/governance/exception_process".to_owned();
-
-    preflight_author_environment_inventory_from_input(dir.path(), &input)
-        .expect("selected Charter preflight");
-
-    let rendered = hcm_2_2_with_environment_inventory_now_utc("2026-07-10T12:34:56Z", || {
-        handbook_compiler::render_environment_inventory_markdown(&input)
-            .expect("render selected references")
-    });
-    assert!(rendered.contains("> **Charter Ref:** .handbook/project/charter.yaml"));
-    assert!(rendered.contains(
-        "- Charter exceptions are recorded at: .handbook/project/charter.yaml#/governance/exception_process"
-    ));
-    assert!(!rendered.contains(".handbook/charter/CHARTER.md"));
-}
-
-#[test]
-fn hcm_2_2_environment_inventory_preflight_refuses_uncommitted_selected_charter() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    legacy_authoring_fixture_repo(dir.path());
-    write_file(
-        &dir.path().join(".handbook/project/charter.yaml"),
-        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
-    );
-    write_valid_selected_project_context(dir.path());
-    let input = valid_environment_inventory_input();
-
-    let error = preflight_author_environment_inventory_from_input(dir.path(), &input)
-        .expect_err("uncommitted selected Charter must be refused");
-
-    assert_eq!(
-        error.kind,
-        AuthorEnvironmentInventoryRefusalKind::InvalidUpstreamCanonicalTruth
-    );
-    assert_eq!(error.broken_subject, ".handbook/project/charter.yaml");
-    assert!(error
-        .summary
-        .contains("selected Charter committed-authority read failed"));
 }

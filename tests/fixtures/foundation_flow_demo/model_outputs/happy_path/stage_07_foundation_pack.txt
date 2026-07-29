@@ -27,7 +27,7 @@ Deliver `M4` as one believable journey proof:
 3. Stage 05 capture writes `CHARTER.md`.
 4. Manual state handoff sets `needs_project_context=true`, then resolve activates stage 06.
 5. Stage 06 capture writes `PROJECT_CONTEXT.md`.
-6. Stage 07 capture writes the foundation pack and environment inventory.
+6. Stage 07 capture writes the foundation pack.
 7. Stage 10 compile produces payload for an external model.
 8. Stage 10 capture writes `FEATURE_SPEC.md` only after a completed external response exists.
 
@@ -94,20 +94,3 @@ gates:
     category: regression
     requirement: required
     description: Keep fixed timestamp and normalized capture-id proof stable across reruns.
-
---- FILE: artifacts/foundation/ENVIRONMENT_INVENTORY.md ---
-# Environment Inventory
-
-## Toolchains
-- Rust stable toolchain for CLI and compiler tests
-- Cargo for focused proof execution
-
-## Runtime Assumptions
-- local filesystem access for repo-truth stage metadata and fixture content
-- no network dependency for journey proof tests
-- external model output is represented by committed markdown fixtures
-
-## Important Paths
-- `core/pipelines/foundation_inputs.yaml`
-- `core/stages/10_feature_spec.md`
-- `tests/fixtures/foundation_flow_demo`

@@ -8,7 +8,7 @@
     "ref": "handbook.roles.core@1.1.0",
     "fingerprint": "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029"
   },
-  "canonical_schema_ref": "handbook.schemas.artifacts.environment-context@1.0.0",
+  "canonical_schema_ref": "handbook.schemas.artifacts.environment-context@1.1.0",
   "supported_role_refs": [
     "environment_context"
   ],
@@ -23,5 +23,5 @@
   "review_triggers": [],
   "required_capabilities": [],
   "extensions": {},
-  "definition_fingerprint": "sha256:81382d62b492b8837d876775e8e20b12a55d35894d5d3832450fe3a067f23f6f"
+  "definition_fingerprint": "sha256:7702ac15b3e65192b044e565f2cf18b062ce5b89b92d74bcd0b71df8abd81a9f"
 }

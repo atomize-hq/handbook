@@ -251,7 +251,7 @@ fn canonical_artifact_kind_sort_key(kind: CanonicalArtifactKind) -> u8 {
     match kind {
         CanonicalArtifactKind::Charter => 0,
         CanonicalArtifactKind::ProjectContext => 1,
-        CanonicalArtifactKind::EnvironmentInventory => 2,
+        CanonicalArtifactKind::EnvironmentContext => 2,
         CanonicalArtifactKind::FeatureSpec => 3,
     }
 }

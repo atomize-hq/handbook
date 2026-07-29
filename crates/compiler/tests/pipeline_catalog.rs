@@ -247,15 +247,7 @@ fn stage_library_inputs_remain_the_authoritative_declarative_source() {
     let pipeline = load_pipeline_definition(&root, "core/pipelines/foundation_inputs.yaml")
         .expect("foundation inputs pipeline");
     let TemplateLibrarySelection::Charter(charter_defaults) =
-        resolve_shipped_template_library(TemplateLibraryRequest::CharterAuthoring)
-    else {
-        panic!("expected shipped charter defaults");
-    };
-    let TemplateLibrarySelection::EnvironmentInventory(environment_inventory_defaults) =
-        resolve_shipped_template_library(TemplateLibraryRequest::EnvironmentInventoryAuthoring)
-    else {
-        panic!("expected shipped environment inventory defaults");
-    };
+        resolve_shipped_template_library(TemplateLibraryRequest::CharterAuthoring);
 
     let charter_stage =
         load_stage_compile_definition(&root, &pipeline, "stage.05_charter_synthesize")
@@ -276,30 +268,6 @@ fn stage_library_inputs_remain_the_authoritative_declarative_source() {
             },
         ]
     );
-
-    let foundation_pack_stage =
-        load_stage_compile_definition(&root, &pipeline, "stage.07_foundation_pack")
-            .expect("foundation pack stage");
-    assert!(foundation_pack_stage
-        .inputs
-        .library
-        .contains(&CompileStageInput {
-            path: environment_inventory_defaults
-                .synthesize_directive()
-                .repo_relative_path()
-                .to_string(),
-            required: true,
-        }));
-    assert!(foundation_pack_stage
-        .inputs
-        .library
-        .contains(&CompileStageInput {
-            path: environment_inventory_defaults
-                .template()
-                .repo_relative_path()
-                .to_string(),
-            required: true,
-        }));
 }
 
 #[test]

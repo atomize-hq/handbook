@@ -145,7 +145,9 @@ fn canonical_artifact(
     match kind {
         CanonicalArtifactKind::Charter => &artifacts.charter,
         CanonicalArtifactKind::ProjectContext => &artifacts.project_context,
-        CanonicalArtifactKind::EnvironmentInventory => &artifacts.environment_inventory,
+        CanonicalArtifactKind::EnvironmentContext => {
+            panic!("Environment Context is validated from selected canonical YAML")
+        }
         CanonicalArtifactKind::FeatureSpec => &artifacts.feature_spec,
     }
 }

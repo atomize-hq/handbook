@@ -38,6 +38,7 @@ pub mod charter_promotion_workflow;
 pub mod charter_runtime_vectors;
 pub mod context_resolution_registry;
 pub mod definition_identity;
+pub mod environment_context_artifact;
 pub mod freshness;
 pub mod instance_profile;
 mod profile_builtins;
@@ -78,22 +79,15 @@ pub use artifact_registry::{
     ResolvedArtifactInstance, ResolvedArtifactKind, ResolvedArtifactRegistry,
 };
 pub use author::{
-    parse_charter_structured_input_yaml, parse_environment_inventory_structured_input_yaml,
-    render_charter_markdown, render_environment_inventory_markdown, validate_charter_markdown,
-    validate_charter_structured_input, validate_environment_inventory_markdown,
-    validate_environment_inventory_structured_input, CharterAudience, CharterBackwardCompatibility,
+    parse_charter_structured_input_yaml, render_charter_markdown, validate_charter_markdown,
+    validate_charter_structured_input, CharterAudience, CharterBackwardCompatibility,
     CharterCoreError, CharterCoreErrorKind, CharterDebtTrackingInput, CharterDecisionRecordsInput,
     CharterDefaultImplicationsInput, CharterDeprecationPolicy, CharterDimensionInput,
     CharterDimensionName, CharterDomainInput, CharterExceptionsInput, CharterExpectedLifetime,
     CharterObservabilityThreshold, CharterOperationalRealityInput, CharterPostureInput,
     CharterProjectClassification, CharterProjectConstraintsInput, CharterProjectInput,
     CharterRequiredness, CharterRolloutControls, CharterRuntimeEnvironment, CharterStructuredInput,
-    CharterSurface, EnvironmentCiInput, EnvironmentExternalServiceInput,
-    EnvironmentInventoryCoreError, EnvironmentInventoryCoreErrorKind,
-    EnvironmentInventoryStructuredInput, EnvironmentKnownUnknownInput,
-    EnvironmentLocalDevelopmentInput, EnvironmentProductionInput,
-    EnvironmentRuntimeAssumptionsInput, EnvironmentSecretHandlingInput, EnvironmentToolingInput,
-    EnvironmentUpdateContractInput, EnvironmentVariableInput, DEFAULT_EXCEPTION_RECORD_LOCATION,
+    CharterSurface, DEFAULT_EXCEPTION_RECORD_LOCATION,
 };
 pub use baseline_validation::{
     baseline_artifact_validation, baseline_artifact_validation_for_path,
@@ -189,6 +183,13 @@ pub use definition_identity::{
     parse_definition_yaml, parse_schema_json, DefinitionFingerprint, ExactDefinitionRef,
     RegistryLoadError, RegistryLoadErrorKind, SourceByteBudget, MAX_SOURCE_DOCUMENT_BYTES,
     MAX_TOTAL_SOURCE_BYTES,
+};
+pub use environment_context_artifact::{
+    load_selected_environment_context, parse_canonical_environment_context,
+    render_environment_context_markdown, serialize_canonical_environment_context,
+    CanonicalEnvironmentContext, CanonicalEnvironmentContextProjection,
+    EnvironmentContextArtifactError, EnvironmentContextArtifactErrorKind, NamedEnvironment,
+    ENVIRONMENT_CONTEXT_CANONICAL_PATH,
 };
 pub use freshness::{
     compute_freshness, FreshnessIssue, FreshnessIssueKind, FreshnessStatus, FreshnessTruth,

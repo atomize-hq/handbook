@@ -167,9 +167,6 @@ fn map_next_safe_action(action: handbook_flow::ResolverNextSafeAction) -> crate:
         handbook_flow::ResolverNextSafeAction::RunAuthorProjectContext => {
             crate::NextSafeAction::RunAuthorProjectContext
         }
-        handbook_flow::ResolverNextSafeAction::RunAuthorEnvironmentInventory => {
-            crate::NextSafeAction::RunAuthorEnvironmentInventory
-        }
         handbook_flow::ResolverNextSafeAction::CreateSystemRoot {
             canonical_repo_relative_path,
         } => crate::NextSafeAction::CreateSystemRoot {

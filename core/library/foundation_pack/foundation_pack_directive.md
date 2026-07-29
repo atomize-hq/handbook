@@ -36,10 +36,10 @@ Also available:
 5. Keep it lean:
    - Each artifact should be ~1–3 pages max.
    - Prefer checklists, tables, and concrete bullets.
-6. Environment inventory is a first-class output:
-   - In current reduced-v1 product truth, the canonical baseline path is `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`.
-   - This stage emits the pipeline artifact `artifacts/foundation/ENVIRONMENT_INVENTORY.md`, but that artifact is not the canonical product authority.
-   - Any change that impacts env vars, services, ports, or runtime assumptions must update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.
+6. Environment Context is separate project context:
+   - The canonical path is `.handbook/project/environment.yaml`.
+   - Use a valid document when present; do not infer enforcement from presence.
+   - If a new named environment or capability is needed, update Environment Context before a work contract references it.
 
 ## Outputs (write all of these)
 
@@ -50,7 +50,6 @@ Produce the following artifacts using the provided templates:
 3. `TEST_STRATEGY_BRIEF.md`
 4. `QUALITY_GATES_SPEC.md` (human-readable, exhaustive)
 5. `quality_gates.yaml` (machine-readable, executable spec)
-6. `ENVIRONMENT_INVENTORY.md`
 
 ## Output Formatting (MANDATORY — multi-file wrapper)
 
@@ -70,9 +69,6 @@ in this order, with **no additional text** before, between (other than whitespac
 <complete contents>
 
 --- FILE: artifacts/foundation/quality_gates.yaml ---
-<complete contents>
-
---- FILE: artifacts/foundation/ENVIRONMENT_INVENTORY.md ---
 <complete contents>
 
 Rules:

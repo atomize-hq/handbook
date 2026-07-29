@@ -20,10 +20,6 @@ fn make_repo() -> tempfile::TempDir {
         b"valid project context",
     );
     write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        b"valid environment inventory",
-    );
-    write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"feature",
     );
@@ -37,8 +33,6 @@ fn custom_layout_contract() -> CanonicalLayoutContract {
         ".custom_handbook/charter/CHARTER.md",
         ".custom_handbook/project_context",
         ".custom_handbook/project_context/PROJECT_CONTEXT.md",
-        ".custom_handbook/environment_inventory",
-        ".custom_handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
         ".custom_handbook/feature_spec",
         ".custom_handbook/feature_spec/FEATURE_SPEC.md",
     )
@@ -48,11 +42,6 @@ fn test_validator(kind: CanonicalArtifactKind, markdown: &str) -> Result<(), Str
     match kind {
         CanonicalArtifactKind::Charter if markdown.contains("valid charter") => Ok(()),
         CanonicalArtifactKind::ProjectContext if markdown.contains("valid project context") => {
-            Ok(())
-        }
-        CanonicalArtifactKind::EnvironmentInventory
-            if markdown.contains("valid environment inventory") =>
-        {
             Ok(())
         }
         CanonicalArtifactKind::FeatureSpec => {
@@ -68,7 +57,7 @@ fn baseline_validation_uses_supplied_validator() {
     let artifacts = CanonicalArtifacts::load(dir.path()).expect("artifacts");
 
     let validations = baseline_artifact_validations(&artifacts, test_validator);
-    assert_eq!(validations.len(), 3);
+    assert_eq!(validations.len(), 2);
     assert!(validations.iter().all(|validation| {
         matches!(
             validation.verdict,
@@ -123,10 +112,6 @@ fn baseline_validation_uses_loaded_custom_paths_and_custom_ingest_issue_paths() 
         &repo_root.join(".custom_handbook/project_context/PROJECT_CONTEXT.md"),
         b"valid project context",
     );
-    write_file(
-        &repo_root.join(".custom_handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        b"valid environment inventory",
-    );
 
     let artifacts =
         CanonicalArtifacts::load_with_contract(repo_root, custom_layout_contract()).expect("load");
@@ -140,7 +125,6 @@ fn baseline_validation_uses_loaded_custom_paths_and_custom_ingest_issue_paths() 
         vec![
             ".custom_handbook/charter/CHARTER.md",
             ".custom_handbook/project_context/PROJECT_CONTEXT.md",
-            ".custom_handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
         ]
     );
 

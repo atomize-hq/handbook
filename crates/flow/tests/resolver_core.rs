@@ -89,46 +89,22 @@ fn valid_project_context_markdown() -> &'static str {
     )
 }
 
-#[cfg(unix)]
-fn valid_environment_inventory_markdown() -> &'static str {
-    "# Environment Inventory
-
-> **Canonical File:** `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
-> **Project Context Ref:** `.handbook/project/context.yaml`
-
-## What this is
-Canonical environment and runtime inventory.
-
-## How to use
-- Update this file when runtime assumptions change.
-
-## 1) Environment Variables (Inventory)
-- None yet.
-
-## 2) External Services / Infrastructure Dependencies
-- None yet.
-
-## 3) Runtime Assumptions (Ports, Paths, Storage, Limits)
-- None yet.
-
-## 4) Local Development Requirements
-- None yet.
-
-## 5) CI Requirements
-- None yet.
-
-## 6) Production / Deployment Requirements (even if not live yet)
-- None yet.
-
-## 7) Dependency & Tooling Inventory (project-specific)
-- None yet.
-
-## 8) Update Contract (non-negotiable)
-- Update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.
-
-## 9) Known Unknowns
-- None yet.
-"
+fn valid_environment_context_yaml() -> &'static str {
+    concat!(
+        "authoritative_references:\n",
+        "  - \"handbook.project.environments@1.0.0\"\n",
+        "environments:\n",
+        "  -\n",
+        "    capabilities:\n",
+        "      - \"rust.stable\"\n",
+        "      - \"filesystem.workspace-write\"\n",
+        "    description: \"Local development.\"\n",
+        "    environment_id: \"local-dev\"\n",
+        "known_unknowns: []\n",
+        "record_id: \"handbook.environment-context\"\n",
+        "schema_id: \"handbook.artifact.environment-context\"\n",
+        "schema_version: \"1.1\"\n",
+    )
 }
 
 fn non_default_contract() -> handbook_engine::CanonicalLayoutContract {
@@ -138,8 +114,6 @@ fn non_default_contract() -> handbook_engine::CanonicalLayoutContract {
         ".custom_handbook/charter/CHARTER.md",
         ".custom_handbook/project_context",
         ".custom_handbook/project_context/PROJECT_CONTEXT.md",
-        ".custom_handbook/environment_inventory",
-        ".custom_handbook/environment_inventory/ENVIRONMENT_INVENTORY.md",
         ".custom_handbook/feature_spec",
         ".custom_handbook/feature_spec/FEATURE_SPEC.md",
     )
@@ -675,68 +649,6 @@ fn flow_resolver_refuses_live_execution_packets_without_fixture_backing() {
 
 #[cfg(unix)]
 #[test]
-fn flow_resolver_excludes_optional_sources_when_total_budget_demands_it() {
-    let dir = tempfile::tempdir().expect("tempdir");
-    let root = dir.path();
-
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature spec body",
-    );
-
-    let decisions = resolve_shipped_profile_decisions(root).expect("shipped decisions");
-    let project_context =
-        parse_canonical_project_context(&decisions, valid_project_context_markdown().as_bytes())
-            .expect("canonical Project Context");
-    let required_total = valid_charter_markdown().len() as u64
-        + render_project_context_markdown(&project_context)
-            .expect("rendered Project Context")
-            .len() as u64;
-
-    let result = resolve(
-        root,
-        ResolveRequest {
-            budget_policy: BudgetPolicy {
-                max_total_bytes: Some(required_total),
-                max_per_artifact_bytes: None,
-            },
-            ..ResolveRequest::default()
-        },
-    )
-    .expect("resolve");
-
-    assert_eq!(
-        result.budget_outcome.disposition,
-        BudgetDisposition::Exclude
-    );
-    assert!(result
-        .packet_result
-        .sections
-        .iter()
-        .all(|section| section.title != "ENVIRONMENT_INVENTORY"));
-    assert!(result.packet_result.notes.iter().any(|note| {
-        note.text
-            == format!(
-                "optional source excluded due to budget: .handbook/environment_inventory/ENVIRONMENT_INVENTORY.md ({} bytes [source])",
-                valid_environment_inventory_markdown().len()
-            )
-    }));
-}
-
-#[cfg(unix)]
-#[test]
 fn flow_resolver_builds_fixture_context_for_execution_demo_packets() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path().join("tests/fixtures/execution_demo/basic");
@@ -748,10 +660,6 @@ fn flow_resolver_builds_fixture_context_for_execution_demo_packets() {
     write_file(
         &root.join(".handbook/project/context.yaml"),
         valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        valid_environment_inventory_markdown().as_bytes(),
     );
     write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
@@ -779,7 +687,7 @@ fn flow_resolver_builds_fixture_context_for_execution_demo_packets() {
         fixture_context.fixture_basis_root,
         "tests/fixtures/execution_demo/basic/.handbook/"
     );
-    assert_eq!(fixture_context.fixture_lineage.len(), 4);
+    assert_eq!(fixture_context.fixture_lineage.len(), 3);
     assert_eq!(
         result.packet_result.decision_summary.ready_next_safe_action,
         ReadyPacketNextSafeAction::InspectProof
@@ -799,12 +707,6 @@ fn flow_resolver_builds_honest_fixture_context_for_non_default_execution_demo_co
     write_file(
         &root.join(".handbook/project/context.yaml"),
         valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(custom_handbook_path(
-            "environment_inventory/ENVIRONMENT_INVENTORY.md",
-        )),
-        valid_environment_inventory_markdown().as_bytes(),
     );
     write_file(
         &root.join(custom_handbook_path("feature_spec/FEATURE_SPEC.md")),
@@ -832,7 +734,7 @@ fn flow_resolver_builds_honest_fixture_context_for_non_default_execution_demo_co
         fixture_context.fixture_basis_root,
         "tests/fixtures/execution_demo/custom/.custom_handbook/"
     );
-    assert_eq!(fixture_context.fixture_lineage.len(), 4);
+    assert_eq!(fixture_context.fixture_lineage.len(), 3);
     assert_eq!(
         result.packet_result.sections[1].canonical_repo_relative_path,
         ".handbook/project/context.yaml"
@@ -892,47 +794,6 @@ const HCM_2_2_SELECTED_CHARTER_YAML: &str = include_str!(concat!(
     "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
 ));
 
-fn hcm_2_2_environment_inventory_markdown() -> &'static str {
-    "# Environment Inventory
-
-> **Canonical File:** `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md`
-> **Project Context Ref:** `.handbook/project/context.yaml`
-
-## What this is
-Canonical environment and runtime inventory.
-
-## How to use
-- Update this file when runtime assumptions change.
-
-## 1) Environment Variables (Inventory)
-- None yet.
-
-## 2) External Services / Infrastructure Dependencies
-- None yet.
-
-## 3) Runtime Assumptions (Ports, Paths, Storage, Limits)
-- None yet.
-
-## 4) Local Development Requirements
-- None yet.
-
-## 5) CI Requirements
-- None yet.
-
-## 6) Production / Deployment Requirements (even if not live yet)
-- None yet.
-
-## 7) Dependency & Tooling Inventory (project-specific)
-- None yet.
-
-## 8) Update Contract (non-negotiable)
-- Update `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` in the same change.
-
-## 9) Known Unknowns
-- None yet.
-"
-}
-
 fn hcm_2_2_flow_fixture(root: &std::path::Path, legacy_charter: &[u8]) {
     hcm_2_2_committed_charter::promote_committed_charter(
         root,
@@ -943,10 +804,6 @@ fn hcm_2_2_flow_fixture(root: &std::path::Path, legacy_charter: &[u8]) {
     write_file(
         &root.join(".handbook/project/context.yaml"),
         valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        hcm_2_2_environment_inventory_markdown().as_bytes(),
     );
     write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
@@ -962,10 +819,6 @@ fn hcm_2_2_uncommitted_flow_fixture(root: &std::path::Path) {
     write_file(
         &root.join(".handbook/project/context.yaml"),
         valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/environment_inventory/ENVIRONMENT_INVENTORY.md"),
-        hcm_2_2_environment_inventory_markdown().as_bytes(),
     );
     write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
@@ -1055,6 +908,134 @@ fn hcm_2_2_flow_projects_selected_charter_yaml_and_ignores_legacy_markdown() {
         entry.contains("bridge=BR-HCM-2-CHARTER-FLOW-01")
             && entry.contains("promotion_ref=promotions/")
             && entry.contains("lifecycle_transition_ref=lifecycle-transitions/")
+    }));
+}
+
+#[test]
+fn valid_environment_context_is_rendered_into_the_advisory_packet() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    write_file(
+        &root.join(".handbook/project/environment.yaml"),
+        valid_environment_context_yaml().as_bytes(),
+    );
+
+    let decisions =
+        handbook_engine::resolve_shipped_profile_decisions(root).expect("selected profile");
+    let selected = handbook_engine::load_selected_environment_context(root, &decisions)
+        .expect("selected Environment Context projection");
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+
+    assert!(result.packet_result.is_ready());
+    assert!(result.refusal.is_none());
+    assert!(result.blockers.is_empty());
+    let source = result
+        .packet_result
+        .included_sources
+        .iter()
+        .find(|source| source.kind == CanonicalArtifactKind::EnvironmentContext)
+        .expect("advisory Environment Context source");
+    assert_eq!(
+        source.canonical_repo_relative_path,
+        selected.canonical_path()
+    );
+    assert!(!source.required);
+    assert_eq!(
+        source.rendered_output_sha256.as_deref(),
+        Some(selected.rendered_output_fingerprint().as_str())
+    );
+    let section = result
+        .packet_result
+        .sections
+        .iter()
+        .find(|section| section.kind == CanonicalArtifactKind::EnvironmentContext)
+        .expect("advisory Environment Context section");
+    assert_eq!(section.mode, handbook_flow::PacketSectionMode::Rendered);
+    assert_eq!(section.contents.as_bytes(), selected.rendered_bytes());
+}
+
+#[test]
+fn oversized_environment_context_is_summarized_without_rendered_body() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    let oversized_description = "x".repeat(8_000);
+    let yaml = valid_environment_context_yaml().replace(
+        "description: \"Local development.\"",
+        format!("description: \"{oversized_description}\"").as_str(),
+    );
+    write_file(
+        &root.join(".handbook/project/environment.yaml"),
+        yaml.as_bytes(),
+    );
+
+    let decisions =
+        handbook_engine::resolve_shipped_profile_decisions(root).expect("selected profile");
+    let selected = handbook_engine::load_selected_environment_context(root, &decisions)
+        .expect("selected Environment Context projection");
+    let result = resolve(
+        root,
+        ResolveRequest {
+            budget_policy: handbook_flow::BudgetPolicy {
+                max_total_bytes: None,
+                max_per_artifact_bytes: Some(selected.rendered_bytes().len() as u64 - 1),
+            },
+            ..ResolveRequest::default()
+        },
+    )
+    .expect("resolve");
+
+    assert_eq!(
+        result.budget_outcome.disposition,
+        handbook_flow::BudgetDisposition::Summarize
+    );
+    let source = result
+        .packet_result
+        .included_sources
+        .iter()
+        .find(|source| source.kind == CanonicalArtifactKind::EnvironmentContext)
+        .expect("summarized Environment Context source");
+    assert!(source.rendered_output_byte_len.is_none());
+    assert!(source.rendered_output_sha256.is_none());
+    let section = result
+        .packet_result
+        .sections
+        .iter()
+        .find(|section| section.kind == CanonicalArtifactKind::EnvironmentContext)
+        .expect("summarized Environment Context section");
+    assert_eq!(section.mode, handbook_flow::PacketSectionMode::Summary);
+    assert!(!section.contents.contains(oversized_description.as_str()));
+    assert!(result.packet_result.notes.iter().any(|note| {
+        note.text.starts_with(
+            "optional source summarized due to budget: .handbook/project/environment.yaml",
+        )
+    }));
+}
+
+#[test]
+fn invalid_environment_context_is_reported_without_blocking_the_packet() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    write_file(
+        &root.join(".handbook/project/environment.yaml"),
+        b"schema_id: handbook.artifact.environment-context\nschema_version: '1.1'\n",
+    );
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+
+    assert!(result.packet_result.is_ready());
+    assert!(result.refusal.is_none());
+    assert!(result.blockers.is_empty());
+    assert!(result
+        .packet_result
+        .sections
+        .iter()
+        .all(|section| { section.kind != CanonicalArtifactKind::EnvironmentContext }));
+    assert!(result.packet_result.notes.iter().any(|note| {
+        note.text
+            == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
     }));
 }
 
