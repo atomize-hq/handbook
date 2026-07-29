@@ -2,13 +2,15 @@
 
 ## Status and authority
 
-**Status:** approved  
+**Status:** approved; greenfield Environment Context amendment accepted
+2026-07-28
 **Approved:** 2026-07-16  
 **Decision authority:** explicit user/product decision after the reviewed HCM-0.6
 research and candidate comparison  
-**Implementation effect:** target documentation and future shipped-profile data
-only; no runtime, schema publication, setup, renderer, intake, CLI, SDK, Tauri,
-Substrate, or HCM-0.7 implementation is authorized
+**Implementation effect:** this record freezes product semantics. The bounded
+runtime/schema/setup/renderer/intake/CLI correction is authorized only by the
+active HCM-2.4 SPEC; Tauri, Substrate, HCM-0.7, and future task-gate runtime are
+not authorized here
 
 This record is the authoritative HCM-0.6 shipped-default decision. It replaces
 the candidate recommendation as the decision surface while retaining the
@@ -20,9 +22,9 @@ machine semantics; labels and repository vocabulary remain presentation.
 Handbook v1 ships a curated first-party catalog of exactly six artifact kinds.
 The shipped root profile selects exactly three long-lived project-level
 instances. Two are always required. The Environment Context instance is
-conditionally required through one evidence-gated exact condition. The root
-profile selects no Work Specification, Decision Record, or Risk Record
-instance.
+optional advisory context with no active project-condition dependency. Its
+presence never selects enforcement. The root profile selects no Work
+Specification, Decision Record, or Risk Record instance.
 
 The catalog is broader than the root-profile instance set. That distinction is
 intentional: first-party support does not imply universal selection,
@@ -104,7 +106,7 @@ filename placement is profile configuration, never semantic discovery.
 |---|---|---|---|---|---|---|---|
 | `project_authority` | `handbook.artifact-kind.project-authority@1.0.0` | `constitutional_authority` | `constitutional_root` / `handbook.capabilities.constitutional-root@1.0.0` | Charter | `.handbook/project/charter.yaml` | `always` | `null` |
 | `project_context` | `handbook.artifact-kind.project-context@1.0.0` | `project_context` | none | Project Context | `.handbook/project/context.yaml` | `always` | `null` |
-| `environment_context` | `handbook.artifact-kind.environment-context@1.0.0` | `environment_context` | none | Environment Context | `.handbook/project/environment.yaml` | `conditional` | `handbook.condition.project.managed-operational-surface@1.0.0` |
+| `environment_context` | `handbook.artifact-kind.environment-context@1.1.0` | `environment_context` | none | Environment Context | `.handbook/project/environment.yaml` | `optional` | `null` |
 
 The root profile selects no instance of:
 
@@ -171,58 +173,45 @@ structural/semantic invalidity fails closed; exact minimum content, factual
 boundary, freshness thresholds, stale-fact consequences, and external-reference
 rules remain subordinate decisions.
 
-## Environment Context boundary and applicability
+## Environment Context boundary and optional gate
 
-The conditional `environment_context` instance owns maintained environment,
-deployment, runtime-dependency, and safe configuration metadata. It may store
-durable operational facts and authoritative references. It must not become a
-secret store, copy volatile live values unnecessarily, represent inferred
-deployment state as fact, duplicate topology owned elsewhere, own runbooks,
-mirror exhaustive software catalogs, or claim all operational information.
+The optional `environment_context` instance owns the project's named
+environments, their declared capabilities, and authoritative references. It is
+usable project context whenever the YAML is present and valid. It must not
+become a secret store, copy volatile live values unnecessarily, represent
+inferred deployment state as fact, duplicate topology owned elsewhere, own
+runbooks, mirror exhaustive software catalogs, or claim all operational
+information.
 
 One selected artifact instance does not imply one deployment/runtime
-environment. Internal environment modeling and cardinality remain subordinate
-schema decisions. The descriptor and canonical path retain stable identity when
-the condition is false and no artifact file is required.
+environment, and no workstation must satisfy the project's complete environment
+matrix. File presence never selects enforcement. Missing or invalid context is
+reported; while the gate is unselected that report is nonblocking and makes no
+factual claim about the project.
 
-### Exact condition
+The optional environment gate is selected explicitly and, when selected,
+authorizes implementation only for the current task when that task's declared
+requirements are a subset of positively verified current-session capabilities.
+Planning, research, inspection, diagnosis, and handoff remain available without
+implementation proof. Feature/spec policy and cross-target completion proof
+remain separate from task execution authorization; sprint/orchestration may
+aggregate readiness for reporting and scheduling only.
 
-The instance uses
-`handbook.condition.project.managed-operational-surface@1.0.0`.
+| Environment Context | Gate | Task/session proof | Product result |
+|---|---|---|---|
+| valid | not selected | irrelevant | load as advisory context; normal work allowed |
+| missing/invalid | not selected | irrelevant | continue without trusted context; report non-blockingly |
+| valid | selected | task requirements positively satisfied | implementation allowed for that task |
+| valid | selected | requirements missing/fail/unavailable | planning, inspection, diagnosis, and handoff only |
+| missing/invalid | selected | unavailable | planning/diagnostic mode only until repaired |
 
-The condition is applicable when an independently authoritative verified
-project fact or admitted evidence establishes continuing project responsibility
-for a runtime, deployment, operated automation, or operational integration
-surface whose durable operational facts must be maintained for safe operation,
-support, or change. Production deployment is not required. A non-production
-surface may qualify. A language runtime, package manager, local-development or
-test environment, container file, or CI configuration alone is insufficient.
-Profile declaration may contribute an assertion or evidence reference, but
-profile opt-in alone cannot replace the verified fact.
-
-| Outcome | Required meaning | Requiredness effect |
-|---|---|---|
-| `true` | current independent authoritative fact or admitted evidence proves continuing responsibility for at least one qualifying surface | the artifact is applicable and missing/invalid content fails closed |
-| `false` | affirmative current authoritative fact or admitted evidence proves no qualifying responsibility exists | the artifact is inapplicable; absence cannot make setup, doctor, or profile resolution incomplete |
-| `unknown` | the condition is resolvable, but available evidence proves neither true nor false | indeterminate; never coerced to false or true |
-| `unresolved` | the exact condition definition, required input, reference, or evidence cannot resolve | indeterminate; never coerced |
-| `stale` | otherwise admissible evidence lies outside the explicit freshness basis | indeterminate; never coerced |
-| `refused` | evaluation is circular, malformed, untrusted, disallowed, or materially contradictory without an approved precedence contract | indeterminate; never coerced |
-
-Evaluation is deterministic over exact authoritative inputs/evidence and an
-explicit freshness basis. It excludes Environment Context as its own
-applicability input and records the complete fingerprinted input/evidence
-closure. Identical definitions, facts, evidence, and freshness basis reproduce
-the same outcome and closure fingerprint. Bare silence and unchecked profile
-flags never produce `false`. Contradictory evidence produces `refused` unless a
-separately approved authority/precedence contract resolves it.
-
-The condition's record schema, exact input bindings, admitted evidence types,
-outcome precedence, freshness thresholds, evaluator implementation, transport,
-and migration behavior remain undecided. Conditional requiredness authorizes no
-inferred facts, empty scaffolding, or automatic creation. Applicability becoming
-false neither deletes a retained artifact nor establishes that retained content
-is current or authoritative.
+The active profile does not select a project-condition evaluator. The retained
+`handbook.condition.project.managed-operational-surface@1.0.0` definition exists
+only because the immutable shipped-profile 1.1/HCM-2.2 exact closure pins it;
+it is not an applicability oracle or an input to active Environment Context
+resolution. The exact future task declaration and session-proof runtime belongs
+to the later implementation-contract slice under the durable gate in the active
+[HCM-2.4 decision](../../HCM-2.4/decision/20260728-p2-greenfield-environment-context-and-task-gate.md).
 
 ## Lifecycle and review posture
 
@@ -230,7 +219,7 @@ is current or authoritative.
 |---|---|
 | Project Authority | long-lived normative identity; explicit reviewed amendment; reassess on governance, policy, exception, red-line, engineering-posture, or posture-trigger changes; preserve provenance and prior history |
 | Project Context | maintained current-state identity; reassess owned facts, references, boundaries, ownership, and material bounded-topology changes; never infer missing facts or expand into an exhaustive catalog |
-| Environment Context | maintained while applicable; reassess responsibility, durable dependencies, authoritative references, operational-fact validity, and applicability evidence when they change |
+| Environment Context | optional maintained project context; reassess named environments, declared capabilities, authoritative references, and known unknowns when they change; gate selection remains separate |
 | Work Specification | one stable bounded intended-change identity; explicit lifecycle/status changes; never a rolling singleton for unrelated work; existence alone asserts no approval, activity, implementation, verification, or current fact |
 | Decision Record | one stable discrete-decision identity; preserve history and distinguish record status from external effects; supersession never rewrites prior identity |
 | Risk Record | evidence-qualified uncertainty; reassess relevant evidence, assumptions, ownership, treatment, validity basis, and referenced constitutional-posture changes; never overstate certainty or auto-enact posture |
@@ -304,7 +293,7 @@ The approved posture derives from the reviewed Candidate B direction but is not
 identical to its initial candidate values. It preserves a small universal core,
 supplies common first-party schemas without requiring empty files, separates
 project authority from facts and intended change, and bounds operational facts
-through evidence-gated applicability.
+as optional advisory context with separately selected task-scoped enforcement.
 
 Rejected for v1:
 
@@ -318,15 +307,23 @@ Rejected for v1:
   mutable omnibus record that collapses separately identified work/decisions.
 - **Role inference from names:** kind, role, capability, instance, label, path,
   and adapter vocabulary require explicit typed identities.
+- **Global applicability oracle:** Handbook does not prove whether a project has
+  a managed operational surface or prove its global absence.
+- **File-presence enforcement:** valid Environment Context may inform a session,
+  but its presence cannot implicitly select the task gate.
+- **Compatibility-only successor:** this greenfield product preserves
+  superseded P2 design through Git history rather than profiles or identities
+  created solely for release compatibility.
 
 ## Explicitly unresolved subordinate contracts
 
-This decision does not approve any canonical content-schema identity or fields,
-exact content boundary beyond the invariants above, kind/definition fingerprint
-other than the exact stable-role registry fingerprints, lifecycle-policy ID,
-intake/renderer definition ID, initial content, setup/materialization behavior,
-migration/alias policy, permissions, downstream-profile cardinality, adapter or
-external source-of-truth mapping, Projection, or implementation.
+HCM-2.4 now owns the exact Environment Context schema 1.1, corrected-in-place
+kind 1.1, intake 1.0, renderer 1.0, and shipped-root 1.2 fingerprints. This
+decision still does not approve other canonical content-schema identities or
+fields, exact content boundaries beyond the invariants above, lifecycle-policy
+IDs, initial content, materialization, migration/alias policy, permissions,
+downstream-profile cardinality, adapters, external source-of-truth mappings,
+Projection, or future implementation-contract/task-gate runtime.
 
 HCM-1.1 through HCM-2.x may implement only the exact catalog and root-profile
 selection above, with each remaining subordinate contract reviewed through its

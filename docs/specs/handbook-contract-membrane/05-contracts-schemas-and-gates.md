@@ -621,15 +621,16 @@ references.
 
 | `id` | `kind_ref` | `role_ref` | `capability_refs` plus contract closure | `label` | `canonical_path` | `requiredness.mode` | `requiredness.condition_ref` |
 |---|---|---|---|---|---|---|---|
-| `project_authority` | `handbook.artifact-kind.project-authority@1.0.0` | `constitutional_authority` | `constitutional_root` via `handbook.capabilities.constitutional-root@1.0.0` | Charter | `.handbook/project/charter.yaml` | `always` | `null` |
-| `project_context` | `handbook.artifact-kind.project-context@1.0.0` | `project_context` | empty | Project Context | `.handbook/project/context.yaml` | `always` | `null` |
-| `environment_context` | `handbook.artifact-kind.environment-context@1.0.0` | `environment_context` | empty | Environment Context | `.handbook/project/environment.yaml` | `conditional` | `handbook.condition.project.managed-operational-surface@1.0.0` |
+| `project_authority` | `handbook.artifact-kind.project-authority@1.1.0` | `constitutional_authority` | `constitutional_root` via `handbook.capabilities.constitutional-root@1.0.0` | Charter | `.handbook/project/charter.yaml` | `always` | `null` |
+| `project_context` | `handbook.artifact-kind.project-context@1.1.0` | `project_context` | empty | Project Context | `.handbook/project/context.yaml` | `always` | `null` |
+| `environment_context` | `handbook.artifact-kind.environment-context@1.1.0` | `environment_context` | empty | Environment Context | `.handbook/project/environment.yaml` | `optional` | `null` |
 
 The root profile selects exactly those three descriptors and no Work
 Specification, Decision Record, or Risk Record descriptor. Selection does not
 imply materialization. Setup/doctor cannot treat unselected work/decision/risk
-artifacts as missing, scaffold empty general-purpose records, or treat a false
-Environment Context condition as incomplete.
+artifacts as missing or scaffold empty general-purpose records. Missing or
+invalid optional Environment Context is reported non-blockingly when no task
+gate is selected.
 
 `project_authority` is the one always-required instance selecting capability ID
 `constitutional_root`; its kind must conform to the full exact
@@ -649,41 +650,36 @@ requiredness.
 and safe-configuration fact surface. It cannot own secrets, runbooks, volatile
 live state, inferred deployment fact, exhaustive catalogs, or topology owned by
 another canonical source. One descriptor does not imply one internal
-environment. Its identity/path remain stable when inapplicable and absent.
+environment. Its selected identity/path remain stable; absence means only that
+no trusted Environment Context is loaded and makes no inapplicability claim.
 
 Paths and labels grant no typed semantics. Matching instance/role spellings do
 not merge namespaces. Consumers resolve exact descriptors; co-location does not
 merge responsibilities; path changes require explicit profile/migration
 handling with no fallback filename discovery or duplicate canonical authority.
 
-### Managed-operational-surface condition policy
+### Environment Context and task gate policy
 
-`handbook.condition.project.managed-operational-surface@1.0.0` is true only when
-an independently authoritative verified project fact or admitted evidence
-establishes continuing project responsibility for a runtime, deployment,
-operated automation, or operational integration whose durable facts must be
-maintained for safe operation, support, or change. Production is not required.
-Incidental language-runtime, package-manager, local/test-environment, container,
-or CI presence is insufficient, and a profile flag alone cannot replace the
-verified fact. Environment Context cannot satisfy its own condition.
+Environment Context is valid advisory context whenever its selected canonical
+YAML is present and structurally valid. File presence does not enable a gate.
+When no gate is selected, missing or invalid context cannot block work and
+unselected makes no claim about project-wide responsibility.
 
-| Outcome | Exact semantic class | Boolean/applicability effect |
+Future implementation enforcement is explicitly task-scoped and positive
+only. The feature/spec owns supported targets, baseline constraints, and
+cross-target completion. Each task declares portability or exact requirements
+drawn from Environment Context and may strengthen/narrow but not weaken the
+baseline. A selected session gate permits implementation only when those task
+requirements are a subset of positively verified session capabilities.
+Sprint/orchestration aggregation is scheduling and reporting only.
+
+| Context | Gate/proof | Effect |
 |---|---|---|
-| `true` | current authoritative evidence positively proves qualifying continuing responsibility | applicable; artifact required and missing/invalid fails closed |
-| `false` | affirmative current authoritative evidence proves no qualifying responsibility | inapplicable; absence is complete |
-| `unknown` | evaluable inputs prove neither true nor false | indeterminate; no coercion |
-| `unresolved` | exact definition/input/reference/evidence cannot resolve | indeterminate; no coercion |
-| `stale` | evidence is outside the explicit freshness basis | indeterminate; no coercion |
-| `refused` | circular, malformed, untrusted, disallowed, or materially contradictory without approved precedence | indeterminate; no coercion |
-
-Evaluation is deterministic over exact definitions, independently authoritative
-facts/admitted evidence, and an explicit freshness basis and records the full
-fingerprinted input/evidence closure. Identical closure reproduces the outcome.
-Bare silence cannot establish `false`. Contradictions produce `refused` unless a
-separately approved authority/precedence contract resolves them. The condition
-record schema, exact input bindings, evidence types, freshness thresholds,
-outcome precedence, evaluator, transport, and migration remain separate
-contracts. Conditionality creates no empty scaffold or automatic artifact.
+| valid | gate unselected | advisory context; normal work allowed |
+| missing/invalid | gate unselected | non-blocking report; normal work without trusted context |
+| valid | selected task requirements satisfied | implementation allowed for that task |
+| valid | selected proof missing/failing/unavailable | planning, inspection, diagnosis, handoff only |
+| missing/invalid | selected | planning/diagnostic mode until repaired |
 
 ### Lifecycle, support, and derived-view constraints
 
@@ -691,7 +687,7 @@ contracts. Conditionality creates no empty scaffold or automatic artifact.
 |---|---|
 | Project Authority | reviewed long-lived normative amendment; preserve provenance/history; reassess relevant governance, policy, exception, red-line, posture, and trigger changes |
 | Project Context | maintain current owned facts/references; reassess boundaries, ownership, and material bounded-topology changes without becoming a catalog |
-| Environment Context | maintain while applicable; reassess responsibility, durable dependencies/references, fact validity, and applicability evidence |
+| Environment Context | maintain named environments, capability IDs, references, known unknowns, and fact validity; gate selection is external and task-scoped |
 | Work Specification | one bounded intended-change identity; explicit status/history; never a rolling unrelated singleton or assertion of implementation/current truth |
 | Decision Record | one discrete-decision identity; preserve effect/status/history separation and supersession lineage |
 | Risk Record | evidence-qualified uncertainty; reassess relevant evidence/assumptions/ownership/treatment/validity/posture references without enacting policy |
@@ -709,7 +705,8 @@ Project Authority intake must satisfy the complete frozen constitutional-root
 coverage/approval/reassessment contract. Canonical YAML remains authoritative;
 fixed renderer output is derived and outside the capitalized Projection
 contract. The shipped root profile initially selects no Projection definitions.
-Exact intake/renderer refs and all implementations remain later decisions.
+Exact intake/renderer refs and implementations are admitted only by their
+owning implementation slices; this Phase 0 boundary does not select them.
 
 Operational/runbook, quality-strategy, and software/service/component/API/
 resource-catalog kinds are deferred. Environment Context may reference but not

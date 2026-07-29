@@ -1,12 +1,10 @@
 # HCM-2.4 implementation plan
 
-Status: partially executed under Option C planning containment. P0/P1A/P1B/P1C
-and P3/P3B are review-clean and committed. P2S is review-clean and committed at
-`755acc56fad6cc99c016dc58f94d310c84f98c58`; P2A is immutable historical
-feasibility evidence. Future native-adapter selection is superseded. P2
-remains unresolved, fail-closed, and not GREEN. The P4/P5 token prerequisite is
-review-clean and committed at `00dde01`; P4's separate negative-surface/path
-proof remains open. P6, P7, and Phase 2 exit remain closed.
+Status: active greenfield P2 correction. P0/P1A/P1B/P1C and P3/P3B are
+review-clean and committed. P2S, P2A, and Option C are historical evidence,
+not active architecture. The P4/P5 token prerequisite is review-clean and
+committed at `00dde01`; P4's separate negative-surface/path proof remains
+open. P6, P7, and Phase 2 exit remain closed.
 
 ## Dependency graph
 
@@ -23,15 +21,16 @@ P0 baseline/inventory
 
 P2–P5 may be prepared independently after P1C only under their own exact later
 selectors and must land serially when shared registry, fixture, proof, or
-generated inventory files overlap. Option C does not authorize P4 or unrelated
-work. P6 cannot start until P2 and P4, plus every other required predecessor,
-are committed, clean, and independently GREEN.
+generated inventory files overlap. The greenfield P2 correction does not
+authorize P4 or unrelated work. P6 cannot start until P2 and P4, plus every
+other required predecessor, are committed, clean, and independently GREEN.
 
 Current boundary: commits `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
 `5a2ccf6939be0e549e7e7355a245c7511c271eef`, and
 `00dde0162fcb15576c83b6ed40ab7286488d0890` contain completed reviewed
-packets. P2 has no approved applicability authority and remains fail-closed.
-P4/P5 have the exact operator-approved derivation selector frozen in
+packets. P2 now has approved greenfield Environment Context semantics; this
+packet must still pass verification and review before it is GREEN. P4/P5 have
+the exact operator-approved derivation selector frozen in
 `decision/20260727-p4-p5-coverage-token-derivation-selector.md`; selector
 review, RED/GREEN, supplemental causal closure, and commit are complete. P4
 retains an open negative-surface/path proof outside that selector. P2 and that
@@ -97,7 +96,6 @@ Work:
 - add the exact P2 CLI main/help/snapshot files and named tests from SPEC.
 
 Acceptance:
-
 - no undecided family, source, view, deletion, or proof row;
 - exact file manifests replace every planning glob;
 - HIGH/CRITICAL and UNKNOWN dispositions are explicit; and
@@ -332,159 +330,63 @@ GREEN:
   unit test, the three exact Unix-only assertion literals, and the one exact
   existing-helper setup substitution, with every read/proof anchor unchanged.
 
-## P2 — Environment Context vertical
+## P2 — Greenfield Environment Context correction
 
-Entry: P1C accepted; Environment Context impact UIDs resolved; P2S
-schema/definition freeze and P2A non-production feasibility are complete and
-immutable historical evidence. Option C supersedes the planned
-native-adapter/dependency selection. Runtime entry is closed.
+## P2.1 — Product/spec freeze
 
-Authority gate:
+- amend HCM-0.6 and active HCM-2.4 authority in place;
+- freeze the five-row context/gate behavior table;
+- freeze feature/spec policy and cross-target completion, task execution
+  authorization, and reporting-only orchestration aggregation;
+- make the future implementation-contract GREEN gate explicit.
 
-- HCM-0.6 deliberately leaves the condition record schema, exact input
-  bindings, admitted evidence types, precedence, freshness thresholds, and
-  evaluator implementation outside its released contract;
-- the remediated planning amendment
-  `decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md`
-  freezes eight exact schemas, retained admitted sources, immutable record/
-  transaction chains, the unique maximal transaction and two-head boundary,
-  producer verification/transaction, per-source freshness, total precedence,
-  ordered dependency-observation closure fingerprints, the six-row exact store
-  observation/nullability/error/fixture matrix with checked 4096-entry and
-  131072-byte canonical-envelope ceilings, no offending-entry retention, and
-  no over-limit envelope or fingerprint, owner/API/transport,
-  future symbols/tests, and impact ceilings without runtime authority;
-- the live shipped resolver consequently returns only `unresolved` /
-  `EvidenceContractUnavailable` and `indeterminate` for the selected
-  Environment Context descriptor;
-- this run does not select `crates/engine/src/profile_decision.rs`, a new
-  evaluator/producer, a schema/definition, or any evidence-contract runtime
-  surface; and
-- structured Environment Context input, `applicability_basis`, profile opt-in,
-  or mere artifact presence cannot authorize itself or be coerced to
-  condition `true`/`false`.
+## P2.2 — Rejected design cleanup
 
-Do not begin the RED-to-GREEN runtime loop. The prior review-clean P2S result
-and P2A observations remain historical evidence only. No future
-WebAuthn/FIDO/CTAP ceremony, USB/HID or device access, platform UI,
-cancellation/error integration, unsafe code, Cargo/lockfile change, dependency,
-native port, producer, evaluator, or resolver work is authorized by this plan.
-The 9/9 authenticator-security probe proves only bounded feasibility. A later
-human product decision may select a new authority model or a versioned profile
-direction, but it may not infer implementation authority from this
-containment. Separately authorized P4 or unrelated work requires its own exact
-selector. P6 still waits for P2 and P4 to become genuinely GREEN.
+- verify the P2S evaluator/evidence definitions have no runtime consumer;
+- delete the evaluator, eight schemas, and their dedicated test;
+- remove managed-operational-surface from the active profile/request path;
+- retain immutable historical commits, proofs, and dispatches without treating
+  them as current authority.
 
-Superseded historical decomposition:
+## P2.3 — Canonical contract
 
-1. P2S adds only the eight closed schemas and evaluator definition, with
-   closed-field/preimage/nullability vectors and no Rust production edit.
-   **Complete and review-clean at `755acc56`.**
-2. P2A runs a non-production native-platform feasibility probe. It stops for a
-   second human decision before any production adapter, dependency, Cargo,
-   unsafe-policy, process, or platform-module edit. **Complete with
-   conditionally feasible, presently blocked evidence; no durable probe
-   material remains.**
-3. P2P would have added the new evidence producer module/service and proved its
-   source/challenge/assertion/use-chain/record/two-head/immutable-transaction
-   transaction, unavailable-port zero-write, recovery, simultaneous-head
-   rollback, fork, replay, and cross-family refusal.
-4. P2R would have added only the evaluator in that module and proved bounded maximal-
-   transaction/fixed-head transport, ordered dependency-observation closure
-   replay, per-source freshness, and every reachable precedence branch.
-5. P2I would have edited only the exact `profile_decision.rs` enum/constructor/resolver/
-   private-helper/consumer selectors, preserves the direct public fallback,
-   and proves the explicit public-enum compatibility decision plus the
-   CRITICAL flow wall.
-6. P2V would have run only after the predecessors were independently
-   review-clean. It is not authorized.
+- correct the active Environment Context schema to named environments and
+  capability IDs without gate/evidence fields;
+- update intake coverage and exact fingerprints;
+- select Environment Context as optional with no condition;
+- provide typed duplicate-free parse, canonical serialization, bounded safe
+  load, and deterministic Markdown rendering.
 
-Items 3–6 are frozen historical planning, not an executable queue. No
-Environment Context applicability is inferred, coerced, or self-declared under
-the released contract. Creating `.handbook/project/environment.yaml`, changing
-its `applicability_basis`, or toggling profile state cannot change the
-condition outcome.
+## P2.4 — Advisory behavior
 
-### P2 course-correction product gate
+- add RED tests for optional missing and invalid context;
+- make overall readiness ignore missing/invalid failures only for the exact
+  unselected optional Environment Context policy;
+- preserve the exact row status/action so setup and doctor still report the
+  issue;
+- prove required artifacts and unrelated optional-artifact invalidity retain
+  their existing blocking policy;
+- add validated Environment Context as a rendered optional source in the live
+  advisory/session packet; omit and report missing/invalid context without
+  blocking that packet.
 
-The bounded reassessment is recorded in
-[`decision/20260728-p2-product-decision-reassessment.md`](../decision/20260728-p2-product-decision-reassessment.md).
-It compares five product directions:
+## P2.5 — Legacy cleanup
 
-1. indefinite fail-closed behavior, retained only as the safe baseline and not
-   a release solution;
-2. an additive exact default-profile successor that preserves Charter and
-   Project Context but postpones Environment Context;
-3. an explicit project-owner declaration with exact identity, subject,
-   true/false, freshness, revocation, contradiction, and audit semantics;
-4. a verifier-only successor for a named real external or already-owned
-   issuer/key with complete positive and negative coverage; and
-5. current Charter operational-reality evidence as positive support only,
-   never proof of global absence.
+- remove the kind-specific `author environment-inventory` Markdown writer and
+  its templates/tests;
+- remove Environment Inventory from fixed flow/baseline authority or otherwise
+  prove its bytes are never read, fingerprinted, or emitted;
+- keep canonical Environment Context mutation on the already-owned generic
+  artifact path.
 
-The planning recommendation is direction 2 because it is the smallest route to
-a usable READY repository without a new trust system, evidence producer, or
-native ceremony. It is not selected. Shipped-root 1.1 and 1.2 remain immutable;
-a later human decision must choose the exact successor version/fingerprint,
-approve the changed HCM-0.6 default, and explicitly amend the P2/P6/P7/Phase 2
-gates. Option C containment remains active until that decision.
+## P2.6 — Correction verification and landing
 
-For status precision, invalid, unsafe, or unreadable selected artifacts produce
-`INVALID` before the resolver's indeterminate applicability is classified.
-Missing or structurally valid Environment Context remains `INDETERMINATE`.
-Neither state can reach READY under the current shipped-root 1.2 selector.
-
-Every packet has a separate immutable subject, RED/GREEN wall, independent
-review, and reviewed commit. Creating a child packet does not complete P2.
-
-Fresh exact impact ceilings at commit
-`00dde0162fcb15576c83b6ed40ab7286488d0890` are CRITICAL/220 with 75 direct,
-8 processes, and 13 modules for `resolve_shipped_profile_decisions`;
-CRITICAL/156 with 1 direct, 7 processes, and 10 modules for
-`ResolvedProfileDecisions::from_profile`; CRITICAL/77 with 1 direct,
-6 processes, and 10 modules for `artifact_decision`; and LOW/0 for
-`ProjectConditionDecisionReason` with an incomplete type-edge caveat. Any wider
-fresh result, another existing production symbol, public `from_profile`
-signature/fallback change, or unapproved CLI/compiler adapter stops.
-
-RED:
-
-- the author command writes Environment Inventory Markdown;
-- changing the legacy Markdown can influence flow/baseline behavior; and
-- the selected conditional YAML is not the sole mutation/read authority.
-
-Work:
-
-- parse structured input into the exact Environment Context canonical schema;
-- validate and atomically write `.handbook/project/environment.yaml` only when
-  the selected descriptor condition applies;
-- route CLI, setup, doctor, compiler, manifest, and flow reads to retained YAML;
-- use only the exact Environment Inventory branches in the P2 selector,
-  including the fixed canonical/baseline and flow adapters required to make
-  legacy Markdown non-authoritative; leave aggregate bridge-type and
-  fixed-selector deletion to P6;
-- update `AuthorCommand::EnvironmentInventory` help in `crates/cli/src/main.rs`
-  and only the exact inline `author_help_matches_snapshot`, the
-  snapshot-consuming `author_environment_inventory_help_matches_snapshot`, and
-  the one consumed subcommand snapshot listed in SPEC;
-- render human-review Markdown from retained canonical bytes;
-- remove Environment Inventory Markdown templates, authority writers, validators,
-  fallback reads, and output-tag exceptions once their replacement tests pass.
-
-GREEN:
-
-- condition true/false, malformed/duplicate/oversize, no-follow, atomic refusal,
-  retained observation, and ABA/concurrency proofs pass;
-- renderer full-byte golden and fingerprint pass;
-- engine and compiler manifest generation prove the selected Environment
-  Context identity/fingerprint, conditional absence, and zero influence from
-  legacy Markdown mutation or deletion;
-- legacy Markdown deletion or mutation has no outcome effect;
-- Charter and Project Context focused regressions remain green.
-
-Stop rather than weakening this packet if condition `true`/`false` would
-require inference, an unchecked declaration, a self-referential Environment
-Context field, `indeterminate` coercion, or an unselected evaluator edit.
+- focused engine/compiler/CLI/flow tests and full proportional workspace wall;
+- format and strict lint;
+- forbidden-influence scans;
+- independent doubt/code-quality review;
+- GitNexus `detect_changes --scope compare --base-ref main`;
+- atomic local commits, no push, protected dirty paths excluded.
 
 ## P3 — Work Specification / Stage 10 vertical
 
@@ -647,7 +549,6 @@ This result closes only the selected token prerequisite. The P4 no-root,
 generated-command, inferred-filename, Projection, and persistent-view proof
 remains open; the current selector does not authorize additional test or proof
 implementation for that gate.
-
 ## P5 — Risk Record support proof
 
 Entry: P1C accepted.
@@ -677,8 +578,9 @@ prerequisite is committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`.
 Entry: P1A–P1C and P2–P5 individually committed and green; no bridge deletion
 has occurred.
 
-Current entry result: not satisfied. P2 remains unresolved and not GREEN. The
-P4/P5 token prerequisite is
+Current entry result: not satisfied. This P2 correction is not GREEN until
+its verification, independent review, and local landing complete. The P4/P5
+token prerequisite is
 review-clean and committed, but P4's separate negative-surface/path proof
 remains open. Do not begin P6.
 

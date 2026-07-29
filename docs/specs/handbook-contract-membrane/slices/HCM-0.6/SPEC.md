@@ -1,5 +1,10 @@
 # HCM-0.6 — Shipped Default Artifact Set Decision
 
+> Active product semantics were amended in place by the HCM-2.4 greenfield
+> correction. Environment Context is optional advisory context with no
+> applicability condition. This file preserves the original decision process;
+> the authoritative outcome is the linked decision record.
+
 ## Status and authority
 
 This slice is Phase 0 documentation/design work. It is authorized by the
@@ -101,12 +106,13 @@ The slice closes only when all of the following are true:
 - the proof wall and repository-required change detection pass; and
 - only documentation/control-pack artifacts are committed.
 
-The approved decision fixes exactly six kinds, three root-profile instances,
-always/always/conditional requiredness, the exact managed-operational-surface
-condition identity/policy, the unique constitutional root, exact role support,
-and the lifecycle/intake/renderer/Projection posture. Subordinate schemas,
-fields, policy IDs, definition IDs, publication, and runtime behavior remain
-unapproved.
+The greenfield-amended decision fixes exactly six kinds and three root-profile
+instances: required Project Context, required Project Authority, and optional
+Environment Context. Environment Context presence and validity control advisory
+context use; a separately selected task gate controls enforcement. No global
+applicability condition, evidence policy, or compatibility-only profile is part
+of the shipped default. The unique constitutional root, exact role support, and
+the lifecycle/intake/renderer/Projection posture remain as decided.
 
 ## Non-goals
 

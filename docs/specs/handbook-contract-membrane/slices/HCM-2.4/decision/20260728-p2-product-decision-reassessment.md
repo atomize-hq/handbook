@@ -1,6 +1,7 @@
 # P2 Environment Context product-decision reassessment
 
-Status: recommendation only; explicit human product decision required
+Status: superseded historical recommendation; the explicit human decision is
+[`20260728-p2-greenfield-environment-context-and-task-gate.md`](20260728-p2-greenfield-environment-context-and-task-gate.md)
 
 Date: 2026-07-28
 

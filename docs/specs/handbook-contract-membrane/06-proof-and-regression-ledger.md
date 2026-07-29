@@ -45,9 +45,9 @@ No lower proof level implies a higher one.
 
 ### `PR-002` — Structured baseline input parsing
 
-**Current evidence:** HCM-2.1 makes the closed Project Context `1.0` YAML record selected canonical truth with schema-bound parsing and typed decode; Charter and Environment Inventory retain typed structured authoring inputs without canonical-YAML authority.
+**Current evidence:** HCM-2.1 makes the closed Project Context `1.0` YAML record selected canonical truth with schema-bound parsing and typed decode; HCM-2.2 does the same for Charter; and the HCM-2.4 greenfield correction makes Environment Context `1.1` canonical YAML with typed decode, bounded load, safe generic mutation, and deterministic derived Markdown.
 
-**Classification:** `ContractCorrectAndProven` for the exact Project Context canonical-record pilot; `UsefulPrecursor` for the retained sibling input models.
+**Classification:** `ContractCorrectAndProven` for the exact Project Context, Charter, and Environment Context canonical-record paths; `UsefulPrecursor` for retained sibling input models.
 
 **Must preserve:** deterministic typed parsing/validation value, not Markdown authority.
 
@@ -145,16 +145,16 @@ closeout. This does not support a generic custom-kind intake claim.
 
 | Gate | Required proof | Current state |
 |---|---|---|
-| `PG-PROFILE-01` | selected profile resolves complete artifact/vocabulary/Resolution truth with deterministic fingerprint | open; HCM-1.4 proves deterministic selected-profile decision/readiness adoption in setup and doctor, while vocabulary/Resolution application, condition evaluation, and remaining consumers are open |
+| `PG-PROFILE-01` | selected profile resolves complete artifact/vocabulary/Resolution truth with deterministic fingerprint | open; HCM-1.4 proves deterministic selected-profile decision/readiness adoption in setup and doctor. HCM-2.4 removes the rejected Environment Context condition prerequisite and proves optional advisory readiness; vocabulary/Resolution application and remaining consumers stay open |
 | `PG-DEFAULT-01` | focused research plus a user brainstorming/decision session explicitly approve the shipped kind set, default instances, and requiredness; examples/current enums do not count | closed for the HCM-0.6 documentation decision by its exact approved record, final proof wall, clean independent review, and two-commit closeout; no runtime/profile publication proof |
 | `PG-KIND-01` | a versioned `ArtifactKindDefinition` resolves a safe canonical schema, validation, optional intake, lifecycle, and projections independently from repository instance state | open program-wide; HCM-1.1 proves kind/schema resolution, HCM-1.4 proves selected-instance structural inspection through the bound kind in setup/doctor, and HCM-2.1 consumes the selected Project Context schema. HCM-2.3 adds exact earned evidence for the repository-defined registry-brief kind/schema, optional supplied intake, immutable candidate/promotion lineage, atomic publication, and generic actual-binary validation path. HCM-2.4 P1A adds exact package-owned successor kind/intake/fixed-renderer closures and semantic repository admission for Project Context, Environment Context, Work Specification, Decision Record, and Risk Record without changing released schemas; P4/P5 add exact Decision/Risk generic mutation and promotion proof without changing released IDs or fingerprints. Lifecycle for other kinds, capitalized Projection, semantic-validator, P4's remaining negative-surface/path proof, and remaining-kind coverage stay open |
 | `PG-KIND-02` | repository-defined custom kind registers, passes meta-schema/structural validation, and exercises supplied intake coverage without a new Rust enum variant, executable hook, remote schema fetch, generated CLI command, or pre-Phase-3 generic projection engine | closed only for the exact HCM-2.3 repository-defined registry-brief path at implementation commit `628b672ef33326e87e4fb30be13489e8af04b38c` and final 111-path review subject `sha256:d510e94e5b47db209022927bc4afa74b8820e27cd645123cc1cdc3aa5f72fdef`; no program-wide generic/custom-kind, shipped-default, SDK/transport, remote-schema, generated-command, or Projection claim is earned |
-| `PG-ARTIFACT-01` | a profile-selected `ArtifactInstanceDescriptor` binds a kind to path/label/requiredness/dependencies and participates in validation/doctor/flow | open program-wide; HCM-1.4 proves descriptor-owned path/role/requiredness/applicability/capability identity plus structural validation and doctor/setup participation, and HCM-2.1 proves content-authority/author/doctor/flow participation for exact instance `project_context`. HCM-2.3 adds exact registry-brief descriptor-selection, canonical-path read/validation, generic operation-context, intake/candidate/promotion, and actual-binary evidence. HCM-2.4 selects shipped-root `1.2` with the exact Project Context, Project Authority, and Environment Context rows, proves a repository-profile-selected Work Specification descriptor through Stage 10 capture/handoff, and proves exact Decision/Risk generic intake/candidate/promotion/read/validate paths. Environment Context behavior, P4's separate negative-surface/path proof, aggregate flow adoption, and remaining product consumers stay open |
+| `PG-ARTIFACT-01` | a profile-selected `ArtifactInstanceDescriptor` binds a kind to path/label/requiredness/dependencies and participates in validation/doctor/flow | open program-wide; HCM-1.4 proves descriptor-owned path/role/requiredness/applicability/capability identity plus structural validation and doctor/setup participation, and HCM-2.1 proves content-authority/author/doctor/flow participation for exact instance `project_context`. HCM-2.3 adds exact registry-brief descriptor-selection, canonical-path read/validation, generic operation-context, intake/candidate/promotion, and actual-binary evidence. HCM-2.4 selects exact Project Context, Project Authority, and optional Environment Context rows, proves advisory Environment Context read/render/status, a repository-profile-selected Work Specification descriptor through Stage 10 capture/handoff, and exact Decision/Risk generic intake/candidate/promotion/read/validate paths. P4's separate negative-surface/path proof, aggregate flow adoption, and remaining product consumers stay open |
 | `PG-INTAKE-01` | guided-adaptive, express, and agent-assisted acquisition use one intake definition and produce the same candidate schema while exposing missing coverage | closed for the exact first-party Charter by HCM-2.2 all-mode, coverage-refusal, stable-replay, orphan-refusal, and installed-skill proof; generic/custom-kind intake remains open under `PG-KIND-02` |
 | `PG-INTAKE-02` | intake provenance distinguishes user declarations, evidenced inference, defaults, unknowns, contradictions, waivers, and approvals; normative fields cannot be silently inferred into authority | closed for the exact first-party Charter by the complete acyclic candidate-`1.3` semantic/exact-result/currentness chain, typed provenance, zero/one/many discovery, historical/orphan refusal, and retained recovery proof; no generic claim |
 | `PG-CHARTER-01` | `CharterIntakeDefinition` covers approved questionnaire domains, promotes only an approved schema-valid candidate to canonical Charter YAML, and deterministically renders Markdown as a renderer-derived human-review view | closed for the exact first-party Charter by candidate `1.3` exact-result authority, new approval, atomic promotion/lifecycle proof, canonical YAML, deterministic Markdown, and real product-path evidence |
 | `PG-YAML-01` | one artifact family is canonically YAML, structurally validated, and deterministically rendered | closed for exact shipped instance `project_context` by HCM-2.1 and independently evidenced for the exact HCM-2.4 Stage 10 Work Specification path; no program-wide or remaining-sibling claim |
-| `PG-YAML-02` | no dual editable Markdown/YAML truth remains for converted families | closed for exact Project Context, first-party Charter, the HCM-2.4 Stage 10 Work Specification path, and the exact Risk Record proof. Open program-wide for Environment Context, Decision Record's remaining negative-surface/path proof, aggregate flow, and other unconverted sibling surfaces |
+| `PG-YAML-02` | no dual editable Markdown/YAML truth remains for converted families | closed for exact Project Context, first-party Charter, the HCM-2.4 Stage 10 Work Specification path, and the exact Risk Record proof. HCM-2.4 greenfield correction closes Environment Context when legacy Environment Inventory influence is absent. Decision Record's remaining negative-surface/path proof, aggregate flow, and other unconverted sibling surfaces stay open |
 
 | `PG-VOCAB-01` | lexical and structural conflation render correctly without losing stable role resolution | open |
 | `PG-RES-01` | six-dimension envelope validates inheritance, authority, memory, and validation horizons | open |
@@ -197,8 +197,8 @@ Temporary scaffolding may be introduced only when a row is added here first.
 | Bridge ID | Architectural purpose | Allowed lifetime | Deletion proof |
 |---|---|---|---|
 | `BR-SUB-CLI-01` | let Substrate consume the versioned Handbook JSON protocol before the permanent published-Rust boundary is available | may enter the normal path only in HCM-6.1 after `PG-JSON-01`; remains isolated and replaceable until HCM-6.3 | `PG-PUBLISH-01` and `PG-SUB-RUST-01` pass for the replacing exact API/seam; the normal Substrate path no longer spawns/parses the Handbook CLI; bridge-specific dependencies/config/tests are removed; standalone Handbook CLI remains unaffected |
-| `BR-HCM-2-PILOT-FLOW-01` | let the one-family HCM-2.1 flow cutover consume selected canonical Project Context YAML and its in-memory fixed renderer while unconverted Charter, Environment Inventory content authority, and Feature Spec sources remain on the frozen fixed family; Environment Inventory receives only the packet's selected-YAML reference cutover | active only for exact selected instance `project_context`; it does not read or translate legacy Project Context Markdown and must be deleted no later than HCM-2.4 | all shipped families consumed by flow use profile-selected canonical structured truth; the mixed fixed/selected adapter, legacy Project Context output tag exception, and bridge-specific tests are removed; HCM-2.4 proof shows no fixed family/path selector or Project Context Markdown influence remains |
-| `BR-HCM-2-CHARTER-FLOW-01` | bounded HCM-2.2 bridge adding selected canonical Charter YAML and its in-memory fixed renderer to flow while Environment Inventory content and Feature Spec remain on the frozen fixed family | active only for exact instance `project_authority`; source/render fingerprints remain distinct and the bridge must be deleted no later than HCM-2.4 | HCM-2.4 moves all shipped families to selected structured truth and removes this adapter and its tests |
+| `BR-HCM-2-PILOT-FLOW-01` | let the one-family HCM-2.1 flow cutover consume selected canonical Project Context YAML and its in-memory fixed renderer while other fixed siblings remain | active only for exact selected instance `project_context`; P2 removes Environment Inventory influence but does not infer bridge deletion; P6 must delete it | all shipped families consumed by flow use profile-selected canonical structured truth; the mixed fixed/selected adapter, legacy Project Context output tag exception, and bridge-specific tests are removed; P6 proof shows no fixed family/path selector or Project Context Markdown influence remains |
+| `BR-HCM-2-CHARTER-FLOW-01` | bounded HCM-2.2 bridge adding selected canonical Charter YAML and its in-memory fixed renderer while other fixed siblings remain | active only for exact instance `project_authority`; source/render fingerprints remain distinct; Environment Inventory is no longer content authority; P6 must delete the bridge | P6 moves all shipped flow consumers to selected structured truth and removes this adapter and its tests |
 
 There is no approved user migration tool, legacy importer, dual-read mode, or compatibility profile.
 
@@ -237,6 +237,7 @@ Every implementation slice must preserve applicable baselines:
 29. schema, kind, capability, capability-dependency contract, intake, renderer, profile-parent, vocabulary, posture, and other HCM-0.2 definition refs derive mechanically as `identity@version`; every referenced definition has a recomputable uniform fingerprint producer, the graph is acyclic with intake compatibility owned only intake -> kind, and range/latest/ambient/bare-ref fallback is refused.
 30. a resolved artifact instance has one concrete safe repo-relative canonical path; templates and absolute paths do not survive resolution.
 31. fixed renderer-definition refs and generic Projection-definition refs remain separate; declaring a future compatible Projection definition never authorizes HCM-0.2/Phase 2 to produce a capitalized Projection or populate a precursor engine.
+31a. Environment Context presence and validity permit advisory use but never select enforcement; future implementation authorization is task-scoped positive subset proof, feature/spec cross-target completion is separate, and sprint/orchestration aggregation is non-authoritative.
 32. stable roles and semantic capabilities are separate registries/fields; profiles, kinds, and vocabulary pin one exact stable-role registry ref/fingerprint pair, while versioned capability contracts bind required semantic fields to schema pointers and pass semantic validation; dependencies cite exact capability contracts and use only the frozen `exactly_one`/`at_least_one` semantics without source-order provider selection.
 33. every valid resolved profile has exactly one `always`-required instance selecting the `constitutional_root` capability, and role/vocabulary/conditions/overlays cannot erase or multiply it.
 34. intake source kinds and coverage results remain typed; defaults, inference, waivers, contradictions, unknowns, declarations, and approvals do not collapse into one value authority.
@@ -426,8 +427,8 @@ transport, contract, dock, or gate proof. Before HCM-0.6 may close:
 - Minimal, Standard, and Full candidates use the same rubric and keep shipped
   kinds distinct from selected instances and requiredness;
 - the explicit user decision record fixes exactly six first-party kind refs,
-  exactly three root-profile instance descriptors, always/always/conditional
-  requiredness, the exact managed-operational-surface condition ref/policy,
+  exactly three root-profile instance descriptors, always/always/optional
+  requiredness with no Environment Context condition,
   and one unique `constitutional_root` provider;
 - the machine tables pin full exact namespaced kind refs, the
   `handbook.capabilities.constitutional-root@1.0.0` capability contract, and
@@ -615,11 +616,12 @@ may close HCM-1.2:
   schemas; only Project Authority advertises `constitutional_root`; every
   lifecycle, intake, renderer, review-trigger, required-capability, Projection,
   and extension selection remains empty or null;
-- the managed-operational-surface condition, empty shipped vocabulary, four-
-  level/six-domain Context Resolution stack, and matcher/escalation/promotion
-  records are exact typed fingerprint producers only and expose no evaluator,
-  selector, escalation, memory-promotion, label-application, setup, or doctor
-  behavior;
+- the originally published managed-operational-surface condition was an exact
+  typed fingerprint producer with no evaluator; the HCM-2.4 greenfield
+  correction removes it from the active product rather than promoting it to a
+  runtime authority. The empty shipped vocabulary, four-level/six-domain
+  Context Resolution stack, and matcher/escalation/promotion records remain
+  exact typed fingerprint producers only;
 - closed artifact descriptors validate exact kinds, roles, capabilities,
   normalized unique paths, requiredness/condition truth, dependency namespace/
   contract/cardinality, later-owned emptiness, and exactly one always-required
@@ -1196,10 +1198,11 @@ fetch, shipped-default expansion, or general custom-kind publication claim is
 earned there. At the HCM-2.3 closeout, HCM-2.4 and all later phases remained
 unauthorized.
 
-## HCM-2.4 partial implementation evidence boundary
+## HCM-2.4 greenfield correction evidence boundary
 
-HCM-2.4 has not closed and does not satisfy the Phase 2 exit gate. Its
-independently reviewed, committed partial boundary consists of:
+Earlier HCM-2.4 commits remain historical evidence. The accepted greenfield P2
+decision supersedes their active evaluator/native conclusions without
+rewriting their immutable proof records. The corrected boundary consists of:
 
 - checkpoint commit `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
   which contains P0, review-clean P1A/P1B/P1C, the truthful P2 authority stop,
@@ -1221,18 +1224,10 @@ independently reviewed, committed partial boundary consists of:
   ASCII `_` with `-` in the final coverage-ID segment before the unchanged
   `-value` suffix, and the Decision/Risk/generic-lineage walls passed 4/4,
   13/13, and 54/54 with zero ignores;
-- P2S commit `755acc56fad6cc99c016dc58f94d310c84f98c58`,
-  whose different-fresh closure review returned CLEAN over the exact
-  schema/definition subject
-  `sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04`;
-  it adds eight unregistered closed schemas, one unregistered evaluator
-  definition, and schema/definition proof only, with 15/15 focused and 6/6
-  registry-preservation tests;
-- bounded P2A non-production evidence proving the existing unavailable native
-  port leaves a prepared repository byte-identical, while recording that the
-  local Windows WebAuthn DLL/header exist but no approved safe binding, live
-  CTAP2.1 transport/device ceremony, or native cancellation/HRESULT mapping is
-  available under current authority;
+- P2S commit `755acc56fad6cc99c016dc58f94d310c84f98c58` and P2A remain
+  immutable historical feasibility/design evidence only; their unconsumed
+  evaluator/schemas are removed from the active tree and no native work is
+  selected;
 - exact package admission of five successor kind/intake/fixed-renderer
   closures, live shipped-root `1.2` selection with exactly three root
   descriptors, and byte/fingerprint-preserved HCM-2.2 Charter authority; and
@@ -1240,20 +1235,13 @@ independently reviewed, committed partial boundary consists of:
   feature-identity, and handoff authority, with deterministic Feature Spec
   Markdown retained only as a human-review view.
 
-The maximum earned promotion is the exact definition/profile boundary above,
-the additive P2S schema/evaluator-definition freeze, and the exact Work
-Specification, Decision mutation/promotion, and Risk mutation/promotion real
-paths. Environment Context remains unconverted: no P2 producer, production
-native adapter, evaluator runtime, resolver integration, or Environment
-Context writer is authorized. P2A is conditionally feasible but presently
-blocked on an exact second human adapter/dependency decision.
-P4's no-root/generated-command/inferred-filename/Projection/persistent-view
-proof remains open even though its token prerequisite and positive mutation
-path are GREEN. P6 is therefore ineligible, both
-`BR-HCM-2-PILOT-FLOW-01` and `BR-HCM-2-CHARTER-FLOW-01` remain active, fixed
-family/path selection remains live, and `PG-YAML-02` is not closed
-program-wide. No Phase 2 exit, bridge deletion, generic Projection, public API,
-SDK/transport, released-schema change, or HCM-3.x authority is claimed.
+The corrected P2 earns only optional canonical Environment Context YAML,
+generic schema-backed intake/safe promotion, advisory read/validation,
+deterministic fixed rendering, setup/doctor status, and removal of legacy
+Environment Inventory influence. Task-gate runtime remains deferred behind the
+active implementation-contract acceptance gate. P4 and unrelated aggregate
+flow cleanup retain their own proof obligations. No Phase 2 exit, generic
+Projection, SDK/transport, or HCM-3.x authority is inferred.
 
 ## Control-pack orchestration-repair proof gate
 

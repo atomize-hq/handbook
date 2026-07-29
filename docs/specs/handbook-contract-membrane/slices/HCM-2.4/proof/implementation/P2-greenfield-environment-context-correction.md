@@ -271,9 +271,11 @@ Starting HEAD: `7becde555bcc9742cd0ada4cff27542f521e6abb`.
 
 - index status: current at `7becde5` on
   `feat/handbook-contract-membrane`.
-- final pre-commit compare to `main`: 1,167 files, 8,894 symbols, 243 affected
-  processes, CRITICAL. This is the whole long-lived branch delta rather than
-  the packet; the count includes newly staged packet definitions.
+- first implementation pre-commit compare to `main`: 1,167 files, 8,894
+  symbols, 243 affected processes, CRITICAL. The final active-authority staged
+  compare was 1,168 files with the same 8,894 symbols, 243 processes, and
+  CRITICAL rating. These are whole long-lived branch deltas rather than packet
+  risk; the counts include newly staged packet definitions/authority.
 - unstaged indexed view: 124 files, 236 symbols, eight affected processes,
   HIGH. It includes the eight protected documentation changes and stale graph
   mappings for deleted Environment Inventory preflight symbols; the packet
@@ -281,6 +283,8 @@ Starting HEAD: `7becde555bcc9742cd0ada4cff27542f521e6abb`.
 - first staged implementation group: 107 indexed files, 155 symbols, eight
   affected processes, HIGH; the 128 staged paths include assets and records
   without indexed symbols.
+- active-authority staged group: 15 files, 74 symbols, no affected processes,
+  LOW.
 
 ### Protected paths
 

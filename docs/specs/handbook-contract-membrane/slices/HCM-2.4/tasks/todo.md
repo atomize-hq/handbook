@@ -1,12 +1,10 @@
 # HCM-2.4 implementation checklist
 
-Status: partial implementation under Option C planning containment.
-P0/P1A/P1B/P1C and P3/P3B are review-clean. P2S is review-clean and committed
-at `755acc56`; P2A is immutable non-production feasibility evidence. Future
-native-adapter selection is superseded. P2 remains unresolved, fail-closed, and
-not GREEN. The P4/P5 token prerequisite is review-clean and committed at
-`00dde01`; P4's separate negative-surface/path proof remains open. P6, P7, and
-Phase 2 exit remain incomplete.
+Status: active greenfield P2 correction. P0/P1A/P1B/P1C and P3/P3B are
+review-clean. P2S, P2A, and Option C are historical evidence, not active
+architecture. The P4/P5 token prerequisite is review-clean and committed at
+`00dde01`; P4's separate negative-surface/path proof remains open. P6, P7,
+and Phase 2 exit remain incomplete.
 
 ## Entry
 
@@ -47,7 +45,6 @@ Phase 2 exit remain incomplete.
       review CLEAN.
 
 ## P1A — Definition support and admission
-
 - [x] Add immutable exact-version successors for Project Context, Environment
       Context, Work Specification, Decision Record, and Risk Record.
 - [x] Add one schema-backed first-party intake and fixed deterministic renderer
@@ -152,112 +149,43 @@ Phase 2 exit remain incomplete.
       closure review CLEAN at dispatch
       `20260726T235106Z--HCM-2-4--p1c-shipped-root-adoption-closure-review`.
 
-## P2 — Environment Context
+## P2 — Greenfield Environment Context correction
 
-- [x] Draft the exact planning-only evidence/evaluator amendment:
-      `decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md`.
-- [x] Rebuild GitNexus at `00dde01`, record the three CRITICAL resolver
-      ceilings and the incomplete-edge LOW reason-enum result, and run the
-      9/9 non-production authenticator-security feasibility probe.
-- [x] Obtain fresh discovery review of the planning amendment; reviewer
-      `/root/hcm_2_4_p2_planning_review` returned seven P2/Required findings
-      covering rollback, source fingerprints, closed schemas, freshness,
-      outcome reachability, API compatibility, and packet decomposition.
-- [x] Remediate all seven findings in the planning/control-pack subject by
-      adding the monotonic evidence/authenticator head boundary, retained
-      source schema and preimage, total closed records/closure, per-source
-      freshness, reachable precedence, exact compatibility API, and separate
-      P2S/P2A/P2P/P2R/P2I/P2V packets.
-- [x] Obtain different-fresh closure review; reviewer
-      `/root/hcm_2_4_p2_planning_closure` closed five findings and returned two
-      causal P2/Required gaps for simultaneous two-head rollback and incomplete
-      dependency-byte observation binding.
-- [x] Remediate both causal findings with a safely enumerated unique maximal
-      immutable transaction chain and ordered closed observation rows for every
-      attempted dependency class.
-- [x] Obtain supplemental causal review 1; reviewer
-      `/root/hcm_2_4_p2_planning_supplemental_1` closed rollback resistance and
-      returned one causal P2 for transaction-directory failures that precede a
-      sequence-bearing observation row.
-- [x] Remediate that finding with an exact first
-      `evidence_transaction_store` row, canonical raw-filename inventory
-      fingerprint, closed error codes, and six store-level proof vectors.
-- [x] Record supplemental causal review 2's final P2: the six store failures
-      lacked a normative one-to-one observation/nullability/error/fixture/
-      closure matrix.
-- [x] Repair only that gap with exact absent, unsafe, unreadable,
-      invalid-entry, alias, and over-limit rows plus deterministic Unix/Windows
-      first-row fixtures.
-- [x] Freeze the one-review rule: start a new matrix-only discovery lineage,
-      not a third supplemental cycle; any valid P1/P2 stops without another
-      repair, while CLEAN permits the reviewed planning commit and human
-      approval request only.
-- [x] Record the matrix-only discovery review's P2: a complete over-limit
-      directory envelope is unbounded against the frozen 131072-byte ceiling.
-- [x] Record the later unadmitted discovery signal: exact transaction names
-      first exceed 131072 bytes at Unix entry 1102 and Windows entry 558, before
-      the count ceiling; the signal did not enter a review gate.
-- [x] Repair only the newly authorized gap with checked 4096-entry and
-      131072-byte projected canonical-envelope ceilings, exact
-      `directory_limit_exceeded` nullability/error/first-row/closure semantics,
-      one fixed closure for all count/byte/arithmetic over-limit stores, and
-      count 4096/4097, Unix 1101/1102, Windows 557/558, exact
-      131072/131073-byte, long-name, and arbitrary-suffix vectors.
-- [x] Obtain exactly one fresh complete-subject review; any valid P1/P2 stops
-      without remediation, while CLEAN permits only the reviewed planning
-      commit, separate mechanical closeout, and distinct P2S/P2A approval.
-- [x] Implement and independently review the eight P2S schemas, exact evaluator
-      definition, semantic/preimage/nullability/dual-ceiling vectors, and
-      registration-absence proof without a Rust production edit; commit
-      `755acc56`, reviewed subject `sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04`.
-- [x] Run the bounded P2A non-production probe: preserve the supporting 9/9
-      authenticator-security wall, prove unavailable-port filesystem
-      zero-write 1/1 with discarded temporary material, and record the
-      present Windows WebAuthn surface plus unavailable safe binding/live
-      transport/cancellation behavior.
-- [x] Select Option C planning containment: supersede future production
-      native-adapter selection and preserve P2S/P2A as immutable historical
-      evidence.
-- [x] Freeze the containment boundary: no WebAuthn/FIDO/CTAP, USB/HID, device,
-      platform UI, cancellation/error, unsafe, Cargo/lockfile, dependency,
-      producer, evaluator, resolver, or native integration work is authorized.
-- [x] Preserve the released fail-closed result: no structured Environment
-      Context input, `applicability_basis`, profile toggle, artifact presence,
-      or `indeterminate` coercion can establish applicability.
-- [x] Trace `artifact_decision` through inspection/readiness classification,
-      setup action selection, doctor/setup rendering, and CLI exit policy.
-      Record the missing/structurally-valid `INDETERMINATE` path, the
-      higher-precedence invalid/unsafe/unreadable `INVALID` path, nonzero exit,
-      and the invariant that shipped-root 1.2 cannot reach READY.
-- [x] Record the bounded A–E product analysis in
-      `decision/20260728-p2-product-decision-reassessment.md`, including all
-      requested experience, security, burden, contract, versioning, program,
-      READY, and next-packet dimensions.
-- [x] Recommend, without selecting, an additive default-profile successor that
-      temporarily postpones Environment Context, preserves Charter and Project
-      Context authority, and leaves shipped-root 1.1/1.2 immutable.
-- [x] Obtain isolated Option C containment review: dispatch
-      `20260728T134152Z--HCM-2-4--p2-option-c-containment-review` returned CLEAN
-      with no findings.
-- [x] Obtain isolated product-analysis discovery review, remediate
-      `PRODUCT-STATUS-001` by recording `INVALID` precedence, and obtain
-      different-fresh CLEAN closure at dispatch
-      `20260728T140357Z--HCM-2-4--p2-product-decision-reassessment-closure-review`.
-- [ ] BLOCKED: obtain a later explicit human product decision selecting a
-      released-authority direction. Option C itself does not select an
-      authority model or authorize implementation.
-- [ ] Establish a focused RED proving Markdown is currently authoritative.
-- [ ] Write only selected `.handbook/project/environment.yaml` canonical bytes.
-- [ ] Cut CLI/setup/doctor/compiler/flow reads to selected retained YAML.
-- [ ] Update only `AuthorCommand::EnvironmentInventory` help,
-      `author_help_matches_snapshot`,
-      `author_environment_inventory_help_matches_snapshot`, and the one consumed
-      subcommand snapshot added by the amended manifest.
-- [ ] Render Markdown only from canonical bytes.
-- [ ] Remove legacy Environment Inventory authority helpers/templates/fallbacks.
-- [ ] Prove condition, schema, safe path, no-follow, atomicity, retained
-      observation, concurrency, full-byte view, and zero legacy influence.
-- [ ] Record status/evidence: pending.
+### Authority
+
+- [x] Record the accepted Environment Context/task-gate product decision.
+- [x] Amend HCM-0.6 and HCM-2.4 active semantics in place.
+- [x] Freeze the five-row behavior table.
+- [x] Add the future implementation-contract GREEN gate.
+- [x] Rebaseline active program/P6/P7/Phase 2 gates without closing P4.
+
+### Rejected machinery
+
+- [x] Verify the P2S evaluator/evidence files have no runtime consumer.
+- [x] Delete the evaluator, eight evidence schemas, and dedicated test.
+- [x] Remove managed-operational-surface from active profile resolution.
+- [x] Prove no rejected evidence identity influences runtime.
+
+### Environment Context vertical
+
+- [x] Establish focused RED for optional advisory readiness and schema shape.
+- [x] Correct the canonical schema/intake/profile exact closures.
+- [x] Add typed parse, canonical serialize, bounded load, and deterministic
+      Markdown render.
+- [x] Integrate validated Environment Context into the live advisory/session
+      packet as a rendered optional source; omit invalid/missing context with a
+      non-blocking report.
+- [x] Scope non-blocking readiness to the exact unselected Environment Context
+      policy and prove another invalid optional artifact still blocks.
+- [x] Prove generic intake/validation/safe promotion remains the sole writer.
+- [x] Prove setup/doctor report optional invalid/missing context non-blockingly.
+- [x] Prove required artifact failures still block.
+
+### Legacy cleanup
+
+- [x] Remove Environment Inventory Markdown authoring and templates.
+- [x] Remove fixed legacy Environment Inventory authority/influence.
+- [x] Prove legacy Markdown changes cannot affect readiness, flow, or output.
 
 ## P3 — Work Specification
 
@@ -429,8 +357,8 @@ Phase 2 exit remain incomplete.
 
 ## P6 — Aggregate cleanup
 
-- [ ] BLOCKED: P2 is unresolved/not GREEN and P4's separate
-      negative-surface/path proof remains open. The P4/P5 token prerequisite
+- [ ] BLOCKED: this P2 correction is not yet review-clean/GREEN and P4's
+      separate negative-surface/path proof remains open. The P4/P5 token prerequisite
       is review-clean and committed.
 - [ ] Replace fixed/bridge flow input collection with admitted selected
       descriptors and retained canonical bytes.
@@ -446,7 +374,7 @@ Phase 2 exit remain incomplete.
 ## P7 — Proof, review, and closeout
 
 - [ ] BLOCKED: P7 cannot begin until P6 is accepted; Phase 2 exit cannot be
-      claimed from Option C containment.
+      claimed from this bounded P2 correction.
 - [ ] Run every per-family proof and exact Phase 2 exit mapping.
 - [ ] Replay exact 1.1 acceptance, exact 1.2 compatibility, every
       Project-Authority-field negative, real-path 1.2 selection, byte-identical
@@ -469,3 +397,25 @@ Phase 2 exit remain incomplete.
 - [ ] Stop before HCM-3.x or any automatically inferred implementation.
 - [ ] State in the completed handoff that implementation requires a new explicit
       top-level selection of that exact handoff and enters read-only P0 first.
+
+## Verification and landing
+
+- [x] Focused RED/GREEN tests pass.
+- [x] Rerun the proportional/full engine/compiler/flow/CLI wall after review
+      remediation.
+- [x] Rerun format, strict lint, and diff checks after review remediation.
+- [x] Rerun forbidden-influence scans after review remediation.
+- [x] Fresh independent review is clean and all P1/P2 findings are closed.
+- [x] Rerun GitNexus compare-to-main change detection after review remediation.
+- [ ] Atomic local commits created; nothing pushed.
+- [x] All eight original protected dirty paths and the concurrent
+      `docs/ideas/intent-to-outcome-fidelity.md` path remain untouched,
+      unstaged, and uncommitted.
+
+## Deliberately deferred
+
+- [x] Do not build future implementation-task declarations, feature/spec
+      baseline enforcement, session proof, gate selection, subset matching, or
+      cross-target completion runtime in this packet.
+- [x] Do not add trust/identity, native/hardware, evidence-ledger, revocation,
+      applicability-oracle, plugin, or transport machinery.

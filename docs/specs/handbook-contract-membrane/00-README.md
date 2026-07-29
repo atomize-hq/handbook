@@ -4,7 +4,7 @@
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
-**Implementation authorization:** HCM-1.1 through HCM-2.3 are completed bounded evidence, not continuing authority. HCM-2.3 closes `PG-KIND-02` only for the proven repository-defined registry-brief path, adds the exact earned registry-brief subsets to `PG-KIND-01` and `PG-ARTIFACT-01`, preserves first-party Charter as `ContractCorrectAndProven`, and leaves broader generic/custom-kind intake `TargetOnly`; it adds no shipped kind, SDK or public transport support, Projection engine, remote schema fetching, generated command, broader artifact-family conversion, or later-slice authority. `handbook-engine` `0.2.0` is the accepted compatibility boundary for the landed public-enum additions; it is not a publication or downstream-adoption claim. HCM-2.4 and every later slice remain unauthorized until separately selected.
+**Implementation authorization:** HCM-1.1 through HCM-2.3 are completed bounded evidence, not continuing authority. HCM-2.3 closes `PG-KIND-02` only for the proven repository-defined registry-brief path, adds the exact earned registry-brief subsets to `PG-KIND-01` and `PG-ARTIFACT-01`, preserves first-party Charter as `ContractCorrectAndProven`, and leaves broader generic/custom-kind intake `TargetOnly`; it adds no shipped kind, SDK or public transport support, Projection engine, remote schema fetching, generated command, broader artifact-family conversion, or later-slice authority. `handbook-engine` `0.2.0` is the accepted compatibility boundary for the landed public-enum additions; it is not a publication or downstream-adoption claim. HCM-2.4 is now selected only for its bounded greenfield P2 correction; P4, P6, P7, full HCM-2.4 completion, Phase 2 exit, and every later slice remain unauthorized until their own exact gates are satisfied.
 **Repo-truth snapshot:** 2026-07-25 at `7b3b5454ef363d08e4c6c78e6a201d8c36c10c5c`; re-check live code before every slice
 
 ## Purpose
@@ -263,8 +263,9 @@ restart, concurrency, and actual-binary path. Only the exact registry-brief
 kind/schema and intake subsets move to `RealPathAdopted`; broader
 generic/custom-kind intake remains `TargetOnly`. `PG-KIND-02` closes only for
 that proven path, while `PG-KIND-01` and `PG-ARTIFACT-01` receive only their
-exact earned subset evidence. HCM-2.4 and all later slices remain unauthorized
-pending their own packet and selector.
+exact earned subset evidence. At that HCM-2.3 closeout, HCM-2.4 and all later slices remained unauthorized.
+The current HCM-2.4 authorization is bounded to the greenfield P2 correction;
+P4, P6, P7, full HCM-2.4 completion, and later slices retain their own gates.
 
 The shipped default artifact set is approved in [`slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md`](slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md)
 and its exact kind, profile, descriptor, and selected-registry data now exist.

@@ -1,5 +1,8 @@
 # HCM-2.4 P2 condition-evaluator authority stop
 
+> Superseded historical stop. The accepted greenfield decision removes the
+> condition prerequisite instead of implementing an evaluator.
+
 Status: accepted after independent clean review; runtime prerequisite remains open
 
 Date: 2026-07-27

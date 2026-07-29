@@ -1,15 +1,11 @@
 # HCM-2.4 — Remaining shipped artifact-family conversion
 
-Status: partially implemented under Option C planning containment. P0/P1A/P1B/
-P1C and P3/P3B are review-clean and committed; the exact P4/P5 coverage-token
-prerequisite is review-clean and committed at
-`00dde0162fcb15576c83b6ed40ab7286488d0890`. P4's separate
-negative-surface/path proof remains open. P2S is review-clean and committed at
-`755acc56fad6cc99c016dc58f94d310c84f98c58`; P2A is retained as immutable
-non-production feasibility evidence. Future native-adapter selection is
-superseded. P2 remains unresolved, fail-closed, and not GREEN. No production
-adapter or P2P began. P6, P7, HCM-2.4 completion, and Phase 2 exit are not
-earned.
+Status: active greenfield P2 correction. P0/P1A/P1B/P1C and P3/P3B are
+review-clean and committed; the P4/P5 token prerequisite is accepted at
+`00dde0162fcb15576c83b6ed40ab7286488d0890`, P4's separate
+negative-surface/path proof remains open, and P5 remains accepted. P6, P7,
+HCM-2.4 completion, and Phase 2 exit remain unearned. P2S/P2A/Option C are
+historical evidence only under the 2026-07-28 greenfield decision.
 
 Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
 
@@ -47,12 +43,12 @@ end:
 - the exact Phase 2 exit proofs are replayed without weakening the completed
   Charter, Project Context, or HCM-2.3 registry-brief authority.
 
-This document freezes implementation packets and proof obligations. Runtime
-work is authorized only through exact selectors recorded by parent-owned
-orchestration. The current selection authorizes only Option C containment
-planning and a product-decision reassessment. It does not authorize runtime,
-schema/definition, Cargo/dependency, native integration, P4, P6, P7, Phase 2
-exit, or another slice.
+This document freezes implementation packets and proof obligations. The
+current selection authorizes the bounded greenfield P2 correction described
+below, including its documentation, definition, runtime, cleanup, test, proof,
+and local-commit surfaces. It does not authorize future task-gate runtime, P4,
+P6, P7, Phase 2 exit, HCM-3.x, native/hardware/trust/evidence infrastructure,
+dependencies, Cargo changes, or another slice.
 
 ## Authority and preserved decisions
 
@@ -72,22 +68,26 @@ below:
    released 1.1 profile ref and fingerprint.
 2. Project Context remains selected at `.handbook/project/context.yaml`; the
    HCM-2.1 canonical bytes and renderer behavior remain regression anchors.
-3. `handbook.profile.shipped-root@1.1.0` remains immutable. Its successor may
-   still select exactly three root instances—Project Authority, Project Context,
-   and conditional Environment Context. It must not add Work Specification,
-   Decision Record, or Risk Record root instances.
+3. The active greenfield shipped root is corrected in place and selects
+   exactly three root instances—Project Authority, Project Context, and optional
+   Environment Context with no condition. Older exact identities remain only
+   where the active Charter boundary genuinely pins them; Git history, not a
+   compatibility-only successor, preserves superseded product history.
 4. The HCM-2.3 `registry-brief` custom kind, its 111-path subject fingerprint,
    generic operation authority, real-binary proof, and non-enumerated command
    surface remain unchanged. It is a preservation row, not a seventh shipped
    first-party kind.
-5. Existing released schema, kind, profile, intake, and renderer definition
-   bytes are immutable. HCM-2.4 uses additive exact-version successors where a
-   definition must gain references.
+5. Exact schema, kind, profile, intake, and renderer identities remain where
+   active architectural closures cite them. Greenfield correction does not
+   create a successor solely for release compatibility and may correct the
+   active shipped-root identity in place.
 
 ## Versioned Charter compatibility membrane
 
-The HCM-2.4 profile successor must not change the Charter authority selected by
-HCM-2.2. The only authorized compatibility boundary is the existing
+The active shipped profile must not change the Charter authority selected by
+HCM-2.2. This is an internal exact-identity architectural boundary, not an
+external migration or release-compatibility promise. The only authorized
+boundary is the existing
 `CharterDefinitionRegistry::validate_selected_decisions` function, with its
 signature and public API unchanged.
 
@@ -144,7 +144,7 @@ explicit no-edit anchors.
 | --- | --- | --- | --- | --- |
 | Project Authority / Charter | `handbook.artifact-kind.project-authority@1.1.0` / `handbook.schemas.artifacts.project-authority@1.1.0` | Always: `.handbook/project/charter.yaml` | None | Preservation-only; consume through the common selected-artifact path without changing Charter authority |
 | Project Context | `handbook.artifact-kind.project-context@1.0.0` / `handbook.schemas.artifacts.project-context@1.0.0` | Always: `.handbook/project/context.yaml` | Canonical YAML exists, but the published kind/profile has no intake or renderer reference | Add `handbook.intake.project-context@1.0.0`, `handbook.renderer.project-context-review-markdown@1.0.0`, and an additive kind successor; preserve HCM-2.1 bytes and rendering |
-| Environment Context | `handbook.artifact-kind.environment-context@1.0.0` / `handbook.schemas.artifacts.environment-context@1.0.0` | Conditional: `.handbook/project/environment.yaml` | The authoring and flow path still treats Environment Inventory Markdown as editable authority | Make selected Environment Context YAML the only editable source, publish intake/renderer support, and delete Markdown-authority helpers after equivalence proof |
+| Environment Context | `handbook.artifact-kind.environment-context@1.1.0` / `handbook.schemas.artifacts.environment-context@1.1.0` | Optional: `.handbook/project/environment.yaml` | The rejected P2 path treated legacy Environment Inventory Markdown and condition evidence as authority | Keep Environment Context YAML as the only editable source; use valid content as advisory context independently of future explicit task-gate selection; delete legacy Markdown and evaluator influence |
 | Work Specification | `handbook.artifact-kind.work-specification@1.0.0` / `handbook.schemas.artifacts.work-specification@1.0.0` | No shipped-root singleton | Stage 10 captures `artifacts/feature_spec/FEATURE_SPEC.md` as authority; the kind has no intake or renderer | Capture structured Work Specification YAML at the fixed path `artifacts/work-specification/work-specification.yaml`; retain `artifacts/feature_spec/FEATURE_SPEC.md` only as a disposable deterministic view; prove a repository-profile-selected real path |
 | Decision Record | `handbook.artifact-kind.decision-record@1.0.0` / `handbook.schemas.artifacts.decision-record@1.0.0` | None by design | Kind is schema-only and has no first-party intake/renderer | Publish fixed intake/renderer support and prove it through an explicit repository-profile descriptor; create no root instance or command |
 | Risk Record | `handbook.artifact-kind.risk-record@1.0.0` / `handbook.schemas.artifacts.risk-record@1.0.0` | None by design | Kind is schema-only and has no first-party intake/renderer | Publish fixed intake/renderer support and prove it through an explicit repository-profile descriptor; create no root instance or command |
@@ -161,7 +161,7 @@ artifacts, not additional editable artifact families.
 | --- | --- | --- | --- | --- |
 | Project Authority | `.handbook/project/charter.yaml` | Existing Charter intake and HCM-2.2 authority | Existing Charter review renderer | View is derived; never competes with committed Charter authority |
 | Project Context | `.handbook/project/context.yaml` | New published intake covers the exact 1.0 schema and existing author path | New definition binds the existing deterministic renderer | View is generated from retained canonical bytes; no Markdown input or fallback |
-| Environment Context | `.handbook/project/environment.yaml` when the selected condition is true | CLI structured input, guided/express/agent-assisted intake, setup, doctor, and flow validate the same selected schema | `handbook.renderer.environment-context-review-markdown@1.0.0` | No persisted Markdown authority. The legacy `.handbook/environment_inventory/ENVIRONMENT_INVENTORY.md` is removed from reads and writes; any displayed Markdown is regenerated |
+| Environment Context | `.handbook/project/environment.yaml` when present and valid; absence never implies a factual project classification | `handbook.intake.environment-context@1.0.0`, setup, doctor, and flow validate schema 1.1; the production packet consumer includes the deterministic view only after successful validation | `handbook.renderer.environment-context-review-markdown@1.0.0` | Valid YAML is advisory context when the future task gate is unselected. Missing or invalid YAML is reported and omitted without blocking. No persisted Markdown authority or condition-evaluator fallback remains |
 | Work Specification | `artifacts/work-specification/work-specification.yaml` for the fixed Stage 10/repository-profile descriptor | Stage 10 capture and generic intake decode to the same work-specification schema | `handbook.renderer.work-specification-review-markdown@1.0.0`; existing `artifacts/feature_spec/FEATURE_SPEC.md` presentation may remain only as regenerated output | The Markdown file is rejected as canonical input, cannot affect fingerprints or handoff decisions, and is replaceable from retained YAML bytes |
 | Decision Record | Fixture descriptor path `.handbook/records/decision.yaml`; no production default | All supported intake modes validate the decision-record schema | `handbook.renderer.decision-record-review-markdown@1.0.0` | Renderer output is on demand; no default instance, filename inference, persistent mirror, or root path |
 | Risk Record | Fixture descriptor path `.handbook/records/risk.yaml`; no production default | All supported intake modes validate the risk-record schema | `handbook.renderer.risk-record-review-markdown@1.0.0` | Renderer output is on demand; no default instance, filename inference, persistent mirror, or root path |
@@ -190,20 +190,28 @@ The last four rows are not promoted into new artifact kinds or mislabeled as
 renderers. Their negative authority is proved by showing that they do not
 select, mutate, fingerprint, or validate an HCM canonical artifact.
 
-## Versioned definition publication
+## Versioned definition publication and greenfield correction
 
-Packet P1A must publish exact successors without mutating released bytes:
+P1A earned the exact-definition closure listed below. The greenfield P2
+decision preserves the non-Environment rows and their earned evidence while
+correcting the active Environment kind 1.1, intake 1.0, renderer 1.0, and
+shipped-root 1.2 definitions in place. Environment schema 1.0 and kind 1.0
+remain available only because the immutable HCM-2.2/profile 1.1 closure pins
+them; no compatibility-only Environment successor is published.
+
+The active exact set is:
 
 - `handbook.artifact-kind.project-context@1.1.0`;
-- `handbook.artifact-kind.environment-context@1.1.0`;
+- `handbook.artifact-kind.environment-context@1.1.0`, bound to
+  `handbook.schemas.artifacts.environment-context@1.1.0`;
 - `handbook.artifact-kind.work-specification@1.1.0`;
 - `handbook.artifact-kind.decision-record@1.1.0`;
 - `handbook.artifact-kind.risk-record@1.1.0`;
 - one `@1.0.0` first-party intake and renderer definition for each of those five
-  kinds; and
-- `handbook.profile.shipped-root@1.2.0`, selecting only the existing three root
-  instances and referencing the Project Context and Environment Context
-  successors.
+  kinds, including the corrected-in-place Environment definitions; and
+- `handbook.profile.shipped-root@1.2.0`, corrected in place to select only the
+  existing three root instances and to make Environment Context optional with
+  no condition.
 
 The resolved instance fields are frozen, not inferred:
 
@@ -213,16 +221,16 @@ The resolved instance fields are frozen, not inferred:
 | `handbook.profile.shipped-root@1.2.0` / `project_context` | `handbook.artifact-kind.project-context@1.1.0` | `handbook.intake.project-context@1.0.0` | [`handbook.renderer.project-context-review-markdown@1.0.0`] | `.handbook/project/context.yaml` |
 | `handbook.profile.shipped-root@1.2.0` / `environment_context` | `handbook.artifact-kind.environment-context@1.1.0` | `handbook.intake.environment-context@1.0.0` | [`handbook.renderer.environment-context-review-markdown@1.0.0`] | `.handbook/project/environment.yaml` |
 
-Project Authority and Project Context remain `always`; Environment Context
-retains the existing conditional requiredness and exact condition ref. All three
-keep empty Projection refs. No profile field may remain null/empty where this
-table names an intake or renderer.
+Project Authority and Project Context remain `always`; Environment Context is
+`optional` with a null condition ref. All three keep empty Projection refs. No
+profile field may remain null/empty where this table names an intake or
+renderer.
 
-P1A must prove that the 1.2 `project_authority` row is byte-for-byte equal to
-the released 1.1 row and must freeze the completed 1.2 profile's literal
-authored fingerprint in the HCM-2.4 definition vector. P1B cannot begin while
-that literal is absent, provisional, recomputed from an unreviewed definition,
-or inconsistent with the typed dependency closure.
+P1A evidence continues to prove that the 1.2 `project_authority` row is
+byte-for-byte equal to the released 1.1 row. The active HCM-2.4 definition
+vector freezes the greenfield-corrected 1.2 profile's literal authored
+fingerprint; it may not be absent, provisional, or inconsistent with the typed
+dependency closure.
 
 The Work Specification real-path proof is also frozen:
 
@@ -282,7 +290,7 @@ package boundary.
 | `BR-HCM-2-CHARTER-FLOW-01` and `CharterFlowBridge` | Delete in P6 | Common path preserves committed Charter observation, candidate/result separation, fingerprint, authority evidence, and HCM-2.2 regressions |
 | `rendered_projection_for_path` | Delete, not rename | Renderer selection is by admitted instance/kind renderer refs, never fixed path; packet and fixture consumers replay exact semantics |
 | `CanonicalArtifactKind`, `CANONICAL_ARTIFACT_ORDER`, `CanonicalArtifactDescriptor`, fixed `CanonicalArtifacts` fields | Remove or reduce to non-authoritative compatibility types in P6 | Every flow-consumed shipped instance is enumerated from admitted profile/descriptor selection; no fixed enum determines authority |
-| `CanonicalLayoutContract` fixed Charter/Context/Environment Inventory/Feature Spec fields and `canonical_artifact_relative_path` switch | Remove fixed-family/path selection in P6 | All canonical paths come from admitted descriptors; root discovery and safe-path rules remain |
+| `CanonicalLayoutContract` fixed Charter/Context/Feature Spec fields plus the temporary fixed Environment Context branch in its artifact switch, and both engine/compiler `canonical_artifact_relative_path` switches | Remove fixed-family/path selection in P6 | All canonical paths come from admitted descriptors, including Environment Context; root discovery and safe-path rules remain |
 | `load_fixed_siblings[_with_contract]`, `load_with_contract_selection`, `descriptor_for_layout`, `descriptor_for` | Delete in P6 | Generic selected-instance loader has retained bytes, exact source identity, bounded reads, no-follow semantics, duplicate rejection, and stable ordering |
 | `validate_artifact_markdown`, `baseline_artifact_validations`, fixed `packet_artifact_plans_for`, `present_fixture_sources_for`, and `canonical_artifact_kind_priority` branches | Rewrite/delete in P6 | Validation, packet inclusion, fixture source reporting, ordering, and budget targeting operate on selected instance identities and derived renderer outputs |
 | Environment Inventory input-to-Markdown author path in `crates/engine/src/author/environment_inventory_core.rs`, `crates/compiler/src/author/environment_inventory.rs`, CLI writer, templates, and directive | Replace/delete in P2 | Structured input emits canonical Environment Context YAML; schema validation and deterministic renderer equivalence pass; legacy Markdown cannot influence flow |
@@ -401,84 +409,86 @@ required GREEN evidence, not publication-only metadata. The real shipped path
 must show generic selected decisions at 1.2 while every Charter record and
 HCM-2.2 validation path retains the exact 1.1 authority pair.
 
-### P2 — Environment Context vertical
+### P2 — Greenfield Environment Context correction
 
-Cut structured authoring, CLI, setup/doctor, compiler, and flow consumers from
-Environment Inventory Markdown to the selected Environment Context YAML. Prove
-conditional absence, schema parity, atomic safe write, retained observation,
-full-byte rendering, and zero legacy influence. Leave aggregate bridges intact
-until P6.
+The accepted authority is
+[`20260728-p2-greenfield-environment-context-and-task-gate.md`](decision/20260728-p2-greenfield-environment-context-and-task-gate.md).
+It supersedes the earlier Option C product recommendation, the P2S evaluator
+design, the P2A native feasibility direction, and the compatibility-only
+Core/Operational profile proposal.
 
-P2 runtime work has an unmet authority prerequisite. The frozen HCM-0.6
-condition decision leaves the condition record schema, exact input bindings,
-admitted evidence types, precedence, freshness thresholds, and evaluator
-implementation outside its released contract. The remediated planning amendment
-`decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md`
-freezes eight closed schemas, retained admitted-source evidence, immutable
-record and transaction chains, mutable heads bound to the unique maximal
-transaction, the exact producer transaction, per-source freshness, total
- outcome precedence, ordered dependency-observation closure fingerprints, the
- six-row store observation/nullability/error/fixture matrix with checked
- 4096-entry and 131072-byte canonical-envelope ceilings and one intentionally
- shared fixed over-limit closure,
-evaluator/compatibility APIs, future symbols, packet tests, and impact ceilings
-for independent review and human approval. It does not amend a released
-definition or authorize runtime.
+| Environment Context | Gate | Task/session proof | Product result |
+| --- | --- | --- | --- |
+| valid | not selected | irrelevant | load as advisory context; normal work allowed |
+| missing/invalid | not selected | irrelevant | continue without trusted context; report non-blockingly |
+| valid | selected | task requirements positively satisfied | implementation allowed for that task |
+| valid | selected | requirements missing/fail/unavailable | planning, inspection, diagnosis, and handoff only |
+| missing/invalid | selected | unavailable | planning/diagnostic mode only until repaired |
 
-The live shipped resolver therefore continues to return only
-`unresolved` / `EvidenceContractUnavailable` and `indeterminate` for the
-selected Environment Context descriptor. No existing or proposed P2 runtime
-symbol is selected in this run.
+Presence plus validity controls advisory consumption. File presence never
+selects enforcement. Unselected makes no claim about project-wide operational
+responsibility, and no workstation must satisfy the project's complete
+environment matrix.
 
-The condition-true/false and write-only-when-applicable clauses remain exit
-requirements; they are not authority to invent an evaluator, coerce
-`indeterminate`, treat structured Environment Context input or its
-`applicability_basis` as independent condition evidence, make profile selection
-an applicability flag, or write while applicability is unresolved. P2
- behavior-changing work must remain paused. The dual-ceiling over-limit repair
- receives exactly one fresh complete-subject review; a valid P1/P2 stops without
- remediation,
-while CLEAN permits only the reviewed planning amendment and a later explicit
-human product decision. P2R, P2I, and P2V remain closed behind their exact
-predecessors. Independently authorized P4 or unrelated work may proceed only
-under its own later exact selector, but P6 cannot begin until both P2 and P4 are
-genuinely GREEN.
+The active selected instance is `environment_context` at
+`.handbook/project/environment.yaml`, optional with no condition ref. Its
+canonical YAML contains a record ID, named environments with descriptions and
+unique capability IDs, authoritative references, and known unknowns. It has no
+applicability, gate-selection, owner-identity, signer, evidence-ledger, freshness,
+or revocation field.
 
-That bounded decision was exercised only through P2S and P2A. P2S is
-review-clean at `755acc56fad6cc99c016dc58f94d310c84f98c58` with reviewed
-subject
-`sha256:7b1d0d4444b84613334625191f2d7272e2a866a7ba38d1b67aca875bc78c5f04`.
-P2A observed an installed Windows WebAuthn surface and compatible assertion
-shape, but no approved safe binding, live CTAP2.1 transport/device ceremony,
-or native cancellation/error mapping. It proved the default unavailable port
-performs zero repository writes. P2S schemas/evaluator and P2A feasibility
-records remain immutable historical evidence; they do not authorize or imply a
-production path.
+The current P2 packet owns:
 
-Option C now supersedes every future native-adapter selection in this plan.
-No WebAuthn/FIDO/CTAP ceremony, USB/HID or device access, platform UI,
-cancellation/error integration, unsafe code, Cargo/lockfile change, or
-dependency work is authorized. Under the current released contract,
-Environment Context applicability remains explicitly unresolved and
-fail-closed: it may not be inferred, coerced, self-declared, or established by
-creating the artifact or toggling a profile flag. Option C is temporary
-containment, not a product-complete state and not a GREEN result for P2.
+- exact schema/kind/intake/renderer definitions and in-place shipped-root selection;
+- duplicate-free, bounded selected YAML load and typed validation;
+- canonical serialization, generic intake/candidate/safe promotion, and fixed
+  deterministic Markdown review rendering;
+- setup/doctor status where missing, invalid, unsafe, or unreadable unselected
+  Environment Context is reported without changing overall readiness;
+- live advisory/session packet consumption of valid rendered Environment
+  Context, with missing/invalid context omitted and reported non-blockingly;
+- existing packet-budget dispositions over rendered Environment Context bytes;
+- deletion of Environment Inventory Markdown authoring/templates/authority; and
+- deletion of the unconsumed P2S evaluator/evidence definitions and dedicated tests.
 
-The product-decision reassessment compares indefinite fail-closed behavior, a
-new default-profile successor without Environment Context, an explicit
-project-owner declaration, a named existing external/already-owned authority,
-and narrow positive-only Charter evidence. It recommends the additive profile
-successor as the smallest product direction that can restore a usable READY
-path while leaving shipped-root 1.1 and 1.2 immutable. The recommendation is
-not selected authority. A later human packet must freeze the exact successor
-version/fingerprint, amend the HCM-0.6 three-instance default decision, and
-explicitly rebaseline P2/P6/P7/Phase 2 gates before any implementation packet
-can exist.
+The readiness exception is exact to the selected optional Environment Context
+contract. It does not reinterpret other optional artifacts. Required Charter or
+Project Context failures and unrelated invalid optional artifacts retain their
+existing blocking policy.
 
-Until then, the missing or structurally valid shipped-root 1.2 baseline remains
-`INDETERMINATE`; invalid, unsafe, or unreadable selected artifacts take the
-higher-precedence `INVALID` path. Both outcomes exit nonzero, and neither can
-reach READY.
+Future enforcement is deliberately deferred to the later
+implementation-contract slice:
+
+- Environment Context defines named environments and capabilities;
+- the feature/spec selects supported targets, freezes non-negotiable baselines,
+  and owns completion proof across required targets;
+- each implementation task declares portability or exact Environment Context
+  requirements, may narrow/strengthen but never weaken the spec baseline, and
+  cannot invent a new environment without an Environment Context change first;
+- a separately selected session gate permits implementation only when that
+  task's requirements are a subset of positively verified session
+  capabilities; and
+- sprint/orchestration may aggregate readiness for scheduling/reporting only
+  and cannot block a compatible task because another task needs a different environment.
+
+The later slice cannot become GREEN without task environment declarations,
+session-proof matching, and the separate feature/spec cross-target completion
+proof. This packet must not manufacture those future runtime types.
+
+P2S commit `755acc56fad6cc99c016dc58f94d310c84f98c58`, P2A commit
+`dd2f808`, Option C containment commit
+`3098390b00aa111db83173cbe4998f6620929d94`, and their proof/dispatch
+records remain immutable historical evidence only. No active evaluator,
+native/hardware integration, identity authority, signed declaration, evidence
+producer/ledger/head, freshness/revocation framework, or global applicability
+oracle survives this correction.
+
+P2 GREEN requires exact definition/fingerprint replay, focused advisory and
+budget tests, deterministic renderer goldens, safe generic mutation, zero
+rejected-evidence/legacy-Markdown influence, the full proportional workspace
+wall, strict format/lint/diff checks, GitNexus change detection, and fresh
+independent review. Full selected task-gate execution remains deferred and is
+not a P2 completion claim.
 
 ### P3 — Work Specification / Stage 10 vertical
 
@@ -564,34 +574,30 @@ implementation handoff/ledger closeout. P7 may not begin HCM-3.x.
 
 The current parent may perform only a truthful partial control-pack and
 true-stop closeout. It must preserve the open Phase 2 exit rows and both bridge
-IDs, cite the exact P2 runtime authority blocker and P4's open negative-surface
-proof, and must not represent the partial reviewed commits as P7 or slice
-completion.
+IDs, cite P2's bounded greenfield result and deferred task-gate runtime plus
+P4's open negative-surface proof, and must not represent the partial reviewed
+commits as P7 or slice completion.
 
 ## Exact implementation surface selectors
 
-These selectors record the historical maximum planned implementation surface.
+These selectors record the exact implementation ceilings that remain active.
 A packet must stop if it needs a surface outside its row unless the parent
-accepts a same-scope correction after fresh impact analysis. The P2A/P2P/P2R/
-P2I/P2V rows are non-executable historical planning under Option C; they confer
-no present or future native-adapter authority.
+accepts a same-scope correction after fresh impact analysis. The former
+P2S/P2A/P2P/P2R/P2I/P2V selectors are superseded by the greenfield P2 row;
+their detailed native/evidence design remains Git history and confers no
+present or future evaluator, evidence-platform, or native-adapter authority.
 
 | Packet | Production/definition selectors | Test/proof selectors | Documentation selectors |
 | --- | --- | --- | --- |
 | P1A | exact new version files under `crates/engine/definitions/{artifact-kinds,intakes,renderers,profiles}/`; `crates/engine/src/profile_builtins.rs`; exact `AuthoredArtifactKindDefinition::validate` and later-owned dependency branches in `artifact_kind_registry.rs`; the exact frozen-row branch in `artifact_instance.rs`; exact P1A typed-closure branch in `ArtifactIntakeDefinitionV1::parse`; exact shipped-root `1.2` branch in `validate_authored_profile_fingerprints`; exact Charter-only compatibility selection in `load_repository_intakes`; exact type-absent string-valued `const` branch in `ResolvedSchema::collect_coverage_leaf_shapes`; `ArtifactIntakeRegistry::load_with_builtin_compatibility` and `resolve_profile_selection` remain unchanged; no public signature or other generic repository-definition behavior change beyond the exact approved string-`const` predicate | editable `crates/engine/tests/{artifact_instances,artifact_kind_registry,profile_artifact_schemas,profile_context_schemas,profile_selection,profile_work_decision_schemas,profile_risk_schema,hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile,hcm_2_4_definition_support,hcm_2_4_definition_runtime}.rs` plus test-only assertions inside `crates/engine/src/schema_registry.rs`; read/proof-only `hcm_2_3_registration_kernel.rs` with zero-byte delta; exact new vectors under `slices/HCM-2.4/contracts/`, including the literal typed-closure 1.2 profile fingerprint, full Project Authority descriptor, and renderer goldens | HCM-2.4 packet only until P7 |
 | P1B | `crates/engine/src/charter_definition_registry.rs` exact `CharterDefinitionRegistry.validate_selected_decisions#1`; `crates/engine/src/charter_lifecycle_validation.rs` exact `SELECTED_PROFILE_REF`, `SELECTED_PROFILE_FINGERPRINT`, `build_result`, and `validate_definition_authority`; `crates/engine/src/charter_intake.rs` exact `evaluate_charter_intake`; `crates/engine/src/charter_approval_workflow.rs` exact `validate_candidate_currentness`; `crates/engine/src/charter_promotion_workflow.rs` exact `validate_candidate_contract` and `CharterPromotionWorkflowServiceV1.promote_at#2`; `crates/engine/src/charter_authority_transaction.rs` exact `CharterAuthorityTransactionServiceV1.preflight#1`; `crates/compiler/src/doctor.rs` exact `doctor_report_from_inspection` is a read/proof anchor and is not edited; no signature/public type/schema/vector change | exact new `crates/engine/tests/hcm_2_4_charter_profile_compatibility.rs`, including `invalid_compatible_profile_decisions_cannot_produce_charter_intake`; every `crates/engine/tests/hcm_2_2_*.rs`; exact compiler doctor unit and CLI doctor/profile test commands from the proof; HCM-2.2 compiler/CLI product-cutover/version/skill tests; all direct HIGH/CRITICAL upstream tests; exact 1.1/1.2 equality and per-field negative vectors | packet proof only |
 | P1C | `crates/engine/src/profile_decision.rs` exact `shipped_profile_request` source list and selected profile ref; `crates/engine/src/project_context_artifact.rs` exact existing `selected_contract_matches` predicate and its existing unit test only, admitting the exact Project Context kind `1.0`/`1.1` pair over the unchanged schema `1.0` and canonical path without adding a production symbol or fallback; `resolve_shipped_profile_decisions` is a read/proof anchor and is not edited; no signature/public type changes | editable `crates/engine/tests/{hcm_1_2_selected_kinds,hcm_1_2_unselected_kinds,hcm_1_4_profile_decisions,hcm_1_4_profile_inspection,hcm_2_2_definition_profile}.rs` and P1B compatibility target; in Unix compiler test `doctor_api_projects_the_exact_stable_project_context_row`, only report schema-version expectation `1.1.0` to `1.2.0` and Project Context kind expectation `1.0.0` to selected `1.1.0`; in Unix CLI test `doctor_reports_ready_when_required_artifacts_present`, only replace its obsolete inline Charter 1.0 setup with the existing `write_valid_selected_charter` helper and change the Project Context kind expectation `1.0.0` to selected `1.1.0`; no helper implementation, fixture asset, or other assertion edit; `crates/engine/tests/hcm_2_1_project_context.rs` is read/proof-only with required zero-byte delta and 12/12 pass; every CRITICAL upstream preservation test | packet proof only |
-| P2S | eight exact new project-condition evidence schema files and one exact new evaluator definition named by the planning amendment; no Rust production edit | schema/definition vectors covering every constant, bound, enum, regex, preimage, closed-key refusal, and closure nullability branch | packet proof only; human approval required |
-| P2A | completed non-production native-platform feasibility probe only; immutable historical evidence; no production `PlatformNativeAuthenticatorPortV1` or later native selector is authorized | retained local primitive and zero-write unavailability proof; no new device, cancellation, status/error, or ceremony work | superseded by Option C; do not resume native-adapter selection |
-| P2P | new `crates/engine/src/project_condition_evidence.rs` producer/service surface plus `crates/engine/src/lib.rs` module exposure; no profile, CLI/compiler caller, or Environment Context edit | new `hcm_2_4_project_condition_evidence_producer.rs`: source/challenge/assertion/use-chain/record/two-head/immutable-transaction transaction, interruption/recovery, simultaneous-head rollback/fork/replay/cross-family, and unavailable-port zero-write | packet proof only |
-| P2R | evaluator functions in the same new engine module; no shipped resolver or Environment Context edit | new `hcm_2_4_project_condition_evidence_evaluator.rs`: bounded maximal-transaction/fixed-head transport, ordered dependency-observation closure replay, mixed freshness, all reachable precedence branches, and zero self-reference influence | packet proof only |
-| P2I | `profile_decision.rs` only: exact reason-enum additions, new crate-private `ProjectConditionEvaluation::evaluated`, `resolve_shipped_profile_decisions`, unchanged-body extraction through new private `from_profile_with_condition_evaluations`, and `artifact_decision`; no other existing production symbol | condition-specific cases in `hcm_1_4_profile_decisions.rs` and `hcm_1_4_profile_inspection.rs`; direct public fallback, serialized existing reason, downstream compile, exact outcome/applicability, and CRITICAL flow walls | packet proof only; explicit public-enum compatibility approval required |
-| P2V | `crates/engine/src/author/environment_inventory_core.rs`; exact Environment Inventory branches in `crates/engine/src/{baseline_validation,canonical_artifacts,canonical_paths,lib}.rs`; `crates/compiler/src/author/{environment_inventory,environment_inventory_shell,mod}.rs`; `crates/compiler/src/layout.rs`; exact Environment Inventory branches in `crates/compiler/src/{baseline_validation,template_library,lib}.rs`; `crates/flow/src/resolver.rs` exact Environment Inventory validation/load/budget branches; `crates/cli/src/author.rs`; `crates/cli/src/main.rs` exact `AuthorCommand::EnvironmentInventory` help text; `crates/cli/src/rendering.rs` exact Environment Inventory labels only when required to preserve the existing public result shape; `core/library/environment_inventory/{ENVIRONMENT_INVENTORY_INPUTS.yaml.tmpl,environment_inventory_directive.md,ENVIRONMENT_INVENTORY.md.tmpl}`; exact setup/doctor adapters resolved in P0; P6 retains ownership of aggregate bridge-type and fixed-selector deletion | `crates/engine/tests/author_core.rs`; Environment Inventory cases in `crates/compiler/tests/author.rs` and `crates/cli/tests/author_cli.rs`; `crates/cli/tests/cli_surface.rs` exact inline `author_help_matches_snapshot` and snapshot-consuming `author_environment_inventory_help_matches_snapshot`; exact consumed `crates/cli/tests/snapshots/handbook-author-environment-inventory-help.txt`; `crates/engine/tests/{artifact_manifest_interface,baseline_validation,canonical_artifacts_ingest,freshness_computation}.rs`; `crates/compiler/tests/{artifact_manifest_interface,canonical_artifacts_ingest,freshness_computation,rendering_surface,resolver_core,setup,doctor}.rs`; `crates/flow/tests/resolver_core.rs`; native Windows mutation/refusal cases | packet proof only |
+| P2 | exact in-place Environment Context schema/kind/intake/renderer and shipped-root definitions; typed canonical artifact module and exports; exact optional-Environment-Context branch in setup/doctor readiness; selected safe load/render/advisory packet and packet-budget branches; deletion of Environment Inventory authoring, templates, fixed authority branches, help/snapshots, and the unconsumed condition-evaluator/evidence definitions/tests; no task-gate runtime, evidence evaluator, native adapter, identity/trust authority, Cargo, public API, or unrelated optional-artifact policy change | exact Environment Context contract, deterministic rendering, safe generic intake/promotion, optional readiness/advisory packet/budget regressions; a regression proving another optional artifact retains its blocking policy; affected legacy-authority absence tests; full proportional wall and rejected-influence scans | greenfield decision, active SPEC/plan/todo, program gates/crosswalk/ledger, implementation proof, and superseding notes on earlier active P2 decision records only |
 | P3 | `core/stages/10_feature_spec.md`; two files under `core/library/feature_spec/`; `core/schemas/feature_spec.yaml`; `core/pipelines/{default,foundation_inputs}.yaml`; `crates/pipeline/src/{pipeline_capture,stage_10_feature_spec_provenance,pipeline_handoff}.rs`; exact fixed path/layout constants | `crates/pipeline/tests/{pipeline_capture,pipeline_handoff}.rs`; CLI handoff refusal tests; new exact fixture root `crates/engine/tests/fixtures/hcm_2_4_work_specification/`; exact mirrors under `tests/fixtures/pipeline_proof_corpus/foundation_inputs/` and `tests/fixtures/foundation_flow_demo/`; real-binary descriptor-selected capture/handoff proof | packet proof only |
 | P3B | no runtime or library edits | `crates/cli/tests/cli_surface.rs`, including only the private fresh repository-identity prerequisite helper and two invocation points frozen by `decision/20260727-p3b-repository-identity-prerequisite-selector-repair.md` plus the three private canonical-consumer helpers frozen by `decision/20260727-p3b-m5-canonical-consumer-selector-repair.md`; exact `pipeline_handoff_emit_refuses_when_feature_spec_artifact_is_missing` setup assertion in `crates/cli/tests/pipeline_handoff_refusals.rs` frozen by `decision/20260727-p3b-negative-fixture-independence-selector-repair.md`; exact `foundation_flow_demo_feature_specs_match_directive_and_template_contract` cross-case assertion in `crates/cli/tests/feature_spec_contract.rs` frozen by `decision/20260727-p3b-feature-spec-contract-selector-repair.md`; exact `tests/fixtures/foundation_flow_demo/evidence/{happy_path,skip_path}.transcript.txt` bytes and selected M5 scorecard; the ten exact Stage 10 fixture-authority paths named by `decision/20260727-p3b-fixture-contract-selector-repair.md`; the two foundation-flow Work Specification inputs and exact generated-view/slice-plan evidence named by the two feature-identity/M5 decisions; the paired shared compile payload/explain goldens named by `decision/20260727-p3b-shared-compile-golden-selector-repair.md`; generated fixture-repo outputs remain transient and no fixture identity may be committed | P3B proof record and eight exact selector decisions only |
 | P4 | additive Decision Record definitions from P1A plus only `Function:crates/engine/src/artifact_mutation.rs:intake_commit_plan`, shared atomically with P5 for the exact final-segment ASCII `_` to `-` derivation before appending `-value`; no other production symbol or normalization | exact fixture root `crates/engine/tests/fixtures/hcm_2_4_decision_record/`; convert only the named blocker refusal into exact committed token-list proof and activate only the named positive mutation test in `crates/engine/tests/hcm_2_4_decision_record.rs`; preserve every other test | packet proof only |
 | P5 | additive Risk Record definitions from P1A plus the same single `intake_commit_plan` expression selected atomically by P4; no second production edit | exact fixture root `crates/engine/tests/fixtures/hcm_2_4_risk_record/`; convert only the named blocker refusal into exact committed token-list proof and activate only the named positive mutation test in `crates/engine/tests/hcm_2_4_risk_record.rs`; preserve every other test | packet proof only |
-| P6 | atomic compile closure for bridge-type deletion: `crates/engine/src/{artifact_manifest,baseline_validation,canonical_artifacts,canonical_paths,freshness,lib}.rs`; `crates/compiler/src/author/{charter_shell,environment_inventory_shell,mod}.rs`; `crates/compiler/src/{baseline_validation,blocker,layout,lib,refusal}.rs`; `crates/compiler/src/rendering/{markdown,shared}.rs`; `crates/flow/src/{resolver,budget,packet_result}.rs`; `crates/cli/src/rendering.rs`; only the bridge/fixed-family branches in these files are editable | `crates/engine/tests/{artifact_manifest_interface,baseline_validation,canonical_artifacts_ingest,freshness_computation,hcm_1_1_custom_kind,hcm_2_1_project_context}.rs`; `crates/compiler/tests/{artifact_manifest_interface,author,canonical_artifacts_ingest,freshness_computation,refusal_mapping,rendering_surface,resolver_core}.rs`; `crates/flow/tests/{resolver_core,budget_domains}.rs`; `crates/cli/tests/{author_cli,cli_surface,feature_spec_contract,pipeline_handoff_refusals}.rs` | bridge rows and earned proof rows only in P7 |
+| P6 | atomic compile closure for bridge-type deletion: `crates/engine/src/{artifact_manifest,baseline_validation,canonical_artifacts,canonical_paths,freshness,lib}.rs`; `crates/compiler/src/author/{charter_shell,mod}.rs`; `crates/compiler/src/{baseline_validation,blocker,layout,lib,refusal}.rs`; `crates/compiler/src/rendering/{markdown,shared}.rs`; `crates/flow/src/{resolver,budget,packet_result}.rs`, including `EnvironmentContextFlowBridge`, `PacketArtifactInputs`, and the temporary fixed Environment Context packet/layout branches; `crates/cli/src/rendering.rs`; only the live bridge/fixed-family branches in these files are editable | `crates/engine/tests/{artifact_manifest_interface,baseline_validation,canonical_artifacts_ingest,freshness_computation,hcm_1_1_custom_kind,hcm_2_1_project_context}.rs`; `crates/compiler/tests/{artifact_manifest_interface,author,canonical_artifacts_ingest,freshness_computation,refusal_mapping,rendering_surface,resolver_core}.rs`; `crates/flow/tests/{resolver_core,budget_domains}.rs`; `crates/cli/tests/{author_cli,cli_surface,feature_spec_contract,pipeline_handoff_refusals}.rs` | bridge rows and earned proof rows only in P7 |
 | P7 | no new runtime behavior | full workspace wall and all focused regressions | `03-seam-crosswalk.md`, `04-phase-slice-map.md`, `06-proof-and-regression-ledger.md`, `09-review-finding-inventory.md`, exact HCM-2.4 `SPEC.md`/plan/todo status and evidence, and new P7 proof/review records only as earned |
 
 The selector table does not authorize blanket directory rewrites. P0 must turn
@@ -705,7 +711,9 @@ Every P1A and P2–P5 family row must prove:
 6. real-path selected-descriptor proof, not only unit construction; and
 7. native Windows and Unix-safe behavior for any mutation path.
 
-Before P2–P5, P1B/P1C additionally prove:
+The following P1B/P1C exact-identity checks remain architectural Charter
+closure invariants, not external compatibility obligations. Before P2–P5,
+P1B/P1C additionally prove:
 
 1. released shipped-root 1.1 bytes/fingerprint and valid acceptance are
    unchanged;
@@ -813,9 +821,10 @@ Stop the active implementation packet and return to the parent when:
 - a renderer needs Resolution input or becomes a generic Projection;
 - a family needs filename discovery, a generated command, root-profile
   expansion, migration, or dual reads;
-- P2 would need to infer, coerce, or self-authorize Environment Context
-  applicability, or edit the unselected condition evaluator before its exact
-  evidence/evaluator contract is approved;
+- P2 would require a trust/identity authority, signed declaration, native or
+  hardware integration, evidence producer/ledger/head, freshness/revocation
+  model, global applicability inference, generic plugin/transport framework, or
+  future implementation-task runtime;
 - P4 or P5 would require any coverage-token normalization beyond the approved
   final-segment ASCII `_` to `-` derivation, lineage token-grammar widening, a
   released intake-definition edit, another production symbol, or wider impact;
@@ -828,6 +837,16 @@ Stop the active implementation packet and return to the parent when:
   green.
 
 ## Implementation-entry acceptance criteria
+
+The historical implementation-entry criteria below remain durable planning
+provenance for unaffected packet selectors and proof ceilings. The current
+greenfield correction is instead selected by the controlling handoff and the
+accepted 2026-07-28 product decision. It becomes reviewable only when the exact
+five-row behavior, bounded current vertical, P4/P6/P7 statuses, future
+implementation-contract GREEN gate, full verification, protected-path
+exclusions, and local no-push commits are all truthful.
+
+Historical entry criteria:
 
 Implementation may be separately selected only when all of the following are
 true:

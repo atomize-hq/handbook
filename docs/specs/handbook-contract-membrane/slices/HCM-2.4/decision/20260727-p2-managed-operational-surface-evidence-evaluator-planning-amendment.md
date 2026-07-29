@@ -1,5 +1,8 @@
 # P2 managed-operational-surface evidence/evaluator planning amendment
 
+> Superseded historical design. The accepted greenfield decision removes this
+> evaluator/evidence system from the active product.
+
 Status: **six-row transaction-store matrix with checked 4096-entry and
 131072-byte canonical-envelope ceilings frozen for one fresh independent review
 and later distinct P2S/P2A human approval; no runtime implementation authority**

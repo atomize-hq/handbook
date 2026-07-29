@@ -147,7 +147,6 @@ claim that `PG-KIND-01`, `PG-KIND-02`, or a runtime seam has landed.
 **Non-goals:** semantic correction or clarification; Rust, Cargo, runtime, CLI, Tauri, Substrate, SDK, public API, schema-version, proof-promotion, or HCM-0.5 work; rewriting historical handoffs/dispatches; changing record schemas solely to carry leaf refs; selecting shipped defaults; or opportunistic control-pack cleanup.
 
 **Review-budget stop:** exhausted. Redesign Review 1, one remediation, and terminal Redesign Review 2 completed. Do not run Review 3, remediate the terminal finding, or authorize execution.
-
 ### `HCM-0.5` design-freeze contract
 
 **Dependencies:** HCM-0.2 semantic identities, HCM-0.3 Resolution/Snapshot/Projection contracts, HCM-0.4 owner/SDK/DTO/transport contracts, and HCM-0.8 orchestration mechanics are completed dependency evidence. HCM-0.9 is abandoned evidence and supplies no topology, catalog-leaf, or resume authority.
@@ -164,7 +163,7 @@ claim that `PG-KIND-01`, `PG-KIND-02`, or a runtime seam has landed.
 
 **Dependencies:** frozen HCM-0.2 kind/instance/registry/intake/constitutional-root semantics, HCM-0.3 renderer/Projection separation, HCM-0.4 owner/transport boundaries, HCM-0.5 contract/evidence/gate separation, and HCM-0.8 orchestration controls are completed dependency evidence. Current enums, templates, paths, examples, and historical artifacts are precedent only.
 
-**Approved output:** exactly six first-party kind refs at `1.0.0`; additive `handbook.roles.core@1.1.0` with exact fingerprint and distinct artifact role `environment_context`; root instances `project_authority`, `project_context`, and `environment_context` at the three `.handbook/project/*.yaml` paths; always/always/conditional requiredness; exact managed-operational-surface condition identity and six-outcome evidence policy; one unique `constitutional_root`; approved role-support, lifecycle/review, first-party intake/renderer posture; and no capitalized Projection selected by the shipped root profile. The complete authority is [`slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md`](slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md).
+**Approved output:** exactly six first-party kinds; distinct artifact role `environment_context`; root instances `project_authority`, `project_context`, and `environment_context` at the three `.handbook/project/*.yaml` paths; always/always/optional requiredness with no Environment Context condition; one unique `constitutional_root`; approved role-support, lifecycle/review, first-party intake/renderer posture; and no capitalized Projection selected by the shipped root profile. Environment Context presence permits advisory use and never selects enforcement. The complete authority is [`slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md`](slices/HCM-0.6/decision/shipped-default-artifact-set-decision.md).
 
 **Exit gate:** research and candidates remain review-clean provenance; the explicit user decision is transcribed without inventing subordinate schemas or implementation; affected `00`-`06` rows agree; `PG-DEFAULT-01` closes only for the documentation decision; a different-fresh independent reviewer reports `CLEAN`; final proof and staged change detection replay the exact subject; and the two-commit completed handoff closes the slice.
 
@@ -247,7 +246,6 @@ records are completed dependency evidence for HCM-1.4 and authorize no
 additional HCM-1.3 work.
 
 ### `HCM-1.4` — Profile-aware setup and doctor decisions
-
 - make setup/doctor use typed profile decisions;
 - keep CLI wording outside engine decisions;
 - expose machine-readable profile/capability truth.
@@ -391,9 +389,11 @@ does not authorize HCM-2.4 or a later phase.
 
 ### `HCM-2.4` — Remaining shipped artifact families
 
-- convert remaining first-party artifacts that need structured manipulation;
-- decide explicitly which pre-Phase-3 outputs are renderer-derived human-review views only;
-- remove superseded Markdown-authority helpers.
+- complete optional canonical Environment Context YAML as advisory project context;
+- keep enforcement separate as an explicit future task-scoped positive-proof gate;
+- preserve feature/spec policy and cross-target completion separately from task execution authorization;
+- remove the rejected condition-evidence design and superseded Markdown authority;
+- keep deterministic pre-Phase-3 outputs as renderer-derived human-review views only.
 
 Current partial implementation boundary at commits
 `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
@@ -409,21 +409,21 @@ Current partial implementation boundary at commits
   capture, provenance, feature identity, and handoff authority to canonical
   Work Specification YAML while Feature Spec Markdown is a deterministic
   human-review view.
-- P2 runtime is blocked. The condition-evidence/evaluator amendment includes
-  the exact six-row transaction-store failure matrix with checked 4096-entry
-  and 131072-byte canonical-envelope ceilings and one intentionally shared
-  fixed over-limit closure under one
-  human-authorized fresh review gate: a valid P1/P2 stops without repair, while
-  CLEAN permits only presentation for distinct P2S and non-production P2A
-  human approval. Production adapter authority or a proven completed producer
-  dependency remains a later explicit gate before P2P.
+- P2 is rebaselined by the accepted greenfield Environment Context/task-gate
+  decision. The P2S/P2A evaluator/native material is historical only and has no
+  active runtime prerequisite. Current implementation owns optional canonical
+  YAML, advisory use, generic safe mutation, deterministic rendering, and
+  non-blocking setup/doctor status. Task-gate runtime is deferred to the later
+  implementation-contract slice under its explicit GREEN gate.
 - The shared P4/P5 coverage-token prerequisite is review-clean and committed.
   Exact Decision and Risk generic mutation/promotion paths are GREEN. P4's
   separate no-root/generated-command/inferred-filename/Projection/
   persistent-view proof remains open; the token selector did not authorize it.
-- P6 has not begun, both temporary flow bridges remain active, and the Phase 2
-  exit gate below is not closed. This partial boundary authorizes neither
-  HCM-3.x nor another slice.
+- P2 owns removal of legacy Environment Inventory authority and influence.
+  P6 retains its original aggregate-flow and fixed-selector/bridge deletion
+  gate and remains blocked until P2, P4, and every other exact predecessor are
+  independently GREEN. Phase 2 and HCM-3.x are not authorized merely by P2
+  completion.
 
 ### Phase 2 exit gate
 
@@ -435,6 +435,9 @@ Current partial implementation boundary at commits
 - generic configured custom-kind Projections and all Resolution-aware views remain deferred until `HCM-3.2` and `HCM-3.3` land;
 - no user migration tooling or dual-read promise exists;
 - every temporary internal cutover bridge named in `06` is deleted.
+- future implementation-contract work proves task declarations, positive
+  session-capability matching, and a separate feature/spec cross-target
+  completion result; orchestration aggregation remains non-authoritative.
 
 ## Phase 3 — Vocabulary, Context Resolution, Snapshot Memory, and Projections
 
@@ -547,7 +550,6 @@ Current partial implementation boundary at commits
 - preserve deterministic refusal and doctor/contract closeout.
 
 ### Phase 4 exit gate
-
 - CLI, SDK, and Tauri adapter tests exercise the same typed use cases;
 - `handbook-compiler` has an explicit retained or retirement posture;
 - JSON Schema covers every supported machine response;
