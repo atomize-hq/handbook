@@ -1,0 +1,291 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review",
+  "created_at_utc": "2026-07-29T15:51:43Z",
+  "source_handoff_ids": [
+    "20260728T144118Z--HCM-2-4--orchestration--p2-option-c-containment-product-decision-required"
+  ],
+  "parent_orchestration_id": "20260729T152119Z--HCM-2-4--bounded-p2-control-plane-closeout-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "bounded-p2-control-plane-closeout",
+  "subject_fingerprint": "sha256:cec724d632cab54360d2c1d01d6b03755154894102357ebfb7a46e480eb56412",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "bounded-p2-control-plane-closeout-closure",
+    "trigger_run_ids": [
+      "bounded-p2-control-plane-closeout-review"
+    ],
+    "finding_refs": [
+      "P2-INSTALL-CONSUMER-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-29T15:21:19Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-bounded-p2-control-plane-closeout",
+        "packet_ids": [
+          "bounded-p2-control-plane-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-greenfield-environment-context-and-task-gate.md#decision"
+      }
+    ],
+    "fingerprint": "sha256:e6297eedfba59587df0b65907052b335416824f7db50b53602c43d093c58ee39"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:29f67b7b8b9eefb6a2bf70a6b71c64a026e1b0353602b24a4a8315fd7779c44e",
+    "integrated_outcome_id": "hcm-2.4-bounded-p2-control-plane-closeout",
+    "outcome_registry_fingerprint": "sha256:e6297eedfba59587df0b65907052b335416824f7db50b53602c43d093c58ee39",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "final_closeout"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260729T152318Z--HCM-2-4--bounded-p2-control-plane-closeout-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "bounded-p2-control-plane-closeout-convergence-2",
+    "completed_at_utc": "2026-07-29T15:51:42Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run the full supported install smoke and installed live-skill smoke in one isolated WSL home, then re-run the live smoke after correcting stale assertions",
+        "evidence_ref": "parent terminal output: install-smoke.sh completed OK and codex-skill-live-smoke.sh completed OK against the remediated installed runtime"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "case-insensitively scan tools, install, core, and .github for legacy Environment Inventory identifiers/commands and verify the obsolete fixture is absent",
+        "evidence_ref": "parent terminal output: zero active matches; tools/fixtures/environment_inventory_inputs/runtime_smoke_valid.yaml is absent; exact remediation delta is six modified files plus that deletion"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinally sorted 21-entry path-NUL-SHA256-newline active-authority and remediated-consumer manifest",
+        "evidence_ref": "subject_manifest below: aggregate sha256:cec724d632cab54360d2c1d01d6b03755154894102357ebfb7a46e480eb56412"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "verify the immutable discovery dispatch, run ordinary v1.4 corpus validation with jsonschema 4.25.1, parse tools/harness.py, and run bash syntax checks on all three changed shell scripts",
+        "evidence_ref": "parent terminal output: discovery dispatch verification passed; 67-record/416-current-dispatch corpus validation passed; AST and bash syntax checks exited 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "core/overlays/release/release_major.md",
+        "sha256": "e60f0f97439d5c1f0d26f438bf65846a8a03170910f25a866ff616d911cb7566"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "182c67f5b1cdf9e4f68a3f1fc42b3917128517eb25c433ff0c97bd0ca648f8ee"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "sha256": "8e27edc832956db24088008a86513702a4e7d17af4392f614e52dfa2668bd17e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "621bf425e428fb10f502f52f5f4a7178bc0aef4f4a776d8ad4108991ec20084e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "60388298f1559fc7bc640d5c4d6100d21d92df794570e3ca29c041526a776294"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "6247099bf8a7dfbea84fc941c10bae62e2d691fbcea6d0ea3d9b3851fb883846"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "a9988477e9f60f0ddf049a598ecf593bbe7b046f8536b3d09c456de11609e2b9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.6/SPEC.md",
+        "sha256": "9b364b77481cb86f213352d6c58fce63af50289000503814f65ccfa072989368"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "8d51a39c4168f6dbc310cfff2bbdd3cfb78927089d1d04e05aded42737c2d764"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260726-p2-condition-evaluator-authority-stop.md",
+        "sha256": "2b815ee699db3dfb3d4fe28b9da2d341de77642d8aa53b45af2786db57f394d1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p2-managed-operational-surface-evidence-evaluator-planning-amendment.md",
+        "sha256": "c91823f7aa44969c2441d69182fbdb4f58b7095826b48d8a4f90eb278461798c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-greenfield-environment-context-and-task-gate.md",
+        "sha256": "22a6f6c2811f74b80a0acf9a77aff180f520a195381d1299479989d2eefbbab0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-product-decision-reassessment.md",
+        "sha256": "227b74a38b75f3d7c29c3ee11bd3da01ee661934059df966fe0e76df92bb75b0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2-greenfield-environment-context-correction.md",
+        "sha256": "8dc389f686b4d45625afe4a420f53c6a9cc4f1c13b145931543074ef3c6dcb73"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "4161af3e2832ed5bef313ca82a7477d1bc426bd8056905d83da6c024cf540ead"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "673dd8cda6169c8b98f358f8f7aee4bd3a64d7776a623b79e03c262a4a611283"
+      },
+      {
+        "path": "install/handbook-home/SKILL.md.tmpl",
+        "sha256": "c830c75790c5fc25c7f13e8816e5df378ff8ec5e2f69779a09dfddb97d15c0c8"
+      },
+      {
+        "path": "tools/ci/codex-skill-live-smoke.sh",
+        "sha256": "11c39c142734fc0cbe4a6d28b5bd777e36eb3b0f28704c76c4ab534b7c844a8d"
+      },
+      {
+        "path": "tools/ci/install-smoke.sh",
+        "sha256": "acd7c78665c49ea5b13a6c02bec066e4eae1b381aafa87509dea1c3f988eff81"
+      },
+      {
+        "path": "tools/codex/install.sh",
+        "sha256": "efb3e3ab1860a4ed224f806b69c03bda124dabfa478c2e2dc4d696a55ea542fe"
+      },
+      {
+        "path": "tools/harness.py",
+        "sha256": "0265939a609a8cb2fb884247fd6c9efe8f63d7fff4706921c7683a08b4a6665b"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:cec724d632cab54360d2c1d01d6b03755154894102357ebfb7a46e480eb56412"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "P2-INSTALL-CONSUMER-001 closure within bounded HCM-2.4 P2 control-plane closeout",
+    "detail_resolution": "active installer, installed skill, CI/live smoke, harness state, release overlay, and obsolete fixture",
+    "temporal_horizon": "discovery finding through tested consumer remediation",
+    "authority_horizon": "bounded P2 consumer correction only; no runtime/product/schema/future-gate change",
+    "memory_horizon": "immutable discovery dispatch, one P2 finding, 21-file manifest, and one deleted fixture",
+    "validation_horizon": "different-fresh CLEAN closure before reviewed-primary commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T152318Z--HCM-2-4--bounded-p2-control-plane-closeout-review.json",
+      "sections": [
+        "review_cycle",
+        "tasks",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-greenfield-environment-context-and-task-gate.md",
+      "sections": [
+        "Decision",
+        "Greenfield correction",
+        "Acceptance"
+      ]
+    },
+    {
+      "path": "install/handbook-home/SKILL.md.tmpl",
+      "sections": [
+        "installed root skill prerequisites and workflow"
+      ]
+    },
+    {
+      "path": "tools/ci/codex-skill-live-smoke.sh",
+      "sections": [
+        "assert_credential_free_doctor_contract",
+        "validate_runtime_contract",
+        "credential-free integration ceiling"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery review /root/bounded_p2_closeout_review returned one required P2 finding, P2-INSTALL-CONSUMER-001: active installer, installed-skill, CI/live-smoke, harness, fixture, and core overlay consumers still retained deleted Environment Inventory dependencies or terminology. The bounded remediation removes that active legacy surface, retains Project Context authoring, states optional canonical/advisory Environment Context truth, aligns live assertions with action-required readiness and Project Context kind 1.1, and changes no runtime behavior, product semantics, schema, or future task-gate scope. One pre-existing trailing-whitespace blank line in the already-changed harness file was normalized to satisfy mandatory v1.4 subject hygiene. Full install and installed live-skill smokes both complete OK. Eight protected dirty files and one user-owned untracked idea file remain outside the subject; the immutable earlier HCM-2.4 partial handoff is unchanged.",
+  "allowed_scope": [
+    "Read and replay the exact 21-file subject manifest and verify the obsolete Environment Inventory fixture remains absent.",
+    "Inspect the exact seven-path remediation diff and immutable discovery dispatch/finding.",
+    "Run read-only install/skill, validation, Git, JSON, search, and diff checks.",
+    "Return findings through the built-in subagent channel without editing files."
+  ],
+  "non_goals": [
+    "Do not edit any file or create a handoff, ledger entry, commit, or push.",
+    "Do not reopen runtime behavior, product semantics, schemas, or future task-gate scope.",
+    "Do not claim P4, P6, P7, full HCM-2.4, Phase 2, future task-gate runtime, or HCM-3.x completion/authorization.",
+    "Do not mutate historical records or protected/user-owned paths."
+  ],
+  "tasks": [
+    "Verify P2-INSTALL-CONSUMER-001 is closed across installer, installed skill, install smoke, live smoke, harness state, release overlay, and obsolete fixture removal.",
+    "Verify the active tools/install/core/.github inventory contains no legacy Environment Inventory identifier or author command and the removed fixture has no consumer.",
+    "Verify the installed skill states canonical Environment Context is optional advisory context and retains no legacy kind-specific authoring path.",
+    "Verify the live smoke correctly expects action-required readiness for missing required Charter and Project Context kind 1.1 while preserving the credential-free Project Context/doctor/inspect proof.",
+    "Verify the full install and installed live-skill smoke evidence is credible, the 21-file manifest replays, and no protected/historical/user-owned byte entered the subject.",
+    "Return CLEAN only if the finding is closed and no directly remediation-unmasked P1/P2 remains; list any P3/P4 advisory separately."
+  ],
+  "contracts_and_gates": [
+    "This closure is causally limited to P2-INSTALL-CONSUMER-001 and defects directly unmasked by its remediation.",
+    "Environment Context remains optional canonical advisory context; no future task-gate/session-proof/subset/cross-target runtime is implemented here.",
+    "The immutable 20260728T144118Z partial handoff and all protected/user-owned paths must remain outside the subject.",
+    "No subject byte may change after CLEAN; the reviewed-primary remediation commit must precede the separate mechanical handoff/ledger closeout commit."
+  ],
+  "stop_conditions": [
+    "Stop and report if any subject hash differs from the manifest or the deleted fixture reappears.",
+    "Stop and report any active legacy Environment Inventory consumer, command, prerequisite, or state key.",
+    "Stop and report any runtime/product/schema/future-gate change or completion overclaim.",
+    "Stop and report if a protected, user-owned, or historical record byte changed."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

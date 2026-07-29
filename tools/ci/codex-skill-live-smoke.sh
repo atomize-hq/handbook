@@ -10,7 +10,6 @@ HANDBOOK_BINARY="$HANDBOOK_HOME/bin/handbook"
 RUNTIME_MANIFEST="$HANDBOOK_HOME/runtime-manifest.json"
 CHARTER_CANONICAL_CONTENT="$ROOT_DIR/docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
 PROJECT_CONTEXT_FIXTURE_INPUTS="$ROOT_DIR/tools/fixtures/project_context_inputs/runtime_smoke_valid.yaml"
-ENVIRONMENT_INVENTORY_FIXTURE_INPUTS="$ROOT_DIR/tools/fixtures/environment_inventory_inputs/runtime_smoke_valid.yaml"
 RELEASE_VERSION="$(tr -d '[:space:]' <"$ROOT_DIR/VERSION")"
 export PATH="${CARGO_HOME:-$HOME/.cargo}/bin:$PATH"
 
@@ -109,14 +108,14 @@ if data.get("schema_id") != "handbook.repository-doctor-report":
     raise SystemExit(f"unexpected Doctor schema: {data.get('schema_id')}")
 if data.get("schema_version") != "1.2.0":
     raise SystemExit(f"unexpected Doctor schema version: {data.get('schema_version')}")
-if data.get("status") != "indeterminate":
-    raise SystemExit(f"expected indeterminate status, got: {data.get('status')}")
+if data.get("status") != "action_required":
+    raise SystemExit(f"expected action-required status, got: {data.get('status')}")
 project_context = data.get("project_context")
 if not project_context:
     raise SystemExit("expected retained Project Context fingerprint row")
 if project_context.get("instance_id") != "project_context":
     raise SystemExit(f"unexpected Project Context instance: {project_context.get('instance_id')}")
-if project_context.get("kind_ref") != "handbook.artifact-kind.project-context@1.0.0":
+if project_context.get("kind_ref") != "handbook.artifact-kind.project-context@1.1.0":
     raise SystemExit(f"unexpected Project Context kind: {project_context.get('kind_ref')}")
 if project_context.get("canonical_path") != ".handbook/project/context.yaml":
     raise SystemExit(f"unexpected Project Context path: {project_context.get('canonical_path')}")
@@ -261,32 +260,6 @@ parts.append(
     "expected_current_fingerprint: null\n"
 )
 destination.write_text("".join(parts), encoding="utf-8")
-PY
-}
-
-write_selected_environment_inventory_input() {
-  local source_path="$1"
-  local destination_path="$2"
-
-  python3 - "$source_path" "$destination_path" <<'PY'
-import pathlib
-import sys
-
-source = pathlib.Path(sys.argv[1]).read_text(encoding="utf-8")
-replacements = {
-    'charter_ref: ".handbook/charter/CHARTER.md"':
-        'charter_ref: ".handbook/project/charter.yaml"',
-    'exception_record_location: ".handbook/charter/CHARTER.md#exceptions"':
-        'exception_record_location: ".handbook/project/charter.yaml#/governance/exception_process"',
-}
-destination = source
-for legacy, selected in replacements.items():
-    if destination.count(legacy) != 1:
-        raise SystemExit(f"expected exactly one fixture reference to project: {legacy}")
-    destination = destination.replace(legacy, selected)
-if ".handbook/charter/CHARTER.md" in destination:
-    raise SystemExit("temporary Environment Inventory input retained legacy Charter Markdown")
-pathlib.Path(sys.argv[2]).write_text(destination, encoding="utf-8")
 PY
 }
 
@@ -601,8 +574,7 @@ validate_runtime_contract() {
     "$HANDBOOK_HOME/resources/charter/CHARTER_INPUTS.yaml.tmpl" \
     "$HANDBOOK_HOME/resources/charter/charter_inputs_directive.md" \
     "$installed_charter_skill" \
-    "$HANDBOOK_HOME/resources/project_context/PROJECT_CONTEXT_INPUTS.yaml.tmpl" \
-    "$HANDBOOK_HOME/resources/environment_inventory/ENVIRONMENT_INVENTORY_INPUTS.yaml.tmpl"; do
+    "$HANDBOOK_HOME/resources/project_context/PROJECT_CONTEXT_INPUTS.yaml.tmpl"; do
     [[ -f "$required" ]] || {
       echo "REFUSED: missing installed handbook home prerequisite: $required" >&2
       return 1
@@ -809,21 +781,15 @@ test ! -e "$happy_repo/.handbook/project/charter.yaml"
 test ! -e "$happy_repo/.handbook/charter/CHARTER.md"
 
 echo "==> credential-free integration ceiling without Codex or native credentials"
-all_three_repo="$tmp_root/all-three-repo"
+credential_free_repo="$tmp_root/credential-free-repo"
 offline_path="$tmp_root/no-codex-path"
-all_three_doctor="$tmp_root/all-three-doctor.json"
-all_three_inspect="$tmp_root/all-three-inspect.txt"
-all_three_environment_input="$tmp_root/environment-inventory-selected-charter.yaml"
-all_three_environment_validate="$tmp_root/environment-inventory-validate.txt"
-all_three_environment_author="$tmp_root/environment-inventory-author.txt"
-mkdir -p "$all_three_repo" "$offline_path"
-git -C "$all_three_repo" init -q
-write_selected_environment_inventory_input \
-  "$ENVIRONMENT_INVENTORY_FIXTURE_INPUTS" \
-  "$all_three_environment_input"
-all_three_setup_status="$(
+credential_free_doctor="$tmp_root/credential-free-doctor.json"
+credential_free_inspect="$tmp_root/credential-free-inspect.txt"
+mkdir -p "$credential_free_repo" "$offline_path"
+git -C "$credential_free_repo" init -q
+credential_free_setup_status="$(
   capture_in_repo \
-    "$all_three_repo" \
+    "$credential_free_repo" \
     /dev/null \
     /dev/null \
     /dev/null \
@@ -831,12 +797,12 @@ all_three_setup_status="$(
     PATH="$offline_path" \
     "$HANDBOOK_BINARY" setup
 )"
-[[ "$all_three_setup_status" -eq 1 ]] || {
-  echo "expected all-three setup indeterminate exit 1, got: $all_three_setup_status"
+[[ "$credential_free_setup_status" -eq 1 ]] || {
+  echo "expected credential-free setup action-required exit 1, got: $credential_free_setup_status"
   exit 1
 }
 (
-  cd "$all_three_repo"
+  cd "$credential_free_repo"
   env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
     "$HANDBOOK_BINARY" author project-context --validate --from-inputs - \
     <"$PROJECT_CONTEXT_FIXTURE_INPUTS" >/dev/null
@@ -844,77 +810,32 @@ all_three_setup_status="$(
     "$HANDBOOK_BINARY" author project-context --from-inputs - \
     <"$PROJECT_CONTEXT_FIXTURE_INPUTS" >/dev/null
 )
-before_environment="$(snapshot_file_tree "$all_three_repo")"
-all_three_environment_validate_status="$(
-  capture_in_repo \
-    "$all_three_repo" \
-    "$all_three_environment_validate" \
-    /dev/null \
-    /dev/null \
-    env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
-    "$HANDBOOK_BINARY" author environment-inventory --validate \
-      --from-inputs "$all_three_environment_input"
-)"
-[[ "$all_three_environment_validate_status" -eq 1 ]] || {
-  echo "expected Environment Inventory validation refusal exit 1, got: $all_three_environment_validate_status"
+credential_free_doctor_status="$(capture_doctor_json "$credential_free_repo" "$credential_free_doctor")"
+[[ "$credential_free_doctor_status" -eq 1 ]] || {
+  echo "expected credential-free Doctor exit 1, got: $credential_free_doctor_status"
   exit 1
 }
-after_environment="$(snapshot_file_tree "$all_three_repo")"
-[[ "$after_environment" == "$before_environment" ]] || {
-  echo "Environment Inventory validation refusal mutated repository bytes"
-  exit 1
-}
-grep -F 'OUTCOME: REFUSED' "$all_three_environment_validate" >/dev/null
-grep -F 'CATEGORY: MissingRequiredCharter' "$all_three_environment_validate" >/dev/null
-
-all_three_environment_author_status="$(
-  capture_in_repo \
-    "$all_three_repo" \
-    "$all_three_environment_author" \
-    /dev/null \
-    /dev/null \
-    env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
-    "$HANDBOOK_BINARY" author environment-inventory \
-      --from-inputs "$all_three_environment_input"
-)"
-[[ "$all_three_environment_author_status" -eq 1 ]] || {
-  echo "expected Environment Inventory author refusal exit 1, got: $all_three_environment_author_status"
-  exit 1
-}
-after_environment="$(snapshot_file_tree "$all_three_repo")"
-[[ "$after_environment" == "$before_environment" ]] || {
-  echo "Environment Inventory author refusal mutated repository bytes"
-  exit 1
-}
-grep -F 'OUTCOME: REFUSED' "$all_three_environment_author" >/dev/null
-grep -F 'CATEGORY: MissingRequiredCharter' "$all_three_environment_author" >/dev/null
-
-all_three_doctor_status="$(capture_doctor_json "$all_three_repo" "$all_three_doctor")"
-[[ "$all_three_doctor_status" -eq 1 ]] || {
-  echo "expected all-three Doctor exit 1, got: $all_three_doctor_status"
-  exit 1
-}
-test ! -e "$all_three_repo/.handbook/project/charter.yaml"
-test ! -e "$all_three_repo/.handbook/charter/CHARTER.md"
-test -f "$all_three_repo/.handbook/project/context.yaml"
-test ! -e "$all_three_repo/.handbook/project_context/PROJECT_CONTEXT.md"
+test ! -e "$credential_free_repo/.handbook/project/charter.yaml"
+test ! -e "$credential_free_repo/.handbook/charter/CHARTER.md"
+test -f "$credential_free_repo/.handbook/project/context.yaml"
+test ! -e "$credential_free_repo/.handbook/project_context/PROJECT_CONTEXT.md"
 grep -F 'schema_id: "handbook.artifact.project-context"' \
-  "$all_three_repo/.handbook/project/context.yaml" >/dev/null
-assert_credential_free_doctor_contract "$all_three_doctor"
-all_three_inspect_status="$(
+  "$credential_free_repo/.handbook/project/context.yaml" >/dev/null
+assert_credential_free_doctor_contract "$credential_free_doctor"
+credential_free_inspect_status="$(
   capture_in_repo \
-    "$all_three_repo" \
-    "$all_three_inspect" \
+    "$credential_free_repo" \
+    "$credential_free_inspect" \
     /dev/null \
     /dev/null \
     env -u CODEX_API_KEY -u OPENAI_API_KEY PATH="$offline_path" \
     "$HANDBOOK_BINARY" inspect --packet planning.packet
 )"
-[[ "$all_three_inspect_status" -eq 1 ]] || {
-  echo "expected flow refusal without promoted Charter exit 1, got: $all_three_inspect_status"
+[[ "$credential_free_inspect_status" -eq 1 ]] || {
+  echo "expected flow refusal without promoted Charter exit 1, got: $credential_free_inspect_status"
   exit 1
 }
-assert_credential_free_flow_refusal "$all_three_inspect"
+assert_credential_free_flow_refusal "$credential_free_inspect"
 
 echo "==> outside-git-repo refusal smoke"
 outside_dir="$tmp_root/not-a-repo"

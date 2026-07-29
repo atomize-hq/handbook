@@ -110,7 +110,6 @@ charter-intake/openai.yaml
 resources/authoring/charter_authoring_method.md
 resources/charter/CHARTER_INPUTS.yaml.tmpl
 resources/charter/charter_inputs_directive.md
-resources/environment_inventory/ENVIRONMENT_INVENTORY_INPUTS.yaml.tmpl
 resources/project_context/PROJECT_CONTEXT_INPUTS.yaml.tmpl
 runtime-manifest.json
 EOF
@@ -122,7 +121,6 @@ assert_installed_runtime_contract() {
   test -d "$HANDBOOK_HOME/resources/authoring"
   test -d "$HANDBOOK_HOME/resources/charter"
   test -d "$HANDBOOK_HOME/resources/project_context"
-  test -d "$HANDBOOK_HOME/resources/environment_inventory"
   assert_path_absent "$HANDBOOK_HOME/bin/handbook-charter-intake"
   assert_path_absent "$HANDBOOK_HOME/share"
 }

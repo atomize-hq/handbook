@@ -1,6 +1,6 @@
 ---
 name: handbook
-description: "Run native Handbook Charter governance plus deterministic project-context and environment-inventory authoring."
+description: "Run native Handbook Charter governance plus deterministic project-context authoring."
 ---
 
 # Handbook
@@ -11,7 +11,7 @@ Native governance and baseline-authoring workflow for the `Handbook` family.
 - Installed thin projections: `~/handbook/.agents/skills/handbook/` and `~/handbook/.agents/skills/handbook-charter-intake/`
 - Codex discovery glue: `~/.codex/skills/handbook*`
 
-Use this root skill from inside a real git work tree. Setup creates repository infrastructure but does not author Charter truth. Charter acquisition creates immutable lineage and requires later human approval and atomic promotion; Project Context and Environment Inventory retain their deterministic authoring commands.
+Use this root skill from inside a real git work tree. Setup creates repository infrastructure but does not author Charter truth. Charter acquisition creates immutable lineage and requires later human approval and atomic promotion. Project Context retains its deterministic authoring commands. Canonical Environment Context is optional advisory context and is not authored through a legacy kind-specific command.
 
 Resolve the repository and installed runtime first:
 
@@ -25,8 +25,7 @@ for required in \
   "$handbook_home/bin/handbook" \
   "$handbook_home/runtime-manifest.json" \
   "$handbook_home/resources/charter/CHARTER_INPUTS.yaml.tmpl" \
-  "$handbook_home/resources/project_context/PROJECT_CONTEXT_INPUTS.yaml.tmpl" \
-  "$handbook_home/resources/environment_inventory/ENVIRONMENT_INVENTORY_INPUTS.yaml.tmpl"; do
+  "$handbook_home/resources/project_context/PROJECT_CONTEXT_INPUTS.yaml.tmpl"; do
   [[ -f "$required" ]] || {
     echo "REFUSED: missing installed handbook home prerequisite: $required" >&2
     exit 1
@@ -51,13 +50,11 @@ Workflow:
    handbook author charter --validate
    ```
 
-4. Validate and author the remaining baseline artifacts:
+4. Validate and author Project Context:
 
    ```bash
    $HANDBOOK_HOME/bin/handbook author project-context --validate --from-inputs <project-context-path|->
    $HANDBOOK_HOME/bin/handbook author project-context --from-inputs <project-context-path|->
-   $HANDBOOK_HOME/bin/handbook author environment-inventory --validate --from-inputs <environment-inventory-path|->
-   $HANDBOOK_HOME/bin/handbook author environment-inventory --from-inputs <environment-inventory-path|->
    ```
 
 5. Run `$HANDBOOK_HOME/bin/handbook doctor --json` and inspect the additive Charter definition, canonical, lifecycle, source/render fingerprint, and next-action fields before claiming completion.

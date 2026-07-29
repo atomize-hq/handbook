@@ -664,8 +664,6 @@ def _update_state_after_capture(stage_id: str, stage_entry: Dict[str, Any], wrot
             state["project_context_ref"] = "artifacts/project_context/PROJECT_CONTEXT.md"
         if p.endswith("artifacts/base/BASE_CONTEXT.md"):
             state["base_context_ref"] = "artifacts/base/BASE_CONTEXT.md"
-        if p.endswith("artifacts/foundation/ENVIRONMENT_INVENTORY.md"):
-            state["environment_inventory_ref"] = "artifacts/foundation/ENVIRONMENT_INVENTORY.md"
 
     # apply `sets` variables (usually booleans)
     sets = stage_entry.get("sets") or []
@@ -995,7 +993,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     overlays: List[str] = []
     if args.overlays:
         overlays.extend([x.strip() for x in args.overlays.split(",") if x.strip()])
-    
+
     if var_overrides.get("enable_complexity"):
         candidates = ["quality/complexity_assessment", "complexity_assessment"]
         if not any(c in overlays for c in candidates):

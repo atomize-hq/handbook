@@ -7,7 +7,7 @@ in posture (e.g., internal → external users, beta → GA).
 - Prefer **more sprint slots** than you think you need (avoid cramming).
 - Require at least one sprint lane dedicated to integration/hardening.
 - Add explicit `research_discovery` tasks early if architectural unknowns exist.
-- Strengthen release DoD: require quality gates, docs, and environment inventory completeness.
+- Strengthen release DoD: require quality gates, docs, and environment context completeness.
 
 ## Suggested defaults
 - Sprint slots: 3–6
