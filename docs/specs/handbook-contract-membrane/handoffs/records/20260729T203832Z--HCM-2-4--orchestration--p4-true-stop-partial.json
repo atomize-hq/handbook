@@ -1,0 +1,386 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260729T203832Z--HCM-2-4--orchestration--p4-true-stop-partial",
+  "created_at_utc": "2026-07-29T20:38:32Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P4-control-plane-true-stop-closeout",
+  "orchestration_id": "20260729T202746Z--HCM-2-4--p4-control-plane-closeout-orchestration",
+  "source_handoff_ids": [
+    "20260729T160402Z--HCM-2-4--orchestration--bounded-p2-control-plane-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "partial",
+  "stop_reason": "context_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-29T20:38:32Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T202827Z--HCM-2-4--p4-control-plane-status-aggregate-review.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "p4-control-plane-status-aggregate-review",
+      "dispatch_id": "20260729T202827Z--HCM-2-4--p4-control-plane-status-aggregate-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T202827Z--HCM-2-4--p4-control-plane-status-aggregate-review.json",
+      "dispatch_fingerprint": "sha256:bbef38317d531eb74625e0ee28d43d69b1abb86642176f73643f1ede5b49fc7e",
+      "role": "review",
+      "agent_id": "/root/p4_status_aggregate_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:b74c3ff9adafeba8a5cfdf8395fceff9b8730274520d810f6032a44175543855",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T202827Z--HCM-2-4--p4-control-plane-status-aggregate-review.json",
+        "git:f924c2baa33f5fd306a1e7419bcda1758448bf51"
+      ],
+      "result_subject_fingerprint": "sha256:b74c3ff9adafeba8a5cfdf8395fceff9b8730274520d810f6032a44175543855"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-07-29T20:38:32Z",
+    "dispatch_count": 1,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:846cda13e6b7de84375f7a3baa70c1e1bd87c6a78b12e430ad4049a3988d252b"
+    ],
+    "aggregate_fingerprint": "sha256:aadd77dee74ceddfd219be6947edae92ff1e09e3415a187299b88f6639343276"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "f924c2baa33f5fd306a1e7419bcda1758448bf51",
+    "subject_fingerprint": "sha256:b74c3ff9adafeba8a5cfdf8395fceff9b8730274520d810f6032a44175543855",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T202827Z--HCM-2-4--p4-control-plane-status-aggregate-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+      "git:00dde0162fcb15576c83b6ed40ab7286488d0890",
+      "git:158115daa2b85d41663b79dc677fce69e59fd1e2",
+      "git:f924c2baa33f5fd306a1e7419bcda1758448bf51"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T202827Z--HCM-2-4--p4-control-plane-status-aggregate-review.json"
+  },
+  "active_resolution": {
+    "level": "proof",
+    "scope_horizon": "bounded HCM-2.4 P4 control-plane closeout inside an incomplete HCM-2.4 orchestration",
+    "detail_resolution": "completed P2, P3/P3B, GREEN P4, accepted P5, satisfied P6 prerequisites, and exact P6/P7/Phase 2 stop boundary",
+    "temporal_horizon": "through reviewed program-status commit f924c2baa33f5fd306a1e7419bcda1758448bf51",
+    "authority_horizon": "P4 completion only; P6 unselected and unauthorized, P7 blocked, full HCM-2.4 and Phase 2 incomplete",
+    "memory_horizon": "bounded-P2 handoff, P4/P5 prerequisite, P4 negative-proof lineage, aggregate v1.4 review, and this superseding partial handoff",
+    "validation_horizon": "CLEAN reviewed primary commit plus schema-valid deterministic mechanical closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Close the bounded HCM-2.4 P4 control plane as completed and GREEN, record the accepted P5 and satisfied P6 prerequisites, and true-stop the still-incomplete enclosing HCM-2.4 orchestration without selecting P6 or authorizing later work.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Implementation authorization"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.4 current evidence boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "Current boundary",
+        "P4 — Decision Record support proof",
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "P7 — Phase 2 exit and true stop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+      "sections": [
+        "Current bounded negative-proof candidate (2026-07-29)",
+        "Authorized resolution and current proof"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T202827Z--HCM-2-4--p4-control-plane-status-aggregate-review.json",
+      "sections": [
+        "exact CLEAN reviewed status subject"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "f924c2baa33f5fd306a1e7419bcda1758448bf51",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/ideas/intent-to-outcome-fidelity.md"
+    ]
+  },
+  "work_completed": [
+    "Preserved the completed bounded P2 implementation and authority at 9b3edf2745054872939ad48abad50ae5c2d97f9a and f62141b358239e15f106f04034131202e9db1cac, with future implementation-task gate runtime still deferred.",
+    "Recorded P3/P3B as completed and the shared P4/P5 prerequisite as review-clean at 00dde0162fcb15576c83b6ed40ab7286488d0890, leaving P5 GREEN and accepted.",
+    "Recorded the independent five-part P4 negative-surface/path proof as review-clean at 158115daa2b85d41663b79dc677fce69e59fd1e2, making bounded P4 GREEN and completed.",
+    "Corrected the four program-level summaries and two stale plan phrases without changing runtime behavior, tests, schemas, definitions, profiles, fixtures, or product semantics.",
+    "Completed a fresh v1.4 aggregate review over the exact 15-path subject; /root/p4_status_aggregate_review returned CLEAN with no findings or advisories.",
+    "Committed the exact reviewed control-plane correction and immutable review dispatch as f924c2baa33f5fd306a1e7419bcda1758448bf51."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "status": "completed",
+      "summary": "Current program status and implementation authority now record completed P4, accepted P5, and the unselected P6 true-stop."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "status": "completed",
+      "summary": "Current-to-target seams no longer classify P4 negative-surface/path proof as open."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "status": "completed",
+      "summary": "HCM-2.4 phase authority records 00dde01, 158115d, satisfied P6 prerequisites, and the fresh-entry boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "status": "completed",
+      "summary": "Program proof gates and the HCM-2.4 evidence boundary contain only the exact P4/P5 evidence earned by 00dde01 and 158115d."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T202827Z--HCM-2-4--p4-control-plane-status-aggregate-review.json",
+      "status": "completed",
+      "summary": "Validated v1.4 aggregate review dispatch; exact 15-path subject sha256:b74c3ff9adafeba8a5cfdf8395fceff9b8730274520d810f6032a44175543855 returned CLEAN."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260729T203832Z--HCM-2-4--orchestration--p4-true-stop-partial.json",
+      "status": "completed",
+      "summary": "Parent-owned v1.4 partial true-stop handoff: bounded P4 completed while enclosing HCM-2.4 remains incomplete."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-P4-CLOSEOUT-D1",
+      "summary": "Bounded P4 is GREEN and completed through exact prerequisite commit 00dde0162fcb15576c83b6ed40ab7286488d0890 and negative-proof commit 158115daa2b85d41663b79dc677fce69e59fd1e2.",
+      "authority_effect": "Program-level current truth may close P4's positive and negative proof obligations; no runtime or product authority is added.",
+      "refs": [
+        "git:00dde0162fcb15576c83b6ed40ab7286488d0890",
+        "git:158115daa2b85d41663b79dc677fce69e59fd1e2",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P4-CLOSEOUT-D2",
+      "summary": "P5 remains GREEN and accepted; P1A-P1C and P2-P5 prerequisites for P6 are satisfied.",
+      "authority_effect": "Prerequisite completion does not select or authorize P6 and does not confer P7 or Phase 2 exit authority.",
+      "refs": [
+        "git:00dde0162fcb15576c83b6ed40ab7286488d0890",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P4-CLOSEOUT-D3",
+      "summary": "The enclosing HCM-2.4 orchestration true-stops partial at the P6 selection boundary.",
+      "authority_effect": "P6 remains unselected and unauthorized because no P6 selector, entry review, or explicit operator selection exists; P7 remains blocked behind accepted P6; full HCM-2.4, Phase 2, HCM-3.x, and automatic continuation remain open or unauthorized.",
+      "refs": [
+        "git:f924c2baa33f5fd306a1e7419bcda1758448bf51",
+        "docs/specs/handbook-contract-membrane/00-README.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-P6-SELECTION-AUTHORITY",
+      "classification": "authority",
+      "summary": "P6 is unselected and unauthorized; prerequisite completion alone does not supply a P6 selector, entry review, or explicit operator selection.",
+      "resume_condition": "Receive a fresh explicit operator selection for P6 and establish its own exact selector and entry-review authority under the live HCM-2.4 plan.",
+      "owner": "operator and top-level parent orchestrator"
+    }
+  ],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "v1.4 dispatch verification plus fresh aggregate read-only review",
+      "status": "passed",
+      "evidence_ref": "20260729T202827Z--HCM-2-4--p4-control-plane-status-aggregate-review; /root/p4_status_aggregate_review CLEAN; sha256:b74c3ff9adafeba8a5cfdf8395fceff9b8730274520d810f6032a44175543855"
+    },
+    {
+      "command": "validate_handoffs.py ordinary validation and both supported self-tests after deterministic ledger rebuild",
+      "status": "passed",
+      "evidence_ref": "69 records, 422 current JSON dispatches, exact 69-entry ledger parity; historical v1 admission and orchestration/causal contract self-tests passed"
+    },
+    {
+      "command": "active-authority stale-P4/P6 scan, JSON parsing, and git diff --check",
+      "status": "passed",
+      "evidence_ref": "only three explicitly historical P4-incomplete statements remain in P4-decision-record.md; zero current P6-waits-on-P4 matches; JSON and whitespace checks passed"
+    },
+    {
+      "command": "GitNexus detect_changes scope compare base_ref main",
+      "status": "passed",
+      "evidence_ref": "with diff.interHunkContext=1000000 to merge query ranges, the final pre-commit comparison completed at 1,181 branch-wide files, 2,103 indexed symbols, 57 affected flows, CRITICAL cumulative risk; packet/staged detection reported no indexed symbol or execution-flow changes"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Implementation authorization",
+        "Current conclusion"
+      ],
+      "reason": "Replace stale P4-open program status with the exact completed/blocked boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Current-to-target crosswalk"
+      ],
+      "reason": "Remove stale P4-negative-proof target classifications and preserve the separate P6 gate.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families"
+      ],
+      "reason": "Record completed P4/P5 evidence and the fresh P6 entry-authority boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Open program proof gates",
+        "HCM-2.4 current evidence boundary"
+      ],
+      "reason": "Add only the proof earned by 00dde01 and 158115d and remove stale current P4-open claims.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260729T203832Z--HCM-2-4--orchestration--p4-true-stop-partial.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the parent-owned P4-completed, enclosing-orchestration-partial true stop.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger from every canonical handoff record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Begin only a freshly selected P6 entry-authority packet; do not continue automatically from this P4 closeout.",
+    "condition": "A fresh explicit operator selection must choose P6, and the resumed parent must establish and review an exact P6 selector and entry packet under the live HCM-2.4 plan.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260729T203832Z--HCM-2-4--orchestration--p4-true-stop-partial.json",
+        "sections": [
+          "entire partial true-stop handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sections": [
+          "Status",
+          "Implementation authorization"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sections": [
+          "P6 — Aggregate flow and fixed-selector deletion",
+          "P7 — Phase 2 exit and true stop"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sections": [
+          "P6",
+          "P7"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "After explicit selection, establish and independently review only the exact P6 selector and entry authority before implementation.",
+      "Reconfirm P1A-P1C and P2-P5 remain committed, clean, and individually GREEN at P6 entry."
+    ],
+    "prohibited_scope": [
+      "Do not continue automatically into P6 or infer P6 authority from satisfied prerequisites.",
+      "Do not begin P7 until P6 is accepted.",
+      "Do not claim full HCM-2.4 completion or Phase 2 exit.",
+      "Do not authorize HCM-3.x, future implementation-task gate runtime, unrelated product semantics, or a push."
+    ],
+    "acceptance_criteria": [
+      "A fresh operator selection explicitly chooses P6.",
+      "An exact P6 selector and entry-review subject exist and pass their own live gates.",
+      "The completed P2, P3/P3B, P4, and accepted P5 evidence remains unchanged and GREEN.",
+      "P7 and Phase 2 remain open until P6 is independently accepted and the P7 exit wall passes."
+    ],
+    "stop_conditions": [
+      "Stop if no fresh explicit P6 selection exists.",
+      "Stop if any P6 prerequisite regresses or its selector/entry review is absent or not CLEAN.",
+      "Stop before P7, Phase 2 exit, HCM-3.x, automatic continuation, or push without their separate authority."
+    ]
+  },
+  "supersedes": [
+    "20260729T160402Z--HCM-2-4--orchestration--bounded-p2-control-plane-completed"
+  ],
+  "chat_summary": "Bounded HCM-2.4 P4 is GREEN and completed through 00dde01 and 158115d; P5 remains accepted and P1A-P1C/P2-P5 prerequisites for P6 are satisfied. The enclosing HCM-2.4 orchestration true-stops partial: P6 has no selector, entry review, or explicit selection; P7 remains blocked, full HCM-2.4 and Phase 2 remain incomplete, and future task-gate runtime, HCM-3.x, automatic continuation, and push remain unauthorized."
+}
