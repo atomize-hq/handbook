@@ -1,0 +1,413 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial",
+  "created_at_utc": "2026-07-29T22:47:42Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-selector-entry-true-stop-closeout",
+  "orchestration_id": "20260729T222320Z--HCM-2-4--p6-selector-entry-orchestration",
+  "source_handoff_ids": [
+    "20260729T203832Z--HCM-2-4--orchestration--p4-true-stop-partial"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "partial",
+  "stop_reason": "context_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-29T22:24:21Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T222421Z--HCM-2-4--p6-aggregate-flow-selector-review.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "p6-aggregate-flow-selector-discovery-review",
+      "dispatch_id": "20260729T222421Z--HCM-2-4--p6-aggregate-flow-selector-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T222421Z--HCM-2-4--p6-aggregate-flow-selector-review.json",
+      "dispatch_fingerprint": "sha256:de0a2fde55e23eca3ccdc80b88198c83b64cce1cba80fa9758e5292b0229b30d",
+      "role": "review",
+      "agent_id": "/root/p6_selector_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:2c3ccd9893d05e302156f329ea11c477660ccf49bfc08e695debf548839f30ae",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-2.4-P6-DISPATCH-AUTHREF-001",
+        "HCM-2.4-P6-IMPACT-COUNT-001",
+        "HCM-2.4-P6-BRIDGE-TYPE-COUNT-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T222421Z--HCM-2-4--p6-aggregate-flow-selector-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md"
+      ],
+      "result_subject_fingerprint": "sha256:2c3ccd9893d05e302156f329ea11c477660ccf49bfc08e695debf548839f30ae"
+    },
+    {
+      "run_id": "p6-aggregate-flow-selector-closure-review",
+      "dispatch_id": "20260729T223556Z--HCM-2-4--p6-aggregate-flow-selector-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T223556Z--HCM-2-4--p6-aggregate-flow-selector-closure-review.json",
+      "dispatch_fingerprint": "sha256:49ef8356eaf5e5d9bef771baa0b201e744ecbb72a33e9e3aa2fe9d67c0cf27a6",
+      "role": "review",
+      "agent_id": "/root/p6_selector_closure_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:ac7e0df98ed64bdd56049b332af9527b70748472555b250c0fe0c97e036d5453",
+      "review_round": 2,
+      "predecessor_run_id": "p6-aggregate-flow-selector-discovery-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T223556Z--HCM-2-4--p6-aggregate-flow-selector-closure-review.json",
+        "git:f8c64ad284277640fb3d284d7a432945c010c6f0"
+      ],
+      "result_subject_fingerprint": "sha256:ac7e0df98ed64bdd56049b332af9527b70748472555b250c0fe0c97e036d5453"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-07-29T22:47:42Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:217df4ed7d6129aa11d1df35872064d5e54d2a6c71f4e1f70fe61d32d6f98f89"
+    ],
+    "aggregate_fingerprint": "sha256:b6b0bf9301567ef25e25f86e5d758b52dc08432b86ef15025ee4686c51eaea1d"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "p6-selector-discovery-remediation",
+      "finding_run_id": "p6-aggregate-flow-selector-discovery-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "p6-aggregate-flow-selector-closure-review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:ac7e0df98ed64bdd56049b332af9527b70748472555b250c0fe0c97e036d5453",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T223556Z--HCM-2-4--p6-aggregate-flow-selector-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "f8c64ad284277640fb3d284d7a432945c010c6f0",
+    "subject_fingerprint": "sha256:ac7e0df98ed64bdd56049b332af9527b70748472555b250c0fe0c97e036d5453",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T222421Z--HCM-2-4--p6-aggregate-flow-selector-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T223556Z--HCM-2-4--p6-aggregate-flow-selector-closure-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "git:f8c64ad284277640fb3d284d7a432945c010c6f0"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T223556Z--HCM-2-4--p6-aggregate-flow-selector-closure-review.json"
+  },
+  "active_resolution": {
+    "level": "planning",
+    "scope_horizon": "bounded HCM-2.4 P6 selector and entry-authority true stop",
+    "detail_resolution": "reviewed atomic descriptor-selected aggregate-flow cleanup contract without implementation",
+    "temporal_horizon": "through reviewed selector commit f8c64ad284277640fb3d284d7a432945c010c6f0",
+    "authority_horizon": "P6 selected for a later implementation session only; P7, Phase 2, HCM-3.x, task-gate runtime, automatic continuation, and push remain unauthorized",
+    "memory_horizon": "consumed P4 true-stop handoff, complete P6 selector, discovery P2s, different-fresh CLEAN closure, and this parent true stop",
+    "validation_horizon": "reviewed primary commit plus schema-valid deterministic mechanical closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Create, independently review, and locally commit the exact HCM-2.4 P6 selector and entry contract for a later atomic aggregate-flow cleanup, then true-stop without implementing it.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Trigger and earned entry authority",
+        "Exact owner and execution-flow boundary",
+        "Complete production path and symbol manifest",
+        "GitNexus upstream impact ledger",
+        "Atomic indivisibility and ancillary allowance",
+        "Stop conditions and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+      "sections": [
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "P7 — Phase 2 exit and true stop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+      "sections": [
+        "P6 — Aggregate cleanup",
+        "P7 — Phase 2 exit"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T223556Z--HCM-2-4--p6-aggregate-flow-selector-closure-review.json",
+      "sections": [
+        "exact CLEAN reviewed selector/entry subject"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "f8c64ad284277640fb3d284d7a432945c010c6f0",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/ideas/intent-to-outcome-fidelity.md"
+    ]
+  },
+  "work_completed": [
+    "Consumed the selected P4 true-stop handoff and confirmed P1A-P1C and P2-P5 remain committed and GREEN at starting HEAD 9df90f55e0c3ea16391866f3539157ed528d9f2e.",
+    "Refreshed the GitNexus index without injecting AGENTS/skills and recorded upstream impact for every planned P6 symbol, including CanonicalArtifact CRITICAL/27 and all HIGH choke points.",
+    "Created the exact P6 owner, 19-production-path, 19-test-path, RED, preservation, atomicity, ancillary, stop, non-goal, and resume selector without changing implementation bytes.",
+    "Remediated three valid discovery P2 findings: exact authority headings, two depth-3 LOW/8 counts, and consistent all-four bridge-type deletion wording.",
+    "Obtained a different-fresh CLEAN closure from /root/p6_selector_closure_review with no P3/P4 advisories.",
+    "Committed the exact reviewed selector/entry subject and both immutable review dispatches as f8c64ad284277640fb3d284d7a432945c010c6f0."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "status": "completed",
+      "summary": "Exact reviewed P6 selector and later-session entry authority; implementation remains unstarted."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T222421Z--HCM-2-4--p6-aggregate-flow-selector-review.json",
+      "status": "completed",
+      "summary": "Immutable discovery review dispatch whose three P2 findings were fully remediated."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T223556Z--HCM-2-4--p6-aggregate-flow-selector-closure-review.json",
+      "status": "completed",
+      "summary": "Causally linked different-fresh CLEAN closure over the exact remediated subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial.json",
+      "status": "completed",
+      "summary": "Parent-owned partial true-stop handoff at the P6 implementation boundary."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-P6-ENTRY-D1",
+      "summary": "P6 is explicitly selected and entry-authorized for a fresh later implementation session under the dated aggregate-flow selector.",
+      "authority_effect": "The later session may implement only the selector's atomic 19-production-path/19-test-path descriptor-selected aggregate-flow cleanup after replaying its entry and RED gates.",
+      "refs": [
+        "git:f8c64ad284277640fb3d284d7a432945c010c6f0",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P6-ENTRY-D2",
+      "summary": "Both HCM-2 bridge IDs and all four bridge types must be deleted with fixed selector/path authority as one indivisible implementation.",
+      "authority_effect": "Atomicity authorizes no unrelated cleanup, compatibility layer, public API, module, dependency, Cargo, schema, definition, profile, fixture, or task-gate runtime change.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P6-ENTRY-D3",
+      "summary": "This orchestration true-stops after selector/entry authority; P6 implementation has not started.",
+      "authority_effect": "P7, full HCM-2.4 completion, Phase 2 exit, HCM-3.x, future implementation-task gate runtime, automatic continuation, and push remain open or unauthorized.",
+      "refs": [
+        "git:f8c64ad284277640fb3d284d7a432945c010c6f0",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-2.4-P6-DISPATCH-AUTHREF-001",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p6-aggregate-flow-selector-discovery-review",
+      "summary": "The discovery dispatch cited four non-existent 05/06 section labels; the closure dispatch now binds exact live headings.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T223556Z--HCM-2-4--p6-aggregate-flow-selector-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.4-P6-IMPACT-COUNT-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p6-aggregate-flow-selector-discovery-review",
+      "summary": "Two loader rows used 1 rather than the full depth-3 impacted count 8; both now record LOW/8, D/P/M 1/0/2, depths 1/2/5.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.4-P6-BRIDGE-TYPE-COUNT-001",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p6-aggregate-flow-selector-discovery-review",
+      "summary": "Selector/checklist wording understated the four bridge types; both now require all four named types atomically.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-P6-IMPLEMENTATION-FRESH-SESSION",
+      "classification": "authority",
+      "summary": "P6 implementation is intentionally unstarted and cannot continue automatically from this selector/entry session.",
+      "resume_condition": "Start a fresh top-level HCM-2.4 P6 implementation session that explicitly consumes this handoff and the dated selector, verifies f8c64ad284277640fb3d284d7a432945c010c6f0 plus unchanged GREEN prerequisites/live bridge inventory/impact ceiling, and records the selector's exact required RED baseline before the first production edit.",
+      "owner": "operator and next top-level parent orchestrator"
+    }
+  ],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "v1.4 discovery and closure dispatch verification plus two fresh built-in read-only reviews",
+      "status": "passed",
+      "evidence_ref": "discovery subject sha256:2c3ccd9893d05e302156f329ea11c477660ccf49bfc08e695debf548839f30ae; closure subject sha256:ac7e0df98ed64bdd56049b332af9527b70748472555b250c0fe0c97e036d5453; closure CLEAN"
+    },
+    {
+      "command": "focused prerequisite wall, cargo fmt --all -- --check, git diff --check, recursive 19+19 ceiling inventory, and protected-path hash replay",
+      "status": "passed",
+      "evidence_ref": "all focused tests GREEN; 34 recursive consumer paths with 0 outside ceiling; 0 production/test/runtime status paths; 0 protected hash mismatches"
+    },
+    {
+      "command": "GitNexus impact ledger and detect_changes scope compare base_ref main plus staged packet detection",
+      "status": "passed",
+      "evidence_ref": "every planned symbol replayed; compare-to-main completed at 1,181 files/10,643 symbols/268 flows/CRITICAL cumulative branch risk; staged selector packet LOW with 24 documentation symbols and 0 affected flows"
+    },
+    {
+      "command": "ordinary handoff validation, deterministic ledger parity, and both supported self-tests",
+      "status": "passed",
+      "evidence_ref": "70 records, 424 current JSON dispatches, 8 admitted legacy dispatches, exact 70-entry ledger parity; historical v1 admission and orchestration/causal contract self-tests passed"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "entire selector"
+      ],
+      "reason": "Freeze exact later-session P6 implementation authority without implementing it.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the parent-owned P6-selected, implementation-unstarted true stop.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger from every canonical handoff record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Implement only the reviewed HCM-2.4 P6 atomic aggregate-flow cleanup in a fresh session.",
+    "condition": "A fresh top-level session must explicitly select P6 implementation, consume this record and the dated selector, verify reviewed commit f8c64ad284277640fb3d284d7a432945c010c6f0 is present and P1A-P1C/P2-P5 plus the live bridge/fixed-selector/impact inventory remain unchanged, then add and record both exact required RED tests and the required absence-scan RED before any production edit.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial.json",
+        "sections": [
+          "entire partial true-stop handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+        "sections": [
+          "entire selector"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sections": [
+          "P6 — Aggregate flow and fixed-selector deletion"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sections": [
+          "P6 — Aggregate cleanup",
+          "P7 — Phase 2 exit"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Execute only the selector's atomic 19-production-path and 19-test-path bridge/fixed-selector cleanup after the exact RED baseline.",
+      "Use only the selector's bounded private-helper ancillary allowance if its dispatch amendment and fresh impact/consumer checks pass."
+    ],
+    "prohibited_scope": [
+      "Do not begin P7 or claim full HCM-2.4/Phase 2 completion.",
+      "Do not authorize HCM-3.x, future implementation-task gate runtime, generic configured renderers, capitalized Projections, public APIs, commands, dependencies, Cargo/version changes, modules, compatibility layers, unrelated cleanup, automatic continuation, or push."
+    ],
+    "acceptance_criteria": [
+      "The exact required RED baseline is recorded before production edits.",
+      "Both bridge IDs, all four bridge types, fixed enum/order/layout/path authority, fixed-sibling loaders, legacy exceptions, and bridge-only tests are removed atomically.",
+      "Every preserved Charter, Project Context, Environment Context, packet, budget, summary, fixture, blocker, refusal, and fingerprint proof remains GREEN.",
+      "A fresh implementation review and P6 proof close only P6; P7 and Phase 2 remain separate."
+    ],
+    "stop_conditions": [
+      "Stop if reviewed commit/selector, GREEN prerequisites, source/test ceiling, bridge inventory, or GitNexus impact counts materially differ.",
+      "Stop if either required RED test does not fail for the intended bridge/fixed-selector reason before production edits.",
+      "Stop on any need outside the exact manifest/ancillary allowance or before P7, Phase 2, HCM-3.x, task-gate runtime, continuation, or push."
+    ]
+  },
+  "supersedes": [
+    "20260729T203832Z--HCM-2-4--orchestration--p4-true-stop-partial"
+  ],
+  "chat_summary": "HCM-2.4 P6 is now explicitly selected and entry-authorized by a complete, different-fresh CLEAN selector committed at f8c64ad284277640fb3d284d7a432945c010c6f0. P6 implementation is unstarted and must resume only in a fresh top-level session after exact commit/prerequisite/inventory replay and the required RED baseline; P7, Phase 2, HCM-3.x, task-gate runtime, automatic continuation, and push remain unauthorized."
+}
