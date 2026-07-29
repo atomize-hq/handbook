@@ -5,9 +5,11 @@ review-clean, and locally committed at implementation commit `9b3edf2` with
 authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean. P2S,
 P2A, and Option C are historical evidence, not active architecture. The P4/P5
 token prerequisite is review-clean and committed at `00dde01`; P4's separate
-five-part negative-surface/path proof is review-clean and GREEN. HCM-2.4, P6,
-P7, and Phase 2 exit remain incomplete; future task-gate runtime remains
-deferred.
+five-part negative-surface/path proof is review-clean and GREEN. P6 is selected
+and entry-authorized for a later implementation session by
+`decision/20260729-p6-aggregate-flow-cleanup-selector.md`, but every P6
+implementation item remains unchecked. HCM-2.4, P7, and Phase 2 exit remain
+incomplete; future task-gate runtime remains deferred.
 
 ## Entry
 
@@ -359,17 +361,17 @@ deferred.
 
 ## P6 — Aggregate cleanup
 
-- [ ] BLOCKED: the bounded P2 prerequisite is satisfied at implementation
-      `9b3edf2` with authority `f62141b`, and P4's separate negative proof is
-      GREEN. This packet does not select or authorize P6, no P6 entry review
-      exists, and no bridge deletion may begin.
+- [x] Select and independently review the exact later-session P6 entry contract
+      in `decision/20260729-p6-aggregate-flow-cleanup-selector.md`; the bounded
+      P2 prerequisite is satisfied at implementation `9b3edf2` with authority
+      `f62141b`, and P4's separate negative proof is GREEN.
 - [ ] Replace fixed/bridge flow input collection with admitted selected
       descriptors and retained canonical bytes.
 - [ ] Preserve Charter authority, Project Context behavior, registry brief,
       packet ordering, budgets, fixtures, blockers, and refusals.
 - [ ] Delete `BR-HCM-2-PILOT-FLOW-01`.
 - [ ] Delete `BR-HCM-2-CHARTER-FLOW-01`.
-- [ ] Delete both bridge types, fixed renderer path selector, fixed-family/path
+- [ ] Delete all four bridge types, fixed renderer path selector, fixed-family/path
       authority, fixed-sibling loaders, legacy exceptions, and bridge-only tests.
 - [ ] Prove forbidden selector/legacy influence scans are empty.
 - [ ] Record status/evidence: pending.

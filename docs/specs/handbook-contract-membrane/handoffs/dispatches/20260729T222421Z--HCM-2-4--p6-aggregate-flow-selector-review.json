@@ -1,0 +1,249 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260729T222421Z--HCM-2-4--p6-aggregate-flow-selector-review",
+  "created_at_utc": "2026-07-29T22:24:21Z",
+  "source_handoff_ids": [
+    "20260729T203832Z--HCM-2-4--orchestration--p4-true-stop-partial"
+  ],
+  "parent_orchestration_id": "20260729T222320Z--HCM-2-4--p6-selector-entry-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-aggregate-flow-cleanup",
+  "subject_fingerprint": "sha256:2c3ccd9893d05e302156f329ea11c477660ccf49bfc08e695debf548839f30ae",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p6-aggregate-flow-selector-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-29T22:24:20Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+        "packet_ids": [
+          "P6-aggregate-flow-cleanup"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md#trigger-and-earned-entry-authority"
+      }
+    ],
+    "fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:217df4ed7d6129aa11d1df35872064d5e54d2a6c71f4e1f70fe61d32d6f98f89",
+    "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+    "outcome_registry_fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "p6-aggregate-flow-selector-convergence-1",
+    "completed_at_utc": "2026-07-29T22:24:20Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "focused P1A/P1B/Decision/Environment/Risk/flow/pipeline baseline targets listed in the selector",
+        "evidence_ref": "parent terminal output: Charter 9, Decision 10, P1A runtime 7, P1A support 13, Environment 10, Risk 13, pipeline capture 47, pipeline handoff 10; all passed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "recursive rg inventory of bridge IDs/types, fixed selectors, aggregate identities, packet inputs, render projections, and authority evidence under crates; compare every hit with the SPEC P6 ceiling",
+        "evidence_ref": "parent terminal output: 19 production paths, 19 test paths, 34 recursive consumer paths, 0 missing ceiling paths, 0 unexpected consumer paths"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordered 8-entry repo-path-NUL-SHA256-newline selector/entry manifest",
+        "evidence_ref": "subject_manifest below: sha256:2c3ccd9893d05e302156f329ea11c477660ccf49bfc08e695debf548839f30ae"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output: exit 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "744ac7d61a2da40c7eb1d3f5e4b3269f24a9ca6fb80ef33256774b24ce780109"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "a184cdc18f64fadadadd1f5810e47d9409db83727146f29817e718b770bf49cd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "db30f1a89a1daef44cfd7637655e52b3ba132a90c0f2e45ce4228fee4456d779"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "888807afca83d795ab1286c0f3aa337a6e91e066488bd5ba9195fa7f0a2051a0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "73c6929cc3b04d66c88a46415baf417caf3b219d25f6848984b462b66f280eb3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+        "sha256": "a09bacaebb76a14a5d6e5e27cda908ad2d06853a624555826f7662fbc64a044a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "d0c53af9f90d9d45d6799b11e8ea38a307df4cdc2319a0685869cb5b55a317e6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "be1825a8e790c8bc90f25ed78fcf7fab9892ece58157ae6c971fd2485f7dde90"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:2c3ccd9893d05e302156f329ea11c477660ccf49bfc08e695debf548839f30ae"
+  },
+  "active_resolution": {
+    "level": "planning",
+    "scope_horizon": "bounded HCM-2.4 P6 selector and later-session entry contract",
+    "detail_resolution": "atomic descriptor-selected aggregate flow cleanup without implementation",
+    "temporal_horizon": "pre-implementation selector review",
+    "authority_horizon": "P6 selection and entry only; no P6 implementation, P7, Phase 2, HCM-3.x, task-gate runtime, continuation, or push authority",
+    "memory_horizon": "live P6 source/test inventory, refreshed GitNexus graph, P1A-P1C and P2-P5 GREEN prerequisites, selected P4 handoff, and v1.4 control contract",
+    "validation_horizon": "fresh independent selector review before the authority commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Trigger and earned entry authority",
+        "Exact owner and execution-flow boundary",
+        "Complete production path and symbol manifest",
+        "Complete test and proof manifest",
+        "GitNexus upstream impact ledger",
+        "Stop conditions and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "HCM-2.4",
+        "Artifact and projection contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Temporary compatibility bridge ledger",
+        "HCM-2.4 proof gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "At HEAD 9df90f55e0c3ea16391866f3539157ed528d9f2e, P1A-P1C and P2-P5 are committed and GREEN, both HCM-2 bridge IDs/types and the fixed aggregate selectors remain live, and P6 implementation is unstarted. The proposed eight-path authority subject selects only a later P6 implementation session under an exact 19-production-path/19-test-path ceiling. No production, test, fixture, schema, definition, profile, Cargo, or runtime byte is changed. Nine protected user-owned paths remain outside the subject.",
+  "allowed_scope": [
+    "Replay the exact eight-entry manifest and review the selector plus seven active-state updates against the selected P4 handoff and live repository truth.",
+    "Verify the exact owner, collection/renderer contract, complete production/test manifests, bridge/fixed-selector inventory, and every symbol-specific upstream GitNexus result.",
+    "Verify the required RED baseline, behavior-preservation wall, atomic bridge/type deletion rationale, bounded ancillary allowance, explicit stops, non-goals, and implementation resume condition.",
+    "Verify the selector remains within the frozen SPEC P6 ceiling and leaves every P6 implementation and P7/Phase 2 item uncompleted."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, push, write a handoff or ledger entry, create another dispatch, or delegate.",
+    "Do not implement P6 or authorize P7, Phase 2 exit, HCM-3.x, task-gate runtime, generic configured renderers, capitalized Projections, public APIs, dependencies, Cargo changes, modules, compatibility layers, or unrelated cleanup.",
+    "Do not include protected/user-owned paths in the subject or modify historical records/dispatches."
+  ],
+  "tasks": [
+    "Independently inspect every subject file, replay all subject hashes and the aggregate fingerprint, and compare the selector with live source/test consumers rather than trusting the manifest.",
+    "Confirm the 19 production and 19 test paths equal the SPEC P6 ceilings and recursively identify any missing consumer, proof path, bridge/fixed selector, or planned symbol.",
+    "Check every HIGH/CRITICAL impact row, especially CanonicalArtifact CRITICAL, aggregate identity/layout/freshness/manifest/packet/budget choke points, for truthful caller/process/module accounting and adequate preservation proof.",
+    "Return findings first in P1, P2, P3, P4 order with file/line, violated contract, reason, smallest remediation, and missing proof; separately dispose any P3/P4 advisory under the inventory protocol."
+  ],
+  "contracts_and_gates": [
+    "P6 authority is selector/entry only and requires a fresh later implementation session; no implementation byte may be present in this subject",
+    "The P6 implementation ceiling is exactly the SPEC's 19 production paths and 19 test paths, with no fixtures, schemas, definitions, profiles, Cargo metadata, dependency, public API, command, or module additions",
+    "Both bridge IDs and all four bridge types, fixed enum/order/layout/path authority, fixed-sibling loaders, legacy exceptions, and bridge-only tests must be removed atomically only during implementation",
+    "Charter authority, Project Context behavior, Environment Context advisory behavior, packet dispositions/budgets/summaries/fixtures/blockers/refusals/fingerprints, deterministic order, and exact source bytes are frozen",
+    "P7, Phase 2, HCM-3.x, task-gate runtime, automatic continuation, and push remain unauthorized"
+  ],
+  "stop_conditions": [
+    "Return blocked if any subject hash, selector authority, source/test ceiling, or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Stop on any missing planned symbol impact, unexpected consumer/path, unresolved UNKNOWN, need for a fixture/definition/schema/profile/Cargo/runtime change, or scope outside the selector."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

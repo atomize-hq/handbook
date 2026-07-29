@@ -6,8 +6,10 @@ authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean and
 committed. P2S, P2A, and Option C are historical evidence, not active
 architecture. The P4/P5 token prerequisite is review-clean and committed at
 `00dde01`; P4's separate five-part negative-surface/path proof is review-clean
-and GREEN. P6 and P7 remain unselected and blocked; HCM-2.4 completion and
-Phase 2 exit remain incomplete.
+and GREEN. P6 is selected and entry-authorized for a later implementation
+session by `decision/20260729-p6-aggregate-flow-cleanup-selector.md`, but its
+implementation is unstarted. P7 remains blocked; HCM-2.4 completion and Phase
+2 exit remain incomplete.
 
 ## Dependency graph
 
@@ -26,8 +28,9 @@ P2–P5 may be prepared independently after P1C only under their own exact later
 selectors and must land serially when shared registry, fixture, proof, or
 generated inventory files overlap. The greenfield P2 correction does not
 authorize P4 or unrelated work. P1A-P1C and P2-P5 prerequisites for P6 are now
-committed, clean, and independently GREEN, but P6 cannot start without its own
-selector, entry review, and explicit operator selection.
+committed, clean, and independently GREEN. The operator has now supplied P6
+selection, and the dated selector freezes its separately reviewed later-session
+entry boundary.
 
 Current boundary: commits `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
 `5a2ccf6939be0e549e7e7355a245c7511c271eef`, and
@@ -39,9 +42,10 @@ exact operator-approved derivation selector frozen in
 `decision/20260727-p4-p5-coverage-token-derivation-selector.md`; selector
 review, RED/GREEN, supplemental causal closure, and commit are complete. P4
 now also has a separate operator-authorized five-part negative-surface/path
-proof with CLEAN different-fresh closure. P4 is GREEN. P6 and P7 remain
-ineligible because neither is selected or authorized by this packet. Current
-activity is limited to the bounded P4 control plane and true-stop handoff.
+proof with CLEAN different-fresh closure. P4 is GREEN. P6 is selected for a
+fresh later implementation session but unstarted; P7 remains ineligible.
+Current activity is limited to the P6 selector/entry authority and true-stop
+handoff.
 
 ## Standing rules
 
@@ -587,11 +591,12 @@ prerequisite is committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`.
 Entry: P1A–P1C and P2–P5 individually committed and green; no bridge deletion
 has occurred.
 
-Current entry result: not selected. The bounded greenfield P2 correction is
-GREEN and committed at implementation `9b3edf2` with authority `f62141b`; P3,
-P4, and P5 proof gates are GREEN. No P6 selector, entry review, or separate
-operator authority exists in this packet. No bridge deletion has occurred.
-P6 remains blocked and must not begin.
+Current entry result: selected and entry-authorized for a later implementation
+session by `decision/20260729-p6-aggregate-flow-cleanup-selector.md`. The
+bounded greenfield P2 correction is GREEN and committed at implementation
+`9b3edf2` with authority `f62141b`; P3, P4, and P5 proof gates are GREEN. No
+bridge deletion or other P6 implementation has occurred. Implementation may
+begin only under the selector's exact fresh-session resume condition.
 
 RED:
 

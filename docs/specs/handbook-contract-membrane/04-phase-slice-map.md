@@ -425,11 +425,12 @@ commit `9b3edf2745054872939ad48abad50ae5c2d97f9a` and authority commit
   `158115daa2b85d41663b79dc677fce69e59fd1e2`. P4 is GREEN and completed.
 - P2 owns removal of legacy Environment Inventory authority and influence.
   P6 retains its original aggregate-flow and fixed-selector/bridge deletion
-  gate. P1A-P1C and P2-P5 prerequisites are satisfied, but no P6 selector,
-  entry review, or explicit operator selection exists; P6 remains unselected
-  and unauthorized pending fresh entry authority. P7 remains blocked behind
-  accepted P6. Full HCM-2.4 and Phase 2 remain incomplete, and neither HCM-3.x
-  work nor automatic continuation is authorized.
+  gate. P1A-P1C and P2-P5 prerequisites are satisfied, and P6 is explicitly
+  selected and entry-authorized for a later implementation session by
+  `slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md`.
+  P6 implementation is unstarted. P7 remains blocked behind accepted P6. Full
+  HCM-2.4 and Phase 2 remain incomplete, and neither HCM-3.x work nor automatic
+  continuation is authorized.
 
 ### Phase 2 exit gate
 

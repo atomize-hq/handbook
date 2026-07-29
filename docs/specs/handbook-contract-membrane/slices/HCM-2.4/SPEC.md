@@ -7,8 +7,10 @@ review-clean, and locally committed at implementation commit
 review-clean and committed; the P4/P5 token prerequisite is accepted at
 `00dde0162fcb15576c83b6ed40ab7286488d0890`, P4's separate five-part
 negative-surface/path proof is review-clean and GREEN, and P5 remains accepted.
-P6 and P7 remain unselected and blocked; HCM-2.4 completion and Phase 2 exit
-remain unearned. Future task-gate runtime remains deferred; P2S/P2A/Option C
+P6 is explicitly selected and entry-authorized for a later implementation
+session by `decision/20260729-p6-aggregate-flow-cleanup-selector.md`, but its
+implementation is unstarted. P7 remains blocked; HCM-2.4 completion and Phase 2
+exit remain unearned. Future task-gate runtime remains deferred; P2S/P2A/Option C
 are historical evidence only under the 2026-07-28 greenfield decision.
 
 Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
@@ -48,11 +50,12 @@ end:
   Charter, Project Context, or HCM-2.3 registry-brief authority.
 
 This document freezes implementation packets and proof obligations. The
-current selection authorizes the bounded greenfield P2 correction described
-below, including its documentation, definition, runtime, cleanup, test, proof,
-and local-commit surfaces. It does not authorize future task-gate runtime, P4,
-P6, P7, Phase 2 exit, HCM-3.x, native/hardware/trust/evidence infrastructure,
-dependencies, Cargo changes, or another slice.
+current selection additionally authorizes only the later P6 implementation
+boundary frozen in
+`decision/20260729-p6-aggregate-flow-cleanup-selector.md`. It does not authorize
+implementation in this selector session, future task-gate runtime, P7, Phase 2
+exit, HCM-3.x, native/hardware/trust/evidence infrastructure, dependencies,
+Cargo changes, or another slice.
 
 ## Authority and preserved decisions
 
@@ -575,17 +578,24 @@ tests. Preserve packet order, budget outcomes, source summaries, fixture
 semantics, Charter authority, Project Context behavior, and registry-brief
 proof. This is the HIGH-risk flow choke point and must be one focused packet.
 
+P6 is now selected and entry-authorized for a fresh later implementation
+session by `decision/20260729-p6-aggregate-flow-cleanup-selector.md`. That
+selector freezes the exact owner, production/test manifest, live bridge/fixed
+inventory, refreshed impact ledger, required RED, preservation wall, atomicity,
+ancillary allowance, stops, and resume condition. No P6 implementation has
+started.
+
 ### P7 — Phase 2 exit proof and control-pack closeout
 
 Run the complete proof wall, prove every Phase 2 exit row, update only earned
 gate/bridge rows, perform the declared review flow, and produce the separate
 implementation handoff/ledger closeout. P7 may not begin HCM-3.x.
 
-The current parent may perform only this truthful bounded P4 control-plane and
-true-stop closeout. It must preserve the open Phase 2 exit rows and both bridge
-IDs, cite P2's bounded greenfield result and deferred task-gate runtime plus
-P4's GREEN negative-surface proof, and must not represent the reviewed packet
-as P6, P7, or slice completion.
+The current parent may perform only the P6 selector/entry-authority subject and
+its true-stop closeout. It must preserve the open Phase 2 exit rows and both
+bridge IDs, cite P2's bounded greenfield result and deferred task-gate runtime
+plus P4's GREEN negative-surface proof, and must not represent selection as P6
+implementation, P7, or slice completion.
 
 ## Exact implementation surface selectors
 
