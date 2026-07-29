@@ -5,8 +5,9 @@ review-clean, and locally committed at implementation commit `9b3edf2` with
 authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean. P2S,
 P2A, and Option C are historical evidence, not active architecture. The P4/P5
 token prerequisite is review-clean and committed at `00dde01`; P4's separate
-negative-surface/path proof remains open. HCM-2.4, P6, P7, and Phase 2 exit
-remain incomplete; future task-gate runtime remains deferred.
+five-part negative-surface/path proof is review-clean and GREEN. HCM-2.4, P6,
+P7, and Phase 2 exit remain incomplete; future task-gate runtime remains
+deferred.
 
 ## Entry
 
@@ -329,11 +330,10 @@ remain incomplete; future task-gate runtime remains deferred.
 - [x] Obtain fresh independent implementation review, remediate both closure
       findings, obtain different-fresh supplemental causal review CLEAN, and
       commit the reviewed P4/P5 token packet at `00dde01`.
-- [ ] Prove no root default, generated command, inferred filename, Projection,
-       or persistent view.
-      This broader P4 gate is outside the approved token selector and remains
-      outstanding for separate authority; token prerequisite closure does not
-      satisfy it.
+- [x] Prove no root default, generated command, inferred filename, Projection,
+      or persistent view through the separate bounded selector, five exact
+      negative tests, CLEAN same-subject review burst, exact-set P2
+      remediation, and different-fresh CLEAN closure.
 - [x] Record bounded-stop evidence:
       `proof/implementation/P4-decision-record.md` and
       `decision/20260727-p4-p5-generic-mutation-token-authority-stop.md`.
@@ -360,10 +360,9 @@ remain incomplete; future task-gate runtime remains deferred.
 ## P6 — Aggregate cleanup
 
 - [ ] BLOCKED: the bounded P2 prerequisite is satisfied at implementation
-      commit `9b3edf2` with authority commit `f62141b`, but P4's separate
-      negative-surface/path proof remains open and all other P6 entry
-      prerequisites remain required. The P4/P5 token prerequisite is
-      review-clean and committed.
+      `9b3edf2` with authority `f62141b`, and P4's separate negative proof is
+      GREEN. This packet does not select or authorize P6, no P6 entry review
+      exists, and no bridge deletion may begin.
 - [ ] Replace fixed/bridge flow input collection with admitted selected
       descriptors and retained canonical bytes.
 - [ ] Preserve Charter authority, Project Context behavior, registry brief,

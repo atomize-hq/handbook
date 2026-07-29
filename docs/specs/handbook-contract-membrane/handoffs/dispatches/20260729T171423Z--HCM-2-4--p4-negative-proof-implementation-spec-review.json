@@ -1,0 +1,281 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260729T171423Z--HCM-2-4--p4-negative-proof-implementation-spec-review",
+  "created_at_utc": "2026-07-29T17:14:23Z",
+  "source_handoff_ids": [
+    "20260729T160402Z--HCM-2-4--orchestration--bounded-p2-control-plane-completed"
+  ],
+  "parent_orchestration_id": "20260729T163207Z--HCM-2-4--p4-negative-proof-completion-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P4-negative-surface-proof",
+  "subject_fingerprint": "sha256:e81d9dd64c00a4cf0f707550035cc0bc03a0f94c5811e9cc7f0960da09676d34",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p4-negative-proof-implementation-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-29T16:47:58Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p4-negative-proof-completion",
+        "packet_ids": [
+          "P4-negative-surface-proof"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p4-decision-record-negative-proof-selector.md#trigger-and-authority"
+      }
+    ],
+    "fingerprint": "sha256:69d377e3acfee4464e0212d8c560529d0c4f0616c0f8260476a72c1764d3fd5d"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:1467514cab5931e4f77eb7cde196302537a2197b1cecc5e7660622e0415f0eb9",
+    "integrated_outcome_id": "hcm-2.4-p4-negative-proof-completion",
+    "outcome_registry_fingerprint": "sha256:69d377e3acfee4464e0212d8c560529d0c4f0616c0f8260476a72c1764d3fd5d",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260729T164759Z--HCM-2-4--p4-negative-proof-selector-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p4-negative-proof-implementation-convergence-spec-1",
+    "completed_at_utc": "2026-07-29T17:14:04Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "cargo test -p handbook-engine --test hcm_2_4_decision_record; cargo test -p handbook-engine --test hcm_2_3_generic_lineage -- --test-threads=1; cargo test -p handbook-engine --test hcm_2_3_registration_kernel; cargo clippy -p handbook-engine --lib -- -D warnings; cargo clippy -p handbook-engine --test hcm_2_4_decision_record -- -D warnings",
+        "evidence_ref": "parent terminal output: Decision 10/10, generic lineage 54/54, registration kernel 16/16, both strict Clippy commands exit 0"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "execute all five P4 negative tests independently; inspect shipped-root inventory, selected profile, AuthorCommand/help, exact-path decoys, Projection widening, Markdown decoys, renderer closure and golden",
+        "evidence_ref": "parent terminal output and P4 proof candidate: each exact negative test 1 passed/0 failed/9 filtered; renderer replay 1 passed/0 failed/9 filtered"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinal-sorted 20-entry path-NUL-SHA256-newline implementation manifest",
+        "evidence_ref": "subject_manifest below: sha256:e81d9dd64c00a4cf0f707550035cc0bc03a0f94c5811e9cc7f0960da09676d34"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output: exit 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/src/main.rs",
+        "sha256": "81c09f2fe97e30e06fdad14fab6c62c88af4bfbfbdc841b3dfc1b4e4e90057c0"
+      },
+      {
+        "path": "crates/cli/tests/snapshots/handbook-author-help.txt",
+        "sha256": "4fe84bb85feca66e57548413962a56baa4b80068c19966c2370fcd481740f4af"
+      },
+      {
+        "path": "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml",
+        "sha256": "5090e56e503c98df20df61a27ef946b239a0d0e9fb26d712427514a4697ed42f"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.decision-record-review-markdown/1.0.0.yaml",
+        "sha256": "7038f538e7c3280f4acf1878d9d91c3957a879004079cde1fe345baa5fe03e2c"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_decision_record/.handbook/definitions/profiles/decision-record-root-1.0.0.yaml",
+        "sha256": "6cce0cc246d9d2e57329f9c2e31b50357afbf1635b2a70ddff76782b7b1af0d3"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_decision_record/.handbook/profile-selection.json",
+        "sha256": "f17346ecabfb04010a0bc6be2fae46a7a9125f8775a484ca5567dbf2b33700ff"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_decision_record/.handbook/records/decision.yaml",
+        "sha256": "4f9703bb54dd7d2cfc17e35fe54db9dfb460525821f54c56b35cbb6ae2cd836a"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_decision_record.rs",
+        "sha256": "782542fcf0553e7fba0cc324294ccdfe797abfc634d579fb638d53b31a78f3f2"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_risk_record.rs",
+        "sha256": "39f72b43ad384581f847866733865ed1b8033914d5c4d0b9baa14824fbe8c14c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "194016b268c0595a95b0ac4c91977d11a8f053d4faf8e00571d344af95f0e26a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "c33b7de512eac8c48c4a2b353c145ae1360ff96ab29c3f23fbd4cc1a945430ae"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T164759Z--HCM-2-4--p4-negative-proof-selector-review.json",
+        "sha256": "c7d4e0f478abfaa6b7ccfe99961909fbc198abba1f3a23b82c01baa52f8a2420"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "8d51a39c4168f6dbc310cfff2bbdd3cfb78927089d1d04e05aded42737c2d764"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+        "sha256": "0b30e23a732c1906b6148a6b9720f32d33d3a5b171d4528835c87d6923e7afb2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "sha256": "085d3f6962c629ad751a6bbc08d591f7c6ebb81294d64676b833b405451ca7a2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p4-decision-record-negative-proof-selector.md",
+        "sha256": "302c2408c34eb62cd510019fd154df5f4c07f9043cd553063fe98b1dd543281f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sha256": "ad5f72375ad3d4e07afe982aa66588f42c78476e38b8e4a0b6ac6b488e4209e9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "5b772177a0409375b2cbc01f359b1285b503a4e8eb206d2aed4714b7b75c3af8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "4161af3e2832ed5bef313ca82a7477d1bc426bd8056905d83da6c024cf540ead"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "673dd8cda6169c8b98f358f8f7aee4bd3a64d7776a623b79e03c262a4a611283"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:e81d9dd64c00a4cf0f707550035cc0bc03a0f94c5811e9cc7f0960da09676d34"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "bounded HCM-2.4 P4 Decision Record negative-surface proof",
+    "detail_resolution": "spec-contract lens over five forbidden surfaces and retained positive proof",
+    "temporal_horizon": "post-verification implementation discovery review",
+    "authority_horizon": "P4 acceptance only; no production, P6, P7, full HCM-2.4, or Phase 2 authority",
+    "memory_horizon": "live P4 selector, prerequisite lineage, Decision fixture/target, P5 structural reference, and v1.4 review contract",
+    "validation_horizon": "fresh CLEAN same-subject review burst before P4 GREEN"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p4-decision-record-negative-proof-selector.md",
+      "sections": [
+        "Exact implementation selector",
+        "Preserved positive proof",
+        "Exact proof and review wall",
+        "Non-goals and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P4 — Decision Record support proof",
+        "Artifact row matrix",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "At HEAD 05a79bfa894e28046436c7cfaadf802dc0275150 with prerequisite 00dde016 as an ancestor, the bounded P4 test file adds exactly five negative tests and one renderer replay. The complete Decision target is 10/10, generic lineage is 54/54, registration kernel is 16/16, and strict Clippy/fmt/whitespace checks pass. No production, fixture, released definition, CLI, Cargo, dependency, public API, or protected/user-owned path changed in the review subject. P4 remains pending until this review burst is causally clean.",
+  "allowed_scope": [
+    "Replay the exact 20-entry manifest and review the additive P4 test/proof candidate against the selector and live SPEC.",
+    "Evaluate claim-to-test completeness for each of the five forbidden surfaces and the retained positive profile/descriptor/path/generic-operation/token/stale-basis/renderer/byte proofs.",
+    "Use P5 only as structural context; require independent P4 Decision evidence and no causal reliance on P5 results.",
+    "Classify any gap under the live P1-P4 review rubric without editing the subject."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, push, write a handoff or ledger entry, create another dispatch, or delegate.",
+    "Do not infer production, P6, P7, full HCM-2.4, Phase 2, HCM-3.x, Projection, Resolution, command, filename, or persistent-view authority.",
+    "Do not include protected/user-owned paths or treat their pre-existing worktree changes as review subject."
+  ],
+  "tasks": [
+    "Verify the frozen subject identity and independently map each forbidden-surface requirement to executable Decision-specific assertions.",
+    "Confirm the exact-path and Markdown cases prove refusal/non-fallback and the command/root/Projection cases use authoritative inventories.",
+    "Confirm the existing four positive tests remain intact and the renderer replay proves existing deterministic bytes without creating a new surface.",
+    "Return findings first in Critical, Required, Optional, Nit order with file/line, violated contract, reason, smallest remediation, and missing proof; separately dispose any P3/P4 advisory."
+  ],
+  "contracts_and_gates": [
+    "Exactly five new negative tests and one renderer replay; existing positive tests remain unchanged",
+    "All five forbidden claims are independently proven against Decision Record support",
+    "No production, fixture, schema, definition, golden, CLI, Cargo, dependency, public API, token grammar, or future-gate change",
+    "P4 becomes GREEN only after the complete same-subject review burst is CLEAN",
+    "P6, P7, full HCM-2.4, Phase 2, HCM-3.x, push, and automatic continuation remain forbidden"
+  ],
+  "stop_conditions": [
+    "Return blocked if any subject hash, authority, or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Stop on any need for production, fixture, released-definition, command, dynamic-path, Projection, persistent-view, or broader control-plane change."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

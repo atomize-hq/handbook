@@ -5,8 +5,9 @@ review-clean, and locally committed at implementation commit `9b3edf2` with
 authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean and
 committed. P2S, P2A, and Option C are historical evidence, not active
 architecture. The P4/P5 token prerequisite is review-clean and committed at
-`00dde01`; P4's separate negative-surface/path proof remains open. P6, P7,
-HCM-2.4 completion, and Phase 2 exit remain closed.
+`00dde01`; P4's separate five-part negative-surface/path proof is review-clean
+and GREEN. P6 and P7 remain unselected and blocked; HCM-2.4 completion and
+Phase 2 exit remain closed.
 
 ## Dependency graph
 
@@ -36,10 +37,10 @@ authority commit `f62141b358239e15f106f04034131202e9db1cac`. P4/P5 have the
 exact operator-approved derivation selector frozen in
 `decision/20260727-p4-p5-coverage-token-derivation-selector.md`; selector
 review, RED/GREEN, supplemental causal closure, and commit are complete. P4
-retains an open negative-surface/path proof outside that selector. That P4 gate
-and all other existing P6 prerequisites keep P6 and full P7 ineligible. The
-current P7 activity is limited to
-reviewed partial control-pack records and parent-owned true-stop handoffs.
+now also has a separate operator-authorized five-part negative-surface/path
+proof with CLEAN different-fresh closure. P4 is GREEN. P6 and P7 remain
+ineligible because neither is selected or authorized by this packet. Current
+activity is limited to the bounded P4 control plane and true-stop handoff.
 
 ## Standing rules
 
@@ -549,10 +550,13 @@ refusal, canonical bytes, and every unrelated negative. Fresh impact is LOW/3,
 1 direct caller, 0 processes, 2 modules; another production symbol or wider
 impact stops the packet.
 
-This result closes only the selected token prerequisite. The P4 no-root,
-generated-command, inferred-filename, Projection, and persistent-view proof
-remains open; the current selector does not authorize additional test or proof
-implementation for that gate.
+The token result closed only its selected prerequisite. Separate selector
+`decision/20260729-p4-decision-record-negative-proof-selector.md` subsequently
+authorized exactly five negative tests and one positive renderer replay. The
+live Decision target is 10/10, generic lineage is 54/54, registration kernel is
+16/16, all five negatives pass independently, and different-fresh closure is
+CLEAN after exact-set remediation of one P2 root-inventory finding. P4 is
+GREEN without a production, fixture, definition, schema, CLI, or API change.
 ## P5 — Risk Record support proof
 
 Entry: P1C accepted.
@@ -582,14 +586,11 @@ prerequisite is committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`.
 Entry: P1A–P1C and P2–P5 individually committed and green; no bridge deletion
 has occurred.
 
-Current entry result: not satisfied. The bounded greenfield P2 correction is
-GREEN, independently review-clean, and locally committed at implementation
-commit `9b3edf2745054872939ad48abad50ae5c2d97f9a` with authority commit
-`f62141b358239e15f106f04034131202e9db1cac`; its P6 prerequisite is satisfied.
-The P4/P5 token prerequisite is review-clean and committed, but P4's separate
-negative-surface/path proof remains open, so P4 is not GREEN. No bridge deletion
-has occurred, and every other P6 entry prerequisite remains required. Do not
-begin P6.
+Current entry result: not selected. The bounded greenfield P2 correction is
+GREEN and committed at implementation `9b3edf2` with authority `f62141b`; P3,
+P4, and P5 proof gates are GREEN. No P6 selector, entry review, or separate
+operator authority exists in this packet. No bridge deletion has occurred.
+P6 remains blocked and must not begin.
 
 RED:
 

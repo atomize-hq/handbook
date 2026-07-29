@@ -9,14 +9,18 @@ use handbook_engine::artifact_repository::{
 use handbook_engine::canonical_yaml::canonical_yaml_bytes;
 use handbook_engine::{
     parse_definition_yaml, resolve_profile_selection, ArtifactInstanceRegistry,
-    DefinitionFingerprint, ExactDefinitionRef, RepositoryInvocationIdentityServiceV1, SymbolicId,
+    DefinitionFingerprint, DefinitionSource, ExactDefinitionRef,
+    RepositoryInvocationIdentityServiceV1, ResolvedInstanceProfile, SymbolicId,
 };
 use serde_json::{json, Value};
+use std::collections::BTreeSet;
 use std::fs;
 use std::path::Path;
 
 const DECISION_KIND_REF: &str = "handbook.artifact-kind.decision-record@1.1.0";
 const DECISION_INSTANCE_ID: &str = "decision_record";
+const DECISION_RENDERER_REF: &str = "handbook.renderer.decision-record-review-markdown@1.0.0";
+const DECISION_SCHEMA_REF: &str = "handbook.schemas.artifacts.decision-record@1.0.0";
 const DECISION_PROFILE_REF: &str = "example.profile.hcm-2-4-decision-record@1.0.0";
 const DECISION_PROFILE_FINGERPRINT: &str =
     "sha256:2c2d744185a63c328d1363d0df3f50d8a1e3cff0e86f9575e39f69c9a7dba37b";
@@ -53,6 +57,34 @@ fn open_decision_record_fixture_repository() -> (tempfile::TempDir, ArtifactRepo
 fn decision_target() -> ArtifactTargetV1 {
     ArtifactTargetV1::parse(DECISION_KIND_REF, DECISION_INSTANCE_ID)
         .expect("Decision Record target")
+}
+
+fn decision_fixture_selection() -> RepositoryProfileSelectionV1 {
+    let selection_bytes =
+        fs::read(decision_record_fixture_root().join(".handbook/profile-selection.json"))
+            .expect("Decision Record repository selection fixture");
+    RepositoryProfileSelectionV1::from_json_bytes(&selection_bytes)
+        .expect("valid Decision Record repository selection")
+}
+
+fn shipped_root_decision_profile() -> ResolvedInstanceProfile {
+    let mut request = decision_fixture_selection().profile_request();
+    request.selected_profile_ref =
+        ExactDefinitionRef::parse("handbook.profile.shipped-root@1.2.0").expect("shipped-root ref");
+    request.profile_sources.retain(|binding| {
+        matches!(&binding.source, DefinitionSource::BuiltIn(reference)
+            if reference.as_str() == "handbook.profile.shipped-root@1.2.0")
+    });
+    resolve_profile_selection(decision_record_fixture_root(), request)
+        .expect("shipped-root 1.2 source closure")
+}
+
+fn selected_decision_profile() -> ResolvedInstanceProfile {
+    resolve_profile_selection(
+        decision_record_fixture_root(),
+        decision_fixture_selection().profile_request(),
+    )
+    .expect("Decision Record profile resolves without runtime changes")
 }
 
 fn decision_record_candidate_content() -> Value {
@@ -620,4 +652,285 @@ fn generic_decision_record_mutation_retains_real_bytes_and_rejects_stale_basis()
         expected_bytes
     );
     assert!(!repo.path().join(".handbook/records/decision.md").exists());
+}
+
+#[test]
+fn shipped_root_has_no_decision_record_instance_or_default() {
+    let parent = shipped_root_decision_profile();
+    let selected = selected_decision_profile();
+    let parent_ids = parent
+        .artifact_instances()
+        .ids()
+        .into_iter()
+        .collect::<BTreeSet<_>>();
+    let selected_ids = selected
+        .artifact_instances()
+        .ids()
+        .into_iter()
+        .collect::<BTreeSet<_>>();
+
+    assert!(!parent_ids.contains(DECISION_INSTANCE_ID));
+    assert!(parent_ids.iter().all(|id| {
+        parent
+            .artifact_instances()
+            .instance(&SymbolicId::parse(id).expect("shipped-root instance id"))
+            .expect("shipped-root descriptor")
+            .canonical_path()
+            != ".handbook/records/decision.yaml"
+    }));
+    let mut expected_selected_ids = parent_ids.clone();
+    assert!(expected_selected_ids.insert(DECISION_INSTANCE_ID));
+    assert_eq!(selected_ids, expected_selected_ids);
+    assert_eq!(selected.exact_ref().as_str(), DECISION_PROFILE_REF);
+
+    let selection: Value = serde_json::from_slice(
+        &fs::read(decision_record_fixture_root().join(".handbook/profile-selection.json"))
+            .expect("Decision Record selection fixture"),
+    )
+    .expect("Decision Record selection JSON");
+    assert_eq!(
+        selection["profile_sources"][1]["source"],
+        json!({
+            "kind": "repository_path",
+            "path": ".handbook/definitions/profiles/decision-record-root-1.0.0.yaml"
+        })
+    );
+}
+
+#[test]
+fn author_command_inventory_has_no_decision_record_surface() {
+    let cli = include_str!("../../cli/src/main.rs");
+    let author_command = cli
+        .split_once("enum AuthorCommand")
+        .expect("AuthorCommand enum")
+        .1
+        .split_once('}')
+        .expect("AuthorCommand enum body")
+        .0;
+    assert!(author_command.contains("Charter(AuthorCharterArgs)"));
+    assert!(author_command.contains("ProjectContext(AuthorProjectContextArgs)"));
+
+    let help = include_str!("../../cli/tests/snapshots/handbook-author-help.txt");
+    let emitted_commands = help
+        .lines()
+        .filter_map(|line| {
+            let trimmed = line.strip_prefix("  ")?;
+            (!trimmed.starts_with('-')).then(|| {
+                trimmed
+                    .split_whitespace()
+                    .next()
+                    .expect("author command name")
+            })
+        })
+        .collect::<Vec<_>>();
+    assert_eq!(emitted_commands, ["charter", "project-context"]);
+
+    for forbidden in [
+        "DecisionRecord",
+        "Decision Record",
+        "decision-record",
+        "decision_record",
+    ] {
+        assert!(!author_command.contains(forbidden));
+        assert!(!help.contains(forbidden));
+    }
+}
+
+#[test]
+fn missing_exact_decision_filename_refuses_inferred_and_dynamic_decoys() {
+    let (repo, repository) = open_decision_record_fixture_repository();
+    let canonical_path = repo.path().join(".handbook/records/decision.yaml");
+    let canonical_bytes = fs::read(&canonical_path).expect("canonical Decision Record bytes");
+    fs::remove_file(&canonical_path).expect("remove exact Decision Record filename");
+    for decoy in [
+        "decision-record.yaml",
+        "decision_record.yaml",
+        "example.record.decision.yaml",
+    ] {
+        fs::write(
+            repo.path().join(".handbook/records").join(decoy),
+            &canonical_bytes,
+        )
+        .expect("install alternate Decision Record filename");
+    }
+
+    assert_eq!(
+        repository
+            .read(
+                &ExactDefinitionRef::parse(DECISION_KIND_REF).expect("Decision kind ref"),
+                &SymbolicId::parse(DECISION_INSTANCE_ID).expect("Decision instance id"),
+            )
+            .expect_err("alternate filenames must not be discovered")
+            .kind(),
+        ArtifactRepositoryErrorKindV1::ArtifactRead
+    );
+}
+
+#[test]
+fn decision_record_projection_widening_is_refused() {
+    let selected = selected_decision_profile();
+    let descriptor = selected
+        .artifact_instances()
+        .instance(&SymbolicId::parse(DECISION_INSTANCE_ID).expect("Decision instance id"))
+        .expect("Decision Record descriptor");
+    assert!(descriptor.projection_definition_refs().is_empty());
+
+    let profile: Value = serde_json::from_slice(
+        &fs::read(
+            decision_record_fixture_root()
+                .join(".handbook/definitions/profiles/decision-record-root-1.0.0.yaml"),
+        )
+        .expect("Decision Record profile"),
+    )
+    .expect("Decision Record profile JSON");
+    let mut descriptors = profile["artifact_instances"]
+        .as_array()
+        .expect("artifact instances")
+        .clone();
+    descriptors
+        .iter_mut()
+        .find(|descriptor| descriptor["id"] == DECISION_INSTANCE_ID)
+        .expect("Decision Record descriptor")["projection_definition_refs"] =
+        json!(["example.projection.decision-record@1.0.0"]);
+
+    assert!(
+        ArtifactInstanceRegistry::resolve(
+            &descriptors,
+            shipped_root_decision_profile().artifact_kind_registry(),
+            &[],
+        )
+        .is_err(),
+        "capitalized Projection widening must be refused"
+    );
+}
+
+#[test]
+fn markdown_decoys_have_zero_decision_record_authority() {
+    let (repo, repository) = open_decision_record_fixture_repository();
+    let kind_ref = ExactDefinitionRef::parse(DECISION_KIND_REF).expect("Decision kind ref");
+    let instance_id = SymbolicId::parse(DECISION_INSTANCE_ID).expect("Decision instance id");
+    let mirror = repo.path().join(".handbook/records/decision.md");
+    let inferred = repo.path().join(".handbook/records/DECISION_RECORD.md");
+    assert!(!mirror.exists());
+    assert!(!inferred.exists());
+
+    let before = repository
+        .read(&kind_ref, &instance_id)
+        .expect("canonical read before Markdown decoys");
+    repository
+        .validate(&kind_ref, &instance_id)
+        .expect("generic validation before Markdown decoys");
+    assert!(!mirror.exists());
+    assert!(!inferred.exists());
+
+    fs::write(&mirror, b"# Malicious persistent mirror\n").expect("Markdown mirror decoy");
+    fs::write(&inferred, b"# Inferred Decision Record view\n").expect("inferred Markdown decoy");
+    let after = repository
+        .read(&kind_ref, &instance_id)
+        .expect("canonical read after Markdown decoys");
+    assert_eq!(after.content, before.content);
+    assert_eq!(after.artifact_fingerprint, before.artifact_fingerprint);
+    assert_eq!(
+        repository
+            .validate(&kind_ref, &instance_id)
+            .expect("generic validation after Markdown decoys")
+            .content,
+        before.content
+    );
+
+    fs::remove_file(repo.path().join(".handbook/records/decision.yaml"))
+        .expect("remove canonical Decision Record YAML");
+    assert_eq!(
+        repository
+            .read(&kind_ref, &instance_id)
+            .expect_err("Markdown must not become a fallback authority")
+            .kind(),
+        ArtifactRepositoryErrorKindV1::ArtifactRead
+    );
+}
+
+#[test]
+fn fixed_decision_renderer_golden_is_deterministic_and_resolution_free() {
+    let definition_root = Path::new(env!("CARGO_MANIFEST_DIR")).join("definitions");
+    let mut renderer = parse_definition_yaml(
+        &fs::read(
+            definition_root
+                .join("renderers/handbook.renderer.decision-record-review-markdown/1.0.0.yaml"),
+        )
+        .expect("Decision Record renderer"),
+    )
+    .expect("renderer definition");
+    assert_eq!(renderer["resolution_input"], Value::Null);
+    assert_eq!(renderer["input_schema_ref"], DECISION_SCHEMA_REF);
+    assert_eq!(
+        renderer["implementation_id"],
+        "decision-record-review-markdown-v1"
+    );
+    assert_eq!(
+        renderer["determinism_profile"],
+        "closed-decision-record-review-markdown-v1"
+    );
+    assert_eq!(renderer["extensions"], json!({}));
+    let supplied = renderer
+        .as_object_mut()
+        .expect("renderer object")
+        .remove("renderer_fingerprint")
+        .expect("renderer fingerprint");
+    let schema = selected_decision_profile()
+        .artifact_kind_registry()
+        .schema_registry()
+        .entry(&ExactDefinitionRef::parse(DECISION_SCHEMA_REF).expect("Decision schema ref"))
+        .expect("Decision Record schema entry")
+        .clone();
+    let computed = DefinitionFingerprint::from_json_value(&json!({
+        "definition": renderer,
+        "resolved_dependencies": [{
+            "definition_fingerprint": schema.entry_fingerprint().as_str(),
+            "definition_ref": DECISION_SCHEMA_REF,
+            "dependency_role": "input_schema"
+        }]
+    }))
+    .expect("renderer closure fingerprint");
+    assert_eq!(supplied, computed.as_str());
+    assert_eq!(
+        computed.as_str(),
+        "sha256:81f616aeecb1eac6c5c9207bcd2eb82c8e79ee159d57b97e2f15492a6d6a12b3"
+    );
+
+    let goldens: Value = serde_json::from_slice(
+        &fs::read(Path::new(env!("CARGO_MANIFEST_DIR")).join(
+            "../../docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+        ))
+        .expect("renderer goldens"),
+    )
+    .expect("renderer golden JSON");
+    assert_eq!(goldens["external_inputs"], json!([]));
+    let golden = goldens["goldens"]
+        .as_array()
+        .expect("golden array")
+        .iter()
+        .find(|golden| golden["renderer_ref"] == DECISION_RENDERER_REF)
+        .expect("Decision Record renderer golden");
+    assert_eq!(golden["renderer_fingerprint"], computed.as_str());
+    assert_eq!(golden["resolution_input"], Value::Null);
+    selected_decision_profile()
+        .artifact_kind_registry()
+        .schema_registry()
+        .resolved(&ExactDefinitionRef::parse(DECISION_SCHEMA_REF).expect("Decision schema ref"))
+        .expect("resolved Decision Record schema")
+        .validate_json(&golden["canonical_input"])
+        .expect("schema-valid golden input");
+    let markdown = golden["expected_markdown_utf8"]
+        .as_str()
+        .expect("golden Markdown");
+    assert_eq!(
+        markdown.len() as u64,
+        golden["expected_byte_length"]
+            .as_u64()
+            .expect("byte length")
+    );
+    assert_eq!(
+        DefinitionFingerprint::from_bytes(markdown.as_bytes()).as_str(),
+        golden["expected_sha256"].as_str().expect("golden SHA-256")
+    );
 }

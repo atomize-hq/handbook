@@ -1,0 +1,289 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260729T172756Z--HCM-2-4--p4-negative-proof-implementation-closure-review",
+  "created_at_utc": "2026-07-29T17:27:56Z",
+  "source_handoff_ids": [
+    "20260729T160402Z--HCM-2-4--orchestration--bounded-p2-control-plane-completed"
+  ],
+  "parent_orchestration_id": "20260729T163207Z--HCM-2-4--p4-negative-proof-completion-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P4-negative-surface-proof",
+  "subject_fingerprint": "sha256:840ac542df61453d18b6579e0c698d9ff9b383269d97ae69f27c9c0656ba5bf4",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p4-negative-proof-implementation-closure-1",
+    "trigger_run_ids": [
+      "p4-negative-proof-implementation-standards-review"
+    ],
+    "finding_refs": [
+      "P4-NEGATIVE-ROOT-INVENTORY-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-29T16:47:58Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p4-negative-proof-completion",
+        "packet_ids": [
+          "P4-negative-surface-proof"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p4-decision-record-negative-proof-selector.md#trigger-and-authority"
+      }
+    ],
+    "fingerprint": "sha256:69d377e3acfee4464e0212d8c560529d0c4f0616c0f8260476a72c1764d3fd5d"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:1467514cab5931e4f77eb7cde196302537a2197b1cecc5e7660622e0415f0eb9",
+    "integrated_outcome_id": "hcm-2.4-p4-negative-proof-completion",
+    "outcome_registry_fingerprint": "sha256:69d377e3acfee4464e0212d8c560529d0c4f0616c0f8260476a72c1764d3fd5d",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260729T171424Z--HCM-2-4--p4-negative-proof-implementation-standards-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p4-negative-proof-implementation-closure-convergence-1",
+    "completed_at_utc": "2026-07-29T17:27:55Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "cargo test -p handbook-engine --test hcm_2_4_decision_record shipped_root_has_no_decision_record_instance_or_default -- --exact; cargo test -p handbook-engine --test hcm_2_4_decision_record; cargo clippy -p handbook-engine --test hcm_2_4_decision_record -- -D warnings",
+        "evidence_ref": "parent terminal output after remediation: focused root inventory 1/1; complete Decision target 10/10; strict target Clippy exit 0"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "review the exact root-inventory remediation plus all affected five-part P4 proof assertions",
+        "evidence_ref": "the selected ID set now equals an exact clone of the shipped-root ID set with only decision_record inserted; no production or fixture bytes changed"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinal-sorted 22-entry path-NUL-SHA256-newline closure manifest",
+        "evidence_ref": "subject_manifest below: sha256:840ac542df61453d18b6579e0c698d9ff9b383269d97ae69f27c9c0656ba5bf4"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output: exit 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/src/main.rs",
+        "sha256": "81c09f2fe97e30e06fdad14fab6c62c88af4bfbfbdc841b3dfc1b4e4e90057c0"
+      },
+      {
+        "path": "crates/cli/tests/snapshots/handbook-author-help.txt",
+        "sha256": "4fe84bb85feca66e57548413962a56baa4b80068c19966c2370fcd481740f4af"
+      },
+      {
+        "path": "crates/engine/definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml",
+        "sha256": "5090e56e503c98df20df61a27ef946b239a0d0e9fb26d712427514a4697ed42f"
+      },
+      {
+        "path": "crates/engine/definitions/renderers/handbook.renderer.decision-record-review-markdown/1.0.0.yaml",
+        "sha256": "7038f538e7c3280f4acf1878d9d91c3957a879004079cde1fe345baa5fe03e2c"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_decision_record/.handbook/definitions/profiles/decision-record-root-1.0.0.yaml",
+        "sha256": "6cce0cc246d9d2e57329f9c2e31b50357afbf1635b2a70ddff76782b7b1af0d3"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_decision_record/.handbook/profile-selection.json",
+        "sha256": "f17346ecabfb04010a0bc6be2fae46a7a9125f8775a484ca5567dbf2b33700ff"
+      },
+      {
+        "path": "crates/engine/tests/fixtures/hcm_2_4_decision_record/.handbook/records/decision.yaml",
+        "sha256": "4f9703bb54dd7d2cfc17e35fe54db9dfb460525821f54c56b35cbb6ae2cd836a"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_decision_record.rs",
+        "sha256": "0714aaa4e82b036ca350707b89ce561dc04f11c043a633fdc8c77fd8b33f4422"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_4_risk_record.rs",
+        "sha256": "39f72b43ad384581f847866733865ed1b8033914d5c4d0b9baa14824fbe8c14c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "194016b268c0595a95b0ac4c91977d11a8f053d4faf8e00571d344af95f0e26a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "c33b7de512eac8c48c4a2b353c145ae1360ff96ab29c3f23fbd4cc1a945430ae"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T164759Z--HCM-2-4--p4-negative-proof-selector-review.json",
+        "sha256": "c7d4e0f478abfaa6b7ccfe99961909fbc198abba1f3a23b82c01baa52f8a2420"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T171423Z--HCM-2-4--p4-negative-proof-implementation-spec-review.json",
+        "sha256": "a378903f335dede31618b7c9c706d6830337bf4cc7c8ee6d63c9bd78a48365bc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T171424Z--HCM-2-4--p4-negative-proof-implementation-standards-review.json",
+        "sha256": "d013489dea0ae960fc897173f6448556c387c59f3c155430a9d7f1fd27ad6441"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "8d51a39c4168f6dbc310cfff2bbdd3cfb78927089d1d04e05aded42737c2d764"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/contracts/renderer-goldens-v1.0.json",
+        "sha256": "0b30e23a732c1906b6148a6b9720f32d33d3a5b171d4528835c87d6923e7afb2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260727-p4-p5-generic-mutation-token-authority-stop.md",
+        "sha256": "085d3f6962c629ad751a6bbc08d591f7c6ebb81294d64676b833b405451ca7a2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p4-decision-record-negative-proof-selector.md",
+        "sha256": "302c2408c34eb62cd510019fd154df5f4c07f9043cd553063fe98b1dd543281f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+        "sha256": "e5053bdd635bf50197db246cf65712c80d58dd53e473c407946b1d534e5516b4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P5-risk-record.md",
+        "sha256": "5b772177a0409375b2cbc01f359b1285b503a4e8eb206d2aed4714b7b75c3af8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "4161af3e2832ed5bef313ca82a7477d1bc426bd8056905d83da6c024cf540ead"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "673dd8cda6169c8b98f358f8f7aee4bd3a64d7776a623b79e03c262a4a611283"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:840ac542df61453d18b6579e0c698d9ff9b383269d97ae69f27c9c0656ba5bf4"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "bounded HCM-2.4 P4 Decision Record negative-surface proof remediation closure",
+    "detail_resolution": "exact shipped-root set-preservation assertion and affected five-part proof",
+    "temporal_horizon": "post-remediation different-fresh closure review",
+    "authority_horizon": "P4 acceptance only; no production, P6, P7, full HCM-2.4, or Phase 2 authority",
+    "memory_horizon": "selector review, same-subject discovery burst, one P2, exact parent remediation, and v1.4 causal contract",
+    "validation_horizon": "different-fresh CLEAN closure before P4 GREEN"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p4-decision-record-negative-proof-selector.md",
+      "sections": [
+        "Exact implementation selector",
+        "Preserved positive proof",
+        "Exact proof and review wall",
+        "Non-goals and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P4-decision-record.md",
+      "sections": [
+        "Current bounded negative-proof candidate (2026-07-29)"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "At HEAD 05a79bfa894e28046436c7cfaadf802dc0275150, discovery spec review was CLEAN and standards review found only P4-NEGATIVE-ROOT-INVENTORY-001. The parent replaced the one-sided difference check with exact equality between selected IDs and shipped-root IDs plus decision_record. The remediated focused test is 1/1, the complete Decision target is 10/10, strict target Clippy and fmt/whitespace checks pass, and no production, fixture, CLI, released definition, Cargo, dependency, or public API changed.",
+  "allowed_scope": [
+    "Replay the exact 22-entry manifest and confirm only the P2 root-inventory assertion/proof delta changed materially.",
+    "Verify selected_ids must equal the complete shipped-root ID set plus exactly decision_record, so both additions and deletions fail.",
+    "Recheck the affected no-root/default claim and ensure the other four negatives and renderer replay remain intact.",
+    "Return a causal CLEAN result only if P4-NEGATIVE-ROOT-INVENTORY-001 is fully remediated without scope expansion."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery or unrelated clean findings.",
+    "Do not edit, format, stage, commit, push, write a handoff or ledger entry, create another dispatch, or delegate.",
+    "Do not infer production, P6, P7, full HCM-2.4, Phase 2, HCM-3.x, Projection, Resolution, command, filename, or persistent-view authority."
+  ],
+  "tasks": [
+    "Verify the changed subject fingerprint and the exact remediation delta from the discovery subject.",
+    "Confirm the strengthened set equality fails if any shipped-root descriptor is removed or any extra descriptor is added.",
+    "Confirm focused/full verification is sufficient and the proof record truthfully records discovery and remediation.",
+    "Return the required structured result with any remaining causal P1/P2 finding; separately dispose any P3/P4 advisory."
+  ],
+  "contracts_and_gates": [
+    "P4-NEGATIVE-ROOT-INVENTORY-001 must be causally remediated by exact parent-preserving set equality",
+    "No production, fixture, schema, definition, golden, CLI, Cargo, dependency, public API, token grammar, or future-gate change",
+    "P4 becomes GREEN only after this different-fresh closure is CLEAN",
+    "P6, P7, full HCM-2.4, Phase 2, HCM-3.x, push, and automatic continuation remain forbidden"
+  ],
+  "stop_conditions": [
+    "Return blocked if any subject hash, causal predecessor, finding, or required read-only evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Stop on any unrelated discovery or need for broader authority."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

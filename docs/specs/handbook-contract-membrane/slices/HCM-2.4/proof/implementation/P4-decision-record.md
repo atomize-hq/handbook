@@ -1,7 +1,105 @@
 # HCM-2.4 P4 Decision Record implementation proof
 
-Status: **TOKEN PREREQUISITE REVIEW-CLEAN AND COMMITTED — P4
-negative-surface/path proof remains open**
+Status: **GREEN — positive prerequisite and independent five-part
+negative-surface/path proof are review-clean**
+
+## Current bounded negative-proof candidate (2026-07-29)
+
+The operator-authorized selector is
+`decision/20260729-p4-decision-record-negative-proof-selector.md`. Fresh
+selector reviewer `/root/p4_negative_selector_review` returned CLEAN from
+dispatch
+`20260729T164759Z--HCM-2-4--p4-negative-proof-selector-review` after replaying
+all 18 subject hashes and the aggregate
+`sha256:e29d121bceec54d3721feecfd1eab16a0cfe3de4be15ea62d00d253962a584f1`.
+That result authorized exactly five additive Decision-specific negative tests
+and one positive renderer replay in the existing P4 integration target.
+
+The five forbidden surfaces are now independently executable:
+
+1. `shipped_root_has_no_decision_record_instance_or_default` resolves the
+   built-in shipped-root 1.2 inventory, proves neither `decision_record` nor
+   `.handbook/records/decision.yaml` is present there, and proves the selected
+   repository child adds exactly the one `decision_record` descriptor.
+2. `author_command_inventory_has_no_decision_record_surface` inventories the
+   authoritative `AuthorCommand` enum and consumed author-help snapshot,
+   proves their only emitted commands are `charter` and `project-context`, and
+   rejects identifier, label, kebab-case, and snake-case Decision spellings.
+3. `missing_exact_decision_filename_refuses_inferred_and_dynamic_decoys`
+   removes the exact canonical file, installs valid-byte
+   `decision-record.yaml`, `decision_record.yaml`, and
+   `example.record.decision.yaml` decoys, and receives the exact
+   `ArtifactRead` refusal from generic repository read.
+4. `decision_record_projection_widening_is_refused` proves the admitted
+   descriptor has no projection refs, injects a capitalized Projection ref
+   into a cloned Decision inventory, and proves the existing registry rejects
+   that widened inventory.
+5. `markdown_decoys_have_zero_decision_record_authority` proves no Markdown
+   mirror exists or is emitted by generic read/validate, proves plausible
+   Markdown decoys cannot change content or fingerprint, and proves removal of
+   the canonical YAML still returns `ArtifactRead` rather than falling back.
+
+`fixed_decision_renderer_golden_is_deterministic_and_resolution_free`
+independently recomputes renderer closure fingerprint
+`sha256:81f616aeecb1eac6c5c9207bcd2eb82c8e79ee159d57b97e2f15492a6d6a12b3`,
+validates the frozen canonical input through the selected Decision schema,
+proves `resolution_input: null` and zero external inputs, and reproduces the
+152-byte Markdown SHA-256
+`sha256:5296400baf82eda7d22c2d1d754af0c25081516b876a9bf511a87f210adf378e`.
+
+Each five-part negative test passed independently with `--exact` (1 passed,
+0 failed, 9 filtered for each). The positive renderer replay independently
+passed with the same exact count. The complete live Decision target then
+passed without ignored tests:
+
+```text
+cargo test -p handbook-engine --test hcm_2_4_decision_record
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```
+
+The retained generic and wider preservation walls passed:
+
+```text
+cargo test -p handbook-engine --test hcm_2_3_generic_lineage -- --test-threads=1
+test result: ok. 54 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
+cargo test -p handbook-engine --test hcm_2_3_registration_kernel
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```
+
+Strict Clippy passed for the engine library and the Decision integration
+target. `cargo fmt --all -- --check` and `git diff --check` passed. GitNexus
+upstream impact queries returned `UNKNOWN`/not found with zero impacted symbols
+for the nine proposed new test-only helper/test names, as expected before
+their addition; this packet edits no existing production function, class, or
+method and changes no runtime behavior.
+
+The same-subject implementation discovery burst used dispatches
+`20260729T171423Z--HCM-2-4--p4-negative-proof-implementation-spec-review`
+and
+`20260729T171424Z--HCM-2-4--p4-negative-proof-implementation-standards-review`
+over
+`sha256:e81d9dd64c00a4cf0f707550035cc0bc03a0f94c5811e9cc7f0960da09676d34`.
+The spec lens returned CLEAN. The standards lens returned one P2,
+`P4-NEGATIVE-ROOT-INVENTORY-001`: the initial one-sided child-minus-parent
+assertion did not prove preservation of every shipped-root descriptor. The
+parent replaced it with exact set equality against shipped-root plus only
+`decision_record`. The remediated focused test passed 1/1, the complete target
+passed 10/10, strict target Clippy passed, and formatting/whitespace checks
+passed. At that point, different-fresh closure review of the changed subject
+was the only remaining acceptance wall before P4 could become GREEN.
+
+Different-fresh reviewer `/root/p4_negative_impl_closure_review` then returned
+CLEAN with no advisory from dispatch
+`20260729T172756Z--HCM-2-4--p4-negative-proof-implementation-closure-review`
+over
+`sha256:840ac542df61453d18b6579e0c698d9ff9b383269d97ae69f27c9c0656ba5bf4`.
+The reviewer reproduced all 22 hashes, confirmed the equality rejects both a
+missing inherited descriptor and any extra descriptor, reran focused 1/1 and
+complete 10/10 Decision tests, and closed
+`P4-NEGATIVE-ROOT-INVENTORY-001`. The bounded P4 proof is GREEN. This result
+does not authorize P6, P7, full HCM-2.4, Phase 2 exit, or any automatic
+continuation.
 
 The historical bounded stop was independently reproduced by
 `/root/hcm_2_4_p4_stop_review` from dispatch
@@ -19,9 +117,9 @@ CLEAN over subject
 Different-fresh supplemental causal reviewer
 `/root/hcm_2_4_p4_p5_token_impl_supplemental_1` returned CLEAN over
 `sha256:00c19024eeb94a2e93263489fd255f0ea47c3730bfc34da2e9cf6a054de1e5b9`;
-the token prerequisite is committed at `00dde01`. P4 remains incomplete
-independently because its no-root, generated-command, inferred-filename,
-Projection, and persistent-view proof is still open.
+the token prerequisite is committed at `00dde01`. At that historical
+checkpoint, P4 remained incomplete because its no-root, generated-command,
+inferred-filename, Projection, and persistent-view proof was still open.
 
 ## Authorized resolution and current proof
 
@@ -212,6 +310,7 @@ not expanded after the mandatory stop.
 
 The parent selected the first historical option through the later exact
 operator authorization. The current GREEN proof above replaces only the prior
-unavailable-proof recommendation. It does not claim P4 acceptance, commit,
-P6 authority, or slice completion. The token prerequisite is review-clean and
-committed; the separate P4 negative-surface/path gate remains outstanding.
+unavailable-proof recommendation. At this historical stop, the token
+prerequisite was review-clean and committed while the separate P4
+negative-surface/path gate remained outstanding; the current completion does
+not confer P6 authority or slice completion.

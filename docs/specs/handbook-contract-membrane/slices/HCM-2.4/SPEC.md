@@ -5,11 +5,11 @@ review-clean, and locally committed at implementation commit
 `9b3edf2745054872939ad48abad50ae5c2d97f9a` with authority commit
 `f62141b358239e15f106f04034131202e9db1cac`. P0/P1A/P1B/P1C and P3/P3B are
 review-clean and committed; the P4/P5 token prerequisite is accepted at
-`00dde0162fcb15576c83b6ed40ab7286488d0890`, P4's separate
-negative-surface/path proof remains open, and P5 remains accepted. P6, P7,
-HCM-2.4 completion, and Phase 2 exit remain unearned. Future task-gate runtime
-remains deferred; P2S/P2A/Option C are historical evidence only under the
-2026-07-28 greenfield decision.
+`00dde0162fcb15576c83b6ed40ab7286488d0890`, P4's separate five-part
+negative-surface/path proof is review-clean and GREEN, and P5 remains accepted.
+P6 and P7 remain unselected and blocked; HCM-2.4 completion and Phase 2 exit
+remain unearned. Future task-gate runtime remains deferred; P2S/P2A/Option C
+are historical evidence only under the 2026-07-28 greenfield decision.
 
 Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
 
@@ -556,10 +556,15 @@ fingerprints, and every unrelated negative remain unchanged. The historical
 authority-stop record is the reproduced RED evidence. No second production
 symbol, broader inference, P2 runtime work, or P6 work is authorized.
 
-This token prerequisite does not complete P4. Its no-root, generated-command,
-inferred-filename, Projection, and persistent-view proof remains open and was
-not authorized for expansion by the token selector. P5's shared token
-prerequisite is accepted and committed.
+The token prerequisite alone did not complete P4. The separately authorized
+`decision/20260729-p4-decision-record-negative-proof-selector.md` added five
+Decision-specific negative tests plus one renderer replay without production
+or fixture changes. The 10-test Decision target, 54-test generic-lineage wall,
+16-test registration kernel, exact negative tests, strict Clippy, formatting,
+and whitespace checks passed. After one P2 root-inventory assertion finding,
+exact-set remediation, and different-fresh CLEAN closure at
+`sha256:840ac542df61453d18b6579e0c698d9ff9b383269d97ae69f27c9c0656ba5bf4`,
+P4 is GREEN. P5's shared token prerequisite remains accepted and committed.
 
 ### P6 — Aggregate flow and fixed-selector deletion
 
@@ -576,11 +581,11 @@ Run the complete proof wall, prove every Phase 2 exit row, update only earned
 gate/bridge rows, perform the declared review flow, and produce the separate
 implementation handoff/ledger closeout. P7 may not begin HCM-3.x.
 
-The current parent may perform only a truthful partial control-pack and
+The current parent may perform only this truthful bounded P4 control-plane and
 true-stop closeout. It must preserve the open Phase 2 exit rows and both bridge
 IDs, cite P2's bounded greenfield result and deferred task-gate runtime plus
-P4's open negative-surface proof, and must not represent the partial reviewed
-commits as P7 or slice completion.
+P4's GREEN negative-surface proof, and must not represent the reviewed packet
+as P6, P7, or slice completion.
 
 ## Exact implementation surface selectors
 
