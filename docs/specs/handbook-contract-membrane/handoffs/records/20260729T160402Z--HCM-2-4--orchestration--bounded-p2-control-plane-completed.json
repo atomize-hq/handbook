@@ -1,0 +1,386 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260729T160402Z--HCM-2-4--orchestration--bounded-p2-control-plane-completed",
+  "created_at_utc": "2026-07-29T16:04:02Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "bounded-p2-control-plane-closeout",
+  "orchestration_id": "20260729T152119Z--HCM-2-4--bounded-p2-control-plane-closeout-orchestration",
+  "source_handoff_ids": [
+    "20260728T144118Z--HCM-2-4--orchestration--p2-option-c-containment-product-decision-required"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-29T16:04:02Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "bounded-p2-control-plane-closeout-review",
+      "dispatch_id": "20260729T152318Z--HCM-2-4--bounded-p2-control-plane-closeout-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T152318Z--HCM-2-4--bounded-p2-control-plane-closeout-review.json",
+      "dispatch_fingerprint": "sha256:e594b039bae388d8624d1df79701421b846a3c3dd2eb3f1fba8ae78c5f34441b",
+      "role": "review",
+      "agent_id": "/root/bounded_p2_closeout_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:6b47417f1f034b943ea65db3cee1ec88f6b1a2b7069ae8adae210dd728b87806",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "P2-INSTALL-CONSUMER-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T152318Z--HCM-2-4--bounded-p2-control-plane-closeout-review.json"
+      ],
+      "result_subject_fingerprint": "sha256:6b47417f1f034b943ea65db3cee1ec88f6b1a2b7069ae8adae210dd728b87806"
+    },
+    {
+      "run_id": "bounded-p2-control-plane-closeout-closure-review",
+      "dispatch_id": "20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review.json",
+      "dispatch_fingerprint": "sha256:51f429c2f94093d0ddb8194529a066ccaaf0321d5212bea30a59279fdd038cdd",
+      "role": "review",
+      "agent_id": "/root/bounded_p2_closeout_closure_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:cec724d632cab54360d2c1d01d6b03755154894102357ebfb7a46e480eb56412",
+      "review_round": 2,
+      "predecessor_run_id": "bounded-p2-control-plane-closeout-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review.json",
+        "git:538c5b5bbdafa573b8df8f0a9b32d4e74ea70beb"
+      ],
+      "result_subject_fingerprint": "sha256:cec724d632cab54360d2c1d01d6b03755154894102357ebfb7a46e480eb56412"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-07-29T16:04:02Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:29f67b7b8b9eefb6a2bf70a6b71c64a026e1b0353602b24a4a8315fd7779c44e"
+    ],
+    "aggregate_fingerprint": "sha256:4d8b37794902cb7a1158c6aa1addd58390daff4965937a177b71e418ebe7a5b2"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "bounded-p2-install-consumer-remediation",
+      "finding_run_id": "bounded-p2-control-plane-closeout-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "bounded-p2-control-plane-closeout-closure-review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:cec724d632cab54360d2c1d01d6b03755154894102357ebfb7a46e480eb56412",
+      "evidence_refs": [
+        "git:538c5b5bbdafa573b8df8f0a9b32d4e74ea70beb",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "538c5b5bbdafa573b8df8f0a9b32d4e74ea70beb",
+    "subject_fingerprint": "sha256:cec724d632cab54360d2c1d01d6b03755154894102357ebfb7a46e480eb56412",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T152318Z--HCM-2-4--bounded-p2-control-plane-closeout-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2-greenfield-environment-context-correction.md",
+      "git:538c5b5bbdafa573b8df8f0a9b32d4e74ea70beb"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review.json"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "bounded HCM-2.4 P2 control-plane closeout",
+    "detail_resolution": "exact landing commits, optional advisory Environment Context, active legacy-consumer removal, review, and deferred runtime boundary",
+    "temporal_horizon": "landed P2 through reviewed consumer remediation and mechanical closeout",
+    "authority_horizon": "bounded P2 only; P4 open and P6/P7/full HCM-2.4/Phase 2 incomplete",
+    "memory_horizon": "immutable prior handoff, two v1.4 dispatches, four primary commits, and this superseding closeout",
+    "validation_horizon": "review-clean primary commit plus schema-valid deterministic ledger closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [
+      "handbook.artifact-kind.environment-context@1.1.0"
+    ],
+    "artifact_instance_refs": [
+      "environment_context"
+    ],
+    "intake_definition_refs": [
+      "handbook.intake.environment-context@1.0.0"
+    ],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-greenfield-environment-context-and-task-gate.md"
+  },
+  "objective": "Close only the already-landed bounded HCM-2.4 P2 greenfield correction through the parent-owned Handbook Contract Membrane handoff control plane without changing runtime behavior, product semantics, schemas, or future gate scope.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260728T144118Z--HCM-2-4--orchestration--p2-option-c-containment-product-decision-required.json",
+      "sections": [
+        "immutable superseded product-decision-required handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-greenfield-environment-context-and-task-gate.md",
+      "sections": [
+        "Decision",
+        "Required behavior",
+        "Greenfield correction",
+        "Future implementation-contract gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2-greenfield-environment-context-correction.md",
+      "sections": [
+        "Verification",
+        "Independent review"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review.json",
+      "sections": [
+        "exact CLEAN reviewed subject"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "538c5b5bbdafa573b8df8f0a9b32d4e74ea70beb",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/ideas/intent-to-outcome-fidelity.md"
+    ]
+  },
+  "work_completed": [
+    "Recorded bounded P2 implementation commit 9b3edf2745054872939ad48abad50ae5c2d97f9a, product-authority commit f62141b358239e15f106f04034131202e9db1cac, and active-status commit 09891faa9fbf1b07d72b11f327ea9e9b0f5ee09a without reopening their product semantics.",
+    "Confirmed canonical Environment Context is optional advisory context when no task gate is selected, while future task declarations, gate selection, current-session capability proof, subset matching, and feature/spec cross-target completion runtime remain deferred.",
+    "Removed the remaining active installer, installed-skill, CI/live-smoke, harness, fixture, and core overlay Environment Inventory consumers identified by independent review.",
+    "Ran the full install smoke and installed live-skill smoke in an isolated WSL home; both completed OK.",
+    "Completed a v1.4 discovery review, parent remediation, and different-fresh v1.4 closure review. The final verdict is CLEAN with no P1/P2 and no P3/P4 advisory.",
+    "Committed the exact reviewed remediation and two immutable dispatches as 538c5b5bbdafa573b8df8f0a9b32d4e74ea70beb."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-greenfield-environment-context-and-task-gate.md",
+      "status": "completed",
+      "summary": "Accepted bounded P2 product authority for optional canonical/advisory Environment Context and deferred future task-gate runtime."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P2-greenfield-environment-context-correction.md",
+      "status": "completed",
+      "summary": "Bounded P2 implementation and independent-review proof."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review.json",
+      "status": "completed",
+      "summary": "Different-fresh CLEAN v1.4 closure-review subject at sha256:cec724d632cab54360d2c1d01d6b03755154894102357ebfb7a46e480eb56412."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260729T160402Z--HCM-2-4--orchestration--bounded-p2-control-plane-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned bounded P2 completed handoff superseding the stale product-decision-required facts."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-P2-CLOSEOUT-D1",
+      "summary": "Bounded P2 is completed at the exact three landed commits plus reviewed consumer-remediation commit 538c5b5bbdafa573b8df8f0a9b32d4e74ea70beb.",
+      "authority_effect": "The stale partial handoff is superseded for present-tense bounded P2 status; its bytes remain immutable historical evidence.",
+      "refs": [
+        "git:9b3edf2745054872939ad48abad50ae5c2d97f9a",
+        "git:f62141b358239e15f106f04034131202e9db1cac",
+        "git:09891faa9fbf1b07d72b11f327ea9e9b0f5ee09a",
+        "git:538c5b5bbdafa573b8df8f0a9b32d4e74ea70beb"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2-CLOSEOUT-D2",
+      "summary": "Environment Context remains canonical optional advisory context; rejected evaluator/evidence and legacy Environment Inventory active consumers are absent.",
+      "authority_effect": "No task-gate, evaluator, evidence, identity/trust, native-adapter, or compatibility runtime is created by this closeout.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-greenfield-environment-context-and-task-gate.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review.json"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P2-CLOSEOUT-D3",
+      "summary": "This handoff closes bounded P2 only.",
+      "authority_effect": "P4 remains open; P6 and P7 remain blocked; full HCM-2.4 and Phase 2 remain incomplete; no automatic continuation, P6 entry, HCM-3.x work, push, or clean-origin claim is authorized.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/00-README.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "P2-INSTALL-CONSUMER-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "bounded-p2-control-plane-closeout-review",
+      "summary": "Active installer, installed-skill, CI/live-smoke, harness, fixture, and core overlay consumers retained deleted Environment Inventory dependencies or terminology; the exact seven-path remediation removed them and passed different-fresh closure review.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T152318Z--HCM-2-4--bounded-p2-control-plane-closeout-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260729T155143Z--HCM-2-4--bounded-p2-control-plane-closeout-closure-review.json",
+        "git:538c5b5bbdafa573b8df8f0a9b32d4e74ea70beb"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "bash tools/ci/install-smoke.sh in isolated WSL HOME",
+      "status": "passed",
+      "evidence_ref": "full install, reinstall, dev-setup, crossover, and public install smoke ended OK"
+    },
+    {
+      "command": "bash tools/ci/codex-skill-live-smoke.sh in isolated WSL HOME",
+      "status": "passed",
+      "evidence_ref": "installed runtime, credential-free Project Context/doctor/inspect, and refusal smokes ended OK"
+    },
+    {
+      "command": "case-insensitive recursive Environment Inventory active-consumer scan",
+      "status": "passed",
+      "evidence_ref": "zero matches under tools, install, core, and .github; obsolete fixture absent"
+    },
+    {
+      "command": "v1.4 dispatch verification and different-fresh closure review",
+      "status": "passed",
+      "evidence_ref": "sha256:cec724d632cab54360d2c1d01d6b03755154894102357ebfb7a46e480eb56412; CLEAN with no advisory"
+    },
+    {
+      "command": "validate_handoffs.py ordinary plus both supported self-tests after deterministic ledger rebuild",
+      "status": "passed",
+      "evidence_ref": "five record schemas, five dispatch schemas, two templates, full immutable admission, record/index parity, causal lineage, and deterministic rebuild"
+    },
+    {
+      "command": "GitNexus detect-changes against main and staged-only primary closeout scope",
+      "status": "passed",
+      "evidence_ref": "main comparison reported branch-wide CRITICAL history at 1171 files/5544 symbols/223 flows; staged remediation reported no indexed symbol changes"
+    },
+    {
+      "command": "protected/user-owned hashes, historical handoff immutability, JSON parse, shell syntax, Python AST, and git diff --check",
+      "status": "passed",
+      "evidence_ref": "all bounded closeout exclusions and mechanical checks passed"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260729T160402Z--HCM-2-4--orchestration--bounded-p2-control-plane-completed.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the parent-owned superseding bounded P2 completed closeout.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger from all canonical records.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic continuation is authorized from this bounded P2 closeout.",
+    "condition": "Only a fresh explicit user instruction under its own exact authority may select later HCM-2.4 work; P6 remains blocked until P4 is separately completed and all live gates pass.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260729T160402Z--HCM-2-4--orchestration--bounded-p2-control-plane-completed.json",
+        "sections": [
+          "entire completed bounded P2 handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260728-p2-greenfield-environment-context-and-task-gate.md",
+        "sections": [
+          "Decision",
+          "Future implementation-contract gate"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sections": [
+          "P4",
+          "P6",
+          "P7"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not continue automatically into P4, P6, P7, full HCM-2.4 closeout, Phase 2 exit, or HCM-3.x.",
+      "Do not claim future task declarations, task-gate selection, current-session capability proof, subset matching, or feature/spec cross-target completion runtime.",
+      "Do not reopen P2 product semantics, schemas, or runtime behavior.",
+      "Do not push or claim clean-origin state from this local closeout."
+    ],
+    "acceptance_criteria": [
+      "Bounded P2 remains tied to implementation 9b3edf2745054872939ad48abad50ae5c2d97f9a, product authority f62141b358239e15f106f04034131202e9db1cac, active status 09891faa9fbf1b07d72b11f327ea9e9b0f5ee09a, and reviewed consumer remediation 538c5b5bbdafa573b8df8f0a9b32d4e74ea70beb.",
+      "The completed v1.4 handoff and deterministic ledger pass ordinary validation and both supported self-tests.",
+      "P4 remains open; P6/P7 remain blocked; full HCM-2.4 and Phase 2 remain incomplete.",
+      "Protected and user-owned paths remain byte-identical and excluded."
+    ],
+    "stop_conditions": [
+      "Stop before any later packet without a fresh explicit selection and its exact gate.",
+      "Stop if later work would infer task-gate/runtime authority from this bounded P2 closeout.",
+      "Stop before any push unless the user separately authorizes it."
+    ]
+  },
+  "supersedes": [
+    "20260728T144118Z--HCM-2-4--orchestration--p2-option-c-containment-product-decision-required"
+  ],
+  "chat_summary": "Bounded HCM-2.4 P2 is completed and review-clean through implementation 9b3edf2, authority f62141b, active status 09891fa, and consumer closeout 538c5b5. Canonical Environment Context is optional advisory context; rejected evaluator/evidence and active Environment Inventory consumers are absent. P4 is open; P6/P7, full HCM-2.4, Phase 2, future task-gate runtime, HCM-3.x, automatic continuation, and push remain unauthorized."
+}
