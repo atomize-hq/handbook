@@ -424,13 +424,15 @@ commit `9b3edf2745054872939ad48abad50ae5c2d97f9a` and authority commit
   persistent-view proof is review-clean and committed at
   `158115daa2b85d41663b79dc677fce69e59fd1e2`. P4 is GREEN and completed.
 - P2 owns removal of legacy Environment Inventory authority and influence.
-  P6 is implemented, independently review-clean, and accepted at reviewed
-  subject
-  `sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38`.
-  Descriptor-selected `CanonicalArtifacts` now owns aggregate flow; both
-  bridges and normal-path fixed selector authority are removed, and the
-  preservation wall remains GREEN. P7 is eligible but remains unselected and
-  unstarted. Full HCM-2.4 and Phase 2 remain incomplete, and neither HCM-3.x
+  P6 is in protocol-integrity repair. Preserved implementation commit
+  `b1edf060710bc96cd61631755519baba864ba30a` removes both bridges and installs
+  the descriptor-selected aggregate collection, but the valid discovery review
+  keeps residual fixed-kind authority and protocol truth as open P2 findings.
+  The CLEAN supplemental-2 result applies only to the pre-edit selector
+  fingerprint. P6 acceptance remains pending implementation remediation and a
+  fresh complete-subject review. P7 is
+  ineligible, unselected, and unstarted. Full HCM-2.4 and Phase 2 remain
+  incomplete, and neither HCM-3.x
   work nor automatic continuation is authorized.
 
 ### Phase 2 exit gate

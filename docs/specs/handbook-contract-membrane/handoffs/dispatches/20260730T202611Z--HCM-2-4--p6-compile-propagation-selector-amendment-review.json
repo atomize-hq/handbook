@@ -1,0 +1,228 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260730T202611Z--HCM-2-4--p6-compile-propagation-selector-amendment-review",
+  "created_at_utc": "2026-07-30T20:26:11Z",
+  "source_handoff_ids": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "parent_orchestration_id": "20260730T174739Z--HCM-2-4--p6-protocol-integrity-repair-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-protocol-integrity-repair",
+  "subject_fingerprint": "sha256:0e6bdcd8aafeccee6bbdd57bbec9194d2b83a955d09cc81fef1d4a851b9baafc",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p6-protocol-integrity-selector-amendment-closure-1",
+    "trigger_run_ids": [
+      "p6-protocol-integrity-final-review"
+    ],
+    "finding_refs": [
+      "HCM-2.4-P6-FIXED-KIND-AUTHORITY-REPAIR-001",
+      "HCM-2.4-P6-PROTOCOL-TRUTH-REPAIR-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-30T18:35:16Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p6-protocol-integrity-repair",
+        "packet_ids": [
+          "P6-protocol-integrity-repair"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md#repair-authority-and-context"
+      }
+    ],
+    "fingerprint": "sha256:fbabb85feb9d5762ed68a674b77b9bdeb9ca06ecfd195effae922b123996bb9a"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:0d492344206b0e6a7bdd990e2ef8917f09fe00aee8c9f3ae49a877ca5b7b58cd",
+    "integrated_outcome_id": "hcm-2.4-p6-protocol-integrity-repair",
+    "outcome_registry_fingerprint": "sha256:fbabb85feb9d5762ed68a674b77b9bdeb9ca06ecfd195effae922b123996bb9a",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "final_closeout"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p6-compile-propagation-selector-amendment-convergence-1",
+    "completed_at_utc": "2026-07-30T20:26:10Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "confirm git diff b1edf060710bc96cd61631755519baba864ba30a -- crates is empty and replay the discovery dispatch's complete GREEN P6 proof-wall evidence",
+        "evidence_ref": "parent terminal output at 2026-07-30T20:26Z: zero crate paths differ from preserved b1edf060; immutable discovery dispatch SHA-256 remains 4ad28395b7de970d4047ff2e177c1ea0058a91ebd92578ad2a07465a1be48dbb"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "recursively inventory CanonicalArtifactKind, canonical subject, packet, renderer-label, compiler mapping, CLI mapping, and authorized test consumers across the P6 production/test ceiling",
+        "evidence_ref": "parent terminal output at 2026-07-30T20:26Z: exact two new function arms identified; JSON packet-source and packet-section label consumers at json.rs:155 and json.rs:266 explicitly remain outside the amendment and are a mandatory sufficiency check; zero fixture edits"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted five-entry repo-path-NUL-SHA256-newline selector-amendment manifest",
+        "evidence_ref": "subject_manifest below: sha256:0e6bdcd8aafeccee6bbdd57bbec9194d2b83a955d09cc81fef1d4a851b9baafc"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output at 2026-07-30T20:26Z: exit 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output at 2026-07-30T20:26Z: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/compiler/src/rendering/json.rs",
+        "sha256": "3c65f261182967b963ac46745a5b9eb28227961325b13dd83bc08064f55e2383"
+      },
+      {
+        "path": "crates/compiler/src/resolver.rs",
+        "sha256": "c6f778d3ea3c95b63205922d335e9e7e93ea40e3f6494b07c1b1899fc85401a6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review.json",
+        "sha256": "4ad28395b7de970d4047ff2e177c1ea0058a91ebd92578ad2a07465a1be48dbb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+        "sha256": "b5c07e7aaab189e410665d04f1930ec102cec452059e24a4f05d40bf5f36d9de"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+        "sha256": "cd24edf64657080c1448a80089c3d836dd3eac2a53a5f5b814a58a177851cc22"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:0e6bdcd8aafeccee6bbdd57bbec9194d2b83a955d09cc81fef1d4a851b9baafc"
+  },
+  "active_resolution": {
+    "level": "implementation-selector-amendment",
+    "scope_horizon": "bounded P6 fixed-kind-authority remediation feasibility",
+    "detail_resolution": "exact CanonicalArtifact arms in compiler map_subject_ref and render_subject_json only",
+    "temporal_horizon": "pre-Rust-edit selector-amendment review after P2 discovery",
+    "authority_horizon": "two exact private match arms only; no other production/test arm, path, fixture, schema, validator, P7, Phase 2 exit, or HCM-3.x",
+    "memory_horizon": "immutable 4ad28395 discovery evidence, preserved b1edf060 crate baseline, exact five-entry amendment subject, and fresh UNKNOWN private-symbol GitNexus impacts",
+    "validation_horizon": "fresh independent CLEAN amendment verdict required before Rust edits; complete different-fresh P2 closure still required after remediation"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+      "sections": [
+        "Expanded remediation authority",
+        "Bounded compile-propagation amendment",
+        "Scope and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Complete production path and symbol manifest",
+        "Complete test and proof manifest",
+        "Stop conditions and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Review dispatch",
+        "Causal review budget"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage"
+      ]
+    }
+  ],
+  "repo_truth": "HEAD remains b1edf060710bc96cd61631755519baba864ba30a and no crate byte differs from that preserved implementation commit. The immutable P2 discovery dispatch remains byte-identical at SHA-256 4ad28395b7de970d4047ff2e177c1ea0058a91ebd92578ad2a07465a1be48dbb. The uncommitted repair decision now freezes exactly two additional private CanonicalArtifact arms. Fresh GitNexus upstream impact could not resolve either private function and returned UNKNOWN/zero graph hits; exact textual inventory also finds fixed-kind label consumers in JSON packet-source and packet-section rendering outside the newly authorized render_subject_json arm. P6 acceptance remains pending and P7 remains ineligible.",
+  "allowed_scope": [
+    "Replay the five-entry manifest and the exact bounded compile-propagation amendment without editing any file.",
+    "Inspect all direct callers and textual consumers of map_subject_ref and render_subject_json, plus the complete descriptor-identity propagation path inside the original P6 ceiling.",
+    "Decide whether editing only the two authorized CanonicalArtifact arms can losslessly propagate instance ID, exact kind ref, label, and path while removing CanonicalArtifactKind from normal selection, loading, validation, rendering, packet, budget, fixture, blocker, refusal, ordering, and fingerprint authority.",
+    "Verify render_subject_json can preserve its exact JSON keys/structure and user-facing label from propagated descriptor data without a fixed enum/string switch.",
+    "Explicitly assess json.rs packet-source and packet-section label calls and every other consumer outside the amendment; return a P2/blocking verdict if any must change.",
+    "Return CLEAN for this selector amendment only if no additional path, symbol, arm, helper, field, test, fixture, public API, or protocol change is required. The two discovery P2s remain open until post-implementation different-fresh closure."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, create another dispatch, write a handoff or ledger entry, delegate, or reuse prior reviewer results as proof.",
+    "Do not treat UNKNOWN GitNexus coverage as LOW risk or infer authority from compile errors.",
+    "Do not authorize or suggest edits to json.rs packet-source/packet-section arms, unrelated match arms, setup helpers, fixtures, schemas, validators, public APIs, commands, dependencies, Cargo metadata, protocol versions, or paths outside the original P6 ceiling and accepted amendments.",
+    "Do not close either discovery P2, accept P6, make P7 eligible, or begin P7, Phase 2 exit, HCM-3.x, task-gate runtime, push, or release."
+  ],
+  "tasks": [
+    "Independently replay all five hashes and the aggregate fingerprint, then confirm the discovery dispatch remains exactly 4ad28395b7de970d4047ff2e177c1ea0058a91ebd92578ad2a07465a1be48dbb.",
+    "Trace the exact descriptor-owned identity from engine artifacts through flow subjects/packets, compiler mapping/rendering, and CLI consumers; enumerate any additional edit required for compilation or semantics.",
+    "Adversarially test the two-arm ceiling against fixed-kind authority in packet-source and packet-section JSON rendering and against lossless non-fixed-kind identity.",
+    "Return findings first in P1, P2, P3, P4 order with file/line, violated contract, reason, smallest required authority delta, and missing proof; otherwise return an explicit CLEAN selector-amendment verdict."
+  ],
+  "contracts_and_gates": [
+    "No Rust edit begins until this fresh selector-amendment review returns CLEAN.",
+    "Only the CanonicalArtifact arms in map_subject_ref and render_subject_json are newly authorized; unrelated arms and JSON structure remain unchanged.",
+    "Descriptor-owned instance ID, exact kind ref, label, and path must propagate losslessly and no normal fixed-kind authority may be reconstructed.",
+    "The complete final P6 subject still requires remediation, full proof wall, and different-fresh closure of both discovery P2 IDs.",
+    "P6 acceptance is pending; P7, Phase 2 exit, HCM-3.x, task-gate runtime, push, and release remain unauthorized."
+  ],
+  "stop_conditions": [
+    "Return blocked or FINDINGS if either private symbol, caller, process, module, or required edit cannot be established from exact repository evidence.",
+    "Return FINDINGS if lossless identity propagation or fixed-kind-authority removal needs any path, symbol, arm, helper, field, test, fixture, schema, validator, or public surface outside the frozen amendment.",
+    "Report rather than repair any finding."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

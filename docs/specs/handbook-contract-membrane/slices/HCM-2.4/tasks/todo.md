@@ -5,10 +5,12 @@ review-clean, and locally committed at implementation commit `9b3edf2` with
 authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean. P2S,
 P2A, and Option C are historical evidence, not active architecture. The P4/P5
 token prerequisite is review-clean and committed at `00dde01`; P4's separate
-five-part negative-surface/path proof is review-clean and GREEN. P6 is
-implemented, independently review-clean, and accepted at reviewed subject
-`sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38`.
-P7 is eligible but remains unselected and unstarted. HCM-2.4 and Phase 2 exit
+five-part negative-surface/path proof is review-clean and GREEN. P6 is in
+protocol-integrity repair. Preserved implementation commit
+`b1edf060710bc96cd61631755519baba864ba30a` remains unaccepted with both valid
+discovery P2 findings open; CLEAN supplemental-2 evidence applies only to the
+pre-edit selector fingerprint. P7 is ineligible,
+unselected, and unstarted. HCM-2.4 and Phase 2 exit
 remain incomplete; future task-gate runtime remains deferred.
 
 ## Entry
@@ -371,18 +373,28 @@ remain incomplete; future task-gate runtime remains deferred.
       packet ordering, budgets, fixtures, blockers, and refusals.
 - [x] Delete `BR-HCM-2-PILOT-FLOW-01`.
 - [x] Delete `BR-HCM-2-CHARTER-FLOW-01`.
-- [x] Delete all four bridge types, fixed renderer path selector, fixed-family/path
+- [x] Delete all four bridge types, fixed renderer path selector, fixed layout/path
       authority, fixed-sibling loaders, legacy exceptions, and bridge-only tests.
-- [x] Prove forbidden selector/legacy influence scans are empty.
-- [x] Record status/evidence: final different-fresh closure CLEAN at
-      `handoffs/dispatches/20260730T155751Z--HCM-2-4--p6-final-implementation-closure-review.json`
-      for reviewed subject
-      `sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38`.
+- [ ] Remove residual `CanonicalArtifactKind` normal-path authority and prove the
+      exact descriptor-owned identity through loading, validation, rendering,
+      packet, budget, fixture, blocker, refusal, ordering, and fingerprints.
+- [x] Prove bridge IDs/types, fixed loaders, fixed order/path selectors, and legacy
+      influence are absent at the preserved checkpoint; fixed-kind authority
+      remains the explicit open P2.
+- [x] Record the bounded protocol-integrity repair decision, remove the eight
+      invalid active dispatches without rewriting Git history, and preserve
+      `b1edf060710bc96cd61631755519baba864ba30a`.
+- [x] Obtain CLEAN selector sufficiency for the final bounded compile/JSON
+      amendment; this result binds only the pre-edit selector fingerprint.
+- [ ] Implement the two valid discovery P2 remediations, run the complete proof
+      wall, obtain a fresh complete-subject review, and record only the acceptance
+      truth earned by that evidence.
 
 ## P7 — Proof, review, and closeout
 
-- [ ] ELIGIBLE BUT UNSELECTED/UNSTARTED: accepted P6 satisfies the P7 entry
-      prerequisite, but Phase 2 exit remains unclaimed.
+- [ ] INELIGIBLE, UNSELECTED, AND UNSTARTED: P6 acceptance remains pending, so
+      the P7 entry prerequisite is not satisfied and Phase 2 exit remains
+      unclaimed.
 - [ ] Run every per-family proof and exact Phase 2 exit mapping.
 - [ ] Replay exact 1.1 acceptance, exact 1.2 compatibility, every
       Project-Authority-field negative, real-path 1.2 selection, byte-identical

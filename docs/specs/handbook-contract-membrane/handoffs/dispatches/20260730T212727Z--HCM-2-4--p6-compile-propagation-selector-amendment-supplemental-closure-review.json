@@ -1,0 +1,229 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260730T212727Z--HCM-2-4--p6-compile-propagation-selector-amendment-supplemental-closure-review",
+  "created_at_utc": "2026-07-30T21:27:27Z",
+  "source_handoff_ids": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "parent_orchestration_id": "20260730T174739Z--HCM-2-4--p6-protocol-integrity-repair-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-protocol-integrity-repair",
+  "subject_fingerprint": "sha256:8862618f0309214d3bfdf7f873e54040def003d2b86e6f2aa2d520c5d317afe7",
+  "review_cycle": {
+    "kind": "supplemental_causal",
+    "cycle_id": "p6-protocol-integrity-selector-amendment-supplemental-1",
+    "trigger_run_ids": [
+      "p6-compile-propagation-selector-review"
+    ],
+    "finding_refs": [
+      "HCM-2.4-P6-JSON-PACKET-LABEL-PROPAGATION-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-30T18:35:16Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p6-protocol-integrity-repair",
+        "packet_ids": [
+          "P6-protocol-integrity-repair"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md#repair-authority-and-context"
+      }
+    ],
+    "fingerprint": "sha256:fbabb85feb9d5762ed68a674b77b9bdeb9ca06ecfd195effae922b123996bb9a"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:0d492344206b0e6a7bdd990e2ef8917f09fe00aee8c9f3ae49a877ca5b7b58cd",
+    "integrated_outcome_id": "hcm-2.4-p6-protocol-integrity-repair",
+    "outcome_registry_fingerprint": "sha256:fbabb85feb9d5762ed68a674b77b9bdeb9ca06ecfd195effae922b123996bb9a",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "final_closeout"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260730T202611Z--HCM-2-4--p6-compile-propagation-selector-amendment-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p6-compile-propagation-selector-amendment-convergence-2",
+    "completed_at_utc": "2026-07-30T21:27:26Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "confirm git diff b1edf060710bc96cd61631755519baba864ba30a -- crates is empty and replay the immutable discovery proof wall",
+        "evidence_ref": "parent terminal output at 2026-07-30T21:27Z: zero crate paths differ from preserved b1edf060; no Rust edit has begun"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "recursively inventory compiler JSON packet-source, packet-section, subject, shared/Markdown, and CLI fixed-label consumers plus descriptor propagation paths",
+        "evidence_ref": "parent terminal output at 2026-07-30T21:27Z: exact json.rs:155 and json.rs:266 value expressions added; all other fixed-label consumers remain inside original P6 paths; no new production/test path or fixture"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted six-entry repo-path-NUL-SHA256-newline supplemental selector-amendment manifest",
+        "evidence_ref": "subject_manifest below: sha256:8862618f0309214d3bfdf7f873e54040def003d2b86e6f2aa2d520c5d317afe7"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output at 2026-07-30T21:27Z: exit 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output at 2026-07-30T21:27Z: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/compiler/src/rendering/json.rs",
+        "sha256": "3c65f261182967b963ac46745a5b9eb28227961325b13dd83bc08064f55e2383"
+      },
+      {
+        "path": "crates/compiler/src/resolver.rs",
+        "sha256": "c6f778d3ea3c95b63205922d335e9e7e93ea40e3f6494b07c1b1899fc85401a6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review.json",
+        "sha256": "4ad28395b7de970d4047ff2e177c1ea0058a91ebd92578ad2a07465a1be48dbb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T202611Z--HCM-2-4--p6-compile-propagation-selector-amendment-review.json",
+        "sha256": "a72bded3781710ce9779bb6647096f0c7abc8ce13ecad0bc4bb33347eb59593e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+        "sha256": "b5c07e7aaab189e410665d04f1930ec102cec452059e24a4f05d40bf5f36d9de"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+        "sha256": "eb3ea920ceab70046611d96ba5f18f3eeb5058fcc27d8aaa926cef6949fc8499"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:8862618f0309214d3bfdf7f873e54040def003d2b86e6f2aa2d520c5d317afe7"
+  },
+  "active_resolution": {
+    "level": "implementation-selector-amendment",
+    "scope_horizon": "supplemental closure of the complete bounded P6 compiler propagation ceiling",
+    "detail_resolution": "two CanonicalArtifact arms plus exactly two JSON packet kind-value expressions",
+    "temporal_horizon": "different-fresh pre-Rust-edit supplemental selector closure",
+    "authority_horizon": "existing compiler JSON path and exact expressions only; no additional production/test path, fixture, schema, validator, P7, Phase 2 exit, or HCM-3.x",
+    "memory_horizon": "immutable discovery and first amendment dispatches, preserved b1edf060 crate baseline, exact six-entry closure subject, and fresh UNKNOWN private-function impacts",
+    "validation_horizon": "CLEAN different-fresh supplemental selector verdict required before Rust edits; post-implementation closure of the two original P2s remains required"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+      "sections": [
+        "Expanded remediation authority",
+        "Bounded compile-propagation amendment",
+        "Scope and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Complete production path and symbol manifest",
+        "Complete test and proof manifest",
+        "Stop conditions and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Review dispatch",
+        "Causal review budget"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage"
+      ]
+    }
+  ],
+  "repo_truth": "HEAD remains b1edf060710bc96cd61631755519baba864ba30a and no crate byte differs from it. Discovery dispatch 20260730T183600Z remains SHA-256 4ad28395b7de970d4047ff2e177c1ea0058a91ebd92578ad2a07465a1be48dbb. First amendment dispatch 20260730T202611Z remains SHA-256 a72bded3781710ce9779bb6647096f0c7abc8ce13ecad0bc4bb33347eb59593e and its P2 finding is preserved. The repair decision now adds only json.rs:155 and json.rs:266 kind-value expressions to the already-added compiler JSON path. GitNexus returned UNKNOWN/zero indexed impact for both private functions; exact textual consumers are frozen in this closure. P6 acceptance remains pending and P7 remains ineligible.",
+  "allowed_scope": [
+    "Replay all six subject hashes and the aggregate fingerprint; verify both predecessor dispatches remain byte-identical.",
+    "Verify HCM-2.4-P6-JSON-PACKET-LABEL-PROPAGATION-001 is fully closed as a selector-sufficiency finding by the exact two-expression authority delta.",
+    "Trace descriptor-owned instance ID, exact kind ref, label, and path through packet sources, fixture lineage, packet sections, blockers, refusals, compiler mapping, JSON rendering, shared/Markdown rendering, and CLI consumers.",
+    "Confirm each newly authorized JSON expression can use the propagated label directly while preserving the existing kind key, JSON structure, field order, escaping, and first-party values.",
+    "Return CLEAN only if the complete planned remediation compiles and satisfies the two original P2 contracts without any additional production/test path, symbol, expression, fixture, schema, validator, public abstraction, or protocol change."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, create another dispatch, write a handoff or ledger entry, delegate, or reuse prior reviewer results as proof.",
+    "Do not close either original discovery P2, accept P6, make P7 eligible, or begin Rust implementation.",
+    "Do not authorize a fixed-kind mapping, generic/configured renderer, new JSON field, field reorder, protocol version, helper, production/test path, fixture, schema, validator, public API, dependency, Cargo change, P7, Phase 2 exit, HCM-3.x, push, or release."
+  ],
+  "tasks": [
+    "Validate the supplemental causal lineage and independently replay the six-entry subject.",
+    "Inspect the exact future compile propagation and prove the two new value expressions are the complete missing ceiling delta identified by the predecessor finding.",
+    "Verify first-party JSON labels remain unchanged but are sourced solely from descriptor-propagated labels, including non-fixed-kind behavior through already-authorized tests.",
+    "Return findings first in P1, P2, P3, P4 order; otherwise return explicit CLEAN selector-amendment closure with HCM-2.4-P6-JSON-PACKET-LABEL-PROPAGATION-001 closed."
+  ],
+  "contracts_and_gates": [
+    "No Rust edit begins until this different-fresh supplemental selector closure is CLEAN.",
+    "Only the CanonicalArtifact arms in map_subject_ref and render_subject_json plus the two exact JSON kind-value expressions are newly authorized.",
+    "All labels come from descriptor-owned propagated data; no fixed-kind mapping remains in normal authority.",
+    "The complete final P6 subject still requires implementation, full proof wall, and different-fresh closure of both original discovery P2 IDs.",
+    "P6 acceptance is pending; P7, Phase 2 exit, HCM-3.x, task-gate runtime, push, and release remain unauthorized."
+  ],
+  "stop_conditions": [
+    "Return blocked or FINDINGS if any required edit cannot be established from exact repository evidence.",
+    "Return FINDINGS if compilation or semantics requires another production/test path, symbol, expression, helper, field, fixture, schema, validator, or public surface.",
+    "Report rather than repair any finding."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

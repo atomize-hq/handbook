@@ -1,0 +1,239 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260730T214310Z--HCM-2-4--p6-json-compact-label-selector-final-closure-review",
+  "created_at_utc": "2026-07-30T21:43:10Z",
+  "source_handoff_ids": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "parent_orchestration_id": "20260730T174739Z--HCM-2-4--p6-protocol-integrity-repair-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-protocol-integrity-repair",
+  "subject_fingerprint": "sha256:4b8862d7acb77c778d306ad6d6dbf22824a783250f1fe488a8f07e83a73cde5b",
+  "review_cycle": {
+    "kind": "supplemental_causal",
+    "cycle_id": "p6-protocol-integrity-selector-amendment-supplemental-2",
+    "trigger_run_ids": [
+      "p6-compile-propagation-selector-isolated-closure"
+    ],
+    "finding_refs": [
+      "HCM-2.4-P6-JSON-PRESENTATION-LABEL-CONFLICT-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-30T18:35:16Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p6-protocol-integrity-repair",
+        "packet_ids": [
+          "P6-protocol-integrity-repair"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md#repair-authority-and-context"
+      }
+    ],
+    "fingerprint": "sha256:fbabb85feb9d5762ed68a674b77b9bdeb9ca06ecfd195effae922b123996bb9a"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:0d492344206b0e6a7bdd990e2ef8917f09fe00aee8c9f3ae49a877ca5b7b58cd",
+    "integrated_outcome_id": "hcm-2.4-p6-protocol-integrity-repair",
+    "outcome_registry_fingerprint": "sha256:fbabb85feb9d5762ed68a674b77b9bdeb9ca06ecfd195effae922b123996bb9a",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "final_closeout"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260730T212727Z--HCM-2-4--p6-compile-propagation-selector-amendment-supplemental-closure-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p6-json-compact-label-selector-convergence-3",
+    "completed_at_utc": "2026-07-30T21:43:09Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "confirm git diff b1edf060710bc96cd61631755519baba864ba30a -- crates is empty and replay the immutable discovery proof wall",
+        "evidence_ref": "parent terminal output at 2026-07-30T21:43Z: zero crate paths differ from preserved b1edf060; no Rust/test edit has begun"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory admitted descriptor labels, current compact JSON/Markdown/CLI values, all three JSON projection functions, and rendering_surface proof consumers",
+        "evidence_ref": "parent terminal output at 2026-07-30T21:42Z: descriptor labels contain ASCII spaces at shipped profile lines 30/48; current output values are compact; exactly one existing test path is added and no fixture asset changes"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted eight-entry repo-path-NUL-SHA256-newline final selector-amendment manifest",
+        "evidence_ref": "subject_manifest below: sha256:4b8862d7acb77c778d306ad6d6dbf22824a783250f1fe488a8f07e83a73cde5b"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output at 2026-07-30T21:42Z: exit 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output at 2026-07-30T21:42Z: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/compiler/src/rendering/json.rs",
+        "sha256": "3c65f261182967b963ac46745a5b9eb28227961325b13dd83bc08064f55e2383"
+      },
+      {
+        "path": "crates/compiler/src/resolver.rs",
+        "sha256": "c6f778d3ea3c95b63205922d335e9e7e93ea40e3f6494b07c1b1899fc85401a6"
+      },
+      {
+        "path": "crates/compiler/tests/rendering_surface.rs",
+        "sha256": "dbda51526a87507d45dd5520a3423c3ab8d2c92eef99133c0c150acd3265b494"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review.json",
+        "sha256": "4ad28395b7de970d4047ff2e177c1ea0058a91ebd92578ad2a07465a1be48dbb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T202611Z--HCM-2-4--p6-compile-propagation-selector-amendment-review.json",
+        "sha256": "a72bded3781710ce9779bb6647096f0c7abc8ce13ecad0bc4bb33347eb59593e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T212727Z--HCM-2-4--p6-compile-propagation-selector-amendment-supplemental-closure-review.json",
+        "sha256": "c77a69490dd09ce5805f2b528de611f2ce5eb830e1358b54cd013dcb44f2b5fa"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+        "sha256": "b5c07e7aaab189e410665d04f1930ec102cec452059e24a4f05d40bf5f36d9de"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+        "sha256": "f54fa2a145f0b898caaca8d21d29cbf00a119b2aa249a3aa29913e4af8117b3e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:4b8862d7acb77c778d306ad6d6dbf22824a783250f1fe488a8f07e83a73cde5b"
+  },
+  "active_resolution": {
+    "level": "implementation-selector-amendment",
+    "scope_horizon": "final supplemental closure of the bounded P6 compiler JSON presentation ceiling",
+    "detail_resolution": "ASCII SPACE-only compact label rule for three exact JSON projections plus one existing proof path",
+    "temporal_horizon": "different-fresh pre-Rust-edit final supplemental selector closure",
+    "authority_horizon": "three exact JSON projections and rendering_surface.rs only; no additional production/test path, fixture, schema, validator, P7, Phase 2 exit, or HCM-3.x",
+    "memory_horizon": "three immutable predecessor dispatches, preserved b1edf060 crate baseline, exact eight-entry closure subject, and resolved compact-label semantics",
+    "validation_horizon": "CLEAN different-fresh selector verdict required before Rust/test edits; post-implementation closure of both original discovery P2 IDs remains required"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+      "sections": [
+        "Expanded remediation authority",
+        "Bounded compile-propagation amendment",
+        "JSON presentation-only compact label rule",
+        "Scope and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Complete production path and symbol manifest",
+        "Complete test and proof manifest",
+        "Stop conditions and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Review dispatch",
+        "Causal review budget"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage"
+      ]
+    }
+  ],
+  "repo_truth": "HEAD remains b1edf060710bc96cd61631755519baba864ba30a and no crate byte differs from it. The three predecessor dispatches remain byte-identical at SHA-256 4ad28395b7de970d4047ff2e177c1ea0058a91ebd92578ad2a07465a1be48dbb, a72bded3781710ce9779bb6647096f0c7abc8ce13ecad0bc4bb33347eb59593e, and c77a69490dd09ce5805f2b528de611f2ce5eb830e1358b54cd013dcb44f2b5fa. The repair decision now resolves the prior semantic conflict with an ASCII SPACE U+0020 removal rule limited to three JSON projections and freezes regression proof to existing crates/compiler/tests/rendering_surface.rs. P6 acceptance remains pending and P7 remains ineligible.",
+  "allowed_scope": [
+    "Replay all eight subject hashes and the aggregate fingerprint; verify all three predecessor dispatches remain byte-identical.",
+    "Verify HCM-2.4-P6-JSON-PRESENTATION-LABEL-CONFLICT-001 is fully closed by the exact ASCII SPACE-only presentation rule.",
+    "Verify the planned implementation removes every U+0020 from the admitted descriptor label and preserves case, punctuation, non-ASCII whitespace, Unicode code points, and the retained exact label/instance ID/kind ref.",
+    "Verify the rule is used only by render_subject_json, render_packet_sources_json, and render_packet_sections_json, preserves the existing JSON kind key/structure/order/escaping/first-party values, and cannot influence normal authority.",
+    "Verify rendering_surface.rs can provide bounded exact first-party and non-fixed-label proof without helper, fixture, production/test path, schema, validator, public API, or protocol changes.",
+    "Return CLEAN only if the complete selector now supports compilation and both original P2 remediations without any further authority expansion."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, create another dispatch, write a handoff or ledger entry, delegate, or reuse prior reviewer results as proof.",
+    "Do not close either original discovery P2, accept P6, make P7 eligible, or begin Rust/test implementation.",
+    "Do not authorize trimming, case folding, punctuation removal, Unicode normalization, non-ASCII whitespace removal, a fixed-kind mapping, generic/configured renderer, new JSON field, field reorder, protocol version, helper outside existing authority, additional production/test path, fixture, schema, validator, public API, dependency, Cargo change, P7, Phase 2 exit, HCM-3.x, push, or release."
+  ],
+  "tasks": [
+    "Validate the final supplemental causal lineage and independently replay the eight-entry subject.",
+    "Prove the exact U+0020-only rule resolves the predecessor conflict and keeps compact labels presentation-only.",
+    "Prove the three-projection and one-test-path ceiling is complete for future compilation and regression coverage.",
+    "Return findings first in P1, P2, P3, P4 order; otherwise return explicit CLEAN selector closure with HCM-2.4-P6-JSON-PRESENTATION-LABEL-CONFLICT-001 closed."
+  ],
+  "contracts_and_gates": [
+    "No Rust/test edit begins until this different-fresh final supplemental selector closure is CLEAN.",
+    "Only U+0020 removal from descriptor labels in the three exact JSON projections is authorized; all exact identity remains retained and authoritative.",
+    "Only crates/compiler/tests/rendering_surface.rs may add bounded regression proof; no fixture asset or other path may change.",
+    "The complete final P6 subject still requires implementation, full proof wall, and different-fresh closure of both original discovery P2 IDs.",
+    "P6 acceptance is pending; P7, Phase 2 exit, HCM-3.x, task-gate runtime, push, and release remain unauthorized."
+  ],
+  "stop_conditions": [
+    "Return blocked or FINDINGS if the exact transformation, retained identity, or proof cannot be established from repository evidence.",
+    "Return FINDINGS if compilation or semantics requires another production/test path, projection, expression, helper, fixture, schema, validator, or public surface.",
+    "Report rather than repair any finding."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

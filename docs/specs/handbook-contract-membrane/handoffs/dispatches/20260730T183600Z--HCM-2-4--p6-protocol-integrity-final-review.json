@@ -1,0 +1,391 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review",
+  "created_at_utc": "2026-07-30T18:36:00Z",
+  "source_handoff_ids": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "parent_orchestration_id": "20260730T174739Z--HCM-2-4--p6-protocol-integrity-repair-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-protocol-integrity-repair",
+  "subject_fingerprint": "sha256:b24dab5bfa503eabfa89d3393fd85989d4de7fc28dbfbc3e618720e9f613bfa3",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p6-protocol-integrity-final-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-30T18:35:16Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p6-protocol-integrity-repair",
+        "packet_ids": [
+          "P6-protocol-integrity-repair"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md#repair-authority-and-context"
+      }
+    ],
+    "fingerprint": "sha256:fbabb85feb9d5762ed68a674b77b9bdeb9ca06ecfd195effae922b123996bb9a"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:0d492344206b0e6a7bdd990e2ef8917f09fe00aee8c9f3ae49a877ca5b7b58cd",
+    "integrated_outcome_id": "hcm-2.4-p6-protocol-integrity-repair",
+    "outcome_registry_fingerprint": "sha256:fbabb85feb9d5762ed68a674b77b9bdeb9ca06ecfd195effae922b123996bb9a",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "p6-protocol-integrity-final-convergence-1",
+    "completed_at_utc": "2026-07-30T18:35:16Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "two exact P6 discriminators, both exact provenance tests, cargo test --workspace --all-features -j1, strict workspace Clippy, exact authorized WSL 21-target wall, and recursive absence proof",
+        "evidence_ref": "parent terminal output: native workspace 0 failures; strict Clippy 0 warnings; exact WSL authorized targets 21/21 GREEN; bridge/fixed-selector absence scan 0 matches"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "recursive inventory of P6 production/test consumers, fixtures, bridge IDs/types, fixed selectors, and protected paths; compare with selector plus two authorized proof amendments",
+        "evidence_ref": "parent terminal output: 28 selected code/test paths, 0 crate changes after b1edf060, 0 protected paths in subject, 8 invalid dispatch paths absent, no fixture change"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute ordered 38-entry repo-path-NUL-SHA256-newline final P6 plus repair manifest",
+        "evidence_ref": "subject_manifest below: sha256:b24dab5bfa503eabfa89d3393fd85989d4de7fc28dbfbc3e618720e9f613bfa3"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output: exit 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output: exit 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "be32dd3e5e89b1478c2c34b807776795f9ac583ba0aec482d5b11d38bcf118e5"
+      },
+      {
+        "path": "crates/cli/tests/pipeline_handoff_refusals.rs",
+        "sha256": "36ccea1f25728720ffefd8a72a0b9b98baefca52afa33324dbed3018c5fb84c3"
+      },
+      {
+        "path": "crates/compiler/src/author/charter_shell.rs",
+        "sha256": "ceda7415fd9f692e51789e01cadb895f5a7f2b1f78c7b954d5eb33e0d8b8198f"
+      },
+      {
+        "path": "crates/compiler/src/author/mod.rs",
+        "sha256": "72c6b81be994f1a09899d901c69bb2eb33e7ccbf6a96ea51d99c6878a3a11948"
+      },
+      {
+        "path": "crates/compiler/src/blocker.rs",
+        "sha256": "5d2bbf924ec3db6e2412a8dc7b95bdeb91a1a1ae7070636211d9e48c4926335b"
+      },
+      {
+        "path": "crates/compiler/src/layout.rs",
+        "sha256": "b9b28a643b26e604593125befd4be44d21bcefaeb7af8f1825d5005d144d0b44"
+      },
+      {
+        "path": "crates/compiler/tests/artifact_manifest_interface.rs",
+        "sha256": "4bc38cc2b19e5ffe1a52a3c6dccc43ea4031518d08f730c814b2a87b9c779ed6"
+      },
+      {
+        "path": "crates/compiler/tests/canonical_artifacts_ingest.rs",
+        "sha256": "cf1e8c317743443966222bee187ab4ef46eef709592258a952e7acc349bff097"
+      },
+      {
+        "path": "crates/compiler/tests/freshness_computation.rs",
+        "sha256": "93298e1e79eced14d1f364b7adf79328a0f55afb977ea6956c18e20813d2fc79"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_handoff.rs",
+        "sha256": "3a6341f6b7e00566f962507dd18ddd2e4a542182b9742f9a2e6c670cb6b3874f"
+      },
+      {
+        "path": "crates/compiler/tests/refusal_mapping.rs",
+        "sha256": "dae17053af3b43ab34ca30df7b4e144613530a4022b0a53dff119be4b3ba4a62"
+      },
+      {
+        "path": "crates/compiler/tests/rendering_surface.rs",
+        "sha256": "dbda51526a87507d45dd5520a3423c3ab8d2c92eef99133c0c150acd3265b494"
+      },
+      {
+        "path": "crates/compiler/tests/resolver_core.rs",
+        "sha256": "71456f7a03ef8a73d3cd43ade01bf6e3c034cc5c255d065e54f3ca22a55fa7a6"
+      },
+      {
+        "path": "crates/engine/src/artifact_manifest.rs",
+        "sha256": "4236a9c3af793dd373755a1cd7a8abc8f18cb9600a44a232cfb770be48b9d5e8"
+      },
+      {
+        "path": "crates/engine/src/baseline_validation.rs",
+        "sha256": "e166eb6e7e80a839963e050fb2a15a6f32dedde60bd56df6ead3326303f05578"
+      },
+      {
+        "path": "crates/engine/src/canonical_artifacts.rs",
+        "sha256": "7ff4353c29140d13b120d979e8979f0550e057fe6457055b5275b76b2b1a8c4d"
+      },
+      {
+        "path": "crates/engine/src/canonical_paths.rs",
+        "sha256": "bfa34ed90ddd8df05260f8d919edeef548061562841910d187850bdd1dcc8c9f"
+      },
+      {
+        "path": "crates/engine/src/canonical_repo_support.rs",
+        "sha256": "dd6dd05d7597a525d5efe5ca2a4e6901581c3d6a71a870ed28757a1782b22e60"
+      },
+      {
+        "path": "crates/engine/src/freshness.rs",
+        "sha256": "efc9c33d4d5eb218b2be63993457f4976bd7285dad36449b461469094e395b9e"
+      },
+      {
+        "path": "crates/engine/tests/artifact_manifest_interface.rs",
+        "sha256": "4bc38cc2b19e5ffe1a52a3c6dccc43ea4031518d08f730c814b2a87b9c779ed6"
+      },
+      {
+        "path": "crates/engine/tests/baseline_validation.rs",
+        "sha256": "28a44fd95dc870332d357c604c570916f4a314d9d581de41fc2958bc456e0d30"
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "sha256": "5c91c11f2dad831584d554341a40118b7cd0fd6445f5559ccf9bf15c329de3f2"
+      },
+      {
+        "path": "crates/engine/tests/freshness_computation.rs",
+        "sha256": "93298e1e79eced14d1f364b7adf79328a0f55afb977ea6956c18e20813d2fc79"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_1_project_context.rs",
+        "sha256": "9618884a52e2378bcbddc1f550b1842849722e495391d7cc57b8bd86680bdccc"
+      },
+      {
+        "path": "crates/flow/src/resolver.rs",
+        "sha256": "5fe9da48498a934cbe410095ea9ef235c1e47c5ed808722a5db73003662f992d"
+      },
+      {
+        "path": "crates/flow/tests/budget_domains.rs",
+        "sha256": "43cf66b9983bd15345eafdaffaa912073a50c5e810766902604ea0a7195cc7ee"
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "sha256": "fd6053ec3571c93065ed45b0a6a0b9fdca584cbb5aec2cdbbb20f7b29d85a92b"
+      },
+      {
+        "path": "crates/pipeline/tests/pipeline_handoff.rs",
+        "sha256": "7c96be7f1727ae345b4f35f6bbbba203c5ed485cf6370726d70fb716ea231fbc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "e885157fc0b1c985946ced366fa5ccfc260d6359637e047d47a29b629d10bdcd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "57fe8d04b5e33043c2bc7709d6b93fa8a99073e4ce4c15ea43ba7828f5906400"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "67b2efc6a28453910428b6a4c21cbae51236b750a95d1c83ad505f4516dec2d9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "630683781c70215db38872f31fd7f0e627e4f4d09d0cb7bf334bfbc8ec057d71"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "bad8759c6058f5f2f77916aeb6619fb206d53336da1be35655088c94044db02b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-pipeline-handoff-provenance-test-selector-amendment.md",
+        "sha256": "651b1db85e853d14e6f3d1f674b30479557fbd2ab97f57a5d481f37fd9c707e5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-bounded-read-clippy-selector-amendment.md",
+        "sha256": "d9689df51fcb537d77246a474e326c2638d2ef3fecff47a4fb518814874752a8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+        "sha256": "ba4ad11d8b63b592c21fd03c591463c143109255e82a63b3e550d52c70b77e88"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "4edd0d372d9b5963bef831cf8b178e82615b4b5d0ee4527cb266c378dbf3ac15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "c7196b61b97b0fc28be80f4f76276c2fe119946622f0186b1ca572f05bbb11ab"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b24dab5bfa503eabfa89d3393fd85989d4de7fc28dbfbc3e618720e9f613bfa3"
+  },
+  "active_resolution": {
+    "level": "implementation",
+    "scope_horizon": "complete HCM-2.4 P6 implementation subject plus bounded protocol-integrity repair",
+    "detail_resolution": "descriptor-selected aggregate flow, proof amendments, control-pack truth, removal of eight invalid active dispatches, and fresh review lineage",
+    "temporal_horizon": "post-implementation pre-repair-commit final review",
+    "authority_horizon": "P6 repair only; no P7, Phase 2 exit, HCM-3.x, task-gate runtime, automatic continuation, push, or release",
+    "memory_horizon": "preserved b1edf060 implementation, selected P6 entry handoff, fresh unique orchestration, 38 live subject paths, eight historical invalid-dispatch hashes, and fresh proof wall",
+    "validation_horizon": "fresh independent discovery review followed by remediation and different-fresh closure for any P1/P2"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+      "sections": [
+        "Repair authority and context",
+        "Invalid active dispatch inventory",
+        "Repair decisions",
+        "Scope and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Trigger and earned entry authority",
+        "Complete production path and symbol manifest",
+        "Complete test and proof manifest",
+        "Stop conditions and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-pipeline-handoff-provenance-test-selector-amendment.md",
+      "sections": [
+        "Frozen amendment",
+        "Proof semantics"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-bounded-read-clippy-selector-amendment.md",
+      "sections": [
+        "Frozen amendment",
+        "Proof wall"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Review dispatch",
+        "Convergence before discovery review",
+        "Causal review budget"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage",
+        "True-stop handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Priority decision matrix"
+      ]
+    }
+  ],
+  "repo_truth": "HEAD is preserved at b1edf060710bc96cd61631755519baba864ba30a. Its complete 28-path Rust P6 subject is unchanged by this repair. Exactly eight invalid dispatch files that reused the closed 20260729T222320Z P6 selector orchestration are absent from the active dispatch directory; the repair decision records their exact paths and SHA-256 hashes, while Git history preserves their bytes. This fresh dispatch belongs to unique orchestration 20260730T174739Z--HCM-2-4--p6-protocol-integrity-repair-orchestration and consumes only the selected P6-entry handoff. Native cargo test --workspace --all-features -j1, strict workspace Clippy, formatting, whitespace, exact focused tests, exact 21-target WSL authorized wall, and recursive absence scans are GREEN. A supplemental broad WSL run exposed five existing HCM-2.3 native-component admission failures and one existing CLI wording assertion; git diff b1edf060 -- crates is empty, so those failures are outside this repair and must be assessed rather than silently treated as repaired. The active control pack may still contain citations to removed invalid review evidence and must be checked for truthful final-review ownership. Protected user paths remain outside the subject.",
+  "allowed_scope": [
+    "Replay all 38 live subject entries and review the complete final P6 implementation, selector amendments, control-pack truth, and protocol-repair decision.",
+    "Verify the eight named invalid dispatch paths are absent from the active directory, their decision-recorded hashes match git show b1edf060 bytes, and no removed dispatch or reviewer result is claimed as valid proof.",
+    "Verify the new orchestration, source handoff, causal budget, registry, manifest, fingerprint, timestamps, and review identity are newly derived and v1.4-valid.",
+    "Review descriptor-selected collection/rendering behavior, exact byte and identity retention, source/rendered fingerprints, three permitted fixed renderers, policy preservation, bridge/fixed-authority deletion, proof amendments, and all durable negatives.",
+    "Assess the native GREEN wall and supplemental WSL failures against the byte-identical b1edf060 crate baseline; report any actual P6 defect rather than repairing an unrelated environmental baseline.",
+    "Check every control-pack statement and evidence citation for current truth, especially references to invalid removed review dispatches and the superseded subject fingerprint."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, push, write a handoff or ledger entry, create another dispatch, delegate, or reuse any prior reviewer result as proof.",
+    "Do not restore, modify, admit, or claim validity for any of the eight removed dispatches; inspect historical bytes read-only through git show only when validating the repair decision hashes.",
+    "Do not change validator semantics, historical admission hashes, production behavior, tests, fixtures, schemas, definitions, profiles, Cargo metadata, dependencies, public APIs, commands, modules, or protected user paths.",
+    "Do not authorize or begin P7, Phase 2 exit, HCM-3.x, task-gate runtime, automatic continuation, push, or release."
+  ],
+  "tasks": [
+    "Independently replay every subject hash and the aggregate fingerprint, inspect every subject path, compare the 28 Rust paths with b1edf060 and the P6 selector, and validate the two bounded test-proof amendments.",
+    "Independently verify the active absence and historical hashes of all eight invalid dispatches and audit the repair decision against the operator authorization and 07/08 v1.4 lineage rules.",
+    "Audit all seven control-pack files for stale or invalid claims, especially any assertion that a removed dispatch or old reviewer verdict is the current accepted review evidence.",
+    "Review the implementation and tests across correctness, regressions, safety, maintainability, standards, proof quality, scope containment, and preserved Charter/Project/Environment policy.",
+    "Return findings first in P1, P2, P3, P4 order with file/line, violated contract, reason, smallest authorized remediation, and missing proof; separately dispose any valid P3/P4 advisory under 09."
+  ],
+  "contracts_and_gates": [
+    "b1edf060 history and all crate bytes remain unchanged by the repair; validator semantics and historical admission hashes remain unchanged",
+    "exactly eight invalid dispatches remain absent from the active dispatch directory and are never reused as valid evidence",
+    "the repair review lineage starts under the unique 20260730T174739Z orchestration and consumes the selected P6-entry handoff",
+    "the descriptor-selected P6 implementation preserves all selector contracts and exact recursive absence scans",
+    "the final control pack identifies only fresh valid review evidence and keeps P7 eligible but unselected and unstarted",
+    "no unresolved P1/P2 may reach the repair commit; any remediation requires different-fresh closure",
+    "P7, Phase 2 exit, HCM-3.x, task-gate runtime, automatic continuation, push, and release remain unauthorized"
+  ],
+  "stop_conditions": [
+    "Return blocked if any subject hash, historical invalid-dispatch hash, active absence fact, authority edge, or proof claim cannot be independently established.",
+    "Report rather than repair any finding.",
+    "Stop on any need to change validator semantics, historical admission hashes, production behavior, tests, fixtures, protected paths, or scope outside the bounded protocol repair."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
