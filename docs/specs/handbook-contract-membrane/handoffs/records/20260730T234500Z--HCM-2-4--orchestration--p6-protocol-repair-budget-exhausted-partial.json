@@ -1,0 +1,543 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260730T234500Z--HCM-2-4--orchestration--p6-protocol-repair-budget-exhausted-partial",
+  "created_at_utc": "2026-07-30T23:45:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-protocol-integrity-repair-budget-exhausted",
+  "orchestration_id": "20260730T174739Z--HCM-2-4--p6-protocol-integrity-repair-orchestration",
+  "source_handoff_ids": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "partial",
+  "stop_reason": "context_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-30T23:40:00Z",
+    "evidence_ref": "built-in fresh read-only review agents completed the four v1.4 dispatches recorded below"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "p6-protocol-integrity-final-review",
+      "dispatch_id": "20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review.json",
+      "dispatch_fingerprint": "sha256:4ad28395b7de970d4047ff2e177c1ea0058a91ebd92578ad2a07465a1be48dbb",
+      "role": "review",
+      "agent_id": "/root/p6_protocol_integrity_final_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:b24dab5bfa503eabfa89d3393fd85989d4de7fc28dbfbc3e618720e9f613bfa3",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-2.4-P6-FIXED-KIND-AUTHORITY-REPAIR-001",
+        "HCM-2.4-P6-PROTOCOL-TRUTH-REPAIR-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md"
+      ],
+      "result_subject_fingerprint": "sha256:b24dab5bfa503eabfa89d3393fd85989d4de7fc28dbfbc3e618720e9f613bfa3"
+    },
+    {
+      "run_id": "p6-compile-propagation-selector-review",
+      "dispatch_id": "20260730T202611Z--HCM-2-4--p6-compile-propagation-selector-amendment-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T202611Z--HCM-2-4--p6-compile-propagation-selector-amendment-review.json",
+      "dispatch_fingerprint": "sha256:a72bded3781710ce9779bb6647096f0c7abc8ce13ecad0bc4bb33347eb59593e",
+      "role": "review",
+      "agent_id": "/root/p6_compile_propagation_selector_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:0e6bdcd8aafeccee6bbdd57bbec9194d2b83a955d09cc81fef1d4a851b9baafc",
+      "review_round": 2,
+      "predecessor_run_id": "p6-protocol-integrity-final-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-2.4-P6-JSON-PACKET-LABEL-PROPAGATION-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T202611Z--HCM-2-4--p6-compile-propagation-selector-amendment-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md"
+      ],
+      "result_subject_fingerprint": "sha256:0e6bdcd8aafeccee6bbdd57bbec9194d2b83a955d09cc81fef1d4a851b9baafc"
+    },
+    {
+      "run_id": "p6-compile-propagation-selector-isolated-closure",
+      "dispatch_id": "20260730T212727Z--HCM-2-4--p6-compile-propagation-selector-amendment-supplemental-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T212727Z--HCM-2-4--p6-compile-propagation-selector-amendment-supplemental-closure-review.json",
+      "dispatch_fingerprint": "sha256:c77a69490dd09ce5805f2b528de611f2ce5eb830e1358b54cd013dcb44f2b5fa",
+      "role": "review",
+      "agent_id": "/root/p6_compile_propagation_selector_isolated_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:8862618f0309214d3bfdf7f873e54040def003d2b86e6f2aa2d520c5d317afe7",
+      "review_round": 3,
+      "predecessor_run_id": "p6-compile-propagation-selector-review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-2.4-P6-JSON-PRESENTATION-LABEL-CONFLICT-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T212727Z--HCM-2-4--p6-compile-propagation-selector-amendment-supplemental-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md"
+      ],
+      "result_subject_fingerprint": "sha256:8862618f0309214d3bfdf7f873e54040def003d2b86e6f2aa2d520c5d317afe7"
+    },
+    {
+      "run_id": "p6-json-compact-label-selector-final-closure",
+      "dispatch_id": "20260730T214310Z--HCM-2-4--p6-json-compact-label-selector-final-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T214310Z--HCM-2-4--p6-json-compact-label-selector-final-closure-review.json",
+      "dispatch_fingerprint": "sha256:c456a413824cfab711730dcd4a745dbd75fe35bbc7ff1f665a9f4e52a3857e8f",
+      "role": "review",
+      "agent_id": "/root/p6_json_compact_label_selector_final_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:4b8862d7acb77c778d306ad6d6dbf22824a783250f1fe488a8f07e83a73cde5b",
+      "review_round": 4,
+      "predecessor_run_id": "p6-compile-propagation-selector-isolated-closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T214310Z--HCM-2-4--p6-json-compact-label-selector-final-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md"
+      ],
+      "result_subject_fingerprint": "sha256:4b8862d7acb77c778d306ad6d6dbf22824a783250f1fe488a8f07e83a73cde5b"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-07-30T23:45:00Z",
+    "dispatch_count": 4,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:0d492344206b0e6a7bdd990e2ef8917f09fe00aee8c9f3ae49a877ca5b7b58cd"
+    ],
+    "aggregate_fingerprint": "sha256:2aceadd473762b7aac17d674ba4e8e4f7982ca9edf47a6f734e218cfa8b1ff20"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "p6-original-findings-selector-authority-remediation",
+      "finding_run_id": "p6-protocol-integrity-final-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "p6-compile-propagation-selector-review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:0e6bdcd8aafeccee6bbdd57bbec9194d2b83a955d09cc81fef1d4a851b9baafc",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T202611Z--HCM-2-4--p6-compile-propagation-selector-amendment-review.json"
+      ]
+    },
+    {
+      "remediation_id": "p6-json-packet-label-selector-authority-remediation",
+      "finding_run_id": "p6-compile-propagation-selector-review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "p6-compile-propagation-selector-isolated-closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:8862618f0309214d3bfdf7f873e54040def003d2b86e6f2aa2d520c5d317afe7",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T212727Z--HCM-2-4--p6-compile-propagation-selector-amendment-supplemental-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "p6-json-compact-label-selector-authority-remediation",
+      "finding_run_id": "p6-compile-propagation-selector-isolated-closure",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "p6-json-compact-label-selector-final-closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:4b8862d7acb77c778d306ad6d6dbf22824a783250f1fe488a8f07e83a73cde5b",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T214310Z--HCM-2-4--p6-json-compact-label-selector-final-closure-review.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "b1edf060710bc96cd61631755519baba864ba30a",
+    "subject_fingerprint": "sha256:4b8862d7acb77c778d306ad6d6dbf22824a783250f1fe488a8f07e83a73cde5b",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T202611Z--HCM-2-4--p6-compile-propagation-selector-amendment-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T212727Z--HCM-2-4--p6-compile-propagation-selector-amendment-supplemental-closure-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T214310Z--HCM-2-4--p6-json-compact-label-selector-final-closure-review.json",
+      "git:d34f7ef59bb5ed36dd9e0adeb5a76c4f4bea2597"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T214310Z--HCM-2-4--p6-json-compact-label-selector-final-closure-review.json"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "bounded HCM-2.4 P6 protocol-integrity repair true stop",
+    "detail_resolution": "pre-edit selector authority is CLEAN; Rust/test remediation remains unreviewed",
+    "temporal_horizon": "through protocol/control checkpoint d34f7ef59bb5ed36dd9e0adeb5a76c4f4bea2597",
+    "authority_horizon": "transition only to one new P6 final-review parent; P7, Phase 2, HCM-3.x, task-gate runtime, automatic continuation, push, and release remain unauthorized",
+    "memory_horizon": "consumed P6 selector-entry handoff, four-dispatch v1.4 lineage, exhausted supplemental-2 budget, selector-only CLEAN fingerprint, open implementation findings, and this partial true stop",
+    "validation_horizon": "checkpoint commit plus schema-valid deterministic partial handoff and ledger"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Repair P6 protocol integrity without rewriting history, freeze sufficient selector authority for the two valid implementation findings, and true-stop when the final-closeout supplemental budget is exhausted.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+      "sections": [
+        "Expanded remediation authority",
+        "Bounded compile-propagation amendment",
+        "JSON presentation-only compact label rule",
+        "Invalid active dispatch inventory",
+        "Scope and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Complete production path and symbol manifest",
+        "Complete test and proof manifest",
+        "Required RED baseline",
+        "Preserved behavior and proof obligations",
+        "Stop conditions and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP",
+        "PHASE 8 — TRUE-STOP HANDOFF"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Status model",
+        "Finding and escalation behavior"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "d34f7ef59bb5ed36dd9e0adeb5a76c4f4bea2597",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "crates/cli/src/rendering.rs",
+      "crates/cli/tests/cli_surface.rs",
+      "crates/compiler/src/baseline_validation.rs",
+      "crates/compiler/src/blocker.rs",
+      "crates/compiler/src/refusal.rs",
+      "crates/compiler/src/rendering/json.rs",
+      "crates/compiler/src/rendering/markdown.rs",
+      "crates/compiler/src/rendering/shared.rs",
+      "crates/compiler/src/resolver.rs",
+      "crates/compiler/tests/artifact_manifest_interface.rs",
+      "crates/compiler/tests/canonical_artifacts_ingest.rs",
+      "crates/compiler/tests/freshness_computation.rs",
+      "crates/compiler/tests/refusal_mapping.rs",
+      "crates/compiler/tests/rendering_surface.rs",
+      "crates/engine/src/baseline_validation.rs",
+      "crates/engine/src/canonical_artifacts.rs",
+      "crates/engine/src/freshness.rs",
+      "crates/engine/tests/artifact_manifest_interface.rs",
+      "crates/engine/tests/baseline_validation.rs",
+      "crates/engine/tests/canonical_artifacts_ingest.rs",
+      "crates/engine/tests/freshness_computation.rs",
+      "crates/flow/src/packet_result.rs",
+      "crates/flow/src/resolver.rs",
+      "crates/flow/tests/budget_domains.rs",
+      "crates/flow/tests/resolver_core.rs",
+      "docs/ideas/intent-to-outcome-fidelity.md"
+    ]
+  },
+  "work_completed": [
+    "Preserved implementation commit b1edf060710bc96cd61631755519baba864ba30a without amend, reset, rebase, or history rewrite.",
+    "Removed the eight invalid dispatches from the active directory while recording their exact historical hashes in the repair decision.",
+    "Created and executed four entirely new v1.4 dispatches under the unique repair parent with a frozen outcome registry and parent-derived causal budget.",
+    "Recorded two valid implementation P2 findings, amended the bounded selector authority, and obtained CLEAN supplemental-2 review for the pre-edit selector fingerprint only.",
+    "Committed only valid dispatches, repair authority, invalid-dispatch removals, and truthful pre-edit control-pack state as d34f7ef59bb5ed36dd9e0adeb5a76c4f4bea2597.",
+    "Excluded every Rust/test edit and every protected path from the checkpoint commit."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+      "status": "completed",
+      "summary": "Durable bounded repair authority, invalid-dispatch inventory, and reviewed pre-edit compile/JSON selector amendments."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T214310Z--HCM-2-4--p6-json-compact-label-selector-final-closure-review.json",
+      "status": "completed",
+      "summary": "CLEAN supplemental-2 closure for selector sufficiency only; it is not implementation acceptance."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260730T234500Z--HCM-2-4--orchestration--p6-protocol-repair-budget-exhausted-partial.json",
+      "status": "completed",
+      "summary": "Parent-owned partial true-stop handoff at the exhausted final-closeout causal budget."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-P6-PROTOCOL-CHECKPOINT-D1",
+      "summary": "The old parent closes with a safe protocol/control checkpoint and does not stage or commit current Rust/test remediation.",
+      "authority_effect": "Checkpoint d34f7ef59bb5ed36dd9e0adeb5a76c4f4bea2597 is context for the new final-review parent, not P6 acceptance.",
+      "refs": [
+        "git:d34f7ef59bb5ed36dd9e0adeb5a76c4f4bea2597",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P6-PROTOCOL-CHECKPOINT-D2",
+      "summary": "Supplemental-2 CLEAN binds only pre-edit subject sha256:4b8862d7acb77c778d306ad6d6dbf22824a783250f1fe488a8f07e83a73cde5b.",
+      "authority_effect": "Current Rust/test remediation remains unreviewed and cannot support P6 acceptance or P7 eligibility.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T214310Z--HCM-2-4--p6-json-compact-label-selector-final-closure-review.json"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P6-PROTOCOL-CHECKPOINT-D3",
+      "summary": "The final-closeout discovery, closure, supplemental-1, and supplemental-2 cycles exhaust the old parent's causal review budget.",
+      "authority_effect": "One newly authorized P6 final-review parent must consume this partial handoff and create a new parent-derived outcome registry and causal budget; prior dispatches/results are immutable context only.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-2.4-P6-FIXED-KIND-AUTHORITY-REPAIR-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "open",
+      "source_run_id": "p6-protocol-integrity-final-review",
+      "summary": "Preserved implementation commit b1edf060 retains CanonicalArtifactKind normal-path authority; bounded remediation is authorized but current Rust/test changes are unreviewed.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.4-P6-PROTOCOL-TRUTH-REPAIR-001",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "open",
+      "source_run_id": "p6-protocol-integrity-final-review",
+      "summary": "P6 acceptance truth must be re-earned from newly valid reviewed evidence; the checkpoint control pack correctly keeps acceptance pending and P7 ineligible.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T183600Z--HCM-2-4--p6-protocol-integrity-final-review.json",
+        "git:d34f7ef59bb5ed36dd9e0adeb5a76c4f4bea2597"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.4-P6-JSON-PACKET-LABEL-PROPAGATION-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p6-compile-propagation-selector-review",
+      "summary": "The repair decision now authorizes descriptor-propagated labels in the two exact packet JSON kind expressions.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T212727Z--HCM-2-4--p6-compile-propagation-selector-amendment-supplemental-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md"
+      ]
+    },
+    {
+      "finding_id": "HCM-2.4-P6-JSON-PRESENTATION-LABEL-CONFLICT-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "p6-compile-propagation-selector-isolated-closure",
+      "summary": "The repair decision resolves JSON compatibility with the exact ASCII SPACE-only presentation rule and bounded existing-path proof.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T214310Z--HCM-2-4--p6-json-compact-label-selector-final-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-P6-OLD-PARENT-CAUSAL-BUDGET-EXHAUSTED",
+      "classification": "authority",
+      "summary": "The old parent reached CLEAN supplemental-2 on the pre-edit selector fingerprint and cannot truthfully create another changed-subject final-closeout cycle.",
+      "resume_condition": "Start the explicitly authorized unique P6 final-review parent, consume this partial handoff, freeze a new parent-derived outcome registry and causal budget, and treat all old-parent dispatches/results as immutable context only.",
+      "owner": "new P6 final-review parent orchestrator"
+    }
+  ],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "four v1.4 old-parent dispatch validations and complete causal-population replay",
+      "status": "passed",
+      "evidence_ref": "dispatch SHA-256 values 4ad28395..., a72bded3..., c77a6949..., c456a413...; population aggregate sha256:2aceadd473762b7aac17d674ba4e8e4f7982ca9edf47a6f734e218cfa8b1ff20"
+    },
+    {
+      "command": "checkpoint staged-path guard, git diff --cached --check, secret scan, ordinary handoff validation, and GitNexus staged detection",
+      "status": "passed",
+      "evidence_ref": "20 protocol/control paths only; 0 crates or protected paths staged; no whitespace/secrets; 70-record/70-ledger parity; no code-symbol changes"
+    },
+    {
+      "command": "focused P6 tests, affected package wall, strict four-crate Clippy, cargo fmt, recursive absence scans, and cargo test --workspace",
+      "status": "passed",
+      "evidence_ref": "current Rust/test working tree proof is GREEN but remains unreviewed and is not evidence for P6 acceptance in this handoff"
+    },
+    {
+      "command": "protected-path SHA-256 replay",
+      "status": "passed",
+      "evidence_ref": "all nine protected paths match their pre-work hashes and remain unstaged/uncommitted"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+      "sections": [
+        "entire decision"
+      ],
+      "reason": "Record bounded repair authority and the immutable invalid-dispatch inventory.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260730T234500Z--HCM-2-4--orchestration--p6-protocol-repair-budget-exhausted-partial.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Close the exhausted old parent without claiming implementation review or P6 acceptance.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query index from every canonical handoff record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Run one new HCM-2.4 P6 final-review orchestration over the complete changed subject and proof wall.",
+    "condition": "Consume this partial handoff, start a unique final-review parent with a newly frozen parent-derived outcome registry and causal budget, and treat every old-parent dispatch/result as immutable context only.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260730T234500Z--HCM-2-4--orchestration--p6-protocol-repair-budget-exhausted-partial.json",
+        "sections": [
+          "entire partial handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md",
+        "sections": [
+          "entire repair decision"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+        "sections": [
+          "entire P6 selector"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sections": [
+          "P6 — Aggregate flow and fixed-selector deletion"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sections": [
+          "P6 — Aggregate cleanup",
+          "P7 — Proof, review, and closeout"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Create new v1.4 final-review dispatches only under the new parent and new parent-derived causal budget.",
+      "Review the complete current P6 Rust/test/control subject and recorded proof wall; if CLEAN, commit that reviewed primary state.",
+      "If the new discovery reports valid P1/P2 findings, use only the new parent's causal remediation and different-fresh closure budget.",
+      "After a CLEAN final subject, create the new parent's completed v1.4 handoff and deterministic ledger closeout commit."
+    ],
+    "prohibited_scope": [
+      "Do not treat old-parent dispatches or reviewer results as the new parent's population or proof.",
+      "Do not amend, reset, rebase, rewrite history, alter validator/schema semantics, or change historical admission hashes.",
+      "Do not stage or commit protected paths or unrelated work.",
+      "Do not begin P7, Phase 2 exit, HCM-3.x, task-gate runtime, automatic continuation, push, or release."
+    ],
+    "acceptance_criteria": [
+      "A fresh built-in read-only reviewer returns CLEAN on the complete changed subject and proof wall under the new parent.",
+      "No unresolved valid P1/P2 remains; any new-parent findings use exact causal remediation/closure lineage.",
+      "The reviewed primary P6 commit contains only authorized Rust/test/control paths and excludes protected/unrelated paths.",
+      "The completed new-parent handoff and deterministic ledger are committed separately; P7 remains unselected."
+    ],
+    "stop_conditions": [
+      "Stop if the checkpoint cannot be reconstructed without staging current Rust/test changes.",
+      "Stop on any required production/test path outside the original P6 ceiling and accepted amendments.",
+      "Stop if completion requires validator/schema changes, history rewrite, fixture changes, P7, Phase 2 exit, HCM-3.x, task-gate runtime, push, or release."
+    ]
+  },
+  "supersedes": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "chat_summary": "P6 protocol/control checkpoint d34f7ef preserves b1edf060 and valid v1.4 selector authority while removing eight invalid dispatches. The old parent exhausted supplemental-2 CLEAN only on the pre-edit selector fingerprint; current Rust/test remediation is unreviewed, P6 acceptance is pending, and P7 is ineligible. Resume only under the newly authorized final-review parent."
+}
