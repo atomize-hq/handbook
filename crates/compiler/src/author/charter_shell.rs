@@ -1,13 +1,12 @@
 use super::{
-    acquire_authoring_lock, baseline_authoring_eligibility, canonical_artifact_identity,
+    acquire_authoring_lock,
     charter::{AuthorCharterRefusal, AuthorCharterRefusalKind, AuthorCharterResult},
     format_repo_mutation_error, format_repo_write_path_error, validate_canonical_write_target,
-    validate_system_root_for_authoring, AuthoringLockError, BaselineAuthoringEligibility,
-    SystemRootAuthoringError,
+    validate_system_root_for_authoring, AuthoringLockError, SystemRootAuthoringError,
 };
 use crate::canonical_artifacts::{CanonicalArtifactKind, CanonicalArtifacts};
 use crate::layout::RepoLayoutRoot;
-use crate::repo_file_access::write_repo_relative_bytes;
+use crate::repo_file_access::{write_repo_relative_bytes, RepoRelativeFileAccessError};
 use std::path::Path;
 
 pub(super) fn preflight_author_charter(repo_root: &Path) -> Result<(), AuthorCharterRefusal> {
@@ -97,21 +96,13 @@ fn validate_authoring_preconditions(
         }
     }
 
-    let charter = canonical_artifact_identity(artifacts, CanonicalArtifactKind::Charter);
-    if charter.kind != CanonicalArtifactKind::Charter {
-        return Err(AuthorCharterRefusal {
-            kind: AuthorCharterRefusalKind::ExistingCanonicalTruth,
-            summary: "unexpected canonical artifact identity for charter authoring".to_string(),
-            broken_subject: "canonical charter truth".to_string(),
-            next_safe_action:
-                "inspect canonical artifact metadata and retry `handbook author charter --from-inputs <path|->`"
-                    .to_string(),
-        });
-    }
-
-    match baseline_authoring_eligibility(artifacts, CanonicalArtifactKind::Charter) {
-        BaselineAuthoringEligibility::Authorable => {}
-        BaselineAuthoringEligibility::ExistingValidCanonicalTruth => {
+    let workspace = RepoLayoutRoot::new(repo_root).workspace();
+    match workspace.read_string(&charter_layout.canonical_target()) {
+        Ok(markdown)
+            if markdown
+                == handbook_engine::setup_starter_template(CanonicalArtifactKind::Charter) => {}
+        Ok(markdown) if super::charter::validate_charter_markdown(&markdown).is_err() => {}
+        Ok(_) => {
             return Err(AuthorCharterRefusal {
                 kind: AuthorCharterRefusalKind::ExistingCanonicalTruth,
                 summary:
@@ -124,7 +115,12 @@ fn validate_authoring_preconditions(
                 ),
             });
         }
-        BaselineAuthoringEligibility::RequiresSetupRefresh => {
+        Err(RepoRelativeFileAccessError::Missing(_)) => {}
+        Err(
+            RepoRelativeFileAccessError::SymlinkNotAllowed(_)
+            | RepoRelativeFileAccessError::NotRegularFile(_)
+            | RepoRelativeFileAccessError::ReadFailure { .. },
+        ) => {
             return Err(AuthorCharterRefusal {
                 kind: AuthorCharterRefusalKind::MutationRefused,
                 summary:

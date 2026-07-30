@@ -1,0 +1,197 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260730T034242Z--HCM-2-4--p6-implementation-standards-review",
+  "created_at_utc": "2026-07-30T03:42:42Z",
+  "source_handoff_ids": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "parent_orchestration_id": "20260729T222320Z--HCM-2-4--p6-selector-entry-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-aggregate-flow-cleanup",
+  "subject_fingerprint": "sha256:643537b4070f3405e75311abd5843de98112c9c844543e7a5284208a8d8cbde9",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p6-implementation-proof-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-29T22:24:20Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+        "packet_ids": [
+          "P6-aggregate-flow-cleanup"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md#trigger-and-earned-entry-authority"
+      }
+    ],
+    "fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:217df4ed7d6129aa11d1df35872064d5e54d2a6c71f4e1f70fe61d32d6f98f89",
+    "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+    "outcome_registry_fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6",
+    "review_stage": "proof",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "proof"
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": "20260730T034241Z--HCM-2-4--p6-implementation-specification-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p6-implementation-proof-convergence-1",
+    "completed_at_utc": "2026-07-30T03:42:40Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "both focused and complete pipeline-handoff targets; affected provenance wall; all selected P6 and preservation targets; cargo test --workspace",
+        "evidence_ref": "parent terminal output: focused compiler 1/1 and pipeline 1/1; complete compiler 8/8 and pipeline 10/10; affected manifest/freshness/capture/refusal consumers GREEN; full workspace exit 0 in 868.3 seconds"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "recursive bridge/fixed-authority absence scans plus changed-path and fixture inventory",
+        "evidence_ref": "parent terminal output: both bridge IDs, four bridge types, rendered_projection_for_path, fixed sibling loaders, load_with_contract_selection, descriptor_for_layout, fixed order constant, and both path switches absent; zero fixture/Cargo/definition/profile/schema changes; all implementation paths inside selector plus reviewed two-test amendment"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted 27-entry repo-path-NUL-SHA256-newline implementation manifest",
+        "evidence_ref": "subject_manifest below: sha256:643537b4070f3405e75311abd5843de98112c9c844543e7a5284208a8d8cbde9"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check and strict five-crate Clippy across all targets/features",
+        "evidence_ref": "parent terminal output: both exit 0; engine, compiler, flow, CLI, and pipeline checks GREEN with -D warnings"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output: exit 0 after complete proof wall"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/cli/tests/cli_surface.rs", "sha256": "8dd300ed46195f138b27766038cbdff81a03b554203c8d4a8b5035ea511da0ee"},
+      {"path": "crates/cli/tests/pipeline_handoff_refusals.rs", "sha256": "36ccea1f25728720ffefd8a72a0b9b98baefca52afa33324dbed3018c5fb84c3"},
+      {"path": "crates/compiler/src/author/charter_shell.rs", "sha256": "ceda7415fd9f692e51789e01cadb895f5a7f2b1f78c7b954d5eb33e0d8b8198f"},
+      {"path": "crates/compiler/src/author/mod.rs", "sha256": "72c6b81be994f1a09899d901c69bb2eb33e7ccbf6a96ea51d99c6878a3a11948"},
+      {"path": "crates/compiler/src/layout.rs", "sha256": "b9b28a643b26e604593125befd4be44d21bcefaeb7af8f1825d5005d144d0b44"},
+      {"path": "crates/compiler/tests/artifact_manifest_interface.rs", "sha256": "4bc38cc2b19e5ffe1a52a3c6dccc43ea4031518d08f730c814b2a87b9c779ed6"},
+      {"path": "crates/compiler/tests/canonical_artifacts_ingest.rs", "sha256": "cf1e8c317743443966222bee187ab4ef46eef709592258a952e7acc349bff097"},
+      {"path": "crates/compiler/tests/freshness_computation.rs", "sha256": "bd22770fc840c68c7c65c995d913024d78e28dd9819e6bbf906ab02b5ae3b01d"},
+      {"path": "crates/compiler/tests/pipeline_handoff.rs", "sha256": "3a6341f6b7e00566f962507dd18ddd2e4a542182b9742f9a2e6c670cb6b3874f"},
+      {"path": "crates/compiler/tests/refusal_mapping.rs", "sha256": "fd7d41952169decbe73f3bba66115d68489c4059e1a2b388423910aff3a645d0"},
+      {"path": "crates/engine/src/artifact_manifest.rs", "sha256": "4236a9c3af793dd373755a1cd7a8abc8f18cb9600a44a232cfb770be48b9d5e8"},
+      {"path": "crates/engine/src/baseline_validation.rs", "sha256": "e166eb6e7e80a839963e050fb2a15a6f32dedde60bd56df6ead3326303f05578"},
+      {"path": "crates/engine/src/canonical_artifacts.rs", "sha256": "e8be046b1e9e57399b39f5166921f1873620e278f15762c2b83489a1c70fe9fc"},
+      {"path": "crates/engine/src/canonical_paths.rs", "sha256": "bfa34ed90ddd8df05260f8d919edeef548061562841910d187850bdd1dcc8c9f"},
+      {"path": "crates/engine/src/freshness.rs", "sha256": "ec2a11f19e88070d12fd8076f305e5673f793ffbdfc607a31a178a9756a36984"},
+      {"path": "crates/engine/tests/artifact_manifest_interface.rs", "sha256": "4bc38cc2b19e5ffe1a52a3c6dccc43ea4031518d08f730c814b2a87b9c779ed6"},
+      {"path": "crates/engine/tests/baseline_validation.rs", "sha256": "28a44fd95dc870332d357c604c570916f4a314d9d581de41fc2958bc456e0d30"},
+      {"path": "crates/engine/tests/canonical_artifacts_ingest.rs", "sha256": "cf1e8c317743443966222bee187ab4ef46eef709592258a952e7acc349bff097"},
+      {"path": "crates/engine/tests/freshness_computation.rs", "sha256": "bd22770fc840c68c7c65c995d913024d78e28dd9819e6bbf906ab02b5ae3b01d"},
+      {"path": "crates/engine/tests/hcm_2_1_project_context.rs", "sha256": "9618884a52e2378bcbddc1f550b1842849722e495391d7cc57b8bd86680bdccc"},
+      {"path": "crates/flow/src/resolver.rs", "sha256": "c169f319ca9ffd8f060b12f16819b8840a9cd4d5257f65dd02d5b48a9e3a4f80"},
+      {"path": "crates/flow/tests/budget_domains.rs", "sha256": "43cf66b9983bd15345eafdaffaa912073a50c5e810766902604ea0a7195cc7ee"},
+      {"path": "crates/flow/tests/resolver_core.rs", "sha256": "5a97b2ac6563ae8f0501edba73b1117653fbee392ae26900a92032208e99a397"},
+      {"path": "crates/pipeline/tests/pipeline_handoff.rs", "sha256": "7c96be7f1727ae345b4f35f6bbbba203c5ed485cf6370726d70fb716ea231fbc"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T021416Z--HCM-2-4--p6-pipeline-handoff-selector-amendment-review.json", "sha256": "d463f96c0deeea7b3ed8aa7d1df178a2c0dbd4b0e60769ecd1ac597bec86ae42"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T025942Z--HCM-2-4--p6-pipeline-handoff-selector-amendment-closure-review.json", "sha256": "f1ceece7202fd74f1e89ad4defe35b9e7d794e3fd5d4e7fd819cc02df80c215e"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-pipeline-handoff-provenance-test-selector-amendment.md", "sha256": "651b1db85e853d14e6f3d1f674b30479557fbd2ab97f57a5d481f37fd9c707e5"}
+    ],
+    "aggregate_fingerprint": "sha256:643537b4070f3405e75311abd5843de98112c9c844543e7a5284208a8d8cbde9"
+  },
+  "active_resolution": {
+    "level": "proof",
+    "scope_horizon": "complete HCM-2.4 P6 implementation subject and proof wall",
+    "detail_resolution": "implementation, Rust-quality, and regression-strength lens over descriptor-selected aggregate flow",
+    "temporal_horizon": "post-implementation, post-workspace convergence, pre-control-pack closeout",
+    "authority_horizon": "P6 only; P7 remains eligible but unselected and Phase 2/HCM-3.x/task-gate runtime/push/release remain unauthorized",
+    "memory_horizon": "reviewed selector, P6 RED/GREEN implementation, paired amendment discovery/closure, exact absence scans, preservation wall, and full workspace result",
+    "validation_horizon": "same-fingerprint discovery burst, any required remediation/closure, control-pack correction, primary commit, and mechanical true-stop handoff"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md", "sections": ["entire selector"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-pipeline-handoff-provenance-test-selector-amendment.md", "sections": ["entire expanded additive amendment"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md", "sections": ["P6 — Aggregate flow and fixed-selector deletion", "Exact implementation surface selectors", "Explicit non-goals and authority stops"]},
+    {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sections": ["Artifact instance descriptor contract", "Canonical truth, views, and evidence", "Environment Context and task gate policy"]},
+    {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sections": ["Greenfield deletion gates", "HCM-2.4 current evidence boundary"]},
+    {"path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md", "sections": ["Review priority rubric", "Priority decision matrix"]}
+  ],
+  "repo_truth": "At HEAD 78433acbbb34f672d2eaa590d39fd41703999182, the uncommitted 27-path P6 subject replaces mixed fixed/bridge aggregation with one descriptor-selected CanonicalArtifacts collection, retains exact source bytes and distinct rendered fingerprints, dispatches only the three authorized fixed renderers, preserves Charter/Project/Environment policy and packet/budget/provenance behavior, and removes the exact bridge/fixed authority inventory. Both post-emission missing-to-present handoff tests and the existing-byte snapshot test are GREEN. Full workspace, strict five-crate Clippy, formatting, whitespace, fixture immutability, and recursive absence scans are GREEN. Protected user-owned paths remain outside the subject.",
+  "allowed_scope": [
+    "Review the exact 27-entry subject against the complete original selector and expanded two-test amendment with an implementation/standards lens.",
+    "Inspect Rust ownership, identity propagation, collection ordering, renderer dispatch, fallback behavior, error/refusal precedence, and source/render fingerprint separation for correctness and simplicity.",
+    "Verify tests are durable behavior proofs rather than bridge-shaped assertions, including both post-emission provenance transitions and the retained existing-byte snapshot test.",
+    "Check for hidden dual reads, fixed-path influence, inferred filenames, generic renderer execution, weakened negatives, dead compatibility paths, unsafe changes, or scope beyond the subject.",
+    "Verify the complete proof wall genuinely exercises the changed call paths and no fixture or protected path is part of the subject."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, push, write control-pack updates, handoff, ledger, or another dispatch, or delegate.",
+    "Do not authorize generic configured renderer execution, public APIs, commands, dependencies, Cargo/version, modules, schemas, definitions, profiles, fixtures, compatibility layers, P7, Phase 2, HCM-3.x, task-gate runtime, release, or unrelated cleanup.",
+    "Do not include or modify protected user-owned paths."
+  ],
+  "tasks": [
+    "Replay the complete subject manifest, causal stage/budget/outcome lineage, original selector, amendment closure, and convergence evidence.",
+    "Review the production delta line-by-line across correctness, readability, architecture, security, and performance, tracing direct consumers and refusal/error paths.",
+    "Review tests first for discriminator strength and preserved semantics, then verify the implementation satisfies them without compatibility or fixed-authority residue.",
+    "Return findings first in P1, P2, P3, P4 order with exact path/line, violated contract, reason, smallest remediation, and missing proof; separately dispose every P3/P4 advisory."
+  ],
+  "contracts_and_gates": [
+    "The complete original P6 selector plus reviewed additive amendment is the closed implementation ceiling",
+    "One descriptor-selected CanonicalArtifacts collection is the sole normal-path authority",
+    "Only the three exact existing first-party fixed renderers may dispatch",
+    "Charter committed authority, Project Context legacy non-influence, Environment Context advisory behavior, and all packet/budget/provenance semantics remain unchanged",
+    "Exact recursive deletion gates and all preservation/workspace walls remain GREEN",
+    "P7 is eligible only after P6 acceptance and remains unselected; broader program authority remains closed"
+  ],
+  "stop_conditions": [
+    "Return blocked if any subject hash, causal linkage, authority reference, or proof evidence cannot be established.",
+    "Report rather than repair any finding.",
+    "Stop on a P1/P2, widened renderer/policy/path/API/fixture scope, weakened durable negative, or any unauthorized P7/Phase 2/HCM-3.x/runtime/push/release implication."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}

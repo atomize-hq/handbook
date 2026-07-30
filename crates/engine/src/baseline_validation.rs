@@ -1,6 +1,6 @@
 use crate::canonical_artifacts::{
-    canonical_artifact_descriptors, ArtifactIngestIssueKind, ArtifactPresence, CanonicalArtifact,
-    CanonicalArtifactDescriptor, CanonicalArtifactKind, CanonicalArtifacts,
+    ArtifactIngestIssueKind, ArtifactPresence, CanonicalArtifact, CanonicalArtifactKind,
+    CanonicalArtifacts,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -28,12 +28,11 @@ pub fn baseline_artifact_validations<F>(
 where
     F: Fn(CanonicalArtifactKind, &str) -> Result<(), String> + Copy,
 {
-    canonical_artifact_descriptors()
+    artifacts
+        .artifacts
         .iter()
-        .filter(|descriptor| descriptor.baseline_required)
-        .map(|descriptor| {
-            validation_for_descriptor(artifacts, descriptor, validate_artifact_markdown)
-        })
+        .filter(|artifact| artifact.identity.baseline_required)
+        .map(|artifact| validation_for_descriptor(artifacts, artifact, validate_artifact_markdown))
         .collect()
 }
 
@@ -45,12 +44,9 @@ pub fn baseline_artifact_validation<F>(
 where
     F: Fn(CanonicalArtifactKind, &str) -> Result<(), String> + Copy,
 {
-    canonical_artifact_descriptors()
-        .iter()
-        .find(|descriptor| descriptor.baseline_required && descriptor.kind == kind)
-        .map(|descriptor| {
-            validation_for_descriptor(artifacts, descriptor, validate_artifact_markdown)
-        })
+    canonical_artifact(artifacts, kind)
+        .filter(|artifact| artifact.identity.baseline_required)
+        .map(|artifact| validation_for_descriptor(artifacts, artifact, validate_artifact_markdown))
 }
 
 pub fn baseline_artifact_validation_for_path<'a>(
@@ -64,31 +60,28 @@ pub fn baseline_artifact_validation_for_path<'a>(
 
 fn validation_for_descriptor<F>(
     artifacts: &CanonicalArtifacts,
-    descriptor: &CanonicalArtifactDescriptor,
+    artifact: &CanonicalArtifact,
     validate_artifact_markdown: F,
 ) -> BaselineArtifactValidation
 where
     F: Fn(CanonicalArtifactKind, &str) -> Result<(), String> + Copy,
 {
-    let artifact = canonical_artifact(artifacts, descriptor.kind);
     BaselineArtifactValidation {
-        kind: descriptor.kind,
+        kind: artifact.identity.kind,
         canonical_repo_relative_path: artifact.identity.relative_path.clone(),
         packet_required: artifact.identity.packet_required,
-        verdict: verdict_for_descriptor(artifacts, descriptor, validate_artifact_markdown),
+        verdict: verdict_for_descriptor(artifacts, artifact, validate_artifact_markdown),
     }
 }
 
 fn verdict_for_descriptor<F>(
     artifacts: &CanonicalArtifacts,
-    descriptor: &CanonicalArtifactDescriptor,
+    artifact: &CanonicalArtifact,
     validate_artifact_markdown: F,
 ) -> BaselineArtifactVerdict
 where
     F: Fn(CanonicalArtifactKind, &str) -> Result<(), String> + Copy,
 {
-    let artifact = canonical_artifact(artifacts, descriptor.kind);
-
     if has_ingest_issue_for_artifact(artifacts, artifact) {
         return BaselineArtifactVerdict::IngestInvalid;
     }
@@ -141,13 +134,9 @@ fn has_ingest_issue_for_artifact(
 fn canonical_artifact(
     artifacts: &CanonicalArtifacts,
     kind: CanonicalArtifactKind,
-) -> &CanonicalArtifact {
-    match kind {
-        CanonicalArtifactKind::Charter => &artifacts.charter,
-        CanonicalArtifactKind::ProjectContext => &artifacts.project_context,
-        CanonicalArtifactKind::EnvironmentContext => {
-            panic!("Environment Context is validated from selected canonical YAML")
-        }
-        CanonicalArtifactKind::FeatureSpec => &artifacts.feature_spec,
-    }
+) -> Option<&CanonicalArtifact> {
+    artifacts
+        .artifacts
+        .iter()
+        .find(|artifact| artifact.identity.kind == kind)
 }

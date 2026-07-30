@@ -7,11 +7,13 @@ review-clean, and locally committed at implementation commit
 review-clean and committed; the P4/P5 token prerequisite is accepted at
 `00dde0162fcb15576c83b6ed40ab7286488d0890`, P4's separate five-part
 negative-surface/path proof is review-clean and GREEN, and P5 remains accepted.
-P6 is explicitly selected and entry-authorized for a later implementation
-session by `decision/20260729-p6-aggregate-flow-cleanup-selector.md`, but its
-implementation is unstarted. P7 remains blocked; HCM-2.4 completion and Phase 2
-exit remain unearned. Future task-gate runtime remains deferred; P2S/P2A/Option C
-are historical evidence only under the 2026-07-28 greenfield decision.
+P6 is implemented, independently review-clean, and accepted at reviewed subject
+`sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38`.
+The descriptor-selected artifact flow now owns aggregate collection and both
+bridge/fixed authority paths are removed. P7 is eligible but remains unselected
+and unstarted; HCM-2.4 completion and Phase 2 exit remain unearned. Future
+task-gate runtime remains deferred; P2S/P2A/Option C are historical evidence
+only under the 2026-07-28 greenfield decision.
 
 Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
 
@@ -44,18 +46,17 @@ end:
 - every selected artifact has exactly one editable canonical YAML source;
 - every pre-Phase-3 Markdown output is a derived human-review view only and is
   never an input to Resolution;
-- the two temporary flow bridges and all fixed-family/path selection logic are
-  removed after their replacements are proven; and
+- the two temporary flow bridges and all normal-path fixed-family/path
+  selection logic are removed, with their replacements proven; and
 - the exact Phase 2 exit proofs are replayed without weakening the completed
   Charter, Project Context, or HCM-2.3 registry-brief authority.
 
-This document freezes implementation packets and proof obligations. The
-current selection additionally authorizes only the later P6 implementation
-boundary frozen in
-`decision/20260729-p6-aggregate-flow-cleanup-selector.md`. It does not authorize
-implementation in this selector session, future task-gate runtime, P7, Phase 2
-exit, HCM-3.x, native/hardware/trust/evidence infrastructure, dependencies,
-Cargo changes, or another slice.
+This document freezes implementation packets and proof obligations. P6 has
+completed within the boundary frozen in
+`decision/20260729-p6-aggregate-flow-cleanup-selector.md`; its accepted subject
+does not authorize future task-gate runtime, P7, Phase 2 exit, HCM-3.x,
+native/hardware/trust/evidence infrastructure, dependencies, Cargo changes, or
+another slice.
 
 ## Authority and preserved decisions
 
@@ -293,13 +294,13 @@ package boundary.
 
 | Legacy surface | Disposition | Replacement proof required before deletion |
 | --- | --- | --- |
-| `BR-HCM-2-PILOT-FLOW-01` and `ProjectContextFlowBridge` | Delete in P6 | Project Context is selected, retained, validated, and rendered through the same generic selected-artifact path as other shipped kinds; no Project Context Markdown influence |
-| `BR-HCM-2-CHARTER-FLOW-01` and `CharterFlowBridge` | Delete in P6 | Common path preserves committed Charter observation, candidate/result separation, fingerprint, authority evidence, and HCM-2.2 regressions |
-| `rendered_projection_for_path` | Delete, not rename | Renderer selection is by admitted instance/kind renderer refs, never fixed path; packet and fixture consumers replay exact semantics |
-| `CanonicalArtifactKind`, `CANONICAL_ARTIFACT_ORDER`, `CanonicalArtifactDescriptor`, fixed `CanonicalArtifacts` fields | Remove or reduce to non-authoritative compatibility types in P6 | Every flow-consumed shipped instance is enumerated from admitted profile/descriptor selection; no fixed enum determines authority |
-| `CanonicalLayoutContract` fixed Charter/Context/Feature Spec fields plus the temporary fixed Environment Context branch in its artifact switch, and both engine/compiler `canonical_artifact_relative_path` switches | Remove fixed-family/path selection in P6 | All canonical paths come from admitted descriptors, including Environment Context; root discovery and safe-path rules remain |
-| `load_fixed_siblings[_with_contract]`, `load_with_contract_selection`, `descriptor_for_layout`, `descriptor_for` | Delete in P6 | Generic selected-instance loader has retained bytes, exact source identity, bounded reads, no-follow semantics, duplicate rejection, and stable ordering |
-| `validate_artifact_markdown`, `baseline_artifact_validations`, fixed `packet_artifact_plans_for`, `present_fixture_sources_for`, and `canonical_artifact_kind_priority` branches | Rewrite/delete in P6 | Validation, packet inclusion, fixture source reporting, ordering, and budget targeting operate on selected instance identities and derived renderer outputs |
+| `BR-HCM-2-PILOT-FLOW-01` and `ProjectContextFlowBridge` | Removed in accepted P6 | Project Context is selected, retained, validated, and rendered through the same descriptor-selected artifact path as other shipped kinds; no Project Context Markdown influence |
+| `BR-HCM-2-CHARTER-FLOW-01` and `CharterFlowBridge` | Removed in accepted P6 | Common path preserves committed Charter observation, candidate/result separation, fingerprint, authority evidence, and HCM-2.2 regressions |
+| `rendered_projection_for_path` | Removed, not renamed, in accepted P6 | Renderer selection is by admitted instance/kind renderer refs, never fixed path; packet and fixture consumers replay exact semantics |
+| `CanonicalArtifactKind`, `CANONICAL_ARTIFACT_ORDER`, `CanonicalArtifactDescriptor`, fixed `CanonicalArtifacts` fields | Normal-path fixed authority removed in accepted P6 | Every flow-consumed shipped instance is enumerated from admitted profile/descriptor selection; no fixed enum determines authority |
+| `CanonicalLayoutContract` fixed Charter/Context/Feature Spec fields plus the temporary fixed Environment Context branch in its artifact switch, and both engine/compiler `canonical_artifact_relative_path` switches | Fixed-family/path selection removed in accepted P6 | All canonical paths come from admitted descriptors, including Environment Context; root discovery and safe-path rules remain |
+| `load_fixed_siblings[_with_contract]`, `load_with_contract_selection`, `descriptor_for_layout`, `descriptor_for` | Removed in accepted P6 | Generic selected-instance loader has retained bytes, exact source identity, bounded reads, no-follow semantics, duplicate rejection, and stable ordering |
+| `validate_artifact_markdown`, `baseline_artifact_validations`, fixed `packet_artifact_plans_for`, `present_fixture_sources_for`, and `canonical_artifact_kind_priority` branches | Fixed-authority branches rewritten/deleted in accepted P6 | Validation, packet inclusion, fixture source reporting, ordering, and budget targeting operate on selected instance identities and derived renderer outputs |
 | Environment Inventory input-to-Markdown author path in `crates/engine/src/author/environment_inventory_core.rs`, `crates/compiler/src/author/environment_inventory.rs`, CLI writer, templates, and directive | Replace/delete in P2 | Structured input emits canonical Environment Context YAML; schema validation and deterministic renderer equivalence pass; legacy Markdown cannot influence flow |
 | `core/library/environment_inventory/ENVIRONMENT_INVENTORY.md.tmpl` and Markdown-authority directive | Delete in P2 | Canonical YAML template/intake or schema-guided authoring covers the selected instance |
 | `FEATURE_SPEC_ARTIFACT_PATH`, heading parser, Markdown capture validator, fixed provenance fields, fixed handoff reads, Feature Spec template/directive assumptions | Replace in P3 | Stage 10 persists schema-valid canonical Work Specification YAML, derives the fixed view, and binds provenance/handoff decisions to YAML |
@@ -578,12 +579,15 @@ tests. Preserve packet order, budget outcomes, source summaries, fixture
 semantics, Charter authority, Project Context behavior, and registry-brief
 proof. This is the HIGH-risk flow choke point and must be one focused packet.
 
-P6 is now selected and entry-authorized for a fresh later implementation
-session by `decision/20260729-p6-aggregate-flow-cleanup-selector.md`. That
-selector freezes the exact owner, production/test manifest, live bridge/fixed
-inventory, refreshed impact ledger, required RED, preservation wall, atomicity,
-ancillary allowance, stops, and resume condition. No P6 implementation has
-started.
+P6 is implemented and accepted under
+`decision/20260729-p6-aggregate-flow-cleanup-selector.md`. The exact owner,
+production/test manifest plus the bounded provenance-test and bounded-read
+Clippy amendments, live bridge/fixed inventory, required RED, preservation
+wall, atomicity, and stops were satisfied. The final different-fresh closure
+review is CLEAN at
+`handoffs/dispatches/20260730T155751Z--HCM-2-4--p6-final-implementation-closure-review.json`
+for reviewed subject
+`sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38`.
 
 ### P7 — Phase 2 exit proof and control-pack closeout
 
@@ -591,11 +595,11 @@ Run the complete proof wall, prove every Phase 2 exit row, update only earned
 gate/bridge rows, perform the declared review flow, and produce the separate
 implementation handoff/ledger closeout. P7 may not begin HCM-3.x.
 
-The current parent may perform only the P6 selector/entry-authority subject and
-its true-stop closeout. It must preserve the open Phase 2 exit rows and both
-bridge IDs, cite P2's bounded greenfield result and deferred task-gate runtime
-plus P4's GREEN negative-surface proof, and must not represent selection as P6
-implementation, P7, or slice completion.
+P6 acceptance satisfies P7's entry prerequisite, so P7 is eligible. P7 remains
+unselected and unstarted: the current parent may perform only the P6 true-stop
+closeout, must preserve open Phase 2 exit rows, cite P2's bounded greenfield
+result and deferred task-gate runtime plus P4's GREEN negative-surface proof,
+and must not represent P6 acceptance as P7 or slice completion.
 
 ## Exact implementation surface selectors
 

@@ -272,15 +272,14 @@ fn cmp_subject(a: &SubjectRef, b: &SubjectRef) -> Ordering {
     match (a, b) {
         (
             SubjectRef::CanonicalArtifact {
-                kind: kind_a,
                 canonical_repo_relative_path: path_a,
+                ..
             },
             SubjectRef::CanonicalArtifact {
-                kind: kind_b,
                 canonical_repo_relative_path: path_b,
+                ..
             },
-        ) => (canonical_artifact_kind_priority(*kind_a), path_a)
-            .cmp(&(canonical_artifact_kind_priority(*kind_b), path_b)),
+        ) => path_a.cmp(path_b),
         (
             SubjectRef::InheritedDependency {
                 dependency_id: id_a,
@@ -303,14 +302,5 @@ fn subject_kind_priority(subject: &SubjectRef) -> u8 {
         SubjectRef::CanonicalArtifact { .. } => 0,
         SubjectRef::InheritedDependency { .. } => 1,
         SubjectRef::Policy { .. } => 2,
-    }
-}
-
-fn canonical_artifact_kind_priority(kind: CanonicalArtifactKind) -> u8 {
-    match kind {
-        CanonicalArtifactKind::Charter => 0,
-        CanonicalArtifactKind::ProjectContext => 1,
-        CanonicalArtifactKind::EnvironmentContext => 2,
-        CanonicalArtifactKind::FeatureSpec => 3,
     }
 }

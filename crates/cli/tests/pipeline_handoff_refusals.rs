@@ -374,7 +374,7 @@ fn inspect_ignores_non_system_handoff_and_derived_files() {
     );
     assert!(!stdout.contains(".handbook/charter/CHARTER.md"), "{stdout}");
     assert!(
-        stdout.contains(".handbook/feature_spec/FEATURE_SPEC.md"),
+        !stdout.contains(".handbook/feature_spec/FEATURE_SPEC.md"),
         "{stdout}"
     );
     assert!(

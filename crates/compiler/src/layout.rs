@@ -1,4 +1,3 @@
-use crate::canonical_artifacts::CanonicalArtifactKind;
 use crate::repo_file_access::{CompilerWorkspace, NormalizedRepoRelativePath};
 use std::path::Path;
 
@@ -7,23 +6,11 @@ pub(crate) const SYSTEM_ROOT_RELATIVE: &str = ".handbook";
 pub(crate) const CANONICAL_CHARTER_RELATIVE_PATH: &str = ".handbook/charter/CHARTER.md";
 pub(crate) const CANONICAL_PROJECT_CONTEXT_RELATIVE_PATH: &str =
     ".handbook/project_context/PROJECT_CONTEXT.md";
-pub(crate) const CANONICAL_FEATURE_SPEC_RELATIVE_PATH: &str =
-    "artifacts/work-specification/work-specification.yaml";
-
 #[allow(dead_code)]
 const AUTHORING_LOCK_ROOT_RELATIVE: &str = ".handbook/state/authoring";
 const CHARTER_AUTHORING_LOCK_RELATIVE_PATH: &str = ".handbook/state/authoring/charter.lock";
 const PROJECT_CONTEXT_AUTHORING_LOCK_RELATIVE_PATH: &str =
     ".handbook/state/authoring/project_context.lock";
-
-pub(crate) fn canonical_artifact_relative_path(kind: CanonicalArtifactKind) -> &'static str {
-    match kind {
-        CanonicalArtifactKind::Charter => CANONICAL_CHARTER_RELATIVE_PATH,
-        CanonicalArtifactKind::ProjectContext => CANONICAL_PROJECT_CONTEXT_RELATIVE_PATH,
-        CanonicalArtifactKind::EnvironmentContext => ".handbook/project/environment.yaml",
-        CanonicalArtifactKind::FeatureSpec => CANONICAL_FEATURE_SPEC_RELATIVE_PATH,
-    }
-}
 
 #[derive(Clone, Copy, Debug)]
 pub(crate) struct RepoLayoutRoot<'a> {
@@ -37,45 +24,12 @@ impl<'a> RepoLayoutRoot<'a> {
         }
     }
 
-    pub(crate) fn canonical(self) -> CanonicalLayout<'a> {
-        CanonicalLayout { repo_root: self }
-    }
-
     pub(crate) fn authoring(self) -> AuthoringLayout<'a> {
         AuthoringLayout { repo_root: self }
     }
 
     pub(crate) fn workspace(self) -> CompilerWorkspace<'a> {
         self.workspace
-    }
-}
-
-#[derive(Clone, Copy, Debug)]
-pub(crate) struct CanonicalLayout<'a> {
-    repo_root: RepoLayoutRoot<'a>,
-}
-
-impl<'a> CanonicalLayout<'a> {
-    pub(crate) fn new(repo_root: &'a Path) -> Self {
-        RepoLayoutRoot::new(repo_root).canonical()
-    }
-
-    pub(crate) fn workspace(self) -> CompilerWorkspace<'a> {
-        self.repo_root.workspace()
-    }
-
-    pub(crate) fn system_root_relative(self) -> &'static str {
-        SYSTEM_ROOT_RELATIVE
-    }
-
-    pub(crate) fn artifact_relative_path(self, kind: CanonicalArtifactKind) -> &'static str {
-        canonical_artifact_relative_path(kind)
-    }
-
-    pub(crate) fn artifact_path(self, kind: CanonicalArtifactKind) -> NormalizedRepoRelativePath {
-        self.workspace()
-            .normalize_repo_relative(self.artifact_relative_path(kind))
-            .expect("canonical artifact path should stay repo-relative")
     }
 }
 
@@ -104,7 +58,7 @@ impl<'a> AuthoringLayout<'a> {
     pub(crate) fn charter(self) -> AuthoringArtifactLayout<'a> {
         AuthoringArtifactLayout {
             authoring: self,
-            kind: CanonicalArtifactKind::Charter,
+            canonical_target_relative_path: CANONICAL_CHARTER_RELATIVE_PATH,
             lock_relative_path: CHARTER_AUTHORING_LOCK_RELATIVE_PATH,
         }
     }
@@ -112,7 +66,7 @@ impl<'a> AuthoringLayout<'a> {
     pub(crate) fn project_context(self) -> AuthoringArtifactLayout<'a> {
         AuthoringArtifactLayout {
             authoring: self,
-            kind: CanonicalArtifactKind::ProjectContext,
+            canonical_target_relative_path: CANONICAL_PROJECT_CONTEXT_RELATIVE_PATH,
             lock_relative_path: PROJECT_CONTEXT_AUTHORING_LOCK_RELATIVE_PATH,
         }
     }
@@ -121,23 +75,20 @@ impl<'a> AuthoringLayout<'a> {
 #[derive(Clone, Copy, Debug)]
 pub(crate) struct AuthoringArtifactLayout<'a> {
     authoring: AuthoringLayout<'a>,
-    kind: CanonicalArtifactKind,
+    canonical_target_relative_path: &'static str,
     lock_relative_path: &'static str,
 }
 
 impl<'a> AuthoringArtifactLayout<'a> {
     pub(crate) fn canonical_target_relative(self) -> &'static str {
-        self.authoring
-            .repo_root
-            .canonical()
-            .artifact_relative_path(self.kind)
+        self.canonical_target_relative_path
     }
 
     pub(crate) fn canonical_target(self) -> NormalizedRepoRelativePath {
         self.authoring
-            .repo_root
-            .canonical()
-            .artifact_path(self.kind)
+            .workspace()
+            .normalize_repo_relative(self.canonical_target_relative_path)
+            .expect("authoring target should stay repo-relative")
     }
 
     pub(crate) fn lock_relative_path(self) -> &'static str {

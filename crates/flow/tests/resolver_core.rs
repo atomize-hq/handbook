@@ -1,9 +1,4 @@
 use handbook_engine::CanonicalArtifactKind;
-#[cfg(unix)]
-use handbook_engine::{
-    parse_canonical_project_context, render_project_context_markdown,
-    resolve_shipped_profile_decisions,
-};
 use handbook_flow::{
     resolve, resolve_with_contract, PacketSelectionStatus, ResolveRequest, ResolverNextSafeAction,
     ResolverRefusalCategory, ResolverSubjectRef,
@@ -119,11 +114,6 @@ fn non_default_contract() -> handbook_engine::CanonicalLayoutContract {
     )
 }
 
-#[cfg(unix)]
-fn custom_handbook_path(relative: &str) -> std::path::PathBuf {
-    std::path::PathBuf::from(".custom_handbook").join(relative)
-}
-
 #[test]
 fn flow_resolver_blocks_missing_system_root_with_typed_refusal() {
     let dir = tempfile::tempdir().expect("tempdir");
@@ -214,18 +204,18 @@ fn selected_project_context_alone_establishes_the_canonical_root() {
 
     assert_eq!(
         refusal.category,
-        ResolverRefusalCategory::RequiredArtifactMissing
+        ResolverRefusalCategory::RequiredArtifactInvalid
     );
     assert_eq!(
         refusal.broken_subject,
         ResolverSubjectRef::CanonicalArtifact {
             kind: CanonicalArtifactKind::Charter,
-            canonical_repo_relative_path: ".handbook/charter/CHARTER.md".to_owned(),
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
     assert_eq!(
         refusal.next_safe_action,
-        ResolverNextSafeAction::RunSetupRefresh
+        ResolverNextSafeAction::RunAuthorCharter
     );
     assert!(result
         .decision_log_entries
@@ -264,17 +254,10 @@ fn flow_resolver_builds_ready_planning_packet_body() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
     write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature spec body",
+        &root.join(".handbook/project/environment.yaml"),
+        valid_environment_context_yaml().as_bytes(),
     );
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
@@ -286,7 +269,10 @@ fn flow_resolver_builds_ready_planning_packet_body() {
     assert_eq!(result.packet_result.sections.len(), 3);
     assert_eq!(result.packet_result.sections[0].title, "CHARTER");
     assert_eq!(result.packet_result.sections[1].title, "PROJECT_CONTEXT");
-    assert_eq!(result.packet_result.sections[2].title, "FEATURE_SPEC");
+    assert_eq!(
+        result.packet_result.sections[2].title,
+        "ENVIRONMENT_CONTEXT"
+    );
     assert_eq!(
         result.packet_result.sections[1].canonical_repo_relative_path,
         ".handbook/project/context.yaml"
@@ -300,12 +286,11 @@ fn flow_resolver_builds_ready_planning_packet_body() {
         .starts_with("# Project Context\n"));
     assert_eq!(
         result.packet_result.sections[0].mode,
-        PacketSectionMode::Verbatim
+        PacketSectionMode::Rendered
     );
-    assert_eq!(
-        result.packet_result.sections[0].contents,
-        valid_charter_markdown()
-    );
+    assert!(result.packet_result.sections[0]
+        .contents
+        .starts_with("# Engineering Charter"));
     assert_eq!(
         result.packet_result.decision_summary.ready_next_safe_action,
         ReadyPacketNextSafeAction::InspectProof
@@ -318,21 +303,15 @@ fn flow_resolver_builds_ready_planning_packet_body_with_non_default_contract() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    std::fs::create_dir_all(root.join(".custom_handbook")).expect("custom root");
     write_file(
-        &root.join(custom_handbook_path("charter/CHARTER.md")),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(custom_handbook_path("project_context/PROJECT_CONTEXT.md")),
+        &root.join(".custom_handbook/project_context/PROJECT_CONTEXT.md"),
         b"conflicting legacy Project Context Markdown",
     );
     write_file(
-        &root.join(custom_handbook_path("feature_spec/FEATURE_SPEC.md")),
-        b"feature spec body",
+        &root.join(".handbook/project/environment.yaml"),
+        valid_environment_context_yaml().as_bytes(),
     );
 
     let result = resolve_with_contract(root, ResolveRequest::default(), non_default_contract())
@@ -343,7 +322,7 @@ fn flow_resolver_builds_ready_planning_packet_body_with_non_default_contract() {
     assert_eq!(result.packet_result.included_sources.len(), 3);
     assert_eq!(
         result.packet_result.sections[0].canonical_repo_relative_path,
-        ".custom_handbook/charter/CHARTER.md"
+        ".handbook/project/charter.yaml"
     );
     assert_eq!(
         result.packet_result.sections[1].canonical_repo_relative_path,
@@ -351,7 +330,7 @@ fn flow_resolver_builds_ready_planning_packet_body_with_non_default_contract() {
     );
     assert_eq!(
         result.packet_result.sections[2].canonical_repo_relative_path,
-        ".custom_handbook/feature_spec/FEATURE_SPEC.md"
+        ".handbook/project/environment.yaml"
     );
 }
 
@@ -361,25 +340,27 @@ fn flow_resolver_summarizes_optional_sources_when_budget_demands_it() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    let oversized_description = "x".repeat(8_192);
+    let yaml = valid_environment_context_yaml().replace(
+        "description: \"Local development.\"",
+        format!("description: \"{oversized_description}\"").as_str(),
     );
     write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
+        &root.join(".handbook/project/environment.yaml"),
+        yaml.as_bytes(),
     );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        "x".repeat(8192).as_bytes(),
-    );
+    let decisions =
+        handbook_engine::resolve_shipped_profile_decisions(root).expect("selected profile");
+    let selected = handbook_engine::load_selected_environment_context(root, &decisions)
+        .expect("selected Environment Context projection");
 
     let result = resolve(
         root,
         ResolveRequest {
             budget_policy: BudgetPolicy {
                 max_total_bytes: None,
-                max_per_artifact_bytes: Some(4096),
+                max_per_artifact_bytes: Some(selected.rendered_bytes().len() as u64 - 1),
             },
             ..ResolveRequest::default()
         },
@@ -394,15 +375,16 @@ fn flow_resolver_summarizes_optional_sources_when_budget_demands_it() {
         .packet_result
         .sections
         .iter()
-        .find(|section| section.title == "FEATURE_SPEC")
-        .expect("feature spec section");
+        .find(|section| section.title == "ENVIRONMENT_CONTEXT")
+        .expect("Environment Context section");
     assert_eq!(section.mode, PacketSectionMode::Summary);
     assert!(section
         .contents
         .contains("budget summary: full contents omitted"));
     assert!(result.packet_result.notes.iter().any(|note| {
-        note.text
-            == "optional source summarized due to budget: .handbook/feature_spec/FEATURE_SPEC.md (8192 bytes [source])"
+        note.text.starts_with(
+            "optional source summarized due to budget: .handbook/project/environment.yaml",
+        )
     }));
 }
 
@@ -414,16 +396,12 @@ fn flow_resolver_refuses_symlinked_canonical_artifact_as_non_canonical_input() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    std::fs::create_dir_all(root.join(".handbook/charter")).expect("mkdirs");
-    std::fs::create_dir_all(root.join(".handbook/feature_spec")).expect("mkdirs");
-
-    let real = root.join("real_charter.md");
-    write_file(&real, b"charter");
-    symlink(&real, root.join(".handbook/charter/CHARTER.md")).expect("symlink charter");
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"spec",
-    );
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    std::fs::remove_file(root.join(".handbook/project/charter.yaml"))
+        .expect("remove selected Charter");
+    let real = root.join("real_charter.yaml");
+    write_file(&real, HCM_2_2_SELECTED_CHARTER_YAML.as_bytes());
+    symlink(&real, root.join(".handbook/project/charter.yaml")).expect("symlink Charter");
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
 
@@ -436,7 +414,7 @@ fn flow_resolver_refuses_symlinked_canonical_artifact_as_non_canonical_input() {
         refusal.broken_subject,
         ResolverSubjectRef::CanonicalArtifact {
             kind: CanonicalArtifactKind::Charter,
-            canonical_repo_relative_path: ".handbook/charter/CHARTER.md".to_owned(),
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
     assert_eq!(
@@ -451,18 +429,7 @@ fn flow_resolver_never_opens_retired_project_context_non_regular_sentinel() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature",
-    );
-    write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
-    );
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
     std::fs::create_dir_all(root.join(".handbook/project_context/PROJECT_CONTEXT.md"))
         .expect("project_context dir");
 
@@ -491,11 +458,11 @@ fn flow_resolver_refuses_required_artifact_malformed_path_read_error() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    std::fs::create_dir_all(root.join(".handbook/charter/CHARTER.md")).expect("charter dir");
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"spec",
-    );
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    std::fs::remove_file(root.join(".handbook/project/charter.yaml"))
+        .expect("remove selected Charter");
+    std::fs::create_dir_all(root.join(".handbook/project/charter.yaml"))
+        .expect("Charter directory");
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
 
@@ -505,7 +472,7 @@ fn flow_resolver_refuses_required_artifact_malformed_path_read_error() {
         refusal.broken_subject,
         ResolverSubjectRef::CanonicalArtifact {
             kind: CanonicalArtifactKind::Charter,
-            canonical_repo_relative_path: ".handbook/charter/CHARTER.md".to_owned(),
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
     assert_eq!(
@@ -520,18 +487,7 @@ fn flow_resolver_refuses_when_budget_is_exhausted() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature spec that is longer than one byte",
-    );
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
 
     let result = resolve(
         root,
@@ -566,18 +522,8 @@ fn flow_resolver_budget_refusal_uses_non_default_contract_paths() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(custom_handbook_path("charter/CHARTER.md")),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(custom_handbook_path("feature_spec/FEATURE_SPEC.md")),
-        b"feature spec that is longer than one byte",
-    );
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    std::fs::create_dir_all(root.join(".custom_handbook")).expect("custom root");
 
     let result = resolve_with_contract(
         root,
@@ -597,7 +543,7 @@ fn flow_resolver_budget_refusal_uses_non_default_contract_paths() {
     assert_eq!(
         refusal.next_safe_action,
         ResolverNextSafeAction::ReduceCanonicalArtifactSize {
-            canonical_repo_relative_path: ".custom_handbook/charter/CHARTER.md".to_owned(),
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
 }
@@ -608,18 +554,7 @@ fn flow_resolver_refuses_live_execution_packets_without_fixture_backing() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature",
-    );
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
 
     let result = resolve(
         root,
@@ -653,18 +588,8 @@ fn flow_resolver_builds_fixture_context_for_execution_demo_packets() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path().join("tests/fixtures/execution_demo/basic");
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"demo feature body",
-    );
+    std::fs::create_dir_all(&root).expect("fixture root");
+    hcm_2_2_flow_fixture(&root, valid_charter_markdown().as_bytes());
 
     let result = resolve(
         &root,
@@ -687,7 +612,7 @@ fn flow_resolver_builds_fixture_context_for_execution_demo_packets() {
         fixture_context.fixture_basis_root,
         "tests/fixtures/execution_demo/basic/.handbook/"
     );
-    assert_eq!(fixture_context.fixture_lineage.len(), 3);
+    assert_eq!(fixture_context.fixture_lineage.len(), 2);
     assert_eq!(
         result.packet_result.decision_summary.ready_next_safe_action,
         ReadyPacketNextSafeAction::InspectProof
@@ -700,18 +625,9 @@ fn flow_resolver_builds_honest_fixture_context_for_non_default_execution_demo_co
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path().join("tests/fixtures/execution_demo/custom");
 
-    write_file(
-        &root.join(custom_handbook_path("charter/CHARTER.md")),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/project/context.yaml"),
-        valid_project_context_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(custom_handbook_path("feature_spec/FEATURE_SPEC.md")),
-        b"demo feature body",
-    );
+    std::fs::create_dir_all(&root).expect("fixture root");
+    hcm_2_2_flow_fixture(&root, valid_charter_markdown().as_bytes());
+    std::fs::create_dir_all(root.join(".custom_handbook")).expect("custom root");
 
     let result = resolve_with_contract(
         &root,
@@ -734,20 +650,10 @@ fn flow_resolver_builds_honest_fixture_context_for_non_default_execution_demo_co
         fixture_context.fixture_basis_root,
         "tests/fixtures/execution_demo/custom/.custom_handbook/"
     );
-    assert_eq!(fixture_context.fixture_lineage.len(), 3);
-    assert_eq!(
-        result.packet_result.sections[1].canonical_repo_relative_path,
-        ".handbook/project/context.yaml"
-    );
-    assert!(result
-        .packet_result
-        .sections
-        .iter()
-        .enumerate()
-        .filter(|(index, _)| *index != 1)
-        .all(|(_, section)| section
-            .canonical_repo_relative_path
-            .starts_with(".custom_handbook/")));
+    assert_eq!(fixture_context.fixture_lineage.len(), 2);
+    assert!(result.packet_result.sections.iter().all(|section| section
+        .canonical_repo_relative_path
+        .starts_with(".handbook/project/")));
 }
 
 #[cfg(all(not(unix), not(windows)))]
@@ -824,6 +730,167 @@ fn hcm_2_2_uncommitted_flow_fixture(root: &std::path::Path) {
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"feature spec body",
     );
+}
+
+#[test]
+fn descriptor_selected_flow_preserves_packet_contract_without_bridges() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    write_file(
+        &root.join(".handbook/project/environment.yaml"),
+        valid_environment_context_yaml().as_bytes(),
+    );
+    write_file(
+        &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
+        b"legacy Project Context Markdown must have zero selected influence\n",
+    );
+
+    let decisions =
+        handbook_engine::resolve_shipped_profile_decisions(root).expect("selected profile");
+    let charter = handbook_engine::load_selected_charter(root, &decisions)
+        .expect("selected Charter projection");
+    let project_context = handbook_engine::load_selected_project_context(root, &decisions)
+        .expect("selected Project Context projection");
+    let environment_context = handbook_engine::load_selected_environment_context(root, &decisions)
+        .expect("selected Environment Context projection");
+    let first = resolve(root, ResolveRequest::default()).expect("first resolve");
+
+    write_file(
+        &root.join(".handbook/charter/CHARTER.md"),
+        b"legacy Charter Markdown must have zero selected influence\n",
+    );
+    write_file(
+        &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
+        b"different legacy Project Context Markdown must still have zero influence\n",
+    );
+    let second = resolve(root, ResolveRequest::default()).expect("second resolve");
+
+    assert_eq!(
+        first, second,
+        "legacy Markdown changed selected packet truth"
+    );
+    assert_eq!(first.selection.status, PacketSelectionStatus::Selected);
+    assert!(first.refusal.is_none());
+    assert!(first.blockers.is_empty());
+    assert_eq!(
+        first
+            .packet_result
+            .included_sources
+            .iter()
+            .map(|source| source.kind)
+            .collect::<Vec<_>>(),
+        vec![
+            CanonicalArtifactKind::Charter,
+            CanonicalArtifactKind::ProjectContext,
+            CanonicalArtifactKind::EnvironmentContext,
+        ]
+    );
+    assert_eq!(
+        first
+            .packet_result
+            .included_sources
+            .iter()
+            .map(|source| source.canonical_repo_relative_path.as_str())
+            .collect::<Vec<_>>(),
+        vec![
+            charter.canonical_path(),
+            project_context.canonical_path(),
+            environment_context.canonical_path(),
+        ]
+    );
+
+    let selected = [
+        (
+            CanonicalArtifactKind::Charter,
+            charter.source_fingerprint().as_str(),
+            charter.rendered_output_fingerprint().as_str(),
+            charter.rendered_bytes(),
+        ),
+        (
+            CanonicalArtifactKind::ProjectContext,
+            project_context.source_fingerprint().as_str(),
+            project_context.rendered_output_fingerprint().as_str(),
+            project_context.rendered_bytes(),
+        ),
+        (
+            CanonicalArtifactKind::EnvironmentContext,
+            environment_context.source_fingerprint().as_str(),
+            environment_context.rendered_output_fingerprint().as_str(),
+            environment_context.rendered_bytes(),
+        ),
+    ];
+    for (kind, source_fingerprint, rendered_fingerprint, rendered_bytes) in selected {
+        assert_ne!(source_fingerprint, rendered_fingerprint);
+        let source = first
+            .packet_result
+            .included_sources
+            .iter()
+            .find(|source| source.kind == kind)
+            .expect("selected source");
+        assert_eq!(
+            source.content_sha256.as_deref(),
+            Some(
+                source_fingerprint
+                    .strip_prefix("sha256:")
+                    .expect("source fingerprint domain")
+            )
+        );
+        assert_eq!(
+            source.rendered_output_sha256.as_deref(),
+            Some(rendered_fingerprint)
+        );
+        assert_eq!(
+            source.rendered_output_byte_len,
+            Some(rendered_bytes.len() as u64)
+        );
+        assert_eq!(source.rendered_media_type.as_deref(), Some("text/markdown"));
+
+        let section = first
+            .packet_result
+            .sections
+            .iter()
+            .find(|section| section.kind == kind)
+            .expect("selected rendered section");
+        assert_eq!(section.mode, handbook_flow::PacketSectionMode::Rendered);
+        assert_eq!(section.contents.as_bytes(), rendered_bytes);
+        assert_eq!(
+            section.source_content_sha256.as_deref(),
+            Some(source_fingerprint)
+        );
+        assert_eq!(
+            section.rendered_output_sha256.as_deref(),
+            Some(rendered_fingerprint)
+        );
+    }
+
+    assert!(first.decision_log_entries.iter().all(|entry| {
+        !entry.contains("bridge=")
+            && !entry.contains(".handbook/charter/CHARTER.md")
+            && !entry.contains(".handbook/project_context/PROJECT_CONTEXT.md")
+    }));
+    assert!(first.decision_log_entries.iter().any(|entry| {
+        entry.contains("promotion_ref=promotions/")
+            && entry.contains("lifecycle_transition_ref=lifecycle-transitions/")
+    }));
+
+    write_file(
+        &root.join(".handbook/project/environment.yaml"),
+        b"schema_id: handbook.artifact.environment-context\nschema_version: '1.1'\n",
+    );
+    let invalid_advisory = resolve(root, ResolveRequest::default()).expect("advisory resolve");
+    assert!(invalid_advisory.packet_result.is_ready());
+    assert!(invalid_advisory.refusal.is_none());
+    assert!(invalid_advisory.blockers.is_empty());
+    assert!(invalid_advisory
+        .packet_result
+        .sections
+        .iter()
+        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+    assert!(invalid_advisory.packet_result.notes.iter().any(|note| {
+        note.text
+            == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
+    }));
 }
 
 #[test]
@@ -905,7 +972,7 @@ fn hcm_2_2_flow_projects_selected_charter_yaml_and_ignores_legacy_markdown() {
             && !entry.contains("legacy Charter Markdown")
     }));
     assert!(first.decision_log_entries.iter().any(|entry| {
-        entry.contains("bridge=BR-HCM-2-CHARTER-FLOW-01")
+        !entry.contains("bridge=")
             && entry.contains("promotion_ref=promotions/")
             && entry.contains("lifecycle_transition_ref=lifecycle-transitions/")
     }));
@@ -1033,6 +1100,143 @@ fn invalid_environment_context_is_reported_without_blocking_the_packet() {
         .sections
         .iter()
         .all(|section| { section.kind != CanonicalArtifactKind::EnvironmentContext }));
+    assert!(result.packet_result.notes.iter().any(|note| {
+        note.text
+            == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
+    }));
+}
+
+#[cfg(unix)]
+#[test]
+fn symlinked_environment_context_is_reported_without_blocking_the_packet() {
+    use std::os::unix::fs::symlink;
+
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    let source = root.join("environment-source.yaml");
+    write_file(&source, valid_environment_context_yaml().as_bytes());
+    symlink(&source, root.join(".handbook/project/environment.yaml"))
+        .expect("symlink Environment Context");
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+
+    assert!(result.packet_result.is_ready());
+    assert!(result.refusal.is_none());
+    assert!(result.blockers.is_empty());
+    assert!(result
+        .packet_result
+        .sections
+        .iter()
+        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+    assert!(result.packet_result.notes.iter().any(|note| {
+        note.text
+            == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
+    }));
+}
+
+#[test]
+fn non_regular_environment_context_is_reported_without_blocking_the_packet() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    std::fs::create_dir_all(root.join(".handbook/project/environment.yaml"))
+        .expect("Environment Context directory");
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+
+    assert!(result.packet_result.is_ready());
+    assert!(result.refusal.is_none());
+    assert!(result.blockers.is_empty());
+    assert!(result
+        .packet_result
+        .sections
+        .iter()
+        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+    assert!(result.packet_result.notes.iter().any(|note| {
+        note.text
+            == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
+    }));
+}
+
+#[cfg(unix)]
+#[test]
+fn unreadable_environment_context_is_reported_without_blocking_the_packet() {
+    use std::os::unix::fs::PermissionsExt;
+
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    let path = root.join(".handbook/project/environment.yaml");
+    write_file(&path, valid_environment_context_yaml().as_bytes());
+    std::fs::set_permissions(&path, std::fs::Permissions::from_mode(0o000))
+        .expect("make Environment Context unreadable");
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+    std::fs::set_permissions(&path, std::fs::Permissions::from_mode(0o600))
+        .expect("restore Environment Context permissions");
+
+    assert!(result.packet_result.is_ready());
+    assert!(result.refusal.is_none());
+    assert!(result.blockers.is_empty());
+    assert!(result
+        .packet_result
+        .sections
+        .iter()
+        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+    assert!(result.packet_result.notes.iter().any(|note| {
+        note.text
+            == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
+    }));
+}
+
+#[test]
+fn oversized_environment_context_source_is_reported_without_blocking_the_packet() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    write_file(
+        &root.join(".handbook/project/environment.yaml"),
+        &vec![b'x'; handbook_engine::MAX_SOURCE_DOCUMENT_BYTES + 1],
+    );
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+
+    assert!(result.packet_result.is_ready());
+    assert!(result.refusal.is_none());
+    assert!(result.blockers.is_empty());
+    assert!(result
+        .packet_result
+        .sections
+        .iter()
+        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+    assert!(result.packet_result.notes.iter().any(|note| {
+        note.text
+            == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
+    }));
+}
+
+#[cfg(any(unix, windows))]
+#[test]
+fn unstable_environment_context_source_is_reported_without_blocking_the_packet() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    hcm_2_2_flow_fixture(root, valid_charter_markdown().as_bytes());
+    let source = root.join("environment-source.yaml");
+    write_file(&source, valid_environment_context_yaml().as_bytes());
+    std::fs::hard_link(&source, root.join(".handbook/project/environment.yaml"))
+        .expect("hard link Environment Context");
+
+    let result = resolve(root, ResolveRequest::default()).expect("resolve");
+
+    assert!(result.packet_result.is_ready());
+    assert!(result.refusal.is_none());
+    assert!(result.blockers.is_empty());
+    assert!(result
+        .packet_result
+        .sections
+        .iter()
+        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
     assert!(result.packet_result.notes.iter().any(|note| {
         note.text
             == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"

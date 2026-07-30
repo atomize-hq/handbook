@@ -4,61 +4,21 @@ use handbook_flow::ResolveRequest;
 #[cfg(unix)]
 use handbook_flow::{BudgetDisposition, BudgetPolicy};
 
+#[cfg(unix)]
+#[path = "../../engine/tests/support/hcm_2_2_committed_charter.rs"]
+mod hcm_2_2_committed_charter;
+
+#[cfg(unix)]
+const HCM_2_2_SELECTED_CHARTER_YAML: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
+));
+
 fn write_file(path: &std::path::Path, contents: &[u8]) {
     if let Some(parent) = path.parent() {
         std::fs::create_dir_all(parent).expect("mkdirs");
     }
     std::fs::write(path, contents).expect("write");
-}
-
-#[cfg(unix)]
-fn valid_charter_markdown() -> &'static str {
-    "# Engineering Charter — Handbook
-
-## What this is
-Body.
-
-## How to use this charter
-Use it.
-
-## Rubric: 1–5 rigor levels
-Levels.
-
-## Project baseline posture
-Baseline.
-
-## Domains / areas (optional overrides)
-None.
-
-## Posture at a glance (quick scan)
-Snapshot.
-
-## Dimensions (details + guardrails)
-Details.
-
-## Cross-cutting red lines (global non-negotiables)
-- Keep trust boundaries intact.
-
-## Exceptions / overrides process
-- **Approvers:** project_owner
-- **Record location:** docs/exceptions.md
-- **Minimum required fields:**
-  - what
-  - why
-  - scope
-  - risk
-  - owner
-  - expiry_or_revisit_date
-
-## Debt tracking expectations
-Tracked in issues.
-
-## Decision Records (ADRs): how to use this charter
-Use ADRs.
-
-## Review & updates
-Review monthly.
-"
 }
 
 #[test]
@@ -74,10 +34,9 @@ fn refusal_required_artifact_missing() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    std::fs::create_dir_all(root.join(".handbook/feature_spec")).expect("mkdirs");
     write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"spec",
+        &root.join(".handbook/project/context.yaml"),
+        b"project context",
     );
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
@@ -100,15 +59,14 @@ fn refusal_non_canonical_input_attempt_is_selected_for_symlinked_canonical_artif
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    std::fs::create_dir_all(root.join(".handbook/charter")).expect("mkdirs");
-    std::fs::create_dir_all(root.join(".handbook/feature_spec")).expect("mkdirs");
+    std::fs::create_dir_all(root.join(".handbook/project")).expect("mkdirs");
 
-    let real = root.join("real_charter.md");
+    let real = root.join("real_charter.yaml");
     write_file(&real, b"charter");
-    symlink(&real, root.join(".handbook/charter/CHARTER.md")).expect("symlink charter");
+    symlink(&real, root.join(".handbook/project/charter.yaml")).expect("symlink charter");
     write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"spec",
+        &root.join(".handbook/project/context.yaml"),
+        b"project context",
     );
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
@@ -118,7 +76,7 @@ fn refusal_non_canonical_input_attempt_is_selected_for_symlinked_canonical_artif
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
             kind: CanonicalArtifactKind::Charter,
-            canonical_repo_relative_path: ".handbook/charter/CHARTER.md".to_owned(),
+            canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
     assert_eq!(
@@ -134,8 +92,8 @@ fn refusal_required_artifact_empty() {
 
     write_file(&root.join(".handbook/project/charter.yaml"), b"");
     write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"spec",
+        &root.join(".handbook/project/context.yaml"),
+        b"project context",
     );
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
@@ -160,8 +118,8 @@ fn refusal_required_artifact_starter_template() {
         setup_starter_template_bytes(CanonicalArtifactKind::Charter),
     );
     write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"spec",
+        &root.join(".handbook/project/context.yaml"),
+        b"project context",
     );
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
@@ -187,8 +145,8 @@ fn refusal_required_artifact_invalid() {
 
     write_file(&root.join(".handbook/project/charter.yaml"), b"charter");
     write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"spec",
+        &root.join(".handbook/project/context.yaml"),
+        b"project context",
     );
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
@@ -214,13 +172,13 @@ fn refusal_required_artifact_read_error_is_selected_for_malformed_required_path(
 
     std::fs::create_dir_all(root.join(".handbook/project/charter.yaml")).expect("charter dir");
     write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"spec",
+        &root.join(".handbook/project/context.yaml"),
+        b"project context",
     );
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
     let refusal = result.refusal.expect("refusal");
-    assert_eq!(refusal.category, RefusalCategory::RequiredArtifactInvalid);
+    assert_eq!(refusal.category, RefusalCategory::ArtifactReadError);
     assert_eq!(
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
@@ -230,7 +188,7 @@ fn refusal_required_artifact_read_error_is_selected_for_malformed_required_path(
     );
     assert_eq!(
         render_next_safe_action_value(&refusal.next_safe_action),
-        "run `handbook author charter --from-inputs <path|->`"
+        "run `handbook setup refresh`"
     );
 }
 
@@ -240,13 +198,10 @@ fn refusal_budget_refused_is_selected_when_other_inputs_ok() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature spec that is longer than one byte",
+    hcm_2_2_committed_charter::promote_committed_charter(
+        root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "compiler-refusal-budget",
     );
     write_file(
         &root.join(".handbook/project/context.yaml"),
@@ -273,13 +228,10 @@ fn refusal_unsupported_request_is_selected_for_live_execution_packet_when_other_
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
-    );
-    write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature",
+    hcm_2_2_committed_charter::promote_committed_charter(
+        root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "compiler-refusal-unsupported",
     );
     write_file(
         &root.join(".handbook/project/context.yaml"),

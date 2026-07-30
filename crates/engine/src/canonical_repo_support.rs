@@ -126,12 +126,6 @@ impl TrustedRepoFile {
         })
     }
 
-    pub(crate) fn read_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut bytes = Vec::new();
-        (&self.file).read_to_end(&mut bytes)?;
-        Ok(bytes)
-    }
-
     pub(crate) fn read_bytes_bounded(
         &self,
         maximum_bytes: usize,
@@ -772,7 +766,10 @@ mod trusted_read_race_tests {
         .unwrap();
         std::fs::write(repo.path().join("original/sub/value.yaml"), b"replaced\n").unwrap();
 
-        assert_eq!(trusted.read_bytes().unwrap(), b"inside\n");
+        assert_eq!(
+            trusted.read_bytes_bounded_stable(1024).unwrap().0,
+            b"inside\n"
+        );
     }
 
     #[cfg(unix)]
@@ -823,8 +820,9 @@ mod trusted_read_race_tests {
             workspace
                 .trusted_read(&relative)
                 .unwrap()
-                .read_bytes()
-                .unwrap(),
+                .read_bytes_bounded(1024)
+                .unwrap()
+                .0,
             b"legacy\n"
         );
         assert!(workspace.trusted_read_strict(&relative).is_err());

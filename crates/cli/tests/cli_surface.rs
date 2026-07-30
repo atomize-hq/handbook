@@ -4929,7 +4929,8 @@ fn generate_retry_after_repair_clears_missing_root_refusal() {
     );
     assert!(second_stdout.contains("## PACKET BODY"));
     assert!(second_stdout.contains("### CHARTER"));
-    assert!(second_stdout.contains("### FEATURE_SPEC"));
+    assert!(second_stdout.contains("### PROJECT_CONTEXT"));
+    assert!(!second_stdout.contains("### FEATURE_SPEC"));
 }
 
 #[test]
@@ -4972,7 +4973,8 @@ fn inspect_retry_after_repair_clears_missing_root_refusal() {
     );
     assert!(second_stdout.contains("## PACKET BODY"));
     assert!(second_stdout.contains("### CHARTER"));
-    assert!(second_stdout.contains("### FEATURE_SPEC"));
+    assert!(second_stdout.contains("### PROJECT_CONTEXT"));
+    assert!(!second_stdout.contains("### FEATURE_SPEC"));
 }
 
 #[test]
@@ -5104,8 +5106,10 @@ fn generate_succeeds_when_feature_spec_is_missing_in_partial_system_tree() {
         ],
     );
     assert!(stdout.contains("### CHARTER (.handbook/project/charter.yaml)"));
+    assert!(stdout.contains("### PROJECT_CONTEXT (.handbook/project/context.yaml)"));
     assert!(!stdout.contains("### FEATURE_SPEC (.handbook/feature_spec/FEATURE_SPEC.md)"));
-    assert!(stdout.contains("optional source omitted: .handbook/feature_spec/FEATURE_SPEC.md"));
+    assert!(!stdout.contains(".handbook/feature_spec/FEATURE_SPEC.md"));
+    assert!(stdout.contains("optional source omitted: .handbook/project/environment.yaml"));
 }
 
 #[test]
@@ -5150,7 +5154,8 @@ fn inspect_succeeds_when_feature_spec_is_missing_in_partial_system_tree() {
         ],
     );
     assert!(stdout.contains("## JSON FALLBACK"));
-    assert!(stdout.contains("optional source omitted: .handbook/feature_spec/FEATURE_SPEC.md"));
+    assert!(!stdout.contains(".handbook/feature_spec/FEATURE_SPEC.md"));
+    assert!(stdout.contains("optional source omitted: .handbook/project/environment.yaml"));
 }
 
 #[test]
@@ -5351,12 +5356,13 @@ fn generate_emits_real_packet_body_when_ready() {
         "expected committed charter fixture contents: {stdout}"
     );
     assert!(
-        stdout.contains("### FEATURE_SPEC"),
-        "expected feature body section: {stdout}"
+        stdout.contains("### PROJECT_CONTEXT"),
+        "expected selected Project Context body section: {stdout}"
     );
+    assert!(!stdout.contains("### FEATURE_SPEC"), "{stdout}");
     assert!(
-        stdout.contains("# Canonical planning-ready feature spec fixture"),
-        "expected committed feature spec fixture contents: {stdout}"
+        !stdout.contains("# Canonical planning-ready feature spec fixture"),
+        "unadmitted fixed FeatureSpec must not influence the packet: {stdout}"
     );
 }
 
@@ -5388,10 +5394,8 @@ fn generate_succeeds_from_nested_directory_inside_ready_repo() {
         stdout.contains("# Engineering Charter — Boundary Project"),
         "expected committed charter fixture contents: {stdout}"
     );
-    assert!(
-        stdout.contains("# Canonical planning-ready feature spec fixture"),
-        "expected committed feature spec fixture contents: {stdout}"
-    );
+    assert!(stdout.contains("### PROJECT_CONTEXT"), "{stdout}");
+    assert!(!stdout.contains("### FEATURE_SPEC"), "{stdout}");
 }
 
 #[test]
@@ -5512,10 +5516,8 @@ fn inspect_reports_ready_when_required_artifacts_present() {
         stdout.contains("# Engineering Charter — Boundary Project"),
         "expected committed charter fixture contents: {stdout}"
     );
-    assert!(
-        stdout.contains("# Canonical planning-ready feature spec fixture"),
-        "expected committed feature spec fixture contents: {stdout}"
-    );
+    assert!(stdout.contains("### PROJECT_CONTEXT"), "{stdout}");
+    assert!(!stdout.contains("### FEATURE_SPEC"), "{stdout}");
     assert!(
         stdout.contains("selection packet_id=planning.packet status=Selected"),
         "expected selected decision summary: {stdout}"
@@ -5554,10 +5556,8 @@ fn inspect_succeeds_from_nested_directory_inside_ready_repo() {
         stdout.contains("# Engineering Charter — Boundary Project"),
         "expected committed charter fixture contents: {stdout}"
     );
-    assert!(
-        stdout.contains("# Canonical planning-ready feature spec fixture"),
-        "expected committed feature spec fixture contents: {stdout}"
-    );
+    assert!(stdout.contains("### PROJECT_CONTEXT"), "{stdout}");
+    assert!(!stdout.contains("### FEATURE_SPEC"), "{stdout}");
 }
 
 #[test]
@@ -5658,10 +5658,8 @@ fn generate_resolves_execution_demo_packet_from_fixture_set() {
         stdout.contains("### CHARTER"),
         "expected charter body section: {stdout}"
     );
-    assert!(
-        stdout.contains("### FEATURE_SPEC"),
-        "expected feature body section: {stdout}"
-    );
+    assert!(stdout.contains("### PROJECT_CONTEXT"), "{stdout}");
+    assert!(!stdout.contains("### FEATURE_SPEC"), "{stdout}");
     assert!(
         stdout.contains("## PACKET OVERVIEW"),
         "expected packet overview section: {stdout}"
@@ -5730,10 +5728,8 @@ fn generate_resolves_execution_demo_packet_from_nested_directory_inside_repo() {
         stdout.contains("### CHARTER"),
         "expected charter body section: {stdout}"
     );
-    assert!(
-        stdout.contains("### FEATURE_SPEC"),
-        "expected feature body section: {stdout}"
-    );
+    assert!(stdout.contains("### PROJECT_CONTEXT"), "{stdout}");
+    assert!(!stdout.contains("### FEATURE_SPEC"), "{stdout}");
 }
 
 #[test]
@@ -5814,10 +5810,8 @@ fn inspect_includes_fixture_section_for_execution_demo_packet() {
         stdout.contains("### CHARTER"),
         "expected charter body section: {stdout}"
     );
-    assert!(
-        stdout.contains("### FEATURE_SPEC"),
-        "expected feature body section: {stdout}"
-    );
+    assert!(stdout.contains("### PROJECT_CONTEXT"), "{stdout}");
+    assert!(!stdout.contains("### FEATURE_SPEC"), "{stdout}");
     assert!(
         stdout.contains("## PACKET OVERVIEW"),
         "expected packet overview section: {stdout}"
@@ -5837,13 +5831,14 @@ fn inspect_includes_fixture_section_for_execution_demo_packet() {
     let pos_charter = stdout
         .find("Charter [.handbook/project/charter.yaml]")
         .expect("charter should be listed");
-    let pos_feature = stdout
-        .find("FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]")
-        .expect("feature spec should be listed");
+    let pos_project_context = stdout
+        .find("ProjectContext [.handbook/project/context.yaml]")
+        .expect("Project Context should be listed");
     assert!(
-        pos_charter < pos_feature,
-        "expected deterministic ordering (charter before feature): {stdout}"
+        pos_charter < pos_project_context,
+        "expected descriptor-selected ordering (Charter before Project Context): {stdout}"
     );
+    assert!(!stdout.contains("FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]"));
 }
 
 #[test]
@@ -5886,7 +5881,6 @@ fn inspect_preserves_full_execution_demo_fixture_lineage_order() {
         &[
             "1. Charter [.handbook/project/charter.yaml]",
             "2. ProjectContext [.handbook/project/context.yaml]",
-            "3. FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]",
         ],
     );
 
@@ -5896,9 +5890,9 @@ fn inspect_preserves_full_execution_demo_fixture_lineage_order() {
         &[
             "\"canonical_repo_relative_path\": \".handbook/project/charter.yaml\"",
             "\"canonical_repo_relative_path\": \".handbook/project/context.yaml\"",
-            "\"canonical_repo_relative_path\": \".handbook/feature_spec/FEATURE_SPEC.md\"",
         ],
     );
+    assert!(!stdout.contains(".handbook/feature_spec/FEATURE_SPEC.md"));
 }
 
 #[test]
@@ -5956,11 +5950,9 @@ fn generate_non_ready_execution_demo_preserves_fixture_backed_labeling() {
     );
     assert_in_order(
         &stdout,
-        &[
-            "1. ProjectContext [.handbook/project/context.yaml]",
-            "2. FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]",
-        ],
+        &["1. ProjectContext [.handbook/project/context.yaml]"],
     );
+    assert!(!stdout.contains("FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]"));
     assert!(stdout.contains("document_not_object"), "{stdout}");
 }
 
@@ -6018,10 +6010,8 @@ fn inspect_resolves_execution_demo_packet_from_nested_directory_inside_repo() {
         stdout.contains("### CHARTER"),
         "expected charter body section: {stdout}"
     );
-    assert!(
-        stdout.contains("### FEATURE_SPEC"),
-        "expected feature body section: {stdout}"
-    );
+    assert!(stdout.contains("### PROJECT_CONTEXT"), "{stdout}");
+    assert!(!stdout.contains("### FEATURE_SPEC"), "{stdout}");
 }
 
 #[test]
@@ -6266,10 +6256,10 @@ fn generate_refuses_when_required_project_context_path_is_malformed() {
         [
             "OUTCOME: REFUSED",
             "OBJECT: planning.packet",
-            "NEXT SAFE ACTION: run `handbook author project-context --from-inputs <path|->`",
+            "NEXT SAFE ACTION: run `handbook setup refresh`",
         ],
     );
-    assert!(stdout.contains("CATEGORY: RequiredArtifactInvalid"));
+    assert!(stdout.contains("CATEGORY: ArtifactReadError"));
     assert!(stdout.contains("non_regular_file_refused"));
     assert!(!stdout.contains("## PACKET BODY"));
 }
@@ -6287,10 +6277,10 @@ fn inspect_refuses_when_required_project_context_path_is_malformed() {
         [
             "OUTCOME: REFUSED",
             "OBJECT: planning.packet",
-            "NEXT SAFE ACTION: run `handbook author project-context --from-inputs <path|->`",
+            "NEXT SAFE ACTION: run `handbook setup refresh`",
         ],
     );
-    assert!(stdout.contains("CATEGORY: RequiredArtifactInvalid"));
+    assert!(stdout.contains("CATEGORY: ArtifactReadError"));
     assert!(stdout.contains("non_regular_file_refused"));
     assert!(stdout.contains("## JSON FALLBACK"));
     assert!(!stdout.contains("## PACKET BODY"));

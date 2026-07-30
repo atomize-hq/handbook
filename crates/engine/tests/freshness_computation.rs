@@ -1,7 +1,8 @@
 use handbook_engine::{
-    compute_freshness, ArtifactPresence, CanonicalArtifactIdentity, CanonicalArtifactKind,
-    FreshnessIssue, FreshnessIssueKind, FreshnessStatus, InheritedDependency, OverrideTarget,
-    OverrideWithRationale, C03_SCHEMA_VERSION, MANIFEST_GENERATION_VERSION,
+    compute_freshness, ArtifactApplicability, ArtifactPresence, CanonicalArtifactIdentity,
+    CanonicalArtifactKind, FreshnessIssue, FreshnessIssueKind, FreshnessStatus,
+    InheritedDependency, OverrideTarget, OverrideWithRationale, RequirednessMode,
+    C03_SCHEMA_VERSION, MANIFEST_GENERATION_VERSION,
 };
 
 fn identity(
@@ -22,10 +23,46 @@ fn identity(
         CanonicalArtifactKind::EnvironmentContext => (false, false, false),
         CanonicalArtifactKind::FeatureSpec => (false, false, false),
     };
+    let (instance_id, kind_ref, label) = match kind {
+        CanonicalArtifactKind::Charter => (
+            "project_authority",
+            "handbook.artifact-kind.project-authority@1.1.0",
+            "Charter",
+        ),
+        CanonicalArtifactKind::ProjectContext => (
+            "project_context",
+            "handbook.artifact-kind.project-context@1.1.0",
+            "Project Context",
+        ),
+        CanonicalArtifactKind::EnvironmentContext => (
+            "environment_context",
+            "handbook.artifact-kind.environment-context@1.1.0",
+            "Environment Context",
+        ),
+        CanonicalArtifactKind::FeatureSpec => (
+            "feature_spec",
+            "handbook.artifact-kind.work-specification@1.0.0",
+            "Feature Spec",
+        ),
+    };
 
     CanonicalArtifactIdentity {
+        instance_id: instance_id.to_owned(),
+        kind_ref: kind_ref.to_owned(),
         kind,
+        label: label.to_owned(),
         relative_path: relative_path.to_owned(),
+        requiredness_mode: if packet_required {
+            RequirednessMode::Always
+        } else {
+            RequirednessMode::Optional
+        },
+        applicability: if packet_required {
+            ArtifactApplicability::Required
+        } else {
+            ArtifactApplicability::Optional
+        },
+        renderer_definition_refs: Vec::new(),
         packet_required,
         baseline_required,
         setup_scaffolded,
@@ -219,6 +256,46 @@ fn override_targeting_canonical_artifact_is_forbidden_and_recorded() {
     assert_ne!(
         with_override_a.fingerprint_sha256,
         with_override_b.fingerprint_sha256
+    );
+}
+
+#[test]
+fn same_rationale_different_override_targets_change_fingerprint() {
+    let charter = identity(
+        CanonicalArtifactKind::Charter,
+        ArtifactPresence::PresentNonEmpty,
+        Some("aaa"),
+        None,
+    );
+    let project_context = identity(
+        CanonicalArtifactKind::ProjectContext,
+        ArtifactPresence::PresentNonEmpty,
+        Some("bbb"),
+        None,
+    );
+    let artifacts = [charter, project_context];
+    let rationale = "same rationale".to_string();
+
+    let charter_override = compute_freshness(
+        &artifacts,
+        &[],
+        &[OverrideWithRationale {
+            target: OverrideTarget::CanonicalArtifact(CanonicalArtifactKind::Charter),
+            rationale: rationale.clone(),
+        }],
+    );
+    let project_context_override = compute_freshness(
+        &artifacts,
+        &[],
+        &[OverrideWithRationale {
+            target: OverrideTarget::CanonicalArtifact(CanonicalArtifactKind::ProjectContext),
+            rationale,
+        }],
+    );
+
+    assert_ne!(
+        charter_override.fingerprint_sha256,
+        project_context_override.fingerprint_sha256
     );
 }
 

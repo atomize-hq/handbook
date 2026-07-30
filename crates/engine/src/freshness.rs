@@ -1,6 +1,8 @@
+use crate::artifact_instance::RequirednessMode;
 use crate::canonical_artifacts::{
     ArtifactPresence, CanonicalArtifactIdentity, CanonicalArtifactKind,
 };
+use crate::profile_decision::ArtifactApplicability;
 use sha2::{Digest, Sha256};
 
 pub const C03_SCHEMA_VERSION: &str = "reduced-v1-m8";
@@ -42,8 +44,8 @@ pub struct OverrideWithRationale {
 
 impl Ord for OverrideWithRationale {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        (override_target_sort_key(self.target), &self.rationale)
-            .cmp(&(override_target_sort_key(other.target), &other.rationale))
+        (&self.rationale, format!("{:?}", self.target))
+            .cmp(&(&other.rationale, format!("{:?}", other.target)))
     }
 }
 
@@ -105,12 +107,20 @@ pub fn compute_freshness(
     let mut sorted_artifacts: Vec<&CanonicalArtifactIdentity> = artifacts.iter().collect();
     sorted_artifacts.sort_by(|a, b| {
         (
-            canonical_artifact_kind_sort_key(a.kind),
-            a.relative_path.as_str(),
+            match a.applicability {
+                ArtifactApplicability::Required => 0,
+                ArtifactApplicability::Optional => 1,
+                ArtifactApplicability::Indeterminate => 2,
+            },
+            a.instance_id.as_str(),
         )
             .cmp(&(
-                canonical_artifact_kind_sort_key(b.kind),
-                b.relative_path.as_str(),
+                match b.applicability {
+                    ArtifactApplicability::Required => 0,
+                    ArtifactApplicability::Optional => 1,
+                    ArtifactApplicability::Indeterminate => 2,
+                },
+                b.instance_id.as_str(),
             ))
     });
 
@@ -118,7 +128,28 @@ pub fn compute_freshness(
     sorted_deps.sort();
 
     let mut sorted_overrides = overrides.to_vec();
-    sorted_overrides.sort();
+    let override_target_instance_id = |target: OverrideTarget| match target {
+        OverrideTarget::CanonicalArtifact(kind) => sorted_artifacts
+            .iter()
+            .find(|artifact| artifact.kind == kind)
+            .map_or("unadmitted_canonical_artifact", |artifact| {
+                artifact.instance_id.as_str()
+            }),
+    };
+    sorted_overrides.sort_by(|left, right| {
+        (
+            override_target_instance_id(left.target),
+            left.rationale.as_str(),
+        )
+            .cmp(&(
+                override_target_instance_id(right.target),
+                right.rationale.as_str(),
+            ))
+    });
+    let sorted_override_target_instance_ids = sorted_overrides
+        .iter()
+        .map(|record| override_target_instance_id(record.target).to_owned())
+        .collect::<Vec<_>>();
 
     let mut issues = Vec::new();
     for override_record in &sorted_overrides {
@@ -184,6 +215,7 @@ pub fn compute_freshness(
         &sorted_artifacts,
         &sorted_deps,
         &sorted_overrides,
+        &sorted_override_target_instance_ids,
     ));
 
     FreshnessTruth {
@@ -201,6 +233,7 @@ fn fingerprint_bytes(
     artifacts: &[&CanonicalArtifactIdentity],
     inherited_dependencies: &[InheritedDependency],
     overrides: &[OverrideWithRationale],
+    override_target_instance_ids: &[String],
 ) -> Vec<u8> {
     let mut enc = Encoder::new();
 
@@ -209,8 +242,24 @@ fn fingerprint_bytes(
 
     enc.u32(artifacts.len() as u32);
     for artifact in artifacts {
-        enc.u8(canonical_artifact_kind_sort_key(artifact.kind));
+        enc.str(&artifact.instance_id);
+        enc.str(&artifact.kind_ref);
+        enc.str(&artifact.label);
         enc.str(&artifact.relative_path);
+        enc.u8(match artifact.requiredness_mode {
+            RequirednessMode::Always => 0,
+            RequirednessMode::Optional => 1,
+            RequirednessMode::Conditional => 2,
+        });
+        enc.u8(match artifact.applicability {
+            ArtifactApplicability::Required => 0,
+            ArtifactApplicability::Optional => 1,
+            ArtifactApplicability::Indeterminate => 2,
+        });
+        enc.u32(artifact.renderer_definition_refs.len() as u32);
+        for renderer in &artifact.renderer_definition_refs {
+            enc.str(renderer);
+        }
         enc.bool(artifact.packet_required);
         enc.u8(artifact_presence_sort_key(artifact.presence));
         enc.opt_str(artifact.content_sha256.as_deref());
@@ -225,8 +274,8 @@ fn fingerprint_bytes(
     }
 
     enc.u32(overrides.len() as u32);
-    for ov in overrides {
-        enc.u8(override_target_sort_key(ov.target));
+    for (ov, target_instance_id) in overrides.iter().zip(override_target_instance_ids) {
+        enc.str(target_instance_id);
         enc.str(&ov.rationale);
     }
 
@@ -247,26 +296,11 @@ fn bytes_to_lower_hex(bytes: &[u8]) -> String {
     out
 }
 
-fn canonical_artifact_kind_sort_key(kind: CanonicalArtifactKind) -> u8 {
-    match kind {
-        CanonicalArtifactKind::Charter => 0,
-        CanonicalArtifactKind::ProjectContext => 1,
-        CanonicalArtifactKind::EnvironmentContext => 2,
-        CanonicalArtifactKind::FeatureSpec => 3,
-    }
-}
-
 fn artifact_presence_sort_key(presence: ArtifactPresence) -> u8 {
     match presence {
         ArtifactPresence::Missing => 0,
         ArtifactPresence::PresentEmpty => 1,
         ArtifactPresence::PresentNonEmpty => 2,
-    }
-}
-
-fn override_target_sort_key(target: OverrideTarget) -> u8 {
-    match target {
-        OverrideTarget::CanonicalArtifact(kind) => canonical_artifact_kind_sort_key(kind),
     }
 }
 

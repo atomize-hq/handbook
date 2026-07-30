@@ -571,11 +571,11 @@ fn public_projection_excludes_retained_source_and_file_identity() {
 }
 
 #[test]
-fn fixed_sibling_loader_never_ingests_retired_project_context_member() {
+fn descriptor_selected_collection_never_ingests_retired_project_context_member() {
     let repo = tempfile::tempdir().unwrap();
     write(
-        &repo.path().join(".handbook/charter/CHARTER.md"),
-        b"charter",
+        &repo.path().join(".handbook/project/context.yaml"),
+        BOUNDARY_YAML.as_bytes(),
     );
     std::fs::create_dir_all(
         repo.path()
@@ -583,41 +583,53 @@ fn fixed_sibling_loader_never_ingests_retired_project_context_member() {
     )
     .unwrap();
 
-    let generic = CanonicalArtifacts::load(repo.path()).unwrap();
-    assert!(generic.ingest_issues.iter().any(|issue| {
-        issue.canonical_repo_relative_path == ".handbook/project_context/PROJECT_CONTEXT.md"
-    }));
-
-    let siblings = CanonicalArtifacts::load_fixed_siblings(repo.path()).unwrap();
-    assert_eq!(
-        siblings.project_context.identity.presence,
-        ArtifactPresence::Missing
-    );
-    assert!(siblings.ingest_issues.iter().all(|issue| {
+    let artifacts = CanonicalArtifacts::load(repo.path()).unwrap();
+    let selected = artifacts
+        .artifacts
+        .iter()
+        .find(|artifact| artifact.identity.instance_id == "project_context")
+        .expect("selected Project Context");
+    assert_eq!(selected.bytes.as_deref(), Some(BOUNDARY_YAML.as_bytes()));
+    assert!(artifacts.ingest_issues.iter().all(|issue| {
         issue.canonical_repo_relative_path != ".handbook/project_context/PROJECT_CONTEXT.md"
+    }));
+    assert!(artifacts.artifacts.iter().all(|artifact| {
+        artifact.identity.relative_path != ".handbook/project_context/PROJECT_CONTEXT.md"
     }));
 }
 
 #[test]
-fn fixed_sibling_loader_recognizes_selected_project_context_namespace_as_root_scaffold() {
+fn descriptor_selected_collection_recognizes_selected_project_context_namespace_as_root_scaffold() {
     let repo = tempfile::tempdir().unwrap();
     write(
         &repo.path().join(".handbook/project/context.yaml"),
         BOUNDARY_YAML.as_bytes(),
     );
 
-    let siblings = CanonicalArtifacts::load_fixed_siblings(repo.path()).unwrap();
+    let artifacts = CanonicalArtifacts::load(repo.path()).unwrap();
 
-    assert_eq!(siblings.system_root_status, SystemRootStatus::Ok);
+    assert_eq!(artifacts.system_root_status, SystemRootStatus::Ok);
     assert_eq!(
-        siblings.charter.identity.presence,
+        artifacts
+            .artifacts
+            .iter()
+            .find(|artifact| artifact.identity.instance_id == "project_authority")
+            .expect("selected Charter")
+            .identity
+            .presence,
         ArtifactPresence::Missing
     );
     assert_eq!(
-        siblings.project_context.identity.presence,
-        ArtifactPresence::Missing
+        artifacts
+            .artifacts
+            .iter()
+            .find(|artifact| artifact.identity.instance_id == "project_context")
+            .expect("selected Project Context")
+            .identity
+            .presence,
+        ArtifactPresence::PresentNonEmpty
     );
-    assert!(siblings.ingest_issues.iter().all(|issue| {
+    assert!(artifacts.ingest_issues.iter().all(|issue| {
         issue.canonical_repo_relative_path != ".handbook/project_context/PROJECT_CONTEXT.md"
     }));
 }

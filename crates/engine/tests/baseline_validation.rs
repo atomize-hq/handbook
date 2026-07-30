@@ -14,14 +14,13 @@ fn write_file(path: &std::path::Path, contents: &[u8]) {
 fn make_repo() -> tempfile::TempDir {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
-    write_file(&root.join(".handbook/charter/CHARTER.md"), b"valid charter");
     write_file(
-        &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
-        b"valid project context",
+        &root.join(".handbook/project/charter.yaml"),
+        b"valid charter",
     );
     write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature",
+        &root.join(".handbook/project/context.yaml"),
+        b"valid project context",
     );
     dir
 }
@@ -92,11 +91,9 @@ fn baseline_validation_for_path_selects_matching_validation() {
     let artifacts = CanonicalArtifacts::load(dir.path()).expect("artifacts");
     let validations = baseline_artifact_validations(&artifacts, test_validator);
 
-    let found = baseline_artifact_validation_for_path(
-        &validations,
-        ".handbook/project_context/PROJECT_CONTEXT.md",
-    )
-    .expect("matching validation");
+    let found =
+        baseline_artifact_validation_for_path(&validations, ".handbook/project/context.yaml")
+            .expect("matching validation");
 
     assert_eq!(found.kind, CanonicalArtifactKind::ProjectContext);
 }
@@ -106,10 +103,10 @@ fn baseline_validation_uses_loaded_custom_paths_and_custom_ingest_issue_paths() 
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
 
-    std::fs::create_dir_all(repo_root.join(".custom_handbook/charter/CHARTER.md"))
-        .expect("charter dir");
+    std::fs::create_dir_all(repo_root.join(".custom_handbook")).expect("custom root");
+    std::fs::create_dir_all(repo_root.join(".handbook/project/charter.yaml")).expect("charter dir");
     write_file(
-        &repo_root.join(".custom_handbook/project_context/PROJECT_CONTEXT.md"),
+        &repo_root.join(".handbook/project/context.yaml"),
         b"valid project context",
     );
 
@@ -123,8 +120,8 @@ fn baseline_validation_uses_loaded_custom_paths_and_custom_ingest_issue_paths() 
             .map(|validation| validation.canonical_repo_relative_path.as_str())
             .collect::<Vec<_>>(),
         vec![
-            ".custom_handbook/charter/CHARTER.md",
-            ".custom_handbook/project_context/PROJECT_CONTEXT.md",
+            ".handbook/project/charter.yaml",
+            ".handbook/project/context.yaml",
         ]
     );
 
@@ -133,12 +130,12 @@ fn baseline_validation_uses_loaded_custom_paths_and_custom_ingest_issue_paths() 
             .expect("charter validation");
     assert_eq!(
         charter.canonical_repo_relative_path,
-        ".custom_handbook/charter/CHARTER.md"
+        ".handbook/project/charter.yaml"
     );
     assert_eq!(charter.verdict, BaselineArtifactVerdict::IngestInvalid);
 
     let found =
-        baseline_artifact_validation_for_path(&validations, ".custom_handbook/charter/CHARTER.md")
+        baseline_artifact_validation_for_path(&validations, ".handbook/project/charter.yaml")
             .expect("matching validation");
     assert_eq!(found.verdict, BaselineArtifactVerdict::IngestInvalid);
 }

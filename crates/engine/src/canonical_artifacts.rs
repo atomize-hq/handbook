@@ -1,9 +1,25 @@
+use crate::artifact_instance::RequirednessMode;
+use crate::artifact_registry::ResolvedArtifactInstance;
 use crate::canonical_paths::{
-    canonical_artifact_relative_path, default_canonical_layout_contract, CanonicalLayout,
-    CanonicalLayoutContract,
+    default_canonical_layout_contract, CanonicalLayout, CanonicalLayoutContract,
 };
 use crate::canonical_repo_support::{RepoRelativeFileAccessError, RepoRelativeMetadataReadError};
-use crate::project_context_artifact::SELECTED_PROJECT_CONTEXT_CANONICAL_PATH;
+use crate::charter_artifact::{
+    parse_canonical_charter, render_canonical_charter_markdown, CharterArtifactErrorKind,
+};
+use crate::definition_identity::{DefinitionFingerprint, MAX_SOURCE_DOCUMENT_BYTES};
+use crate::environment_context_artifact::{
+    parse_canonical_environment_context, render_environment_context_markdown,
+    EnvironmentContextArtifactErrorKind,
+};
+use crate::profile_decision::{
+    resolve_shipped_profile_decisions, ArtifactApplicability, ArtifactProfileDecision,
+    ResolvedProfileDecisions,
+};
+use crate::project_context_artifact::{
+    parse_canonical_project_context, render_project_context_markdown,
+    ProjectContextArtifactErrorKind,
+};
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 use std::path::{Path, PathBuf};
@@ -16,18 +32,6 @@ pub enum CanonicalArtifactKind {
     EnvironmentContext,
     FeatureSpec,
 }
-
-impl CanonicalArtifactKind {
-    pub(crate) fn relative_path(self) -> &'static str {
-        canonical_artifact_relative_path(self)
-    }
-}
-
-pub const CANONICAL_ARTIFACT_ORDER: [CanonicalArtifactKind; 3] = [
-    CanonicalArtifactKind::Charter,
-    CanonicalArtifactKind::ProjectContext,
-    CanonicalArtifactKind::FeatureSpec,
-];
 
 const CHARTER_TEMPLATE: &str = "\
 # Charter
@@ -126,7 +130,11 @@ pub fn canonical_artifact_descriptors() -> &'static [CanonicalArtifactDescriptor
 }
 
 pub fn setup_starter_template(kind: CanonicalArtifactKind) -> &'static str {
-    descriptor_for(kind).setup_starter_template
+    CANONICAL_ARTIFACT_DESCRIPTORS
+        .iter()
+        .find(|descriptor| descriptor.kind == kind)
+        .expect("canonical artifact descriptor should exist")
+        .setup_starter_template
 }
 
 pub fn setup_starter_template_bytes(kind: CanonicalArtifactKind) -> &'static [u8] {
@@ -155,8 +163,14 @@ pub enum ArtifactPresence {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CanonicalArtifactIdentity {
+    pub instance_id: String,
+    pub kind_ref: String,
     pub kind: CanonicalArtifactKind,
+    pub label: String,
     pub relative_path: String,
+    pub requiredness_mode: RequirednessMode,
+    pub applicability: ArtifactApplicability,
+    pub renderer_definition_refs: Vec<String>,
     pub packet_required: bool,
     pub baseline_required: bool,
     pub setup_scaffolded: bool,
@@ -170,14 +184,16 @@ pub struct CanonicalArtifactIdentity {
 pub struct CanonicalArtifact {
     pub identity: CanonicalArtifactIdentity,
     pub bytes: Option<Vec<u8>>,
+    pub rendered_bytes: Option<Vec<u8>>,
+    pub rendered_output_sha256: Option<String>,
+    pub rendered_media_type: Option<String>,
+    pub render_failure: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CanonicalArtifacts {
     pub system_root_status: SystemRootStatus,
-    pub charter: CanonicalArtifact,
-    pub project_context: CanonicalArtifact,
-    pub feature_spec: CanonicalArtifact,
+    pub artifacts: Vec<CanonicalArtifact>,
     pub ingest_issues: Vec<ArtifactIngestIssue>,
 }
 
@@ -186,30 +202,19 @@ impl CanonicalArtifacts {
         Self::load_with_contract(repo_root, *default_canonical_layout_contract())
     }
 
-    pub fn load_fixed_siblings(repo_root: impl AsRef<Path>) -> Result<Self, ArtifactIngestError> {
-        Self::load_fixed_siblings_with_contract(repo_root, *default_canonical_layout_contract())
-    }
-
     pub fn load_with_contract(
         repo_root: impl AsRef<Path>,
         contract: CanonicalLayoutContract,
     ) -> Result<Self, ArtifactIngestError> {
-        Self::load_with_contract_selection(repo_root, contract, true)
-    }
-
-    pub fn load_fixed_siblings_with_contract(
-        repo_root: impl AsRef<Path>,
-        contract: CanonicalLayoutContract,
-    ) -> Result<Self, ArtifactIngestError> {
-        Self::load_with_contract_selection(repo_root, contract, false)
-    }
-
-    fn load_with_contract_selection(
-        repo_root: impl AsRef<Path>,
-        contract: CanonicalLayoutContract,
-        include_legacy_project_context: bool,
-    ) -> Result<Self, ArtifactIngestError> {
         let repo_root = repo_root.as_ref();
+        let decisions = resolve_shipped_profile_decisions(repo_root).map_err(|error| {
+            ArtifactIngestError::ReadFailure {
+                path: repo_root.to_path_buf(),
+                source: std::io::Error::other(format!(
+                    "failed to resolve admitted artifact descriptors: {error:?}"
+                )),
+            }
+        })?;
         let layout = if contract == *default_canonical_layout_contract() {
             CanonicalLayout::new(repo_root)
         } else {
@@ -224,7 +229,7 @@ impl CanonicalArtifacts {
                     SystemRootStatus::SymlinkNotAllowed
                 } else if !meta.is_dir() {
                     SystemRootStatus::NotDir
-                } else if canonical_root_scaffold_exists(layout, include_legacy_project_context)? {
+                } else if canonical_root_scaffold_exists(layout, &decisions)? {
                     SystemRootStatus::Ok
                 } else {
                     SystemRootStatus::Missing
@@ -238,90 +243,108 @@ impl CanonicalArtifacts {
 
         let mut ingest_issues = Vec::new();
 
-        let (charter, project_context, feature_spec) = match system_root_status {
-            SystemRootStatus::Ok => (
-                load_one(layout, CanonicalArtifactKind::Charter, &mut ingest_issues),
-                if include_legacy_project_context {
-                    load_one(
+        let mut admitted = decisions.artifact_decisions().iter().collect::<Vec<_>>();
+        admitted.sort_by(|left, right| {
+            let rank = |applicability| match applicability {
+                ArtifactApplicability::Required => 0,
+                ArtifactApplicability::Optional => 1,
+                ArtifactApplicability::Indeterminate => 2,
+            };
+            (rank(left.applicability()), left.instance_id().as_str())
+                .cmp(&(rank(right.applicability()), right.instance_id().as_str()))
+        });
+        let artifacts = admitted
+            .into_iter()
+            .map(|decision| {
+                let kind = match decision.kind_ref().as_str() {
+                    "handbook.artifact-kind.project-authority@1.1.0" => {
+                        CanonicalArtifactKind::Charter
+                    }
+                    "handbook.artifact-kind.project-context@1.1.0" => {
+                        CanonicalArtifactKind::ProjectContext
+                    }
+                    "handbook.artifact-kind.environment-context@1.1.0" => {
+                        CanonicalArtifactKind::EnvironmentContext
+                    }
+                    other => unreachable!(
+                        "the selected P6 flow admits no compatibility projection for {other}"
+                    ),
+                };
+                let descriptor = decisions
+                    .registry()
+                    .instance(decision.instance_id())
+                    .expect("admitted decision retains its resolved descriptor");
+                match system_root_status {
+                    SystemRootStatus::Ok => load_one(
                         layout,
-                        CanonicalArtifactKind::ProjectContext,
+                        &decisions,
+                        decision,
+                        descriptor,
+                        kind,
                         &mut ingest_issues,
-                    )
-                } else {
-                    missing_one(layout, CanonicalArtifactKind::ProjectContext)
-                },
-                load_one(
-                    layout,
-                    CanonicalArtifactKind::FeatureSpec,
-                    &mut ingest_issues,
-                ),
-            ),
-            SystemRootStatus::Missing
-            | SystemRootStatus::NotDir
-            | SystemRootStatus::SymlinkNotAllowed => (
-                missing_one(layout, CanonicalArtifactKind::Charter),
-                missing_one(layout, CanonicalArtifactKind::ProjectContext),
-                missing_one(layout, CanonicalArtifactKind::FeatureSpec),
-            ),
-        };
+                    ),
+                    SystemRootStatus::Missing
+                    | SystemRootStatus::NotDir
+                    | SystemRootStatus::SymlinkNotAllowed => {
+                        missing_one(decision, descriptor, kind)
+                    }
+                }
+            })
+            .collect();
 
         Ok(Self {
             system_root_status,
-            charter,
-            project_context,
-            feature_spec,
+            artifacts,
             ingest_issues,
         })
     }
 
-    pub fn identities(&self) -> [&CanonicalArtifactIdentity; 3] {
-        [
-            &self.charter.identity,
-            &self.project_context.identity,
-            &self.feature_spec.identity,
-        ]
+    pub fn identities(&self) -> Vec<&CanonicalArtifactIdentity> {
+        self.artifacts
+            .iter()
+            .map(|artifact| &artifact.identity)
+            .collect()
     }
 }
 
 fn canonical_root_scaffold_exists(
     layout: CanonicalLayout<'_>,
-    include_legacy_project_context: bool,
+    decisions: &ResolvedProfileDecisions,
 ) -> Result<bool, ArtifactIngestError> {
     let workspace = layout.workspace();
-    for kind in CANONICAL_ARTIFACT_ORDER {
-        if kind == CanonicalArtifactKind::ProjectContext && !include_legacy_project_context {
-            let selected_namespace_path = Path::new(SELECTED_PROJECT_CONTEXT_CANONICAL_PATH)
-                .parent()
-                .expect("selected Project Context path has a namespace");
-            if selected_namespace_path.starts_with(Path::new(layout.system_root_relative())) {
-                let selected_namespace = workspace
-                    .normalize_repo_relative(
-                        selected_namespace_path
-                            .to_str()
-                            .expect("selected Project Context namespace is UTF-8"),
-                    )
-                    .expect("selected Project Context namespace stays repo-relative");
-                match workspace.metadata_no_follow(&selected_namespace) {
-                    Ok(Some(meta)) if meta.is_dir() => return Ok(true),
-                    Ok(Some(_)) | Ok(None) => {}
-                    Err(err) => return Err(artifact_ingest_read_failure(err)),
-                }
-            }
-            continue;
-        }
-        let artifact_path = layout.artifact_path(kind);
+    for decision in decisions.artifact_decisions() {
+        let artifact_path = workspace
+            .normalize_repo_relative(decision.canonical_path())
+            .expect("admitted artifact paths stay repo-relative");
         match workspace.metadata_no_follow(&artifact_path) {
             Ok(Some(_)) => return Ok(true),
             Ok(None) => {}
             Err(err) => return Err(artifact_ingest_read_failure(err)),
         }
 
-        let namespace_dir = layout.namespace_dir_path(kind);
+        let namespace_dir = Path::new(decision.canonical_path())
+            .parent()
+            .and_then(Path::to_str)
+            .map(|path| {
+                workspace
+                    .normalize_repo_relative(path)
+                    .expect("admitted artifact namespaces stay repo-relative")
+            })
+            .expect("admitted artifact paths retain a namespace");
         match workspace.metadata_no_follow(&namespace_dir) {
             Ok(Some(meta)) if meta.is_dir() => return Ok(true),
             Ok(Some(_)) | Ok(None) => {}
             Err(err) => return Err(artifact_ingest_read_failure(err)),
         }
+    }
+
+    let legacy_charter = workspace
+        .normalize_repo_relative(crate::canonical_paths::CANONICAL_CHARTER_NAMESPACE_DIR)
+        .expect("legacy authoring namespace stays repo-relative");
+    match workspace.metadata_no_follow(&legacy_charter) {
+        Ok(Some(meta)) if meta.is_dir() => return Ok(true),
+        Ok(Some(_)) | Ok(None) => {}
+        Err(err) => return Err(artifact_ingest_read_failure(err)),
     }
 
     Ok(false)
@@ -412,105 +435,123 @@ fn record_ingest_issue(
     kind: ArtifactIngestIssueKind,
     artifact_kind: CanonicalArtifactKind,
     canonical_repo_relative_path: &str,
+    packet_required: bool,
 ) {
     issues.push(ArtifactIngestIssue {
         kind,
         artifact_kind,
         canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
-        packet_required: descriptor_for(artifact_kind).packet_required,
+        packet_required,
     });
 }
 
 fn load_one(
     layout: CanonicalLayout<'_>,
+    decisions: &ResolvedProfileDecisions,
+    decision: &ArtifactProfileDecision,
+    descriptor: &ResolvedArtifactInstance,
     kind: CanonicalArtifactKind,
     issues: &mut Vec<ArtifactIngestIssue>,
 ) -> CanonicalArtifact {
     let workspace = layout.workspace();
-    let artifact_path = layout.artifact_path(kind);
-    let descriptor = descriptor_for_layout(layout, kind);
+    let artifact_path = workspace
+        .normalize_repo_relative(decision.canonical_path())
+        .expect("admitted artifact paths stay repo-relative");
+    let packet_required = decision.applicability() == ArtifactApplicability::Required;
+    let mut record_selected_issue = |issue_kind| {
+        record_ingest_issue(
+            issues,
+            issue_kind,
+            kind,
+            decision.canonical_path(),
+            packet_required,
+        );
+    };
 
     let meta = match workspace.metadata_no_follow(&artifact_path) {
         Ok(meta) => meta,
         Err(_err) => {
-            record_ingest_issue(
-                issues,
-                ArtifactIngestIssueKind::CanonicalArtifactReadError,
-                kind,
-                descriptor.relative_path,
-            );
-            return missing_one(layout, kind);
+            record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
+            let mut artifact = missing_one(decision, descriptor, kind);
+            artifact.render_failure = Some("repository_read_failed".to_owned());
+            return artifact;
         }
     };
 
     if meta.is_none() {
-        return missing_one(layout, kind);
+        return missing_one(decision, descriptor, kind);
     }
 
     let meta = meta.expect("meta");
     if meta.file_type().is_symlink() {
-        record_ingest_issue(
-            issues,
-            ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed,
-            kind,
-            descriptor.relative_path,
-        );
-        return missing_one(layout, kind);
+        record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed);
+        let mut artifact = missing_one(decision, descriptor, kind);
+        artifact.render_failure = Some("symlink_refused".to_owned());
+        return artifact;
     }
     if !meta.is_file() {
-        record_ingest_issue(
-            issues,
-            ArtifactIngestIssueKind::CanonicalArtifactReadError,
-            kind,
-            descriptor.relative_path,
-        );
-        return missing_one(layout, kind);
+        record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
+        let mut artifact = missing_one(decision, descriptor, kind);
+        artifact.render_failure = Some("non_regular_file_refused".to_owned());
+        return artifact;
     }
 
     let trusted_file = match workspace.trusted_read(&artifact_path) {
         Ok(trusted_file) => trusted_file,
         Err(RepoRelativeFileAccessError::SymlinkNotAllowed(_)) => {
-            record_ingest_issue(
-                issues,
-                ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed,
-                kind,
-                descriptor.relative_path,
-            );
-            return missing_one(layout, kind);
+            record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed);
+            let mut artifact = missing_one(decision, descriptor, kind);
+            artifact.render_failure = Some("symlink_refused".to_owned());
+            return artifact;
+        }
+        Err(RepoRelativeFileAccessError::NotRegularFile(_)) => {
+            record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
+            let mut artifact = missing_one(decision, descriptor, kind);
+            artifact.render_failure = Some("non_regular_file_refused".to_owned());
+            return artifact;
         }
         Err(
             RepoRelativeFileAccessError::Missing(_)
-            | RepoRelativeFileAccessError::NotRegularFile(_)
             | RepoRelativeFileAccessError::ReadFailure { .. },
         ) => {
-            record_ingest_issue(
-                issues,
-                ArtifactIngestIssueKind::CanonicalArtifactReadError,
-                kind,
-                descriptor.relative_path,
-            );
-            return missing_one(layout, kind);
+            record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
+            let mut artifact = missing_one(decision, descriptor, kind);
+            artifact.render_failure = Some("repository_read_failed".to_owned());
+            return artifact;
         }
         Err(RepoRelativeFileAccessError::InvalidPath(_)) => {
             unreachable!("canonical artifact paths should stay repo-relative")
         }
     };
 
-    let bytes = match trusted_file.read_bytes() {
-        Ok(bytes) => bytes,
-        Err(_) => {
-            record_ingest_issue(
-                issues,
-                ArtifactIngestIssueKind::CanonicalArtifactReadError,
-                kind,
-                descriptor.relative_path,
+    let (bytes, exceeded) = match trusted_file.read_bytes_bounded_stable(MAX_SOURCE_DOCUMENT_BYTES)
+    {
+        Ok(observed) => observed,
+        Err(error) => {
+            record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
+            let detail = error.to_string();
+            let mut artifact = missing_one(decision, descriptor, kind);
+            artifact.render_failure = Some(
+                if detail.contains("stable regular-file identity")
+                    || detail.contains("retained-handle observation")
+                {
+                    "observation_changed_during_inspection"
+                } else {
+                    "repository_read_failed"
+                }
+                .to_owned(),
             );
-            return missing_one(layout, kind);
+            return artifact;
         }
     };
+    if exceeded {
+        record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
+        let mut artifact = missing_one(decision, descriptor, kind);
+        artifact.render_failure = Some("document_limit_exceeded".to_owned());
+        return artifact;
+    }
 
     let byte_len = bytes.len() as u64;
-    let matches_setup_starter_template = matches_setup_starter_template(kind, &bytes);
     let presence = if byte_len == 0 {
         ArtifactPresence::PresentEmpty
     } else {
@@ -518,38 +559,187 @@ fn load_one(
     };
 
     let content_sha256 = Some(sha256_hex(&bytes));
+    let renderer = descriptor
+        .renderer_definition_refs()
+        .first()
+        .map(|renderer| renderer.as_str());
+    let fixed_renderer_selected = matches!(
+        (
+            decision.instance_id().as_str(),
+            decision.kind_ref().as_str(),
+            renderer,
+        ),
+        (
+            "project_authority",
+            "handbook.artifact-kind.project-authority@1.1.0",
+            Some("handbook.renderer.charter-review-markdown@1.0.0"),
+        ) | (
+            "project_context",
+            "handbook.artifact-kind.project-context@1.1.0",
+            Some("handbook.renderer.project-context-review-markdown@1.0.0"),
+        ) | (
+            "environment_context",
+            "handbook.artifact-kind.environment-context@1.1.0",
+            Some("handbook.renderer.environment-context-review-markdown@1.0.0"),
+        )
+    );
+    let rendered = match (
+        decision.instance_id().as_str(),
+        decision.kind_ref().as_str(),
+        renderer,
+    ) {
+        (
+            "project_authority",
+            "handbook.artifact-kind.project-authority@1.1.0",
+            Some("handbook.renderer.charter-review-markdown@1.0.0"),
+        ) => parse_canonical_charter(decisions, &bytes)
+            .and_then(|record| render_canonical_charter_markdown(&record))
+            .map_err(|error| match error.kind() {
+                CharterArtifactErrorKind::SourceLimitExceeded => "document_limit_exceeded",
+                CharterArtifactErrorKind::DuplicateKey => "duplicate_yaml_key",
+                CharterArtifactErrorKind::SyntaxError => "yaml_syntax_invalid",
+                CharterArtifactErrorKind::NonObjectRoot => "document_not_object",
+                CharterArtifactErrorKind::SelectedDecisionMissing
+                | CharterArtifactErrorKind::SelectedContractMismatch
+                | CharterArtifactErrorKind::StructuralValidationFailed
+                | CharterArtifactErrorKind::SemanticValidationFailed => {
+                    "structural_validation_failed"
+                }
+                CharterArtifactErrorKind::TypedDecodeFailed => "typed_decode_failed",
+                CharterArtifactErrorKind::SerializationFailed
+                | CharterArtifactErrorKind::RenderedViewRefused => "rendered_view_refused",
+            }),
+        (
+            "project_context",
+            "handbook.artifact-kind.project-context@1.1.0",
+            Some("handbook.renderer.project-context-review-markdown@1.0.0"),
+        ) => parse_canonical_project_context(decisions, &bytes)
+            .and_then(|record| render_project_context_markdown(&record))
+            .map_err(|error| match error.kind() {
+                ProjectContextArtifactErrorKind::SourceLimitExceeded => "document_limit_exceeded",
+                ProjectContextArtifactErrorKind::DuplicateKey => "duplicate_yaml_key",
+                ProjectContextArtifactErrorKind::SyntaxError => "yaml_syntax_invalid",
+                ProjectContextArtifactErrorKind::NonObjectRoot => "document_not_object",
+                ProjectContextArtifactErrorKind::SelectedDecisionMissing
+                | ProjectContextArtifactErrorKind::SelectedContractMismatch
+                | ProjectContextArtifactErrorKind::StructuralValidationFailed => {
+                    "structural_validation_failed"
+                }
+                ProjectContextArtifactErrorKind::TypedDecodeFailed => "typed_decode_failed",
+                ProjectContextArtifactErrorKind::SerializationFailed
+                | ProjectContextArtifactErrorKind::RenderedViewRefused => "rendered_view_refused",
+            }),
+        (
+            "environment_context",
+            "handbook.artifact-kind.environment-context@1.1.0",
+            Some("handbook.renderer.environment-context-review-markdown@1.0.0"),
+        ) => parse_canonical_environment_context(decisions, &bytes)
+            .and_then(|record| render_environment_context_markdown(&record))
+            .map_err(|error| match error.kind() {
+                EnvironmentContextArtifactErrorKind::SourceLimitExceeded => {
+                    "document_limit_exceeded"
+                }
+                EnvironmentContextArtifactErrorKind::DuplicateKey => "duplicate_yaml_key",
+                EnvironmentContextArtifactErrorKind::SyntaxError => "yaml_syntax_invalid",
+                EnvironmentContextArtifactErrorKind::NonObjectRoot => "document_not_object",
+                EnvironmentContextArtifactErrorKind::SelectedDecisionMissing
+                | EnvironmentContextArtifactErrorKind::SelectedContractMismatch
+                | EnvironmentContextArtifactErrorKind::StructuralValidationFailed
+                | EnvironmentContextArtifactErrorKind::DuplicateEnvironmentId => {
+                    "structural_validation_failed"
+                }
+                EnvironmentContextArtifactErrorKind::TypedDecodeFailed => "typed_decode_failed",
+                EnvironmentContextArtifactErrorKind::SerializationFailed
+                | EnvironmentContextArtifactErrorKind::RenderedViewRefused => {
+                    "rendered_view_refused"
+                }
+                EnvironmentContextArtifactErrorKind::Missing
+                | EnvironmentContextArtifactErrorKind::UnsafePath
+                | EnvironmentContextArtifactErrorKind::SourceReadFailed
+                | EnvironmentContextArtifactErrorKind::ObservationChanged => {
+                    "repository_read_failed"
+                }
+            }),
+        _ => Ok(bytes.clone()),
+    };
+    let (rendered_bytes, rendered_output_sha256, rendered_media_type, render_failure) =
+        match rendered {
+            Ok(rendered_bytes) if fixed_renderer_selected => {
+                let fingerprint = DefinitionFingerprint::from_bytes(&rendered_bytes).to_string();
+                (
+                    Some(rendered_bytes),
+                    Some(fingerprint),
+                    Some("text/markdown".to_owned()),
+                    None,
+                )
+            }
+            Ok(_) => (None, None, None, None),
+            Err(reason) => (None, None, None, Some(reason.to_owned())),
+        };
 
     CanonicalArtifact {
         identity: CanonicalArtifactIdentity {
+            instance_id: decision.instance_id().as_str().to_owned(),
+            kind_ref: decision.kind_ref().as_str().to_owned(),
             kind,
-            relative_path: descriptor.relative_path.to_owned(),
-            packet_required: descriptor.packet_required,
-            baseline_required: descriptor.baseline_required,
-            setup_scaffolded: descriptor.setup_scaffolded,
+            label: descriptor.label().to_owned(),
+            relative_path: decision.canonical_path().to_owned(),
+            requiredness_mode: decision.requiredness_mode(),
+            applicability: decision.applicability(),
+            renderer_definition_refs: descriptor
+                .renderer_definition_refs()
+                .iter()
+                .map(|renderer| renderer.as_str().to_owned())
+                .collect(),
+            packet_required,
+            baseline_required: packet_required,
+            setup_scaffolded: false,
             presence,
             byte_len: Some(byte_len),
             content_sha256,
-            matches_setup_starter_template,
+            matches_setup_starter_template: false,
         },
         bytes: Some(bytes),
+        rendered_bytes,
+        rendered_output_sha256,
+        rendered_media_type,
+        render_failure,
     }
 }
 
-fn missing_one(layout: CanonicalLayout<'_>, kind: CanonicalArtifactKind) -> CanonicalArtifact {
-    let descriptor = descriptor_for_layout(layout, kind);
+fn missing_one(
+    decision: &ArtifactProfileDecision,
+    descriptor: &ResolvedArtifactInstance,
+    kind: CanonicalArtifactKind,
+) -> CanonicalArtifact {
+    let packet_required = decision.applicability() == ArtifactApplicability::Required;
     CanonicalArtifact {
         identity: CanonicalArtifactIdentity {
+            instance_id: decision.instance_id().as_str().to_owned(),
+            kind_ref: decision.kind_ref().as_str().to_owned(),
             kind,
-            relative_path: descriptor.relative_path.to_owned(),
-            packet_required: descriptor.packet_required,
-            baseline_required: descriptor.baseline_required,
-            setup_scaffolded: descriptor.setup_scaffolded,
+            label: descriptor.label().to_owned(),
+            relative_path: decision.canonical_path().to_owned(),
+            requiredness_mode: decision.requiredness_mode(),
+            applicability: decision.applicability(),
+            renderer_definition_refs: descriptor
+                .renderer_definition_refs()
+                .iter()
+                .map(|renderer| renderer.as_str().to_owned())
+                .collect(),
+            packet_required,
+            baseline_required: packet_required,
+            setup_scaffolded: false,
             presence: ArtifactPresence::Missing,
             byte_len: None,
             content_sha256: None,
             matches_setup_starter_template: false,
         },
         bytes: None,
+        rendered_bytes: None,
+        rendered_output_sha256: None,
+        rendered_media_type: None,
+        render_failure: None,
     }
 }
 
@@ -565,27 +755,6 @@ fn bytes_to_lower_hex(bytes: &[u8]) -> String {
         let _ = write!(out, "{:02x}", b);
     }
     out
-}
-
-fn descriptor_for_layout(
-    layout: CanonicalLayout<'_>,
-    kind: CanonicalArtifactKind,
-) -> CanonicalArtifactDescriptor {
-    let mut descriptor = *descriptor_for(kind);
-    if layout.contract() == *default_canonical_layout_contract() {
-        descriptor.relative_path = kind.relative_path();
-    } else {
-        descriptor.relative_path = layout.artifact_relative_path(kind);
-        descriptor.namespace_dir = layout.namespace_dir(kind);
-    }
-    descriptor
-}
-
-fn descriptor_for(kind: CanonicalArtifactKind) -> &'static CanonicalArtifactDescriptor {
-    CANONICAL_ARTIFACT_DESCRIPTORS
-        .iter()
-        .find(|descriptor| descriptor.kind == kind)
-        .expect("canonical artifact descriptor should exist")
 }
 
 fn artifact_ingest_read_failure(err: RepoRelativeMetadataReadError) -> ArtifactIngestError {

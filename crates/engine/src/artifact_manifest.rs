@@ -44,8 +44,9 @@ impl ArtifactManifest {
         let ingest_issues = artifacts.ingest_issues.clone();
         let ordered_identities = artifacts
             .identities()
-            .map(|identity| identity.clone())
-            .to_vec();
+            .into_iter()
+            .cloned()
+            .collect::<Vec<_>>();
 
         let freshness = compute_freshness(
             &ordered_identities,

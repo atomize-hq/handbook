@@ -1,4 +1,7 @@
-use handbook_engine::{ArtifactPresence, CanonicalArtifactIdentity, CanonicalArtifactKind};
+use handbook_engine::{
+    ArtifactApplicability, ArtifactPresence, CanonicalArtifactIdentity, CanonicalArtifactKind,
+    RequirednessMode,
+};
 use handbook_flow::{
     evaluate_budget_with_effective_bytes, BudgetByteDomain, BudgetDisposition,
     BudgetEffectiveBytes, BudgetPolicy,
@@ -8,8 +11,16 @@ const SELECTED_PATH: &str = ".handbook/project/context.yaml";
 
 fn selected_identity(source_byte_len: u64) -> CanonicalArtifactIdentity {
     CanonicalArtifactIdentity {
+        instance_id: "project_context".to_owned(),
+        kind_ref: "handbook.artifact-kind.project-context@1.1.0".to_owned(),
         kind: CanonicalArtifactKind::ProjectContext,
+        label: "Project Context".to_owned(),
         relative_path: SELECTED_PATH.to_owned(),
+        requiredness_mode: RequirednessMode::Always,
+        applicability: ArtifactApplicability::Required,
+        renderer_definition_refs: vec![
+            "handbook.renderer.project-context-review-markdown@1.0.0".to_owned()
+        ],
         packet_required: true,
         baseline_required: true,
         setup_scaffolded: false,
@@ -71,8 +82,14 @@ fn rendered_output_domain_controls_both_thresholds_when_source_is_larger() {
 #[test]
 fn fixed_artifacts_retain_the_source_budget_domain() {
     let fixed = CanonicalArtifactIdentity {
+        instance_id: "work_specification".to_owned(),
+        kind_ref: "handbook.artifact-kind.work-specification@1.0.0".to_owned(),
         kind: CanonicalArtifactKind::FeatureSpec,
+        label: "Work Specification".to_owned(),
         relative_path: ".handbook/feature_spec/FEATURE_SPEC.md".to_owned(),
+        requiredness_mode: RequirednessMode::Optional,
+        applicability: ArtifactApplicability::Optional,
+        renderer_definition_refs: Vec::new(),
         packet_required: false,
         baseline_required: false,
         setup_scaffolded: false,
@@ -95,8 +112,22 @@ fn fixed_artifacts_retain_the_source_budget_domain() {
 
 fn identity(path: &str, byte_len: u64, packet_required: bool) -> CanonicalArtifactIdentity {
     CanonicalArtifactIdentity {
+        instance_id: path.replace(['/', '.'], "_"),
+        kind_ref: "example.artifact-kind.unrendered@1.0.0".to_owned(),
         kind: CanonicalArtifactKind::FeatureSpec,
+        label: "Unrendered Artifact".to_owned(),
         relative_path: path.to_owned(),
+        requiredness_mode: if packet_required {
+            RequirednessMode::Always
+        } else {
+            RequirednessMode::Optional
+        },
+        applicability: if packet_required {
+            ArtifactApplicability::Required
+        } else {
+            ArtifactApplicability::Optional
+        },
+        renderer_definition_refs: Vec::new(),
         packet_required,
         baseline_required: false,
         setup_scaffolded: false,

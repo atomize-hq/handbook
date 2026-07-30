@@ -3,8 +3,8 @@ use handbook_compiler::resolve;
 use handbook_compiler::{render_next_safe_action_value, BlockerCategory};
 #[cfg(unix)]
 use handbook_engine::{
-    parse_canonical_project_context, render_project_context_markdown,
-    resolve_shipped_profile_decisions,
+    load_selected_charter, load_selected_environment_context, parse_canonical_project_context,
+    render_project_context_markdown, resolve_shipped_profile_decisions,
 };
 #[cfg(unix)]
 use handbook_engine::{setup_starter_template_bytes, CanonicalArtifactKind};
@@ -13,6 +13,33 @@ use handbook_flow::{
     BudgetDisposition, BudgetPolicy, PacketSectionMode, PacketVariant, ReadyPacketNextSafeAction,
 };
 use handbook_flow::{PacketSelectionStatus, ResolveRequest};
+
+#[cfg(unix)]
+#[path = "../../engine/tests/support/hcm_2_2_committed_charter.rs"]
+mod hcm_2_2_committed_charter;
+
+#[cfg(unix)]
+const HCM_2_2_SELECTED_CHARTER_YAML: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
+));
+
+#[cfg(unix)]
+const VALID_ENVIRONMENT_CONTEXT_YAML: &str = concat!(
+    "authoritative_references:\n",
+    "  - \"handbook.project.environments@1.0.0\"\n",
+    "environments:\n",
+    "  -\n",
+    "    capabilities:\n",
+    "      - \"rust.stable\"\n",
+    "      - \"filesystem.workspace-write\"\n",
+    "    description: \"Local development.\"\n",
+    "    environment_id: \"local-dev\"\n",
+    "known_unknowns: []\n",
+    "record_id: \"handbook.environment-context\"\n",
+    "schema_id: \"handbook.artifact.environment-context\"\n",
+    "schema_version: \"1.1\"\n",
+);
 
 #[cfg(unix)]
 fn write_file(path: &std::path::Path, contents: &[u8]) {
@@ -99,13 +126,6 @@ fn invalid_optional_project_context_markdown() -> String {
 }
 
 #[cfg(unix)]
-fn sha256_hex(bytes: &[u8]) -> String {
-    use sha2::{Digest, Sha256};
-
-    format!("{:x}", Sha256::digest(bytes))
-}
-
-#[cfg(unix)]
 fn write_valid_project_context(repo_root: &std::path::Path) {
     write_file(
         &repo_root.join(".handbook/project/context.yaml"),
@@ -116,10 +136,12 @@ fn write_valid_project_context(repo_root: &std::path::Path) {
 #[cfg(unix)]
 fn required_budget_bytes(repo_root: &std::path::Path) -> u64 {
     let decisions = resolve_shipped_profile_decisions(repo_root).expect("shipped decisions");
+    let charter =
+        load_selected_charter(repo_root, &decisions).expect("selected Charter projection");
     let project_context =
         parse_canonical_project_context(&decisions, valid_project_context_markdown().as_bytes())
             .expect("canonical Project Context");
-    valid_charter_markdown().len() as u64
+    charter.rendered_bytes().len() as u64
         + render_project_context_markdown(&project_context)
             .expect("rendered Project Context")
             .len() as u64
@@ -155,6 +177,11 @@ fn optional_artifact_read_error_blocks_without_refusal() {
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
 
+    hcm_2_2_committed_charter::promote_committed_charter(
+        repo_root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-retired-read-decoy",
+    );
     write_file(
         &repo_root.join(".handbook/charter/CHARTER.md"),
         valid_charter_markdown().as_bytes(),
@@ -188,6 +215,11 @@ fn missing_optional_project_context_emits_omission_note() {
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
 
+    hcm_2_2_committed_charter::promote_committed_charter(
+        repo_root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-missing-project-context",
+    );
     write_file(
         &repo_root.join(".handbook/charter/CHARTER.md"),
         valid_charter_markdown().as_bytes(),
@@ -216,6 +248,11 @@ fn semantically_invalid_optional_project_context_is_omitted_from_ready_packet() 
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
 
+    hcm_2_2_committed_charter::promote_committed_charter(
+        repo_root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-invalid-project-context",
+    );
     write_file(
         &repo_root.join(".handbook/charter/CHARTER.md"),
         valid_charter_markdown().as_bytes(),
@@ -247,6 +284,11 @@ fn semantically_invalid_required_charter_blocks_with_required_artifact_invalid()
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
 
+    hcm_2_2_committed_charter::promote_committed_charter(
+        repo_root,
+        b"schema_id: handbook.artifact.charter\nschema_version: '1.1'\n",
+        "resolver-invalid-selected-charter",
+    );
     write_file(&repo_root.join(".handbook/charter/CHARTER.md"), b"charter");
     write_file(
         &repo_root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
@@ -273,9 +315,10 @@ fn required_starter_template_blocks_without_ready_packet() {
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
 
-    write_file(
-        &repo_root.join(".handbook/charter/CHARTER.md"),
-        setup_starter_template_bytes(CanonicalArtifactKind::Charter),
+    hcm_2_2_committed_charter::promote_committed_charter(
+        repo_root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-project-context-starter",
     );
     write_file(
         &repo_root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
@@ -292,16 +335,16 @@ fn required_starter_template_blocks_without_ready_packet() {
     let refusal = result.refusal.expect("refusal");
     assert_eq!(
         refusal.category,
-        handbook_compiler::RefusalCategory::RequiredArtifactStarterTemplate
+        handbook_compiler::RefusalCategory::RequiredArtifactInvalid
     );
     assert_eq!(
         render_next_safe_action_value(&refusal.next_safe_action),
-        "run `handbook author charter --from-inputs <path|->`"
+        "run `handbook author project-context --from-inputs <path|->`"
     );
     assert!(result.blockers.iter().any(|blocker| blocker.category
-        == BlockerCategory::RequiredArtifactStarterTemplate
+        == BlockerCategory::RequiredArtifactInvalid
         && render_next_safe_action_value(&blocker.next_safe_action)
-            == "run `handbook author charter --from-inputs <path|->`"));
+            == "run `handbook author project-context --from-inputs <path|->`"));
     assert!(result.packet_result.sections.is_empty());
 }
 
@@ -311,6 +354,11 @@ fn resolver_is_deterministic_for_identical_inputs() {
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
 
+    hcm_2_2_committed_charter::promote_committed_charter(
+        repo_root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-deterministic",
+    );
     write_file(
         &repo_root.join(".handbook/charter/CHARTER.md"),
         valid_charter_markdown().as_bytes(),
@@ -334,13 +382,19 @@ fn budget_next_safe_action_is_only_present_on_refuse() {
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
 
-    write_file(
-        &repo_root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
+    hcm_2_2_committed_charter::promote_committed_charter(
+        repo_root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-budget-actions",
+    );
+    let oversized_description = "x".repeat(8_192);
+    let environment = VALID_ENVIRONMENT_CONTEXT_YAML.replace(
+        "description: \"Local development.\"",
+        format!("description: \"{oversized_description}\"").as_str(),
     );
     write_file(
-        &repo_root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        "f".repeat(4096).as_bytes(),
+        &repo_root.join(".handbook/project/environment.yaml"),
+        environment.as_bytes(),
     );
     write_file(
         &repo_root.join(".handbook/project/context.yaml"),
@@ -348,10 +402,13 @@ fn budget_next_safe_action_is_only_present_on_refuse() {
     );
 
     // Summarize optional.
+    let decisions = resolve_shipped_profile_decisions(repo_root).expect("shipped decisions");
+    let selected = load_selected_environment_context(repo_root, &decisions)
+        .expect("selected Environment Context projection");
     let summarize_req = ResolveRequest {
         budget_policy: BudgetPolicy {
             max_total_bytes: None,
-            max_per_artifact_bytes: Some(valid_charter_markdown().len() as u64),
+            max_per_artifact_bytes: Some(selected.rendered_bytes().len() as u64 - 1),
         },
         ..ResolveRequest::default()
     };
@@ -396,23 +453,32 @@ fn budget_summarize_replaces_optional_body_with_summary() {
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
 
-    write_file(
-        &repo_root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
+    hcm_2_2_committed_charter::promote_committed_charter(
+        repo_root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-budget-summary",
+    );
+    let oversized_description = "x".repeat(8_192);
+    let environment = VALID_ENVIRONMENT_CONTEXT_YAML.replace(
+        "description: \"Local development.\"",
+        format!("description: \"{oversized_description}\"").as_str(),
     );
     write_file(
-        &repo_root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        "feature".repeat(1024).as_bytes(),
+        &repo_root.join(".handbook/project/environment.yaml"),
+        environment.as_bytes(),
     );
     write_file(
         &repo_root.join(".handbook/project/context.yaml"),
         valid_project_context_markdown().as_bytes(),
     );
 
+    let decisions = resolve_shipped_profile_decisions(repo_root).expect("shipped decisions");
+    let selected = load_selected_environment_context(repo_root, &decisions)
+        .expect("selected Environment Context projection");
     let summarize_req = ResolveRequest {
         budget_policy: BudgetPolicy {
             max_total_bytes: None,
-            max_per_artifact_bytes: Some(valid_charter_markdown().len() as u64),
+            max_per_artifact_bytes: Some(selected.rendered_bytes().len() as u64 - 1),
         },
         ..ResolveRequest::default()
     };
@@ -427,8 +493,8 @@ fn budget_summarize_replaces_optional_body_with_summary() {
         .packet_result
         .sections
         .iter()
-        .find(|section| section.title == "FEATURE_SPEC")
-        .expect("feature spec section");
+        .find(|section| section.title == "ENVIRONMENT_CONTEXT")
+        .expect("Environment Context section");
     assert_eq!(summarized_section.mode, PacketSectionMode::Summary);
     assert!(
         summarized_section
@@ -438,9 +504,7 @@ fn budget_summarize_replaces_optional_body_with_summary() {
         summarized_section.contents
     );
     assert!(
-        !summarized_section
-            .contents
-            .contains("featurefeaturefeature"),
+        !summarized_section.contents.contains("xxxxxxxxxxxxxxxx"),
         "full optional contents should not leak once summarized: {:?}",
         summarized_section.contents
     );
@@ -452,13 +516,14 @@ fn budget_exclude_removes_optional_body_from_packet() {
     let dir = tempfile::tempdir().expect("tempdir");
     let repo_root = dir.path();
 
-    write_file(
-        &repo_root.join(".handbook/charter/CHARTER.md"),
-        valid_charter_markdown().as_bytes(),
+    hcm_2_2_committed_charter::promote_committed_charter(
+        repo_root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-budget-exclude",
     );
     write_file(
-        &repo_root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature",
+        &repo_root.join(".handbook/project/environment.yaml"),
+        VALID_ENVIRONMENT_CONTEXT_YAML.as_bytes(),
     );
     write_file(
         &repo_root.join(".handbook/project/context.yaml"),
@@ -485,7 +550,7 @@ fn budget_exclude_removes_optional_body_from_packet() {
             .included_sources
             .iter()
             .all(|source| source.canonical_repo_relative_path
-                != ".handbook/feature_spec/FEATURE_SPEC.md"),
+                != ".handbook/project/environment.yaml"),
         "excluded sources should not be listed as included: {:?}",
         result.packet_result.included_sources
     );
@@ -495,7 +560,7 @@ fn budget_exclude_removes_optional_body_from_packet() {
             .packet_result
             .sections
             .iter()
-            .all(|section| section.title != "FEATURE_SPEC"),
+            .all(|section| section.title != "ENVIRONMENT_CONTEXT"),
         "excluded optional section should be absent from packet body: {:?}",
         result.packet_result.sections
     );
@@ -507,6 +572,11 @@ fn resolver_builds_typed_packet_body_for_planning_packet() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
+    hcm_2_2_committed_charter::promote_committed_charter(
+        root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-planning-packet",
+    );
     write_file(
         &root.join(".handbook/charter/CHARTER.md"),
         valid_charter_markdown().as_bytes(),
@@ -519,6 +589,10 @@ fn resolver_builds_typed_packet_body_for_planning_packet() {
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"feature spec body",
     );
+    write_file(
+        &root.join(".handbook/project/environment.yaml"),
+        VALID_ENVIRONMENT_CONTEXT_YAML.as_bytes(),
+    );
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
 
@@ -529,7 +603,10 @@ fn resolver_builds_typed_packet_body_for_planning_packet() {
     assert_eq!(result.packet_result.sections.len(), 3);
     assert_eq!(result.packet_result.sections[0].title, "CHARTER");
     assert_eq!(result.packet_result.sections[1].title, "PROJECT_CONTEXT");
-    assert_eq!(result.packet_result.sections[2].title, "FEATURE_SPEC");
+    assert_eq!(
+        result.packet_result.sections[2].title,
+        "ENVIRONMENT_CONTEXT"
+    );
     assert_eq!(
         result.packet_result.sections[1].canonical_repo_relative_path,
         ".handbook/project/context.yaml"
@@ -540,11 +617,13 @@ fn resolver_builds_typed_packet_body_for_planning_packet() {
     );
     assert_eq!(
         result.packet_result.sections[0].mode,
-        PacketSectionMode::Verbatim
+        PacketSectionMode::Rendered
     );
+    let decisions = resolve_shipped_profile_decisions(root).expect("shipped decisions");
+    let charter = load_selected_charter(root, &decisions).expect("selected Charter projection");
     assert_eq!(
-        result.packet_result.sections[0].contents,
-        valid_charter_markdown()
+        result.packet_result.sections[0].contents.as_bytes(),
+        charter.rendered_bytes()
     );
     assert_eq!(
         result.packet_result.decision_summary.ready_next_safe_action,
@@ -567,6 +646,11 @@ fn ready_packet_sections_match_included_source_metadata() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
+    hcm_2_2_committed_charter::promote_committed_charter(
+        root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-source-metadata",
+    );
     write_file(
         &root.join(".handbook/charter/CHARTER.md"),
         valid_charter_markdown().as_bytes(),
@@ -579,6 +663,10 @@ fn ready_packet_sections_match_included_source_metadata() {
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"feature spec body",
     );
+    write_file(
+        &root.join(".handbook/project/environment.yaml"),
+        VALID_ENVIRONMENT_CONTEXT_YAML.as_bytes(),
+    );
 
     let result = resolve(root, ResolveRequest::default()).expect("resolve");
 
@@ -586,7 +674,7 @@ fn ready_packet_sections_match_included_source_metadata() {
         .packet_result
         .sections
         .iter()
-        .filter(|section| section.mode == PacketSectionMode::Verbatim)
+        .filter(|section| section.mode == PacketSectionMode::Rendered)
     {
         let source = result
             .packet_result
@@ -597,12 +685,15 @@ fn ready_packet_sections_match_included_source_metadata() {
             })
             .expect("matching included source");
 
-        let bytes = section.contents.as_bytes();
-        assert_eq!(source.byte_len, Some(bytes.len() as u64));
         assert_eq!(
-            source.content_sha256.as_deref(),
-            Some(sha256_hex(bytes).as_str())
+            source.rendered_output_byte_len,
+            Some(section.contents.len() as u64)
         );
+        assert_eq!(
+            source.rendered_output_sha256.as_deref(),
+            section.rendered_output_sha256.as_deref()
+        );
+        assert!(source.content_sha256.is_some());
     }
 }
 
@@ -612,6 +703,12 @@ fn resolver_builds_fixture_context_for_execution_demo_packets() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path().join("tests/fixtures/execution_demo/basic");
 
+    std::fs::create_dir_all(&root).expect("fixture root");
+    hcm_2_2_committed_charter::promote_committed_charter(
+        &root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-execution-demo",
+    );
     write_file(
         &root.join(".handbook/charter/CHARTER.md"),
         valid_charter_markdown().as_bytes(),
@@ -644,18 +741,14 @@ fn resolver_builds_fixture_context_for_execution_demo_packets() {
         fixture_context.fixture_basis_root,
         "tests/fixtures/execution_demo/basic/.handbook/"
     );
-    assert_eq!(fixture_context.fixture_lineage.len(), 3);
+    assert_eq!(fixture_context.fixture_lineage.len(), 2);
     assert_eq!(
         fixture_context.fixture_lineage[0].canonical_repo_relative_path,
-        ".handbook/charter/CHARTER.md"
+        ".handbook/project/charter.yaml"
     );
     assert_eq!(
         fixture_context.fixture_lineage[1].canonical_repo_relative_path,
         ".handbook/project/context.yaml"
-    );
-    assert_eq!(
-        fixture_context.fixture_lineage[2].canonical_repo_relative_path,
-        ".handbook/feature_spec/FEATURE_SPEC.md"
     );
     assert_eq!(
         result.packet_result.decision_summary.ready_next_safe_action,
@@ -669,6 +762,11 @@ fn resolver_redacts_packet_body_for_unsupported_live_execution_requests() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
+    hcm_2_2_committed_charter::promote_committed_charter(
+        root,
+        HCM_2_2_SELECTED_CHARTER_YAML.as_bytes(),
+        "resolver-live-refusal",
+    );
     write_file(
         &root.join(".handbook/charter/CHARTER.md"),
         valid_charter_markdown().as_bytes(),

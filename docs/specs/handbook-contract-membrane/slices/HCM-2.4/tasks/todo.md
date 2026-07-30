@@ -5,11 +5,11 @@ review-clean, and locally committed at implementation commit `9b3edf2` with
 authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean. P2S,
 P2A, and Option C are historical evidence, not active architecture. The P4/P5
 token prerequisite is review-clean and committed at `00dde01`; P4's separate
-five-part negative-surface/path proof is review-clean and GREEN. P6 is selected
-and entry-authorized for a later implementation session by
-`decision/20260729-p6-aggregate-flow-cleanup-selector.md`, but every P6
-implementation item remains unchecked. HCM-2.4, P7, and Phase 2 exit remain
-incomplete; future task-gate runtime remains deferred.
+five-part negative-surface/path proof is review-clean and GREEN. P6 is
+implemented, independently review-clean, and accepted at reviewed subject
+`sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38`.
+P7 is eligible but remains unselected and unstarted. HCM-2.4 and Phase 2 exit
+remain incomplete; future task-gate runtime remains deferred.
 
 ## Entry
 
@@ -365,21 +365,24 @@ incomplete; future task-gate runtime remains deferred.
       in `decision/20260729-p6-aggregate-flow-cleanup-selector.md`; the bounded
       P2 prerequisite is satisfied at implementation `9b3edf2` with authority
       `f62141b`, and P4's separate negative proof is GREEN.
-- [ ] Replace fixed/bridge flow input collection with admitted selected
+- [x] Replace fixed/bridge flow input collection with admitted selected
       descriptors and retained canonical bytes.
-- [ ] Preserve Charter authority, Project Context behavior, registry brief,
+- [x] Preserve Charter authority, Project Context behavior, registry brief,
       packet ordering, budgets, fixtures, blockers, and refusals.
-- [ ] Delete `BR-HCM-2-PILOT-FLOW-01`.
-- [ ] Delete `BR-HCM-2-CHARTER-FLOW-01`.
-- [ ] Delete all four bridge types, fixed renderer path selector, fixed-family/path
+- [x] Delete `BR-HCM-2-PILOT-FLOW-01`.
+- [x] Delete `BR-HCM-2-CHARTER-FLOW-01`.
+- [x] Delete all four bridge types, fixed renderer path selector, fixed-family/path
       authority, fixed-sibling loaders, legacy exceptions, and bridge-only tests.
-- [ ] Prove forbidden selector/legacy influence scans are empty.
-- [ ] Record status/evidence: pending.
+- [x] Prove forbidden selector/legacy influence scans are empty.
+- [x] Record status/evidence: final different-fresh closure CLEAN at
+      `handoffs/dispatches/20260730T155751Z--HCM-2-4--p6-final-implementation-closure-review.json`
+      for reviewed subject
+      `sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38`.
 
 ## P7 — Proof, review, and closeout
 
-- [ ] BLOCKED: P7 cannot begin until P6 is accepted; Phase 2 exit cannot be
-      claimed from this bounded P2 correction.
+- [ ] ELIGIBLE BUT UNSELECTED/UNSTARTED: accepted P6 satisfies the P7 entry
+      prerequisite, but Phase 2 exit remains unclaimed.
 - [ ] Run every per-family proof and exact Phase 2 exit mapping.
 - [ ] Replay exact 1.1 acceptance, exact 1.2 compatibility, every
       Project-Authority-field negative, real-path 1.2 selection, byte-identical

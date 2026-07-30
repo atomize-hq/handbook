@@ -1,0 +1,215 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260730T021416Z--HCM-2-4--p6-pipeline-handoff-selector-amendment-review",
+  "created_at_utc": "2026-07-30T02:14:16Z",
+  "source_handoff_ids": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "parent_orchestration_id": "20260729T222320Z--HCM-2-4--p6-selector-entry-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-aggregate-flow-cleanup",
+  "subject_fingerprint": "sha256:3c26932cc15ffd152bc72462dbf51078fab7cb1c5064d38d91ec180d45af32f4",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p6-pipeline-handoff-selector-amendment-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-29T22:24:20Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+        "packet_ids": [
+          "P6-aggregate-flow-cleanup"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md#trigger-and-earned-entry-authority"
+      }
+    ],
+    "fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:217df4ed7d6129aa11d1df35872064d5e54d2a6c71f4e1f70fe61d32d6f98f89",
+    "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+    "outcome_registry_fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": "20260729T223556Z--HCM-2-4--p6-aggregate-flow-selector-closure-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p6-pipeline-handoff-selector-amendment-convergence-1",
+    "completed_at_utc": "2026-07-30T02:14:15Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "cargo test -p handbook-compiler --test pipeline_handoff handoff_validation_refuses_stale_canonical_provenance -- --exact",
+        "evidence_ref": "parent terminal output: the isolated test reproduced the sole proportional-wall proof gap because tampering the retired legacy Charter decoy was accepted by the descriptor-selected canonical provenance validator"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "recursive target-function and legacy/canonical Charter path inventory in crates/compiler/tests/pipeline_handoff.rs",
+        "evidence_ref": "parent terminal output: the helper legacy decoy remains at line 46, the exact test mutation is the only authorized occurrence at line 213, and no test-file diff exists before review"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted three-entry repo-path-NUL-SHA256-newline amendment manifest",
+        "evidence_ref": "subject_manifest below: sha256:3c26932cc15ffd152bc72462dbf51078fab7cb1c5064d38d91ec180d45af32f4"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output: exit 0 before amendment review"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output: exit 0 before amendment review"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/compiler/tests/pipeline_handoff.rs",
+        "sha256": "78f12e351696f0e151c85e137bf1c815e4370185fa4b3186a93ba257fcb2e92f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+        "sha256": "b5c07e7aaab189e410665d04f1930ec102cec452059e24a4f05d40bf5f36d9de"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-pipeline-handoff-provenance-test-selector-amendment.md",
+        "sha256": "0f667733947d92fb23e0b0699c5b407d5594ede32b14e59bcfd8e44882da4192"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:3c26932cc15ffd152bc72462dbf51078fab7cb1c5064d38d91ec180d45af32f4"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "one additive HCM-2.4 P6 compiler test selector amendment",
+    "detail_resolution": "one LOW-risk mutation expression selecting the admitted Charter descriptor source",
+    "temporal_horizon": "active P6 proof-gap correction before the test edit",
+    "authority_horizon": "test-proof amendment only; no production, API, fixture, helper, P7, Phase 2, HCM-3.x, task-gate runtime, push, or release authority",
+    "memory_horizon": "reviewed P6 selector, selected entry handoff, exact isolated workspace failure, additive operator authority, and exact GitNexus impact",
+    "validation_horizon": "fresh bounded amendment review followed by focused and full provenance proof, then the existing P6 proof wall"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-pipeline-handoff-provenance-test-selector-amendment.md",
+      "sections": [
+        "Trigger and additive authority",
+        "Exact ancillary allowance",
+        "Pre-edit gates",
+        "Required proof and integration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Trigger and earned entry authority",
+        "Atomic indivisibility and ancillary allowance",
+        "Stop conditions and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 3 — INTERNAL EXECUTION",
+        "PHASE 5 — INDEPENDENT REVIEW"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Internal dispatch contract",
+        "Finding classification and reconciliation",
+        "Built-in delegated-run protocol"
+      ]
+    }
+  ],
+  "repo_truth": "At HEAD 78433acbbb34f672d2eaa590d39fd41703999182 on feat/handbook-contract-membrane, the active P6 implementation is uncommitted and its original 19 selected test targets plus preservation wall are GREEN. The proportional workspace wall exposed exactly one stale compiler test mutation outside that manifest: handoff_validation_refuses_stale_canonical_provenance tampers the retired .handbook/charter/CHARTER.md decoy, so the descriptor-selected validator correctly accepts it. GitNexus reports exact LOW upstream impact with 0 direct callers, 0 processes, and 0 modules. The test path is byte-unchanged before this review; no production, API, helper, fixture, schema, profile, definition, renderer, Cargo, or other assertion is authorized. This read-only review dispatch grants its reviewer no ancillary edit surface; the amendment subject freezes the parent implementation allowance at exactly one test path and one mutation expression.",
+  "allowed_scope": [
+    "Review the additive amendment, the immutable parent selector, and the current pre-edit compiler test bytes against the operator's exact one-expression authority.",
+    "Verify that replacing only the mutation target .handbook/charter/CHARTER.md with .handbook/project/charter.yaml exercises admitted canonical provenance while leaving the installed legacy Charter decoy unchanged.",
+    "Verify the ancillary ceiling is exactly one test path, one changed expression line, LOW risk, and zero production/API/helper/fixture changes.",
+    "Return a read-only CLEAN verdict or prioritized findings before the parent edits the test."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, push, write a handoff or ledger entry, create another dispatch, or delegate.",
+    "Do not change install_canonical_inputs, fixtures, production code, public APIs, schemas, definitions, profiles, renderers, Cargo metadata, or any other legacy-path assertion.",
+    "Do not reopen the P6 implementation design, select P7, claim Phase 2 completion, or authorize HCM-3.x, task-gate runtime, automatic continuation, push, or release."
+  ],
+  "tasks": [
+    "Replay all three subject hashes, the aggregate fingerprint, the causal predecessor/outcome/budget lineage, and exact amendment authority headings.",
+    "Verify the isolated failure is caused solely by tampering a deliberately non-authoritative legacy Charter decoy and that project/charter.yaml is the descriptor-selected canonical Charter source installed by the existing setup.",
+    "Verify the proposed replacement is exactly one mutation-expression line and will preserve the assertion that validation returns StaleCanonicalProvenance.",
+    "Return findings first in P1, P2, P3, P4 order with file/line, violated contract, reason, smallest remediation, and missing proof; separately dispose any P3/P4 advisory."
+  ],
+  "contracts_and_gates": [
+    "The amendment is additive and cannot rewrite any immutable selector or dispatch",
+    "The only implementation delta is one mutation expression in crates/compiler/tests/pipeline_handoff.rs",
+    "The frozen ancillary allowance is LOW risk, one path, one changed line, and test proof only",
+    "The legacy Charter installed by install_canonical_inputs remains a deliberate non-authoritative decoy",
+    "The focused result must remain StaleCanonicalProvenance and the complete compiler pipeline-handoff plus affected provenance wall must pass",
+    "P7, Phase 2, HCM-3.x, task-gate runtime, automatic continuation, push, and release remain unauthorized"
+  ],
+  "stop_conditions": [
+    "Return blocked if a subject hash, predecessor linkage, exact LOW impact, or the one-expression boundary cannot be established.",
+    "Report rather than repair any finding.",
+    "Stop on any need to modify install_canonical_inputs, a fixture, production code, an API, another assertion, or more than the exact mutation expression."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

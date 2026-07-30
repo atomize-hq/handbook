@@ -349,7 +349,7 @@ fn handoff_validation_refuses_stale_canonical_provenance() {
     let (_dir, repo_root, bundle_root, _validated, _manifest) = prepare_emitted_bundle_repo();
 
     write_file(
-        &repo_root.join(".handbook/charter/CHARTER.md"),
+        &repo_root.join(".handbook/project/charter.yaml"),
         "# tampered canonical charter\n",
     );
 

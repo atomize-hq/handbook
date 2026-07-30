@@ -15,10 +15,10 @@ fn make_repo_with_required_system_artifacts() -> tempfile::TempDir {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(&root.join(".handbook/charter/CHARTER.md"), b"charter");
+    write_file(&root.join(".handbook/project/charter.yaml"), b"charter");
     write_file(
-        &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
-        b"feature",
+        &root.join(".handbook/project/context.yaml"),
+        b"project context",
     );
 
     dir
@@ -42,7 +42,7 @@ fn manifest_artifacts_are_in_contract_order() {
         vec![
             CanonicalArtifactKind::Charter,
             CanonicalArtifactKind::ProjectContext,
-            CanonicalArtifactKind::FeatureSpec,
+            CanonicalArtifactKind::EnvironmentContext,
         ]
     );
 }
@@ -136,7 +136,7 @@ fn manifest_from_snapshot_keeps_pre_mutation_identity() {
 
     let artifacts = CanonicalArtifacts::load(root).expect("artifacts");
     write_file(
-        &root.join(".handbook/charter/CHARTER.md"),
+        &root.join(".handbook/project/charter.yaml"),
         b"charter changed after snapshot",
     );
 

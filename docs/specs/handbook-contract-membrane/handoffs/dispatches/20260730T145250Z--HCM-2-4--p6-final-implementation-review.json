@@ -1,0 +1,354 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260730T145250Z--HCM-2-4--p6-final-implementation-review",
+  "created_at_utc": "2026-07-30T14:52:50Z",
+  "source_handoff_ids": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "parent_orchestration_id": "20260729T222320Z--HCM-2-4--p6-selector-entry-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-aggregate-flow-cleanup",
+  "subject_fingerprint": "sha256:b934c834c1b55e6d8fa2388eb9f8e0c5d707c8acbc6d5d1ce2fe8d1dc400188f",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p6-final-implementation-closeout-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-29T22:24:20Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+        "packet_ids": [
+          "P6-aggregate-flow-cleanup"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md#trigger-and-earned-entry-authority"
+      }
+    ],
+    "fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:217df4ed7d6129aa11d1df35872064d5e54d2a6c71f4e1f70fe61d32d6f98f89",
+    "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+    "outcome_registry_fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "proof"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260730T141812Z--HCM-2-4--p6-bounded-read-clippy-selector-amendment-closure-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p6-final-implementation-convergence-1",
+    "completed_at_utc": "2026-07-30T14:52:49Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run both mandatory focused tests, both provenance-amendment tests, all 21 authorized test targets, workspace strict Clippy, formatting, exact absence scans, and cargo test --workspace --all-features -j1",
+        "evidence_ref": "parent terminal output: every focused and target wall passed; strict workspace Clippy passed; recursive bridge/fixed-selector/unbounded-reader scan passed; all-features workspace wall exited 0 in 1088.4 seconds"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory staged subject, fixture/Cargo/schema/definition/profile/renderer paths, bridge/fixed selectors, provenance mutation expressions, and TrustedRepoFile readers",
+        "evidence_ref": "parent terminal output: exactly 34 staged subject paths, 26 code/test plus eight amendment/review artifacts; no fixture, Cargo, dependency, schema, definition, profile, renderer-definition, module, or public-API path; exact two provenance expressions; no bridge/fixed selector or TrustedRepoFile::read_bytes caller remains"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted 34-entry repo-path-NUL-SHA256-newline implementation manifest",
+        "evidence_ref": "subject_manifest below: sha256:b934c834c1b55e6d8fa2388eb9f8e0c5d707c8acbc6d5d1ce2fe8d1dc400188f"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output: exit 0 on final code state"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --cached --check",
+        "evidence_ref": "parent terminal output: exit 0 on exact staged subject"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "be32dd3e5e89b1478c2c34b807776795f9ac583ba0aec482d5b11d38bcf118e5"
+      },
+      {
+        "path": "crates/cli/tests/pipeline_handoff_refusals.rs",
+        "sha256": "36ccea1f25728720ffefd8a72a0b9b98baefca52afa33324dbed3018c5fb84c3"
+      },
+      {
+        "path": "crates/compiler/src/author/charter_shell.rs",
+        "sha256": "ceda7415fd9f692e51789e01cadb895f5a7f2b1f78c7b954d5eb33e0d8b8198f"
+      },
+      {
+        "path": "crates/compiler/src/author/mod.rs",
+        "sha256": "72c6b81be994f1a09899d901c69bb2eb33e7ccbf6a96ea51d99c6878a3a11948"
+      },
+      {
+        "path": "crates/compiler/src/blocker.rs",
+        "sha256": "5d2bbf924ec3db6e2412a8dc7b95bdeb91a1a1ae7070636211d9e48c4926335b"
+      },
+      {
+        "path": "crates/compiler/src/layout.rs",
+        "sha256": "b9b28a643b26e604593125befd4be44d21bcefaeb7af8f1825d5005d144d0b44"
+      },
+      {
+        "path": "crates/compiler/tests/artifact_manifest_interface.rs",
+        "sha256": "4bc38cc2b19e5ffe1a52a3c6dccc43ea4031518d08f730c814b2a87b9c779ed6"
+      },
+      {
+        "path": "crates/compiler/tests/canonical_artifacts_ingest.rs",
+        "sha256": "cf1e8c317743443966222bee187ab4ef46eef709592258a952e7acc349bff097"
+      },
+      {
+        "path": "crates/compiler/tests/freshness_computation.rs",
+        "sha256": "bd22770fc840c68c7c65c995d913024d78e28dd9819e6bbf906ab02b5ae3b01d"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_handoff.rs",
+        "sha256": "3a6341f6b7e00566f962507dd18ddd2e4a542182b9742f9a2e6c670cb6b3874f"
+      },
+      {
+        "path": "crates/compiler/tests/refusal_mapping.rs",
+        "sha256": "adf3de3fd70d20c30f31526fdd134497760a974059b42c1ee96de3ecc1eb984e"
+      },
+      {
+        "path": "crates/engine/src/artifact_manifest.rs",
+        "sha256": "4236a9c3af793dd373755a1cd7a8abc8f18cb9600a44a232cfb770be48b9d5e8"
+      },
+      {
+        "path": "crates/engine/src/baseline_validation.rs",
+        "sha256": "e166eb6e7e80a839963e050fb2a15a6f32dedde60bd56df6ead3326303f05578"
+      },
+      {
+        "path": "crates/engine/src/canonical_artifacts.rs",
+        "sha256": "7ff4353c29140d13b120d979e8979f0550e057fe6457055b5275b76b2b1a8c4d"
+      },
+      {
+        "path": "crates/engine/src/canonical_paths.rs",
+        "sha256": "bfa34ed90ddd8df05260f8d919edeef548061562841910d187850bdd1dcc8c9f"
+      },
+      {
+        "path": "crates/engine/src/canonical_repo_support.rs",
+        "sha256": "dd6dd05d7597a525d5efe5ca2a4e6901581c3d6a71a870ed28757a1782b22e60"
+      },
+      {
+        "path": "crates/engine/src/freshness.rs",
+        "sha256": "8c521f9eb99738f974f898525674d76bf493ab252ca3505c95a290b0e977f97b"
+      },
+      {
+        "path": "crates/engine/tests/artifact_manifest_interface.rs",
+        "sha256": "4bc38cc2b19e5ffe1a52a3c6dccc43ea4031518d08f730c814b2a87b9c779ed6"
+      },
+      {
+        "path": "crates/engine/tests/baseline_validation.rs",
+        "sha256": "28a44fd95dc870332d357c604c570916f4a314d9d581de41fc2958bc456e0d30"
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "sha256": "5c91c11f2dad831584d554341a40118b7cd0fd6445f5559ccf9bf15c329de3f2"
+      },
+      {
+        "path": "crates/engine/tests/freshness_computation.rs",
+        "sha256": "bd22770fc840c68c7c65c995d913024d78e28dd9819e6bbf906ab02b5ae3b01d"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_1_project_context.rs",
+        "sha256": "9618884a52e2378bcbddc1f550b1842849722e495391d7cc57b8bd86680bdccc"
+      },
+      {
+        "path": "crates/flow/src/resolver.rs",
+        "sha256": "10326086c9a26094d24d187c0bf0c95f04707d9919992eba18f1eb678c77d835"
+      },
+      {
+        "path": "crates/flow/tests/budget_domains.rs",
+        "sha256": "43cf66b9983bd15345eafdaffaa912073a50c5e810766902604ea0a7195cc7ee"
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "sha256": "5a97b2ac6563ae8f0501edba73b1117653fbee392ae26900a92032208e99a397"
+      },
+      {
+        "path": "crates/pipeline/tests/pipeline_handoff.rs",
+        "sha256": "7c96be7f1727ae345b4f35f6bbbba203c5ed485cf6370726d70fb716ea231fbc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T021416Z--HCM-2-4--p6-pipeline-handoff-selector-amendment-review.json",
+        "sha256": "d463f96c0deeea7b3ed8aa7d1df178a2c0dbd4b0e60769ecd1ac597bec86ae42"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T025942Z--HCM-2-4--p6-pipeline-handoff-selector-amendment-closure-review.json",
+        "sha256": "f1ceece7202fd74f1e89ad4defe35b9e7d794e3fd5d4e7fd819cc02df80c215e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T034241Z--HCM-2-4--p6-implementation-specification-review.json",
+        "sha256": "91cf744c7b518494aea87428d7f54fccbb275fb096ebe5fb0f74b7c37bd9131f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T034242Z--HCM-2-4--p6-implementation-standards-review.json",
+        "sha256": "c56a5b1e19b6b181c4ee04418c3d24fbfaacb2366c99191f21b2bdb8eb2acb48"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T140720Z--HCM-2-4--p6-bounded-read-clippy-selector-amendment-review.json",
+        "sha256": "a9b929468b6ab30d6817afbe1bb58ce92792aa4ca1c73e06093de36e06873344"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T141812Z--HCM-2-4--p6-bounded-read-clippy-selector-amendment-closure-review.json",
+        "sha256": "84788495780a163eeddc2794c2433352e05cfa496278f4a3625a58f61a1fbf85"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-pipeline-handoff-provenance-test-selector-amendment.md",
+        "sha256": "651b1db85e853d14e6f3d1f674b30479557fbd2ab97f57a5d481f37fd9c707e5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-bounded-read-clippy-selector-amendment.md",
+        "sha256": "d9689df51fcb537d77246a474e326c2638d2ef3fecff47a4fb518814874752a8"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b934c834c1b55e6d8fa2388eb9f8e0c5d707c8acbc6d5d1ce2fe8d1dc400188f"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "complete HCM-2.4 P6 implementation subject after all authorized remediation and proof amendments",
+    "detail_resolution": "different-fresh final implementation and standards review over the exact staged subject and complete proof wall",
+    "temporal_horizon": "after final code/test convergence and before control-pack truth correction or primary commit",
+    "authority_horizon": "P6 only; P7 remains eligible but unselected; Phase 2, HCM-3.x, task-gate runtime, automatic continuation, push, and release remain unauthorized",
+    "memory_horizon": "reviewed selector, both additive amendments, complete prior discovery/remediation/supplemental lineage, final absence scan, staged GitNexus change detection, and all focused/target/workspace proof",
+    "validation_horizon": "CLEAN final implementation verdict, earned control-pack truth correction, primary commit, parent-owned true-stop handoff, mechanical ledger validation, and separate handoff commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Exact collection and fixed-renderer contract",
+        "Complete production path and symbol manifest",
+        "Complete test and proof manifest",
+        "Preserved behavior and proof obligations",
+        "Atomic indivisibility and ancillary allowance",
+        "Stop conditions and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Artifact instance descriptor contract",
+        "Lifecycle, support, and derived-view constraints",
+        "Charter intake and canonical contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Ready-to-use prompt",
+        "Orchestration boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Finding and escalation behavior",
+        "Review lineage",
+        "Built-in delegated-run protocol"
+      ]
+    }
+  ],
+  "repo_truth": "At HEAD 78433acbbb34f672d2eaa590d39fd41703999182 on feat/handbook-contract-membrane, exactly 34 P6 implementation/amendment/review paths are staged and no protected path is staged. Descriptor-selected CanonicalArtifacts now owns normal collection, retained exact source bytes and identities, distinct source/render fingerprints, the exact three first-party renderer projections, packet ordering/budgets/summaries/fixtures/blockers/refusals/decision logs, Charter authority, Project Context legacy non-influence, and Environment Context advisory behavior. Both bridge IDs, all four bridge types, rendered_projection_for_path, fixed sibling loaders, fixed order/path/priority selectors, and private unbounded TrustedRepoFile::read_bytes are absent. The two provenance amendments prove missing-to-present selected-YAML drift; existing-byte mutation remains separately covered. Both mandatory REDs and the recursive absence RED were recorded before production edits. Final GREEN includes both mandatory focused tests, both provenance tests, all 21 authorized targets, strict workspace Clippy, formatting, whitespace, exact absence scans, and cargo test --workspace --all-features -j1 exit 0 in 1088.4 seconds. Staged GitNexus change detection reports 34 paths, 160 symbols, one expected Fingerprint_bytes-to-U64 execution flow, and MEDIUM aggregate risk. Protected user work is byte-identical to its recorded hashes and remains unstaged. P7 is eligible but unselected and unstarted.",
+  "allowed_scope": [
+    "Replay the exact 34-entry staged subject and review the complete P6 implementation against the selector, both additive amendments, and all prior P2 remediation.",
+    "Inspect descriptor-selected collection, retained bytes/identity, distinct fingerprints, exact renderer ceiling, selected-path authority, ordering, budget, packet, fixture, blocker, refusal, provenance, and freshness behavior.",
+    "Verify no bridge, fixed selection/order/path/priority authority, compatibility layer, dual read, generic configured renderer, custom-kind renderer machinery, or unbounded selected source read remains.",
+    "Verify Charter committed authority, Project Context legacy-Markdown non-influence, Environment Context advisory/non-blocking behavior, HCM-2.1/HCM-2.2/HCM-2.3 preservation, durable negatives, and both provenance truth domains.",
+    "Audit exact path/symbol ceilings, no fixture/public/API/Cargo/schema/definition/profile/renderer-definition change, no protected-path staging, and no P7 or broader authority.",
+    "Return read-only CLEAN or prioritized findings; P3/P4 must be explicitly disposed for parent inventory/deduplication."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, push, write a handoff/ledger/control-pack artifact, create another dispatch, or delegate.",
+    "Do not propose generic renderer execution, compatibility layers, dual reads, inferred filenames, Work Specification/Decision Record/Risk Record/custom-kind renderer machinery, task-gate runtime, or unrelated cleanup.",
+    "Do not select or begin P7, claim Phase 2 completion, or authorize HCM-3.x, automatic continuation, push, or release."
+  ],
+  "tasks": [
+    "Replay all 34 hashes, the aggregate fingerprint, final-closeout stage transition, prior causal chain, selector amendments, staged path inventory, and protected-path exclusion.",
+    "Review every staged production diff and affected call path for sole descriptor authority, safe bounded retained reads, exact three-renderer dispatch, identity/fingerprint correctness, and absence of fixed/bridge authority.",
+    "Review every staged test delta for durable discriminating proof without fixture/helper/assertion weakening, including both provenance paths and bounded-read tests.",
+    "Reconcile all six prior implementation/amendment P2 findings as closed and verify the final code edit did not unmask a related P1/P2.",
+    "Evaluate the complete proof evidence and staged GitNexus MEDIUM/one-flow result for unexplained scope or missing preservation coverage.",
+    "Return findings first in P1, P2, P3, P4 order with file/line, violated contract, reason, smallest remediation, and missing proof; separately dispose every P3/P4 advisory."
+  ],
+  "contracts_and_gates": [
+    "One descriptor-selected CanonicalArtifacts collection is the sole normal authority",
+    "Source bytes and source/render fingerprints remain exact and distinct",
+    "Only the exact three existing first-party renderer projections dispatch",
+    "Charter, Project Context, Environment Context, packets, budgets, fixtures, blockers, refusals, decision logs, manifest, freshness, and provenance behavior remain preserved",
+    "Both bridge IDs, all bridge types, rendered helper, fixed loaders/order/path/priority selectors, and unbounded selected read are absent",
+    "No fixture, public API, Cargo/dependency, schema, definition, profile, renderer-definition, module, unsafe policy, P7, or broader authority change",
+    "Final reviewed subject must be CLEAN with no unresolved P1/P2 before control-pack correction or commit"
+  ],
+  "stop_conditions": [
+    "Return blocked if any subject hash, causal linkage, staged path ceiling, protected-path exclusion, proof result, or live authority section cannot be established.",
+    "Report rather than repair every finding.",
+    "Stop on any unexplained path/symbol/process/module, altered policy, weakened durable negative, remaining competing authority, generic renderer machinery, or P7/broader work."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

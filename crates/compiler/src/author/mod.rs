@@ -28,11 +28,7 @@ pub use project_context::{
     AuthorProjectContextResult,
 };
 
-use crate::baseline_validation::{baseline_artifact_validation, BaselineArtifactVerdict};
-use crate::canonical_artifacts::{
-    CanonicalArtifact, CanonicalArtifactIdentity, CanonicalArtifactKind, CanonicalArtifacts,
-    SystemRootStatus,
-};
+use crate::canonical_artifacts::{CanonicalArtifacts, SystemRootStatus};
 use crate::repo_file_access::{
     resolve_repo_relative_write_path, RepoRelativeMutationError, RepoRelativeWritePathError,
 };
@@ -63,57 +59,6 @@ fn validate_system_root_for_authoring(
         SystemRootStatus::Missing => Err(SystemRootAuthoringError::Missing),
         SystemRootStatus::NotDir => Err(SystemRootAuthoringError::NotDir),
         SystemRootStatus::SymlinkNotAllowed => Err(SystemRootAuthoringError::SymlinkNotAllowed),
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-enum BaselineAuthoringEligibility {
-    Authorable,
-    ExistingValidCanonicalTruth,
-    RequiresSetupRefresh,
-}
-
-fn canonical_artifact_identity(
-    artifacts: &CanonicalArtifacts,
-    kind: CanonicalArtifactKind,
-) -> &CanonicalArtifactIdentity {
-    &canonical_artifact(artifacts, kind).identity
-}
-
-fn canonical_artifact(
-    artifacts: &CanonicalArtifacts,
-    kind: CanonicalArtifactKind,
-) -> &CanonicalArtifact {
-    match kind {
-        CanonicalArtifactKind::Charter => &artifacts.charter,
-        CanonicalArtifactKind::ProjectContext => &artifacts.project_context,
-        CanonicalArtifactKind::EnvironmentContext => {
-            panic!("Environment Context is not owned by fixed-sibling authoring")
-        }
-        CanonicalArtifactKind::FeatureSpec => &artifacts.feature_spec,
-    }
-}
-
-fn baseline_authoring_eligibility(
-    artifacts: &CanonicalArtifacts,
-    kind: CanonicalArtifactKind,
-) -> BaselineAuthoringEligibility {
-    let validation = baseline_artifact_validation(artifacts, kind)
-        .expect("baseline authoring eligibility requires a baseline artifact");
-
-    match validation.verdict {
-        BaselineArtifactVerdict::Missing
-        | BaselineArtifactVerdict::Empty
-        | BaselineArtifactVerdict::StarterOwned
-        | BaselineArtifactVerdict::SemanticallyInvalid { .. } => {
-            BaselineAuthoringEligibility::Authorable
-        }
-        BaselineArtifactVerdict::ValidCanonicalTruth { .. } => {
-            BaselineAuthoringEligibility::ExistingValidCanonicalTruth
-        }
-        BaselineArtifactVerdict::IngestInvalid => {
-            BaselineAuthoringEligibility::RequiresSetupRefresh
-        }
     }
 }
 

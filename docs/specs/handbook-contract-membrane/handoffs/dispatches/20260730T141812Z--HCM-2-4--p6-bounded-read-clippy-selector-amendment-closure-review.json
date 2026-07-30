@@ -1,0 +1,274 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260730T141812Z--HCM-2-4--p6-bounded-read-clippy-selector-amendment-closure-review",
+  "created_at_utc": "2026-07-30T14:18:12Z",
+  "source_handoff_ids": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "parent_orchestration_id": "20260729T222320Z--HCM-2-4--p6-selector-entry-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-aggregate-flow-cleanup",
+  "subject_fingerprint": "sha256:4fb41a8225c45354efbbb48e53c3e1b64c7e8092ba4ddb0bf9ce3ec31dd68db5",
+  "review_cycle": {
+    "kind": "supplemental_causal",
+    "cycle_id": "p6-bounded-read-clippy-selector-amendment-supplemental-1",
+    "trigger_run_ids": [
+      "p6_bounded_read_amendment_review"
+    ],
+    "finding_refs": [
+      "HCM-2.4-P6-BOUNDED-AMENDMENT-AUTHREF-001",
+      "HCM-2.4-P6-BOUNDED-AMENDMENT-LINEAGE-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-29T22:24:20Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+        "packet_ids": [
+          "P6-aggregate-flow-cleanup"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md#trigger-and-earned-entry-authority"
+      }
+    ],
+    "fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:217df4ed7d6129aa11d1df35872064d5e54d2a6c71f4e1f70fe61d32d6f98f89",
+    "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+    "outcome_registry_fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6",
+    "review_stage": "proof",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "proof"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260730T140720Z--HCM-2-4--p6-bounded-read-clippy-selector-amendment-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p6-bounded-read-clippy-selector-amendment-convergence-2",
+    "completed_at_utc": "2026-07-30T14:18:11Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run the remediated descriptor-selected oversize and unstable-identity focused tests, refusal proofs, and strict engine Clippy discriminator before the ancillary edit",
+        "evidence_ref": "parent terminal output: bounded selected-ingest and refusal remediation proofs pass; strict engine Clippy fails only because private TrustedRepoFile::read_bytes is dead_code"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory TrustedRepoFile::read_bytes and every .read_bytes() caller under affected crates",
+        "evidence_ref": "parent terminal output: exact LOW/0/0/0 GitNexus impact and exactly two unit-test calls in canonical_repo_support.rs; zero production callers after bounded selected-ingest remediation"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted thirteen-entry repo-path-NUL-SHA256-newline closure manifest",
+        "evidence_ref": "subject_manifest below: sha256:4fb41a8225c45354efbbb48e53c3e1b64c7e8092ba4ddb0bf9ce3ec31dd68db5"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output: exit 0 before replacement dispatch creation"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent terminal output: exit 0 before replacement dispatch creation"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "be32dd3e5e89b1478c2c34b807776795f9ac583ba0aec482d5b11d38bcf118e5"
+      },
+      {
+        "path": "crates/compiler/src/blocker.rs",
+        "sha256": "5d2bbf924ec3db6e2412a8dc7b95bdeb91a1a1ae7070636211d9e48c4926335b"
+      },
+      {
+        "path": "crates/compiler/tests/refusal_mapping.rs",
+        "sha256": "adf3de3fd70d20c30f31526fdd134497760a974059b42c1ee96de3ecc1eb984e"
+      },
+      {
+        "path": "crates/engine/src/canonical_artifacts.rs",
+        "sha256": "7ff4353c29140d13b120d979e8979f0550e057fe6457055b5275b76b2b1a8c4d"
+      },
+      {
+        "path": "crates/engine/src/canonical_repo_support.rs",
+        "sha256": "31ff288697926fe957e7ad128d95e57ed44acfdeab15fdf49cb99daa1602f635"
+      },
+      {
+        "path": "crates/engine/src/freshness.rs",
+        "sha256": "8c521f9eb99738f974f898525674d76bf493ab252ca3505c95a290b0e977f97b"
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "sha256": "5c91c11f2dad831584d554341a40118b7cd0fd6445f5559ccf9bf15c329de3f2"
+      },
+      {
+        "path": "crates/flow/src/resolver.rs",
+        "sha256": "10326086c9a26094d24d187c0bf0c95f04707d9919992eba18f1eb678c77d835"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T034241Z--HCM-2-4--p6-implementation-specification-review.json",
+        "sha256": "91cf744c7b518494aea87428d7f54fccbb275fb096ebe5fb0f74b7c37bd9131f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T034242Z--HCM-2-4--p6-implementation-standards-review.json",
+        "sha256": "c56a5b1e19b6b181c4ee04418c3d24fbfaacb2366c99191f21b2bdb8eb2acb48"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T140720Z--HCM-2-4--p6-bounded-read-clippy-selector-amendment-review.json",
+        "sha256": "a9b929468b6ab30d6817afbe1bb58ce92792aa4ca1c73e06093de36e06873344"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+        "sha256": "b5c07e7aaab189e410665d04f1930ec102cec452059e24a4f05d40bf5f36d9de"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-bounded-read-clippy-selector-amendment.md",
+        "sha256": "d9689df51fcb537d77246a474e326c2638d2ef3fecff47a4fb518814874752a8"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:4fb41a8225c45354efbbb48e53c3e1b64c7e8092ba4ddb0bf9ce3ec31dd68db5"
+  },
+  "active_resolution": {
+    "level": "proof",
+    "scope_horizon": "implementation P2 remediation plus one additive HCM-2.4 P6 bounded-read lint-closure path",
+    "detail_resolution": "supplemental pre-edit selector-amendment closure after correcting authority and review lineage",
+    "temporal_horizon": "post-implementation-discovery remediation, before editing canonical_repo_support.rs",
+    "authority_horizon": "one path and three expressions only; no public API, fixture, behavior, P7, Phase 2, HCM-3.x, task-gate runtime, push, or release authority",
+    "memory_horizon": "reviewed P6 selector, three implementation discovery findings, two dispatch-only amendment findings, operator approval, focused proof, strict Clippy discriminator, exact caller inventory, and GitNexus impact",
+    "validation_horizon": "different-fresh CLEAN pre-edit amendment closure followed by the exact edit, affected tests, strict engine Clippy, complete P6 convergence, and a separate different-fresh final implementation closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-bounded-read-clippy-selector-amendment.md",
+      "sections": [
+        "Trigger and additive authority",
+        "Exact ancillary allowance",
+        "Impact and scope freeze",
+        "Pre-edit review gate",
+        "Review finding consolidation and corrected lineage",
+        "Required proof and integration"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Exact collection and fixed-renderer contract",
+        "Atomic indivisibility and ancillary allowance",
+        "Stop conditions and non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P6 — Aggregate flow and fixed-selector deletion",
+        "Exact implementation surface selectors",
+        "Explicit non-goals and authority stops"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Artifact instance descriptor contract",
+        "Lifecycle, support, and derived-view constraints",
+        "Charter intake and canonical contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Finding and escalation behavior",
+        "Built-in delegated-run protocol"
+      ]
+    }
+  ],
+  "repo_truth": "At HEAD 78433acbbb34f672d2eaa590d39fd41703999182 on feat/handbook-contract-membrane, the uncommitted P6 subject contains remediation for the bounded-read, fixed-kind-authority, and ingest-refusal implementation findings. The replacement dispatch corrects the first bounded-amendment dispatch's authority label and binds the actual three findings runs plus their complete six-P2 set. Focused remediation proofs are GREEN. Strict engine Clippy remains intentionally RED only because the now-unused private TrustedRepoFile::read_bytes method remains in the not-yet-edited canonical_repo_support.rs path. GitNexus reports exact LOW upstream impact with 0 direct callers, 0 processes, and 0 modules; recursive inventory finds only two unit-test calls in that path. The operator approved exactly one added path and three expressions. No edit to canonical_repo_support.rs has occurred. This closure may authorize that exact edit but cannot accept the final P6 implementation; a separate final closure remains mandatory. Protected user-owned paths remain outside the subject.",
+  "allowed_scope": [
+    "Replay the thirteen-entry subject and close the complete six-P2 set from the three actual findings runs.",
+    "Verify the implementation remediation removed fixed kind priority authority, uses bounded stable retained-handle reads, and preserves ingest refusal taxonomy and durable reason detail.",
+    "Verify deleting private TrustedRepoFile::read_bytes is the smallest honest correction after normal selected ingestion moved to bounded stable reads.",
+    "Verify the two proposed bounded unit-call replacements preserve retained-handle path-substitution and unsupported-platform legacy-read proof without changing assertions.",
+    "Verify the exact one-path/three-expression/LOW ceiling and zero public API, fixture, behavior, schema, definition, profile, renderer, Cargo, dependency, module, or broader authority.",
+    "Return read-only CLEAN or prioritized findings before the parent edits canonical_repo_support.rs; do not claim final P6 implementation acceptance."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, push, write a handoff or ledger entry, create another dispatch, or delegate.",
+    "Do not add a lint suppression, dummy caller, compatibility shim, dual read, helper, dependency, public API, fixture, or additional path.",
+    "Do not reopen unrelated P6 design, select P7, claim final P6 or Phase 2 completion, or authorize HCM-3.x, task-gate runtime, automatic continuation, push, or release."
+  ],
+  "tasks": [
+    "Replay all thirteen hashes, aggregate fingerprint, causal outcome/budget/stage lineage, the immediately preceding trigger run and its two exact P2 IDs, then verify the complete three-run/six-P2 remediation evidence set named by the amendment.",
+    "Inspect the current implementation remediation and verify closure of the bounded-read, fixed-kind-authority, ingest-refusal, original authority-reference, replacement authority-reference, and replacement-lineage findings.",
+    "Inspect the current unbounded method, bounded and bounded-stable primitives, selected-loader use, exact LOW impact, two-call inventory, and both affected unit tests.",
+    "Verify each proposed replacement preserves its existing assertion while removing the only private unbounded read surface and making strict Clippy satisfiable.",
+    "Return findings first in P1, P2, P3, P4 order with file/line, violated contract, reason, smallest remediation, and missing proof; separately dispose every P3/P4 advisory."
+  ],
+  "contracts_and_gates": [
+    "All six P2 IDs must be explicitly closed before the one-path edit",
+    "The amendment is additive and cannot rewrite immutable selectors or dispatches",
+    "The later edit is exactly one private method deletion and two bounded unit-call replacements in one path",
+    "No normal selected source read may remain unbounded",
+    "Retained-handle path-substitution and unsupported-platform legacy-read proof must remain intact",
+    "Strict engine Clippy, bounded selected-ingest proofs, complete P6 convergence, and a separate different-fresh final closure must pass after the edit",
+    "P7 and every broader program/release authority remain closed"
+  ],
+  "stop_conditions": [
+    "Return blocked if any subject hash, causal linkage, trigger run, finding reference, exact LOW impact, two-call inventory, or live authority section cannot be established.",
+    "Report rather than repair every finding.",
+    "Stop on any need for another path, helper, lint suppression, dummy caller, public/API/fixture/behavior change, or assertion weakening."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

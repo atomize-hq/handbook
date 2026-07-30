@@ -6,10 +6,11 @@ authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean and
 committed. P2S, P2A, and Option C are historical evidence, not active
 architecture. The P4/P5 token prerequisite is review-clean and committed at
 `00dde01`; P4's separate five-part negative-surface/path proof is review-clean
-and GREEN. P6 is selected and entry-authorized for a later implementation
-session by `decision/20260729-p6-aggregate-flow-cleanup-selector.md`, but its
-implementation is unstarted. P7 remains blocked; HCM-2.4 completion and Phase
-2 exit remain incomplete.
+and GREEN. P6 is implemented, independently review-clean, and accepted at
+reviewed subject
+`sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38`.
+P7 is eligible but remains unselected and unstarted; HCM-2.4 completion and
+Phase 2 exit remain incomplete.
 
 ## Dependency graph
 
@@ -42,10 +43,10 @@ exact operator-approved derivation selector frozen in
 `decision/20260727-p4-p5-coverage-token-derivation-selector.md`; selector
 review, RED/GREEN, supplemental causal closure, and commit are complete. P4
 now also has a separate operator-authorized five-part negative-surface/path
-proof with CLEAN different-fresh closure. P4 is GREEN. P6 is selected for a
-fresh later implementation session but unstarted; P7 remains ineligible.
-Current activity is limited to the P6 selector/entry authority and true-stop
-handoff.
+proof with CLEAN different-fresh closure. P4 is GREEN. P6 is implemented and
+accepted with descriptor-selected aggregate ownership and no bridge/fixed
+normal-path authority. P7 is eligible but unselected and unstarted. Current
+activity is limited to the P6 true-stop handoff.
 
 ## Standing rules
 
@@ -588,15 +589,17 @@ prerequisite is committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`.
 
 ## P6 — Aggregate flow and fixed-selector deletion
 
-Entry: P1A–P1C and P2–P5 individually committed and green; no bridge deletion
-has occurred.
+Entry: P1A–P1C and P2–P5 individually committed and green.
 
-Current entry result: selected and entry-authorized for a later implementation
-session by `decision/20260729-p6-aggregate-flow-cleanup-selector.md`. The
-bounded greenfield P2 correction is GREEN and committed at implementation
-`9b3edf2` with authority `f62141b`; P3, P4, and P5 proof gates are GREEN. No
-bridge deletion or other P6 implementation has occurred. Implementation may
-begin only under the selector's exact fresh-session resume condition.
+Current result: implemented and accepted under
+`decision/20260729-p6-aggregate-flow-cleanup-selector.md`. The mixed
+fixed/bridge collection is replaced by one descriptor-selected
+`CanonicalArtifacts` collection, both bridge IDs and all four bridge types are
+absent, and normal-path fixed enum/order/layout/path authority is removed. The
+complete focused, preservation, strict-lint, formatting, absence-scan, and
+proportional workspace walls are GREEN. Different-fresh closure is CLEAN for
+reviewed subject
+`sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38`.
 
 RED:
 
@@ -635,11 +638,11 @@ custom configured renderers or Projections generic.
 
 Completion entry: P6 accepted.
 
-Current entry result: not satisfied. P7 remains blocked behind P6. The parent may update only earned
-partial-boundary truth, obtain fresh aggregate review, commit that reviewed
-control-pack subject, and create one parent-owned blocked/partial true-stop
-handoff. It may not check the full P7 exit items, delete either bridge, or use a
-partial handoff to claim Phase 2 exit.
+Current entry result: satisfied by accepted P6. P7 is eligible but remains
+unselected and unstarted. The parent may update only earned P6 boundary truth,
+commit the reviewed P6 subject, and create one parent-owned partial true-stop
+handoff. It may not check the full P7 exit items or use the partial handoff to
+claim Phase 2 exit.
 
 Work:
 

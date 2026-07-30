@@ -1,0 +1,360 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260730T155751Z--HCM-2-4--p6-final-implementation-closure-review",
+  "created_at_utc": "2026-07-30T15:57:51Z",
+  "source_handoff_ids": [
+    "20260729T224742Z--HCM-2-4--orchestration--p6-selector-entry-partial"
+  ],
+  "parent_orchestration_id": "20260729T222320Z--HCM-2-4--p6-selector-entry-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P6-aggregate-flow-cleanup",
+  "subject_fingerprint": "sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p6-final-implementation-closeout-closure-1",
+    "trigger_run_ids": [
+      "p6_final_implementation_review"
+    ],
+    "finding_refs": [
+      "HCM-2.4-P6-OPTIONAL-INGEST-NONBLOCKING-001",
+      "HCM-2.4-P6-OVERRIDE-TARGET-FINGERPRINT-001",
+      "HCM-2.4-P6-UNIX-PROOF-WALL-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-29T22:24:20Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+        "packet_ids": [
+          "P6-aggregate-flow-cleanup"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md#trigger-and-earned-entry-authority"
+      }
+    ],
+    "fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:217df4ed7d6129aa11d1df35872064d5e54d2a6c71f4e1f70fe61d32d6f98f89",
+    "integrated_outcome_id": "hcm-2.4-p6-aggregate-flow-cleanup",
+    "outcome_registry_fingerprint": "sha256:47e456122a07c19c82aca12de46390338e8ae5968dfcd11ba0d065d4b91526d6",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "final_closeout"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260730T145250Z--HCM-2-4--p6-final-implementation-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p6-final-implementation-closure-convergence-1",
+    "completed_at_utc": "2026-07-30T15:57:50Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run focused remediation proofs, the complete 21-target Windows manifest, the complete P6-applicable 20-target WSL manifest, strict workspace Clippy, and cargo test --workspace --all-features -j1",
+        "evidence_ref": "parent terminal output: Windows 21/21 GREEN; WSL 20/20 P6-applicable targets GREEN; strict workspace Clippy GREEN; full workspace exit 0 in 1094.2 seconds"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "replay fixture, consumer, selected-path, legacy-decoy, pipeline-provenance, and Unix cfg inventories",
+        "evidence_ref": "parent terminal output: no fixture asset, production path, public API, Cargo, schema, definition, profile, or renderer-definition expansion; selected Charter authority and Environment Context policy preserved"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted 37-entry repo-path-NUL-SHA256-newline implementation manifest",
+        "evidence_ref": "subject_manifest below: sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent terminal output: exit 0 on the final remediation state"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --cached --check",
+        "evidence_ref": "parent terminal output: exit 0 on the exact staged subject"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "be32dd3e5e89b1478c2c34b807776795f9ac583ba0aec482d5b11d38bcf118e5"
+      },
+      {
+        "path": "crates/cli/tests/pipeline_handoff_refusals.rs",
+        "sha256": "36ccea1f25728720ffefd8a72a0b9b98baefca52afa33324dbed3018c5fb84c3"
+      },
+      {
+        "path": "crates/compiler/src/author/charter_shell.rs",
+        "sha256": "ceda7415fd9f692e51789e01cadb895f5a7f2b1f78c7b954d5eb33e0d8b8198f"
+      },
+      {
+        "path": "crates/compiler/src/author/mod.rs",
+        "sha256": "72c6b81be994f1a09899d901c69bb2eb33e7ccbf6a96ea51d99c6878a3a11948"
+      },
+      {
+        "path": "crates/compiler/src/blocker.rs",
+        "sha256": "5d2bbf924ec3db6e2412a8dc7b95bdeb91a1a1ae7070636211d9e48c4926335b"
+      },
+      {
+        "path": "crates/compiler/src/layout.rs",
+        "sha256": "b9b28a643b26e604593125befd4be44d21bcefaeb7af8f1825d5005d144d0b44"
+      },
+      {
+        "path": "crates/compiler/tests/artifact_manifest_interface.rs",
+        "sha256": "4bc38cc2b19e5ffe1a52a3c6dccc43ea4031518d08f730c814b2a87b9c779ed6"
+      },
+      {
+        "path": "crates/compiler/tests/canonical_artifacts_ingest.rs",
+        "sha256": "cf1e8c317743443966222bee187ab4ef46eef709592258a952e7acc349bff097"
+      },
+      {
+        "path": "crates/compiler/tests/freshness_computation.rs",
+        "sha256": "93298e1e79eced14d1f364b7adf79328a0f55afb977ea6956c18e20813d2fc79"
+      },
+      {
+        "path": "crates/compiler/tests/pipeline_handoff.rs",
+        "sha256": "3a6341f6b7e00566f962507dd18ddd2e4a542182b9742f9a2e6c670cb6b3874f"
+      },
+      {
+        "path": "crates/compiler/tests/refusal_mapping.rs",
+        "sha256": "dae17053af3b43ab34ca30df7b4e144613530a4022b0a53dff119be4b3ba4a62"
+      },
+      {
+        "path": "crates/compiler/tests/rendering_surface.rs",
+        "sha256": "dbda51526a87507d45dd5520a3423c3ab8d2c92eef99133c0c150acd3265b494"
+      },
+      {
+        "path": "crates/compiler/tests/resolver_core.rs",
+        "sha256": "71456f7a03ef8a73d3cd43ade01bf6e3c034cc5c255d065e54f3ca22a55fa7a6"
+      },
+      {
+        "path": "crates/engine/src/artifact_manifest.rs",
+        "sha256": "4236a9c3af793dd373755a1cd7a8abc8f18cb9600a44a232cfb770be48b9d5e8"
+      },
+      {
+        "path": "crates/engine/src/baseline_validation.rs",
+        "sha256": "e166eb6e7e80a839963e050fb2a15a6f32dedde60bd56df6ead3326303f05578"
+      },
+      {
+        "path": "crates/engine/src/canonical_artifacts.rs",
+        "sha256": "7ff4353c29140d13b120d979e8979f0550e057fe6457055b5275b76b2b1a8c4d"
+      },
+      {
+        "path": "crates/engine/src/canonical_paths.rs",
+        "sha256": "bfa34ed90ddd8df05260f8d919edeef548061562841910d187850bdd1dcc8c9f"
+      },
+      {
+        "path": "crates/engine/src/canonical_repo_support.rs",
+        "sha256": "dd6dd05d7597a525d5efe5ca2a4e6901581c3d6a71a870ed28757a1782b22e60"
+      },
+      {
+        "path": "crates/engine/src/freshness.rs",
+        "sha256": "efc9c33d4d5eb218b2be63993457f4976bd7285dad36449b461469094e395b9e"
+      },
+      {
+        "path": "crates/engine/tests/artifact_manifest_interface.rs",
+        "sha256": "4bc38cc2b19e5ffe1a52a3c6dccc43ea4031518d08f730c814b2a87b9c779ed6"
+      },
+      {
+        "path": "crates/engine/tests/baseline_validation.rs",
+        "sha256": "28a44fd95dc870332d357c604c570916f4a314d9d581de41fc2958bc456e0d30"
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "sha256": "5c91c11f2dad831584d554341a40118b7cd0fd6445f5559ccf9bf15c329de3f2"
+      },
+      {
+        "path": "crates/engine/tests/freshness_computation.rs",
+        "sha256": "93298e1e79eced14d1f364b7adf79328a0f55afb977ea6956c18e20813d2fc79"
+      },
+      {
+        "path": "crates/engine/tests/hcm_2_1_project_context.rs",
+        "sha256": "9618884a52e2378bcbddc1f550b1842849722e495391d7cc57b8bd86680bdccc"
+      },
+      {
+        "path": "crates/flow/src/resolver.rs",
+        "sha256": "5fe9da48498a934cbe410095ea9ef235c1e47c5ed808722a5db73003662f992d"
+      },
+      {
+        "path": "crates/flow/tests/budget_domains.rs",
+        "sha256": "43cf66b9983bd15345eafdaffaa912073a50c5e810766902604ea0a7195cc7ee"
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "sha256": "fd6053ec3571c93065ed45b0a6a0b9fdca584cbb5aec2cdbbb20f7b29d85a92b"
+      },
+      {
+        "path": "crates/pipeline/tests/pipeline_handoff.rs",
+        "sha256": "7c96be7f1727ae345b4f35f6bbbba203c5ed485cf6370726d70fb716ea231fbc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T021416Z--HCM-2-4--p6-pipeline-handoff-selector-amendment-review.json",
+        "sha256": "d463f96c0deeea7b3ed8aa7d1df178a2c0dbd4b0e60769ecd1ac597bec86ae42"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T025942Z--HCM-2-4--p6-pipeline-handoff-selector-amendment-closure-review.json",
+        "sha256": "f1ceece7202fd74f1e89ad4defe35b9e7d794e3fd5d4e7fd819cc02df80c215e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T034241Z--HCM-2-4--p6-implementation-specification-review.json",
+        "sha256": "91cf744c7b518494aea87428d7f54fccbb275fb096ebe5fb0f74b7c37bd9131f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T034242Z--HCM-2-4--p6-implementation-standards-review.json",
+        "sha256": "c56a5b1e19b6b181c4ee04418c3d24fbfaacb2366c99191f21b2bdb8eb2acb48"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T140720Z--HCM-2-4--p6-bounded-read-clippy-selector-amendment-review.json",
+        "sha256": "a9b929468b6ab30d6817afbe1bb58ce92792aa4ca1c73e06093de36e06873344"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T141812Z--HCM-2-4--p6-bounded-read-clippy-selector-amendment-closure-review.json",
+        "sha256": "84788495780a163eeddc2794c2433352e05cfa496278f4a3625a58f61a1fbf85"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T145250Z--HCM-2-4--p6-final-implementation-review.json",
+        "sha256": "e5cb13fb18cff886585f00843e7fa5d683df1407d61d787680024029c7fef6f7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-pipeline-handoff-provenance-test-selector-amendment.md",
+        "sha256": "651b1db85e853d14e6f3d1f674b30479557fbd2ab97f57a5d481f37fd9c707e5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260730-p6-bounded-read-clippy-selector-amendment.md",
+        "sha256": "d9689df51fcb537d77246a474e326c2638d2ef3fecff47a4fb518814874752a8"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:814a1899c282511e1c3a5d9bb464308dea87f3dfd47825799bcfb2b672d93a38"
+  },
+  "active_resolution": {
+    "level": "execution",
+    "scope_horizon": "closure of the three exact P2 findings against the complete HCM-2.4 P6 implementation subject",
+    "detail_resolution": "different-fresh delta-focused closure review over Environment Context ingest disposition, override-target fingerprint identity, Unix selected-authority proof, and complete subject identity",
+    "temporal_horizon": "after remediation and the complete packet/workspace wall, before control-pack correction or primary commit",
+    "authority_horizon": "P6 only; P7 remains eligible but unselected; Phase 2, HCM-3.x, task-gate runtime, automatic continuation, push, and release remain unauthorized",
+    "memory_horizon": "reviewed selector, both additive amendments, discovery findings, remediation diffs, cross-platform proof, exact absence scan, and staged GitNexus change detection",
+    "validation_horizon": "CLEAN closure verdict, earned control-pack correction, primary commit, parent-owned true-stop handoff, deterministic ledger validation, and separate mechanical commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260729-p6-aggregate-flow-cleanup-selector.md",
+      "sections": [
+        "Complete production path and symbol manifest",
+        "Complete test and proof manifest",
+        "Preserved behavior and proof obligations",
+        "Review requirement"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260730T145250Z--HCM-2-4--p6-final-implementation-review.json",
+      "sections": [
+        "review_cycle",
+        "subject_manifest",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Ready-to-use prompt",
+        "Orchestration boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Finding and escalation behavior",
+        "Review lineage",
+        "Built-in delegated-run protocol"
+      ]
+    }
+  ],
+  "repo_truth": "At HEAD 78433acbbb34f672d2eaa590d39fd41703999182 on feat/handbook-contract-membrane, exactly 37 P6 implementation/amendment/review-evidence paths are staged and no protected path is staged. The three discovery P2 findings are remediated: selected Environment Context ingest issues are advisory and non-blocking without changing other optional policy; override fingerprints include stable selected target identity before rationale; and Unix compiler/flow proofs now use committed selected Charter YAML plus selected Project/Environment Context while legacy fixed paths remain non-authoritative decoys. Windows 21/21 authorized targets and WSL 20/20 P6-applicable targets pass. The sole WSL cli_surface absolute-path wording failure is byte-identical in behavior and assertion at reviewed selector commit f8c64ad and is excluded as unrelated pre-existing platform debt. Strict Windows workspace Clippy, formatting, whitespace, exact recursive absence scans, and cargo test --workspace --all-features -j1 exit 0 in 1094.2 seconds. GitNexus staged change detection reports 37 paths, 217 symbols, one expected Fingerprint_bytes-to-U64 flow, and MEDIUM risk. P7 is eligible but unselected and unstarted.",
+  "allowed_scope": [
+    "Replay the exact 37-entry manifest and fingerprint, the discovery predecessor, and the exact three P2 IDs.",
+    "Verify the exact descriptor-selected Environment Context non-blocking exception preserves all other optional ingest behavior.",
+    "Verify override target identity and deterministic ordering prevent same-rationale collisions without reintroducing fixed kind authority.",
+    "Verify all corrected Unix tests exercise committed selected Charter authority, selected Project/Environment Context behavior, legacy non-influence, budgets, fixtures, refusals, and rendering.",
+    "Assess the f8c64ad Unix cli_surface baseline reproduction as an unrelated exclusion rather than P6 regression.",
+    "Return read-only CLEAN or prioritized findings; separately dispose any P3/P4 advisory."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, push, write a handoff/ledger/control-pack artifact, create another dispatch, or delegate.",
+    "Do not reopen general discovery or propose cleanup of the pre-existing Unix CLI wording assertion or cfg-only engine warning.",
+    "Do not select or begin P7, claim Phase 2 completion, or authorize HCM-3.x, task-gate runtime, automatic continuation, push, or release."
+  ],
+  "tasks": [
+    "Replay all subject hashes and the aggregate fingerprint against live files.",
+    "Close or reject each of HCM-2.4-P6-OPTIONAL-INGEST-NONBLOCKING-001, HCM-2.4-P6-OVERRIDE-TARGET-FINGERPRINT-001, and HCM-2.4-P6-UNIX-PROOF-WALL-001 with file/line evidence.",
+    "Review the remediation delta and affected call paths for policy preservation, deterministic identity, and durable cross-platform proof.",
+    "Confirm the exact absence wall and complete verification evidence remain sufficient.",
+    "Return findings first in P1, P2, P3, P4 order and explicitly state the final verdict."
+  ],
+  "contracts_and_gates": [
+    "All three exact P2 IDs must be closed on the replacement fingerprint",
+    "Environment Context remains advisory/non-blocking without changing other optional artifact policy",
+    "Override fingerprints bind stable target identity and rationale deterministically",
+    "Unix proof uses selected committed Charter authority and permanent descriptor-selected assertions",
+    "No fixture, public API, production path beyond the reviewed subject, Cargo, schema, definition, profile, renderer-definition, or protected-path change",
+    "Final closure must be CLEAN with no unresolved P1/P2 before control-pack correction or commit"
+  ],
+  "stop_conditions": [
+    "Return blocked if any manifest hash, predecessor linkage, exact P2 reference, proof result, or authority section cannot be established.",
+    "Report rather than repair every finding.",
+    "Stop on any material expansion, changed policy, weakened durable negative, remaining competing authority, or P7/broader work."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
