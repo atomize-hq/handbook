@@ -1,0 +1,433 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop",
+  "created_at_utc": "2026-07-31T22:17:42Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "20260731-post-phase-2-smoke-repair-selector",
+  "orchestration_id": "20260731T182849Z--HCM-2-4--post-phase-2-smoke-repair",
+  "source_handoff_ids": [
+    "20260731T194418Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-authority-blocked"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-31T22:17:42Z",
+    "evidence_ref": "built-in fresh review remains available; no new dispatch was issued because the complete wall exposed another scope breach before supplemental convergence"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm_2_4_smoke_planning_review",
+      "dispatch_id": "20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json",
+      "dispatch_fingerprint": "sha256:c922403ce696765bfa13353d29f2ee6c618d68aa52a9163b264af4c55adefab7",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_smoke_planning_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:c49d008af6e15c3822fa19435ccab1255b77bc61b73969d7c8ae04399204eed5",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM24-PSRPR-0001", "HCM24-PSRPR-0002"],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json"],
+      "result_subject_fingerprint": "sha256:c49d008af6e15c3822fa19435ccab1255b77bc61b73969d7c8ae04399204eed5"
+    },
+    {
+      "run_id": "hcm_2_4_smoke_planning_closure",
+      "dispatch_id": "20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json",
+      "dispatch_fingerprint": "sha256:4c8b2ffff5178c6be0f0e46f3c9f91c41202ee546f8f6e7c698bc2f4ea5baf15",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_smoke_planning_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:b7baf7d5b1626a61a60a2f972be804d20c089d313ee022e107bfdd138354812b",
+      "review_round": 2,
+      "predecessor_run_id": "hcm_2_4_smoke_planning_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json"],
+      "result_subject_fingerprint": "sha256:b7baf7d5b1626a61a60a2f972be804d20c089d313ee022e107bfdd138354812b"
+    },
+    {
+      "run_id": "hcm_2_4_smoke_implementation_review",
+      "dispatch_id": "20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json",
+      "dispatch_fingerprint": "sha256:2772f6f6795064a9c29f43b90b829b237e7f25b2120bd94b9406fb4175cf7800",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_smoke_implementation_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "debugging-and-error-recovery", "test-driven-development", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:a95fd80dfc55b68fa968ece970a9f09cbec4c8937f206d290257fda141ccc34d",
+      "review_round": 3,
+      "predecessor_run_id": "hcm_2_4_smoke_planning_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM24-PSRIR-0001"],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json"],
+      "result_subject_fingerprint": "sha256:a95fd80dfc55b68fa968ece970a9f09cbec4c8937f206d290257fda141ccc34d"
+    },
+    {
+      "run_id": "hcm_2_4_smoke_implementation_closure",
+      "dispatch_id": "20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json",
+      "dispatch_fingerprint": "sha256:9abc01962ee0f33a6510d747516bef60af1ce5cb7ae938f74afab60e9be921ba",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_smoke_implementation_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "debugging-and-error-recovery", "test-driven-development", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af",
+      "review_round": 4,
+      "predecessor_run_id": "hcm_2_4_smoke_implementation_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json"],
+      "result_subject_fingerprint": "sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-07-31T22:17:42Z",
+    "dispatch_count": 4,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": ["sha256:27a404e0d9edf04c02a1aa0ac67180c2c341c6e05701267c29d2c19635243e47"],
+    "aggregate_fingerprint": "sha256:6c0fbc8f1595c46fa69fc06d5a130d75aa62b010bb3ea1eb0640918f65804f3a"
+  },
+  "ancillary_diff_observations": [
+    {
+      "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+      "path": "crates/cli/tests/setup_cli.rs",
+      "path_kind": "test_assertion",
+      "changed_lines": 106
+    },
+    {
+      "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+      "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+      "path_kind": "test_assertion",
+      "changed_lines": 54
+    },
+    {
+      "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+      "path": "crates/flow/tests/resolver_core.rs",
+      "path_kind": "test_assertion",
+      "changed_lines": 60
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "post-phase-2-smoke-planning-remediation",
+      "finding_run_id": "hcm_2_4_smoke_planning_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm_2_4_smoke_planning_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:b7baf7d5b1626a61a60a2f972be804d20c089d313ee022e107bfdd138354812b",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json"]
+    },
+    {
+      "remediation_id": "post-phase-2-smoke-implementation-remediation",
+      "finding_run_id": "hcm_2_4_smoke_implementation_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm_2_4_smoke_implementation_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json"]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "f0ffe211f253deaecad0830e91f4a0ab8aadc7c5",
+    "subject_fingerprint": "sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/post-phase-2-smoke-runbook.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json"
+  },
+  "active_resolution": {
+    "level": "HCM-2.4 post-exit smoke-repair second authority stop",
+    "scope_horizon": "the authorized fifth non-control path is GREEN, but the full workspace wall exposes a sixth path",
+    "detail_resolution": "seven compiler author tests use legacy_authoring_fixture_repo without a safe setup-created operational identity",
+    "temporal_horizon": "after exact RED/GREEN and installed release smoke, before supplemental review, strict Clippy, final review, or completion primary commit",
+    "authority_horizon": "explicit authority for exactly crates/compiler/tests/author.rs is required; runtime, additional paths, HCM-3.x, release, and push remain unauthorized",
+    "memory_horizon": "prior immutable four-dispatch lineage, first blocked handoff, exact CLI RED/GREEN, installed smoke, and seven compiler wall failures",
+    "validation_horizon": "resume only to amend the selector, establish operational identity in the shared compiler test fixture, rerun the wall, and continue the same causal review budget"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Resume the same HCM-2.4 corrective outcome for exactly one authorized CLI test path, converge the complete proof wall, obtain causal supplemental and final reviews, and true-stop before HCM-3.x.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T194418Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-authority-blocked.json",
+      "sections": ["Blockers", "Escalations", "Resume"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "sections": ["D. Exact scope ceiling", "Authority-resumption amendment", "Acceptance contract"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": ["Resolution escalation record", "Two-commit true-stop closeout"]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "b63b16345461fd8546e16bd880f53e9f0e7aba08",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "crates/cli/tests/cli_surface.rs",
+      "docs/ideas/intent-to-outcome-fidelity.md",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"
+    ]
+  },
+  "work_completed": [
+    "Verified live branch feat/handbook-contract-membrane at blocked closeout b63b16345461fd8546e16bd880f53e9f0e7aba08 and preserved the prior four dispatches and blocked handoff unchanged.",
+    "Reverified all nine protected-path SHA-256 values and kept them outside the changed subject.",
+    "Ran GitNexus impact before editing the named CLI test; the symbol and file fallback were not indexed, so callers were unknown, affected processes and indexed impact were zero, risk UNKNOWN, and FTS remained unavailable.",
+    "Recaptured the exact CLI RED, amended only the selector and crates/cli/tests/cli_surface.rs, placed unchanged invalid bytes at .handbook/project/charter.yaml, and preserved every RequiredArtifactInvalid assertion.",
+    "The exact CLI test passed and the full cli_surface target passed all 96 tests inside the workspace wall.",
+    "A fresh release installation passed setup/packet, absent/legacy root, non-Git setup, JSON refusal, generic lists, Windows Project Context, authenticator, and pipeline smoke journeys.",
+    "Stopped before strict Clippy and before issuing supplemental/final review when seven compiler author tests failed because their shared legacy-only fixture no longer establishes canonical root."
+  ],
+  "deliverables": [
+    {
+      "path": "crates/cli/tests/cli_surface.rs",
+      "status": "partial",
+      "summary": "Authorized canonical invalid-Charter fixture change is GREEN but uncommitted and not yet independently reviewed."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "status": "partial",
+      "summary": "Authorized fifth-path amendment is present but awaits broader authority, supplemental review, and completion convergence."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+      "status": "completed",
+      "summary": "Parent-owned second bounded authority stop under the unchanged orchestration and causal budget."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-POST-SMOKE-RESUME-D1",
+      "summary": "The authorized CLI fixture now uses canonical .handbook/project/charter.yaml with unchanged invalid bytes and unchanged RequiredArtifactInvalid assertions.",
+      "authority_effect": "The test now proves invalid canonical Charter handling rather than missing canonical truth behind repository identity.",
+      "refs": ["crates/cli/tests/cli_surface.rs", "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"]
+    },
+    {
+      "decision_id": "HCM-2.4-POST-SMOKE-RESUME-D2",
+      "summary": "Do not change crates/compiler/tests/author.rs without explicit authority for a sixth non-control path.",
+      "authority_effect": "Strict Clippy, supplemental review, final review, and completion commits remain blocked.",
+      "refs": ["crates/compiler/tests/author.rs", "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"]
+    },
+    {
+      "decision_id": "HCM-2.4-POST-SMOKE-RESUME-D3",
+      "summary": "The P7/Phase 2 exit remains immutable completed evidence; this post-exit correction remains incomplete and HCM-3.x remains unauthorized.",
+      "authority_effect": "No historical dispatch/handoff, runtime, release, publication, or remote state is changed.",
+      "refs": ["docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json"]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM24-PSRPR-0001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm_2_4_smoke_planning_review",
+      "summary": "The initial selector omitted live flow/compiler missing-artifact action paths.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json"]
+    },
+    {
+      "finding_id": "HCM24-PSRPR-0002",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm_2_4_smoke_planning_review",
+      "summary": "The initial prepared-packet journey lacked an exact authority-complete helper path.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json"]
+    },
+    {
+      "finding_id": "HCM24-PSRIR-0001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm_2_4_smoke_implementation_review",
+      "summary": "A retired Charter namespace fallback allowed legacy Markdown-only trees to establish canonical root.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json"]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-2.4-POST-SMOKE-SCOPE-002",
+      "classification": "authority",
+      "summary": "Seven compiler author tests use legacy_authoring_fixture_repo without safe operational-root establishment; repairing them requires changing crates/compiler/tests/author.rs, a sixth non-control path not authorized by the resumed selector.",
+      "resume_condition": "The user explicitly authorizes adding exactly crates/compiler/tests/author.rs and the smallest shared-fixture operational-identity setup, with no runtime or additional path change.",
+      "owner": "user"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-2.4-POST-SMOKE-SCOPE-AUTHORITY-002",
+      "trigger": "cargo test --workspace --all-features passed the repaired 96-test CLI surface but failed seven tests in crates/compiler/tests/author.rs with MissingSystemRoot instead of their authoring-specific outcomes.",
+      "current_resolution": "The authorized CLI invalid-Charter fixture and installed release smoke are GREEN; the shared compiler fixture writes only retired setup-scaffolded Markdown and no longer establishes canonical root after the reviewed legacy fallback deletion.",
+      "target_resolution": "Permit one additional test-only path so legacy authoring tests establish a safe setup-created operational root without restoring legacy Markdown authority, then rerun the entire wall and continue the same supplemental/final review plan.",
+      "decision_required": "Authorize or reject adding exactly crates/compiler/tests/author.rs for the smallest shared-fixture identity setup within the existing 12-path/600-line maximum.",
+      "options": [
+        "Authorize the sixth non-control path and initialize safe repository identity in legacy_authoring_fixture_repo while preserving every test's current authoring bytes and assertions.",
+        "Reject the amendment and explicitly authorize abandoning or reverting the uncommitted fifth-path amendment and/or prior partial correction.",
+        "Provide a different exact test-only strategy that changes no additional path and makes all seven compiler author tests valid without restoring legacy root authority."
+      ],
+      "recommendation": "Authorize exactly crates/compiler/tests/author.rs and add setup-created repository identity in its shared fixture; unlike the CLI invalid-canonical test, these tests exercise legacy authoring operations after operational setup rather than canonical invalidity.",
+      "affected_refs": [
+        "crates/compiler/tests/author.rs",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260731T194418Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-authority-blocked.json"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "Resume only on explicit authority for exactly the compiler test path; retain the parent, outcome, packet, budget, immutable dispatches/handoffs, protected paths, and HCM-3.x stop."
+    }
+  ],
+  "validation": [
+    {
+      "command": "cargo test -p handbook-cli --test cli_surface generate_blocks_invalid_required_charter_with_required_artifact_invalid -- --exact before edit",
+      "status": "failed",
+      "evidence_ref": "RED: SystemRootMissing/RunSetup from retired Markdown-only root"
+    },
+    {
+      "command": "cargo test -p handbook-cli --test cli_surface generate_blocks_invalid_required_charter_with_required_artifact_invalid -- --exact after edit",
+      "status": "passed",
+      "evidence_ref": "GREEN: canonical invalid Charter retained RequiredArtifactInvalid and author-Charter action"
+    },
+    {
+      "command": "fresh cargo install --path crates/cli --locked --force plus disposable installed-binary smoke",
+      "status": "passed",
+      "evidence_ref": "setup/packet, absent/legacy root, non-Git, JSON refusal, generic lists, Windows Project Context, authenticator, and pipeline journeys passed"
+    },
+    {
+      "command": "cargo test --workspace --all-features",
+      "status": "failed",
+      "evidence_ref": "CLI surface passed 96/96; seven crates/compiler/tests/author.rs tests failed because legacy_authoring_fixture_repo did not establish safe operational identity"
+    },
+    {
+      "command": "cargo fmt --all -- --check and git diff --check",
+      "status": "passed",
+      "evidence_ref": "both passed immediately after the authorized two-path edit"
+    },
+    {
+      "command": "protected-path SHA-256 and prior-dispatch/handoff immutability audit",
+      "status": "passed",
+      "evidence_ref": "all nine hashes matched; prior four dispatches and first blocked handoff had no working-tree diff"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+      "sections": ["entire handoff"],
+      "reason": "Publish the second parent-owned authority stop without spending supplemental review on an incomplete subject.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": ["deterministic ledger entry"],
+      "reason": "Rebuild the ledger from all canonical records.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Decide whether the same corrective outcome may add one exact compiler test path and continue to causal review and completion.",
+    "condition": "Resume only when the user explicitly authorizes or rejects the exact crates/compiler/tests/author.rs selector amendment.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+        "sections": ["Blockers", "Escalations", "Resume"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+        "sections": ["D. Exact scope ceiling", "Authority-resumption amendment", "Acceptance contract"]
+      },
+      {
+        "path": "crates/compiler/tests/author.rs",
+        "sections": ["legacy_authoring_fixture_repo", "Charter author/preflight tests"]
+      }
+    ],
+    "allowed_scope": [
+      "If authorized, add exactly crates/compiler/tests/author.rs as the sixth non-control path and amend the selector.",
+      "Initialize safe setup-created repository identity in legacy_authoring_fixture_repo without changing runtime code, legacy bytes, or authoring assertions.",
+      "Rerun the seven failing compiler tests, full workspace wall, strict Clippy, formatting, installed smoke if runtime changes, GitNexus change detection, supplemental-causal review, and final complete-subject review.",
+      "Create completion primary and mechanical handoff/ledger commits only after every gate is GREEN."
+    ],
+    "prohibited_scope": [
+      "Do not change runtime/production code or any seventh non-control path.",
+      "Do not restore legacy Markdown root authority or weaken any existing test assertion.",
+      "Do not mutate prior dispatches or handoffs, create another parent/outcome/packet/budget, define JSON protocol, widen platform authority, select HCM-3.x, release, or push."
+    ],
+    "acceptance_criteria": [
+      "The user explicitly selects one escalation option.",
+      "All seven compiler author tests and the complete workspace wall pass without runtime change.",
+      "The same causal budget's next supplemental review and a final complete-subject review return CLEAN.",
+      "All nine protected paths remain byte-identical, unstaged, and uncommitted."
+    ],
+    "stop_conditions": [
+      "Stop again if any additional path or authority is required.",
+      "Stop if a required P1/P2 cannot be closed or causal supplemental allowance is exhausted.",
+      "Stop before HCM-3.x, runtime expansion, release, push, or publication."
+    ]
+  },
+  "supersedes": [
+    "20260731T194418Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-authority-blocked"
+  ],
+  "chat_summary": "The authorized CLI canonical-invalid fixture is GREEN and installed smoke passes, but the complete workspace wall exposed seven compiler author tests whose shared legacy-only fixture lacks operational identity. A sixth test path is required. Supplemental/final review and completion commits were deliberately not executed. HCM-3.x and push remain unauthorized."
+}
