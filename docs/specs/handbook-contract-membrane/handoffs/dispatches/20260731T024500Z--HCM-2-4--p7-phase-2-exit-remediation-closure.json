@@ -1,0 +1,256 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260731T024500Z--HCM-2-4--p7-phase-2-exit-remediation-closure",
+  "created_at_utc": "2026-07-31T02:45:00Z",
+  "source_handoff_ids": [
+    "20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed"
+  ],
+  "parent_orchestration_id": "20260731T022800Z--HCM-2-4--p7-phase-2-exit-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P7-phase-2-exit",
+  "subject_fingerprint": "sha256:105082bbb0678389756152ac4f616512f649f51dace3b10c153684f1751522f2",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "p7-phase-2-exit-final-closeout-closure-1",
+    "trigger_run_ids": [
+      "p7_phase2_exit_final_review"
+    ],
+    "finding_refs": [
+      "HCM-P7-FR-0001",
+      "HCM-P7-FR-0002"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-31T02:27:59Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p7-phase-2-exit",
+        "packet_ids": [
+          "P7-phase-2-exit"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed.json#resume"
+      }
+    ],
+    "fingerprint": "sha256:628e8aef9295827f6cd8b2f42792542e6fd9b1a31c3f50eccb2e24f80de1bcb1"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:699780a8b8c0a37fed7ed93e2910693c058c15ab0bc5c2e4788fb40780f2bc50",
+    "integrated_outcome_id": "hcm-2.4-p7-phase-2-exit",
+    "outcome_registry_fingerprint": "sha256:628e8aef9295827f6cd8b2f42792542e6fd9b1a31c3f50eccb2e24f80de1bcb1",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "final_closeout"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260731T022800Z--HCM-2-4--p7-phase-2-exit-final-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p7-phase-2-exit-convergence-2",
+    "completed_at_utc": "2026-07-31T02:44:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "retain the complete P1A-P6 family replay, all eight Phase 2 exit rows, strict Clippy, native serial all-features workspace, Unix selected-profile targets, package/archive/docs, and handoff modes after documentation-only remediation",
+        "evidence_ref": "discovery independently confirmed the implementation/proof boundary; remediation changes only authorized control-pack/proof text and cargo fmt --all -- --check remains GREEN"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "replay the six-family truth/view matrix and 12-term retired bridge/fixed-selector absence wall after the documentation-only remediation",
+        "evidence_ref": "no Rust/test/fixture/definition/schema/Cargo byte changed; discovery independently confirmed zero Rust hits for all 12 retired terms"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinal-sorted nine-entry repo-path-NUL-SHA256-newline replacement subject",
+        "evidence_ref": "subject_manifest below: sha256:105082bbb0678389756152ac4f616512f649f51dace3b10c153684f1751522f2"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check plus changed-document UTF-8/link/anchor/fence/secret checks",
+        "evidence_ref": "parent terminal output after remediation: formatting and changed-document checks exit 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --cached --check and protected-path exclusion audit",
+        "evidence_ref": "parent terminal output after remediation: exit 0; remediation staging has exactly eight subject documents plus the immutable discovery dispatch and excludes every protected path"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "8d8dcb4e404c2c9c7016e83238ff567c276157e0e3bb6411c5776b3c87e147f0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "27468dcbe3dadb6ab2eca78bd3fc04f2a638bca05e90329657356fbf5af02d1f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "1b461fe629c99fc05ce5a3b3dfd91fe681e0a9da59bec34a1ef31f0c426cbf02"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "7ecf5f12563dac7a22568841313891a015598ceeede395891ee97f6252d3e51b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T022800Z--HCM-2-4--p7-phase-2-exit-final-review.json",
+        "sha256": "79f68c06fe6d25d09695d7a47a80c9be4403ee6ea9b3fa50b22d456be8f70d22"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "c9c145906aea87a173fd007cba315cd47a02f0e2d4295a4d2e8bb2482a909be6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md",
+        "sha256": "e98f016104c8fa023c52b9635eead6916ab29041a18a9a322527f8454d4f8205"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "550c0d396bb00e17a6191e61d2d2ab0c2c76a4b3a59edc6633b6dffff9d89ffe"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "1ece39137ed2c75714f5a8207df05e0246a06b2da52e294c017b918ce95adf3a"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:105082bbb0678389756152ac4f616512f649f51dace3b10c153684f1751522f2"
+  },
+  "active_resolution": {
+    "level": "implementation-phase-exit-final-review-closure",
+    "scope_horizon": "different-fresh closure of two P7 control-truth P2 findings on the complete HCM-2.4 Phase 2 exit subject",
+    "detail_resolution": "P7 selection/landing text is internally consistent and exact staged GitNexus evidence distinguishes nine-path remediation staging from ten-path closure-ready staging at 10 documentation symbols",
+    "temporal_horizon": "first closure cycle after fresh final_closeout discovery",
+    "authority_horizon": "eight exact P7 documentation/proof paths only; no Rust, test, fixture, definition, schema, Cargo, dependency, HCM-3.x, release, or push authority",
+    "memory_horizon": "immutable discovery dispatch, both stable P2 findings, exact nine-entry replacement subject, selected P6 completed handoff, and unchanged complete proof wall",
+    "validation_horizon": "CLEAN closure of HCM-P7-FR-0001 and HCM-P7-FR-0002 with no newly unmasked P1/P2 is required before the local primary commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed.json",
+      "sections": [
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P7 — Phase 2 exit proof and control-pack closeout",
+        "Phase 2 exit map",
+        "Full implementation proof wall"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md",
+      "sections": [
+        "Proof wall",
+        "Review and stop boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Review dispatch",
+        "Causal review budget",
+        "Completion review"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules",
+        "Inventory"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery reviewer /root/p7_phase2_exit_final_review matched all eight original subject hashes, independently confirmed the implementation and Phase 2 exit evidence, preserved HCM-RF-0001/HCM-RF-0002 as P3 advisories, and returned exactly P2 HCM-P7-FR-0001 plus HCM-P7-FR-0002. Parent remediation changed only the eight authorized control-pack/proof documents: all live status text now says P7 was explicitly selected, the discovery FINDINGS verdict conferred no acceptance, only this different-fresh closure can accept P7/HCM-2.4/Phase 2, and exact GitNexus evidence records 9 remediation-stage paths and 10 closure-ready paths after adding this immutable dispatch, both with 10 documentation symbols, zero affected processes, and LOW risk. No Rust/test/fixture/definition/schema/Cargo/dependency byte changed. The full proof wall remains applicable; protected user-owned paths remain excluded. P7 acceptance is determined only by this verdict.",
+  "allowed_scope": [
+    "Replay all nine subject hashes and the aggregate fingerprint; verify this closure dispatch is excluded from its own subject and every replacement path is within the P7 selector ceiling.",
+    "Verify HCM-P7-FR-0001 is closed: P7 is consistently recorded as explicitly selected, discovery FINDINGS conferred no acceptance, and every landing/closeout statement binds acceptance only to this exact closure verdict.",
+    "Verify HCM-P7-FR-0002 is closed: remediation staging reports 9 files/10 symbols and closure-ready staging reports 10 files/10 symbols, with zero affected processes and LOW risk; compare-to-main remains a disclosed diagnostic, not GREEN.",
+    "Confirm the discovery review's implementation, Phase 2 exit, WSL advisory, inventory, and no-runtime conclusions remain applicable because no runtime/test/fixture/definition/schema/Cargo byte changed.",
+    "Independently inspect for newly unmasked P1/P2 and return CLEAN only if the exact replacement subject can be committed byte-for-byte."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff or ledger entry, delegate, or reuse the discovery verdict as proof of this changed subject.",
+    "Do not authorize any Rust/test/fixture/definition/schema/profile/validator/Cargo/dependency/public API/package/runtime change or broaden any gate beyond the exact P7 ceiling.",
+    "Do not treat the WSL exact-message mismatch as a passing test, a Phase 2 waiver, or authority to edit its test/runtime surface.",
+    "Do not begin HCM-3.x, future task-gate runtime, release, push, or automatic continuation."
+  ],
+  "tasks": [
+    "Validate the first closure cycle, causal predecessor, exact two finding references, registry, budget, all nine replacement hashes, and aggregate fingerprint.",
+    "Independently review the complete control-truth and staged-GitNexus remediation against the unchanged implementation/proof evidence and live repository state.",
+    "Return findings first in P1, P2, P3, P4 order; otherwise return explicit CLEAN closing HCM-P7-FR-0001 and HCM-P7-FR-0002 for subject sha256:105082bbb0678389756152ac4f616512f649f51dace3b10c153684f1751522f2."
+  ],
+  "contracts_and_gates": [
+    "No primary commit occurs unless this exact replacement subject is CLEAN with no unresolved P1/P2.",
+    "No subject byte changes after CLEAN; both immutable P7 dispatches are included as review evidence in the primary commit.",
+    "CLEAN completes P7, HCM-2.4, and only the exact Phase 2 exit recorded here; P3/P4 remain durably inventoried.",
+    "HCM-3.x, task-gate runtime, automatic continuation, release, and push remain unauthorized."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if any live control statement remains contradictory, premature, or bound to the discovery FINDINGS verdict instead of this closure.",
+    "Return FINDINGS if either staged GitNexus count is inaccurate, any exit row is unsupported, or correction requires a path outside the exact P7 documentation/proof ceiling.",
+    "Report rather than repair every finding."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

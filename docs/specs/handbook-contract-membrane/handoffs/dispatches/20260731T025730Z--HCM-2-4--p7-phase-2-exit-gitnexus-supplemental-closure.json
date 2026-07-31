@@ -1,0 +1,259 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260731T025730Z--HCM-2-4--p7-phase-2-exit-gitnexus-supplemental-closure",
+  "created_at_utc": "2026-07-31T02:57:30Z",
+  "source_handoff_ids": [
+    "20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed"
+  ],
+  "parent_orchestration_id": "20260731T022800Z--HCM-2-4--p7-phase-2-exit-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P7-phase-2-exit",
+  "subject_fingerprint": "sha256:fd8fcdf5b4d9bbee18b262dbdfb199e0ad798c53e46a4ecb1e275a35fa08bddb",
+  "review_cycle": {
+    "kind": "supplemental_causal",
+    "cycle_id": "p7-phase-2-exit-final-closeout-supplemental-1",
+    "trigger_run_ids": [
+      "p7_phase2_exit_closure_review"
+    ],
+    "finding_refs": [
+      "HCM-P7-FR-0002"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-31T02:27:59Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p7-phase-2-exit",
+        "packet_ids": [
+          "P7-phase-2-exit"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed.json#resume"
+      }
+    ],
+    "fingerprint": "sha256:628e8aef9295827f6cd8b2f42792542e6fd9b1a31c3f50eccb2e24f80de1bcb1"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:699780a8b8c0a37fed7ed93e2910693c058c15ab0bc5c2e4788fb40780f2bc50",
+    "integrated_outcome_id": "hcm-2.4-p7-phase-2-exit",
+    "outcome_registry_fingerprint": "sha256:628e8aef9295827f6cd8b2f42792542e6fd9b1a31c3f50eccb2e24f80de1bcb1",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "final_closeout"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260731T024500Z--HCM-2-4--p7-phase-2-exit-remediation-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "p7-phase-2-exit-convergence-3",
+    "completed_at_utc": "2026-07-31T02:57:29Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "retain the complete P1A-P6 replay, all eight Phase 2 exit rows, strict Clippy, native serial all-features workspace, Unix selected-profile targets, package/archive/docs, and handoff modes after documentation-only supplemental remediation",
+        "evidence_ref": "discovery and first closure independently confirmed the implementation/proof boundary; supplemental remediation changes only authorized control-pack/proof text"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "retain the six-family truth/view matrix and 12-term retired bridge/fixed-selector absence wall after the documentation-only supplemental remediation",
+        "evidence_ref": "no Rust/test/fixture/definition/schema/Cargo byte changed; both prior reviews independently confirmed zero Rust hits for all 12 retired terms"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinal-sorted ten-entry repo-path-NUL-SHA256-newline twice-remediated subject",
+        "evidence_ref": "subject_manifest below: sha256:fd8fcdf5b4d9bbee18b262dbdfb199e0ad798c53e46a4ecb1e275a35fa08bddb"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check plus changed-document UTF-8/link/anchor/fence/secret checks",
+        "evidence_ref": "parent terminal output after supplemental remediation: formatting and changed-document checks exit 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --cached --check, exact staged path inspection, repeated staged GitNexus detection, and protected-path exclusion audit",
+        "evidence_ref": "ten-entry replacement subject contains only eight authorized documents and two immutable predecessor dispatches; staged GitNexus symbol cardinality varies but every run returns zero affected processes and LOW risk"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "20cb731af30feb5fd9bcafd998a30c04ba46810e3a93a95e166ec9d3aa3b6e43"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "eaf5d6096653799b9bacc7160fd14be8c842d2c247392c86a36fe3b83ceb1901"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "07d2ea14f27a44f2aec933b08a040d829c7dd381a52b1412d9a6b1d93b820b25"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "7ecf5f12563dac7a22568841313891a015598ceeede395891ee97f6252d3e51b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T022800Z--HCM-2-4--p7-phase-2-exit-final-review.json",
+        "sha256": "79f68c06fe6d25d09695d7a47a80c9be4403ee6ea9b3fa50b22d456be8f70d22"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T024500Z--HCM-2-4--p7-phase-2-exit-remediation-closure.json",
+        "sha256": "f1b4e09dd7ece0c23cfc70d67658c6e42e2f0980cd1cfb726abf699d2216589e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "8335dae165baadc1ae75171f67a9ae3604275b20c7e742ec60bc778a7e7a788c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md",
+        "sha256": "0fb96e94caa18d8f9fb0ea8bb66247b5fc61e74d34ae9aaca6a093ebfcda201c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "c8ac2ebe2ea038a38b935448a5c4299204cdc6c0082478bf8154bc3b87d613f9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "58ffd640e1af6f9207ff6e4ba408c2d9a6c0d9a655766b2061bc79829266a0aa"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:fd8fcdf5b4d9bbee18b262dbdfb199e0ad798c53e46a4ecb1e275a35fa08bddb"
+  },
+  "active_resolution": {
+    "level": "implementation-phase-exit-final-review-supplemental",
+    "scope_horizon": "supplemental-fresh closure of unresolved HCM-P7-FR-0002 on the complete HCM-2.4 Phase 2 exit subject",
+    "detail_resolution": "the control pack removes nondeterministic GitNexus symbol cardinality as an exact gate and retains exact path scope, zero affected processes, and LOW risk as reproducible evidence",
+    "temporal_horizon": "first supplemental causal cycle after different-fresh closure returned FINDINGS",
+    "authority_horizon": "eight exact P7 documentation/proof paths only; no Rust, test, fixture, definition, schema, Cargo, dependency, HCM-3.x, release, or push authority",
+    "memory_horizon": "immutable discovery and first-closure dispatches, HCM-P7-FR-0001 closed, HCM-P7-FR-0002 unresolved, exact ten-entry replacement subject, and unchanged complete proof wall",
+    "validation_horizon": "CLEAN closure of HCM-P7-FR-0002 with no newly unmasked P1/P2 is required before the local primary commit"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed.json",
+      "sections": [
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P7 — Phase 2 exit proof and control-pack closeout",
+        "Phase 2 exit map",
+        "Full implementation proof wall"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md",
+      "sections": [
+        "Proof wall",
+        "Review and stop boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Review dispatch",
+        "Causal review budget",
+        "Completion review"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules",
+        "Inventory"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery review returned P2 HCM-P7-FR-0001 and HCM-P7-FR-0002. First closure independently closed HCM-P7-FR-0001 and found no other new P1/P2, but left HCM-P7-FR-0002 open because repeated GitNexus 1.6.9 staged detection on an unchanged index returned 10, 12, and 14 documentation symbols while consistently reporting the exact staged file count, zero affected processes, and LOW risk. Parent supplemental remediation changes only the eight authorized documents: symbol cardinality is now explicitly diagnostic, while exact path inspection and the stable zero-process/LOW result remain the gate. No Rust/test/fixture/definition/schema/Cargo/dependency byte changed; the full proof wall remains applicable; protected paths remain excluded. P7 acceptance is determined only by this verdict.",
+  "allowed_scope": [
+    "Replay all ten subject hashes and the aggregate fingerprint; verify this supplemental dispatch is excluded from its own subject and every replacement path is within the P7 selector ceiling.",
+    "Verify HCM-P7-FR-0002 is closed by truthful evidence: GitNexus symbol totals are explicitly nondeterministic diagnostics, not an exact gate; exact path scope, zero affected processes, and LOW risk remain reproducible.",
+    "Confirm HCM-P7-FR-0001 remains closed and neither predecessor FINDINGS verdict is used as acceptance evidence.",
+    "Confirm the prior implementation, Phase 2 exit, WSL advisory, inventory, and no-runtime conclusions remain applicable because no runtime/test/fixture/definition/schema/Cargo byte changed.",
+    "Independently inspect for newly unmasked P1/P2 and return CLEAN only if the exact twice-remediated subject can be committed byte-for-byte."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff or ledger entry, delegate, or reuse a predecessor verdict as proof of this changed subject.",
+    "Do not repair or normalize GitNexus, or authorize any Rust/test/fixture/definition/schema/profile/validator/Cargo/dependency/public API/package/runtime change.",
+    "Do not treat the WSL exact-message mismatch as a passing test, a Phase 2 waiver, or authority to edit its test/runtime surface.",
+    "Do not begin HCM-3.x, future task-gate runtime, release, push, or automatic continuation."
+  ],
+  "tasks": [
+    "Validate the supplemental-causal cycle, predecessor, trigger, finding reference, registry, budget, all ten replacement hashes, and aggregate fingerprint.",
+    "Independently verify the control pack no longer asserts a reproducible exact GitNexus symbol total and still proves exact scope, zero affected processes, and LOW risk.",
+    "Return findings first in P1, P2, P3, P4 order; otherwise return explicit CLEAN closing HCM-P7-FR-0002 for subject sha256:fd8fcdf5b4d9bbee18b262dbdfb199e0ad798c53e46a4ecb1e275a35fa08bddb."
+  ],
+  "contracts_and_gates": [
+    "No primary commit occurs unless this exact replacement subject is CLEAN with no unresolved P1/P2.",
+    "No subject byte changes after CLEAN; all three immutable P7 dispatches are included as review evidence in the primary commit.",
+    "CLEAN completes P7, HCM-2.4, and only the exact Phase 2 exit recorded here; P3/P4 remain durably inventoried.",
+    "HCM-3.x, task-gate runtime, automatic continuation, release, and push remain unauthorized."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if any live control statement still treats GitNexus symbol cardinality as an exact reproducible gate or hides its nondeterminism.",
+    "Return FINDINGS for any newly unmasked P1/P2, unsupported exit row, path-scope drift, affected production process, or risk above LOW.",
+    "Report rather than repair every finding."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

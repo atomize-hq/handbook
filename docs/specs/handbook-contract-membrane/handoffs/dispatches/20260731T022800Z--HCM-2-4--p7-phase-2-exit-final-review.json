@@ -1,0 +1,258 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260731T022800Z--HCM-2-4--p7-phase-2-exit-final-review",
+  "created_at_utc": "2026-07-31T02:28:00Z",
+  "source_handoff_ids": [
+    "20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed"
+  ],
+  "parent_orchestration_id": "20260731T022800Z--HCM-2-4--p7-phase-2-exit-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P7-phase-2-exit",
+  "subject_fingerprint": "sha256:1552534eca77047aedbd3bf2589a24484abef79f15ffc1f9f8552d8c1c96eef0",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "p7-phase-2-exit-final-closeout-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-31T02:27:59Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-p7-phase-2-exit",
+        "packet_ids": [
+          "P7-phase-2-exit"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed.json#resume"
+      }
+    ],
+    "fingerprint": "sha256:628e8aef9295827f6cd8b2f42792542e6fd9b1a31c3f50eccb2e24f80de1bcb1"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:699780a8b8c0a37fed7ed93e2910693c058c15ab0bc5c2e4788fb40780f2bc50",
+    "integrated_outcome_id": "hcm-2.4-p7-phase-2-exit",
+    "outcome_registry_fingerprint": "sha256:628e8aef9295827f6cd8b2f42792542e6fd9b1a31c3f50eccb2e24f80de1bcb1",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "p7-phase-2-exit-convergence-1",
+    "completed_at_utc": "2026-07-31T02:27:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "replay every P1A-P6 focused family, direct 1.1/exact 1.2 Charter compatibility, all HCM-2.2 negatives, strict Clippy, native serial all-features workspace, Unix selected-profile targets, package/archive/docs, and handoff modes",
+        "evidence_ref": "P7 proof record: every selected packet and all eight Phase 2 exit rows GREEN; native workspace exit 0 in 891.9 seconds"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "replay six-family truth/view matrix, registry-brief custom kind, rejected-P2 influence, retained fixtures/consumers, and 12-term bridge/fixed-selector absence wall",
+        "evidence_ref": "no Rust/test/fixture/definition/schema/Cargo byte changed; 12 retired terms have zero Rust hits; exact real-path and legacy non-influence tests pass"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinal-sorted eight-entry repo-path-NUL-SHA256-newline P7 subject",
+        "evidence_ref": "subject_manifest below: sha256:1552534eca77047aedbd3bf2589a24484abef79f15ffc1f9f8552d8c1c96eef0"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check plus changed-document UTF-8/link/anchor/fence/secret checks",
+        "evidence_ref": "parent terminal output: formatting and all eight changed-document checks exit 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check and protected-path exclusion audit",
+        "evidence_ref": "parent terminal output: exit 0; only the eight authorized subject paths plus this immutable dispatch are intended for staging"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "2131556b00842e938a8f97022d524c451de5d44b6016de3674641b81b27419ca"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "a6ef3f3be721c4d901307b34e86773551daf0db27ce97d32fdc8ad3d40386993"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "cff87a1fcfb3fc4ac2c28b7bb766fc8bd9940848bb1077fbe752af122e0e3910"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "7ecf5f12563dac7a22568841313891a015598ceeede395891ee97f6252d3e51b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+        "sha256": "98697247f9f242e54e27f97b19b37a6854766798a203cb7b72ebc506c8632fea"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md",
+        "sha256": "3cd7c8439169c60a01dfcc8484d02a24dd51ae68f8483eef24de7ebbcf51b147"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/plan.md",
+        "sha256": "01dde1006905fe95b7dbbfcf2bbbb875d07370cd9f22815ae06832f63774849f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/tasks/todo.md",
+        "sha256": "f303c164ead75ab2ce5a84ec451ca7601b3c13a53bb3a4451c183baa1d246d86"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:1552534eca77047aedbd3bf2589a24484abef79f15ffc1f9f8552d8c1c96eef0"
+  },
+  "active_resolution": {
+    "level": "implementation-phase-exit-final-review",
+    "scope_horizon": "complete HCM-2.4 P7 Phase 2 exit proof and control-pack closeout subject",
+    "detail_resolution": "all eight exact exit rows, complete P1A-P6 replay, earned gate/bridge truth, P3 advisory triage, and no-runtime boundary",
+    "temporal_horizon": "fresh final_closeout discovery after explicit operator P7 selection from completed P6",
+    "authority_horizon": "eight exact P7 documentation/proof paths only; no Rust, test, fixture, definition, schema, Cargo, dependency, HCM-3.x, release, or push authority",
+    "memory_horizon": "selected P6 completed handoff, accepted primary/closeout commits, CLEAN P6 dispatch, P1A-P6 proof lineage, fresh parent wall, and exact eight-entry manifest",
+    "validation_horizon": "CLEAN is required before the local primary commit and separate completed handoff/ledger closeout; every P1/P2 requires remediation and different-fresh closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed.json",
+      "sections": [
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P7 — Phase 2 exit proof and control-pack closeout",
+        "Phase 2 exit map",
+        "Full implementation proof wall"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "Proof gate inventory",
+        "Bridge inventory",
+        "HCM-2.4 completed evidence boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Review dispatch",
+        "Causal review budget",
+        "Completion review"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Dispatch routing",
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules",
+        "Inventory"
+      ]
+    }
+  ],
+  "repo_truth": "Branch feat/handbook-contract-membrane is at accepted P6 closeout 4aecd1b42356592ccd4d093c85486a9c25410dca. The exact eight-path P7 documentation/proof subject changes no Rust/test/fixture/definition/schema/Cargo/dependency byte. Every focused family, direct 1.1/exact 1.2 compatibility path, HCM-2.2 negative/atomic/recovery matrix, native serial workspace wall, package/archive/document/handoff gate, and 12-term absence scan is GREEN. Fresh WSL cli_surface is 100/101: the one pre-existing cross-platform exact-message mismatch refuses safely and is registered as HCM-RF-0002, not counted green or treated as a Phase 2 waiver. GitNexus is freshly indexed at HEAD; exact staged detection is GREEN at 9 files, 8 documentation symbols, zero affected processes, LOW risk. Current and 1.6.9 compare-to-main calls reproduce the Windows unavailable-FTS local-backend termination and are recorded as a diagnostic rather than mislabeled GREEN. Protected user-owned paths remain excluded. P7 acceptance is determined only by this dispatch verdict.",
+  "allowed_scope": [
+    "Replay all eight subject hashes and the aggregate fingerprint; verify the dispatch is excluded from its own subject and every path is within the P7 selector ceiling.",
+    "Independently map every Phase 2 exit obligation to live implementation/tests and determine whether each claimed GREEN result is positively supported without a waiver.",
+    "Review exact direct shipped-root 1.1 acceptance, selected 1.2 compatibility, Project Authority descriptor-field refusals, HCM-2.2 atomicity/recovery/immutable-record preservation, and P6 descriptor-selected common loading.",
+    "Review custom-kind no-enum/no-generated-command evidence, fixed deterministic renderer-only views, Projection/Resolution deferral, legacy Markdown/rejected-P2 non-influence, and bridge/fixed-selector deletion.",
+    "Audit proof-wall truth, including the WSL 100/101 classification, workspace packaging baseline, document/handoff gates, GitNexus diagnostic, protected-path exclusions, no-runtime ceiling, and no-push rule.",
+    "Review HCM-RF-0001 phase-exit triage and HCM-RF-0002 admission/priority/disposition against the inventory rubric.",
+    "Return CLEAN only if no unresolved P1/P2 exists and the exact frozen P7 subject may be committed without another byte change."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff or ledger entry, delegate, or reuse a predecessor verdict as proof.",
+    "Do not authorize any Rust/test/fixture/definition/schema/profile/validator/Cargo/dependency/public API/package/runtime change or broaden any gate beyond the exact P7 ceiling.",
+    "Do not treat the WSL exact-message mismatch as a passing test, a Phase 2 waiver, or authority to edit its test/runtime surface.",
+    "Do not begin HCM-3.x, future task-gate runtime, release, push, or automatic continuation."
+  ],
+  "tasks": [
+    "Validate fresh v1.4 discovery lineage, causal registry/budget, convergence checks, authority headings, all eight manifest hashes, and the aggregate fingerprint.",
+    "Perform independent specification, standards, regression, proof-truth, control-pack, advisory, and exit-mapping review against live repository evidence.",
+    "Return findings first in P1, P2, P3, P4 order with stable new IDs and explicit duplicate comparison; otherwise return explicit CLEAN for subject sha256:1552534eca77047aedbd3bf2589a24484abef79f15ffc1f9f8552d8c1c96eef0."
+  ],
+  "contracts_and_gates": [
+    "No primary commit occurs unless this exact subject is CLEAN with no unresolved P1/P2.",
+    "Any valid P1/P2 is consolidated and remediated only within existing authority, followed by affected/full verification and a different-fresh closure review under this parent budget.",
+    "No subject byte changes after CLEAN; this immutable dispatch is added as review evidence to the primary commit without entering the reviewed subject fingerprint.",
+    "CLEAN completes P7, HCM-2.4, and only the exact Phase 2 exit recorded here; P3/P4 remain durably inventoried.",
+    "HCM-3.x, task-gate runtime, automatic continuation, release, and push remain unauthorized."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS for any unsupported exit row, proof waiver, inaccurate status, stale authority reference, missing required gate, unregistered advisory, or unresolved P1/P2.",
+    "Return FINDINGS if correction requires any surface outside the exact P7 documentation/proof ceiling.",
+    "Report rather than repair every finding."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

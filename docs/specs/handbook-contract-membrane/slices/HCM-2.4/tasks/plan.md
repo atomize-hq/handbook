@@ -6,12 +6,26 @@ authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean and
 committed. P2S, P2A, and Option C are historical evidence, not active
 architecture. The P4/P5 token prerequisite is review-clean and committed at
 `00dde01`; P4's separate five-part negative-surface/path proof is review-clean
-and GREEN. The complete P6 repair candidate removes the two valid discovery P2s
-and has a GREEN complete proof wall. CLEAN in
+and GREEN. The complete P6 repair is accepted at primary commit `1209430` and
+closeout commit `4aecd1b`. CLEAN in
 `../../../handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
-accepts this frozen P6 subject; FINDINGS leaves it pending. P7 is eligible only
-under CLEAN and remains unselected and unstarted; HCM-2.4 completion and
-Phase 2 exit remain incomplete.
+accepted its frozen subject. The operator explicitly selected P7; its complete
+proof wall and all eight Phase 2 exit rows are GREEN. Discovery dispatch
+`../../../handoffs/dispatches/20260731T022800Z--HCM-2-4--p7-phase-2-exit-final-review.json`
+  returned two P2 control-truth findings and conferred no acceptance. The first
+  remediated closure
+  `../../../handoffs/dispatches/20260731T024500Z--HCM-2-4--p7-phase-2-exit-remediation-closure.json`
+  closed `HCM-P7-FR-0001` but left `HCM-P7-FR-0002` open because identical
+  GitNexus staged replays returned nondeterministic documentation-symbol counts.
+  The supplemental review
+  `../../../handoffs/dispatches/20260731T025730Z--HCM-2-4--p7-phase-2-exit-gitnexus-supplemental-closure.json`
+  substantively corrected that proof but returned FINDINGS because
+  `HCM-P7-FR-0003` proved the old parent cannot create a truthful completed
+  handoff. Decision `../decision/20260731-p7-final-review-lineage-repair.md`
+  authorizes a distinct final-review parent. CLEAN in
+  `../../../handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json`
+  completes P7, HCM-2.4, and the exact Phase 2 exit. FINDINGS leaves them
+  unaccepted.
 
 ## Dependency graph
 
@@ -45,11 +59,12 @@ exact operator-approved derivation selector frozen in
 review, RED/GREEN, supplemental causal closure, and commit are complete. P4
 now also has a separate operator-authorized five-part negative-surface/path
 proof with CLEAN different-fresh closure. P4 is GREEN. The complete P6 repair
-candidate removes the bridges and residual normal-path fixed-kind authority,
-preserves descriptor-owned identity, and has a GREEN complete proof wall. Its
-acceptance is bound only to the frozen final-review CLEAN condition. P7 remains
-unselected and unstarted. Current activity is limited to P6 final review and
-true-stop transition.
+removes the bridges and residual normal-path fixed-kind authority and preserves
+descriptor-owned identity. It is accepted. P7 was explicitly selected and its
+proof/exit mapping is GREEN; current activity is limited to the operator-
+authorized fresh-parent review and true-stop closeout. The old parent remains
+immutable FINDINGS context and contributes no acceptance evidence or delegated
+runs to the new parent.
 
 ## Standing rules
 
@@ -643,12 +658,10 @@ custom configured renderers or Projections generic.
 
 ## P7 — Phase 2 exit and true stop
 
-Completion entry: P6 accepted.
+Completion entry: P6 accepted. Satisfied.
 
-Current entry result: satisfied only if the frozen P6 final-review dispatch is
-CLEAN. Under CLEAN, P7 becomes eligible but remains unselected and unstarted;
-under FINDINGS it remains ineligible. The parent may commit and close out only a
-CLEAN P6 subject. It may not check the full P7 exit items or claim Phase 2 exit.
+Current entry result: the frozen P6 final-review dispatch is CLEAN and the
+operator explicitly selected P7. The proof wall and exact exit map are GREEN.
 
 Work:
 
@@ -668,15 +681,20 @@ Work:
 - commit the reviewed implementation subject;
 - create the parent-owned completed implementation handoff, rebuild the ledger,
   validate all handoff modes, and commit the mechanical closeout separately;
-- push without force and verify clean origin 0/0.
+- do not push; verify the local commits and protected-path exclusions.
 
 Exit:
 
 - unresolved P1/P2 is empty;
 - P3/P4 is fixed or registered/deduplicated;
 - every Phase 2 exit row is proven;
-- the branch is clean and synchronized; and
+- only the named user-owned pre-existing paths remain dirty and unstaged; and
 - stop before HCM-3.x or any other implementation.
+
+P7 evidence is frozen in
+`../proof/implementation/P7-phase-2-exit-closeout.md`. CLEAN in the exact P7
+final-review dispatch satisfies this exit and authorizes local commits plus the
+separate parent handoff/ledger closeout only. Nothing is pushed.
 
 Planning completion does not authorize this plan. A later implementation
 session must explicitly select the new exact completed amended-planning

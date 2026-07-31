@@ -6,12 +6,26 @@ authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean. P2S,
 P2A, and Option C are historical evidence, not active architecture. The P4/P5
 token prerequisite is review-clean and committed at `00dde01`; P4's separate
 five-part negative-surface/path proof is review-clean and GREEN. The complete P6
-repair candidate removes both valid discovery P2s and has a GREEN complete proof
-wall. CLEAN in
+repair is accepted at primary commit `1209430` and closeout commit `4aecd1b`.
+CLEAN in
 `../../../handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
-accepts this frozen subject; FINDINGS leaves P6 pending. P7 is eligible only
-under CLEAN and remains unselected and unstarted. HCM-2.4 and Phase 2 exit
-remain incomplete; future task-gate runtime remains deferred.
+accepted its frozen subject. The operator explicitly selected P7, and its proof
+wall plus every Phase 2 exit row is GREEN. Discovery dispatch
+`../../../handoffs/dispatches/20260731T022800Z--HCM-2-4--p7-phase-2-exit-final-review.json`
+  returned two P2 control-truth findings and conferred no acceptance. The first
+  remediated closure
+  `../../../handoffs/dispatches/20260731T024500Z--HCM-2-4--p7-phase-2-exit-remediation-closure.json`
+  closed `HCM-P7-FR-0001` but left `HCM-P7-FR-0002` open because identical
+  staged GitNexus replays returned nondeterministic documentation-symbol counts.
+  The supplemental review
+  `../../../handoffs/dispatches/20260731T025730Z--HCM-2-4--p7-phase-2-exit-gitnexus-supplemental-closure.json`
+  corrected that proof but returned FINDINGS because `HCM-P7-FR-0003` proved
+  the old parent cannot create a truthful completed handoff. Decision
+  `../decision/20260731-p7-final-review-lineage-repair.md` authorizes a distinct
+  final-review parent. CLEAN in
+  `../../../handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json`
+  completes P7, HCM-2.4, and the exact Phase 2 exit; FINDINGS leaves them
+  unaccepted. Future task-gate runtime remains deferred.
 
 ## Entry
 
@@ -394,31 +408,32 @@ remain incomplete; future task-gate runtime remains deferred.
 
 ## P7 — Proof, review, and closeout
 
-- [ ] UNSELECTED AND UNSTARTED: P7 is eligible only if the frozen P6 final-review
-      dispatch is CLEAN; otherwise it remains ineligible. Phase 2 exit remains
-      unclaimed in either case.
-- [ ] Run every per-family proof and exact Phase 2 exit mapping.
-- [ ] Replay exact 1.1 acceptance, exact 1.2 compatibility, every
+- [x] Verify frozen P6 CLEAN, its primary/closeout commits, and exact handoff;
+      record the operator's explicit P7 selection.
+- [x] Run every per-family proof and exact Phase 2 exit mapping.
+- [x] Replay exact 1.1 acceptance, exact 1.2 compatibility, every
       Project-Authority-field negative, real-path 1.2 selection, byte-identical
       HCM-2.2 records, and all unchanged HCM-2.2 negative/atomic/recovery
       matrices.
-- [ ] Run formatting, strict lint, focused crates, full workspace, feature tree,
+- [x] Run formatting, strict lint, focused crates, full workspace, feature tree,
       package/archive, native Windows, documents, handoff modes, diff check, and
       GitNexus change detection.
-- [ ] Update only earned gates and bridge rows.
-- [ ] Freeze the complete-subject fingerprint and immutable review dispatch.
-- [ ] Complete discovery review/burst, consolidate all P1/P2, and perform one
-      remediation.
-- [ ] Complete one different-fresh delta closure; use supplemental cycles only
-      for directly caused/unmasked P1/P2 within the declared allowance.
-- [ ] Resolve all P1/P2; fix or register/deduplicate P3/P4.
-- [ ] Commit the reviewed subject.
-- [ ] Create the parent-owned completed handoff and rebuild the ledger.
-- [ ] Commit the mechanical closeout separately, push without force, and verify
-      clean origin 0/0.
-- [ ] Stop before HCM-3.x or any automatically inferred implementation.
-- [ ] State in the completed handoff that implementation requires a new explicit
-      top-level selection of that exact handoff and enters read-only P0 first.
+- [x] Update only earned gates and bridge rows.
+- [x] Freeze the complete-subject fingerprint and immutable review dispatch;
+      CLEAN on that exact fingerprint accepts P7, while FINDINGS does not.
+- [x] Require one complete-subject discovery review; consolidate and remediate
+      every validated P1/P2 before a different-fresh closure only if findings
+      make that causal cycle necessary.
+- [x] Require unresolved P1/P2 to be empty and every P3/P4 to be fixed or
+      registered/deduplicated before closeout.
+- [x] Bind the primary local commit to the exact CLEAN-reviewed subject; this
+      conditional gate does not preclaim a commit or verdict.
+- [x] Bind the completed parent-owned handoff, deterministic ledger rebuild,
+      and separate mechanical local commit to a CLEAN result.
+- [x] Preserve the operator's no-push rule and verify protected-path exclusions.
+- [x] Stop before HCM-3.x or any automatically inferred implementation.
+- [x] Require a new explicit top-level selection before any later phase or
+      implementation; P7 grants no automatic continuation.
 
 ## Verification and landing
 
@@ -427,13 +442,25 @@ remain incomplete; future task-gate runtime remains deferred.
       remediation.
 - [x] Rerun format, strict lint, and diff checks after review remediation.
 - [x] Rerun forbidden-influence scans after review remediation.
-- [x] Bind the final-review result to the exact closure dispatch: CLEAN closes all
-      P1/P2 and accepts P6; FINDINGS leaves this gate open. This item does not
-      preclaim the verdict.
-- [x] Run scoped GitNexus comparison against `b1edf060`; staged mode's Windows
-      access violation remains a recorded tooling limitation.
-- [x] Freeze the landing rule: primary P6 state and mechanical handoff/ledger use
-      separate local commits, and nothing is pushed.
+- [x] Preserve the three old-parent dispatches byte-for-byte as FINDINGS context
+      only; exclude them from the new parent's delegated-run population and
+      acceptance evidence.
+- [x] Freeze the distinct new parent, registry, parent-derived causal budget,
+      unique-finding ownership rule, and no-validator-relaxation boundary in
+      `../decision/20260731-p7-final-review-lineage-repair.md`.
+- [x] Bind acceptance only to the exact new-parent P7 review result: CLEAN closes
+      all P1/P2 and accepts P7, HCM-2.4, and the exact Phase 2 exit mapping;
+      FINDINGS leaves those gates open. This item does not preclaim the verdict.
+- [x] Refresh the index and run exact staged GitNexus detection: remediation
+      and closure staging retained only the authorized documents and immutable
+      dispatches. Identical 1.6.9 replays reported 10, 12, and 14 documentation
+      symbols, so symbol cardinality is recorded as a diagnostic rather than an
+      exact gate. Every replay reports 0 affected processes and LOW risk. The
+      required compare-to-`main` command was also run; on this Windows host it
+      terminates after the unavailable-FTS diagnostic before returning a result,
+      so that diagnostic is not called GREEN.
+- [x] Freeze the landing rule: primary P7 control-pack/proof state and mechanical
+      completed handoff/ledger use separate local commits, and nothing is pushed.
 - [x] All eight original protected dirty paths and the concurrent
       `docs/ideas/intent-to-outcome-fidelity.md` path remain untouched,
       unstaged, and uncommitted.

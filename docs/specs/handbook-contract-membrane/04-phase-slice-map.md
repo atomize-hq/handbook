@@ -395,7 +395,7 @@ does not authorize HCM-2.4 or a later phase.
 - remove the rejected condition-evidence design and superseded Markdown authority;
 - keep deterministic pre-Phase-3 outputs as renderer-derived human-review views only.
 
-Current partial implementation boundary at commits
+Completed implementation lineage begins at commits
 `5cf41d2f64d68cb7f78abb5eccab9acf307089d3`,
 `5a2ccf6939be0e549e7e7355a245c7511c271eef`, and
 `00dde0162fcb15576c83b6ed40ab7286488d0890`, plus bounded P2 implementation
@@ -424,29 +424,54 @@ commit `9b3edf2745054872939ad48abad50ae5c2d97f9a` and authority commit
   persistent-view proof is review-clean and committed at
   `158115daa2b85d41663b79dc677fce69e59fd1e2`. P4 is GREEN and completed.
 - P2 owns removal of legacy Environment Inventory authority and influence.
-  The complete P6 repair candidate removes both bridges and residual normal-path
-  fixed-kind authority, installs descriptor-owned aggregate identity, and has a
-  GREEN complete proof wall. The old parent's CLEAN supplemental-2 result remains
-  limited to its pre-edit selector fingerprint. For this frozen subject, CLEAN in
+  The accepted P6 repair removes both bridges and residual normal-path
+  fixed-kind authority and installs descriptor-owned aggregate identity at
+  primary commit `1209430240eb67c7aa2baac5859d84cb9a84a3b2` and closeout
+  `4aecd1b42356592ccd4d093c85486a9c25410dca`. CLEAN in
   `handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
-  accepts P6; FINDINGS keeps it pending. P7 is eligible only under CLEAN and
-  remains unselected and unstarted. Full HCM-2.4 and Phase 2 remain
-  incomplete, and neither HCM-3.x
-  work nor automatic continuation is authorized.
+  accepted P6. The operator explicitly selected P7; its complete proof wall and
+  every exit row below are GREEN. Discovery dispatch
+  `handoffs/dispatches/20260731T022800Z--HCM-2-4--p7-phase-2-exit-final-review.json`
+  returned two P2 control-truth findings and conferred no acceptance. The first
+  remediated closure
+  `handoffs/dispatches/20260731T024500Z--HCM-2-4--p7-phase-2-exit-remediation-closure.json`
+  closed `HCM-P7-FR-0001` but returned FINDINGS because GitNexus's identical
+  staged replays reported nondeterministic documentation-symbol counts. The
+  supplemental review
+  `handoffs/dispatches/20260731T025730Z--HCM-2-4--p7-phase-2-exit-gitnexus-supplemental-closure.json`
+  returned FINDINGS: the GitNexus proof was substantively corrected, but
+  `HCM-P7-FR-0003` proved that reused finding ownership made the old parent
+  unrepresentable as a completed v1.4 handoff. Under
+  `slices/HCM-2.4/decision/20260731-p7-final-review-lineage-repair.md`, the old
+  parent is historical context only. CLEAN in new-parent dispatch
+  `handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json`
+  completes P7, HCM-2.4, and the exact Phase 2 exit; FINDINGS leaves all three
+  unaccepted. Neither HCM-3.x work nor automatic continuation is authorized.
 
 ### Phase 2 exit gate
 
-- each targeted artifact has exactly one editable canonical truth;
-- all intake modes converge on the same kind-selected canonical schema and expose missing coverage;
-- the Charter intake record/candidate/canonical boundaries are auditable and non-competing;
-- at least one custom kind registers, validates, and exercises supplied intake coverage without a Rust enum variant or generated command;
-- Markdown and other Phase 2 renderer-derived human-review views are reproducibly derived only by fixed deterministic, non-Resolution, first-party renderers and remain outside the Projection contract;
-- generic configured custom-kind Projections and all Resolution-aware views remain deferred until `HCM-3.2` and `HCM-3.3` land;
-- no user migration tooling or dual-read promise exists;
-- every temporary internal cutover bridge named in `06` is deleted.
+- GREEN: each targeted artifact has exactly one editable canonical truth;
+- GREEN: all intake modes converge on the same kind-selected canonical schema
+  and expose missing coverage;
+- GREEN: the Charter intake record/candidate/canonical boundaries are auditable
+  and non-competing under direct 1.1 and selected compatible 1.2;
+- GREEN: the registry-brief custom kind registers, validates, and exercises
+  supplied intake without a Rust product variant or generated command;
+- GREEN: Phase 2 human-review views are reproducibly derived only by fixed
+  deterministic, non-Resolution, first-party renderers and remain outside the
+  Projection contract;
+- GREEN: generic configured custom-kind Projections and all Resolution-aware
+  views remain deferred until separately selected `HCM-3.2` and `HCM-3.3` work;
+- GREEN: no user migration tooling or dual-read promise exists;
+- GREEN: every temporary internal cutover bridge named in `06` is deleted.
 - future implementation-contract work proves task declarations, positive
   session-capability matching, and a separate feature/spec cross-target
   completion result; orchestration aggregation remains non-authoritative.
+
+The exact proof mapping is
+[`slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md`](slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md).
+The future implementation-contract bullet is a separate deferred product gate,
+not a competing canonical-artifact authority or an unproved Phase 2 exit row.
 
 ## Phase 3 — Vocabulary, Context Resolution, Snapshot Memory, and Projections
 

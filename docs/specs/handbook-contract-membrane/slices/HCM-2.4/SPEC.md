@@ -7,16 +7,30 @@ review-clean, and locally committed at implementation commit
 review-clean and committed; the P4/P5 token prerequisite is accepted at
 `00dde0162fcb15576c83b6ed40ab7286488d0890`, P4's separate five-part
 negative-surface/path proof is review-clean and GREEN, and P5 remains accepted.
-The complete P6 repair candidate preserves implementation commit
-`b1edf060710bc96cd61631755519baba864ba30a`, removes both bridges and residual
-normal-path fixed-kind authority, installs descriptor-owned aggregate identity,
-and has a GREEN complete proof wall. For this frozen subject, CLEAN in
+The complete P6 repair is accepted at primary commit
+`1209430240eb67c7aa2baac5859d84cb9a84a3b2` and closeout commit
+`4aecd1b42356592ccd4d093c85486a9c25410dca`; it removes both bridges and
+residual normal-path fixed-kind authority and installs descriptor-owned
+aggregate identity. CLEAN in
 `../../handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
-means P6 is completed and accepted; FINDINGS leaves acceptance pending. P7 is
-eligible only under CLEAN and remains unselected and unstarted; HCM-2.4
-completion and Phase 2 exit remain unearned. Future
-task-gate runtime remains deferred; P2S/P2A/Option C are historical evidence
-only under the 2026-07-28 greenfield decision.
+accepted the reviewed P6 subject. The operator explicitly selected P7 from the
+completed P6 handoff. P7's complete proof wall and every Phase 2 exit row are
+GREEN. Discovery dispatch
+`../../handoffs/dispatches/20260731T022800Z--HCM-2-4--p7-phase-2-exit-final-review.json`
+  returned two P2 control-truth findings and conferred no acceptance. The first
+  remediated closure
+  `../../handoffs/dispatches/20260731T024500Z--HCM-2-4--p7-phase-2-exit-remediation-closure.json`
+  closed `HCM-P7-FR-0001` but returned FINDINGS because the exact GitNexus
+  documentation-symbol count was not reproducible. The supplemental review
+  `../../handoffs/dispatches/20260731T025730Z--HCM-2-4--p7-phase-2-exit-gitnexus-supplemental-closure.json`
+  returned FINDINGS: the GitNexus proof was corrected, but `HCM-P7-FR-0003`
+  proved the old parent cannot own a truthful completed v1.4 handoff. Decision
+  `decision/20260731-p7-final-review-lineage-repair.md` authorizes one distinct
+  final-review parent; the old dispatches remain context only. CLEAN in
+  `../../handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json`
+  completes P7, HCM-2.4, and the exact Phase 2 exit; FINDINGS leaves all three
+  unaccepted. Future task-gate runtime remains deferred; P2S/P2A/Option C are
+  historical evidence only under the 2026-07-28 greenfield decision.
 
 Planning-amendment baseline: `fa31f65fddd678b33ea89d6b7e41201240254986`
 
@@ -56,13 +70,14 @@ end:
 
 This document freezes implementation packets and proof obligations. The P6
 implementation candidate is complete within the boundary frozen in
-`decision/20260729-p6-aggregate-flow-cleanup-selector.md` and becomes accepted
-only when
+`decision/20260729-p6-aggregate-flow-cleanup-selector.md` and was accepted when
 `../../handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
-is CLEAN. That accepted P6 boundary makes P7 eligible but leaves it unselected
-and unstarted; it does not authorize future task-gate runtime, P7 implementation,
-Phase 2 exit, HCM-3.x, native/hardware/trust/evidence infrastructure,
-dependencies, Cargo changes, or another slice.
+returned CLEAN. The operator then explicitly selected P7 from the completed P6
+handoff. That selection authorizes only the P7 proof, review, control-pack, and
+local two-commit closeout described below; it does not authorize future
+task-gate runtime, new runtime behavior, HCM-3.x,
+native/hardware/trust/evidence infrastructure, dependencies, Cargo changes, or
+another slice.
 
 ## Authority and preserved decisions
 
@@ -602,10 +617,15 @@ Run the complete proof wall, prove every Phase 2 exit row, update only earned
 gate/bridge rows, perform the declared review flow, and produce the separate
 implementation handoff/ledger closeout. P7 may not begin HCM-3.x.
 
-P7 becomes eligible only if the frozen P6 final-review dispatch is CLEAN and
-remains unselected and unstarted in either case. The current parent may commit
-and true-stop only a CLEAN P6 subject while preserving open Phase 2 exit rows;
-it must not represent this work as P7 work or slice completion.
+P7 was explicitly selected by the operator after the frozen P6 final-review
+dispatch returned CLEAN and the P6 primary/closeout commits were verified. Its
+complete proof is recorded in
+`proof/implementation/P7-phase-2-exit-closeout.md`. The first final-review
+parent is non-accepting historical context under
+`decision/20260731-p7-final-review-lineage-repair.md`. CLEAN in the exact fresh
+parent dispatch completes P7, HCM-2.4, and the Phase 2 exit mapping; FINDINGS
+leaves them unaccepted. No result authorizes HCM-3.x, release, push, or
+automatic continuation.
 
 ## Exact implementation surface selectors
 

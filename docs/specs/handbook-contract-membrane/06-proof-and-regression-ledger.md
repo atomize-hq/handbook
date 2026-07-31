@@ -147,14 +147,14 @@ closeout. This does not support a generic custom-kind intake claim.
 |---|---|---|
 | `PG-PROFILE-01` | selected profile resolves complete artifact/vocabulary/Resolution truth with deterministic fingerprint | open; HCM-1.4 proves deterministic selected-profile decision/readiness adoption in setup and doctor. HCM-2.4 removes the rejected Environment Context condition prerequisite and proves optional advisory readiness; vocabulary/Resolution application and remaining consumers stay open |
 | `PG-DEFAULT-01` | focused research plus a user brainstorming/decision session explicitly approve the shipped kind set, default instances, and requiredness; examples/current enums do not count | closed for the HCM-0.6 documentation decision by its exact approved record, final proof wall, clean independent review, and two-commit closeout; no runtime/profile publication proof |
-| `PG-KIND-01` | a versioned `ArtifactKindDefinition` resolves a safe canonical schema, validation, optional intake, lifecycle, and projections independently from repository instance state | open program-wide; HCM-1.1 proves kind/schema resolution, HCM-1.4 proves selected-instance structural inspection through the bound kind in setup/doctor, and HCM-2.1 consumes the selected Project Context schema. HCM-2.3 adds exact earned evidence for the repository-defined registry-brief kind/schema, optional supplied intake, immutable candidate/promotion lineage, atomic publication, and generic actual-binary validation path. HCM-2.4 P1A adds exact package-owned successor kind/intake/fixed-renderer closures and semantic repository admission for Project Context, Environment Context, Work Specification, Decision Record, and Risk Record without changing released schemas; P4/P5 add exact Decision/Risk generic mutation and promotion proof without changing released IDs or fingerprints, and P4's separately authorized five-part negative-surface/path proof is GREEN. Lifecycle for other kinds, capitalized Projection, semantic-validator, and remaining-kind coverage stay open |
+| `PG-KIND-01` | a versioned `ArtifactKindDefinition` resolves a safe canonical schema, validation, optional intake, lifecycle, and projections independently from repository instance state | Phase 2 subset closed: HCM-1.1 proves kind/schema resolution, HCM-1.4 proves selected-instance structural inspection, HCM-2.3 proves the repository-defined registry-brief kind/schema, supplied intake, immutable lineage, atomic publication, and generic actual-binary path, and HCM-2.4 proves the five exact package-owned successor kind/intake/fixed-renderer closures plus Project Context, Project Authority, Environment Context, Work Specification, Decision, and Risk real-path preservation. P4/P5 mutation/promotion and P4's five-part negative surface/path proof are GREEN. The program-wide gate remains open only for separately authorized later lifecycle, semantic-validator, and capitalized Projection coverage; that deferred work is not Phase 2 authority. |
 | `PG-KIND-02` | repository-defined custom kind registers, passes meta-schema/structural validation, and exercises supplied intake coverage without a new Rust enum variant, executable hook, remote schema fetch, generated CLI command, or pre-Phase-3 generic projection engine | closed only for the exact HCM-2.3 repository-defined registry-brief path at implementation commit `628b672ef33326e87e4fb30be13489e8af04b38c` and final 111-path review subject `sha256:d510e94e5b47db209022927bc4afa74b8820e27cd645123cc1cdc3aa5f72fdef`; no program-wide generic/custom-kind, shipped-default, SDK/transport, remote-schema, generated-command, or Projection claim is earned |
-| `PG-ARTIFACT-01` | a profile-selected `ArtifactInstanceDescriptor` binds a kind to path/label/requiredness/dependencies and participates in validation/doctor/flow | open program-wide; HCM-1.4 proves descriptor-owned path/role/requiredness/applicability/capability identity plus structural validation and doctor/setup participation, and HCM-2.1 proves content-authority/author/doctor/flow participation for exact instance `project_context`. HCM-2.3 adds exact registry-brief descriptor-selection, canonical-path read/validation, generic operation-context, intake/candidate/promotion, and actual-binary evidence. HCM-2.4 selects exact Project Context, Project Authority, and optional Environment Context rows, proves advisory Environment Context read/render/status, a repository-profile-selected Work Specification descriptor through Stage 10 capture/handoff, exact Decision/Risk generic intake/candidate/promotion/read/validate paths, and P4's five-part negative-surface/path closure. Aggregate flow adoption and remaining product consumers stay open |
+| `PG-ARTIFACT-01` | a profile-selected `ArtifactInstanceDescriptor` binds a kind to path/label/requiredness/dependencies and participates in validation/doctor/flow | Phase 2 subset closed: HCM-1.4 proves descriptor-owned path/role/requiredness/applicability/capability identity, HCM-2.1 proves Project Context content authority, HCM-2.2 proves Project Authority, HCM-2.3 proves registry-brief selection and generic operations, and HCM-2.4 proves optional Environment Context, repository-selected Work Specification Stage 10 capture/handoff, Decision/Risk generic paths, and descriptor-selected aggregate flow with no fixed family/path authority. Remaining later product consumers stay open under their own slices and do not weaken the exact Phase 2 exit. |
 | `PG-INTAKE-01` | guided-adaptive, express, and agent-assisted acquisition use one intake definition and produce the same candidate schema while exposing missing coverage | closed for the exact first-party Charter by HCM-2.2 all-mode, coverage-refusal, stable-replay, orphan-refusal, and installed-skill proof; generic/custom-kind intake remains open under `PG-KIND-02` |
 | `PG-INTAKE-02` | intake provenance distinguishes user declarations, evidenced inference, defaults, unknowns, contradictions, waivers, and approvals; normative fields cannot be silently inferred into authority | closed for the exact first-party Charter by the complete acyclic candidate-`1.3` semantic/exact-result/currentness chain, typed provenance, zero/one/many discovery, historical/orphan refusal, and retained recovery proof; no generic claim |
 | `PG-CHARTER-01` | `CharterIntakeDefinition` covers approved questionnaire domains, promotes only an approved schema-valid candidate to canonical Charter YAML, and deterministically renders Markdown as a renderer-derived human-review view | closed for the exact first-party Charter by candidate `1.3` exact-result authority, new approval, atomic promotion/lifecycle proof, canonical YAML, deterministic Markdown, and real product-path evidence |
 | `PG-YAML-01` | one artifact family is canonically YAML, structurally validated, and deterministically rendered | closed for exact shipped instance `project_context` by HCM-2.1 and independently evidenced for the exact HCM-2.4 Stage 10 Work Specification path; no program-wide or remaining-sibling claim |
-| `PG-YAML-02` | no dual editable Markdown/YAML truth remains for converted families | closed for exact Project Context, first-party Charter, the HCM-2.4 Stage 10 Work Specification path, and the exact Decision and Risk Record proofs. HCM-2.4 greenfield correction closes Environment Context when legacy Environment Inventory influence is absent. Aggregate flow and other unconverted sibling surfaces stay open |
+| `PG-YAML-02` | no dual editable Markdown/YAML truth remains for converted families | closed program-wide for the Phase 2 conversion set: Project Context, first-party Charter/Project Authority, Environment Context, Stage 10 Work Specification, Decision Record, and Risk Record each have one editable canonical YAML truth; retained Markdown is fixed deterministic output or a zero-influence decoy. Descriptor-selected aggregate flow has no legacy/fallback read, migration promise, or competing fixed-family authority. Future Projection output remains derived and cannot reopen this gate without new authority. |
 
 | `PG-VOCAB-01` | lexical and structural conflation render correctly without losing stable role resolution | open |
 | `PG-RES-01` | six-dimension envelope validates inheritance, authority, memory, and validation horizons | open |
@@ -197,8 +197,8 @@ Temporary scaffolding may be introduced only when a row is added here first.
 | Bridge ID | Architectural purpose | Allowed lifetime | Deletion proof |
 |---|---|---|---|
 | `BR-SUB-CLI-01` | let Substrate consume the versioned Handbook JSON protocol before the permanent published-Rust boundary is available | may enter the normal path only in HCM-6.1 after `PG-JSON-01`; remains isolated and replaceable until HCM-6.3 | `PG-PUBLISH-01` and `PG-SUB-RUST-01` pass for the replacing exact API/seam; the normal Substrate path no longer spawns/parses the Handbook CLI; bridge-specific dependencies/config/tests are removed; standalone Handbook CLI remains unaffected |
-| `BR-HCM-2-PILOT-FLOW-01` | let the one-family HCM-2.1 flow cutover consume selected canonical Project Context YAML and its in-memory fixed renderer while other fixed siblings remained | removed in the complete P6 repair candidate; acceptance follows the frozen final-review verdict rule | GREEN: the bridge ID/type, mixed fixed/selected adapter, legacy Project Context output-tag exception, bridge-only tests, and residual normal-path fixed-kind authority are absent |
-| `BR-HCM-2-CHARTER-FLOW-01` | bounded HCM-2.2 bridge adding selected canonical Charter YAML and its in-memory fixed renderer while other fixed siblings remained | removed in the complete P6 repair candidate; acceptance follows the frozen final-review verdict rule | GREEN: the bridge ID/type and bridge-only test are absent, while committed Charter authority and distinct source/render fingerprints remain preserved |
+| `BR-HCM-2-PILOT-FLOW-01` | let the one-family HCM-2.1 flow cutover consume selected canonical Project Context YAML and its in-memory fixed renderer while other fixed siblings remained | deleted and accepted by P6; closed by the P7 recursive absence/behavior wall | GREEN: the bridge ID/type, mixed fixed/selected adapter, legacy Project Context output-tag exception, bridge-only tests, and residual normal-path fixed-kind authority are absent |
+| `BR-HCM-2-CHARTER-FLOW-01` | bounded HCM-2.2 bridge adding selected canonical Charter YAML and its in-memory fixed renderer while other fixed siblings remained | deleted and accepted by P6; closed by the P7 recursive absence/behavior wall | GREEN: the bridge ID/type and bridge-only test are absent, while committed Charter authority and distinct source/render fingerprints remain preserved |
 
 There is no approved user migration tool, legacy importer, dual-read mode, or compatibility profile.
 
@@ -1198,7 +1198,7 @@ fetch, shipped-default expansion, or general custom-kind publication claim is
 earned there. At the HCM-2.3 closeout, HCM-2.4 and all later phases remained
 unauthorized.
 
-## HCM-2.4 current evidence boundary
+## HCM-2.4 completed evidence boundary
 
 Earlier HCM-2.4 commits remain historical evidence. The accepted greenfield P2
 decision supersedes their active evaluator/native conclusions without
@@ -1254,22 +1254,39 @@ removal of legacy Environment Inventory influence. P3/P3B are completed. The
 shared `00dde01` prerequisite leaves P5 GREEN and accepted, and the independent
 `158115d` negative proof makes P4 GREEN and completed. P1A-P1C and P2-P5
 prerequisites for P6 were satisfied. Task-gate runtime remains deferred behind
-the active implementation-contract acceptance gate. The complete P6 repair
-candidate operates under
+the active implementation-contract acceptance gate. The accepted P6 repair
+operates under
 `slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md`. It preserves
-implementation commit `b1edf060710bc96cd61631755519baba864ba30a`, removes both
-bridge IDs, all four bridge types, and residual normal-path fixed-kind authority,
-and retains exact descriptor-owned identity and bytes. The complete focused,
-package, Clippy, formatting, absence-scan, and proportional workspace proof wall
-is GREEN. The eight dispatches inventoried by the repair decision are not active
-evidence; Git history preserves their exact bytes. The old parent's CLEAN
-supplemental-2 review remains limited to its pre-edit selector fingerprint. For
-this frozen subject, only CLEAN in
+primary commit `1209430240eb67c7aa2baac5859d84cb9a84a3b2` and closeout
+`4aecd1b42356592ccd4d093c85486a9c25410dca`, removes both bridge IDs, all four
+bridge types, and residual normal-path fixed-kind authority, and retains exact
+descriptor-owned identity and bytes. CLEAN in
 `handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
-accepts P6; FINDINGS keeps it pending. P7 becomes eligible only under that CLEAN
-condition and remains unselected and unstarted. Full HCM-2.4 and Phase 2
-remain incomplete. No generic Projection, SDK/transport, HCM-3.x work,
-automatic continuation, push, or release is authorized.
+accepted P6. The operator explicitly selected P7. Its proof record
+`slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md` maps and
+positively proves all eight Phase 2 exit rows, replays every P1A-P6 family,
+passes the serial all-features workspace, strict lint, package/archive,
+document, handoff, absence, and exact staged GitNexus walls, records the
+compare-to-`main` Windows-backend diagnostic, and registers both surviving P3
+advisories. Discovery dispatch
+`handoffs/dispatches/20260731T022800Z--HCM-2-4--p7-phase-2-exit-final-review.json`
+returned P2 `HCM-P7-FR-0001` and `HCM-P7-FR-0002`; the parent corrected only
+authorized control-pack/proof text. The first remediated closure
+`handoffs/dispatches/20260731T024500Z--HCM-2-4--p7-phase-2-exit-remediation-closure.json`
+closed `HCM-P7-FR-0001` but returned FINDINGS because identical staged
+GitNexus replays reported 10, 12, and 14 documentation symbols. The stable
+result is the exact authorized path set, zero affected processes, and LOW risk;
+symbol cardinality is diagnostic. The supplemental closure
+`handoffs/dispatches/20260731T025730Z--HCM-2-4--p7-phase-2-exit-gitnexus-supplemental-closure.json`
+returned FINDINGS because `HCM-P7-FR-0003` proved the old parent's reused
+finding ownership cannot produce a truthful completed v1.4 handoff. Decision
+`slices/HCM-2.4/decision/20260731-p7-final-review-lineage-repair.md` makes all
+three old dispatches immutable context only and authorizes a distinct parent,
+registry, and budget without relaxing validation. CLEAN in
+`handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json`
+completes P7, HCM-2.4, and the exact Phase 2 exit; FINDINGS leaves them
+unaccepted. No generic Projection, SDK/transport, HCM-3.x work, automatic
+continuation, push, or release is authorized.
 
 ## Control-pack orchestration-repair proof gate
 
