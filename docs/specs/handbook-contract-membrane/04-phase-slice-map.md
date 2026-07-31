@@ -424,14 +424,13 @@ commit `9b3edf2745054872939ad48abad50ae5c2d97f9a` and authority commit
   persistent-view proof is review-clean and committed at
   `158115daa2b85d41663b79dc677fce69e59fd1e2`. P4 is GREEN and completed.
 - P2 owns removal of legacy Environment Inventory authority and influence.
-  P6 is in protocol-integrity repair. Preserved implementation commit
-  `b1edf060710bc96cd61631755519baba864ba30a` removes both bridges and installs
-  the descriptor-selected aggregate collection, but the valid discovery review
-  keeps residual fixed-kind authority and protocol truth as open P2 findings.
-  The CLEAN supplemental-2 result applies only to the pre-edit selector
-  fingerprint. P6 acceptance remains pending implementation remediation and a
-  fresh complete-subject review. P7 is
-  ineligible, unselected, and unstarted. Full HCM-2.4 and Phase 2 remain
+  The complete P6 repair candidate removes both bridges and residual normal-path
+  fixed-kind authority, installs descriptor-owned aggregate identity, and has a
+  GREEN complete proof wall. The old parent's CLEAN supplemental-2 result remains
+  limited to its pre-edit selector fingerprint. For this frozen subject, CLEAN in
+  `handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
+  accepts P6; FINDINGS keeps it pending. P7 is eligible only under CLEAN and
+  remains unselected and unstarted. Full HCM-2.4 and Phase 2 remain
   incomplete, and neither HCM-3.x
   work nor automatic continuation is authorized.
 

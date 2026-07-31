@@ -1,7 +1,7 @@
 use crate::{
     blocker::Blocker,
     refusal::{NextSafeAction, RefusalCategory, SubjectRef},
-    BlockerCategory, CanonicalArtifactKind,
+    BlockerCategory,
 };
 use handbook_flow::{
     BudgetDisposition, BudgetReason, NextSafeAction as BudgetNextSafeAction, PacketBodyNote,
@@ -100,7 +100,7 @@ pub fn render_packet_source_summary(summary: &PacketSourceSummary) -> String {
     ) {
         return format!(
             "{} [{}] ({presence}, {source_byte_len} source bytes, source_sha256=sha256:{source_sha256}, {rendered_byte_len} rendered bytes, rendered_sha256={rendered_sha256}, media_type={media_type})",
-            render_canonical_artifact_kind(summary.kind),
+            render_canonical_artifact_kind(&summary.label),
             summary.canonical_repo_relative_path
         );
     }
@@ -118,7 +118,7 @@ pub fn render_packet_source_summary(summary: &PacketSourceSummary) -> String {
 
     format!(
         "{} [{}] ({presence}, {bytes}{hash})",
-        render_canonical_artifact_kind(summary.kind),
+        render_canonical_artifact_kind(&summary.label),
         summary.canonical_repo_relative_path
     )
 }
@@ -316,13 +316,8 @@ pub fn render_subject_ref(subject: &SubjectRef) -> String {
     recovery_shell::render_subject_ref(subject)
 }
 
-pub fn render_canonical_artifact_kind(kind: CanonicalArtifactKind) -> &'static str {
-    match kind {
-        CanonicalArtifactKind::Charter => "Charter",
-        CanonicalArtifactKind::ProjectContext => "ProjectContext",
-        CanonicalArtifactKind::EnvironmentContext => "EnvironmentContext",
-        CanonicalArtifactKind::FeatureSpec => "FeatureSpec",
-    }
+pub fn render_canonical_artifact_kind(label: &str) -> &str {
+    label
 }
 
 pub fn render_budget_disposition(disposition: BudgetDisposition) -> &'static str {
@@ -384,10 +379,7 @@ pub fn json_string(input: &str) -> String {
 }
 
 mod recovery_shell {
-    use crate::{
-        refusal::{NextSafeAction, SubjectRef},
-        CanonicalArtifactKind,
-    };
+    use crate::refusal::{NextSafeAction, SubjectRef};
 
     pub(super) fn render_next_safe_action_value(action: &NextSafeAction) -> String {
         match action {
@@ -430,12 +422,12 @@ mod recovery_shell {
     pub(super) fn render_subject_ref(subject: &SubjectRef) -> String {
         match subject {
             SubjectRef::CanonicalArtifact {
-                kind,
+                label,
                 canonical_repo_relative_path,
+                ..
             } => format!(
                 "canonical artifact {} at {}",
-                render_canonical_artifact_kind(*kind),
-                canonical_repo_relative_path
+                label, canonical_repo_relative_path
             ),
             SubjectRef::InheritedDependency {
                 dependency_id,
@@ -445,15 +437,6 @@ mod recovery_shell {
                 None => format!("inherited dependency {dependency_id}"),
             },
             SubjectRef::Policy { policy_id } => format!("policy {policy_id}"),
-        }
-    }
-
-    fn render_canonical_artifact_kind(kind: CanonicalArtifactKind) -> &'static str {
-        match kind {
-            CanonicalArtifactKind::Charter => "Charter",
-            CanonicalArtifactKind::ProjectContext => "ProjectContext",
-            CanonicalArtifactKind::EnvironmentContext => "EnvironmentContext",
-            CanonicalArtifactKind::FeatureSpec => "FeatureSpec",
         }
     }
 }

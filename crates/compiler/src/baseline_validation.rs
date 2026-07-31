@@ -3,7 +3,7 @@ pub use handbook_engine::baseline_validation::{
 };
 
 use crate::author::validate_charter_markdown;
-use crate::canonical_artifacts::{CanonicalArtifactKind, CanonicalArtifacts};
+use crate::canonical_artifacts::{CanonicalArtifactIdentity, CanonicalArtifacts};
 
 pub fn baseline_artifact_validations(
     artifacts: &CanonicalArtifacts,
@@ -16,26 +16,29 @@ pub fn baseline_artifact_validations(
 
 pub fn baseline_artifact_validation(
     artifacts: &CanonicalArtifacts,
-    kind: CanonicalArtifactKind,
+    instance_id: &str,
 ) -> Option<BaselineArtifactValidation> {
     handbook_engine::baseline_validation::baseline_artifact_validation(
         artifacts,
-        kind,
+        instance_id,
         validate_artifact_markdown,
     )
 }
 
-fn validate_artifact_markdown(kind: CanonicalArtifactKind, markdown: &str) -> Result<(), String> {
-    match kind {
-        CanonicalArtifactKind::Charter => validate_charter_markdown(markdown),
-        CanonicalArtifactKind::ProjectContext => {
+fn validate_artifact_markdown(
+    identity: &CanonicalArtifactIdentity,
+    markdown: &str,
+) -> Result<(), String> {
+    match (identity.instance_id.as_str(), identity.kind_ref.as_str()) {
+        ("project_authority", "handbook.artifact-kind.project-authority@1.1.0") => {
+            validate_charter_markdown(markdown)
+        }
+        ("project_context", "handbook.artifact-kind.project-context@1.1.0") => {
             Err("selected Project Context YAML is validated through profile inspection".to_owned())
         }
-        CanonicalArtifactKind::EnvironmentContext => {
+        ("environment_context", "handbook.artifact-kind.environment-context@1.1.0") => {
             Err("Environment Context is validated from selected canonical YAML".to_owned())
         }
-        CanonicalArtifactKind::FeatureSpec => {
-            Err("feature spec is not part of baseline validation".to_string())
-        }
+        _ => Err("selected artifact has no baseline Markdown validator".to_owned()),
     }
 }

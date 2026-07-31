@@ -165,7 +165,6 @@ pub enum ArtifactPresence {
 pub struct CanonicalArtifactIdentity {
     pub instance_id: String,
     pub kind_ref: String,
-    pub kind: CanonicalArtifactKind,
     pub label: String,
     pub relative_path: String,
     pub requiredness_mode: RequirednessMode,
@@ -256,38 +255,17 @@ impl CanonicalArtifacts {
         let artifacts = admitted
             .into_iter()
             .map(|decision| {
-                let kind = match decision.kind_ref().as_str() {
-                    "handbook.artifact-kind.project-authority@1.1.0" => {
-                        CanonicalArtifactKind::Charter
-                    }
-                    "handbook.artifact-kind.project-context@1.1.0" => {
-                        CanonicalArtifactKind::ProjectContext
-                    }
-                    "handbook.artifact-kind.environment-context@1.1.0" => {
-                        CanonicalArtifactKind::EnvironmentContext
-                    }
-                    other => unreachable!(
-                        "the selected P6 flow admits no compatibility projection for {other}"
-                    ),
-                };
                 let descriptor = decisions
                     .registry()
                     .instance(decision.instance_id())
                     .expect("admitted decision retains its resolved descriptor");
                 match system_root_status {
-                    SystemRootStatus::Ok => load_one(
-                        layout,
-                        &decisions,
-                        decision,
-                        descriptor,
-                        kind,
-                        &mut ingest_issues,
-                    ),
+                    SystemRootStatus::Ok => {
+                        load_one(layout, &decisions, decision, descriptor, &mut ingest_issues)
+                    }
                     SystemRootStatus::Missing
                     | SystemRootStatus::NotDir
-                    | SystemRootStatus::SymlinkNotAllowed => {
-                        missing_one(decision, descriptor, kind)
-                    }
+                    | SystemRootStatus::SymlinkNotAllowed => missing_one(decision, descriptor),
                 }
             })
             .collect();
@@ -425,7 +403,9 @@ pub enum ArtifactIngestIssueKind {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ArtifactIngestIssue {
     pub kind: ArtifactIngestIssueKind,
-    pub artifact_kind: CanonicalArtifactKind,
+    pub instance_id: String,
+    pub kind_ref: String,
+    pub label: String,
     pub canonical_repo_relative_path: String,
     pub packet_required: bool,
 }
@@ -433,13 +413,17 @@ pub struct ArtifactIngestIssue {
 fn record_ingest_issue(
     issues: &mut Vec<ArtifactIngestIssue>,
     kind: ArtifactIngestIssueKind,
-    artifact_kind: CanonicalArtifactKind,
+    instance_id: &str,
+    kind_ref: &str,
+    label: &str,
     canonical_repo_relative_path: &str,
     packet_required: bool,
 ) {
     issues.push(ArtifactIngestIssue {
         kind,
-        artifact_kind,
+        instance_id: instance_id.to_owned(),
+        kind_ref: kind_ref.to_owned(),
+        label: label.to_owned(),
         canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
         packet_required,
     });
@@ -450,7 +434,6 @@ fn load_one(
     decisions: &ResolvedProfileDecisions,
     decision: &ArtifactProfileDecision,
     descriptor: &ResolvedArtifactInstance,
-    kind: CanonicalArtifactKind,
     issues: &mut Vec<ArtifactIngestIssue>,
 ) -> CanonicalArtifact {
     let workspace = layout.workspace();
@@ -462,7 +445,9 @@ fn load_one(
         record_ingest_issue(
             issues,
             issue_kind,
-            kind,
+            decision.instance_id().as_str(),
+            decision.kind_ref().as_str(),
+            descriptor.label(),
             decision.canonical_path(),
             packet_required,
         );
@@ -472,26 +457,26 @@ fn load_one(
         Ok(meta) => meta,
         Err(_err) => {
             record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
-            let mut artifact = missing_one(decision, descriptor, kind);
+            let mut artifact = missing_one(decision, descriptor);
             artifact.render_failure = Some("repository_read_failed".to_owned());
             return artifact;
         }
     };
 
     if meta.is_none() {
-        return missing_one(decision, descriptor, kind);
+        return missing_one(decision, descriptor);
     }
 
     let meta = meta.expect("meta");
     if meta.file_type().is_symlink() {
         record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed);
-        let mut artifact = missing_one(decision, descriptor, kind);
+        let mut artifact = missing_one(decision, descriptor);
         artifact.render_failure = Some("symlink_refused".to_owned());
         return artifact;
     }
     if !meta.is_file() {
         record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
-        let mut artifact = missing_one(decision, descriptor, kind);
+        let mut artifact = missing_one(decision, descriptor);
         artifact.render_failure = Some("non_regular_file_refused".to_owned());
         return artifact;
     }
@@ -500,13 +485,13 @@ fn load_one(
         Ok(trusted_file) => trusted_file,
         Err(RepoRelativeFileAccessError::SymlinkNotAllowed(_)) => {
             record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed);
-            let mut artifact = missing_one(decision, descriptor, kind);
+            let mut artifact = missing_one(decision, descriptor);
             artifact.render_failure = Some("symlink_refused".to_owned());
             return artifact;
         }
         Err(RepoRelativeFileAccessError::NotRegularFile(_)) => {
             record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
-            let mut artifact = missing_one(decision, descriptor, kind);
+            let mut artifact = missing_one(decision, descriptor);
             artifact.render_failure = Some("non_regular_file_refused".to_owned());
             return artifact;
         }
@@ -515,7 +500,7 @@ fn load_one(
             | RepoRelativeFileAccessError::ReadFailure { .. },
         ) => {
             record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
-            let mut artifact = missing_one(decision, descriptor, kind);
+            let mut artifact = missing_one(decision, descriptor);
             artifact.render_failure = Some("repository_read_failed".to_owned());
             return artifact;
         }
@@ -530,7 +515,7 @@ fn load_one(
         Err(error) => {
             record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
             let detail = error.to_string();
-            let mut artifact = missing_one(decision, descriptor, kind);
+            let mut artifact = missing_one(decision, descriptor);
             artifact.render_failure = Some(
                 if detail.contains("stable regular-file identity")
                     || detail.contains("retained-handle observation")
@@ -546,7 +531,7 @@ fn load_one(
     };
     if exceeded {
         record_selected_issue(ArtifactIngestIssueKind::CanonicalArtifactReadError);
-        let mut artifact = missing_one(decision, descriptor, kind);
+        let mut artifact = missing_one(decision, descriptor);
         artifact.render_failure = Some("document_limit_exceeded".to_owned());
         return artifact;
     }
@@ -681,7 +666,6 @@ fn load_one(
         identity: CanonicalArtifactIdentity {
             instance_id: decision.instance_id().as_str().to_owned(),
             kind_ref: decision.kind_ref().as_str().to_owned(),
-            kind,
             label: descriptor.label().to_owned(),
             relative_path: decision.canonical_path().to_owned(),
             requiredness_mode: decision.requiredness_mode(),
@@ -710,14 +694,12 @@ fn load_one(
 fn missing_one(
     decision: &ArtifactProfileDecision,
     descriptor: &ResolvedArtifactInstance,
-    kind: CanonicalArtifactKind,
 ) -> CanonicalArtifact {
     let packet_required = decision.applicability() == ArtifactApplicability::Required;
     CanonicalArtifact {
         identity: CanonicalArtifactIdentity {
             instance_id: decision.instance_id().as_str().to_owned(),
             kind_ref: decision.kind_ref().as_str().to_owned(),
-            kind,
             label: descriptor.label().to_owned(),
             relative_path: decision.canonical_path().to_owned(),
             requiredness_mode: decision.requiredness_mode(),

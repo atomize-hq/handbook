@@ -1,6 +1,6 @@
 use handbook_engine::{
     ArtifactIngestError, ArtifactIngestIssueKind, ArtifactPresence, CanonicalArtifact,
-    CanonicalArtifactKind, CanonicalArtifacts, CanonicalLayoutContract, SystemRootStatus,
+    CanonicalArtifacts, CanonicalLayoutContract, SystemRootStatus,
 };
 
 fn write_file(path: &std::path::Path, contents: &[u8]) {
@@ -10,14 +10,14 @@ fn write_file(path: &std::path::Path, contents: &[u8]) {
     std::fs::write(path, contents).expect("write");
 }
 
-fn selected_artifact(
-    artifacts: &CanonicalArtifacts,
-    kind: CanonicalArtifactKind,
-) -> &CanonicalArtifact {
+fn selected_artifact<'a>(
+    artifacts: &'a CanonicalArtifacts,
+    instance_id: &str,
+) -> &'a CanonicalArtifact {
     artifacts
         .artifacts
         .iter()
-        .find(|artifact| artifact.identity.kind == kind)
+        .find(|artifact| artifact.identity.instance_id == instance_id)
         .expect("selected artifact")
 }
 
@@ -74,7 +74,7 @@ fn descriptor_selected_collection_retains_exact_source_bytes() {
         (
             "project_authority",
             "handbook.artifact-kind.project-authority@1.1.0",
-            CanonicalArtifactKind::Charter,
+            "Charter",
             ".handbook/project/charter.yaml",
             charter_bytes.as_slice(),
             "aa7ac428f52178fabe5b5edd4af8f257f82d39c3394d9f8b0edeafcaf145c6ed",
@@ -82,7 +82,7 @@ fn descriptor_selected_collection_retains_exact_source_bytes() {
         (
             "project_context",
             "handbook.artifact-kind.project-context@1.1.0",
-            CanonicalArtifactKind::ProjectContext,
+            "Project Context",
             ".handbook/project/context.yaml",
             project_context_bytes.as_slice(),
             "237b9009e40b089237d5d3b2761d080c863a6d27ec9b6309fcf2541a26ee8cac",
@@ -90,7 +90,7 @@ fn descriptor_selected_collection_retains_exact_source_bytes() {
         (
             "environment_context",
             "handbook.artifact-kind.environment-context@1.1.0",
-            CanonicalArtifactKind::EnvironmentContext,
+            "Environment Context",
             ".handbook/project/environment.yaml",
             environment_context_bytes.as_slice(),
             "69924ebee0eeb1ed678eaeb2ca7ab13e2b435c49431c297d02eb5b521faad957",
@@ -98,12 +98,12 @@ fn descriptor_selected_collection_retains_exact_source_bytes() {
     ];
 
     assert_eq!(artifacts.artifacts.len(), expected.len());
-    for (artifact, (instance_id, kind_ref, kind, path, bytes, source_sha256)) in
+    for (artifact, (instance_id, kind_ref, label, path, bytes, source_sha256)) in
         artifacts.artifacts.iter().zip(expected)
     {
         assert_eq!(artifact.identity.instance_id, instance_id);
         assert_eq!(artifact.identity.kind_ref, kind_ref);
-        assert_eq!(artifact.identity.kind, kind);
+        assert_eq!(artifact.identity.label, label);
         assert_eq!(artifact.identity.relative_path, path);
         assert_eq!(artifact.identity.byte_len, Some(bytes.len() as u64));
         assert_eq!(artifact.bytes.as_deref(), Some(bytes));
@@ -194,7 +194,7 @@ fn required_artifact_missing_is_reported_as_presence_missing() {
     );
 
     let artifacts = CanonicalArtifacts::load(dir.path()).expect("load");
-    let charter = selected_artifact(&artifacts, CanonicalArtifactKind::Charter);
+    let charter = selected_artifact(&artifacts, "project_authority");
     assert_eq!(artifacts.system_root_status, SystemRootStatus::Ok);
     assert_eq!(charter.identity.presence, ArtifactPresence::Missing);
     assert!(charter.bytes.is_none());
@@ -206,7 +206,7 @@ fn optional_missing_is_distinct_from_empty() {
     write_required_artifacts(dir.path());
 
     let artifacts = CanonicalArtifacts::load(dir.path()).expect("load");
-    let environment = selected_artifact(&artifacts, CanonicalArtifactKind::EnvironmentContext);
+    let environment = selected_artifact(&artifacts, "environment_context");
     assert_eq!(environment.identity.presence, ArtifactPresence::Missing);
     assert!(environment.bytes.is_none());
     assert!(environment.identity.content_sha256.is_none());
@@ -219,7 +219,7 @@ fn empty_means_exactly_zero_bytes() {
     write_file(&dir.path().join(".handbook/project/environment.yaml"), b"");
 
     let artifacts = CanonicalArtifacts::load(dir.path()).expect("load");
-    let environment = selected_artifact(&artifacts, CanonicalArtifactKind::EnvironmentContext);
+    let environment = selected_artifact(&artifacts, "environment_context");
     assert_eq!(
         environment.identity.presence,
         ArtifactPresence::PresentEmpty
@@ -238,7 +238,7 @@ fn whitespace_only_counts_as_non_empty() {
     );
 
     let artifacts = CanonicalArtifacts::load(dir.path()).expect("load");
-    let environment = selected_artifact(&artifacts, CanonicalArtifactKind::EnvironmentContext);
+    let environment = selected_artifact(&artifacts, "environment_context");
     assert_eq!(
         environment.identity.presence,
         ArtifactPresence::PresentNonEmpty
@@ -258,12 +258,12 @@ fn required_artifact_directory_is_recorded_as_read_error_and_missing() {
     );
 
     let artifacts = CanonicalArtifacts::load(dir.path()).expect("load");
-    let charter = selected_artifact(&artifacts, CanonicalArtifactKind::Charter);
+    let charter = selected_artifact(&artifacts, "project_authority");
     assert_eq!(charter.identity.presence, ArtifactPresence::Missing);
     assert!(charter.bytes.is_none());
     assert!(artifacts.ingest_issues.iter().any(|issue| {
         issue.kind == ArtifactIngestIssueKind::CanonicalArtifactReadError
-            && issue.artifact_kind == CanonicalArtifactKind::Charter
+            && issue.instance_id == "project_authority"
             && issue.canonical_repo_relative_path == ".handbook/project/charter.yaml"
             && issue.packet_required
     }));
@@ -284,7 +284,7 @@ fn non_default_layout_contract_cannot_override_descriptor_paths() {
         CanonicalArtifacts::load_with_contract(dir.path(), custom_layout_contract()).expect("load");
     assert_eq!(artifacts.system_root_status, SystemRootStatus::Ok);
     assert_eq!(
-        selected_artifact(&artifacts, CanonicalArtifactKind::Charter)
+        selected_artifact(&artifacts, "project_authority")
             .identity
             .relative_path,
         ".handbook/project/charter.yaml"
@@ -330,7 +330,7 @@ fn selected_repo_root_symlink_is_trusted_but_relative_artifact_symlinks_are_refu
     );
 
     let artifacts = CanonicalArtifacts::load(&malicious_root).expect("malicious-root load");
-    let charter = selected_artifact(&artifacts, CanonicalArtifactKind::Charter);
+    let charter = selected_artifact(&artifacts, "project_authority");
     assert_eq!(charter.identity.presence, ArtifactPresence::Missing);
     assert!(artifacts.ingest_issues.iter().any(|issue| {
         issue.kind == ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed

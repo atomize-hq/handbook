@@ -49,7 +49,6 @@ fn identity(
     CanonicalArtifactIdentity {
         instance_id: instance_id.to_owned(),
         kind_ref: kind_ref.to_owned(),
-        kind,
         label: label.to_owned(),
         relative_path: relative_path.to_owned(),
         requiredness_mode: if packet_required {
@@ -218,11 +217,11 @@ fn override_targeting_canonical_artifact_is_forbidden_and_recorded() {
     );
 
     let override_a = OverrideWithRationale {
-        target: OverrideTarget::CanonicalArtifact(CanonicalArtifactKind::Charter),
+        target: OverrideTarget::CanonicalArtifact("project_authority".to_owned()),
         rationale: "because".to_string(),
     };
     let override_b = OverrideWithRationale {
-        target: OverrideTarget::CanonicalArtifact(CanonicalArtifactKind::Charter),
+        target: OverrideTarget::CanonicalArtifact("project_authority".to_owned()),
         rationale: "because, but different".to_string(),
     };
 
@@ -280,7 +279,7 @@ fn same_rationale_different_override_targets_change_fingerprint() {
         &artifacts,
         &[],
         &[OverrideWithRationale {
-            target: OverrideTarget::CanonicalArtifact(CanonicalArtifactKind::Charter),
+            target: OverrideTarget::CanonicalArtifact("project_authority".to_owned()),
             rationale: rationale.clone(),
         }],
     );
@@ -288,7 +287,7 @@ fn same_rationale_different_override_targets_change_fingerprint() {
         &artifacts,
         &[],
         &[OverrideWithRationale {
-            target: OverrideTarget::CanonicalArtifact(CanonicalArtifactKind::ProjectContext),
+            target: OverrideTarget::CanonicalArtifact("project_context".to_owned()),
             rationale,
         }],
     );

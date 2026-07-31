@@ -1,7 +1,5 @@
 use crate::artifact_instance::RequirednessMode;
-use crate::canonical_artifacts::{
-    ArtifactPresence, CanonicalArtifactIdentity, CanonicalArtifactKind,
-};
+use crate::canonical_artifacts::{ArtifactPresence, CanonicalArtifactIdentity};
 use crate::profile_decision::ArtifactApplicability;
 use sha2::{Digest, Sha256};
 
@@ -31,9 +29,9 @@ impl PartialOrd for InheritedDependency {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum OverrideTarget {
-    CanonicalArtifact(CanonicalArtifactKind),
+    CanonicalArtifact(String),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -44,8 +42,9 @@ pub struct OverrideWithRationale {
 
 impl Ord for OverrideWithRationale {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        (&self.rationale, format!("{:?}", self.target))
-            .cmp(&(&other.rationale, format!("{:?}", other.target)))
+        let OverrideTarget::CanonicalArtifact(self_target) = &self.target;
+        let OverrideTarget::CanonicalArtifact(other_target) = &other.target;
+        (&self.rationale, self_target).cmp(&(&other.rationale, other_target))
     }
 }
 
@@ -128,37 +127,41 @@ pub fn compute_freshness(
     sorted_deps.sort();
 
     let mut sorted_overrides = overrides.to_vec();
-    let override_target_instance_id = |target: OverrideTarget| match target {
-        OverrideTarget::CanonicalArtifact(kind) => sorted_artifacts
+    let override_target_instance_id = |target: &OverrideTarget| match target {
+        OverrideTarget::CanonicalArtifact(instance_id) => sorted_artifacts
             .iter()
-            .find(|artifact| artifact.kind == kind)
+            .find(|artifact| artifact.instance_id == *instance_id)
             .map_or("unadmitted_canonical_artifact", |artifact| {
                 artifact.instance_id.as_str()
             }),
     };
     sorted_overrides.sort_by(|left, right| {
         (
-            override_target_instance_id(left.target),
+            override_target_instance_id(&left.target),
             left.rationale.as_str(),
         )
             .cmp(&(
-                override_target_instance_id(right.target),
+                override_target_instance_id(&right.target),
                 right.rationale.as_str(),
             ))
     });
     let sorted_override_target_instance_ids = sorted_overrides
         .iter()
-        .map(|record| override_target_instance_id(record.target).to_owned())
+        .map(|record| override_target_instance_id(&record.target).to_owned())
         .collect::<Vec<_>>();
 
     let mut issues = Vec::new();
     for override_record in &sorted_overrides {
-        match override_record.target {
-            OverrideTarget::CanonicalArtifact(kind) => {
+        match &override_record.target {
+            OverrideTarget::CanonicalArtifact(instance_id) => {
+                let display_label = sorted_artifacts
+                    .iter()
+                    .find(|artifact| artifact.instance_id == *instance_id)
+                    .map_or(instance_id.as_str(), |artifact| artifact.label.as_str());
                 issues.push(FreshnessIssue {
                     kind: FreshnessIssueKind::ForbiddenOverride,
                     detail: format!(
-                        "override forbidden for reduced-v1 canonical artifact {kind:?}: {}",
+                        "override forbidden for reduced-v1 canonical artifact {display_label}: {}",
                         override_record.rationale
                     ),
                 });
@@ -176,8 +179,8 @@ pub fn compute_freshness(
                 issues.push(FreshnessIssue {
                     kind: FreshnessIssueKind::RequiredArtifactMissing,
                     detail: format!(
-                        "required canonical artifact missing: {:?} at {}",
-                        artifact.kind, artifact.relative_path
+                        "required canonical artifact missing: {} at {}",
+                        artifact.label, artifact.relative_path
                     ),
                 });
             }
@@ -185,8 +188,8 @@ pub fn compute_freshness(
                 issues.push(FreshnessIssue {
                     kind: FreshnessIssueKind::RequiredArtifactEmpty,
                     detail: format!(
-                        "required canonical artifact empty: {:?} at {}",
-                        artifact.kind, artifact.relative_path
+                        "required canonical artifact empty: {} at {}",
+                        artifact.label, artifact.relative_path
                     ),
                 });
             }
@@ -195,8 +198,8 @@ pub fn compute_freshness(
                     issues.push(FreshnessIssue {
                         kind: FreshnessIssueKind::RequiredArtifactStarterTemplate,
                         detail: format!(
-                            "required canonical artifact still contains the shipped starter template: {:?} at {}",
-                            artifact.kind, artifact.relative_path
+                            "required canonical artifact still contains the shipped starter template: {} at {}",
+                            artifact.label, artifact.relative_path
                         ),
                     });
                 }

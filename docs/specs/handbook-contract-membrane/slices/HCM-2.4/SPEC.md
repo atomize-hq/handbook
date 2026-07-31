@@ -7,13 +7,14 @@ review-clean, and locally committed at implementation commit
 review-clean and committed; the P4/P5 token prerequisite is accepted at
 `00dde0162fcb15576c83b6ed40ab7286488d0890`, P4's separate five-part
 negative-surface/path proof is review-clean and GREEN, and P5 remains accepted.
-P6 is in protocol-integrity repair. Preserved implementation commit
-`b1edf060710bc96cd61631755519baba864ba30a` removes both bridges and installs
-the descriptor-selected aggregate collection, but the valid discovery review
-keeps residual fixed-kind authority and protocol truth as open P2 findings. The
-CLEAN supplemental-2 review applies only to the pre-edit selector fingerprint;
-implementation remediation and complete-subject review remain pending. P7 is ineligible,
-unselected, and unstarted; HCM-2.4 completion and Phase 2 exit remain unearned. Future
+The complete P6 repair candidate preserves implementation commit
+`b1edf060710bc96cd61631755519baba864ba30a`, removes both bridges and residual
+normal-path fixed-kind authority, installs descriptor-owned aggregate identity,
+and has a GREEN complete proof wall. For this frozen subject, CLEAN in
+`../../handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
+means P6 is completed and accepted; FINDINGS leaves acceptance pending. P7 is
+eligible only under CLEAN and remains unselected and unstarted; HCM-2.4
+completion and Phase 2 exit remain unearned. Future
 task-gate runtime remains deferred; P2S/P2A/Option C are historical evidence
 only under the 2026-07-28 greenfield decision.
 
@@ -53,12 +54,15 @@ end:
 - the exact Phase 2 exit proofs are replayed without weakening the completed
   Charter, Project Context, or HCM-2.3 registry-brief authority.
 
-This document freezes implementation packets and proof obligations. P6 has
-completed within the boundary frozen in
-`decision/20260729-p6-aggregate-flow-cleanup-selector.md`; its accepted subject
-does not authorize future task-gate runtime, P7, Phase 2 exit, HCM-3.x,
-native/hardware/trust/evidence infrastructure, dependencies, Cargo changes, or
-another slice.
+This document freezes implementation packets and proof obligations. The P6
+implementation candidate is complete within the boundary frozen in
+`decision/20260729-p6-aggregate-flow-cleanup-selector.md` and becomes accepted
+only when
+`../../handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
+is CLEAN. That accepted P6 boundary makes P7 eligible but leaves it unselected
+and unstarted; it does not authorize future task-gate runtime, P7 implementation,
+Phase 2 exit, HCM-3.x, native/hardware/trust/evidence infrastructure,
+dependencies, Cargo changes, or another slice.
 
 ## Authority and preserved decisions
 
@@ -296,13 +300,13 @@ package boundary.
 
 | Legacy surface | Disposition | Replacement proof required before deletion |
 | --- | --- | --- |
-| `BR-HCM-2-PILOT-FLOW-01` and `ProjectContextFlowBridge` | Removed in preserved implementation commit `b1edf060710bc96cd61631755519baba864ba30a`; P6 acceptance pending | Project Context is selected, retained, validated, and rendered through the same descriptor-selected artifact path as other shipped kinds; no Project Context Markdown influence |
-| `BR-HCM-2-CHARTER-FLOW-01` and `CharterFlowBridge` | Removed in preserved implementation commit `b1edf060710bc96cd61631755519baba864ba30a`; P6 acceptance pending | Common path preserves committed Charter observation, candidate/result separation, fingerprint, authority evidence, and HCM-2.2 regressions |
-| `rendered_projection_for_path` | Removed, not renamed, in preserved implementation commit `b1edf060710bc96cd61631755519baba864ba30a`; P6 acceptance pending | Renderer selection is by admitted instance/kind renderer refs, never fixed path; packet and fixture consumers replay exact semantics |
-| `CanonicalArtifactKind`, `CANONICAL_ARTIFACT_ORDER`, `CanonicalArtifactDescriptor`, fixed `CanonicalArtifacts` fields | Incomplete at preserved implementation commit `b1edf060710bc96cd61631755519baba864ba30a`; the valid discovery review keeps residual normal-path fixed-kind authority open as P2 | Every flow-consumed shipped instance must derive identity from admitted instance ID, exact kind ref, label, and path; no fixed enum may determine normal authority |
-| `CanonicalLayoutContract` fixed Charter/Context/Feature Spec fields plus the temporary fixed Environment Context branch in its artifact switch, and both engine/compiler `canonical_artifact_relative_path` switches | Fixed-family/path selection removed in preserved implementation commit `b1edf060710bc96cd61631755519baba864ba30a`; P6 acceptance pending | All canonical paths come from admitted descriptors, including Environment Context; root discovery and safe-path rules remain |
-| `load_fixed_siblings[_with_contract]`, `load_with_contract_selection`, `descriptor_for_layout`, `descriptor_for` | Removed in preserved implementation commit `b1edf060710bc96cd61631755519baba864ba30a`; P6 acceptance pending | Generic selected-instance loader must retain bytes, exact descriptor identity, bounded reads, no-follow semantics, duplicate rejection, and stable ordering |
-| `validate_artifact_markdown`, `baseline_artifact_validations`, fixed `packet_artifact_plans_for`, `present_fixture_sources_for`, and `canonical_artifact_kind_priority` branches | Bridge/fixed-array branches were rewritten in preserved implementation commit `b1edf060710bc96cd61631755519baba864ba30a`, but residual fixed-kind propagation remains open as P2 | Validation, packet inclusion, fixture source reporting, ordering, and budget targeting must operate on exact selected descriptor identity and derived renderer outputs |
+| `BR-HCM-2-PILOT-FLOW-01` and `ProjectContextFlowBridge` | Removed in the complete P6 repair candidate | Project Context is selected, retained, validated, and rendered through the same descriptor-selected artifact path as other shipped kinds; no Project Context Markdown influence |
+| `BR-HCM-2-CHARTER-FLOW-01` and `CharterFlowBridge` | Removed in the complete P6 repair candidate | Common path preserves committed Charter observation, candidate/result separation, fingerprint, authority evidence, and HCM-2.2 regressions |
+| `rendered_projection_for_path` | Removed, not renamed, in the complete P6 repair candidate | Renderer selection is by admitted instance/kind renderer refs, never fixed path; packet and fixture consumers replay exact semantics |
+| `CanonicalArtifactKind`, `CANONICAL_ARTIFACT_ORDER`, `CanonicalArtifactDescriptor`, fixed `CanonicalArtifacts` fields | Removed from normal selection, loading, validation, rendering, packet, budget, fixture, blocker, refusal, ordering, and fingerprint authority; compatibility enum has no normal-path authority | Every flow-consumed shipped instance derives identity from admitted instance ID, exact kind ref, label, and path; no fixed enum determines normal authority |
+| `CanonicalLayoutContract` fixed Charter/Context/Feature Spec fields plus the temporary fixed Environment Context branch in its artifact switch, and both engine/compiler `canonical_artifact_relative_path` switches | Fixed-family/path selection removed in the complete P6 repair candidate | All canonical paths come from admitted descriptors, including Environment Context; root discovery and safe-path rules remain |
+| `load_fixed_siblings[_with_contract]`, `load_with_contract_selection`, `descriptor_for_layout`, `descriptor_for` | Removed in the complete P6 repair candidate | Generic selected-instance loader retains bytes, exact descriptor identity, bounded reads, no-follow semantics, duplicate rejection, and stable ordering |
+| `validate_artifact_markdown`, `baseline_artifact_validations`, fixed `packet_artifact_plans_for`, `present_fixture_sources_for`, and `canonical_artifact_kind_priority` branches | Bridge/fixed-array and residual fixed-kind propagation are removed from normal-path authority in the complete P6 repair candidate | Validation, packet inclusion, fixture source reporting, ordering, and budget targeting operate on exact selected descriptor identity and derived renderer outputs |
 | Environment Inventory input-to-Markdown author path in `crates/engine/src/author/environment_inventory_core.rs`, `crates/compiler/src/author/environment_inventory.rs`, CLI writer, templates, and directive | Replace/delete in P2 | Structured input emits canonical Environment Context YAML; schema validation and deterministic renderer equivalence pass; legacy Markdown cannot influence flow |
 | `core/library/environment_inventory/ENVIRONMENT_INVENTORY.md.tmpl` and Markdown-authority directive | Delete in P2 | Canonical YAML template/intake or schema-guided authoring covers the selected instance |
 | `FEATURE_SPEC_ARTIFACT_PATH`, heading parser, Markdown capture validator, fixed provenance fields, fixed handoff reads, Feature Spec template/directive assumptions | Replace in P3 | Stage 10 persists schema-valid canonical Work Specification YAML, derives the fixed view, and binds provenance/handoff decisions to YAML |
@@ -581,17 +585,16 @@ tests. Preserve packet order, budget outcomes, source summaries, fixture
 semantics, Charter authority, Project Context behavior, and registry-brief
 proof. This is the HIGH-risk flow choke point and must be one focused packet.
 
-P6 remains in repair under
+The complete P6 repair candidate operates under
 `decision/20260729-p6-aggregate-flow-cleanup-selector.md` and
-`decision/20260730-p6-protocol-integrity-repair.md`. Preserved implementation
-commit `b1edf060710bc96cd61631755519baba864ba30a` is not accepted: the valid
-discovery dispatch records residual fixed-kind authority and protocol truth as
-open P2 findings. The eight invalid dispatches inventoried by the repair decision
-are removed without rewriting Git history. The later CLEAN supplemental-2
-review proves only that the bounded selector amendment is sufficient for future
-Rust/test remediation; it is not implementation proof. P6 acceptance remains
-pending implementation remediation, complete proof, and fresh complete-subject
-review under a new authorized final-review parent.
+`decision/20260730-p6-protocol-integrity-repair.md`. The eight invalid dispatches
+inventoried by the repair decision remain removed without rewriting Git history,
+and the old parent's supplemental-2 CLEAN result remains limited to its pre-edit
+selector fingerprint. The remediation removes the two valid discovery P2s,
+including residual normal-path fixed-kind authority, and the complete proof wall
+is GREEN. For this frozen subject, CLEAN in
+`../../handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
+means P6 is completed and accepted; FINDINGS leaves acceptance pending.
 
 ### P7 — Phase 2 exit proof and control-pack closeout
 
@@ -599,11 +602,10 @@ Run the complete proof wall, prove every Phase 2 exit row, update only earned
 gate/bridge rows, perform the declared review flow, and produce the separate
 implementation handoff/ledger closeout. P7 may not begin HCM-3.x.
 
-P6 acceptance has not yet been re-earned, so P7 is ineligible, unselected, and
-unstarted. The current parent must complete the P6 repair review, commit, and
-true-stop closeout while preserving open Phase 2 exit rows; it must not
-represent the current implementation as accepted P6, P7 work, or slice
-completion.
+P7 becomes eligible only if the frozen P6 final-review dispatch is CLEAN and
+remains unselected and unstarted in either case. The current parent may commit
+and true-stop only a CLEAN P6 subject while preserving open Phase 2 exit rows;
+it must not represent this work as P7 work or slice completion.
 
 ## Exact implementation surface selectors
 

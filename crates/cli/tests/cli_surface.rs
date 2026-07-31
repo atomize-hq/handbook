@@ -5832,7 +5832,7 @@ fn inspect_includes_fixture_section_for_execution_demo_packet() {
         .find("Charter [.handbook/project/charter.yaml]")
         .expect("charter should be listed");
     let pos_project_context = stdout
-        .find("ProjectContext [.handbook/project/context.yaml]")
+        .find("Project Context [.handbook/project/context.yaml]")
         .expect("Project Context should be listed");
     assert!(
         pos_charter < pos_project_context,
@@ -5880,7 +5880,7 @@ fn inspect_preserves_full_execution_demo_fixture_lineage_order() {
         fixture_section,
         &[
             "1. Charter [.handbook/project/charter.yaml]",
-            "2. ProjectContext [.handbook/project/context.yaml]",
+            "2. Project Context [.handbook/project/context.yaml]",
         ],
     );
 
@@ -5950,7 +5950,7 @@ fn generate_non_ready_execution_demo_preserves_fixture_backed_labeling() {
     );
     assert_in_order(
         &stdout,
-        &["1. ProjectContext [.handbook/project/context.yaml]"],
+        &["1. Project Context [.handbook/project/context.yaml]"],
     );
     assert!(!stdout.contains("FeatureSpec [.handbook/feature_spec/FEATURE_SPEC.md]"));
     assert!(stdout.contains("document_not_object"), "{stdout}");

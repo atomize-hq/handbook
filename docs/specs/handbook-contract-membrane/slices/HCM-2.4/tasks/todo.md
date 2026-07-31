@@ -5,12 +5,12 @@ review-clean, and locally committed at implementation commit `9b3edf2` with
 authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean. P2S,
 P2A, and Option C are historical evidence, not active architecture. The P4/P5
 token prerequisite is review-clean and committed at `00dde01`; P4's separate
-five-part negative-surface/path proof is review-clean and GREEN. P6 is in
-protocol-integrity repair. Preserved implementation commit
-`b1edf060710bc96cd61631755519baba864ba30a` remains unaccepted with both valid
-discovery P2 findings open; CLEAN supplemental-2 evidence applies only to the
-pre-edit selector fingerprint. P7 is ineligible,
-unselected, and unstarted. HCM-2.4 and Phase 2 exit
+five-part negative-surface/path proof is review-clean and GREEN. The complete P6
+repair candidate removes both valid discovery P2s and has a GREEN complete proof
+wall. CLEAN in
+`../../../handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
+accepts this frozen subject; FINDINGS leaves P6 pending. P7 is eligible only
+under CLEAN and remains unselected and unstarted. HCM-2.4 and Phase 2 exit
 remain incomplete; future task-gate runtime remains deferred.
 
 ## Entry
@@ -375,26 +375,28 @@ remain incomplete; future task-gate runtime remains deferred.
 - [x] Delete `BR-HCM-2-CHARTER-FLOW-01`.
 - [x] Delete all four bridge types, fixed renderer path selector, fixed layout/path
       authority, fixed-sibling loaders, legacy exceptions, and bridge-only tests.
-- [ ] Remove residual `CanonicalArtifactKind` normal-path authority and prove the
+- [x] Remove residual `CanonicalArtifactKind` normal-path authority and prove the
       exact descriptor-owned identity through loading, validation, rendering,
       packet, budget, fixture, blocker, refusal, ordering, and fingerprints.
 - [x] Prove bridge IDs/types, fixed loaders, fixed order/path selectors, and legacy
-      influence are absent at the preserved checkpoint; fixed-kind authority
-      remains the explicit open P2.
+      influence are absent; prove the compatibility enum has no normal-path
+      authority.
 - [x] Record the bounded protocol-integrity repair decision, remove the eight
       invalid active dispatches without rewriting Git history, and preserve
       `b1edf060710bc96cd61631755519baba864ba30a`.
 - [x] Obtain CLEAN selector sufficiency for the final bounded compile/JSON
       amendment; this result binds only the pre-edit selector fingerprint.
-- [ ] Implement the two valid discovery P2 remediations, run the complete proof
-      wall, obtain a fresh complete-subject review, and record only the acceptance
-      truth earned by that evidence.
+- [x] Implement the two valid discovery P2 remediations and run the complete proof
+      wall.
+- [x] Bind final acceptance to different-fresh closure of the complete frozen
+      subject: CLEAN in the exact closure dispatch accepts P6; FINDINGS keeps
+      acceptance pending. This item records the conditional gate, not a verdict.
 
 ## P7 — Proof, review, and closeout
 
-- [ ] INELIGIBLE, UNSELECTED, AND UNSTARTED: P6 acceptance remains pending, so
-      the P7 entry prerequisite is not satisfied and Phase 2 exit remains
-      unclaimed.
+- [ ] UNSELECTED AND UNSTARTED: P7 is eligible only if the frozen P6 final-review
+      dispatch is CLEAN; otherwise it remains ineligible. Phase 2 exit remains
+      unclaimed in either case.
 - [ ] Run every per-family proof and exact Phase 2 exit mapping.
 - [ ] Replay exact 1.1 acceptance, exact 1.2 compatibility, every
       Project-Authority-field negative, real-path 1.2 selection, byte-identical
@@ -425,9 +427,13 @@ remain incomplete; future task-gate runtime remains deferred.
       remediation.
 - [x] Rerun format, strict lint, and diff checks after review remediation.
 - [x] Rerun forbidden-influence scans after review remediation.
-- [x] Fresh independent review is clean and all P1/P2 findings are closed.
-- [x] Rerun GitNexus compare-to-main change detection after review remediation.
-- [x] Atomic local commits created; nothing pushed.
+- [x] Bind the final-review result to the exact closure dispatch: CLEAN closes all
+      P1/P2 and accepts P6; FINDINGS leaves this gate open. This item does not
+      preclaim the verdict.
+- [x] Run scoped GitNexus comparison against `b1edf060`; staged mode's Windows
+      access violation remains a recorded tooling limitation.
+- [x] Freeze the landing rule: primary P6 state and mechanical handoff/ledger use
+      separate local commits, and nothing is pushed.
 - [x] All eight original protected dirty paths and the concurrent
       `docs/ideas/intent-to-outcome-fidelity.md` path remain untouched,
       unstaged, and uncommitted.

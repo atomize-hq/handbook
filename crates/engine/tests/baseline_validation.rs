@@ -1,6 +1,6 @@
 use handbook_engine::{
     baseline_artifact_validation, baseline_artifact_validation_for_path,
-    baseline_artifact_validations, BaselineArtifactVerdict, CanonicalArtifactKind,
+    baseline_artifact_validations, BaselineArtifactVerdict, CanonicalArtifactIdentity,
     CanonicalArtifacts, CanonicalLayoutContract,
 };
 
@@ -37,16 +37,11 @@ fn custom_layout_contract() -> CanonicalLayoutContract {
     )
 }
 
-fn test_validator(kind: CanonicalArtifactKind, markdown: &str) -> Result<(), String> {
-    match kind {
-        CanonicalArtifactKind::Charter if markdown.contains("valid charter") => Ok(()),
-        CanonicalArtifactKind::ProjectContext if markdown.contains("valid project context") => {
-            Ok(())
-        }
-        CanonicalArtifactKind::FeatureSpec => {
-            Err("feature spec is not part of baseline validation".to_string())
-        }
-        _ => Err(format!("unexpected markdown for {kind:?}")),
+fn test_validator(identity: &CanonicalArtifactIdentity, markdown: &str) -> Result<(), String> {
+    match identity.instance_id.as_str() {
+        "project_authority" if markdown.contains("valid charter") => Ok(()),
+        "project_context" if markdown.contains("valid project context") => Ok(()),
+        _ => Err(format!("unexpected markdown for {}", identity.instance_id)),
     }
 }
 
@@ -70,12 +65,11 @@ fn baseline_validation_reports_semantic_invalidity_from_validator() {
     let dir = make_repo();
     let artifacts = CanonicalArtifacts::load(dir.path()).expect("artifacts");
 
-    let validation = baseline_artifact_validation(
-        &artifacts,
-        CanonicalArtifactKind::ProjectContext,
-        |_kind, _markdown| Err("project context failed semantic validation".to_string()),
-    )
-    .expect("validation");
+    let validation =
+        baseline_artifact_validation(&artifacts, "project_context", |_identity, _markdown| {
+            Err("project context failed semantic validation".to_string())
+        })
+        .expect("validation");
 
     assert_eq!(
         validation.verdict,
@@ -95,7 +89,8 @@ fn baseline_validation_for_path_selects_matching_validation() {
         baseline_artifact_validation_for_path(&validations, ".handbook/project/context.yaml")
             .expect("matching validation");
 
-    assert_eq!(found.kind, CanonicalArtifactKind::ProjectContext);
+    assert_eq!(found.instance_id, "project_context");
+    assert_eq!(found.label, "Project Context");
 }
 
 #[test]
@@ -125,9 +120,8 @@ fn baseline_validation_uses_loaded_custom_paths_and_custom_ingest_issue_paths() 
         ]
     );
 
-    let charter =
-        baseline_artifact_validation(&artifacts, CanonicalArtifactKind::Charter, test_validator)
-            .expect("charter validation");
+    let charter = baseline_artifact_validation(&artifacts, "project_authority", test_validator)
+        .expect("charter validation");
     assert_eq!(
         charter.canonical_repo_relative_path,
         ".handbook/project/charter.yaml"

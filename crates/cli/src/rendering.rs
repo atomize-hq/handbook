@@ -81,7 +81,7 @@ fn render_packet_source_summary(source: &handbook_flow::PacketSourceSummary) -> 
     ) {
         return format!(
             "{} [{}] ({presence}, {source_byte_len} source bytes, source_sha256=sha256:{source_sha256}, {rendered_byte_len} rendered bytes, rendered_sha256={rendered_sha256}, media_type={media_type})",
-            render_canonical_artifact_kind(source.kind),
+            source.label,
             source.canonical_repo_relative_path
         );
     }
@@ -99,18 +99,8 @@ fn render_packet_source_summary(source: &handbook_flow::PacketSourceSummary) -> 
 
     format!(
         "{} [{}] ({presence}, {bytes}{hash})",
-        render_canonical_artifact_kind(source.kind),
-        source.canonical_repo_relative_path
+        source.label, source.canonical_repo_relative_path
     )
-}
-
-fn render_canonical_artifact_kind(kind: handbook_engine::CanonicalArtifactKind) -> &'static str {
-    match kind {
-        handbook_engine::CanonicalArtifactKind::Charter => "Charter",
-        handbook_engine::CanonicalArtifactKind::ProjectContext => "ProjectContext",
-        handbook_engine::CanonicalArtifactKind::EnvironmentContext => "EnvironmentContext",
-        handbook_engine::CanonicalArtifactKind::FeatureSpec => "FeatureSpec",
-    }
 }
 
 fn inject_after_first_three_lines(rendered: &str, injection: &str) -> String {
@@ -748,12 +738,12 @@ fn render_blocker_category(category: handbook_compiler::BlockerCategory) -> &'st
 fn render_subject_ref(subject: &handbook_compiler::SubjectRef) -> String {
     match subject {
         handbook_compiler::SubjectRef::CanonicalArtifact {
-            kind,
+            label,
             canonical_repo_relative_path,
+            ..
         } => format!(
             "canonical artifact {} at {}",
-            render_canonical_artifact_kind(*kind),
-            canonical_repo_relative_path
+            label, canonical_repo_relative_path
         ),
         handbook_compiler::SubjectRef::InheritedDependency {
             dependency_id,
@@ -918,10 +908,14 @@ fn flow_subject_ref_for_rendering(
 ) -> handbook_compiler::SubjectRef {
     match subject {
         handbook_flow::ResolverSubjectRef::CanonicalArtifact {
-            kind,
+            instance_id,
+            kind_ref,
+            label,
             canonical_repo_relative_path,
         } => handbook_compiler::SubjectRef::CanonicalArtifact {
-            kind,
+            instance_id,
+            kind_ref,
+            label,
             canonical_repo_relative_path,
         },
         handbook_flow::ResolverSubjectRef::InheritedDependency {

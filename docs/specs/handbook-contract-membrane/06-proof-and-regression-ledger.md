@@ -197,8 +197,8 @@ Temporary scaffolding may be introduced only when a row is added here first.
 | Bridge ID | Architectural purpose | Allowed lifetime | Deletion proof |
 |---|---|---|---|
 | `BR-SUB-CLI-01` | let Substrate consume the versioned Handbook JSON protocol before the permanent published-Rust boundary is available | may enter the normal path only in HCM-6.1 after `PG-JSON-01`; remains isolated and replaceable until HCM-6.3 | `PG-PUBLISH-01` and `PG-SUB-RUST-01` pass for the replacing exact API/seam; the normal Substrate path no longer spawns/parses the Handbook CLI; bridge-specific dependencies/config/tests are removed; standalone Handbook CLI remains unaffected |
-| `BR-HCM-2-PILOT-FLOW-01` | let the one-family HCM-2.1 flow cutover consume selected canonical Project Context YAML and its in-memory fixed renderer while other fixed siblings remained | removed in preserved implementation commit `b1edf060710bc96cd61631755519baba864ba30a`; P6 acceptance remains pending | GREEN at the checkpoint: the bridge ID/type, mixed fixed/selected adapter, legacy Project Context output-tag exception, and bridge-only tests are absent; residual fixed-kind authority is a separate open P2 |
-| `BR-HCM-2-CHARTER-FLOW-01` | bounded HCM-2.2 bridge adding selected canonical Charter YAML and its in-memory fixed renderer while other fixed siblings remained | removed in preserved implementation commit `b1edf060710bc96cd61631755519baba864ba30a`; P6 acceptance remains pending | GREEN at the checkpoint: the bridge ID/type and bridge-only test are absent, while committed Charter authority and distinct source/render fingerprints remain preservation requirements; residual fixed-kind authority is a separate open P2 |
+| `BR-HCM-2-PILOT-FLOW-01` | let the one-family HCM-2.1 flow cutover consume selected canonical Project Context YAML and its in-memory fixed renderer while other fixed siblings remained | removed in the complete P6 repair candidate; acceptance follows the frozen final-review verdict rule | GREEN: the bridge ID/type, mixed fixed/selected adapter, legacy Project Context output-tag exception, bridge-only tests, and residual normal-path fixed-kind authority are absent |
+| `BR-HCM-2-CHARTER-FLOW-01` | bounded HCM-2.2 bridge adding selected canonical Charter YAML and its in-memory fixed renderer while other fixed siblings remained | removed in the complete P6 repair candidate; acceptance follows the frozen final-review verdict rule | GREEN: the bridge ID/type and bridge-only test are absent, while committed Charter authority and distinct source/render fingerprints remain preserved |
 
 There is no approved user migration tool, legacy importer, dual-read mode, or compatibility profile.
 
@@ -1254,18 +1254,20 @@ removal of legacy Environment Inventory influence. P3/P3B are completed. The
 shared `00dde01` prerequisite leaves P5 GREEN and accepted, and the independent
 `158115d` negative proof makes P4 GREEN and completed. P1A-P1C and P2-P5
 prerequisites for P6 were satisfied. Task-gate runtime remains deferred behind
-the active implementation-contract acceptance gate. P6 is in protocol-integrity
-repair under
-`slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md`.
-Preserved implementation commit `b1edf060710bc96cd61631755519baba864ba30a`
-removes both bridge IDs and all four bridge types, but the valid discovery
-review keeps residual fixed-kind authority and protocol truth as open P2
-findings. The eight dispatches inventoried by the repair decision are not active
-evidence; Git history preserves their exact bytes. The CLEAN supplemental-2
-review applies only to the pre-edit selector fingerprint and does not accept the
-implementation. P6 acceptance is pending implementation remediation, complete
-proof, and a fresh complete-subject review. P7 is ineligible, unselected, and unstarted.
-Full HCM-2.4 and Phase 2
+the active implementation-contract acceptance gate. The complete P6 repair
+candidate operates under
+`slices/HCM-2.4/decision/20260730-p6-protocol-integrity-repair.md`. It preserves
+implementation commit `b1edf060710bc96cd61631755519baba864ba30a`, removes both
+bridge IDs, all four bridge types, and residual normal-path fixed-kind authority,
+and retains exact descriptor-owned identity and bytes. The complete focused,
+package, Clippy, formatting, absence-scan, and proportional workspace proof wall
+is GREEN. The eight dispatches inventoried by the repair decision are not active
+evidence; Git history preserves their exact bytes. The old parent's CLEAN
+supplemental-2 review remains limited to its pre-edit selector fingerprint. For
+this frozen subject, only CLEAN in
+`handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
+accepts P6; FINDINGS keeps it pending. P7 becomes eligible only under that CLEAN
+condition and remains unselected and unstarted. Full HCM-2.4 and Phase 2
 remain incomplete. No generic Projection, SDK/transport, HCM-3.x work,
 automatic continuation, push, or release is authorized.
 

@@ -1,4 +1,3 @@
-use crate::CanonicalArtifactKind;
 use serde::Serialize;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
@@ -22,7 +21,9 @@ pub enum RefusalCategory {
 #[serde(untagged)]
 pub enum SubjectRef {
     CanonicalArtifact {
-        kind: CanonicalArtifactKind,
+        instance_id: String,
+        kind_ref: String,
+        label: String,
         canonical_repo_relative_path: String,
     },
     InheritedDependency {

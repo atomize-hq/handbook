@@ -10,9 +10,9 @@ use crate::packet_result::{
 use handbook_engine::{
     baseline_artifact_validation_for_path, default_canonical_layout_contract,
     ArtifactIngestIssueKind, ArtifactManifest, ArtifactPresence, BaselineArtifactValidation,
-    BaselineArtifactVerdict, CanonicalArtifact, CanonicalArtifactKind, CanonicalArtifacts,
-    CanonicalLayoutContract, CharterAuthorityTransactionServiceV1, FreshnessIssueKind,
-    FreshnessStatus, ManifestError, ManifestInputs, SystemRootStatus,
+    BaselineArtifactVerdict, CanonicalArtifact, CanonicalArtifacts, CanonicalLayoutContract,
+    CharterAuthorityTransactionServiceV1, FreshnessIssueKind, FreshnessStatus, ManifestError,
+    ManifestInputs, SystemRootStatus,
 };
 use std::cmp::Ordering;
 use std::path::Path;
@@ -196,7 +196,9 @@ fn baseline_artifact_validations(
         };
 
         validations.push(BaselineArtifactValidation {
-            kind: artifact.identity.kind,
+            instance_id: artifact.identity.instance_id.clone(),
+            kind_ref: artifact.identity.kind_ref.clone(),
+            label: artifact.identity.label.clone(),
             canonical_repo_relative_path: artifact.identity.relative_path.clone(),
             packet_required: artifact.identity.packet_required,
             verdict,
@@ -225,7 +227,9 @@ pub enum ResolverRefusalCategory {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ResolverSubjectRef {
     CanonicalArtifact {
-        kind: CanonicalArtifactKind,
+        instance_id: String,
+        kind_ref: String,
+        label: String,
         canonical_repo_relative_path: String,
     },
     InheritedDependency {
@@ -316,18 +320,23 @@ fn blocker_category_priority(category: ResolverBlockerCategory) -> u8 {
 }
 
 fn author_or_fill_next_safe_action(
-    kind: CanonicalArtifactKind,
+    instance_id: &str,
+    kind_ref: &str,
     canonical_repo_relative_path: &str,
 ) -> ResolverNextSafeAction {
-    match kind {
-        CanonicalArtifactKind::Charter => ResolverNextSafeAction::RunAuthorCharter,
-        CanonicalArtifactKind::ProjectContext => ResolverNextSafeAction::RunAuthorProjectContext,
-        CanonicalArtifactKind::EnvironmentContext => {
+    match (instance_id, kind_ref) {
+        ("project_authority", "handbook.artifact-kind.project-authority@1.1.0") => {
+            ResolverNextSafeAction::RunAuthorCharter
+        }
+        ("project_context", "handbook.artifact-kind.project-context@1.1.0") => {
+            ResolverNextSafeAction::RunAuthorProjectContext
+        }
+        ("environment_context", "handbook.artifact-kind.environment-context@1.1.0") => {
             ResolverNextSafeAction::CreateCanonicalArtifact {
                 canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
             }
         }
-        CanonicalArtifactKind::FeatureSpec => ResolverNextSafeAction::FillCanonicalArtifact {
+        _ => ResolverNextSafeAction::FillCanonicalArtifact {
             canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
         },
     }
@@ -336,14 +345,18 @@ fn author_or_fill_next_safe_action(
 fn required_artifact_blocker(
     category: ResolverBlockerCategory,
     summary: String,
-    kind: CanonicalArtifactKind,
+    instance_id: &str,
+    kind_ref: &str,
+    label: &str,
     canonical_repo_relative_path: &str,
     next_safe_action: ResolverNextSafeAction,
 ) -> ResolverBlocker {
     ResolverBlocker {
         category,
         subject: ResolverSubjectRef::CanonicalArtifact {
-            kind,
+            instance_id: instance_id.to_owned(),
+            kind_ref: kind_ref.to_owned(),
+            label: label.to_owned(),
             canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
         },
         summary,
@@ -402,7 +415,9 @@ fn build_baseline_blockers(
         blockers.push(ResolverBlocker {
             category: ResolverBlockerCategory::ArtifactReadError,
             subject: ResolverSubjectRef::CanonicalArtifact {
-                kind: issue.artifact_kind,
+                instance_id: issue.instance_id.clone(),
+                kind_ref: issue.kind_ref.clone(),
+                label: issue.label.clone(),
                 canonical_repo_relative_path: issue.canonical_repo_relative_path.clone(),
             },
             summary: match issue.kind {
@@ -468,17 +483,22 @@ fn push_baseline_truth_blockers(
             BaselineArtifactVerdict::Missing => Some(required_artifact_blocker(
                 ResolverBlockerCategory::RequiredArtifactMissing,
                 "missing required canonical artifact".to_string(),
-                validation.kind,
+                validation.instance_id.as_str(),
+                validation.kind_ref.as_str(),
+                validation.label.as_str(),
                 validation.canonical_repo_relative_path.as_str(),
                 ResolverNextSafeAction::RunSetupRefresh,
             )),
             BaselineArtifactVerdict::Empty => Some(required_artifact_blocker(
                 ResolverBlockerCategory::RequiredArtifactEmpty,
                 "required canonical artifact is empty".to_string(),
-                validation.kind,
+                validation.instance_id.as_str(),
+                validation.kind_ref.as_str(),
+                validation.label.as_str(),
                 validation.canonical_repo_relative_path.as_str(),
                 author_or_fill_next_safe_action(
-                    validation.kind,
+                    validation.instance_id.as_str(),
+                    validation.kind_ref.as_str(),
                     validation.canonical_repo_relative_path.as_str(),
                 ),
             )),
@@ -486,10 +506,13 @@ fn push_baseline_truth_blockers(
                 ResolverBlockerCategory::RequiredArtifactStarterTemplate,
                 "required canonical artifact still contains the shipped starter template"
                     .to_string(),
-                validation.kind,
+                validation.instance_id.as_str(),
+                validation.kind_ref.as_str(),
+                validation.label.as_str(),
                 validation.canonical_repo_relative_path.as_str(),
                 author_or_fill_next_safe_action(
-                    validation.kind,
+                    validation.instance_id.as_str(),
+                    validation.kind_ref.as_str(),
                     validation.canonical_repo_relative_path.as_str(),
                 ),
             )),
@@ -497,10 +520,13 @@ fn push_baseline_truth_blockers(
                 Some(required_artifact_blocker(
                     ResolverBlockerCategory::RequiredArtifactInvalid,
                     format!("required canonical artifact is invalid: {summary}"),
-                    validation.kind,
+                    validation.instance_id.as_str(),
+                    validation.kind_ref.as_str(),
+                    validation.label.as_str(),
                     validation.canonical_repo_relative_path.as_str(),
                     author_or_fill_next_safe_action(
-                        validation.kind,
+                        validation.instance_id.as_str(),
+                        validation.kind_ref.as_str(),
                         validation.canonical_repo_relative_path.as_str(),
                     ),
                 ))
@@ -669,8 +695,8 @@ pub fn resolve_with_contract(
 
     for (artifact, projection) in manifest.artifacts.iter().zip(&rendered_projections) {
         decision_log_entries.push(format!(
-            "c03.artifact kind={:?} required={} presence={:?} byte_len={:?} sha256={:?} path={}",
-            artifact.kind,
+            "c03.artifact kind={} required={} presence={:?} byte_len={:?} sha256={:?} path={}",
+            artifact.label,
             artifact.packet_required,
             artifact.presence,
             artifact.byte_len,
@@ -681,7 +707,9 @@ pub fn resolve_with_contract(
             decision_log_entries.push(format!(
                 "hcm2.selected instance_id={} advisory={} rendered_byte_len={} rendered_sha256={} media_type=text/markdown",
                 artifact.instance_id,
-                artifact.kind == CanonicalArtifactKind::EnvironmentContext,
+                artifact.instance_id == "environment_context"
+                    && artifact.kind_ref
+                        == "handbook.artifact-kind.environment-context@1.1.0",
                 projection.rendered_byte_length(),
                 projection.rendered_output_fingerprint()
             ));
@@ -702,8 +730,8 @@ pub fn resolve_with_contract(
     }
     for validation in &baseline_validations {
         decision_log_entries.push(format!(
-            "c04.baseline.validation kind={:?} required={} verdict={} path={} detail={}",
-            validation.kind,
+            "c04.baseline.validation kind={} required={} verdict={} path={} detail={}",
+            validation.label,
             validation.packet_required,
             baseline_verdict_label(&validation.verdict),
             validation.canonical_repo_relative_path,
@@ -1090,7 +1118,9 @@ fn included_sources_for(plans: &[PacketArtifactPlan<'_>]) -> Vec<PacketSourceSum
 
             let projection = plan.rendered_projection;
             Some(PacketSourceSummary {
-                kind: plan.artifact.identity.kind,
+                instance_id: plan.artifact.identity.instance_id.clone(),
+                kind_ref: plan.artifact.identity.kind_ref.clone(),
+                label: plan.artifact.identity.label.clone(),
                 canonical_repo_relative_path: plan.artifact.identity.relative_path.clone(),
                 required: plan.artifact.identity.packet_required,
                 presence: plan.artifact.identity.presence,
@@ -1142,7 +1172,9 @@ fn present_fixture_sources_for(
             }
 
             Some(PacketSourceSummary {
-                kind: identity.kind,
+                instance_id: identity.instance_id.clone(),
+                kind_ref: identity.kind_ref.clone(),
+                label: identity.label.clone(),
                 canonical_repo_relative_path: identity.relative_path.clone(),
                 required: identity.packet_required,
                 presence: identity.presence,
@@ -1313,7 +1345,9 @@ fn packet_sections_for(plans: &[PacketArtifactPlan<'_>]) -> Vec<PacketSection> {
                 .map(|projection| projection.rendered_output_fingerprint().to_owned());
 
             Some(PacketSection {
-                kind: plan.artifact.identity.kind,
+                instance_id: plan.artifact.identity.instance_id.clone(),
+                kind_ref: plan.artifact.identity.kind_ref.clone(),
+                label: plan.artifact.identity.label.clone(),
                 canonical_repo_relative_path: plan.artifact.identity.relative_path.clone(),
                 title: plan.title.clone(),
                 mode,
@@ -1456,7 +1490,9 @@ fn baseline_verdict_detail(verdict: &BaselineArtifactVerdict) -> String {
 fn required_artifact_refusal(
     category: ResolverRefusalCategory,
     summary: String,
-    kind: CanonicalArtifactKind,
+    instance_id: &str,
+    kind_ref: &str,
+    label: &str,
     canonical_repo_relative_path: &str,
     next_safe_action: ResolverNextSafeAction,
 ) -> ResolverRefusal {
@@ -1464,7 +1500,9 @@ fn required_artifact_refusal(
         category,
         summary,
         broken_subject: ResolverSubjectRef::CanonicalArtifact {
-            kind,
+            instance_id: instance_id.to_owned(),
+            kind_ref: kind_ref.to_owned(),
+            label: label.to_owned(),
             canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
         },
         next_safe_action,
@@ -1481,17 +1519,22 @@ fn refusal_for_required_baseline_truth(
             BaselineArtifactVerdict::Missing => Some(required_artifact_refusal(
                 ResolverRefusalCategory::RequiredArtifactMissing,
                 "missing required canonical artifact".to_string(),
-                validation.kind,
+                validation.instance_id.as_str(),
+                validation.kind_ref.as_str(),
+                validation.label.as_str(),
                 validation.canonical_repo_relative_path.as_str(),
                 ResolverNextSafeAction::RunSetupRefresh,
             )),
             BaselineArtifactVerdict::Empty => Some(required_artifact_refusal(
                 ResolverRefusalCategory::RequiredArtifactEmpty,
                 "required canonical artifact is empty".to_string(),
-                validation.kind,
+                validation.instance_id.as_str(),
+                validation.kind_ref.as_str(),
+                validation.label.as_str(),
                 validation.canonical_repo_relative_path.as_str(),
                 author_or_fill_next_safe_action(
-                    validation.kind,
+                    validation.instance_id.as_str(),
+                    validation.kind_ref.as_str(),
                     validation.canonical_repo_relative_path.as_str(),
                 ),
             )),
@@ -1499,10 +1542,13 @@ fn refusal_for_required_baseline_truth(
                 ResolverRefusalCategory::RequiredArtifactStarterTemplate,
                 "required canonical artifact still contains the shipped starter template"
                     .to_string(),
-                validation.kind,
+                validation.instance_id.as_str(),
+                validation.kind_ref.as_str(),
+                validation.label.as_str(),
                 validation.canonical_repo_relative_path.as_str(),
                 author_or_fill_next_safe_action(
-                    validation.kind,
+                    validation.instance_id.as_str(),
+                    validation.kind_ref.as_str(),
                     validation.canonical_repo_relative_path.as_str(),
                 ),
             )),
@@ -1510,10 +1556,13 @@ fn refusal_for_required_baseline_truth(
                 Some(required_artifact_refusal(
                     ResolverRefusalCategory::RequiredArtifactInvalid,
                     format!("required canonical artifact is invalid: {summary}"),
-                    validation.kind,
+                    validation.instance_id.as_str(),
+                    validation.kind_ref.as_str(),
+                    validation.label.as_str(),
                     validation.canonical_repo_relative_path.as_str(),
                     author_or_fill_next_safe_action(
-                        validation.kind,
+                        validation.instance_id.as_str(),
+                        validation.kind_ref.as_str(),
                         validation.canonical_repo_relative_path.as_str(),
                     ),
                 ))
@@ -1592,7 +1641,9 @@ fn compute_refusal(
                 return Some(required_artifact_refusal(
                     ResolverRefusalCategory::RequiredArtifactMissing,
                     "missing required canonical artifact".to_string(),
-                    artifact.kind,
+                    artifact.instance_id.as_str(),
+                    artifact.kind_ref.as_str(),
+                    artifact.label.as_str(),
                     artifact.relative_path.as_str(),
                     ResolverNextSafeAction::RunSetupRefresh,
                 ));
@@ -1601,9 +1652,15 @@ fn compute_refusal(
                 return Some(required_artifact_refusal(
                     ResolverRefusalCategory::RequiredArtifactEmpty,
                     "required canonical artifact is empty".to_string(),
-                    artifact.kind,
+                    artifact.instance_id.as_str(),
+                    artifact.kind_ref.as_str(),
+                    artifact.label.as_str(),
                     artifact.relative_path.as_str(),
-                    author_or_fill_next_safe_action(artifact.kind, artifact.relative_path.as_str()),
+                    author_or_fill_next_safe_action(
+                        artifact.instance_id.as_str(),
+                        artifact.kind_ref.as_str(),
+                        artifact.relative_path.as_str(),
+                    ),
                 ));
             }
             ArtifactPresence::PresentNonEmpty if artifact.matches_setup_starter_template => {
@@ -1611,9 +1668,15 @@ fn compute_refusal(
                     ResolverRefusalCategory::RequiredArtifactStarterTemplate,
                     "required canonical artifact still contains the shipped starter template"
                         .to_string(),
-                    artifact.kind,
+                    artifact.instance_id.as_str(),
+                    artifact.kind_ref.as_str(),
+                    artifact.label.as_str(),
                     artifact.relative_path.as_str(),
-                    author_or_fill_next_safe_action(artifact.kind, artifact.relative_path.as_str()),
+                    author_or_fill_next_safe_action(
+                        artifact.instance_id.as_str(),
+                        artifact.kind_ref.as_str(),
+                        artifact.relative_path.as_str(),
+                    ),
                 ));
             }
             ArtifactPresence::PresentNonEmpty => {}
@@ -1716,13 +1779,14 @@ fn refusal_for_ingest_issues(
     }
 
     if let Some(issue) = first_symlink_issue {
-        let kind = issue.artifact_kind;
         let canonical_repo_relative_path = issue.canonical_repo_relative_path.clone();
         return Some(ResolverRefusal {
             category: ResolverRefusalCategory::NonCanonicalInputAttempt,
             summary: "canonical artifact path must not be a symlink".to_string(),
             broken_subject: ResolverSubjectRef::CanonicalArtifact {
-                kind,
+                instance_id: issue.instance_id.clone(),
+                kind_ref: issue.kind_ref.clone(),
+                label: issue.label.clone(),
                 canonical_repo_relative_path,
             },
             next_safe_action: ResolverNextSafeAction::RunSetupRefresh,
@@ -1730,7 +1794,6 @@ fn refusal_for_ingest_issues(
     }
 
     if let Some((issue, detail)) = first_required_read_issue {
-        let kind = issue.artifact_kind;
         let canonical_repo_relative_path = issue.canonical_repo_relative_path.clone();
         return Some(ResolverRefusal {
             category: ResolverRefusalCategory::ArtifactReadError,
@@ -1739,7 +1802,9 @@ fn refusal_for_ingest_issues(
                 detail.unwrap_or("repository_read_failed")
             ),
             broken_subject: ResolverSubjectRef::CanonicalArtifact {
-                kind,
+                instance_id: issue.instance_id.clone(),
+                kind_ref: issue.kind_ref.clone(),
+                label: issue.label.clone(),
                 canonical_repo_relative_path,
             },
             next_safe_action: ResolverNextSafeAction::RunSetupRefresh,
@@ -1778,26 +1843,37 @@ fn compute_blockers(
                 ArtifactPresence::Missing => blockers.push(required_artifact_blocker(
                     ResolverBlockerCategory::RequiredArtifactMissing,
                     "missing required canonical artifact".to_string(),
-                    artifact.kind,
+                    artifact.instance_id.as_str(),
+                    artifact.kind_ref.as_str(),
+                    artifact.label.as_str(),
                     artifact.relative_path.as_str(),
                     ResolverNextSafeAction::RunSetupRefresh,
                 )),
                 ArtifactPresence::PresentEmpty => blockers.push(required_artifact_blocker(
                     ResolverBlockerCategory::RequiredArtifactEmpty,
                     "required canonical artifact is empty".to_string(),
-                    artifact.kind,
+                    artifact.instance_id.as_str(),
+                    artifact.kind_ref.as_str(),
+                    artifact.label.as_str(),
                     artifact.relative_path.as_str(),
-                    author_or_fill_next_safe_action(artifact.kind, artifact.relative_path.as_str()),
+                    author_or_fill_next_safe_action(
+                        artifact.instance_id.as_str(),
+                        artifact.kind_ref.as_str(),
+                        artifact.relative_path.as_str(),
+                    ),
                 )),
                 ArtifactPresence::PresentNonEmpty if artifact.matches_setup_starter_template => {
                     blockers.push(required_artifact_blocker(
                         ResolverBlockerCategory::RequiredArtifactStarterTemplate,
                         "required canonical artifact still contains the shipped starter template"
                             .to_string(),
-                        artifact.kind,
+                        artifact.instance_id.as_str(),
+                        artifact.kind_ref.as_str(),
+                        artifact.label.as_str(),
                         artifact.relative_path.as_str(),
                         author_or_fill_next_safe_action(
-                            artifact.kind,
+                            artifact.instance_id.as_str(),
+                            artifact.kind_ref.as_str(),
                             artifact.relative_path.as_str(),
                         ),
                     ));

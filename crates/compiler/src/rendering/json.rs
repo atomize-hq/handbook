@@ -1,9 +1,8 @@
 use super::model::RenderOutputModel;
 use super::shared::{
     json_string, render_blocker_category, render_budget_disposition,
-    render_budget_next_safe_action, render_budget_reason, render_canonical_artifact_kind,
-    render_packet_status, render_packet_variant, render_ready_packet_next_safe_action,
-    render_refusal_category,
+    render_budget_next_safe_action, render_budget_reason, render_packet_status,
+    render_packet_variant, render_ready_packet_next_safe_action, render_refusal_category,
 };
 use crate::{ArtifactPresence, Blocker, Refusal, SubjectRef};
 use handbook_flow::{
@@ -152,7 +151,7 @@ fn render_packet_sources_json(sources: &[PacketSourceSummary]) -> String {
         write!(
             &mut output,
             "      {{\n        \"kind\": {},\n        \"canonical_repo_relative_path\": {},\n        \"required\": {},\n        \"presence\": {},\n        \"byte_len\": {},\n        \"content_sha256\": {},\n        \"rendered_output_byte_len\": {},\n        \"rendered_output_sha256\": {},\n        \"rendered_media_type\": {}\n      }}{}\n",
-            json_string(render_canonical_artifact_kind(source.kind)),
+            json_string(&source.label.replace(' ', "")),
             json_string(&source.canonical_repo_relative_path),
             source.required,
             json_string(match source.presence {
@@ -263,7 +262,7 @@ fn render_packet_sections_json(sections: &[PacketSection]) -> String {
         write!(
             &mut output,
             "      {{\n        \"kind\": {},\n        \"canonical_repo_relative_path\": {},\n        \"title\": {},\n        \"mode\": {},\n        \"contents\": {},\n        \"source_content_sha256\": {},\n        \"rendered_output_sha256\": {}\n      }}{}\n",
-            json_string(render_canonical_artifact_kind(section.kind)),
+            json_string(&section.label.replace(' ', "")),
             json_string(&section.canonical_repo_relative_path),
             json_string(&section.title),
             json_string(match section.mode {
@@ -386,11 +385,12 @@ fn render_blockers_json(blockers: &[Blocker]) -> String {
 fn render_subject_json(subject: &SubjectRef) -> String {
     match subject {
         SubjectRef::CanonicalArtifact {
-            kind,
+            label,
             canonical_repo_relative_path,
+            ..
         } => format!(
             "{{\n      \"kind\": {},\n      \"canonical_repo_relative_path\": {}\n    }}",
-            json_string(render_canonical_artifact_kind(*kind)),
+            json_string(&label.replace(' ', "")),
             json_string(canonical_repo_relative_path)
         ),
         SubjectRef::InheritedDependency {

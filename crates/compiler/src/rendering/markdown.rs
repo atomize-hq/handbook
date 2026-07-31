@@ -2,7 +2,7 @@ use super::model::RenderOutputModel;
 use crate::{
     blocker::Blocker,
     refusal::{NextSafeAction, RefusalCategory, SubjectRef},
-    BlockerCategory, CanonicalArtifactKind,
+    BlockerCategory,
 };
 use handbook_flow::PacketSelectionStatus;
 
@@ -164,12 +164,12 @@ fn render_next_safe_action_value(action: &NextSafeAction) -> String {
 fn render_subject_ref(subject: &SubjectRef) -> String {
     match subject {
         SubjectRef::CanonicalArtifact {
-            kind,
+            label,
             canonical_repo_relative_path,
+            ..
         } => format!(
             "canonical artifact {} at {}",
-            render_canonical_artifact_kind(*kind),
-            canonical_repo_relative_path
+            label, canonical_repo_relative_path
         ),
         SubjectRef::InheritedDependency {
             dependency_id,
@@ -179,15 +179,6 @@ fn render_subject_ref(subject: &SubjectRef) -> String {
             None => format!("inherited dependency {dependency_id}"),
         },
         SubjectRef::Policy { policy_id } => format!("policy {policy_id}"),
-    }
-}
-
-fn render_canonical_artifact_kind(kind: CanonicalArtifactKind) -> &'static str {
-    match kind {
-        CanonicalArtifactKind::Charter => "Charter",
-        CanonicalArtifactKind::ProjectContext => "ProjectContext",
-        CanonicalArtifactKind::EnvironmentContext => "EnvironmentContext",
-        CanonicalArtifactKind::FeatureSpec => "FeatureSpec",
     }
 }
 

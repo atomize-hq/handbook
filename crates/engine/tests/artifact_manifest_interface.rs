@@ -1,7 +1,6 @@
 use handbook_engine::{
-    ArtifactManifest, CanonicalArtifactKind, CanonicalArtifacts, InheritedDependency,
-    ManifestInputs, OverrideTarget, OverrideWithRationale, C03_SCHEMA_VERSION,
-    MANIFEST_GENERATION_VERSION,
+    ArtifactManifest, CanonicalArtifacts, InheritedDependency, ManifestInputs, OverrideTarget,
+    OverrideWithRationale, C03_SCHEMA_VERSION, MANIFEST_GENERATION_VERSION,
 };
 
 fn write_file(path: &std::path::Path, contents: &[u8]) {
@@ -36,13 +35,17 @@ fn manifest_artifacts_are_in_contract_order() {
     let manifest =
         ArtifactManifest::generate(dir.path(), ManifestInputs::default()).expect("manifest");
 
-    let kinds: Vec<CanonicalArtifactKind> = manifest.artifacts.iter().map(|a| a.kind).collect();
+    let instance_ids: Vec<&str> = manifest
+        .artifacts
+        .iter()
+        .map(|artifact| artifact.instance_id.as_str())
+        .collect();
     assert_eq!(
-        kinds,
+        instance_ids,
         vec![
-            CanonicalArtifactKind::Charter,
-            CanonicalArtifactKind::ProjectContext,
-            CanonicalArtifactKind::EnvironmentContext,
+            "project_authority",
+            "project_context",
+            "environment_context"
         ]
     );
 }
@@ -103,11 +106,11 @@ fn freshness_issues_have_deterministic_order() {
         inherited_dependencies: Vec::new(),
         overrides: vec![
             OverrideWithRationale {
-                target: OverrideTarget::CanonicalArtifact(CanonicalArtifactKind::FeatureSpec),
+                target: OverrideTarget::CanonicalArtifact("feature_spec".to_owned()),
                 rationale: "b".to_string(),
             },
             OverrideWithRationale {
-                target: OverrideTarget::CanonicalArtifact(CanonicalArtifactKind::Charter),
+                target: OverrideTarget::CanonicalArtifact("project_authority".to_owned()),
                 rationale: "a".to_string(),
             },
         ],
@@ -124,7 +127,7 @@ fn freshness_issues_have_deterministic_order() {
         .collect();
     assert!(details[0].contains("Charter"));
     assert!(details[0].ends_with(": a"));
-    assert!(details[1].contains("FeatureSpec"));
+    assert!(details[1].contains("feature_spec"));
     assert!(details[1].ends_with(": b"));
 }
 
@@ -145,7 +148,7 @@ fn manifest_from_snapshot_keeps_pre_mutation_identity() {
     let charter = manifest
         .artifacts
         .iter()
-        .find(|artifact| artifact.kind == CanonicalArtifactKind::Charter)
+        .find(|artifact| artifact.instance_id == "project_authority")
         .expect("charter identity");
 
     assert_eq!(charter.byte_len, Some(original_bytes.len() as u64));

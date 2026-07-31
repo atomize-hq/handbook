@@ -137,10 +137,14 @@ fn map_blocker_category(category: handbook_flow::ResolverBlockerCategory) -> Blo
 fn map_subject_ref(subject: handbook_flow::ResolverSubjectRef) -> SubjectRef {
     match subject {
         handbook_flow::ResolverSubjectRef::CanonicalArtifact {
-            kind,
+            instance_id,
+            kind_ref,
+            label,
             canonical_repo_relative_path,
         } => SubjectRef::CanonicalArtifact {
-            kind,
+            instance_id,
+            kind_ref,
+            label,
             canonical_repo_relative_path,
         },
         handbook_flow::ResolverSubjectRef::InheritedDependency {

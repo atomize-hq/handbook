@@ -1,6 +1,6 @@
 use crate::budget::{BudgetDisposition, BudgetReason};
 use crate::resolver::PacketSelectionStatus;
-use handbook_engine::{ArtifactPresence, CanonicalArtifactKind};
+use handbook_engine::ArtifactPresence;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PacketVariant {
@@ -21,7 +21,9 @@ impl PacketVariant {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PacketSourceSummary {
-    pub kind: CanonicalArtifactKind,
+    pub instance_id: String,
+    pub kind_ref: String,
+    pub label: String,
     pub canonical_repo_relative_path: String,
     pub required: bool,
     pub presence: ArtifactPresence,
@@ -54,7 +56,9 @@ pub struct PacketBodyNote {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PacketSection {
-    pub kind: CanonicalArtifactKind,
+    pub instance_id: String,
+    pub kind_ref: String,
+    pub label: String,
     pub canonical_repo_relative_path: String,
     pub title: String,
     pub mode: PacketSectionMode,

@@ -1,4 +1,3 @@
-#[cfg(unix)]
 use handbook_compiler::render_json;
 #[cfg(unix)]
 use handbook_compiler::rendering::render_inspect;
@@ -14,6 +13,151 @@ use handbook_engine::{setup_starter_template_bytes, CanonicalArtifactKind};
 #[cfg(unix)]
 use handbook_flow::BudgetPolicy;
 use handbook_flow::ResolveRequest;
+
+#[test]
+fn json_kind_projections_remove_only_ascii_space_from_descriptor_label() {
+    use handbook_compiler::{
+        Blocker, BlockerCategory, NextSafeAction, RenderOutputModel, SubjectRef,
+    };
+    use handbook_engine::ArtifactPresence;
+    use handbook_flow::{
+        BudgetDisposition, BudgetOutcome, BudgetReason, PacketDecisionSummary, PacketResult,
+        PacketSection, PacketSectionMode, PacketSelectionStatus, PacketSourceSummary,
+        PacketVariant, ReadyPacketNextSafeAction,
+    };
+
+    let descriptor_label = " MiX-é\u{00a0} Kind.! ";
+    let expected_compact_label = "MiX-é\u{00a0}Kind.!";
+    let model = RenderOutputModel {
+        c04_result_version: "test".to_owned(),
+        c03_schema_version: "test".to_owned(),
+        c03_manifest_generation_version: 1,
+        c03_fingerprint_sha256: "sha256:test".to_owned(),
+        packet_id: "planning.packet".to_owned(),
+        packet_result: PacketResult {
+            packet_id: "planning.packet".to_owned(),
+            variant: PacketVariant::Planning,
+            fixture_context: None,
+            included_sources: vec![
+                PacketSourceSummary {
+                    instance_id: "incident_brief".to_owned(),
+                    kind_ref: "example.artifact-kind.incident-brief@7.3.0".to_owned(),
+                    label: descriptor_label.to_owned(),
+                    canonical_repo_relative_path: ".handbook/incidents/current.yaml".to_owned(),
+                    required: false,
+                    presence: ArtifactPresence::PresentNonEmpty,
+                    byte_len: Some(4),
+                    content_sha256: Some("source".to_owned()),
+                    rendered_output_byte_len: None,
+                    rendered_output_sha256: None,
+                    rendered_media_type: None,
+                },
+                PacketSourceSummary {
+                    instance_id: "project_context".to_owned(),
+                    kind_ref: "handbook.artifact-kind.project-context@1.1.0".to_owned(),
+                    label: "Project Context".to_owned(),
+                    canonical_repo_relative_path: ".handbook/project/context.yaml".to_owned(),
+                    required: false,
+                    presence: ArtifactPresence::PresentNonEmpty,
+                    byte_len: Some(4),
+                    content_sha256: Some("source".to_owned()),
+                    rendered_output_byte_len: None,
+                    rendered_output_sha256: None,
+                    rendered_media_type: None,
+                },
+            ],
+            notes: Vec::new(),
+            decision_summary: PacketDecisionSummary {
+                packet_status: PacketSelectionStatus::Selected,
+                budget_disposition: BudgetDisposition::Keep,
+                budget_reason: BudgetReason::WithinBudget,
+                decision_log_entries: 1,
+                summary_line: "selected".to_owned(),
+                ready_next_safe_action: ReadyPacketNextSafeAction::InspectProof,
+            },
+            sections: vec![
+                PacketSection {
+                    instance_id: "incident_brief".to_owned(),
+                    kind_ref: "example.artifact-kind.incident-brief@7.3.0".to_owned(),
+                    label: descriptor_label.to_owned(),
+                    canonical_repo_relative_path: ".handbook/incidents/current.yaml".to_owned(),
+                    title: "INCIDENT_BRIEF".to_owned(),
+                    mode: PacketSectionMode::Verbatim,
+                    contents: "body".to_owned(),
+                    source_content_sha256: Some("source".to_owned()),
+                    rendered_output_sha256: None,
+                },
+                PacketSection {
+                    instance_id: "environment_context".to_owned(),
+                    kind_ref: "handbook.artifact-kind.environment-context@1.1.0".to_owned(),
+                    label: "Environment Context".to_owned(),
+                    canonical_repo_relative_path: ".handbook/project/environment.yaml".to_owned(),
+                    title: "ENVIRONMENT_CONTEXT".to_owned(),
+                    mode: PacketSectionMode::Verbatim,
+                    contents: "body".to_owned(),
+                    source_content_sha256: Some("source".to_owned()),
+                    rendered_output_sha256: None,
+                },
+            ],
+        },
+        packet_status: PacketSelectionStatus::Selected,
+        budget_outcome: BudgetOutcome {
+            disposition: BudgetDisposition::Keep,
+            reason: BudgetReason::WithinBudget,
+            targets: Vec::new(),
+            next_safe_action: None,
+        },
+        decision_log_entries: vec!["selected".to_owned()],
+        refusal: None,
+        blockers: vec![
+            Blocker {
+                category: BlockerCategory::RequiredArtifactInvalid,
+                subject: SubjectRef::CanonicalArtifact {
+                    instance_id: "incident_brief".to_owned(),
+                    kind_ref: "example.artifact-kind.incident-brief@7.3.0".to_owned(),
+                    label: descriptor_label.to_owned(),
+                    canonical_repo_relative_path: ".handbook/incidents/current.yaml".to_owned(),
+                },
+                summary: "invalid".to_owned(),
+                next_safe_action: NextSafeAction::RunDoctor,
+            },
+            Blocker {
+                category: BlockerCategory::RequiredArtifactInvalid,
+                subject: SubjectRef::CanonicalArtifact {
+                    instance_id: "project_authority".to_owned(),
+                    kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+                    label: "Charter".to_owned(),
+                    canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
+                },
+                summary: "invalid".to_owned(),
+                next_safe_action: NextSafeAction::RunDoctor,
+            },
+        ],
+    };
+
+    let rendered: serde_json::Value = serde_json::from_str(&render_json(&model)).expect("JSON");
+    assert_eq!(
+        rendered["packet_result"]["included_sources"][0]["kind"],
+        expected_compact_label
+    );
+    assert_eq!(
+        rendered["packet_result"]["sections"][0]["kind"],
+        expected_compact_label
+    );
+    assert_eq!(
+        rendered["blockers"][0]["subject"]["kind"],
+        expected_compact_label
+    );
+    assert_eq!(
+        rendered["packet_result"]["included_sources"][1]["kind"],
+        "ProjectContext"
+    );
+    assert_eq!(
+        rendered["packet_result"]["sections"][1]["kind"],
+        "EnvironmentContext"
+    );
+    assert_eq!(rendered["blockers"][1]["subject"]["kind"], "Charter");
+}
 
 #[cfg(unix)]
 #[path = "../../engine/tests/support/hcm_2_2_committed_charter.rs"]
@@ -181,7 +325,7 @@ fn render_markdown_keeps_trust_header_first_for_ready_result() {
     assert!(rendered.contains("PACKET VARIANT: planning.packet"));
     assert!(rendered.contains("## INCLUDED SOURCES"));
     assert!(rendered.contains("Charter [.handbook/project/charter.yaml]"));
-    assert!(rendered.contains("EnvironmentContext [.handbook/project/environment.yaml]"));
+    assert!(rendered.contains("Environment Context [.handbook/project/environment.yaml]"));
     assert!(rendered.contains("## OMISSIONS AND BUDGET"));
     assert!(rendered.contains("## DECISION SUMMARY"));
     assert!(rendered.contains("## PACKET BODY"));
@@ -240,7 +384,7 @@ fn render_markdown_keeps_optional_project_context_in_order_when_present() {
         pos_charter < pos_context && pos_context < pos_environment,
         "expected section order charter -> project_context -> environment_context: {rendered}"
     );
-    assert!(rendered.contains("ProjectContext [.handbook/project/context.yaml]"));
+    assert!(rendered.contains("Project Context [.handbook/project/context.yaml]"));
     assert!(rendered.contains("MODE: rendered from selected canonical YAML"));
     assert!(rendered.contains("SOURCE SHA256: sha256:"));
     assert!(rendered.contains("RENDERED SHA256: sha256:"));
@@ -516,7 +660,7 @@ fn render_markdown_includes_execution_demo_fixture_context_and_ready_next_action
         &rendered,
         &[
             "1. Charter [.handbook/project/charter.yaml]",
-            "2. ProjectContext [.handbook/project/context.yaml]",
+            "2. Project Context [.handbook/project/context.yaml]",
         ],
     );
     assert!(rendered.contains("### CHARTER (.handbook/project/charter.yaml)"));
@@ -657,7 +801,7 @@ fn render_markdown_omits_budget_excluded_optional_sections() {
     let model = build_output_model(&result).expect("model");
 
     let rendered = render_markdown(&model);
-    assert!(!rendered.contains("EnvironmentContext [.handbook/project/environment.yaml]"));
+    assert!(!rendered.contains("Environment Context [.handbook/project/environment.yaml]"));
     assert!(!rendered.contains("### ENVIRONMENT_CONTEXT (.handbook/project/environment.yaml)"));
     assert!(rendered
         .contains("optional source excluded due to budget: .handbook/project/environment.yaml"));

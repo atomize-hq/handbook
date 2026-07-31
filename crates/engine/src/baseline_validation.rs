@@ -1,5 +1,5 @@
 use crate::canonical_artifacts::{
-    ArtifactIngestIssueKind, ArtifactPresence, CanonicalArtifact, CanonicalArtifactKind,
+    ArtifactIngestIssueKind, ArtifactPresence, CanonicalArtifact, CanonicalArtifactIdentity,
     CanonicalArtifacts,
 };
 
@@ -15,7 +15,9 @@ pub enum BaselineArtifactVerdict {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct BaselineArtifactValidation {
-    pub kind: CanonicalArtifactKind,
+    pub instance_id: String,
+    pub kind_ref: String,
+    pub label: String,
     pub canonical_repo_relative_path: String,
     pub packet_required: bool,
     pub verdict: BaselineArtifactVerdict,
@@ -26,7 +28,7 @@ pub fn baseline_artifact_validations<F>(
     validate_artifact_markdown: F,
 ) -> Vec<BaselineArtifactValidation>
 where
-    F: Fn(CanonicalArtifactKind, &str) -> Result<(), String> + Copy,
+    F: Fn(&CanonicalArtifactIdentity, &str) -> Result<(), String> + Copy,
 {
     artifacts
         .artifacts
@@ -38,13 +40,13 @@ where
 
 pub fn baseline_artifact_validation<F>(
     artifacts: &CanonicalArtifacts,
-    kind: CanonicalArtifactKind,
+    instance_id: &str,
     validate_artifact_markdown: F,
 ) -> Option<BaselineArtifactValidation>
 where
-    F: Fn(CanonicalArtifactKind, &str) -> Result<(), String> + Copy,
+    F: Fn(&CanonicalArtifactIdentity, &str) -> Result<(), String> + Copy,
 {
-    canonical_artifact(artifacts, kind)
+    canonical_artifact(artifacts, instance_id)
         .filter(|artifact| artifact.identity.baseline_required)
         .map(|artifact| validation_for_descriptor(artifacts, artifact, validate_artifact_markdown))
 }
@@ -64,10 +66,12 @@ fn validation_for_descriptor<F>(
     validate_artifact_markdown: F,
 ) -> BaselineArtifactValidation
 where
-    F: Fn(CanonicalArtifactKind, &str) -> Result<(), String> + Copy,
+    F: Fn(&CanonicalArtifactIdentity, &str) -> Result<(), String> + Copy,
 {
     BaselineArtifactValidation {
-        kind: artifact.identity.kind,
+        instance_id: artifact.identity.instance_id.clone(),
+        kind_ref: artifact.identity.kind_ref.clone(),
+        label: artifact.identity.label.clone(),
         canonical_repo_relative_path: artifact.identity.relative_path.clone(),
         packet_required: artifact.identity.packet_required,
         verdict: verdict_for_descriptor(artifacts, artifact, validate_artifact_markdown),
@@ -80,7 +84,7 @@ fn verdict_for_descriptor<F>(
     validate_artifact_markdown: F,
 ) -> BaselineArtifactVerdict
 where
-    F: Fn(CanonicalArtifactKind, &str) -> Result<(), String> + Copy,
+    F: Fn(&CanonicalArtifactIdentity, &str) -> Result<(), String> + Copy,
 {
     if has_ingest_issue_for_artifact(artifacts, artifact) {
         return BaselineArtifactVerdict::IngestInvalid;
@@ -109,7 +113,7 @@ where
                 }
             };
 
-            match validate_artifact_markdown(artifact.identity.kind, &markdown) {
+            match validate_artifact_markdown(&artifact.identity, &markdown) {
                 Ok(()) => BaselineArtifactVerdict::ValidCanonicalTruth { markdown },
                 Err(summary) => BaselineArtifactVerdict::SemanticallyInvalid { summary },
             }
@@ -126,17 +130,18 @@ fn has_ingest_issue_for_artifact(
             issue.kind,
             ArtifactIngestIssueKind::CanonicalArtifactReadError
                 | ArtifactIngestIssueKind::CanonicalArtifactSymlinkNotAllowed
-        ) && issue.artifact_kind == artifact.identity.kind
+        ) && issue.instance_id == artifact.identity.instance_id
+            && issue.kind_ref == artifact.identity.kind_ref
             && issue.canonical_repo_relative_path == artifact.identity.relative_path
     })
 }
 
-fn canonical_artifact(
-    artifacts: &CanonicalArtifacts,
-    kind: CanonicalArtifactKind,
-) -> Option<&CanonicalArtifact> {
+fn canonical_artifact<'a>(
+    artifacts: &'a CanonicalArtifacts,
+    instance_id: &str,
+) -> Option<&'a CanonicalArtifact> {
     artifacts
         .artifacts
         .iter()
-        .find(|artifact| artifact.identity.kind == kind)
+        .find(|artifact| artifact.identity.instance_id == instance_id)
 }

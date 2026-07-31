@@ -45,7 +45,9 @@ fn refusal_required_artifact_missing() {
     assert_eq!(
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
@@ -75,7 +77,9 @@ fn refusal_non_canonical_input_attempt_is_selected_for_symlinked_canonical_artif
     assert_eq!(
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
@@ -102,7 +106,9 @@ fn refusal_required_artifact_empty() {
     assert_eq!(
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
@@ -128,7 +134,9 @@ fn refusal_required_artifact_starter_template() {
     assert_eq!(
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
@@ -155,7 +163,9 @@ fn refusal_required_artifact_invalid() {
     assert_eq!(
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
@@ -182,7 +192,9 @@ fn refusal_required_artifact_read_error_is_selected_for_malformed_required_path(
     assert_eq!(
         refusal.broken_subject,
         SubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );

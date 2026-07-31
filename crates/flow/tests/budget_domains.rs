@@ -1,6 +1,5 @@
 use handbook_engine::{
-    ArtifactApplicability, ArtifactPresence, CanonicalArtifactIdentity, CanonicalArtifactKind,
-    RequirednessMode,
+    ArtifactApplicability, ArtifactPresence, CanonicalArtifactIdentity, RequirednessMode,
 };
 use handbook_flow::{
     evaluate_budget_with_effective_bytes, BudgetByteDomain, BudgetDisposition,
@@ -13,7 +12,6 @@ fn selected_identity(source_byte_len: u64) -> CanonicalArtifactIdentity {
     CanonicalArtifactIdentity {
         instance_id: "project_context".to_owned(),
         kind_ref: "handbook.artifact-kind.project-context@1.1.0".to_owned(),
-        kind: CanonicalArtifactKind::ProjectContext,
         label: "Project Context".to_owned(),
         relative_path: SELECTED_PATH.to_owned(),
         requiredness_mode: RequirednessMode::Always,
@@ -84,7 +82,6 @@ fn fixed_artifacts_retain_the_source_budget_domain() {
     let fixed = CanonicalArtifactIdentity {
         instance_id: "work_specification".to_owned(),
         kind_ref: "handbook.artifact-kind.work-specification@1.0.0".to_owned(),
-        kind: CanonicalArtifactKind::FeatureSpec,
         label: "Work Specification".to_owned(),
         relative_path: ".handbook/feature_spec/FEATURE_SPEC.md".to_owned(),
         requiredness_mode: RequirednessMode::Optional,
@@ -114,7 +111,6 @@ fn identity(path: &str, byte_len: u64, packet_required: bool) -> CanonicalArtifa
     CanonicalArtifactIdentity {
         instance_id: path.replace(['/', '.'], "_"),
         kind_ref: "example.artifact-kind.unrendered@1.0.0".to_owned(),
-        kind: CanonicalArtifactKind::FeatureSpec,
         label: "Unrendered Artifact".to_owned(),
         relative_path: path.to_owned(),
         requiredness_mode: if packet_required {

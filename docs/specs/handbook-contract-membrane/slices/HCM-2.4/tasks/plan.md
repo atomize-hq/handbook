@@ -6,11 +6,11 @@ authority commit `f62141b`. P0/P1A/P1B/P1C and P3/P3B are review-clean and
 committed. P2S, P2A, and Option C are historical evidence, not active
 architecture. The P4/P5 token prerequisite is review-clean and committed at
 `00dde01`; P4's separate five-part negative-surface/path proof is review-clean
-and GREEN. P6 is in protocol-integrity repair. Preserved implementation commit
-`b1edf060710bc96cd61631755519baba864ba30a` remains unaccepted with two valid
-discovery P2 findings open; CLEAN supplemental-2 evidence applies only to the
-pre-edit selector fingerprint. P7 is ineligible,
-unselected, and unstarted; HCM-2.4 completion and
+and GREEN. The complete P6 repair candidate removes the two valid discovery P2s
+and has a GREEN complete proof wall. CLEAN in
+`../../../handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json`
+accepts this frozen P6 subject; FINDINGS leaves it pending. P7 is eligible only
+under CLEAN and remains unselected and unstarted; HCM-2.4 completion and
 Phase 2 exit remain incomplete.
 
 ## Dependency graph
@@ -44,12 +44,12 @@ exact operator-approved derivation selector frozen in
 `decision/20260727-p4-p5-coverage-token-derivation-selector.md`; selector
 review, RED/GREEN, supplemental causal closure, and commit are complete. P4
 now also has a separate operator-authorized five-part negative-surface/path
-proof with CLEAN different-fresh closure. P4 is GREEN. P6 is in
-protocol-integrity repair: preserved commit `b1edf060710bc96cd61631755519baba864ba30a`
-removes the bridges but retains residual fixed-kind authority identified by the
-valid discovery review. Acceptance remains pending implementation remediation
-and fresh complete-subject review. P7 is ineligible, unselected, and unstarted.
-Current activity is limited to the authorized P6 repair and true-stop transition.
+proof with CLEAN different-fresh closure. P4 is GREEN. The complete P6 repair
+candidate removes the bridges and residual normal-path fixed-kind authority,
+preserves descriptor-owned identity, and has a GREEN complete proof wall. Its
+acceptance is bound only to the frozen final-review CLEAN condition. P7 remains
+unselected and unstarted. Current activity is limited to P6 final review and
+true-stop transition.
 
 ## Standing rules
 
@@ -594,17 +594,19 @@ prerequisite is committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`.
 
 Entry: P1A–P1C and P2–P5 individually committed and green.
 
-Current result: preserved implementation commit
-`b1edf060710bc96cd61631755519baba864ba30a` remains unaccepted under
+Current result: the complete candidate preserves implementation commit
+`b1edf060710bc96cd61631755519baba864ba30a` under
 `decision/20260729-p6-aggregate-flow-cleanup-selector.md` and
 `decision/20260730-p6-protocol-integrity-repair.md`. The mixed
 fixed/bridge collection is replaced by one descriptor-selected
 `CanonicalArtifacts` collection, both bridge IDs and all four bridge types are
-absent, but the valid discovery review keeps residual fixed-kind authority and
-protocol truth open as P2 findings. The CLEAN supplemental-2 review binds only
-the pre-edit selector amendment fingerprint. Implementation remediation,
-complete wall convergence, and fresh complete-subject review remain pending;
-the eight dispatches inventoried by the repair decision are not active evidence.
+absent, residual normal-path fixed-kind authority is removed, and exact admitted
+identity/bytes flow through validation, rendering, packet, budget, fixture,
+blocker, refusal, ordering, and fingerprints. The complete wall is GREEN. The
+old parent's supplemental-2 review binds only its pre-edit selector fingerprint,
+and the eight dispatches inventoried by the repair decision are not active
+evidence. CLEAN in the frozen final-review dispatch accepts P6; FINDINGS leaves
+it pending.
 
 RED:
 
@@ -643,11 +645,10 @@ custom configured renderers or Projections generic.
 
 Completion entry: P6 accepted.
 
-Current entry result: unsatisfied while P6 acceptance is pending. P7 is
-ineligible, unselected, and unstarted. The parent may finish the bounded P6
-repair, update only earned P6 boundary truth, commit the reviewed P6 subject,
-and create one parent-owned partial true-stop handoff. It may not check the full
-P7 exit items or use the partial handoff to claim Phase 2 exit.
+Current entry result: satisfied only if the frozen P6 final-review dispatch is
+CLEAN. Under CLEAN, P7 becomes eligible but remains unselected and unstarted;
+under FINDINGS it remains ineligible. The parent may commit and close out only a
+CLEAN P6 subject. It may not check the full P7 exit items or claim Phase 2 exit.
 
 Work:
 

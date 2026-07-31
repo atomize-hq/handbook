@@ -1,4 +1,3 @@
-use handbook_engine::CanonicalArtifactKind;
 use handbook_flow::{
     resolve, resolve_with_contract, PacketSelectionStatus, ResolveRequest, ResolverNextSafeAction,
     ResolverRefusalCategory, ResolverSubjectRef,
@@ -209,7 +208,9 @@ fn selected_project_context_alone_establishes_the_canonical_root() {
     assert_eq!(
         refusal.broken_subject,
         ResolverSubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
@@ -413,7 +414,9 @@ fn flow_resolver_refuses_symlinked_canonical_artifact_as_non_canonical_input() {
     assert_eq!(
         refusal.broken_subject,
         ResolverSubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
@@ -471,7 +474,9 @@ fn flow_resolver_refuses_required_artifact_malformed_path_read_error() {
     assert_eq!(
         refusal.broken_subject,
         ResolverSubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
@@ -684,7 +689,9 @@ fn flow_resolver_refuses_selected_project_context_without_strict_read_support() 
     assert_eq!(
         refusal.broken_subject,
         ResolverSubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::ProjectContext,
+            instance_id: "project_context".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-context@1.1.0".to_owned(),
+            label: "Project Context".to_owned(),
             canonical_repo_relative_path: ".handbook/project/context.yaml".to_owned(),
         }
     );
@@ -778,12 +785,30 @@ fn descriptor_selected_flow_preserves_packet_contract_without_bridges() {
             .packet_result
             .included_sources
             .iter()
-            .map(|source| source.kind)
+            .map(|source| {
+                (
+                    source.instance_id.as_str(),
+                    source.kind_ref.as_str(),
+                    source.label.as_str(),
+                )
+            })
             .collect::<Vec<_>>(),
         vec![
-            CanonicalArtifactKind::Charter,
-            CanonicalArtifactKind::ProjectContext,
-            CanonicalArtifactKind::EnvironmentContext,
+            (
+                "project_authority",
+                "handbook.artifact-kind.project-authority@1.1.0",
+                "Charter",
+            ),
+            (
+                "project_context",
+                "handbook.artifact-kind.project-context@1.1.0",
+                "Project Context",
+            ),
+            (
+                "environment_context",
+                "handbook.artifact-kind.environment-context@1.1.0",
+                "Environment Context",
+            ),
         ]
     );
     assert_eq!(
@@ -802,32 +827,42 @@ fn descriptor_selected_flow_preserves_packet_contract_without_bridges() {
 
     let selected = [
         (
-            CanonicalArtifactKind::Charter,
+            "project_authority",
+            "handbook.artifact-kind.project-authority@1.1.0",
+            "Charter",
             charter.source_fingerprint().as_str(),
             charter.rendered_output_fingerprint().as_str(),
             charter.rendered_bytes(),
         ),
         (
-            CanonicalArtifactKind::ProjectContext,
+            "project_context",
+            "handbook.artifact-kind.project-context@1.1.0",
+            "Project Context",
             project_context.source_fingerprint().as_str(),
             project_context.rendered_output_fingerprint().as_str(),
             project_context.rendered_bytes(),
         ),
         (
-            CanonicalArtifactKind::EnvironmentContext,
+            "environment_context",
+            "handbook.artifact-kind.environment-context@1.1.0",
+            "Environment Context",
             environment_context.source_fingerprint().as_str(),
             environment_context.rendered_output_fingerprint().as_str(),
             environment_context.rendered_bytes(),
         ),
     ];
-    for (kind, source_fingerprint, rendered_fingerprint, rendered_bytes) in selected {
+    for (instance_id, kind_ref, label, source_fingerprint, rendered_fingerprint, rendered_bytes) in
+        selected
+    {
         assert_ne!(source_fingerprint, rendered_fingerprint);
         let source = first
             .packet_result
             .included_sources
             .iter()
-            .find(|source| source.kind == kind)
+            .find(|source| source.instance_id == instance_id)
             .expect("selected source");
+        assert_eq!(source.kind_ref, kind_ref);
+        assert_eq!(source.label, label);
         assert_eq!(
             source.content_sha256.as_deref(),
             Some(
@@ -850,8 +885,10 @@ fn descriptor_selected_flow_preserves_packet_contract_without_bridges() {
             .packet_result
             .sections
             .iter()
-            .find(|section| section.kind == kind)
+            .find(|section| section.instance_id == instance_id)
             .expect("selected rendered section");
+        assert_eq!(section.kind_ref, kind_ref);
+        assert_eq!(section.label, label);
         assert_eq!(section.mode, handbook_flow::PacketSectionMode::Rendered);
         assert_eq!(section.contents.as_bytes(), rendered_bytes);
         assert_eq!(
@@ -886,7 +923,7 @@ fn descriptor_selected_flow_preserves_packet_contract_without_bridges() {
         .packet_result
         .sections
         .iter()
-        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+        .all(|section| section.instance_id != "environment_context"));
     assert!(invalid_advisory.packet_result.notes.iter().any(|note| {
         note.text
             == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
@@ -921,7 +958,7 @@ fn hcm_2_2_flow_projects_selected_charter_yaml_and_ignores_legacy_markdown() {
         .packet_result
         .included_sources
         .iter()
-        .find(|source| source.kind == CanonicalArtifactKind::Charter)
+        .find(|source| source.instance_id == "project_authority")
         .expect("selected Charter source");
     assert_eq!(
         source.canonical_repo_relative_path,
@@ -951,7 +988,7 @@ fn hcm_2_2_flow_projects_selected_charter_yaml_and_ignores_legacy_markdown() {
         .packet_result
         .sections
         .iter()
-        .find(|section| section.kind == CanonicalArtifactKind::Charter)
+        .find(|section| section.instance_id == "project_authority")
         .expect("rendered Charter section");
     assert_eq!(section.mode, handbook_flow::PacketSectionMode::Rendered);
     assert_eq!(
@@ -1001,7 +1038,7 @@ fn valid_environment_context_is_rendered_into_the_advisory_packet() {
         .packet_result
         .included_sources
         .iter()
-        .find(|source| source.kind == CanonicalArtifactKind::EnvironmentContext)
+        .find(|source| source.instance_id == "environment_context")
         .expect("advisory Environment Context source");
     assert_eq!(
         source.canonical_repo_relative_path,
@@ -1016,7 +1053,7 @@ fn valid_environment_context_is_rendered_into_the_advisory_packet() {
         .packet_result
         .sections
         .iter()
-        .find(|section| section.kind == CanonicalArtifactKind::EnvironmentContext)
+        .find(|section| section.instance_id == "environment_context")
         .expect("advisory Environment Context section");
     assert_eq!(section.mode, handbook_flow::PacketSectionMode::Rendered);
     assert_eq!(section.contents.as_bytes(), selected.rendered_bytes());
@@ -1061,7 +1098,7 @@ fn oversized_environment_context_is_summarized_without_rendered_body() {
         .packet_result
         .included_sources
         .iter()
-        .find(|source| source.kind == CanonicalArtifactKind::EnvironmentContext)
+        .find(|source| source.instance_id == "environment_context")
         .expect("summarized Environment Context source");
     assert!(source.rendered_output_byte_len.is_none());
     assert!(source.rendered_output_sha256.is_none());
@@ -1069,7 +1106,7 @@ fn oversized_environment_context_is_summarized_without_rendered_body() {
         .packet_result
         .sections
         .iter()
-        .find(|section| section.kind == CanonicalArtifactKind::EnvironmentContext)
+        .find(|section| section.instance_id == "environment_context")
         .expect("summarized Environment Context section");
     assert_eq!(section.mode, handbook_flow::PacketSectionMode::Summary);
     assert!(!section.contents.contains(oversized_description.as_str()));
@@ -1099,7 +1136,7 @@ fn invalid_environment_context_is_reported_without_blocking_the_packet() {
         .packet_result
         .sections
         .iter()
-        .all(|section| { section.kind != CanonicalArtifactKind::EnvironmentContext }));
+        .all(|section| { section.instance_id != "environment_context" }));
     assert!(result.packet_result.notes.iter().any(|note| {
         note.text
             == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
@@ -1128,7 +1165,7 @@ fn symlinked_environment_context_is_reported_without_blocking_the_packet() {
         .packet_result
         .sections
         .iter()
-        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+        .all(|section| section.instance_id != "environment_context"));
     assert!(result.packet_result.notes.iter().any(|note| {
         note.text
             == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
@@ -1152,7 +1189,7 @@ fn non_regular_environment_context_is_reported_without_blocking_the_packet() {
         .packet_result
         .sections
         .iter()
-        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+        .all(|section| section.instance_id != "environment_context"));
     assert!(result.packet_result.notes.iter().any(|note| {
         note.text
             == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
@@ -1183,7 +1220,7 @@ fn unreadable_environment_context_is_reported_without_blocking_the_packet() {
         .packet_result
         .sections
         .iter()
-        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+        .all(|section| section.instance_id != "environment_context"));
     assert!(result.packet_result.notes.iter().any(|note| {
         note.text
             == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
@@ -1209,7 +1246,7 @@ fn oversized_environment_context_source_is_reported_without_blocking_the_packet(
         .packet_result
         .sections
         .iter()
-        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+        .all(|section| section.instance_id != "environment_context"));
     assert!(result.packet_result.notes.iter().any(|note| {
         note.text
             == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
@@ -1236,7 +1273,7 @@ fn unstable_environment_context_source_is_reported_without_blocking_the_packet()
         .packet_result
         .sections
         .iter()
-        .all(|section| section.kind != CanonicalArtifactKind::EnvironmentContext));
+        .all(|section| section.instance_id != "environment_context"));
     assert!(result.packet_result.notes.iter().any(|note| {
         note.text
             == "optional source omitted: .handbook/project/environment.yaml (invalid canonical truth)"
@@ -1259,7 +1296,9 @@ fn hcm_2_2_flow_refuses_selected_charter_without_committed_current_authority() {
     assert_eq!(
         refusal.broken_subject,
         ResolverSubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
@@ -1283,7 +1322,9 @@ fn hcm_2_2_flow_requires_selected_charter_even_when_legacy_markdown_is_valid() {
     assert_eq!(
         refusal.broken_subject,
         ResolverSubjectRef::CanonicalArtifact {
-            kind: CanonicalArtifactKind::Charter,
+            instance_id: "project_authority".to_owned(),
+            kind_ref: "handbook.artifact-kind.project-authority@1.1.0".to_owned(),
+            label: "Charter".to_owned(),
             canonical_repo_relative_path: ".handbook/project/charter.yaml".to_owned(),
         }
     );
