@@ -1,0 +1,330 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260731T135635Z--HCM-2-4--orchestration--administrative-root-status-synchronized",
+  "created_at_utc": "2026-07-31T13:56:35Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "orchestration_id": "20260731T135002Z--HCM-2-4--administrative-status-sync-orchestration",
+  "source_handoff_ids": [
+    "20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-31T13:56:35Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T135011Z--HCM-2-4--administrative-root-status-sync-review.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "administrative_root_status_sync_review",
+      "dispatch_id": "20260731T135011Z--HCM-2-4--administrative-root-status-sync-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T135011Z--HCM-2-4--administrative-root-status-sync-review.json",
+      "dispatch_fingerprint": "sha256:01b2620bd656aa08bb6ea4678be94891df3d161a63c7d5fe25bf4613e6dabd74",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_admin_status_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:5e00d16c96235a79e09b5ac91f1cf375486479bb36ff7cbbd7c5a52c1c19f027",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T135011Z--HCM-2-4--administrative-root-status-sync-review.json",
+        "git:85e7a77ff00d05a26b74dc8378d88d18d133ffe4"
+      ],
+      "result_subject_fingerprint": "sha256:5e00d16c96235a79e09b5ac91f1cf375486479bb36ff7cbbd7c5a52c1c19f027"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-07-31T13:56:35Z",
+    "dispatch_count": 1,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:94d5ac3ada93efb1a17d2f9c67eac53490bf270215cffb2c50d137e13712bd3f"
+    ],
+    "aggregate_fingerprint": "sha256:dcd67bfc8cc9a69e9806f14f4283a46371c5725fb8b6ebf053becaf5416745e2"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "85e7a77ff00d05a26b74dc8378d88d18d133ffe4",
+    "subject_fingerprint": "sha256:5e00d16c96235a79e09b5ac91f1cf375486479bb36ff7cbbd7c5a52c1c19f027",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T135011Z--HCM-2-4--administrative-root-status-sync-review.json",
+      "git:85e7a77ff00d05a26b74dc8378d88d18d133ffe4"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T135011Z--HCM-2-4--administrative-root-status-sync-review.json"
+  },
+  "active_resolution": {
+    "level": "administrative-root-status-synchronization",
+    "scope_horizon": "completed one-file status synchronization after HCM-2.4 P7 and exact HCM-2 Phase 2 exit",
+    "detail_resolution": "three stale current-status locations in 00-README.md and no adjacent documentation",
+    "temporal_horizon": "post-P7 closeout through reviewed primary status-sync commit and two-commit true stop",
+    "authority_horizon": "README status truth synchronized; HCM-3.x, task-gate runtime, automatic continuation, release, push, and publication unauthorized",
+    "memory_horizon": "completed P7 handoff, immutable P7 CLEAN dispatch, final one-file README subject, one fresh administrative review, and this closeout",
+    "validation_horizon": "exact diff, reference existence, Markdown/link/fence/whitespace checks, GitNexus detection, protected-path preservation, and handoff protocol validation"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Perform exactly one administrative synchronization of the three stale root-status statements in 00-README.md after the completed HCM-2.4 P7 closeout, review the final one-file bytes once, commit locally, and stop before HCM-3.x or any adjacent work.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json",
+      "sections": [
+        "active_resolution",
+        "decisions",
+        "resume",
+        "chat_summary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json",
+      "sections": [
+        "exact CLEAN reviewed subject",
+        "contracts_and_gates"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP",
+        "PHASE 7 — CONTROL-PACK CLOSEOUT AND COMMIT",
+        "PHASE 8 — TRUE-STOP HANDOFF"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Built-in delegated-run protocol",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "85e7a77ff00d05a26b74dc8378d88d18d133ffe4",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/ideas/intent-to-outcome-fidelity.md"
+    ]
+  },
+  "work_completed": [
+    "Selected and validated the exact completed P7 handoff, its ledger parity, both named commits, the immutable CLEAN dispatch hash, and reviewed subject identity.",
+    "Recorded SHA-256 hashes for all nine protected user-owned paths before work and preserved every path byte-for-byte, unstaged, and outside the primary commit.",
+    "Changed only the top-level Status paragraph, Implementation authorization paragraph, and HCM-2.4 current-status summary in 00-README.md, preserving unrelated and historical wording.",
+    "Ran only proportional one-file reference, status-claim, Markdown-link, fence, UTF-8, whitespace, exact-diff, and dispatch-validation checks; no proof wall, runtime, workspace, Clippy, WSL, archive, or package tests were replayed.",
+    "Executed exactly one fresh isolated read-only review. It returned CLEAN with no P1-P4 findings, retained HCM-RF-0001 and HCM-RF-0002 as accepted P3 advisories, and confirmed no unrelated README rewrite.",
+    "Ran GitNexus staged change detection, which found no indexed code changes; compare-to-main reproduced the existing unavailable-FTS diagnostic and was not repaired or represented as GREEN.",
+    "Committed the reviewed README subject and immutable CLEAN review dispatch as primary commit 85e7a77ff00d05a26b74dc8378d88d18d133ffe4 without pushing."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "status": "completed",
+      "summary": "Minimal three-location root-status synchronization after the completed P7 closeout."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T135011Z--HCM-2-4--administrative-root-status-sync-review.json",
+      "status": "completed",
+      "summary": "Immutable one-file fresh review dispatch for subject sha256:5e00d16c96235a79e09b5ac91f1cf375486479bb36ff7cbbd7c5a52c1c19f027."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T135635Z--HCM-2-4--orchestration--administrative-root-status-synchronized.json",
+      "status": "completed",
+      "summary": "Parent-owned completed administrative root-status synchronization handoff."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-ADMIN-STATUS-D1",
+      "summary": "The root README now states current truth: P6 is accepted; P7 and HCM-2.4 are completed; and the exact HCM-2 Phase 2 exit is GREEN.",
+      "authority_effect": "This is an administrative synchronization only and does not reopen P7 implementation or proof.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/00-README.md",
+        "git:85e7a77ff00d05a26b74dc8378d88d18d133ffe4"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-ADMIN-STATUS-D2",
+      "summary": "HCM-RF-0001 and HCM-RF-0002 remain accepted P3 advisories; future task-gate runtime remains deferred.",
+      "authority_effect": "No advisory was reopened and no runtime or test correction authority was created.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-ADMIN-STATUS-D3",
+      "summary": "HCM-3.x, automatic continuation, release, push, and publication remain unauthorized.",
+      "authority_effect": "This completed administrative closeout selects no later slice and grants no implementation, release, publication, or remote-write authority.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/00-README.md",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "exact ledger/record/dispatch/commit reference and SHA-256 checks",
+      "status": "passed",
+      "evidence_ref": "one exact ledger entry resolved; record status/stop reason were completed; both commits existed; dispatch file SHA-256 matched the completed handoff; reviewed subject identities matched"
+    },
+    {
+      "command": "exact README diff and current-status claim inspection",
+      "status": "passed",
+      "evidence_ref": "one semantic file and exactly the three authorized current-status locations; every required fact present and the known stale claims absent"
+    },
+    {
+      "command": "strict UTF-8, relative Markdown-link existence, fence balance, and git diff --check",
+      "status": "passed",
+      "evidence_ref": "UTF-8 passed; all 12 relative links resolved; four fence markers balanced; whitespace checks exited 0"
+    },
+    {
+      "command": "validate_handoffs.py --verify-dispatch for the administrative review dispatch",
+      "status": "passed",
+      "evidence_ref": "v1.4 schema, causal budget, convergence, live manifest, and text whitespace checks passed for sha256:5e00d16c96235a79e09b5ac91f1cf375486479bb36ff7cbbd7c5a52c1c19f027"
+    },
+    {
+      "command": "fresh isolated administrative root-status review",
+      "status": "passed",
+      "evidence_ref": "/root/hcm_2_4_admin_status_review returned CLEAN with no P1-P4 findings and no missing in-scope verification"
+    },
+    {
+      "command": "GitNexus detect-changes --repo handbook --scope staged and compare-to-main attempt",
+      "status": "passed",
+      "evidence_ref": "staged detection reported no indexed code changes; compare-to-main exited on the existing FTS-extension-unavailable diagnostic and is not called GREEN"
+    },
+    {
+      "command": "protected-path SHA-256 and staged-exclusion audits before both commits",
+      "status": "passed",
+      "evidence_ref": "all nine protected paths matched their pre-work hashes, remained unstaged, and were excluded from both the primary subject and mechanical closeout"
+    },
+    {
+      "command": "validate_handoffs.py ordinary validation after deterministic ledger rebuild",
+      "status": "passed",
+      "evidence_ref": "5 record schemas, 5 internal-dispatch schemas, 2 templates, 74 records, 437 current internal dispatches, 8 admitted legacy dispatches, and 74 ledger entries passed"
+    },
+    {
+      "command": "validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "historical record/dispatch mutation and deletion scenarios were rejected and exact ledger rebuild scenarios passed"
+    },
+    {
+      "command": "validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "v1.4 causal contract and orchestration contract fail-closed scenarios passed"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Implementation authorization",
+        "Initial program conclusion HCM-2.4 summary"
+      ],
+      "reason": "Synchronize the three stale current-status statements with the completed P7 handoff and CLEAN dispatch.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T135635Z--HCM-2-4--orchestration--administrative-root-status-synchronized.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the parent-owned completed administrative status-sync closeout.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger from every canonical record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic continuation is authorized from this completed administrative root-status synchronization.",
+    "condition": "Only a new explicit operator selection under HCM-3.x or separately authorized task-gate/release/publication authority may begin later work.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T135635Z--HCM-2-4--orchestration--administrative-root-status-synchronized.json",
+        "sections": [
+          "entire completed administrative handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json",
+        "sections": [
+          "entire completed P7 handoff"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not continue automatically into HCM-3.x or future task-gate runtime.",
+      "Do not release, push, publish, or repair adjacent documentation without separate authority.",
+      "Do not reopen HCM-RF-0001 or HCM-RF-0002 or replay the accepted P7 proof wall."
+    ],
+    "acceptance_criteria": [
+      "The root README remains bound to the completed P7 handoff and CLEAN dispatch without broadening their authority.",
+      "The completed administrative handoff and deterministic ledger pass ordinary validation and both protocol self-tests.",
+      "All nine protected paths remain byte-identical, unstaged, and uncommitted; nothing is pushed."
+    ],
+    "stop_conditions": [
+      "Stop before HCM-3.x, task-gate runtime, automatic continuation, release, push, or publication without fresh explicit authority.",
+      "Stop if future work would reinterpret either accepted P3 advisory or broaden the exact Phase 2 exit."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Completed one administrative root-status synchronization at primary commit 85e7a77ff00d05a26b74dc8378d88d18d133ffe4. One fresh isolated review returned CLEAN with no findings. P6 is accepted; P7 and HCM-2.4 are completed; the exact HCM-2 Phase 2 exit is GREEN; both P3 advisories remain accepted. HCM-3.x, task-gate runtime, automatic continuation, release, push, and publication remain unauthorized."
+}
