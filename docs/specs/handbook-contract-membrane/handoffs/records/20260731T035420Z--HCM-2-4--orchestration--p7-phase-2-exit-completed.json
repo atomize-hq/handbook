@@ -1,0 +1,339 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed",
+  "created_at_utc": "2026-07-31T03:54:20Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "P7-phase-2-exit",
+  "orchestration_id": "20260731T033800Z--HCM-2-4--p7-final-review-restart-orchestration",
+  "source_handoff_ids": [
+    "20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-07-31T03:54:20Z",
+    "evidence_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "p7_final_review_restart_discovery",
+      "dispatch_id": "20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json",
+      "dispatch_fingerprint": "sha256:39654ae6fe677fa7514a60911dd9a8b1d940164e155e2d32e9bc74c980a81b07",
+      "role": "review",
+      "agent_id": "/root/p7_final_review_restart_discovery",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:831f5ffbb0b3f732dd394f13ba503a0a4bde1b200e980983ff056b33f3b03ef1",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json",
+        "git:6e7f4f222b594e401558e305b0f2d620f993d083"
+      ],
+      "result_subject_fingerprint": "sha256:831f5ffbb0b3f732dd394f13ba503a0a4bde1b200e980983ff056b33f3b03ef1"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-07-31T03:54:20Z",
+    "dispatch_count": 1,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:a5f7789c21162516bb4244ba4ce4b7d03eb1bbadb6db8bc19f8ac65501a0b1bb"
+    ],
+    "aggregate_fingerprint": "sha256:aca4c79945fe658afca68ff563c502fedb88f73e1d086ee0c256da4bf8219972"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "6e7f4f222b594e401558e305b0f2d620f993d083",
+    "subject_fingerprint": "sha256:831f5ffbb0b3f732dd394f13ba503a0a4bde1b200e980983ff056b33f3b03ef1",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json",
+      "git:6e7f4f222b594e401558e305b0f2d620f993d083"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json"
+  },
+  "active_resolution": {
+    "level": "phase-exit",
+    "scope_horizon": "completed HCM-2.4 P7 proof closeout and exact HCM-2 Phase 2 exit",
+    "detail_resolution": "all eight exit rows, complete P1A-P6 proof replay, real-path selected-profile behavior, retired-surface absence, accepted P3 dispositions, and repaired v1.4 review ownership",
+    "temporal_horizon": "landed P7 through a distinct fresh-parent CLEAN final_closeout discovery and two-commit true stop",
+    "authority_horizon": "P7, HCM-2.4, and exact HCM-2 Phase 2 exit completed; HCM-3.x, task-gate runtime, release, and push unauthorized",
+    "memory_horizon": "accepted P6 handoff, immutable old-parent FINDINGS dispatches as excluded historical context, lineage-repair decision, exact CLEAN subject, primary commit, and this completed handoff",
+    "validation_horizon": "CLEAN exact subject, positive proof for every exit row, strict repository walls, and schema-valid deterministic ledger closeout"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [
+      "project_context",
+      "project_authority",
+      "environment_context"
+    ],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-p7-final-review-lineage-repair.md"
+  },
+  "objective": "Complete only HCM-2.4 P7 by replaying the full Phase 2 proof wall, positively proving every exit row, repairing final-review ownership under a fresh causal parent, landing the reviewed control pack locally, and stopping before HCM-3.x.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed.json",
+      "sections": [
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-p7-final-review-lineage-repair.md",
+      "sections": [
+        "Context",
+        "Decision",
+        "Consequences"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "P7 — Phase 2 exit proof and control-pack closeout",
+        "Phase 2 exit map",
+        "Full implementation proof wall"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md",
+      "sections": [
+        "Exact Phase 2 exit mapping",
+        "Proof wall",
+        "Review and stop boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json",
+      "sections": [
+        "exact CLEAN reviewed subject"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "6e7f4f222b594e401558e305b0f2d620f993d083",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/ideas/intent-to-outcome-fidelity.md"
+    ]
+  },
+  "work_completed": [
+    "Selected P7 explicitly from the accepted P6 handoff and preserved every protected/user-owned path byte-for-byte, unstaged, and outside both commits.",
+    "Replayed every required P1A-P6 proof family, exact profile 1.1 acceptance and 1.2 compatibility, Project Authority negative-field/atomicity/recovery/immutable-record proofs, real-path selected-profile behavior, and all retired-surface absence walls.",
+    "Positively proved all eight exact Phase 2 exit rows and retained HCM-RF-0001 and HCM-RF-0002 as accepted P3 advisories; WSL 100/101 was neither called GREEN nor waived.",
+    "Recorded the HCM-P7-FR-0003 causal lineage repair without validator/schema relaxation. The old parent and its three byte-exact FINDINGS dispatches remain excluded historical context and are not this parent's delegated runs or acceptance evidence.",
+    "Created the distinct new parent, outcome registry, and parent-derived causal budget. Its only delegated run was a fresh isolated complete-subject review that returned CLEAN with no findings and no reused prior finding ID.",
+    "Ran formatting, strict workspace Clippy, focused and full workspace/all-features proof, feature-tree, package/archive, document, handoff, and GitNexus walls; committed the unchanged reviewed subject as 6e7f4f222b594e401558e305b0f2d620f993d083."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md",
+      "status": "completed",
+      "summary": "Complete P7 proof wall and exact eight-row Phase 2 exit mapping, including preserved P3 dispositions and true-stop boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-p7-final-review-lineage-repair.md",
+      "status": "completed",
+      "summary": "Durable authority decision for the distinct fresh review parent and exclusion of the unrepresentable old lineage."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json",
+      "status": "completed",
+      "summary": "Fresh-parent isolated CLEAN review of exact subject sha256:831f5ffbb0b3f732dd394f13ba503a0a4bde1b200e980983ff056b33f3b03ef1."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned completed P7, HCM-2.4, and exact Phase 2 true-stop handoff."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-P7-CLOSEOUT-D1",
+      "summary": "P7 and HCM-2.4 are completed, and every exact HCM-2 Phase 2 exit row is positively proved at primary commit 6e7f4f222b594e401558e305b0f2d620f993d083 and reviewed subject sha256:831f5ffbb0b3f732dd394f13ba503a0a4bde1b200e980983ff056b33f3b03ef1.",
+      "authority_effect": "Only the earned HCM-2 Phase 2 exit is accepted; no HCM-3.x, release, push, task-gate runtime, or automatic continuation is authorized.",
+      "refs": [
+        "git:6e7f4f222b594e401558e305b0f2d620f993d083",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P7-CLOSEOUT-D2",
+      "summary": "The new-parent population is exactly one CLEAN discovery dispatch under the distinct registry and budget; the old parent cannot truthfully own this completed v1.4 handoff.",
+      "authority_effect": "The three old-parent FINDINGS dispatches are immutable causal context only and are excluded from delegated_runs, dispatch_population, reviewed_state proof_refs, and acceptance evidence.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-p7-final-review-lineage-repair.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-P7-CLOSEOUT-D3",
+      "summary": "HCM-RF-0001 and HCM-RF-0002 remain durably inventoried accepted P3 advisories; the WSL 100/101 wording mismatch is disclosed rather than relabeled GREEN or waived.",
+      "authority_effect": "The advisories do not block the positively proved exit rows and receive no runtime/test correction authority in P7.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "complete P1A-P6 focused family replay and exact eight-row Phase 2 exit map",
+      "status": "passed",
+      "evidence_ref": "P7 proof record: every required per-family, compatibility, Project Authority, selected-profile, real-path, and retired-surface obligation is positively proved"
+    },
+    {
+      "command": "cargo test --workspace --all-features -j1",
+      "status": "passed",
+      "evidence_ref": "full native serial workspace/all-features wall completed with zero failures"
+    },
+    {
+      "command": "cargo clippy --workspace --all-targets --all-features -- -D warnings and cargo fmt --all -- --check",
+      "status": "passed",
+      "evidence_ref": "strict final Clippy and formatting checks exited 0 after the CLEAN review"
+    },
+    {
+      "command": "feature-tree, package/archive, document, and exact absence walls",
+      "status": "passed",
+      "evidence_ref": "locked feature resolution, package/archive contract, UTF-8/link/anchor/fence/secret checks, and twelve retired-surface terms all passed"
+    },
+    {
+      "command": "authorized WSL Ubuntu-24.04 P7 target inventory",
+      "status": "passed",
+      "evidence_ref": "all exit-contract targets are GREEN; WSL 100/101 remains an accepted, durably inventoried P3 wording mismatch and is not represented as GREEN or waived"
+    },
+    {
+      "command": "fresh isolated new-parent complete-subject review",
+      "status": "passed",
+      "evidence_ref": "subject sha256:831f5ffbb0b3f732dd394f13ba503a0a4bde1b200e980983ff056b33f3b03ef1 returned CLEAN with no findings; both accepted P3 advisories preserved"
+    },
+    {
+      "command": "validate_handoffs.py ordinary plus --self-test-v1-admission, --self-test-orchestration-contract, and --verify-dispatch",
+      "status": "passed",
+      "evidence_ref": "72-record/436-current-dispatch/72-ledger corpus and both fail-closed self-tests passed before the primary commit; exact new dispatch manifest replay passed"
+    },
+    {
+      "command": "GitNexus detect-changes --repo handbook --scope staged and required compare-to-main attempt",
+      "status": "passed",
+      "evidence_ref": "staged result: 13 documentation/control paths, 12 indexed symbols, zero affected processes, LOW risk; compare-to-main exited on the disclosed unavailable-FTS diagnostic and is not called GREEN"
+    },
+    {
+      "command": "protected-path hashes, staged exclusion, and no-push audit",
+      "status": "passed",
+      "evidence_ref": "all nine protected paths remained byte-identical and excluded; branch was 0 behind/16 ahead after the primary commit and nothing was pushed"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the parent-owned completed P7 and exact Phase 2 true-stop handoff.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger from every canonical record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic continuation is authorized from the completed HCM-2 Phase 2 true stop.",
+    "condition": "Only a new explicit operator selection under HCM-3.x authority may begin later work.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json",
+        "sections": [
+          "entire completed P7 handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/P7-phase-2-exit-closeout.md",
+        "sections": [
+          "Exact Phase 2 exit mapping",
+          "Review and stop boundary"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sections": [
+          "Inventory"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not continue automatically into HCM-3.x, future task-gate runtime, release, push, or any later phase.",
+      "Do not reinterpret the accepted P3 advisories as GREEN gates or waivers.",
+      "Do not reuse the old P7 parent, its finding ownership, or its three FINDINGS results as acceptance evidence."
+    ],
+    "acceptance_criteria": [
+      "P7, HCM-2.4, and the exact HCM-2 Phase 2 exit remain bound to primary commit 6e7f4f222b594e401558e305b0f2d620f993d083 and reviewed subject sha256:831f5ffbb0b3f732dd394f13ba503a0a4bde1b200e980983ff056b33f3b03ef1.",
+      "The completed v1.4 handoff reconciles exactly one new-parent dispatch and excludes all old-parent dispatches from its delegated-run population.",
+      "The handoff and deterministically rebuilt ledger pass ordinary validation and both supported self-tests.",
+      "Protected/user-owned paths remain byte-identical, unstaged, and uncommitted; nothing is pushed."
+    ],
+    "stop_conditions": [
+      "Stop before HCM-3.x unless a fresh explicit operator selection supplies its authority.",
+      "Stop before task-gate runtime, release, or push without separate authority.",
+      "Stop if any future action would broaden the exact Phase 2 exit or weaken the two accepted P3 dispositions."
+    ]
+  },
+  "supersedes": [
+    "20260731T005606Z--HCM-2-4--orchestration--p6-final-review-completed"
+  ],
+  "chat_summary": "HCM-2.4 P7 and the exact HCM-2 Phase 2 exit are completed at primary commit 6e7f4f222b594e401558e305b0f2d620f993d083 with CLEAN reviewed subject sha256:831f5ffbb0b3f732dd394f13ba503a0a4bde1b200e980983ff056b33f3b03ef1. The completed handoff reconciles only the fresh parent's single CLEAN dispatch; the three old-parent FINDINGS dispatches are immutable excluded historical context. HCM-RF-0001 and HCM-RF-0002 remain accepted P3 advisories. HCM-3.x, task-gate runtime, automatic continuation, release, and push remain unauthorized."
+}
