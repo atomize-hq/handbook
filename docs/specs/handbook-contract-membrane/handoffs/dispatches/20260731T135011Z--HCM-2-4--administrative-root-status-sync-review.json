@@ -1,0 +1,201 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260731T135011Z--HCM-2-4--administrative-root-status-sync-review",
+  "created_at_utc": "2026-07-31T13:50:11Z",
+  "source_handoff_ids": [
+    "20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed"
+  ],
+  "parent_orchestration_id": "20260731T135002Z--HCM-2-4--administrative-status-sync-orchestration",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": null,
+  "subject_fingerprint": "sha256:5e00d16c96235a79e09b5ac91f1cf375486479bb36ff7cbbd7c5a52c1c19f027",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "administrative-root-status-sync-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-31T13:50:02Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-administrative-root-status-sync",
+        "packet_ids": [
+          null
+        ],
+        "authority_ref": "operator-authorized HCM-2.4 administrative root-status synchronization after completed P7 closeout"
+      }
+    ],
+    "fingerprint": "sha256:7150878b16a01a37839c1a77bcb1b218a31442d11aea6a68467981139a2a6ba4"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:94d5ac3ada93efb1a17d2f9c67eac53490bf270215cffb2c50d137e13712bd3f",
+    "integrated_outcome_id": "hcm-2.4-administrative-root-status-sync",
+    "outcome_registry_fingerprint": "sha256:7150878b16a01a37839c1a77bcb1b218a31442d11aea6a68467981139a2a6ba4",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "administrative-root-status-sync-convergence-1",
+    "completed_at_utc": "2026-07-31T13:50:10Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "inspect the exact README diff; verify both authoritative commits, the completed handoff, and the CLEAN dispatch; check required and stale current-status claims",
+        "evidence_ref": "parent pre-review output: one README file, three authorized hunks, all references present, required claims present, and known stale claims absent"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "git diff --name-only plus documentation-only scope audit",
+        "evidence_ref": "the semantic subject is only docs/specs/handbook-contract-membrane/00-README.md; no fixture, runtime, test, schema, definition, Cargo, or consumer surface is applicable"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the one-entry repo-path-NUL-SHA256-newline manifest",
+        "evidence_ref": "subject_manifest below: sha256:5e00d16c96235a79e09b5ac91f1cf375486479bb36ff7cbbd7c5a52c1c19f027"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode, relative Markdown-link existence check, and Markdown-fence balance check for 00-README.md",
+        "evidence_ref": "UTF-8 passed; 12 links resolve; four fence markers balance"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent pre-review git diff --check exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "42b330c6771e0ddc2d2c96018bdacf9ba19e758dd6abcfafc7a408d6a595ebaa"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:5e00d16c96235a79e09b5ac91f1cf375486479bb36ff7cbbd7c5a52c1c19f027"
+  },
+  "active_resolution": {
+    "level": "administrative-root-status-synchronization",
+    "scope_horizon": "one current-status synchronization after completed HCM-2.4 P7 and exact HCM-2 Phase 2 exit",
+    "detail_resolution": "three known stale current-status claims in 00-README.md only",
+    "temporal_horizon": "post-P7 closeout at e83b0c883b3807a88cc6a31f093508143ecfce31",
+    "authority_horizon": "README status truth only; no P7 replay, adjacent repair, HCM-3.x, task-gate runtime, release, push, or publication authority",
+    "memory_horizon": "completed P7 handoff, immutable CLEAN dispatch, exact reviewed subject, and final README bytes",
+    "validation_horizon": "consistency, stale-claim removal, stop-boundary preservation, and absence of unrelated README rewriting"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json",
+      "sections": [
+        "active_resolution",
+        "decisions",
+        "resume",
+        "chat_summary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T034000Z--HCM-2-4--p7-final-review-restart-discovery.json",
+      "sections": [
+        "exact CLEAN reviewed subject",
+        "contracts_and_gates"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "Status",
+        "Implementation authorization",
+        "Initial program conclusion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Inventory"
+      ]
+    }
+  ],
+  "repo_truth": "HEAD e83b0c883b3807a88cc6a31f093508143ecfce31 contains the completed P7 handoff. P7 primary commit 6e7f4f222b594e401558e305b0f2d620f993d083 and reviewed subject sha256:831f5ffbb0b3f732dd394f13ba503a0a4bde1b200e980983ff056b33f3b03ef1 are authoritative. The named dispatch returned CLEAN, P6 is accepted, P7 and HCM-2.4 are completed, and the exact HCM-2 Phase 2 exit is GREEN. HCM-RF-0001 and HCM-RF-0002 remain accepted P3 advisories. Future task-gate runtime, HCM-3.x, automatic continuation, release, push, and publication remain unauthorized. The review subject changes only the three named current-status locations in 00-README.md.",
+  "allowed_scope": [
+    "Read only the final bytes and exact diff of docs/specs/handbook-contract-membrane/00-README.md.",
+    "Check consistency with the completed P7 handoff and CLEAN dispatch, removal of the three known stale current-status claims, preservation of the stop boundary, and absence of unrelated README rewriting.",
+    "Return CLEAN only when there is no valid P1/P2; report genuine P3/P4 only if introduced by this one-file change."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff or ledger entry, delegate, or repair adjacent documentation.",
+    "Do not replay P1A-P7 proof, workspace tests, Clippy, WSL, package archives, runtime tests, or GitNexus indexing.",
+    "Do not reopen HCM-RF-0001 or HCM-RF-0002, select HCM-3.x, authorize task-gate runtime, release, push, or publication."
+  ],
+  "tasks": [
+    "Identify findings independently, ordered Critical, Required, Optional, Nit, against only the exact four review checks.",
+    "Verify that the three authorized README locations state P6 accepted; P7 and HCM-2.4 completed; exact HCM-2 Phase 2 exit GREEN; both accepted P3 advisories retained; future task-gate deferred; and every stop boundary retained.",
+    "Verify the diff contains no unrelated README rewrite and return a structured CLEAN or FINDINGS verdict for subject sha256:5e00d16c96235a79e09b5ac91f1cf375486479bb36ff7cbbd7c5a52c1c19f027."
+  ],
+  "contracts_and_gates": [
+    "The completed P7 handoff and CLEAN dispatch are immutable authority inputs; review does not replay their proof wall.",
+    "No unresolved valid P1/P2 may enter the primary status-sync commit.",
+    "The reviewed semantic subject is exactly one file and three current-status locations; the dispatch is immutable review evidence, not part of its fingerprint.",
+    "HCM-3.x, automatic continuation, future task-gate runtime, release, push, and publication remain unauthorized."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if any required status fact or stop boundary is absent, contradicted, or overstated.",
+    "Return FINDINGS if the README diff rewrites unrelated text or if correction would require a semantic edit outside 00-README.md.",
+    "Report rather than repair every finding; do not request proof-wall replay or runtime/test changes."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
