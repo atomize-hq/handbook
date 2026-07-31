@@ -1,0 +1,221 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review",
+  "created_at_utc": "2026-07-31T18:31:20Z",
+  "source_handoff_ids": [
+    "20260731T135635Z--HCM-2-4--orchestration--administrative-root-status-synchronized"
+  ],
+  "parent_orchestration_id": "20260731T182849Z--HCM-2-4--post-phase-2-smoke-repair",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "20260731-post-phase-2-smoke-repair-selector",
+  "subject_fingerprint": "sha256:c49d008af6e15c3822fa19435ccab1255b77bc61b73969d7c8ae04399204eed5",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "post-phase-2-smoke-repair-planning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-31T18:28:49Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+        "packet_ids": [
+          "20260731-post-phase-2-smoke-repair-selector"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:27a404e0d9edf04c02a1aa0ac67180c2c341c6e05701267c29d2c19635243e47",
+    "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+    "outcome_registry_fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "post-phase-2-smoke-repair-planning-convergence-1",
+    "completed_at_utc": "2026-07-31T18:31:10Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "verify live branch/HEAD and protected hashes; reproduce setup, inspect, generate, doctor, artifact JSON, Project Context, generic listing, and pipeline observations in disposable repositories; inspect the exact selector diff",
+        "evidence_ref": "parent pre-review output: expected branch and 55d220a9 HEAD; nine protected hashes recorded; SMOKE-ROOT-LOOP reproduced; HCM-2.3 JSON authority adjudicated; selected manual paths replayed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "rg -n 'hcm_2_3_generic_custom_kind|runtime_smoke_valid|pipeline_proof_corpus|post_phase_2_closed_intake_smoke' crates/cli/tests crates/engine/tests tools/fixtures docs/specs/handbook-contract-membrane/slices/HCM-2.4",
+        "evidence_ref": "parent inventory confirms active generic, Project Context, Charter, and pipeline consumers and that the proposed dedicated Charter fixture does not yet exist"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the one-entry repo-path-NUL-SHA256-newline manifest for the selector",
+        "evidence_ref": "subject manifest below; selector sha256 59b5d77e5c8bb98eb2275333277919c703510a2ce6afc3583f3abd3c00ba6f0f; aggregate sha256:c49d008af6e15c3822fa19435ccab1255b77bc61b73969d7c8ae04399204eed5"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode and Markdown fence-balance check for the selector",
+        "evidence_ref": "strict UTF-8 passed; 222 lines; two fence markers balance"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+        "evidence_ref": "parent pre-review command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+        "sha256": "59b5d77e5c8bb98eb2275333277919c703510a2ce6afc3583f3abd3c00ba6f0f"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:c49d008af6e15c3822fa19435ccab1255b77bc61b73969d7c8ae04399204eed5"
+  },
+  "active_resolution": {
+    "level": "HCM-2.4 post-exit corrective selector",
+    "scope_horizon": "one setup-root repair, one explicit JSON adjudication, and one disposable manual smoke journey",
+    "detail_resolution": "exact state matrix, mechanism comparison, two production paths, five ancillary paths, acceptance wall, review stages, and stop ceilings",
+    "temporal_horizon": "new post-Phase-2 correction after immutable P7 completion and administrative status sync",
+    "authority_horizon": "HCM-2.4 correction only; no HCM-3.x, public JSON protocol, SDK/transport, native adapter, release, push, or historical rewrite",
+    "memory_horizon": "live HEAD reproduction, selected source handoff, active HCM-2.3/HCM-2.4 contracts, and this new parent registry",
+    "validation_horizon": "selector sufficiency before RED tests or production edits"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "sections": [
+        "Selection identity",
+        "A. Setup and packet decision",
+        "B. Artifact --json adjudication",
+        "C. Minimal manual smoke journey",
+        "D. Exact scope ceiling",
+        "Acceptance contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "HCM-2.3 CLI command surface and local JSON fixture boundary",
+        "HCM-2.4 scope and negative boundaries"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-2.4 — Remaining shipped artifact families",
+        "Phase 2 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-2.4 completed evidence boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Causal cascading review hardening"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric"
+      ]
+    }
+  ],
+  "repo_truth": "At live HEAD 55d220a9, setup creates a safe repository identity but canonical scaffold detection recognizes only selected artifact paths, so inspect/generate incorrectly return SystemRootMissing/RunSetup until canonical content exists. The current HCM-2.3 contract has no exact CLI-local pre-establishment JSON error envelope. Generic listing succeeds with explicit selection plus identity. Project Context validation succeeds and Windows mutation refuses safely. The formal P7/Phase 2 exit remains completed immutable evidence.",
+  "allowed_scope": [
+    "Review the selector as a complete acceptance and authority contract; do not edit it.",
+    "Check that operational-root recognition is smaller and safer than namespace mutation or new status/public surfaces, and that every negative legacy/unsafe/content-nonauthoring boundary is explicit.",
+    "Check the HCM-2.3 JSON adjudication against active contract/tests and flag any claimed authority or missing required behavior.",
+    "Check that the exact proposed source/test/fixture/help paths, ancillary line ceiling, manual journeys, proof wall, review lineage, and stop rules are sufficient and internally consistent."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger entry, delegate, or implement the repair.",
+    "Do not reopen P7/Phase 2 exit evidence, select HCM-3.x, define a public JSON/DTO/schema protocol, generate profile selection, widen platform authority, or modernize historical fixtures.",
+    "Do not review production code as an implementation subject; this stage reviews only selector sufficiency."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit, with unique run-local IDs and exact selector/authority evidence.",
+    "Verify the selector freezes the required state table, compares all three mechanisms, selects a minimal owner-safe mechanism, preserves setup non-authoring/non-Git/legacy/unsafe behavior, and provides testable acceptance criteria.",
+    "Verify the JSON deferral is supported by the active HCM-2.3 contract/tests and does not conceal a required typed CLI-local shape.",
+    "Verify the exact path/line ceiling can carry the named RED/GREEN and manual journeys without fixture or authority gaps.",
+    "Return CLEAN only if no valid P1/P2 finding remains for subject sha256:c49d008af6e15c3822fa19435ccab1255b77bc61b73969d7c8ae04399204eed5."
+  ],
+  "contracts_and_gates": [
+    "Production edits are forbidden until this planning stage is independently CLEAN.",
+    "One planning discovery lineage is permitted; FINDINGS trigger consolidated parent remediation and different-fresh closure under this same parent/budget.",
+    "Each newly emitted finding receives a unique run-local ID; predecessor IDs may appear only as closure triggers.",
+    "The immutable P7/Phase 2 exit record remains completed; this selector can authorize only a separate post-exit HCM-2.4 correction.",
+    "No unresolved valid P1/P2 may proceed to RED tests or implementation."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repairing if the selector is ambiguous, overbroad, untestable, conflicts with current authority, or omits a mandatory negative boundary.",
+    "Return FINDINGS if the JSON conclusion needs an exact typed shape under current HCM-2.3 authority or if the manual journey cannot be delivered within the frozen ceiling.",
+    "Report any broader-authority or causal-budget concern to the parent; do not create work or authority outside this dispatch."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

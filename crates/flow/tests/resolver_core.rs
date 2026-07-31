@@ -187,6 +187,51 @@ fn flow_resolver_prioritizes_system_root_missing_over_live_execution_refusal() {
     assert_eq!(refusal.category, ResolverRefusalCategory::SystemRootMissing);
 }
 
+#[test]
+fn missing_artifacts_in_established_root_use_author_actions() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    std::fs::create_dir(dir.path().join(".handbook")).expect("system root");
+    handbook_engine::RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup(dir.path())
+        .expect("setup identity");
+
+    let result = resolve(dir.path(), ResolveRequest::default()).expect("resolve");
+    let refusal = result.refusal.expect("missing Charter refusal");
+    assert_eq!(
+        refusal.category,
+        ResolverRefusalCategory::RequiredArtifactInvalid
+    );
+    assert!(refusal.summary.contains("required_path_missing"));
+    assert_eq!(
+        refusal.next_safe_action,
+        ResolverNextSafeAction::RunAuthorCharter
+    );
+    assert!(result.blockers.iter().any(|blocker| {
+        matches!(
+            (&blocker.subject, &blocker.next_safe_action),
+            (
+                ResolverSubjectRef::CanonicalArtifact { instance_id, .. },
+                ResolverNextSafeAction::RunAuthorCharter
+            ) if instance_id == "project_authority"
+        )
+    }));
+    assert!(result.blockers.iter().any(|blocker| {
+        matches!(
+            (&blocker.subject, &blocker.next_safe_action),
+            (
+                ResolverSubjectRef::CanonicalArtifact { instance_id, .. },
+                ResolverNextSafeAction::RunAuthorProjectContext
+            ) if instance_id == "project_context"
+        )
+    }));
+    assert!(result.blockers.iter().all(|blocker| {
+        !matches!(
+            blocker.next_safe_action,
+            ResolverNextSafeAction::RunSetup | ResolverNextSafeAction::RunSetupRefresh
+        )
+    }));
+}
+
 #[cfg(unix)]
 #[test]
 fn selected_project_context_alone_establishes_the_canonical_root() {
@@ -227,12 +272,15 @@ fn selected_project_context_alone_establishes_the_canonical_root() {
     }));
 }
 
-#[cfg(unix)]
 #[test]
-fn retired_project_context_alone_does_not_establish_the_canonical_root() {
+fn legacy_markdown_tree_does_not_establish_or_influence_the_canonical_root() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
+    write_file(
+        &root.join(".handbook/charter/CHARTER.md"),
+        b"legacy Charter truth",
+    );
     write_file(
         &root.join(".handbook/project_context/PROJECT_CONTEXT.md"),
         b"retired editable Project Context truth",
@@ -243,10 +291,10 @@ fn retired_project_context_alone_does_not_establish_the_canonical_root() {
 
     assert_eq!(refusal.category, ResolverRefusalCategory::SystemRootMissing);
     assert_eq!(refusal.next_safe_action, ResolverNextSafeAction::RunSetup);
-    assert!(result
-        .decision_log_entries
-        .iter()
-        .all(|entry| !entry.contains(".handbook/project_context/PROJECT_CONTEXT.md")));
+    assert!(result.decision_log_entries.iter().all(|entry| {
+        !entry.contains(".handbook/charter/CHARTER.md")
+            && !entry.contains(".handbook/project_context/PROJECT_CONTEXT.md")
+    }));
 }
 
 #[cfg(unix)]

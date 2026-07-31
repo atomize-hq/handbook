@@ -1,6 +1,7 @@
 use handbook_engine::{
     ArtifactIngestError, ArtifactIngestIssueKind, ArtifactPresence, CanonicalArtifact,
-    CanonicalArtifacts, CanonicalLayoutContract, SystemRootStatus, MAX_SOURCE_DOCUMENT_BYTES,
+    CanonicalArtifacts, CanonicalLayoutContract, RepositoryInvocationIdentityServiceV1,
+    SystemRootStatus, MAX_SOURCE_DOCUMENT_BYTES,
 };
 
 fn write_file(path: &std::path::Path, contents: &[u8]) {
@@ -240,6 +241,45 @@ fn runtime_only_state_does_not_establish_system_root() {
 }
 
 #[test]
+fn setup_identity_establishes_operational_root_without_authoring_content() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let repo_root = dir.path();
+    std::fs::create_dir(repo_root.join(".handbook")).expect("system root");
+    RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup(repo_root)
+        .expect("setup identity");
+
+    let artifacts = CanonicalArtifacts::load(repo_root).expect("load");
+    assert_eq!(artifacts.system_root_status, SystemRootStatus::Ok);
+    assert!(artifacts
+        .artifacts
+        .iter()
+        .all(|artifact| artifact.identity.presence == ArtifactPresence::Missing));
+    for forbidden in [
+        ".handbook/project/charter.yaml",
+        ".handbook/project/context.yaml",
+        ".handbook/project/environment.yaml",
+        ".handbook/profile-selection.json",
+    ] {
+        assert!(
+            !repo_root.join(forbidden).exists(),
+            "unexpected {forbidden}"
+        );
+    }
+}
+
+#[test]
+fn malformed_identity_cannot_establish_operational_root() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    write_file(
+        &dir.path().join(".handbook/repository-identity.v1"),
+        b"sha256:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    );
+
+    assert!(CanonicalArtifacts::load(dir.path()).is_err());
+}
+
+#[test]
 fn system_root_error_display_is_contract_neutral() {
     let system_root = std::path::PathBuf::from(".custom_handbook");
     assert_eq!(
@@ -276,9 +316,19 @@ fn selected_descriptor_namespace_establishes_partial_canonical_root() {
 }
 
 #[test]
-fn retired_project_context_namespace_does_not_establish_canonical_root() {
+fn legacy_markdown_namespaces_do_not_establish_canonical_root() {
     let dir = tempfile::tempdir().expect("tempdir");
+    std::fs::create_dir_all(dir.path().join(".handbook/charter")).expect("mkdirs");
     std::fs::create_dir_all(dir.path().join(".handbook/project_context")).expect("mkdirs");
+    write_file(
+        &dir.path().join(".handbook/charter/CHARTER.md"),
+        b"legacy Charter truth",
+    );
+    write_file(
+        &dir.path()
+            .join(".handbook/project_context/PROJECT_CONTEXT.md"),
+        b"retired Project Context truth",
+    );
 
     let artifacts = CanonicalArtifacts::load(dir.path()).expect("load");
     assert_eq!(artifacts.system_root_status, SystemRootStatus::Missing);

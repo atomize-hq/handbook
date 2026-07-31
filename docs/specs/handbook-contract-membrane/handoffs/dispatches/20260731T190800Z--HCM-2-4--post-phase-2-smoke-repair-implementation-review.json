@@ -1,0 +1,271 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review",
+  "created_at_utc": "2026-07-31T19:08:00Z",
+  "source_handoff_ids": [
+    "20260731T135635Z--HCM-2-4--orchestration--administrative-root-status-synchronized"
+  ],
+  "parent_orchestration_id": "20260731T182849Z--HCM-2-4--post-phase-2-smoke-repair",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "debugging-and-error-recovery",
+    "test-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "20260731-post-phase-2-smoke-repair-selector",
+  "subject_fingerprint": "sha256:a95fd80dfc55b68fa968ece970a9f09cbec4c8937f206d290257fda141ccc34d",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "post-phase-2-smoke-repair-implementation-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-31T18:28:49Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+        "packet_ids": [
+          "20260731-post-phase-2-smoke-repair-selector"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:27a404e0d9edf04c02a1aa0ac67180c2c341c6e05701267c29d2c19635243e47",
+    "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+    "outcome_registry_fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "post-phase-2-smoke-repair-implementation-convergence-1",
+    "completed_at_utc": "2026-07-31T19:07:50Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run focused engine canonical/identity/manifest tests; full flow tests; compiler canonical/manifest/resolver/setup/doctor tests; Charter product tests; generic artifact CLI tests; manual fixture tests; new setup/runbook tests; full 96-test CLI surface; strict four-package all-target/all-feature Clippy",
+        "evidence_ref": "parent outputs: engine 17+6+5 passed; flow 23 passed; compiler 29 focused passed; Charter 8 passed; artifact 8 passed; fixture 2 passed; setup/runbook 2 passed; CLI surface 96 passed; strict Clippy passed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory every consumer of planning_ready_repo, hcm_2_3_generic_custom_kind, runtime_smoke_valid, pipeline_proof_corpus, repository identity, canonical root status, and missing-artifact next actions",
+        "evidence_ref": "parent inventory confirms no fixture rewrite, no new fixture, exactly four production and four ancillary paths, and 299 ancillary changed lines"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted 11-entry repo-path-NUL-SHA256-newline implementation manifest",
+        "evidence_ref": "subject manifest below; aggregate sha256:a95fd80dfc55b68fa968ece970a9f09cbec4c8937f206d290257fda141ccc34d"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent command exited 0 after the complete focused wall"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "bounded_test_support",
+    "risk_ceiling": "test_proof_only",
+    "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+    "max_paths": 3,
+    "max_changed_lines": 165,
+    "entries": [
+      {
+        "path": "crates/cli/tests/setup_cli.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 78
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 42
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 45
+      }
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/setup_cli.rs",
+        "sha256": "2b6ea2264f22d74f0d2f032fa936362e967e558b7123f209b527ed4249984a15"
+      },
+      {
+        "path": "crates/compiler/src/blocker.rs",
+        "sha256": "b68f7428a289da634248794c27f13f6894f1b902e3c07cf161392c65af3cdc8c"
+      },
+      {
+        "path": "crates/engine/src/canonical_artifacts.rs",
+        "sha256": "340483d3940c2441bacaaeee5b7fd6d59962c70648d34305d4d542cfeda348e1"
+      },
+      {
+        "path": "crates/engine/src/repository_invocation_identity.rs",
+        "sha256": "7dd5d39c3a3861bfa419883aafd3f7f697f634f03fa0a5a23db32ecd83a6be3b"
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "sha256": "63c45fc9477df36ca8a4d56fb659ff2d0927d619088b1233e37c874935d6e04e"
+      },
+      {
+        "path": "crates/flow/src/resolver.rs",
+        "sha256": "6fcb0a46b5565721b3c6395a982d402cf36625dc5cbf82aa22c6beb89cec0857"
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "sha256": "e0b2134f65230aac61a57b97bedac514c66111313d9bdc0d37797b93bf9a7a02"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json",
+        "sha256": "c922403ce696765bfa13353d29f2ee6c618d68aa52a9163b264af4c55adefab7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json",
+        "sha256": "4c8b2ffff5178c6be0f0e46f3c9f91c41202ee546f8f6e7c698bc2f4ea5baf15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+        "sha256": "5df0f3da46cfc962befcd2d5a940803b39703e2c4df70455edb195083dd3ccea"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/post-phase-2-smoke-runbook.md",
+        "sha256": "c702765e58c74aed0d6e5696ce8f55aee4aaccea6f0198afda82fea7b9682e61"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:a95fd80dfc55b68fa968ece970a9f09cbec4c8937f206d290257fda141ccc34d"
+  },
+  "active_resolution": {
+    "level": "HCM-2.4 post-exit smoke-repair implementation",
+    "scope_horizon": "safe setup-identity root recognition, missing-artifact author/fill actions, focused tests, and disposable smoke runbook",
+    "detail_resolution": "four production paths, three Rust test paths, one runbook, selector, and immutable planning lineage",
+    "temporal_horizon": "implementation stage after CLEAN planning closure and before proof/control-pack closeout",
+    "authority_horizon": "selector-bounded HCM-2.4 correction only; no JSON protocol, profile-selection synthesis, native/platform widening, HCM-3.x, release, or push",
+    "memory_horizon": "RED outputs, GREEN focused/proportional wall, exact source diffs, planning findings/closure, and runbook bytes",
+    "validation_horizon": "runtime correctness, failure safety, negative legacy/unsafe boundaries, test quality, and scope discipline"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "sections": [
+        "A. Setup and packet decision",
+        "B. Artifact --json adjudication",
+        "C. Minimal manual smoke journey",
+        "D. Exact scope ceiling",
+        "Acceptance contract",
+        "Planning-finding remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json",
+      "sections": [
+        "CLEAN planning closure subject and contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "HCM-2.3 CLI/local JSON boundary",
+        "HCM-2.4 negative authority boundaries"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Causal cascading review hardening"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric"
+      ]
+    }
+  ],
+  "repo_truth": "The implementation makes the default canonical root operational when the existing strict reader validates setup-created repository identity, while malformed/unsafe identity fails closed and non-default layout behavior stays unchanged. Missing-artifact flow/compiler branches use the existing instance-aware author/fill selector. Setup remains content-non-authoring and does not create profile selection. No artifact JSON runtime, public API/schema, Cargo/dependency, fixture, native adapter, or HCM-3.x change exists. All declared focused/proportional verification is GREEN.",
+  "allowed_scope": [
+    "Review every byte in the exact 11-entry subject and the corresponding diffs against HEAD.",
+    "Trace safe identity recognition through canonical ingestion, manifest/baseline validation, flow refusal/blocker selection, compiler equivalent actions, and CLI inspect/generate behavior.",
+    "Check absent/default/custom/unsafe/symlink/non-directory/legacy states, content non-authoring, missing selection/identity refusal, and JSON deferral for regressions or authority widening.",
+    "Assess tests and runbook for false positives, platform assumptions, source-checkout mutation, and complete selector acceptance coverage."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create dispatches, write handoffs/ledger, delegate, or remediate findings.",
+    "Do not define typed pre-establishment JSON, generate profile selection/content, widen Windows/native authority, rewrite fixtures/history, select HCM-3.x, release, or push.",
+    "Do not review future proof/control-pack text that is not in this implementation subject."
+  ],
+  "tasks": [
+    "Return findings first in Critical/Required/Optional/Nit order with new unique run-local IDs and exact file/line evidence.",
+    "Review root establishment and unsafe-state handling for fail-open, trust-boundary, custom-layout, path/symlink, registry-identity, and error-projection defects.",
+    "Review every missing-artifact action replacement and prove true root absence/read failures still select setup/refresh while known artifacts select author/fill.",
+    "Review the RED/GREEN tests and runbook against all selector acceptance rows and the declared 299-line ancillary ceiling.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:a95fd80dfc55b68fa968ece970a9f09cbec4c8937f206d290257fda141ccc34d."
+  ],
+  "contracts_and_gates": [
+    "This is the sole implementation discovery lineage; FINDINGS require consolidated parent remediation and a different-fresh closure under the same parent/budget.",
+    "Every newly emitted finding must have a new run-local ID; no planning finding ID may be reused.",
+    "No primary commit occurs until implementation and final complete-subject review stages are CLEAN.",
+    "The formal P7/Phase 2 exit remains immutable completed evidence; this review can accept only the separate post-exit correction.",
+    "No HCM-3.x, typed JSON protocol, SDK/transport, profile-selection synthesis, native/platform widening, release, or push authority exists."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if identity recognition can be forged into content truth, bypass committed Charter authority, affect custom layouts, or fail open on unsafe state.",
+    "Return FINDINGS if any setup-created root path still retries setup, any truly absent/unsafe root loses setup guidance, or any missing known artifact retains setup-refresh guidance.",
+    "Return FINDINGS if tests/runbook overclaim proof, mutate the source checkout, omit a selected negative boundary, or exceed the frozen ceiling.",
+    "Report rather than repair every issue; broader authority belongs to the parent."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -803,7 +803,7 @@ fn is_repository_identity_fingerprint(value: &str) -> bool {
             .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(byte))
 }
 
-fn read_repository_identity(
+pub(crate) fn read_repository_identity(
     repo_root: &Path,
 ) -> Result<Option<String>, RepositoryIdentitySetupErrorV1> {
     let workspace = CanonicalWorkspace::new(repo_root);

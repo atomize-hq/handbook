@@ -471,6 +471,64 @@ fn build_baseline_blockers(
     blockers
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn missing_validation(
+        instance_id: &str,
+        kind_ref: &str,
+        canonical_repo_relative_path: &str,
+    ) -> BaselineArtifactValidation {
+        BaselineArtifactValidation {
+            instance_id: instance_id.to_owned(),
+            kind_ref: kind_ref.to_owned(),
+            label: instance_id.to_owned(),
+            canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
+            packet_required: true,
+            verdict: BaselineArtifactVerdict::Missing,
+        }
+    }
+
+    #[test]
+    fn missing_baseline_truth_uses_instance_aware_author_actions() {
+        let validations = vec![
+            missing_validation(
+                "project_authority",
+                "handbook.artifact-kind.project-authority@1.1.0",
+                ".handbook/project/charter.yaml",
+            ),
+            missing_validation(
+                "project_context",
+                "handbook.artifact-kind.project-context@1.1.0",
+                ".handbook/project/context.yaml",
+            ),
+        ];
+        let mut blockers = Vec::new();
+
+        push_baseline_truth_blockers(
+            &mut blockers,
+            &validations,
+            BaselineBlockerScope::AllBaseline,
+        );
+        let refusal = refusal_for_required_baseline_truth(&validations).expect("refusal");
+
+        assert_eq!(blockers.len(), 2);
+        assert_eq!(
+            blockers[0].next_safe_action,
+            ResolverNextSafeAction::RunAuthorCharter
+        );
+        assert_eq!(
+            blockers[1].next_safe_action,
+            ResolverNextSafeAction::RunAuthorProjectContext
+        );
+        assert_eq!(
+            refusal.next_safe_action,
+            ResolverNextSafeAction::RunAuthorCharter
+        );
+    }
+}
+
 fn push_baseline_truth_blockers(
     blockers: &mut Vec<ResolverBlocker>,
     baseline_validations: &[BaselineArtifactValidation],
@@ -487,7 +545,11 @@ fn push_baseline_truth_blockers(
                 validation.kind_ref.as_str(),
                 validation.label.as_str(),
                 validation.canonical_repo_relative_path.as_str(),
-                ResolverNextSafeAction::RunSetupRefresh,
+                author_or_fill_next_safe_action(
+                    validation.instance_id.as_str(),
+                    validation.kind_ref.as_str(),
+                    validation.canonical_repo_relative_path.as_str(),
+                ),
             )),
             BaselineArtifactVerdict::Empty => Some(required_artifact_blocker(
                 ResolverBlockerCategory::RequiredArtifactEmpty,
@@ -1523,7 +1585,11 @@ fn refusal_for_required_baseline_truth(
                 validation.kind_ref.as_str(),
                 validation.label.as_str(),
                 validation.canonical_repo_relative_path.as_str(),
-                ResolverNextSafeAction::RunSetupRefresh,
+                author_or_fill_next_safe_action(
+                    validation.instance_id.as_str(),
+                    validation.kind_ref.as_str(),
+                    validation.canonical_repo_relative_path.as_str(),
+                ),
             )),
             BaselineArtifactVerdict::Empty => Some(required_artifact_refusal(
                 ResolverRefusalCategory::RequiredArtifactEmpty,
@@ -1645,7 +1711,11 @@ fn compute_refusal(
                     artifact.kind_ref.as_str(),
                     artifact.label.as_str(),
                     artifact.relative_path.as_str(),
-                    ResolverNextSafeAction::RunSetupRefresh,
+                    author_or_fill_next_safe_action(
+                        artifact.instance_id.as_str(),
+                        artifact.kind_ref.as_str(),
+                        artifact.relative_path.as_str(),
+                    ),
                 ));
             }
             ArtifactPresence::PresentEmpty => {
@@ -1847,7 +1917,11 @@ fn compute_blockers(
                     artifact.kind_ref.as_str(),
                     artifact.label.as_str(),
                     artifact.relative_path.as_str(),
-                    ResolverNextSafeAction::RunSetupRefresh,
+                    author_or_fill_next_safe_action(
+                        artifact.instance_id.as_str(),
+                        artifact.kind_ref.as_str(),
+                        artifact.relative_path.as_str(),
+                    ),
                 )),
                 ArtifactPresence::PresentEmpty => blockers.push(required_artifact_blocker(
                     ResolverBlockerCategory::RequiredArtifactEmpty,

@@ -1,0 +1,217 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure",
+  "created_at_utc": "2026-07-31T18:45:04Z",
+  "source_handoff_ids": [
+    "20260731T135635Z--HCM-2-4--orchestration--administrative-root-status-synchronized"
+  ],
+  "parent_orchestration_id": "20260731T182849Z--HCM-2-4--post-phase-2-smoke-repair",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "20260731-post-phase-2-smoke-repair-selector",
+  "subject_fingerprint": "sha256:b7baf7d5b1626a61a60a2f972be804d20c089d313ee022e107bfdd138354812b",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "post-phase-2-smoke-repair-planning-closure-1",
+    "trigger_run_ids": [
+      "hcm_2_4_smoke_planning_review"
+    ],
+    "finding_refs": [
+      "HCM24-PSRPR-0001",
+      "HCM24-PSRPR-0002"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-31T18:28:49Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+        "packet_ids": [
+          "20260731-post-phase-2-smoke-repair-selector"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:27a404e0d9edf04c02a1aa0ac67180c2c341c6e05701267c29d2c19635243e47",
+    "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+    "outcome_registry_fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "post-phase-2-smoke-repair-planning-closure-convergence-1",
+    "completed_at_utc": "2026-07-31T18:44:50Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "inspect the exact selector remediation; trace missing-artifact actions at crates/flow/src/resolver.rs:474-518,1512-1550,1639-1660 and crates/compiler/src/blocker.rs:189-230; reproduce planning_ready_repo plus copied canonical Charter and confirm authority invalidity; identify the existing dynamic committed-Charter ready proofs",
+        "evidence_ref": "parent remediation evidence: four exact production paths now frozen; existing instance-aware action helper selected; two exact prepared-packet tests and helper sources named; direct canonical copy proven insufficient due committed_charter_authority_read_durabilityviolation"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory planning_ready_repo consumers, planning_ready_repo/write_valid_selected_charter helpers, hcm_2_2_product_cutover closed-intake proof, Project Context runtime fixture, generic custom fixture, and pipeline proof corpus",
+        "evidence_ref": "parent inventory confirms exact existing read-only helper/proof sources and reduces proposed changed ancillary surface to four paths with no new fixture"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the one-entry repo-path-NUL-SHA256-newline manifest for the remediated selector",
+        "evidence_ref": "subject manifest below; selector sha256 5df0f3da46cfc962befcd2d5a940803b39703e2c4df70455edb195083dd3ccea; aggregate sha256:b7baf7d5b1626a61a60a2f972be804d20c089d313ee022e107bfdd138354812b"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode and Markdown fence-balance check for the remediated selector",
+        "evidence_ref": "strict UTF-8 passed; 257 lines; two fence markers balance"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+        "evidence_ref": "parent pre-closure command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+        "sha256": "5df0f3da46cfc962befcd2d5a940803b39703e2c4df70455edb195083dd3ccea"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b7baf7d5b1626a61a60a2f972be804d20c089d313ee022e107bfdd138354812b"
+  },
+  "active_resolution": {
+    "level": "HCM-2.4 post-exit corrective selector planning closure",
+    "scope_horizon": "closure of exactly two planning P2 findings before RED tests or production edits",
+    "detail_resolution": "exact flow/compiler action scope plus exact existing closed-intake and ready-packet proof commands/sources",
+    "temporal_horizon": "same planning stage after consolidated remediation of the first discovery subject",
+    "authority_horizon": "unchanged HCM-2.4 correction; no HCM-3.x, public JSON protocol, SDK/transport, native adapter, release, push, or historical rewrite",
+    "memory_horizon": "immutable first FINDINGS dispatch/result, remediated selector, live source traces, and disposable ready-packet probe",
+    "validation_horizon": "close HCM24-PSRPR-0001 and HCM24-PSRPR-0002 or emit only genuinely remediation-unmasked unique findings"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "sections": [
+        "C. Minimal manual smoke journey",
+        "D. Exact scope ceiling",
+        "Acceptance contract",
+        "Planning-finding remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json",
+      "sections": [
+        "review_cycle",
+        "subject_manifest",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/SPEC.md",
+      "sections": [
+        "HCM-2.3 CLI command surface and local JSON fixture boundary",
+        "HCM-2.4 scope and negative boundaries"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Causal cascading review hardening"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric"
+      ]
+    }
+  ],
+  "repo_truth": "The first planning reviewer found that missing artifacts still select RunSetupRefresh in live flow/compiler branches and that the original prepared-packet phrase lacked a reproducible authority-complete fixture. The remediated selector freezes four production paths, uses existing author_or_fill action selection after operational-root establishment, and names exact existing closed-intake and authority-complete ready-packet tests/helper sources. It proposes no new Charter fixture. No runtime/test production edit has occurred.",
+  "allowed_scope": [
+    "Review the complete remediated selector read-only and determine whether it closes both predecessor P2 findings.",
+    "Verify all missing-artifact live branches and the compiler equivalent are inside the four-path ceiling and the exact action contract is testable without altering root-absence behavior.",
+    "Verify the named closed-intake and two ready-packet commands/sources are exact, disposable, authority-complete, and sufficient for the runbook while the installed-binary smoke retains the other manual steps.",
+    "Check that the revised four-path ancillary ceiling remains sufficient for RED/GREEN and runbook proof."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger entry, delegate, or implement the repair.",
+    "Do not reuse predecessor finding IDs as newly emitted findings; cite them only as closure triggers.",
+    "Do not reopen P7, select HCM-3.x, define public JSON protocol, add a fixture, widen native/platform authority, release, push, or modernize history."
+  ],
+  "tasks": [
+    "Validate the closure cycle, predecessor, exact two finding refs, unchanged registry/budget, remediated selector hash, and aggregate fingerprint.",
+    "Independently verify that the selector closes HCM24-PSRPR-0001 by freezing every necessary production path and testable author/fill action behavior.",
+    "Independently verify that the selector closes HCM24-PSRPR-0002 with exact existing disposable preparation commands and authority-complete helper sources.",
+    "Return findings first in P1/P2/P3/P4 order using new unique IDs for any remediation-unmasked issue; otherwise return CLEAN for subject sha256:b7baf7d5b1626a61a60a2f972be804d20c089d313ee022e107bfdd138354812b."
+  ],
+  "contracts_and_gates": [
+    "Production edits and RED tests remain forbidden unless this exact replacement planning subject is CLEAN with no unresolved P1/P2.",
+    "The original FINDINGS dispatch and result remain immutable; this is a different-fresh closure under the same parent, registry, and causal budget.",
+    "CLEAN ends the planning discovery lineage and authorizes only the selector-bounded RED/implementation stage.",
+    "HCM-3.x, public JSON protocol, SDK/transport, native adapter, automatic continuation beyond this correction, release, and push remain unauthorized."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if either predecessor issue remains open or if remediation unmasked a new unique P1/P2 within the same planning cause.",
+    "Return FINDINGS if the exact commands/sources are not reproducible or if the four production/four ancillary path ceilings are insufficient.",
+    "Report rather than repair; do not broaden authority or create work outside this closure dispatch."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

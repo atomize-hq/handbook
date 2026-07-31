@@ -20,6 +20,9 @@ use crate::project_context_artifact::{
     parse_canonical_project_context, render_project_context_markdown,
     ProjectContextArtifactErrorKind,
 };
+use crate::repository_invocation_identity::{
+    read_repository_identity, REPOSITORY_IDENTITY_REPO_PATH,
+};
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 use std::path::{Path, PathBuf};
@@ -228,7 +231,7 @@ impl CanonicalArtifacts {
                     SystemRootStatus::SymlinkNotAllowed
                 } else if !meta.is_dir() {
                     SystemRootStatus::NotDir
-                } else if canonical_root_scaffold_exists(layout, &decisions)? {
+                } else if canonical_root_scaffold_exists(repo_root, layout, &decisions)? {
                     SystemRootStatus::Ok
                 } else {
                     SystemRootStatus::Missing
@@ -286,9 +289,23 @@ impl CanonicalArtifacts {
 }
 
 fn canonical_root_scaffold_exists(
+    repo_root: &Path,
     layout: CanonicalLayout<'_>,
     decisions: &ResolvedProfileDecisions,
 ) -> Result<bool, ArtifactIngestError> {
+    if layout.contract() == *default_canonical_layout_contract() {
+        match read_repository_identity(repo_root) {
+            Ok(Some(_)) => return Ok(true),
+            Ok(None) => {}
+            Err(error) => {
+                return Err(ArtifactIngestError::ReadFailure {
+                    path: repo_root.join(REPOSITORY_IDENTITY_REPO_PATH),
+                    source: std::io::Error::other(error),
+                });
+            }
+        }
+    }
+
     let workspace = layout.workspace();
     for decision in decisions.artifact_decisions() {
         let artifact_path = workspace
@@ -314,15 +331,6 @@ fn canonical_root_scaffold_exists(
             Ok(Some(_)) | Ok(None) => {}
             Err(err) => return Err(artifact_ingest_read_failure(err)),
         }
-    }
-
-    let legacy_charter = workspace
-        .normalize_repo_relative(crate::canonical_paths::CANONICAL_CHARTER_NAMESPACE_DIR)
-        .expect("legacy authoring namespace stays repo-relative");
-    match workspace.metadata_no_follow(&legacy_charter) {
-        Ok(Some(meta)) if meta.is_dir() => return Ok(true),
-        Ok(Some(_)) | Ok(None) => {}
-        Err(err) => return Err(artifact_ingest_read_failure(err)),
     }
 
     Ok(false)

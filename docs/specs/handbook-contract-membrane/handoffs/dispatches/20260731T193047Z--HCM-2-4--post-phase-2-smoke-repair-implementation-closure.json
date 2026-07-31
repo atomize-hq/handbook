@@ -1,0 +1,268 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure",
+  "created_at_utc": "2026-07-31T19:30:47Z",
+  "source_handoff_ids": [
+    "20260731T135635Z--HCM-2-4--orchestration--administrative-root-status-synchronized"
+  ],
+  "parent_orchestration_id": "20260731T182849Z--HCM-2-4--post-phase-2-smoke-repair",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "debugging-and-error-recovery",
+    "test-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "20260731-post-phase-2-smoke-repair-selector",
+  "subject_fingerprint": "sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "post-phase-2-smoke-repair-implementation-closure-1",
+    "trigger_run_ids": [
+      "hcm_2_4_smoke_implementation_review"
+    ],
+    "finding_refs": [
+      "HCM24-PSRIR-0001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-31T18:28:49Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+        "packet_ids": [
+          "20260731-post-phase-2-smoke-repair-selector"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:27a404e0d9edf04c02a1aa0ac67180c2c341c6e05701267c29d2c19635243e47",
+    "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+    "outcome_registry_fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "post-phase-2-smoke-repair-implementation-closure-convergence-1",
+    "completed_at_utc": "2026-07-31T19:30:40Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run the new engine, flow, and CLI legacy-Markdown negatives before and after the one-block remediation, then replay all canonical-artifact, flow-resolver, and setup/runbook test subjects",
+        "evidence_ref": "RED: engine reported Ok not Missing; flow/CLI reported RequiredArtifactInvalid not SystemRootMissing. GREEN: engine 17, flow 16, and setup/runbook CLI 3 passed after deleting only the legacy Charter namespace establishment fallback"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "re-audit canonical root establishment consumers and the existing legacy Charter/retired Project Context influence tests",
+        "evidence_ref": "selected canonical namespaces and strict setup identity remain root-establishing; the legacy-only engine/flow/CLI cases now require setup and disclose no legacy content; no fixture or production path was added"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted 12-entry repo-path-NUL-SHA256-newline remediation manifest",
+        "evidence_ref": "subject manifest below; aggregate sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af differs from the discovery fingerprint"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent command exited 0 after remediation"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent command exited 0 after remediation"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "bounded_test_support",
+    "risk_ceiling": "test_proof_only",
+    "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+    "max_paths": 3,
+    "max_changed_lines": 220,
+    "entries": [
+      {
+        "path": "crates/cli/tests/setup_cli.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 106
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 54
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 60
+      }
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/setup_cli.rs",
+        "sha256": "7153e08ee87e0b54ba058419166a5015a5e63bebf5c2e140fc1fe157c4270c48"
+      },
+      {
+        "path": "crates/compiler/src/blocker.rs",
+        "sha256": "b68f7428a289da634248794c27f13f6894f1b902e3c07cf161392c65af3cdc8c"
+      },
+      {
+        "path": "crates/engine/src/canonical_artifacts.rs",
+        "sha256": "7b56c04cfdc96628ea746763e4bc59bd38b727a4416dcbeb5343ac16548858bc"
+      },
+      {
+        "path": "crates/engine/src/repository_invocation_identity.rs",
+        "sha256": "7dd5d39c3a3861bfa419883aafd3f7f697f634f03fa0a5a23db32ecd83a6be3b"
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "sha256": "a6c71e3c55d04b4ce4fd23aefba87fa33d3742ccc115a08056d849ec24ed41b5"
+      },
+      {
+        "path": "crates/flow/src/resolver.rs",
+        "sha256": "6fcb0a46b5565721b3c6395a982d402cf36625dc5cbf82aa22c6beb89cec0857"
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "sha256": "bc8ad258ec14c6f97bdf5f2f96aafd2fd539308a1ab5a32ffac6ecbcaaa05ede"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json",
+        "sha256": "c922403ce696765bfa13353d29f2ee6c618d68aa52a9163b264af4c55adefab7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json",
+        "sha256": "4c8b2ffff5178c6be0f0e46f3c9f91c41202ee546f8f6e7c698bc2f4ea5baf15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json",
+        "sha256": "2772f6f6795064a9c29f43b90b829b237e7f25b2120bd94b9406fb4175cf7800"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+        "sha256": "5df0f3da46cfc962befcd2d5a940803b39703e2c4df70455edb195083dd3ccea"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/post-phase-2-smoke-runbook.md",
+        "sha256": "c702765e58c74aed0d6e5696ce8f55aee4aaccea6f0198afda82fea7b9682e61"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af"
+  },
+  "active_resolution": {
+    "level": "HCM-2.4 post-exit smoke-repair implementation closure",
+    "scope_horizon": "closure of the one legacy-root establishment finding without widening the reviewed production surface",
+    "detail_resolution": "remove one legacy namespace fallback and add engine/flow/CLI legacy-only negative proof",
+    "temporal_horizon": "same implementation stage after consolidated remediation of its sole discovery finding",
+    "authority_horizon": "unchanged selector-bounded HCM-2.4 correction; no JSON protocol, profile-selection synthesis, native/platform widening, HCM-3.x, release, or push",
+    "memory_horizon": "immutable FINDINGS dispatch/result, exact RED outputs, minimal diff, GREEN focused replay, and changed subject fingerprint",
+    "validation_horizon": "close HCM24-PSRIR-0001 or emit only a genuinely remediation-unmasked unique finding"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "sections": [
+        "A. Setup and packet decision",
+        "D. Exact scope ceiling",
+        "Acceptance contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json",
+      "sections": [
+        "review_cycle",
+        "subject_manifest",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Causal cascading review hardening"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric"
+      ]
+    }
+  ],
+  "repo_truth": "The discovery reviewer found one legacy fallback that allowed `.handbook/charter` to establish canonical root. The parent reproduced it independently at engine, flow, CLI, and installed-binary layers; added cross-platform legacy Charter plus retired Project Context negatives; removed only that legacy fallback; and replayed the focused subjects GREEN. Safe setup identity and selected canonical namespaces still establish the default root. No new production path, fixture, JSON behavior, API/schema, dependency, native authority, or HCM-3.x change exists.",
+  "allowed_scope": [
+    "Review the complete 12-entry remediation subject read-only and determine whether it closes HCM24-PSRIR-0001.",
+    "Replay the changed fingerprint and inspect the exact fallback deletion plus engine/flow/CLI legacy-only negatives.",
+    "Verify selected canonical namespaces and valid setup identity still establish root, while absent and legacy-only roots require setup and expose no legacy bytes.",
+    "Check that no remediation-unmasked P1/P2 exists inside the same cause and reviewed selector scope."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create dispatches, write handoffs/ledger, delegate, or remediate findings.",
+    "Do not reuse HCM24-PSRIR-0001 as a newly emitted finding; it is a closure trigger only.",
+    "Do not define typed JSON protocol, generate content/profile selection, widen platform authority, rewrite fixtures/history, select HCM-3.x, release, or push."
+  ],
+  "tasks": [
+    "Validate the closure lineage, predecessor, one finding ref, unchanged registry/budget, all entry hashes, and aggregate fingerprint.",
+    "Independently verify that no legacy Markdown-only tree establishes root or influences canonical truth at engine, flow, or CLI layers.",
+    "Verify the one-block deletion does not break valid setup-identity or selected-canonical-namespace establishment and preserves unsafe/absent fail-closed behavior.",
+    "Return findings first using new unique run-local IDs for any remediation-unmasked issue; otherwise return CLEAN for subject sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af."
+  ],
+  "contracts_and_gates": [
+    "The original implementation FINDINGS dispatch/result remains immutable; this is a different-fresh closure under the same parent, registry, and causal budget.",
+    "CLEAN closes the implementation discovery lineage and permits proof/control-pack work only; it does not authorize a primary commit yet.",
+    "Every newly emitted finding must receive a new run-local ID and be genuinely caused or unmasked by the immediately preceding remediation.",
+    "The formal P7/Phase 2 exit remains immutable completed evidence; HCM-3.x, release, and push remain unauthorized."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if HCM24-PSRIR-0001 remains open or the remediation unmasked a unique in-scope P1/P2.",
+    "Return FINDINGS if the exact tests are false positives, any legacy-only variant establishes root, or valid setup identity no longer establishes it.",
+    "Report rather than repair; do not broaden authority or create work outside this closure dispatch."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

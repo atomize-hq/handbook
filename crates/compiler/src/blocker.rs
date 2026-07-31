@@ -202,7 +202,11 @@ fn push_baseline_truth_blockers(
                 validation.kind_ref.as_str(),
                 validation.label.as_str(),
                 validation.canonical_repo_relative_path.as_str(),
-                NextSafeAction::RunSetupRefresh,
+                author_or_fill_next_safe_action(
+                    validation.instance_id.as_str(),
+                    validation.kind_ref.as_str(),
+                    validation.canonical_repo_relative_path.as_str(),
+                ),
             )),
             BaselineArtifactVerdict::Empty => Some(required_artifact_blocker(
                 BlockerCategory::RequiredArtifactEmpty,
@@ -320,5 +324,58 @@ fn subject_kind_priority(subject: &SubjectRef) -> u8 {
         SubjectRef::CanonicalArtifact { .. } => 0,
         SubjectRef::InheritedDependency { .. } => 1,
         SubjectRef::Policy { .. } => 2,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn missing_validation(
+        instance_id: &str,
+        kind_ref: &str,
+        canonical_repo_relative_path: &str,
+    ) -> BaselineArtifactValidation {
+        BaselineArtifactValidation {
+            instance_id: instance_id.to_owned(),
+            kind_ref: kind_ref.to_owned(),
+            label: instance_id.to_owned(),
+            canonical_repo_relative_path: canonical_repo_relative_path.to_owned(),
+            packet_required: true,
+            verdict: BaselineArtifactVerdict::Missing,
+        }
+    }
+
+    #[test]
+    fn missing_baseline_artifacts_use_instance_aware_author_actions() {
+        let validations = vec![
+            missing_validation(
+                "project_authority",
+                "handbook.artifact-kind.project-authority@1.1.0",
+                ".handbook/project/charter.yaml",
+            ),
+            missing_validation(
+                "project_context",
+                "handbook.artifact-kind.project-context@1.1.0",
+                ".handbook/project/context.yaml",
+            ),
+        ];
+        let mut blockers = Vec::new();
+
+        push_baseline_truth_blockers(
+            &mut blockers,
+            &validations,
+            BaselineBlockerScope::AllBaseline,
+        );
+
+        assert_eq!(blockers.len(), 2);
+        assert_eq!(
+            blockers[0].next_safe_action,
+            NextSafeAction::RunAuthorCharter
+        );
+        assert_eq!(
+            blockers[1].next_safe_action,
+            NextSafeAction::RunAuthorProjectContext
+        );
     }
 }
