@@ -1,0 +1,415 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260801T213000Z--HCM-3-2--orchestration--context-resolution-authority-required",
+  "created_at_utc": "2026-08-01T21:30:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-P1-planning-selector",
+  "orchestration_id": "20260801T202515Z--HCM-3-2--context-resolution-kernel",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": "019fbefb-4cd5-72b0-a22d-bc230f0b692b"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-01T21:30:00Z",
+    "evidence_ref": "two fresh built-in read-only review runs completed under the bound parent orchestration"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm32_planning_review",
+      "dispatch_id": "20260801T202751Z--HCM-3-2--context-resolution-planning-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T202751Z--HCM-3-2--context-resolution-planning-review.json",
+      "dispatch_fingerprint": "sha256:08d409074227ea8e4b70141d7b9352cfe7f8ef7378680bf30424f1560d394d66",
+      "role": "review",
+      "agent_id": "/root/hcm32_planning_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:184c9746e080fa09498ce3700e9354a9895f8eaf00abd4bfd587c3664b4f915d",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM32-PLN-DISC-001",
+        "HCM32-PLN-DISC-002",
+        "HCM32-PLN-DISC-003",
+        "HCM32-PLN-DISC-004"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T202751Z--HCM-3-2--context-resolution-planning-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md"
+      ],
+      "result_subject_fingerprint": "sha256:184c9746e080fa09498ce3700e9354a9895f8eaf00abd4bfd587c3664b4f915d"
+    },
+    {
+      "run_id": "hcm32_authority_stop_closure",
+      "dispatch_id": "20260801T211000Z--HCM-3-2--context-resolution-planning-authority-stop-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T211000Z--HCM-3-2--context-resolution-planning-authority-stop-closure.json",
+      "dispatch_fingerprint": "sha256:cfdf94dc4c8d7e081f2f1f1fa54410685f2b34cf1fbb7f00d0f49ff2c3914a43",
+      "role": "review",
+      "agent_id": "/root/hcm32_authority_stop_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b",
+      "review_round": 2,
+      "predecessor_run_id": "hcm32_planning_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T211000Z--HCM-3-2--context-resolution-planning-authority-stop-closure.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md"
+      ],
+      "result_subject_fingerprint": "sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-01T21:30:00Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:9e317280367a3668c484802c4cbc0e4e090faad692692e8327a40c11b73346ae"
+    ],
+    "aggregate_fingerprint": "sha256:2859ff52b27c4f6de288d2869426350898dd2d9156a61c044b5afbda70cf5198"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3.2-planning-authority-stop-consolidation",
+      "finding_run_id": "hcm32_planning_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm32_authority_stop_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T211000Z--HCM-3-2--context-resolution-planning-authority-stop-closure.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "402dd2c993ee8316682a5214b443efaebfafe78d",
+    "subject_fingerprint": "sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T211000Z--HCM-3-2--context-resolution-planning-authority-stop-closure.json"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T211000Z--HCM-3-2--context-resolution-planning-authority-stop-closure.json"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 Context Resolution authority stop",
+    "scope_horizon": "the reviewed planning selector and exact admission/risk authority gap before any RED or Rust work",
+    "detail_resolution": "trusted resolver/schema for all authority-bearing records, candidate mapping, exact public signatures, and named CRITICAL stack symbols",
+    "temporal_horizon": "after CLEAN planning authority-stop closure and safe primary commit; before implementation, product proof, or integration publication",
+    "authority_horizon": "exact HCM-3.2 resumption decision only; HCM-3.3+, generic framework/schema, dependency, transport, publication, push, and historical rewrite remain unauthorized",
+    "memory_horizon": "two immutable dispatches, one consolidated remediation, CLEAN closure, primary commit 402dd2c, expected base/integration/remote observations",
+    "validation_horizon": "resume only after exact reviewed authority closes admission and CRITICAL-impact posture, then repeat planning closure before RED/Rust"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Own exactly HCM-3.2 through a reviewed selector and stop durably when the missing trusted authority-admission contract and CRITICAL impact posture prevent safe implementation.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.2"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Context Resolution envelope",
+        "Resolution escalation and memory promotion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "sections": [
+        "Unresolved admission authority",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": [
+        "Exact public symbols",
+        "Exact ceilings",
+        "Stop conditions"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached HEAD",
+    "head": "402dd2c993ee8316682a5214b443efaebfafe78d",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260801T213000Z--HCM-3-2--orchestration--context-resolution-authority-required.json",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl"
+    ]
+  },
+  "work_completed": [
+    "Verified the exact bound checkout, base commit/tree, integration ref, required ancestry, remote baseline, detached cleanliness, and protected external-root non-access before editing.",
+    "Read live HCM authority, predecessor context, required orchestration/engineering skills, exact engine definitions, and proof ledger.",
+    "Created the bounded HCM-3.2 SPEC, plan, checklist, selector, outcome registry, proof record, and two schema-valid v1.4 review dispatches.",
+    "Obtained fresh discovery findings, consolidated them into an exact authority stop, and obtained different-fresh CLEAN closure without Rust/RED work.",
+    "Committed the safe reviewed planning/authority-stop state as primary commit 402dd2c993ee8316682a5214b443efaebfafe78d."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "status": "partial",
+      "summary": "Reviewed HCM-3.2 planning contract with exact unresolved admission-authority and CRITICAL-impact gates."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "status": "blocked",
+      "summary": "Selector is durably stopped before implementation pending exact reviewed resumption authority."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md",
+      "status": "completed",
+      "summary": "Consolidated four-finding disposition and exact resumption decision."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.2-AUTHORITY-STOP-001",
+      "summary": "Do not implement a caller-constructible authority-bearing kernel without an admitted resolver/authentication boundary.",
+      "authority_effect": "Stops HCM-3.2 before RED/Rust and requests exact same-slice resumption authority; grants no later-slice or framework authority.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM32-PLN-DISC-001",
+      "classification": "resolution_escalation",
+      "severity": "critical",
+      "priority": "P1",
+      "status": "resolved",
+      "source_run_id": "hcm32_planning_review",
+      "summary": "Missing trusted resolver for authority-bearing refs is converted to the exact durable authority stop.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-PLN-DISC-002",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "resolved",
+      "source_run_id": "hcm32_planning_review",
+      "summary": "Exact candidate-to-trigger/condition/authority mapping is an explicit resumption gate.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-PLN-DISC-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_planning_review",
+      "summary": "Containment now compares positive allow language while inherited denies accumulate and subtract separately.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-PLN-DISC-004",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "resolved",
+      "source_run_id": "hcm32_planning_review",
+      "summary": "Exact public signatures and changed-symbol counting are explicit resumption gates.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-3.2-AUTHORITY-ADMISSION",
+      "classification": "authority",
+      "summary": "No selected schema/resolver authenticates all authority-bearing Context Resolution records, and required existing stack edits exceed the reviewed risk ceiling.",
+      "resume_condition": "Provide one exact reviewed HCM-3.2 authority ref choosing the admission model or narrowed claim, mapping candidates, freezing signatures/counting, and accepting or avoiding the named CRITICAL symbols.",
+      "owner": "Handbook product/contract authority"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-3.2-RESUMPTION-AUTHORITY",
+      "trigger": "Planning discovery proved caller-coherent refs cannot establish authenticated creation/disposition authority and GitNexus impact exceeds the proposed ceiling.",
+      "current_resolution": "Reviewed HCM-3.2 planning authority stop with no implementation or completed proof.",
+      "target_resolution": "A reviewed, bounded, implementable HCM-3.2 selector with exact admission authority and accepted risk posture.",
+      "decision_required": "Choose an existing trusted resolver, authorize a bounded new admission surface, or explicitly narrow the HCM-3.2 proof claim; also decide the named CRITICAL stack edits.",
+      "options": [
+        "Bind every authority-bearing input to an existing trusted owner and exact resolver/schema.",
+        "Authorize a bounded new admission surface with exact bytes, authentication, signatures, paths, symbols, and negative proof.",
+        "Narrow HCM-3.2 and revise PG-RES-01 expectations to exclude authority-bearing envelope/transition behavior."
+      ],
+      "recommendation": "Prefer an existing trusted resolver if one can be named exactly; otherwise issue a separate reviewed authority decision rather than inventing a generic framework in this slice.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "An exact reviewed authority ref resolves every decision above and a fresh same-slice selector closure is CLEAN before RED/Rust."
+    }
+  ],
+  "validation": [
+    {
+      "command": "validate_handoffs.py --verify-dispatch <each HCM-3.2 dispatch>",
+      "status": "passed",
+      "evidence_ref": "both v1.4 dispatches replayed their exact subject fingerprints"
+    },
+    {
+      "command": "validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "ordinary validation passed before primary commit"
+    },
+    {
+      "command": "validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "historical admission self-test passed before primary commit"
+    },
+    {
+      "command": "validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "v1.4 causal and orchestration contract self-tests passed before primary commit"
+    },
+    {
+      "command": "GitNexus impact for ContextResolutionStackDefinition, AuthoredStack::resolve, and ContextResolutionStackDefinition::load_bytes",
+      "status": "passed",
+      "evidence_ref": "HIGH for struct and CRITICAL for both named methods; no symbol edited"
+    },
+    {
+      "command": "GitNexus FTS/scoped/compare-to-main detect_changes",
+      "status": "not_run",
+      "evidence_ref": "unavailable: no GitNexus MCP detect_changes tool is exposed and the local runner offers index/status only; no product symbol changed"
+    },
+    {
+      "command": "git diff --check and exact changed-path audit",
+      "status": "passed",
+      "evidence_ref": "seven primary control paths only; no production, test, dependency, shipped-definition, profile, or pipeline path changed"
+    }
+  ],
+  "pack_updates": [],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Resume exactly HCM-3.2 from the committed authority stop after exact reviewed admission and risk authority is supplied.",
+    "condition": "An exact reviewed authority ref chooses the authority-admission model or narrowed claim, maps candidates, freezes callable signatures/counting, and accepts or avoids the named CRITICAL symbols.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md",
+        "sections": [
+          "Findings and consolidated disposition",
+          "Exact resumption decision"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "sections": [
+          "Exact public symbols",
+          "Exact ceilings",
+          "Stop conditions"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sections": [
+          "Causal cascading review hardening",
+          "Resuming from a handoff"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Amend exactly the HCM-3.2 selector/SPEC/plan/proof from a cited reviewed authority decision.",
+      "Dispatch a new same-slice planning review under the same parent outcome and causal rules.",
+      "Begin RED/Rust only after the amended selector receives CLEAN review."
+    ],
+    "prohibited_scope": [
+      "HCM-3.3 or later behavior",
+      "Generic authority framework/schema without explicit reviewed authority",
+      "Rust/RED work before selector closure",
+      "Changed shipped definition/profile/vocabulary identity",
+      "Protected external checkout/control-repository access",
+      "Push or remote publication"
+    ],
+    "acceptance_criteria": [
+      "Every authority-bearing record resolves to admitted bytes and an authenticated owner, or the proof claim explicitly excludes that behavior.",
+      "Candidate class maps to exact trigger, missing condition, requested authority, evidence, and no-candidate cases.",
+      "Every public callable signature and changed-symbol counting rule is frozen and negatively testable.",
+      "The selector explicitly accepts or avoids the named HIGH/CRITICAL stack impact with a proportional proof wall.",
+      "A fresh schema-valid review returns CLEAN before any implementation work."
+    ],
+    "stop_conditions": [
+      "Stop again if authority remains caller-asserted or requires an unapproved generic framework/schema.",
+      "Stop if the resumption widens to HCM-3.3+, changes shipped identity, or leaves CRITICAL impact unresolved.",
+      "Stop if the causal review budget cannot admit the required same-slice re-selection."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-3.2 stopped before Rust. Fresh discovery found missing trusted authority admission, incomplete candidate mapping/API signatures, ambiguous containment, and CRITICAL stack impact. Containment was clarified; a different fresh reviewer CLEANed the precise authority stop. Primary commit 402dd2c preserves the planning evidence. Resume only with exact reviewed same-slice authority."
+}
