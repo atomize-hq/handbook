@@ -1,0 +1,254 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T040600Z--HCM-0-8--v1-4-ancillary-prefix-proof-review",
+  "created_at_utc": "2026-08-01T04:06:00Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T022300Z--HCM-0-8--v1-4-same-parent-resumption-validation-repair",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "debugging-and-error-recovery",
+    "test-driven-development",
+    "incremental-implementation",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "20260801-v1-4-same-parent-resumption-validation-repair",
+  "subject_fingerprint": "sha256:ab10cdddbfe00c253727e250a4ae46c768400dff3f942baa1482e98a5c0cf5cb",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "v1-4-ancillary-prefix-proof-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T02:23:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-0.8-v1.4-same-parent-resumption-validation-repair",
+        "packet_ids": [
+          "20260801-v1-4-same-parent-resumption-validation-repair"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md"
+      }
+    ],
+    "fingerprint": "sha256:5394b405a66fe6ae99acad53b390cb8f39663128314fd2e7b5411c3bdbedf6a4"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f79081aff048f1b6891fe332525a7fe50a68dc73fee59e4b9882ea6c4117c8e0",
+    "integrated_outcome_id": "hcm-0.8-v1.4-same-parent-resumption-validation-repair",
+    "outcome_registry_fingerprint": "sha256:5394b405a66fe6ae99acad53b390cb8f39663128314fd2e7b5411c3bdbedf6a4",
+    "review_stage": "proof",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "implementation"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260801T025300Z--HCM-0-8--v1-4-same-parent-resumption-implementation-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "v1-4-ancillary-prefix-proof-convergence",
+    "completed_at_utc": "2026-08-01T04:05:10Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run ancillary-prefix focused regressions, both supported self-tests, Python AST parsing, ordinary validation, and whitespace checks",
+        "evidence_ref": "focused orchestration self-test, v1 admission self-test, and Python AST passed; ordinary validation has only the authorized latest-second-stop failure"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory the production ancillary validator call plus all four embedded consumers, the two immutable smoke stops, and all six smoke dispatch allowances",
+        "evidence_ref": "one production and four test call sites; first/second stops own exact four-dispatch cutoffs while two later smoke dispatches add the authorized CLI/compiler ancillary paths"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted 15-entry repo-path-NUL-SHA256-newline proof-integration subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:ab10cdddbfe00c253727e250a4ae46c768400dff3f942baa1482e98a5c0cf5cb"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "parse validate_handoffs.py with Python ast",
+        "evidence_ref": "PYTHON AST PASS after ancillary-prefix implementation"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "1f065c3eede0a4097490dc5179f81fc0f86b9b1e3e62333153f28b7c0bc0c273"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json",
+        "sha256": "c922403ce696765bfa13353d29f2ee6c618d68aa52a9163b264af4c55adefab7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json",
+        "sha256": "4c8b2ffff5178c6be0f0e46f3c9f91c41202ee546f8f6e7c698bc2f4ea5baf15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json",
+        "sha256": "2772f6f6795064a9c29f43b90b829b237e7f25b2120bd94b9406fb4175cf7800"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json",
+        "sha256": "9abc01962ee0f33a6510d747516bef60af1ce5cb7ae938f74afab60e9be921ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review.json",
+        "sha256": "ecbca639034e170a6b289febd2effca7b7034a662ca237119aadef3881b877dc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json",
+        "sha256": "65ea7f80f11dbdb4361fcf1258c9701ff8f9356e413269fe2c71e8a9ed1e7b01"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T022520Z--HCM-0-8--v1-4-same-parent-resumption-selector-review.json",
+        "sha256": "bd56204158993076d5ff9380f5f5d1514b602d9fa90056781bc400ec4a6183e1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T023300Z--HCM-0-8--v1-4-same-parent-resumption-selector-closure.json",
+        "sha256": "672c6c5b4ab751ca4399fdb096f532b7e7066fa6f3f462aab06731bc302691b7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T024400Z--HCM-0-8--v1-4-same-parent-resumption-implementation-review.json",
+        "sha256": "763ed12eb268916e0efe9411ddb4be69537b4083219df005f3faab37ee5b35b9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T025300Z--HCM-0-8--v1-4-same-parent-resumption-implementation-closure.json",
+        "sha256": "f877309cfc6930c690001097a47a376155e520db2f3491723ca41c26660d7a54"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T194418Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-authority-blocked.json",
+        "sha256": "b1e4dcda1ceb0e9bdfcbd9103e82fbe422d75ea2b30108ab03239fb9b10c215d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+        "sha256": "a504404f557bc0c2e6e82d04332a2b4b12596ed7b5d41fcfc27e204c5838d725"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "sha256": "7c1f22e66b5ffdfaaf09c17fb7343e5402e94ab7e9747cc36533c22da759dc0e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+        "sha256": "4ce9ba3ce761c4cf10355460232858e3899ec12f3f5de28ffe0f5de2ddc1c17a"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:ab10cdddbfe00c253727e250a4ae46c768400dff3f942baa1482e98a5c0cf5cb"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 ancillary-prefix proof integration discovery",
+    "scope_horizon": "existing protocol document, validator, selector, embedded tests, and immutable live smoke evidence only",
+    "detail_resolution": "handoff-cutoff ancillary authority, cumulative successor prefixes, exact omission/extra rejection, and completed final-review widening guard",
+    "temporal_horizon": "fresh proof-stage discovery after CLEAN implementation closure and before the second enabling commit",
+    "authority_horizon": "same parent/outcome/packet/budget; no new behavioral path, smoke dispatch, history/product/HCM-3.x/push authority",
+    "memory_horizon": "e2cb4e1 first enabling commit, one authorized temporary smoke cutoff failure, immutable two-stop/six-dispatch corpus, and exact RED/GREEN",
+    "validation_horizon": "P1/P2 findings require consolidated remediation and different-fresh proof closure; CLEAN ends proof discovery without closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+      "sections": [
+        "Required RED and GREEN regressions",
+        "Causal review stages",
+        "Authorized four-commit dependency sequence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "V1.4 same-parent resumption and terminality",
+        "Failure rules"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T025300Z--HCM-0-8--v1-4-same-parent-resumption-implementation-closure.json",
+      "sections": [
+        "review_cycle",
+        "subject_manifest",
+        "return_contract"
+      ]
+    }
+  ],
+  "repo_truth": "Branch feat/handbook-contract-membrane is at first enabling commit e2cb4e1. The selector now authorizes proof integration and four commits. Exact RED showed later ancillary allowance retroactively invalidating an interim record; the cutoff filter and cumulative-prefix regressions are GREEN. Both self-tests and Python AST pass. Ordinary validation remains nonzero only at the latest unsuperseded second smoke stop. Protected paths and immutable smoke evidence retain their recorded hashes.",
+  "allowed_scope": [
+    "Review the exact 15-entry proof-integration subject read-only.",
+    "Verify ancillary authority is derived only from parent dispatches at or before each handoff cutoff.",
+    "Verify cumulative successor reconciliation, omission/extra rejection, and completed final-clean-review/post-review-widening guards.",
+    "Verify the selector uses a proof-stage planned transition and the exact four-commit dependency sequence."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger, delegate, or run product discovery.",
+    "Do not add a supplemental cycle, new behavioral path, schema/history/product/smoke-dispatch/HCM-3.x/release/push scope.",
+    "Do not treat the one authorized latest-second-stop ordinary failure as a proof defect."
+  ],
+  "tasks": [
+    "Validate proof-stage discovery lineage, unchanged registry/budget, predecessor, 15-entry manifest, and selector authority.",
+    "Review the production cutoff filter and embedded RED/GREEN cases for false acceptance or false rejection.",
+    "Confirm completed records still require a final clean review and reject post-review ancillary widening through their handoff cutoff.",
+    "Return findings first with unique proof-run IDs, or CLEAN for exact subject sha256:ab10cdddbfe00c253727e250a4ae46c768400dff3f942baa1482e98a5c0cf5cb."
+  ],
+  "contracts_and_gates": [
+    "The second enabling commit is forbidden until this proof discovery is CLEAN or all P1/P2 findings receive consolidated remediation and different-fresh proof closure.",
+    "A CLEAN discovery ends the proof stage without a closure dispatch.",
+    "The protocol remains incomplete until smoke closeout, final_closeout review, and protocol mechanical closeout land."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS for any cutoff escape, cumulative-prefix mismatch, weakened completed-record guard, missing regression, or selector/implementation mismatch.",
+    "Return BLOCKED if resolution needs another path, history/product change, schema expansion, or causal-budget reset.",
+    "Report rather than repair."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

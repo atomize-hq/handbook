@@ -1788,10 +1788,16 @@ def validate_v1_4_ancillary_observations(
     *,
     repo_root: Path = REPO_ROOT,
 ) -> None:
+    handoff_cutoff = parse_utc_timestamp(record["created_at_utc"], record_path)
     parent_dispatches = [
         dispatch
-        for _, dispatch, _ in dispatches.values()
+        for dispatch_path, dispatch, _ in dispatches.values()
         if dispatch["parent_orchestration_id"] == record["orchestration_id"]
+        and parse_utc_timestamp(
+            dispatch["created_at_utc"],
+            dispatch_path,
+        )
+        <= handoff_cutoff
     ]
     if record["status"] == "completed":
         completed_reviews = [
@@ -1807,15 +1813,21 @@ def validate_v1_4_ancillary_observations(
         final_review_dispatch = dispatches[
             completed_reviews[-1]["dispatch_id"]
         ][1]
-        final_review_cutoff = parse_utc_timestamp(
-            final_review_dispatch["created_at_utc"],
-            record_path,
+        final_review_cutoff = (
+            parse_utc_timestamp(
+                final_review_dispatch["created_at_utc"],
+                record_path,
+            ),
+            final_review_dispatch["dispatch_id"],
         )
         for dispatch in parent_dispatches:
             if (
-                parse_utc_timestamp(
-                    dispatch["created_at_utc"],
-                    record_path,
+                (
+                    parse_utc_timestamp(
+                        dispatch["created_at_utc"],
+                        record_path,
+                    ),
+                    dispatch["dispatch_id"],
                 )
                 > final_review_cutoff
                 and dispatch["ancillary_allowance"]["kind"] != "none"
@@ -1828,9 +1840,12 @@ def validate_v1_4_ancillary_observations(
         parent_dispatches = [
             dispatch
             for dispatch in parent_dispatches
-            if parse_utc_timestamp(
-                dispatch["created_at_utc"],
-                record_path,
+            if (
+                parse_utc_timestamp(
+                    dispatch["created_at_utc"],
+                    record_path,
+                ),
+                dispatch["dispatch_id"],
             )
             <= final_review_cutoff
         ]
@@ -3730,7 +3745,14 @@ def run_v1_4_causal_contract_self_test() -> int:
         ancillary_file = temp_repo / ancillary_path
         ancillary_file.parent.mkdir(parents=True)
         ancillary_file.write_text("baseline\n", encoding="utf-8")
-        subprocess.run(["git", "add", ancillary_path], cwd=temp_repo, check=True)
+        later_ancillary_path = "tests/fixtures/later-observed.txt"
+        later_ancillary_file = temp_repo / later_ancillary_path
+        later_ancillary_file.write_text("baseline\n", encoding="utf-8")
+        subprocess.run(
+            ["git", "add", ancillary_path, later_ancillary_path],
+            cwd=temp_repo,
+            check=True,
+        )
         subprocess.run(
             ["git", "commit", "-qm", "baseline"],
             cwd=temp_repo,
@@ -3744,6 +3766,10 @@ def run_v1_4_causal_contract_self_test() -> int:
             text=True,
         ).stdout.strip()
         ancillary_file.write_text("baseline\nobserved\n", encoding="utf-8")
+        later_ancillary_file.write_text(
+            "baseline\nobserved\n",
+            encoding="utf-8",
+        )
         observed_allowance = load_json(INTERNAL_DISPATCH_TEMPLATE_PATH)
         observed_allowance["subject_manifest"]["entries"][0]["path"] = (
             ancillary_path
@@ -3788,7 +3814,11 @@ def run_v1_4_causal_contract_self_test() -> int:
                 file=sys.stderr,
             )
             return 1
-        subprocess.run(["git", "add", ancillary_path], cwd=temp_repo, check=True)
+        subprocess.run(
+            ["git", "add", ancillary_path, later_ancillary_path],
+            cwd=temp_repo,
+            check=True,
+        )
         subprocess.run(
             ["git", "commit", "-qm", "observed"],
             cwd=temp_repo,
@@ -3805,6 +3835,7 @@ def run_v1_4_causal_contract_self_test() -> int:
             "orchestration_id": observed_allowance[
                 "parent_orchestration_id"
             ],
+            "created_at_utc": "2026-07-14T00:00:02Z",
             "status": "completed",
             "delegated_runs": [
                 {
@@ -3837,6 +3868,108 @@ def run_v1_4_causal_contract_self_test() -> int:
             ancillary_dispatches,
             repo_root=temp_repo,
         )
+        later_allowance = copy.deepcopy(observed_allowance)
+        later_allowance.update(
+            {
+                "dispatch_id": (
+                    "20260714T000001Z--HCM-X-Y--prefix-later-allowance"
+                ),
+                "created_at_utc": "2026-07-14T00:00:01Z",
+            }
+        )
+        later_allowance["subject_manifest"]["entries"][0]["path"] = (
+            later_ancillary_path
+        )
+        later_allowance["ancillary_allowance"]["entries"][0]["path"] = (
+            later_ancillary_path
+        )
+        later_allowance["ancillary_allowance"]["max_paths"] = 2
+        later_allowance["ancillary_allowance"]["max_changed_lines"] = 2
+        prefix_dispatches = {
+            **ancillary_dispatches,
+            later_allowance["dispatch_id"]: (
+                Path("prefix-later-allowance.json"),
+                later_allowance,
+                "2" * 64,
+            ),
+        }
+        interim_record = copy.deepcopy(ancillary_record)
+        interim_record["status"] = "partial"
+        interim_record["created_at_utc"] = observed_allowance["created_at_utc"]
+        try:
+            validate_v1_4_ancillary_observations(
+                interim_record,
+                Path("interim-ancillary-prefix.json"),
+                prefix_dispatches,
+                repo_root=temp_repo,
+            )
+        except ValidationFailure as error:
+            print(
+                "orchestration contract self-test failed: later ancillary "
+                f"allowance retroactively invalidated an interim prefix: {error}",
+                file=sys.stderr,
+            )
+            return 1
+        successor_record = copy.deepcopy(interim_record)
+        successor_record["created_at_utc"] = later_allowance["created_at_utc"]
+        successor_record["ancillary_diff_observations"].append(
+            {
+                "baseline_ref": baseline_ref,
+                "path": later_ancillary_path,
+                "path_kind": "test_fixture",
+                "changed_lines": 1,
+            }
+        )
+        successor_record["ancillary_diff_observations"].sort(
+            key=lambda observation: (
+                observation["baseline_ref"],
+                observation["path"],
+            )
+        )
+        validate_v1_4_ancillary_observations(
+            successor_record,
+            Path("successor-ancillary-prefix.json"),
+            prefix_dispatches,
+            repo_root=temp_repo,
+        )
+        omitted_prefix_observation = copy.deepcopy(successor_record)
+        omitted_prefix_observation["ancillary_diff_observations"].pop()
+        extra_prefix_observation = copy.deepcopy(interim_record)
+        extra_prefix_observation["ancillary_diff_observations"].append(
+            next(
+                observation
+                for observation in successor_record[
+                    "ancillary_diff_observations"
+                ]
+                if observation["path"] == later_ancillary_path
+            )
+        )
+        extra_prefix_observation["ancillary_diff_observations"].sort(
+            key=lambda observation: (
+                observation["baseline_ref"],
+                observation["path"],
+            )
+        )
+        for label, candidate in (
+            ("omitted", omitted_prefix_observation),
+            ("extra", extra_prefix_observation),
+        ):
+            try:
+                validate_v1_4_ancillary_observations(
+                    candidate,
+                    Path(f"{label}-ancillary-prefix.json"),
+                    prefix_dispatches,
+                    repo_root=temp_repo,
+                )
+            except ValidationFailure:
+                pass
+            else:
+                print(
+                    "orchestration contract self-test failed: ancillary "
+                    f"prefix {label} unexpectedly validated",
+                    file=sys.stderr,
+                )
+                return 1
         false_observation = copy.deepcopy(ancillary_record)
         false_observation["ancillary_diff_observations"][0][
             "changed_lines"
@@ -3932,14 +4065,48 @@ def run_v1_4_causal_contract_self_test() -> int:
                 file=sys.stderr,
             )
             return 1
+        same_second_widening_dispatch = copy.deepcopy(late_widening_dispatch)
+        same_second_widening_dispatch.update(
+            {
+                "dispatch_id": "ZZZZZZZZZZZZZZZ--HCM-X-Y--late-widening",
+                "created_at_utc": observed_allowance["created_at_utc"],
+            }
+        )
+        same_second_widened_dispatches = dict(ancillary_dispatches)
+        same_second_widened_dispatches[
+            same_second_widening_dispatch["dispatch_id"]
+        ] = (
+            Path("same-second-late-widening.json"),
+            same_second_widening_dispatch,
+            "3" * 64,
+        )
+        try:
+            validate_v1_4_ancillary_observations(
+                expanded_observation,
+                Path("same-second-late-widening-closeout.json"),
+                same_second_widened_dispatches,
+                repo_root=temp_repo,
+            )
+        except ValidationFailure:
+            pass
+        else:
+            print(
+                "orchestration contract self-test failed: a same-second "
+                "post-review dispatch widened the frozen ancillary ceiling",
+                file=sys.stderr,
+            )
+            return 1
 
     print(
         "v1.4 causal contract self-test passed: renamed and post-CLEAN "
         "discovery rejected; remediation-unmasked failure consumes the next "
         "causal cycle; third supplemental, undeclared outcome reset, "
         "mixed-version parents, offset cutoffs, omitted dispatches, and "
-        "executable-prefix subdivision rejected; v1.3 corpus mutations and "
-        "false ancillary counts and post-review ceiling widening fail closed; "
+        "executable-prefix subdivision rejected; cumulative ancillary prefixes "
+        "accepted while retroactive authority, prefix omissions/extras, false "
+        "counts, post-review ceiling widening, and same-second widening fail "
+        "closed; v1.3 corpus "
+        "mutations rejected; "
         "direct same-parent stop succession and terminal completion accepted; "
         "orphan dispatches, broken or cross-parent successors, identity drift, "
         "and resumption after completion rejected; abandoned dispatches, registered "

@@ -117,7 +117,13 @@ GREEN self-test coverage must include:
 - drift in each required record identity and in integrated outcome or causal
   budget identity;
 - omission or addition in an interim dispatch prefix; and
-- a later dispatch after the latest unsuperseded record.
+- a later dispatch after the latest unsuperseded record;
+- a later dispatch allowance cannot retroactively invalidate an interim
+  record's ancillary-authority prefix;
+- each same-parent successor reconciles its cumulative ancillary prefix, with
+  omissions and extras inside that prefix rejected; and
+- a completed record retains the final-clean-review cutoff and rejects any
+  post-review ancillary widening.
 
 The focused regression command may exercise the orchestration self-test or a
 private test entry point, but all cases must run through production validation
@@ -131,7 +137,12 @@ The new parent freezes one registry and one derived budget before review.
 2. `implementation`: fresh complete implementation/regression discovery;
    FINDINGS receive one consolidated remediation and different-fresh closure,
    with supplemental causal cycles only under the standing v1.4 rules.
-3. `final_closeout`: after the smoke closeout converges ordinary validation,
+3. `proof`: after the implementation closure, a fresh discovery review enters
+   through `planned_stage_transition` and assesses ancillary-prefix integration
+   against the live two-stop corpus. Only P1/P2 FINDINGS permit consolidated
+   remediation and a different-fresh proof closure; CLEAN ends the stage
+   without a closure run.
+4. `final_closeout`: after the smoke closeout converges ordinary validation,
    a different-fresh reviewer assesses the complete protocol subject and live
    corpus before the protocol handoff is written.
 
@@ -139,20 +150,28 @@ No review stage or budget is borrowed from the smoke orchestration. Reviewers
 are read-only built-in fresh agents. Every dispatch must pass exact v1.4
 verification before execution.
 
-## Authorized three-commit dependency sequence
+## Authorized four-commit dependency sequence
 
-### Commit 1 — enabling protocol primary
+### Commit 1 — existing enabling protocol primary
 
-Commit the reviewed selector, protocol text, validator implementation/tests,
-pre-final review dispatches, and compact proof. This is an enabling commit,
-not a completed closeout. At this boundary:
+Commit `e2cb4e1f7ad3d8f12f651a2b09d7d69bbbd49569` is the landed first
+enabling commit. It contains the reviewed selector, protocol text, initial
+validator implementation/tests, and planning/implementation review lineage.
+It remains enabling evidence, not a completed closeout.
+
+### Commit 2 — ancillary-prefix enabling commit
+
+Commit only this selector amendment, cutoff-bounded ancillary reconciliation,
+its embedded regressions, and the proof-stage discovery dispatch plus a
+different-fresh closure dispatch only if P1/P2 remediation is required. This
+second enabling boundary must satisfy:
 
 - focused regressions and both self-tests pass;
 - ordinary validation has exactly one known logical smoke cutoff failure at
   the latest unsuperseded second authority stop and remains non-zero;
 - no protocol completed handoff or completed claim exists.
 
-### Commit 2 — smoke mechanical closeout
+### Commit 3 — smoke mechanical closeout
 
 Using the landed enabling validator, create one HCM-2.4 completed handoff that:
 
@@ -166,18 +185,18 @@ Using the landed enabling validator, create one HCM-2.4 completed handoff that:
 - changes only the new smoke handoff and deterministic ledger; and
 - passes ordinary validation plus both self-tests before commit.
 
-### Commit 3 — protocol mechanical closeout
+### Commit 4 — protocol mechanical closeout
 
-After commit 2, create and verify the final-closeout protocol review dispatch
+After commit 3, create and verify the final-closeout protocol review dispatch
 against the now-converged live corpus. CLEAN permits one protocol handoff that
 reconciles every new-parent dispatch and one deterministic ledger rebuild.
-The third commit may contain only that final review dispatch, the protocol
+The fourth commit may contain only that final review dispatch, the protocol
 handoff, the ledger, and an exact `09` registration if actually required.
 Ordinary validation and both self-tests rerun before commit.
 
-The protocol repair is not complete until commit 3 lands. The non-consecutive
-primary/closeout pair is explicitly authorized because the smoke terminal
-successor is the prerequisite that makes corpus-wide validation possible.
+The protocol repair is not complete until commit 4 lands. The two enabling
+commits form the reviewed protocol primary stack; the smoke terminal successor
+then makes corpus-wide validation possible before final protocol closeout.
 
 ## Non-goals and stop conditions
 
