@@ -496,6 +496,15 @@ not a competing canonical-artifact authority or an unproved Phase 2 exit row.
 - deterministic renderer consumption;
 - stable machine semantics beneath local terminology.
 
+**Completed boundary:** typed label/alias/ambiguity resolution and deterministic
+acyclic structural absorption are proof-CLEAN against the exact selected
+stable-role registry. The shipped empty vocabulary preserves existing output;
+one non-empty repository/test vocabulary changes presentation only through the
+fixed Stage-10 Work Specification renderer, with canonical YAML and every
+stable-role edge preserved. `PG-VOCAB-01` closes and only the vocabulary subset
+of `PG-PROFILE-01` advances. HCM-3.2+, other consumers/adapters, and the Phase 3
+exit remain open and unselected.
+
 ### `HCM-3.2` — Context Resolution kernel
 
 - configurable ordered stack;

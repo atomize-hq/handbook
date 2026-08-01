@@ -145,7 +145,7 @@ closeout. This does not support a generic custom-kind intake claim.
 
 | Gate | Required proof | Current state |
 |---|---|---|
-| `PG-PROFILE-01` | selected profile resolves complete artifact/vocabulary/Resolution truth with deterministic fingerprint | open; HCM-1.4 proves deterministic selected-profile decision/readiness adoption in setup and doctor. HCM-2.4 removes the rejected Environment Context condition prerequisite and proves optional advisory readiness; vocabulary/Resolution application and remaining consumers stay open |
+| `PG-PROFILE-01` | selected profile resolves complete artifact/vocabulary/Resolution truth with deterministic fingerprint | vocabulary subset closed by HCM-3.1: the selected profile resolves the exact vocabulary/stable-role registry pair, retains the exact vocabulary fingerprint in deterministic profile identity, and drives the fixed Stage-10 Work Specification renderer without changing canonical YAML or stable machine meaning. HCM-1.4 readiness, HCM-2.4 advisory selection, Context Resolution application, and remaining consumers remain separately scoped; the program-wide gate stays open. |
 | `PG-DEFAULT-01` | focused research plus a user brainstorming/decision session explicitly approve the shipped kind set, default instances, and requiredness; examples/current enums do not count | closed for the HCM-0.6 documentation decision by its exact approved record, final proof wall, clean independent review, and two-commit closeout; no runtime/profile publication proof |
 | `PG-KIND-01` | a versioned `ArtifactKindDefinition` resolves a safe canonical schema, validation, optional intake, lifecycle, and projections independently from repository instance state | Phase 2 subset closed: HCM-1.1 proves kind/schema resolution, HCM-1.4 proves selected-instance structural inspection, HCM-2.3 proves the repository-defined registry-brief kind/schema, supplied intake, immutable lineage, atomic publication, and generic actual-binary path, and HCM-2.4 proves the five exact package-owned successor kind/intake/fixed-renderer closures plus Project Context, Project Authority, Environment Context, Work Specification, Decision, and Risk real-path preservation. P4/P5 mutation/promotion and P4's five-part negative surface/path proof are GREEN. The program-wide gate remains open only for separately authorized later lifecycle, semantic-validator, and capitalized Projection coverage; that deferred work is not Phase 2 authority. |
 | `PG-KIND-02` | repository-defined custom kind registers, passes meta-schema/structural validation, and exercises supplied intake coverage without a new Rust enum variant, executable hook, remote schema fetch, generated CLI command, or pre-Phase-3 generic projection engine | closed only for the exact HCM-2.3 repository-defined registry-brief path at implementation commit `628b672ef33326e87e4fb30be13489e8af04b38c` and final 111-path review subject `sha256:d510e94e5b47db209022927bc4afa74b8820e27cd645123cc1cdc3aa5f72fdef`; no program-wide generic/custom-kind, shipped-default, SDK/transport, remote-schema, generated-command, or Projection claim is earned |
@@ -156,7 +156,7 @@ closeout. This does not support a generic custom-kind intake claim.
 | `PG-YAML-01` | one artifact family is canonically YAML, structurally validated, and deterministically rendered | closed for exact shipped instance `project_context` by HCM-2.1 and independently evidenced for the exact HCM-2.4 Stage 10 Work Specification path; no program-wide or remaining-sibling claim |
 | `PG-YAML-02` | no dual editable Markdown/YAML truth remains for converted families | closed program-wide for the Phase 2 conversion set: Project Context, first-party Charter/Project Authority, Environment Context, Stage 10 Work Specification, Decision Record, and Risk Record each have one editable canonical YAML truth; retained Markdown is fixed deterministic output or a zero-influence decoy. Descriptor-selected aggregate flow has no legacy/fallback read, migration promise, or competing fixed-family authority. Future Projection output remains derived and cannot reopen this gate without new authority. |
 
-| `PG-VOCAB-01` | lexical and structural conflation render correctly without losing stable role resolution | open |
+| `PG-VOCAB-01` | lexical and structural conflation render correctly without losing stable role resolution | closed for the exact HCM-3.1 vocabulary kernel and fixed Stage-10 Work Specification consumer at proof subject `sha256:ee97b424c966aaecaeb3f1d09e08129ba4c69f80e889290e36d13fea6d76936d`: typed roles remain direct, unique/ambiguous untyped lookup is deterministic, invalid authority/capability/category/ownership/cycle cases refuse, the shipped empty vocabulary is byte-compatible, and one non-empty profile renders all absorption edges without canonical-YAML or machine-identity influence. Other consumers/adapters remain unproved. |
 | `PG-RES-01` | six-dimension envelope validates inheritance, authority, memory, and validation horizons | open |
 | `PG-PROJ-01` | same source truth yields multiple deterministic Resolution projections with provenance | open |
 | `PG-PROJ-02` | omitted required claims remain visible and cannot false-pass | open |
@@ -182,6 +182,23 @@ closeout. This does not support a generic custom-kind intake claim.
 | `PG-ORCH-01` | an explicitly selected phase/slice remains owned by one active parent that executes built-in `default` subagents, captures identity/status, collects results, and completes review -> valid-finding remediation -> different fresh review without an ordinary user-mediated task hop | proven by the HCM-0.8 one-parent multi-round review/remediation loop; final lineage capture belongs in the v1.2 parent record |
 | `PG-ORCH-02` | every current internal dispatch declares execution target, parent ID, role, typed review-cycle reason or explicit non-review null, replayable subject manifest/fingerprint, manifest-wide text-whitespace policy, fresh-context requirement, closeout owner, ordered required-skills chain beginning with `using-agent-skills`, and complete structured return contract; unavailable mandatory delegation, predecessor dispatch/record creation, unchanged causal-cycle subjects, review-budget overflow, and dirty live review subjects fail closed | proven by HCM-0.8 current-schema dispatch validation, dependency-complete live dispatch replay, immutable predecessor-corpus admission, and fail-closed orchestration self-tests |
 | `PG-CATALOG-01` | proposed proof that the frozen HCM-0.4 `05` payload was mechanically decomposed without semantic delta | retired without proof; HCM-0.9 was abandoned after terminal Redesign Review 2 was not CLEAN, no decomposition occurred, and the monolith remains canonical |
+
+### HCM-3.1 earned vocabulary boundary
+
+The CLEAN proof subject
+`sha256:ee97b424c966aaecaeb3f1d09e08129ba4c69f80e889290e36d13fea6d76936d`
+binds the exact engine vocabulary/profile paths, non-empty fixture and golden,
+real pipeline consumer, negative/replay tests, and post-remediation proof wall.
+It proves regression rules 29, 32, 33, and 36 for this slice: uniform exact
+definition identity, exact stable-role registry selection, preserved unique
+constitutional-root meaning, and vocabulary confinement to registered roles
+and presentation-safe absorption. Full workspace tests, strict Clippy, format,
+handoff validation, and both self-tests pass. GitNexus FTS and compare-to-main
+change detection remain unavailable and are not classified GREEN.
+
+No Context Resolution, Projection, Snapshot, posture, adapter/public transport,
+command, dependency, or shipped non-empty vocabulary gate advances. The Phase 3
+exit remains open.
 
 The rejected HCM-2.2 checkpoints referenced from
 [`slices/HCM-2.2/`](slices/HCM-2.2/SPEC.md) remain non-authoritative evidence.

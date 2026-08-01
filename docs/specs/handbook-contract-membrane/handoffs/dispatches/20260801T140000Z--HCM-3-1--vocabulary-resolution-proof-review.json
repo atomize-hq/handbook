@@ -1,0 +1,180 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T140000Z--HCM-3-1--vocabulary-resolution-proof-review",
+  "created_at_utc": "2026-08-01T14:00:00Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T122747Z--HCM-3-1--vocabulary-resolution",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "doubt-driven-development",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.1",
+  "packet_id": "HCM-3.1-P3-proof-control-closeout",
+  "subject_fingerprint": "sha256:ee97b424c966aaecaeb3f1d09e08129ba4c69f80e889290e36d13fea6d76936d",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.1-vocabulary-resolution-proof-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T12:27:47Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.1-vocabulary-resolution-full-slice",
+        "packet_ids": [
+          "HCM-3.1-P1-vocabulary-kernel",
+          "HCM-3.1-P2-profile-renderer-adoption",
+          "HCM-3.1-P3-proof-control-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:d0f92e3453edc70c4ed9a185d69dfbbe631fbe84653bad07ecbf060d8ef20ee2"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f32411b780227c90d7d3146339f933cd19df4911a82043d981958f67663b8758",
+    "integrated_outcome_id": "hcm-3.1-vocabulary-resolution-full-slice",
+    "outcome_registry_fingerprint": "sha256:d0f92e3453edc70c4ed9a185d69dfbbe631fbe84653bad07ecbf060d8ef20ee2",
+    "review_stage": "proof",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "implementation"
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": "20260801T133919Z--HCM-3-1--vocabulary-resolution-implementation-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.1-vocabulary-resolution-proof-convergence-1",
+    "completed_at_utc": "2026-08-01T13:59:50Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "focused engine/profile/pipeline/compiler/CLI tests; cargo test --workspace --all-targets --all-features; cargo clippy --workspace --all-targets --all-features -- -D warnings; cargo fmt --all -- --check",
+        "evidence_ref": "7/7, 20/20, 48/48, 39/39, CLI 1/1; full workspace PASS after 993 seconds; strict Clippy and format PASS"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "trace typed/untyped vocabulary resolution, exact profile identity, shipped-empty compatibility, custom non-empty profile, Stage-10 admission/rendering, compiler and CLI consumers",
+        "evidence_ref": "proof wall records exact real-path golden, two deterministic runs, unchanged canonical YAML, two units, three edges, and non-influence/path scans"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted 12-entry repo-path-NUL-SHA256-newline proof subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:ee97b424c966aaecaeb3f1d09e08129ba4c69f80e889290e36d13fea6d76936d"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check; strict UTF-8 proof/fixture reads",
+        "evidence_ref": "format check exited 0; proof and fixtures are valid UTF-8"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check f0b5f4c..HEAD",
+        "evidence_ref": "reviewed commit-stack whitespace check exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/artifact_repository.rs", "sha256": "b1f516527454cc86b49c193e8217addff6a21789be52b774b14b4a2655cbba73"},
+      {"path": "crates/engine/src/lib.rs", "sha256": "f06041a66802f2239e8d1ac434e9af9cbe7dcdbd9edc9160e29676c98de65a41"},
+      {"path": "crates/engine/src/profile_selection.rs", "sha256": "a449dd7ee577649aa191c7eba56cdd30b72c1364cc451144584c5d8619316902"},
+      {"path": "crates/engine/src/vocabulary_registry.rs", "sha256": "cd2250df76776ebe42c7ba2690f66c646bdeb9b7da5ed3ba8cf537bade4c2c5a"},
+      {"path": "crates/engine/tests/fixtures/hcm_3_1_vocabulary_resolution/artifacts/feature_spec/FEATURE_SPEC.md", "sha256": "c4f0632935939e5ef91068f1ab783a0c7a54fe4cc7e04c462a8d82712f5018d4"},
+      {"path": "crates/engine/tests/fixtures/hcm_3_1_vocabulary_resolution/definitions/vocabularies/example.vocabulary.hcm-3-1/1.0.0.yaml", "sha256": "585c62b4be167f3d914f276986b138c0356c0a24bd41aa41b679e2d29d781487"},
+      {"path": "crates/engine/tests/profile_selection.rs", "sha256": "57df5eea13ddee64e974742cf55325803a02368aed3e5b2dc518191ca0d510cd"},
+      {"path": "crates/engine/tests/vocabulary_registry.rs", "sha256": "04832d5c80e73a7810f8eabb38df793f31d649bbeb0f9b36c41269bdcd708ee5"},
+      {"path": "crates/pipeline/src/pipeline_capture.rs", "sha256": "535d6fda07ddff03371484a4ec5546a34d77f05af9a0aba14045bf9ce8eb3938"},
+      {"path": "crates/pipeline/tests/pipeline_capture.rs", "sha256": "35db8ea21e4767334a95b276695f6e38f4fc6853eae6a0fe9708b08395ba86ec"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T134304Z--implementation-closure-clean.md", "sha256": "bb2c58807f51b9a5fa02fcdc80ec4569e023859c09e30fed8ad2512011e562d3"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/proof-stage/20260801T135934Z--vocabulary-resolution-proof-wall.md", "sha256": "a6cf621f4a1c169b1f48358a0ec04277e60eff4256a46035c9c2ce120c30420a"}
+    ],
+    "aggregate_fingerprint": "sha256:ee97b424c966aaecaeb3f1d09e08129ba4c69f80e889290e36d13fea6d76936d"
+  },
+  "active_resolution": {
+    "level": "HCM-3.1 separately typed proof discovery",
+    "scope_horizon": "real-path, ambiguity, absorption, non-influence, deterministic replay, and complete workspace regression evidence",
+    "detail_resolution": "exact fingerprint vectors, typed/untyped resolution, negative matrix, graph loss prevention, selected-profile identity, shipped-empty compatibility, and Stage-10 golden",
+    "temporal_horizon": "after CLEAN implementation closure and local implementation-review commit; before control-pack status or final-closeout review",
+    "authority_horizon": "HCM-3.1 proof only; no HCM-3.2/3.3, shipped publication, public transport, dependency, push, or later gate claim",
+    "memory_horizon": "reviewed commit stack through 0766550, exact 12-entry subject, post-remediation command wall, and immutable prior review results",
+    "validation_horizon": "whether the evidence earns PG-VOCAB-01 and the vocabulary subset of PG-PROFILE-01"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md", "sections": ["Proof wall and stop conditions", "Required product behavior", "Non-goals"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md", "sections": ["Test selector", "Proof wall and stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/proof-stage/20260801T135934Z--vocabulary-resolution-proof-wall.md", "sections": ["Proof outcomes", "Command wall", "GitNexus evidence", "Protected and deferred boundaries"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T134304Z--implementation-closure-clean.md", "sections": ["Finding closure"]}
+  ],
+  "repo_truth": "Planning and implementation discovery lineages are CLEAN. The four-commit local stack implements typed vocabulary resolution and one exact Stage-10 consumer. The post-remediation full workspace, strict Clippy, focused targets, validators, self-tests, replay vectors, golden, negative matrix, non-influence scans, and unchanged shipped-empty behavior pass. GitNexus FTS/function comparison remains unavailable and is not GREEN.",
+  "allowed_scope": [
+    "Review the exact 12-entry proof subject read-only and replay enough evidence to judge real-path, ambiguity, absorption, non-influence, and deterministic replay claims.",
+    "Verify every required negative and both exact fingerprint vectors are covered without false positives.",
+    "Verify the Stage-10 path is a real deterministic product consumer, preserves canonical YAML and every absorption edge, and leaves shipped-empty output unchanged.",
+    "Judge only whether exact HCM-3.1 evidence can close PG-VOCAB-01 and advance the vocabulary subset of PG-PROFILE-01."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger/control-pack state, delegate, or implement a fix.",
+    "Do not select or require HCM-3.2 Context Resolution, HCM-3.3 Projection, Snapshot Memory, posture, adapter/public transport, new command, dependency, or shipped non-empty vocabulary work.",
+    "Do not classify unavailable GitNexus FTS/change comparison as GREEN or weaken immutable prior review results."
+  ],
+  "tasks": [
+    "Return findings first in P1/P2/P3/P4 order with unique proof-stage IDs and exact evidence.",
+    "Replay the subject fingerprint and validate proof-stage transition/lineage.",
+    "Audit proof completeness for all required positive/negative behaviors, exact replay vectors, unchanged empty compatibility, and real-path deterministic output.",
+    "Return CLEAN only if no valid P1/P2 proof gap remains for subject sha256:ee97b424c966aaecaeb3f1d09e08129ba4c69f80e889290e36d13fea6d76936d."
+  ],
+  "contracts_and_gates": [
+    "This is one proof discovery cycle under the unchanged parent/budget; any finding requires consolidated parent remediation and a different-fresh closure before control-pack status.",
+    "A CLEAN proof verdict may earn only PG-VOCAB-01 and the vocabulary subset of PG-PROFILE-01; the overall Phase 3 exit and later gates remain open.",
+    "The final-closeout stage and mechanical handoff/ledger commit remain separately mandatory."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if proof is incomplete, evidence is false-positive, real-path adoption is missing/lossy, or compatibility/non-influence is unproved.",
+    "Return BLOCKED only for a genuine external/authority/capability boundary outside HCM-3.1.",
+    "Report rather than repair; do not broaden authority or write global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}

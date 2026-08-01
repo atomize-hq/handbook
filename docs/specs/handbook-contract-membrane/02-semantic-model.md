@@ -311,6 +311,14 @@ The profile makes the collapse explicit so adapters can report whether the targe
 
 Vocabulary defaults are deterministic: a missing label uses the stable-role registry's canonical display label; aliases and absorptions default to empty. Duplicate display labels are allowed, but typed context must still resolve exactly one stable role. Absorptions are directed, acyclic, cannot absorb the `constitutional_authority` role, cannot mention a capability ID, and cannot erase an authority boundary or change a schema/kind/operation identifier. An adapter that cannot preserve a declared structural absorption must refuse or report a typed loss; it may not silently flatten the workflow.
 
+HCM-3.1 implements this model using the existing stable-role categories as the
+semantic-axis authority; it adds no axis schema field. The resolved vocabulary
+pins the selected stable-role registry exactly, canonicalizes every semantic
+field before fingerprinting, and preserves typed role lookup beneath local
+labels/aliases. The exact Stage-10 Work Specification renderer is the sole
+landed non-empty consumer; its complete absorption rendering proves no silent
+flattening for that path only.
+
 ## Context Resolution
 
 Use namespaced implementation terminology such as:

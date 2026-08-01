@@ -1811,6 +1811,16 @@ Duplicate displayed labels are legal. Ambiguity matters only when a machine oper
 
 Stable role resolution always uses typed context first. Untyped ambiguous input returns candidates or a typed refusal. Profile vocabulary never renames schema IDs, profile/kind/instance IDs, capability IDs, SDK/JSON operation IDs, or CLI commands. An adapter that cannot preserve structural absorption reports typed loss/refusal rather than silently flattening it.
 
+HCM-3.1 proves this contract for the exact engine vocabulary kernel and the
+fixed Stage-10 Work Specification renderer. Alias normalization collapses each
+Unicode whitespace run to one ASCII space, applies Unicode scalar lowercase
+expansion, and performs no punctuation, accent, or compatibility folding.
+Canonical map/set ordering covers labels, normalized aliases, absorptions, and
+the exact stable-role registry pair before the existing uniform fingerprint
+producer runs. The real renderer preserves canonical YAML, stable role IDs,
+every absorption edge, and shipped-empty bytes. No other renderer, adapter,
+public operation, Context Resolution, or Projection support is implied.
+
 ## Context Resolution stack definition
 
 ```yaml

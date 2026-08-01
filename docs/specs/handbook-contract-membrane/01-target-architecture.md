@@ -210,6 +210,13 @@ Substrate imports exact published `handbook-sdk` and/or advanced owner-crate ver
 - Every Projection identifies its source fingerprint, projection definition, target Resolution, vocabulary profile, and lossiness. A renderer-derived view does not prematurely claim this Resolution-aware provenance contract.
 - Expansion may reveal or deterministically derive existing truth. It may not invent canonical detail.
 
+HCM-3.1 lands the bounded vocabulary owner in `handbook-engine` and applies its
+resolved presentation only in the existing fixed Stage-10 Work Specification
+renderer in `handbook-pipeline`. The renderer preserves canonical YAML and
+stable role IDs, emits every declared absorption edge, and remains a
+renderer-derived view without Context Resolution or capitalized Projection
+authority. Other renderers, adapters, and product surfaces remain later work.
+
 ## Charter intake and project-posture kernel
 
 The historical Charter questionnaire becomes a versioned `CharterIntakeDefinition`, not a restored question-by-question CLI wizard.

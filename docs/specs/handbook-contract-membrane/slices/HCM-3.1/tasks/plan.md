@@ -1,6 +1,6 @@
 # HCM-3.1 Delivery Plan
 
-Status: planning discovery findings remediated; fresh closure pending
+Status: proof CLEAN; earned control-pack synchronized; final-closeout pending
 Authority: `../SPEC.md` and
 `../decision/2026-08-01-vocabulary-resolution-selector.md`
 

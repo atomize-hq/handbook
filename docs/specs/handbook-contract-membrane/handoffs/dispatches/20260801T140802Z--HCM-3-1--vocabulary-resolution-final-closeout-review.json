@@ -1,0 +1,205 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T140802Z--HCM-3-1--vocabulary-resolution-final-closeout-review",
+  "created_at_utc": "2026-08-01T14:08:02Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T122747Z--HCM-3-1--vocabulary-resolution",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "code-review-and-quality",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.1",
+  "packet_id": "HCM-3.1-P3-proof-control-closeout",
+  "subject_fingerprint": "sha256:b8a0d61be8ebcb1179ff0c83b8bf5659de9f41bd0d9d93bad7b26d0ece615563",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.1-vocabulary-resolution-final-closeout-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T12:27:47Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.1-vocabulary-resolution-full-slice",
+        "packet_ids": [
+          "HCM-3.1-P1-vocabulary-kernel",
+          "HCM-3.1-P2-profile-renderer-adoption",
+          "HCM-3.1-P3-proof-control-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:d0f92e3453edc70c4ed9a185d69dfbbe631fbe84653bad07ecbf060d8ef20ee2"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f32411b780227c90d7d3146339f933cd19df4911a82043d981958f67663b8758",
+    "integrated_outcome_id": "hcm-3.1-vocabulary-resolution-full-slice",
+    "outcome_registry_fingerprint": "sha256:d0f92e3453edc70c4ed9a185d69dfbbe631fbe84653bad07ecbf060d8ef20ee2",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "proof"
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": "20260801T140000Z--HCM-3-1--vocabulary-resolution-proof-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.1-vocabulary-resolution-final-closeout-convergence-1",
+    "completed_at_utc": "2026-08-01T14:07:52Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "planning CLEAN; implementation FINDINGS remediated and closure CLEAN; proof CLEAN; focused/full workspace/strict Clippy/format/validators/self-tests PASS; earned 00-06 synchronization",
+        "evidence_ref": "complete review lineage and proof records in the 33-entry aggregate subject"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "trace every aggregate production, test, fixture, authority, review-dispatch, and proof path from f0b5f4c through current control truth",
+        "evidence_ref": "33 exact paths; protected/user research paths, shipped vocabulary, Cargo/public transports, handoff record, and ledger excluded"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted 33-entry repo-path-NUL-SHA256-newline complete aggregate",
+        "evidence_ref": "subject manifest below; aggregate sha256:b8a0d61be8ebcb1179ff0c83b8bf5659de9f41bd0d9d93bad7b26d0ece615563"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check; strict UTF-8 proof/control reads",
+        "evidence_ref": "format and text checks PASS"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check and git diff --check f0b5f4c..HEAD",
+        "evidence_ref": "working-tree and reviewed-stack whitespace checks exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/artifact_repository.rs", "sha256": "b1f516527454cc86b49c193e8217addff6a21789be52b774b14b4a2655cbba73"},
+      {"path": "crates/engine/src/lib.rs", "sha256": "f06041a66802f2239e8d1ac434e9af9cbe7dcdbd9edc9160e29676c98de65a41"},
+      {"path": "crates/engine/src/profile_selection.rs", "sha256": "a449dd7ee577649aa191c7eba56cdd30b72c1364cc451144584c5d8619316902"},
+      {"path": "crates/engine/src/vocabulary_registry.rs", "sha256": "cd2250df76776ebe42c7ba2690f66c646bdeb9b7da5ed3ba8cf537bade4c2c5a"},
+      {"path": "crates/engine/tests/fixtures/hcm_3_1_vocabulary_resolution/artifacts/feature_spec/FEATURE_SPEC.md", "sha256": "c4f0632935939e5ef91068f1ab783a0c7a54fe4cc7e04c462a8d82712f5018d4"},
+      {"path": "crates/engine/tests/fixtures/hcm_3_1_vocabulary_resolution/definitions/vocabularies/example.vocabulary.hcm-3-1/1.0.0.yaml", "sha256": "585c62b4be167f3d914f276986b138c0356c0a24bd41aa41b679e2d29d781487"},
+      {"path": "crates/engine/tests/profile_selection.rs", "sha256": "57df5eea13ddee64e974742cf55325803a02368aed3e5b2dc518191ca0d510cd"},
+      {"path": "crates/engine/tests/vocabulary_registry.rs", "sha256": "04832d5c80e73a7810f8eabb38df793f31d649bbeb0f9b36c41269bdcd708ee5"},
+      {"path": "crates/pipeline/src/pipeline_capture.rs", "sha256": "535d6fda07ddff03371484a4ec5546a34d77f05af9a0aba14045bf9ce8eb3938"},
+      {"path": "crates/pipeline/tests/pipeline_capture.rs", "sha256": "35db8ea21e4767334a95b276695f6e38f4fc6853eae6a0fe9708b08395ba86ec"},
+      {"path": "docs/specs/handbook-contract-membrane/00-README.md", "sha256": "90427fae170f11ec23d47458b2c9991b05e19988d69a54eaffca6c5acb16a6da"},
+      {"path": "docs/specs/handbook-contract-membrane/01-target-architecture.md", "sha256": "8284de2c72b019d06370afbac85103c9ba9a57353debe08972ce0a724cad3df1"},
+      {"path": "docs/specs/handbook-contract-membrane/02-semantic-model.md", "sha256": "65d2c979b800b7c4cc5799b8dce920d28a76a04ff9a5b3669acc4480825c56c6"},
+      {"path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md", "sha256": "af11a60409de2fd35321e49da68df46a5e2ecb734071baa7760ffd48d92d3ac4"},
+      {"path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md", "sha256": "94026ab3423496561bb40d9aca59a4af3e94d6c4820b4cf2248ec633edf1efdc"},
+      {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sha256": "ebce0f3819aee0b118a02997e4e6635ed3f33b4edf6f0aa0e62f01f53cd4f475"},
+      {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sha256": "3cbd016b6dfd5d8dda1022e054cae14b87ff34dcbb2d351f1d8b7b5c8f669a7e"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T123319Z--HCM-3-1--vocabulary-resolution-planning-review.json", "sha256": "b35e56f352d915255af1a6a85551f048c79d15555a295414ef5e472a2b56b3ed"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T124330Z--HCM-3-1--vocabulary-resolution-planning-closure.json", "sha256": "86c17a247d763d6da142cc5b8d913c3d451acab94872e367b1684df8e3e6048e"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T132625Z--HCM-3-1--vocabulary-resolution-implementation-review.json", "sha256": "86b22ea88289a9c8fdb6ecd10078d488285406a5f86c78b1dbccd10ad3670c94"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T133919Z--HCM-3-1--vocabulary-resolution-implementation-closure.json", "sha256": "778468a807505c8007221cf3205e32b7f24136d8073e6a8ec8ef645acd77b35f"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T140000Z--HCM-3-1--vocabulary-resolution-proof-review.json", "sha256": "8b0c8bfe3bcf754926d39f3f83faebd256e2a2b9c397a6e7145420b0dc8fd960"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md", "sha256": "de834e906634b922af7ebd85dade8445c588cda9d33c9f0930debe039216c7f0"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md", "sha256": "f5ebd62c44b87453ff13ecf8d693014c5309d3fbeb6db0c99318039fda148443"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/20260801T124300Z--planning-discovery-remediation.md", "sha256": "a97ad844d15fb2639bd198b3d2513a7649b5e73b451f9b08850c4ab7e2e52a3c"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/20260801T125323Z--planning-closure-clean.md", "sha256": "0dd94b845c480900205a8d608d52fab59f26e66adf259140df3f259ce48f995a"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T132527Z--p1-p2-convergence.md", "sha256": "df2c4e9434a8dc778d7454cb249c6268cd5a7188f78215e2f912546126d3acc9"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T133853Z--implementation-discovery-remediation.md", "sha256": "4aa0f913ab4480ba83443fc8964c1c38923222e00a108dff435ad0d7c6914189"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T134304Z--implementation-closure-clean.md", "sha256": "bb2c58807f51b9a5fa02fcdc80ec4569e023859c09e30fed8ad2512011e562d3"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/proof-stage/20260801T135934Z--vocabulary-resolution-proof-wall.md", "sha256": "a6cf621f4a1c169b1f48358a0ec04277e60eff4256a46035c9c2ce120c30420a"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/proof-stage/20260801T140625Z--proof-review-clean.md", "sha256": "dd1c8522d63102415b7292921cfddcc4da826abdb4ef2878968f4bc773e3df29"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/tasks/plan.md", "sha256": "fd06082748f7ad9a3ff64e42010cc0193a379f427ca0b23641cd5af268b5a252"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/tasks/todo.md", "sha256": "4e11129046db7cc08d75356b8e081ce2bd3bcd39319d95d5abd5ef7d84261444"}
+    ],
+    "aggregate_fingerprint": "sha256:b8a0d61be8ebcb1179ff0c83b8bf5659de9f41bd0d9d93bad7b26d0ece615563"
+  },
+  "active_resolution": {
+    "level": "HCM-3.1 final-closeout complete aggregate",
+    "scope_horizon": "all slice authority, implementation, tests, fixtures, review lineage, proof, earned control truth, and closeout readiness",
+    "detail_resolution": "33 exact paths from frozen selector through proof-CLEAN gate synchronization; mechanical handoff/ledger remain excluded",
+    "temporal_horizon": "after planning, implementation, and proof lineages are CLEAN; before primary aggregate commit and separate mechanical closeout",
+    "authority_horizon": "HCM-3.1 only; no HCM-3.2+, Phase 3 exit, push, release, publication, historical mutation, or unrelated working-copy ownership",
+    "memory_horizon": "full local commit stack, all immutable dispatch/result evidence, exact proof subject, current 00-06 truth, and nine protected initial hashes",
+    "validation_horizon": "final aggregate correctness, earned-status precision, scope containment, and readiness for parent handoff/ledger mechanics"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md", "sections": ["Required product behavior", "Proof wall and stop conditions", "Earned status"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md", "sections": ["Under-specified questions adjudicated", "Exact ceilings", "Proof wall and stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/proof-stage/20260801T135934Z--vocabulary-resolution-proof-wall.md", "sections": ["Proof outcomes", "Command wall", "Protected and deferred boundaries"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/proof-stage/20260801T140625Z--proof-review-clean.md", "sections": ["CLEAN verdict and earned boundary"]},
+    {"path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md", "sections": ["Vocabulary row"]},
+    {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sections": ["PG-PROFILE-01", "PG-VOCAB-01", "HCM-3.1 earned vocabulary boundary"]}
+  ],
+  "repo_truth": "HCM-3.1 planning, implementation, and proof stages are CLEAN. The four-commit reviewed stack through 0766550 plus current earned control/proof candidate implements only typed vocabulary resolution and the exact fixed Stage-10 Work Specification consumer. PG-VOCAB-01 closes and only the vocabulary subset of PG-PROFILE-01 advances. No P3/P4 exists. Protected and unrelated paths remain outside the subject. GitNexus FTS/change comparison remains unavailable rather than GREEN.",
+  "allowed_scope": [
+    "Review the exact 33-entry complete aggregate read-only and replay the manifest/fingerprint.",
+    "Verify implementation behavior, tests, proof claims, review lineage, and every affected 00-06 control statement agree without overclaiming.",
+    "Verify PG-VOCAB-01 closure, the limited PG-PROFILE-01 advance, Vocabulary seam classifications, and all explicit HCM-3.2+/Phase-3-exit deferrals are earned and mutually consistent.",
+    "Verify the aggregate is ready for one primary reviewed commit followed only by a mechanical completed v1.4 handoff/ledger commit."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create files/dispatches/handoffs/ledger state, delegate, or implement a fix.",
+    "Do not demand HCM-3.2 Context Resolution, HCM-3.3 Projection, Snapshot, posture, adapter/public transport, dependency, new command, or shipped non-empty vocabulary work.",
+    "Do not treat protected/unrelated working-copy paths or unavailable GitNexus capabilities as part of the subject or GREEN evidence."
+  ],
+  "tasks": [
+    "Return findings first in P1/P2/P3/P4 order with unique final-closeout IDs and exact path/line evidence.",
+    "Replay all 33 hashes, aggregate subject, typed stage lineage, parent registry, and causal budget.",
+    "Audit complete aggregate behavior and proof for false positives, missing negatives, overclaim, scope drift, stale control truth, and closeout incompatibility.",
+    "Return CLEAN only if no valid P1/P2 remains and any P3/P4 has an exact disposition for subject sha256:b8a0d61be8ebcb1179ff0c83b8bf5659de9f41bd0d9d93bad7b26d0ece615563."
+  ],
+  "contracts_and_gates": [
+    "This is the one final-closeout discovery cycle after proof CLEAN; findings require consolidated remediation and a different-fresh closure before any completion handoff.",
+    "CLEAN authorizes the primary reviewed aggregate commit and subsequent mechanical closeout only; it does not authorize new implementation or HCM-3.2.",
+    "The mechanical commit may contain only the completed v1.4 parent handoff, rebuilt ledger, directly required closeout index artifacts, and exact inventory rows if required."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if aggregate behavior/proof/control truth is incomplete, inconsistent, lossy, overclaimed, or outside the selector.",
+    "Return BLOCKED only for a genuine external/authority/capability boundary outside HCM-3.1.",
+    "Report rather than repair; do not write global or repository state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}
