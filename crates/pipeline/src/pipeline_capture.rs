@@ -36,6 +36,7 @@ use handbook_engine::artifact_intake::{
 use handbook_engine::artifact_intake_registry::AcquisitionModeV1;
 use handbook_engine::artifact_repository::{ArtifactRepositoryV1, ArtifactTargetV1};
 use handbook_engine::canonical_yaml::{canonical_yaml_bytes, parse_canonical_yaml};
+use handbook_engine::VocabularyDefinition;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
@@ -45,7 +46,6 @@ use std::fs;
 use std::io::Write;
 use std::path::{Component, Path, PathBuf};
 
-const WORK_SPECIFICATION_PROFILE_REF: &str = "example.profile.hcm-2-4-work-specification@1.0.0";
 const WORK_SPECIFICATION_KIND_REF: &str = "handbook.artifact-kind.work-specification@1.1.0";
 const WORK_SPECIFICATION_INSTANCE_ID: &str = "work_specification";
 const WORK_SPECIFICATION_INTAKE_REF: &str = "handbook.intake.work-specification@1.0.0";
@@ -1712,7 +1712,10 @@ fn admit_work_specification(
     let context = repository
         .operation_context(target.kind_ref(), target.instance_id())
         .map_err(|err| format!("Work Specification operation context did not resolve: {err}"))?;
-    if context.profile_ref().as_str() != WORK_SPECIFICATION_PROFILE_REF
+    let selected_profile_ref = repository
+        .selected_profile_ref()
+        .map_err(|err| format!("Work Specification selected profile did not resolve: {err}"))?;
+    if context.profile_ref() != &selected_profile_ref
         || context.kind_ref().as_str() != WORK_SPECIFICATION_KIND_REF
         || context.instance_id().as_str() != WORK_SPECIFICATION_INSTANCE_ID
         || context.schema_ref().as_str() != WORK_SPECIFICATION_SCHEMA_REF
@@ -1805,14 +1808,21 @@ fn admit_work_specification(
             .map_err(|err| format!("Work Specification YAML canonicalization failed: {err}"))?,
     )
     .map_err(|_| "Work Specification canonical YAML was not UTF-8".to_string())?;
-    let markdown_view = render_work_specification_markdown(&evaluation.normalized_content)?;
+    let vocabulary = repository
+        .resolved_vocabulary()
+        .map_err(|err| format!("Work Specification selected vocabulary did not resolve: {err}"))?;
+    let markdown_view =
+        render_work_specification_markdown(&evaluation.normalized_content, &vocabulary)?;
     Ok(AdmittedWorkSpecification {
         canonical_yaml,
         markdown_view,
     })
 }
 
-fn render_work_specification_markdown(content: &Value) -> Result<String, String> {
+fn render_work_specification_markdown(
+    content: &Value,
+    vocabulary: &VocabularyDefinition,
+) -> Result<String, String> {
     let object = content
         .as_object()
         .ok_or_else(|| "admitted Work Specification content must remain an object".to_string())?;
@@ -1832,9 +1842,33 @@ fn render_work_specification_markdown(content: &Value) -> Result<String, String>
             .and_then(Value::as_str)
             .ok_or_else(|| "admitted Work Specification status is unavailable".to_string())?,
     )?;
-    Ok(format!(
-        "# Work Specification\n\n## Objective\n\n{objective}\n\n## Scope\n\n{scope}\n\n## Non-Goals\n\n{non_goals}\n\n## Acceptance Criteria\n\n{acceptance}\n\n## Status\n\n{status}\n"
-    ))
+    let heading = match vocabulary.explicit_label("delivery_unit") {
+        Some(label) => format!(
+            "# Work Specification — {}",
+            controlled_markdown_text(label)?
+        ),
+        None => "# Work Specification".to_string(),
+    };
+    let mut rendered = format!(
+        "{heading}\n\n## Objective\n\n{objective}\n\n## Scope\n\n{scope}\n\n## Non-Goals\n\n{non_goals}\n\n## Acceptance Criteria\n\n{acceptance}\n\n## Status\n\n{status}\n"
+    );
+    if !vocabulary.absorptions().is_empty() {
+        rendered.push_str("\n## Vocabulary\n");
+        for absorption in vocabulary.absorptions() {
+            rendered.push_str(&format!("\n### `{}`\n", absorption.unit_id()));
+            for role_id in absorption.absorbs() {
+                let label = vocabulary
+                    .display_label(role_id)
+                    .ok_or_else(|| format!("selected vocabulary lost absorbed role `{role_id}`"))?;
+                rendered.push_str(&format!(
+                    "\n- `{role_id}`: {}",
+                    controlled_markdown_text(label)?
+                ));
+            }
+            rendered.push('\n');
+        }
+    }
+    Ok(rendered)
 }
 
 fn controlled_markdown_list(value: Option<&Value>, field: &str) -> Result<String, String> {

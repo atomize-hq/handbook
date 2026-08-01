@@ -198,6 +198,128 @@ fn install_stage_10_work_specification_ready_repo() -> (tempfile::TempDir, PathB
     (dir, repo_root)
 }
 
+fn install_stage_10_hcm_3_1_vocabulary_repo() -> (tempfile::TempDir, PathBuf) {
+    let (dir, repo_root) = install_stage_10_work_specification_ready_repo();
+    let baseline_selection_path = repo_root.join(".handbook/profile-selection.json");
+    let baseline_selection =
+        handbook_engine::artifact_intake_registry::RepositoryProfileSelectionV1::from_json_bytes(
+            &fs::read(&baseline_selection_path).unwrap(),
+        )
+        .unwrap();
+    let baseline_profile = handbook_engine::resolve_profile_selection(
+        &repo_root,
+        baseline_selection.profile_request(),
+    )
+    .unwrap();
+    let fixture_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../engine/tests/fixtures/hcm_3_1_vocabulary_resolution");
+
+    let profile_target =
+        repo_root.join(".handbook/definitions/profiles/hcm-3-1-vocabulary-resolution-1.0.0.yaml");
+    let vocabulary_target =
+        repo_root.join(".handbook/definitions/vocabularies/hcm-3-1-vocabulary-1.0.0.yaml");
+    fs::create_dir_all(profile_target.parent().expect("profile parent")).unwrap();
+    fs::create_dir_all(vocabulary_target.parent().expect("vocabulary parent")).unwrap();
+    let mut profile: serde_json::Value = serde_json::from_slice(
+        &fs::read(
+            repo_root.join(".handbook/definitions/profiles/work-specification-root-1.0.0.yaml"),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    profile["profile_id"] = serde_json::json!("example.profile.hcm-3-1-vocabulary-resolution");
+    profile["vocabulary_ref"] = serde_json::json!("example.vocabulary.hcm-3-1@1.0.0");
+    profile
+        .as_object_mut()
+        .unwrap()
+        .remove("profile_fingerprint");
+    let definition = profile.clone();
+    profile["profile_fingerprint"] = handbook_engine::DefinitionFingerprint::from_json_value(
+        &serde_json::json!({
+            "definition": definition,
+            "dependencies": [
+                {
+                    "definition_class": "artifact_instance_registry",
+                    "reference": "example.profile.hcm-3-1-vocabulary-resolution@1.0.0",
+                    "fingerprint": baseline_profile.artifact_instances().fingerprint().as_str(),
+                },
+                {
+                    "definition_class": "profile",
+                    "reference": "handbook.profile.shipped-root@1.2.0",
+                    "fingerprint": "sha256:40c5fdb8a6ea42cf0f5f2c5cac8306ec7ad3a238c341653947f85abc93d72c40",
+                },
+                {
+                    "definition_class": "vocabulary",
+                    "reference": "example.vocabulary.hcm-3-1@1.0.0",
+                    "fingerprint": "sha256:0a28353460ce60a0fc53ba5e99ea2ec753abf94638489fe1eebd69b317d90ec4",
+                }
+            ]
+        }),
+    )
+    .unwrap()
+    .to_string()
+    .into();
+    fs::write(
+        &profile_target,
+        serde_json::to_vec_pretty(&profile).unwrap(),
+    )
+    .unwrap();
+    fs::copy(
+        fixture_root.join("definitions/vocabularies/example.vocabulary.hcm-3-1/1.0.0.yaml"),
+        &vocabulary_target,
+    )
+    .expect("copy HCM-3.1 vocabulary");
+
+    let selection_path = repo_root.join(".handbook/profile-selection.json");
+    let mut selection: serde_json::Value =
+        serde_json::from_slice(&fs::read(&selection_path).unwrap()).unwrap();
+    selection["selected_profile_ref"] =
+        serde_json::json!("example.profile.hcm-3-1-vocabulary-resolution@1.0.0");
+    let profile_sources = selection["profile_sources"].as_array_mut().unwrap();
+    profile_sources.retain(|source| {
+        source["exact_ref"].as_str() != Some("example.profile.hcm-2-4-work-specification@1.0.0")
+    });
+    profile_sources.push(serde_json::json!({
+        "exact_ref": "example.profile.hcm-3-1-vocabulary-resolution@1.0.0",
+        "source": {
+            "kind": "repository_path",
+            "path": ".handbook/definitions/profiles/hcm-3-1-vocabulary-resolution-1.0.0.yaml"
+        }
+    }));
+    selection["vocabulary_sources"]
+        .as_array_mut()
+        .unwrap()
+        .push(serde_json::json!({
+            "exact_ref": "example.vocabulary.hcm-3-1@1.0.0",
+            "source": {
+                "kind": "repository_path",
+                "path": ".handbook/definitions/vocabularies/hcm-3-1-vocabulary-1.0.0.yaml"
+            }
+        }));
+    fs::write(
+        &selection_path,
+        serde_json::to_vec_pretty(&selection).unwrap(),
+    )
+    .unwrap();
+    let admitted =
+        handbook_engine::artifact_intake_registry::RepositoryProfileSelectionV1::from_json_bytes(
+            &fs::read(&selection_path).unwrap(),
+        )
+        .expect("admit HCM-3.1 profile selection");
+    handbook_engine::resolve_profile_selection(&repo_root, admitted.profile_request())
+        .expect("resolve HCM-3.1 profile selection");
+    (dir, repo_root)
+}
+
+fn hcm_3_1_vocabulary_markdown_view() -> String {
+    fs::read_to_string(
+        Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../engine/tests/fixtures/hcm_3_1_vocabulary_resolution")
+            .join("artifacts/feature_spec/FEATURE_SPEC.md"),
+    )
+    .expect("HCM-3.1 vocabulary Markdown golden")
+}
+
 fn custom_storage_layout() -> PipelineStorageLayoutContract {
     PipelineStorageLayoutContract::try_from_paths(
         ".custom_handbook/state",
@@ -837,6 +959,43 @@ fn capture_apply_stage_10_matches_shared_golden_from_completed_external_output()
         provenance["payload_sha256"],
         normalized_compile_payload_sha256(&compile_payload)
     );
+}
+
+#[test]
+fn capture_apply_stage_10_consumes_selected_vocabulary_without_absorption_loss() {
+    let input = stage_10_completed_feature_spec_input();
+    let expected = hcm_3_1_vocabulary_markdown_view();
+    let mut observed = Vec::new();
+
+    for _ in 0..2 {
+        let (_dir, repo_root) = install_stage_10_hcm_3_1_vocabulary_repo();
+        capture_pipeline_output(&repo_root, &stage_10_request(input.clone()))
+            .expect("capture with selected HCM-3.1 vocabulary");
+        assert_eq!(
+            fs::read_to_string(
+                repo_root.join("artifacts/work-specification/work-specification.yaml")
+            )
+            .unwrap(),
+            input,
+            "vocabulary presentation cannot change canonical artifact truth"
+        );
+        let rendered =
+            fs::read_to_string(repo_root.join("artifacts/feature_spec/FEATURE_SPEC.md")).unwrap();
+        assert_eq!(rendered, expected);
+        assert_eq!(rendered.matches("### `").count(), 2);
+        assert_eq!(
+            rendered
+                .lines()
+                .filter(|line| line.starts_with("- `"))
+                .count(),
+            3,
+            "every directed absorption edge must be rendered"
+        );
+        assert!(rendered.ends_with('\n'));
+        assert!(!rendered.ends_with("\n\n"));
+        observed.push(rendered);
+    }
+    assert_eq!(observed[0], observed[1], "real-path replay must be exact");
 }
 
 #[test]

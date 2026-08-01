@@ -20,7 +20,7 @@ use crate::stable_role_registry::read_trusted_repo_source;
 use crate::{
     resolve_profile_selection, ArtifactInstanceDescriptor, DefinitionFingerprint, DefinitionSource,
     ExactDefinitionRef, RegistryLoadErrorKind, ResolvedArtifactRegistry, ResolvedInstanceProfile,
-    SourceByteBudget, SymbolicId, REPOSITORY_IDENTITY_REPO_PATH,
+    SourceByteBudget, SymbolicId, VocabularyDefinition, REPOSITORY_IDENTITY_REPO_PATH,
 };
 use std::fmt;
 use std::path::{Path, PathBuf};
@@ -300,6 +300,14 @@ impl ArtifactRepositoryV1 {
 
     pub(crate) fn registry(&self) -> &ResolvedArtifactRegistry {
         &self.registry
+    }
+
+    pub fn selected_profile_ref(&self) -> Result<ExactDefinitionRef, ArtifactRepositoryErrorV1> {
+        self.with_recovered_repository(|repository| Ok(repository.profile.exact_ref().clone()))
+    }
+
+    pub fn resolved_vocabulary(&self) -> Result<VocabularyDefinition, ArtifactRepositoryErrorV1> {
+        self.with_recovered_repository(|repository| Ok(repository.profile.vocabulary().clone()))
     }
 
     pub fn list_kinds(&self) -> Result<Vec<ArtifactKindListItemV1>, ArtifactRepositoryErrorV1> {
