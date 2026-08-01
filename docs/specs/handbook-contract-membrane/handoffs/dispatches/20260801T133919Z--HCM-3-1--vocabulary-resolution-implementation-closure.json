@@ -1,0 +1,187 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T133919Z--HCM-3-1--vocabulary-resolution-implementation-closure",
+  "created_at_utc": "2026-08-01T13:39:19Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T122747Z--HCM-3-1--vocabulary-resolution",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "doubt-driven-development",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.1",
+  "packet_id": "HCM-3.1-P2-profile-renderer-adoption",
+  "subject_fingerprint": "sha256:f011d2384279e8d667121bb823564a1e7152aea6fd6399631adb30c5b7208998",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.1-vocabulary-resolution-implementation-closure-1",
+    "trigger_run_ids": [
+      "hcm31_implementation_review"
+    ],
+    "finding_refs": [
+      "HCM31-IMP-DISC-001",
+      "HCM31-IMP-DISC-002",
+      "HCM31-IMP-DISC-003"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T12:27:47Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.1-vocabulary-resolution-full-slice",
+        "packet_ids": [
+          "HCM-3.1-P1-vocabulary-kernel",
+          "HCM-3.1-P2-profile-renderer-adoption",
+          "HCM-3.1-P3-proof-control-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:d0f92e3453edc70c4ed9a185d69dfbbe631fbe84653bad07ecbf060d8ef20ee2"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f32411b780227c90d7d3146339f933cd19df4911a82043d981958f67663b8758",
+    "integrated_outcome_id": "hcm-3.1-vocabulary-resolution-full-slice",
+    "outcome_registry_fingerprint": "sha256:d0f92e3453edc70c4ed9a185d69dfbbe631fbe84653bad07ecbf060d8ef20ee2",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260801T132625Z--HCM-3-1--vocabulary-resolution-implementation-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.1-vocabulary-resolution-implementation-closure-convergence-1",
+    "completed_at_utc": "2026-08-01T13:39:09Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "cargo test -p handbook-engine --test vocabulary_registry; cargo test -p handbook-engine --test profile_selection; cargo test -p handbook-pipeline --test pipeline_capture; cargo clippy -p handbook-engine --test vocabulary_registry -- -D warnings",
+        "evidence_ref": "vocabulary 7/7, profile 20/20, pipeline 48/48, focused strict Clippy PASS"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "reconcile the three predecessor findings against the unchanged implementation aggregate and the one-file test remediation",
+        "evidence_ref": "normalization, self-loop, and shipped-vector proof added; no production, fixture, shipped definition, dependency, or public API change"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted 12-entry repo-path-NUL-SHA256-newline remediated implementation subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:f011d2384279e8d667121bb823564a1e7152aea6fd6399631adb30c5b7208998"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "format check exited 0 after mechanical formatting"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "working-tree whitespace check exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/artifact_repository.rs", "sha256": "b1f516527454cc86b49c193e8217addff6a21789be52b774b14b4a2655cbba73"},
+      {"path": "crates/engine/src/lib.rs", "sha256": "f06041a66802f2239e8d1ac434e9af9cbe7dcdbd9edc9160e29676c98de65a41"},
+      {"path": "crates/engine/src/profile_selection.rs", "sha256": "a449dd7ee577649aa191c7eba56cdd30b72c1364cc451144584c5d8619316902"},
+      {"path": "crates/engine/src/vocabulary_registry.rs", "sha256": "cd2250df76776ebe42c7ba2690f66c646bdeb9b7da5ed3ba8cf537bade4c2c5a"},
+      {"path": "crates/engine/tests/fixtures/hcm_3_1_vocabulary_resolution/artifacts/feature_spec/FEATURE_SPEC.md", "sha256": "c4f0632935939e5ef91068f1ab783a0c7a54fe4cc7e04c462a8d82712f5018d4"},
+      {"path": "crates/engine/tests/fixtures/hcm_3_1_vocabulary_resolution/definitions/vocabularies/example.vocabulary.hcm-3-1/1.0.0.yaml", "sha256": "585c62b4be167f3d914f276986b138c0356c0a24bd41aa41b679e2d29d781487"},
+      {"path": "crates/engine/tests/profile_selection.rs", "sha256": "57df5eea13ddee64e974742cf55325803a02368aed3e5b2dc518191ca0d510cd"},
+      {"path": "crates/engine/tests/vocabulary_registry.rs", "sha256": "04832d5c80e73a7810f8eabb38df793f31d649bbeb0f9b36c41269bdcd708ee5"},
+      {"path": "crates/pipeline/src/pipeline_capture.rs", "sha256": "535d6fda07ddff03371484a4ec5546a34d77f05af9a0aba14045bf9ce8eb3938"},
+      {"path": "crates/pipeline/tests/pipeline_capture.rs", "sha256": "35db8ea21e4767334a95b276695f6e38f4fc6853eae6a0fe9708b08395ba86ec"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T132527Z--p1-p2-convergence.md", "sha256": "df2c4e9434a8dc778d7454cb249c6268cd5a7188f78215e2f912546126d3acc9"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T133853Z--implementation-discovery-remediation.md", "sha256": "4aa0f913ab4480ba83443fc8964c1c38923222e00a108dff435ad0d7c6914189"}
+    ],
+    "aggregate_fingerprint": "sha256:f011d2384279e8d667121bb823564a1e7152aea6fd6399631adb30c5b7208998"
+  },
+  "active_resolution": {
+    "level": "HCM-3.1 implementation closure",
+    "scope_horizon": "closure of exactly three P2 test-proof findings over the complete implementation aggregate",
+    "detail_resolution": "Unicode whitespace/lowercase/non-folding vectors, explicit absorption self-loop refusal, and immutable shipped vocabulary fingerprint",
+    "temporal_horizon": "same implementation stage after one consolidated remediation of the discovery subject",
+    "authority_horizon": "unchanged HCM-3.1 only; no production expansion, HCM-3.2/3.3, shipped mutation, public transport, dependency, push, or historical rewrite",
+    "memory_horizon": "immutable implementation FINDINGS result, 12-entry remediated subject, unchanged production commits bbe3140 and 3be3200, and focused convergence evidence",
+    "validation_horizon": "close all three predecessor finding IDs or emit only genuinely remediation-caused/unmasked findings"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md", "sections": ["Alias normalization and collision rule", "Canonical fingerprint", "Production and test ceilings"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md", "sections": ["Fingerprint selector", "Test selector"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T133853Z--implementation-discovery-remediation.md", "sections": ["Consolidated disposition", "Post-remediation convergence", "Remaining gate"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T132625Z--HCM-3-1--vocabulary-resolution-implementation-review.json", "sections": ["review_cycle", "subject_manifest", "return_contract"]}
+  ],
+  "repo_truth": "The fresh implementation discovery reviewer matched the original aggregate and returned three P2 proof gaps only. The parent added exact normalization/non-folding, self-loop, and shipped-fingerprint regressions in one existing test file. All focused suites, focused strict Clippy, formatting, and whitespace checks pass. Production and shipped-definition bytes are unchanged. GitNexus could not index the edited test functions and remains UNKNOWN rather than GREEN.",
+  "allowed_scope": [
+    "Review the complete 12-entry remediated implementation subject read-only and determine whether it closes all three predecessor findings.",
+    "Replay the normalization matrix, explicit self-loop refusal, and exact shipped fingerprint assertion against the frozen selector.",
+    "Confirm the one-file remediation changes only proof coverage and leaves the previously reviewed production behavior and aggregate intact."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger/control-pack state, delegate, or implement a fix.",
+    "Do not reuse predecessor finding IDs as newly emitted findings; cite them only as closure triggers.",
+    "Do not review HCM-3.2/3.3, demand production expansion, mutate shipped definitions, add public operations/dependencies, or classify unavailable GitNexus capabilities GREEN."
+  ],
+  "tasks": [
+    "Validate closure lineage, exact three finding refs, unchanged registry/budget, and the 12-entry manifest.",
+    "Independently verify HCM31-IMP-DISC-001 is closed by Unicode whitespace, lowercase expansion, and explicit non-folding assertions.",
+    "Independently verify HCM31-IMP-DISC-002 is closed by a fingerprint-valid self-loop that returns DependencyCycle.",
+    "Independently verify HCM31-IMP-DISC-003 is closed by the exact shipped vocabulary fingerprint assertion.",
+    "Return new unique findings only for remediation-caused/unmasked issues; otherwise return CLEAN for subject sha256:f011d2384279e8d667121bb823564a1e7152aea6fd6399631adb30c5b7208998."
+  ],
+  "contracts_and_gates": [
+    "Separately typed proof-stage work remains forbidden unless this closure is CLEAN with no unresolved P1/P2.",
+    "The original FINDINGS dispatch/result remains immutable; this is a different-fresh closure under the same parent, registry, and causal budget.",
+    "CLEAN ends the implementation discovery lineage and authorizes only the planned proof stage.",
+    "Shipped vocabulary bytes/fingerprint and stable machine identities remain immutable."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if any predecessor issue remains open or remediation unmasked a new unique P1/P2 in the same implementation cause.",
+    "Return BLOCKED only for a genuine authority/capability boundary outside HCM-3.1.",
+    "Report rather than repair; do not broaden authority or write global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}

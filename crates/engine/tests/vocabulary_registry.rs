@@ -54,6 +54,10 @@ fn exact_empty_mapping_vocabulary_loads() {
         vocabulary.stable_role_registry_fingerprint().as_str(),
         "sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029"
     );
+    assert_eq!(
+        vocabulary.vocabulary_fingerprint().as_str(),
+        "sha256:69113b1a9271ce207d45bdb91ebae8d6516249e16b59891b292546078364a22b"
+    );
 }
 #[test]
 fn changed_mapping_or_role_pair_refuses() {
@@ -259,6 +263,35 @@ fn canonical_semantic_order_and_alias_normalization_replay_one_identity() {
         vocabulary.resolve_untyped("feature"),
         VocabularyResolution::Unique("delivery_unit".to_string())
     );
+
+    let mut normalized = nonempty_value();
+    normalized["aliases"]["delivery_unit"] =
+        serde_json::json!(["a-b", "i\u{307}tem", "résumé", "sprint feature", "ｑｕａｄ"]);
+    close_fingerprint(&mut normalized);
+    normalized["aliases"]["delivery_unit"] =
+        serde_json::json!(["A-B", "İTEM", "Résumé", "Sprint\u{2003}Feature", "ＱＵＡＤ"]);
+    let vocabulary = load_value(&normalized).unwrap();
+
+    for normalized_alias in [
+        "a-b",
+        "i\u{307}tem",
+        "résumé",
+        "SPRINT\t \u{2003}FEATURE",
+        "ｑｕａｄ",
+    ] {
+        assert_eq!(
+            vocabulary.resolve_untyped(normalized_alias),
+            VocabularyResolution::Unique("delivery_unit".to_string()),
+            "{normalized_alias:?} must follow the frozen lowercase/whitespace rule"
+        );
+    }
+    for non_folded_alias in ["a b", "resume", "quad"] {
+        assert_eq!(
+            vocabulary.resolve_untyped(non_folded_alias),
+            VocabularyResolution::Unknown,
+            "punctuation, accents, and compatibility characters must not fold"
+        );
+    }
 }
 
 #[test]
@@ -345,6 +378,16 @@ fn vocabulary_validation_refuses_unknown_capability_authority_ownership_and_cycl
             .push(serde_json::json!("delivery_unit"));
         close_fingerprint(&mut cycle);
         cases.push(("cycle", cycle, RegistryLoadErrorKind::DependencyCycle));
+
+        let mut self_loop = nonempty_value();
+        self_loop["absorptions"][0]["absorbs"] =
+            serde_json::json!(["delivery_unit", "implementation_unit"]);
+        close_fingerprint(&mut self_loop);
+        cases.push((
+            "self loop",
+            self_loop,
+            RegistryLoadErrorKind::DependencyCycle,
+        ));
 
         let mut extensions = nonempty_value();
         extensions["extensions"]["future"] = serde_json::json!(true);
