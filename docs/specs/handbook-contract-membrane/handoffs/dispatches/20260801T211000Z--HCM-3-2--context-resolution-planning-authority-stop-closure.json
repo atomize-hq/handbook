@@ -1,0 +1,247 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T211000Z--HCM-3-2--context-resolution-planning-authority-stop-closure",
+  "created_at_utc": "2026-08-01T21:10:00Z",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed"
+  ],
+  "parent_orchestration_id": "20260801T202515Z--HCM-3-2--context-resolution-kernel",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-P1-planning-selector",
+  "subject_fingerprint": "sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.2-context-resolution-planning-authority-stop-closure-1",
+    "trigger_run_ids": [
+      "hcm32_planning_review"
+    ],
+    "finding_refs": [
+      "HCM32-PLN-DISC-001",
+      "HCM32-PLN-DISC-002",
+      "HCM32-PLN-DISC-003",
+      "HCM32-PLN-DISC-004"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T20:25:15Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-full-slice",
+        "packet_ids": [
+          "HCM-3.2-P1-planning-selector",
+          "HCM-3.2-P2-kernel-implementation",
+          "HCM-3.2-P3-proof-control-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:32ce222086ce006ee833e096bdd252f2c0105045d8b51bf61ba7b84f330edc08"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:9e317280367a3668c484802c4cbc0e4e090faad692692e8327a40c11b73346ae",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-full-slice",
+    "outcome_registry_fingerprint": "sha256:32ce222086ce006ee833e096bdd252f2c0105045d8b51bf61ba7b84f330edc08",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260801T202751Z--HCM-3-2--context-resolution-planning-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-context-resolution-planning-authority-stop-closure-convergence-1",
+    "completed_at_utc": "2026-08-01T21:09:50Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "reconcile all four planning findings against live HCM-3.2 authority, exact Context Resolution registries, GitNexus impact, and no-new-framework/schema boundary",
+        "evidence_ref": "five-file subject below; runtime and RED edit count zero; P1 authority stop and three P2 dispositions recorded"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory exact authority-bearing envelope/transition fields, existing context_resolution_registry admitted families, and stack generalization symbols/processes",
+        "evidence_ref": "no admitted root/disposition authority resolver found; AuthoredStack::resolve and load_bytes are CRITICAL upstream; protected external roots not accessed"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted five-entry repo-path-NUL-SHA256-newline authority-stop subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 and Markdown fence-balance inspection for all five planning files",
+        "evidence_ref": "files decode and fences remain balanced"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-3.2",
+        "evidence_ref": "parent pre-closure command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "sha256": "b4e612a75be69989bb2e4876193d0ef5cc451bb863e7e62b680f98df8e274d0a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "sha256": "72e327f69168cc515834a24b5ee26c8109cafe5cf2c39ab1e086e520ef52c2ae"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md",
+        "sha256": "cd479c78886abf6ffb67fff4a6eb3232ad0d6cacbe38926ae257e2dc26f45e6d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+        "sha256": "c90b59c89c555c34dadeb6f5e5cf5c52a2c00776764141c622916ba1a422556d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+        "sha256": "7755739aeac5d82802b3b2a7fe4e124d741fc7583ad9ddce88eea93c04e359b9"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 planning authority-stop closure",
+    "scope_horizon": "exact HCM-3.2 planning subject and four discovery findings; no runtime implementation",
+    "detail_resolution": "missing trusted authority resolver, candidate mapping, deny-separated containment, exact public signatures, and named CRITICAL stack impact",
+    "temporal_horizon": "after consolidated planning remediation and before any RED/Rust edit",
+    "authority_horizon": "same-slice authority stop only; no generic authority framework, schema, HCM-3.3+, product edit, integration publication, or push",
+    "memory_horizon": "immutable discovery dispatch/result, five-file remediated subject, exact base/remote observations, and frozen parent registry",
+    "validation_horizon": "verify all four findings are accurately closed or converted to a precise resumable authority stop"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "sections": [
+        "Unresolved admission authority",
+        "Public Rust surface",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": [
+        "Selected owner and call boundary",
+        "Inheritance selector",
+        "Mutation selector",
+        "Memory, validation, and escalation selector",
+        "Exact public symbols",
+        "Exact ceilings",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md",
+      "sections": [
+        "Findings and consolidated disposition",
+        "Why implementation cannot safely continue",
+        "Exact resumption decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T202751Z--HCM-3-2--context-resolution-planning-review.json",
+      "sections": [
+        "review_cycle",
+        "subject_manifest",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Context Resolution envelope",
+        "Resolution escalation and memory promotion"
+      ]
+    }
+  ],
+  "repo_truth": "The discovery reviewer found one P1 and three P2 gaps. Live contracts name semantic authorities but no admitted authority-record resolver authenticates root/disposition inputs. Core policy contains trigger classes, not exact trigger definitions. Containment now separates positive allow language from inherited deny subtraction. Public callable signatures remain unselected. GitNexus reports HIGH/CRITICAL impact beyond the initial ceiling. No Rust, test, fixture, dependency, profile, shipped definition, pipeline, or protected external path was edited or accessed.",
+  "allowed_scope": [
+    "Review the exact five-file remediated planning subject read-only and determine whether it accurately closes or converts all four findings into a durable HCM-3.2 authority stop.",
+    "Verify the claimed missing authority resolver and generic-framework boundary against the cited live contracts and existing Context Resolution registry.",
+    "Verify the candidate mapping, containment clarification, public-signature requirement, and CRITICAL-impact requirement are precise resumption gates.",
+    "Return CLEAN only if the subject is safe, non-completed, same-slice scoped, and no unresolved P1/P2 remains hidden behind the stop wording."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, implement, create a handoff/ledger/dispatch, delegate, or invent the missing authority model.",
+    "Do not authorize HCM-3.3+, a generic authority framework/schema, Rust/RED work, completed proof, integration publication, or push.",
+    "Do not reuse predecessor finding IDs as new findings; cite them only as closure triggers."
+  ],
+  "tasks": [
+    "Validate closure lineage, exact four finding refs, unchanged parent registry/budget, and five-entry manifest.",
+    "Verify HCM32-PLN-DISC-001 is accurately converted to an authority stop with exact resumption alternatives and no hidden implementation permission.",
+    "Verify HCM32-PLN-DISC-002 and HCM32-PLN-DISC-004 remain explicit resumption gates, and HCM32-PLN-DISC-003 is closed without contradiction.",
+    "Return findings first with new unique IDs only for remediation-caused or unmasked issues; otherwise return CLEAN for subject sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b."
+  ],
+  "contracts_and_gates": [
+    "The original discovery dispatch/result remains immutable; this is one consolidated remediation and different-fresh closure under the same parent, registry, and budget.",
+    "CLEAN closes only the planning discovery lineage as a true stop; it does not authorize RED/Rust, PG-RES-01 completion, or local integration-ref publication.",
+    "No shipped definition/profile/vocabulary, protected external path, or later-slice behavior may be used to make the subject appear complete.",
+    "No unresolved valid P1/P2 may be omitted from the durable authority boundary."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if a predecessor issue is obscured, misstated, or the resumption boundary is not exact.",
+    "Return BLOCKED if review itself requires missing authority or cannot validate the manifest/lineage.",
+    "Report rather than repair; do not broaden authority or write global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
