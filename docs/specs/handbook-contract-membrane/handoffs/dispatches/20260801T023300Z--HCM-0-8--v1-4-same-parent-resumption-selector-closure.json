@@ -1,0 +1,200 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T023300Z--HCM-0-8--v1-4-same-parent-resumption-selector-closure",
+  "created_at_utc": "2026-08-01T02:33:00Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T022300Z--HCM-0-8--v1-4-same-parent-resumption-validation-repair",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "20260801-v1-4-same-parent-resumption-validation-repair",
+  "subject_fingerprint": "sha256:18c10754a6a91c86f6c7c1db785582244460f9318bb85976eb59514785adf290",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "v1-4-same-parent-resumption-planning-closure-1",
+    "trigger_run_ids": [
+      "hcm_0_8_resumption_selector_review"
+    ],
+    "finding_refs": [
+      "HCM08-V14SPR-0001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T02:23:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-0.8-v1.4-same-parent-resumption-validation-repair",
+        "packet_ids": [
+          "20260801-v1-4-same-parent-resumption-validation-repair"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md"
+      }
+    ],
+    "fingerprint": "sha256:5394b405a66fe6ae99acad53b390cb8f39663128314fd2e7b5411c3bdbedf6a4"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f79081aff048f1b6891fe332525a7fe50a68dc73fee59e4b9882ea6c4117c8e0",
+    "integrated_outcome_id": "hcm-0.8-v1.4-same-parent-resumption-validation-repair",
+    "outcome_registry_fingerprint": "sha256:5394b405a66fe6ae99acad53b390cb8f39663128314fd2e7b5411c3bdbedf6a4",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260801T022520Z--HCM-0-8--v1-4-same-parent-resumption-selector-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "v1-4-same-parent-resumption-selector-closure-convergence-1",
+    "completed_at_utc": "2026-08-01T02:32:44Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "reconcile the planning finding with the operator-frozen direct-successor acceptance rule and live two-stop chain",
+        "evidence_ref": "selector Reproduced contradiction, Acceptance contract rules 2/4/5, Required RED and GREEN regressions, and Commit 1 boundary"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "verify the second authority stop directly names the first in source_handoff_ids and supersedes while both immutable records own their exact four-dispatch cutoffs",
+        "evidence_ref": "live immutable first and second smoke authority-stop records"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the one-entry repo-path-NUL-SHA256-newline manifest for the remediated selector",
+        "evidence_ref": "selector sha256 df941f9fad265b0cb2d5ef97b0266e791275b1af979f892cc35c28c8bef7c033; aggregate sha256:18c10754a6a91c86f6c7c1db785582244460f9318bb85976eb59514785adf290"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "inspect the remediated Markdown section structure",
+        "evidence_ref": "selector remains valid Markdown with unchanged identity, scope, causal stages, and three-commit sequence"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent command exited 0 after selector remediation"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+        "sha256": "df941f9fad265b0cb2d5ef97b0266e791275b1af979f892cc35c28c8bef7c033"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:18c10754a6a91c86f6c7c1db785582244460f9318bb85976eb59514785adf290"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 v1.4 same-parent resumption selector closure",
+    "scope_horizon": "closure of the single planning finding before RED tests or production edits",
+    "detail_resolution": "link-local direct dual successor semantics and the exact one-failure enabling-primary boundary",
+    "temporal_horizon": "planning closure after consolidated selector remediation",
+    "authority_horizon": "unchanged protocol repair only; no schema/history/product/smoke-dispatch/HCM-3.x/push authority",
+    "memory_horizon": "immutable FINDINGS dispatch/result, remediated selector, two smoke stops, and six smoke dispatches",
+    "validation_horizon": "close HCM08-V14SPR-0001 or emit only a genuinely remediation-unmasked unique finding"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+      "sections": [
+        "Reproduced contradiction",
+        "Acceptance contract",
+        "Required RED and GREEN regressions",
+        "Authorized three-commit dependency sequence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T022520Z--HCM-0-8--v1-4-same-parent-resumption-selector-review.json",
+      "sections": [
+        "review_cycle",
+        "subject_manifest",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Canonical truth and immutability",
+        "Causal cascading review hardening",
+        "Failure rules"
+      ]
+    }
+  ],
+  "repo_truth": "The planning reviewer found one selector contradiction. The selector now follows the operator-frozen link-local rule: the directly dual-linked second stop validates the first stop as an interim exact prefix, while the still-unsuperseded second stop alone remains the known temporary ordinary-validation failure until smoke closeout.",
+  "allowed_scope": [
+    "Review the exact remediated selector read-only and determine whether it closes HCM08-V14SPR-0001.",
+    "Verify the two-stop preterminal and terminal successor regression contracts match the direct dual-link acceptance rule.",
+    "Verify Commit 1 explicitly authorizes exactly one temporary failure at the latest unsuperseded second stop."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger, delegate, or implement the repair.",
+    "Do not reuse HCM08-V14SPR-0001 as a newly emitted finding ID.",
+    "Do not edit or reinterpret history, add schema/product/smoke-dispatch/HCM-3.x scope, push, or claim protocol completion."
+  ],
+  "tasks": [
+    "Validate the closure cycle, predecessor, finding ref, unchanged registry/budget, selector hash, and aggregate fingerprint.",
+    "Independently verify that the selector consistently applies link-local successor validity across acceptance, tests, and Commit 1.",
+    "Return findings first using a new unique ID for any remediation-unmasked issue; otherwise return CLEAN for sha256:18c10754a6a91c86f6c7c1db785582244460f9318bb85976eb59514785adf290."
+  ],
+  "contracts_and_gates": [
+    "RED tests and production edits remain forbidden unless this exact replacement planning subject is CLEAN.",
+    "The original FINDINGS dispatch/result remain immutable; this is a different-fresh closure under the same parent, registry, and causal budget.",
+    "CLEAN ends planning discovery and authorizes only selector-bounded RED and implementation work."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if the predecessor contradiction remains or if remediation unmasked a new same-cause issue.",
+    "Return BLOCKED if closing the finding requires a third behavioral path, schema change, or history edit.",
+    "Report rather than repair."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

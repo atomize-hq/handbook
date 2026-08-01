@@ -69,6 +69,24 @@ review stages, complete parent dispatch populations, structured finding
 disposition, and Git-reviewed diffs. Once committed, they are immutable and
 corrections are additive.
 
+### V1.4 same-parent resumption and terminality
+
+- A completed v1.4 handoff is terminal for its orchestration. No later handoff
+  or dispatch may resume that parent.
+- A non-completed v1.4 handoff remains a fail-closed cutoff unless the next
+  same-orchestration v1.4 handoff directly names it in both
+  `source_handoff_ids` and `supersedes`. Source-only, supersedes-only,
+  branching, and non-immediate links do not establish resumption.
+- Every same-parent successor preserves `program_id`, `phase_id`, `slice_id`,
+  `packet_id`, `orchestration_id`, and the integrated-outcome/causal-budget
+  identity derived from its dispatch prefix.
+- Every interim record reconciles exactly the parent dispatch prefix through
+  its own cutoff. A qualified successor does not rewrite that immutable
+  prefix; it only proves why later same-parent evidence may exist.
+- The latest unsuperseded record reconciles the complete parent population and
+  rejects every later dispatch. A cross-parent record never qualifies as that
+  successor; a same-packet dual-link attempt that changes orchestration fails.
+
 ## Handoff schema routing
 
 handbook.session-handoff records route only by top-level schema_version:

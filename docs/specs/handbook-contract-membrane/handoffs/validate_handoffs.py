@@ -1579,7 +1579,7 @@ def validate_v1_4_dispatch_population(
         manifest["through_created_at_utc"],
         record_path,
     )
-    population = sorted(
+    parent_population = sorted(
         (
             value
             for value in dispatches.values()
@@ -1591,20 +1591,10 @@ def validate_v1_4_dispatch_population(
             item[1]["dispatch_id"],
         ),
     )
-    future_dispatches = [
-        dispatch["dispatch_id"]
-        for path, dispatch, _ in population
-        if parse_utc_timestamp(dispatch["created_at_utc"], path) > cutoff
-    ]
-    if future_dispatches:
-        raise ValidationFailure(
-            f"{record_path}: parent dispatch population contains dispatches "
-            f"after the handoff cutoff: {future_dispatches!r}"
-        )
     predecessor_versions = sorted(
         {
             dispatch["schema_version"]
-            for _, dispatch, _ in population
+            for _, dispatch, _ in parent_population
             if dispatch["schema_version"] != "1.4"
         }
     )
@@ -1613,6 +1603,11 @@ def validate_v1_4_dispatch_population(
             f"{record_path}: v1.4 parent orchestration mixes immutable "
             f"predecessor dispatch versions {predecessor_versions!r}"
         )
+    population = [
+        value
+        for value in parent_population
+        if parse_utc_timestamp(value[1]["created_at_utc"], value[0]) <= cutoff
+    ]
     expected_ids = [dispatch["dispatch_id"] for _, dispatch, _ in population]
     actual_ids = [run["dispatch_id"] for run in record["delegated_runs"]]
     if actual_ids != expected_ids:
@@ -1645,6 +1640,145 @@ def validate_v1_4_dispatch_population(
         raise ValidationFailure(
             f"{record_path}: dispatch population aggregate fingerprint mismatch"
         )
+
+
+def validate_v1_4_handoff_chains(
+    records: list[tuple[Path, dict[str, Any]]],
+    dispatches: dict[str, tuple[Path, dict[str, Any], str]],
+) -> None:
+    v1_4_records = [
+        (path, record)
+        for path, record in records
+        if record.get("schema_version") == "1.4"
+    ]
+    record_by_id = {
+        record["handoff_id"]: (path, record) for path, record in v1_4_records
+    }
+    groups: dict[str, list[tuple[Path, dict[str, Any]]]] = {}
+    for path, record in v1_4_records:
+        validate_v1_4_dispatch_population(record, path, dispatches)
+        groups.setdefault(record["orchestration_id"], []).append((path, record))
+
+        dual_links = set(record["source_handoff_ids"]) & set(
+            record["supersedes"]
+        )
+        for predecessor_id in dual_links:
+            predecessor_entry = record_by_id.get(predecessor_id)
+            if predecessor_entry is None:
+                continue
+            _, predecessor = predecessor_entry
+            if (
+                record["packet_id"] == predecessor["packet_id"]
+                and record["orchestration_id"]
+                != predecessor["orchestration_id"]
+            ):
+                raise ValidationFailure(
+                    f"{path}: same-packet successor {record['handoff_id']!r} "
+                    "cannot change parent orchestration"
+                )
+
+    identity_fields = (
+        "program_id",
+        "phase_id",
+        "slice_id",
+        "packet_id",
+        "orchestration_id",
+    )
+    for orchestration_id, group in groups.items():
+        ordered = sorted(
+            group,
+            key=lambda item: (
+                parse_utc_timestamp(item[1]["created_at_utc"], item[0]),
+                item[1]["handoff_id"],
+            ),
+        )
+        group_ids = {record["handoff_id"] for _, record in ordered}
+        first_path, first_record = ordered[0]
+        selected_identity = tuple(
+            first_record[field] for field in identity_fields
+        )
+        causal_identity: tuple[tuple[str, str], ...] | None = None
+
+        for index, (path, record) in enumerate(ordered):
+            if tuple(record[field] for field in identity_fields) != selected_identity:
+                raise ValidationFailure(
+                    f"{path}: same-orchestration successor "
+                    f"{record['handoff_id']!r} changed selected identity"
+                )
+
+            same_parent_sources = set(record["source_handoff_ids"]) & group_ids
+            same_parent_supersedes = set(record["supersedes"]) & group_ids
+            if same_parent_sources != same_parent_supersedes:
+                raise ValidationFailure(
+                    f"{path}: same-orchestration successor "
+                    f"{record['handoff_id']!r} must name its predecessor in "
+                    "both source_handoff_ids and supersedes"
+                )
+            expected_predecessors = (
+                set()
+                if index == 0
+                else {ordered[index - 1][1]["handoff_id"]}
+            )
+            if same_parent_sources != expected_predecessors:
+                raise ValidationFailure(
+                    f"{path}: same-orchestration successor "
+                    f"{record['handoff_id']!r} does not directly continue the "
+                    "immediately preceding handoff"
+                )
+
+            cutoff = parse_utc_timestamp(record["created_at_utc"], path)
+            prefix_dispatches = [
+                dispatch
+                for dispatch_path, dispatch, _ in dispatches.values()
+                if dispatch["parent_orchestration_id"] == orchestration_id
+                and parse_utc_timestamp(
+                    dispatch["created_at_utc"], dispatch_path
+                )
+                <= cutoff
+            ]
+            record_causal_identity = tuple(
+                sorted(
+                    {
+                        (
+                            dispatch["causal_control"]["integrated_outcome_id"],
+                            dispatch["causal_control"]["causal_budget_id"],
+                        )
+                        for dispatch in prefix_dispatches
+                    }
+                )
+            )
+            if causal_identity is None:
+                causal_identity = record_causal_identity
+            elif record_causal_identity != causal_identity:
+                raise ValidationFailure(
+                    f"{path}: same-orchestration successor "
+                    f"{record['handoff_id']!r} changed integrated outcome or "
+                    "causal-budget identity"
+                )
+
+            future_dispatches = sorted(
+                dispatch["dispatch_id"]
+                for dispatch_path, dispatch, _ in dispatches.values()
+                if dispatch["parent_orchestration_id"] == orchestration_id
+                and parse_utc_timestamp(
+                    dispatch["created_at_utc"], dispatch_path
+                )
+                > cutoff
+            )
+            has_successor = index + 1 < len(ordered)
+            if record["status"] == "completed" and (
+                has_successor or future_dispatches
+            ):
+                raise ValidationFailure(
+                    f"{path}: completed v1.4 handoff "
+                    f"{record['handoff_id']!r} is terminal for its orchestration"
+                )
+            if not has_successor and future_dispatches:
+                raise ValidationFailure(
+                    f"{path}: latest unsuperseded v1.4 handoff "
+                    f"{record['handoff_id']!r} has later parent dispatches: "
+                    f"{future_dispatches!r}"
+                )
 
 
 def validate_v1_4_ancillary_observations(
@@ -3203,6 +3337,349 @@ def run_v1_4_causal_contract_self_test() -> int:
         )
         return 1
 
+    chain_values = [budget_discovery, budget_closure, supplemental_one]
+    chain_dispatches = {
+        value["dispatch_id"]: (
+            DISPATCHES_DIR / f"{value['dispatch_id']}.json",
+            value,
+            hashlib.sha256(value["dispatch_id"].encode()).hexdigest(),
+        )
+        for value in chain_values
+    }
+
+    def chain_record(
+        label: str,
+        cutoff: str,
+        *,
+        predecessor: str | None = None,
+        status: str = "escalation_required",
+        orchestration_id: str = parent_id,
+        dispatch_data: dict[str, tuple[Path, dict[str, Any], str]]
+        | None = None,
+    ) -> tuple[Path, dict[str, Any]]:
+        dispatch_data = dispatch_data or chain_dispatches
+        population = sorted(
+            (
+                value
+                for value in dispatch_data.values()
+                if value[1]["parent_orchestration_id"] == orchestration_id
+                and value[1]["created_at_utc"] <= cutoff
+            ),
+            key=lambda item: (item[1]["created_at_utc"], item[1]["dispatch_id"]),
+        )
+        encoded = "".join(
+            f"{path.relative_to(REPO_ROOT).as_posix()}\0{dispatch_sha256}\n"
+            for path, _, dispatch_sha256 in population
+        ).encode()
+        record = {
+            "schema_version": "1.4",
+            "handoff_id": label,
+            "created_at_utc": cutoff,
+            "status": status,
+            "program_id": "handbook-contract-membrane",
+            "phase_id": "HCM-0",
+            "slice_id": "HCM-0.8",
+            "packet_id": "packet-a",
+            "orchestration_id": orchestration_id,
+            "source_handoff_ids": [predecessor] if predecessor else [],
+            "supersedes": [predecessor] if predecessor else [],
+            "delegated_runs": [run(value) for _, value, _ in population],
+            "dispatch_population": {
+                "scope": "parent_orchestration",
+                "through_created_at_utc": cutoff,
+                "dispatch_count": len(population),
+                "algorithm": "sha256",
+                "encoding": "dispatch-ref-null-sha256-newline-v1",
+                "causal_budget_ids": sorted(
+                    {
+                        value["causal_control"]["causal_budget_id"]
+                        for _, value, _ in population
+                    }
+                ),
+                "aggregate_fingerprint": (
+                    "sha256:" + hashlib.sha256(encoded).hexdigest()
+                ),
+            },
+        }
+        return Path(f"{label}.json"), record
+
+    first_path, first_stop = chain_record(
+        "20260728T000500Z--HCM-0-8--self-test-first-stop",
+        budget_discovery["created_at_utc"],
+    )
+    second_path, second_stop = chain_record(
+        "20260728T000600Z--HCM-0-8--self-test-second-stop",
+        budget_closure["created_at_utc"],
+        predecessor=first_stop["handoff_id"],
+    )
+    terminal_path, terminal_stop = chain_record(
+        "20260728T000700Z--HCM-0-8--self-test-terminal",
+        supplemental_one["created_at_utc"],
+        predecessor=second_stop["handoff_id"],
+        status="completed",
+    )
+
+    try:
+        validate_v1_4_dispatch_population(
+            first_stop,
+            first_path,
+            chain_dispatches,
+        )
+    except ValidationFailure as error:
+        print(
+            "orchestration contract self-test failed: directly succeeded "
+            f"interim prefix rejected: {error}",
+            file=sys.stderr,
+        )
+        return 1
+
+    def expect_handoff_chain(
+        label: str,
+        record_values: list[tuple[Path, dict[str, Any]]],
+        dispatch_data: dict[str, tuple[Path, dict[str, Any], str]],
+        *,
+        accepted: bool,
+        error_ref: str | None = None,
+    ) -> bool:
+        try:
+            validate_v1_4_handoff_chains(record_values, dispatch_data)
+        except ValidationFailure as error:
+            return not accepted and (
+                error_ref is None or error_ref in str(error)
+            )
+        return accepted
+
+    first_two_dispatches = {
+        dispatch_id: value
+        for dispatch_id, value in chain_dispatches.items()
+        if value[1]["created_at_utc"] <= second_stop["created_at_utc"]
+    }
+    first_only_dispatches = {
+        budget_discovery["dispatch_id"]: chain_dispatches[
+            budget_discovery["dispatch_id"]
+        ]
+    }
+    chain_cases = [
+        (
+            "linked-two-stop-prefix",
+            [(first_path, first_stop), (second_path, second_stop)],
+            first_two_dispatches,
+            True,
+            None,
+        ),
+        (
+            "latest-unsuperseded-cutoff",
+            [(first_path, first_stop), (second_path, second_stop)],
+            chain_dispatches,
+            False,
+            second_stop["handoff_id"],
+        ),
+        (
+            "linked-two-stop-terminal-successor",
+            [
+                (first_path, first_stop),
+                (second_path, second_stop),
+                (terminal_path, terminal_stop),
+            ],
+            chain_dispatches,
+            True,
+            None,
+        ),
+        (
+            "orphan-later-dispatch",
+            [(first_path, first_stop)],
+            first_two_dispatches,
+            False,
+            first_stop["handoff_id"],
+        ),
+    ]
+
+    completed_first = copy.deepcopy(first_stop)
+    completed_first["status"] = "completed"
+    chain_cases.extend(
+        [
+            (
+                "dispatch-after-completion",
+                [(first_path, completed_first)],
+                first_two_dispatches,
+                False,
+                completed_first["handoff_id"],
+            ),
+            (
+                "handoff-after-completion",
+                [(first_path, completed_first), (second_path, second_stop)],
+                first_two_dispatches,
+                False,
+                completed_first["handoff_id"],
+            ),
+        ]
+    )
+
+    source_only = copy.deepcopy(second_stop)
+    source_only["supersedes"] = []
+    supersedes_only = copy.deepcopy(second_stop)
+    supersedes_only["source_handoff_ids"] = []
+    non_immediate = copy.deepcopy(terminal_stop)
+    non_immediate["source_handoff_ids"] = [first_stop["handoff_id"]]
+    non_immediate["supersedes"] = [first_stop["handoff_id"]]
+    cross_parent_path, cross_parent = chain_record(
+        "20260728T000600Z--HCM-0-8--self-test-cross-parent",
+        budget_closure["created_at_utc"],
+        orchestration_id=parent_id + "-other",
+    )
+    cross_parent["source_handoff_ids"] = [first_stop["handoff_id"]]
+    cross_parent["supersedes"] = [first_stop["handoff_id"]]
+    compound_cross_parent = copy.deepcopy(cross_parent)
+    compound_cross_parent["handoff_id"] += "-phase-drift"
+    compound_cross_parent["phase_id"] = "HCM-9"
+    compound_cross_parent_path = Path(
+        f"{compound_cross_parent['handoff_id']}.json"
+    )
+    cross_packet_transition = copy.deepcopy(compound_cross_parent)
+    cross_packet_transition["handoff_id"] += "-cross-packet"
+    cross_packet_transition["packet_id"] = "other-packet"
+    cross_packet_transition_path = Path(
+        f"{cross_packet_transition['handoff_id']}.json"
+    )
+    chain_cases.extend(
+        [
+            (
+                "source-only-link",
+                [(first_path, first_stop), (second_path, source_only)],
+                first_two_dispatches,
+                False,
+                source_only["handoff_id"],
+            ),
+            (
+                "supersedes-only-link",
+                [(first_path, first_stop), (second_path, supersedes_only)],
+                first_two_dispatches,
+                False,
+                supersedes_only["handoff_id"],
+            ),
+            (
+                "non-immediate-link",
+                [
+                    (first_path, first_stop),
+                    (second_path, second_stop),
+                    (terminal_path, non_immediate),
+                ],
+                chain_dispatches,
+                False,
+                non_immediate["handoff_id"],
+            ),
+            (
+                "cross-parent-successor",
+                [(first_path, first_stop), (cross_parent_path, cross_parent)],
+                first_two_dispatches,
+                False,
+                cross_parent["handoff_id"],
+            ),
+            (
+                "cross-parent-plus-phase-drift",
+                [
+                    (first_path, first_stop),
+                    (compound_cross_parent_path, compound_cross_parent),
+                ],
+                first_two_dispatches,
+                False,
+                compound_cross_parent["handoff_id"],
+            ),
+            (
+                "completed-plus-cross-parent-phase-drift",
+                [
+                    (first_path, completed_first),
+                    (compound_cross_parent_path, compound_cross_parent),
+                ],
+                first_two_dispatches,
+                False,
+                compound_cross_parent["handoff_id"],
+            ),
+            (
+                "historical-cross-packet-transition",
+                [
+                    (first_path, first_stop),
+                    (cross_packet_transition_path, cross_packet_transition),
+                ],
+                first_only_dispatches,
+                True,
+                None,
+            ),
+        ]
+    )
+
+    identity_fields = {
+        "program_id": "other-program",
+        "phase_id": "HCM-9",
+        "slice_id": "HCM-9.9",
+        "packet_id": "other-packet",
+    }
+    for field, changed_value in identity_fields.items():
+        drifted = copy.deepcopy(second_stop)
+        drifted[field] = changed_value
+        chain_cases.append(
+            (
+                f"{field}-drift",
+                [(first_path, first_stop), (second_path, drifted)],
+                first_two_dispatches,
+                False,
+                drifted["handoff_id"],
+            )
+        )
+
+    for drift_kind in ("integrated_outcome_id", "causal_budget_id"):
+        drift_dispatches = copy.deepcopy(first_two_dispatches)
+        drift_value = drift_dispatches[budget_closure["dispatch_id"]][1]
+        if drift_kind == "integrated_outcome_id":
+            drift_value["causal_control"][drift_kind] = (
+                "mechanical-closeout-outcome"
+            )
+        else:
+            drift_value["causal_control"][drift_kind] = "sha256:" + "9" * 64
+        drift_second_path, drift_second = chain_record(
+            f"20260728T000600Z--HCM-0-8--self-test-{drift_kind}-drift",
+            budget_closure["created_at_utc"],
+            predecessor=first_stop["handoff_id"],
+            dispatch_data=drift_dispatches,
+        )
+        chain_cases.append(
+            (
+                f"{drift_kind}-drift",
+                [(first_path, first_stop), (drift_second_path, drift_second)],
+                drift_dispatches,
+                False,
+                drift_second["handoff_id"],
+            )
+        )
+
+    added_prefix = copy.deepcopy(first_stop)
+    added_prefix["delegated_runs"].append(run(budget_closure))
+    chain_cases.append(
+        (
+            "interim-prefix-addition",
+            [(first_path, added_prefix)],
+            first_two_dispatches,
+            False,
+            added_prefix["handoff_id"],
+        )
+    )
+
+    for label, record_values, dispatch_data, accepted, error_ref in chain_cases:
+        if not expect_handoff_chain(
+            label,
+            record_values,
+            dispatch_data,
+            accepted=accepted,
+            error_ref=error_ref,
+        ):
+            expectation = "validate" if accepted else "fail closed"
+            print(
+                f"orchestration contract self-test failed: {label} did not "
+                f"{expectation}",
+                file=sys.stderr,
+            )
+            return 1
+
     runtime_allowance = load_json(INTERNAL_DISPATCH_TEMPLATE_PATH)
     runtime_allowance["subject_manifest"]["entries"][0]["path"] = (
         "src/fixtures/runtime-authority.json"
@@ -3463,7 +3940,9 @@ def run_v1_4_causal_contract_self_test() -> int:
         "mixed-version parents, offset cutoffs, omitted dispatches, and "
         "executable-prefix subdivision rejected; v1.3 corpus mutations and "
         "false ancillary counts and post-review ceiling widening fail closed; "
-        "abandoned dispatches, registered "
+        "direct same-parent stop succession and terminal completion accepted; "
+        "orphan dispatches, broken or cross-parent successors, identity drift, "
+        "and resumption after completion rejected; abandoned dispatches, registered "
         "separate packets, typed stage advance, and bounded P2 lineage "
         "accepted; mechanical reset and exact observed P3B subdivision "
         "rejected"
@@ -5102,6 +5581,8 @@ def main() -> int:
                 raise ValidationFailure(f"duplicate record handoff_id: {handoff_id}")
             seen_record_ids.add(handoff_id)
             records.append((path, record))
+
+        validate_v1_4_handoff_chains(records, dispatches)
 
         for path, record in records:
             if record["schema_version"] in {"1.2", "1.3", "1.4"}:

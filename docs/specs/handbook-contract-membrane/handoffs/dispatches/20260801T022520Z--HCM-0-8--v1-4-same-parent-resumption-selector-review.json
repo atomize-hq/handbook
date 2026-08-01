@@ -1,0 +1,239 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T022520Z--HCM-0-8--v1-4-same-parent-resumption-selector-review",
+  "created_at_utc": "2026-08-01T02:25:20Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T022300Z--HCM-0-8--v1-4-same-parent-resumption-validation-repair",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "20260801-v1-4-same-parent-resumption-validation-repair",
+  "subject_fingerprint": "sha256:84573e3ae4f316fb2454b8f73370b2d35329db0c3e2c86e49aff4becf48a79b5",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "v1-4-same-parent-resumption-planning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T02:23:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-0.8-v1.4-same-parent-resumption-validation-repair",
+        "packet_ids": [
+          "20260801-v1-4-same-parent-resumption-validation-repair"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md"
+      }
+    ],
+    "fingerprint": "sha256:5394b405a66fe6ae99acad53b390cb8f39663128314fd2e7b5411c3bdbedf6a4"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f79081aff048f1b6891fe332525a7fe50a68dc73fee59e4b9882ea6c4117c8e0",
+    "integrated_outcome_id": "hcm-0.8-v1.4-same-parent-resumption-validation-repair",
+    "outcome_registry_fingerprint": "sha256:5394b405a66fe6ae99acad53b390cb8f39663128314fd2e7b5411c3bdbedf6a4",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "v1-4-same-parent-resumption-selector-convergence",
+    "completed_at_utc": "2026-08-01T02:25:19Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "audit the selector against every operator-frozen acceptance rule, exact two behavioral paths, three-commit dependency, and temporary ordinary-validation state",
+        "evidence_ref": "selector sections Acceptance contract, Exact path scope, Required RED and GREEN regressions, and Authorized three-commit dependency sequence"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory validate_v1_4_dispatch_population and all five live call sites; enumerate both smoke stops and all six smoke dispatches",
+        "evidence_ref": "parent terminal: production definition at line 1568, semantic call at 1897, four self-test calls, two records, and six dispatch filenames"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted 11-entry repo-path-NUL-SHA256-newline selector subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:84573e3ae4f316fb2454b8f73370b2d35329db0c3e2c86e49aff4becf48a79b5"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "compile validate_handoffs.py source in memory",
+        "evidence_ref": "parent terminal: PYTHON COMPILE PASS"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent command exited 0 after selector creation"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "194016b268c0595a95b0ac4c91977d11a8f053d4faf8e00571d344af95f0e26a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json",
+        "sha256": "c922403ce696765bfa13353d29f2ee6c618d68aa52a9163b264af4c55adefab7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json",
+        "sha256": "4c8b2ffff5178c6be0f0e46f3c9f91c41202ee546f8f6e7c698bc2f4ea5baf15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json",
+        "sha256": "2772f6f6795064a9c29f43b90b829b237e7f25b2120bd94b9406fb4175cf7800"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json",
+        "sha256": "9abc01962ee0f33a6510d747516bef60af1ce5cb7ae938f74afab60e9be921ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review.json",
+        "sha256": "ecbca639034e170a6b289febd2effca7b7034a662ca237119aadef3881b877dc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json",
+        "sha256": "65ea7f80f11dbdb4361fcf1258c9701ff8f9356e413269fe2c71e8a9ed1e7b01"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T194418Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-authority-blocked.json",
+        "sha256": "b1e4dcda1ceb0e9bdfcbd9103e82fbe422d75ea2b30108ab03239fb9b10c215d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+        "sha256": "a504404f557bc0c2e6e82d04332a2b4b12596ed7b5d41fcfc27e204c5838d725"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "sha256": "fd1e42141a738f81a509b4cf14d7132619d5f61aaa1c710c52069be522b851fd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+        "sha256": "ece13fbe5a635476fdc4eadbdb73b5686afcb8109f39fbae3f08abb3dddb1fa8"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:84573e3ae4f316fb2454b8f73370b2d35329db0c3e2c86e49aff4becf48a79b5"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 v1.4 same-parent resumption selector review",
+    "scope_horizon": "two behavioral control paths, embedded validator regressions, and three dependency-ordered commits",
+    "detail_resolution": "direct dual-link successor chain, exact prefix ownership, terminal completion, identity preservation, and temporary live validation state",
+    "temporal_horizon": "planning review before any protocol or validator production edit",
+    "authority_horizon": "protocol repair only; no schema/history/product/smoke-dispatch/HCM-3.x/push authority",
+    "memory_horizon": "immutable 2609bf5 product primary, two smoke authority stops, six smoke dispatches, and current validator failure",
+    "validation_horizon": "selector sufficiency CLEAN required before RED tests or production edits"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+      "sections": [
+        "Acceptance contract",
+        "Exact path scope",
+        "Required RED and GREEN regressions",
+        "Authorized three-commit dependency sequence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Canonical truth and immutability",
+        "Two-commit true-stop closeout",
+        "Failure rules"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/causal-review-budget-and-lineage-hardening.md",
+      "sections": [
+        "Decision",
+        "Rejected alternatives"
+      ]
+    }
+  ],
+  "repo_truth": "Branch feat/handbook-contract-membrane is at immutable product primary 2609bf52569a8ee2e24e10d168f16f65006bdb97. The current ordinary validator fails at the first smoke authority stop because proof/final dispatches are later than its cutoff; the second stop has the same logical later-dispatch set. Both stops and all six dispatches retain their frozen hashes. GitNexus was refreshed to 2609bf5 with FTS unavailable.",
+  "allowed_scope": [
+    "Review the selector and exact 11-entry context subject read-only.",
+    "Assess whether every operator acceptance rule and forbidden case is frozen before implementation.",
+    "Assess the validator-only selected mechanism, exact two behavioral paths, embedded test scope, causal stages, and three-commit dependency ordering.",
+    "Emit unique planning-run finding IDs for any independently identified P1-P4 issue."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger, delegate, or implement the validator repair.",
+    "Do not edit, delete, reparent, reissue, or reinterpret historical records/dispatches or the product primary.",
+    "Do not add schema/template/dependency/product/HCM-3.x/release/publication/push scope."
+  ],
+  "tasks": [
+    "Validate the parent/outcome/packet registry, derived budget, planning-stage discovery, manifest, and current evidence hashes.",
+    "Review the acceptance contract for terminal completion, exact direct successor linkage, identity preservation, prefix ownership, and latest-record completeness.",
+    "Review every required positive/negative regression and whether the selected private-helper approach is sufficient without a schema change.",
+    "Review the temporary known ordinary-validation state and the enabling-primary, smoke-closeout, protocol-closeout dependency sequence.",
+    "Return findings first or CLEAN for exact subject sha256:84573e3ae4f316fb2454b8f73370b2d35329db0c3e2c86e49aff4becf48a79b5."
+  ],
+  "contracts_and_gates": [
+    "No behavioral edit may begin until this selector review is CLEAN.",
+    "History remains byte-immutable and orphan/terminal resumption remains fail-closed.",
+    "The protocol primary is enabling only and may disclose, but never green-label, the temporary ordinary failure.",
+    "The repair is not complete until the post-smoke fresh final review and protocol closeout commit land."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS for any missing acceptance rule, negative case, identity invariant, path ceiling, causal stage, or commit dependency.",
+    "Return BLOCKED if the contract requires a schema/history/product change or another behavioral path.",
+    "Report rather than repair; do not broaden this planning dispatch."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

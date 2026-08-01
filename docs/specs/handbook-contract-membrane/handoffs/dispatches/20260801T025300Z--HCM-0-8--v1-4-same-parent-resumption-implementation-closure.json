@@ -1,0 +1,251 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T025300Z--HCM-0-8--v1-4-same-parent-resumption-implementation-closure",
+  "created_at_utc": "2026-08-01T02:53:00Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T022300Z--HCM-0-8--v1-4-same-parent-resumption-validation-repair",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "debugging-and-error-recovery",
+    "test-driven-development",
+    "incremental-implementation",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "20260801-v1-4-same-parent-resumption-validation-repair",
+  "subject_fingerprint": "sha256:939d96fcc30a99c444b791c83ecd95e13f43d6912930400259a5a0c3a2cadf87",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "v1-4-same-parent-resumption-implementation-closure-1",
+    "trigger_run_ids": [
+      "hcm_0_8_resumption_implementation_review"
+    ],
+    "finding_refs": [
+      "HCM08-V14SIR-0001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T02:23:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-0.8-v1.4-same-parent-resumption-validation-repair",
+        "packet_ids": [
+          "20260801-v1-4-same-parent-resumption-validation-repair"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md"
+      }
+    ],
+    "fingerprint": "sha256:5394b405a66fe6ae99acad53b390cb8f39663128314fd2e7b5411c3bdbedf6a4"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f79081aff048f1b6891fe332525a7fe50a68dc73fee59e4b9882ea6c4117c8e0",
+    "integrated_outcome_id": "hcm-0.8-v1.4-same-parent-resumption-validation-repair",
+    "outcome_registry_fingerprint": "sha256:5394b405a66fe6ae99acad53b390cb8f39663128314fd2e7b5411c3bdbedf6a4",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260801T024400Z--HCM-0-8--v1-4-same-parent-resumption-implementation-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "v1-4-same-parent-resumption-implementation-closure-convergence-1",
+    "completed_at_utc": "2026-08-01T02:52:29Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run compound same-packet cross-parent/identity-drift regressions, the complete orchestration self-test, v1 admission self-test, Python compile, and ordinary validator",
+        "evidence_ref": "compound and completed-predecessor escapes now fail; historical cross-packet transition remains accepted; both self-tests and compile pass; ordinary retains only the authorized second-stop failure"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "recheck all eleven live v1.4 records and seven historical cross-packet dual-link transitions against the remediated predicate",
+        "evidence_ref": "same packet plus different orchestration now fails independently of phase/slice/program drift; different-packet historical lineage remains outside same-parent resumption"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted 14-entry repo-path-NUL-SHA256-newline closure subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:939d96fcc30a99c444b791c83ecd95e13f43d6912930400259a5a0c3a2cadf87"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "compile validate_handoffs.py from source",
+        "evidence_ref": "uv run python -m py_compile exited 0 after remediation"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent command exited 0 after consolidated remediation"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "1f065c3eede0a4097490dc5179f81fc0f86b9b1e3e62333153f28b7c0bc0c273"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json",
+        "sha256": "c922403ce696765bfa13353d29f2ee6c618d68aa52a9163b264af4c55adefab7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json",
+        "sha256": "4c8b2ffff5178c6be0f0e46f3c9f91c41202ee546f8f6e7c698bc2f4ea5baf15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json",
+        "sha256": "2772f6f6795064a9c29f43b90b829b237e7f25b2120bd94b9406fb4175cf7800"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json",
+        "sha256": "9abc01962ee0f33a6510d747516bef60af1ce5cb7ae938f74afab60e9be921ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review.json",
+        "sha256": "ecbca639034e170a6b289febd2effca7b7034a662ca237119aadef3881b877dc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json",
+        "sha256": "65ea7f80f11dbdb4361fcf1258c9701ff8f9356e413269fe2c71e8a9ed1e7b01"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T022520Z--HCM-0-8--v1-4-same-parent-resumption-selector-review.json",
+        "sha256": "bd56204158993076d5ff9380f5f5d1514b602d9fa90056781bc400ec4a6183e1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T023300Z--HCM-0-8--v1-4-same-parent-resumption-selector-closure.json",
+        "sha256": "672c6c5b4ab751ca4399fdb096f532b7e7066fa6f3f462aab06731bc302691b7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T024400Z--HCM-0-8--v1-4-same-parent-resumption-implementation-review.json",
+        "sha256": "763ed12eb268916e0efe9411ddb4be69537b4083219df005f3faab37ee5b35b9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T194418Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-authority-blocked.json",
+        "sha256": "b1e4dcda1ceb0e9bdfcbd9103e82fbe422d75ea2b30108ab03239fb9b10c215d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+        "sha256": "a504404f557bc0c2e6e82d04332a2b4b12596ed7b5d41fcfc27e204c5838d725"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "sha256": "398de1d9918e17d944a97d6a93150863b5d479ea9690fc4148003e96c3177950"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+        "sha256": "df941f9fad265b0cb2d5ef97b0266e791275b1af979f892cc35c28c8bef7c033"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:939d96fcc30a99c444b791c83ecd95e13f43d6912930400259a5a0c3a2cadf87"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 v1.4 same-parent resumption implementation closure",
+    "scope_horizon": "closure of one implementation P2 across the exact validator/protocol subject",
+    "detail_resolution": "same-packet cross-parent rejection independent of compound identity drift and completed-predecessor status",
+    "temporal_horizon": "implementation closure before the enabling primary commit",
+    "authority_horizon": "unchanged two behavioral paths; no schema/history/product/smoke-dispatch/HCM-3.x/push authority",
+    "memory_horizon": "immutable FINDINGS dispatch/result, consolidated predicate/test remediation, live historical compatibility, and one authorized temporary cutoff failure",
+    "validation_horizon": "close HCM08-V14SIR-0001 or emit only a genuinely remediation-unmasked unique finding"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+      "sections": [
+        "Acceptance contract",
+        "Required RED and GREEN regressions",
+        "Authorized three-commit dependency sequence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T024400Z--HCM-0-8--v1-4-same-parent-resumption-implementation-review.json",
+      "sections": [
+        "review_cycle",
+        "subject_manifest",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "V1.4 same-parent resumption and terminality",
+        "Failure rules"
+      ]
+    }
+  ],
+  "repo_truth": "The first implementation reviewer found that same-packet cross-parent rejection incorrectly depended on all other identity fields matching. The remediated predicate rejects same packet plus changed orchestration before group validation, regardless of phase/slice/program drift or predecessor completion. New valid-population regressions cover the compound and completed compound escapes; a different-packet historical transition remains accepted. Self-tests pass and ordinary validation remains bounded to the second smoke stop.",
+  "allowed_scope": [
+    "Review the exact 14-entry remediated subject read-only and determine whether it closes HCM08-V14SIR-0001.",
+    "Independently verify compound same-packet cross-parent plus identity-drift and completed-predecessor cases fail through the intended production predicate.",
+    "Verify different-packet historical lineage remains valid and the live corpus retains exactly one authorized temporary cutoff failure."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger, delegate, or run product discovery.",
+    "Do not reuse HCM08-V14SIR-0001 as a newly emitted finding ID.",
+    "Do not add schema/history/product/smoke-dispatch/HCM-3.x/push scope or claim protocol completion."
+  ],
+  "tasks": [
+    "Validate closure lineage, finding ref, unchanged registry/budget, 14-entry manifest, and changed fingerprint.",
+    "Close the exact compound-escape finding against production code and focused regressions.",
+    "Return findings first with a new unique ID for any remediation-unmasked issue; otherwise return CLEAN for sha256:939d96fcc30a99c444b791c83ecd95e13f43d6912930400259a5a0c3a2cadf87."
+  ],
+  "contracts_and_gates": [
+    "The enabling primary remains forbidden until this exact closure subject is CLEAN.",
+    "The predecessor FINDINGS dispatch/result remain immutable and this closure uses a different fresh reviewer.",
+    "CLEAN ends the implementation discovery lineage and authorizes only the enabling-primary verification/commit boundary."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if the compound escape remains or remediation unmasked another same-cause P1/P2.",
+    "Return BLOCKED if closure requires another behavioral path, schema change, or history edit.",
+    "Report rather than repair."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
