@@ -1,0 +1,525 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+  "created_at_utc": "2026-08-01T14:15:09Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.1",
+  "packet_id": "HCM-3.1-P3-proof-control-closeout",
+  "orchestration_id": "20260801T122747Z--HCM-3-1--vocabulary-resolution",
+  "source_handoff_ids": [],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-01T14:15:09Z",
+    "evidence_ref": "six built-in fresh read-only review dispatches reconciled; planning and implementation findings received different-fresh CLEAN closures; proof and final-closeout reviews returned CLEAN"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm31_planning_review",
+      "dispatch_id": "20260801T123319Z--HCM-3-1--vocabulary-resolution-planning-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T123319Z--HCM-3-1--vocabulary-resolution-planning-review.json",
+      "dispatch_fingerprint": "sha256:b35e56f352d915255af1a6a85551f048c79d15555a295414ef5e472a2b56b3ed",
+      "role": "review",
+      "agent_id": "/root/hcm31_planning_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "doubt-driven-development", "documentation-and-ADRs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:3ab7d1ba51bb9e87ef0911a8b3b08db5d702ab18ab5acd5adda2bfde04da0672",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM31-PLN-DISC-001", "HCM31-PLN-DISC-002", "HCM31-PLN-DISC-003"],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T123319Z--HCM-3-1--vocabulary-resolution-planning-review.json"],
+      "result_subject_fingerprint": "sha256:3ab7d1ba51bb9e87ef0911a8b3b08db5d702ab18ab5acd5adda2bfde04da0672"
+    },
+    {
+      "run_id": "hcm31_planning_closure",
+      "dispatch_id": "20260801T124330Z--HCM-3-1--vocabulary-resolution-planning-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T124330Z--HCM-3-1--vocabulary-resolution-planning-closure.json",
+      "dispatch_fingerprint": "sha256:86c17a247d763d6da142cc5b8d913c3d451acab94872e367b1684df8e3e6048e",
+      "role": "review",
+      "agent_id": "/root/hcm31_planning_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "doubt-driven-development", "documentation-and-ADRs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:84cf15dde44b0ceaa4eba40616fcfd382e4eb0f6a784e94b40e1042a30e71582",
+      "review_round": 2,
+      "predecessor_run_id": "hcm31_planning_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/20260801T125323Z--planning-closure-clean.md"],
+      "result_subject_fingerprint": "sha256:84cf15dde44b0ceaa4eba40616fcfd382e4eb0f6a784e94b40e1042a30e71582"
+    },
+    {
+      "run_id": "hcm31_implementation_review",
+      "dispatch_id": "20260801T132625Z--HCM-3-1--vocabulary-resolution-implementation-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T132625Z--HCM-3-1--vocabulary-resolution-implementation-review.json",
+      "dispatch_fingerprint": "sha256:86b22ea88289a9c8fdb6ecd10078d488285406a5f86c78b1dbccd10ad3670c94",
+      "role": "review",
+      "agent_id": "/root/hcm31_implementation_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "doubt-driven-development", "test-driven-development", "debugging-and-error-recovery", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:7e03ef62442187febff0a8c28fc2f77fedd2141b6e1aa4e73b7d3ff8e42af708",
+      "review_round": 3,
+      "predecessor_run_id": "hcm31_planning_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM31-IMP-DISC-001", "HCM31-IMP-DISC-002", "HCM31-IMP-DISC-003"],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T132625Z--HCM-3-1--vocabulary-resolution-implementation-review.json"],
+      "result_subject_fingerprint": "sha256:7e03ef62442187febff0a8c28fc2f77fedd2141b6e1aa4e73b7d3ff8e42af708"
+    },
+    {
+      "run_id": "hcm31_implementation_closure",
+      "dispatch_id": "20260801T133919Z--HCM-3-1--vocabulary-resolution-implementation-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T133919Z--HCM-3-1--vocabulary-resolution-implementation-closure.json",
+      "dispatch_fingerprint": "sha256:778468a807505c8007221cf3205e32b7f24136d8073e6a8ec8ef645acd77b35f",
+      "role": "review",
+      "agent_id": "/root/hcm31_implementation_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "doubt-driven-development", "test-driven-development", "debugging-and-error-recovery", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:f011d2384279e8d667121bb823564a1e7152aea6fd6399631adb30c5b7208998",
+      "review_round": 4,
+      "predecessor_run_id": "hcm31_implementation_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T134304Z--implementation-closure-clean.md"],
+      "result_subject_fingerprint": "sha256:f011d2384279e8d667121bb823564a1e7152aea6fd6399631adb30c5b7208998"
+    },
+    {
+      "run_id": "hcm31_proof_review",
+      "dispatch_id": "20260801T140000Z--HCM-3-1--vocabulary-resolution-proof-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T140000Z--HCM-3-1--vocabulary-resolution-proof-review.json",
+      "dispatch_fingerprint": "sha256:8b0c8bfe3bcf754926d39f3f83faebd256e2a2b9c397a6e7145420b0dc8fd960",
+      "role": "review",
+      "agent_id": "/root/hcm31_proof_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "doubt-driven-development", "test-driven-development", "debugging-and-error-recovery", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:ee97b424c966aaecaeb3f1d09e08129ba4c69f80e889290e36d13fea6d76936d",
+      "review_round": 5,
+      "predecessor_run_id": "hcm31_implementation_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/proof-stage/20260801T140625Z--proof-review-clean.md"],
+      "result_subject_fingerprint": "sha256:ee97b424c966aaecaeb3f1d09e08129ba4c69f80e889290e36d13fea6d76936d"
+    },
+    {
+      "run_id": "hcm31_final_closeout_review",
+      "dispatch_id": "20260801T140802Z--HCM-3-1--vocabulary-resolution-final-closeout-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T140802Z--HCM-3-1--vocabulary-resolution-final-closeout-review.json",
+      "dispatch_fingerprint": "sha256:3a41508809aeeda2f54280584214492d9e5bc89dd443956e65420b9621d2841e",
+      "role": "review",
+      "agent_id": "/root/hcm31_final_closeout_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "doubt-driven-development", "documentation-and-ADRs", "test-driven-development", "debugging-and-error-recovery", "code-review-and-quality", "git-workflow-and-versioning"],
+      "subject_fingerprint": "sha256:b8a0d61be8ebcb1179ff0c83b8bf5659de9f41bd0d9d93bad7b26d0ece615563",
+      "review_round": 6,
+      "predecessor_run_id": "hcm31_proof_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T140802Z--HCM-3-1--vocabulary-resolution-final-closeout-review.json", "git:144fad13c14a64ae36f5bdf5554d9adcac10d20e"],
+      "result_subject_fingerprint": "sha256:b8a0d61be8ebcb1179ff0c83b8bf5659de9f41bd0d9d93bad7b26d0ece615563"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-01T14:15:09Z",
+    "dispatch_count": 6,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": ["sha256:f32411b780227c90d7d3146339f933cd19df4911a82043d981958f67663b8758"],
+    "aggregate_fingerprint": "sha256:dc1b80cff2672dfceaaf8a2b6a2f88e61a05e324d240c06eb3266e28c0364b58"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3-1-planning-remediation",
+      "finding_run_id": "hcm31_planning_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm31_planning_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:84cf15dde44b0ceaa4eba40616fcfd382e4eb0f6a784e94b40e1042a30e71582",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/20260801T124300Z--planning-discovery-remediation.md", "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/20260801T125323Z--planning-closure-clean.md"]
+    },
+    {
+      "remediation_id": "hcm-3-1-implementation-proof-remediation",
+      "finding_run_id": "hcm31_implementation_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm31_implementation_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:f011d2384279e8d667121bb823564a1e7152aea6fd6399631adb30c5b7208998",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T133853Z--implementation-discovery-remediation.md", "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T134304Z--implementation-closure-clean.md"]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "144fad13c14a64ae36f5bdf5554d9adcac10d20e",
+    "subject_fingerprint": "sha256:b8a0d61be8ebcb1179ff0c83b8bf5659de9f41bd0d9d93bad7b26d0ece615563",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/proof-stage/20260801T135934Z--vocabulary-resolution-proof-wall.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/proof-stage/20260801T140625Z--proof-review-clean.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T140802Z--HCM-3-1--vocabulary-resolution-final-closeout-review.json",
+      "git:bbe3140d0b1442bd5417d29e27548d88ce4e965b",
+      "git:3be3200c283244f1065ceb7a42f594362c97209f",
+      "git:07665506d2d7ce6a73cbd4831628567f674bb4f9",
+      "git:144fad13c14a64ae36f5bdf5554d9adcac10d20e"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T140802Z--HCM-3-1--vocabulary-resolution-final-closeout-review.json"
+  },
+  "active_resolution": {
+    "level": "HCM-3.1 Vocabulary Resolution completed",
+    "scope_horizon": "slice-local authority, typed vocabulary/profile kernel, exact Stage-10 consumer, proof/control synchronization, and v1.4 closeout",
+    "detail_resolution": "stable-role fallback labels, normalized aliases and ambiguity, deterministic acyclic absorption, complete semantic fingerprints, selected-profile identity, and lossless fixed-renderer output",
+    "temporal_horizon": "local commit stack 8004da7 through reviewed aggregate 144fad1 and this mechanical completion",
+    "authority_horizon": "HCM-3.1 completed; HCM-3.2+, Phase 3 exit, release, publication, and push remain unauthorized",
+    "memory_horizon": "two immutable FINDINGS reviews, two different-fresh CLEAN closures, CLEAN proof review, CLEAN 33-path final review, exact protected hashes, and complete validation wall",
+    "validation_horizon": "focused/full workspace tests, strict Clippy/format/diff, exact vectors/golden/negative matrix, handoff validation/self-tests, ledger parity, and protected-path exclusion"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Land HCM-3.1 Vocabulary Resolution completely with reviewed typed semantics, exact profile identity, a real deterministic renderer path, proof/control synchronization, local commits, and v1.4 closeout without starting HCM-3.2 or pushing.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md",
+      "sections": ["Required product behavior", "Proof wall and stop conditions", "Earned status"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md",
+      "sections": ["Under-specified questions adjudicated", "Exact ceilings", "Proof wall and stop conditions"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T140802Z--HCM-3-1--vocabulary-resolution-final-closeout-review.json",
+      "sections": ["subject_manifest", "contracts_and_gates", "return_contract"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": ["PG-PROFILE-01", "PG-VOCAB-01", "HCM-3.1 earned vocabulary boundary"]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "144fad13c14a64ae36f5bdf5554d9adcac10d20e",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/ideas/intent-to-outcome-fidelity.md",
+      "docs/research/rust-workspace-build-speed.md"
+    ]
+  },
+  "work_completed": [
+    "Froze one HCM-3.1 parent, integrated outcome, three packets, outcome registry, causal budget, and exact selector before runtime edits.",
+    "Resolved labels, aliases, typed/untyped lookup, ambiguity, stable-role fallback labels, absorption constraints, canonical ordering, and uniform vocabulary fingerprints against the exact selected stable-role registry.",
+    "Integrated exact vocabulary identity into selected-profile resolution and added narrow recovered repository access without changing artifact descriptors or stable machine meaning.",
+    "Adopted resolved vocabulary in the existing fixed Stage-10 Work Specification renderer; canonical YAML is unchanged, shipped-empty output is byte-identical, and one non-empty test vocabulary renders two units and all three absorption edges deterministically.",
+    "Proved registry mismatch, unknown/capability/non-workflow roles, constitutional absorption, duplicate ownership/targets, cycles/self-loops, ambiguity, normalization/non-folding, adapter-loss prevention, exact vectors, deterministic replay, and non-influence.",
+    "Executed planning, implementation, proof, and final_closeout review stages; six P1/P2 findings received consolidated parent remediation and different-fresh CLEAN closures, proof was CLEAN, and final 33-path aggregate review was CLEAN.",
+    "Synchronized only the Vocabulary seam, HCM-3.1 slice status, PG-VOCAB-01, and the vocabulary subset of PG-PROFILE-01; the overall Phase 3 exit and every HCM-3.2+ gate remain open.",
+    "Passed focused and full workspace tests, strict workspace Clippy, format/diff checks, ordinary handoff validation, both self-tests, and protected-path audits; GitNexus unavailable capabilities were not mislabeled GREEN."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md",
+      "status": "completed",
+      "summary": "Reviewed HCM-3.1 contract, selector bounds, proof wall, and earned-status ceiling."
+    },
+    {
+      "path": "crates/engine/src/vocabulary_registry.rs",
+      "status": "completed",
+      "summary": "Typed vocabulary resolution, normalization, ambiguity, absorption validation, fallback labels, and deterministic fingerprints."
+    },
+    {
+      "path": "crates/engine/src/profile_selection.rs",
+      "status": "completed",
+      "summary": "Exact selected stable-role registry and vocabulary identity integration."
+    },
+    {
+      "path": "crates/pipeline/src/pipeline_capture.rs",
+      "status": "completed",
+      "summary": "Real fixed Work Specification consumer with deterministic labels and complete absorption rendering."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/proof-stage/20260801T135934Z--vocabulary-resolution-proof-wall.md",
+      "status": "completed",
+      "summary": "Post-remediation real-path, negative, replay, non-influence, regression, and validator proof wall."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "status": "completed",
+      "summary": "Exact PG-VOCAB-01 closure and vocabulary-only PG-PROFILE-01 advance with later gates open."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned v1.4 completion reconciling all six review runs and the reviewed aggregate."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.1-D1",
+      "summary": "Existing stable-role categories provide the semantic-axis authority; HCM-3.1 adds no new axis schema field.",
+      "authority_effect": "Vocabulary may label and structurally group registered roles only; category meaning remains stable-role-registry authority.",
+      "refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md"]
+    },
+    {
+      "decision_id": "HCM-3.1-D2",
+      "summary": "Aliases collapse Unicode whitespace runs, apply Unicode scalar lowercase expansion, and perform no punctuation, accent, or compatibility folding.",
+      "authority_effect": "Untyped collisions return sorted candidates; aliases never select typed operations or machine identifiers.",
+      "refs": ["crates/engine/src/vocabulary_registry.rs", "crates/engine/tests/vocabulary_registry.rs"]
+    },
+    {
+      "decision_id": "HCM-3.1-D3",
+      "summary": "Structural absorption uses the directed graph unit_id -> absorbs[] with one owner per workflow role and deterministic acyclic validation.",
+      "authority_effect": "Constitutional/non-workflow/capability targets, duplicate ownership, cycles, and self-loops fail closed.",
+      "refs": ["crates/engine/src/vocabulary_registry.rs"]
+    },
+    {
+      "decision_id": "HCM-3.1-D4",
+      "summary": "The existing fixed Stage-10 Work Specification renderer is the sole HCM-3.1 non-empty product consumer.",
+      "authority_effect": "The slice proves presentation-only vocabulary use without beginning Context Resolution or capitalized Projection work.",
+      "refs": ["crates/pipeline/src/pipeline_capture.rs", "crates/pipeline/tests/pipeline_capture.rs"]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM31-PLN-DISC-001",
+      "classification": "local_remediation",
+      "severity": "critical",
+      "priority": "P1",
+      "status": "remediated",
+      "source_run_id": "hcm31_planning_review",
+      "summary": "The initial selector required a newline-delimited fingerprint preimage that contradicted the immutable shipped no-delimiter vector.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/20260801T125323Z--planning-closure-clean.md"]
+    },
+    {
+      "finding_id": "HCM31-PLN-DISC-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm31_planning_review",
+      "summary": "The initial production ceiling named a nonexistent engine pipeline path instead of the real pipeline consumer.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/20260801T125323Z--planning-closure-clean.md"]
+    },
+    {
+      "finding_id": "HCM31-PLN-DISC-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm31_planning_review",
+      "summary": "The initial selector had not frozen byte-exact non-empty Markdown output and escaping/order/newline behavior.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/20260801T125323Z--planning-closure-clean.md"]
+    },
+    {
+      "finding_id": "HCM31-IMP-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm31_implementation_review",
+      "summary": "Selector-required Unicode normalization and explicit non-folding behavior lacked focused regression proof.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T134304Z--implementation-closure-clean.md"]
+    },
+    {
+      "finding_id": "HCM31-IMP-DISC-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm31_implementation_review",
+      "summary": "The mandatory absorption self-loop refusal lacked an independent focused regression.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T134304Z--implementation-closure-clean.md"]
+    },
+    {
+      "finding_id": "HCM31-IMP-DISC-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm31_implementation_review",
+      "summary": "The focused test did not assert the immutable shipped vocabulary fingerprint vector directly.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/implementation/20260801T134304Z--implementation-closure-clean.md"]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "cargo test -p handbook-engine --test vocabulary_registry; cargo test -p handbook-engine --test profile_selection; cargo test -p handbook-pipeline --test pipeline_capture; cargo test -p handbook-compiler --test pipeline_capture",
+      "status": "passed",
+      "evidence_ref": "focused vocabulary 7/7, profile 20/20, pipeline 48/48, and compiler pipeline 39/39 passed"
+    },
+    {
+      "command": "cargo test --workspace --all-targets --all-features",
+      "status": "passed",
+      "evidence_ref": "post-remediation full workspace exited 0 after 993 seconds, including engine, flow, pipeline, compiler, and CLI regressions"
+    },
+    {
+      "command": "cargo clippy --workspace --all-targets --all-features -- -D warnings; cargo fmt --all -- --check; git diff --check",
+      "status": "passed",
+      "evidence_ref": "strict workspace Clippy, format, and reviewed-stack/working-tree whitespace checks passed"
+    },
+    {
+      "command": "exact vocabulary vectors, negative matrix, shipped-empty compatibility, and real Stage-10 deterministic replay",
+      "status": "passed",
+      "evidence_ref": "both pinned fingerprints replay; every required refusal passes; canonical YAML is unchanged; golden contains two units, all three edges, and one terminal LF across two runs"
+    },
+    {
+      "command": "ordinary handoff validation plus --self-test-v1-admission and --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "canonical records/dispatches/templates/ledger, historical admission, v1.4 causal contract, and orchestration contract pass with ledger unchanged before closeout"
+    },
+    {
+      "command": "GitNexus impact and change detection",
+      "status": "passed",
+      "evidence_ref": "indexed struct/impl impacts were LOW with zero processes; Rust function/test symbols were UNKNOWN; scoped final detection was LOW with zero affected processes; compare-to-main/FTS remained unavailable and was not represented as GREEN"
+    },
+    {
+      "command": "fresh planning, implementation, proof, and final-closeout reviews",
+      "status": "passed",
+      "evidence_ref": "all P1/P2 findings are remediated through different-fresh CLEAN closures; proof subject ee97b424 and final 33-path subject b8a0d61b are CLEAN; no P3/P4 was emitted"
+    },
+    {
+      "command": "protected-path, immutable shipped-definition, unrelated-path, and scope audit before every commit",
+      "status": "passed",
+      "evidence_ref": "all nine protected paths retained initial SHA-256 values and stayed unstaged/uncommitted; shipped vocabulary bytes remained unchanged; unrelated docs/research material stayed outside every slice commit"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": ["Status", "Implementation authorization"],
+      "reason": "Record HCM-3.1 completion and keep HCM-3.2+ unauthorized.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": ["Canonical artifacts, renderer-derived views, and Projections"],
+      "reason": "Record the bounded engine/pipeline ownership and fixed-renderer boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": ["Vocabulary model"],
+      "reason": "Record the proven stable-role-axis, identity, and sole-consumer boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": ["Vocabulary"],
+      "reason": "Promote only the exact kernel and Stage-10 real-path classifications.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": ["HCM-3.1"],
+      "reason": "Record the completed slice boundary and open Phase 3 exit.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": ["Vocabulary contract"],
+      "reason": "Bind exact landed normalization, fingerprint, and consumer behavior.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": ["PG-PROFILE-01", "PG-VOCAB-01", "HCM-3.1 earned vocabulary boundary"],
+      "reason": "Close only the earned vocabulary proof and profile subset.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed.json",
+      "sections": ["entire handoff"],
+      "reason": "Publish the parent-owned completion after the final aggregate CLEAN review.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": ["deterministic ledger entry"],
+      "reason": "Rebuild the query ledger from every canonical record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic continuation is authorized from completed HCM-3.1.",
+    "condition": "Only a new explicit operator selection may authorize HCM-3.2 or later work.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed.json",
+        "sections": ["entire completed handoff"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md",
+        "sections": ["Earned status", "Non-goals"]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not continue automatically into HCM-3.2 Context Resolution or any later slice.",
+      "Do not mutate shipped vocabulary/stable-role identities, historical dispatches/handoffs, or the reviewed HCM-3.1 subject.",
+      "Do not release, publish, push, add transports/commands/dependencies, or widen Phase 3 authority without new explicit authorization."
+    ],
+    "acceptance_criteria": [
+      "The completed v1.4 parent handoff reconciles all six HCM-3.1 review dispatches and exact finding-remediation-closure edges.",
+      "The final reviewed baseline is 144fad13c14a64ae36f5bdf5554d9adcac10d20e and the mechanical ledger rebuild validates byte-deterministically.",
+      "All nine protected paths remain byte-identical, unstaged, and uncommitted; no push occurred."
+    ],
+    "stop_conditions": [
+      "Stop before HCM-3.2, any new Phase 3 implementation, release, publication, or push without fresh explicit authority.",
+      "Stop if future work would alter any immutable HCM-3.1 evidence or overstate the bounded Vocabulary classification."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Completed HCM-3.1 Vocabulary Resolution at reviewed baseline 144fad1. Typed labels/aliases/ambiguity, deterministic acyclic absorption, exact vocabulary/profile fingerprints, shipped-empty compatibility, and one real lossless Stage-10 renderer are landed; PG-VOCAB-01 closes and only the vocabulary subset of PG-PROFILE-01 advances. All review stages are CLEAN after bounded remediation, no P3/P4 remains, HCM-3.2 is unselected, and nothing was pushed."
+}
