@@ -1,0 +1,456 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260801T061500Z--HCM-0-8--orchestration--v1-4-same-parent-resumption-validation-repair-completed",
+  "created_at_utc": "2026-08-01T06:15:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "20260801-v1-4-same-parent-resumption-validation-repair",
+  "orchestration_id": "20260801T022300Z--HCM-0-8--v1-4-same-parent-resumption-validation-repair",
+  "source_handoff_ids": [],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-01T06:15:00Z",
+    "evidence_ref": "seven built-in fresh review dispatches reconciled; final converged-corpus review returned CLEAN"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm_0_8_resumption_selector_review",
+      "dispatch_id": "20260801T022520Z--HCM-0-8--v1-4-same-parent-resumption-selector-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T022520Z--HCM-0-8--v1-4-same-parent-resumption-selector-review.json",
+      "dispatch_fingerprint": "sha256:bd56204158993076d5ff9380f5f5d1514b602d9fa90056781bc400ec4a6183e1",
+      "role": "review",
+      "agent_id": "/root/hcm_0_8_resumption_selector_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:84573e3ae4f316fb2454b8f73370b2d35329db0c3e2c86e49aff4becf48a79b5",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM08-V14SPR-0001"],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T022520Z--HCM-0-8--v1-4-same-parent-resumption-selector-review.json"],
+      "result_subject_fingerprint": "sha256:84573e3ae4f316fb2454b8f73370b2d35329db0c3e2c86e49aff4becf48a79b5"
+    },
+    {
+      "run_id": "hcm_0_8_resumption_selector_closure",
+      "dispatch_id": "20260801T023300Z--HCM-0-8--v1-4-same-parent-resumption-selector-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T023300Z--HCM-0-8--v1-4-same-parent-resumption-selector-closure.json",
+      "dispatch_fingerprint": "sha256:672c6c5b4ab751ca4399fdb096f532b7e7066fa6f3f462aab06731bc302691b7",
+      "role": "review",
+      "agent_id": "/root/hcm_0_8_resumption_selector_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:18c10754a6a91c86f6c7c1db785582244460f9318bb85976eb59514785adf290",
+      "review_round": 2,
+      "predecessor_run_id": "hcm_0_8_resumption_selector_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T023300Z--HCM-0-8--v1-4-same-parent-resumption-selector-closure.json"],
+      "result_subject_fingerprint": "sha256:18c10754a6a91c86f6c7c1db785582244460f9318bb85976eb59514785adf290"
+    },
+    {
+      "run_id": "hcm_0_8_resumption_implementation_review",
+      "dispatch_id": "20260801T024400Z--HCM-0-8--v1-4-same-parent-resumption-implementation-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T024400Z--HCM-0-8--v1-4-same-parent-resumption-implementation-review.json",
+      "dispatch_fingerprint": "sha256:763ed12eb268916e0efe9411ddb4be69537b4083219df005f3faab37ee5b35b9",
+      "role": "review",
+      "agent_id": "/root/hcm_0_8_resumption_implementation_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "debugging-and-error-recovery", "test-driven-development", "incremental-implementation", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:884ae774e460f5cd82133d3a18323720140344b9f86520cf04ce89fa3a2fe418",
+      "review_round": 3,
+      "predecessor_run_id": "hcm_0_8_resumption_selector_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM08-V14SIR-0001"],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T024400Z--HCM-0-8--v1-4-same-parent-resumption-implementation-review.json"],
+      "result_subject_fingerprint": "sha256:884ae774e460f5cd82133d3a18323720140344b9f86520cf04ce89fa3a2fe418"
+    },
+    {
+      "run_id": "hcm_0_8_resumption_implementation_closure",
+      "dispatch_id": "20260801T025300Z--HCM-0-8--v1-4-same-parent-resumption-implementation-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T025300Z--HCM-0-8--v1-4-same-parent-resumption-implementation-closure.json",
+      "dispatch_fingerprint": "sha256:f877309cfc6930c690001097a47a376155e520db2f3491723ca41c26660d7a54",
+      "role": "review",
+      "agent_id": "/root/hcm_0_8_resumption_implementation_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "debugging-and-error-recovery", "test-driven-development", "incremental-implementation", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:939d96fcc30a99c444b791c83ecd95e13f43d6912930400259a5a0c3a2cadf87",
+      "review_round": 4,
+      "predecessor_run_id": "hcm_0_8_resumption_implementation_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T025300Z--HCM-0-8--v1-4-same-parent-resumption-implementation-closure.json"],
+      "result_subject_fingerprint": "sha256:939d96fcc30a99c444b791c83ecd95e13f43d6912930400259a5a0c3a2cadf87"
+    },
+    {
+      "run_id": "hcm_0_8_ancillary_prefix_proof_review",
+      "dispatch_id": "20260801T040600Z--HCM-0-8--v1-4-ancillary-prefix-proof-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T040600Z--HCM-0-8--v1-4-ancillary-prefix-proof-review.json",
+      "dispatch_fingerprint": "sha256:48a47fbbaff6b8d2bced809712d0cfd884b098fbff484af4fb46c9e6fee422ad",
+      "role": "review",
+      "agent_id": "/root/hcm_0_8_ancillary_prefix_proof_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "debugging-and-error-recovery", "test-driven-development", "incremental-implementation", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:ab10cdddbfe00c253727e250a4ae46c768400dff3f942baa1482e98a5c0cf5cb",
+      "review_round": 5,
+      "predecessor_run_id": "hcm_0_8_resumption_implementation_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM08-V14APPR-0001"],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T040600Z--HCM-0-8--v1-4-ancillary-prefix-proof-review.json"],
+      "result_subject_fingerprint": "sha256:ab10cdddbfe00c253727e250a4ae46c768400dff3f942baa1482e98a5c0cf5cb"
+    },
+    {
+      "run_id": "hcm_0_8_ancillary_prefix_proof_closure",
+      "dispatch_id": "20260801T044800Z--HCM-0-8--v1-4-ancillary-prefix-proof-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T044800Z--HCM-0-8--v1-4-ancillary-prefix-proof-closure.json",
+      "dispatch_fingerprint": "sha256:33cb25f398fa6fa0bf9cf0ef8b66b61ea75f1f25d910541f499859b8f18be154",
+      "role": "review",
+      "agent_id": "/root/hcm_0_8_ancillary_prefix_proof_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "debugging-and-error-recovery", "test-driven-development", "incremental-implementation", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:ce8ff7830fa4acf03f8507c4037fa5703881dff12a394277fe48f575bc37fccf",
+      "review_round": 6,
+      "predecessor_run_id": "hcm_0_8_ancillary_prefix_proof_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T044800Z--HCM-0-8--v1-4-ancillary-prefix-proof-closure.json"],
+      "result_subject_fingerprint": "sha256:ce8ff7830fa4acf03f8507c4037fa5703881dff12a394277fe48f575bc37fccf"
+    },
+    {
+      "run_id": "hcm_0_8_resumption_final_closeout_review",
+      "dispatch_id": "20260801T054000Z--HCM-0-8--v1-4-same-parent-resumption-final-closeout-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T054000Z--HCM-0-8--v1-4-same-parent-resumption-final-closeout-review.json",
+      "dispatch_fingerprint": "sha256:5305b252caaa13e112a23a2967c2bfea960feb33f92b4e0089a55a9d3f63a65f",
+      "role": "review",
+      "agent_id": "/root/hcm_0_8_resumption_final_closeout_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "debugging-and-error-recovery", "code-review-and-quality", "git-workflow-and-versioning"],
+      "subject_fingerprint": "sha256:49d774f2b70b07f403402e1bf17cae79ed9e1dc717947dfa403db4360861cb5d",
+      "review_round": 7,
+      "predecessor_run_id": "hcm_0_8_ancillary_prefix_proof_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T054000Z--HCM-0-8--v1-4-same-parent-resumption-final-closeout-review.json", "git:7160acd5f67bcdbd031e8476342319519131e86f"],
+      "result_subject_fingerprint": "sha256:49d774f2b70b07f403402e1bf17cae79ed9e1dc717947dfa403db4360861cb5d"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-01T06:15:00Z",
+    "dispatch_count": 7,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": ["sha256:f79081aff048f1b6891fe332525a7fe50a68dc73fee59e4b9882ea6c4117c8e0"],
+    "aggregate_fingerprint": "sha256:fa3e0b4d1899c66f93c21209d157c3c4d6963fa062c4a3b084e0ee595d79ba72"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "v1-4-same-parent-resumption-selector-remediation",
+      "finding_run_id": "hcm_0_8_resumption_selector_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm_0_8_resumption_selector_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:18c10754a6a91c86f6c7c1db785582244460f9318bb85976eb59514785adf290",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T023300Z--HCM-0-8--v1-4-same-parent-resumption-selector-closure.json"]
+    },
+    {
+      "remediation_id": "v1-4-same-parent-resumption-implementation-remediation",
+      "finding_run_id": "hcm_0_8_resumption_implementation_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm_0_8_resumption_implementation_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:939d96fcc30a99c444b791c83ecd95e13f43d6912930400259a5a0c3a2cadf87",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T025300Z--HCM-0-8--v1-4-same-parent-resumption-implementation-closure.json"]
+    },
+    {
+      "remediation_id": "v1-4-ancillary-prefix-proof-remediation",
+      "finding_run_id": "hcm_0_8_ancillary_prefix_proof_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm_0_8_ancillary_prefix_proof_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:ce8ff7830fa4acf03f8507c4037fa5703881dff12a394277fe48f575bc37fccf",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T044800Z--HCM-0-8--v1-4-ancillary-prefix-proof-closure.json"]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "7160acd5f67bcdbd031e8476342319519131e86f",
+    "subject_fingerprint": "sha256:49d774f2b70b07f403402e1bf17cae79ed9e1dc717947dfa403db4360861cb5d",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T054000Z--HCM-0-8--v1-4-same-parent-resumption-final-closeout-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260801T051500Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-completed.json",
+      "git:e2cb4e1f7ad3d8f12f651a2b09d7d69bbbd49569",
+      "git:86b141333f349f1b886fc4b7718f787be9e19f47",
+      "git:7160acd5f67bcdbd031e8476342319519131e86f"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T054000Z--HCM-0-8--v1-4-same-parent-resumption-final-closeout-review.json"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 v1.4 same-parent resumption validation repair completed",
+    "scope_horizon": "the protocol document, validator/embedded regressions, selector, seven review dispatches, and converged smoke corpus",
+    "detail_resolution": "completed terminality, link-local non-completed cutoffs, exact dual-link supersession, identity continuity, cumulative ancillary prefixes, and final-review freeze",
+    "temporal_horizon": "enabling commits e2cb4e1 and 86b1413 through smoke closeout 7160acd and this mechanical protocol closeout",
+    "authority_horizon": "protocol repair complete; no history/product/smoke-dispatch/HCM-3.x/release/publication/push authority",
+    "memory_horizon": "three immutable FINDINGS reviews, three changed-fingerprint CLEAN closures, final converged-corpus CLEAN review, and exact protected-path hashes",
+    "validation_horizon": "ordinary validation, both self-tests, schema/duplicate-key checks, ledger parity, whitespace, and protected-path exclusion"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Repair v1.4 validation so bounded same-parent resumption can preserve exact interim cutoffs and converge to one terminal successor without editing history, then close the protocol only after the live smoke corpus validates.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+      "sections": ["Acceptance contract", "Causal review stages", "Authorized four-commit dependency sequence"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T054000Z--HCM-0-8--v1-4-same-parent-resumption-final-closeout-review.json",
+      "sections": ["subject_manifest", "contracts_and_gates", "return_contract"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": ["V1.4 same-parent resumption and terminality", "Deterministic ledger rebuild", "Failure rules"]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "7160acd5f67bcdbd031e8476342319519131e86f",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/ideas/intent-to-outcome-fidelity.md"
+    ]
+  },
+  "work_completed": [
+    "Froze one new HCM-0.8 parent, integrated outcome, packet, registry, and causal budget without modifying any historical dispatch or handoff.",
+    "Specified and implemented completed-record terminality, direct same-parent dual-link resumption, identity continuity, exact per-record dispatch cutoffs, and latest-unsuperseded population completeness.",
+    "Bound ancillary authority to each handoff cutoff and retained canonical timestamp-plus-dispatch-ID final-review freeze, with regressions for retroactive allowance, cumulative prefixes, omissions/extras, and same-second widening.",
+    "Landed enabling commits e2cb4e1f7ad3d8f12f651a2b09d7d69bbbd49569 and 86b141333f349f1b886fc4b7718f787be9e19f47 without claiming completion.",
+    "Used the enabling validator to land smoke terminal closeout 7160acd5f67bcdbd031e8476342319519131e86f, consuming the second stop and reconciling all six smoke dispatches while preserving product primary 2609bf5.",
+    "Executed planning, implementation, proof, and final_closeout review stages; three P2 findings received consolidated remediation and different-fresh CLEAN closures, and the final converged-corpus review returned CLEAN.",
+    "Passed ordinary validation and both self-tests against the converged corpus; GitNexus FTS limitations and no-index staged results were reported honestly."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "status": "completed",
+      "summary": "Normative v1.4 same-parent resumption, cutoff, terminality, and identity-continuity rules."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "completed",
+      "summary": "Production validation and embedded positive/negative regressions for successor chains and ancillary prefixes."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md",
+      "status": "completed",
+      "summary": "Reviewed selector with explicit proof stage, four-commit dependency sequence, and temporary known validation state."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T061500Z--HCM-0-8--orchestration--v1-4-same-parent-resumption-validation-repair-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned protocol completion reconciling all seven HCM-0.8 review dispatches."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-0.8-V14-RESUMPTION-D1",
+      "summary": "A completed v1.4 handoff is always terminal; no successor or later same-parent dispatch is admitted.",
+      "authority_effect": "Resumption after completion remains a validation failure.",
+      "refs": ["docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"]
+    },
+    {
+      "decision_id": "HCM-0.8-V14-RESUMPTION-D2",
+      "summary": "A non-completed handoff remains a fail-closed cutoff unless its direct same-orchestration successor names it in both source_handoff_ids and supersedes while preserving all frozen identities.",
+      "authority_effect": "Broken chains, cross-parent successors, identity drift, and orphan later dispatches fail closed without rewriting interim history.",
+      "refs": ["docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-v1-4-same-parent-resumption-validation-repair.md"]
+    },
+    {
+      "decision_id": "HCM-0.8-V14-RESUMPTION-D3",
+      "summary": "Dispatch and ancillary authority are evaluated at each record's exact cutoff; completed ancillary authority additionally freezes at the canonical final CLEAN review ordering key.",
+      "authority_effect": "Later authority cannot retroactively invalidate interim records or widen a completed reviewed subject.",
+      "refs": ["docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM08-V14SPR-0001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm_0_8_resumption_selector_review",
+      "summary": "The initial selector contradicted link-local successor validity by treating both interim stops as simultaneous ordinary-validation failures.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T023300Z--HCM-0-8--v1-4-same-parent-resumption-selector-closure.json"]
+    },
+    {
+      "finding_id": "HCM08-V14SIR-0001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm_0_8_resumption_implementation_review",
+      "summary": "Same-packet cross-parent rejection incorrectly depended on all other identity fields matching, allowing a compound cross-parent plus phase-drift escape.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T025300Z--HCM-0-8--v1-4-same-parent-resumption-implementation-closure.json"]
+    },
+    {
+      "finding_id": "HCM08-V14APPR-0001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm_0_8_ancillary_prefix_proof_review",
+      "summary": "Timestamp-only final CLEAN ordering allowed a same-second lexically later dispatch ID to widen completed ancillary authority.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T044800Z--HCM-0-8--v1-4-ancillary-prefix-proof-closure.json"]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "focused embedded v1.4 resumption and ancillary-prefix regression matrix",
+      "status": "passed",
+      "evidence_ref": "terminality, dual-link, identity drift, orphan dispatch, per-cutoff population, cumulative prefix, omission/extra, and same-second widening cases pass through production validation"
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "converged canonical records, dispatches, templates, and deterministic ledger validate with exact parity"
+    },
+    {
+      "command": "validate_handoffs.py --self-test-v1-admission and --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "historical admission, v1.4 causal contract, orchestration contract, and exact ledger rebuild scenarios pass"
+    },
+    {
+      "command": "final fresh converged-corpus review",
+      "status": "passed",
+      "evidence_ref": "/root/hcm_0_8_resumption_final_closeout_review returned CLEAN for sha256:49d774f2b70b07f403402e1bf17cae79ed9e1dc717947dfa403db4360861cb5d"
+    },
+    {
+      "command": "GitNexus impact and change detection",
+      "status": "passed",
+      "evidence_ref": "Python symbol remained unresolved/UNKNOWN with FTS unavailable; compare-to-main failed under FTS; strongest local and staged checks were reported without mislabeling unavailable results GREEN"
+    },
+    {
+      "command": "JSON duplicate-key/schema, dispatch/record/ledger parity, and git diff --check",
+      "status": "passed",
+      "evidence_ref": "all final control artifacts parse uniquely, validate against v1.4, reconcile exact populations, and pass whitespace checks"
+    },
+    {
+      "command": "protected-path and immutable-history audit before every commit",
+      "status": "passed",
+      "evidence_ref": "all nine protected paths retained initial SHA-256 hashes, stayed unstaged, and all existing dispatch/handoff bytes remained unchanged"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T054000Z--HCM-0-8--v1-4-same-parent-resumption-final-closeout-review.json",
+      "sections": ["entire dispatch"],
+      "reason": "Preserve the immutable fresh complete-subject CLEAN review.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T061500Z--HCM-0-8--orchestration--v1-4-same-parent-resumption-validation-repair-completed.json",
+      "sections": ["entire handoff"],
+      "reason": "Publish the parent-owned protocol completion after the converged-corpus CLEAN review.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": ["deterministic ledger entry"],
+      "reason": "Rebuild the query ledger from every canonical record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic continuation is authorized from this completed protocol repair.",
+    "condition": "Only a new explicit operator selection may authorize later work; HCM-3.x is not selected here.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T061500Z--HCM-0-8--orchestration--v1-4-same-parent-resumption-validation-repair-completed.json",
+        "sections": ["entire completed handoff"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T051500Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-completed.json",
+        "sections": ["entire completed smoke handoff"]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not continue automatically into HCM-3.x or reopen smoke product discovery.",
+      "Do not edit, delete, reparent, or reissue any historical dispatch or handoff.",
+      "Do not release, publish, push, or widen protocol/product authority without new explicit authorization."
+    ],
+    "acceptance_criteria": [
+      "The protocol parent handoff reconciles all seven HCM-0.8 dispatches and the deterministic ledger passes full validation.",
+      "The four-commit dependency sequence is linear and its final commit contains only final review/handoff/ledger control artifacts.",
+      "All nine protected paths remain byte-identical, unstaged, and uncommitted."
+    ],
+    "stop_conditions": [
+      "Stop before HCM-3.x, new product discovery, release, publication, or push without fresh explicit authority.",
+      "Stop if future work would alter any immutable evidence from either completed orchestration."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Completed the HCM-0.8 v1.4 same-parent resumption validation repair after two enabling commits, the dependent HCM-2.4 smoke terminal closeout, and a fresh converged-corpus CLEAN review. Completed records are terminal; non-completed records remain exact fail-closed cutoffs unless directly dual-linked by an identity-continuous same-parent successor; ancillary authority is cutoff-bound and final-review-frozen. All seven protocol dispatches reconcile, HCM-3.x remains unselected, and nothing was pushed."
+}
