@@ -1,0 +1,238 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T124330Z--HCM-3-1--vocabulary-resolution-planning-closure",
+  "created_at_utc": "2026-08-01T12:43:30Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T122747Z--HCM-3-1--vocabulary-resolution",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.1",
+  "packet_id": "HCM-3.1-P1-vocabulary-kernel",
+  "subject_fingerprint": "sha256:84cf15dde44b0ceaa4eba40616fcfd382e4eb0f6a784e94b40e1042a30e71582",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.1-vocabulary-resolution-planning-closure-1",
+    "trigger_run_ids": [
+      "hcm31_planning_review"
+    ],
+    "finding_refs": [
+      "HCM31-PLN-DISC-001",
+      "HCM31-PLN-DISC-002",
+      "HCM31-PLN-DISC-003"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T12:27:47Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.1-vocabulary-resolution-full-slice",
+        "packet_ids": [
+          "HCM-3.1-P1-vocabulary-kernel",
+          "HCM-3.1-P2-profile-renderer-adoption",
+          "HCM-3.1-P3-proof-control-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:d0f92e3453edc70c4ed9a185d69dfbbe631fbe84653bad07ecbf060d8ef20ee2"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f32411b780227c90d7d3146339f933cd19df4911a82043d981958f67663b8758",
+    "integrated_outcome_id": "hcm-3.1-vocabulary-resolution-full-slice",
+    "outcome_registry_fingerprint": "sha256:d0f92e3453edc70c4ed9a185d69dfbbe631fbe84653bad07ecbf060d8ef20ee2",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260801T123319Z--HCM-3-1--vocabulary-resolution-planning-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.1-vocabulary-resolution-planning-closure-convergence-1",
+    "completed_at_utc": "2026-08-01T12:43:20Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "reconcile all three planning findings against definition_identity canonicalization and the live crates/pipeline Work Specification renderer; freeze two exact fingerprint vectors and the non-empty Markdown byte contract",
+        "evidence_ref": "remediation proof below; runtime edit count remains zero; no shipped definition changed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory crates/engine vocabulary/profile/repository owners, crates/pipeline/src/pipeline_capture.rs consumer, crates/pipeline/tests/pipeline_capture.rs, and HCM-2.4 hidden fixture installation paths",
+        "evidence_ref": "production ceiling now names the real pipeline path plus exact selected-registry integration; test ceiling names three test files and one isolated HCM-3.1 fixture tree"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted five-entry repo-path-NUL-SHA256-newline remediated planning subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:84cf15dde44b0ceaa4eba40616fcfd382e4eb0f6a784e94b40e1042a30e71582"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8, Markdown fence balance, and independent Python replay of shipped/non-empty canonical JSON SHA-256 vectors",
+        "evidence_ref": "all files decode; fences balance; hashes replay as 69113b1a9271ce207d45bdb91ebae8d6516249e16b59891b292546078364a22b and 0a28353460ce60a0fc53ba5e99ea2ec753abf94638489fe1eebd69b317d90ec4"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-3.1",
+        "evidence_ref": "parent pre-closure command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md",
+        "sha256": "de834e906634b922af7ebd85dade8445c588cda9d33c9f0930debe039216c7f0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md",
+        "sha256": "f5ebd62c44b87453ff13ecf8d693014c5309d3fbeb6db0c99318039fda148443"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/20260801T124300Z--planning-discovery-remediation.md",
+        "sha256": "a97ad844d15fb2639bd198b3d2513a7649b5e73b451f9b08850c4ab7e2e52a3c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/tasks/plan.md",
+        "sha256": "8fff88e81b218008f64f2c2fe6ec4b6153eecc1429a2a734910abb88af4849a0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/tasks/todo.md",
+        "sha256": "36f8b44c9b87cc55f397455060122f31a5958a8c1214e8c927ca397dcd58026f"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:84cf15dde44b0ceaa4eba40616fcfd382e4eb0f6a784e94b40e1042a30e71582"
+  },
+  "active_resolution": {
+    "level": "HCM-3.1 planning closure",
+    "scope_horizon": "closure of exactly one P1 and two P2 planning findings before any RED/runtime edit",
+    "detail_resolution": "existing no-LF fingerprint producer and two exact vectors; actual pipeline consumer ceiling; byte-exact non-empty Markdown template and edge preservation",
+    "temporal_horizon": "same planning stage after one consolidated remediation of the discovery subject",
+    "authority_horizon": "unchanged HCM-3.1 only; no HCM-3.2/3.3, frozen CLI JSON, shipped-definition mutation, new dependency, push, or historical rewrite",
+    "memory_horizon": "immutable first FINDINGS dispatch/result, five-file remediated subject, exact live source paths, and unique parent registry",
+    "validation_horizon": "close all three predecessor finding IDs or emit only genuinely remediation-caused/unmasked unique findings"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md",
+      "sections": [
+        "Canonical fingerprint",
+        "Real consumer behavior",
+        "Production and test ceilings"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md",
+      "sections": [
+        "Fingerprint selector",
+        "Exact ceilings",
+        "Test selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/proof/20260801T124300Z--planning-discovery-remediation.md",
+      "sections": [
+        "Consolidated disposition",
+        "Remaining gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T123319Z--HCM-3-1--vocabulary-resolution-planning-review.json",
+      "sections": [
+        "review_cycle",
+        "subject_manifest",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Causal cascading review hardening"
+      ]
+    }
+  ],
+  "repo_truth": "The first fresh planning reviewer found an impossible LF/pinned-fingerprint pair, a nonexistent engine consumer path, and an under-specified renderer golden. The parent remediated all three in one five-file subject: existing RFC 8785 bytes are hashed directly; both exact vectors replay; the production ceiling names crates/pipeline/src/pipeline_capture.rs and exact engine integration; the complete non-empty Markdown bytes are frozen. No runtime or shipped-definition edit has occurred; protected paths remain outside the subject.",
+  "allowed_scope": [
+    "Review the complete five-file remediated subject read-only and determine whether it closes all three predecessor findings.",
+    "Replay both canonical JSON hashes and verify the algorithm remains uniform with the immutable shipped vector.",
+    "Verify the corrected engine/pipeline production and exact test/fixture ceilings cover the selected implementation without widening authority.",
+    "Verify the heading, body preservation, Vocabulary suffix, escaping, ordering, omission, edge-count, and terminal-newline rules are sufficient for an authority-derived RED golden."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger, delegate, or implement runtime code.",
+    "Do not reuse predecessor finding IDs as newly emitted findings; cite them only as closure triggers.",
+    "Do not select HCM-3.2 or later, add a schema/dependency/CLI field, publish a vocabulary, mutate shipped identities, or broaden protected/control paths."
+  ],
+  "tasks": [
+    "Validate closure lineage, exact three finding refs, predecessor, unchanged registry/budget, and five-entry manifest.",
+    "Independently verify HCM31-PLN-DISC-001 is closed by the no-delimiter RFC 8785 producer and exact replay vectors.",
+    "Independently verify HCM31-PLN-DISC-002 is closed by the actual pipeline consumer ceiling and selected-registry engine boundary.",
+    "Independently verify HCM31-PLN-DISC-003 is closed by the exact Markdown byte contract and real-path golden ceiling.",
+    "Return findings first with new unique IDs only for remediation-caused/unmasked issues; otherwise return CLEAN for subject sha256:84cf15dde44b0ceaa4eba40616fcfd382e4eb0f6a784e94b40e1042a30e71582."
+  ],
+  "contracts_and_gates": [
+    "Runtime edits and RED tests remain forbidden unless this exact replacement planning subject is CLEAN with no unresolved P1/P2.",
+    "The original FINDINGS dispatch/result remains immutable; this is a different-fresh closure under the same parent, registry, and causal budget.",
+    "CLEAN ends the planning discovery lineage and authorizes only selector-bounded P1/P2 RED/implementation work.",
+    "Shipped vocabulary bytes/fingerprint and stable machine identities remain immutable."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if any predecessor issue remains open or remediation unmasked a new unique P1/P2 in the same planning cause.",
+    "Return BLOCKED if the remediated contract still requires a material product/schema/HCM-3.2/3.3 decision.",
+    "Report rather than repair; do not broaden authority or write global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

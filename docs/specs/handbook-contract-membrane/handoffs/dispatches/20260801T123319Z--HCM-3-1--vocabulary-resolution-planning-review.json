@@ -1,0 +1,246 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T123319Z--HCM-3-1--vocabulary-resolution-planning-review",
+  "created_at_utc": "2026-08-01T12:33:19Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T122747Z--HCM-3-1--vocabulary-resolution",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.1",
+  "packet_id": "HCM-3.1-P1-vocabulary-kernel",
+  "subject_fingerprint": "sha256:3ab7d1ba51bb9e87ef0911a8b3b08db5d702ab18ab5acd5adda2bfde04da0672",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.1-vocabulary-resolution-planning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T12:27:47Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.1-vocabulary-resolution-full-slice",
+        "packet_ids": [
+          "HCM-3.1-P1-vocabulary-kernel",
+          "HCM-3.1-P2-profile-renderer-adoption",
+          "HCM-3.1-P3-proof-control-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:d0f92e3453edc70c4ed9a185d69dfbbe631fbe84653bad07ecbf060d8ef20ee2"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f32411b780227c90d7d3146339f933cd19df4911a82043d981958f67663b8758",
+    "integrated_outcome_id": "hcm-3.1-vocabulary-resolution-full-slice",
+    "outcome_registry_fingerprint": "sha256:d0f92e3453edc70c4ed9a185d69dfbbe631fbe84653bad07ecbf060d8ef20ee2",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.1-vocabulary-resolution-planning-convergence-1",
+    "completed_at_utc": "2026-08-01T12:33:10Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "verify live branch/HEAD and nine protected hashes; read selected HCM 00-06 authority, dependency handoffs, live vocabulary/profile/consumer owners, and freeze SPEC/plan/todo/decision before runtime edits",
+        "evidence_ref": "parent pre-review record: branch feat/handbook-contract-membrane at f0b5f4c; dependency handoffs completed without unresolved P1/P2; runtime edit count zero; four-file selector subject below"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "GitNexus concept query for vocabulary, then inspect vocabulary_registry, stable_role_registry, profile_selection, instance_profile, canonical renderers, ArtifactRepositoryV1, pipeline_capture, compiler doctor, CLI doctor, shipped definitions, and focused tests",
+        "evidence_ref": "GitNexus index refreshed to f0b5f4c; concept FTS was unavailable and reported degraded; exact-source inventory selected the admitted Work Specification Markdown path and excluded frozen CLI JSON/Context Resolution/Projection surfaces"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted four-entry repo-path-NUL-SHA256-newline planning subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:3ab7d1ba51bb9e87ef0911a8b3b08db5d702ab18ab5acd5adda2bfde04da0672"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode and Markdown fence-balance check for all four planning files",
+        "evidence_ref": "strict UTF-8 passed; only decision contains one balanced JSON fence"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-3.1",
+        "evidence_ref": "parent pre-review command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md",
+        "sha256": "f7563705cb0a5cd48016a9789d8ac745880777a5a634183f103784ca08184e43"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md",
+        "sha256": "3f0233da1771db9d8f52303229a45aadb056148f7e63e8d258bc10e82798be0a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/tasks/plan.md",
+        "sha256": "e43c196555b847d112d8e9429e9bc635ad8f77a8f6d9e33c16ef6fd79d38979a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/tasks/todo.md",
+        "sha256": "9afcf74b43b13db038cfdab432db3e1eb59b89e40ded4b2a90e11ab0a6e35aee"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:3ab7d1ba51bb9e87ef0911a8b3b08db5d702ab18ab5acd5adda2bfde04da0672"
+  },
+  "active_resolution": {
+    "level": "HCM-3.1 complete slice planning selector review",
+    "scope_horizon": "typed vocabulary kernel, exact profile retention, one fixed Work Specification renderer, proof, earned control synchronization, and v1.4 closeout",
+    "detail_resolution": "stable-role category authority, label and alias normalization, ambiguity, directed absorption graph, fingerprint preimage/order, exact product path, tests, path ceilings, and stop rules",
+    "temporal_horizon": "fresh planning stage before any Rust or runtime edit",
+    "authority_horizon": "HCM-3.1 only; no HCM-3.2 Context Resolution, HCM-3.3 Projection, Snapshot, posture, public transport, new CLI schema, push, or historical rewrite",
+    "memory_horizon": "live f0b5f4c source, completed Phase 2 and HCM-0.8 dependency records, selected HCM 00-06 sections, and this unique parent registry",
+    "validation_horizon": "planning sufficiency CLEAN required before RED tests or implementation"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/SPEC.md",
+      "sections": [
+        "Frozen owner and runtime path",
+        "Typed model",
+        "Alias normalization and collision rule",
+        "Structural absorption graph",
+        "Canonical fingerprint",
+        "Real consumer behavior",
+        "Proof obligations",
+        "Production and test ceilings"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.1/decision/2026-08-01-vocabulary-resolution-selector.md",
+      "sections": [
+        "Orchestration registry",
+        "Under-specified questions adjudicated",
+        "Identity and compatibility posture",
+        "Exact ceilings",
+        "Test selector",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Stable semantics and configurable language",
+        "Instance profiles",
+        "Vocabulary model"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Stable-role registry",
+        "Vocabulary contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-PROFILE-01",
+        "PG-VOCAB-01",
+        "Regression rules 29, 32, 33, and 36"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Causal cascading review hardening",
+        "v1.4 same-parent resumption validation"
+      ]
+    }
+  ],
+  "repo_truth": "Live branch feat/handbook-contract-membrane is at expected f0b5f4c. Exactly nine pre-existing protected user paths are modified/untracked and remain hash-identical, unstaged, and outside this subject. Phase 2 and its smoke are completed and HCM-0.8 repaired v1.4 validation. The shipped vocabulary is empty and pinned to stable-role registry 1.1.0; the engine currently rejects non-empty vocabulary. Profile selection already retains exact vocabulary identity. Work Specification capture is the smallest real fixed renderer path. GitNexus index refresh succeeded, but concept FTS returned unavailable/degraded rather than GREEN.",
+  "allowed_scope": [
+    "Review the exact four-file planning subject read-only for internal consistency, completeness, authority, and implementability.",
+    "Check the four explicit adjudications: existing category axes, deterministic alias collision, exact directed absorption graph, and Work Specification consumer boundary.",
+    "Check typed behavior, canonical fingerprint ordering, profile identity, real-path proof, negative/non-influence matrix, exact production/test/control ceilings, commit sequence, and proof wall.",
+    "Emit unique planning-run finding IDs for independently identified P1-P4 issues; do not repair them."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, write a handoff/ledger, create another dispatch, delegate, or implement runtime code.",
+    "Do not select HCM-3.2 or later, design Context Resolution or capitalized Projection, change a frozen CLI JSON schema, publish a non-empty shipped vocabulary, add dependencies, or modify protected paths.",
+    "Do not treat GitNexus FTS unavailability as a GREEN capability result or broaden the path ceiling."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit, with unique run-local IDs and exact file/section evidence.",
+    "Verify the contract preserves stable machine meaning while providing deterministic fallback, labels, typed and untyped resolution, ambiguity, absorption, and identity.",
+    "Verify the graph/category/fingerprint algorithms are non-vacuous, deterministic, implementable without new authority, and cover all required negative cases.",
+    "Verify the selected real product path can prove PG-VOCAB-01 without beginning HCM-3.2/HCM-3.3 and while preserving shipped-empty output.",
+    "Return CLEAN only if no valid P1/P2 remains for exact subject sha256:3ab7d1ba51bb9e87ef0911a8b3b08db5d702ab18ab5acd5adda2bfde04da0672."
+  ],
+  "contracts_and_gates": [
+    "Runtime edits are forbidden until this planning stage is independently CLEAN.",
+    "One planning discovery lineage is permitted; findings cause consolidated parent remediation and different-fresh closure under the same parent, registry, budget, and exact finding refs.",
+    "The shipped-root vocabulary bytes/fingerprint and all stable machine identities remain immutable.",
+    "A unit-only API cannot close PG-VOCAB-01; one deterministic real renderer path with no absorption loss is mandatory.",
+    "No unresolved valid P1/P2 may proceed to RED tests or implementation."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repairing if the selector is ambiguous, incomplete, untestable, overbroad, or conflicts with active HCM authority.",
+    "Return BLOCKED if the required behavior needs a new schema field, material human product choice, HCM-3.2/HCM-3.3 runtime, changed shipped identity, or authority outside this slice.",
+    "Report any causal-registry, protected-path, or subject-integrity issue to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
