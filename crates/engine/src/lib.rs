@@ -241,7 +241,7 @@ pub use semantic_capability_registry::{
     SemanticCapabilityRegistry, SemanticValidationProfileDefinition,
 };
 pub use stable_role_registry::{StableRoleCategory, StableRoleDefinition, StableRoleRegistry};
-pub use vocabulary_registry::VocabularyDefinition;
+pub use vocabulary_registry::{VocabularyAbsorption, VocabularyDefinition, VocabularyResolution};
 
 pub fn workspace_contract_version() -> &'static str {
     "C-02"

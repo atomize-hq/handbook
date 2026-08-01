@@ -1,6 +1,10 @@
 use handbook_engine::*;
 use std::collections::BTreeSet;
 use std::path::Path;
+
+const HCM_3_1_VOCABULARY_BYTES: &[u8] = include_bytes!(
+    "fixtures/hcm_3_1_vocabulary_resolution/definitions/vocabularies/example.vocabulary.hcm-3-1/1.0.0.yaml"
+);
 fn r(value: &str) -> ExactDefinitionRef {
     ExactDefinitionRef::parse(value).unwrap()
 }
@@ -1175,6 +1179,99 @@ fn vocabulary_resolves_and_matches_its_stable_role_registry_producer() {
             .unwrap_err()
             .kind(),
         ProfileLoadErrorKind::FingerprintMismatch
+    );
+}
+
+#[test]
+fn selected_nonempty_vocabulary_is_retained_in_exact_profile_identity_only() {
+    let crate_root = Path::new(env!("CARGO_MANIFEST_DIR"));
+    let baseline = resolve_profile_selection(crate_root, request(false)).unwrap();
+    let repo = tempfile::tempdir().unwrap();
+    std::fs::create_dir_all(repo.path().join("sources")).unwrap();
+
+    let root_bytes =
+        std::fs::read(crate_root.join("tests/fixtures/hcm_1_2_repository_profile/root.yaml"))
+            .unwrap();
+    std::fs::write(repo.path().join("sources/root.yaml"), &root_bytes).unwrap();
+    std::fs::write(
+        repo.path().join("sources/hcm-3-1.vocabulary.yaml"),
+        HCM_3_1_VOCABULARY_BYTES,
+    )
+    .unwrap();
+
+    let root: serde_json::Value = serde_yaml_bw::from_slice(&root_bytes).unwrap();
+    let mut child = serde_json::json!({
+        "schema_id": "handbook.instance-profile",
+        "schema_version": "1.0",
+        "profile_id": "example.profile.hcm-3-1",
+        "profile_version": "1.0.0",
+        "profile_scope": "repository",
+        "extends_profile_ref": "example.profile.root@1.0.0",
+        "vocabulary_ref": "example.vocabulary.hcm-3-1@1.0.0"
+    });
+    let definition = child.clone();
+    child["profile_fingerprint"] = DefinitionFingerprint::from_json_value(&serde_json::json!({
+        "definition": definition,
+        "dependencies": [
+            {
+                "definition_class": "profile",
+                "reference": "example.profile.root@1.0.0",
+                "fingerprint": root["profile_fingerprint"].as_str().unwrap(),
+            },
+            {
+                "definition_class": "vocabulary",
+                "reference": "example.vocabulary.hcm-3-1@1.0.0",
+                "fingerprint": "sha256:0a28353460ce60a0fc53ba5e99ea2ec753abf94638489fe1eebd69b317d90ec4",
+            }
+        ]
+    }))
+    .unwrap()
+    .to_string()
+    .into();
+    std::fs::write(
+        repo.path().join("sources/hcm-3-1.profile.yaml"),
+        serde_yaml_bw::to_string(&child).unwrap(),
+    )
+    .unwrap();
+
+    let mut selection = request(false);
+    selection.selected_profile_ref = r("example.profile.hcm-3-1@1.0.0");
+    selection.profile_sources[0].source =
+        DefinitionSource::RepositoryPath("sources/root.yaml".into());
+    selection.profile_sources.push(DefinitionSourceBinding {
+        definition_ref: r("example.profile.hcm-3-1@1.0.0"),
+        source: DefinitionSource::RepositoryPath("sources/hcm-3-1.profile.yaml".into()),
+    });
+    selection.vocabulary_sources.push(DefinitionSourceBinding {
+        definition_ref: r("example.vocabulary.hcm-3-1@1.0.0"),
+        source: DefinitionSource::RepositoryPath("sources/hcm-3-1.vocabulary.yaml".into()),
+    });
+
+    let resolved = resolve_profile_selection(repo.path(), selection).unwrap();
+    assert_eq!(
+        resolved.vocabulary().exact_ref().as_str(),
+        "example.vocabulary.hcm-3-1@1.0.0"
+    );
+    assert_eq!(
+        resolved.vocabulary().vocabulary_fingerprint().as_str(),
+        "sha256:0a28353460ce60a0fc53ba5e99ea2ec753abf94638489fe1eebd69b317d90ec4"
+    );
+    assert_ne!(
+        resolved.resolved_profile_fingerprint(),
+        baseline.resolved_profile_fingerprint()
+    );
+    assert_eq!(
+        resolved.artifact_instances().fingerprint(),
+        baseline.artifact_instances().fingerprint(),
+        "vocabulary selection cannot change artifact machine identity"
+    );
+    assert_eq!(
+        resolved
+            .vocabulary()
+            .resolve_typed_role("delivery_unit")
+            .unwrap()
+            .role_id(),
+        "delivery_unit"
     );
 }
 

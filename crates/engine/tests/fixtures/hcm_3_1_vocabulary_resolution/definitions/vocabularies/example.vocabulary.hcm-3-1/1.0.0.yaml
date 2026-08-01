@@ -1,0 +1,28 @@
+schema_id: handbook.vocabulary-profile
+schema_version: "1.0"
+vocabulary_id: example.vocabulary.hcm-3-1
+vocabulary_version: 1.0.0
+stable_role_registry:
+  ref: handbook.roles.core@1.1.0
+  fingerprint: sha256:0c85b1b53786e7980c4fd0d7975cd9cde1a3eae2bc8daceb23be1a1731263029
+labels:
+  delivery_unit: Feature
+  implementation_unit: Slice
+aliases:
+  atomic_action:
+    - task
+  delivery_unit:
+    - feature
+  implementation_unit:
+    - slice
+    - task
+absorptions:
+  - unit_id: delivery_unit
+    absorbs:
+      - implementation_unit
+  - unit_id: implementation_unit
+    absorbs:
+      - atomic_action
+      - execution_envelope
+extensions: {}
+vocabulary_fingerprint: sha256:0a28353460ce60a0fc53ba5e99ea2ec753abf94638489fe1eebd69b317d90ec4

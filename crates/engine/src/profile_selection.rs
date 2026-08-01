@@ -304,18 +304,25 @@ pub fn resolve_profile_selection(
 
     let mut vocabularies = BTreeMap::new();
     for source in vocabulary_sources {
+        let (vocabulary_role_ref, vocabulary_role_fingerprint) =
+            admitted_vocabulary_stable_role_selection(source.bytes()).map_err(registry_error)?;
+        let vocabulary_roles = stable_registries
+            .get(&vocabulary_role_ref)
+            .ok_or_else(|| missing("vocabulary stable-role registry producer"))?;
+        if vocabulary_roles.fingerprint() != &vocabulary_role_fingerprint {
+            return Err(stable_registry_mismatch(
+                "vocabulary stable-role fingerprint does not match its registry producer",
+            ));
+        }
         let vocabulary =
-            VocabularyDefinition::load_bytes(source.bytes()).map_err(registry_error)?;
+            VocabularyDefinition::load_bytes_with_registry(source.bytes(), vocabulary_roles)
+                .map_err(registry_error)?;
         require_derived_ref(
             "vocabulary",
             vocabulary.exact_ref(),
             source.definition_ref(),
         )?;
-        let vocabulary_roles = stable_registries
-            .get(vocabulary.stable_role_registry_ref())
-            .ok_or_else(|| missing("vocabulary stable-role registry producer"))?;
-        if vocabulary_roles.fingerprint() != vocabulary.stable_role_registry_fingerprint()
-            || vocabulary.stable_role_registry_ref() != &selected_stable.0
+        if vocabulary.stable_role_registry_ref() != &selected_stable.0
             || vocabulary.stable_role_registry_fingerprint() != &selected_stable.1
         {
             return Err(stable_registry_mismatch(
