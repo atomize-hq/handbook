@@ -1,0 +1,557 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260801T051500Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-completed",
+  "created_at_utc": "2026-08-01T05:15:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "20260731-post-phase-2-smoke-repair-selector",
+  "orchestration_id": "20260731T182849Z--HCM-2-4--post-phase-2-smoke-repair",
+  "source_handoff_ids": [
+    "20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-01T05:15:00Z",
+    "evidence_ref": "six immutable built-in fresh review dispatches reconciled; final complete-subject review is CLEAN"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm_2_4_smoke_planning_review",
+      "dispatch_id": "20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json",
+      "dispatch_fingerprint": "sha256:c922403ce696765bfa13353d29f2ee6c618d68aa52a9163b264af4c55adefab7",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_smoke_planning_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:c49d008af6e15c3822fa19435ccab1255b77bc61b73969d7c8ae04399204eed5",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM24-PSRPR-0001",
+        "HCM24-PSRPR-0002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json"
+      ],
+      "result_subject_fingerprint": "sha256:c49d008af6e15c3822fa19435ccab1255b77bc61b73969d7c8ae04399204eed5"
+    },
+    {
+      "run_id": "hcm_2_4_smoke_planning_closure",
+      "dispatch_id": "20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json",
+      "dispatch_fingerprint": "sha256:4c8b2ffff5178c6be0f0e46f3c9f91c41202ee546f8f6e7c698bc2f4ea5baf15",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_smoke_planning_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:b7baf7d5b1626a61a60a2f972be804d20c089d313ee022e107bfdd138354812b",
+      "review_round": 2,
+      "predecessor_run_id": "hcm_2_4_smoke_planning_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json"
+      ],
+      "result_subject_fingerprint": "sha256:b7baf7d5b1626a61a60a2f972be804d20c089d313ee022e107bfdd138354812b"
+    },
+    {
+      "run_id": "hcm_2_4_smoke_implementation_review",
+      "dispatch_id": "20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json",
+      "dispatch_fingerprint": "sha256:2772f6f6795064a9c29f43b90b829b237e7f25b2120bd94b9406fb4175cf7800",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_smoke_implementation_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "debugging-and-error-recovery",
+        "test-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:a95fd80dfc55b68fa968ece970a9f09cbec4c8937f206d290257fda141ccc34d",
+      "review_round": 3,
+      "predecessor_run_id": "hcm_2_4_smoke_planning_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM24-PSRIR-0001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json"
+      ],
+      "result_subject_fingerprint": "sha256:a95fd80dfc55b68fa968ece970a9f09cbec4c8937f206d290257fda141ccc34d"
+    },
+    {
+      "run_id": "hcm_2_4_smoke_implementation_closure",
+      "dispatch_id": "20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json",
+      "dispatch_fingerprint": "sha256:9abc01962ee0f33a6510d747516bef60af1ce5cb7ae938f74afab60e9be921ba",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_smoke_implementation_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "debugging-and-error-recovery",
+        "test-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af",
+      "review_round": 4,
+      "predecessor_run_id": "hcm_2_4_smoke_implementation_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json"
+      ],
+      "result_subject_fingerprint": "sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af"
+    },
+    {
+      "run_id": "hcm_2_4_smoke_proof_gap_review",
+      "dispatch_id": "20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review.json",
+      "dispatch_fingerprint": "sha256:ecbca639034e170a6b289febd2effca7b7034a662ca237119aadef3881b877dc",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_smoke_proof_gap_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "debugging-and-error-recovery",
+        "test-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:3f264513e85ba0747a8daa2c0999baf768b572ac28036ba76d2ba42f87ac2300",
+      "review_round": 5,
+      "predecessor_run_id": "hcm_2_4_smoke_implementation_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review.json"
+      ],
+      "result_subject_fingerprint": "sha256:3f264513e85ba0747a8daa2c0999baf768b572ac28036ba76d2ba42f87ac2300"
+    },
+    {
+      "run_id": "hcm_2_4_smoke_final_complete_subject_review",
+      "dispatch_id": "20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json",
+      "dispatch_fingerprint": "sha256:65ea7f80f11dbdb4361fcf1258c9701ff8f9356e413269fe2c71e8a9ed1e7b01",
+      "role": "review",
+      "agent_id": "/root/hcm_2_4_smoke_final_complete_subject_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:c0b76343975925818fe26b5097cf62b7f39008aa877c589a4d6cb875b264a15b",
+      "review_round": 6,
+      "predecessor_run_id": "hcm_2_4_smoke_proof_gap_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json",
+        "git:2609bf52569a8ee2e24e10d168f16f65006bdb97"
+      ],
+      "result_subject_fingerprint": "sha256:c0b76343975925818fe26b5097cf62b7f39008aa877c589a4d6cb875b264a15b"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-01T05:15:00Z",
+    "dispatch_count": 6,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:27a404e0d9edf04c02a1aa0ac67180c2c341c6e05701267c29d2c19635243e47"
+    ],
+    "aggregate_fingerprint": "sha256:9e457e7e0a7d7b448a820f41b51a0410b094e4e74f1f19685f3d72760f1290e8"
+  },
+  "ancillary_diff_observations": [
+    {
+      "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+      "path": "crates/cli/tests/cli_surface.rs",
+      "path_kind": "test_assertion",
+      "changed_lines": 5
+    },
+    {
+      "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+      "path": "crates/cli/tests/setup_cli.rs",
+      "path_kind": "test_assertion",
+      "changed_lines": 106
+    },
+    {
+      "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+      "path": "crates/compiler/tests/author.rs",
+      "path_kind": "test_assertion",
+      "changed_lines": 4
+    },
+    {
+      "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+      "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+      "path_kind": "test_assertion",
+      "changed_lines": 54
+    },
+    {
+      "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+      "path": "crates/flow/tests/resolver_core.rs",
+      "path_kind": "test_assertion",
+      "changed_lines": 60
+    }
+  ],
+  "remediations": [
+    {
+      "remediation_id": "post-phase-2-smoke-planning-remediation",
+      "finding_run_id": "hcm_2_4_smoke_planning_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm_2_4_smoke_planning_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:b7baf7d5b1626a61a60a2f972be804d20c089d313ee022e107bfdd138354812b",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json"
+      ]
+    },
+    {
+      "remediation_id": "post-phase-2-smoke-implementation-remediation",
+      "finding_run_id": "hcm_2_4_smoke_implementation_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm_2_4_smoke_implementation_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:66f379301be2b69d73acc406c2db7ac9105eb279c85cc55487a02f32b60d73af",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "2609bf52569a8ee2e24e10d168f16f65006bdb97",
+    "subject_fingerprint": "sha256:c0b76343975925818fe26b5097cf62b7f39008aa877c589a4d6cb875b264a15b",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/20260731-post-phase-2-smoke-repair-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/post-phase-2-smoke-runbook.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json",
+      "git:2609bf52569a8ee2e24e10d168f16f65006bdb97"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json"
+  },
+  "active_resolution": {
+    "level": "HCM-2.4 post-exit product-smoke correction completed",
+    "scope_horizon": "the exact reviewed four production and six non-control paths under the immutable Phase 2 exit",
+    "detail_resolution": "setup-created operational roots now report missing required canonical artifacts instead of repeating setup; fixture proof gaps are corrected without restoring legacy authority",
+    "temporal_horizon": "reviewed product primary 2609bf5 through this terminal mechanical closeout",
+    "authority_horizon": "HCM-2.4 correction complete; HCM-3.x, JSON protocol expansion, native widening, release, publication, and push remain unauthorized",
+    "memory_horizon": "six immutable review dispatches, two superseded authority stops, complete proof wall, installed smoke, and protected-path preservation",
+    "validation_horizon": "ordinary validation plus both self-tests must pass with exact record/dispatch/ledger parity"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Land one bounded post-Phase-2 smoke correction, prove the complete supported journeys, close all causal review lineage, and true-stop without reopening the immutable Phase 2 exit or selecting HCM-3.x.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "sections": [
+        "Acceptance contract",
+        "D. Exact scope ceiling",
+        "Authority-resumption amendment"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+      "sections": [
+        "blockers",
+        "escalations",
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json",
+      "sections": [
+        "subject_manifest",
+        "contracts_and_gates",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "V1.4 same-parent resumption and terminality",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "2609bf52569a8ee2e24e10d168f16f65006bdb97",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/ideas/intent-to-outcome-fidelity.md"
+    ]
+  },
+  "work_completed": [
+    "Preserved the formal P7 and HCM-2 Phase 2 exit as immutable completed evidence while selecting this separate HCM-2.4 post-exit correction.",
+    "Changed setup-root recognition and missing-artifact action mapping so a safely setup-created root reports required Project Authority and Project Context actions instead of directing the operator back to setup.",
+    "Preserved absent, unsafe, symlink, non-directory, legacy-only, non-Git, non-authoring, explicit-selection, repository-identity, Windows mutation, and authenticator boundaries.",
+    "Corrected exactly two authority-resumed test fixtures: invalid canonical Charter bytes remain invalid, and the shared legacy authoring fixture uses the setup-owned identity API without handcrafted bytes.",
+    "Passed focused engine, flow, compiler, CLI, setup/doctor, artifact, packet, fixture, full-workspace, strict Clippy, formatting, installed-binary smoke, and required absence checks.",
+    "Reconciled exactly six immutable built-in review dispatches, including all FINDINGS, remediation closures, proof CLEAN, final complete-subject CLEAN, and both superseded authority stops.",
+    "Committed the complete reviewed product subject as 2609bf52569a8ee2e24e10d168f16f65006bdb97 without push."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "status": "completed",
+      "summary": "Reviewed acceptance contract and exact six-path non-control ceiling for the post-exit correction."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/20260731-post-phase-2-smoke-repair-proof.md",
+      "status": "completed",
+      "summary": "Compact durable proof for corrected behavior, verification wall, and review lineage."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/post-phase-2-smoke-runbook.md",
+      "status": "completed",
+      "summary": "Disposable supported manual smoke journeys that do not mutate the source checkout."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T051500Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned terminal completion consuming the second authority stop and reconciling all six smoke dispatches."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-2.4-POST-SMOKE-CLOSEOUT-D1",
+      "summary": "A safely setup-created operational root is established by setup-owned repository identity; missing required canonical artifacts produce author/fill actions and never RunSetup.",
+      "authority_effect": "Setup remains content-non-authoring and absent or unsafe roots retain their fail-closed behavior.",
+      "refs": [
+        "git:2609bf52569a8ee2e24e10d168f16f65006bdb97",
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-POST-SMOKE-CLOSEOUT-D2",
+      "summary": "HCM-2.3 does not authorize inventing a public typed JSON pre-establishment refusal envelope; no JSON runtime protocol change was made.",
+      "authority_effect": "Published JSON protocol, DTO, SDK, transport, and Phase 4 authority remain deferred.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-2.4-POST-SMOKE-CLOSEOUT-D3",
+      "summary": "The immutable P7/Phase 2 exit remains completed evidence; this separately selected correction is now completed without selecting HCM-3.x.",
+      "authority_effect": "No historical closeout is rewritten and no later slice, release, publication, or push authority is granted.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM24-PSRPR-0001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm_2_4_smoke_planning_review",
+      "summary": "The initial selector omitted live flow/compiler missing-artifact action paths.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json"
+      ]
+    },
+    {
+      "finding_id": "HCM24-PSRPR-0002",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm_2_4_smoke_planning_review",
+      "summary": "The initial prepared-packet journey lacked an exact authority-complete helper path.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json"
+      ]
+    },
+    {
+      "finding_id": "HCM24-PSRIR-0001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm_2_4_smoke_implementation_review",
+      "summary": "A retired Charter namespace fallback allowed legacy Markdown-only trees to establish canonical root.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "focused engine, flow, compiler, CLI, setup/doctor, artifact, packet, and fixture regressions",
+      "status": "passed",
+      "evidence_ref": "final complete-subject review manifest and compact proof record exact successful focused coverage"
+    },
+    {
+      "command": "cargo test --workspace --all-features",
+      "status": "passed",
+      "evidence_ref": "complete workspace wall passed after both authority-resumed fixture corrections"
+    },
+    {
+      "command": "cargo clippy --workspace --all-targets --all-features -- -D warnings and cargo fmt --all -- --check",
+      "status": "passed",
+      "evidence_ref": "strict Clippy and formatting passed on the reviewed product subject"
+    },
+    {
+      "command": "fresh locked installed-binary smoke in disposable directories",
+      "status": "passed",
+      "evidence_ref": "setup/packet, absent/legacy, non-Git, JSON refusal, generic artifact, Windows mutation, authenticator, and pipeline journeys passed"
+    },
+    {
+      "command": "legacy-root, retired bridge/fixed-selector, and handcrafted repository-identity absence scans",
+      "status": "passed",
+      "evidence_ref": "production legacy matches=0, retired terms=0, handcrafted identity literals=0"
+    },
+    {
+      "command": "fresh proof-gap and final complete-subject reviews",
+      "status": "passed",
+      "evidence_ref": "both distinct built-in reviewers returned CLEAN for exact fingerprints 3f264513 and c0b76343"
+    },
+    {
+      "command": "GitNexus impact and change detection",
+      "status": "passed",
+      "evidence_ref": "test symbols remained unavailable/UNKNOWN and compare-to-main remained unavailable under FTS; staged/local diagnostics were reported honestly and no unavailable comparison was called GREEN"
+    },
+    {
+      "command": "protected-path and immutable prior-dispatch/handoff audit",
+      "status": "passed",
+      "evidence_ref": "all nine protected paths retained initial hashes and remained unstaged; all prior dispatches and authority-stop records retained exact bytes"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T051500Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-completed.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the parent-owned terminal smoke-repair completion after the enabling validator permits exact prefix reconciliation.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger from every canonical record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic continuation is authorized from this completed post-Phase-2 smoke correction.",
+    "condition": "Only a new explicit operator selection may authorize later work; HCM-3.x is not selected here.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T051500Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-completed.json",
+        "sections": [
+          "entire completed handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T035420Z--HCM-2-4--orchestration--p7-phase-2-exit-completed.json",
+        "sections": [
+          "entire immutable P7 handoff"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not continue automatically into HCM-3.x.",
+      "Do not define a public JSON protocol, widen native authority, rewrite Phase 2 evidence, release, publish, or push without new authority.",
+      "Do not reopen the completed smoke product review or issue new smoke dispatches."
+    ],
+    "acceptance_criteria": [
+      "The completed record consumes and supersedes the second authority stop and reconciles exactly all six smoke dispatches.",
+      "Ordinary validation and both self-tests pass with deterministic ledger parity.",
+      "All nine protected paths remain byte-identical, unstaged, and uncommitted."
+    ],
+    "stop_conditions": [
+      "Stop before HCM-3.x, JSON protocol expansion, native widening, release, publication, or push without fresh explicit authority.",
+      "Stop if any future work would rewrite this terminal record, either authority stop, or any of the six dispatches."
+    ]
+  },
+  "supersedes": [
+    "20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop"
+  ],
+  "chat_summary": "Completed the separate HCM-2.4 post-Phase-2 product-smoke correction at reviewed product primary 2609bf52569a8ee2e24e10d168f16f65006bdb97. Setup-created operational roots now report missing required canonical artifacts rather than looping to setup; legacy and unsafe boundaries remain fail-closed; setup remains non-authoring. Exactly six smoke dispatches and both superseded authority stops are reconciled. The immutable Phase 2 exit remains complete, HCM-3.x is not selected, and nothing was pushed."
+}
