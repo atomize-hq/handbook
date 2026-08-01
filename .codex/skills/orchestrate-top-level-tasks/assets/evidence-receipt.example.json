@@ -1,0 +1,39 @@
+{
+  "protocol": "codex.top-level-evidence-receipt.v1",
+  "completion_profile": "handbook_v1_4",
+  "publication_mode": "local_only",
+  "meta_workflow_id": "handbook-phase-3-example",
+  "dispatch_nonce": "00000000000000000000000000000000",
+  "evidence_id": "HCM-3.2-WINDOWS-EVIDENCE",
+  "consuming_slice": "HCM-3.2",
+  "status": "EVIDENCE_CLEAN",
+  "platform": "windows",
+  "evidence_task": {
+    "thread_id": "example-thread",
+    "host_id": "example-host"
+  },
+  "source": {
+    "commit": "1111111111111111111111111111111111111111",
+    "tree": "2222222222222222222222222222222222222222",
+    "target_ref": "refs/heads/orchestration/handbook-phase-3-example",
+    "live_local": "1111111111111111111111111111111111111111"
+  },
+  "environment": {
+    "host_id": "example-host",
+    "project_id": "example-project",
+    "project_path": "C:\\example\\handbook",
+    "os_version": "Windows Example",
+    "tool_versions": {
+      "handbook": "example"
+    }
+  },
+  "evidence": {
+    "artifact_path": "C:\\temp\\example-evidence.json",
+    "artifact_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "gates": [
+      "HCM-3.2-WINDOWS-GATE"
+    ]
+  },
+  "prohibited_actions_confirmed": true,
+  "checkout_unchanged": true
+}

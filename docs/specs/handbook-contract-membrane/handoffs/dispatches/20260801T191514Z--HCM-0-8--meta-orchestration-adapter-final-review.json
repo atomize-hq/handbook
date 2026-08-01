@@ -1,0 +1,205 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T191514Z--HCM-0-8--meta-orchestration-adapter-final-review",
+  "created_at_utc": "2026-08-01T19:15:14Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T190437Z--HCM-0-8--meta-orchestration-adapter",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "test-driven-development",
+    "code-review-and-quality",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "20260801-meta-orchestration-adapter",
+  "subject_fingerprint": "sha256:b3d136ce1056bef7bad22f18e3e39c697f7079e37b95165dc7b7ccc57eb7ea22",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-0.8-meta-orchestration-adapter-final-closeout-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T19:04:37Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-0.8-meta-orchestration-adapter",
+        "packet_ids": [
+          "20260801-meta-orchestration-adapter"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:f7d819ec3d054cf484740c7bfb707f650c805a6f99b537f08f70ff4126ba193c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:3d876985f0b838387e7b27a8488c1f251461323f4aebb6b451583ece65ce8d04",
+    "integrated_outcome_id": "hcm-0.8-meta-orchestration-adapter",
+    "outcome_registry_fingerprint": "sha256:f7d819ec3d054cf484740c7bfb707f650c805a6f99b537f08f70ff4126ba193c",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260801T190921Z--HCM-0-8--meta-orchestration-adapter-planning-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-0.8-meta-orchestration-adapter-final-convergence-1",
+    "completed_at_utc": "2026-08-01T19:15:05Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "planning FINDINGS received consolidated remediation and different-fresh CLEAN closure; run skill self-test, metadata validation, Ruff check/format, Python compile, JSON parse, exact authority scan, ordinary handoff validation, and both self-tests",
+        "evidence_ref": "all commands exited 0; ordinary corpus is 79 records, 458 current dispatches before this final dispatch, 8 legacy dispatches, and 79 ledger entries"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory all 22 tracked skill files plus the two live protocol owners, selector, and both planning dispatches; scan all meta/receipt/sequence/causal references",
+        "evidence_ref": "27 exact paths below; validator rejects abstract sequence entries; receipts remain scheduling-only; schemas, validator, runtime, product docs, protected paths, and history are excluded"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted 27-entry repo-path-NUL-SHA256-newline complete primary subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:b3d136ce1056bef7bad22f18e3e39c697f7079e37b95165dc7b7ccc57eb7ea22"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "uvx ruff format --check skill scripts; uvx ruff check skill scripts; skill quick_validate; strict JSON/Python checks",
+        "evidence_ref": "seven Python files formatted; all lint checks, metadata validation, compile, and JSON parsing passed"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check over the exact primary ceiling",
+        "evidence_ref": "command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": ".codex/skills/orchestrate-top-level-tasks/SKILL.md", "sha256": "e7d0d23785f53acc38d788eafae6079d234351102e822c93e9ee7c8d3e495f37"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/agents/openai.yaml", "sha256": "986122c55e576d8ef829682ade99b610f55188e2dbfaeb9cced6cec0d5bb9d49"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/assets/blocked-receipt.example.json", "sha256": "3958709003d4a2c51aa1e05228716a532590de43dc74b6e530cabaefa79ffb65"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/assets/evidence-receipt.example.json", "sha256": "8d7f8d888b3594f8175802ebb3f5f532ae6970d3aec39f659ac02fa9a4696d87"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/assets/evidence-task-prompt-template.md", "sha256": "1844c5a711be97c16cbc1160f307eb51f4705dec9939b2afee03335be9b751ba"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/assets/increment-contract.example.md", "sha256": "bfc26d7ee10bf33b31305ed8626b3b72e212d76c1fad634d0a05cd6d8a3ac5a5"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/assets/increment-orchestrator-prompt-template.md", "sha256": "35a9a62b3197f2171873b39ed84ee7e42a4cc5064c93585697c025b03bb81eb0"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/assets/increment-variables.example.json", "sha256": "b8eff5474be54ec5d8e003468db842fa10b7d923caf9c64057c9a021dc311c26"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/assets/landing-receipt.example.json", "sha256": "ad5f44d1ab286ef0393998a84954ec7aea68a5497adde834c6b469ea5a9da287"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/assets/meta-orchestrator-prompt-template.md", "sha256": "9db0b14fc688fff531bc3fbf340925beaf12a37cf76b50f842a91db9e8545343"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/assets/state.example.json", "sha256": "3959c4aa995d6f6e90a153a97dac34ec22a7663379dfce28fc1e8728a173c587"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/references/handbook-adapter.md", "sha256": "2d8226b95cbb83d6f21a3ca51c12da037905bb57de60a08b006dee9f97ba5d3b"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/references/platform-dispatch.md", "sha256": "6ef9bb845a8e8ca35cf7575121672fabc9f14e242cb49959a390f76b7cf3d57f"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/references/protocol.md", "sha256": "ed9c93bf78d0baf274a99e97ac7743895574ee61669da5dc9de20f758ee887c6"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/scripts/.gitignore", "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/scripts/bind_meta_identity.py", "sha256": "d6ecc354391c639ba84a48e8997cd5f6f35634b11f22ebdab03248bd36501fe6"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/scripts/protocol_json.py", "sha256": "68724bcefdf7ade08b112d433e3c77e1d551124570bae833a024ff46cfe60370"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/scripts/render_increment_prompt.py", "sha256": "e5b036b2fe472fbeb0b9fe99b3a4e28ccb34cf4d924500b0ca5144bc8920b4d5"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/scripts/self_test.py", "sha256": "590b4d8b88321ff1f5c1845709dc43bf68df4a1a3e2982c0fbe9a926ce6aedc0"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/scripts/validate_evidence_receipt.py", "sha256": "da64bec42faf54b2372a27318cc08728a7723bb970f579bed5487052c1de1377"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/scripts/validate_receipt.py", "sha256": "4f62fa95bd685858033295484ad23a7fa0896a478a04b512c7d07f9ca6c9f5d7"},
+      {"path": ".codex/skills/orchestrate-top-level-tasks/scripts/validate_state.py", "sha256": "496f0e88c0692b6650ef55c4e0bdddf4efc2c600c9f3bd3da8a15c52862526e8"},
+      {"path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md", "sha256": "0970976de8803432042d547afdbbd9000bcbbb11d2c9bdb654c966b3abea48cb"},
+      {"path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "sha256": "f76c46839bb47bd24e734d822be493d337f35244db657a6cf370d10a78026711"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T190546Z--HCM-0-8--meta-orchestration-adapter-planning-review.json", "sha256": "b445f8eb123fe9b623ba9e35efd7ec73ac178617cd27ceea0411996edd0ffaa3"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T190921Z--HCM-0-8--meta-orchestration-adapter-planning-closure.json", "sha256": "06d8a925205fd697d24d8ac4ee0a8239bc0213e9e278ed179e191d35989f725b"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md", "sha256": "3eb1ef5237f9c04a71cd9285dd39a2fd1f5aa52f87fe158451fcd2d0ea114d66"}
+    ],
+    "aggregate_fingerprint": "sha256:b3d136ce1056bef7bad22f18e3e39c697f7079e37b95165dc7b7ccc57eb7ea22"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 meta-orchestration adapter final complete subject",
+    "scope_horizon": "repository-local skill, two controlling protocol clarifications, reviewed selector, planning lineage, deterministic proof, and closeout readiness",
+    "detail_resolution": "exact slice-sequence validation, increment/meta ownership, receipt non-authority, causal lineage, protected boundaries, and two-commit mechanics",
+    "temporal_horizon": "after planning CLEAN and full deterministic convergence; before primary and mechanical closeout commits",
+    "authority_horizon": "HCM-0.8 administrative tooling/protocol only; no HCM-3.x, product/runtime, schema, validator, release, push, or historical mutation",
+    "memory_horizon": "complete 27-path subject, planning FINDINGS/remediation/CLEAN evidence, live 07/08/09, prior HCM-0.8 history, and initial protected hashes",
+    "validation_horizon": "aggregate correctness, bounded authority, skill usability, causal-cadence preservation, and v1.4 closeout compatibility"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md", "sections": ["Exact semantic boundary", "Exact path ceiling", "Causal review plan", "Acceptance", "Stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md", "sections": ["Increment and external meta boundary", "Ready-to-use prompt", "Orchestration boundary"]},
+    {"path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "sections": ["External meta scheduling boundary", "Review lineage", "Two-commit true-stop closeout"]},
+    {"path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md", "sections": ["Decision and retained rigor", "Review priority rubric"]},
+    {"path": ".codex/skills/orchestrate-top-level-tasks/SKILL.md", "sections": ["Apply delegated meta authority correctly", "Enforce causal review cadence", "Accept a completed receipt", "Handle a true stop"]},
+    {"path": ".codex/skills/orchestrate-top-level-tasks/references/handbook-adapter.md", "sections": ["Authority boundary", "Delegated meta adjudication", "Completion mapping"]}
+  ],
+  "repo_truth": "Planning closed CLEAN after one P2 remediation. The repository-local skill is fully present and validates exact HCM slice IDs, scheduling-only receipts, bounded adjudication, local-only publication, and causal cadence. Live 07 and 08 now distinguish increment true-stop behavior from separately authorized external meta scheduling without changing v1.4 schemas or product authority. Ordinary validation and both self-tests pass. GitNexus indexed neither new skill symbols nor untracked docs; direct impacts are UNKNOWN, scoped all-change output is polluted by protected AGENTS/CLAUDE edits, and compare-to-main remains unavailable rather than GREEN.",
+  "allowed_scope": [
+    "Review the exact 27-entry subject read-only and replay every manifest hash plus aggregate fingerprint.",
+    "Audit the copied/adapted skill, scripts, examples, and both live protocol owners for one coherent authority model and usable fail-closed validation.",
+    "Verify the increment always stops, the meta scheduler advances only an exact operator-preauthorized slice sequence after independent proof, and receipts never become Handbook authority.",
+    "Verify causal cadence, same-slice lineage, local-only/no-push publication, protected paths, and two-commit v1.4 closeout remain intact."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create files/dispatches/handoffs/ledger state, delegate, or repair any finding.",
+    "Do not require 00-06, HCM-3.x, schema/validator/runtime, dependency, version, release, remote, or historical changes outside the selector.",
+    "Do not treat GitNexus FTS/compare unavailability, the meta receipt, or a handoff recommendation as implementation authority."
+  ],
+  "tasks": [
+    "Return findings first in P1/P2/P3/P4 order with unique final-review IDs, exact path/line evidence, violated contract, smallest remediation, and missing proof.",
+    "Replay all 27 hashes and the aggregate, then audit authority consistency, validator behavior, examples, prompt semantics, review cadence, and scope containment.",
+    "Check that the exact-slice sequence validator cannot be bypassed by abstract names and that same-slice resumptions do not consume a sibling sequence entry or reset causal lineage.",
+    "Return CLEAN only if no valid P1/P2 remains and every P3/P4 has an exact closeout disposition for subject sha256:b3d136ce1056bef7bad22f18e3e39c697f7079e37b95165dc7b7ccc57eb7ea22."
+  ],
+  "contracts_and_gates": [
+    "This is the one final-closeout discovery cycle after planning CLEAN; any P1/P2 requires consolidated remediation and different-fresh closure before primary commit.",
+    "CLEAN authorizes only the exact primary reviewed commit and subsequent mechanical handoff/ledger closeout.",
+    "The increment cannot launch a sibling; the external meta scheduler cannot derive, reorder, or extend exact slice IDs or treat a receipt as authority.",
+    "No protected path, HCM-3.x surface, validator/schema, product/runtime source, historical evidence, remote ref, or push may enter the packet."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if tooling, protocol truth, tests, manifests, authority, or causal cadence is incomplete, contradictory, overbroad, or falsely claimed.",
+    "Return BLOCKED only for a genuine external/authority/capability boundary outside this HCM-0.8 packet.",
+    "Report rather than repair; do not write repository or global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

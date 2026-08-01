@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orchestrate Handbook Top-Level Tasks"
+  short_description: "Coordinate Handbook slices with verified local v1.4 closeouts"
+  default_prompt: "Use $orchestrate-top-level-tasks to coordinate this explicitly authorized Handbook slice sequence."

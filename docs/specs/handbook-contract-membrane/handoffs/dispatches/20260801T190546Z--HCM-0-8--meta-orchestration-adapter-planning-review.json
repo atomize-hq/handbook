@@ -1,0 +1,208 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T190546Z--HCM-0-8--meta-orchestration-adapter-planning-review",
+  "created_at_utc": "2026-08-01T19:05:46Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T190437Z--HCM-0-8--meta-orchestration-adapter",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "20260801-meta-orchestration-adapter",
+  "subject_fingerprint": "sha256:764367109ef6557279f38bb516ba0d837147584c821496bef98ede88ad5313ed",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-0.8-meta-orchestration-adapter-planning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T19:04:37Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-0.8-meta-orchestration-adapter",
+        "packet_ids": [
+          "20260801-meta-orchestration-adapter"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:f7d819ec3d054cf484740c7bfb707f650c805a6f99b537f08f70ff4126ba193c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:3d876985f0b838387e7b27a8488c1f251461323f4aebb6b451583ece65ce8d04",
+    "integrated_outcome_id": "hcm-0.8-meta-orchestration-adapter",
+    "outcome_registry_fingerprint": "sha256:f7d819ec3d054cf484740c7bfb707f650c805a6f99b537f08f70ff4126ba193c",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-0.8-meta-orchestration-adapter-planning-convergence-1",
+    "completed_at_utc": "2026-08-01T19:05:33Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "read the complete repository-local skill contract, its Handbook adapter/protocol references, and live 07/08/09 authority; freeze one exact selector before protocol edits",
+        "evidence_ref": "one-file planning subject below; no 07/08 or runtime edit exists at this stage"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory every meta-orchestrator, receipt, next-slice, true-stop, and causal-cadence reference across 07/08/09 and the complete local skill tree",
+        "evidence_ref": "live rg inventory identifies only the two ambiguous increment-stop sentences in 07/08; skill references already preserve scheduling-only receipts and bounded cadence"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted one-entry repo-path-NUL-SHA256-newline planning subject",
+        "evidence_ref": "selector sha256 2f528c4e; aggregate sha256:764367109ef6557279f38bb516ba0d837147584c821496bef98ede88ad5313ed"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode and direct Markdown inspection",
+        "evidence_ref": "selector decodes as strict UTF-8 and has balanced Markdown structure"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md",
+        "evidence_ref": "command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md",
+        "sha256": "2f528c4ed54fc459c9f94b7409f12c5a22c01f18ca6cfd521032b6bd07cbf29b"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:764367109ef6557279f38bb516ba0d837147584c821496bef98ede88ad5313ed"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 meta-orchestration adapter planning",
+    "scope_horizon": "one repository-local skill, two protocol clarifications, exact review evidence, and mechanical v1.4 closeout",
+    "detail_resolution": "increment/meta ownership, receipt non-authority, preauthorized dispatch, causal-lineage preservation, and closed path ceiling",
+    "temporal_horizon": "before any 07/08 edit or skill commit",
+    "authority_horizon": "HCM-0.8 administrative control plane only; no HCM-3.x, schema, validator, runtime, publication, or history change",
+    "memory_horizon": "live 9f5b072 checkout, complete local skill and adapter references, current 07/08/09, and prior HCM-0.8 completion evidence",
+    "validation_horizon": "selector sufficiency CLEAN before semantic protocol edits"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md",
+      "sections": [
+        "Exact semantic boundary",
+        "Exact path ceiling",
+        "Causal review plan",
+        "Acceptance",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Purpose",
+        "Phase 7 — control-pack closeout and commit",
+        "Orchestration boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Purpose",
+        "Two-commit true-stop closeout",
+        "Top-level orchestration protocol"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Decision and retained rigor",
+        "Registration and review-subject boundary"
+      ]
+    }
+  ],
+  "repo_truth": "The branch is feat/handbook-contract-membrane at 9f5b072 with nine protected user-owned paths unchanged and unstaged. The repository-local skill is untracked and already encodes scheduling-only receipts plus bounded causal cadence. Live 07 and 08 correctly stop an increment but do not yet distinguish a separately authorized external meta scheduler, so the skill is not yet durably admitted.",
+  "allowed_scope": [
+    "Review the one-file selector read-only for authority, completeness, internal consistency, and reviewability.",
+    "Verify the exact distinction between increment true-stop behavior and separately authorized meta scheduling.",
+    "Verify receipt non-authority, per-slice selector requirements, same-slice causal-lineage preservation, and the closed primary/mechanical path ceilings.",
+    "Return unique planning finding IDs for independently identified P1-P4 issues; do not repair them."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, write a handoff/ledger, create another dispatch, delegate, or change any repository file.",
+    "Do not authorize HCM-3.x, automatic sequence expansion, schema/validator/runtime changes, publication, push, or history rewriting.",
+    "Do not treat the skill, a receipt, or a completed handoff as independent authority for an unselected slice."
+  ],
+  "tasks": [
+    "Return findings first in P1/P2/P3/P4 order with exact selector line evidence and smallest valid remediation.",
+    "Audit whether the selector is sufficient to admit the skill without creating a competing authority system or weakening 07/08/09.",
+    "Audit whether the proposed path ceiling and two-stage review plan are genuinely bounded and still support a valid v1.4 closeout.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:764367109ef6557279f38bb516ba0d837147584c821496bef98ede88ad5313ed."
+  ],
+  "contracts_and_gates": [
+    "No semantic 07/08 edit may begin until this planning stage is independently CLEAN.",
+    "A receipt is scheduling evidence only; the reviewed selector and live repository authority remain mandatory.",
+    "The increment runner always true-stops; delegated meta authority is bounded by the operator-preauthorized sequence and cannot reset causal cadence.",
+    "No unresolved P1/P2 may proceed to the primary packet."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repairing if the selector is ambiguous, overbroad, incomplete, or conflicts with current control authority.",
+    "Return BLOCKED if a valid solution requires schema/validator/runtime changes, product authority, history rewriting, or broader operator judgment.",
+    "Report any protected-path or subject-integrity issue without writing state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

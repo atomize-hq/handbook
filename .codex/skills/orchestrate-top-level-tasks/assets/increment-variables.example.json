@@ -1,0 +1,22 @@
+{
+  "INCREMENT": "HCM-3.2",
+  "META_WORKFLOW_ID": "handbook-phase-3-example",
+  "DISPATCH_NONCE": "00000000000000000000000000000000",
+  "META_THREAD_ID": "example-meta-thread",
+  "META_HOST_ID": "example-host",
+  "PHASE_ID": "HCM-3",
+  "SLICE_ID": "HCM-3.2",
+  "ACTIVE_PACKET": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+  "HANDOFF_SELECTOR": "latest-for-slice",
+  "NEXT_INCREMENT": "HCM-3.3",
+  "WORKING_DIRECTORY": "C:\\example\\handbook-worktree",
+  "PROTECTED_CHECKOUTS": [
+    "C:\\example\\handbook"
+  ],
+  "TARGET_REF": "refs/heads/orchestration/handbook-phase-3-example",
+  "EXPECTED_BASE_COMMIT": "0000000000000000000000000000000000000000",
+  "EXPECTED_BASE_TREE": "0000000000000000000000000000000000000000",
+  "REQUIRED_ANCESTOR": "0000000000000000000000000000000000000000",
+  "REMOTE": "origin",
+  "REMOTE_BASELINE_COMMIT": "0000000000000000000000000000000000000000"
+}

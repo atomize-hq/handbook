@@ -17,6 +17,35 @@ The protocol supports:
 
 A dispatch is an execution/audit envelope. Creating an internal dispatch is not completion and normally does not return control to the user.
 
+## External meta scheduling boundary
+
+The Handbook parent defined here owns one selected slice or genuine same-slice
+resumption and always true-stops after its v1.4 handoff/ledger closeout. It does
+not create a sibling slice task.
+
+A separately operator-authorized external meta orchestrator may schedule fresh
+top-level increment tasks only from a closed ordered sequence of exact slice
+IDs that the operator preauthorized. Before advancing, it independently
+verifies the completed handoff and ledger, local commits and integration ref,
+unchanged remote baseline, protected paths, causal review cadence, and the next
+slice's live dependencies and selector requirement. It cannot derive, reorder,
+or extend the sequence.
+
+External meta state and receipts are untrusted scheduling evidence. They are
+not Handbook handoffs, internal dispatches, selectors, review results, ledger
+entries, or product authority; they do not enter `dispatch_population` or
+`delegated_runs`. A receipt never authorizes a slice by itself. Every fresh
+slice establishes or consumes its own reviewed selector. A same-slice
+resumption preserves the existing parent/outcome-derived causal lineage and
+cannot reset a review budget by creating a new task.
+
+Delegated meta adjudication may correct an active increment or schedule a
+same-slice resumption only while slice authority, causal budget, risk ceiling,
+and the operator-preauthorized sequence remain unchanged. It cannot waive a
+P1/P2, rewrite immutable evidence, expand authority or risk, invent a slice,
+push, or continue outside that envelope; those conditions require explicit new
+operator authority.
+
 ## Storage model
 
 ~~~text
@@ -392,7 +421,9 @@ A handoff cannot contain the hash of the commit that contains itself. Use a deli
 10. Commit only the new handoff, ledger entry, directly required closeout index
     artifacts, and exact advisory inventory registrations in a second closeout
     commit.
-11. Report the reviewed commit/stack and closeout hash in chat. Do not start the next slice.
+11. Report the reviewed commit/stack and closeout hash in chat. This increment
+    does not start the next slice; any next task is a separate, independently
+    verified action by an authorized external meta orchestrator or the operator.
 
 The final dispatch may include the pre-closeout `ledger.jsonl` because that file
 is part of the reviewed primary state. Completed-record validation replays the

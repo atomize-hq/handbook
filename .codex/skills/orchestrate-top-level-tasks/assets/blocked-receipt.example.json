@@ -1,0 +1,33 @@
+{
+  "protocol": "codex.top-level-task-receipt.v1",
+  "completion_profile": "handbook_v1_4",
+  "publication_mode": "local_only",
+  "meta_workflow_id": "handbook-phase-3-example",
+  "dispatch_nonce": "00000000000000000000000000000000",
+  "increment": "HCM-3.2",
+  "status": "AUTHORITY_REQUIRED",
+  "increment_task": {
+    "thread_id": "example-thread",
+    "host_id": "example-host"
+  },
+  "expected_base": {
+    "commit": "0000000000000000000000000000000000000000",
+    "tree": "0000000000000000000000000000000000000000"
+  },
+  "blocker": {
+    "summary": "Required scope exceeds the selected slice ceiling",
+    "details": "The discovered public contract change is outside the preauthorized sequence and risk envelope.",
+    "required_authority": "User approval of a revised selector and sequence envelope is required.",
+    "same_slice_adjudicable": false,
+    "handoff_prompt": "Resume from the committed v1.4 authority-stop handoff after the selector decision."
+  },
+  "handbook_stop": {
+    "handoff_record_path": "docs/specs/handbook-contract-membrane/handoffs/records/example-blocked.json",
+    "handoff_record_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "status": "escalation_required",
+    "primary_commits": [
+      "1111111111111111111111111111111111111111"
+    ],
+    "closeout_commit": "2222222222222222222222222222222222222222"
+  }
+}

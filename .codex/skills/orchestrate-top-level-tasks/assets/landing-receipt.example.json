@@ -1,0 +1,81 @@
+{
+  "protocol": "codex.top-level-task-receipt.v1",
+  "completion_profile": "handbook_v1_4",
+  "publication_mode": "local_only",
+  "meta_workflow_id": "handbook-phase-3-example",
+  "dispatch_nonce": "00000000000000000000000000000000",
+  "increment": "HCM-3.2",
+  "status": "CLOSED_LOCAL_CLEAN",
+  "increment_task": {
+    "thread_id": "example-thread",
+    "host_id": "example-host"
+  },
+  "expected_base": {
+    "commit": "0000000000000000000000000000000000000000",
+    "tree": "0000000000000000000000000000000000000000"
+  },
+  "landed": {
+    "primary_commits": [
+      "1111111111111111111111111111111111111111"
+    ],
+    "primary_tip": "1111111111111111111111111111111111111111",
+    "closeout_commit": "2222222222222222222222222222222222222222",
+    "commit": "2222222222222222222222222222222222222222",
+    "tree": "3333333333333333333333333333333333333333",
+    "target_ref": "refs/heads/orchestration/handbook-phase-3-example",
+    "live_local": "2222222222222222222222222222222222222222",
+    "remote_baseline": "4444444444444444444444444444444444444444",
+    "live_remote": "4444444444444444444444444444444444444444",
+    "push_performed": false
+  },
+  "subject_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "changed_files": [
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md"
+  ],
+  "review": {
+    "slice_id": "HCM-3.2",
+    "handoff_record_path": "docs/specs/handbook-contract-membrane/handoffs/records/example.json",
+    "handoff_record_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "handoff_schema_version": "1.4",
+    "final_dispatch_path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/example.json",
+    "final_dispatch_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "subject_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "terminal": "CLEAN",
+    "p1": 0,
+    "p2": 0,
+    "p3_p4_disposition": "none",
+    "dispatch_population_count": 1,
+    "dispatch_population_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "causal_cadence": {
+      "v1_4_validation_passed": true,
+      "default_budget_respected": true,
+      "max_supplemental_cycles_used": 0,
+      "explicit_budget_extension_ref": null,
+      "general_discovery_reopened": false,
+      "cycle_after_clean": false,
+      "budget_reset_attempted": false
+    }
+  },
+  "control_plane": {
+    "ledger_path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+    "ledger_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "ordinary_validation_passed": true,
+    "self_test_v1_admission_passed": true,
+    "self_test_orchestration_contract_passed": true
+  },
+  "verification": {
+    "required_checks_passed": true,
+    "allowlist_passed": true,
+    "proof_wall_passed": true,
+    "formatting_passed": true,
+    "selected_scope_clean": true,
+    "protected_paths_unchanged": true,
+    "local_ref_cas_passed": true,
+    "gitnexus_scoped": "passed",
+    "gitnexus_compare_to_main": "unavailable",
+    "gitnexus_unavailable_reason": "FTS unavailable; result not represented as GREEN",
+    "ahead": 34,
+    "behind": 0
+  },
+  "next_increment": "HCM-3.3"
+}

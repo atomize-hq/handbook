@@ -1,0 +1,212 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260801T190921Z--HCM-0-8--meta-orchestration-adapter-planning-closure",
+  "created_at_utc": "2026-08-01T19:09:21Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260801T190437Z--HCM-0-8--meta-orchestration-adapter",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "20260801-meta-orchestration-adapter",
+  "subject_fingerprint": "sha256:fcd999a0790d069f0d84124aa4b3c7d895c6bc1da5336e33f85e3fed58556af8",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-0.8-meta-orchestration-adapter-planning-closure",
+    "trigger_run_ids": [
+      "meta_adapter_planning_review"
+    ],
+    "finding_refs": [
+      "HCM-0.8-PLAN-P2-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T19:04:37Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-0.8-meta-orchestration-adapter",
+        "packet_ids": [
+          "20260801-meta-orchestration-adapter"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:f7d819ec3d054cf484740c7bfb707f650c805a6f99b537f08f70ff4126ba193c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:3d876985f0b838387e7b27a8488c1f251461323f4aebb6b451583ece65ce8d04",
+    "integrated_outcome_id": "hcm-0.8-meta-orchestration-adapter",
+    "outcome_registry_fingerprint": "sha256:f7d819ec3d054cf484740c7bfb707f650c805a6f99b537f08f70ff4126ba193c",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260801T190546Z--HCM-0-8--meta-orchestration-adapter-planning-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-0.8-meta-orchestration-adapter-planning-convergence-2",
+    "completed_at_utc": "2026-08-01T19:09:15Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "apply the one consolidated selector remediation for HCM-0.8-PLAN-P2-001 and preserve every other selected boundary",
+        "evidence_ref": "bounded-objective authority removed; only a closed operator-preauthorized ordered sequence of exact slice IDs may advance"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "recheck the remediated authority against live 07/08/09 and all skill scheduling/receipt references",
+        "evidence_ref": "the sequence can no longer be derived, reordered, or extended; same-slice resumption and causal lineage remain separately bounded"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted one-entry repo-path-NUL-SHA256-newline remediated planning subject",
+        "evidence_ref": "selector sha256 3eb1ef52; aggregate sha256:fcd999a0790d069f0d84124aa4b3c7d895c6bc1da5336e33f85e3fed58556af8"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode and direct Markdown inspection",
+        "evidence_ref": "selector decodes as strict UTF-8 and retains balanced Markdown structure"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md",
+        "evidence_ref": "command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md",
+        "sha256": "3eb1ef5237f9c04a71cd9285dd39a2fd1f5aa52f87fe158451fcd2d0ea114d66"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:fcd999a0790d069f0d84124aa4b3c7d895c6bc1da5336e33f85e3fed58556af8"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 meta-orchestration adapter planning closure",
+    "scope_horizon": "the one remediated selector and its fixed skill/protocol/closeout ceiling",
+    "detail_resolution": "closed exact-slice sequence authority and preservation of every planning contract",
+    "temporal_horizon": "after consolidated planning remediation; before any 07/08 edit or skill commit",
+    "authority_horizon": "HCM-0.8 administrative control plane only; no HCM-3.x, schema, validator, runtime, publication, or history change",
+    "memory_horizon": "initial FINDINGS dispatch/result, remediated selector, complete local skill references, and current 07/08/09",
+    "validation_horizon": "different-fresh closure of HCM-0.8-PLAN-P2-001 and absence of remediation-caused P1/P2"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md",
+      "sections": [
+        "Exact semantic boundary",
+        "Exact path ceiling",
+        "Causal review plan",
+        "Acceptance",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Purpose",
+        "Ready-to-use prompt",
+        "Orchestration boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Purpose",
+        "Two-commit true-stop closeout",
+        "Top-level orchestration protocol"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Decision and retained rigor",
+        "Registration and review-subject boundary"
+      ]
+    }
+  ],
+  "repo_truth": "The first fresh planning review returned P2 HCM-0.8-PLAN-P2-001 and P3 HCM-0.8-PLAN-P3-002. The parent changed only the selector to require a closed ordered operator-preauthorized sequence of exact slice IDs and corrected the non-blocking section reference only in this successor dispatch. No skill, 07/08, runtime, schema, validator, staging, commit, or protected-path change occurred.",
+  "allowed_scope": [
+    "Review the remediated one-file selector read-only and verify HCM-0.8-PLAN-P2-001 is closed.",
+    "Verify no abstract objective, receipt, meta inference, or handoff can supply an unenumerated slice ID or reorder/extend the operator sequence.",
+    "Verify the remediation preserves bounded same-slice adjudication, per-slice selectors, causal lineage, and the exact path/review/closeout ceiling.",
+    "Report any remediation-caused or unmasked P1/P2 with a unique closure finding ID; do not reopen general planning discovery."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, write a handoff/ledger, create another dispatch, delegate, or change any repository file.",
+    "Do not re-review unrelated wording or request HCM-3.x, schema/validator/runtime, publication, push, or history changes.",
+    "Do not mutate the immutable initial dispatch to repair its P3 section-reference observation."
+  ],
+  "tasks": [
+    "Return findings first with exact evidence, limited to the known remediation and its affected authority boundary.",
+    "Confirm the exact-slice sequence rule closes HCM-0.8-PLAN-P2-001 without introducing contradiction or unusable authority.",
+    "Confirm HCM-0.8-PLAN-P3-002 is mechanically avoided in this successor dispatch and needs no durable inventory row.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:fcd999a0790d069f0d84124aa4b3c7d895c6bc1da5336e33f85e3fed58556af8."
+  ],
+  "contracts_and_gates": [
+    "This is the different-fresh planning closure; it does not restart open-ended discovery.",
+    "CLEAN closes planning and permits only the selector-authorized skill/07/08 primary packet.",
+    "A receipt remains scheduling evidence only, and every fresh slice still requires its own reviewed selector.",
+    "No unresolved P1/P2 may advance."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if the remediation fails to close the known P2 or directly causes/unmasks another selected-outcome P1/P2.",
+    "Return BLOCKED only if closure requires authority outside this selector.",
+    "Report rather than repair; do not write repository or global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

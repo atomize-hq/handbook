@@ -6,6 +6,22 @@ Use this prompt to start or resume one top-level Handbook Contract Membrane phas
 
 The runner owns the selected scope from preflight through implementation or documentation, verification, fresh independent review, remediation, re-review, proof, control-pack closeout, and commit. A handoff supplies optional resume context. It does not select the work, and an internal dispatch is not a reason to return control to the user.
 
+## Increment and external meta boundary
+
+This prompt governs one increment orchestrator. The increment closes its own
+selected slice or genuine same-slice resumption, writes the required v1.4
+handoff/ledger closeout, reports the reviewed and closeout commits, and stops.
+It never creates a sibling slice task.
+
+A separately operator-authorized external meta orchestrator may create the next
+fresh increment only from a closed ordered sequence of exact slice IDs that the
+operator preauthorized. It may do so only after independently verifying the
+prior increment's completed handoff, ledger, local commit/ref state, protected
+paths, causal review cadence, and remaining authority. It cannot derive,
+reorder, or extend the sequence. Meta receipts and runtime state are scheduling
+evidence only: they do not select a slice, replace its reviewed selector, enter
+the Handbook v1.4 dispatch population, or authorize implementation.
+
 ## Runtime parameters
 
 Set:
@@ -479,7 +495,8 @@ After verification and fresh review are clean:
 3. for a multi-packet slice, permit a reviewed packet-commit stack whose final
    primary tip represents the aggregate reviewed subject;
 4. otherwise commit with a scoped Conventional Commit message;
-5. do not start another slice automatically.
+5. do not start another slice from this increment; complete the v1.4 true-stop
+   closeout and return control.
 
 PHASE 8 — TRUE-STOP HANDOFF
 
@@ -571,7 +588,8 @@ The top-level orchestrator may:
 
 The orchestrator must not:
 
-- start another slice automatically;
+- start another slice from this increment; a separately authorized external
+  meta orchestrator owns any verified next-task scheduling;
 - self-approve its own implementation/documentation;
 - replace built-in subagents with external/shell-launched agents;
 - convert an internal dispatch into an ordinary user task hop;

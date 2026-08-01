@@ -1,0 +1,36 @@
+{
+  "protocol": "codex.top-level-orchestration-state.v1",
+  "completion_profile": "handbook_v1_4",
+  "publication_mode": "local_only",
+  "meta_workflow_id": "handbook-phase-3-example",
+  "status": "INITIALIZING",
+  "dispatch_authorized": false,
+  "delegated_authority": {
+    "launch_preauthorized_sequence": true,
+    "adjudicate_bounded_blockers": true,
+    "expand_sequence": false
+  },
+  "remote": "origin",
+  "remote_baseline": "0000000000000000000000000000000000000000",
+  "target_ref": "refs/heads/orchestration/handbook-phase-3-example",
+  "required_ancestor": "0000000000000000000000000000000000000000",
+  "sequence": [
+    "HCM-3.2",
+    "HCM-3.3"
+  ],
+  "required_evidence": [],
+  "cursor": 0,
+  "expected_base": {
+    "commit": "0000000000000000000000000000000000000000",
+    "tree": "0000000000000000000000000000000000000000"
+  },
+  "meta": {
+    "thread_id": null,
+    "host_id": null
+  },
+  "active_dispatch": null,
+  "active_slice_checkpoints": [],
+  "active_evidence_dispatches": [],
+  "verified_evidence": [],
+  "completed": []
+}
