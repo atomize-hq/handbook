@@ -1,0 +1,491 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260801T193115Z--HCM-0-8--orchestration--meta-orchestration-adapter-completed",
+  "created_at_utc": "2026-08-01T19:31:15Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "20260801-meta-orchestration-adapter",
+  "orchestration_id": "20260801T190437Z--HCM-0-8--meta-orchestration-adapter",
+  "source_handoff_ids": [],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex parent orchestrator",
+    "thread_ref": null
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-01T19:31:15Z",
+    "evidence_ref": "four fresh built-in read-only review runs completed; both P2 findings received parent remediation and different-fresh CLEAN closure"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "meta_adapter_planning_review",
+      "dispatch_id": "20260801T190546Z--HCM-0-8--meta-orchestration-adapter-planning-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T190546Z--HCM-0-8--meta-orchestration-adapter-planning-review.json",
+      "dispatch_fingerprint": "sha256:b445f8eb123fe9b623ba9e35efd7ec73ac178617cd27ceea0411996edd0ffaa3",
+      "role": "review",
+      "agent_id": "/root/meta_adapter_planning_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:764367109ef6557279f38bb516ba0d837147584c821496bef98ede88ad5313ed",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.8-PLAN-P2-001",
+        "HCM-0.8-PLAN-P3-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T190546Z--HCM-0-8--meta-orchestration-adapter-planning-review.json"
+      ],
+      "result_subject_fingerprint": "sha256:764367109ef6557279f38bb516ba0d837147584c821496bef98ede88ad5313ed"
+    },
+    {
+      "run_id": "meta_adapter_planning_closure",
+      "dispatch_id": "20260801T190921Z--HCM-0-8--meta-orchestration-adapter-planning-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T190921Z--HCM-0-8--meta-orchestration-adapter-planning-closure.json",
+      "dispatch_fingerprint": "sha256:06d8a925205fd697d24d8ac4ee0a8239bc0213e9e278ed179e191d35989f725b",
+      "role": "review",
+      "agent_id": "/root/meta_adapter_planning_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:fcd999a0790d069f0d84124aa4b3c7d895c6bc1da5336e33f85e3fed58556af8",
+      "review_round": 2,
+      "predecessor_run_id": "meta_adapter_planning_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T190921Z--HCM-0-8--meta-orchestration-adapter-planning-closure.json"
+      ],
+      "result_subject_fingerprint": "sha256:fcd999a0790d069f0d84124aa4b3c7d895c6bc1da5336e33f85e3fed58556af8"
+    },
+    {
+      "run_id": "meta_adapter_final_review",
+      "dispatch_id": "20260801T191514Z--HCM-0-8--meta-orchestration-adapter-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T191514Z--HCM-0-8--meta-orchestration-adapter-final-review.json",
+      "dispatch_fingerprint": "sha256:d2ee808865dd2d8d106e0c44eb91e873f7500d2044a0ca8fbd4a92b8776c3a9f",
+      "role": "review",
+      "agent_id": "/root/meta_adapter_final_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "test-driven-development",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:b3d136ce1056bef7bad22f18e3e39c697f7079e37b95165dc7b7ccc57eb7ea22",
+      "review_round": 3,
+      "predecessor_run_id": "meta_adapter_planning_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM-0.8-FINAL-P2-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T191514Z--HCM-0-8--meta-orchestration-adapter-final-review.json"
+      ],
+      "result_subject_fingerprint": "sha256:b3d136ce1056bef7bad22f18e3e39c697f7079e37b95165dc7b7ccc57eb7ea22"
+    },
+    {
+      "run_id": "meta_adapter_final_closure",
+      "dispatch_id": "20260801T192357Z--HCM-0-8--meta-orchestration-adapter-final-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T192357Z--HCM-0-8--meta-orchestration-adapter-final-closure.json",
+      "dispatch_fingerprint": "sha256:5bf8c41a2de9af0aaebe56b8ebac6e22d01bc63a2d7688d124ba6464f806dec8",
+      "role": "review",
+      "agent_id": "/root/meta_adapter_final_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "test-driven-development",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:4bcbaca4396aade8efee08c4e8980a5813dbccd3784b752a03560dc0ff630ab5",
+      "review_round": 4,
+      "predecessor_run_id": "meta_adapter_final_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T192357Z--HCM-0-8--meta-orchestration-adapter-final-closure.json"
+      ],
+      "result_subject_fingerprint": "sha256:4bcbaca4396aade8efee08c4e8980a5813dbccd3784b752a03560dc0ff630ab5"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-01T19:31:15Z",
+    "dispatch_count": 4,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:3d876985f0b838387e7b27a8488c1f251461323f4aebb6b451583ece65ce8d04"
+    ],
+    "aggregate_fingerprint": "sha256:95153eaf66e905b6312f23999431c125704746cad99d55bbcf1d9494c895cb0e"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-0-8-meta-adapter-planning-remediation",
+      "finding_run_id": "meta_adapter_planning_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "meta_adapter_planning_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:fcd999a0790d069f0d84124aa4b3c7d895c6bc1da5336e33f85e3fed58556af8",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T190921Z--HCM-0-8--meta-orchestration-adapter-planning-closure.json"
+      ]
+    },
+    {
+      "remediation_id": "hcm-0-8-meta-adapter-final-remediation",
+      "finding_run_id": "meta_adapter_final_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "meta_adapter_final_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:4bcbaca4396aade8efee08c4e8980a5813dbccd3784b752a03560dc0ff630ab5",
+      "evidence_refs": [
+        ".codex/skills/orchestrate-top-level-tasks/scripts/bind_meta_identity.py",
+        ".codex/skills/orchestrate-top-level-tasks/scripts/render_increment_prompt.py",
+        ".codex/skills/orchestrate-top-level-tasks/scripts/self_test.py",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T192357Z--HCM-0-8--meta-orchestration-adapter-final-closure.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "da63b16ce9a2a16295df6b3290ee01e00f341921",
+    "subject_fingerprint": "sha256:4bcbaca4396aade8efee08c4e8980a5813dbccd3784b752a03560dc0ff630ab5",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T190921Z--HCM-0-8--meta-orchestration-adapter-planning-closure.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T192357Z--HCM-0-8--meta-orchestration-adapter-final-closure.json",
+      ".codex/skills/orchestrate-top-level-tasks/scripts/self_test.py",
+      "git:da63b16ce9a2a16295df6b3290ee01e00f341921"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T192357Z--HCM-0-8--meta-orchestration-adapter-final-closure.json"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 repository-local meta-orchestration adapter completion",
+    "scope_horizon": "one repository-local skill, two controlling protocol clarifications, exact review lineage, deterministic proof, and v1.4 closeout",
+    "detail_resolution": "closed exact-slice sequence, increment/meta ownership, receipt non-authority, state-bound helpers, causal cadence, and local-only publication",
+    "temporal_horizon": "reviewed primary committed; mechanical handoff/ledger closeout pending",
+    "authority_horizon": "HCM-0.8 administrative tooling/protocol only; no HCM-3.x, product/runtime, schema, validator, release, push, or historical mutation",
+    "memory_horizon": "four immutable dispatches, two remediated P2 findings, two different-fresh CLEAN closures, complete 28-path final subject, and nine protected hashes",
+    "validation_horizon": "skill self-test/metadata/lint/compile/JSON, ordinary v1.4 validation and both self-tests, diff/manifest replay, GitNexus truth, and protected-path exclusion"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Admit the Handbook-local top-level-task orchestration skill and clarify the exact external meta scheduling boundary without weakening increment true-stop, v1.4 authority, or causal review cadence.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md",
+      "sections": [
+        "Exact semantic boundary",
+        "Exact path ceiling",
+        "Causal review plan",
+        "Acceptance"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Increment and external meta boundary",
+        "Ready-to-use prompt",
+        "Orchestration boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "External meta scheduling boundary",
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    },
+    {
+      "path": ".codex/skills/orchestrate-top-level-tasks/SKILL.md",
+      "sections": [
+        "Apply delegated meta authority correctly",
+        "Enforce causal review cadence",
+        "Accept a completed receipt",
+        "Handle a true stop"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "feat/handbook-contract-membrane",
+    "head": "da63b16ce9a2a16295df6b3290ee01e00f341921",
+    "dirty": true,
+    "changed_paths": [
+      ".claude/skills/gitnexus/gitnexus-cli/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-debugging/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-exploring/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-guide/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md",
+      ".claude/skills/gitnexus/gitnexus-refactoring/SKILL.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/ideas/intent-to-outcome-fidelity.md",
+      "docs/research/rust-workspace-build-speed.md"
+    ]
+  },
+  "work_completed": [
+    "Copied and adapted the top-level orchestration skill into the repository with Handbook v1.4 authority, protected-path, local-only publication, and causal-cadence controls.",
+    "Restricted meta scheduling to a closed ordered operator-preauthorized sequence of exact slice IDs and made the state validator reject abstract sequence entries.",
+    "Bound identity mutation and prompt rendering to the same canonical validated state, including exact current slice, phase, successor, meta identity, refs, remote, and commit/tree values.",
+    "Clarified in 07 that each increment true-stops and never launches a sibling while a separate verified meta scheduler may create only the next preauthorized exact slice.",
+    "Clarified in 08 that external receipts/state are scheduling-only, excluded from v1.4 populations and authority, and cannot reset causal lineage or waive/expand work.",
+    "Completed one planning and one final-closeout review lineage; both P2 findings were remediated and closed by different fresh reviewers without supplemental cycles or reopened discovery."
+  ],
+  "deliverables": [
+    {
+      "path": ".codex/skills/orchestrate-top-level-tasks",
+      "status": "completed",
+      "summary": "Repository-local skill, scripts, templates, examples, and Handbook adapter references."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "status": "completed",
+      "summary": "Increment true-stop and external meta scheduling boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "status": "completed",
+      "summary": "Receipt non-authority, exact-sequence, causal-lineage, and bounded-adjudication protocol."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260801-meta-orchestration-adapter-selector.md",
+      "status": "completed",
+      "summary": "Reviewed packet authority and exact path/review/stop ceiling."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-0.8-META-ADAPTER-D1",
+      "summary": "An increment orchestrator owns one selected slice or same-slice resumption and always true-stops after v1.4 closeout.",
+      "authority_effect": "Sibling task creation is outside the increment and belongs only to a separately authorized external meta scheduler.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.8-META-ADAPTER-D2",
+      "summary": "Meta scheduling requires a closed ordered operator-preauthorized sequence of exact HCM slice IDs.",
+      "authority_effect": "The meta scheduler and its helpers cannot derive, reorder, extend, or substitute slice authority.",
+      "refs": [
+        ".codex/skills/orchestrate-top-level-tasks/scripts/validate_state.py",
+        ".codex/skills/orchestrate-top-level-tasks/scripts/render_increment_prompt.py"
+      ]
+    },
+    {
+      "decision_id": "HCM-0.8-META-ADAPTER-D3",
+      "summary": "External receipts and runtime state are untrusted scheduling evidence, not Handbook v1.4 or product authority.",
+      "authority_effect": "Receipts stay outside dispatch populations/delegated runs and cannot select work, reset cadence, or waive P1/P2.",
+      "refs": [
+        ".codex/skills/orchestrate-top-level-tasks/SKILL.md",
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-0.8-PLAN-P2-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "meta_adapter_planning_review",
+      "summary": "The initial selector allowed a bounded objective that could authorize an unenumerated sibling slice.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T190921Z--HCM-0-8--meta-orchestration-adapter-planning-closure.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-PLAN-P3-002",
+      "classification": "local_remediation",
+      "severity": "warning",
+      "priority": "P3",
+      "status": "remediated",
+      "source_run_id": "meta_adapter_planning_review",
+      "summary": "The initial planning dispatch cited an imprecise 07 section label; its successor uses existing section names without rewriting the immutable dispatch.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T190921Z--HCM-0-8--meta-orchestration-adapter-planning-closure.json"
+      ]
+    },
+    {
+      "finding_id": "HCM-0.8-FINAL-P2-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "meta_adapter_final_review",
+      "summary": "Identity binding and prompt rendering could bypass exact-slice validation even though direct state validation rejected abstract sequence entries.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T192357Z--HCM-0-8--meta-orchestration-adapter-final-closure.json"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "python .codex/skills/orchestrate-top-level-tasks/scripts/self_test.py",
+      "status": "passed",
+      "evidence_ref": "positive state/receipt/evidence/prompt flows plus abstract sequence, invalid binding, mismatched current slice, and unenumerated successor negatives passed"
+    },
+    {
+      "command": "skill quick_validate; uvx ruff check; uvx ruff format --check; python compileall; JSON parse",
+      "status": "passed",
+      "evidence_ref": "skill metadata valid; seven Python files linted/formatted/compiled; all skill and packet JSON parsed"
+    },
+    {
+      "command": "ordinary handoff validation plus --self-test-v1-admission and --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "79 records, 460 current dispatches, 8 legacy dispatches, and 79 ledger entries passed before closeout; both self-tests passed"
+    },
+    {
+      "command": "four fresh planning/final review runs under one parent/outcome-derived causal budget",
+      "status": "passed",
+      "evidence_ref": "FINDINGS to consolidated remediation to different-fresh CLEAN in both stages; no supplemental cycle, post-CLEAN cycle, or discovery reset"
+    },
+    {
+      "command": "GitNexus impact and change detection",
+      "status": "passed",
+      "evidence_ref": "new untracked helper symbols were absent from the index and recorded UNKNOWN; staged detection returned no indexed changes; compare-to-main remained unavailable due FTS and was not represented as GREEN"
+    },
+    {
+      "command": "git diff --check, exact manifest replay, staged path audit, and protected-path hashes",
+      "status": "passed",
+      "evidence_ref": "final 28-entry subject fingerprint 4bcbaca4 replayed; 29 primary paths were staged; all nine protected paths remained byte-identical and unstaged"
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Increment and external meta boundary",
+        "Phase 7 true-stop instruction",
+        "Orchestration boundary"
+      ],
+      "reason": "Distinguish increment ownership from separately authorized external scheduling.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "External meta scheduling boundary",
+        "Two-commit true-stop closeout"
+      ],
+      "reason": "Freeze receipt non-authority, exact sequence, causal lineage, and adjudication limits.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T193115Z--HCM-0-8--orchestration--meta-orchestration-adapter-completed.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the completed parent-owned v1.4 closeout.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger from canonical records.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No top-level slice sequence is dispatched by this completed adapter packet.",
+    "condition": "A future meta-orchestration session requires explicit operator authorization to create tasks and a closed ordered sequence of exact slice IDs.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260801T193115Z--HCM-0-8--orchestration--meta-orchestration-adapter-completed.json",
+        "sections": [
+          "entire completed handoff"
+        ]
+      },
+      {
+        "path": ".codex/skills/orchestrate-top-level-tasks/SKILL.md",
+        "sections": [
+          "Load the complete contract",
+          "Apply delegated meta authority correctly",
+          "Enforce causal review cadence"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not derive, reorder, or extend a top-level slice sequence or treat a receipt/handoff as independent slice authority.",
+      "Do not start HCM-3.x, create top-level tasks, release, publish, push, or mutate historical evidence from this completed packet."
+    ],
+    "acceptance_criteria": [
+      "The repository-local skill and live 07/08 boundary remain mutually consistent and validation-clean.",
+      "Any future meta workflow binds exact state/task identities, independently verifies every closeout, and preserves the live v1.4 causal cadence.",
+      "All nine protected paths remain byte-identical, unstaged, and uncommitted; no push occurred."
+    ],
+    "stop_conditions": [
+      "Stop before creating a meta or increment task unless the operator explicitly authorizes task creation and a closed ordered sequence of exact slice IDs.",
+      "Stop for any sequence/scope/risk expansion, P1/P2 waiver, immutable-history repair, unavailable exact platform proof, or causal-budget exhaustion."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Completed the bounded HCM-0.8 meta-orchestration adapter at primary da63b16. The repository-local skill, exact-slice state/helper validation, increment true-stop boundary, receipt non-authority, and causal-cadence safeguards are review-clean. No HCM-3.x task was started and nothing was pushed."
+}
