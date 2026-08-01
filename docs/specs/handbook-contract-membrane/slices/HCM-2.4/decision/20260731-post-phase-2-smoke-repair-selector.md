@@ -163,13 +163,15 @@ Production Rust paths, exactly 4 of the permitted 5:
 3. `crates/flow/src/resolver.rs`
 4. `crates/compiler/src/blocker.rs`
 
-Non-control test, fixture, and help paths, exactly 4 of the permitted 12 and at
+Non-control test, fixture, and help paths, exactly 6 of the permitted 12 and at
 most 600 changed lines in aggregate:
 
 1. `crates/engine/tests/canonical_artifacts_ingest.rs`
 2. `crates/cli/tests/setup_cli.rs`
 3. `crates/flow/tests/resolver_core.rs`
 4. `docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/post-phase-2-smoke-runbook.md`
+5. `crates/cli/tests/cli_surface.rs`
+6. `crates/compiler/tests/author.rs`
 
 Control/proof paths may be limited to this selector, new-parent v1.4 review
 dispatches, the exact post-exit status/evidence rows in `00-README.md`,
@@ -184,6 +186,27 @@ adapter, historical proof/dispatch/handoff/transcript, or HCM-3.x path is in
 scope. If implementation requires another production path, another
 non-control path, more than 600 ancillary changed lines, or a new protocol
 surface, stop with an authority-required handoff.
+
+### Authority-resumption amendment
+
+The explicit resumption from handoff
+`20260731T194418Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-authority-blocked`
+adds only `crates/cli/tests/cli_surface.rs`. The existing
+`generate_blocks_invalid_required_charter_with_required_artifact_invalid`
+fixture must place its unchanged invalid bytes at canonical
+`.handbook/project/charter.yaml`, preserving its `RequiredArtifactInvalid`
+assertions. It must not establish repository identity as a substitute because
+that would exercise a missing canonical Charter rather than an invalid one.
+
+The explicit resumption from handoff
+`20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop`
+adds only `crates/compiler/tests/author.rs`. The shared
+`legacy_authoring_fixture_repo` must establish valid operational repository
+identity through
+`RepositoryInvocationIdentityServiceV1::initialize_for_setup`, without
+handcrafting identity bytes or changing the existing legacy starter-template
+bytes, authoring assertions, output paths, independent missing-root tests, or
+invalid-root tests.
 
 ## Acceptance contract
 

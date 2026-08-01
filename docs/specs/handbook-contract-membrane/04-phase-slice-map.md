@@ -448,6 +448,18 @@ commit `9b3edf2745054872939ad48abad50ae5c2d97f9a` and authority commit
   completes P7, HCM-2.4, and the exact Phase 2 exit; FINDINGS leaves all three
   unaccepted. Neither HCM-3.x work nor automatic continuation is authorized.
 
+The formal P7/HCM-2.4/Phase 2 exit above remains immutable completed evidence.
+A separately selected post-exit smoke correction is bounded by
+`slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md`.
+It repairs the setup-created operational-root packet retry, preserves
+non-authoring setup and absent/unsafe/legacy-only fail-closed behavior, and
+changes no Phase 2 exit row. Proof-stage review
+`handoffs/dispatches/20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review.json`
+is CLEAN. CLEAN in
+`handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json`
+completes only the corrective outcome; FINDINGS or BLOCKED leaves it open and
+HCM-3.x unauthorized.
+
 ### Phase 2 exit gate
 
 - GREEN: each targeted artifact has exactly one editable canonical truth;

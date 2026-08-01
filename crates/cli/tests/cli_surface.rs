@@ -5034,7 +5034,10 @@ fn generate_blocks_invalid_required_charter_with_required_artifact_invalid() {
     let dir = tempfile::tempdir().expect("tempdir");
     let root = dir.path();
 
-    write_file(&root.join(".handbook/charter/CHARTER.md"), b"charter-body");
+    write_file(
+        &root.join(".handbook/project/charter.yaml"),
+        b"charter-body",
+    );
     write_file(
         &root.join(".handbook/feature_spec/FEATURE_SPEC.md"),
         b"feature-body",

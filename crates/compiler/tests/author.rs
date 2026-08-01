@@ -177,6 +177,10 @@ fn legacy_authoring_fixture_repo(root: &Path) {
             setup_starter_template_bytes(descriptor.kind),
         );
     }
+
+    handbook_engine::RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup(root)
+        .expect("initialize repository invocation identity");
 }
 
 #[test]

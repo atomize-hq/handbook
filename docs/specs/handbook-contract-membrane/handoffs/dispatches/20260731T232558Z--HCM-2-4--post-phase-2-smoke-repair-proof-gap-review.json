@@ -1,0 +1,297 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review",
+  "created_at_utc": "2026-07-31T23:25:58Z",
+  "source_handoff_ids": [
+    "20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop"
+  ],
+  "parent_orchestration_id": "20260731T182849Z--HCM-2-4--post-phase-2-smoke-repair",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "debugging-and-error-recovery",
+    "test-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "20260731-post-phase-2-smoke-repair-selector",
+  "subject_fingerprint": "sha256:3f264513e85ba0747a8daa2c0999baf768b572ac28036ba76d2ba42f87ac2300",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "post-phase-2-smoke-repair-proof-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-31T18:28:49Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+        "packet_ids": [
+          "20260731-post-phase-2-smoke-repair-selector"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:27a404e0d9edf04c02a1aa0ac67180c2c341c6e05701267c29d2c19635243e47",
+    "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+    "outcome_registry_fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c",
+    "review_stage": "proof",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "implementation"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "post-phase-2-smoke-repair-proof-gap-convergence",
+    "completed_at_utc": "2026-07-31T23:25:57Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run the seven exact compiler author regressions, complete 29-test author target, cargo test --workspace --all-features, strict workspace Clippy, and fresh locked installed-binary smoke",
+        "evidence_ref": "parent terminal output: seven exact tests passed; author 29/29; workspace exited 0 in 910.1 seconds; Clippy -D warnings exited 0; installed setup/packet, absence/legacy, non-Git, JSON, generic, platform, authenticator, and pipeline journeys passed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory all 15 legacy_authoring_fixture_repo call sites, verify unchanged missing/invalid-root tests, and run legacy-root plus 12-term bridge/fixed-selector absence scans",
+        "evidence_ref": "parent terminal output: only the shared helper gained setup-owned identity; legacy starter bytes/assertions/output paths are unchanged; production legacy-path matches=0, retired 12-term Rust matches=0, handcrafted identity literals=0"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted 17-entry repo-path-NUL-SHA256-newline proof-gap manifest",
+        "evidence_ref": "subject manifest below; aggregate sha256:3f264513e85ba0747a8daa2c0999baf768b572ac28036ba76d2ba42f87ac2300"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "parent command exited 0 after the sixth-path edit"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check and git diff --cached --check",
+        "evidence_ref": "parent commands exited 0; only the two authorized test paths and selector amendment are staged"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "bounded_test_support",
+    "risk_ceiling": "test_proof_only",
+    "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+    "max_paths": 5,
+    "max_changed_lines": 229,
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 5
+      },
+      {
+        "path": "crates/cli/tests/setup_cli.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 106
+      },
+      {
+        "path": "crates/compiler/tests/author.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 4
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 54
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 60
+      }
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "6bf4a1ed2d977596f11d6d54a2a4e5671ac5f1b22c9dd26941f64f2bed41e3d7"
+      },
+      {
+        "path": "crates/cli/tests/setup_cli.rs",
+        "sha256": "7153e08ee87e0b54ba058419166a5015a5e63bebf5c2e140fc1fe157c4270c48"
+      },
+      {
+        "path": "crates/compiler/src/blocker.rs",
+        "sha256": "b68f7428a289da634248794c27f13f6894f1b902e3c07cf161392c65af3cdc8c"
+      },
+      {
+        "path": "crates/compiler/tests/author.rs",
+        "sha256": "7fe24168f9366c1bbd1a3c5d2af80a6f9299750e7964c0333d20abe346c87594"
+      },
+      {
+        "path": "crates/engine/src/canonical_artifacts.rs",
+        "sha256": "7b56c04cfdc96628ea746763e4bc59bd38b727a4416dcbeb5343ac16548858bc"
+      },
+      {
+        "path": "crates/engine/src/repository_invocation_identity.rs",
+        "sha256": "7dd5d39c3a3861bfa419883aafd3f7f697f634f03fa0a5a23db32ecd83a6be3b"
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "sha256": "a6c71e3c55d04b4ce4fd23aefba87fa33d3742ccc115a08056d849ec24ed41b5"
+      },
+      {
+        "path": "crates/flow/src/resolver.rs",
+        "sha256": "6fcb0a46b5565721b3c6395a982d402cf36625dc5cbf82aa22c6beb89cec0857"
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "sha256": "bc8ad258ec14c6f97bdf5f2f96aafd2fd539308a1ab5a32ffac6ecbcaaa05ede"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json",
+        "sha256": "c922403ce696765bfa13353d29f2ee6c618d68aa52a9163b264af4c55adefab7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json",
+        "sha256": "4c8b2ffff5178c6be0f0e46f3c9f91c41202ee546f8f6e7c698bc2f4ea5baf15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json",
+        "sha256": "2772f6f6795064a9c29f43b90b829b237e7f25b2120bd94b9406fb4175cf7800"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json",
+        "sha256": "9abc01962ee0f33a6510d747516bef60af1ce5cb7ae938f74afab60e9be921ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T194418Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-authority-blocked.json",
+        "sha256": "b1e4dcda1ceb0e9bdfcbd9103e82fbe422d75ea2b30108ab03239fb9b10c215d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+        "sha256": "a504404f557bc0c2e6e82d04332a2b4b12596ed7b5d41fcfc27e204c5838d725"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+        "sha256": "8e039000ea3179b7cba86c3f0a7cfccfebc6679b8de058348e8181681f5c0558"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/post-phase-2-smoke-runbook.md",
+        "sha256": "c702765e58c74aed0d6e5696ce8f55aee4aaccea6f0198afda82fea7b9682e61"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:3f264513e85ba0747a8daa2c0999baf768b572ac28036ba76d2ba42f87ac2300"
+  },
+  "active_resolution": {
+    "level": "HCM-2.4 post-exit smoke-repair proof-gap review",
+    "scope_horizon": "the complete authorized six-path non-control ceiling after two explicit authority resumptions",
+    "detail_resolution": "canonical invalid-Charter CLI fixture plus setup-owned operational identity in the shared legacy authoring fixture",
+    "temporal_horizon": "proof stage after implementation CLEAN and before control-pack convergence or final closeout review",
+    "authority_horizon": "unchanged selector-bounded correction; no production expansion, seventh non-control path, JSON protocol, native widening, HCM-3.x, release, or push",
+    "memory_horizon": "immutable planning/implementation dispatches, two authority-stop handoffs, exact failed workspace evidence, repaired wall, installed smoke, and absence scans",
+    "validation_horizon": "independently assess the newly exposed proof gap and complete wall without reopening implementation discovery"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "sections": [
+        "D. Exact scope ceiling",
+        "Authority-resumption amendment",
+        "Acceptance contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+      "sections": [
+        "blockers",
+        "escalations",
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Built-in delegated-run protocol",
+        "Review lineage"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric"
+      ]
+    }
+  ],
+  "repo_truth": "The prior implementation closure is immutable and CLEAN. The first authorized follow-up replaced only one CLI legacy fixture path with canonical .handbook/project/charter.yaml and kept invalid bytes/assertions. The second follow-up added only setup-owned identity initialization to the shared compiler author fixture. The seven exact failures, full author target, complete workspace, strict Clippy, formatting, installed binary journeys, and absence scans now exit successfully. GitNexus does not index either test symbol; staged detection maps only generic selector headings and reports a CRITICAL 299-process name-collision diagnostic, while compare-to-main terminates under unavailable FTS and is not called GREEN.",
+  "allowed_scope": [
+    "Review the complete 17-entry proof-gap subject read-only.",
+    "Assess whether the two authorized test-fixture corrections faithfully prove the selected runtime without weakening bytes, assertions, negative roots, output paths, or owner boundaries.",
+    "Replay the exact six-path ceiling, 229-line test allowance, complete proof wall, installed-binary journeys, and absence scans.",
+    "Emit new unique run-local finding IDs for any independently identified issue."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create dispatches, write handoffs/ledger, delegate, or remediate findings.",
+    "Do not restore legacy root authority, handcraft repository identity, generate profile selection, change production/runtime code, or add a seventh non-control path.",
+    "Do not define a JSON protocol, widen platform/native authority, rewrite completed Phase 2 evidence, select HCM-3.x, release, or push."
+  ],
+  "tasks": [
+    "Validate the same parent, packet, registry, causal budget, proof-stage transition, all manifest hashes, and ancillary observations.",
+    "Inspect the CLI invalid-Charter test and verify it still proves RequiredArtifactInvalid for unchanged invalid canonical bytes rather than a missing Charter.",
+    "Inspect legacy_authoring_fixture_repo and all 15 consumers; verify setup-owned identity is appropriate, legacy bytes/assertions/output paths remain unchanged, and missing/invalid-root negatives remain independent.",
+    "Evaluate the focused tests, complete workspace wall, strict Clippy/formatting, installed-binary smoke, absence scans, and GitNexus diagnostics against the acceptance contract.",
+    "Return findings first, ordered P1 through P4, or CLEAN for subject sha256:3f264513e85ba0747a8daa2c0999baf768b572ac28036ba76d2ba42f87ac2300."
+  ],
+  "contracts_and_gates": [
+    "The formal P7/Phase 2 exit and prior dispatch/handoff bytes remain immutable; this is a separate post-exit correction.",
+    "Setup remains content-non-authoring and does not synthesize profile selection.",
+    "Legacy Markdown-only roots do not establish or influence canonical truth; absent and unsafe roots remain fail-closed.",
+    "No production/runtime or seventh non-control path is authorized.",
+    "CLEAN permits control-pack convergence and a different-fresh final complete-subject review; it does not itself authorize the primary commit."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if either fixture correction weakens its original contract, if any required wall is unsupported, or if the selector no longer bounds the observed paths and lines.",
+    "Return BLOCKED if a production path, seventh non-control path, unavailable required proof, or broader authority is necessary.",
+    "Report rather than repair; do not broaden this review dispatch."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -5,6 +5,18 @@
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
 **Implementation authorization:** HCM-1.1 through HCM-2.3 are completed bounded evidence, not continuing authority. HCM-2.3 closes `PG-KIND-02` only for the proven repository-defined registry-brief path, adds the exact earned registry-brief subsets to `PG-KIND-01` and `PG-ARTIFACT-01`, preserves first-party Charter as `ContractCorrectAndProven`, and leaves broader generic/custom-kind intake `TargetOnly`; it adds no shipped kind, SDK or public transport support, Projection engine, remote schema fetching, generated command, broader artifact-family conversion, or later-slice authority. `handbook-engine` `0.2.0` is the accepted compatibility boundary for the landed public-enum additions; it is not a publication or downstream-adoption claim. HCM-2.4 P2, P3/P3B, and P4 are completed bounded evidence, and P5 is accepted. P6 is completed and accepted by the exact CLEAN condition above. Future implementation-task gate runtime remains deferred. P7 is completed, HCM-2.4 is completed, and the exact HCM-2 Phase 2 exit is GREEN. `HCM-RF-0001` and `HCM-RF-0002` remain accepted P3 advisories. Every HCM-3.x slice, automatic continuation, release, push, and publication remain unauthorized.
+
+**Post-exit corrective outcome:** The immutable P7/Phase 2 exit remains
+completed evidence. The separately selected HCM-2.4 product-smoke correction
+recognizes safe setup-created operational identity, reports missing required
+Project Authority and Project Context with author/fill actions instead of a
+setup retry, and preserves absent/unsafe/legacy-only refusal plus non-authoring
+setup. Proof-stage dispatch
+`handoffs/dispatches/20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review.json`
+is CLEAN. CLEAN in
+`handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json`
+accepts only this corrective outcome; FINDINGS leaves it incomplete. HCM-3.x
+remains unauthorized.
 **Repo-truth snapshot:** 2026-07-25 at `7b3b5454ef363d08e4c6c78e6a201d8c36c10c5c`; re-check live code before every slice
 
 ## Purpose

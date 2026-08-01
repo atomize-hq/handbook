@@ -1,0 +1,329 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review",
+  "created_at_utc": "2026-07-31T23:53:00Z",
+  "source_handoff_ids": [
+    "20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop"
+  ],
+  "parent_orchestration_id": "20260731T182849Z--HCM-2-4--post-phase-2-smoke-repair",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-2",
+  "slice_id": "HCM-2.4",
+  "packet_id": "20260731-post-phase-2-smoke-repair-selector",
+  "subject_fingerprint": "sha256:c0b76343975925818fe26b5097cf62b7f39008aa877c589a4d6cb875b264a15b",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "post-phase-2-smoke-repair-final-closeout-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-07-31T18:28:49Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+        "packet_ids": [
+          "20260731-post-phase-2-smoke-repair-selector"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:27a404e0d9edf04c02a1aa0ac67180c2c341c6e05701267c29d2c19635243e47",
+    "integrated_outcome_id": "hcm-2.4-post-phase-2-smoke-repair",
+    "outcome_registry_fingerprint": "sha256:1ed5542bcc08a954c32421633ae8d1667e2db5b6ddd7351c169ac97d734e447c",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "proof"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "post-phase-2-smoke-repair-final-complete-subject-convergence",
+    "completed_at_utc": "2026-07-31T23:52:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "run the seven exact author regressions, complete author target, full workspace/all-features wall, strict Clippy, formatting, fresh installed-binary smoke, and proof-stage independent replay",
+        "evidence_ref": "parent proof record and proof-stage CLEAN review: seven exact tests passed, author 29/29, parent workspace 910.1 seconds, independent workspace 874.1 seconds, strict Clippy/formatting/install and all disposable journeys passed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "replay canonical/legacy influence scans, 12 retired bridge/fixed-selector terms, compiler identity-literal absence, protected-path hashes, and exact six-path/363-line ceiling",
+        "evidence_ref": "compact proof and proof-stage CLEAN review: production legacy matches=0, retired terms=0, handcrafted identity literals=0, protected 9/9, non-control paths=6, ancillary changed lines=363"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted 24-entry repo-path-NUL-SHA256-newline complete-subject manifest",
+        "evidence_ref": "subject_manifest below; aggregate sha256:c0b76343975925818fe26b5097cf62b7f39008aa877c589a4d6cb875b264a15b"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check and validate proof dispatch",
+        "evidence_ref": "parent commands exited 0; proof dispatch replayed exact subject sha256:3f264513e85ba0747a8daa2c0999baf768b572ac28036ba76d2ba42f87ac2300"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent command exited 0 after control/proof convergence"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "bounded_test_support",
+    "risk_ceiling": "test_proof_only",
+    "baseline_ref": "55d220a9ec41cc34e7b42273f23ff90c529f7339",
+    "max_paths": 5,
+    "max_changed_lines": 229,
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 5
+      },
+      {
+        "path": "crates/cli/tests/setup_cli.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 106
+      },
+      {
+        "path": "crates/compiler/tests/author.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 4
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 54
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "path_kind": "test_assertion",
+        "changed_lines": 60
+      }
+    ]
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/cli/tests/cli_surface.rs",
+        "sha256": "6bf4a1ed2d977596f11d6d54a2a4e5671ac5f1b22c9dd26941f64f2bed41e3d7"
+      },
+      {
+        "path": "crates/cli/tests/setup_cli.rs",
+        "sha256": "7153e08ee87e0b54ba058419166a5015a5e63bebf5c2e140fc1fe157c4270c48"
+      },
+      {
+        "path": "crates/compiler/src/blocker.rs",
+        "sha256": "b68f7428a289da634248794c27f13f6894f1b902e3c07cf161392c65af3cdc8c"
+      },
+      {
+        "path": "crates/compiler/tests/author.rs",
+        "sha256": "7fe24168f9366c1bbd1a3c5d2af80a6f9299750e7964c0333d20abe346c87594"
+      },
+      {
+        "path": "crates/engine/src/canonical_artifacts.rs",
+        "sha256": "7b56c04cfdc96628ea746763e4bc59bd38b727a4416dcbeb5343ac16548858bc"
+      },
+      {
+        "path": "crates/engine/src/repository_invocation_identity.rs",
+        "sha256": "7dd5d39c3a3861bfa419883aafd3f7f697f634f03fa0a5a23db32ecd83a6be3b"
+      },
+      {
+        "path": "crates/engine/tests/canonical_artifacts_ingest.rs",
+        "sha256": "a6c71e3c55d04b4ce4fd23aefba87fa33d3742ccc115a08056d849ec24ed41b5"
+      },
+      {
+        "path": "crates/flow/src/resolver.rs",
+        "sha256": "6fcb0a46b5565721b3c6395a982d402cf36625dc5cbf82aa22c6beb89cec0857"
+      },
+      {
+        "path": "crates/flow/tests/resolver_core.rs",
+        "sha256": "bc8ad258ec14c6f97bdf5f2f96aafd2fd539308a1ab5a32ffac6ecbcaaa05ede"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "767cc19f97586e159282383dc01abad9bb104640c8c8b73dbb2d2b9d874f14fc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "5244c9bfaa599d963f9a3d0006374ca59968c6a3d9b920626e843d0949988c05"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "e1740861a3b253c4fb9d9f9572eb32df465c4abda6a3f689001031750f0b71ab"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "ff6cedc80702a591470a54f84970577b400e5bafb0b33afdc9fde9bc20e44186"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T183120Z--HCM-2-4--post-phase-2-smoke-repair-planning-review.json",
+        "sha256": "c922403ce696765bfa13353d29f2ee6c618d68aa52a9163b264af4c55adefab7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T184504Z--HCM-2-4--post-phase-2-smoke-repair-planning-closure.json",
+        "sha256": "4c8b2ffff5178c6be0f0e46f3c9f91c41202ee546f8f6e7c698bc2f4ea5baf15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T190800Z--HCM-2-4--post-phase-2-smoke-repair-implementation-review.json",
+        "sha256": "2772f6f6795064a9c29f43b90b829b237e7f25b2120bd94b9406fb4175cf7800"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T193047Z--HCM-2-4--post-phase-2-smoke-repair-implementation-closure.json",
+        "sha256": "9abc01962ee0f33a6510d747516bef60af1ce5cb7ae938f74afab60e9be921ba"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review.json",
+        "sha256": "ecbca639034e170a6b289febd2effca7b7034a662ca237119aadef3881b877dc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+        "sha256": "ed3267ae7e0aa7b198cae1cc11f0a021aefb1b243a1bf5ce2e555dbbafbe4db6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T194418Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-authority-blocked.json",
+        "sha256": "b1e4dcda1ceb0e9bdfcbd9103e82fbe422d75ea2b30108ab03239fb9b10c215d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+        "sha256": "a504404f557bc0c2e6e82d04332a2b4b12596ed7b5d41fcfc27e204c5838d725"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+        "sha256": "8e039000ea3179b7cba86c3f0a7cfccfebc6679b8de058348e8181681f5c0558"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/20260731-post-phase-2-smoke-repair-proof.md",
+        "sha256": "e0f44330c9315d625146c9a1cf897c3217e3e2c8c6e23c63609d1ce7327af5c5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/post-phase-2-smoke-runbook.md",
+        "sha256": "c702765e58c74aed0d6e5696ce8f55aee4aaccea6f0198afda82fea7b9682e61"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:c0b76343975925818fe26b5097cf62b7f39008aa877c589a4d6cb875b264a15b"
+  },
+  "active_resolution": {
+    "level": "HCM-2.4 post-exit smoke-repair final complete-subject review",
+    "scope_horizon": "the exact four production and six non-control paths plus converged proof/control truth",
+    "detail_resolution": "operational-root repair, two authority-resumed fixture corrections, manual journeys, complete proof wall, and all parent dispatch/handoff lineage",
+    "temporal_horizon": "final_closeout stage after proof CLEAN and before the reviewed primary commit",
+    "authority_horizon": "this correction only; no seventh non-control path, fifth production path, JSON protocol, native widening, HCM-3.x, release, publication, or push",
+    "memory_horizon": "immutable Phase 2 exit, five prior dispatches, two superseded authority stops, compact proof, and pre-closeout ledger",
+    "validation_horizon": "different-fresh complete-subject review; CLEAN permits primary and mechanical closeout commits only"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md",
+      "sections": [
+        "D. Exact scope ceiling",
+        "Authority-resumption amendment",
+        "Acceptance contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-2.4/proof/implementation/20260731-post-phase-2-smoke-repair-proof.md",
+      "sections": [
+        "Corrected behavior",
+        "Verification wall",
+        "Review"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260731T221742Z--HCM-2-4--orchestration--post-phase-2-smoke-repair-second-authority-stop.json",
+      "sections": [
+        "resume",
+        "supersedes"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric"
+      ]
+    }
+  ],
+  "repo_truth": "The immutable P7/Phase 2 exit remains completed. This separate correction is staged over the earlier partial primary tip 5f1aad42ff272765b108ea8ca8a509728d8f55b8. Four production paths implement setup-identity operational-root recognition and instance-aware missing-artifact actions; six exact non-control paths prove the runtime and supported manual journeys. Proof-stage review returned CLEAN. HCM-2.3 requires no typed pre-establishment JSON envelope. GitNexus exact test-symbol impact is unavailable/UNKNOWN, staged detection reports a generic-heading CRITICAL name collision, and compare-to-main terminates under unavailable FTS; none is mislabeled GREEN.",
+  "allowed_scope": [
+    "Review the exact 24-entry complete subject read-only, including the pre-closeout ledger and all five prior dispatches/two authority-stop records.",
+    "Verify selector, runtime, fixtures, runbook, compact proof, active control-pack rows, test wall, installed smoke, absence scans, and review lineage agree.",
+    "Reconcile every prior CLEAN, FINDINGS, remediation, blocked authority stop, and authorized continuation under this parent and causal budget.",
+    "Emit new unique final-run finding IDs for any independently identified issue."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create dispatches, write handoffs/ledger, delegate, or remediate findings.",
+    "Do not rewrite any prior dispatch, handoff, Phase 2 proof, or completed closeout.",
+    "Do not add a production/non-control path, define JSON protocol, widen native authority, select HCM-3.x, release, publish, or push."
+  ],
+  "tasks": [
+    "Validate parent, outcome registry, causal budget, final_closeout transition, every manifest hash, ancillary observations, and exact scope ceiling.",
+    "Review the complete corrected runtime and two authority-resumed fixtures against all setup/packet, legacy, unsafe, non-authoring, generic, and platform boundaries.",
+    "Assess the proof wall, installed-binary journeys, required absence scans, GitNexus diagnostics, compact proof, and active control-pack claims.",
+    "Reconcile the five predecessor dispatches, three remediated findings, two authority stops, and proof CLEAN without treating immutable Phase 2 completion as reopened.",
+    "Return findings first, ordered P1 through P4, or CLEAN for subject sha256:c0b76343975925818fe26b5097cf62b7f39008aa877c589a4d6cb875b264a15b."
+  ],
+  "contracts_and_gates": [
+    "The complete subject must remain within exactly four production paths, six non-control paths, and the enumerated control/proof surface.",
+    "Setup remains content-non-authoring; absent/unsafe/legacy-only states remain fail-closed; no profile selection is synthesized.",
+    "All historical dispatch/handoff and Phase 2 proof bytes remain immutable.",
+    "CLEAN permits the reviewed primary commit and separate mechanical handoff/ledger closeout only; it grants no HCM-3.x continuation."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if any subject hash, behavior, proof, control claim, or lineage reconciliation is incomplete or inconsistent.",
+    "Return BLOCKED if another production path, seventh non-control path, broader authority, or unavailable mandatory proof is required.",
+    "Report rather than repair; do not broaden this final dispatch."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -1288,6 +1288,44 @@ completes P7, HCM-2.4, and the exact Phase 2 exit; FINDINGS leaves them
 unaccepted. No generic Projection, SDK/transport, HCM-3.x work, automatic
 continuation, push, or release is authorized.
 
+## HCM-2.4 post-exit smoke-repair evidence
+
+The immutable P7 and Phase 2 exit proof above is not reopened. Selector
+`slices/HCM-2.4/decision/20260731-post-phase-2-smoke-repair-selector.md`
+owns one separate corrective outcome:
+
+- safe setup-created repository identity establishes the operational root, so
+  missing required Project Authority and Project Context select their existing
+  instance-aware author/fill actions rather than another setup attempt;
+- a truly absent root still returns `SystemRootMissing`/`RunSetup`;
+  unsafe identity/root states and legacy Markdown-only trees remain
+  fail-closed and cannot influence canonical truth;
+- setup remains content-non-authoring and creates no Charter, Project Context,
+  Environment Context, profile selection, legacy truth, or empty canonical
+  content namespace;
+- the CLI invalid-Charter fixture uses canonical
+  `.handbook/project/charter.yaml` with unchanged invalid bytes and
+  `RequiredArtifactInvalid` assertions; the compiler legacy-authoring fixture
+  uses only `RepositoryInvocationIdentityServiceV1::initialize_for_setup`,
+  preserving starter bytes, authoring assertions, output paths, and independent
+  missing/invalid-root negatives;
+- seven exact authoring regressions, the 29-test author target, complete
+  all-features workspace wall, strict Clippy, formatting, fresh installed
+  binary journeys, and recursive legacy/bridge/identity absence scans pass; and
+- HCM-2.3 defines no typed pre-establishment `--json` error envelope, so plain
+  stderr with empty stdout remains unchanged and any published protocol stays
+  deferred to Phase 4 authority.
+
+The compact command/result mapping is
+`slices/HCM-2.4/proof/implementation/20260731-post-phase-2-smoke-repair-proof.md`.
+Proof-stage dispatch
+`handoffs/dispatches/20260731T232558Z--HCM-2-4--post-phase-2-smoke-repair-proof-gap-review.json`
+returned CLEAN with no P3/P4. CLEAN in different-fresh final dispatch
+`handoffs/dispatches/20260731T235300Z--HCM-2-4--post-phase-2-smoke-repair-final-complete-subject-review.json`
+accepts this correction only; FINDINGS or BLOCKED leaves it incomplete. No
+HCM-3.x, JSON protocol, SDK/transport, native-adapter, release, publication, or
+push authority is created.
+
 ## Control-pack orchestration-repair proof gate
 
 The immutable HCM-0.1 history remains evidence of the prior workflow and is not rewritten. At corrective slice HCM-0.8's completed closeout, the following conditions had to hold; the later HCM-0.6 decision resolves the shipped-default item that was intentionally open at that boundary:
