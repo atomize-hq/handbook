@@ -1,0 +1,570 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required",
+  "created_at_utc": "2026-08-02T01:26:13Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-P1-planning-selector",
+  "orchestration_id": "20260801T202515Z--HCM-3-2--context-resolution-kernel",
+  "source_handoff_ids": [
+    "20260801T213000Z--HCM-3-2--orchestration--context-resolution-authority-required"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fbfc9-408e-7662-b4f8-3fd0b6a5776b"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-02T01:24:00Z",
+    "evidence_ref": "fresh built-in agents executed the implementation-stage discovery/closure and proof-stage authority-stop review"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm32_planning_review",
+      "dispatch_id": "20260801T202751Z--HCM-3-2--context-resolution-planning-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T202751Z--HCM-3-2--context-resolution-planning-review.json",
+      "dispatch_fingerprint": "sha256:08d409074227ea8e4b70141d7b9352cfe7f8ef7378680bf30424f1560d394d66",
+      "role": "review",
+      "agent_id": "/root/hcm32_planning_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:184c9746e080fa09498ce3700e9354a9895f8eaf00abd4bfd587c3664b4f915d",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM32-PLN-DISC-001",
+        "HCM32-PLN-DISC-002",
+        "HCM32-PLN-DISC-003",
+        "HCM32-PLN-DISC-004"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md"
+      ],
+      "result_subject_fingerprint": "sha256:184c9746e080fa09498ce3700e9354a9895f8eaf00abd4bfd587c3664b4f915d"
+    },
+    {
+      "run_id": "hcm32_authority_stop_closure",
+      "dispatch_id": "20260801T211000Z--HCM-3-2--context-resolution-planning-authority-stop-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T211000Z--HCM-3-2--context-resolution-planning-authority-stop-closure.json",
+      "dispatch_fingerprint": "sha256:cfdf94dc4c8d7e081f2f1f1fa54410685f2b34cf1fbb7f00d0f49ff2c3914a43",
+      "role": "review",
+      "agent_id": "/root/hcm32_authority_stop_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b",
+      "review_round": 2,
+      "predecessor_run_id": "hcm32_planning_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md"
+      ],
+      "result_subject_fingerprint": "sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b"
+    },
+    {
+      "run_id": "hcm32_selector_admission_review",
+      "dispatch_id": "20260802T002238Z--HCM-3-2--context-resolution-selector-admission-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T002238Z--HCM-3-2--context-resolution-selector-admission-review.json",
+      "dispatch_fingerprint": "sha256:c6706bb9c34ab46b35a3ba926ccace37462b9d9894488db8d5a2c40f06b87f83",
+      "role": "review",
+      "agent_id": "/root/hcm32_selector_admission_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:62193f0c324bd89d46a286e5af17fb66a311fc340c97a9d9fbecb98fc98c8848",
+      "review_round": 3,
+      "predecessor_run_id": "hcm32_authority_stop_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM32-SEL-DISC-001",
+        "HCM32-SEL-DISC-002",
+        "HCM32-SEL-DISC-003",
+        "HCM32-SEL-DISC-004",
+        "HCM32-SEL-DISC-005"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md"
+      ],
+      "result_subject_fingerprint": "sha256:62193f0c324bd89d46a286e5af17fb66a311fc340c97a9d9fbecb98fc98c8848"
+    },
+    {
+      "run_id": "hcm32_selector_admission_closure",
+      "dispatch_id": "20260802T003415Z--HCM-3-2--context-resolution-selector-admission-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T003415Z--HCM-3-2--context-resolution-selector-admission-closure.json",
+      "dispatch_fingerprint": "sha256:dfc3e5321cdaf51e12bcd7668f4c08981f3ea291c7ef95124df1eff0f2ced25b",
+      "role": "review",
+      "agent_id": "/root/hcm32_selector_admission_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:0e75c01e91939c669a8a8588e16804929820462badf37a7c384ff29abb9a3a63",
+      "review_round": 4,
+      "predecessor_run_id": "hcm32_selector_admission_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md"
+      ],
+      "result_subject_fingerprint": "sha256:0e75c01e91939c669a8a8588e16804929820462badf37a7c384ff29abb9a3a63"
+    },
+    {
+      "run_id": "hcm32_authority_stop_proof_review",
+      "dispatch_id": "20260802T011908Z--HCM-3-2--authority-lineage-composition-stop-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T011908Z--HCM-3-2--authority-lineage-composition-stop-review.json",
+      "dispatch_fingerprint": "sha256:6f309f133ec3f8e24a4910d763369a730cf067617a2beada2c556a683adc559c",
+      "role": "review",
+      "agent_id": "/root/hcm32_authority_stop_proof_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "security-and-hardening",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:6aa817425949ac1cf0515547d4a105d75cf3f50fda95c267a4fb336d073132ac",
+      "review_round": 5,
+      "predecessor_run_id": "hcm32_selector_admission_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md"
+      ],
+      "result_subject_fingerprint": "sha256:6aa817425949ac1cf0515547d4a105d75cf3f50fda95c267a4fb336d073132ac"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-02T01:26:13Z",
+    "dispatch_count": 5,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:9e317280367a3668c484802c4cbc0e4e090faad692692e8327a40c11b73346ae"
+    ],
+    "aggregate_fingerprint": "sha256:3fea1b8b2212916ae1aaa9a3cb249a04e85875365a9b7b2f2da640a441fd8a90"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3.2-planning-authority-stop-consolidation",
+      "finding_run_id": "hcm32_planning_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm32_authority_stop_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:35160861f785b57f5539be5c6581517e58814a6fc27429a857c8bec8d79ba87b",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md"
+      ]
+    },
+    {
+      "remediation_id": "hcm-3.2-selector-admission-consolidation",
+      "finding_run_id": "hcm32_selector_admission_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm32_selector_admission_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:0e75c01e91939c669a8a8588e16804929820462badf37a7c384ff29abb9a3a63",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "f4e06b146fc803f45d7e0e4c2b3f9b4f7b88d3d8",
+    "subject_fingerprint": "sha256:6aa817425949ac1cf0515547d4a105d75cf3f50fda95c267a4fb336d073132ac",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T011908Z--HCM-3-2--authority-lineage-composition-stop-review.json"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 authority-lineage composition stop",
+    "scope_horizon": "reviewed Option 2 selector and exact real-path failure at the committed-registry/generic-lineage seam",
+    "detail_resolution": "transaction-family inventory and journal-authority ownership, fourth-path requirement, additional CRITICAL impact, and safe product-clean stop",
+    "temporal_horizon": "after CLEAN selector closure and CLEAN proof-stage stop review; before product implementation or lineage-store repair",
+    "authority_horizon": "same HCM-3.2 resumption only; fourth production path and additional CRITICAL edit require new reviewed product/lineage-owner authority",
+    "memory_horizon": "immutable predecessor, five-dispatch population, reviewed seven-file stop subject, primary commit, and exact task identity",
+    "validation_horizon": "resume only after authority amends the selector and a fresh independent closure is CLEAN"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Resume exactly HCM-3.2 under Option 2, close its selector admission, and stop durably when mandatory real-path proof shows the selected committed-registry and generic-lineage primitives cannot coexist inside the reviewed path/risk ceiling.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": [
+        "Authority-binding and admission selector",
+        "Exact ceilings",
+        "Test selector",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md",
+      "sections": [
+        "Root cause",
+        "Impact and authority boundary",
+        "Safe-stop disposition",
+        "Exact resumption condition"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached",
+    "head": "f4e06b146fc803f45d7e0e4c2b3f9b4f7b88d3d8",
+    "dirty": false,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T002238Z--HCM-3-2--context-resolution-selector-admission-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T003415Z--HCM-3-2--context-resolution-selector-admission-closure.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T011908Z--HCM-3-2--authority-lineage-composition-stop-review.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md"
+    ]
+  },
+  "work_completed": [
+    "Revalidated the assigned checkout, base/tree/ancestry/integration ref/remote baseline and protected-path baselines before editing.",
+    "Consumed the exact Option 2 resumption authority and obtained CLEAN selector-admission closure after one five-finding consolidation.",
+    "Built focused RED for configurable stacks, envelopes, all eleven authority uses, native assertions, replay, currentness, and typed transitions.",
+    "Proved the selected committed-registry and generic-lineage primitives refuse composition before authority lookup.",
+    "Ran GitNexus impact and stopped because repair requires artifact_lineage_store.rs and an additional CRITICAL symbol outside reviewed authority.",
+    "Removed all unreviewed partial product/test code and obtained a fresh CLEAN proof-stage review of the exact product-clean authority stop.",
+    "Committed the reviewed safe selector/evidence state as primary commit f4e06b146fc803f45d7e0e4c2b3f9b4f7b88d3d8."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "status": "partial",
+      "summary": "Independently CLEAN Option 2 selector with exact admission, API, proof, path, declaration, line, and risk ceilings."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md",
+      "status": "completed",
+      "summary": "Exact real-path failure, code ownership conflict, impact, safe-stop disposition, and resumption authority boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required.json",
+      "status": "completed",
+      "summary": "v1.4 escalation-required same-slice true-stop handoff."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.2-AUTHORITY-LINEAGE-STOP-001",
+      "summary": "Do not bypass generic recovery or edit its global transaction inventory under the three-path selector; preserve a product-clean stop and request explicit lineage-owner/product authority.",
+      "authority_effect": "Stops HCM-3.2 incomplete with one P1 blocker and grants no fourth path, additional CRITICAL edit, later slice, publication, or push authority.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T011908Z--HCM-3-2--authority-lineage-composition-stop-review.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM32-PLN-DISC-001",
+      "classification": "resolution_escalation",
+      "severity": "critical",
+      "priority": "P1",
+      "status": "resolved",
+      "source_run_id": "hcm32_planning_review",
+      "summary": "Option 2 supplied the previously missing admission authority.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-PLN-DISC-002",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "resolved",
+      "source_run_id": "hcm32_planning_review",
+      "summary": "Candidate mappings are frozen exactly.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-PLN-DISC-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_planning_review",
+      "summary": "Positive-language containment and accumulating deny semantics remain frozen.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-PLN-DISC-004",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "resolved",
+      "source_run_id": "hcm32_planning_review",
+      "summary": "Callable signatures and counting are frozen.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-SEL-DISC-001",
+      "classification": "local_remediation",
+      "severity": "critical",
+      "priority": "P1",
+      "status": "remediated",
+      "source_run_id": "hcm32_selector_admission_review",
+      "summary": "Fresh nonce and cross-resolver replay semantics close captured assertion reuse.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-SEL-DISC-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_selector_admission_review",
+      "summary": "Promotion consumes actual envelope/stack and typed semantic memory.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-SEL-DISC-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_selector_admission_review",
+      "summary": "All eleven authority uses bind exact non-reusable subjects.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-SEL-DISC-004",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_selector_admission_review",
+      "summary": "SPEC and selector agree on the exact 24 exports.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-SEL-DISC-005",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_selector_admission_review",
+      "summary": "The real-path positive/negative admission proof matrix is explicit.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-3.2-AUTHORITY-LINEAGE-COMPOSITION",
+      "classification": "authority",
+      "summary": "The selected resolver must compose committed approver authority with generic artifact recovery, but their live transaction-family contracts reject one another.",
+      "resume_condition": "Provide reviewed product and lineage-owner authority for a bounded artifact_lineage_store.rs repair with explicit additional CRITICAL acceptance and amended ceilings, or identify an existing contract-satisfying recovery seam.",
+      "owner": "Handbook product/contract authority and generic-lineage owner"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-3.2-AUTHORITY-LINEAGE-COMPOSITION",
+      "trigger": "Mandatory real-path proof failed before authority lookup because generic inventory rejects the committed registry transaction family; live impact marks validate_inventory CRITICAL.",
+      "current_resolution": "Independently CLEAN HCM-3.2 Option 2 selector and product-clean reviewed authority-stop evidence.",
+      "target_resolution": "A reviewed implementable selector whose recovery/currentness seam composes committed registry and generic artifact ownership without bypass.",
+      "decision_required": "Authorize and bound a lineage-store composition repair, including fourth-path and additional CRITICAL risk, or name an existing safe seam satisfying both owners.",
+      "options": [
+        "Authorize a narrowly scoped generic-lineage inventory/journal family repair with full regression proof and amended ceilings.",
+        "Select an existing safe committed-read seam that preserves generic recovery and registry currentness without editing lineage ownership."
+      ],
+      "recommendation": "Prefer a lineage-owner-reviewed scoped composition repair because independent review found no existing compatible seam.",
+      "affected_refs": [
+        "crates/engine/src/artifact_lineage_store.rs",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "Amend the same HCM-3.2 selector under exact reviewed authority and obtain a fresh independent CLEAN closure before RED/Rust; do not reset lineage or budget."
+    }
+  ],
+  "validation": [
+    {
+      "command": "validate_handoffs.py --verify-dispatch <closure and proof-stop dispatches>",
+      "status": "passed",
+      "evidence_ref": "selector closure replayed sha256:0e75c01e... and proof-stop review replayed sha256:6aa81742..."
+    },
+    {
+      "command": "cargo check -p handbook-engine",
+      "status": "passed",
+      "evidence_ref": "safe product-clean primary state compiles"
+    },
+    {
+      "command": "two focused context_resolution_kernel real-path tests",
+      "status": "failed",
+      "evidence_ref": "both failed with generic artifact recovery refused authority admission; exact commands and test-source digest are in the stop proof"
+    },
+    {
+      "command": "GitNexus impact validate_inventory and require_journal_authority",
+      "status": "passed",
+      "evidence_ref": "CRITICAL 30/8/6/3 and LOW 9/1/1 respectively; FTS unavailable"
+    },
+    {
+      "command": "GitNexus detect-changes --scope all",
+      "status": "passed",
+      "evidence_ref": "4 tracked control files, 30 documentation symbols, 0 affected processes, LOW risk before primary commit"
+    },
+    {
+      "command": "GitNexus detect-changes --scope compare --base-ref main",
+      "status": "passed",
+      "evidence_ref": "available; reports the branch's pre-existing 1288-file/9422-symbol CRITICAL delta, not a GREEN slice comparison"
+    },
+    {
+      "command": "git diff --check and exact product-path audit",
+      "status": "passed",
+      "evidence_ref": "primary commit contains nine HCM-3.2 control/proof paths and no product/test/dependency/shipped-definition/profile/pipeline path"
+    }
+  ],
+  "pack_updates": [],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Resume exactly the existing HCM-3.2 parent after reviewed lineage-composition authority is supplied.",
+    "condition": "A reviewed authority ref either admits a bounded artifact_lineage_store.rs repair with additional CRITICAL acceptance and amended ceilings or identifies an existing seam satisfying both committed-registry and generic-recovery contracts.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md",
+        "sections": [
+          "Root cause",
+          "Impact and authority boundary",
+          "Exact resumption condition"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T011908Z--HCM-3-2--authority-lineage-composition-stop-review.json",
+        "sections": [
+          "causal_control",
+          "subject_manifest",
+          "contracts_and_gates"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Amend the same HCM-3.2 selector under the exact new lineage-owner/product authority.",
+      "Obtain fresh independent selector closure and resume the same outcome/packets/budget.",
+      "Implement only the newly bounded recovery composition plus the already selected HCM-3.2 kernel and proportional proof wall."
+    ],
+    "prohibited_scope": [
+      "Renaming/resetting the parent, outcome, packets, selector, findings, or causal budget",
+      "Unreviewed artifact_lineage_store.rs or additional HIGH/CRITICAL edits",
+      "HCM-3.3+, generic framework/schema catalog, dependency, unsafe/native/transport, shipped identity mutation, remote publication, or push"
+    ],
+    "acceptance_criteria": [
+      "Exact authority names the repair path, owner semantics, callable surface, symbol/path ceilings, and accepted additional risk.",
+      "Fresh selector closure is CLEAN before RED/Rust.",
+      "Real committed-registry plus generic-recovery positive/negative proof passes without bypass.",
+      "No unresolved P1/P2 remains before completed closeout."
+    ],
+    "stop_conditions": [
+      "Stop if authority does not cover the fourth path and additional CRITICAL symbol.",
+      "Stop if no fail-closed composition can preserve both owner contracts.",
+      "Stop on any HCM-3.3+, dependency, public, platform, transport, or shipped-identity expansion."
+    ]
+  },
+  "supersedes": [
+    "20260801T213000Z--HCM-3-2--orchestration--context-resolution-authority-required"
+  ],
+  "chat_summary": "HCM-3.2 Option 2 selector closed CLEAN, but real-path proof showed committed approver-registry transactions and generic artifact recovery reject one another. Repair needs an unauthorized fourth path and additional CRITICAL edit. Partial Rust was removed; primary f4e06b1 preserves the reviewed product-clean stop."
+}
