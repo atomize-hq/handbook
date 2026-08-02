@@ -1,0 +1,982 @@
+{
+    "schema_id": "handbook.session-handoff",
+    "schema_version": "1.4",
+    "handoff_id": "20260802T161500Z--HCM-0-8--orchestration--post-clean-authority-continuation-completed",
+    "created_at_utc": "2026-08-02T16:15:00Z",
+    "program_id": "handbook-contract-membrane",
+    "phase_id": "HCM-0",
+    "slice_id": "HCM-0.8",
+    "packet_id": "HCM-0.8-P3-authority-continuation-proof-closeout",
+    "orchestration_id": "20260802T025200Z--HCM-0-8--post-clean-authority-continuation",
+    "source_handoff_ids": [],
+    "session": {
+        "kind": "orchestration",
+        "agent": "codex",
+        "thread_ref": "019fc055-5272-7a73-8818-70ff752786c4"
+    },
+    "status": "completed",
+    "stop_reason": "completed",
+    "delegation_capability": {
+        "status": "available",
+        "checked_at_utc": "2026-08-02T16:00:00Z",
+        "evidence_ref": "fresh built-in v1.4 review/remediation/closure runs completed"
+    },
+    "delegated_runs": [
+        {
+            "run_id": "hcm08_authority_continuation_planning_review",
+            "dispatch_id": "20260802T025342Z--HCM-0-8--post-clean-authority-continuation-planning-review",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T025342Z--HCM-0-8--post-clean-authority-continuation-planning-review.json",
+            "dispatch_fingerprint": "sha256:8f49db89f77e28465eb6b58fc4c3dff26f3bfc54ec8421e41abe9b778dca0991",
+            "role": "review",
+            "agent_id": "/root/hcm08_authority_continuation_planning_review",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "spec-driven-development",
+                "planning-and-task-breakdown",
+                "doubt-driven-development",
+                "documentation-and-ADRs",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "code-review-and-quality"
+            ],
+            "subject_fingerprint": "sha256:2eddbc1215508f4ca60aaf09b771e72ede7e9d3b6fb1bfc1649c94706adab38c",
+            "review_round": 1,
+            "predecessor_run_id": null,
+            "remediation_for_run_ids": [],
+            "final_status": "completed",
+            "verdict": "findings",
+            "finding_refs": [
+                "HCM08-PLN-DISC-001",
+                "HCM08-PLN-DISC-002",
+                "HCM08-PLN-DISC-003",
+                "HCM08-PLN-DISC-004",
+                "HCM08-PLN-DISC-005"
+            ],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T025342Z--HCM-0-8--post-clean-authority-continuation-planning-review.json"
+            ],
+            "result_subject_fingerprint": "sha256:2eddbc1215508f4ca60aaf09b771e72ede7e9d3b6fb1bfc1649c94706adab38c"
+        },
+        {
+            "run_id": "hcm08_authority_continuation_planning_closure",
+            "dispatch_id": "20260802T031200Z--HCM-0-8--post-clean-authority-continuation-planning-closure",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T031200Z--HCM-0-8--post-clean-authority-continuation-planning-closure.json",
+            "dispatch_fingerprint": "sha256:dd9aece5a891ea0a55f54fbf57716da894cf99429cbc8b26297dd70f7225f1d1",
+            "role": "review",
+            "agent_id": "/root/hcm08_authority_continuation_planning_closure",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "spec-driven-development",
+                "planning-and-task-breakdown",
+                "doubt-driven-development",
+                "documentation-and-ADRs",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "code-review-and-quality"
+            ],
+            "subject_fingerprint": "sha256:18153f5f786ea304d8e4a022a07d501783a16acdec5953111572df54cfa1ea03",
+            "review_round": 2,
+            "predecessor_run_id": "hcm08_authority_continuation_planning_review",
+            "remediation_for_run_ids": [],
+            "final_status": "completed",
+            "verdict": "findings",
+            "finding_refs": [],
+            "carried_finding_refs": [
+                "HCM08-PLN-DISC-001"
+            ],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T031200Z--HCM-0-8--post-clean-authority-continuation-planning-closure.json"
+            ],
+            "result_subject_fingerprint": "sha256:18153f5f786ea304d8e4a022a07d501783a16acdec5953111572df54cfa1ea03"
+        },
+        {
+            "run_id": "hcm08_authority_continuation_planning_supplemental",
+            "dispatch_id": "20260802T033100Z--HCM-0-8--post-clean-authority-continuation-planning-supplemental",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T033100Z--HCM-0-8--post-clean-authority-continuation-planning-supplemental.json",
+            "dispatch_fingerprint": "sha256:ae6dc0e8453dbcb1d5c87e48eea07f98cfd7d42bcbf4fbec2033bbc172773584",
+            "role": "review",
+            "agent_id": "/root/hcm08_authority_continuation_planning_supplemental",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "spec-driven-development",
+                "planning-and-task-breakdown",
+                "doubt-driven-development",
+                "documentation-and-ADRs",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "code-review-and-quality"
+            ],
+            "subject_fingerprint": "sha256:60d673b19db96cbb3cd16405e603cc5e529cfea3200a64195373385008fdc4d8",
+            "review_round": 3,
+            "predecessor_run_id": "hcm08_authority_continuation_planning_closure",
+            "remediation_for_run_ids": [],
+            "final_status": "completed",
+            "verdict": "clean",
+            "finding_refs": [],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T033100Z--HCM-0-8--post-clean-authority-continuation-planning-supplemental.json"
+            ],
+            "result_subject_fingerprint": "sha256:60d673b19db96cbb3cd16405e603cc5e529cfea3200a64195373385008fdc4d8"
+        },
+        {
+            "run_id": "hcm08_authority_continuation_implementation",
+            "dispatch_id": "20260802T034300Z--HCM-0-8--post-clean-authority-continuation-implementation",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T034300Z--HCM-0-8--post-clean-authority-continuation-implementation.json",
+            "dispatch_fingerprint": "sha256:1f8d1d9006c744e97d58383d2d700674c89559f51dc99a0b6427ed306bbe38ea",
+            "role": "implementation",
+            "agent_id": "/root/hcm08_authority_continuation_implementation",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "source-driven-development",
+                "spec-driven-development",
+                "incremental-implementation",
+                "test-driven-development",
+                "debugging-and-error-recovery",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "documentation-and-ADRs",
+                "git-workflow-and-versioning"
+            ],
+            "subject_fingerprint": "sha256:60d673b19db96cbb3cd16405e603cc5e529cfea3200a64195373385008fdc4d8",
+            "review_round": 4,
+            "predecessor_run_id": "hcm08_authority_continuation_planning_supplemental",
+            "remediation_for_run_ids": [],
+            "final_status": "blocked",
+            "verdict": "blocked",
+            "finding_refs": [],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T034300Z--HCM-0-8--post-clean-authority-continuation-implementation.json"
+            ],
+            "result_subject_fingerprint": "sha256:1ee91ab28d488029e6ebae5fab0d9d2b0de0c0d034961864d009577d9c612556"
+        },
+        {
+            "run_id": "hcm08_authority_continuation_implementation_discovery",
+            "dispatch_id": "20260802T041400Z--HCM-0-8--authority-continuation-implementation-discovery",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T041400Z--HCM-0-8--authority-continuation-implementation-discovery.json",
+            "dispatch_fingerprint": "sha256:84d42cb8d1f45979286b5d7d4af73765fc5236827c118d0206267fd8f353136a",
+            "role": "review",
+            "agent_id": "/root/hcm08_authority_continuation_implementation_discovery",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "spec-driven-development",
+                "doubt-driven-development",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "test-driven-development",
+                "code-review-and-quality"
+            ],
+            "subject_fingerprint": "sha256:1ee91ab28d488029e6ebae5fab0d9d2b0de0c0d034961864d009577d9c612556",
+            "review_round": 5,
+            "predecessor_run_id": "hcm08_authority_continuation_implementation",
+            "remediation_for_run_ids": [],
+            "final_status": "completed",
+            "verdict": "findings",
+            "finding_refs": [
+                "HCM08-DISC-P1-001",
+                "HCM08-DISC-P1-002",
+                "HCM08-DISC-P2-003"
+            ],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T041400Z--HCM-0-8--authority-continuation-implementation-discovery.json"
+            ],
+            "result_subject_fingerprint": "sha256:1ee91ab28d488029e6ebae5fab0d9d2b0de0c0d034961864d009577d9c612556"
+        },
+        {
+            "run_id": "hcm08_authority_continuation_implementation_remediation",
+            "dispatch_id": "20260802T043500Z--HCM-0-8--authority-continuation-implementation-remediation",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T043500Z--HCM-0-8--authority-continuation-implementation-remediation.json",
+            "dispatch_fingerprint": "sha256:c8a6a17ba03d4bb7b07b7cf8f3b5b5b25ff85f12d96155f5222294c194f36592",
+            "role": "remediation",
+            "agent_id": "/root/hcm08_authority_continuation_implementation_remediation",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "source-driven-development",
+                "spec-driven-development",
+                "incremental-implementation",
+                "test-driven-development",
+                "debugging-and-error-recovery",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "documentation-and-ADRs"
+            ],
+            "subject_fingerprint": "sha256:b680bcf4779975b11b9f4e6d58b1c0099f7babb1442ff8837f79fc3fd0744f88",
+            "review_round": 6,
+            "predecessor_run_id": "hcm08_authority_continuation_implementation_discovery",
+            "remediation_for_run_ids": [
+                "hcm08_authority_continuation_implementation_discovery"
+            ],
+            "final_status": "completed",
+            "verdict": "not_applicable",
+            "finding_refs": [],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T043500Z--HCM-0-8--authority-continuation-implementation-remediation.json"
+            ],
+            "result_subject_fingerprint": "sha256:abf6ddc159be376930a373f9d4862481bbc82108b5eb9f63fe7087ddbf0310bd"
+        },
+        {
+            "run_id": "hcm08_authority_continuation_final_review",
+            "dispatch_id": "20260802T051500Z--HCM-0-8--authority-continuation-final-aggregate-review",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T051500Z--HCM-0-8--authority-continuation-final-aggregate-review.json",
+            "dispatch_fingerprint": "sha256:3fa52bf11c81d1451489d5d11b7388e88be2e58e352cefbf3f5779b6cc64205e",
+            "role": "review",
+            "agent_id": "/root/hcm08_authority_continuation_final_review",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "spec-driven-development",
+                "doubt-driven-development",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "test-driven-development",
+                "code-review-and-quality",
+                "git-workflow-and-versioning"
+            ],
+            "subject_fingerprint": "sha256:abf6ddc159be376930a373f9d4862481bbc82108b5eb9f63fe7087ddbf0310bd",
+            "review_round": 7,
+            "predecessor_run_id": "hcm08_authority_continuation_implementation_remediation",
+            "remediation_for_run_ids": [],
+            "final_status": "completed",
+            "verdict": "findings",
+            "finding_refs": [
+                "HCM08-FINAL-P1-004"
+            ],
+            "carried_finding_refs": [
+                "HCM08-DISC-P2-003"
+            ],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T051500Z--HCM-0-8--authority-continuation-final-aggregate-review.json"
+            ],
+            "result_subject_fingerprint": "sha256:abf6ddc159be376930a373f9d4862481bbc82108b5eb9f63fe7087ddbf0310bd"
+        },
+        {
+            "run_id": "hcm08_authority_continuation_final_review_remediation",
+            "dispatch_id": "20260802T055000Z--HCM-0-8--authority-continuation-final-review-remediation",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T055000Z--HCM-0-8--authority-continuation-final-review-remediation.json",
+            "dispatch_fingerprint": "sha256:e39e5723a4d76b7a7b2ef8a0c0d140a8db8153cd065c5e447469f8b153fc6339",
+            "role": "remediation",
+            "agent_id": "/root/hcm08_authority_continuation_final_review_remediation",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "source-driven-development",
+                "spec-driven-development",
+                "incremental-implementation",
+                "test-driven-development",
+                "debugging-and-error-recovery",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "documentation-and-ADRs"
+            ],
+            "subject_fingerprint": "sha256:57695e2a3e22cbf00425a2a0dfb44a0f514c718d156eebef1e81579f8d80234e",
+            "review_round": 8,
+            "predecessor_run_id": "hcm08_authority_continuation_final_review",
+            "remediation_for_run_ids": [
+                "hcm08_authority_continuation_final_review"
+            ],
+            "final_status": "completed",
+            "verdict": "not_applicable",
+            "finding_refs": [],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T055000Z--HCM-0-8--authority-continuation-final-review-remediation.json"
+            ],
+            "result_subject_fingerprint": "sha256:65f75e1a430257cb2148a2dd6a0ce73a22cc075bcb7414427b20685966f877d7"
+        },
+        {
+            "run_id": "hcm08_authority_continuation_final_supplemental",
+            "dispatch_id": "20260802T060000Z--HCM-0-8--authority-continuation-final-aggregate-supplemental",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T060000Z--HCM-0-8--authority-continuation-final-aggregate-supplemental.json",
+            "dispatch_fingerprint": "sha256:5a99c2576465c7e5c2e776dc69e94ab5d9806d89e2fe57afa2843f450727b8cc",
+            "role": "review",
+            "agent_id": "/root/hcm08_authority_continuation_final_supplemental",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "spec-driven-development",
+                "doubt-driven-development",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "test-driven-development",
+                "code-review-and-quality",
+                "git-workflow-and-versioning"
+            ],
+            "subject_fingerprint": "sha256:65f75e1a430257cb2148a2dd6a0ce73a22cc075bcb7414427b20685966f877d7",
+            "review_round": 9,
+            "predecessor_run_id": "hcm08_authority_continuation_final_review_remediation",
+            "remediation_for_run_ids": [],
+            "final_status": "completed",
+            "verdict": "clean",
+            "finding_refs": [],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T060000Z--HCM-0-8--authority-continuation-final-aggregate-supplemental.json"
+            ],
+            "result_subject_fingerprint": "sha256:65f75e1a430257cb2148a2dd6a0ce73a22cc075bcb7414427b20685966f877d7"
+        },
+        {
+            "run_id": "hcm08_retained_lineage_proof_review",
+            "dispatch_id": "20260802T150200Z--HCM-0-8--retained-finding-lineage-proof-review",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T150200Z--HCM-0-8--retained-finding-lineage-proof-review.json",
+            "dispatch_fingerprint": "sha256:9664ddd1a906f5b03d9a7020af26f4ba363718ac4c7b1d3602ecddaf61093659",
+            "role": "review",
+            "agent_id": "/root/hcm08_retained_lineage_proof_review",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "spec-driven-development",
+                "doubt-driven-development",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "test-driven-development",
+                "code-review-and-quality",
+                "git-workflow-and-versioning"
+            ],
+            "subject_fingerprint": "sha256:a102484dee8562a2f112969b3e3fd5564e981fc92b52144f5bf94390819d25a7",
+            "review_round": 10,
+            "predecessor_run_id": "hcm08_authority_continuation_final_supplemental",
+            "remediation_for_run_ids": [],
+            "final_status": "completed",
+            "verdict": "findings",
+            "finding_refs": [
+                "HCM08-RETAIN-P2-001"
+            ],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T150200Z--HCM-0-8--retained-finding-lineage-proof-review.json"
+            ],
+            "result_subject_fingerprint": "sha256:a102484dee8562a2f112969b3e3fd5564e981fc92b52144f5bf94390819d25a7"
+        },
+        {
+            "run_id": "hcm08_retained_lineage_remediation",
+            "dispatch_id": "20260802T151500Z--HCM-0-8--retained-finding-lineage-proof-remediation",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T151500Z--HCM-0-8--retained-finding-lineage-proof-remediation.json",
+            "dispatch_fingerprint": "sha256:263e950ebdc76a9e6eba871ed243bb63a50a1751db44c49587b054fa58afd1a7",
+            "role": "remediation",
+            "agent_id": "/root/hcm08_retained_lineage_remediation",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "source-driven-development",
+                "spec-driven-development",
+                "incremental-implementation",
+                "test-driven-development",
+                "debugging-and-error-recovery",
+                "api-and-interface-design",
+                "security-and-hardening"
+            ],
+            "subject_fingerprint": "sha256:2ff3b7768d4bc60682b7d2170268c13a6ae7b309e2cc4743b6cd96e563e0ea67",
+            "review_round": 11,
+            "predecessor_run_id": "hcm08_retained_lineage_proof_review",
+            "remediation_for_run_ids": [
+                "hcm08_retained_lineage_proof_review"
+            ],
+            "final_status": "completed",
+            "verdict": "not_applicable",
+            "finding_refs": [],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T151500Z--HCM-0-8--retained-finding-lineage-proof-remediation.json"
+            ],
+            "result_subject_fingerprint": "sha256:36489f842dfb401efede63067e0edcecfea17d9038fc5ba4f0beca5dceb3d164"
+        },
+        {
+            "run_id": "hcm08_retained_lineage_proof_closure",
+            "dispatch_id": "20260802T153000Z--HCM-0-8--retained-finding-lineage-proof-closure",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T153000Z--HCM-0-8--retained-finding-lineage-proof-closure.json",
+            "dispatch_fingerprint": "sha256:843a88be6d0e22b89eaede7ed55750355ef30bbb0d54f85ced4d52f37457dd1e",
+            "role": "review",
+            "agent_id": "/root/hcm08_retained_lineage_proof_closure",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "spec-driven-development",
+                "doubt-driven-development",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "test-driven-development",
+                "code-review-and-quality",
+                "git-workflow-and-versioning"
+            ],
+            "subject_fingerprint": "sha256:36489f842dfb401efede63067e0edcecfea17d9038fc5ba4f0beca5dceb3d164",
+            "review_round": 12,
+            "predecessor_run_id": "hcm08_retained_lineage_remediation",
+            "remediation_for_run_ids": [],
+            "final_status": "completed",
+            "verdict": "findings",
+            "finding_refs": [
+                "HCM08-RETAIN-CLOSE-P2-001"
+            ],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T153000Z--HCM-0-8--retained-finding-lineage-proof-closure.json"
+            ],
+            "result_subject_fingerprint": "sha256:36489f842dfb401efede63067e0edcecfea17d9038fc5ba4f0beca5dceb3d164"
+        },
+        {
+            "run_id": "hcm08_retained_lineage_test_remediation",
+            "dispatch_id": "20260802T154500Z--HCM-0-8--retained-finding-lineage-proof-supplemental-remediation",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T154500Z--HCM-0-8--retained-finding-lineage-proof-supplemental-remediation.json",
+            "dispatch_fingerprint": "sha256:f9ab742243aa9df84b6007e2b81f29ef7f07919c4f07744c88ef073a8e239950",
+            "role": "remediation",
+            "agent_id": "/root/hcm08_retained_lineage_test_remediation",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "source-driven-development",
+                "spec-driven-development",
+                "incremental-implementation",
+                "test-driven-development",
+                "debugging-and-error-recovery",
+                "code-review-and-quality"
+            ],
+            "subject_fingerprint": "sha256:dd636ea8c4a6f8bbcc8717bcdbbbf47e1c9348aba726d423a272a86ad65552dd",
+            "review_round": 13,
+            "predecessor_run_id": "hcm08_retained_lineage_proof_closure",
+            "remediation_for_run_ids": [
+                "hcm08_retained_lineage_proof_closure"
+            ],
+            "final_status": "completed",
+            "verdict": "not_applicable",
+            "finding_refs": [],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T154500Z--HCM-0-8--retained-finding-lineage-proof-supplemental-remediation.json"
+            ],
+            "result_subject_fingerprint": "sha256:1034801c64bab2deafabcf9ed4c3acc72c54bd8c064c1ae1641936718e92c1eb"
+        },
+        {
+            "run_id": "hcm08_retained_lineage_final_supplemental",
+            "dispatch_id": "20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental",
+            "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json",
+            "dispatch_fingerprint": "sha256:508d36fb5e417dd7cc2806b5989c63516843c25d7f5b38516c86ed986799d4f9",
+            "role": "review",
+            "agent_id": "/root/hcm08_retained_lineage_final_supplemental",
+            "agent_type": "default",
+            "fresh_context": true,
+            "required_skills": [
+                "using-agent-skills",
+                "context-engineering",
+                "spec-driven-development",
+                "doubt-driven-development",
+                "api-and-interface-design",
+                "security-and-hardening",
+                "test-driven-development",
+                "code-review-and-quality",
+                "git-workflow-and-versioning"
+            ],
+            "subject_fingerprint": "sha256:1034801c64bab2deafabcf9ed4c3acc72c54bd8c064c1ae1641936718e92c1eb",
+            "review_round": 14,
+            "predecessor_run_id": "hcm08_retained_lineage_test_remediation",
+            "remediation_for_run_ids": [],
+            "final_status": "completed",
+            "verdict": "clean",
+            "finding_refs": [],
+            "carried_finding_refs": [],
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ],
+            "result_subject_fingerprint": "sha256:1034801c64bab2deafabcf9ed4c3acc72c54bd8c064c1ae1641936718e92c1eb"
+        }
+    ],
+    "dispatch_population": {
+        "scope": "parent_orchestration",
+        "through_created_at_utc": "2026-08-02T16:15:00Z",
+        "dispatch_count": 14,
+        "algorithm": "sha256",
+        "encoding": "dispatch-ref-null-sha256-newline-v1",
+        "causal_budget_ids": [
+            "sha256:2d3f1c349622262c2be6970135114c7738afa9ffda75ee9319ba67e93f4d1b93"
+        ],
+        "aggregate_fingerprint": "sha256:9a74e2ea79702ca455a9a7735f9cb82f7f224334ff7286c68cbbb2bb5dc32dc6"
+    },
+    "authority_continuations": [],
+    "ancillary_diff_observations": [],
+    "remediations": [
+        {
+            "remediation_id": "hcm-0-8-plan1",
+            "finding_run_id": "hcm08_authority_continuation_planning_review",
+            "owner": "parent_orchestrator",
+            "delegated_run_id": null,
+            "re_review_run_id": "hcm08_authority_continuation_planning_closure",
+            "status": "completed",
+            "result_subject_fingerprint": "sha256:18153f5f786ea304d8e4a022a07d501783a16acdec5953111572df54cfa1ea03",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T031200Z--HCM-0-8--post-clean-authority-continuation-planning-closure.json"
+            ]
+        },
+        {
+            "remediation_id": "hcm-0-8-plan2",
+            "finding_run_id": "hcm08_authority_continuation_planning_closure",
+            "owner": "parent_orchestrator",
+            "delegated_run_id": null,
+            "re_review_run_id": "hcm08_authority_continuation_planning_supplemental",
+            "status": "completed",
+            "result_subject_fingerprint": "sha256:60d673b19db96cbb3cd16405e603cc5e529cfea3200a64195373385008fdc4d8",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T033100Z--HCM-0-8--post-clean-authority-continuation-planning-supplemental.json"
+            ]
+        },
+        {
+            "remediation_id": "hcm-0-8-impl1",
+            "finding_run_id": "hcm08_authority_continuation_implementation_discovery",
+            "owner": "parent_orchestrator",
+            "delegated_run_id": null,
+            "re_review_run_id": "hcm08_authority_continuation_final_review",
+            "status": "completed",
+            "result_subject_fingerprint": "sha256:abf6ddc159be376930a373f9d4862481bbc82108b5eb9f63fe7087ddbf0310bd",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T051500Z--HCM-0-8--authority-continuation-final-aggregate-review.json"
+            ]
+        },
+        {
+            "remediation_id": "hcm-0-8-impl2",
+            "finding_run_id": "hcm08_authority_continuation_final_review",
+            "owner": "parent_orchestrator",
+            "delegated_run_id": null,
+            "re_review_run_id": "hcm08_authority_continuation_final_supplemental",
+            "status": "completed",
+            "result_subject_fingerprint": "sha256:65f75e1a430257cb2148a2dd6a0ce73a22cc075bcb7414427b20685966f877d7",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T060000Z--HCM-0-8--authority-continuation-final-aggregate-supplemental.json"
+            ]
+        },
+        {
+            "remediation_id": "hcm-0-8-proof1",
+            "finding_run_id": "hcm08_retained_lineage_proof_review",
+            "owner": "parent_orchestrator",
+            "delegated_run_id": null,
+            "re_review_run_id": "hcm08_retained_lineage_proof_closure",
+            "status": "completed",
+            "result_subject_fingerprint": "sha256:36489f842dfb401efede63067e0edcecfea17d9038fc5ba4f0beca5dceb3d164",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T153000Z--HCM-0-8--retained-finding-lineage-proof-closure.json"
+            ]
+        },
+        {
+            "remediation_id": "hcm-0-8-proof2",
+            "finding_run_id": "hcm08_retained_lineage_proof_closure",
+            "owner": "parent_orchestrator",
+            "delegated_run_id": null,
+            "re_review_run_id": "hcm08_retained_lineage_final_supplemental",
+            "status": "completed",
+            "result_subject_fingerprint": "sha256:1034801c64bab2deafabcf9ed4c3acc72c54bd8c064c1ae1641936718e92c1eb",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        }
+    ],
+    "reviewed_state": {
+        "baseline_head": "6bd2259516d2f6a8ce423b60b3b7479d7f264acf",
+        "subject_fingerprint": "sha256:1034801c64bab2deafabcf9ed4c3acc72c54bd8c064c1ae1641936718e92c1eb",
+        "proof_refs": [
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T150200Z--HCM-0-8--retained-finding-lineage-proof-review.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json",
+            "git:6bd2259516d2f6a8ce423b60b3b7479d7f264acf"
+        ],
+        "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+    },
+    "active_resolution": {
+        "level": "completed",
+        "scope_horizon": "bounded HCM-0.8 v1.4 control repair",
+        "detail_resolution": "typed authority continuation and retained finding lineage",
+        "temporal_horizon": "final supplemental CLEAN",
+        "authority_horizon": "local closeout only; HCM-3.2 product prohibited",
+        "memory_horizon": "14 dispatches and unique finding ownership",
+        "validation_horizon": "full validator, ledger, GitNexus, protected paths"
+    },
+    "snapshot_refs": {
+        "capture_status": "not_available",
+        "prior_end_snapshot_ref": null,
+        "session_start_snapshot_ref": null,
+        "grounding_delta_ref": null,
+        "grounding_projection_ref": null,
+        "session_end_snapshot_ref": null,
+        "session_delta_ref": null
+    },
+    "semantic_refs": {
+        "artifact_kind_refs": [],
+        "artifact_instance_refs": [],
+        "intake_definition_refs": [],
+        "intake_record_refs": [],
+        "artifact_candidate_refs": [],
+        "canonical_artifact_refs": [],
+        "posture_kernel_ref": null,
+        "posture_recommendation_refs": [],
+        "posture_transition_refs": [],
+        "default_set_decision_ref": null
+    },
+    "objective": "Complete the bounded HCM-0.8 post-CLEAN authority-continuation and retained-finding lineage control repair without HCM-3.2 product work.",
+    "authority_refs": [
+        {
+            "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md",
+            "sections": [
+                "Authority extension amendment"
+            ]
+        },
+        {
+            "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/authority/20260802-retained-finding-lineage-extension.json",
+            "sections": [
+                "complete JSON authority"
+            ]
+        },
+        {
+            "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json",
+            "sections": [
+                "review_cycle",
+                "subject_manifest",
+                "return_contract"
+            ]
+        }
+    ],
+    "repo_state": {
+        "branch": "detached",
+        "head": "6bd2259516d2f6a8ce423b60b3b7479d7f264acf",
+        "dirty": false,
+        "changed_paths": [
+            "docs/specs/handbook-contract-membrane/00-README.md",
+            "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+            "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+            "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+            "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+            "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+            "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T025342Z--HCM-0-8--post-clean-authority-continuation-planning-review.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T031200Z--HCM-0-8--post-clean-authority-continuation-planning-closure.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T033100Z--HCM-0-8--post-clean-authority-continuation-planning-supplemental.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T034300Z--HCM-0-8--post-clean-authority-continuation-implementation.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T041400Z--HCM-0-8--authority-continuation-implementation-discovery.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T043500Z--HCM-0-8--authority-continuation-implementation-remediation.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T051500Z--HCM-0-8--authority-continuation-final-aggregate-review.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T055000Z--HCM-0-8--authority-continuation-final-review-remediation.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T060000Z--HCM-0-8--authority-continuation-final-aggregate-supplemental.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T150200Z--HCM-0-8--retained-finding-lineage-proof-review.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T151500Z--HCM-0-8--retained-finding-lineage-proof-remediation.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T153000Z--HCM-0-8--retained-finding-lineage-proof-closure.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T154500Z--HCM-0-8--retained-finding-lineage-proof-supplemental-remediation.json",
+            "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json",
+            "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.4.schema.json",
+            "docs/specs/handbook-contract-membrane/handoffs/handoff-template.json",
+            "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch-template.json",
+            "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.4.schema.json",
+            "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/SPEC.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/authority/20260802-hcm-3-2-lineage-composition-authority.json",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/authority/20260802-retained-finding-lineage-extension.json",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T030900Z--planning-discovery-remediation.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T032700Z--planning-closure-supplemental-remediation.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T033900Z--planning-supplemental-clean.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T041000Z--implementation-fixed-point-stop.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T043000Z--implementation-discovery-remediation.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T050000Z--authority-continuation-implementation-remediation-green.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T054500Z--final-aggregate-review-remediation.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T055900Z--authority-continuation-evidence-remediation.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T145421Z--retained-finding-lineage-extension.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/tasks/plan.md",
+            "docs/specs/handbook-contract-membrane/slices/HCM-0.8/tasks/todo.md"
+        ]
+    },
+    "work_completed": [
+        "Implemented bounded v1.4 authority continuation.",
+        "Added non-owning typed retained-finding references.",
+        "Closed all P1/P2 with final supplemental CLEAN.",
+        "Preserved immutable history and frozen corpora."
+    ],
+    "deliverables": [
+        {
+            "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+            "status": "completed",
+            "summary": "Fail-closed validator and self-tests."
+        },
+        {
+            "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/authority/20260802-retained-finding-lineage-extension.json",
+            "status": "completed",
+            "summary": "Exact retained-lineage extension authority."
+        },
+        {
+            "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json",
+            "status": "completed",
+            "summary": "Final independent CLEAN review."
+        },
+        {
+            "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260802T161500Z--HCM-0-8--orchestration--post-clean-authority-continuation-completed.json",
+            "status": "completed",
+            "summary": "Completed v1.4 handoff."
+        }
+    ],
+    "decisions": [
+        {
+            "decision_id": "HCM08-D1",
+            "summary": "Use a monotonic finite typed continuation rather than a budget reset.",
+            "authority_effect": "Only an exact direct non-completed same-parent successor qualifies.",
+            "refs": [
+                "docs/specs/handbook-contract-membrane/slices/HCM-0.8/SPEC.md"
+            ]
+        },
+        {
+            "decision_id": "HCM08-D2",
+            "summary": "Use carried_finding_refs without transferring original ownership.",
+            "authority_effect": "Immediate trigger arrays include exact owned and carried P1/P2.",
+            "refs": [
+                "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md"
+            ]
+        }
+    ],
+    "findings": [
+        {
+            "finding_id": "HCM08-PLN-DISC-001",
+            "classification": "local_remediation",
+            "severity": "critical",
+            "priority": "P1",
+            "status": "remediated",
+            "source_run_id": "hcm08_authority_continuation_planning_review",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        },
+        {
+            "finding_id": "HCM08-PLN-DISC-002",
+            "classification": "local_remediation",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "hcm08_authority_continuation_planning_review",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        },
+        {
+            "finding_id": "HCM08-PLN-DISC-003",
+            "classification": "local_remediation",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "hcm08_authority_continuation_planning_review",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        },
+        {
+            "finding_id": "HCM08-PLN-DISC-004",
+            "classification": "local_remediation",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "hcm08_authority_continuation_planning_review",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        },
+        {
+            "finding_id": "HCM08-PLN-DISC-005",
+            "classification": "local_remediation",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "hcm08_authority_continuation_planning_review",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        },
+        {
+            "finding_id": "HCM08-DISC-P1-001",
+            "classification": "local_remediation",
+            "severity": "critical",
+            "priority": "P1",
+            "status": "remediated",
+            "source_run_id": "hcm08_authority_continuation_implementation_discovery",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        },
+        {
+            "finding_id": "HCM08-DISC-P1-002",
+            "classification": "local_remediation",
+            "severity": "critical",
+            "priority": "P1",
+            "status": "remediated",
+            "source_run_id": "hcm08_authority_continuation_implementation_discovery",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        },
+        {
+            "finding_id": "HCM08-DISC-P2-003",
+            "classification": "local_remediation",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "hcm08_authority_continuation_implementation_discovery",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        },
+        {
+            "finding_id": "HCM08-FINAL-P1-004",
+            "classification": "local_remediation",
+            "severity": "critical",
+            "priority": "P1",
+            "status": "remediated",
+            "source_run_id": "hcm08_authority_continuation_final_review",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        },
+        {
+            "finding_id": "HCM08-RETAIN-P2-001",
+            "classification": "local_remediation",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "hcm08_retained_lineage_proof_review",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        },
+        {
+            "finding_id": "HCM08-RETAIN-CLOSE-P2-001",
+            "classification": "local_remediation",
+            "severity": "major",
+            "priority": "P2",
+            "status": "remediated",
+            "source_run_id": "hcm08_retained_lineage_proof_closure",
+            "summary": "Bounded review finding remediated through its recorded causal closure.",
+            "evidence_refs": [
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T160000Z--HCM-0-8--retained-finding-lineage-proof-supplemental.json"
+            ]
+        }
+    ],
+    "blockers": [],
+    "escalations": [],
+    "validation": [
+        {
+            "command": "ordinary validation",
+            "status": "passed",
+            "evidence_ref": "82 pre-closeout records and 479 current dispatches passed"
+        },
+        {
+            "command": "historical admission self-test",
+            "status": "passed",
+            "evidence_ref": "frozen v1.0-v1.3 bytes remained admitted only by exact hashes"
+        },
+        {
+            "command": "orchestration contract self-test",
+            "status": "passed",
+            "evidence_ref": "exact HCM-3.2 replay and retained-lineage positive/negative matrix passed"
+        },
+        {
+            "command": "final dispatch replay",
+            "status": "passed",
+            "evidence_ref": "sha256:1034801c64bab2deafabcf9ed4c3acc72c54bd8c064c1ae1641936718e92c1eb"
+        },
+        {
+            "command": "GitNexus staged and compare-to-main detect changes",
+            "status": "blocked",
+            "evidence_ref": "FTS unavailable; staged unmapped and compare exited nonzero; inherited scoped HIGH/compare CRITICAL retained"
+        },
+        {
+            "command": "formatting, whitespace, immutable dispatch and protected-path checks",
+            "status": "passed",
+            "evidence_ref": "all bounded checks passed"
+        }
+    ],
+    "pack_updates": [
+        {
+            "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260802T161500Z--HCM-0-8--orchestration--post-clean-authority-continuation-completed.json",
+            "sections": [
+                "entire handoff"
+            ],
+            "reason": "Durable completed closeout.",
+            "status": "completed"
+        },
+        {
+            "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+            "sections": [
+                "deterministic ledger entry"
+            ],
+            "reason": "Canonical ledger rebuild.",
+            "status": "completed"
+        }
+    ],
+    "resume": {
+        "execution_target": "none",
+        "objective": "Do not dispatch HCM-3.2 from this completed parent.",
+        "condition": "Bound meta orchestrator independently verifies local closeout before any separately authorized HCM-3.2 task.",
+        "must_read": [
+            {
+                "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260802T161500Z--HCM-0-8--orchestration--post-clean-authority-continuation-completed.json",
+                "sections": [
+                    "entire completed handoff"
+                ]
+            },
+            {
+                "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required.json",
+                "sections": [
+                    "entire authority stop"
+                ]
+            }
+        ],
+        "allowed_scope": [],
+        "prohibited_scope": [
+            "HCM-3.2 product edits, artifact_lineage_store.rs, HCM-3.3+, dependencies, runtime/public/unsafe/transport surface, remote publication, or push.",
+            "Any dispatch, finding, budget, registry, parent, outcome, or identity rewrite."
+        ],
+        "acceptance_criteria": [
+            "Two-commit local closeout validates and expected-old CAS succeeds.",
+            "No unresolved P1/P2 and no post-CLEAN review cycle.",
+            "Next increment correlation remains exactly HCM-3.2."
+        ],
+        "stop_conditions": [
+            "Stop on any identity, scope, risk, authority, protected-path, or publication mismatch."
+        ]
+    },
+    "supersedes": [],
+    "chat_summary": "HCM-0.8 completed the bounded v1.4 authority-continuation and retained-finding repair. Fourteen dispatches preserve unique ownership and exact triggers; final supplemental review is CLEAN with zero P1/P2. HCM-3.2 remains meta-gated."
+}
