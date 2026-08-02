@@ -1,6 +1,6 @@
 # HCM-3.2 Context Resolution Kernel
 
-Status: authority stop after independent planning discovery; no Rust edits authorized
+Status: resumed under reviewed Option 2 authority; selector-admission review required before RED/Rust
 Phase: HCM-3
 Slice: HCM-3.2
 Parent orchestration: `20260801T202515Z--HCM-3-2--context-resolution-kernel`
@@ -42,40 +42,48 @@ HCM-3.1 vocabulary/stable-role identity and the shipped profile closure are
 immutable dependencies. The user selection of HCM-3.2 is the slice authority;
 the predecessor handoff neither widens nor narrows it.
 
-## Unresolved admission authority
+## Selected authority admission
 
-The live HCM-3.2 contracts identify creating, parent, requested, approving,
-target-memory, decision, evidence, trigger, constraint, source, and target
-authorities, but they do not identify an admitted authority-record schema or a
-trusted resolver that binds those semantic refs/fingerprints to authenticated
-authority. The existing Context Resolution registry admits only the shipped
-matcher, escalation, promotion, and stack definition families. It cannot prove
-that an arbitrary constraint, trigger, decision, evidence, source, target, or
-authority pair names admitted bytes or an authorized principal.
+The product authority selected Option 2. HCM-3.2 adds one narrow closed
+`handbook.context-resolution-authority-binding` record and one admission
+resolver in the Context Resolution module. The binding is not a shipped
+definition, schema-catalog family, generic token framework, or cross-product
+authority service. It is a profile-selected canonical generic artifact whose
+current bytes are read only through `ArtifactRepositoryAuthorityGuardV1` and
+`GenericArtifactLineageStoreV1` recovery/currentness, using the existing HCM-2.3
+artifact mutation owner and without changing either primitive.
 
-Consequently, a public or caller-constructible HCM-3.2 transition/envelope API
-could accept internally coherent but fabricated pairs and appear to authorize
-root creation, escalation, or memory promotion. Shape validation and
-fingerprinting do not close that trust boundary. Creating a generic authority
-catalog, token, schema, or authentication framework is outside this selector
-and is expressly forbidden by the increment contract without a reviewed
-authority decision.
+The resolver pins the caller-supplied expected artifact-byte fingerprint and
+derives a second RFC-8785/SHA-256 semantic binding fingerprint. The closed
+record pins repository identity, selected profile and stack, exact committed
+approver-registry state/head, eleven authority mappings (`root_creation`,
+`parent`, `requested`, `approving`, `decision`, `evidence`,
+`trigger_condition`, `constraint`, `source`, `target`, `target_memory`), and
+the four exact candidate mappings. Owner lookup selects only active,
+non-exhausted committed credentials that cover the exact
+`ApproverAuthorityPairV1`. The resolver uses the existing native authenticator
+port, request encoder, ES256 assertion verifier, RP/user-verification checks,
+and counter rule. Its challenge covers the repository, registry head, binding
+byte/semantic fingerprints, authority use, and exact subject ref/fingerprint.
 
-Implementation may resume only after exact reviewed authority specifies one
-bounded alternative:
+Admission is an opaque HCM-3.2 value with private fields. Every uncached
+challenge includes a fresh 32-byte nonce allocated through the engine's
+existing `getrandom` dependency; entropy failure refuses before authenticator
+use. Byte-identical reuse of the same use/ref/fingerprint inside one resolver
+returns the cached exact admission; reuse of a use/ref with changed bytes
+refuses. Across resolver instances, a new nonce makes a captured assertion
+invalid even when the authenticator's permitted counter behavior is zero/zero.
+Nonzero counters must also increase within one resolver lifetime. The resolver
+does not persist, enroll, rotate, or mutate credentials. Envelope and
+transition constructors consume admissions for the exact subject they
+validate; caller coherence alone grants nothing.
 
-1. an existing trusted owner and exact resolver/schema for every
-   authority-bearing input, including root creation and terminal disposition;
-2. a new bounded admission surface with exact owner, record bytes,
-   fingerprint/authentication rule, public signatures, path/symbol ceilings,
-   and negative proof; or
-3. an explicitly narrowed HCM-3.2 claim that removes authority-bearing
-   envelope/transition behavior and revises `PG-RES-01` expectations.
-
-The resumption authority must also decide whether the required generalization
-of `AuthoredStack::resolve` and `ContextResolutionStackDefinition::load_bytes`
-is permitted despite GitNexus reporting CRITICAL upstream impact. The current
-LOW/MEDIUM-only ceiling cannot authorize those edits.
+The selected authority also accepts the live HIGH impact on
+`ContextResolutionStackDefinition` and CRITICAL impact on exactly
+`AuthoredStack::resolve` and
+`ContextResolutionStackDefinition::load_bytes`, subject to the reviewed
+selector and complete proportional proof wall. No other existing public or
+HIGH/CRITICAL symbol may be edited.
 
 ## Frozen owner and identities
 
@@ -214,17 +222,25 @@ kernel. The HCM-3.5 selector must later choose the actual migration/removal.
 
 ## Public Rust surface
 
-The selector permits only the following new namespaced engine surface:
+The selector permits exactly these 24 new namespaced engine exports:
 
-- `ContextResolutionDimensions`;
-- `ContextResolutionEnvelopeInput` and `ContextResolutionEnvelope`;
-- `ContextResolutionMutationRule` and `ContextResolutionMutationDecision`;
-- `ContextResolutionMemoryDecision` and `ContextResolutionValidationDecision`;
-- `ContextResolutionEscalationCandidate`;
-- `ContextResolutionEscalationRequest` and
+- `ContextResolutionExactBinding`, `ContextResolutionAuthorityUse`,
+  `ContextResolutionAuthorityAdmission`, and
+  `ContextResolutionAuthorityAdmissionResolver`;
+- `ContextResolutionDimensions`, `ContextResolutionEnvelopeInput`, and
+  `ContextResolutionEnvelope`;
+- `ContextResolutionMutationEffect`, `ContextResolutionMutationRule`, and
+  `ContextResolutionMutationDecision`;
+- `ContextResolutionMemoryDecision` and
+  `ContextResolutionValidationDecision`;
+- `ContextResolutionEscalationCandidate`,
+  `ContextResolutionEscalationRequest`,
+  `ContextResolutionEscalationOutcome`, and
   `ContextResolutionEscalationDisposition`;
-- `ContextResolutionPromotionRequest` and
-  `ContextResolutionPromotionDisposition`;
+- `ContextResolutionSemanticMemoryTarget`,
+  `ContextResolutionSemanticMemoryRecord`,
+  `ContextResolutionPromotionRequest`, `ContextResolutionPromotionOutcome`,
+  and `ContextResolutionPromotionDisposition`;
 - `ContextResolutionTransitionRegistry`;
 - `ContextResolutionKernelError` and `ContextResolutionKernelErrorKind`.
 
@@ -234,11 +250,10 @@ ambient latest/range lookup, new crate, dependency, feature, version bump, or
 transport surface is authorized. Public visibility is bounded to the owner
 crate and is not a publication or downstream-adoption claim.
 
-This list is descriptive planning material, not executable authority. It does
-not enumerate exact constructors/evaluators/accessors or their signatures and
-therefore fails the public-surface freeze required before implementation.
-Resumption must replace it with exact signatures and an unambiguous changed-
-symbol counting rule, including any authority-admission type that is approved.
+The exact public symbols and callable signatures are frozen in the selected
+decision record. All public fields remain private except existing external
+primitive fields. No implementation may add a public symbol or change a frozen
+signature without amending and independently reviewing the selector first.
 
 ## Proof obligations
 
@@ -263,6 +278,19 @@ Focused RED/GREEN proof must cover:
    L0-L3 scoped filtering;
 9. no Projection, Snapshot, flow, pipeline, compiler, CLI, SDK, transport,
    dependency, unsafe, or shipped-definition delta.
+10. real-path authority admission for the exact canonical artifact and generic
+    recovery/currentness path; repository/profile/stack/registry-head mismatch;
+    raw/semantic fingerprint mismatch; missing/extra/malformed mappings;
+    zero/multiple/inactive/exhausted/wrong-pair credentials; authenticator
+    refusal/unavailability; RP/UV/credential/signature/counter failure; fresh
+    nonce behavior; captured assertion refusal across fresh resolvers for both
+    zero and nonzero counters; exact replay and changed-subject refusal; and
+    the exact subject mapping for all eleven authority uses;
+11. typed promotion proof that the actual source envelope admits every source,
+    the target horizon is strictly higher in the supplied stack, only a typed
+    semantic-memory target/result can enter the registry, and applied/refused/
+    stale compare-and-write outcomes cannot grant artifact/contract/posture or
+    HCM-3.4 durable-memory authority.
 
 The proportional proof wall is:
 
@@ -301,11 +329,13 @@ proof records, exact affected HCM 00-06 rows after earned proof, current v1.4
 dispatches, one parent handoff, the deterministic ledger, and `09` only for a
 fresh validated P3/P4.
 
-Ceilings: at most 3 production paths, 3 test/fixture path families, 20 changed
-production symbols, 1,000 hand-written production lines, and one LOW/MEDIUM
-engine subsystem. Exceeding a ceiling requires reviewed same-slice
-decomposition or an authority stop; public/dependency/unsafe/schema/transport
-expansion requires user authority.
+Ceilings: at most 3 production paths, 3 test/fixture path families, 80 changed
+named production declarations under the selector counting rule, and 1,800
+hand-written production lines. Risk is limited to the three explicitly
+accepted existing symbols plus new symbols in the same engine subsystem.
+Exceeding a ceiling requires reviewed same-slice decomposition or an authority
+stop; dependency/unsafe/schema-catalog/transport expansion requires user
+authority.
 
 ## Review and closeout
 
@@ -329,5 +359,8 @@ transport, unsafe/native/platform machinery, more than the reviewed ceilings,
 unresolved HIGH/CRITICAL impact, unavailable mandatory delegation, exhausted
 causal budget, or broader human/product authority.
 
-This stop condition is currently met. No RED test, Rust edit, implementation
-check, or completed-slice publication is authorized from this SPEC.
+The prior authority stop was released by the exact same-slice resumption
+binding. RED/Rust remains prohibited until the amended selector receives one
+fresh schema-valid implementation-stage independent CLEAN review. A finding or
+validator refusal keeps the stop active until resolved within the causal
+budget.

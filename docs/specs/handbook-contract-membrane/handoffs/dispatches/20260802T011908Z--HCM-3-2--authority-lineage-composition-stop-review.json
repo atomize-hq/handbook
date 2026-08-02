@@ -1,0 +1,230 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260802T011908Z--HCM-3-2--authority-lineage-composition-stop-review",
+  "created_at_utc": "2026-08-02T01:19:08Z",
+  "source_handoff_ids": [
+    "20260801T213000Z--HCM-3-2--orchestration--context-resolution-authority-required"
+  ],
+  "parent_orchestration_id": "20260801T202515Z--HCM-3-2--context-resolution-kernel",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-P3-proof-control-closeout",
+  "subject_fingerprint": "sha256:6aa817425949ac1cf0515547d4a105d75cf3f50fda95c267a4fb336d073132ac",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.2-authority-lineage-composition-proof-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T20:25:15Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-full-slice",
+        "packet_ids": [
+          "HCM-3.2-P1-planning-selector",
+          "HCM-3.2-P2-kernel-implementation",
+          "HCM-3.2-P3-proof-control-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:32ce222086ce006ee833e096bdd252f2c0105045d8b51bf61ba7b84f330edc08"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:9e317280367a3668c484802c4cbc0e4e090faad692692e8327a40c11b73346ae",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-full-slice",
+    "outcome_registry_fingerprint": "sha256:32ce222086ce006ee833e096bdd252f2c0105045d8b51bf61ba7b84f330edc08",
+    "review_stage": "proof",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "implementation"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260802T003415Z--HCM-3-2--context-resolution-selector-admission-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-authority-lineage-composition-stop-convergence-1",
+    "completed_at_utc": "2026-08-02T01:18:58Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "remove unreviewed partial Rust and converge the safe selector plus exact failing-proof subject without widening the reviewed three-path/risk ceiling",
+        "evidence_ref": "git status contains only the selector-admission control lineage and authority-lineage composition proof; no Rust/test/product path remains changed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "trace committed approver registry transaction ownership through generic inventory and journal-authority validation, then run local GitNexus upstream impact on both required repair symbols",
+        "evidence_ref": "validate_inventory is CRITICAL with 30 upstream/8 direct/6 processes; require_journal_authority is LOW with 9 upstream/1 direct/1 process; both are in unauthorized artifact_lineage_store.rs"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted seven-entry repo-path-NUL-SHA256-newline proof-stop subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:6aa817425949ac1cf0515547d4a105d75cf3f50fda95c267a4fb336d073132ac"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 and Markdown fence-balance inspection over the seven manifested files",
+        "evidence_ref": "all manifested files decode as UTF-8; fences are balanced"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent pre-review command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T003415Z--HCM-3-2--context-resolution-selector-admission-closure.json",
+        "sha256": "dfc3e5321cdaf51e12bcd7668f4c08981f3ea291c7ef95124df1eff0f2ced25b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "sha256": "3c63c2bb34e7fcb6c19286ffa96494eff5d17ee9662dbfc15158d63e38a6a7fd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "sha256": "ac9c1dd371639a035b19ae32ed5b3f0efd8d6d254f4274455de04f325c83f657"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md",
+        "sha256": "cdb17e5444cc41f0a817045b1da3b03cb857d6ce38bd754bd4d0cf06f236b671"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md",
+        "sha256": "a4d7b6ed6b73f6e2f985323870b19a2d32b30e3c5f8f6d6c5f0d21523ce34d73"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+        "sha256": "2a2c9d25272da0bca25561be91917be549083a4227415b19baf75a4b02f86d67"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+        "sha256": "14b1d2a9d5c912d97965c676bf209e99f57517c748565cf179b378275005281c"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:6aa817425949ac1cf0515547d4a105d75cf3f50fda95c267a4fb336d073132ac"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 proof-stage authority-lineage composition stop",
+    "scope_horizon": "the complete safe selector-admission state plus the mandatory real-path proof that the selected committed-registry and generic-lineage primitives cannot coexist",
+    "detail_resolution": "exact failing tests, transaction-family ownership conflict, two required lineage-store repair symbols, live impact, safe partial-code removal, and exact resumption options",
+    "temporal_horizon": "after CLEAN implementation-stage selector closure and focused RED; before any primary product implementation or lineage-store repair",
+    "authority_horizon": "same HCM-3.2 parent/outcome/packets/budget only; fourth production path and additional CRITICAL edit remain unauthorized",
+    "memory_horizon": "immutable planning/implementation review lineage, seven-file proof-stop subject, exact task identity, test-source digest, and GitNexus evidence",
+    "validation_horizon": "independent proof-stage review of whether the stop is genuine, evidence is sufficient, and safe state is resumable without waiving P1"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md",
+      "sections": [
+        "Real-path result",
+        "Root cause",
+        "Impact and authority boundary",
+        "Safe-stop disposition",
+        "Exact resumption condition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": [
+        "Exact ceilings",
+        "Test selector",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T003415Z--HCM-3-2--context-resolution-selector-admission-closure.json",
+      "sections": [
+        "causal_control",
+        "subject_manifest",
+        "contracts_and_gates"
+      ]
+    }
+  ],
+  "repo_truth": "The amended selector remains byte-exact with its independently CLEAN implementation-stage closure. Focused RED constructed the real committed-registry/native-assertion path and failed before authority lookup because GenericArtifactLineageStoreV1 rejects the registry transaction family and would parse its intent as generic. Local GitNexus marks validate_inventory CRITICAL beyond the accepted symbols. All partial Rust/test changes were removed; no product path remains changed. FTS is unavailable and is not GREEN.",
+  "allowed_scope": [
+    "Review the exact seven-file proof-stop subject read-only.",
+    "Verify the committed-registry/generic-lineage incompatibility from repository code and determine whether any already-authorized safe seam exists.",
+    "Verify the test failure, GitNexus impact, three-path/risk ceiling, and safe removal of unreviewed partial product code justify a top-level authority stop.",
+    "Return a unique P1/P2 only if the stop evidence or resumption boundary is materially wrong; otherwise return CLEAN for the authority-stop subject without completing HCM-3.2."
+  ],
+  "non_goals": [
+    "Do not edit, implement, format, stage, commit, create handoff/ledger/dispatch, delegate, or repair the lineage store.",
+    "Do not waive the blocker, call failed real-path product proof GREEN, reopen general implementation discovery, or reset parent/outcome/packet/budget lineage.",
+    "Do not authorize a fourth production path, additional CRITICAL edit, HCM-3.3+, dependency/schema/transport surface, shipped identity change, publication, or push."
+  ],
+  "tasks": [
+    "Validate the dispatch, same parent/outcome/registry/budget, monotonic proof-stage entry, predecessor, and seven-entry manifest.",
+    "Trace GenericArtifactLineageStoreV1 inventory and journal-authority behavior against committed registry transaction ownership.",
+    "Confirm live impact and selector ceilings make the necessary repair unauthorized.",
+    "Confirm partial Rust/test removal leaves only the safe reviewed selector lineage and exact failing-proof record.",
+    "Return findings first or CLEAN only for exact subject sha256:6aa817425949ac1cf0515547d4a105d75cf3f50fda95c267a4fb336d073132ac."
+  ],
+  "contracts_and_gates": [
+    "CLEAN means the authority stop is accurate and durable; it does not complete HCM-3.2 or waive its P1 blocker.",
+    "The selected outcome, packet IDs, causal budget, dispatch prefix, source handoff, and predecessor lineage remain unchanged.",
+    "Any lineage-store repair requires new reviewed product/owner authority and fresh selector closure before RED/Rust resumes.",
+    "The parent must create one v1.4 escalation-required handoff and two-commit true-stop closeout; no local integration publication or push is authorized for an incomplete slice."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if evidence is insufficient, safe state is not actually clean of product edits, or an existing in-scope recovery seam contradicts the stop.",
+    "Return BLOCKED if review itself requires unavailable capability or authority.",
+    "Report rather than repair."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

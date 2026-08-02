@@ -1,0 +1,249 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260802T003415Z--HCM-3-2--context-resolution-selector-admission-closure",
+  "created_at_utc": "2026-08-02T00:34:15Z",
+  "source_handoff_ids": [
+    "20260801T213000Z--HCM-3-2--orchestration--context-resolution-authority-required"
+  ],
+  "parent_orchestration_id": "20260801T202515Z--HCM-3-2--context-resolution-kernel",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-P2-kernel-implementation",
+  "subject_fingerprint": "sha256:0e75c01e91939c669a8a8588e16804929820462badf37a7c384ff29abb9a3a63",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.2-context-resolution-selector-admission-implementation-closure-1",
+    "trigger_run_ids": [
+      "hcm32_selector_admission_review"
+    ],
+    "finding_refs": [
+      "HCM32-SEL-DISC-001",
+      "HCM32-SEL-DISC-002",
+      "HCM32-SEL-DISC-003",
+      "HCM32-SEL-DISC-004",
+      "HCM32-SEL-DISC-005"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-01T20:25:15Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-full-slice",
+        "packet_ids": [
+          "HCM-3.2-P1-planning-selector",
+          "HCM-3.2-P2-kernel-implementation",
+          "HCM-3.2-P3-proof-control-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:32ce222086ce006ee833e096bdd252f2c0105045d8b51bf61ba7b84f330edc08"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:9e317280367a3668c484802c4cbc0e4e090faad692692e8327a40c11b73346ae",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-full-slice",
+    "outcome_registry_fingerprint": "sha256:32ce222086ce006ee833e096bdd252f2c0105045d8b51bf61ba7b84f330edc08",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260802T002238Z--HCM-3-2--context-resolution-selector-admission-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-context-resolution-selector-admission-closure-convergence-1",
+    "completed_at_utc": "2026-08-02T00:34:05Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "consolidate all five selector-admission findings into one same-implementation-stage amendment without RED, Rust, implementation checks, parent/outcome/packet/budget reset, or scope expansion",
+        "evidence_ref": "five-file closure subject below; finding dispositions recorded in the remediation proof; only selector/SPEC/plan/todo/proof control paths changed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "retrace native assertion freshness/counters, every authority-use subject, source-envelope/stack promotion validation, typed semantic-memory boundary, public exports, and real-path proof matrix",
+        "evidence_ref": "existing getrandom dependency supplies fresh nonce; exact subject table covers all eleven uses; promotion consumes actual envelope/stack and typed target/result; SPEC and selector agree on 24 exports and expanded negative proof"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted five-entry repo-path-NUL-SHA256-newline remediated subject",
+        "evidence_ref": "subject manifest below; aggregate sha256:0e75c01e91939c669a8a8588e16804929820462badf37a7c384ff29abb9a3a63"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode and Markdown fence-balance check for all five remediated files",
+        "evidence_ref": "strict UTF-8 passed; selector has six balanced fences; the other files have none"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent pre-closure command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "sha256": "3c63c2bb34e7fcb6c19286ffa96494eff5d17ee9662dbfc15158d63e38a6a7fd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "sha256": "ac9c1dd371639a035b19ae32ed5b3f0efd8d6d254f4274455de04f325c83f657"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md",
+        "sha256": "cdb17e5444cc41f0a817045b1da3b03cb857d6ce38bd754bd4d0cf06f236b671"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+        "sha256": "2a2c9d25272da0bca25561be91917be549083a4227415b19baf75a4b02f86d67"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+        "sha256": "14b1d2a9d5c912d97965c676bf209e99f57517c748565cf179b378275005281c"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:0e75c01e91939c669a8a8588e16804929820462badf37a7c384ff29abb9a3a63"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 selector-admission implementation-stage closure",
+    "scope_horizon": "closure of exactly one P1 replay bypass and four P2 selector/API/proof findings over the complete amended HCM-3.2 selector subject",
+    "detail_resolution": "fresh nonce and cross-resolver replay; exact eleven-use subject table; actual source envelope/stack and typed semantic-memory promotion; exact 24 public exports; full real-path admission and forbidden-authority proof",
+    "temporal_horizon": "after one consolidated remediation and before any RED test or Rust edit",
+    "authority_horizon": "same HCM-3.2 implementation stage only; no planning reset, HCM-3.3+, dependency/schema/primitive/path/risk expansion, shipped identity change, publication, or push",
+    "memory_horizon": "immutable discovery dispatch/result, five exact finding IDs, five-file remediated subject, same source handoff, registry, budget, and packet",
+    "validation_horizon": "different-fresh closure of all five findings; CLEAN authorizes only the frozen RED/GREEN packet"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T002238Z--HCM-3-2--context-resolution-selector-admission-review.json",
+      "sections": [
+        "review_cycle",
+        "causal_control",
+        "subject_manifest",
+        "return_contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md",
+      "sections": [
+        "Consolidated disposition",
+        "Security boundary after remediation",
+        "Remaining gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "sections": [
+        "Selected authority admission",
+        "Public Rust surface",
+        "Proof obligations"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": [
+        "Authority-binding and admission selector",
+        "Memory, validation, and escalation selector",
+        "Exact public symbols and signatures",
+        "Test selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Context Resolution envelope",
+        "Resolution escalation and memory promotion"
+      ]
+    }
+  ],
+  "repo_truth": "The discovery subject was reviewed read-only and produced exactly HCM32-SEL-DISC-001 through 005. The parent applied one consolidated control-only remediation: existing getrandom entropy now enters every uncached challenge; every authority use has one exact subject; promotion consumes the actual envelope/stack and typed semantic-memory boundary; SPEC and selector agree on 24 exports; and admission/promotion negative proof is explicit. No RED, Rust, implementation command, dependency, primitive, shipped definition, profile, pipeline, or protected checkout changed.",
+  "allowed_scope": [
+    "Review the exact five-file remediated subject read-only and determine whether it closes all five discovery findings.",
+    "Independently test the fresh-nonce design against captured assertion replay across fresh resolver instances with zero and nonzero counters.",
+    "Verify the exact subject table prevents reusable parent/owner admissions from authorizing changed children, requests, dispositions, sources, targets, or results.",
+    "Verify actual source-envelope/stack validation and typed semantic-memory target/result/CAS semantics implement the live promotion contract without HCM-3.4 storage.",
+    "Verify exact 24-export agreement and complete real-path positive/negative proof obligations fit the frozen paths/declarations/lines/risk ceilings."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, implement, write RED tests, create another dispatch/handoff/ledger, delegate, or write global state.",
+    "Do not reuse predecessor finding IDs as new findings; cite them only as closure triggers.",
+    "Do not reopen planning, widen paths/public surface/risk, require HCM-3.3/3.4 behavior, edit existing authority primitives, add dependencies/schema/transport, mutate shipped identity, publish, or push."
+  ],
+  "tasks": [
+    "Validate closure lineage, exact five finding refs, unchanged source handoff/parent/registry/budget/packet, and five-entry manifest.",
+    "Close HCM32-SEL-DISC-001 against the nonce/challenge/cache/counter semantics and required cross-resolver proof.",
+    "Close HCM32-SEL-DISC-002 and 003 against typed promotion validation and the exact authority-subject table.",
+    "Close HCM32-SEL-DISC-004 and 005 against the reconciled export list and expanded real-path proof matrix.",
+    "Return a new unique finding only for a genuinely remediation-caused or unmasked issue; otherwise return CLEAN for sha256:0e75c01e91939c669a8a8588e16804929820462badf37a7c384ff29abb9a3a63."
+  ],
+  "contracts_and_gates": [
+    "The discovery dispatch/result remains immutable; this is one consolidated remediation and different-fresh closure in the same implementation stage.",
+    "No RED/Rust action is permitted until this exact closure subject is CLEAN with no unresolved P1/P2.",
+    "CLEAN closes only selector admission and authorizes the frozen incremental TDD implementation; later converged implementation, proof, and final reviews remain mandatory.",
+    "Any additional public/path/dependency/primitive/HIGH/CRITICAL or later-slice need is a stop, not a closure request."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if any predecessor issue remains or remediation unmasked a new same-scope P1/P2.",
+    "Return BLOCKED if closure requires authority or capability beyond the frozen HCM-3.2 selector and causal budget.",
+    "Report rather than repair."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -7,17 +7,23 @@
 - [x] Draft SPEC, plan, todo, selector, one outcome registry, ceilings, proof wall, and stop rules.
 - [x] Validate and execute the fresh planning discovery dispatch.
 - [x] Record one P1 and three P2 planning findings without beginning RED/Rust.
-- [ ] Consolidate the findings into an exact authority-stop subject and obtain different-fresh closure.
-- [ ] Commit the reviewed safe planning/authority-stop state.
+- [x] Consolidate the findings into an exact authority-stop subject and obtain different-fresh closure.
+- [x] Commit the reviewed safe planning/authority-stop state.
+- [x] Consume exact same-parent Option 2 resumption and accepted three-symbol risk authority.
+- [x] Amend exact selector/SPEC/plan/checklist without reopening the CLEAN planning cycle.
+- [x] Validate and execute one fresh implementation-stage selector-admission discovery review.
+- [x] Consolidate `HCM32-SEL-DISC-001` through `005` into one same-stage remediation without RED/Rust.
+- [ ] Obtain different-fresh CLEAN closure of all five selector-admission findings before RED/Rust.
 
 ## P2 — Kernel implementation
 
-Blocked pending exact reviewed admission-authority and CRITICAL-impact
-resumption authority. Every item below remains intentionally unexecuted.
+Blocked only until the amended selector-admission review is independently
+CLEAN. Then execute in order under the frozen surface and ceilings.
 
 - [ ] Write failing configurable-stack and envelope tests.
 - [ ] Run upstream impact analysis for every existing symbol to be edited and warn on HIGH/CRITICAL risk.
 - [ ] Generalize ordered-stack validation while preserving shipped identity.
+- [ ] Implement the closed current-artifact authority binding and native assertion admission resolver without editing reused primitives.
 - [ ] Implement six-dimension root/child resolution and deterministic fingerprints.
 - [ ] Implement fail-closed mutation matching, deny precedence, and containment refusal.
 - [ ] Implement memory/validation decisions and escalation/promotion admission semantics.
@@ -27,8 +33,8 @@ resumption authority. Every item below remains intentionally unexecuted.
 
 ## P3 — Proof and closeout
 
-Completed-slice items below are not authorized for this stop. Execute only the
-blocked-state control-plane items explicitly marked for the true-stop handoff.
+Execute after P2 converges and receives its causal independent implementation
+review.
 
 - [ ] Replay unchanged L0-L3 pipeline scoped-filtering behavior.
 - [ ] Pass affected crate tests and complete workspace test wall.
@@ -42,14 +48,3 @@ blocked-state control-plane items explicitly marked for the true-stop handoff.
 - [ ] Recheck expected-old integration ref and atomically update it to the closeout commit.
 - [ ] Verify local ref, final tree, remote baseline, clean worktree, and no push.
 - [ ] Send one terminal receipt to the bound meta task as the final tool action.
-
-## Authority-stop closeout
-
-- [ ] Record the discovery result and consolidated parent disposition.
-- [ ] Obtain different-fresh closure of all four finding IDs on the revised subject.
-- [ ] Run control-file whitespace/format checks and GitNexus scoped detection honestly.
-- [ ] Commit the safe reviewed planning/authority-stop state.
-- [ ] Create and validate a v1.4 `escalation_required` handoff and deterministic ledger.
-- [ ] Commit only the mechanical handoff/ledger closeout surface.
-- [ ] Verify integration ref and remote baseline remain unchanged and no push occurred.
-- [ ] Send the bound `AUTHORITY_REQUIRED` receipt to the meta task as the final tool action.
