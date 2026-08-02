@@ -3469,6 +3469,7 @@ New top-level handoffs record each proof-relevant built-in delegation:
   "final_status": "completed",
   "verdict": "clean",
   "finding_refs": [],
+  "carried_finding_refs": [],
   "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/...json"]
 }
 ```
@@ -3536,6 +3537,13 @@ finding.
 Every v1.4 finding ID must also resolve through its `source_run_id` to that
 review run's `finding_refs`. Priority/severity pairs are exact. A clean review
 cannot carry P1/P2; a `findings` review must carry at least one P1/P2.
+An optional `carried_finding_refs` lets a later FINDINGS review retain an
+earlier P1/P2 without becoming its owner. Every carried ID must resolve to one
+original owner, that owner must be an exact trigger of the carrier's review
+cycle, and completed remediation must link the owner to the carrier. The next
+cycle's exact P1/P2 array is the union of its immediate trigger runs' owned and
+carried IDs. Absent means empty; duplicate ownership, fabricated or P3/P4
+carry, non-predecessor carry, missing remediation, and trigger laundering fail.
 Completed P1/P2 entries are remediated or resolved and have typed remediation
 lineage. Completed P3/P4 entries may be inventoried without becoming blockers
 only when their `HCM-RF-####` ID and priority match a durable row in

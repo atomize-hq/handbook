@@ -1,0 +1,42 @@
+{
+  "schema_id":"handbook.internal-dispatch",
+  "schema_version":"1.4",
+  "dispatch_id":"20260802T154500Z--HCM-0-8--retained-finding-lineage-proof-supplemental-remediation",
+  "created_at_utc":"2026-08-02T15:45:00Z",
+  "source_handoff_ids":[],
+  "parent_orchestration_id":"20260802T025200Z--HCM-0-8--post-clean-authority-continuation",
+  "orchestration_decision":"local_remediation_packet",
+  "execution_target":"internal_subagent",
+  "agent_type":"default",
+  "role":"remediation",
+  "fresh_context_required":true,
+  "closeout_owner":"parent_orchestrator",
+  "required_skills":["using-agent-skills","context-engineering","source-driven-development","spec-driven-development","incremental-implementation","test-driven-development","debugging-and-error-recovery","code-review-and-quality"],
+  "phase_id":"HCM-0",
+  "slice_id":"HCM-0.8",
+  "packet_id":"HCM-0.8-P3-authority-continuation-proof-closeout",
+  "subject_fingerprint":"sha256:dd636ea8c4a6f8bbcc8717bcdbbbf47e1c9348aba726d423a272a86ad65552dd",
+  "review_cycle":null,
+  "causal_outcome_registry":{"declared_at_utc":"2026-08-02T02:52:00Z","algorithm":"sha256","encoding":"canonical-json-newline-v1","outcomes":[{"integrated_outcome_id":"hcm-0.8-post-clean-authority-continuation-control-repair","packet_ids":["HCM-0.8-P1-authority-continuation-planning","HCM-0.8-P2-authority-continuation-protocol","HCM-0.8-P3-authority-continuation-proof-closeout"],"authority_ref":"docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md"}],"fingerprint":"sha256:2c670d3f5640fb401899067f50f3a6c4df917041476d3586b6682b4718bbe2aa"},
+  "causal_control":{"causal_budget_id":"sha256:2d3f1c349622262c2be6970135114c7738afa9ffda75ee9319ba67e93f4d1b93","integrated_outcome_id":"hcm-0.8-post-clean-authority-continuation-control-repair","outcome_registry_fingerprint":"sha256:2c670d3f5640fb401899067f50f3a6c4df917041476d3586b6682b4718bbe2aa","review_stage":"proof","stage_transition":{"kind":"continue","from_stage":"proof"},"event_reason":"remediation","causal_predecessor_dispatch_id":"20260802T153000Z--HCM-0-8--retained-finding-lineage-proof-closure"},
+  "pre_review_convergence":null,
+  "ancillary_allowance":{"kind":"none","risk_ceiling":"no_ancillary_surface","baseline_ref":null,"max_paths":0,"max_changed_lines":0,"entries":[]},
+  "subject_hygiene":{"whitespace_policy":"text-files-no-trailing-whitespace-v1"},
+  "subject_manifest":{"algorithm":"sha256","encoding":"repo-path-null-sha256-newline-v1","entries":[
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T153000Z--HCM-0-8--retained-finding-lineage-proof-closure.json","sha256":"843a88be6d0e22b89eaede7ed55750355ef30bbb0d54f85ced4d52f37457dd1e"},
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py","sha256":"247be25009a73749d43b180e0f48d7d0de963b553d078458b09b72ce6fa01ae2"},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-0.8/authority/20260802-retained-finding-lineage-extension.json","sha256":"bab692a43f16aac404814b95206c973d401cb21addc8e80a873444f09eabf131"}
+  ],"aggregate_fingerprint":"sha256:dd636ea8c4a6f8bbcc8717bcdbbbf47e1c9348aba726d423a272a86ad65552dd"},
+  "active_resolution":{"level":"HCM-0.8 retained-finding proof supplemental remediation","scope_horizon":"only HCM08-RETAIN-CLOSE-P2-001","detail_resolution":"make wrong-verdict negatives mutation-sensitive to the new guard","temporal_horizon":"first immediately causal proof supplemental after closure FINDINGS","authority_horizon":"validator self-test only; no product/runtime/dependency/public surface, commit, closeout, or push","memory_horizon":"immutable proof closure finding and existing correct semantic guard","validation_horizon":"guard-removal mutation probe plus full wall"},
+  "authority_refs":[
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T153000Z--HCM-0-8--retained-finding-lineage-proof-closure.json","sections":["review_cycle","subject_manifest","return_contract"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-0.8/authority/20260802-retained-finding-lineage-extension.json","sections":["required_negatives","prohibitions"]}
+  ],
+  "repo_truth":"Different-fresh closure confirmed the semantic guard but found that both wrong-verdict negatives accepted any ValidationFailure and therefore remained green after in-memory removal of the new guard.",
+  "allowed_scope":["Remediate only HCM08-RETAIN-CLOSE-P2-001 in validate_handoffs.py.","Make blocked and not_applicable carrier fixtures assert the exact new guard failure or equivalent mutation-sensitive evidence.","Prove removing the guard makes the self-test fail, then replay the full wall."],
+  "non_goals":["Do not change the semantic guard or broader validation semantics unless required by the exact finding.","Do not edit dispatches, authority/docs/schema/template, product/Rust/Cargo/dependencies/runtime/public surface, HCM-3.2 product, ledger, or handoff.","Do not stage, commit, publish, push, or send a receipt."],
+  "tasks":["Add exact expected-failure matching for the two wrong-verdict negatives.","Run the guard-removal mutation probe and full validation wall.","Return bounded evidence for a fresh supplemental review."],
+  "contracts_and_gates":["The proof must fail if the new guard is removed.","A different-fresh supplemental CLEAN review is required before primary commit.","No P1/P2 waiver."],
+  "stop_conditions":["Stop on prohibited expansion or unrelated HIGH/CRITICAL surface.","Stop if mutation sensitivity needs a wider contract change.","Report rather than close out."],
+  "return_contract":{"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"bounded_write","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","changed_paths","validation","parent_disposition"]}
+}

@@ -237,3 +237,16 @@ Stop on any need for a generic budget reset, historical rewrite, completed
 parent continuation, second extension, P1/P2 waiver, public/dependency/runtime
 surface, HCM-3.2 product edit, or unexpected HIGH/CRITICAL expansion beyond the
 reviewed validator control-plane symbols.
+
+## Identity-bound retained-finding extension
+
+Authority artifact
+`authority/20260802-retained-finding-lineage-extension.json` permits one
+post-CLEAN proof-stage repair for the immutable nine-dispatch population. The
+only new semantic surface is optional
+`delegated_runs[].carried_finding_refs`: a later FINDINGS review may retain an
+earlier P1/P2 without becoming its owner when the original owner is an exact
+typed-cycle trigger and completed remediation re-reviews into the carrier. The
+next review cycle uses the immediate trigger runs' owned-plus-carried P1/P2
+union. No parent, outcome, budget, packet, finding identity, dispatch byte,
+path/risk ceiling, or prohibited product/runtime authority changes.

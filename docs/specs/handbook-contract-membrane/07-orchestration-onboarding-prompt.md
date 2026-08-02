@@ -452,6 +452,14 @@ ordering, same-cycle findings-to-CLEAN remediation laundering, and a third
 supplemental cycle. Every remediation re-review belongs to the immediately
 following cycle and binds a changed post-remediation subject fingerprint.
 
+When a re-review retains an earlier P1/P2 rather than discovering a new one,
+the parent records that stable ID in optional `carried_finding_refs` on the
+later FINDINGS run. The finding keeps its unique original `source_run_id`; the
+carrier must be the completed re-review of that owner's exact remediation and
+the owner must be an exact trigger of the carrier's cycle. The next cycle names
+the immediate trigger runs' owned-plus-carried P1/P2 union. Never duplicate,
+transfer, rename, or omit finding ownership to represent retention.
+
 When remediation or its converged packet wall reveals a related test failure,
 proof gap, or manifest/scope omission, record that typed causal reason and use
 the immediately next closure/supplemental allowance. It cannot become a new

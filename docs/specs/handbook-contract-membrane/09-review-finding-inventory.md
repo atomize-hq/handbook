@@ -59,6 +59,13 @@ Mechanical closeout is outside the review-cycle budget. Before any reviewer is
 spawned, its dispatch must pass the complete packet/fixture-consumer/manifest/
 formatting/whitespace convergence gate and live manifest replay.
 
+Retaining an earlier P1/P2 does not allocate a new finding ID or transfer its
+owner. The later FINDINGS run uses optional `carried_finding_refs`; the original
+owner must be an exact trigger of that re-review and have completed remediation
+into it. The following cycle names the carrier's owned-plus-carried P1/P2
+union. This typed lineage prevents both duplicate ownership and trigger-array
+laundering without creating another review budget.
+
 Rejected alternatives are eliminating independent review, treating failing
 selected proof as backlog, allowing self-approval, or automatically waiving a
 finding because similar debt already exists.

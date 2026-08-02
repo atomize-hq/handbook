@@ -68,3 +68,15 @@ No production/runtime symbol is in scope.
   formatting/whitespace, and change detection pass.
 - Closeout checkpoint: final aggregate CLEAN, primary commit, mechanical
   closeout commit, CAS publication, unchanged remote/protected paths.
+
+## Authorized post-CLEAN continuation
+
+1. Bind the retained-finding extension artifact to both nonces and the nine
+   immutable dispatch hashes.
+2. Add failing carried-lineage positive/negative self-tests.
+3. Add the optional handoff field and enforce unique ownership, exact trigger,
+   priority, remediation, and next-cycle union semantics.
+4. Run the complete proof wall and one fresh independent proof-stage aggregate
+   review over the authority and material repair.
+5. Add the reviewed primary commit to the existing stack, then perform the
+   mechanical handoff/ledger closeout and expected-old CAS.

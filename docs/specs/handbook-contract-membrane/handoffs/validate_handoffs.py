@@ -927,10 +927,16 @@ def validate_review_cycles(
                 "follow a CLEAN cycle"
             )
         expected_finding_refs = sorted(
-            finding_id
-            for finding_id, finding in findings_by_id.items()
-            if finding["source_run_id"] in expected_trigger_ids
-            and finding["priority"] in {"P1", "P2"}
+            {
+                finding_id
+                for run in prior_cycle["runs"]
+                if run["run_id"] in expected_trigger_ids
+                for finding_id in [
+                    *run["finding_refs"],
+                    *run.get("carried_finding_refs", []),
+                ]
+                if findings_by_id[finding_id]["priority"] in {"P1", "P2"}
+            }
         )
         if sorted(cycle["finding_refs"]) != expected_finding_refs:
             raise ValidationFailure(
@@ -3086,6 +3092,11 @@ def validate_v1_2_semantics(
 
         for run in runs:
             if run["role"] != "review":
+                if run.get("carried_finding_refs"):
+                    raise ValidationFailure(
+                        f"{record_path}: non-review run {run['run_id']!r} "
+                        "cannot carry findings"
+                    )
                 continue
             for finding_id in run["finding_refs"]:
                 if finding_id not in findings_by_id:
@@ -3098,11 +3109,61 @@ def validate_v1_2_semantics(
                         f"{record_path}: review run {run['run_id']!r} references "
                         f"finding {finding_id!r} owned by a different run"
                     )
+            carried_finding_refs = run.get("carried_finding_refs", [])
+            if carried_finding_refs and (
+                run["final_status"] != "completed"
+                or run["verdict"] != "findings"
+            ):
+                raise ValidationFailure(
+                    f"{record_path}: review run {run['run_id']!r} can carry "
+                    "findings only when completed with verdict findings"
+                )
+            if set(carried_finding_refs).intersection(run["finding_refs"]):
+                raise ValidationFailure(
+                    f"{record_path}: review run {run['run_id']!r} cannot both "
+                    "own and carry one finding"
+                )
+            dispatch_cycle = dispatch_by_run_id[run["run_id"]].get(
+                "review_cycle"
+            )
+            trigger_run_ids = (
+                dispatch_cycle["trigger_run_ids"]
+                if carried_finding_refs and dispatch_cycle is not None
+                else []
+            )
+            for finding_id in carried_finding_refs:
+                finding = findings_by_id.get(finding_id)
+                if finding is None:
+                    raise ValidationFailure(
+                        f"{record_path}: review run {run['run_id']!r} carries "
+                        f"unknown finding {finding_id!r}"
+                    )
+                owner_run_id = finding["source_run_id"]
+                if (
+                    finding["priority"] not in {"P1", "P2"}
+                    or owner_run_id == run["run_id"]
+                    or owner_run_id not in trigger_run_ids
+                    or run_order[owner_run_id] >= run_order[run["run_id"]]
+                ):
+                    raise ValidationFailure(
+                        f"{record_path}: review run {run['run_id']!r} has "
+                        f"invalid carried finding {finding_id!r}"
+                    )
+                if not any(
+                    remediation["finding_run_id"] == owner_run_id
+                    and remediation["re_review_run_id"] == run["run_id"]
+                    and remediation["status"] == "completed"
+                    for remediation in remediations
+                ):
+                    raise ValidationFailure(
+                        f"{record_path}: review run {run['run_id']!r} carries "
+                        f"finding {finding_id!r} without exact remediation lineage"
+                    )
             linked_findings = findings_by_run.get(run["run_id"], [])
             has_blocking = any(
                 finding["priority"] in {"P1", "P2"}
                 for finding in linked_findings
-            )
+            ) or bool(carried_finding_refs)
             if run["verdict"] == "clean" and has_blocking:
                 raise ValidationFailure(
                     f"{record_path}: clean review run {run['run_id']!r} carries "
@@ -6042,6 +6103,8 @@ def run_orchestration_contract_self_test() -> int:
     del template["dispatch_population"]
     del template["ancillary_diff_observations"]
     template.pop("authority_continuations", None)
+    for run in template["delegated_runs"]:
+        run.pop("carried_finding_refs", None)
     dispatch_template = copy.deepcopy(current_dispatch_template)
     dispatch_template["schema_version"] = "1.3"
     del dispatch_template["causal_outcome_registry"]
@@ -6585,6 +6648,114 @@ def run_orchestration_contract_self_test() -> int:
         dispatch_data,
         review_inventory_entries=self_test_inventory_entries,
     )
+
+    retained_dispatch_data = copy.deepcopy(dispatch_data)
+    retained_dispatch_data["self-test-clean-review"][1]["review_cycle"][
+        "finding_refs"
+    ] = ["findings-review-finding"]
+    retained_record = copy.deepcopy(valid_parent_record)
+    retained_record["delegated_runs"][1]["finding_refs"] = []
+    retained_record["delegated_runs"][1]["carried_finding_refs"] = [
+        "findings-review-finding"
+    ]
+    retained_record["findings"] = [
+        finding
+        for finding in retained_record["findings"]
+        if finding["finding_id"] != "mid-findings-review-finding"
+    ]
+    validate_v1_2_semantics(
+        retained_record,
+        RECORDS_DIR / "self-test-retained-finding-lineage.json",
+        set(),
+        retained_dispatch_data,
+        review_inventory_entries=self_test_inventory_entries,
+    )
+
+    retained_negative_cases: list[
+        tuple[str, dict[str, Any], dict[str, tuple[Path, dict[str, Any], str]]]
+    ] = []
+    case_record = copy.deepcopy(retained_record)
+    case_record["delegated_runs"][1]["finding_refs"] = [
+        "findings-review-finding"
+    ]
+    retained_negative_cases.append(
+        ("duplicate-owner-carry", case_record, retained_dispatch_data)
+    )
+    case_record = copy.deepcopy(retained_record)
+    case_record["delegated_runs"][1]["carried_finding_refs"] = [
+        "fabricated-finding"
+    ]
+    retained_negative_cases.append(
+        ("fabricated-carry", case_record, retained_dispatch_data)
+    )
+    case_record = copy.deepcopy(retained_record)
+    case_record["findings"][0]["priority"] = "P3"
+    case_record["findings"][0]["severity"] = "warning"
+    retained_negative_cases.append(
+        ("nonblocking-carry", case_record, retained_dispatch_data)
+    )
+    case_dispatch_data = copy.deepcopy(retained_dispatch_data)
+    case_dispatch_data["self-test-mid-findings-review"][1]["review_cycle"][
+        "trigger_run_ids"
+    ] = ["clean-review"]
+    retained_negative_cases.append(
+        ("non-predecessor-carry", retained_record, case_dispatch_data)
+    )
+    case_record = copy.deepcopy(retained_record)
+    case_record["remediations"] = case_record["remediations"][1:]
+    retained_negative_cases.append(
+        ("carry-without-remediation", case_record, retained_dispatch_data)
+    )
+    case_dispatch_data = copy.deepcopy(retained_dispatch_data)
+    case_dispatch_data["self-test-clean-review"][1]["review_cycle"][
+        "finding_refs"
+    ] = []
+    retained_negative_cases.append(
+        ("trigger-array-laundering", retained_record, case_dispatch_data)
+    )
+    case_record = copy.deepcopy(retained_record)
+    case_record["delegated_runs"][1]["final_status"] = "blocked"
+    case_record["remediations"] = case_record["remediations"][1:]
+    retained_negative_cases.append(
+        ("blocked-carrier", case_record, retained_dispatch_data)
+    )
+    case_record = copy.deepcopy(retained_record)
+    case_record["delegated_runs"][1]["verdict"] = "not_applicable"
+    case_record["remediations"] = case_record["remediations"][:1]
+    retained_negative_cases.append(
+        ("not-applicable-carrier", case_record, retained_dispatch_data)
+    )
+    retained_exact_failures = {
+        "blocked-carrier": "can carry findings only when completed with verdict findings",
+        "not-applicable-carrier": (
+            "can carry findings only when completed with verdict findings"
+        ),
+    }
+    for label, candidate_record, candidate_dispatches in retained_negative_cases:
+        try:
+            validate_v1_2_semantics(
+                candidate_record,
+                RECORDS_DIR / f"self-test-{label}.json",
+                set(),
+                candidate_dispatches,
+                review_inventory_entries=self_test_inventory_entries,
+            )
+        except ValidationFailure as exc:
+            expected_failure = retained_exact_failures.get(label)
+            if expected_failure is not None and expected_failure not in str(exc):
+                print(
+                    "orchestration contract self-test failed: retained-finding "
+                    f"negative {label!r} raised the wrong failure: {exc}",
+                    file=sys.stderr,
+                )
+                return 1
+        else:
+            print(
+                "orchestration contract self-test failed: retained-finding "
+                f"negative {label!r} unexpectedly validated",
+                file=sys.stderr,
+            )
+            return 1
 
     same_cycle_laundering_record = copy.deepcopy(valid_parent_record)
     same_cycle_laundering_record["delegated_runs"] = [
@@ -7339,11 +7510,13 @@ def run_orchestration_contract_self_test() -> int:
         "all-untyped lineage, same/unchanged-cycle remediation laundering, "
         "post-CLEAN and over-budget causal review cycles, plus later-entry "
         "trailing spaces/tabs fail closed; "
-        "chained findings/remediation/re-review, exactly two supplemental "
+        "chained and retained findings/remediation/re-review, exactly two supplemental "
         "causal cycles, clean review with a complete durable P3/P4 inventory "
         "row, direct parent remediation, "
         "reviewed-baseline/primary-commit identity, and two-commit ledger "
-        "mutation validate"
+        "mutation validate; duplicate ownership, fabricated/unowned carry, "
+        "wrong-priority carry, non-predecessor carry, missing remediation, "
+        "trigger-array laundering, and blocked/not-applicable carriers fail closed"
     )
     return 0
 

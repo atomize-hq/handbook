@@ -138,3 +138,14 @@ post-consumption dispatch.
 Stop if review finds that the grant cannot mechanically bind direct predecessor,
 identity, subject ceiling, selector CLEAN, finite slots, and terminal
 consumption without a generic reset or historical rewrite.
+
+## Retained-finding lineage amendment
+
+The identity-bound authority extension selects optional
+`delegated_runs[].carried_finding_refs` as the smallest additive repair. It
+does not change `findings[].source_run_id` or transfer ownership. A carrier may
+name only P1/P2 IDs owned by exact `review_cycle.trigger_run_ids`, and only when
+completed remediation re-reviews that owner into the carrier. A carrier with
+FINDINGS is blocking even when it owns no new P1/P2. The immediately following
+cycle's exact finding array is the owned-plus-carried union of its trigger
+runs. Missing fields remain empty for old v1.4 records.

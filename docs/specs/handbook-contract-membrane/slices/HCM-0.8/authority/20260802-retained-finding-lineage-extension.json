@@ -1,0 +1,61 @@
+{
+  "schema_id": "handbook.retained-finding-lineage-extension-authority",
+  "schema_version": "1.0",
+  "issued_at_utc": "2026-08-02T14:54:21Z",
+  "thread_id": "019fc055-5272-7a73-8818-70ff752786c4",
+  "host_id": "local",
+  "meta_workflow_id": "handbook-hcm-3-2-20260801T201530Z",
+  "meta_thread_id": "019fbef9-19f2-7d12-8f17-9537932eed73",
+  "meta_host_id": "local",
+  "original_dispatch_nonce": "cc6ec0b2a3ca4000b16ec433fd236f59",
+  "authority_extension_nonce": "b09f72892a5046b8aa26f9866cde8ea8",
+  "parent_orchestration_id": "20260802T025200Z--HCM-0-8--post-clean-authority-continuation",
+  "integrated_outcome_id": "hcm-0.8-post-clean-authority-continuation-control-repair",
+  "outcome_registry_fingerprint": "sha256:2c670d3f5640fb401899067f50f3a6c4df917041476d3586b6682b4718bbe2aa",
+  "causal_budget_id": "sha256:2d3f1c349622262c2be6970135114c7738afa9ffda75ee9319ba67e93f4d1b93",
+  "review_stage": "proof",
+  "mechanism": {
+    "field": "delegated_runs[].carried_finding_refs",
+    "original_owner": "findings[].source_run_id remains unique and unchanged",
+    "carrier": "a later FINDINGS review may carry only an earlier P1/P2 owned by a review named in its dispatch review_cycle.trigger_run_ids",
+    "remediation": "the original owner must have a completed remediation whose re_review_run_id is the carrier",
+    "next_cycle": "the carrier's owned and carried P1/P2 union is the exact immediate-trigger finding array",
+    "compatibility": "the field is optional and absent means an empty carry set"
+  },
+  "exact_regressions": [
+    {"finding_id": "HCM08-PLN-DISC-001", "owner_run_id": "hcm08_authority_continuation_planning_review", "carrier_run_id": "hcm08_authority_continuation_planning_closure"},
+    {"finding_id": "HCM08-DISC-P2-003", "owner_run_id": "hcm08_authority_continuation_implementation_discovery", "carrier_run_id": "hcm08_authority_continuation_final_review"}
+  ],
+  "immutable_dispatch_fingerprints": {
+    "20260802T025342Z--HCM-0-8--post-clean-authority-continuation-planning-review": "sha256:8f49db89f77e28465eb6b58fc4c3dff26f3bfc54ec8421e41abe9b778dca0991",
+    "20260802T031200Z--HCM-0-8--post-clean-authority-continuation-planning-closure": "sha256:dd9aece5a891ea0a55f54fbf57716da894cf99429cbc8b26297dd70f7225f1d1",
+    "20260802T033100Z--HCM-0-8--post-clean-authority-continuation-planning-supplemental": "sha256:ae6dc0e8453dbcb1d5c87e48eea07f98cfd7d42bcbf4fbec2033bbc172773584",
+    "20260802T034300Z--HCM-0-8--post-clean-authority-continuation-implementation": "sha256:1f8d1d9006c744e97d58383d2d700674c89559f51dc99a0b6427ed306bbe38ea",
+    "20260802T041400Z--HCM-0-8--authority-continuation-implementation-discovery": "sha256:84d42cb8d1f45979286b5d7d4af73765fc5236827c118d0206267fd8f353136a",
+    "20260802T043500Z--HCM-0-8--authority-continuation-implementation-remediation": "sha256:c8a6a17ba03d4bb7b07b7cf8f3b5b5b25ff85f12d96155f5222294c194f36592",
+    "20260802T051500Z--HCM-0-8--authority-continuation-final-aggregate-review": "sha256:3fa52bf11c81d1451489d5d11b7388e88be2e58e352cefbf3f5779b6cc64205e",
+    "20260802T055000Z--HCM-0-8--authority-continuation-final-review-remediation": "sha256:e39e5723a4d76b7a7b2ef8a0c0d140a8db8153cd065c5e447469f8b153fc6339",
+    "20260802T060000Z--HCM-0-8--authority-continuation-final-aggregate-supplemental": "sha256:5a99c2576465c7e5c2e776dc69e94ab5d9806d89e2fe57afa2843f450727b8cc"
+  },
+  "path_ceiling": [
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T150200Z--HCM-0-8--retained-finding-lineage-proof-review.json",
+    "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.4.schema.json",
+    "docs/specs/handbook-contract-membrane/handoffs/handoff-template.json",
+    "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+    "docs/specs/handbook-contract-membrane/slices/HCM-0.8/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-0.8/authority/20260802-retained-finding-lineage-extension.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T145421Z--retained-finding-lineage-extension.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-0.8/tasks/plan.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-0.8/tasks/todo.md"
+  ],
+  "symbol_ceiling": ["validate_review_cycles", "validate_v1_2_semantics", "run_orchestration_contract_self_test"],
+  "risk_ceiling": "HIGH",
+  "required_negatives": ["duplicate ownership", "fabricated or unowned carry", "wrong priority or severity", "non-predecessor carry", "missing remediation", "trigger-array laundering", "cycle after CLEAN", "third supplemental", "budget or identity reset"],
+  "prohibitions": ["immutable dispatch edit", "generic review-budget reset", "new parent, outcome, packet, or finding identity", "P1/P2 waiver", "HCM-3.2 product work", "dependency, public/runtime, unsafe/native/transport, or shipped-identity change", "push or remote publication"]
+}

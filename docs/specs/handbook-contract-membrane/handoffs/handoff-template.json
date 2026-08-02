@@ -42,6 +42,7 @@
       "final_status": "completed",
       "verdict": "findings",
       "finding_refs": [],
+      "carried_finding_refs": [],
       "evidence_refs": [],
       "result_subject_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
     }

@@ -49,6 +49,21 @@
 
 ## Closeout
 
+## Retained-finding authority extension
+
+- [x] Reverify task identity, reviewed-primary checkpoint, integration ref,
+  remote baseline, protected paths, and nine immutable dispatch hashes.
+- [x] Record the exact authority artifact, path/symbol/risk ceiling, and
+  selector amendment.
+- [x] Add a failing retained-finding positive fixture before validator repair.
+- [x] Add optional carried-finding schema/template and fail-closed semantics.
+- [x] Add duplicate/fabricated/wrong-priority/non-predecessor/missing-
+  remediation/trigger-laundering negatives while preserving existing budget
+  and terminality negatives.
+- [ ] Pass the full proof wall and live review-dispatch gate.
+- [ ] Obtain fresh independent CLEAN review of authority and material repair.
+- [ ] Commit the new reviewed primary tip, then complete handoff/ledger/CAS.
+
 - [ ] Commit the reviewed primary state or reviewed primary stack.
 - [ ] Create completed v1.4 handoff using the final primary tip as baseline.
 - [ ] Rebuild ledger and rerun ordinary validation plus both self-tests.

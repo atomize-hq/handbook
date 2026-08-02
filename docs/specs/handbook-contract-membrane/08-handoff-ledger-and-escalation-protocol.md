@@ -167,6 +167,8 @@ V1.4 requires:
   commit, bounded by the allowance population frozen at the final clean-review
   dispatch;
 - structured finding priority, status, and source-review-run linkage;
+- optional typed carried-finding refs that retain an earlier P1/P2 without
+  changing its unique source-review owner;
 - snapshot_refs and semantic_refs;
 - resume rather than the historical queue-shaped next_session object.
 
@@ -376,6 +378,15 @@ proof gap, or manifest/scope omission after remediation consumes the next
 causal cycle or stops; it cannot be relabeled as discovery. Legitimate separate
 integrated outcomes receive separate derived budgets and remain independently
 reviewable.
+
+A later FINDINGS re-review may list an earlier blocking ID in optional
+`carried_finding_refs`. The ID remains owned only by its original
+`source_run_id`/`finding_refs`; the original owner must be an exact trigger of
+the carrier's cycle and completed remediation must re-review into that carrier.
+The next cycle's exact finding array is the union of each immediate trigger
+run's owned and carried P1/P2. Missing means empty. Duplicate ownership,
+fabricated/unowned or P3/P4 carry, non-predecessor carry, missing remediation,
+and trigger-array laundering fail closed.
 
 A completed v1.4 record fails semantic validation when a P1/P2 findings review
 lacks typed successful parent/delegated remediation, delegated remediation is

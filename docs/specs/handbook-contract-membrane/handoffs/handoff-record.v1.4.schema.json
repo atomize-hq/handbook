@@ -1177,6 +1177,14 @@
           },
           "uniqueItems": true
         },
+        "carried_finding_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
         "evidence_refs": {
           "type": "array",
           "items": {
