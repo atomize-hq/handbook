@@ -57,6 +57,39 @@
     ],
     "aggregate_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
   },
+  "authority_continuations": [
+    {
+      "extension_id": "replace-with-authority-extension-id",
+      "grant_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "predecessor_handoff_id": "replace-with-direct-authority-stop-handoff",
+      "selector_run_id": "replace-with-clean-authority-selector-run",
+      "baseline_commit": "0000000000000000000000000000000000000000",
+      "baseline_tree": "0000000000000000000000000000000000000000",
+      "slots": [
+        {
+          "review_slot": "authority_admission",
+          "cycle_ids": ["replace-with-authority-admission-cycle"],
+          "dispatch_ids": ["replace-with-authority-admission-dispatch"]
+        }
+      ],
+      "actual_changed_paths": ["replace/with/actual/changed/path.rs"],
+      "changed_symbols": [
+        {"symbol": "replace_with_changed_symbol", "risk": "HIGH"}
+      ],
+      "observed_risk": "HIGH",
+      "gitnexus_evidence": {
+        "path": "replace/with/gitnexus-change-detection.json",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "attestation": {
+          "run_id": "replace-with-clean-evidence-review-run",
+          "dispatch_id": "replace-with-evidence-review-dispatch",
+          "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/replace-evidence-review.json",
+          "dispatch_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      },
+      "status": "active"
+    }
+  ],
   "ancillary_diff_observations": [],
   "remediations": [],
   "reviewed_state": {

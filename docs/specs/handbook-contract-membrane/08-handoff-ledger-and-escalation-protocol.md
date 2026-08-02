@@ -116,6 +116,30 @@ corrections are additive.
   rejects every later dispatch. A cross-parent record never qualifies as that
   successor; a same-packet dual-link attempt that changes orchestration fails.
 
+One narrow v1.4 exception permits bounded work after a direct non-completed
+`authority_boundary` cutoff. Every extension dispatch repeats one canonical
+grant and fingerprint, keeps the same parent/outcome/registry/budget/packet
+identity, and names one ordered slot: `authority_admission`, `implementation`,
+`proof`, or `final_closeout`. The grant binds independently issued and
+different-parent CLEAN-attested authority, the predecessor's reviewed Git
+baseline, path/symbol/risk/scope ceilings, and four cycles per slot. Admission
+is read-only; its CLEAN selector is required before later work. Each slot has
+at most one non-cycle dispatch plus four one-dispatch cycles, and CLEAN ends
+the slot. Successor handoffs record exact membership and actual delta parity;
+a completed successor marks the sole grant consumed after final CLEAN. A
+failed admission, second grant/successor, branch, identity drift, ceiling
+breach, or post-consumption dispatch fails closed.
+
+For a code-bearing delta, the successor summary must reference an available,
+byte-hashed GitNexus compare artifact. The artifact's exact baseline/target,
+actual paths, complete nonempty symbols and risks, aggregate maximum risk, and
+raw-output fingerprint must match the replayed Git delta, handoff summary, and
+grant ceilings. One completed CLEAN review run in that same successor handoff
+must attest a manifest containing the exact artifact hash. Missing, mutated,
+unavailable, empty, omitted, unauthorized, understated, or unattested evidence
+is invalid; documentation-only continuations retain compatibility when no code
+path is present.
+
 ## Handoff schema routing
 
 handbook.session-handoff records route only by top-level schema_version:

@@ -52,6 +52,52 @@
     "event_reason": "initial_stage_review",
     "causal_predecessor_dispatch_id": null
   },
+  "authority_continuation": {
+    "grant": {
+      "extension_id": "replace-with-single-authority-extension-id",
+      "predecessor_handoff_id": "replace-with-direct-authority-stop-handoff-id",
+      "predecessor_dispatch_population_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "parent_orchestration_id": "YYYYMMDDTHHMMSSZ--HCM-X-Y--orchestration",
+      "integrated_outcome_id": "replace-with-integrated-outcome",
+      "outcome_registry_fingerprint": "sha256:9222e16f74ffce01a4465fad85befa90a29a97e099768a4220db01c95b705442",
+      "causal_budget_id": "sha256:16cece26798d37a5c654ac1f25fe688a1c2c9d664adcf1c6b96ed10c0476a1c3",
+      "packet_ids": [null],
+      "authority_ref": {
+        "path": "replace/with/repository-authority.json",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "issuer": {"role": "replace-with-issuer-role", "identity": "replace-with-issuer-identity"},
+        "owner": {"role": "replace-with-owner-role", "identity": "replace-with-owner-identity"},
+        "issued_at_utc": "2026-07-13T23:57:00Z",
+        "source": {
+          "task_ref": "replace-with-task",
+          "thread_ref": "replace-with-thread",
+          "host_ref": "replace-with-host",
+          "dispatch_nonce": "replace-with-nonce"
+        },
+        "attestation": {
+          "handoff_id": "replace-with-completed-different-parent-handoff",
+          "run_id": "replace-with-clean-review-run",
+          "dispatch_id": "replace-with-clean-review-dispatch",
+          "dispatch_ref": "replace/with/clean-review-dispatch.json",
+          "dispatch_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      },
+      "baseline_commit": "0000000000000000000000000000000000000000",
+      "baseline_tree": "0000000000000000000000000000000000000000",
+      "subject_path_ceiling": ["replace/with/repository-authority.json"],
+      "symbol_delta": [],
+      "risk_ceiling": "LOW",
+      "scope_delta": "Replace with the exact bounded continuation scope.",
+      "review_allowance": [
+        {"review_slot": "authority_admission", "max_cycles": 4},
+        {"review_slot": "implementation", "max_cycles": 4},
+        {"review_slot": "proof", "max_cycles": 4},
+        {"review_slot": "final_closeout", "max_cycles": 4}
+      ]
+    },
+    "grant_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "review_slot": "authority_admission"
+  },
   "pre_review_convergence": {
     "gate_id": "replace-with-convergence-gate",
     "completed_at_utc": "2026-07-13T23:59:00Z",

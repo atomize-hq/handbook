@@ -19,6 +19,37 @@ The HCM-0.4 owner, SDK/transport, and public-proof-plan sections remain frozen d
 - First-version schema, kind, stable-role registry, intake, renderer, capability-contract, posture-trigger/policy, and profile-parent references are exact ID/version references with their required semantic fingerprints. Version ranges, implicit latest selection, and undeclared fallback are refused.
 - Canonical normalization and fingerprints exclude absolute machine paths, timestamps unless time is itself semantic input, and presentation-only ordering. They include every semantic value and exact referenced definition fingerprint.
 
+### V1.4 authority-continuation control record
+
+An internal dispatch may carry one optional `authority_continuation`. Its
+immutable grant binds the direct non-completed authority-stop predecessor and
+dispatch population, unchanged orchestration/outcome/registry/budget/packet
+identity, an independently issued and different-parent CLEAN-attested
+authority artifact, exact reviewed Git baseline, sorted path and symbol
+ceilings, accepted risk, scope, and four ordered review allowances. The grant
+fingerprint is lowercase SHA-256 over UTF-8 RFC 8785/JCS canonical JSON plus
+one LF; only `review_slot` varies outside the grant. The artifact is the
+acyclic grant projection excluding only the authority path, hash, and later
+attestation.
+
+Admission is read-only and requires its own CLEAN selector before later work.
+Each slot permits at most one non-cycle dispatch and four one-dispatch review
+cycles; CLEAN terminates the slot. A completed v1.4 successor consumes the
+grant after final-closeout CLEAN. A second grant, identity drift, older-cutoff
+branch, out-of-ceiling delta, role collision, failed admission reuse, or
+post-consumption dispatch is invalid. Objects without this optional field
+retain their historical meaning.
+
+Every code-bearing continuation summary also carries a byte-hashed GitNexus
+change-detection evidence reference. Its artifact fixes the provider/version,
+exact compare command, baseline and target commit/tree, actual changed paths,
+complete nonempty symbol/risk observations, aggregate maximum risk, and raw
+output fingerprint. A completed CLEAN review run in the same handoff attests a
+dispatch whose replayed manifest contains those exact evidence bytes. Git,
+evidence, summary, and grant must agree exactly; missing or unavailable
+evidence, empty or omitted symbols, unauthorized symbols/risks, understated
+aggregate risk, and unattested bytes fail closed.
+
 ### Uniform exact-definition identity
 
 Every HCM-0.2/HCM-0.3 versioned definition uses a namespaced stable identity field and SemVer field. Its exact ref is mechanically `identity + "@" + version`; for example, `profile_id: handbook.profile.example` plus `profile_version: "1.0.0"` yields `handbook.profile.example@1.0.0`. A ref that cannot be derived this way, resolves to different identity fields, or resolves more than one record is invalid.

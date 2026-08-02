@@ -12,7 +12,7 @@ import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
-from typing import Any
+from typing import Any, Callable
 
 from jsonschema import Draft202012Validator, FormatChecker
 
@@ -236,6 +236,13 @@ def load_json(path: Path) -> dict[str, Any]:
         raise ValidationFailure(f"{path}: invalid JSON: {error}") from error
     if not isinstance(value, dict):
         raise ValidationFailure(f"{path}: expected a JSON object")
+    return value
+
+
+def load_dispatch_template_fixture() -> dict[str, Any]:
+    """Return the ordinary historical/self-test template shape."""
+    value = load_json(INTERNAL_DISPATCH_TEMPLATE_PATH)
+    value.pop("authority_continuation", None)
     return value
 
 
@@ -955,11 +962,19 @@ def validate_review_cycles(
 
 
 REVIEW_STAGE_ORDER = {
+    "authority_admission": -1,
     "planning": 0,
     "implementation": 1,
     "proof": 2,
     "final_closeout": 3,
 }
+AUTHORITY_CONTINUATION_SLOTS = (
+    "authority_admission",
+    "implementation",
+    "proof",
+    "final_closeout",
+)
+RISK_ORDER = {"LOW": 0, "MEDIUM": 1, "HIGH": 2, "CRITICAL": 3}
 PRE_REVIEW_CHECK_KINDS = {
     "complete_packet_wall",
     "recursive_fixture_consumer_inventory",
@@ -997,6 +1012,175 @@ def derive_causal_budget_id(
         f"{parent_orchestration_id}\0{integrated_outcome_id}\n".encode()
     )
     return "sha256:" + hashlib.sha256(encoded).hexdigest()
+
+
+def canonical_jcs_json(value: Any) -> str:
+    """Encode the grant's closed JSON domain using RFC 8785 ordering."""
+    if value is None or isinstance(value, (bool, int)):
+        return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+    if isinstance(value, str):
+        return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+    if isinstance(value, list):
+        return "[" + ",".join(canonical_jcs_json(item) for item in value) + "]"
+    if isinstance(value, dict):
+        if any(not isinstance(key, str) for key in value):
+            raise ValidationFailure("canonical grant JSON requires string keys")
+        items = sorted(
+            value.items(),
+            key=lambda item: item[0].encode("utf-16-be", "surrogatepass"),
+        )
+        return "{" + ",".join(
+            canonical_jcs_json(key) + ":" + canonical_jcs_json(item)
+            for key, item in items
+        ) + "}"
+    raise ValidationFailure(
+        f"canonical grant JSON rejects unsupported value {type(value).__name__}"
+    )
+
+
+def derive_authority_grant_fingerprint(grant: dict[str, Any]) -> str:
+    encoded = (canonical_jcs_json(grant) + "\n").encode("utf-8")
+    return "sha256:" + hashlib.sha256(encoded).hexdigest()
+
+
+def authority_artifact_from_grant(grant: dict[str, Any]) -> dict[str, Any]:
+    authority = grant["authority_ref"]
+    return {
+        "schema_id": "handbook.authority-continuation-grant",
+        "schema_version": "1.0",
+        "extension_id": grant["extension_id"],
+        "predecessor_handoff_id": grant["predecessor_handoff_id"],
+        "predecessor_dispatch_population_fingerprint": grant[
+            "predecessor_dispatch_population_fingerprint"
+        ],
+        "parent_orchestration_id": grant["parent_orchestration_id"],
+        "integrated_outcome_id": grant["integrated_outcome_id"],
+        "outcome_registry_fingerprint": grant["outcome_registry_fingerprint"],
+        "causal_budget_id": grant["causal_budget_id"],
+        "packet_ids": grant["packet_ids"],
+        "authority_ref": {
+            "issuer": authority["issuer"],
+            "owner": authority["owner"],
+            "issued_at_utc": authority["issued_at_utc"],
+            "source": authority["source"],
+        },
+        "baseline_commit": grant["baseline_commit"],
+        "baseline_tree": grant["baseline_tree"],
+        "subject_path_ceiling": grant["subject_path_ceiling"],
+        "symbol_delta": grant["symbol_delta"],
+        "risk_ceiling": grant["risk_ceiling"],
+        "scope_delta": grant["scope_delta"],
+        "review_allowance": grant["review_allowance"],
+    }
+
+
+def validate_authority_continuation_dispatch(
+    dispatch: dict[str, Any], dispatch_path: Path, *, repo_root: Path = REPO_ROOT
+) -> None:
+    continuation = dispatch.get("authority_continuation")
+    causal = dispatch["causal_control"]
+    if continuation is None:
+        if causal["review_stage"] == "authority_admission" or causal[
+            "stage_transition"
+        ]["kind"] == "authority_extension":
+            raise ValidationFailure(
+                f"{dispatch_path}: authority stage/transition requires a continuation grant"
+            )
+        return
+
+    grant = continuation["grant"]
+    expected_fingerprint = derive_authority_grant_fingerprint(grant)
+    if continuation["grant_fingerprint"] != expected_fingerprint:
+        raise ValidationFailure(
+            f"{dispatch_path}: authority continuation grant fingerprint mismatch"
+        )
+    stable_identity = {
+        "parent_orchestration_id": dispatch["parent_orchestration_id"],
+        "integrated_outcome_id": causal["integrated_outcome_id"],
+        "outcome_registry_fingerprint": causal.get("outcome_registry_fingerprint"),
+        "causal_budget_id": causal["causal_budget_id"],
+    }
+    for field, expected in stable_identity.items():
+        if grant[field] != expected:
+            raise ValidationFailure(
+                f"{dispatch_path}: authority grant {field} drifts from dispatch identity"
+            )
+    if dispatch["packet_id"] not in grant["packet_ids"]:
+        raise ValidationFailure(
+            f"{dispatch_path}: authority grant does not register dispatch packet"
+        )
+    registry_packets = sorted(
+        packet_id
+        for outcome in dispatch["causal_outcome_registry"]["outcomes"]
+        if outcome["integrated_outcome_id"] == grant["integrated_outcome_id"]
+        for packet_id in outcome["packet_ids"]
+    )
+    if grant["packet_ids"] != registry_packets:
+        raise ValidationFailure(
+            f"{dispatch_path}: authority grant packet identity differs from registry"
+        )
+    if continuation["review_slot"] != causal["review_stage"]:
+        raise ValidationFailure(
+            f"{dispatch_path}: authority review slot and causal stage differ"
+        )
+    paths = grant["subject_path_ceiling"]
+    if paths != sorted(paths) or len(paths) != len(set(paths)):
+        raise ValidationFailure(
+            f"{dispatch_path}: authority subject path ceiling must be unique and sorted"
+        )
+    symbols = grant["symbol_delta"]
+    if symbols != sorted(symbols, key=lambda item: (item["symbol"], item["risk"])):
+        raise ValidationFailure(
+            f"{dispatch_path}: authority symbol delta must be sorted"
+        )
+    if len({item["symbol"] for item in symbols}) != len(symbols):
+        raise ValidationFailure(
+            f"{dispatch_path}: authority symbol delta contains duplicates"
+        )
+    if any(RISK_ORDER[item["risk"]] > RISK_ORDER[grant["risk_ceiling"]] for item in symbols):
+        raise ValidationFailure(
+            f"{dispatch_path}: authority symbol risk exceeds grant ceiling"
+        )
+    allowance = grant["review_allowance"]
+    if [item["review_slot"] for item in allowance] != list(
+        AUTHORITY_CONTINUATION_SLOTS
+    ) or any(item["max_cycles"] != 4 for item in allowance):
+        raise ValidationFailure(
+            f"{dispatch_path}: authority continuation review allowance is not exact"
+        )
+    manifest = {
+        item["path"]: item["sha256"]
+        for item in dispatch["subject_manifest"]["entries"]
+    }
+    authority = grant["authority_ref"]
+    if manifest.get(authority["path"]) != authority["sha256"]:
+        raise ValidationFailure(
+            f"{dispatch_path}: authority artifact is absent or stale in subject manifest"
+        )
+    attestation = authority["attestation"]
+    if manifest.get(attestation["dispatch_ref"]) != attestation[
+        "dispatch_sha256"
+    ].removeprefix("sha256:"):
+        raise ValidationFailure(
+            f"{dispatch_path}: authority review dispatch is absent or stale in subject manifest"
+        )
+    if not set(manifest).issubset(set(paths)):
+        raise ValidationFailure(
+            f"{dispatch_path}: dispatch manifest exceeds authority subject ceiling"
+        )
+    if parse_utc_timestamp(authority["issued_at_utc"], dispatch_path) >= parse_utc_timestamp(
+        dispatch["created_at_utc"], dispatch_path
+    ):
+        raise ValidationFailure(
+            f"{dispatch_path}: authority artifact must predate continuation dispatch"
+        )
+    authority_path = repo_root / authority["path"]
+    artifact = load_json(authority_path)
+    expected_artifact = authority_artifact_from_grant(grant)
+    if artifact != expected_artifact:
+        raise ValidationFailure(
+            f"{dispatch_path}: authority artifact and immutable grant fields differ"
+        )
 
 
 def is_pre_registry_v1_4_dispatch(dispatch_path: Path) -> bool:
@@ -1177,6 +1361,9 @@ def validate_v1_4_dispatch_control(
 ) -> None:
     parse_utc_timestamp(dispatch["created_at_utc"], dispatch_path)
     validate_v1_4_outcome_registry(dispatch, dispatch_path)
+    validate_authority_continuation_dispatch(
+        dispatch, dispatch_path, repo_root=repo_root
+    )
     causal = dispatch["causal_control"]
     expected_budget_id = derive_causal_budget_id(
         dispatch["parent_orchestration_id"],
@@ -1400,6 +1587,14 @@ def validate_v1_4_causal_sequence(
     for causal_budget_id, sequence in sequences.items():
         prior_dispatch: dict[str, Any] | None = None
         prior_stage: str | None = None
+        continuation_fingerprint: str | None = None
+        continuation_started = False
+        selector_clean = False
+        selector_failed = False
+        highest_continuation_slot = -1
+        clean_continuation_slots: set[str] = set()
+        continuation_slot_dispatch_counts: dict[str, int] = {}
+        continuation_slot_noncycle_counts: dict[str, int] = {}
         stage_cycles: dict[
             str, list[tuple[dict[str, Any], list[dict[str, Any]]]]
         ] = {}
@@ -1408,6 +1603,49 @@ def validate_v1_4_causal_sequence(
             stage = causal["review_stage"]
             transition = causal["stage_transition"]
             predecessor_id = causal["causal_predecessor_dispatch_id"]
+            continuation = dispatch.get("authority_continuation")
+            if continuation is not None:
+                fingerprint = continuation["grant_fingerprint"]
+                if continuation_fingerprint is None:
+                    continuation_fingerprint = fingerprint
+                elif fingerprint != continuation_fingerprint:
+                    raise ValidationFailure(
+                        f"{record_path}: parent repeats a non-equivalent authority grant"
+                    )
+                if selector_failed:
+                    raise ValidationFailure(
+                        f"{record_path}: continuation dispatch follows failed authority admission"
+                    )
+                slot = continuation["review_slot"]
+                continuation_slot_dispatch_counts[slot] = (
+                    continuation_slot_dispatch_counts.get(slot, 0) + 1
+                )
+                if continuation_slot_dispatch_counts[slot] > 5:
+                    raise ValidationFailure(
+                        f"{record_path}: authority continuation slot {slot!r} exceeds five dispatches"
+                    )
+                if dispatch["review_cycle"] is None:
+                    continuation_slot_noncycle_counts[slot] = (
+                        continuation_slot_noncycle_counts.get(slot, 0) + 1
+                    )
+                    if continuation_slot_noncycle_counts[slot] > 1:
+                        raise ValidationFailure(
+                            f"{record_path}: authority continuation slot {slot!r} repeats a non-cycle dispatch"
+                        )
+                slot_index = AUTHORITY_CONTINUATION_SLOTS.index(slot)
+                if slot in clean_continuation_slots:
+                    raise ValidationFailure(
+                        f"{record_path}: continuation dispatch follows CLEAN in slot {slot!r}"
+                    )
+                if slot_index > highest_continuation_slot + 1 or slot_index < highest_continuation_slot:
+                    raise ValidationFailure(
+                        f"{record_path}: authority continuation slot order is invalid"
+                    )
+                highest_continuation_slot = max(highest_continuation_slot, slot_index)
+                if continuation["review_slot"] != "authority_admission" and not selector_clean:
+                    raise ValidationFailure(
+                        f"{record_path}: continuation writes or advances before selector CLEAN"
+                    )
             if prior_dispatch is None:
                 if (
                     transition["kind"] != "enter"
@@ -1424,12 +1662,27 @@ def validate_v1_4_causal_sequence(
                         f"{record_path}: dispatch {dispatch['dispatch_id']!r} "
                         "does not name the immediately preceding causal dispatch"
                     )
-                if REVIEW_STAGE_ORDER[stage] < REVIEW_STAGE_ORDER[prior_stage]:
+                is_authority_extension = (
+                    continuation is not None
+                    and not continuation_started
+                    and stage == "authority_admission"
+                    and transition == {
+                        "kind": "authority_extension",
+                        "from_stage": prior_stage,
+                    }
+                )
+                if (
+                    REVIEW_STAGE_ORDER[stage] < REVIEW_STAGE_ORDER[prior_stage]
+                    and not is_authority_extension
+                ):
                     raise ValidationFailure(
                         f"{record_path}: causal budget {causal_budget_id!r} "
                         "regresses its review stage"
                     )
-                if stage == prior_stage:
+                if is_authority_extension:
+                    expected_transition = ("authority_extension", prior_stage)
+                    continuation_started = True
+                elif stage == prior_stage:
                     expected_transition = ("continue", prior_stage)
                 else:
                     expected_transition = ("enter", prior_stage)
@@ -1451,7 +1704,12 @@ def validate_v1_4_causal_sequence(
                     "review cycle"
                 )
             if review_cycle is not None:
-                cycles = stage_cycles.setdefault(stage, [])
+                cycle_group = (
+                    f"authority:{continuation['review_slot']}"
+                    if continuation is not None
+                    else stage
+                )
+                cycles = stage_cycles.setdefault(cycle_group, [])
                 if not cycles or cycles[-1][0]["cycle_id"] != review_cycle[
                     "cycle_id"
                 ]:
@@ -1470,7 +1728,7 @@ def validate_v1_4_causal_sequence(
                         for prior_run in cycle_runs
                     ):
                         raise ValidationFailure(
-                            f"{record_path}: review stage {stage!r} creates a "
+                            f"{record_path}: review stage {cycle_group!r} creates a "
                             "cycle after CLEAN"
                         )
                     cycles.append((review_cycle, [run]))
@@ -1489,6 +1747,11 @@ def validate_v1_4_causal_sequence(
                         )
                     cycle_runs.append(run)
 
+                if continuation is not None and len(cycles[-1][1]) != 1:
+                    raise ValidationFailure(
+                        f"{record_path}: authority continuation permits one dispatch per cycle"
+                    )
+
                 if review_cycle["kind"] == "discovery":
                     if event_reason not in {
                         "initial_stage_review",
@@ -1506,6 +1769,17 @@ def validate_v1_4_causal_sequence(
 
             prior_dispatch = dispatch
             prior_stage = stage
+            if continuation is not None and stage == "authority_admission":
+                if run["final_status"] == "completed" and run["verdict"] == "clean":
+                    selector_clean = True
+                elif run["final_status"] == "completed" and run["verdict"] == "findings":
+                    selector_failed = True
+            if (
+                continuation is not None
+                and run["final_status"] == "completed"
+                and run["verdict"] == "clean"
+            ):
+                clean_continuation_slots.add(continuation["review_slot"])
 
         for stage, cycles in stage_cycles.items():
             kinds = [cycle["kind"] for cycle, _ in cycles]
@@ -1642,10 +1916,646 @@ def validate_v1_4_dispatch_population(
         )
 
 
+def validate_authority_continuation_chains(
+    records: list[tuple[Path, dict[str, Any]]],
+    dispatches: dict[str, tuple[Path, dict[str, Any], str]],
+    *,
+    repo_root: Path = REPO_ROOT,
+) -> None:
+    record_by_id = {record["handoff_id"]: (path, record) for path, record in records}
+    continuation_by_parent: dict[
+        str, list[tuple[Path, dict[str, Any], dict[str, Any]]]
+    ] = {}
+    for dispatch_path, dispatch, _ in dispatches.values():
+        continuation = dispatch.get("authority_continuation")
+        if continuation is not None:
+            continuation_by_parent.setdefault(
+                dispatch["parent_orchestration_id"], []
+            ).append((dispatch_path, dispatch, continuation))
+
+    for parent_id, entries in continuation_by_parent.items():
+        entries.sort(
+            key=lambda item: (
+                parse_utc_timestamp(item[1]["created_at_utc"], item[0]),
+                item[1]["dispatch_id"],
+            )
+        )
+        fingerprints = {item[2]["grant_fingerprint"] for item in entries}
+        if len(fingerprints) != 1:
+            raise ValidationFailure(
+                f"{parent_id}: more than one authority continuation grant exists"
+            )
+        grant = entries[0][2]["grant"]
+        baseline_tree = subprocess.run(
+            ["git", "rev-parse", f"{grant['baseline_commit']}^{{tree}}"],
+            cwd=repo_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if (
+            baseline_tree.returncode != 0
+            or baseline_tree.stdout.strip() != grant["baseline_tree"]
+        ):
+            raise ValidationFailure(
+                f"{parent_id}: authority continuation baseline commit/tree is invalid"
+            )
+        predecessor_entry = record_by_id.get(grant["predecessor_handoff_id"])
+        if predecessor_entry is None:
+            raise ValidationFailure(
+                f"{parent_id}: authority continuation predecessor handoff is missing"
+            )
+        predecessor_path, predecessor = predecessor_entry
+        predecessor_commit = subprocess.run(
+            ["git", "log", "-1", "--format=%H", "--", str(predecessor_path)],
+            cwd=repo_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if (
+            predecessor_commit.returncode != 0
+            or predecessor_commit.stdout.strip() != grant["baseline_commit"]
+        ):
+            raise ValidationFailure(
+                f"{parent_id}: authority baseline is not the direct predecessor handoff commit"
+            )
+        if (
+            predecessor["orchestration_id"] != parent_id
+            or predecessor["status"] == "completed"
+            or predecessor["stop_reason"] != "authority_boundary"
+        ):
+            raise ValidationFailure(
+                f"{parent_id}: authority continuation predecessor is not a same-parent non-completed authority stop"
+            )
+        if predecessor["dispatch_population"]["aggregate_fingerprint"] != grant[
+            "predecessor_dispatch_population_fingerprint"
+        ]:
+            raise ValidationFailure(
+                f"{parent_id}: authority continuation predecessor population changed"
+            )
+        predecessor_cutoff = parse_utc_timestamp(
+            predecessor["created_at_utc"], predecessor_path
+        )
+        first_path, first_dispatch, first_continuation = entries[0]
+        if parse_utc_timestamp(first_dispatch["created_at_utc"], first_path) <= predecessor_cutoff:
+            raise ValidationFailure(
+                f"{first_path}: authority continuation does not follow predecessor cutoff"
+            )
+        prefix = sorted(
+            (
+                dispatch
+                for path, dispatch, _ in dispatches.values()
+                if dispatch["parent_orchestration_id"] == parent_id
+                and parse_utc_timestamp(dispatch["created_at_utc"], path)
+                <= predecessor_cutoff
+            ),
+            key=lambda item: (item["created_at_utc"], item["dispatch_id"]),
+        )
+        if (
+            not prefix
+            or first_continuation["review_slot"] != "authority_admission"
+            or first_dispatch["role"] != "review"
+            or first_dispatch["causal_control"]["causal_predecessor_dispatch_id"]
+            != prefix[-1]["dispatch_id"]
+            or first_dispatch["causal_control"]["stage_transition"]["kind"]
+            != "authority_extension"
+        ):
+            raise ValidationFailure(
+                f"{first_path}: first continuation is not the direct read-only authority selector"
+            )
+
+        authority = grant["authority_ref"]
+        authority_path = repo_root / authority["path"]
+        if hashlib.sha256(authority_path.read_bytes()).hexdigest() != authority["sha256"]:
+            raise ValidationFailure(
+                f"{first_path}: authority artifact bytes do not match the grant"
+            )
+        attestation = authority["attestation"]
+        attested_entry = record_by_id.get(attestation["handoff_id"])
+        if attested_entry is None:
+            raise ValidationFailure(
+                f"{first_path}: authority attestation handoff is missing"
+            )
+        _, attested_handoff = attested_entry
+        if (
+            attested_handoff["status"] != "completed"
+            or attested_handoff["orchestration_id"] == parent_id
+        ):
+            raise ValidationFailure(
+                f"{first_path}: authority attestation must be a completed different-parent handoff"
+            )
+        attested_run = next(
+            (
+                run
+                for run in attested_handoff["delegated_runs"]
+                if run["run_id"] == attestation["run_id"]
+            ),
+            None,
+        )
+        attested_dispatch_entry = dispatches.get(attestation["dispatch_id"])
+        if attested_run is None or attested_dispatch_entry is None:
+            raise ValidationFailure(
+                f"{first_path}: authority attestation run or dispatch is missing"
+            )
+        attested_dispatch_path, attested_dispatch, attested_sha256 = (
+            attested_dispatch_entry
+        )
+        attested_ref = attested_dispatch_path.relative_to(repo_root).as_posix()
+        attested_manifest = {
+            item["path"]: item["sha256"]
+            for item in attested_dispatch["subject_manifest"]["entries"]
+        }
+        attested_manifest_aggregate = "sha256:" + hashlib.sha256(
+            "".join(
+                f"{item['path']}\0{item['sha256']}\n"
+                for item in attested_dispatch["subject_manifest"]["entries"]
+            ).encode()
+        ).hexdigest()
+        if (
+            attested_run["dispatch_id"] != attestation["dispatch_id"]
+            or attested_run["role"] != "review"
+            or attested_run["final_status"] != "completed"
+            or attested_run["verdict"] != "clean"
+            or attested_run["subject_fingerprint"]
+            != attested_dispatch["subject_fingerprint"]
+            or attested_run["result_subject_fingerprint"]
+            != attested_run["subject_fingerprint"]
+            or attested_dispatch["subject_fingerprint"]
+            != attested_manifest_aggregate
+            or attested_dispatch["subject_manifest"]["aggregate_fingerprint"]
+            != attested_manifest_aggregate
+            or attestation["dispatch_ref"] != attested_ref
+            or attestation["dispatch_sha256"] != f"sha256:{attested_sha256}"
+            or attested_manifest.get(authority["path"]) != authority["sha256"]
+        ):
+            raise ValidationFailure(
+                f"{first_path}: authority attestation is incomplete, stale, or not CLEAN"
+            )
+
+        parent_records = sorted(
+            (
+                (path, record)
+                for path, record in records
+                if record.get("schema_version") == "1.4"
+                and record["orchestration_id"] == parent_id
+            ),
+            key=lambda item: parse_utc_timestamp(item[1]["created_at_utc"], item[0]),
+        )
+        successor_records = [
+            (path, record)
+            for path, record in parent_records
+            if parse_utc_timestamp(record["created_at_utc"], path) > predecessor_cutoff
+        ]
+        if not successor_records:
+            raise ValidationFailure(
+                f"{parent_id}: continuation dispatches lack a successor handoff"
+            )
+        prior_successor_id = predecessor["handoff_id"]
+        for successor_index, (successor_path, successor) in enumerate(successor_records):
+            expected_link = [prior_successor_id]
+            if (
+                successor.get("source_handoff_ids") != expected_link
+                or successor.get("supersedes") != expected_link
+            ):
+                raise ValidationFailure(
+                    f"{successor_path}: continuation successor is not a direct dual-link"
+                )
+            if successor_index + 1 < len(successor_records) and successor["status"] == "completed":
+                raise ValidationFailure(
+                    f"{successor_path}: consumed continuation has a second successor"
+                )
+            prior_successor_id = successor["handoff_id"]
+        admission_agent: str | None = None
+        executor_agents: set[str] = set()
+        for record_path, record in successor_records:
+            summaries = record.get("authority_continuations", [])
+            if len(summaries) != 1:
+                raise ValidationFailure(
+                    f"{record_path}: continuation successor lacks exactly one summary"
+                )
+            summary = summaries[0]
+            cutoff = parse_utc_timestamp(record["created_at_utc"], record_path)
+            included = [
+                (path, dispatch, continuation)
+                for path, dispatch, continuation in entries
+                if parse_utc_timestamp(dispatch["created_at_utc"], path) <= cutoff
+            ]
+            runs_by_dispatch = {
+                run["dispatch_id"]: run for run in record["delegated_runs"]
+            }
+            selector_run = runs_by_dispatch.get(first_dispatch["dispatch_id"])
+            if selector_run is None:
+                raise ValidationFailure(
+                    f"{record_path}: continuation summary omits selector run"
+                )
+            admission_agent = selector_run["agent_id"]
+            for _, dispatch, _ in included:
+                run = runs_by_dispatch.get(dispatch["dispatch_id"])
+                if run is not None and dispatch["role"] != "review" and run["agent_id"]:
+                    executor_agents.add(run["agent_id"])
+            expected_slots = []
+            for slot in AUTHORITY_CONTINUATION_SLOTS:
+                slot_entries = [item for item in included if item[2]["review_slot"] == slot]
+                if not slot_entries:
+                    continue
+                if len(slot_entries) > 5 or sum(
+                    dispatch["review_cycle"] is None
+                    for _, dispatch, _ in slot_entries
+                ) > 1:
+                    raise ValidationFailure(
+                        f"{record_path}: authority continuation slot membership exceeds its dispatch ceiling"
+                    )
+                expected_slots.append(
+                    {
+                        "review_slot": slot,
+                        "cycle_ids": [
+                            dispatch["review_cycle"]["cycle_id"]
+                            for _, dispatch, _ in slot_entries
+                            if dispatch["review_cycle"] is not None
+                        ],
+                        "dispatch_ids": [
+                            dispatch["dispatch_id"] for _, dispatch, _ in slot_entries
+                        ],
+                    }
+                )
+            static_summary = {
+                "extension_id": grant["extension_id"],
+                "grant_fingerprint": entries[0][2]["grant_fingerprint"],
+                "predecessor_handoff_id": grant["predecessor_handoff_id"],
+                "selector_run_id": selector_run["run_id"],
+                "baseline_commit": grant["baseline_commit"],
+                "baseline_tree": grant["baseline_tree"],
+                "slots": expected_slots,
+            }
+            if any(summary[key] != value for key, value in static_summary.items()):
+                raise ValidationFailure(
+                    f"{record_path}: authority continuation summary parity mismatch"
+                )
+            if summary["actual_changed_paths"] != sorted(summary["actual_changed_paths"]):
+                raise ValidationFailure(
+                    f"{record_path}: actual authority path delta must be sorted"
+                )
+            actual_delta = subprocess.run(
+                [
+                    "git",
+                    "diff",
+                    "--name-only",
+                    "--no-renames",
+                    grant["baseline_commit"],
+                    record["repo_state"]["head"],
+                    "--",
+                ],
+                cwd=repo_root,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if actual_delta.returncode != 0:
+                raise ValidationFailure(
+                    f"{record_path}: cannot replay authority baseline-to-tip Git delta"
+                )
+            if summary["actual_changed_paths"] != sorted(
+                path for path in actual_delta.stdout.splitlines() if path
+            ):
+                raise ValidationFailure(
+                    f"{record_path}: recorded authority path delta differs from Git"
+                )
+            if not set(summary["actual_changed_paths"]).issubset(
+                set(grant["subject_path_ceiling"])
+            ):
+                raise ValidationFailure(
+                    f"{record_path}: actual changed path exceeds authority ceiling"
+                )
+            granted_symbols = {
+                (item["symbol"], item["risk"]) for item in grant["symbol_delta"]
+            }
+            observed_symbols = {
+                (item["symbol"], item["risk"])
+                for item in summary["changed_symbols"]
+            }
+            if (
+                summary["changed_symbols"]
+                != sorted(
+                    summary["changed_symbols"],
+                    key=lambda item: (item["symbol"], item["risk"]),
+                )
+                or not observed_symbols.issubset(granted_symbols)
+            ):
+                raise ValidationFailure(
+                    f"{record_path}: GitNexus changed-symbol observations are unsorted or out of ceiling"
+                )
+            if RISK_ORDER[summary["observed_risk"]] > RISK_ORDER[grant["risk_ceiling"]]:
+                raise ValidationFailure(
+                    f"{record_path}: observed authority risk exceeds grant ceiling"
+                )
+            validate_gitnexus_change_detection_evidence(
+                record_path,
+                record,
+                summary,
+                grant,
+                dispatches,
+                repo_root=repo_root,
+            )
+            expected_status = "consumed" if record["status"] == "completed" else "active"
+            if summary["status"] != expected_status:
+                raise ValidationFailure(
+                    f"{record_path}: authority continuation active/consumed status mismatch"
+                )
+            if record["status"] == "completed":
+                final_entries = [item for item in included if item[2]["review_slot"] == "final_closeout"]
+                if not final_entries:
+                    raise ValidationFailure(
+                        f"{record_path}: completed continuation lacks final-closeout review"
+                    )
+                final_run = runs_by_dispatch[final_entries[-1][1]["dispatch_id"]]
+                if final_run["role"] != "review" or final_run["verdict"] != "clean":
+                    raise ValidationFailure(
+                        f"{record_path}: consumed continuation lacks final CLEAN"
+                    )
+                if any(
+                    parse_utc_timestamp(dispatch["created_at_utc"], path) > cutoff
+                    for path, dispatch, _ in entries
+                ):
+                    raise ValidationFailure(
+                        f"{record_path}: continuation dispatch exists after consumption"
+                    )
+
+        identities = {
+            authority["issuer"]["identity"],
+            attested_run["agent_id"],
+            admission_agent,
+            *executor_agents,
+        }
+        expected_identity_count = 3 + len(executor_agents)
+        if None in identities or len(identities) != expected_identity_count:
+            raise ValidationFailure(
+                f"{first_path}: issuer, attestation reviewer, admission reviewer, and executor roles collide"
+            )
+
+
+CODE_BEARING_SUFFIXES = (
+    ".c",
+    ".cc",
+    ".cpp",
+    ".cs",
+    ".go",
+    ".java",
+    ".js",
+    ".jsx",
+    ".kt",
+    ".kts",
+    ".py",
+    ".rb",
+    ".rs",
+    ".swift",
+    ".ts",
+    ".tsx",
+)
+
+
+def validate_gitnexus_change_detection_evidence(
+    record_path: Path,
+    record: dict[str, Any],
+    summary: dict[str, Any],
+    grant: dict[str, Any],
+    dispatches: dict[str, tuple[Path, dict[str, Any], str]],
+    *,
+    repo_root: Path = REPO_ROOT,
+) -> None:
+    code_bearing = any(
+        path.endswith(CODE_BEARING_SUFFIXES)
+        for path in summary["actual_changed_paths"]
+    )
+    evidence_ref = summary.get("gitnexus_evidence")
+    if evidence_ref is None:
+        if code_bearing:
+            raise ValidationFailure(
+                f"{record_path}: code-bearing continuation lacks GitNexus evidence"
+            )
+        return
+
+    evidence_path = repo_root / evidence_ref["path"]
+    try:
+        evidence_bytes = evidence_path.read_bytes()
+    except OSError as error:
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence is unavailable: {error}"
+        ) from error
+    if hashlib.sha256(evidence_bytes).hexdigest() != evidence_ref["sha256"]:
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence bytes do not match the summary"
+        )
+    evidence = load_json(evidence_path)
+    expected_keys = {
+        "schema_id",
+        "schema_version",
+        "status",
+        "provider",
+        "command",
+        "scope",
+        "baseline_commit",
+        "baseline_tree",
+        "target_commit",
+        "target_tree",
+        "actual_changed_paths",
+        "changed_symbols",
+        "observed_risk",
+        "raw_output_fingerprint",
+    }
+    if set(evidence) != expected_keys:
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence fields are incomplete or unknown"
+        )
+    string_fields = (
+        "schema_id",
+        "schema_version",
+        "status",
+        "command",
+        "scope",
+        "baseline_commit",
+        "baseline_tree",
+        "target_commit",
+        "target_tree",
+        "observed_risk",
+        "raw_output_fingerprint",
+    )
+    commit_fields = ("baseline_commit", "baseline_tree", "target_commit", "target_tree")
+    if (
+        any(not isinstance(evidence[field], str) for field in string_fields)
+        or any(
+            len(evidence[field]) != 40
+            or any(character not in "0123456789abcdef" for character in evidence[field])
+            for field in commit_fields
+        )
+        or not isinstance(evidence["actual_changed_paths"], list)
+        or any(
+            not isinstance(path, str) or not path
+            for path in evidence["actual_changed_paths"]
+        )
+        or not isinstance(evidence["changed_symbols"], list)
+        or any(
+            not isinstance(item, dict)
+            or set(item) != {"symbol", "risk"}
+            or not isinstance(item["symbol"], str)
+            or not item["symbol"]
+            or item["risk"] not in RISK_ORDER
+            for item in evidence["changed_symbols"]
+        )
+        or evidence["observed_risk"] not in RISK_ORDER
+    ):
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence field types or identities are invalid"
+        )
+    provider = evidence["provider"]
+    if (
+        evidence["schema_id"] != "handbook.gitnexus-change-detection-evidence"
+        or evidence["schema_version"] != "1.0"
+        or evidence["status"] != "available"
+        or not isinstance(provider, dict)
+        or set(provider) != {"name", "version"}
+        or provider["name"] != "GitNexus"
+        or not isinstance(provider["version"], str)
+        or not provider["version"]
+        or evidence["scope"] != "compare"
+    ):
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence provider, version, status, or scope is invalid"
+        )
+    expected_command = (
+        "detect_changes(scope=compare,base_ref="
+        f"{evidence['baseline_commit']},target_ref={evidence['target_commit']})"
+    )
+    if evidence["command"] != expected_command:
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence command is not exact"
+        )
+    if (
+        evidence["baseline_commit"] != grant["baseline_commit"]
+        or evidence["baseline_tree"] != grant["baseline_tree"]
+        or evidence["target_commit"] != record["repo_state"]["head"]
+    ):
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence baseline or target identity differs"
+        )
+    target_tree = subprocess.run(
+        ["git", "rev-parse", f"{evidence['target_commit']}^{{tree}}"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if (
+        target_tree.returncode != 0
+        or target_tree.stdout.strip() != evidence["target_tree"]
+    ):
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence target commit/tree is invalid"
+        )
+    if evidence["actual_changed_paths"] != summary["actual_changed_paths"]:
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence and actual path summary differ"
+        )
+    if evidence["changed_symbols"] != summary["changed_symbols"]:
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence and changed-symbol summary differ"
+        )
+    if code_bearing and not evidence["changed_symbols"]:
+        raise ValidationFailure(
+            f"{record_path}: code-bearing GitNexus evidence has empty symbol coverage"
+        )
+    if evidence["changed_symbols"] != sorted(
+        evidence["changed_symbols"],
+        key=lambda item: (item["symbol"], item["risk"]),
+    ) or len({item["symbol"] for item in evidence["changed_symbols"]}) != len(
+        evidence["changed_symbols"]
+    ):
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence symbols must be unique and sorted"
+        )
+    granted_symbols = {
+        (item["symbol"], item["risk"]) for item in grant["symbol_delta"]
+    }
+    evidence_symbols = {
+        (item["symbol"], item["risk"]) for item in evidence["changed_symbols"]
+    }
+    if not evidence_symbols.issubset(granted_symbols):
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence symbol or risk exceeds the grant"
+        )
+    aggregate_risk = max(
+        (item["risk"] for item in evidence["changed_symbols"]),
+        key=RISK_ORDER.__getitem__,
+        default="LOW",
+    )
+    if (
+        evidence["observed_risk"] != aggregate_risk
+        or summary["observed_risk"] != aggregate_risk
+    ):
+        raise ValidationFailure(
+            f"{record_path}: GitNexus aggregate observed risk is understated or inconsistent"
+        )
+    raw_fingerprint = evidence["raw_output_fingerprint"]
+    if (
+        not isinstance(raw_fingerprint, str)
+        or len(raw_fingerprint) != 71
+        or not raw_fingerprint.startswith("sha256:")
+        or any(character not in "0123456789abcdef" for character in raw_fingerprint[7:])
+    ):
+        raise ValidationFailure(
+            f"{record_path}: GitNexus raw-output fingerprint is invalid"
+        )
+
+    attestation = evidence_ref["attestation"]
+    attested_run = next(
+        (
+            run
+            for run in record["delegated_runs"]
+            if run["run_id"] == attestation["run_id"]
+        ),
+        None,
+    )
+    attested_dispatch_entry = dispatches.get(attestation["dispatch_id"])
+    if attested_run is None or attested_dispatch_entry is None:
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence attestation run or dispatch is missing"
+        )
+    attested_path, attested_dispatch, attested_sha256 = attested_dispatch_entry
+    attested_manifest_entries = attested_dispatch["subject_manifest"]["entries"]
+    attested_manifest = {
+        item["path"]: item["sha256"] for item in attested_manifest_entries
+    }
+    attested_subject = "sha256:" + hashlib.sha256(
+        "".join(
+            f"{item['path']}\0{item['sha256']}\n"
+            for item in attested_manifest_entries
+        ).encode()
+    ).hexdigest()
+    if (
+        attested_run["dispatch_id"] != attestation["dispatch_id"]
+        or attested_run["role"] != "review"
+        or attested_run["final_status"] != "completed"
+        or attested_run["verdict"] != "clean"
+        or attested_run["subject_fingerprint"] != attested_subject
+        or attested_run["result_subject_fingerprint"] != attested_subject
+        or attested_dispatch["subject_fingerprint"] != attested_subject
+        or attested_dispatch["subject_manifest"]["aggregate_fingerprint"]
+        != attested_subject
+        or attestation["dispatch_ref"]
+        != attested_path.relative_to(repo_root).as_posix()
+        or attestation["dispatch_sha256"] != f"sha256:{attested_sha256}"
+        or attested_manifest.get(evidence_ref["path"]) != evidence_ref["sha256"]
+    ):
+        raise ValidationFailure(
+            f"{record_path}: GitNexus evidence lacks a completed CLEAN same-handoff attestation"
+        )
+
+
 def validate_v1_4_handoff_chains(
     records: list[tuple[Path, dict[str, Any]]],
     dispatches: dict[str, tuple[Path, dict[str, Any], str]],
 ) -> None:
+    validate_authority_continuation_chains(records, dispatches)
     v1_4_records = [
         (path, record)
         for path, record in records
@@ -2620,6 +3530,910 @@ def run_v1_4_causal_contract_self_test() -> int:
         )
         return 1
 
+    continuation_schema_fixture = load_dispatch_template_fixture()
+    continuation_schema_fixture["authority_continuation"] = {
+        "grant": {
+            "extension_id": "authority-continuation-self-test",
+            "predecessor_handoff_id": "authority-stop-self-test",
+            "predecessor_dispatch_population_fingerprint": "sha256:" + "1" * 64,
+            "parent_orchestration_id": "authority-parent-self-test",
+            "integrated_outcome_id": "authority-outcome-self-test",
+            "outcome_registry_fingerprint": "sha256:" + "2" * 64,
+            "causal_budget_id": "sha256:" + "3" * 64,
+            "packet_ids": ["authority-packet-self-test"],
+            "authority_ref": {
+                "path": "docs/authority/self-test.json",
+                "sha256": "4" * 64,
+                "issuer": {"role": "product_authority", "identity": "issuer-self-test"},
+                "owner": {"role": "lineage_owner", "identity": "owner-self-test"},
+                "issued_at_utc": "2026-07-28T00:00:00Z",
+                "source": {
+                    "task_ref": "task-self-test",
+                    "thread_ref": "thread-self-test",
+                    "host_ref": "host-self-test",
+                    "dispatch_nonce": "nonce-self-test"
+                },
+                "attestation": {
+                    "handoff_id": "attestation-handoff-self-test",
+                    "run_id": "attestation-run-self-test",
+                    "dispatch_id": "attestation-dispatch-self-test",
+                    "dispatch_ref": "docs/attestation/self-test.json",
+                    "dispatch_sha256": "sha256:" + "5" * 64
+                }
+            },
+            "baseline_commit": "a" * 40,
+            "baseline_tree": "b" * 40,
+            "subject_path_ceiling": [
+                "docs/attestation/self-test.json",
+                "docs/authority/self-test.json",
+            ],
+            "symbol_delta": [{"symbol": "self_test_symbol", "risk": "LOW"}],
+            "risk_ceiling": "LOW",
+            "scope_delta": "self-test authority continuation only",
+            "review_allowance": [
+                {"review_slot": slot, "max_cycles": 4}
+                for slot in (
+                    "authority_admission", "implementation", "proof", "final_closeout"
+                )
+            ]
+        },
+        "grant_fingerprint": "sha256:" + "6" * 64,
+        "review_slot": "authority_admission"
+    }
+    try:
+        validate_instance(
+            continuation_schema_fixture,
+            load_json(INTERNAL_DISPATCH_SCHEMA_PATHS["1.4"]),
+            "authority continuation dispatch schema fixture",
+        )
+    except ValidationFailure as error:
+        print(
+            "orchestration contract self-test failed: authority continuation "
+            f"dispatch schema rejected the positive fixture: {error}",
+            file=sys.stderr,
+        )
+        return 1
+
+    golden_value = {"a": 1, "emoji": "😀", "z": [True, None, "x"]}
+    if derive_authority_grant_fingerprint(golden_value) != (
+        "sha256:484926e249d6a3720a2b97f286faf125855a3bf35ee6fc7f0e8d67b3b8de1d32"
+    ):
+        print(
+            "orchestration contract self-test failed: authority grant JCS golden vector drifted",
+            file=sys.stderr,
+        )
+        return 1
+    fixture_grant = continuation_schema_fixture["authority_continuation"]["grant"]
+    fixture_fingerprint = derive_authority_grant_fingerprint(fixture_grant)
+    for field in fixture_grant:
+        mutated = copy.deepcopy(fixture_grant)
+        value = mutated[field]
+        if isinstance(value, str):
+            mutated[field] = value + "-mutated"
+        elif isinstance(value, list):
+            mutated[field] = [*value, copy.deepcopy(value[-1])]
+        else:
+            mutated[field] = {**value, "mutation": True}
+        if derive_authority_grant_fingerprint(mutated) == fixture_fingerprint:
+            print(
+                "orchestration contract self-test failed: authority grant stable "
+                f"field {field!r} did not affect its fingerprint",
+                file=sys.stderr,
+            )
+            return 1
+    slot_variant = copy.deepcopy(continuation_schema_fixture["authority_continuation"])
+    slot_variant["review_slot"] = "proof"
+    if derive_authority_grant_fingerprint(slot_variant["grant"]) != fixture_fingerprint:
+        print(
+            "orchestration contract self-test failed: per-dispatch slot changed immutable grant fingerprint",
+            file=sys.stderr,
+        )
+        return 1
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        authority_root = Path(temp_dir)
+        authority_path = authority_root / fixture_grant["authority_ref"]["path"]
+        authority_path.parent.mkdir(parents=True)
+        artifact = authority_artifact_from_grant(fixture_grant)
+        authority_bytes = (json.dumps(artifact, indent=2, ensure_ascii=False) + "\n").encode()
+        authority_path.write_bytes(authority_bytes)
+        fixture_grant["authority_ref"]["sha256"] = hashlib.sha256(authority_bytes).hexdigest()
+        continuation_schema_fixture["authority_continuation"]["grant_fingerprint"] = (
+            derive_authority_grant_fingerprint(fixture_grant)
+        )
+        continuation_schema_fixture["parent_orchestration_id"] = fixture_grant[
+            "parent_orchestration_id"
+        ]
+        continuation_schema_fixture["packet_id"] = fixture_grant["packet_ids"][0]
+        continuation_schema_fixture["causal_outcome_registry"]["outcomes"] = [
+            {
+                "integrated_outcome_id": fixture_grant["integrated_outcome_id"],
+                "packet_ids": fixture_grant["packet_ids"],
+                "authority_ref": "self-test",
+            }
+        ]
+        continuation_schema_fixture["causal_control"].update(
+            {
+                "causal_budget_id": fixture_grant["causal_budget_id"],
+                "integrated_outcome_id": fixture_grant["integrated_outcome_id"],
+                "outcome_registry_fingerprint": fixture_grant[
+                    "outcome_registry_fingerprint"
+                ],
+                "review_stage": "authority_admission",
+                "stage_transition": {"kind": "authority_extension", "from_stage": "proof"},
+            }
+        )
+        continuation_schema_fixture["created_at_utc"] = "2026-07-28T00:01:00Z"
+        continuation_schema_fixture["subject_manifest"]["entries"] = [
+            {
+                "path": fixture_grant["authority_ref"]["path"],
+                "sha256": fixture_grant["authority_ref"]["sha256"],
+            },
+            {
+                "path": fixture_grant["authority_ref"]["attestation"][
+                    "dispatch_ref"
+                ],
+                "sha256": fixture_grant["authority_ref"]["attestation"][
+                    "dispatch_sha256"
+                ].removeprefix("sha256:"),
+            },
+        ]
+        try:
+            validate_authority_continuation_dispatch(
+                continuation_schema_fixture,
+                Path("authority-positive.json"),
+                repo_root=authority_root,
+            )
+        except ValidationFailure as error:
+            print(
+                "orchestration contract self-test failed: authority continuation positive "
+                f"fixture rejected: {error}",
+                file=sys.stderr,
+            )
+            return 1
+
+        dispatch_negative_cases: list[tuple[str, dict[str, Any]]] = []
+        stale = copy.deepcopy(continuation_schema_fixture)
+        stale["subject_manifest"]["entries"][0]["sha256"] = "0" * 64
+        dispatch_negative_cases.append(("stale-authority", stale))
+        missing_review = copy.deepcopy(continuation_schema_fixture)
+        missing_review["subject_manifest"]["entries"] = missing_review[
+            "subject_manifest"
+        ]["entries"][:1]
+        dispatch_negative_cases.append(("missing-authority-review", missing_review))
+        postdated = copy.deepcopy(continuation_schema_fixture)
+        postdated["authority_continuation"]["grant"]["authority_ref"]["issued_at_utc"] = postdated["created_at_utc"]
+        postdated["authority_continuation"]["grant_fingerprint"] = derive_authority_grant_fingerprint(postdated["authority_continuation"]["grant"])
+        dispatch_negative_cases.append(("postdated-authority", postdated))
+        drift = copy.deepcopy(continuation_schema_fixture)
+        drift["authority_continuation"]["grant"]["causal_budget_id"] = "sha256:" + "9" * 64
+        drift["authority_continuation"]["grant_fingerprint"] = derive_authority_grant_fingerprint(drift["authority_continuation"]["grant"])
+        dispatch_negative_cases.append(("identity-drift", drift))
+        parity = copy.deepcopy(continuation_schema_fixture)
+        parity["authority_continuation"]["grant"]["scope_delta"] += " drift"
+        parity["authority_continuation"]["grant_fingerprint"] = derive_authority_grant_fingerprint(parity["authority_continuation"]["grant"])
+        dispatch_negative_cases.append(("authority-parity-drift", parity))
+        for label, value in dispatch_negative_cases:
+            try:
+                validate_authority_continuation_dispatch(
+                    value, Path(f"{label}.json"), repo_root=authority_root
+                )
+            except ValidationFailure:
+                pass
+            else:
+                print(
+                    "orchestration contract self-test failed: authority continuation "
+                    f"negative {label!r} unexpectedly validated",
+                    file=sys.stderr,
+                )
+                return 1
+
+    exact_predecessor_path = RECORDS_DIR / (
+        "20260802T012613Z--HCM-3-2--orchestration--"
+        "authority-lineage-composition-required.json"
+    )
+    exact_predecessor = load_json(exact_predecessor_path)
+    exact_dispatches: dict[str, tuple[Path, dict[str, Any], str]] = {}
+    exact_dispatch_by_run: dict[str, dict[str, Any]] = {}
+    for predecessor_run in exact_predecessor["delegated_runs"]:
+        predecessor_dispatch_path = REPO_ROOT / predecessor_run["dispatch_ref"]
+        predecessor_dispatch = load_json(predecessor_dispatch_path)
+        exact_dispatches[predecessor_dispatch["dispatch_id"]] = (
+            predecessor_dispatch_path,
+            predecessor_dispatch,
+            hashlib.sha256(predecessor_dispatch_path.read_bytes()).hexdigest(),
+        )
+        exact_dispatch_by_run[predecessor_run["run_id"]] = predecessor_dispatch
+
+    exact_authority_relative = (
+        "docs/specs/handbook-contract-membrane/slices/HCM-0.8/authority/"
+        "20260802-hcm-3-2-lineage-composition-authority.json"
+    )
+    exact_authority_path = REPO_ROOT / exact_authority_relative
+    exact_artifact = load_json(exact_authority_path)
+    exact_authority_sha256 = hashlib.sha256(exact_authority_path.read_bytes()).hexdigest()
+    attestation_dispatch_path = REPO_ROOT / (
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/"
+        "20260802T060000Z--HCM-0-8--authority-continuation-final-aggregate-supplemental.json"
+    )
+    attestation_dispatch = copy.deepcopy(
+        exact_dispatch_by_run[exact_predecessor["delegated_runs"][-1]["run_id"]]
+    )
+    attestation_entries = [
+        {"path": exact_authority_relative, "sha256": exact_authority_sha256}
+    ]
+    attestation_subject = "sha256:" + hashlib.sha256(
+        "".join(
+            f"{item['path']}\0{item['sha256']}\n" for item in attestation_entries
+        ).encode()
+    ).hexdigest()
+    attestation_dispatch.update(
+        {
+            "dispatch_id": "20260802T060000Z--HCM-0-8--authority-continuation-final-aggregate-supplemental",
+            "created_at_utc": "2026-08-02T06:00:00Z",
+            "parent_orchestration_id": "20260802T025200Z--HCM-0-8--post-clean-authority-continuation",
+            "subject_fingerprint": attestation_subject,
+            "subject_manifest": {
+                "algorithm": "sha256",
+                "encoding": "repo-path-null-sha256-newline-v1",
+                "entries": attestation_entries,
+                "aggregate_fingerprint": attestation_subject,
+            },
+        }
+    )
+    attestation_dispatch_sha256 = hashlib.sha256(
+        (json.dumps(attestation_dispatch, separators=(",", ":")) + "\n").encode()
+    ).hexdigest()
+    exact_dispatches[attestation_dispatch["dispatch_id"]] = (
+        attestation_dispatch_path,
+        attestation_dispatch,
+        attestation_dispatch_sha256,
+    )
+    attestation_handoff = {
+        "schema_version": "1.4",
+        "handoff_id": "20260802T060100Z--HCM-0-8--orchestration--authority-continuation-completed",
+        "created_at_utc": "2026-08-02T06:01:00Z",
+        "status": "completed",
+        "orchestration_id": "20260802T025200Z--HCM-0-8--post-clean-authority-continuation",
+        "delegated_runs": [
+            {
+                "run_id": "hcm08_authority_continuation_final_review",
+                "dispatch_id": attestation_dispatch["dispatch_id"],
+                "role": "review",
+                "agent_id": "attestation-reviewer-self-test",
+                "final_status": "completed",
+                "verdict": "clean",
+                "subject_fingerprint": attestation_dispatch["subject_fingerprint"],
+                "result_subject_fingerprint": attestation_dispatch["subject_fingerprint"],
+            }
+        ],
+    }
+    exact_grant = {
+        key: copy.deepcopy(value)
+        for key, value in exact_artifact.items()
+        if key not in {"schema_id", "schema_version"}
+    }
+    exact_grant["authority_ref"] = {
+        "path": exact_authority_relative,
+        "sha256": exact_authority_sha256,
+        **exact_grant["authority_ref"],
+        "attestation": {
+            "handoff_id": attestation_handoff["handoff_id"],
+            "run_id": attestation_handoff["delegated_runs"][0]["run_id"],
+            "dispatch_id": attestation_dispatch["dispatch_id"],
+            "dispatch_ref": attestation_dispatch_path.relative_to(REPO_ROOT).as_posix(),
+            "dispatch_sha256": "sha256:" + attestation_dispatch_sha256,
+        },
+    }
+    exact_grant_fingerprint = derive_authority_grant_fingerprint(exact_grant)
+
+    predecessor_last_dispatch = exact_dispatch_by_run[
+        exact_predecessor["delegated_runs"][-1]["run_id"]
+    ]
+
+    def exact_continuation_dispatch(
+        *,
+        dispatch_id: str,
+        created_at_utc: str,
+        packet_id: str,
+        role: str,
+        slot: str,
+        predecessor_dispatch: dict[str, Any],
+    ) -> dict[str, Any]:
+        value = copy.deepcopy(predecessor_last_dispatch)
+        review_cycle = None
+        if role == "review":
+            review_cycle = {
+                "kind": "discovery",
+                "cycle_id": f"hcm-3.2-authority-{slot}-discovery",
+                "trigger_run_ids": [],
+                "finding_refs": [],
+            }
+        entries = sorted([
+            {"path": exact_authority_relative, "sha256": exact_authority_sha256},
+            {
+                "path": attestation_dispatch_path.relative_to(REPO_ROOT).as_posix(),
+                "sha256": attestation_dispatch_sha256,
+            },
+        ], key=lambda item: item["path"])
+        aggregate = "sha256:" + hashlib.sha256(
+            "".join(f"{item['path']}\0{item['sha256']}\n" for item in entries).encode()
+        ).hexdigest()
+        prior_stage = predecessor_dispatch["causal_control"]["review_stage"]
+        value.update(
+            {
+                "dispatch_id": dispatch_id,
+                "created_at_utc": created_at_utc,
+                "parent_orchestration_id": exact_grant["parent_orchestration_id"],
+                "packet_id": packet_id,
+                "role": role,
+                "review_cycle": review_cycle,
+                "pre_review_convergence": (
+                    copy.deepcopy(predecessor_last_dispatch["pre_review_convergence"])
+                    if role == "review"
+                    else None
+                ),
+                "subject_fingerprint": aggregate,
+                "subject_manifest": {
+                    "algorithm": "sha256",
+                    "encoding": "repo-path-null-sha256-newline-v1",
+                    "entries": entries,
+                    "aggregate_fingerprint": aggregate,
+                },
+                "authority_continuation": {
+                    "grant": copy.deepcopy(exact_grant),
+                    "grant_fingerprint": exact_grant_fingerprint,
+                    "review_slot": slot,
+                },
+            }
+        )
+        value["causal_control"] = {
+            "causal_budget_id": exact_grant["causal_budget_id"],
+            "integrated_outcome_id": exact_grant["integrated_outcome_id"],
+            "outcome_registry_fingerprint": exact_grant["outcome_registry_fingerprint"],
+            "review_stage": slot,
+            "stage_transition": {
+                "kind": "authority_extension" if slot == "authority_admission" else "enter",
+                "from_stage": prior_stage,
+            },
+            "event_reason": "planned_stage_transition",
+            "causal_predecessor_dispatch_id": predecessor_dispatch["dispatch_id"],
+        }
+        return value
+
+    exact_admission = exact_continuation_dispatch(
+        dispatch_id="20260802T060200Z--HCM-3-2--authority-admission",
+        created_at_utc="2026-08-02T06:02:00Z",
+        packet_id="HCM-3.2-P2-kernel-implementation",
+        role="review",
+        slot="authority_admission",
+        predecessor_dispatch=predecessor_last_dispatch,
+    )
+    exact_implementation = exact_continuation_dispatch(
+        dispatch_id="20260802T060300Z--HCM-3-2--authority-implementation",
+        created_at_utc="2026-08-02T06:03:00Z",
+        packet_id="HCM-3.2-P2-kernel-implementation",
+        role="implementation",
+        slot="implementation",
+        predecessor_dispatch=exact_admission,
+    )
+    exact_proof = exact_continuation_dispatch(
+        dispatch_id="20260802T060400Z--HCM-3-2--authority-proof",
+        created_at_utc="2026-08-02T06:04:00Z",
+        packet_id="HCM-3.2-P3-proof-control-closeout",
+        role="review",
+        slot="proof",
+        predecessor_dispatch=exact_implementation,
+    )
+    exact_final = exact_continuation_dispatch(
+        dispatch_id="20260802T060500Z--HCM-3-2--authority-final-closeout",
+        created_at_utc="2026-08-02T06:05:00Z",
+        packet_id="HCM-3.2-P3-proof-control-closeout",
+        role="review",
+        slot="final_closeout",
+        predecessor_dispatch=exact_proof,
+    )
+    exact_continuation_values = [
+        exact_admission,
+        exact_implementation,
+        exact_proof,
+        exact_final,
+    ]
+    exact_continuation_runs: list[dict[str, Any]] = []
+    exact_agent_ids = [
+        "admission-reviewer-self-test",
+        "continuation-executor-self-test",
+        "proof-reviewer-self-test",
+        "final-reviewer-self-test",
+    ]
+    for index, (value, agent_id) in enumerate(
+        zip(exact_continuation_values, exact_agent_ids, strict=True), start=1
+    ):
+        dispatch_path = DISPATCHES_DIR / f"{value['dispatch_id']}.json"
+        dispatch_sha256 = hashlib.sha256(
+            (json.dumps(value, separators=(",", ":")) + "\n").encode()
+        ).hexdigest()
+        exact_dispatches[value["dispatch_id"]] = (
+            dispatch_path,
+            value,
+            dispatch_sha256,
+        )
+        exact_continuation_runs.append(
+            {
+                "run_id": f"hcm32-authority-run-{index}",
+                "dispatch_id": value["dispatch_id"],
+                "role": value["role"],
+                "agent_id": agent_id,
+                "final_status": "completed",
+                "verdict": "clean" if value["role"] == "review" else "not_applicable",
+                "subject_fingerprint": value["subject_fingerprint"],
+                "result_subject_fingerprint": value["subject_fingerprint"],
+                "finding_refs": [],
+            }
+        )
+        exact_dispatch_by_run[exact_continuation_runs[-1]["run_id"]] = value
+
+    exact_temp_directory = tempfile.TemporaryDirectory(
+        prefix="hcm-3-2-authority-evidence-"
+    )
+    exact_repo_root = Path(exact_temp_directory.name)
+    subprocess.run(
+        [
+            "git",
+            "clone",
+            "-q",
+            "--shared",
+            "--no-checkout",
+            str(REPO_ROOT),
+            str(exact_repo_root),
+        ],
+        check=True,
+    )
+    subprocess.run(
+        ["git", "checkout", "-q", exact_grant["baseline_commit"]],
+        cwd=exact_repo_root,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "config", "user.name", "HCM self-test"],
+        cwd=exact_repo_root,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "config", "user.email", "hcm-self-test@example.invalid"],
+        cwd=exact_repo_root,
+        check=True,
+    )
+    exact_code_path = "crates/engine/src/artifact_lineage_store.rs"
+    exact_code_file = exact_repo_root / exact_code_path
+    exact_code_file.write_text(
+        exact_code_file.read_text(encoding="utf-8")
+        + "\n// HCM authority-continuation GitNexus evidence fixture.\n",
+        encoding="utf-8",
+    )
+    subprocess.run(
+        ["git", "add", exact_code_path], cwd=exact_repo_root, check=True
+    )
+    subprocess.run(
+        ["git", "commit", "-qm", "self-test code-bearing continuation"],
+        cwd=exact_repo_root,
+        check=True,
+    )
+    exact_target_commit = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=exact_repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    exact_target_tree = subprocess.run(
+        ["git", "rev-parse", "HEAD^{tree}"],
+        cwd=exact_repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    exact_evidence_relative = (
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/"
+        "implementation/authority-continuation-gitnexus-change-detection.json"
+    )
+    exact_changed_symbols = [
+        {"symbol": "ContextResolutionStackDefinition", "risk": "HIGH"},
+        {
+            "symbol": "ContextResolutionStackDefinition::load_bytes",
+            "risk": "CRITICAL",
+        },
+    ]
+    exact_evidence = {
+        "schema_id": "handbook.gitnexus-change-detection-evidence",
+        "schema_version": "1.0",
+        "status": "available",
+        "provider": {"name": "GitNexus", "version": "self-test-1.0.0"},
+        "command": (
+            "detect_changes(scope=compare,base_ref="
+            f"{exact_grant['baseline_commit']},target_ref={exact_target_commit})"
+        ),
+        "scope": "compare",
+        "baseline_commit": exact_grant["baseline_commit"],
+        "baseline_tree": exact_grant["baseline_tree"],
+        "target_commit": exact_target_commit,
+        "target_tree": exact_target_tree,
+        "actual_changed_paths": [exact_code_path],
+        "changed_symbols": exact_changed_symbols,
+        "observed_risk": "CRITICAL",
+        "raw_output_fingerprint": "sha256:"
+        + hashlib.sha256(b"self-test GitNexus raw output\n").hexdigest(),
+    }
+    exact_evidence_path = exact_repo_root / exact_evidence_relative
+    exact_evidence_path.parent.mkdir(parents=True, exist_ok=True)
+    exact_evidence_bytes = (
+        json.dumps(exact_evidence, indent=2, ensure_ascii=False) + "\n"
+    ).encode()
+    exact_evidence_path.write_bytes(exact_evidence_bytes)
+    exact_evidence_sha256 = hashlib.sha256(exact_evidence_bytes).hexdigest()
+    exact_authority_copy = exact_repo_root / exact_authority_relative
+    exact_authority_copy.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(exact_authority_path, exact_authority_copy)
+
+    exact_proof["subject_manifest"]["entries"] = sorted(
+        [
+            *exact_proof["subject_manifest"]["entries"],
+            {"path": exact_evidence_relative, "sha256": exact_evidence_sha256},
+        ],
+        key=lambda item: item["path"],
+    )
+    exact_proof_subject = "sha256:" + hashlib.sha256(
+        "".join(
+            f"{item['path']}\0{item['sha256']}\n"
+            for item in exact_proof["subject_manifest"]["entries"]
+        ).encode()
+    ).hexdigest()
+    exact_proof["subject_fingerprint"] = exact_proof_subject
+    exact_proof["subject_manifest"]["aggregate_fingerprint"] = exact_proof_subject
+    exact_proof_run = exact_continuation_runs[2]
+    exact_proof_run["subject_fingerprint"] = exact_proof_subject
+    exact_proof_run["result_subject_fingerprint"] = exact_proof_subject
+    exact_proof_sha256 = hashlib.sha256(
+        (json.dumps(exact_proof, separators=(",", ":")) + "\n").encode()
+    ).hexdigest()
+    exact_dispatches[exact_proof["dispatch_id"]] = (
+        DISPATCHES_DIR / f"{exact_proof['dispatch_id']}.json",
+        exact_proof,
+        exact_proof_sha256,
+    )
+    exact_evidence_ref = {
+        "path": exact_evidence_relative,
+        "sha256": exact_evidence_sha256,
+        "attestation": {
+            "run_id": exact_proof_run["run_id"],
+            "dispatch_id": exact_proof["dispatch_id"],
+            "dispatch_ref": (
+                "docs/specs/handbook-contract-membrane/handoffs/dispatches/"
+                f"{exact_proof['dispatch_id']}.json"
+            ),
+            "dispatch_sha256": "sha256:" + exact_proof_sha256,
+        },
+    }
+
+    def exact_summary(
+        included_values: list[dict[str, Any]], *, consumed: bool
+    ) -> dict[str, Any]:
+        slots = []
+        for slot in AUTHORITY_CONTINUATION_SLOTS:
+            values = [
+                value
+                for value in included_values
+                if value["authority_continuation"]["review_slot"] == slot
+            ]
+            if values:
+                slots.append(
+                    {
+                        "review_slot": slot,
+                        "cycle_ids": [
+                            value["review_cycle"]["cycle_id"]
+                            for value in values
+                            if value["review_cycle"] is not None
+                        ],
+                        "dispatch_ids": [value["dispatch_id"] for value in values],
+                    }
+                )
+        return {
+            "extension_id": exact_grant["extension_id"],
+            "grant_fingerprint": exact_grant_fingerprint,
+            "predecessor_handoff_id": exact_grant["predecessor_handoff_id"],
+            "selector_run_id": exact_continuation_runs[0]["run_id"],
+            "baseline_commit": exact_grant["baseline_commit"],
+            "baseline_tree": exact_grant["baseline_tree"],
+            "slots": slots,
+            "actual_changed_paths": [exact_code_path],
+            "changed_symbols": copy.deepcopy(exact_changed_symbols),
+            "observed_risk": "CRITICAL",
+            "gitnexus_evidence": copy.deepcopy(exact_evidence_ref),
+            "status": "consumed" if consumed else "active",
+        }
+
+    active_successor = {
+        "schema_version": "1.4",
+        "handoff_id": "20260802T060450Z--HCM-3-2--orchestration--authority-active",
+        "created_at_utc": "2026-08-02T06:04:50Z",
+        "status": "escalation_required",
+        "orchestration_id": exact_grant["parent_orchestration_id"],
+        "source_handoff_ids": [exact_predecessor["handoff_id"]],
+        "supersedes": [exact_predecessor["handoff_id"]],
+        "delegated_runs": exact_continuation_runs[:3],
+        "repo_state": {"head": exact_target_commit},
+        "authority_continuations": [
+            exact_summary(exact_continuation_values[:3], consumed=False)
+        ],
+    }
+    completed_successor = copy.deepcopy(active_successor)
+    completed_successor.update(
+        {
+            "handoff_id": "20260802T060600Z--HCM-3-2--orchestration--authority-consumed",
+            "created_at_utc": "2026-08-02T06:06:00Z",
+            "status": "completed",
+            "source_handoff_ids": [active_successor["handoff_id"]],
+            "supersedes": [active_successor["handoff_id"]],
+            "delegated_runs": exact_continuation_runs,
+            "authority_continuations": [
+                exact_summary(exact_continuation_values, consumed=True)
+            ],
+        }
+    )
+    exact_dispatches = {
+        dispatch_id: (
+            exact_repo_root / path.relative_to(REPO_ROOT),
+            dispatch,
+            dispatch_sha256,
+        )
+        for dispatch_id, (path, dispatch, dispatch_sha256) in exact_dispatches.items()
+    }
+    exact_records = [
+        (
+            exact_repo_root / exact_predecessor_path.relative_to(REPO_ROOT),
+            exact_predecessor,
+        ),
+        (exact_repo_root / "attestation-handoff.json", attestation_handoff),
+        (exact_repo_root / "active-successor.json", active_successor),
+        (exact_repo_root / "completed-successor.json", completed_successor),
+    ]
+    for value in exact_continuation_values:
+        try:
+            validate_authority_continuation_dispatch(
+                value,
+                exact_repo_root / f"{value['dispatch_id']}.json",
+                repo_root=exact_repo_root,
+            )
+        except ValidationFailure as error:
+            print(
+                "orchestration contract self-test failed: exact HCM-3.2 continuation "
+                f"dispatch rejected: {error}",
+                file=sys.stderr,
+            )
+            return 1
+    exact_runs = [*exact_predecessor["delegated_runs"], *exact_continuation_runs]
+    try:
+        validate_v1_4_causal_sequence(
+            Path("exact-hcm-3.2-authority-sequence.json"),
+            exact_runs,
+            exact_dispatch_by_run,
+        )
+        validate_authority_continuation_chains(
+            exact_records, exact_dispatches, repo_root=exact_repo_root
+        )
+    except ValidationFailure as error:
+        print(
+            "orchestration contract self-test failed: exact HCM-3.2 artifact-first "
+            f"continuation rejected: {error}",
+            file=sys.stderr,
+        )
+        return 1
+
+    def expect_evidence_negative(
+        label: str,
+        *,
+        evidence_value: dict[str, Any] | None,
+        summary_mutator: Callable[[dict[str, Any]], None],
+        record_mutator: Callable[[dict[str, Any]], None] | None = None,
+        expected_message: str,
+    ) -> bool:
+        negative_record = copy.deepcopy(completed_successor)
+        negative_summary = negative_record["authority_continuations"][0]
+        summary_mutator(negative_summary)
+        if record_mutator is not None:
+            record_mutator(negative_record)
+        try:
+            if evidence_value is not None:
+                negative_bytes = (
+                    json.dumps(evidence_value, indent=2, ensure_ascii=False) + "\n"
+                ).encode()
+                exact_evidence_path.write_bytes(negative_bytes)
+                negative_summary["gitnexus_evidence"]["sha256"] = hashlib.sha256(
+                    negative_bytes
+                ).hexdigest()
+            validate_gitnexus_change_detection_evidence(
+                Path(f"exact-hcm-3.2-{label}.json"),
+                negative_record,
+                negative_summary,
+                exact_grant,
+                exact_dispatches,
+                repo_root=exact_repo_root,
+            )
+        except ValidationFailure as error:
+            if expected_message in str(error):
+                return True
+            print(
+                "orchestration contract self-test failed: exact HCM-3.2 evidence "
+                f"negative {label!r} failed for the wrong reason: {error}",
+                file=sys.stderr,
+            )
+            return False
+        finally:
+            exact_evidence_path.write_bytes(exact_evidence_bytes)
+        print(
+            "orchestration contract self-test failed: exact HCM-3.2 evidence "
+            f"negative {label!r} unexpectedly validated",
+            file=sys.stderr,
+        )
+        return False
+
+    empty_evidence = copy.deepcopy(exact_evidence)
+    empty_evidence["changed_symbols"] = []
+    empty_evidence["observed_risk"] = "LOW"
+    omitted_symbol_evidence = copy.deepcopy(exact_evidence)
+    omitted_symbol_evidence["changed_symbols"] = exact_changed_symbols[:1]
+    omitted_symbol_evidence["observed_risk"] = "HIGH"
+    unauthorized_evidence = copy.deepcopy(exact_evidence)
+    unauthorized_evidence["changed_symbols"].append(
+        {"symbol": "Unauthorized::symbol", "risk": "CRITICAL"}
+    )
+    understated_evidence = copy.deepcopy(exact_evidence)
+    understated_evidence["observed_risk"] = "HIGH"
+    evidence_negative_cases = [
+        (
+            "missing",
+            None,
+            lambda summary: summary.pop("gitnexus_evidence"),
+            None,
+            "lacks GitNexus evidence",
+        ),
+        (
+            "empty-symbols",
+            empty_evidence,
+            lambda summary: summary.update(
+                {"changed_symbols": [], "observed_risk": "LOW"}
+            ),
+            None,
+            "empty symbol coverage",
+        ),
+        (
+            "omitted-symbol",
+            omitted_symbol_evidence,
+            lambda summary: summary.update(
+                {
+                    "changed_symbols": copy.deepcopy(exact_changed_symbols),
+                    "observed_risk": "CRITICAL",
+                }
+            ),
+            None,
+            "changed-symbol summary differ",
+        ),
+        (
+            "unauthorized-symbol",
+            unauthorized_evidence,
+            lambda summary: summary.update(
+                {
+                    "changed_symbols": copy.deepcopy(
+                        unauthorized_evidence["changed_symbols"]
+                    ),
+                    "observed_risk": "CRITICAL",
+                }
+            ),
+            None,
+            "symbol or risk exceeds the grant",
+        ),
+        (
+            "understated-risk",
+            understated_evidence,
+            lambda summary: summary.update({"observed_risk": "HIGH"}),
+            None,
+            "aggregate observed risk is understated",
+        ),
+        (
+            "unattested",
+            copy.deepcopy(exact_evidence),
+            lambda summary: None,
+            lambda record: record["delegated_runs"][2].update(
+                {"verdict": "findings"}
+            ),
+            "lacks a completed CLEAN same-handoff attestation",
+        ),
+    ]
+    for (
+        label,
+        evidence_value,
+        summary_mutator,
+        record_mutator,
+        expected_message,
+    ) in evidence_negative_cases:
+        if not expect_evidence_negative(
+            label,
+            evidence_value=evidence_value,
+            summary_mutator=summary_mutator,
+            record_mutator=record_mutator,
+            expected_message=expected_message,
+        ):
+            return 1
+
+    baseline_drift_dispatches = copy.deepcopy(exact_dispatches)
+    for _, value, _ in baseline_drift_dispatches.values():
+        continuation = value.get("authority_continuation")
+        if continuation is not None:
+            continuation["grant"]["baseline_commit"] = "f4e06b146fc803f45d7e0e4c2b3f9b4f7b88d3d8"
+            continuation["grant"]["baseline_tree"] = "76492b8cadb0e084ffe5e3b35983ef6f69df6d28"
+            continuation["grant_fingerprint"] = derive_authority_grant_fingerprint(
+                continuation["grant"]
+            )
+    negative_chain_cases = []
+    negative_chain_cases.append(
+        ("predecessor-baseline-drift", exact_records, baseline_drift_dispatches)
+    )
+    projection_drift_dispatches = copy.deepcopy(exact_dispatches)
+    projection_value = projection_drift_dispatches[exact_admission["dispatch_id"]][1]
+    projection_value["authority_continuation"]["grant"]["scope_delta"] += " drift"
+    projection_value["authority_continuation"]["grant_fingerprint"] = (
+        derive_authority_grant_fingerprint(
+            projection_value["authority_continuation"]["grant"]
+        )
+    )
+    negative_chain_cases.append(
+        ("artifact-projection-mutation", exact_records, projection_drift_dispatches)
+    )
+    findings_records = copy.deepcopy(exact_records)
+    findings_records[1][1]["delegated_runs"][0]["verdict"] = "findings"
+    negative_chain_cases.append(("attestation-findings", findings_records, exact_dispatches))
+    mismatched_subject_records = copy.deepcopy(exact_records)
+    mismatched_subject_records[1][1]["delegated_runs"][0][
+        "result_subject_fingerprint"
+    ] = "sha256:" + "f" * 64
+    negative_chain_cases.append(
+        ("attestation-subject-mismatch", mismatched_subject_records, exact_dispatches)
+    )
+    same_parent_records = copy.deepcopy(exact_records)
+    same_parent_records[1][1]["orchestration_id"] = exact_grant["parent_orchestration_id"]
+    negative_chain_cases.append(("same-parent-attestation", same_parent_records, exact_dispatches))
+    summary_records = copy.deepcopy(exact_records)
+    summary_records[-1][1]["authority_continuations"][0]["actual_changed_paths"] = [
+        "outside/ceiling.txt"
+    ]
+    negative_chain_cases.append(("summary-path-ceiling", summary_records, exact_dispatches))
+    second_successor_records = copy.deepcopy(exact_records)
+    second = copy.deepcopy(completed_successor)
+    second["handoff_id"] += "-second"
+    second["created_at_utc"] = "2026-08-02T06:07:00Z"
+    second["status"] = "escalation_required"
+    second["source_handoff_ids"] = [completed_successor["handoff_id"]]
+    second["supersedes"] = [completed_successor["handoff_id"]]
+    second["authority_continuations"][0]["status"] = "active"
+    second_successor_records.append((Path("second-successor.json"), second))
+    negative_chain_cases.append(
+        ("second-successor-after-consumption", second_successor_records, exact_dispatches)
+    )
+    for label, record_values, dispatch_values in negative_chain_cases:
+        try:
+            validate_authority_continuation_chains(
+                record_values, dispatch_values, repo_root=exact_repo_root
+            )
+        except ValidationFailure:
+            pass
+        else:
+            print(
+                "orchestration contract self-test failed: exact HCM-3.2 negative "
+                f"{label!r} unexpectedly validated",
+                file=sys.stderr,
+            )
+            return 1
+
     v1_3_dispatch_entries = sorted(
         (
             path.name,
@@ -3043,6 +4857,86 @@ def run_v1_4_causal_contract_self_test() -> int:
             [planning, implementation],
             True,
             ["clean", "clean"],
+        )
+    )
+
+    authority_boundary = dispatch(40, stage="proof", cycle_id="authority-boundary-proof")
+    authority_admission = dispatch(
+        41,
+        stage="authority_admission",
+        cycle_id="authority-admission-discovery",
+        event_reason="planned_stage_transition",
+        predecessor=authority_boundary,
+    )
+    authority_admission["causal_control"]["stage_transition"] = {
+        "kind": "authority_extension",
+        "from_stage": "proof",
+    }
+    authority_admission["authority_continuation"] = copy.deepcopy(
+        continuation_schema_fixture["authority_continuation"]
+    )
+    authority_admission["authority_continuation"]["review_slot"] = "authority_admission"
+    authority_implementation = dispatch(
+        42,
+        stage="implementation",
+        cycle_id="authority-implementation-discovery",
+        event_reason="planned_stage_transition",
+        predecessor=authority_admission,
+    )
+    authority_implementation["authority_continuation"] = copy.deepcopy(
+        authority_admission["authority_continuation"]
+    )
+    authority_implementation["authority_continuation"]["review_slot"] = "implementation"
+    cases.extend(
+        [
+            (
+                "authority-continuation-selector-before-edit",
+                [authority_boundary, authority_admission, authority_implementation],
+                True,
+                ["clean", "clean", "clean"],
+            ),
+            (
+                "authority-continuation-write-before-clean",
+                [authority_boundary, authority_admission, authority_implementation],
+                False,
+                ["clean", "findings", "clean"],
+            ),
+        ]
+    )
+    authority_proof_skip = dispatch(
+        43,
+        stage="proof",
+        cycle_id="authority-proof-skip",
+        event_reason="planned_stage_transition",
+        predecessor=authority_admission,
+    )
+    authority_proof_skip["authority_continuation"] = copy.deepcopy(
+        authority_admission["authority_continuation"]
+    )
+    authority_proof_skip["authority_continuation"]["review_slot"] = "proof"
+    cases.append(
+        (
+            "authority-continuation-slot-skip",
+            [authority_boundary, authority_admission, authority_proof_skip],
+            False,
+            ["clean", "clean", "clean"],
+        )
+    )
+    authority_same_cycle = dispatch(
+        42,
+        stage="authority_admission",
+        cycle_id="authority-admission-discovery",
+        predecessor=authority_admission,
+    )
+    authority_same_cycle["authority_continuation"] = copy.deepcopy(
+        authority_admission["authority_continuation"]
+    )
+    cases.append(
+        (
+            "authority-continuation-same-cycle-second-dispatch",
+            [authority_boundary, authority_admission, authority_same_cycle],
+            False,
+            ["clean", "findings", "clean"],
         )
     )
 
@@ -3695,7 +5589,7 @@ def run_v1_4_causal_contract_self_test() -> int:
             )
             return 1
 
-    runtime_allowance = load_json(INTERNAL_DISPATCH_TEMPLATE_PATH)
+    runtime_allowance = load_dispatch_template_fixture()
     runtime_allowance["subject_manifest"]["entries"][0]["path"] = (
         "src/fixtures/runtime-authority.json"
     )
@@ -3770,7 +5664,7 @@ def run_v1_4_causal_contract_self_test() -> int:
             "baseline\nobserved\n",
             encoding="utf-8",
         )
-        observed_allowance = load_json(INTERNAL_DISPATCH_TEMPLATE_PATH)
+        observed_allowance = load_dispatch_template_fixture()
         observed_allowance["subject_manifest"]["entries"][0]["path"] = (
             ancillary_path
         )
@@ -4125,7 +6019,7 @@ def run_orchestration_contract_self_test() -> int:
         INTERNAL_DISPATCH_SCHEMA_PATHS["1.4"]
     )
     current_template = load_json(TEMPLATE_PATH)
-    current_dispatch_template = load_json(INTERNAL_DISPATCH_TEMPLATE_PATH)
+    current_dispatch_template = load_dispatch_template_fixture()
     validate_instance(
         current_template,
         current_handoff_schema,
@@ -4147,6 +6041,7 @@ def run_orchestration_contract_self_test() -> int:
     template["schema_version"] = "1.3"
     del template["dispatch_population"]
     del template["ancillary_diff_observations"]
+    template.pop("authority_continuations", None)
     dispatch_template = copy.deepcopy(current_dispatch_template)
     dispatch_template["schema_version"] = "1.3"
     del dispatch_template["causal_outcome_registry"]

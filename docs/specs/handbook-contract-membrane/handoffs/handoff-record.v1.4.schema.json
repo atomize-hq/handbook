@@ -216,6 +216,86 @@
         }
       }
     },
+    "authority_continuations": {
+      "type": "array",
+      "maxItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "extension_id",
+          "grant_fingerprint",
+          "predecessor_handoff_id",
+          "selector_run_id",
+          "baseline_commit",
+          "baseline_tree",
+          "slots",
+          "actual_changed_paths",
+          "changed_symbols",
+          "observed_risk",
+          "status"
+        ],
+        "properties": {
+          "extension_id": {"type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9._-]+$"},
+          "grant_fingerprint": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+          "predecessor_handoff_id": {"type": "string", "minLength": 8},
+          "selector_run_id": {"type": "string", "minLength": 1},
+          "baseline_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+          "baseline_tree": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+          "slots": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["review_slot", "cycle_ids", "dispatch_ids"],
+              "properties": {
+                "review_slot": {"enum": ["authority_admission", "implementation", "proof", "final_closeout"]},
+                "cycle_ids": {"type": "array", "maxItems": 4, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "dispatch_ids": {"type": "array", "maxItems": 5, "uniqueItems": true, "items": {"type": "string", "minLength": 8}}
+              }
+            }
+          },
+          "actual_changed_paths": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "changed_symbols": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["symbol", "risk"],
+              "properties": {
+                "symbol": {"type": "string", "minLength": 1},
+                "risk": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]}
+              }
+            }
+          },
+          "observed_risk": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+          "gitnexus_evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "sha256", "attestation"],
+            "properties": {
+              "path": {"type": "string", "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*:)(?!.*\\/$)[^\\u0000\\r\\n]+$"},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "attestation": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["run_id", "dispatch_id", "dispatch_ref", "dispatch_sha256"],
+                "properties": {
+                  "run_id": {"type": "string", "minLength": 1},
+                  "dispatch_id": {"type": "string", "minLength": 8},
+                  "dispatch_ref": {"type": "string", "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*:)(?!.*\\/$)[^\\u0000\\r\\n]+$"},
+                  "dispatch_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+                }
+              }
+            }
+          },
+          "status": {"enum": ["active", "consumed"]}
+        }
+      }
+    },
     "ancillary_diff_observations": {
       "type": "array",
       "items": {

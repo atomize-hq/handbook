@@ -327,6 +327,7 @@
         },
         "review_stage": {
           "enum": [
+            "authority_admission",
             "planning",
             "implementation",
             "proof",
@@ -343,6 +344,7 @@
           "properties": {
             "kind": {
               "enum": [
+                "authority_extension",
                 "enter",
                 "continue"
               ]
@@ -354,6 +356,7 @@
               ],
               "enum": [
                 null,
+                "authority_admission",
                 "planning",
                 "implementation",
                 "proof",
@@ -382,6 +385,117 @@
             "null"
           ],
           "minLength": 1
+        }
+      }
+    },
+    "authority_continuation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["grant", "grant_fingerprint", "review_slot"],
+      "properties": {
+        "grant_fingerprint": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "review_slot": {
+          "enum": ["authority_admission", "implementation", "proof", "final_closeout"]
+        },
+        "grant": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "extension_id",
+            "predecessor_handoff_id",
+            "predecessor_dispatch_population_fingerprint",
+            "parent_orchestration_id",
+            "integrated_outcome_id",
+            "outcome_registry_fingerprint",
+            "causal_budget_id",
+            "packet_ids",
+            "authority_ref",
+            "baseline_commit",
+            "baseline_tree",
+            "subject_path_ceiling",
+            "symbol_delta",
+            "risk_ceiling",
+            "scope_delta",
+            "review_allowance"
+          ],
+          "properties": {
+            "extension_id": {"type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9._-]+$"},
+            "predecessor_handoff_id": {"type": "string", "minLength": 8},
+            "predecessor_dispatch_population_fingerprint": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+            "parent_orchestration_id": {"type": "string", "minLength": 8},
+            "integrated_outcome_id": {"type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9._-]+$"},
+            "outcome_registry_fingerprint": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+            "causal_budget_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+            "packet_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": ["string", "null"]}},
+            "baseline_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+            "baseline_tree": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+            "subject_path_ceiling": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*:)(?!.*\\/$)[^\\u0000\\r\\n]+$"}},
+            "symbol_delta": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["symbol", "risk"],
+                "properties": {
+                  "symbol": {"type": "string", "minLength": 1},
+                  "risk": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]}
+                }
+              }
+            },
+            "risk_ceiling": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+            "scope_delta": {"type": "string", "minLength": 1},
+            "authority_ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "sha256", "issuer", "owner", "issued_at_utc", "source", "attestation"],
+              "properties": {
+                  "path": {"type": "string", "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*:)(?!.*\\/$)[^\\u0000\\r\\n]+$"},
+                "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "issued_at_utc": {"type": "string", "format": "date-time", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"},
+                "issuer": {"$ref": "#/$defs/authorityActor"},
+                "owner": {"$ref": "#/$defs/authorityActor"},
+                "source": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["task_ref", "thread_ref", "host_ref", "dispatch_nonce"],
+                  "properties": {
+                    "task_ref": {"type": "string", "minLength": 1},
+                    "thread_ref": {"type": "string", "minLength": 1},
+                    "host_ref": {"type": "string", "minLength": 1},
+                    "dispatch_nonce": {"type": "string", "minLength": 1}
+                  }
+                },
+                "attestation": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["handoff_id", "run_id", "dispatch_id", "dispatch_ref", "dispatch_sha256"],
+                  "properties": {
+                    "handoff_id": {"type": "string", "minLength": 8},
+                    "run_id": {"type": "string", "minLength": 1},
+                    "dispatch_id": {"type": "string", "minLength": 8},
+                    "dispatch_ref": {"type": "string", "minLength": 1},
+                    "dispatch_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+                  }
+                }
+              }
+            },
+            "review_allowance": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "prefixItems": [
+                {"$ref": "#/$defs/authorityAdmissionAllowance"},
+                {"$ref": "#/$defs/implementationAllowance"},
+                {"$ref": "#/$defs/proofAllowance"},
+                {"$ref": "#/$defs/finalCloseoutAllowance"}
+              ],
+              "items": false
+            }
+          }
         }
       }
     },
@@ -828,6 +942,28 @@
     }
   ],
   "$defs": {
+    "authorityActor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "identity"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "identity": {"type": "string", "minLength": 1}
+      }
+    },
+    "authorityAdmissionAllowance": {"$ref": "#/$defs/authorityAllowance", "properties": {"review_slot": {"const": "authority_admission"}}},
+    "implementationAllowance": {"$ref": "#/$defs/authorityAllowance", "properties": {"review_slot": {"const": "implementation"}}},
+    "proofAllowance": {"$ref": "#/$defs/authorityAllowance", "properties": {"review_slot": {"const": "proof"}}},
+    "finalCloseoutAllowance": {"$ref": "#/$defs/authorityAllowance", "properties": {"review_slot": {"const": "final_closeout"}}},
+    "authorityAllowance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["review_slot", "max_cycles"],
+      "properties": {
+        "review_slot": {"enum": ["authority_admission", "implementation", "proof", "final_closeout"]},
+        "max_cycles": {"const": 4}
+      }
+    },
     "pathSections": {
       "type": "object",
       "additionalProperties": false,

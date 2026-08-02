@@ -19,6 +19,23 @@ It is not a task checklist. Slice-local `tasks/todo.md` files own execution stat
 
 No lower proof level implies a higher one.
 
+### `PR-HCM08-AUTHORITY-EVIDENCE` — Code-bearing continuation evidence
+
+**Current evidence:** the v1.4 schema, template, semantic validator, and exact
+synthetic HCM-3.2 replay require a byte-hashed GitNexus compare artifact plus a
+completed CLEAN same-handoff review attestation. The positive fixture reports
+two authorized symbols including CRITICAL aggregate risk. Focused negatives
+reject missing evidence, empty coverage, an omitted symbol, an unauthorized
+symbol, understated risk, and non-CLEAN attestation.
+
+**Classification:** `SemanticallyCorrect` for the control-plane protocol and
+replay fixture only. It does not claim that HCM-3.2 product work or its reserved
+future evidence artifact exists.
+
+**Must preserve:** exact Git/evidence/summary/grant path parity; nonempty
+code-symbol coverage; exact symbol/risk containment; aggregate-risk equality;
+and byte/dispatch/run attestation replay.
+
 ## Current proven baselines
 
 ### `PR-001` — Published owner crates
@@ -181,6 +198,7 @@ closeout. This does not support a generic custom-kind intake claim.
 | `PG-HANDOFF-02` | once snapshots land, handoffs reference start/end snapshots and delta; orchestration rechecks current state before dispatch | open |
 | `PG-ORCH-01` | an explicitly selected phase/slice remains owned by one active parent that executes built-in `default` subagents, captures identity/status, collects results, and completes review -> valid-finding remediation -> different fresh review without an ordinary user-mediated task hop | proven by the HCM-0.8 one-parent multi-round review/remediation loop; final lineage capture belongs in the v1.2 parent record |
 | `PG-ORCH-02` | every current internal dispatch declares execution target, parent ID, role, typed review-cycle reason or explicit non-review null, replayable subject manifest/fingerprint, manifest-wide text-whitespace policy, fresh-context requirement, closeout owner, ordered required-skills chain beginning with `using-agent-skills`, and complete structured return contract; unavailable mandatory delegation, predecessor dispatch/record creation, unchanged causal-cycle subjects, review-budget overflow, and dirty live review subjects fail closed | proven by HCM-0.8 current-schema dispatch validation, dependency-complete live dispatch replay, immutable predecessor-corpus admission, and fail-closed orchestration self-tests |
+| `PG-ORCH-03` | one direct non-completed v1.4 authority stop can continue without rewriting its CLEAN prefix or resetting its causal budget, while independently reviewed authority, selector CLEAN, bounded slot/cycle membership, exact Git/symbol/risk reconciliation, and final single-use consumption fail closed | proven by the exact HCM-3.2 five-dispatch-prefix artifact-first active/consumed fixture, grant-fingerprint golden/mutation vectors, negative continuation matrix, historical admission replay, and ordinary validation; this is control-plane proof only and grants no HCM-3.2 product authority |
 | `PG-CATALOG-01` | proposed proof that the frozen HCM-0.4 `05` payload was mechanically decomposed without semantic delta | retired without proof; HCM-0.9 was abandoned after terminal Redesign Review 2 was not CLEAN, no decomposition occurred, and the monolith remains canonical |
 
 ### HCM-3.1 earned vocabulary boundary

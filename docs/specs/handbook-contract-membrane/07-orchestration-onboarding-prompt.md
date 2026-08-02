@@ -177,6 +177,16 @@ later superseding record only when its recommendation/facts must be replaced.
 For HANDOFF_SELECTOR=none, begin from the explicit slice authority without
 inventing resume history.
 
+A selected non-completed v1.4 `authority_boundary` handoff is still a true
+stop unless an exact optional authority-continuation grant is present. Before
+any edit, validate its direct predecessor/prefix, unchanged parent/outcome/
+registry/budget/packet identities, reviewed baseline, artifact bytes and
+different-parent CLEAN attestation, role separation, and ceilings; then run
+the read-only `authority_admission` selector. Only selector CLEAN admits the
+ordered implementation, proof, and final-closeout slots. Never synthesize a
+grant from handoff prose, reuse a failed/consumed grant, or treat this control
+as generic slice authority.
+
 PHASE 1 — SELECTIVE CONTEXT ASSEMBLY
 
 Load:

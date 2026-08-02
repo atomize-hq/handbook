@@ -1,0 +1,218 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260802T031200Z--HCM-0-8--post-clean-authority-continuation-planning-closure",
+  "created_at_utc": "2026-08-02T03:12:00Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260802T025200Z--HCM-0-8--post-clean-authority-continuation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "HCM-0.8-P1-authority-continuation-planning",
+  "subject_fingerprint": "sha256:18153f5f786ea304d8e4a022a07d501783a16acdec5953111572df54cfa1ea03",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-0.8-post-clean-authority-continuation-planning-closure-1",
+    "trigger_run_ids": [
+      "hcm08_authority_continuation_planning_review"
+    ],
+    "finding_refs": [
+      "HCM08-PLN-DISC-001",
+      "HCM08-PLN-DISC-002",
+      "HCM08-PLN-DISC-003",
+      "HCM08-PLN-DISC-004",
+      "HCM08-PLN-DISC-005"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-02T02:52:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-0.8-post-clean-authority-continuation-control-repair",
+        "packet_ids": [
+          "HCM-0.8-P1-authority-continuation-planning",
+          "HCM-0.8-P2-authority-continuation-protocol",
+          "HCM-0.8-P3-authority-continuation-proof-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:2c670d3f5640fb401899067f50f3a6c4df917041476d3586b6682b4718bbe2aa"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:2d3f1c349622262c2be6970135114c7738afa9ffda75ee9319ba67e93f4d1b93",
+    "integrated_outcome_id": "hcm-0.8-post-clean-authority-continuation-control-repair",
+    "outcome_registry_fingerprint": "sha256:2c670d3f5640fb401899067f50f3a6c4df917041476d3586b6682b4718bbe2aa",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260802T025342Z--HCM-0-8--post-clean-authority-continuation-planning-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-0.8-post-clean-authority-continuation-planning-closure-convergence-1",
+    "completed_at_utc": "2026-08-02T03:11:50Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "consolidate and remediate HCM08-PLN-DISC-001 through 005 without schema, validator, runtime, dependency, or HCM-3.2 product edits",
+        "evidence_ref": "five-file replacement planning subject and immutable discovery dispatch"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "reconcile independent authority provenance, admission failure, actual Git and GitNexus ceilings, real successor handoffs, canonical grant hashing, and burst membership",
+        "evidence_ref": "SPEC, selector, plan, checklist, and remediation proof bind every reviewer finding"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted five-entry repo-path-NUL-SHA256-newline remediated planning manifest",
+        "evidence_ref": "aggregate sha256:18153f5f786ea304d8e4a022a07d501783a16acdec5953111572df54cfa1ea03"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "inspect Markdown structure and run git diff --check",
+        "evidence_ref": "command exited 0"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "strict UTF-8 and trailing whitespace scan",
+        "evidence_ref": "five entries decode and contain no trailing whitespace"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/SPEC.md",
+        "sha256": "261c3a981bf719b7370f83e0b0a1b113baf28dfc95095592279809f7f0dbead2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md",
+        "sha256": "c1d9df7cd3e762a7edcb213399c9dd1643c0e137cb7f5a8912d7f0a4c4c03980"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T030900Z--planning-discovery-remediation.md",
+        "sha256": "cbc34160f2066c44b2c28e82306c66ebaf8e331fd85670c3a50b6ec675c9cfe9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/tasks/plan.md",
+        "sha256": "837d5923f84d44f4ca035594bbc3424bb96417629c84b9aa9b014729d01eeb23"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/tasks/todo.md",
+        "sha256": "ecfa38df2e1f0bc8f1be0e8a489bfcf450643d8245f9395aad9f504a013c8b4c"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:18153f5f786ea304d8e4a022a07d501783a16acdec5953111572df54cfa1ea03"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 planning closure",
+    "scope_horizon": "closure of one P1 and four P2 planning findings before schema or validator implementation",
+    "detail_resolution": "independent typed authority, admission termination, actual diff and symbol-risk reconciliation, exact successor handoffs, canonical grant hash, and one-dispatch cycles",
+    "temporal_horizon": "same planning stage after one consolidated remediation",
+    "authority_horizon": "HCM-0.8 control plane only; no HCM-3.2 product, runtime, dependency, public, unsafe/native/transport, shipped identity, push, or history rewrite",
+    "memory_horizon": "immutable FINDINGS dispatch/result, exact five-file changed subject, base fe62a4b, and HCM-3.2 predecessor context",
+    "validation_horizon": "close all five finding IDs or emit only remediation-caused or unmasked unique findings"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/SPEC.md",
+      "sections": ["Selected mechanism", "Fail-closed invariants", "Validator and schema requirements", "Testing strategy and commands"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md",
+      "sections": ["Admission selector", "Exact schema surface", "HCM-3.2 regression binding"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T030900Z--planning-discovery-remediation.md",
+      "sections": ["Consolidated disposition", "Remaining gate"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T025342Z--HCM-0-8--post-clean-authority-continuation-planning-review.json",
+      "sections": ["review_cycle", "subject_manifest", "return_contract"]
+    }
+  ],
+  "repo_truth": "The first fresh planning review passed exact replay and baseline validation, then found one P1 and four P2. The parent performed one planning-only remediation. No schema, template, validator, control authority, runtime, dependency, or HCM-3.2 product byte has changed. The replacement subject now binds independent authority provenance, immutable admission failure, actual Git and GitNexus ceilings, active and consumed real successor handoffs, exact canonical grant hashing, and one-dispatch cycle ceilings.",
+  "allowed_scope": [
+    "Review the exact five-file remediated planning subject read-only and close or retain HCM08-PLN-DISC-001 through 005.",
+    "Verify provenance is independently issued and reviewed rather than self-authorized.",
+    "Verify admission findings terminate the grant and actual baseline-to-tip path/symbol/risk evidence is enforced.",
+    "Verify exact HCM-3.2 active and consumed successor handoffs, canonical hash vectors, and one-dispatch cycle bounds are sufficient."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a dispatch, write a handoff or ledger, delegate, or implement.",
+    "Do not reuse predecessor finding IDs as new findings or reopen general discovery.",
+    "Do not authorize HCM-3.2 product work, a generic budget reset, completed-parent resumption, dependency/runtime/public surface, or second extension."
+  ],
+  "tasks": [
+    "Validate exact closure lineage, five finding refs, predecessor, unchanged registry/budget, and manifest.",
+    "Independently verify each predecessor finding is closed by the replacement contract and mandatory negative proof.",
+    "Return new unique findings only for remediation-caused or unmasked P1/P2; otherwise CLEAN for sha256:18153f5f786ea304d8e4a022a07d501783a16acdec5953111572df54cfa1ea03."
+  ],
+  "contracts_and_gates": [
+    "No implementation edit begins before this exact replacement planning subject is CLEAN.",
+    "The discovery dispatch/result remains immutable; this is different-fresh closure under the same parent, outcome registry, and causal budget.",
+    "CLEAN ends planning and authorizes only the exact HCM-0.8 control repair ceiling; P1/P2 cannot be waived."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if any predecessor issue remains or remediation caused or unmasked a unique P1/P2.",
+    "Return BLOCKED if correctness requires history mutation, a generic reset, completed-parent continuation, product/runtime work, or authority beyond HCM-0.8.",
+    "Report rather than repair; keep the subject read-only."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

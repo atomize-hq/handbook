@@ -1,0 +1,104 @@
+{
+  "schema_id": "handbook.authority-continuation-grant",
+  "schema_version": "1.0",
+  "extension_id": "hcm-3.2-lineage-composition-authority-continuation",
+  "predecessor_handoff_id": "20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required",
+  "predecessor_dispatch_population_fingerprint": "sha256:3fea1b8b2212916ae1aaa9a3cb249a04e85875365a9b7b2f2da640a441fd8a90",
+  "parent_orchestration_id": "20260801T202515Z--HCM-3-2--context-resolution-kernel",
+  "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-full-slice",
+  "outcome_registry_fingerprint": "sha256:32ce222086ce006ee833e096bdd252f2c0105045d8b51bf61ba7b84f330edc08",
+  "causal_budget_id": "sha256:9e317280367a3668c484802c4cbc0e4e090faad692692e8327a40c11b73346ae",
+  "packet_ids": [
+    "HCM-3.2-P1-planning-selector",
+    "HCM-3.2-P2-kernel-implementation",
+    "HCM-3.2-P3-proof-control-closeout"
+  ],
+  "authority_ref": {
+    "issuer": {
+      "role": "user_product_authority",
+      "identity": "operator-authorized-complete-HCM-3.2"
+    },
+    "owner": {
+      "role": "product_and_lineage_owner",
+      "identity": "handbook-product-and-generic-lineage-owner"
+    },
+    "issued_at_utc": "2026-08-02T02:52:00Z",
+    "source": {
+      "task_ref": "20260801T202515Z--HCM-3-2--context-resolution-kernel",
+      "thread_ref": "019fbfc9-408e-7662-b4f8-3fd0b6a5776b",
+      "host_ref": "slingshot:env_e_6a3d9cd24b5483238ba55b699a98be35",
+      "dispatch_nonce": "adf08a6ede3648bba2566bdd54334c58"
+    }
+  },
+  "baseline_commit": "fe62a4b57854830373a57ccdcc7acb9f4b7a9ac0",
+  "baseline_tree": "671e0fac370d91bb4fe57073fa63ad37f55f4c40",
+  "subject_path_ceiling": [
+    "crates/engine/src/artifact_lineage_store.rs",
+    "crates/engine/src/context_resolution.rs",
+    "crates/engine/src/context_resolution_registry.rs",
+    "crates/engine/src/lib.rs",
+    "crates/engine/tests/context_resolution_kernel.rs",
+    "crates/engine/tests/context_resolution_stack.rs",
+    "docs/specs/handbook-contract-membrane/00-README.md",
+    "docs/specs/handbook-contract-membrane/01-boundary-and-invariants.md",
+    "docs/specs/handbook-contract-membrane/02-semantics-and-taxonomy.md",
+    "docs/specs/handbook-contract-membrane/03-crosswalk-matrix.md",
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T202751Z--HCM-3-2--context-resolution-planning-review.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260801T211000Z--HCM-3-2--context-resolution-planning-authority-stop-closure.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T002238Z--HCM-3-2--context-resolution-selector-admission-review.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T003415Z--HCM-3-2--context-resolution-selector-admission-closure.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T011908Z--HCM-3-2--authority-lineage-composition-stop-review.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T051500Z--HCM-0-8--authority-continuation-final-aggregate-review.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T060000Z--HCM-0-8--authority-continuation-final-aggregate-supplemental.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-0.8/authority/20260802-hcm-3-2-lineage-composition-authority.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260801T210000Z--planning-discovery-authority-stop.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T003317Z--selector-admission-discovery-remediation.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T011556Z--authority-lineage-composition-stop.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/authority-continuation-gitnexus-change-detection.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md"
+  ],
+  "symbol_delta": [
+    {
+      "symbol": "AuthoredStack::resolve",
+      "risk": "CRITICAL"
+    },
+    {
+      "symbol": "ContextResolutionStackDefinition",
+      "risk": "HIGH"
+    },
+    {
+      "symbol": "ContextResolutionStackDefinition::load_bytes",
+      "risk": "CRITICAL"
+    },
+    {
+      "symbol": "GenericArtifactLineageStoreV1::validate_inventory",
+      "risk": "CRITICAL"
+    }
+  ],
+  "risk_ceiling": "CRITICAL",
+  "scope_delta": "Resume the same HCM-3.2 outcome with the selected context-resolution kernel plus one bounded generic-lineage inventory composition repair; preserve committed-registry currentness and generic recovery without bypass, and grant no HCM-3.3+, dependency, unsafe, transport, shipped-identity, or publication authority.",
+  "review_allowance": [
+    {
+      "review_slot": "authority_admission",
+      "max_cycles": 4
+    },
+    {
+      "review_slot": "implementation",
+      "max_cycles": 4
+    },
+    {
+      "review_slot": "proof",
+      "max_cycles": 4
+    },
+    {
+      "review_slot": "final_closeout",
+      "max_cycles": 4
+    }
+  ]
+}

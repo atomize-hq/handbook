@@ -1,0 +1,75 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260802T041400Z--HCM-0-8--authority-continuation-implementation-discovery",
+  "created_at_utc": "2026-08-02T04:14:00Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260802T025200Z--HCM-0-8--post-clean-authority-continuation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "doubt-driven-development", "api-and-interface-design", "security-and-hardening", "test-driven-development", "code-review-and-quality"],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "HCM-0.8-P2-authority-continuation-protocol",
+  "subject_fingerprint": "sha256:1ee91ab28d488029e6ebae5fab0d9d2b0de0c0d034961864d009577d9c612556",
+  "review_cycle": {"kind": "discovery", "cycle_id": "hcm-0.8-authority-continuation-implementation-discovery", "trigger_run_ids": [], "finding_refs": []},
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-02T02:52:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{"integrated_outcome_id": "hcm-0.8-post-clean-authority-continuation-control-repair", "packet_ids": ["HCM-0.8-P1-authority-continuation-planning", "HCM-0.8-P2-authority-continuation-protocol", "HCM-0.8-P3-authority-continuation-proof-closeout"], "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md"}],
+    "fingerprint": "sha256:2c670d3f5640fb401899067f50f3a6c4df917041476d3586b6682b4718bbe2aa"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:2d3f1c349622262c2be6970135114c7738afa9ffda75ee9319ba67e93f4d1b93",
+    "integrated_outcome_id": "hcm-0.8-post-clean-authority-continuation-control-repair",
+    "outcome_registry_fingerprint": "sha256:2c670d3f5640fb401899067f50f3a6c4df917041476d3586b6682b4718bbe2aa",
+    "review_stage": "implementation",
+    "stage_transition": {"kind": "continue", "from_stage": "implementation"},
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": "20260802T034300Z--HCM-0-8--post-clean-authority-continuation-implementation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-0.8-authority-continuation-implementation-discovery-convergence-1",
+    "completed_at_utc": "2026-08-02T04:13:50Z",
+    "checks": [
+      {"kind": "complete_packet_wall", "status": "passed", "command": "freeze partial three-file implementation, reviewed SPEC/selector, and exact fixed-point stop proof after implementer stopped", "evidence_ref": "six-file read-only subject; no product/dependency/runtime path"},
+      {"kind": "recursive_fixture_consumer_inventory", "status": "passed", "command": "trace artifact-to-grant parity, attestation dispatch manifest, and baseline commit/tree dependencies", "evidence_ref": "potential mutual SHA-256 and future/self-commit cycles isolated"},
+      {"kind": "manifest_replay", "status": "passed", "command": "recompute sorted six-entry repo-path-NUL-SHA256-newline subject", "evidence_ref": "aggregate sha256:1ee91ab28d488029e6ebae5fab0d9d2b0de0c0d034961864d009577d9c612556"},
+      {"kind": "formatting", "status": "passed", "command": "run git diff --check", "evidence_ref": "command exited 0"},
+      {"kind": "whitespace", "status": "passed", "command": "strict UTF-8 and whitespace scan", "evidence_ref": "subject passes"}
+    ]
+  },
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256", "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.4.schema.json", "sha256": "4cd0eddae268d69c2c66c15c76fe3a5d9f0117829b95e5ee8443ce90fd8352d1"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/internal-dispatch.v1.4.schema.json", "sha256": "6815356fd0fa8287806b6d582cb3727526b589b489c0b76636bdbb6f6bf17f78"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py", "sha256": "a3acc36fb7f17e63f116a0ce693670d57080257d1ec4c5b6ef4b2da597e9cabd"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/SPEC.md", "sha256": "c68a2a75ddd236c23fa053c158dd6a4c074607b334bae5d695b0ecd15b3828e1"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md", "sha256": "d8f1cb7310b0cebac67f8c01492efc0a6b692ff0e248df0a64d05ea99215bc31"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T041000Z--implementation-fixed-point-stop.md", "sha256": "457de2d862fdd936e0fa8ae92f1acafd9d86c22e67ff6ae5167b808a083bfeb1"}
+    ],
+    "aggregate_fingerprint": "sha256:1ee91ab28d488029e6ebae5fab0d9d2b0de0c0d034961864d009577d9c612556"
+  },
+  "active_resolution": {"level": "HCM-0.8 implementation discovery", "scope_horizon": "exact partial control-plane subject and fixed-point contradiction only", "detail_resolution": "artifact/grant parity, attestation manifest dependency, known predecessor baseline, and smallest non-circular repair", "temporal_horizon": "after RED and partial GREEN, before any remediation", "authority_horizon": "read-only; no product/runtime/dependency/public surface, commit, handoff, ledger, or push", "memory_horizon": "reviewed planning subject, implementation dispatch/result, partial bytes, and exact HCM-3.2 predecessor", "validation_horizon": "confirm or reject P1 and define smallest exact remediation"},
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/SPEC.md", "sections": ["Selected mechanism", "Validator and schema requirements", "Testing strategy and commands"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md", "sections": ["Exact schema surface", "HCM-3.2 regression binding"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T041000Z--implementation-fixed-point-stop.md", "sections": ["Unmasked P1 contradiction", "Review gate"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T034300Z--HCM-0-8--post-clean-authority-continuation-implementation.json", "sections": ["allowed_scope", "stop_conditions", "return_contract"]}
+  ],
+  "repo_truth": "Implementation captured intended RED and partial GREEN, then stopped before exact positive fixture because artifact parity appeared to require an attestation dispatch hash while that dispatch required the artifact hash, and baseline wording appeared to require a future/self-commit. Three control files contain uncommitted partial scaffolding; no prohibited path changed.",
+  "allowed_scope": ["Review the exact six-file subject read-only.", "Prove or disprove the two hash-cycle claims and assign unique P1-P4 findings.", "If valid, state the smallest non-circular repair that preserves trusted completed-handoff attestation and direct predecessor baseline semantics."],
+  "non_goals": ["Do not edit, format, stage, commit, create files, delegate, or continue implementation.", "Do not broaden into product/runtime/dependency/public surface or HCM-3.2 implementation.", "Do not waive trusted attestation, actual diff/symbol/risk ceilings, identity preservation, or finite allowance."],
+  "tasks": ["Replay the manifest and inspect the exact schema/helper dependencies.", "Determine whether attestation may be excluded from artifact parity while remaining fingerprinted in the grant and independently replayed.", "Determine whether baseline must be the already-known direct predecessor reviewed commit/tree.", "Return CLEAN only if no P1/P2 exists; otherwise findings with exact evidence and bounded remediation."],
+  "contracts_and_gates": ["Partial implementation is not accepted or review-CLEAN by construction.", "Any repair must retain completed different-parent CLEAN attestation replay and exact HCM-3.2 end-to-end admission.", "P1/P2 require one consolidated remediation and different-fresh closure before continuation."],
+  "stop_conditions": ["Return BLOCKED if no non-circular repair exists inside unchanged scope and risk.", "Report rather than repair.", "Do not authorize product work or closeout."],
+  "return_contract": {"transport": "built_in_subagent", "findings_first": true, "include_agent_identity_and_status": true, "edit_scope": "read_only", "global_handoff": "forbidden", "ledger_write": "forbidden", "user_task_hop": "forbidden", "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]}
+}

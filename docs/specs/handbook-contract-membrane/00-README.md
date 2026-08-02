@@ -20,6 +20,15 @@ is separately completed by its own reviewed authority; HCM-3.2+ remains
 unauthorized.
 **Repo-truth snapshot:** 2026-07-25 at `7b3b5454ef363d08e4c6c78e6a201d8c36c10c5c`; re-check live code before every slice
 
+**Authority-continuation control:** HCM-0.8 adds one optional, v1.4-only
+same-parent continuation grant for a direct non-completed
+`authority_boundary` predecessor. Admission requires a separately issued and
+different-parent CLEAN-attested authority artifact, an unchanged parent,
+outcome registry, packet population and causal budget, a fresh read-only
+selector CLEAN before edits, four ordered review slots, and final single-use
+consumption. This control does not itself authorize HCM-3.2 product work or
+generic automatic continuation.
+
 ## Purpose
 
 This directory is the durable context-engineering control surface for the Handbook contract-membrane program.

@@ -1,0 +1,109 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260802T034300Z--HCM-0-8--post-clean-authority-continuation-implementation",
+  "created_at_utc": "2026-08-02T03:43:00Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "20260802T025200Z--HCM-0-8--post-clean-authority-continuation",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "incremental-implementation", "test-driven-development", "debugging-and-error-recovery", "api-and-interface-design", "security-and-hardening", "documentation-and-ADRs", "git-workflow-and-versioning"],
+  "phase_id": "HCM-0",
+  "slice_id": "HCM-0.8",
+  "packet_id": "HCM-0.8-P2-authority-continuation-protocol",
+  "subject_fingerprint": "sha256:60d673b19db96cbb3cd16405e603cc5e529cfea3200a64195373385008fdc4d8",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-02T02:52:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{"integrated_outcome_id": "hcm-0.8-post-clean-authority-continuation-control-repair", "packet_ids": ["HCM-0.8-P1-authority-continuation-planning", "HCM-0.8-P2-authority-continuation-protocol", "HCM-0.8-P3-authority-continuation-proof-closeout"], "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md"}],
+    "fingerprint": "sha256:2c670d3f5640fb401899067f50f3a6c4df917041476d3586b6682b4718bbe2aa"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:2d3f1c349622262c2be6970135114c7738afa9ffda75ee9319ba67e93f4d1b93",
+    "integrated_outcome_id": "hcm-0.8-post-clean-authority-continuation-control-repair",
+    "outcome_registry_fingerprint": "sha256:2c670d3f5640fb401899067f50f3a6c4df917041476d3586b6682b4718bbe2aa",
+    "review_stage": "implementation",
+    "stage_transition": {"kind": "enter", "from_stage": "planning"},
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260802T033100Z--HCM-0-8--post-clean-authority-continuation-planning-supplemental"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/SPEC.md", "sha256": "c68a2a75ddd236c23fa053c158dd6a4c074607b334bae5d695b0ecd15b3828e1"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md", "sha256": "d8f1cb7310b0cebac67f8c01492efc0a6b692ff0e248df0a64d05ea99215bc31"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T030900Z--planning-discovery-remediation.md", "sha256": "cbc34160f2066c44b2c28e82306c66ebaf8e331fd85670c3a50b6ec675c9cfe9"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T032700Z--planning-closure-supplemental-remediation.md", "sha256": "d02f265267babbb82c9f3a83799bda997649ae4ca13a02bf7b2407879b3b8b06"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/tasks/plan.md", "sha256": "187beeefcced4bf8fab07fc013f4b993fac83c1b01ddb8c948514d7ca44d60b3"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/tasks/todo.md", "sha256": "434dd6ff27542da715875eec509bd697c397aa15556c6ce7b0d51e1e5c88fe11"}
+    ],
+    "aggregate_fingerprint": "sha256:60d673b19db96cbb3cd16405e603cc5e529cfea3200a64195373385008fdc4d8"
+  },
+  "active_resolution": {
+    "level": "HCM-0.8 bounded protocol implementation",
+    "scope_horizon": "only reviewed 00 and 04-09 control authority, current v1.4 schemas/templates/validator/self-tests, HCM-0.8 proof pack, and inert exact HCM-3.2 authority artifact",
+    "detail_resolution": "optional monotonic authority continuation grant, completed external attestation replay, four typed slots, exact cycle/dispatch ceilings, actual diff-symbol-risk reconciliation, active/consumed handoff parity, and exact regression fixtures",
+    "temporal_horizon": "after planning CLEAN and before implementation discovery review",
+    "authority_horizon": "no Rust, Cargo, dependency, public API, unsafe/native/transport, product runtime, HCM-3.2 implementation, shipped identity, push, or history rewrite",
+    "memory_horizon": "exact clean planning subject, immutable three planning dispatches/results, base fe62a4b, exact HCM-3.2 predecessor/five-dispatch prefix, and protected baselines",
+    "validation_horizon": "TDD RED/GREEN, focused positive/negative fixtures, ordinary validation, both self-tests, exact dispatch replay, strict formatting, and complete implementation handback"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/SPEC.md", "sections": ["Selected mechanism", "Fail-closed invariants", "Exact implementation ceiling", "Validator and schema requirements", "Testing strategy and commands", "Stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/decision/20260802-post-clean-authority-continuation-selector.md", "sections": ["Admission selector", "Exact schema surface", "HCM-3.2 regression binding", "Stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-0.8/proof/20260802T033900Z--planning-supplemental-clean.md", "sections": ["Final planning disposition"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required.json", "sections": ["complete JSON record"]},
+    {"path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md", "sections": ["Phase 3 — execute the active slice", "Phase 5 — fresh review / remediation loop", "Mandatory stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "sections": ["V1.4 same-parent resumption and terminality", "Review lineage"]}
+  ],
+  "repo_truth": "Planning ended CLEAN after one discovery, one consolidated remediation/closure, and one immediately causal supplemental. GitNexus upstream impact is LOW for validate_v1_4_dispatch_control, validate_v1_4_causal_sequence, validate_v1_4_handoff_chains, validate_v1_2_semantics, run_v1_4_causal_contract_self_test, and run_orchestration_contract_self_test. FTS/query remains unavailable/degraded. Baseline ordinary validation and both self-tests pass. No schema, validator, control-authority, runtime, dependency, or HCM-3.2 product implementation byte has yet changed.",
+  "allowed_scope": [
+    "Implement only the reviewed smallest additive v1.4 authority-continuation surface and exact HCM-3.2 inert authority artifact.",
+    "Use TDD: make focused exact-prefix and negative fixtures fail for the intended reason before validator/schema implementation, then converge.",
+    "Edit only the exact SPEC ceiling; add dedicated helpers rather than unrelated refactors; preserve old records and v1.0-v1.3 admission bytes.",
+    "Run focused fixtures, py_compile, ordinary validation, historical admission self-test, orchestration-contract self-test, exact dispatch replays, git diff --check, and strict UTF-8/whitespace."
+  ],
+  "non_goals": [
+    "Do not edit Rust, Cargo, product/runtime/dependency/public/unsafe/native/transport/shipped-identity paths or implement HCM-3.2 product behavior.",
+    "Do not commit, stage, create final review dispatch, handoff, ledger, CAS publication, push, or send a receipt.",
+    "Do not alter existing dispatch/record bytes, frozen corpora, parent/outcome/registry/packet/budget identity, or immutable prefix.",
+    "Do not add a generic budget reset, completed-parent continuation, second grant, P1/P2 waiver, or post-CLEAN ordinary discovery."
+  ],
+  "tasks": [
+    "Revalidate the exact planning subject and inspect every live schema/validator owner before editing.",
+    "Add RED fixtures, then schema/template fields, canonical grant helpers, attestation and direct-predecessor checks, causal-slot enforcement, actual Git/GitNexus ceiling reconciliation, handoff summary parity/terminal consumption, and full negatives.",
+    "Create the inert exact HCM-3.2 authority artifact with bound user/meta/thread/host/nonce/predecessor/scope/symbol/risk fields; do not claim it attested before HCM-0.8 closeout.",
+    "Update only necessary 00 and 04-09 control authority plus HCM-0.8 proof/checklist, and return exact changed paths, tests, RED/GREEN evidence, and any stop condition."
+  ],
+  "contracts_and_gates": [
+    "All new fields are optional for historical v1.4 objects but fail closed when continuation is present.",
+    "The exact HCM-3.2 five-dispatch prefix and predecessor are used without mutation and prove selector-before-edit plus later independent material review.",
+    "Every invalid, stale, reused, cross-identity, completed, branched, over-budget, role-colliding, unrelated-scope, or post-consumption case fails.",
+    "No unresolved P1/P2 may be hidden; parent owns independent review and closeout."
+  ],
+  "stop_conditions": [
+    "Stop and report unexpected HIGH/CRITICAL, public, dependency, unsafe/native/transport, product runtime, shipped identity, or HCM-3.2 product expansion.",
+    "Stop if correctness requires historical mutation, new schema major/minor version, generic reset, completed-parent continuation, or more than one grant.",
+    "Stop if focused positive fixture cannot admit the exact HCM-3.2 continuation end to end."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "changed_paths", "validation", "red_green_evidence", "parent_disposition"]
+  }
+}
