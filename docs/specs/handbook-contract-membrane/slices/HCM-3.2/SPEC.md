@@ -1,10 +1,17 @@
 # HCM-3.2 Context Resolution Kernel
 
-Status: resumed under reviewed Option 2 authority; selector-admission review required before RED/Rust
+Status: fresh operator-authorized restart; selector review required before RED/Rust
 Phase: HCM-3
 Slice: HCM-3.2
-Parent orchestration: `20260801T202515Z--HCM-3-2--context-resolution-kernel`
-Integrated outcome: `hcm-3.2-context-resolution-kernel-full-slice`
+Parent orchestration: `20260802T232751Z--HCM-3-2--context-resolution-kernel-fresh`
+Integrated outcome: `hcm-3.2-context-resolution-kernel-fresh-whole-slice`
+
+The operator course correction starts a genuinely fresh HCM-3.2 parent at
+commit `a1aef5a5fc8a4471cee6044e16bd751ae512e216`, tree
+`17dbde4d8f12127d7ddd7ac0ed8997c5f33789c8`, with no handoff selector. The
+stopped HCM-3.2 parent and its findings remain immutable historical evidence;
+this parent does not supersede, directly succeed, or reuse any of its parent,
+outcome, packet, finding, cycle, or budget identities.
 
 ## Objective
 
@@ -51,7 +58,10 @@ definition, schema-catalog family, generic token framework, or cross-product
 authority service. It is a profile-selected canonical generic artifact whose
 current bytes are read only through `ArtifactRepositoryAuthorityGuardV1` and
 `GenericArtifactLineageStoreV1` recovery/currentness, using the existing HCM-2.3
-artifact mutation owner and without changing either primitive.
+artifact mutation owner. The generic store changes only in the two selector-
+named methods needed to recognize and route the committed `registry` family
+without parsing it as a generic-artifact intent; every other primitive remains
+unchanged.
 
 The resolver pins the caller-supplied expected artifact-byte fingerprint and
 derives a second RFC-8785/SHA-256 semantic binding fingerprint. The closed
@@ -313,6 +323,9 @@ Production edits are limited to:
 
 - `crates/engine/src/context_resolution_registry.rs`;
 - new `crates/engine/src/context_resolution.rs`;
+- `crates/engine/src/artifact_lineage_store.rs`, only
+  `GenericArtifactLineageStoreV1::validate_inventory` and conditionally
+  `GenericArtifactLineageStoreV1::require_journal_authority`;
 - `crates/engine/src/lib.rs` only for the exact namespaced exports above.
 
 Test/fixture edits are limited to:
@@ -329,10 +342,14 @@ proof records, exact affected HCM 00-06 rows after earned proof, current v1.4
 dispatches, one parent handoff, the deterministic ledger, and `09` only for a
 fresh validated P3/P4.
 
-Ceilings: at most 3 production paths, 3 test/fixture path families, 80 changed
-named production declarations under the selector counting rule, and 1,800
-hand-written production lines. Risk is limited to the three explicitly
-accepted existing symbols plus new symbols in the same engine subsystem.
+Ceilings: at most 4 production paths, 3 test/fixture path families, 80 changed
+named production declarations under the selector counting rule, and 2,000
+hand-written production lines. Risk is limited to
+`ContextResolutionStackDefinition` at HIGH; `AuthoredStack::resolve`,
+`ContextResolutionStackDefinition::load_bytes`, and
+`GenericArtifactLineageStoreV1::validate_inventory` at CRITICAL; the
+conditionally necessary `GenericArtifactLineageStoreV1::require_journal_authority`
+only while fresh impact remains LOW; and new symbols in the same engine subsystem.
 Exceeding a ceiling requires reviewed same-slice decomposition or an authority
 stop; dependency/unsafe/schema-catalog/transport expansion requires user
 authority.

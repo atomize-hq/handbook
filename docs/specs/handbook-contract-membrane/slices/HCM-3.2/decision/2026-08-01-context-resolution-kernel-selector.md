@@ -1,26 +1,41 @@
 # HCM-3.2 Context Resolution Kernel Selector
 
-Status: amended for same-parent Option 2 resumption; fresh implementation-stage CLEAN required before RED/Rust
+Status: fresh operator-authorized whole-slice selector; independent CLEAN required before RED/Rust
 Selected slice: HCM-3.2 only
-Parent orchestration: `20260801T202515Z--HCM-3-2--context-resolution-kernel`
+Parent orchestration: `20260802T232751Z--HCM-3-2--context-resolution-kernel-fresh`
 
 ## Selection and predecessor boundary
 
-The user explicitly selected the complete HCM-3.2 slice. HCM-3.1 is completed
+The user explicitly selected the complete HCM-3.2 slice as a genuinely fresh
+parent at checkpoint `a1aef5a5fc8a4471cee6044e16bd751ae512e216`, tree
+`17dbde4d8f12127d7ddd7ac0ed8997c5f33789c8`, with `HANDOFF_SELECTOR=none`.
+HCM-3.1 is completed
 predecessor context and its vocabulary/profile closure is immutable. This
 selector does not select HCM-3.3 or any later work.
 
+The stopped parent `20260801T202515Z--HCM-3-2--context-resolution-kernel`,
+handoff `20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required`,
+its source chain, findings, remedies, blockers, and operator decisions are
+immutable historical constraints. This selector neither supersedes nor claims
+direct succession from that handoff and reuses none of its orchestration,
+outcome, packet, cycle, finding, or budget identities. The rejected HCM-0.10
+planning commit and failed HCM-0.8 continuation grant provide no authority.
+
 ## Orchestration registry
 
-The parent has one integrated outcome and three packets:
+The fresh parent has one integrated outcome and four packets:
 
 ```json
-[{"authority_ref":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md","integrated_outcome_id":"hcm-3.2-context-resolution-kernel-full-slice","packet_ids":["HCM-3.2-P1-planning-selector","HCM-3.2-P2-kernel-implementation","HCM-3.2-P3-proof-control-closeout"]}]
+[{"authority_ref":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md","integrated_outcome_id":"hcm-3.2-context-resolution-kernel-fresh-whole-slice","packet_ids":["HCM-3.2-FRESH-P1-selector-authority","HCM-3.2-FRESH-P2-kernel-implementation","HCM-3.2-FRESH-P3-proof","HCM-3.2-FRESH-P4-final-closeout"]}]
 ```
 
 The canonical JSON plus one terminal LF is the frozen outcome registry preimage.
 Every v1.4 dispatch binds its recomputed registry fingerprint and the causal
 budget derived from this parent orchestration plus the integrated outcome.
+The registry fingerprint is
+`sha256:c45bc9bc7bfee52e23bc87514c5facf9c1c769d6dc777d784c48339f9a8f793b`;
+the causal-budget fingerprint is
+`sha256:91f15b60a9ab3ae9850f346d6045d076a46f2bcc2fda9fcc0ea5ecbccc932228`.
 
 ## Selected owner and call boundary
 
@@ -118,9 +133,10 @@ resolver lifetimes even when both retained and asserted counters are zero.
 Nonzero sign counters must additionally increase during one resolver lifetime;
 zero/zero remains the existing accepted authenticator behavior. This is not
 enrollment or durable credential-use mutation.
-`ApproverAuthorityPairV1`, the authenticator module, repository guard, generic
-lineage store, artifact mutation owner, and all registry bytes remain
-unchanged.
+`ApproverAuthorityPairV1`, the authenticator module, repository guard, artifact
+mutation owner, and all registry bytes remain unchanged. The generic lineage
+store changes only in the two exact methods and routing semantics selected
+below.
 
 ## Definition identity selector
 
@@ -355,10 +371,10 @@ impl ContextResolutionEnvelope {
         &self, requested_value: &str,
     ) -> Result<ContextResolutionValidationDecision, Error>;
     pub fn missing_context_candidate(
-        &self, proposed: Binding, evidence: Vec<Binding>,
+        &self, proposed: &ContextResolutionEnvelope, evidence: Vec<Binding>,
     ) -> Result<ContextResolutionEscalationCandidate, Error>;
     pub fn missing_authority_candidate(
-        &self, proposed: Binding, evidence: Vec<Binding>,
+        &self, proposed: &ContextResolutionEnvelope, evidence: Vec<Binding>,
     ) -> Result<ContextResolutionEscalationCandidate, Error>;
 }
 
@@ -374,8 +390,7 @@ impl ContextResolutionEscalationCandidate {
 pub struct ContextResolutionEscalationRequest;
 impl ContextResolutionEscalationRequest {
     pub fn new(
-        request_id: &str, current_envelope: Binding,
-        proposed_envelope: Binding,
+        request_id: &str, current_envelope: &ContextResolutionEnvelope,
         candidate: ContextResolutionEscalationCandidate,
     ) -> Result<Self, Error>;
     pub fn exact_binding(&self) -> &Binding;
@@ -402,7 +417,7 @@ impl ContextResolutionSemanticMemoryTarget {
 }
 pub struct ContextResolutionSemanticMemoryRecord;
 impl ContextResolutionSemanticMemoryRecord {
-    pub fn new(record: Binding) -> Result<Self, Error>;
+    pub fn new(record: Binding, target_memory_authority: &Admission) -> Result<Self, Error>;
     pub fn exact_binding(&self) -> &Binding;
 }
 impl ContextResolutionPromotionRequest {
@@ -412,6 +427,7 @@ impl ContextResolutionPromotionRequest {
         stack: &ContextResolutionStackDefinition,
         target_memory_horizon: &str,
         target: ContextResolutionSemanticMemoryTarget,
+        target_authority: &Admission,
         requested_authority_ref: &str,
     ) -> Result<Self, Error>;
     pub fn exact_binding(&self) -> &Binding;
@@ -461,7 +477,7 @@ pub struct ContextResolutionKernelError;
 impl ContextResolutionKernelError {
     pub fn kind(&self) -> ContextResolutionKernelErrorKind;
     pub fn detail(&self) -> &str;
-    pub fn candidate(&self) -> Option<&ContextResolutionEscalationCandidate>;
+    pub fn candidate(self) -> Option<ContextResolutionEscalationCandidate>;
 }
 ```
 
@@ -472,12 +488,37 @@ Its representation may retain levels, domains, and policy pairs privately.
 dispatcher, public trait, blanket implementation, generic framework, or symbol
 outside this list is authorized.
 
+An escalation candidate is a sealed value created only by envelope resolution
+or the two typed envelope candidate methods. It stores the exact current and
+proposed envelope bindings plus complete profile, stack, dimension,
+constraint, and mutation metadata. A failed child resolution returns no
+envelope but includes this sealed candidate in the kernel error. Request
+construction consumes that candidate and the exact current envelope, then
+revalidates identical profile/stack, at least one changed bound, and the exact
+candidate/current tuple. Cross-profile, cross-stack, unchanged, fabricated,
+or mismatched proposals refuse before a request binding exists. No public
+constructor can fabricate a candidate.
+The existing error accessor consumes the error and returns its owned candidate,
+so a failed-resolution candidate can move directly into request construction
+without cloning, rebuilding, or exposing private fields.
+
+A semantic-memory target is an unauthoritative candidate whose deterministic
+binding is available after construction. Promotion-request construction then
+requires a `Target` admission whose subject is that exact candidate binding.
+A result record is constructible only with a `TargetMemory` admission whose
+subject exactly matches the result binding. Registry admission rechecks both
+authority uses and subjects. Because admissions are opaque resolver outputs,
+arbitrary artifact, contract, posture, Snapshot, Projection, gate, or durable-
+memory bindings cannot enter a request, disposition, or registry through
+nominal wrappers.
+
 ## Exact ceilings
 
 Production paths:
 
 - `crates/engine/src/context_resolution_registry.rs`;
 - `crates/engine/src/context_resolution.rs`;
+- `crates/engine/src/artifact_lineage_store.rs`;
 - `crates/engine/src/lib.rs`.
 
 Test/fixture paths:
@@ -490,26 +531,66 @@ Control paths are the exact HCM-3.2 slice files, review/proof dispatches and
 records, affected HCM 00-06 rows after earned proof, one v1.4 handoff, ledger,
 and a new `09` row only when required by a validated P3/P4.
 
-Maximums are: 3 production paths, 3 test families, 80 changed named production
-declarations, and 1,800 hand-written production lines. A named declaration is
+Maximums are: 4 production paths, 3 test families, 80 changed named production
+declarations, and 2,000 hand-written production lines. At most 60 non-test
+changed lines and 180 test changed lines may be added to
+`artifact_lineage_store.rs`. A named declaration is
 counted once by post-state `(module, impl owner, declaration name)` for each
-new or edited struct, enum, function, method, or constant in the three
+new or edited struct, enum, function, method, or constant in the four
 production paths. Fields, variants, imports, derives, compiler-generated
-implementations, and tests do not count. The three accepted existing symbols
+implementations, and tests do not count. The five accepted existing symbols
 count; unchanged reused primitives do not. No Cargo/dependency/version/unsafe/
 schema-catalog/transport surface or ancillary path is allowed. Protected paths,
 frozen historical dispatch/record corpora, and every path outside the ceilings
 remain unstaged/uncommitted.
 
-Live GitNexus reports HIGH for `ContextResolutionStackDefinition` (4 upstream,
-4 processes), CRITICAL for `AuthoredStack::resolve` (47 upstream, 5 processes),
-and CRITICAL for `ContextResolutionStackDefinition::load_bytes` (166 upstream,
-8 processes). Product authority explicitly accepts only these three existing
-symbol edits. The full engine/profile/CLI/setup/promotion/intake/lifecycle/
+Fresh live GitNexus reports HIGH for `ContextResolutionStackDefinition` (4
+upstream, 4 processes), CRITICAL for `AuthoredStack::resolve` (6 upstream, 5
+processes), CRITICAL for `ContextResolutionStackDefinition::load_bytes` (30
+upstream, 8 processes), and CRITICAL for
+`GenericArtifactLineageStoreV1::validate_inventory` (30 upstream, 6 processes).
+Product authority explicitly accepts only these four HIGH/CRITICAL existing
+symbol edits. `GenericArtifactLineageStoreV1::require_journal_authority` is the
+only conditional fifth edit: live impact is LOW (9 upstream, 1 process), and
+the edit is necessary because the method otherwise enumerates the recognized
+foreign registry family and parses its intent under the generic-artifact
+schema. It must route the exact `registry` family away from generic parsing;
+if fresh pre-edit impact is not LOW or the necessity changes, leave it
+unchanged and stop. The full engine/profile/CLI/setup/promotion/intake/lifecycle/
 workspace replay wall is mandatory. `ApproverAuthorityPairV1` and assertion
 verification also have existing CRITICAL graph reach but remain byte-for-byte
 unchanged; the authenticator port is MEDIUM and guard/store are LOW. Any need
-to edit those primitives or any fourth existing HIGH/CRITICAL symbol stops.
+to edit those primitives or any fifth existing HIGH/CRITICAL symbol stops.
+
+## Lineage-store composition boundary
+
+`registry` is the only recognized foreign transaction family under
+`.handbook/state/transactions`. The committed approver-registry owner remains
+the sole parser, validator, recovery owner, and currentness authority for its
+two exact intent schemas. The generic store must validate links at the family
+boundary, then exclude `registry` from generic intent parsing and generic
+recovery. It must continue fully validating and recovering only
+`intake-records`, `artifact-candidates`, and `artifact-promotions`. Every other
+family, linked family, malformed generic transaction, owner mismatch, stale
+generic output, registry currentness failure, crash-recovery inconsistency,
+or replay inconsistency refuses. No transaction is deleted or allowlisted by
+schema; neither owner interprets the other's intents.
+
+Required lineage tests are named
+`registry_transaction_family_coexists_with_generic_inventory_without_generic_parsing`,
+`generic_journal_authority_excludes_registry_intents`, and
+`unknown_transaction_family_remains_refused`, plus the existing complete
+generic recovery/currentness and committed-registry replay walls. Positive
+proof must traverse the actual guard, generic recovery/currentness, and
+committed-registry owner. Negative proof must include a registry intent that
+would fail generic parsing, an unknown fourth family, a linked registry family,
+stale/malformed generic transactions, registry crash recovery, owner mismatch,
+and replay/currentness refusal.
+
+Selector consistency proof compares SPEC, selector, plan, and todo and shows
+the same four production paths, exact five existing symbols including the
+conditional LOW method, 2,000-line ceiling, three test families, and no claim
+that the two selected lineage-store methods remain unchanged.
 
 ## Test selector
 
@@ -533,11 +614,18 @@ and refusal of artifact/contract/posture or durable-memory claims.
 No test may claim Projection, Snapshot, flow/pipeline adoption, posture, SDK,
 transport, release, publication, or downstream proof.
 
+Escalation negative proof covers cross-profile, cross-stack, unchanged-bound,
+fabricated-binding, and candidate/request tuple mismatch for each candidate
+class. Semantic-memory proof covers one positively admitted target/result and
+construction/registry refusal for artifact, contract, posture, Snapshot,
+Projection, gate, and durable-memory subjects.
+
 ## Review and proof selector
 
-The prior planning stage is already independently CLEAN and must not be
-reopened. This amended selector must receive one fresh implementation-stage
-discovery CLEAN before RED/Rust. Later implementation review
+The fresh parent has no inherited CLEAN stage. This complete selector must
+receive an ordinary fresh planning discovery review and, if findings exist,
+one consolidated remediation plus different-fresh closure before RED/Rust.
+Later implementation review
 uses the complete converged subject and exact proof wall. P1/P2 findings receive
 one consolidated remediation plus different-fresh closure; only directly
 causal unmasked findings may consume the two supplemental cycles. Proof and
@@ -569,9 +657,9 @@ unresolved HIGH/CRITICAL impact, contract contradiction not repairable inside
 HCM-3.2, mandatory delegation failure, exhausted causal budget, or unresolved
 P1/P2. Local findings, proof gaps, and bounded remediation remain parent-owned.
 
-The authority-resolution, candidate-mapping, exact-public-signature, and named
-HIGH/CRITICAL conditions are now selected. The same slice remains stopped only
-until the fresh implementation-stage selector-admission review is CLEAN. A
+The authority-resolution, candidate-mapping, exact-public-signature,
+lineage-family routing, and named HIGH/CRITICAL conditions are now selected.
+The fresh slice remains stopped only until its selector review is CLEAN. A
 validator refusal, P1/P2, additional public/path/dependency/risk expansion, or
-causal-budget contradiction stops fail closed; the parent/outcome/packets may
-not be renamed or reset.
+causal-budget contradiction stops fail closed; the fresh identities may not be
+renamed or reset.

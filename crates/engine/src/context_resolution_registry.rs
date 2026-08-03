@@ -331,6 +331,8 @@ struct AuthoredStack {
 pub struct ContextResolutionStackDefinition {
     exact_ref: ExactDefinitionRef,
     definition_fingerprint: DefinitionFingerprint,
+    levels: Vec<Level>,
+    dimension_domains: DimensionDomains,
 }
 impl ContextResolutionStackDefinition {
     pub fn exact_ref(&self) -> &ExactDefinitionRef {
@@ -355,6 +357,17 @@ impl ContextResolutionStackDefinition {
         let value = parse_definition_yaml(bytes)?;
         let authored: AuthoredStack = decode(value)?;
         authored.resolve(policies)
+    }
+
+    #[rustfmt::skip]
+    pub(crate) fn ranks(&self, level_id: &str, values: [&str; 6]) -> Option<[u8; 6]> {
+        self.levels.iter().any(|level| level.level_id == level_id).then_some(())?;
+        let domains = [&self.dimension_domains.scope_horizon, &self.dimension_domains.detail_resolution, &self.dimension_domains.temporal_horizon, &self.dimension_domains.authority_horizon, &self.dimension_domains.memory_horizon, &self.dimension_domains.validation_horizon];
+        let mut ranks = [0; 6];
+        for (index, (domain, value_id)) in domains.into_iter().zip(values).enumerate() {
+            ranks[index] = domain.iter().find(|value| value.value_id == value_id)?.rank;
+        }
+        Some(ranks)
     }
 }
 pub(crate) fn admitted_context_resolution_stack_exact_ref(
@@ -386,61 +399,41 @@ impl AuthoredStack {
                 "unsupported Context Resolution stack record",
             ));
         }
-        let expected_levels = [
-            (
-                "strategic",
-                "Strategic",
-                [
-                    "program",
-                    "full",
-                    "long_range",
-                    "program_policy",
-                    "strategic",
-                    "program_gate",
-                ],
-            ),
-            (
-                "coordination",
-                "Coordination",
-                [
-                    "slice",
-                    "normal",
-                    "current_slice",
-                    "slice_write",
-                    "coordination",
-                    "slice_closeout",
-                ],
-            ),
-            (
-                "execution",
-                "Execution",
-                [
-                    "assigned_unit",
-                    "normal",
-                    "immediate",
-                    "local_write",
-                    "execution",
-                    "unit_closeout",
-                ],
-            ),
-            (
-                "operation",
-                "Operation",
-                [
-                    "local_observation",
-                    "identifier_only",
-                    "current_operation",
-                    "read_only",
-                    "operation",
-                    "observation_only",
-                ],
-            ),
-        ];
-        if self.levels.len() != 4 {
+        if self.levels.is_empty() || self.levels.len() > 64 {
             return Err(stack_drift());
         }
-        for (level, (id, label, values)) in self.levels.iter().zip(expected_levels) {
-            let actual = [
+        let mut level_ids = BTreeSet::new();
+        for level in &self.levels {
+            if level.level_id.is_empty()
+                || level.display_label.is_empty()
+                || !level_ids.insert(level.level_id.as_str())
+            {
+                return Err(stack_drift());
+            }
+        }
+        let domains = [
+            &self.dimension_domains.scope_horizon,
+            &self.dimension_domains.detail_resolution,
+            &self.dimension_domains.temporal_horizon,
+            &self.dimension_domains.authority_horizon,
+            &self.dimension_domains.memory_horizon,
+            &self.dimension_domains.validation_horizon,
+        ];
+        for domain in domains {
+            let mut ids = BTreeSet::new();
+            if domain.is_empty()
+                || domain.len() > 256
+                || domain.iter().enumerate().any(|(rank, value)| {
+                    value.value_id.is_empty()
+                        || !ids.insert(value.value_id.as_str())
+                        || usize::from(value.rank) != rank
+                })
+            {
+                return Err(stack_drift());
+            }
+        }
+        let ranks = |level: &Level| {
+            let values = [
                 level.defaults.scope_horizon.as_str(),
                 level.defaults.detail_resolution.as_str(),
                 level.defaults.temporal_horizon.as_str(),
@@ -448,58 +441,26 @@ impl AuthoredStack {
                 level.defaults.memory_horizon.as_str(),
                 level.defaults.validation_horizon.as_str(),
             ];
-            if level.level_id != id || level.display_label != label || actual != values {
-                return Err(stack_drift());
-            }
-        }
-        let domains = [
-            (
-                &self.dimension_domains.scope_horizon,
-                ["local_observation", "assigned_unit", "slice", "program"],
-            ),
-            (
-                &self.dimension_domains.detail_resolution,
-                ["identifier_only", "summary", "normal", "full"],
-            ),
-            (
-                &self.dimension_domains.temporal_horizon,
-                [
-                    "current_operation",
-                    "immediate",
-                    "current_slice",
-                    "long_range",
-                ],
-            ),
-            (
-                &self.dimension_domains.authority_horizon,
-                ["read_only", "local_write", "slice_write", "program_policy"],
-            ),
-            (
-                &self.dimension_domains.memory_horizon,
-                ["operation", "execution", "coordination", "strategic"],
-            ),
-            (
-                &self.dimension_domains.validation_horizon,
-                [
-                    "observation_only",
-                    "unit_closeout",
-                    "slice_closeout",
-                    "program_gate",
-                ],
-            ),
-        ];
-        for (domain, expected) in domains {
-            if domain.len() != 4
-                || domain
+            let mut resolved = [0u8; 6];
+            for (index, (domain, value)) in domains.iter().zip(values).enumerate() {
+                resolved[index] = domain
                     .iter()
-                    .zip(expected)
-                    .enumerate()
-                    .any(|(rank, (value, id))| {
-                        value.value_id != id || usize::from(value.rank) != rank
-                    })
-            {
-                return Err(stack_drift());
+                    .find(|entry| entry.value_id == value)
+                    .map(|entry| entry.rank)
+                    .ok_or_else(stack_drift)?;
             }
+            Ok::<_, RegistryLoadError>(resolved)
+        };
+        let level_ranks = self
+            .levels
+            .iter()
+            .map(ranks)
+            .collect::<Result<Vec<_>, _>>()?;
+        if level_ranks
+            .windows(2)
+            .any(|pair| (0..6).any(|index| pair[1][index] > pair[0][index]))
+        {
+            return Err(stack_drift());
         }
         let selections = [
             (
@@ -536,9 +497,6 @@ impl AuthoredStack {
             fingerprints.push(f.as_str());
         }
         let exact_ref = ExactDefinitionRef::new(&self.stack_id, &self.stack_version)?;
-        if exact_ref.as_str() != "handbook.context-resolution.shipped-root@1.0.0" {
-            return Err(stack_drift());
-        }
         let supplied = DefinitionFingerprint::parse(&self.definition_fingerprint)?;
         let computed = fingerprint_serializable(&StackClosure {
             definition: &self,
@@ -553,6 +511,8 @@ impl AuthoredStack {
         Ok(ContextResolutionStackDefinition {
             exact_ref,
             definition_fingerprint: computed,
+            levels: self.levels,
+            dimension_domains: self.dimension_domains,
         })
     }
 }

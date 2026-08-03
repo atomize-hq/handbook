@@ -1,0 +1,78 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260803T000500Z--HCM-3-2--fresh-selector-supplemental-1",
+  "created_at_utc": "2026-08-03T00:05:00Z",
+  "source_handoff_ids": ["20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed", "20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required"],
+  "parent_orchestration_id": "20260802T232751Z--HCM-3-2--context-resolution-kernel-fresh",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "doubt-driven-development", "documentation-and-ADRs", "api-and-interface-design", "security-and-hardening", "code-review-and-quality"],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-FRESH-P1-selector-authority",
+  "subject_fingerprint": "sha256:07f8d711b9140b980f91ffd829f64deeb4a5e545374d9af842d36370bff1af19",
+  "review_cycle": {
+    "kind": "supplemental_causal",
+    "cycle_id": "hcm-3.2-fresh-selector-supplemental-1",
+    "trigger_run_ids": ["hcm32_selector_closure"],
+    "finding_refs": ["HCM32-FRESH-SEL-DISC-001", "HCM32-FRESH-SEL-DISC-002", "HCM32-FRESH-SEL-DISC-003", "HCM32-FRESH-SEL-CLOS-001", "HCM32-FRESH-SEL-CLOS-002"]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-02T23:27:51Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{"integrated_outcome_id": "hcm-3.2-context-resolution-kernel-fresh-whole-slice", "packet_ids": ["HCM-3.2-FRESH-P1-selector-authority", "HCM-3.2-FRESH-P2-kernel-implementation", "HCM-3.2-FRESH-P3-proof", "HCM-3.2-FRESH-P4-final-closeout"], "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"}],
+    "fingerprint": "sha256:c45bc9bc7bfee52e23bc87514c5facf9c1c769d6dc777d784c48339f9a8f793b"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:91f15b60a9ab3ae9850f346d6045d076a46f2bcc2fda9fcc0ea5ecbccc932228",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-fresh-whole-slice",
+    "outcome_registry_fingerprint": "sha256:c45bc9bc7bfee52e23bc87514c5facf9c1c769d6dc777d784c48339f9a8f793b",
+    "review_stage": "planning",
+    "stage_transition": {"kind": "continue", "from_stage": "planning"},
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260802T234500Z--HCM-3-2--fresh-selector-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-fresh-selector-supplemental-1-convergence",
+    "completed_at_utc": "2026-08-03T00:04:59Z",
+    "checks": [
+      {"kind": "complete_packet_wall", "status": "passed", "command": "repair only the stale unchanged claim and two bootstrap deadlocks directly unmasked by closure", "evidence_ref": "sealed failed-proposal candidate and post-candidate Target admission stay within frozen names/path/risk"},
+      {"kind": "recursive_fixture_consumer_inventory", "status": "passed", "command": "trace failed child resolution to escalation request and target candidate to resolver admission to promotion request", "evidence_ref": "both previously cyclic flows are now ordered and fail closed"},
+      {"kind": "manifest_replay", "status": "passed", "command": "recompute sorted five-entry subject", "evidence_ref": "aggregate sha256:07f8d711b9140b980f91ffd829f64deeb4a5e545374d9af842d36370bff1af19"},
+      {"kind": "formatting", "status": "passed", "command": "strict UTF-8 and Markdown fence balance", "evidence_ref": "passed"},
+      {"kind": "whitespace", "status": "passed", "command": "git diff --check", "evidence_ref": "passed"}
+    ]
+  },
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md", "sha256": "bf1c5df74f26698ff8fdd6cb78e51ada9b8d3a45163cce311bff982023703f35"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md", "sha256": "f0153c0c215dac697a3ac2a4da87910e56eef76522f2ebd9fdc0a9922d2b09de"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md", "sha256": "c3b7e72bd6f96a945912ec831f6bc4cf9c52223267f5615875614240d33c8a5e"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md", "sha256": "8b63c96fe25edadba8593c73809da22af841334825ed873ac99568eac4837fca"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md", "sha256": "248a5c054180b1d7323cbefc5b45fd261b3713b78e9f79a4571de16022594542"}
+    ],
+    "aggregate_fingerprint": "sha256:07f8d711b9140b980f91ffd829f64deeb4a5e545374d9af842d36370bff1af19"
+  },
+  "active_resolution": {"level": "HCM-3.2 planning supplemental causal closure", "scope_horizon": "only five cited findings in the fresh selector", "detail_resolution": "stale store claim, failed-proposal request path, and target-admission ordering", "temporal_horizon": "first supplemental before any RED/Rust", "authority_horizon": "unchanged HCM-3.2 fresh authority", "memory_horizon": "discovery, closure, and amended exact subject", "validation_horizon": "terminal CLEAN or bounded second supplemental"},
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md", "sections": ["Authority-binding and admission selector", "Inheritance selector", "Exact public symbols and signatures", "Lineage-store composition boundary"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md", "sections": ["HCM-3.2 Fresh Selector Discovery Remediation"]}
+  ],
+  "repo_truth": "The first closure returned two original findings partial, one open, and exactly two directly unmasked bootstrap findings. Only those causes were amended; no tests or Rust edits exist.",
+  "allowed_scope": ["Disposition the five cited findings only.", "Verify failed resolution can yield a sealed candidate consumable by request construction.", "Verify target candidate binding exists before Target admission and request admission rechecks it.", "Return CLEAN only if all cited findings close and no directly causal P1/P2 remains."],
+  "non_goals": ["No general discovery.", "No edits, tests, Rust, dispatch/handoff/ledger writes, staging, or commits.", "No authority or ceiling expansion."],
+  "tasks": ["Return exact disposition for each cited finding.", "Report only directly caused/unmasked P1/P2 with new IDs.", "Return CLEAN when no valid P1/P2 remains."],
+  "contracts_and_gates": ["This is supplemental causal cycle one of at most two.", "No cycle follows CLEAN.", "RED/Rust remain forbidden until CLEAN."],
+  "stop_conditions": ["Return FINDINGS for any incomplete cited repair or directly caused P1/P2.", "Return BLOCKED for scope beyond selected HCM-3.2."],
+  "return_contract": {"transport": "built_in_subagent", "findings_first": true, "include_agent_identity_and_status": true, "edit_scope": "read_only", "global_handoff": "forbidden", "ledger_write": "forbidden", "user_task_hop": "forbidden", "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]}
+}

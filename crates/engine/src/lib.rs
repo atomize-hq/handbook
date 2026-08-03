@@ -36,6 +36,7 @@ pub mod charter_observation;
 mod charter_promotion_intent_v12;
 pub mod charter_promotion_workflow;
 pub mod charter_runtime_vectors;
+mod context_resolution;
 pub mod context_resolution_registry;
 pub mod definition_identity;
 pub mod environment_context_artifact;
@@ -175,6 +176,20 @@ pub use charter_promotion_workflow::{
 pub use charter_runtime_vectors::{
     validate_runtime_record_fingerprint_vectors, RuntimeRecordVectorError,
     RuntimeRecordVectorReport,
+};
+pub use context_resolution::{
+    ContextResolutionAuthorityAdmission, ContextResolutionAuthorityAdmissionResolver,
+    ContextResolutionAuthorityUse, ContextResolutionDimensions, ContextResolutionEnvelope,
+    ContextResolutionEnvelopeInput, ContextResolutionEscalationCandidate,
+    ContextResolutionEscalationDisposition, ContextResolutionEscalationOutcome,
+    ContextResolutionEscalationRequest, ContextResolutionExactBinding,
+    ContextResolutionKernelError, ContextResolutionKernelErrorKind,
+    ContextResolutionMemoryDecision, ContextResolutionMutationDecision,
+    ContextResolutionMutationEffect, ContextResolutionMutationRule,
+    ContextResolutionPromotionDisposition, ContextResolutionPromotionOutcome,
+    ContextResolutionPromotionRequest, ContextResolutionSemanticMemoryRecord,
+    ContextResolutionSemanticMemoryTarget, ContextResolutionTransitionRegistry,
+    ContextResolutionValidationDecision,
 };
 pub use context_resolution_registry::{
     ContextResolutionPolicyRegistry, ContextResolutionStackDefinition,

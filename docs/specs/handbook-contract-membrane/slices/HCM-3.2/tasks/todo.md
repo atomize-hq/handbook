@@ -1,5 +1,21 @@
 # HCM-3.2 Task Checklist
 
+The checked items below are immutable historical evidence from the stopped
+parent. They do not count as work or review cycles for the fresh parent
+`20260802T232751Z--HCM-3-2--context-resolution-kernel-fresh`.
+
+## Fresh P1 — Selector authority
+
+- [x] Validate the exact checkout, checkpoint/tree, integration ref, ancestry,
+  remote baseline, cleanliness, rendered contract, and protected-path hashes.
+- [x] Re-read live protocol, HCM-3.2 authority, predecessor context, historical
+  HCM-3.2 findings/stops, and current implementation primitives.
+- [x] Run live read-only GitNexus query/context/impact reconnaissance.
+- [x] Validate and execute fresh selector discovery review.
+- [x] Consolidate `HCM32-FRESH-SEL-DISC-001` through `003` once.
+- [x] Obtain different-fresh CLEAN closure for all three finding IDs.
+- [x] Re-run live impact and warn before any authorized HIGH/CRITICAL edit.
+
 ## P1 — Planning authority
 
 - [x] Validate bound checkout, base tree, ancestry, integration ref, remote baseline, and cleanliness.
@@ -20,15 +36,15 @@
 Blocked only until the amended selector-admission review is independently
 CLEAN. Then execute in order under the frozen surface and ceilings.
 
-- [ ] Write failing configurable-stack and envelope tests.
-- [ ] Run upstream impact analysis for every existing symbol to be edited and warn on HIGH/CRITICAL risk.
-- [ ] Generalize ordered-stack validation while preserving shipped identity.
-- [ ] Implement the closed current-artifact authority binding and native assertion admission resolver without editing reused primitives.
-- [ ] Implement six-dimension root/child resolution and deterministic fingerprints.
-- [ ] Implement fail-closed mutation matching, deny precedence, and containment refusal.
-- [ ] Implement memory/validation decisions and escalation/promotion admission semantics.
-- [ ] Export only the selector-named public engine surface.
-- [ ] Pass focused engine/profile/immutable-definition proof.
+- [x] Write failing configurable-stack and envelope tests.
+- [x] Run upstream impact analysis for every existing symbol to be edited and warn on HIGH/CRITICAL risk.
+- [x] Generalize ordered-stack validation while preserving shipped identity.
+- [x] Implement the closed current-artifact authority binding and native assertion admission resolver without editing reused primitives.
+- [x] Implement six-dimension root/child resolution and deterministic fingerprints.
+- [x] Implement fail-closed mutation matching, deny precedence, and containment refusal.
+- [x] Implement memory/validation decisions and escalation/promotion admission semantics.
+- [x] Export only the selector-named public engine surface.
+- [x] Pass focused engine/profile/immutable-definition proof.
 - [ ] Execute implementation discovery review; remediate and close causally if required.
 
 ## P3 — Proof and closeout

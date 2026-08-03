@@ -1,0 +1,171 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260802T233000Z--HCM-3-2--fresh-selector-review",
+  "created_at_utc": "2026-08-02T23:30:00Z",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required"
+  ],
+  "parent_orchestration_id": "20260802T232751Z--HCM-3-2--context-resolution-kernel-fresh",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-FRESH-P1-selector-authority",
+  "subject_fingerprint": "sha256:1628e7a3630f16ac1f4a6fe92ff5b7b1e2725a2495c4055002b8ee62bcb09fb9",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.2-fresh-selector-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-02T23:27:51Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{
+      "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-fresh-whole-slice",
+      "packet_ids": [
+        "HCM-3.2-FRESH-P1-selector-authority",
+        "HCM-3.2-FRESH-P2-kernel-implementation",
+        "HCM-3.2-FRESH-P3-proof",
+        "HCM-3.2-FRESH-P4-final-closeout"
+      ],
+      "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+    }],
+    "fingerprint": "sha256:c45bc9bc7bfee52e23bc87514c5facf9c1c769d6dc777d784c48339f9a8f793b"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:91f15b60a9ab3ae9850f346d6045d076a46f2bcc2fda9fcc0ea5ecbccc932228",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-fresh-whole-slice",
+    "outcome_registry_fingerprint": "sha256:c45bc9bc7bfee52e23bc87514c5facf9c1c769d6dc777d784c48339f9a8f793b",
+    "review_stage": "planning",
+    "stage_transition": {"kind": "enter", "from_stage": null},
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-fresh-selector-convergence-1",
+    "completed_at_utc": "2026-08-02T23:29:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "verify bound checkout/base/tree/integration ref/remote/cleanliness/rendered contract/protected hashes; read live AGENTS, protocol 07-09, HCM-3.2 authority, HCM-3.1 predecessor, stopped-parent evidence, required skills, live source/tests",
+        "evidence_ref": "parent pre-review record: detached clean checkout at a1aef5a5/tree 17dbde4d; integration ref equal; remote baseline 7becde55; protected paths hashed; runtime edit count zero"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inspect context-resolution registry/kernel/profile callers plus generic lineage store and committed approver-registry transaction owner/recovery tests",
+        "evidence_ref": "live GitNexus FTS unavailable; exact-UID context/impact and direct source inventory bind four HIGH/CRITICAL symbols plus one conditional LOW symbol"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted four-entry repo-path-NUL-SHA256-newline selector subject",
+        "evidence_ref": "subject manifest aggregate sha256:1628e7a3630f16ac1f4a6fe92ff5b7b1e2725a2495c4055002b8ee62bcb09fb9"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode and Markdown fence-balance check for selector subject",
+        "evidence_ref": "strict UTF-8 and balanced fences passed"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-3.2",
+        "evidence_ref": "parent command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md", "sha256": "6f624d2a1e6430de3be32b0bdc32f7eac6f2da2b31ada34c4ca623f8250ad6bb"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md", "sha256": "374e61268dc90568e9b8687dbef5a52d9e129c04413b6a1a1aad64efef56ee6e"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md", "sha256": "67eefbec0502b04b574df134541a2304a122c628f595dc57bca2642427a70348"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md", "sha256": "2d6d3f35ea8cd8ad8bbab10e5bcf4bf8a3506d6cd4f455ef9a4c7b595e39473b"}
+    ],
+    "aggregate_fingerprint": "sha256:1628e7a3630f16ac1f4a6fe92ff5b7b1e2725a2495c4055002b8ee62bcb09fb9"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 fresh complete-slice selector review",
+    "scope_horizon": "engine-owned authority admission, configurable stack, six-dimension envelope, lineage-family composition, inheritance, mutation, memory, validation, escalation/promotion, proof, and v1.4 closeout",
+    "detail_resolution": "exact identities, canonical bytes, owners, transaction-family routing, callable signatures, four production paths, five existing-symbol ceiling, tests, and stops",
+    "temporal_horizon": "fresh planning stage before any test, RED, or Rust edit",
+    "authority_horizon": "HCM-3.2 only; no failed continuation grant, HCM-0.10, schema/tool changes, HCM-3.3+, transport, push, or historical rewrite",
+    "memory_horizon": "live base a1aef5a5, HCM-3.1 predecessor, immutable stopped-parent evidence, current source/tests, and fresh parent registry",
+    "validation_horizon": "selector CLEAN required before RED or implementation"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md", "sections": ["Authority and dependencies", "Selected authority admission", "Public Rust surface", "Proof obligations", "Production, test, and control ceilings"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md", "sections": ["Selection and predecessor boundary", "Orchestration registry", "Authority-binding and admission selector", "Exact public symbols", "Exact ceilings", "Lineage-store composition boundary", "Test selector", "Stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/02-semantic-model.md", "sections": ["Context Resolution", "Resolution envelope", "Escalation and promotion"]},
+    {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sections": ["Context Resolution stack definition", "Context Resolution envelope", "Resolution escalation and memory promotion"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required.json", "sections": ["work_completed", "evidence", "resume"]}
+  ],
+  "repo_truth": "Exact fresh base is clean and unchanged. Existing context-resolution implementation from the stopped parent is present at the checkpoint, but generic lineage inventory and journal-authority scans reject or parse the committed registry family under the wrong owner. Live exact-UID impact is HIGH/CRITICAL for the four authorized symbols and LOW for the conditionally necessary routing method. FTS is unavailable, never GREEN.",
+  "allowed_scope": [
+    "Review the exact four-file selector subject read-only for authority, consistency, completeness, safety, implementability, and testability.",
+    "Check Option 2 authentication/currentness, all eleven authority subjects, four candidate classes, configurable stack and six dimensions, mutation/memory/validation/escalation, and exact public signatures.",
+    "Check exact registry-versus-generic transaction-family ownership/routing, unknown-family refusal, crash recovery, replay/currentness, five-symbol risk ceiling, line/test/path ceilings, and real-path positive/negative proof.",
+    "Carry historical findings as known constraints without reusing their IDs; emit unique fresh-run IDs only for presently valid selector gaps and do not repair them."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, write a global handoff/ledger, create another dispatch, delegate, run tests, or implement Rust.",
+    "Do not consume the failed continuation grant, implement HCM-0.10/HCM-3.3+, edit orchestration schemas/tools, change shipped identity, add dependencies, or widen public/path/risk ceilings.",
+    "Do not report unavailable FTS or future proof as GREEN."
+  ],
+  "tasks": [
+    "Return findings first with unique HCM32-FRESH-SEL-DISC IDs, severity, exact evidence, violated authority, smallest remediation, and missing proof.",
+    "Adversarially verify no hidden authority decision, cross-owner parsing, broad family allowlist, generic framework, self-authorizing transition, or future-slice behavior is required.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:1628e7a3630f16ac1f4a6fe92ff5b7b1e2725a2495c4055002b8ee62bcb09fb9."
+  ],
+  "contracts_and_gates": [
+    "Tests, RED, and Rust edits are forbidden until this planning selector stage is independently CLEAN.",
+    "Findings cause one consolidated parent remediation and different-fresh closure under the same fresh identities.",
+    "No unresolved P1/P2, shipped identity change, owner bypass, unknown-family acceptance, or later-slice behavior may proceed."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repairing any ambiguity, contradiction, unsafe routing, incomplete signature/test ceiling, or unprovable authority boundary.",
+    "Return BLOCKED if the design requires broader paths/public API/dependencies, another HIGH/CRITICAL symbol, schema/tool changes, HCM-3.3+, or historical mutation."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}

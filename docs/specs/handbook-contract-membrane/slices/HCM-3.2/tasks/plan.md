@@ -1,11 +1,12 @@
-# HCM-3.2 Resumed Implementation Plan
+# HCM-3.2 Fresh Whole-Slice Implementation Plan
 
 ## Overview
 
-Resume the same parent/outcome/packets from its independently reviewed planning
-authority stop. Freeze and review the selected HCM-3.2-specific authority
-binding/admission design before RED, then implement, prove, independently
-review, close, and publish locally without resetting causal lineage.
+Execute the operator-authorized fresh HCM-3.2 parent from the exact integration
+checkpoint. Prior HCM-3.2 findings, remedies, stops, and operator decisions are
+immutable known constraints, not reused lineage or newly discovered authority.
+Freeze and independently review the complete current selector before RED, then
+implement, prove, review, close, and publish locally under fresh v1.4 identities.
 
 ## Architecture decisions
 
@@ -24,10 +25,19 @@ review, close, and publish locally without resetting causal lineage.
   semantics; do not implement HCM-3.4 storage.
 - Preserve L0-L3 pipeline behavior unchanged and defer its real migration to
   HCM-3.5.
+- Compose the committed approver-registry transaction family with generic
+  artifact recovery/currentness in `artifact_lineage_store.rs`: each owner
+  validates only its exact family, registry is the only recognized foreign
+  family, and every unknown family still refuses.
+- Freeze four production paths, three test families, 80 changed declarations,
+  2,000 production lines, the four named HIGH/CRITICAL symbols, and only the
+  conditionally necessary LOW `require_journal_authority` edit.
+- Require typed current/proposed envelopes for escalation and exact opaque
+  `Target`/`TargetMemory` admissions for semantic-memory target/result values.
 
 ## Ordered packets
 
-### P1 — Planning and selector freeze
+### P1 — Fresh selector authority
 
 - Write SPEC, plan, todo, and exact selector.
 - Freeze one outcome registry, ceilings, public names, tests, proof wall, and
@@ -35,15 +45,14 @@ review, close, and publish locally without resetting causal lineage.
 - Obtain schema-valid fresh planning discovery review and, if needed,
   consolidated remediation plus different-fresh closure.
 
-Checkpoint: planning discovery is durably closed as an authority stop before
-any Rust edit.
+Checkpoint: the fresh complete selector review is durably CLEAN before any
+test, RED, or Rust edit.
 
 ### P2 — Authority admission, stack, and envelope kernel
 
 The product authority selected the bounded HCM-3.2 record/resolver and accepted
-the three named HIGH/CRITICAL edits. First amend the existing planning subject
-and obtain the one fresh implementation-stage selector-admission discovery
-review. Do not create another planning cycle and do not begin RED/Rust before
+the four named HIGH/CRITICAL edits plus one conditional LOW edit. Obtain the
+fresh selector discovery/closure cadence first. Do not begin RED/Rust before
 CLEAN.
 
 - Write RED tests for configurable stack admission and six-dimension envelope

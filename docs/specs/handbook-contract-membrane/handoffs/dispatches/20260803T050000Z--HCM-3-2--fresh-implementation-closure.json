@@ -1,0 +1,90 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260803T050000Z--HCM-3-2--fresh-implementation-closure",
+  "created_at_utc": "2026-08-03T05:00:00Z",
+  "source_handoff_ids": ["20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed", "20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required"],
+  "parent_orchestration_id": "20260802T232751Z--HCM-3-2--context-resolution-kernel-fresh",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "doubt-driven-development", "code-review-and-quality", "api-and-interface-design", "security-and-hardening", "test-driven-development", "source-driven-development"],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-FRESH-P2-kernel-implementation",
+  "subject_fingerprint": "sha256:5aa024471ba5964dcad52d0bfc2f851a6d59154e62f1c3febc60aa372805b269",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.2-fresh-implementation-closure-1",
+    "trigger_run_ids": ["hcm32_impl_review", "hcm32_impl_remediation"],
+    "finding_refs": ["HCM32-FRESH-IMPL-DISC-001", "HCM32-FRESH-IMPL-DISC-002", "HCM32-FRESH-IMPL-DISC-003", "HCM32-FRESH-IMPL-DISC-004", "HCM32-FRESH-IMPL-DISC-005"]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-02T23:27:51Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{"integrated_outcome_id": "hcm-3.2-context-resolution-kernel-fresh-whole-slice", "packet_ids": ["HCM-3.2-FRESH-P1-selector-authority", "HCM-3.2-FRESH-P2-kernel-implementation", "HCM-3.2-FRESH-P3-proof", "HCM-3.2-FRESH-P4-final-closeout"], "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"}],
+    "fingerprint": "sha256:c45bc9bc7bfee52e23bc87514c5facf9c1c769d6dc777d784c48339f9a8f793b"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:91f15b60a9ab3ae9850f346d6045d076a46f2bcc2fda9fcc0ea5ecbccc932228",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-fresh-whole-slice",
+    "outcome_registry_fingerprint": "sha256:c45bc9bc7bfee52e23bc87514c5facf9c1c769d6dc777d784c48339f9a8f793b",
+    "review_stage": "implementation",
+    "stage_transition": {"kind": "continue", "from_stage": "implementation"},
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260803T034500Z--HCM-3-2--fresh-implementation-remediation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-fresh-implementation-convergence-2",
+    "completed_at_utc": "2026-08-03T04:59:59Z",
+    "checks": [
+      {"kind": "complete_packet_wall", "status": "passed", "command": "cargo test -p handbook-engine --all-targets --all-features", "evidence_ref": "exit 0 in 731.4 seconds on the exact remediated subject; focused kernel 21/21 and stack 4/4 also GREEN"},
+      {"kind": "recursive_fixture_consumer_inventory", "status": "passed", "command": "recount complete implementation surface and immutable mutation-owner boundary", "evidence_ref": "four production paths, three test families, 79 declarations, fewer than 2000 inserted production lines; binding schema 53 leaves versus generic mutation owner 1..=15 outputs"},
+      {"kind": "manifest_replay", "status": "passed", "command": "recompute sorted 20-entry material implementation subject", "evidence_ref": "aggregate sha256:5aa024471ba5964dcad52d0bfc2f851a6d59154e62f1c3febc60aa372805b269"},
+      {"kind": "formatting", "status": "passed", "command": "cargo fmt --all -- --check and strict engine Clippy -D warnings", "evidence_ref": "both GREEN after remediation"},
+      {"kind": "whitespace", "status": "passed", "command": "git diff --check", "evidence_ref": "GREEN after remediation"}
+    ]
+  },
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path":"crates/engine/src/artifact_lineage_store.rs","sha256":"48f16861ffdd0d32380314cf921b195188245e1e8d741ada8c4d4fc264a973db"},
+      {"path":"crates/engine/src/context_resolution.rs","sha256":"acd07b7551d0c34e7d06aac9e10586cd698ef09bb536c0409dec953697ff8e2f"},
+      {"path":"crates/engine/src/context_resolution_registry.rs","sha256":"ce4d299c38d1c0ddd797f02d767cff3a6f180c7e9a1a485a754219bf8abf662a"},
+      {"path":"crates/engine/src/lib.rs","sha256":"5155942cae8039ff8a2888c9b17c58feb6e66b00e05bb56a9e20595f94d4040e"},
+      {"path":"crates/engine/tests/context_resolution_kernel.rs","sha256":"96ff1783eb585ad0a1214f1e9ccffa2b0932b77798e24fae52a784e65ce5b625"},
+      {"path":"crates/engine/tests/context_resolution_stack.rs","sha256":"36960edd1a861fe7b2d52acc1d33e933c114d888a6173062d4f733ca5f0005d4"},
+      {"path":"crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/artifact-kinds/context-resolution-authority-1.0.0.yaml","sha256":"0ed9d1a988aa3452dd0ae7ee3ceb91cf393ad565717675b03f1bdb003bbad3ab"},
+      {"path":"crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/intakes/context-resolution-authority-1.0.0.yaml","sha256":"5f309f287aa40f2cca9d443ad8fb3d4850f68880ee172239fde965a2c5a81d22"},
+      {"path":"crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/profiles/context-resolution-authority-1.0.0.yaml","sha256":"0240f546d9edae6d948cdff9dbb1bef927d077ac938cebb03f86f2037b312b7c"},
+      {"path":"crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.entry.yaml","sha256":"5b2ab0c58af2438c0ccb0ba2e5efea889dadd1d8cb923e599df0fe647cf558e5"},
+      {"path":"crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.schema.json","sha256":"7d7ad3d8eaa4cbf78ee2c008abaaeea159b01b1bafcd833027da97a519b6514e"},
+      {"path":"crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/profile-selection.json","sha256":"8e19cba6213e4cb65dc7c52230a993825da27cf02a34111f8da3d1fbb4e938b1"},
+      {"path":"crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/project/context-resolution-authority.json","sha256":"e3e5d04dfc801c4a8d80bbe868557fa6d9277898ab825c4fe5378519ce531e88"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md","sha256":"bf1c5df74f26698ff8fdd6cb78e51ada9b8d3a45163cce311bff982023703f35"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md","sha256":"7e983f00376c4aefea5cb371957b459a3af10921c75c6710b5263361736b6507"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md","sha256":"046866930b34818c16322f554813d82708d22e4144e22a4af9bc52e882e6f2f2"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md","sha256":"f2bbeeafaa7c8a5ad81442a3d45474b0e9a610ad1d27b3ee64668c2685785602"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md","sha256":"2878b0fa49e5cf27761c4ed2f36716b987bcfb3112805cce8b6d8cfba8cf08b2"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md","sha256":"8b63c96fe25edadba8593c73809da22af841334825ed873ac99568eac4837fca"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md","sha256":"3fee597bb2573c7f66499c1c8029614d22a99b38e56c629cb3fb053c1befd7b8"}
+    ],
+    "aggregate_fingerprint": "sha256:5aa024471ba5964dcad52d0bfc2f851a6d59154e62f1c3febc60aa372805b269"
+  },
+  "active_resolution": {"level":"HCM-3.2 implementation closure","scope_horizon":"exact 20-file remediated subject and five discovery findings","detail_resolution":"verify four bounded remediations and adjudicate the immutable owner-lineage conflict","temporal_horizon":"post-remediation and complete engine wall before any commit","authority_horizon":"same frozen selector; no path, owner-contract, API, dependency, or risk expansion","memory_horizon":"terminal planning CLEAN, discovery findings, consolidated remediation, and exact current bytes","validation_horizon":"close each finding only on direct evidence; preserve any P1/P2 blocker"},
+  "authority_refs": [{"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T030000Z--HCM-3-2--fresh-implementation-review.json","sections":["complete dispatch and five findings"]},{"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md","sections":["complete proof"]},{"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md","sections":["complete selector"]}],
+  "repo_truth": "Findings 001-004 have bounded code/test remediation with focused and full-engine GREEN evidence. Finding 005 remains claimed as an immutable conflict: 53 canonical binding leaves cannot obtain owner-produced lineage through the existing generic mutation owner's 1..=15 distinct-output contract. The seeded fixture proves admission only, not owner production.",
+  "allowed_scope": ["Review the exact 20-file subject read-only and disposition only the five referenced findings.", "Confirm findings 001-004 behaviorally from code and tests.", "For finding 005 inspect the selected schema leaf count and existing generic intake, mutation, lineage, and repository APIs; determine whether any already-authorized path can produce canonical owner lineage without weakening either contract.", "Return CLEAN only if all five findings are closed; otherwise return FINDINGS or BLOCKED with exact authority needed."],
+  "non_goals": ["No edits, tests, formatting, staging, commits, dispatch/handoff/ledger writes, delegation, general discovery, selector reopening, or future-slice design.", "No waiver, seeded-lineage misrepresentation, or newly invented production/API path."],
+  "tasks": ["Disposition HCM32-FRESH-IMPL-DISC-001 through -005 individually with direct evidence.", "Verify the complete subject stayed within paths, declarations, lines, signatures, and risk ceilings.", "State whether a safe partial checkpoint and v1.4 true-stop handoff are warranted if finding 005 remains open."],
+  "contracts_and_gates": ["This different-fresh closure is the only ordinary closure for implementation discovery.", "An unresolved P1/P2 forbids proof-stage promotion and completed publication.", "A confirmed immutable owner ceiling is same-slice adjudicable product authority, not an implementation waiver."],
+  "stop_conditions": ["Return FINDINGS for any referenced P1/P2 that remains unresolved.", "Return BLOCKED when closure itself cannot decide from repository evidence; never repair."],
+  "return_contract": {"transport":"built_in_subagent","findings_first":true,"include_agent_identity_and_status":true,"edit_scope":"read_only","global_handoff":"forbidden","ledger_write":"forbidden","user_task_hop":"forbidden","required_result_fields":["agent_id","final_status","verdict","findings","advisory_disposition","validation","parent_disposition"]}
+}

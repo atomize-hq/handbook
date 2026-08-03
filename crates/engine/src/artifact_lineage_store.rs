@@ -3461,6 +3461,9 @@ impl GenericArtifactLineageStoreV1 {
         let transactions = self.repo_root.join(".handbook/state/transactions");
         if transactions.exists() {
             for family in read_dir_paths(&transactions)? {
+                if file_name(&family)? == "registry" {
+                    continue;
+                }
                 for transaction in read_dir_paths(&family)? {
                     let intent = transaction.join("intent.json");
                     if intent.exists() {
@@ -5001,6 +5004,20 @@ impl GenericArtifactLineageStoreV1 {
             for family in families {
                 reject_link(&family, true)?;
                 let name = file_name(&family)?;
+                if name == "registry" {
+                    for transaction in read_dir_paths(&family)? {
+                        let transaction_name = file_name(&transaction)?;
+                        if !(transaction_name.ends_with(".pending")
+                            || transaction_name.ends_with(".committed"))
+                        {
+                            return Err(conflicting(
+                                "unknown entry in registry transaction family",
+                            ));
+                        }
+                        reject_link(&transaction, true)?;
+                    }
+                    continue;
+                }
                 if ![
                     "intake-records",
                     "artifact-candidates",

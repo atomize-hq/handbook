@@ -1,0 +1,97 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260802T234500Z--HCM-3-2--fresh-selector-closure",
+  "created_at_utc": "2026-08-02T23:45:00Z",
+  "source_handoff_ids": ["20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed", "20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required"],
+  "parent_orchestration_id": "20260802T232751Z--HCM-3-2--context-resolution-kernel-fresh",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "doubt-driven-development", "documentation-and-ADRs", "api-and-interface-design", "security-and-hardening", "code-review-and-quality"],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-FRESH-P1-selector-authority",
+  "subject_fingerprint": "sha256:78fc412c22795d3ea2175e05334b8961d6e75e454793f4a7500826b77fd9e1ed",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.2-fresh-selector-closure-1",
+    "trigger_run_ids": ["hcm32_selector_review"],
+    "finding_refs": ["HCM32-FRESH-SEL-DISC-001", "HCM32-FRESH-SEL-DISC-002", "HCM32-FRESH-SEL-DISC-003"]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-02T23:27:51Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{
+      "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-fresh-whole-slice",
+      "packet_ids": ["HCM-3.2-FRESH-P1-selector-authority", "HCM-3.2-FRESH-P2-kernel-implementation", "HCM-3.2-FRESH-P3-proof", "HCM-3.2-FRESH-P4-final-closeout"],
+      "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+    }],
+    "fingerprint": "sha256:c45bc9bc7bfee52e23bc87514c5facf9c1c769d6dc777d784c48339f9a8f793b"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:91f15b60a9ab3ae9850f346d6045d076a46f2bcc2fda9fcc0ea5ecbccc932228",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-kernel-fresh-whole-slice",
+    "outcome_registry_fingerprint": "sha256:c45bc9bc7bfee52e23bc87514c5facf9c1c769d6dc777d784c48339f9a8f793b",
+    "review_stage": "planning",
+    "stage_transition": {"kind": "continue", "from_stage": "planning"},
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260802T233000Z--HCM-3-2--fresh-selector-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-fresh-selector-closure-convergence-1",
+    "completed_at_utc": "2026-08-02T23:44:59Z",
+    "checks": [
+      {"kind": "complete_packet_wall", "status": "passed", "command": "consolidate all three discovery findings into the complete five-file selector subject without test or Rust edits", "evidence_ref": "scope ceilings synchronized; typed envelope proposals and opaque semantic-memory admissions frozen; remediation maps every finding"},
+      {"kind": "recursive_fixture_consumer_inventory", "status": "passed", "command": "replay escalation/promotion contracts and lineage-store/registry ownership boundaries against amended signatures", "evidence_ref": "same profile/stack and changed-bound checks are now mechanically available; registry and generic owners remain disjoint"},
+      {"kind": "manifest_replay", "status": "passed", "command": "recompute sorted five-entry repo-path-NUL-SHA256-newline closure subject", "evidence_ref": "aggregate sha256:78fc412c22795d3ea2175e05334b8961d6e75e454793f4a7500826b77fd9e1ed"},
+      {"kind": "formatting", "status": "passed", "command": "strict UTF-8 and Markdown fence-balance inspection", "evidence_ref": "all five files decode and fences balance"},
+      {"kind": "whitespace", "status": "passed", "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-3.2", "evidence_ref": "parent command exited 0"}
+    ]
+  },
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md", "sha256": "bf1c5df74f26698ff8fdd6cb78e51ada9b8d3a45163cce311bff982023703f35"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md", "sha256": "731bc7eb1ba46ef60fa217f81cbc4290b4712c34542b97c98c1c3816d38b68ca"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md", "sha256": "db62b21c686eaaf10f44244a7e0dfd279762b556d37fdabe5804cfc6ed5252ba"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md", "sha256": "8b63c96fe25edadba8593c73809da22af841334825ed873ac99568eac4837fca"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md", "sha256": "248a5c054180b1d7323cbefc5b45fd261b3713b78e9f79a4571de16022594542"}
+    ],
+    "aggregate_fingerprint": "sha256:78fc412c22795d3ea2175e05334b8961d6e75e454793f4a7500826b77fd9e1ed"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 fresh selector finding closure",
+    "scope_horizon": "complete fresh HCM-3.2 selector including Option 2, four-path lineage composition, typed escalation, semantic-memory authority, proof and closeout",
+    "detail_resolution": "exact remediation of three discovery finding IDs and no general rediscovery",
+    "temporal_horizon": "different-fresh planning closure before any test, RED, or Rust edit",
+    "authority_horizon": "HCM-3.2 only under unchanged fresh identities and operator course correction",
+    "memory_horizon": "exact discovery subject/result plus amended five-file subject",
+    "validation_horizon": "CLEAN required to enter implementation"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md", "sections": ["Selected authority admission", "Public Rust surface", "Production, test, and control ceilings"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md", "sections": ["Exact public symbols and signatures", "Exact ceilings", "Lineage-store composition boundary", "Test selector"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md", "sections": ["HCM-3.2 Fresh Selector Discovery Remediation"]},
+    {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sections": ["Resolution escalation and memory promotion"]}
+  ],
+  "repo_truth": "Only the control subject and dispatches differ from exact base. No tests or Rust edits exist. The discovery reviewer independently matched the prior manifest and returned exactly three valid findings now consolidated in this subject.",
+  "allowed_scope": [
+    "Review only whether HCM32-FRESH-SEL-DISC-001 through 003 are fully and coherently remediated in the exact five-file subject.",
+    "Verify uniform four-path/five-symbol/2,000-line ceilings and the exact conditional LOW rule.",
+    "Verify typed proposal relationship and opaque Target/TargetMemory admission rules make required negative proof implementable without new public names or authority widening.",
+    "Return CLEAN only when all three findings are closed and no directly caused/unmasked P1/P2 exists."
+  ],
+  "non_goals": ["Do not reopen general discovery or add findings unrelated to the three remediations.", "Do not edit, run tests, implement Rust, create dispatches/handoffs, stage, or commit.", "Do not widen HCM-3.2, paths, symbols, dependencies, schemas/tools, or historical lineage."],
+  "tasks": ["Return finding-by-finding closure dispositions with exact evidence.", "Report any directly caused/unmasked P1/P2 separately with a fresh closure-run ID.", "Return terminal CLEAN only if the complete amended subject has no unresolved P1/P2."],
+  "contracts_and_gates": ["This is the different-fresh closure for the one planning discovery cycle.", "No cycle follows planning CLEAN.", "RED and Rust remain forbidden until CLEAN."],
+  "stop_conditions": ["Return FINDINGS if any original finding remains partial or remediation directly causes/unmasks a P1/P2.", "Return BLOCKED for any required scope beyond the frozen authority."],
+  "return_contract": {"transport": "built_in_subagent", "findings_first": true, "include_agent_identity_and_status": true, "edit_scope": "read_only", "global_handoff": "forbidden", "ledger_write": "forbidden", "user_task_hop": "forbidden", "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]}
+}
