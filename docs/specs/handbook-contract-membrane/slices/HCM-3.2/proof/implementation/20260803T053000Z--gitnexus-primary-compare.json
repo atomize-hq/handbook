@@ -1,0 +1,1757 @@
+{
+  "schema_id": "handbook.gitnexus-change-artifact",
+  "schema_version": "1",
+  "created_at_utc": "2026-08-03T05:30:00Z",
+  "baseline_commit": "a1aef5a5fc8a4471cee6044e16bd751ae512e216",
+  "target_commit": "7cc9bc7d5a7ac2deeda9cab726df01c6ec918795",
+  "target_tree": "061ddd9d8718b942f12b24c52fd240a2daa0b3c0",
+  "scope": "compare",
+  "base_ref": "a1aef5a5fc8a4471cee6044e16bd751ae512e216",
+  "repo": "C:\\Users\\spmcc\\.codex\\worktrees\\0945\\handbook",
+  "git_actual_changed_paths": [
+    "crates/engine/src/artifact_lineage_store.rs",
+    "crates/engine/src/context_resolution.rs",
+    "crates/engine/src/context_resolution_registry.rs",
+    "crates/engine/src/lib.rs",
+    "crates/engine/tests/context_resolution_kernel.rs",
+    "crates/engine/tests/context_resolution_stack.rs",
+    "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/artifact-kinds/context-resolution-authority-1.0.0.yaml",
+    "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/intakes/context-resolution-authority-1.0.0.yaml",
+    "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/profiles/context-resolution-authority-1.0.0.yaml",
+    "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.entry.yaml",
+    "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.schema.json",
+    "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/profile-selection.json",
+    "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/project/context-resolution-authority.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T233000Z--HCM-3-2--fresh-selector-review.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T234500Z--HCM-3-2--fresh-selector-closure.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T000500Z--HCM-3-2--fresh-selector-supplemental-1.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T001500Z--HCM-3-2--fresh-selector-supplemental-2.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T003000Z--HCM-3-2--fresh-kernel-implementation.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T020000Z--HCM-3-2--authority-fixture-implementation.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T030000Z--HCM-3-2--fresh-implementation-review.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T034500Z--HCM-3-2--fresh-implementation-remediation.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T050000Z--HCM-3-2--fresh-implementation-closure.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md"
+  ],
+  "git_numstat": [
+    {
+      "path": "crates/engine/src/artifact_lineage_store.rs",
+      "added": 17,
+      "deleted": 0
+    },
+    {
+      "path": "crates/engine/src/context_resolution.rs",
+      "added": 1498,
+      "deleted": 0
+    },
+    {
+      "path": "crates/engine/src/context_resolution_registry.rs",
+      "added": 66,
+      "deleted": 106
+    },
+    {
+      "path": "crates/engine/src/lib.rs",
+      "added": 15,
+      "deleted": 0
+    },
+    {
+      "path": "crates/engine/tests/context_resolution_kernel.rs",
+      "added": 1504,
+      "deleted": 0
+    },
+    {
+      "path": "crates/engine/tests/context_resolution_stack.rs",
+      "added": 110,
+      "deleted": 1
+    },
+    {
+      "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/artifact-kinds/context-resolution-authority-1.0.0.yaml",
+      "added": 20,
+      "deleted": 0
+    },
+    {
+      "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/intakes/context-resolution-authority-1.0.0.yaml",
+      "added": 65,
+      "deleted": 0
+    },
+    {
+      "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/profiles/context-resolution-authority-1.0.0.yaml",
+      "added": 46,
+      "deleted": 0
+    },
+    {
+      "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.entry.yaml",
+      "added": 12,
+      "deleted": 0
+    },
+    {
+      "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.schema.json",
+      "added": 26,
+      "deleted": 0
+    },
+    {
+      "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/profile-selection.json",
+      "added": 65,
+      "deleted": 0
+    },
+    {
+      "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/project/context-resolution-authority.json",
+      "added": 14,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T233000Z--HCM-3-2--fresh-selector-review.json",
+      "added": 171,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T234500Z--HCM-3-2--fresh-selector-closure.json",
+      "added": 97,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T000500Z--HCM-3-2--fresh-selector-supplemental-1.json",
+      "added": 78,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T001500Z--HCM-3-2--fresh-selector-supplemental-2.json",
+      "added": 70,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T003000Z--HCM-3-2--fresh-kernel-implementation.json",
+      "added": 72,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T020000Z--HCM-3-2--authority-fixture-implementation.json",
+      "added": 42,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T030000Z--HCM-3-2--fresh-implementation-review.json",
+      "added": 61,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T034500Z--HCM-3-2--fresh-implementation-remediation.json",
+      "added": 23,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T050000Z--HCM-3-2--fresh-implementation-closure.json",
+      "added": 90,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "added": 25,
+      "deleted": 8
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "added": 120,
+      "deleted": 32
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md",
+      "added": 28,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md",
+      "added": 73,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md",
+      "added": 62,
+      "deleted": 0
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+      "added": 20,
+      "deleted": 11
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+      "added": 25,
+      "deleted": 9
+    }
+  ],
+  "gitnexus_summary": {
+    "changed_count": 288,
+    "affected_count": 11,
+    "changed_files": 29,
+    "risk_level": "high"
+  },
+  "complete_changed_symbols": [
+    [
+      "Const:crates/engine/tests/context_resolution_kernel.rs:AUTHORITY_INSTANCE_ID",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Const:crates/engine/tests/context_resolution_kernel.rs:AUTHORITY_KIND_REF",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Const:crates/engine/tests/context_resolution_kernel.rs:FINGERPRINT",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Enum:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityUse",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Enum:crates/engine/src/context_resolution.rs:ContextResolutionEscalationOutcome",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Enum:crates/engine/src/context_resolution.rs:ContextResolutionKernelErrorKind",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Enum:crates/engine/src/context_resolution.rs:ContextResolutionMemoryDecision",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Enum:crates/engine/src/context_resolution.rs:ContextResolutionMutationDecision",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Enum:crates/engine/src/context_resolution.rs:ContextResolutionMutationEffect",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Enum:crates/engine/src/context_resolution.rs:ContextResolutionPromotionOutcome",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Enum:crates/engine/src/context_resolution.rs:ContextResolutionValidationDecision",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/artifact_lineage_store.rs:GenericArtifactLineageStoreV1.require_journal_authority#4",
+      "crates/engine/src/artifact_lineage_store.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/artifact_lineage_store.rs:GenericArtifactLineageStoreV1.validate_inventory#0",
+      "crates/engine/src/artifact_lineage_store.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution_registry.rs:AuthoredStack.resolve#1",
+      "crates/engine/src/context_resolution_registry.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution_registry.rs:ContextResolutionStackDefinition.ranks#2",
+      "crates/engine/src/context_resolution_registry.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmission.authority_use#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmission.binding_fingerprint#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmission.subject#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver.admit#3",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver.new#4",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityUse.as_str#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionDimensions.new#1",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionDimensions.values#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.authorize_memory#1",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.authorize_validation#1",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.dimensions#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.evaluate_mutation#2",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.exact_binding#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.missing_authority_candidate#2",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.missing_context_candidate#2",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.resolve_child#6",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.resolve_root#5",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.candidate_binding#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.new#10",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.class#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.evidence#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.missing_condition#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.requested_authority_ref#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.trigger#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition.exact_binding#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition.new#6",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEscalationRequest.exact_binding#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionEscalationRequest.new#3",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionExactBinding.fingerprint#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionExactBinding.new#2",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionExactBinding.reference#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionKernelError.candidate#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionKernelError.detail#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionKernelError.kind#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionMutationRule.new#4",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition.exact_binding#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition.new#8",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest.exact_binding#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest.new#8",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryRecord.exact_binding#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryRecord.new#2",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryTarget.candidate_binding#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryTarget.new#2",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.admit_escalation_disposition#3",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.admit_escalation_request#4",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.admit_promotion_disposition#5",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.admit_promotion_request#5",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.new#0",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/src/context_resolution.rs:load_authority_snapshot",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:assertion_response",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:authority_coverage_submissions",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:authority_fixture_definition_fingerprints_are_exact",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:authority_fixture_has_a_repository_profile_selection",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:authority_fixture_root",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:authority_mappings",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.get_assertion#1",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.make_credential#1",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.new#0",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:candidate_mappings",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:cbor_bytes",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:cbor_length",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:cbor_text",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:closed_input_and_transition_outcome_matrix_refuses",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:copy_fixture_tree",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:exact_bindings_dimensions_and_authority_uses_are_closed",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:generic_journal_authority_excludes_registry_intents",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:make_credential_response",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:mutation_and_typed_decision_contracts_are_namespaced",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:real_authority_path_admits_all_eleven_uses_and_replays_exactly",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:real_authority_path_refuses_authenticator_counter_and_cross_resolver_replay",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:real_authority_path_refuses_stale_malformed_and_uncovered_bindings",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:registry_transaction_family_coexists_with_generic_inventory_without_generic_parsing",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:rewrite_authority_binding",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:seed_real_authority_repository",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:unknown_transaction_family_remains_refused",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_kernel.rs:visit",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_stack.rs:close_stack_fingerprint",
+      "crates/engine/tests/context_resolution_stack.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_stack.rs:complete_stack_record_and_nested_closure_mutation_matrix_refuses",
+      "crates/engine/tests/context_resolution_stack.rs",
+      "touched"
+    ],
+    [
+      "Function:crates/engine/tests/context_resolution_stack.rs:configurable_linear_stack_loads_with_complete_narrowing_defaults",
+      "crates/engine/tests/context_resolution_stack.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/artifact_lineage_store.rs:GenericArtifactLineageStoreV1",
+      "crates/engine/src/artifact_lineage_store.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution_registry.rs:AuthoredStack",
+      "crates/engine/src/context_resolution_registry.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution_registry.rs:ContextResolutionStackDefinition",
+      "crates/engine/src/context_resolution_registry.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmission",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityUse",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionDimensions",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionEscalationRequest",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionExactBinding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionKernelError",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionMutationRule",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryRecord",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryTarget",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Impl:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:admit_terminal",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:candidate_from_mapping",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:closed_object",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:invalid_fingerprint",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:kernel_error",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:materialize_envelope",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:require_admission",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:require_admission_list",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:require_sorted_unique",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:rule_binding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:segment_matches",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:selector_contains",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:selector_matches",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:semantic_memory_ref",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:stale_request",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:string_at",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:typed_candidate",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:validate_envelope_values",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:validate_profile_stack",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:validate_record_id",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:validate_selector",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Macro:crates/engine/src/context_resolution.rs:validate_target",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Module:crates/engine/src/lib.rs:context_resolution_registry",
+      "crates/engine/src/lib.rs",
+      "touched"
+    ],
+    [
+      "Module:crates/engine/tests/context_resolution_kernel.rs:artifact_lineage_store",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Module:crates/engine/tests/context_resolution_kernel.rs:canonical_repo_support",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution_registry.rs:ContextResolutionStackDefinition.dimension_domains",
+      "crates/engine/src/context_resolution_registry.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmission.authority",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmission.authority_use",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmission.binding_fingerprint",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmission.subject",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver.binding_instance_id",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver.binding_kind_ref",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver.cache",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver.counters",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver.expected_artifact_fingerprint",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver.repo_root",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver.snapshot_artifact_fingerprint",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver.snapshot_binding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionDimensions.values",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope._constraint_inputs",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope._escalation_triggers",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope._objective_ref",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.active_level_id",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.authority",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.dimensions",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.exact_binding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.mutation_allow_layers",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.mutation_denies",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.resolution_stack",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.resolved_profile",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope.stack",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.active_level_id",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.candidate_binding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.constraint_inputs",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.dimensions",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.envelope_id",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.escalation_triggers",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.mutation_rules",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.objective_ref",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.parent",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.resolution_stack",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput.resolved_profile",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.authority",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.class",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.current",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.evidence",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.missing_condition",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.proposed",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.requested_authority_ref",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.resolution_stack",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.resolved_profile",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate.trigger",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition._superseding_request",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition.authorized_envelope",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition.decision",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition.disposition_id",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition.exact_binding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition.outcome",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition.request",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationRequest.candidate",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationRequest.exact_binding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionEscalationRequest.request_id",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionExactBinding.fingerprint",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionExactBinding.reference",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionKernelError.candidate",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionKernelError.detail",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionKernelError.kind",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionMutationRule.effect",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionMutationRule.rule_id",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionMutationRule.selector",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionMutationRule.target_kind",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition._approving_authority_ref",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition._outcome",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition.binding_fingerprint",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition.decision",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition.disposition_id",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition.exact_binding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition.request",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition.result_record",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition.validation_evidence",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest._requested_authority_ref",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest._target_memory_horizon",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest.binding_fingerprint",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest.exact_binding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest.request_id",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest.source_envelope",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest.source_inputs",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest.target",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryRecord.record",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryTarget.candidate_binding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryTarget.expected_target_fingerprint",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryTarget.target_record_ref",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.escalation_dispositions",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.escalation_requests",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.escalation_terminal_by_request",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.promotion_dispositions",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.promotion_requests",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry.promotion_terminal_by_request",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.credential_id",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.fixed_sign_count",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.get_calls",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.key",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.last_response",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.make_calls",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.refused",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Property:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort.replay_response",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md:L1:HCM-3.2 Context Resolution Kernel Selector",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md:L24:Orchestration registry",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md:L275:Exact public symbols and signatures",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md:L515:Exact ceilings",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md:L52:Authority-binding and admission selector",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md:L565:Lineage-store composition boundary",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md:L595:Test selector",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md:L623:Review and proof selector",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md:L652:Stop conditions",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md:L7:Selection and predecessor boundary",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md:L1:HCM-3.2 Fresh Selector Discovery Remediation",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md:L1:HCM-3.2 Fresh Kernel Pre-Review Proof",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md:L12:Live impact gate",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md:L27:RED/GREEN",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md:L5:Planning authority",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md:L51:Exact ceilings",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md:L69:Pending gates",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md:L1:HCM-3.2 Context Resolution Kernel",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md:L320:Production, test, and control ceilings",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md:L52:Selected authority admission",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md:L1:HCM-3.2 Fresh Whole-Slice Implementation Plan",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md:L11:Architecture decisions",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md:L3:Overview",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md:L38:Ordered packets",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md:L40:P1 — Fresh selector authority",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md:L51:P2 — Authority admission, stack, and envelope kernel",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md:L1:HCM-3.2 Task Checklist",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md:L34:P2 — Kernel implementation",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+      "touched"
+    ],
+    [
+      "Section:docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md:L7:Fresh P1 — Selector authority",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution_registry.rs:ContextResolutionStackDefinition",
+      "crates/engine/src/context_resolution_registry.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmission",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionAuthorityAdmissionResolver",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionDimensions",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionEnvelopeInput",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionEscalationCandidate",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionEscalationDisposition",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionEscalationRequest",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionExactBinding",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionKernelError",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionMutationRule",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionPromotionDisposition",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionPromotionRequest",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryRecord",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionSemanticMemoryTarget",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/src/context_resolution.rs:ContextResolutionTransitionRegistry",
+      "crates/engine/src/context_resolution.rs",
+      "touched"
+    ],
+    [
+      "Struct:crates/engine/tests/context_resolution_kernel.rs:AuthorityPort",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "touched"
+    ]
+  ],
+  "complete_affected_processes": [
+    [
+      "proc_100_journal_count_and_ag",
+      "Journal_count_and_aggregate_byte_boundaries_are_exact → New",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 2
+        }
+      ]
+    ],
+    [
+      "proc_101_journal_count_and_ag",
+      "Journal_count_and_aggregate_byte_boundaries_are_exact → New",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 2
+        }
+      ]
+    ],
+    [
+      "proc_113_expire_retained_resu",
+      "Expire_retained_result_at_for_testing → New",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 2
+        }
+      ]
+    ],
+    [
+      "proc_114_expire_retained_resu",
+      "Expire_retained_result_at_for_testing → New",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 2
+        }
+      ]
+    ],
+    [
+      "proc_119_evaluate_intake_docu",
+      "Evaluate_intake_document → Establishing_root",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 4
+        }
+      ]
+    ],
+    [
+      "proc_278_journal_count_and_ag",
+      "Journal_count_and_aggregate_byte_boundaries_are_exact → Establishing_root",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 2
+        }
+      ]
+    ],
+    [
+      "proc_34_read_committed_closu",
+      "Read_committed_closure → New",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 2
+        }
+      ]
+    ],
+    [
+      "proc_35_read_committed_closu",
+      "Read_committed_closure → New",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 2
+        }
+      ]
+    ],
+    [
+      "proc_48_read_committed_autho",
+      "Read_committed_authoritative → New",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 2
+        }
+      ]
+    ],
+    [
+      "proc_49_read_committed_autho",
+      "Read_committed_authoritative → New",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 2
+        }
+      ]
+    ],
+    [
+      "proc_99_evaluate_committed_r",
+      "Evaluate_committed_read → New",
+      [
+        {
+          "symbol": "validate_inventory",
+          "step": 2
+        }
+      ]
+    ]
+  ],
+  "raw_output_encoding": "canonical-sorted-compact-json-utf8",
+  "raw_output_sha256": "sha256:79de8672331e573edd8b07b0afa71b67e014430b47f55034fa46a8d52ce48e31",
+  "capability": {
+    "graph": "available",
+    "fts": "unavailable",
+    "vector_search": "unavailable"
+  },
+  "interpretation": "Available byte-hashed exact base-to-final-primary comparison. Aggregate HIGH risk; unresolved HCM32-FRESH-IMPL-DISC-005 forbids completion. The complete GitNexus symbol/process lists are nonempty and the 29-path Git inventory is authoritative."
+}

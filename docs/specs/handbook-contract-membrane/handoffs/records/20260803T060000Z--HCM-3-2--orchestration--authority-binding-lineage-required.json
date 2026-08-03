@@ -1,0 +1,821 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260803T060000Z--HCM-3-2--orchestration--authority-binding-lineage-required",
+  "created_at_utc": "2026-08-03T06:00:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-FRESH-P2-kernel-implementation",
+  "orchestration_id": "20260802T232751Z--HCM-3-2--context-resolution-kernel-fresh",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fc4c6-e893-7372-bae1-78fb3d949b88"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-03T05:20:00Z",
+    "evidence_ref": "Fresh built-in agents executed selector discovery/closure/supplementals, bounded implementation, implementation discovery/remediation, and different-fresh closure."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm32_selector_review",
+      "dispatch_id": "20260802T233000Z--HCM-3-2--fresh-selector-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T233000Z--HCM-3-2--fresh-selector-review.json",
+      "dispatch_fingerprint": "sha256:e45e5089421c47e6df8ab0d253b4356fca262fa53fcc5af13afd3f68718126bc",
+      "role": "review",
+      "agent_id": "/root/hcm32_selector_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:1628e7a3630f16ac1f4a6fe92ff5b7b1e2725a2495c4055002b8ee62bcb09fb9",
+      "result_subject_fingerprint": "sha256:1628e7a3630f16ac1f4a6fe92ff5b7b1e2725a2495c4055002b8ee62bcb09fb9",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM32-FRESH-SEL-DISC-001",
+        "HCM32-FRESH-SEL-DISC-002",
+        "HCM32-FRESH-SEL-DISC-003"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "run_id": "hcm32_selector_closure",
+      "dispatch_id": "20260802T234500Z--HCM-3-2--fresh-selector-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T234500Z--HCM-3-2--fresh-selector-closure.json",
+      "dispatch_fingerprint": "sha256:922cad7396a452275a1c5db615750bb69a2499716303a4e30d96cc2f4aac94d8",
+      "role": "review",
+      "agent_id": "/root/hcm32_selector_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:78fc412c22795d3ea2175e05334b8961d6e75e454793f4a7500826b77fd9e1ed",
+      "result_subject_fingerprint": "sha256:78fc412c22795d3ea2175e05334b8961d6e75e454793f4a7500826b77fd9e1ed",
+      "review_round": 2,
+      "predecessor_run_id": "hcm32_selector_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM32-FRESH-SEL-CLOS-001",
+        "HCM32-FRESH-SEL-CLOS-002"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "run_id": "hcm32_selector_supp1",
+      "dispatch_id": "20260803T000500Z--HCM-3-2--fresh-selector-supplemental-1",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T000500Z--HCM-3-2--fresh-selector-supplemental-1.json",
+      "dispatch_fingerprint": "sha256:7246d443c7da25661b29ee50ddf4acd3b789eab751e6d1eba561175562453725",
+      "role": "review",
+      "agent_id": "/root/hcm32_selector_supp1",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:07f8d711b9140b980f91ffd829f64deeb4a5e545374d9af842d36370bff1af19",
+      "result_subject_fingerprint": "sha256:07f8d711b9140b980f91ffd829f64deeb4a5e545374d9af842d36370bff1af19",
+      "review_round": 3,
+      "predecessor_run_id": "hcm32_selector_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [],
+      "carried_finding_refs": [
+        "HCM32-FRESH-SEL-CLOS-001"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "run_id": "hcm32_selector_supp2",
+      "dispatch_id": "20260803T001500Z--HCM-3-2--fresh-selector-supplemental-2",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T001500Z--HCM-3-2--fresh-selector-supplemental-2.json",
+      "dispatch_fingerprint": "sha256:108ba4dc221837ee389ebcfddd14f2b36ce446d397f82124f197434968375371",
+      "role": "review",
+      "agent_id": "/root/hcm32_selector_supp2",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "doubt-driven-development",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:dea09f62e2572ebf4aeaf53d787e9d462d602129d85cc29e3aa5081c7fe4bd2a",
+      "result_subject_fingerprint": "sha256:dea09f62e2572ebf4aeaf53d787e9d462d602129d85cc29e3aa5081c7fe4bd2a",
+      "review_round": 4,
+      "predecessor_run_id": "hcm32_selector_supp1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "run_id": "hcm32_kernel_implementation",
+      "dispatch_id": "20260803T003000Z--HCM-3-2--fresh-kernel-implementation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T003000Z--HCM-3-2--fresh-kernel-implementation.json",
+      "dispatch_fingerprint": "sha256:1370a7af6d3093443e1320f349064c27cf9e009a54c2beab3b537ce9228d6c74",
+      "role": "implementation",
+      "agent_id": "/root/hcm32_kernel_implementation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "incremental-implementation",
+        "test-driven-development",
+        "debugging-and-error-recovery",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "documentation-and-ADRs",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:dea09f62e2572ebf4aeaf53d787e9d462d602129d85cc29e3aa5081c7fe4bd2a",
+      "result_subject_fingerprint": "sha256:63c989dfb6489237c911ae9e0c56ea927c3f070a05f38a131f14ebb675c32fd3",
+      "review_round": null,
+      "predecessor_run_id": "hcm32_selector_supp2",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md"
+      ]
+    },
+    {
+      "run_id": "hcm32_authority_fixture",
+      "dispatch_id": "20260803T020000Z--HCM-3-2--authority-fixture-implementation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T020000Z--HCM-3-2--authority-fixture-implementation.json",
+      "dispatch_fingerprint": "sha256:48bb98b7e9f7dcee57e8f4265db6195f2d88ee0c8f87f4af7332ddaff2c4d7b2",
+      "role": "implementation",
+      "agent_id": "/root/hcm32_authority_fixture",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "spec-driven-development",
+        "incremental-implementation",
+        "test-driven-development",
+        "debugging-and-error-recovery",
+        "api-and-interface-design",
+        "security-and-hardening"
+      ],
+      "subject_fingerprint": "sha256:63c989dfb6489237c911ae9e0c56ea927c3f070a05f38a131f14ebb675c32fd3",
+      "result_subject_fingerprint": "sha256:63c989dfb6489237c911ae9e0c56ea927c3f070a05f38a131f14ebb675c32fd3",
+      "review_round": null,
+      "predecessor_run_id": "hcm32_kernel_implementation",
+      "remediation_for_run_ids": [],
+      "final_status": "blocked",
+      "verdict": "blocked",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md"
+      ]
+    },
+    {
+      "run_id": "hcm32_impl_review",
+      "dispatch_id": "20260803T030000Z--HCM-3-2--fresh-implementation-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T030000Z--HCM-3-2--fresh-implementation-review.json",
+      "dispatch_fingerprint": "sha256:06b54e4880d3b9b2e8a1fad5dd1234ee0560714a36d123fdaff6e75f4ecf903f",
+      "role": "review",
+      "agent_id": "/root/hcm32_impl_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "doubt-driven-development",
+        "code-review-and-quality",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "source-driven-development"
+      ],
+      "subject_fingerprint": "sha256:6c52fc43bdb982ded1ece1b45f97254cc2206823c2246f96901a3284e8bdfa05",
+      "result_subject_fingerprint": "sha256:6c52fc43bdb982ded1ece1b45f97254cc2206823c2246f96901a3284e8bdfa05",
+      "review_round": 5,
+      "predecessor_run_id": "hcm32_authority_fixture",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM32-FRESH-IMPL-DISC-001",
+        "HCM32-FRESH-IMPL-DISC-002",
+        "HCM32-FRESH-IMPL-DISC-003",
+        "HCM32-FRESH-IMPL-DISC-004",
+        "HCM32-FRESH-IMPL-DISC-005"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md"
+      ]
+    },
+    {
+      "run_id": "hcm32_impl_remediation",
+      "dispatch_id": "20260803T034500Z--HCM-3-2--fresh-implementation-remediation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T034500Z--HCM-3-2--fresh-implementation-remediation.json",
+      "dispatch_fingerprint": "sha256:a288a4e315f378cd1e016b0d0c53e82f416e8f9f2c1c85fa0a6d947ae4e6ce61",
+      "role": "remediation",
+      "agent_id": "/root/hcm32_impl_remediation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "incremental-implementation",
+        "test-driven-development",
+        "debugging-and-error-recovery",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:6c52fc43bdb982ded1ece1b45f97254cc2206823c2246f96901a3284e8bdfa05",
+      "result_subject_fingerprint": "sha256:5aa024471ba5964dcad52d0bfc2f851a6d59154e62f1c3febc60aa372805b269",
+      "review_round": null,
+      "predecessor_run_id": "hcm32_impl_review",
+      "remediation_for_run_ids": [
+        "hcm32_impl_review"
+      ],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md"
+      ]
+    },
+    {
+      "run_id": "hcm32_impl_closure",
+      "dispatch_id": "20260803T050000Z--HCM-3-2--fresh-implementation-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T050000Z--HCM-3-2--fresh-implementation-closure.json",
+      "dispatch_fingerprint": "sha256:0d578e76e09cdaa8aeeb12532add02179eeba67c347f5fbabe7f437fd2feef87",
+      "role": "review",
+      "agent_id": "/root/hcm32_impl_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "doubt-driven-development",
+        "code-review-and-quality",
+        "api-and-interface-design",
+        "security-and-hardening",
+        "test-driven-development",
+        "source-driven-development"
+      ],
+      "subject_fingerprint": "sha256:5aa024471ba5964dcad52d0bfc2f851a6d59154e62f1c3febc60aa372805b269",
+      "result_subject_fingerprint": "sha256:5aa024471ba5964dcad52d0bfc2f851a6d59154e62f1c3febc60aa372805b269",
+      "review_round": 6,
+      "predecessor_run_id": "hcm32_impl_remediation",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [],
+      "carried_finding_refs": [
+        "HCM32-FRESH-IMPL-DISC-001",
+        "HCM32-FRESH-IMPL-DISC-002",
+        "HCM32-FRESH-IMPL-DISC-003",
+        "HCM32-FRESH-IMPL-DISC-004",
+        "HCM32-FRESH-IMPL-DISC-005"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T053000Z--gitnexus-primary-compare.json"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-03T06:00:00Z",
+    "dispatch_count": 9,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:91f15b60a9ab3ae9850f346d6045d076a46f2bcc2fda9fcc0ea5ecbccc932228"
+    ],
+    "aggregate_fingerprint": "sha256:b01b39392ae5203b9780ec774551294b581c1a139b907f735484cfb9091c8eec"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3.2-fresh-selector-discovery-consolidation",
+      "finding_run_id": "hcm32_selector_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm32_selector_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:78fc412c22795d3ea2175e05334b8961d6e75e454793f4a7500826b77fd9e1ed",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "remediation_id": "hcm-3.2-fresh-selector-closure-causal-repair",
+      "finding_run_id": "hcm32_selector_closure",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm32_selector_supp1",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:07f8d711b9140b980f91ffd829f64deeb4a5e545374d9af842d36370bff1af19",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "remediation_id": "hcm-3.2-fresh-selector-supplemental-causal-repair",
+      "finding_run_id": "hcm32_selector_supp1",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm32_selector_supp2",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:dea09f62e2572ebf4aeaf53d787e9d462d602129d85cc29e3aa5081c7fe4bd2a",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "remediation_id": "hcm-3.2-fresh-implementation-consolidation",
+      "finding_run_id": "hcm32_impl_review",
+      "owner": "delegated_run",
+      "delegated_run_id": "hcm32_impl_remediation",
+      "re_review_run_id": "hcm32_impl_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:5aa024471ba5964dcad52d0bfc2f851a6d59154e62f1c3febc60aa372805b269",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "7cc9bc7d5a7ac2deeda9cab726df01c6ec918795",
+    "subject_fingerprint": "sha256:5aa024471ba5964dcad52d0bfc2f851a6d59154e62f1c3febc60aa372805b269",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T050000Z--HCM-3-2--fresh-implementation-closure.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T053000Z--gitnexus-primary-compare.json"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 authenticated-binding owner-lineage authority stop",
+    "scope_horizon": "fresh reviewed selector, safe partial kernel checkpoint, and exact 53-leaf versus 15-output owner conflict",
+    "detail_resolution": "owner-produced canonical authority lineage, generic mutation/lineage ceilings, and seeded-fixture non-authority",
+    "temporal_horizon": "after different-fresh implementation closure with one open P2; before proof-stage promotion or completed publication",
+    "authority_horizon": "same fresh HCM-3.2 parent only; owner-contract or additional production/API design requires explicit reviewed product authority",
+    "memory_horizon": "immutable historical stops, nine-dispatch fresh population, safe primary stack tip 7cc9bc7, and exact task identity",
+    "validation_horizon": "resume only after exact authority amendment and fresh independent selector closure"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Deliver the complete fresh HCM-3.2 Context Resolution kernel, but stop durably when independent closure proves the canonical 53-leaf authority binding cannot obtain owner-produced lineage through the immutable generic 1..=15-output mutation and lineage contracts.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": ["complete fresh selector", "authority-binding and admission selector", "exact ceilings", "stop conditions"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md",
+      "sections": ["HCM32-FRESH-IMPL-DISC-005 disposition", "immutable owner-contract evidence"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T050000Z--HCM-3-2--fresh-implementation-closure.json",
+      "sections": ["complete different-fresh closure subject and gates"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T053000Z--gitnexus-primary-compare.json",
+      "sections": ["complete byte-hashed GitNexus base-to-primary comparison"]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached",
+    "head": "7cc9bc7d5a7ac2deeda9cab726df01c6ec918795",
+    "dirty": false,
+    "changed_paths": [
+      "crates/engine/src/artifact_lineage_store.rs",
+      "crates/engine/src/context_resolution.rs",
+      "crates/engine/src/context_resolution_registry.rs",
+      "crates/engine/src/lib.rs",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "crates/engine/tests/context_resolution_stack.rs",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/artifact-kinds/context-resolution-authority-1.0.0.yaml",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/intakes/context-resolution-authority-1.0.0.yaml",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/profiles/context-resolution-authority-1.0.0.yaml",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.entry.yaml",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.schema.json",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/profile-selection.json",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/project/context-resolution-authority.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T233000Z--HCM-3-2--fresh-selector-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260802T234500Z--HCM-3-2--fresh-selector-closure.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T000500Z--HCM-3-2--fresh-selector-supplemental-1.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T001500Z--HCM-3-2--fresh-selector-supplemental-2.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T003000Z--HCM-3-2--fresh-kernel-implementation.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T020000Z--HCM-3-2--authority-fixture-implementation.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T030000Z--HCM-3-2--fresh-implementation-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T034500Z--HCM-3-2--fresh-implementation-remediation.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T050000Z--HCM-3-2--fresh-implementation-closure.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T024500Z--fresh-kernel-pre-review-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md"
+    ]
+  },
+  "work_completed": [
+    "Verified the exact assigned checkout, base/tree/ancestry, dedicated local integration ref, remote baseline, cleanliness, and protected paths before editing.",
+    "Established a genuinely fresh HCM-3.2 orchestration/outcome/packet/budget identity and closed the selector CLEAN under the ordinary discovery, closure, and two immediately causal supplemental cycles.",
+    "Re-ran live HIGH/CRITICAL/LOW impact analysis and implemented only the reviewed four production paths and exact public surface.",
+    "Closed four implementation P2 findings through one consolidated remediation and a different-fresh closure over a 20-file byte-hashed subject.",
+    "Ran focused kernel/stack proof, strict formatting and lint, and the full handbook-engine all-target/all-feature wall GREEN in 731.4 seconds.",
+    "Preserved the fifth P2: the canonical binding has 53 leaves while existing mutation and lineage owners cap distinct outputs/coverage at 15; direct fixture seeding proves admission but not owner-produced lineage.",
+    "Created safe non-completed primary stack b260dab2c3959a5497f1153146d462768b07fa49, corrected closure-trigger lineage at c074c6c7382c1835fcee599a1f3cfd6fe3e198c4, corrected supplemental finding lineage at final primary tip 7cc9bc7d5a7ac2deeda9cab726df01c6ec918795, and generated the exact base-to-final-primary GitNexus artifact."
+  ],
+  "deliverables": [
+    {
+      "path": "crates/engine/src/context_resolution.rs",
+      "status": "partial",
+      "summary": "Reviewed bounded kernel checkpoint; not eligible for completed publication while owner-produced authority lineage is impossible."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "status": "partial",
+      "summary": "Independently CLEAN fresh HCM-3.2 selector preserving exact paths, signatures, ceilings, risk, and non-goals."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T053000Z--gitnexus-primary-compare.json",
+      "status": "completed",
+      "summary": "Available byte-hashed GitNexus base-to-primary artifact with complete nonempty symbol/process lists and exact Git paths."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260803T060000Z--HCM-3-2--orchestration--authority-binding-lineage-required.json",
+      "status": "completed",
+      "summary": "v1.4 escalation-required same-slice true-stop handoff."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.2-FRESH-AUTHORITY-BINDING-LINEAGE-STOP-001",
+      "summary": "Do not represent seeded canonical bytes as owner-produced lineage or weaken the immutable generic owner contracts; preserve the reviewed safe checkpoint and request exact same-slice authority.",
+      "authority_effect": "Stops HCM-3.2 incomplete with one open P2 and grants no proof-stage promotion, completed publication, later slice, new generic framework, push, or remote publication.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T050000Z--HCM-3-2--fresh-implementation-closure.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM32-FRESH-SEL-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_selector_review",
+      "summary": "Fresh selector froze exact authority-binding ownership and canonical-byte/currentness rules.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-FRESH-SEL-DISC-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_selector_review",
+      "summary": "Fresh selector froze all six dimensions, ordering, narrowing, overlap, and indeterminacy semantics.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-FRESH-SEL-DISC-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_selector_review",
+      "summary": "Fresh selector froze exact public signatures, ceilings, compatibility, proof, and non-goals.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-FRESH-SEL-CLOS-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_selector_closure",
+      "summary": "Causal supplemental repairs closed the selector's remaining exact-boundary gap.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-FRESH-SEL-CLOS-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_selector_closure",
+      "summary": "Causal supplemental review closed the selector deadlock without widening scope.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260802T234000Z--fresh-selector-discovery-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-FRESH-IMPL-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_impl_review",
+      "summary": "Resolver now passes the complete nonempty eligible credential set and refuses unknown selection.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-FRESH-IMPL-DISC-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_impl_review",
+      "summary": "Superseding requests must be distinct and exactly already admitted.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-FRESH-IMPL-DISC-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_impl_review",
+      "summary": "Promotion disposition authority must equal the authenticated approving mapping.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-FRESH-IMPL-DISC-004",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm32_impl_review",
+      "summary": "Behavior proof now covers root/child, six dimensions, mutation, memory, validation, transitions, and stack boundaries.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md"
+      ]
+    },
+    {
+      "finding_id": "HCM32-FRESH-IMPL-DISC-005",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "open",
+      "source_run_id": "hcm32_impl_review",
+      "summary": "Canonical authority binding cannot obtain owner-produced lineage: 53 schema leaves exceed immutable 1..=15 mutation and lineage output/coverage ceilings.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T050000Z--HCM-3-2--fresh-implementation-closure.json"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-3.2-FRESH-AUTHORITY-BINDING-OWNER-LINEAGE",
+      "classification": "authority",
+      "summary": "The selected canonical authenticated binding needs 53 covered leaves, while existing generic mutation and lineage owners accept only 1..=15 distinct outputs/coverage entries; repository evaluation APIs do not persist owner lineage.",
+      "resume_condition": "Explicitly select and independently review a same-slice owner-contract or production-path/API design that can produce canonical authenticated binding lineage while preserving generic validation, recovery, currentness, replay protection, and all existing HCM-3.2 authority bindings.",
+      "owner": "Handbook product/contract authority and generic mutation/lineage owners"
+    },
+    {
+      "blocker_id": "HCM-3.2-PROTECTED-ORCHESTRATION-PATH-DRIFT",
+      "classification": "external",
+      "summary": "The protected meta-orchestration directory no longer matches the preflight snapshot: the preflight aggregate began 8659ba24ff06, while the final 72-file aggregate is 1086c8c4f876712a9a3e5437dbc30e87f2ed0021668a4d1d6a6974cf66cb677d. This task made no writes there.",
+      "resume_condition": "The meta owner adjudicates the external protected-path change and supplies or confirms the intended immutable snapshot before any continuation.",
+      "owner": "meta orchestrator / protected-path owner"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-3.2-FRESH-AUTHORITY-BINDING-OWNER-LINEAGE",
+      "trigger": "Different-fresh implementation closure kept HCM32-FRESH-IMPL-DISC-005 open after direct repository proof of the 53-versus-15 conflict.",
+      "current_resolution": "CLEAN fresh selector, safe partial primary checkpoint, four implementation findings closed, full engine wall GREEN, one exact open P2.",
+      "target_resolution": "A reviewed implementable owner-produced lineage design for the canonical authority binding without seeded-byte bypass or generic-contract weakening.",
+      "decision_required": "Authorize an exact bounded owner-contract/encoding or additional production/API design, or select an existing contract-satisfying persistence seam.",
+      "options": [
+        "Authorize a narrowly bounded HCM-3.2-specific owner-produced encoding/persistence design with exact paths, symbols, risks, migration, and regression proof.",
+        "Identify an existing owner API that persists the exact 53-leaf binding under current mutation and lineage contracts."
+      ],
+      "recommendation": "Prefer an HCM-3.2-specific bounded encoding/persistence decision; do not broaden the generic framework or silently raise global limits.",
+      "affected_refs": [
+        "crates/engine/src/artifact_mutation.rs",
+        "crates/engine/src/artifact_lineage_store.rs",
+        "crates/engine/src/context_resolution.rs",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "Amend the same fresh HCM-3.2 selector under exact new authority and obtain an independent CLEAN selector review before RED or Rust; preserve parent/outcome/packet/finding/budget identities."
+    }
+  ],
+  "validation": [
+    {
+      "command": "cargo test -p handbook-engine --all-targets --all-features",
+      "status": "passed",
+      "evidence_ref": "Exact remediated primary subject passed in 731.4 seconds; focused context_resolution_kernel 21/21 and context_resolution_stack 4/4."
+    },
+    {
+      "command": "cargo clippy -p handbook-engine --all-targets --all-features -- -D warnings",
+      "status": "passed",
+      "evidence_ref": "Strict engine lint GREEN after remediation."
+    },
+    {
+      "command": "cargo fmt --all -- --check and git diff --check",
+      "status": "passed",
+      "evidence_ref": "Formatting and whitespace GREEN."
+    },
+    {
+      "command": "fresh implementation closure review",
+      "status": "failed",
+      "evidence_ref": "hcm32_impl_closure closed 001-004 and preserved HCM32-FRESH-IMPL-DISC-005 OPEN; proof-stage promotion and completed publication forbidden."
+    },
+    {
+      "command": "GitNexus detect_changes compare exact base to 7cc9bc7d5a7ac2deeda9cab726df01c6ec918795",
+      "status": "passed",
+      "evidence_ref": "Available byte-hashed artifact 64959e9d442105fa3dca18348fbf45701f013de982af9319af014494f48d180c records HIGH aggregate risk, all 288 changed symbols, all 11 affected processes, exact 29 Git paths, and canonical raw-output sha256:79de8672331e573edd8b07b0afa71b67e014430b47f55034fa46a8d52ce48e31; FTS unavailable."
+    },
+    {
+      "command": "protected checkout/path and remote baseline verification",
+      "status": "failed",
+      "evidence_ref": "Protected checkout heads/statuses were re-observed without writes, the dedicated integration ref remained a1aef5a, origin remained 7becde55, and no push occurred. However, the protected meta-orchestration directory changed from the preflight aggregate prefix 8659ba24ff06 to 1086c8c4f876712a9a3e5437dbc30e87f2ed0021668a4d1d6a6974cf66cb677d (72 files), so byte-identity cannot be claimed."
+    },
+    {
+      "command": "validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "5 record schemas, 5 internal-dispatch schemas, 2 templates, 84 records, 488 current dispatches, 8 admitted legacy dispatches, and 84 ledger entries passed exact validation and parity."
+    },
+    {
+      "command": "validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "Historical record/dispatch byte mutation, deletion, unknown-history, sentinel isolation, and exact-ledger cases passed fail-closed."
+    },
+    {
+      "command": "validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "v1.4 causal cadence, supplemental budget, finding carry/ownership, remediation, reviewed baseline, and two-commit closeout cases passed fail-closed."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260803T060000Z--HCM-3-2--orchestration--authority-binding-lineage-required.json",
+      "sections": [
+        "entire parent-owned true-stop handoff"
+      ],
+      "reason": "Durably preserve the exact open P2, safe checkpoint, review lineage, and same-slice authority boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministically rebuilt query index"
+      ],
+      "reason": "Index the canonical v1.4 true-stop record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Resume exactly this fresh HCM-3.2 parent after reviewed authority supplies an owner-produced lineage design for the canonical authenticated binding.",
+    "condition": "Explicit same-slice product/owner authority selects an exact bounded design and authorizes a fresh selector amendment/review before code.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260803T060000Z--HCM-3-2--orchestration--authority-binding-lineage-required.json",
+        "sections": [
+          "complete current handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260803T050000Z--HCM-3-2--fresh-implementation-closure.json",
+        "sections": [
+          "complete closure dispatch and finding lineage"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T043000Z--fresh-kernel-implementation-remediation.md",
+        "sections": [
+          "HCM32-FRESH-IMPL-DISC-005"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/implementation/20260803T053000Z--gitnexus-primary-compare.json",
+        "sections": [
+          "complete comparison artifact"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Amend the same fresh HCM-3.2 selector under exact new owner/product authority.",
+      "Obtain fresh independent selector closure before RED/Rust and preserve the existing outcome, packets, budget, and finding identities.",
+      "Implement only the newly bounded owner-produced lineage design, close finding 005, then run the proportional proof/review wall."
+    ],
+    "prohibited_scope": [
+      "No identity reset, finding waiver, ordinary discovery reopen, or reuse of the failed HCM-0.8 continuation grant.",
+      "No HCM-3.3+, generic cross-product framework/schema catalog, new dependency/crate, unsafe/native/platform/transport, shipped identity mutation, remote publication, or push."
+    ],
+    "acceptance_criteria": [
+      "Canonical binding is produced and persisted by an authorized owner path, not direct seeded bytes.",
+      "Generic validation, recovery, currentness, replay protection, registry ownership, exact bytes/fingerprints, and all eleven authority uses remain fail-closed.",
+      "Independent closure resolves HCM32-FRESH-IMPL-DISC-005 with complete positive/negative proof and no unresolved P1/P2."
+    ],
+    "stop_conditions": [
+      "Stop if authority does not bind exact paths/symbols/risks/ceilings and compatibility.",
+      "Stop on another production path, public API, dependency, unsafe/native/transport, shipped identity, HCM-3.3+, or unexpected HIGH/CRITICAL expansion.",
+      "Stop if both owner contracts cannot be preserved fail-closed."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Fresh HCM-3.2 reached a safe partial checkpoint with selector CLEAN, four implementation P2s remediated, and the full engine wall GREEN. Different-fresh closure kept one P2 open: the canonical authority binding has 53 leaves but existing generic mutation/lineage ownership permits at most 15 outputs/coverage entries, so direct fixture seeding is not owner-produced lineage. Proof promotion and completed publication are forbidden pending exact same-slice authority."
+}
