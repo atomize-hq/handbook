@@ -20,7 +20,7 @@
     "kind": "supplemental_causal",
     "cycle_id": "hcm-3.2-fresh-selector-supplemental-1",
     "trigger_run_ids": ["hcm32_selector_closure"],
-    "finding_refs": ["HCM32-FRESH-SEL-DISC-001", "HCM32-FRESH-SEL-DISC-002", "HCM32-FRESH-SEL-DISC-003", "HCM32-FRESH-SEL-CLOS-001", "HCM32-FRESH-SEL-CLOS-002"]
+    "finding_refs": ["HCM32-FRESH-SEL-CLOS-001", "HCM32-FRESH-SEL-CLOS-002"]
   },
   "causal_outcome_registry": {
     "declared_at_utc": "2026-08-02T23:27:51Z",
