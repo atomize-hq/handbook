@@ -19,7 +19,7 @@
   "review_cycle": {
     "kind": "closure",
     "cycle_id": "hcm-3.2-fresh-implementation-closure-1",
-    "trigger_run_ids": ["hcm32_impl_review", "hcm32_impl_remediation"],
+    "trigger_run_ids": ["hcm32_impl_review"],
     "finding_refs": ["HCM32-FRESH-IMPL-DISC-001", "HCM32-FRESH-IMPL-DISC-002", "HCM32-FRESH-IMPL-DISC-003", "HCM32-FRESH-IMPL-DISC-004", "HCM32-FRESH-IMPL-DISC-005"]
   },
   "causal_outcome_registry": {
