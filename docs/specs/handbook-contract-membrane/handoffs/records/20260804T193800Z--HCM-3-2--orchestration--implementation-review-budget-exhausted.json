@@ -1,0 +1,382 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted",
+  "created_at_utc": "2026-08-04T19:38:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-JCS-P2-capsule-authority-kernel",
+  "orchestration_id": "20260804T124829Z--HCM-3-2--context-resolution-jcs-recovery",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260803T060000Z--HCM-3-2--orchestration--authority-binding-lineage-required"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fccbc-5188-71a3-be2a-9aec6aeb7a78"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-04T19:35:00Z",
+    "evidence_ref": "Five fresh built-in review agents executed the complete planning and implementation discovery/closure cadence."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm32_planning_discovery",
+      "dispatch_id": "20260804T125609Z--HCM-3-2--jcs-recovery-planning-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T125609Z--HCM-3-2--jcs-recovery-planning-discovery.json",
+      "dispatch_fingerprint": "sha256:b87d2d0fc79abddcf83ef7b9eee5e47ea99e63518dd7c3e2db074df56d493966",
+      "role": "review",
+      "agent_id": "/root/hcm32_planning_discovery",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "doubt-driven-development", "documentation-and-ADRs", "api-and-interface-design", "security-and-hardening", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:0af7442bd1d1765c080165c88be407cc45194ad965594f637bba733b5b208ef8",
+      "result_subject_fingerprint": "sha256:0af7442bd1d1765c080165c88be407cc45194ad965594f637bba733b5b208ef8",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM32-JCS-PLN-DISC-001", "HCM32-JCS-PLN-DISC-002", "HCM32-JCS-PLN-DISC-003", "HCM32-JCS-PLN-DISC-004"],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md"]
+    },
+    {
+      "run_id": "hcm32_planning_closure",
+      "dispatch_id": "20260804T132138Z--HCM-3-2--jcs-recovery-planning-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T132138Z--HCM-3-2--jcs-recovery-planning-closure.json",
+      "dispatch_fingerprint": "sha256:3a206f7988c06e1d50a41f9618b3f09ea343e72411fb19957501654762be552d",
+      "role": "review",
+      "agent_id": "/root/hcm32_planning_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "doubt-driven-development", "documentation-and-ADRs", "api-and-interface-design", "security-and-hardening", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:45cb0d78f7345575bb5beaddb9bc84f4cdf0c076ff37ba8fa0e24d7c379b21a3",
+      "result_subject_fingerprint": "sha256:45cb0d78f7345575bb5beaddb9bc84f4cdf0c076ff37ba8fa0e24d7c379b21a3",
+      "review_round": 2,
+      "predecessor_run_id": "hcm32_planning_discovery",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [],
+      "carried_finding_refs": ["HCM32-JCS-PLN-DISC-003"],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md"]
+    },
+    {
+      "run_id": "hcm32_planning_supplemental",
+      "dispatch_id": "20260804T133125Z--HCM-3-2--jcs-recovery-planning-supplemental",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T133125Z--HCM-3-2--jcs-recovery-planning-supplemental.json",
+      "dispatch_fingerprint": "sha256:0ef2c61cfbd7a69fb135705abee362ca08a1935d8233beb5debd1f0ae3c6ab4b",
+      "role": "review",
+      "agent_id": "/root/hcm32_planning_supplemental",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "doubt-driven-development", "documentation-and-ADRs", "api-and-interface-design", "security-and-hardening", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:506a7a630063deb95593396d4ae684d1d727ab3b7778911c1bda2155390c54b2",
+      "result_subject_fingerprint": "sha256:506a7a630063deb95593396d4ae684d1d727ab3b7778911c1bda2155390c54b2",
+      "review_round": 3,
+      "predecessor_run_id": "hcm32_planning_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T133700Z--jcs-recovery-planning-clean.md"]
+    },
+    {
+      "run_id": "hcm32_impl_discovery",
+      "dispatch_id": "20260804T180000Z--HCM-3-2--jcs-recovery-implementation-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T180000Z--HCM-3-2--jcs-recovery-implementation-discovery.json",
+      "dispatch_fingerprint": "sha256:f96f8830b03e28cf36186d1bdfa63a5a7db00bc301f18e3fe0ad1a946ff4b01b",
+      "role": "review",
+      "agent_id": "/root/hcm32_impl_discovery",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "doubt-driven-development", "code-review-and-quality", "api-and-interface-design", "security-and-hardening", "test-driven-development", "source-driven-development"],
+      "subject_fingerprint": "sha256:479c26327ff6b00eb15926f9147251fb179d161487d0ebcc6610246677a03f65",
+      "result_subject_fingerprint": "sha256:479c26327ff6b00eb15926f9147251fb179d161487d0ebcc6610246677a03f65",
+      "review_round": 4,
+      "predecessor_run_id": "hcm32_planning_supplemental",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM32-JCS-IMPL-DISC-001", "HCM32-JCS-IMPL-DISC-002", "HCM32-JCS-IMPL-DISC-003", "HCM32-JCS-IMPL-DISC-004", "HCM32-JCS-IMPL-DISC-005", "HCM32-JCS-IMPL-DISC-006"],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T180000Z--HCM-3-2--jcs-recovery-implementation-discovery.json"]
+    },
+    {
+      "run_id": "hcm32_impl_closure",
+      "dispatch_id": "20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json",
+      "dispatch_fingerprint": "sha256:879a814863856be615913fdf2939f92ceeb15742532d88ed7472c68da38c8b1b",
+      "role": "review",
+      "agent_id": "/root/hcm32_impl_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "doubt-driven-development", "code-review-and-quality", "api-and-interface-design", "security-and-hardening", "test-driven-development", "source-driven-development"],
+      "subject_fingerprint": "sha256:0360117ee7ede2b62d98737e307592bde536044ef1de175807e5124073125dc6",
+      "result_subject_fingerprint": "sha256:0360117ee7ede2b62d98737e307592bde536044ef1de175807e5124073125dc6",
+      "review_round": 5,
+      "predecessor_run_id": "hcm32_impl_discovery",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [],
+      "carried_finding_refs": ["HCM32-JCS-IMPL-DISC-001", "HCM32-JCS-IMPL-DISC-002", "HCM32-JCS-IMPL-DISC-003", "HCM32-JCS-IMPL-DISC-004", "HCM32-JCS-IMPL-DISC-005", "HCM32-JCS-IMPL-DISC-006"],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json"]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-04T19:38:00Z",
+    "dispatch_count": 5,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": ["sha256:34ccbe5a9fb4f6ec07b588e2354166c876ff82dee36b3559097acafde66d82b2"],
+    "aggregate_fingerprint": "sha256:c5ad355beb9f6530ddaca4fd36d2e6e680693061ee9205772cd60b98aed1ee5b"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3.2-jcs-planning-discovery-consolidation",
+      "finding_run_id": "hcm32_planning_discovery",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm32_planning_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:45cb0d78f7345575bb5beaddb9bc84f4cdf0c076ff37ba8fa0e24d7c379b21a3",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md"]
+    },
+    {
+      "remediation_id": "hcm-3.2-jcs-planning-closure-causal-repair",
+      "finding_run_id": "hcm32_planning_closure",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm32_planning_supplemental",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:506a7a630063deb95593396d4ae684d1d727ab3b7778911c1bda2155390c54b2",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T133700Z--jcs-recovery-planning-clean.md"]
+    },
+    {
+      "remediation_id": "hcm-3.2-jcs-implementation-consolidation",
+      "finding_run_id": "hcm32_impl_discovery",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm32_impl_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:0360117ee7ede2b62d98737e307592bde536044ef1de175807e5124073125dc6",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json"]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "72d5b4ce2f14eea0cd476074f0b479837af92088",
+    "subject_fingerprint": "sha256:506a7a630063deb95593396d4ae684d1d727ab3b7778911c1bda2155390c54b2",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T133125Z--HCM-3-2--jcs-recovery-planning-supplemental.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T133700Z--jcs-recovery-planning-clean.md"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 implementation review-budget authority stop",
+    "scope_horizon": "reviewed JCS/replacement planning checkpoint plus exact uncommitted failed implementation subject",
+    "detail_resolution": "six original implementation P1/P2 findings remained open after the one allowed consolidated remediation and different-fresh closure",
+    "temporal_horizon": "after implementation closure FINDINGS and before proof, product commit, or local publication",
+    "authority_horizon": "same fresh HCM-3.2 parent only; continuation requires explicit bounded causal-budget extension authority",
+    "memory_horizon": "five-dispatch parent population, planning CLEAN subject, failed implementation discovery/closure subjects, bound task identity, and protected-path observations",
+    "validation_horizon": "resume only after exact authority admits another remediation/closure cycle without waiving or relabeling the six findings"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Deliver the complete HCM-3.2 Context Resolution JCS capsule and minimum replacement-recovery floor, but stop durably when different-fresh closure proves all six original implementation blockers remain and ordinary causal review authority is exhausted.",
+  "authority_refs": [
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md","sections":["complete selector","causal review budget","stop conditions"]},
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T180000Z--HCM-3-2--jcs-recovery-implementation-discovery.json","sections":["complete implementation discovery subject"]},
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json","sections":["complete different-fresh closure subject and six finding refs"]},
+    {"path":"docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md","sections":["Causal review and remediation loop","Two-commit true-stop closeout"]}
+  ],
+  "repo_state": {
+    "branch": "detached",
+    "head": "72d5b4ce2f14eea0cd476074f0b479837af92088",
+    "dirty": true,
+    "changed_paths": [
+      "crates/engine/src/artifact_lineage_store.rs",
+      "crates/engine/src/artifact_mutation.rs",
+      "crates/engine/src/context_resolution.rs",
+      "crates/engine/tests/context_resolution_kernel.rs",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/artifact-kinds/context-resolution-authority-1.0.0.yaml",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/intakes/context-resolution-authority-1.0.0.yaml",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/profiles/context-resolution-authority-1.0.0.yaml",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.entry.yaml",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.schema.json",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/profile-selection.json",
+      "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/project/context-resolution-authority.json",
+      "crates/engine/tests/hcm_2_3_generic_lineage.rs",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T125609Z--HCM-3-2--jcs-recovery-planning-discovery.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T132138Z--HCM-3-2--jcs-recovery-planning-closure.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T133125Z--HCM-3-2--jcs-recovery-planning-supplemental.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T180000Z--HCM-3-2--jcs-recovery-implementation-discovery.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-04-deferred-continuous-availability.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T133700Z--jcs-recovery-planning-clean.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T175422Z--jcs-recovery-implementation-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T193000Z--jcs-recovery-implementation-remediation.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md"
+    ]
+  },
+  "work_completed": [
+    "Verified bound task identity, exact checkout/base/tree/ancestry, integration ref, remote baseline, and initial protected-path observations before editing.",
+    "Established the fresh parent/outcome/packet/budget identities and obtained terminal planning CLEAN under the ordinary v1.4 discovery, closure, and one causal supplemental cycle.",
+    "Implemented a bounded three-production-path JCS/recovery candidate and ran focused kernel 27/27, generic lineage 54/54, strict Clippy, formatting, and whitespace checks.",
+    "Accepted all six implementation discovery findings and performed one consolidated remediation within the reviewed path/risk/line/test ceilings.",
+    "Different-fresh closure kept all six original findings open; no supplemental is causally admissible because none was caused or unmasked by the repair.",
+    "Committed only the reviewed planning authority and immutable dispatch evidence at safe partial checkpoint 72d5b4ce2f14eea0cd476074f0b479837af92088; P1/P2-bearing product WIP remains unstaged and unpublished."
+  ],
+  "deliverables": [
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md","status":"completed","summary":"Independently CLEAN planning authority for the fresh HCM-3.2 parent."},
+    {"path":"crates/engine/src/context_resolution.rs","status":"blocked","summary":"Uncommitted implementation candidate; closure retained P1 publisher/currentness and P2 recovery/quarantine/proof blockers."},
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/records/20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted.json","status":"completed","summary":"v1.4 authority-boundary true-stop record preserving exact review lineage and resume authority."}
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.2-JCS-IMPLEMENTATION-BUDGET-STOP-001",
+      "summary": "Do not run another remediation/review cycle, commit the unsafe product WIP, advance to proof, or publish; preserve the reviewed planning checkpoint and request exact review-budget extension authority.",
+      "authority_effect": "Stops HCM-3.2 non-completed with six open P1/P2 and grants no waiver, proof-stage transition, local integration update, later slice, or push.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json",
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+      ]
+    }
+  ],
+  "findings": [
+    {"finding_id":"HCM32-JCS-PLN-DISC-001","classification":"local_remediation","severity":"major","priority":"P2","status":"remediated","source_run_id":"hcm32_planning_discovery","summary":"Generic and HCM fingerprint domains and exact preimages were frozen without substituting ownership.","evidence_refs":["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md"]},
+    {"finding_id":"HCM32-JCS-PLN-DISC-002","classification":"local_remediation","severity":"major","priority":"P2","status":"remediated","source_run_id":"hcm32_planning_discovery","summary":"Layer-specific limits and joint satisfiability were frozen and independently closed.","evidence_refs":["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md"]},
+    {"finding_id":"HCM32-JCS-PLN-DISC-003","classification":"local_remediation","severity":"major","priority":"P2","status":"remediated","source_run_id":"hcm32_planning_discovery","summary":"The exact transition-to-assertion-to-response retained publisher chain was corrected and independently closed.","evidence_refs":["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T133700Z--jcs-recovery-planning-clean.md"]},
+    {"finding_id":"HCM32-JCS-PLN-DISC-004","classification":"local_remediation","severity":"major","priority":"P2","status":"remediated","source_run_id":"hcm32_planning_discovery","summary":"Registry-head-driven H2/T2 recovery, quarantine, lock order, and non-HCM coexistence were frozen.","evidence_refs":["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md"]},
+    {"finding_id":"HCM32-JCS-IMPL-DISC-001","classification":"resolution_escalation","severity":"critical","priority":"P1","status":"open","source_run_id":"hcm32_impl_discovery","summary":"Cryptographic publisher negative proof remains unproven because retained-byte mismatch rejects the test mutations before signature/client/RP/flags/counter verification.","evidence_refs":["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json"]},
+    {"finding_id":"HCM32-JCS-IMPL-DISC-002","classification":"resolution_escalation","severity":"critical","priority":"P1","status":"open","source_run_id":"hcm32_impl_discovery","summary":"Cache and clone currentness still do not re-run exact retained publisher assertion/response cryptographic verification.","evidence_refs":["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json"]},
+    {"finding_id":"HCM32-JCS-IMPL-DISC-003","classification":"resolution_escalation","severity":"major","priority":"P2","status":"open","source_run_id":"hcm32_impl_discovery","summary":"H2 gap classification does not verify the exact registry transition/state delta before reporting retry availability.","evidence_refs":["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json"]},
+    {"finding_id":"HCM32-JCS-IMPL-DISC-004","classification":"resolution_escalation","severity":"major","priority":"P2","status":"open","source_run_id":"hcm32_impl_discovery","summary":"Recovery phases and the complete selected reason/cardinality matrix remain incompletely implemented and proved.","evidence_refs":["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json"]},
+    {"finding_id":"HCM32-JCS-IMPL-DISC-005","classification":"resolution_escalation","severity":"major","priority":"P2","status":"open","source_run_id":"hcm32_impl_discovery","summary":"Quarantine validation accepts malformed optional values, omits idempotency structure, and implements only one selected phase.","evidence_refs":["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json"]},
+    {"finding_id":"HCM32-JCS-IMPL-DISC-006","classification":"resolution_escalation","severity":"major","priority":"P2","status":"open","source_run_id":"hcm32_impl_discovery","summary":"Implementation proof continues to overstate cryptographic substitution, currentness, and quarantine-schema closure.","evidence_refs":["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json"]}
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-3.2-JCS-IMPLEMENTATION-REVIEW-BUDGET-EXHAUSTED",
+      "classification": "authority",
+      "summary": "Different-fresh implementation closure retained all six original P1/P2 findings. They are not repair-caused or unmasked and therefore cannot enter a supplemental causal cycle under the ordinary budget.",
+      "resume_condition": "Explicit operator/product authority grants an exact bounded same-parent review-budget extension for these six finding identities and one additional consolidated remediation plus different-fresh closure, without schema/tooling edits or waiver.",
+      "owner": "Handbook product authority and meta orchestrator"
+    },
+    {
+      "blocker_id": "HCM-3.2-PROTECTED-PATH-EXTERNAL-DRIFT",
+      "classification": "external",
+      "summary": "The protected orchestration path changed externally from the preflight 56-file aggregate 2bad1f3fca8f496a8c1df46a239278f88e60496b813bb25f77ed047103046b41 to a 90-file aggregate f1fb574c3740a60e47fa0f82b3798db0301e4baaa243576169aa25604a61f2ab; protected worktrees 4677/ad8f also changed from preflight dirty observations to clean. This task made no writes there.",
+      "resume_condition": "The meta owner adjudicates and rebinds the intended immutable protected-path snapshot before any continuation.",
+      "owner": "meta orchestrator / protected-path owner"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-3.2-JCS-IMPLEMENTATION-REVIEW-BUDGET-EXHAUSTED",
+      "trigger": "Different-fresh implementation closure returned FINDINGS for all six original implementation findings after the one ordinary consolidated remediation.",
+      "current_resolution": "Planning is independently CLEAN and committed at 72d5b4ce2f14eea0cd476074f0b479837af92088; product WIP is uncommitted, unstaged, review-failed, and unpublished.",
+      "target_resolution": "One explicitly authorized bounded remediation/closure opportunity on the same parent, outcome, packet, budget lineage, and six finding identities.",
+      "decision_required": "Grant or deny a precise review-budget extension; if granted, bind the permitted cycle count, unchanged scope/risk ceilings, and direct resumption from this handoff.",
+      "options": [
+        "Grant exactly one same-parent bounded remediation plus different-fresh closure for HCM32-JCS-IMPL-DISC-001 through 006.",
+        "Keep HCM-3.2 stopped and discard the uncommitted implementation candidate in a separately authorized cleanup action."
+      ],
+      "recommendation": "Prefer one exact same-parent extension because the defects and smallest repairs remain inside the already reviewed three-path/risk envelope; do not reset identity or waive P1/P2.",
+      "affected_refs": [
+        "crates/engine/src/context_resolution.rs",
+        "crates/engine/src/artifact_lineage_store.rs",
+        "crates/engine/tests/context_resolution_kernel.rs",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "Resume only from this handoff after the exact budget extension and protected-path rebinding are both verified; create no new parent/outcome/packet/finding identities."
+    }
+  ],
+  "validation": [
+    {"command":"bound identity/base/tree/ancestry/integration-ref/remote preflight","status":"passed","evidence_ref":"Assigned checkout began at 9368b5cee612bdb1ffd25562eef35e8d863ff930 / 08f7810d8316a42daf8aae8bcb3bc5b8cdaf87d8; required ancestor present; integration ref exact; remote product baseline 7becde555bcc9742cd0ada4cff27542f521e6abb."},
+    {"command":"planning discovery/closure/supplemental review cadence","status":"passed","evidence_ref":"Terminal planning CLEAN subject sha256:506a7a630063deb95593396d4ae684d1d727ab3b7778911c1bda2155390c54b2."},
+    {"command":"cargo test -p handbook-engine --test context_resolution_kernel -- --nocapture","status":"passed","evidence_ref":"Uncommitted remediated WIP passed 27/27 in 427.50 seconds; this does not override review findings."},
+    {"command":"cargo test -p handbook-engine --test hcm_2_3_generic_lineage -- --nocapture","status":"passed","evidence_ref":"Uncommitted remediated WIP passed 54/54 in 285.37 seconds."},
+    {"command":"cargo clippy --workspace --all-targets --all-features -- -D warnings; cargo fmt --all -- --check; git diff --check","status":"passed","evidence_ref":"Strict lint, formatting, and whitespace passed on the remediated WIP."},
+    {"command":"different-fresh implementation closure review","status":"failed","evidence_ref":"hcm32_impl_closure retained HCM32-JCS-IMPL-DISC-001 through 006 OPEN against sha256:0360117ee7ede2b62d98737e307592bde536044ef1de175807e5124073125dc6."},
+    {"command":"post-remediation complete workspace proof wall","status":"not_run","evidence_ref":"Not run because implementation did not close and proof-stage transition is forbidden."},
+    {"command":"post-remediation GitNexus scoped and compare-to-main detection","status":"not_run","evidence_ref":"No product commit or publication is permitted; earlier pre-review detection remains historical only and is not reported GREEN for this WIP."},
+    {"command":"protected checkout/path re-observation","status":"failed","evidence_ref":"All ten protected checkout heads were read-only re-observed and clean, but protected orchestration aggregate changed from 56 files / 2bad1f3f... to 90 files / f1fb574c...; 4677/ad8f preflight dirty observations also became clean externally."},
+    {"command":"uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py","status":"passed","evidence_ref":"85 record schemas, 493 current internal dispatches, 8 admitted legacy dispatches, and 85 ledger entries validated."},
+    {"command":"uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission","status":"passed","evidence_ref":"Historical admission self-test passed, including exact ledger rebuild scenarios."},
+    {"command":"uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract","status":"passed","evidence_ref":"v1.4 causal and orchestration contract self-tests passed, including over-budget, post-CLEAN, finding-lineage, and two-commit cases."},
+    {"command":"local/remote publication observation","status":"passed","evidence_ref":"Dedicated integration ref remains 9368b5cee612bdb1ffd25562eef35e8d863ff930; origin/feat/handbook-contract-membrane remains 7becde555bcc9742cd0ada4cff27542f521e6abb; no push occurred."}
+  ],
+  "pack_updates": [
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/records/20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted.json","sections":["entire parent-owned true-stop handoff"],"reason":"Durably preserve planning CLEAN, six open findings, exhausted ordinary review authority, uncommitted WIP boundary, and protected-path drift.","status":"completed"},
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl","sections":["deterministically rebuilt query index"],"reason":"Index this canonical v1.4 true-stop record.","status":"completed"}
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Resume exactly this HCM-3.2 parent only after explicit bounded review-budget extension authority and protected-path snapshot rebinding.",
+    "condition": "The operator/meta orchestrator supplies an exact same-parent extension for the six named finding identities and confirms the intended protected-path baseline.",
+    "must_read": [
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/records/20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted.json","sections":["complete current handoff"]},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260804T192400Z--HCM-3-2--jcs-recovery-implementation-closure.json","sections":["complete closure dispatch and finding lineage"]},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md","sections":["complete selector","causal review budget","stop conditions"]}
+    ],
+    "allowed_scope": [
+      "Preserve parent 20260804T124829Z--HCM-3-2--context-resolution-jcs-recovery, the outcome registry, packet IDs, causal budget, and all ten finding identities.",
+      "If explicitly extended, repair only the six open implementation findings within the existing three production paths, line/test ceilings, and accepted risks, then run one different-fresh closure.",
+      "After implementation CLEAN only, advance monotonically to the complete proof wall and proof/final-closeout reviews."
+    ],
+    "prohibited_scope": [
+      "No new parent/outcome/packet/finding/cycle identity, ordinary discovery reopen, P1/P2 waiver, schema/tooling edit, or hidden budget reset.",
+      "No unsafe product-WIP commit or integration publication before CLEAN.",
+      "No sixth production path, public/dependency/owner/native/transport expansion, shipped identity change, H2/H3 implementation, HCM-3.3+, remote publication, or push."
+    ],
+    "acceptance_criteria": [
+      "Cryptographic publisher substitutions reach and fail the actual verifier under hash-consistent retained evidence.",
+      "Every cache/clone/operational currentness path revalidates the exact retained publisher and fully verified committed lineage.",
+      "Registry delta, recovery phase/reason/cardinality, quarantine optional types/idempotency/limits, and proof claims are exact and independently CLEAN.",
+      "Protected paths match the newly bound immutable snapshot before continuation."
+    ],
+    "stop_conditions": [
+      "Stop if the authority extension does not name this parent, exact six finding identities, allowed extra cycle count, and unchanged scope/risk ceilings.",
+      "Stop on any new production path, public API, dependency, generic owner expansion, unsafe/native/transport surface, shipped identity, HCM-3.3+, or unexpected HIGH/CRITICAL symbol.",
+      "Stop if protected-path identity cannot be re-established or P1/P2 remain after the authorized closure."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Fresh HCM-3.2 planning closed CLEAN, but different-fresh implementation closure retained all six original P1/P2 after the ordinary consolidated remediation. Product WIP remains unstaged and unpublished; only the reviewed planning checkpoint was committed. Continuation requires an exact same-parent review-budget extension and protected-path snapshot rebinding."
+}
