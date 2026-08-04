@@ -1,383 +1,294 @@
-# HCM-3.2 Context Resolution Kernel
+# HCM-3.2 Context Resolution kernel — fresh JCS capsule and replacement recovery
 
-Status: fresh operator-authorized restart; selector review required before RED/Rust
-Phase: HCM-3
-Slice: HCM-3.2
-Parent orchestration: `20260802T232751Z--HCM-3-2--context-resolution-kernel-fresh`
-Integrated outcome: `hcm-3.2-context-resolution-kernel-fresh-whole-slice`
+Status: planning subject awaiting independent v1.4 review. No test, RED, or
+Rust edit is authorized until the fresh planning stage is CLEAN.
 
-The operator course correction starts a genuinely fresh HCM-3.2 parent at
-commit `a1aef5a5fc8a4471cee6044e16bd751ae512e216`, tree
-`17dbde4d8f12127d7ddd7ac0ed8997c5f33789c8`, with no handoff selector. The
-stopped HCM-3.2 parent and its findings remain immutable historical evidence;
-this parent does not supersede, directly succeed, or reuse any of its parent,
-outcome, packet, finding, cycle, or budget identities.
+## Fresh-parent authority
+
+- phase: `HCM-3`
+- slice: `HCM-3.2`
+- parent orchestration:
+  `20260804T124829Z--HCM-3-2--context-resolution-jcs-recovery`
+- integrated outcome:
+  `hcm-3.2-context-resolution-jcs-recovery-whole-slice`
+- causal budget:
+  `sha256:34ccbe5a9fb4f6ec07b588e2354166c876ff82dee36b3559097acafde66d82b2`
+- bound operator prompt:
+  `sha256:55c715447d5ea23787bb57322b77acdf26e0fd6d892016a5adff824b648ae7f2`
+- checkpoint: `9368b5cee612bdb1ffd25562eef35e8d863ff930`
+- checkpoint tree: `08f7810d8316a42daf8aae8bcb3bc5b8cdaf87d8`
+- publication: local-only expected-old compare-and-swap; never push
+
+This is an explicitly authorized fresh HCM-3.2 parent. It does not continue,
+supersede, rename, or reset either stopped HCM-3.2 parent. The HCM-3.1
+completion, all stopped-parent handoffs, off-integration-ref commits, prior
+findings, and three adversarial reviews are source evidence only. Their
+dispatch, outcome, packet, finding, cycle, and budget identities remain
+immutable.
 
 ## Objective
 
-Land the engine-owned Context Resolution kernel defined by the exact HCM-3.2
-row. The kernel must resolve configurable linear stacks, materialize immutable
-six-dimension envelopes, enforce parent/child narrowing and fail-closed mutation
-authority, and expose typed memory, validation, escalation, and promotion
-boundaries with deterministic fingerprints.
+Complete the engine-owned Context Resolution kernel with:
 
-This slice closes only `PG-RES-01` and the Context Resolution subset of
-`PG-PROFILE-01`. It does not begin capitalized Projection, Snapshot Memory,
-pipeline/packet adoption, project posture, SDK, CLI/Tauri/transport, release,
-publication, or HCM-3.3+ work.
+1. one configurable ordered stack and six independent Resolution dimensions;
+2. deterministic root/child envelopes, monotonic narrowing, deny-on-overlap,
+   and indeterminate refusal;
+3. typed mutation, memory, validation, escalation, disposition, and semantic
+   memory boundaries;
+4. one exceptional private HCM-3.2 JCS capsule admitted only through the real
+   generic intake/candidate/promotion/committed-lineage owner path;
+5. authenticated publisher authority, committed provenance, and fresh
+   authority revalidation at every operational consumption;
+6. replacement history and crash recovery meeting the minimum four-part
+   recovery floor; and
+7. focused and proportional regression proof followed by independent review,
+   two-commit v1.4 closeout, and local-only publication.
 
-## Authority and dependencies
+`PG-RES-01` may close only for this bounded kernel. HCM-3.3 Projection,
+HCM-3.4 Snapshot Memory, HCM-3.5 adoption, HCM-3.6 posture, Phase 3 exit,
+release, and remote publication remain open.
 
-The implementation is bounded by:
+## Selected authority artifact
 
-- `04-phase-slice-map.md`, exact HCM-3.2 row;
-- `01-target-architecture.md`, Handbook ownership, crate ownership, invariants
-  3-7, 12-15, 20-21, and Phase 3 non-goals;
-- `02-semantic-model.md`, Context Resolution definition, six dimensions,
-  ordered stack, envelope, escalation, and promotion;
-- `03-seam-crosswalk.md`, Pipeline work levels and Context Resolution definition
-  stack rows;
-- `05-contracts-schemas-and-gates.md`, exact stack, envelope, escalation, and
-  memory-promotion contracts;
-- `06-proof-and-regression-ledger.md`, `PR-005`, `PG-PROFILE-01`, `PG-RES-01`,
-  and regression rules 29, 42, 48, 49, and 81-92;
-- completed HCM-3.1 handoff
-  `20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed`
-  as predecessor context only.
+The compatibility tuple is exact:
 
-HCM-3.1 vocabulary/stable-role identity and the shipped profile closure are
-immutable dependencies. The user selection of HCM-3.2 is the slice authority;
-the predecessor handoff neither widens nor narrows it.
+| Domain | Exact identity |
+|---|---|
+| artifact kind | `handbook.artifact-kind.context-resolution-authority-binding@1.0.0` |
+| artifact instance | `context_resolution_authority` |
+| canonical path | `.handbook/project/context-resolution-authority.yaml` |
+| wrapper schema | `handbook.schemas.context-resolution-authority-capsule@1.0.0` |
+| intake definition | `handbook.intake.context-resolution-authority-capsule@1.0.0` |
+| wrapper member | `/declaration_jcs` |
+| declaration schema | `handbook.context-resolution-authority-declaration@1.0` |
+| codec | `handbook.hcm-3.2.context-resolution-authority-binding-jcs@1.0` |
+| payload schema | `handbook.context-resolution-authority-binding@1.0` |
 
-## Selected authority admission
+The generic owner sees only the closed object
+`{"declaration_jcs": <string>}`. The string content is the byte-exact RFC
+8785/JCS serialization of one closed nine-member declaration. The declaration
+contains an exact JCS string for the complete 53-leaf binding. Generic
+validation establishes wrapper shape and `/declaration_jcs` provenance only;
+it never represents the declaration or binding as semantically valid.
 
-The product authority selected Option 2. HCM-3.2 adds one narrow closed
-`handbook.context-resolution-authority-binding` record and one admission
-resolver in the Context Resolution module. The binding is not a shipped
-definition, schema-catalog family, generic token framework, or cross-product
-authority service. It is a profile-selected canonical generic artifact whose
-current bytes are read only through `ArtifactRepositoryAuthorityGuardV1` and
-`GenericArtifactLineageStoreV1` recovery/currentness, using the existing HCM-2.3
-artifact mutation owner. The generic store changes only in the two selector-
-named methods needed to recognize and route the committed `registry` family
-without parsing it as a generic-artifact intent; every other primitive remains
-unchanged.
+The HCM product gate alone parses and validates the declaration and binding.
+It is mandatory before candidate eligibility, authoritative persistence,
+promotion, pending or installed recovery, current reads, resolver admission,
+and every authority consumption. Direct seeding, generic
+`eligible_without_approval`, an ungated committed read, cache reuse, or clone
+reuse never creates Context Resolution authority.
 
-The resolver pins the caller-supplied expected artifact-byte fingerprint and
-derives a second RFC-8785/SHA-256 semantic binding fingerprint. The closed
-record pins repository identity, selected profile and stack, exact committed
-approver-registry state/head, eleven authority mappings (`root_creation`,
-`parent`, `requested`, `approving`, `decision`, `evidence`,
-`trigger_condition`, `constraint`, `source`, `target`, `target_memory`), and
-the four exact candidate mappings. Owner lookup selects only active,
-non-exhausted committed credentials that cover the exact
-`ApproverAuthorityPairV1`. The resolver uses the existing native authenticator
-port, request encoder, ES256 assertion verifier, RP/user-verification checks,
-and counter rule. Its challenge covers the repository, registry head, binding
-byte/semantic fingerprints, authority use, and exact subject ref/fingerprint.
+## Canonical and fingerprint contract
 
-Admission is an opaque HCM-3.2 value with private fields. Every uncached
-challenge includes a fresh 32-byte nonce allocated through the engine's
-existing `getrandom` dependency; entropy failure refuses before authenticator
-use. Byte-identical reuse of the same use/ref/fingerprint inside one resolver
-returns the cached exact admission; reuse of a use/ref with changed bytes
-refuses. Across resolver instances, a new nonce makes a captured assertion
-invalid even when the authenticator's permitted counter behavior is zero/zero.
-Nonzero counters must also increase within one resolver lifetime. The resolver
-does not persist, enroll, rotate, or mutate credentials. Envelope and
-transition constructors consume admissions for the exact subject they
-validate; caller coherence alone grants nothing.
+The selector freezes the exact nine declaration members, literal-null root
+predecessor quartet, 53 JSON-pointer payload manifest, layer-specific limits,
+and six non-substitutable fingerprint domains. Generic domains preserve their
+existing algorithms: canonical JSON of the terminal value, canonical JSON of
+the normalized wrapper, and exact canonical YAML artifact bytes. Only the
+three HCM-owned declaration/payload/semantic domains add literal tags and
+unsigned 64-bit big-endian lengths. Both declaration and payload parse
+duplicate-safely as strict UTF-8/I-JSON, re-emit byte-identically as JCS, and
+refuse BOM, trailing bytes, alternate encodings, unknown versions, extra or
+missing members, mixed-null predecessor values, and bound excess before
+expensive semantic work. The two nested carrier strings have explicit 96 KiB
+and 80 KiB decoded UTF-8 exceptions; every other string uses 8 KiB. Depth,
+members, and decoded escape attribution are exact in the selector.
 
-The selected authority also accepts the live HIGH impact on
-`ContextResolutionStackDefinition` and CRITICAL impact on exactly
-`AuthoredStack::resolve` and
-`ContextResolutionStackDefinition::load_bytes`, subject to the reviewed
-selector and complete proportional proof wall. No other existing public or
-HIGH/CRITICAL symbol may be edited.
+Generic lineage supplies atomic wrapper authorship and replacement only. It
+does not supply inner-field partial updates, queries, provenance, or schema
+completion. Authorship and replacement are atomic over the whole binding,
+while all 53 leaves still receive complete HCM validation. A second artifact
+family, consumer, public interchange use, or generic atomic-document feature
+requires new product authority.
 
-## Frozen owner and identities
+## Authority and publication proof
 
-`handbook-engine` owns the pure Context Resolution model, validation,
-fingerprinting, matcher evaluation, and append-only transition admission.
-`handbook-flow`, `handbook-pipeline`, `handbook-sdk`, and transports receive no
-new behavior in this slice.
+The declaration embeds the independently committed prior approver-registry
+quartet. An external, closed nine-member `publisher_authority` object is
+accepted only on the HCM promotion request and retained in the generic
+promotion intent. It binds exact result-state and transition ref/fingerprint
+pairs, publisher credential hash, padded RFC 4648 base64 challenge JCS, and
+padded raw assertion response. It is forbidden for every other kind. The
+publisher update must be the authentic direct `update_mapping` successor of
+the embedded prior head, signed by the same active administrator/publisher
+credential. That credential must already cover registry administration and
+Context Resolution publication ownership; the result preserves every prior
+unrelated mapping/state field, advances only that credential's exact existing
+authenticated-use counter/sequence/head fields, and adds only
+`context_resolution_authority_publication` /
+`context-resolution-authority/<outer64hex>`. The retained transition,
+challenge, credential, and mapping cardinality all reverify. Response proof is
+the exact existing two-hop chain: transition authorization pair -> retained
+assertion -> retained decoded-response pair; the publisher raw response equals
+the response record's strictly decoded and canonically re-encoded raw bytes.
 
-The following admitted identities remain byte-exact:
+Construction is acyclic:
 
-- `handbook.context-resolution.shipped-root@1.0.0`;
-- `handbook.mutation-matcher.core@1.0.0`;
-- `handbook.resolution-escalation.core@1.0.0`;
-- `handbook.memory-promotion.core@1.0.0`;
-- the HCM-3.1 selected profile, stable-role registry, and vocabulary identities.
+1. validate committed prior registry H0;
+2. build exact payload, declaration, wrapper, and outer bytes;
+3. compute all fingerprint domains and durably commit the semantically gated,
+   non-authoritative generic candidate;
+4. commit authenticated H0-to-H1 registry publication authority; and
+5. commit generic promotion T1 carrying the external H1 witness.
 
-The shipped definition bytes and fingerprints do not change. HCM-3.2
-generalizes stack validation around that admitted shipped instance and adds
-runtime application; it does not silently create a new shipped default.
+Replacement repeats H1-to-H2 and T2. The outer bytes contain only the prior
+registry quartet, never the resulting registry head, assertion, or mapping.
 
-## Configurable ordered stack
+## Private proof states and currentness
 
-`ContextResolutionStackDefinition` continues to bind one exact definition ref,
-definition fingerprint, and the three exact core policy fingerprints. Its
-runtime-resolved representation additionally retains:
+The implementation must keep these private and non-interchangeable:
 
-- one non-empty broad-to-narrow linear list of unique stable level IDs and
-  display labels;
-- exactly six non-empty ordered value domains;
-- unique value IDs and contiguous ranks beginning at zero in every domain;
-- one complete six-dimension default per level;
-- defaults that preserve or narrow every dimension from each broader level to
-  its adjacent narrower level.
+- candidate-validated capsule: non-capability;
+- publication-authorized pending commit: non-capability;
+- historical committed proof: recovery/audit only, non-cloneable and unable to
+  construct or satisfy an admission;
+- current authority witness: operational only while the exact current
+  registry/publisher/repository/profile/stack/predecessor/lineage closure
+  remains live; and
+- corrupt, ambiguous, or quarantined publication: non-capability.
 
-Profiles may vary level count, IDs, labels, domain values, and equal adjacent
-defaults. They may not reverse rank meaning, omit a dimension, create an
-arbitrary graph, select a different policy at invocation time, or hide changed
-semantic bytes behind an unchanged ref/fingerprint.
+There is no caller-selected historical/current mode flag. Phase derives from
+the committed journal and exact installed state. Resolver construction,
+cache hit, admission, clone consumption, envelope resolution, mutation,
+memory, validation, escalation, transition, and semantic-memory boundaries
+revalidate current authority. Head advance, revocation, mapping loss, restored
+old bytes, predecessor mismatch, repository/profile/stack drift, or broken
+lineage makes old operational values unusable.
 
-## Six-dimension envelope
+## Replacement and recovery floor
 
-The public kernel uses namespaced types. It does not introduce an unqualified
-`Resolution` type.
+Replacement support is complete only when all four properties hold:
 
-An envelope input declares:
+1. a superseded promotion remains historically verifiable from its retained
+   exact displaced bytes and one unique committed direct successor; only the
+   latest committed canonical output can be operational;
+2. every crash boundary, including canonical installation before the durable
+   publication result or commit marker, converges by exact recovery or enters
+   an explicit bounded fail-closed quarantine; installed-but-uncommitted bytes
+   never satisfy a current read;
+3. staged and installed work remains a non-capability
+   `PublicationAuthorizedPendingCommit` equivalent until the generic journal
+   is durably committed; historical/current proof cannot be borrowed; and
+4. the HCM promotion key is exactly `hcm32crpub_<outer64hex>`; the committed
+   candidate and H2 registry witness are durable before the predecessor is
+   disabled; HCM entry acquires promotion/registry locks before the generic
+   lineage lock; and irrecoverable work receives an exact durable quarantine
+   diagnostic rather than stopping unrelated recovery.
 
-- stable envelope ID and objective ref;
-- the exact selected resolved-profile ref/fingerprint;
-- the exact selected stack ref/fingerprint;
-- active level ID;
-- all six explicit dimension value IDs;
-- zero or one exact parent envelope ref/fingerprint;
-- deterministically ordered exact constraint ref/fingerprint pairs;
-- ordered mutation rules;
-- ordered exact escalation-trigger bindings.
+The availability trade-off is deliberate. After H2 authorizes O2 and before
+T2 commits, neither O1 nor O2 is operational authority. O1 remains authentic
+history only and never reactivates. Exact retry may finish T2; incompatible or
+irrecoverable state quarantines fail closed.
 
-The resolver receives the selected `ResolvedInstanceProfile` and, for a child,
-the actual parent envelope. Omission never inherits later. Root inputs have no
-parent. Child inputs must cite the supplied parent exactly, use the same profile
-and stack, and preserve or narrow every dimension. A stale/missing parent,
-profile or stack mismatch, unknown value, or rank increase refuses without a
-partial envelope and returns a typed escalation candidate where the exact core
-policy defines one.
+Cold recovery of an H2-to-T2 no-journal crash is registry-head-driven. The
+exact H2 operation ID and publication mapping identify the outer fingerprint;
+the already committed candidate is found only by replaying its exact HCM
+kind/instance, closures, normalized wrapper, canonical YAML, and predecessor.
+One candidate permits the existing `promote` retry. Missing, multiple, invalid,
+or conflicting candidates create one bounded transition-keyed quarantine
+record under `.handbook/state/context-resolution-authority/quarantine/`.
+Resolver load without a supplied retry still discovers and diagnoses the gap;
+non-HCM recovery remains available. The selector freezes record schema,
+phases/reasons, cardinality, lock order, exact retry, and committed resolution.
 
-`envelope_fingerprint` is RFC-8785/SHA-256 through the existing uniform
-fingerprint producer over the complete normalized envelope excluding only its
-own fingerprint. Presentation time, filesystem state, and invocation order are
-not inputs.
+## Existing kernel behavior preserved
 
-## Mutation semantics
+The shipped stack identity and HCM-3.1 vocabulary/profile closure remain
+byte-identical. One stack has one exact fingerprint, one linear order, six
+complete non-empty ranked domains, and adjacent defaults that do not widen
+toward narrower levels. Envelopes materialize all dimensions, use at most one
+parent, and children preserve or narrow each rank and mutation authority.
+Unknown dimensions, malformed selectors, stale authority, overlap that is not
+deterministically deny, and indeterminate matching refuse.
 
-The exact core matcher supports only `repository_path` and the shipped
-`normalized_repo_relative_glob_v1` grammar. Validation is ASCII, case-sensitive,
-bounded, separator-normalized, and rejects absolute paths, backslashes, empty,
-dot/dot-dot, URI, NUL, malformed wildcard, and unresolvable selectors.
+Escalation requests and dispositions, and memory-promotion requests and
+dispositions, are separate immutable append-only records with exact
+cardinality, authority, evidence, compare-and-write, and target-horizon rules.
+They never self-authorize or promote Projection, Snapshot, artifact, contract,
+posture, or gate truth.
 
-Root effective mutation is local allow minus local deny. Child effective
-mutation is parent effective allow intersected with child local allow, minus
-the union of parent and child denies. No allow rule means no grant. Any valid
-allow/deny overlap resolves deny. Unknown target kind, malformed target,
-matcher failure, or an allow-containment relation that cannot be proven is an
-indeterminate refusal, never an allow.
+## Production and test boundary
 
-A child allow must be provably contained by a parent effective allow under the
-closed grammar. Identical selectors, literal narrowing, segment wildcard
-narrowing, and terminal-recursive-prefix narrowing are supported. Any possible
-expansion or relation the kernel cannot prove refuses with
-`mutation_allow_expansion`; it does not weaken the parent or partially apply
-the child.
+The absolute production ceiling remains the operator-authorized five paths:
 
-Mutation evaluation is pure. It normalizes and evaluates a declared target; it
-does not read the filesystem, follow symlinks, or infer ambient authority.
-
-## Memory and validation semantics
-
-Memory and validation checks resolve requested value IDs through the same
-selected stack domains:
-
-- a requested memory rank at or below the envelope rank is authorized;
-- a higher memory rank returns a typed promotion-required result and grants no
-  write;
-- a validation claim at or below the envelope rank is authorized;
-- a higher validation rank returns `not_authorized`, never passed;
-- unknown values and stale stack/profile identity refuse.
-
-Memory promotion writes only new reviewed semantic-memory state through the
-exact core request/disposition contract. It cannot mutate an artifact,
-contract, posture policy, Snapshot, Projection, or gate.
-
-## Escalation and promotion records
-
-Requests and terminal dispositions are immutable separately fingerprinted
-records. Constructors validate exact request bindings, same-profile/stack
-proposal relations, non-empty source/evidence requirements where required,
-outcome-specific fields, and compare-and-write bases.
-
-The in-memory admission registry is an exact semantic validator, not a durable
-store. It admits at most one terminal disposition per exact request, rejects a
-changed record under a reused ID, rejects stale request fingerprints, and
-preserves prior request/disposition bytes. Creating an escalation request never
-grants authority. Only `approved` may cite an authorized replacement envelope;
-only `applied` memory promotion may cite a new semantic-memory result.
-
-Durable storage, operations, SDK exposure, and adapter delivery are later
-slices.
-
-## L0-L3 compatibility posture
-
-The existing pipeline `work_level` and scoped-block filter remain a useful
-precursor. HCM-3.2 neither maps `L0`-`L3` into public kernel identifiers nor
-edits pipeline stages/rules, because HCM-3.5 owns Resolution-aware pipeline
-adoption. The current pipeline compile/filter positive and negative targets
-must replay unchanged. This is an intentional preservation boundary: no useful
-behavior is removed, and no legacy mixed taxonomy is frozen into the new
-kernel. The HCM-3.5 selector must later choose the actual migration/removal.
-
-## Public Rust surface
-
-The selector permits exactly these 24 new namespaced engine exports:
-
-- `ContextResolutionExactBinding`, `ContextResolutionAuthorityUse`,
-  `ContextResolutionAuthorityAdmission`, and
-  `ContextResolutionAuthorityAdmissionResolver`;
-- `ContextResolutionDimensions`, `ContextResolutionEnvelopeInput`, and
-  `ContextResolutionEnvelope`;
-- `ContextResolutionMutationEffect`, `ContextResolutionMutationRule`, and
-  `ContextResolutionMutationDecision`;
-- `ContextResolutionMemoryDecision` and
-  `ContextResolutionValidationDecision`;
-- `ContextResolutionEscalationCandidate`,
-  `ContextResolutionEscalationRequest`,
-  `ContextResolutionEscalationOutcome`, and
-  `ContextResolutionEscalationDisposition`;
-- `ContextResolutionSemanticMemoryTarget`,
-  `ContextResolutionSemanticMemoryRecord`,
-  `ContextResolutionPromotionRequest`, `ContextResolutionPromotionOutcome`,
-  and `ContextResolutionPromotionDisposition`;
-- `ContextResolutionTransitionRegistry`;
-- `ContextResolutionKernelError` and `ContextResolutionKernelErrorKind`.
-
-All fields that would permit bypassing validation remain private. Constructors
-and accessors are typed and deterministic. No `serde_json::Value` dispatcher,
-ambient latest/range lookup, new crate, dependency, feature, version bump, or
-transport surface is authorized. Public visibility is bounded to the owner
-crate and is not a publication or downstream-adoption claim.
-
-The exact public symbols and callable signatures are frozen in the selected
-decision record. All public fields remain private except existing external
-primitive fields. No implementation may add a public symbol or change a frozen
-signature without amending and independently reviewing the selector first.
-
-## Proof obligations
-
-Focused RED/GREEN proof must cover:
-
-1. shipped stack/profile/fingerprint replay and one configurable non-shipped
-   linear stack with all six dimensions;
-2. invalid/duplicate/missing domains, non-contiguous ranks, missing defaults,
-   and adjacent rank increase refusal;
-3. root resolution, deterministic replay, all six independent values, same
-   active level with different dimensions, and profile/stack/parent mismatch;
-4. parent equality/narrowing and every single-dimension increase refusal;
-5. valid literal/glob/recursive matching, parent/child allow intersection,
-   deny-on-overlap, expansion refusal, malformed selector/target, unknown kind,
-   and indeterminate containment refusal;
-6. memory same/narrow authorization, higher-rank promotion-required, validation
-   same/narrow authorization, and higher-rank not-authorized;
-7. escalation request no-effect, approval/refusal/supersession cardinality,
-   promotion applied/refused/stale cardinality, stale compare-and-write, and
-   forbidden target-authority refusal;
-8. unchanged HCM-3.1 exact definition/profile replay and unchanged pipeline
-   L0-L3 scoped filtering;
-9. no Projection, Snapshot, flow, pipeline, compiler, CLI, SDK, transport,
-   dependency, unsafe, or shipped-definition delta.
-10. real-path authority admission for the exact canonical artifact and generic
-    recovery/currentness path; repository/profile/stack/registry-head mismatch;
-    raw/semantic fingerprint mismatch; missing/extra/malformed mappings;
-    zero/multiple/inactive/exhausted/wrong-pair credentials; authenticator
-    refusal/unavailability; RP/UV/credential/signature/counter failure; fresh
-    nonce behavior; captured assertion refusal across fresh resolvers for both
-    zero and nonzero counters; exact replay and changed-subject refusal; and
-    the exact subject mapping for all eleven authority uses;
-11. typed promotion proof that the actual source envelope admits every source,
-    the target horizon is strictly higher in the supplied stack, only a typed
-    semantic-memory target/result can enter the registry, and applied/refused/
-    stale compare-and-write outcomes cannot grant artifact/contract/posture or
-    HCM-3.4 durable-memory authority.
-
-The proportional proof wall is:
-
-- focused engine stack/policy/profile/kernel tests;
-- focused pipeline scoped-work-level regression targets without pipeline edits;
-- relevant engine and pipeline crate tests;
-- `cargo test --workspace --all-targets --all-features`;
-- `cargo clippy --workspace --all-targets --all-features -- -D warnings`;
-- `cargo fmt --all -- --check` and `git diff --check`;
-- ordinary handoff validation plus both orchestration self-tests;
-- GitNexus impact before existing-symbol edits and scoped plus compare-to-main
-  detection before the primary commit, with FTS/comparison unavailability
-  recorded honestly;
-- exact path/scope, immutable-definition, remote-baseline, and protected-root
-  non-access/non-mutation audits.
-
-## Production, test, and control ceilings
-
-Production edits are limited to:
-
+- `crates/engine/src/context_resolution.rs`;
 - `crates/engine/src/context_resolution_registry.rs`;
-- new `crates/engine/src/context_resolution.rs`;
-- `crates/engine/src/artifact_lineage_store.rs`, only
-  `GenericArtifactLineageStoreV1::validate_inventory` and conditionally
-  `GenericArtifactLineageStoreV1::require_journal_authority`;
-- `crates/engine/src/lib.rs` only for the exact namespaced exports above.
+- `crates/engine/src/artifact_mutation.rs`;
+- `crates/engine/src/artifact_lineage_store.rs`;
+- `crates/engine/src/lib.rs`.
 
-Test/fixture edits are limited to:
+The selected implementation plans changes only in
+`context_resolution.rs`, `artifact_mutation.rs`, and
+`artifact_lineage_store.rs`. The other two remain byte-identical unless a
+planning finding is remediated and independently closed inside the same
+authority and risk ceiling. No sixth production path is permitted.
 
-- `crates/engine/tests/context_resolution_stack.rs`;
-- new `crates/engine/tests/context_resolution_kernel.rs`;
-- new `crates/engine/tests/fixtures/hcm_3_2_context_resolution/**`.
+Test edits are limited to:
 
-Existing pipeline L0-L3 regression targets are execution-only proof and are not
-an edit allowance.
+- `crates/engine/tests/context_resolution_kernel.rs`;
+- `crates/engine/tests/hcm_2_3_generic_lineage.rs`; and
+- `crates/engine/tests/fixtures/hcm_3_2_context_resolution/**`.
 
-Control-plane edits are limited to the HCM-3.2 SPEC, plan, todo, selector,
-proof records, exact affected HCM 00-06 rows after earned proof, current v1.4
-dispatches, one parent handoff, the deterministic ledger, and `09` only for a
-fresh validated P3/P4.
+The selector freezes exact existing/new symbol, path, declaration, line, and
+test ceilings. No public API, dependency, crate, unsafe/native/platform or
+transport surface, generic framework, shipped identity mutation, or registry
+semantic change is authorized.
 
-Ceilings: at most 4 production paths, 3 test/fixture path families, 80 changed
-named production declarations under the selector counting rule, and 2,000
-hand-written production lines. Risk is limited to
-`ContextResolutionStackDefinition` at HIGH; `AuthoredStack::resolve`,
-`ContextResolutionStackDefinition::load_bytes`, and
-`GenericArtifactLineageStoreV1::validate_inventory` at CRITICAL; the
-conditionally necessary `GenericArtifactLineageStoreV1::require_journal_authority`
-only while fresh impact remains LOW; and new symbols in the same engine subsystem.
-Exceeding a ceiling requires reviewed same-slice decomposition or an authority
-stop; dependency/unsafe/schema-catalog/transport expansion requires user
-authority.
+## Required proof
 
-## Review and closeout
+Focused RED/GREEN must cover:
 
-The parent freezes one outcome registry before review. Planning,
-implementation, proof, and final-closeout stages follow the live v1.4 causal
-cadence. Every review dispatch is immutable, schema-valid, manifest-replayed,
-fresh, read-only, and built-in. Valid P1/P2 findings receive one consolidated
-remediation and different-fresh closure, with only the two permitted directly
-causal supplementals. No cycle follows CLEAN.
+- the ordered stack, six independent dimensions, deterministic fingerprints,
+  root/child narrowing, deny overlap, indeterminate refusal, memory,
+  validation, escalation, terminal cardinality, and semantic-memory limits;
+- empty-target intake through candidate, authenticated publisher update,
+  promotion, committed recovery, resolver admission, and O1-to-O2-to-O3 cold
+  recovery without direct canonical seeding;
+- exact wrapper/declaration/payload canonicalization, 53-pointer validation,
+  all fingerprint substitution pairs, unknown tuple/version, duplicate keys,
+  mixed-null predecessor, golden generic/HCM fingerprint vectors, equality to
+  committed generic records, and limit-1/limit/limit+1 plus jointly satisfiable
+  size/depth/member/string/escape bounds;
+- direct seed, forged/missing/ambiguous journal or publisher, cross-repository
+  replay, wrong predecessor, stale cache/clone, revocation, mapping loss,
+  rollback, restored old bytes, and non-current head;
+- exact publisher object/challenge/response/mapping syntax and substitution;
+  exact retry conflict; cold restart immediately before/after H2 and before
+  generic-intent creation/fsync; missing/ambiguous candidate/witness;
+  concurrent retry; durable quarantine/non-HCM coexistence; and faults after
+  every registry, staging, canonical-install, publication-result, marker,
+  evidence, result, ledger, and committed-rename boundary; and
+- unchanged generic non-HCM intake/candidate/promotion/recovery/currentness,
+  HCM-3.1 vocabulary, stack identity, profile replay, and useful L0-L3
+  precursor behavior.
 
-Completion requires no unresolved P1/P2, full proof, scoped and compare-to-main
-change detection, one reviewed primary commit or reviewed stack, a separate
-mechanical v1.4 handoff/ledger closeout commit, and atomic expected-old update
-of the dedicated local integration ref. No push occurs.
+The proportional wall includes focused tests, affected engine and lineage
+tests, full workspace all-target/all-feature tests, strict Clippy, format,
+diff/whitespace, exact definition/profile replay, ordinary handoff validation,
+both orchestration self-tests, GitNexus scoped and compare-to-main detection,
+remote-baseline verification, and protected-path proof. Unavailable FTS or
+comparison remains unavailable, never GREEN.
 
-## Stop conditions
+## Deferred continuous availability
 
-Stop non-completed if work requires HCM-3.3+, pipeline/flow adoption, changed
-shipped definition/profile/vocabulary bytes, a new dependency/crate/schema or
-transport, unsafe/native/platform machinery, more than the reviewed ceilings,
-unresolved HIGH/CRITICAL impact, unavailable mandatory delegation, exhausted
-causal budget, or broader human/product authority.
+The staged H2 installation-authorization / H3 operational-activation design
+is documented in
+`decision/2026-08-04-deferred-continuous-availability.md` as future work and
+non-authority. HCM-3.2 does not implement it. Its trigger is a future explicit
+product requirement or SLO for uninterrupted Context Resolution through every
+replacement crash boundary.
 
-The prior authority stop was released by the exact same-slice resumption
-binding. RED/Rust remains prohibited until the amended selector receives one
-fresh schema-valid implementation-stage independent CLEAN review. A finding or
-validator refusal keeps the stop active until resolved within the causal
-budget.
+## Completion and stops
+
+Completion requires planning CLEAN before code, monotonically ordered
+implementation/proof/final-closeout reviews, no unresolved P1/P2, a reviewed
+primary commit stack, a separate mechanical v1.4 handoff/ledger closeout,
+validator plus both self-tests, and expected-old local-ref compare-and-swap.
+
+Stop before implementation or completion for any sixth production path,
+unexpected HIGH/CRITICAL symbol, public API or dependency expansion, generic
+ownership change, unsafe/native/platform/transport work, shipped identity
+change, HCM-3.3+, unrepresentable v1.4 cadence, exhausted review budget,
+unavailable mandatory delegation, or unresolved P1/P2. If the minimum
+replacement floor cannot fit these bounds, return a durable same-slice true
+stop; bootstrap-only scope is not inferred.

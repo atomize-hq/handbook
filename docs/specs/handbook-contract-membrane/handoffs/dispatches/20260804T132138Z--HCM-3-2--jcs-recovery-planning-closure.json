@@ -1,0 +1,221 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260804T132138Z--HCM-3-2--jcs-recovery-planning-closure",
+  "created_at_utc": "2026-08-04T13:21:38Z",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260803T060000Z--HCM-3-2--orchestration--authority-binding-lineage-required"
+  ],
+  "parent_orchestration_id": "20260804T124829Z--HCM-3-2--context-resolution-jcs-recovery",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-JCS-P1-selector-authority",
+  "subject_fingerprint": "sha256:45cb0d78f7345575bb5beaddb9bc84f4cdf0c076ff37ba8fa0e24d7c379b21a3",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.2-jcs-recovery-planning-closure-1",
+    "trigger_run_ids": ["hcm32_planning_discovery"],
+    "finding_refs": [
+      "HCM32-JCS-PLN-DISC-001",
+      "HCM32-JCS-PLN-DISC-002",
+      "HCM32-JCS-PLN-DISC-003",
+      "HCM32-JCS-PLN-DISC-004"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-04T12:48:29Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-jcs-recovery-whole-slice",
+        "packet_ids": [
+          "HCM-3.2-JCS-P1-selector-authority",
+          "HCM-3.2-JCS-P2-capsule-authority-kernel",
+          "HCM-3.2-JCS-P3-replacement-recovery",
+          "HCM-3.2-JCS-P4-proof",
+          "HCM-3.2-JCS-P5-final-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:fedd78206b2b1d1b830bb26b084b90684733f0a71c85e9f6ca5637c697358753"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:34ccbe5a9fb4f6ec07b588e2354166c876ff82dee36b3559097acafde66d82b2",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-jcs-recovery-whole-slice",
+    "outcome_registry_fingerprint": "sha256:fedd78206b2b1d1b830bb26b084b90684733f0a71c85e9f6ca5637c697358753",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260804T125609Z--HCM-3-2--jcs-recovery-planning-discovery"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-jcs-recovery-planning-closure-convergence-1",
+    "completed_at_utc": "2026-08-04T13:21:30Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "consolidate HCM32-JCS-PLN-DISC-001 through 004 exactly once across the complete authority subject without tests or Rust edits",
+        "evidence_ref": "generic/HCM hash algorithms, layered limits, closed publisher witness, and H2-to-T2 recovery/quarantine are synchronized in SPEC, selector, plan, checklist, and remediation record"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "replay existing generic fingerprint algorithms, canonical YAML output, promotion request/idempotency rules, registry challenge/assertion/update_mapping records, lock order, committed candidate discovery, and recovery entry points",
+        "evidence_ref": "domains 1-3 now exactly preserve existing owners; candidate is durable non-authoritative evidence before H2; exact retry uses allowed 75-byte key; registry/promotion locks precede generic lock; no registry schema or sixth production path is selected"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted six-entry repo-path-NUL-SHA256-newline closure subject",
+        "evidence_ref": "aggregate sha256:45cb0d78f7345575bb5beaddb9bc84f4cdf0c076ff37ba8fa0e24d7c379b21a3"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 and Markdown fence-balance inspection of all six files",
+        "evidence_ref": "all files decode strictly and every Markdown fence is balanced"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-3.2",
+        "evidence_ref": "parent pre-closure command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "sha256": "15a8f8e641546e353a4562c5b4478469f5a260c56130978cb9d199ccef271fed"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "sha256": "62993943c7768897411f8d0c4402f6d3984675a58bd94e4387b833b6a0c06e8e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-04-deferred-continuous-availability.md",
+        "sha256": "d1b7ec8dab45546f5d3a08d2253e4e56132f2800812a5817363177b9dcd4f75e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md",
+        "sha256": "104fb48d69212439b09988ffa41ec81ca91447004c5848b3830c3955e5ab3fab"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+        "sha256": "061eec13324052e097b2572061a75b53d84f13fe34ddb2b97b697480d503d53b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+        "sha256": "3e2c3f471974a1310b6f52d93a3a3f1707ba7b4f477a2182ba540a7ef9203079"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:45cb0d78f7345575bb5beaddb9bc84f4cdf0c076ff37ba8fa0e24d7c379b21a3"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 JCS/recovery planning finding closure",
+    "scope_horizon": "exact six-file amended HCM-3.2 authority subject and four planning discovery P2 findings",
+    "detail_resolution": "close only the generic/HCM fingerprint split, nested-string limits, publisher-authority syntax/semantics, and H2-to-T2 no-journal cold recovery/remediation",
+    "temporal_horizon": "different-fresh planning closure before every test, RED, and Rust edit",
+    "authority_horizon": "same HCM-3.2 parent/outcome/registry/budget/path/risk/public ceiling; no general rediscovery or later-slice/generic expansion",
+    "memory_horizon": "immutable discovery dispatch/result, exact remediation record, existing generic/registry/lineage code facts, and amended complete subject",
+    "validation_horizon": "finding-by-finding CLEAN or only directly caused/unmasked P1/P2"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "sections": ["Canonical and fingerprint contract", "Authority and publication proof", "Replacement and recovery floor", "Required proof"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": ["Known-finding disposition", "Runtime owner and exact compatibility tuple", "Fingerprint domains and preimages", "Publisher authority and real owner pipeline", "Private typed states, currentness, and replacement", "Lineage-store composition boundary", "Test selector"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md",
+      "sections": ["HCM-3.2 JCS/recovery planning discovery remediation"]
+    }
+  ],
+  "repo_truth": "The discovery reviewer independently verified exact subject 0af7442b and returned only four P2 findings. The parent performed one consolidated documentation-only remediation. Generic domains now retain live algorithms; limits are satisfiable; publisher authority is closed and reuses the retained authenticated registry transition; H2 no-journal recovery is discoverable from a pre-H2 committed candidate plus H2 witness under existing lock order. No test, Rust, dependency, public API, registry schema/tooling, commit, handoff, ledger, publication, or protected-path mutation exists.",
+  "allowed_scope": [
+    "Review only whether HCM32-JCS-PLN-DISC-001 through 004 are completely and coherently remediated in the exact six-file subject.",
+    "Verify generic domains 1-3 match live algorithms and HCM domains 4-6 have exact preimages; verify every layer limit is satisfiable and testable.",
+    "Verify the nine-member publisher object, retained challenge/assertion/transition mapping, state-delta rules, and negative proof are closed without registry-schema change.",
+    "Verify the H2-to-T2 trigger, pre-H2 candidate durability, idempotency key, lock order, candidate discovery, phase/quarantine schema, cold-start/concurrent-retry behavior, and non-HCM coexistence close finding 004 inside existing authority.",
+    "Return CLEAN only if all four findings close and no directly caused or unmasked P1/P2 remains."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery or create findings unrelated to the four remediations.",
+    "Do not edit, format, stage, commit, delegate, test, implement Rust, create dispatches/handoffs, write the ledger, or publish.",
+    "Do not widen paths, risks, public APIs, registry/generic ownership, dependencies, H2/H3 continuous availability, HCM-3.3+, or historical lineage."
+  ],
+  "tasks": [
+    "Return finding-by-finding closure dispositions with exact amended evidence for all four original IDs.",
+    "Report any directly caused/unmasked P1/P2 separately with a new closure-run finding ID and prove causality to this remediation.",
+    "Return terminal CLEAN only if the exact complete subject has no unresolved P1/P2."
+  ],
+  "contracts_and_gates": [
+    "This is the different-fresh closure for the sole planning discovery cycle and one consolidated remediation.",
+    "No cycle follows planning CLEAN; any directly caused/unmasked P1/P2 may use only the live supplemental causal allowance.",
+    "Tests, RED, and Rust remain forbidden until CLEAN."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if any original finding remains partial or the remediation directly causes/unmasks a P1/P2.",
+    "Return BLOCKED if closure requires a sixth production path, new HIGH/CRITICAL symbol, registry schema/semantic change, public/dependency/owner expansion, H2/H3, bootstrap-only reduction, or HCM-3.3+.",
+    "Report subject-integrity, causal, or protected-boundary failure without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

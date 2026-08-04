@@ -1,142 +1,385 @@
 # HCM-3.2 Context Resolution Kernel Selector
 
-Status: fresh operator-authorized whole-slice selector; independent CLEAN required before RED/Rust
-Selected slice: HCM-3.2 only
-Parent orchestration: `20260802T232751Z--HCM-3-2--context-resolution-kernel-fresh`
+Status: fresh JCS-capsule and replacement-recovery planning subject; an
+independent v1.4 CLEAN review is required before any test, RED, or Rust edit.
 
-## Selection and predecessor boundary
+Selected slice: `HCM-3.2` only
 
-The user explicitly selected the complete HCM-3.2 slice as a genuinely fresh
-parent at checkpoint `a1aef5a5fc8a4471cee6044e16bd751ae512e216`, tree
-`17dbde4d8f12127d7ddd7ac0ed8997c5f33789c8`, with `HANDOFF_SELECTOR=none`.
-HCM-3.1 is completed
-predecessor context and its vocabulary/profile closure is immutable. This
-selector does not select HCM-3.3 or any later work.
+Parent orchestration: `20260804T124829Z--HCM-3-2--context-resolution-jcs-recovery`
 
-The stopped parent `20260801T202515Z--HCM-3-2--context-resolution-kernel`,
-handoff `20260802T012613Z--HCM-3-2--orchestration--authority-lineage-composition-required`,
-its source chain, findings, remedies, blockers, and operator decisions are
-immutable historical constraints. This selector neither supersedes nor claims
-direct succession from that handoff and reuses none of its orchestration,
-outcome, packet, cycle, finding, or budget identities. The rejected HCM-0.10
-planning commit and failed HCM-0.8 continuation grant provide no authority.
+Integrated outcome: `hcm-3.2-context-resolution-jcs-recovery-whole-slice`
 
-## Orchestration registry
+## Selection, identity, and historical boundary
 
-The fresh parent has one integrated outcome and four packets:
+The operator selected one genuinely fresh whole-slice parent from commit
+`9368b5cee612bdb1ffd25562eef35e8d863ff930`, tree
+`08f7810d8316a42daf8aae8bcb3bc5b8cdaf87d8`, with
+`HANDOFF_SELECTOR=none`. HCM-3.1 is completed predecessor context; its shipped
+vocabulary, profile, and definition closure are immutable. HCM-3.3 and every
+later slice remain unselected.
+
+The stopped HCM-3.2 parents, handoff
+`20260803T060000Z--HCM-3-2--orchestration--authority-binding-lineage-required`,
+blocked codec receipt, off-ref commits `f42ac62c759e47e6c16d37dabc87acab48463cea`,
+`01aaae7105bbe02ed403aa4063133b13cde542f7`,
+`30cb1eb6baeb475e52d39d80e8629f2c7a899d29`,
+`b4efb0f02a67fbd4e3b85ce51951c977a8312642`, and
+`a123fed8fe0bd9b546fa7884a0d596e22e6f2fb9` are immutable source evidence.
+This parent neither continues nor supersedes them and reuses none of their
+parent, outcome, packet, cycle, finding, or budget identities. All findings,
+remediations, blockers, security-floor decisions, and three adversarial-review
+results are known constraints. They are not waived, renumbered, or presented
+as fresh discovery.
+
+## Orchestration registry and cadence
+
+The exact outcome registry preimage is this canonical JSON plus one LF:
 
 ```json
-[{"authority_ref":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md","integrated_outcome_id":"hcm-3.2-context-resolution-kernel-fresh-whole-slice","packet_ids":["HCM-3.2-FRESH-P1-selector-authority","HCM-3.2-FRESH-P2-kernel-implementation","HCM-3.2-FRESH-P3-proof","HCM-3.2-FRESH-P4-final-closeout"]}]
+[{"authority_ref":"docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md","integrated_outcome_id":"hcm-3.2-context-resolution-jcs-recovery-whole-slice","packet_ids":["HCM-3.2-JCS-P1-selector-authority","HCM-3.2-JCS-P2-capsule-authority-kernel","HCM-3.2-JCS-P3-replacement-recovery","HCM-3.2-JCS-P4-proof","HCM-3.2-JCS-P5-final-closeout"]}]
 ```
 
-The canonical JSON plus one terminal LF is the frozen outcome registry preimage.
-Every v1.4 dispatch binds its recomputed registry fingerprint and the causal
-budget derived from this parent orchestration plus the integrated outcome.
-The registry fingerprint is
-`sha256:c45bc9bc7bfee52e23bc87514c5facf9c1c769d6dc777d784c48339f9a8f793b`;
-the causal-budget fingerprint is
-`sha256:91f15b60a9ab3ae9850f346d6045d076a46f2bcc2fda9fcc0ea5ecbccc932228`.
+Registry fingerprint:
+`sha256:fedd78206b2b1d1b830bb26b084b90684733f0a71c85e9f6ca5637c697358753`.
+Causal-budget fingerprint:
+`sha256:34ccbe5a9fb4f6ec07b588e2354166c876ff82dee36b3559097acafde66d82b2`.
+The ordinary v1.4 planning, implementation, proof, and final-closeout stages
+each use one complete-subject discovery or same-fingerprint burst, one
+consolidated remediation, one different-fresh closure, and at most two
+immediately causal P1/P2 supplementals. No cycle follows CLEAN.
 
-## Selected owner and call boundary
+## Known-finding disposition
 
-`handbook-engine` is the sole runtime owner. The new kernel consumes the exact
-`ResolvedInstanceProfile::context_resolution()` selected by the existing
-profile path and the profile's exact ref/fingerprint. It produces immutable
-engine values only. No flow, pipeline, compiler, CLI, SDK, Tauri, Substrate,
-HTTP, dock, or publication consumer is added.
+Prior planning and selector findings `HCM32-PLN-DISC-001..004`,
+`HCM32-SEL-DISC-001..005`, `HCM32-FRESH-SEL-DISC-001..003`, and
+`HCM32-FRESH-SEL-CLOS-001` supplied historical constraints already folded into
+this complete subject. Prior implementation findings
+`HCM32-FRESH-IMPL-DISC-001..004` are represented by their known bounded
+remedies. `HCM32-FRESH-IMPL-DISC-005`,
+`HCM32-FRESH-IMPL-SUPP-CODEC-001..002`,
+`HCM32-FRESH-IMPL-SUPP-CODEC-CLOS-001`,
+`HCM32-SEC-SEL-DISC-001..002`, and the open P1
+`HCM32-SEC-IMPL-DISC-001` remain carried safety obligations. The JCS capsule,
+private proof states, currentness rules, and four-part recovery floor below
+are the authorized product response; only fresh implementation and proof can
+close the carried open obligations.
 
-Authority-bearing calls additionally consume opaque admissions from the exact
-HCM-3.2 resolver selected below. The selector never substitutes caller
-coherence for authenticated current authority.
+Fresh planning discovery returned `HCM32-JCS-PLN-DISC-001..004` as four P2
+control findings. This amended subject is their single consolidated
+remediation: exact generic/HCM fingerprint split, satisfiable layered limits,
+closed publisher syntax/semantics, and registry-head-driven no-journal
+recovery. They remain blocking until a different fresh closure returns CLEAN.
 
-## Authority-binding and admission selector
+## Runtime owner and exact compatibility tuple
 
-The only new authority source is one profile-selected canonical generic
-artifact read under `ArtifactRepositoryAuthorityGuardV1` and
-`GenericArtifactLineageStoreV1` recovery/currentness. The record is closed:
+`handbook-engine` is the sole runtime owner. It consumes the exact selected
+`ResolvedInstanceProfile::context_resolution()` and emits immutable engine
+values. No pipeline, compiler, CLI, SDK, Tauri, Substrate, HTTP, dock, or
+publication consumer is added.
 
-```yaml
-schema_id: handbook.context-resolution-authority-binding
-schema_version: "1.0"
-binding_id: handbook.context-resolution-authority.example
-binding_version: "1.0.0"
-repository_identity_fingerprint: sha256:...
-resolved_profile: { ref: handbook.profile.example@1.0.0, fingerprint: sha256:... }
-resolution_stack: { ref: handbook.context-resolution.example@1.0.0, fingerprint: sha256:... }
-approver_registry:
-  state_ref: registry-state.example
-  state_fingerprint: sha256:...
-  head_transition_ref: registry-transition.example
-  head_transition_fingerprint: sha256:...
-authority_mappings:
-  root_creation: { approval_class: context_resolution_root, authority_ref: work.root.owner }
-  parent: { approval_class: context_resolution_parent, authority_ref: work.parent.owner }
-  requested: { approval_class: context_resolution_requested, authority_ref: work.request.owner }
-  approving: { approval_class: context_resolution_approving, authority_ref: work.approver }
-  decision: { approval_class: context_resolution_decision, authority_ref: decision.owner }
-  evidence: { approval_class: context_resolution_evidence, authority_ref: evidence.owner }
-  trigger_condition: { approval_class: context_resolution_trigger, authority_ref: trigger.owner }
-  constraint: { approval_class: context_resolution_constraint, authority_ref: constraint.owner }
-  source: { approval_class: context_resolution_source, authority_ref: source.owner }
-  target: { approval_class: context_resolution_target, authority_ref: target.owner }
-  target_memory: { approval_class: context_resolution_target_memory, authority_ref: memory.owner }
-candidate_mappings:
-  dimension_rank_increase:
-    trigger: { ref: trigger.dimension-rank-increase@1.0.0, fingerprint: sha256:... }
-    missing_condition: one_or_more_dimension_ranks_exceed_parent
-    evidence_requirement: current_and_proposed_envelopes
-  mutation_allow_expansion:
-    trigger: { ref: trigger.mutation-allow-expansion@1.0.0, fingerprint: sha256:... }
-    missing_condition: child_allow_not_provably_contained
-    evidence_requirement: parent_and_child_mutation_rules
-  missing_context:
-    trigger: { ref: trigger.missing-context@1.0.0, fingerprint: sha256:... }
-    missing_condition: required_context_record_absent
-    evidence_requirement: available_context_and_missing_ref
-  missing_authority:
-    trigger: { ref: trigger.missing-authority@1.0.0, fingerprint: sha256:... }
-    missing_condition: required_authority_mapping_absent
-    evidence_requirement: current_authority_and_requested_pair
-extensions: {}
-binding_fingerprint: sha256:...
+The private HCM-3.2 v1 capsule has this closed compatibility tuple:
+
+| domain | exact value |
+|---|---|
+| artifact kind | `handbook.artifact-kind.context-resolution-authority-binding@1.0.0` |
+| artifact instance | `context_resolution_authority` |
+| canonical path | `.handbook/project/context-resolution-authority.yaml` |
+| wrapper schema | `handbook.schemas.context-resolution-authority-capsule@1.0.0` |
+| intake definition | `handbook.intake.context-resolution-authority-capsule@1.0.0` |
+| sole wrapper terminal | `/declaration_jcs` required string |
+| declaration schema | `handbook.context-resolution-authority-declaration@1.0` |
+| codec | `handbook.hcm-3.2.context-resolution-authority-binding-jcs@1.0` |
+| payload schema | `handbook.context-resolution-authority-binding@1.0` |
+
+Generic intake validates only the closed one-terminal wrapper and provenance
+for `/declaration_jcs`. It never claims inner semantic validity or operational
+authority. The HCM-owned gate alone parses the exact UTF-8 terminal as RFC
+8785/JCS, requires byte-identical re-emission, and validates the declaration
+and payload. Historical decoders are immutable and append-only; an unknown or
+reinterpreted tuple fails closed.
+
+The declaration has exactly nine members:
+`schema_id`, `schema_version`, `codec_id`, `codec_version`, `payload_jcs`,
+`payload_byte_fingerprint`, `semantic_binding_fingerprint`, `predecessor`, and
+`prior_registry`. `predecessor` has exactly
+`outer_artifact_ref`, `outer_artifact_fingerprint`,
+`payload_byte_fingerprint`, and `semantic_binding_fingerprint`; a root uses
+literal null for all four, while a replacement uses exact non-null strings for
+all four. Mixed-null quartets refuse. `prior_registry` has exactly
+`state_ref`, `state_fingerprint`, `head_transition_ref`, and
+`head_transition_fingerprint` and equals the payload registry quartet.
+
+The inner payload has the exact 53-leaf JSON-pointer manifest:
+
+```text
+/schema_id /schema_version /binding_id /binding_version
+/repository_identity_fingerprint
+/resolved_profile/ref /resolved_profile/fingerprint
+/resolution_stack/ref /resolution_stack/fingerprint
+/approver_registry/state_ref /approver_registry/state_fingerprint
+/approver_registry/head_transition_ref /approver_registry/head_transition_fingerprint
+/authority_mappings/{root_creation,parent,requested,approving,decision,evidence,trigger_condition,constraint,source,target,target_memory}/{approval_class,authority_ref}
+/candidate_mappings/{dimension_rank_increase,mutation_allow_expansion,missing_context,missing_authority}/trigger/ref
+/candidate_mappings/{dimension_rank_increase,mutation_allow_expansion,missing_context,missing_authority}/trigger/fingerprint
+/candidate_mappings/{dimension_rank_increase,mutation_allow_expansion,missing_context,missing_authority}/missing_condition
+/candidate_mappings/{dimension_rank_increase,mutation_allow_expansion,missing_context,missing_authority}/evidence_requirement
+/extensions /binding_fingerprint
 ```
 
-The selected artifact schema may be repository-defined, but this parser and
-semantic contract are HCM-3.2-specific and closed. No schema-catalog entry or
-new shipped definition is created. Canonical artifact admission supplies the
-exact raw-byte fingerprint; `binding_fingerprint` is RFC-8785/SHA-256 over the
-complete semantic record excluding itself. Both must match. The record must
-pin the exact repository identity, operation-context profile, supplied stack,
-and current committed approver registry state/head. Missing, extra, duplicate,
-stale, noncanonical, mismatched, or changed bytes refuse.
+Every leaf receives complete semantic validation. Generic lineage supplies
+atomic wrapper authorship and replacement, not per-leaf provenance, partial
+updates, queries, or schema completion. This deliberate trade-off is accepted
+for this private capsule. A second artifact family, consumer, public
+interchange need, or generic atomic-document facility requires new authority.
 
-For an authority use, owner lookup takes its one exact
-`ApproverAuthorityPairV1`, sorts active non-exhausted ES256 credentials that
-cover it through `select_eligible_credentials`, and gives that exact allow-list
-to `NativeAuthenticatorPortV1::get_assertion`. Before every uncached call the
-resolver fills a fresh `[u8; 32]` nonce with the engine's existing direct
-`getrandom` dependency; entropy failure refuses. The SHA-256 client-data
-challenge domain-separates and length-prefixes that nonce, repository identity,
-registry state/head, binding artifact and semantic fingerprints, use string,
-and exact subject ref/fingerprint. `decode_and_verify_get_assertion_response`
-must select exactly one requested credential, validate RP/user-presence/user-
-verification, verify ES256, and satisfy the existing counter rule. Zero
-candidates, authenticator refusal, multiple/unknown response selection, stale
-currentness, entropy failure, counter rollback, or any verification error
-refuses with no admission.
+Before allocation-heavy validation, reject BOM, invalid UTF-8/I-JSON,
+duplicates, trailing bytes, alternate encodings, extra or missing members,
+excess depth, member count, string bytes, escapes, or escape expansion. Bounds
+are measured at explicit layers:
 
-The resolver caches successful admissions by `(authority_use, subject_ref)`.
-Exact fingerprint replay inside one resolver is idempotent and returns the same
-admission; changed fingerprint reuse refuses. A fresh resolver always allocates
-a new nonce before authentication, so a captured response cannot replay across
-resolver lifetimes even when both retained and asserted counters are zero.
-Nonzero sign counters must additionally increase during one resolver lifetime;
-zero/zero remains the existing accepted authenticator behavior. This is not
-enrollment or durable credential-use mutation.
-`ApproverAuthorityPairV1`, the authenticator module, repository guard, artifact
-mutation owner, and all registry bytes remain unchanged. The generic lineage
-store changes only in the two exact methods and routing semantics selected
-below.
+- the complete canonical YAML artifact is at most 131,072 bytes;
+- the decoded UTF-8 content of wrapper `/declaration_jcs` is at most 98,304
+  bytes; this is the first carrier exception to the ordinary-string limit;
+- the decoded UTF-8 content of declaration `/payload_jcs` is at most 81,920
+  bytes; this is the second and final exception;
+- every other decoded JSON string in declaration or payload is at most 8,192
+  UTF-8 bytes;
+- aggregate object-member count across declaration and payload is at most 192;
+- maximum JSON container depth is 12, with each root object at depth 1 and
+  each nested object/array incrementing depth by one; scalars do not increment;
+- across the declaration parse and payload parse together, escaped source
+  tokens may produce at most 16,384 decoded UTF-8 bytes. A byte is attributed
+  to escape expansion when emitted from a JSON escape token (`\"`, `\\`,
+  `\/`, control escape, or one valid `\uXXXX`/surrogate pair), and is counted
+  once at the layer that decodes it.
+
+The declaration and payload input lengths are their exact decoded UTF-8 byte
+lengths before JSON parsing. Limit-minus-one, exact-limit, and limit-plus-one
+vectors cover both exceptions, ordinary strings, aggregate escapes, depth,
+members, and one jointly satisfiable maximum artifact.
+
+## Fingerprint domains and preimages
+
+The following domains are distinct and non-substitutable. Domains 1-3 retain
+the exact existing generic algorithms without tags or new preimages:
+
+1. generic terminal value = `sha256(canonical_json(JSON string value))`, where
+   the canonical JSON bytes include the enclosing quotes and JSON escapes;
+2. normalized wrapper = `sha256(canonical_json({"declaration_jcs": value}))`;
+3. outer canonical artifact = `sha256(canonical_yaml_bytes(normalized_wrapper))`,
+   including exactly the bytes and terminal newline emitted by the existing
+   canonical YAML writer.
+
+HCM-owned domains 4-6 use `sha256(tag || u64be(len) || bytes)` with no separator
+or terminal newline. `u64be` is one unsigned 64-bit big-endian byte length and
+`tag` is the literal ASCII byte sequence shown, including its final NUL:
+
+4. raw declaration tag `handbook.hcm-3.2.declaration-jcs.v1\0`, bytes = exact
+   byte-identical JCS declaration input;
+5. payload bytes tag `handbook.hcm-3.2.payload-jcs.v1\0`, bytes = exact decoded
+   UTF-8 JCS bytes stored in `payload_jcs`;
+6. semantic binding tag `handbook.hcm-3.2.semantic-binding.v1\0`, bytes = exact
+   RFC 8785/JCS serialization of the payload after removing only the root
+   `binding_fingerprint` member.
+
+The declaration's two inner fingerprints and payload binding fingerprint must
+match their own domains. The generic value, wrapper, and artifact fingerprints
+must match the committed generic promotion. No field may contain or hash its
+own final enclosing fingerprint, so no self-reference cycle is admitted.
+Focused proof freezes one golden preimage and lowercase `sha256:` digest for
+each domain, shows domains 1-3 equal committed generic value/candidate/promotion
+records, and substitutes every digest across every other domain.
+
+## Publisher authority and real owner pipeline
+
+The capsule is authoritative only after the real owner pipeline: empty or
+current selected target -> generic intake -> candidate -> HCM semantic gate ->
+authenticated registry promotion authorizing the exact output -> generic
+promotion -> durable committed lineage -> fresh HCM current-authority witness.
+Direct fixture seeding, generic `eligible_without_approval`, ungated committed
+reads, cache hits, clones, and restored old bytes never create authority.
+
+The generic promotion request retains one HCM-only closed
+`publisher_authority` object. It is forbidden for every other artifact tuple
+and has exactly these nine members:
+
+```json
+{
+  "schema_id": "handbook.context-resolution-publisher-authority",
+  "schema_version": "1.0",
+  "result_registry_state_ref": "registry-states/registry-state_<64hex>.json",
+  "result_registry_state_fingerprint": "sha256:<64hex>",
+  "result_transition_ref": "registry-transitions/registry-transition_<64hex>.json",
+  "result_transition_fingerprint": "sha256:<64hex>",
+  "publisher_credential_id_hash": "sha256:<64hex>",
+  "challenge_jcs_base64": "<RFC4648 standard base64 with required padding>",
+  "raw_assertion_response_base64": "<RFC4648 standard base64 with required padding>"
+}
+```
+
+Every ref is normalized repository-relative ASCII and at most 512 bytes; every
+fingerprint is lowercase SHA-256. Base64 must decode and re-encode byte-
+identically using RFC 4648 standard alphabet with padding. Decoded challenge
+and raw response are each non-empty and at most 16,384 bytes; the complete
+object's canonical JSON is at most 64 KiB.
+
+The challenge is exact retained JCS for the existing closed eleven-member
+`handbook.authenticator-challenge@1.0` record: `$schema`,
+`changed_credential_id_hash`, `nonce_base64`, `operation`, `operation_id`,
+`prior_registry_state_fingerprint`, `prior_transition_fingerprint`,
+`repository_identity_fingerprint`, `result_registry_state_fingerprint`,
+`schema_id`, and `schema_version`. `operation` is `update_mapping` and
+`operation_id` is exactly `hcm32-authorize-<outer64hex>`, where `<outer64hex>`
+is domain-3 without `sha256:`. The result transition's exact
+`authorization_ref` and `authorization_fingerprint` select one retained
+assertion record. That assertion's exact `decoded_response_ref` and
+`decoded_response_fingerprint` select one retained assertion-response record.
+The publisher object's `raw_assertion_response_base64` must strictly decode and
+standard-base64 re-encode byte-identically, and the decoded bytes must equal
+the strict decoded and byte-identically re-encoded `raw_response_base64`
+member of that response record. The two-hop refs/fingerprints, decoded
+credential, client-data hash, signature, RP, presence, verification, and
+counter all reverify against the retained challenge and credential.
+
+The transition must be the live direct successor from the declaration's
+`prior_registry` quartet and must update exactly the credential named by
+`publisher_credential_id_hash`. That active credential is also the exact
+asserting administrator and, before H2, covers both
+`registry_admin` / `repository_registry_admin` and
+`context_resolution_authority_publisher` /
+`repository_context_resolution_authority_publisher`. H2 preserves every prior
+credential, status, unrelated mapping, and unrelated registry field. For the
+same publisher/administrator credential it admits only the exact existing
+authenticated-use advancement (`sign_count`, `use_sequence`, and use-head
+ref/fingerprint) plus adding one mapping:
+`context_resolution_authority_publication` /
+`context-resolution-authority/<outer64hex>`. Zero or multiple credentials with
+the exact publication mapping, any removed/changed prior mapping, an invalid
+counter/use-head advance, or any extra state delta refuses.
+
+Existing registry authentication, repository identity, credential coverage,
+response verification, and committed currentness are reused unchanged.
+Candidate eligibility runs the complete HCM capsule/semantic gate and may
+commit only non-authoritative candidate evidence before H2; it does not require
+or convey publisher authority. Promotion planning, persisted-output validation,
+recovery, current reads, and admission require the exact publication proof
+before the output can become authoritative. Missing/extra/duplicate fields,
+wrong base64, credential, challenge, assertion, transition, mapping,
+fingerprint, or non-HCM use refuse.
+
+For each authority use, the HCM resolver maps the payload pair to active
+non-exhausted ES256 credentials, obtains one fresh authenticator assertion over
+a domain-separated challenge binding repository, live registry head,
+outer/declaration/payload/semantic fingerprints, use, and exact subject, and
+verifies RP, presence, verification, credential selection, signature, and
+counter. No candidate, cardinality ambiguity, refusal, stale registry,
+revocation, entropy failure, changed subject, or replay mismatch yields an
+admission.
+
+## Private typed states, currentness, and replacement
+
+Four private non-interchangeable states are selected:
+
+- `HistoricalCommittedProof`: audit/recovery proof only;
+- `PublicationAuthorizedPendingCommit`: exact output is authorized for the
+  pending generic journal but conveys no operational capability;
+- `CurrentAuthorityWitness`: exact durable committed output is the live direct
+  successor registry mapping and may back operational admissions;
+- `CorruptOrAmbiguous`: bounded diagnostics and refusal only.
+
+There is no caller-selected historical/current mode flag. Historical or
+pending values cannot construct, return, cache, clone, or satisfy
+`ContextResolutionAuthorityAdmission`. The types remain private to the HCM
+owner and their constructors are phase-specific.
+
+Every resolver load, cache hit, cloned/admission consumption, candidate,
+promotion, envelope, mutation, memory, validation, escalation, and transition
+operation revalidates exact canonical bytes, committed generic lineage, live
+direct-successor registry head/mapping, active publisher credentials, exact
+predecessor, repository/profile/stack identity, and all fingerprint domains.
+A later head, revocation, mapping loss, profile/stack/repository change,
+restored old bytes, or lineage mismatch makes the admission unusable.
+
+For O1 -> O2, H2 authorizes O2 before T2 is durably committed. During that
+interval neither O1 nor O2 is operational. O1 remains historical only and is
+never reactivated after failure. Once T2 is committed, O2 alone is current.
+Each artifact binds its own predecessor and prior-registry quartet; proof
+borrowing across versions is impossible.
+
+Superseded O1 remains historically verifiable after O2 owns the canonical path
+using retained exact displaced bytes plus exactly one committed direct-
+successor lineage witness. Historical verification still proves O1's exact
+bytes, H0 -> H1 authenticated publication, publisher, repository/profile/stack,
+lineage, and outer/declaration/payload/semantic fingerprints. It creates no
+capability.
+
+Every crash boundary converges by exact retry or records a diagnosable
+fail-closed HCM quarantine. Installed-but-uncommitted bytes are never readable
+as authority. An installed exact output with a missing durable native marker
+reconstructs the one truthful publication result from durable pre-observation,
+canonical/displaced identities, registry transition, and journal request, then
+continues idempotently.
+
+The H2 -> T2 no-journal gap uses registry-head-driven discovery, not a new
+registry or generic-intake schema. Before H2, the candidate and all closure
+records are already durable generic committed outputs. H2 durably retains the
+exact challenge, raw response, assertion, result state, transition, outer
+fingerprint mapping, and operation ID. The generic promotion idempotency key is
+exactly `hcm32crpub_<outer64hex>` (75 allowed ASCII bytes), so it is
+deterministic from H2.
+
+On every HCM candidate, promotion, resolver-load, and authority-consumption
+entry, the HCM owner first acquires `ArtifactRepositoryAuthorityGuardV1`
+(`promotion.lock`, then `registry.lock`) and then invokes HCM recovery under
+`generic-artifact-operations.lock`. No path acquires those locks in reverse.
+Under those locks it reads the live transition's exact prior/result states. A
+transition whose only state delta is the exact publication mapping and whose
+operation ID names its outer fingerprint is an H2 trigger.
+
+For that trigger, recovery searches committed candidates only for the exact
+HCM kind/instance and accepts one whose replayed normalized wrapper and
+canonical YAML produce the mapped outer fingerprint, whose basis equals the
+declaration predecessor, and whose retained intake/validation closures all
+verify. It then classifies exactly one of:
+
+- matching committed T2: verify and expose current witness;
+- matching pending T2: run normal generic recovery;
+- no journal with one candidate: record an open diagnostic, and an exact
+  caller retry using that candidate, publisher object, predecessor, and
+  deterministic key may create T2;
+- no candidate, multiple candidates, invalid candidate, journal/request
+  conflict, wrong canonical predecessor, or ambiguous registry delta: record
+  fail-closed quarantine and refuse HCM authority.
+
+The durable record path is
+`.handbook/state/context-resolution-authority/quarantine/quarantine_<transition64hex>.json`.
+It is closed `handbook.context-resolution-publication-quarantine@1.0` with exact
+members: `schema_id`, `schema_version`,
+`repository_identity_fingerprint`, `result_registry_state_ref`,
+`result_registry_state_fingerprint`, `result_transition_ref`,
+`result_transition_fingerprint`, `outer_artifact_fingerprint`,
+`observed_canonical_artifact_fingerprint` (string or null), `candidate_ref`
+(string or null), `candidate_fingerprint` (string or null), `idempotency_key`,
+`journal_transaction_id` (string or null), `phase`, `reason`, `resolution`,
+`result_transaction_ref` (string or null), `result_transaction_fingerprint`
+(string or null), and `record_fingerprint`. `record_fingerprint` is existing
+canonical-JSON SHA-256 with itself omitted. `phase` is one of
+`authorized_without_generic_intent`, `generic_pending`, or
+`installed_without_commit`; `reason` is one of `retry_available`,
+`candidate_missing`, `candidate_ambiguous`, `candidate_invalid`,
+`predecessor_mismatch`, `journal_conflict`, `installed_result_ambiguous`, or
+`registry_delta_ambiguous`; `resolution` is `open` or `committed`.
+
+An open `retry_available` record admits only the exact existing `promote`
+retry. After its normal generic T2 commit, recovery replaces the record
+durably with `resolution=committed` and the exact retained result pair. Every
+other open reason requires explicit future repair authority and remains
+non-capability. The quarantine directory contains at most one record for each
+transition and at most 64 records total; overflow, unknown records, or changed
+same-transition bytes refuse HCM recovery. Cold restart without a retry request
+still discovers and records the gap. Concurrent retry serializes under the
+same locks. Unrelated generic recovery continues, and no quarantine relaxes
+unknown-family refusal or creates authority.
 
 ## Definition identity selector
 
@@ -488,6 +731,17 @@ Its representation may retain levels, domains, and policy pairs privately.
 dispatcher, public trait, blanket implementation, generic framework, or symbol
 outside this list is authorized.
 
+The signatures in this section are the complete public callable ceiling and
+remain unchanged by the JCS/recovery repair. Currentness is carried in private
+fields of the opaque admission, resolver, envelope, candidate, request,
+disposition, and registry values. Their existing constructors and methods
+revalidate internally and may return the already-declared `StaleAuthority` or
+`Indeterminate` result; no caller-selected proof mode or new public parameter
+is admitted. New capsule codecs, fingerprint-domain values, publisher proofs,
+historical/pending/current states, lineage witnesses, and quarantine records
+are module-private or `pub(crate)` only where the three selected owner modules
+must compose. Existing edited callables keep their current Rust signatures.
+
 An escalation candidate is a sealed value created only by envelope resolution
 or the two typed envelope candidate methods. It stores the exact current and
 proposed envelope bindings plus complete profile, stack, dimension,
@@ -516,81 +770,94 @@ nominal wrappers.
 
 Production paths:
 
-- `crates/engine/src/context_resolution_registry.rs`;
 - `crates/engine/src/context_resolution.rs`;
+- `crates/engine/src/context_resolution_registry.rs` (ceiling only; no edit is
+  planned);
+- `crates/engine/src/artifact_mutation.rs`;
 - `crates/engine/src/artifact_lineage_store.rs`;
-- `crates/engine/src/lib.rs`.
+- `crates/engine/src/lib.rs` (ceiling only; no edit is planned).
 
 Test/fixture paths:
 
-- `crates/engine/tests/context_resolution_stack.rs`;
 - `crates/engine/tests/context_resolution_kernel.rs`;
+- `crates/engine/tests/hcm_2_3_generic_lineage.rs`;
 - `crates/engine/tests/fixtures/hcm_3_2_context_resolution/**`.
 
-Control paths are the exact HCM-3.2 slice files, review/proof dispatches and
-records, affected HCM 00-06 rows after earned proof, one v1.4 handoff, ledger,
-and a new `09` row only when required by a validated P3/P4.
+Control paths are limited to the exact HCM-3.2 SPEC/selector/plan/checklist,
+future-work decision, proof and dispatch artifacts, earned 00-06 ledger rows,
+one v1.4 handoff, ledger, and a `09` row only when validation requires it.
 
-Maximums are: 4 production paths, 3 test families, 80 changed named production
-declarations, and 2,000 hand-written production lines. At most 60 non-test
-changed lines and 180 test changed lines may be added to
-`artifact_lineage_store.rs`. A named declaration is
-counted once by post-state `(module, impl owner, declaration name)` for each
-new or edited struct, enum, function, method, or constant in the four
-production paths. Fields, variants, imports, derives, compiler-generated
-implementations, and tests do not count. The five accepted existing symbols
-count; unchanged reused primitives do not. No Cargo/dependency/version/unsafe/
-schema-catalog/transport surface or ancillary path is allowed. Protected paths,
-frozen historical dispatch/record corpora, and every path outside the ceilings
-remain unstaged/uncommitted.
+The five production paths are an absolute ceiling, not a requirement. The
+planned code-bearing paths are `context_resolution.rs`, `artifact_mutation.rs`,
+and `artifact_lineage_store.rs`. Maximums are 80 changed named production
+declarations, 2,400 hand-written production lines (1,300 / 500 / 600 for those
+three planned paths), 2,400 hand-written focused test/fixture lines, and 18
+material test functions. A declaration is counted once by post-state `(module,
+impl owner, name)` for each edited/new struct, enum, function, method, or
+constant. Fields, variants, imports, derives, generated implementations, and
+tests do not count. No Cargo, dependency, crate, unsafe, schema-catalog,
+transport, native/platform, or ancillary production path is authorized.
 
-Fresh live GitNexus reports HIGH for `ContextResolutionStackDefinition` (4
-upstream, 4 processes), CRITICAL for `AuthoredStack::resolve` (6 upstream, 5
-processes), CRITICAL for `ContextResolutionStackDefinition::load_bytes` (30
-upstream, 8 processes), and CRITICAL for
-`GenericArtifactLineageStoreV1::validate_inventory` (30 upstream, 6 processes).
-Product authority explicitly accepts only these four HIGH/CRITICAL existing
-symbol edits. `GenericArtifactLineageStoreV1::require_journal_authority` is the
-only conditional fifth edit: live impact is LOW (9 upstream, 1 process), and
-the edit is necessary because the method otherwise enumerates the recognized
-foreign registry family and parses its intent under the generic-artifact
-schema. It must route the exact `registry` family away from generic parsing;
-if fresh pre-edit impact is not LOW or the necessity changes, leave it
-unchanged and stop. The full engine/profile/CLI/setup/promotion/intake/lifecycle/
-workspace replay wall is mandatory. `ApproverAuthorityPairV1` and assertion
-verification also have existing CRITICAL graph reach but remain byte-for-byte
-unchanged; the authenticator port is MEDIUM and guard/store are LOW. Any need
-to edit those primitives or any fifth existing HIGH/CRITICAL symbol stops.
+Live pre-edit GitNexus classified these exact existing seams:
+
+| existing symbol | risk | upstream / processes | selected edit |
+|---|---:|---:|---|
+| `validate_persisted_output_authority` | CRITICAL | 187 / 2 | require HCM gate and committed publisher proof |
+| `validate_request_subject` | CRITICAL | 27 / 6 | retain exact HCM-only publisher authority object |
+| `GenericArtifactLineageStoreV1::recover_pending` | CRITICAL | 52 / 5 | exact markerless retry or HCM quarantine |
+| `GenericArtifactLineageStoreV1::verify_committed` | CRITICAL | 25 / 5 | distinguish current output from retained historical proof |
+| `ArtifactMutationServiceV1::promote` | MEDIUM | 10 / available graph | hold evaluation lock/currentness through effect |
+| `candidate_preview` | LOW | 15 / 1 | HCM gate before eligibility |
+| `build_promotion_plan` | LOW | 11 / available graph | HCM publication authorization |
+| `parse_promotion` | LOW | 12 / available graph | exact retained HCM request field |
+| `PromotionDocumentV1` | LOW | available graph | private HCM-only field |
+| `GenericArtifactLineageStoreV1::require_journal_authority` | LOW | 10 / 1 | exact HCM quarantine/refusal routing only if necessary |
+
+The authority explicitly anticipated committed-journal verification, recovery,
+marker handling, phase-aware validation, retry reconstruction, and these
+HCM-specific seams up to CRITICAL. The four observed CRITICAL results were
+warned before editing and are admitted only under this reviewed selector and
+the full proportional wall. Context Resolution admission/resolver/envelope/
+transition edits observed LOW risk. Any additional HIGH/CRITICAL symbol,
+sixth production path, public API expansion, or changed owner is an authority
+stop before edit. Every existing symbol receives a fresh upstream impact call
+immediately before its edit.
 
 ## Lineage-store composition boundary
 
-`registry` is the only recognized foreign transaction family under
-`.handbook/state/transactions`. The committed approver-registry owner remains
-the sole parser, validator, recovery owner, and currentness authority for its
-two exact intent schemas. The generic store must validate links at the family
-boundary, then exclude `registry` from generic intent parsing and generic
-recovery. It must continue fully validating and recovering only
-`intake-records`, `artifact-candidates`, and `artifact-promotions`. Every other
-family, linked family, malformed generic transaction, owner mismatch, stale
-generic output, registry currentness failure, crash-recovery inconsistency,
-or replay inconsistency refuses. No transaction is deleted or allowlisted by
-schema; neither owner interprets the other's intents.
+The generic store continues to own only its existing generic transaction
+families; the committed registry owner continues to own registry transactions.
+Unknown-family refusal, generic intent validation, registry currentness,
+replay protection, owner fingerprints, and crash recovery remain intact.
+Neither owner parses the other's schema and no transaction is deleted or
+broadly allowlisted.
 
-Required lineage tests are named
-`registry_transaction_family_coexists_with_generic_inventory_without_generic_parsing`,
-`generic_journal_authority_excludes_registry_intents`, and
-`unknown_transaction_family_remains_refused`, plus the existing complete
-generic recovery/currentness and committed-registry replay walls. Positive
-proof must traverse the actual guard, generic recovery/currentness, and
-committed-registry owner. Negative proof must include a registry intent that
-would fail generic parsing, an unknown fourth family, a linked registry family,
-stale/malformed generic transactions, registry crash recovery, owner mismatch,
-and replay/currentness refusal.
+For HCM publication only, evaluation under the existing lineage lock may read
+one exact committed registry transition and its authenticated retained witness.
+The selected mutation path validates capsule semantics before candidate
+eligibility and persistence as non-authoritative evidence. It validates the
+publisher proof before promotion planning, authoritative canonical persistence,
+immediately before effect, during pending/installed recovery, and before
+current reads. The lock spans the final currentness check and effectful
+promotion so the registry cannot advance between authorization and publication.
 
-Selector consistency proof compares SPEC, selector, plan, and todo and shows
-the same four production paths, exact five existing symbols including the
-conditional LOW method, 2,000-line ceiling, three test families, and no claim
-that the two selected lineage-store methods remain unchanged.
+Committed verification has two private results: current exact canonical output
+or historical exact displaced output with one unique committed direct
+successor. Only the first can support a current witness. Markerless installed
+recovery reconstructs an exact native/publication result only from durable
+facts and never invents a live-handle claim. If reconstruction is impossible
+or conflicts, one HCM-specific quarantine record captures bounded schema,
+journal identity, output fingerprint, phase, and reason. It is not generic
+authority, and it prevents only HCM authority consumption/publication until
+explicit future repair. All other generic recovery remains available.
+
+Required lineage proof includes O1 -> O2 -> O3 cold recovery; historical O1
+verification after O2/O3 owns the canonical path; fault injection after every
+registry, promotion, installation, native-marker, publication-marker, journal,
+and rename boundary; exact retry and retry conflict; forged/missing/ambiguous
+journal witness; cross-repository replay; rollback; unknown family; generic
+non-HCM transaction validation; registry revocation/currentness loss; and
+quarantine diagnostics. Installed-uncommitted output never reads as authority.
 
 ## Test selector
 
@@ -599,17 +866,32 @@ exist. GREEN must prove every SPEC proof obligation, including exact shipped
 replay, non-shipped configurability, six independent dimensions, deterministic
 fingerprints, child narrowing, deny overlap, indeterminate refusal, typed
 memory/validation outcomes, no-effect escalation, transition cardinality, and
-unchanged HCM-3.1/L0-L3 behavior. Authority GREEN must additionally exercise
-the real selected-artifact/guard/generic-recovery/committed-registry path and
-all eleven exact subjects, plus raw/semantic/currentness/profile/stack/head
-mismatch, malformed/extra/missing binding fields, credential cardinality and
-coverage, authenticator refusal/RP/UV/credential/signature/counter failures,
-entropy failure through an internal test seam, exact replay, changed subject,
-and captured response refusal across fresh resolvers with zero and nonzero
-counters. Promotion GREEN must use an actual resolved source envelope and stack
-to prove strict target-memory rank, ordered source-envelope admissions, typed
-semantic-memory target/result, compare-and-write applied/refused/stale behavior,
-and refusal of artifact/contract/posture or durable-memory claims.
+unchanged HCM-3.1/L0-L3 behavior. Authority GREEN must exercise the real empty
+target -> intake -> candidate -> authenticated registry promotion -> generic
+committed lineage -> current resolver path, never direct seeding. It covers all
+eleven exact authority subjects and publisher proof.
+
+Capsule negative proof covers duplicate keys, invalid UTF-8/I-JSON, BOM,
+trailing bytes, alternate encodings, extra/missing members, mixed-null
+predecessor quartet, every size/depth/member/string/escape limit, unknown tuple,
+non-byte-identical JCS, all six cross-domain fingerprint substitutions, each of
+the exact 53 pointer validations, wrong predecessor, and cross-repository/
+profile/stack substitution. Generic structural success alone must remain
+non-authoritative.
+
+Currentness negative proof covers direct seed, ungated committed read, generic
+`eligible_without_approval`, stale cache and clone, later head, credential
+revocation, mapping loss, restored old bytes, rollback, forged/missing/
+ambiguous witness, failed promotion, and O1 historical proof structurally
+unable to reach every operational API. Positive/negative replacement proof
+covers O1 -> O2 -> O3 cold recovery, exact retry conflict, crash injection at
+every registry/promotion/publication/journal boundary, markerless installed
+recovery, quarantine, and unchanged non-HCM recovery.
+
+Promotion GREEN also uses an actual resolved source envelope and stack to prove
+strict target-memory rank, ordered source-envelope admissions, typed semantic-
+memory target/result, compare-and-write applied/refused/stale behavior, and
+refusal of artifact/contract/posture or durable-memory claims.
 
 No test may claim Projection, Snapshot, flow/pipeline adoption, posture, SDK,
 transport, release, publication, or downstream proof.
@@ -645,21 +927,33 @@ comparison is unavailable, not GREEN.
 - HCM-3.6 posture;
 - SDK, CLI/Tauri/Substrate/HTTP/dock/transport work;
 - new dependency, crate, module framework, unsafe/native/platform machinery;
+- generic atomic-document/capsule support, a second artifact family or
+  consumer, per-inner-field provenance/query/update support;
+- staged H2 installation authorization followed by H3 operational activation;
 - shipped-definition/profile/vocabulary mutation;
 - release, publication, push, or remote reconciliation;
 - unrelated cleanup or immutable-history repair.
+
+The H2/H3 continuous-availability design is future work and non-authority.
+It would remove the deliberately accepted no-authority interval, but requires
+additional registry/state-machine semantics and crash proof. Its sole trigger
+is a future explicit product requirement or SLO for uninterrupted Context
+Resolution across replacement and every supported crash boundary. This slice
+documents it in `decision/2026-08-04-deferred-continuous-availability.md` and
+does not implement it.
 
 ## Stop conditions
 
 Stop for any required scope beyond the ceilings, new public/dependency/schema/
 unsafe/transport authority, HCM-3.3+ behavior, changed shipped identity,
-unresolved HIGH/CRITICAL impact, contract contradiction not repairable inside
+any additional HIGH/CRITICAL symbol, contract contradiction not repairable inside
 HCM-3.2, mandatory delegation failure, exhausted causal budget, or unresolved
 P1/P2. Local findings, proof gaps, and bounded remediation remain parent-owned.
 
-The authority-resolution, candidate-mapping, exact-public-signature,
-lineage-family routing, and named HIGH/CRITICAL conditions are now selected.
-The fresh slice remains stopped only until its selector review is CLEAN. A
-validator refusal, P1/P2, additional public/path/dependency/risk expansion, or
-causal-budget contradiction stops fail closed; the fresh identities may not be
-renamed or reset.
+The JCS capsule, 53-pointer validation, fingerprint domains, external publisher
+proof, private states, exact currentness, minimum replacement floor, kernel
+semantics, exact public signatures, five-path ceiling, and named risks are now
+selected. The fresh slice remains stopped until this complete selector review
+is CLEAN. Validator refusal, unsafe bootstrap-only reduction, inability to fit
+the recovery floor, P1/P2, or any public/path/dependency/risk expansion stops
+fail closed; identities may not be renamed or reset.

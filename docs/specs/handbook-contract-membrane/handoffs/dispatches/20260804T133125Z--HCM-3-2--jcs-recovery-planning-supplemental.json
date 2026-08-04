@@ -1,0 +1,174 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260804T133125Z--HCM-3-2--jcs-recovery-planning-supplemental",
+  "created_at_utc": "2026-08-04T13:31:25Z",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260803T060000Z--HCM-3-2--orchestration--authority-binding-lineage-required"
+  ],
+  "parent_orchestration_id": "20260804T124829Z--HCM-3-2--context-resolution-jcs-recovery",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-JCS-P1-selector-authority",
+  "subject_fingerprint": "sha256:506a7a630063deb95593396d4ae684d1d727ab3b7778911c1bda2155390c54b2",
+  "review_cycle": {
+    "kind": "supplemental_causal",
+    "cycle_id": "hcm-3.2-jcs-recovery-planning-supplemental-1",
+    "trigger_run_ids": ["hcm32_planning_closure"],
+    "finding_refs": ["HCM32-JCS-PLN-DISC-003"]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-04T12:48:29Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-jcs-recovery-whole-slice",
+        "packet_ids": [
+          "HCM-3.2-JCS-P1-selector-authority",
+          "HCM-3.2-JCS-P2-capsule-authority-kernel",
+          "HCM-3.2-JCS-P3-replacement-recovery",
+          "HCM-3.2-JCS-P4-proof",
+          "HCM-3.2-JCS-P5-final-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:fedd78206b2b1d1b830bb26b084b90684733f0a71c85e9f6ca5637c697358753"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:34ccbe5a9fb4f6ec07b588e2354166c876ff82dee36b3559097acafde66d82b2",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-jcs-recovery-whole-slice",
+    "outcome_registry_fingerprint": "sha256:fedd78206b2b1d1b830bb26b084b90684733f0a71c85e9f6ca5637c697358753",
+    "review_stage": "planning",
+    "stage_transition": {"kind": "continue", "from_stage": "planning"},
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260804T132138Z--HCM-3-2--jcs-recovery-planning-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-jcs-recovery-planning-supplemental-convergence-1",
+    "completed_at_utc": "2026-08-04T13:31:20Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "repair only the partially open HCM32-JCS-PLN-DISC-003 response-chain wording without changing parent, scope, owner, risk, or representation",
+        "evidence_ref": "selector and SPEC now bind transition authorization pair -> retained assertion -> retained decoded-response pair -> strict raw-response byte equality; remediation record and checklist record the bounded causal repair"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "replay live approver registry transition, assertion, decoded response, and raw response ownership fields",
+        "evidence_ref": "approver_registry_mutation.rs live chain is transition authorization_ref/fingerprint, assertion decoded_response_ref/fingerprint, response raw_response_base64; no code or owner change"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted six-entry repo-path-NUL-SHA256-newline supplemental subject",
+        "evidence_ref": "aggregate sha256:506a7a630063deb95593396d4ae684d1d727ab3b7778911c1bda2155390c54b2"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 and Markdown fence-balance inspection",
+        "evidence_ref": "all six subject files decode and fences balance"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-3.2",
+        "evidence_ref": "parent command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md", "sha256": "a0f6d096f2dd99427f57b05e7d0725238ed393f4b8f770fe7381aa0e3a34610d"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md", "sha256": "dc78f9f5c7fecf86c6a914177d6cfac941b2e836bbfadac4857bb9eb39947a05"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-04-deferred-continuous-availability.md", "sha256": "d1b7ec8dab45546f5d3a08d2253e4e56132f2800812a5817363177b9dcd4f75e"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md", "sha256": "7a5fbc4541676a2c3c85b0906e3be8c8fefcfd4196983be68d452c27f93c093e"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md", "sha256": "061eec13324052e097b2572061a75b53d84f13fe34ddb2b97b697480d503d53b"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md", "sha256": "4282d2c24a24035cd513097ef965202ab2c9a60623e39448e9d34ff35127527d"}
+    ],
+    "aggregate_fingerprint": "sha256:506a7a630063deb95593396d4ae684d1d727ab3b7778911c1bda2155390c54b2"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 first planning supplemental closure",
+    "scope_horizon": "only partially open HCM32-JCS-PLN-DISC-003",
+    "detail_resolution": "exact existing transition-to-assertion-to-decoded-response-to-raw-bytes chain",
+    "temporal_horizon": "first immediately causal supplemental after planning closure FINDINGS and before tests/Rust",
+    "authority_horizon": "same HCM-3.2 parent/outcome/registry/budget/path/risk/public ceiling; no general rediscovery or expansion",
+    "memory_horizon": "immutable discovery and closure dispatch/results, bounded causal repair, live registry record chain, and exact supplemental subject",
+    "validation_horizon": "close original finding 003 or report only a directly caused/unmasked P1/P2"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md", "sections": ["Authority and publication proof"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md", "sections": ["Publisher authority and real owner pipeline"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260804T132000Z--jcs-recovery-planning-remediation.md", "sections": ["HCM-3.2 JCS/recovery planning discovery remediation"]}
+  ],
+  "repo_truth": "The different-fresh closure closed findings 001, 002, and 004 and kept original finding 003 partially open only because one sentence skipped the retained assertion hop. The bounded repair now matches live ownership exactly. No new closure-run P1/P2, code/test/implementation check, public/path/risk/owner change, commit, handoff, ledger, publication, or protected mutation exists.",
+  "allowed_scope": [
+    "Review only whether HCM32-JCS-PLN-DISC-003 is now closed by the exact two-hop retained pair chain and strict raw-response byte equality.",
+    "Verify transition authorization pair selects the assertion, assertion decoded-response pair selects the response, and the publisher raw response strictly equals the response record raw bytes.",
+    "Return CLEAN only if finding 003 closes and no directly caused/unmasked P1/P2 remains."
+  ],
+  "non_goals": [
+    "Do not reopen findings 001, 002, or 004 or general discovery.",
+    "Do not edit, stage, commit, delegate, test, implement Rust, create dispatches/handoffs, write ledger, or publish.",
+    "Do not widen representation, publisher schema, paths, risks, API, owner, dependency, generic/registry semantics, H2/H3, or HCM-3.3+."
+  ],
+  "tasks": [
+    "Return the exact closure disposition for HCM32-JCS-PLN-DISC-003 with amended and live-code evidence.",
+    "Report only a P1/P2 directly caused or unmasked by this two-hop wording repair.",
+    "Return terminal CLEAN only if planning has no unresolved P1/P2."
+  ],
+  "contracts_and_gates": [
+    "This is supplemental causal cycle one; it cannot reopen discovery.",
+    "No cycle follows CLEAN.",
+    "Tests, RED, and Rust remain forbidden until CLEAN."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if original finding 003 remains partial or the repair directly causes/unmasks P1/P2.",
+    "Return BLOCKED for any scope/authority expansion.",
+    "Report subject-integrity or causal failure without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}
