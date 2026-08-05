@@ -1,0 +1,238 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T184800Z--HCM-3-3--pg-proj-01-proof-obligation-closure",
+  "created_at_utc": "2026-08-05T18:48:00Z",
+  "source_handoff_ids": [
+    "20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed"
+  ],
+  "parent_orchestration_id": "20260805T184000Z--HCM-3-3--pg-proj-01-proof-obligation-remediation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "doubt-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-P2-pg-proj-01-proof-remediation-causal-review",
+  "subject_fingerprint": "sha256:71aa5eeeb750994bdbf7811940ba9e453cd8e8045b15e6e7a1fd7e22c7a8aa50",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.3-pg-proj-01-proof-obligation-closure-1",
+    "trigger_run_ids": [
+      "/root/hcm33_proj01_discovery"
+    ],
+    "finding_refs": [
+      "HCM33-PROJ01-DISC-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T18:40:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.3-pg-proj-01-multi-envelope-proof-remediation",
+        "packet_ids": [
+          "HCM-3.3-P2-pg-proj-01-proof-remediation-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184000Z--pg-proj-01-corrective-selector-and-preflight.md"
+      }
+    ],
+    "fingerprint": "sha256:bc25a71a766cb010a24aa091b4ec633e500bebef3db642cf17b3d117a575ac9f"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:de7e8eb43c3dda05d0718c69775ea9c156cab87fe5f32706bdad06ca2a84965c",
+    "integrated_outcome_id": "hcm-3.3-pg-proj-01-multi-envelope-proof-remediation",
+    "outcome_registry_fingerprint": "sha256:bc25a71a766cb010a24aa091b4ec633e500bebef3db642cf17b3d117a575ac9f",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260805T184200Z--HCM-3-3--pg-proj-01-proof-obligation-discovery"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.3-pg-proj-01-proof-obligation-closure-convergence",
+    "completed_at_utc": "2026-08-05T18:47:33Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "replay the sole discovery P2 and its one parent-owned consolidated planning-only remediation against the unchanged parent, outcome registry, authority, path ceiling, and non-goals",
+        "evidence_ref": "Run /root/hcm33_proj01_discovery owns HCM33-PROJ01-DISC-001. The repaired subject contains only SPEC.md, tasks/plan.md, the frozen corrective selector/preflight, and the parent remediation proof."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "re-inventory the complete four-file repaired subject and every named context-only sibling/prohibited surface",
+        "evidence_ref": "No code, test, fixture, profile, schema, registry, validator, historical selector/todo, Snapshot Memory, HCM-3.2, HCM-3.4+, pipeline, adopter, consumer, transport, protected checkout, or remote path entered the subject."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinally sorted repo-path-NUL-SHA256-newline-v1 manifest plus the frozen registry and derived causal budget",
+        "evidence_ref": "Subject sha256:71aa5eeeb750994bdbf7811940ba9e453cd8e8045b15e6e7a1fd7e22c7a8aa50; registry sha256:bc25a71a766cb010a24aa091b4ec633e500bebef3db642cf17b3d117a575ac9f; budget sha256:de7e8eb43c3dda05d0718c69775ea9c156cab87fe5f32706bdad06ca2a84965c."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode, Markdown fence balance, and exact repaired-subject path inspection",
+        "evidence_ref": "All four manifest files decode as strict UTF-8, Markdown fences are balanced, and the subject path set equals the allowed repaired planning subject."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "corrected trailing-space/tab scan plus git diff --check",
+        "evidence_ref": "Both checks exited clean after the consolidated remediation and before this closure dispatch was created."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+        "sha256": "1b6f9ad13ccebbafdedf8016c02626a01ebb3c64e1f8044e8989be611e20d574"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184000Z--pg-proj-01-corrective-selector-and-preflight.md",
+        "sha256": "18d7f31ef5c58ff57fb5ae9b0274205bfed85e2b11127481f11a944402d41cf2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184700Z--pg-proj-01-discovery-remediation.md",
+        "sha256": "e8b96fae085d554294535e816d638a2bcd9aa9713a7ef44a9c019b156dceef2c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+        "sha256": "ebdb6f4011467c45759ec5d3b20ed9497e2036b95f7fac22087a72464b496696"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:71aa5eeeb750994bdbf7811940ba9e453cd8e8045b15e6e7a1fd7e22c7a8aa50"
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 PG-PROJ-01 corrective planning closure",
+    "scope_horizon": "the sole discovery P2 and its consolidated repair in the exact corrective planning subject",
+    "detail_resolution": "fixed source/profile/vocabulary/definition closure under at least two authorized envelopes, per-envelope deterministic replay, cross-envelope output/result accounting, full provenance, and unchanged authority",
+    "temporal_horizon": "delta-focused closure after one discovery and one consolidated remediation",
+    "authority_horizon": "planning documents and parent-local evidence only; no implementation, gate closure, sibling slice, protected checkout, remote, or publication authority",
+    "memory_horizon": "the discovery run/finding, frozen corrective registry, immutable source handoff, and parent-owned remediation proof",
+    "validation_horizon": "different-fresh closure of HCM33-PROJ01-DISC-001 followed by proof wall and local-only two-commit closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184000Z--pg-proj-01-corrective-selector-and-preflight.md",
+      "sections": [
+        "Selected corrective objective",
+        "Review subject and cadence",
+        "Hard non-goals and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184700Z--pg-proj-01-discovery-remediation.md",
+      "sections": [
+        "Finding validation",
+        "Consolidated parent remediation",
+        "Scope and proof disposition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Projection semantics",
+        "Collapse and expansion",
+        "Projection provenance"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Projection definition",
+        "Projection request",
+        "Projection result",
+        "Projection request/result field authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-PROJ-01",
+        "PG-PROJ-02"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery produced exactly HCM33-PROJ01-DISC-001, a valid planning-only P2. The parent changed only SPEC.md and tasks/plan.md and added one remediation proof; the historical decision/todo and completed parent remain untouched. PG-PROJ-01 and PG-PROJ-02 remain open, and no implementation or adoption claim exists.",
+  "allowed_scope": [
+    "Perform one different-fresh, delta-focused, read-only closure of HCM33-PROJ01-DISC-001 against the exact four-file repaired subject.",
+    "Verify that the repair fixes source/profile/vocabulary/definition identity across at least two authorized envelopes, two deterministic replays per envelope, complete per-envelope and cross-envelope accounting/provenance/fingerprints, correctly equal or distinct output treatment, source byte/fingerprint immutability, and authority_effect: none.",
+    "Report only an unresolved trigger or a P1/P2 directly caused or unmasked by this remediation. Do not reopen general discovery or repair findings."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery, report unrelated improvements as blocking, edit, format, stage, commit, delegate, create a dispatch/handoff, write the ledger, or run product implementation tests.",
+    "Do not implement Projection behavior, close PG-PROJ-01 or PG-PROJ-02, create implementation/code proof, alter historical completed lineage, decision/todo, HCM-3.2, HCM-3.4+, code/tests/fixtures/profiles/schemas/registries/validators/templates/skills/tools/dependencies/APIs/versions/release, pipeline/adopters/consumers/transports, protected checkouts, local integration ref, or remote state."
+  ],
+  "tasks": [
+    "Return findings first only if HCM33-PROJ01-DISC-001 remains incomplete or this exact remediation directly caused or unmasked a P1/P2 inside unchanged scope, authority, and risk.",
+    "Check that all non-envelope inputs and source bytes remain fixed across the two authorized envelope cases and that changing them invalidates rather than satisfies the matrix.",
+    "Check two identical replays per envelope, complete ordered evaluations and rule partitions, omissions/proof effects, derivations, lossiness, output/result fingerprints, cross-envelope equality/distinction accounting, source immutability, authority_effect: none, and collapse/expand/no-synthesis boundaries.",
+    "Return CLEAN only if the trigger is closed and no directly caused or unmasked P1/P2 remains for subject sha256:71aa5eeeb750994bdbf7811940ba9e453cd8e8045b15e6e7a1fd7e22c7a8aa50."
+  ],
+  "contracts_and_gates": [
+    "This is the sole different-fresh planning closure for the frozen corrective outcome after one consolidated remediation.",
+    "A CLEAN verdict ends review. A valid directly caused or unmasked P1/P2 may enter only the immediately next supplemental causal cycle, at most twice; P1/P2 cannot be waived.",
+    "No result from this review authorizes implementation, gate closure, sibling-slice work, protected-path mutation, remote interaction, or scope expansion."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if the trigger remains or the remediation directly caused/unmasked a P1/P2; do not repair it.",
+    "Return BLOCKED if closure requires broader authority, implementation evidence, a canonical semantic amendment, a protected path, remote interaction, or unavailable mandatory evidence.",
+    "Report any manifest, causal-lineage, authority, or protected-boundary defect to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

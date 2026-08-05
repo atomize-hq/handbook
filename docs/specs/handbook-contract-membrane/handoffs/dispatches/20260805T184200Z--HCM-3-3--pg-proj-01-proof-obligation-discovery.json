@@ -1,0 +1,238 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T184200Z--HCM-3-3--pg-proj-01-proof-obligation-discovery",
+  "created_at_utc": "2026-08-05T18:42:00Z",
+  "source_handoff_ids": [
+    "20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed"
+  ],
+  "parent_orchestration_id": "20260805T184000Z--HCM-3-3--pg-proj-01-proof-obligation-remediation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "doubt-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-P2-pg-proj-01-proof-remediation-causal-review",
+  "subject_fingerprint": "sha256:d5a06414b99d3b1abfd00f1cac1885276c564fcc550ad8bd478a9262be546ef9",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.3-pg-proj-01-proof-obligation-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T18:40:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.3-pg-proj-01-multi-envelope-proof-remediation",
+        "packet_ids": [
+          "HCM-3.3-P2-pg-proj-01-proof-remediation-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184000Z--pg-proj-01-corrective-selector-and-preflight.md"
+      }
+    ],
+    "fingerprint": "sha256:bc25a71a766cb010a24aa091b4ec633e500bebef3db642cf17b3d117a575ac9f"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:de7e8eb43c3dda05d0718c69775ea9c156cab87fe5f32706bdad06ca2a84965c",
+    "integrated_outcome_id": "hcm-3.3-pg-proj-01-multi-envelope-proof-remediation",
+    "outcome_registry_fingerprint": "sha256:bc25a71a766cb010a24aa091b4ec633e500bebef3db642cf17b3d117a575ac9f",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.3-pg-proj-01-proof-obligation-discovery-convergence",
+    "completed_at_utc": "2026-08-05T18:41:07Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "read the HCM-3.3 phase row, immutable completed HCM-3.3 handoff, canonical Projection semantics and field authority, PG-PROJ-01/02, live 07/08/09 protocol, and the complete three-file pre-repair subject",
+        "evidence_ref": "The corrective selector freezes one new planning-only parent and outcome; the existing specification and plan remain the complete pre-repair subject for independent discovery."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory the corrective selector, HCM-3.3 specification and plan, plus every named sibling seam and prohibited implementation surface",
+        "evidence_ref": "The subject contains only three planning documents. Code, tests, fixtures, profiles, schemas, registries, validators, Snapshot Memory, HCM-3.2, HCM-3.4+, pipeline, adopters, consumers, and transports are context-only non-goals."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinally sorted repo-path-NUL-SHA256-newline-v1 manifest, canonical-json outcome registry, and derived causal budget",
+        "evidence_ref": "Subject sha256:d5a06414b99d3b1abfd00f1cac1885276c564fcc550ad8bd478a9262be546ef9; registry sha256:bc25a71a766cb010a24aa091b4ec633e500bebef3db642cf17b3d117a575ac9f; budget sha256:de7e8eb43c3dda05d0718c69775ea9c156cab87fe5f32706bdad06ca2a84965c."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode, Markdown fence balance, and exact subject-path allowlist inspection",
+        "evidence_ref": "All three manifest files decode as strict UTF-8, Markdown fences are balanced, and all paths are inside the corrective planning subject."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "corrected trailing-space/tab scan plus git diff --check",
+        "evidence_ref": "Both checks exited clean before this dispatch was created."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+        "sha256": "982bf1a21cfd60006d259dfdbedbdd3b0eb8d4af93c6efbf8ac1028e551bdc8b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184000Z--pg-proj-01-corrective-selector-and-preflight.md",
+        "sha256": "18d7f31ef5c58ff57fb5ae9b0274205bfed85e2b11127481f11a944402d41cf2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+        "sha256": "c1ec6b6a99d7e39a8aa736f3d9ea103aa7e4015248cae6990d1f6f83925e2783"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:d5a06414b99d3b1abfd00f1cac1885276c564fcc550ad8bd478a9262be546ef9"
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 PG-PROJ-01 corrective planning discovery",
+    "scope_horizon": "one corrective future-proof obligation for the existing HCM-3.3 selector-plan",
+    "detail_resolution": "one byte-identical source/profile/definition closure evaluated under at least two authorized Resolution envelopes with deterministic accounted outcomes and unchanged authority",
+    "temporal_horizon": "pre-repair discovery for a new post-closeout corrective parent",
+    "authority_horizon": "planning documents and parent-local review evidence only; no implementation, gate closure, sibling slice, protected checkout, remote, or publication authority",
+    "memory_horizon": "immutable completed HCM-3.3 source handoff, new selector/preflight, and one frozen corrective outcome registry",
+    "validation_horizon": "complete-subject discovery, consolidated P1/P2 remediation when required, different-fresh closure, and local-only two-commit closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184000Z--pg-proj-01-corrective-selector-and-preflight.md",
+      "sections": [
+        "Selected corrective objective",
+        "Frozen causal outcome registry",
+        "Review subject and cadence",
+        "Allowed primary and closeout scope",
+        "Hard non-goals and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.3 — Deterministic Projection engine"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Projection semantics",
+        "Collapse and expansion",
+        "Projection provenance"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Projection definition",
+        "Projection request",
+        "Projection result",
+        "Projection request/result field authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-PROJ-01",
+        "PG-PROJ-02"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed.json",
+      "sections": [
+        "entire completed handoff",
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "The assigned clean detached checkout and dedicated local ref began at b35aaa1dd63d78901b6ef468bee55a22a3874b73/tree 2db37cbff5615f8563a510701da531876c69ee06 with required ancestor 12c203f605c26ce7d1911e4ee60c0de205822000. The prior HCM-3.3 parent is completed immutable context. PG-PROJ-01 and PG-PROJ-02 remain open. The three-file discovery subject is documentation-only and the protected checkout observations are frozen.",
+  "allowed_scope": [
+    "Review the exact three-file pre-repair subject read-only against the exact PG-PROJ-01 gate and the new corrective selector.",
+    "Independently determine whether the future proof wall explicitly holds one exact byte-identical source/profile/vocabulary/definition closure fixed while evaluating at least two authorized envelopes, and whether each envelope has deterministic replay, complete accounting, provenance/fingerprints, correctly distinct or accounted output, and authority_effect: none.",
+    "Return fresh HCM33-PROJ01-DISC identifiers only for independently established defects in this exact selected proof obligation; do not repair findings."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, create another dispatch, write a handoff or ledger, delegate, or run product implementation tests.",
+    "Do not implement Projection behavior, close PG-PROJ-01 or PG-PROJ-02, create an implementation/code selector or proof, alter completed HCM-3.3 lineage, HCM-3.2, HCM-3.4+, code/tests/fixtures/profiles/schemas/registries/validators/templates/skills/tools/dependencies/APIs/versions/release, pipeline/adopters/consumers/transports, protected checkouts, local integration ref, or remote state."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit, with exact file/section, violated contract or gate, why the proof wall is insufficient, smallest in-scope remediation, and missing verification.",
+    "Check that one exact source truth, exact resolved profile and vocabulary, and exact ProjectionDefinition remain byte-identical across at least two authorized envelopes rather than allowing different inputs to masquerade as a Resolution comparison.",
+    "Check deterministic repeated replay for each envelope; complete included/omitted/not-applicable, proof-effect and lossiness accounting; exact source/profile/vocabulary/definition/envelope and output/result fingerprints; output distinction or correct equality accounting; and unchanged source bytes/authority with authority_effect: none.",
+    "Check preservation of reveal/derive-only, no-synthesis, collapse-without-widening, and expansion-as-broader-authorized-request-or-escalation boundaries.",
+    "Return CLEAN only if no valid P1/P2 exists for subject sha256:d5a06414b99d3b1abfd00f1cac1885276c564fcc550ad8bd478a9262be546ef9."
+  ],
+  "contracts_and_gates": [
+    "This is one complete-subject planning discovery under a new frozen parent/outcome registry; it does not reuse or alter the completed parent budget.",
+    "P1/P2 cannot be waived or deferred. P3/P4 may remain non-blocking only with exact disposition under the live inventory rules.",
+    "No review may follow CLEAN. A closure cycle is authorized only after completed consolidated remediation of discovery P1/P2 findings."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair when the selected proof wall is incomplete, ambiguous, non-deterministic, overbroad, or cannot distinguish a true multi-envelope comparison from changed source/profile/definition inputs.",
+    "Return BLOCKED if validation requires any scope outside the exact documentation subject, a canonical semantic amendment, implementation evidence, protected checkout mutation, remote interaction, or unavailable mandatory review capability.",
+    "Report any manifest, causal-lineage, authority, or protected-boundary defect to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

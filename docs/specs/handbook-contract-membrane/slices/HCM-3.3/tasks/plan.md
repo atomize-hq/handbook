@@ -76,6 +76,20 @@ lossless precedence matrix; evaluator-semantic drift changes fingerprints or
 refuses; no false pass for omitted required claims; source authority remains
 unchanged for artifact, snapshot, delta, and semantic-record sources.
 
+For `PG-PROJ-01`, the future proof fixture must freeze one byte-identical
+source plus its exact source/profile/vocabulary/definition closure and the
+same operation, surface, purpose, and currentness inputs. It then supplies at
+least two separately authorized exact envelope pairs as the only changed
+input, executes two identical replays per envelope, and compares the complete
+outputs and results. Per-envelope output bytes/fingerprints, ordered evaluation
+fingerprints, result fingerprint, rule partition, omissions/proof effects,
+derivations, and lossiness must replay exactly. Cross-envelope assertions must
+trace every difference to the definition's Resolution minima, require output
+fingerprint differences when output bytes differ, explicitly account for any
+correctly equal output, and prove that result fingerprints bind their distinct
+envelope pairs. Before/after source bytes and fingerprint remain equal and
+every result is exactly `authority_effect: none`.
+
 **Dependencies:** work item 2.
 
 ### 4. Enforce collapse/expand and no-synthesis boundaries
@@ -95,9 +109,15 @@ and forbidden synthesis/remote/executable definition cases.
 selected portions of `PG-PROJ-01` and `PG-PROJ-02`, with no Snapshot Memory,
 pipeline, consumer, public API, or Phase-3 exit claim.
 
-**Verification:** targeted and regression proof, independent discovery/
-remediation/closure cadence, complete applicable workspace wall, and an exact
-scope/classification statement.
+**Verification:** targeted and regression proof, including the work-item-3
+two-envelope matrix with ordinally complete per-rule accounting and complete
+source/profile/vocabulary/definition/envelope/output/result provenance;
+independent discovery/remediation/closure cadence; complete applicable
+workspace wall; and an exact scope/classification statement. The proof case is
+invalid if a source byte, non-envelope pair/fingerprint, operation, surface,
+purpose, or currentness input changes between envelopes. Both envelopes must
+already be authorized, and the engine must not perform implicit expansion,
+synthesis, source mutation, or authority promotion.
 
 **Dependencies:** work items 1 through 4 and a newly authorized implementation
 selector.

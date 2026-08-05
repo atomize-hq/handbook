@@ -98,6 +98,30 @@ transport migration remain separate work.
 
 A separately authorized implementation selector must require at least:
 
+- one `PG-PROJ-01` multi-envelope matrix that starts from one
+  byte-identical source truth and holds its exact source ref/fingerprint,
+  resolved-profile ref/fingerprint, vocabulary ref/fingerprint,
+  `ProjectionDefinition` ref/fingerprint, operation, surface, purpose, and
+  currentness closure constant while varying only the exact paired
+  ref/fingerprint of at least two independently authorized Context Resolution
+  envelopes;
+- two byte-identical deterministic replays under each envelope. Within each
+  envelope, output bytes/fingerprint, ordered disclosure-evaluation
+  fingerprints, complete result fingerprint, and all inclusion, omission,
+  `not_applicable`, proof-effect, derivation, and lossiness entries must replay
+  exactly;
+- an explicit cross-envelope comparison derived from the unchanged definition
+  rules. It must identify every envelope-caused rule-disposition difference,
+  require distinct output bytes/fingerprints whenever those rules change the
+  output, and explicitly justify and account for any equal output
+  bytes/fingerprint when the rules leave output unchanged. The result
+  fingerprints must remain deterministic and bind their distinct envelope
+  pairs; changing any non-envelope source/profile/vocabulary/definition input
+  invalidates the case rather than counting as a Resolution projection;
+- complete provenance for every replay, including exact source, profile,
+  vocabulary, definition, envelope, derivation input/output, output, and result
+  fingerprints, plus before/after equality of source bytes and source
+  fingerprint and exact `authority_effect: none`;
 - deterministic repeated reveal and derive results from identical exact inputs;
 - positive replay/provenance for a declaratively configured registered custom
   kind using the same engine, plus refusal for invalid custom configuration;
@@ -120,6 +144,12 @@ A separately authorized implementation selector must require at least:
 - provenance and output/result fingerprint replay with `authority_effect: none`;
 - proof of both open gates `PG-PROJ-01` and `PG-PROJ-02` only to the exact
   selected implementation boundary, with no Phase-3 exit or Snapshot claim.
+
+The multi-envelope case is not an expansion operation. Both envelopes must be
+valid before their requests are constructed; the engine may neither widen the
+narrower request nor manufacture absent detail. The case must preserve the
+collapse boundary and must treat any need for broader unauthorized authority
+as a separate typed escalation rather than as a successful Projection.
 
 ## Frozen outcome registry and review cadence
 
