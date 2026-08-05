@@ -1,0 +1,358 @@
+{
+  "schema_id": "handbook.gitnexus-change-detection-evidence",
+  "schema_version": "1.0",
+  "created_at_utc": "2026-08-05T22:51:21Z",
+  "supersedes": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T223701Z--gitnexus-canonical-population-correction.json",
+  "finding_closed": "HCM33-I1-GNX-SUPP-CLOSURE-001",
+  "baseline": {
+    "commit": "5542371afef828fd83282aa3971262e6ad1b62ed",
+    "tree": "999ab75512caba5a4b23c47df931206f01c3f138"
+  },
+  "target": {
+    "kind": "final_staged_pre_primary_subject",
+    "actual_paths": [
+      "crates/engine/src/context_resolution.rs",
+      "crates/engine/src/lib.rs",
+      "crates/engine/src/projection.rs",
+      "crates/engine/src/projection/fixtures/definition.json",
+      "crates/engine/src/projection/fixtures/resolved-profile.json",
+      "crates/engine/src/projection/fixtures/source.json",
+      "crates/engine/src/projection/fixtures/vocabulary.json",
+      "crates/engine/src/projection/tests.rs"
+    ],
+    "symbol_bearing_paths": [
+      "crates/engine/src/projection.rs",
+      "crates/engine/src/projection/tests.rs",
+      "crates/engine/src/context_resolution.rs",
+      "crates/engine/src/lib.rs"
+    ]
+  },
+  "canonicalization": {
+    "reason": "Single raw GitNexus replays returned duplicate/pseudo rows and nondeterministic row counts. This artifact preserves every raw fingerprint and admits only exact-path, non-File, unique IDs present in all sixteen bounded replays.",
+    "algorithm": "16-replay exact-path unique-ID intersection v1",
+    "run_fingerprints": [
+      {
+        "raw_output_fingerprint": "sha256:1269e8d922e77f61fc438b2843c405d84c9214f2e37e8c30536ef77711702260",
+        "reported": {
+          "changed_count": 97,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 96
+      },
+      {
+        "raw_output_fingerprint": "sha256:53a76b520a508098e2f86196016639dc1d5091261dfc0a413ce68363201d7dc3",
+        "reported": {
+          "changed_count": 99,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 99
+      },
+      {
+        "raw_output_fingerprint": "sha256:27ace47aab2098210466f73a14488ce1653dfa9f29ef12ff724e3bbd690143c0",
+        "reported": {
+          "changed_count": 99,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 99
+      },
+      {
+        "raw_output_fingerprint": "sha256:c44bd222d150c91fab8c330d9b1a4dda3bd68cac025475a1dd80c6f1c38cff1f",
+        "reported": {
+          "changed_count": 96,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 96
+      },
+      {
+        "raw_output_fingerprint": "sha256:c7ba9902c121ad1eb89dd328c8ded53331584dd916beab4f24bbb38e15a31be5",
+        "reported": {
+          "changed_count": 110,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 97
+      },
+      {
+        "raw_output_fingerprint": "sha256:7627aebc7f1e0ab3aa9f15465f5c715e09e4d46c7fd76e2c2097a9a6dd324275",
+        "reported": {
+          "changed_count": 99,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 96
+      },
+      {
+        "raw_output_fingerprint": "sha256:1b2148ec490b7dd25bf098abd78b30683817d565bec1a66c43b6db5d4b86a837",
+        "reported": {
+          "changed_count": 100,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 100
+      },
+      {
+        "raw_output_fingerprint": "sha256:236493ff4bbec40f0f74eea207c813604669af2885b2a09e8863bb6cec9348d8",
+        "reported": {
+          "changed_count": 105,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 105
+      },
+      {
+        "raw_output_fingerprint": "sha256:be3f05eed2343894edcb0811a33edb1e3ccd179dfdae3a42745e0c6eb4b9e900",
+        "reported": {
+          "changed_count": 102,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 99
+      },
+      {
+        "raw_output_fingerprint": "sha256:60474d3bbd05164faaf30297a96c3f5d95ce32b8386b91b6acca4544fd2f02cb",
+        "reported": {
+          "changed_count": 99,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 97
+      },
+      {
+        "raw_output_fingerprint": "sha256:69f87684901914ed307ce506161685fd0d08a2d3545ae93bc112550a300dbc30",
+        "reported": {
+          "changed_count": 107,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 99
+      },
+      {
+        "raw_output_fingerprint": "sha256:5ead60cd78acd6feaee25966f6ab1e7966f537b0a621a048b34fe6556962c3fd",
+        "reported": {
+          "changed_count": 99,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 96
+      },
+      {
+        "raw_output_fingerprint": "sha256:aada71b3e244778d97e325060ae4b1d5e77c1dac88d90d6301815ad7df4e037d",
+        "reported": {
+          "changed_count": 130,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 98
+      },
+      {
+        "raw_output_fingerprint": "sha256:b9a7483a8a3c9a8dacc06e693677fec74c1d2107cafb775eb5808a1cc1e2ce4d",
+        "reported": {
+          "changed_count": 99,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 96
+      },
+      {
+        "raw_output_fingerprint": "sha256:d96cf54dacb38b6382195aadbd2cd2cfc307f6536445967f9d8c6d4ba130251c",
+        "reported": {
+          "changed_count": 97,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 96
+      },
+      {
+        "raw_output_fingerprint": "sha256:ecbee075bde315a08f266c9527d275c697c2d3b9aa9137ef68d081d75a4711df",
+        "reported": {
+          "changed_count": 96,
+          "affected_count": 2,
+          "changed_files": 8,
+          "risk_level": "medium"
+        },
+        "filtered_unique_count": 96
+      }
+    ],
+    "stable_symbol_ids": [
+      "Const:crates/engine/src/projection.rs:DECISION_INPUT_FIELDS",
+      "Const:crates/engine/src/projection.rs:SUPPORT_REASON_ORDER",
+      "Const:crates/engine/src/projection/tests.rs:AUTHORITY_INSTANCE_ID",
+      "Const:crates/engine/src/projection/tests.rs:AUTHORITY_KIND_REF",
+      "Const:crates/engine/src/projection/tests.rs:AUTHORITY_PATH",
+      "Const:crates/engine/src/projection/tests.rs:DEFINITION",
+      "Const:crates/engine/src/projection/tests.rs:POLICY_PATHS",
+      "Const:crates/engine/src/projection/tests.rs:PROFILE",
+      "Const:crates/engine/src/projection/tests.rs:SOURCE",
+      "Const:crates/engine/src/projection/tests.rs:STACK_PATH",
+      "Const:crates/engine/src/projection/tests.rs:VOCABULARY",
+      "Enum:crates/engine/src/projection.rs:AuthorityEffect",
+      "Enum:crates/engine/src/projection.rs:CurrentnessMode",
+      "Enum:crates/engine/src/projection.rs:DerivationAlgorithm",
+      "Enum:crates/engine/src/projection.rs:EvaluatedPolicyAction",
+      "Enum:crates/engine/src/projection.rs:FinalDisposition",
+      "Enum:crates/engine/src/projection.rs:MinimumResolutionOutcome",
+      "Enum:crates/engine/src/projection.rs:NotApplicableReason",
+      "Enum:crates/engine/src/projection.rs:OmissionReason",
+      "Enum:crates/engine/src/projection.rs:PayloadAccess",
+      "Enum:crates/engine/src/projection.rs:PolicyAction",
+      "Enum:crates/engine/src/projection.rs:PolicyEvaluation",
+      "Enum:crates/engine/src/projection.rs:ProjectionErrorKind",
+      "Enum:crates/engine/src/projection.rs:ProjectionLossiness",
+      "Enum:crates/engine/src/projection.rs:ProjectionOperation",
+      "Enum:crates/engine/src/projection.rs:ProofEffect",
+      "Enum:crates/engine/src/projection.rs:SupportReason",
+      "Enum:crates/engine/src/projection.rs:SupportStatus",
+      "Enum:crates/engine/src/projection.rs:UpstreamRedactionCheck",
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope",
+      "Impl:crates/engine/src/context_resolution.rs:ProjectionAuthorityView",
+      "Impl:crates/engine/src/projection.rs:DerivationDefinition",
+      "Impl:crates/engine/src/projection.rs:ExactPair",
+      "Impl:crates/engine/src/projection.rs:MinimumResolution",
+      "Impl:crates/engine/src/projection.rs:ProjectionConfiguration",
+      "Impl:crates/engine/src/projection.rs:ProjectionCurrentnessRequest",
+      "Impl:crates/engine/src/projection.rs:ProjectionError",
+      "Impl:crates/engine/src/projection.rs:ProjectionRequest",
+      "Impl:crates/engine/src/projection.rs:ProjectionResult",
+      "Impl:crates/engine/src/projection.rs:ProjectionSource",
+      "Impl:crates/engine/src/projection.rs:TargetSchema",
+      "Impl:crates/engine/src/projection/tests.rs:TestAuthority",
+      "Impl:crates/engine/src/projection/tests.rs:admitted_envelopes.Authenticator",
+      "Impl:crates/engine/src/projection/tests.rs:admitted_envelopes.Fixture",
+      "Module:crates/engine/src/lib.rs:projection",
+      "Module:crates/engine/src/lib.rs:repository_invocation_identity",
+      "Module:crates/engine/src/projection.rs:tests",
+      "Module:crates/engine/src/projection/tests.rs:admitted_envelopes",
+      "Struct:crates/engine/src/context_resolution.rs:ProjectionAuthorityView",
+      "Struct:crates/engine/src/projection.rs:AuthoredDefinition",
+      "Struct:crates/engine/src/projection.rs:AuthoredProfile",
+      "Struct:crates/engine/src/projection.rs:AuthoredVocabulary",
+      "Struct:crates/engine/src/projection.rs:CapturedRevisions",
+      "Struct:crates/engine/src/projection.rs:ClassificationRegistry",
+      "Struct:crates/engine/src/projection.rs:ConfiguredKind",
+      "Struct:crates/engine/src/projection.rs:CurrentnessCheck",
+      "Struct:crates/engine/src/projection.rs:CurrentnessFamilyRequirement",
+      "Struct:crates/engine/src/projection.rs:CurrentnessRequirements",
+      "Struct:crates/engine/src/projection.rs:CurrentnessValidation",
+      "Struct:crates/engine/src/projection.rs:DerivationDefinition",
+      "Struct:crates/engine/src/projection.rs:DerivationRecord",
+      "Struct:crates/engine/src/projection.rs:DisclosureEvaluation",
+      "Struct:crates/engine/src/projection.rs:DisclosurePolicy",
+      "Struct:crates/engine/src/projection.rs:DisclosureRule",
+      "Struct:crates/engine/src/projection.rs:ExactPair",
+      "Struct:crates/engine/src/projection.rs:ExpectedFamilyRevision",
+      "Struct:crates/engine/src/projection.rs:FieldRule",
+      "Struct:crates/engine/src/projection.rs:IncludedRule",
+      "Struct:crates/engine/src/projection.rs:LiveCurrentnessObservation",
+      "Struct:crates/engine/src/projection.rs:LiveCurrentnessQuery",
+      "Struct:crates/engine/src/projection.rs:MinimumResolution",
+      "Struct:crates/engine/src/projection.rs:NotApplicableRule",
+      "Struct:crates/engine/src/projection.rs:OmittedRule",
+      "Struct:crates/engine/src/projection.rs:ProjectionConfiguration",
+      "Struct:crates/engine/src/projection.rs:ProjectionCurrentnessRequest",
+      "Struct:crates/engine/src/projection.rs:ProjectionError",
+      "Struct:crates/engine/src/projection.rs:ProjectionOutput",
+      "Struct:crates/engine/src/projection.rs:ProjectionRequest",
+      "Struct:crates/engine/src/projection.rs:ProjectionResult",
+      "Struct:crates/engine/src/projection.rs:ProjectionSource",
+      "Struct:crates/engine/src/projection.rs:ProjectionSourceSelection",
+      "Struct:crates/engine/src/projection.rs:RevisionSlot",
+      "Struct:crates/engine/src/projection.rs:SourceDocument",
+      "Struct:crates/engine/src/projection.rs:SourceSelector",
+      "Struct:crates/engine/src/projection.rs:SupportEvaluator",
+      "Struct:crates/engine/src/projection.rs:TargetSchema",
+      "Struct:crates/engine/src/projection.rs:UpstreamRedaction",
+      "Struct:crates/engine/src/projection.rs:ValidatedDefinition",
+      "Struct:crates/engine/src/projection.rs:ValidatedProfile",
+      "Struct:crates/engine/src/projection.rs:ValidatedVocabulary",
+      "Struct:crates/engine/src/projection/tests.rs:Authenticator",
+      "Struct:crates/engine/src/projection/tests.rs:Fixture",
+      "Struct:crates/engine/src/projection/tests.rs:TestAuthority",
+      "Trait:crates/engine/src/projection.rs:ProjectionAuthorityAccess",
+      "TypeAlias:crates/engine/src/projection.rs:ProjectionResultValue",
+      "TypeAlias:crates/engine/src/projection/tests.rs:SemanticMutation"
+    ],
+    "stable_processes": [
+      {
+        "id": "proc_256_exact_currentness_re",
+        "name": "Exact_currentness_requires_snapshot_selection_and_independent_live_observation → CurrentnessRequirements",
+        "process_type": "intra_community",
+        "step_count": 3,
+        "changed_steps": [
+          {
+            "symbol": "CurrentnessRequirements",
+            "step": 3
+          }
+        ]
+      },
+      {
+        "id": "proc_275_currentness_none_and",
+        "name": "Currentness_none_and_exact_captured_revision_closures_refuse_substitution → CurrentnessRequirements",
+        "process_type": "intra_community",
+        "step_count": 3,
+        "changed_steps": [
+          {
+            "symbol": "CurrentnessRequirements",
+            "step": 3
+          }
+        ]
+      }
+    ],
+    "stable_symbol_count": 96,
+    "stable_process_count": 2,
+    "canonical_population_fingerprint": "sha256:22d7925a7d1fdcb860bba9d0bbc696e4c5f55bfdefabe9782cfc288b5ea30583",
+    "population_fingerprint_encoding": "utf8-ordinal-sorted-symbol-id-lf-terminal-lf-v1",
+    "population_fingerprint_serialization": {
+      "sort": "artifact array is already JavaScript ordinal lexicographic order",
+      "separator": {
+        "hex": "0a",
+        "name": "LF"
+      },
+      "terminal": {
+        "hex": "0a",
+        "name": "LF"
+      },
+      "text_encoding": "UTF-8"
+    },
+    "canonical_population_byte_length": 5518
+  },
+  "result": {
+    "aggregate_maximum_risk": "medium",
+    "changed_files": 8,
+    "complete_unique_symbol_identities": 96,
+    "affected_processes": 2
+  },
+  "compare_to_main": {
+    "status": "unavailable",
+    "observation": "Final refreshed-index invocation exited 1 without a comparison payload; not GREEN.",
+    "prior_available_branch_wide_result": {
+      "risk": "critical",
+      "changed_files": 1395,
+      "changed_symbols": 10029,
+      "affected_processes": 259
+    }
+  },
+  "limitations": [
+    "FTS unavailable; not GREEN.",
+    "Raw replay row counts are nondeterministic, so the stable exact-path identity intersection and all sixteen raw fingerprints are recorded explicitly.",
+    "The superseded artifact used an undocumented literal-backslash-n hash; this file replaces it with the explicit LF-byte serialization above."
+  ]
+}

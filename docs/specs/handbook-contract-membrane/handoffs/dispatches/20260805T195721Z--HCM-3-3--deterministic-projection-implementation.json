@@ -1,0 +1,197 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T195721Z--HCM-3-3--deterministic-projection-implementation",
+  "created_at_utc": "2026-08-05T19:57:21Z",
+  "source_handoff_ids": [
+    "20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed"
+  ],
+  "parent_orchestration_id": "20260805T194328Z--HCM-3-3--deterministic-projection-implementation",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "documentation-and-ADRs",
+    "code-review-and-quality",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-I1-implementation-causal-review",
+  "subject_fingerprint": "sha256:c55d587b5bb93fbd524a76e85cc36e80c92db98ef363709cc4cd209f381d7700",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T19:43:28Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.3-deterministic-projection-engine-implementation",
+        "packet_ids": [
+          "HCM-3.3-I1-implementation-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md"
+      }
+    ],
+    "fingerprint": "sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:5a83c123bc0f2505e3d86579edeff19e605f2fdd3d4b6419914b59a1d0595622",
+    "integrated_outcome_id": "hcm-3.3-deterministic-projection-engine-implementation",
+    "outcome_registry_fingerprint": "sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260805T195342Z--HCM-3-3--implementation-selector-closure"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md",
+        "sha256": "5dd7157dccd6e85af42e6a378105013f99be34920885f0a7d48d3807357cabfe"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md",
+        "sha256": "b547bea82b172c7c957cba36e16db5b07040bb6608a13a15f3a66855d82c0760"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:c55d587b5bb93fbd524a76e85cc36e80c92db98ef363709cc4cd209f381d7700"
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 deterministic Projection private implementation",
+    "scope_horizon": "one generic configured custom-kind engine and its exact private configuration/test fixtures",
+    "detail_resolution": "current Resolution view, exact closure validation, reveal/derive, disclosure/support/currentness, complete accounting/provenance/fingerprints, lossiness, and expansion refusal",
+    "temporal_horizon": "post-selector-CLEAN implementation and focused proof before independent complete-subject discovery",
+    "authority_horizon": "exact eight primary paths only; no public/dependency/default/adopter/transport/sibling/protected/ref/remote authority",
+    "memory_horizon": "immutable source handoffs, CLEAN repaired selector, one frozen parent/outcome registry, and this child result",
+    "validation_horizon": "test-first focused proof, packet wall, parent convergence, independent discovery/remediation/closure, and v1.4 closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md",
+      "sections": [
+        "Exact owner, symbol, configuration, and path envelope",
+        "Positive, negative, and future-proof wall",
+        "Review and closeout envelope"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+      "sections": [
+        "Frozen planning decision",
+        "Future implementation proof obligations"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+      "sections": [
+        "Future implementation work items",
+        "Risks and controls"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Projection semantics",
+        "Collapse and expansion",
+        "Projection provenance"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Projection disclosure policy",
+        "Projection support evaluator definition",
+        "Projection definition",
+        "Projection request",
+        "Projection result",
+        "Projection request/result field authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-PROJ-01",
+        "PG-PROJ-02"
+      ]
+    }
+  ],
+  "repo_truth": "Selector closure /root/hcm33_i1_selector_closure returned CLEAN for the exact repaired subject. The clean checkout contains no capitalized Projection engine. GitNexus exact impact for the only existing impl edit is LOW with zero dependants/processes/modules; FTS remains unavailable. No code path has been edited.",
+  "allowed_scope": [
+    "Edit only crates/engine/src/lib.rs, crates/engine/src/context_resolution.rs, crates/engine/src/projection.rs, crates/engine/src/projection/tests.rs, and the four exact JSON fixtures under crates/engine/src/projection/fixtures named by the selector.",
+    "Before context_resolution.rs is edited, rerun exact upstream GitNexus impact for UID Impl:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope and stop/report before any unexpected HIGH/CRITICAL change.",
+    "Use test-driven development: create the fixed private fixtures and failing private tests first, record RED, then implement the minimum private production engine and obtain GREEN. Use apply_patch for edits.",
+    "Return focused proof, exact changed paths, impact evidence, source-before/after hashes, and any remaining gap to the parent; do not commit."
+  ],
+  "non_goals": [
+    "Do not edit any other source/test/fixture/doc/dispatch/handoff/ledger path, Cargo/dependency/version/feature/unsafe policy, public module/export/API, shipped profile/schema/registry/default, HCM-3.2 semantics beyond the one new private view method, HCM-3.4+, renderer/pipeline/SDK/CLI/transport/consumer/adopter, release, protected checkout, integration ref, or remote state.",
+    "Do not add synthesis, model prompts, executable hooks, remote code/fetch, commands, transport-owned rules, source-order fallback, source mutation, authority promotion, ambient/latest selection, wall-clock/random identity, or hidden payload reads.",
+    "Do not stage, commit, merge, rebase, reset, clean, fetch, query a remote, push, publish, write a global handoff/ledger, or create another task."
+  ],
+  "tasks": [
+    "Reverify the CLEAN selector, exact eight-path ceiling, clean base, and LOW impact. Read existing exact-binding/JCS/Resolution/profile patterns before editing.",
+    "Create strict-JCS private resolved-profile, vocabulary, definition, and source fixtures. Their configured custom kind must use the existing generic exact identity model without a first-party branch or shipped-default change.",
+    "Write failing private tests covering generic custom-kind selection, two deterministic reveal/derive replays, complete rule partitions/evaluations/proof effects/lossiness/provenance/fingerprints, fail-closed paths, no-payload-read short circuits, collapse/expansion, and the corrected fixed-input two-envelope matrix.",
+    "Add one crate-private currentness-guarded ContextResolutionEnvelope view method returning only exact envelope/profile/stack pairs, active level, and six dimension values/ranks. Do not expose authority payload or mutation capability.",
+    "Implement strict exact pair/profile/vocabulary/catalog/source/cardinality/currentness validation; data-only definition validation; complete six-dimension evaluation; upstream redaction; exact metadata-only disclosure; exact built-in metadata-only support evaluator and first reason; reveal and allowlisted acyclic deterministic derive only.",
+    "Emit every rule exactly once as included, typed omission, or operation-mismatch not_applicable; compute proof effects and fixed lossiness; canonicalize output; record complete provenance/evaluations/derivations/fingerprints and literal authority_effect none without mutating source bytes.",
+    "Prove fixed source/profile/vocabulary/definition bytes and pairs plus fixed operation/surface/purpose/currentness under two independently authorized envelope pairs, two replays each, distinct/equal output accounting, distinct envelope-bound result fingerprints, and exact source before/after equality.",
+    "Prove refusal for zero/multiple source, stale/mismatched closure, profile-unlisted definition, invalid custom config/capability/disclosure/support/currentness, none/exact captured-revision errors, equal unrelated live revision, evaluator substitution/stale/dependency/input/reason/drift cases, forbidden content, cycles/duplicate target, unsupported operation/surface, and expansion requiring broader request or typed escalation.",
+    "Run cargo fmt --check, cargo test -p handbook-engine for the private module and complete engine crate, cargo check -p handbook-engine --all-targets --all-features, strict Clippy for handbook-engine, git diff --check, exact path audit, and return structured results."
+  ],
+  "contracts_and_gates": [
+    "The private engine must match the complete Projection definition/request/result/disclosure/support/currentness and field-authority contracts; a convenient subset is not completion.",
+    "Every exact pair and semantic dependency validates before payload access; missing/stale/incompatible state refuses rather than becoming an omission except the four typed per-rule omission reasons.",
+    "No omitted required rule or omitted claimed rule can contribute a pass. A result may still exist with target absence and not_observed proof effect.",
+    "The implementation may close only the exact selected internal portions of PG-PROJ-01 and PG-PROJ-02 after independent proof/review; it cannot claim Phase-3 exit or adoption."
+  ],
+  "stop_conditions": [
+    "Stop before edit on unexpected HIGH/CRITICAL impact or any path beyond the eight selected paths.",
+    "Stop on required public/dependency/version/default/schema/registry/adopter/transport/sibling/unsafe/remote expansion, canonical semantic contradiction, or inability to prove currentness/evaluator/multi-envelope/source-immutability requirements privately.",
+    "Return BLOCKED rather than weakening fail-closed behavior, proof accounting, no-synthesis/no-mutation/no-authority-promotion, or the corrected fixed-input envelope matrix."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

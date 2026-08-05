@@ -1,0 +1,119 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T213555Z--HCM-3-3--deterministic-projection-consolidated-remediation",
+  "created_at_utc": "2026-08-05T21:35:55Z",
+  "source_handoff_ids": ["20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed"],
+  "parent_orchestration_id": "20260805T194328Z--HCM-3-3--deterministic-projection-implementation",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "remediation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "incremental-implementation", "test-driven-development", "debugging-and-error-recovery", "code-review-and-quality", "git-workflow-and-versioning"],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-I1-implementation-causal-review",
+  "subject_fingerprint": "sha256:f5c063a50d840d11bf7943034efbfdb8d1474f1df7f004dc81b6df2aae441e68",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T19:43:28Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{"integrated_outcome_id": "hcm-3.3-deterministic-projection-engine-implementation", "packet_ids": ["HCM-3.3-I1-implementation-causal-review"], "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md"}],
+    "fingerprint": "sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:5a83c123bc0f2505e3d86579edeff19e605f2fdd3d4b6419914b59a1d0595622",
+    "integrated_outcome_id": "hcm-3.3-deterministic-projection-engine-implementation",
+    "outcome_registry_fingerprint": "sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c",
+    "review_stage": "implementation",
+    "stage_transition": {"kind": "continue", "from_stage": "implementation"},
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260805T212403Z--HCM-3-3--deterministic-projection-implementation-discovery"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/context_resolution.rs", "sha256": "f6fc220529d9964c342781281530bf8a1117531ecd3dc65734be051f72a7f206"},
+      {"path": "crates/engine/src/lib.rs", "sha256": "daadd0d32d84cca0a3653cab83ef4eccf2ad8b48f3bc4d3a8eb530e976cb0b33"},
+      {"path": "crates/engine/src/projection.rs", "sha256": "cdcd7d3291b490c4b3abf345906a8a56a30e941d5457b786086531399084fb67"},
+      {"path": "crates/engine/src/projection/fixtures/definition.json", "sha256": "8d1b2dd3859f212dc7d5700ab37009ef5e9187dbe55f2057295cf7fc196cf342"},
+      {"path": "crates/engine/src/projection/fixtures/resolved-profile.json", "sha256": "4571945e20c1edc40c329ab7eed4f263fd75a2d511e43dda17b99fba56b934a9"},
+      {"path": "crates/engine/src/projection/fixtures/source.json", "sha256": "ffeac8effef1da3d3dbf8ff00c77d7f1887273cabae214cbf918a41e314ee8ec"},
+      {"path": "crates/engine/src/projection/fixtures/vocabulary.json", "sha256": "7397def542b0d62dcdde8b99111be87adb195bb186606d2f689118ab1382b964"},
+      {"path": "crates/engine/src/projection/tests.rs", "sha256": "1602eb9ec1e127cca95c77156dd5f5e81ac5956304df7c5c258dec12d6a04c19"},
+      {"path": "docs/specs/handbook-contract-membrane/00-README.md", "sha256": "b48691793385ce69bda75d913c0143c29a759470244ba96f9dc92faeb4487430"},
+      {"path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md", "sha256": "53ce4ba3e35e37437b08bd3b260528a0ebb03ac2469105fc2b04234176a305d0"},
+      {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sha256": "73ae6423f571ea8f29a4093a103016e431dc213b577cd96aeab8153484e2a9bd"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T194532Z--HCM-3-3--implementation-selector-discovery.json", "sha256": "3e57c11013cdd79a2c870e2eb511cd8ee229c98fb863284ccd1a256b82874273"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T195342Z--HCM-3-3--implementation-selector-closure.json", "sha256": "3caf53c1f45fb04d3a4e1e4c3cb6e4694fbd8d1ed03ba6a2ddb43a09b01f20f3"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T195721Z--HCM-3-3--deterministic-projection-implementation.json", "sha256": "c7e7142c275bba9c99ef7e767130bc2a24277429def292c5c80f765dc6e8203b"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T212403Z--HCM-3-3--deterministic-projection-implementation-discovery.json", "sha256": "97d6aa65fa205682cd359bd1536388b149a31958d12fee04ddfe5d9669f5237b"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md", "sha256": "5dd7157dccd6e85af42e6a378105013f99be34920885f0a7d48d3807357cabfe"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md", "sha256": "b547bea82b172c7c957cba36e16db5b07040bb6608a13a15f3a66855d82c0760"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T211549Z--gitnexus-change-detection.json", "sha256": "255d9ed680e02a0d1c24f44004ffda997192d935a39e95bd3d41043edcf13cfe"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T211549Z--implementation-proof-wall.md", "sha256": "6a2fa723edf90426c588f6ffe8a606869f100ae238aa16041f0d79889fc2e40e"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T213555Z--implementation-discovery-remediation.md", "sha256": "9ec8aebcd7ed784747eba8542d67cde9b2c26bcd908551de82f01887f66351fe"}
+    ],
+    "aggregate_fingerprint": "sha256:f5c063a50d840d11bf7943034efbfdb8d1474f1df7f004dc81b6df2aae441e68"
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 implementation consolidated remediation",
+    "scope_horizon": "four validated discovery P2 findings inside the same private engine/test/fixture envelope",
+    "detail_resolution": "live snapshot currentness, effective target collapse, authored profile identity, and trusted semantic dependency resolution",
+    "temporal_horizon": "single consolidated remediation before different-fresh implementation closure",
+    "authority_horizon": "only the exact eight implementation paths; parent owns proof/control/artifact/closure documents",
+    "memory_horizon": "discovery findings, parent remediation decision, repaired selector, and frozen outcome registry",
+    "validation_horizon": "RED for each trigger, focused GREEN, static walls, refreshed GitNexus evidence, and different-fresh closure"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T213555Z--implementation-discovery-remediation.md", "sections": ["Discovery result", "One consolidated remediation", "Impact boundary"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T212403Z--HCM-3-3--deterministic-projection-implementation-discovery.json", "sections": ["complete dispatch"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md", "sections": ["Exact owner, symbol, configuration, and path envelope", "Positive, negative, and future-proof wall"]},
+    {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sections": ["Projection currentness", "Projection request", "Projection result", "Projection request/result field authority"]}
+  ],
+  "repo_truth": "Independent discovery returned exactly four P2 findings. Parent validated all four. Pre-remediation exact symbol impact is MEDIUM at execute_projection and LOW elsewhere; no HIGH/CRITICAL symbol impact. The complete staged graph is HIGH and remains mandatory closure evidence.",
+  "allowed_scope": [
+    "Edit only crates/engine/src/projection.rs, crates/engine/src/projection/tests.rs, and the existing four exact private fixtures if required; touch context_resolution.rs or lib.rs only if the validated findings cannot close without their already-admitted private surfaces.",
+    "Apply one consolidated remediation for HCM33-I1-IMPL-DISC-001 through -004. Rerun exact impact before any additional existing symbol not covered by the parent impact set is edited.",
+    "Use test-first RED/GREEN for live bound currentness, effective collapse, authored profile identity, and semantic dependency substitution. Return exact hashes and gates; do not commit."
+  ],
+  "non_goals": [
+    "Do not edit proof/control/dispatch/handoff/ledger paths; the parent owns them.",
+    "Do not add public API, Cargo/dependency/version/default catalog, external registry, remote lookup, executable extension, transport rule, source mutation, consumer/adopter, Snapshot Memory, later slice, ref, remote, or protected-path work."
+  ],
+  "tasks": [
+    "Add failing tests for every missing verification named by the four discovery findings and preserve no-payload-read assertions.",
+    "Restrict exact currentness to snapshot selectors and compare bound captured tuples to an independent deterministic private live-observation closure before payload access.",
+    "Make validated equal-or-narrower target ranks the effective rule-evaluation boundary and bind that target in result provenance/fingerprint.",
+    "Bind the authored profile/configuration exact pair into request/result identity while separately validating its underlying Resolution-profile pair against the authority view.",
+    "Resolve/recompute every selected semantic dependency family from bounded trusted private definitions and reject fingerprint-only substitution/semantic drift before payload access.",
+    "Run focused Projection tests, fmt, all-target/all-feature check, strict Clippy, diff/path audit, and one bounded complete-crate attempt."
+  ],
+  "contracts_and_gates": [
+    "All four P2s must close together; no partial closure or weakened fail-closed behavior is acceptable.",
+    "The remediation cannot rename the outcome/packet or reset its causal budget.",
+    "The different-fresh closure, not this implementer, owns final CLEAN judgment."
+  ],
+  "stop_conditions": [
+    "Stop before any unexpected HIGH/CRITICAL symbol edit or path outside the eight implementation paths.",
+    "Return BLOCKED only if a finding requires public/external/dependency/default/adopter/transport/Snapshot/later-slice authority or cannot be proven privately.",
+    "Do not waive, relabel, or defer any P2."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}

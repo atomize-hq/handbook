@@ -1,0 +1,207 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T212403Z--HCM-3-3--deterministic-projection-implementation-discovery",
+  "created_at_utc": "2026-08-05T21:24:03Z",
+  "source_handoff_ids": [
+    "20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed"
+  ],
+  "parent_orchestration_id": "20260805T194328Z--HCM-3-3--deterministic-projection-implementation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "code-review-and-quality",
+    "test-driven-development",
+    "documentation-and-ADRs"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-I1-implementation-causal-review",
+  "subject_fingerprint": "sha256:e0619dd19d146a31a28143ccd1466f7c0d9232a53eb30b35aebf431280b0b164",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.3-deterministic-projection-implementation-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T19:43:28Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.3-deterministic-projection-engine-implementation",
+        "packet_ids": [
+          "HCM-3.3-I1-implementation-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md"
+      }
+    ],
+    "fingerprint": "sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:5a83c123bc0f2505e3d86579edeff19e605f2fdd3d4b6419914b59a1d0595622",
+    "integrated_outcome_id": "hcm-3.3-deterministic-projection-engine-implementation",
+    "outcome_registry_fingerprint": "sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260805T195721Z--HCM-3-3--deterministic-projection-implementation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.3-deterministic-projection-implementation-discovery-convergence",
+    "completed_at_utc": "2026-08-05T21:23:50Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check; focused Projection suite; all-target/all-feature check; strict Clippy; git diff --check",
+        "evidence_ref": "20260805T211549Z--implementation-proof-wall.md records GREEN focused/static gates and the bounded full-crate TIMEOUT only after the complete library binary passed."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "audit exact eight implementation paths, three control-truth paths, authority/proof records, and prohibited sibling surfaces",
+        "evidence_ref": "Eight selected implementation paths, three bounded control-pack paths, three prior dispatches, and four authority/proof paths form this review subject; no public/Cargo/default/consumer/transport/protected path entered."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute eighteen-entry repo-path-NUL-SHA256-newline-v1 manifest",
+        "evidence_ref": "sha256:e0619dd19d146a31a28143ccd1466f7c0d9232a53eb30b35aebf431280b0b164"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check and strict JSON/UTF-8 parse",
+        "evidence_ref": "Rust formatting passed; JSON fixtures, dispatches, and GitNexus artifact parse as UTF-8 JSON."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "No whitespace error before dispatch."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      { "path": "crates/engine/src/context_resolution.rs", "sha256": "f6fc220529d9964c342781281530bf8a1117531ecd3dc65734be051f72a7f206" },
+      { "path": "crates/engine/src/lib.rs", "sha256": "daadd0d32d84cca0a3653cab83ef4eccf2ad8b48f3bc4d3a8eb530e976cb0b33" },
+      { "path": "crates/engine/src/projection.rs", "sha256": "cdcd7d3291b490c4b3abf345906a8a56a30e941d5457b786086531399084fb67" },
+      { "path": "crates/engine/src/projection/fixtures/definition.json", "sha256": "8d1b2dd3859f212dc7d5700ab37009ef5e9187dbe55f2057295cf7fc196cf342" },
+      { "path": "crates/engine/src/projection/fixtures/resolved-profile.json", "sha256": "4571945e20c1edc40c329ab7eed4f263fd75a2d511e43dda17b99fba56b934a9" },
+      { "path": "crates/engine/src/projection/fixtures/source.json", "sha256": "ffeac8effef1da3d3dbf8ff00c77d7f1887273cabae214cbf918a41e314ee8ec" },
+      { "path": "crates/engine/src/projection/fixtures/vocabulary.json", "sha256": "7397def542b0d62dcdde8b99111be87adb195bb186606d2f689118ab1382b964" },
+      { "path": "crates/engine/src/projection/tests.rs", "sha256": "1602eb9ec1e127cca95c77156dd5f5e81ac5956304df7c5c258dec12d6a04c19" },
+      { "path": "docs/specs/handbook-contract-membrane/00-README.md", "sha256": "b48691793385ce69bda75d913c0143c29a759470244ba96f9dc92faeb4487430" },
+      { "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md", "sha256": "53ce4ba3e35e37437b08bd3b260528a0ebb03ac2469105fc2b04234176a305d0" },
+      { "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sha256": "73ae6423f571ea8f29a4093a103016e431dc213b577cd96aeab8153484e2a9bd" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T194532Z--HCM-3-3--implementation-selector-discovery.json", "sha256": "3e57c11013cdd79a2c870e2eb511cd8ee229c98fb863284ccd1a256b82874273" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T195342Z--HCM-3-3--implementation-selector-closure.json", "sha256": "3caf53c1f45fb04d3a4e1e4c3cb6e4694fbd8d1ed03ba6a2ddb43a09b01f20f3" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T195721Z--HCM-3-3--deterministic-projection-implementation.json", "sha256": "c7e7142c275bba9c99ef7e767130bc2a24277429def292c5c80f765dc6e8203b" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md", "sha256": "5dd7157dccd6e85af42e6a378105013f99be34920885f0a7d48d3807357cabfe" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md", "sha256": "b547bea82b172c7c957cba36e16db5b07040bb6608a13a15f3a66855d82c0760" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T211549Z--gitnexus-change-detection.json", "sha256": "255d9ed680e02a0d1c24f44004ffda997192d935a39e95bd3d41043edcf13cfe" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T211549Z--implementation-proof-wall.md", "sha256": "6a2fa723edf90426c588f6ffe8a606869f100ae238aa16041f0d79889fc2e40e" }
+    ],
+    "aggregate_fingerprint": "sha256:e0619dd19d146a31a28143ccd1466f7c0d9232a53eb30b35aebf431280b0b164"
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 private deterministic Projection complete-subject discovery",
+    "scope_horizon": "one private configured custom-kind engine, opaque Resolution bridge, fixed fixtures/tests, proof wall, and exact bounded control truth",
+    "detail_resolution": "all validation, evaluation, payload-read, accounting, provenance, fingerprint, currentness, collapse/expansion, and forbidden-authority paths plus HIGH GitNexus graph",
+    "temporal_horizon": "first implementation-stage discovery after selector CLEAN and implementation convergence",
+    "authority_horizon": "exact eighteen-entry review subject; findings may require only consolidated remediation inside the admitted implementation/control envelope",
+    "memory_horizon": "immutable source handoff, repaired selector, implementation run evidence, proof wall, and exact byte-hashed GitNexus artifact",
+    "validation_horizon": "independent complete-subject discovery followed by one consolidated remediation and different-fresh closure if required"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md",
+      "sections": ["Exact owner, symbol, configuration, and path envelope", "Positive, negative, and future-proof wall", "Review and closeout envelope"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+      "sections": ["Frozen planning decision", "Future implementation proof obligations"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": ["Projection semantics", "Collapse and expansion", "Projection provenance"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": ["Projection disclosure policy", "Projection support evaluator definition", "Projection definition", "Projection request", "Projection result", "Projection request/result field authority"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": ["PG-PROJ-01", "PG-PROJ-02"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T211549Z--gitnexus-change-detection.json",
+      "sections": ["complete artifact"]
+    }
+  ],
+  "repo_truth": "The exact staged eight-path code delta has a refreshed-index GitNexus result of HIGH: 480 complete symbol identities and 14 affected flows. The only existing production impl impact was LOW before edit. Compare-to-main is separately CRITICAL from accepted-base branch divergence. FTS is unavailable. Focused Projection tests, format, check, strict Clippy, whitespace, and the library portion of the bounded full crate run passed; the full command timed out only in the existing context_resolution_kernel integration executable.",
+  "allowed_scope": [
+    "Perform one fresh read-only complete-subject discovery over the exact eighteen-entry manifest and replay every HCM-3.3 contract/proof claim.",
+    "Inspect all private code and tests, run bounded read-only checks, and analyze the complete HIGH GitNexus symbol/process artifact without understating its risk.",
+    "Report P1/P2 findings with exact paths/symbols, violated authority, smallest in-scope remediation, and missing verification. Record P3/P4 only when newly discovered and non-duplicative."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, create dispatches/handoffs, rebuild the ledger, mutate the GitNexus index, touch protected paths/refs/remotes, or delegate.",
+    "Do not authorize public API, Cargo/dependency/version/default/adopter/renderer/transport/Snapshot/HCM-3.4+/release expansion or waive a P1/P2 because tests pass."
+  ],
+  "tasks": [
+    "Replay the exact manifest and GitNexus artifact hash, then inspect every changed production/test/control path against the selector and canonical Projection contract.",
+    "Review strict pair/catalog/source/cardinality/currentness validation and confirm every semantic dependency refuses before payload access.",
+    "Review six-dimension Resolution comparison, upstream redaction, disclosure/support ordering and first reason, reveal/derive determinism and acyclicity, complete rule partition, proof effects, lossiness, provenance, output/result fingerprints, source immutability, and authority_effect none.",
+    "Review the genuine two-admitted-envelope test: fixed non-envelope closure, two replays per envelope, equal/distinct output accounting, envelope-bound result identity, and actual stale-currentness refusal.",
+    "Review collapse/expansion boundaries and ensure no synthesis, prompt/model, remote code, executable hook, transport rule, source mutation/order fallback, or authority promotion exists.",
+    "Assess whether the complete HIGH GitNexus result is expected for this private engine/test fixture graph and identify any actual unexpected flow or scope breach.",
+    "Return CLEAN only if no P1/P2 remains; otherwise return FINDINGS for one consolidated parent remediation."
+  ],
+  "contracts_and_gates": [
+    "All HCM-3.3 implementation behavior and negative paths are completion-critical; passing tests cannot substitute for complete contract inspection.",
+    "The GitNexus artifact is mandatory review subject evidence and its exact hash must remain in any repaired closure manifest.",
+    "This discovery cannot claim Phase-3 exit, public/adopter completion, or a later slice."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS for any P1/P2, incomplete mandatory proof, understated HIGH/CRITICAL risk, manifest mismatch, or authority/scope violation; do not repair.",
+    "Return BLOCKED only for a genuine unavailable mandatory capability or contradiction that prevents review, with exact evidence.",
+    "Do not reopen selector planning or use an advisory to broaden the implementation."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}

@@ -2,9 +2,25 @@
 
 **Status:** active control pack; Phase 0 design/default authority is closed; HCM-1.1 through HCM-1.4, the bounded HCM-2.1 Project Context pilot, HCM-2.2 candidate-`1.3` exact-result authority, and the exact HCM-2.3 repository-defined `registry-brief` implementation have landed; HCM-2.3 landed at implementation commit `628b672ef33326e87e4fb30be13489e8af04b38c`, received final complete-subject review at commit `746fff667f6fbe0270182a467285d60394362530`, and binds the exact 111-path subject `sha256:d510e94e5b47db209022927bc4afa74b8820e27cd645123cc1cdc3aa5f72fdef`; only the exact registry-brief subsets of the Artifact kind/schema registry and Charter intake coverage promote to `RealPathAdopted`; HCM-2.4 P2 and P3/P3B are completed, P4 is GREEN and completed, and P5 is GREEN and accepted. The P4/P5 prerequisite is committed at `00dde0162fcb15576c83b6ed40ab7286488d0890`, and P4's independent negative-surface/path proof is committed at `158115daa2b85d41663b79dc677fce69e59fd1e2`. The complete P6 repair candidate removes both bridges and residual normal-path fixed-kind authority, retains descriptor-owned identity and exact bytes, and has a GREEN complete proof wall. The CLEAN verdict from `handoffs/dispatches/20260731T004500Z--HCM-2-4--p6-final-review-control-truth-supplemental-2-closure.json` completed and accepted P6. P7 is completed at primary commit `6e7f4f222b594e401558e305b0f2d620f993d083`, reviewed subject `sha256:831f5ffbb0b3f732dd394f13ba503a0a4bde1b200e980983ff056b33f3b03ef1`, and closeout commit `e83b0c883b3807a88cc6a31f093508143ecfce31`; HCM-2.4 is completed and the exact HCM-2 Phase 2 exit is GREEN. `HCM-RF-0001` and `HCM-RF-0002` remain accepted P3 advisories, and future task-gate runtime remains deferred. HCM-3.1 Vocabulary Resolution is proof-CLEAN at subject `sha256:ee97b424c966aaecaeb3f1d09e08129ba4c69f80e889290e36d13fea6d76936d`, closing `PG-VOCAB-01` and only the vocabulary subset of `PG-PROFILE-01`. HCM-3.2 Context Resolution is completed locally at reviewed primary commit `9fd54c2f746eddd4df5dff37ba3828626395000d`: the completed v1.4 handoff `handoffs/records/20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json` records the fresh-parent complete-subject `CLEAN` closure, including the valid-anchor-A/different-valid-B identity-before-mutation refusal, and closes `PG-RES-01` only for this bounded kernel. HCM-0.11, HCM-3.3+, automatic continuation, tooling/schema/template work, dependency, public-API, platform, and transport expansion, release, push, and publication remain unauthorized.
 
+**Current-selection correction:** the historical HCM-3.2 status above did not
+authorize HCM-3.3. The separately selected bounded HCM-3.3 private/internal
+implementation below now supersedes only that HCM-3.3 deferral; HCM-0.11,
+HCM-3.4+, and every listed expansion remain unauthorized.
+
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
 **Implementation authorization:** HCM-1.1 through HCM-2.3 are completed bounded evidence, not continuing authority. HCM-2.3 closes `PG-KIND-02` only for the proven repository-defined registry-brief path, adds the exact earned registry-brief subsets to `PG-KIND-01` and `PG-ARTIFACT-01`, preserves first-party Charter as `ContractCorrectAndProven`, and leaves broader generic/custom-kind intake `TargetOnly`; it adds no shipped kind, SDK or public transport support, Projection engine, remote schema fetching, generated command, broader artifact-family conversion, or later-slice authority. `handbook-engine` `0.2.0` is the accepted compatibility boundary for the landed public-enum additions; it is not a publication or downstream-adoption claim. HCM-2.4 P2, P3/P3B, and P4 are completed bounded evidence, and P5 is accepted. P6 is completed and accepted by the exact CLEAN condition above. Future implementation-task gate runtime remains deferred. P7 is completed, HCM-2.4 is completed, and the exact HCM-2 Phase 2 exit is GREEN. `HCM-RF-0001` and `HCM-RF-0002` remain accepted P3 advisories. HCM-3.1 is completed bounded evidence for typed vocabulary resolution and the exact Stage-10 Work Specification renderer only. HCM-3.2 is completed locally as bounded evidence for the recovered Context Resolution kernel, including live currentness, private JCS capsule publication, append-only quarantine anchors/completions, exact-A recovery, different-B pre-mutation refusal, and generic-lineage compatibility; it closes `PG-RES-01` only for that exact kernel. It grants no automatic continuation or authority for HCM-0.11, HCM-3.3+, tooling/schema/template work, dependency, public-API, platform, or transport expansion, release, push, or publication.
+
+**HCM-3.3 bounded implementation:** the separately selected private/internal
+Deterministic Projection increment implements one generic configured
+custom-kind core with an opaque current Resolution view, deterministic
+`reveal` and allowlisted deterministic `derive`, fail-closed validation and
+currentness, complete six-dimension omission/proof/lossiness accounting, exact
+provenance/fingerprints, source immutability, and non-widening collapse. Its
+corrected proof wall replays one byte-identical closure twice under each of two
+distinct admitted envelopes. Only the exact private/internal portions of
+`PG-PROJ-01` and `PG-PROJ-02` close; no public API/default catalog/adopter,
+Snapshot Memory, HCM-3.4+, Phase-3 exit, release, push, or publication follows.
 
 **Post-exit corrective outcome:** The immutable P7/Phase 2 exit remains
 completed evidence. The separately selected HCM-2.4 product-smoke correction
@@ -19,6 +35,10 @@ accepts only this corrective outcome; FINDINGS leaves it incomplete. HCM-3.1
 is separately completed by its own reviewed authority. HCM-3.2 is separately
 completed locally by its own reviewed authority and completed v1.4 handoff;
 HCM-0.11, HCM-3.3+, and automatic continuation remain unauthorized.
+The HCM-3.3 deferral in the historical post-exit paragraph is superseded only
+by the separately selected bounded implementation recorded above. HCM-0.11,
+HCM-3.4+, and automatic continuation remain unauthorized.
+
 **Repo-truth snapshot:** 2026-07-25 at `7b3b5454ef363d08e4c6c78e6a201d8c36c10c5c`; re-check live code before every slice
 
 **Authority-continuation control:** HCM-0.8 adds one optional, v1.4-only

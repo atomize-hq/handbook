@@ -1,0 +1,192 @@
+{
+  "schema_id": "handbook.gitnexus-change-detection-evidence",
+  "schema_version": "1.0",
+  "created_at_utc": "2026-08-05T22:16:15Z",
+  "baseline": {
+    "commit": "5542371afef828fd83282aa3971262e6ad1b62ed",
+    "tree": "999ab75512caba5a4b23c47df931206f01c3f138"
+  },
+  "target": {
+    "kind": "final_staged_pre_primary_subject",
+    "actual_paths": [
+      "crates/engine/src/context_resolution.rs",
+      "crates/engine/src/lib.rs",
+      "crates/engine/src/projection.rs",
+      "crates/engine/src/projection/fixtures/definition.json",
+      "crates/engine/src/projection/fixtures/resolved-profile.json",
+      "crates/engine/src/projection/fixtures/source.json",
+      "crates/engine/src/projection/fixtures/vocabulary.json",
+      "crates/engine/src/projection/tests.rs"
+    ]
+  },
+  "exact_compare": {
+    "command": "detect_changes({scope:\"staged\"})",
+    "raw_output_encoding": "compact-json-utf8-v1",
+    "raw_output_fingerprint": "sha256:b0a0375cb521f4f9ec34faa8b6ba42616625acb384b67c0d743dcbfeddb3eb11",
+    "aggregate_maximum_risk": "medium",
+    "summary": {
+      "changed_count": 102,
+      "affected_count": 2,
+      "changed_files": 8,
+      "risk_level": "medium"
+    },
+    "complete_symbol_ids": [
+      "Struct:crates/engine/src/context_resolution.rs:ProjectionAuthorityView",
+      "Impl:crates/engine/src/context_resolution.rs:ProjectionAuthorityView",
+      "Impl:crates/engine/src/context_resolution.rs:ContextResolutionEnvelope",
+      "Module:crates/engine/src/lib.rs:projection",
+      "Module:crates/engine/src/lib.rs:repository_invocation_identity",
+      "File:crates/engine/src/projection.rs",
+      "File:crates/engine/src/projection.rs",
+      "File:crates/engine/src/projection.rs",
+      "Trait:crates/engine/src/projection.rs:ProjectionAuthorityAccess",
+      "Impl:crates/engine/src/projection.rs:ProjectionError",
+      "Impl:crates/engine/src/projection.rs:ExactPair",
+      "Impl:crates/engine/src/projection.rs:TargetSchema",
+      "Impl:crates/engine/src/projection.rs:MinimumResolution",
+      "Impl:crates/engine/src/projection.rs:DerivationDefinition",
+      "Impl:crates/engine/src/projection.rs:ProjectionConfiguration",
+      "Impl:crates/engine/src/projection.rs:ProjectionSource",
+      "Impl:crates/engine/src/projection.rs:ProjectionCurrentnessRequest",
+      "Impl:crates/engine/src/projection.rs:ProjectionRequest",
+      "Impl:crates/engine/src/projection.rs:ProjectionResult",
+      "Struct:crates/engine/src/projection.rs:ProjectionError",
+      "Struct:crates/engine/src/projection.rs:ExactPair",
+      "Struct:crates/engine/src/projection.rs:AuthoredProfile",
+      "Struct:crates/engine/src/projection.rs:ConfiguredKind",
+      "Struct:crates/engine/src/projection.rs:ValidatedProfile",
+      "Struct:crates/engine/src/projection.rs:AuthoredVocabulary",
+      "Struct:crates/engine/src/projection.rs:ValidatedVocabulary",
+      "Struct:crates/engine/src/projection.rs:AuthoredDefinition",
+      "Struct:crates/engine/src/projection.rs:ValidatedDefinition",
+      "Struct:crates/engine/src/projection.rs:SourceSelector",
+      "Struct:crates/engine/src/projection.rs:TargetSchema",
+      "Struct:crates/engine/src/projection.rs:DisclosurePolicy",
+      "Struct:crates/engine/src/projection.rs:ClassificationRegistry",
+      "Struct:crates/engine/src/projection.rs:DisclosureRule",
+      "Struct:crates/engine/src/projection.rs:SupportEvaluator",
+      "Struct:crates/engine/src/projection.rs:CurrentnessRequirements",
+      "Struct:crates/engine/src/projection.rs:CurrentnessFamilyRequirement",
+      "Struct:crates/engine/src/projection.rs:FieldRule",
+      "Struct:crates/engine/src/projection.rs:MinimumResolution",
+      "Struct:crates/engine/src/projection.rs:DerivationDefinition",
+      "Struct:crates/engine/src/projection.rs:ProjectionConfiguration",
+      "Struct:crates/engine/src/projection.rs:SourceDocument",
+      "Struct:crates/engine/src/projection.rs:CapturedRevisions",
+      "Struct:crates/engine/src/projection.rs:UpstreamRedaction",
+      "Struct:crates/engine/src/projection.rs:ProjectionSource",
+      "Struct:crates/engine/src/projection.rs:ProjectionSourceSelection",
+      "Struct:crates/engine/src/projection.rs:ProjectionCurrentnessRequest",
+      "Struct:crates/engine/src/projection.rs:ExpectedFamilyRevision",
+      "Struct:crates/engine/src/projection.rs:RevisionSlot",
+      "Struct:crates/engine/src/projection.rs:ProjectionRequest",
+      "Struct:crates/engine/src/projection.rs:DisclosureEvaluation",
+      "Struct:crates/engine/src/projection.rs:IncludedRule",
+      "Struct:crates/engine/src/projection.rs:OmittedRule",
+      "Struct:crates/engine/src/projection.rs:NotApplicableRule",
+      "Struct:crates/engine/src/projection.rs:DerivationRecord",
+      "Struct:crates/engine/src/projection.rs:CurrentnessValidation",
+      "Struct:crates/engine/src/projection.rs:CurrentnessCheck",
+      "Struct:crates/engine/src/projection.rs:LiveCurrentnessQuery",
+      "Struct:crates/engine/src/projection.rs:LiveCurrentnessObservation",
+      "Struct:crates/engine/src/projection.rs:ProjectionOutput",
+      "Struct:crates/engine/src/projection.rs:ProjectionResult",
+      "Module:crates/engine/src/projection.rs:tests",
+      "Enum:crates/engine/src/projection.rs:ProjectionErrorKind",
+      "Enum:crates/engine/src/projection.rs:PolicyAction",
+      "Enum:crates/engine/src/projection.rs:SupportReason",
+      "Enum:crates/engine/src/projection.rs:CurrentnessMode",
+      "Enum:crates/engine/src/projection.rs:DerivationAlgorithm",
+      "Enum:crates/engine/src/projection.rs:ProjectionOperation",
+      "Enum:crates/engine/src/projection.rs:MinimumResolutionOutcome",
+      "Enum:crates/engine/src/projection.rs:UpstreamRedactionCheck",
+      "Enum:crates/engine/src/projection.rs:PolicyEvaluation",
+      "Enum:crates/engine/src/projection.rs:EvaluatedPolicyAction",
+      "Enum:crates/engine/src/projection.rs:SupportStatus",
+      "Enum:crates/engine/src/projection.rs:PayloadAccess",
+      "Enum:crates/engine/src/projection.rs:FinalDisposition",
+      "Enum:crates/engine/src/projection.rs:OmissionReason",
+      "Enum:crates/engine/src/projection.rs:ProofEffect",
+      "Enum:crates/engine/src/projection.rs:NotApplicableReason",
+      "Enum:crates/engine/src/projection.rs:ProjectionLossiness",
+      "Enum:crates/engine/src/projection.rs:AuthorityEffect",
+      "TypeAlias:crates/engine/src/projection.rs:ProjectionResultValue",
+      "Const:crates/engine/src/projection.rs:DECISION_INPUT_FIELDS",
+      "Const:crates/engine/src/projection.rs:SUPPORT_REASON_ORDER",
+      "Struct:crates/engine/src/projection/tests.rs:TestAuthority",
+      "Struct:crates/engine/src/projection/tests.rs:Fixture",
+      "Struct:crates/engine/src/projection/tests.rs:Authenticator",
+      "Struct:crates/engine/src/projection/tests.rs:TestAuthority",
+      "Struct:crates/engine/src/projection/tests.rs:Fixture",
+      "Struct:crates/engine/src/projection/tests.rs:Authenticator",
+      "TypeAlias:crates/engine/src/projection/tests.rs:SemanticMutation",
+      "Module:crates/engine/src/projection/tests.rs:admitted_envelopes",
+      "Impl:crates/engine/src/projection/tests.rs:TestAuthority",
+      "Impl:crates/engine/src/projection/tests.rs:admitted_envelopes.Fixture",
+      "Impl:crates/engine/src/projection/tests.rs:admitted_envelopes.Authenticator",
+      "Const:crates/engine/src/projection/tests.rs:SOURCE",
+      "Const:crates/engine/src/projection/tests.rs:PROFILE",
+      "Const:crates/engine/src/projection/tests.rs:VOCABULARY",
+      "Const:crates/engine/src/projection/tests.rs:DEFINITION",
+      "Const:crates/engine/src/projection/tests.rs:AUTHORITY_KIND_REF",
+      "Const:crates/engine/src/projection/tests.rs:AUTHORITY_INSTANCE_ID",
+      "Const:crates/engine/src/projection/tests.rs:AUTHORITY_PATH",
+      "Const:crates/engine/src/projection/tests.rs:STACK_PATH",
+      "Const:crates/engine/src/projection/tests.rs:POLICY_PATHS"
+    ],
+    "complete_affected_processes": [
+      {
+        "id": "proc_256_exact_currentness_re",
+        "name": "Exact_currentness_requires_snapshot_selection_and_independent_live_observation → CurrentnessRequirements",
+        "process_type": "intra_community",
+        "step_count": 3,
+        "changed_steps": [
+          {
+            "symbol": "CurrentnessRequirements",
+            "step": 3
+          }
+        ]
+      },
+      {
+        "id": "proc_275_currentness_none_and",
+        "name": "Currentness_none_and_exact_captured_revision_closures_refuse_substitution → CurrentnessRequirements",
+        "process_type": "intra_community",
+        "step_count": 3,
+        "changed_steps": [
+          {
+            "symbol": "CurrentnessRequirements",
+            "step": 3
+          }
+        ]
+      }
+    ]
+  },
+  "compare_to_main": {
+    "command": "npx --yes gitnexus detect-changes --scope compare --base-ref main --repo handbook",
+    "status": "unavailable",
+    "exit_code": 1,
+    "observation": "The final refreshed-index invocation emitted only the FTS-unavailable diagnostic and no comparison payload; it is not GREEN.",
+    "prior_available_evidence": {
+      "artifact": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T211549Z--gitnexus-change-detection.json",
+      "result": "critical",
+      "changed_files": 1395,
+      "changed_symbols": 10029,
+      "affected_processes": 259,
+      "interpretation": "branch-wide accepted-base divergence from local main"
+    }
+  },
+  "pre_edit_impacts": {
+    "execute_projection": "medium",
+    "validate_currentness_requirements": "low",
+    "validate_request_currentness": "low",
+    "validate_request": "low",
+    "validate_pair": "low",
+    "projection_configuration": "low",
+    "unexpected_high_or_critical_targets": 0
+  },
+  "limitations": [
+    "FTS extension unavailable; no FTS result is represented as GREEN.",
+    "Final exact staged comparison is MEDIUM and is not understated.",
+    "Final compare-to-main payload is unavailable after index refresh; the earlier available CRITICAL observation is retained only as historical evidence."
+  ]
+}

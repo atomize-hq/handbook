@@ -1,0 +1,223 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T195342Z--HCM-3-3--implementation-selector-closure",
+  "created_at_utc": "2026-08-05T19:53:42Z",
+  "source_handoff_ids": [
+    "20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed"
+  ],
+  "parent_orchestration_id": "20260805T194328Z--HCM-3-3--deterministic-projection-implementation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-I1-implementation-causal-review",
+  "subject_fingerprint": "sha256:c55d587b5bb93fbd524a76e85cc36e80c92db98ef363709cc4cd209f381d7700",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.3-implementation-selector-closure-1",
+    "trigger_run_ids": [
+      "/root/hcm33_i1_selector_review"
+    ],
+    "finding_refs": [
+      "HCM33-I1-SEL-001",
+      "HCM33-I1-SEL-002"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T19:43:28Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.3-deterministic-projection-engine-implementation",
+        "packet_ids": [
+          "HCM-3.3-I1-implementation-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md"
+      }
+    ],
+    "fingerprint": "sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:5a83c123bc0f2505e3d86579edeff19e605f2fdd3d4b6419914b59a1d0595622",
+    "integrated_outcome_id": "hcm-3.3-deterministic-projection-engine-implementation",
+    "outcome_registry_fingerprint": "sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260805T194532Z--HCM-3-3--implementation-selector-discovery"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.3-implementation-selector-closure-convergence",
+    "completed_at_utc": "2026-08-05T19:53:30Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "replay both discovery P2 findings and the one consolidated parent remediation against the unchanged HCM-3.3 implementation authority",
+        "evidence_ref": "Run /root/hcm33_i1_selector_review owns HCM33-I1-SEL-001 and HCM33-I1-SEL-002. The complete repaired subject is the selector plus parent remediation proof."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "re-inventory the exact eight implementation paths, crate-private Resolution bridge, fixed request closure, currentness/evaluator matrix, and every prohibited sibling surface",
+        "evidence_ref": "The repaired selector adds only context_resolution.rs for one currentness-guarded private view and expands proof requirements. No public/Cargo/default/adopter/transport path entered scope."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the two-path repo-path-NUL-SHA256-newline-v1 manifest plus the frozen registry and causal budget",
+        "evidence_ref": "Subject sha256:c55d587b5bb93fbd524a76e85cc36e80c92db98ef363709cc4cd209f381d7700; registry sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c; budget sha256:5a83c123bc0f2505e3d86579edeff19e605f2fdd3d4b6419914b59a1d0595622."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode, Markdown fence balance, and exact repaired-subject path inspection",
+        "evidence_ref": "Both files decode as UTF-8, fences are balanced, and the selector explicitly carries the internal bridge plus the full fixed-input/currentness/evaluator proof matrix."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "trailing-space/tab scan plus git diff --check",
+        "evidence_ref": "Both checks exited clean after remediation and before this closure dispatch was created."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md",
+        "sha256": "5dd7157dccd6e85af42e6a378105013f99be34920885f0a7d48d3807357cabfe"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md",
+        "sha256": "b547bea82b172c7c957cba36e16db5b07040bb6608a13a15f3a66855d82c0760"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:c55d587b5bb93fbd524a76e85cc36e80c92db98ef363709cc4cd209f381d7700"
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 implementation selector closure",
+    "scope_horizon": "the two discovery P2 findings and their consolidated repair inside the exact selector",
+    "detail_resolution": "crate-private currentness/profile/stack/envelope bridge plus complete fixed-input, currentness, evaluator, and cross-envelope proof matrix",
+    "temporal_horizon": "different-fresh delta-focused closure before any code edit",
+    "authority_horizon": "selector and parent-local evidence only; CLEAN admits the exact eight-path private implementation and no broader work",
+    "memory_horizon": "discovery run/findings, immutable source handoffs, repaired selector, and frozen outcome registry",
+    "validation_horizon": "closure of HCM33-I1-SEL-001/002 followed by implementation/proof/final-closeout stages"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md",
+      "sections": [
+        "Exact owner, symbol, configuration, and path envelope",
+        "Positive, negative, and future-proof wall",
+        "Review and closeout envelope"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md",
+      "sections": [
+        "Finding validation",
+        "Consolidated remediation and scope"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+      "sections": [
+        "Frozen planning decision",
+        "Future implementation proof obligations"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Projection disclosure policy",
+        "Projection support evaluator definition",
+        "Projection definition",
+        "Projection request",
+        "Projection result",
+        "Projection request/result field authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "The parent validated both selector P2 findings and repaired only the selector plus one remediation proof. GitNexus LOW risk remains exact for the newly admitted crate-private ContextResolutionEnvelope impl method. No code, tests, fixtures, protected paths, refs, or remote state changed.",
+  "allowed_scope": [
+    "Perform one different-fresh read-only closure of HCM33-I1-SEL-001 and HCM33-I1-SEL-002 against the exact repaired two-file subject.",
+    "Verify the private currentness/profile/stack/envelope bridge is exact and non-mutating, and the complete fixed-input/currentness/evaluator/cross-envelope matrix is now explicit.",
+    "Report only an unresolved trigger or a P1/P2 directly caused or unmasked by this remediation; do not reopen general discovery or repair findings."
+  ],
+  "non_goals": [
+    "Do not reopen selector discovery, report unrelated improvements as blocking, edit, format, stage, commit, delegate, create a dispatch/handoff, write the ledger, or run implementation tests.",
+    "Do not authorize or implement a public/Cargo/default/adopter/transport/sibling/protected/ref/remote change."
+  ],
+  "tasks": [
+    "Return findings first only if either trigger remains incomplete or this exact remediation directly caused/unmasked a P1/P2 inside unchanged authority and LOW risk.",
+    "Check the new context_resolution.rs method ceiling: existing currentness guard first; opaque exact pairs/level/six values/ranks only; no authority payload, mutation handle, public export, or existing behavior change.",
+    "Check fixed operation, surface, purpose, and complete currentness closure across both authorized envelope cases; two replays each; exact distinct/equal output accounting; distinct envelope-bound result fingerprints; unchanged source authority.",
+    "Check explicit none/captured-revision and complete evaluator substitution/staleness/dependency/input/reason/drift refusal cases.",
+    "Return CLEAN only if both P2s are closed and no directly caused or unmasked P1/P2 remains for subject sha256:c55d587b5bb93fbd524a76e85cc36e80c92db98ef363709cc4cd209f381d7700."
+  ],
+  "contracts_and_gates": [
+    "This is the sole different-fresh planning closure after one consolidated remediation for the frozen implementation outcome.",
+    "CLEAN ends planning review. A directly caused/unmasked P1/P2 may use only the immediately next supplemental cycle; no general discovery is reopened.",
+    "No review result grants public/dependency/default/adopter/transport/sibling/protected/remote authority or any gate claim before implementation proof."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if either trigger remains or the remediation directly caused/unmasked a P1/P2; do not repair it.",
+    "Return BLOCKED if closure requires broader authority, implementation evidence, protected-path mutation, remote interaction, or unavailable mandatory evidence.",
+    "Report manifest, causal-lineage, identity, GitNexus, or authority defects to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

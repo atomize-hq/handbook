@@ -1,0 +1,137 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T222357Z--HCM-3-3--deterministic-projection-remediation-closure",
+  "created_at_utc": "2026-08-05T22:23:57Z",
+  "source_handoff_ids": ["20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed"],
+  "parent_orchestration_id": "20260805T194328Z--HCM-3-3--deterministic-projection-implementation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "code-review-and-quality", "test-driven-development", "documentation-and-ADRs"],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-I1-implementation-causal-review",
+  "subject_fingerprint": "sha256:e833f7e05df2d0122d5c74b733ae590e3ab77439e09972e7c6317ed26862daec",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.3-deterministic-projection-remediation-closure-1",
+    "trigger_run_ids": ["/root/hcm33_i1_impl_review"],
+    "finding_refs": ["HCM33-I1-IMPL-DISC-001", "HCM33-I1-IMPL-DISC-002", "HCM33-I1-IMPL-DISC-003", "HCM33-I1-IMPL-DISC-004"]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T19:43:28Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{"integrated_outcome_id": "hcm-3.3-deterministic-projection-engine-implementation", "packet_ids": ["HCM-3.3-I1-implementation-causal-review"], "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md"}],
+    "fingerprint": "sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:5a83c123bc0f2505e3d86579edeff19e605f2fdd3d4b6419914b59a1d0595622",
+    "integrated_outcome_id": "hcm-3.3-deterministic-projection-engine-implementation",
+    "outcome_registry_fingerprint": "sha256:f9c6f68bd80fca048138ecea08f74ebd9b9ffe0026582477cb4f3821c773c70c",
+    "review_stage": "implementation",
+    "stage_transition": {"kind": "continue", "from_stage": "implementation"},
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260805T213555Z--HCM-3-3--deterministic-projection-consolidated-remediation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.3-deterministic-projection-remediation-closure-convergence",
+    "completed_at_utc": "2026-08-05T22:23:40Z",
+    "checks": [
+      {"kind": "complete_packet_wall", "status": "passed", "command": "replay all four P2 triggers, focused 13-test suite, complete 168-test library transcript, format/check/strict-Clippy/diff gates, and bounded timeout evidence", "evidence_ref": "20260805T221615Z--post-remediation-proof-wall.md"},
+      {"kind": "recursive_fixture_consumer_inventory", "status": "passed", "command": "re-inventory exact eight implementation paths, semantic dependency definitions, currentness observation path, collapse provenance, control truth, and prohibited sibling surfaces", "evidence_ref": "Remediation changed only five admitted implementation paths; final subject contains no public/Cargo/default/adopter/transport/Snapshot/later-slice surface."},
+      {"kind": "manifest_replay", "status": "passed", "command": "recompute twenty-three-entry repo-path-NUL-SHA256-newline-v1 manifest", "evidence_ref": "sha256:e833f7e05df2d0122d5c74b733ae590e3ab77439e09972e7c6317ed26862daec, including final GitNexus artifact sha256:b319527304ad756548516ef11c7022859e3aa2643c1606e0df9a010f6f3bc601"},
+      {"kind": "formatting", "status": "passed", "command": "cargo fmt --all -- --check; JSON/UTF-8 parse", "evidence_ref": "Final Rust and JSON subject passed formatting/parsing."},
+      {"kind": "whitespace", "status": "passed", "command": "staged and unstaged git diff --check", "evidence_ref": "Both checks passed after remediation."}
+    ]
+  },
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path":"crates/engine/src/context_resolution.rs","sha256":"f6fc220529d9964c342781281530bf8a1117531ecd3dc65734be051f72a7f206"},
+      {"path":"crates/engine/src/lib.rs","sha256":"daadd0d32d84cca0a3653cab83ef4eccf2ad8b48f3bc4d3a8eb530e976cb0b33"},
+      {"path":"crates/engine/src/projection.rs","sha256":"ebf6bf4284ba36cc09a23eca07165a14f6647ff5b15a0b694c1ef3fd44e802b9"},
+      {"path":"crates/engine/src/projection/fixtures/definition.json","sha256":"e8106932e7016697196f7b89af86344f025c51594dded5b42f1393d86bd6158f"},
+      {"path":"crates/engine/src/projection/fixtures/resolved-profile.json","sha256":"a1c39546db52eeb357981f5b287c6746fe57c0d137b06a979a76f0f4e4f1aac0"},
+      {"path":"crates/engine/src/projection/fixtures/source.json","sha256":"5349066cd3e3040ec3bd0a4f02a224e4dbb52f67fe04f5145a4c5a12c226b113"},
+      {"path":"crates/engine/src/projection/fixtures/vocabulary.json","sha256":"7397def542b0d62dcdde8b99111be87adb195bb186606d2f689118ab1382b964"},
+      {"path":"crates/engine/src/projection/tests.rs","sha256":"8a1727613997dafc70de73920de50d94f733a0c00f76433782ef57b30a159767"},
+      {"path":"docs/specs/handbook-contract-membrane/00-README.md","sha256":"b48691793385ce69bda75d913c0143c29a759470244ba96f9dc92faeb4487430"},
+      {"path":"docs/specs/handbook-contract-membrane/04-phase-slice-map.md","sha256":"53ce4ba3e35e37437b08bd3b260528a0ebb03ac2469105fc2b04234176a305d0"},
+      {"path":"docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md","sha256":"73ae6423f571ea8f29a4093a103016e431dc213b577cd96aeab8153484e2a9bd"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T194532Z--HCM-3-3--implementation-selector-discovery.json","sha256":"3e57c11013cdd79a2c870e2eb511cd8ee229c98fb863284ccd1a256b82874273"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T195342Z--HCM-3-3--implementation-selector-closure.json","sha256":"3caf53c1f45fb04d3a4e1e4c3cb6e4694fbd8d1ed03ba6a2ddb43a09b01f20f3"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T195721Z--HCM-3-3--deterministic-projection-implementation.json","sha256":"c7e7142c275bba9c99ef7e767130bc2a24277429def292c5c80f765dc6e8203b"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T212403Z--HCM-3-3--deterministic-projection-implementation-discovery.json","sha256":"97d6aa65fa205682cd359bd1536388b149a31958d12fee04ddfe5d9669f5237b"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T213555Z--HCM-3-3--deterministic-projection-consolidated-remediation.json","sha256":"3dfffdf36efcde3fbfa561199115fb6442d87c617ca9a6e71095c5296de45be6"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md","sha256":"5dd7157dccd6e85af42e6a378105013f99be34920885f0a7d48d3807357cabfe"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md","sha256":"b547bea82b172c7c957cba36e16db5b07040bb6608a13a15f3a66855d82c0760"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T211549Z--gitnexus-change-detection.json","sha256":"255d9ed680e02a0d1c24f44004ffda997192d935a39e95bd3d41043edcf13cfe"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T211549Z--implementation-proof-wall.md","sha256":"6a2fa723edf90426c588f6ffe8a606869f100ae238aa16041f0d79889fc2e40e"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T213555Z--implementation-discovery-remediation.md","sha256":"9ec8aebcd7ed784747eba8542d67cde9b2c26bcd908551de82f01887f66351fe"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--gitnexus-post-remediation-change-detection.json","sha256":"b319527304ad756548516ef11c7022859e3aa2643c1606e0df9a010f6f3bc601"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md","sha256":"f6c48c1e6e3b68e6571e66f0d7ece008512a237b3a11655c7d12735eb951cae6"}
+    ],
+    "aggregate_fingerprint": "sha256:e833f7e05df2d0122d5c74b733ae590e3ab77439e09972e7c6317ed26862daec"
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 implementation different-fresh remediation closure",
+    "scope_horizon": "the complete final private engine/test/proof/control subject and exact four discovery triggers",
+    "detail_resolution": "snapshot live currentness, effective collapse, authored profile identity, trusted semantic dependencies, all original contract paths, and final MEDIUM GitNexus graph",
+    "temporal_horizon": "one delta-focused closure after the sole consolidated implementation remediation",
+    "authority_horizon": "exact twenty-three-entry subject; CLEAN ends implementation review without granting public/default/adopter/Snapshot/later-slice authority",
+    "memory_horizon": "discovery run/findings, remediation run, immutable selector/source authority, old HIGH discovery artifact, and final exact MEDIUM artifact",
+    "validation_horizon": "closure of all four triggers plus complete-subject regression and proof/control consistency"
+  },
+  "authority_refs": [
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T213555Z--implementation-discovery-remediation.md","sections":["Discovery result","One consolidated remediation","Impact boundary"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md","sections":["Consolidated remediation result","Final validation","Final GitNexus boundary","Earned boundary pending closure"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--gitnexus-post-remediation-change-detection.json","sections":["complete artifact"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md","sections":["Exact owner, symbol, configuration, and path envelope","Positive, negative, and future-proof wall"]},
+    {"path":"docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md","sections":["Projection currentness","Projection request","Projection result","Projection request/result field authority"]}
+  ],
+  "repo_truth": "The remediator produced exact RED for four triggers, then focused 13/13 GREEN and a complete 168/168 library pass. Parent replay timed out and is not GREEN. Final staged GitNexus is available and MEDIUM with 102 complete symbol identities/two private test flows; final compare-to-main is unavailable after refresh and the earlier available branch-wide CRITICAL result remains historical evidence. FTS is unavailable.",
+  "allowed_scope": [
+    "Perform one different-fresh read-only delta-focused closure of HCM33-I1-IMPL-DISC-001 through -004 against the complete twenty-three-entry final subject.",
+    "Replay final manifest/artifact, inspect the remediation and regression impact, and run bounded read-only checks. Report only an unresolved trigger or a P1/P2 directly caused or unmasked by this remediation.",
+    "Return CLEAN only when all four triggers close and no directly caused/unmasked P1/P2 remains."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery, edit/format/stage/commit/reindex/delegate, create records/dispatches, touch ledger/refs/remotes/protected paths, or authorize broader scope.",
+    "Do not require the unavailable final compare-to-main payload to be GREEN; verify it is honestly unavailable and the exact staged artifact is complete and byte-hashed."
+  ],
+  "tasks": [
+    "Close HCM33-I1-IMPL-DISC-001 by verifying snapshot-only exact mode, independently bound live tuple comparison, stale/equal-unbound/missing/extra/duplicate/substitution refusal, and zero payload reads.",
+    "Close HCM33-I1-IMPL-DISC-002 by verifying target ranks govern evaluation, narrower collapse omits higher-minimum rules, target provenance/fingerprint is exact, and replays are deterministic.",
+    "Close HCM33-I1-IMPL-DISC-003 by verifying authored profile/configuration bytes independently bind request/result identity and drift refuses or changes identity.",
+    "Close HCM33-I1-IMPL-DISC-004 by verifying all selected semantic dependency families resolve/recompute from trusted private definitions and substitution/drift refuses before payload reads.",
+    "Recheck all original HCM-3.3 behavior, control truth, scope ceiling, final MEDIUM GitNexus artifact population/hash, and honest unavailable final compare-to-main/FTS status."
+  ],
+  "contracts_and_gates": [
+    "This is the sole different-fresh implementation closure after one consolidated remediation.",
+    "CLEAN ends implementation review; a directly caused/unmasked P1/P2 may use only an immediately causal supplemental cycle. No general discovery is reopened.",
+    "No result grants Phase-3 exit, public/default/adopter/transport/Snapshot/HCM-3.4+ authority."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if any trigger remains or the remediation directly caused/unmasked a P1/P2; do not repair.",
+    "Return BLOCKED only for a genuine mandatory evidence/authority contradiction that prevents closure.",
+    "Do not relabel historical discovery or create a new review budget."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}

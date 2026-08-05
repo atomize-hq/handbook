@@ -522,7 +522,7 @@ completed v1.4 handoff
 [`20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json`](handoffs/records/20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json)
 records the fresh-parent complete-subject `CLEAN` closure, completing the slice
 and closing `PG-RES-01` only for this exact kernel. The stopped predecessor
-parent remains immutable source evidence. HCM-0.11, HCM-3.3+, consumer
+parent remains immutable source evidence. HCM-0.11, HCM-3.4+, consumer
 migration, tooling/schema/template work, dependency, public-API, platform, and
 transport expansion, release, push, and publication remain separately selected.
 
@@ -535,6 +535,16 @@ transport expansion, release, push, and publication remain separately selected.
 - omission and lossiness accounting;
 - source/profile/projection fingerprints;
 - no synthesis in the core implementation.
+
+The selected HCM-3.3 private/internal increment is implemented and proof-ready
+under the bounded 2026-08-05 implementation parent. It admits one generic
+configured custom-kind engine, one currentness-guarded opaque Resolution view,
+deterministic `reveal` and allowlisted deterministic `derive`, complete
+omission/proof/lossiness/provenance/fingerprint accounting, and the corrected
+two-admitted-envelope replay wall. This earns only the exact private/internal
+portions of `PG-PROJ-01` and `PG-PROJ-02`; public API/default catalog/consumer
+adoption, Snapshot Memory, HCM-3.4+, release, push, and Phase-3 exit remain
+separately authorized.
 
 ### `HCM-3.4` — Snapshot Memory and deterministic delta engine
 
