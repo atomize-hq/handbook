@@ -1,0 +1,245 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T170410Z--HCM-3-3--deterministic-projection-selector-discovery",
+  "created_at_utc": "2026-08-05T17:04:10Z",
+  "source_handoff_ids": [
+    "20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed"
+  ],
+  "parent_orchestration_id": "20260805T170317Z--HCM-3-3--deterministic-projection-selector-plan",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "doubt-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-P1-selector-plan-causal-review",
+  "subject_fingerprint": "sha256:aefa8a45c8da170d939e089392d75acc63d10fb3362044f9e0b1cc4cd54f8e01",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.3-selector-plan-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T17:03:17Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.3-deterministic-projection-selector-plan",
+        "packet_ids": [
+          "HCM-3.3-P1-selector-plan-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/decision/20260805T170317Z--deterministic-projection-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:3faffb894be91f8b2b4d866790e70344ee49a49c873e4129e0ea02665455cbc3"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:fbab06e4eefd8fe5ee14ea7c3f0a30e62085d22b7d1db60b490853c03760c76e",
+    "integrated_outcome_id": "hcm-3.3-deterministic-projection-selector-plan",
+    "outcome_registry_fingerprint": "sha256:3faffb894be91f8b2b4d866790e70344ee49a49c873e4129e0ea02665455cbc3",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.3-selector-plan-discovery-convergence",
+    "completed_at_utc": "2026-08-05T17:04:09Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "read the HCM-3.3 phase-map row, completed HCM-3.2 handoff, canonical Projection semantics, PG-PROJ gates, live 07/08/09 protocol, and all five candidate planning files",
+        "evidence_ref": "Bound HCM-3.3 planning candidate is documentation-only; the exact HCM-3.2 prerequisite is completed and no source, test, fixture, schema, profile, or transport file is in the subject."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory all candidate HCM-3.3 selector/spec/plan/todo/proof files and their named sibling seams",
+        "evidence_ref": "The subject contains exactly the selector, specification, plan, task ledger, and preflight proof. Snapshot Memory, pipeline/adopter, renderer, SDK, CLI, and transport seams are context-only non-goals."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted repo-path-NUL-SHA256-newline-v1 subject manifest plus canonical-json outcome registry and derived causal budget",
+        "evidence_ref": "Subject sha256:aefa8a45c8da170d939e089392d75acc63d10fb3362044f9e0b1cc4cd54f8e01; registry sha256:3faffb894be91f8b2b4d866790e70344ee49a49c873e4129e0ea02665455cbc3; budget sha256:fbab06e4eefd8fe5ee14ea7c3f0a30e62085d22b7d1db60b490853c03760c76e."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode, fence-balance, and trailing-whitespace scan for the complete candidate subject",
+        "evidence_ref": "All five manifest files decode as UTF-8, have balanced Markdown fences, and have no trailing spaces or tabs."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "Exited 0 before this dispatch was created."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+        "sha256": "61028d13454882d5cccd158c4b52a863d37edf9f043fd06c78da15ab809f291b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/decision/20260805T170317Z--deterministic-projection-selector.md",
+        "sha256": "9a3b36071c7fa80ed529fbdd309d5f02b92fcab3b509e14d17605d1995238cb8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T170317Z--preflight-and-authority.md",
+        "sha256": "0857d507f94a48a2b038d34b648f1bb6e3ab9e15148aabc84d4dbc28a2968f35"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+        "sha256": "55089b8d3a40bc7fb2d7f431da532decbe7460255dcbb9a62433593acdf7bd48"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/todo.md",
+        "sha256": "08f5abf5e8127f5a2b90e6fc9387dbce122b8682c73bed7163bb3b2b815c6c17"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:aefa8a45c8da170d939e089392d75acc63d10fb3362044f9e0b1cc4cd54f8e01"
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 deterministic Projection selector-plan discovery",
+    "scope_horizon": "one HCM-3.3 planning-only selector and implementation plan",
+    "detail_resolution": "generic Resolution-aware reveal/derive, exact definition/request/result provenance, collapse/expand, omission/lossiness, fingerprints, no synthesis, and future proof boundary",
+    "temporal_horizon": "planning stage before any HCM-3.3 implementation selection",
+    "authority_horizon": "HCM-3.3 planning only; no HCM-3.2 amendment, HCM-3.4+, code, schema, profile, public API, dependency, consumer, platform, transport, remote publication, or push",
+    "memory_horizon": "completed HCM-3.2 dependency record, exact local base/tree, and this frozen one-outcome planning registry",
+    "validation_horizon": "different-fresh planning closure plus two-commit local-only closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/decision/20260805T170317Z--deterministic-projection-selector.md",
+      "sections": [
+        "Authority and scope",
+        "Selector decision",
+        "Dependency proof",
+        "Causal outcome registry",
+        "Review and proof wall",
+        "Explicit non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.3 — Deterministic Projection engine"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Projection semantics",
+        "Collapse and expansion",
+        "Projection provenance"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Projection definition",
+        "Projection request/result field authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-PROJ-01",
+        "PG-PROJ-02",
+        "Regression rule 43"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json",
+      "sections": [
+        "entire completed handoff",
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "The assigned checkout and dedicated local integration ref are clean at 12c203f605c26ce7d1911e4ee60c0de205822000/tree d1cca0b342a8f671a4b9cef3f330cab42c0c32ef. HCM-3.2 is a completed immutable prerequisite; PG-PROJ-01 and PG-PROJ-02 are open. The candidate subject contains only planning documentation and proof. No source code, test, fixture, profile, schema, registry, public API, dependency, remote, or transport surface is selected.",
+  "allowed_scope": [
+    "Review the exact five-file HCM-3.3 planning subject read-only for authority, semantic completeness, determinism, safety, scope, reviewability, and future proofability.",
+    "Independently test the candidate decision against the canonical Projection contracts: generic configured custom-kind applicability, reveal/derive only, collapse/expand, typed omission/lossiness, exact fingerprints, authority preservation, no synthesis, and HCM-3.2/HCM-3.4+ separation.",
+    "Return unique fresh HCM33-PLAN-DISC identifiers only for gaps in this exact candidate planning subject; do not repair any finding."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff or ledger, delegate, or run product tests.",
+    "Do not implement a Projection engine, select production symbols/paths, create an HCM-3.3 implementation packet, alter HCM-3.2, Snapshot Memory, pipeline/adopter/consumer plans, schemas/templates/skills/tooling, public APIs, dependencies, remote state, or local integration ref."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit, with exact file/section, violated authority or gate, why the planning boundary/proof is wrong, smallest valid remediation, and missing verification.",
+    "Look for any way the proposed plan could synthesize, mutate/promote source authority, widen an envelope, use ambiguous source selection, omit a required claim without proof effect, evade lossiness/provenance accounting, or merge renderer/Snapshot/transport scope into the core.",
+    "Check that the future proof obligations are sufficient for the selected PG-PROJ-01/PG-PROJ-02 boundary and do not claim HCM-3.4+, Phase 3 exit, or implementation completion.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:aefa8a45c8da170d939e089392d75acc63d10fb3362044f9e0b1cc4cd54f8e01."
+  ],
+  "contracts_and_gates": [
+    "This is one complete-subject planning discovery review under the frozen outcome registry. A valid P1/P2 receives one consolidated remediation and a different-fresh delta closure; no review follows CLEAN.",
+    "P1/P2 cannot be waived or deferred. P3/P4 may be inventoried only under the live review inventory rules.",
+    "The plan must remain documentation-only and must not create an implementation or adoption claim."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair if the selector/specification/plan is ambiguous, contradictory, incomplete, untestable, unsafe, overbroad, or under-specified for the canonical Projection contract.",
+    "Return BLOCKED if validation requires a code/test/fixture change, a canonical semantic amendment, a new dependency/public API/schema/template/tooling scope, a sibling slice, remote interaction, or unavailable mandatory review capability.",
+    "Report any manifest, causal-cadence, protected-boundary, or authority issue to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

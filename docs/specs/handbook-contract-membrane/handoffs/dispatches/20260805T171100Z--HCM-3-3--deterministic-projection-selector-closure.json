@@ -1,0 +1,236 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure",
+  "created_at_utc": "2026-08-05T17:11:00Z",
+  "source_handoff_ids": [
+    "20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed"
+  ],
+  "parent_orchestration_id": "20260805T170317Z--HCM-3-3--deterministic-projection-selector-plan",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "doubt-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-P1-selector-plan-causal-review",
+  "subject_fingerprint": "sha256:24afe319ad86da599a6f7091bae0bf4a26ac681f0eb8e273955f22534267dedb",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.3-selector-plan-closure-1",
+    "trigger_run_ids": [
+      "/root/hcm33_planning_discovery"
+    ],
+    "finding_refs": [
+      "HCM33-PLAN-DISC-001",
+      "HCM33-PLAN-DISC-002",
+      "HCM33-PLAN-DISC-003"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T17:03:17Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.3-deterministic-projection-selector-plan",
+        "packet_ids": [
+          "HCM-3.3-P1-selector-plan-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/decision/20260805T170317Z--deterministic-projection-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:3faffb894be91f8b2b4d866790e70344ee49a49c873e4129e0ea02665455cbc3"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:fbab06e4eefd8fe5ee14ea7c3f0a30e62085d22b7d1db60b490853c03760c76e",
+    "integrated_outcome_id": "hcm-3.3-deterministic-projection-selector-plan",
+    "outcome_registry_fingerprint": "sha256:3faffb894be91f8b2b4d866790e70344ee49a49c873e4129e0ea02665455cbc3",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260805T170410Z--HCM-3-3--deterministic-projection-selector-discovery"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.3-selector-plan-closure-convergence",
+    "completed_at_utc": "2026-08-05T17:10:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "replay the three discovery P2 findings and one parent-owned consolidated planning-only remediation against unchanged phase, slice, packet, outcome, authority, and no-code scope",
+        "evidence_ref": "/root/hcm33_planning_discovery reported only HCM33-PLAN-DISC-001, 002, and 003; the remediation proof binds their complete repairs without selecting an implementation surface."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "re-inventory all six repaired planning-subject files and named context-only seams",
+        "evidence_ref": "The repaired subject adds one remediation proof and retains only selector/specification/plan/task/preflight documentation. No code, test, fixture, profile, schema, registry, Snapshot, pipeline, consumer, SDK, CLI, or transport path enters scope."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the sorted repo-path-NUL-SHA256-newline-v1 closure manifest plus the frozen canonical-json outcome registry and derived causal budget",
+        "evidence_ref": "Subject sha256:24afe319ad86da599a6f7091bae0bf4a26ac681f0eb8e273955f22534267dedb; registry sha256:3faffb894be91f8b2b4d866790e70344ee49a49c873e4129e0ea02665455cbc3; budget sha256:fbab06e4eefd8fe5ee14ea7c3f0a30e62085d22b7d1db60b490853c03760c76e."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode, fence-balance, and trailing-whitespace scan for the complete repaired planning subject",
+        "evidence_ref": "All six manifest files decode as UTF-8, have balanced Markdown fences, and have no trailing spaces or tabs."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "Exited 0 before this closure dispatch was created."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+        "sha256": "982bf1a21cfd60006d259dfdbedbdd3b0eb8d4af93c6efbf8ac1028e551bdc8b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/decision/20260805T170317Z--deterministic-projection-selector.md",
+        "sha256": "016bc63d9219c331af94d75c7c8090c6e0e19aacf1691e165eaa305c299a9179"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T170317Z--preflight-and-authority.md",
+        "sha256": "0857d507f94a48a2b038d34b648f1bb6e3ab9e15148aabc84d4dbc28a2968f35"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T171200Z--selector-plan-discovery-remediation.md",
+        "sha256": "5ee84b8a95b9d1e0ac64775dd93685d6f4d9b92d7dd1f6cb096a51f88ada25cf"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+        "sha256": "c1ec6b6a99d7e39a8aa736f3d9ea103aa7e4015248cae6990d1f6f83925e2783"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/todo.md",
+        "sha256": "2e5c4fe9e558625c508a4223b99836ad65513f160c4ffe014cd7d32b5b24cdea"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:24afe319ad86da599a6f7091bae0bf4a26ac681f0eb8e273955f22534267dedb"
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 deterministic Projection selector-plan delta closure",
+    "scope_horizon": "one HCM-3.3 planning-only selector and implementation plan",
+    "detail_resolution": "only the three repaired P2 gaps: configured custom-kind genericity, profile-catalog/captured-revision admission, and exact evaluator closure",
+    "temporal_horizon": "planning closure before any HCM-3.3 implementation selection",
+    "authority_horizon": "HCM-3.3 planning only; no HCM-3.2 amendment, HCM-3.4+, code, schema, profile, public API, dependency, consumer, platform, transport, remote publication, or push",
+    "memory_horizon": "the discovery run and its three trigger findings, parent-owned remediation proof, completed HCM-3.2 dependency record, and unchanged frozen outcome registry",
+    "validation_horizon": "different-fresh closure of remediation delta plus two-commit local-only closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/decision/20260805T170317Z--deterministic-projection-selector.md",
+      "sections": [
+        "Selector decision",
+        "Review and proof wall",
+        "Explicit non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.3 — Deterministic Projection engine"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Projection definition",
+        "Projection request/result field authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-PROJ-01",
+        "PG-PROJ-02",
+        "Regression rule 43"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery found three valid planning-only P2 gaps. The parent repaired them without changing the phase/slice/packet/outcome registry, source handoff, base/tree, no-code scope, or integration ref. The repaired six-file subject remains documentation-only; PG-PROJ-01 and PG-PROJ-02 remain open and no implementation/adoption claim is made.",
+  "allowed_scope": [
+    "Perform one different-fresh delta-focused read-only closure of the exact six-file repaired planning subject and only HCM33-PLAN-DISC-001, 002, and 003.",
+    "Verify the custom-kind same-engine requirement, resolved-profile catalog admission and exact currentness closure, and exact built-in metadata-only support evaluator with fingerprint closure are fully repaired under canonical Projection authority.",
+    "Report only a trigger still unresolved or a P1/P2 directly caused or unmasked by this remediation. Do not reopen general discovery."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery; do not identify unrelated improvement opportunities as blocking; do not edit, format, stage, commit, delegate, run product tests, or write a handoff/ledger.",
+    "Do not implement a Projection engine, select production symbols/paths, create an HCM-3.3 implementation packet, alter HCM-3.2, Snapshot Memory, pipeline/adopter/consumer plans, schemas/templates/skills/tooling, public APIs, dependencies, remote state, or local integration ref."
+  ],
+  "tasks": [
+    "Return findings first only if one of the three named P2s remains incomplete or this remediation directly caused or unmasked a P1/P2 inside the unchanged planning authority and no-code scope.",
+    "Verify configured registered custom-kind declarative same-engine behavior; profile-catalog plus null/empty or snapshot captured-revision admission; and exact versioned built-in evaluator identity/input/reason/fingerprint closure.",
+    "Return CLEAN only if all three trigger findings are fully closed and no directly caused or unmasked P1/P2 remains for sha256:24afe319ad86da599a6f7091bae0bf4a26ac681f0eb8e273955f22534267dedb."
+  ],
+  "contracts_and_gates": [
+    "This is the one different-fresh planning closure for the frozen outcome registry. No review cycle may follow a CLEAN verdict.",
+    "P1/P2 cannot be waived or deferred. A new finding may consume a supplemental causal cycle only when directly caused or unmasked by this remediation; P3/P4 remain non-blocking only under the review inventory rules.",
+    "This closure cannot authorize implementation, gate closure, Snapshot Memory, pipeline/adopter/consumer work, public APIs, dependencies, remote interaction, or any scope expansion."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if a trigger remains or remediation directly caused/unmasked a P1/P2; do not repair it.",
+    "Return BLOCKED if closure requires broader authority, a canonical semantic amendment, code/test/fixture scope, schema/template/tooling scope, a sibling slice, remote interaction, or unavailable mandatory evidence.",
+    "Report any manifest, causal-cadence, protected-boundary, or authority issue to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
