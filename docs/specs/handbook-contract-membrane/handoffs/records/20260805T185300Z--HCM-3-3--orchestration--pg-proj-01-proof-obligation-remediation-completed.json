@@ -1,0 +1,463 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed",
+  "created_at_utc": "2026-08-05T18:53:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-P2-pg-proj-01-proof-remediation-causal-review",
+  "orchestration_id": "20260805T184000Z--HCM-3-3--pg-proj-01-proof-obligation-remediation",
+  "source_handoff_ids": [
+    "20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex HCM-3.3 PG-PROJ-01 corrective increment orchestrator",
+    "thread_ref": "019fd335-a75e-7bb0-bba9-19d5cf75c6c2"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-05T18:53:00Z",
+    "evidence_ref": "Two schema-valid v1.4 built-in read-only gpt-5.6-sol/high review runs completed with isolated context: one discovery FINDINGS run, one parent-owned consolidated remediation, and one different-fresh CLEAN closure."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "/root/hcm33_proj01_discovery",
+      "dispatch_id": "20260805T184200Z--HCM-3-3--pg-proj-01-proof-obligation-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T184200Z--HCM-3-3--pg-proj-01-proof-obligation-discovery.json",
+      "dispatch_fingerprint": "sha256:97b38fe746e271a02bcf410157528e2c81f39c4f7e6fdb20c0009e50359a1e35",
+      "role": "review",
+      "agent_id": "/root/hcm33_proj01_discovery",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "doubt-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:d5a06414b99d3b1abfd00f1cac1885276c564fcc550ad8bd478a9262be546ef9",
+      "result_subject_fingerprint": "sha256:d5a06414b99d3b1abfd00f1cac1885276c564fcc550ad8bd478a9262be546ef9",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM33-PROJ01-DISC-001"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T184200Z--HCM-3-3--pg-proj-01-proof-obligation-discovery.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184700Z--pg-proj-01-discovery-remediation.md"
+      ]
+    },
+    {
+      "run_id": "/root/hcm33_proj01_closure",
+      "dispatch_id": "20260805T184800Z--HCM-3-3--pg-proj-01-proof-obligation-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T184800Z--HCM-3-3--pg-proj-01-proof-obligation-closure.json",
+      "dispatch_fingerprint": "sha256:48edbe95f6ffc999f407d6c418dd079fdc700ce44839f7bdf721e208e1eccf2b",
+      "role": "review",
+      "agent_id": "/root/hcm33_proj01_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "doubt-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:71aa5eeeb750994bdbf7811940ba9e453cd8e8045b15e6e7a1fd7e22c7a8aa50",
+      "result_subject_fingerprint": "sha256:71aa5eeeb750994bdbf7811940ba9e453cd8e8045b15e6e7a1fd7e22c7a8aa50",
+      "review_round": 2,
+      "predecessor_run_id": "/root/hcm33_proj01_discovery",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T184800Z--HCM-3-3--pg-proj-01-proof-obligation-closure.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184700Z--pg-proj-01-discovery-remediation.md"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-05T18:53:00Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:de7e8eb43c3dda05d0718c69775ea9c156cab87fe5f32706bdad06ca2a84965c"
+    ],
+    "aggregate_fingerprint": "sha256:41f217c137d296cc005b1af179888e5c53180a95e9678bfc5b7954246e7ca8a7"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3.3-pg-proj-01-discovery-remediation",
+      "finding_run_id": "/root/hcm33_proj01_discovery",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "/root/hcm33_proj01_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:71aa5eeeb750994bdbf7811940ba9e453cd8e8045b15e6e7a1fd7e22c7a8aa50",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184700Z--pg-proj-01-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T184800Z--HCM-3-3--pg-proj-01-proof-obligation-closure.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "578405e63f5e84dac99e3c5b78c76f4e66ea2079",
+    "subject_fingerprint": "sha256:71aa5eeeb750994bdbf7811940ba9e453cd8e8045b15e6e7a1fd7e22c7a8aa50",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T184800Z--HCM-3-3--pg-proj-01-proof-obligation-closure.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184000Z--pg-proj-01-corrective-selector-and-preflight.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184700Z--pg-proj-01-discovery-remediation.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T184800Z--HCM-3-3--pg-proj-01-proof-obligation-closure.json",
+      "git:578405e63f5e84dac99e3c5b78c76f4e66ea2079"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 PG-PROJ-01 corrective proof-obligation remediation completed",
+    "scope_horizon": "one new planning-only corrective parent over the exact HCM-3.3 PG-PROJ-01 future proof obligation",
+    "detail_resolution": "one byte-identical source/profile/vocabulary/definition closure under at least two authorized envelopes, deterministic per-envelope replay, complete cross-envelope accounting/provenance/fingerprints, and unchanged authority",
+    "temporal_horizon": "reviewed primary commit 578405e63f5e84dac99e3c5b78c76f4e66ea2079 followed only by mechanical v1.4 closeout",
+    "authority_horizon": "planning obligation only; no Projection implementation, gate closure, HCM-3.2/HCM-3.4+ change, public/dependency/consumer/transport/release/remote authority",
+    "memory_horizon": "immutable completed HCM-3.3 source handoff, one new frozen corrective outcome, one discovery P2, one parent remediation, and one different-fresh CLEAN closure",
+    "validation_horizon": "exact closure-manifest replay, scoped proof wall, ordinary handoff validation, both self-tests, deterministic ledger, protected-path equality, and expected-old local CAS"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Repair only the future PG-PROJ-01 proof obligation so one fixed source/profile/vocabulary/ProjectionDefinition closure is projected under at least two authorized Resolution envelopes with deterministic, fully accounted outputs, complete provenance/fingerprints, and unchanged source authority.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184000Z--pg-proj-01-corrective-selector-and-preflight.md",
+      "sections": [
+        "Selected corrective objective",
+        "Frozen causal outcome registry",
+        "Review subject and cadence",
+        "Allowed primary and closeout scope",
+        "Hard non-goals and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+      "sections": [
+        "Future implementation proof obligations",
+        "Completion and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+      "sections": [
+        "Implement provenance, lossiness, and non-authority result semantics",
+        "Prove only the selected Projection gates",
+        "Planning completion boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.3 — Deterministic Projection engine"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Projection semantics",
+        "Collapse and expansion",
+        "Projection provenance"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Projection definition",
+        "Projection request",
+        "Projection result",
+        "Projection request/result field authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-PROJ-01",
+        "PG-PROJ-02"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed.json",
+      "sections": [
+        "entire completed handoff",
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Fresh review / remediation loop",
+        "Full proof wall",
+        "True-stop handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout",
+        "Deterministic ledger rebuild"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 578405e63f5e84dac99e3c5b78c76f4e66ea2079",
+    "head": "578405e63f5e84dac99e3c5b78c76f4e66ea2079",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Bound the real increment thread/host to nonce 1539bf7ecb5544329c471a5fb8f5344b and verified the exact assigned checkout, target ref/base/tree, required ancestor, cleanliness, worktree ownership, configured origin, and protected-checkout observations before edits.",
+    "Established a distinct corrective parent and frozen one new planning-only integrated outcome without resuming or modifying the completed HCM-3.3 parent, its handoff, dispatches, causal budget, findings, or CLEAN result.",
+    "Ran one complete-subject fresh discovery review; it independently reported HCM33-PROJ01-DISC-001 because the existing proof wall did not isolate Resolution as the only varying input across two envelopes.",
+    "Applied one consolidated parent-owned remediation to SPEC.md and tasks/plan.md, requiring a byte-identical fixed source/profile/vocabulary/definition closure, two authorized envelope cases, two replays per envelope, complete accounting/provenance/fingerprints, and unchanged authority.",
+    "Received one different-fresh delta-focused CLEAN closure. No supplemental cycle followed CLEAN, no P3/P4 advisory was returned, and PG-PROJ-01/PG-PROJ-02 remain open.",
+    "Committed the exact reviewed six-path primary state at 578405e63f5e84dac99e3c5b78c76f4e66ea2079; this record and the deterministic ledger are the only mechanical closeout surface."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+      "status": "completed",
+      "summary": "Future PG-PROJ-01 proof wall now requires one fixed source/profile/vocabulary/definition closure under at least two authorized envelopes with deterministic replay and complete authority-preserving accounting."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+      "status": "completed",
+      "summary": "Future implementation work items now carry the exact two-envelope matrix, invariant inputs, replay, comparison, and provenance acceptance criteria."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184000Z--pg-proj-01-corrective-selector-and-preflight.md",
+      "status": "completed",
+      "summary": "Distinct corrective selector, identity/preflight proof, frozen outcome registry, path boundary, and causal review authority."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184700Z--pg-proj-01-discovery-remediation.md",
+      "status": "completed",
+      "summary": "Parent-owned validation and consolidated remediation of the sole discovery P2."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T184200Z--HCM-3-3--pg-proj-01-proof-obligation-discovery.json",
+      "status": "completed",
+      "summary": "Fresh complete-subject discovery FINDINGS dispatch bound to the pre-repair subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T184800Z--HCM-3-3--pg-proj-01-proof-obligation-closure.json",
+      "status": "completed",
+      "summary": "Different-fresh delta-focused CLEAN closure bound to the exact four-file repaired manifest."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned v1.4 completed corrective handoff reconciling identity, review cadence, remediation, proof, and local-only closeout."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.3-P2-D1",
+      "summary": "The future PG-PROJ-01 wall must isolate Resolution by holding one byte-identical source/profile/vocabulary/ProjectionDefinition closure fixed while evaluating at least two already-authorized envelopes, with two deterministic replays per envelope and exact cross-envelope accounting.",
+      "authority_effect": "none; this is a planning proof obligation only and does not implement Projection behavior, close a gate, alter source authority, or authorize another slice.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184700Z--pg-proj-01-discovery-remediation.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM33-PROJ01-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/hcm33_proj01_discovery",
+      "summary": "The pre-repair proof wall repeated identical requests but did not hold one exact source/profile/vocabulary/definition closure fixed while varying only at least two authorized envelopes, so changed inputs could masquerade as Resolution effects.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T184700Z--pg-proj-01-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T184800Z--HCM-3-3--pg-proj-01-proof-obligation-closure.json"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <discovery-dispatch>",
+      "status": "passed",
+      "evidence_ref": "Pre-execution discovery verification replayed subject sha256:d5a06414b99d3b1abfd00f1cac1885276c564fcc550ad8bd478a9262be546ef9 and admitted the frozen registry/budget/cycle."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <closure-dispatch>",
+      "status": "passed",
+      "evidence_ref": "Closure verification replayed exact reviewed subject sha256:71aa5eeeb750994bdbf7811940ba9e453cd8e8045b15e6e7a1fd7e22c7a8aa50 after remediation and before primary commit."
+    },
+    {
+      "command": "normalized PG-PROJ-01 proof-obligation assertions; exact six-path allowlist; historical decision/todo exclusion; strict UTF-8/fence/whitespace checks; git diff --check",
+      "status": "passed",
+      "evidence_ref": "The reviewed primary subject satisfies the exact two-envelope proof wall, changes only six authorized documentation/dispatch paths, and leaves the historical decision/todo and every protected scope untouched."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "Ordinary schema, immutable-history admission, exact dispatch population, causal lineage, reviewed-baseline manifest replay, record/index parity, and deterministic ledger validation passed."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "Historical admission and deterministic ledger negative self-test passed."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "V1.4 causal registry/budget, discovery-remediation-closure lineage, different-fresh CLEAN cutoff, no supplemental/post-CLEAN cycle, and two-commit closeout self-test passed."
+    },
+    {
+      "command": "GitNexus upstream impact and scoped/compare-to-main detect_changes",
+      "status": "not_run",
+      "evidence_ref": "Unavailable: no code symbol is selected, and this session exposes no .gitnexus/run.cjs, gitnexus CLI, or GitNexus MCP capability. Impact has no target; change detection is recorded unavailable, never GREEN."
+    },
+    {
+      "command": "protected-checkout, dedicated-local-ref, and no-push audit",
+      "status": "passed",
+      "evidence_ref": "Protected product and meta-control checkout HEAD/tree/status observation digests equal preflight; the dedicated local ref remains at the expected base until closeout CAS; origin was not queried, and no push was performed."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+      "sections": [
+        "Future implementation proof obligations"
+      ],
+      "reason": "Require the missing PG-PROJ-01 fixed-input multi-envelope deterministic proof case.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+      "sections": [
+        "Implement provenance, lossiness, and non-authority result semantics",
+        "Prove only the selected Projection gates"
+      ],
+      "reason": "Carry the exact multi-envelope fixture, replay, accounting, fingerprint, authority, and invalidation criteria into future implementation planning.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the distinct corrective parent's completed v1.4 identity, causal review, proof, and local-only closeout.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger byte-deterministically from immutable canonical records.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic HCM-3.3 implementation continuation is authorized by this corrective planning closeout.",
+    "condition": "Only a future explicit user instruction may select an HCM-3.3 implementation increment that consumes this proof obligation and the immutable completed selector-plan context.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed.json",
+        "sections": [
+          "entire completed handoff",
+          "resume"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+        "sections": [
+          "Future implementation proof obligations",
+          "Completion and stop conditions"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+        "sections": [
+          "Implement provenance, lossiness, and non-authority result semantics",
+          "Prove only the selected Projection gates"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed.json",
+        "sections": [
+          "entire completed handoff",
+          "resume"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not automatically implement HCM-3.3, close PG-PROJ-01/PG-PROJ-02, claim Phase-3 completion, or create an implementation/code proof from this planning closeout.",
+      "Do not alter completed HCM-3.3 or HCM-3.2 handoffs/dispatches/causal lineage; code, tests, fixtures, profiles, schemas, registries, validators, templates, skills, tools, dependencies, APIs, versions, release, Snapshot Memory, HCM-3.4+, pipeline/adopter/consumer/transport scope, protected checkouts, or remote state remain unauthorized.",
+      "Do not reinterpret this repaired proof obligation as runtime evidence or a gate-close claim."
+    ],
+    "acceptance_criteria": [
+      "A future implementation task has explicit user authority and a new bounded implementation selector.",
+      "Its PG-PROJ-01 proof freezes one byte-identical source/profile/vocabulary/definition closure, varies only at least two already-authorized envelope pairs, executes two replays per envelope, and proves complete deterministic accounting/provenance/fingerprints plus unchanged authority.",
+      "The future task preserves reveal/derive-only semantics, no synthesis, collapse without self-widening, expansion only through a broader authorized request or typed escalation, and keeps PG-PROJ-02/Phase-3 claims separately evidence-bound."
+    ],
+    "stop_conditions": [
+      "Stop before implementation without a new explicit user instruction and reviewed implementation selector.",
+      "Stop if a future proof changes any non-envelope input between envelope cases, lacks complete per-rule/proof-effect/lossiness/provenance accounting, mutates/promotes source authority, or requires broader slice authority.",
+      "Stop on target-ref drift; do not merge, rebase, reset, clean, force-update, fetch, query a remote, or push."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Completed the distinct HCM-3.3 PG-PROJ-01 planning correction. The future proof wall now isolates Resolution across two authorized envelopes while fixing all source/profile/vocabulary/definition inputs, requires deterministic replay and complete provenance/accounting, and preserves source authority. One discovery P2 was remediated and different-fresh closure is CLEAN; both Projection gates remain open and implementation still requires explicit user authority."
+}
