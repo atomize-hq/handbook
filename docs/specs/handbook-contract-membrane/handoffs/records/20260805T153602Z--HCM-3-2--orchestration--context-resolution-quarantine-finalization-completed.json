@@ -1,0 +1,508 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed",
+  "created_at_utc": "2026-08-05T15:36:02Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-QF-P4-closeout",
+  "orchestration_id": "20260805T101500Z--HCM-3-2--context-resolution-quarantine-finalization",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex top-level increment orchestrator",
+    "thread_ref": "019fd14a-7bec-7aa0-9bc4-10750a78f678"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-05T15:36:02Z",
+    "evidence_ref": "Eight schema-valid v1.4 built-in subagent dispatches completed; planning and implementation findings received consolidated remediation and different-fresh CLEAN closures."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "/root/hcm32_qf_selector_discovery",
+      "dispatch_id": "20260805T101522Z--HCM-3-2--quarantine-finalization-selector-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T101522Z--HCM-3-2--quarantine-finalization-selector-discovery.json",
+      "dispatch_fingerprint": "sha256:f0523257542447056faa891e8721a2b750a226254249b70f7345a27cf0d468c9",
+      "role": "review",
+      "agent_id": "/root/hcm32_qf_selector_discovery",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "doubt-driven-development", "documentation-and-ADRs", "api-and-interface-design", "security-and-hardening", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:75058af4942230947fde0fa8755643a276fa13f46ce969a5f602de39ecc940d2",
+      "result_subject_fingerprint": "sha256:75058af4942230947fde0fa8755643a276fa13f46ce969a5f602de39ecc940d2",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM32-QF-SEL-DISC-001", "HCM32-QF-SEL-DISC-002"],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T101522Z--HCM-3-2--quarantine-finalization-selector-discovery.json"]
+    },
+    {
+      "run_id": "hcm32_qf_selector_remediation",
+      "dispatch_id": "20260805T102305Z--HCM-3-2--quarantine-finalization-selector-remediation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T102305Z--HCM-3-2--quarantine-finalization-selector-remediation.json",
+      "dispatch_fingerprint": "sha256:8946003c52a8c4815f51e40d9603273a33cdf8847213839dd0cf4ba7faaf376a",
+      "role": "remediation",
+      "agent_id": "/root/hcm32_qf_selector_remediation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "planning-and-task-breakdown", "documentation-and-ADRs", "incremental-implementation"],
+      "subject_fingerprint": "sha256:75058af4942230947fde0fa8755643a276fa13f46ce969a5f602de39ecc940d2",
+      "result_subject_fingerprint": "sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66",
+      "review_round": null,
+      "predecessor_run_id": "/root/hcm32_qf_selector_discovery",
+      "remediation_for_run_ids": ["/root/hcm32_qf_selector_discovery"],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T102700Z--quarantine-finalization-selector-remediation.md"]
+    },
+    {
+      "run_id": "hcm32_qf_selector_closure",
+      "dispatch_id": "20260805T103138Z--HCM-3-2--quarantine-finalization-selector-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T103138Z--HCM-3-2--quarantine-finalization-selector-closure.json",
+      "dispatch_fingerprint": "sha256:653cd0f6c66afc478691727d258cb46f8134d1ebddb2fd62542d98e24c418281",
+      "role": "review",
+      "agent_id": "/root/hcm32_qf_selector_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "planning-and-task-breakdown", "doubt-driven-development", "documentation-and-ADRs", "api-and-interface-design", "security-and-hardening", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66",
+      "result_subject_fingerprint": "sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66",
+      "review_round": 2,
+      "predecessor_run_id": "hcm32_qf_selector_remediation",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T103138Z--HCM-3-2--quarantine-finalization-selector-closure.json"]
+    },
+    {
+      "run_id": "hcm32_qf_implementation",
+      "dispatch_id": "20260805T104006Z--HCM-3-2--quarantine-finalization-implementation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T104006Z--HCM-3-2--quarantine-finalization-implementation.json",
+      "dispatch_fingerprint": "sha256:700bcae4548e0dfd7f3ff687a0ea71513923a1573ecd170916ffa985eafdf67a",
+      "role": "implementation",
+      "agent_id": "/root/hcm32_qf_implementation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "incremental-implementation", "test-driven-development", "debugging-and-error-recovery", "api-and-interface-design", "security-and-hardening", "documentation-and-ADRs", "git-workflow-and-versioning"],
+      "subject_fingerprint": "sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66",
+      "result_subject_fingerprint": "sha256:54f2fdfb072500da361aca7fd6ae6c6dfc2b68fd46f62605520a4527e9d13833",
+      "review_round": null,
+      "predecessor_run_id": "hcm32_qf_selector_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md"]
+    },
+    {
+      "run_id": "hcm32_qf_proof",
+      "dispatch_id": "20260805T112506Z--HCM-3-2--quarantine-finalization-proof",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T112506Z--HCM-3-2--quarantine-finalization-proof.json",
+      "dispatch_fingerprint": "sha256:b64e9cf35ab0ca65e4209373c2fc88a29d6ef24402352c5df978488141b73678",
+      "role": "proof",
+      "agent_id": "/root/hcm32_qf_proof",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "test-driven-development", "debugging-and-error-recovery", "code-review-and-quality", "documentation-and-ADRs", "git-workflow-and-versioning"],
+      "subject_fingerprint": "sha256:54f2fdfb072500da361aca7fd6ae6c6dfc2b68fd46f62605520a4527e9d13833",
+      "result_subject_fingerprint": "sha256:6e66ad8f7e2ef8a5d981aceec9c8b163b764719fec91b437df2643f8d88f2d6c",
+      "review_round": null,
+      "predecessor_run_id": "hcm32_qf_implementation",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md"]
+    },
+    {
+      "run_id": "/root/hcm32_qf_implementation_discovery",
+      "dispatch_id": "20260805T131306Z--HCM-3-2--quarantine-finalization-implementation-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T131306Z--HCM-3-2--quarantine-finalization-implementation-discovery.json",
+      "dispatch_fingerprint": "sha256:9f2d0e30486f499ef72b7b3e16294431f2f0495667fe28dff985ca0465e9bfa6",
+      "role": "review",
+      "agent_id": "/root/hcm32_qf_implementation_discovery",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "doubt-driven-development", "api-and-interface-design", "security-and-hardening", "test-driven-development", "code-review-and-quality", "git-workflow-and-versioning"],
+      "subject_fingerprint": "sha256:6e66ad8f7e2ef8a5d981aceec9c8b163b764719fec91b437df2643f8d88f2d6c",
+      "result_subject_fingerprint": "sha256:6e66ad8f7e2ef8a5d981aceec9c8b163b764719fec91b437df2643f8d88f2d6c",
+      "review_round": 3,
+      "predecessor_run_id": "hcm32_qf_proof",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM32-QF-IMPL-DISC-001"],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T131306Z--HCM-3-2--quarantine-finalization-implementation-discovery.json"]
+    },
+    {
+      "run_id": "hcm32_qf_implementation_remediation",
+      "dispatch_id": "20260805T134628Z--HCM-3-2--quarantine-finalization-implementation-remediation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T134628Z--HCM-3-2--quarantine-finalization-implementation-remediation.json",
+      "dispatch_fingerprint": "sha256:c770cb1a7616a322a42b43e3b29afdea391384b9220c863f0dd9e7d28a9ebca5",
+      "role": "remediation",
+      "agent_id": "/root/hcm32_qf_implementation_remediation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "spec-driven-development", "incremental-implementation", "test-driven-development", "debugging-and-error-recovery", "api-and-interface-design", "security-and-hardening", "documentation-and-ADRs", "git-workflow-and-versioning"],
+      "subject_fingerprint": "sha256:6e66ad8f7e2ef8a5d981aceec9c8b163b764719fec91b437df2643f8d88f2d6c",
+      "result_subject_fingerprint": "sha256:aedc22daf1788465ebb0a07850953361a962bd61d80cc88ae94ad0e7ccf17099",
+      "review_round": null,
+      "predecessor_run_id": "/root/hcm32_qf_implementation_discovery",
+      "remediation_for_run_ids": ["/root/hcm32_qf_implementation_discovery"],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md"]
+    },
+    {
+      "run_id": "hcm32_qf_implementation_closure",
+      "dispatch_id": "20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure.json",
+      "dispatch_fingerprint": "sha256:dfe73e3d18cc4a329b070f61312e64f9c75cd9f63388ea710c495e0396c93542",
+      "role": "review",
+      "agent_id": "/root/hcm32_qf_implementation_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "spec-driven-development", "doubt-driven-development", "api-and-interface-design", "security-and-hardening", "test-driven-development", "code-review-and-quality", "git-workflow-and-versioning"],
+      "subject_fingerprint": "sha256:aedc22daf1788465ebb0a07850953361a962bd61d80cc88ae94ad0e7ccf17099",
+      "result_subject_fingerprint": "sha256:aedc22daf1788465ebb0a07850953361a962bd61d80cc88ae94ad0e7ccf17099",
+      "review_round": 4,
+      "predecessor_run_id": "hcm32_qf_implementation_remediation",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure.json", "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md"]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-05T15:36:02Z",
+    "dispatch_count": 8,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": ["sha256:a50c9dbfec9d454fe4300a5e88ba20cc76e839ed7c85c90b2e92768a6c03a237"],
+    "aggregate_fingerprint": "sha256:c3255cd00309933e915dfbba97d8477b128f1ddfbd78b6a496441d2e2d868b74"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3.2-qf-selector-remediation",
+      "finding_run_id": "/root/hcm32_qf_selector_discovery",
+      "owner": "delegated_run",
+      "delegated_run_id": "hcm32_qf_selector_remediation",
+      "re_review_run_id": "hcm32_qf_selector_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T102700Z--quarantine-finalization-selector-remediation.md", "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T103138Z--HCM-3-2--quarantine-finalization-selector-closure.json"]
+    },
+    {
+      "remediation_id": "hcm-3.2-qf-implementation-evidence-remediation",
+      "finding_run_id": "/root/hcm32_qf_implementation_discovery",
+      "owner": "delegated_run",
+      "delegated_run_id": "hcm32_qf_implementation_remediation",
+      "re_review_run_id": "hcm32_qf_implementation_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:aedc22daf1788465ebb0a07850953361a962bd61d80cc88ae94ad0e7ccf17099",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md", "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure.json"]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "9fd54c2f746eddd4df5dff37ba3828626395000d",
+    "subject_fingerprint": "sha256:aedc22daf1788465ebb0a07850953361a962bd61d80cc88ae94ad0e7ccf17099",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure.json",
+      "git:9fd54c2f746eddd4df5dff37ba3828626395000d"
+    ],
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure.json"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 quarantine identity-ordering finalization completed",
+    "scope_horizon": "complete recovered Context Resolution product subject plus exact identity-before-mutation repair",
+    "detail_resolution": "live currentness, JCS capsule publication, append-only quarantine anchors/completions, exact-A recovery, different-B refusal, generic lineage compatibility, and conditional control truth",
+    "temporal_horizon": "fresh parent at primary commit 9fd54c2 followed only by this mechanical v1.4 closeout",
+    "authority_horizon": "HCM-3.2 completed locally; HCM-0.11, HCM-3.3, tooling changes, public/dependency/platform/transport expansion, remote publication, and push remain unauthorized",
+    "memory_horizon": "immutable predecessor evidence, protected 33-path recovery input, two planning findings, one evidence-disputed implementation finding, both different-fresh CLEAN closures, and complete proof wall",
+    "validation_horizon": "focused adversarial tests, full kernel/generic/engine/workspace walls, check/Clippy/format/diff, ordinary validation, both self-tests, GitNexus, and protected-path audit"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": ["handbook.artifact-kind.context-resolution-authority-binding@1.0.0"],
+    "artifact_instance_refs": ["context_resolution_authority"],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [".handbook/project/context-resolution-authority.yaml"],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Finish actual HCM-3.2 Context Resolution product work by selectively recovering the protected source subject, repairing quarantine candidate identity ordering before durable mutation, independently proving and reviewing the complete subject, and publishing only a two-commit local closeout.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md",
+      "sections": ["Fresh authority and additive lineage", "Exact remaining product defect", "Proof wall and completion", "Stop conditions"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+      "sections": ["Required product behavior", "Proof and review", "Earned status"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md",
+      "sections": ["Proof wall", "Implementation discovery finding and bounded evidence remediation", "GitNexus and control-plane observations"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure.json",
+      "sections": ["subject_manifest", "contracts_and_gates", "return_contract"]
+    }
+  ],
+  "repo_state": {
+    "branch": "orchestration/handbook-hcm-3-2-fresh-review-20260805",
+    "head": "9fd54c2f746eddd4df5dff37ba3828626395000d",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Created the exact fresh parent, one integrated outcome, four QF packets, additive selector, and independent planning CLEAN before product edits.",
+    "Recovered the protected HCM-3.2 product, tests, fixtures, source proof, and source dispatch evidence selectively without mutating any protected checkout.",
+    "Moved exact candidate identity validation ahead of mutating quarantine inventory cleanup while preserving exact-A crash recovery, inventory bounds, anchor/currentness checks, and generic non-HCM behavior.",
+    "Added the real valid-anchor A/different-valid-B/partial-scratch negative and proved scratch, open record, anchor, completion, canonical authority, and surrounding inventory remain byte-identical after refusal.",
+    "Revalidated stable source findings HCM32-JCS-IMPL-DISC-001, 002, 003, 004, 005, and 006; the only fresh implementation finding was independently closed as unreachable under mandatory generic lineage invariants.",
+    "Completed the full product/workspace proof wall, strict static/hygiene gates, GitNexus impact/change detection, ordinary validation, and both validator self-tests.",
+    "Committed the reviewed primary state at 9fd54c2f746eddd4df5dff37ba3828626395000d; this record and the deterministic ledger are the only mechanical closeout surface."
+  ],
+  "deliverables": [
+    {
+      "path": "crates/engine/src/artifact_lineage_store.rs",
+      "status": "completed",
+      "summary": "Fail-closed HCM quarantine identity ordering, anchors/completions, durable recovery, and currentness integration."
+    },
+    {
+      "path": "crates/engine/src/context_resolution.rs",
+      "status": "completed",
+      "summary": "Recovered complete Context Resolution authority and recovery classification subject."
+    },
+    {
+      "path": "crates/engine/tests/context_resolution_kernel.rs",
+      "status": "completed",
+      "summary": "Thirty-three real-path kernel tests including exact A/B mutation refusal and both lexical-order generic-invariant cases."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md",
+      "status": "completed",
+      "summary": "Independently CLEAN fresh-parent selector and exact scope/authority boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md",
+      "status": "completed",
+      "summary": "Complete product, regression, validator, GitNexus, protected-path, and review evidence."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned v1.4 completion reconciling all eight dispatches, findings, remediations, proof, and final CLEAN review."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.2-QF-D1",
+      "summary": "A caller candidate must match the anchored open quarantine record before any inventory validation that can reconcile scratch state.",
+      "authority_effect": "Different candidate ref, fingerprint, or deterministic idempotency key fails before durable mutation; the exact anchored candidate retains legitimate recovery."
+    ,
+      "refs": ["crates/engine/src/artifact_lineage_store.rs", "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md"]
+    },
+    {
+      "decision_id": "HCM-3.2-QF-D2",
+      "summary": "Generic lineage reachability is a hard prerequisite before HCM recovery candidate classification.",
+      "authority_effect": "An uncited, duplicate, or rebound matching invalid candidate cannot create a generic-lineage-valid mixed inventory; the fresh review finding is resolved by invariant proof and a two-order negative."
+    ,
+      "refs": ["crates/engine/src/context_resolution.rs", "crates/engine/tests/context_resolution_kernel.rs"]
+    },
+    {
+      "decision_id": "HCM-3.2-QF-D3",
+      "summary": "FTS remains unavailable while scoped and compare-to-main GitNexus change detection are valid CRITICAL observations.",
+      "authority_effect": "Unavailable FTS is never reported GREEN; all mapped CRITICAL symbols and flows remain inside the selected Context Resolution/quarantine seams."
+    ,
+      "refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md"]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM32-QF-SEL-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/hcm32_qf_selector_discovery",
+      "summary": "The initial selector contradicted itself by describing both an exact three-path production ceiling and a sixth-path stop.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T102700Z--quarantine-finalization-selector-remediation.md", "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T103138Z--HCM-3-2--quarantine-finalization-selector-closure.json"]
+    },
+    {
+      "finding_id": "HCM32-QF-SEL-DISC-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/hcm32_qf_selector_discovery",
+      "summary": "The initial selector implied separate proof/final reviews despite the granted combined implementation/proof review and mechanical P4 closeout.",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T102700Z--quarantine-finalization-selector-remediation.md", "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T103138Z--HCM-3-2--quarantine-finalization-selector-closure.json"]
+    },
+    {
+      "finding_id": "HCM32-QF-IMPL-DISC-001",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "resolved",
+      "source_run_id": "/root/hcm32_qf_implementation_discovery",
+      "summary": "Discovery alleged that a matching invalid recovery candidate could coexist with one valid candidate and be ignored; bounded construction attempts and independent closure proved generic lineage rejects every such state before HCM classification.",
+      "evidence_refs": ["crates/engine/tests/context_resolution_kernel.rs", "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md", "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure.json"]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "cargo test -p handbook-engine --test context_resolution_kernel different_valid_quarantine_candidate_refuses_before_publication_mutation -- --exact",
+      "status": "passed",
+      "evidence_ref": "Independent closure replay: 1 passed, 32 filtered; harness 87.60s; valid anchored A and different valid B refuse before any durable mutation."
+    },
+    {
+      "command": "cargo test -p handbook-engine --test context_resolution_kernel matching_invalid_recovery_candidate_refuses_in_both_lexical_orders -- --exact",
+      "status": "passed",
+      "evidence_ref": "Independent closure replay: 1 passed, 32 filtered; harness 84.22s; both lexical placements fail at generic lineage reachability."
+    },
+    {
+      "command": "cargo test -p handbook-engine --test context_resolution_kernel; cargo test -p handbook-engine --test hcm_2_3_generic_lineage",
+      "status": "passed",
+      "evidence_ref": "Final kernel state 33/33 passed after evidence remediation; complete generic lineage wall 55/55 passed on unchanged production bytes."
+    },
+    {
+      "command": "definition/profile replay; cargo test -p handbook-engine --all-targets --all-features; cargo test --workspace --all-targets --all-features; cargo check --workspace --all-targets --all-features",
+      "status": "passed",
+      "evidence_ref": "Proof wall records shipped definition/profile replay, engine and workspace all-target/all-feature GREEN, and workspace check GREEN; final test-only remediation was covered by the 33-test kernel."
+    },
+    {
+      "command": "cargo clippy --workspace --all-targets --all-features -- -D warnings; cargo fmt --all -- --check; git diff --check",
+      "status": "passed",
+      "evidence_ref": "Final primary state passed strict Clippy in 1.22s, rustfmt, and diff whitespace checks."
+    },
+    {
+      "command": "ordinary handoff validation; --self-test-v1-admission; --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "Completed record, exact dispatch population, deterministic ledger, historical admission, and orchestration causal/two-commit contracts pass."
+    },
+    {
+      "command": "GitNexus upstream impact and detect-changes --scope all plus --scope compare --base-ref main",
+      "status": "passed",
+      "evidence_ref": "Target method LOW before edit; context classifier HIGH and complete scoped subject CRITICAL were warned and stayed authorized. Final scoped detection: 18 files, 193 symbols, 50 processes, CRITICAL. Compare-to-main: 1,355 files, 9,929 symbols, 259 processes, CRITICAL. FTS unavailable."
+    },
+    {
+      "command": "protected checkout, orchestration directory, base/tree/ref/remote, allowlist, and no-push audit",
+      "status": "passed",
+      "evidence_ref": "All four protected checkout HEAD/tree/status digests and .git marker digests match preflight; protected 018f remains 2,003 tracked/untracked entries with its exact initial status digest. Dedicated local ref and origin feature baseline remained at their expected values before closeout."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": ["Status", "Implementation authorization"],
+      "reason": "Record exact HCM-3.2 completion without authorizing HCM-3.3.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": ["Context Resolution"],
+      "reason": "Record the earned live currentness and quarantine classification.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": ["HCM-3.2"],
+      "reason": "Record only the completed selected slice boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": ["PG-RES-01", "HCM-3.2"],
+      "reason": "Bind the exact proof wall and independent review dispositions.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json",
+      "sections": ["entire handoff"],
+      "reason": "Publish the parent-owned completion after final CLEAN review and primary commit.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": ["deterministic ledger entry"],
+      "reason": "Rebuild the query ledger from every canonical record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic continuation is authorized from completed HCM-3.2.",
+    "condition": "Only a new explicit operator selection may authorize another increment.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json",
+        "sections": ["entire completed handoff"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "sections": ["Earned status", "Non-goals"]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not continue automatically into HCM-3.3 or any HCM-0.11 work.",
+      "Do not alter orchestration tooling, schemas, templates, skills, immutable source evidence, or the reviewed HCM-3.2 subject.",
+      "Do not release, publish remotely, push, add dependencies/public APIs/platform transports, or widen authority without new explicit authorization."
+    ],
+    "acceptance_criteria": [
+      "The completed v1.4 parent handoff reconciles all eight fresh-parent dispatches and exact finding-remediation-closure edges.",
+      "The reviewed baseline is 9fd54c2f746eddd4df5dff37ba3828626395000d and the handoff plus deterministic ledger are committed separately.",
+      "The local integration ref advances atomically from eb4b7ba55c6f3db40799e67275f3bbbb8610c87a to the closeout commit while the origin feature baseline remains unchanged and no push occurs."
+    ],
+    "stop_conditions": [
+      "Stop before HCM-3.3, HCM-0.11, any new Phase 3 implementation, tooling work, release, publication, or push without fresh explicit authority.",
+      "Stop if future work would mutate protected recovery evidence or overstate the bounded HCM-3.2 completion."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Completed HCM-3.2 Context Resolution at reviewed primary 9fd54c2. Exact quarantine candidate identity is checked before mutation, valid anchored A/different valid B preserves every durable byte, exact-A recovery and generic lineage remain intact, all fresh findings are closed through different-fresh CLEAN review, and only the v1.4 handoff plus ledger remain for local-only mechanical closeout."
+}
