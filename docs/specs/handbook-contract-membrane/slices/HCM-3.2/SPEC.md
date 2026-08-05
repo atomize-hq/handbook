@@ -297,18 +297,19 @@ replacement crash boundary.
 
 ## Completion and stops
 
-Planning is CLEAN and the recovered implementation/proof candidate is GREEN.
-Completion still requires one forthcoming fresh-parent combined
-implementation/proof review ending `CLEAN` with no unresolved P1/P2 and its
-verdict recorded in a completed v1.4 handoff. Mechanical P4 closeout follows
-with no review cycle: commit the reviewed primary state, create and commit the
-separate v1.4 handoff/ledger closeout, pass the validator plus both self-tests,
-and perform expected-old local-ref compare-and-swap.
+Planning is CLEAN and the recovered implementation/proof subject is completed
+locally at reviewed primary commit `9fd54c2f746eddd4df5dff37ba3828626395000d`.
+The completed v1.4 handoff
+[`20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json`](../../handoffs/records/20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json)
+records the fresh-parent complete-subject `CLEAN` closure with no unresolved
+P1/P2, completing HCM-3.2 and closing `PG-RES-01` only for this bounded kernel.
+The mechanical P4 closeout is recorded separately after the handoff validator
+and both self-tests; it adds no continuing authority.
 
-Stop before implementation or completion for any fourth production path,
-unexpected HIGH/CRITICAL symbol, public API or dependency expansion, generic
-ownership change, unsafe/native/platform/transport work, shipped identity
-change, HCM-3.3+, unrepresentable v1.4 cadence, exhausted review budget,
-unavailable mandatory delegation, or unresolved P1/P2. If the minimum
-replacement floor cannot fit these bounds, return a durable same-slice true
-stop; bootstrap-only scope is not inferred.
+No automatic continuation is authorized. Stop before HCM-0.11, HCM-3.3+, any
+fourth production path, tooling/schema/template work, public-API or dependency
+expansion, generic ownership change, unsafe/native/platform/transport work,
+shipped identity change, release, push, publication, unrepresentable v1.4
+cadence, exhausted review budget, unavailable mandatory delegation, or
+unresolved P1/P2. If the minimum replacement floor cannot fit these bounds,
+return a durable same-slice true stop; bootstrap-only scope is not inferred.

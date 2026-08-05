@@ -51,12 +51,13 @@ Earlier work belongs to predecessor parents and is source evidence only.
 - [x] Pass ordinary handoff validation and both self-tests.
 - [x] Run GitNexus scoped and compare-to-`main` detection before primary
   commit; record unavailable capabilities honestly.
-- [ ] Execute the already-authorized different-fresh closure to independently
-  adjudicate whether the two-order generic-lineage invariant evidence falsifies
-  the claimed reachable P2. `CLEAN` closes `HCM32-QF-IMPL-DISC-001`.
-- [ ] If and only if closure returns `FINDINGS` or `BLOCKED`, keep HCM-3.2
-  incomplete and require a classifier-reachable RED or new operator authority
-  before further remediation.
+- [x] The different-fresh closure returned `CLEAN`, resolving
+  `HCM32-QF-IMPL-DISC-001` through the two-order generic-lineage invariant
+  evidence and completing HCM-3.2 / `PG-RES-01` locally for the bounded kernel.
+- [x] The `FINDINGS`/`BLOCKED` contingency did not occur; no further
+  remediation or automatic continuation is authorized. HCM-0.11, HCM-3.3+,
+  tooling/schema/template work, broader dependency/public-API/platform/transport
+  expansion, and release/push/publication remain unauthorized.
 
 ## `HCM-3.2-QF-P4-closeout`
 
