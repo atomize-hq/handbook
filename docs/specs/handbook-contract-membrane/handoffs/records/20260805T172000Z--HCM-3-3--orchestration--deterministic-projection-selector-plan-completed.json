@@ -1,0 +1,478 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed",
+  "created_at_utc": "2026-08-05T17:20:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-P1-selector-plan-causal-review",
+  "orchestration_id": "20260805T170317Z--HCM-3-3--deterministic-projection-selector-plan",
+  "source_handoff_ids": [
+    "20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex HCM-3.3 planning increment orchestrator",
+    "thread_ref": "019fd2db-0721-74a0-9317-dc5e22c3ecc2"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-05T17:20:00Z",
+    "evidence_ref": "Two schema-valid v1.4 built-in, read-only, fresh-context review dispatches completed: one discovery, parent-owned consolidated remediation, and one different-fresh CLEAN closure."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "/root/hcm33_planning_discovery",
+      "dispatch_id": "20260805T170410Z--HCM-3-3--deterministic-projection-selector-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T170410Z--HCM-3-3--deterministic-projection-selector-discovery.json",
+      "dispatch_fingerprint": "sha256:a8c21098fd9e9ac480930841e993765d3f7c3b15f18a0043f1fe35c63d02890a",
+      "role": "review",
+      "agent_id": "/root/hcm33_planning_discovery",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "doubt-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:aefa8a45c8da170d939e089392d75acc63d10fb3362044f9e0b1cc4cd54f8e01",
+      "result_subject_fingerprint": "sha256:aefa8a45c8da170d939e089392d75acc63d10fb3362044f9e0b1cc4cd54f8e01",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM33-PLAN-DISC-001",
+        "HCM33-PLAN-DISC-002",
+        "HCM33-PLAN-DISC-003"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T170410Z--HCM-3-3--deterministic-projection-selector-discovery.json"
+      ]
+    },
+    {
+      "run_id": "/root/hcm33_planning_closure",
+      "dispatch_id": "20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure.json",
+      "dispatch_fingerprint": "sha256:2ef71e7ed2e62d9bb4897a5c2d17939d848b8c4f5d3164a9e86b0555124ce433",
+      "role": "review",
+      "agent_id": "/root/hcm33_planning_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "doubt-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:24afe319ad86da599a6f7091bae0bf4a26ac681f0eb8e273955f22534267dedb",
+      "result_subject_fingerprint": "sha256:24afe319ad86da599a6f7091bae0bf4a26ac681f0eb8e273955f22534267dedb",
+      "review_round": 2,
+      "predecessor_run_id": "/root/hcm33_planning_discovery",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T171200Z--selector-plan-discovery-remediation.md"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-05T17:20:00Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:fbab06e4eefd8fe5ee14ea7c3f0a30e62085d22b7d1db60b490853c03760c76e"
+    ],
+    "aggregate_fingerprint": "sha256:06d184ddd5b87643d4b327109a7ebc615eabc0974f530b9b10267c67d0a59934"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3.3-selector-plan-discovery-remediation",
+      "finding_run_id": "/root/hcm33_planning_discovery",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "/root/hcm33_planning_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:24afe319ad86da599a6f7091bae0bf4a26ac681f0eb8e273955f22534267dedb",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T171200Z--selector-plan-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "bd0a78090a709938d3e76770f6c5ac45291517b0",
+    "subject_fingerprint": "sha256:24afe319ad86da599a6f7091bae0bf4a26ac681f0eb8e273955f22534267dedb",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T170317Z--preflight-and-authority.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T171200Z--selector-plan-discovery-remediation.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure.json",
+      "git:bd0a78090a709938d3e76770f6c5ac45291517b0"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 Deterministic Projection selector-plan completed",
+    "scope_horizon": "one reviewed HCM-3.3 planning-only selector, specification, implementation plan, task ledger, local dispatch evidence, and parent closeout",
+    "detail_resolution": "future generic Resolution-aware reveal/derive behavior, collapse/expand handling, omission/lossiness/provenance, resolved-profile admission/currentness, evaluator closure, and source/profile/projection fingerprints are specified without selecting or implementing production code",
+    "temporal_horizon": "fresh completed planning subject at primary commit bd0a78090a709938d3e76770f6c5ac45291517b0 followed only by this mechanical v1.4 closeout",
+    "authority_horizon": "HCM-3.3 planning is complete locally; HCM-3.3 implementation, HCM-3.2 amendment, HCM-3.4+, Snapshot Memory, pipeline/adopter/consumer work, code/tests/fixtures/profiles/schemas/tooling, public API/dependency/release/remote/push remain unauthorized",
+    "memory_horizon": "immutable completed HCM-3.2 prerequisite, one frozen outcome registry, three discovery P2 findings, one consolidated parent remediation, a different-fresh CLEAN closure, and exact six-file final planning manifest",
+    "validation_horizon": "ordinary handoff validation, both self-tests, final-manifest replay against the primary commit, deterministic ledger, diff/allowlist, local-ref compare-and-swap, and protected-path/no-push audit"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Complete the only authorized HCM-3.3 planning increment: produce and independently close a bounded Deterministic Projection selector and implementation plan from the completed HCM-3.2 PG-RES-01 boundary, without implementing Projection behavior or widening Phase 3 scope.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/decision/20260805T170317Z--deterministic-projection-selector.md",
+      "sections": [
+        "Authority and scope",
+        "Selector decision",
+        "Causal outcome registry",
+        "Review and proof wall",
+        "Explicit non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+      "sections": [
+        "Planning contract",
+        "Selected future semantic boundary",
+        "Future proof obligations",
+        "Non-goals and true stop"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.3 — Deterministic Projection engine"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Projection semantics",
+        "Collapse and expansion",
+        "Projection provenance"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Projection definition",
+        "Projection request/result field authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-PROJ-01",
+        "PG-PROJ-02",
+        "Regression rule 43"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Completion closeout",
+        "Internal subagent boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Deterministic ledger rebuild",
+        "Completion handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json",
+      "sections": [
+        "entire completed handoff",
+        "resume"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at bd0a78090a709938d3e76770f6c5ac45291517b0",
+    "head": "bd0a78090a709938d3e76770f6c5ac45291517b0",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Verified the exact assigned checkout, expected base/tree, dedicated local integration ref, required ancestry, cleanliness, protected checkout observations, and the completed immutable HCM-3.2 prerequisite before editing.",
+    "Established one frozen HCM-3.3 planning outcome and selected a documentation-only Deterministic Projection boundary that remains generic, Resolution-aware, reveal/derive-only, deterministic, provenance-preserving, and non-synthesizing.",
+    "Created the bounded HCM-3.3 selector, specification, plan, task ledger, preflight proof, and schema-valid internal discovery/closure dispatches without touching code, tests, fixtures, profiles, schemas, registries, tooling, APIs, dependencies, or remote state.",
+    "Repaired all three discovery P2 gaps in one parent-owned remediation: configured custom-kind same-engine behavior, resolved-profile/captured-currentness admission, and exact versioned metadata-only evaluator/fingerprint closure.",
+    "Received a different-fresh delta closure with CLEAN verdict; no supplemental review was opened and PG-PROJ-01/PG-PROJ-02 remain open for a future explicitly authorized implementation increment.",
+    "Committed the reviewed primary planning state at bd0a78090a709938d3e76770f6c5ac45291517b0; this parent record and the deterministic ledger are the only mechanical closeout surface."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+      "status": "completed",
+      "summary": "Planning-only Deterministic Projection contract and non-goals."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/decision/20260805T170317Z--deterministic-projection-selector.md",
+      "status": "completed",
+      "summary": "Bounded selector, one outcome registry, decision, proof wall, and causal-review authority."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+      "status": "completed",
+      "summary": "Future implementation plan and concrete proof obligations without implementation authorization."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/todo.md",
+      "status": "completed",
+      "summary": "Planning-completion task ledger and explicit implementation true stop."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T171200Z--selector-plan-discovery-remediation.md",
+      "status": "completed",
+      "summary": "Parent-owned consolidated P2 remediation evidence."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure.json",
+      "status": "completed",
+      "summary": "Different-fresh delta closure dispatch bound to the final six-file planning manifest."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned v1.4 completed planning handoff reconciling the review, remediation, proof, and local-only closeout."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.3-P1-D1",
+      "summary": "The future Deterministic Projection core is a generic resolved-profile, exact-definition evaluator that only reveals or deterministically derives from admitted source authority; it never synthesizes source authority or adopts renderer, Snapshot Memory, pipeline, consumer, or transport responsibilities.",
+      "authority_effect": "A later implementation must retain declarative configured custom-kind behavior, exact currentness and evaluator closure, typed lossiness/provenance/fingerprints, and the selected future proof wall; it needs a new explicit authorization and may not claim PG-PROJ closure from this plan.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/decision/20260805T170317Z--deterministic-projection-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM33-PLAN-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/hcm33_planning_discovery",
+      "summary": "The original planning subject did not make configured registered custom kinds prove that they use the same generic deterministic engine and no hardcoded branch or source-order fallback.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T171200Z--selector-plan-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure.json"
+      ]
+    },
+    {
+      "finding_id": "HCM33-PLAN-DISC-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/hcm33_planning_discovery",
+      "summary": "The original planning subject lacked exact resolved-profile catalog admission and currentness closure for null/empty none mode versus snapshot-selector captured revision values.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T171200Z--selector-plan-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure.json"
+      ]
+    },
+    {
+      "finding_id": "HCM33-PLAN-DISC-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/hcm33_planning_discovery",
+      "summary": "The original planning subject did not close the exact evaluator version/build/input allowlist, deterministic unsupported reason, and evaluator identity in definition/evaluation/result fingerprints.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T171200Z--selector-plan-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T171100Z--HCM-3-3--deterministic-projection-selector-closure.json"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "Ordinary current-record/current-dispatch schema, causal lineage, exact final manifest, record/index parity, and deterministic ledger validation passed."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "Historical admission and exact ledger-rebuild negative self-test passed."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "v1.4 causal-cadence, review/remediation lineage, fresh-review, CLEAN cutoff, and two-commit closeout self-test passed."
+    },
+    {
+      "command": "git diff --check; staged allowlist audit; exact final closure-dispatch replay",
+      "status": "passed",
+      "evidence_ref": "The reviewed primary state contains eight documentation/dispatch paths only; closeout contains only this parent record and the deterministic ledger."
+    },
+    {
+      "command": "GitNexus impact plus scoped and compare-to-main detect_changes",
+      "status": "not_run",
+      "evidence_ref": "Unavailable: no .gitnexus/run.cjs, gitnexus CLI, or GitNexus MCP capability is present in this checkout. No code symbol was changed, so no impact target exists."
+    },
+    {
+      "command": "protected-path, dedicated-local-ref, and no-push audit",
+      "status": "passed",
+      "evidence_ref": "Protected product and HCM-3.2/control-plane checkout tree/status observations remain byte-for-byte at their preflight values; the dedicated local ref was compare-and-swap updated only after closeout. Remote access was not queried by policy and no push was performed."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+      "sections": [
+        "entire planning-only specification"
+      ],
+      "reason": "Establish the selected HCM-3.3 future semantic and proof boundary without implementation.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/decision/20260805T170317Z--deterministic-projection-selector.md",
+      "sections": [
+        "entire selector decision"
+      ],
+      "reason": "Record the bounded authority, frozen causal outcome, and no-code planning decision.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+      "sections": [
+        "entire implementation plan"
+      ],
+      "reason": "Define, but do not authorize or perform, the future implementation and proof sequence.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/todo.md",
+      "sections": [
+        "entire planning task ledger"
+      ],
+      "reason": "Mark the planning review completed and retain an explicit true stop before implementation.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the parent-owned planning completion after final CLEAN review and primary commit.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger from all immutable canonical records.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic HCM-3.3 implementation continuation is authorized from this completed planning increment.",
+    "condition": "Only a new explicit user-authorized HCM-3.3 implementation selector may consume this planning handoff.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed.json",
+        "sections": [
+          "entire completed handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md",
+        "sections": [
+          "Planning contract",
+          "Selected future semantic boundary",
+          "Non-goals and true stop"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/tasks/plan.md",
+        "sections": [
+          "entire plan"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not automatically implement HCM-3.3, close PG-PROJ-01/PG-PROJ-02, or reinterpret the completed HCM-3.2 prerequisite.",
+      "Do not alter production code, tests, fixtures, profiles, schemas, registries, tooling, validators, skills, public APIs, dependencies, release/versioning, Snapshot Memory, pipeline/adopter/consumer scope, or remote state without new explicit authority.",
+      "Do not amend this immutable planning handoff or use this planning completion to waive future P1/P2 findings."
+    ],
+    "acceptance_criteria": [
+      "A new task has explicit HCM-3.3 implementation authority, selects a bounded implementation packet, and validates this record plus the final six-file CLEAN manifest before code selection.",
+      "The future implementation keeps declarative generic custom-kind handling, resolved-profile/captured-currentness admission, exact evaluator closure, no synthesis, and typed omission/lossiness/provenance/fingerprints.",
+      "The reviewed primary baseline is bd0a78090a709938d3e76770f6c5ac45291517b0; this record and the deterministic ledger are committed separately and the local integration ref was atomically advanced from 12c203f605c26ce7d1911e4ee60c0de205822000."
+    ],
+    "stop_conditions": [
+      "Stop before implementation or any scope widening unless a new explicit authorization selects it.",
+      "Stop if a future task would alter protected HCM-3.2 evidence, conflate Projection core with Snapshot/pipeline/adopter/consumer concerns, or overstate this plan as implementation or gate completion.",
+      "Stop on local-ref compare-and-swap drift; do not merge, rebase, reset, clean, force-update, fetch, query remote, or push."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Completed the bounded HCM-3.3 Deterministic Projection selector-plan only. The primary commit freezes generic resolved-profile reveal/derive semantics, deterministic collapse/expand, omissions/lossiness/provenance, exact currentness and evaluator fingerprint closure, and a future proof wall. Discovery's three P2 planning gaps were remediated once and a different-fresh closure is CLEAN. No Projection implementation, code change, PG-PROJ closure, remote query, or push occurred; a new explicit authorization is required for HCM-3.3 implementation."
+}
