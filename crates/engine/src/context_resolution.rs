@@ -1813,10 +1813,73 @@ impl ContextResolutionEnvelopeInput {
 #[derive(Clone, Debug)]
 pub struct ContextResolutionEnvelope { exact_binding: ContextResolutionExactBinding, _objective_ref: String, resolved_profile: ContextResolutionExactBinding, resolution_stack: ContextResolutionExactBinding, active_level_id: String, dimensions: ContextResolutionDimensions, _constraint_inputs: Vec<ContextResolutionExactBinding>, mutation_allow_layers: Vec<Vec<ContextResolutionMutationRule>>, mutation_denies: Vec<ContextResolutionMutationRule>, _escalation_triggers: Vec<ContextResolutionExactBinding>, authority: Arc<Value>, authority_admission: ContextResolutionAuthorityAdmission, stack: ContextResolutionStackDefinition }
 
+#[allow(dead_code)]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub(crate) struct ProjectionAuthorityView {
+    envelope: ContextResolutionExactBinding,
+    resolved_profile: ContextResolutionExactBinding,
+    resolution_stack: ContextResolutionExactBinding,
+    active_level_id: String,
+    dimension_values: [String; 6],
+    dimension_ranks: [u8; 6],
+}
+
+#[allow(dead_code)]
+impl ProjectionAuthorityView {
+    pub(crate) fn envelope(&self) -> &ContextResolutionExactBinding {
+        &self.envelope
+    }
+
+    pub(crate) fn resolved_profile(&self) -> &ContextResolutionExactBinding {
+        &self.resolved_profile
+    }
+
+    pub(crate) fn resolution_stack(&self) -> &ContextResolutionExactBinding {
+        &self.resolution_stack
+    }
+
+    pub(crate) fn active_level(&self) -> &str {
+        &self.active_level_id
+    }
+
+    pub(crate) fn dimension_values(&self) -> [&str; 6] {
+        self.dimension_values.each_ref().map(String::as_str)
+    }
+
+    pub(crate) fn dimension_ranks(&self) -> [u8; 6] {
+        self.dimension_ranks
+    }
+}
+
 #[rustfmt::skip]
 impl ContextResolutionEnvelope {
     #[rustfmt::skip]
     fn require_current(&self) -> Result<(), ContextResolutionKernelError> { self.authority_admission.require_current() }
+
+    #[allow(dead_code)]
+    pub(crate) fn projection_authority_view(
+        &self,
+    ) -> Result<ProjectionAuthorityView, ContextResolutionKernelError> {
+        self.require_current()?;
+        let dimension_values = self.dimensions.values().map(str::to_owned);
+        let dimension_ranks = self
+            .stack
+            .ranks(&self.active_level_id, self.dimensions.values())
+            .ok_or_else(|| {
+                kernel_error!(
+                    ContextResolutionKernelErrorKind::StaleAuthority,
+                    "envelope dimensions are no longer in the exact Resolution stack",
+                )
+            })?;
+        Ok(ProjectionAuthorityView {
+            envelope: self.exact_binding.clone(),
+            resolved_profile: self.resolved_profile.clone(),
+            resolution_stack: self.resolution_stack.clone(),
+            active_level_id: self.active_level_id.clone(),
+            dimension_values,
+            dimension_ranks,
+        })
+    }
 
     pub fn resolve_root(
         profile: &ResolvedInstanceProfile,

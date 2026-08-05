@@ -48,6 +48,8 @@ pub mod profile_inspection;
 pub mod profile_selection;
 pub mod project_condition_registry;
 pub mod project_context_artifact;
+#[allow(dead_code)]
+mod projection;
 pub mod repository_invocation_identity;
 pub mod schema_registry;
 pub mod semantic_capability_registry;
