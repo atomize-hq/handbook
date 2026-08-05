@@ -174,7 +174,7 @@ closeout. This does not support a generic custom-kind intake claim.
 | `PG-YAML-02` | no dual editable Markdown/YAML truth remains for converted families | closed program-wide for the Phase 2 conversion set: Project Context, first-party Charter/Project Authority, Environment Context, Stage 10 Work Specification, Decision Record, and Risk Record each have one editable canonical YAML truth; retained Markdown is fixed deterministic output or a zero-influence decoy. Descriptor-selected aggregate flow has no legacy/fallback read, migration promise, or competing fixed-family authority. Future Projection output remains derived and cannot reopen this gate without new authority. |
 
 | `PG-VOCAB-01` | lexical and structural conflation render correctly without losing stable role resolution | closed for the exact HCM-3.1 vocabulary kernel and fixed Stage-10 Work Specification consumer at proof subject `sha256:ee97b424c966aaecaeb3f1d09e08129ba4c69f80e889290e36d13fea6d76936d`: typed roles remain direct, unique/ambiguous untyped lookup is deterministic, invalid authority/capability/category/ownership/cycle cases refuse, the shipped empty vocabulary is byte-compatible, and one non-empty profile renders all absorption edges without canonical-YAML or machine-identity influence. Other consumers/adapters remain unproved. |
-| `PG-RES-01` | six-dimension envelope validates inheritance, authority, memory, and validation horizons | open pending already-authorized different-fresh adjudication for HCM-3.2: the prior bounded implementation/proof wall remains recorded evidence for rules 42 and 48, authenticated publication/currentness, replacement recovery, quarantine identity-before-mutation, and unchanged generic lineage, but fresh finding `HCM32-QF-IMPL-DISC-001` is evidence-disputed and not self-closed. Its mixed valid-plus-invalid matching state was not shown classifier-reachable without generic-lineage refusal; no production repair was made. `CLEAN` independently closes the finding. `FINDINGS` or `BLOCKED` leaves HCM-3.2 incomplete and only then requires a classifier-reachable RED or new operator authority. |
+| `PG-RES-01` | six-dimension envelope validates inheritance, authority, memory, and validation horizons | closed only for the completed local HCM-3.2 Context Resolution kernel at reviewed primary `9fd54c2f746eddd4df5dff37ba3828626395000d`. The completed v1.4 parent handoff records the fresh-parent `CLEAN` selector and complete-subject implementation/proof closures, resolving `HCM32-QF-IMPL-DISC-001` by proving generic-lineage refusal prevents a mixed matching state from reaching the quarantine classifier. The bounded proof covers rules 42 and 48, authenticated publication/currentness, replacement recovery, quarantine identity-before-mutation, and generic-lineage compatibility. No HCM-0.11, HCM-3.3+, consumer, tooling/schema/template, dependency, public-API, platform, transport, release, push, or publication authority is earned. |
 | `PG-PROJ-01` | same source truth yields multiple deterministic Resolution projections with provenance | open |
 | `PG-PROJ-02` | omitted required claims remain visible and cannot false-pass | open |
 | `PG-SNAP-01` | same selected stable state and capture policy produce the same normalized state fingerprint with deterministic ordering | open |
@@ -216,10 +216,10 @@ change detection remain unavailable and are not classified GREEN.
 
 That HCM-3.1 subject advances no Context Resolution, Projection, Snapshot,
 posture, adapter/public transport, command, dependency, or shipped non-empty
-vocabulary gate. The separately selected conditional HCM-3.2 boundary follows;
+vocabulary gate. The separately selected completed HCM-3.2 boundary follows;
 the Phase 3 exit remains open.
 
-### HCM-3.2 conditional Context Resolution proof boundary
+### HCM-3.2 completed Context Resolution boundary
 
 The fresh-parent proof record
 [`20260805T125727Z--quarantine-finalization-proof-wall.md`](slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md)
@@ -232,17 +232,20 @@ GitNexus scope-all and compare-to-`main` completed at `CRITICAL` with only the
 authorized selected seams in the scoped subject; FTS remains unavailable and
 is not classified GREEN. Rules 42 and 48 are retained without widening.
 
-Fresh remediation audit `HCM32-QF-IMPL-DISC-001` supersedes any
-`proof-complete` inference from that wall. A new focused regression proves
-matching invalid orphan evidence fails closed as uncited on either lexical
-side and that removal restores the valid committed candidate, but no fixture
-preserved exact generic authority while reaching the quarantine classifier.
-No production repair was made. The already-authorized different-fresh closure
-must independently adjudicate whether the two-order invariant evidence
-falsifies the claimed reachable P2. `CLEAN` closes the finding; `FINDINGS` or
-`BLOCKED` leaves HCM-3.2 and `PG-RES-01` incomplete and only then requires a
-classifier-reachable RED or new operator authority. HCM-3.3+, consumer
-adoption, release, push, and publication remain open.
+Fresh remediation audit `HCM32-QF-IMPL-DISC-001` is resolved by the
+different-fresh `CLEAN` implementation closure
+[`20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure.json`](handoffs/dispatches/20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure.json),
+after the selector closure also returned `CLEAN`. The focused two-order
+regression proves matching invalid orphan evidence fails closed as uncited on
+either lexical side and that removal restores the valid committed candidate;
+generic-lineage refusal prevents a mixed matching state from reaching the
+quarantine classifier. The completed v1.4 parent handoff
+[`20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json`](handoffs/records/20260805T153602Z--HCM-3-2--orchestration--context-resolution-quarantine-finalization-completed.json)
+records both completed CLEAN closure dispositions and the reviewed subject.
+`PG-RES-01` therefore closes only for this bounded kernel. HCM-0.11, HCM-3.3+,
+consumer adoption, tooling/schema/template work, dependency, public-API,
+platform, and transport expansion, release, push, and publication remain
+unauthorized.
 
 The rejected HCM-2.2 checkpoints referenced from
 [`slices/HCM-2.2/`](slices/HCM-2.2/SPEC.md) remain non-authoritative evidence.
