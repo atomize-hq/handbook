@@ -1,0 +1,444 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction",
+  "created_at_utc": "2026-08-05T23:03:30Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.3",
+  "packet_id": "HCM-3.3-I1-implementation-causal-review",
+  "orchestration_id": "20260805T194328Z--HCM-3-3--deterministic-projection-implementation",
+  "source_handoff_ids": [
+    "20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed",
+    "20260805T172000Z--HCM-3-3--orchestration--deterministic-projection-selector-plan-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex HCM-3.3 Deterministic Projection implementation orchestrator",
+    "thread_ref": "019fd36d-248b-7312-9675-93885308ba3d"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-05T19:45:32Z",
+    "evidence_ref": "Fresh isolated built-in gpt-5.6-sol/high agents were spawned with fork_turns=none for every discovery, implementation, remediation, proof, and closure run."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "/root/hcm33_i1_selector_review",
+      "dispatch_id": "20260805T194532Z--HCM-3-3--implementation-selector-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T194532Z--HCM-3-3--implementation-selector-discovery.json",
+      "dispatch_fingerprint": "sha256:3e57c11013cdd79a2c870e2eb511cd8ee229c98fb863284ccd1a256b82874273",
+      "role": "review",
+      "agent_id": "/root/hcm33_i1_selector_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "planning-and-task-breakdown", "documentation-and-ADRs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:8cf363314ee96355f421ea23c83fc488937442ffe409234a476f2d6506a65e0c",
+      "result_subject_fingerprint": "sha256:8cf363314ee96355f421ea23c83fc488937442ffe409234a476f2d6506a65e0c",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM33-I1-SEL-001", "HCM33-I1-SEL-002"],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md",
+        "runtime:gpt-5.6-sol/high;fork_turns=none;agent:/root/hcm33_i1_selector_review"
+      ]
+    },
+    {
+      "run_id": "/root/hcm33_i1_selector_closure",
+      "dispatch_id": "20260805T195342Z--HCM-3-3--implementation-selector-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T195342Z--HCM-3-3--implementation-selector-closure.json",
+      "dispatch_fingerprint": "sha256:3caf53c1f45fb04d3a4e1e4c3cb6e4694fbd8d1ed03ba6a2ddb43a09b01f20f3",
+      "role": "review",
+      "agent_id": "/root/hcm33_i1_selector_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "planning-and-task-breakdown", "documentation-and-ADRs", "code-review-and-quality"],
+      "subject_fingerprint": "sha256:c55d587b5bb93fbd524a76e85cc36e80c92db98ef363709cc4cd209f381d7700",
+      "result_subject_fingerprint": "sha256:c55d587b5bb93fbd524a76e85cc36e80c92db98ef363709cc4cd209f381d7700",
+      "review_round": 2,
+      "predecessor_run_id": "/root/hcm33_i1_selector_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T195342Z--HCM-3-3--implementation-selector-closure.json",
+        "runtime:gpt-5.6-sol/high;fork_turns=none;agent:/root/hcm33_i1_selector_closure"
+      ]
+    },
+    {
+      "run_id": "/root/hcm33_i1_implementation",
+      "dispatch_id": "20260805T195721Z--HCM-3-3--deterministic-projection-implementation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T195721Z--HCM-3-3--deterministic-projection-implementation.json",
+      "dispatch_fingerprint": "sha256:c7e7142c275bba9c99ef7e767130bc2a24277429def292c5c80f765dc6e8203b",
+      "role": "implementation",
+      "agent_id": "/root/hcm33_i1_implementation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "incremental-implementation", "test-driven-development", "debugging-and-error-recovery", "documentation-and-ADRs", "code-review-and-quality", "git-workflow-and-versioning"],
+      "subject_fingerprint": "sha256:c55d587b5bb93fbd524a76e85cc36e80c92db98ef363709cc4cd209f381d7700",
+      "result_subject_fingerprint": "sha256:e0619dd19d146a31a28143ccd1466f7c0d9232a53eb30b35aebf431280b0b164",
+      "review_round": null,
+      "predecessor_run_id": "/root/hcm33_i1_selector_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T211549Z--implementation-proof-wall.md",
+        "runtime:gpt-5.6-sol/high;fork_turns=none;agent:/root/hcm33_i1_implementation"
+      ]
+    },
+    {
+      "run_id": "/root/hcm33_i1_impl_review",
+      "dispatch_id": "20260805T212403Z--HCM-3-3--deterministic-projection-implementation-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T212403Z--HCM-3-3--deterministic-projection-implementation-discovery.json",
+      "dispatch_fingerprint": "sha256:97d6aa65fa205682cd359bd1536388b149a31958d12fee04ddfe5d9669f5237b",
+      "role": "review",
+      "agent_id": "/root/hcm33_i1_impl_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "code-review-and-quality", "test-driven-development", "documentation-and-ADRs"],
+      "subject_fingerprint": "sha256:e0619dd19d146a31a28143ccd1466f7c0d9232a53eb30b35aebf431280b0b164",
+      "result_subject_fingerprint": "sha256:e0619dd19d146a31a28143ccd1466f7c0d9232a53eb30b35aebf431280b0b164",
+      "review_round": 3,
+      "predecessor_run_id": "/root/hcm33_i1_implementation",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM33-I1-IMPL-DISC-001", "HCM33-I1-IMPL-DISC-002", "HCM33-I1-IMPL-DISC-003", "HCM33-I1-IMPL-DISC-004"],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T213555Z--implementation-discovery-remediation.md",
+        "runtime:gpt-5.6-sol/high;fork_turns=none;agent:/root/hcm33_i1_impl_review"
+      ]
+    },
+    {
+      "run_id": "/root/hcm33_i1_remediation",
+      "dispatch_id": "20260805T213555Z--HCM-3-3--deterministic-projection-consolidated-remediation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T213555Z--HCM-3-3--deterministic-projection-consolidated-remediation.json",
+      "dispatch_fingerprint": "sha256:3dfffdf36efcde3fbfa561199115fb6442d87c617ca9a6e71095c5296de45be6",
+      "role": "remediation",
+      "agent_id": "/root/hcm33_i1_remediation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "incremental-implementation", "test-driven-development", "debugging-and-error-recovery", "code-review-and-quality", "git-workflow-and-versioning"],
+      "subject_fingerprint": "sha256:f5c063a50d840d11bf7943034efbfdb8d1474f1df7f004dc81b6df2aae441e68",
+      "result_subject_fingerprint": "sha256:e833f7e05df2d0122d5c74b733ae590e3ab77439e09972e7c6317ed26862daec",
+      "review_round": null,
+      "predecessor_run_id": "/root/hcm33_i1_impl_review",
+      "remediation_for_run_ids": ["/root/hcm33_i1_impl_review"],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md",
+        "runtime:gpt-5.6-sol/high;fork_turns=none;agent:/root/hcm33_i1_remediation"
+      ]
+    },
+    {
+      "run_id": "/root/hcm33_i1_impl_closure",
+      "dispatch_id": "20260805T222357Z--HCM-3-3--deterministic-projection-remediation-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T222357Z--HCM-3-3--deterministic-projection-remediation-closure.json",
+      "dispatch_fingerprint": "sha256:6adc571eb42725db29d055b4e8598a0dcad82ff8a82f46f3702aad91f3db72b4",
+      "role": "review",
+      "agent_id": "/root/hcm33_i1_impl_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "code-review-and-quality", "test-driven-development", "documentation-and-ADRs"],
+      "subject_fingerprint": "sha256:e833f7e05df2d0122d5c74b733ae590e3ab77439e09972e7c6317ed26862daec",
+      "result_subject_fingerprint": "sha256:e833f7e05df2d0122d5c74b733ae590e3ab77439e09972e7c6317ed26862daec",
+      "review_round": 4,
+      "predecessor_run_id": "/root/hcm33_i1_remediation",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM33-I1-IMPL-CLOSURE-001"],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T223701Z--gitnexus-evidence-remediation.md",
+        "runtime:gpt-5.6-sol/high;fork_turns=none;agent:/root/hcm33_i1_impl_closure"
+      ]
+    },
+    {
+      "run_id": "/root/hcm33_i1_gnx_closure",
+      "dispatch_id": "20260805T223857Z--HCM-3-3--gitnexus-evidence-supplemental-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T223857Z--HCM-3-3--gitnexus-evidence-supplemental-closure.json",
+      "dispatch_fingerprint": "sha256:01aad1c252619b410d394b9ff88f9e5e3f5a4cb828339e46acb8c3218446d647",
+      "role": "review",
+      "agent_id": "/root/hcm33_i1_gnx_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "code-review-and-quality", "documentation-and-ADRs"],
+      "subject_fingerprint": "sha256:6b691cde8445185670e19fbb742822cb95dc96e144b1dafbebfeca6cbf452d39",
+      "result_subject_fingerprint": "sha256:6b691cde8445185670e19fbb742822cb95dc96e144b1dafbebfeca6cbf452d39",
+      "review_round": 5,
+      "predecessor_run_id": "/root/hcm33_i1_impl_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": ["HCM33-I1-GNX-SUPP-CLOSURE-001"],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-fingerprint-remediation.md",
+        "runtime:gpt-5.6-sol/high;fork_turns=none;agent:/root/hcm33_i1_gnx_closure"
+      ]
+    },
+    {
+      "run_id": "/root/hcm33_i1_gnx_final",
+      "dispatch_id": "20260805T225121Z--HCM-3-3--gitnexus-fingerprint-final-supplemental-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T225121Z--HCM-3-3--gitnexus-fingerprint-final-supplemental-closure.json",
+      "dispatch_fingerprint": "sha256:6af3add97d7eb354e2034390614a4c1eea2a84deee38a0f4e8bec30a5e590d36",
+      "role": "review",
+      "agent_id": "/root/hcm33_i1_gnx_final",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": ["using-agent-skills", "context-engineering", "code-review-and-quality", "documentation-and-ADRs"],
+      "subject_fingerprint": "sha256:3ec53583d1243e2400f4d40bda137d94cd59fe1bf99d229a4b30ccad3fb898af",
+      "result_subject_fingerprint": "sha256:3ec53583d1243e2400f4d40bda137d94cd59fe1bf99d229a4b30ccad3fb898af",
+      "review_round": 6,
+      "predecessor_run_id": "/root/hcm33_i1_gnx_closure",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T225121Z--HCM-3-3--gitnexus-fingerprint-final-supplemental-closure.json",
+        "runtime:gpt-5.6-sol/high;fork_turns=none;agent:/root/hcm33_i1_gnx_final;verdict:CLEAN"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-05T23:03:30Z",
+    "dispatch_count": 8,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": ["sha256:5a83c123bc0f2505e3d86579edeff19e605f2fdd3d4b6419914b59a1d0595622"],
+    "aggregate_fingerprint": "sha256:d00f631aec670b4b0683b6a22d711fb296d921460a298563598841c129151e14"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3.3-i1-selector-consolidated-remediation",
+      "finding_run_id": "/root/hcm33_i1_selector_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "/root/hcm33_i1_selector_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:c55d587b5bb93fbd524a76e85cc36e80c92db98ef363709cc4cd209f381d7700",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md"]
+    },
+    {
+      "remediation_id": "hcm-3.3-i1-implementation-consolidated-remediation",
+      "finding_run_id": "/root/hcm33_i1_impl_review",
+      "owner": "delegated_run",
+      "delegated_run_id": "/root/hcm33_i1_remediation",
+      "re_review_run_id": "/root/hcm33_i1_impl_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:e833f7e05df2d0122d5c74b733ae590e3ab77439e09972e7c6317ed26862daec",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md"]
+    },
+    {
+      "remediation_id": "hcm-3.3-i1-gitnexus-population-remediation",
+      "finding_run_id": "/root/hcm33_i1_impl_closure",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "/root/hcm33_i1_gnx_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:6b691cde8445185670e19fbb742822cb95dc96e144b1dafbebfeca6cbf452d39",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T223701Z--gitnexus-evidence-remediation.md"]
+    },
+    {
+      "remediation_id": "hcm-3.3-i1-gitnexus-fingerprint-remediation",
+      "finding_run_id": "/root/hcm33_i1_gnx_closure",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "/root/hcm33_i1_gnx_final",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:3ec53583d1243e2400f4d40bda137d94cd59fe1bf99d229a4b30ccad3fb898af",
+      "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-fingerprint-remediation.md"]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "e78d3515d417aba56902582efefe36a2adac2eeb",
+    "subject_fingerprint": "sha256:3ec53583d1243e2400f4d40bda137d94cd59fe1bf99d229a4b30ccad3fb898af",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T225121Z--HCM-3-3--gitnexus-fingerprint-final-supplemental-closure.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T211549Z--implementation-proof-wall.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-final-population-correction.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T225121Z--HCM-3-3--gitnexus-fingerprint-final-supplemental-closure.json",
+      "git:4f835ffa614865fb87e9caeea8ef0239447186df",
+      "git:e78d3515d417aba56902582efefe36a2adac2eeb"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.3 deterministic Projection implementation reviewed; publication blocked by protected-index digest contradiction",
+    "scope_horizon": "one private/internal Deterministic Projection engine and its exact fixtures, tests, proof, and bounded gate-control updates",
+    "detail_resolution": "declarative source/profile/vocabulary/definition/envelope selection; reveal and allowlisted derive; six-dimension Resolution; typed omissions, proof effects, lossiness, provenance, fingerprints, collapse and typed escalation",
+    "temporal_horizon": "reviewed primary stack 4f835ffa614865fb87e9caeea8ef0239447186df then e78d3515d417aba56902582efefe36a2adac2eeb, followed by this committed true-stop handoff with no local-ref publication",
+    "authority_horizon": "private engine only; no public API, dependency/version, shipped default, renderer/transport, SDK/CLI, adopter migration, later slice, release, Phase-3 exit, remote query, or push",
+    "memory_horizon": "immutable planning/corrective lineage, one new frozen implementation outcome, complete discovery-remediation-closure lineage, and exactly two immediately causal supplemental evidence cycles ending CLEAN",
+    "validation_horizon": "13 focused tests, 168 library tests, exact negative/fail-closed paths, formatting/check/strict clippy, exact GitNexus artifact, ordinary handoff validation, both self-tests, and unresolved adjudication of contradictory protected-index digests before any expected-old local CAS"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Implement and prove the exact selected private Deterministic Projection engine with deterministic Resolution-aware reveal/allowlisted derive semantics, fail-closed accounting, provenance and fingerprints, no authority promotion, and the corrected multi-envelope future proof wall.",
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md", "sections": ["Selected implementation outcome", "Exact owner paths and symbols", "Risk and path envelope", "Proof wall and causal cadence"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md", "sections": ["Implementation contract", "Future implementation proof obligations", "Completion and stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T185300Z--HCM-3-3--orchestration--pg-proj-01-proof-obligation-remediation-completed.json", "sections": ["entire completed handoff", "resume"]},
+    {"path": "docs/specs/handbook-contract-membrane/02-semantic-model.md", "sections": ["Projection semantics", "Collapse and expansion", "Projection provenance"]},
+    {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sections": ["Projection definition", "Projection request", "Projection result", "Projection request/result field authority"]},
+    {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sections": ["PG-PROJ-01", "PG-PROJ-02"]},
+    {"path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md", "sections": ["Fresh review / remediation loop", "Full proof wall", "True-stop handoff"]},
+    {"path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "sections": ["Review lineage", "Two-commit true-stop closeout", "Deterministic ledger rebuild"]},
+    {"path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md", "sections": ["Review priority rubric", "Admission and duplicate rules"]}
+  ],
+  "repo_state": {
+    "branch": "detached at e78d3515d417aba56902582efefe36a2adac2eeb",
+    "head": "e78d3515d417aba56902582efefe36a2adac2eeb",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json"
+    ]
+  },
+  "work_completed": [
+    "Bound real task 019fd36d-248b-7312-9675-93885308ba3d/local to nonce 204e7dc06f5b43fc9131fe9e4b995859 and verified the exact assigned checkout, local target/base/tree, required ancestor, cleanliness, ownership, configured origin metadata, and protected-checkout observations before edits.",
+    "Established and independently closed a new implementation selector before code edits, including exact paths/symbols/configuration/call paths/fixtures/proof/risk and project-required pre-edit GitNexus impact analysis.",
+    "Implemented the private deterministic Projection core, direct fixtures, tests, proof surfaces, and bounded control-document updates in two reviewed primary commits: code 4f835ffa614865fb87e9caeea8ef0239447186df and documentation/proof e78d3515d417aba56902582efefe36a2adac2eeb.",
+    "Closed two selector P2s, four implementation discovery P2s, one closure-evidence P2, and one supplemental fingerprint P2 through one consolidated implementation remediation and exactly two causal supplemental evidence cycles; fresh final review returned CLEAN and no cycle followed CLEAN.",
+    "Proved two independently authorized Resolution envelopes over byte-identical source/profile/vocabulary/definition bytes, two deterministic replays per envelope, cross-envelope accounting, unchanged source bytes/fingerprint, exact provenance/result fingerprints, fail-closed paths, and authority_effect none.",
+    "Closed only the evidence-supported bounded private portions of PG-PROJ-01 and PG-PROJ-02; Phase-3 exit and every public/adopter/transport/later-slice surface remain unclaimed. No P3/P4 advisory was returned, so the inventory requires no entry.",
+    "Stopped before local publication because the final protected-checkout audit reproduced the original HEAD/tree/status observations but not the raw index SHA-256 values durably recorded at preflight; the index mtimes predate this task, so neither protected-byte drift nor a preflight measurement defect may be asserted without adjudication."
+  ],
+  "deliverables": [
+    {"path": "crates/engine/src/projection.rs", "status": "completed", "summary": "Private deterministic Projection engine, declarative configuration, validation, evaluation, accounting, provenance, fingerprints, collapse, and typed escalation."},
+    {"path": "crates/engine/src/projection/tests.rs", "status": "completed", "summary": "Thirteen focused positive, negative, fail-closed, deterministic replay, collapse, and multi-envelope proof tests."},
+    {"path": "crates/engine/src/projection/fixtures", "status": "completed", "summary": "Byte-stable source, profile, vocabulary, and definition fixtures shared across independently authorized envelope cases."},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-final-population-correction.json", "status": "completed", "summary": "Byte-hashed exact 96-symbol final GitNexus population with stable unique IDs and two test flows."},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json", "status": "blocked", "summary": "Parent v1.4 true-stop handoff preserving the reviewed primary stack and exact digest contradiction without publishing the local target ref."}
+  ],
+  "decisions": [
+    {"decision_id": "HCM-3.3-I1-D1", "summary": "Projection selection is exact and declarative across source kind, resolved profile, vocabulary, definition, and authorized Resolution envelope; ambiguity and currentness failures are typed fail-closed errors.", "authority_effect": "none", "refs": ["crates/engine/src/projection.rs", "crates/engine/src/projection/tests.rs"]},
+    {"decision_id": "HCM-3.3-I1-D2", "summary": "The core permits only reveal and allowlisted deterministic derive, computes omissions/proof effects/lossiness/provenance/fingerprints, never mutates or promotes source authority, and never widens during collapse.", "authority_effect": "none", "refs": ["crates/engine/src/projection.rs", "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md"]},
+    {"decision_id": "HCM-3.3-I1-D3", "summary": "The exact scoped GitNexus artifact is the code-bearing closeout evidence; final compare-to-main remained unavailable after index refresh and is recorded unavailable rather than GREEN.", "authority_effect": "none", "refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-final-population-correction.json", "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-fingerprint-remediation.md"]}
+  ],
+  "findings": [
+    {"finding_id": "HCM33-I1-SEL-001", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_selector_review", "summary": "The selector needed an exact private envelope view surface.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md"]},
+    {"finding_id": "HCM33-I1-SEL-002", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_selector_review", "summary": "The selector needed a complete positive/negative proof matrix.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md"]},
+    {"finding_id": "HCM33-I1-IMPL-DISC-001", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_impl_review", "summary": "Definition currentness needed live snapshot binding.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md"]},
+    {"finding_id": "HCM33-I1-IMPL-DISC-002", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_impl_review", "summary": "Narrower collapse needed to constrain execution rather than remain informational.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md"]},
+    {"finding_id": "HCM33-I1-IMPL-DISC-003", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_impl_review", "summary": "The resolved profile needed binding to its authoring profile reference.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md"]},
+    {"finding_id": "HCM33-I1-IMPL-DISC-004", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_impl_review", "summary": "Semantic dependency fingerprints needed resolution and validation.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md"]},
+    {"finding_id": "HCM33-I1-IMPL-CLOSURE-001", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_impl_closure", "summary": "The first final GitNexus artifact used a duplicated identity population and needed canonical unique symbol IDs.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T223701Z--gitnexus-evidence-remediation.md"]},
+    {"finding_id": "HCM33-I1-GNX-SUPP-CLOSURE-001", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_gnx_closure", "summary": "The canonical GitNexus population needed the exact documented LF-delimited fingerprint algorithm and value.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-fingerprint-remediation.md"]}
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM-3.3-I1-PROTECTED-INDEX-DIGEST-CONTRADICTION",
+      "classification": "authority",
+      "summary": "Final protected-checkout audit matches both frozen HEAD/tree/status observations, but the product raw index is sha256:d8c1877324d3d6435019fe6467c48a8342de827e9257d1c7892adc19d4c9853c rather than frozen sha256:60c00adbea6fce2383b7183129c93de628061a77aa08a174ada84b45b526608e, and the meta raw index is sha256:ada08b5b28472e56651dc4c009e5867730baab58bef142fe6e7a5f883267c291 rather than frozen sha256:ed3f648a99b3c703e94f26af0416bdbc83210902df2974bbeb515af397353220. Their filesystem mtimes are 2026-08-01T20:13:40.1402317Z and 2026-08-05T16:53:18.9036434Z, both before this task, so the evidence cannot distinguish pre-existing digest-method error from protected-byte drift.",
+      "resume_condition": "The meta/user authority adjudicates the frozen-vs-live index digest contradiction, supplies the exact accepted measurement method or restored expected bytes, and explicitly authorizes same-slice closeout resumption without relaxing HEAD/tree/status/protected-byte guarantees.",
+      "owner": "Handbook meta orchestration authority"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM-3.3-I1-PROTECTED-DIGEST-ADJUDICATION",
+      "trigger": "Required final protected-path proof contradicted the reviewed preflight's two raw index digests while all HEAD/tree/status observations remained identical and both index mtimes predated the task.",
+      "current_resolution": "Reviewed two-commit primary stack preserved on detached HEAD; true-stop handoff committed locally; dedicated integration ref remains at expected base and no remote was queried or pushed.",
+      "target_resolution": "An adjudicated protected-checkout baseline that permits a truthful final equality proof and expected-old local CAS, or an explicit decision to reject this primary stack.",
+      "decision_required": "Determine whether the preflight digests used a different measurement, provide the exact reproducible baseline/method, or direct recovery of the protected bytes; do not infer equality from unchanged HEAD/tree/status alone.",
+      "options": [
+        "Accept a documented reproducible logical-index measurement and authorize resumption from this exact true-stop commit.",
+        "Provide or restore the exact protected index bytes matching the frozen digests, then authorize equality recheck and resumption.",
+        "Reject the primary stack and issue explicit recovery authority in a new top-level task."
+      ],
+      "recommendation": "First reconcile the digest-generation method against the pre-task index mtimes; preserve both protected checkouts and the reviewed detached primary stack until that evidence is resolved.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "Exact meta/user adjudication resolves the two frozen/live digest pairs and reauthorizes same-slice local-only closeout from the unchanged reviewed primary tip."
+    }
+  ],
+  "validation": [
+    {"command": "cargo test -p handbook-engine projection::tests", "status": "passed", "evidence_ref": "Final parent replay passed all 13 focused deterministic Projection tests, including the corrected multi-envelope proof wall and negative/fail-closed paths."},
+    {"command": "cargo test -p handbook-engine --lib", "status": "passed", "evidence_ref": "Fresh isolated remediation run passed all 168 library tests in 153.76 seconds; the parent bounded replay later timed out and is not represented as an additional GREEN run."},
+    {"command": "cargo fmt --all -- --check; cargo check -p handbook-engine; cargo clippy -p handbook-engine --all-targets -- -D warnings; git diff --check", "status": "passed", "evidence_ref": "Formatting, compilation, strict linting, and whitespace checks passed on the reviewed primary subject."},
+    {"command": "bounded cargo test -p handbook-engine", "status": "blocked", "evidence_ref": "The complete-crate attempt exceeded the 308-second bound in a legacy integration-test path; no failure was reported and the result is not GREEN."},
+    {"command": "GitNexus upstream impact before existing symbol edits", "status": "passed", "evidence_ref": "ContextResolutionEnvelope was LOW with zero callers/processes/modules; execute_projection was MEDIUM with eight direct test callers and one test process; validation functions were LOW. One ambiguous ProjectionError::new HIGH result was disambiguated and that symbol was not edited."},
+    {"command": "GitNexus exact scoped final code change detection", "status": "passed", "evidence_ref": "Byte-hashed artifact docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-final-population-correction.json has SHA-256 742d207a6601730b26ea0aaa6fe432ea60e1e3c017ecec2a53c58ad32a0d6ba6, 96 stable unique symbol IDs, two test flows, MEDIUM risk, and population sha256:22d7925a7d1fdcb860bba9d0bbc696e4c5f55bfdefabe9782cfc288b5ea30583."},
+    {"command": "GitNexus compare-to-main after final index refresh", "status": "not_run", "evidence_ref": "Unavailable after attempted refresh: process exited with Windows access violation -1073741819 and produced no final comparison payload. Earlier available branch-wide comparison was CRITICAL because the long-lived base differs from main (1395 files, 10029 symbols, 259 flows), not because of the exact eight-path slice delta; neither result is represented as GREEN."},
+    {"command": "causal review cadence validation", "status": "passed", "evidence_ref": "Planning used discovery, one parent remediation, and different-fresh CLEAN closure. Implementation used discovery, one consolidated delegated remediation, different-fresh closure, and exactly two directly causal supplemental evidence cycles ending CLEAN; no extension, reset, reopened discovery, waived P1/P2, or post-CLEAN cycle occurred."},
+    {"command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py", "status": "passed", "evidence_ref": "Ordinary v1.4 schema, immutable-history, exact dispatch-population, causal-lineage, reviewed-baseline, record/index parity, and deterministic-ledger validation passed before this true-stop commit."},
+    {"command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission", "status": "passed", "evidence_ref": "Historical admission and deterministic-ledger negative self-test passed."},
+    {"command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract", "status": "passed", "evidence_ref": "V1.4 causal registry/budget, supplemental ceiling, CLEAN cutoff, remediation, evidence, and two-commit protocol self-test passed."},
+    {"command": "protected-checkout, dedicated-local-ref, and no-push audit", "status": "blocked", "evidence_ref": "Both protected HEAD/tree/status observations equal preflight and both raw index mtimes predate the task, but the raw index SHA-256 pairs contradict the frozen proof values. The dedicated local ref remains at expected base 5542371afef828fd83282aa3971262e6ad1b62ed; origin was not queried and no push occurred. Publication is blocked rather than treating the contradiction as equality."}
+  ],
+  "pack_updates": [
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json", "sections": ["entire handoff"], "reason": "Preserve the reviewed primary stack, exact dispatch population, proof, and protected-index digest contradiction as a committed v1.4 true stop without local-ref publication.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl", "sections": ["deterministic ledger entry"], "reason": "Rebuild the query ledger byte-deterministically from immutable canonical records.", "status": "completed"}
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Resume exactly this HCM-3.3-I1 local-only closeout only after adjudicating the protected-index digest contradiction.",
+    "condition": "Meta/user authority supplies an exact accepted protected-index measurement or restoration decision and explicitly authorizes resumption from the unchanged reviewed primary tip and true-stop commit.",
+    "must_read": [
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json", "sections": ["entire true-stop handoff", "blockers", "escalations", "resume"]},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md", "sections": ["Completion and stop conditions"]}
+    ],
+    "allowed_scope": [
+      "Read-only reproduction of the exact protected-index digest method named by adjudicating authority.",
+      "Mechanical handoff/ledger correction and expected-old local CAS only after equality is truthfully re-established.",
+      "No product-code or reviewed-primary change."
+    ],
+    "prohibited_scope": [
+      "Do not publish the local target ref, create another increment, or begin HCM-3.4+ before adjudication.",
+      "Do not broaden the private engine into a public API, dependency/version change, shipped default, renderer/transport, SDK/CLI, pipeline/adopter/consumer migration, Snapshot Memory, release, or Phase-3 exit claim.",
+      "Do not alter immutable completed planning/corrective handoffs or their dispatches, protected checkouts, or remote state."
+    ],
+    "acceptance_criteria": [
+      "The two protected index observations are reconciled by one exact reproducible method or exact restored bytes.",
+      "Protected HEAD/tree/status and the accepted index measurements equal the adjudicated baseline.",
+      "The reviewed primary tip and true-stop commit remain unchanged, the target ref still equals expected base, and local CAS is explicitly reauthorized."
+    ],
+    "stop_conditions": ["Stop again if the digest contradiction remains or requires mutating either protected checkout without explicit authority.", "Stop on target-ref drift or any request to merge, rebase, reset, clean, force-update, fetch, query a remote, or push."]
+  },
+  "supersedes": [],
+  "chat_summary": "The private HCM-3.3 engine and two-commit reviewed primary stack are complete, all eight P2s are remediated, and final review is CLEAN. Publication stopped because final protected HEAD/tree/status match preflight but both raw index digests contradict the frozen proof while their mtimes predate the task. The target ref remains at base; no remote was queried or pushed. Same-slice adjudication is required."
+}
