@@ -1,0 +1,265 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T103138Z--HCM-3-2--quarantine-finalization-selector-closure",
+  "created_at_utc": "2026-08-05T10:31:38Z",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted"
+  ],
+  "parent_orchestration_id": "20260805T101500Z--HCM-3-2--context-resolution-quarantine-finalization",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-QF-P1-selector-and-recovery",
+  "subject_fingerprint": "sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.2-qf-selector-closure-1",
+    "trigger_run_ids": [
+      "/root/hcm32_qf_selector_discovery"
+    ],
+    "finding_refs": [
+      "HCM32-QF-SEL-DISC-001",
+      "HCM32-QF-SEL-DISC-002"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T10:15:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-quarantine-finalization",
+        "packet_ids": [
+          "HCM-3.2-QF-P1-selector-and-recovery",
+          "HCM-3.2-QF-P2-identity-ordering-repair",
+          "HCM-3.2-QF-P3-proof-and-review",
+          "HCM-3.2-QF-P4-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:af062b113b499761ef50df4e1b427bbb19a91d7158f27793c5ee269f4ef49d02"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:a50c9dbfec9d454fe4300a5e88ba20cc76e839ed7c85c90b2e92768a6c03a237",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-quarantine-finalization",
+    "outcome_registry_fingerprint": "sha256:af062b113b499761ef50df4e1b427bbb19a91d7158f27793c5ee269f4ef49d02",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260805T102305Z--HCM-3-2--quarantine-finalization-selector-remediation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-qf-selector-closure-convergence-1",
+    "completed_at_utc": "2026-08-05T10:31:37Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "replay discovery findings and single consolidated remediation against unchanged parent/outcome/packet/risk authority",
+        "evidence_ref": "/root/hcm32_qf_selector_discovery returned exactly P2 HCM32-QF-SEL-DISC-001 and 002; /root/hcm32_qf_selector_remediation changed only SPEC, plan, and one remediation proof"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "re-scan all effective planning subject references to production-path ceiling and causal cadence while retaining the complete valid-A/different-valid-B and recovered-product boundary",
+        "evidence_ref": "operative fresh-parent subject has zero sixth-path stops, consistently stops at a fourth path, requires one combined implementation/proof review, and leaves P4 mechanical"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted eight-entry repo-path-NUL-SHA256-newline closure subject plus unchanged registry and budget",
+        "evidence_ref": "subject sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66; registry sha256:af062b113b499761ef50df4e1b427bbb19a91d7158f27793c5ee269f4ef49d02; budget sha256:a50c9dbfec9d454fe4300a5e88ba20cc76e839ed7c85c90b2e92768a6c03a237"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8, no-BOM, and Markdown fence-balance check for all eight closure subject files",
+        "evidence_ref": "all checks passed; seven-entry acyclic planning-authority fingerprint is sha256:a52fa05711fee4f9f9364feaba6ee99406cbbdf32dddab3738a6316265a554c1"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check and trailing-whitespace scan",
+        "evidence_ref": "both passed; no staged paths"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "sha256": "41842e71a6cf3d598d0a33a6c7880c2898910f1f47fad154d4370aab1307e7f4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "sha256": "dc78f9f5c7fecf86c6a914177d6cfac941b2e836bbfadac4857bb9eb39947a05"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-04-deferred-continuous-availability.md",
+        "sha256": "d1b7ec8dab45546f5d3a08d2253e4e56132f2800812a5817363177b9dcd4f75e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md",
+        "sha256": "bac9a3a51df1bd1d3fc233584c2ff8ddace690afd813a01058eb7f6599b95a3f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md",
+        "sha256": "798497a836f03361f41f79b23de2ae94e9f58cf83de84bf87a9b9e45852b9312"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T102700Z--quarantine-finalization-selector-remediation.md",
+        "sha256": "f15130f0aa7b702b89d23c66044f446b6e683d54fcfcbf03eab04ddec1c0a8b6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+        "sha256": "446dcb2640af1a349fece06af1c6c52ba09ef5c1a7f72f70f0047d588d8320fb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+        "sha256": "42815085dc83e785ec9fa1d5ac14f308de036538a4c3a9f4272f3f435d741fa8"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 fresh quarantine identity-ordering selector discovery",
+    "scope_horizon": "complete recovered Context Resolution product subject plus the exact quarantine identity-before-mutation repair",
+    "detail_resolution": "fresh parent/outcome/four packets, additive selector lineage, exact production/test ceiling, stable findings 001-006, valid anchored A/different-valid B/partial-scratch proof, compatibility, proof wall, and two-commit local closeout",
+    "temporal_horizon": "planning stage before every product, test, fixture, or product-control recovery edit",
+    "authority_horizon": "HCM-3.2 only; no HCM-0.11/tooling, generic ownership expansion, H2/H3 implementation, HCM-3.3+, public/dependency/native/transport expansion, shipped identity change, remote publication, or push",
+    "memory_horizon": "exact base eb4b7ba, HCM-3.1 completion, stopped HCM-3.2 source handoff, immutable 33-path protected recovery input, prior selector/dispatch/proof source evidence, and this fresh registry",
+    "validation_horizon": "independent selector CLEAN is mandatory before product recovery or implementation"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md",
+      "sections": [
+        "Fresh authority and additive lineage",
+        "Frozen outcome registry and cadence",
+        "Recovered complete subject",
+        "Exact remaining product defect",
+        "Exact production, test, and symbol boundary",
+        "Proof wall and completion",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": [
+        "complete selected HCM-3.2 product authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md",
+      "sections": [
+        "immutable source evidence only; not fresh-parent authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted.json",
+      "sections": [
+        "immutable source findings 001-006 and stopped predecessor boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Context Resolution stack definition",
+        "Context Resolution envelope",
+        "Resolution escalation and memory promotion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-RES-01",
+        "Regression rules 42 and 48"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery returned exactly two P2 planning contradictions. The single consolidated remediation changed only SPEC.md, tasks/plan.md, and one fresh remediation proof. The eight-entry subject binds those exact bytes; registry, budget, parent, outcome, packets, production/test ceilings, protected WIP, remote baseline, and product gate remain unchanged. No Rust, test, fixture, or product-control recovery edit exists.",
+  "allowed_scope": [
+    "Perform one different-fresh delta-focused read-only closure of the exact eight-entry subject and the two trigger findings.",
+    "Verify HCM32-QF-SEL-DISC-001 is closed by an unambiguous exact three-path ceiling that stops on a fourth path.",
+    "Verify HCM32-QF-SEL-DISC-002 is closed by one combined implementation/proof review cadence followed by mechanical P4 closeout with no review cycle.",
+    "Revalidate that the unchanged remainder still binds stable findings 001-006, valid anchored A/different-valid-B mutation refusal, exact-A recovery, generic non-HCM compatibility, proof wall, two-commit local closeout, and prohibited scope."
+  ],
+  "non_goals": [
+    "Do not reopen general planning discovery, add unrelated findings, edit any file, format, stage, commit, delegate, test product code, recover protected bytes, or write handoff/ledger state.",
+    "Do not create HCM-0.11/HCM-3.3 work, tooling changes, public/dependency/platform/transport expansion, remote publication, or push."
+  ],
+  "tasks": [
+    "Return findings first only if either exact trigger remains or the bounded remediation directly caused or unmasked a P1/P2 within unchanged planning scope.",
+    "Use unique HCM32-QF-SEL-CLOSE IDs only for directly causal closure findings; do not relabel general discovery.",
+    "Return CLEAN only if both trigger findings are fully closed and no directly caused or unmasked P1/P2 remains for sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66."
+  ],
+  "contracts_and_gates": [
+    "This is the single different-fresh closure for planning; no cycle follows CLEAN.",
+    "Product recovery remains prohibited until this closure is CLEAN.",
+    "FINDINGS may trigger only legitimately causal bounded supplemental handling; no general rediscovery or budget reset."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if either P2 is incomplete or the remediation directly caused/unmasked a P1/P2.",
+    "Return BLOCKED if closure requires broader authority, tooling/schema change, product edits, or unavailable mandatory evidence."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

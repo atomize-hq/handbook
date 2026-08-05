@@ -502,8 +502,9 @@ stable-role registry. The shipped empty vocabulary preserves existing output;
 one non-empty repository/test vocabulary changes presentation only through the
 fixed Stage-10 Work Specification renderer, with canonical YAML and every
 stable-role edge preserved. `PG-VOCAB-01` closes and only the vocabulary subset
-of `PG-PROFILE-01` advances. HCM-3.2+, other consumers/adapters, and the Phase 3
-exit remain open and unselected.
+of `PG-PROFILE-01` advances. HCM-3.2 is separately selected and has the
+conditional proof-complete boundary below; HCM-3.3+, other consumers/adapters,
+and the Phase 3 exit remain open and unselected.
 
 ### `HCM-3.2` — Context Resolution kernel
 
@@ -511,6 +512,16 @@ exit remain open and unselected.
 - six explicit dimensions;
 - inheritance, mutation, memory, validation, and escalation semantics;
 - migration of useful work-level behavior without freezing L0-L3.
+
+**Conditional completion boundary:** the fresh-parent implementation and full
+proof wall are GREEN for the bounded engine kernel, private JCS authority
+capsule, generic-lineage publication/currentness path, replacement recovery,
+and identity-before-mutation quarantine refusal. The slice and `PG-RES-01`
+remain open until a forthcoming fresh-parent complete-subject
+implementation/proof review returns `CLEAN` and the parent records that verdict
+in a completed v1.4 handoff. The stopped predecessor parent is immutable source
+evidence, never completion authority. HCM-3.3+, consumer migration, release,
+push, and publication remain separately selected.
 
 ### `HCM-3.3` — Deterministic Projection engine
 

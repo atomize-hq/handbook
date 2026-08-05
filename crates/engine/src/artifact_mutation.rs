@@ -84,6 +84,7 @@ struct PromotionDocumentV1 {
     candidate_ref: String,
     candidate_fingerprint: String,
     expected_current_artifact_fingerprint: Option<String>,
+    publisher_authority: Option<Value>,
 }
 
 #[derive(Clone, Debug)]
@@ -196,6 +197,38 @@ pub(crate) fn validate_persisted_output_authority(
     let kind_ref = string_field(subject, "kind_ref")?;
     let instance_id = string_field(subject, "instance_id")?;
     let operation = string_field(intent, "operation_id")?;
+    let is_context_resolution = kind_ref
+        == crate::context_resolution::CONTEXT_RESOLUTION_AUTHORITY_KIND_REF
+        && instance_id == crate::context_resolution::CONTEXT_RESOLUTION_AUTHORITY_INSTANCE_ID;
+    if is_context_resolution && operation == "artifact.candidate.append" && ordinal == 0 {
+        let wrapper = parse_jcs_lf_value(bytes)?;
+        crate::context_resolution::validate_context_resolution_capsule_candidate(
+            repo_root, &wrapper,
+        )
+        .map_err(control_error)?;
+    }
+    if is_context_resolution && operation == "artifact.candidate.promote" && ordinal == 0 {
+        let wrapper = parse_canonical_yaml(bytes)
+            .map_err(|_| control_error("persisted HCM canonical artifact is not exact YAML"))?;
+        crate::context_resolution::validate_context_resolution_declared_predecessor(
+            &wrapper,
+            subject
+                .get("expected_current_artifact_fingerprint")
+                .and_then(Value::as_str),
+        )
+        .map_err(control_error)?;
+        let outer = DefinitionFingerprint::from_bytes(bytes);
+        let publisher = subject
+            .get("publisher_authority")
+            .ok_or_else(|| control_error("persisted HCM promotion has no publisher authority"))?;
+        crate::context_resolution::validate_context_resolution_historical_publication(
+            repo_root,
+            &wrapper,
+            outer.as_str(),
+            publisher,
+        )
+        .map_err(control_error)?;
+    }
     let is_runtime_record = match operation {
         "intake.record.append" => ordinal == final_ordinal,
         "artifact.candidate.append" => matches!(ordinal, 1 | 2),
@@ -562,35 +595,73 @@ impl ArtifactMutationServiceV1 {
     ) -> Result<GenericMutationExecutionV1, ArtifactMutationErrorV1> {
         let repo_root = repo_root.as_ref();
         let document = parse_promotion(request_bytes)?;
+        let is_context_resolution = kind_ref
+            == crate::context_resolution::CONTEXT_RESOLUTION_AUTHORITY_KIND_REF
+            && instance_id == crate::context_resolution::CONTEXT_RESOLUTION_AUTHORITY_INSTANCE_ID;
+        if is_context_resolution != document.publisher_authority.is_some() {
+            return Err(mutation_error(
+                ArtifactMutationErrorKindV1::InvalidRequest,
+                "publisher_authority is required only for the exact private HCM-3.2 tuple",
+            ));
+        }
+        let quarantine_transition = document
+            .publisher_authority
+            .as_ref()
+            .map(|publisher| {
+                publisher
+                    .get("result_transition_fingerprint")
+                    .and_then(Value::as_str)
+                    .map(str::to_owned)
+                    .ok_or_else(|| {
+                        mutation_error(
+                            ArtifactMutationErrorKindV1::InvalidRequest,
+                            "HCM publisher transition fingerprint is absent",
+                        )
+                    })
+            })
+            .transpose()?;
         let authority = ArtifactRepositoryAuthorityGuardV1::acquire(repo_root)
             .map_err(repository_authority_error)?;
         let (operation_context_fingerprint, canonical_artifact_ref) =
             request_authority(repo_root, &authority, kind_ref, instance_id)?;
         let repository_identity = authority.repository_identity_fingerprint().to_string();
+        let mut request_subject = json!({
+            "operation_id": "artifact.candidate.promote",
+            "kind_ref": kind_ref,
+            "instance_id": instance_id,
+            "candidate_ref": document.candidate_ref,
+            "candidate_fingerprint": document.candidate_fingerprint,
+            "expected_current_artifact_fingerprint": document.expected_current_artifact_fingerprint,
+            "operation_context_fingerprint": operation_context_fingerprint,
+            "canonical_artifact_ref": canonical_artifact_ref,
+        });
+        if let Some(publisher) = document.publisher_authority.clone() {
+            request_subject["publisher_authority"] = publisher;
+        }
         let request = GenericMutationRequestV1 {
             repository_identity_fingerprint: repository_identity,
             owner_contract_subject_fingerprint: HCM_2_3_OWNER_SUBJECT_FINGERPRINT.to_string(),
             operation: GenericArtifactOperationV1::ArtifactCandidatePromote,
             idempotency_key: document.idempotency_key.clone(),
-            request_subject: json!({
-                "operation_id": "artifact.candidate.promote",
-                "kind_ref": kind_ref,
-                "instance_id": instance_id,
-                "candidate_ref": document.candidate_ref,
-                "candidate_fingerprint": document.candidate_fingerprint,
-                "expected_current_artifact_fingerprint": document.expected_current_artifact_fingerprint,
-                "operation_context_fingerprint": operation_context_fingerprint,
-                "canonical_artifact_ref": canonical_artifact_ref,
-            }),
+            request_subject,
         };
         let store = GenericArtifactLineageStoreV1::new(repo_root);
-        store
+        let execution = store
             .execute_authorized(
                 request,
                 || {
                     authority.require_current_identity().map_err(|error| {
                         control_error(format!("repository authority changed: {error}"))
-                    })
+                    })?;
+                    if let Some(transition) = quarantine_transition.as_deref() {
+                        store.require_hcm_publication_quarantine_candidate_during_evaluation(
+                            transition,
+                            &document.candidate_ref,
+                            &document.candidate_fingerprint,
+                            &document.idempotency_key,
+                        )?;
+                    }
+                    Ok(())
                 },
                 |intent| validate_persisted_intent_authority(repo_root, &authority, intent),
                 |intent, ordinal, final_ordinal, bytes| {
@@ -627,7 +698,42 @@ impl ArtifactMutationServiceV1 {
                     ArtifactMutationErrorKindV1::Store,
                     format!("generic lineage store refused: {}", error.detail()),
                 )
-            })
+            })?;
+        if is_context_resolution
+            && execution.result.outcome == "committed"
+            && matches!(
+                execution.disposition,
+                GenericExecutionDispositionV1::Committed | GenericExecutionDispositionV1::Replayed
+            )
+        {
+            let publisher = document
+                .publisher_authority
+                .as_ref()
+                .expect("exact HCM promotion required publisher authority");
+            let transition_fingerprint = publisher
+                .get("result_transition_fingerprint")
+                .and_then(Value::as_str)
+                .ok_or_else(|| {
+                    mutation_error(
+                        ArtifactMutationErrorKindV1::Store,
+                        "HCM publisher transition fingerprint disappeared",
+                    )
+                })?;
+            store
+                .complete_hcm_publication_quarantine(
+                    transition_fingerprint,
+                    &document.candidate_ref,
+                    &document.candidate_fingerprint,
+                    &document.idempotency_key,
+                )
+                .map_err(|error| {
+                    mutation_error(
+                        ArtifactMutationErrorKindV1::Store,
+                        format!("HCM quarantine closeout refused: {}", error.detail()),
+                    )
+                })?;
+        }
+        Ok(execution)
     }
 }
 
@@ -806,6 +912,15 @@ fn candidate_preview(
         .registry()
         .validate_json(target.instance_id(), &normalized_content)
         .map_err(|_| control_error("candidate content failed structural validation"))?;
+    if kind_ref == crate::context_resolution::CONTEXT_RESOLUTION_AUTHORITY_KIND_REF
+        && instance_id == crate::context_resolution::CONTEXT_RESOLUTION_AUTHORITY_INSTANCE_ID
+    {
+        crate::context_resolution::validate_context_resolution_capsule_candidate(
+            repository.repo_root(),
+            &normalized_content,
+        )
+        .map_err(control_error)?;
+    }
     let kind = repository
         .registry()
         .kind(target.kind_ref())
@@ -1220,15 +1335,22 @@ fn parse_promotion(bytes: &[u8]) -> Result<PromotionDocumentV1, ArtifactMutation
             "promotion request is not one duplicate-safe document",
         )
     })?;
-    require_exact_fields(
-        &value,
-        &[
-            "idempotency_key",
-            "candidate_ref",
-            "candidate_fingerprint",
-            "expected_current_artifact_fingerprint",
-        ],
-    )?;
+    let base = [
+        "idempotency_key",
+        "candidate_ref",
+        "candidate_fingerprint",
+        "expected_current_artifact_fingerprint",
+    ];
+    let hcm = [
+        "idempotency_key",
+        "candidate_ref",
+        "candidate_fingerprint",
+        "expected_current_artifact_fingerprint",
+        "publisher_authority",
+    ];
+    if require_exact_fields(&value, &base).is_err() {
+        require_exact_fields(&value, &hcm)?;
+    }
     serde_json::from_value(value).map_err(|_| {
         mutation_error(
             ArtifactMutationErrorKindV1::InvalidRequest,
@@ -1385,6 +1507,35 @@ fn build_promotion_plan(
         .validate_json(target.instance_id(), &reparsed)
         .map_err(|_| control_error("promoted canonical YAML failed structural validation"))?;
     let canonical_fingerprint = DefinitionFingerprint::from_bytes(&canonical_bytes);
+    if kind_ref == crate::context_resolution::CONTEXT_RESOLUTION_AUTHORITY_KIND_REF
+        && instance_id == crate::context_resolution::CONTEXT_RESOLUTION_AUTHORITY_INSTANCE_ID
+    {
+        crate::context_resolution::validate_context_resolution_current_predecessor(
+            repository.repo_root(),
+            &preview.normalized_content,
+            document.expected_current_artifact_fingerprint.as_deref(),
+        )
+        .map_err(control_error)?;
+        let outer_hex = canonical_fingerprint
+            .as_str()
+            .strip_prefix("sha256:")
+            .expect("definition fingerprint is SHA-256");
+        if document.idempotency_key != format!("hcm32crpub_{outer_hex}") {
+            return Err(control_error(
+                "HCM publication idempotency key does not bind the outer artifact",
+            ));
+        }
+        crate::context_resolution::validate_context_resolution_publication(
+            repository.repo_root(),
+            &preview.normalized_content,
+            canonical_fingerprint.as_str(),
+            document
+                .publisher_authority
+                .as_ref()
+                .ok_or_else(|| control_error("HCM publication authority is absent"))?,
+        )
+        .map_err(control_error)?;
+    }
     let canonical_ref = repository
         .canonical_path_under_lock(&target)
         .map_err(|error| control_error(format!("canonical target failed: {error}")))?;

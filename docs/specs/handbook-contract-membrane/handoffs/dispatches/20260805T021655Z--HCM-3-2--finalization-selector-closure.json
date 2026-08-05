@@ -1,0 +1,217 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T021655Z--HCM-3-2--finalization-selector-closure",
+  "created_at_utc": "2026-08-05T02:16:55Z",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted"
+  ],
+  "parent_orchestration_id": "20260805T014559Z--HCM-3-2--context-resolution-finalization",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-FINAL-P1-selector-and-recovery",
+  "subject_fingerprint": "sha256:4aace33a0fb203ac4e01675d0f3a8a4b63bdd3478da7e080c35c5f935ae3ce43",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.2-finalization-selector-closure-1",
+    "trigger_run_ids": ["/root/hcm32_final_selector_discovery"],
+    "finding_refs": [
+      "HCM32-FINAL-SEL-DISC-001",
+      "HCM32-FINAL-SEL-DISC-002",
+      "HCM32-FINAL-SEL-DISC-003",
+      "HCM32-FINAL-SEL-DISC-004"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T01:45:59Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-finalization-whole-slice",
+        "packet_ids": [
+          "HCM-3.2-FINAL-P1-selector-and-recovery",
+          "HCM-3.2-FINAL-P2-product-remediation",
+          "HCM-3.2-FINAL-P3-proof-and-review",
+          "HCM-3.2-FINAL-P4-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:34ddf53e78a819f92d3adf6520883300b77a60a03af18e5d63d040f421a2ac0a"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:965504ad2e1bde129646aab608915599ff3025c11f719b9b7e002cb8426f1882",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-finalization-whole-slice",
+    "outcome_registry_fingerprint": "sha256:34ddf53e78a819f92d3adf6520883300b77a60a03af18e5d63d040f421a2ac0a",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260805T020646Z--HCM-3-2--finalization-selector-discovery"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-finalization-selector-closure-convergence-1",
+    "completed_at_utc": "2026-08-05T02:16:54Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "consolidate the four selector-discovery P2 findings into one unchanged-scope planning remediation",
+        "evidence_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T021507Z--finalization-selector-remediation.md"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "replay combined clone/currentness/cryptographic consumption, original 004/005 recovery and quarantine scopes, non-HCM compatibility, exact-candidate completion, closeout review, and four-packet equality",
+        "evidence_ref": "all four discovery findings are mapped to exact selector, plan, checklist, and proof changes; no product path is edited"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the ordinal-sorted seven-entry repo-path-NUL-SHA256-newline remediated planning subject and canonical outcome registry",
+        "evidence_ref": "subject sha256:4aace33a0fb203ac4e01675d0f3a8a4b63bdd3478da7e080c35c5f935ae3ce43; registry sha256:34ddf53e78a819f92d3adf6520883300b77a60a03af18e5d63d040f421a2ac0a"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode and Markdown fence-balance check for the seven-entry planning subject",
+        "evidence_ref": "all files decode as UTF-8 and fence counts remain balanced"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent convergence command exited 0"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "sha256": "300557dab127bcdfd8e63c49dcb7bd2dd68e0b0f182a7083e35f7a3243da0a4d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "sha256": "dc78f9f5c7fecf86c6a914177d6cfac941b2e836bbfadac4857bb9eb39947a05"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-04-deferred-continuous-availability.md",
+        "sha256": "d1b7ec8dab45546f5d3a08d2253e4e56132f2800812a5817363177b9dcd4f75e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md",
+        "sha256": "bac9a3a51df1bd1d3fc233584c2ff8ddace690afd813a01058eb7f6599b95a3f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T021507Z--finalization-selector-remediation.md",
+        "sha256": "7850b94e92a3ffcf6243809674f350dd56a6590874c5aa7c027d212b42edfdf8"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+        "sha256": "d9a81ded30d7d345a9f0f91406b37b3feb67c1b999627d1024c67bf00748ec8a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+        "sha256": "dce132601c9e14cd76f3f950b2f758b2f01ee57f6e193a8c749acfbc1dc26c41"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:4aace33a0fb203ac4e01675d0f3a8a4b63bdd3478da7e080c35c5f935ae3ce43"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 fresh finalization selector closure",
+    "scope_horizon": "the exact remediated seven-file planning subject only",
+    "detail_resolution": "four discovery P2s: combined cryptographic/currentness consumption, restored stable 004/005 scopes, executable closeout review, and four-packet equality",
+    "temporal_horizon": "different-fresh planning closure before every Rust, test, and fixture edit",
+    "authority_horizon": "unchanged HCM-3.2 product paths, risks, four packets, tooling prohibition, deferred H2/H3, and local-only publication",
+    "memory_horizon": "discovery dispatch/result, consolidated remediation proof, immutable source handoff, old selector, and protected recovery evidence",
+    "validation_horizon": "return CLEAN only when every discovery finding is closed and no new P1/P2 exists"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md",
+      "sections": ["Mandatory carried product findings", "Fail-closed negative matrix", "Proof wall and review", "Completion and stop conditions"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T021507Z--finalization-selector-remediation.md",
+      "sections": ["Consolidated findings and disposition", "Boundary"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted.json",
+      "sections": ["immutable source findings 001-006"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": ["Review priority rubric", "Admission and duplicate rules"]
+    }
+  ],
+  "repo_truth": "Only the remediated seven-file planning subject plus discovery/closure dispatches differs from base. No Rust, test, fixture, tooling, protected path, ref, or remote was mutated. The four CRITICAL product seams were observed read-only through the protected index; FTS is unavailable, not GREEN.",
+  "allowed_scope": [
+    "Review the exact seven-entry subject read-only and verify closure of HCM32-FINAL-SEL-DISC-001 through 004.",
+    "Re-attempt combined clone/cache publisher substitution, stable finding identity transfer, incomplete recovery/quarantine matrices, unauthorized fifth packet, and unreviewed closeout publication.",
+    "Return any newly unmasked P1/P2 only if directly caused by this consolidated remediation and inside unchanged planning scope."
+  ],
+  "non_goals": [
+    "Do not edit, format, test, stage, commit, delegate, write a handoff/ledger, or implement/recover product code.",
+    "Do not reopen general discovery, change the four-packet registry, trust the protected WIP, create tooling work, waive P1/P2, or expand H2/H3/HCM-3.3/public/dependency scope."
+  ],
+  "tasks": [
+    "Return findings first with exact IDs/locations/gates/smallest remediation/missing verification; otherwise return CLEAN for subject sha256:4aace33a0fb203ac4e01675d0f3a8a4b63bdd3478da7e080c35c5f935ae3ce43.",
+    "Confirm stable 004/005 meanings exactly match the immutable source while non-HCM compatibility and exact-candidate completion remain additional requirements and closure occurs only after P3 proof.",
+    "Confirm every authority-bearing clone/cache/downstream operation retains and re-runs the complete real publisher cryptographic/currentness chain.",
+    "Confirm the closeout review sequence is executable without rewriting reviewed history and the packet set is exactly four."
+  ],
+  "contracts_and_gates": [
+    "No product/test/fixture edit is authorized until this different-fresh planning closure is CLEAN.",
+    "No unresolved discovery P2, new P1/P2, finding-identity transfer, unauthorized packet, or closeout publication gap may proceed.",
+    "No review cycle follows CLEAN in the planning stage."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair for any remaining or directly unmasked P1/P2.",
+    "Return BLOCKED if closure requires tooling/schema, new authority/path/risk, public API, H2/H3, or generic ownership expansion."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}

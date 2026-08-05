@@ -1,0 +1,252 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T020646Z--HCM-3-2--finalization-selector-discovery",
+  "created_at_utc": "2026-08-05T02:06:46Z",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted"
+  ],
+  "parent_orchestration_id": "20260805T014559Z--HCM-3-2--context-resolution-finalization",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-development",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-FINAL-P1-selector-and-recovery",
+  "subject_fingerprint": "sha256:ce6005b99227ecb9f67e16ace0cb3494d45fa5c648038c0cad8dcb2912c9db59",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.2-finalization-selector-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T01:45:59Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-finalization-whole-slice",
+        "packet_ids": [
+          "HCM-3.2-FINAL-P1-selector-and-recovery",
+          "HCM-3.2-FINAL-P2-product-remediation",
+          "HCM-3.2-FINAL-P3-proof-and-review",
+          "HCM-3.2-FINAL-P4-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:34ddf53e78a819f92d3adf6520883300b77a60a03af18e5d63d040f421a2ac0a"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:965504ad2e1bde129646aab608915599ff3025c11f719b9b7e002cb8426f1882",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-finalization-whole-slice",
+    "outcome_registry_fingerprint": "sha256:34ddf53e78a819f92d3adf6520883300b77a60a03af18e5d63d040f421a2ac0a",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-finalization-selector-convergence-1",
+    "completed_at_utc": "2026-08-05T02:06:45Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "verify bound identity, assigned checkout/base/tree/integration ref/ancestor/authoritative feature remote/cleanliness/protected observations; read live AGENTS, 00-09 workflow, HCM-3.2 authority, exact source handoff, old selector, protected recovery evidence, and required skills",
+        "evidence_ref": "increment 019fcf9b-d5d1-7242-9116-14977f9313d6/local is bound to nonce 42dc4d66b9f146e1916cfca6f4b2d2c5; checkout and local ref equal eb4b7ba55c6f3db40799e67275f3bbbb8610c87a/tree d51327c442190edcf1bf56423db54fd2522c5e6f; required ancestor is present; origin feature ref and tracking ref equal 7becde555bcc9742cd0ada4cff27542f521e6abb; no Rust, test, or fixture edit exists"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory exact prior selector, source findings, three planned production paths, two test paths, HCM-3.2 fixture tree, protected thirteen-path WIP, current/historical/pending authority consumers, generic recovery, quarantine, and deferred H2/H3 boundary",
+        "evidence_ref": "fresh additive selector binds findings 002/004/005/006 as mandatory requirements, 001/003 as regression targets, exact public compatibility, unchanged non-HCM markerless recovery, envelope clone currentness, candidate-bound quarantine completion, and honest proof; protected WIP remains read-only"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted six-entry repo-path-NUL-SHA256-newline subject plus canonical-json-newline outcome registry",
+        "evidence_ref": "subject sha256:ce6005b99227ecb9f67e16ace0cb3494d45fa5c648038c0cad8dcb2912c9db59; registry sha256:34ddf53e78a819f92d3adf6520883300b77a60a03af18e5d63d040f421a2ac0a; budget sha256:965504ad2e1bde129646aab608915599ff3025c11f719b9b7e002cb8426f1882"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "strict UTF-8 decode and Markdown fence-balance check for all six planning files",
+        "evidence_ref": "strict UTF-8 passed; old selector has 8 and fresh selector has 4 balanced fence delimiters; all other planning files have none"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "parent pre-review command exited 0 and every manifest text entry has zero trailing-space/tab lines"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "sha256": "300557dab127bcdfd8e63c49dcb7bd2dd68e0b0f182a7083e35f7a3243da0a4d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "sha256": "dc78f9f5c7fecf86c6a914177d6cfac941b2e836bbfadac4857bb9eb39947a05"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-04-deferred-continuous-availability.md",
+        "sha256": "d1b7ec8dab45546f5d3a08d2253e4e56132f2800812a5817363177b9dcd4f75e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md",
+        "sha256": "2a3cbbf5380f52a447b61c73c3e1e4776ef69993edb78749e71290b1c299b8a5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+        "sha256": "1ef61da8bb704625834d1ba0e0e1693c0d74ff6a1edc795bb09f0bcd3ef6bc55"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+        "sha256": "5521a5093ce06af7ab4b63d9e1bb7b01b6712cc1e97f48e9a27453ae69efafba"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:ce6005b99227ecb9f67e16ace0cb3494d45fa5c648038c0cad8dcb2912c9db59"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 fresh finalization selector discovery",
+    "scope_horizon": "engine-owned ordered-stack kernel plus one private JCS authority capsule, real generic intake/promotion/lineage composition, authenticated publisher authority, current operational consumption, replacement/recovery, proof, and local-only closeout",
+    "detail_resolution": "fresh parent/outcome/four packets, additive selector lineage, exact paths/symbols/ceilings, five proof states, predecessor quartet, negative matrix, stable findings 001-006, compatibility, proof wall, and H2/H3 deferral",
+    "temporal_horizon": "planning stage before every Rust, test, and fixture edit",
+    "authority_horizon": "HCM-3.2 only; no HCM-0.11/tooling, generic framework, H2/H3 implementation, HCM-3.3+, public/dependency/native/transport expansion, shipped identity change, remote publication, or push",
+    "memory_horizon": "exact base eb4b7ba, HCM-3.1 completion, immutable selected handoff, quarantined checkpoint/invalid continuation, protected thirteen-path recovery evidence, old selector, and this fresh registry",
+    "validation_horizon": "independent selector CLEAN is mandatory before product recovery or implementation"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md",
+      "sections": [
+        "Fresh authority and additive lineage",
+        "Frozen outcome registry and cadence",
+        "Product objective and owner contracts",
+        "Exact production, test, and symbol boundary",
+        "Transition state machine and proof modes",
+        "Mandatory carried product findings",
+        "Fail-closed negative matrix",
+        "Compatibility and deferred boundary",
+        "Proof wall and review",
+        "Completion and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": [
+        "Runtime owner and exact compatibility tuple",
+        "Fingerprint domains and preimages",
+        "Publisher authority and real owner pipeline",
+        "Private typed states, currentness, and replacement",
+        "Ordered-stack and six-dimension selector",
+        "Inheritance selector",
+        "Mutation selector",
+        "Memory, validation, and escalation selector",
+        "Exact public symbols and signatures",
+        "Exact ceilings",
+        "Lineage-store composition boundary",
+        "Test selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted.json",
+      "sections": ["immutable source findings 001-006 and failed implementation boundary"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": ["Context Resolution stack definition", "Context Resolution envelope", "Resolution escalation and memory promotion"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": ["PG-RES-01", "Regression rules 42 and 48"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": ["Review priority rubric", "Admission and duplicate rules"]
+    }
+  ],
+  "repo_truth": "The bound checkout and dedicated integration ref are clean at eb4b7ba55c6f3db40799e67275f3bbbb8610c87a/tree d51327c442190edcf1bf56423db54fd2522c5e6f. The authoritative origin feature ref remains 7becde555bcc9742cd0ada4cff27542f521e6abb. Only the six-file planning subject and this dispatch are new/modified. The protected 9586 checkpoint/WIP was inspected read-only and remains untrusted recovery evidence. GitNexus CLI registry contains an eb4b7ba index, but concept query reports FTS unavailable; that capability is unavailable, not GREEN.",
+  "allowed_scope": [
+    "Review the exact six-file effective planning subject read-only for authority, completeness, consistency, security, implementability, reviewability, and testability.",
+    "Adversarially verify the fresh identity/registry, additive relationship to the old selector, exact owner/path/symbol ceiling, state machine, historical/current non-substitution, predecessor quartet, current-envelope clone behavior, non-HCM markerless compatibility, candidate-bound quarantine, negative matrix, proof wall, and H2/H3 deferral.",
+    "Treat findings 002/004/005/006 as mandatory requirements and 001/003 as regression targets without renaming, waiving, or transferring their historical identities.",
+    "Return unique fresh planning finding IDs only for gaps in this exact subject; do not repair them."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger, delegate, test, or implement product code.",
+    "Do not treat the selected source handoff as same-parent continuation or supersession, trust/publish the quarantined checkpoint/WIP, create HCM-0.11/tooling changes, reopen old discovery, or waive old P1/P2.",
+    "Do not add public API, dependency/crate, sixth production path, generic recovery/framework authority, H2/H3, HCM-3.3+, remote publication, or push."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit, with unique HCM32-FINAL-SEL-DISC IDs, exact file/section evidence, violated contract/gate, smallest valid remediation, and missing verification.",
+    "Attempt to bypass the current-authority witness through admission/envelope clones and downstream consumption; broaden non-HCM markerless recovery; close quarantine with a substitute candidate; borrow historical/pending proof; bypass exact predecessor/current registry/generic lineage; or overclaim proof.",
+    "Check that every required product repair and proof fits the three planned production paths, exact named symbols, accepted four-function CRITICAL ceiling, unchanged public signatures, line/test ceilings, and four packet IDs.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:ce6005b99227ecb9f67e16ace0cb3494d45fa5c648038c0cad8dcb2912c9db59."
+  ],
+  "contracts_and_gates": [
+    "No Rust, test, fixture, recovery-copy, or product implementation edit is authorized until this planning stage independently closes CLEAN.",
+    "One consolidated selector remediation and one different-fresh closure are available; only immediately causal unmasked P1/P2 may use supplementals.",
+    "No unresolved P1/P2, historical/pending operational capability, generic semantic overclaim, compatibility regression, quarantine substitution, or proof overclaim may proceed.",
+    "A sixth production path, unexpected HIGH/CRITICAL symbol, public/dependency/owner/unsafe/native/transport expansion, shipped identity change, H2/H3, HCM-3.3+, or tooling change is a true stop."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair if the fresh selector is ambiguous, contradictory, incomplete, untestable, unsafe, or overbroad.",
+    "Return BLOCKED if completion requires tooling/schema change, new authority/risk/path, generic ownership expansion, H2/H3, bootstrap-only reduction, or a public API change.",
+    "Report any manifest, cadence, protected-boundary, or source-lineage issue to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

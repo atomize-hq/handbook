@@ -1,12 +1,12 @@
 schema_id: handbook.schema-registry-entry
 schema_version: "1.0"
-content_schema_id: example.schemas.context-resolution-authority
+content_schema_id: handbook.schemas.context-resolution-authority-capsule
 content_schema_version: 1.0.0
 document_ref: .handbook/definitions/schemas/context-resolution-authority-1.0.0.schema.json
-document_fingerprint: sha256:7d7ad3d8eaa4cbf78ee2c008abaaeea159b01b1bafcd833027da97a519b6514e
-closure_fingerprint: sha256:bb3af0a17fa7204e789aa5896410e5fdb43c14e9f04c160e9a7b04004e00da4b
+document_fingerprint: sha256:e021fa2f6d30b784fb207dca6e5228e284afa5018447fb4c7ab73ef883eb4606
+closure_fingerprint: sha256:aa62eb775d14ebb3ddad10a1cb22e286940e0bfd2bbfb06159155038f4180f23
 meta_schema_ref: https://json-schema.org/draft/2020-12/schema
 media_type: application/schema+json
 compatibility: exact
 extensions: {}
-entry_fingerprint: sha256:bf68f1a0eadf913d0e060d7d4af74884f7b3d4b7441004202a08a610e92cafc1
+entry_fingerprint: sha256:94813ba29a13c962e80c395e05845d5a7420bca214fea94ef922a4caaccd8950

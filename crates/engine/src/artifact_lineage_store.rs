@@ -2,7 +2,7 @@ use crate::canonical_repo_support::{CanonicalWorkspace, TrustedRepoFile};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Map, Value};
 use sha2::{Digest, Sha256};
-use std::collections::BTreeSet;
+use std::collections::{BTreeMap, BTreeSet};
 #[cfg(not(unix))]
 use std::fs::OpenOptions;
 use std::fs::{self, File};
@@ -477,6 +477,11 @@ fn validate_request_subject(
             "domain request subject must be one closed object",
         )
     })?;
+    let is_hcm_publication = operation == GenericArtifactOperationV1::ArtifactCandidatePromote
+        && object.get("kind_ref").and_then(Value::as_str)
+            == Some("handbook.artifact-kind.context-resolution-authority-binding@1.0.0")
+        && object.get("instance_id").and_then(Value::as_str)
+            == Some("context_resolution_authority");
     let expected: &[&str] = match operation {
         GenericArtifactOperationV1::IntakeRecordAppend => &[
             "operation_id",
@@ -495,6 +500,17 @@ fn validate_request_subject(
             "intake_record_fingerprint",
             "expected_candidate_fingerprint",
             "operation_context_fingerprint",
+        ],
+        GenericArtifactOperationV1::ArtifactCandidatePromote if is_hcm_publication => &[
+            "operation_id",
+            "kind_ref",
+            "instance_id",
+            "candidate_ref",
+            "candidate_fingerprint",
+            "expected_current_artifact_fingerprint",
+            "operation_context_fingerprint",
+            "canonical_artifact_ref",
+            "publisher_authority",
         ],
         GenericArtifactOperationV1::ArtifactCandidatePromote => &[
             "operation_id",
@@ -546,9 +562,34 @@ fn validate_request_subject(
             validate_sha256(required_string(object, "candidate_fingerprint")?)?;
             validate_nullable_sha256(object.get("expected_current_artifact_fingerprint"))?;
             validate_safe_ref(required_string(object, "canonical_artifact_ref")?)?;
+            if is_hcm_publication
+                && !object
+                    .get("publisher_authority")
+                    .is_some_and(Value::is_object)
+            {
+                return Err(error(
+                    GenericLineageStoreErrorKindV1::InvalidRequest,
+                    "HCM publisher authority must be one retained object",
+                ));
+            }
         }
     }
     Ok(())
+}
+
+fn hcm_context_resolution_promotion(intent: &Value) -> bool {
+    operation_from_intent(intent).ok() == Some(GenericArtifactOperationV1::ArtifactCandidatePromote)
+        && intent
+            .pointer("/request_subject/kind_ref")
+            .and_then(Value::as_str)
+            == Some("handbook.artifact-kind.context-resolution-authority-binding@1.0.0")
+        && intent
+            .pointer("/request_subject/instance_id")
+            .and_then(Value::as_str)
+            == Some("context_resolution_authority")
+        && intent
+            .pointer("/request_subject/publisher_authority")
+            .is_some_and(Value::is_object)
 }
 
 fn validate_plan(
@@ -2271,6 +2312,199 @@ fn build_ledger(
     )
 }
 
+#[rustfmt::skip]
+fn validate_hcm_quarantine_record(
+    record: &Value,
+    transition_fingerprint: &str,
+    required_resolution: Option<&str>,
+) -> Result<(), GenericLineageStoreErrorV1> {
+    validate_sha256(transition_fingerprint)?;
+    let object = record
+        .as_object()
+        .ok_or_else(|| conflicting("HCM quarantine is not an object"))?;
+    let expected = BTreeSet::from([
+        "schema_id",
+        "schema_version",
+        "repository_identity_fingerprint",
+        "result_registry_state_ref",
+        "result_registry_state_fingerprint",
+        "result_transition_ref",
+        "result_transition_fingerprint",
+        "outer_artifact_fingerprint",
+        "observed_canonical_artifact_fingerprint",
+        "candidate_ref",
+        "candidate_fingerprint",
+        "idempotency_key",
+        "journal_transaction_id",
+        "phase",
+        "reason",
+        "resolution",
+        "result_transaction_ref",
+        "result_transaction_fingerprint",
+        "record_fingerprint",
+    ]);
+    if object.keys().map(String::as_str).collect::<BTreeSet<_>>() != expected
+        || string_field(record, "schema_id")?
+            != "handbook.context-resolution-publication-quarantine"
+        || string_field(record, "schema_version")? != "1.0"
+        || string_field(record, "result_transition_fingerprint")? != transition_fingerprint
+    {
+        return Err(conflicting(
+            "HCM quarantine violates its exact closed shape",
+        ));
+    }
+    for field in [
+        "repository_identity_fingerprint",
+        "result_registry_state_fingerprint",
+        "result_transition_fingerprint",
+        "outer_artifact_fingerprint",
+        "record_fingerprint",
+    ] {
+        validate_sha256(string_field(record, field)?)?;
+    }
+    for field in ["result_registry_state_ref", "result_transition_ref"] {
+        validate_safe_ref(string_field(record, field)?)?;
+    }
+    let optional_string = |field: &str| match record.get(field) {
+        Some(Value::Null) => Ok(None),
+        Some(Value::String(value)) => Ok(Some(value.as_str())),
+        _ => Err(conflicting(format!("HCM quarantine optional {field} is not string or null"))),
+    };
+    let observed = optional_string("observed_canonical_artifact_fingerprint")?;
+    let candidate_ref = optional_string("candidate_ref")?;
+    let candidate_fingerprint = optional_string("candidate_fingerprint")?;
+    let transaction_id = optional_string("journal_transaction_id")?;
+    let result_ref = optional_string("result_transaction_ref")?;
+    let result_fingerprint = optional_string("result_transaction_fingerprint")?;
+    if candidate_ref.is_some() != candidate_fingerprint.is_some()
+        || result_ref.is_some() != result_fingerprint.is_some()
+    {
+        return Err(conflicting(
+            "HCM quarantine optional ref/fingerprint pair is mixed",
+        ));
+    }
+    for value in [observed, candidate_fingerprint, result_fingerprint]
+        .into_iter()
+        .flatten()
+    {
+        validate_sha256(value)?;
+    }
+    for value in [candidate_ref, result_ref].into_iter().flatten() {
+        validate_safe_ref(value)?;
+    }
+    let outer = string_field(record, "outer_artifact_fingerprint")?;
+    if string_field(record, "idempotency_key")?
+        != format!("hcm32crpub_{}", fingerprint_hex(outer)?)
+    {
+        return Err(conflicting("HCM quarantine idempotency key is not deterministic"));
+    }
+    let reason = string_field(record, "reason")?;
+    if !matches!(
+        reason,
+        "retry_available"
+            | "candidate_missing"
+            | "candidate_ambiguous"
+            | "candidate_invalid"
+            | "predecessor_mismatch"
+            | "journal_conflict"
+            | "installed_result_ambiguous"
+            | "registry_delta_ambiguous"
+    ) {
+        return Err(conflicting(
+            "HCM quarantine reason is outside the closed set",
+        ));
+    }
+    let resolution = string_field(record, "resolution")?;
+    if required_resolution.is_some_and(|required| required != resolution)
+        || !matches!(resolution, "open" | "committed")
+    {
+        return Err(conflicting("HCM quarantine resolution is invalid"));
+    }
+    let phase = string_field(record, "phase")?;
+    let candidate_present = candidate_ref.is_some();
+    let valid_matrix = match (resolution, phase, reason) {
+        ("open", "authorized_without_generic_intent", "retry_available") => {
+            transaction_id.is_none() && candidate_present
+        }
+        ("open", "authorized_without_generic_intent", "candidate_missing" | "candidate_ambiguous" | "candidate_invalid" | "predecessor_mismatch" | "registry_delta_ambiguous") => {
+            transaction_id.is_none() && !candidate_present
+        }
+        ("open", "generic_pending", "journal_conflict" | "registry_delta_ambiguous") => {
+            transaction_id.is_some() && !candidate_present
+        }
+        ("open", "installed_without_commit", "installed_result_ambiguous") => {
+            !candidate_present
+        }
+        ("committed", "authorized_without_generic_intent", "retry_available") => {
+            transaction_id.is_some() && candidate_present && result_ref.is_some()
+        }
+        _ => false,
+    };
+    if !valid_matrix || (resolution == "open" && result_ref.is_some()) {
+        return Err(conflicting(
+            "HCM quarantine phase, reason, and cardinality are incoherent",
+        ));
+    }
+    if transaction_id.is_some_and(|value| value.is_empty() || value.len() > 128
+        || !value.bytes().all(|byte| byte.is_ascii_alphanumeric() || matches!(byte, b'_' | b'-')))
+    {
+        return Err(conflicting("HCM quarantine transaction ID is invalid"));
+    }
+    let mut preimage = record.clone();
+    preimage
+        .as_object_mut()
+        .expect("validated object")
+        .remove("record_fingerprint");
+    if finalize_control(preimage, "record_fingerprint")? != *record {
+        return Err(conflicting("HCM quarantine fingerprint does not recompute"));
+    }
+    Ok(())
+}
+
+#[rustfmt::skip]
+fn hcm_quarantine_anchor(record:&Value,transition_fingerprint:&str) -> Result<Value,GenericLineageStoreErrorV1> { finalize_control(json!({"schema_id":"handbook.context-resolution-publication-quarantine-anchor","schema_version":"1.0","result_transition_fingerprint":transition_fingerprint,"open_record_fingerprint":string_field(record,"record_fingerprint")?}),"anchor_fingerprint") }
+
+#[rustfmt::skip]
+fn validate_hcm_quarantine_inventory(root: &Path) -> Result<usize, GenericLineageStoreErrorV1> {
+    let anchor_root=root.parent().ok_or_else(||conflicting("HCM quarantine inventory root has no parent"))?.join("quarantine-anchors"); let mut anchors:BTreeMap<String,Value>=BTreeMap::new();
+    if anchor_root.try_exists().map_err(|_|io_error("HCM quarantine anchor inventory lookup failed"))? { let metadata=fs::symlink_metadata(&anchor_root).map_err(|_|io_error("HCM quarantine anchor inventory metadata failed"))?; if !metadata.is_dir() || metadata.file_type().is_symlink(){return Err(conflicting("HCM quarantine anchor inventory root is unsafe"));}
+        let mut entries=fs::read_dir(&anchor_root).map_err(|_|io_error("HCM quarantine anchor inventory read failed"))?.map(|entry|entry.map(|value|value.path()).map_err(|_|io_error("HCM quarantine anchor inventory entry failed"))).collect::<Result<Vec<_>,_>>()?; entries.sort();
+        for path in entries { let name=file_name(&path)?; let hex=name.strip_prefix("quarantine_").and_then(|value|value.strip_suffix(".json")).ok_or_else(||conflicting("HCM quarantine anchor inventory contains an unknown entry"))?; if hex.len()!=64 || !hex.bytes().all(|byte|byte.is_ascii_hexdigit()&&!byte.is_ascii_uppercase()){return Err(conflicting("HCM quarantine anchor filename is malformed"));} let metadata=fs::symlink_metadata(&path).map_err(|_|io_error("HCM quarantine anchor metadata failed"))?; if !metadata.is_file()||metadata.file_type().is_symlink()||metadata.len()>65_536{return Err(conflicting("HCM quarantine anchor is unsafe or oversized"));} let anchor=read_control(&path,"anchor_fingerprint")?; require_exact_fields(&anchor,&["schema_id","schema_version","result_transition_fingerprint","open_record_fingerprint","anchor_fingerprint"],GenericLineageStoreErrorKindV1::ConflictingTransactionState)?; let transition=format!("sha256:{hex}"); if anchor.get("schema_id").and_then(Value::as_str)!=Some("handbook.context-resolution-publication-quarantine-anchor")||anchor.get("schema_version").and_then(Value::as_str)!=Some("1.0")||anchor.get("result_transition_fingerprint").and_then(Value::as_str)!=Some(&transition)||validate_sha256(string_field(&anchor,"open_record_fingerprint")?).is_err(){return Err(conflicting("HCM quarantine anchor identity is invalid"));}
+        if anchors.insert(hex.to_owned(),anchor).is_some(){return Err(conflicting("HCM quarantine transition has duplicate anchors"));} }
+    }
+    if !root.try_exists().map_err(|_| io_error("HCM quarantine inventory lookup failed"))? { if anchors.is_empty(){return Ok(0);} return Err(conflicting("HCM quarantine anchor has no open source record")); }
+    let metadata=fs::symlink_metadata(root).map_err(|_| io_error("HCM quarantine inventory metadata failed"))?;
+    if !metadata.is_dir() || metadata.file_type().is_symlink() { return Err(conflicting("HCM quarantine inventory root is unsafe")); }
+    let mut entries=fs::read_dir(root).map_err(|_| io_error("HCM quarantine inventory read failed"))?.map(|entry| entry.map(|value| value.path()).map_err(|_| io_error("HCM quarantine inventory entry failed"))).collect::<Result<Vec<_>,_>>()?; entries.sort();
+    let mut scratch:BTreeMap<String,PathBuf>=BTreeMap::new();
+    for path in entries.iter().filter(|path| path.file_name().and_then(|value| value.to_str()).is_some_and(|name| name.starts_with("quarantine_") && name.ends_with(".committed.writing"))) { let name=file_name(path)?; let hex=name.strip_prefix("quarantine_").and_then(|value|value.strip_suffix(".committed.writing")).ok_or_else(||conflicting("HCM quarantine scratch filename is malformed"))?; if hex.len()!=64 || !hex.bytes().all(|byte|byte.is_ascii_hexdigit()&&!byte.is_ascii_uppercase()){return Err(conflicting("HCM quarantine scratch filename is malformed"));} let metadata=fs::symlink_metadata(path).map_err(|_|io_error("HCM quarantine scratch metadata failed"))?; if !metadata.is_file()||metadata.file_type().is_symlink()||metadata.len()>65_536{return Err(conflicting("HCM quarantine scratch is unsafe or oversized"));}
+        if scratch.insert(hex.to_owned(),path.to_owned()).is_some(){return Err(conflicting("HCM quarantine transition has duplicate scratch"));} }
+    let mut records:BTreeMap<String,(Option<Value>,Option<Value>)>=BTreeMap::new();
+    for path in entries.into_iter().filter(|path| path.try_exists().unwrap_or(false) && !path.file_name().and_then(|value|value.to_str()).is_some_and(|name|name.ends_with(".committed.writing"))) {
+        let name=file_name(&path)?; let body=name.strip_prefix("quarantine_").ok_or_else(|| conflicting("HCM quarantine inventory contains an unknown entry"))?;
+        let (hex,committed)=body.strip_suffix(".committed.json").map(|value|(value,true)).or_else(|| body.strip_suffix(".json").map(|value|(value,false))).ok_or_else(|| conflicting("HCM quarantine inventory contains an unknown entry"))?;
+        if hex.len()!=64 || !hex.bytes().all(|byte| byte.is_ascii_hexdigit() && !byte.is_ascii_uppercase()) { return Err(conflicting("HCM quarantine filename is malformed")); }
+        let metadata=fs::symlink_metadata(&path).map_err(|_| io_error("HCM quarantine entry metadata failed"))?;
+        if !metadata.is_file() || metadata.file_type().is_symlink() || metadata.len()>65_536 { return Err(conflicting("HCM quarantine entry is unsafe or oversized")); }
+        let transition=format!("sha256:{hex}"); let record=read_control(&path,"record_fingerprint")?; validate_hcm_quarantine_record(&record,&transition,Some(if committed{"committed"}else{"open"}))?;
+        let slot=records.entry(hex.to_owned()).or_default(); let target=if committed{&mut slot.1}else{&mut slot.0}; if target.replace(record).is_some(){return Err(conflicting("HCM quarantine transition has duplicate records"));}
+    }
+    if records.keys().chain(anchors.keys()).collect::<BTreeSet<_>>().len()>64 { return Err(error(GenericLineageStoreErrorKindV1::BoundExceeded,"HCM quarantine inventory exceeds 64 records")); }
+    for hex in anchors.keys() { if records.get(hex).and_then(|(open,_)|open.as_ref()).is_none(){return Err(conflicting("HCM quarantine anchor has no open source record"));} }
+    for (hex,(open,committed)) in &records { if let Some(open)=open { let transition=format!("sha256:{hex}"); let expected=hcm_quarantine_anchor(open,&transition)?; if anchors.get(hex)!=Some(&expected){return Err(conflicting("HCM quarantine open record is not bound to its original fingerprint"));} }
+    if let Some(committed)=committed { let open=open.as_ref().ok_or_else(|| conflicting("HCM quarantine completion has no open source record"))?; for field in ["schema_id","schema_version","repository_identity_fingerprint","result_registry_state_ref","result_registry_state_fingerprint","result_transition_ref","result_transition_fingerprint","outer_artifact_fingerprint","observed_canonical_artifact_fingerprint","candidate_ref","candidate_fingerprint","idempotency_key","phase","reason"] { if open.get(field)!=committed.get(field){return Err(conflicting("HCM quarantine completion changed its source identity"));} } } }
+    for (hex,path) in scratch { if records.get(&hex).and_then(|(open,_)|open.as_ref()).is_none(){return Err(conflicting("HCM quarantine scratch has no open source record"));} remove_store_file(&path)?; }
+    Ok(records.keys().chain(anchors.keys()).collect::<BTreeSet<_>>().len())
+}
+
+#[rustfmt::skip]
+fn write_hcm_quarantine_completion_durable(open_path:&Path, bytes:&[u8]) -> Result<(),GenericLineageStoreErrorV1> {
+    let root=open_path.parent().ok_or_else(|| io_error("HCM quarantine completion parent is unavailable"))?; let stem=open_path.file_stem().and_then(|value|value.to_str()).ok_or_else(|| conflicting("HCM quarantine filename is malformed"))?;
+    let completed=root.join(format!("{stem}.committed.json")); if completed.try_exists().map_err(|_| io_error("HCM quarantine completion lookup failed"))? { return require_equal_file(&completed,bytes); }
+    let writing=root.join(format!("{stem}.committed.writing")); if writing.try_exists().map_err(|_| io_error("HCM quarantine scratch lookup failed"))? { remove_store_file(&writing)?; }
+    write_new_durable(&writing,bytes)?; rename_store_path(&writing,&completed)?; sync_directory(root)?; require_equal_file(&completed,bytes)
+}
+
 impl GenericArtifactLineageStoreV1 {
     pub(crate) fn new(repo_root: impl AsRef<Path>) -> Self {
         Self {
@@ -2527,6 +2761,152 @@ impl GenericArtifactLineageStoreV1 {
             ));
         }
         read_bounded_regular(&self.repo_root.join(relative_ref), MAX_RECORD_BYTES)
+    }
+
+    pub(crate) fn read_committed_authoritative_with_intent_during_evaluation(
+        &self,
+        relative_ref: &str,
+        fingerprint: &str,
+    ) -> Result<(Vec<u8>, Value), GenericLineageStoreErrorV1> {
+        validate_safe_ref(relative_ref)?;
+        validate_sha256(fingerprint)?;
+        self.verified_committed_authority(relative_ref, fingerprint)?
+            .ok_or_else(|| {
+                error(
+                    GenericLineageStoreErrorKindV1::RetainedResultMismatch,
+                    "authoritative output is not backed by one exact committed chain",
+                )
+            })
+    }
+
+    pub(crate) fn read_committed_authoritative_for_currentness(
+        &self,
+        relative_ref: &str,
+        fingerprint: &str,
+    ) -> Result<Vec<u8>, GenericLineageStoreErrorV1> {
+        self.read_committed_authoritative_with_intent_for_currentness(relative_ref, fingerprint)
+            .map(|(bytes, _)| bytes)
+    }
+
+    pub(crate) fn read_committed_authoritative_with_intent_for_currentness(
+        &self,
+        relative_ref: &str,
+        fingerprint: &str,
+    ) -> Result<(Vec<u8>, Value), GenericLineageStoreErrorV1> {
+        validate_safe_ref(relative_ref)?;
+        validate_sha256(fingerprint)?;
+        let _lock = GenericStoreLock::acquire(&self.repo_root)?;
+        self.validate_inventory()?;
+        self.recover_locked()?;
+        self.read_committed_authoritative_with_intent_during_evaluation(relative_ref, fingerprint)
+    }
+
+    pub(crate) fn read_committed_closure_for_currentness(
+        &self,
+        authoritative_ref: &str,
+        authoritative_fingerprint: &str,
+        closure_ref: &str,
+        closure_fingerprint: &str,
+    ) -> Result<Vec<u8>, GenericLineageStoreErrorV1> {
+        validate_safe_ref(authoritative_ref)?;
+        validate_sha256(authoritative_fingerprint)?;
+        let _lock = GenericStoreLock::acquire(&self.repo_root)?;
+        self.validate_inventory()?;
+        self.recover_locked()?;
+        if self
+            .verified_committed_authority(authoritative_ref, authoritative_fingerprint)?
+            .is_none()
+        {
+            return Err(error(
+                GenericLineageStoreErrorKindV1::RetainedResultMismatch,
+                "closure authority is not backed by one exact committed chain",
+            ));
+        }
+        self.read_committed_closure_during_evaluation(
+            authoritative_ref,
+            authoritative_fingerprint,
+            closure_ref,
+            closure_fingerprint,
+        )
+    }
+
+    pub(crate) fn record_hcm_publication_quarantine(
+        &self,
+        transition_fingerprint: &str,
+        record: &Value,
+    ) -> Result<(), GenericLineageStoreErrorV1> {
+        validate_sha256(transition_fingerprint)?;
+        validate_hcm_quarantine_record(record, transition_fingerprint, Some("open"))?;
+        let _lock = GenericStoreLock::acquire(&self.repo_root)?;
+        let root = self
+            .repo_root
+            .join(".handbook/state/context-resolution-authority/quarantine");
+        create_safe_directories(&self.repo_root, &root)?;
+        let anchor_root = root
+            .parent()
+            .expect("quarantine root has a state parent")
+            .join("quarantine-anchors");
+        create_safe_directories(&self.repo_root, &anchor_root)?;
+        let path = root.join(format!(
+            "quarantine_{}.json",
+            fingerprint_hex(transition_fingerprint)?
+        ));
+        let anchor_path = anchor_root.join(format!(
+            "quarantine_{}.json",
+            fingerprint_hex(transition_fingerprint)?
+        ));
+        if anchor_path
+            .try_exists()
+            .map_err(|_| io_error("HCM quarantine anchor lookup failed"))?
+            && !path
+                .try_exists()
+                .map_err(|_| io_error("HCM quarantine lookup failed"))?
+        {
+            require_equal_file(
+                &anchor_path,
+                &jcs_lf(&hcm_quarantine_anchor(record, transition_fingerprint)?)?,
+            )?;
+            write_new_or_equal(&path, &jcs_lf(record)?)?;
+        }
+        let count = validate_hcm_quarantine_inventory(&root)?;
+        if count >= 64 && !path.exists() && !anchor_path.exists() {
+            return Err(error(
+                GenericLineageStoreErrorKindV1::BoundExceeded,
+                "HCM quarantine inventory exceeds 64 records",
+            ));
+        }
+        write_new_or_equal(
+            &anchor_path,
+            &jcs_lf(&hcm_quarantine_anchor(record, transition_fingerprint)?)?,
+        )?;
+        write_new_or_equal(&path, &jcs_lf(record)?)?;
+        validate_hcm_quarantine_inventory(&root).map(|_| ())
+    }
+
+    #[rustfmt::skip]
+    fn committed_hcm_quarantine_result(&self, record:&Value) -> Result<GenericDomainMutationResultV1,GenericLineageStoreErrorV1> {
+        let key=string_field(record,"idempotency_key")?; let key_fingerprint=sha256_prefixed(&canonical_json(&json!({"key":key}))?); let ledger=read_control(&self.ledger_path(&key_fingerprint),"entry_fingerprint")?; self.require_exact_committed_chain(&ledger)?;
+        if string_field(&ledger,"state")?!="retained_result" || string_field(&ledger,"operation_id")?!=GenericArtifactOperationV1::ArtifactCandidatePromote.operation_id() || string_field(&ledger,"domain_mutation_key_fingerprint")?!=key_fingerprint { return Err(retained_error("HCM quarantine key is not backed by one exact promotion result")); }
+        let transaction_id=string_field(&ledger,"transaction_id")?; let committed=self.transaction_family_root(GenericArtifactOperationV1::ArtifactCandidatePromote).join(format!("{transaction_id}.committed")); let intent=read_control(&committed.join("intent.json"),"intent_fingerprint")?; let subject=intent.get("request_subject").ok_or_else(|| retained_error("HCM promotion request subject is absent"))?;
+        if string_field(&intent,"planned_outcome")?!="commit" || string_field(&intent,"request_fingerprint")?!=string_field(&ledger,"request_fingerprint")? || subject.get("candidate_ref").and_then(Value::as_str)!=record.get("candidate_ref").and_then(Value::as_str) || subject.get("candidate_fingerprint").and_then(Value::as_str)!=record.get("candidate_fingerprint").and_then(Value::as_str) || subject.get("publisher_authority").and_then(|value|value.get("result_transition_fingerprint")).and_then(Value::as_str)!=record.get("result_transition_fingerprint").and_then(Value::as_str) || !intent_outputs(&intent)?.iter().any(|output| output.get("final_ref").and_then(Value::as_str)==Some(".handbook/project/context-resolution-authority.yaml") && output.get("bytes_sha256").and_then(Value::as_str)==record.get("outer_artifact_fingerprint").and_then(Value::as_str)) { return Err(retained_error("committed HCM promotion does not bind the quarantined identity")); }
+        let result=self.read_result_for_transaction(GenericArtifactOperationV1::ArtifactCandidatePromote,transaction_id)?; if result.outcome!="committed" || result.request_fingerprint!=string_field(&intent,"request_fingerprint")? || result.internal_transaction_evidence_ref.is_none() || result.internal_transaction_evidence_fingerprint.is_none() || !result.authoritative_outputs.iter().any(|output| output.relative_ref==".handbook/project/context-resolution-authority.yaml" && Some(output.fingerprint.as_str())==record.get("outer_artifact_fingerprint").and_then(Value::as_str)) { return Err(retained_error("HCM quarantine completion lacks an exact committed T2 result")); } Ok(result)
+    }
+
+    #[rustfmt::skip]
+    pub(crate) fn require_hcm_publication_quarantine_candidate_during_evaluation(&self, transition_fingerprint:&str, candidate_ref:&str, candidate_fingerprint:&str, idempotency_key:&str) -> Result<(),GenericLineageStoreErrorV1> {
+        validate_sha256(transition_fingerprint)?; validate_safe_ref(candidate_ref)?; validate_sha256(candidate_fingerprint)?; let root=self.repo_root.join(".handbook/state/context-resolution-authority/quarantine"); let path=root.join(format!("quarantine_{}.json",fingerprint_hex(transition_fingerprint)?));
+        if path.try_exists().map_err(|_|io_error("HCM quarantine lookup failed"))? { let record=read_control(&path,"record_fingerprint")?; validate_hcm_quarantine_record(&record,transition_fingerprint,Some("open"))?; if record.get("reason").and_then(Value::as_str)!=Some("retry_available") || record.get("candidate_ref").and_then(Value::as_str)!=Some(candidate_ref) || record.get("candidate_fingerprint").and_then(Value::as_str)!=Some(candidate_fingerprint) || record.get("idempotency_key").and_then(Value::as_str)!=Some(idempotency_key) { return Err(conflicting("preexisting HCM quarantine does not bind this exact retry candidate")); } }
+        validate_hcm_quarantine_inventory(&root).map(|_|())
+    }
+
+    #[rustfmt::skip]
+    pub(crate) fn complete_hcm_publication_quarantine(&self, transition_fingerprint:&str, candidate_ref:&str, candidate_fingerprint:&str, idempotency_key:&str) -> Result<(),GenericLineageStoreErrorV1> {
+        let _lock=GenericStoreLock::acquire(&self.repo_root)?; self.require_hcm_publication_quarantine_candidate_during_evaluation(transition_fingerprint,candidate_ref,candidate_fingerprint,idempotency_key)?; let root=self.repo_root.join(".handbook/state/context-resolution-authority/quarantine"); let path=root.join(format!("quarantine_{}.json",fingerprint_hex(transition_fingerprint)?)); if !path.try_exists().map_err(|_|io_error("HCM quarantine lookup failed"))?{return Ok(());} let mut record=read_control(&path,"record_fingerprint")?; let result=self.committed_hcm_quarantine_result(&record)?; let object=record.as_object_mut().ok_or_else(||conflicting("HCM quarantine is not an object"))?; object.remove("record_fingerprint"); object.insert("journal_transaction_id".to_owned(),json!(result.transaction_id)); object.insert("resolution".to_owned(),json!("committed")); object.insert("result_transaction_ref".to_owned(),json!(result.internal_transaction_evidence_ref)); object.insert("result_transaction_fingerprint".to_owned(),json!(result.internal_transaction_evidence_fingerprint)); let completed=finalize_control(record,"record_fingerprint")?; validate_hcm_quarantine_record(&completed,transition_fingerprint,Some("committed"))?; write_hcm_quarantine_completion_durable(&path,&jcs_lf(&completed)?)?; validate_hcm_quarantine_inventory(&root).map(|_|())
+    }
+
+    #[rustfmt::skip]
+    pub(crate) fn reconcile_hcm_publication_quarantine(&self, transition_fingerprint:&str) -> Result<(),GenericLineageStoreErrorV1> {
+        validate_sha256(transition_fingerprint)?; let _lock=GenericStoreLock::acquire(&self.repo_root)?; let root=self.repo_root.join(".handbook/state/context-resolution-authority/quarantine"); let path=root.join(format!("quarantine_{}.json",fingerprint_hex(transition_fingerprint)?)); validate_hcm_quarantine_inventory(&root)?; if !path.try_exists().map_err(|_|io_error("HCM quarantine lookup failed"))?{return Ok(());} let completed=root.join(format!("quarantine_{}.committed.json",fingerprint_hex(transition_fingerprint)?)); if completed.try_exists().map_err(|_|io_error("HCM quarantine completion lookup failed"))?{return Ok(());} let mut record=read_control(&path,"record_fingerprint")?; let result=self.committed_hcm_quarantine_result(&record)?; let object=record.as_object_mut().ok_or_else(||conflicting("HCM quarantine is not an object"))?; object.remove("record_fingerprint"); object.insert("journal_transaction_id".to_owned(),json!(result.transaction_id)); object.insert("resolution".to_owned(),json!("committed")); object.insert("result_transaction_ref".to_owned(),json!(result.internal_transaction_evidence_ref)); object.insert("result_transaction_fingerprint".to_owned(),json!(result.internal_transaction_evidence_fingerprint)); let completed_record=finalize_control(record,"record_fingerprint")?; validate_hcm_quarantine_record(&completed_record,transition_fingerprint,Some("committed"))?; write_hcm_quarantine_completion_durable(&path,&jcs_lf(&completed_record)?)?; validate_hcm_quarantine_inventory(&root).map(|_|())
     }
 
     pub(crate) fn read_committed_closure_during_evaluation(
@@ -3715,12 +4095,15 @@ impl GenericArtifactLineageStoreV1 {
                 .join("native-publication-result.json")
                 .try_exists()
                 .map_err(|_| io_error("native publication result lookup failed"))?;
-        if promotion_commit && installed.contains(&0) && !publication_result_preexists {
+        if promotion_commit
+            && installed.contains(&0)
+            && !publication_result_preexists
+            && !hcm_context_resolution_promotion(&intent)
+        {
             return Err(conflicting(
                 "markerless installed publication lacks its durable native result",
             ));
         }
-
         let mut installed_guards = Vec::new();
         for (ordinal, descriptor) in outputs.iter().enumerate() {
             if installed.contains(&ordinal) {
@@ -4250,12 +4633,15 @@ impl GenericArtifactLineageStoreV1 {
                 .and_then(Value::as_str)
                 == Some("publication_basis_conflict");
         if string_field(&intent, "planned_outcome")? == "commit" && !terminal_publication_conflict {
-            let guards = self.verify_installed_outputs(
-                committed,
-                &intent,
-                &verified,
-                &intent_outputs(&intent)?,
-            )?;
+            let outputs = intent_outputs(&intent)?;
+            let guards =
+                match self.verify_installed_outputs(committed, &intent, &verified, &outputs) {
+                    Ok(guards) => guards,
+                    Err(_) if hcm_context_resolution_promotion(&intent) => {
+                        self.verify_hcm_historical_publication(committed, &intent, &outputs)?
+                    }
+                    Err(error) => return Err(error),
+                };
             require_installed_guards_unchanged(&guards)?;
         }
         if operation_from_intent(&intent)? == GenericArtifactOperationV1::ArtifactCandidatePromote
@@ -4484,6 +4870,141 @@ impl GenericArtifactLineageStoreV1 {
         Ok(guards)
     }
 
+    fn verify_hcm_historical_publication(
+        &self,
+        transaction: &Path,
+        intent: &Value,
+        outputs: &[Value],
+    ) -> Result<Vec<InstalledOutputGuard>, GenericLineageStoreErrorV1> {
+        if !hcm_context_resolution_promotion(intent)
+            || outputs.is_empty()
+            || string_field(&outputs[0], "install_mode")? != "replace_if_current"
+            || outputs[1..]
+                .iter()
+                .any(|output| string_field(output, "install_mode").ok() != Some("create_new"))
+        {
+            return Err(retained_error(
+                "historical publication proof is restricted to one exact HCM replacement with immutable subordinate evidence",
+            ));
+        }
+        let expected_ref = string_field(&outputs[0], "final_ref")?;
+        let expected_fingerprint = string_field(&outputs[0], "bytes_sha256")?;
+        let staged = transaction
+            .join("staged")
+            .join(staged_name(0, string_field(&outputs[0], "token")?));
+        let historical_bytes = read_bounded_regular(&staged, MAX_RECORD_BYTES)?;
+        require_descriptor_bytes(&outputs[0], &historical_bytes)?;
+
+        let family =
+            self.transaction_family_root(GenericArtifactOperationV1::ArtifactCandidatePromote);
+        let mut witnesses = Vec::new();
+        for successor in read_dir_paths(&family)? {
+            if successor == transaction
+                || successor
+                    .extension()
+                    .is_none_or(|extension| extension != "committed")
+            {
+                continue;
+            }
+            let successor_intent =
+                read_control(&successor.join("intent.json"), "intent_fingerprint")?;
+            validate_intent(&successor_intent)?;
+            if !hcm_context_resolution_promotion(&successor_intent)
+                || string_field(&successor_intent, "planned_outcome")? != "commit"
+                || successor_intent
+                    .get("expected_basis_fingerprint")
+                    .and_then(Value::as_str)
+                    != Some(expected_fingerprint)
+            {
+                continue;
+            }
+            let successor_outputs = intent_outputs(&successor_intent)?;
+            if successor_outputs.is_empty()
+                || string_field(&successor_outputs[0], "final_ref")? != expected_ref
+            {
+                return Err(retained_error(
+                    "HCM successor does not replace the exact historical canonical path",
+                ));
+            }
+            let successor_verified =
+                read_control(&successor.join("verified.json"), "verified_fingerprint")?;
+            validate_verified(&successor_verified, &successor_intent)?;
+            let successor_marker =
+                read_control(&successor.join("commit-marker.json"), "marker_fingerprint")?;
+            validate_marker(&successor_marker, &successor_intent, &successor_verified)?;
+            if successor_marker.get("outcome").and_then(Value::as_str) != Some("committed") {
+                return Err(retained_error(
+                    "HCM historical successor is not one committed publication",
+                ));
+            }
+            let observation = read_native_publication_observation(
+                &successor,
+                &successor_intent,
+                &successor_verified,
+            )?;
+            if string_field(&observation, "expected_basis_presence")? != "present"
+                || string_field(&observation, "expected_basis_fingerprint")? != expected_fingerprint
+                || string_field(&observation, "canonical_ref")? != expected_ref
+            {
+                return Err(retained_error(
+                    "HCM successor observation does not bind the exact historical basis",
+                ));
+            }
+            let native_result = read_control(
+                &successor.join("native-publication-result.json"),
+                "result_fingerprint",
+            )?;
+            let displaced = native_result
+                .get("displaced_observation")
+                .ok_or_else(|| retained_error("HCM successor omits displaced basis evidence"))?;
+            if string_field(&native_result, "publication_disposition")? != "authorized"
+                || string_field(&native_result, "reader_authority")?
+                    != "withheld_until_commit_marker"
+                || string_field(&native_result, "result_fingerprint")?
+                    != string_field(&successor_marker, "publication_result_fingerprint")?
+                || string_field(displaced, "presence")? != "regular"
+                || string_field(displaced, "semantic_binding")? != "expected_basis"
+                || string_field(displaced, "bytes_sha256")? != expected_fingerprint
+                || displaced.get("byte_length") != outputs[0].get("byte_length")
+                || string_field(displaced, "identity_token")?
+                    != string_field(&observation, "expected_basis_identity_token")?
+            {
+                return Err(retained_error(
+                    "HCM successor result does not preserve exact historical publication evidence",
+                ));
+            }
+            let displaced_ref = string_field(&observation, "displaced_ref")?;
+            validate_safe_ref(displaced_ref)?;
+            let displaced_path = self.repo_root.join(displaced_ref);
+            let displaced_bytes = read_bounded_regular(&displaced_path, MAX_RECORD_BYTES)?;
+            if displaced_bytes != historical_bytes {
+                return Err(retained_error(
+                    "HCM displaced historical bytes do not equal the committed predecessor",
+                ));
+            }
+            witnesses.push(observe_installed_output(
+                &displaced_path,
+                &historical_bytes,
+                Some(string_field(&observation, "expected_basis_identity_token")?),
+            )?);
+        }
+        if witnesses.len() != 1 {
+            return Err(retained_error(
+                "HCM historical publication does not have one unique direct successor witness",
+            ));
+        }
+        let mut bytes = vec![historical_bytes];
+        for output in &outputs[1..] {
+            let path = self.repo_root.join(string_field(output, "final_ref")?);
+            let retained = read_bounded_regular(&path, MAX_RECORD_BYTES)?;
+            require_descriptor_bytes(output, &retained)?;
+            witnesses.push(observe_installed_output(&path, &retained, None)?);
+            bytes.push(retained);
+        }
+        validate_persisted_cross_bindings(intent, outputs, &bytes)?;
+        Ok(witnesses)
+    }
+
     fn install_descriptor(
         &self,
         transaction: &Path,
@@ -4582,6 +5103,55 @@ impl GenericArtifactLineageStoreV1 {
             }
         }
         Ok(false)
+    }
+
+    fn verified_committed_authority(
+        &self,
+        relative_ref: &str,
+        fingerprint: &str,
+    ) -> Result<Option<(Vec<u8>, Value)>, GenericLineageStoreErrorV1> {
+        let mut matched_intent = None;
+        for operation in [
+            GenericArtifactOperationV1::IntakeRecordAppend,
+            GenericArtifactOperationV1::ArtifactCandidateAppend,
+            GenericArtifactOperationV1::ArtifactCandidatePromote,
+        ] {
+            let family = self.transaction_family_root(operation);
+            if !family
+                .try_exists()
+                .map_err(|_| io_error("journal family lookup failed"))?
+            {
+                continue;
+            }
+            for path in read_dir_paths(&family)? {
+                if path.extension().is_none_or(|ext| ext != "committed") {
+                    continue;
+                }
+                self.verify_committed(&path)?;
+                let intent = read_control(&path.join("intent.json"), "intent_fingerprint")?;
+                let marker = read_control(&path.join("commit-marker.json"), "marker_fingerprint")?;
+                let Some(outputs) = marker
+                    .get("authoritative_outputs")
+                    .and_then(Value::as_array)
+                else {
+                    return Err(retained_error("committed marker outputs are malformed"));
+                };
+                if outputs.iter().any(|output| {
+                    output.get("ref").and_then(Value::as_str) == Some(relative_ref)
+                        && output.get("fingerprint").and_then(Value::as_str) == Some(fingerprint)
+                }) && matched_intent.replace(intent).is_some()
+                {
+                    return Err(retained_error(
+                        "multiple exact committed chains cite one authoritative output",
+                    ));
+                }
+            }
+        }
+        let Some(intent) = matched_intent else {
+            return Ok(None);
+        };
+        let bytes = read_bounded_regular(&self.repo_root.join(relative_ref), MAX_RECORD_BYTES)?;
+        Ok(Some((bytes, intent)))
     }
 
     fn require_exact_committed_chain(

@@ -1,0 +1,212 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T102305Z--HCM-3-2--quarantine-finalization-selector-remediation",
+  "created_at_utc": "2026-08-05T10:23:05Z",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted"
+  ],
+  "parent_orchestration_id": "20260805T101500Z--HCM-3-2--context-resolution-quarantine-finalization",
+  "orchestration_decision": "local_remediation_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "remediation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "incremental-implementation"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-QF-P1-selector-and-recovery",
+  "subject_fingerprint": "sha256:75058af4942230947fde0fa8755643a276fa13f46ce969a5f602de39ecc940d2",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T10:15:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-quarantine-finalization",
+        "packet_ids": [
+          "HCM-3.2-QF-P1-selector-and-recovery",
+          "HCM-3.2-QF-P2-identity-ordering-repair",
+          "HCM-3.2-QF-P3-proof-and-review",
+          "HCM-3.2-QF-P4-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:af062b113b499761ef50df4e1b427bbb19a91d7158f27793c5ee269f4ef49d02"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:a50c9dbfec9d454fe4300a5e88ba20cc76e839ed7c85c90b2e92768a6c03a237",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-quarantine-finalization",
+    "outcome_registry_fingerprint": "sha256:af062b113b499761ef50df4e1b427bbb19a91d7158f27793c5ee269f4ef49d02",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "remediation",
+    "causal_predecessor_dispatch_id": "20260805T101522Z--HCM-3-2--quarantine-finalization-selector-discovery"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "sha256": "1a323c6303e19b750972ce6c13731121b47abce1d88a8a36e5a1d307d4b61e6e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "sha256": "dc78f9f5c7fecf86c6a914177d6cfac941b2e836bbfadac4857bb9eb39947a05"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-04-deferred-continuous-availability.md",
+        "sha256": "d1b7ec8dab45546f5d3a08d2253e4e56132f2800812a5817363177b9dcd4f75e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md",
+        "sha256": "bac9a3a51df1bd1d3fc233584c2ff8ddace690afd813a01058eb7f6599b95a3f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md",
+        "sha256": "798497a836f03361f41f79b23de2ae94e9f58cf83de84bf87a9b9e45852b9312"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+        "sha256": "c920f405694196d99aa194ddbd2082a2bc98c50fc132b2e6b5794456c9b6d6d5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+        "sha256": "42815085dc83e785ec9fa1d5ac14f308de036538a4c3a9f4272f3f435d741fa8"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:75058af4942230947fde0fa8755643a276fa13f46ce969a5f602de39ecc940d2"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 fresh quarantine identity-ordering selector discovery",
+    "scope_horizon": "complete recovered Context Resolution product subject plus the exact quarantine identity-before-mutation repair",
+    "detail_resolution": "fresh parent/outcome/four packets, additive selector lineage, exact production/test ceiling, stable findings 001-006, valid anchored A/different-valid B/partial-scratch proof, compatibility, proof wall, and two-commit local closeout",
+    "temporal_horizon": "planning stage before every product, test, fixture, or product-control recovery edit",
+    "authority_horizon": "HCM-3.2 only; no HCM-0.11/tooling, generic ownership expansion, H2/H3 implementation, HCM-3.3+, public/dependency/native/transport expansion, shipped identity change, remote publication, or push",
+    "memory_horizon": "exact base eb4b7ba, HCM-3.1 completion, stopped HCM-3.2 source handoff, immutable 33-path protected recovery input, prior selector/dispatch/proof source evidence, and this fresh registry",
+    "validation_horizon": "independent selector CLEAN is mandatory before product recovery or implementation"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md",
+      "sections": [
+        "Fresh authority and additive lineage",
+        "Frozen outcome registry and cadence",
+        "Recovered complete subject",
+        "Exact remaining product defect",
+        "Exact production, test, and symbol boundary",
+        "Proof wall and completion",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": [
+        "complete selected HCM-3.2 product authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md",
+      "sections": [
+        "immutable source evidence only; not fresh-parent authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted.json",
+      "sections": [
+        "immutable source findings 001-006 and stopped predecessor boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Context Resolution stack definition",
+        "Context Resolution envelope",
+        "Resolution escalation and memory promotion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-RES-01",
+        "Regression rules 42 and 48"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "The bound checkout and dedicated integration ref are clean at eb4b7ba55c6f3db40799e67275f3bbbb8610c87a/tree d51327c442190edcf1bf56423db54fd2522c5e6f before planning edits. The authoritative origin feature ref remains 7becde555bcc9742cd0ada4cff27542f521e6abb. Only the seven-file planning subject, fourteen byte-identical source-evidence files, and this dispatch are new/modified. Protected 018f was inspected read-only and retains all 33 WIP paths. GitNexus has a base index, but the exact recovered compact quarantine evaluation method is absent and FTS is unavailable; neither is represented GREEN.",
+  "allowed_scope": [
+    "Edit only docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md and tasks/plan.md to remediate HCM32-QF-SEL-DISC-001 and HCM32-QF-SEL-DISC-002 exactly.",
+    "Create one fresh-parent selector-remediation proof Markdown under slices/HCM-3.2/proof recording the two findings, exact edits, new manifest fingerprint, UTF-8/fence checks, and git diff --check.",
+    "Use apply_patch. Recompute the complete effective planning subject manifest. Do not edit the selector unless an exact contradiction prevents the two bounded repairs."
+  ],
+  "non_goals": [
+    "Do not edit Rust, tests, fixtures, product-control pack files outside SPEC/plan, the prior immutable selector/dispatch/proof evidence, validators/schemas/templates/skills/tooling, handoff records, or ledger.",
+    "Do not stage, commit, delegate, review, recover protected product bytes, create HCM-0.11/HCM-3.3 work, expand public/dependency/platform/transport scope, publish remotely, or push."
+  ],
+  "tasks": [
+    "Replace the two effective-subject stop references to a sixth production path with a fourth production path, preserving the exact three-path production ceiling.",
+    "Rewrite the SPEC completion cadence to require planning CLEAN, one combined implementation/proof review ending CLEAN, then mechanical P4 closeout with no review cycle.",
+    "Create the bounded remediation proof, run a cross-file cadence/path-ceiling scan, strict UTF-8 and fence checks, recompute sorted manifest, and run git diff --check.",
+    "Return exact changed paths, new subject entries/fingerprint, command results, and whether both finding IDs are fully remediated."
+  ],
+  "contracts_and_gates": [
+    "Both P2 findings must be remediated together once; do not add unrelated planning content.",
+    "Closure is a different-fresh delta-focused review against the recomputed fingerprint; product recovery remains forbidden until CLEAN.",
+    "No product, authority, registry, packet, outcome, risk, or cadence expansion is authorized."
+  ],
+  "stop_conditions": [
+    "Stop without edits outside the three allowed planning/evidence paths if either finding cannot be repaired exactly.",
+    "Stop on manifest drift unrelated to this remediation, a request for broader authority, or any protected-path mutation."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

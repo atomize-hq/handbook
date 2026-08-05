@@ -1,0 +1,210 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T151417Z--HCM-3-2--quarantine-finalization-implementation-closure",
+  "created_at_utc": "2026-08-05T15:14:17Z",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted"
+  ],
+  "parent_orchestration_id": "20260805T101500Z--HCM-3-2--context-resolution-quarantine-finalization",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "doubt-driven-development",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "test-driven-development",
+    "code-review-and-quality",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-QF-P3-proof-and-review",
+  "subject_fingerprint": "sha256:aedc22daf1788465ebb0a07850953361a962bd61d80cc88ae94ad0e7ccf17099",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.2-qf-implementation-closure-1",
+    "trigger_run_ids": ["/root/hcm32_qf_implementation_discovery"],
+    "finding_refs": ["HCM32-QF-IMPL-DISC-001"]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T10:15:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-quarantine-finalization",
+        "packet_ids": [
+          "HCM-3.2-QF-P1-selector-and-recovery",
+          "HCM-3.2-QF-P2-identity-ordering-repair",
+          "HCM-3.2-QF-P3-proof-and-review",
+          "HCM-3.2-QF-P4-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:af062b113b499761ef50df4e1b427bbb19a91d7158f27793c5ee269f4ef49d02"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:a50c9dbfec9d454fe4300a5e88ba20cc76e839ed7c85c90b2e92768a6c03a237",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-quarantine-finalization",
+    "outcome_registry_fingerprint": "sha256:af062b113b499761ef50df4e1b427bbb19a91d7158f27793c5ee269f4ef49d02",
+    "review_stage": "implementation",
+    "stage_transition": {"kind": "continue", "from_stage": "implementation"},
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260805T134628Z--HCM-3-2--quarantine-finalization-implementation-remediation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.2-qf-implementation-closure-convergence-1",
+    "completed_at_utc": "2026-08-05T15:14:16Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "replay the single discovery finding and consolidated evidence remediation against unchanged authority, scope, risk, and product bytes",
+        "evidence_ref": "/root/hcm32_qf_implementation_discovery returned only P2 HCM32-QF-IMPL-DISC-001; /root/hcm32_qf_implementation_remediation added only one bounded two-order invariant test plus conditional control/proof truth and made no production edit"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "trace load_authority_snapshot through generic evaluate/recovery and both lexical-order candidate inventories",
+        "evidence_ref": "both matching invalid candidates are rejected by generic lineage inventory before HCM classification; exact-A/different-valid-B and 33-test kernel remain GREEN"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute sorted 44-entry repo-path-NUL-SHA256-newline closure subject and verify one allowed deletion",
+        "evidence_ref": "subject sha256:aedc22daf1788465ebb0a07850953361a962bd61d80cc88ae94ad0e7ccf17099; deletion crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/project/context-resolution-authority.json; registry and budget unchanged"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check plus strict text validation",
+        "evidence_ref": "rustfmt and strict text checks passed after the test-only evidence remediation"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check plus trailing-whitespace scan",
+        "evidence_ref": "both passed; no staged paths"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      { "path": "crates/engine/src/artifact_lineage_store.rs", "sha256": "220f783c8746a73de14dc59d7fbac74fe6495458764bd3c40a48a02371dd3fc2" },
+      { "path": "crates/engine/src/artifact_mutation.rs", "sha256": "eb6e4e19a7c5012c64e0c3a71141ef3725c947efc34df2f11ce487e2c348de74" },
+      { "path": "crates/engine/src/context_resolution.rs", "sha256": "c743a7210a369e5e1f1b7be2ee0eba074dc613e5e3d2c238ecec0cdce3961f43" },
+      { "path": "crates/engine/tests/context_resolution_kernel.rs", "sha256": "96964d3ebf6225274e30146ef03e5abd277bc036acdf0776b2ab9d03f9fdf676" },
+      { "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/artifact-kinds/context-resolution-authority-1.0.0.yaml", "sha256": "ab0df95a90e2345b384b6fff810fdfb83d2131fab106a1dd6aab3e539eb4eb99" },
+      { "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/intakes/context-resolution-authority-1.0.0.yaml", "sha256": "398c237f741da5be8db3ca4a052bb38d6d690e1542ad3c104ec2030260caad14" },
+      { "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/profiles/context-resolution-authority-1.0.0.yaml", "sha256": "c1d1c7c27583f97d44b92ecbfbb7eed66ff19f9026c223c071e18fa1500dcc8d" },
+      { "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.entry.yaml", "sha256": "21c0f2adcb0146fa97e59ba4184731f9ab8dea4af13d5dba2f2c1541a13a20e3" },
+      { "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/definitions/schemas/context-resolution-authority-1.0.0.schema.json", "sha256": "e021fa2f6d30b784fb207dca6e5228e284afa5018447fb4c7ab73ef883eb4606" },
+      { "path": "crates/engine/tests/fixtures/hcm_3_2_context_resolution/.handbook/profile-selection.json", "sha256": "b052c42a781f82f766df0b9b125415f48ef68d39f366b28342c3f35199f96920" },
+      { "path": "crates/engine/tests/hcm_2_3_generic_lineage.rs", "sha256": "dea53dd5e5c55807e47343b357f21a04c74c58bb406b31e162f06ba996d8a6a7" },
+      { "path": "docs/specs/handbook-contract-membrane/00-README.md", "sha256": "d2bed08c8f4235bfdb4e73bc45a48be05e35a488561314d713d2671af6c37e33" },
+      { "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md", "sha256": "fddfb42820fea63bc84861e40d84695d26f787bea1dc124481a9fb8c76fbbf0f" },
+      { "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md", "sha256": "ba60a40ab65b835c5eb8a86f30e3e6f28c0bb82713977f7ba74bf7556ad53148" },
+      { "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sha256": "86266dc4f6085d62ca0f3d42bb9250be3bb06268fefc6ea580101de99cce086f" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T020646Z--HCM-3-2--finalization-selector-discovery.json", "sha256": "7077e0e38a562059d6e49b94b775933425877d9d90f7cdd9cf7c4a3d7572a8c1" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T021655Z--HCM-3-2--finalization-selector-closure.json", "sha256": "d2b677d8c4ea8243e6cbe0a0afd2a3154f8fe71d3236039bd66519a8f007e806" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T040003Z--HCM-3-2--finalization-implementation-security.json", "sha256": "99231978cb4ca40f078581b76d3185576b01a39e25d0002da900de09337c0df0" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T040004Z--HCM-3-2--finalization-implementation-recovery-state-machine.json", "sha256": "9ff3bd8009a590950169d762ca716beca1796c0a24a0354a9284c765c075fd59" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T040005Z--HCM-3-2--finalization-implementation-compatibility-regression.json", "sha256": "588e99f29b20635ee693d95498efff3cff429cb89b46d4a8cb4c8c01c645c298" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T055500Z--HCM-3-2--finalization-implementation-closure.json", "sha256": "39a9f47bc0aba02750fe49191815ef36723212c580f86c1c12e3972346a9478e" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T073000Z--HCM-3-2--finalization-implementation-supplemental-1.json", "sha256": "c5af0d1e65fec602e7e60656ab46f9bd34f2a632d7c632fa5c78af5476827502" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T090000Z--HCM-3-2--finalization-implementation-supplemental-2.json", "sha256": "9b3bac545d97fa384f19c4680318a13bd3a72b9a053f5d23aaa86b0dd9198579" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T101522Z--HCM-3-2--quarantine-finalization-selector-discovery.json", "sha256": "f0523257542447056faa891e8721a2b750a226254249b70f7345a27cf0d468c9" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T102305Z--HCM-3-2--quarantine-finalization-selector-remediation.json", "sha256": "8946003c52a8c4815f51e40d9603273a33cdf8847213839dd0cf4ba7faaf376a" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T103138Z--HCM-3-2--quarantine-finalization-selector-closure.json", "sha256": "653cd0f6c66afc478691727d258cb46f8134d1ebddb2fd62542d98e24c418281" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T104006Z--HCM-3-2--quarantine-finalization-implementation.json", "sha256": "700bcae4548e0dfd7f3ff687a0ea71513923a1573ecd170916ffa985eafdf67a" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T112506Z--HCM-3-2--quarantine-finalization-proof.json", "sha256": "b64e9cf35ab0ca65e4209373c2fc88a29d6ef24402352c5df978488141b73678" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T131306Z--HCM-3-2--quarantine-finalization-implementation-discovery.json", "sha256": "9f2d0e30486f499ef72b7b3e16294431f2f0495667fe28dff985ca0465e9bfa6" },
+      { "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T134628Z--HCM-3-2--quarantine-finalization-implementation-remediation.json", "sha256": "c770cb1a7616a322a42b43e3b29afdea391384b9220c863f0dd9e7d28a9ebca5" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md", "sha256": "f3a0b7434fecbc3048db310cb11337c745e6df178bbcd8045cc621187cc4989e" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md", "sha256": "dc78f9f5c7fecf86c6a914177d6cfac941b2e836bbfadac4857bb9eb39947a05" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-04-deferred-continuous-availability.md", "sha256": "d1b7ec8dab45546f5d3a08d2253e4e56132f2800812a5817363177b9dcd4f75e" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md", "sha256": "bac9a3a51df1bd1d3fc233584c2ff8ddace690afd813a01058eb7f6599b95a3f" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md", "sha256": "798497a836f03361f41f79b23de2ae94e9f58cf83de84bf87a9b9e45852b9312" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T021507Z--finalization-selector-remediation.md", "sha256": "7850b94e92a3ffcf6243809674f350dd56a6590874c5aa7c027d212b42edfdf8" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T035036Z--context-resolution-finalization-proof.md", "sha256": "728182316ddfcde10e3d741d9138c4aef9a8fca4b9139a764ea4daf17fef0b32" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T054946Z--finalization-implementation-remediation.md", "sha256": "5b066236be4653b23ee2728d114f2a01dca3d73c36417b3f7d6f07d45ed2d5bc" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T072900Z--finalization-implementation-supplemental-remediation.md", "sha256": "f391aacf90f284b869ad18a87bea9a5ecf63e6e73c860a1389716ff0190211f1" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T085700Z--finalization-implementation-supplemental-2-remediation.md", "sha256": "a768f08ccccec59d1be240dee2ebb467828e57a4cdc460e918c59de8d89af3a1" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T102700Z--quarantine-finalization-selector-remediation.md", "sha256": "f15130f0aa7b702b89d23c66044f446b6e683d54fcfcbf03eab04ddec1c0a8b6" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md", "sha256": "a07ec60b532103e5bd0b150243eef2dd8cbc18551df49e7fa88aa24dce6019f6" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md", "sha256": "0e1658616866c02ec53047ef8bc74b5be05c3b7e28ea3c74c60329945f013fd0" },
+      { "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md", "sha256": "9180a22264ada08abcb819fa964d44505369a67855120f35d3870b0d82a36046" }
+    ],
+    "aggregate_fingerprint": "sha256:aedc22daf1788465ebb0a07850953361a962bd61d80cc88ae94ad0e7ccf17099"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 quarantine identity-ordering implementation closure",
+    "scope_horizon": "complete recovered Context Resolution product subject plus exact identity-before-mutation repair",
+    "detail_resolution": "single trigger finding about purported mixed valid/invalid HCM candidate reachability under generic lineage invariants",
+    "temporal_horizon": "different-fresh delta-focused closure after one consolidated evidence remediation",
+    "authority_horizon": "HCM-3.2 only; unchanged production ceiling and no tooling, public, dependency, identity, native, transport, H2/H3, HCM-3.3, remote publication, or push",
+    "memory_horizon": "discovery finding, four failed reachability constructions, one bounded two-order invariant test, full proof wall, and unchanged target production bytes",
+    "validation_horizon": "independent call-chain inspection plus focused adversarial tests"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md", "sections": ["Proof wall and completion", "Stop conditions"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T125727Z--quarantine-finalization-proof-wall.md", "sections": ["Implementation discovery finding and bounded evidence remediation"]},
+    {"path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md", "sections": ["Admission and duplicate rules"]}
+  ],
+  "repo_truth": "The complete recovered product plus exact identity-ordering repair remains unchanged after discovery. The evidence remediation added one test showing both lexical placements of a matching invalid recovery candidate are rejected by generic lineage inventory before HCM classification. Four increasingly realistic attempts could not construct the discovery reviewer's proposed reachable mixed inventory without first violating generic lineage or timing out before the claimed branch. The finding is evidence-disputed, not self-closed; this different-fresh closure supplies the independent adjudication.",
+  "allowed_scope": [
+    "Perform one different-fresh, delta-focused, read-only closure of HCM32-QF-IMPL-DISC-001 and directly caused or unmasked P1/P2 only.",
+    "Independently trace load_authority_snapshot and the generic lineage evaluate/recovery path to determine whether any inventory accepted by generic invariants can reach detect_authorized_publication_gap with both a valid and a matching invalid candidate.",
+    "Run matching_invalid_recovery_candidate_refuses_in_both_lexical_orders and different_valid_quarantine_candidate_refuses_before_publication_mutation; inspect their fixtures and assertions.",
+    "If generic lineage invariants prove the claimed failure path unreachable, explicitly close HCM32-QF-IMPL-DISC-001 and confirm stable findings HCM32-JCS-IMPL-DISC-004 and 006 remain closed. If a reachable construction exists, return FINDINGS or BLOCKED with exact evidence."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery, add unrelated findings, edit, format, stage, commit, delegate, write handoff/ledger state, change refs, push, or publish.",
+    "Do not create HCM-0.11 or HCM-3.3 work, alter tooling/schema/template/skill files, or expand production/public/dependency/platform/transport/shipped-identity scope."
+  ],
+  "tasks": [
+    "Return findings first only if HCM32-QF-IMPL-DISC-001 remains reachable or the evidence remediation directly caused or unmasked a P1/P2.",
+    "Report independent call-chain and focused-test evidence, including counts and timing, and explain whether the generic invariant is a hard prerequisite before HCM classification.",
+    "Return CLEAN only when the trigger finding is independently falsified or fully closed and no directly caused or unmasked P1/P2 remains for sha256:aedc22daf1788465ebb0a07850953361a962bd61d80cc88ae94ad0e7ccf17099."
+  ],
+  "contracts_and_gates": [
+    "This is the single different-fresh implementation closure; no review cycle follows CLEAN.",
+    "No finding waiver, general rediscovery, identity rename, post-CLEAN cycle, or third supplemental without explicit operator authority.",
+    "FINDINGS may trigger only legitimately causal bounded supplemental handling inside unchanged authority; unreachable speculation is not an admitted P2."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if a generic-lineage-valid reachable failing construction exists or the remediation directly caused/unmasked a P1/P2.",
+    "Return BLOCKED if adjudication requires broader production/tooling/authority scope or mandatory evidence cannot be obtained."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "parent_disposition"]
+  }
+}

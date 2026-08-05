@@ -5,8 +5,8 @@
   "profile_version": "1.0.0",
   "profile_scope": "repository",
   "extends_profile_ref": "handbook.profile.shipped-root@1.2.0",
-  "schema_registry_sources": ["handbook.schemas.artifacts.project-authority@1.1.0", "example.schemas.context-resolution-authority@1.0.0"],
-  "artifact_kind_sources": ["handbook.artifact-kind.project-authority@1.1.0", "example.artifact-kind.context-resolution-authority@1.0.0"],
+  "schema_registry_sources": ["handbook.schemas.artifacts.project-authority@1.1.0", "handbook.schemas.context-resolution-authority-capsule@1.0.0"],
+  "artifact_kind_sources": ["handbook.artifact-kind.project-authority@1.1.0", "handbook.artifact-kind.context-resolution-authority-binding@1.0.0"],
   "artifact_instances": [{
     "canonical_path": ".handbook/project/charter.yaml",
     "capability_refs": ["constitutional_root"],
@@ -28,19 +28,19 @@
     "schema_id": "handbook.artifact-instance-descriptor",
     "schema_version": "1.0",
     "id": "context_resolution_authority",
-    "kind_ref": "example.artifact-kind.context-resolution-authority@1.0.0",
+    "kind_ref": "handbook.artifact-kind.context-resolution-authority-binding@1.0.0",
     "role_ref": null,
     "capability_refs": [],
     "label": "Context Resolution Authority",
-    "canonical_path": ".handbook/project/context-resolution-authority.json",
+    "canonical_path": ".handbook/project/context-resolution-authority.yaml",
     "requiredness": {"mode": "always", "condition_ref": null},
     "depends_on": [],
     "lifecycle_policy_ref": null,
-    "intake_definition_ref": "example.intake.context-resolution-authority@1.0.0",
+    "intake_definition_ref": "handbook.intake.context-resolution-authority-capsule@1.0.0",
     "renderer_definition_refs": [],
     "projection_definition_refs": [],
     "validation_overlay_refs": [],
     "extensions": {}
   }],
-  "profile_fingerprint": "sha256:247c49587c89adced5597c6d7b07f60d5ae1e6a2c91a9eabafd6f4da63f80edb"
+  "profile_fingerprint": "sha256:54c9b0a5453dd96bcabb7b98705994b6b95da8449025e6d658d1ffbd8d97e7fa"
 }

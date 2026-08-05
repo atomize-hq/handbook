@@ -1,0 +1,230 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260805T104006Z--HCM-3-2--quarantine-finalization-implementation",
+  "created_at_utc": "2026-08-05T10:40:06Z",
+  "source_handoff_ids": [
+    "20260801T141509Z--HCM-3-1--orchestration--vocabulary-resolution-completed",
+    "20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted"
+  ],
+  "parent_orchestration_id": "20260805T101500Z--HCM-3-2--context-resolution-quarantine-finalization",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "spec-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "api-and-interface-design",
+    "security-and-hardening",
+    "documentation-and-ADRs",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.2",
+  "packet_id": "HCM-3.2-QF-P2-identity-ordering-repair",
+  "subject_fingerprint": "sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-05T10:15:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.2-context-resolution-quarantine-finalization",
+        "packet_ids": [
+          "HCM-3.2-QF-P1-selector-and-recovery",
+          "HCM-3.2-QF-P2-identity-ordering-repair",
+          "HCM-3.2-QF-P3-proof-and-review",
+          "HCM-3.2-QF-P4-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:af062b113b499761ef50df4e1b427bbb19a91d7158f27793c5ee269f4ef49d02"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:a50c9dbfec9d454fe4300a5e88ba20cc76e839ed7c85c90b2e92768a6c03a237",
+    "integrated_outcome_id": "hcm-3.2-context-resolution-quarantine-finalization",
+    "outcome_registry_fingerprint": "sha256:af062b113b499761ef50df4e1b427bbb19a91d7158f27793c5ee269f4ef49d02",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260805T103138Z--HCM-3-2--quarantine-finalization-selector-closure"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/SPEC.md",
+        "sha256": "41842e71a6cf3d598d0a33a6c7880c2898910f1f47fad154d4370aab1307e7f4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+        "sha256": "dc78f9f5c7fecf86c6a914177d6cfac941b2e836bbfadac4857bb9eb39947a05"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-04-deferred-continuous-availability.md",
+        "sha256": "d1b7ec8dab45546f5d3a08d2253e4e56132f2800812a5817363177b9dcd4f75e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md",
+        "sha256": "bac9a3a51df1bd1d3fc233584c2ff8ddace690afd813a01058eb7f6599b95a3f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md",
+        "sha256": "798497a836f03361f41f79b23de2ae94e9f58cf83de84bf87a9b9e45852b9312"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/proof/20260805T102700Z--quarantine-finalization-selector-remediation.md",
+        "sha256": "f15130f0aa7b702b89d23c66044f446b6e683d54fcfcbf03eab04ddec1c0a8b6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/plan.md",
+        "sha256": "446dcb2640af1a349fece06af1c6c52ba09ef5c1a7f72f70f0047d588d8320fb"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/tasks/todo.md",
+        "sha256": "42815085dc83e785ec9fa1d5ac14f308de036538a4c3a9f4272f3f435d741fa8"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:b145914c59176a2b6c4159a0f75a6390458db60ff784ed397960be95acc02b66"
+  },
+  "active_resolution": {
+    "level": "HCM-3.2 fresh quarantine identity-ordering selector discovery",
+    "scope_horizon": "complete recovered Context Resolution product subject plus the exact quarantine identity-before-mutation repair",
+    "detail_resolution": "fresh parent/outcome/four packets, additive selector lineage, exact production/test ceiling, stable findings 001-006, valid anchored A/different-valid B/partial-scratch proof, compatibility, proof wall, and two-commit local closeout",
+    "temporal_horizon": "planning stage before every product, test, fixture, or product-control recovery edit",
+    "authority_horizon": "HCM-3.2 only; no HCM-0.11/tooling, generic ownership expansion, H2/H3 implementation, HCM-3.3+, public/dependency/native/transport expansion, shipped identity change, remote publication, or push",
+    "memory_horizon": "exact base eb4b7ba, HCM-3.1 completion, stopped HCM-3.2 source handoff, immutable 33-path protected recovery input, prior selector/dispatch/proof source evidence, and this fresh registry",
+    "validation_horizon": "independent selector CLEAN is mandatory before product recovery or implementation"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-quarantine-finalization-selector.md",
+      "sections": [
+        "Fresh authority and additive lineage",
+        "Frozen outcome registry and cadence",
+        "Recovered complete subject",
+        "Exact remaining product defect",
+        "Exact production, test, and symbol boundary",
+        "Proof wall and completion",
+        "Stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-01-context-resolution-kernel-selector.md",
+      "sections": [
+        "complete selected HCM-3.2 product authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.2/decision/2026-08-05-context-resolution-finalization-selector.md",
+      "sections": [
+        "immutable source evidence only; not fresh-parent authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260804T193800Z--HCM-3-2--orchestration--implementation-review-budget-exhausted.json",
+      "sections": [
+        "immutable source findings 001-006 and stopped predecessor boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Context Resolution stack definition",
+        "Context Resolution envelope",
+        "Resolution escalation and memory promotion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-RES-01",
+        "Regression rules 42 and 48"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "Planning closure /root/hcm32_qf_selector_closure returned CLEAN for the exact eight-entry subject; no later planning cycle is authorized. The assigned checkout remains detached at base eb4b7ba/tree d51327c before product recovery. Protected 018f retains the immutable 33-path WIP; fourteen source-evidence paths are already byte-identical in the assigned checkout and twelve product/test/fixture tracked paths remain to recover. The old negative self-refingerprints the open record and misses the real valid-anchor ordering defect.",
+  "allowed_scope": [
+    "Recover byte-exactly from protected read-only 018f only these twelve product paths: crates/engine/src/artifact_lineage_store.rs, crates/engine/src/artifact_mutation.rs, crates/engine/src/context_resolution.rs, crates/engine/tests/context_resolution_kernel.rs, crates/engine/tests/hcm_2_3_generic_lineage.rs, and the seven modified/deleted paths under crates/engine/tests/fixtures/hcm_3_2_context_resolution.",
+    "Do not overwrite SPEC.md, tasks/plan.md, tasks/todo.md, the new fresh selector/proof, or the four control-pack docs; those require new-parent adaptation later.",
+    "After exact recovery, build an exact-worktree GitNexus index in the assigned checkout using existing tooling in index-only/no-file-injection mode. Run upstream impact on the recovered existing test function different_valid_quarantine_candidate_refuses_before_publication_mutation and GenericArtifactLineageStoreV1::require_hcm_publication_quarantine_candidate_during_evaluation.",
+    "Pause and return the recovery hashes and both impact reports before editing either existing function. After parent follow-up, replace the false negative with the valid anchored A/different valid B/partial scratch state-invariance test, observe RED, apply the smallest identity-before-inventory-mutation repair only in artifact_lineage_store.rs, and observe GREEN plus exact-A/generic recovery regression.",
+    "Use apply_patch for repository edits. The protected worktree is read-only evidence and must remain byte-identical."
+  ],
+  "non_goals": [
+    "Do not edit HCM-0.11, validators/schemas/templates/skills/tooling, dependencies/crates, public APIs, unsafe/native/platform/transport code, HCM-3.3+, shipped definition/profile/vocabulary identity, handoff records, ledger, or the local integration ref.",
+    "Do not stage, commit, merge, rebase, reset, clean, push, publish remotely, or modify any protected path.",
+    "Do not change validate_hcm_quarantine_inventory unless a separate fresh upstream impact and parent authority prove a split is strictly required."
+  ],
+  "tasks": [
+    "Verify planning CLEAN dispatch/subject and exact assigned/protected boundary.",
+    "Recover the exact twelve admitted product/test/fixture paths from 018f, delete only the obsolete recovered fixture marked deleted there, and prove source/target hashes match while protected status/hash remains unchanged.",
+    "Create the exact assigned-worktree GitNexus index without repository file injection; run and return upstream impact for the test function and target method, including direct callers, affected processes, risk, and FTS status; stop before semantic edit.",
+    "On parent follow-up only: change the existing negative so A/open/anchor remain valid, B is otherwise valid and different, scratch/open/anchor/completion/canonical/transaction/inventory snapshots occur before the call, and every durable byte is identical after refusal.",
+    "Run the focused test before production repair and record the expected RED caused by scratch deletion; then compare full candidate identity before cleanup-capable inventory validation, preserving exact-A cleanup/recovery, absent-open inventory validation, bounds/currentness, and generic non-HCM behavior.",
+    "Run focused GREEN plus exact-A crash-recovery and generic lineage regressions, format/whitespace checks, and return exact changed paths/results."
+  ],
+  "contracts_and_gates": [
+    "Recovered bytes are admitted source, not completion authority; prior findings 001/002/003/004/006 and all recovered proof behavior remain mandatory.",
+    "Every existing-symbol semantic edit requires fresh upstream impact first; warn/stop for unexpected HIGH/CRITICAL outside the reviewed Context Resolution/quarantine seams.",
+    "The new repair remains in the target lineage-store method; another production path/symbol for the new repair is a stop unless fresh impact proves unavoidable.",
+    "RED must exercise valid anchored A and different otherwise-valid B, not self-refingerprint A or fail first at anchor validation.",
+    "Exact-A crash recovery, inventory bounds, anchor/currentness checks, and generic non-HCM behavior may not regress."
+  ],
+  "stop_conditions": [
+    "Pause after recovery and impact before semantic edits.",
+    "Stop on recovery hash mismatch, protected-path drift, another production/test path, public/dependency/unsafe/native/platform/transport expansion, shipped identity change, unexpected HIGH/CRITICAL scope, or inability to create the real negative without tooling changes.",
+    "Return BLOCKED rather than changing orchestration tooling or weakening any P1/P2 requirement."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

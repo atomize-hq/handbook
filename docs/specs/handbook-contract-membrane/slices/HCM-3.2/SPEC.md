@@ -1,30 +1,35 @@
-# HCM-3.2 Context Resolution kernel — fresh JCS capsule and replacement recovery
+# HCM-3.2 Context Resolution kernel — quarantine identity-ordering finalization
 
-Status: planning subject awaiting independent v1.4 review. No test, RED, or
-Rust edit is authorized until the fresh planning stage is CLEAN.
+Status: the recovered implementation's prior proof wall was GREEN, but fresh
+finding `HCM32-QF-IMPL-DISC-001` is evidence-disputed and not self-closed. Its
+dispatched mixed valid-plus-invalid matching state was not shown reachable past
+generic lineage, so no production repair was made. The already-authorized
+different-fresh closure must independently adjudicate whether that invariant
+evidence falsifies the claimed reachable P2. `CLEAN` closes the finding;
+`FINDINGS` or `BLOCKED` leaves HCM-3.2 incomplete and only then requires a
+classifier-reachable RED or new operator authority.
 
 ## Fresh-parent authority
 
 - phase: `HCM-3`
 - slice: `HCM-3.2`
 - parent orchestration:
-  `20260804T124829Z--HCM-3-2--context-resolution-jcs-recovery`
+  `20260805T101500Z--HCM-3-2--context-resolution-quarantine-finalization`
 - integrated outcome:
-  `hcm-3.2-context-resolution-jcs-recovery-whole-slice`
+  `hcm-3.2-context-resolution-quarantine-finalization`
 - causal budget:
-  `sha256:34ccbe5a9fb4f6ec07b588e2354166c876ff82dee36b3559097acafde66d82b2`
+  `sha256:a50c9dbfec9d454fe4300a5e88ba20cc76e839ed7c85c90b2e92768a6c03a237`
 - bound operator prompt:
-  `sha256:55c715447d5ea23787bb57322b77acdf26e0fd6d892016a5adff824b648ae7f2`
-- checkpoint: `9368b5cee612bdb1ffd25562eef35e8d863ff930`
-- checkpoint tree: `08f7810d8316a42daf8aae8bcb3bc5b8cdaf87d8`
+  `sha256:c4966d679e5bca3e01058c5b4ecbf04bb607db8ab0297ac4088f646b527a5db0`
+- checkpoint: `eb4b7ba55c6f3db40799e67275f3bbbb8610c87a`
+- checkpoint tree: `d51327c442190edcf1bf56423db54fd2522c5e6f`
 - publication: local-only expected-old compare-and-swap; never push
 
 This is an explicitly authorized fresh HCM-3.2 parent. It does not continue,
-supersede, rename, or reset either stopped HCM-3.2 parent. The HCM-3.1
-completion, all stopped-parent handoffs, off-integration-ref commits, prior
-findings, and three adversarial reviews are source evidence only. Their
-dispatch, outcome, packet, finding, cycle, and budget identities remain
-immutable.
+supersede, rename, or reset a stopped HCM-3.2 parent. The HCM-3.1 completion,
+prior HCM-3.2 handoffs, findings, selectors, dispatches, proof, and protected
+33-path WIP are immutable source evidence only. The additive authority is
+`decision/2026-08-05-context-resolution-quarantine-finalization-selector.md`.
 
 ## Objective
 
@@ -42,7 +47,9 @@ Complete the engine-owned Context Resolution kernel with:
 6. replacement history and crash recovery meeting the minimum four-part
    recovery floor; and
 7. focused and proportional regression proof followed by independent review,
-   two-commit v1.4 closeout, and local-only publication.
+   two-commit v1.4 closeout, and local-only publication; and
+8. identity-before-mutation refusal when a valid anchored quarantine record
+   for candidate A is evaluated with a different otherwise-valid candidate B.
 
 `PG-RES-01` may close only for this bounded kernel. HCM-3.3 Projection,
 HCM-3.4 Snapshot Memory, HCM-3.5 adoption, HCM-3.6 posture, Phase 3 exit,
@@ -209,19 +216,15 @@ posture, or gate truth.
 
 ## Production and test boundary
 
-The absolute production ceiling remains the operator-authorized five paths:
+The absolute production ceiling is exactly:
 
-- `crates/engine/src/context_resolution.rs`;
-- `crates/engine/src/context_resolution_registry.rs`;
-- `crates/engine/src/artifact_mutation.rs`;
 - `crates/engine/src/artifact_lineage_store.rs`;
-- `crates/engine/src/lib.rs`.
+- `crates/engine/src/artifact_mutation.rs` only for retained recovered work;
+- `crates/engine/src/context_resolution.rs` only for retained recovered work.
 
-The selected implementation plans changes only in
-`context_resolution.rs`, `artifact_mutation.rs`, and
-`artifact_lineage_store.rs`. The other two remain byte-identical unless a
-planning finding is remediated and independently closed inside the same
-authority and risk ceiling. No sixth production path is permitted.
+The new identity-ordering repair remains in `artifact_lineage_store.rs` unless
+fresh impact analysis proves otherwise. No fourth production path is
+permitted.
 
 Test edits are limited to:
 
@@ -260,7 +263,10 @@ Focused RED/GREEN must cover:
   evidence, result, ledger, and committed-rename boundary; and
 - unchanged generic non-HCM intake/candidate/promotion/recovery/currentness,
   HCM-3.1 vocabulary, stack identity, profile replay, and useful L0-L3
-  precursor behavior.
+  precursor behavior; and
+- a valid anchored open quarantine record for candidate A plus partial
+  completion scratch refusing a different otherwise-valid candidate B before
+  any durable byte changes.
 
 The proportional wall includes focused tests, affected engine and lineage
 tests, full workspace all-target/all-feature tests, strict Clippy, format,
@@ -268,6 +274,17 @@ diff/whitespace, exact definition/profile replay, ordinary handoff validation,
 both orchestration self-tests, GitNexus scoped and compare-to-main detection,
 remote-baseline verification, and protected-path proof. Unavailable FTS or
 comparison remains unavailable, never GREEN.
+
+The 2026-08-05 fresh-parent replay passed that wall. It includes the exact
+valid anchored quarantine candidate A plus partial completion scratch refusing
+a different otherwise-valid candidate B before any durable-byte change, 32/32
+Context Resolution kernel tests, 55/55 generic-lineage tests, complete engine
+and workspace all-target/all-feature tests, workspace check, strict Clippy,
+format, whitespace, ordinary handoff validation, and both self-tests. GitNexus
+scope-all and compare-to-`main` completed at `CRITICAL`; the scoped symbols and
+flows remain inside the authorized currentness/quarantine/generic-lineage
+seams. FTS is unavailable and is not classified GREEN. Exact evidence is in
+[`proof/20260805T125727Z--quarantine-finalization-proof-wall.md`](proof/20260805T125727Z--quarantine-finalization-proof-wall.md).
 
 ## Deferred continuous availability
 
@@ -280,12 +297,15 @@ replacement crash boundary.
 
 ## Completion and stops
 
-Completion requires planning CLEAN before code, monotonically ordered
-implementation/proof/final-closeout reviews, no unresolved P1/P2, a reviewed
-primary commit stack, a separate mechanical v1.4 handoff/ledger closeout,
-validator plus both self-tests, and expected-old local-ref compare-and-swap.
+Planning is CLEAN and the recovered implementation/proof candidate is GREEN.
+Completion still requires one forthcoming fresh-parent combined
+implementation/proof review ending `CLEAN` with no unresolved P1/P2 and its
+verdict recorded in a completed v1.4 handoff. Mechanical P4 closeout follows
+with no review cycle: commit the reviewed primary state, create and commit the
+separate v1.4 handoff/ledger closeout, pass the validator plus both self-tests,
+and perform expected-old local-ref compare-and-swap.
 
-Stop before implementation or completion for any sixth production path,
+Stop before implementation or completion for any fourth production path,
 unexpected HIGH/CRITICAL symbol, public API or dependency expansion, generic
 ownership change, unsafe/native/platform/transport work, shipped identity
 change, HCM-3.3+, unrepresentable v1.4 cadence, exhausted review budget,

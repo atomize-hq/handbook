@@ -1,26 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$defs": {
-    "fingerprint": {"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},
-    "exact_binding": {"type":"object","additionalProperties":false,"required":["ref","fingerprint"],"properties":{"ref":{"type":"string","minLength":1},"fingerprint":{"$ref":"#/$defs/fingerprint"}}},
-    "authority_pair": {"type":"object","additionalProperties":false,"required":["approval_class","authority_ref"],"properties":{"approval_class":{"type":"string","minLength":1},"authority_ref":{"type":"string","minLength":1}}},
-    "candidate_mapping": {"type":"object","additionalProperties":false,"required":["trigger","missing_condition","evidence_requirement"],"properties":{"trigger":{"$ref":"#/$defs/exact_binding"},"missing_condition":{"type":"string","minLength":1},"evidence_requirement":{"type":"string","minLength":1}}}
-  },
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_id", "schema_version", "binding_id", "binding_version", "repository_identity_fingerprint", "resolved_profile", "resolution_stack", "approver_registry", "authority_mappings", "candidate_mappings", "extensions", "binding_fingerprint"],
+  "required": ["declaration_jcs"],
   "properties": {
-    "schema_id": {"const": "handbook.context-resolution-authority-binding"},
-    "schema_version": {"const": "1.0"},
-    "binding_id": {"type": "string", "minLength": 1, "maxLength": 128},
-    "binding_version": {"type": "string", "minLength": 1, "maxLength": 128},
-    "repository_identity_fingerprint": {"$ref":"#/$defs/fingerprint"},
-    "resolved_profile": {"$ref":"#/$defs/exact_binding"},
-    "resolution_stack": {"$ref":"#/$defs/exact_binding"},
-    "approver_registry": {"type":"object","additionalProperties":false,"required":["state_ref","state_fingerprint","head_transition_ref","head_transition_fingerprint"],"properties":{"state_ref":{"type":"string","minLength":1},"state_fingerprint":{"$ref":"#/$defs/fingerprint"},"head_transition_ref":{"type":"string","minLength":1},"head_transition_fingerprint":{"$ref":"#/$defs/fingerprint"}}},
-    "authority_mappings": {"type":"object","additionalProperties":false,"required":["root_creation","parent","requested","approving","decision","evidence","trigger_condition","constraint","source","target","target_memory"],"properties":{"root_creation":{"$ref":"#/$defs/authority_pair"},"parent":{"$ref":"#/$defs/authority_pair"},"requested":{"$ref":"#/$defs/authority_pair"},"approving":{"$ref":"#/$defs/authority_pair"},"decision":{"$ref":"#/$defs/authority_pair"},"evidence":{"$ref":"#/$defs/authority_pair"},"trigger_condition":{"$ref":"#/$defs/authority_pair"},"constraint":{"$ref":"#/$defs/authority_pair"},"source":{"$ref":"#/$defs/authority_pair"},"target":{"$ref":"#/$defs/authority_pair"},"target_memory":{"$ref":"#/$defs/authority_pair"}}},
-    "candidate_mappings": {"type":"object","additionalProperties":false,"required":["dimension_rank_increase","mutation_allow_expansion","missing_context","missing_authority"],"properties":{"dimension_rank_increase":{"$ref":"#/$defs/candidate_mapping"},"mutation_allow_expansion":{"$ref":"#/$defs/candidate_mapping"},"missing_context":{"$ref":"#/$defs/candidate_mapping"},"missing_authority":{"$ref":"#/$defs/candidate_mapping"}}},
-    "extensions": {"type":"object","additionalProperties":false,"properties":{}},
-    "binding_fingerprint": {"$ref":"#/$defs/fingerprint"}
+    "declaration_jcs": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 98304
+    }
   }
 }

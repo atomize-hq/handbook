@@ -982,6 +982,48 @@ fn ordinary_repository_read_recovers_markerless_installed_promotion_first() {
 }
 
 #[test]
+fn ordinary_markerless_promotion_without_native_result_refuses_without_mutation() {
+    fn snapshot(root: &Path) -> Vec<(String, Vec<u8>)> {
+        fn visit(base: &Path, path: &Path, rows: &mut Vec<(String, Vec<u8>)>) {
+            let mut entries = fs::read_dir(path)
+                .unwrap()
+                .map(|entry| entry.unwrap().path())
+                .collect::<Vec<_>>();
+            entries.sort();
+            for entry in entries {
+                if entry.is_dir() {
+                    visit(base, &entry, rows);
+                } else {
+                    rows.push((
+                        entry
+                            .strip_prefix(base)
+                            .unwrap()
+                            .to_string_lossy()
+                            .replace('\\', "/"),
+                        fs::read(entry).unwrap(),
+                    ));
+                }
+            }
+        }
+
+        let mut rows = Vec::new();
+        visit(root, root, &mut rows);
+        rows
+    }
+
+    let (repo, repository, target, pending) = markerless_repository();
+    fs::remove_file(pending.join("native-publication-result.json")).unwrap();
+    let state_root = repo.path().join(".handbook/state");
+    let before = snapshot(&state_root);
+
+    assert!(repository
+        .read(target.kind_ref(), target.instance_id())
+        .is_err());
+    assert_eq!(snapshot(&state_root), before);
+    assert!(pending.exists());
+}
+
+#[test]
 fn every_public_repository_metadata_read_recovers_before_returning_owned_data() {
     for operation in [
         "selection",

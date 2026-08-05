@@ -1,13 +1,18 @@
-# HCM-3.2 fresh JCS capsule and replacement-recovery plan
+# HCM-3.2 quarantine identity-ordering finalization plan
 
-Status: planning subject awaiting independent v1.4 review. No test, RED, or
-Rust edit is permitted before planning CLEAN.
+Status: P1 and the prior P2 repair are complete, but P3 is reopened by
+`HCM32-QF-IMPL-DISC-001`. The dispatched mixed state did not reach the
+classifier without violating generic-lineage truth, so production remains
+unchanged and the finding is evidence-disputed rather than self-closed. The
+already-authorized different-fresh closure adjudicates that dispute before any
+new authority or RED requirement. P4 remains forbidden until that closure is
+`CLEAN`.
 
 ## Identity and objective
 
-- parent: `20260804T124829Z--HCM-3-2--context-resolution-jcs-recovery`
-- outcome: `hcm-3.2-context-resolution-jcs-recovery-whole-slice`
-- checkpoint: `9368b5cee612bdb1ffd25562eef35e8d863ff930`
+- parent: `20260805T101500Z--HCM-3-2--context-resolution-quarantine-finalization`
+- outcome: `hcm-3.2-context-resolution-quarantine-finalization`
+- checkpoint: `eb4b7ba55c6f3db40799e67275f3bbbb8610c87a`
 - publication: expected-old local-only compare-and-swap; never push
 
 Complete HCM-3.2 through the reviewed private JCS capsule, real generic owner
@@ -51,65 +56,42 @@ continued, superseded, or reset.
 
 ## Ordered packets
 
-### P1 — selector authority
+### `HCM-3.2-QF-P1-selector-and-recovery`
 
 - verify identity, exact base/ref/tree/ancestor/remote, worktree cleanliness,
   protected-root observations, and live GitNexus availability;
-- carry all historical findings and adversarial-review results as known
-  constraints;
-- align SPEC, selector, plan, checklist, and future-work decision;
-- freeze exact public call surface, paths, named symbols/risks, line/test
-  ceilings, proof wall, and stop conditions;
+- recover prior selector, dispatch, and proof files byte-identically as source
+  evidence while leaving product WIP untouched;
+- align SPEC, new additive selector, plan, and checklist;
+- freeze the valid-anchor A / different-valid-B / partial-scratch negative,
+  exact production/test boundary, proof wall, and stop conditions;
 - obtain an ordinary fresh planning discovery review and, if necessary, one
   consolidated remediation and different-fresh closure.
 
 Checkpoint: planning stage is independently CLEAN before any test or Rust edit.
 
-### P2 — capsule, publisher authority, and current kernel
+### `HCM-3.2-QF-P2-identity-ordering-repair`
 
 - rerun upstream impact immediately before every existing-symbol edit and warn
   for every reviewed HIGH/CRITICAL result;
-- write focused RED tests for capsule canonicalization/fingerprint separation,
-  generic/HCM golden vectors, layer-specific limit boundaries, exact publisher
-  object/challenge/assertion/mapping, real owner-path publication, currentness,
-  cache/clone refusal, and kernel behavior;
-- implement the private bounded codec and semantic gate in
-  `context_resolution.rs`;
-- integrate the HCM-only publisher proof into `candidate_preview`, promotion
-  request/plan validation, persisted-output validation, and the unchanged-
-  signature mutation service entry points;
-- revalidate current witness on every resolver/admission/envelope/mutation/
-  memory/validation/escalation/transition consumption;
-- preserve shipped HCM-3.1 definition/profile/vocabulary bytes and the exact
-  public kernel signatures.
+- selectively recover the complete 33-path WIP after selector CLEAN;
+- preserve and revalidate stable finding closure for `001`, `002`, `003`,
+  `004`, and `006`;
+- write a focused RED test with a valid A record/anchor and partial scratch,
+  then supply different otherwise-valid B without rewriting A;
+- prove scratch, open record, anchor, completion state, canonical authority,
+  transaction state, and surrounding inventory remain byte-identical;
+- make the smallest fail-closed identity-before-cleanup repair in
+  `artifact_lineage_store.rs` while preserving exact-A crash recovery and
+  generic non-HCM behavior.
 
 Checkpoint: focused capsule/kernel/promotion tests pass and no unreviewed
 surface or risk has appeared.
 
-### P3 — replacement and crash recovery
+### `HCM-3.2-QF-P3-proof-and-review`
 
-- write RED recovery tests for O1 -> O2 -> O3, historical displaced proof,
-  installed-before-marker recovery, pending non-capability, H2-to-T2 cold
-  restart without a request, exact retry/concurrent conflict, transition-keyed
-  quarantine, and every supported fault boundary;
-- distinguish current canonical verification from exact historical displaced
-  verification through one unique direct successor;
-- reconstruct a truthful markerless installed result only from durable facts;
-- acquire promotion/registry locks before the generic evaluation lock and
-  share currentness/effect linearization under that retained order;
-- classify the exact current transition as committed, pending, retry-available,
-  or one of the closed quarantine reasons by replaying zero/one/multiple HCM
-  candidate closures;
-- quarantine irrecoverable HCM pending state without weakening unrelated
-  generic recovery, registry ownership, unknown-family refusal, or non-HCM
-  validation.
-
-Checkpoint: every crash converges or is diagnosably fail closed; installed-
-uncommitted bytes and all historical/pending proof remain non-authoritative.
-
-### P4 — proportional proof and causal review
-
-- run focused negative proof, engine and lineage caller/process regression,
+- run the exact adversarial negative, engine and lineage caller/process
+  regression,
   full workspace all-target/all-feature tests, strict Clippy, rustfmt, diff and
   whitespace gates;
 - replay exact shipped definitions/profile/vocabulary and unchanged L0-L3
@@ -117,12 +99,22 @@ uncommitted bytes and all historical/pending proof remain non-authoritative.
 - run ordinary handoff validation and both orchestration self-tests;
 - run GitNexus scoped and compare-to-main detection before the primary commit;
   unavailable FTS/comparison remains unavailable, never GREEN;
-- obtain fresh complete implementation and proof reviews, remediate/close only
+- obtain fresh complete-subject implementation/proof review, remediate/close only
   within the live causal budget, and leave no unresolved P1/P2.
 
 Checkpoint: complete code-bearing subject and proof are independently CLEAN.
 
-### P5 — two-commit closeout and local publication
+Current checkpoint: the prior code-bearing subject retains its recorded GREEN
+wall, including valid-anchor-A/different-valid-B identity-before-mutation
+refusal. It is not the current completion authority: the
+`HCM32-QF-IMPL-DISC-001` remediation audit could prove only generic-lineage
+fail-closed refusal in both lexical orders, not a genuine classifier RED.
+Submit that exact evidence dispute to the already-authorized different-fresh
+closure. `CLEAN` independently closes the finding; `FINDINGS` or `BLOCKED`
+keeps HCM-3.2 incomplete and only then requires a classifier-reachable RED or
+new operator authority.
+
+### `HCM-3.2-QF-P4-closeout`
 
 - commit the reviewed primary state/stack;
 - create the completed v1.4 parent handoff against the primary tip, rebuild the
@@ -136,28 +128,27 @@ Checkpoint: complete code-bearing subject and proof are independently CLEAN.
 
 ## Closed bounds
 
-Absolute production ceiling: `context_resolution.rs`,
-`context_resolution_registry.rs`, `artifact_mutation.rs`,
-`artifact_lineage_store.rs`, and `lib.rs`. Only the first, third, and fourth are
-planned code-bearing paths. Maximums: 80 changed production declarations,
-2,400 hand-written production lines with selector-bound per-file allocation,
-2,400 focused test/fixture lines, and 18 material test functions.
+Absolute production ceiling: `artifact_lineage_store.rs`, plus retained
+recovered `artifact_mutation.rs` and `context_resolution.rs`. The new repair
+changes only the lineage-store evaluation seam unless fresh impact proves
+otherwise. Existing reviewed aggregate ceilings remain 2,400 hand-written
+production lines, 2,400 focused test/fixture lines, and 18 material tests.
 
 The selected live-risk seams are the four CRITICAL functions
 `validate_persisted_output_authority`, `validate_request_subject`,
 `GenericArtifactLineageStoreV1::recover_pending`, and
 `GenericArtifactLineageStoreV1::verify_committed`, plus the exact lower-risk
-callers named in the selector. Any additional HIGH/CRITICAL symbol, sixth
+callers named in the selector. Any additional HIGH/CRITICAL symbol, fourth
 production path, new public API, owner, dependency/crate, unsafe/native/
 platform/transport surface, shipped identity mutation, HCM-3.3+, or generic
 framework is a stop before edit.
 
 ## Definition of done
 
-All five packets complete monotonically; planning, implementation, proof, and
-final-closeout reviews end CLEAN with no unresolved P1/P2; the minimum
-replacement floor is proved through the real owner pipeline; primary and
-mechanical closeout commits are distinct; expected-old local CAS succeeds;
+All four packets complete monotonically; planning and implementation/proof end
+CLEAN with no unresolved P1/P2; the exact identity-before-mutation negative
+and recovered replacement floor pass through the real owner pipeline; primary
+and mechanical closeout commits are distinct; expected-old local CAS succeeds;
 remote/protected paths remain unchanged; and the bound receipt is delivered.
 If the floor cannot fit the bounds, stop durably rather than infer bootstrap-
 only scope or reduce the replacement claim.
