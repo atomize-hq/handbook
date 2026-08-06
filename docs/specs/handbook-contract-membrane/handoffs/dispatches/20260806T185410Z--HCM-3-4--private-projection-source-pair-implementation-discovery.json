@@ -1,0 +1,232 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260806T185410Z--HCM-3-4--private-projection-source-pair-implementation-discovery",
+  "created_at_utc": "2026-08-06T18:54:10Z",
+  "source_handoff_ids": [
+    "20260806T180300Z--HCM-3-4--orchestration--private-projection-source-pair-planning-completed"
+  ],
+  "parent_orchestration_id": "20260806T185300Z--HCM-3-4--private-projection-source-pair-implementation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "incremental-implementation",
+    "test-driven-development",
+    "code-review-and-quality",
+    "documentation-and-ADRs"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-I2-private-projection-source-pair-implementation",
+  "subject_fingerprint": "sha256:7f73ab6e45a35543f418fdd8d2b7e1cd8ed99f7c26e9503623c788f5fe7c2947",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.4-private-projection-source-pair-implementation-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T18:53:43Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.4-private-projection-source-pair-implementation",
+        "packet_ids": [
+          "HCM-3.4-I2-private-projection-source-pair-implementation"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T183318Z--private-projection-source-pair-implementation-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:d3a7e940a0469af9d5c23b3c9d1ecc103f02473132bf3119651cb36b9d01a4b9"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:66592695b535af0f8505953302e66a9aa3e78f9c3ed964e76dd5b70e8e6b0e2d",
+    "integrated_outcome_id": "hcm-3.4-private-projection-source-pair-implementation",
+    "outcome_registry_fingerprint": "sha256:d3a7e940a0469af9d5c23b3c9d1ecc103f02473132bf3119651cb36b9d01a4b9",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.4-private-projection-source-pair-implementation-discovery-convergence",
+    "completed_at_utc": "2026-08-06T18:54:05Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the completed planning handoff, implementation selector, pre-review proof, complete source-pair engine/test/fixture subject, and the 07/08/09 protocol; run the focused Projection test wall and formatting check.",
+        "evidence_ref": "The exact six-path implementation subject is the minimal private source-pair seam and test-only proof matrix. `cargo fmt --all -- --check`, `cargo test -p handbook-engine --lib projection::tests -- --nocapture`, and `git diff --check` pass before review."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inventory the source-pair fixture and all touched Projection paths for runtime consumers, public surfaces, schemas, dependencies, adapters, packet consumers, and HCM-3.5+ references.",
+        "evidence_ref": "Only private `crates/engine/src/projection.rs`, existing private fixture/test paths, one test-only fixture, selector, and proof are selected. No public, consumer, schema, dependency, or future-slice path is present."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 subject manifest, canonical outcome registry, and parent/outcome-derived causal budget.",
+        "evidence_ref": "Subject sha256:7f73ab6e45a35543f418fdd8d2b7e1cd8ed99f7c26e9503623c788f5fe7c2947; registry sha256:d3a7e940a0469af9d5c23b3c9d1ecc103f02473132bf3119651cb36b9d01a4b9; budget sha256:66592695b535af0f8505953302e66a9aa3e78f9c3ed964e76dd5b70e8e6b0e2d."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Decode every subject entry as UTF-8, inspect Markdown fences, and run `cargo fmt --all -- --check`.",
+        "evidence_ref": "All subject text is UTF-8 with a final newline, no unbalanced Markdown fence, and Rust formatting check passes."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Check all subject entries for trailing whitespace and run `git diff --check`.",
+        "evidence_ref": "No trailing whitespace was found and `git diff --check` exits 0."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "crates/engine/src/projection.rs",
+        "sha256": "e6d1cc9de264c367ffdd25a931423a730c5fd33efc23f3f529da45303074de27"
+      },
+      {
+        "path": "crates/engine/src/projection/fixtures/snapshot-source-pair.json",
+        "sha256": "22d1f12bea9df275ee43cff7df78883450df5a3ec25e1e88e0213124d8c6dc4b"
+      },
+      {
+        "path": "crates/engine/src/projection/fixtures/source.json",
+        "sha256": "0ba049cdd5c7b8dcdd5c8c49db60b908ea78db0daa0aba918a57d1751cc42aaf"
+      },
+      {
+        "path": "crates/engine/src/projection/tests.rs",
+        "sha256": "41365054bf2291256742fb5899769206bae98706b54f84d610f5d184abc87e7e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T183318Z--private-projection-source-pair-implementation-selector.md",
+        "sha256": "bb1bfe9909b07eeec14571644a42c99df66e78a7565f09588c4cebb603ca83c9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T185342Z--private-projection-source-pair-implementation-pre-review.md",
+        "sha256": "d2b58350ea35c9906b191fb985a4653cef899d290201030790332d2f15746c76"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:7f73ab6e45a35543f418fdd8d2b7e1cd8ed99f7c26e9503623c788f5fe7c2947"
+  },
+  "active_resolution": {
+    "level": "HCM-3.4 private Projection source-pair implementation discovery",
+    "scope_horizon": "one private generic Projection source-pair capability and its test-only proof matrix",
+    "detail_resolution": "immutable current/delta exact-pair binding, dependency state provenance, five-family captured/live currentness, typed refusal, omission/redaction, and authority effect none",
+    "temporal_horizon": "implementation review before primary commit",
+    "authority_horizon": "selector-bounded private engine/test/fixture paths only",
+    "memory_horizon": "HCM-3.3 one-source baseline, HCM-3.4 true stop, and completed source-pair planning handoff",
+    "validation_horizon": "one complete-subject discovery review followed only by directly causal remediation and different-fresh closure if a P1/P2 is found"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T183318Z--private-projection-source-pair-implementation-selector.md",
+      "sections": [
+        "entire decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "sections": [
+        "private source-pair model and configuration seam",
+        "fixed implementation proof matrix"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T180300Z--HCM-3-4--orchestration--private-projection-source-pair-planning-completed.json",
+      "sections": [
+        "entire completed planning handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "v1.4 causal cadence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "v1.4 handoff and ledger completion"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "review priority rubric and closure"
+      ]
+    }
+  ],
+  "repo_truth": "At the nonce-bound base, Projection supports the frozen one-source baseline. This candidate adds only a private source-pair relation: one immutable `snapshot_current`, one compatible `snapshot_delta`, normalized captured family closures, exact dependency/state binding, and five-family currentness proof. The current worktree contains only the selected candidate subject; GitNexus MCP/CLI/index is unavailable, recorded as unavailable rather than green.",
+  "allowed_scope": [
+    "Independently review exactly the six manifest paths and the named authority context for correctness, fail-closed behavior, provenance, fingerprints, currentness, test completeness, and scope preservation.",
+    "Use the existing private Projection engine/test seams as read-only context; run read-only focused checks if useful to reproduce a finding.",
+    "Return unique HCM34-SPI-DISC identifiers only for valid candidate defects. Do not repair a finding."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a dispatch, write a handoff or ledger, delegate, or change the review subject.",
+    "Do not create public APIs, CLI/SDK/pipeline/packet consumers, runtime adapters, schemas, dependencies, HCM-3.5/HCM-3.6/Phase-3 behavior, unrelated Projection cleanup, or a second Projection model.",
+    "Do not access protected checkouts or remote state, fetch, push, publish, merge, rebase, reset, clean, or update refs."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit. Each finding must name exact manifest path/symbol, violated contract or gate, concrete exploit or regression, smallest safe remediation, and missing verification.",
+    "Verify that definition/source/source-selection fingerprints bind every new exact-pair and current-state fact; that validation runs before semantics/currentness/payload; and that malformed, missing, duplicate, stale, substituted, incompatible, and omitted-family cases fail closed without payload reads.",
+    "Verify the test-only fixture and 17-test Projection wall prove one current plus one delta, five captured/live families with all slots, typed omissions/redaction, and preserved frozen one-source behavior. Check whether policy/evaluator source-kind admission can undermine the pair relation.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:7f73ab6e45a35543f418fdd8d2b7e1cd8ed99f7c26e9503623c788f5fe7c2947."
+  ],
+  "contracts_and_gates": [
+    "This is the one complete-subject discovery review under the frozen implementation outcome registry. Valid P1/P2 findings receive one consolidated in-scope remediation and one different-fresh delta-focused closure; no review follows CLEAN.",
+    "PG-SNAP proof remains fail-closed: no identity substitution, source-pair weakening, omitted currentness family, hidden-data disclosure, authority expansion, or unsupported source-kind admission may pass.",
+    "P1/P2 cannot be waived or deferred. P3/P4 may only be inventoried under the live review inventory rules."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair if the manifest subject is unsafe, incomplete, untestable, overbroad, or inconsistent with the completed plan or frozen one-source baseline.",
+    "Return BLOCKED if valid review requires non-selected public/consumer/schema/dependency/future-slice scope, protected checkout access, remote action, a mandatory unavailable capability, or authority expansion.",
+    "Report manifest, causal-cadence, protected-boundary, or authority issues to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

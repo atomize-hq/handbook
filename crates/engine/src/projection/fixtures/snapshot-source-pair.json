@@ -1,0 +1,140 @@
+{
+  "snapshot_current": {
+    "authority_class": "observation_snapshot",
+    "capability": {
+      "fingerprint": "sha256:a67993f210d56568fc01fc1c5c8ab6ef7094ff7ce942a48be0b439508b17d73b",
+      "ref": "handbook.semantic-capability.projection-source@1.0.0"
+    },
+    "captured_family_revisions": [
+      {
+        "adapter": {
+          "fingerprint": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "ref": "handbook.adapter.evidence@1.0.0"
+        },
+        "family": "evidence",
+        "family_revision": "evidence-revision-5",
+        "slots": {}
+      },
+      {
+        "adapter": {
+          "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "ref": "handbook.adapter.git@1.0.0"
+        },
+        "family": "git",
+        "family_revision": "git-revision-5",
+        "slots": {}
+      },
+      {
+        "adapter": {
+          "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "ref": "handbook.adapter.handbook@1.0.0"
+        },
+        "family": "handbook",
+        "family_revision": "handbook-revision-5",
+        "slots": {}
+      },
+      {
+        "adapter": {
+          "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "ref": "handbook.adapter.session@1.0.0"
+        },
+        "family": "session",
+        "family_revision": "session-revision-5",
+        "slots": {}
+      },
+      {
+        "adapter": {
+          "fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "ref": "handbook.adapter.work@1.0.0"
+        },
+        "family": "work",
+        "family_revision": "work-revision-5",
+        "slots": {
+          "active_plan": "active-plan-revision-5",
+          "work_ledger": "work-ledger-revision-5"
+        }
+      }
+    ],
+    "configured_kind_ref": "handbook.artifact-kind.snapshot-current@1.0.0",
+    "declared_pointers": {
+      "/constraints": "array",
+      "/internal_notes": "string",
+      "/objective": "string",
+      "/optional_detail": "string",
+      "/secret_notes": "string",
+      "/upstream_hidden": "string"
+    },
+    "payload_jcs": "{\"constraints\":[\"No remote execution\",\"Preserve authority\"],\"internal_notes\":\"pair-internal detail\",\"objective\":\"retained safe objective\",\"secret_notes\":\"never disclose\",\"upstream_hidden\":\"already hidden\"}",
+    "ref": "snapshot.current@1",
+    "schema": {
+      "fingerprint": "sha256:92f2a7a95d09cea1e14e306e045adc23525484f019097b06283216daf893b7e9",
+      "ref": "handbook.schemas.custom-roadmap@1.0.0"
+    },
+    "source_dependencies": [],
+    "source_kind": "snapshot",
+    "state_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "upstream_redactions": [
+      {
+        "action": "redacted_summary",
+        "disposition": {
+          "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "ref": "redaction.snapshot.retained-objective@1"
+        },
+        "original_pointer": "/objective",
+        "retained_pointer": "/objective"
+      },
+      {
+        "action": "omit",
+        "disposition": {
+          "fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "ref": "redaction.snapshot.upstream-hidden@1"
+        },
+        "original_pointer": "/upstream_hidden",
+        "retained_pointer": null
+      }
+    ]
+  },
+  "snapshot_delta": {
+    "authority_class": "observation_snapshot_delta",
+    "capability": {
+      "fingerprint": "sha256:a67993f210d56568fc01fc1c5c8ab6ef7094ff7ce942a48be0b439508b17d73b",
+      "ref": "handbook.semantic-capability.projection-source@1.0.0"
+    },
+    "captured_revisions": {
+      "adapter": {
+        "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "ref": "handbook.adapter.delta@1.0.0"
+      },
+      "family": "delta",
+      "family_revision": "delta-revision-5",
+      "slots": {}
+    },
+    "configured_kind_ref": "handbook.artifact-kind.snapshot-delta@1.0.0",
+    "declared_pointers": {
+      "/constraints": "array",
+      "/internal_notes": "string",
+      "/objective": "string",
+      "/optional_detail": "string",
+      "/secret_notes": "string",
+      "/upstream_hidden": "string"
+    },
+    "payload_jcs": "{\"constraints\":[],\"internal_notes\":\"delta\",\"objective\":\"delta\",\"optional_detail\":\"delta\",\"secret_notes\":\"delta\",\"upstream_hidden\":\"delta\"}",
+    "ref": "snapshot.delta@1",
+    "schema": {
+      "fingerprint": "sha256:92f2a7a95d09cea1e14e306e045adc23525484f019097b06283216daf893b7e9",
+      "ref": "handbook.schemas.custom-roadmap@1.0.0"
+    },
+    "source_dependencies": [
+      {
+        "role": "to_snapshot",
+        "source": {
+          "fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "ref": "snapshot.current@1"
+        },
+        "state_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    ],
+    "source_kind": "snapshot_delta",
+    "upstream_redactions": []
+  }
+}

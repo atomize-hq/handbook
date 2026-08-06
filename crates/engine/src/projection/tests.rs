@@ -4,6 +4,7 @@ const SOURCE: &[u8] = include_bytes!("fixtures/source.json");
 const PROFILE: &[u8] = include_bytes!("fixtures/resolved-profile.json");
 const VOCABULARY: &[u8] = include_bytes!("fixtures/vocabulary.json");
 const DEFINITION: &[u8] = include_bytes!("fixtures/definition.json");
+const SNAPSHOT_SOURCE_PAIR: &[u8] = include_bytes!("fixtures/snapshot-source-pair.json");
 type SemanticMutation = fn(&mut serde_json::Value, &mut serde_json::Value);
 
 #[test]
@@ -180,6 +181,7 @@ fn accounting_omissions_proof_effects_lossiness_and_no_read_short_circuits_are_c
         result.omission("reveal_upstream_hidden").unwrap().reason,
         OmissionReason::Redacted
     );
+
     assert!(result
         .not_applicable
         .iter()
@@ -339,7 +341,7 @@ fn currentness_none_and_exact_captured_revision_closures_refuse_substitution() {
         &|_| Ok(live.clone()),
     )
     .unwrap();
-    assert_eq!(result.currentness_validation.checks.len(), 2);
+    assert_eq!(result.currentness_validation.checks.len(), 1);
 
     for mutate in [
         |request: &mut ProjectionRequest| request.currentness.expected_family_revisions.clear(),
@@ -349,7 +351,7 @@ fn currentness_none_and_exact_captured_revision_closures_refuse_substitution() {
         },
         |request: &mut ProjectionRequest| {
             request.currentness.expected_family_revisions[0].adapter =
-                "handbook.adapter.stale@1.0.0".to_owned()
+                ExactPair::new("handbook.adapter.stale@1.0.0", &fake_fingerprint('9')).unwrap()
         },
         |request: &mut ProjectionRequest| {
             request.currentness.expected_family_revisions[0]
@@ -373,6 +375,416 @@ fn currentness_none_and_exact_captured_revision_closures_refuse_substitution() {
             ProjectionErrorKind::InvalidCurrentness,
         );
     }
+}
+
+#[test]
+fn snapshot_source_pair_fixture_normalizes_the_fixed_current_and_delta_sources() {
+    let fixture: serde_json::Value = serde_json::from_slice(SNAPSHOT_SOURCE_PAIR).unwrap();
+    let current = ProjectionSource::load(&canonical_json(&fixture["snapshot_current"])).unwrap();
+    let delta = ProjectionSource::load(&canonical_json(&fixture["snapshot_delta"])).unwrap();
+
+    assert_eq!(current.document.captured_family_revisions.len(), 5);
+    assert_eq!(delta.document.captured_family_revisions.len(), 1);
+}
+
+#[test]
+fn snapshot_source_raw_closure_accepts_only_legacy_or_sorted_unique_multi_family_forms() {
+    let fixture: serde_json::Value = serde_json::from_slice(SNAPSHOT_SOURCE_PAIR).unwrap();
+    let current = &fixture["snapshot_current"];
+    let first_family = current["captured_family_revisions"][0].clone();
+
+    let mut legacy = current.clone();
+    legacy
+        .as_object_mut()
+        .unwrap()
+        .remove("captured_family_revisions");
+    legacy["captured_revisions"] = first_family.clone();
+    assert!(ProjectionSource::load(&canonical_json(&legacy)).is_ok());
+
+    let mut both = current.clone();
+    both["captured_revisions"] = first_family.clone();
+    let mut missing = current.clone();
+    missing
+        .as_object_mut()
+        .unwrap()
+        .remove("captured_family_revisions");
+    let mut empty = current.clone();
+    empty["captured_family_revisions"] = serde_json::json!([]);
+    let mut unsorted = current.clone();
+    unsorted["captured_family_revisions"]
+        .as_array_mut()
+        .unwrap()
+        .reverse();
+    let mut duplicate = current.clone();
+    duplicate["captured_family_revisions"]
+        .as_array_mut()
+        .unwrap()
+        .push(first_family);
+
+    for malformed in [both, missing, empty, unsorted, duplicate] {
+        assert_eq!(
+            ProjectionSource::load(&canonical_json(&malformed))
+                .unwrap_err()
+                .kind,
+            ProjectionErrorKind::InvalidDefinition
+        );
+    }
+}
+
+#[test]
+fn snapshot_source_pair_definition_admits_exact_current_and_delta_selectors() {
+    let configuration = snapshot_pair_configuration();
+
+    assert_eq!(configuration.definition.source_selectors.len(), 2);
+    assert_eq!(
+        configuration
+            .definition
+            .currentness_requirements
+            .families
+            .len(),
+        5
+    );
+}
+
+#[test]
+fn snapshot_source_pair_definition_refuses_optional_state_or_delta_payload_rules() {
+    let (profile, vocabulary, mut definition) = snapshot_pair_configuration_documents();
+    definition["source_pair_requirements"][0]["require_state_identity"] = serde_json::json!(false);
+    repair_definition_fingerprint(&mut definition);
+    let (profile, vocabulary) = repair_profile_for_definition(
+        &canonical_json(&profile),
+        &canonical_json(&vocabulary),
+        &definition,
+    );
+    assert_load_kind(
+        &profile,
+        &vocabulary,
+        &canonical_json(&definition),
+        ProjectionErrorKind::InvalidDefinition,
+    );
+
+    let (profile, vocabulary, mut definition) = snapshot_pair_configuration_documents();
+    definition["field_rules"][0]["source_selector_id"] = serde_json::json!("snapshot_delta");
+    repair_definition_fingerprint(&mut definition);
+    let (profile, vocabulary) = repair_profile_for_definition(
+        &canonical_json(&profile),
+        &canonical_json(&vocabulary),
+        &definition,
+    );
+    assert_load_kind(
+        &profile,
+        &vocabulary,
+        &canonical_json(&definition),
+        ProjectionErrorKind::InvalidDefinition,
+    );
+}
+
+#[test]
+fn snapshot_source_pair_requires_exact_dependency_state_and_five_family_currentness() {
+    let configuration = snapshot_pair_configuration();
+    let authority = TestAuthority::broad(&configuration);
+    let (current, delta) = snapshot_pair_sources();
+    let request = snapshot_pair_request(&configuration, &current, &delta, &authority);
+
+    let result = execute_projection_with_live_observer(
+        &configuration,
+        &authority,
+        &request,
+        &[&current, &delta],
+        &|query| Ok(snapshot_pair_live_observation(&current, query)),
+    )
+    .unwrap();
+    assert_eq!(result.sources.len(), 2);
+    assert_eq!(
+        result.sources[0].state_fingerprint,
+        current.document.state_fingerprint
+    );
+    assert_eq!(result.currentness_validation.checks.len(), 5);
+    assert_eq!(
+        result
+            .currentness_validation
+            .checks
+            .iter()
+            .find(|check| check.family == "work")
+            .unwrap()
+            .expected_slots
+            .len(),
+        2
+    );
+    assert_eq!(result.authority_effect, AuthorityEffect::None);
+    assert_eq!(delta.payload_read_count(), 0);
+    let objective_evaluation = result.evaluation("reveal_objective").unwrap();
+    assert_eq!(
+        objective_evaluation.upstream_redaction_check,
+        UpstreamRedactionCheck::None
+    );
+    assert_eq!(objective_evaluation.payload_access, PayloadAccess::Read);
+    assert_eq!(
+        result.omission("reveal_upstream_hidden").unwrap().reason,
+        OmissionReason::Redacted
+    );
+
+    let mut substituted_state = request.clone();
+    substituted_state.sources[0].state_fingerprint = Some(fake_fingerprint('1'));
+    assert_kind(
+        execute_projection_with_live_observer(
+            &configuration,
+            &authority,
+            &substituted_state,
+            &[&current, &delta],
+            &|query| Ok(snapshot_pair_live_observation(&current, query)),
+        ),
+        ProjectionErrorKind::StaleBinding,
+    );
+
+    let (no_state_current, no_state_delta) = snapshot_pair_sources();
+    let mut no_state_request = snapshot_pair_request(
+        &configuration,
+        &no_state_current,
+        &no_state_delta,
+        &authority,
+    );
+    no_state_request.sources[0].state_fingerprint = None;
+    assert_kind(
+        execute_projection_with_live_observer(
+            &configuration,
+            &authority,
+            &no_state_request,
+            &[&no_state_current, &no_state_delta],
+            &|query| Ok(snapshot_pair_live_observation(&no_state_current, query)),
+        ),
+        ProjectionErrorKind::StaleBinding,
+    );
+    assert_eq!(no_state_current.payload_read_count(), 0);
+    assert_eq!(no_state_delta.payload_read_count(), 0);
+
+    let (missing_current, missing_delta) = snapshot_pair_sources();
+    let missing_request =
+        snapshot_pair_request(&configuration, &missing_current, &missing_delta, &authority);
+    assert_kind(
+        execute_projection_with_live_observer(
+            &configuration,
+            &authority,
+            &missing_request,
+            &[&missing_current],
+            &|query| Ok(snapshot_pair_live_observation(&missing_current, query)),
+        ),
+        ProjectionErrorKind::Cardinality,
+    );
+    assert_eq!(missing_current.payload_read_count(), 0);
+    assert_eq!(missing_delta.payload_read_count(), 0);
+
+    let mut no_dependency_fixture: serde_json::Value =
+        serde_json::from_slice(SNAPSHOT_SOURCE_PAIR).unwrap();
+    let no_dependency_current =
+        ProjectionSource::load(&canonical_json(&no_dependency_fixture["snapshot_current"]))
+            .unwrap();
+    no_dependency_fixture["snapshot_delta"]["source_dependencies"] = serde_json::json!([]);
+    let no_dependency_delta =
+        ProjectionSource::load(&canonical_json(&no_dependency_fixture["snapshot_delta"])).unwrap();
+    let no_dependency_request = snapshot_pair_request(
+        &configuration,
+        &no_dependency_current,
+        &no_dependency_delta,
+        &authority,
+    );
+    assert_kind(
+        execute_projection_with_live_observer(
+            &configuration,
+            &authority,
+            &no_dependency_request,
+            &[&no_dependency_current, &no_dependency_delta],
+            &|query| {
+                Ok(snapshot_pair_live_observation(
+                    &no_dependency_current,
+                    query,
+                ))
+            },
+        ),
+        ProjectionErrorKind::Cardinality,
+    );
+    assert_eq!(no_dependency_current.payload_read_count(), 0);
+    assert_eq!(no_dependency_delta.payload_read_count(), 0);
+
+    let mut duplicate_dependency_fixture: serde_json::Value =
+        serde_json::from_slice(SNAPSHOT_SOURCE_PAIR).unwrap();
+    let dependency =
+        duplicate_dependency_fixture["snapshot_delta"]["source_dependencies"][0].clone();
+    duplicate_dependency_fixture["snapshot_delta"]["source_dependencies"]
+        .as_array_mut()
+        .unwrap()
+        .push(dependency);
+    assert_eq!(
+        ProjectionSource::load(&canonical_json(
+            &duplicate_dependency_fixture["snapshot_delta"]
+        ))
+        .unwrap_err()
+        .kind,
+        ProjectionErrorKind::InvalidDefinition
+    );
+
+    let (duplicate_current, duplicate_delta) = snapshot_pair_sources();
+    let mut duplicate_request = snapshot_pair_request(
+        &configuration,
+        &duplicate_current,
+        &duplicate_delta,
+        &authority,
+    );
+    duplicate_request
+        .sources
+        .push(duplicate_request.sources[1].clone());
+    assert_kind(
+        execute_projection_with_live_observer(
+            &configuration,
+            &authority,
+            &duplicate_request,
+            &[&duplicate_current, &duplicate_delta],
+            &|query| Ok(snapshot_pair_live_observation(&duplicate_current, query)),
+        ),
+        ProjectionErrorKind::Cardinality,
+    );
+    assert_eq!(duplicate_current.payload_read_count(), 0);
+    assert_eq!(duplicate_delta.payload_read_count(), 0);
+
+    let mut malformed_fixture: serde_json::Value =
+        serde_json::from_slice(SNAPSHOT_SOURCE_PAIR).unwrap();
+    let malformed_current =
+        ProjectionSource::load(&canonical_json(&malformed_fixture["snapshot_current"])).unwrap();
+    malformed_fixture["snapshot_delta"]["source_dependencies"][0]["source"]["fingerprint"] =
+        serde_json::json!(fake_fingerprint('2'));
+    let malformed_delta =
+        ProjectionSource::load(&canonical_json(&malformed_fixture["snapshot_delta"])).unwrap();
+    let malformed_request = snapshot_pair_request(
+        &configuration,
+        &malformed_current,
+        &malformed_delta,
+        &authority,
+    );
+    assert_kind(
+        execute_projection_with_live_observer(
+            &configuration,
+            &authority,
+            &malformed_request,
+            &[&malformed_current, &malformed_delta],
+            &|query| Ok(snapshot_pair_live_observation(&malformed_current, query)),
+        ),
+        ProjectionErrorKind::StaleBinding,
+    );
+    assert_eq!(malformed_current.payload_read_count(), 0);
+
+    let mut missing_family = request.clone();
+    missing_family.currentness.expected_family_revisions.pop();
+    assert_kind(
+        execute_projection_with_live_observer(
+            &configuration,
+            &authority,
+            &missing_family,
+            &[&current, &delta],
+            &|query| Ok(snapshot_pair_live_observation(&current, query)),
+        ),
+        ProjectionErrorKind::InvalidCurrentness,
+    );
+
+    let mut substituted_adapter = request.clone();
+    substituted_adapter.currentness.expected_family_revisions[0].adapter =
+        ExactPair::new("handbook.adapter.substituted@1.0.0", &fake_fingerprint('3')).unwrap();
+    assert_kind(
+        execute_projection_with_live_observer(
+            &configuration,
+            &authority,
+            &substituted_adapter,
+            &[&current, &delta],
+            &|query| Ok(snapshot_pair_live_observation(&current, query)),
+        ),
+        ProjectionErrorKind::InvalidCurrentness,
+    );
+
+    let stale_session = execute_projection_with_live_observer(
+        &configuration,
+        &authority,
+        &request,
+        &[&current, &delta],
+        &|query| {
+            let mut observation = snapshot_pair_live_observation(&current, query);
+            if observation.family == "session" {
+                observation.family_revision = "stale-session".to_owned();
+            }
+            Ok(observation)
+        },
+    );
+    assert_kind(stale_session, ProjectionErrorKind::InvalidCurrentness);
+
+    let (stale_work_current, stale_work_delta) = snapshot_pair_sources();
+    let stale_work_request = snapshot_pair_request(
+        &configuration,
+        &stale_work_current,
+        &stale_work_delta,
+        &authority,
+    );
+    let stale_work = execute_projection_with_live_observer(
+        &configuration,
+        &authority,
+        &stale_work_request,
+        &[&stale_work_current, &stale_work_delta],
+        &|query| {
+            let mut observation = snapshot_pair_live_observation(&stale_work_current, query);
+            if observation.family == "work" {
+                observation
+                    .slots
+                    .insert("active_plan".to_owned(), "stale-active-plan".to_owned());
+            }
+            Ok(observation)
+        },
+    );
+    assert_kind(stale_work, ProjectionErrorKind::InvalidCurrentness);
+    assert_eq!(stale_work_current.payload_read_count(), 0);
+    assert_eq!(stale_work_delta.payload_read_count(), 0);
+
+    let (selector_current, selector_delta) = snapshot_pair_sources();
+    let mut selector_substitution = snapshot_pair_request(
+        &configuration,
+        &selector_current,
+        &selector_delta,
+        &authority,
+    );
+    selector_substitution.currentness.expected_family_revisions[0].selector_id =
+        "snapshot_delta".to_owned();
+    assert_kind(
+        execute_projection_with_live_observer(
+            &configuration,
+            &authority,
+            &selector_substitution,
+            &[&selector_current, &selector_delta],
+            &|query| Ok(snapshot_pair_live_observation(&selector_current, query)),
+        ),
+        ProjectionErrorKind::InvalidCurrentness,
+    );
+    assert_eq!(selector_current.payload_read_count(), 0);
+    assert_eq!(selector_delta.payload_read_count(), 0);
+
+    let (slot_current, slot_delta) = snapshot_pair_sources();
+    let mut slot_substitution =
+        snapshot_pair_request(&configuration, &slot_current, &slot_delta, &authority);
+    slot_substitution
+        .currentness
+        .expected_family_revisions
+        .iter_mut()
+        .find(|expected| expected.family == "work")
+        .unwrap()
+        .slots[0]
+        .slot = "substituted_slot".to_owned();
+    assert_kind(
+        execute_projection_with_live_observer(
+            &configuration,
+            &authority,
+            &slot_substitution,
+            &[&slot_current, &slot_delta],
+            &|query| Ok(snapshot_pair_live_observation(&slot_current, query)),
+        ),
+        ProjectionErrorKind::InvalidCurrentness,
+    );
+    assert_eq!(slot_current.payload_read_count(), 0);
+    assert_eq!(slot_delta.payload_read_count(), 0);
 }
 
 #[test]
@@ -557,7 +969,10 @@ fn exact_currentness_requires_snapshot_selection_and_independent_live_observatio
     let mut definition: serde_json::Value = serde_json::from_slice(DEFINITION).unwrap();
     definition["currentness_requirements"] = serde_json::json!({
         "families": [{
-            "adapter": "handbook.adapter.fixture@1.0.0",
+            "adapter": {
+                "ref": "handbook.adapter.fixture@1.0.0",
+                "fingerprint": "sha256:5d519bea57cde1de247cb73f79f418d5a7fcb0746ebc3f1e551e74e3e1883849"
+            },
             "family": "custom_roadmap",
             "selector_id": "roadmap",
             "slots": ["content"]
@@ -780,6 +1195,7 @@ fn request<A: ProjectionAuthorityAccess>(
         vec![ProjectionSourceSelection {
             selector_id: "roadmap".to_owned(),
             exact_pair: source.exact_pair(),
+            state_fingerprint: None,
         }],
         configuration.profile.configuration_pair.clone(),
         configuration.profile.exact_pair.clone(),
@@ -802,12 +1218,158 @@ fn snapshot_source() -> ProjectionSource {
     ProjectionSource::load(&canonical_json(&source)).unwrap()
 }
 
+fn snapshot_pair_configuration_documents(
+) -> (serde_json::Value, serde_json::Value, serde_json::Value) {
+    let fixture: serde_json::Value = serde_json::from_slice(SNAPSHOT_SOURCE_PAIR).unwrap();
+    let current = &fixture["snapshot_current"];
+    let mut profile: serde_json::Value = serde_json::from_slice(PROFILE).unwrap();
+    let mut vocabulary: serde_json::Value = serde_json::from_slice(VOCABULARY).unwrap();
+    let mut definition: serde_json::Value = serde_json::from_slice(DEFINITION).unwrap();
+
+    let mut current_selector = definition["source_selectors"][0].clone();
+    current_selector["selector_id"] = serde_json::json!("snapshot_current");
+    current_selector["source_kind"] = serde_json::json!("snapshot");
+    current_selector["configured_kind_ref"] = current["configured_kind_ref"].clone();
+    let mut delta_selector = current_selector.clone();
+    delta_selector["selector_id"] = serde_json::json!("snapshot_delta");
+    delta_selector["source_kind"] = serde_json::json!("snapshot_delta");
+    delta_selector["configured_kind_ref"] =
+        fixture["snapshot_delta"]["configured_kind_ref"].clone();
+    definition["source_selectors"] = serde_json::json!([current_selector, delta_selector]);
+    for rule in definition["field_rules"].as_array_mut().unwrap() {
+        rule["source_selector_id"] = serde_json::json!("snapshot_current");
+    }
+    definition["currentness_requirements"] = serde_json::json!({
+        "mode": "exact_revision_check",
+        "revision_basis": "captured_revision",
+        "families": current["captured_family_revisions"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|family| serde_json::json!({
+                "selector_id": "snapshot_current",
+                "family": family["family"],
+                "adapter": family["adapter"],
+                "slots": family["slots"].as_object().unwrap().keys().collect::<Vec<_>>(),
+            }))
+            .collect::<Vec<_>>(),
+    });
+    definition["source_pair_requirements"] = serde_json::json!([{
+        "current_selector_id": "snapshot_current",
+        "derived_selector_id": "snapshot_delta",
+        "dependency_role": "to_snapshot",
+        "require_state_identity": true,
+    }]);
+    let current_kind = serde_json::json!({
+        "kind_ref": current["configured_kind_ref"],
+        "source_kind": "snapshot",
+        "capability": current["capability"],
+        "source_schema": current["schema"],
+    });
+    let delta_kind = serde_json::json!({
+        "kind_ref": fixture["snapshot_delta"]["configured_kind_ref"],
+        "source_kind": "snapshot_delta",
+        "capability": fixture["snapshot_delta"]["capability"],
+        "source_schema": fixture["snapshot_delta"]["schema"],
+    });
+    profile["configured_kinds"] = serde_json::json!([current_kind, delta_kind]);
+    vocabulary["registered_custom_kinds"] = serde_json::json!([
+        current["configured_kind_ref"],
+        fixture["snapshot_delta"]["configured_kind_ref"],
+    ]);
+    repair_fingerprint_field(&mut vocabulary, "vocabulary_fingerprint");
+    profile["vocabulary"]["fingerprint"] = vocabulary["vocabulary_fingerprint"].clone();
+    repair_definition_fingerprint(&mut definition);
+    profile["projection_catalog"][0]["fingerprint"] = definition["definition_fingerprint"].clone();
+    repair_fingerprint_field(&mut profile, "profile_fingerprint");
+
+    (profile, vocabulary, definition)
+}
+
+fn snapshot_pair_configuration() -> ProjectionConfiguration {
+    let (profile, vocabulary, definition) = snapshot_pair_configuration_documents();
+    ProjectionConfiguration::load(
+        &canonical_json(&profile),
+        &canonical_json(&vocabulary),
+        &canonical_json(&definition),
+    )
+    .unwrap()
+}
+
+fn snapshot_pair_sources() -> (ProjectionSource, ProjectionSource) {
+    let mut fixture: serde_json::Value = serde_json::from_slice(SNAPSHOT_SOURCE_PAIR).unwrap();
+    let current_bytes = canonical_json(&fixture["snapshot_current"]);
+    let current = ProjectionSource::load(&current_bytes).unwrap();
+    fixture["snapshot_delta"]["source_dependencies"][0]["source"] =
+        serde_json::to_value(current.exact_pair()).unwrap();
+    let delta = ProjectionSource::load(&canonical_json(&fixture["snapshot_delta"])).unwrap();
+    (current, delta)
+}
+
+fn snapshot_pair_request<A: ProjectionAuthorityAccess>(
+    configuration: &ProjectionConfiguration,
+    current: &ProjectionSource,
+    delta: &ProjectionSource,
+    authority: &A,
+) -> ProjectionRequest {
+    ProjectionRequest::new(
+        "projection-request.snapshot-source-pair",
+        vec![
+            ProjectionSourceSelection {
+                selector_id: "snapshot_current".to_owned(),
+                exact_pair: current.exact_pair(),
+                state_fingerprint: current.document.state_fingerprint.clone(),
+            },
+            ProjectionSourceSelection {
+                selector_id: "snapshot_delta".to_owned(),
+                exact_pair: delta.exact_pair(),
+                state_fingerprint: None,
+            },
+        ],
+        configuration.profile.configuration_pair.clone(),
+        configuration.profile.exact_pair.clone(),
+        configuration.vocabulary.exact_pair.clone(),
+        configuration.definition.exact_pair.clone(),
+        authority.envelope_pair(),
+        authority.resolution_stack_pair(),
+        ProjectionOperation::Reveal,
+        "agent_packet",
+        "delegated_execution_context",
+        ProjectionCurrentnessRequest::captured(current, "snapshot_current").unwrap(),
+        authority.dimension_ranks(),
+    )
+}
+
+fn snapshot_pair_live_observation(
+    current: &ProjectionSource,
+    query: &LiveCurrentnessQuery,
+) -> LiveCurrentnessObservation {
+    let captured = current
+        .document
+        .captured_family_revisions
+        .iter()
+        .find(|captured| captured.family == query.family)
+        .unwrap();
+    LiveCurrentnessObservation {
+        selector_id: query.selector_id.clone(),
+        source: query.source.clone(),
+        family: query.family.clone(),
+        adapter: query.adapter.clone(),
+        family_revision: captured.family_revision.clone(),
+        slots: captured.slots.clone(),
+    }
+}
+
 fn live_observation(source: &ProjectionSource) -> LiveCurrentnessObservation {
     LiveCurrentnessObservation {
         selector_id: "roadmap".to_owned(),
         source: source.exact_pair(),
         family: "custom_roadmap".to_owned(),
-        adapter: "handbook.adapter.fixture@1.0.0".to_owned(),
+        adapter: ExactPair::new(
+            "handbook.adapter.fixture@1.0.0",
+            "sha256:5d519bea57cde1de247cb73f79f418d5a7fcb0746ebc3f1e551e74e3e1883849",
+        )
+        .unwrap(),
         family_revision: "roadmap-revision-7".to_owned(),
         slots: BTreeMap::from([("content".to_owned(), "content-revision-11".to_owned())]),
     }

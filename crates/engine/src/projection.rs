@@ -177,6 +177,8 @@ struct AuthoredDefinition {
     disclosure_policy: DisclosurePolicy,
     support_evaluator: SupportEvaluator,
     currentness_requirements: CurrentnessRequirements,
+    #[serde(default)]
+    source_pair_requirements: Vec<SourcePairRequirement>,
     field_rules: Vec<FieldRule>,
     derivations: Vec<DerivationDefinition>,
     definition_fingerprint: String,
@@ -192,6 +194,7 @@ struct ValidatedDefinition {
     disclosure_policy: DisclosurePolicy,
     support_evaluator: SupportEvaluator,
     currentness_requirements: CurrentnessRequirements,
+    source_pair_requirements: Vec<SourcePairRequirement>,
     field_rules: Vec<FieldRule>,
     derivations: Vec<DerivationDefinition>,
 }
@@ -205,6 +208,15 @@ struct SourceSelector {
     capability: ExactPair,
     source_schema: ExactPair,
     cardinality: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+struct SourcePairRequirement {
+    current_selector_id: String,
+    derived_selector_id: String,
+    dependency_role: String,
+    require_state_identity: bool,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -309,7 +321,7 @@ struct CurrentnessRequirements {
 struct CurrentnessFamilyRequirement {
     selector_id: String,
     family: String,
-    adapter: String,
+    adapter: ExactPair,
     slots: Vec<String>,
 }
 
@@ -590,6 +602,7 @@ impl ProjectionConfiguration {
                 disclosure_policy: authored_definition.disclosure_policy,
                 support_evaluator: authored_definition.support_evaluator,
                 currentness_requirements: authored_definition.currentness_requirements,
+                source_pair_requirements: authored_definition.source_pair_requirements,
                 field_rules: authored_definition.field_rules,
                 derivations: authored_definition.derivations,
             },
@@ -647,7 +660,10 @@ impl ProjectionConfiguration {
             families: vec![CurrentnessFamilyRequirement {
                 selector_id: selector_id.to_owned(),
                 family: family.to_owned(),
-                adapter: adapter.to_owned(),
+                adapter: ExactPair::new(
+                    adapter,
+                    DefinitionFingerprint::from_bytes(adapter.as_bytes()).as_str(),
+                )?,
                 slots: slots.iter().map(|slot| (*slot).to_owned()).collect(),
             }],
         };
@@ -879,6 +895,10 @@ fn validate_definition(definition: &AuthoredDefinition) -> ProjectionResultValue
         &definition.currentness_requirements,
         &definition.source_selectors,
     )?;
+    validate_source_pair_requirements(
+        &definition.source_pair_requirements,
+        &definition.source_selectors,
+    )?;
     require_unique(
         definition
             .source_selectors
@@ -934,12 +954,17 @@ fn validate_definition(definition: &AuthoredDefinition) -> ProjectionResultValue
     for selector in &definition.source_selectors {
         validate_pair(&selector.capability)?;
         validate_pair(&selector.source_schema)?;
+        let is_pair_derived = definition
+            .source_pair_requirements
+            .iter()
+            .any(|requirement| requirement.derived_selector_id == selector.selector_id);
         if selector.cardinality != "exactly_one"
             || selector.configured_kind_ref.is_empty()
-            || !definition
+            || (!definition
                 .support_evaluator
                 .supported_source_kinds
                 .contains(&selector.source_kind)
+                && !is_pair_derived)
         {
             return Err(ProjectionError::new(
                 ProjectionErrorKind::InvalidDefinition,
@@ -957,6 +982,11 @@ fn validate_definition(definition: &AuthoredDefinition) -> ProjectionResultValue
             || !valid_json_pointer(&rule.target_pointer)
             || !classifications.contains(&rule.disclosure_classification)
             || !optional.contains(rule.target_pointer.as_str())
+            || definition
+                .source_selectors
+                .iter()
+                .find(|selector| selector.selector_id == rule.source_selector_id)
+                .is_none_or(|selector| selector.source_kind == "snapshot_delta")
             || definition
                 .target_schema
                 .pointer_types
@@ -1031,13 +1061,23 @@ fn validate_currentness_requirements(
                     .map(|family| family.family.as_str()),
                 "currentness family",
             )?;
+            if requirements
+                .families
+                .windows(2)
+                .any(|pair| pair[0].family >= pair[1].family)
+            {
+                return Err(ProjectionError::new(
+                    ProjectionErrorKind::InvalidCurrentness,
+                    "exact currentness families are not canonically sorted",
+                ));
+            }
             for family in &requirements.families {
                 let selector = selectors
                     .iter()
                     .find(|selector| selector.selector_id == family.selector_id);
-                if family.adapter.is_empty()
-                    || family.slots.is_empty()
+                if validate_pair(&family.adapter).is_err()
                     || selector.is_none_or(|selector| selector.source_kind != "snapshot")
+                    || family.slots.windows(2).any(|pair| pair[0] >= pair[1])
                 {
                     return Err(ProjectionError::new(
                         ProjectionErrorKind::InvalidCurrentness,
@@ -1046,6 +1086,59 @@ fn validate_currentness_requirements(
                 }
                 require_unique(family.slots.iter().map(String::as_str), "currentness slot")?;
             }
+        }
+    }
+    Ok(())
+}
+
+fn validate_source_pair_requirements(
+    requirements: &[SourcePairRequirement],
+    selectors: &[SourceSelector],
+) -> ProjectionResultValue<()> {
+    require_unique(
+        requirements
+            .iter()
+            .map(|requirement| requirement.current_selector_id.as_str()),
+        "source-pair current selector",
+    )?;
+    require_unique(
+        requirements
+            .iter()
+            .map(|requirement| requirement.derived_selector_id.as_str()),
+        "source-pair derived selector",
+    )?;
+    let paired_derived_selectors = requirements
+        .iter()
+        .map(|requirement| requirement.derived_selector_id.as_str())
+        .collect::<BTreeSet<_>>();
+    if selectors.iter().any(|selector| {
+        selector.source_kind == "snapshot_delta"
+            && !paired_derived_selectors.contains(selector.selector_id.as_str())
+    }) {
+        return Err(ProjectionError::new(
+            ProjectionErrorKind::InvalidDefinition,
+            "snapshot-delta selectors require one declared source-pair relation",
+        ));
+    }
+    for requirement in requirements {
+        let current_selector = selectors
+            .iter()
+            .find(|selector| selector.selector_id == requirement.current_selector_id);
+        let derived_selector = selectors
+            .iter()
+            .find(|selector| selector.selector_id == requirement.derived_selector_id);
+        if requirement.current_selector_id.is_empty()
+            || requirement.derived_selector_id.is_empty()
+            || requirement.dependency_role.is_empty()
+            || !requirement.require_state_identity
+            || requirement.current_selector_id == requirement.derived_selector_id
+            || current_selector.is_none_or(|selector| selector.source_kind != "snapshot")
+            || derived_selector.is_none_or(|selector| selector.source_kind != "snapshot_delta")
+        {
+            return Err(ProjectionError::new(
+                ProjectionErrorKind::InvalidDefinition,
+                "source-pair requirement is not an exact selector relation",
+            ));
         }
     }
     Ok(())
@@ -1236,36 +1329,49 @@ fn validate_trusted_semantic_dependencies(
         &definition.disclosure_policy.matcher_definition,
         "disclosure matcher",
     )?;
-    let policy_rules = serde_json::to_value(&definition.disclosure_policy.rules).map_err(|_| {
-        ProjectionError::new(
-            ProjectionErrorKind::StaleBinding,
-            "disclosure policy rules cannot be normalized",
-        )
-    })?;
-    let trusted_policy_rules = json!([
+    let trusted_policy_rule_shapes = json!([
         {
             "action": "allow",
             "disclosure_classifications": ["public"],
             "rule_id": "public_allow",
-            "source_kinds": ["semantic_record", "snapshot"],
             "source_pointer_selector": "*",
         },
         {
             "action": "allow",
             "disclosure_classifications": ["internal"],
             "rule_id": "internal_allow",
-            "source_kinds": ["semantic_record", "snapshot"],
             "source_pointer_selector": "*",
         },
         {
             "action": "redact",
             "disclosure_classifications": ["sensitive", "secret"],
             "rule_id": "sensitive_redact",
-            "source_kinds": ["semantic_record", "snapshot"],
             "source_pointer_selector": "*",
         },
     ]);
-    if policy_rules != trusted_policy_rules {
+    let policy_rule_shapes = Value::Array(
+        definition
+            .disclosure_policy
+            .rules
+            .iter()
+            .map(|rule| {
+                json!({
+                    "action": match rule.action { PolicyAction::Allow => "allow", PolicyAction::Redact => "redact" },
+                    "disclosure_classifications": rule.disclosure_classifications,
+                    "rule_id": rule.rule_id,
+                    "source_pointer_selector": rule.source_pointer_selector,
+                })
+            })
+            .collect(),
+    );
+    let allowed_policy_source_kinds = ["semantic_record".to_owned(), "snapshot".to_owned()];
+    if !definition
+        .disclosure_policy
+        .rules
+        .iter()
+        .all(|rule| rule.source_kinds == allowed_policy_source_kinds)
+        || policy_rule_shapes != trusted_policy_rule_shapes
+    {
         return Err(ProjectionError::new(
             ProjectionErrorKind::StaleBinding,
             "disclosure policy rules drift from the bounded private definition",
@@ -1459,6 +1565,7 @@ fn fingerprint_validated_definition(
         "projection_definition_id": definition.exact_pair.reference.split('@').next().unwrap_or_default(),
         "projection_definition_version": definition.exact_pair.reference.split('@').nth(1).unwrap_or_default(),
         "source_selectors": definition.source_selectors.iter().map(source_selector_value).collect::<Vec<_>>(),
+        "source_pair_requirements": definition.source_pair_requirements,
         "support_evaluator": definition.support_evaluator,
         "target_schema": definition.target_schema,
     });
@@ -1535,10 +1642,11 @@ fn field_rule_value(rule: &FieldRule) -> Value {
 
 #[derive(Clone, Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
-struct SourceDocument {
+struct RawSourceDocument {
     authority_class: String,
     capability: ExactPair,
-    captured_revisions: CapturedRevisions,
+    captured_revisions: Option<CapturedRevision>,
+    captured_family_revisions: Option<Vec<CapturedRevision>>,
     configured_kind_ref: String,
     declared_pointers: BTreeMap<String, String>,
     payload_jcs: String,
@@ -1546,16 +1654,44 @@ struct SourceDocument {
     reference: String,
     schema: ExactPair,
     source_kind: String,
+    #[serde(default)]
+    source_dependencies: Vec<SourceDependency>,
+    #[serde(default)]
+    state_fingerprint: Option<String>,
     upstream_redactions: Vec<UpstreamRedaction>,
 }
 
 #[derive(Clone, Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
-struct CapturedRevisions {
+struct CapturedRevision {
     family: String,
-    adapter: String,
+    adapter: ExactPair,
     family_revision: String,
     slots: BTreeMap<String, String>,
+}
+
+#[derive(Clone, Debug)]
+struct SourceDocument {
+    authority_class: String,
+    capability: ExactPair,
+    captured_family_revisions: Vec<CapturedRevision>,
+    configured_kind_ref: String,
+    declared_pointers: BTreeMap<String, String>,
+    payload_jcs: String,
+    reference: String,
+    schema: ExactPair,
+    source_kind: String,
+    source_dependencies: Vec<SourceDependency>,
+    state_fingerprint: Option<String>,
+    upstream_redactions: Vec<UpstreamRedaction>,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct SourceDependency {
+    role: String,
+    source: ExactPair,
+    state_fingerprint: String,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -1578,12 +1714,29 @@ struct ProjectionSource {
 impl ProjectionSource {
     fn load(bytes: &[u8]) -> ProjectionResultValue<Self> {
         let value = strict_jcs(bytes, "Projection source")?;
-        let document: SourceDocument = serde_json::from_value(value).map_err(|error| {
+        let raw: RawSourceDocument = serde_json::from_value(value).map_err(|error| {
             ProjectionError::new(
                 ProjectionErrorKind::InvalidDefinition,
                 format!("Projection source envelope is not exact: {error}"),
             )
         })?;
+        let document = SourceDocument {
+            authority_class: raw.authority_class,
+            capability: raw.capability,
+            captured_family_revisions: normalize_captured_family_revisions(
+                raw.captured_revisions,
+                raw.captured_family_revisions,
+            )?,
+            configured_kind_ref: raw.configured_kind_ref,
+            declared_pointers: raw.declared_pointers,
+            payload_jcs: raw.payload_jcs,
+            reference: raw.reference,
+            schema: raw.schema,
+            source_kind: raw.source_kind,
+            source_dependencies: raw.source_dependencies,
+            state_fingerprint: raw.state_fingerprint,
+            upstream_redactions: raw.upstream_redactions,
+        };
         if document.reference.is_empty()
             || document.authority_class.is_empty()
             || document.configured_kind_ref.is_empty()
@@ -1595,6 +1748,34 @@ impl ProjectionSource {
                 "Projection source metadata closure is incomplete",
             ));
         }
+        if document
+            .state_fingerprint
+            .as_deref()
+            .is_some_and(|fingerprint| DefinitionFingerprint::parse(fingerprint).is_err())
+        {
+            return Err(ProjectionError::new(
+                ProjectionErrorKind::InvalidDefinition,
+                "source state fingerprint is invalid",
+            ));
+        }
+        for dependency in &document.source_dependencies {
+            if dependency.role.is_empty()
+                || DefinitionFingerprint::parse(&dependency.state_fingerprint).is_err()
+                || validate_pair(&dependency.source).is_err()
+            {
+                return Err(ProjectionError::new(
+                    ProjectionErrorKind::InvalidDefinition,
+                    "source dependency closure is invalid",
+                ));
+            }
+        }
+        require_unique(
+            document
+                .source_dependencies
+                .iter()
+                .map(|dependency| dependency.role.as_str()),
+            "source dependency role",
+        )?;
         let fingerprint = DefinitionFingerprint::from_bytes(bytes).to_string();
         let exact_pair = ExactPair::new(&document.reference, &fingerprint)?;
         Ok(Self {
@@ -1625,6 +1806,43 @@ impl ProjectionSource {
         )?;
         Ok(payload.pointer(pointer).cloned())
     }
+}
+
+fn normalize_captured_family_revisions(
+    legacy: Option<CapturedRevision>,
+    multi_family: Option<Vec<CapturedRevision>>,
+) -> ProjectionResultValue<Vec<CapturedRevision>> {
+    let (captured, requires_sorted_input) = match (legacy, multi_family) {
+        (Some(legacy), None) => (vec![legacy], false),
+        (None, Some(multi_family)) => (multi_family, true),
+        _ => {
+            return Err(ProjectionError::new(
+                ProjectionErrorKind::InvalidDefinition,
+                "source captured revisions must use exactly one legacy or multi-family form",
+            ));
+        }
+    };
+    if captured.is_empty()
+        || captured.iter().any(|revision| {
+            revision.family.is_empty()
+                || revision.family_revision.is_empty()
+                || revision
+                    .slots
+                    .iter()
+                    .any(|(slot, value)| slot.is_empty() || value.is_empty())
+                || validate_pair(&revision.adapter).is_err()
+        })
+        || (requires_sorted_input
+            && captured
+                .windows(2)
+                .any(|pair| pair[0].family >= pair[1].family))
+    {
+        return Err(ProjectionError::new(
+            ProjectionErrorKind::InvalidDefinition,
+            "source captured-family closure is malformed, unsorted, or duplicate",
+        ));
+    }
+    Ok(captured)
 }
 
 trait ProjectionAuthorityAccess {
@@ -1666,6 +1884,7 @@ impl ProjectionAuthorityAccess for ProjectionAuthorityView {
 struct ProjectionSourceSelection {
     selector_id: String,
     exact_pair: ExactPair,
+    state_fingerprint: Option<String>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
@@ -1685,24 +1904,27 @@ impl ProjectionCurrentnessRequest {
     }
 
     fn captured(source: &ProjectionSource, selector_id: &str) -> ProjectionResultValue<Self> {
-        let captured = &source.document.captured_revisions;
+        let captured = &source.document.captured_family_revisions;
         Ok(Self {
             mode: CurrentnessMode::ExactRevisionCheck,
             revision_basis: Some("captured_revision".to_owned()),
-            expected_family_revisions: vec![ExpectedFamilyRevision {
-                selector_id: selector_id.to_owned(),
-                family: captured.family.clone(),
-                adapter: captured.adapter.clone(),
-                family_revision: captured.family_revision.clone(),
-                slots: captured
-                    .slots
-                    .iter()
-                    .map(|(slot, revision)| RevisionSlot {
-                        slot: slot.clone(),
-                        revision: revision.clone(),
-                    })
-                    .collect(),
-            }],
+            expected_family_revisions: captured
+                .iter()
+                .map(|captured| ExpectedFamilyRevision {
+                    selector_id: selector_id.to_owned(),
+                    family: captured.family.clone(),
+                    adapter: captured.adapter.clone(),
+                    family_revision: captured.family_revision.clone(),
+                    slots: captured
+                        .slots
+                        .iter()
+                        .map(|(slot, revision)| RevisionSlot {
+                            slot: slot.clone(),
+                            revision: revision.clone(),
+                        })
+                        .collect(),
+                })
+                .collect(),
         })
     }
 }
@@ -1711,7 +1933,7 @@ impl ProjectionCurrentnessRequest {
 struct ExpectedFamilyRevision {
     selector_id: String,
     family: String,
-    adapter: String,
+    adapter: ExactPair,
     family_revision: String,
     slots: Vec<RevisionSlot>,
 }
@@ -1947,11 +2169,13 @@ struct CurrentnessValidation {
 struct CurrentnessCheck {
     selector_id: String,
     family: String,
-    adapter: String,
-    slot: Option<String>,
+    adapter: ExactPair,
     expected_revision: String,
     captured_revision: String,
     observed_revision: String,
+    expected_slots: BTreeMap<String, String>,
+    captured_slots: BTreeMap<String, String>,
+    observed_slots: BTreeMap<String, String>,
     passed: bool,
 }
 
@@ -1960,7 +2184,7 @@ struct LiveCurrentnessQuery {
     selector_id: String,
     source: ExactPair,
     family: String,
-    adapter: String,
+    adapter: ExactPair,
     slots: Vec<String>,
 }
 
@@ -1969,7 +2193,7 @@ struct LiveCurrentnessObservation {
     selector_id: String,
     source: ExactPair,
     family: String,
-    adapter: String,
+    adapter: ExactPair,
     family_revision: String,
     slots: BTreeMap<String, String>,
 }
@@ -2070,6 +2294,7 @@ where
 {
     validate_request(configuration, authority, request)?;
     let selected = bind_sources(configuration, request, sources)?;
+    validate_selected_source_pair_relations(configuration, request, &selected)?;
     validate_selected_source_semantics(configuration, &selected)?;
     let currentness_validation =
         validate_request_currentness(configuration, request, &selected, observe_live)?;
@@ -2334,6 +2559,16 @@ fn bind_sources<'a>(
                 "source configured-kind capability or schema pair is stale",
             ));
         }
+        if let Some(state_fingerprint) = &request_matches[0].state_fingerprint {
+            if DefinitionFingerprint::parse(state_fingerprint).is_err()
+                || source.document.state_fingerprint.as_deref() != Some(state_fingerprint)
+            {
+                return Err(ProjectionError::new(
+                    ProjectionErrorKind::StaleBinding,
+                    "selected source state identity is stale",
+                ));
+            }
+        }
         selected.insert(selector.selector_id.clone(), source);
     }
     if request.sources.len() != selected.len() || sources.len() != selected.len() {
@@ -2343,6 +2578,57 @@ fn bind_sources<'a>(
         ));
     }
     Ok(selected)
+}
+
+fn validate_selected_source_pair_relations(
+    configuration: &ProjectionConfiguration,
+    request: &ProjectionRequest,
+    selected: &BTreeMap<String, &ProjectionSource>,
+) -> ProjectionResultValue<()> {
+    for requirement in &configuration.definition.source_pair_requirements {
+        let current = selected
+            .get(requirement.current_selector_id.as_str())
+            .expect("validated source-pair current selector");
+        let derived = selected
+            .get(requirement.derived_selector_id.as_str())
+            .expect("validated source-pair derived selector");
+        let current_selection = request
+            .sources
+            .iter()
+            .find(|selection| selection.selector_id == requirement.current_selector_id)
+            .expect("validated source-pair current request selection");
+        if current.document.state_fingerprint.is_none()
+            || current_selection.state_fingerprint != current.document.state_fingerprint
+        {
+            return Err(ProjectionError::new(
+                ProjectionErrorKind::StaleBinding,
+                "source-pair current state identity is absent or stale",
+            ));
+        }
+        let dependencies = derived
+            .document
+            .source_dependencies
+            .iter()
+            .filter(|dependency| dependency.role == requirement.dependency_role)
+            .collect::<Vec<_>>();
+        if dependencies.len() != 1 {
+            return Err(ProjectionError::new(
+                ProjectionErrorKind::Cardinality,
+                "source-pair dependency role cardinality is not exactly one",
+            ));
+        }
+        let dependency = dependencies[0];
+        if dependency.source != current.exact_pair
+            || current.document.state_fingerprint.as_deref()
+                != Some(dependency.state_fingerprint.as_str())
+        {
+            return Err(ProjectionError::new(
+                ProjectionErrorKind::StaleBinding,
+                "source-pair dependency does not bind the selected current source identity",
+            ));
+        }
+    }
+    Ok(())
 }
 
 fn validate_selected_source_semantics(
@@ -2418,6 +2704,21 @@ where
                     "captured currentness family cardinality is not exact",
                 ));
             }
+            for (selector_id, source) in selected {
+                let requirement_count = requirements
+                    .families
+                    .iter()
+                    .filter(|requirement| requirement.selector_id == *selector_id)
+                    .count();
+                if requirement_count > 0
+                    && source.document.captured_family_revisions.len() != requirement_count
+                {
+                    return Err(ProjectionError::new(
+                        ProjectionErrorKind::InvalidCurrentness,
+                        "selected source captured-family closure is incomplete or contains an extra family",
+                    ));
+                }
+            }
             let mut checks = Vec::new();
             for requirement in &requirements.families {
                 let expected = request
@@ -2439,7 +2740,17 @@ where
                             "captured currentness selector is absent",
                         )
                     })?;
-                let captured = &source.document.captured_revisions;
+                let captured = source
+                    .document
+                    .captured_family_revisions
+                    .iter()
+                    .find(|captured| captured.family == requirement.family)
+                    .ok_or_else(|| {
+                        ProjectionError::new(
+                            ProjectionErrorKind::InvalidCurrentness,
+                            "source captured currentness family is absent",
+                        )
+                    })?;
                 if expected.selector_id != requirement.selector_id
                     || expected.family != requirement.family
                     || expected.adapter != requirement.adapter
@@ -2447,6 +2758,7 @@ where
                     || captured.adapter != requirement.adapter
                     || expected.family_revision != captured.family_revision
                     || expected.slots.len() != requirement.slots.len()
+                    || captured.slots.len() != requirement.slots.len()
                 {
                     return Err(ProjectionError::new(
                         ProjectionErrorKind::InvalidCurrentness,
@@ -2473,20 +2785,10 @@ where
                         "independent live family observation does not equal the bound captured tuple",
                     ));
                 }
-                checks.push(CurrentnessCheck {
-                    selector_id: requirement.selector_id.clone(),
-                    family: requirement.family.clone(),
-                    adapter: requirement.adapter.clone(),
-                    slot: None,
-                    expected_revision: expected.family_revision.clone(),
-                    captured_revision: captured.family_revision.clone(),
-                    observed_revision: live.family_revision.clone(),
-                    passed: true,
-                });
                 let expected_slots = expected
                     .slots
                     .iter()
-                    .map(|slot| (slot.slot.as_str(), slot.revision.as_str()))
+                    .map(|slot| (slot.slot.clone(), slot.revision.clone()))
                     .collect::<BTreeMap<_, _>>();
                 for slot in &requirement.slots {
                     let expected_revision = expected_slots.get(slot.as_str()).ok_or_else(|| {
@@ -2501,7 +2803,7 @@ where
                             "source captured currentness slot is absent",
                         )
                     })?;
-                    if *expected_revision != captured_revision {
+                    if expected_revision != captured_revision {
                         return Err(ProjectionError::new(
                             ProjectionErrorKind::InvalidCurrentness,
                             "captured currentness slot value is stale",
@@ -2513,7 +2815,7 @@ where
                             "independent live currentness slot is absent",
                         )
                     })?;
-                    if observed_revision != *expected_revision
+                    if observed_revision != expected_revision
                         || observed_revision != captured_revision
                     {
                         return Err(ProjectionError::new(
@@ -2521,17 +2823,19 @@ where
                             "independent live slot observation does not equal the bound captured tuple",
                         ));
                     }
-                    checks.push(CurrentnessCheck {
-                        selector_id: requirement.selector_id.clone(),
-                        family: requirement.family.clone(),
-                        adapter: requirement.adapter.clone(),
-                        slot: Some(slot.clone()),
-                        expected_revision: (*expected_revision).to_owned(),
-                        captured_revision: captured_revision.clone(),
-                        observed_revision: observed_revision.clone(),
-                        passed: true,
-                    });
                 }
+                checks.push(CurrentnessCheck {
+                    selector_id: requirement.selector_id.clone(),
+                    family: requirement.family.clone(),
+                    adapter: requirement.adapter.clone(),
+                    expected_revision: expected.family_revision.clone(),
+                    captured_revision: captured.family_revision.clone(),
+                    observed_revision: live.family_revision.clone(),
+                    expected_slots,
+                    captured_slots: captured.slots.clone(),
+                    observed_slots: live.slots.clone(),
+                    passed: true,
+                });
             }
             Ok(CurrentnessValidation {
                 mode: CurrentnessMode::ExactRevisionCheck,
