@@ -1,0 +1,258 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260806T020500Z--HCM-3-4--snapshot-memory-planning-closure",
+  "created_at_utc": "2026-08-06T02:05:00Z",
+  "source_handoff_ids": [
+    "20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction"
+  ],
+  "parent_orchestration_id": "20260806T015055Z--HCM-3-4--snapshot-memory-planning",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-P1-snapshot-memory-planning-causal-review",
+  "subject_fingerprint": "sha256:36305fa8709d0bb7abec62acaecc7eae9c8c6ec47df3366dcb60014b444b29ba",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.4-snapshot-memory-planning-closure",
+    "trigger_run_ids": [
+      "/root/hcm34_planning_discovery"
+    ],
+    "finding_refs": [
+      "HCM34-PLAN-DISC-001",
+      "HCM34-PLAN-DISC-002"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T01:50:55Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.4-snapshot-memory-planning",
+        "packet_ids": [
+          "HCM-3.4-P1-snapshot-memory-planning-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T015055Z--snapshot-memory-planning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:92341be0eef761c4fb6d905fa17bfed66370bde8a18f293039948ec8b7c54932"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:50c1b7f6c0004618ad6e581178a9958f7bc3e327a386ff36c52497f971537425",
+    "integrated_outcome_id": "hcm-3.4-snapshot-memory-planning",
+    "outcome_registry_fingerprint": "sha256:92341be0eef761c4fb6d905fa17bfed66370bde8a18f293039948ec8b7c54932",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260806T015500Z--HCM-3-4--snapshot-memory-planning-discovery"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.4-snapshot-memory-planning-closure-convergence",
+    "completed_at_utc": "2026-08-06T02:04:32Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Replay HCM34-PLAN-DISC-001 and HCM34-PLAN-DISC-002 against the repaired selector, specification, plan, task ledger, preflight, and remediation proof under unchanged HCM-3.4 planning authority.",
+        "evidence_ref": "Both valid discovery P2s have one consolidated documentary repair: private generic Projection proof without adoption and unknown/unclassifiable-surface omission before persistence. No product scope entered the packet."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inventory all six repaired planning-subject files and the named HCM-3.3 generic Projection and HCM-3.5 adoption seams.",
+        "evidence_ref": "The repaired subject contains only selector/specification/plan/task/preflight/remediation documentation. No source, test, fixture, schema, profile, public API, dependency, workflow, runtime configuration, Handoff, packet, pipeline, consumer, SDK, CLI, or transport path is selected."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the ordinal-sorted repo-path-NUL-SHA256-newline-v1 repaired-subject manifest plus the frozen canonical-json outcome registry and derived causal budget.",
+        "evidence_ref": "Subject sha256:36305fa8709d0bb7abec62acaecc7eae9c8c6ec47df3366dcb60014b444b29ba after two mechanical EOF-whitespace corrections that did not alter reviewed planning semantics; registry sha256:92341be0eef761c4fb6d905fa17bfed66370bde8a18f293039948ec8b7c54932; budget sha256:50c1b7f6c0004618ad6e581178a9958f7bc3e327a386ff36c52497f971537425."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Strict UTF-8 decode and Markdown fence-balance scan for every repaired subject file.",
+        "evidence_ref": "All six manifest files decode as UTF-8, have balanced Markdown fences, and have no trailing spaces or tabs."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Run git diff --check against the assigned checkout before creating the closure dispatch.",
+        "evidence_ref": "git diff --check exited 0 before this closure dispatch was created."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+        "sha256": "4a0ab7b3724394d084a70894fe72f6ce7c95a77ff5038cb22b586052e07fa147"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T015055Z--snapshot-memory-planning-selector.md",
+        "sha256": "ccf9d486c17e453267d6f6272abfff6874b67030904170c89aa3d3c79e827605"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T015055Z--planning-preflight-and-authority.md",
+        "sha256": "3327ad7fb51fe90154a396d3f173eb331f141b10227d5b463bf891985d9149c5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T020000Z--planning-discovery-remediation.md",
+        "sha256": "a6c9e94523131bced8b9c6390490090f1457932fb2b7e8f5a5d6fa25900803fc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+        "sha256": "c099a21b4332c6dee698b401e3e55cb83f23e25426b034825b69a0a07ed15ea5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/todo.md",
+        "sha256": "1992c4669865fc02439250279088c04994ff9725c3c5e754852bcaff7f3b792b"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:36305fa8709d0bb7abec62acaecc7eae9c8c6ec47df3366dcb60014b444b29ba"
+  },
+  "active_resolution": {
+    "level": "HCM-3.4 Snapshot Memory planning delta closure",
+    "scope_horizon": "one HCM-3.4 planning-only selector and implementation plan",
+    "detail_resolution": "only HCM34-PLAN-DISC-001 private generic Projection proof and HCM34-PLAN-DISC-002 unknown/unclassifiable-surface fail-closed redaction proof",
+    "temporal_horizon": "planning closure before any HCM-3.4 implementation selection",
+    "authority_horizon": "HCM-3.4 planning only; no code, schema, API, dependency, configuration, HCM-3.5+, remote publication, or push",
+    "memory_horizon": "the discovery result, parent-owned remediation proof, completed HCM-3.3 generic Projection predecessor, and unchanged frozen outcome registry",
+    "validation_horizon": "different-fresh closure of the two repaired P2s plus two-commit local-only closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T015055Z--snapshot-memory-planning-selector.md",
+      "sections": [
+        "entire decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+      "sections": [
+        "API and data-model boundary",
+        "Integration and compatibility posture",
+        "Future implementation proof and regression strategy"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "sections": [
+        "Future implementation packets",
+        "Verification checkpoints",
+        "Non-goals and human review gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.4 — Snapshot Memory and deterministic delta engine",
+        "HCM-3.5 — Resolution-aware snapshot, packet, and pipeline adoption"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Snapshot capture policy",
+        "Context Memory Snapshot",
+        "Snapshot delta",
+        "Snapshot redaction and retention"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-SNAP-01 through PG-SNAP-06",
+        "Regression rules 44 and 45"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json",
+      "sections": [
+        "entire completed handoff",
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery found two valid planning-only P2 gaps. The parent repaired them without changing phase, slice, packet, outcome registry, HCM-3.3 source handoff, no-code scope, or integration ref. The repaired six-file subject remains documentation-only; all PG-SNAP gates remain future implementation gates and no HCM-3.5 adoption claim is made.",
+  "allowed_scope": [
+    "Perform one different-fresh delta-focused read-only closure of the exact six-file repaired planning subject and only HCM34-PLAN-DISC-001 and HCM34-PLAN-DISC-002.",
+    "Verify that private HCM-3.4 generic Projection proof remains through the existing contract with exact sources, typed disclosure or omission, complete accounting, captured-revision currentness, pointer identity, hidden-data and stale refusal, and authority_effect none without HCM-3.5 consumer adoption.",
+    "Verify that an unknown or unclassifiable capture surface is explicitly omitted before persistence and cannot degrade into a non-omit action or retained data; report only a trigger still unresolved or a directly caused/unmasked P1/P2."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery; do not edit, format, stage, unstage, commit, delegate, run product tests, or write a handoff or ledger.",
+    "Do not implement or test Snapshot Memory behavior or select code paths/symbols, schemas, public APIs, dependencies, workflow/runtime configuration, HCM-3.5+, HCM-3.3 amendments, protected checkouts, local integration ref, or remote state.",
+    "Do not query a remote, fetch, push, publish, merge, rebase, reset, or clean."
+  ],
+  "tasks": [
+    "Return findings first only if either named P2 remains incomplete or this remediation directly caused or unmasked a P1/P2 inside unchanged planning authority and no-code scope.",
+    "Verify the private existing-generic-Projection boundary and the unknown/unclassifiable-surface omission-before-persistence negative using the exact repaired specification and future proof matrix.",
+    "Return CLEAN only if both trigger findings are fully closed and no directly caused or unmasked P1/P2 remains for sha256:36305fa8709d0bb7abec62acaecc7eae9c8c6ec47df3366dcb60014b444b29ba."
+  ],
+  "contracts_and_gates": [
+    "This is the one different-fresh planning closure for the frozen outcome registry. No review cycle may follow a CLEAN verdict.",
+    "P1/P2 cannot be waived or deferred. A new finding may consume a supplemental causal cycle only when directly caused or unmasked by this remediation; P3/P4 remain non-blocking only under the review inventory rules.",
+    "This closure cannot authorize implementation, gate closure, HCM-3.5 consumer adoption, public APIs, dependencies, remote interaction, or any scope expansion."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS if a trigger remains or remediation directly caused/unmasked a P1/P2; do not repair it.",
+    "Return BLOCKED if closure requires broader authority, a canonical semantic amendment, code/test/fixture scope, schema/template/tooling scope, a sibling slice, remote interaction, or unavailable mandatory evidence.",
+    "Report any manifest, causal-cadence, protected-boundary, or authority issue to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

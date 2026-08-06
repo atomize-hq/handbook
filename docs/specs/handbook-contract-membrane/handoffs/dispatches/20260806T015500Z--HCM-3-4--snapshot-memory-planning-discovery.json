@@ -1,0 +1,264 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260806T015500Z--HCM-3-4--snapshot-memory-planning-discovery",
+  "created_at_utc": "2026-08-06T01:55:00Z",
+  "source_handoff_ids": [
+    "20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction"
+  ],
+  "parent_orchestration_id": "20260806T015055Z--HCM-3-4--snapshot-memory-planning",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-P1-snapshot-memory-planning-causal-review",
+  "subject_fingerprint": "sha256:1485b0de01a9f03e523f158b6ee99846e389019f545c32c8e283fcb429baba7c",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.4-snapshot-memory-planning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T01:50:55Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.4-snapshot-memory-planning",
+        "packet_ids": [
+          "HCM-3.4-P1-snapshot-memory-planning-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T015055Z--snapshot-memory-planning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:92341be0eef761c4fb6d905fa17bfed66370bde8a18f293039948ec8b7c54932"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:50c1b7f6c0004618ad6e581178a9958f7bc3e327a386ff36c52497f971537425",
+    "integrated_outcome_id": "hcm-3.4-snapshot-memory-planning",
+    "outcome_registry_fingerprint": "sha256:92341be0eef761c4fb6d905fa17bfed66370bde8a18f293039948ec8b7c54932",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.4-snapshot-memory-planning-discovery-convergence",
+    "completed_at_utc": "2026-08-06T01:54:32Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the HCM-3.4 phase-map row, completed HCM-3.3 handoff, Snapshot Memory architecture/semantic/contract sections, PG-SNAP gates, live 07/08/09 protocol, and all five planning files.",
+        "evidence_ref": "The bounded candidate is documentation-only. No source, test, fixture, schema, profile, public API, dependency, workflow, runtime configuration, consumer, or transport path is in the subject."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inventory every HCM-3.4 selector/spec/plan/todo/preflight file and the named HCM-3.2, HCM-3.3, HCM-3.5, and HCM-3.6 seams.",
+        "evidence_ref": "The subject contains exactly five HCM-3.4 planning files. Snapshot implementation and HCM-3.5/HCM-3.6 adoption are context-only non-goals."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 subject manifest plus the canonical-json outcome registry and derived causal budget.",
+        "evidence_ref": "Subject sha256:1485b0de01a9f03e523f158b6ee99846e389019f545c32c8e283fcb429baba7c; registry sha256:92341be0eef761c4fb6d905fa17bfed66370bde8a18f293039948ec8b7c54932; budget sha256:50c1b7f6c0004618ad6e581178a9958f7bc3e327a386ff36c52497f971537425."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Strict UTF-8 decode and Markdown fence-balance scan for every manifest file.",
+        "evidence_ref": "All five manifest files decode as UTF-8; the plan's two Markdown fences balance and all other files have none."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Check each manifest file for trailing spaces/tabs and run git diff --check.",
+        "evidence_ref": "No manifest entry has trailing whitespace and git diff --check exited 0."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+        "sha256": "8e735a38a65694ec5513e005afccbe2b108db6d68bffd0575595fc546bf8ecf6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T015055Z--snapshot-memory-planning-selector.md",
+        "sha256": "74285a624ade46692e68412fd78f44f8657cacd7167d2c9d80e4ff964ab0351d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T015055Z--planning-preflight-and-authority.md",
+        "sha256": "e29249d30dbc8bed08ac5320f06e884187ac0902c84a9f706878887945c3ff56"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+        "sha256": "cedbd45f975e732377d89c4608c2c4a0591903d3fbdedbfc3f01c8c5bc4b26c0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/todo.md",
+        "sha256": "30f4f031e456fb485c7e63fd40bf79ec519c598c101e1e7855825311740acd42"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:1485b0de01a9f03e523f158b6ee99846e389019f545c32c8e283fcb429baba7c"
+  },
+  "active_resolution": {
+    "level": "HCM-3.4 Snapshot Memory planning discovery",
+    "scope_horizon": "one HCM-3.4 planning-only selector and implementation plan",
+    "detail_resolution": "capture policy, immutable snapshots, consistency, fingerprints, deltas, drift, redaction, retention, deduplication, and paired workflow",
+    "temporal_horizon": "planning stage before any HCM-3.4 implementation selection",
+    "authority_horizon": "HCM-3.4 planning only; no code, schema, API, dependency, configuration, HCM-3.5+, remote publication, or push",
+    "memory_horizon": "completed HCM-3.2 and HCM-3.3 records, exact local base/tree, and this frozen planning outcome registry",
+    "validation_horizon": "different-fresh planning closure plus two-commit local-only closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T015055Z--snapshot-memory-planning-selector.md",
+      "sections": [
+        "entire decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+      "sections": [
+        "entire planning specification"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "sections": [
+        "entire future implementation plan"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.4 — Snapshot Memory and deterministic delta engine",
+        "HCM-3.5 — Resolution-aware snapshot, packet, and pipeline adoption"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Snapshot Memory posture",
+        "Non-negotiable invariants"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Snapshot Memory",
+        "Paired top-level orchestration snapshots",
+        "Capture consistency",
+        "Snapshot deltas",
+        "Drift semantics",
+        "Security, redaction, and retention"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Snapshot capture policy",
+        "Context Memory Snapshot",
+        "Snapshot delta",
+        "Snapshot redaction and retention"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-SNAP-01 through PG-SNAP-06",
+        "Regression rules 44 and 45"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json",
+      "sections": [
+        "entire completed handoff",
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "The assigned checkout and dedicated local integration ref are clean at 0ca422c6a0150c9f79348eafcaba37b97435b76d/tree 2106c81c51aebee9d1b171b51e82a11405c072ca. HCM-3.3 is a completed immutable predecessor. All PG-SNAP gates remain open. The candidate subject contains only planning documentation and proof; no product behavior is implemented or tested.",
+  "allowed_scope": [
+    "Review the exact five-file HCM-3.4 planning subject read-only for authority, semantic completeness, determinism, privacy, compatibility, scope, reviewability, and future proofability.",
+    "Independently test the candidate decision against canonical Snapshot Memory contracts: policy closure, family coverage, stable/bounded/unstable derivation, separate fingerprints, delta compatibility, catalog-complete signal mapping, redaction/retention, deduplication, paired workflow, and non-authority.",
+    "Return unique HCM34-PLAN-DISC identifiers only for gaps in this planning subject; do not repair any finding."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff or ledger, delegate, or run product tests.",
+    "Do not implement or test Snapshot Memory behavior or select code paths/symbols, schemas, public APIs, dependencies, workflow/runtime configuration, HCM-3.5+, HCM-3.3 amendments, protected checkouts, local integration ref, or remote state.",
+    "Do not query a remote, fetch, push, publish, merge, rebase, reset, or clean."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit, with exact file/section, violated authority or gate, why the plan/proof is wrong, smallest valid remediation, and missing verification.",
+    "Check that no policy, snapshot, delta, signal, redaction, retention, deduplication, or paired-workflow rule creates ambient discovery, model interpretation, source mutation, authority promotion, hidden sensitive reads, bare identity, non-deterministic ordering, or HCM-3.5 adoption.",
+    "Check that the planned proof matrix can establish only the exact open PG-SNAP boundary and does not claim PG-HANDOFF-02, public API, Phase-3 exit, HCM-3.5 adoption, or implementation completion.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:1485b0de01a9f03e523f158b6ee99846e389019f545c32c8e283fcb429baba7c."
+  ],
+  "contracts_and_gates": [
+    "This is one complete-subject planning discovery review under the frozen outcome registry. A valid P1/P2 receives one consolidated remediation and a different-fresh delta closure; no review follows CLEAN.",
+    "P1/P2 cannot be waived or deferred. P3/P4 may be inventoried only under the live review inventory rules.",
+    "The packet must remain documentation-only and must not create an implementation or adoption claim."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair if the selector/specification/plan is ambiguous, contradictory, incomplete, untestable, unsafe, overbroad, or under-specified for canonical Snapshot Memory contracts.",
+    "Return BLOCKED if validation requires a code/test/fixture change, a canonical semantic amendment, a new dependency/public API/schema/template/tooling scope, a sibling slice, remote interaction, or unavailable mandatory review capability.",
+    "Report any manifest, causal-cadence, protected-boundary, or authority issue to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
