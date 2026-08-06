@@ -1,0 +1,454 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260806T022000Z--HCM-3-4--orchestration--snapshot-memory-planning-protected-checkout-stop",
+  "created_at_utc": "2026-08-06T02:20:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-P1-snapshot-memory-planning-causal-review",
+  "orchestration_id": "20260806T015055Z--HCM-3-4--snapshot-memory-planning",
+  "source_handoff_ids": [
+    "20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fd4b2-f71b-7e81-8c24-52bcd6fb96b5"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-06T02:05:00Z",
+    "evidence_ref": "built-in subagent spawn/wait capability used for discovery and different-fresh closure"
+  },
+  "delegated_runs": [
+    {
+      "run_id": "/root/hcm34_planning_discovery",
+      "dispatch_id": "20260806T015500Z--HCM-3-4--snapshot-memory-planning-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T015500Z--HCM-3-4--snapshot-memory-planning-discovery.json",
+      "dispatch_fingerprint": "sha256:abf5ad8ff22b0ddb2961f8c64b157b7d3015b4d7b4e7b6a38d5b5d84c44abb26",
+      "role": "review",
+      "agent_id": "/root/hcm34_planning_discovery",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:1485b0de01a9f03e523f158b6ee99846e389019f545c32c8e283fcb429baba7c",
+      "result_subject_fingerprint": "sha256:1485b0de01a9f03e523f158b6ee99846e389019f545c32c8e283fcb429baba7c",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM34-PLAN-DISC-001",
+        "HCM34-PLAN-DISC-002"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T015500Z--HCM-3-4--snapshot-memory-planning-discovery.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T020000Z--planning-discovery-remediation.md"
+      ]
+    },
+    {
+      "run_id": "/root/hcm34_planning_closure",
+      "dispatch_id": "20260806T020500Z--HCM-3-4--snapshot-memory-planning-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T020500Z--HCM-3-4--snapshot-memory-planning-closure.json",
+      "dispatch_fingerprint": "sha256:a338cd72ae6ecd5c07217a2cc0dee1e69f9bcef421e11d74547ddbe9471403d1",
+      "role": "review",
+      "agent_id": "/root/hcm34_planning_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:36305fa8709d0bb7abec62acaecc7eae9c8c6ec47df3366dcb60014b444b29ba",
+      "result_subject_fingerprint": "sha256:36305fa8709d0bb7abec62acaecc7eae9c8c6ec47df3366dcb60014b444b29ba",
+      "review_round": 2,
+      "predecessor_run_id": "/root/hcm34_planning_discovery",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T020500Z--HCM-3-4--snapshot-memory-planning-closure.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T020000Z--planning-discovery-remediation.md"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-06T02:20:00Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:50c1b7f6c0004618ad6e581178a9958f7bc3e327a386ff36c52497f971537425"
+    ],
+    "aggregate_fingerprint": "sha256:223180639f92cc0b68226a089a7314f28a2f44ce0c6d2aed20427e35b6030383"
+  },
+  "remediations": [
+    {
+      "remediation_id": "hcm-3.4-snapshot-memory-planning-discovery-remediation",
+      "finding_run_id": "/root/hcm34_planning_discovery",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "/root/hcm34_planning_closure",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:36305fa8709d0bb7abec62acaecc7eae9c8c6ec47df3366dcb60014b444b29ba",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T020000Z--planning-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T020500Z--HCM-3-4--snapshot-memory-planning-closure.json"
+      ]
+    }
+  ],
+  "ancillary_diff_observations": [],
+  "reviewed_state": {
+    "baseline_head": "0d22b010e4246fea52a261d3f173e5f5856ab92c",
+    "subject_fingerprint": "sha256:36305fa8709d0bb7abec62acaecc7eae9c8c6ec47df3366dcb60014b444b29ba",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T020500Z--HCM-3-4--snapshot-memory-planning-closure.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T015055Z--planning-preflight-and-authority.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T020000Z--planning-discovery-remediation.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T020500Z--HCM-3-4--snapshot-memory-planning-closure.json",
+      "git:0d22b010e4246fea52a261d3f173e5f5856ab92c"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.4 Snapshot Memory planning true stop before local publication",
+    "scope_horizon": "one review-clean HCM-3.4 planning-only selector, specification, implementation plan, task ledger, local dispatch evidence, and same-slice protected-checkout adjudication boundary",
+    "detail_resolution": "future policy-selected immutable ContextMemorySnapshot capture, determinism/fingerprints, stable/bounded/unstable consistency, compatible SnapshotDelta and deterministic drift signals, redaction/retention/deduplication, paired end/start workflow, and private generic Projection proof without adoption",
+    "temporal_horizon": "review-clean primary commit 0d22b010e4246fea52a261d3f173e5f5856ab92c; stopped before dedicated-local-ref update after protected worktree 958a index mtime changed during an audit",
+    "authority_horizon": "HCM-3.4 planning content is review-clean but local publication is not authorized while the protected-checkout mutation remains unadjudicated; no authority exists here to repair, waive, reset, or otherwise alter that protected checkout",
+    "memory_horizon": "completed immutable HCM-3.3 predecessor, one frozen outcome registry, two discovery P2 findings, one consolidated parent remediation, a different-fresh CLEAN closure, exact six-file final planning manifest, and the protected 958a index-mtime observation",
+    "validation_horizon": "ordinary handoff validation, both self-tests, exact final-manifest replay against the primary commit, deterministic ledger, diff/allowlist, and a same-slice adjudication of the protected-checkout mutation before any local-ref update"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Preserve the review-clean HCM-3.4 planning result as a same-slice true stop after a prohibited protected-checkout index mutation was observed, without implementing product behavior, adopting HCM-3.5 consumers, or advancing the local integration ref.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T015055Z--snapshot-memory-planning-selector.md",
+      "sections": [
+        "entire decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+      "sections": [
+        "entire planning specification"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "sections": [
+        "entire future implementation plan"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.4 — Snapshot Memory and deterministic delta engine",
+        "HCM-3.5 — Resolution-aware snapshot, packet, and pipeline adoption"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Snapshot Memory posture",
+        "Non-negotiable invariants"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Snapshot Memory",
+        "Paired top-level orchestration snapshots",
+        "Capture consistency",
+        "Snapshot deltas",
+        "Drift semantics",
+        "Security, redaction, and retention"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Snapshot capture policy",
+        "Context Memory Snapshot",
+        "Snapshot delta",
+        "Snapshot redaction and retention"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-SNAP-01 through PG-SNAP-06",
+        "Regression rules 44 and 45"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Completion closeout",
+        "Internal subagent boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Deterministic ledger rebuild",
+        "Completion handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json",
+      "sections": [
+        "entire completed handoff",
+        "resume"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 0d22b010e4246fea52a261d3f173e5f5856ab92c",
+    "head": "0d22b010e4246fea52a261d3f173e5f5856ab92c",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260806T022000Z--HCM-3-4--orchestration--snapshot-memory-planning-protected-checkout-stop.json"
+    ]
+  },
+  "work_completed": [
+    "Verified the assigned checkout, expected base/tree, dedicated local integration ref, required ancestry, local tracking baseline, cleanliness, protected checkout HEAD/tree/status and raw-index-mtime observations, and completed immutable HCM-3.3 predecessor before editing.",
+    "Created the bounded HCM-3.4 planning-only selector, specification, phased future implementation plan, task ledger, preflight proof, and v1.4 discovery/closure dispatches without touching product source, tests, fixtures, schemas, public APIs, dependencies, workflows, runtime configuration, or remote state.",
+    "Planned deterministic capture policy/model hooks, immutable normalized ContextMemorySnapshot records, stable/bounded/unstable consistency, separate state/record fingerprints, compatible deterministic SnapshotDelta and drift signals, fail-closed redaction, retention/deduplication, and paired prior-end/session-start workflow without model-owned interpretation.",
+    "Repaired the two discovery P2 gaps in one parent-owned planning remediation: private proof through the existing generic Projection without HCM-3.5 consumer adoption, and deterministic unknown/unclassifiable-surface omission before persistence.",
+    "Received a different-fresh CLEAN closure; no supplemental review was opened. PG-SNAP-01 through PG-SNAP-06 remain future implementation obligations, and implementation stays deliberately unauthorized.",
+    "Committed the reviewed primary planning state at 0d22b010e4246fea52a261d3f173e5f5856ab92c. A protected 958a index mtime changed during final audit, so no local integration ref was updated and this parent record is a same-slice adjudicable true stop."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+      "status": "completed",
+      "summary": "Planning-only Snapshot Memory and deterministic delta-engine contract, integration boundary, proof strategy, and non-goals."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T015055Z--snapshot-memory-planning-selector.md",
+      "status": "completed",
+      "summary": "Bounded selector, frozen outcome registry, review cadence, and planning-only authority."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "status": "completed",
+      "summary": "Future phased implementation plan, verification matrix, integration seams, and human review gate."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/todo.md",
+      "status": "completed",
+      "summary": "Planning task ledger and explicit implementation true stop."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T020000Z--planning-discovery-remediation.md",
+      "status": "completed",
+      "summary": "Parent-owned consolidated P2 remediation evidence."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T020500Z--HCM-3-4--snapshot-memory-planning-closure.json",
+      "status": "completed",
+      "summary": "Different-fresh delta closure dispatch bound to the final six-file planning manifest."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T022000Z--HCM-3-4--orchestration--snapshot-memory-planning-protected-checkout-stop.json",
+      "status": "blocked",
+      "summary": "Parent-owned v1.4 same-slice true stop preserving review evidence and the protected-checkout adjudication boundary; no local publication occurred."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.4-P1-D1",
+      "summary": "The future Snapshot Memory capability is policy-selected deterministic observation and comparison: immutable normalized snapshots and compatible deltas, catalog-backed signals, fail-closed privacy and retention controls, and a private existing-generic-Projection proof with no HCM-3.5 consumer adoption or model interpretation as meaning.",
+      "authority_effect": "A later implementation requires a new explicit authorization and bounded selector. It must retain the planned deterministic, privacy-aware, typed-omission, non-authority, and paired-boundary rules; this true stop neither closes any PG-SNAP gate nor authorizes product behavior or local publication.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T015055Z--snapshot-memory-planning-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM34-PLAN-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/hcm34_planning_discovery",
+      "summary": "The original planning subject deferred generic Projection proof to HCM-3.5 instead of requiring a private HCM-3.4 proof through the existing generic Projection without consumer adoption.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T020000Z--planning-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T020500Z--HCM-3-4--snapshot-memory-planning-closure.json"
+      ]
+    },
+    {
+      "finding_id": "HCM34-PLAN-DISC-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/hcm34_planning_discovery",
+      "summary": "The original redaction proof matrix lacked an unknown or unclassifiable capture-surface case that must omit before persistence and cannot downgrade to retained data.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T020000Z--planning-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T020500Z--HCM-3-4--snapshot-memory-planning-closure.json"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM34-LOCAL-REF-BLOCK-001",
+      "classification": "authority",
+      "summary": "The final audit's Git status invocation refreshed the index mtime of protected C:/Users/spmcc/.codex/worktrees/958a/handbook at 2026-08-06T02:18:37Z, after the HCM-3.4 authority declaration. Product files, HEAD/tree, status, and file count remained unchanged, but the contract forbids protected-checkout mutation and grants no repair or waiver authority.",
+      "resume_condition": "The meta orchestrator independently adjudicates the protected index mutation as recoverable without altering protected user state, or the operator supplies explicit authority and a safe recovery instruction. Until then, do not update refs, reset, clean, repair, or modify any protected checkout.",
+      "owner": "meta orchestrator / operator"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM34-LOCAL-REF-ESC-001",
+      "trigger": "A final local-only protected-checkout audit observed a post-authority index-mtime change in the protected 958a worktree after invoking its Git status command.",
+      "current_resolution": "HCM-3.4 planning primary commit 0d22b010e4246fea52a261d3f173e5f5856ab92c is review-clean, the parent true-stop record is committed locally, and refs/heads/orchestration/handbook-hcm-3-4-planning-20260806 remains at expected base 0ca422c6a0150c9f79348eafcaba37b97435b76d.",
+      "target_resolution": "A same-slice adjudication that preserves all protected user-owned bytes and decides whether the non-product index refresh can be accepted or requires operator-directed recovery before dedicated local-ref publication.",
+      "decision_required": "Decide whether to retain the review-clean HCM-3.4 primary/true-stop commit pair without publication, or authorize a bounded protected-checkout recovery and fresh pre-publication audit.",
+      "options": [
+        "Option 1: Retain the true stop and have the meta orchestrator verify the protected worktree independently before creating any new task.",
+        "Option 2: The operator performs or explicitly authorizes a safe protected-index recovery, then a new same-slice task reruns preflight without changing the reviewed planning subject.",
+        "Option 3: Discard the unreferenced local planning commits only under explicit operator direction; no automatic reset or cleanup is authorized."
+      ],
+      "recommendation": "Option 1: independently adjudicate the non-product protected-index refresh first; preserve the current local commits and do not update the integration ref.",
+      "affected_refs": [
+        "refs/heads/orchestration/handbook-hcm-3-4-planning-20260806",
+        "C:/Users/spmcc/.codex/worktrees/958a/handbook",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260806T022000Z--HCM-3-4--orchestration--snapshot-memory-planning-protected-checkout-stop.json"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "The meta orchestrator records a same-slice adjudication and, if publication remains desired, dispatches a new bounded task with exact protected-checkout handling; no HCM-3.5 or product implementation authority follows from this stop."
+    }
+  ],
+  "validation": [
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "Ordinary current-record/current-dispatch schema, causal lineage, final manifest, record/index parity, and deterministic ledger validation passed after closeout."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "Historical admission and exact ledger-rebuild negative self-test passed."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "v1.4 causal-cadence, review/remediation lineage, fresh-review, CLEAN cutoff, and two-commit closeout self-test passed."
+    },
+    {
+      "command": "git diff --check; staged allowlist audit; exact final closure-dispatch replay",
+      "status": "passed",
+      "evidence_ref": "The reviewed primary state contains eight planning documentation/dispatch paths only; closeout contains only this parent record and the deterministic ledger."
+    },
+    {
+      "command": "GitNexus impact plus scoped and compare-to-main detect_changes",
+      "status": "not_run",
+      "evidence_ref": "Unavailable: no GitNexus MCP capability, CLI, or .gitnexus/run.cjs runner is present. No function, class, or method changed, so no impact-analysis target exists; unavailable is not GREEN."
+    },
+    {
+      "command": "protected-path, dedicated-local-ref, and no-push audit",
+      "status": "blocked",
+      "evidence_ref": "Protected HEAD/tree/status/file-count observations matched preflight. The inherited recorded digest discrepancy remains non-product evidence from HCM-3.3, but protected 958a raw index mtime is now 2026-08-06T02:18:37Z after the HCM-3.4 authority declaration because the final audit invoked Git status. Its prior observed raw index SHA-256 was 75e7a1225a613986682f4ce6ac6de5ad92fbfb16878f98c0ea7398cb4bc8c872; no product path was changed. No dedicated local ref update, remote query, or push occurred."
+    }
+  ],
+  "pack_updates": [],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Adjudicate the same HCM-3.4 protected-checkout boundary only; do not implement Snapshot Memory or start another slice.",
+    "condition": "The meta orchestrator or operator first resolves whether the post-authority protected 958a index refresh is acceptable or supplies explicit safe recovery authority.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T022000Z--HCM-3-4--orchestration--snapshot-memory-planning-protected-checkout-stop.json",
+        "sections": [
+          "entire completed handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+        "sections": [
+          "entire planning specification"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+        "sections": [
+          "entire plan"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Same-slice read-only adjudication of protected-checkout evidence and local-ref publication eligibility only after explicit authority."
+    ],
+    "prohibited_scope": [
+      "Do not automatically implement HCM-3.4, close PG-SNAP-01 through PG-SNAP-06, adopt HCM-3.5 consumers, or reinterpret the completed HCM-3.3 predecessor.",
+      "Do not alter product source, tests, fixtures, schemas, public APIs, dependencies, workflows, runtime configuration, HCM-3.5/HCM-3.6 work, Phase-3 exit scope, protected evidence, release state, or remote state without new explicit authority.",
+      "Do not amend this immutable true-stop handoff, update the dedicated local ref, or use the review-clean planning subject to waive the protected-checkout boundary or future P1/P2 findings."
+    ],
+    "acceptance_criteria": [
+      "The meta orchestrator independently confirms that no protected user-owned byte requires recovery and explicitly adjudicates local-ref publication eligibility.",
+      "Any later implementation task separately receives explicit HCM-3.4 implementation authority, selects a bounded packet, and validates this true stop plus the final six-file CLEAN manifest before code selection.",
+      "The reviewed primary baseline remains 0d22b010e4246fea52a261d3f173e5f5856ab92c; the dedicated local integration ref remains at 0ca422c6a0150c9f79348eafcaba37b97435b76d and must not move in this task."
+    ],
+    "stop_conditions": [
+      "Stop before local-ref update, implementation, or any scope widening unless a new explicit authorization and protected-checkout adjudication select it.",
+      "Stop if a future task would alter protected HCM-3.3 evidence, conflate private generic Projection proof with HCM-3.5 consumer adoption, or overstate this plan as implementation or gate completion.",
+      "Stop on local-ref compare-and-swap drift; do not merge, rebase, reset, clean, force-update, fetch, query remote, or push."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-3.4 planning primary 0d22b010e4246fea52a261d3f173e5f5856ab92c is review-clean: the plan freezes deterministic capture/snapshot/delta/privacy/paired-boundary behavior, private generic Projection proof, and future regression strategy. Discovery's two P2s were remediated and closure is CLEAN. A protected 958a index mtime was refreshed during final audit, so the local integration ref was not updated; this is a same-slice adjudicable true stop. No implementation, HCM-3.5 adoption, remote query, or push occurred."
+}
