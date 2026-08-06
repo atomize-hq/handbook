@@ -1,0 +1,482 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260806T180300Z--HCM-3-4--orchestration--private-projection-source-pair-planning-completed",
+  "created_at_utc": "2026-08-06T18:03:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-P2-private-projection-source-pair-planning",
+  "orchestration_id": "20260806T174800Z--HCM-3-4--private-projection-source-pair-planning",
+  "source_handoff_ids": [
+    "20260806T064500Z--HCM-3-4--orchestration--snapshot-memory-projection-cardinality-stop"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "Codex HCM-3.4 private Projection source-pair planning orchestrator",
+    "thread_ref": "019fd829-752d-7d93-bfd8-ecb0a30d03a3"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-06T18:03:00Z",
+    "evidence_ref": "Two schema-valid v1.4 built-in read-only default review runs completed with isolated context: one complete-subject discovery FINDINGS run, one parent-owned consolidated documentation remediation, and one different-fresh delta-focused CLEAN closure."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "/root/source_pair_discovery_review",
+      "dispatch_id": "20260806T174900Z--HCM-3-4--private-projection-source-pair-planning-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T174900Z--HCM-3-4--private-projection-source-pair-planning-discovery.json",
+      "dispatch_fingerprint": "sha256:593d23297d20844f2f50dd33f3ee452082486e4ffad30064bc149323470a656c",
+      "role": "review",
+      "agent_id": "/root/source_pair_discovery_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:7d375cd5d1bdd82014cad240d6c197f45415395b58f0d5f4c46b38d3e621ef35",
+      "result_subject_fingerprint": "sha256:7d375cd5d1bdd82014cad240d6c197f45415395b58f0d5f4c46b38d3e621ef35",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM34-SPP-DISC-001",
+        "HCM34-SPP-DISC-002",
+        "HCM34-SPP-DISC-003"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T174900Z--HCM-3-4--private-projection-source-pair-planning-discovery.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md"
+      ]
+    },
+    {
+      "run_id": "/root/source_pair_closure_review",
+      "dispatch_id": "20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure.json",
+      "dispatch_fingerprint": "sha256:35c770ae958ba1d1d402faab2e0bd268ca0b331a12088153a6d988d353f19f1f",
+      "role": "review",
+      "agent_id": "/root/source_pair_closure_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:63b8458f5acd26de578bca3d13a1014bd2512c697a99e4509d92022f33d13e14",
+      "result_subject_fingerprint": "sha256:63b8458f5acd26de578bca3d13a1014bd2512c697a99e4509d92022f33d13e14",
+      "review_round": 2,
+      "predecessor_run_id": "/root/source_pair_discovery_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-06T18:03:00Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:3bede48cf6ad661aa461f07fb24f51f44fd92d84b37ff7a0b668ca3b1678a695"
+    ],
+    "aggregate_fingerprint": "sha256:0b6cb3a0153655bcb5bca6bedddfe3f1847d7e0c0e654b53dd1d09880e2fd86b"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3.4-private-projection-source-pair-discovery-remediation",
+      "finding_run_id": "/root/source_pair_discovery_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "/root/source_pair_closure_review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:63b8458f5acd26de578bca3d13a1014bd2512c697a99e4509d92022f33d13e14",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "87079aaca3010f141be352536745055fd919e081",
+    "subject_fingerprint": "sha256:63b8458f5acd26de578bca3d13a1014bd2512c697a99e4509d92022f33d13e14",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T174700Z--private-projection-source-pair-planning-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T174700Z--private-projection-source-pair-planning-preflight.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure.json",
+      "git:87079aaca3010f141be352536745055fd919e081"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.4 private Projection source-pair planning completed",
+    "scope_horizon": "one private generic Projection source-pair capability plan",
+    "detail_resolution": "one immutable snapshot_current plus a compatible snapshot_delta, five-family exact currentness, fail-closed pair validation, private provenance, typed omissions/disclosures, hidden-data refusal, and authority_effect none",
+    "temporal_horizon": "reviewed primary commit 87079aaca3010f141be352536745055fd919e081 followed only by mechanical v1.4 closeout",
+    "authority_horizon": "planning only; no Rust, product test, fixture, generic Projection configuration, public API/schema/dependency, runtime/consumer adoption, HCM-3.5/HCM-3.6, Phase-3 exit, protected-checkout, or remote authority",
+    "memory_horizon": "the immutable HCM-3.4 cardinality true stop, one new frozen planning outcome, three discovery P2s, one consolidated remediation, and a different-fresh CLEAN closure",
+    "validation_horizon": "exact closure-manifest replay, scoped planning proof wall, ordinary handoff validation, both self-tests, deterministic ledger, local-ref expected-old CAS, protected-boundary proof, and no-push verification"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Plan the minimum private generic Projection source-pair capability needed to satisfy PG-SNAP-04 while retaining pre-HCM-3.4 deterministic non-authority, exact source binding/currentness, typed omissions, hidden-data refusal, and fail-closed behavior.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T174700Z--private-projection-source-pair-planning-selector.md",
+      "sections": [
+        "entire decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+      "sections": [
+        "Private Projection source-pair planning amendment",
+        "Completion and stop conditions"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "sections": [
+        "entire implementation-ready planning packet"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Snapshot-grounding Projection definition",
+        "Snapshot projection request/result"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-SNAP-04"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T064500Z--HCM-3-4--orchestration--snapshot-memory-projection-cardinality-stop.json",
+      "sections": [
+        "entire immutable true stop",
+        "blockers",
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Fresh review / remediation loop",
+        "Full proof wall",
+        "Two-commit closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout",
+        "Deterministic ledger rebuild"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules",
+        "Closure review"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 87079aaca3010f141be352536745055fd919e081",
+    "head": "87079aaca3010f141be352536745055fd919e081",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260806T180300Z--HCM-3-4--orchestration--private-projection-source-pair-planning-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Bound the real increment thread 019fd829-752d-7d93-bfd8-ecb0a30d03a3 and host local to dispatch nonce f77bcdc4a7e644cd84c89b2d4cba9cb99a18c8875b344e75ba123cc5d9fabc9c; verified the assigned checkout, exact target ref/base/tree, required ancestor, cleanliness, detached ownership, and origin baseline before edits while preserving every protected checkout.",
+    "Consumed but did not rewrite the immutable HCM-3.4 source-pair cardinality true stop; created a distinct frozen planning outcome and selector with a documentation-only, private-source-pair boundary.",
+    "Produced an implementation-ready plan for the smallest private Projection seam: canonical raw XOR normalization, immutable current/delta pair identity, delta-to-current dependency relation, state/provenance fingerprint, exact adapter pairs, five canonical family checks, fail-closed refusals, typed omissions/disclosures, hidden-data refusal, and authority_effect none.",
+    "Ran one complete-subject fresh discovery review. It reported HCM34-SPP-DISC-001 through -003. The parent applied exactly one consolidated documentation remediation, then a different-fresh delta-focused closure reviewed the repaired fingerprint CLEAN. No supplemental or post-CLEAN review ran.",
+    "Committed the reviewed eight-path primary planning state at 87079aaca3010f141be352536745055fd919e081. This handoff and the deterministic ledger are the only mechanical closeout surface."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+      "status": "completed",
+      "summary": "Freezes the private Projection source-pair amendment without relaxing PG-SNAP-04 or authorizing implementation."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "status": "completed",
+      "summary": "Defines the minimal private model/configuration seam, exact source-pair/family rules, fail-closed behavior, baseline preservation, and fixed test-only future proof matrix."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/todo.md",
+      "status": "completed",
+      "summary": "Records planning tasks, discovery P2s, their consolidated remediation, and the CLEAN closure boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T174700Z--private-projection-source-pair-planning-selector.md",
+      "status": "completed",
+      "summary": "Provides the fresh planning selector, frozen outcome registry, authority boundary, and causal budget."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T174700Z--private-projection-source-pair-planning-preflight.md",
+      "status": "completed",
+      "summary": "Captures identity, baseline, protected-boundary, source grounding, and planning-only preflight proof."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md",
+      "status": "completed",
+      "summary": "Captures the three discovery P2s and their one parent-owned consolidated remediation."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T174900Z--HCM-3-4--private-projection-source-pair-planning-discovery.json",
+      "status": "completed",
+      "summary": "Fresh complete-subject discovery FINDINGS dispatch bound to the pre-remediation subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure.json",
+      "status": "completed",
+      "summary": "Different-fresh delta-focused CLEAN closure bound to the repaired six-file manifest."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T180300Z--HCM-3-4--orchestration--private-projection-source-pair-planning-completed.json",
+      "status": "completed",
+      "summary": "Parent-owned v1.4 completed handoff reconciling identity, causal cadence, remediation, proof, and local-only closeout."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.4-P2-D1",
+      "summary": "A future explicit implementation increment may add only the smallest private generic Projection source-pair mechanism: one snapshot_current and one compatible snapshot_delta, canonical five-family captured/live currentness closure, pair/state provenance, and fail-closed validation while retaining every existing one-source behavior.",
+      "authority_effect": "none; this is a planning packet, does not implement Projection or Snapshot Memory, does not close PG-SNAP-04, and authorizes no consumer, public surface, runtime configuration, or subsequent slice.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM34-SPP-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/source_pair_discovery_review",
+      "summary": "The initial plan did not define a raw exactly-one legacy singleton versus multi-family capture decode boundary before canonical validation, so an array-only form could not be safely admitted or malformed alternatives proven fail-closed.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure.json"
+      ]
+    },
+    {
+      "finding_id": "HCM34-SPP-DISC-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/source_pair_discovery_review",
+      "summary": "The initial plan required pair state identity but did not carry private state provenance through selection, dependency, and result, so current or delta state substitution could not be independently refused and proven.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure.json"
+      ]
+    },
+    {
+      "finding_id": "HCM34-SPP-DISC-003",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/source_pair_discovery_review",
+      "summary": "The initial plan did not make exact adapter pairs, declared empty scalar slots, work-family maps, and exactly five family-level currentness results explicit; existing singleton logic would otherwise produce incompatible scalar/slot behavior.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure.json"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "assigned-checkout/base/tree/ancestor/origin/worktree/cleanliness preflight",
+      "status": "passed",
+      "evidence_ref": "The nonce-bound assigned checkout was verified before edits at local integration ref 7f269887c1715263cd2ea370427ca2cc76e4e1a3, expected tree d4d0eea44c2b3ba985e87674844e5b9713376db1, required ancestor d7877f7843afbcda78d65e0fa2bf7093d3c71e6a, and observed origin main a3babd20329027afacdcee9d8b7b9d638d15af5b."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <discovery-dispatch>",
+      "status": "passed",
+      "evidence_ref": "Pre-execution discovery verification replayed pre-remediation subject sha256:7d375cd5d1bdd82014cad240d6c197f45415395b58f0d5f4c46b38d3e621ef35 and admitted the frozen registry/budget/cycle. The immutable dispatch was intentionally not rewritten after remediation."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --verify-dispatch <closure-dispatch>",
+      "status": "passed",
+      "evidence_ref": "Closure verification replayed exact reviewed subject sha256:63b8458f5acd26de578bca3d13a1014bd2512c697a99e4509d92022f33d13e14 after remediation and before primary commit."
+    },
+    {
+      "command": "six-file UTF-8/final-newline/fence/whitespace checks; exact eight-path primary allowlist; git diff --check",
+      "status": "passed",
+      "evidence_ref": "The reviewed primary state changes only the eight authorized planning, proof, selector, and dispatch paths; no Rust, test, fixture, configuration, consumer, public, or future-slice path is changed."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "status": "passed",
+      "evidence_ref": "Ordinary schema, immutable-history admission, causal lineage, reviewed-baseline manifest replay, record/index parity, and deterministic ledger validation passed after this mechanical closeout was assembled."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission",
+      "status": "passed",
+      "evidence_ref": "Historical admission and deterministic ledger negative self-test passed after mechanical closeout assembly."
+    },
+    {
+      "command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract",
+      "status": "passed",
+      "evidence_ref": "V1.4 registry/budget, discovery-remediation-different-fresh-closure lineage, CLEAN cutoff, and two-commit closeout self-test passed after mechanical closeout assembly."
+    },
+    {
+      "command": "GitNexus upstream impact and scoped/compare-to-main detect_changes",
+      "status": "not_run",
+      "evidence_ref": "Unavailable: this planning-only task selected no code symbol, and the session exposes no GitNexus MCP capability, .gitnexus/run.cjs, or gitnexus CLI. GitNexus detection is recorded unavailable, never GREEN."
+    },
+    {
+      "command": "protected-boundary and local-publication audit",
+      "status": "passed",
+      "evidence_ref": "No command accessed, modified, staged, or committed a protected checkout. The meta-supplied protected-path hashes/manifests remained the preflight comparison authority; only the assigned worktree changed. The dedicated local ref remained at the expected base until post-closeout expected-old CAS, and no push occurred."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+      "sections": [
+        "Private Projection source-pair planning amendment"
+      ],
+      "reason": "Freeze the private source-pair planning authority and retain every baseline non-authority/fail-closed constraint.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "sections": [
+        "Private source-pair model and configuration seam",
+        "Fixed implementation proof matrix"
+      ],
+      "reason": "Carry exact source identity, compatibility, five-family validation, provenance, refusals, and test-only future proof into the implementation-ready plan.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T180300Z--HCM-3-4--orchestration--private-projection-source-pair-planning-completed.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the completed parent identity, causal cadence, proof, and local-only closeout without changing the immutable predecessor true stop.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger byte-deterministically from immutable canonical records.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No automatic HCM-3.4 implementation continuation is authorized by this planning closeout.",
+    "condition": "Only a future explicit user instruction may select a bounded implementation increment that consumes this completed planning packet and the immutable HCM-3.4 cardinality true stop.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T180300Z--HCM-3-4--orchestration--private-projection-source-pair-planning-completed.json",
+        "sections": [
+          "entire completed handoff",
+          "resume"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+        "sections": [
+          "Private Projection source-pair planning amendment",
+          "Completion and stop conditions"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+        "sections": [
+          "entire implementation-ready planning packet"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T064500Z--HCM-3-4--orchestration--snapshot-memory-projection-cardinality-stop.json",
+        "sections": [
+          "entire immutable true stop",
+          "resume"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not automatically implement HCM-3.4, close PG-SNAP-04, claim Phase-3 completion, or treat this planning closeout as runtime evidence.",
+      "Do not alter the immutable true stop or predecessor lineage; no code, tests, fixtures, generic Projection configuration, public APIs/schemas/dependencies, runtime configuration, consumers, HCM-3.5/HCM-3.6, Phase-3 exit surfaces, protected checkouts, remote state, or release work is authorized.",
+      "Do not use a public/CLI/SDK/pipeline/Handoff/packet consumer, runtime adapter, generic diagnostic surface, or fabricated pre-implementation smoke path to claim the pair is implemented."
+    ],
+    "acceptance_criteria": [
+      "A future implementation task has a new explicit user grant and a reviewed bounded implementation selector.",
+      "It implements only the private source-pair seam frozen here and proves current/delta identity and compatibility, captured-versus-live five-family validation, all fail-closed negatives, typed omission/disclosure/redaction behavior, authority_effect none, and unchanged one-source behavior through a private test-only integration fixture with fixed canonical inputs.",
+      "It preserves deterministic non-authority, existing exact source binding/currentness, typed omissions, hidden-data refusal, and fail-closed behavior from pre-HCM-3.4 baseline d7877f7843afbcda78d65e0fa2bf7093d3c71e6a."
+    ],
+    "stop_conditions": [
+      "Stop before implementation without a new explicit user instruction and reviewed implementation selector.",
+      "Stop if implementation needs a public surface, generic runtime configuration, consumer adoption, HCM-3.5/HCM-3.6 scope, a new authority effect, protected-checkout access, or remote action.",
+      "Stop on target-ref drift; do not merge, rebase, reset, clean, force-update, fetch, push, or publish remotely."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Completed HCM-3.4 private Projection source-pair planning. The packet freezes a minimal private current/delta pair, canonical five-family captured/live validation, provenance/state compatibility, fail-closed refusals, and a test-only future proof matrix while preserving one-source behavior and non-authority. Three discovery P2s were consolidated and a different-fresh closure is CLEAN. PG-SNAP-04 remains open; implementation needs a future explicit grant."
+}
