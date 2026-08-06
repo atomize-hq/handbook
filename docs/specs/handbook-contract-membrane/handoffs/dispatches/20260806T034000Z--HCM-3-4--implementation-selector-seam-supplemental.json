@@ -1,0 +1,201 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260806T034000Z--HCM-3-4--implementation-selector-seam-supplemental",
+  "created_at_utc": "2026-08-06T03:40:00Z",
+  "source_handoff_ids": [
+    "20260806T022000Z--HCM-3-4--orchestration--snapshot-memory-planning-protected-checkout-stop",
+    "20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction"
+  ],
+  "parent_orchestration_id": "20260806T031809Z--HCM-3-4--snapshot-memory-implementation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-I1-snapshot-memory-implementation-causal-review",
+  "subject_fingerprint": "sha256:e9af32b5d3aac3305b4cfbebf1e11968635e2dd9a38ffbfa771739343cb30d1e",
+  "review_cycle": {
+    "kind": "supplemental_causal",
+    "cycle_id": "hcm-3.4-implementation-selector-seam-supplemental-1",
+    "trigger_run_ids": [
+      "selector_closure"
+    ],
+    "finding_refs": [
+      "HCM34-I1-SEL-002"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T03:18:09Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.4-snapshot-memory-implementation",
+        "packet_ids": [
+          "HCM-3.4-I1-snapshot-memory-implementation-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T031809Z--implementation-selector-and-preflight.md"
+      }
+    ],
+    "fingerprint": "sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:4cd601ad1bc674f710d644094f5ae66d09e74fe9c6e9a249ea6aea9992089306",
+    "integrated_outcome_id": "hcm-3.4-snapshot-memory-implementation",
+    "outcome_registry_fingerprint": "sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260806T032900Z--HCM-3-4--implementation-selector-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.4-implementation-selector-seam-supplemental-convergence",
+    "completed_at_utc": "2026-08-06T03:39:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the closure result and only HCM34-I1-SEL-002 plus the candidate exact 03 seam rows.",
+        "evidence_ref": "This supplemental addresses one closure-unmasked P2 and does not reopen discovery."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Confirm the correction names no production, test, fixture, consumer, or protected path.",
+        "evidence_ref": "The one-file subject changes only exact authority names; the prior closed private envelope is unchanged."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the one-entry repo-path-NUL-SHA256-newline-v1 correction manifest and preserve the existing registry and budget.",
+        "evidence_ref": "Subject sha256:e9af32b5d3aac3305b4cfbebf1e11968635e2dd9a38ffbfa771739343cb30d1e; preserved registry sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125; budget sha256:4cd601ad1bc674f710d644094f5ae66d09e74fe9c6e9a249ea6aea9992089306."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Strict UTF-8 decode, Markdown fence balance, and literal heading/row comparison against 03-seam-crosswalk.md.",
+        "evidence_ref": "The correction cites Resolution-aware artifact views, Snapshot Memory, and Context Resolution definition stack exactly."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Trailing-space/tab scan and git diff --check after the one-file correction.",
+        "evidence_ref": "The correction subject has no whitespace or patch-format defect."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T033900Z--selector-seam-citation-correction.md",
+        "sha256": "548c4ae8e69f26b0c794bed6e78819276b75643f6ecd8ea63f56b92912b5ac19"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:e9af32b5d3aac3305b4cfbebf1e11968635e2dd9a38ffbfa771739343cb30d1e"
+  },
+  "active_resolution": {
+    "level": "HCM-3.4 selector supplemental causal closure",
+    "scope_horizon": "one exact HCM-3.4 seam-citation correction",
+    "detail_resolution": "literal existing 03 row names only",
+    "temporal_horizon": "immediately after selector closure finding",
+    "authority_horizon": "read-only correction verification; no code authority until CLEAN",
+    "memory_horizon": "discovery, closure finding, and the frozen parent/outcome registry",
+    "validation_horizon": "one permitted supplemental review only"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T033900Z--selector-seam-citation-correction.md",
+      "sections": [
+        "HCM-3.4 selector seam-citation correction"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Resolution-aware artifact views",
+        "Snapshot Memory",
+        "Context Resolution definition stack",
+        "Pipeline/Resolution semantics"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage"
+      ]
+    }
+  ],
+  "repo_truth": "Only the literal 03 citation was corrected. The reviewed selector remains documentation-only and no Snapshot Memory source/test path exists yet.",
+  "allowed_scope": [
+    "Read-only supplemental verification that the literal 03 names now resolve and satisfy HCM34-I1-SEL-002.",
+    "Verify the correction did not change scope, registry, budget, or admit implementation early."
+  ],
+  "non_goals": [
+    "Do not revisit settled authority, fixtures, paths, or general implementation design.",
+    "Do not edit, stage, commit, update refs, access protected checkouts, or perform remote operations."
+  ],
+  "tasks": [
+    "Verify the three cited 03 row names are exact and sufficient for the HCM-3.4 private Snapshot Memory / completed Resolution seam.",
+    "Verify HCM-3.5 pipeline/consumer adoption stays excluded and the single correction causes no new P1/P2 issue.",
+    "Return CLEAN only if HCM34-I1-SEL-002 is fully resolved."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md#snapshot-memory",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if literal seam authority cannot be verified.",
+    "Return a P1/P2 only if directly caused or unmasked by this correction; remain read-only."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

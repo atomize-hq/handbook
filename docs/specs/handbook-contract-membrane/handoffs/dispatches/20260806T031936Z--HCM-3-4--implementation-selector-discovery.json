@@ -1,0 +1,239 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260806T031936Z--HCM-3-4--implementation-selector-discovery",
+  "created_at_utc": "2026-08-06T03:19:36Z",
+  "source_handoff_ids": [
+    "20260806T022000Z--HCM-3-4--orchestration--snapshot-memory-planning-protected-checkout-stop",
+    "20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction"
+  ],
+  "parent_orchestration_id": "20260806T031809Z--HCM-3-4--snapshot-memory-implementation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "incremental-implementation",
+    "test-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-I1-snapshot-memory-implementation-causal-review",
+  "subject_fingerprint": "sha256:3f9fcf8d063dedd0df673a7268b1d2baf2335872b30841ee591f402bb570186e",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.4-implementation-selector-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T03:18:09Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.4-snapshot-memory-implementation",
+        "packet_ids": [
+          "HCM-3.4-I1-snapshot-memory-implementation-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T031809Z--implementation-selector-and-preflight.md"
+      }
+    ],
+    "fingerprint": "sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:4cd601ad1bc674f710d644094f5ae66d09e74fe9c6e9a249ea6aea9992089306",
+    "integrated_outcome_id": "hcm-3.4-snapshot-memory-implementation",
+    "outcome_registry_fingerprint": "sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.4-implementation-selector-discovery-convergence",
+    "completed_at_utc": "2026-08-06T03:19:35Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read AGENTS.md, START_HERE, 00/01/02/03/04/05/06/07/08/09 authority, the HCM-3.4 planning selector/spec/plan/todo/true-stop handoff, HCM-3.3 completion, and the complete fresh implementation selector.",
+        "evidence_ref": "The selector binds one whole-slice private implementation parent/outcome and a seven-packet sequence without reopening planning lineage or selecting consumer adoption."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inventory every selected private engine/test/fixture path and the existing Projection/Resolution source/test precedent.",
+        "evidence_ref": "One private module declaration, five private Snapshot Memory production modules, private tests/fixtures, and one added Projection integration test are admitted. Public exports, Cargo/version/dependency, defaults, HCM-3.5/HCM-3.6, pipeline, SDK/CLI, transports, consumers, protected checkouts, and remote state remain excluded."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the ordinal-sorted repo-path-NUL-SHA256-newline-v1 selector/todo manifest, canonical outcome registry, and parent/outcome-derived causal budget.",
+        "evidence_ref": "Subject sha256:3f9fcf8d063dedd0df673a7268b1d2baf2335872b30841ee591f402bb570186e; registry sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125; budget sha256:4cd601ad1bc674f710d644094f5ae66d09e74fe9c6e9a249ea6aea9992089306."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Strict UTF-8 decode, Markdown fence balance, exact path allowlist, and selector section inspection.",
+        "evidence_ref": "The selector and active task ledger decode as UTF-8, have balanced Markdown fences, and contain identity, preflight, capsule, outcome, owner/path/packet, proof, non-goal, and stop envelopes."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Trailing-space/tab scan plus git diff --check.",
+        "evidence_ref": "The UTF-8 whitespace scan and git diff --check passed before this dispatch was created."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T031809Z--implementation-selector-and-preflight.md",
+        "sha256": "6e427c125b58c0e08e148ded87a656bcb3d1e5e463c6c5a88a888ac4ad5eae75"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/todo.md",
+        "sha256": "e86c95956662628c2819fa055d09ecef9d94f257a3383e2ac454a2902fa6e8a2"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:3f9fcf8d063dedd0df673a7268b1d2baf2335872b30841ee591f402bb570186e"
+  },
+  "active_resolution": {
+    "level": "HCM-3.4 implementation selector discovery",
+    "scope_horizon": "one private Snapshot Memory owner/test/proof envelope",
+    "detail_resolution": "exact module paths, private generic Projection proof, full fail-closed matrix, and a closed no-consumer risk boundary",
+    "temporal_horizon": "pre-code selector review for the nonce-bound implementation parent",
+    "authority_horizon": "selector and parent-local review evidence only until CLEAN; no code edit, gate closure, sibling work, protected path, remote, or publication authority",
+    "memory_horizon": "immutable HCM-3.3 completion and HCM-3.4 planning true stop plus one new parent/outcome registry",
+    "validation_horizon": "independent selector discovery followed by implementation/proof/final-closeout stages under the frozen causal budget"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T031809Z--implementation-selector-and-preflight.md",
+      "sections": [
+        "Dispatch identity and authority",
+        "Exact owner, path, and packet envelope",
+        "Positive, negative, and review wall"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+      "sections": [
+        "Frozen planning decision",
+        "API and data-model boundary",
+        "Future implementation proof and regression strategy"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "sections": [
+        "Future implementation packets",
+        "Verification checkpoints",
+        "Non-goals and human review gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Snapshot Memory",
+        "Capture consistency",
+        "Snapshot deltas",
+        "Resolution-aware snapshot projection",
+        "Security, redaction, and retention"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Snapshot capture policy",
+        "Context Memory Snapshot",
+        "Snapshot delta",
+        "Snapshot-grounding Projection definition",
+        "Snapshot projection request/result",
+        "Snapshot redaction and retention"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-SNAP-01 through PG-SNAP-06",
+        "Regression rules 44 through 47"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "The exact clean base has no Snapshot Memory policy, record, delta, redaction, retention, or paired-boundary implementation. The private generic Projection engine can already consume a snapshot source kind and preserve exact source/currentness/omission/non-authority behavior. GitNexus call-graph impact is available; FTS search is unavailable. The HIGH-risk execute_projection function is not selected for modification.",
+  "allowed_scope": [
+    "Review the exact two-file implementation selector/task subject read-only before any code edit.",
+    "Independently validate private owner paths, packet order, source/test/fixture envelope, no-public/no-dependency/no-adoption boundary, GitNexus risk evidence, proof completeness, and selector authority against the immutable planning true stop.",
+    "Return fresh HCM34-I1-SEL identifiers only for independently established selector defects; do not repair them."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, delegate, create another dispatch/handoff, write the ledger, or run implementation tests.",
+    "Do not authorize or implement a public API, Cargo/version/dependency/unsafe/default/profile/schema/registry change, generic Projection behavior change, HCM-3.5/HCM-3.6/Phase-3 work, renderer, pipeline, SDK/CLI, transport, consumer, protected-checkout, local target-ref, or remote change."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit, with exact selector/task section, violated authority/contract/gate, why it is wrong, smallest in-scope remediation, and missing verification.",
+    "Check that the selector is closed enough to prevent implementation drift while admitting all seven required internal packets and PG-SNAP-01 through PG-SNAP-06 without a public or adoption claim.",
+    "Check that every named path is necessary and sufficient, every new production type is private, no existing function/class/method edit is hidden, and the HIGH Projection call-graph evidence is accurately bounded.",
+    "Check that the proof wall covers normalized/fingerprint replay, consistency, predecessor refusal, compare-or-exclude delta closure, catalog/signal bijection, redaction/retention refusal, and private generic Projection exact-source/currentness/typed-omission/no-hidden-read/non-authority behavior.",
+    "Return CLEAN only if no valid P1/P2 exists for subject sha256:3f9fcf8d063dedd0df673a7268b1d2baf2335872b30841ee591f402bb570186e."
+  ],
+  "contracts_and_gates": [
+    "This is the sole planning-stage implementation-selector discovery for the frozen HCM-3.4 implementation outcome.",
+    "P1/P2 cannot be waived. P3/P4 may remain non-blocking only with exact live-inventory disposition.",
+    "A CLEAN selector admits only ordered implementation/proof/final-closeout stages under this parent and ends selector discovery; no review follows selector CLEAN."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair when the selector is incomplete, ambiguous, overbroad, insufficiently fail-closed, or cannot prove its exact risk/path/proof envelope.",
+    "Return BLOCKED if validation requires implementation evidence, broader authority, a canonical semantic amendment, protected-path mutation, remote interaction, or unavailable mandatory review capability.",
+    "Report any manifest, causal-lineage, identity, GitNexus, or protected-boundary defect to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

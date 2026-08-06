@@ -1,0 +1,75 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260806T034500Z--HCM-3-4--packet-1-policy-source-family-implementation",
+  "created_at_utc": "2026-08-06T03:45:00Z",
+  "source_handoff_ids": ["20260806T022000Z--HCM-3-4--orchestration--snapshot-memory-planning-protected-checkout-stop"],
+  "parent_orchestration_id": "20260806T031809Z--HCM-3-4--snapshot-memory-implementation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "incremental-implementation", "test-driven-development", "debugging-and-error-recovery"],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-I1-snapshot-memory-implementation-causal-review",
+  "subject_fingerprint": "sha256:a1449381c055aa990569cf61af9fce8887360cce10e331cd634b493eb29a3386",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T03:18:09Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{"integrated_outcome_id": "hcm-3.4-snapshot-memory-implementation", "packet_ids": ["HCM-3.4-I1-snapshot-memory-implementation-causal-review"], "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T031809Z--implementation-selector-and-preflight.md"}],
+    "fingerprint": "sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:4cd601ad1bc674f710d644094f5ae66d09e74fe9c6e9a249ea6aea9992089306",
+    "integrated_outcome_id": "hcm-3.4-snapshot-memory-implementation",
+    "outcome_registry_fingerprint": "sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125",
+    "review_stage": "implementation",
+    "stage_transition": {"kind": "enter", "from_stage": "planning"},
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260806T034000Z--HCM-3-4--implementation-selector-seam-supplemental"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256", "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md", "sha256": "4a0ab7b3724394d084a70894fe72f6ce7c95a77ff5038cb22b586052e07fa147"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T032800Z--implementation-selector-remediation.md", "sha256": "4cd8475eb59b46f99289b72cc762a3b0a86059f90af19ac74560ca954f7479cb"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T033900Z--selector-seam-citation-correction.md", "sha256": "548c4ae8e69f26b0c794bed6e78819276b75643f6ecd8ea63f56b92912b5ac19"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md", "sha256": "c099a21b4332c6dee698b401e3e55cb83f23e25426b034825b69a0a07ed15ea5"}
+    ],
+    "aggregate_fingerprint": "sha256:a1449381c055aa990569cf61af9fce8887360cce10e331cd634b493eb29a3386"
+  },
+  "active_resolution": {"level": "HCM-3.4 packet 1", "scope_horizon": "private capture policy/source family", "detail_resolution": "exact code/test/fixture paths", "temporal_horizon": "first ordered implementation packet", "authority_horizon": "private engine only", "memory_horizon": "selector plus HCM-3.4 contracts", "validation_horizon": "focused RED/GREEN before packet return"},
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md", "sections": ["Freeze private capture-policy and source-family model"]},
+    {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sections": ["Snapshot capture policy"]},
+    {"path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md", "sections": ["PG-SNAP-01", "PG-SNAP-02"]}
+  ],
+  "repo_truth": "No Snapshot Memory module exists. Generic Projection is private and untouched. This packet creates only the private policy/source-family foundation.",
+  "allowed_scope": [
+    "crates/engine/src/lib.rs: add only a private snapshot_memory module declaration.",
+    "crates/engine/src/snapshot_memory/mod.rs, policy.rs, tests.rs, and fixtures/policy-family.json: create private policy/source-family/slot/window/fingerprint types and focused tests.",
+    "Use canonical deterministic ordering and DefinitionFingerprint/canonical JSON helpers; require declared live revisions/cursors and reject ambient, duplicate, unknown, malformed, or scope-widening input."
+  ],
+  "non_goals": [
+    "Do not add public exports, dependencies, schema/version/defaults, runtime capture orchestration, Projection changes, consumers, HCM-3.5 work, or any external operation.",
+    "Do not edit an existing function, class, or method; if unexpectedly necessary, stop and report the exact GitNexus impact before editing.",
+    "Do not touch record, delta, redaction, projection, or any fixture other than policy-family.json beyond minimal private module declarations needed to compile."
+  ],
+  "tasks": [
+    "Read the dispatch and exact Snapshot policy contracts; establish focused RED tests first.",
+    "Implement an immutable private policy model with exact identity/fingerprint, ordered unique source families/slots/static windows, closed triggers/horizons, and explicit comparison/drift/predecessor/redaction/retention selections.",
+    "Prove canonical replay and fail-closed duplicate/unknown family/slot/window/trigger/ref/fingerprint/horizon/ambient-source cases.",
+    "Run cargo fmt and focused engine tests; return changed files, RED/GREEN evidence, validation, and no-commit status."
+  ],
+  "contracts_and_gates": ["Policy identity is independent of live revisions/cursors.", "Only declared slots may accept live revision/cursor values.", "Every collection/order affecting identity is canonical and closed.", "All invalid or scope-widening inputs refuse deterministically."],
+  "stop_conditions": ["Return BLOCKED if the packet needs an out-of-envelope path or a public/schema/dependency decision.", "Return BLOCKED before any existing-symbol edit with its upstream GitNexus impact evidence."],
+  "return_contract": {"transport": "built_in_subagent", "findings_first": true, "include_agent_identity_and_status": true, "edit_scope": "bounded_write", "global_handoff": "forbidden", "ledger_write": "forbidden", "user_task_hop": "forbidden", "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "changed_files", "impact_analysis", "validation", "parent_disposition"]}
+}

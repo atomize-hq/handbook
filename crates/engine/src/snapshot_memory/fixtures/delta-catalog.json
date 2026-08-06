@@ -1,0 +1,19 @@
+{
+  "schema_id": "handbook.snapshot-drift-catalog",
+  "schema_version": "1.0",
+  "comparison_contract": {"ref": "handbook.snapshot-comparison.core@1.0.0", "fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111"},
+  "drift_rule_catalog": {"ref": "handbook.snapshot-drift.core@1.0.0", "fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222"},
+  "admitted_policies": [],
+  "rules": [
+    {"rule_id": "expected_progress", "rule": {"ref": "handbook.snapshot-drift.expected-progress@1.0.0", "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}, "signal_kind": "expected_progress", "matches_family": "work", "requires_justification": false, "admitted_justification_refs": []},
+    {"rule_id": "justified_divergence", "rule": {"ref": "handbook.snapshot-drift.justified-divergence@1.0.0", "fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}, "signal_kind": "justified_divergence", "matches_family": "handbook", "requires_justification": true, "admitted_justification_refs": ["decision.hcm_3_4_delta"]},
+    {"rule_id": "unexplained_drift", "rule": {"ref": "handbook.snapshot-drift.unexplained-drift@1.0.0", "fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"}, "signal_kind": "unexplained_drift", "matches_family": "session", "requires_justification": false, "admitted_justification_refs": []},
+    {"rule_id": "scope_expansion", "rule": {"ref": "handbook.snapshot-drift.scope-expansion@1.0.0", "fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}, "signal_kind": "scope_expansion", "matches_family": "git", "requires_justification": false, "admitted_justification_refs": []},
+    {"rule_id": "execution_inefficiency_signal", "rule": {"ref": "handbook.snapshot-drift.execution-inefficiency@1.0.0", "fingerprint": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"}, "signal_kind": "execution_inefficiency_signal", "matches_family": "evidence", "requires_justification": false, "admitted_justification_refs": []},
+    {"rule_id": "planning_inaccuracy_signal", "rule": {"ref": "handbook.snapshot-drift.planning-inaccuracy@1.0.0", "fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"}, "signal_kind": "planning_inaccuracy_signal", "matches_family": "work", "requires_justification": false, "admitted_justification_refs": []},
+    {"rule_id": "proof_drift", "rule": {"ref": "handbook.snapshot-drift.proof-drift@1.0.0", "fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111"}, "signal_kind": "proof_drift", "matches_family": "evidence", "requires_justification": false, "admitted_justification_refs": []},
+    {"rule_id": "semantic_drift", "rule": {"ref": "handbook.snapshot-drift.semantic-drift@1.0.0", "fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222"}, "signal_kind": "semantic_drift", "matches_family": "handbook", "requires_justification": false, "admitted_justification_refs": []},
+    {"rule_id": "stale_handoff", "rule": {"ref": "handbook.snapshot-drift.stale-handoff@1.0.0", "fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333"}, "signal_kind": "stale_handoff", "matches_family": "session", "requires_justification": false, "admitted_justification_refs": []}
+  ],
+  "catalog_fingerprint": ""
+}

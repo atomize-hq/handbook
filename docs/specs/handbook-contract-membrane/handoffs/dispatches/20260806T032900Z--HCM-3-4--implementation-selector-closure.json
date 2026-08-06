@@ -1,0 +1,279 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260806T032900Z--HCM-3-4--implementation-selector-closure",
+  "created_at_utc": "2026-08-06T03:29:00Z",
+  "source_handoff_ids": [
+    "20260806T022000Z--HCM-3-4--orchestration--snapshot-memory-planning-protected-checkout-stop",
+    "20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction"
+  ],
+  "parent_orchestration_id": "20260806T031809Z--HCM-3-4--snapshot-memory-implementation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "incremental-implementation",
+    "test-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-I1-snapshot-memory-implementation-causal-review",
+  "subject_fingerprint": "sha256:5b4e7889f4a5ecfcc08334b5b3612c1ddabbdd6f6a5262238b06d2baec9439f6",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.4-implementation-selector-closure-1",
+    "trigger_run_ids": [
+      "selector_discovery"
+    ],
+    "finding_refs": [
+      "HCM34-I1-SEL-001",
+      "HCM34-I1-SEL-002"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T03:18:09Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.4-snapshot-memory-implementation",
+        "packet_ids": [
+          "HCM-3.4-I1-snapshot-memory-implementation-causal-review"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T031809Z--implementation-selector-and-preflight.md"
+      }
+    ],
+    "fingerprint": "sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:4cd601ad1bc674f710d644094f5ae66d09e74fe9c6e9a249ea6aea9992089306",
+    "integrated_outcome_id": "hcm-3.4-snapshot-memory-implementation",
+    "outcome_registry_fingerprint": "sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260806T031936Z--HCM-3-4--implementation-selector-discovery"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.4-implementation-selector-closure-convergence",
+    "completed_at_utc": "2026-08-06T03:28:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Re-read the direct HCM-3.4 implementation contract, all 01/02/03/04/05/06/07/08/09 authority, HCM-3.4 planning records, the discovery dispatch/result, and both exact remediation artifacts.",
+        "evidence_ref": "The remediation records a direct fresh implementation grant without inventing same-parent continuation and preserves the planning true stop unchanged."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Re-inventory the exact private module, test, and explicitly named fixture envelope against HCM-3.4/HCM-3.5 seams and existing Projection/Resolution ownership.",
+        "evidence_ref": "The five fixture paths are individually named; all production types remain private; generic Projection behavior and every HCM-3.5 consumer remain excluded."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the ordinal-sorted repo-path-NUL-SHA256-newline-v1 remediation manifest, canonical registry, and parent/outcome budget.",
+        "evidence_ref": "Subject sha256:5b4e7889f4a5ecfcc08334b5b3612c1ddabbdd6f6a5262238b06d2baec9439f6; preserved registry sha256:7a6a21cb5b305a52e92e0b234d8f26ecf343d1f79a02ac777f0407ffe41e6125; budget sha256:4cd601ad1bc674f710d644094f5ae66d09e74fe9c6e9a249ea6aea9992089306."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Strict UTF-8 decode, Markdown fence balance, exact fixture allowlist, authority-reference section inspection, and direct-grant wording review.",
+        "evidence_ref": "Both remediation artifacts decode as UTF-8, have balanced Markdown fences, cite 01/03/04/07/08 precisely, and retain no self-asserted nonce-as-authority claim."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Trailing-space/tab scan and git diff --check after selector remediation.",
+        "evidence_ref": "The remediation subject has no trailing whitespace or patch-format defect."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T032800Z--snapshot-memory-implementation-authority-admission.md",
+        "sha256": "385fffe81b96f03d3b9503116a942565abbf59cc280f69587d9b0597f344d15b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T032800Z--implementation-selector-remediation.md",
+        "sha256": "4cd8475eb59b46f99289b72cc762a3b0a86059f90af19ac74560ca954f7479cb"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:5b4e7889f4a5ecfcc08334b5b3612c1ddabbdd6f6a5262238b06d2baec9439f6"
+  },
+  "active_resolution": {
+    "level": "HCM-3.4 remediated implementation selector closure",
+    "scope_horizon": "one private Snapshot Memory owner/test/proof envelope",
+    "detail_resolution": "exact module and fixture paths, private generic Projection proof, full fail-closed matrix, and HCM-3.5 exclusion",
+    "temporal_horizon": "post-remediation selector closure before code",
+    "authority_horizon": "explicit direct implementation grant plus selector closure only; no code until CLEAN and no broader authority",
+    "memory_horizon": "immutable HCM-3.3 completion, HCM-3.4 planning true stop, discovery result, and one parent/outcome review registry",
+    "validation_horizon": "different-fresh selector closure followed by ordered implementation/proof/final-closeout stages"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T032800Z--snapshot-memory-implementation-authority-admission.md",
+      "sections": [
+        "Exact source and identity",
+        "Narrow authority and ceilings",
+        "Admission consequence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T032800Z--implementation-selector-remediation.md",
+      "sections": [
+        "Explicit authority and predecessor posture",
+        "Required authority pack and selected seam",
+        "Exact private envelope and seven internal packets",
+        "Proof, risk, and hard non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": [
+        "Snapshot Memory posture",
+        "Non-negotiable invariants"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": [
+        "Snapshot Memory",
+        "Capture consistency",
+        "Snapshot deltas",
+        "Resolution-aware snapshot projection",
+        "Security, redaction, and retention"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Snapshot Memory",
+        "Projection and Resolution seams"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.4 — Snapshot Memory and deterministic delta engine",
+        "HCM-3.5 — Resolution-aware snapshot, packet, and pipeline adoption"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Snapshot capture policy",
+        "Context Memory Snapshot",
+        "Snapshot delta",
+        "Snapshot-grounding Projection definition",
+        "Snapshot projection request/result",
+        "Snapshot redaction and retention"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-SNAP-01 through PG-SNAP-06",
+        "Regression rules 44 through 47"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Increment and external meta boundary",
+        "PHASE 1 — SELECTIVE CONTEXT ASSEMBLY",
+        "PHASE 5 — FRESH REVIEW / REMEDIATION LOOP"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "V1.4 same-parent resumption and terminality",
+        "Dispatch routing",
+        "Review lineage",
+        "Top-level orchestration protocol"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "The exact clean base has no Snapshot Memory implementation. The direct user authority is durably admitted; the remediated selector names the entire required authority pack and exact fixture files. Generic Projection remains private and unchanged; FTS is unavailable while exact call-graph impact is available.",
+  "allowed_scope": [
+    "Read-only delta-focused closure review of the exact two-entry remediation manifest and the discovery findings.",
+    "Verify that the direct authority admission is separate from the planning parent, the complete authority pack is cited, and the exact private path/fixture envelope and seven packet plan remain closed.",
+    "Verify no remediation-caused HCM-3.5/public/consumer or selector-registry budget reset was introduced."
+  ],
+  "non_goals": [
+    "Do not reopen general implementation discovery or propose unrelated cleanup.",
+    "Do not claim same-parent continuation, alter the immutable planning true stop, or create a user task hop.",
+    "Do not edit, stage, commit, update refs, query remote state, or enter protected checkouts."
+  ],
+  "tasks": [
+    "Verify the P2 authority remediation uses the direct complete user implementation contract as a discrete durable admission and does not infer authority from planning or scheduling evidence.",
+    "Verify P2 authority references now include exact applicable 01, 03, 04, 07, and 08 sections as well as Snapshot contracts and proof gates.",
+    "Verify P3 fixture-scope remediation names a closed exact five-file fixture list and the private implementation envelope still excludes public and HCM-3.5 surfaces.",
+    "Return CLEAN only if both required findings and the advisory are remediated without creating a selector/proof/review regression."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/01-target-architecture.md#snapshot-memory-posture",
+    "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md#snapshot-memory",
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md#hcm-34--snapshot-memory-and-deterministic-delta-engine",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#snapshot-capture-policy",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#pg-snap-01-through-pg-snap-06",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#decision-and-retained-rigor"
+  ],
+  "stop_conditions": [
+    "Return BLOCKED if the direct user implementation authority cannot be assessed as distinct from planning or if a required broader authority is needed.",
+    "Return findings for any incomplete P1/P2 remediation; remain read-only and return the result to the parent."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

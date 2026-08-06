@@ -53,6 +53,8 @@ mod projection;
 pub mod repository_invocation_identity;
 pub mod schema_registry;
 pub mod semantic_capability_registry;
+#[allow(dead_code)]
+mod snapshot_memory;
 pub mod stable_role_registry;
 pub mod vocabulary_registry;
 

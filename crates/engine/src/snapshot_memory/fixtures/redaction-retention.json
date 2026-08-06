@@ -1,0 +1,84 @@
+{
+  "redaction": {
+    "fail_closed": true,
+    "unmatched_action": "omit"
+  },
+  "retention": {
+    "allowed_tuples": [
+      {
+        "memory_horizon": "strategic",
+        "trigger": "gate_complete",
+        "record_class": "context_memory_snapshot"
+      },
+      {
+        "memory_horizon": "strategic",
+        "trigger": "publish",
+        "record_class": "context_memory_snapshot"
+      },
+      {
+        "memory_horizon": "execution",
+        "trigger": "session_start",
+        "record_class": "context_memory_snapshot"
+      },
+      {
+        "memory_horizon": "execution",
+        "trigger": "session_end",
+        "record_class": "context_memory_snapshot"
+      },
+      {
+        "memory_horizon": "operation",
+        "trigger": "session_start",
+        "record_class": "context_memory_snapshot"
+      },
+      {
+        "memory_horizon": "operation",
+        "trigger": "session_end",
+        "record_class": "context_memory_snapshot"
+      }
+    ],
+    "rules": [
+      {
+        "rule_id": "strategic_gate_complete",
+        "memory_horizon": "strategic",
+        "trigger": "gate_complete",
+        "record_class": "context_memory_snapshot",
+        "action": "retain_indefinitely"
+      },
+      {
+        "rule_id": "strategic_publish",
+        "memory_horizon": "strategic",
+        "trigger": "publish",
+        "record_class": "context_memory_snapshot",
+        "action": "retain_indefinitely"
+      },
+      {
+        "rule_id": "execution_session_start",
+        "memory_horizon": "execution",
+        "trigger": "session_start",
+        "record_class": "context_memory_snapshot",
+        "action": "retention_window"
+      },
+      {
+        "rule_id": "execution_session_end",
+        "memory_horizon": "execution",
+        "trigger": "session_end",
+        "record_class": "context_memory_snapshot",
+        "action": "retention_window"
+      },
+      {
+        "rule_id": "operation_session_start",
+        "memory_horizon": "operation",
+        "trigger": "session_start",
+        "record_class": "context_memory_snapshot",
+        "action": "retention_window"
+      },
+      {
+        "rule_id": "operation_session_end",
+        "memory_horizon": "operation",
+        "trigger": "session_end",
+        "record_class": "context_memory_snapshot",
+        "action": "retention_window"
+      }
+    ]
+  }
+}
