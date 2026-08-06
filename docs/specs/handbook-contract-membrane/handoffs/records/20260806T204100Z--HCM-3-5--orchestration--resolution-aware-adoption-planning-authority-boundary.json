@@ -1,0 +1,362 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary",
+  "created_at_utc": "2026-08-06T20:41:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "HCM-3.5-P1-resolution-aware-adoption-planning",
+  "orchestration_id": "20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning",
+  "source_handoff_ids": [
+    "20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fd8b9-5172-7022-8f6a-89e45751a747"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-06T20:30:00Z",
+    "evidence_ref": "A fresh built-in, read-only discovery reviewer completed through the internal subagent channel."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "/root/hcm35_discovery_review",
+      "dispatch_id": "20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery.json",
+      "dispatch_fingerprint": "sha256:dafdddebc036d25cb55d51f00d10150675d620b18ed90b9e990f1257b748869d",
+      "role": "review",
+      "agent_id": "/root/hcm35_discovery_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:53f6bd408ab8905661bc064fbe934b57865996e3f3d2ac4859511dd6bff49a9a",
+      "result_subject_fingerprint": "sha256:53f6bd408ab8905661bc064fbe934b57865996e3f3d2ac4859511dd6bff49a9a",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery.json"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-06T20:41:00Z",
+    "dispatch_count": 1,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:73ac770a423a3283f04620eaec5e09f48586874ca6bd7e4ee9c0fd49b55f6ea6"
+    ],
+    "aggregate_fingerprint": "sha256:058e68cf96a6dad12dee039a4c0479fc0ac2023df68d09d104b5a800a5ff51fb"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "7eb0cf400002760076bb69cfcc03d3eeb76cfc1e",
+    "subject_fingerprint": "sha256:53f6bd408ab8905661bc064fbe934b57865996e3f3d2ac4859511dd6bff49a9a",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260806T202615Z--resolution-aware-adoption-planning-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260806T202615Z--resolution-aware-adoption-planning-preflight.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery.json",
+      "git:7eb0cf400002760076bb69cfcc03d3eeb76cfc1e"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 Resolution-aware snapshot, packet, and pipeline adoption authority-boundary stop",
+    "scope_horizon": "one HCM-3.5 documentation-only planning outcome",
+    "detail_resolution": "The completed HCM-3.4 private Snapshot Memory and Projection source-pair evidence establishes no exported engine operation. HCM-3.5 cannot select an engine export, public Flow/pipeline compatibility posture, or concrete gate operation without product authority.",
+    "temporal_horizon": "reviewed documentation primary 7eb0cf400002760076bb69cfcc03d3eeb76cfc1e; this true stop does not advance the dedicated local integration ref",
+    "authority_horizon": "No Rust, public API, schema, dependency, configuration, product/runtime, CLI/SDK/transport, consumer, or Phase-3 expansion is authorized. Only the named documentation subject and durable authority stop are complete.",
+    "memory_horizon": "validated HCM-3.4 completed source-pair handoff, HCM-3.5 seven-file planning subject, frozen one-outcome registry, and one fresh CLEAN discovery review",
+    "validation_horizon": "preflight/ref/tree/protected evidence, HCM-3.4 predecessor validation, manifest replay, whitespace/diff checks, v1.4 dispatch and closeout validation, two validator self-tests, unavailable GitNexus attestation, and no-push audit"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Produce a reviewed HCM-3.5 planning packet that validates the completed HCM-3.4 private predecessor, identifies the exact Flow, Projection, pipeline, handoff, and gate seams, preserves fail-closed behavior, and stops rather than infers the required public compatibility and gate-operation decision.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260806T202615Z--resolution-aware-adoption-planning-selector.md",
+      "sections": [
+        "entire decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+      "sections": [
+        "Authority boundary: public compatibility and gate-operation decision",
+        "Planning exit and stop condition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+      "sections": [
+        "entire completed predecessor handoff",
+        "reviewed_state",
+        "work_completed",
+        "snapshot_refs"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Snapshot-grounding Projection definition",
+        "local closeout and parent-promotion eligibility"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-SNAP-*",
+        "PG-HANDOFF-02"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "fresh review and causal cadence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "True stops",
+        "Deterministic ledger rebuild"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 7eb0cf400002760076bb69cfcc03d3eeb76cfc1e",
+    "head": "7eb0cf400002760076bb69cfcc03d3eeb76cfc1e",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json"
+    ]
+  },
+  "work_completed": [
+    "Verified the nonce-bound assigned worktree, dedicated integration ref, base/tree/ancestor, local origin tracking baseline, cleanliness, ownership, and protected-checkout hashes before editing.",
+    "Validated the selected completed HCM-3.4 source-pair handoff with the live ordinary v1.4 corpus validator and inspected its private engine source pair rather than assuming predecessor claims.",
+    "Recorded the exact future Flow, engine Projection, pipeline inclusion, handoff-reference, and local-versus-promotion-gate seams, their dependencies, fail-closed invariants, proof matrix, and explicit non-goals.",
+    "Corrected the smallest coupled control-pack statements so HCM-3.4 private completion is not misrepresented as public or consumer adoption.",
+    "Received a fresh complete-subject CLEAN discovery review. It found no P1/P2 or advisory finding; causal policy forbids a review after CLEAN.",
+    "Committed the reviewed documentation primary 7eb0cf400002760076bb69cfcc03d3eeb76cfc1e. The required engine export/public compatibility and gate-operation decision remains unselected, so HCM-3.5 implementation planning cannot be completed."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+      "status": "completed",
+      "summary": "Validated HCM-3.5 authority-boundary specification with exact seams, invariants, proof matrix, and non-goals."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md",
+      "status": "partial",
+      "summary": "Conditional implementation sequence awaiting an explicit public compatibility and gate-operation decision."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/todo.md",
+      "status": "partial",
+      "summary": "Planning evidence complete; implementation tasks intentionally remain blocked by authority."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260806T202615Z--resolution-aware-adoption-planning-selector.md",
+      "status": "completed",
+      "summary": "Frozen documentation-only selector and exact authority boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+      "status": "blocked",
+      "summary": "Durable v1.4 authority-boundary handoff; no implementation or local integration advance is claimed."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.5-P1-D1",
+      "summary": "Private HCM-3.4 Snapshot Memory and Projection semantics are valid predecessor evidence but do not select an exported engine type/operation, a public Flow/pipeline compatibility posture, or a gate runtime. The recommendation for new purpose-named typed operations is not an authorized decision.",
+      "authority_effect": "none",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [
+    {
+      "blocker_id": "HCM35-PUBLIC-COMPATIBILITY-AND-GATE-DECISION",
+      "classification": "authority",
+      "summary": "HCM-3.5 must cross the private `handbook-engine` Snapshot Memory/Projection boundary into public Flow and pipeline consumers, and must select whether a concrete gate operation exists. Any export or existing public request/result change would make a public compatibility/product decision excluded by this packet.",
+      "resume_condition": "The user or authorized product authority selects the exact public engine-to-Flow/pipeline operation or value boundary, compatibility/SemVer posture for current callers, and whether HCM-3.5 consumes a concrete gate operation or leaves it to its future owner. A fresh same-slice selector then binds that decision before any implementation.",
+      "owner": "user / authorized product authority"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM35-API-GATE-ESC-001",
+      "trigger": "Live evidence confirms that HCM-3.4's required snapshot and Projection modules remain private, while HCM-3.5's named Flow/pipeline consumers use public operations with CLI/compiler callers and no concrete gate runtime owner is selected.",
+      "current_resolution": "The reviewed documentation packet faithfully identifies exact owner/call-path seams and fail-closed proofs without changing code. The private predecessor, current APIs, nullable handoff fields, and gate semantics are preserved; HCM-3.5 implementation and parent-promotion claims are not made.",
+      "target_resolution": "A narrowly authorized public compatibility and gate-operation decision supplies an exact engine export/operation, Flow/pipeline compatibility treatment, and gate consumption boundary for a fresh HCM-3.5 selector.",
+      "decision_required": "Choose one exact public compatibility posture (for example, new purpose-named typed operations that leave legacy resolver/compiler paths untouched, or an expressly versioned extension) and state whether gate runtime consumption is authorized now. No decision may be inferred from this record.",
+      "options": [
+        "Option 1: authorize a purpose-named typed engine grounding operation plus new Flow and pipeline operations, preserving existing public operations; separately state the gate-operation posture.",
+        "Option 2: authorize a versioned extension of existing public Flow/pipeline operations with an explicit compatibility and migration contract; separately state the gate-operation posture.",
+        "Option 3: name another exact public owner/interface that preserves the existing acyclic dependency direction and complete fail-closed obligations."
+      ],
+      "recommendation": "Option 1, if authorized, because it isolates Resolution-aware adoption from current CLI/compiler callers; this recommendation is not a product decision or implementation authority.",
+      "affected_refs": [
+        "crates/engine/src/lib.rs",
+        "crates/engine/src/projection.rs",
+        "crates/engine/src/snapshot_memory",
+        "crates/flow/src/resolver.rs",
+        "crates/flow/src/packet_result.rs",
+        "crates/pipeline/src/pipeline_compile.rs",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "A fresh same-slice task receives the explicit decision, revalidates the HCM-3.4 predecessor and current caller surface, freezes an implementation selector, and applies impact analysis before any source edit."
+    }
+  ],
+  "validation": [
+    {
+      "command": "assigned-checkout/ref/base/tree/ancestor/origin/worktree/cleanliness/protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Before edits, HEAD and refs/heads/orchestration/handbook-hcm-3-5-planning-20260806 matched 1a10bfd59e8433fa344dd2baa4880b4b87c7f8f6, tree 92225d653952cd1ca11a9e7edf449e98fc7eaff7, required ancestor 1a10bfd59e8433fa344dd2baa4880b4b87c7f8f6, and local origin/main plus origin/HEAD a3babd20329027afacdcee9d8b7b9d638d15af5b; protected checksums/statuses were recorded."
+    },
+    {
+      "command": "v1.4 discovery dispatch verification and fresh complete-subject review",
+      "status": "passed",
+      "evidence_ref": "The discovery dispatch replayed subject sha256:53f6bd408ab8905661bc064fbe934b57865996e3f3d2ac4859511dd6bff49a9a. Fresh reviewer /root/hcm35_discovery_review returned CLEAN with no P1/P2/P3/P4; no post-CLEAN review ran."
+    },
+    {
+      "command": "UTF-8/Markdown hygiene and git diff --check",
+      "status": "passed",
+      "evidence_ref": "The complete staged documentation subject and closeout surface have no trailing whitespace or diff errors."
+    },
+    {
+      "command": "GitNexus upstream impact and scoped/compare-to-main detect_changes",
+      "status": "not_run",
+      "evidence_ref": "Unavailable: this checkout exposes no GitNexus MCP tool, CLI, or .gitnexus/run.cjs index. No function, class, or method was edited; manual exact-path comparison confirms documentation-only scope. This is unavailable, never GREEN."
+    },
+    {
+      "command": "product/runtime test suite",
+      "status": "not_run",
+      "evidence_ref": "Planning-only authority selects no Rust or runtime behavior and therefore makes no product-test claim."
+    },
+    {
+      "command": "v1.4 ordinary validator plus admission and orchestration-contract self-tests",
+      "status": "passed",
+      "evidence_ref": "Run after deterministic ledger rebuild during mechanical closeout; validates record/index parity, causal lineage, immutable historical admission, and two-commit closeout rules."
+    },
+    {
+      "command": "protected-boundary and local-publication audit",
+      "status": "passed",
+      "evidence_ref": "Only the assigned worktree changed. Protected paths stayed byte-for-byte and unstaged/uncommitted; the dedicated local integration ref remains at its expected base and no remote query, fetch, push, or publication occurred."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": [
+        "HCM-3.4 and HCM-3.5 planning correction"
+      ],
+      "reason": "Prevent private HCM-3.4 completion from being read as automatic consumer/public adoption.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "Snapshot Memory"
+      ],
+      "reason": "Update Snapshot Memory's current private-boundary truth and explicit consumer prerequisites.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Resolve the same HCM-3.5 public compatibility and gate-operation authority boundary before selecting any implementation work.",
+    "condition": "A user or authorized product authority supplies the exact public engine/Flow/pipeline compatibility posture and gate-operation scope described by the blocker and escalation.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+        "sections": [
+          "entire true-stop handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+        "sections": [
+          "entire authority-boundary planning packet"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+        "sections": [
+          "entire completed predecessor handoff"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Read-only same-slice adjudication until a new explicit authority is bound to a fresh HCM-3.5 selector.",
+      "After explicit authority and selector validation only, the narrowly selected public compatibility/gate-operation planning or implementation surface."
+    ],
+    "prohibited_scope": [
+      "Do not infer an engine export, Flow/pipeline request/result change, SemVer/migration posture, gate runtime, dependency, schema, configuration, SDK, CLI, transport, consumer adoption, or parent promotion from this stop.",
+      "Do not reopen this CLEAN review, alter immutable predecessors, select HCM-3.6/HCM-4+/HCM-5, mutate protected paths, or perform remote operations without separate explicit authority."
+    ],
+    "acceptance_criteria": [
+      "The authority names exact public owner(s), operation/value/request/result surface, caller compatibility behavior, SemVer/migration treatment, and gate-operation disposition while preserving acyclic dependencies and fail-closed disclosure/currentness/redaction behavior.",
+      "A fresh selector, impact analysis before every source-symbol edit, complete proof matrix, and v1.4 causal review lineage bind the selected work; P1/P2 remain unwaived.",
+      "No implementation begins merely because HCM-3.4 is completed privately or because this planning stop recommends an option."
+    ],
+    "stop_conditions": [
+      "Stop if the authority is ambiguous, broadens the selected slice/risk ceiling, lacks a concrete gate disposition, or requires any unselected public/dependency/product decision.",
+      "Stop on any protected-path discrepancy, integration-ref/base drift, review capability failure, or failed mandatory proof; do not merge, rebase, reset, clean, force-update, fetch, push, or publish remotely."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-3.5 has a CLEAN documentation-only planning review and a verified HCM-3.4 private predecessor. Implementation stops because exposing private engine snapshot/projection semantics to public Flow/pipeline callers and selecting gate-runtime consumption are excluded product/API decisions. The durable authority-boundary record preserves conditional seams and proof without advancing the local integration ref or claiming consumer adoption."
+}
