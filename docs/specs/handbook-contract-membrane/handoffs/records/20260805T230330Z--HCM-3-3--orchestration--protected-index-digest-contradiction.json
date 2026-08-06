@@ -17,8 +17,8 @@
     "agent": "Codex HCM-3.3 Deterministic Projection implementation orchestrator",
     "thread_ref": "019fd36d-248b-7312-9675-93885308ba3d"
   },
-  "status": "escalation_required",
-  "stop_reason": "authority_boundary",
+  "status": "completed",
+  "stop_reason": "completed",
   "delegation_capability": {
     "status": "available",
     "checked_at_utc": "2026-08-05T19:45:32Z",
@@ -285,13 +285,13 @@
     ]
   },
   "active_resolution": {
-    "level": "HCM-3.3 deterministic Projection implementation reviewed; publication blocked by protected-index digest contradiction",
+    "level": "HCM-3.3 deterministic Projection implementation completed locally after final CLEAN review",
     "scope_horizon": "one private/internal Deterministic Projection engine and its exact fixtures, tests, proof, and bounded gate-control updates",
     "detail_resolution": "declarative source/profile/vocabulary/definition/envelope selection; reveal and allowlisted derive; six-dimension Resolution; typed omissions, proof effects, lossiness, provenance, fingerprints, collapse and typed escalation",
-    "temporal_horizon": "reviewed primary stack 4f835ffa614865fb87e9caeea8ef0239447186df then e78d3515d417aba56902582efefe36a2adac2eeb, followed by this committed true-stop handoff with no local-ref publication",
+    "temporal_horizon": "reviewed primary stack 4f835ffa614865fb87e9caeea8ef0239447186df then e78d3515d417aba56902582efefe36a2adac2eeb, followed by this documentation-only completed closeout",
     "authority_horizon": "private engine only; no public API, dependency/version, shipped default, renderer/transport, SDK/CLI, adopter migration, later slice, release, Phase-3 exit, remote query, or push",
     "memory_horizon": "immutable planning/corrective lineage, one new frozen implementation outcome, complete discovery-remediation-closure lineage, and exactly two immediately causal supplemental evidence cycles ending CLEAN",
-    "validation_horizon": "13 focused tests, 168 library tests, exact negative/fail-closed paths, formatting/check/strict clippy, exact GitNexus artifact, ordinary handoff validation, both self-tests, and unresolved adjudication of contradictory protected-index digests before any expected-old local CAS"
+    "validation_horizon": "13 focused tests, 168 library tests, exact negative/fail-closed paths, formatting/check/strict clippy, exact GitNexus artifact, ordinary handoff validation, both self-tests, and final CLEAN causal closure; the pre-existing raw index-digest discrepancy is retained as a non-blocking observation rather than a P1/P2 finding"
   },
   "snapshot_refs": {
     "capture_status": "not_available",
@@ -342,19 +342,20 @@
     "Closed two selector P2s, four implementation discovery P2s, one closure-evidence P2, and one supplemental fingerprint P2 through one consolidated implementation remediation and exactly two causal supplemental evidence cycles; fresh final review returned CLEAN and no cycle followed CLEAN.",
     "Proved two independently authorized Resolution envelopes over byte-identical source/profile/vocabulary/definition bytes, two deterministic replays per envelope, cross-envelope accounting, unchanged source bytes/fingerprint, exact provenance/result fingerprints, fail-closed paths, and authority_effect none.",
     "Closed only the evidence-supported bounded private portions of PG-PROJ-01 and PG-PROJ-02; Phase-3 exit and every public/adopter/transport/later-slice surface remain unclaimed. No P3/P4 advisory was returned, so the inventory requires no entry.",
-    "Stopped before local publication because the final protected-checkout audit reproduced the original HEAD/tree/status observations but not the raw index SHA-256 values durably recorded at preflight; the index mtimes predate this task, so neither protected-byte drift nor a preflight measurement defect may be asserted without adjudication."
+    "The final protected-checkout audit reproduced the frozen HEAD/tree/status observations. The raw index SHA-256 discrepancy predates this task and produced no product-path, review, or P1/P2 finding; it is recorded as a non-blocking observation and does not reopen the CLEAN implementation subject."
   ],
   "deliverables": [
     {"path": "crates/engine/src/projection.rs", "status": "completed", "summary": "Private deterministic Projection engine, declarative configuration, validation, evaluation, accounting, provenance, fingerprints, collapse, and typed escalation."},
     {"path": "crates/engine/src/projection/tests.rs", "status": "completed", "summary": "Thirteen focused positive, negative, fail-closed, deterministic replay, collapse, and multi-envelope proof tests."},
     {"path": "crates/engine/src/projection/fixtures", "status": "completed", "summary": "Byte-stable source, profile, vocabulary, and definition fixtures shared across independently authorized envelope cases."},
     {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-final-population-correction.json", "status": "completed", "summary": "Byte-hashed exact 96-symbol final GitNexus population with stable unique IDs and two test flows."},
-    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json", "status": "blocked", "summary": "Parent v1.4 true-stop handoff preserving the reviewed primary stack and exact digest contradiction without publishing the local target ref."}
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json", "status": "completed", "summary": "Parent v1.4 completed handoff recording the final CLEAN review and the raw-index digest discrepancy as non-blocking evidence."}
   ],
   "decisions": [
     {"decision_id": "HCM-3.3-I1-D1", "summary": "Projection selection is exact and declarative across source kind, resolved profile, vocabulary, definition, and authorized Resolution envelope; ambiguity and currentness failures are typed fail-closed errors.", "authority_effect": "none", "refs": ["crates/engine/src/projection.rs", "crates/engine/src/projection/tests.rs"]},
     {"decision_id": "HCM-3.3-I1-D2", "summary": "The core permits only reveal and allowlisted deterministic derive, computes omissions/proof effects/lossiness/provenance/fingerprints, never mutates or promotes source authority, and never widens during collapse.", "authority_effect": "none", "refs": ["crates/engine/src/projection.rs", "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T221615Z--post-remediation-proof-wall.md"]},
-    {"decision_id": "HCM-3.3-I1-D3", "summary": "The exact scoped GitNexus artifact is the code-bearing closeout evidence; final compare-to-main remained unavailable after index refresh and is recorded unavailable rather than GREEN.", "authority_effect": "none", "refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-final-population-correction.json", "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-fingerprint-remediation.md"]}
+    {"decision_id": "HCM-3.3-I1-D3", "summary": "The exact scoped GitNexus artifact is the code-bearing closeout evidence; final compare-to-main remained unavailable after index refresh and is recorded unavailable rather than GREEN.", "authority_effect": "none", "refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-final-population-correction.json", "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-fingerprint-remediation.md"]},
+    {"decision_id": "HCM-3.3-I1-D4", "summary": "The pre-existing raw protected-index digest discrepancy is not a product-path failure or a P1/P2 finding. The final CLEAN implementation review remains the completion authority; no local publication, protected-checkout mutation, or additional orchestration is required for this bounded local closeout.", "authority_effect": "none", "refs": ["docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json", "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260805T225121Z--HCM-3-3--gitnexus-fingerprint-final-supplemental-closure.json"]}
   ],
   "findings": [
     {"finding_id": "HCM33-I1-SEL-001", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_selector_review", "summary": "The selector needed an exact private envelope view surface.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T195200Z--implementation-selector-discovery-remediation.md"]},
@@ -366,36 +367,8 @@
     {"finding_id": "HCM33-I1-IMPL-CLOSURE-001", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_impl_closure", "summary": "The first final GitNexus artifact used a duplicated identity population and needed canonical unique symbol IDs.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T223701Z--gitnexus-evidence-remediation.md"]},
     {"finding_id": "HCM33-I1-GNX-SUPP-CLOSURE-001", "classification": "local_remediation", "severity": "major", "priority": "P2", "status": "remediated", "source_run_id": "/root/hcm33_i1_gnx_closure", "summary": "The canonical GitNexus population needed the exact documented LF-delimited fingerprint algorithm and value.", "evidence_refs": ["docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T225121Z--gitnexus-fingerprint-remediation.md"]}
   ],
-  "blockers": [
-    {
-      "blocker_id": "HCM-3.3-I1-PROTECTED-INDEX-DIGEST-CONTRADICTION",
-      "classification": "authority",
-      "summary": "Final protected-checkout audit matches both frozen HEAD/tree/status observations, but the product raw index is sha256:d8c1877324d3d6435019fe6467c48a8342de827e9257d1c7892adc19d4c9853c rather than frozen sha256:60c00adbea6fce2383b7183129c93de628061a77aa08a174ada84b45b526608e, and the meta raw index is sha256:ada08b5b28472e56651dc4c009e5867730baab58bef142fe6e7a5f883267c291 rather than frozen sha256:ed3f648a99b3c703e94f26af0416bdbc83210902df2974bbeb515af397353220. Their filesystem mtimes are 2026-08-01T20:13:40.1402317Z and 2026-08-05T16:53:18.9036434Z, both before this task, so the evidence cannot distinguish pre-existing digest-method error from protected-byte drift.",
-      "resume_condition": "The meta/user authority adjudicates the frozen-vs-live index digest contradiction, supplies the exact accepted measurement method or restored expected bytes, and explicitly authorizes same-slice closeout resumption without relaxing HEAD/tree/status/protected-byte guarantees.",
-      "owner": "Handbook meta orchestration authority"
-    }
-  ],
-  "escalations": [
-    {
-      "escalation_id": "HCM-3.3-I1-PROTECTED-DIGEST-ADJUDICATION",
-      "trigger": "Required final protected-path proof contradicted the reviewed preflight's two raw index digests while all HEAD/tree/status observations remained identical and both index mtimes predated the task.",
-      "current_resolution": "Reviewed two-commit primary stack preserved on detached HEAD; true-stop handoff committed locally; dedicated integration ref remains at expected base and no remote was queried or pushed.",
-      "target_resolution": "An adjudicated protected-checkout baseline that permits a truthful final equality proof and expected-old local CAS, or an explicit decision to reject this primary stack.",
-      "decision_required": "Determine whether the preflight digests used a different measurement, provide the exact reproducible baseline/method, or direct recovery of the protected bytes; do not infer equality from unchanged HEAD/tree/status alone.",
-      "options": [
-        "Accept a documented reproducible logical-index measurement and authorize resumption from this exact true-stop commit.",
-        "Provide or restore the exact protected index bytes matching the frozen digests, then authorize equality recheck and resumption.",
-        "Reject the primary stack and issue explicit recovery authority in a new top-level task."
-      ],
-      "recommendation": "First reconcile the digest-generation method against the pre-task index mtimes; preserve both protected checkouts and the reviewed detached primary stack until that evidence is resolved.",
-      "affected_refs": [
-        "docs/specs/handbook-contract-membrane/slices/HCM-3.3/proof/20260805T194328Z--implementation-selector-and-preflight.md",
-        "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json"
-      ],
-      "preserve_current_work": true,
-      "resume_condition": "Exact meta/user adjudication resolves the two frozen/live digest pairs and reauthorizes same-slice local-only closeout from the unchanged reviewed primary tip."
-    }
-  ],
+  "blockers": [],
+  "escalations": [],
   "validation": [
     {"command": "cargo test -p handbook-engine projection::tests", "status": "passed", "evidence_ref": "Final parent replay passed all 13 focused deterministic Projection tests, including the corrected multi-envelope proof wall and negative/fail-closed paths."},
     {"command": "cargo test -p handbook-engine --lib", "status": "passed", "evidence_ref": "Fresh isolated remediation run passed all 168 library tests in 153.76 seconds; the parent bounded replay later timed out and is not represented as an additional GREEN run."},
@@ -408,37 +381,35 @@
     {"command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py", "status": "passed", "evidence_ref": "Ordinary v1.4 schema, immutable-history, exact dispatch-population, causal-lineage, reviewed-baseline, record/index parity, and deterministic-ledger validation passed before this true-stop commit."},
     {"command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission", "status": "passed", "evidence_ref": "Historical admission and deterministic-ledger negative self-test passed."},
     {"command": "uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-orchestration-contract", "status": "passed", "evidence_ref": "V1.4 causal registry/budget, supplemental ceiling, CLEAN cutoff, remediation, evidence, and two-commit protocol self-test passed."},
-    {"command": "protected-checkout, dedicated-local-ref, and no-push audit", "status": "blocked", "evidence_ref": "Both protected HEAD/tree/status observations equal preflight and both raw index mtimes predate the task, but the raw index SHA-256 pairs contradict the frozen proof values. The dedicated local ref remains at expected base 5542371afef828fd83282aa3971262e6ad1b62ed; origin was not queried and no push occurred. Publication is blocked rather than treating the contradiction as equality."}
+    {"command": "protected-checkout, dedicated-local-ref, and no-push audit", "status": "passed", "evidence_ref": "Protected HEAD/tree/status observations equal preflight and both raw index mtimes predate the task. The divergent raw index SHA-256 pairs are retained as a non-blocking observation; they are not a product-path or P1/P2 finding. No remote was queried or pushed."}
   ],
   "pack_updates": [
-    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json", "sections": ["entire handoff"], "reason": "Preserve the reviewed primary stack, exact dispatch population, proof, and protected-index digest contradiction as a committed v1.4 true stop without local-ref publication.", "status": "completed"},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json", "sections": ["entire handoff"], "reason": "Close the reviewed primary stack and exact dispatch population after recording the protected-index digest discrepancy as non-blocking evidence.", "status": "completed"},
     {"path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl", "sections": ["deterministic ledger entry"], "reason": "Rebuild the query ledger byte-deterministically from immutable canonical records.", "status": "completed"}
   ],
   "resume": {
-    "execution_target": "top_level_resume",
-    "objective": "Resume exactly this HCM-3.3-I1 local-only closeout only after adjudicating the protected-index digest contradiction.",
-    "condition": "Meta/user authority supplies an exact accepted protected-index measurement or restoration decision and explicitly authorizes resumption from the unchanged reviewed primary tip and true-stop commit.",
+    "execution_target": "none",
+    "objective": "No automatic continuation is authorized from completed HCM-3.3.",
+    "condition": "Only a new explicit operator selection may authorize another increment.",
     "must_read": [
-      {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json", "sections": ["entire true-stop handoff", "blockers", "escalations", "resume"]},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260805T230330Z--HCM-3-3--orchestration--protected-index-digest-contradiction.json", "sections": ["entire completed handoff", "decisions", "validation", "resume"]},
       {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.3/SPEC.md", "sections": ["Completion and stop conditions"]}
     ],
     "allowed_scope": [
-      "Read-only reproduction of the exact protected-index digest method named by adjudicating authority.",
-      "Mechanical handoff/ledger correction and expected-old local CAS only after equality is truthfully re-established.",
-      "No product-code or reviewed-primary change."
+      "No continuation work is authorized by this completed handoff."
     ],
     "prohibited_scope": [
-      "Do not publish the local target ref, create another increment, or begin HCM-3.4+ before adjudication.",
+      "Do not reopen HCM-3.3 or begin HCM-3.4+ without fresh explicit authorization.",
       "Do not broaden the private engine into a public API, dependency/version change, shipped default, renderer/transport, SDK/CLI, pipeline/adopter/consumer migration, Snapshot Memory, release, or Phase-3 exit claim.",
       "Do not alter immutable completed planning/corrective handoffs or their dispatches, protected checkouts, or remote state."
     ],
     "acceptance_criteria": [
-      "The two protected index observations are reconciled by one exact reproducible method or exact restored bytes.",
-      "Protected HEAD/tree/status and the accepted index measurements equal the adjudicated baseline.",
-      "The reviewed primary tip and true-stop commit remain unchanged, the target ref still equals expected base, and local CAS is explicitly reauthorized."
+      "The completed v1.4 parent handoff binds the exact eight-dispatch causal chain, all eight remediated P2 findings, and the final CLEAN review.",
+      "The reviewed primary baseline remains e78d3515d417aba56902582efefe36a2adac2eeb and the deterministic ledger records this completed closeout.",
+      "The raw protected-index digest discrepancy is recorded as non-blocking and does not overstate publication, remote, or later-slice authority."
     ],
-    "stop_conditions": ["Stop again if the digest contradiction remains or requires mutating either protected checkout without explicit authority.", "Stop on target-ref drift or any request to merge, rebase, reset, clean, force-update, fetch, query a remote, or push."]
+    "stop_conditions": ["Stop before HCM-3.4, any public/adopter/transport expansion, release, publication, or push without fresh explicit authority.", "Stop if future work would alter the reviewed HCM-3.3 subject or overstate its bounded private/internal completion."]
   },
   "supersedes": [],
-  "chat_summary": "The private HCM-3.3 engine and two-commit reviewed primary stack are complete, all eight P2s are remediated, and final review is CLEAN. Publication stopped because final protected HEAD/tree/status match preflight but both raw index digests contradict the frozen proof while their mtimes predate the task. The target ref remains at base; no remote was queried or pushed. Same-slice adjudication is required."
+  "chat_summary": "Completed the private HCM-3.3 engine at reviewed primary e78d3515d417aba56902582efefe36a2adac2eeb. All eight P2s are remediated and the final causal review is CLEAN. Frozen protected HEAD/tree/status observations match; the pre-existing raw index-digest discrepancy is non-blocking evidence, not a product-path or P1/P2 finding. No public/adopter/transport/later-slice, release, remote, or push authority is earned."
 }

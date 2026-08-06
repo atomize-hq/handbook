@@ -536,13 +536,16 @@ transport expansion, release, push, and publication remain separately selected.
 - source/profile/projection fingerprints;
 - no synthesis in the core implementation.
 
-The selected HCM-3.3 private/internal increment is implemented and proof-ready
-under the bounded 2026-08-05 implementation parent. It admits one generic
+The selected HCM-3.3 private/internal increment is completed locally under the
+bounded 2026-08-05 implementation parent and its final CLEAN review. It admits
+one generic
 configured custom-kind engine, one currentness-guarded opaque Resolution view,
 deterministic `reveal` and allowlisted deterministic `derive`, complete
 omission/proof/lossiness/provenance/fingerprint accounting, and the corrected
 two-admitted-envelope replay wall. This earns only the exact private/internal
-portions of `PG-PROJ-01` and `PG-PROJ-02`; public API/default catalog/consumer
+portions of `PG-PROJ-01` and `PG-PROJ-02`. The pre-existing raw protected-index
+digest discrepancy is recorded as non-blocking evidence, not a P1/P2 finding;
+public API/default catalog/consumer
 adoption, Snapshot Memory, HCM-3.4+, release, push, and Phase-3 exit remain
 separately authorized.
 

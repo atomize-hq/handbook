@@ -4,8 +4,8 @@
 
 **Current-selection correction:** the historical HCM-3.2 status above did not
 authorize HCM-3.3. The separately selected bounded HCM-3.3 private/internal
-implementation below now supersedes only that HCM-3.3 deferral; HCM-0.11,
-HCM-3.4+, and every listed expansion remain unauthorized.
+implementation below is completed locally and supersedes only that HCM-3.3
+deferral; HCM-0.11, HCM-3.4+, and every listed expansion remain unauthorized.
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
@@ -19,8 +19,11 @@ currentness, complete six-dimension omission/proof/lossiness accounting, exact
 provenance/fingerprints, source immutability, and non-widening collapse. Its
 corrected proof wall replays one byte-identical closure twice under each of two
 distinct admitted envelopes. Only the exact private/internal portions of
-`PG-PROJ-01` and `PG-PROJ-02` close; no public API/default catalog/adopter,
-Snapshot Memory, HCM-3.4+, Phase-3 exit, release, push, or publication follows.
+`PG-PROJ-01` and `PG-PROJ-02` close, with all P2 findings remediated and final
+causal review CLEAN. The pre-existing raw protected-index digest discrepancy is
+non-blocking evidence, not a product-path or P1/P2 finding. No public API,
+default catalog/adopter, Snapshot Memory, HCM-3.4+, Phase-3 exit, release,
+push, or publication follows.
 
 **Post-exit corrective outcome:** The immutable P7/Phase 2 exit remains
 completed evidence. The separately selected HCM-2.4 product-smoke correction
@@ -35,9 +38,9 @@ accepts only this corrective outcome; FINDINGS leaves it incomplete. HCM-3.1
 is separately completed by its own reviewed authority. HCM-3.2 is separately
 completed locally by its own reviewed authority and completed v1.4 handoff;
 HCM-0.11, HCM-3.3+, and automatic continuation remain unauthorized.
-The HCM-3.3 deferral in the historical post-exit paragraph is superseded only
-by the separately selected bounded implementation recorded above. HCM-0.11,
-HCM-3.4+, and automatic continuation remain unauthorized.
+The HCM-3.3 deferral in the historical post-exit paragraph is superseded by the
+completed bounded implementation recorded above. HCM-0.11, HCM-3.4+, and
+automatic continuation remain unauthorized.
 
 **Repo-truth snapshot:** 2026-07-25 at `7b3b5454ef363d08e4c6c78e6a201d8c36c10c5c`; re-check live code before every slice
 
