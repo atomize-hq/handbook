@@ -1,0 +1,231 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260806T174900Z--HCM-3-4--private-projection-source-pair-planning-discovery",
+  "created_at_utc": "2026-08-06T17:49:00Z",
+  "source_handoff_ids": [
+    "20260806T064500Z--HCM-3-4--orchestration--snapshot-memory-projection-cardinality-stop"
+  ],
+  "parent_orchestration_id": "20260806T174800Z--HCM-3-4--private-projection-source-pair-planning",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-P2-private-projection-source-pair-planning",
+  "subject_fingerprint": "sha256:7d375cd5d1bdd82014cad240d6c197f45415395b58f0d5f4c46b38d3e621ef35",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3.4-private-projection-source-pair-planning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T17:48:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.4-private-projection-source-pair-planning",
+        "packet_ids": [
+          "HCM-3.4-P2-private-projection-source-pair-planning"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T174700Z--private-projection-source-pair-planning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:3368f5f514700ad9b21f3fb1add55111f08320952de7fa14725a5959845b176f"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:3bede48cf6ad661aa461f07fb24f51f44fd92d84b37ff7a0b668ca3b1678a695",
+    "integrated_outcome_id": "hcm-3.4-private-projection-source-pair-planning",
+    "outcome_registry_fingerprint": "sha256:3368f5f514700ad9b21f3fb1add55111f08320952de7fa14725a5959845b176f",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.4-private-projection-source-pair-planning-discovery-convergence",
+    "completed_at_utc": "2026-08-06T17:48:55Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the selected source-pair selector, amended HCM-3.4 specification, implementation-ready plan, task ledger, preflight, immutable HCM-3.4 true stop, generic Projection source/currentness seam, Snapshot-grounding Projection contract, and 07/08/09 protocol.",
+        "evidence_ref": "The complete candidate is documentation-only. Rust, tests, fixtures, generic Projection runtime configuration, consumers, APIs, schemas, dependencies, and HCM-3.5+ are non-goals."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inventory all planning-subject paths plus the referenced private Projection and Snapshot Memory source/test seams and HCM-3.5 consumer boundary.",
+        "evidence_ref": "Only the five planning documents are in the subject manifest. `crates/engine/src/projection.rs`, `crates/engine/src/projection/tests.rs`, Snapshot Memory code, and HCM-3.5 are read-only context and no fixture/consumer is selected."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 manifest, canonical outcome registry, and parent/outcome-derived causal budget.",
+        "evidence_ref": "Subject sha256:7d375cd5d1bdd82014cad240d6c197f45415395b58f0d5f4c46b38d3e621ef35; registry sha256:3368f5f514700ad9b21f3fb1add55111f08320952de7fa14725a5959845b176f; budget sha256:3bede48cf6ad661aa461f07fb24f51f44fd92d84b37ff7a0b668ca3b1678a695."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Strict UTF-8 decode and Markdown fence-balance inspection for every planning-subject file.",
+        "evidence_ref": "All five manifest files decode as UTF-8, render as Markdown, and contain no unbalanced fenced block."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Check every planning-subject file for trailing spaces/tabs and run git diff --check.",
+        "evidence_ref": "The planning subject has no trailing whitespace and git diff --check exits 0 before the reviewer is spawned."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+        "sha256": "10a2379842862bc960855b27d091ed95242b6c4f4fd6c83b1a233357b7785719"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T174700Z--private-projection-source-pair-planning-selector.md",
+        "sha256": "61a3250df852a4197bb2d2f4568bfb9fdf07608581c79bdd51590e3df0923bb0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T174700Z--private-projection-source-pair-planning-preflight.md",
+        "sha256": "8785974df6ca87896f8ba157749747df9569a54da612e3c7de9850a33b141e15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+        "sha256": "6f79f434c62dce83922523ccc6c16601982810f0f56a866d455a74291ca3cbd9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/todo.md",
+        "sha256": "a9cb00ed952602d70d1bc84fc6956b6417002cf9e8ecdcc0201b0f2d86ed68c4"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:7d375cd5d1bdd82014cad240d6c197f45415395b58f0d5f4c46b38d3e621ef35"
+  },
+  "active_resolution": {
+    "level": "HCM-3.4 private Projection source-pair planning discovery",
+    "scope_horizon": "one private generic source-pair capability plan",
+    "detail_resolution": "exact current/delta identity, compatibility dependency, five-family currentness, disclosure/omission, redaction, and non-authority",
+    "temporal_horizon": "planning before a future implementation selector",
+    "authority_horizon": "documentation only; no source/test/fixture/configuration/consumer adoption",
+    "memory_horizon": "HCM-3.3 baseline and immutable HCM-3.4 cardinality true stop",
+    "validation_horizon": "one complete-subject discovery review and bounded causal closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T174700Z--private-projection-source-pair-planning-selector.md",
+      "sections": [
+        "entire decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "sections": [
+        "entire implementation-ready planning packet"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T064500Z--HCM-3-4--orchestration--snapshot-memory-projection-cardinality-stop.json",
+      "sections": [
+        "entire true-stop handoff",
+        "blockers",
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Snapshot-grounding Projection definition",
+        "Snapshot projection request/result"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-SNAP-04"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Admission and duplicate rules"
+      ]
+    }
+  ],
+  "repo_truth": "The assigned worktree is clean at the nonce-bound base before this documentation subject. Live private Projection code already binds exact multiple sources but stores one captured revision tuple per source and has no declarative delta-to-current relation. The HCM-3.4 true stop reports this as the exact PG-SNAP-04 blocker; no source, test, fixture, runtime configuration, or consumer is selected by this packet.",
+  "allowed_scope": [
+    "Independently review only the five-file documentation subject for authority, exact pair identity, currentness, compatibility, omission/redaction, pre-HCM-3.4 behavior preservation, proofability, and scope.",
+    "Use the named live Projection and Snapshot Memory seams solely as read-only context to validate that the proposed private field/validator plan is minimal and technically grounded.",
+    "Return unique HCM34-SPP-DISC identifiers only for candidate planning defects; do not repair any finding."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a dispatch, write a handoff/ledger, delegate, or run product tests.",
+    "Do not implement or test Snapshot Memory or Projection behavior, select Rust symbols for editing, add a generic Projection configuration, public API/schema/dependency/workflow/runtime setting, or adopt a Handoff, packet, pipeline, SDK, CLI, HCM-3.5, HCM-3.6, or Phase-3 consumer.",
+    "Do not access protected checkouts or remote state, fetch, push, publish, merge, rebase, reset, or clean."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit. Every finding names exact file/section, violated authority or gate, concrete failure, smallest safe remediation, and missing verification.",
+    "Verify that the plan keeps one `snapshot_current` plus one compatible `snapshot_delta`, all five currentness families/slots, exact provenance, Resolution minima, typed disclosures/omissions, hidden-data refusal, and authority_effect none while preserving one-source behavior.",
+    "Verify that `captured_family_revisions`, `source_dependencies`, and `source_pair_requirements` are a bounded private model/configuration seam rather than a public configuration or HCM-3.5 consumer; check the fixed private test-only proof matrix for missing-half, incompatibility, stale, substitution, duplicate, omitted-family, malformed-pair, and redaction negatives.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:7d375cd5d1bdd82014cad240d6c197f45415395b58f0d5f4c46b38d3e621ef35."
+  ],
+  "contracts_and_gates": [
+    "This is one complete-subject planning discovery review under the frozen source-pair outcome registry. A valid P1/P2 receives one consolidated documentation-only remediation and a different-fresh delta closure; no review follows CLEAN.",
+    "PG-SNAP-04 remains open. The plan must not relax it, create a second Projection model, omit a required checked family, expose hidden data, or create an HCM-3.5 consumer claim.",
+    "P1/P2 cannot be waived or deferred. P3/P4 may be inventoried only under the live review inventory rules."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair if the planning subject is ambiguous, incomplete, untestable, unsafe, overbroad, incompatible with the generic baseline, or would weaken PG-SNAP-04.",
+    "Return BLOCKED if validation requires implementation, tests, fixtures, a generic runtime configuration, public/schema/dependency/workflow scope, HCM-3.5 adoption, a sibling slice, protected checkout access, remote action, or unavailable mandatory review capability.",
+    "Report any manifest, causal-cadence, protected-boundary, or authority issue to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

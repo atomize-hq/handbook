@@ -1,122 +1,220 @@
-# HCM-3.4 Snapshot Memory and deterministic delta engine — implementation plan
+# HCM-3.4 private Projection source-pair — implementation-ready planning packet
 
-## Planning outcome
+## Status and authority
 
-This is a future implementation plan, not a code packet. It decomposes the Snapshot Memory capability selected by HCM-3.4 without selecting current symbols, paths, APIs, schemas, or runtime behavior. The current increment creates no Snapshot record, capture policy, delta, hook, test, or adoption claim.
+This is a planning-only packet for the fresh integrated outcome
+`hcm-3.4-private-projection-source-pair-planning` and packet
+`HCM-3.4-P2-private-projection-source-pair-planning`. Its only authority is
+the frozen selector at
+`../decision/20260806T174700Z--private-projection-source-pair-planning-selector.md`.
+It consumes, but does not alter, the immutable blocked HCM-3.4 handoff
+`20260806T064500Z--HCM-3-4--orchestration--snapshot-memory-projection-cardinality-stop`.
 
-## Dependency graph
+This plan is not an implementation grant. Do not edit Rust, product or test
+code, fixtures, generic Projection runtime configuration, public APIs,
+schemas, dependencies, workflow/runtime configuration, or a consumer. Do not
+claim `PG-SNAP-04`, HCM-3.5 adoption, `PG-HANDOFF-02`, or Phase-3 exit from
+this packet.
 
-```text
-completed HCM-3.2 Context Resolution kernel
-  + completed HCM-3.3 deterministic Projection boundary
-  + frozen Snapshot capture/delta/redaction/retention contracts
-    -> exact capture-policy and source-family closure
-    -> immutable normalized snapshot and derived consistency
-    -> compatible deterministic delta and catalog signals
-    -> fail-closed redaction, retention, and deduplication posture
-    -> paired end/start boundary workflow
-    -> private HCM-3.4 generic Projection integration proof
-    -> later HCM-3.5 handoff/packet/pipeline adoption
-```
+## Grounded problem statement
 
-HCM-3.3 is the immediate ordered predecessor. Its Projection completion does not authorize HCM-3.4, but it locks the generic non-authority and exact-fingerprint posture that later snapshot grounding will consume. HCM-3.2 supplies the resolved-envelope prerequisite. HCM-3.5 and HCM-3.6 are explicitly outside this plan's implementation authority.
+The immutable true stop and the live private engine agree on the failure mode:
 
-## Future implementation packets
+| Live seam | Current behavior | Why PG-SNAP-04 cannot be proven |
+|---|---|---|
+| `ProjectionRequest.sources` and `bind_sources` in `crates/engine/src/projection.rs` | Multiple exact sources and exactly-one selector binding already exist. | This is sufficient to name two sources but not to prove their semantic relationship. |
+| `SourceDocument.captured_revisions` and `ProjectionCurrentnessRequest::captured` | One source exposes one `{family, adapter, family_revision, slots}` tuple. | The snapshot-grounding definition requires five distinct tuples from one `snapshot_current` source. |
+| `validate_request_currentness` | It compares one captured tuple per requirement with an independent live observation. | Reusing the singleton for five required families fails exact family/adapter closure; it cannot validate the complete set. |
+| `validate_selected_source_semantics` | It validates each selected source independently. | It does not assert that `snapshot_delta.to_snapshot` is the selected current snapshot. |
 
-Each future packet must first name exact code/test paths, ownership, impact analysis, input/output manifests, and a bounded source of truth. No packet may combine product implementation with public transport adoption or schema/version expansion without separate authorization.
+The target is therefore a bounded private generic source-pair capability—not a
+Snapshot-specific Projection engine, not a consumer bridge, and not a revised
+proof obligation. The pre-HCM-3.4 generic Projection baseline at
+`d7877f7843afbcda78d65e0fa2bf7093d3c71e6a` remains binding: deterministic
+non-authority, exact source binding, independent-live currentness, typed
+omissions, no hidden-data read, and fail-closed refusal.
 
-### 1. Freeze private capture-policy and source-family model
+## Frozen pair identity and compatibility contract
 
-**Goal:** implement exact policy parsing, validation, fingerprinting, source-family adapters, static windows, and multi-slot composite revisions.
+The only planned pair is ordered and complete. Neither member can be inferred
+from source order, label, timestamp, filename, or a latest lookup.
 
-**Acceptance criteria:** policy identity, trigger, memory horizon, source adapter, window, comparison, drift, predecessor, redaction, retention, and consistency closure are exact and deterministic. Invocations supply only live revisions/cursors for declared slots and cannot widen policy scope.
+| Role | Exact identity | Required relation | Refuse when |
+|---|---|---|---|
+| `snapshot_current` | One `source_kind: snapshot` document; exact record ref/fingerprint and its separate state fingerprint. | Its immutable record is stable or policy-admissible bounded, has the selected policy/schema/adapter closure, and supplies all five captured family tuples. | absent, duplicate, bare-ref, malformed, unstable/excluded, wrong kind/schema/capability, stale record/state identity, or incomplete/duplicate family closure. |
+| `snapshot_delta` | One `source_kind: snapshot_delta` document; exact delta ref/fingerprint. | Its immutable endpoint metadata has one `to_snapshot` dependency whose exact record pair and state fingerprint equal `snapshot_current`; its own contract already proves ordered compatible previous-to-current endpoints, same repository/workspace/stream, compatible policy/schema/adapters, and complete comparison coverage. | absent, duplicate, bare-ref, wrong kind/schema/capability, missing/duplicate/malformed dependency, substituted current record or state fingerprint, reversed/incompatible endpoints, stale/uncataloged delta, or incomplete comparison coverage. |
 
-**Proof:** canonical-order replay; duplicate/unknown family, source-slot, window, trigger, ref/fingerprint, horizon, and ambient-source refusal; changed live revision/cursor changes capture input rather than policy identity.
+The current source is the sole currentness authority. Its canonical set is
+exactly these entries in stable family order, with no duplicate, omitted, or
+extra family, adapter, or source-slot identity:
 
-**Dependencies:** HCM-3.2 exact envelope/profile identity and frozen HCM-0.3 contracts.
+| Family | Selector | Required slots |
+|---|---|---|
+| `git` | `snapshot_current` | none |
+| `handbook` | `snapshot_current` | none |
+| `work` | `snapshot_current` | `work_ledger`, `active_plan` |
+| `session` | `snapshot_current` | none |
+| `evidence` | `snapshot_current` | none |
 
-### 2. Produce immutable normalized ContextMemorySnapshot records
+For each tuple the request value, the source's captured value, and the
+independent live observation must all match exactly. A currentness check cannot
+be supplied by the delta, a caller-provided replacement, a plan/session-only
+observation, or another selector. Since `/signals` is unfiltered delta output,
+the five checks include `session`; filtering it would require a separately
+declared rule and typed omission, not a silent family subset.
 
-**Goal:** capture every selected family into one immutable record with exact provenance, exclusions, predecessor link, and separate state/record fingerprints.
+## Minimum private engine/configuration seam
 
-**Acceptance criteria:** selected-family coverage is total; source payload and revision envelopes are normalized; map/path/window/ref order is deterministic; state identity excludes volatile boundary data while record identity preserves the complete record; snapshots stay descriptive evidence.
+The later implementation must stay inside the private `handbook-engine`
+Projection module. It may modify no public export and may not create a shipped
+definition, CLI/SDK adapter, packet, Handoff, pipeline, or runtime adoption.
 
-**Proof:** identical-state replays; different trigger/time/sequence records with equal state fingerprints; payload/ref/order mutation failures; missing, duplicate, extra, or bare-ref state refusal; no promotion or source mutation.
+1. In `crates/engine/src/projection.rs`, split decode from the normalized
+   private model. `RawSourceDocument` has
+   `captured_revisions: Option<CapturedRevision>` and
+   `captured_family_revisions: Option<Vec<CapturedRevision>>`; it requires
+   exactly one. Legacy singleton source bytes decode through the first field;
+   pair-capable source bytes use the non-empty, family-sorted,
+   family-unique array. Missing, both-present, empty, unsorted, and duplicate
+   forms refuse before payload access. The private normalized `SourceDocument`
+   exposes only one canonical captured-family closure. This is compatibility
+   preservation, not a second currentness mode.
+2. Add one private, definition-declared `source_pair_requirements` collection
+   of `SourcePairRequirement { current_selector_id, derived_selector_id,
+   dependency_role, require_state_identity }` values. An empty collection is
+   the legacy/default behavior. For this packet the sole requirement names
+   `snapshot_current`, `snapshot_delta`, `to_snapshot`, and `true`. The generic
+   engine validates identity closure; immutable snapshot and delta records
+   remain the owners of snapshot/delta compatibility.
+3. Add private optional `state_fingerprint` to the normalized source document
+   and to `ProjectionSourceSelection`; require it only for a current selector
+   whose pair requirement sets `require_state_identity`. The generic request
+   binds it to the source document, the delta's `to_snapshot` dependency, and
+   the copied generic result provenance. A legacy selection has no state
+   fingerprint. Add private `source_dependencies` only to the source envelope:
+   each `SourceDependency` carries a stable role, exact source pair, and its
+   required state fingerprint. It is not an ambient link, resolver, reverse
+   lookup, or payload injection path.
+4. Change private currentness construction and validation to look up a
+   required family/adapter/slot tuple in the selected current source's
+   canonical closure. `CurrentnessFamilyRequirement`, `CapturedRevision`,
+   expected request values, and independent live observations each use the
+   same exact adapter ref/fingerprint pair. Definition-declared slot sets may
+   be empty; when non-empty they are sorted, unique, and must match exactly.
+   The result has exactly one canonical `CurrentnessCheck` per required family;
+   its work record contains the expected/captured/observed slot maps rather
+   than emitting a second record per slot. It rejects missing, duplicate,
+   extra, selector/adapter/slot-substituted, or live-mismatched tuples before
+   any result. Existing one-family definitions keep their exact singleton
+   behavior through an explicit compatibility replay.
+5. Run the pair relation check after exact selector binding and before
+   currentness/disclosure/payload access. A result keeps both generic source
+   selections in its existing `sources` provenance and always retains
+   `authority_effect: none`; neither the relation nor the result can mutate
+   its sources.
 
-**Dependencies:** packet 1.
+This is the smallest bounded seam because the engine already has a vector of
+exact source selections and generic typed omission machinery. The new pieces
+only represent plural captured tuples and one declared exact source relation;
+they do not add discovery, a Snapshot-specific output model, a second
+Projection call path, a caller-selected family subset, or a consumer.
 
-### 3. Derive consistency and preserve paired boundary order
+## Required implementation packets (future authority only)
 
-**Goal:** implement stable/bounded/unstable derivation, retries/refusal, and immediate prior-end/new-start predecessor handling.
+### Packet A — private source-envelope normalisation and pair validator
 
-**Acceptance criteria:** only the full selected-family aggregation table chooses top-level consistency/admissibility; bounded observations cite the exact policy-selected rule and captured revisions; sequences are unique, strictly increasing, immediate, and acyclic within repository/workspace/stream.
+**Likely owner and paths:** private types and validators in
+`crates/engine/src/projection.rs`; private assertions in
+`crates/engine/src/projection/tests.rs` only.
 
-**Proof:** all-stable; valid bounded; active-plan-only drift; changed source; out-of-bound; whole-family exclusion; retry/refusal; self/future/cyclic/skipped/wrong-stream/wrong-trigger predecessor negatives. Unstable records cannot ground closeout, promotion, hard gate, or stable comparison.
+**Acceptance criteria:** legacy single-family source bytes preserve existing
+success/refusal behavior; raw legacy-only and multi-family-only forms normalize
+to exact canonical closure; missing/both-present/empty/unsorted/duplicate raw
+closures refuse; a delta can name exactly one current dependency; and the
+engine refuses all record/state substitution, malformed, incompatible, or
+unbound pair cases before payload access.
 
-**Dependencies:** packets 1 and 2.
+**Proof:** focused private source-envelope/parser and relation tests with no
+Snapshot Memory runtime adapter or consumer. A future code selector must run
+upstream GitNexus impact analysis for every edited function and stop before a
+HIGH/CRITICAL expansion unless the new authority explicitly admits it.
 
-### 4. Build deterministic SnapshotDelta and drift catalog evaluation
+### Packet B — currentness closure and generic-result preservation
 
-**Goal:** compare compatible stable/bounded endpoint snapshots without mutating either and derive only catalog-backed signals.
+**Likely owner and paths:** the private currentness request/validation helpers
+and exact currentness tests in `crates/engine/src/projection.rs` and
+`crates/engine/src/projection/tests.rs`.
 
-**Acceptance criteria:** every endpoint-selected family is compared or type-excluded once; normalized changes carry stable keys and fingerprints; every catalog rule is evaluated once in order; matched evaluations and signals are bijective; only durable rule-admitted evidence explains justified divergence.
+**Acceptance criteria:** exactly the five listed tuples, including exact
+adapter pairs and empty declared slot sets, are copied from `snapshot_current`,
+independently observed live, and represented as exactly five generic result
+checks; work's one check contains the three slot maps. Request/result source
+provenance retains the current state fingerprint unchanged. All tuple,
+adapter-fingerprint, state-identity, and value closure failures refuse;
+ordinary one-family Projection currentness remains unchanged; pair identity
+passes no authority to the result.
 
-**Proof:** equal-state empty-change delta; ordered changed-family vectors; expected, justified, unexplained, scope, proof, semantic, planning, efficiency, and stale-handoff signals; reversed endpoint distinction; incompatible, unstable, missing/excluded/duplicate family, stale catalog, missing/duplicate/contradictory evaluation, and uncataloged-signal refusal.
+**Proof:** positive five-family replay and the negative matrix below. The
+later selector must include an old one-source fixture replay as an explicit
+compatibility wall.
 
-**Dependencies:** packets 2 and 3.
+### Packet C — private fixed-input PG-SNAP-04 integration proof
 
-### 5. Enforce redaction, retention, and immutable storage optimization
+**Likely owner and paths:** one new private test-only integration fixture and
+one exact test in `crates/engine/src/projection/tests.rs`, with fixed canonical
+source bytes defined or included only for that test.
 
-**Goal:** apply fail-closed sensitive-surface protection before persistence and make policy-selected retention/deduplication safe.
+**Acceptance criteria:** the test passes one fixed compatible
+`snapshot_current`/`snapshot_delta` pair through unchanged generic execution;
+it proves authorized disclosure, typed omission, all-family accounting,
+captured-versus-live equality, original/retained-pointer behavior without a
+hidden payload read, stale/insufficient refusal, provenance of both sources,
+and `authority_effect: none`.
 
-**Acceptance criteria:** unmatched input omits; secret, unrestricted environment, secret-file, command, and unrestricted diff floors cannot weaken; original/retained pointer behavior is unambiguous; all allowed horizon/trigger/record-class tuples resolve exactly once; deduplication preserves record identity and compaction is reviewed/additive.
+**Proof boundary:** no CLI, public adapter, Handoff, packet, pipeline,
+consumer, public schema, or fabricated pre-implementation smoke path. The
+fixture is proof-only and cannot become a configured runtime definition.
 
-**Proof:** all action-matrix rows; known-unmatched, matcher-failed, and unknown/unclassifiable-surface omission before persistence; identical and omit overlap; incompatible non-omit overlap refusal; retained-pointer outside-subtree behavior; hold/reference/floor deletion refusal; immutable record replay after dedupe/compaction. The unknown/unclassifiable case must deterministically refuse to downgrade into a non-omit action or retained data.
+## Fixed canonical integration matrix
 
-**Dependencies:** packets 1 through 3.
-
-### 6. Prove private Snapshot Projection integration without consumer adoption
-
-**Goal:** exercise the exact snapshot/delta boundary only through the existing generic Projection contract, without inventing a Snapshot-specific projection model or adopting any consumer.
-
-**Acceptance criteria:** projection inputs are the exact compatible snapshot/delta source pairs and Resolution minima; every selected family has one authorized disclosure or typed omission; unfiltered signals remain current only through their captured revisions; redaction preserves original/retained-pointer semantics without hidden reads; stale or insufficient inputs refuse; and authority_effect is none.
-
-**Proof:** a deterministic private projection matrix covering authorized disclosure, typed omission, complete all-family accounting, exact captured revisions, original/retained-pointer source identity, hidden-data refusal, stale/insufficient-input refusal, and authority_effect: none. The matrix must prove that no Handoff, packet, pipeline, or other HCM-3.5 consumer adoption occurred.
-
-**Dependencies:** packets 2 through 5 and the existing generic Projection contract completed by HCM-3.3.
-
-### 7. Prove the HCM-3.4 capability without adopting consumers
-
-**Goal:** close only the selected Snapshot gates with a complete deterministic matrix and independent review.
-
-**Acceptance criteria:** PG-SNAP-01 through PG-SNAP-06 have exact evidence at the authorized private implementation boundary. The paired previous-end/new-start workflow is available as a capability, while HCM-3.5 owns handoff/packet/pipeline adoption and HCM-3.6 owns posture use.
-
-**Proof:** the complete matrix in SPEC.md, including the private generic Projection matrix from packet 6; repeated exact replays; fail-closed negatives; scoped/full applicable regression wall; source immutability; no model interpretation; and a different-fresh review after each material repair.
-
-**Dependencies:** packets 1 through 6 and a newly authorized implementation selector.
-
-## Verification checkpoints
-
-| Checkpoint | Required evidence before advancing |
+| Case | Required result |
 |---|---|
-| Model closure | policy/family/ref/fingerprint and negative validation matrix pass; no public/schema/API selection entered |
-| Snapshot closure | coverage, ordering, two-fingerprint, consistency, and predecessor walls pass; unstable/promotion negatives are explicit |
-| Delta closure | endpoint compatibility, exact family coverage, catalog completeness, signal bijection, and durable-justification cases pass |
-| Security/storage closure | redaction action/pointer matrix and retention/hold/dedupe/compaction negatives pass |
-| Private Projection closure | generic Projection matrix proves exact sources, typed disclosure/omission, complete accounting, captured-revision currentness, pointer semantics, hidden-data and stale refusal, and authority_effect: none without consumer adoption |
-| HCM-3.4 proof closure | all six PG-SNAP rows pass at selected scope; no HCM-3.5 adoption, PG-HANDOFF-02, public surface, or Phase-3 exit claim |
+| compatible pair / all five live tuples equal | generic result has both exact sources, every applicable field is disclosed or typed-omitted once, five-family checks pass, and authority effect is none |
+| omitted `snapshot_current` or `snapshot_delta` | typed cardinality refusal before result/payload read |
+| duplicate role or substituted exact pair/current state fingerprint | typed cardinality or stale-binding refusal before result/payload read; result provenance cannot retain a substituted state identity |
+| delta missing, duplicating, or mispointing its `to_snapshot` relation | typed pair-compatibility refusal before currentness/disclosure |
+| unstable/excluded current or incompatible/reversed delta endpoints | typed source/pair refusal; no empty/green projection |
+| legacy-only, multi-family-only, missing, both-present, empty, unsorted, or duplicate captured closure | only the first two valid forms normalize; every other raw form refuses before payload access |
+| omitted, duplicate, extra, or selector/adapter/slot-substituted currentness tuple | typed currentness refusal before output; adapter ref or fingerprint substitution also refuses |
+| stale family or slot live observation, including `session` | typed stale refusal; no partial result; successful result has exactly five family checks with work slot maps in one check |
+| authorized current field | exact generic disclosure and included accounting |
+| resolution-insufficient, redacted, unavailable, or unsupported rule | one generic typed omission with its existing proof effect; no field silently disappears |
+| original pointer covered by omit/fingerprint/artifact-ref/redacted-summary disposition | `redacted` omission and zero original-payload reads |
+| exact retained pointer outside original subtree | independently evaluated; never treated as covered by prefix coincidence |
 
-## Risks and controls
+## Future verification and review sequence
 
-| Risk | Control |
-|---|---|
-| A capture observes a moving world but labels it stable | derive consistency from complete pre/captured/post evidence and fail closed on exclusions or invalid bounds |
-| A delta hides unavailable state as unchanged | require one compare-or-exclude disposition per selected family and refuse incomplete coverage |
-| Drift becomes subjective/model-owned reasoning | bind every classification to one exact catalog rule and durable evidence/justification refs |
-| Snapshot state leaks sensitive content | enforce fail-closed redaction before persistence and project retained fields independently |
-| Deduplication erases provenance or retention safety | share payload storage only; preserve immutable record identity, references, holds, and floors |
-| HCM-3.4 silently becomes HCM-3.5 adoption | reserve generic Projection, handoff references, packet grounding, pipeline use, and consumer migration to HCM-3.5 |
+1. A later explicit implementation selector names the exact code symbols and
+   runs upstream impact analysis before any edit. It must warn on HIGH or
+   CRITICAL impact before proceeding.
+2. Implement Packets A–C sequentially, replaying the unchanged one-source
+   currentness fixture at each material boundary.
+3. Run focused positive and fail-closed tests, formatting, source diff checks,
+   and private source-byte immutability assertions. Then run the applicable
+   engine regression wall once the subject converges.
+4. Before review, produce a complete manifest that includes the private test
+   fixture and every consumer of the changed private model. Do not call this
+   packet GREEN if platform, GitNexus comparison, or regression proof is
+   unavailable; record it honestly.
+5. Use one discovery review, one consolidated remediation for valid P1/P2,
+   and one different-fresh closure review under the later selector's frozen
+   outcome registry. Mechanical closeout comes only after CLEAN.
 
-## Non-goals and human review gate
+## Non-goals and future stop conditions
 
-This plan does not authorize implementation. A human reviews this complete planning packet before any later task may choose implementation scope. That later task must begin from a newly reviewed selector and must not infer authority from this plan, the HCM-3.3 handoff, or a prior snapshot record.
+Stop rather than broaden if the minimum seam needs public visibility,
+dependency/Cargo changes, a generic shipped configuration, a schema/API
+version, a model-specific Projection result, a Snapshot Memory runtime
+serializer, any consumer adoption, HCM-3.5 work, or a revision of PG-SNAP-04.
+The next authority must explicitly decide such an expansion. This packet does
+not resolve, run, or claim any of those items.

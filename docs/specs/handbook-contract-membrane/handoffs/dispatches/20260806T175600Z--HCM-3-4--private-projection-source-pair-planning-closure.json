@@ -1,0 +1,248 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260806T175600Z--HCM-3-4--private-projection-source-pair-planning-closure",
+  "created_at_utc": "2026-08-06T17:56:00Z",
+  "source_handoff_ids": [
+    "20260806T064500Z--HCM-3-4--orchestration--snapshot-memory-projection-cardinality-stop"
+  ],
+  "parent_orchestration_id": "20260806T174800Z--HCM-3-4--private-projection-source-pair-planning",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.4",
+  "packet_id": "HCM-3.4-P2-private-projection-source-pair-planning",
+  "subject_fingerprint": "sha256:63b8458f5acd26de578bca3d13a1014bd2512c697a99e4509d92022f33d13e14",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3.4-private-projection-source-pair-planning-closure",
+    "trigger_run_ids": [
+      "/root/source_pair_discovery_review"
+    ],
+    "finding_refs": [
+      "HCM34-SPP-DISC-001",
+      "HCM34-SPP-DISC-002",
+      "HCM34-SPP-DISC-003"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T17:48:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3.4-private-projection-source-pair-planning",
+        "packet_ids": [
+          "HCM-3.4-P2-private-projection-source-pair-planning"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T174700Z--private-projection-source-pair-planning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:3368f5f514700ad9b21f3fb1add55111f08320952de7fa14725a5959845b176f"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:3bede48cf6ad661aa461f07fb24f51f44fd92d84b37ff7a0b668ca3b1678a695",
+    "integrated_outcome_id": "hcm-3.4-private-projection-source-pair-planning",
+    "outcome_registry_fingerprint": "sha256:3368f5f514700ad9b21f3fb1add55111f08320952de7fa14725a5959845b176f",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260806T174900Z--HCM-3-4--private-projection-source-pair-planning-discovery"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3.4-private-projection-source-pair-planning-closure-convergence",
+    "completed_at_utc": "2026-08-06T17:55:17Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the immutable discovery dispatch and all three HCM34-SPP-DISC findings, then inspect only their consolidated repair in the amended specification, selector, plan, task ledger, and remediation proof.",
+        "evidence_ref": "One documentation-only remediation adds strict raw XOR normalization, private state provenance, and exact five-family currentness/check shapes without extending authority or scope."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Re-inventory the repaired planning subject and the named Projection/Snapshot seams to verify no Rust, test, fixture, runtime configuration, consumer, public surface, or future slice has entered scope.",
+        "evidence_ref": "The six subject paths are planning documents only. Referenced source and test seams remain read-only context; no fixture or consumer is selected."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 manifest and replay the frozen outcome registry and causal budget.",
+        "evidence_ref": "Subject sha256:63b8458f5acd26de578bca3d13a1014bd2512c697a99e4509d92022f33d13e14; registry sha256:3368f5f514700ad9b21f3fb1add55111f08320952de7fa14725a5959845b176f; budget sha256:3bede48cf6ad661aa461f07fb24f51f44fd92d84b37ff7a0b668ca3b1678a695."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Strict UTF-8 decode, Markdown fence-balance, and final-newline inspection for every six-file planning-subject entry.",
+        "evidence_ref": "Every subject entry passes the format checks before closure dispatch."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Check every six-file planning-subject entry for trailing spaces/tabs and run git diff --check.",
+        "evidence_ref": "Every subject entry has no trailing whitespace and git diff --check exits 0 before closure dispatch."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+        "sha256": "84e28c689c2fb9504ef5b14a186732b6ad6bf6da53f6506e40b1cada9345dc91"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T174700Z--private-projection-source-pair-planning-selector.md",
+        "sha256": "09f532d57eb1f5b298d8955c31113b85268f06c8eeed865722467047bee6733f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T174700Z--private-projection-source-pair-planning-preflight.md",
+        "sha256": "8785974df6ca87896f8ba157749747df9569a54da612e3c7de9850a33b141e15"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md",
+        "sha256": "0a72bf7e91d0f6946d471a63ac71b297b3e12aaf7ab8acffe1b4b114393817d1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+        "sha256": "8485395cb8fbca63a862529a9c67fb53c326c3b6fd927b7f042fc4c6daf5904d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/todo.md",
+        "sha256": "04179a483b9a10d05fd1b2f47e22ee3626a1fb4f2306485ed84e814cf0d4b990"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:63b8458f5acd26de578bca3d13a1014bd2512c697a99e4509d92022f33d13e14"
+  },
+  "active_resolution": {
+    "level": "HCM-3.4 private Projection source-pair planning closure",
+    "scope_horizon": "one private generic source-pair capability plan",
+    "detail_resolution": "only strict raw XOR decoding, state provenance, and exact five-family currentness repair",
+    "temporal_horizon": "planning before a future implementation selector",
+    "authority_horizon": "documentation only; no source/test/fixture/configuration/consumer adoption",
+    "memory_horizon": "HCM-3.3 baseline, immutable HCM-3.4 cardinality true stop, and discovery findings HCM34-SPP-DISC-001 through -003",
+    "validation_horizon": "delta-focused closure after one consolidated remediation"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T174700Z--private-projection-source-pair-planning-selector.md",
+      "sections": [
+        "entire decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/tasks/plan.md",
+      "sections": [
+        "private source-pair model and configuration seam",
+        "fixed implementation proof matrix"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/proof/20260806T175000Z--private-projection-source-pair-planning-discovery-remediation.md",
+      "sections": [
+        "entire consolidated remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T174900Z--HCM-3-4--private-projection-source-pair-planning-discovery.json",
+      "sections": [
+        "review cycle",
+        "subject manifest",
+        "tasks"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Snapshot-grounding Projection definition",
+        "Snapshot projection request/result"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "PG-SNAP-04"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Closure review",
+        "Review priority rubric"
+      ]
+    }
+  ],
+  "repo_truth": "The discovery reviewer returned exactly three valid P2 planning defects. The parent made one documentation-only remediation to the same frozen outcome: raw source decode now has a strict exactly-one invariant and canonical normalization; state identity is private request/result provenance and a required pair relation; each of the five family checks has exact adapter and slot semantics. No Rust, test, fixture, Projection runtime configuration, consumer, public surface, or future slice is selected.",
+  "allowed_scope": [
+    "Review only whether HCM34-SPP-DISC-001, HCM34-SPP-DISC-002, and HCM34-SPP-DISC-003 are completely repaired in the six-file documentation subject for the frozen fingerprint.",
+    "Use the named live private Projection and Snapshot Memory seams solely as read-only context to validate that the repaired plan remains minimal, private, and compatible with the one-source baseline.",
+    "Return a P1/P2 only if it is directly caused or unmasked by this remediation. Return CLEAN if all three repairs are sufficient; do not reopen general discovery."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a dispatch, write a handoff/ledger, delegate, or run product tests.",
+    "Do not reopen general discovery, relitigate settled scope, add a new planning objective, implement or test Snapshot Memory or Projection behavior, or select a Rust symbol for editing.",
+    "Do not add generic Projection configuration, public API/schema/dependency/workflow/runtime setting, consumer adoption, HCM-3.5/HCM-3.6 work, protected-checkout access, or remote action."
+  ],
+  "tasks": [
+    "Verify HCM34-SPP-DISC-001 only: the exact raw decoded source shape permits legacy singleton or family-array input through one and only one field, canonicalizes before validation, and fails closed before payload access for neither/both/empty/unsorted/duplicate forms; confirm the private proof matrix covers legacy singleton and five-family array success plus all malformed negatives.",
+    "Verify HCM34-SPP-DISC-002 only: the optional private state fingerprint is required on the pair current source, is preserved from request selection to result provenance, and makes both current-state and delta-dependency state substitutions fail closed while a legacy one-source request remains unchanged.",
+    "Verify HCM34-SPP-DISC-003 only: adapter identity is represented as exact adapter pairs; definition-declared empty slots are valid for the four scalar families; work-family maps retain exact slots; and Snapshot projection emits exactly five family currentness checks, not scalar plus slot duplicates.",
+    "Return findings first, ordered Critical, Required, Optional, Nit. For a P1/P2, cite the exact repaired item, causal relation to one of the three trigger findings, concrete failure, smallest safe remediation, and missing verification. Return CLEAN only if no valid P1/P2 remains for subject sha256:63b8458f5acd26de578bca3d13a1014bd2512c697a99e4509d92022f33d13e14."
+  ],
+  "contracts_and_gates": [
+    "This is the different-fresh, delta-focused closure after the one permitted consolidated remediation in the frozen planning stage. Do not run a review after CLEAN or relabel an unmasked gap as new discovery.",
+    "PG-SNAP-04 remains open. The plan must keep the immutable current/delta pair, all five families, deterministic non-authority, exact one-source baseline behavior, typed omissions/disclosures, hidden-data refusal, and authority_effect none.",
+    "P1/P2 cannot be waived. A supplemental cycle is permitted only for a P1/P2 directly caused or unmasked by the immediately preceding remediation under unchanged authority and risk."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair for an incomplete repair or a directly caused/unmasked P1/P2.",
+    "Return BLOCKED if validation requires implementation, product tests, fixtures, a generic runtime configuration, public/schema/dependency/workflow scope, consumer adoption, a sibling slice, protected checkout access, or remote action.",
+    "Do not report unrelated baseline observations as closure findings; record an advisory disposition only when required by the result contract."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

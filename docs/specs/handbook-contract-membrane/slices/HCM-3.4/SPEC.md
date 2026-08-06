@@ -58,6 +58,60 @@ HCM-3.4 provides a capability boundary for later integration; it does not adopt 
 
 No legacy migration, dual-readable truth, public compatibility promise, transport surface, default catalog, or schema version is selected here. A future implementation may add an additive internal representation only after its own selected compatibility/migration decision and proof. This plan claims no existing persisted data requires conversion.
 
+## Private Projection source-pair planning amendment
+
+The immutable HCM-3.4 true stop
+`20260806T064500Z--HCM-3-4--orchestration--snapshot-memory-projection-cardinality-stop`
+established one narrow missing capability: the private generic Projection
+implementation can bind a vector of exact sources, but each source currently
+has only one captured-revision tuple and no declarative source-pair relation.
+It therefore cannot prove the already-required `PG-SNAP-04` source pair and
+five-family currentness closure. The true stop, its blocked implementation
+state, and every earlier planning/implementation review remain immutable
+evidence; this amendment neither reopens nor waives their causal lineage.
+
+The separately selected source-pair planning outcome may plan only the minimum
+private generic Projection capability. Its detailed selector and
+implementation-ready work package are
+`decision/20260806T174700Z--private-projection-source-pair-planning-selector.md`
+and `tasks/plan.md`. It authorizes no Rust, test, fixture, Projection runtime
+configuration, consumer, HCM-3.5 adoption, or proof-gate closure.
+
+The planned boundary is deliberately additive:
+
+1. one immutable `snapshot_current` source carries an exact record pair,
+   state fingerprint, and a complete canonical captured-family closure for
+   `git`, `handbook`, `work` (`work_ledger` and `active_plan` slots),
+   `session`, and `evidence`;
+2. one immutable `snapshot_delta` source carries its exact delta pair and an
+   exact `to_snapshot` dependency that names the selected current record and
+   state identity; the delta's own immutable contract establishes its ordered,
+   compatible previous-to-current endpoints; and
+3. a definition-declared private source-pair requirement validates that one
+   selected delta satisfies that exact dependency on one selected current
+   source before currentness, disclosure, or payload access.
+
+The future private source grammar must make that representation unambiguous:
+its raw source document has exactly one of legacy singleton
+`captured_revisions` or canonical multi-family `captured_family_revisions`,
+then normalizes either to one family closure. A pair-required current snapshot
+also has one exact `state_fingerprint` copied into its private generic source
+selection and result provenance; the selected delta's `to_snapshot` dependency
+must equal both identities. The five required result currentness records are
+one canonical record per family (with work's slot maps nested in its one
+record), and adapters remain exact ref/fingerprint pairs. These additions stay
+private and opt-in: a legacy source selection has no state fingerprint and a
+definition without a pair requirement keeps the established one-source shape.
+
+Missing halves, duplicate selectors, substitutions, malformed or incompatible
+endpoint bindings, stale family/slot observations, omitted or extra family
+tuples, and missing pair metadata must all refuse without a Projection result.
+Definitions that declare no source-pair requirement, and legacy one-family
+source documents, retain their existing exact binding/currentness behavior.
+The planning outcome does not select a runtime configuration or implementation
+fixture; a later explicit implementation selector must create its private,
+fixed-input test-only integration proof.
+
 ## Future implementation proof and regression strategy
 
 A later implementation selector must bind exact code paths, owners, tests, fixtures, source manifests, impact analysis, and platform evidence. At minimum it must prove:

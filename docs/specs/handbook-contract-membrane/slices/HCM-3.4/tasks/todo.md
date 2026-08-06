@@ -1,23 +1,51 @@
-# HCM-3.4 implementation task ledger
+# HCM-3.4 private Projection source-pair planning task ledger
 
-## Completed immutable planning context
+## Fresh planning outcome
 
-- [x] The separate HCM-3.4 planning selector, discovery remediation, different-fresh CLEAN closure, primary planning commit, and protected-checkout true-stop handoff are preserved as immutable predecessor context.
-- [x] The fresh nonce-bound implementation task revalidated its assigned checkout, expected base/tree, dedicated local ref, required ancestor, local remote baseline, cleanliness, and worktree ownership without entering a protected checkout.
-- [x] The fresh implementation selector freezes the private path/symbol/proof envelope and the one parent-level integrated outcome before review.
+- [x] Consume the immutable projection-cardinality true stop as source context
+  without changing its parent, review lineage, implementation commits, or
+  recommendation.
+- [x] Independently ground the planning premise in the live private Projection
+  source: multi-source exact binding exists, but captured revision metadata is
+  singleton and no source-pair compatibility relation is validated.
+- [x] Freeze one additive private source-pair plan that preserves pre-HCM-3.4
+  one-source Projection binding/currentness, typed omissions, fail-closed
+  behavior, and non-authority.
 
-## Active implementation sequence
+## Reviewable planning deliverables
 
-- [ ] Run a fresh discovery review of the implementation selector. Consolidate and remediate any valid P1/P2, then obtain a different-fresh closure before code.
-- [ ] Packet 1: implement exact capture-policy and source-family/slot/window closure.
-- [ ] Packet 2: implement immutable normalized snapshot records and separate state/record identity.
-- [ ] Packet 3: implement derived consistency and paired prior-end/session-start boundaries.
-- [ ] Packet 4: implement deterministic compatible delta and catalog-backed drift signals.
-- [ ] Packet 5: implement fail-closed redaction, retention, deduplication, and compaction controls.
-- [ ] Packet 6: prove private generic Snapshot Projection with `authority_effect: none` and no consumer adoption.
-- [ ] Packet 7: close PG-SNAP-01 through PG-SNAP-06 with the complete deterministic proof wall and fresh review.
-- [ ] Commit the reviewed primary implementation state, create the parent-owned v1.4 completed handoff, rebuild/validate the ledger and self-tests, commit mechanical closeout only, then compare-and-swap the dedicated local ref from the exact base.
+- [ ] Validate the source-pair selector, planning amendment, plan, task ledger,
+  and preflight proof as one complete documentation subject.
+- [ ] Obtain one fresh built-in discovery review under the frozen
+  `hcm-3.4-private-projection-source-pair-planning` outcome registry.
+- [x] Consolidate `HCM34-SPP-DISC-001` through `HCM34-SPP-DISC-003` in one
+  documentation-only remediation: raw XOR source decoding, state-identity
+  provenance, and five-record exact currentness closure.
+- [ ] Register/deduplicate a valid P3/P4 only at mechanical closeout.
+- [ ] Obtain one different-fresh delta closure after any P1/P2 remediation; do
+  not reopen discovery or run a review after CLEAN.
+- [ ] Commit the reviewed planning subject, then create the parent v1.4 handoff
+  and mechanically rebuild/validate the ledger in a separate closeout commit.
+- [ ] Update only the dedicated local planning ref with expected-old
+  compare-and-swap after every closeout gate passes.
+
+## Future implementation checklist (not selected by this task)
+
+- [ ] Add the private canonical captured-family closure and exact source-pair
+  requirement without changing legacy singleton source behavior.
+- [ ] Validate `snapshot_current` plus compatible `snapshot_delta` identity,
+  five-family captured/live currentness, disclosure/omission, redaction, and
+  non-authority through one fixed private integration fixture.
+- [ ] Prove fail-closed missing-half, incompatibility, stale, substitution,
+  duplicate, omitted-family, malformed-pair, hidden-data, and insufficient
+  Resolution negatives.
+- [ ] Obtain a new explicit implementation selector before changing any source,
+  test, fixture, configuration, or consumer path.
 
 ## Explicit non-goals
 
-- [ ] No public API, schema/version, dependency, workflow/runtime configuration, transport, SDK, CLI, Handoff/packet/pipeline consumer adoption, HCM-3.5/HCM-3.6/Phase-3 exit work, protected-checkout command, remote query/fetch/push/publication, merge, rebase, reset, or clean.
+- [ ] No Rust, tests, fixtures, generic Projection runtime configuration,
+  public API/schema/dependency, runtime/workflow setting, CLI/SDK, Handoff,
+  packet/pipeline consumer, HCM-3.5/HCM-3.6, or Phase-3 exit work.
+- [ ] No protected-checkout operation, remote query/fetch/push/publication,
+  merge, rebase, reset, clean, or non-local ref update.
