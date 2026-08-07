@@ -1,0 +1,187 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260807T211546Z--HCM-3-5--audit-corrective-remediation-closure",
+  "created_at_utc": "2026-08-07T21:15:46Z",
+  "source_handoff_ids": [
+    "20260807T181740Z--HCM-3-5--orchestration--p1-p4-transition-materialization-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-5-audit-corrective-implementation-20260807",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "HCM-3.5-audit-corrective-source-ingestion-negative-proof-and-replayable-closeout",
+  "subject_fingerprint": "sha256:5a719a4d9cc8c696b90dea9bb7cca04259e3258c719af885711ec3d93eebdc12",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3-5-audit-corrective-implementation-closure-1",
+    "trigger_run_ids": [
+      "hcm35-ac-discovery-20260807"
+    ],
+    "finding_refs": [
+      "HCM35-AC-DISC-001",
+      "HCM35-AC-DISC-002",
+      "HCM35-AC-DISC-003",
+      "HCM35-AC-DISC-004"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-07T20:55:50Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-5-audit-corrective-source-ingestion-negative-proof-and-replayable-closeout",
+        "packet_ids": [
+          "HCM-3.5-audit-corrective-source-ingestion-negative-proof-and-replayable-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T205550Z--audit-corrective-source-ingestion-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:0b5ed73ea09c899dff51cde371a0a97fda7769324531f825f5dbffcf81abb829"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:814850cd500f14304711d745fe0c940ba3b140ffbe923415542d5c9c45cf8c64",
+    "integrated_outcome_id": "hcm-3-5-audit-corrective-source-ingestion-negative-proof-and-replayable-closeout",
+    "outcome_registry_fingerprint": "sha256:0b5ed73ea09c899dff51cde371a0a97fda7769324531f825f5dbffcf81abb829",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260807T205600Z--HCM-3-5--audit-corrective-complete-subject-discovery"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-5-audit-corrective-closure-pre-review-v1",
+    "completed_at_utc": "2026-08-07T21:15:45Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "scoped diff review, proof-matrix reconciliation, and git diff --check",
+        "evidence_ref": "terminal: only the selector-admitted source/parser/test/proof surface is changed"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "rg direct fs::read and serde_json::from_slice over live HCM-3.5 source paths",
+        "evidence_ref": "terminal: remaining direct reads are test-fixture setup; live paths use bounded reader/parser"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "SHA-256 replay of the sorted 8-entry remediation manifest",
+        "evidence_ref": "terminal: sha256:5a719a4d9cc8c696b90dea9bb7cca04259e3258c719af885711ec3d93eebdc12"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "terminal: passed after remediation"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "rg -n [ \\t]+$ over every remediation-manifest text path",
+        "evidence_ref": "terminal: no trailing whitespace across closure subject"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path":"crates/engine/src/definition_identity.rs","sha256":"a16c94af111664622eddf62feae9c4cad6defbd85fc743f55b6f11164108718e"},
+      {"path":"crates/engine/src/grounding.rs","sha256":"217a67642666ef07f6ac009e8633b9a68643a22c2f8710e9a83d601dcebc784f"},
+      {"path":"crates/engine/src/grounding_transition.rs","sha256":"c4b50ea9f0741315e31fa918b502ea63286cbc6885671c93798083a9fa73ecc2"},
+      {"path":"crates/engine/src/snapshot_memory/mod.rs","sha256":"cf3403794bbbe38592c03c76a75f1e4e2400046c32c55d0ed63840742b5e705f"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T205600Z--HCM-3-5--audit-corrective-complete-subject-discovery.json","sha256":"3dc44c3a28a35b60b9105de00267a7bae62eff5d09a4e41833efdd7df97abe42"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T205550Z--audit-corrective-source-ingestion-selector.md","sha256":"b6fc53329ee7806bb989328dfa607c60e580146921b9f8d4599337de8dd6a6b1"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-proof-matrix.md","sha256":"c669e1b2210a90989911c137d2cb94c42791c9e5cf3f9200dbd158df743d1d38"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-source-impact.md","sha256":"bac34ffaebd22288520c16ecce22962bddc32a9f3d7f75a392a4810196765f39"}
+    ],
+    "aggregate_fingerprint": "sha256:5a719a4d9cc8c696b90dea9bb7cca04259e3258c719af885711ec3d93eebdc12"
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 audit-corrective remediation closure",
+    "scope_horizon": "only the discovery findings and their admitted source-ingestion/parser/proof remediation",
+    "detail_resolution": "whether the shared bounded reader, duplicate-key-safe parsing, typed refusal mapping, negative matrix, and prospective v1.4 lineage plan close DISC-001 through DISC-004",
+    "temporal_horizon": "after consolidated remediation and before final complete-subject review",
+    "authority_horizon": "read-only closure review; no new authority, implementation, schema/template/validator, Flow/pipeline/resolver/compiler, remote, or protected-checkout action",
+    "memory_horizon": "carry the discovery finding IDs and preserve historical P1-P4 records byte-for-byte",
+    "validation_horizon": "review only the delta; the later final-closeout review independently binds the full final HCM-3.5 subject"
+  },
+  "authority_refs": [
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T205600Z--HCM-3-5--audit-corrective-complete-subject-discovery.json","sections":["entire immutable discovery dispatch"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T205550Z--audit-corrective-source-ingestion-selector.md","sections":["entire selector"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-proof-matrix.md","sections":["discovery findings and one remediation","negative source matrix"]},
+    {"path":"docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md","sections":["causal review cadence"]},
+    {"path":"docs/specs/handbook-contract-membrane/09-review-finding-inventory.md","sections":["priority and closure rules"]}
+  ],
+  "repo_truth": "This is a local-only corrective closure from the assigned detached worktree at 38097b69d1f1c5b1ab857e4252a442f45834bae6/tree 53d172cebcb20d43f9a01298ea14df436efef485, bound to task 019fddfa-610b-7512-b591-654ba4f5130a, host local, meta task 019fda65-3892-7900-a692-2dd0a0fccc7a, and nonce dd04871aad668887df84520236dca6db213aa2975a5353f38f0ee3f7f11db63c. The full local library suite passed 201 tests with one unrelated ignored test in 157.97 seconds. No protected checkout or remote was accessed. GitNexus graph tools remain unavailable/not-green.",
+  "allowed_scope": [
+    "Review only the 8-entry remediation manifest against DISC-001 through DISC-004, including the actual P1/P4 matrix behavior and existing typed failure surfaces.",
+    "Verify that P1 and P4 have no live direct source read/parser bypass, that raw source cannot reach outputs, and that the corrective parent—not historical records—will carry replayable closure lineage.",
+    "Return any unmasked P1/P2 gap with a unique HCM35-AC-CLOSE identifier, exact admitted remediation, and verification. Inventory P3/P4 only."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery, review unrelated original P1-P4 behavior, edit, format, stage, commit, create a record/ledger, delegate, update refs, or alter the subject.",
+    "Do not access protected checkout or remote state; do not fetch, pull, push, publish, merge, rebase, reset, clean, or alter Flow, pipeline, projection, resolver/compiler, Cargo, dependencies, configuration, schema, template, validator, SDK, CLI, Substrate, or gate runtime."
+  ],
+  "tasks": [
+    "Independently replay the 8-entry manifest and inspect only the remediation delta against all four carried discovery findings.",
+    "Confirm the no-raw-output and no-usable-output behavior for every negative table category and the limited existing P1/P4 typed surfaces.",
+    "Return findings first, then validation, advisory disposition, GitNexus availability condition, and parent disposition. CLEAN is permitted only when no P1/P2 gap remains in this delta."
+  ],
+  "contracts_and_gates": [
+    "This closure is different-fresh from the discovery reviewer and may not become a second general discovery. It closes the one consolidated remediation only.",
+    "Any valid P1/P2 finding is blocking and may consume at most one immediately causal supplemental cycle. No cycle may follow CLEAN in this implementation review stage.",
+    "A separate fresh final-closeout complete-subject review remains mandatory before a record, ledger closeout, or local CAS."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair for a valid P1/P2. Return BLOCKED if remediation needs a path outside the selector, protected-checkout or remote access, dependency/configuration change, or new authority.",
+    "Report manifest, parent/nonce, causal-cadence, or scope drift to the parent without writing state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}

@@ -1,9 +1,12 @@
+use crate::definition_identity::read_bounded_regular_source;
 use crate::snapshot_memory::derive_grounding_transition;
-use crate::{DefinitionFingerprint, ExactDefinitionRef};
+use crate::{parse_schema_json, DefinitionFingerprint, ExactDefinitionRef, SourceByteBudget};
 use serde::Deserialize;
 use serde_json::Value;
-use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::Path;
+
+#[cfg(test)]
+use std::path::PathBuf;
 
 const SOURCE_DIRECTORY: [&str; 4] = [".handbook", "grounding", "hcm-3.5", "v1"];
 const PRIOR_END_REF: &str = "handbook.hcm-3-5.transition-snapshot.prior-end@1.0.0";
@@ -69,17 +72,20 @@ struct GroundingProjectionDescriptor {
 pub(crate) fn materialize_grounding_transition_refs(
     repo_root: &Path,
 ) -> Result<GroundingTransitionRefs, GroundingTransitionMaterializationError> {
-    let source_root = source_root(repo_root);
-    let policy = read_source(&source_root, "snapshot-policy.json")?;
-    let prior_capture = read_source(&source_root, "prior-capture.json")?;
-    let prior_snapshot = read_source(&source_root, "prior-snapshot.json")?;
-    let session_start_capture = read_source(&source_root, "current-capture.json")?;
-    let session_start_snapshot = read_source(&source_root, "current-snapshot.json")?;
-    let session_end_capture = read_source(&source_root, "session-end-capture.json")?;
-    let session_end_snapshot = read_source(&source_root, "session-end-snapshot.json")?;
-    let catalog = read_source(&source_root, "delta-catalog.json")?;
-    let grounding_route = read_source(&source_root, "delta-route.json")?;
-    let session_route = read_source(&source_root, "session-delta-route.json")?;
+    let mut source_budget = SourceByteBudget::default();
+    let policy = read_source(repo_root, "snapshot-policy.json", &mut source_budget)?;
+    let prior_capture = read_source(repo_root, "prior-capture.json", &mut source_budget)?;
+    let prior_snapshot = read_source(repo_root, "prior-snapshot.json", &mut source_budget)?;
+    let session_start_capture = read_source(repo_root, "current-capture.json", &mut source_budget)?;
+    let session_start_snapshot =
+        read_source(repo_root, "current-snapshot.json", &mut source_budget)?;
+    let session_end_capture =
+        read_source(repo_root, "session-end-capture.json", &mut source_budget)?;
+    let session_end_snapshot =
+        read_source(repo_root, "session-end-snapshot.json", &mut source_budget)?;
+    let catalog = read_source(repo_root, "delta-catalog.json", &mut source_budget)?;
+    let grounding_route = read_source(repo_root, "delta-route.json", &mut source_budget)?;
+    let session_route = read_source(repo_root, "session-delta-route.json", &mut source_budget)?;
     let transition = derive_grounding_transition(
         &policy,
         &prior_capture,
@@ -103,16 +109,19 @@ pub(crate) fn materialize_grounding_transition_refs(
         transition.session_delta_route_fingerprint(),
     )?;
     let definition_ref = exact_json_ref(
-        &read_source(&source_root, "definition.json")?,
+        &read_source(repo_root, "definition.json", &mut source_budget)?,
         "definition_ref",
     )?;
     let disclosure_ref = exact_json_ref(
-        &read_source(&source_root, "disclosure.json")?,
+        &read_source(repo_root, "disclosure.json", &mut source_budget)?,
         "disclosure_ref",
     )?;
-    let projection_value: Value =
-        serde_json::from_slice(&read_source(&source_root, "grounding-projection.json")?)
-            .map_err(|_| GroundingTransitionMaterializationError::InvalidSource)?;
+    let projection_value = parse_schema_json(&read_source(
+        repo_root,
+        "grounding-projection.json",
+        &mut source_budget,
+    )?)
+    .map_err(|_| GroundingTransitionMaterializationError::InvalidSource)?;
     let projection: GroundingProjectionDescriptor =
         serde_json::from_value(projection_value.clone())
             .map_err(|_| GroundingTransitionMaterializationError::InvalidSource)?;
@@ -156,6 +165,7 @@ pub(crate) fn materialize_grounding_transition_refs(
     })
 }
 
+#[cfg(test)]
 fn source_root(repo_root: &Path) -> PathBuf {
     SOURCE_DIRECTORY
         .iter()
@@ -163,10 +173,11 @@ fn source_root(repo_root: &Path) -> PathBuf {
 }
 
 fn read_source(
-    source_root: &Path,
+    repo_root: &Path,
     name: &str,
+    budget: &mut SourceByteBudget,
 ) -> Result<Vec<u8>, GroundingTransitionMaterializationError> {
-    fs::read(source_root.join(name))
+    read_bounded_regular_source(repo_root, &source_relative_path(name), budget)
         .map_err(|_| GroundingTransitionMaterializationError::InvalidSource)
 }
 
@@ -174,7 +185,7 @@ fn exact_json_ref(
     bytes: &[u8],
     ref_field: &str,
 ) -> Result<String, GroundingTransitionMaterializationError> {
-    let value: Value = serde_json::from_slice(bytes)
+    let value = parse_schema_json(bytes)
         .map_err(|_| GroundingTransitionMaterializationError::InvalidSource)?;
     let reference = value
         .get(ref_field)
@@ -185,6 +196,10 @@ fn exact_json_ref(
         &DefinitionFingerprint::from_json_value(&value)
             .map_err(|_| GroundingTransitionMaterializationError::InvalidSource)?,
     )
+}
+
+fn source_relative_path(name: &str) -> String {
+    format!("{}/{}", SOURCE_DIRECTORY.join("/"), name)
 }
 
 fn exact_token(
@@ -199,6 +214,7 @@ fn exact_token(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs;
 
     #[test]
     fn materializes_the_p4_transition_refs_from_the_tracked_source_route() {
@@ -229,5 +245,137 @@ mod tests {
             refs.session_delta_ref(),
             "handbook.grounding.delta.session-start-to-session-end@1.0.0#sha256:049365356ec18ad1525b3621e9b0214e4a0adcdb4b2fc72993b7d548d4d8df27"
         );
+    }
+
+    #[test]
+    fn hcm_3_5_transition_source_refusal_matrix_never_materializes_refs() {
+        let cases = [
+            "malformed",
+            "mismatched",
+            "reversed",
+            "stale",
+            "partial",
+            "tampered",
+            "duplicate-key",
+            "oversized",
+            "symlinked",
+        ];
+
+        for case in cases {
+            let repo = persisted_transition_source_fixture();
+            let root = source_root(repo.path());
+            match case {
+                "malformed" => fs::write(root.join("definition.json"), b"{").unwrap(),
+                "mismatched" => {
+                    let projection_path = root.join("grounding-projection.json");
+                    let mut projection: Value =
+                        serde_json::from_slice(&fs::read(&projection_path).unwrap()).unwrap();
+                    projection["snapshot_ref"] = serde_json::json!(
+                        "handbook.grounding.snapshot.current@1.0.0#sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+                    );
+                    write_json(&projection_path, &projection);
+                }
+                "reversed" => {
+                    let route_path = root.join("delta-route.json");
+                    let mut route: Value =
+                        serde_json::from_slice(&fs::read(&route_path).unwrap()).unwrap();
+                    let prior = route["prior_snapshot_fingerprint"].clone();
+                    route["prior_snapshot_fingerprint"] =
+                        route["current_snapshot_fingerprint"].clone();
+                    route["current_snapshot_fingerprint"] = prior;
+                    write_json(&route_path, &route);
+                }
+                "stale" => {
+                    let snapshot_path = root.join("session-end-snapshot.json");
+                    let mut snapshot: Value =
+                        serde_json::from_slice(&fs::read(&snapshot_path).unwrap()).unwrap();
+                    snapshot["boundary_sequence"] = serde_json::json!(1);
+                    write_json(&snapshot_path, &snapshot);
+                }
+                "partial" => fs::remove_file(root.join("snapshot-policy.json")).unwrap(),
+                "tampered" => {
+                    let definition_path = root.join("definition.json");
+                    let mut definition: Value =
+                        serde_json::from_slice(&fs::read(&definition_path).unwrap()).unwrap();
+                    definition["maximum_cardinality"] = serde_json::json!(3);
+                    write_json(&definition_path, &definition);
+                }
+                "duplicate-key" => {
+                    let definition_path = root.join("definition.json");
+                    let original = fs::read(&definition_path).unwrap();
+                    let mut duplicate =
+                        b"{\"schema_id\":\"handbook.grounding-summary-definition\",".to_vec();
+                    duplicate.extend_from_slice(&original[1..]);
+                    fs::write(definition_path, duplicate).unwrap();
+                }
+                "oversized" => {
+                    let definition_path = root.join("definition.json");
+                    let mut oversized =
+                        vec![b' '; crate::definition_identity::MAX_SOURCE_DOCUMENT_BYTES + 1];
+                    oversized.extend_from_slice(&fs::read(&definition_path).unwrap());
+                    fs::write(definition_path, oversized).unwrap();
+                }
+                "symlinked" => {
+                    let definition_path = root.join("definition.json");
+                    let target = repo.path().join("outside-definition.json");
+                    fs::write(&target, fs::read(&definition_path).unwrap()).unwrap();
+                    fs::remove_file(&definition_path).unwrap();
+                    create_file_symlink(&target, &definition_path);
+                }
+                _ => unreachable!("table case is exhaustive"),
+            }
+
+            assert_eq!(
+                materialize_grounding_transition_refs(repo.path()),
+                Err(GroundingTransitionMaterializationError::InvalidSource),
+                "case {case} must not materialize usable transition references"
+            );
+        }
+    }
+
+    fn persisted_transition_source_fixture() -> tempfile::TempDir {
+        let repo = tempfile::tempdir().unwrap();
+        let destination = source_root(repo.path());
+        fs::create_dir_all(&destination).unwrap();
+        let source = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../..")
+            .join(".handbook/grounding/hcm-3.5/v1");
+        for name in [
+            "snapshot-policy.json",
+            "prior-capture.json",
+            "prior-snapshot.json",
+            "current-capture.json",
+            "current-snapshot.json",
+            "session-end-capture.json",
+            "session-end-snapshot.json",
+            "delta-catalog.json",
+            "delta-route.json",
+            "session-delta-route.json",
+            "definition.json",
+            "disclosure.json",
+            "grounding-projection.json",
+        ] {
+            fs::copy(source.join(name), destination.join(name)).unwrap();
+        }
+        repo
+    }
+
+    fn write_json(path: &Path, value: &Value) {
+        fs::write(path, serde_json::to_vec(value).unwrap()).unwrap();
+    }
+
+    #[cfg(unix)]
+    fn create_file_symlink(target: &Path, link: &Path) {
+        std::os::unix::fs::symlink(target, link).expect("test symlink is available");
+    }
+
+    #[cfg(windows)]
+    fn create_file_symlink(target: &Path, link: &Path) {
+        std::os::windows::fs::symlink_file(target, link).expect("test symlink is available");
+    }
+
+    #[cfg(all(not(unix), not(windows)))]
+    fn create_file_symlink(_target: &Path, _link: &Path) {
+        panic!("HCM-3.5 source admission requires a supported no-follow platform");
     }
 }

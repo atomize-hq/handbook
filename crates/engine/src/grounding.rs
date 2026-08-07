@@ -1,11 +1,17 @@
 use crate::context_resolution::ContextResolutionEnvelope;
+use crate::definition_identity::read_bounded_regular_source;
 use crate::snapshot_memory::{derive_grounding_source_pair, GroundingSourcePair};
-use crate::{DefinitionFingerprint, ExactDefinitionRef};
+use crate::{
+    parse_schema_json, DefinitionFingerprint, ExactDefinitionRef, RegistryLoadErrorKind,
+    SourceByteBudget,
+};
 use serde::Deserialize;
 use serde_json::Value;
 use std::collections::{BTreeMap, BTreeSet};
-use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::Path;
+
+#[cfg(test)]
+use std::path::PathBuf;
 
 const SOURCE_DIRECTORY: [&str; 4] = [".handbook", "grounding", "hcm-3.5", "v1"];
 const CURRENT_SNAPSHOT_REF: &str = "handbook.grounding.snapshot.current@1.0.0";
@@ -420,8 +426,8 @@ fn resolve_with_authority(
     resolution_ranks: [u8; 6],
     provenance: GroundingProvenance,
 ) -> Result<GroundedResolution, (GroundingRefusalKind, Vec<GroundingOmission>)> {
-    let source_root = source_root(repo_root);
-    let definition_bytes = read_source(&source_root, "definition.json")?;
+    let mut source_budget = SourceByteBudget::default();
+    let definition_bytes = read_source(repo_root, "definition.json", &mut source_budget)?;
     let definition_value = parse_json(&definition_bytes)?;
     if fingerprint(&definition_value)? != definition_ref.fingerprint {
         return Err((GroundingRefusalKind::DefinitionMismatch, Vec::new()));
@@ -430,7 +436,7 @@ fn resolve_with_authority(
         .map_err(|_| (GroundingRefusalKind::MalformedSource, Vec::new()))?;
     validate_definition(&definition, definition_ref)?;
 
-    let disclosure_bytes = read_source(&source_root, "disclosure.json")?;
+    let disclosure_bytes = read_source(repo_root, "disclosure.json", &mut source_budget)?;
     let disclosure_value = parse_json(&disclosure_bytes)?;
     if fingerprint(&disclosure_value)? != disclosure_ref.fingerprint {
         return Err((GroundingRefusalKind::DisclosureMismatch, Vec::new()));
@@ -439,7 +445,7 @@ fn resolve_with_authority(
         .map_err(|_| (GroundingRefusalKind::MalformedSource, Vec::new()))?;
     validate_disclosure(&disclosure, disclosure_ref)?;
 
-    let source_pair = load_source_pair(&source_root)?;
+    let source_pair = load_source_pair(repo_root, &mut source_budget)?;
     if snapshot_ref.reference != CURRENT_SNAPSHOT_REF
         || snapshot_ref.fingerprint != *source_pair.current_snapshot_fingerprint()
         || delta_ref.reference != source_pair.delta_ref()
@@ -456,8 +462,8 @@ fn resolve_with_authority(
         return Err((GroundingRefusalKind::InsufficientResolution, Vec::new()));
     }
 
-    let witness_bytes = read_source(&source_root, "currentness.json")?;
-    let witness: CurrentnessWitness = serde_json::from_slice(&witness_bytes)
+    let witness_bytes = read_source(repo_root, "currentness.json", &mut source_budget)?;
+    let witness: CurrentnessWitness = serde_json::from_value(parse_json(&witness_bytes)?)
         .map_err(|_| (GroundingRefusalKind::MalformedSource, Vec::new()))?;
     validate_currentness(&definition, &witness, source_pair.current_snapshot())?;
 
@@ -482,6 +488,7 @@ fn resolve_with_authority(
     })
 }
 
+#[cfg(test)]
 fn source_root(repo_root: &Path) -> PathBuf {
     SOURCE_DIRECTORY
         .iter()
@@ -489,22 +496,31 @@ fn source_root(repo_root: &Path) -> PathBuf {
 }
 
 fn read_source(
-    source_root: &Path,
+    repo_root: &Path,
     name: &str,
+    budget: &mut SourceByteBudget,
 ) -> Result<Vec<u8>, (GroundingRefusalKind, Vec<GroundingOmission>)> {
-    fs::read(source_root.join(name)).map_err(|_| (GroundingRefusalKind::MissingSource, Vec::new()))
+    read_bounded_regular_source(repo_root, &source_relative_path(name), budget).map_err(|error| {
+        let kind = if error.kind() == RegistryLoadErrorKind::MissingSource {
+            GroundingRefusalKind::MissingSource
+        } else {
+            GroundingRefusalKind::MalformedSource
+        };
+        (kind, Vec::new())
+    })
 }
 
 fn load_source_pair(
-    source_root: &Path,
+    repo_root: &Path,
+    budget: &mut SourceByteBudget,
 ) -> Result<GroundingSourcePair, (GroundingRefusalKind, Vec<GroundingOmission>)> {
-    let policy = read_source(source_root, "snapshot-policy.json")?;
-    let prior_capture = read_source(source_root, "prior-capture.json")?;
-    let prior_snapshot = read_source(source_root, "prior-snapshot.json")?;
-    let current_capture = read_source(source_root, "current-capture.json")?;
-    let current_snapshot = read_source(source_root, "current-snapshot.json")?;
-    let catalog = read_source(source_root, "delta-catalog.json")?;
-    let delta_route = read_source(source_root, "delta-route.json")?;
+    let policy = read_source(repo_root, "snapshot-policy.json", budget)?;
+    let prior_capture = read_source(repo_root, "prior-capture.json", budget)?;
+    let prior_snapshot = read_source(repo_root, "prior-snapshot.json", budget)?;
+    let current_capture = read_source(repo_root, "current-capture.json", budget)?;
+    let current_snapshot = read_source(repo_root, "current-snapshot.json", budget)?;
+    let catalog = read_source(repo_root, "delta-catalog.json", budget)?;
+    let delta_route = read_source(repo_root, "delta-route.json", budget)?;
     derive_grounding_source_pair(
         &policy,
         &prior_capture,
@@ -518,7 +534,11 @@ fn load_source_pair(
 }
 
 fn parse_json(bytes: &[u8]) -> Result<Value, (GroundingRefusalKind, Vec<GroundingOmission>)> {
-    serde_json::from_slice(bytes).map_err(|_| (GroundingRefusalKind::MalformedSource, Vec::new()))
+    parse_schema_json(bytes).map_err(|_| (GroundingRefusalKind::MalformedSource, Vec::new()))
+}
+
+fn source_relative_path(name: &str) -> String {
+    format!("{}/{}", SOURCE_DIRECTORY.join("/"), name)
 }
 
 fn fingerprint(
@@ -1082,6 +1102,104 @@ mod tests {
     }
 
     #[test]
+    fn hcm_3_5_source_refusal_matrix_is_fail_closed_without_usable_output() {
+        let cases = [
+            ("malformed", GroundingRefusalKind::MalformedSource),
+            ("mismatched", GroundingRefusalKind::SourceMismatch),
+            ("reversed", GroundingRefusalKind::IncompatibleDelta),
+            ("stale", GroundingRefusalKind::StaleCurrentness),
+            ("partial", GroundingRefusalKind::MissingSource),
+            ("tampered", GroundingRefusalKind::DefinitionMismatch),
+            ("duplicate-key", GroundingRefusalKind::MalformedSource),
+            ("oversized", GroundingRefusalKind::MalformedSource),
+            ("symlinked", GroundingRefusalKind::MalformedSource),
+        ];
+
+        for (case, expected) in cases {
+            let (repo, mut refs) = persisted_source_fixture();
+            let root = source_root(repo.path());
+            match case {
+                "malformed" => fs::write(root.join("definition.json"), b"{").unwrap(),
+                "mismatched" => {
+                    refs.snapshot = ExactGroundingRef::parse(&format!(
+                        "{CURRENT_SNAPSHOT_REF}#{}",
+                        fingerprint('f')
+                    ))
+                    .unwrap();
+                }
+                "reversed" => {
+                    let route_path = root.join("delta-route.json");
+                    let mut route: Value =
+                        serde_json::from_slice(&fs::read(&route_path).unwrap()).unwrap();
+                    let prior = route["prior_snapshot_fingerprint"].clone();
+                    route["prior_snapshot_fingerprint"] =
+                        route["current_snapshot_fingerprint"].clone();
+                    route["current_snapshot_fingerprint"] = prior;
+                    write_json(&route_path, &route);
+                }
+                "stale" => {
+                    let witness_path = root.join("currentness.json");
+                    let mut witness: Value =
+                        serde_json::from_slice(&fs::read(&witness_path).unwrap()).unwrap();
+                    witness["families"][0]["captured_revision_fingerprint"] =
+                        json!(fingerprint('f'));
+                    write_json(&witness_path, &witness);
+                }
+                "partial" => fs::remove_file(root.join("currentness.json")).unwrap(),
+                "tampered" => {
+                    let definition_path = root.join("definition.json");
+                    let mut definition: Value =
+                        serde_json::from_slice(&fs::read(&definition_path).unwrap()).unwrap();
+                    definition["maximum_cardinality"] = json!(3);
+                    write_json(&definition_path, &definition);
+                }
+                "duplicate-key" => {
+                    let definition_path = root.join("definition.json");
+                    let original = fs::read(&definition_path).unwrap();
+                    let mut duplicate =
+                        b"{\"schema_id\":\"handbook.grounding-summary-definition\",".to_vec();
+                    duplicate.extend_from_slice(&original[1..]);
+                    fs::write(definition_path, duplicate).unwrap();
+                }
+                "oversized" => {
+                    let definition_path = root.join("definition.json");
+                    let mut oversized =
+                        vec![b' '; crate::definition_identity::MAX_SOURCE_DOCUMENT_BYTES + 1];
+                    oversized.extend_from_slice(&fs::read(&definition_path).unwrap());
+                    fs::write(definition_path, oversized).unwrap();
+                }
+                "symlinked" => {
+                    let definition_path = root.join("definition.json");
+                    let target = repo.path().join("outside-definition.json");
+                    fs::write(&target, fs::read(&definition_path).unwrap()).unwrap();
+                    fs::remove_file(&definition_path).unwrap();
+                    create_file_symlink(&target, &definition_path);
+                }
+                _ => unreachable!("table case is exhaustive"),
+            }
+
+            match resolve_with_authority(
+                repo.path(),
+                &refs.snapshot,
+                &refs.delta,
+                &refs.definition,
+                &refs.disclosure,
+                [0; 6],
+                provenance(),
+            ) {
+                Err((actual, omissions)) => {
+                    assert_eq!(actual, expected, "case {case}");
+                    assert!(
+                        omissions.is_empty(),
+                        "case {case} must not yield usable output"
+                    );
+                }
+                Ok(_) => panic!("case {case} unexpectedly produced a grounded resolution"),
+            }
+        }
+    }
+
+    #[test]
     fn tracked_p4_transition_source_replays_the_grounding_projection() {
         let repo = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
         let source_root = source_root(&repo);
@@ -1153,6 +1271,21 @@ mod tests {
         delta: ExactGroundingRef,
         definition: ExactGroundingRef,
         disclosure: ExactGroundingRef,
+    }
+
+    #[cfg(unix)]
+    fn create_file_symlink(target: &Path, link: &Path) {
+        std::os::unix::fs::symlink(target, link).expect("test symlink is available");
+    }
+
+    #[cfg(windows)]
+    fn create_file_symlink(target: &Path, link: &Path) {
+        std::os::windows::fs::symlink_file(target, link).expect("test symlink is available");
+    }
+
+    #[cfg(all(not(unix), not(windows)))]
+    fn create_file_symlink(_target: &Path, _link: &Path) {
+        panic!("HCM-3.5 source admission requires a supported no-follow platform");
     }
 
     fn persisted_source_fixture() -> (TempDir, FixtureRefs) {

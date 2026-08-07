@@ -1,0 +1,227 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260807T212217Z--HCM-3-5--audit-corrective-final-closeout-review",
+  "created_at_utc": "2026-08-07T21:22:17Z",
+  "source_handoff_ids": [
+    "20260807T181740Z--HCM-3-5--orchestration--p1-p4-transition-materialization-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-5-audit-corrective-implementation-20260807",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "HCM-3.5-audit-corrective-source-ingestion-negative-proof-and-replayable-closeout",
+  "subject_fingerprint": "sha256:04af7c8ce36c63c8928b6be058803cdc6b2f20d4d4964d21b8a65291c4101bf7",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-5-audit-corrective-final-closeout-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-07T20:55:50Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-5-audit-corrective-source-ingestion-negative-proof-and-replayable-closeout",
+        "packet_ids": [
+          "HCM-3.5-audit-corrective-source-ingestion-negative-proof-and-replayable-closeout"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T205550Z--audit-corrective-source-ingestion-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:0b5ed73ea09c899dff51cde371a0a97fda7769324531f825f5dbffcf81abb829"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:814850cd500f14304711d745fe0c940ba3b140ffbe923415542d5c9c45cf8c64",
+    "integrated_outcome_id": "hcm-3-5-audit-corrective-source-ingestion-negative-proof-and-replayable-closeout",
+    "outcome_registry_fingerprint": "sha256:0b5ed73ea09c899dff51cde371a0a97fda7769324531f825f5dbffcf81abb829",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "implementation"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260807T211546Z--HCM-3-5--audit-corrective-remediation-closure"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-5-audit-corrective-final-closeout-pre-review-v1",
+    "completed_at_utc": "2026-08-07T21:22:16Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "full 54-path P1-P4-plus-correction subject review, scoped diff, and git diff --check",
+        "evidence_ref": "terminal: no out-of-scope paths; historical record remains unchanged"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "manual local caller/source-reader inventory across the original P1-P4 path and correction",
+        "evidence_ref": "proof: audit-corrective source-impact; GitNexus is unavailable/not-green"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "SHA-256 replay of the sorted 54-entry complete final subject manifest",
+        "evidence_ref": "terminal: sha256:04af7c8ce36c63c8928b6be058803cdc6b2f20d4d4964d21b8a65291c4101bf7"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "terminal: passed after corrective code and proof completion"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "rg -n [ \\t]+$ over every final-review manifest text path",
+        "evidence_ref": "terminal: no trailing whitespace across 54 final-review paths"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path":".handbook/grounding/hcm-3.5/v1/current-capture.json","sha256":"f8b61ba34fc0074575d8a739fa85bccfd7e8fff84c4b903e0d0dd8e0ff2c7570"},
+      {"path":".handbook/grounding/hcm-3.5/v1/current-snapshot.json","sha256":"beac8e254d680875a8b40c4f8aab8c23f440d4ae806b3af0fcd9cf298b465f50"},
+      {"path":".handbook/grounding/hcm-3.5/v1/currentness.json","sha256":"151ddf7edf9cfb6f1bfad54b7b2dabb8ea196fa7771d66ff1751179887efa371"},
+      {"path":".handbook/grounding/hcm-3.5/v1/definition.json","sha256":"e553ba87b1182df8d4bc587259bcbe227e208b2e1ef670a8b6dbc35f4ed75e1d"},
+      {"path":".handbook/grounding/hcm-3.5/v1/delta-catalog.json","sha256":"f2de1ce0684197ca3b3b92428dfcf3d2946fdeab76df1880b03acfe7b1cf28a7"},
+      {"path":".handbook/grounding/hcm-3.5/v1/delta-route.json","sha256":"839ba6ea4cc3728f02a4615ab1f2e38381d9f0f1448e919f96a05a85b4ab9438"},
+      {"path":".handbook/grounding/hcm-3.5/v1/disclosure.json","sha256":"ec46c655d094a69f7d46aa1788f337d2feb0acb72398526f4570d470d0e66948"},
+      {"path":".handbook/grounding/hcm-3.5/v1/grounding-projection.json","sha256":"fa8a0901be95c278cebcee276e7aeba92fd64d1f19afaeb766657d40cd49392b"},
+      {"path":".handbook/grounding/hcm-3.5/v1/prior-capture.json","sha256":"2c8733946b44ef51080607ed06e8af0dde1ca4dd5453c587b899f85be6b084b3"},
+      {"path":".handbook/grounding/hcm-3.5/v1/prior-snapshot.json","sha256":"5a6d11b725b396fdcc01c4e675fadd46f65508b5cf83d0adafe85d78143666d4"},
+      {"path":".handbook/grounding/hcm-3.5/v1/session-delta-route.json","sha256":"049365356ec18ad1525b3621e9b0214e4a0adcdb4b2fc72993b7d548d4d8df27"},
+      {"path":".handbook/grounding/hcm-3.5/v1/session-end-capture.json","sha256":"2c8733946b44ef51080607ed06e8af0dde1ca4dd5453c587b899f85be6b084b3"},
+      {"path":".handbook/grounding/hcm-3.5/v1/session-end-snapshot.json","sha256":"c1c20406831464451de0d6dd95bef69099132e15cd7448b54cedc86bb7e25179"},
+      {"path":".handbook/grounding/hcm-3.5/v1/snapshot-policy.json","sha256":"cbda09d69cfc53d5e1be175f977b9cbf2e4a4c14645c51d11a24a23176522071"},
+      {"path":"crates/engine/src/definition_identity.rs","sha256":"a16c94af111664622eddf62feae9c4cad6defbd85fc743f55b6f11164108718e"},
+      {"path":"crates/engine/src/grounding.rs","sha256":"217a67642666ef07f6ac009e8633b9a68643a22c2f8710e9a83d601dcebc784f"},
+      {"path":"crates/engine/src/grounding_transition.rs","sha256":"c4b50ea9f0741315e31fa918b502ea63286cbc6885671c93798083a9fa73ecc2"},
+      {"path":"crates/engine/src/lib.rs","sha256":"36359485cd98815c4bb536342ed0756e717463f73e787a5f00688278778ef9ee"},
+      {"path":"crates/engine/src/snapshot_memory/mod.rs","sha256":"cf3403794bbbe38592c03c76a75f1e4e2400046c32c55d0ed63840742b5e705f"},
+      {"path":"crates/engine/src/snapshot_memory/tests.rs","sha256":"11817ae747bfc9efdaef5b8ccf8de0141dee4ad1d88c62a7560b6075d60b7f03"},
+      {"path":"crates/engine/tests/fixtures/hcm_3_5_grounding/definition.json","sha256":"652eb765b1c9bf3e22c962e1f4a2a0906db3373f290e6fc9596f115e7dcc2448"},
+      {"path":"crates/engine/tests/fixtures/hcm_3_5_grounding/disclosure.json","sha256":"8a598e26a16a9e9c340a75969cf8029fb9ff6d0ffa423f39c06701e94249838c"},
+      {"path":"crates/engine/tests/hcm_3_5_grounding.rs","sha256":"c9a2c3ae32449a5406dbfbe96e83dbaf74652c087b48cb26d8413abe5ebb7f61"},
+      {"path":"crates/flow/src/grounded_packet.rs","sha256":"1f4ede3d2ea31ea353d441f89e23cda862502ae0cfe00d10fa053aea2710db2f"},
+      {"path":"crates/flow/src/lib.rs","sha256":"fc394651c31524a6df70b545ead5984bb82e36ac2ed1bcd8ce98280d90dd969c"},
+      {"path":"crates/flow/tests/hcm_3_5_grounded_packet.rs","sha256":"b407fe7439605b9cb76ff69c42118c6e3385a53c6b19f421352192cc7d22d003"},
+      {"path":"crates/pipeline/src/lib.rs","sha256":"982a2f38dae8c3840f6f953b7ecacb96a1cbf58b209380d0bfc368f0ef2d920f"},
+      {"path":"crates/pipeline/src/shared_grounding_inclusion.rs","sha256":"52d7b9973cae535b9ce7da7208a67680588892a3da100d49af76a9ac56e7cbd6"},
+      {"path":"crates/pipeline/tests/hcm_3_5_shared_grounding_inclusion.rs","sha256":"a012e66eee0d23d6bbc702e83d08db5226de50bbb37791341ace03d399facedf"},
+      {"path":"docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md","sha256":"7e09acea2db929ea36fb22a3769ebd391f2a34ef67b38a2116728cbdb4327b81"},
+      {"path":"docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md","sha256":"3b9da30e79dc718860992ab06ce561473e4553ad608542a02f93b2c2e27c6614"},
+      {"path":"docs/specs/handbook-contract-membrane/09-review-finding-inventory.md","sha256":"6182562270809da3921422d8285365242292ebcf2f3ccdba1589a2096a39ca81"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T205600Z--HCM-3-5--audit-corrective-complete-subject-discovery.json","sha256":"3dc44c3a28a35b60b9105de00267a7bae62eff5d09a4e41833efdd7df97abe42"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T211546Z--HCM-3-5--audit-corrective-remediation-closure.json","sha256":"a43ec225d70e2165f0ba8ac4a3b2469cb526e71f538b129e4e5b01dafaf6e97f"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/records/20260807T181740Z--HCM-3-5--orchestration--p1-p4-transition-materialization-completed.json","sha256":"61e0d71da2f497426d6aefa37f0ca35fd712d728df59c920d573730691a54658"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md","sha256":"762fef5405dd2e7fdeff5615e4b975ca34f9b29d0ced8e3e392f60c484668df5"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T153500Z--p1-implementation-admission-recovery-selector.md","sha256":"c9c73309a443662a40e869a49cf8daed294effa08564c7322a78d068a06d6b40"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T163000Z--p2-grounded-flow-packet-selector.md","sha256":"dcbd26cc83557163c0cf1c718f07b29b7d6af79cb12d5aed3b8ef78792ac7973"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T170000Z--p3-namespaced-shared-grounding-inclusion-selector.md","sha256":"3f48ed5f99b6b811daf4ad04689cb8aa373b6b0a52cc9877c9c528f2a2d92cbb"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T173000Z--p4-descriptive-transition-refs-selector.md","sha256":"fafb61f106a40cdda1f676ab464f1aa86a52492faac63e4a7829e2a24285e49e"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T180000Z--p4-transition-materialization-selector.md","sha256":"66fff5579e6fa08252013d14614408c9143a4384183be3e40f285f289ab6a41d"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T205550Z--audit-corrective-source-ingestion-selector.md","sha256":"b6fc53329ee7806bb989328dfa607c60e580146921b9f8d4599337de8dd6a6b1"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T160000Z--p1-implementation-admission-recovery-proof-matrix.md","sha256":"0f310ba38f35e7ad7f65b2eb3099744317755762171e5066d361ac224282fce4"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T160000Z--p1-implementation-admission-recovery-source-impact.md","sha256":"4472b94e477183c58159c889594db2254f8dfd0d2d6a71f75c1c126940a25e0a"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T164000Z--p2-grounded-flow-packet-proof-matrix.md","sha256":"04f74f82844f303b7fe713cdc537ed6cbb7614c6dd7a01c9896b9ddc8d2d254f"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T164000Z--p2-grounded-flow-packet-source-impact.md","sha256":"d8a409dde003ffabcfe19c9cf8c8b01b906e74fce158406efe55dffc982f5ea5"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T171000Z--p3-namespaced-shared-grounding-inclusion-proof-matrix.md","sha256":"4a5ecd6ab0acbdf242f2912a56cfe0df69898eca0f28e9ffc777d2a86694f369"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T171000Z--p3-namespaced-shared-grounding-inclusion-source-impact.md","sha256":"a4f33e429936fc9f7f5c4323b766c4104bdf4b1ea1389be97334eab91eb838e3"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T173000Z--p4-descriptive-transition-refs-proof-matrix.md","sha256":"75d4a0240a3c168ad86b0e94c944901159aa76bd3209defbd52126781e345430"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T173000Z--p4-descriptive-transition-refs-source-impact.md","sha256":"380545d0bddf6553401a4a92779cde7a04a37dbe549cfc48d3be93edc710ed7a"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T180000Z--p4-transition-materialization-proof-matrix.md","sha256":"7d01a578e92a9f92943a7120ed49884d61f7876612c468e35cf4213809f35676"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T180000Z--p4-transition-materialization-source-impact.md","sha256":"12c6775e12cc31675a5b6ef98217209c48af3f63143bc6a98dc0f49b539a5956"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-proof-matrix.md","sha256":"c669e1b2210a90989911c137d2cb94c42791c9e5cf3f9200dbd158df743d1d38"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-source-impact.md","sha256":"bac34ffaebd22288520c16ecce22962bddc32a9f3d7f75a392a4810196765f39"}
+    ],
+    "aggregate_fingerprint": "sha256:04af7c8ce36c63c8928b6be058803cdc6b2f20d4d4964d21b8a65291c4101bf7"
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 audit-corrective final-closeout complete-subject review",
+    "scope_horizon": "the complete original P1-P4 HCM-3.5 code/test/proof path plus the bounded source-ingestion correction and both prior corrective dispatches",
+    "detail_resolution": "whether the whole final HCM-3.5 path is clean, including typed downstream P2/P3 regression seams, P4 non-promoting materialization, fail-closed P1/P4 source admission, negative proof, and prospective corrective lineage",
+    "temporal_horizon": "after the implementation-stage closure CLEAN and before any primary commit, record, ledger, or target CAS",
+    "authority_horizon": "read-only final review only; no code/document/record/ledger/ref/remote/protected-checkout action and no scope expansion",
+    "memory_horizon": "the terminal historical parent remains context only; its record is immutable and this distinct corrective parent must prove its own closure",
+    "validation_horizon": "CLEAN is the required final evidence before primary commit and mechanical completed-record/ledger closeout; no review follows CLEAN"
+  },
+  "authority_refs": [
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T205550Z--audit-corrective-source-ingestion-selector.md","sections":["complete final-review subject"]},
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T205600Z--HCM-3-5--audit-corrective-complete-subject-discovery.json","sections":["entire discovery dispatch"]},
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T211546Z--HCM-3-5--audit-corrective-remediation-closure.json","sections":["entire closure dispatch"]},
+    {"path":"docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md","sections":["causal review cadence"]},
+    {"path":"docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md","sections":["v1.4 closeout requirements"]},
+    {"path":"docs/specs/handbook-contract-membrane/09-review-finding-inventory.md","sections":["priority and closure rules"]}
+  ],
+  "repo_truth": "The assigned worktree remains detached at the required expected-old target 38097b69d1f1c5b1ab857e4252a442f45834bae6/tree 53d172cebcb20d43f9a01298ea14df436efef485, with required ancestor 1a10bfd59e8433fa344dd2baa4880b4b87c7f8f6. This local-only review is bound to task 019fddfa-610b-7512-b591-654ba4f5130a, host local, meta task 019fda65-3892-7900-a692-2dd0a0fccc7a, and nonce dd04871aad668887df84520236dca6db213aa2975a5353f38f0ee3f7f11db63c. Required targeted checks and cargo test -p handbook-engine --lib passed locally (201 passed, 1 ignored, 157.97 seconds). No protected checkout or remote was accessed. GitNexus graph tooling remains unavailable/not-green; no unavailable result is claimed green.",
+  "allowed_scope": [
+    "Independently replay all 54 manifest entries and review the complete original P1-P4 HCM-3.5 path plus the correction, not merely the delta.",
+    "Verify P1 typed public outcome/no-raw/no-usable-output behavior, P2/P3 retained typed consumer regression seams, P4 no-materialized-ref behavior, the negative source matrix, historical-record preservation, and prospective corrective lineage.",
+    "Return every valid P1/P2 finding with unique HCM35-AC-FINAL identifier, exact location/contract/minimum admitted remediation and verification. Inventory P3/P4 only."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, create record/ledger, delegate, update a ref, alter the manifest, or access remote/protected state.",
+    "Do not widen public API/transport or modify any excluded Flow/pipeline/resolver/compiler behavior, Cargo/dependencies/configuration, schema/template/validator, SDK, CLI, Substrate, gate runtime, P5/P6, HCM-3.6+, HCM-4+, or HCM-5."
+  ],
+  "tasks": [
+    "Review the complete final subject fresh and independently, including whether each original P1-P4 seam remains within its historical contract and whether the correction is fail-closed without source disclosure.",
+    "Check byte-hashed dispatch lineage, the historical-record non-rewrite condition, targeted/full local verification evidence, and GitNexus availability truthfulness.",
+    "Return findings first, then validation, advisory disposition, GitNexus condition, and parent disposition. CLEAN is required before closeout and permits no subsequent review."
+  ],
+  "contracts_and_gates": [
+    "This is the required fresh full-subject final-closeout review, distinct from discovery and delta closure. It binds the only final CLEAN evidence for this corrective parent.",
+    "P1/P2 findings are blocking and cannot be waived. A valid finding stops closeout; no local CAS is allowed without CLEAN and zero unresolved P1/P2.",
+    "After CLEAN, only mechanical primary commit, completed record/ledger closeout commit, exact expected-old local CAS, and verification remain. No review cycle follows CLEAN."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS for any P1/P2 gap and BLOCKED for a required scope/authority/protected/remote/dependency expansion. Do not repair within this final review.",
+    "Report manifest, lineage, parent/nonce, target, protected-path, or local-only drift to the parent without writing state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}

@@ -6,7 +6,7 @@ mod redaction;
 #[cfg(test)]
 mod tests;
 
-use crate::{DefinitionFingerprint, ExactDefinitionRef};
+use crate::{parse_schema_json, DefinitionFingerprint, ExactDefinitionRef};
 use delta::{derive_snapshot_delta, load_drift_catalog, SnapshotEndpoint};
 use policy::{load_policy, validate_capture_input};
 use record::build_snapshot;
@@ -259,7 +259,7 @@ fn validate_grounding_route(
 }
 
 fn json_value(bytes: &[u8]) -> Result<Value, GroundingSourceError> {
-    serde_json::from_slice(bytes).map_err(|_| GroundingSourceError::InvalidSource)
+    parse_schema_json(bytes).map_err(|_| GroundingSourceError::InvalidSource)
 }
 
 fn fingerprint_of(value: &Value) -> Result<DefinitionFingerprint, GroundingSourceError> {

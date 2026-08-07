@@ -1,9 +1,11 @@
+use crate::canonical_repo_support::{CanonicalWorkspace, RepoRelativeFileAccessError};
 use semver::Version;
 use serde::de::{MapAccess, SeqAccess, Visitor};
 use serde::{Deserialize, Deserializer, Serialize};
 use serde_json::{Map, Number, Value};
 use sha2::{Digest, Sha256};
 use std::fmt;
+use std::path::Path;
 
 pub const MAX_SOURCE_DOCUMENT_BYTES: usize = 1024 * 1024;
 pub const MAX_TOTAL_SOURCE_BYTES: usize = 8 * 1024 * 1024;
@@ -265,6 +267,52 @@ impl SourceByteBudget {
     pub fn remaining_bytes(&self) -> usize {
         MAX_TOTAL_SOURCE_BYTES - self.total_bytes
     }
+}
+
+pub(crate) fn read_bounded_regular_source(
+    repo_root: &Path,
+    repo_relative_path: &str,
+    budget: &mut SourceByteBudget,
+) -> Result<Vec<u8>, RegistryLoadError> {
+    let workspace = CanonicalWorkspace::new(repo_root);
+    let relative_path = workspace
+        .normalize_repo_relative(repo_relative_path)
+        .map_err(|_| {
+            RegistryLoadError::new(
+                RegistryLoadErrorKind::InvalidSourcePath,
+                "source path is invalid",
+            )
+        })?;
+    let source = workspace
+        .trusted_read_strict(&relative_path)
+        .map_err(map_source_access_error)?;
+    let (bytes, exceeded) = source
+        .read_bytes_bounded_stable(MAX_SOURCE_DOCUMENT_BYTES)
+        .map_err(|_| {
+            RegistryLoadError::new(
+                RegistryLoadErrorKind::SourceReadFailure,
+                "source could not be read safely",
+            )
+        })?;
+    if exceeded {
+        return Err(RegistryLoadError::new(
+            RegistryLoadErrorKind::SourceLimitExceeded,
+            "source document exceeds the 1 MiB limit",
+        ));
+    }
+    budget.admit(bytes.len())?;
+    Ok(bytes)
+}
+
+fn map_source_access_error(error: RepoRelativeFileAccessError) -> RegistryLoadError {
+    let kind = match error {
+        RepoRelativeFileAccessError::Missing(_) => RegistryLoadErrorKind::MissingSource,
+        RepoRelativeFileAccessError::SymlinkNotAllowed(_) => RegistryLoadErrorKind::SymlinkSource,
+        RepoRelativeFileAccessError::NotRegularFile(_) => RegistryLoadErrorKind::NonRegularSource,
+        RepoRelativeFileAccessError::InvalidPath(_) => RegistryLoadErrorKind::InvalidSourcePath,
+        RepoRelativeFileAccessError::ReadFailure { .. } => RegistryLoadErrorKind::SourceReadFailure,
+    };
+    RegistryLoadError::new(kind, "source admission failed")
 }
 
 pub fn parse_definition_yaml(bytes: &[u8]) -> Result<Value, RegistryLoadError> {
