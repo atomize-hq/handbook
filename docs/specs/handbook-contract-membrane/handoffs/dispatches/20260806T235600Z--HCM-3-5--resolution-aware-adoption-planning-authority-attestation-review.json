@@ -1,0 +1,267 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260806T235600Z--HCM-3-5--resolution-aware-adoption-planning-authority-attestation-review",
+  "created_at_utc": "2026-08-06T23:56:00Z",
+  "source_handoff_ids": [
+    "20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed",
+    "20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary"
+  ],
+  "parent_orchestration_id": "20260806T235500Z--HCM-3-5--resolution-aware-adoption-planning-authority-attestation",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "HCM-3.5-A1-resolution-aware-adoption-planning-authority-attestation",
+  "subject_fingerprint": "sha256:0a97f3acedccb7ee7a17903204eb372a1e4ff4245c14fc6e8833caa81bc1281e",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-5-resolution-aware-adoption-planning-authority-attestation-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T23:55:45Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-5-resolution-aware-adoption-planning-authority-attestation-prerequisite",
+        "packet_ids": [
+          "HCM-3.5-A1-resolution-aware-adoption-planning-authority-attestation"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority.json"
+      }
+    ],
+    "fingerprint": "sha256:cb03bd28e09aebcc59736e57f5751e69e848e3ccd71e78087ccf293dc79875e0"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:d530e122623ac458f905adf3116789af0ac59be146b7e7f005318b1422c005c9",
+    "integrated_outcome_id": "hcm-3-5-resolution-aware-adoption-planning-authority-attestation-prerequisite",
+    "outcome_registry_fingerprint": "sha256:cb03bd28e09aebcc59736e57f5751e69e848e3ccd71e78087ccf293dc79875e0",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-5-authority-attestation-discovery-convergence",
+    "completed_at_utc": "2026-08-06T23:55:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the corrected user authority contract, repository-local user authority source, continuation artifact, attestation basis, HCM-3.4 completed predecessor, HCM-3.5 authority-boundary predecessor, their complete dispatch populations, and the 07/08/09 controls.",
+        "evidence_ref": "The subject is limited to one user-source record, one artifact projection, one attestation basis, and this read-only review dispatch. The artifact reserves a closed documentation-only future ceiling and chooses no future engine, Flow, pipeline, SDK, CLI, Substrate, runtime, API, schema, dependency, or consumer surface."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Replay every manifest entry and inspect the predecessor handoffs plus their dispatch references; inventory the artifact ceiling for duplicate, glob, directory-shortcut, absolute, backslash, and source-code paths.",
+        "evidence_ref": "The manifest has no fixtures or consumers. HCM-3.4 and the original HCM-3.5 predecessor are immutable read-only evidence. The ceiling is exact, unique, Python-ordinal sorted, documentation/control-plane only, and reserves the required future dispatch and document names."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 subject manifest, the canonical outcome registry, and the parent/outcome-derived causal budget.",
+        "evidence_ref": "Subject sha256:0a97f3acedccb7ee7a17903204eb372a1e4ff4245c14fc6e8833caa81bc1281e; registry sha256:cb03bd28e09aebcc59736e57f5751e69e848e3ccd71e78087ccf293dc79875e0; budget sha256:d530e122623ac458f905adf3116789af0ac59be146b7e7f005318b1422c005c9."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Strict UTF-8 decode and JSON parse every manifest entry; verify the continuation artifact equals the stable-field authority_artifact_from_grant() projection to be used in the later complete grant.",
+        "evidence_ref": "Every manifest entry decodes as UTF-8 and parses in its expected format. The artifact uses handbook.authority-continuation-grant 1.0 and contains no artifact path/hash or later attestation field."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Check every UTF-8 manifest entry for trailing spaces/tabs and run git diff --check before reviewer spawn.",
+        "evidence_ref": "No manifest entry has trailing whitespace and git diff --check succeeds for the bounded documentation-only candidate."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sha256": "7e09acea2db929ea36fb22a3769ebd391f2a34ef67b38a2116728cbdb4327b81"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "3b9da30e79dc718860992ab06ce561473e4553ad608542a02f93b2c2e27c6614"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "sha256": "6182562270809da3921422d8285365242292ebcf2f3ccdba1589a2096a39ca81"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T185410Z--HCM-3-4--private-projection-source-pair-implementation-discovery.json",
+        "sha256": "a8ed430d3471fade7433a5e116179da7b689b4f70b0a3e6e30508f995e6f8099"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T190810Z--HCM-3-4--private-projection-source-pair-implementation-closure.json",
+        "sha256": "00ddcc193e474425e3e5c7fb1a55a15df7f5f66341c37ebb7d7264d8306c3770"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery.json",
+        "sha256": "dafdddebc036d25cb55d51f00d10150675d620b18ed90b9e990f1257b748869d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+        "sha256": "187a5fa9429953ffba2c1f3cc38862447db427a354ba4ec54b11d6d0eb036992"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+        "sha256": "454aafb25e06dc82954de4c9780cedc3a7482de6a31c5aeecf799f0c6ea9efd3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+        "sha256": "af0ebd87eef5a6bb12eb7291d96e5ba133a524faf6e3d76d51304c254ddc63d3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-attestation-basis.json",
+        "sha256": "da254c1236363f1f61fa82d0784f3c0a60ac0277fd7b5e8e130046f1f2655c9b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-authority.json",
+        "sha256": "294b321b985aa95165412c1031c6fab0e4b3d0ec9f710d126dea0e3d65c7a46c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority.json",
+        "sha256": "98bc051e65ad427227b8a2af6d85c4184cb9d3657ac35fad709bee435d1e3e94"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:0a97f3acedccb7ee7a17903204eb372a1e4ff4245c14fc6e8833caa81bc1281e"
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 authority-artifact issuance and independent CLEAN attestation prerequisite",
+    "scope_horizon": "one documentation/control-plane issuance task distinct from the original HCM-3.5 planning parent",
+    "detail_resolution": "Verify the repository-local user authority source, the exact continuation-artifact projection, closed documentation ceiling, deterministic future reservation, unchanged original predecessor identities, and no added implementation authority.",
+    "temporal_horizon": "This different parent may attest the grant prerequisite but does not resume, supersede, consume, complete, or replace 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning.",
+    "authority_horizon": "New JSON authority/control records and their handoff/ledger closeout only; no Rust, runtime, public API, schema/configuration, dependency, SDK/CLI/Substrate, consumer, HCM-3.6, remote, publication, or protected-checkout work.",
+    "memory_horizon": "The complete HCM-3.4 source-pair record and direct HCM-3.5 authority-boundary record, including their recorded dispatch populations.",
+    "validation_horizon": "Manifest replay, v1.4 dispatch validation, fresh read-only review, ordinary validator, both self-tests, deterministic ledger parity, protected-path verification, and expected-old local-only publication."
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority.json",
+      "sections": [
+        "entire repository-local user authority source"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-authority.json",
+      "sections": [
+        "entire continuation artifact projection"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-attestation-basis.json",
+      "sections": [
+        "entire attestation basis and future reservation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+      "sections": [
+        "entire direct authority-boundary predecessor and dispatch population"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+      "sections": [
+        "entire direct HCM-3.4 predecessor and dispatch population"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "built-in delegation and fresh review"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "v1.4 closeout and authority continuation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "priority rubric and advisory disposition"
+      ]
+    }
+  ],
+  "repo_truth": "The direct HCM-3.5 predecessor is a non-completed authority-boundary handoff at 109cca2c65a4187a82a7d2affee32559ab14e900 / 7f752e3f6e6e5e78f86a9ab612980a553f220c28 with its single immutable discovery dispatch population. HCM-3.4 remains completed private source-pair evidence only. The corrected user contract authorizes this repository-local source record and continuation artifact prerequisite, not a product implementation or a new product decision.",
+  "allowed_scope": [
+    "Independently review the exact repository-local user authority source, continuation artifact, and attestation basis for byte/meaning parity with the corrected authority contract.",
+    "Verify the artifact reserves only the listed documentation/control-plane ceiling, includes the required predecessor and attestation references, keeps symbol_delta empty and risk LOW, and does not freeze the future engine/Flow/pipeline API.",
+    "Verify the source and artifact bind the meta task/thread, local host, authority-decision nonce, original parent, outcome, registry, causal budget, packet, predecessor population, and 109cca2c65a4187a82a7d2affee32559ab14e900 / 7f752e3f6e6e5e78f86a9ab612980a553f220c28 baseline exactly.",
+    "Return unique HCM35-AUTH-ATT-DISC identifiers only for valid attestation defects; do not repair any finding."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff/ledger, delegate, or run product tests.",
+    "Do not choose, freeze, implement, test, or otherwise promote a concrete engine, Flow, pipeline, SDK, CLI, Substrate, gate-runtime, public API, schema, configuration, dependency, consumer-adoption, HCM-3.6, remote, publication, or protected-checkout surface.",
+    "Do not resume, supersede, complete, replace, or consume the original HCM-3.5 planning parent or its CLEAN discovery lineage."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit. Every finding names an exact file/section, violated authority or gate, concrete failure, smallest safe remediation, and missing verification.",
+    "Check the source-record terms exactly: greenfield typed owner/cutover planning, future SDK/CLI/Substrate compatibility with transitional Tier 2 binary/JSON, deferred concrete promotion runtime, and redacted engine-produced delta signals that preserve HCM-3.4 relation-only snapshot_delta semantics.",
+    "Check that the artifact is the exact stable projection of a future complete grant: its authority provenance names the source record and exact meta identity, it omits only its own path/hash and later attestation, and it makes no implementation choice.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:0a97f3acedccb7ee7a17903204eb372a1e4ff4245c14fc6e8833caa81bc1281e."
+  ],
+  "contracts_and_gates": [
+    "This different-parent prerequisite has its own discovery review budget and must not reset or consume the original HCM-3.5 planning parent's CLEAN discovery or causal budget.",
+    "A valid P1/P2 requires one consolidated remediation and a different-fresh closure review only if it is directly causal and remains inside this exact issuance scope. A CLEAN review ends the cycle; no review follows CLEAN.",
+    "The completed parent handoff must use this reviewer as the future grant's authority_ref.attestation and list both authority-record paths in its authority references."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair if the source/artifact differs from the contract, the future ceiling is open, unsorted, non-documentary, incomplete, or selects a product decision, or predecessor/identity/baseline evidence drifts.",
+    "Return BLOCKED if validation requires code, runtime, schema, configuration, dependency, public API, consumer, sibling-slice, protected-checkout, remote, or unavailable review capability work.",
+    "Report any manifest, causal-cadence, protected-boundary, or authority issue to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

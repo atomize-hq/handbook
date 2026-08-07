@@ -1,0 +1,38 @@
+{
+  "schema_id": "handbook.user-product-authority",
+  "schema_version": "1.0",
+  "authority_id": "20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority",
+  "issued_at_utc": "2026-08-06T23:55:30Z",
+  "issuer": {
+    "role": "user_product_authority",
+    "identity": "user_product_authority"
+  },
+  "owner": {
+    "role": "product_and_lineage_owner",
+    "identity": "user_product_authority"
+  },
+  "authority_binding": {
+    "meta_workflow_id": "handbook-hcm-3-5-planning-20260806",
+    "meta_task_id": "019fd8b6-73b3-79d2-bd1b-08462c5bf620",
+    "meta_thread_id": "019fd8b6-73b3-79d2-bd1b-08462c5bf620",
+    "meta_host_id": "local",
+    "authority_decision_nonce": "220063abb93fbbe8eaba8831ea730a1179ae74c4e10be21e4bb6e629ca6bb57d"
+  },
+  "authorized_planning_terms": {
+    "typed_owner_boundary": "HCM-3.5 may plan and freeze the exact typed handbook-engine, handbook-flow, and handbook-pipeline owner boundary and an intentional greenfield cutover. Existing callers are not a legacy-compatibility constraint unless an architectural reason requires a compatibility treatment.",
+    "future_composition": "The plan must remain compatible with future standalone Handbook CLI plus crates.io SDK/library composition by Substrate. Tier 2 bundled binary/JSON remains transitional. SDK, CLI, Substrate implementation, publication, registry proof, and consumer adoption remain out of scope.",
+    "promotion_gate": "The concrete promotion-gate evaluator/runtime is deferred. HCM-3.5 may plan only a typed, non-promoting evidence boundary.",
+    "delta_signals": "HCM-3.4's immutable relation-only snapshot_delta rule remains intact. HCM-3.5 may plan a bounded, redacted, engine-produced delta-signal summary instead of generic delta field reads and must reconcile that form with the reveal_delta_signals target language."
+  },
+  "prohibitions": [
+    "No Rust implementation.",
+    "No runtime behavior or runtime check.",
+    "No public API implementation or selection beyond the later planning boundary.",
+    "No schema or configuration change.",
+    "No dependency change.",
+    "No HCM-3.6 work.",
+    "No remote, publication, registry proof, SDK/CLI/Substrate implementation, or consumer adoption.",
+    "No protected-checkout mutation."
+  ],
+  "authority_effect": "planning_only"
+}

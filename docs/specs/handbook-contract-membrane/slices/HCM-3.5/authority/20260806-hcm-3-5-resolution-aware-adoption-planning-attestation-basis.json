@@ -1,0 +1,90 @@
+{
+  "schema_id": "handbook.hcm-3-5-authority-attestation-basis",
+  "schema_version": "1.0",
+  "authority_attestation_id": "20260806-hcm-3-5-resolution-aware-adoption-planning-attestation-basis",
+  "issued_at_utc": "2026-08-06T23:55:40Z",
+  "increment_task": {
+    "thread_id": "019fd979-9d2f-76b3-9820-9b124d1344c0",
+    "host_id": "local",
+    "dispatch_nonce": "3ce6cf85113555ca4af97d9e814cd74ee949ba63389ed823f5e15bc906dd50a6"
+  },
+  "user_authority_source": {
+    "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority.json",
+    "sha256": "98bc051e65ad427227b8a2af6d85c4184cb9d3657ac35fad709bee435d1e3e94"
+  },
+  "continuation_artifact": {
+    "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-authority.json",
+    "sha256": "294b321b985aa95165412c1031c6fab0e4b3d0ec9f710d126dea0e3d65c7a46c",
+    "projection": "authority_artifact_from_grant() stable-field projection; authority_ref.path, authority_ref.sha256, and authority_ref.attestation remain outside the artifact and are completed only after CLEAN attestation."
+  },
+  "predecessor_evidence": {
+    "hcm_3_4_handoff": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+    "hcm_3_4_dispatches": [
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T185410Z--HCM-3-4--private-projection-source-pair-implementation-discovery.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T190810Z--HCM-3-4--private-projection-source-pair-implementation-closure.json"
+    ],
+    "hcm_3_5_authority_boundary_handoff": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+    "hcm_3_5_dispatch_population_fingerprint": "sha256:058e68cf96a6dad12dee039a4c0479fc0ac2023df68d09d104b5a800a5ff51fb",
+    "hcm_3_5_predecessor_dispatch": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery.json",
+    "baseline_commit": "109cca2c65a4187a82a7d2affee32559ab14e900",
+    "baseline_tree": "7f752e3f6e6e5e78f86a9ab612980a553f220c28"
+  },
+  "attestation_review": {
+    "dispatch_path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T235600Z--HCM-3-5--resolution-aware-adoption-planning-authority-attestation-review.json",
+    "required_result": "one fresh built-in, read-only, different-parent CLEAN review whose replayed manifest contains the exact user authority source and continuation artifact bytes",
+    "forbidden_subject": "No future engine, Flow, pipeline, SDK, CLI, Substrate, runtime, public-API, schema, configuration, dependency, consumer-adoption, or promotion-gate implementation may be frozen or selected."
+  },
+  "future_resumption_reservation": {
+    "parent_orchestration_id": "20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning",
+    "first_required_slot": "authority_admission",
+    "reserved_documentation_paths": [
+      "docs/specs/handbook-contract-membrane/00-README.md",
+      "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T185410Z--HCM-3-4--private-projection-source-pair-implementation-discovery.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T190810Z--HCM-3-4--private-projection-source-pair-implementation-closure.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T235600Z--HCM-3-5--resolution-aware-adoption-planning-authority-attestation-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000100Z--HCM-3-5--resolution-aware-adoption-planning-authority-admission-discovery.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000200Z--HCM-3-5--resolution-aware-adoption-planning-documentation-implementation.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000300Z--HCM-3-5--resolution-aware-adoption-planning-documentation-discovery.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000400Z--HCM-3-5--resolution-aware-adoption-planning-documentation-closure.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000500Z--HCM-3-5--resolution-aware-adoption-planning-documentation-supplemental-1.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000600Z--HCM-3-5--resolution-aware-adoption-planning-documentation-supplemental-2.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000700Z--HCM-3-5--resolution-aware-adoption-planning-proof-discovery.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000800Z--HCM-3-5--resolution-aware-adoption-planning-proof-closure.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000900Z--HCM-3-5--resolution-aware-adoption-planning-proof-supplemental-1.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001000Z--HCM-3-5--resolution-aware-adoption-planning-proof-supplemental-2.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001100Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-discovery.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001200Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-closure.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001300Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-supplemental-1.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001400Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-supplemental-2.json",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260806T235900Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-attestation-completed.json",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260807T001500Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-continuation-completed.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T183318Z--private-projection-source-pair-implementation-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-attestation-basis.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-authority.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority.json",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260806T202615Z--resolution-aware-adoption-planning-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T000000Z--resolution-aware-adoption-planning-continuation-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260806T202615Z--resolution-aware-adoption-planning-preflight.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T000000Z--resolution-aware-adoption-planning-authority-admission.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T000000Z--resolution-aware-adoption-planning-continuation-proof.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/todo.md"
+    ]
+  },
+  "authority_effect": "attestation_prerequisite_only"
+}

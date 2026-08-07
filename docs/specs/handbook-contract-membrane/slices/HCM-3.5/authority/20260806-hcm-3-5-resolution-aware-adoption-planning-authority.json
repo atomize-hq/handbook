@@ -1,0 +1,102 @@
+{
+  "schema_id": "handbook.authority-continuation-grant",
+  "schema_version": "1.0",
+  "extension_id": "hcm-3-5-resolution-aware-adoption-planning-continuation-v1",
+  "predecessor_handoff_id": "20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary",
+  "predecessor_dispatch_population_fingerprint": "sha256:058e68cf96a6dad12dee039a4c0479fc0ac2023df68d09d104b5a800a5ff51fb",
+  "parent_orchestration_id": "20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning",
+  "integrated_outcome_id": "hcm-3-5-resolution-aware-adoption-planning",
+  "outcome_registry_fingerprint": "sha256:7b1e0a41e9b64efd903da5eaf10fb454e1bb2dc7a3833cf3c3207cff00285672",
+  "causal_budget_id": "sha256:73ac770a423a3283f04620eaec5e09f48586874ca6bd7e4ee9c0fd49b55f6ea6",
+  "packet_ids": [
+    "HCM-3.5-P1-resolution-aware-adoption-planning"
+  ],
+  "authority_ref": {
+    "issuer": {
+      "role": "user_product_authority",
+      "identity": "user_product_authority"
+    },
+    "owner": {
+      "role": "product_and_lineage_owner",
+      "identity": "user_product_authority::docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority.json::meta_thread=019fd8b6-73b3-79d2-bd1b-08462c5bf620::host=local::authority_decision_nonce=220063abb93fbbe8eaba8831ea730a1179ae74c4e10be21e4bb6e629ca6bb57d"
+    },
+    "issued_at_utc": "2026-08-06T23:55:30Z",
+    "source": {
+      "task_ref": "019fd8b6-73b3-79d2-bd1b-08462c5bf620",
+      "thread_ref": "019fd8b6-73b3-79d2-bd1b-08462c5bf620",
+      "host_ref": "local",
+      "dispatch_nonce": "220063abb93fbbe8eaba8831ea730a1179ae74c4e10be21e4bb6e629ca6bb57d"
+    }
+  },
+  "baseline_commit": "109cca2c65a4187a82a7d2affee32559ab14e900",
+  "baseline_tree": "7f752e3f6e6e5e78f86a9ab612980a553f220c28",
+  "subject_path_ceiling": [
+    "docs/specs/handbook-contract-membrane/00-README.md",
+    "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+    "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+    "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+    "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T185410Z--HCM-3-4--private-projection-source-pair-implementation-discovery.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T190810Z--HCM-3-4--private-projection-source-pair-implementation-closure.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T235600Z--HCM-3-5--resolution-aware-adoption-planning-authority-attestation-review.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000100Z--HCM-3-5--resolution-aware-adoption-planning-authority-admission-discovery.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000200Z--HCM-3-5--resolution-aware-adoption-planning-documentation-implementation.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000300Z--HCM-3-5--resolution-aware-adoption-planning-documentation-discovery.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000400Z--HCM-3-5--resolution-aware-adoption-planning-documentation-closure.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000500Z--HCM-3-5--resolution-aware-adoption-planning-documentation-supplemental-1.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000600Z--HCM-3-5--resolution-aware-adoption-planning-documentation-supplemental-2.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000700Z--HCM-3-5--resolution-aware-adoption-planning-proof-discovery.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000800Z--HCM-3-5--resolution-aware-adoption-planning-proof-closure.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000900Z--HCM-3-5--resolution-aware-adoption-planning-proof-supplemental-1.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001000Z--HCM-3-5--resolution-aware-adoption-planning-proof-supplemental-2.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001100Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-discovery.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001200Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-closure.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001300Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-supplemental-1.json",
+    "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001400Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-supplemental-2.json",
+    "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+    "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+    "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+    "docs/specs/handbook-contract-membrane/handoffs/records/20260806T235900Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-attestation-completed.json",
+    "docs/specs/handbook-contract-membrane/handoffs/records/20260807T001500Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-continuation-completed.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T183318Z--private-projection-source-pair-implementation-selector.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-attestation-basis.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-authority.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority.json",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260806T202615Z--resolution-aware-adoption-planning-selector.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T000000Z--resolution-aware-adoption-planning-continuation-selector.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260806T202615Z--resolution-aware-adoption-planning-preflight.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T000000Z--resolution-aware-adoption-planning-authority-admission.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T000000Z--resolution-aware-adoption-planning-continuation-proof.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md",
+    "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/todo.md"
+  ],
+  "symbol_delta": [],
+  "risk_ceiling": "LOW",
+  "scope_delta": "Authorize only the direct same-parent HCM-3.5 documentation-planning resumption: after a read-only CLEAN authority-admission selector, freeze the exact typed handbook-engine/handbook-flow/handbook-pipeline owner boundary and intentional greenfield cutover; preserve future standalone Handbook CLI and crates.io SDK/library composition by Substrate while Tier 2 bundled binary/JSON is transitional; defer concrete promotion-gate runtime to a typed non-promoting evidence boundary; preserve HCM-3.4 relation-only snapshot_delta and plan only a bounded redacted engine-produced delta-signal summary reconciled with reveal_delta_signals. No Rust, runtime, public API implementation, schema/configuration, dependency, HCM-3.6, remote, publication, registry proof, consumer adoption, or protected-checkout mutation is authorized.",
+  "review_allowance": [
+    {
+      "review_slot": "authority_admission",
+      "max_cycles": 4
+    },
+    {
+      "review_slot": "implementation",
+      "max_cycles": 4
+    },
+    {
+      "review_slot": "proof",
+      "max_cycles": 4
+    },
+    {
+      "review_slot": "final_closeout",
+      "max_cycles": 4
+    }
+  ]
+}
