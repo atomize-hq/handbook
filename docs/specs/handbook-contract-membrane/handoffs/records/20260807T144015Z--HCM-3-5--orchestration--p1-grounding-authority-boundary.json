@@ -1,0 +1,378 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260807T144015Z--HCM-3-5--orchestration--p1-grounding-authority-boundary",
+  "created_at_utc": "2026-08-07T14:40:15Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "HCM-3.5-P1-engine-grounding-bounded-delta",
+  "orchestration_id": "handbook-hcm-3-5-continuation-implementation-20260807",
+  "source_handoff_ids": [
+    "20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fdc90-717f-7470-aa93-946027954127"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-07T14:40:15Z",
+    "evidence_ref": "A fresh bounded P1 implementer and a different fresh read-only discovery reviewer both completed through the internal subagent channel."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "p1_engine_grounding_implementation",
+      "dispatch_id": "20260807T141501Z--HCM-3-5--engine-grounding-bounded-delta-implementation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T141501Z--HCM-3-5--engine-grounding-bounded-delta-implementation.json",
+      "dispatch_fingerprint": "sha256:c3e11c3518dd72b59d1e3c76c3d57584ce1b45fe81f6ddc8635e2af6e9902234",
+      "role": "implementation",
+      "agent_id": "/root/p1_implementation_retry",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "incremental-implementation",
+        "test-driven-development",
+        "git-workflow-and-versioning",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:544386922420e216dfdc56990896227fd0c80ecfa70f537c3d0566261bffab1c",
+      "result_subject_fingerprint": "sha256:6e3e551732c8588ff5d4d6cb9eeb9cb0f94166d35129284a853aa18ce60fbdca",
+      "review_round": null,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "blocked",
+      "verdict": "blocked",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-source-impact.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-proof-matrix.md",
+        "The initial executor launch failed at transport level before repository access; the fresh retry is the only execution represented by this blocked result."
+      ]
+    },
+    {
+      "run_id": "p1_engine_grounding_discovery",
+      "dispatch_id": "20260807T143010Z--HCM-3-5--engine-grounding-bounded-delta-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T143010Z--HCM-3-5--engine-grounding-bounded-delta-discovery.json",
+      "dispatch_fingerprint": "sha256:89309e9ebfdb9e46696fbe6d7491fb4d02794b6676c6244b36455ecaca063e80",
+      "role": "review",
+      "agent_id": "/root/p1_blocker_discovery",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:6e3e551732c8588ff5d4d6cb9eeb9cb0f94166d35129284a853aa18ce60fbdca",
+      "result_subject_fingerprint": "sha256:6e3e551732c8588ff5d4d6cb9eeb9cb0f94166d35129284a853aa18ce60fbdca",
+      "review_round": 1,
+      "predecessor_run_id": "p1_engine_grounding_implementation",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM35-P1-DISC-001"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T143010Z--HCM-3-5--engine-grounding-bounded-delta-discovery.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-source-impact.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-proof-matrix.md"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-07T14:40:15Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:c7081283bc41d6e3ac842ea84a41049dba969540e5b05b96a2d26df67e4a9b31"
+    ],
+    "aggregate_fingerprint": "sha256:abf5b8e110bd3d2e043832722633eb30a5693144eea59a9b9ac2609c6e3fb30c"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "9df9c1b6b0c144fe5140f2efa2b3f4417e6fe12d",
+    "subject_fingerprint": "sha256:6e3e551732c8588ff5d4d6cb9eeb9cb0f94166d35129284a853aa18ce60fbdca",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T143010Z--HCM-3-5--engine-grounding-bounded-delta-discovery.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-source-impact.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-proof-matrix.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T143010Z--HCM-3-5--engine-grounding-bounded-delta-discovery.json",
+      "git:9df9c1b6b0c144fe5140f2efa2b3f4417e6fe12d"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 P1 engine grounding authority-boundary stop",
+    "scope_horizon": "the selected engine-only P1 grounding and bounded-delta-summary packet",
+    "detail_resolution": "P0 and P1 define the required shape of a bounded summary but do not select the immutable definition/disclosure artifact, exact rules, or persisted current-snapshot-to-compatible-delta source route needed for implementation.",
+    "temporal_horizon": "P1 proof and fresh discovery completed before source edits; no P2 work begins.",
+    "authority_horizon": "No Rust, fixture, schema, configuration, consumer, gate runtime, SDK, CLI, Substrate, publication, or remote authority is available beyond the safe blocked-P1 evidence.",
+    "memory_horizon": "Immutable P0 cross-parent authority, the distinct continuation identity and nonce, local GitNexus impact evidence, and the P1 discovery finding remain required context.",
+    "validation_horizon": "A fresh authority selector must name the missing facts before a new bounded implementation/proof/review cycle may begin."
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Implement HCM-3.5 P1 engine grounding and a bounded redacted delta-signal summary without reopening P0, exporting HCM-3.4 private types, or adopting Flow/pipeline/CLI/SDK/Substrate/gate-runtime scope.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md",
+      "sections": [
+        "entire selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+      "sections": [
+        "Packet 0 — implementation admission and typed-boundary contract freeze",
+        "Greenfield and Packet 1 ceiling"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed.json",
+      "sections": [
+        "entire immutable predecessor"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "true-stop and causal review cadence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "blocked/partial true-stop and deterministic ledger rebuild"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 9df9c1b6b0c144fe5140f2efa2b3f4417e6fe12d",
+    "head": "9df9c1b6b0c144fe5140f2efa2b3f4417e6fe12d",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260807T144015Z--HCM-3-5--orchestration--p1-grounding-authority-boundary.json"
+    ]
+  },
+  "work_completed": [
+    "Bound the distinct continuation parent handbook-hcm-3-5-continuation-implementation-20260807, task 019fdc90-717f-7470-aa93-946027954127, host local, and nonce e7242bf06d18a6327d4b223866f0bed5871dbcd1ff4f4be05e81ad4193d1c1f5; verified exact local target/base/tree/ancestor and a clean assigned worktree before edits.",
+    "Created and validated the exact P1 selector and internal implementation dispatch under the distinct continuation parent. Local GitNexus analysis indexed the worktree without remote access and recorded LOW impacts for ContextMemorySnapshot and SnapshotDelta plus HIGH impact for execute_projection_with_live_observer; the HIGH seam remained unedited and unused.",
+    "A bounded implementer used test-first evidence, removed its temporary expected-failing scaffold after discovering the authority gap, wrote source/impact and blocked proof records, and made no Rust, fixture, configuration, consumer, staging, or remote change.",
+    "A different fresh read-only discovery reviewer replayed the 32-entry subject manifest and independently confirmed the unresolved P2 authority gap. No remediation or closure review occurred because selecting facts or adding the required source fixture would exceed P1 authority.",
+    "Committed the reviewed safe P1 selector/dispatch/proof evidence at 9df9c1b6b0c144fe5140f2efa2b3f4417e6fe12d. The protected checkout was never mutated; the target ref remains at 7e0836a1c60f3992a80719b597f3fc18fabe807e and no CAS/ref update, remote operation, P2/P3/P4, P5, or P6 work was attempted."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md",
+      "status": "partial",
+      "summary": "Bound the P1 engine-only surface and made the missing definition/source-route authority explicit."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-source-impact.md",
+      "status": "blocked",
+      "summary": "Records LOW and HIGH impact evidence, source/fixture facts, and the safe no-edit disposition."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-proof-matrix.md",
+      "status": "blocked",
+      "summary": "Records the expected test-first failure and each unprovable P1 proof obligation without claiming implementation."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T143010Z--HCM-3-5--engine-grounding-bounded-delta-discovery.json",
+      "status": "completed",
+      "summary": "Binds the different-fresh P1 discovery review and its manifest/convergence wall."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T144015Z--HCM-3-5--orchestration--p1-grounding-authority-boundary.json",
+      "status": "blocked",
+      "summary": "Durable authority-boundary handoff; P1 is not CLEAN and no next packet is admitted."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.5-P1-D1",
+      "summary": "The future requirement for a definition-bounded summary does not itself select cardinality, eligibility/order, overflow, metadata, or omission/refusal rules, and HCM-3.4's private in-memory SnapshotDelta derivation is not an exact persisted repo-root mapping. P1 therefore stops rather than manufacture either fact.",
+      "authority_effect": "none",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-source-impact.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM35-P1-DISC-001",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "open",
+      "source_run_id": "p1_engine_grounding_discovery",
+      "summary": "P1 lacks the exact immutable summary definition/disclosure artifact and rules plus an exact persisted current-snapshot-to-compatible-delta mapping. Selecting values, identity grammar, source layout, or a synthetic delta would invent product behavior; adding a fixture/schema would exceed the closed P1 ceiling.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-source-impact.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-proof-matrix.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T143010Z--HCM-3-5--engine-grounding-bounded-delta-discovery.json"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM35-P1-GROUNDING-DEFINITION-AND-SOURCE-ROUTE",
+      "classification": "authority",
+      "summary": "The selected P1 packet cannot construct GroundingRequest::new or prove a bounded summary because the canonical definition/disclosure values and exact repo-root snapshot/delta source mapping are absent, while the selector prohibits fixture, schema, and configuration expansion.",
+      "resume_condition": "A user or authorized product authority supplies a fresh P1 selector naming the immutable definition and disclosure artifacts, exact refs/fingerprints, cardinality, eligibility/order, overflow, permitted metadata, omission/refusal rules, and either an existing persisted compatible snapshot/delta route or a separately authorized reviewed fixture/source delta.",
+      "owner": "user / authorized product authority"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM35-P1-GROUNDING-ESC-001",
+      "trigger": "The P1 implementer and independent discovery reviewer both found that the private HCM-3.4 delta is derived in memory from two validated endpoints and a catalog, while no selected persisted delta source or summary-definition artifact/rules exist.",
+      "current_resolution": "P1 has a closed engine-only shape, fail-closed requirement, and proof matrix, but not the selected semantic/source inputs needed to implement it. The HIGH retained projection executor is preserved unchanged; no raw signals, private export, consumer adoption, or promotion path was created.",
+      "target_resolution": "A new explicit P1 authority binds the exact immutable definition/disclosure artifacts and the exact persisted source pair/delta route, or expressly admits the minimum reviewed fixture/source addition required to create that route.",
+      "decision_required": "Select the exact summary rules and source references rather than authorizing the implementer to choose them. State whether a new controlled fixture/source delta is admitted if no existing route is selected.",
+      "options": [
+        "Option 1: name existing immutable definition/disclosure artifacts and an existing persisted snapshot/delta route, with all summary/omission/refusal rules fixed.",
+        "Option 2: authorize one separately reviewed fixture/source delta addition plus named definition/disclosure artifacts and fixed summary/omission/refusal rules.",
+        "Option 3: retain this true stop and leave P1 unimplemented."
+      ],
+      "recommendation": "Option 1 if the authoritative artifacts already exist; otherwise Option 2 only through a new narrowly bounded selector. This recommendation is not implementation authority.",
+      "affected_refs": [
+        "crates/engine/src/grounding.rs",
+        "crates/engine/src/projection.rs",
+        "crates/engine/src/snapshot_memory/delta.rs",
+        "crates/engine/src/projection/fixtures/snapshot-source-pair.json",
+        "crates/engine/src/snapshot_memory/fixtures"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "A fresh top-level same-slice task validates the new authority, exact source artifacts, base/tree/parent identity, and every impacted existing symbol before a new bounded P1 implementation dispatch."
+    }
+  ],
+  "validation": [
+    {
+      "command": "assigned checkout/ref/base/tree/ancestor/worktree/cleanliness/protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Before edits, detached HEAD and the local target ref matched 7e0836a1c60f3992a80719b597f3fc18fabe807e, tree ddeaf41a367d069c38b378398117673d5c8e8218, and required ancestor 1a10bfd59e8433fa344dd2baa4880b4b87c7f8f6; the protected checkout was distinct and untouched."
+    },
+    {
+      "command": "P1 implementation and discovery dispatch validation",
+      "status": "passed",
+      "evidence_ref": "Both v1.4 dispatches passed offline schema/control/manifest validation. The discovery reviewer replayed the complete 32-entry manifest sha256:6e3e551732c8588ff5d4d6cb9eeb9cb0f94166d35129284a853aa18ce60fbdca."
+    },
+    {
+      "command": "P1 test-first and blocked proof matrix",
+      "status": "blocked",
+      "evidence_ref": "The temporary new grounding test failed as expected before implementation and was removed after the authority gap was established. No P1 positive/fail-closed runtime proof can be claimed without the missing selected facts."
+    },
+    {
+      "command": "GitNexus index, upstream impact, and scoped detection",
+      "status": "passed",
+      "evidence_ref": "A local index was built without remote access. ContextMemorySnapshot and SnapshotDelta were LOW; execute_projection_with_live_observer was HIGH with four direct callers and four affected processes and remained unmodified/unused. Staged P1 documentation detection found five files, eight documentation symbols, zero affected processes, and LOW risk."
+    },
+    {
+      "command": "formatting, whitespace, and scoped diff checks",
+      "status": "passed",
+      "evidence_ref": "cargo fmt --all -- --check, git diff --check, manifest-text whitespace checks, and the exact five-path primary allowlist passed."
+    },
+    {
+      "command": "full historical v1.4 ordinary validator",
+      "status": "blocked",
+      "evidence_ref": "The known pre-existing P0 historical-validator exception still stops ordinary full-corpus validation at the prior HCM-3.5 planning parent. It is preserved transparently and is never reported GREEN; no historical record, dispatch, or validator artifact was changed."
+    },
+    {
+      "command": "v1.4 admission and orchestration-contract self-tests",
+      "status": "not_run",
+      "evidence_ref": "Run during mechanical closeout after the parent handoff and deterministic ledger entry are added; their actual result is recorded by the closeout commit evidence."
+    },
+    {
+      "command": "protected-boundary, local-only, and target-ref audit",
+      "status": "passed",
+      "evidence_ref": "No protected-checkout, remote, fetch, pull, push, publication, merge, rebase, reset, clean, or target-ref CAS operation occurred. GitNexus-generated AGENTS.md and CLAUDE.md count refreshes remain unstaged, uncommitted, untouched, and excluded from every allowlist/closeout claim."
+    }
+  ],
+  "pack_updates": [],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Resolve the same HCM-3.5 P1 definition and exact source-route authority only; do not begin P2, P3, P4, HCM-3.6, HCM-4+, HCM-5, P5, or P6.",
+    "condition": "The user or authorized product authority supplies the exact artifacts, refs/fingerprints, fixed summary/omission/refusal rules, and exact persisted source route (or a separately admitted reviewed fixture/source delta) required by HCM35-P1-DISC-001.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T144015Z--HCM-3-5--orchestration--p1-grounding-authority-boundary.json",
+        "sections": [
+          "entire true-stop handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md",
+        "sections": [
+          "entire selector"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-source-impact.md",
+        "sections": [
+          "Blocking source facts"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed.json",
+        "sections": [
+          "entire immutable predecessor"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Read-only same-slice authority adjudication until a new exact P1 selector is validated.",
+      "After that authority only, the fresh selector's exact engine/test/proof ceiling and its mandatory impact/review sequence."
+    ],
+    "prohibited_scope": [
+      "Do not infer summary values, source identity grammar/layout, fixture contents, schema/configuration, redaction policy, or consumer behavior from this stop or existing examples.",
+      "Do not modify P0 or any immutable predecessor, protected checkout, target ref, AGENTS.md, CLAUDE.md, Flow/pipeline/compiler/CLI/SDK/Substrate/gate runtime, or perform remote/publication work.",
+      "Do not start P2/P3/P4 or any later HCM slice until P1 is implemented, fully proved, and different-fresh closure CLEAN."
+    ],
+    "acceptance_criteria": [
+      "The new authority names the exact immutable definition/disclosure artifacts and their refs/fingerprints, all summary and omission/refusal rules, and one compatible current snapshot/delta source route.",
+      "A fresh P1 selector states any newly admitted fixture/source path exactly; it does not treat the P0 historical exception as a same-parent resumption.",
+      "A new implementer replays local GitNexus impact for every existing symbol, preserves the HIGH projection executor, and completes P1 proof plus a fresh review/remediation/closure cadence before any next packet."
+    ],
+    "stop_conditions": [
+      "Stop on unresolved authority ambiguity, missing exact artifact/source proof, any HIGH/CRITICAL impact that needs review, protected-path drift, or any requested scope expansion beyond the new selector.",
+      "Do not update the target ref unless a separately completed P4 closeout authorizes its expected-old local CAS."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-3.5 P1 is blocked before Rust edits. Independent discovery confirmed that the selected contract lacks the exact summary definition/disclosure rules and persisted source-pair/delta route; no P2-P6, target-ref, protected-checkout, or remote action occurred."
+}
