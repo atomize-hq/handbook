@@ -1,0 +1,196 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260807T143010Z--HCM-3-5--engine-grounding-bounded-delta-discovery",
+  "created_at_utc": "2026-08-07T14:30:10Z",
+  "source_handoff_ids": [
+    "20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-5-continuation-implementation-20260807",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "HCM-3.5-P1-engine-grounding-bounded-delta",
+  "subject_fingerprint": "sha256:6e3e551732c8588ff5d4d6cb9eeb9cb0f94166d35129284a853aa18ce60fbdca",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-5-p1-engine-grounding-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-07T14:14:59Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-5-p1-engine-grounding-bounded-delta",
+        "packet_ids": [
+          "HCM-3.5-P1-engine-grounding-bounded-delta"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:b06570a3e5fbb8ae5d5852487d5a6da34f3de2b4dc366b745eccb4f963b9c444"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:c7081283bc41d6e3ac842ea84a41049dba969540e5b05b96a2d26df67e4a9b31",
+    "integrated_outcome_id": "hcm-3-5-p1-engine-grounding-bounded-delta",
+    "outcome_registry_fingerprint": "sha256:b06570a3e5fbb8ae5d5852487d5a6da34f3de2b4dc366b745eccb4f963b9c444",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": "20260807T141501Z--HCM-3-5--engine-grounding-bounded-delta-implementation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-5-p1-engine-grounding-blocker-wall-v1",
+    "completed_at_utc": "2026-08-07T14:30:07Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "P1 source/impact record, blocked proof matrix, scoped status, and exact changed-path review",
+        "evidence_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-proof-matrix.md"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "rg --files and exact delta/signal inventory across crates/engine/src/projection, crates/engine/src/snapshot_memory, and crates/engine/tests",
+        "evidence_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-source-impact.md"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "SHA-256 replay of the sorted 32-entry subject manifest",
+        "evidence_ref": "terminal: subject sha256:6e3e551732c8588ff5d4d6cb9eeb9cb0f94166d35129284a853aa18ce60fbdca"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check; git diff --check",
+        "evidence_ref": "terminal: 2026-08-07T14:30:07Z"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "rg -n '[ \\t]+$' over every P1 changed UTF-8 text path",
+        "evidence_ref": "terminal: 2026-08-07T14:30:07Z"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path":"crates/engine/Cargo.toml","sha256":"9a780b4f859b1f5bc1e96d795324b95cb978f754b4b3eff7431548d6801cd220"},
+      {"path":"crates/engine/src/lib.rs","sha256":"b16702bbeded9a9ded95185811beb10c4785ae476800775b23a0234350618d7a"},
+      {"path":"crates/engine/src/projection.rs","sha256":"a9ea3166c6908bf7d40fba0316420f94cfc9f8fe0dd1e8f860893121ed0206d3"},
+      {"path":"crates/engine/src/projection/fixtures/definition.json","sha256":"e8106932e7016697196f7b89af86344f025c51594dded5b42f1393d86bd6158f"},
+      {"path":"crates/engine/src/projection/fixtures/resolved-profile.json","sha256":"a1c39546db52eeb357981f5b287c6746fe57c0d137b06a979a76f0f4e4f1aac0"},
+      {"path":"crates/engine/src/projection/fixtures/snapshot-source-pair.json","sha256":"3ab58d46713014d64dc589b02f04d17b1703336b87c9e1c192267e53cfc33212"},
+      {"path":"crates/engine/src/projection/fixtures/source.json","sha256":"0ba049cdd5c7b8dcdd5c8c49db60b908ea78db0daa0aba918a57d1751cc42aaf"},
+      {"path":"crates/engine/src/projection/fixtures/vocabulary.json","sha256":"7397def542b0d62dcdde8b99111be87adb195bb186606d2f689118ab1382b964"},
+      {"path":"crates/engine/src/projection/tests.rs","sha256":"de1dd1e46933f2ab77bf8be4ec3009361adce0445ac23bb85c77f4a0ec7c1d45"},
+      {"path":"crates/engine/src/snapshot_memory/delta.rs","sha256":"bfbfc0dac0fca52845b1f3e4dbf5da97376d42992c758ca8d6d6095512a2848c"},
+      {"path":"crates/engine/src/snapshot_memory/fixtures/delta-catalog.json","sha256":"1244b8f203a350cf5aa3ba5f50c50fcb941cdac18e8dddb3a1d6c4e6df85bd4f"},
+      {"path":"crates/engine/src/snapshot_memory/fixtures/policy-family.json","sha256":"9851cb55189c6f72373272433c711640729ccaa278dd2ebeeec7b74e6e331001"},
+      {"path":"crates/engine/src/snapshot_memory/fixtures/redaction-retention.json","sha256":"3aa4ba61bd2107b65bb3eb9189b42dd71f775dee9a4834d2c7ba790ed9776177"},
+      {"path":"crates/engine/src/snapshot_memory/fixtures/snapshot-record.json","sha256":"76d991b03e22adeea4f651115d8a09deef407e5662de5f9ba92a7854c7e32d38"},
+      {"path":"crates/engine/src/snapshot_memory/mod.rs","sha256":"5b64035a600e2349b2afdd7ff9e3c1fd73cdcbfff6f591bf4d8db5ec22f2d7d5"},
+      {"path":"crates/engine/src/snapshot_memory/policy.rs","sha256":"308ff9c040be3903f729ee176ffbc9e498503d33b08d5e7066059b24740b3031"},
+      {"path":"crates/engine/src/snapshot_memory/record.rs","sha256":"eaf89aa53704d30d2be671a5a9d262e37c64f06777e30b3636d8ebe82830ec81"},
+      {"path":"crates/engine/src/snapshot_memory/redaction.rs","sha256":"b291f8e697bacc6e42d22257e9e142941280360d18afd29902a91d9664c5476e"},
+      {"path":"crates/engine/src/snapshot_memory/tests.rs","sha256":"37402813faff2a2cb5a8be26349d49f1e18768dc61247f564acc033376139a37"},
+      {"path":"crates/engine/tests/context_resolution_kernel.rs","sha256":"96964d3ebf6225274e30146ef03e5abd277bc036acdf0776b2ab9d03f9fdf676"},
+      {"path":"crates/engine/tests/context_resolution_policies.rs","sha256":"2ad296365348301bcbc6484d892cd84f57c3edb411283fbc6e13650e235dbf83"},
+      {"path":"crates/engine/tests/freshness_computation.rs","sha256":"91021ae0b64c4edc26dd5a2ea9fe738c693b08dce4f1c723f84fe84503b592ad"},
+      {"path":"docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md","sha256":"7e09acea2db929ea36fb22a3769ebd391f2a34ef67b38a2116728cbdb4327b81"},
+      {"path":"docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md","sha256":"3b9da30e79dc718860992ab06ce561473e4553ad608542a02f93b2c2e27c6614"},
+      {"path":"docs/specs/handbook-contract-membrane/09-review-finding-inventory.md","sha256":"6182562270809da3921422d8285365242292ebcf2f3ccdba1589a2096a39ca81"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T141501Z--HCM-3-5--engine-grounding-bounded-delta-implementation.json","sha256":"c3e11c3518dd72b59d1e3c76c3d57584ce1b45fe81f6ddc8635e2af6e9902234"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/records/20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed.json","sha256":"5a45fc634fcff759f960ca3e6a2121fd4c59c8578abbcbf6ab74dbfffa7880d4"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md","sha256":"762fef5405dd2e7fdeff5615e4b975ca34f9b29d0ced8e3e392f60c484668df5"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md","sha256":"78ba16ef63c8261597d9b4c6a6023d7be0cbc7c965754770590ad7ffcf3dd79e"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md","sha256":"819775fb7ba743e905cb32771d6ab4224d181c7ad0d19b1d9647a87b8b466d19"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-proof-matrix.md","sha256":"effe5fbee2053c23d1f9a10dc3c9ff659e4d853bd56a5ae7c32413144342a8fe"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T141501Z--p1-engine-grounding-source-impact.md","sha256":"5a790d6db7bddad7475335dc852df3bd7cbb2b6512f27fb37aad690bd6da41ba"}
+    ],
+    "aggregate_fingerprint": "sha256:6e3e551732c8588ff5d4d6cb9eeb9cb0f94166d35129284a853aa18ce60fbdca"
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 P1 independent blocker discovery",
+    "scope_horizon": "the complete current P1 engine-grounding subject, including its no-code blocker proof",
+    "detail_resolution": "whether an exact summary definition and compatible exact source-pair/delta route are already selected without inventing semantics or widening the P1 ceiling",
+    "temporal_horizon": "before any P1 source edit and before P2",
+    "authority_horizon": "read-only P1 review only; no repair, new authority, schema, fixture, consumer, gate, transport, or remote authority",
+    "memory_horizon": "immutable P0 contract, the distinct continuation parent, and the recorded P1 source/proof evidence",
+    "validation_horizon": "findings are parent-owned; any valid P1/P2 requires one consolidated causal remediation and a different-fresh closure before P1 can proceed"
+  },
+  "authority_refs": [
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md","sections":["entire selector"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md","sections":["Packet 0 — implementation admission and typed-boundary contract freeze","Greenfield and Packet 1 ceiling"]},
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/records/20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed.json","sections":["entire immutable predecessor"]},
+    {"path":"docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md","sections":["causal review cadence"]},
+    {"path":"docs/specs/handbook-contract-membrane/09-review-finding-inventory.md","sections":["priority and closure rules"]}
+  ],
+  "repo_truth": "The assigned worktree remains at 7e0836a1c60f3992a80719b597f3fc18fabe807e/tree ddeaf41a367d069c38b378398117673d5c8e8218. This review binds parent handbook-hcm-3-5-continuation-implementation-20260807 and nonce e7242bf06d18a6327d4b223866f0bed5871dbcd1ff4f4be05e81ad4193d1c1f5. The P1 implementation attempt made no Rust/fixture/config/consumer change. GitNexus detect-changes reports only AGENTS.md and CLAUDE.md count refreshes caused by local indexing; they are outside scope, unstaged, uncommitted, preserved, and absent from this subject/allowlist. No protected checkout or remote was accessed.",
+  "allowed_scope": [
+    "Independently read the complete manifest and determine whether the selected P1 authority already supplies an exact summary definition and exact compatible snapshot/delta source route.",
+    "Return every valid P1/P2 finding with a unique HCM35-P1-DISC identifier, exact file/line/contract, minimum in-scope remediation, and required verification. Do not rely on the existing proof conclusion.",
+    "Inventory P3/P4 only under the finding inventory; do not choose semantics, authorize a fixture or schema, or edit any file."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, create any record, write a handoff/ledger, delegate, or alter the subject.",
+    "Do not implement Rust or authorize a summary cardinality, eligibility/order, overflow policy, source layout, fixture, schema, consumer, gate runtime, public transport, SDK, CLI, or Substrate behavior.",
+    "Do not access the protected checkout or remote state, fetch, pull, push, publish, merge, rebase, reset, clean, force-update, or update a ref."
+  ],
+  "tasks": [
+    "Reproduce source and fixture truth directly from the manifest and inspect exact HCM-3.4 projection/delta/currentness/redaction behavior without modifying it.",
+    "Independently assess the P1 public contract, exact-ref request posture, bounded summary definition requirements, testability, high-risk executor avoidance, and no-raw-signal/private-export limits.",
+    "Return findings first, then validation commands/results, advisory dispositions, and a parent disposition. CLEAN is permitted only if the exact selected authority supports an implementation without invented semantics or scope expansion."
+  ],
+  "contracts_and_gates": [
+    "This is the sole P1 complete-subject discovery review. A valid P1/P2 receives one consolidated parent remediation and then a different-fresh delta closure; no review follows CLEAN.",
+    "The HIGH-risk execute_projection_with_live_observer seam must remain unedited and cannot be used as a P1 shortcut. UNKNOWN module-name impact evidence is not GREEN.",
+    "A truthful blocker is preferable to an invented summary policy, source layout, fixture, schema, or consumer path. No P2 begins unless P1 becomes CLEAN."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair for a valid P1/P2. Return BLOCKED if review needs new product authority, a code/runtime scope expansion, protected-checkout access, remote action, or unavailable required evidence.",
+    "Report any manifest, baseline, parent/nonce, causal cadence, protected-path, or out-of-scope drift to the parent without writing state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id","final_status","verdict","findings","advisory_disposition","validation","gitnexus_status","parent_disposition"]
+  }
+}

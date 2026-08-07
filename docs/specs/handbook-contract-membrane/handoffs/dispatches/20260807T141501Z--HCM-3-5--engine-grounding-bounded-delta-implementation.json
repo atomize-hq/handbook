@@ -1,0 +1,181 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260807T141501Z--HCM-3-5--engine-grounding-bounded-delta-implementation",
+  "created_at_utc": "2026-08-07T14:15:01Z",
+  "source_handoff_ids": [
+    "20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-5-continuation-implementation-20260807",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "incremental-implementation",
+    "test-driven-development",
+    "git-workflow-and-versioning",
+    "api-and-interface-design"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "HCM-3.5-P1-engine-grounding-bounded-delta",
+  "subject_fingerprint": "sha256:544386922420e216dfdc56990896227fd0c80ecfa70f537c3d0566261bffab1c",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-07T14:14:59Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-5-p1-engine-grounding-bounded-delta",
+        "packet_ids": [
+          "HCM-3.5-P1-engine-grounding-bounded-delta"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:b06570a3e5fbb8ae5d5852487d5a6da34f3de2b4dc366b745eccb4f963b9c444"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:c7081283bc41d6e3ac842ea84a41049dba969540e5b05b96a2d26df67e4a9b31",
+    "integrated_outcome_id": "hcm-3-5-p1-engine-grounding-bounded-delta",
+    "outcome_registry_fingerprint": "sha256:b06570a3e5fbb8ae5d5852487d5a6da34f3de2b4dc366b745eccb4f963b9c444",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sha256": "7e09acea2db929ea36fb22a3769ebd391f2a34ef67b38a2116728cbdb4327b81"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sha256": "3b9da30e79dc718860992ab06ce561473e4553ad608542a02f93b2c2e27c6614"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed.json",
+        "sha256": "5a45fc634fcff759f960ca3e6a2121fd4c59c8578abbcbf6ab74dbfffa7880d4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+        "sha256": "762fef5405dd2e7fdeff5615e4b975ca34f9b29d0ced8e3e392f60c484668df5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md",
+        "sha256": "78ba16ef63c8261597d9b4c6a6023d7be0cbc7c965754770590ad7ffcf3dd79e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md",
+        "sha256": "819775fb7ba743e905cb32771d6ab4224d181c7ad0d19b1d9647a87b8b466d19"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:544386922420e216dfdc56990896227fd0c80ecfa70f537c3d0566261bffab1c"
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 P1 engine grounding implementation",
+    "scope_horizon": "one engine-only typed grounding operation and definition-bounded delta summary",
+    "detail_resolution": "opaque exact references, private source-pair resolution, grounded/refused/error algebra, typed provenance and omissions, bounded redacted summary, and non-promoting evidence",
+    "temporal_horizon": "after distinct-parent P1 selection and before fresh complete-subject review",
+    "authority_horizon": "P1 source/test/proof ceiling only; no consumer, transport, gate, schema, dependency, package, publication, or remote authority",
+    "memory_horizon": "immutable P0 typed-boundary contract and immutable HCM-3.4 private source-pair evidence",
+    "validation_horizon": "focused P1 proof wall followed by one fresh discovery and a different-fresh causal closure if remediation is required"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md",
+      "sections": [
+        "entire selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+      "sections": [
+        "Packet 0 — implementation admission and typed-boundary contract freeze",
+        "Greenfield and Packet 1 ceiling"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed.json",
+      "sections": [
+        "entire immutable predecessor"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "implementation and causal review cadence"
+      ]
+    }
+  ],
+  "repo_truth": "The assigned worktree is detached at 7e0836a1c60f3992a80719b597f3fc18fabe807e with tree ddeaf41a367d069c38b378398117673d5c8e8218 and required ancestor 1a10bfd59e8433fa344dd2baa4880b4b87c7f8f6. HCM-3.4 Snapshot Memory and Projection are private. Existing Flow/pipeline/compiler/CLI paths are unchanged regression baselines. A local GitNexus executable is available but no repository index exists; create or refresh it locally without accessing a remote before performing impact analysis.",
+  "allowed_scope": [
+    "Create only crates/engine/src/grounding.rs and crates/engine/tests/hcm_3_5_grounding.rs; modify only crates/engine/src/lib.rs, crates/engine/src/projection.rs, crates/engine/src/snapshot_memory/mod.rs, crates/engine/src/snapshot_memory/record.rs, and crates/engine/src/snapshot_memory/delta.rs within the selector's narrow limits.",
+    "Create only the P1 source/impact record and P1 proof matrix under docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof, without touching a handoff record, ledger, schema, or immutable predecessor.",
+    "Implement the P0-closed public grounding types/factories/accessors and private source-pair adapters, preserving all five currentness families, redaction-before-read, typed omissions/provenance, authority_effect none, and a definition-bounded redacted delta-signal summary."
+  ],
+  "non_goals": [
+    "Do not edit Flow, pipeline, compiler, CLI, SDK, Substrate, Cargo, dependencies, versions, schemas, configuration, fixtures, gate runtime, public JSON/Serde, publication, handoff record, ledger, or a protected checkout.",
+    "Do not re-export HCM-3.4 private record, delta, request, result, or evaluation types; do not expose raw snapshots, raw changes, raw signal collections, or generic serialization.",
+    "Do not fetch, pull, push, query remote state, merge, rebase, reset, clean, force-update, update refs, stage, or commit."
+  ],
+  "tasks": [
+    "Read the complete selector, P0 contract, and allowed current engine/HCM-3.4 source as bounded context; run the local GitNexus index command and record upstream impact evidence before every existing-symbol edit. Stop for HIGH or CRITICAL impact until the parent has explicitly reviewed it.",
+    "Write a failing focused P1 engine test, implement the smallest fail-closed grounding operation that satisfies it, and expand the test matrix only inside the exact test path. Do not modify the fixed HCM-3.4 fixture.",
+    "Run focused and affected-crate proof, formatting, diff checks, public-export/raw-signal absence checks, and record source/impact plus proof results. Return changed paths, impact findings, validation results, and unresolved blockers to the parent."
+  ],
+  "contracts_and_gates": [
+    "A refusal never produces GroundedResolution. Only opaque FlowPacketGrounding and SharedResolutionInclusion cross the future consumer boundary; no Flow or pipeline path is selected in P1.",
+    "Currentness, exact source binding, compatibility, redaction, Resolution bounds, provenance, omissions, and summary accounting remain engine-owned and fail closed. Byte pressure cannot widen Resolution.",
+    "The implementer is not a reviewer. The parent must assemble the complete P1 wall, run the mandatory pre-review dispatch validation, and obtain a fresh discovery review before P1 can be called CLEAN."
+  ],
+  "stop_conditions": [
+    "Return BLOCKED without edits beyond the ceiling if the selected source requires a dependency, schema, fixture, consumer, public transport, gate-runtime, protected-checkout, remote, or out-of-ceiling change.",
+    "Return BLOCKED if a required existing-symbol impact is HIGH or CRITICAL, if the local GitNexus analysis cannot produce replayable impact evidence, or if the P0 contract is contradictory.",
+    "Return all results through the built-in channel without writing a global handoff, ledger, dispatch, review result, or commit."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "impact_evidence",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}
