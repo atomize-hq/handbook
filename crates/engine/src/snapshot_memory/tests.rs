@@ -18,6 +18,8 @@ use super::redaction::{
 use crate::DefinitionFingerprint;
 use serde_json::{json, Value};
 use std::collections::{BTreeMap, BTreeSet};
+use std::fs;
+use std::path::Path;
 
 const POLICY_FIXTURE: &[u8] = include_bytes!("fixtures/policy-family.json");
 const SNAPSHOT_RECORD_FIXTURE: &[u8] = include_bytes!("fixtures/snapshot-record.json");
@@ -559,6 +561,229 @@ fn repaired_snapshot_record_fixture() -> Value {
         observation["payload_fingerprint"] = json!(fingerprint);
     }
     value
+}
+
+#[test]
+#[ignore = "one-time P4 source materializer; tracked sources are replayed separately"]
+fn materializes_hcm_3_5_p4_transition_documents() {
+    let policy_value = repaired_policy_fixture();
+    let policy = load_policy(&canonical_json(&policy_value)).expect("valid policy");
+    let catalog = authored_delta_catalog(&policy);
+
+    let prior_end = transition_record(&policy, "snap_hcm_3_5_p4_prior_end_0001", "session_end", 1);
+    let prior_end_capture = transition_capture(&policy, "session_end");
+    let prior_end_snapshot = build_snapshot(
+        &policy,
+        &validate_capture_input(&policy, &canonical_json(&prior_end_capture))
+            .expect("valid prior-end capture"),
+        &[],
+        &canonical_json(&prior_end),
+    )
+    .expect("valid prior-end record");
+
+    let mut session_start = transition_record(
+        &policy,
+        "snap_hcm_3_5_p4_session_start_0002",
+        "session_start",
+        2,
+    );
+    session_start["previous_snapshot"] = json!({
+        "ref": "snap_hcm_3_5_p4_prior_end_0001",
+        "record_fingerprint": prior_end_snapshot.record_fingerprint().to_string(),
+        "boundary_sequence": 1,
+    });
+    mark_transition_payloads(
+        &mut session_start,
+        &["evidence", "git", "work"],
+        "grounding",
+    );
+    let session_start_capture = transition_capture(&policy, "session_start");
+    let session_start_snapshot = build_snapshot(
+        &policy,
+        &validate_capture_input(&policy, &canonical_json(&session_start_capture))
+            .expect("valid session-start capture"),
+        &[&prior_end_snapshot],
+        &canonical_json(&session_start),
+    )
+    .expect("valid session-start record");
+
+    let mut session_end = transition_record(
+        &policy,
+        "snap_hcm_3_5_p4_session_end_0003",
+        "session_end",
+        3,
+    );
+    mark_transition_payloads(&mut session_end, &["session"], "closeout");
+    let session_end_capture = transition_capture(&policy, "session_end");
+    build_snapshot(
+        &policy,
+        &validate_capture_input(&policy, &canonical_json(&session_end_capture))
+            .expect("valid session-end capture"),
+        &[&session_start_snapshot],
+        &canonical_json(&session_end),
+    )
+    .expect("valid session-end record");
+
+    let grounding_route = transition_route(
+        "handbook.grounding.delta.prior-end-to-session-start@1.0.0",
+        &prior_end,
+        &session_start,
+        &catalog,
+    );
+    let session_route = transition_route(
+        "handbook.grounding.delta.session-start-to-session-end@1.0.0",
+        &session_start,
+        &session_end,
+        &catalog,
+    );
+
+    let definition: Value = serde_json::from_slice(include_bytes!(
+        "../../tests/fixtures/hcm_3_5_grounding/definition.json"
+    ))
+    .expect("definition fixture");
+    let disclosure: Value = serde_json::from_slice(include_bytes!(
+        "../../tests/fixtures/hcm_3_5_grounding/disclosure.json"
+    ))
+    .expect("disclosure fixture");
+    let grounding_snapshot_ref = format!(
+        "handbook.grounding.snapshot.current@1.0.0#{}",
+        DefinitionFingerprint::from_json_value(&session_start).expect("session-start fingerprint")
+    );
+    let grounding_delta_ref = format!(
+        "{}#{}",
+        grounding_route["delta_ref"]
+            .as_str()
+            .expect("grounding delta ref"),
+        DefinitionFingerprint::from_json_value(&grounding_route)
+            .expect("grounding route fingerprint")
+    );
+    let definition_ref = format!(
+        "{}#{}",
+        definition["definition_ref"]
+            .as_str()
+            .expect("definition ref"),
+        DefinitionFingerprint::from_json_value(&definition).expect("definition fingerprint")
+    );
+    let disclosure_ref = format!(
+        "{}#{}",
+        disclosure["disclosure_ref"]
+            .as_str()
+            .expect("disclosure ref"),
+        DefinitionFingerprint::from_json_value(&disclosure).expect("disclosure fingerprint")
+    );
+    let projection = json!({
+        "schema_id": "handbook.hcm-3-5-grounding-projection",
+        "schema_version": "1.0",
+        "snapshot_ref": grounding_snapshot_ref,
+        "delta_ref": grounding_delta_ref,
+        "definition_ref": definition_ref,
+        "disclosure_ref": disclosure_ref,
+        "summary_entry_count": 2,
+        "omission_count": 3,
+        "evidence_availability": "unavailable",
+    });
+    let source_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../..")
+        .join(".handbook/grounding/hcm-3.5/v1");
+    fs::create_dir_all(&source_root).expect("P4 source directory");
+    for (name, value) in [
+        ("snapshot-policy.json", policy_value),
+        ("prior-capture.json", prior_end_capture),
+        ("prior-snapshot.json", prior_end),
+        ("current-capture.json", session_start_capture),
+        ("current-snapshot.json", session_start.clone()),
+        ("session-end-capture.json", session_end_capture),
+        ("session-end-snapshot.json", session_end),
+        ("delta-catalog.json", catalog),
+        ("delta-route.json", grounding_route),
+        ("session-delta-route.json", session_route),
+        ("currentness.json", transition_currentness(&session_start)),
+        ("definition.json", definition),
+        ("disclosure.json", disclosure),
+        ("grounding-projection.json", projection),
+    ] {
+        fs::write(source_root.join(name), canonical_json(&value)).expect("write P4 source");
+    }
+}
+
+fn transition_record(
+    policy: &super::policy::SnapshotCapturePolicy,
+    snapshot_id: &str,
+    trigger: &str,
+    boundary_sequence: u64,
+) -> Value {
+    let mut record = repaired_snapshot_record_fixture();
+    record["snapshot_id"] = json!(snapshot_id);
+    record["capture"]["trigger"] = json!(trigger);
+    record["capture"]["started_at"] = json!(format!("2026-08-07T17:{boundary_sequence:02}:00Z"));
+    record["capture"]["completed_at"] = json!(format!("2026-08-07T17:{boundary_sequence:02}:05Z"));
+    record["capture"]["input"]["policy"] =
+        exact_pair(policy.reference(), policy.fingerprint().as_str());
+    record["capture"]["input"]["trigger"] = json!(trigger);
+    record["boundary_stream_ref"] = json!("orchestration.hcm-3-5.p4");
+    record["boundary_sequence"] = json!(boundary_sequence);
+    record
+}
+
+fn transition_capture(policy: &super::policy::SnapshotCapturePolicy, trigger: &str) -> Value {
+    let mut capture = valid_capture_input(policy);
+    capture["trigger"] = json!(trigger);
+    capture
+}
+
+fn mark_transition_payloads(record: &mut Value, families: &[&str], marker: &str) {
+    for family in families {
+        let observation = record["family_observations"]
+            .as_array_mut()
+            .expect("family observations")
+            .iter_mut()
+            .find(|observation| observation["family"] == *family)
+            .expect("selected family");
+        observation["payload"]["hcm_3_5_p4_marker"] = json!(format!("{marker}_{family}"));
+    }
+    repair_snapshot_payload_fingerprints(record);
+}
+
+fn transition_route(delta_ref: &str, prior: &Value, current: &Value, catalog: &Value) -> Value {
+    json!({
+        "schema_id": "handbook.grounding-delta-route",
+        "schema_version": "1.0",
+        "delta_ref": delta_ref,
+        "prior_snapshot_fingerprint": DefinitionFingerprint::from_json_value(prior).expect("prior fingerprint").to_string(),
+        "current_snapshot_fingerprint": DefinitionFingerprint::from_json_value(current).expect("current fingerprint").to_string(),
+        "delta_catalog_fingerprint": DefinitionFingerprint::from_json_value(catalog).expect("catalog fingerprint").to_string(),
+    })
+}
+
+fn transition_currentness(record: &Value) -> Value {
+    let families = record["family_observations"]
+        .as_array()
+        .expect("family observations")
+        .iter()
+        .map(|observation| {
+            let slots = observation["source_slot_revisions"]
+                .as_array()
+                .expect("source slots")
+                .iter()
+                .map(|slot| {
+                    json!({
+                        "source_slot": slot["source_slot"],
+                        "captured_revision_fingerprint": slot["captured_revision"]["fingerprint"],
+                    })
+                })
+                .collect::<Vec<_>>();
+            json!({
+                "family": observation["family"],
+                "captured_revision_fingerprint": observation["captured_revision"]["fingerprint"],
+                "slots": slots,
+            })
+        })
+        .collect::<Vec<_>>();
+    json!({
+        "schema_id": "handbook.grounding-currentness",
+        "schema_version": "1.0",
+        "families": families,
+    })
 }
 
 fn normalize_fixture_payload(value: &mut Value, field_name: Option<&str>) {

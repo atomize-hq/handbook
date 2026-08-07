@@ -1081,6 +1081,73 @@ mod tests {
         );
     }
 
+    #[test]
+    fn tracked_p4_transition_source_replays_the_grounding_projection() {
+        let repo = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let source_root = source_root(&repo);
+        let definition: Value = serde_json::from_slice(
+            &fs::read(source_root.join("definition.json")).expect("P4 definition source"),
+        )
+        .expect("definition JSON");
+        let disclosure: Value = serde_json::from_slice(
+            &fs::read(source_root.join("disclosure.json")).expect("P4 disclosure source"),
+        )
+        .expect("disclosure JSON");
+        let current: Value = serde_json::from_slice(
+            &fs::read(source_root.join("current-snapshot.json")).expect("P4 current snapshot"),
+        )
+        .expect("current snapshot JSON");
+        let route: Value = serde_json::from_slice(
+            &fs::read(source_root.join("delta-route.json")).expect("P4 grounding route"),
+        )
+        .expect("grounding route JSON");
+        let snapshot = ExactGroundingRef::parse(&format!(
+            "{CURRENT_SNAPSHOT_REF}#{}",
+            json_fingerprint(&current)
+        ))
+        .expect("current snapshot ref");
+        let delta = ExactGroundingRef::parse(&format!(
+            "{}#{}",
+            route["delta_ref"].as_str().expect("grounding delta ref"),
+            json_fingerprint(&route)
+        ))
+        .expect("grounding delta ref");
+        let definition_ref = ExactGroundingRef::parse(&format!(
+            "{}#{}",
+            definition["definition_ref"]
+                .as_str()
+                .expect("definition ref"),
+            json_fingerprint(&definition)
+        ))
+        .expect("definition ref");
+        let disclosure_ref = ExactGroundingRef::parse(&format!(
+            "{}#{}",
+            disclosure["disclosure_ref"]
+                .as_str()
+                .expect("disclosure ref"),
+            json_fingerprint(&disclosure)
+        ))
+        .expect("disclosure ref");
+
+        let grounded = resolve_with_authority(
+            &repo,
+            &snapshot,
+            &delta,
+            &definition_ref,
+            &disclosure_ref,
+            [0; 6],
+            provenance(),
+        )
+        .expect("tracked P4 source grounds");
+
+        assert_eq!(grounded.delta_signal_summary().entries().len(), 2);
+        assert_eq!(grounded.delta_signal_summary().omissions().len(), 3);
+        assert_eq!(
+            grounded.evidence().local_closeout(),
+            EvidenceAvailability::Unavailable
+        );
+    }
+
     struct FixtureRefs {
         snapshot: ExactGroundingRef,
         delta: ExactGroundingRef,
