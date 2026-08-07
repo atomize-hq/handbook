@@ -1,12 +1,17 @@
 #![forbid(unsafe_code)]
 
 pub mod budget;
+pub mod grounded_packet;
 pub mod packet_result;
 pub mod resolver;
 
 pub use budget::{
     evaluate_budget, evaluate_budget_with_effective_bytes, BudgetByteDomain, BudgetDisposition,
     BudgetEffectiveBytes, BudgetOutcome, BudgetPolicy, BudgetReason, BudgetTarget, NextSafeAction,
+};
+pub use grounded_packet::{
+    adopt_grounding_outcome, GroundedPacket, GroundedPacketOutcome, GroundedPacketStatus,
+    RefusedGroundedPacket,
 };
 pub use packet_result::{
     PacketBodyNote, PacketBodyNoteKind, PacketDecisionSummary, PacketFixtureContext, PacketResult,
