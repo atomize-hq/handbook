@@ -1,0 +1,381 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed",
+  "created_at_utc": "2026-08-07T12:45:10Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "implementation-admission-and-contract-freeze",
+  "orchestration_id": "handbook-hcm-3-5-implementation-20260807",
+  "source_handoff_ids": [
+    "20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fda6a-f05f-7a23-ad68-89b30f372578"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-07T12:29:26Z",
+    "evidence_ref": "Fresh built-in discovery and different-fresh closure reviewers completed through the internal subagent channel."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "/root/p0_discovery_review",
+      "dispatch_id": "20260807T122925Z--HCM-3-5--implementation-admission-and-contract-freeze-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T122925Z--HCM-3-5--implementation-admission-and-contract-freeze-discovery.json",
+      "dispatch_fingerprint": "sha256:7454a8060f91567ba36bd382f8f90213aef70d7939338a11ea04a1b86cbe7728",
+      "role": "review",
+      "agent_id": "/root/p0_discovery_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:bfe8f074316d38e64bf73eb735a8b151029a915d0006e25ccbdb0e71cbeabca2",
+      "result_subject_fingerprint": "sha256:bfe8f074316d38e64bf73eb735a8b151029a915d0006e25ccbdb0e71cbeabca2",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM35-P0-DISC-001"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T122925Z--HCM-3-5--implementation-admission-and-contract-freeze-discovery.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T124000Z--implementation-admission-discovery-remediation.md"
+      ]
+    },
+    {
+      "run_id": "/root/p0_closure_review",
+      "dispatch_id": "20260807T124045Z--HCM-3-5--implementation-admission-and-contract-freeze-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T124045Z--HCM-3-5--implementation-admission-and-contract-freeze-closure.json",
+      "dispatch_fingerprint": "sha256:91cf339924be5e5b5afc3bb3ad0b2f8f4f0136bccd954ff35e43d696984f2e5b",
+      "role": "review",
+      "agent_id": "/root/p0_closure_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "api-and-interface-design",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:53aa11b464779eeb62819858a768d29482bba26e0f44bc8657c3e5c7c48000ff",
+      "result_subject_fingerprint": "sha256:53aa11b464779eeb62819858a768d29482bba26e0f44bc8657c3e5c7c48000ff",
+      "review_round": 2,
+      "predecessor_run_id": "/root/p0_discovery_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T124045Z--HCM-3-5--implementation-admission-and-contract-freeze-closure.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T124000Z--implementation-admission-discovery-remediation.md"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-07T12:45:10Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:30e9ff7747e830b54d4030b812edd9f6f5b24a2f40233b4b61769be0f0e031da"
+    ],
+    "aggregate_fingerprint": "sha256:378b4f749131106d1f08fee1b15b968b88af3df3105e8c0418706e7f5d31be6b"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm-3-5-p0-discovery-complete-public-boundary-closure",
+      "finding_run_id": "/root/p0_discovery_review",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "/root/p0_closure_review",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:53aa11b464779eeb62819858a768d29482bba26e0f44bc8657c3e5c7c48000ff",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T124000Z--implementation-admission-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T124045Z--HCM-3-5--implementation-admission-and-contract-freeze-closure.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "e7732df2e8ce7b418fad73e6ee872b60b478e95d",
+    "subject_fingerprint": "sha256:53aa11b464779eeb62819858a768d29482bba26e0f44bc8657c3e5c7c48000ff",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T124045Z--HCM-3-5--implementation-admission-and-contract-freeze-closure.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T122444Z--implementation-admission-and-typed-boundary-preflight.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T124000Z--implementation-admission-discovery-remediation.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T124045Z--HCM-3-5--implementation-admission-and-contract-freeze-closure.json",
+      "git:e7732df2e8ce7b418fad73e6ee872b60b478e95d"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 Packet 0 implementation admission complete",
+    "scope_horizon": "one documentation-only implementation-admission record and typed-boundary contract freeze",
+    "detail_resolution": "engine grounding operation/value visibility, request/reference construction, private resolver, refusal/error algebra, bounded summary, non-promoting evidence, no fallback, and the initial Packet 1 ceiling",
+    "temporal_horizon": "completed local documentation closeout",
+    "authority_horizon": "Packet 0 documents only; no code/runtime/public export implementation/schema/dependency/consumer/gate/remote authority was created",
+    "memory_horizon": "human-approved local HCM-3.5 planning tip exception, HCM-3.4 immutable source-pair handoff, discovery P2 remediation, and different-fresh closure CLEAN",
+    "validation_horizon": "final primary documentation commit and mechanical local closeout only; next_increment none"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Freeze the first engine-owned typed grounding boundary for HCM-3.5 so Packet 1 can perform symbol-level impact analysis and implement a bounded engine operation without reopening HCM-3.5 architecture.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md",
+      "sections": [
+        "entire Packet 0 decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+      "sections": [
+        "Packet 0 — implementation admission and typed-boundary contract freeze",
+        "Explicit non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+      "sections": [
+        "entire immutable source-pair handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "v1.4 causal review cadence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at e7732df2e8ce7b418fad73e6ee872b60b478e95d",
+    "head": "e7732df2e8ce7b418fad73e6ee872b60b478e95d",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Bound task thread 019fda6a-f05f-7a23-ad68-89b30f372578 and host local to nonce d9432121a0209ee059502e74ed1480cb5ccd7c74d5c639a070d98b82b4d2571c; verified assigned detached checkout, local target ref/base/tree/ancestor, cleanliness, and protected-worktree posture before edits.",
+    "Recorded the transparent human-approved local HCM-3.5 planning-tip exception without treating it as a normal prior v1.4 HCM-3.5 handoff or ledger closeout.",
+    "Inspected the private HCM-3.4 source pair and current engine, Flow, pipeline, compiler, CLI, handoff, SDK, and Substrate seams; froze only the engine grounding contract and Packet 1 source/test/proof ceiling.",
+    "Ran one fresh complete-subject discovery review, consolidated its one P2 repair, and obtained one different-fresh delta closure CLEAN. No supplemental or post-CLEAN review ran.",
+    "Committed the 15-path reviewed primary documentation state at e7732df2e8ce7b418fad73e6ee872b60b478e95d. This record and the deterministic ledger are the only mechanical closeout surface."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+      "status": "completed",
+      "summary": "Freezes the exact grounding operation, closed public type/factory/accessor surface, private resolver, refusal/error algebra, summary/evidence limits, and Packet 1 ceiling."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md",
+      "status": "completed",
+      "summary": "Records bound authority, exact owner/cutover contract, source seams, and Packet 1 revalidation."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T124000Z--implementation-admission-discovery-remediation.md",
+      "status": "completed",
+      "summary": "Records the single discovery P2 and consolidated documentation-only repair."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T124045Z--HCM-3-5--implementation-admission-and-contract-freeze-closure.json",
+      "status": "completed",
+      "summary": "Binds the different-fresh closure CLEAN to the repaired Packet 0 subject."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed.json",
+      "status": "completed",
+      "summary": "Records the v1.4 parent closeout and local-only publication evidence."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.5-P0-D1",
+      "summary": "The only future cross-crate grounding operation is handbook_engine::grounding::ground_resolution over opaque exact refs and ContextResolutionEnvelope. It yields a typed grounded/refused semantic result, keeps source resolution/private HCM-3.4 state engine-owned, and exposes only bounded read-only values.",
+      "authority_effect": "none; no code/runtime/public export implementation/schema/dependency/consumer/package/gate/remote capability was created.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-3.5-P0-D2",
+      "summary": "Flow and pipeline retain current resolver/compiler behavior only as regression baselines. New purpose-named typed paths must not fall back to raw level, legacy semantics, raw signals, or re-read private source data; evidence stays non-promoting until a future handbook-contracts owner is separately selected.",
+      "authority_effect": "none; no Flow/pipeline/CLI/compiler/SDK/Substrate adoption or gate policy/runtime was implemented.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM35-P0-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "/root/p0_discovery_review",
+      "summary": "The initial public type ceiling omitted exact-reference/error factory and result-accessor closure. The consolidated repair admits only opaque reference parsing, one request factory, a private engine resolver, closed bounded accessors, and the payload-free integrity-error boundary.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T124000Z--implementation-admission-discovery-remediation.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T124045Z--HCM-3-5--implementation-admission-and-contract-freeze-closure.json"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "assigned checkout/ref/base/tree/ancestor/worktree/cleanliness/protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Before edits, detached HEAD and local target ref matched 0aa11d2851caee63f373c19c394925ec70473a8a, tree ebbddc19ad869f108e021ac31674fd5b5efde4ba, and required ancestor 1a10bfd59e8433fa344dd2baa4880b4b87c7f8f6; the protected checkout was distinct and untouched."
+    },
+    {
+      "command": "v1.4 discovery and closure dispatch verification",
+      "status": "passed",
+      "evidence_ref": "Discovery replayed sha256:bfe8f074316d38e64bf73eb735a8b151029a915d0006e25ccbdb0e71cbeabca2; closure replayed sha256:53aa11b464779eeb62819858a768d29482bba26e0f44bc8657c3e5c7c48000ff before the primary commit."
+    },
+    {
+      "command": "git diff --check and exact 15-path primary allowlist",
+      "status": "passed",
+      "evidence_ref": "The reviewed primary commit contains only the HCM-3.5 documentation contract, decision/proofs, and two review dispatches; no code-bearing path is present."
+    },
+    {
+      "command": "GitNexus upstream impact and detect_changes",
+      "status": "not_run",
+      "evidence_ref": "Unavailable: no GitNexus MCP tool, CLI, or index exists in this checkout. Packet 0 edited no code symbol; manual exact-path diff detection was used and unavailable evidence is never GREEN."
+    },
+    {
+      "command": "full historical v1.4 ordinary validator",
+      "status": "blocked",
+      "evidence_ref": "It stops at pre-existing parent 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN. The human-approved local planning tip is this Packet 0 authority's named transparent exception after the known validator-semantics contradiction; no historical dispatch, handoff, ledger row, or validator artifact was changed."
+    },
+    {
+      "command": "targeted Packet 0 v1.4 record/causal/primary-baseline replay plus admission and orchestration-contract self-tests",
+      "status": "passed",
+      "evidence_ref": "The targeted HCM-3.5-P0 closeout replay, historical-admission self-test, and orchestration-contract self-test passed after deterministic ledger rebuild."
+    },
+    {
+      "command": "protected-boundary and local-publication audit",
+      "status": "passed",
+      "evidence_ref": "Only the assigned worktree changed. No protected checkout was modified, staged, or committed; no remote command was used; the target ref remains at its expected base until final expected-old local CAS."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+      "sections": [
+        "Packet 0 — implementation admission and typed-boundary contract freeze"
+      ],
+      "reason": "Freeze the exact Packet 1 operation/value, ownership, refusal, and proof boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md",
+      "sections": [
+        "Frozen architecture decisions",
+        "Packet 0",
+        "Packet 1"
+      ],
+      "reason": "Bind the first engine-only implementation route without altering existing consumer behavior.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed.json",
+      "sections": [
+        "entire handoff"
+      ],
+      "reason": "Publish the completed Packet 0 parent identity, review cadence, finding disposition, and local-only closeout evidence.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the query ledger byte-deterministically from canonical records.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "No next increment is preauthorized by this HCM-3.5 Packet 0 completion.",
+    "condition": "A later explicit user instruction and new bounded Packet 1 selector are required before any code or consumer work.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T124510Z--HCM-3-5--orchestration--implementation-admission-and-contract-freeze-completed.json",
+        "sections": [
+          "entire completed handoff",
+          "resume"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+        "sections": [
+          "Packet 0 — implementation admission and typed-boundary contract freeze"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not infer HCM-3.5 Packet 1, HCM-3.6, HCM-4+, HCM-5, public/consumer/schema/dependency/pipeline/CLI/SDK/Substrate/gate-runtime, protected-checkout, remote, or release authority from this completed Packet 0 record.",
+      "Do not reopen the completed causal review cycle, rewrite immutable predecessors, or use this handoff to create a next task."
+    ],
+    "acceptance_criteria": [],
+    "stop_conditions": [
+      "Stop at a new authority boundary and obtain a fresh explicit selector before any further work.",
+      "Do not merge, rebase, reset, clean, force-update, fetch, pull, push, or publish remotely."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Completed HCM-3.5 Packet 0 locally. The reviewed documentation freezes one engine-owned typed grounding operation, opaque exact refs, private source resolution, grounded/refused/error algebra, bounded redacted delta summary, non-promoting evidence, greenfield no-fallback cutover, and a narrow Packet 1 ceiling. Discovery P2 was consolidated and different-fresh closure is CLEAN; no next increment is authorized."
+}
