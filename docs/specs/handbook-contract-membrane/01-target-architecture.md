@@ -132,6 +132,40 @@ transports         depend on handbook-sdk
 
 The diagram expresses allowed inward dependencies, not a requirement that every crate import every predecessor. `handbook-contracts` may depend on exact semantic types from `handbook-engine`; `handbook-pipeline` may consume `handbook-contracts` when contract execution lands; `handbook-sdk` composes the four owner crates. `handbook-engine`, `handbook-flow`, `handbook-pipeline`, and `handbook-contracts` never depend on `handbook-sdk`, a transport, or Substrate. Process-dock implementations remain separable adapters over `handbook-contracts`; HCM-0.5 freezes their protocol before an implementation crate name is selected.
 
+### HCM-3.5 future Resolution-adoption cutover
+
+HCM-3.5 freezes a future greenfield owner boundary without selecting a Rust
+signature, public DTO, schema, or implementation:
+
+- `handbook-engine` remains the sole owner of snapshot/delta compatibility,
+  currentness, redaction-before-read, deterministic Resolution Projection,
+  and an engine-produced bounded/redacted delta-signal summary. The immutable
+  HCM-3.4 `snapshot_delta` remains a relation-only observation; neither Flow
+  nor pipeline may read its complete signals or recreate its model.
+- `handbook-flow` consumes one exact typed engine grounding result and owns
+  packet-ready/refused handling, typed omissions, and provenance forwarding.
+  It does not own snapshot capture, delta derivation, currentness, redaction,
+  or a promotion decision.
+- `handbook-pipeline` consumes one exact namespaced engine Resolution input
+  for shared scoped inclusion. It owns compilation/capture/handoff sequencing,
+  but cannot retain raw `work_level` or L0–L3 as final semantic authority and
+  cannot become a second resolver.
+- `handbook-sdk` will compose the selected owner operations for ordinary
+  consumers; the standalone Handbook CLI will be an SDK adapter. Substrate
+  will consume or wrap the exact published crates.io SDK/library boundary;
+  Tier 2's exact-binary/versioned-JSON bridge remains isolated and
+  transitional until the separate published real-seam proof replaces it.
+
+The cutover is intentionally greenfield. Future purpose-named adoption paths
+must not extend the existing resolver or compiler request/result contracts,
+and their current callers are evidence for regression proof rather than a
+legacy compatibility promise. A temporary one-way, definition-pinned mapping
+may translate legacy scoped metadata to the namespaced shared Resolution input
+only during cutover; unknown, stale, malformed, ambiguous, or unapproved
+mapping refuses. The normal adoption path switches only after the complete
+HCM-3.5 proof wall; it never falls back from a typed Resolution refusal to raw
+`work_level` filtering.
+
 `handbook-compiler` is retired during HCM-4.1: composition that belongs to ordinary consumers moves to `handbook-sdk`, executable-shell behavior moves to `handbook-cli`, and already-owned behavior remains in its owner crate. It may exist as bounded cutover scaffolding only until the CLI no longer depends on it; no new downstream API or permanent domain owner is added there.
 
 ### Agent-facing Handbook skill

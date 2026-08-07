@@ -1,155 +1,226 @@
-# HCM-3.5 Resolution-aware adoption — authority-boundary planning packet
+# HCM-3.5 Resolution-aware adoption — implementation-ready plan
 
-## Status
+## Plan status and boundary
 
-This is a documentation-only planning packet for integrated outcome
-`hcm-3-5-resolution-aware-adoption-planning` and packet
-`HCM-3.5-P1-resolution-aware-adoption-planning`. The selector permits a
-reviewed authority-boundary result, not an implementation claim. It consumes
-the completed HCM-3.4 source-pair handoff only as immutable predecessor
-evidence.
+This is an implementation-ready documentation plan for the single integrated
+outcome `hcm-3-5-resolution-aware-adoption-planning` and packet
+`HCM-3.5-P1-resolution-aware-adoption-planning`. It records the selected
+future architecture but does not authorize code, public APIs, schemas,
+dependencies, package publication, SDK/CLI/Substrate adoption, or a gate
+runtime. Each future implementation packet requires a fresh code selector,
+symbol-level impact analysis, and an independent proof/review loop.
+
+The live prerequisite is HCM-3.4's private source-pair boundary at
+`ca765cc`/`cc6d849`. It remains private; `snapshot_delta` is relation-only.
+The live Flow resolver (`resolve` / `resolve_with_contract` through packet
+assembly) and pipeline compiler (`compile_pipeline_stage*` through scoped
+document filtering) are current evidence seams, not APIs to extend by default.
+
+## Frozen architecture decisions
+
+1. **Typed owner chain.** `handbook-engine` owns exact snapshot/delta binding,
+   currentness, redaction-before-read, bounded Resolution Projection, and the
+   bounded/redacted delta-signal summary. `handbook-flow` owns the future
+   packet path consuming that result. `handbook-pipeline` owns future
+   namespaced shared Resolution inclusion and transition sequencing. The
+   acyclic consumers do not reimplement engine semantics.
+2. **Greenfield adoption.** New purpose-named paths leave current resolver and
+   compiler contracts unchanged. Existing callers are regression baselines.
+   The only temporary bridge is an exact one-way mapping from legacy scoped
+   metadata to the namespaced inclusion input; no raw-level fallback is
+   allowed after a typed-path refusal.
+3. **Bounded delta disclosure.** HCM-3.4 `snapshot_delta` keeps complete
+   relation semantics. Engine derives an envelope-bound, redacted,
+   definition-bounded summary; `reveal_delta_signals` consumes only that
+   summary, never raw `/signals`.
+4. **Descriptive transition refs.** Parent handoffs cite exact
+   prior-end/start/grounding/end/delta refs after validation. They do not copy
+   snapshots or convert observation into authority.
+5. **Non-promoting evidence.** Flow/pipeline carry typed evidence refs,
+   omissions, and separately named local/parent dimensions. Both are false or
+   unavailable on indeterminate evidence. A future `handbook-contracts` owner
+   alone evaluates gate policy and parent promotion.
+6. **External composition.** Future `handbook-sdk` composes owner operations;
+   standalone Handbook CLI adapts SDK results. Substrate consumes/wraps exact
+   published crates.io SDK/library versions. The Tier 2 binary/JSON bridge is
+   isolated transitional transport pending independent publication and
+   current-tip real-seam proof.
 
 ## Dependency graph
 
 ```text
-HCM-3.2 Context Resolution public kernel
-        +
-HCM-3.4 private snapshots/deltas + source-pair Projection proof
-        |
-        v
-public engine-to-Flow compatibility decision  [REQUIRED]
-        |
-        +--> Flow Resolution-aware grounding packet
-        |
-        +--> Pipeline namespaced scoped inclusion
-        |
-        +--> Handoff start/end snapshot and delta references
-        |
-        +--> Local-closeout / parent-promotion policy operation
+HCM-3.2 Resolution kernel + HCM-3.4 private snapshot/delta source pair
+                                  |
+                                  v
+                   Engine typed grounding + bounded summary
+                         /                    |                    \
+                        v                     v                     v
+                 Flow packet path     Pipeline shared inclusion   transition refs
+                        \                     |                    /
+                         \                    v                   /
+                          typed non-promoting evidence boundary
+                                             |
+                                             v
+                         future gate owner (separate HCM-5 authority)
+
+owner operations -> SDK -> standalone CLI
+published SDK/library -> Substrate wrapper/consumer
+Tier 2 binary/JSON bridge --transitional--> published real seam
 ```
 
-The first two dependencies are validated at the selected base. The third is
-not selected by this task. No downstream task is implementable until it is.
+## Ordered future implementation packets
 
-## Conditional implementation sequence
+### Packet 0 — implementation admission and contract freeze
 
-### Task 0 — select the public compatibility and gate-operation authority
+**Dependencies:** a new implementation selector and fresh read-only inspection
+of the HCM-3.4, Flow, pipeline, handoff, SDK, CLI, and Substrate seams.
 
-**Dependency:** explicit user/product authority.
-
-**Decision required:** choose the engine export/Flow operation posture from
-`../SPEC.md#authority-boundary-public-compatibility-and-gate-operation-decision`,
-including SemVer/migration treatment and whether HCM-3.5 may consume a
-concrete gate runtime or only an interface.
+**Decision to carry forward:** choose concrete internal/public type and
+operation details without violating this plan's owner/cutover boundary. Do not
+make existing resolver/compiler request/result paths mandatory for HCM-3.5.
 
 **Acceptance criteria:**
 
-- The decision names the exact public owner, request/result types or operation
-  IDs, compatibility promises, and forbidden public surfaces.
-- It preserves the acyclic dependency graph and does not add a dependency.
-- It says whether legacy Flow/pipeline operations are unchanged or versioned.
+- Names exact code symbols/path ceiling, compatibility posture, and no-cycle
+  dependency direction.
+- Preserves relation-only `snapshot_delta`, bounded summary, and non-promoting
+  gate boundary.
+- Runs upstream impact analysis before each symbol edit; GitNexus absence is
+  recorded as unavailable, never GREEN.
 
-**Verification:** fresh implementation selector, upstream impact analysis for
-every edited symbol, and a public-API compatibility matrix approved under that
-selector.
+**Verification:** reviewed selector, source/caller inventory, public
+compatibility matrix, and manifest/whitespace convergence.
 
-### Task 1 — expose the selected engine grounding boundary
+### Packet 1 — engine grounding and bounded delta summary
 
-**Likely owner:** `handbook-engine`; current private sources are
-`crates/engine/src/snapshot_memory/{policy,record,delta,redaction}.rs` and
-`crates/engine/src/projection.rs`.
+**Likely owner:** `handbook-engine`, continuing the private Snapshot Memory
+and generic Projection seams.
 
-**Call path:** selected typed public operation -> private current snapshot plus
-compatible delta -> generic Projection validation/currentness -> immutable
-grounding result/provenance.
+**Future call path:** exact current snapshot + exact compatible relation-only
+delta + Resolution envelope -> currentness/redaction validation -> bounded
+Projection and bounded/redacted delta-signal summary -> typed result or refusal.
 
-**Acceptance criteria:** no duplicate Flow snapshot model; exact source-pair
-and five-family currentness survive; redaction occurs before payload read;
-result preserves omissions/proof effects and `authority_effect: none`.
+**Acceptance criteria:**
 
-**Verification:** HCM-3.4 regression wall plus new API-only positive/refusal
-tests for every source, profile, envelope, adapter, slot, currentness, and
-retained-pointer substitution.
+- Preserves exact source/policy/profile/vocabulary/definition/envelope
+  provenance, all five currentness families, typed omissions, and
+  `authority_effect: none`.
+- Has definition-pinned bounded cardinality/order/overflow and redaction for
+  the summary; reconciles it with `reveal_delta_signals`.
+- Reads no raw source payload before a redaction refusal and never emits an
+  unfiltered delta signal to a consumer.
 
-### Task 2 — add a purpose-named Flow grounding path
+**Verification:** positive bounded projection; absent/duplicate/substituted
+sources; stale family/slot; incompatible/reversed delta; insufficient
+Resolution; redaction-before-read; summary-overflow; omitted/unsupported
+signal; and regression of the HCM-3.4 source-pair wall.
 
-**Likely owner:** `crates/flow/src/resolver.rs` and `packet_result.rs`;
-existing `resolve_with_contract` is the compatibility baseline.
+### Packet 2 — Flow packet adoption
 
-**Call path:** selected Flow request -> engine grounding operation -> exact
-Projection result -> packet sections/notes/provenance -> ready/refused result.
+**Likely owner:** `handbook-flow`, adjacent to the current resolver and packet
+assembly seams, without changing them.
 
-**Acceptance criteria:** Resolution determines eligible disclosure; budgets
-remain subordinate resource reporting; every omitted field is typed; stale or
-insufficient source prevents ready selection; existing resolver behavior is
-unchanged unless Task 0 explicitly versions it.
+**Future call path:** purpose-named Flow request -> typed engine grounding
+result -> packet fields/typed omissions/provenance -> ready or refused result.
 
-**Verification:** new flow integration corpus covering narrow/broad envelopes,
-same-source/different-envelope provenance, all omission kinds, stale pair,
-budget pressure, and legacy resolver byte-compatibility.
+**Acceptance criteria:**
 
-### Task 3 — replace raw pipeline work-level authority
+- Resolution controls disclosure; byte budgets remain subordinate resource
+  reporting.
+- Flow neither reconstructs Snapshot Memory nor reads a full delta/signal.
+- Existing `resolve` and `resolve_with_contract` behavior remains unchanged.
 
-**Likely owner:** `crates/pipeline/src/pipeline_compile.rs` from
-`compile_pipeline_stage*` through `assemble_documents`,
-`load_repo_relative_document`, and `filter_scoped_blocks`, plus its tests.
+**Verification:** narrow/broad envelope cases, every omission kind, stale and
+insufficient source refusal, byte-pressure non-widening, provenance replay,
+and legacy resolver compatibility wall.
 
-**Call path:** selected stage -> exact namespaced Resolution mapping -> scoped
-document inclusion -> compile payload/provenance -> capture/handoff consumer.
+### Packet 3 — pipeline namespaced shared inclusion
 
-**Acceptance criteria:** raw `L0`–`L3` never remains the final semantic
-authority; compatibility mapping is exact and versioned if retained; every
-include decision is reproducible from the source/envelope pair; invalid or
-indeterminate inputs refuse rather than default to `L1`.
+**Likely owner:** `handbook-pipeline`, from the compile-stage seams through
+document assembly and scoped filtering.
 
-**Verification:** deterministic same-input replay, deny/narrowing cases,
-unknown/malformed mapping refusal, old scoped-block regression corpus, and
-capture/handoff provenance replay.
+**Future call path:** purpose-named stage -> exact namespaced shared engine
+Resolution input -> deterministic scoped inclusion -> compile provenance ->
+capture/handoff evidence.
 
-### Task 4 — adopt session snapshot references at parent boundaries
+**Acceptance criteria:**
 
-**Likely owner:** current v1.4 parent-handoff producer and its completed
-`snapshot_refs` schema fields; no schema change is presumed.
+- No final include decision depends on raw `work_level` or L0–L3.
+- A temporary mapping is definition-pinned, one-way, exact, current, and
+provenance-bearing; no typed-path failure falls back to it.
+- Unknown, stale, malformed, ambiguous, nested, or overbroad mapping refuses.
 
-**Call path:** prior end -> new start -> compatible delta -> grounding
-Projection -> session work -> end snapshot -> final delta -> parent handoff.
+**Verification:** same-input replay; allow/narrow/deny cases; every mapping
+refusal; raw-level no-fallback; preserved scoped-document corpus behavior;
+and capture/provenance replay.
 
-**Acceptance criteria:** refs are exact and current; records remain
-descriptive; start/end/currentness failures produce the correct
-`not_available`, `partial`, or `failed` posture; no handoff copies snapshot
-contents or claims promotion.
+### Packet 4 — session transition references
 
-**Verification:** deterministic handoff-record fixture/corpus with a valid
-pair and every missing, stale, incompatible, unstable, sequence, and
-redaction refusal.
+**Likely owner:** the selected parent-handoff producer using existing nullable
+`snapshot_refs` capacity; this plan assumes no schema change.
 
-### Task 5 — consume distinct closeout and promotion decisions
+**Future call path:** prior end -> start -> compatible delta -> grounding
+Projection -> work -> end -> final delta -> exact parent-handoff refs.
 
-**Likely owner:** selected gate operation owner; semantic source is
-`05-contracts-schemas-and-gates.md` only until Task 0 chooses runtime
+**Acceptance criteria:**
+
+- Refs are exact, current, descriptive, and never copy snapshot content.
+- Missing/partial/unstable/incompatible/stale capture reports its truthful
+  status and blocks a grounding or promotion claim.
+
+**Verification:** valid sequence plus absent, unstable, incompatible, stale,
+reversed, redacted, sequencing, and partial-reference corpus cases.
+
+### Packet 5 — non-promoting evidence integration
+
+**Dependencies:** a separately selected `handbook-contracts` gate-runtime
+owner. It is not an HCM-3.5 runtime implementation task.
+
+**Acceptance criteria:**
+
+- Local completion and parent-promotion eligibility remain separate exact
+  policy/evidence evaluations.
+- Packet/pipeline readiness, advisory score, or handoff existence cannot
+  promote a parent.
+
+**Verification:** complete hard/required/advisory/not-observed/omitted/
+redacted/stale/indeterminate matrix and a regression proving local completion
+cannot promote a parent.
+
+### Packet 6 — ordinary-consumer and Substrate composition
+
+**Dependencies:** HCM-4 SDK/JSON work and separate publication/adoption
 authority.
 
-**Acceptance criteria:** local completion and parent-promotion eligibility
-remain independently fingerprinted, default false on indeterminate state, and
-are never inferred from Flow/pipeline success.
+**Acceptance criteria:**
 
-**Verification:** hard/required/advisory/omitted/not-observed/stale policy
-matrix and a regression proving local success cannot promote a parent.
+- SDK composes owner operations; standalone Handbook CLI is a thin adapter.
+- Tier 2 stays exact-versioned JSON, bounded, isolated, and removable.
+- Permanent Substrate consumption/wrapping resolves exact crates.io
+SDK/library versions at a named current-tip real seam without path/patch/CLI
+fallback.
 
-## Risk and stop matrix
+**Verification:** independently satisfy `PG-SDK-01`, `PG-JSON-01`,
+`PG-SUB-CLI-01`, `PG-PUBLISH-01`, and `PG-SUB-RUST-01`; no proof substitutes
+for another.
 
-| Risk | Effect | Required response |
+## Checkpoints and stop matrix
+
+| Checkpoint | Must be true before advancing | Stop when |
 |---|---|---|
-| Exporting private engine types changes published compatibility | Implementation cannot legally start under this packet. | Stop at Task 0 authority boundary; do not add `pub` or edit Cargo metadata. |
-| Existing Flow/pipeline callers observe input/result changes | Legacy products could change behavior. | Select a versioned/new operation or explicit migration contract before edits. |
-| Snapshot data is comprehensive | Sensitive or irrelevant data could reach a session. | Use only generic Projection disclosure/omission/redaction; refuse before read. |
-| Raw work levels are treated as Resolution | Scope/authority semantics collapse into a byte/string shortcut. | Use a namespaced engine type and exact mapping; unknown mapping refuses. |
-| Gate semantics are implemented in Flow/pipeline | A consumer becomes a competing contract authority. | Stop unless selected gate runtime owner supplies an exact operation. |
+| Engine -> Flow | Exact source/currentness/redaction/provenance result and bounded summary are proven. | A public/private boundary or summary requires a different owner, schema, dependency, or API decision. |
+| Flow -> pipeline | Flow uses the typed engine result without legacy mutation. | Flow must read full delta data, recreate engine logic, or change retained resolver behavior. |
+| Pipeline -> transition refs | Namespaced inclusion is deterministic and raw fallback is impossible. | Mapping cannot be exact/current/provenance-bearing or Handoff needs a schema change. |
+| Evidence -> promotion | Local/parent distinction is carried without evaluation. | A consumer needs a promotion answer before the selected gate owner exists. |
+| SDK/CLI/Substrate | Owner operations are independently available and published proof is authorized. | Tier 2 is treated as permanent, registry/publication proof is unavailable, or Substrate needs a semantic exception. |
 
-## Exit proof
+## Explicit non-goals
 
-This planning task proves only the live dependency assessment, the exact
-authority boundary, and a reviewed durable stop. It cannot prove `PG-SNAP-*`,
-`PG-HANDOFF-02`, a Flow/pipeline adoption, local/promotion runtime behavior,
-or Phase-3 exit. Those claims require the selected implementation decision and
-the proof matrix above.
+- No code, tests, fixtures, source export, public API/signature, schema,
+  config, dependency, package, registry, SDK, CLI, Substrate, or consumer
+  implementation.
+- No current caller migration, compatibility promise, or unbounded legacy
+  bridge; no direct raw delta signal route; no duplicate snapshot model.
+- No HCM-3.4 rewrite, HCM-3.6/HCM-4+/HCM-5 selection, gate runtime,
+  publication, remote operation, handoff/ledger record, staging, commit, or
+  ref update.

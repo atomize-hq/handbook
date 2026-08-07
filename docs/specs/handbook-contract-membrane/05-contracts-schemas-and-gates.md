@@ -2818,7 +2818,19 @@ extensions: {}
 definition_fingerprint: sha256:...
 ```
 
-The request's `currentness.expected_family_revisions` and the result's `currentness_validation.checks` must each equal the definition's required family set exactly. Family IDs, source-selector IDs, adapters, and source-slot sets must match. Each request value is copied from the exact bound snapshot's captured composite/per-slot revisions, and every result observed value must equal it. Omission, extra entries, duplicate families, selector/adapter/slot substitution, or values not equal to the bound captured state refuses before output. Because this definition reveals the delta's unfiltered `/signals`, its currentness set covers every family compared by that delta, including `session`; a definition that omits one must instead filter/omit signals derived from unchecked families with typed proof effects.
+The request's `currentness.expected_family_revisions` and the result's `currentness_validation.checks` must each equal the definition's required family set exactly. Family IDs, source-selector IDs, adapters, and source-slot sets must match. Each request value is copied from the exact bound snapshot's captured composite/per-slot revisions, and every result observed value must equal it. Omission, extra entries, duplicate families, selector/adapter/slot substitution, or values not equal to the bound captured state refuses before output. The historical example above reads the delta's unfiltered `/signals`, so its currentness set covers every family compared by that delta, including `session`; a definition that omits one must instead filter/omit signals derived from unchecked families with typed proof effects.
+
+**HCM-3.5 adoption constraint:** a future implementation must preserve the
+rule's semantic role while replacing that direct raw-delta read with the
+engine-produced bounded/redacted delta-signal summary defined in `02`. The
+summary must bind the exact selected delta, envelope, disclosure/redaction
+decision, bounded ordering/overflow disposition, included/omitted accounting,
+and source provenance. It cannot be recomputed by Flow or pipeline and cannot
+contain a raw signal/change/snapshot payload. The selected future definition
+must retain `reveal_delta_signals` reconciliation evidence and refuse rather
+than expose an unfiltered signal whose dependent family lacks a currentness
+check. This is a planning constraint only; it does not amend a shipped schema,
+public DTO, or runtime operation.
 
 ## Snapshot projection request/result
 
@@ -4495,6 +4507,16 @@ The gate blocks before score evaluation when any hard/required claim is neither 
 Weights are positive finite advisory-progress metadata. Omitted weight contributes neither numerator nor denominator; `not_applicable` is excluded; every applicable non-pass contributes zero. Score cannot override hard/required failure, missing evidence, invalid input, or incomplete accounting. Extensions, manifests, adapters, and docks cannot add waiver semantics.
 
 `local_closeout_eligible` and `parent_promotion_eligible` are computed separately from exact policy refs/fingerprints and default false on indeterminate state. Local pass never implies parent promotion.
+
+**HCM-3.5 non-promoting evidence boundary:** Flow and pipeline may return
+typed evidence references, omissions, and refusal/local-completion status for
+a later gate owner, but neither consumer evaluates `GateResult`, derives a
+parent-promotion value, or supplies a default when evidence is missing,
+omitted, redacted, stale, malformed, or indeterminate. The future adoption
+path carries local and parent dimensions separately and treats both as false
+or unavailable unless the selected `handbook-contracts` gate runtime evaluates
+their exact policies. This plan creates no gate runtime, gate schema, or
+promotion claim.
 
 ## Dock capability manifest
 

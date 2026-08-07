@@ -1,0 +1,363 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260807T000100Z--HCM-3-5--resolution-aware-adoption-planning-authority-admission-discovery",
+  "created_at_utc": "2026-08-07T00:36:00Z",
+  "source_handoff_ids": [
+    "20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary"
+  ],
+  "parent_orchestration_id": "20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "HCM-3.5-P1-resolution-aware-adoption-planning",
+  "subject_fingerprint": "sha256:7723905c5687687aed59d5cff58d7330fbfaa8d423d06d33492f858a111d4742",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-5-resolution-aware-adoption-planning-authority-admission-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-06T20:27:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-5-resolution-aware-adoption-planning",
+        "packet_ids": [
+          "HCM-3.5-P1-resolution-aware-adoption-planning"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260806T202615Z--resolution-aware-adoption-planning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:7b1e0a41e9b64efd903da5eaf10fb454e1bb2dc7a3833cf3c3207cff00285672"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:73ac770a423a3283f04620eaec5e09f48586874ca6bd7e4ee9c0fd49b55f6ea6",
+    "integrated_outcome_id": "hcm-3-5-resolution-aware-adoption-planning",
+    "outcome_registry_fingerprint": "sha256:7b1e0a41e9b64efd903da5eaf10fb454e1bb2dc7a3833cf3c3207cff00285672",
+    "review_stage": "authority_admission",
+    "stage_transition": {
+      "kind": "authority_extension",
+      "from_stage": "planning"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery"
+  },
+  "authority_continuation": {
+    "grant": {
+      "extension_id": "hcm-3-5-resolution-aware-adoption-planning-continuation-v1",
+      "predecessor_handoff_id": "20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary",
+      "predecessor_dispatch_population_fingerprint": "sha256:058e68cf96a6dad12dee039a4c0479fc0ac2023df68d09d104b5a800a5ff51fb",
+      "parent_orchestration_id": "20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning",
+      "integrated_outcome_id": "hcm-3-5-resolution-aware-adoption-planning",
+      "outcome_registry_fingerprint": "sha256:7b1e0a41e9b64efd903da5eaf10fb454e1bb2dc7a3833cf3c3207cff00285672",
+      "causal_budget_id": "sha256:73ac770a423a3283f04620eaec5e09f48586874ca6bd7e4ee9c0fd49b55f6ea6",
+      "packet_ids": [
+        "HCM-3.5-P1-resolution-aware-adoption-planning"
+      ],
+      "authority_ref": {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-authority.json",
+        "sha256": "294b321b985aa95165412c1031c6fab0e4b3d0ec9f710d126dea0e3d65c7a46c",
+        "issuer": {
+          "role": "user_product_authority",
+          "identity": "user_product_authority"
+        },
+        "owner": {
+          "role": "product_and_lineage_owner",
+          "identity": "user_product_authority::docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority.json::meta_thread=019fd8b6-73b3-79d2-bd1b-08462c5bf620::host=local::authority_decision_nonce=220063abb93fbbe8eaba8831ea730a1179ae74c4e10be21e4bb6e629ca6bb57d"
+        },
+        "issued_at_utc": "2026-08-06T23:55:30Z",
+        "source": {
+          "task_ref": "019fd8b6-73b3-79d2-bd1b-08462c5bf620",
+          "thread_ref": "019fd8b6-73b3-79d2-bd1b-08462c5bf620",
+          "host_ref": "local",
+          "dispatch_nonce": "220063abb93fbbe8eaba8831ea730a1179ae74c4e10be21e4bb6e629ca6bb57d"
+        },
+        "attestation": {
+          "handoff_id": "20260806T235900Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-attestation-completed",
+          "run_id": "/root/attestation_clean_review",
+          "dispatch_id": "20260806T235600Z--HCM-3-5--resolution-aware-adoption-planning-authority-attestation-review",
+          "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T235600Z--HCM-3-5--resolution-aware-adoption-planning-authority-attestation-review.json",
+          "dispatch_sha256": "sha256:75ba8a9903c7fe395c888c1493cedc6f537bea9877375c93b0a527aac3fd39d2"
+        }
+      },
+      "baseline_commit": "109cca2c65a4187a82a7d2affee32559ab14e900",
+      "baseline_tree": "7f752e3f6e6e5e78f86a9ab612980a553f220c28",
+      "subject_path_ceiling": [
+        "docs/specs/handbook-contract-membrane/00-README.md",
+        "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+        "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T185410Z--HCM-3-4--private-projection-source-pair-implementation-discovery.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T190810Z--HCM-3-4--private-projection-source-pair-implementation-closure.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T235600Z--HCM-3-5--resolution-aware-adoption-planning-authority-attestation-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000100Z--HCM-3-5--resolution-aware-adoption-planning-authority-admission-discovery.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000200Z--HCM-3-5--resolution-aware-adoption-planning-documentation-implementation.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000300Z--HCM-3-5--resolution-aware-adoption-planning-documentation-discovery.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000400Z--HCM-3-5--resolution-aware-adoption-planning-documentation-closure.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000500Z--HCM-3-5--resolution-aware-adoption-planning-documentation-supplemental-1.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000600Z--HCM-3-5--resolution-aware-adoption-planning-documentation-supplemental-2.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000700Z--HCM-3-5--resolution-aware-adoption-planning-proof-discovery.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000800Z--HCM-3-5--resolution-aware-adoption-planning-proof-closure.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T000900Z--HCM-3-5--resolution-aware-adoption-planning-proof-supplemental-1.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001000Z--HCM-3-5--resolution-aware-adoption-planning-proof-supplemental-2.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001100Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-discovery.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001200Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-closure.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001300Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-supplemental-1.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T001400Z--HCM-3-5--resolution-aware-adoption-planning-final-closeout-supplemental-2.json",
+        "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260806T235900Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-attestation-completed.json",
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260807T001500Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-continuation-completed.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T183318Z--private-projection-source-pair-implementation-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-attestation-basis.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-authority.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260806T202615Z--resolution-aware-adoption-planning-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T000000Z--resolution-aware-adoption-planning-continuation-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260806T202615Z--resolution-aware-adoption-planning-preflight.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T000000Z--resolution-aware-adoption-planning-authority-admission.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T000000Z--resolution-aware-adoption-planning-continuation-proof.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/todo.md"
+      ],
+      "symbol_delta": [],
+      "risk_ceiling": "LOW",
+      "scope_delta": "Authorize only the direct same-parent HCM-3.5 documentation-planning resumption: after a read-only CLEAN authority-admission selector, freeze the exact typed handbook-engine/handbook-flow/handbook-pipeline owner boundary and intentional greenfield cutover; preserve future standalone Handbook CLI and crates.io SDK/library composition by Substrate while Tier 2 bundled binary/JSON is transitional; defer concrete promotion-gate runtime to a typed non-promoting evidence boundary; preserve HCM-3.4 relation-only snapshot_delta and plan only a bounded redacted engine-produced delta-signal summary reconciled with reveal_delta_signals. No Rust, runtime, public API implementation, schema/configuration, dependency, HCM-3.6, remote, publication, registry proof, consumer adoption, or protected-checkout mutation is authorized.",
+      "review_allowance": [
+        {
+          "review_slot": "authority_admission",
+          "max_cycles": 4
+        },
+        {
+          "review_slot": "implementation",
+          "max_cycles": 4
+        },
+        {
+          "review_slot": "proof",
+          "max_cycles": 4
+        },
+        {
+          "review_slot": "final_closeout",
+          "max_cycles": 4
+        }
+      ]
+    },
+    "grant_fingerprint": "sha256:3c0ab1aa7b46549760e6d82fd5c64c8d37a9a2ee0ed64beca0025bf5418fe768",
+    "review_slot": "authority_admission"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-5-resolution-aware-adoption-authority-admission-convergence",
+    "completed_at_utc": "2026-08-07T00:34:31Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "revalidate the direct authority-boundary predecessor, frozen parent/outcome/registry/budget/packet identity, authority artifact, and completed different-parent CLEAN attestation",
+        "evidence_ref": "ordinary v1.4 validator passed; direct grant/artifact/attestation replay is bound by the 11-path manifest"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "inventory the original parent dispatch, direct handoff predecessor, authority source/artifact/basis, and different-parent attestation record/dispatch",
+        "evidence_ref": "all read-only authority consumers needed for this admission selector are explicitly present in the manifest"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute the Python-ordinal repo-path-NUL-SHA256-newline-v1 manifest aggregate",
+        "evidence_ref": "sha256:7723905c5687687aed59d5cff58d7330fbfaa8d423d06d33492f858a111d4742"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "git diff --check over the authority-admission manifest",
+        "evidence_ref": "PASS"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "rg -n '[\\t ]+$' over the authority-admission manifest",
+        "evidence_ref": "11/11 UTF-8 text entries have no trailing whitespace"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T203000Z--HCM-3-5--resolution-aware-adoption-planning-discovery.json",
+        "sha256": "dafdddebc036d25cb55d51f00d10150675d620b18ed90b9e990f1257b748869d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260806T235600Z--HCM-3-5--resolution-aware-adoption-planning-authority-attestation-review.json",
+        "sha256": "75ba8a9903c7fe395c888c1493cedc6f537bea9877375c93b0a527aac3fd39d2"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+        "sha256": "454aafb25e06dc82954de4c9780cedc3a7482de6a31c5aeecf799f0c6ea9efd3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T235900Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-attestation-completed.json",
+        "sha256": "4bedbaf2ebdb320fe878dc109525ef3145ded70a771fe73362ecc6de4044fc99"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+        "sha256": "af0ebd87eef5a6bb12eb7291d96e5ba133a524faf6e3d76d51304c254ddc63d3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-attestation-basis.json",
+        "sha256": "da254c1236363f1f61fa82d0784f3c0a60ac0277fd7b5e8e130046f1f2655c9b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-authority.json",
+        "sha256": "294b321b985aa95165412c1031c6fab0e4b3d0ec9f710d126dea0e3d65c7a46c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-user-product-authority.json",
+        "sha256": "98bc051e65ad427227b8a2af6d85c4184cb9d3657ac35fad709bee435d1e3e94"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260806T202615Z--resolution-aware-adoption-planning-selector.md",
+        "sha256": "d245ff5a536e3948c5c699c481d136e9295ab8451b0de6cb5bee19a43a3eec47"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md",
+        "sha256": "535e7aa7fd74a03fca6e56cb6ca86e80a153b483d3117d8330a604d14500e401"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/todo.md",
+        "sha256": "4a052bbc59ecc74d0c1ae3ca2d35a952732beaf424a590a59e607bf45d8914e9"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:7723905c5687687aed59d5cff58d7330fbfaa8d423d06d33492f858a111d4742"
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 direct same-parent authority-admission selector",
+    "scope_horizon": "one read-only authority-admission review before the pre-reserved documentation-planning slots",
+    "detail_resolution": "Validate only the exact continuation grant, artifact bytes, direct non-completed authority-boundary predecessor, completed different-parent CLEAN attestation, path ceiling, stable parent/outcome/registry/budget/packet identity, and reserved first slot.",
+    "temporal_horizon": "The original parent remains non-completed until this selector is CLEAN; no documentation planning or implementation slot may begin first.",
+    "authority_horizon": "Read-only admission only. No Rust, runtime, public API implementation, schema/configuration, dependency, SDK/CLI/Substrate, consumer adoption, HCM-3.6, remote, publication, registry proof, or protected-checkout mutation.",
+    "memory_horizon": "The direct HCM-3.5 authority-boundary handoff and dispatch prefix plus the completed different-parent authority-attestation record and CLEAN dispatch.",
+    "validation_horizon": "Live manifest replay, v1.4 dispatch validation, and a fresh isolated built-in CLEAN admission review; any mismatch fails closed."
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-authority.json",
+      "sections": [
+        "entire stable authority artifact"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/authority/20260806-hcm-3-5-resolution-aware-adoption-planning-attestation-basis.json",
+      "sections": [
+        "entire attestation basis and future-resumption reservation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+      "sections": [
+        "entire direct non-completed authority-boundary predecessor"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T235900Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-attestation-completed.json",
+      "sections": [
+        "entire completed different-parent CLEAN attestation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Handoff selection",
+        "built-in delegation and fresh review"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "V1.4 same-parent resumption and terminality",
+        "Built-in delegated-run protocol"
+      ]
+    }
+  ],
+  "repo_truth": "The direct predecessor is the non-completed HCM-3.5 authority-boundary handoff, whose one planning discovery remains CLEAN and whose parent/outcome registry and causal budget are immutable. The completed HCM-3.5 authority-attestation handoff is different-parent prerequisite evidence only. The exact continuation artifact grants one read-only authority-admission selector before the reserved documentation-planning slots; it neither resets the inherited planning cadence nor selects product implementation.",
+  "allowed_scope": [
+    "Independently verify the complete authority_continuation object against the on-disk authority artifact, including the exact full-grant fingerprint, direct predecessor, parent/outcome/registry/budget/packet identity, empty symbol delta, LOW ceiling, sorted documentation path ceiling, and authority-admission slot.",
+    "Independently verify that the named attestation record is completed under a different parent and that its named built-in review dispatch is CLEAN and contains the authority artifact bytes.",
+    "Independently verify that this dispatch is the direct first continuation after the original HCM-3.5 planning discovery and is read-only; report a valid P1/P2 authority mismatch or CLEAN without repairing files."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a dispatch, write a handoff or ledger, delegate, or run product tests.",
+    "Do not begin documentation planning, select or implement a public engine/Flow/pipeline interface, gate runtime, SDK, CLI, Substrate consumer, configuration, dependency, schema, registry, publication, or HCM-3.6 surface.",
+    "Do not access protected checkouts or remote state, fetch, push, publish, merge, rebase, reset, or clean."
+  ],
+  "tasks": [
+    "Return findings first, ordered Critical, Required, Optional, Nit. Every finding names an exact file/section, violated continuation requirement, concrete failure, smallest safe remediation, and missing validation.",
+    "Reject any substitution, stale hash, changed parent/outcome/registry/budget/packet identity, non-direct predecessor, non-CLEAN or same-parent attestation, path-ceiling breach, non-empty symbol delta, risk increase, post-CLEAN grant use, or non-read-only admission posture.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:7723905c5687687aed59d5cff58d7330fbfaa8d423d06d33492f858a111d4742."
+  ],
+  "contracts_and_gates": [
+    "This is the required first authority-admission slot under the inherited HCM-3.5 causal budget. It is a distinct read-only selector, not a new planning discovery and not a reset of the original CLEAN planning review.",
+    "The continuation grant permits no later documentation planning unless this fresh isolated selector is CLEAN. A valid P1/P2 remains blocking and follows only the grant's typed causal allowance; P3/P4 remain subject to the live inventory rules.",
+    "The reviewer must not self-remediate, create durable state, or authorize product work. The parent alone validates and disposes the structured result."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair for any authority, attestation, identity, grant, manifest, ceiling, causal-lineage, or read-only-boundary defect.",
+    "Return BLOCKED if evidence requires a broader authority decision, product/runtime check, protected-checkout access, remote operation, or unavailable mandatory review capability.",
+    "Report all results to the parent through the built-in channel without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -1,127 +1,174 @@
 # HCM-3.5 Resolution-aware snapshot, packet, and pipeline adoption
 
-**Status:** planning-only, authority-boundary candidate. This packet may add
-documentation, planning, selector, proof, review-dispatch, handoff, ledger,
-and the two coupled control-pack truth corrections named by its selector. It
-does not authorize implementation, runtime checks, public API selection,
-schema/dependency changes, configuration, consumer adoption, or remote work.
+**Status:** CLEAN-admitted, documentation-only implementation plan. This
+packet freezes future ownership, cutover, proof, and refusal decisions; it
+does not authorize Rust, runtime behavior, public APIs, schemas,
+configuration, dependencies, package publication, SDK/CLI/Substrate adoption,
+remote work, or a gate runtime.
 
-## Objective
+## Objective and completed dependency evidence
 
-HCM-3.5 is the first proposed adoption of the completed private Phase-3
-primitives. A later implementation must make Flow consume an exact
-`ContextResolutionEnvelope`, produce a bounded Resolution-aware grounding
-Projection from an exact current snapshot and compatible delta, replace
-pipeline's raw `work_level` filtering with namespaced shared semantics, record
-session-start/session-end snapshot and delta references in parent handoffs, and
-keep local closeout distinct from parent-promotion readiness.
+HCM-3.5 plans the first future consumer path for the completed private HCM-3.4
+Snapshot Memory boundary. It turns an exact current snapshot plus compatible
+delta into a bounded Resolution Projection for Flow, namespaced shared
+inclusion for pipeline, descriptive session transition references, and typed
+non-promoting evidence. It does not turn any observation, packet, pipeline
+result, or local completion into parent promotion.
 
-This planning run must not infer how a published `handbook-engine` API exposes
-the currently private Snapshot Memory and Projection modules. It records that
-missing compatibility decision as a true authority boundary. Therefore this
-packet can establish the implementation seams, invariants, proof matrix, and
-non-goals, but cannot claim an implementation-ready or completed HCM-3.5 plan
-until the named decision exists.
+The only Snapshot Memory dependency evidence is immutable and read-only:
 
-## Verified predecessor and repository truth
+- `ca765cc7a45206392dc1997adaa924d4a8ecaeb3` supplies the private
+  Snapshot Memory model and deterministic delta behavior; and
+- `cc6d84926e6435c3960af86e5927a18991dd04fd` supplies the private generic
+  Projection source-pair proof.
 
-The selected predecessor is the completed HCM-3.4 source-pair handoff
-`20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed`.
-It is valid v1.4 ledger evidence at the assigned base and was independently
-validated with the complete handoff corpus. Its primary commit
-`cc6d84926e6435c3960af86e5927a18991dd04fd` adds one exact private
-`snapshot_current` / `snapshot_delta` source relation, five-family currentness,
-typed refusal, provenance, redaction handling, and `authority_effect: none`.
+At the planning base, `crates/engine/src/lib.rs` retains private
+`snapshot_memory` and `projection` modules; `SnapshotDelta` is private to the
+engine. No Flow, pipeline, handoff, gate, SDK, CLI, transport, or Substrate
+consumer can use those private types. That is dependency evidence, not a
+compatibility constraint or a reason to expose the existing private model.
 
-The earlier HCM-3.4 primary `ca765cc7a45206392dc1997adaa924d4a8ecaeb3`
-contains the private Snapshot Memory implementation:
+## Frozen future owner boundary
 
-- `crates/engine/src/snapshot_memory/policy.rs`, `record.rs`, `delta.rs`, and
-  `redaction.rs` model capture, immutable snapshots, compatible deltas, drift,
-  retention, and redaction;
-- `crates/engine/src/projection.rs` consumes the private source pair; and
-- `crates/engine/src/lib.rs` declares both `projection` and `snapshot_memory`
-  with private `mod` visibility. No non-engine runtime consumer references
-  `ContextMemorySnapshot`, `SnapshotDelta`, or the capture API.
-
-That boundary is adequate predecessor evidence for private semantics only. It
-does not select an exported type, service, serialization, SemVer posture, or
-Flow-facing operation. The previous HCM-3.4 handoff's `snapshot_refs` are
-honestly `not_available`; the current v1.4 handoff schema already has nullable
-start/end/projection/delta reference fields but does not itself create a
-snapshot producer.
-
-## Frozen future seams and ownership
-
-| Future seam | Current call path | Later owner and required boundary | Must remain true |
+| Future owner | Owns | May consume | Must not own or do |
 |---|---|---|---|
-| Flow Resolution consumption | `handbook_flow::resolve` / `resolve_with_contract` accept public `ResolveRequest { budget_policy, packet_id }`, then `resolver::build_packet_result` emits rendered artifact sections. | `handbook-flow` consumes an exact engine-defined, current snapshot/delta grounding input through a reviewed engine-to-flow contract. It must not recreate Snapshot Memory, Projection, currentness, or redaction logic. | Resolution is six-dimensional, not a byte-budget alias; existing byte budgeting remains a resource constraint; stale, missing, incompatible, uncurrent, or insufficient sources refuse before a packet is ready. |
-| Grounding Projection | HCM-3.4's private `projection::execute_projection` binds `snapshot_current` and `snapshot_delta`; Flow cannot name that private module. | `handbook-engine` remains the deterministic Projection owner. The compatibility decision must select the minimal exported typed operation/value boundary consumed by Flow. | Exact source/profile/vocabulary/definition/envelope fingerprints, complete disclosure/omission accounting, per-family currentness, redaction-before-read, and `authority_effect: none` survive the crossing. Comprehensive capture is never comprehensive disclosure. |
-| Pipeline scoped inclusion | `pipeline_compile::compile_pipeline_stage*` obtains a raw `work_level`, passes it to `assemble_documents`, then `load_repo_relative_document` calls `filter_scoped_blocks`. | `handbook-pipeline` consumes an exact namespaced shared Resolution input from `handbook-engine`; it does not retain L0-L3 as semantic authority or add a competing resolver. | Unknown, stale, malformed, or indeterminate Resolution refuses; deny/least-disclosure behavior wins; legacy work-level behavior is preserved only through an explicit compatibility mapping approved with the new interface. |
-| Parent handoff transition | v1.4 `snapshot_refs` already stores nullable prior/start/grounding/end/delta refs. | The orchestration handoff producer records exact refs from the selected capture/projection operation after source currentness is rechecked. | Handoffs cite observations; they never copy snapshots, make a snapshot canonical authority, or make a snapshot alone authorize dispatch. Missing/failed capture is explicit, not `captured`. |
-| Local versus promotion gate | `GateResult` semantics specify separate local-closeout and parent-promotion eligibility; no `handbook-contracts` runtime exists. | HCM-3.5 may only consume an exact future gate policy/result boundary if its owner and compatibility posture are explicitly selected. | Local success never implies parent promotion; omitted/unobserved claims cannot pass; no Flow or pipeline default becomes a gate policy. |
+| `handbook-engine` | Exact snapshot/delta binding and compatibility, family currentness, redaction-before-read, deterministic bounded Resolution Projection, typed omission/provenance, and a bounded/redacted delta-signal summary. | HCM-3.4 private snapshot/delta semantics and the HCM-3.2 Resolution kernel. | It does not promote evidence, select Substrate orchestration, or expose raw snapshot/delta payloads by default. |
+| `handbook-flow` | A purpose-named future packet path that consumes one exact engine grounding result and reports ready/refused/omitted packet state. | The typed engine result only. | It does not recreate snapshots/deltas/currentness/redaction, read relation-only delta signals, or make gate/promotion decisions. |
+| `handbook-pipeline` | A purpose-named future namespaced shared-inclusion path, compilation/capture/handoff sequencing, and provenance forwarding. | The exact shared engine Resolution inclusion input and selected Flow/engine evidence refs where needed. | It does not retain raw `work_level` or L0–L3 as semantic authority, create a second resolver, or consume full snapshot/delta data. |
+| Future gate owner (`handbook-contracts`) | Exact local-closeout and parent-promotion policy evaluation. | Typed evidence refs/fingerprints and omissions from the adoption path. | It remains the only promotion decision owner; HCM-3.5 does not create this runtime. |
+| `handbook-sdk` and standalone Handbook CLI | Future ordinary-consumer composition and transport adaptation over the chosen owner operations. | Selected SDK/library capabilities and typed results. | They do not absorb semantic ownership or become a fallback engine/Flow/pipeline path. |
+| Substrate | Future orchestration/product wording and consumption or wrapping of the published SDK/library. | Exact published crates.io capability boundary. | It does not become a semantic owner or use a sibling/path/patch substitute as permanent adoption. |
 
-## Authority boundary: public compatibility and gate-operation decision
+The required dependency direction is `handbook-flow -> handbook-engine` and
+`handbook-pipeline -> handbook-engine`; neither direction reverses, and neither
+consumer reaches into an engine private module. `handbook-sdk` composes owner
+operations; transports, including the standalone Handbook CLI and Substrate,
+depend outward on that composition.
 
-The private HCM-3.4 types cannot be used from `handbook-flow` or
-`handbook-pipeline`: Rust module privacy forbids access across crates. The
-current Flow entry points and result structs are public and are called by the
-CLI and compatibility compiler. Reusing them by changing their required input
-would therefore select observable compatibility behavior. The existing crate
-dependencies already point inward to `handbook-engine`; no new dependency is
-needed, but the engine export and Flow/pipeline operation shape are a public
-API decision.
+## Greenfield cutover and current call-path seams
 
-The user or a separately authorized product decision must choose one bounded
-posture before implementation planning can be completed:
+This is a greenfield semantic cutover. The future adoption paths are
+purpose-named and typed; they do not alter the request/result contracts or
+observable behavior of the current resolver/compiler paths. Existing callers
+are regression evidence only.
 
-1. Add a purpose-named, typed public engine snapshot-grounding operation and a
-   new Flow Resolution-aware entry point, leaving existing resolver/compile
-   operations unchanged.
-2. Extend the existing public Flow and pipeline request/result operations with
-   a versioned compatibility/migration contract.
-3. Select another exact public owner/interface that preserves the acyclic
-   `flow -> engine` and `pipeline -> engine` dependency direction.
-
-The recommended posture is option 1: a narrow typed engine operation plus new
-purpose-named Flow and pipeline operations. It isolates HCM-3.5 semantics,
-does not silently change existing `ResolveRequest` or `PipelineCompileResult`
-behavior, and leaves SDK/CLI/transport adoption for their selected later
-slices. This is a recommendation, not an authorized decision.
-
-The same decision must state whether HCM-3.5 may consume a concrete
-`GateResult` operation now or must retain gate-policy integration as an
-unimplemented typed boundary until HCM-5 supplies the runtime owner. The
-frozen semantic distinction in `05` is not permission to invent a runtime
-gate evaluator.
-
-## Future fail-closed behavior and proof matrix
-
-| Area | Positive proof | Required refusal / non-promotion proof |
+| Current read-only seam | Future cutover decision | Regression boundary |
 |---|---|---|
-| Engine-to-Flow grounding | One exact current snapshot plus compatible delta produces one fingerprinted Projection under an exact envelope; packet fields are included or typed-omitted once. | Private-module bypass, wrong profile/definition/envelope, missing/duplicate/substituted source, stale family/slot, incompatible/reversed delta, uncurrent capture, or unchecked delta family produces no ready packet. |
-| Flow budget compatibility | Existing source/render byte budget remains independently observable after a permitted Resolution-aware projection. | Budget status never widens disclosure, substitutes for Resolution, turns an omission into inclusion, or declares readiness after a projection refusal. |
-| Pipeline shared semantics | A named Resolution mapping deterministically includes only allowed scoped content while carrying exact provenance. | Unknown/malformed/stale mapping, raw L0-L3 fallback without approved mapping, nested/ambiguous scope syntax, or a broader envelope cannot silently include content. |
-| Handoff capture | A parent records exact prior-end/start/grounding/end/delta refs after capture/currentness validation. | Absent/unstable/partial/incompatible capture, stale handoff, or snapshot-only evidence leaves capture status honest and blocks any promotion claim. |
-| Gate distinction | A selected local result and parent-promotion result remain separately fingerprinted and reported. | Local closure, advisory score, omission, `not_observed`, stale policy, or unavailable gate runtime cannot become parent promotion. |
-| Cross-crate compatibility | New selected APIs preserve existing resolver, compiler, and pipeline behavior under their old operations. | No engine-to-flow cycle, public untyped `Value` bridge, duplicate snapshot model, hidden snapshot payload, SDK/CLI/transport adoption, or Phase-3 exit claim. |
+| `handbook_flow::resolve` / `resolve_with_contract` -> `resolver::build_packet_result` | Add a separate Flow grounding path that accepts only the selected typed engine grounding result. | Existing resolver inputs/results remain unchanged and do not acquire a required snapshot or Resolution field. |
+| `compile_pipeline_stage*` -> `assemble_documents` -> `load_repo_relative_document` -> `filter_scoped_blocks` | Add a separate pipeline inclusion path driven by an exact namespaced shared engine Resolution input. | Existing `work_level` behavior remains replayable while the new path is proved; it is never a fallback for a refusal on the new path. |
+| v1.4 parent handoff `snapshot_refs` | Populate descriptive prior-end/start/grounding/end/delta references only after the selected capture/currentness checks pass. | Nullable/missing references remain honest; no record copies snapshot contents or becomes snapshot authority. |
+| Current CLI/compiler/SDK/Substrate seams | Future standalone CLI calls SDK composition; Substrate consumes/wraps exact crates.io SDK/library versions. | Tier 2 exact binary/JSON remains an isolated transitional bridge, not API proof or permanent fallback. |
+
+The only permitted cutover bridge is a definition-pinned, one-way mapping from
+legacy scoped metadata to the namespaced shared Resolution inclusion input. It
+must carry exact source/envelope/provenance identity and has no default. An
+unknown, stale, malformed, ambiguous, nested, or broader-than-requested
+mapping refuses. Raw `work_level` is never the final inclusion decision after
+the new path is selected.
+
+## Engine grounding and bounded delta-signal decision
+
+The HCM-3.4 `snapshot_delta` remains a relation-only, complete immutable
+observation. Its `/signals` collection remains owned by the delta and is not a
+Flow/pipeline input. The engine produces the only consumer-facing delta view:
+a bounded/redacted delta-signal summary derived from the exact selected delta,
+the exact Resolution envelope, and the exact disclosure/redaction policy.
+
+The summary is definition-bounded: the future definition fixes its ordered
+maximum cardinality, eligibility/order rule, overflow behavior, permitted
+signal metadata, and all source/provenance fields. It includes only allowed
+signal identity/classification, rule identity, bounded affected-reference or
+fingerprint data, and allowed evidence/justification refs. It excludes raw
+changes, snapshot payloads, concealed signals, and unrestricted prose. It is
+not a second delta, mutable cache, caller filter, or generic JSON bridge.
+
+`reveal_delta_signals` is reconciled by revealing that summary only. The
+future result must account exactly once for each eligible included signal and
+every omitted, redacted, unsupported, stale, excess, or Resolution-insufficient
+signal. If an unfiltered signal would rely on an unchecked currentness family,
+the engine refuses or records the typed omission required by the selected
+definition; Flow and pipeline cannot compensate by reading the raw delta.
+
+Every future grounding Projection is bounded by its exact Resolution envelope,
+definition, source pair, currentness closure, disclosure policy, and output
+budget. Byte budget remains a subordinate resource report: it cannot widen an
+envelope, turn an omission into inclusion, replace currentness, or mark a
+refusal packet ready.
+
+## Session-transition and non-promoting evidence boundary
+
+A future parent transition follows this fixed reference sequence:
+
+```text
+prior end snapshot ref
+  -> session start snapshot ref
+  -> compatible delta ref
+  -> engine grounding Projection ref
+  -> Flow/pipeline work
+  -> session end snapshot ref
+  -> final compatible delta ref
+  -> parent handoff references
+```
+
+All refs are exact ref/fingerprint pairs. Capture/currentness/compatibility
+must be rechecked before each use. Missing, partial, unstable, stale,
+redacted-only, incompatible, or otherwise refused capture is recorded with
+its truthful status and blocks any claim that a grounding projection or
+promotion decision exists. The handoff remains the normative transition
+record; snapshot and delta records remain descriptive observations.
+
+Flow and pipeline may emit a typed evidence boundary containing exact evidence
+refs/fingerprints, refusal/omission status, and separately named local versus
+parent dimensions. It is deliberately non-promoting: no local success,
+advisory score, packet-ready result, pipeline completion, or handoff presence
+implies parent promotion. Both dimensions default false or unavailable when
+evidence is missing, omitted, redacted, stale, malformed, or indeterminate.
+Only the later selected gate owner can evaluate the exact policies and produce
+a parent-promotion result.
+
+## Future implementation packets and proof matrix
+
+| Packet order | Future owner/call path | Acceptance boundary | Required proof/refusal wall |
+|---|---|---|---|
+| A. Engine grounding | selected engine boundary -> private current snapshot + compatible relation-only delta -> bounded Projection and summary | Exact source/envelope/currentness/redaction/provenance closure; summary reconciles with `reveal_delta_signals`. | Positive bounded projection; missing/duplicate/substituted source; stale family/slot; incompatible/reversed delta; redaction-before-read; hidden raw signal/change; overflow; insufficient Resolution; no result on refusal. |
+| B. Flow packet adoption | future Flow path -> engine grounding -> packet-ready/refused result | Flow forwards typed provenance/omissions and does not recreate engine semantics. | Packet include/omit/refuse matrix; byte-pressure non-widening; legacy resolver replay; no raw delta or private module access. |
+| C. Pipeline inclusion | future pipeline path -> exact namespaced shared Resolution input -> scoped inclusion -> capture/handoff evidence | Inclusion is deterministic and provenance-bearing; legacy mapping, if present, is one-way and temporary. | Same-input replay; allowed/narrow/deny cases; unknown/stale/malformed/ambiguous/overbroad mapping refusal; raw-level no-fallback; existing scoped-path regression. |
+| D. Transition refs | prior end -> start -> delta -> grounding -> end -> final delta -> parent handoff | Only exact validated descriptive refs are recorded. | Valid sequence plus absent/partial/unstable/stale/incompatible/reversed/redacted failure cases; no copied snapshot; no promotion claim. |
+| E. Evidence/gate separation | Flow/pipeline evidence -> future gate owner | Local and parent dimensions are distinct and non-promoting. | Omitted/redacted/stale/not-observed/indeterminate/default-false matrix; prove local completion cannot promote a parent. |
+| F. External composition | SDK -> standalone CLI; published SDK/library -> Substrate wrapper/consumer | CLI is a thin adapter; Tier 2 is replaceable; permanent Substrate path is registry-only. | Existing `PG-SDK-01`, `PG-JSON-01`, `PG-SUB-CLI-01`, `PG-PUBLISH-01`, and `PG-SUB-RUST-01` walls separately pass. |
+
+Each future code packet needs its own implementation selector, fresh impact
+analysis before every symbol edit, and independent review. GitNexus MCP/CLI
+is unavailable in this checkout, so required impact/change-detection evidence
+must be recorded as unavailable, never GREEN, until that capability exists.
+
+## Invariants and fail-closed rules
+
+1. Private HCM-3.4 semantics remain one engine owner; no consumer duplicates
+   Snapshot Memory, delta, currentness, or redaction logic.
+2. Exact ref/fingerprint provenance, all five currentness families, typed
+   omission accounting, redaction-before-read, and `authority_effect: none`
+   survive every permitted crossing.
+3. Resolution is six-dimensional and non-widening. A byte budget, raw work
+   level, handoff, or local status cannot substitute for it.
+4. Full delta signals never route to Flow or pipeline. The bounded summary is
+   engine-derived, envelope-bound, redacted, and complete in its own accounting.
+5. Handoffs cite observations but do not make them canonical truth, gate
+   truth, dispatch authority, or a parent-promotion decision.
+6. Missing, stale, incompatible, malformed, duplicate, uncurrent,
+   insufficient, redacted-only, unsupported, or indeterminate evidence fails
+   closed with a typed refusal, omission, unavailable state, or non-promotion.
+7. Tier 2 binary/JSON is isolated and replaceable. Its presence neither proves
+   crates.io publication nor permits permanent Substrate fallback.
 
 ## Explicit non-goals
 
-- No Rust, tests, fixtures, schemas, dependency/Cargo changes, runtime
-  configuration, migration, public API selection, SDK, CLI, transport, or
-  consumer adoption.
-- No changes to HCM-3.4's immutable handoffs, source-pair proof, private
-  engine semantics, HCM-3.6, HCM-4+, HCM-5, or Phase-3 exit claims.
-- No snapshot capture from this planning task, no fabricated snapshot ref, and
-  no product behavior test result.
-- No protected-checkout mutation, remote query/fetch/push/publication, merge,
-  rebase, reset, clean, force update, or pull request.
-
-## Planning exit and stop condition
-
-This packet may close only if the user supplies the public compatibility and
-gate-operation decision above, after which a reviewed selector can freeze the
-exact implementation API/seams. Until then, the correct result is a reviewed
-v1.4 `authority_boundary` handoff with status `escalation_required`; it is not
-a completed HCM-3.5 plan and does not consume authority for implementation.
+- No Rust, test, fixture, runtime, public API, schema, configuration, Cargo,
+  dependency, SDK, CLI, Substrate, registry, publication, remote, or consumer
+  change.
+- No export or use of existing HCM-3.4 private types, no full
+  `snapshot_delta` signal routing, and no duplicate snapshot/delta model.
+- No modification to HCM-3.4 evidence, historical selectors/preflight,
+  handoff records/ledger, dispatches, HCM-3.6, HCM-4+, HCM-5, or Phase-3 exit.
+- No gate runtime, parent promotion decision, product test result, fabricated
+  snapshot reference, or adoption/completion claim.

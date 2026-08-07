@@ -563,11 +563,28 @@ separately authorized.
 
 ### `HCM-3.5` — Resolution-aware snapshot, packet, and pipeline adoption
 
-- flow consumes Context Resolution rather than only byte budgets;
-- flow produces Resolution-aware snapshot grounding projections rather than loading comprehensive snapshots into every session;
-- pipeline scoped inclusion consumes namespaced shared semantics;
-- handoffs reference session start/end snapshots and deltas;
-- gates distinguish local completion from parent promotion readiness.
+- freeze a greenfield typed `handbook-engine` -> `handbook-flow` ->
+  `handbook-pipeline` owner/call-path cutover; existing Flow/pipeline callers
+  are regression evidence, not a legacy compatibility constraint;
+- have Flow consume a bounded Resolution Projection and typed omissions rather
+  than byte budgets or comprehensive snapshots; byte budget remains a
+  subordinate resource constraint;
+- keep HCM-3.4 `snapshot_delta` relation-only and have engine produce a
+  bounded/redacted delta-signal summary reconciled with
+  `reveal_delta_signals`; Flow and pipeline never directly read full signals;
+- have pipeline scoped inclusion consume a namespaced shared Resolution input;
+  any temporary `work_level` mapping is one-way, exact, provenance-bearing,
+  and fail-closed;
+- have parent handoffs reference prior-end/start/grounding/end/delta records
+  after capture/currentness validation, without copying snapshot content or
+  granting authority;
+- preserve a typed non-promoting evidence boundary: local completion and
+  parent-promotion eligibility are separately fingerprinted, default false on
+  missing, omitted, redacted, stale, or indeterminate evidence, and await the
+  selected gate runtime owner;
+- plan a standalone Handbook CLI over the future SDK/library and exact
+  crates.io Substrate consumption/wrapping. Tier 2 binary/JSON remains
+  transitional until the independent published real-seam replacement proof.
 
 ### `HCM-3.6` — Project posture resolution and recommendation loop
 

@@ -254,6 +254,39 @@ implementation, which supplies bounded first-party proof for `PG-INTAKE-01`,
 `PG-INTAKE-02`, and `PG-CHARTER-01` without a generic claim. It grants no
 implementation authority for HCM-2.3.
 
+### HCM-3.5 future adoption proof boundary
+
+The CLEAN-admitted HCM-3.5 continuation is documentation-only. It closes no
+`PG-SNAP-*`, `PG-HANDOFF-02`, `PG-GATE-01`, `PG-PUBLISH-01`,
+`PG-SUB-CLI-01`, or `PG-SUB-RUST-01` gate. A future implementation may claim
+the intended adoption only after one complete proof matrix establishes all of
+the following:
+
+- exact engine-owned current snapshot/compatible relation-only delta binding,
+  five-family currentness, redaction-before-read, bounded Resolution
+  Projection, typed omissions, and a bounded/redacted delta-signal summary
+  reconciled to `reveal_delta_signals` without full-signal routing;
+- Flow packet success and every refusal preserve source/envelope/projection
+  provenance, keep byte budget subordinate to Resolution, and leave existing
+  resolver behavior unchanged on its retained path;
+- pipeline uses the namespaced shared Resolution inclusion path, proves a
+  declared legacy mapping only while transitional, and refuses unknown,
+  stale, malformed, ambiguous, overbroad, or raw-level fallback input;
+- each parent transition proves prior-end/start/grounding/end/delta references
+  after capture/currentness validation, while partial/unstable/incompatible
+  capture stays honest and cannot establish a promotion claim;
+- local completion and parent-promotion evidence remain separately
+  fingerprinted, fail closed on omitted/redacted/stale/indeterminate evidence,
+  and cannot be inferred from Flow or pipeline success; and
+- standalone CLI/SDK composition, Tier 2 bridge behavior, crates.io
+  publication, and current-tip Substrate real-seam adoption each meet their
+  existing separate proof gates. Documentation planning does not substitute
+  for any of them.
+
+GitNexus MCP/CLI/index is unavailable for this planning subject. Future code
+selection must record required impact/change evidence as unavailable rather
+than GREEN until the capability is available and produces the required result.
+
 ## Greenfield deletion gates
 
 Temporary scaffolding may be introduced only when a row is added here first.

@@ -739,6 +739,36 @@ Divergence is not automatically failure. A durable handoff, escalation, decision
 
 Every normalized change identifies family, stable path/record key, change kind, and before/after value fingerprints. The delta binds the exact drift-rule catalog resolved from the endpoint policies or explicitly admitted by their comparison contract. It evaluates every catalog rule exactly once in catalog order as matched, not matched, or not applicable; every matched evaluation produces exactly one unique signal and every signal maps back to exactly one matched catalog rule. Missing, duplicate, stale, refused, or caller-skipped evaluation fails closed. Every signal cites its stable ID, exact rule ref/fingerprint, matching changes, evidence refs, and optional durable justification refs. No free-form explanation changes deterministic classification. `delta_fingerprint` covers both exact snapshot inputs, the comparison contract, drift catalog, compared/excluded families, normalized changes, complete rule evaluations, signals, and justification refs except itself.
 
+### Bounded delta-signal summary
+
+HCM-3.5 preserves `SnapshotDelta` as the complete immutable relation between
+two compatible observations. It does not expose its complete `signals` set to
+Flow, pipeline, a packet, or a handoff consumer. The future engine grounding
+operation instead derives one bounded, redacted delta-signal summary from the
+exact selected delta and the exact Resolution envelope before any consumer
+reads it.
+
+The future summary is a Projection input, not a second delta or a caller-made
+filter. Its definition pins an ordered maximum cardinality, eligible signal
+kinds, exact source delta fingerprint, target envelope, disclosure/redaction
+policy, omission accounting, and a deterministic overflow disposition. Each
+included item carries only the signal identity/classification, exact rule
+identity, bounded affected-reference/fingerprint information, and allowed
+durable justification/evidence references. It excludes raw normalized changes,
+snapshot payloads, concealed signals, unrestricted explanation text, and any
+pointer whose source disposition does not allow disclosure. Redaction,
+insufficient Resolution, stale currentness, unsupported rule, or excess
+eligible signals yields a typed omission or refusal according to the exact
+definition; it never widens the summary or silently substitutes the complete
+delta.
+
+The snapshot-grounding rule named `reveal_delta_signals` therefore has one
+future HCM-3.5 meaning: reveal this engine-produced bounded summary, with its
+typed omissions and provenance, rather than the relation-only delta's raw
+`/signals` collection. A future implementation must keep that correspondence
+one-to-one and prove it; this documentation decision selects neither an API
+signature nor a new schema.
+
 ### Resolution-aware snapshot projection
 
 A snapshot may be comprehensive, but an agent must not automatically receive all of it.
@@ -799,6 +829,13 @@ A projection can prove only what it exposes and observes.
 - A local task can close without claiming that its parent feature or phase is complete.
 - A gate must distinguish local completion from promotion readiness.
 - An external dock declares the Resolution envelope under which it collected evidence.
+
+HCM-3.5 may carry typed local-evidence status and the exact refs/fingerprints
+needed for later gate evaluation, but it cannot evaluate a gate, infer a
+promotion result from packet/pipeline success, or convert omission into local
+completion. Until the selected `handbook-contracts` runtime owner exists,
+local completion and parent-promotion eligibility are independently
+unavailable/non-promoting outcomes.
 
 ## Contract membrane semantics
 

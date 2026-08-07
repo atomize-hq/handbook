@@ -13,9 +13,13 @@ the separately reviewed private Projection source-pair completion landed at
 `cc6d84926e6435c3960af86e5927a18991dd04fd` with parent closeout
 `1a10bfd59e8433fa344dd2baa4880b4b87c7f8f6`. Those commits establish only the
 private engine boundary and its fixed proof; they do not make Flow, pipeline,
-handoff, gate, SDK, CLI, transport, or public adoption automatic. HCM-3.5 is
-selected only for a documentation-and-planning outcome until an explicit
-public compatibility decision selects any implementation surface.
+handoff, gate, SDK, CLI, transport, or public adoption automatic. The
+CLEAN-admitted HCM-3.5 continuation now freezes a future-only documentation
+plan: `handbook-engine` owns the typed grounding and bounded delta-signal
+summary; `handbook-flow` owns packet adoption; `handbook-pipeline` owns
+namespaced shared inclusion; and local completion stays non-promoting. This
+is not an implementation, public API, schema, package, registry, SDK, CLI,
+Substrate, or consumer-adoption claim.
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 
