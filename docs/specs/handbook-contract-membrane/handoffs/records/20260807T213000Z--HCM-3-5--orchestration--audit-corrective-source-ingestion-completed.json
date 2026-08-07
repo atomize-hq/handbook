@@ -1,0 +1,431 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260807T213000Z--HCM-3-5--orchestration--audit-corrective-source-ingestion-completed",
+  "created_at_utc": "2026-08-07T21:30:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "HCM-3.5-audit-corrective-source-ingestion-negative-proof-and-replayable-closeout",
+  "orchestration_id": "handbook-hcm-3-5-audit-corrective-implementation-20260807",
+  "source_handoff_ids": [
+    "20260807T181740Z--HCM-3-5--orchestration--p1-p4-transition-materialization-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fddfa-610b-7512-b591-654ba4f5130a"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-07T21:30:00Z",
+    "evidence_ref": "Three different-fresh local review runs completed; the final complete-subject review returned CLEAN before either closeout artifact was created."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm35-ac-discovery-20260807",
+      "dispatch_id": "20260807T205600Z--HCM-3-5--audit-corrective-complete-subject-discovery",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T205600Z--HCM-3-5--audit-corrective-complete-subject-discovery.json",
+      "dispatch_fingerprint": "sha256:3dc44c3a28a35b60b9105de00267a7bae62eff5d09a4e41833efdd7df97abe42",
+      "role": "review",
+      "agent_id": "/root/hcm35_discovery_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:acd3f52b4ba8c32f66a9880c5c0cdf916d6de0c874b38453177a2a9cdb7c0ef4",
+      "result_subject_fingerprint": "sha256:acd3f52b4ba8c32f66a9880c5c0cdf916d6de0c874b38453177a2a9cdb7c0ef4",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM35-AC-DISC-001",
+        "HCM35-AC-DISC-002",
+        "HCM35-AC-DISC-003",
+        "HCM35-AC-DISC-004"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T205550Z--audit-corrective-source-ingestion-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-source-impact.md"
+      ]
+    },
+    {
+      "run_id": "hcm35-ac-closure-20260807",
+      "dispatch_id": "20260807T211546Z--HCM-3-5--audit-corrective-remediation-closure",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T211546Z--HCM-3-5--audit-corrective-remediation-closure.json",
+      "dispatch_fingerprint": "sha256:a43ec225d70e2165f0ba8ac4a3b2469cb526e71f538b129e4e5b01dafaf6e97f",
+      "role": "review",
+      "agent_id": "/root/hcm35_closure_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:5a719a4d9cc8c696b90dea9bb7cca04259e3258c719af885711ec3d93eebdc12",
+      "result_subject_fingerprint": "sha256:5a719a4d9cc8c696b90dea9bb7cca04259e3258c719af885711ec3d93eebdc12",
+      "review_round": 2,
+      "predecessor_run_id": "hcm35-ac-discovery-20260807",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [
+        "HCM35-AC-DISC-001",
+        "HCM35-AC-DISC-002",
+        "HCM35-AC-DISC-003",
+        "HCM35-AC-DISC-004"
+      ],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T211546Z--HCM-3-5--audit-corrective-remediation-closure.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-proof-matrix.md"
+      ]
+    },
+    {
+      "run_id": "hcm35-ac-final-closeout-20260807",
+      "dispatch_id": "20260807T212217Z--HCM-3-5--audit-corrective-final-closeout-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T212217Z--HCM-3-5--audit-corrective-final-closeout-review.json",
+      "dispatch_fingerprint": "sha256:ff2bfefa157ed7de0e14574e03120a42f7190228b667fc45c3da8f25c4a34f88",
+      "role": "review",
+      "agent_id": "/root/hcm35_final_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "source-driven-development",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:04af7c8ce36c63c8928b6be058803cdc6b2f20d4d4964d21b8a65291c4101bf7",
+      "result_subject_fingerprint": "sha256:04af7c8ce36c63c8928b6be058803cdc6b2f20d4d4964d21b8a65291c4101bf7",
+      "review_round": 3,
+      "predecessor_run_id": "hcm35-ac-closure-20260807",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T212217Z--HCM-3-5--audit-corrective-final-closeout-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-proof-matrix.md"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-07T21:22:17Z",
+    "dispatch_count": 3,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:814850cd500f14304711d745fe0c940ba3b140ffbe923415542d5c9c45cf8c64"
+    ],
+    "aggregate_fingerprint": "sha256:1ee37081de9e5300bc81a6eefdd8a91044c0a53770968ddcea50b29508f5ad04"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm35-ac-consolidated-p2-remediation-20260807",
+      "finding_run_id": "hcm35-ac-discovery-20260807",
+      "owner": "parent_orchestrator",
+      "delegated_run_id": null,
+      "re_review_run_id": "hcm35-ac-closure-20260807",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:5a719a4d9cc8c696b90dea9bb7cca04259e3258c719af885711ec3d93eebdc12",
+      "evidence_refs": [
+        "HCM35-AC-DISC-001",
+        "HCM35-AC-DISC-002",
+        "HCM35-AC-DISC-003",
+        "HCM35-AC-DISC-004",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-proof-matrix.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T211546Z--HCM-3-5--audit-corrective-remediation-closure.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "50b16e30b6b5ffd1d3b12d54f395b673c38359f2",
+    "subject_fingerprint": "sha256:04af7c8ce36c63c8928b6be058803cdc6b2f20d4d4964d21b8a65291c4101bf7",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T212217Z--HCM-3-5--audit-corrective-final-closeout-review.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T205550Z--audit-corrective-source-ingestion-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-source-impact.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-proof-matrix.md",
+      "git:50b16e30b6b5ffd1d3b12d54f395b673c38359f2"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 audit-corrective source-ingestion closeout",
+    "scope_horizon": "the complete original P1-P4 HCM-3.5 final code path plus the authorized fail-closed source-ingestion correction and prospective v1.4 lineage",
+    "detail_resolution": "a private shared bounded regular-file/non-symlink reader, duplicate-key-safe schema JSON parsing, existing typed P1 and P4 refusal surfaces, and public negative proof",
+    "temporal_horizon": "new corrective parent only; the terminal historical parent is source context and remains byte-for-byte unchanged",
+    "authority_horizon": "only the exact corrective surface and local target CAS are consumed; no P5/P6, later HCM, transport/schema, Flow/pipeline, remote, publication, or protected-checkout authority is implied",
+    "memory_horizon": "the immutable historical completed record, selector, all three corrective dispatches, review outcomes, causal budget, and final 54-path manifest remain replay-critical",
+    "validation_horizon": "final CLEAN preceded primary commit; this record/ledger is mechanical closeout followed only by local validation and expected-old CAS"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Correct HCM-3.5 source ingestion without rewriting historical evidence: fail closed P1/P4 source admission, prove negative public outcomes, and establish a new replayable v1.4 corrective closeout.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T205550Z--audit-corrective-source-ingestion-selector.md",
+      "sections": [
+        "entire audit-finding admission selector and complete final-review subject"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "live corrective cadence and delegation requirements"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "v1.4 handoff and ledger closeout requirements"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "P1/P2 finding closure requirements"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 50b16e30b6b5ffd1d3b12d54f395b673c38359f2",
+    "head": "50b16e30b6b5ffd1d3b12d54f395b673c38359f2",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260807T213000Z--HCM-3-5--orchestration--audit-corrective-source-ingestion-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Bound the assigned worktree, expected-old target commit/tree, required ancestor, and protected-checkout prohibition before any implementation.",
+    "Preserved the historical P1-P4 record byte-for-byte and treated it only as source context; this new corrective parent neither resumes, rewrites, nor supersedes that terminal parent.",
+    "Consolidated every valid P2 discovery finding into one parent-owned remediation: strict bounded regular-file/non-symlink source ingestion, duplicate-key rejection, typed-only P1/P4 failures, and the required negative proof.",
+    "Ran fresh discovery, different-fresh delta closure, and different-fresh 54-path final-closeout review through schema-valid v1.4 dispatches sharing one causal budget; the final review was CLEAN with zero unresolved P1/P2.",
+    "Committed the exact reviewed primary state before creating this separate record and ledger entry; no remote or protected checkout was accessed."
+  ],
+  "deliverables": [
+    {
+      "path": "crates/engine/src/definition_identity.rs",
+      "status": "completed",
+      "summary": "Private shared bounded strict source adapter reusing canonical repository access and SourceByteBudget."
+    },
+    {
+      "path": "crates/engine/src/grounding.rs",
+      "status": "completed",
+      "summary": "P1 routes live source reads and JSON parsing through fail-closed bounded ingestion and verifies typed no-output refusals."
+    },
+    {
+      "path": "crates/engine/src/grounding_transition.rs",
+      "status": "completed",
+      "summary": "P4 routes every materialization source through the same bounded parser path and returns only InvalidSource on invalid input."
+    },
+    {
+      "path": "crates/engine/src/snapshot_memory/mod.rs",
+      "status": "completed",
+      "summary": "Shared HCM-3.5 snapshot JSON parsing rejects duplicate keys."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T212217Z--HCM-3-5--audit-corrective-final-closeout-review.json",
+      "status": "completed",
+      "summary": "Replayable 54-path complete final-review manifest and CLEAN closeout review contract."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T213000Z--HCM-3-5--orchestration--audit-corrective-source-ingestion-completed.json",
+      "status": "completed",
+      "summary": "New independent v1.4 corrective completion record."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.5-AC-D1",
+      "summary": "Use one narrow private bounded-source adapter for both P1 and P4 rather than widening a public API or adding a second parser policy.",
+      "authority_effect": "Consumes only the permitted engine source-ingestion surface and retains existing public typed failure variants.",
+      "refs": [
+        "crates/engine/src/definition_identity.rs",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T205550Z--audit-corrective-source-ingestion-selector.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-3.5-AC-D2",
+      "summary": "Satisfy the historical-lineage finding prospectively with a separate corrective v1.4 parent and never alter or supersede the historical completed parent.",
+      "authority_effect": "Preserves historical records and bounds this parent to new local dispatch, review, record, ledger, and CAS evidence.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260807T181740Z--HCM-3-5--orchestration--p1-p4-transition-materialization-completed.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T212217Z--HCM-3-5--audit-corrective-final-closeout-review.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM35-AC-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm35-ac-discovery-20260807",
+      "summary": "P1/P4 accepted unsafe source file types and had no per-operation byte budget.",
+      "evidence_refs": [
+        "crates/engine/src/definition_identity.rs",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-proof-matrix.md"
+      ]
+    },
+    {
+      "finding_id": "HCM35-AC-DISC-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm35-ac-discovery-20260807",
+      "summary": "Live HCM-3.5 JSON source paths bypassed duplicate-key-safe schema parsing.",
+      "evidence_refs": [
+        "crates/engine/src/grounding.rs",
+        "crates/engine/src/grounding_transition.rs",
+        "crates/engine/src/snapshot_memory/mod.rs"
+      ]
+    },
+    {
+      "finding_id": "HCM35-AC-DISC-003",
+      "classification": "proof_gap",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm35-ac-discovery-20260807",
+      "summary": "The required malformed, mismatched, reversed, stale, partial, tampered, duplicate-key, oversized, and symlinked negative source proof was missing.",
+      "evidence_refs": [
+        "crates/engine/src/grounding.rs",
+        "crates/engine/src/grounding_transition.rs",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T211126Z--audit-corrective-source-ingestion-proof-matrix.md"
+      ]
+    },
+    {
+      "finding_id": "HCM35-AC-DISC-004",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm35-ac-discovery-20260807",
+      "summary": "The immutable historical completion record had no replayable delegated-review lineage; this distinct corrective parent establishes prospective v1.4 evidence without editing history.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260807T181740Z--HCM-3-5--orchestration--p1-p4-transition-materialization-completed.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T205600Z--HCM-3-5--audit-corrective-complete-subject-discovery.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T212217Z--HCM-3-5--audit-corrective-final-closeout-review.json"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "assigned-worktree / target / ancestry / protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Assigned detached worktree was at expected target 38097b69d1f1c5b1ab857e4252a442f45834bae6/tree 53d172cebcb20d43f9a01298ea14df436efef485 with required ancestor 1a10bfd59e8433fa344dd2baa4880b4b87c7f8f6; protected checkout was not inspected or mutated."
+    },
+    {
+      "command": "cargo fmt --all -- --check",
+      "status": "passed",
+      "evidence_ref": "Passed after the corrective primary state was complete."
+    },
+    {
+      "command": "focused public P1/P4 source-refusal matrix",
+      "status": "passed",
+      "evidence_ref": "Both fail-closed matrix tests and the public hcm_3_5_grounding opaque-reference integration test passed with no usable result/reference and no raw-source disclosure."
+    },
+    {
+      "command": "cargo check -p handbook-engine",
+      "status": "passed",
+      "evidence_ref": "Passed locally."
+    },
+    {
+      "command": "cargo test -p handbook-engine --lib",
+      "status": "passed",
+      "evidence_ref": "201 passed, 1 ignored, 157.97 seconds; the command timeout exceeded the observed 139.50-second historical runtime."
+    },
+    {
+      "command": "offline v1.4 dispatch validation and final-manifest replay",
+      "status": "passed",
+      "evidence_ref": "All three dispatches passed local schema validation. Closure and final --verify-dispatch replays passed on the primary state; discovery replayed exactly as 49 expected-old objects plus its admitted selector, with aggregate sha256:acd3f52b4ba8c32f66a9880c5c0cdf916d6de0c874b38453177a2a9cdb7c0ef4. Final complete-subject manifest is sha256:04af7c8ce36c63c8928b6be058803cdc6b2f20d4d4964d21b8a65291c4101bf7."
+    },
+    {
+      "command": "handoff record / ledger schema validation and orchestration self-tests",
+      "status": "passed",
+      "evidence_ref": "Local offline schema validation and both available validator self-tests passed before closeout commit."
+    },
+    {
+      "command": "GitNexus upstream impact and detect_changes",
+      "status": "not_run",
+      "evidence_ref": "UNAVAILABLE / NOT GREEN: neither local GitNexus MCP nor .gitnexus/run.cjs/index exists. Scoped diff, static source/caller inventory, and final-review manifest replay were used without treating unavailable graph evidence as green."
+    },
+    {
+      "command": "historical Packet 0 global validator",
+      "status": "not_run",
+      "evidence_ref": "Historical global-validator contradiction remains not-green/unavailable and is not represented as ordinary full-validator GREEN."
+    }
+  ],
+  "pack_updates": [],
+  "resume": {
+    "execution_target": "none",
+    "objective": "The bounded HCM-3.5 audit-corrective packet is completed; no same-slice work remains under this grant.",
+    "condition": "none",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T213000Z--HCM-3-5--orchestration--audit-corrective-source-ingestion-completed.json",
+        "sections": [
+          "entire completed corrective parent record"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T212217Z--HCM-3-5--audit-corrective-final-closeout-review.json",
+        "sections": [
+          "complete final-review subject manifest and CLEAN contract"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not rewrite or retrospectively repair the terminal historical HCM-3.5 parent or its evidence.",
+      "Do not infer P5/P6, HCM-3.6+, HCM-4+, HCM-5, transport/schema/template/validator, Flow/pipeline, resolver/compiler, SDK, CLI, Substrate, gate-runtime, protected-checkout, remote, publication, merge, rebase, reset, or clean authority."
+    ],
+    "acceptance_criteria": [],
+    "stop_conditions": [
+      "A new explicit user-authorized packet is required for any further work.",
+      "No remote or protected-checkout access is authorized."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "Completed a separate local-only HCM-3.5 audit-corrective v1.4 parent. It preserves historical records, makes P1/P4 source ingestion fail closed, proves negative outcomes, and records discovery, closure, and complete-subject final CLEAN review before expected-old local CAS."
+}
