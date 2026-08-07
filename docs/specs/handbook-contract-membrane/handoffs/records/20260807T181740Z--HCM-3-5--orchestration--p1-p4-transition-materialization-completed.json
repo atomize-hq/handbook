@@ -1,0 +1,268 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260807T181740Z--HCM-3-5--orchestration--p1-p4-transition-materialization-completed",
+  "created_at_utc": "2026-08-07T18:17:40Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "HCM-3.5-P1-engine-grounding-bounded-delta",
+  "orchestration_id": "handbook-hcm-3-5-continuation-implementation-20260807",
+  "source_handoff_ids": [
+    "20260807T144015Z--HCM-3-5--orchestration--p1-grounding-authority-boundary"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fdcd7-31ae-7881-8502-1b173d751c93"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-07T18:17:40Z",
+    "evidence_ref": "A different-fresh local P4 closure reviewer completed a final CLEAN review before this mechanical closeout."
+  },
+  "delegated_runs": [],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-07T18:17:40Z",
+    "dispatch_count": 0,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [],
+    "aggregate_fingerprint": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "authority_continuations": [
+    {
+      "extension_id": "hcm-3-5-p1-p4-user-authorized-continuation-20260807",
+      "grant_fingerprint": "sha256:f5fb20977fd6dad67ece2a8fd47f685de067b8cbf25cee9edd9c772e8a242d2e",
+      "predecessor_handoff_id": "20260807T144015Z--HCM-3-5--orchestration--p1-grounding-authority-boundary",
+      "selector_run_id": "user-authorized-HCM-3-5-P1-implementation-admission-recovery-20260807",
+      "baseline_commit": "925262b062cb6e7c3898db74f20d84772e46af1e",
+      "baseline_tree": "162353b534342b8535c0f3fe16f28a0f67301939",
+      "slots": [
+        {
+          "review_slot": "authority_admission",
+          "cycle_ids": [
+            "HCM-3.5-P1-P4"
+          ],
+          "dispatch_ids": [
+            "user-authorized-HCM-3-5-P1-implementation-admission-recovery-20260807"
+          ]
+        }
+      ],
+      "actual_changed_paths": [
+        ".handbook/grounding/hcm-3.5/v1",
+        "crates/engine/src/grounding.rs",
+        "crates/engine/src/grounding_transition.rs",
+        "crates/engine/src/lib.rs",
+        "crates/engine/src/snapshot_memory/mod.rs",
+        "crates/engine/src/snapshot_memory/tests.rs",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T180000Z--p4-transition-materialization-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T180000Z--p4-transition-materialization-proof-matrix.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T180000Z--p4-transition-materialization-source-impact.md"
+      ],
+      "changed_symbols": [
+        {
+          "symbol": "derive_grounding_source_pair",
+          "risk": "LOW"
+        }
+      ],
+      "observed_risk": "CRITICAL",
+      "status": "consumed"
+    }
+  ],
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "4cd42d3c38635af941b56edcaef5c208e3df8219",
+    "subject_fingerprint": "sha256:526c558bc17096be161ad50aa29b3aa1422f390eb719fdc9f2626330a26e430f",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T180000Z--p4-transition-materialization-proof-matrix.md",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T141500Z--engine-grounding-bounded-delta-implementation-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T180000Z--p4-transition-materialization-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T180000Z--p4-transition-materialization-source-impact.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T180000Z--p4-transition-materialization-proof-matrix.md",
+      "git:935c939f6970feb81362e2100aabd1229e4a42b8"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 P1-P4 implementation and local transition-materialization completion",
+    "scope_horizon": "engine grounding, typed Flow adoption, deterministic pipeline inclusion, and existing-capacity descriptive transition references only",
+    "detail_resolution": "P1 froze and implemented engine-owned grounding with a bounded summary; P2 and P3 adopted only the typed result; P4 materialized the E0-to-S1-to-grounding-delta-to-projection-to-E2-to-session-delta route and pinned the resulting six non-promoting descriptive references.",
+    "temporal_horizon": "P1 through P4 are complete after the different-fresh P4 closure CLEAN; this record and ledger are mechanical closeout only.",
+    "authority_horizon": "The direct user grant is recorded in the authority-admission slot. No P5/P6, HCM-3.6+, schema/template/validator, consumer promotion, SDK, CLI, Substrate, gate runtime, protected checkout, remote, or publication authority is implied.",
+    "memory_horizon": "The direct same-parent source handoff, dispatch nonce, P1-P4 commits, P4 source-bound references, and closure evidence remain required context.",
+    "validation_horizon": "Only local mechanical closeout and expected-old target CAS remain; no review follows CLEAN."
+  },
+  "snapshot_refs": {
+    "capture_status": "captured",
+    "prior_end_snapshot_ref": "handbook.hcm-3-5.transition-snapshot.prior-end@1.0.0#sha256:5a6d11b725b396fdcc01c4e675fadd46f65508b5cf83d0adafe85d78143666d4",
+    "session_start_snapshot_ref": "handbook.hcm-3-5.transition-snapshot.session-start@1.0.0#sha256:beac8e254d680875a8b40c4f8aab8c23f440d4ae806b3af0fcd9cf298b465f50",
+    "grounding_delta_ref": "handbook.grounding.delta.prior-end-to-session-start@1.0.0#sha256:839ba6ea4cc3728f02a4615ab1f2e38381d9f0f1448e919f96a05a85b4ab9438",
+    "grounding_projection_ref": "handbook.hcm-3-5.grounding-projection@1.0.0#sha256:fa8a0901be95c278cebcee276e7aeba92fd64d1f19afaeb766657d40cd49392b",
+    "session_end_snapshot_ref": "handbook.hcm-3-5.transition-snapshot.session-end@1.0.0#sha256:c1c20406831464451de0d6dd95bef69099132e15cd7448b54cedc86bb7e25179",
+    "session_delta_ref": "handbook.grounding.delta.session-start-to-session-end@1.0.0#sha256:049365356ec18ad1525b3621e9b0214e4a0adcdb4b2fc72993b7d548d4d8df27"
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Complete HCM-3.5 P1-P4 with engine-owned grounding, bounded non-promoting evidence, typed downstream adoption, and exact descriptive transition references without changing schema or beginning P5/P6.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T144015Z--HCM-3-5--orchestration--p1-grounding-authority-boundary.json",
+      "sections": [
+        "entire same-parent source handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T180000Z--p4-transition-materialization-selector.md",
+      "sections": [
+        "entire P4 selector and direct-grant admission"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/handoff-record.v1.4.schema.json",
+      "sections": [
+        "snapshot_refs and authority_continuations"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 935c939f6970feb81362e2100aabd1229e4a42b8",
+    "head": "935c939f6970feb81362e2100aabd1229e4a42b8",
+    "dirty": true,
+    "changed_paths": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260807T181740Z--HCM-3-5--orchestration--p1-p4-transition-materialization-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Bound the assigned local worktree, source base 925262b062cb6e7c3898db74f20d84772e46af1e/tree 162353b534342b8535c0f3fe16f28a0f67301939, required ancestor, target expected-old, and protected-worktree prohibition before implementation.",
+    "Used the direct user grant and dispatch nonce in the authority-admission slot, naming the same-parent P1 authority-boundary handoff in both source_handoff_ids and supersedes without rewriting any predecessor.",
+    "Completed P1 at 8ea607a60b3d1669a968332610c56635b0116a27, P2 at 5be17663a7c03a1463e74aa5a1074fcc425f7e1e, P3 at e32897aed28cae16cc93777ca8d9d585fc645830, and corrected P4 transition materialization at 935c939f6970feb81362e2100aabd1229e4a42b8.",
+    "P4 preserves legacy current-source handling first, validates the complete prior-end to session-start to grounding-delta to projection to session-end to session-delta route privately, and records only pinned descriptive references in existing nullable capacity; it does not copy snapshots, promote evidence, or create a public consumer API.",
+    "Local cached GitNexus analysis, upstream impact, staged detection, focused engine tests, and different-fresh P4 closure CLEAN completed before this mechanical closeout. GitNexus-generated AGENTS.md and CLAUDE.md refreshes remain unstaged, uncommitted, undiscarded, and outside all allowlists."
+  ],
+  "deliverables": [
+    {
+      "path": "crates/engine/src/grounding.rs",
+      "status": "completed",
+      "summary": "P1 engine grounding and bounded-summary result, with P4 replay coverage."
+    },
+    {
+      "path": "crates/engine/src/grounding_transition.rs",
+      "status": "completed",
+      "summary": "Private P4 transition materializer returning six exact descriptive references."
+    },
+    {
+      "path": ".handbook/grounding/hcm-3.5/v1",
+      "status": "completed",
+      "summary": "Tracked P4 deterministic test/proof source package for the full transition route; it is not relabelled as an external live capture."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T180000Z--p4-transition-materialization-selector.md",
+      "status": "completed",
+      "summary": "P4 admission selector, corrected producer ownership, and direct-grant linkage."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T180000Z--p4-transition-materialization-proof-matrix.md",
+      "status": "completed",
+      "summary": "Transition route, source-bound reference, and non-promotion proof matrix."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.5-P4-D1",
+      "summary": "P4 owns the narrow repository transition-capture/projection materialization path; its tracked deterministic source route is proof input only and is not a fabricated or externally live capture.",
+      "authority_effect": "Consumes the direct P1-P4 grant only; no schema, template, validator, promotion, P5/P6, or later-program authority is created.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T180000Z--p4-transition-materialization-selector.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-3.5-P4-D2",
+      "summary": "The six snapshot_refs are exact fingerprints of tracked P4 transition artifacts and describe the validated route without copying snapshot contents or asserting evidence promotion.",
+      "authority_effect": "Uses only the existing nullable snapshot_refs capacity.",
+      "refs": [
+        ".handbook/grounding/hcm-3.5/v1/grounding-projection.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T180000Z--p4-transition-materialization-proof-matrix.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "assigned checkout/source/target/ancestor/protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Source base and target expected-old were separately bound; the protected checkout was never mutated."
+    },
+    {
+      "command": "local cached GitNexus analyze, upstream impact, and staged detect_changes",
+      "status": "passed",
+      "evidence_ref": "derive_grounding_source_pair was LOW before edit; retained build_snapshot and derive_snapshot_delta were CRITICAL and remained unmodified. P4 staged detection reported LOW risk and zero affected processes."
+    },
+    {
+      "command": "cargo check -p handbook-engine and focused engine grounding/transition tests",
+      "status": "passed",
+      "evidence_ref": "Focused grounding and transition route tests passed, including independent locked replay of the tracked P4 source route."
+    },
+    {
+      "command": "cargo test -p handbook-engine --lib",
+      "status": "not_run",
+      "evidence_ref": "A full-library attempt exceeded the local command time limit without a reported test failure; it is not claimed GREEN."
+    },
+    {
+      "command": "different-fresh P4 closure review",
+      "status": "passed",
+      "evidence_ref": "Closure reviewer returned CLEAN against 4cd42d3c38635af941b56edcaef5c208e3df8219 before the P4 commit. No review follows CLEAN."
+    },
+    {
+      "command": "handoff validator or gate runtime",
+      "status": "not_run",
+      "evidence_ref": "Explicitly outside this task's authorized scope."
+    }
+  ],
+  "pack_updates": [],
+  "resume": {
+    "execution_target": "none",
+    "objective": "HCM-3.5 P1-P4 is complete; P5/P6 remain external stop boundaries.",
+    "condition": "none",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T181740Z--HCM-3-5--orchestration--p1-p4-transition-materialization-completed.json",
+        "sections": [
+          "entire completed handoff"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not infer P5/P6, HCM-3.6+, HCM-4+, HCM-5, promotion, schema/template/validator, SDK, CLI, Substrate, gate-runtime, protected-checkout, remote, or publication authority from this completed record.",
+      "Do not rewrite P0, the P1 authority-boundary record, their dispatches, or ledger history."
+    ],
+    "acceptance_criteria": [],
+    "stop_conditions": [
+      "A later user-authorized packet is required for any work beyond this completion.",
+      "Do not fetch, pull, push, merge, rebase, reset, clean, or access a remote."
+    ]
+  },
+  "supersedes": [
+    "20260807T144015Z--HCM-3-5--orchestration--p1-grounding-authority-boundary"
+  ],
+  "chat_summary": "Completed same-parent HCM-3.5 P1-P4 recovery. The direct user grant is recorded in the authority-admission slot; P4 materializes and pins exact descriptive transition references from a tracked deterministic proof route without snapshot copying or promotion. P5/P6 remain external stop boundaries."
+}
