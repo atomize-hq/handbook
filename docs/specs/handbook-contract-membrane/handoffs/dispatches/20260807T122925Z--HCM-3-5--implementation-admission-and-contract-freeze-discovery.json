@@ -1,0 +1,272 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260807T122925Z--HCM-3-5--implementation-admission-and-contract-freeze-discovery",
+  "created_at_utc": "2026-08-07T12:29:25Z",
+  "source_handoff_ids": [
+    "20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-5-implementation-20260807",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "implementation-admission-and-contract-freeze",
+  "subject_fingerprint": "sha256:bfe8f074316d38e64bf73eb735a8b151029a915d0006e25ccbdb0e71cbeabca2",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-5-implementation-admission-and-contract-freeze-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-07T12:24:44Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-5-implementation-admission-and-contract-freeze",
+        "packet_ids": [
+          "implementation-admission-and-contract-freeze"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md"
+      }
+    ],
+    "fingerprint": "sha256:4b3e48aa449b0666cc292b04b912e6d9c58eb75797570119920b1af416796291"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:30e9ff7747e830b54d4030b812edd9f6f5b24a2f40233b4b61769be0f0e031da",
+    "integrated_outcome_id": "hcm-3-5-implementation-admission-and-contract-freeze",
+    "outcome_registry_fingerprint": "sha256:4b3e48aa449b0666cc292b04b912e6d9c58eb75797570119920b1af416796291",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-5-implementation-admission-discovery-convergence",
+    "completed_at_utc": "2026-08-07T12:29:20Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the complete Packet 0 documentation subject, the HCM-3.4 source-pair handoff, the frozen HCM-3.5 plan, and the current engine/Flow/pipeline/handoff/SDK/CLI/Substrate seams; confirm the selected boundary is documentation only.",
+        "evidence_ref": "The subject defines only the intended grounding operation/value boundary, refusal/no-fallback algebra, summary/evidence rules, and Packet 1 ceiling; no code-bearing, schema, Cargo, publication, or remote path is present."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Independently inspect the private HCM-3.4 pair, ContextResolutionEnvelope, retained resolver/compiler callers, nullable handoff snapshot refs, and absent SDK/Substrate seams as read-only current-source context.",
+        "evidence_ref": "The selected future engine facade leaves private Snapshot Memory/Projection unexported, retains Flow/pipeline/compiler/CLI paths as regressions only, and admits no consumer or fixture change."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 manifest before dispatch.",
+        "evidence_ref": "Subject sha256:bfe8f074316d38e64bf73eb735a8b151029a915d0006e25ccbdb0e71cbeabca2; registry sha256:4b3e48aa449b0666cc292b04b912e6d9c58eb75797570119920b1af416796291; budget sha256:30e9ff7747e830b54d4030b812edd9f6f5b24a2f40233b4b61769be0f0e031da."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Run git diff --check over the complete Packet 0 documentation subject.",
+        "evidence_ref": "PASS before dispatch."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Decode each subject document as UTF-8 and scan Markdown fences and trailing whitespace.",
+        "evidence_ref": "All selected text is UTF-8 with final newlines, balanced fences, and no trailing whitespace before dispatch."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/00-README.md",
+        "sha256": "e9822450121f7f871ee1940b8057d337dbe175365dc0994d9558a1d10da71a65"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+        "sha256": "61066a6be0c126898152e09f4312dbaf6ded4df4d564984720aab7275f76109c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "sha256": "b741d4883cb3ae960b0938ef0226a87e6ab7afc75e0d49a9692edfa9a54d1941"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "2b74b5465a7584e0cdca87ef3228f000a8f651305befcdc16352749290e85f42"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "9dcc9d4d5200c0b3b1c743a76fa7bf59b82d2d602c6c960f2156f2aac6b61723"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "9ddbfe9439edb1f977a2fe2cfdbbaab8073f20a73dc4def7fc76a4b6fa2435e3"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "8dfad276928208952c2cb628a2163feccc71c086e4ebfce1bfc88b86eb521ba4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+        "sha256": "187a5fa9429953ffba2c1f3cc38862447db427a354ba4ec54b11d6d0eb036992"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/SPEC.md",
+        "sha256": "84e28c689c2fb9504ef5b14a186732b6ad6bf6da53f6506e40b1cada9345dc91"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.4/decision/20260806T183318Z--private-projection-source-pair-implementation-selector.md",
+        "sha256": "bb1bfe9909b07eeec14571644a42c99df66e78a7565f09588c4cebb603ca83c9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+        "sha256": "14dcd211147ee2dc73e5e62b200b0dc8af05a0da6ac4b6183c917df084823527"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T000000Z--resolution-aware-adoption-planning-continuation-selector.md",
+        "sha256": "d23ad635f533f486a1c0130e5c7edb20bc156b6c2d0ed2e2b5077a49a7234235"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md",
+        "sha256": "e69e6d84f7db7efe4fe983a9950125f14979fb4ff88d0b483cd083560c3ffca6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T000000Z--resolution-aware-adoption-planning-continuation-proof.md",
+        "sha256": "bfc242bc92268b949a706aa35d9d6dcea61172196982529483c14a3f6dc0d0f9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T122444Z--implementation-admission-and-typed-boundary-preflight.md",
+        "sha256": "512055b7c8f2c1d35e96a6db1070761f523b2d1ed10e31f029cfd0f09eeb342c"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md",
+        "sha256": "3a1f6cc7683ce6c31c279a1a435fff0d2b197ca2c864e9e99c4cfaa844efada0"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/todo.md",
+        "sha256": "26477411f605c44b015207f66a3a81f727b8f4aa2a8fa97354f238fc1d7c6917"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:bfe8f074316d38e64bf73eb735a8b151029a915d0006e25ccbdb0e71cbeabca2"
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 Packet 0 implementation-admission discovery review",
+    "scope_horizon": "the complete documentation-only typed-boundary freeze and its exact first engine-packet ceiling",
+    "detail_resolution": "grounding operation/value visibility, refusal algebra, no-cycle owner direction, bounded delta summary, non-promoting evidence, no-fallback cutover, source seams, and P1 revalidation",
+    "temporal_horizon": "one fresh complete-subject discovery review before the reviewed local primary documentation commit",
+    "authority_horizon": "Packet 0 documentation and review only; no code, public export, schema, dependency, package, consumer, gate runtime, remote, or protected-checkout mutation",
+    "memory_horizon": "the human-approved local HCM-3.5 planning tip is a transparent exception after validator semantics contradiction; HCM-3.4 source-pair truth remains immutable",
+    "validation_horizon": "if and only if a valid P1/P2 is found, one parent remediation and one different-fresh delta closure; no review after CLEAN"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md",
+      "sections": [
+        "entire decision"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+      "sections": [
+        "Packet 0 — implementation admission and typed-boundary contract freeze",
+        "Frozen future owner boundary",
+        "Explicit non-goals"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "v1.4 causal review cadence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "local-only closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "priority and closure rules"
+      ]
+    }
+  ],
+  "repo_truth": "The selected baseline is the detached human-approved local HCM-3.5 planning tip 0aa11d2851caee63f373c19c394925ec70473a8a, tree ebbddc19ad869f108e021ac31674fd5b5efde4ba, with required ancestor 1a10bfd59e8433fa344dd2baa4880b4b87c7f8f6. HCM-3.4 Snapshot Memory/Projection remains private and relation-only. Current Flow/pipeline/compiler/CLI paths are regression baselines; no SDK crate or Substrate checkout exists. GitNexus MCP, CLI, and index are unavailable and are not GREEN.",
+  "allowed_scope": [
+    "Read the complete manifest and independently inspect the named current source seams to decide whether the Packet 0 contract freezes every required owner/typed boundary without creating code or public implementation scope.",
+    "Return a unique HCM35-P0-DISC identifier for each valid P1/P2 within the exact documentation subject; identify the precise contradiction, why it affects the frozen Packet 1 boundary, and the minimal in-scope parent remediation.",
+    "Inventory P3/P4 only under 09-review-finding-inventory.md. Do not choose a new product or implementation direction."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a dispatch, write a handoff or ledger, delegate, or change the reviewed subject.",
+    "Do not implement Rust, runtime behavior, a public API/export, schema/configuration, Cargo/dependency, SDK/CLI/Substrate, consumer, package/registry, or gate-policy/runtime work.",
+    "Do not access the protected checkout or remote state, fetch, pull, push, publish, merge, rebase, reset, clean, force-update, or update a ref."
+  ],
+  "tasks": [
+    "Verify the exact engine operation, public type posture/private fields, grounded/refused/error algebra, and acyclic dependency direction against the current engine, Flow, pipeline, compiler, CLI, handoff, SDK, and Substrate seams.",
+    "Verify DeltaSignalSummary reconciles reveal_delta_signals while preserving relation-only snapshot_delta, redaction-before-read, definition/envelope bounds, full signal accounting, and the no-raw-/signals rule.",
+    "Verify the greenfield no-fallback cutover, non-promoting GroundingEvidence, deferred handbook-contracts gate owner, future SDK/CLI/Substrate composition, P1 source/test/proof ceiling, and P1 revalidation are explicit and non-contradictory.",
+    "Return CLEAN only if no P1/P2 remains for subject sha256:bfe8f074316d38e64bf73eb735a8b151029a915d0006e25ccbdb0e71cbeabca2."
+  ],
+  "contracts_and_gates": [
+    "This is the single complete-subject discovery review for Packet 0. A valid P1/P2 requires one consolidated parent remediation and exactly one different-fresh delta closure; no new general discovery and no review after CLEAN.",
+    "No typed-path refusal may fall back to raw levels, legacy resolver/compiler semantics, snapshot/delta re-read, or raw signals. The reviewer may not authorize an exception.",
+    "GitNexus absence must be reported unavailable, never GREEN; code-symbol impact is deferred to Packet 1 before any existing code symbol edit."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair for a valid P1/P2. Return BLOCKED if faithful review requires product authority, code/runtime scope, remote action, protected-checkout access, or a mandatory unavailable capability.",
+    "Report any baseline/tree/manifest/cadence/authority/protected-path drift to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}

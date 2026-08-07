@@ -7,19 +7,22 @@ authorize HCM-3.3. The separately selected bounded HCM-3.3 private/internal
 implementation below is completed locally and supersedes only that HCM-3.3
 deferral; HCM-0.11, HCM-3.4+, and every listed expansion remain unauthorized.
 
-**HCM-3.4 and HCM-3.5 planning correction:** HCM-3.4's private Snapshot
+**HCM-3.4 and HCM-3.5 implementation-admission correction:** HCM-3.4's private Snapshot
 Memory primitives landed at `ca765cc7a45206392dc1997adaa924d4a8ecaeb3`, and
 the separately reviewed private Projection source-pair completion landed at
 `cc6d84926e6435c3960af86e5927a18991dd04fd` with parent closeout
 `1a10bfd59e8433fa344dd2baa4880b4b87c7f8f6`. Those commits establish only the
 private engine boundary and its fixed proof; they do not make Flow, pipeline,
 handoff, gate, SDK, CLI, transport, or public adoption automatic. The
-CLEAN-admitted HCM-3.5 continuation now freezes a future-only documentation
-plan: `handbook-engine` owns the typed grounding and bounded delta-signal
-summary; `handbook-flow` owns packet adoption; `handbook-pipeline` owns
-namespaced shared inclusion; and local completion stays non-promoting. This
-is not an implementation, public API, schema, package, registry, SDK, CLI,
-Substrate, or consumer-adoption claim.
+CLEAN-admitted HCM-3.5 planning landing remains future-only. The separately
+selected HCM-3.5-P0 implementation-admission record now freezes the first
+engine-owned typed grounding operation contract: `handbook-engine` owns the
+grounding result and bounded delta-signal summary; `handbook-flow` owns its
+purpose-named packet adoption; `handbook-pipeline` owns namespaced shared
+inclusion; and local completion stays non-promoting. This records the next
+packet's type boundary and proof ceiling only. It is not an implementation,
+published API, schema, package, registry, SDK, CLI, Substrate, or
+consumer-adoption claim.
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 

@@ -1,0 +1,228 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260807T124045Z--HCM-3-5--implementation-admission-and-contract-freeze-closure",
+  "created_at_utc": "2026-08-07T12:40:45Z",
+  "source_handoff_ids": [
+    "20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-5-implementation-20260807",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "api-and-interface-design",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.5",
+  "packet_id": "implementation-admission-and-contract-freeze",
+  "subject_fingerprint": "sha256:53aa11b464779eeb62819858a768d29482bba26e0f44bc8657c3e5c7c48000ff",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3-5-implementation-admission-and-contract-freeze-closure",
+    "trigger_run_ids": [
+      "/root/p0_discovery_review"
+    ],
+    "finding_refs": [
+      "HCM35-P0-DISC-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-07T12:24:44Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-5-implementation-admission-and-contract-freeze",
+        "packet_ids": [
+          "implementation-admission-and-contract-freeze"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md"
+      }
+    ],
+    "fingerprint": "sha256:4b3e48aa449b0666cc292b04b912e6d9c58eb75797570119920b1af416796291"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:30e9ff7747e830b54d4030b812edd9f6f5b24a2f40233b4b61769be0f0e031da",
+    "integrated_outcome_id": "hcm-3-5-implementation-admission-and-contract-freeze",
+    "outcome_registry_fingerprint": "sha256:4b3e48aa449b0666cc292b04b912e6d9c58eb75797570119920b1af416796291",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260807T122925Z--HCM-3-5--implementation-admission-and-contract-freeze-discovery"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-5-implementation-admission-closure-convergence",
+    "completed_at_utc": "2026-08-07T12:40:40Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the immutable discovery dispatch/verdict and HCM35-P0-DISC-001, then inspect only the exact public construction/extraction repair across the documented engine boundary.",
+        "evidence_ref": "The repair fully admits opaque reference/error/factory/accessor values and a private exact-ref resolver without changing the selected no-raw/no-reexport/no-consumer contract."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Re-inventory only the repaired public contract against the private HCM-3.4 source-pair loader and the P1 external-test ceiling.",
+        "evidence_ref": "A future engine integration test can construct typed opaque refs and inspect bounded results without private source values, raw payloads, extra public surface, or a Flow/pipeline change."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the repaired sorted repo-path-NUL-SHA256-newline-v1 closure manifest.",
+        "evidence_ref": "Subject sha256:53aa11b464779eeb62819858a768d29482bba26e0f44bc8657c3e5c7c48000ff; unchanged registry sha256:4b3e48aa449b0666cc292b04b912e6d9c58eb75797570119920b1af416796291; unchanged budget sha256:30e9ff7747e830b54d4030b812edd9f6f5b24a2f40233b4b61769be0f0e031da."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Run git diff --check over the repaired Packet 0 documentation subject.",
+        "evidence_ref": "PASS before closure dispatch."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Decode each closure-manifest entry as UTF-8 and scan Markdown fences and trailing whitespace.",
+        "evidence_ref": "All selected text is UTF-8 with final newlines, balanced fences, and no trailing whitespace before closure dispatch."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+        "sha256": "04e357c424eda4604e710453f630ac5e5d5d8795be8d7bd0e08d95de3d76dd7e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+        "sha256": "a66166d7f3081235783c09029441f38acf964697dbbaf21fc6105b582484654e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T122925Z--HCM-3-5--implementation-admission-and-contract-freeze-discovery.json",
+        "sha256": "7454a8060f91567ba36bd382f8f90213aef70d7939338a11ea04a1b86cbe7728"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md",
+        "sha256": "762fef5405dd2e7fdeff5615e4b975ca34f9b29d0ced8e3e392f60c484668df5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md",
+        "sha256": "78ba16ef63c8261597d9b4c6a6023d7be0cbc7c965754770590ad7ffcf3dd79e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T124000Z--implementation-admission-discovery-remediation.md",
+        "sha256": "204195685cf6beecac8be2141a371b1c18ca9982e68303d48634ee5144d5b405"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md",
+        "sha256": "f2e900d2ad9632a134beb3f6db3949b3eaaa49d97624d086b4a39f6cb3397c05"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:53aa11b464779eeb62819858a768d29482bba26e0f44bc8657c3e5c7c48000ff"
+  },
+  "active_resolution": {
+    "level": "HCM-3.5 Packet 0 public typed-boundary closure review",
+    "scope_horizon": "only HCM35-P0-DISC-001 and the exact documentation-only construction/extraction remediation",
+    "detail_resolution": "opaque exact refs, request factory, private engine-owned resolution, error/refusal mapping, read-only bounded result accessors, and non-promoting evidence-state closure",
+    "temporal_horizon": "one different-fresh delta closure after the one consolidated discovery remediation",
+    "authority_horizon": "the unchanged Packet 0 documentation-only owner boundary; no code, export implementation, schema, dependency, consumer, gate runtime, remote, or protected-checkout mutation",
+    "memory_horizon": "the immutable discovery dispatch and HCM35-P0-DISC-001 remediation record; no general rediscovery is permitted",
+    "validation_horizon": "CLEAN ends Packet 0 review; no further review may run"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/decision/20260807T122444Z--implementation-admission-and-typed-boundary-contract-freeze.md",
+      "sections": [
+        "entire decision and exact remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260807T122925Z--HCM-3-5--implementation-admission-and-contract-freeze-discovery.json",
+      "sections": [
+        "review cycle, subject manifest, and tasks"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/proof/20260807T124000Z--implementation-admission-discovery-remediation.md",
+      "sections": [
+        "entire consolidated remediation"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "closure review and priority rubric"
+      ]
+    }
+  ],
+  "repo_truth": "The discovery P2 established that the initial public operation did not completely admit its opaque reference/error values or the construction/extraction protocol. The remediation now freezes exactly that contract and the private engine resolver, while HCM-3.4 source data remains private and all Flow/pipeline/SDK/CLI/Substrate/gate surfaces remain unimplemented. GitNexus MCP/CLI/index is unavailable, never GREEN.",
+  "allowed_scope": [
+    "Verify only that HCM35-P0-DISC-001 is closed by the named opaque typed refs, request factory, private resolver, semantic refusal/non-semantic error division, closed public type list, and bounded read-only accessors.",
+    "Re-check the direct no-raw, no-reexport, no-fallback, non-promoting, and no-consumer consequences only insofar as this repair could regress them.",
+    "Return a new P1/P2 only if directly caused or unmasked by this repair; do not reopen discovery."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a dispatch, write a handoff or ledger, delegate, or change the reviewed subject.",
+    "Do not conduct general discovery or add code, public API/export implementation, schema/configuration, Cargo/dependency, SDK/CLI/Substrate, consumer, package/registry, or gate-policy/runtime work.",
+    "Do not access the protected checkout or remote state, fetch, pull, push, publish, merge, rebase, reset, clean, force-update, or update a ref."
+  ],
+  "tasks": [
+    "Verify HCM35-P0-DISC-001 is closed: a P1 external engine test can create only opaque exact refs, make the sole typed request, and inspect only bounded grounded/refused values without raw input or private HCM-3.4 state.",
+    "Verify exact-ref lookup remains engine private, semantic invalidity refuses rather than leaks, operation integrity errors remain payload-free, and the fixed public symbol ceiling is complete and exclusive.",
+    "Verify the repair does not create a generic JSON/map/serializer, legacy fallback, direct raw signal route, gate result, Flow/pipeline adoption, or future consumer work.",
+    "Return CLEAN only if the repaired closure subject has no carried or directly causal P1/P2."
+  ],
+  "contracts_and_gates": [
+    "This is the single different-fresh closure for HCM35-P0-DISC-001. Do not reopen discovery or run a review after CLEAN.",
+    "A P1/P2 may be returned only when directly caused or unmasked by the named repair within unchanged authority and risk; it cannot be waived.",
+    "P3/P4 may be inventoried only under the live review inventory rules."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair for a valid P1/P2. Return BLOCKED if faithful closure needs broader authority, product direction, code/runtime scope, a protected path, remote action, or a mandatory unavailable capability.",
+    "Report any manifest, cadence, protected-boundary, or authority issue to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}

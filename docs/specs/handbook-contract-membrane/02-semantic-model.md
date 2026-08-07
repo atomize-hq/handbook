@@ -766,8 +766,9 @@ The snapshot-grounding rule named `reveal_delta_signals` therefore has one
 future HCM-3.5 meaning: reveal this engine-produced bounded summary, with its
 typed omissions and provenance, rather than the relation-only delta's raw
 `/signals` collection. A future implementation must keep that correspondence
-one-to-one and prove it; this documentation decision selects neither an API
-signature nor a new schema.
+one-to-one and prove it. HCM-3.5-P0 selects the engine-library operation/value
+boundary for that implementation, but it selects neither a new schema nor a
+serialized public DTO.
 
 ### Resolution-aware snapshot projection
 
@@ -836,6 +837,14 @@ promotion result from packet/pipeline success, or convert omission into local
 completion. Until the selected `handbook-contracts` runtime owner exists,
 local completion and parent-promotion eligibility are independently
 unavailable/non-promoting outcomes.
+
+The HCM-3.5-P0 engine value representation is deliberately non-promoting:
+`GroundingEvidence` contains only exact refs/fingerprints, typed
+omissions/refusals, and two independently unavailable-or-false dimensions for
+local-closeout and parent-promotion. Its only two accessors return
+`EvidenceAvailability::{Unavailable, False}`. It has no `GateResult`, policy
+evaluator, score, or true-by-default field. Flow and pipeline may forward the
+value but may not derive either dimension.
 
 ## Contract membrane semantics
 

@@ -2829,8 +2829,9 @@ and source provenance. It cannot be recomputed by Flow or pipeline and cannot
 contain a raw signal/change/snapshot payload. The selected future definition
 must retain `reveal_delta_signals` reconciliation evidence and refuse rather
 than expose an unfiltered signal whose dependent family lacks a currentness
-check. This is a planning constraint only; it does not amend a shipped schema,
-public DTO, or runtime operation.
+check. HCM-3.5-P0 freezes this as the engine-only
+`DeltaSignalSummary` value carried by `GroundingOutcome::Grounded`; it does
+not amend a shipped schema, serialized DTO, or runtime operation.
 
 ## Snapshot projection request/result
 

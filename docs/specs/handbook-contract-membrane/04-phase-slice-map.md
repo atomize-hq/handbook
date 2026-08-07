@@ -563,6 +563,10 @@ separately authorized.
 
 ### `HCM-3.5` — Resolution-aware snapshot, packet, and pipeline adoption
 
+- P0 freezes `handbook_engine::grounding::ground_resolution` and its typed
+  request, outcome, refusal, bounded-summary, narrowed-consumer-view, and
+  non-promoting-evidence contract; P1 must implement only the listed
+  engine-private/public boundary under a fresh selector and impact proof;
 - freeze a greenfield typed `handbook-engine` -> `handbook-flow` ->
   `handbook-pipeline` owner/call-path cutover; existing Flow/pipeline callers
   are regression evidence, not a legacy compatibility constraint;

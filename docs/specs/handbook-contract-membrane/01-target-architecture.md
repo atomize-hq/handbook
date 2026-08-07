@@ -134,8 +134,10 @@ The diagram expresses allowed inward dependencies, not a requirement that every 
 
 ### HCM-3.5 future Resolution-adoption cutover
 
-HCM-3.5 freezes a future greenfield owner boundary without selecting a Rust
-signature, public DTO, schema, or implementation:
+HCM-3.5-P0 freezes a future greenfield owner boundary and the first
+implementation packet's Rust-library operation/value contract. It selects no
+schema, DTO serialization, package version, implementation, or consumer
+adoption:
 
 - `handbook-engine` remains the sole owner of snapshot/delta compatibility,
   currentness, redaction-before-read, deterministic Resolution Projection,
@@ -165,6 +167,27 @@ only during cutover; unknown, stale, malformed, ambiguous, or unapproved
 mapping refuses. The normal adoption path switches only after the complete
 HCM-3.5 proof wall; it never falls back from a typed Resolution refusal to raw
 `work_level` filtering.
+
+The first engine boundary is `handbook_engine::grounding`. Its only
+cross-crate operation is `ground_resolution(repo_root: &Path,
+GroundingRequest) -> Result<GroundingOutcome, GroundingOperationError>`.
+`GroundingRequest` carries
+an exact current-snapshot ref, exact compatible-delta ref, exact
+definition/disclosure bindings, and the public `ContextResolutionEnvelope`; it
+does not accept snapshot/delta bytes, a `serde_json::Value`, a raw signal, or a
+caller-selected field/filter list. `GroundingOutcome::{Grounded,
+Refused}` makes expected semantic refusal a typed value. The outer error is
+reserved for an operation-integrity failure that cannot be represented as a
+validated grounding decision. The `Grounded` value has private fields and
+exposes only engine-made `FlowPacketGrounding`, `SharedResolutionInclusion`,
+`DeltaSignalSummary`, provenance, omissions, and non-promoting evidence. The
+four exact-reference types have only opaque `parse_exact` factories;
+`GroundingRequest::new` and the grounded/refused/summary/evidence named
+read-only accessors are the entire public construction/extraction surface. The
+engine-private exact-ref resolver loads the refs and is not public. The
+private HCM-3.4 modules stay private; `handbook-flow` and
+`handbook-pipeline` consume those public grounding values and never import
+`snapshot_memory` or `projection`.
 
 `handbook-compiler` is retired during HCM-4.1: composition that belongs to ordinary consumers moves to `handbook-sdk`, executable-shell behavior moves to `handbook-cli`, and already-owned behavior remains in its owner crate. It may exist as bounded cutover scaffolding only until the CLI no longer depends on it; no new downstream API or permanent domain owner is added there.
 

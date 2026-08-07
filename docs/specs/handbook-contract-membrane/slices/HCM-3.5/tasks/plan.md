@@ -3,12 +3,13 @@
 ## Plan status and boundary
 
 This is an implementation-ready documentation plan for the single integrated
-outcome `hcm-3-5-resolution-aware-adoption-planning` and packet
-`HCM-3.5-P1-resolution-aware-adoption-planning`. It records the selected
-future architecture but does not authorize code, public APIs, schemas,
-dependencies, package publication, SDK/CLI/Substrate adoption, or a gate
-runtime. Each future implementation packet requires a fresh code selector,
-symbol-level impact analysis, and an independent proof/review loop.
+outcome `hcm-3-5-implementation-admission-and-contract-freeze` and Packet 0
+`HCM-3.5-P0-implementation-admission-and-contract-freeze`. It records the
+selected first engine operation/value boundary and the initial P1 ceiling; it
+does not authorize code, public APIs, schemas, dependencies, package
+publication, SDK/CLI/Substrate adoption, or a gate runtime. Packet 1 still
+requires a fresh code selector, symbol-level impact analysis, and an
+independent proof/review loop.
 
 The live prerequisite is HCM-3.4's private source-pair boundary at
 `ca765cc`/`cc6d849`. It remains private; `snapshot_delta` is relation-only.
@@ -18,29 +19,38 @@ document filtering) are current evidence seams, not APIs to extend by default.
 
 ## Frozen architecture decisions
 
-1. **Typed owner chain.** `handbook-engine` owns exact snapshot/delta binding,
+1. **Concrete typed engine boundary.** Packet 1 will add only
+   `handbook_engine::grounding::ground_resolution(repo_root: &Path,
+   GroundingRequest) -> Result<GroundingOutcome, GroundingOperationError>`.
+   `GroundingOutcome` is a grounded/refused value algebra; raw private sources
+   never cross its boundary and its fields remain private. The four opaque
+   exact-reference values have only `parse_exact` factories, `GroundingRequest`
+   has only its named five-argument factory, and grounded/refused values have
+   only named narrow read-only accessors. There is no generic JSON/Serde
+   dispatcher, top-level re-export, public schema, or transport.
+2. **Typed owner chain.** `handbook-engine` owns exact snapshot/delta binding,
    currentness, redaction-before-read, bounded Resolution Projection, and the
    bounded/redacted delta-signal summary. `handbook-flow` owns the future
    packet path consuming that result. `handbook-pipeline` owns future
    namespaced shared Resolution inclusion and transition sequencing. The
    acyclic consumers do not reimplement engine semantics.
-2. **Greenfield adoption.** New purpose-named paths leave current resolver and
+3. **Greenfield adoption.** New purpose-named paths leave current resolver and
    compiler contracts unchanged. Existing callers are regression baselines.
    The only temporary bridge is an exact one-way mapping from legacy scoped
    metadata to the namespaced inclusion input; no raw-level fallback is
    allowed after a typed-path refusal.
-3. **Bounded delta disclosure.** HCM-3.4 `snapshot_delta` keeps complete
+4. **Bounded delta disclosure.** HCM-3.4 `snapshot_delta` keeps complete
    relation semantics. Engine derives an envelope-bound, redacted,
    definition-bounded summary; `reveal_delta_signals` consumes only that
    summary, never raw `/signals`.
-4. **Descriptive transition refs.** Parent handoffs cite exact
+5. **Descriptive transition refs.** Parent handoffs cite exact
    prior-end/start/grounding/end/delta refs after validation. They do not copy
    snapshots or convert observation into authority.
-5. **Non-promoting evidence.** Flow/pipeline carry typed evidence refs,
+6. **Non-promoting evidence.** Flow/pipeline carry typed evidence refs,
    omissions, and separately named local/parent dimensions. Both are false or
    unavailable on indeterminate evidence. A future `handbook-contracts` owner
    alone evaluates gate policy and parent promotion.
-6. **External composition.** Future `handbook-sdk` composes owner operations;
+7. **External composition.** Future `handbook-sdk` composes owner operations;
    standalone Handbook CLI adapts SDK results. Substrate consumes/wraps exact
    published crates.io SDK/library versions. The Tier 2 binary/JSON bridge is
    isolated transitional transport pending independent publication and
@@ -72,17 +82,20 @@ Tier 2 binary/JSON bridge --transitional--> published real seam
 
 ### Packet 0 — implementation admission and contract freeze
 
-**Dependencies:** a new implementation selector and fresh read-only inspection
-of the HCM-3.4, Flow, pipeline, handoff, SDK, CLI, and Substrate seams.
+**Dependencies:** exact local baseline validation and fresh read-only inspection
+of the HCM-3.4, engine, Flow, pipeline, handoff, SDK, CLI, and Substrate seams.
 
-**Decision to carry forward:** choose concrete internal/public type and
-operation details without violating this plan's owner/cutover boundary. Do not
-make existing resolver/compiler request/result paths mandatory for HCM-3.5.
+**Decision frozen:** use `handbook_engine::grounding` as the only cross-crate
+engine grounding module; use `GroundingRequest` and a grounded/refused
+`GroundingOutcome` whose grounded branch exposes only the engine-created
+Flow/pipeline views, summary, provenance, omissions, and non-promoting
+evidence. Do not make existing resolver/compiler request/result paths
+mandatory for HCM-3.5.
 
 **Acceptance criteria:**
 
-- Names exact code symbols/path ceiling, compatibility posture, and no-cycle
-  dependency direction.
+- Names exact code symbols/path ceiling, visibility/refusal algebra,
+  compatibility posture, and no-cycle dependency direction.
 - Preserves relation-only `snapshot_delta`, bounded summary, and non-promoting
   gate boundary.
 - Runs upstream impact analysis before each symbol edit; GitNexus absence is
@@ -93,12 +106,15 @@ compatibility matrix, and manifest/whitespace convergence.
 
 ### Packet 1 — engine grounding and bounded delta summary
 
-**Likely owner:** `handbook-engine`, continuing the private Snapshot Memory
-and generic Projection seams.
+**Exact owner:** `handbook-engine` only. It starts at the P0 source/test/proof
+ceiling in `../SPEC.md`; Flow/pipeline code is context and regression evidence,
+not an implementation surface.
 
-**Future call path:** exact current snapshot + exact compatible relation-only
-delta + Resolution envelope -> currentness/redaction validation -> bounded
-Projection and bounded/redacted delta-signal summary -> typed result or refusal.
+**Future call path:** `GroundingRequest` exact current snapshot + exact
+compatible relation-only delta + `ContextResolutionEnvelope` ->
+private engine exact-ref resolver/currentness/redaction validation -> bounded
+Projection and bounded/redacted delta-signal summary ->
+`GroundingOutcome::{Grounded, Refused}`.
 
 **Acceptance criteria:**
 
@@ -109,6 +125,8 @@ Projection and bounded/redacted delta-signal summary -> typed result or refusal.
   the summary; reconciles it with `reveal_delta_signals`.
 - Reads no raw source payload before a redaction refusal and never emits an
   unfiltered delta signal to a consumer.
+- Does not alter `resolve`, `resolve_with_contract`, `compile_pipeline_stage*`,
+  Cargo metadata, Handoff schemas, gate policy/runtime, or a transport surface.
 
 **Verification:** positive bounded projection; absent/duplicate/substituted
 sources; stale family/slot; incompatible/reversed delta; insufficient
@@ -222,5 +240,6 @@ for another.
 - No current caller migration, compatibility promise, or unbounded legacy
   bridge; no direct raw delta signal route; no duplicate snapshot model.
 - No HCM-3.4 rewrite, HCM-3.6/HCM-4+/HCM-5 selection, gate runtime,
-  publication, remote operation, handoff/ledger record, staging, commit, or
-  ref update.
+  publication, remote operation, or ref update. Packet 0 alone may make its
+  reviewed local documentation primary and mechanical handoff/ledger closeout
+  commits; it may not alter historical records or move a ref.

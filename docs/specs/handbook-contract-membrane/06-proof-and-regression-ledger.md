@@ -262,6 +262,14 @@ The CLEAN-admitted HCM-3.5 continuation is documentation-only. It closes no
 the intended adoption only after one complete proof matrix establishes all of
 the following:
 
+HCM-3.5-P0 additionally fixes the first implementation ceiling: one
+`handbook_engine::grounding` operation must return a typed grounded/refused
+outcome; its only source inputs are exact snapshot/delta references and the
+exact Resolution/definition closure; its only delta disclosure is the
+definition-bounded summary. P1 must revalidate every named private-engine
+symbol, retained Flow/pipeline caller seam, public compatibility posture, and
+absence of SDK/CLI/Substrate/gate adoption before editing.
+
 - exact engine-owned current snapshot/compatible relation-only delta binding,
   five-family currentness, redaction-before-read, bounded Resolution
   Projection, typed omissions, and a bounded/redacted delta-signal summary

@@ -21,6 +21,9 @@
 
 ## Required documentation review work
 
+- [x] Record HCM-3.5-P0's exact `handbook_engine::grounding` operation/value
+  boundary, refusal algebra, delta-summary partition, non-promoting evidence,
+  and Packet 1 source/test/proof revalidation ceiling.
 - [ ] Review the complete HCM-3.5 documentation subject with a fresh,
   independent discovery reviewer under the reserved same-parent continuation
   cadence.
@@ -54,4 +57,5 @@
 - [ ] No HCM-3.4 rewrite, raw full-delta signal route, gate-runtime creation,
   parent-promotion result, fabricated snapshot ref, or adoption claim.
 - [ ] No historical selector/preflight, dispatch, handoff record/ledger,
-  HCM-3.6/HCM-4+/HCM-5, staging, commit, or ref update.
+  HCM-3.6/HCM-4+/HCM-5, or ref update. Packet 0 alone may create its reviewed
+  documentation dispatch, handoff/ledger records, and local closeout commits.

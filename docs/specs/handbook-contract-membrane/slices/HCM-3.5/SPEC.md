@@ -28,6 +28,146 @@ engine. No Flow, pipeline, handoff, gate, SDK, CLI, transport, or Substrate
 consumer can use those private types. That is dependency evidence, not a
 compatibility constraint or a reason to expose the existing private model.
 
+## Packet 0 — implementation admission and typed-boundary contract freeze
+
+This Packet 0 record is the only admission for the first engine-grounding code
+packet. It freezes an intended Rust-library boundary; it does not add that
+boundary to `crates/engine/src/lib.rs`, select a serialized DTO/schema, or
+authorize any source edit.
+
+### Exact future operation and visibility posture
+
+Packet 1 may add `pub mod grounding;` to `handbook-engine` and create
+`crates/engine/src/grounding.rs`. The cross-crate surface is limited to the
+following purpose-named contract:
+
+```text
+handbook_engine::grounding::ground_resolution(
+    repo_root: &std::path::Path,
+    request: GroundingRequest,
+) -> Result<GroundingOutcome, GroundingOperationError>
+```
+
+`GroundingRequest`, `GroundingOutcome`, `GroundedResolution`,
+`GroundingRefusal`, `GroundingRefusalKind`, `GroundingOmission`,
+`GroundingEvidence`, `EvidenceAvailability`, `DeltaSignalSummary`,
+`DeltaSignalSummaryEntry`, `GroundingProvenance`, `FlowPacketGrounding`,
+`SharedResolutionInclusion`, `GroundingSnapshotRef`, `GroundingDeltaRef`,
+`GroundingDefinitionRef`, `GroundingDisclosureRef`, `GroundingReferenceError`,
+and `GroundingOperationError` are public types in that module. Their fields
+are private; construction and source loading stay engine-owned. In particular:
+
+- `GroundingRequest` binds one `GroundingSnapshotRef`, one compatible
+  `GroundingDeltaRef`, exact Projection/summary/disclosure definition pairs,
+  and the public `ContextResolutionEnvelope`. It admits neither source bytes,
+  `serde_json::Value`, an unbounded selector, a raw signal, nor a caller-made
+  currentness or disclosure filter.
+- `GroundingOutcome::Grounded(GroundedResolution)` is the only successful
+  semantic result. `GroundedResolution` exposes narrow engine values for the
+  Flow packet and pipeline inclusion paths, plus typed provenance, omissions,
+  bounded summary, and non-promoting evidence. It does not expose an HCM-3.4
+  snapshot, a `SnapshotDelta`, the raw `/signals` collection, raw changes, or
+  Projection internals.
+- `GroundingOutcome::Refused(GroundingRefusal)` represents every expected
+  fail-closed condition: missing/duplicate/substituted pair, incompatible or
+  reversed delta, stale binding/currentness family or slot, insufficient
+  Resolution, required redaction, unsupported definition, unaccounted signal,
+  or overflow that the exact definition requires to refuse. The outer
+  `GroundingOperationError` is reserved for a non-semantic operation-integrity
+  failure; it carries no source payload and is never converted into a grounded
+  value.
+- `snapshot_memory` and `projection` remain private modules. Packet 1 may add
+  only `pub(crate)` adapters needed by `grounding`; it must not re-export their
+  existing record, delta, request, result, or evaluation types. No top-level
+  `pub use` or generic dispatcher is selected.
+
+The public construction and extraction posture is also fixed, so the later
+engine integration test needs no private HCM-3.4 value or raw input. Each
+`Grounding*Ref::parse_exact(&str) -> Result<Self, GroundingReferenceError>`
+accepts only an opaque canonical identity token; it never reads source data or
+accepts a path, bytes, JSON, signal, filter, currentness tuple, or payload.
+`GroundingRequest::new(snapshot_ref, delta_ref, definition_ref,
+disclosure_ref, envelope) -> Self` is the only request factory. The engine's
+private `GroundingSourceResolver` takes `repo_root` plus those validated refs,
+loads the exact current/delta and definitions, and maps identity/binding/
+semantic failures to `GroundingOutcome::Refused`; it is neither public nor a
+second operation. `GroundingOperationError` is limited to operation-integrity
+failure after a typed request has been made and has no source payload.
+
+`GroundedResolution` has only the named read-only accessors
+`flow_packet_grounding`, `shared_resolution_inclusion`, `delta_signal_summary`,
+`provenance`, `omissions`, and `evidence`. `GroundingRefusal` has only `kind`,
+`omissions`, and `provenance`. `DeltaSignalSummary` exposes bounded entries,
+omission accounting, and provenance through named accessors; each
+`DeltaSignalSummaryEntry` exposes only the previously allowed identity,
+classification, rule, bounded affected-reference/fingerprint, and durable
+evidence/justification values. `GroundingEvidence` exposes only
+`local_closeout` and `parent_promotion` as
+`EvidenceAvailability::{Unavailable, False}`. The consumer-view values are
+opaque inputs to later purpose-named Flow/pipeline operations, not maps,
+generic serializers, or raw-source extractors.
+
+The dependency direction is fixed:
+
+```text
+handbook-flow     -> handbook-engine::grounding
+handbook-pipeline -> handbook-engine::grounding
+handbook-engine   -/-> handbook-flow, handbook-pipeline, handbook-sdk, CLI, or Substrate
+```
+
+`handbook-flow` later consumes `FlowPacketGrounding` through a new
+purpose-named packet operation and returns its own ready/refused packet type.
+`handbook-pipeline` later consumes only `SharedResolutionInclusion` through a
+new purpose-named inclusion operation. Neither call is an overload, option,
+or mandatory field on `resolve`, `resolve_with_contract`,
+`compile_pipeline_stage*`, `PipelineCompileResult`, or `ResolverResult`.
+
+### Bounded delta summary and evidence algebra
+
+`DeltaSignalSummary` is the engine-produced reconciliation of
+`reveal_delta_signals`. Its exact definition fixes maximum cardinality,
+eligible kinds, stable order, overflow action, permitted source metadata, and
+the included/omitted partition. Each source signal is accounted for once as
+included, redacted, out-of-Resolution, unsupported, overflowed, or refused;
+the result preserves exact source-delta/envelope/definition/disclosure
+provenance. Included entries contain only signal ID/kind, exact rule pair,
+bounded affected-reference or fingerprint data, and allowed evidence or
+justification references. They never carry raw changes, snapshots, concealed
+signals, unrestricted prose, or generic JSON.
+
+`GroundingEvidence` has distinct `local_closeout` and `parent_promotion`
+dimensions. Both are `unavailable` or `false` when any input is missing,
+omitted, redacted, stale, malformed, or indeterminate. It has no gate policy,
+score, `GateResult`, or promote operation. Only the later
+`handbook-contracts` gate owner can evaluate those dimensions.
+
+### Greenfield and Packet 1 ceiling
+
+No typed-path refusal may fall back to `handbook_flow::resolve`,
+`resolve_with_contract`, `compile_pipeline_stage*`, or raw L0-L3 filtering.
+Those retained paths and their CLI/compiler callers are regression baselines
+only. Flow/pipeline may surface an engine refusal as their own typed refusal,
+but they may not re-read snapshot/delta data, synthesize a summary, or select
+a legacy/raw path.
+
+Packet 1 is limited to this initial source/test/proof ceiling:
+
+| Category | Exact ceiling |
+|---|---|
+| Engine implementation | `crates/engine/src/lib.rs` (`pub mod grounding` only), new `crates/engine/src/grounding.rs`, narrow `pub(crate)` adapters in `crates/engine/src/projection.rs` and `crates/engine/src/snapshot_memory/{mod.rs,record.rs,delta.rs}` only |
+| Public symbols | `ground_resolution`; `GroundingRequest::new`; `GroundingSnapshotRef::parse_exact`, `GroundingDeltaRef::parse_exact`, `GroundingDefinitionRef::parse_exact`, and `GroundingDisclosureRef::parse_exact`; named `GroundedResolution`, `GroundingRefusal`, `DeltaSignalSummary`, and `GroundingEvidence` read-only accessors only; `GroundingRequest`, `GroundingOutcome`, `GroundedResolution`, `GroundingRefusal`, `GroundingRefusalKind`, `GroundingOmission`, `GroundingEvidence`, `EvidenceAvailability`, `DeltaSignalSummary`, `DeltaSignalSummaryEntry`, `GroundingProvenance`, `FlowPacketGrounding`, `SharedResolutionInclusion`, `GroundingSnapshotRef`, `GroundingDeltaRef`, `GroundingDefinitionRef`, `GroundingDisclosureRef`, `GroundingReferenceError`, and `GroundingOperationError` only |
+| Tests and fixtures | New `crates/engine/tests/hcm_3_5_grounding.rs`; reuse the HCM-3.4 fixed source-pair fixture without changing it unless a fresh selector grants a separately reviewed fixture delta |
+| Documentation/proof | One P1 selector, exact source/impact record, proof matrix, immutable dispatches, parent handoff, and rebuilt ledger only |
+| Explicitly excluded | Flow/pipeline/CLI/compiler/SDK/Substrate code, Cargo/dependency/version/schema/config changes, handoff schema changes, gate runtime, public JSON/Serde transport, package publication, and remote work |
+
+Packet 1 admission must revalidate the exact base/tree/authority and all five
+currentness families; the HCM-3.4 private modules and source-pair semantics;
+the public `ContextResolutionEnvelope` seam; every retained Flow/pipeline and
+CLI/compiler caller; Handoff `snapshot_refs` nullability; the absence of an
+SDK crate, Substrate checkout, gate runtime, and raw `/signals` consumer; and
+fresh upstream impact for every existing symbol it would edit. A HIGH or
+CRITICAL impact result stops for explicit review before any edit.
+
 ## Frozen future owner boundary
 
 | Future owner | Owns | May consume | Must not own or do |
@@ -169,6 +309,8 @@ must be recorded as unavailable, never GREEN, until that capability exists.
 - No export or use of existing HCM-3.4 private types, no full
   `snapshot_delta` signal routing, and no duplicate snapshot/delta model.
 - No modification to HCM-3.4 evidence, historical selectors/preflight,
-  handoff records/ledger, dispatches, HCM-3.6, HCM-4+, HCM-5, or Phase-3 exit.
+  handoff records/ledger, or dispatches; Packet 0 may create only its new
+  review dispatch and mechanical local-closeout handoff/ledger records. No
+  HCM-3.6, HCM-4+, HCM-5, or Phase-3 exit is selected.
 - No gate runtime, parent promotion decision, product test result, fabricated
   snapshot reference, or adoption/completion claim.
