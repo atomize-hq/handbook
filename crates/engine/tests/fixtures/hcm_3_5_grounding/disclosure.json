@@ -1,0 +1,13 @@
+{
+  "schema_id": "handbook.grounding-disclosure-policy",
+  "schema_version": "1.0",
+  "disclosure_ref": "handbook.grounding.disclosure.hcm-3-5-p1@1.0.0",
+  "redacted_signal_kinds": [],
+  "permitted_evidence_ref_prefixes": [
+    "evidence.",
+    "decision."
+  ],
+  "permitted_justification_ref_prefixes": [
+    "decision."
+  ]
+}
