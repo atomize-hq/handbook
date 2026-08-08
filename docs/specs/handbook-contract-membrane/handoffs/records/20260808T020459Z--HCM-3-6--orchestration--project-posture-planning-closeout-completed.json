@@ -1,0 +1,335 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260808T020459Z--HCM-3-6--orchestration--project-posture-planning-closeout-completed",
+  "created_at_utc": "2026-08-08T02:04:59Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-PLANNING",
+  "orchestration_id": "handbook-hcm-3-6-planning-20260807",
+  "source_handoff_ids": [
+    "20260808T011000Z--HCM-3-6--orchestration--project-posture-planning-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fdf18-15c3-7a83-a48f-1c1870099776"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-08T02:04:59Z",
+    "evidence_ref": "The preserved HCM-3.6 retry was a fresh built-in complete-subject review and returned CLEAN with zero P1/P2/P3/P4 findings. This mechanical successor adds no dispatch or review after CLEAN."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "/root/hcm36_discovery_review",
+      "dispatch_id": "20260808T001000Z--HCM-3-6--project-posture-planning-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T001000Z--HCM-3-6--project-posture-planning-discovery-review.json",
+      "dispatch_fingerprint": "sha256:e5034304107026eb0182826ae40f812697f4ad709d2a30ebd055824ad7cb81cd",
+      "role": "review",
+      "agent_id": "/root/hcm36_discovery_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:aa342c9422c8ddbee1c37bc60fbac074e697b03dfba73d866fd510ad76d853a9",
+      "result_subject_fingerprint": null,
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "interrupted",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T001000Z--HCM-3-6--project-posture-planning-discovery-review.json",
+        "Host-level interruption occurred before this reviewer returned a verdict or finding."
+      ]
+    },
+    {
+      "run_id": "/root/hcm36_discovery_retry",
+      "dispatch_id": "20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry.json",
+      "dispatch_fingerprint": "sha256:b3590f8c9d340c260c021c10c00aea6dc5fae5348089b9a8ee7b5a249777998b",
+      "role": "review",
+      "agent_id": "/root/hcm36_discovery_retry",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf",
+      "result_subject_fingerprint": "sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf",
+      "review_round": 2,
+      "predecessor_run_id": "/root/hcm36_discovery_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry.json",
+        "Fresh reviewer /root/hcm36_discovery_retry returned CLEAN with zero P1/P2/P3/P4 findings or advisories."
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-08T02:04:59Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:3038ca64d6f3fb05637bf608985e169c9a4afd60c378ab552b92f9d189a82c8c"
+    ],
+    "aggregate_fingerprint": "sha256:9876f04e033a8ed8121a571f0af09914e212131fe00f867bb3246ebb8350c20f"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "abda9de954ea65c1f065d2426087be5c8f98a24d",
+    "subject_fingerprint": "sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/todo.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260807T000000Z--hcm-3-6-project-posture-planning-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260807T000000Z--hcm-3-6-project-posture-planning-source-impact.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260807T000000Z--hcm-3-6-project-posture-planning-proof-matrix.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry.json",
+      "git:abda9de954ea65c1f065d2426087be5c8f98a24d"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 planning clean-closeout resumption",
+    "scope_horizon": "the committed six-file HCM-3.6 documentation plan and its existing two-dispatch review population only",
+    "detail_resolution": "The reviewed planning subject remains unchanged: handbook-engine owns the future posture kernel, evaluation, and guarded Charter transition; adapters remain typed/non-authoritative; HCM-5 remains the future gate owner; no runtime work is authorized.",
+    "temporal_horizon": "The primary reviewed state is abda9de954ea65c1f065d2426087be5c8f98a24d. This successor records only the mechanical completed handoff and deterministic ledger closeout; it creates no post-CLEAN review cycle.",
+    "authority_horizon": "The explicit human governance exception accepts only the two immutable lineage validator failures for this HCM-3.6 closeout. It does not authorize rewriting history, dispatches, validator/tooling/schema/template changes, product work, protected-checkout mutation, remote contact, or publication beyond the specified local CAS.",
+    "memory_horizon": "The HCM-3.4 and HCM-3.5 completed records remain read-only predecessor evidence. The interrupted discovery dispatch, retry CLEAN result, and their actual validator failures remain replay-critical and are retained without alteration.",
+    "validation_horizon": "review.terminal is CLEAN with zero P1/P2. The ordinary validator and targeted parent replay remain non-passing only for the two named immutable lineage conditions; their real output is recorded as a human_governance_exception, never as a validator pass."
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Close the already-reviewed HCM-3.6 documentation-only project-posture planning packet locally, preserving the exact six-file subject, the final retry CLEAN review, the complete parent dispatch population, and the two immutable validator failures accepted by explicit human governance exception.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260807T000000Z--hcm-3-6-project-posture-planning-selector.md",
+      "sections": ["entire selector"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "sections": ["entire planning authority"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": ["Phase 5 — Fresh Review / Remediation Loop", "Phase 8 — True-Stop Handoff"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": ["Review lineage", "Two-commit true-stop closeout"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T011000Z--HCM-3-6--orchestration--project-posture-planning-completed.json",
+      "sections": ["entire immutable escalation record"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+      "sections": ["read-only predecessor evidence"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T213000Z--HCM-3-5--orchestration--audit-corrective-source-ingestion-completed.json",
+      "sections": ["read-only predecessor evidence"]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at abda9de954ea65c1f065d2426087be5c8f98a24d",
+    "head": "abda9de954ea65c1f065d2426087be5c8f98a24d",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260808T020459Z--HCM-3-6--orchestration--project-posture-planning-closeout-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Resumed only after task 019fdf18-15c3-7a83-a48f-1c1870099776 and host local were bound to nonce 221d0b32349fbbed8a959b79e7e4a2132fc547e533bc911a80db4a97c657f965.",
+    "Verified safe resumption HEAD/tree 93670bc12868f49bc0a71479fc50936a958c2cdb / ab2eafbf6ec74cfb1329aac3eb7bdb89c6ce42e6, expected-old local target 1256e724a2b7da6b6250f57d6f63fced1e2cf949 / ad5bac4904912e9a52b23ac862414deb79613154, required ancestry, unchanged local tracking baseline, clean task worktree, and protected checkout hashes before the closeout edit.",
+    "Confirmed the fresh retry was the complete-subject terminal review: verdict CLEAN, P1=0, P2=0, no P3/P4, and no review after CLEAN.",
+    "Preserved the reviewed primary abda9de954ea65c1f065d2426087be5c8f98a24d, its exact six-file allowlist, the HCM-3.4/HCM-3.5 predecessor boundaries, both immutable HCM-3.6 dispatches, and the preceding escalation handoff without modification.",
+    "Applied the explicit human governance exception only to exceptional acceptance of the two actual immutable lineage validator failures; no validator/tooling/record/dispatch/template repair and no product implementation occurred."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "status": "completed",
+      "summary": "Reviewed primary planning contract retained unchanged."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md",
+      "status": "completed",
+      "summary": "Reviewed future packet and proof plan retained unchanged."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T020459Z--HCM-3-6--orchestration--project-posture-planning-closeout-completed.json",
+      "status": "completed",
+      "summary": "Completed v1.4 successor handoff with direct dual-link to the immutable escalation record and explicit governance-exception evidence."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "status": "completed",
+      "summary": "Deterministic index rebuilt from canonical records."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.6-PLAN-D1",
+      "summary": "The frozen HCM-3.6 subject remains documentation-only: handbook-engine is the sole future posture semantic owner and no product, public, schema, dependency, adapter, gate, or promotion work is authorized.",
+      "authority_effect": "No runtime or policy authority is added by this closeout.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-3.6-CLOSEOUT-D2",
+      "summary": "human_governance_exception: the human operator expressly accepts exceptional completion despite exactly two immutable actual validator failures: 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN; and the HCM-3.6 discovery cycle: review cycle 'hcm-3-6-project-posture-planning-discovery' has inconsistent kind, trigger, findings, or subject.",
+      "authority_effect": "Acceptance-only exception for this HCM-3.6 closeout. It neither changes nor passes the validator, rewrites historical evidence, waives a P1/P2, permits post-CLEAN review, or broadens any product/public/remote authority.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260808T011000Z--HCM-3-6--orchestration--project-posture-planning-completed.json",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "safe-resumption / local-target / ancestry / local-tracking / worktree / protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Task HEAD/tree was 93670bc12868f49bc0a71479fc50936a958c2cdb / ab2eafbf6ec74cfb1329aac3eb7bdb89c6ce42e6; local target and local origin/feat/handbook-contract-membrane baseline remained 1256e724a2b7da6b6250f57d6f63fced1e2cf949 / ad5bac4904912e9a52b23ac862414deb79613154; all protected checkouts were clean and hashed before editing."
+    },
+    {
+      "command": "v1.4 retry dispatch verification",
+      "status": "passed",
+      "evidence_ref": "validate_handoffs.py --verify-dispatch accepted the retry and replayed sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf."
+    },
+    {
+      "command": "npx --no-install gitnexus analyze",
+      "status": "passed",
+      "evidence_ref": "Local analysis completed with 22120 nodes, 47162 edges, 475 clusters, and 300 flows. It changed only generated AGENTS.md/CLAUDE.md count hunks, which were restored byte-for-byte. FTS/BM25 was unavailable and is not represented as GREEN."
+    },
+    {
+      "command": "npx --no-install gitnexus detect-changes --scope staged --repo C:/Users/spmcc/.codex/worktrees/452a/handbook",
+      "status": "passed",
+      "evidence_ref": "The scoped mechanical closeout diff reported No changes detected: the two JSON/JSONL artifacts map to no executable symbol or process."
+    },
+    {
+      "command": "npx --no-install gitnexus detect-changes --scope compare --base-ref main --repo C:/Users/spmcc/.codex/worktrees/452a/handbook",
+      "status": "passed",
+      "evidence_ref": "The comparison succeeded and reported historical divergence from main: 1559 files, 11794 symbols, 266 affected processes, risk level critical. This is baseline context, not a source change in the two-path HCM-3.6 mechanical closeout. FTS/BM25 remains unavailable."
+    },
+    {
+      "command": "ordinary v1.4 record/ledger validator",
+      "status": "failed",
+      "evidence_ref": "human_governance_exception actual output: handoff validation failed: 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN"
+    },
+    {
+      "command": "targeted HCM-3.6 v1.4 parent semantic replay",
+      "status": "failed",
+      "evidence_ref": "human_governance_exception actual output: C:\\Users\\spmcc\\.codex\\worktrees\\452a\\handbook\\docs\\specs\\handbook-contract-membrane\\handoffs\\records\\20260808T020459Z--HCM-3-6--orchestration--project-posture-planning-closeout-completed.json: review cycle 'hcm-3-6-project-posture-planning-discovery' has inconsistent kind, trigger, findings, or subject"
+    },
+    {
+      "command": "deterministic ledger rebuild",
+      "status": "passed",
+      "evidence_ref": "The canonical record-order reconstruction byte-matched ledger.jsonl after adding this one successor entry."
+    },
+    {
+      "command": "v1.4 historical admission self-test",
+      "status": "passed",
+      "evidence_ref": "The self-test passed its immutable v1.0/v1.1 and legacy/current corpus admission and exact-ledger negative cases."
+    },
+    {
+      "command": "v1.4 orchestration-contract self-test",
+      "status": "passed",
+      "evidence_ref": "The self-test passed direct same-parent succession, terminal completion, CLEAN cadence, review/remediation, lineage, and mechanical-closeout checks."
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence_ref": "The permitted successor handoff and deterministic ledger closeout diff contains no whitespace errors."
+    },
+    {
+      "command": "product/runtime tests",
+      "status": "not_run",
+      "evidence_ref": "Prohibited by the HCM-3.6 planning-only authority; this closeout changes no runtime or test surface."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T020459Z--HCM-3-6--orchestration--project-posture-planning-closeout-completed.json",
+      "sections": ["entire completed successor record"],
+      "reason": "Mechanical true-stop closeout that directly supersedes the escalation recommendation without changing its immutable facts.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": ["deterministic ledger entry"],
+      "reason": "Required rebuildable index update for the completed successor record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "none",
+    "condition": "none",
+    "must_read": [],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "No new HCM-3.6 implementation authority follows from this planning closeout."
+    ],
+    "acceptance_criteria": [
+      "The planning subject is review-terminal CLEAN with no unresolved P1/P2 and exceptional acceptance records the two actual immutable validator failures without claiming they passed."
+    ],
+    "stop_conditions": [
+      "A future change requires separately selected authority."
+    ]
+  },
+  "supersedes": [
+    "20260808T011000Z--HCM-3-6--orchestration--project-posture-planning-completed"
+  ],
+  "chat_summary": "HCM-3.6 planning is terminal-review CLEAN (P1=0, P2=0) at the existing reviewed primary abda9de954ea65c1f065d2426087be5c8f98a24d. This completed successor preserves the actual ordinary-validator and targeted-lineage failures as a narrowly authorized human_governance_exception; no validator result is represented as passed unless its command actually passed."
+}
