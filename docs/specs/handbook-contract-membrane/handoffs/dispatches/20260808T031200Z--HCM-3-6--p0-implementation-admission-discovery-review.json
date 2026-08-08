@@ -1,0 +1,207 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260808T031200Z--HCM-3-6--p0-implementation-admission-discovery-review",
+  "created_at_utc": "2026-08-08T03:12:00Z",
+  "source_handoff_ids": [
+    "20260808T020459Z--HCM-3-6--orchestration--project-posture-planning-closeout-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-implementation-20260807",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-P0-IMPLEMENTATION-ADMISSION",
+  "subject_fingerprint": "sha256:4ddc7eec16f3eb79af909416b2306f5f9b2c9b31bf25087edea8d58d351cc3a1",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-6-p0-implementation-admission-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-08T03:11:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-project-posture-implementation-admission",
+        "packet_ids": [
+          "HCM-3.6-P0-IMPLEMENTATION-ADMISSION"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T030700Z--hcm-3-6-project-posture-implementation-admission-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:5e4b54b06f41e9eaf8c8f8d5085492018a9844fb9658fcfd61004a9ef1502cc8"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:a794c8bd295b313ae1a537a6e82ef23583808a562c410c21cdc693435be5a6f6",
+    "integrated_outcome_id": "hcm-3-6-project-posture-implementation-admission",
+    "outcome_registry_fingerprint": "sha256:5e4b54b06f41e9eaf8c8f8d5085492018a9844fb9658fcfd61004a9ef1502cc8",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-6-p0-implementation-admission-discovery-convergence",
+    "completed_at_utc": "2026-08-08T03:11:30Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the complete new P0 selector and source-impact record against the selected planning packet, 01/02/03/04/05/06 posture authority, 07/08/09, and completed HCM-3.4/HCM-3.5 predecessor boundaries.",
+        "evidence_ref": "The two-file P0 subject freezes the private engine owner, closed source/test/docs ceiling, P01-P12 proof matrix, and a fail-closed P3 transaction authority boundary without claiming implementation."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inspect the current profile, freshness, condition, Charter transaction/lifecycle/promotion, grounding, and private snapshot seams plus their callers as read-only dependencies.",
+        "evidence_ref": "No HCM-3.6 fixture or consumer exists. HCM-3.4/HCM-3.5 remain exact/current/redacted evidence only; Flow, pipeline, SDK, CLI, Tauri, Substrate, and HCM-5 are excluded."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 P0 documentation manifest.",
+        "evidence_ref": "Subject sha256:4ddc7eec16f3eb79af909416b2306f5f9b2c9b31bf25087edea8d58d351cc3a1; registry sha256:5e4b54b06f41e9eaf8c8f8d5085492018a9844fb9658fcfd61004a9ef1502cc8; budget sha256:a794c8bd295b313ae1a537a6e82ef23583808a562c410c21cdc693435be5a6f6."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "PASS over the complete P0 documentation subject before dispatch."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Decode every P0 manifest file as UTF-8 and reject trailing spaces or tabs.",
+        "evidence_ref": "Both manifest files are UTF-8 text with final newlines and no trailing whitespace."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T030700Z--hcm-3-6-project-posture-implementation-admission-selector.md",
+        "sha256": "0c255e1a8598345f859b95102b240b7a05a4f7194a5fd42aa833a39a7780a262"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T030700Z--hcm-3-6-p0-implementation-admission-source-impact.md",
+        "sha256": "251e7724654b1d1a8b5b9549fae1bfba21f28459651244257671767eef5dc2ef"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:4ddc7eec16f3eb79af909416b2306f5f9b2c9b31bf25087edea8d58d351cc3a1"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 P0 implementation admission",
+    "scope_horizon": "the two-file documentation-only selector and source-impact subject",
+    "detail_resolution": "private project-posture owner, exact source ceiling, read-only dependency availability, P01-P12 proof obligations, and the missing P3 transaction primitive",
+    "temporal_horizon": "one fresh complete-subject discovery review before any P1 source/test edit",
+    "authority_horizon": "P0 documentation/review only; no product, public, schema, dependency, transaction, consumer, gate, remote, or protected-checkout mutation",
+    "memory_horizon": "HCM-3.4/HCM-3.5 completed records are immutable predecessor evidence; no raw Snapshot/delta or HCM-3.5 adoption path is admitted",
+    "validation_horizon": "CLEAN stops at the specified P3 authority boundary; P1-P4 do not begin without a separately selected atomic posture-transition primitive"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T030700Z--hcm-3-6-project-posture-implementation-admission-selector.md",
+      "sections": [
+        "entire selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "sections": [
+        "Frozen future owner and call paths",
+        "Constitutional, evidence, and mutation rules"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Project posture kernel and recommendation contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed.json",
+      "sections": [
+        "completed private source-pair boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260807T213000Z--HCM-3-5--orchestration--audit-corrective-source-ingestion-completed.json",
+      "sections": [
+        "completed corrective source-ingestion boundary"
+      ]
+    }
+  ],
+  "repo_truth": "The existing engine provides exact profile resolution, C-03 freshness, condition definition identity, committed Charter reads, candidate-promotion/lifecycle transactions, and bounded grounding evidence. It does not provide an admitted posture-specific atomic Charter replace plus immutable PostureTransition group; adding one is outside P0.",
+  "allowed_scope": [
+    "Read the two-file manifest and named authority/source seams to determine whether the P0 selector states the exact owner, ceiling, proof matrix, and genuine P3 authority boundary without fabricating a route.",
+    "Report each valid P1/P2 with a unique HCM36-P0-DISC identifier, exact violated contract, and smallest in-scope documentation remediation.",
+    "Report P3/P4 only under 09-review-finding-inventory.md; do not expand source, transaction, schema, or public authority."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create another dispatch, write a handoff or ledger, delegate, or change the review subject.",
+    "Do not implement Rust, tests, fixtures, public exports, schema/configuration, Cargo/dependency, Charter mutation, adapter delivery, Flow/pipeline/SDK/CLI/Tauri/Substrate, HCM-5 gate/promotion, or remote/protected-checkout operations."
+  ],
+  "tasks": [
+    "Independently verify that handbook-engine::project_posture is private, acyclic, and separated from consumer/adaptor/gate ownership.",
+    "Verify that every P1/P2 refusal and P01-P12 obligation is frozen and that the source/test/documentation ceiling cannot imply a public or raw Snapshot/delta path.",
+    "Verify the source-impact evidence: resolve_profile_selection is CRITICAL and untouched; current Charter transaction/lifecycle facilities cannot satisfy the exact P3 one-replace/PostureTransition atomic group without prohibited expansion.",
+    "Return CLEAN only if the authority-boundary conclusion is truthful and no P1/P2 remains for subject sha256:4ddc7eec16f3eb79af909416b2306f5f9b2c9b31bf25087edea8d58d351cc3a1."
+  ],
+  "contracts_and_gates": [
+    "One discovery review for this P0 outcome; valid P1/P2 require one consolidated remediation and a different-fresh closure; no review follows CLEAN.",
+    "The contract's prohibited broader transaction/schema/public surface is a hard stop, not an invitation to reuse candidate-promotion or lifecycle records as posture transitions.",
+    "GitNexus FTS unavailability must remain unavailable, never GREEN; the actual context/impact evidence must be judged independently."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS for valid P1/P2; return BLOCKED only if faithful review needs unavailable capability or work outside the assigned checkout.",
+    "Report any incorrect P3 transaction claim as a P1/P2 finding; do not invent a primitive, broaden the subject, or access the protected checkout or remote."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}
