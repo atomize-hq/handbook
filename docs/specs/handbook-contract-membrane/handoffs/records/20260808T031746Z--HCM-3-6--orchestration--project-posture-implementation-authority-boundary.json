@@ -1,0 +1,345 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary",
+  "created_at_utc": "2026-08-08T03:17:46Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-P0-IMPLEMENTATION-ADMISSION",
+  "orchestration_id": "handbook-hcm-3-6-implementation-20260807",
+  "source_handoff_ids": [
+    "20260808T020459Z--HCM-3-6--orchestration--project-posture-planning-closeout-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fdf4f-897a-7573-8f7f-18e387e566cf"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-08T03:12:00Z",
+    "evidence_ref": "A fresh built-in read-only P0 discovery reviewer completed from the schema-valid v1.4 dispatch and returned CLEAN."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "p0_implementation_admission_discovery_review",
+      "dispatch_id": "20260808T031200Z--HCM-3-6--p0-implementation-admission-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T031200Z--HCM-3-6--p0-implementation-admission-discovery-review.json",
+      "dispatch_fingerprint": "sha256:b15018aaea6aa0c959d065434226a18339969a3f0c49fae8a73dc8d980bcdb16",
+      "role": "review",
+      "agent_id": "/root/p0_discovery_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:4ddc7eec16f3eb79af909416b2306f5f9b2c9b31bf25087edea8d58d351cc3a1",
+      "result_subject_fingerprint": "sha256:4ddc7eec16f3eb79af909416b2306f5f9b2c9b31bf25087edea8d58d351cc3a1",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T031200Z--HCM-3-6--p0-implementation-admission-discovery-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T030700Z--hcm-3-6-project-posture-implementation-admission-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T030700Z--hcm-3-6-p0-implementation-admission-source-impact.md",
+        "Reviewer verdict: CLEAN; no findings or advisory debt. It independently confirmed that the existing Charter promotion/lifecycle transaction cannot persist the required posture-specific atomic root replacement plus immutable PostureTransition."
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-08T03:17:46Z",
+    "dispatch_count": 1,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:a794c8bd295b313ae1a537a6e82ef23583808a562c410c21cdc693435be5a6f6"
+    ],
+    "aggregate_fingerprint": "sha256:aea8d46938a8d8a0941a4ec3873d4b847ecccabbcd011bfe12c0638981669722"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "cab94769bcc14049ecd42378cf34462079fae386",
+    "subject_fingerprint": "sha256:4ddc7eec16f3eb79af909416b2306f5f9b2c9b31bf25087edea8d58d351cc3a1",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T031200Z--HCM-3-6--p0-implementation-admission-discovery-review.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T030700Z--hcm-3-6-project-posture-implementation-admission-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T030700Z--hcm-3-6-p0-implementation-admission-source-impact.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T031200Z--HCM-3-6--p0-implementation-admission-discovery-review.json",
+      "git:cab94769bcc14049ecd42378cf34462079fae386"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 P0 implementation-admission authority-boundary stop",
+    "scope_horizon": "the selected HCM-3.6 P0-to-P4 project-posture implementation sequence",
+    "detail_resolution": "P0 independently established the exact private owner, no-public-surface ceiling, dependency evidence, and P1-P4 proof shape. The current Charter transaction only supports candidate promotion plus lifecycle records; it does not provide the required one mapped Charter-root replacement atomically paired with an immutable PostureTransition.",
+    "temporal_horizon": "P0 completed and was independently CLEAN before any Rust, product-test, fixture, schema, dependency, configuration, public-API, adapter, or gate edit. P1-P4 did not begin.",
+    "authority_horizon": "The frozen slice excludes a new transaction primitive, changed output group, immutable PostureTransition record/schema, public surface, dependency, or HCM-3.4/HCM-3.5 ownership change. The implementation must therefore stop rather than fabricate a transition route.",
+    "memory_horizon": "The nonce-bound task identity, selected planning closeout, P0 selector, source-impact proof, exact dispatch population, fresh CLEAN review, primary commit, and pre-existing HCM-3.5 validator contradiction remain required context.",
+    "validation_horizon": "A fresh top-level task may begin only after an authorized selector fixes the atomic mutation/record semantics and repeats P0 impact/admission; this stop neither grants that authority nor reopens predecessor lineage."
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Implement exactly HCM-3.6 P0 through P4 project-posture behavior locally after the selected HCM-3.6 planning closeout, while retaining Charter as the only editable constitutional authority and preventing any HCM-5, Flow, pipeline, SDK, CLI, Tauri, Substrate, public-surface, schema, dependency, protected-checkout, or remote expansion.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "sections": [
+        "entire selected slice specification",
+        "P0 through P4"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md",
+      "sections": [
+        "entire active packet"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T020459Z--HCM-3-6--orchestration--project-posture-planning-closeout-completed.json",
+      "sections": [
+        "entire selected planning closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T030700Z--hcm-3-6-project-posture-implementation-admission-selector.md",
+      "sections": [
+        "entire P0 selector and frozen ceiling"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "true-stop and causal-review cadence"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "blocked true-stop and deterministic ledger rebuild"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at cab94769bcc14049ecd42378cf34462079fae386",
+    "head": "cab94769bcc14049ecd42378cf34462079fae386",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary.json"
+    ]
+  },
+  "work_completed": [
+    "Bound task 019fdf4f-897a-7573-8f7f-18e387e566cf, host local, meta workflow handbook-hcm-3-6-implementation-20260807, and nonce 2490c1c9da0a426e7e68cde6ac679d5cd4e94ef9266d7261eaa0ab1af8ded889. Before source inspection or delegation, the assigned worktree, local target ref, exact base/tree, required ancestor, local tracking baseline, and protected checkout head/tree/index/status were verified clean and exact.",
+    "Created the P0 selector, source-impact proof, and schema-valid fresh discovery dispatch. GitNexus indexed locally without remote access; FTS was unavailable and recorded as unavailable, never green. Exact upstream impact showed resolve_profile_selection as CRITICAL with 51 direct callers and 20 affected processes, so it remained read-only.",
+    "Established that handbook-engine::project_posture can only be private and derived, that Charter remains the sole editable constitutional authority, and that no raw Snapshot/delta, ambient time, public surface, or excluded owner may enter the design.",
+    "A different fresh P0 reviewer returned CLEAN with no P1/P2 findings and independently confirmed the existing Charter promotion/lifecycle transaction cannot realize P3's required atomic one-replace plus immutable PostureTransition semantics.",
+    "Committed only the reviewed P0 evidence at cab94769bcc14049ecd42378cf34462079fae386. No Rust, product test, fixture, schema, dependency, configuration, public API, adapter, gate, HCM-3.4/HCM-3.5 ownership, protected-checkout, integration-ref, remote, merge, rebase, reset, clean, force-update, fetch, pull, push, or publication change occurred."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T030700Z--hcm-3-6-project-posture-implementation-admission-selector.md",
+      "status": "completed",
+      "summary": "Independently CLEAN P0 selector freezing the exact private owner, P1-P4 ceiling, negative cases, no-cycle rule, and true-stop boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T030700Z--hcm-3-6-p0-implementation-admission-source-impact.md",
+      "status": "completed",
+      "summary": "Documents exact GitNexus context/impact evidence, source availability, predecessor evidence pairs, FTS unavailability, and the P3 transaction blocker."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T031200Z--HCM-3-6--p0-implementation-admission-discovery-review.json",
+      "status": "completed",
+      "summary": "Schema-valid immutable dispatch for the fresh complete-subject P0 discovery review."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary.json",
+      "status": "blocked",
+      "summary": "Durable P0-CLEAN true-stop: no P1-P4 packet is admitted until a new authority selects the required atomic mutation and immutable-record capability."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.6-P0-D1",
+      "summary": "The existing candidate-promotion plus lifecycle transaction cannot be repurposed as P3's sole posture transition because it lacks a posture-specific atomic Charter-root replace and immutable PostureTransition record. Adding or changing that primitive would be a prohibited transaction/schema expansion, so P1-P4 remain unstarted.",
+      "authority_effect": "none",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T030700Z--hcm-3-6-project-posture-implementation-admission-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T030700Z--hcm-3-6-p0-implementation-admission-source-impact.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [
+    {
+      "blocker_id": "HCM36-P3-ATOMIC-TRANSITION-PRIMITIVE",
+      "classification": "authority",
+      "summary": "The frozen P3 contract requires a sole, exact, atomic mapped Charter-root replacement plus immutable PostureTransition. The selected transaction facilities only model candidate promotion and lifecycle records, and the frozen ceiling forbids adding or altering the needed primitive or record/schema.",
+      "resume_condition": "A user or authorized product authority supplies a fresh HCM-3.6 selector that names the existing exact atomic primitive and immutable record semantics, or separately authorizes the narrowly scoped private transaction/record capability required to provide them.",
+      "owner": "user / authorized product authority"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM36-P3-TRANSITION-ESC-001",
+      "trigger": "P0 source inspection and the different-fresh CLEAN reviewer both found that CharterAuthorityTransactionServiceV1 and CharterLifecycleStoreV1 do not expose P3's required atomic one-replace plus immutable PostureTransition persistence.",
+      "current_resolution": "P0 has a complete private ownership and source-impact selector, but it cannot admit a source route that meets P3 without inventing an unapproved transaction primitive, output group, or record/schema. No partial P1/P2 implementation was started because it could not satisfy the contracted end-to-end mutation and no-write proof.",
+      "target_resolution": "A new reviewed authority selects one exact private posture transition primitive, its atomic Charter compare-and-write semantics, the immutable PostureTransition record/identity, and its authorized owner/allowlist.",
+      "decision_required": "State whether an existing transaction primitive already satisfies the exact P3 atomic semantics and name it, or expressly authorize the minimum private transaction and immutable-record capability needed. State whether this requires a schema change and, if so, authorize that change separately.",
+      "options": [
+        "Option 1: identify an existing private atomic Charter replacement and immutable record facility that exactly satisfies P3, with exact symbols and evidence.",
+        "Option 2: authorize one new or changed private posture-specific transaction primitive and immutable PostureTransition record capability under a fresh, bounded selector.",
+        "Option 3: retain this true stop and leave HCM-3.6 implementation unstarted."
+      ],
+      "recommendation": "Option 1 only if exact existing semantics can be evidenced; otherwise Option 2 through a new narrowly bounded authority. This recommendation is not implementation authority.",
+      "affected_refs": [
+        "crates/engine/src/charter_authority_transaction.rs",
+        "crates/engine/src/charter_promotion_workflow.rs",
+        "crates/engine/src/charter_lifecycle.rs",
+        "crates/engine/src/lib.rs",
+        "crates/engine/src/project_posture.rs"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "A fresh top-level same-slice task validates the new authority, exact source capability, base/tree/parent identity, and all impacted symbols before creating any P1-P4 implementation dispatch."
+    }
+  ],
+  "validation": [
+    {
+      "command": "assigned checkout/ref/base/tree/ancestor/worktree/cleanliness/protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Before delegation or source inspection, detached HEAD and refs/heads/orchestration/handbook-hcm-3-6-implementation-20260807 both equaled 85c042863adad2d2a58f4dcc3bbbc16177937655 with tree 8946426c8d390b744b46bec14b1375c2d4272da0; required ancestor 1256e724a2b7da6b6250f57d6f63fced1e2cf949 was present. The task worktree and protected checkout head/tree/index/status were clean and distinct; origin/feat/handbook-contract-membrane locally resolved to 1256e724a2b7da6b6250f57d6f63fced1e2cf949."
+    },
+    {
+      "command": "P0 v1.4 dispatch verification",
+      "status": "passed",
+      "evidence_ref": "validate_handoffs.py --verify-dispatch passed for 20260808T031200Z--HCM-3-6--p0-implementation-admission-discovery-review.json with subject fingerprint sha256:4ddc7eec16f3eb79af909416b2306f5f9b2c9b31bf25087edea8d58d351cc3a1."
+    },
+    {
+      "command": "fresh complete-subject P0 discovery review",
+      "status": "passed",
+      "evidence_ref": "Different fresh reviewer /root/p0_discovery_review returned CLEAN, no findings, no advisory debt, and confirmed the P3 transaction boundary; no remediation or closure cycle is permitted after CLEAN."
+    },
+    {
+      "command": "GitNexus exact context and upstream impact",
+      "status": "passed",
+      "evidence_ref": "Local npx --no-install gitnexus analyze completed without remote contact. Exact context/impact evidence was collected for proposed existing symbols; resolve_profile_selection was CRITICAL (51 direct callers, 20 affected processes) and was not edited. No existing code symbol was modified."
+    },
+    {
+      "command": "GitNexus FTS query and compare-to-main detection",
+      "status": "blocked",
+      "evidence_ref": "FTS/BM25 extension was unavailable under load-only policy and was not treated as green. The required compare-to-main detection reported historical repository divergence: 1,562 files, 11,794 symbols, 266 processes, CRITICAL; it is not a P0 source-change claim."
+    },
+    {
+      "command": "GitNexus staged change detection and P0 diff hygiene",
+      "status": "passed",
+      "evidence_ref": "Staged P0 documentation detection reported No changes detected because the new markdown/JSON proof records map to no indexed product symbol. git diff --check and no-secret scan passed for the exact three-path primary allowlist."
+    },
+    {
+      "command": "product runtime, crate, and owner-local tests",
+      "status": "not_run",
+      "evidence_ref": "P0 admitted no Rust, product-test, fixture, schema, dependency, configuration, public API, adapter, or gate change. Running product implementation proof would be outside the P0-only true stop."
+    },
+    {
+      "command": "full historical v1.4 validator",
+      "status": "blocked",
+      "evidence_ref": "After the parent handoff and deterministic 102-entry ledger rebuild, validate_handoffs.py failed only at the immutable predecessor 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN. This known HCM-3.5 lineage contradiction is preserved unchanged and is not reported green."
+    },
+    {
+      "command": "v1.4 historical-admission self-test",
+      "status": "passed",
+      "evidence_ref": "validate_handoffs.py --self-test-v1-admission passed all immutable-record, legacy-dispatch, current-sentinel, and exact-ledger-rebuild rejection scenarios."
+    },
+    {
+      "command": "v1.4 orchestration-contract self-test",
+      "status": "passed",
+      "evidence_ref": "validate_handoffs.py --self-test-orchestration-contract passed its causal-cadence, clean-review, inventory, lineage, and two-commit-ledger closeout scenarios."
+    },
+    {
+      "command": "protected-boundary, local-only, and target-ref audit",
+      "status": "passed",
+      "evidence_ref": "No protected-checkout mutation, remote contact, fetch, pull, push, publication, merge, rebase, reset, clean, force-update, or local integration-ref CAS occurred. The integration ref remains at the expected base because this true stop is not a completed P4 closeout."
+    }
+  ],
+  "pack_updates": [],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Resolve only HCM-3.6's exact P3 atomic Charter transition and immutable PostureTransition-record authority before any new P0/P1-P4 admission; do not start another HCM slice or HCM-5 behavior.",
+    "condition": "The user or authorized product authority supplies a reviewed selector naming an exact existing primitive or a narrowly authorized private primitive/record capability, its atomic compare-and-write semantics, record identity, allowed paths, and any required schema decision.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary.json",
+        "sections": [
+          "entire true-stop handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T030700Z--hcm-3-6-project-posture-implementation-admission-selector.md",
+        "sections": [
+          "entire P0 selector"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T030700Z--hcm-3-6-p0-implementation-admission-source-impact.md",
+        "sections": [
+          "transaction-boundary evidence"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T020459Z--HCM-3-6--orchestration--project-posture-planning-closeout-completed.json",
+        "sections": [
+          "entire planning closeout"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Read-only same-slice authority adjudication until an exact transaction/record selector is validated.",
+      "After new authority only, the fresh selector's exact private engine/test/proof ceiling and mandatory impact/review sequence."
+    ],
+    "prohibited_scope": [
+      "Do not infer atomic semantics, record layout, Charter path mapping, schema, or transaction output group from this stop.",
+      "Do not modify immutable predecessors, the protected checkout, target ref, AGENTS.md, CLAUDE.md, Flow, pipeline, SDK, CLI, Tauri, Substrate, HCM-5, a public surface, or any dependency/configuration outside a new selector.",
+      "Do not begin P1, P2, P3, P4, delivery adapter behavior, gate verdicts, parent promotion, HCM-3.5 P5/P6, HCM-4+, or remote/publication work until new P0 admission and required reviews are complete."
+    ],
+    "acceptance_criteria": [
+      "The authority names one exact private transaction route, atomic compare-and-write behavior, canonical Charter root mapping, immutable PostureTransition record identity, and permitted owner paths.",
+      "Any record/schema change is separately and explicitly authorized; otherwise the selector proves no new schema is required.",
+      "A fresh top-level task replays preflight and GitNexus impact for every existing impacted symbol, completes P0 CLEAN, and then follows P1-P4 implementation, proof, and different-fresh review cadence."
+    ],
+    "stop_conditions": [
+      "Stop on unresolved transaction/record ambiguity, missing exact source proof, any HIGH/CRITICAL impact that needs authority review, protected-path drift, or scope expansion beyond the new selector.",
+      "Do not update the integration ref unless a separately completed HCM-3.6 P4 closeout authorizes its expected-old local CAS."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-3.6 P0 is independently CLEAN, but P1-P4 are blocked before product edits: the selected private Charter transaction supports candidate promotion/lifecycle records, not P3's required atomic Charter-root replacement plus immutable PostureTransition. No source, protected-checkout, integration-ref, remote, or HCM-5 action occurred; a new bounded authority is required."
+}
