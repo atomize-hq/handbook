@@ -1,0 +1,108 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260808T190000Z--HCM-3-6--full-source-consolidated-remediation",
+  "created_at_utc": "2026-08-08T19:00:00Z",
+  "source_handoff_ids": ["20260808T051657Z--HCM-3-6--orchestration--atomic-authority-replanning-completed"],
+  "parent_orchestration_id": "handbook-hcm-3-6-implementation-20260808",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "remediation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "incremental-implementation", "debugging-and-error-recovery", "code-review-and-quality", "git-workflow-and-versioning"],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-PROJECT-POSTURE-IMPLEMENTATION",
+  "subject_fingerprint": "sha256:b85bd167e6d9d70513fef0a1f3503ec92c2a6a9edee20bc39925544e5e3bc2d5",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-08T13:29:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{"integrated_outcome_id": "hcm-3-6-project-posture-implementation", "packet_ids": ["HCM-3.6-PROJECT-POSTURE-IMPLEMENTATION"], "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md"}],
+    "fingerprint": "sha256:0ba0ea583ddadc14be74f481271159047c4be11bd87eb7f2ed7b2abcb467d53d"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:64396dd3609551be9fa97222ec45c1a2cb6ccdc373721d466782dcd3d52fd28d",
+    "integrated_outcome_id": "hcm-3-6-project-posture-implementation",
+    "outcome_registry_fingerprint": "sha256:0ba0ea583ddadc14be74f481271159047c4be11bd87eb7f2ed7b2abcb467d53d",
+    "review_stage": "proof",
+    "stage_transition": {"kind": "continue", "from_stage": "proof"},
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260808T160000Z--HCM-3-6--full-source-discovery-review"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/charter_authority_transaction.rs", "sha256": "d1db93846519857b80b66894b778bfa5307bcfec4798107118fb5ab1d256682d"},
+      {"path": "crates/engine/src/charter_lifecycle_store.rs", "sha256": "5c97922a265d6be890afbdf5ea20879863041706f44b75b1b80513ef881ba14e"},
+      {"path": "crates/engine/src/charter_lifecycle_transition_v11.rs", "sha256": "18e94d6b16d64c7c36e695d890a477f673e5d753bee05bbae041e20809bab6a1"},
+      {"path": "crates/engine/src/charter_posture_transaction_intent_v1.rs", "sha256": "aa16ac50c312605ce64f98cfe80f9cfb8d82b28a61c348f25c01b3b129815cbe"},
+      {"path": "crates/engine/src/charter_posture_transaction_tests.rs", "sha256": "340e82016e0d35791ac4e388e93984454f9ca884ce0f04635471e9ee36b1af86"},
+      {"path": "crates/engine/src/lib.rs", "sha256": "4218dc0badb06b309efa75c9b698cd598d447600190aaabb2504161f86cc98a3"},
+      {"path": "crates/engine/src/project_posture.rs", "sha256": "8b2c6048425dcd2a6a9365995cd886c1770f8b142c1a15d9a85ede4829374bab"},
+      {"path": "crates/engine/src/project_posture_tests.rs", "sha256": "2e1a9bd19e7cbea4cacb4507b70d30532a4e9c54c7595e7cf6b8fe18763138ce"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md", "sha256": "4d94a51b9b0c898a7e2c6d42c3c9d207640549d277cc2f9ad05758375a94ea79"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T132656Z--hcm-3-6-p0-source-implementation-selector-impact.md", "sha256": "18e443f00f1ac4b46342fc7a12dc367cfd34a5926f85e6522297a5b0c3c8beb2"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T170000Z--hcm-3-6-implementation-proof-wall.md", "sha256": "224b6f1ab1172fde1397f6dec7c383f9543b72614700df0e87d6ba5941cfdf6b"}
+    ],
+    "aggregate_fingerprint": "sha256:b85bd167e6d9d70513fef0a1f3503ec92c2a6a9edee20bc39925544e5e3bc2d5"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 full-source consolidated remediation",
+    "scope_horizon": "exactly the four P1/P2 findings from the full-source proof-stage discovery review",
+    "detail_resolution": "real private authority admission, distinct lifecycle v1.1 state binding, retained v1.1 read compatibility, and truthful deterministic formatting proof",
+    "temporal_horizon": "one consolidated repair before one different-fresh delta-focused closure review",
+    "authority_horizon": "only the closed HCM-3.6 product paths and required crate-local tests/proof record; no public/schema/dependency/configuration/consumer/HCM-5 expansion",
+    "memory_horizon": "retain P0, P1/P2, P3/P4, proof-wall, and discovery-review lineage; do not discard predecessor findings",
+    "validation_horizon": "return exact changed paths, command results, manifest, and explicit proof that each named finding is remediated"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md", "sections": ["Exact inputs, kernel, recommendation, and refusal", "Compatibility", "Atomic commit and recovery", "Required proof and test matrix"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T160000Z--HCM-3-6--full-source-discovery-review.json", "sections": ["complete manifested review subject"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md", "sections": ["source ceiling and semantic owner"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T170000Z--hcm-3-6-implementation-proof-wall.md", "sections": ["complete proof wall"]}
+  ],
+  "repo_truth": "The fresh full-subject discovery review returned exactly four blocking findings. P1: posture preflight can accept synthetic, non-existent recommendation/policy/approval/reassessment/profile/condition/evidence/snapshot/freshness refs and commits an authority bypass. P2: lifecycle v1.1 copies one old state fingerprint into prior and result even though the result Charter changes; P2: retained observers still attempt legacy JCS-no-LF lineage reading for a selected private v1.1 JCS+LF head; P2: the proof record claimed rustfmt success but the exact selector command rejected current lib.rs module ordering.",
+  "allowed_scope": [
+    "Modify only crates/engine/src/charter_authority_transaction.rs, crates/engine/src/charter_lifecycle_store.rs, crates/engine/src/charter_lifecycle_transition_v11.rs, crates/engine/src/charter_posture_transaction_tests.rs, crates/engine/src/project_posture.rs, crates/engine/src/project_posture_tests.rs, and crates/engine/src/lib.rs as strictly necessary.",
+    "Use existing private HCM-2.2 authority/lifecycle semantic validators and retained pairs to resolve and bind actual recommendation, policy, approval, reassessment, profile, condition, evidence, snapshot, and freshness closure before any posture journal/canonical write. Refuse absent, stale, substituted, unresolved, insufficient, or unauthorized evidence with no domain write.",
+    "Bind separate canonical lifecycle-current state fingerprints for the old and resulting Charter; validate both in posture preflight and the v1.1 direct loader without weakening v1.0 reads.",
+    "Route retained v1.1 selected heads through exact private JCS+LF parser/output identity while retaining unchanged v1.0 lineage record behavior; exercise post-posture retained observation, approval, lifecycle event, and later promotion compatibility.",
+    "Apply deterministic rustfmt module ordering and update only the HCM-3.6 implementation proof wall with actual successful formatting and affected focused test results."
+  ],
+  "non_goals": [
+    "Do not modify Cargo files, schemas, DTO/JSON/transport/public exports, external engine tests, fixtures, Flow, HCM-5, adapters, CLI/SDK/Tauri/Substrate, another slice, protected checkout, refs, remote, dispatches, handoffs, or ledger.",
+    "Do not fabricate a promotion, introduce a second Charter, bypass existing private semantic admission, weaken a validator, stage, commit, delegate, or run broad discovery.",
+    "Do not claim the inherited HCM-3.5 exception applies to these HCM-3.6 findings."
+  ],
+  "tasks": [
+    "Consolidate the four cited P1/P2 repairs within the authorized source ceiling and add only crate-local positive and negative tests that prove the repaired behavior and no-write refusal.",
+    "Run upstream GitNexus impact for any existing function not already named in the selector before altering it; preserve HIGH/CRITICAL warnings and report unavailable FTS honestly.",
+    "Run rustfmt --check on every allowed Rust file, git diff --check, cargo test -p handbook-engine project_posture --lib --no-fail-fast, cargo test -p handbook-engine charter_posture_transaction --lib --no-fail-fast, and relevant existing HCM-2.2 focused tests; return exact outcomes."
+  ],
+  "contracts_and_gates": [
+    "This is the single consolidated remediation for the complete-subject discovery burst. A different fresh delta-focused closure review must follow; do not reopen discovery or run any review after CLEAN.",
+    "Any public-surface or source-ceiling need is a true authority stop. GitNexus FTS/BM25 remains unavailable, never GREEN."
+  ],
+  "stop_conditions": [
+    "Return BLOCKED before writing if the actual semantic-admission repair requires a forbidden public or out-of-ceiling surface.",
+    "Return FINDINGS before writing if no existing private semantic validator can establish the mandatory closure without inventing authority."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "remediated_finding_refs", "changed_paths", "validation", "subject_manifest", "parent_disposition"]
+  }
+}

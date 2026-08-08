@@ -6,6 +6,10 @@ use crate::charter_lifecycle::CharterLifecycleState;
 use crate::charter_lifecycle_store::{
     charter_lifecycle_state_fingerprint, CharterLifecycleStoreV1, RetainedLifecycleAuthorityV1,
 };
+use crate::charter_lifecycle_transition_v11::{
+    lifecycle_transition_output_record_v11, parse_lifecycle_transition_v11,
+    validate_lifecycle_transition_bindings_v11, ValidatedLifecycleTransitionV11,
+};
 use crate::charter_lifecycle_validation::{
     validate_candidate_exact_result_authority, validate_result_bytes,
     CharterLifecycleValidationResultV10, SELECTED_PROFILE_FINGERPRINT, SELECTED_PROFILE_REF,
@@ -15,6 +19,13 @@ use crate::charter_lineage_store::{
     sync_directory, validate_record, LineageRecordClassV1, LineageStoreErrorV1,
     TrustedLineageStoreV1,
 };
+use crate::charter_posture_transaction_intent_v1::{
+    parse_posture_transaction_intent_v1, parse_posture_transition_v1,
+    posture_transaction_intent_marker_v1, posture_transition_output_record_v1,
+    validate_posture_transaction_intent_bindings_v1, AuthorityHeadV1, CanonicalDocumentV1,
+    OutputRecordV1, PairV1, ValidatedPostureTransactionIntentV1, ValidatedPostureTransitionV1,
+    MAX_POSTURE_RECORD_BYTES_V1,
+};
 use crate::charter_promotion_intent_v12::{
     parse_promotion_intent_v12, promotion_intent_marker_v12, PromotionApprovalBindingV12,
     PromotionCandidateLineageV12, PromotionHumanAuthorityV12, PromotionIntentTargetV12,
@@ -23,6 +34,10 @@ use crate::charter_promotion_intent_v12::{
     MAX_PROMOTION_INTENT_BYTES_V12,
 };
 use crate::charter_promotion_workflow::required_approval_pairs_for_authority;
+use crate::project_posture::{
+    bind_exact_canonical_bytes, derive_project_posture_kernel, prepare_posture_change,
+    verify_precommit_cas, PostureChangeRequest,
+};
 use crate::DefinitionFingerprint;
 use crate::{
     load_shipped_charter_definition_registry, parse_canonical_charter,
@@ -48,6 +63,26 @@ enum OutputPurposeV12 {
     Canonical,
     PromotionRecord,
     LifecycleTransition,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum PostureStagePurposeV1 {
+    Canonical,
+    PostureTransition,
+    LifecycleTransition,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum PostureStageStateV1 {
+    Absent,
+    Exact,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum PostureMarkerObservationV1 {
+    Absent,
+    TmpExactPrefix,
+    Published,
 }
 
 impl OutputPurposeV12 {
@@ -329,6 +364,52 @@ struct TransactionRootInventoryV12 {
     rolled_back: Vec<PathBuf>,
 }
 
+#[derive(Clone, Debug)]
+struct PostureTransactionRootInventoryV1 {
+    pending: Vec<PathBuf>,
+    committed: Vec<PathBuf>,
+    rolled_back: Vec<PathBuf>,
+}
+
+struct PreparedPostureWriteV1 {
+    change: crate::project_posture::PreparedPostureChange,
+    old_canonical: Vec<u8>,
+    new_canonical: Vec<u8>,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum AuthorityHeadKindV1 {
+    Promotion,
+    PostureTransition,
+}
+
+#[derive(Clone, Debug)]
+struct AuthorityHistoryEdgeV1 {
+    kind: AuthorityHeadKindV1,
+    basis: Option<CanonicalDocumentV1>,
+    prior_head: Option<AuthorityHeadV1>,
+    canonical: CanonicalDocumentV1,
+    source: PairV1,
+    lifecycle_transition: PairV1,
+    promotion_ancestor: PairV1,
+    promotion_intent: Option<ValidatedPromotionIntentV12>,
+}
+
+/// Private committed-head projection shared by Charter and lifecycle readers.
+///
+/// The existing public committed-Charter shape intentionally remains a
+/// promotion-ancestor projection; this type carries the heterogeneous source
+/// only inside the engine.
+#[derive(Clone, Debug)]
+pub(crate) struct CommittedAuthorityHeadV1 {
+    pub(crate) canonical: CanonicalDocumentV1,
+    source_kind: AuthorityHeadKindV1,
+    pub(crate) source: PairV1,
+    pub(crate) lifecycle_transition: PairV1,
+    pub(crate) promotion_ancestor: PairV1,
+    latest_promotion_intent: ValidatedPromotionIntentV12,
+}
+
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct CharterPromotionErrorV1 {
     kind: CharterPromotionErrorKindV1,
@@ -443,6 +524,44 @@ impl CharterAuthorityTransactionServiceV1 {
         self.recover_one_pending(pending)
     }
 
+    #[cfg(test)]
+    pub(crate) fn recover_posture_pending_for_testing(
+        &self,
+        pending: &Path,
+    ) -> Result<(), CharterPromotionErrorV1> {
+        ensure_supported_platform()?;
+        let _locks = AuthorityLocks::acquire(&self.repo_root)?;
+        self.recover_one_posture_pending(pending)
+    }
+
+    #[cfg(test)]
+    pub(crate) fn bootstrap_posture_genesis_for_testing(
+        &self,
+    ) -> Result<AuthorityHeadV1, CharterPromotionErrorV1> {
+        charter_authority_transaction_tests::seed_lineage(&self.repo_root);
+        self.promote(charter_authority_transaction_tests::request(
+            &self.repo_root,
+        ))?;
+        let committed = self
+            .resolve_committed_authority_head_locked()?
+            .ok_or_else(|| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "test promotion did not yield a committed authority head",
+                )
+            })?;
+        Ok(AuthorityHeadV1 {
+            kind: match committed.source_kind {
+                AuthorityHeadKindV1::Promotion => "promotion".to_owned(),
+                AuthorityHeadKindV1::PostureTransition => "posture_transition".to_owned(),
+            },
+            source: committed.source,
+            canonical: committed.canonical,
+            lifecycle_transition: committed.lifecycle_transition,
+            promotion_ancestor: committed.promotion_ancestor,
+        })
+    }
+
     pub fn read_committed_charter(
         &self,
     ) -> Result<Option<CommittedCharterAuthorityV1>, CharterPromotionErrorV1> {
@@ -452,20 +571,20 @@ impl CharterAuthorityTransactionServiceV1 {
         let Some(canonical_bytes) = read_current_canonical(&self.repo_root)? else {
             return Ok(None);
         };
-        let fingerprint = DefinitionFingerprint::from_bytes(&canonical_bytes).to_string();
-        let intent = self
-            .validate_terminal_history(Some(&canonical_bytes), None)?
+        let head = self
+            .resolve_committed_authority_head_locked()?
             .ok_or_else(|| {
                 error(
                     CharterPromotionErrorKindV1::DurabilityViolation,
-                    "canonical authority exists without a committed promotion journal",
+                    "canonical authority exists without a committed authority journal",
                 )
             })?;
+        validate_current_canonical_against_head(&canonical_bytes, &head.canonical)?;
         Ok(Some(CommittedCharterAuthorityV1 {
             canonical_bytes,
-            canonical_fingerprint: fingerprint,
-            promotion_ref: intent.record.outputs.promotion_record.record_ref,
-            lifecycle_transition_ref: intent.record.outputs.lifecycle_transition.record_ref,
+            canonical_fingerprint: head.canonical.fingerprint,
+            promotion_ref: head.promotion_ancestor.reference,
+            lifecycle_transition_ref: head.lifecycle_transition.reference,
         }))
     }
 
@@ -503,20 +622,20 @@ impl CharterAuthorityTransactionServiceV1 {
         let Some(canonical_bytes) = read_current_canonical(&self.repo_root)? else {
             return Ok(None);
         };
-        let fingerprint = DefinitionFingerprint::from_bytes(&canonical_bytes).to_string();
-        let intent = self
-            .validate_terminal_history(Some(&canonical_bytes), None)?
+        let head = self
+            .resolve_committed_authority_head_locked()?
             .ok_or_else(|| {
                 error(
                     CharterPromotionErrorKindV1::DurabilityViolation,
-                    "canonical authority exists without a committed promotion journal",
+                    "canonical authority exists without a committed authority journal",
                 )
             })?;
+        validate_current_canonical_against_head(&canonical_bytes, &head.canonical)?;
         Ok(Some(CommittedCharterAuthorityV1 {
             canonical_bytes,
-            canonical_fingerprint: fingerprint,
-            promotion_ref: intent.record.outputs.promotion_record.record_ref,
-            lifecycle_transition_ref: intent.record.outputs.lifecycle_transition.record_ref,
+            canonical_fingerprint: head.canonical.fingerprint,
+            promotion_ref: head.promotion_ancestor.reference,
+            lifecycle_transition_ref: head.lifecycle_transition.reference,
         }))
     }
 
@@ -1295,15 +1414,15 @@ impl CharterAuthorityTransactionServiceV1 {
 
     fn recover_pending_locked(&self) -> Result<(), CharterPromotionErrorV1> {
         let root = self.transaction_root();
-        if !root.exists() {
-            return Ok(());
+        if root.exists() {
+            reject_reparse_or_symlink(&root, true).map_err(map_lineage)?;
+            let inventory = transaction_root_inventory(&root)?;
+            self.validate_terminal_inventory(&inventory)?;
+            for pending in inventory.pending {
+                self.recover_one_pending(&pending)?;
+            }
         }
-        reject_reparse_or_symlink(&root, true).map_err(map_lineage)?;
-        let inventory = transaction_root_inventory(&root)?;
-        self.validate_terminal_inventory(&inventory)?;
-        for pending in inventory.pending {
-            self.recover_one_pending(&pending)?;
-        }
+        self.recover_posture_pending_locked()?;
         let canonical = read_current_canonical(&self.repo_root)?;
         self.validate_terminal_history(canonical.as_deref(), None)?;
         Ok(())
@@ -1320,46 +1439,19 @@ impl CharterAuthorityTransactionServiceV1 {
                 "promotion history accepts exactly one current-head observation",
             ));
         }
-        let root = self.transaction_root();
-        if !root.exists() {
-            return if current_canonical.is_none() && expected_head_fingerprint.is_none() {
-                Ok(None)
-            } else {
-                Err(error(
-                    CharterPromotionErrorKindV1::DurabilityViolation,
-                    "canonical authority exists without promotion transaction history",
-                ))
-            };
-        }
-        reject_reparse_or_symlink(&root, true).map_err(map_lineage)?;
-        sync_directory(&root).map_err(map_lineage)?;
-        let inventory = transaction_root_inventory(&root)?;
-        let selected = self.validate_terminal_inventory(&inventory)?;
-        match (
-            current_canonical,
-            expected_head_fingerprint,
-            selected.as_ref(),
-        ) {
+        let selected = self.resolve_committed_authority_head_locked()?;
+        match (current_canonical, expected_head_fingerprint, selected) {
             (None, None, None) => Ok(None),
-            (Some(current), None, Some(intent))
-                if current.len() as u64 == intent.record.outputs.new_canonical_byte_length
-                    && DefinitionFingerprint::from_bytes(current).as_str()
-                        == intent.record.outputs.new_canonical_document_sha256
-                    && intent.record.outputs.new_canonical_fingerprint
-                        == intent.record.outputs.new_canonical_document_sha256 =>
-            {
-                Ok(selected)
+            (Some(current), None, Some(head)) => {
+                validate_current_canonical_against_head(current, &head.canonical)?;
+                Ok(Some(head.latest_promotion_intent))
             }
-            (None, Some(expected), Some(intent))
-                if intent.record.outputs.new_canonical_fingerprint == expected
-                    && intent.record.outputs.new_canonical_fingerprint
-                        == intent.record.outputs.new_canonical_document_sha256 =>
-            {
-                Ok(selected)
+            (None, Some(expected), Some(head)) if head.canonical.fingerprint == expected => {
+                Ok(Some(head.latest_promotion_intent))
             }
             _ => Err(error(
                 CharterPromotionErrorKindV1::DurabilityViolation,
-                "current canonical authority is not the exact committed promotion chain head",
+                "current canonical authority is not the exact committed heterogeneous chain head",
             )),
         }
     }
@@ -1367,7 +1459,7 @@ impl CharterAuthorityTransactionServiceV1 {
     fn validate_terminal_inventory(
         &self,
         inventory: &TransactionRootInventoryV12,
-    ) -> Result<Option<ValidatedPromotionIntentV12>, CharterPromotionErrorV1> {
+    ) -> Result<Vec<ValidatedPromotionIntentV12>, CharterPromotionErrorV1> {
         let mut transaction_ids = BTreeSet::new();
 
         for rolled_back in &inventory.rolled_back {
@@ -1382,65 +1474,21 @@ impl CharterAuthorityTransactionServiceV1 {
             validate_terminal_payload(rolled_back, &intent, PromotionTerminalKindV12::RolledBack)?;
         }
 
-        let mut committed_by_basis: BTreeMap<Option<String>, Vec<ValidatedPromotionIntentV12>> =
-            BTreeMap::new();
-        for committed in &inventory.committed {
-            let intent = read_valid_intent(committed)?;
-            validate_terminal_directory_identity(committed, &intent, ".committed")?;
+        let mut committed_intents = Vec::with_capacity(inventory.committed.len());
+        for directory in &inventory.committed {
+            let intent = read_valid_intent(directory)?;
+            validate_terminal_directory_identity(directory, &intent, ".committed")?;
             if !transaction_ids.insert(intent.record.transaction_id.clone()) {
                 return Err(error(
                     CharterPromotionErrorKindV1::Conflict,
                     "promotion transaction ID has multiple terminal suffixes",
                 ));
             }
-            validate_terminal_payload(committed, &intent, PromotionTerminalKindV12::Committed)?;
+            validate_terminal_payload(directory, &intent, PromotionTerminalKindV12::Committed)?;
             self.validate_final_records(&intent.record)?;
-            committed_by_basis
-                .entry(
-                    intent
-                        .record
-                        .target
-                        .observed_current_artifact_fingerprint
-                        .clone(),
-                )
-                .or_default()
-                .push(intent);
+            committed_intents.push(intent);
         }
-
-        let mut cursor = None;
-        let mut selected = None;
-        let mut traversed = 0_usize;
-        while let Some(mut successors) = committed_by_basis.remove(&cursor) {
-            if successors.len() != 1 {
-                return Err(error(
-                    CharterPromotionErrorKindV1::DurabilityViolation,
-                    "committed promotion history contains a forked successor basis",
-                ));
-            }
-            let successor = successors.remove(0);
-            if successor.record.target.basis_artifact_fingerprint != cursor {
-                return Err(error(
-                    CharterPromotionErrorKindV1::DurabilityViolation,
-                    "committed promotion successor basis is not exact",
-                ));
-            }
-            cursor = Some(successor.record.outputs.new_canonical_fingerprint.clone());
-            selected = Some(successor);
-            traversed += 1;
-            if traversed > 4096 {
-                return Err(error(
-                    CharterPromotionErrorKindV1::DurabilityViolation,
-                    "committed promotion history exceeds its bounded chain length",
-                ));
-            }
-        }
-        if !committed_by_basis.is_empty() {
-            return Err(error(
-                CharterPromotionErrorKindV1::DurabilityViolation,
-                "committed promotion history contains an unreachable or cyclic successor",
-            ));
-        }
-        Ok(selected)
+        Ok(committed_intents)
     }
 
     pub(crate) fn current_committed_intent_locked(
@@ -1454,6 +1502,168 @@ impl CharterAuthorityTransactionServiceV1 {
                     "promotion history has no committed chain head",
                 )
             })
+    }
+
+    pub(crate) fn current_committed_authority_head_locked(
+        &self,
+        canonical_fingerprint: &str,
+    ) -> Result<CommittedAuthorityHeadV1, CharterPromotionErrorV1> {
+        let head = self
+            .resolve_committed_authority_head_locked()?
+            .ok_or_else(|| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "authority history has no committed chain head",
+                )
+            })?;
+        if head.canonical.fingerprint != canonical_fingerprint {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "authority history head fingerprint is not the requested canonical authority",
+            ));
+        }
+        Ok(head)
+    }
+
+    fn resolve_committed_authority_head_locked(
+        &self,
+    ) -> Result<Option<CommittedAuthorityHeadV1>, CharterPromotionErrorV1> {
+        let mut edges = Vec::new();
+        let promotion_root = self.transaction_root();
+        if promotion_root.exists() {
+            reject_reparse_or_symlink(&promotion_root, true).map_err(map_lineage)?;
+            sync_directory(&promotion_root).map_err(map_lineage)?;
+            let inventory = transaction_root_inventory(&promotion_root)?;
+            for intent in self.validate_terminal_inventory(&inventory)? {
+                edges.push(promotion_history_edge(intent)?);
+            }
+        }
+
+        let posture_root = self.posture_transaction_root();
+        if posture_root.exists() {
+            reject_reparse_or_symlink(&posture_root, true).map_err(map_lineage)?;
+            sync_directory(&posture_root).map_err(map_lineage)?;
+            let inventory = posture_transaction_root_inventory(&posture_root)?;
+            for terminal in &inventory.rolled_back {
+                let intent = read_valid_posture_intent(terminal)?;
+                validate_posture_terminal_directory_identity(terminal, &intent, ".rolled-back")?;
+                validate_posture_terminal_payload(
+                    &self.repo_root,
+                    terminal,
+                    &intent,
+                    PostureTerminalKindV1::RolledBack,
+                )?;
+            }
+            for terminal in &inventory.committed {
+                let intent = read_valid_posture_intent(terminal)?;
+                validate_posture_terminal_directory_identity(terminal, &intent, ".committed")?;
+                let edge = validate_posture_terminal_payload(
+                    &self.repo_root,
+                    terminal,
+                    &intent,
+                    PostureTerminalKindV1::Committed,
+                )?
+                .ok_or_else(|| {
+                    error(
+                        CharterPromotionErrorKindV1::DurabilityViolation,
+                        "committed posture terminal did not yield an authority edge",
+                    )
+                })?;
+                edges.push(edge);
+            }
+        }
+
+        if edges.is_empty() {
+            return Ok(None);
+        }
+        let mut successors: BTreeMap<Option<String>, Vec<AuthorityHistoryEdgeV1>> = BTreeMap::new();
+        for edge in edges {
+            successors
+                .entry(edge.basis.as_ref().map(|basis| basis.fingerprint.clone()))
+                .or_default()
+                .push(edge);
+        }
+
+        let mut cursor = None;
+        let mut head: Option<AuthorityHistoryEdgeV1> = None;
+        let mut latest_promotion_intent = None;
+        let mut traversed = 0_usize;
+        while let Some(mut next) = successors.remove(&cursor) {
+            if next.len() != 1 {
+                return Err(error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "committed authority history contains a forked successor basis",
+                ));
+            }
+            let edge = next.remove(0);
+            if head.is_none() && edge.kind != AuthorityHeadKindV1::Promotion {
+                return Err(error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "committed authority history does not begin with promotion genesis",
+                ));
+            }
+            if let Some(previous) = &head {
+                let basis = edge
+                    .basis
+                    .as_ref()
+                    .expect("non-genesis edges retain a basis");
+                let exact_basis = match edge.kind {
+                    AuthorityHeadKindV1::Promotion => {
+                        basis.fingerprint == previous.canonical.fingerprint
+                    }
+                    AuthorityHeadKindV1::PostureTransition => {
+                        basis == &previous.canonical
+                            && edge.promotion_ancestor == previous.promotion_ancestor
+                            && edge.prior_head.as_ref()
+                                == Some(&authority_head_from_committed(previous))
+                    }
+                };
+                if !exact_basis {
+                    return Err(error(
+                        CharterPromotionErrorKindV1::DurabilityViolation,
+                        "committed authority successor does not retain the exact prior head",
+                    ));
+                }
+            } else if edge.basis.is_some() {
+                return Err(error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "promotion genesis unexpectedly retains a basis",
+                ));
+            }
+            if let Some(intent) = edge.promotion_intent.clone() {
+                latest_promotion_intent = Some(intent);
+            }
+            cursor = Some(edge.canonical.fingerprint.clone());
+            head = Some(edge);
+            traversed += 1;
+            if traversed > 4096 {
+                return Err(error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "committed authority history exceeds its 4,096-edge bound",
+                ));
+            }
+        }
+        if !successors.is_empty() {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "committed authority history contains an unreachable or cyclic successor",
+            ));
+        }
+        let head = head.expect("non-empty edge set traverses promotion genesis");
+        let latest_promotion_intent = latest_promotion_intent.ok_or_else(|| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "committed authority history lacks a promotion genesis ancestor",
+            )
+        })?;
+        Ok(Some(CommittedAuthorityHeadV1 {
+            canonical: head.canonical,
+            source_kind: head.kind,
+            source: head.source,
+            lifecycle_transition: head.lifecycle_transition,
+            promotion_ancestor: head.promotion_ancestor,
+            latest_promotion_intent,
+        }))
     }
 
     fn recover_one_pending(&self, pending: &Path) -> Result<(), CharterPromotionErrorV1> {
@@ -1552,6 +1762,573 @@ impl CharterAuthorityTransactionServiceV1 {
             CharterPromotionErrorKindV1::DurabilityViolation,
             "pending promotion encountered unrelated canonical bytes",
         ))
+    }
+
+    fn recover_posture_pending_locked(&self) -> Result<(), CharterPromotionErrorV1> {
+        let root = self.posture_transaction_root();
+        if !root.exists() {
+            return Ok(());
+        }
+        reject_reparse_or_symlink(&root, true).map_err(map_lineage)?;
+        let inventory = posture_transaction_root_inventory(&root)?;
+        for pending in inventory.pending {
+            self.recover_one_posture_pending(&pending)?;
+        }
+        Ok(())
+    }
+
+    /// Applies a fully prepared private posture transition while holding the
+    /// same authority locks as promotion. The record types are crate-private,
+    /// so this does not widen the external engine surface.
+    pub(crate) fn apply_posture_transition(
+        &self,
+        posture: &ValidatedPostureTransitionV1,
+        lifecycle: &ValidatedLifecycleTransitionV11,
+        intent: &ValidatedPostureTransactionIntentV1,
+    ) -> Result<(), CharterPromotionErrorV1> {
+        ensure_supported_platform()?;
+        let _locks = AuthorityLocks::acquire(&self.repo_root)?;
+        self.recover_pending_locked()?;
+        self.apply_posture_transition_locked(posture, lifecycle, intent)
+    }
+
+    fn apply_posture_transition_locked(
+        &self,
+        posture: &ValidatedPostureTransitionV1,
+        lifecycle: &ValidatedLifecycleTransitionV11,
+        intent: &ValidatedPostureTransactionIntentV1,
+    ) -> Result<(), CharterPromotionErrorV1> {
+        let prepared = self.preflight_posture_transition(posture, lifecycle, intent)?;
+        let root = self.posture_transaction_root();
+        let pending = root.join(format!("{}.pending", intent.record.transaction_id));
+        let committed = root.join(format!("{}.committed", intent.record.transaction_id));
+        let rolled_back = root.join(format!("{}.rolled-back", intent.record.transaction_id));
+        if pending.exists() || committed.exists() || rolled_back.exists() {
+            return Err(error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture transaction identity already has a pending or terminal journal",
+            ));
+        }
+
+        publish_posture_intent_from_scratch(&self.repo_root, &root, &pending, intent)?;
+        write_new_durable(&pending.join("canonical.old"), &prepared.old_canonical)?;
+        if read_bounded_regular(&pending.join("canonical.old"), MAX_CANONICAL_BYTES)?
+            != prepared.old_canonical
+        {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture rollback snapshot differs from its preflight basis bytes",
+            ));
+        }
+        publish_posture_stage_from_scratch(
+            &self.repo_root,
+            &root,
+            &pending,
+            PostureStagePurposeV1::Canonical,
+            &prepared.new_canonical,
+            intent,
+        )?;
+        publish_posture_stage_from_scratch(
+            &self.repo_root,
+            &root,
+            &pending,
+            PostureStagePurposeV1::PostureTransition,
+            &posture.raw_bytes,
+            intent,
+        )?;
+        publish_posture_stage_from_scratch(
+            &self.repo_root,
+            &root,
+            &pending,
+            PostureStagePurposeV1::LifecycleTransition,
+            &lifecycle.raw_bytes,
+            intent,
+        )?;
+        publish_posture_marker(&pending, "prepared", &intent.raw_bytes)?;
+
+        // The first preflight happens before journal creation. This second
+        // byte-for-byte CAS is intentionally immediately before canonical
+        // replacement, and is therefore the physical write admission.
+        let live = read_current_canonical(&self.repo_root)?.ok_or_else(|| {
+            error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture write lost its canonical basis before installation",
+            )
+        })?;
+        verify_precommit_cas(&prepared.change, &live).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::Conflict,
+                format!("posture compare-and-swap refused: {failure:?}"),
+            )
+        })?;
+        let canonical_target = self.repo_root.join(CANONICAL_REF);
+        let canonical_parent = canonical_target.parent().expect("fixed canonical parent");
+        create_safe_directories(&self.repo_root, canonical_parent).map_err(map_lineage)?;
+        rename_durable(
+            &pending.join(posture_stage_name(PostureStagePurposeV1::Canonical)),
+            &canonical_target,
+            canonical_parent,
+        )?;
+        if read_current_canonical(&self.repo_root)?.as_deref()
+            != Some(prepared.new_canonical.as_slice())
+        {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture canonical target differs after atomic installation",
+            ));
+        }
+        sync_directory(&pending).map_err(map_lineage)?;
+        publish_posture_marker(&pending, "canonical-installed", &intent.raw_bytes)?;
+        self.install_posture_record_stage(
+            &pending,
+            PostureStagePurposeV1::PostureTransition,
+            intent,
+        )?;
+        self.install_posture_record_stage(
+            &pending,
+            PostureStagePurposeV1::LifecycleTransition,
+            intent,
+        )?;
+        validate_posture_final_records(&self.repo_root, intent)?;
+        publish_posture_marker(&pending, "records-installed", &intent.raw_bytes)?;
+        publish_posture_marker(&pending, "committed", &intent.raw_bytes)?;
+        self.finalize_posture_pending(
+            &pending,
+            &committed,
+            intent,
+            PostureTerminalKindV1::Committed,
+        )
+    }
+
+    fn preflight_posture_transition(
+        &self,
+        posture: &ValidatedPostureTransitionV1,
+        lifecycle: &ValidatedLifecycleTransitionV11,
+        intent: &ValidatedPostureTransactionIntentV1,
+    ) -> Result<PreparedPostureWriteV1, CharterPromotionErrorV1> {
+        if parse_posture_transition_v1(&posture.raw_bytes).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                format!("posture transition bytes refused: {}", failure.detail()),
+            )
+        })? != *posture
+            || parse_lifecycle_transition_v11(&lifecycle.raw_bytes).map_err(|failure| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    format!("posture lifecycle bytes refused: {}", failure.detail()),
+                )
+            })? != *lifecycle
+            || read_valid_posture_intent_from_bytes(&intent.raw_bytes)? != *intent
+        {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture preflight record bytes differ from their closed validated values",
+            ));
+        }
+        if lifecycle.record.prior_transition != intent.record.basis_head.lifecycle_transition {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture lifecycle prior head differs from the intent basis head",
+            ));
+        }
+
+        let old_canonical = read_current_canonical(&self.repo_root)?.ok_or_else(|| {
+            error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture transitions require an existing canonical Charter",
+            )
+        })?;
+        let old_exact = bind_exact_canonical_bytes(&old_canonical).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                format!("posture canonical basis bytes refused: {failure:?}"),
+            )
+        })?;
+        if !canonical_document_matches_bytes(&intent.record.expected_canonical, &old_canonical)
+            || intent.record.recovery.old_canonical != intent.record.expected_canonical
+        {
+            return Err(error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture expected/recovery canonical bytes differ from the live basis",
+            ));
+        }
+        let committed_head =
+            self.current_committed_authority_head_locked(&old_exact.canonical_fingerprint)?;
+        let observed_basis_head = AuthorityHeadV1 {
+            kind: match committed_head.source_kind {
+                AuthorityHeadKindV1::Promotion => "promotion".to_owned(),
+                AuthorityHeadKindV1::PostureTransition => "posture_transition".to_owned(),
+            },
+            source: committed_head.source.clone(),
+            canonical: committed_head.canonical.clone(),
+            lifecycle_transition: committed_head.lifecycle_transition.clone(),
+            promotion_ancestor: committed_head.promotion_ancestor.clone(),
+        };
+        if observed_basis_head != intent.record.basis_head {
+            return Err(error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture basis head is not the exact current heterogeneous authority head",
+            ));
+        }
+        let retained = CharterLifecycleStoreV1::new(&self.repo_root)
+            .observe_canonical_bytes_retained_locked(&old_canonical)
+            .map_err(|failure| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    format!("posture lifecycle basis refused: {}", failure.detail()),
+                )
+            })?;
+        let lifecycle_authority = retained.authority.ok_or_else(|| {
+            error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture transition has no retained lifecycle basis authority",
+            )
+        })?;
+        if lifecycle_authority.state != CharterLifecycleState::Current
+            || !lifecycle_authority.active_observation_refs.is_empty()
+            || lifecycle_authority.lifecycle_transition_ref
+                != intent.record.basis_head.lifecycle_transition.reference
+            || lifecycle_authority.lifecycle_transition_fingerprint
+                != intent.record.basis_head.lifecycle_transition.fingerprint
+            || lifecycle.record.prior_state_fingerprint != lifecycle_authority.state_fingerprint
+        {
+            return Err(error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture admission requires the exact current lifecycle head with no active observations",
+            ));
+        }
+
+        let decisions = resolve_shipped_profile_decisions(&self.repo_root).map_err(|_| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture preflight cannot resolve the shipped Charter profile",
+            )
+        })?;
+        let current = parse_canonical_charter(&decisions, &old_canonical).map_err(|_| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture preflight cannot parse the exact canonical basis",
+            )
+        })?;
+        let request = PostureChangeRequest {
+            dimension_id: posture.record.change.dimension_id.clone(),
+            dimension_index: posture.record.change.dimension_index,
+            authority_path: posture.record.change.authority_path.clone(),
+            expected_stored_value: posture.record.change.expected_stored_value,
+            expected_effective_level: posture.record.change.expected_effective_level,
+            proposed_effective_level: posture.record.change.proposed_effective_level,
+        };
+        let change = prepare_posture_change(&current, old_exact, request).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::Conflict,
+                format!("posture P1 preflight refused: {failure:?}"),
+            )
+        })?;
+        if !prepared_posture_change_matches_record(&change, posture) {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture P1 one-leaf preparation differs from the transition record",
+            ));
+        }
+        let new_canonical = serialize_canonical_charter(&decisions, &change.resulting_charter)
+            .map_err(|_| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "posture P1 result cannot be canonical-serialized",
+                )
+            })?;
+        if !canonical_document_matches_bytes(&intent.record.outputs.canonical, &new_canonical) {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture P1 serialized result differs from the intent canonical output",
+            ));
+        }
+        validate_posture_kernel_replay(&current, &change, &new_canonical, posture)?;
+        validate_posture_transaction_intent_bindings_v1(
+            intent,
+            posture,
+            lifecycle,
+            &old_canonical,
+            &new_canonical,
+        )
+        .map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                format!(
+                    "posture exact intent bindings refused: {}",
+                    failure.detail()
+                ),
+            )
+        })?;
+        validate_posture_semantic_authority_closure(
+            &self.repo_root,
+            posture,
+            lifecycle,
+            &old_canonical,
+            &new_canonical,
+            &lifecycle_authority.state_fingerprint,
+        )?;
+        for output in [
+            &intent.record.outputs.posture_transition,
+            &intent.record.outputs.lifecycle_transition,
+        ] {
+            if posture_record_final_bytes(&self.repo_root, output)?.is_some() {
+                return Err(error(
+                    CharterPromotionErrorKindV1::Conflict,
+                    "posture preflight found an already occupied private output final",
+                ));
+            }
+        }
+        Ok(PreparedPostureWriteV1 {
+            change,
+            old_canonical,
+            new_canonical,
+        })
+    }
+
+    fn install_posture_record_stage(
+        &self,
+        pending: &Path,
+        purpose: PostureStagePurposeV1,
+        intent: &ValidatedPostureTransactionIntentV1,
+    ) -> Result<(), CharterPromotionErrorV1> {
+        if purpose == PostureStagePurposeV1::Canonical {
+            return Err(error(
+                CharterPromotionErrorKindV1::InvalidRequest,
+                "canonical posture stage cannot be installed as a record final",
+            ));
+        }
+        let stage = pending.join(posture_stage_name(purpose));
+        let bytes = read_bounded_regular(&stage, MAX_POSTURE_RECORD_BYTES_V1)?;
+        validate_posture_output_bytes(purpose, &bytes, intent)?;
+        let output = posture_output_for(intent, purpose)?;
+        let final_path = self
+            .lineage
+            .state_path(&output.reference)
+            .map_err(map_lineage)?;
+        let parent = final_path.parent().ok_or_else(|| {
+            error(
+                CharterPromotionErrorKindV1::UnsafeFilesystem,
+                "posture record final has no parent",
+            )
+        })?;
+        create_safe_directories(&self.repo_root, parent).map_err(map_lineage)?;
+        match fs::symlink_metadata(&final_path) {
+            Err(failure) if failure.kind() == std::io::ErrorKind::NotFound => {
+                atomic_rename_no_replace(&stage, &final_path)?;
+                sync_directory(pending).map_err(map_lineage)?;
+                sync_directory(parent).map_err(map_lineage)?;
+            }
+            Ok(metadata) if metadata.file_type().is_symlink() || !metadata.is_file() => {
+                return Err(error(
+                    CharterPromotionErrorKindV1::UnsafeFilesystem,
+                    "pre-existing posture record final is not a regular file",
+                ));
+            }
+            Ok(_) => {
+                if read_bounded_regular(&final_path, MAX_POSTURE_RECORD_BYTES_V1)? != bytes {
+                    return Err(error(
+                        CharterPromotionErrorKindV1::Conflict,
+                        "pre-existing posture record final has unequal bytes",
+                    ));
+                }
+                fs::remove_file(&stage)
+                    .map_err(|_| io_error("redundant posture record stage removal failed"))?;
+                sync_directory(pending).map_err(map_lineage)?;
+            }
+            Err(_) => return Err(io_error("posture record final metadata observation failed")),
+        }
+        let installed = read_bounded_regular(&final_path, MAX_POSTURE_RECORD_BYTES_V1)?;
+        validate_posture_output_bytes(purpose, &installed, intent)
+    }
+
+    fn finalize_posture_pending(
+        &self,
+        pending: &Path,
+        destination: &Path,
+        intent: &ValidatedPostureTransactionIntentV1,
+        kind: PostureTerminalKindV1,
+    ) -> Result<(), CharterPromotionErrorV1> {
+        sync_directory(pending).map_err(map_lineage)?;
+        validate_posture_pending_terminal(&self.repo_root, pending, intent, kind)?;
+        if destination.exists() {
+            return Err(error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture terminal destination already exists; no-replace publication refused",
+            ));
+        }
+        atomic_rename_no_replace(pending, destination)?;
+        sync_directory(&self.posture_transaction_root()).map_err(map_lineage)?;
+        validate_posture_terminal_payload(&self.repo_root, destination, intent, kind)?;
+        Ok(())
+    }
+
+    fn recover_one_posture_pending(&self, pending: &Path) -> Result<(), CharterPromotionErrorV1> {
+        reject_reparse_or_symlink(pending, true).map_err(map_lineage)?;
+        let names = posture_pending_entry_names(pending)?;
+        validate_posture_pending_names(&names)?;
+        if !names.contains("intent.json") {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture pending journal has no exact intent bytes; evidence is preserved",
+            ));
+        }
+        let intent = read_valid_posture_intent(pending)?;
+        validate_posture_pending_identity(pending, &intent)?;
+        let committed = self
+            .posture_transaction_root()
+            .join(format!("{}.committed", intent.record.transaction_id));
+        let rolled_back = self
+            .posture_transaction_root()
+            .join(format!("{}.rolled-back", intent.record.transaction_id));
+        if committed.exists() || rolled_back.exists() {
+            return Err(error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture pending and terminal journals coexist; evidence is preserved",
+            ));
+        }
+        let current = read_current_canonical(&self.repo_root)?;
+        let is_basis = current.as_deref().is_some_and(|bytes| {
+            canonical_document_matches_bytes(&intent.record.expected_canonical, bytes)
+        });
+        let is_result = current.as_deref().is_some_and(|bytes| {
+            canonical_document_matches_bytes(&intent.record.outputs.canonical, bytes)
+        });
+        let committed_marker = observe_posture_marker(pending, "committed", &intent.raw_bytes)?;
+        let rolled_back_marker = observe_posture_marker(pending, "rolled-back", &intent.raw_bytes)?;
+        if rolled_back_marker == PostureMarkerObservationV1::Published {
+            if !is_basis {
+                return Err(error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "posture rollback marker requires the exact basis canonical bytes",
+                ));
+            }
+            validate_posture_pending_terminal(
+                &self.repo_root,
+                pending,
+                &intent,
+                PostureTerminalKindV1::RolledBack,
+            )?;
+            return self.finalize_posture_pending(
+                pending,
+                &rolled_back,
+                &intent,
+                PostureTerminalKindV1::RolledBack,
+            );
+        }
+        if committed_marker == PostureMarkerObservationV1::Published {
+            if !is_result {
+                return Err(error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "posture committed marker requires the exact resulting canonical bytes",
+                ));
+            }
+            validate_posture_pending_terminal(
+                &self.repo_root,
+                pending,
+                &intent,
+                PostureTerminalKindV1::Committed,
+            )?;
+            return self.finalize_posture_pending(
+                pending,
+                &committed,
+                &intent,
+                PostureTerminalKindV1::Committed,
+            );
+        }
+        if is_basis {
+            validate_posture_rollback_origin(&self.repo_root, pending, &intent)?;
+            return self.rollback_posture_and_finalize(pending, &rolled_back, &intent);
+        }
+        if is_result {
+            validate_posture_roll_forward_origin(&self.repo_root, pending, &intent)?;
+            return self.roll_forward_posture_and_finalize(pending, &committed, &intent);
+        }
+        Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture pending canonical bytes match neither its exact basis nor result; evidence is preserved",
+        ))
+    }
+
+    fn rollback_posture_and_finalize(
+        &self,
+        pending: &Path,
+        destination: &Path,
+        intent: &ValidatedPostureTransactionIntentV1,
+    ) -> Result<(), CharterPromotionErrorV1> {
+        for purpose in [
+            PostureStagePurposeV1::LifecycleTransition,
+            PostureStagePurposeV1::PostureTransition,
+            PostureStagePurposeV1::Canonical,
+        ] {
+            remove_exact_posture_stage(pending, purpose, intent)?;
+        }
+        remove_exact_posture_marker(pending, "prepared", &intent.raw_bytes)?;
+        publish_posture_marker(pending, "rolled-back", &intent.raw_bytes)?;
+        self.finalize_posture_pending(
+            pending,
+            destination,
+            intent,
+            PostureTerminalKindV1::RolledBack,
+        )
+    }
+
+    fn roll_forward_posture_and_finalize(
+        &self,
+        pending: &Path,
+        destination: &Path,
+        intent: &ValidatedPostureTransactionIntentV1,
+    ) -> Result<(), CharterPromotionErrorV1> {
+        ensure_posture_marker(pending, "canonical-installed", &intent.raw_bytes)?;
+        self.recover_posture_record_output(
+            pending,
+            PostureStagePurposeV1::PostureTransition,
+            intent,
+        )?;
+        self.recover_posture_record_output(
+            pending,
+            PostureStagePurposeV1::LifecycleTransition,
+            intent,
+        )?;
+        validate_posture_final_records(&self.repo_root, intent)?;
+        ensure_posture_marker(pending, "records-installed", &intent.raw_bytes)?;
+        ensure_posture_marker(pending, "committed", &intent.raw_bytes)?;
+        self.finalize_posture_pending(
+            pending,
+            destination,
+            intent,
+            PostureTerminalKindV1::Committed,
+        )
+    }
+
+    fn recover_posture_record_output(
+        &self,
+        pending: &Path,
+        purpose: PostureStagePurposeV1,
+        intent: &ValidatedPostureTransactionIntentV1,
+    ) -> Result<(), CharterPromotionErrorV1> {
+        let stage = pending.join(posture_stage_name(purpose));
+        let output = posture_output_for(intent, purpose)?;
+        let final_path = self
+            .lineage
+            .state_path(&output.reference)
+            .map_err(map_lineage)?;
+        let stage_bytes = optional_bounded_regular(&stage, MAX_POSTURE_RECORD_BYTES_V1)?;
+        let final_bytes = optional_bounded_regular(&final_path, MAX_POSTURE_RECORD_BYTES_V1)?;
+        if let Some(bytes) = &stage_bytes {
+            validate_posture_output_bytes(purpose, bytes, intent)?;
+        }
+        if let Some(bytes) = &final_bytes {
+            validate_posture_output_bytes(purpose, bytes, intent)?;
+        }
+        match (stage_bytes, final_bytes) {
+            (Some(_), _) => self.install_posture_record_stage(pending, purpose, intent),
+            (None, Some(_)) => Ok(()),
+            (None, None) => Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture roll-forward record is neither an exact stage nor final",
+            )),
+        }
     }
 
     fn roll_forward_and_finalize(
@@ -2105,6 +2882,11 @@ impl CharterAuthorityTransactionServiceV1 {
     fn transaction_root(&self) -> PathBuf {
         self.repo_root
             .join(".handbook/state/transactions/promotions")
+    }
+
+    fn posture_transaction_root(&self) -> PathBuf {
+        self.repo_root
+            .join(".handbook/state/transactions/posture-transitions")
     }
 
     fn pending_path(&self, transaction_id: &str) -> PathBuf {
@@ -4194,6 +4976,1426 @@ mod retained_authority_tests {
             CharterPromotionErrorKindV1::Conflict
         );
     }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum PostureTerminalKindV1 {
+    Committed,
+    RolledBack,
+}
+
+fn validate_current_canonical_against_head(
+    bytes: &[u8],
+    canonical: &CanonicalDocumentV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    if bytes.is_empty()
+        || bytes.len() as u64 != canonical.byte_length
+        || DefinitionFingerprint::from_bytes(bytes).to_string() != canonical.document_sha256
+        || canonical.fingerprint != canonical.document_sha256
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "current canonical authority differs from the committed heterogeneous head",
+        ));
+    }
+    Ok(())
+}
+
+fn promotion_history_edge(
+    intent: ValidatedPromotionIntentV12,
+) -> Result<AuthorityHistoryEdgeV1, CharterPromotionErrorV1> {
+    if intent.record.target.basis_artifact_fingerprint
+        != intent.record.target.observed_current_artifact_fingerprint
+        || intent.record.outputs.new_canonical_fingerprint
+            != intent.record.outputs.new_canonical_document_sha256
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "promotion terminal has an inconsistent authority basis or canonical output",
+        ));
+    }
+    let source = PairV1 {
+        reference: intent.record.outputs.promotion_record.record_ref.clone(),
+        fingerprint: intent
+            .record
+            .outputs
+            .promotion_record
+            .record_fingerprint
+            .clone(),
+    };
+    let basis = intent
+        .record
+        .target
+        .observed_current_artifact_fingerprint
+        .clone()
+        .map(|fingerprint| CanonicalDocumentV1 {
+            reference: CANONICAL_REF.to_owned(),
+            document_sha256: fingerprint.clone(),
+            fingerprint,
+            byte_length: 0,
+        });
+    Ok(AuthorityHistoryEdgeV1 {
+        kind: AuthorityHeadKindV1::Promotion,
+        basis,
+        prior_head: None,
+        canonical: CanonicalDocumentV1 {
+            reference: CANONICAL_REF.to_owned(),
+            fingerprint: intent.record.outputs.new_canonical_fingerprint.clone(),
+            document_sha256: intent.record.outputs.new_canonical_document_sha256.clone(),
+            byte_length: intent.record.outputs.new_canonical_byte_length,
+        },
+        source: source.clone(),
+        lifecycle_transition: PairV1 {
+            reference: intent
+                .record
+                .outputs
+                .lifecycle_transition
+                .record_ref
+                .clone(),
+            fingerprint: intent
+                .record
+                .outputs
+                .lifecycle_transition
+                .record_fingerprint
+                .clone(),
+        },
+        promotion_ancestor: source,
+        promotion_intent: Some(intent),
+    })
+}
+
+fn authority_head_from_committed(head: &AuthorityHistoryEdgeV1) -> AuthorityHeadV1 {
+    AuthorityHeadV1 {
+        kind: match head.kind {
+            AuthorityHeadKindV1::Promotion => "promotion".to_owned(),
+            AuthorityHeadKindV1::PostureTransition => "posture_transition".to_owned(),
+        },
+        source: head.source.clone(),
+        canonical: head.canonical.clone(),
+        lifecycle_transition: head.lifecycle_transition.clone(),
+        promotion_ancestor: head.promotion_ancestor.clone(),
+    }
+}
+
+fn posture_transaction_root_inventory(
+    root: &Path,
+) -> Result<PostureTransactionRootInventoryV1, CharterPromotionErrorV1> {
+    let mut inventory = PostureTransactionRootInventoryV1 {
+        pending: Vec::new(),
+        committed: Vec::new(),
+        rolled_back: Vec::new(),
+    };
+    let mut transaction_ids = BTreeSet::new();
+    for entry in fs::read_dir(root).map_err(|_| io_error("posture transaction root read failed"))? {
+        let entry = entry.map_err(|_| io_error("posture transaction root entry read failed"))?;
+        let name = entry.file_name().into_string().map_err(|_| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture transaction root entry name is not UTF-8",
+            )
+        })?;
+        if name == INTENT_STAGING_NAME {
+            validate_posture_intent_staging(&entry.path())?;
+            continue;
+        }
+        if name == OUTPUT_STAGING_NAME {
+            validate_posture_output_staging(&entry.path())?;
+            continue;
+        }
+        let (transaction_id, destination) = if let Some(id) = name.strip_suffix(".pending") {
+            (id, &mut inventory.pending)
+        } else if let Some(id) = name.strip_suffix(".committed") {
+            (id, &mut inventory.committed)
+        } else if let Some(id) = name.strip_suffix(".rolled-back") {
+            (id, &mut inventory.rolled_back)
+        } else {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture transaction root contains an unsupported suffix or name",
+            ));
+        };
+        validate_posture_transaction_id(transaction_id)?;
+        if !transaction_ids.insert(transaction_id.to_owned()) {
+            return Err(error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture transaction ID has simultaneous suffixes",
+            ));
+        }
+        let path = entry.path();
+        reject_reparse_or_symlink(&path, true).map_err(map_lineage)?;
+        destination.push(path);
+    }
+    inventory.pending.sort();
+    inventory.committed.sort();
+    inventory.rolled_back.sort();
+    Ok(inventory)
+}
+
+fn validate_posture_transaction_id(transaction_id: &str) -> Result<(), CharterPromotionErrorV1> {
+    let Some(hex) = transaction_id.strip_prefix("posture-transaction_") else {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture transaction ID prefix is invalid",
+        ));
+    };
+    if hex.len() != 32
+        || !hex
+            .bytes()
+            .all(|byte| byte.is_ascii_digit() || matches!(byte, b'a'..=b'f'))
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture transaction ID must be exactly 128 lowercase random bits",
+        ));
+    }
+    Ok(())
+}
+
+fn read_valid_posture_intent(
+    directory: &Path,
+) -> Result<ValidatedPostureTransactionIntentV1, CharterPromotionErrorV1> {
+    let bytes = read_bounded_regular(&directory.join("intent.json"), MAX_POSTURE_RECORD_BYTES_V1)?;
+    parse_posture_transaction_intent_v1(&bytes).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture transaction intent refused: {}", failure.detail()),
+        )
+    })
+}
+
+fn validate_posture_terminal_directory_identity(
+    directory: &Path,
+    intent: &ValidatedPostureTransactionIntentV1,
+    suffix: &str,
+) -> Result<(), CharterPromotionErrorV1> {
+    let expected = format!("{}{suffix}", intent.record.transaction_id);
+    if directory.file_name().and_then(|name| name.to_str()) != Some(expected.as_str()) {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture terminal directory key differs from its intent transaction ID",
+        ));
+    }
+    Ok(())
+}
+
+fn validate_posture_terminal_payload(
+    repo_root: &Path,
+    directory: &Path,
+    intent: &ValidatedPostureTransactionIntentV1,
+    kind: PostureTerminalKindV1,
+) -> Result<Option<AuthorityHistoryEdgeV1>, CharterPromotionErrorV1> {
+    let expected: BTreeSet<&str> = match kind {
+        PostureTerminalKindV1::Committed => BTreeSet::from([
+            "intent.json",
+            "canonical.old",
+            "prepared",
+            "canonical-installed",
+            "records-installed",
+            "committed",
+        ]),
+        PostureTerminalKindV1::RolledBack => {
+            BTreeSet::from(["intent.json", "canonical.old", "rolled-back"])
+        }
+    };
+    if posture_pending_entry_names(directory)?
+        != expected
+            .into_iter()
+            .map(str::to_owned)
+            .collect::<BTreeSet<_>>()
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture terminal name set is not exact",
+        ));
+    }
+    if read_valid_posture_intent(directory)? != *intent {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture terminal intent bytes changed",
+        ));
+    }
+    let marker = posture_transaction_intent_marker_v1(&intent.raw_bytes);
+    let markers: &[&str] = match kind {
+        PostureTerminalKindV1::Committed => &[
+            "prepared",
+            "canonical-installed",
+            "records-installed",
+            "committed",
+        ],
+        PostureTerminalKindV1::RolledBack => &["rolled-back"],
+    };
+    for name in markers {
+        if read_bounded_regular(&directory.join(name), marker.len())? != marker {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture terminal marker does not bind exact intent bytes",
+            ));
+        }
+    }
+    let old = read_bounded_regular(&directory.join("canonical.old"), MAX_CANONICAL_BYTES)?;
+    validate_current_canonical_against_head(&old, &intent.record.recovery.old_canonical)?;
+    if kind == PostureTerminalKindV1::RolledBack {
+        let current = read_current_canonical(repo_root)?.ok_or_else(|| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "rolled-back posture terminal has no current canonical authority",
+            )
+        })?;
+        if !canonical_document_matches_bytes(&intent.record.expected_canonical, &current)
+            || posture_record_final_bytes(repo_root, &intent.record.outputs.posture_transition)?
+                .is_some()
+            || posture_record_final_bytes(repo_root, &intent.record.outputs.lifecycle_transition)?
+                .is_some()
+        {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "rolled-back posture terminal does not retain exact basis with no owned finals",
+            ));
+        }
+        return Ok(None);
+    }
+    let current = read_current_canonical(repo_root)?.ok_or_else(|| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "committed posture terminal has no current canonical authority",
+        )
+    })?;
+    if !canonical_document_matches_bytes(&intent.record.outputs.canonical, &current) {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "committed posture terminal current canonical differs from intent output",
+        ));
+    }
+    let posture_bytes = read_private_posture_output(
+        repo_root,
+        &intent.record.outputs.posture_transition,
+        "posture terminal posture transition",
+    )?;
+    let lifecycle_bytes = read_private_posture_output(
+        repo_root,
+        &intent.record.outputs.lifecycle_transition,
+        "posture terminal lifecycle transition",
+    )?;
+    let posture = parse_posture_transition_v1(&posture_bytes).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture transition final refused: {}", failure.detail()),
+        )
+    })?;
+    let lifecycle = parse_lifecycle_transition_v11(&lifecycle_bytes).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture lifecycle final refused: {}", failure.detail()),
+        )
+    })?;
+    validate_posture_terminal_bindings(intent, &posture, &lifecycle)?;
+    validate_posture_semantic_authority_closure(
+        repo_root,
+        &posture,
+        &lifecycle,
+        &old,
+        &current,
+        &lifecycle.record.prior_state_fingerprint,
+    )?;
+    validate_posture_terminal_kernel_replay(repo_root, &old, &current, &posture)?;
+    Ok(Some(AuthorityHistoryEdgeV1 {
+        kind: AuthorityHeadKindV1::PostureTransition,
+        basis: Some(intent.record.expected_canonical.clone()),
+        prior_head: Some(intent.record.basis_head.clone()),
+        canonical: intent.record.outputs.canonical.clone(),
+        source: PairV1 {
+            reference: posture_transition_output_record_v1(&posture).reference,
+            fingerprint: posture.record.transition_fingerprint.clone(),
+        },
+        lifecycle_transition: PairV1 {
+            reference: lifecycle_transition_output_record_v11(&lifecycle).reference,
+            fingerprint: lifecycle.record.transition_fingerprint.clone(),
+        },
+        promotion_ancestor: intent.record.basis_head.promotion_ancestor.clone(),
+        promotion_intent: None,
+    }))
+}
+
+fn read_private_posture_output(
+    repo_root: &Path,
+    output: &OutputRecordV1,
+    label: &str,
+) -> Result<Vec<u8>, CharterPromotionErrorV1> {
+    let path = TrustedLineageStoreV1::new(repo_root)
+        .state_path(&output.reference)
+        .map_err(map_lineage)?;
+    reject_reparse_or_symlink(&path, false).map_err(map_lineage)?;
+    let bytes = read_bounded_regular(&path, MAX_POSTURE_RECORD_BYTES_V1)?;
+    if bytes.len() as u64 != output.byte_length
+        || DefinitionFingerprint::from_bytes(&bytes).to_string() != output.document_sha256
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("{label} bytes differ from intent hash/length"),
+        ));
+    }
+    Ok(bytes)
+}
+
+fn validate_posture_terminal_bindings(
+    intent: &ValidatedPostureTransactionIntentV1,
+    posture: &ValidatedPostureTransitionV1,
+    lifecycle: &ValidatedLifecycleTransitionV11,
+) -> Result<(), CharterPromotionErrorV1> {
+    validate_lifecycle_transition_bindings_v11(lifecycle, posture).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture lifecycle binding refused: {}", failure.detail()),
+        )
+    })?;
+    let record = &intent.record;
+    if record.basis_head != posture.record.prior_authority_head
+        || record.expected_canonical != posture.record.expected_canonical
+        || record.basis_head.canonical != record.expected_canonical
+        || record.recovery.old_canonical != record.expected_canonical
+        || record.change != posture.record.change
+        || record.authority_inputs.recommendation != posture.record.recommendation
+        || record.authority_inputs.source_kernel != posture.record.source_kernel
+        || record.authority_inputs.evaluation_policy != posture.record.evaluation_policy
+        || record.authority_inputs.approval_inputs != posture.record.approval_inputs
+        || record.authority_inputs.authorized_by_ref != posture.record.authorized_by_ref
+        || record.authority_inputs.reassessment != posture.record.reassessment
+        || record.kernel_replay != posture.record.kernel_replay
+        || record.outputs.canonical != posture.record.resulting_canonical
+        || record.outputs.posture_transition != posture_transition_output_record_v1(posture)
+        || record.outputs.lifecycle_transition != lifecycle_transition_output_record_v11(lifecycle)
+        || lifecycle.record.prior_transition != record.basis_head.lifecycle_transition
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture terminal cross-record bindings are substituted",
+        ));
+    }
+    Ok(())
+}
+
+fn read_valid_posture_intent_from_bytes(
+    bytes: &[u8],
+) -> Result<ValidatedPostureTransactionIntentV1, CharterPromotionErrorV1> {
+    parse_posture_transaction_intent_v1(bytes).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture transaction intent refused: {}", failure.detail()),
+        )
+    })
+}
+
+fn canonical_document_matches_bytes(document: &CanonicalDocumentV1, bytes: &[u8]) -> bool {
+    document.byte_length == bytes.len() as u64
+        && document.fingerprint == document.document_sha256
+        && document.document_sha256 == DefinitionFingerprint::from_bytes(bytes).to_string()
+}
+
+fn prepared_posture_change_matches_record(
+    change: &crate::project_posture::PreparedPostureChange,
+    posture: &ValidatedPostureTransitionV1,
+) -> bool {
+    let expected = &posture.record.change;
+    change.change.dimension_id == expected.dimension_id
+        && change.change.dimension_index == expected.dimension_index
+        && change.change.authority_path == expected.authority_path
+        && change.change.baseline_level == expected.baseline_level
+        && change.change.expected_stored_value == expected.expected_stored_value
+        && change.change.expected_effective_level == expected.expected_effective_level
+        && change.change.proposed_stored_value == expected.proposed_stored_value
+        && change.change.proposed_effective_level == expected.proposed_effective_level
+}
+
+fn validate_posture_kernel_replay(
+    source: &crate::CanonicalCharter,
+    change: &crate::project_posture::PreparedPostureChange,
+    new_canonical: &[u8],
+    posture: &ValidatedPostureTransitionV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    let source_kernel =
+        derive_project_posture_kernel(source, &change.current_canonical).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                format!("posture source kernel replay refused: {failure:?}"),
+            )
+        })?;
+    let resulting_exact = bind_exact_canonical_bytes(new_canonical).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture resulting canonical bytes refused: {failure:?}"),
+        )
+    })?;
+    let resulting_kernel =
+        derive_project_posture_kernel(&change.resulting_charter, &resulting_exact).map_err(
+            |failure| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    format!("posture resulting kernel replay refused: {failure:?}"),
+                )
+            },
+        )?;
+    let replay = &posture.record.kernel_replay;
+    if posture.record.source_kernel.fingerprint != source_kernel.kernel_fingerprint
+        || posture.record.resulting_kernel.fingerprint != resulting_kernel.kernel_fingerprint
+        || replay.source_input_fingerprint != source_kernel.input_fingerprint
+        || replay.resulting_input_fingerprint != resulting_kernel.input_fingerprint
+        || replay.source_authority_fingerprint != change.current_canonical.canonical_fingerprint
+        || replay.resulting_authority_fingerprint != resulting_exact.canonical_fingerprint
+        || replay.dimensions.len() != source_kernel.dimensions.len()
+        || replay.dimensions.len() != resulting_kernel.dimensions.len()
+        || replay
+            .dimensions
+            .iter()
+            .zip(&source_kernel.dimensions)
+            .zip(&resulting_kernel.dimensions)
+            .any(|((replayed, source), resulting)| {
+                replayed.dimension_id != source.dimension_id
+                    || replayed.dimension_id != resulting.dimension_id
+                    || replayed.source_effective_level != source.effective_level
+                    || replayed.resulting_effective_level != resulting.effective_level
+                    || replayed.red_line_refs != source.red_line_refs
+                    || replayed.red_line_refs != resulting.red_line_refs
+                    || replayed.trigger_refs != source.trigger_refs
+                    || replayed.trigger_refs != resulting.trigger_refs
+                    || replayed.allowed_shortcut_refs != source.allowed_shortcut_refs
+                    || replayed.allowed_shortcut_refs != resulting.allowed_shortcut_refs
+            })
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture normalized resulting-kernel replay differs from the exact source/result Charters",
+        ));
+    }
+    Ok(())
+}
+
+fn validate_posture_semantic_authority_closure(
+    repo_root: &Path,
+    posture: &ValidatedPostureTransitionV1,
+    lifecycle: &ValidatedLifecycleTransitionV11,
+    old_canonical: &[u8],
+    new_canonical: &[u8],
+    retained_lifecycle_state_fingerprint: &str,
+) -> Result<(), CharterPromotionErrorV1> {
+    let lineage = TrustedLineageStoreV1::new(repo_root);
+    let recommendation = &posture.record.recommendation;
+    let candidate = lineage
+        .read_record_by_ref(
+            LineageRecordClassV1::Candidate,
+            &recommendation.reference,
+            Some(&recommendation.fingerprint),
+        )
+        .map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::Conflict,
+                format!(
+                    "posture recommendation authority refused: {}",
+                    failure.detail()
+                ),
+            )
+        })?;
+    if string_field(&candidate, "candidate_fingerprint").map_err(map_lineage)?
+        != recommendation.fingerprint
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::Conflict,
+            "posture recommendation does not retain its exact candidate identity",
+        ));
+    }
+    let retained_validation = validate_candidate_exact_result_authority(repo_root, &candidate)
+        .map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::Conflict,
+                format!(
+                    "posture recommendation lifecycle-validation authority refused: {}",
+                    failure.detail()
+                ),
+            )
+        })?;
+    let validation = validate_result_bytes(
+        &retained_validation.bytes,
+        Some(&retained_validation.relative_ref),
+    )
+    .map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::Conflict,
+            format!(
+                "posture reassessment result authority refused: {}",
+                failure.detail()
+            ),
+        )
+    })?;
+    let normalized_content_ref =
+        string_field(&candidate, "normalized_content_ref").map_err(map_lineage)?;
+    let normalized_content = lineage
+        .read_candidate_content(normalized_content_ref)
+        .map_err(map_lineage)?;
+    let old_fingerprint = DefinitionFingerprint::from_bytes(old_canonical).to_string();
+    if normalized_content != new_canonical
+        || validation.basis_artifact_fingerprint.as_deref() != Some(old_fingerprint.as_str())
+        || validation.observed_current_artifact_fingerprint.as_deref()
+            != Some(old_fingerprint.as_str())
+        || validation.lifecycle_head_ref.as_deref()
+            != Some(
+                posture
+                    .record
+                    .prior_authority_head
+                    .lifecycle_transition
+                    .reference
+                    .as_str(),
+            )
+        || validation.lifecycle_head_fingerprint.as_deref()
+            != Some(
+                posture
+                    .record
+                    .prior_authority_head
+                    .lifecycle_transition
+                    .fingerprint
+                    .as_str(),
+            )
+        || validation.lifecycle_state != "current"
+        || validation.lifecycle_state_fingerprint.as_deref()
+            != Some(retained_lifecycle_state_fingerprint)
+        || !validation.active_observations.is_empty()
+        || !validation.reopened_coverage_ids.is_empty()
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::Conflict,
+            "posture recommendation closure is stale, substituted, or does not bind the exact current authority",
+        ));
+    }
+    let validation_pair = PairV1 {
+        reference: retained_validation.relative_ref,
+        fingerprint: validation.validation_result_fingerprint.clone(),
+    };
+    let replay = &posture.record.kernel_replay;
+    if posture.record.evaluation_policy.reference != validation.lifecycle_policy_ref
+        || posture.record.evaluation_policy.fingerprint != validation.lifecycle_policy_fingerprint
+        || replay.profile_input.reference != validation.profile_ref
+        || replay.profile_input.fingerprint != validation.resolved_profile_fingerprint
+        || !replay.override_inputs.is_empty()
+        || !replay.condition_inputs.is_empty()
+        || !replay.contract_inputs.is_empty()
+        || !replay.evidence_inputs.is_empty()
+        || !replay.snapshot_inputs.is_empty()
+        || replay.freshness_basis.is_some()
+        || !replay.applicable_scope_refs.is_empty()
+        || !replay.omitted_condition_refs.is_empty()
+        || !replay.unresolved_condition_refs.is_empty()
+        || posture.record.reassessment.intake_definition.reference != validation.intake_record_ref
+        || posture.record.reassessment.intake_definition.fingerprint
+            != validation.intake_record_fingerprint
+        || posture
+            .record
+            .reassessment
+            .validation_result_inputs
+            .as_slice()
+            != std::slice::from_ref(&validation_pair)
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::Conflict,
+            "posture profile, condition, evidence, snapshot, freshness, policy, or reassessment closure is synthetic or incomplete",
+        ));
+    }
+    let registry = observe_committed_approver_registry_locked(repo_root).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::Conflict,
+            format!(
+                "posture approver-registry authority refused: {}",
+                failure.detail()
+            ),
+        )
+    })?;
+    let decisions = resolve_shipped_profile_decisions(repo_root).map_err(|_| {
+        error(
+            CharterPromotionErrorKindV1::Conflict,
+            "posture approval closure cannot resolve the selected shipped profile",
+        )
+    })?;
+    let current = parse_canonical_charter(&decisions, old_canonical).map_err(|_| {
+        error(
+            CharterPromotionErrorKindV1::Conflict,
+            "posture approval closure cannot parse the exact current Charter",
+        )
+    })?;
+    let required_pairs = required_approval_pairs_for_authority(&registry.state, Some(&current))
+        .map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::Conflict,
+                format!(
+                    "posture approval closure cannot recompute required approvals: {}",
+                    failure.detail()
+                ),
+            )
+        })?;
+    let committed_approval_refs = observe_committed_candidate_approval_refs_locked(
+        repo_root,
+        &recommendation.reference,
+        &recommendation.fingerprint,
+        None,
+    )
+    .map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::Conflict,
+            format!("posture approval closure refused: {}", failure.message),
+        )
+    })?;
+    let expected_approvals = committed_approval_refs
+        .iter()
+        .map(|reference| {
+            Ok(PairV1 {
+                reference: reference.clone(),
+                fingerprint: fingerprint_from_content_ref(
+                    reference,
+                    "approvals/approval_",
+                    ".json",
+                )?,
+            })
+        })
+        .collect::<Result<Vec<_>, CharterPromotionErrorV1>>()?;
+    if posture.record.approval_inputs != expected_approvals
+        || expected_approvals.len() != required_pairs.len()
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::Conflict,
+            "posture approval closure is missing, stale, or substituted",
+        ));
+    }
+    let mut approved_authorities = BTreeSet::new();
+    for approval_pair in &posture.record.approval_inputs {
+        let approval = lineage
+            .read_record_by_ref(
+                LineageRecordClassV1::Approval,
+                &approval_pair.reference,
+                Some(&approval_pair.fingerprint),
+            )
+            .map_err(map_lineage)?;
+        let approval_class = string_field(&approval, "approval_class")
+            .map_err(map_lineage)?
+            .to_owned();
+        let authority_ref = string_field(&approval, "authority_ref")
+            .map_err(map_lineage)?
+            .to_owned();
+        if string_field(&approval, "decision").map_err(map_lineage)? != "approved"
+            || string_field(&approval, "candidate_ref").map_err(map_lineage)?
+                != recommendation.reference
+            || string_field(&approval, "candidate_fingerprint").map_err(map_lineage)?
+                != recommendation.fingerprint
+            || string_field(&approval, "basis_artifact_fingerprint").map_err(map_lineage)?
+                != old_fingerprint
+            || string_field(&approval, "approver_registry_state_ref").map_err(map_lineage)?
+                != registry.state_ref
+            || string_field(&approval, "approver_registry_state_fingerprint")
+                .map_err(map_lineage)?
+                != registry.state_fingerprint
+            || string_field(&approval, "registry_head_transition_ref").map_err(map_lineage)?
+                != registry.head_transition_ref
+            || string_field(&approval, "registry_head_transition_fingerprint")
+                .map_err(map_lineage)?
+                != registry.head_transition_fingerprint
+            || !required_pairs.iter().any(|required| {
+                required.approval_class == approval_class && required.authority_ref == authority_ref
+            })
+        {
+            return Err(error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture approval closure does not match the exact current candidate and approver authority",
+            ));
+        }
+        approved_authorities.insert((approval_class, authority_ref));
+    }
+    if required_pairs.iter().any(|required| {
+        !approved_authorities.contains(&(
+            required.approval_class.clone(),
+            required.authority_ref.clone(),
+        ))
+    }) || !approved_authorities
+        .iter()
+        .any(|(_, authority_ref)| authority_ref == &posture.record.authorized_by_ref)
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::Conflict,
+            "posture approvals do not cover the exact current authorization set",
+        ));
+    }
+    if lifecycle.record.prior_state_fingerprint != retained_lifecycle_state_fingerprint {
+        return Err(error(
+            CharterPromotionErrorKindV1::Conflict,
+            "posture lifecycle prior state is not the exact retained current state",
+        ));
+    }
+    Ok(())
+}
+
+fn validate_posture_terminal_kernel_replay(
+    repo_root: &Path,
+    old_canonical: &[u8],
+    new_canonical: &[u8],
+    posture: &ValidatedPostureTransitionV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    let decisions = resolve_shipped_profile_decisions(repo_root).map_err(|_| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture terminal cannot resolve the shipped Charter profile",
+        )
+    })?;
+    let source = parse_canonical_charter(&decisions, old_canonical).map_err(|_| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture terminal cannot parse its exact rollback snapshot",
+        )
+    })?;
+    let source_exact = bind_exact_canonical_bytes(old_canonical).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture terminal source bytes refused: {failure:?}"),
+        )
+    })?;
+    let request = PostureChangeRequest {
+        dimension_id: posture.record.change.dimension_id.clone(),
+        dimension_index: posture.record.change.dimension_index,
+        authority_path: posture.record.change.authority_path.clone(),
+        expected_stored_value: posture.record.change.expected_stored_value,
+        expected_effective_level: posture.record.change.expected_effective_level,
+        proposed_effective_level: posture.record.change.proposed_effective_level,
+    };
+    let change = prepare_posture_change(&source, source_exact, request).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture terminal P1 replay refused: {failure:?}"),
+        )
+    })?;
+    let replayed =
+        serialize_canonical_charter(&decisions, &change.resulting_charter).map_err(|_| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture terminal P1 result cannot be canonical-serialized",
+            )
+        })?;
+    if replayed != new_canonical || !prepared_posture_change_matches_record(&change, posture) {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture terminal P1 replay differs from the committed canonical or transition record",
+        ));
+    }
+    validate_posture_kernel_replay(&source, &change, new_canonical, posture)
+}
+
+fn posture_stage_name(purpose: PostureStagePurposeV1) -> &'static str {
+    match purpose {
+        PostureStagePurposeV1::Canonical => "canonical.new",
+        PostureStagePurposeV1::PostureTransition => "posture-transition.new",
+        PostureStagePurposeV1::LifecycleTransition => "lifecycle-transition.new",
+    }
+}
+
+fn posture_stage_scratch_suffix(purpose: PostureStagePurposeV1) -> &'static str {
+    match purpose {
+        PostureStagePurposeV1::Canonical => "canonical",
+        PostureStagePurposeV1::PostureTransition => "posture-transition",
+        PostureStagePurposeV1::LifecycleTransition => "lifecycle-transition",
+    }
+}
+
+fn posture_output_for<'a>(
+    intent: &'a ValidatedPostureTransactionIntentV1,
+    purpose: PostureStagePurposeV1,
+) -> Result<&'a OutputRecordV1, CharterPromotionErrorV1> {
+    match purpose {
+        PostureStagePurposeV1::PostureTransition => Ok(&intent.record.outputs.posture_transition),
+        PostureStagePurposeV1::LifecycleTransition => {
+            Ok(&intent.record.outputs.lifecycle_transition)
+        }
+        PostureStagePurposeV1::Canonical => Err(error(
+            CharterPromotionErrorKindV1::InvalidRequest,
+            "canonical posture output has no record destination",
+        )),
+    }
+}
+
+fn validate_posture_output_bytes(
+    purpose: PostureStagePurposeV1,
+    bytes: &[u8],
+    intent: &ValidatedPostureTransactionIntentV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    match purpose {
+        PostureStagePurposeV1::Canonical => {
+            if !canonical_document_matches_bytes(&intent.record.outputs.canonical, bytes) {
+                return Err(error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "posture canonical stage differs from its intent document binding",
+                ));
+            }
+        }
+        PostureStagePurposeV1::PostureTransition => {
+            let posture = parse_posture_transition_v1(bytes).map_err(|failure| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    format!("posture transition stage refused: {}", failure.detail()),
+                )
+            })?;
+            if posture_transition_output_record_v1(&posture)
+                != intent.record.outputs.posture_transition
+            {
+                return Err(error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "posture transition stage identity differs from the intent output",
+                ));
+            }
+        }
+        PostureStagePurposeV1::LifecycleTransition => {
+            let lifecycle = parse_lifecycle_transition_v11(bytes).map_err(|failure| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    format!("posture lifecycle stage refused: {}", failure.detail()),
+                )
+            })?;
+            if lifecycle_transition_output_record_v11(&lifecycle)
+                != intent.record.outputs.lifecycle_transition
+            {
+                return Err(error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "posture lifecycle stage identity differs from the intent output",
+                ));
+            }
+        }
+    }
+    Ok(())
+}
+
+fn publish_posture_intent_from_scratch(
+    repo_root: &Path,
+    root: &Path,
+    pending: &Path,
+    intent: &ValidatedPostureTransactionIntentV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    create_safe_directories(repo_root, root).map_err(map_lineage)?;
+    let staging = root.join(INTENT_STAGING_NAME);
+    create_safe_directories(repo_root, &staging).map_err(map_lineage)?;
+    let scratch = staging.join(format!("{}.intent", random_hex_128()?));
+    write_new_durable(&scratch, &intent.raw_bytes)?;
+    if read_valid_posture_intent_from_bytes(&read_bounded_regular(
+        &scratch,
+        MAX_POSTURE_RECORD_BYTES_V1,
+    )?)? != *intent
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture intent scratch differs from its closed validated record",
+        ));
+    }
+    fs::create_dir(pending).map_err(|_| io_error("posture pending directory create-new failed"))?;
+    sync_directory(pending).map_err(map_lineage)?;
+    sync_directory(root).map_err(map_lineage)?;
+    atomic_rename_no_replace(&scratch, &pending.join("intent.json"))?;
+    sync_directory(pending).map_err(map_lineage)?;
+    sync_directory(&staging).map_err(map_lineage)?;
+    sync_directory(root).map_err(map_lineage)?;
+    if read_valid_posture_intent(pending)? != *intent {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "published posture intent differs from the verified scratch bytes",
+        ));
+    }
+    Ok(())
+}
+
+fn publish_posture_stage_from_scratch(
+    repo_root: &Path,
+    root: &Path,
+    pending: &Path,
+    purpose: PostureStagePurposeV1,
+    bytes: &[u8],
+    intent: &ValidatedPostureTransactionIntentV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    validate_posture_output_bytes(purpose, bytes, intent)?;
+    let staging = root.join(OUTPUT_STAGING_NAME);
+    create_safe_directories(repo_root, &staging).map_err(map_lineage)?;
+    let scratch = staging.join(format!(
+        "{}.{}",
+        random_hex_128()?,
+        posture_stage_scratch_suffix(purpose)
+    ));
+    write_new_durable(&scratch, bytes)?;
+    let observed = read_bounded_regular(&scratch, bytes.len())?;
+    if observed != bytes {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture output scratch bytes differ before publication",
+        ));
+    }
+    validate_posture_output_bytes(purpose, &observed, intent)?;
+    atomic_rename_no_replace(&scratch, &pending.join(posture_stage_name(purpose)))?;
+    sync_directory(pending).map_err(map_lineage)?;
+    sync_directory(&staging).map_err(map_lineage)?;
+    sync_directory(root).map_err(map_lineage)?;
+    let published = read_bounded_regular(&pending.join(posture_stage_name(purpose)), bytes.len())?;
+    if published != bytes {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "published posture output stage differs from verified scratch bytes",
+        ));
+    }
+    validate_posture_output_bytes(purpose, &published, intent)
+}
+
+fn posture_pending_entry_names(
+    pending: &Path,
+) -> Result<BTreeSet<String>, CharterPromotionErrorV1> {
+    let mut names = BTreeSet::new();
+    for entry in
+        fs::read_dir(pending).map_err(|_| io_error("posture pending directory read failed"))?
+    {
+        let entry = entry.map_err(|_| io_error("posture pending entry read failed"))?;
+        let name = entry.file_name().into_string().map_err(|_| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture pending entry name is not UTF-8",
+            )
+        })?;
+        let metadata = fs::symlink_metadata(entry.path())
+            .map_err(|_| io_error("posture pending entry metadata failed"))?;
+        if metadata.file_type().is_symlink() || !metadata.is_file() {
+            return Err(error(
+                CharterPromotionErrorKindV1::UnsafeFilesystem,
+                format!("posture pending entry `{name}` is not a safe regular file"),
+            ));
+        }
+        names.insert(name);
+    }
+    Ok(names)
+}
+
+fn validate_posture_pending_names(names: &BTreeSet<String>) -> Result<(), CharterPromotionErrorV1> {
+    const ALLOWED: [&str; 15] = [
+        "intent.json",
+        "canonical.old",
+        "canonical.new",
+        "posture-transition.new",
+        "lifecycle-transition.new",
+        "prepared.tmp",
+        "prepared",
+        "canonical-installed.tmp",
+        "canonical-installed",
+        "records-installed.tmp",
+        "records-installed",
+        "committed.tmp",
+        "committed",
+        "rolled-back.tmp",
+        "rolled-back",
+    ];
+    if names.iter().any(|name| !ALLOWED.contains(&name.as_str())) {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture pending journal contains an unknown evidence name; it is preserved",
+        ));
+    }
+    Ok(())
+}
+
+fn validate_posture_pending_identity(
+    pending: &Path,
+    intent: &ValidatedPostureTransactionIntentV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    let name = pending
+        .file_name()
+        .and_then(|name| name.to_str())
+        .ok_or_else(|| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture pending directory name is not UTF-8",
+            )
+        })?;
+    if name != format!("{}.pending", intent.record.transaction_id) {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture pending directory key differs from its intent transaction ID",
+        ));
+    }
+    Ok(())
+}
+
+fn observe_posture_marker(
+    pending: &Path,
+    name: &str,
+    intent_bytes: &[u8],
+) -> Result<PostureMarkerObservationV1, CharterPromotionErrorV1> {
+    let expected = posture_transaction_intent_marker_v1(intent_bytes);
+    let temporary = optional_bounded_regular(&pending.join(format!("{name}.tmp")), expected.len())?;
+    let published = optional_bounded_regular(&pending.join(name), expected.len())?;
+    match (temporary, published) {
+        (None, None) => Ok(PostureMarkerObservationV1::Absent),
+        (Some(prefix), None) if expected.starts_with(&prefix) => {
+            Ok(PostureMarkerObservationV1::TmpExactPrefix)
+        }
+        (None, Some(bytes)) if bytes == expected => Ok(PostureMarkerObservationV1::Published),
+        _ => Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture marker `{name}` is neither absent, exact prefix, nor exact published bytes"),
+        )),
+    }
+}
+
+fn publish_posture_marker(
+    pending: &Path,
+    name: &str,
+    intent_bytes: &[u8],
+) -> Result<(), CharterPromotionErrorV1> {
+    if observe_posture_marker(pending, name, intent_bytes)? == PostureMarkerObservationV1::Published
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::Conflict,
+            format!("posture marker `{name}` is already published"),
+        ));
+    }
+    complete_marker_temp(pending, name, intent_bytes)?;
+    publish_completed_marker(pending, name, intent_bytes)
+}
+
+fn ensure_posture_marker(
+    pending: &Path,
+    name: &str,
+    intent_bytes: &[u8],
+) -> Result<(), CharterPromotionErrorV1> {
+    match observe_posture_marker(pending, name, intent_bytes)? {
+        PostureMarkerObservationV1::Published => Ok(()),
+        PostureMarkerObservationV1::Absent | PostureMarkerObservationV1::TmpExactPrefix => {
+            publish_posture_marker(pending, name, intent_bytes)
+        }
+    }
+}
+
+fn validate_posture_snapshot(
+    pending: &Path,
+    intent: &ValidatedPostureTransactionIntentV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    let old = read_bounded_regular(&pending.join("canonical.old"), MAX_CANONICAL_BYTES)?;
+    if !canonical_document_matches_bytes(&intent.record.recovery.old_canonical, &old)
+        || intent.record.recovery.old_canonical != intent.record.expected_canonical
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture canonical.old differs from its exact intent-bound recovery basis",
+        ));
+    }
+    Ok(())
+}
+
+fn posture_stage_state(
+    pending: &Path,
+    purpose: PostureStagePurposeV1,
+    intent: &ValidatedPostureTransactionIntentV1,
+) -> Result<PostureStageStateV1, CharterPromotionErrorV1> {
+    let expected_length = match purpose {
+        PostureStagePurposeV1::Canonical => intent.record.outputs.canonical.byte_length as usize,
+        _ => posture_output_for(intent, purpose)?.byte_length as usize,
+    };
+    match optional_bounded_regular(&pending.join(posture_stage_name(purpose)), expected_length)? {
+        None => Ok(PostureStageStateV1::Absent),
+        Some(bytes) => {
+            validate_posture_output_bytes(purpose, &bytes, intent)?;
+            Ok(PostureStageStateV1::Exact)
+        }
+    }
+}
+
+fn remove_exact_posture_stage(
+    pending: &Path,
+    purpose: PostureStagePurposeV1,
+    intent: &ValidatedPostureTransactionIntentV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    let path = pending.join(posture_stage_name(purpose));
+    let Some(bytes) =
+        optional_bounded_regular(&path, MAX_CANONICAL_BYTES.max(MAX_POSTURE_RECORD_BYTES_V1))?
+    else {
+        return Ok(());
+    };
+    validate_posture_output_bytes(purpose, &bytes, intent)?;
+    fs::remove_file(&path).map_err(|_| io_error("exact posture stage removal failed"))?;
+    sync_directory(pending).map_err(map_lineage)
+}
+
+fn remove_exact_posture_marker(
+    pending: &Path,
+    name: &str,
+    intent_bytes: &[u8],
+) -> Result<(), CharterPromotionErrorV1> {
+    let expected = posture_transaction_intent_marker_v1(intent_bytes);
+    for suffix in [".tmp", ""] {
+        let path = pending.join(format!("{name}{suffix}"));
+        let Some(bytes) = optional_bounded_regular(&path, expected.len())? else {
+            continue;
+        };
+        if (suffix == ".tmp" && !expected.starts_with(&bytes))
+            || (suffix.is_empty() && bytes != expected)
+        {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                format!("posture marker `{name}{suffix}` differs from its intent binding"),
+            ));
+        }
+        fs::remove_file(&path).map_err(|_| io_error("exact posture marker removal failed"))?;
+        sync_directory(pending).map_err(map_lineage)?;
+    }
+    Ok(())
+}
+
+fn posture_record_final_bytes(
+    repo_root: &Path,
+    output: &OutputRecordV1,
+) -> Result<Option<Vec<u8>>, CharterPromotionErrorV1> {
+    let path = TrustedLineageStoreV1::new(repo_root)
+        .state_path(&output.reference)
+        .map_err(map_lineage)?;
+    optional_bounded_regular(&path, MAX_POSTURE_RECORD_BYTES_V1)
+}
+
+fn validate_posture_final_records(
+    repo_root: &Path,
+    intent: &ValidatedPostureTransactionIntentV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    let posture_bytes =
+        posture_record_final_bytes(repo_root, &intent.record.outputs.posture_transition)?
+            .ok_or_else(|| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "posture transition final is absent",
+                )
+            })?;
+    let lifecycle_bytes =
+        posture_record_final_bytes(repo_root, &intent.record.outputs.lifecycle_transition)?
+            .ok_or_else(|| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    "posture lifecycle final is absent",
+                )
+            })?;
+    validate_posture_output_bytes(
+        PostureStagePurposeV1::PostureTransition,
+        &posture_bytes,
+        intent,
+    )?;
+    validate_posture_output_bytes(
+        PostureStagePurposeV1::LifecycleTransition,
+        &lifecycle_bytes,
+        intent,
+    )?;
+    let posture = parse_posture_transition_v1(&posture_bytes).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture transition final refused: {}", failure.detail()),
+        )
+    })?;
+    let lifecycle = parse_lifecycle_transition_v11(&lifecycle_bytes).map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture lifecycle final refused: {}", failure.detail()),
+        )
+    })?;
+    validate_posture_terminal_bindings(intent, &posture, &lifecycle)
+}
+
+fn validate_posture_rollback_origin(
+    repo_root: &Path,
+    pending: &Path,
+    intent: &ValidatedPostureTransactionIntentV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    validate_posture_snapshot(pending, intent)?;
+    let canonical = posture_stage_state(pending, PostureStagePurposeV1::Canonical, intent)?;
+    let posture = posture_stage_state(pending, PostureStagePurposeV1::PostureTransition, intent)?;
+    let lifecycle =
+        posture_stage_state(pending, PostureStagePurposeV1::LifecycleTransition, intent)?;
+    if !matches!(
+        [canonical, posture, lifecycle],
+        [
+            PostureStageStateV1::Absent,
+            PostureStageStateV1::Absent,
+            PostureStageStateV1::Absent
+        ] | [
+            PostureStageStateV1::Exact,
+            PostureStageStateV1::Absent,
+            PostureStageStateV1::Absent
+        ] | [
+            PostureStageStateV1::Exact,
+            PostureStageStateV1::Exact,
+            PostureStageStateV1::Absent
+        ] | [
+            PostureStageStateV1::Exact,
+            PostureStageStateV1::Exact,
+            PostureStageStateV1::Exact
+        ]
+    ) {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture rollback stages are outside the exact canonical -> posture -> lifecycle prefix",
+        ));
+    }
+    let prepared = observe_posture_marker(pending, "prepared", &intent.raw_bytes)?;
+    if prepared != PostureMarkerObservationV1::Absent
+        && [canonical, posture, lifecycle] != [PostureStageStateV1::Exact; 3]
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture prepared marker is optimistic relative to staged outputs",
+        ));
+    }
+    for marker in ["canonical-installed", "records-installed", "committed"] {
+        if observe_posture_marker(pending, marker, &intent.raw_bytes)?
+            != PostureMarkerObservationV1::Absent
+        {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture basis recovery has forward marker evidence and cannot roll back",
+            ));
+        }
+    }
+    let rolled = observe_posture_marker(pending, "rolled-back", &intent.raw_bytes)?;
+    if rolled == PostureMarkerObservationV1::TmpExactPrefix
+        && (prepared != PostureMarkerObservationV1::Absent
+            || [canonical, posture, lifecycle] != [PostureStageStateV1::Absent; 3])
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture rollback marker temp is not at the exact cleanup boundary",
+        ));
+    }
+    for output in [
+        &intent.record.outputs.posture_transition,
+        &intent.record.outputs.lifecycle_transition,
+    ] {
+        if posture_record_final_bytes(repo_root, output)?.is_some() {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture basis recovery found a transaction-owned final record; evidence is preserved",
+            ));
+        }
+    }
+    Ok(())
+}
+
+fn validate_posture_roll_forward_origin(
+    repo_root: &Path,
+    pending: &Path,
+    intent: &ValidatedPostureTransactionIntentV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    validate_posture_snapshot(pending, intent)?;
+    if posture_stage_state(pending, PostureStagePurposeV1::Canonical, intent)?
+        != PostureStageStateV1::Absent
+        || observe_posture_marker(pending, "prepared", &intent.raw_bytes)?
+            != PostureMarkerObservationV1::Published
+        || observe_posture_marker(pending, "rolled-back", &intent.raw_bytes)?
+            != PostureMarkerObservationV1::Absent
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture roll-forward lacks the exact prepared/resulting-canonical boundary",
+        ));
+    }
+    let canonical_marker =
+        observe_posture_marker(pending, "canonical-installed", &intent.raw_bytes)?;
+    let records_marker = observe_posture_marker(pending, "records-installed", &intent.raw_bytes)?;
+    let committed_marker = observe_posture_marker(pending, "committed", &intent.raw_bytes)?;
+    if (records_marker != PostureMarkerObservationV1::Absent
+        && canonical_marker != PostureMarkerObservationV1::Published)
+        || (committed_marker != PostureMarkerObservationV1::Absent
+            && records_marker != PostureMarkerObservationV1::Published)
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture forward marker causality is invalid",
+        ));
+    }
+    for purpose in [
+        PostureStagePurposeV1::PostureTransition,
+        PostureStagePurposeV1::LifecycleTransition,
+    ] {
+        let stage = posture_stage_state(pending, purpose, intent)?;
+        let final_bytes =
+            posture_record_final_bytes(repo_root, posture_output_for(intent, purpose)?)?;
+        if let Some(bytes) = &final_bytes {
+            validate_posture_output_bytes(purpose, bytes, intent)?;
+        }
+        if stage == PostureStageStateV1::Absent && final_bytes.is_none() {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture roll-forward record is not accounted by an exact stage or final",
+            ));
+        }
+    }
+    Ok(())
+}
+
+fn validate_posture_pending_terminal(
+    repo_root: &Path,
+    pending: &Path,
+    intent: &ValidatedPostureTransactionIntentV1,
+    kind: PostureTerminalKindV1,
+) -> Result<(), CharterPromotionErrorV1> {
+    validate_posture_terminal_payload(repo_root, pending, intent, kind).map(|_| ())
+}
+
+fn validate_posture_intent_staging(path: &Path) -> Result<(), CharterPromotionErrorV1> {
+    reject_reparse_or_symlink(path, true).map_err(map_lineage)?;
+    for entry in fs::read_dir(path).map_err(|_| io_error("posture intent staging read failed"))? {
+        let entry = entry.map_err(|_| io_error("posture intent staging entry read failed"))?;
+        let name = entry.file_name().into_string().map_err(|_| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture intent scratch name is not UTF-8",
+            )
+        })?;
+        let token = name.strip_suffix(".intent").ok_or_else(|| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture intent staging contains an unknown scratch name",
+            )
+        })?;
+        validate_posture_scratch_token(token)?;
+        reject_reparse_or_symlink(&entry.path(), false).map_err(map_lineage)?;
+    }
+    Ok(())
+}
+
+fn validate_posture_output_staging(path: &Path) -> Result<(), CharterPromotionErrorV1> {
+    reject_reparse_or_symlink(path, true).map_err(map_lineage)?;
+    for entry in fs::read_dir(path).map_err(|_| io_error("posture output staging read failed"))? {
+        let entry = entry.map_err(|_| io_error("posture output staging entry read failed"))?;
+        let name = entry.file_name().into_string().map_err(|_| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture output scratch name is not UTF-8",
+            )
+        })?;
+        let valid = ["canonical", "posture-transition", "lifecycle-transition"]
+            .iter()
+            .find_map(|suffix| {
+                name.strip_suffix(&format!(".{suffix}"))
+                    .map(|token| (token, suffix))
+            })
+            .is_some_and(|(token, _)| validate_posture_scratch_token(token).is_ok());
+        if !valid {
+            return Err(error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                "posture output staging contains an unknown scratch name",
+            ));
+        }
+        reject_reparse_or_symlink(&entry.path(), false).map_err(map_lineage)?;
+    }
+    Ok(())
+}
+
+fn validate_posture_scratch_token(token: &str) -> Result<(), CharterPromotionErrorV1> {
+    if token.len() != 32
+        || !token
+            .bytes()
+            .all(|byte| byte.is_ascii_digit() || matches!(byte, b'a'..=b'f'))
+    {
+        return Err(error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            "posture scratch token is not 128 lowercase random bits",
+        ));
+    }
+    Ok(())
 }
 
 #[cfg(test)]

@@ -4,6 +4,9 @@ use crate::charter_lifecycle::{
     apply_charter_lifecycle_events, CharterLifecycleEvent, CharterLifecycleEventKind,
     CharterLifecycleObservation, CharterLifecycleState,
 };
+use crate::charter_lifecycle_transition_v11::{
+    lifecycle_transition_output_record_v11, parse_lifecycle_transition_v11,
+};
 use crate::charter_lineage_store::{
     create_new_file, create_safe_directories, reject_reparse_or_symlink, string_field,
     sync_directory, validate_record, LineageRecordClassV1, LineageStoreErrorV1,
@@ -359,14 +362,10 @@ impl CharterLifecycleStoreV1 {
         let mut records = Vec::with_capacity(1 + loaded.active_observation_refs.len());
         records.push(RetainedLifecycleRecordV1 {
             relative_ref: loaded.lifecycle_transition_ref.clone(),
-            bytes: self
-                .lineage
-                .read_record(
-                    LineageRecordClassV1::LifecycleTransition,
-                    &loaded.lifecycle_transition_ref,
-                    &loaded.lifecycle_transition_fingerprint,
-                )
-                .map_err(map_lineage)?,
+            bytes: self.read_selected_lifecycle_transition_bytes(
+                &loaded.lifecycle_transition_ref,
+                &loaded.lifecycle_transition_fingerprint,
+            )?,
         });
         for (relative_ref, fingerprint) in loaded
             .active_observation_refs
@@ -893,9 +892,9 @@ impl CharterLifecycleStoreV1 {
         canonical_bytes: Vec<u8>,
     ) -> Result<LoadedLifecycleAuthority, CharterLifecycleStoreErrorV1> {
         let canonical_fingerprint = DefinitionFingerprint::from_bytes(&canonical_bytes).to_string();
-        let promotion = self.current_promotion_anchor(&canonical_fingerprint)?;
-        let mut transition_ref = promotion.lifecycle_transition_ref;
-        let mut transition_fingerprint = promotion.lifecycle_transition_fingerprint;
+        let anchor = self.current_promotion_anchor(&canonical_fingerprint)?;
+        let mut transition_ref = anchor.lifecycle_transition_ref;
+        let mut transition_fingerprint = anchor.lifecycle_transition_fingerprint;
         let mut committed_by_prior: BTreeMap<String, Vec<LifecycleEventIntentRecordV1>> =
             BTreeMap::new();
         let root = self.transaction_root();
@@ -952,22 +951,72 @@ impl CharterLifecycleStoreV1 {
                 "committed lifecycle history contains unreachable transitions or exceeds its bound",
             ));
         }
+        // A posture rebase is a private v1.1 lifecycle record. It is exact
+        // JCS-plus-LF under the P2 contract. Both selection and retained
+        // observation use the same private decoder; v1.0 keeps its existing
+        // lineage decoder unchanged.
         let transition_bytes = self
-            .lineage
-            .read_record(
-                LineageRecordClassV1::LifecycleTransition,
-                &transition_ref,
-                &transition_fingerprint,
-            )
-            .map_err(map_lineage)?;
+            .read_selected_lifecycle_transition_bytes(&transition_ref, &transition_fingerprint)?;
         let transition = parse_schema_json(&transition_bytes)
             .map_err(|_| lineage_error("lifecycle transition is not closed JSON"))?;
-        validate_transition_shape(&transition)?;
-        let state = parse_state(string_field(&transition, "result_state").map_err(map_lineage)?)?;
-        let state_fingerprint = string_field(&transition, "result_state_fingerprint")
-            .map_err(map_lineage)?
-            .to_owned();
-        let active_refs = string_array(&transition, "active_observation_refs")?;
+        let is_posture_rebase = transition.get("schema_id").and_then(Value::as_str)
+            == Some("handbook.lifecycle-transition")
+            && transition.get("schema_version").and_then(Value::as_str) == Some("1.1");
+        let (state, state_fingerprint, active_refs, policy_fingerprint) = if is_posture_rebase {
+            let rebase = parse_lifecycle_transition_v11(&transition_bytes).map_err(|failure| {
+                durability(format!(
+                    "lifecycle posture-rebase record refused: {}",
+                    failure.detail()
+                ))
+            })?;
+            let output = lifecycle_transition_output_record_v11(&rebase);
+            if output.reference != transition_ref
+                || output.fingerprint != transition_fingerprint
+                || output.document_sha256
+                    != DefinitionFingerprint::from_bytes(&transition_bytes).to_string()
+                || output.byte_length != transition_bytes.len() as u64
+            {
+                return Err(durability(
+                    "lifecycle posture-rebase bytes do not match the selected private head pair",
+                ));
+            }
+            if rebase.record.resulting_canonical_fingerprint != canonical_fingerprint {
+                return Err(durability(
+                    "lifecycle posture-rebase record does not bind current canonical authority",
+                ));
+            }
+            let expected_state = charter_lifecycle_state_fingerprint(
+                CHARTER_LIFECYCLE_POLICY_REF,
+                &rebase.record.lifecycle_policy.fingerprint,
+                "project_authority",
+                &canonical_fingerprint,
+                CharterLifecycleState::Current,
+                &[],
+            )?;
+            if rebase.record.result_state_fingerprint != expected_state {
+                return Err(durability(
+                    "lifecycle posture-rebase result state does not bind current canonical authority",
+                ));
+            }
+            (
+                CharterLifecycleState::Current,
+                rebase.record.result_state_fingerprint,
+                Vec::new(),
+                rebase.record.lifecycle_policy.fingerprint,
+            )
+        } else {
+            validate_transition_shape(&transition)?;
+            (
+                parse_state(string_field(&transition, "result_state").map_err(map_lineage)?)?,
+                string_field(&transition, "result_state_fingerprint")
+                    .map_err(map_lineage)?
+                    .to_owned(),
+                string_array(&transition, "active_observation_refs")?,
+                string_field(&transition, "lifecycle_policy_fingerprint")
+                    .map_err(map_lineage)?
+                    .to_owned(),
+            )
+        };
         let mut active_observations = Vec::new();
         let mut active_fingerprints = Vec::new();
         for reference in &active_refs {
@@ -988,20 +1037,20 @@ impl CharterLifecycleStoreV1 {
             active_observations.push(observation_from_record(&value)?);
             active_fingerprints.push(fingerprint);
         }
-        let policy_fingerprint =
-            string_field(&transition, "lifecycle_policy_fingerprint").map_err(map_lineage)?;
-        let expected_state = charter_lifecycle_state_fingerprint(
-            CHARTER_LIFECYCLE_POLICY_REF,
-            policy_fingerprint,
-            "project_authority",
-            &canonical_fingerprint,
-            state,
-            &active_fingerprints,
-        )?;
-        if expected_state != state_fingerprint {
-            return Err(durability(
-                "lifecycle result-state fingerprint does not match exact current authority",
-            ));
+        if !is_posture_rebase {
+            let expected_state = charter_lifecycle_state_fingerprint(
+                CHARTER_LIFECYCLE_POLICY_REF,
+                &policy_fingerprint,
+                "project_authority",
+                &canonical_fingerprint,
+                state,
+                &active_fingerprints,
+            )?;
+            if expected_state != state_fingerprint {
+                return Err(durability(
+                    "lifecycle result-state fingerprint does not match exact current authority",
+                ));
+            }
         }
         let reopened_coverage_ids = active_observations
             .iter()
@@ -1027,19 +1076,64 @@ impl CharterLifecycleStoreV1 {
         &self,
         canonical_fingerprint: &str,
     ) -> Result<PromotionLifecycleAnchor, CharterLifecycleStoreErrorV1> {
-        let intent = CharterAuthorityTransactionServiceV1::new(&self.repo_root)
-            .current_committed_intent_locked(canonical_fingerprint)
+        let head = CharterAuthorityTransactionServiceV1::new(&self.repo_root)
+            .current_committed_authority_head_locked(canonical_fingerprint)
             .map_err(|failure| {
                 durability(format!(
-                    "promotion terminal history refused: {}",
+                    "authority terminal history refused: {}",
                     failure.detail()
                 ))
             })?;
-        let output = intent.record.outputs.lifecycle_transition;
         Ok(PromotionLifecycleAnchor {
-            lifecycle_transition_ref: output.record_ref,
-            lifecycle_transition_fingerprint: output.record_fingerprint,
+            lifecycle_transition_ref: head.lifecycle_transition.reference,
+            lifecycle_transition_fingerprint: head.lifecycle_transition.fingerprint,
         })
+    }
+
+    fn read_selected_lifecycle_transition_bytes(
+        &self,
+        transition_ref: &str,
+        transition_fingerprint: &str,
+    ) -> Result<Vec<u8>, CharterLifecycleStoreErrorV1> {
+        let path = self
+            .lineage
+            .state_path(transition_ref)
+            .map_err(map_lineage)?;
+        let private_bytes = read_bounded_regular(&path, MAX_JOURNAL_BYTES)?;
+        let private_value = parse_schema_json(&private_bytes)
+            .map_err(|_| lineage_error("lifecycle transition is not closed JSON"))?;
+        let is_posture_rebase = private_value.get("schema_id").and_then(Value::as_str)
+            == Some("handbook.lifecycle-transition")
+            && private_value.get("schema_version").and_then(Value::as_str) == Some("1.1");
+        if !is_posture_rebase {
+            return self
+                .lineage
+                .read_record(
+                    LineageRecordClassV1::LifecycleTransition,
+                    transition_ref,
+                    transition_fingerprint,
+                )
+                .map_err(map_lineage);
+        }
+
+        let rebase = parse_lifecycle_transition_v11(&private_bytes).map_err(|failure| {
+            durability(format!(
+                "lifecycle posture-rebase record refused: {}",
+                failure.detail()
+            ))
+        })?;
+        let output = lifecycle_transition_output_record_v11(&rebase);
+        if output.reference != transition_ref
+            || output.fingerprint != transition_fingerprint
+            || output.document_sha256
+                != DefinitionFingerprint::from_bytes(&private_bytes).to_string()
+            || output.byte_length != private_bytes.len() as u64
+        {
+            return Err(durability(
+                "lifecycle posture-rebase bytes do not match the selected private head pair",
+            ));
+        }
+        Ok(private_bytes)
     }
 
     fn commit_and_finalize(
@@ -2316,6 +2410,147 @@ mod promotion_anchor_v12_tests {
         assert!(CharterLifecycleStoreV1::new(repo.path())
             .current_promotion_anchor(&fingerprint)
             .is_err());
+    }
+}
+
+#[cfg(test)]
+mod posture_rebase_v11_retention_tests {
+    use super::*;
+    use crate::charter_lifecycle_transition_v11::{
+        lifecycle_transition_output_record_v11, parse_lifecycle_transition_v11,
+        LifecycleTransitionRecordV11,
+    };
+    use crate::charter_posture_transaction_intent_v1::{
+        encode_jcs_lf_v1, fingerprint_excluding_v1, EmptyExtensionsV1, PairV1,
+        PostureReassessmentV1, MAX_POSTURE_RECORD_BYTES_V1,
+    };
+
+    fn fingerprint(fill: char) -> String {
+        format!("sha256:{}", fill.to_string().repeat(64))
+    }
+
+    fn content_pair(prefix: &str, fill: char) -> PairV1 {
+        PairV1 {
+            reference: format!("{prefix}_{}.json", fill.to_string().repeat(64)),
+            fingerprint: fingerprint(fill),
+        }
+    }
+
+    fn retained_posture_rebase(
+        canonical_fingerprint: &str,
+    ) -> crate::charter_lifecycle_transition_v11::ValidatedLifecycleTransitionV11 {
+        let prior_canonical_fingerprint = fingerprint('a');
+        let mut record = LifecycleTransitionRecordV11 {
+            schema_id: "handbook.lifecycle-transition".to_owned(),
+            schema_version: "1.1".to_owned(),
+            transition_id: String::new(),
+            transition_kind: "posture_transition".to_owned(),
+            lifecycle_policy: PairV1 {
+                reference: CHARTER_LIFECYCLE_POLICY_REF.to_owned(),
+                fingerprint:
+                    "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3"
+                        .to_owned(),
+            },
+            target_instance_id: "project_authority".to_owned(),
+            prior_transition: content_pair("lifecycle-transitions/lifecycle-transition", 'b'),
+            prior_state: "current".to_owned(),
+            prior_state_fingerprint: charter_lifecycle_state_fingerprint(
+                CHARTER_LIFECYCLE_POLICY_REF,
+                "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+                "project_authority",
+                &prior_canonical_fingerprint,
+                CharterLifecycleState::Current,
+                &[],
+            )
+            .unwrap(),
+            new_observation_refs: Vec::new(),
+            active_observation_refs: Vec::new(),
+            result_state: "current".to_owned(),
+            result_state_fingerprint: charter_lifecycle_state_fingerprint(
+                CHARTER_LIFECYCLE_POLICY_REF,
+                "sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3",
+                "project_authority",
+                canonical_fingerprint,
+                CharterLifecycleState::Current,
+                &[],
+            )
+            .unwrap(),
+            prior_canonical_fingerprint,
+            resulting_canonical_fingerprint: canonical_fingerprint.to_owned(),
+            authority_transition: content_pair("posture-transitions/posture-transition", 'c'),
+            reassessment: PostureReassessmentV1 {
+                intake_definition: PairV1 {
+                    reference: "handbook.intake.charter@1.0.0".to_owned(),
+                    fingerprint:
+                        "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
+                            .to_owned(),
+                },
+                affected_coverage_ids: vec!["engineering_posture.dimensions".to_owned()],
+                validation_result_inputs: vec![PairV1 {
+                    reference: "lifecycle-validation-results/current.json".to_owned(),
+                    fingerprint: fingerprint('d'),
+                }],
+            },
+            transitioned_at_utc: "2026-08-08T19:00:00Z".to_owned(),
+            extensions: EmptyExtensionsV1 {},
+            transition_fingerprint: String::new(),
+        };
+        record.transition_fingerprint = fingerprint_excluding_v1(
+            &record,
+            &[
+                "transition_id",
+                "transition_fingerprint",
+                "transitioned_at_utc",
+            ],
+            "retained posture rebase",
+        )
+        .unwrap();
+        record.transition_id = format!(
+            "lifecycle-transition_{}",
+            record
+                .transition_fingerprint
+                .strip_prefix("sha256:")
+                .unwrap()
+        );
+        let raw = encode_jcs_lf_v1(
+            &record,
+            MAX_POSTURE_RECORD_BYTES_V1,
+            "retained posture rebase",
+        )
+        .unwrap();
+        parse_lifecycle_transition_v11(&raw).unwrap()
+    }
+
+    #[test]
+    fn retained_v11_posture_rebase_uses_the_exact_private_jcs_lf_reader() {
+        let repo = tempfile::tempdir().unwrap();
+        let canonical_bytes = b"retained v1.1 posture rebase canonical\n".to_vec();
+        let canonical_fingerprint = DefinitionFingerprint::from_bytes(&canonical_bytes).to_string();
+        let transition = retained_posture_rebase(&canonical_fingerprint);
+        let output = lifecycle_transition_output_record_v11(&transition);
+        let store = CharterLifecycleStoreV1::new(repo.path());
+        let path = store.lineage.state_path(&output.reference).unwrap();
+        fs::create_dir_all(path.parent().unwrap()).unwrap();
+        fs::write(&path, &transition.raw_bytes).unwrap();
+
+        let retained = store
+            .retain_loaded_authority(LoadedLifecycleAuthority {
+                canonical_bytes,
+                canonical_fingerprint,
+                lifecycle_transition_ref: output.reference.clone(),
+                lifecycle_transition_fingerprint: output.fingerprint.clone(),
+                state: CharterLifecycleState::Current,
+                state_fingerprint: transition.record.result_state_fingerprint.clone(),
+                active_observation_refs: Vec::new(),
+                active_observation_fingerprints: Vec::new(),
+                active_observations: Vec::new(),
+                reopened_coverage_ids: Vec::new(),
+            })
+            .expect("retained v1.1 lifecycle head must not re-enter the legacy lineage decoder");
+
+        assert_eq!(retained.records.len(), 1);
+        assert_eq!(retained.records[0].relative_ref, output.reference);
+        assert_eq!(retained.records[0].bytes, transition.raw_bytes);
     }
 }
 

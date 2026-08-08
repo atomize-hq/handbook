@@ -1,0 +1,207 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260808T135500Z--HCM-3-6--p0-source-implementation-selector-delta-closure-review",
+  "created_at_utc": "2026-08-08T13:55:00Z",
+  "source_handoff_ids": [
+    "20260808T051657Z--HCM-3-6--orchestration--atomic-authority-replanning-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-implementation-20260808",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-PROJECT-POSTURE-IMPLEMENTATION",
+  "subject_fingerprint": "sha256:c4185daae209e2cf54de7674f2342f9f9c6afbff7f1fdf366af968a04fdcbf04",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3-6-source-implementation-admission-closure",
+    "trigger_run_ids": [
+      "hcm36-p0-source-selector-discovery-20260808"
+    ],
+    "finding_refs": [
+      "HCM36-P0-DR-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-08T13:29:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-project-posture-implementation",
+        "packet_ids": [
+          "HCM-3.6-PROJECT-POSTURE-IMPLEMENTATION"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:0ba0ea583ddadc14be74f481271159047c4be11bd87eb7f2ed7b2abcb467d53d"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:64396dd3609551be9fa97222ec45c1a2cb6ccdc373721d466782dcd3d52fd28d",
+    "integrated_outcome_id": "hcm-3-6-project-posture-implementation",
+    "outcome_registry_fingerprint": "sha256:0ba0ea583ddadc14be74f481271159047c4be11bd87eb7f2ed7b2abcb467d53d",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260808T134000Z--HCM-3-6--p0-source-implementation-selector-consolidated-remediation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-6-source-implementation-admission-closure-convergence",
+    "completed_at_utc": "2026-08-08T13:54:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Reconcile HCM36-P0-DR-001 against the selector's selected-existing-function list, the paired impact record, and the exact HCM-3.6 P0 admission contract.",
+        "evidence_ref": "Both formerly omitted selected existing seams are now represented exactly once; lifecycle recover_one_pending retains its explicit HIGH compatibility requirement."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Confirm the delta neither changes product source/test/module surfaces nor introduces a public/schema/dependency/consumer or HCM-5 path.",
+        "evidence_ref": "The sole remediation path is the paired impact record; its source ceiling and full regression wall remain unchanged."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 two-file manifest after remediation.",
+        "evidence_ref": "Selector sha256:4d94a51b9b0c898a7e2c6d42c3c9d207640549d277cc2f9ad05758375a94ea79 plus impact sha256:18e443f00f1ac4b46342fc7a12dc367cfd34a5926f85e6522297a5b0c3c8beb2 yields sha256:c4185daae209e2cf54de7674f2342f9f9c6afbff7f1fdf366af968a04fdcbf04."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "git diff --check over the complete P0 selector/remediation worktree",
+        "evidence_ref": "No whitespace errors."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Decode both manifest files as UTF-8 and require final LF with no trailing spaces or tabs.",
+        "evidence_ref": "Both files pass closed text hygiene."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md",
+        "sha256": "4d94a51b9b0c898a7e2c6d42c3c9d207640549d277cc2f9ad05758375a94ea79"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T132656Z--hcm-3-6-p0-source-implementation-selector-impact.md",
+        "sha256": "18e443f00f1ac4b46342fc7a12dc367cfd34a5926f85e6522297a5b0c3c8beb2"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:c4185daae209e2cf54de7674f2342f9f9c6afbff7f1fdf366af968a04fdcbf04"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 source implementation selector delta closure",
+    "scope_horizon": "HCM36-P0-DR-001 and its exact two-row source-impact remediation",
+    "detail_resolution": "coverage of every admitted existing edit seam, including the HIGH lifecycle pending-recovery seam",
+    "temporal_horizon": "one different-fresh delta-focused closure after the sole consolidated P0 remediation",
+    "authority_horizon": "private engine-only source authority may be admitted only by CLEAN; no current edit outside the two-file P0 subject",
+    "memory_horizon": "retain discovery and remediation evidence without reopening general discovery",
+    "validation_horizon": "CLEAN validates only the direct P2 repair and selector admission; it does not waive any later source/proof/review gate"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T133100Z--HCM-3-6--p0-source-implementation-selector-discovery-review.json",
+      "sections": [
+        "complete immutable discovery dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T134000Z--HCM-3-6--p0-source-implementation-selector-consolidated-remediation.json",
+      "sections": [
+        "complete immutable remediation dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md",
+      "sections": [
+        "selected existing functions and GitNexus impact boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T132656Z--hcm-3-6-p0-source-implementation-selector-impact.md",
+      "sections": [
+        "Exact upstream impact"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "sections": [
+        "Private owner and call boundary"
+      ]
+    }
+  ],
+  "repo_truth": "The only discovery P2 was a two-row coverage omission in the paired source-impact record. A fresh remediation agent added the exact low-risk locked-read row and high-risk lifecycle pending-recovery row and validated both. The closure reviewer must assess only whether this repair closes the stated P2 and faithfully admits the unchanged P0 source ceiling.",
+  "allowed_scope": [
+    "Review only the repaired two-file P0 selector subject, HCM36-P0-DR-001, and the named current owner/call paths needed to check the two added rows.",
+    "Return a valid P1/P2 only when the known remediation is incomplete, inaccurate, or leaves the P0 admission contract untrue; state exact line, violated contract, minimum in-scope repair, and missing proof."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a dispatch, write a global handoff or ledger, delegate, or implement product source/tests.",
+    "Do not reopen general discovery, relitigate already-clean P0 areas, broaden public/schema/dependency/consumer/HCM-5 scope, access remote/protected paths, or treat FTS/BM25 unavailability as green."
+  ],
+  "tasks": [
+    "Confirm both new rows are present once, accurately reproduce the replayed impact evidence, and keep every selected existing seam covered in the paired record.",
+    "Confirm the retained HIGH lifecycle recover_one_pending risk remains explicit and the full later compatibility wall is still required.",
+    "Return CLEAN only if HCM36-P0-DR-001 is fully closed and P0 now truthfully admits the unchanged private source route; otherwise findings first."
+  ],
+  "contracts_and_gates": [
+    "This is a different-fresh delta-focused closure review following one discovery and one consolidated remediation; do not reopen general discovery and do not schedule another cycle after CLEAN.",
+    "CLEAN admits only the exact source ceiling and does not waive the inherited HCM-3.5 ordinary-validator failure, HCM-3.6 P1/P2, later proof, or final review gates."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS for any valid P1/P2 direct result of the remediation; return BLOCKED only for unavailable required read-only evidence or authority outside this checkout.",
+    "Do not approve a route that needs a public/schema/dependency/consumer expansion, synthetic promotion, a second current Charter, or unsafe recovery."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}

@@ -30,9 +30,13 @@ pub mod charter_definition_registry;
 pub mod charter_intake;
 pub mod charter_lifecycle;
 pub mod charter_lifecycle_store;
+mod charter_lifecycle_transition_v11;
 mod charter_lifecycle_validation;
 pub mod charter_lineage_store;
 pub mod charter_observation;
+mod charter_posture_transaction_intent_v1;
+#[cfg(test)]
+mod charter_posture_transaction_tests;
 mod charter_promotion_intent_v12;
 pub mod charter_promotion_workflow;
 pub mod charter_runtime_vectors;
@@ -48,6 +52,9 @@ pub mod profile_inspection;
 pub mod profile_selection;
 pub mod project_condition_registry;
 pub mod project_context_artifact;
+mod project_posture;
+#[cfg(test)]
+mod project_posture_tests;
 #[allow(dead_code)]
 mod projection;
 pub mod repository_invocation_identity;

@@ -1,0 +1,154 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260808T134000Z--HCM-3-6--p0-source-implementation-selector-consolidated-remediation",
+  "created_at_utc": "2026-08-08T13:40:00Z",
+  "source_handoff_ids": [
+    "20260808T051657Z--HCM-3-6--orchestration--atomic-authority-replanning-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-implementation-20260808",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "remediation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "incremental-implementation",
+    "code-review-and-quality",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-PROJECT-POSTURE-IMPLEMENTATION",
+  "subject_fingerprint": "sha256:e934cefcd92565fbfe141d1a0a12cfa08203d56205e59fab11eed85b1a2d48e2",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-08T13:29:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-project-posture-implementation",
+        "packet_ids": [
+          "HCM-3.6-PROJECT-POSTURE-IMPLEMENTATION"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:0ba0ea583ddadc14be74f481271159047c4be11bd87eb7f2ed7b2abcb467d53d"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:64396dd3609551be9fa97222ec45c1a2cb6ccdc373721d466782dcd3d52fd28d",
+    "integrated_outcome_id": "hcm-3-6-project-posture-implementation",
+    "outcome_registry_fingerprint": "sha256:0ba0ea583ddadc14be74f481271159047c4be11bd87eb7f2ed7b2abcb467d53d",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "implementation"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260808T133100Z--HCM-3-6--p0-source-implementation-selector-discovery-review"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md",
+        "sha256": "4d94a51b9b0c898a7e2c6d42c3c9d207640549d277cc2f9ad05758375a94ea79"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T132656Z--hcm-3-6-p0-source-implementation-selector-impact.md",
+        "sha256": "e8a5d4c81659ad611348d903755f62bfa89dc128dd489851dd412cdf5429567e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:e934cefcd92565fbfe141d1a0a12cfa08203d56205e59fab11eed85b1a2d48e2"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 source implementation selector consolidated remediation",
+    "scope_horizon": "exactly HCM36-P0-DR-001 in the paired source-impact record",
+    "detail_resolution": "the two selected but omitted existing call seams and their replayed GitNexus upstream impact evidence",
+    "temporal_horizon": "one consolidated repair before a different-fresh delta-focused closure review",
+    "authority_horizon": "one existing HCM-3.6 implementation proof record only; no product source, tests, public/schema/dependency/consumer surface, HCM-5, remote, or protected path",
+    "memory_horizon": "retain the immutable discovery result and all previous parent/planning lineage",
+    "validation_horizon": "return an exact two-file manifest and new aggregate subject fingerprint for closure review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T133100Z--HCM-3-6--p0-source-implementation-selector-discovery-review.json",
+      "sections": [
+        "complete immutable discovery dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md",
+      "sections": [
+        "selected existing functions and GitNexus impact boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T132656Z--hcm-3-6-p0-source-implementation-selector-impact.md",
+      "sections": [
+        "GitNexus upstream impacts"
+      ]
+    }
+  ],
+  "repo_truth": "Fresh discovery returned exactly HCM36-P0-DR-001/P2: read_committed_charter_locked and lifecycle recover_one_pending are admitted existing seams but omitted from the paired impact record. No other finding was returned. The selector is not CLEAN until both exact rows are added with replayed impact evidence.",
+  "allowed_scope": [
+    "Edit only the paired HCM-3.6 source-impact record.",
+    "Add exactly one row for read_committed_charter_locked (LOW, direct/total 0/0) and one row for lifecycle recover_one_pending (HIGH, direct/total 1/8, record_event_inner), preserving all existing rows and the source ceiling.",
+    "Recompute both subject hashes and aggregate, then run formatting and text-hygiene validation."
+  ],
+  "non_goals": [
+    "Do not edit product source/tests, selector, public/schema/dependency/configuration surfaces, dispatches, handoffs, ledger, validator, protected checkout, refs, or remote state.",
+    "Do not reopen discovery, change the P2 classification, dilute the HIGH warning, stage, commit, delegate, or declare CLEAN."
+  ],
+  "tasks": [
+    "Apply the complete minimal repair for HCM36-P0-DR-001 and no other semantic change.",
+    "Verify both added records accurately reproduce the parent-provided GitNexus impact results, then return the exact changed path, per-file SHA-256 values, aggregate subject fingerprint, and validation."
+  ],
+  "contracts_and_gates": [
+    "This is the one consolidated remediation for the P0 discovery finding. It is followed only by a different-fresh delta-focused closure review.",
+    "HIGH risk on lifecycle recover_one_pending remains explicit and requires the full HCM-3.6 compatibility proof wall; FTS/BM25 remains unavailable, never GREEN."
+  ],
+  "stop_conditions": [
+    "Return BLOCKED before writing outside the stated one-file proof scope or inventing new authority.",
+    "Return FINDINGS if exact impact evidence cannot support one of the two required rows."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "remediated_finding_refs",
+      "changed_paths",
+      "validation",
+      "subject_manifest",
+      "parent_disposition"
+    ]
+  }
+}

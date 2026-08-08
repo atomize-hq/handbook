@@ -1,0 +1,78 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260808T210000Z--HCM-3-6--full-source-delta-closure-review",
+  "created_at_utc": "2026-08-08T21:00:00Z",
+  "source_handoff_ids": ["20260808T051657Z--HCM-3-6--orchestration--atomic-authority-replanning-completed"],
+  "parent_orchestration_id": "handbook-hcm-3-6-implementation-20260808",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "source-driven-development", "code-review-and-quality", "security-and-hardening"],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-PROJECT-POSTURE-IMPLEMENTATION",
+  "subject_fingerprint": "sha256:17615cb1d6e8975d3069b808fee3ee0693d2b1f04cd627aeba133c6ef9f7e26f",
+  "review_cycle": {"kind": "closure", "cycle_id": "hcm-3-6-full-source-delta-closure", "trigger_run_ids": ["hcm36-full-source-discovery-20260808"], "finding_refs": ["HCM-3.6-P1", "HCM-3.6-P2", "HCM-3.6-P3", "HCM-3.6-P4"]},
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-08T13:29:00Z", "algorithm": "sha256", "encoding": "canonical-json-newline-v1",
+    "outcomes": [{"integrated_outcome_id": "hcm-3-6-project-posture-implementation", "packet_ids": ["HCM-3.6-PROJECT-POSTURE-IMPLEMENTATION"], "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md"}],
+    "fingerprint": "sha256:0ba0ea583ddadc14be74f481271159047c4be11bd87eb7f2ed7b2abcb467d53d"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:64396dd3609551be9fa97222ec45c1a2cb6ccdc373721d466782dcd3d52fd28d", "integrated_outcome_id": "hcm-3-6-project-posture-implementation", "outcome_registry_fingerprint": "sha256:0ba0ea583ddadc14be74f481271159047c4be11bd87eb7f2ed7b2abcb467d53d",
+    "review_stage": "proof", "stage_transition": {"kind": "continue", "from_stage": "proof"}, "event_reason": "reviewer_finding", "causal_predecessor_dispatch_id": "20260808T190000Z--HCM-3-6--full-source-consolidated-remediation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-6-full-source-delta-closure-convergence", "completed_at_utc": "2026-08-08T20:59:59Z",
+    "checks": [
+      {"kind": "complete_packet_wall", "status": "passed", "command": "Reconcile all four full-source discovery findings against the consolidated remediation, the final 11-file source/selector/proof manifest, and HCM-3.6 SPEC A06/A12/A13/A20.", "evidence_ref": "Private real-closure admission, distinct lifecycle state fingerprints, v1.1 retained JCS+LF reading, exact rustfmt, and all final proof commands are recorded without source-ceiling expansion."},
+      {"kind": "recursive_fixture_consumer_inventory", "status": "passed", "command": "Inspect affected authority, lifecycle retained-observation, approval, promotion, event, and recovery consumers plus new crate-local regressions.", "evidence_ref": "No public export, Cargo/schema, external test/fixture, Flow, adapter, HCM-5, or protected path changed."},
+      {"kind": "manifest_replay", "status": "passed", "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 eleven-file manifest after remediation, final proof, and selector EOF whitespace normalization.", "evidence_ref": "Full closure subject sha256:17615cb1d6e8975d3069b808fee3ee0693d2b1f04cd627aeba133c6ef9f7e26f."},
+      {"kind": "formatting", "status": "passed", "command": "rustfmt --check on all eight authorized Rust files and git diff --check.", "evidence_ref": "Both passed after remediation."},
+      {"kind": "whitespace", "status": "passed", "command": "Decode the text manifest as UTF-8; require final LF and no trailing spaces or tabs.", "evidence_ref": "All final source, selector, and proof text passes closed text hygiene."}
+    ]
+  },
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256", "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/charter_authority_transaction.rs", "sha256": "2a34ad8afd65654164dd60499e82104c1892120a8cb7917a4ee2372d4cac05dc"},
+      {"path": "crates/engine/src/charter_lifecycle_store.rs", "sha256": "10461fa22e4a1ba15004a56a45616c55835e5df221ef6d149af646e6faa3cf80"},
+      {"path": "crates/engine/src/charter_lifecycle_transition_v11.rs", "sha256": "f7712ecb001689bc827b41a08545b545733f1ad60d3c290d4c51536dd4d0de42"},
+      {"path": "crates/engine/src/charter_posture_transaction_intent_v1.rs", "sha256": "aa16ac50c312605ce64f98cfe80f9cfb8d82b28a61c348f25c01b3b129815cbe"},
+      {"path": "crates/engine/src/charter_posture_transaction_tests.rs", "sha256": "fe2ba98e9fd2fecca9d006a6e5f0988862584bdcefe88f744a39177c4dfc0631"},
+      {"path": "crates/engine/src/lib.rs", "sha256": "d36ae2f6562e0abd12ea6fd9e745ddd5bd13c13b51adbf77d326ae0b7806e93d"},
+      {"path": "crates/engine/src/project_posture.rs", "sha256": "8b2c6048425dcd2a6a9365995cd886c1770f8b142c1a15d9a85ede4829374bab"},
+      {"path": "crates/engine/src/project_posture_tests.rs", "sha256": "2e1a9bd19e7cbea4cacb4507b70d30532a4e9c54c7595e7cf6b8fe18763138ce"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md", "sha256": "3e3d9f31d71a3c5838992d9ea0bf89b84c627cf7e15d1c951fc609360ed941d2"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T132656Z--hcm-3-6-p0-source-implementation-selector-impact.md", "sha256": "18e443f00f1ac4b46342fc7a12dc367cfd34a5926f85e6522297a5b0c3c8beb2"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T170000Z--hcm-3-6-implementation-proof-wall.md", "sha256": "06a37e1d34e58a80e52ab94040d9bd6eda90264e55a9f3d0103a9365a61aea9c"}
+    ],
+    "aggregate_fingerprint": "sha256:17615cb1d6e8975d3069b808fee3ee0693d2b1f04cd627aeba133c6ef9f7e26f"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 full-source delta closure", "scope_horizon": "the four named discovery findings and their exact consolidated remediation over the frozen complete source/proof/selector subject", "detail_resolution": "authority closure, lifecycle v1.1 prior/result state validation and retained bytes, compatibility, no-write refusal, formatting, and proof", "temporal_horizon": "one different-fresh closure immediately after the sole consolidated repair", "authority_horizon": "review only; no new source or public/schema/dependency/consumer/HCM-5 authority", "memory_horizon": "retain P0 and complete P1-P4 review/remediation lineage without reopening discovery", "validation_horizon": "CLEAN is final for this source subject and no further review cycle may follow"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md", "sections": ["Exact inputs, kernel, recommendation, and refusal", "Compatibility", "Atomic commit and recovery", "Required proof and test matrix"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T160000Z--HCM-3-6--full-source-discovery-review.json", "sections": ["full discovery subject"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T190000Z--HCM-3-6--full-source-consolidated-remediation.json", "sections": ["complete four-finding remediation"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T132656Z--hcm-3-6-project-posture-implementation-selector.md", "sections": ["source ceiling and semantic owner"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/implementation/20260808T170000Z--hcm-3-6-implementation-proof-wall.md", "sections": ["final post-remediation complete wall"]}
+  ],
+  "repo_truth": "The sole discovery burst returned a P1 synthetic authority admission and P2 lifecycle-state, retained-v1.1-reader, and false-rustfmt-proof findings. One fresh consolidated remediation used existing private authority closure, distinct prior/result lifecycle state fingerprints, a private JCS+LF retained reader, and exact formatting. The final post-remediation focused, compatibility, engine all-features (218), Flow all-features, and workspace all-targets/all-features proof commands all passed. GitNexus FTS/BM25 remains unavailable and is not called green.",
+  "allowed_scope": [
+    "Read and review only the complete 11-file current manifested subject plus direct authority/lifecycle retained-observation, approval, promotion, event, and recovery consumers needed to close the four named findings.",
+    "Return P1/P2 only if directly caused by or still unmasked within this remediation, with exact path/line, violated contract, in-scope repair, and missing proof. Return CLEAN only with zero unresolved P1/P2."
+  ],
+  "non_goals": ["Do not edit, format, stage, unstage, commit, create a dispatch/handoff/ledger, delegate, access remote/protected paths, or reopen general discovery.", "Do not relitigate unrelated areas, authorize scope expansion, waive HCM-3.6 P1/P2, or treat unavailable GitNexus FTS/BM25 as green."],
+  "tasks": ["Verify that synthetic/missing/stale/substituted semantic closure refuses before journal/canonical mutation; lifecycle v1.1 prior/result fingerprints bind their respective Charters; direct retained v1.1 reading preserves v1.0 compatibility and later approval/promotion/event behavior; and the final proof record reports only real green commands.", "Return CLEAN if and only if all four findings are closed with no unmasked P1/P2. Do not perform a new discovery review."],
+  "contracts_and_gates": ["This is the different-fresh delta-focused closure after one discovery and one consolidated remediation. No review cycle may be run after CLEAN.", "The HCM-3.5 ordinary-validator exception has no bearing on HCM-3.6 source correctness, proof, P1/P2, or review."],
+  "stop_conditions": ["Return FINDINGS for a direct P1/P2 remediation defect; return BLOCKED only for unavailable essential read-only evidence or required new authority.", "Do not approve synthetic promotion, a second Charter, unsafe recovery, unverified v1.1 state, public-surface expansion, or incomplete proof."],
+  "return_contract": {"transport": "built_in_subagent", "findings_first": true, "include_agent_identity_and_status": true, "edit_scope": "read_only", "global_handoff": "forbidden", "ledger_write": "forbidden", "user_task_hop": "forbidden", "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "gitnexus_status", "parent_disposition"]}
+}
