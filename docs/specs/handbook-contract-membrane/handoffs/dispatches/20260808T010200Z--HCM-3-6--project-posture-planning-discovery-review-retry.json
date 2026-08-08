@@ -1,0 +1,167 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry",
+  "created_at_utc": "2026-08-08T01:02:00Z",
+  "source_handoff_ids": [
+    "20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed",
+    "20260807T213000Z--HCM-3-5--orchestration--audit-corrective-source-ingestion-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-planning-20260807",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "planning-and-task-breakdown",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-PLANNING",
+  "subject_fingerprint": "sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-6-project-posture-planning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-08T01:01:50Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-project-posture-planning",
+        "packet_ids": ["HCM-3.6-PLANNING"],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260807T000000Z--hcm-3-6-project-posture-planning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:3b7191825579caaa4dd8b5457c5ce56d81acaa3a2e394e816da9f8d5b2f80722"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:3038ca64d6f3fb05637bf608985e169c9a4afd60c378ab552b92f9d189a82c8c",
+    "integrated_outcome_id": "hcm-3-6-project-posture-planning",
+    "outcome_registry_fingerprint": "sha256:3b7191825579caaa4dd8b5457c5ce56d81acaa3a2e394e816da9f8d5b2f80722",
+    "review_stage": "planning",
+    "stage_transition": {"kind": "continue", "from_stage": "planning"},
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": "20260808T001000Z--HCM-3-6--project-posture-planning-discovery-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-6-project-posture-planning-discovery-retry-convergence",
+    "completed_at_utc": "2026-08-08T01:01:55Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the updated six-file HCM-3.6 planning subject with the selected HCM-3.6 row, posture sections of 01/02/05, Project posture seam, PG-POSTURE-01/02, 07/08/09, and the two named predecessor handoffs.",
+        "evidence_ref": "The subject remains documentation-only, records the interrupted no-verdict attempt, and freezes the requested owner, call paths, exact pairs, fingerprints, refusal algebra, hysteresis, adapter boundary, HCM-5 separation, and P01-P12 obligation without a runtime claim."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inspect HCM-3.4/HCM-3.5 predecessor records and named owner seams as read-only provenance; recursively inventory the HCM-3.6 subject directory.",
+        "evidence_ref": "The selected subject contains only six Markdown planning files; product source, tests, fixtures, schemas, dependencies, consumer adapters, and gates are outside its manifest."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 manifest from all six primary files.",
+        "evidence_ref": "Subject sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf; registry sha256:3b7191825579caaa4dd8b5457c5ce56d81acaa3a2e394e816da9f8d5b2f80722; budget sha256:3038ca64d6f3fb05637bf608985e169c9a4afd60c378ab552b92f9d189a82c8c."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-3.6",
+        "evidence_ref": "PASS before retry dispatch."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Decode every HCM-3.6 subject file as UTF-8 and scan for trailing spaces or tabs.",
+        "evidence_ref": "All six manifest entries have final newlines and no trailing whitespace."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md", "sha256": "4c568a415caf9c324e3f58ea310e84adcd50159b2f94e8120d57b7b6329a5c93"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260807T000000Z--hcm-3-6-project-posture-planning-selector.md", "sha256": "de1638166c56c0a4ef1885e2d39c9944ad632d5edb41b41365be8df8706b12ae"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260807T000000Z--hcm-3-6-project-posture-planning-proof-matrix.md", "sha256": "6d76ce9cd8c25bf6cc07203adbca90a49e861c21a07b922aebadace2129b8962"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260807T000000Z--hcm-3-6-project-posture-planning-source-impact.md", "sha256": "c288f710579202e459b25c45ca30dcdb1592f6c3225016af5646e2f827723944"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md", "sha256": "ec08dd5242d12056bbcfc7cfa562a869b0fbac20f8f9986c3a955d7672c4ab6a"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/todo.md", "sha256": "a83c8aaec7c414c7152f1c85658550fa07a132ab1ed1659c9bf2ffb2ca788818"}
+    ],
+    "aggregate_fingerprint": "sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 planning same-cycle discovery retry",
+    "scope_horizon": "the exact six-file HCM-3.6 documentation plan",
+    "detail_resolution": "future engine ownership, exact pairs/currentness/freshness, kernel/policy/recommendation/transition/refusal algebra, advisory notification/acknowledgement, gate separation, and P01-P12 proof planning",
+    "temporal_horizon": "one fresh replacement reviewer after the prior host-interrupted no-verdict run",
+    "authority_horizon": "documentation planning only; no product source, schema, dependency, adapter, gate, remote, or protected-checkout mutation",
+    "memory_horizon": "the named completed HCM-3.4/HCM-3.5 handoffs are read-only input/adoption provenance; raw snapshots and full delta signals remain excluded",
+    "validation_horizon": "valid P1/P2 requires one consolidated remediation and a different-fresh closure; this retry CLEAN is final and forbids later review"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260807T000000Z--hcm-3-6-project-posture-planning-selector.md", "sections": ["entire selector"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md", "sections": ["Frozen future owner and call paths", "Frozen internal Rust boundary", "Constitutional, evidence, and mutation rules", "Explicit non-goals and stops"]},
+    {"path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md", "sections": ["Project posture kernel and recommendation contracts"]},
+    {"path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md", "sections": ["Phase 5 — Fresh Review / Remediation Loop"]},
+    {"path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "sections": ["Review lineage", "Two-commit true-stop closeout"]},
+    {"path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md", "sections": ["Review priority rubric", "Admission and duplicate rules"]}
+  ],
+  "repo_truth": "The assigned detached checkout and dedicated local integration ref began at 1256e724a2b7da6b6250f57d6f63fced1e2cf949, tree ad5bac4904912e9a52b23ac862414deb79613154. HCM-3.4/HCM-3.5 are completed read-only predecessor evidence. The Project posture seam is UsefulPrecursor and PG-POSTURE-01/02 are open. The prior reviewer was interrupted before a result; it is not a finding or CLEAN. GitNexus was locally indexed; FTS search is unavailable, never GREEN. No code symbol or runtime surface is in scope.",
+  "allowed_scope": [
+    "Read the six-file subject and named current authority/provenance to determine whether it completely freezes the future Project posture owner, call paths, records, refusal behavior, evidence limits, and P01-P12 proof plan without creating implementation authority.",
+    "Return a unique HCM36-PLAN-DISC identifier for every valid P1/P2 within the exact documentation subject, including the violated authority, minimal in-scope remediation, and missing proof.",
+    "Classify valid P3/P4 under 09 with fix, inventory, or duplicate disposition without choosing a new product direction."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a dispatch, write a handoff or ledger, delegate, or change the reviewed subject.",
+    "Do not implement Rust, tests, runtime behavior, public API/export, schema/configuration, Cargo/dependency, SDK/CLI/Tauri/Substrate, Flow/pipeline, consumer, package/registry, gate policy/runtime, or publication work.",
+    "Do not access protected checkout state or remote state, fetch, pull, push, publish, merge, rebase, reset, clean, force-update, or update a ref."
+  ],
+  "tasks": [
+    "Independently validate that the planned owner chain is engine-only and acyclic, preserves canonical Charter authority, and keeps global posture dimensions distinct from Context Resolution dimensions.",
+    "Validate every frozen record/input/fingerprint/freshness/refusal requirement and the separate advisory evaluation versus constitutional transition path against 01/02/05.",
+    "Validate P01-P12 coverage and that HCM-3.4/HCM-3.5 evidence, notification/acknowledgement, adapters, and HCM-5 are bounded without unproved implementation or promotion claims.",
+    "Return CLEAN only if no valid P1/P2 remains for subject sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf."
+  ],
+  "contracts_and_gates": [
+    "This is a contiguous same-fingerprint member of the only discovery cycle for the registered HCM-3.6 planning outcome. Valid P1/P2 findings require one consolidated remediation and one different-fresh closure; no review runs after CLEAN.",
+    "The planning subject cannot grant code, public API, schema, dependency, consumer, adapter, HCM-5, remote, or protected-checkout authority.",
+    "GitNexus FTS/search unavailability must be reported unavailable, never GREEN. Upstream impact is deferred to a future implementation selector because this subject edits no source symbol."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS rather than repair for a valid P1/P2. Return BLOCKED if faithful review requires product authority, code/runtime scope, remote action, protected-checkout access, or mandatory unavailable capability.",
+    "Report any base/tree/manifest/cadence/authority/protected-path drift to the parent without writing global state."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "gitnexus_status", "parent_disposition"]
+  }
+}
