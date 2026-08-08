@@ -1,0 +1,461 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260808T011000Z--HCM-3-6--orchestration--project-posture-planning-completed",
+  "created_at_utc": "2026-08-08T01:10:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-PLANNING",
+  "orchestration_id": "handbook-hcm-3-6-planning-20260807",
+  "source_handoff_ids": [
+    "20260806T191500Z--HCM-3-4--orchestration--private-projection-source-pair-implementation-completed",
+    "20260807T213000Z--HCM-3-5--orchestration--audit-corrective-source-ingestion-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fdea8-ac7e-7a40-960a-4ca75455f884"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-08T01:02:00Z",
+    "evidence_ref": "Fresh built-in subagents were available. The initial discovery reviewer was host-interrupted before any result; a fresh same-cycle retry completed CLEAN with zero findings."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "/root/hcm36_discovery_review",
+      "dispatch_id": "20260808T001000Z--HCM-3-6--project-posture-planning-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T001000Z--HCM-3-6--project-posture-planning-discovery-review.json",
+      "dispatch_fingerprint": "sha256:e5034304107026eb0182826ae40f812697f4ad709d2a30ebd055824ad7cb81cd",
+      "role": "review",
+      "agent_id": "/root/hcm36_discovery_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:aa342c9422c8ddbee1c37bc60fbac074e697b03dfba73d866fd510ad76d853a9",
+      "result_subject_fingerprint": null,
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "interrupted",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T001000Z--HCM-3-6--project-posture-planning-discovery-review.json",
+        "Host-level interruption occurred before this reviewer returned a verdict or finding."
+      ]
+    },
+    {
+      "run_id": "/root/hcm36_discovery_retry",
+      "dispatch_id": "20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry.json",
+      "dispatch_fingerprint": "sha256:b3590f8c9d340c260c021c10c00aea6dc5fae5348089b9a8ee7b5a249777998b",
+      "role": "review",
+      "agent_id": "/root/hcm36_discovery_retry",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "planning-and-task-breakdown",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf",
+      "result_subject_fingerprint": "sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf",
+      "review_round": 2,
+      "predecessor_run_id": "/root/hcm36_discovery_review",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry.json",
+        "Fresh reviewer /root/hcm36_discovery_retry returned CLEAN with zero P1/P2/P3/P4 findings or advisories."
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-08T01:10:00Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:3038ca64d6f3fb05637bf608985e169c9a4afd60c378ab552b92f9d189a82c8c"
+    ],
+    "aggregate_fingerprint": "sha256:9876f04e033a8ed8121a571f0af09914e212131fe00f867bb3246ebb8350c20f"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "abda9de954ea65c1f065d2426087be5c8f98a24d",
+    "subject_fingerprint": "sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/todo.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260807T000000Z--hcm-3-6-project-posture-planning-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260807T000000Z--hcm-3-6-project-posture-planning-source-impact.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260807T000000Z--hcm-3-6-project-posture-planning-proof-matrix.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry.json",
+      "git:abda9de954ea65c1f065d2426087be5c8f98a24d"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 project-posture planning authority stop",
+    "scope_horizon": "the committed six-file HCM-3.6 documentation plan and its two internal discovery dispatches only",
+    "detail_resolution": "The plan freezes the future engine owner, exact inputs/currentness/freshness, kernel/evaluation/transition boundaries, refusal algebra, advisory notification/acknowledgement boundary, separation from Context Resolution and HCM-5, and P01-P12 implementation proof. No implementation authority was used.",
+    "temporal_horizon": "primary documentation state is committed; this record and the deterministic ledger are mechanical true-stop closeout only",
+    "authority_horizon": "HCM-3.6 may not modify immutable HCM-3.5 lineage, v1.4 validator semantics, the reviewed six-file subject after CLEAN, product/runtime/schema/dependency surface, protected checkout, or any remote/ref",
+    "memory_horizon": "the two predecessor handoffs, the host-interrupted first discovery dispatch, fresh retry CLEAN, frozen causal budget, and both validator contradictions remain replay-critical",
+    "validation_horizon": "no successful local publication or target-ref CAS is admissible until separately authorized authority resolves both recorded v1.4 validation contradictions"
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Complete the documentation-only HCM-3.6 project-posture planning packet, review it cleanly, and close locally without product implementation. The committed subject met the planning/review objective, but completion is blocked by immutable v1.4 validation contradictions outside the slice authority.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260807T000000Z--hcm-3-6-project-posture-planning-selector.md",
+      "sections": [
+        "entire selector",
+        "Review and closeout naming"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "v1.4 causal review cadence",
+        "Do not run a review after CLEAN"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+      "sections": [
+        "entire immutable authority-boundary record"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+      "sections": [
+        "validate_review_cycles",
+        "validate_v1_2_semantics"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at abda9de954ea65c1f065d2426087be5c8f98a24d",
+    "head": "abda9de954ea65c1f065d2426087be5c8f98a24d",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260808T011000Z--HCM-3-6--orchestration--project-posture-planning-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Bound task thread 019fdea8-ac7e-7a40-960a-4ca75455f884 and host local to nonce 2e1ebd7c9bb9ee2aa0cbb0e6bfca7502468c3a76516e157b943b63e41a8cff6b; verified the assigned worktree, expected base/tree/ancestor, target ref, cleanliness, and protected worktrees before editing.",
+    "Created and committed the exact six-file HCM-3.6 planning subject plus two schema-valid v1.4 review dispatches at abda9de954ea65c1f065d2426087be5c8f98a24d. The subject contains no product/runtime/schema/dependency/adapter/gate/remote change.",
+    "Ran fresh internal discovery. The first run was interrupted before a result; a fresh replacement reviewer returned CLEAN for the final primary subject with zero P1/P2/P3/P4 findings or advisories. No review ran after CLEAN.",
+    "Ran real local GitNexus analysis and scoped staged detection. Analysis changed only generated AGENTS.md/CLAUDE.md count hunks, which were restored byte-for-byte; scoped detection succeeded with no symbol mapping and FTS remained unavailable, never reported GREEN.",
+    "Stopped before local target-ref CAS because ordinary v1.4 validation and targeted parent replay cannot pass without a separately authorized repair beyond HCM-3.6 authority."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "status": "completed",
+      "summary": "Implementation-ready planning contract for engine-owned project posture resolution, evaluation, advisory recommendation, and narrow constitutional transition."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md",
+      "status": "completed",
+      "summary": "Packet decomposition, owner/call-path plan, future test seams, and integration boundaries."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/todo.md",
+      "status": "completed",
+      "summary": "Bounded planning ledger and post-CLEAN review restriction."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260807T000000Z--hcm-3-6-project-posture-planning-selector.md",
+      "status": "completed",
+      "summary": "Reviewed selector, scope ceiling, predecessor provenance, and frozen closeout names."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260807T000000Z--hcm-3-6-project-posture-planning-source-impact.md",
+      "status": "completed",
+      "summary": "No-runtime-impact and future-owner/source seam proof."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260807T000000Z--hcm-3-6-project-posture-planning-proof-matrix.md",
+      "status": "completed",
+      "summary": "P01-P12 future conformance and fail-closed implementation proof matrix."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T011000Z--HCM-3-6--orchestration--project-posture-planning-completed.json",
+      "status": "completed",
+      "summary": "Durable v1.4 authority-boundary record; filename was reserved before review but status is escalation_required, not completed."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.6-PLAN-D1",
+      "summary": "Future semantic ownership belongs solely to handbook-engine::project_posture. Exact refs/fingerprints/currentness resolve before evaluation; advisory recommendation and notification are separate from the only Charter-mutating compare-and-write transition path.",
+      "authority_effect": "Planning only: no source, API, schema, dependency, adapter, gate, or constitutional Charter mutation was authorized or performed.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-3.6-PLAN-D2",
+      "summary": "The clean planning review does not authorize a post-CLEAN subject or dispatch mutation to make v1.4 replay pass. The recorded validator contradictions are escalated instead of being silently waived or repaired in an immutable predecessor.",
+      "authority_effect": "Preserves the HCM-3.6 causal cadence, read-only predecessor boundary, and local-only no-ref-update restriction.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [
+    {
+      "blocker_id": "HCM36-ORDINARY-VALIDATOR-HCM35-LINEAGE",
+      "classification": "authority",
+      "summary": "The required ordinary validator stops at immutable predecessor parent 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning with: continuation writes or advances before selector CLEAN. HCM-3.6 authority explicitly keeps HCM-3.5 historical records and validator/control documents read-only.",
+      "resume_condition": "An explicitly authorized HCM-3.5 lineage or v1.4 validator-semantics repair selects the correct prospective record/continuation solution and restores ordinary validator success without this slice rewriting immutable evidence.",
+      "owner": "Handbook governance authority / user"
+    },
+    {
+      "blocker_id": "HCM36-SAME-CYCLE-SUBJECT-FINGERPRINT",
+      "classification": "authority",
+      "summary": "The sole HCM-3.6 discovery cycle contains interrupted dispatch subject sha256:aa342c9422c8ddbee1c37bc60fbac074e697b03dfba73d866fd510ad76d853a9 and retry CLEAN subject sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf. validate_review_cycles requires a same-cycle subject fingerprint to remain exact. Repair would require revising the clean-reviewed primary subject or creating a later review, both forbidden after CLEAN.",
+      "resume_condition": "A separately authorized v1.4 causal-lineage adjudication selects an immutable-safe recovery that neither rewrites existing dispatches nor treats a new post-CLEAN review as ordinary HCM-3.6 closure.",
+      "owner": "Handbook governance authority / user"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM36-VALIDATOR-AUTHORITY-BOUNDARY",
+      "trigger": "Required ordinary validation fails at the immutable HCM-3.5 parent, and targeted HCM-3.6 parent replay rejects the interrupted/retry same-cycle fingerprint drift. A successful local-only completion requires both to pass.",
+      "current_resolution": "The reviewed planning primary is preserved at abda9de954ea65c1f065d2426087be5c8f98a24d. The two causes, exact fingerprints, review result, and no-post-CLEAN constraint are recorded without altering predecessors, validator semantics, or the primary subject.",
+      "target_resolution": "A governance-authorized, immutable-safe v1.4 lineage resolution must make ordinary validation and HCM-3.6 parent replay pass before any fresh authorized completion attempt can update the dedicated local ref.",
+      "decision_required": "Choose the bounded owner and exact prospective repair authority for both the HCM-3.5 selector-CLEAN validator contradiction and the HCM-3.6 interrupted/retry same-cycle subject-fingerprint rule; determine whether a new selector/parent is required.",
+      "options": [
+        "Authorize a separate HCM-3.5/v1.4 governance packet that establishes the correct prospective lineage or validator-semantics repair while preserving immutable records.",
+        "Authorize a separate HCM-3.6/v1.4 causal-lineage adjudication that defines an immutable-safe treatment of a host-interrupted review and its retry; it must not relabel a post-CLEAN review as ordinary closure.",
+        "Decline repair and retain this documented HCM-3.6 authority stop with no target-ref publication."
+      ],
+      "recommendation": "Select a narrowly scoped v1.4 governance repair before any resume. This slice has no authority to choose a semantics change, rewrite a reviewed dispatch, or manufacture a post-CLEAN review lineage.",
+      "affected_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T001000Z--HCM-3-6--project-posture-planning-discovery-review.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T010200Z--HCM-3-6--project-posture-planning-discovery-review-retry.json"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "A new explicit authority identifies the repair scope, preserves immutable predecessor/dispatch evidence, and provides an approved causal route to a validator-clean HCM-3.6 closeout."
+    }
+  ],
+  "validation": [
+    {
+      "command": "assigned-worktree / target / ancestry / cleanliness / protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Assigned detached checkout, expected target ref/base 1256e724a2b7da6b6250f57d6f63fced1e2cf949, tree ad5bac4904912e9a52b23ac862414deb79613154, required ancestor, local tracking baseline, and protected worktree hashes were verified before edits."
+    },
+    {
+      "command": "npx --no-install gitnexus analyze",
+      "status": "passed",
+      "evidence_ref": "Index analysis completed locally (22067 nodes, 47108 edges, 300 flows). Only generated AGENTS.md/CLAUDE.md count hunks changed and were restored exactly; FTS was unavailable."
+    },
+    {
+      "command": "npx --no-install gitnexus detect-changes --scope staged --repo assigned-worktree",
+      "status": "passed",
+      "evidence_ref": "Real successful scoped output reported no mapped changes; this documentation-only subject edits no source symbols. verification.gitnexus_scoped is passed, while FTS/comparison availability is not represented as GREEN."
+    },
+    {
+      "command": "npx --no-install gitnexus detect-changes --scope compare --base-ref main --repo assigned-worktree",
+      "status": "passed",
+      "evidence_ref": "The required comparison completed and reported CRITICAL historical divergence from main (1557 files, 11754 symbols, 266 processes). It does not identify a HCM-3.6 source edit; FTS remained unavailable and no code edit was undertaken."
+    },
+    {
+      "command": "v1.4 retry dispatch verification",
+      "status": "passed",
+      "evidence_ref": "validate_handoffs.py --verify-dispatch accepted the retry manifest and replayed sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf."
+    },
+    {
+      "command": "ordinary v1.4 record/ledger validator",
+      "status": "blocked",
+      "evidence_ref": "Exact failure: 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN. This is immutable predecessor lineage outside HCM-3.6 authority."
+    },
+    {
+      "command": "targeted HCM-3.6 v1.4 parent semantic replay",
+      "status": "blocked",
+      "evidence_ref": "The retry dispatch modifies the same discovery cycle subject from sha256:aa342c9422c8ddbee1c37bc60fbac074e697b03dfba73d866fd510ad76d853a9 to sha256:98c07b743ec02845cc76cd7c074d9fd26bc349c02cf264aaf7fd32df1d0895cf; validate_review_cycles requires one exact same-cycle subject fingerprint."
+    },
+    {
+      "command": "v1.4 admission and orchestration-contract self-tests",
+      "status": "passed",
+      "evidence_ref": "Both self-tests passed before this mechanical record/ledger closeout; they do not waive either ordinary validator blocker."
+    },
+    {
+      "command": "product/runtime tests",
+      "status": "not_run",
+      "evidence_ref": "Prohibited: HCM-3.6 is documentation planning only and authorizes no product implementation or test execution."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "sections": [
+        "entire planning subject"
+      ],
+      "reason": "Freeze the complete future project-posture design and proof boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md",
+      "sections": [
+        "entire planning subject"
+      ],
+      "reason": "Bind future packet decomposition and implementation/test seams.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/todo.md",
+      "sections": [
+        "entire planning subject"
+      ],
+      "reason": "Record planning tasks and reviewed lifecycle state.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260807T000000Z--hcm-3-6-project-posture-planning-selector.md",
+      "sections": [
+        "entire selector"
+      ],
+      "reason": "Freeze selector, scope, dispatch population, and reserved closeout names.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260807T000000Z--hcm-3-6-project-posture-planning-source-impact.md",
+      "sections": [
+        "entire proof"
+      ],
+      "reason": "Prove the documentation-only source and owner boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260807T000000Z--hcm-3-6-project-posture-planning-proof-matrix.md",
+      "sections": [
+        "entire proof"
+      ],
+      "reason": "Map P01-P12 to future typed proof without runtime claims.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T011000Z--HCM-3-6--orchestration--project-posture-planning-completed.json",
+      "sections": [
+        "entire authority-boundary record"
+      ],
+      "reason": "Durably record the non-waivable v1.4 validation contradictions and protected primary state.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Rebuild the ledger mechanically from canonical handoff records.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "human_interactive",
+    "objective": "Resolve the two recorded v1.4 lineage contradictions under fresh explicit authority, then decide whether a new HCM-3.6 selector/parent may revalidate and close the preserved planning subject.",
+    "condition": "A governance-authorized repair path must first make the immutable HCM-3.5 ordinary-validator failure and the HCM-3.6 same-cycle fingerprint failure adjudicably valid without rewriting predecessors or treating later review as ordinary post-CLEAN closure.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T011000Z--HCM-3-6--orchestration--project-posture-planning-completed.json",
+        "sections": [
+          "entire authority-boundary record"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260806T204100Z--HCM-3-5--orchestration--resolution-aware-adoption-planning-authority-boundary.json",
+        "sections": [
+          "entire immutable authority-boundary record"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "sections": [
+          "v1.4 causal review cadence"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "sections": [
+          "Review lineage",
+          "Two-commit true-stop closeout"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Only an explicit new governance-selected v1.4 lineage/validator repair and a newly authorized HCM-3.6 resumption path."
+    ],
+    "prohibited_scope": [
+      "Do not rewrite the HCM-3.4/HCM-3.5 records, existing HCM-3.6 dispatches, or clean-reviewed primary subject without new explicit authority.",
+      "Do not run a new ordinary HCM-3.6 review after the recorded CLEAN, reclassify the retry as a different closure, waive P1/P2, or silently change causal semantics.",
+      "Do not implement product source/tests/schemas/dependencies/adapters/gates, mutate protected worktrees, contact remote, or update the local integration ref under this stopped packet."
+    ],
+    "acceptance_criteria": [
+      "The selected governance repair validates ordinary v1.4 record/ledger state and the exact HCM-3.6 parent lineage without changing immutable evidence.",
+      "A fresh explicitly authorized HCM-3.6 completion attempt revalidates its own preflight, selector, review cadence, primary/closeout commits, and expected-old local CAS before any ref update."
+    ],
+    "stop_conditions": [
+      "Stop again if the repair requires product/runtime/schema/dependency or public-owner expansion, remote/protected-checkout mutation, an unapproved post-CLEAN review, or an authority wider than expressly granted.",
+      "Do not merge, rebase, reset, clean, force-update, fetch, pull, push, or publish remotely."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-3.6 committed its six-file project-posture planning subject and fresh retry review was CLEAN with no P1/P2. Local completion is stopped: the ordinary validator fails on immutable HCM-3.5 selector-CLEAN lineage, and the HCM-3.6 interrupted/retry discovery pair has different same-cycle subject fingerprints. Both repairs require new governance authority; no target ref or remote was updated."
+}
