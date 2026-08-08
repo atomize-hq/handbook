@@ -1,0 +1,547 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260808T051657Z--HCM-3-6--orchestration--atomic-authority-replanning-completed",
+  "created_at_utc": "2026-08-08T05:16:57Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-ATOMIC-AUTHORITY-REPLANNING",
+  "orchestration_id": "handbook-hcm-3-6-atomic-authority-replanning-20260808",
+  "source_handoff_ids": [
+    "20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fdf87-108a-7001-849f-842de3cdbbaf"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-08T05:16:57Z",
+    "evidence_ref": "Five fresh built-in runs completed the exact discovery, consolidated remediation, delta closure, first supplemental remediation, and different-fresh supplemental CLEAN cadence."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm36-aa-discovery-20260808",
+      "dispatch_id": "20260808T042425Z--HCM-3-6--atomic-authority-replanning-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T042425Z--HCM-3-6--atomic-authority-replanning-discovery-review.json",
+      "dispatch_fingerprint": "sha256:5ac275c4afba5656024d1e18598e9d6c0e1c853be42b48208fbdbc8630adc8e7",
+      "role": "review",
+      "agent_id": "/root/hcm36_atomic_authority_discovery",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:7c7059804c3ce4d07211d48226f644d761087523cfa9f7812759585f713ccd25",
+      "result_subject_fingerprint": "sha256:7c7059804c3ce4d07211d48226f644d761087523cfa9f7812759585f713ccd25",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM36-AA-DISC-001",
+        "HCM36-AA-DISC-002"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T042425Z--HCM-3-6--atomic-authority-replanning-discovery-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md"
+      ]
+    },
+    {
+      "run_id": "hcm36-aa-remediation-20260808",
+      "dispatch_id": "20260808T044017Z--HCM-3-6--atomic-authority-replanning-consolidated-remediation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T044017Z--HCM-3-6--atomic-authority-replanning-consolidated-remediation.json",
+      "dispatch_fingerprint": "sha256:ea06def38c6425e73860a178ce694748ef48e33f502f98ef03e2a056db003884",
+      "role": "remediation",
+      "agent_id": "/root/hcm36_atomic_authority_remediation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-ADRs",
+        "incremental-implementation",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:7c7059804c3ce4d07211d48226f644d761087523cfa9f7812759585f713ccd25",
+      "result_subject_fingerprint": "sha256:8c5a537d44930a8ea02439e71a0f54cc6106fe73841731cda95ee8a1aa890000",
+      "review_round": null,
+      "predecessor_run_id": "hcm36-aa-discovery-20260808",
+      "remediation_for_run_ids": [
+        "hcm36-aa-discovery-20260808"
+      ],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T044017Z--HCM-3-6--atomic-authority-replanning-consolidated-remediation.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md"
+      ]
+    },
+    {
+      "run_id": "hcm36-aa-closure-20260808",
+      "dispatch_id": "20260808T045500Z--HCM-3-6--atomic-authority-replanning-delta-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T045500Z--HCM-3-6--atomic-authority-replanning-delta-closure-review.json",
+      "dispatch_fingerprint": "sha256:b384b89545c3e000f6178182b33dd6edc1c96d1fb46958e5b005cb04f5bc562a",
+      "role": "review",
+      "agent_id": "/root/hcm36_atomic_authority_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:8c5a537d44930a8ea02439e71a0f54cc6106fe73841731cda95ee8a1aa890000",
+      "result_subject_fingerprint": "sha256:8c5a537d44930a8ea02439e71a0f54cc6106fe73841731cda95ee8a1aa890000",
+      "review_round": 2,
+      "predecessor_run_id": "hcm36-aa-remediation-20260808",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM36-AA-CLOSE-001",
+        "HCM36-AA-CLOSE-002"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T045500Z--HCM-3-6--atomic-authority-replanning-delta-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md"
+      ]
+    },
+    {
+      "run_id": "hcm36-aa-supplemental-remediation-20260808",
+      "dispatch_id": "20260808T050202Z--HCM-3-6--atomic-authority-replanning-supplemental-remediation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T050202Z--HCM-3-6--atomic-authority-replanning-supplemental-remediation.json",
+      "dispatch_fingerprint": "sha256:992a72eeeb03d459cecb0f0847993a8c94a6ac871f4cde3a208e140c18c3d519",
+      "role": "remediation",
+      "agent_id": "/root/hcm36_atomic_authority_supplemental_remediation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-ADRs",
+        "incremental-implementation",
+        "code-review-and-quality",
+        "git-workflow-and-versioning"
+      ],
+      "subject_fingerprint": "sha256:8c5a537d44930a8ea02439e71a0f54cc6106fe73841731cda95ee8a1aa890000",
+      "result_subject_fingerprint": "sha256:6d2e6b7f2c6f9006ac579896a5fda74a714df9fff619d97646e1ae77e70c0b90",
+      "review_round": null,
+      "predecessor_run_id": "hcm36-aa-closure-20260808",
+      "remediation_for_run_ids": [
+        "hcm36-aa-closure-20260808"
+      ],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T050202Z--HCM-3-6--atomic-authority-replanning-supplemental-remediation.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md"
+      ]
+    },
+    {
+      "run_id": "hcm36-aa-supplemental-closure-20260808",
+      "dispatch_id": "20260808T050832Z--HCM-3-6--atomic-authority-replanning-supplemental-closure-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T050832Z--HCM-3-6--atomic-authority-replanning-supplemental-closure-review.json",
+      "dispatch_fingerprint": "sha256:998f671f3bfa9f6b9aa82c1cdbd50396e67e4a438e0d2d85df3036f2db2bf62f",
+      "role": "review",
+      "agent_id": "/root/hcm36_atomic_authority_supplemental_closure",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-ADRs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:6d2e6b7f2c6f9006ac579896a5fda74a714df9fff619d97646e1ae77e70c0b90",
+      "result_subject_fingerprint": "sha256:6d2e6b7f2c6f9006ac579896a5fda74a714df9fff619d97646e1ae77e70c0b90",
+      "review_round": 3,
+      "predecessor_run_id": "hcm36-aa-supplemental-remediation-20260808",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T050832Z--HCM-3-6--atomic-authority-replanning-supplemental-closure-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-08T05:16:57Z",
+    "dispatch_count": 5,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:b5ef53ab042d584d0d9eaa658380866020fab922f058185cb1972935dcf7978a"
+    ],
+    "aggregate_fingerprint": "sha256:ac26447f54d2c2afda580d2dfc8648be0cd2a47f15be929e8cfba9cb730dbd5b"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [
+    {
+      "remediation_id": "hcm36-aa-consolidated-remediation-20260808",
+      "finding_run_id": "hcm36-aa-discovery-20260808",
+      "owner": "delegated_run",
+      "delegated_run_id": "hcm36-aa-remediation-20260808",
+      "re_review_run_id": "hcm36-aa-closure-20260808",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:8c5a537d44930a8ea02439e71a0f54cc6106fe73841731cda95ee8a1aa890000",
+      "evidence_refs": [
+        "HCM36-AA-DISC-001",
+        "HCM36-AA-DISC-002",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T044017Z--HCM-3-6--atomic-authority-replanning-consolidated-remediation.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T045500Z--HCM-3-6--atomic-authority-replanning-delta-closure-review.json"
+      ]
+    },
+    {
+      "remediation_id": "hcm36-aa-supplemental-remediation-20260808",
+      "finding_run_id": "hcm36-aa-closure-20260808",
+      "owner": "delegated_run",
+      "delegated_run_id": "hcm36-aa-supplemental-remediation-20260808",
+      "re_review_run_id": "hcm36-aa-supplemental-closure-20260808",
+      "status": "completed",
+      "result_subject_fingerprint": "sha256:6d2e6b7f2c6f9006ac579896a5fda74a714df9fff619d97646e1ae77e70c0b90",
+      "evidence_refs": [
+        "HCM36-AA-CLOSE-001",
+        "HCM36-AA-CLOSE-002",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T050202Z--HCM-3-6--atomic-authority-replanning-supplemental-remediation.json",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T050832Z--HCM-3-6--atomic-authority-replanning-supplemental-closure-review.json"
+      ]
+    }
+  ],
+  "reviewed_state": {
+    "baseline_head": "4753f9142c7284197e28a6dab426ab03ab0793e9",
+    "subject_fingerprint": "sha256:6d2e6b7f2c6f9006ac579896a5fda74a714df9fff619d97646e1ae77e70c0b90",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T050832Z--HCM-3-6--atomic-authority-replanning-supplemental-closure-review.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-source-impact.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/todo.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T050832Z--HCM-3-6--atomic-authority-replanning-supplemental-closure-review.json",
+      "git:4753f9142c7284197e28a6dab426ab03ab0793e9"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 atomic-authority replanning complete",
+    "scope_horizon": "the reviewed nine-file documentation authority package and its five-dispatch v1.4 causal lineage only",
+    "detail_resolution": "one-leaf Charter mutation, heterogeneous canonical head, acyclic private posture/lifecycle identities, exact journal/recovery grammar, private test seam, and future source/proof ceiling",
+    "temporal_horizon": "reviewed primary 4753f9142c7284197e28a6dab426ab03ab0793e9 followed only by this mechanical handoff and ledger closeout",
+    "authority_horizon": "planning authority only; a later implementation requires a fresh selector and repeated impact/admission. No Rust, public/transport schema, dependency, consumer, HCM-5, remote, or protected-path authority follows.",
+    "memory_horizon": "the P0 primary/review/true-stop and all five current dispatches remain immutable causal evidence; no prior lineage was renamed or discarded",
+    "validation_horizon": "terminal supplemental review is CLEAN with P1=0/P2=0/P3=0/P4=0. The global ordinary validator retains only the inherited immutable HCM-3.5 governance-exception failure and is never represented as passing."
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Complete the documentation-only HCM-3.6 atomic-authority repair design so a later separately selected implementation can keep Charter constitutional, posture derived, Context Resolution distinct, and HCM-5 the sole gate/promotion owner.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md",
+      "sections": [
+        "entire selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "sections": [
+        "entire atomic-authority planning contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary.json",
+      "sections": [
+        "immutable P0 evidence and exact authority boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Phase 5 — Fresh Review / Remediation Loop",
+        "Phase 8 — True-Stop Handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Review lineage",
+        "Deterministic ledger rebuild",
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 4753f9142c7284197e28a6dab426ab03ab0793e9",
+    "head": "4753f9142c7284197e28a6dab426ab03ab0793e9",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260808T051657Z--HCM-3-6--orchestration--atomic-authority-replanning-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Bound task 019fdf87-108a-7001-849f-842de3cdbbaf on host local to nonce 11ed24851c1e66c6e226c18e5898a895879aa9846c34912a5f60bab72e699e66 before work.",
+    "Verified exact base/tree, required ancestry, target ref, local tracking baseline, detached worktree ownership, original blocked implementation ref, and protected checkout hashes without remote contact.",
+    "Produced the complete documentation-only authority package for physical one-leaf mutation, heterogeneous authority head, acyclic durable records, total recovery, internal schema/public-surface decision, private test seam, and exact future source/proof allowlist.",
+    "Closed HCM36-AA-DISC-001/-002 through one consolidated remediation and HCM36-AA-CLOSE-001/-002 through the first immediate supplemental cycle; the different-fresh terminal reviewer returned CLEAN with no advisory findings.",
+    "Created primary commit 4753f9142c7284197e28a6dab426ab03ab0793e9 after exact allowlist, manifest, dispatch-prefix, GitNexus staged/compare, text-policy, self-test, and protected-path proof."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "status": "completed",
+      "summary": "Implementation-ready documentation-only atomic-authority contract."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md",
+      "status": "completed",
+      "summary": "Reviewed selector that grants planning closure only and names the exact later implementation boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md",
+      "status": "completed",
+      "summary": "Exact positive/negative atomicity, identity, compatibility, and recovery proof matrix."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-source-impact.md",
+      "status": "completed",
+      "summary": "GitNexus-backed existing-symbol risk and future source/test ceiling."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T051657Z--HCM-3-6--orchestration--atomic-authority-replanning-completed.json",
+      "status": "completed",
+      "summary": "Completed parent-owned v1.4 causal closeout bound to the reviewed primary commit."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "status": "completed",
+      "summary": "Deterministic ledger entry rebuilt from canonical records."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM-3.6-AA-D1",
+      "summary": "A posture transition replaces exactly one fixed Charter dimension level_override leaf under whole-document exact-byte CAS; it never mutates baseline or a second dimension.",
+      "authority_effect": "Charter remains constitutional authority and posture remains a derived kernel.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-3.6-AA-D2",
+      "summary": "Promotion and posture journals form one private heterogeneous canonical-authority head; the public committed-read shape is unchanged and lifecycle/current reads select one Charter.",
+      "authority_effect": "No synthetic promotion or second current authority is introduced; HCM-5 remains the only gate/promotion owner.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-3.6-AA-D3",
+      "summary": "PostureTransition is constructed first, lifecycle-transition 1.1 second, and the private transaction intent/stages/markers/merged edge then bind both exact records and the Charter bytes under total recovery.",
+      "authority_effect": "The future implementation remains crate-private, transport-free, and schema-internal; no public JSON/schema/dependency authority is required.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md"
+      ]
+    },
+    {
+      "decision_id": "HCM-3.6-AA-D4",
+      "summary": "human_governance_exception remains inherited only for the immutable HCM-3.5 ordinary-validator contradiction already accepted by the predecessor HCM-3.6 closeout.",
+      "authority_effect": "The exception does not report the validator as passed, alter history, waive P1/P2, or authorize validator/product/remote changes.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/records/20260808T020459Z--HCM-3-6--orchestration--project-posture-planning-closeout-completed.json",
+        "docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM36-AA-DISC-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm36-aa-discovery-20260808",
+      "summary": "PostureTransition and lifecycle-transition 1.1 formed a cyclic fingerprint dependency.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T045500Z--HCM-3-6--atomic-authority-replanning-delta-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM36-AA-DISC-002",
+      "classification": "cross_document_repair",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm36-aa-discovery-20260808",
+      "summary": "The three private durable schemas and recovery grammar lacked complete implementable field/type/bound/equality closure.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md"
+      ]
+    },
+    {
+      "finding_id": "HCM36-AA-CLOSE-001",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm36-aa-closure-20260808",
+      "summary": "The first repair omitted total equality among basis-head, expected-canonical, and prior-authority-head canonical bindings.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T050832Z--HCM-3-6--atomic-authority-replanning-supplemental-closure-review.json"
+      ]
+    },
+    {
+      "finding_id": "HCM36-AA-CLOSE-002",
+      "classification": "local_remediation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "remediated",
+      "source_run_id": "hcm36-aa-closure-20260808",
+      "summary": "KernelReplay Pair arrays lacked one exact tuple ordering key and focused permutation negatives.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T050832Z--HCM-3-6--atomic-authority-replanning-supplemental-closure-review.json"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "exact base/tree/ref/ancestry/local-tracking/worktree/protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "HEAD and target began at 88a3e78a1eb5b840e64248856cf129ea929021ab / 0d0e7ad2961ba94240da0f3fe628bc66784825d2; required ancestor/local tracking remained 1256e724a2b7da6b6250f57d6f63fced1e2cf949; protected checkout remained clean at tree ad5bac4904912e9a52b23ac862414deb79613154."
+    },
+    {
+      "command": "final v1.4 subject-manifest and dispatch-prefix replay",
+      "status": "passed",
+      "evidence_ref": "Terminal subject sha256:6d2e6b7f2c6f9006ac579896a5fda74a714df9fff619d97646e1ae77e70c0b90 and the five-dispatch causal prefix replayed exactly."
+    },
+    {
+      "command": "terminal different-fresh supplemental causal review",
+      "status": "passed",
+      "evidence_ref": "Reviewer /root/hcm36_atomic_authority_supplemental_closure returned CLEAN with zero P1/P2/P3/P4 for the exact terminal subject."
+    },
+    {
+      "command": "npx --no-install gitnexus detect-changes --scope staged --repo handbook-hcm36-atomic-authority-replanning-1ccd",
+      "status": "passed",
+      "evidence_ref": "14 documentation/control paths, 41 documentation symbols, zero affected processes, LOW risk. FTS was unavailable and is not GREEN."
+    },
+    {
+      "command": "npx --no-install gitnexus detect-changes --scope compare --base-ref main --repo handbook-hcm36-atomic-authority-replanning-1ccd",
+      "status": "passed",
+      "evidence_ref": "Comparison completed with historical divergence of 1,571 files, 11,811 symbols, 266 affected processes, CRITICAL aggregate risk; this is baseline context, not the LOW-risk staged documentation change."
+    },
+    {
+      "command": "ordinary v1.4 record/ledger validator",
+      "status": "failed",
+      "evidence_ref": "Inherited human_governance_exception actual output: handoff validation failed: 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN"
+    },
+    {
+      "command": "v1.4 historical admission self-test",
+      "status": "passed",
+      "evidence_ref": "Immutable v1.0/v1.1 and legacy/current corpus mutation, deletion, isolation, and exact-ledger scenarios passed."
+    },
+    {
+      "command": "v1.4 orchestration-contract self-test",
+      "status": "passed",
+      "evidence_ref": "Causal review/remediation, two supplemental cycles, terminal completion, parent population, and two-commit closeout scenarios passed."
+    },
+    {
+      "command": "git -c core.whitespace=-blank-at-eof diff --cached --check",
+      "status": "passed",
+      "evidence_ref": "The exact v1.4 text policy (no trailing spaces/tabs; final LF required) passed over all primary paths. Git default blank-at-eof additionally diagnoses one reviewed final empty line in the source-impact note; the reviewed bytes were preserved."
+    },
+    {
+      "command": "product/runtime tests",
+      "status": "not_run",
+      "evidence_ref": "Prohibited by the documentation/read-only-analysis authority; no product source or test path changed."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T051657Z--HCM-3-6--orchestration--atomic-authority-replanning-completed.json",
+      "sections": [
+        "entire completed v1.4 record"
+      ],
+      "reason": "Parent-owned mechanical closeout bound to the reviewed primary commit and complete causal dispatch population.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "sections": [
+        "deterministic ledger entry"
+      ],
+      "reason": "Required rebuildable index update for the completed canonical record.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "none",
+    "condition": "none",
+    "must_read": [],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "No implementation follows automatically; any later source work requires a fresh selected implementation authority."
+    ],
+    "acceptance_criteria": [
+      "The documentation-only authority package remains terminal-review CLEAN with no unresolved P1/P2."
+    ],
+    "stop_conditions": [
+      "Any later implementation or authority expansion requires a separately selected increment."
+    ]
+  },
+  "supersedes": [
+    "20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary"
+  ],
+  "chat_summary": "HCM-3.6 atomic-authority replanning is complete at reviewed primary 4753f9142c7284197e28a6dab426ab03ab0793e9. The terminal subject is sha256:6d2e6b7f2c6f9006ac579896a5fda74a714df9fff619d97646e1ae77e70c0b90, all four P2 findings are remediated, and the different-fresh supplemental review is CLEAN. This closeout authorizes no product implementation."
+}
