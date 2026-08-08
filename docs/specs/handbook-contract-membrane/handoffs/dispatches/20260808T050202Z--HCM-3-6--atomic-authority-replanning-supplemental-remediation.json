@@ -1,0 +1,192 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260808T050202Z--HCM-3-6--atomic-authority-replanning-supplemental-remediation",
+  "created_at_utc": "2026-08-08T05:02:02Z",
+  "source_handoff_ids": [
+    "20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-atomic-authority-replanning-20260808",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "remediation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "incremental-implementation",
+    "code-review-and-quality",
+    "git-workflow-and-versioning"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-ATOMIC-AUTHORITY-REPLANNING",
+  "subject_fingerprint": "sha256:8c5a537d44930a8ea02439e71a0f54cc6106fe73841731cda95ee8a1aa890000",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-08T04:24:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-atomic-authority-replanning",
+        "packet_ids": [
+          "HCM-3.6-ATOMIC-AUTHORITY-REPLANNING"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:2975b2f86f7ee62c8e5222f2415eefda6da1469ef36078e10c2c479d33f1f154"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:b5ef53ab042d584d0d9eaa658380866020fab922f058185cb1972935dcf7978a",
+    "integrated_outcome_id": "hcm-3-6-atomic-authority-replanning",
+    "outcome_registry_fingerprint": "sha256:2975b2f86f7ee62c8e5222f2415eefda6da1469ef36078e10c2c479d33f1f154",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260808T045500Z--HCM-3-6--atomic-authority-replanning-delta-closure-review"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "edfa5e70f0f631f2488e138539912da445a2ba245a93e3fc4b1c0f7131afffbd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "feb041fdfdfcf06c2ef4e0341ba979c0a5141cedd5e5377a10e561911c547442"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "192ac11ce3c6acbc2c18ed902917b32e870597b6f50f63a0ecba2adb28bbafad"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+        "sha256": "affb983c1b08549d8fdbb684bf75bf7742c3d13fdb254d866d3f7668deaacf96"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md",
+        "sha256": "b18469a15652ce63100a202c10c7819694ca2f32b5399fabf167e030dcdaf251"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md",
+        "sha256": "f21232201bf59640f792fb992b223c24b1ee156b93349f88f02f046662a3bff7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-source-impact.md",
+        "sha256": "6b5adb0f7c37351349b4c19ca21c7c1e25dd51a5e6824a884e77895e8214b214"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md",
+        "sha256": "cdb71fcd18b30211913fbc5a27028f7e1ec67c4e0cfb035cd08ee8c61d23b1e6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/todo.md",
+        "sha256": "1e45b0f32a59c53e4f39dc5fcd6f3b789b68427ac7f86aef507de80746ad9e69"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:8c5a537d44930a8ea02439e71a0f54cc6106fe73841731cda95ee8a1aa890000"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 atomic-authority replanning first supplemental remediation",
+    "scope_horizon": "only HCM36-AA-CLOSE-001/-002, directly unmasked by the first consolidated repair",
+    "detail_resolution": "add one total basis-head/expected-canonical equality and one exact UTF-8 bytewise Pair tuple ordering key plus focused A08 negatives",
+    "temporal_horizon": "first of at most two immediately causal supplemental cycles after the delta closure findings",
+    "authority_horizon": "documentation-only repair in the same four files; no general discovery or product/public/schema/dependency/HCM-5 authority",
+    "memory_horizon": "retain discovery, consolidated remediation, closure findings, and the same outcome/budget identity without renaming",
+    "validation_horizon": "close both unmasked P2s together, recompute the nine-file subject, and return it for different-fresh supplemental review"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T045500Z--HCM-3-6--atomic-authority-replanning-delta-closure-review.json",
+      "sections": [
+        "entire immutable closure dispatch and returned HCM36-AA-CLOSE-001/-002"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "sections": [
+        "Closed reusable value grammar",
+        "Atomic journal and recovery"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Posture-transition identity and atomic recovery"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md",
+      "sections": [
+        "A08"
+      ]
+    }
+  ],
+  "repo_truth": "The first closure confirmed the cyclic-identity repair and most closed grammar, but found exactly two direct A08 P2 gaps: basis-head canonical equality and Pair tuple ordering. No other original finding or general design area is reopened.",
+  "allowed_scope": [
+    "Edit only 05, HCM-3.6 SPEC, the active selector, and proof matrix, and only for HCM36-AA-CLOSE-001/-002.",
+    "Require basis_head.canonical to equal expected_canonical and the PostureTransition prior-authority-head canonical document binding exactly, before journal creation and again in recovery.",
+    "Define every semantically unordered Pair array as unique and strictly sorted by the tuple (ref UTF-8 bytes, fingerprint UTF-8 bytes), with no ref-only or fingerprint-only alternative.",
+    "Extend A08 with independent basis/expected substitution and Pair same-ref/different-fingerprint plus different-ref permutation negatives; return hashes and the new nine-file aggregate without committing."
+  ],
+  "non_goals": [
+    "Do not edit any other document, dispatch, product source/test/fixture/schema/dependency/configuration/API/transport/HCM-5/handoff/ledger/ref/remote/protected path.",
+    "Do not reopen general discovery, alter the already-closed cyclic identity, weaken any bound, or reclassify the two P2s."
+  ],
+  "tasks": [
+    "Apply the two smallest synchronized grammar repairs across the exact four authorized files.",
+    "Run focused equality/order contradiction checks, A08 reconciliation, text hygiene, links, diff check, and exact nine-file manifest replay.",
+    "Return REMEDIATED only when both P2s close; otherwise return the exact blocker without staging, committing, or writing parent closeout state."
+  ],
+  "contracts_and_gates": [
+    "This is supplemental causal cycle one, not new discovery or a budget reset.",
+    "Both P2s close together and receive a different-fresh supplemental review; only that reviewer may declare CLEAN.",
+    "No implementation, source check, public surface, schema asset, dependency, remote, or protected-path action is authorized."
+  ],
+  "stop_conditions": [
+    "Stop before any path or authority expansion or any attempt to repair immutable history/validator behavior.",
+    "Do not stage, commit, update refs, write handoff/ledger, delegate, or access remote/protected paths.",
+    "Return BLOCKED if the exact equality/order repair cannot be expressed in the four authorized documents."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "changed_paths",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

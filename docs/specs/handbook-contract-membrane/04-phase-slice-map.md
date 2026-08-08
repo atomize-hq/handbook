@@ -598,7 +598,15 @@ separately authorized.
 - configure threshold windows, cooldowns, recipients, and acknowledgment/escalation through an approved `PostureEvaluationPolicy`;
 - require authorized `PostureTransition` records for canonical policy changes;
 - apply hysteresis: immediate raise recommendations may follow hard triggers, while lowering requires sustained evidence and cannot cross floors/red lines;
-- reopen only affected intake coverage instead of regenerating the Charter wholesale.
+- map each transition to exactly one fixed-array Charter `level_override` leaf,
+  compare the complete expected canonical bytes, and leave the baseline plus all
+  other dimensions byte-semantically unchanged;
+- derive one current Charter head across candidate-promotion and posture-
+  transition journals so reads, lifecycle events, recovery, and later promotion
+  agree without fabricating a promotion record; and
+- re-evaluate only `engineering_posture.dimensions`, atomically persist the
+  resulting Charter, immutable PostureTransition, and private lifecycle rebase,
+  and keep the entire owner/schema/test seam crate-private and transport-free.
 
 ### Phase 3 exit gate
 

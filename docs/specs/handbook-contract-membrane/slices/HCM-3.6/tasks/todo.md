@@ -1,40 +1,39 @@
-# HCM-3.6 planning task ledger
+# HCM-3.6 atomic-authority planning ledger
 
-## Completed in this planning increment
+## Current documentation-only increment
 
-- [x] Validate the exact base/tree, integration ref, clean task worktree,
-  protected checkout state, and local remote-tracking baseline without network
-  contact.
-- [x] Validate HCM-3.4/HCM-3.5 predecessor records as read-only evidence and
-  preserve their implementation/adoption boundaries.
-- [x] Freeze `hcm-3-6-project-posture-planning` and the documentation-only
-  scope in the selector.
-- [x] Specify the future engine owner, read/evaluate/mutate paths, data records,
-  fingerprint/currentness rules, refusal algebra, hysteresis, acknowledgement,
-  and HCM-5 separation.
-- [x] Record the future packet sequence, owner/test seams, source-impact
-  boundary, and P01–P12 proof matrix.
+- [x] Bind the nonce/task/host and verify exact local-only base, tree,
+  ancestry, target ref, clean task/protected checkouts, and tracking baseline.
+- [x] Preserve the P0 primary, CLEAN review, blocker, and authority-boundary
+  handoff as immutable source evidence.
+- [x] Read live `01`-`09`, the HCM-3.6 package, P0 selector/proof/review/stop,
+  and relevant Charter transaction/lifecycle/source/test seams.
+- [x] Rebuild a local index-only GitNexus graph; record FTS unavailable and
+  collect exact context/upstream impact for every prospective existing edit
+  symbol.
+- [x] Decide the physical fixed-index `level_override` mapping, baseline/effective
+  algebra, whole-byte CAS, and one-leaf deep-diff rule.
+- [x] Decide one heterogeneous promotion/posture canonical-head model, private
+  durable identities, exact transaction group, recovery matrix, and resulting-
+  kernel replay.
+- [x] Decide crate-local tests and an exact future source/proof ceiling with
+  explicit HIGH/CRITICAL acceptance.
+- [x] Converge the complete intended semantic subject before review; no
+  post-CLEAN semantic checklist edit is permitted.
 
-## Required before this increment closes
+## Parent-owned control state
 
-- [x] Generate and validate the initial v1.4 discovery dispatch from the
-  six-file primary manifest; preserve its interrupted, no-verdict built-in run
-  in the final dispatch population.
-- [ ] Generate a fresh same-cycle discovery retry from the updated manifest and
-  obtain its built-in complete-subject result; consolidate every valid P1/P2
-  only within the six-document planning ceiling.
-- [ ] If remediation changes the material subject, generate a different-fresh
-  causal closure dispatch and obtain CLEAN; otherwise do not run a review after
-  discovery CLEAN.
-- [ ] Run the planning proof wall, GitNexus scoped detection, whitespace/diff,
-  and all mandatory validator/self-test commands.
-- [ ] Commit the reviewed primary documentation state, then only the parent
-  handoff/ledger mechanical closeout state.
-- [ ] Use the expected-old local CAS for the dedicated integration ref; do not
-  push, fetch, pull, merge, rebase, reset, clean, or force-update.
+The immutable discovery dispatch records manifest freeze and review result.
+The completed parent handoff records proof-wall, validator, commit, ledger,
+and CAS results. These mechanical facts are intentionally not toggled inside
+the reviewed semantic subject after CLEAN.
 
-## Deferred future implementation work
+## Deferred implementation; not authorized here
 
-- [ ] Obtain a new explicit HCM-3.6 implementation selector before any product
-  source, test, fixture, schema, dependency, adapter, or gate work.
-- [ ] Implement and prove P1–P4 in `tasks/plan.md` only under that selector.
+- [ ] Create a fresh implementation selector at its exact base and repeat P0
+  impact/admission for the complete P1-P4 route.
+- [ ] Implement only the exact private source ceiling in `tasks/plan.md`.
+- [ ] Prove A01-A24, every HIGH/CRITICAL compatibility process, unchanged
+  HCM-2.2 consumers, and no public/schema/dependency/HCM-5 expansion.
+- [ ] Complete fresh implementation review and two-commit local closeout before
+  any gate or adoption claim.

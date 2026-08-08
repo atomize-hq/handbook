@@ -1431,6 +1431,64 @@ accepts this correction only; FINDINGS or BLOCKED leaves it incomplete. No
 HCM-3.x, JSON protocol, SDK/transport, native-adapter, release, publication, or
 push authority is created.
 
+## HCM-3.6 atomic-authority planning proof gate
+
+The HCM-3.6 atomic-authority replanning subject is documentation authority
+only. It resolves the independently CLEAN P0 true stop
+`HCM36-P3-ATOMIC-TRANSITION-PRIMITIVE`; it does not implement or close
+`PG-POSTURE-01` or `PG-POSTURE-02`. Before this planning decision may close:
+
+- the prior P0 primary `cab94769bcc14049ecd42378cf34462079fae386`, its
+  exact subject fingerprint, CLEAN discovery review, and authority-boundary
+  handoff remain immutable evidence rather than a reopened review cycle;
+- the physical Charter mapping names the fixed nine-member array index and
+  exact `/engineering_posture/dimensions/{index}/level_override` leaf for each
+  dimension, resolves effective level as override-or-baseline, never changes
+  baseline, and proves a one-leaf typed deep diff plus exact-byte CAS;
+- one private heterogeneous head merges committed promotion and posture edges,
+  has one promotion genesis and no fork/cycle/disconnected/duplicate successor,
+  and gives current reads, lifecycle events, recovery, and later promotion the
+  same terminal Charter and lifecycle head without fabricating a promotion;
+- the atomic group and total recovery matrix bind canonical Charter,
+  PostureTransition `1.0`, lifecycle-transition `1.1`, exact JCS+LF journal,
+  old snapshot, stages/finals/markers, and resulting-kernel replay; normal
+  semantic failures write no domain/journal state, while contradictory durable
+  states preserve evidence and refuse;
+- durable identity is explicit: internal posture-transition `1.0`, internal
+  lifecycle-transition `1.1` in the existing partition, and internal posture
+  transaction-intent `1.0`; existing lifecycle `1.0` remains immutable and no
+  definition/schema asset, public lineage enum variant, public Rust export,
+  transport schema, operation, dependency, configuration, or consumer surface
+  is required;
+- tests are crate-local children of the private semantic/transaction owners;
+  no external integration test is described as able to reach a private module;
+- the exact future path/symbol/proof allowlist includes alternating promotion
+  and posture heads, lifecycle event after posture, later promotion, public read
+  compatibility, all recovery boundaries, unchanged HCM-2.2 consumers,
+  privacy/forbidden-scope proof, and explicit HIGH/CRITICAL acceptance;
+- GitNexus uses a local index of the exact base; FTS unavailability remains
+  unavailable, while exact context/upstream impact is recorded. CRITICAL
+  recovery/lifecycle seams and HIGH promotion-history seams are warnings and
+  future proof obligations, not accepted edits in this documentation subject;
+- Charter remains constitutional authority, posture remains a derived kernel,
+  Context Resolution remains distinct, and HCM-5 remains the sole contract-
+  gate verdict and parent-promotion owner;
+- the planning manifest, exact allowlist/diff, whitespace, Markdown/link,
+  dispatch replay, ledger rebuild, archive boundary, handoff validator modes,
+  GitNexus scoped/compare observations, and both self-tests are recorded
+  honestly, including the immutable HCM-3.5 ordinary-validator contradiction;
+- one fresh complete-subject discovery reviewer returns CLEAN, or every valid
+  P1/P2 receives one consolidated bounded remediation and a different-fresh
+  delta closure returns CLEAN; no review follows CLEAN; and
+- the reviewed planning state is committed first, followed only by the
+  mechanical completed v1.4 parent handoff/ledger commit and local expected-old
+  CAS. No implementation or next task is created automatically.
+
+The later implementation wall is the exact A01-A24 matrix under
+`slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md`.
+That future wall, not this planning closeout, is required before any posture
+runtime or gate evidence can be promoted.
+
 ## Control-pack orchestration-repair proof gate
 
 The immutable HCM-0.1 history remains evidence of the prior workflow and is not rewritten. At corrective slice HCM-0.8's completed closeout, the following conditions had to hold; the later HCM-0.6 decision resolves the shipped-default item that was intentionally open at that boundary:

@@ -1,0 +1,233 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260808T042425Z--HCM-3-6--atomic-authority-replanning-discovery-review",
+  "created_at_utc": "2026-08-08T04:24:25Z",
+  "source_handoff_ids": [
+    "20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-atomic-authority-replanning-20260808",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-ATOMIC-AUTHORITY-REPLANNING",
+  "subject_fingerprint": "sha256:7c7059804c3ce4d07211d48226f644d761087523cfa9f7812759585f713ccd25",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-6-atomic-authority-replanning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-08T04:24:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-atomic-authority-replanning",
+        "packet_ids": [
+          "HCM-3.6-ATOMIC-AUTHORITY-REPLANNING"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:2975b2f86f7ee62c8e5222f2415eefda6da1469ef36078e10c2c479d33f1f154"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:b5ef53ab042d584d0d9eaa658380866020fab922f058185cb1972935dcf7978a",
+    "integrated_outcome_id": "hcm-3-6-atomic-authority-replanning",
+    "outcome_registry_fingerprint": "sha256:2975b2f86f7ee62c8e5222f2415eefda6da1469ef36078e10c2c479d33f1f154",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-6-atomic-authority-replanning-discovery-convergence",
+    "completed_at_utc": "2026-08-08T04:24:20Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read live 01-09, the complete HCM-3.6 planning/P0 package, immutable P0 dispatch/review/true-stop, and all selected Charter artifact/transaction/lifecycle source seams.",
+        "evidence_ref": "The nine-file subject decides every requested physical mapping, head, transaction, schema, private-owner, source, test, and proof question without product implementation."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inventory current Charter schema/typed fields, promotion journals, lifecycle records/events, public committed reads, Flow consumers, later-promotion paths, HCM-2.2 tests, and every exact future source/test path.",
+        "evidence_ref": "The selector and source-impact proof bind the private eight-path future ceiling, unchanged regression consumers, and CRITICAL/HIGH acceptance processes; no fixture/schema asset/public consumer edit is selected."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 nine-file planning manifest and the v1.4 outcome-registry/causal-budget fingerprints.",
+        "evidence_ref": "Subject sha256:7c7059804c3ce4d07211d48226f644d761087523cfa9f7812759585f713ccd25; registry sha256:2975b2f86f7ee62c8e5222f2415eefda6da1469ef36078e10c2c479d33f1f154; budget sha256:b5ef53ab042d584d0d9eaa658380866020fab922f058185cb1972935dcf7978a."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "git diff --check over the exact planning subject",
+        "evidence_ref": "PASS after removing final-blank-line errors and before dispatch creation."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Decode all nine manifest files as UTF-8 and reject missing final LF, trailing spaces, or trailing tabs.",
+        "evidence_ref": "All nine entries are UTF-8 text with one final LF and no trailing whitespace."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "edfa5e70f0f631f2488e138539912da445a2ba245a93e3fc4b1c0f7131afffbd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "7af99090e4bd96dd2b39f85dc3aee180ebbf4eb69efdf96058f85630b6685c8e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "192ac11ce3c6acbc2c18ed902917b32e870597b6f50f63a0ecba2adb28bbafad"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+        "sha256": "721349fea2493dbefcc9a2749824915dc7bf00c030b5c10aa6b40353b651374d"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md",
+        "sha256": "e0588a03322ad8cd9da7d35cb0571223060791760c15637a748dbd22ed1c6055"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md",
+        "sha256": "75591ed2b86a3d85540fe3e5d091652fa15d92f62d20c6e96341b13fd4adc43b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-source-impact.md",
+        "sha256": "6b5adb0f7c37351349b4c19ca21c7c1e25dd51a5e6824a884e77895e8214b214"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md",
+        "sha256": "cdb71fcd18b30211913fbc5a27028f7e1ec67c4e0cfb035cd08ee8c61d23b1e6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/todo.md",
+        "sha256": "1e45b0f32a59c53e4f39dc5fcd6f3b789b68427ac7f86aef507de80746ad9e69"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:7c7059804c3ce4d07211d48226f644d761087523cfa9f7812759585f713ccd25"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 atomic-authority replanning",
+    "scope_horizon": "the complete nine-file documentation-only authority repair subject",
+    "detail_resolution": "physical one-leaf Charter mapping, heterogeneous current head, exact private durable schemas, atomic recovery, resulting-kernel replay, private test seam, and future source/proof ceiling",
+    "temporal_horizon": "one fresh complete-subject planning discovery review before primary documentation commit",
+    "authority_horizon": "documentation and read-only source analysis only; no Rust/test/fixture/schema asset/dependency/public/transport/consumer/HCM-5 mutation",
+    "memory_horizon": "the prior P0 primary, CLEAN review, blocker, and true-stop remain immutable source evidence",
+    "validation_horizon": "CLEAN authorizes only local planning closeout; implementation still requires a fresh selector and repeated P0 impact/admission"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md",
+      "sections": [
+        "entire selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary.json",
+      "sections": [
+        "immutable P0 evidence and exact blocker"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Project posture kernel and recommendation contracts",
+        "Canonical-authority head and private durable records",
+        "Posture-transition identity and atomic recovery"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-3.6 atomic-authority planning proof gate"
+      ]
+    }
+  ],
+  "repo_truth": "Current Charter dimensions are a fixed ordered array of level_override leaves. Existing promotion history and lifecycle loading assume the current Charter head is a promotion, so a posture write needs one merged internal head, a posture record, and a lifecycle rebase. The exact repair can remain crate-private and requires no public/transport/schema-asset/dependency surface.",
+  "allowed_scope": [
+    "Read the exact nine-file manifest and named current source/test evidence to review completeness, internal consistency, implementability, and authority containment.",
+    "Report each valid P1/P2 with a unique HCM36-AA-DISC identifier, exact violated contract, affected manifest path/section, and smallest in-scope documentation repair.",
+    "Report P3/P4 only under the inventory protocol; do not edit, implement, expand authority, or write a handoff/ledger."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, delegate, create another dispatch, or mutate any repository byte.",
+    "Do not implement Rust/tests/fixtures/schemas/dependencies/configuration/APIs/transports/adapters/consumers/HCM-5, access protected paths, or perform remote/network work.",
+    "Do not reopen or use the predecessor P0 CLEAN cycle as this subject's review."
+  ],
+  "tasks": [
+    "Verify the physical array mapping, baseline/effective/storage algebra, exact-byte CAS, one-leaf diff, and no multi-dimension/baseline mutation are complete and consistent across 04/05/SPEC/selector/proof.",
+    "Verify the merged promotion/posture head, lifecycle v1.0/v1.1 compatibility, current reads, event recording, later promotion, and recovery select one Charter without a synthetic promotion or public break.",
+    "Verify every private record has an implementable closed identity/fingerprint/ref/partition contract and the pending/committed/rolled-back plus no-write/resulting-kernel semantics are total.",
+    "Verify the private owner/test seam is truthful and the exact future path/symbol/test/proof allowlist covers every HIGH/CRITICAL process while preserving Context Resolution and HCM-5 boundaries.",
+    "Return CLEAN only for exact subject sha256:7c7059804c3ce4d07211d48226f644d761087523cfa9f7812759585f713ccd25 with no unresolved P1/P2."
+  ],
+  "contracts_and_gates": [
+    "One planning discovery review; valid P1/P2 receive one consolidated remediation and a different-fresh delta closure; no review follows CLEAN.",
+    "FTS/BM25 remains unavailable, never GREEN; exact GitNexus context/impact and current source evidence are the admitted graph evidence.",
+    "The historic HCM-3.5 ordinary-validator contradiction is immutable evidence and must not be repaired, waived, or reported passing.",
+    "CLEAN grants planning closeout only and cannot be interpreted as a source selector, public schema decision, gate closure, or HCM-5 authority."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS for any valid P1/P2 incompleteness, contradiction, unsafe recovery gap, public-surface leak, false private-test seam, or missing HIGH/CRITICAL proof.",
+    "Return BLOCKED only if faithful read-only review requires an unavailable capability or work outside the assigned checkout; do not invent authority or implementation."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}

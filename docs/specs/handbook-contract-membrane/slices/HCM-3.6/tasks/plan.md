@@ -1,141 +1,117 @@
-# HCM-3.6 implementation plan
+# HCM-3.6 atomic-authority implementation plan
 
 ## Planning result
 
-This document selects the future implementation order only. It does not
-authorize execution. The sole semantic owner will be
-`handbook-engine::project_posture`; all other named systems remain consumers,
-adapters, evidence sources, or future gate owners.
-
-## Frozen dependency graph
-
-```text
-exact Charter/profile/approved override/condition/contract/evidence/snapshot pairs
-  + explicit FreshnessEvaluationBasis
-  -> resolve_project_posture_kernel
-  -> ProjectPostureKernel
-  -> evaluate_posture_recommendation
-  -> NoRecommendation | Recommended | Refused
-
-reviewed recommendation + exact approval/reassessment/current Charter target
-  -> apply_posture_transition
-  -> atomic Charter replace + immutable PostureTransition
-  -> re-resolved ProjectPostureKernel
-```
-
-HCM-3.4/3.5 outputs enter only as current, redacted, exact evidence pairs.
-Flow, pipeline, CLI, Tauri, SDK, Substrate, adapters, and HCM-5 are not in the
-semantic-owner chain.
+This active packet is documentation authority only. It makes the future
+P1-P4 route implementation-ready but does not select source work. The later
+implementation must be one complete private `handbook-engine` subject; P1/P2
+cannot land without the P3 atomic path and P4 boundary proof.
 
 ## Future packet sequence
 
-### P0 — implementation admission
+### P0 — repeat admission at the implementation base
 
-**Description:** before a later source change, validate a new slice selector,
-upstream impact for every existing symbol to edit, the exact source/test scope,
-and a no-public-surface ceiling.
+- Revalidate the new implementation task/ref/base/tree/ancestry, protected
+  checkout, local tracking baseline, exact source ceiling, and no-public-
+  surface decision.
+- Rebuild/load GitNexus locally and rerun context plus upstream impact for
+  every existing edit symbol. Warn before every HIGH/CRITICAL edit.
+- Verify that only the selector's five new/private files, two existing source
+  owners, private `lib.rs` declarations, and crate-local tests are selected.
+- Stop if an existing read-only dependency, external test, schema asset,
+  public export, Cargo/configuration, consumer, or HCM-5 edit is needed.
 
-**Acceptance criteria:**
+### P1 — private kernel and evaluation
 
-- Exact `project_posture` owner/module boundary is selected in
-  `handbook-engine` with no Flow/grounding/HCM-3.4/HCM-3.5 ownership transfer.
-- Every existing symbol has upstream GitNexus impact evidence; HIGH/CRITICAL
-  changes are surfaced before editing.
-- The implementation packet owns no product schema, dependency, public API,
-  adapter, gate, or promotion work.
+- Implement exact pairs, explicit freshness basis, nine global dimensions,
+  deterministic input/kernel fingerprints, policy evaluation, closed outcomes,
+  and advisory one-dimension recommendations in private `project_posture`.
+- Implement the fixed index/path map and baseline/override algebra without a
+  write path yet.
+- Prove A01-A06, A19, A21, A23, and A24 with crate-local tests.
 
-**Verification:** selector and impact proof, source/test manifest replay,
-fresh independent review.
+### P2 — internal durable identities and merged head
 
-**Dependencies:** a new explicit implementation authority after this planning
-packet.
+- Add closed internal parsers/builders for posture-transition `1.0`, lifecycle-
+  transition `1.1`, and posture transaction intent `1.0`.
+- Refactor promotion terminal validation to contribute exact promotion edges;
+  merge them with posture edges under one bounded no-fork/no-cycle chain.
+- Preserve the existing public committed-Charter result shape and unchanged
+  promotion/lifecycle `1.0` records.
+- Prove A07-A14 and privacy/forbidden-scope assertions.
 
-### P1 — kernel resolution
+### P3 — atomic posture transaction and recovery
 
-**Description:** construct `ExactPostureRef`, validate all exact inputs,
-resolve profile currentness and explicit freshness basis, and derive the
-fingerprinted global `ProjectPostureKernel`.
+- Under the existing Charter authority lock order, validate recommendation,
+  approval, mapped coverage, lifecycle-current/no-active state, whole-byte CAS,
+  one-leaf deep diff, and resulting-kernel replay before creating a journal.
+- Stage old canonical, result canonical, PostureTransition, and lifecycle v1.1
+  bytes exactly; publish with create-new/no-replace and durable markers.
+- Implement the exact pending/committed/rolled-back matrix. Preserve and refuse
+  every contradictory or unsafe state.
+- Prove A15-A19 at every writer/recovery boundary and confirm normal refusals
+  cause no domain write.
 
-**Acceptance criteria:**
+### P4 — compatibility and non-authority closure
 
-- Every input is an exact ref/fingerprint pair; blank, malformed, mutable-only,
-  ambiguous, stale, and fingerprint-mismatched inputs refuse.
-- The kernel reflects only global posture levels and carries explanatory
-  applicability/omission/unresolved-condition references.
-- Semantic fingerprints exclude presentation identifiers/timestamps and sort
-  unordered lists stably.
+- Prove lifecycle observation/event after posture, later candidate promotion
+  after posture/event, public committed read, approval/finalization, and
+  unchanged Flow behavior.
+- Run all unchanged HCM-2.2 promotion/approval/lifecycle consumers plus engine,
+  workspace, platform, package/archive, docs, and privacy/forbidden-scope walls.
+- Prove no public/schema-asset/dependency/transport/consumer/HCM-5 change and no
+  Context Resolution coupling.
+- Run exact staged/scoped GitNexus detection and honest compare-to-main
+  observation, then complete fresh independent review.
 
-**Verification:** future `P01`–`P03` and `P08` owner-local tests; no ambient
-time or raw Snapshot payload reads.
+## Exact future source ceiling
 
-**Dependencies:** P0.
+| Path | Permitted future delta |
+| --- | --- |
+| `crates/engine/src/lib.rs` | private module declarations only |
+| `crates/engine/src/project_posture.rs` | new private semantic owner |
+| `crates/engine/src/project_posture_tests.rs` | new crate-local semantic tests |
+| `crates/engine/src/charter_posture_transaction_intent_v1.rs` | new closed private journal parser/validator |
+| `crates/engine/src/charter_lifecycle_transition_v11.rs` | new closed private lifecycle-rebase parser/validator |
+| `crates/engine/src/charter_authority_transaction.rs` | merged head, private posture transaction, recovery integration only |
+| `crates/engine/src/charter_lifecycle_store.rs` | heterogeneous anchor/current read and v1.1 retained loading only |
+| `crates/engine/src/charter_posture_transaction_tests.rs` | new crate-local atomic/recovery/compatibility tests |
 
-### P2 — policy evaluation and advisory output
+Existing integration/Flow/promotion/approval/lifecycle/workspace tests are
+required commands but are not edit targets. Any changed path outside this
+table is a true stop.
 
-**Description:** evaluate hard triggers and policy-local accumulated rules;
-produce exactly one-dimension immutable recommendation plus typed notification
-intent, or closed no-recommendation/refusal output.
+## HIGH/CRITICAL acceptance posture
 
-**Acceptance criteria:**
+The future implementation may touch HIGH/CRITICAL symbols only as a single
+reviewable compatibility change:
 
-- Hard trigger and accumulated rule identities are mutually exclusive, exact,
-  current, policy-bound, and evidence-linked.
-- A two-dimension event emits two recommendations; scope remains metadata.
-- Threshold/window/count misses, expired evidence, cooldown, and policy
-  mismatches never become a recommendation through a fallback.
+- `recover_pending_locked` — CRITICAL: exhaustive promotion and posture
+  recovery plus approval/lifecycle-validation replay;
+- `validate_terminal_history` and `validate_terminal_inventory` — HIGH: every
+  promotion-only invariant plus cross-partition fork/cycle/unreachable proof;
+- lifecycle `load_current_locked`, `load_canonical_bytes_locked`, and
+  `current_promotion_anchor` replacement — CRITICAL: lifecycle event, retained
+  observation, recovery, later promotion, and unchanged v1.0 proof; and
+- `validate_transition_shape` — CRITICAL if touched, so the plan adds a
+  separate v1.1 validator and requires a new authority stop if modifying v1.0
+  becomes necessary.
 
-**Verification:** future `P04`, `P05`, `P06`, `P07`, `P08`, and `P11` tests.
+Focused tests alone cannot accept these edits. The complete A01-A24 matrix,
+unchanged consumer suites, full workspace wall, GitNexus detection, and fresh
+review are mandatory.
 
-**Dependencies:** P1.
+## Proof and review order
 
-### P3 — guarded constitutional transition
+1. complete P0 preflight/impact and immutable implementation dispatch;
+2. implement P1-P4 inside one exact source ceiling;
+3. run focused RED/GREEN and the complete proof wall;
+4. converge the entire subject and freeze its manifest;
+5. run one fresh discovery review;
+6. consolidate valid P1/P2 once and use a different-fresh delta closure only if
+   remediation changed the subject; and
+7. commit reviewed implementation before mechanical handoff/ledger closeout.
 
-**Description:** implement `apply_posture_transition` as the only mutation
-path, with approval/currentness/reassessment checks and one atomic
-constitutional-root replace plus immutable transition record.
-
-**Acceptance criteria:**
-
-- Only one global-dimension `replace` at the mapped Charter path is admitted.
-- Overrides, scoped paths, multi-change requests, wrong target class, stale
-  targets, bad actors, and failed reassessment refuse before canonical mutation.
-- Successful atomic commit yields resulting Charter/kernel pairs; all failure
-  paths leave canonical authority untouched.
-
-**Verification:** future `P06`, `P07`, `P09`, and `P10` tests, including
-compare-and-write fault injection and no-write assertions.
-
-**Dependencies:** P1 and P2.
-
-### P4 — adapter/gate boundary proof
-
-**Description:** prove only typed notification and acknowledgement intent/outcome
-boundaries. No delivery adapter is selected, and no HCM-5 evaluation/promotion
-capability is introduced.
-
-**Acceptance criteria:**
-
-- Adapter outcomes append acknowledgement disposition only and cannot change
-  recipient, deadline, approval, recommendation, or policy.
-- Recommendations, acknowledgements, packet/handoff completion, and advisory
-  scores cannot mutate Charter, create a gate verdict, or promote a parent.
-- Public/private owner chain remains acyclic and does not make Flow, pipeline,
-  SDK, CLI, Tauri, Substrate, or HCM-5 a posture semantic owner.
-
-**Verification:** future `P07`, `P11`, and `P12` boundary tests and a fresh
-architecture review.
-
-**Dependencies:** P2 and P3.
-
-## Checkpoints and risks
-
-| Checkpoint | Required evidence | Main risk controlled |
-|---|---|---|
-| Kernel admission | exact refs, currentness, explicit time basis | mutable or ambient authority |
-| Evaluation | P01–P08 results and advisory-only proof | evidence becomes mutation/promotion |
-| Transition | P06/P09/P10 atomic no-write/write proof | constitutional authority bypass |
-| Boundary | P07/P11/P12 and independent review | adapter or gate ownership inversion |
-
-Implementation must stop for source-authority conflict, public/schema/dependency
-expansion, an unbounded adapter selection, HCM-5 promotion/gate scope, or a
-failure to reach independent-review CLEAN inside the live causal budget.
+No review follows CLEAN. A public/schema/dependency/consumer need, unresolved
+P1/P2, exhausted causal budget, or HIGH/CRITICAL proof gap is a true stop, not
+partial completion.

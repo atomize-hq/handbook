@@ -3273,40 +3273,407 @@ V1 permits exactly one `proposed_transition` per recommendation. For `trigger_so
 
 ### Posture transition
 
+This non-serialized outline names the fields; the closed types, bounds,
+derivations, and byte grammar are normative in
+`Posture-transition identity and atomic recovery` below.
+
 ```yaml
 schema_id: handbook.posture-transition
 schema_version: "1.0"
-transition_id: posture_transition_...
-recommendation_ref: posture_rec_...
-recommendation_fingerprint: sha256:...
-source_kernel_ref: posture_kernel_...
-source_kernel_fingerprint: sha256:...
-target_authority_ref: .handbook/example/root.yaml
-target_authority_fingerprint: sha256:...
+transition_id: posture-transition_...
+recommendation: { ref: posture_rec_..., fingerprint: sha256:... }
+source_kernel: { ref: posture_kernel_..., fingerprint: sha256:... }
+evaluation_policy: { ref: handbook.posture-policy.example@1.0.0, fingerprint: sha256:... }
+target_authority_ref: .handbook/project/charter.yaml
 target_authority_class: constitutional_root
+prior_authority_head: # exact AuthorityHead
+  kind: promotion
+  source: { ref: promotions/promotion_....json, fingerprint: sha256:... }
+  canonical: { ref: .handbook/project/charter.yaml, fingerprint: sha256:..., document_sha256: sha256:..., byte_length: 1234 }
+  lifecycle_transition: { ref: lifecycle-transitions/lifecycle-transition_....json, fingerprint: sha256:... }
+  promotion_ancestor: { ref: promotions/promotion_....json, fingerprint: sha256:... }
+expected_canonical: { ref: .handbook/project/charter.yaml, fingerprint: sha256:..., document_sha256: sha256:..., byte_length: 1234 }
 change:
-  authority_path: /engineering_posture/dimensions/testing_rigor/level
+  authority_path: /engineering_posture/dimensions/2/level_override
   dimension_id: testing_rigor
+  dimension_index: 2
   operation: replace
-  expected_value: 4
-  proposed_value: 5
+  baseline_level: 4
+  expected_stored_value: null
+  expected_effective_level: 4
+  proposed_stored_value: 5
+  proposed_effective_level: 5
 approval_inputs:
   - ref: approval_...
     fingerprint: sha256:...
 authorized_by_ref: charter.governance.project_owner
 reassessment:
-  intake_definition_ref: handbook.intake.charter@1.0.0
+  intake_definition: { ref: handbook.intake.charter@1.0.0, fingerprint: sha256:... }
   affected_coverage_ids:
     - engineering_posture.dimensions
   validation_result_inputs:
     - ref: validation_...
       fingerprint: sha256:...
+kernel_replay: <exact KernelReplay object defined below>
+resulting_canonical: { ref: .handbook/project/charter.yaml, fingerprint: sha256:..., document_sha256: sha256:..., byte_length: 1234 }
+resulting_kernel: { ref: posture_kernel_..., fingerprint: sha256:... }
 effective_at_utc: "..."
-resulting_authority_fingerprint: sha256:...
-resulting_kernel_ref: posture_kernel_...
-resulting_kernel_fingerprint: sha256:...
+extensions: {}
 transition_fingerprint: sha256:...
 ```
+
+The canonical Charter `1.1` physical map is a fixed nine-member array, not a
+map keyed by `dimension_id`. Indices `0..8` are, in order,
+`speed_vs_quality`, `type_safety_static_analysis`, `testing_rigor`,
+`scalability_performance`, `reliability_operability`, `security_privacy`,
+`observability`, `dx_tooling_automation`, and `ux_polish_api_usability`. The
+engine must verify the ID at the selected index. The only admitted leaf is
+`/engineering_posture/dimensions/{index}/level_override`.
+
+The stored leaf is `null` or integer `1..=5`. Its effective value is the stored
+integer or, when null, the unchanged `/posture/baseline_level`. A proposed
+effective value equal to baseline stores null; every other proposed effective
+value stores that integer. A same-effective-level request is a refused no-op.
+The posture transition never changes baseline because doing so could change
+multiple dimensions. It parses and deterministically reserializes the entire
+Charter, requires a typed deep diff of exactly one mapped leaf, and compare-
+and-writes against the exact retained canonical bytes, length, and SHA-256 in
+addition to the semantic fingerprint and expected physical/effective values.
+
+### Canonical-authority head and private durable records
+
+Canonical authority has one derived heterogeneous head. Every committed
+candidate-promotion intent `1.2` and posture-transition intent `1.0` contributes
+one exact edge from basis Charter fingerprint to resulting Charter fingerprint,
+with one semantic source record pair and one resulting lifecycle-head pair.
+The merged history has exactly one promotion genesis, one successor per basis,
+no fork, cycle, duplicate successor, disconnected edge, or more than 4,096
+committed edges. Pending transactions recover before traversal; rolled-back
+transactions validate but do not participate. Current Charter bytes must equal
+the terminal edge by fingerprint, document SHA-256, and byte length.
+
+The existing public committed-Charter read keeps its shape: current Charter
+bytes/fingerprint, the most recent promotion ancestor in `promotion_ref`, and
+the actual current lifecycle head in `lifecycle_transition_ref`. The private
+head additionally carries the terminal source kind/ref/fingerprint. Candidate
+promotion, posture transition, lifecycle observation/events, recovery, and
+current reads all consume that same head. A posture edge is never presented as
+a synthetic promotion.
+
+HCM-3.6 introduces exactly three private durable identities:
+
+| Identity | Storage | Contract |
+|---|---|---|
+| `handbook.posture-transition` / `1.0` | `.handbook/state/posture-transitions/posture-transition_<fingerprint>.json` | exact JCS+LF immutable semantic record; ID/ref derive from its semantic fingerprint |
+| `handbook.lifecycle-transition` / `1.1` | existing `.handbook/state/lifecycle-transitions/` content-addressed partition | posture-rebase variant; prior state must be `current`, active observations empty, result state remains `current`, authority source is the PostureTransition pair, and affected coverage is exactly `engineering_posture.dimensions` |
+| `handbook.charter-posture-transaction-intent` / `1.0` | `.handbook/state/transactions/posture-transitions/<transaction-id>.*` | exact bounded JCS+LF journal binding old/new Charter, both record outputs, replay closure, recovery, and intent fingerprint |
+
+These are closed Rust-decoded internal record schemas. They create no package
+definition/schema asset, public `LineageRecordClassV1` variant, public Rust
+export, JSON/transport DTO, SDK/CLI/Tauri/Substrate surface, dependency, or
+configuration. Existing lifecycle-transition `1.0` bytes and validation remain
+unchanged; the private lifecycle loader discriminates `1.0` and `1.1`. A later
+promotion may cite a `1.1` posture lifecycle head and still emit its unchanged
+`1.0` promotion lifecycle transition.
+
+### Posture-transition identity and atomic recovery
+
+The private contract uses these lexical and container rules everywhere below.
+`Fingerprint` is exactly `sha256:` followed by 64 lowercase hexadecimal
+characters. A generic ref is 1..=512 UTF-8 bytes, contains no NUL/control byte,
+leading/trailing whitespace, backslash, empty path segment, `.` segment, or
+`..` segment. `Pair` is exactly `{ref: string, fingerprint: Fingerprint}`.
+`CanonicalDocument` is exactly `{ref, fingerprint, document_sha256,
+byte_length}` with ref `.handbook/project/charter.yaml`, both digests equal,
+and length `1..=1_048_576`. `OutputRecord` is exactly `{ref, fingerprint,
+document_sha256, byte_length}` with length `1..=262_144`. All
+digest/ref/ID/enum/time fields are JSON strings; `byte_length` is a
+JSON `u64`; index/level/floor fields are JSON `u8`; arrays/objects use their
+declared JSON kinds; floats and numeric strings are invalid. Every named object
+is closed: all fields are present, no extra field is admitted, arrays are never
+null, and the only nullable fields in these three records are
+`Change.expected_stored_value`, `Change.proposed_stored_value`, and
+`kernel_replay.freshness_basis`; the first two are a level or JSON `null`, and
+freshness is one complete `Pair` or JSON `null`.
+Every semantically unordered `Pair` array is unique and strictly increasing by
+the lexicographic tuple (`ref` UTF-8 bytes, `fingerprint` UTF-8 bytes), comparing
+`ref` first and `fingerprint` only when the refs are byte-equal. Ref-only and
+fingerprint-only ordering are invalid. Every other semantically unordered
+string/ref list is unique and strictly increasing by its element UTF-8 bytes.
+Unknown enum values, missing fields, explicit null anywhere else, and unknown
+nested fields refuse before visibility.
+
+`AuthorityHead` is exactly:
+
+```text
+kind: promotion | posture_transition
+source: Pair
+canonical: CanonicalDocument
+lifecycle_transition: Pair
+promotion_ancestor: Pair
+```
+
+For `kind=promotion`, `source.ref` and `promotion_ancestor.ref` both use
+`promotions/promotion_<64-lower-hex>.json`; for
+`kind=posture_transition`, `source.ref` uses
+`posture-transitions/posture-transition_<64-lower-hex>.json` and the ancestor
+still uses the promotion grammar. Each content-addressed basename equals its
+paired fingerprint suffix. A posture transition is never genesis, so every
+field of `AuthorityHead` is non-null.
+
+`Change` is exactly the nine fields `dimension_id`, `dimension_index`,
+`authority_path`, `operation`, `baseline_level`, `expected_stored_value`,
+`expected_effective_level`, `proposed_stored_value`, and
+`proposed_effective_level` shown by the physical mapping above, plus no hidden
+patch or normalization field. `dimension_index` is integer `0..=8`;
+`baseline_level` and both effective levels are integers `1..=5`; stored values
+are integer `1..=5` or JSON null; and `operation` is only `replace`. The ID,
+index, and path must be the same fixed-map row, each effective value equals its
+stored value or the unchanged baseline when null, and proposed effective must
+differ from expected effective.
+
+`Reassessment` is exactly `{intake_definition: Pair,
+affected_coverage_ids: [string], validation_result_inputs: [Pair]}`. Coverage
+is the exact singleton `engineering_posture.dimensions`; intake definition is
+exactly `handbook.intake.charter@1.0.0` /
+`sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c`.
+Validation inputs have
+cardinality `1..=16`, are unique, and sort by the exact `Pair` tuple above.
+Approval inputs have the same pair grammar, tuple order, uniqueness, and
+`1..=16` bound. `extensions` is present and is exactly `{}`.
+
+`KernelReplay` is exactly:
+
+```text
+constitutional_artifact_ref: .handbook/project/charter.yaml
+source_authority_fingerprint: Fingerprint
+resulting_authority_fingerprint: Fingerprint
+source_input_fingerprint: Fingerprint
+resulting_input_fingerprint: Fingerprint
+profile_input: Pair
+override_inputs: [Pair]
+condition_inputs: [Pair]
+contract_inputs: [Pair]
+evidence_inputs: [Pair]
+snapshot_inputs: [Pair]
+freshness_basis: Pair | null
+dimensions: [KernelReplayDimension; 9]
+applicable_scope_refs: [string]
+omitted_condition_refs: [string]
+unresolved_condition_refs: [string]
+```
+
+Each pair/ref list is bounded `0..=256` and unique. Pair lists sort strictly by
+the exact `Pair` tuple above; string ref lists sort strictly by element UTF-8
+bytes. The dimension array is in the fixed nine-ID order. Each closed dimension
+object contains exactly `dimension_id`, `source_effective_level`,
+`resulting_effective_level`, `floor`, `red_line_refs`, `trigger_refs`,
+`allowed_shortcut_refs`, and `proof_obligation_refs`; numeric values are
+`1..=5` and each ref list is bounded `0..=256`, unique, and byte-sorted. Only
+the selected dimension may change effective level, and its two levels equal
+`Change`'s effective values.
+The authority fingerprints equal the expected/result canonical bindings.
+`resulting_input_fingerprint` is recomputed by substituting the resulting
+constitutional pair into the normalized source closure; the resulting kernel
+is then recomputed from this closure and the exact proposed Charter. No
+recommendation ref, audit time, raw Snapshot/delta payload, ambient lookup, or
+second authority enters this object.
+
+The exact closed `handbook.posture-transition` / `1.0` top-level shape is:
+
+```text
+schema_id, schema_version, transition_id,
+recommendation: Pair, source_kernel: Pair, evaluation_policy: Pair,
+target_authority_ref, target_authority_class,
+prior_authority_head: AuthorityHead,
+expected_canonical: CanonicalDocument,
+change: Change,
+approval_inputs: [Pair], authorized_by_ref,
+reassessment: Reassessment,
+kernel_replay: KernelReplay,
+resulting_canonical: CanonicalDocument,
+resulting_kernel: Pair,
+effective_at_utc, extensions, transition_fingerprint
+```
+
+The schema constants are `handbook.posture-transition` / `1.0`; target ref and
+class are `.handbook/project/charter.yaml` and `constitutional_root`.
+`authorized_by_ref` is a 1..=256-byte safe ref. `effective_at_utc` is canonical
+UTC-second `YYYY-MM-DDTHH:MM:SSZ`. `transition_fingerprint` is SHA-256 over RFC
+8785 JCS of the complete typed object excluding only `transition_id`,
+`transition_fingerprint`, and `effective_at_utc`. The ID is
+`posture-transition_<hex>` and the record ref is
+`posture-transitions/posture-transition_<hex>.json`, where `<hex>` is that
+fingerprint suffix. Persisted bytes are the RFC 8785 JCS object followed by
+exactly one LF and are at most 262,144 bytes.
+
+The PostureTransition semantic preimage intentionally contains the prior
+lifecycle pair but **no resulting lifecycle ref, fingerprint, document hash,
+or length**. Construction is acyclic and mandatory: first compute and freeze
+the PostureTransition pair/bytes; second construct lifecycle-transition `1.1`
+with that pair; third construct the intent with both exact output records; then
+stage. Lifecycle identity can therefore depend on posture identity, never the
+reverse.
+
+The exact closed private `handbook.lifecycle-transition` / `1.1` posture-rebase
+shape is:
+
+```text
+schema_id, schema_version, transition_id, transition_kind,
+lifecycle_policy: Pair, target_instance_id,
+prior_transition: Pair,
+prior_state, prior_state_fingerprint,
+new_observation_refs, active_observation_refs,
+result_state, result_state_fingerprint,
+prior_canonical_fingerprint, resulting_canonical_fingerprint,
+authority_transition: Pair,
+reassessment: Reassessment,
+transitioned_at_utc, extensions, transition_fingerprint
+```
+
+Constants are kind `posture_transition`, target `project_authority`, both state
+strings `current`, both observation arrays exact empty arrays, and empty
+extensions. Lifecycle policy is exactly
+`handbook.lifecycle.constitutional-review-lock@1.0.0` /
+`sha256:88caafb9caaf137647c42a91cd2762ac0871e0a20e2a1844c2c0076d5fb43cc3`;
+prior transition uses
+`lifecycle-transitions/lifecycle-transition_<hex>.json` and matches either an
+admitted `1.0` or `1.1` record. Both state fingerprints equal the canonical
+fingerprint of lifecycle state `current`. Canonical fingerprints equal the
+PostureTransition expected/result bindings; `authority_transition` equals the
+completed PostureTransition ref/fingerprint; reassessment is byte-for-byte the
+same JSON value; and `transitioned_at_utc == effective_at_utc`.
+`transition_fingerprint` is SHA-256 over RFC 8785 JCS excluding only
+`transition_id`, `transition_fingerprint`, and `transitioned_at_utc`; ID/ref
+derive as `lifecycle-transition_<hex>` /
+`lifecycle-transitions/lifecycle-transition_<hex>.json`. Persisted bytes are
+exact JCS+LF and at most 262,144 bytes.
+
+The exact closed `handbook.charter-posture-transaction-intent` / `1.0` shape is:
+
+```text
+schema_id, schema_version, transaction_id, mutation_mode,
+basis_head: AuthorityHead,
+expected_canonical: CanonicalDocument,
+change: Change,
+authority_inputs {
+  recommendation: Pair, source_kernel: Pair, evaluation_policy: Pair,
+  approval_inputs: [Pair], authorized_by_ref,
+  reassessment: Reassessment
+},
+outputs {
+  canonical: CanonicalDocument,
+  posture_transition: OutputRecord,
+  lifecycle_transition: OutputRecord
+},
+kernel_replay: KernelReplay,
+recovery { old_canonical_status, old_canonical: CanonicalDocument },
+intent_fingerprint
+```
+
+`mutation_mode` is only `single_dimension_level_override_replace` and
+`old_canonical_status` is only `present`; posture cannot create genesis, so the
+old document and every basis field are non-null. `transaction_id` is allocated
+internally as `posture-transaction_` plus exactly 32 lowercase hex characters
+from 128 random bits, is unique across all three terminal suffixes, and is not
+accepted from a caller. `intent_fingerprint` is SHA-256 over RFC 8785 JCS of
+every top-level and nested field except itself, including `transaction_id`.
+Intent bytes are exact JCS+LF and at most 262,144 bytes.
+
+Cross-record equality is exact, not semantic approximation:
+
+- intent `basis_head` equals PostureTransition `prior_authority_head`, and
+  intent `expected_canonical` equals PostureTransition `expected_canonical`;
+  as complete JSON values, `intent.basis_head.canonical ==
+  intent.expected_canonical == PostureTransition.prior_authority_head.canonical
+  == PostureTransition.expected_canonical == intent.recovery.old_canonical`;
+- intent `change`, authority inputs, reassessment, and `kernel_replay` equal the
+  corresponding PostureTransition values;
+- intent canonical output equals the PostureTransition resulting canonical;
+- the posture output ref/fingerprint derives from the PostureTransition and
+  its hash/length equal the selected JCS+LF bytes;
+- lifecycle prior transition/canonical, authority transition, reassessment,
+  resulting canonical, and time equal the named PostureTransition/basis values;
+- the lifecycle output ref/fingerprint derives from lifecycle identity and its
+  hash/length equal its selected JCS+LF bytes; and
+- a committed merged edge is exactly `basis_head.canonical.fingerprint ->
+  outputs.canonical.fingerprint`, has the posture output as source, the
+  lifecycle output as resulting lifecycle head, and retains the basis
+  promotion ancestor.
+
+The posture transaction reuses the Charter authority lock order and owns one
+atomic group. All semantic, approval, currentness, mapped intake,
+lifecycle-current/no-active, deep-diff, CAS, exact-schema, equality, and
+resulting-kernel checks, including the total canonical equality above, pass
+before a pending journal is created. Recovery rechecks the same equality from
+the exact intent, record, snapshot, and current-canonical bytes before any
+rollback, roll-forward, or terminal success. Normal refusal changes no
+canonical, record, or posture-journal partition.
+
+The journal root is `.handbook/state/transactions/posture-transitions/`.
+Directories are exactly `<transaction_id>.pending`, `.committed`, or
+`.rolled-back`, plus the fixed private scratch directories `.intent-staging`
+and `.output-staging`. Intent scratch names are `<32-lower-hex>.intent`; output
+scratch names are `<32-lower-hex>.canonical`, `.posture-transition`, or
+`.lifecycle-transition`. Scratch tokens are independently allocated 128-bit
+random values. Scratch files may be absent, partial, or complete after a
+crash, never participate in head/recovery selection, and may enter a pending
+directory only by no-replace rename after exact byte/bound/schema verification.
+Cleanup may remove only a safe regular scratch file with an admitted name;
+unknown or unsafe scratch/root entries are preserved and refused. A pending
+directory admits only `intent.json`,
+`canonical.old`, `canonical.new`, `posture-transition.new`,
+`lifecycle-transition.new`, and `.tmp`/published forms of `prepared`,
+`canonical-installed`, `records-installed`, `committed`, and `rolled-back`.
+Unknown names, non-regular files, symlinks/reparse points, or a second suffix
+for one transaction refuse.
+
+`intent.json` is the selected exact intent bytes; `canonical.old` is the exact
+basis bytes; each `.new` file is byte-for-byte its bound output. Intent and old
+snapshot are written/fsynced/reopened/verified before stages. Stages form only
+the prefix sequence canonical, posture, lifecycle; `prepared` requires all
+three exact. A marker's entire byte string is ASCII
+`sha256:<lowercase SHA-256 of exact intent.json bytes>\n` (72 bytes). A
+`<marker>.tmp` may be absent or an exact byte prefix of that string; a
+published marker is the exact full string, and temp plus published together is
+invalid. Marker causality is strictly `prepared -> canonical-installed ->
+records-installed -> committed`; `rolled-back` is mutually exclusive with all
+forward markers after `prepared`.
+
+After `prepared`, canonical installation consumes `canonical.new` by durable
+rename and exact reread before `canonical-installed`. Each record stage is
+installed with no-replace semantics or matched to an already exact final;
+both stages are consumed and both finals revalidate before
+`records-installed`. `committed` is published only after all prior markers and
+exact finals. Terminal rename is no-replace. A committed terminal contains
+exactly `intent.json`, `canonical.old`, and the four published forward markers;
+a rolled-back terminal contains exactly `intent.json`, `canonical.old`, and
+`rolled-back`. No stage, temp, unknown, or opposite-terminal byte remains.
+
+Recovery is total over exact observations:
+
+- exact basis canonical, no transaction final, no forward marker at or beyond
+  `canonical-installed`, and an admitted stage/`prepared` prefix removes only
+  exact transaction-owned stages, publishes the exact rolled-back marker, and
+  finalizes rolled back;
+- exact resulting canonical plus both outputs available as exact stages or
+  exact finals installs missing finals, replays missing forward markers in
+  causal order, and finalizes committed once;
+- committed requires exact resulting canonical, both exact finals, exact
+  forward marker set, and all cross-record equalities;
+- rolled back requires exact basis canonical, no transaction-owned final, and
+  the exact rolled-back terminal set; and
+- a missing required byte, prefix-order violation, substituted record,
+  mismatched hash/ref/fingerprint/length, unsafe path, fork, unknown file,
+  contradictory marker, or any unlisted state preserves every byte and returns
+  durability refusal without guessed deletion, overwrite, or success.
+
+Admission and recovery recompute the resulting kernel from the exact bounded
+closure plus proposed/current Charter. Success requires equality with the
+resulting-kernel pair in the immutable PostureTransition. The committed intent
+and its intent-bound markers transitively bind both final records, while the
+merged edge independently binds their semantic pairs; neither mechanism
+reintroduces a fingerprint cycle.
 
 | Record/fields | Owner and authority | Default/omission | Required validation | Explicit non-goal |
 |---|---|---|---|---|
@@ -3336,10 +3703,11 @@ transition_fingerprint: sha256:...
 | recommendation guidance/notification | selected trigger/rule and policy remain authority | actions empty; other fields explicit | values match source and policy exactly | no per-transition ambiguity because v1 has exactly one transition |
 | recommendation eligibility/fingerprint | Handbook fixes advisory-only status and derives immutable identity | `recommendation_only` | normalized SHA-256 over full semantic closure except ID/fingerprint | no direct mutation or omitted mutable input |
 | transition recommendation/kernel/target pairs and class | transition engine binds compare-and-write state | none | current fingerprints; class exactly `constitutional_root`; target satisfies capability bindings | no approved-override target or bare ref |
-| transition `change` | canonical policy owner identifies one bound global-dimension mutation | none | exactly one `replace`; path matches constitutional dimension binding; expected/proposed match recommendation/kernel | no patch script, scoped path, or unrelated field |
+| transition `change` | canonical policy owner identifies one fixed-array global-dimension leaf | none | exactly one `replace`; index/ID/path match; baseline is unchanged; stored/effective old/new values match recommendation/kernel; whole-Charter deep diff has one leaf | no keyed pseudo-path, baseline change, patch script, scoped path, normalization-only write, or unrelated field |
 | transition approval inputs/authorized actor | constitutional authority owns approval | none | exact approval pairs and required authority; hysteresis/floors/red lines hold | agent/evaluator cannot self-approve |
-| transition reassessment | intake definition owns affected coverage; transition records proof | none | exact intake ref; non-empty mapped coverage IDs; current validation pairs pass | no whole-Charter or unrelated reopen |
-| transition effective/result pairs/fingerprint | transition engine records atomic write and re-resolution | none after success | authority/kernel results replay; fingerprint covers full record/input fingerprints except itself | no mutable history or success without resulting-kernel proof |
+| transition reassessment | intake definition owns affected coverage; transition records proof | none | exact intake ref; coverage is exactly `engineering_posture.dimensions`; current validation pairs pass; lifecycle is current with no active observations | no whole-Charter/unrelated reopen or clearing unrelated lifecycle work |
+| transition authority head and atomic group | private Charter transaction owns physical commit; promotion and lifecycle owners retain their record semantics | none | one merged no-fork edge; exact old/new bytes; Charter + PostureTransition + lifecycle `1.1` recover together | no synthetic promotion, split current head, or public transaction surface |
+| transition effective/result pairs/fingerprint | transition engine records the canonical result and re-resolution; lifecycle is constructed afterward | none after success | exact canonical hashes/lengths and kernel result replay; semantic fingerprint excludes only ID/fingerprint/audit time and excludes every resulting lifecycle field; lifecycle then binds the completed posture pair while the journal binds both exact byte records | no identity cycle, mutable history, coherent audit rewrite, or success without resulting-kernel proof |
 | all `extensions` | declaring schema owns namespaced optional additions | empty | declared namespace/schema | no unknown required semantics |
 
 Recommendation and transition gates:

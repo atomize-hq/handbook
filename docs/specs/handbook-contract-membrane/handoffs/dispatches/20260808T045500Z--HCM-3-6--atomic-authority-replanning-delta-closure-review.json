@@ -1,0 +1,246 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260808T045500Z--HCM-3-6--atomic-authority-replanning-delta-closure-review",
+  "created_at_utc": "2026-08-08T04:55:00Z",
+  "source_handoff_ids": [
+    "20260808T031746Z--HCM-3-6--orchestration--project-posture-implementation-authority-boundary"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-atomic-authority-replanning-20260808",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-ADRs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3.6-ATOMIC-AUTHORITY-REPLANNING",
+  "subject_fingerprint": "sha256:8c5a537d44930a8ea02439e71a0f54cc6106fe73841731cda95ee8a1aa890000",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3-6-atomic-authority-replanning-closure",
+    "trigger_run_ids": [
+      "hcm36-aa-discovery-20260808"
+    ],
+    "finding_refs": [
+      "HCM36-AA-DISC-001",
+      "HCM36-AA-DISC-002"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-08T04:24:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-atomic-authority-replanning",
+        "packet_ids": [
+          "HCM-3.6-ATOMIC-AUTHORITY-REPLANNING"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:2975b2f86f7ee62c8e5222f2415eefda6da1469ef36078e10c2c479d33f1f154"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:b5ef53ab042d584d0d9eaa658380866020fab922f058185cb1972935dcf7978a",
+    "integrated_outcome_id": "hcm-3-6-atomic-authority-replanning",
+    "outcome_registry_fingerprint": "sha256:2975b2f86f7ee62c8e5222f2415eefda6da1469ef36078e10c2c479d33f1f154",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260808T044017Z--HCM-3-6--atomic-authority-replanning-consolidated-remediation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-6-atomic-authority-replanning-closure-convergence",
+    "completed_at_utc": "2026-08-08T04:54:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Reconcile the exact four-path consolidated repair against HCM36-AA-DISC-001/-002 and all nine authority-package files.",
+        "evidence_ref": "The repair supplies one acyclic posture-to-lifecycle identity order and closes all three private schemas plus journal/recovery equality grammar without expanding the selected planning surface."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Recheck the existing private owner, lifecycle/promotion/current-read compatibility, exact future source ceiling, and A07/A08/A12/A17 proof consumers.",
+        "evidence_ref": "No runtime path changed; the prior source-impact inventory remains exact and the repaired record grammar preserves the same private eight-path future ceiling."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 nine-file post-remediation manifest.",
+        "evidence_ref": "Post-remediation subject is sha256:8c5a537d44930a8ea02439e71a0f54cc6106fe73841731cda95ee8a1aa890000; exactly 05, SPEC, selector, and proof matrix changed from discovery."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "git diff --check over the complete planning and dispatch worktree",
+        "evidence_ref": "No whitespace errors after consolidated remediation."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Decode all nine manifest files as UTF-8 and reject missing final LF, trailing spaces, trailing tabs, unbalanced fences, and missing relative links.",
+        "evidence_ref": "All nine subject files pass the closed text-hygiene wall."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "edfa5e70f0f631f2488e138539912da445a2ba245a93e3fc4b1c0f7131afffbd"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "feb041fdfdfcf06c2ef4e0341ba979c0a5141cedd5e5377a10e561911c547442"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "192ac11ce3c6acbc2c18ed902917b32e870597b6f50f63a0ecba2adb28bbafad"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+        "sha256": "affb983c1b08549d8fdbb684bf75bf7742c3d13fdb254d866d3f7668deaacf96"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/decision/20260808T041700Z--hcm-3-6-atomic-authority-replanning-selector.md",
+        "sha256": "b18469a15652ce63100a202c10c7819694ca2f32b5399fabf167e030dcdaf251"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md",
+        "sha256": "f21232201bf59640f792fb992b223c24b1ee156b93349f88f02f046662a3bff7"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-source-impact.md",
+        "sha256": "6b5adb0f7c37351349b4c19ca21c7c1e25dd51a5e6824a884e77895e8214b214"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md",
+        "sha256": "cdb71fcd18b30211913fbc5a27028f7e1ec67c4e0cfb035cd08ee8c61d23b1e6"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/todo.md",
+        "sha256": "1e45b0f32a59c53e4f39dc5fcd6f3b789b68427ac7f86aef507de80746ad9e69"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:8c5a537d44930a8ea02439e71a0f54cc6106fe73841731cda95ee8a1aa890000"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 atomic-authority replanning delta closure",
+    "scope_horizon": "only the consolidated four-document repair for HCM36-AA-DISC-001 and HCM36-AA-DISC-002 inside the unchanged nine-file planning subject",
+    "detail_resolution": "verify the acyclic identity derivation, exact closed record/journal grammar, and added negative proof close both discovery P2s without a new gap",
+    "temporal_horizon": "different-fresh closure immediately after one consolidated remediation; no general rediscovery and no review after CLEAN",
+    "authority_horizon": "read-only documentation closure; no implementation, public/schema/dependency/HCM-5 expansion, protected path, remote, Git, handoff, or ledger action",
+    "memory_horizon": "carry exactly HCM36-AA-DISC-001/-002 and the immutable discovery/remediation dispatches; predecessor P0 remains read-only evidence",
+    "validation_horizon": "CLEAN only if both P2s are fully remediated and the repair introduced no immediately causal P1/P2 inside unchanged scope"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T042425Z--HCM-3-6--atomic-authority-replanning-discovery-review.json",
+      "sections": [
+        "entire immutable discovery dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260808T044017Z--HCM-3-6--atomic-authority-replanning-consolidated-remediation.json",
+      "sections": [
+        "entire immutable remediation dispatch"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md",
+      "sections": [
+        "Immutable PostureTransition identity",
+        "Lifecycle compatibility",
+        "Atomic journal and recovery"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "Canonical-authority head and private durable records",
+        "Posture-transition identity and atomic recovery"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md",
+      "sections": [
+        "A07",
+        "A08",
+        "A12",
+        "A17"
+      ]
+    }
+  ],
+  "repo_truth": "Discovery found exactly two P2s. The consolidated repair changes exactly four authorized planning documents and preserves the already-accepted physical mapping, heterogeneous head, private seam, and HIGH/CRITICAL proof ceiling. FTS/BM25 remains unavailable, not GREEN.",
+  "allowed_scope": [
+    "Review the exact post-remediation nine-file manifest and only the four-file delta against HCM36-AA-DISC-001/-002.",
+    "Verify posture identity no longer contains the resulting lifecycle pair; lifecycle v1.1 binds the completed posture pair; intent/stages/markers/merged edge bind both finals without a cycle.",
+    "Verify the three private schemas close every required field, nested shape, type, nullability, enum, finite bound, ordering rule, byte form, transaction identity, stage/marker/terminal grammar, and cross-record equality.",
+    "Verify A07/A08/A12/A17 reject cyclic derivation, unknown/missing/extra fields, bad enum/bounds/nullability/order, marker/stage/terminal substitution, and cross-record mismatch."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery, edit, format, stage, commit, delegate, write handoff/ledger, update refs, or access remote/protected paths.",
+    "Do not request or infer implementation, public surface, schema asset, dependency, HCM-5, adapter, consumer, configuration, or product authority."
+  ],
+  "tasks": [
+    "Replay the exact nine-file manifest and compare the four changed files to the discovery subject and both P2 contracts.",
+    "Return CLEAN only if both P2s are fully closed and no causal P1/P2 was introduced; otherwise return unique HCM36-AA-CLOSE finding IDs with exact evidence and smallest in-scope repair.",
+    "Return findings first, then agent identity/status, verdict, advisory disposition, validation, GitNexus availability, and parent disposition."
+  ],
+  "contracts_and_gates": [
+    "This is the one different-fresh delta-focused closure after consolidated remediation; it may not reset the outcome, reopen discovery, or review unrelated planning design.",
+    "Any P1/P2 is blocking. CLEAN ends review for this planning stage; no review or semantic edit may follow it.",
+    "The historic HCM-3.5 validator contradiction and unavailable FTS remain honest non-GREEN evidence and are not this delta's repair scope."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS for any unresolved or newly causal P1/P2; do not repair it.",
+    "Return BLOCKED if faithful read-only closure requires unavailable authority or access outside the assigned checkout.",
+    "Do not write any repository byte or create a global handoff/ledger entry."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}
