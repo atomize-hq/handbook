@@ -1,0 +1,181 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260809T231600Z--HCM-3-6--strict-clippy-partial-corrective-planning-discovery-review",
+  "created_at_utc": "2026-08-09T23:16:00Z",
+  "source_handoff_ids": [
+    "20260809T173000Z--HCM-3-6--orchestration--strict-clippy-corrective-authority-boundary"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-strict-clippy-partial-corrective-planning-20260809",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3-PHASE-3-STRICT-CLIPPY-PARTIAL-CORRECTIVE-PLANNING",
+  "subject_fingerprint": "sha256:a2230e0f4314cbb914bf4c9f65cea63ec227cc67a100350ccb0b1802ec62d298",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-6-strict-clippy-partial-planning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-09T23:15:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-strict-clippy-partial-corrective-planning",
+        "packet_ids": [
+          "HCM-3-PHASE-3-STRICT-CLIPPY-PARTIAL-CORRECTIVE-PLANNING"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T231500Z--hcm-3-6-strict-clippy-partial-corrective-planning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:f9b9cd0a42ba9ce839afb661763c6c8cea81757fd63ba345a8b6690090fb7b89"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:9eebd5324f14fe6f2addfb37347036c7cbe05ea79d380ed1910ef52637c1b6e5",
+    "integrated_outcome_id": "hcm-3-6-strict-clippy-partial-corrective-planning",
+    "outcome_registry_fingerprint": "sha256:f9b9cd0a42ba9ce839afb661763c6c8cea81757fd63ba345a8b6690090fb7b89",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-6-strict-clippy-partial-planning-discovery-convergence",
+    "completed_at_utc": "2026-08-09T23:15:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read live AGENTS, full 00-09 control pack, HCM-3.6 SPEC/tasks/implementation evidence, both strict-Clippy authority stops, Phase-3 exit selector/proof records, and HCM-3.5 future-dependency plan.",
+        "evidence_ref": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T231500Z--hcm-3-6-strict-clippy-partial-corrective-planning-preflight.md"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Replay the strict Clippy command and partition the nine independent mechanical diagnostics from the 20 private-unreachable posture diagnostics; inspect public GroundingOutcome and HCM-3.5 P5/P6 dependency boundaries.",
+        "evidence_ref": "The selector names all six candidate paths, exact diagnostics, prohibited routes, and future dependency deferrals."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 manifest for the selector, preflight, immutable stops, HCM-3.5 plan, and review-control sources.",
+        "evidence_ref": "subject fingerprint sha256:a2230e0f4314cbb914bf4c9f65cea63ec227cc67a100350ccb0b1802ec62d298"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check and balanced Markdown-fence inspection for the planning subject.",
+        "evidence_ref": "The live cargo fmt check completed successfully before this planning review dispatch."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check and v1.4 text-manifest trailing-whitespace replay.",
+        "evidence_ref": "The planning subject is UTF-8 text with no trailing spaces or tabs."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md", "sha256": "dc4016127e4bc3dc0443e88defb22870b9c2029dfc7f64b912d5570df4ba6c26"},
+      {"path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "sha256": "a97aa3a384e5a081660515e3aaf36f98ddf91c95d8a3d471b21759d2fb9bc157"},
+      {"path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md", "sha256": "c25cdbfcfe967f2318ea09e147422629ed783c667aa5d5aa1806c3dd101d4bf1"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary.json", "sha256": "a8cfa99d42a0a863a0eca371a2dcc0edc97137a7d1df4a7ea9586fb8c34b33c1"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T173000Z--HCM-3-6--orchestration--strict-clippy-corrective-authority-boundary.json", "sha256": "6e61afe011f0e5013e4be47c0e1f74507eb2d8be795099aff2a4a64e426c15f6"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T231500Z--hcm-3-6-strict-clippy-partial-corrective-planning-selector.md", "sha256": "c00da38be6b98ee0490c3ad18088f2f027aab1c1d1b2fb026ec110709c34e8f9"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T164900Z--hcm-3-6-strict-clippy-impact-analysis.md", "sha256": "40531da3cff886bd2fb76ad549a8abc4bb2a6edcd53783cb8e7518201426b352"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T170900Z--hcm-3-6-strict-clippy-authority-stop.md", "sha256": "4750a9d0db624c0eefa760590c3d88a42df1f89c2fa0037855da76e825962774"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T231500Z--hcm-3-6-strict-clippy-partial-corrective-planning-preflight.md", "sha256": "465e6f3276740a02048de23bbecfab5abf0724983c09d1ebb268640cb140b8c8"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md", "sha256": "f2e900d2ad9632a134beb3f6db3949b3eaaa49d97624d086b4a39f6cb3397c05"}
+    ],
+    "aggregate_fingerprint": "sha256:a2230e0f4314cbb914bf4c9f65cea63ec227cc67a100350ccb0b1802ec62d298"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 strict-Clippy partial corrective planning",
+    "scope_horizon": "one planning-only selector for exactly nine previously identified mechanical diagnostics in six paths",
+    "detail_resolution": "separate a behavior-preserving partial diagnostic reduction from the still-open 20-diagnostic reachability P2 without admitting source work",
+    "temporal_horizon": "one planning-stage discovery review, parent remediation if needed, and a different-fresh closure before a planning authority stop",
+    "authority_horizon": "control-pack documentation only; no source, test, public API, module, schema, dependency, configuration, runtime, or transport change",
+    "memory_horizon": "both immutable strict-Clippy authority stops, prior impact, selector, preflight, and HCM-3.5 P5/P6 dependency plan",
+    "validation_horizon": "schema-valid dispatch, independent planning review, v1.4 handoff validation, and an honest authority-boundary closeout"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T231500Z--hcm-3-6-strict-clippy-partial-corrective-planning-selector.md", "sections": ["entire selector"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T173000Z--HCM-3-6--orchestration--strict-clippy-corrective-authority-boundary.json", "sections": ["HCM3EXIT-P2-CLIPPY-001", "blockers", "resume"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary.json", "sections": ["HCM3EXIT-P2-CLIPPY-001", "resume"]},
+    {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md", "sections": ["Packet 5", "Packet 6", "Explicit non-goals"]}
+  ],
+  "repo_truth": "The strict gate currently fails with 29 diagnostics. Nine named mechanical diagnostics have a previously tested behavior-preserving path, but the 20 remaining private-unreachable posture diagnostics are an open P2. This review determines only whether the planning selector preserves that distinction and its future-stop authority.",
+  "allowed_scope": [
+    "Read-only independent review of the exact planning selector, preflight evidence, immutable P2 authority stops, review protocol, and HCM-3.5 P5/P6 dependency disposition.",
+    "Report a P1/P2 only if the selector would permit an unauthorized source/public/semantic/Phase-4 route, weaken the P2, or misstate the partial proof/closeout boundary.",
+    "Report P3/P4 only after comparing the exact planning subject against the active inventory."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, publish, branch, update refs, contact a remote, touch the protected checkout, write a global handoff/ledger record, or delegate.",
+    "Do not approve a cfg(test) workaround, lint suppression/configuration change, public/module/type-graph expansion, synthetic production caller, legacy CLI/compiler wiring, candidate-approval/promotion/lifecycle/recovery misuse, Phase-4 implementation, or Phase-3 exit claim."
+  ],
+  "tasks": [
+    "Independently inspect whether each of the nine named candidates is exact, behavior-preserving, and isolated from the 20-diagnostic P2.",
+    "Verify the selector names a later implementation proof/review plan, continuing P2 ownership/resumption condition, Phase-3-open state, and HCM-3.5 P5/P6 plus Phase-4 deferral.",
+    "Return findings first, ordered Critical, Required, Optional, Nit, then a clean or findings verdict and an exact parent disposition."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#built-in-delegated-run-protocol",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
+  ],
+  "stop_conditions": [
+    "Return findings if this planning selector could be interpreted as authority to resolve, waive, baseline, inventory, or downgrade HCM3EXIT-P2-CLIPPY-001.",
+    "Return findings if a candidate needs any path, API, public/module reachability, test semantic, dependency, Cargo/configuration, lint policy, CLI/compiler/SDK/transport, candidate approval/promotion/lifecycle/recovery, or Phase-4 change.",
+    "Return blocked only for unavailable evidence or a contradictory authority that the parent cannot resolve within planning/control-pack scope."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260809T231800Z--HCM-3-6--strict-clippy-partial-corrective-planning-closure-review",
+  "created_at_utc": "2026-08-09T23:18:00Z",
+  "source_handoff_ids": [
+    "20260809T173000Z--HCM-3-6--orchestration--strict-clippy-corrective-authority-boundary"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-strict-clippy-partial-corrective-planning-20260809",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3-PHASE-3-STRICT-CLIPPY-PARTIAL-CORRECTIVE-PLANNING",
+  "subject_fingerprint": "sha256:4881230098db92abff3a7837202271ce00b8ef1b660453b8032b9a24ee110435",
+  "review_cycle": {
+    "kind": "closure",
+    "cycle_id": "hcm-3-6-strict-clippy-partial-planning-closure",
+    "trigger_run_ids": [
+      "strict_partial_planning_discovery"
+    ],
+    "finding_refs": [
+      "HCM36-PARTIAL-PLAN-P2-001"
+    ]
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-09T23:15:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-strict-clippy-partial-corrective-planning",
+        "packet_ids": [
+          "HCM-3-PHASE-3-STRICT-CLIPPY-PARTIAL-CORRECTIVE-PLANNING"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T231500Z--hcm-3-6-strict-clippy-partial-corrective-planning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:f9b9cd0a42ba9ce839afb661763c6c8cea81757fd63ba345a8b6690090fb7b89"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:9eebd5324f14fe6f2addfb37347036c7cbe05ea79d380ed1910ef52637c1b6e5",
+    "integrated_outcome_id": "hcm-3-6-strict-clippy-partial-corrective-planning",
+    "outcome_registry_fingerprint": "sha256:f9b9cd0a42ba9ce839afb661763c6c8cea81757fd63ba345a8b6690090fb7b89",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "continue",
+      "from_stage": "planning"
+    },
+    "event_reason": "reviewer_finding",
+    "causal_predecessor_dispatch_id": "20260809T231600Z--HCM-3-6--strict-clippy-partial-corrective-planning-discovery-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-6-strict-clippy-partial-planning-closure-convergence",
+    "completed_at_utc": "2026-08-09T23:17:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the exact discovery dispatch/result, material selector and preflight correction, remediation proof, immutable P2 authority stops, HCM-3.5 Packet 5/6 plan, and the live 07/08/09 review controls.",
+        "evidence_ref": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T231700Z--hcm-3-6-strict-clippy-partial-corrective-planning-discovery-remediation.md"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Recheck the strict Clippy partition: 29 product-code diagnostics plus the one test-target sort diagnostic; verify the 10 named partial candidates leave exactly the same 20 private-reachability P2 diagnostics and no public GroundingOutcome change.",
+        "evidence_ref": "The corrected selector names the private backing-representation route and forbids public payload, reachability, semantic, or Phase-4 changes."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 post-remediation planning manifest.",
+        "evidence_ref": "subject fingerprint sha256:4881230098db92abff3a7837202271ce00b8ef1b660453b8032b9a24ee110435"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check and balanced Markdown-fence inspection for the post-remediation planning subject.",
+        "evidence_ref": "Formatting passes; no source file is changed."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check and v1.4 UTF-8 trailing-whitespace replay for every manifest entry.",
+        "evidence_ref": "The post-remediation subject is clean under text hygiene."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md", "sha256": "dc4016127e4bc3dc0443e88defb22870b9c2029dfc7f64b912d5570df4ba6c26"},
+      {"path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "sha256": "a97aa3a384e5a081660515e3aaf36f98ddf91c95d8a3d471b21759d2fb9bc157"},
+      {"path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md", "sha256": "c25cdbfcfe967f2318ea09e147422629ed783c667aa5d5aa1806c3dd101d4bf1"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T231600Z--HCM-3-6--strict-clippy-partial-corrective-planning-discovery-review.json", "sha256": "304d476bf9def357cb32d9986070811aa6382cf7067d7375d10c078815cac0bd"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary.json", "sha256": "a8cfa99d42a0a863a0eca371a2dcc0edc97137a7d1df4a7ea9586fb8c34b33c1"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T173000Z--HCM-3-6--orchestration--strict-clippy-corrective-authority-boundary.json", "sha256": "6e61afe011f0e5013e4be47c0e1f74507eb2d8be795099aff2a4a64e426c15f6"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T231500Z--hcm-3-6-strict-clippy-partial-corrective-planning-selector.md", "sha256": "c00da38be6b98ee0490c3ad18088f2f027aab1c1d1b2fb026ec110709c34e8f9"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T231700Z--hcm-3-6-strict-clippy-partial-corrective-planning-selector-remediation.md", "sha256": "75216f0b920579572a66a54076e968c44049358a47a3c11f174f8c83cd9e7c08"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T164900Z--hcm-3-6-strict-clippy-impact-analysis.md", "sha256": "40531da3cff886bd2fb76ad549a8abc4bb2a6edcd53783cb8e7518201426b352"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T170900Z--hcm-3-6-strict-clippy-authority-stop.md", "sha256": "4750a9d0db624c0eefa760590c3d88a42df1f89c2fa0037855da76e825962774"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T231500Z--hcm-3-6-strict-clippy-partial-corrective-planning-preflight.md", "sha256": "465e6f3276740a02048de23bbecfab5abf0724983c09d1ebb268640cb140b8c8"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T231700Z--hcm-3-6-strict-clippy-partial-corrective-planning-discovery-remediation.md", "sha256": "1fe26aa5318c55c166225219b27fe2c4cb83e92771a394aea4bc2ffa470ff728"},
+      {"path": "docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md", "sha256": "f2e900d2ad9632a134beb3f6db3949b3eaaa49d97624d086b4a39f6cb3397c05"}
+    ],
+    "aggregate_fingerprint": "sha256:4881230098db92abff3a7837202271ce00b8ef1b660453b8032b9a24ee110435"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 strict-Clippy partial corrective planning closure",
+    "scope_horizon": "only the material remediation of HCM36-PARTIAL-PLAN-P2-001 within the exact planning/control subject",
+    "detail_resolution": "verify the corrected ten-pair all-target partition and representation-only large-variant route without admitting source or changing the open 20-diagnostic P2",
+    "temporal_horizon": "different-fresh delta-focused closure after one consolidated parent remediation; no general rediscovery and no review after CLEAN",
+    "authority_horizon": "read-only review; no source, test, public API, module, schema, dependency, configuration, runtime, SDK/CLI/transport, candidate/promotion/lifecycle/recovery, or Phase-4 implementation authority",
+    "memory_horizon": "retain the initial discovery, the P2 correction, immutable authority stops, and HCM-3.5 P5/P6 deferral",
+    "validation_horizon": "CLEAN only if the planning P2 is corrected and the persistent HCM3EXIT-P2-CLIPPY-001 authority stop is preserved unchanged"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T231600Z--HCM-3-6--strict-clippy-partial-corrective-planning-discovery-review.json", "sections": ["entire immutable discovery dispatch"]},
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T231700Z--hcm-3-6-strict-clippy-partial-corrective-planning-discovery-remediation.md", "sections": ["entire parent remediation"]},
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T231500Z--hcm-3-6-strict-clippy-partial-corrective-planning-selector.md", "sections": ["Bounded future partial candidate", "Prohibited routes", "Future proof and review plan", "Program dependencies and non-goals"]},
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T231700Z--hcm-3-6-strict-clippy-partial-corrective-planning-selector-remediation.md", "sections": ["entire selector remediation"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T173000Z--HCM-3-6--orchestration--strict-clippy-corrective-authority-boundary.json", "sections": ["HCM3EXIT-P2-CLIPPY-001", "blockers", "resume"]}
+  ],
+  "repo_truth": "The initial discovery correctly stopped the planning subject on its one P2. The parent corrected the count partition and added the only historical representation-only route for the large-variant lint. The source remains unchanged, and HCM3EXIT-P2-CLIPPY-001 remains open and blocking.",
+  "allowed_scope": [
+    "Read-only closure review of the exact remediated planning subject and the one discovery P2.",
+    "Verify that the private boxed representation is specified as an API-preserving implementation candidate, not as public reachability or semantic authority.",
+    "Verify the P2 owner/resumption condition, Phase-3-open status, and Phase-4/HCM-3.5 Packet 5/6 deferral remain explicit."
+  ],
+  "non_goals": [
+    "Do not reopen general discovery or report unrelated design improvements.",
+    "Do not edit, format, stage, commit, publish, update a branch/ref, contact a remote, touch the protected checkout, write a global handoff/ledger record, or delegate.",
+    "Do not approve cfg(test) reachability, lint suppression/configuration, public/module/type-graph expansion, synthetic production callers, legacy CLI/compiler wiring, candidate approval/promotion/lifecycle/recovery misuse, Phase-4 implementation, strict-Clippy completion, or Phase-3 exit."
+  ],
+  "tasks": [
+    "Verify the parent fully repaired HCM36-PARTIAL-PLAN-P2-001 and did not change the persistent strict-Clippy P2 disposition.",
+    "Inspect only the material documentation delta, candidate/prohibited route boundaries, future proof/review plan, and dependency deferral.",
+    "Return CLEAN only when no unresolved planning P1/P2 remains; otherwise return exact findings first with the smallest in-scope repair."
+  ],
+  "contracts_and_gates": [
+    "This is the single different-fresh closure review after consolidated remediation; it does not restart discovery.",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
+  ],
+  "stop_conditions": [
+    "Return findings for an unremediated planning P1/P2 or any weakening of HCM3EXIT-P2-CLIPPY-001.",
+    "Return blocked only for unavailable evidence or an authority contradiction outside planning/control-pack scope.",
+    "Do not write any repository byte."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
