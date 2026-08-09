@@ -1,0 +1,439 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary",
+  "created_at_utc": "2026-08-09T15:20:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3-PHASE-3-EXIT-AUDIT",
+  "orchestration_id": "handbook-hcm-3-6-phase-3-exit-20260809",
+  "source_handoff_ids": [
+    "20260808T220000Z--HCM-3-6--orchestration--project-posture-implementation-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fe6e6-c8c5-7501-93f4-fd9f2e656234"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-09T15:20:00Z",
+    "evidence_ref": "A fresh selector discovery reviewer and a different fresh proof-boundary reviewer completed through the built-in internal-subagent channel under schema-valid v1.4 dispatches."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "phase3_exit_selector_discovery",
+      "dispatch_id": "20260809T143200Z--HCM-3-6--phase-3-exit-selector-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T143200Z--HCM-3-6--phase-3-exit-selector-discovery-review.json",
+      "dispatch_fingerprint": "sha256:54767c3219adb5f1a3727a0bdbb700846327e4c835e25d007ade2fa9b19d1115",
+      "role": "review",
+      "agent_id": "/root/phase3_exit_selector_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:4876654b348083e7e1e4c804fee4f04854189d979a9f605f213a93978d4d855c",
+      "result_subject_fingerprint": "sha256:4876654b348083e7e1e4c804fee4f04854189d979a9f605f213a93978d4d855c",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T143000Z--phase-3-exit-audit-selector.md",
+        "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T143000Z--selector-preflight.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T143200Z--HCM-3-6--phase-3-exit-selector-discovery-review.json"
+      ]
+    },
+    {
+      "run_id": "phase3_exit_proof_boundary_review",
+      "dispatch_id": "20260809T150500Z--HCM-3-6--phase-3-exit-proof-boundary-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T150500Z--HCM-3-6--phase-3-exit-proof-boundary-review.json",
+      "dispatch_fingerprint": "sha256:4fd20ad75a55ed388fbae0ed65e3be9233c72817b5da3968db2ee89099d9a3cc",
+      "role": "review",
+      "agent_id": "/root/phase3_exit_proof_boundary_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "debugging-and-error-recovery"
+      ],
+      "subject_fingerprint": "sha256:6ab09154ccf73d9bd434ca35ef29df375f1ee1a5665973e125fa988b5ed8fd79",
+      "result_subject_fingerprint": "sha256:6ab09154ccf73d9bd434ca35ef29df375f1ee1a5665973e125fa988b5ed8fd79",
+      "review_round": 1,
+      "predecessor_run_id": "phase3_exit_selector_discovery",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM3EXIT-P2-CLIPPY-001"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T150000Z--cumulative-audit-true-stop.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T150500Z--HCM-3-6--phase-3-exit-proof-boundary-review.json",
+        "crates/engine/src/charter_authority_transaction.rs:374",
+        "crates/engine/src/snapshot_memory/policy.rs:443",
+        "crates/engine/src/grounding.rs:109"
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-09T15:20:00Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:9a8ed0b9506dcd2f681d373805695f1e2ccdbe9f2cf5e0801c612b7e7259d367"
+    ],
+    "aggregate_fingerprint": "sha256:e5e1e9cca51bf8fd1750958e6707dd5766378e7dc345e15f9730d299c862f61b"
+  },
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "6d3defd5028ee8f2898c67eec120c2dd901e59af",
+    "subject_fingerprint": "sha256:6ab09154ccf73d9bd434ca35ef29df375f1ee1a5665973e125fa988b5ed8fd79",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T150500Z--HCM-3-6--phase-3-exit-proof-boundary-review.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T143000Z--phase-3-exit-audit-selector.md",
+      "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md",
+      "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T150000Z--cumulative-audit-true-stop.md",
+      "git:6d3defd5028ee8f2898c67eec120c2dd901e59af"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 Phase-3 exit strict-lint authority-boundary stop",
+    "scope_horizon": "the Phase-3 exit audit, permanent ordinary-validator governance decision, and documentation/control-pack closeout only",
+    "detail_resolution": "The sole accepted permanent ordinary-validator exception is historical continuation writes or advances before selector CLEAN. Strict Clippy reports 29 current product-code diagnostics and is an additional P2 failure, so the Phase-3 exit cannot be declared CLEAN.",
+    "temporal_horizon": "The selector discovery and different-fresh proof review completed; no remediation or closure review may begin because repairing current product code exceeds this increment's closed authority.",
+    "authority_horizon": "No product-source, test, schema, dependency, runtime, public-surface, immutable-evidence, remote, or publication authority is available. No local integration-ref CAS is admitted for this non-completed stop.",
+    "memory_horizon": "The immutable HCM-3.6 predecessor, exact HCM-3.5 historical ordinary-validator failure, permanent governance decision, strict-lint evidence, and P2 finding remain required context for any fresh authority.",
+    "validation_horizon": "A future independently authorized product correction must establish its own selector, replay impact for every edited symbol, pass strict Clippy and its focused proof, and then require a fresh Phase-3 exit audit."
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Perform the cumulative HCM-3 Phase-3 exit audit, establish permanent operator governance for the exact historical HCM-3.5 ordinary-validator failure, and close locally only if every other applicable gate passes.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3 exit criteria"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T143000Z--phase-3-exit-audit-selector.md",
+      "sections": [
+        "entire reviewed selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md",
+      "sections": [
+        "entire permanent governance decision",
+        "Exact raw failure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T220000Z--HCM-3-6--orchestration--project-posture-implementation-completed.json",
+      "sections": [
+        "entire immutable selected predecessor"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Phase-3 exit governance authority consumption"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "true-stop and permanent ordinary-validator governance"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Phase-3 exit P3/P4 triage and governance reference"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 6d3defd5028ee8f2898c67eec120c2dd901e59af",
+    "head": "6d3defd5028ee8f2898c67eec120c2dd901e59af",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary.json"
+    ]
+  },
+  "work_completed": [
+    "Bound task 019fe6e6-c8c5-7501-93f4-fd9f2e656234, host local, and dispatch nonce 20e6c21fb2330fb64dbffbffd649fa3b67c7b0ec3ee973ba23c5613fc3405097; before edits, verified the assigned detached worktree, expected base bfedb7131a66bbed6a574ee2a90336439161b117, tree 9e51ebdde2ed57ed7fa17c607e34d15dbba785da, ancestor and local remote-tracking baseline 1256e724a2b7da6b6250f57d6f63fced1e2cf949, and a clean protected checkout.",
+    "Established a schema-valid reviewed Phase-3 exit selector; its fresh discovery review was CLEAN.",
+    "Recorded the permanent accepted_permanent_operator_governance_exception for the exact historical raw failure: 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN. Ordinary validation remains not GREEN whenever that exact condition appears; it permits closeout only if sole and every other applicable gate passes.",
+    "Ran the cumulative workspace, engine, Flow, and pipeline tests plus cargo fmt and both v1.4 self-tests successfully. Ordinary full-corpus handoff validation remained blocked only by the exact preserved historical raw failure.",
+    "Strict cargo clippy --workspace --all-targets --all-features -- -D warnings failed with 29 diagnostics in current product code. The different-fresh proof review classified the result as HCM3EXIT-P2-CLIPPY-001; no prohibited source repair, remediation, closure review, target-ref CAS, remote operation, or publication followed.",
+    "Committed the reviewed selector/governance/proof subject at 6d3defd5028ee8f2898c67eec120c2dd901e59af. The protected checkout was never mutated; the local integration ref remains at its expected base and no push occurred."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T143000Z--phase-3-exit-audit-selector.md",
+      "status": "completed",
+      "summary": "Reviewed selector for the cumulative Phase-3 exit audit."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md",
+      "status": "completed",
+      "summary": "Durable repository-native authority for the single exact historical ordinary-validator failure, with explicit non-waiver semantics."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T150000Z--cumulative-audit-true-stop.md",
+      "status": "blocked",
+      "summary": "Records cumulative applicable evidence and the strict-Clippy P2 authority boundary without claiming Phase-3 exit."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary.json",
+      "status": "blocked",
+      "summary": "Durable v1.4 authority-boundary handoff; Phase-3 is not CLEAN and no local publication occurs."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM3EXIT-D1",
+      "summary": "The exact historical HCM-3.5 selector-CLEAN failure is permanently governed but remains ordinary-validator failure/not GREEN. It is not a waiver for any additional failure.",
+      "authority_effect": "Records the only accepted permanent operator-governance exception for this repository lineage; no product-change authority is created.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md",
+        "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+        "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md"
+      ]
+    },
+    {
+      "decision_id": "HCM3EXIT-D2",
+      "summary": "Strict Clippy's 29 current product-code diagnostics are an unresolved P2 outside the documentation/control-pack-only ceiling. This exit task stops without remediation or a CLEAN claim.",
+      "authority_effect": "Requires a separately authorized product corrective increment and a fresh Phase-3 exit audit before any exit closeout or local CAS.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T150000Z--cumulative-audit-true-stop.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T150500Z--HCM-3-6--phase-3-exit-proof-boundary-review.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM3EXIT-P2-CLIPPY-001",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "open",
+      "source_run_id": "phase3_exit_proof_boundary_review",
+      "summary": "cargo clippy --workspace --all-targets --all-features -- -D warnings exits 101 with 29 strict-lint diagnostics in current product code, including crates/engine/src/charter_authority_transaction.rs:374, crates/engine/src/snapshot_memory/policy.rs:443, and crates/engine/src/grounding.rs:109. This is an additional ordinary failure, not the exact historical HCM-3.5 selector-CLEAN condition governed by the permanent decision.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T150000Z--cumulative-audit-true-stop.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T150500Z--HCM-3-6--phase-3-exit-proof-boundary-review.json",
+        "crates/engine/src/charter_authority_transaction.rs:374",
+        "crates/engine/src/snapshot_memory/policy.rs:443",
+        "crates/engine/src/grounding.rs:109"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM3EXIT-STRICT-LINT-PRODUCT-CORRECTION",
+      "classification": "authority",
+      "summary": "The Phase-3 exit proof wall has an unresolved P2 strict-Clippy product-code failure. This increment may not edit source, tests, schemas, dependencies, runtime configuration, public surfaces, or immutable evidence, so it cannot remediate or waive the failure.",
+      "resume_condition": "A user or authorized product authority issues a fresh, bounded corrective selector that names every admitted source/test/proof surface, requires upstream impact analysis for every existing symbol, and preserves the historical HCM-3.5 evidence and governance-decision semantics.",
+      "owner": "user / authorized product authority"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM3EXIT-STRICT-LINT-ESC-001",
+      "trigger": "The cumulative strict Clippy wall exited 101 with 29 current product-code diagnostics, and a different fresh proof-boundary reviewer independently corroborated the P2 classification.",
+      "current_resolution": "The audit establishes durable governance for the exact historical HCM-3.5 ordinary-validator failure and records passing cumulative runtime/format/self-test evidence, but the additional strict-lint P2 prevents a Phase-3 exit, completion, local CAS, or publication.",
+      "target_resolution": "A separately authorized product corrective increment removes or justifies each strict diagnostic under a new bounded selector, passes its focused/workspace proof and fresh review cadence, and then permits a new Phase-3 exit audit.",
+      "decision_required": "Select the exact product correction scope and validation evidence. Do not authorize this documentation-only closeout to change code or waive the P2.",
+      "options": [
+        "Option 1: issue a fresh bounded product corrective authority for the strict-Clippy diagnostics, followed by a fresh Phase-3 exit audit.",
+        "Option 2: retain this true stop and leave Phase-3 exit incomplete.",
+        "Option 3: establish a separate reviewed policy outside this increment if any diagnostic requires a product-level disposition rather than a code correction."
+      ],
+      "recommendation": "Option 1, with a source/test/proof-only selector and independent review. This recommendation is not implementation authority.",
+      "affected_refs": [
+        "crates/engine/src/charter_authority_transaction.rs:374",
+        "crates/engine/src/snapshot_memory/policy.rs:443",
+        "crates/engine/src/grounding.rs:109",
+        "remaining strict-Clippy diagnostics reported by cargo clippy --workspace --all-targets --all-features -- -D warnings"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "A fresh top-level task validates the new corrective authority, replays GitNexus impact for every existing symbol selected for change, and does not mutate this immutable true-stop record or predecessor evidence."
+    }
+  ],
+  "validation": [
+    {
+      "command": "assigned checkout/ref/base/tree/ancestor/worktree/cleanliness/protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Before edits, detached HEAD and refs/heads/orchestration/handbook-phase-3-exit-20260809 matched bfedb7131a66bbed6a574ee2a90336439161b117, tree 9e51ebdde2ed57ed7fa17c607e34d15dbba785da, required ancestor and local remote-tracking baseline 1256e724a2b7da6b6250f57d6f63fced1e2cf949; the protected checkout had matching clean status/index hashes and was not mutated."
+    },
+    {
+      "command": "selector and proof-boundary v1.4 dispatch validation",
+      "status": "passed",
+      "evidence_ref": "Both internal dispatches passed offline schema/control/manifest validation. The selector review was CLEAN; the different-fresh proof review produced HCM3EXIT-P2-CLIPPY-001."
+    },
+    {
+      "command": "cargo test --workspace --all-targets --all-features",
+      "status": "passed",
+      "evidence_ref": "Exited 0 after 1852.2 seconds."
+    },
+    {
+      "command": "cargo test -p handbook-engine --all-features",
+      "status": "passed",
+      "evidence_ref": "Exited 0 after 1540.4 seconds."
+    },
+    {
+      "command": "cargo test -p handbook-flow --all-features; cargo test -p handbook-pipeline --all-features",
+      "status": "passed",
+      "evidence_ref": "Both commands exited 0; combined wall time 67.5 seconds."
+    },
+    {
+      "command": "cargo fmt --all -- --check",
+      "status": "passed",
+      "evidence_ref": "Exited 0."
+    },
+    {
+      "command": "cargo clippy --workspace --all-targets --all-features -- -D warnings",
+      "status": "failed",
+      "evidence_ref": "Exited 101 with 29 current strict-lint diagnostics; see HCM3EXIT-P2-CLIPPY-001."
+    },
+    {
+      "command": "full historical v1.4 ordinary validator",
+      "status": "blocked",
+      "evidence_ref": "Ordinary validation exited 1 only at the immutable exact raw failure '20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN'. The permanent decision records it without reporting GREEN; strict Clippy is an additional independent P2."
+    },
+    {
+      "command": "v1.4 admission and orchestration-contract self-tests",
+      "status": "passed",
+      "evidence_ref": "Both --self-test-v1-admission and --self-test-orchestration-contract exited 0 before this true-stop closeout."
+    },
+    {
+      "command": "GitNexus analyze and detect-changes",
+      "status": "passed",
+      "evidence_ref": "npx --no-install gitnexus --version reported 1.6.9; local analyze exited 0 with FTS unavailable. With the assigned worktree supplied explicitly as --repo, primary compare-to-base exited 0 (10 documentation/control-pack files, 24 documentation symbols, zero affected processes, LOW); closeout unstaged detection exited 0 with no indexed-symbol changes. Compare-to-main exited 0 but truthfully reports the full historical 1,597-file/12,283-symbol/266-process CRITICAL divergence and is not used as a GREEN narrow-scope claim. No source symbol was edited, so no symbol impact analysis was required."
+    },
+    {
+      "command": "whitespace and staged subject check",
+      "status": "passed",
+      "evidence_ref": "git diff --cached --check passed before the reviewed primary commit; the primary commit contains only the nine audited documentation/control-pack/dispatch paths."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Phase-3 exit governance authority consumption"
+      ],
+      "reason": "Make the permanent decision discoverable to future workflows.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "true-stop and permanent ordinary-validator governance"
+      ],
+      "reason": "Require exact raw-failure citation and non-waiver enforcement in future handoffs.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Phase-3 exit P3/P4 triage and governance reference"
+      ],
+      "reason": "Keep P3/P4 disposition searchable and prevent the historical exception from being treated as a general waiver.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Resolve HCM3EXIT-P2-CLIPPY-001 under a fresh authorized product corrective selector, then repeat the cumulative Phase-3 exit audit; do not treat this same documentation-only increment as authority to resume source work.",
+    "condition": "The user or authorized product authority provides a fresh bounded selector that names the exact admitted product source/test/proof surfaces and accepts the required impact, validation, remediation, and fresh-review cadence.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary.json",
+        "sections": [
+          "entire true-stop handoff"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md",
+        "sections": [
+          "entire permanent governance decision",
+          "Exact raw failure"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T150000Z--cumulative-audit-true-stop.md",
+        "sections": [
+          "strict Clippy authority boundary"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260808T220000Z--HCM-3-6--orchestration--project-posture-implementation-completed.json",
+        "sections": [
+          "entire immutable selected predecessor"
+        ]
+      }
+    ],
+    "allowed_scope": [
+      "Read-only same-slice authority adjudication until a new exact corrective selector is validated.",
+      "After new authority only, the selector's exact product source/test/proof scope and mandated impact/review sequence."
+    ],
+    "prohibited_scope": [
+      "Do not alter immutable predecessor records, dispatches, ledger history, admission hashes, validator semantics, the protected checkout, or the permanent governance decision's exact raw-failure/non-waiver meaning.",
+      "Do not claim Phase-3 exit, update refs, push, publish, or promote any feature branch until every ordinary failure other than the exact permanent historical condition is resolved and a fresh exit closeout authorizes it.",
+      "Do not use the historical HCM-3.5 exception to waive strict Clippy, any P1/P2, product/test/proof/review failure, causal-lineage violation, scope expansion, or later defect."
+    ],
+    "acceptance_criteria": [
+      "The new authority explicitly binds each admitted correction path and requires upstream GitNexus impact analysis for every existing symbol before edits.",
+      "Strict cargo clippy --workspace --all-targets --all-features -- -D warnings passes, with focused and workspace proof recorded and a different-fresh review/remediation/closure cadence completed.",
+      "A new Phase-3 exit audit demonstrates no unresolved P1/P2 and treats ordinary full-corpus handoff validation as not GREEN if the exact historical HCM-3.5 raw failure remains, allowing closeout only when it is sole and all other gates pass."
+    ],
+    "stop_conditions": [
+      "Stop on any missing corrective authority, source/test/schema/dependency/public-surface scope expansion, unresolved P1/P2, protected-path drift, or additional ordinary-validator failure.",
+      "Do not update the local integration ref unless a future completed exit closeout rechecks its expected-old base and performs the authorized local CAS."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-3.6 Phase-3 exit stops with an unresolved P2: strict Clippy has 29 current product-code diagnostics. The reviewed governance decision permanently governs only the exact historical HCM-3.5 selector-CLEAN ordinary-validator failure and waives nothing else. No source repair, local CAS, remote action, or publication occurred."
+}
