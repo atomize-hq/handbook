@@ -1,0 +1,146 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260809T165100Z--HCM-3-6--phase-3-strict-clippy-corrective-implementation",
+  "created_at_utc": "2026-08-09T16:51:00Z",
+  "source_handoff_ids": [
+    "20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-strict-clippy-corrective-20260809",
+  "orchestration_decision": "child_packet_required",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "source-driven-development",
+    "incremental-implementation",
+    "test-driven-development",
+    "debugging-and-error-recovery",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3-PHASE-3-STRICT-CLIPPY-CORRECTIVE",
+  "subject_fingerprint": "sha256:4a45c95edf04a822236627c3279b41efd530f46518f8260df294d06d845b6584",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-09T16:38:20Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-phase-3-strict-clippy-corrective",
+        "packet_ids": [
+          "HCM-3-PHASE-3-STRICT-CLIPPY-CORRECTIVE"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T163659Z--phase-3-strict-clippy-corrective-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:35c7781ec5d803c61d1fe4b491a68b96a04fd3b1f9a828ec883741eac05caad2"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:297b56fc85f4539999cefc218a7a6c9b9ebee7f012fb2d1c8695bad7a7084d3e",
+    "integrated_outcome_id": "hcm-3-6-phase-3-strict-clippy-corrective",
+    "outcome_registry_fingerprint": "sha256:35c7781ec5d803c61d1fe4b491a68b96a04fd3b1f9a828ec883741eac05caad2",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260809T163830Z--HCM-3-6--phase-3-strict-clippy-corrective-selector-discovery-review"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/charter_authority_transaction.rs", "sha256": "2a34ad8afd65654164dd60499e82104c1892120a8cb7917a4ee2372d4cac05dc"},
+      {"path": "crates/engine/src/charter_lifecycle_transition_v11.rs", "sha256": "f7712ecb001689bc827b41a08545b545733f1ad60d3c290d4c51536dd4d0de42"},
+      {"path": "crates/engine/src/charter_posture_transaction_intent_v1.rs", "sha256": "aa16ac50c312605ce64f98cfe80f9cfb8d82b28a61c348f25c01b3b129815cbe"},
+      {"path": "crates/engine/src/grounding.rs", "sha256": "217a67642666ef07f6ac009e8633b9a68643a22c2f8710e9a83d601dcebc784f"},
+      {"path": "crates/engine/src/project_posture.rs", "sha256": "8b2c6048425dcd2a6a9365995cd886c1770f8b142c1a15d9a85ede4829374bab"},
+      {"path": "crates/engine/src/snapshot_memory/policy.rs", "sha256": "308ff9c040be3903f729ee176ffbc9e498503d33b08d5e7066059b24740b3031"},
+      {"path": "crates/engine/src/snapshot_memory/record.rs", "sha256": "eaf89aa53704d30d2be671a5a9d262e37c64f06777e30b3636d8ebe82830ec81"},
+      {"path": "crates/engine/src/snapshot_memory/redaction.rs", "sha256": "b291f8e697bacc6e42d22257e9e142941280360d18afd29902a91d9664c5476e"},
+      {"path": "crates/engine/src/snapshot_memory/tests.rs", "sha256": "11817ae747bfc9efdaef5b8ccf8de0141dee4ad1d88c62a7560b6075d60b7f03"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T163659Z--phase-3-strict-clippy-corrective-selector.md", "sha256": "1df76812e5e2123f1fe22cc6ad864b7010e32a5b4e6ef610b0607084a8df9a5e"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T164900Z--hcm-3-6-strict-clippy-impact-analysis.md", "sha256": "40531da3cff886bd2fb76ad549a8abc4bb2a6edcd53783cb8e7518201426b352"}
+    ],
+    "aggregate_fingerprint": "sha256:4a45c95edf04a822236627c3279b41efd530f46518f8260df294d06d845b6584"
+  },
+  "active_resolution": {
+    "level": "HCM-3.6 strict-Clippy current-product correction",
+    "scope_horizon": "the exact nine admitted engine paths only",
+    "detail_resolution": "clear the exact current 29 strict-Clippy diagnostics without lint suppression, byte/semantic change, public API change, or non-admitted path",
+    "temporal_horizon": "one bounded implementation child followed by a fresh complete-subject discovery review",
+    "authority_horizon": "private implementation representation and visibility only; GroundingOutcome's public enum/variant and accessor signatures are invariant",
+    "memory_horizon": "selector, authority-boundary handoff, permanent validator decision, and impact record",
+    "validation_horizon": "strict Clippy, owner tests, full engine/workspace proof, independent review, two commits, and local-only compare-and-swap"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T163659Z--phase-3-strict-clippy-corrective-selector.md", "sections": ["entire selector"]},
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T164900Z--hcm-3-6-strict-clippy-impact-analysis.md", "sections": ["entire impact record"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary.json", "sections": ["entire immutable authority boundary"]}
+  ],
+  "repo_truth": "The fresh selector discovery review is CLEAN. The exact strict Clippy command fails only in the nine admitted paths. High-risk impacts are documented before this child runs; all correction must preserve behavior and public surface.",
+  "allowed_scope": [
+    "Edit only the nine product paths admitted by the bound HCM-3.6 strict-Clippy corrective contract.",
+    "Apply the smallest behavior-preserving, non-suppression fixes for the current 29 strict-Clippy diagnostics: visibility reachability inside already-private parent modules, equivalent standard-library idioms, lifetime/signature simplification, private type aliases, and private GroundedResolution representation only.",
+    "Preserve every public API, schema, Cargo/dependency/configuration surface, runtime behavior, canonical bytes, and all existing test meaning. GroundingOutcome::Grounded(GroundedResolution) and GroundedResolution accessor signatures must stay public and unchanged.",
+    "Use apply_patch for edits; run focused local tests or the exact strict Clippy command when useful; return changed files and exact results."
+  ],
+  "non_goals": [
+    "Do not edit any path outside the nine admitted product paths, including lib.rs, integration tests, Cargo files, schemas, configuration, generated files, handoffs, ledger, or selector.",
+    "Do not add allow/expect/suppress attributes, weaken lint configuration, disable tests, change test expectations, stage, commit, publish, contact a remote, or touch the protected checkout.",
+    "Do not delegate or create a user task. Stop immediately for any need to change a public interface, semantic behavior, byte encoding, non-admitted path, dependency, schema, or configuration."
+  ],
+  "tasks": [
+    "Implement the smallest exact correction for the 29 reported diagnostics, preserving semantics and the declared public-surface invariant.",
+    "For the HIGH symbols, make no field/value/layout/encoding/normalization behavior change; return a concise per-symbol explanation of the behavior-preserving edit.",
+    "Return findings first, then changed paths, exact diagnostics/proof run, remaining work, and a parent disposition."
+  ],
+  "contracts_and_gates": [
+    "No new lint suppression or waiver is permitted. The parent will run the full proof wall and arrange an independent fresh complete-subject code review before commit.",
+    "Any unresolved strict lint, new diagnostic, public/API change, or source path outside the allowlist is a blocking authority stop."
+  ],
+  "stop_conditions": [
+    "Return BLOCKED before changing a public type signature, enum variant payload, schema, Cargo/dependency/configuration setting, runtime behavior, canonical bytes, or a non-admitted path.",
+    "Return BLOCKED if a warning cannot be removed by the bounded behavior-preserving route."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "high_risk_disposition",
+      "validation",
+      "remaining_protocol_work",
+      "parent_disposition"
+    ]
+  }
+}

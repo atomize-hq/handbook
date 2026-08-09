@@ -1,0 +1,86 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260809T171200Z--HCM-3-6--phase-3-strict-clippy-corrective-implementation-discovery-review",
+  "created_at_utc": "2026-08-09T17:12:00Z",
+  "source_handoff_ids": ["20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary"],
+  "parent_orchestration_id": "handbook-hcm-3-6-strict-clippy-corrective-20260809",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": ["using-agent-skills", "context-engineering", "documentation-and-adrs", "debugging-and-error-recovery", "code-review-and-quality"],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3-PHASE-3-STRICT-CLIPPY-CORRECTIVE",
+  "subject_fingerprint": "sha256:f2a867e27899590e5289418e9553604b73671bb910c1ccce772d86e73f1ae9df",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-strict-clippy-corrective-implementation-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-09T16:38:20Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [{"integrated_outcome_id": "hcm-3-6-phase-3-strict-clippy-corrective", "packet_ids": ["HCM-3-PHASE-3-STRICT-CLIPPY-CORRECTIVE"], "authority_ref": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T163659Z--phase-3-strict-clippy-corrective-selector.md"}],
+    "fingerprint": "sha256:35c7781ec5d803c61d1fe4b491a68b96a04fd3b1f9a828ec883741eac05caad2"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:297b56fc85f4539999cefc218a7a6c9b9ebee7f012fb2d1c8695bad7a7084d3e",
+    "integrated_outcome_id": "hcm-3-6-phase-3-strict-clippy-corrective",
+    "outcome_registry_fingerprint": "sha256:35c7781ec5d803c61d1fe4b491a68b96a04fd3b1f9a828ec883741eac05caad2",
+    "review_stage": "implementation",
+    "stage_transition": {"kind": "continue", "from_stage": "implementation"},
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": "20260809T165100Z--HCM-3-6--phase-3-strict-clippy-corrective-implementation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-strict-clippy-corrective-implementation-discovery-convergence",
+    "completed_at_utc": "2026-08-09T17:11:59Z",
+    "checks": [
+      {"kind": "complete_packet_wall", "status": "passed", "command": "Read the inherited P2, selector, implementation dispatch, impact analysis, authority-stop proof, exact six-file delta, and the parent-reproduced strict Clippy output.", "evidence_ref": "The packet records an unresolved authority question rather than a completion claim; its sole decision is whether a valid in-scope no-suppression remedy exists."},
+      {"kind": "recursive_fixture_consumer_inventory", "status": "passed", "command": "Inventory every remaining dead_code diagnostic, parent-module reachability, test-only consumers, and the public GroundingOutcome seam.", "evidence_ref": "The proof identifies the four remaining owner files and closes public/module, semantic wiring, test-owner, configuration, and suppression routes."},
+      {"kind": "manifest_replay", "status": "passed", "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 manifest for the six source files and five control records.", "evidence_ref": "Implementation discovery subject fingerprint sha256:f2a867e27899590e5289418e9553604b73671bb910c1ccce772d86e73f1ae9df."},
+      {"kind": "formatting", "status": "passed", "command": "cargo fmt --all -- --check; strict UTF-8 decode and balanced Markdown-fence scan for manifested Markdown records.", "evidence_ref": "Parent reproduction passed cargo fmt; proof records are UTF-8 with balanced fences."},
+      {"kind": "whitespace", "status": "passed", "command": "git diff --check and require final LF with no trailing spaces or tabs in the manifested text subject.", "evidence_ref": "Parent reproduction passed git diff --check."}
+    ]
+  },
+  "ancillary_allowance": {"kind": "none", "risk_ceiling": "no_ancillary_surface", "baseline_ref": null, "max_paths": 0, "max_changed_lines": 0, "entries": []},
+  "subject_hygiene": {"whitespace_policy": "text-files-no-trailing-whitespace-v1"},
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "crates/engine/src/charter_authority_transaction.rs", "sha256": "6bdcb20d942348703be2d5edb73e3c20bbe8db2bdb87799f46a1275e27679060"},
+      {"path": "crates/engine/src/grounding.rs", "sha256": "d691c07d71a6e1e199ebef1276b910f12e9d8abd066e11bd55e447fd42c14174"},
+      {"path": "crates/engine/src/snapshot_memory/policy.rs", "sha256": "44a5ab229afcfa55956b60bc03a0f8fedc52ef956cf8b62f9d294c0c70a6dd48"},
+      {"path": "crates/engine/src/snapshot_memory/record.rs", "sha256": "a36112fba68b59709bf6f785ae4e9a03990fb9b201007034f94243b7ef5fc13e"},
+      {"path": "crates/engine/src/snapshot_memory/redaction.rs", "sha256": "880c4938b7dc6b290aef9e61e234ead244c6afff096b9c2352abe3aef5cb2b47"},
+      {"path": "crates/engine/src/snapshot_memory/tests.rs", "sha256": "a057146c1f0ced3467aaec54134b66f15032d87405d05f46abef0991f061962d"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T163830Z--HCM-3-6--phase-3-strict-clippy-corrective-selector-discovery-review.json", "sha256": "d0581c33f8237e3143e8ae7a348f855d2b52a37b582c46f859ee414fc4166b37"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T165100Z--HCM-3-6--phase-3-strict-clippy-corrective-implementation.json", "sha256": "2a0dfcda55d181b82ee8ff22bc27f5751fb6cd956bedae2a5094d20a86fd8577"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T163659Z--phase-3-strict-clippy-corrective-selector.md", "sha256": "1df76812e5e2123f1fe22cc6ad864b7010e32a5b4e6ef610b0607084a8df9a5e"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T164900Z--hcm-3-6-strict-clippy-impact-analysis.md", "sha256": "40531da3cff886bd2fb76ad549a8abc4bb2a6edcd53783cb8e7518201426b352"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T170900Z--hcm-3-6-strict-clippy-authority-stop.md", "sha256": "4750a9d0db624c0eefa760590c3d88a42df1f89c2fa0037855da76e825962774"}
+    ],
+    "aggregate_fingerprint": "sha256:f2a867e27899590e5289418e9553604b73671bb910c1ccce772d86e73f1ae9df"
+  },
+  "active_resolution": {"level": "HCM-3.6 strict-Clippy implementation discovery authority review", "scope_horizon": "only HCM3EXIT-P2-CLIPPY-001 and the six-file attempted non-suppression repair", "detail_resolution": "determine whether a valid in-scope no-suppression remedy remains after the first corrective attempt", "temporal_horizon": "the first complete-subject implementation-stage discovery; a valid finding may receive only one consolidated in-scope remediation and a different-fresh closure", "authority_horizon": "review-only; no source, public, schema, dependency, configuration, or control-plane mutation", "memory_horizon": "retain inherited P2, initial planning CLEAN selector, implementation attempt, impact record, and permanent ordinary-validator decision", "validation_horizon": "exact strict Clippy reproduction and inspection of source/diff/authority evidence needed to distinguish an in-scope remedy from a genuine authority stop"},
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T170900Z--hcm-3-6-strict-clippy-authority-stop.md", "sections": ["entire authority-stop evidence"]},
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T164900Z--hcm-3-6-strict-clippy-impact-analysis.md", "sections": ["entire impact analysis"]},
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T163659Z--phase-3-strict-clippy-corrective-selector.md", "sections": ["entire selector"]},
+    {"path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary.json", "sections": ["HCM3EXIT-P2-CLIPPY-001 and immutable authority"]}
+  ],
+  "repo_truth": "Parent reproduced 20 remaining original dead_code errors after the only six in-scope behavior-preserving repairs; formatting and diff whitespace pass. Current authority closes all parent/module/public reachability, semantic wiring, test-owner, schema, dependency, configuration, and suppression routes.",
+  "allowed_scope": ["Read-only review of HCM3EXIT-P2-CLIPPY-001, the six-file attempted correction, remaining 20 diagnostics, selector/impact/authority-stop records, and minimum current module visibility evidence.", "Return FINDINGS only for a concrete in-scope no-suppression remedy. Otherwise return BLOCKED with the exact forbidden surface or authority decision required.", "Verify that partial repairs do not change public GroundingOutcome shape/accessor signatures, canonical bytes, lint configuration, tests, or protected/remote state."],
+  "non_goals": ["Do not edit, format, stage, commit, delegate, publish, query a network remote, touch the protected checkout, create handoffs/ledger entries, or reopen general discovery.", "Do not bless lint suppression, configuration waiver, test disablement, public/module expansion, or semantic production wiring without new top-level authority."],
+  "tasks": ["Independently reproduce strict Clippy and count/identify the remaining original diagnostics.", "Inspect the attempted visibility route and determine whether a valid no-suppression repair remains inside the nine-file/no-public-surface ceiling.", "Return findings first or a precise same-slice authority stop; identify the minimum next authority without proposing an unauthorized edit."],
+  "contracts_and_gates": ["This is the first complete-subject implementation-stage discovery review. It must not treat an inherited P2 as waived or fabricate closure without a valid remediation.", "A BLOCKED result does not waive HCM3EXIT-P2-CLIPPY-001, the permanent ordinary-validator condition, or any later proof gate."],
+  "stop_conditions": ["Return FINDINGS for a real bounded no-suppression route. Return BLOCKED when clearing remaining diagnostics requires lib.rs, parent-module/public reachability, non-admitted test/semantic surface, or lint/configuration waiver.", "Do not return CLEAN while exact strict Clippy fails."],
+  "return_contract": {"transport": "built_in_subagent", "findings_first": true, "include_agent_identity_and_status": true, "edit_scope": "read_only", "global_handoff": "forbidden", "ledger_write": "forbidden", "user_task_hop": "forbidden", "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "exact_remaining_diagnostics", "authority_analysis", "validation", "parent_disposition"]}
+}

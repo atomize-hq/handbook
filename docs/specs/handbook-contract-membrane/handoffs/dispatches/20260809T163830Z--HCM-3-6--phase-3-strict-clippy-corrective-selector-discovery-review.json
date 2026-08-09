@@ -1,0 +1,207 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260809T163830Z--HCM-3-6--phase-3-strict-clippy-corrective-selector-discovery-review",
+  "created_at_utc": "2026-08-09T16:38:30Z",
+  "source_handoff_ids": [
+    "20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-strict-clippy-corrective-20260809",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3-PHASE-3-STRICT-CLIPPY-CORRECTIVE",
+  "subject_fingerprint": "sha256:bd6e18118c429bfee13ac05180096b16bb35a7cfb9bebb38d012a7bf1810420d",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-strict-clippy-corrective-selector-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-09T16:38:20Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-6-phase-3-strict-clippy-corrective",
+        "packet_ids": [
+          "HCM-3-PHASE-3-STRICT-CLIPPY-CORRECTIVE"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T163659Z--phase-3-strict-clippy-corrective-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:35c7781ec5d803c61d1fe4b491a68b96a04fd3b1f9a828ec883741eac05caad2"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:297b56fc85f4539999cefc218a7a6c9b9ebee7f012fb2d1c8695bad7a7084d3e",
+    "integrated_outcome_id": "hcm-3-6-phase-3-strict-clippy-corrective",
+    "outcome_registry_fingerprint": "sha256:35c7781ec5d803c61d1fe4b491a68b96a04fd3b1f9a828ec883741eac05caad2",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-strict-clippy-corrective-selector-discovery-convergence",
+    "completed_at_utc": "2026-08-09T16:38:27Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the bound increment contract, the authority-boundary handoff, permanent governance decision, 07/08/09, HCM-3.6 authority, and the candidate selector; reproduce the exact strict Clippy diagnostic set as selector evidence.",
+        "evidence_ref": "The candidate confines remediation to the nine contract-admitted product paths, requires strict lint remediation without suppression, and makes no Phase-3 exit claim."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inventory the selector subject and its named authority, source-handoff, product-path, and proof dependencies.",
+        "evidence_ref": "The one-file review subject is the candidate selector; predecessor and historical control-plane records remain read-only context."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 manifest for the candidate selector.",
+        "evidence_ref": "Candidate subject fingerprint sha256:bd6e18118c429bfee13ac05180096b16bb35a7cfb9bebb38d012a7bf1810420d."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check; strict UTF-8 decode and balanced Markdown-fence scan for the candidate selector.",
+        "evidence_ref": "Formatting passed; the selector is valid UTF-8 with balanced Markdown fences."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check and require final LF with no trailing spaces or tabs in the manifested selector.",
+        "evidence_ref": "The selector satisfies text-files-no-trailing-whitespace-v1."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T163659Z--phase-3-strict-clippy-corrective-selector.md",
+        "sha256": "1df76812e5e2123f1fe22cc6ad864b7010e32a5b4e6ef610b0607084a8df9a5e"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:bd6e18118c429bfee13ac05180096b16bb35a7cfb9bebb38d012a7bf1810420d"
+  },
+  "active_resolution": {
+    "level": "strict-Clippy corrective selector admission",
+    "scope_horizon": "one narrow current-product strict-lint correction and its local-only closeout",
+    "detail_resolution": "the exact nine admitted product paths, no lint suppression, no public/schema/dependency/configuration change, and no Phase-3 exit claim",
+    "temporal_horizon": "one fresh discovery review before implementation; any material repair receives a different fresh closure review",
+    "authority_horizon": "review-only pending selector CLEAN; immutable history, remote state, protected checkout, and all non-admitted surfaces remain prohibited",
+    "memory_horizon": "retain the authority-boundary P2, permanent historical-validator decision, completed HCM-3.6 parent, and observed strict lint evidence",
+    "validation_horizon": "strict Clippy, targeted and workspace proof, validator truth, self-tests, review cadence, two commits, and expected-old local CAS"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T163659Z--phase-3-strict-clippy-corrective-selector.md",
+      "sections": [
+        "entire candidate selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T152000Z--HCM-3-6--orchestration--phase-3-exit-strict-lint-authority-boundary.json",
+      "sections": [
+        "entire immutable authority boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md",
+      "sections": [
+        "entire permanent governance decision and exact raw failure"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "selector, review cadence, and parent closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "v1.4 dispatch validation, lineage, and two-commit closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "P1/P2 blocking and P3/P4 disposition"
+      ]
+    }
+  ],
+  "repo_truth": "The bound task worktree and local integration ref match b1edd4d8e045ce64d20a77505ba3da87fe996704 and tree 3ba93283c77dc653c9b7533954ee8b141cbdc820; required ancestor and local remote-tracking baseline match 1256e724a2b7da6b6250f57d6f63fced1e2cf949; the protected checkout is clean. The exact strict Clippy command presently reports the contract-bound diagnostics in the selector's nine product paths.",
+  "allowed_scope": [
+    "Independently review the candidate selector against the bound strict-Clippy correction contract and current source diagnostic evidence.",
+    "Report a P1/P2 for any unauthorized path, changed public/schema/dependency/configuration posture, lint-suppression route, missing proof/review gate, or ambiguity that could waive an ordinary current failure.",
+    "Return CLEAN only when the selector fully preserves immutable lineage and provides an exact, non-waiving strict-lint-only implementation and local-closeout boundary."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a global handoff or ledger entry, delegate, contact a remote, or use the protected checkout.",
+    "Do not authorize or claim Phase-3 exit, change immutable evidence, suppress a lint, alter lint configuration, disable tests, or expand to a public/schema/dependency/runtime/transport surface."
+  ],
+  "tasks": [
+    "Review the selector's path ceiling, strict-lint remediation posture, non-waiver terms, proof wall, causal review cadence, two-commit topology, and expected-old local publication boundary.",
+    "Check that the permanent decision is cited only for the exact historical ordinary-validator failure and that the selector preserves failed/not-GREEN truth.",
+    "Return findings first, ordered Critical, Required, Optional, Nit, with exact evidence and minimum safe remediation, or CLEAN with concise validation evidence."
+  ],
+  "contracts_and_gates": [
+    "This is the sole planning-stage complete-subject discovery review for the frozen corrective outcome. Valid P1/P2 require one consolidated in-scope remediation and a different-fresh closure; no review may follow CLEAN.",
+    "Implementation requires upstream impact analysis for every changed existing Rust item; the parent must record unavailable FTS or compare truthfully rather than call it GREEN.",
+    "Completion still requires formatting, exact strict Clippy, targeted and workspace tests, ordinary-validator truth, both self-tests, review-clean primary state, a mechanical closeout commit, and expected-old local CAS."
+  ],
+  "stop_conditions": [
+    "Return BLOCKED only when review evidence is unavailable. Return FINDINGS for a valid P1/P2 selector defect.",
+    "Do not approve any selector that masks the strict-lint P2, relabels the historical validator failure as GREEN, permits immutable-history change, permits a non-admitted product path, or makes a Phase-3 exit claim."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}
