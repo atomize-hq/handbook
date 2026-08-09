@@ -35,6 +35,17 @@ HANDOFF_SELECTOR: <latest-for-slice | exact-handoff-id | none>
 
 PHASE_ID and SLICE_ID are required and primary scope authority. ACTIVE_PACKET is required before implementation when the phase map requires a slice-local packet.
 
+## Permanent ordinary-validator governance
+
+When a selector, proof, or handoff encounters the exact historical HCM-3.5
+failure `20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning:
+continuation writes or advances before selector CLEAN`, it must consume
+[`phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md`](phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md).
+The raw ordinary-validator result remains failed/not GREEN. It permits a
+closeout only when that exact failure is the sole ordinary-validator failure and
+every other applicable gate passes; it waives neither another validator failure
+nor any P1/P2, code/test/proof/review, causal, scope, or protected-path defect.
+
 ## Ready-to-use prompt
 
 ~~~text

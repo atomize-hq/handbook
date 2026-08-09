@@ -1,0 +1,171 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260809T150500Z--HCM-3-6--phase-3-exit-proof-boundary-review",
+  "created_at_utc": "2026-08-09T15:05:00Z",
+  "source_handoff_ids": [
+    "20260808T220000Z--HCM-3-6--orchestration--project-posture-implementation-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-phase-3-exit-20260809",
+  "orchestration_decision": "resolution_escalation",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality",
+    "debugging-and-error-recovery"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3-PHASE-3-EXIT-AUDIT",
+  "subject_fingerprint": "sha256:6ab09154ccf73d9bd434ca35ef29df375f1ee1a5665973e125fa988b5ed8fd79",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-phase-3-exit-proof-boundary-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-09T14:30:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-phase-3-exit-audit-and-closeout",
+        "packet_ids": [
+          "HCM-3-PHASE-3-EXIT-AUDIT"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T143000Z--phase-3-exit-audit-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:e0cccd4324deece9876c0bbdd9ad0f157d05f6231b93f9caa8fc61a4d1110dde"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:9a8ed0b9506dcd2f681d373805695f1e2ccdbe9f2cf5e0801c612b7e7259d367",
+    "integrated_outcome_id": "hcm-3-phase-3-exit-audit-and-closeout",
+    "outcome_registry_fingerprint": "sha256:e0cccd4324deece9876c0bbdd9ad0f157d05f6231b93f9caa8fc61a4d1110dde",
+    "review_stage": "proof",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260809T143200Z--HCM-3-6--phase-3-exit-selector-discovery-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-phase-3-exit-proof-boundary-convergence",
+    "completed_at_utc": "2026-08-09T15:04:00Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Complete the current cumulative engine, Flow, pipeline, workspace, formatting, strict-lint, ordinary-validator, and handoff-self-test wall; preserve the strict-lint failure as a proposed authority boundary rather than attempting repair.",
+        "evidence_ref": "Workspace, engine, Flow, pipeline, formatting, and both self-tests pass; strict Clippy exits 101 and ordinary validation exits 1 at the exact inherited HCM-3.5 failure."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inventory all Phase-3 exit control documents, the selector review dispatch, and the code paths named by the strict-lint output without editing any product path.",
+        "evidence_ref": "The actual change subject is eight documentation/control artifacts; all product paths are context-only and prohibited."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 eight-file control-pack manifest.",
+        "evidence_ref": "Proof-boundary subject sha256:6ab09154ccf73d9bd434ca35ef29df375f1ee1a5665973e125fa988b5ed8fd79."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Run git diff --check and validate UTF-8/fence/formatting hygiene on all manifested Markdown and JSON files.",
+        "evidence_ref": "git diff --check exits 0; no manifested text has trailing whitespace."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Require final LF and no trailing spaces or tabs in every manifested UTF-8 text file.",
+        "evidence_ref": "Every manifested text file satisfies text-files-no-trailing-whitespace-v1."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md", "sha256": "dc4016127e4bc3dc0443e88defb22870b9c2029dfc7f64b912d5570df4ba6c26"},
+      {"path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "sha256": "a97aa3a384e5a081660515e3aaf36f98ddf91c95d8a3d471b21759d2fb9bc157"},
+      {"path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md", "sha256": "c25cdbfcfe967f2318ea09e147422629ed783c667aa5d5aa1806c3dd101d4bf1"},
+      {"path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260809T143200Z--HCM-3-6--phase-3-exit-selector-discovery-review.json", "sha256": "54767c3219adb5f1a3727a0bdbb700846327e4c835e25d007ade2fa9b19d1115"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T143000Z--phase-3-exit-audit-selector.md", "sha256": "20be4b8a1856793439e113c1bf7af3984f64835f44eed7d7609a0e6d346c87fb"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md", "sha256": "64f11a7c7eb0f672e2c4cc74c2ae2da3951e88f1dedda6513890942c59e2e777"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T143000Z--selector-preflight.md", "sha256": "f7f01950dad695d7b48bb1d9b01da3dc734ace0683b277b013fc58f9def475f2"},
+      {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T150000Z--cumulative-audit-true-stop.md", "sha256": "8c4129acd98b19b6fbd68cd9417fa43dc2de872d8915a2f14da0b63970c983cc"}
+    ],
+    "aggregate_fingerprint": "sha256:6ab09154ccf73d9bd434ca35ef29df375f1ee1a5665973e125fa988b5ed8fd79"
+  },
+  "active_resolution": {
+    "level": "Phase-3 exit proof boundary",
+    "scope_horizon": "cumulative Phase-3 evidence and one documentation-only authority stop",
+    "detail_resolution": "current validation truth, non-waivable ordinary exception, strict-lint blocker, permanent governance decision, and durable stop requirements",
+    "temporal_horizon": "proof-stage discovery that may stop at a product-code authority boundary",
+    "authority_horizon": "review only; product repair, dependency, schema, runtime, public, remote, and protected-checkout work remain prohibited",
+    "memory_horizon": "retain HCM-3.1 through HCM-3.6 evidence and selector CLEAN without rewriting any immutable predecessor",
+    "validation_horizon": "a valid additional current proof failure must be reported as FINDINGS and stops this increment; no exception may mask it"
+  },
+  "authority_refs": [
+    {"path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md", "sections": ["Phase 3 exit gate"]},
+    {"path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md", "sections": ["review cadence and proof wall"]},
+    {"path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md", "sections": ["true-stop and validation protocol"]},
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T143000Z--phase-3-exit-audit-selector.md", "sections": ["entire reviewed selector"]},
+    {"path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md", "sections": ["entire authority decision"]}
+  ],
+  "repo_truth": "Current runtime tests and formatting pass, both v1.4 self-tests pass, ordinary validation fails only at the exact preserved HCM-3.5 condition, and strict workspace Clippy fails with current product-code diagnostics. The selector authorizes no code repair.",
+  "allowed_scope": [
+    "Independently validate the cumulative audit true-stop documentation, permanent governance decision, canonical workflow guidance, and the actual strict-lint/ordinary-validator evidence.",
+    "Report the smallest valid P1/P2 classification and authority boundary for every current failure; distinguish the exact accepted ordinary-validator exception from any extra failure.",
+    "Confirm that no documentation wording promotes the Phase-3 exit or waives code, proof, review, causal, scope, or protected-path failures."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a global handoff or ledger entry, delegate, contact a remote, use the protected checkout, or repair a product diagnostic.",
+    "Do not report strict Clippy or any additional failure as covered by the HCM-3.5 ordinary-validator governance decision."
+  ],
+  "tasks": [
+    "Review whether the true-stop evidence accurately states all pass/fail results and the exact no-repair authority boundary.",
+    "Verify that the permanent governance decision has the required duration, future-consumption, ordinary-failure, immutable-history, and non-waiver semantics.",
+    "Return FINDINGS for the strict-lint proof failure if corroborated; return CLEAN only if no current additional P1/P2 exists."
+  ],
+  "contracts_and_gates": [
+    "This is the one proof-stage discovery review. A corroborated strict-lint failure is a P2 proof/validation blocker and cannot be remediated under this documentation-only selector.",
+    "The inherited HCM-3.5 validator exception applies only to that exact raw failure and never to strict lint or another proof result."
+  ],
+  "stop_conditions": [
+    "Return FINDINGS for every valid P1/P2. The parent must stop at the authority boundary rather than edit product code.",
+    "Return BLOCKED only when the reviewer cannot access the named local evidence."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": ["agent_id", "final_status", "verdict", "findings", "advisory_disposition", "validation", "gitnexus_status", "parent_disposition"]
+  }
+}

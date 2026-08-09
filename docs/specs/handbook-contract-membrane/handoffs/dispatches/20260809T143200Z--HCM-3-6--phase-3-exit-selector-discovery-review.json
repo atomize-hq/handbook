@@ -1,0 +1,198 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260809T143200Z--HCM-3-6--phase-3-exit-selector-discovery-review",
+  "created_at_utc": "2026-08-09T14:32:00Z",
+  "source_handoff_ids": [
+    "20260808T220000Z--HCM-3-6--orchestration--project-posture-implementation-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-3-6-phase-3-exit-20260809",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-3",
+  "slice_id": "HCM-3.6",
+  "packet_id": "HCM-3-PHASE-3-EXIT-AUDIT",
+  "subject_fingerprint": "sha256:4876654b348083e7e1e4c804fee4f04854189d979a9f605f213a93978d4d855c",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-3-phase-3-exit-selector-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-09T14:30:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-3-phase-3-exit-audit-and-closeout",
+        "packet_ids": [
+          "HCM-3-PHASE-3-EXIT-AUDIT"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T143000Z--phase-3-exit-audit-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:e0cccd4324deece9876c0bbdd9ad0f157d05f6231b93f9caa8fc61a4d1110dde"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:9a8ed0b9506dcd2f681d373805695f1e2ccdbe9f2cf5e0801c612b7e7259d367",
+    "integrated_outcome_id": "hcm-3-phase-3-exit-audit-and-closeout",
+    "outcome_registry_fingerprint": "sha256:e0cccd4324deece9876c0bbdd9ad0f157d05f6231b93f9caa8fc61a4d1110dde",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-3-phase-3-exit-selector-discovery-convergence",
+    "completed_at_utc": "2026-08-09T14:31:00Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the exact Phase-3 exit gate, 00 through 09 authority, HCM-3.1 through HCM-3.6 completion records, and the candidate selector/preflight subject.",
+        "evidence_ref": "The candidate selects only documentation/control-pack exit audit and durable closeout; no product path is in scope."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Inventory the two candidate files and their named Phase-3 source handoffs/control-pack dependencies.",
+        "evidence_ref": "The subject has exactly the candidate selector and preflight; named historical records are context-only and immutable."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the sorted repo-path-NUL-SHA256-newline-v1 two-file manifest.",
+        "evidence_ref": "Candidate subject fingerprint sha256:4876654b348083e7e1e4c804fee4f04854189d979a9f605f213a93978d4d855c."
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "Strict UTF-8 decode, balanced Markdown-fence scan, and git diff --check for the candidate subject.",
+        "evidence_ref": "The two candidate Markdown files decode as UTF-8 and have no whitespace error."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "Require final LF and no trailing spaces or tabs in every manifested UTF-8 text file.",
+        "evidence_ref": "Both manifested files satisfy text-files-no-trailing-whitespace-v1."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T143000Z--phase-3-exit-audit-selector.md",
+        "sha256": "7625f92a5d595fd1caf6d8a2a822546ae38073d55dcc5899e8c053186aa9293b"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260809T143000Z--selector-preflight.md",
+        "sha256": "f7f01950dad695d7b48bb1d9b01da3dc734ace0683b277b013fc58f9def475f2"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:4876654b348083e7e1e4c804fee4f04854189d979a9f605f213a93978d4d855c"
+  },
+  "active_resolution": {
+    "level": "Phase-3 exit selector admission",
+    "scope_horizon": "one cumulative HCM-3 documentation/control-pack audit and local-only closeout",
+    "detail_resolution": "selector bounds, preserved predecessor lineage, permanent governance-decision requirements, proof obligations, and forbidden product/immutable surfaces",
+    "temporal_horizon": "one fresh discovery review before the selected exit audit starts",
+    "authority_horizon": "review-only; no implementation, schema, dependency, runtime, public, remote, protected-checkout, or immutable-history change",
+    "memory_horizon": "retain completed HCM-3.1 through HCM-3.6 evidence and exact HCM-3.5 validator failure without rewriting any predecessor",
+    "validation_horizon": "CLEAN makes the selector effective; any P1/P2 requires one consolidated bounded remediation and different-fresh closure"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-3.1 through HCM-3.6 and Phase 3 exit gate"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "selector, delegated review, causal cadence, and closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "v1.4 dispatch validation, review lineage, and two-commit closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T143000Z--phase-3-exit-audit-selector.md",
+      "sections": [
+        "entire candidate selector"
+      ]
+    }
+  ],
+  "repo_truth": "The task worktree and local integration ref equal the bound base/tree and are clean. The required ancestor and local remote-tracking baseline match. The protected checkout is clean and byte-identical at the bound tree. The ordinary validator's inherited HCM-3.5 failure remains an ordinary non-GREEN result, not a selector admission result.",
+  "allowed_scope": [
+    "Independently review the two-file candidate selector/preflight subject against the bound HCM-3.6 exit contract and live 00 through 09 authority.",
+    "Identify any P1/P2 selector omission, scope expansion, failure-semantics ambiguity, causal-cadence defect, or immutable/protected-path conflict with exact evidence and smallest in-scope repair.",
+    "Return CLEAN only when the selector makes all eight exit criteria, permanent-governance terms, two-commit topology, and local-only boundary discoverable without granting product or future-program authority."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, unstage, commit, create a global handoff or ledger entry, delegate, contact a remote, use the protected checkout, or start the cumulative audit.",
+    "Do not waive the inherited HCM-3.5 validator result, declare it GREEN, alter immutable predecessor evidence, or authorize any product/schema/dependency/runtime/public-surface work."
+  ],
+  "tasks": [
+    "Review the selector's authority boundary, permanent-exception conditions, evidence requirements, exit-gate completeness, and closeout topology.",
+    "Check the preflight record against the supplied base/tree/ancestor/remote and protected-checkout requirements.",
+    "Return ordered Critical/Required/Optional/Nit findings with precise evidence and the minimum safe remediation, or CLEAN with a concise verification record."
+  ],
+  "contracts_and_gates": [
+    "This is the one planning-stage complete-subject discovery review. P1/P2 findings require one consolidated remediation and a different-fresh closure; no review may follow CLEAN.",
+    "A completed Phase-3 exit still requires a separate proof-stage discovery/review/remediation/closure lineage, all applicable validations, an ordinary validator result recorded truthfully, and the new authority decision."
+  ],
+  "stop_conditions": [
+    "Return BLOCKED only when review evidence is unavailable; return FINDINGS for a valid P1/P2 selector or authority defect.",
+    "Do not approve an ambiguous permanent waiver, an exception that masks another failure, selector scope beyond documentation/control-pack work, or any path that changes immutable predecessor evidence."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}

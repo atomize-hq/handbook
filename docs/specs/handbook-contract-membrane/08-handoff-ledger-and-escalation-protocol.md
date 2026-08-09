@@ -545,6 +545,16 @@ python3 "$root/validate_handoffs.py"
 
 ## Required validation
 
+### Permanent ordinary-validator governance
+
+For the exact historical raw failure
+`20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN`, rely only on
+[`phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md`](phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md).
+Record the ordinary validator as failed/not GREEN and cite both the decision and
+the raw failure in every relying selector, proof, and handoff. A closeout may
+continue only if this is the sole ordinary-validator failure and every other
+applicable gate passes; any additional validation failure is blocking.
+
 ~~~bash
 uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py
 uv run --with jsonschema==4.25.1 python docs/specs/handbook-contract-membrane/handoffs/validate_handoffs.py --self-test-v1-admission

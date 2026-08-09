@@ -88,6 +88,12 @@ return P3/P4 advisories. In v1.4 delegated-run evidence, such a run uses
 or P2 and therefore retains the existing mandatory remediation and
 different-fresh re-review lineage.
 
+The permanent ordinary-validator governance decision at
+`phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md`
+does not lower a review finding's priority or waive P1/P2. It applies only to
+its exact historical raw validator failure and only after every other gate,
+including findings and proof, passes.
+
 An informational observation with no requested change is not a review finding
 and does not enter this inventory.
 
