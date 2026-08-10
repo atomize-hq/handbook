@@ -1,0 +1,29 @@
+# HCM-4.1 implementation dependency-order exception
+
+**Decision ID:** `HCM-4.1-IMPLEMENTATION-PHASE-3-OPEN-EXCEPTION-01`
+
+## Decision
+
+HCM-4.1 may create and independently review its implementation-admission
+selector while Phase 3 remains open. Only if that selector is `CLEAN` may the
+exact selected SDK ordinary-use-case implementation proceed before Phase-3
+closeout, because a genuine SDK caller is needed to complete the private
+HCM-3.6 posture-transition reachability seam.
+
+## Preserved limits
+
+- Phase 3, HCM-3.6, `HCM3EXIT-P2-CLIPPY-001`, and HCM-3.5 P5/P6 remain open.
+- The exception grants no phase exit, public transport/schema work, HCM-4.2+,
+  Phase 5/6, release, publication, push, Substrate, or Tauri authority.
+- A selector that cannot map every retained normal CLI route to admitted SDK
+  composition without an unplanned compatibility decision must stop before
+  product edits.
+- A later Phase-3 closeout must consume real SDK production-adoption evidence
+  and independently rerun strict Clippy, regression, causal-review, and exit
+  gates.
+
+## Authority
+
+- `slices/HCM-4.1/decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md`;
+- `handoffs/records/20260810T012500Z--HCM-4-1--orchestration--sdk-owner-use-case-planning-completed.json`;
+- `phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md`.

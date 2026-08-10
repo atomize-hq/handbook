@@ -2,8 +2,12 @@
 
 **Packet:** `HCM-4.1-PLANNING-CONTROL-PACK`
 
-**Status:** planning/control package only. No runtime implementation, SDK
-crate, or transport work is authorized by this packet.
+**Status:** the planning/control package is complete. Its fresh HCM-4.1
+implementation admission selector received independent `findings`, not
+`CLEAN`: the retained normal-CLI compatibility map and the exact
+operation-definition/schema/bootstrap authority are absent. No runtime
+implementation, SDK crate, Cargo edge, compiler/CLI cutover, or transport work
+is admitted pending a new authority-bound same-slice resumption.
 
 ## Objective
 
@@ -16,6 +20,8 @@ Phase 3 remains open.
 
 The governing selector is
 [`decision/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-selector.md`](decision/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-selector.md).
+The implementation admission selector is
+[`decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md`](decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md).
 
 ## Non-negotiable ownership boundary
 

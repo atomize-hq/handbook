@@ -1,5 +1,17 @@
 # HCM-4.1 planning ledger
 
+## Implementation admission
+
+- [x] Independently review
+  `decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md`
+  before any product edit. Discovery dispatch
+  `20260810T133000Z--HCM-4-1--implementation-admission-discovery-review`
+  returned P1 HCM41-IA-01 (missing retained-route compatibility map) and P2
+  HCM41-IA-02 (missing operation-definition/schema/bootstrap authority), so
+  record the authority-boundary true stop.
+- [ ] Do not create `handbook-sdk`, alter Cargo, expose the posture bridge, or
+  cut over CLI/compiler composition until the implementation selector is CLEAN.
+
 ## Planning/control package
 
 - [x] Bind the exact task, host, nonce, base/tree, local integration ref, and
