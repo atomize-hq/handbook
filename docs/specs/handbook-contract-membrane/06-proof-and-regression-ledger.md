@@ -8,20 +8,25 @@ It is not a task checklist. Slice-local `tasks/todo.md` files own execution stat
 
 ## HCM-4.1 SDK owner and use-case planning proof gate
 
-HCM-4.1 may close only as reviewed planning/control-pack evidence. Its proof
-wall requires: the durable Phase-3-open dependency-order exception; an exact
+HCM-4.1 first closed as reviewed planning/control-pack evidence. Its operator
+continuation may close only after: the durable Phase-3-open dependency-order
+exception; an exact
 SDK semantic-owner and ordinary-use-case inventory; an explicit HCM-3.6
 posture-transition real-ingress decision that rejects promotion, recovery,
 startup, reader, test, and compiler-compatibility substitutes; future-packet
 owner/input/result/refusal/mutation/idempotency/CAS/proof contracts;
 compiler-retirement and temporary-scaffolding deletion proof; a frozen subject
-manifest; independent causal review with no unresolved P1/P2; and the
-two-commit v1.4 handoff/ledger closeout.
+manifest; independent direct review with no unresolved P1/P2; and a reviewed
+primary commit locally published with expected-old CAS. The operator does not
+authorize v1.4 handoff, ledger, or validator claims for this continuation.
 
-This gate does **not** satisfy HCM-3.6 production reachability, strict Clippy,
-HCM-3.5 P5/P6, a public API or dependency decision, any Phase-4
-implementation, or a Phase-3 exit. A later exact implementation authority
-must produce the actual production-adoption evidence, all
+The original planning gate did **not** satisfy HCM-3.6 production reachability,
+strict Clippy, HCM-3.5 P5/P6, publication or external-dependency adoption, a
+Phase-3 exit, or any Phase-4 implementation beyond the now-authorized direct,
+typed, Rust-linkage-only SDK boundary. The HCM-4.1 continuation may prove that
+bounded boundary locally; it does not make it discoverable, transport-backed,
+schema-published, externally adopted, or released. The continuation must
+produce the actual production-adoption evidence, all
 positive/negative/recovery/restart/regression proof, GitNexus impact evidence,
 and the Phase-3 closure reruns.
 

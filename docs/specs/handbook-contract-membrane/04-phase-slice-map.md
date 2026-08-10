@@ -626,21 +626,25 @@ separately authorized.
 Phase 3 remains open. The narrowly scoped HCM-4.1 planning exception recorded
 in `phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md`
 permits planning the SDK/ordinary-consumer boundary required by the private
-HCM-3.6 posture seam; it does not authorize implementation or any other
-Phase-4 work.
+HCM-3.6 posture seam. The exact HCM-4.1 operator continuation waiver permits
+the selected SDK implementation sequence while retaining product proof,
+independent review, CLI-parity, and Phase-3-open limits; it does not authorize
+any other Phase-4 work.
 
-### `HCM-4.1` — SDK owner and use-case inventory
+### `HCM-4.1` — SDK owner and use-case implementation
 
-- planning/control-pack selection only: freeze the SDK semantic-owner and
-  ordinary-use-case inventory, implementation packets, proof gates, and
-  compiler-retirement cutover;
-- identify the future real SDK/ordinary-consumer ingress for the private
-  HCM-3.6 posture transition, including its approved-recommendation, policy,
-  approval, canonical-head, reassessment, and compare-and-write bindings;
-- reserve all crate creation, public API, dependency, compiler-cutover, and
-  transport implementation for a fresh HCM-4.1 implementation selector;
+- implement the frozen SDK semantic-owner and ordinary-use-case inventory in
+  the operator-selected packet order: direct typed Rust posture ingress,
+  HCM-3.6 proof replay, existing-owner composition, eight-route cutover, then
+  compiler retirement;
+- the initial Rust posture method is direct-linkage-only and undiscoverable:
+  it creates no canonical operation-definition, capability descriptor,
+  bootstrap, DTO/schema, CLI JSON, or Tauri boundary;
+- retain all eight normal CLI routes and their observable behavior during
+  route-by-route SDK cutover; compiler retirement follows only full parity and
+  deletion proof;
 - preserve crate-local ownership of state, policy, validation, and mutation
-  semantics; the SDK exposes capabilities rather than internal topology.
+  semantics; HCM-4.2 owns canonical capability/schema/bootstrap discovery.
 
 ### `HCM-4.2` — Shared DTO and JSON Schema contract
 

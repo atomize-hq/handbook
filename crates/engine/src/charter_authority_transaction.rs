@@ -36,7 +36,7 @@ use crate::charter_promotion_intent_v12::{
 use crate::charter_promotion_workflow::required_approval_pairs_for_authority;
 use crate::project_posture::{
     bind_exact_canonical_bytes, derive_project_posture_kernel, prepare_posture_change,
-    verify_precommit_cas, PostureChangeRequest,
+    replay_project_posture_kernel, verify_precommit_cas, PostureChangeRequest,
 };
 use crate::DefinitionFingerprint;
 use crate::{
@@ -44,7 +44,7 @@ use crate::{
     resolve_shipped_profile_decisions, serialize_canonical_charter, ExactDefinitionRef,
 };
 use serde_json::Value;
-#[cfg(test)]
+#[cfg(any(test, feature = "test-support"))]
 use std::cell::Cell;
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs::{self, File, OpenOptions};
@@ -52,6 +52,7 @@ use std::io::{Read, Seek, SeekFrom, Write};
 use std::path::{Component, Path, PathBuf};
 
 const CANONICAL_REF: &str = ".handbook/project/charter.yaml";
+const REPOSITORY_IDENTITY_REPO_PATH: &str = ".handbook/repository-identity.v1";
 const MAX_CANONICAL_BYTES: usize = 1024 * 1024;
 const MAX_INTENT_BYTES: usize = MAX_PROMOTION_INTENT_BYTES_V12;
 const MAX_OUTPUT_RECORD_BYTES: usize = 262_144;
@@ -76,6 +77,12 @@ enum PostureStagePurposeV1 {
 enum PostureStageStateV1 {
     Absent,
     Exact,
+}
+
+#[cfg(any(test, feature = "test-support"))]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum PostureTransitionFaultPointV1 {
+    AfterCanonicalInstalled,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -317,6 +324,53 @@ thread_local! {
     static SELECTED_RECOVERY_FAULT_V1: Cell<Option<RecoveryBoundaryV12>> = const { Cell::new(None) };
 }
 
+#[cfg(any(test, feature = "test-support"))]
+thread_local! {
+    static SELECTED_POSTURE_TRANSITION_FAULT_V1: Cell<Option<PostureTransitionFaultPointV1>> = const { Cell::new(None) };
+}
+
+#[cfg(feature = "test-support")]
+struct ScopedPostureTransitionFaultV1 {
+    previous: Option<PostureTransitionFaultPointV1>,
+}
+
+#[cfg(feature = "test-support")]
+impl ScopedPostureTransitionFaultV1 {
+    fn select(selected: PostureTransitionFaultPointV1) -> Self {
+        let previous =
+            SELECTED_POSTURE_TRANSITION_FAULT_V1.with(|slot| slot.replace(Some(selected)));
+        Self { previous }
+    }
+}
+
+#[cfg(feature = "test-support")]
+impl Drop for ScopedPostureTransitionFaultV1 {
+    fn drop(&mut self) {
+        SELECTED_POSTURE_TRANSITION_FAULT_V1.with(|slot| slot.set(self.previous));
+    }
+}
+
+/// Test-only guard for stopping a real posture write after its canonical
+/// replacement. This item is compiled only with the non-default
+/// `test-support` feature and is never re-exported by `handbook-sdk`.
+#[cfg(feature = "test-support")]
+#[doc(hidden)]
+pub struct PostureTransitionFaultInjectionGuardV1 {
+    _scoped: ScopedPostureTransitionFaultV1,
+}
+
+#[cfg(feature = "test-support")]
+impl PostureTransitionFaultInjectionGuardV1 {
+    #[doc(hidden)]
+    pub fn after_canonical_install() -> Self {
+        Self {
+            _scoped: ScopedPostureTransitionFaultV1::select(
+                PostureTransitionFaultPointV1::AfterCanonicalInstalled,
+            ),
+        }
+    }
+}
+
 #[cfg(test)]
 struct ScopedPromotionFaultV12 {
     previous: Option<CharterPromotionFaultPointV1>,
@@ -375,6 +429,25 @@ struct PreparedPostureWriteV1 {
     change: crate::project_posture::PreparedPostureChange,
     old_canonical: Vec<u8>,
     new_canonical: Vec<u8>,
+}
+
+/// The private writer's closed idempotency result.  This remains crate-local so
+/// the engine facade can translate it to its bounded public receipt without
+/// leaking transaction records or journal paths.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub(crate) enum PostureTransitionApplyDispositionV1 {
+    Applied,
+    Replayed,
+}
+
+/// Validated, crate-private material retained for an exact idempotent replay.
+///
+/// The public facade turns this into its bounded receipt; raw durable records
+/// never cross the engine boundary.
+pub(crate) struct CommittedPostureTransitionReplayV1 {
+    pub(crate) posture: ValidatedPostureTransitionV1,
+    pub(crate) lifecycle: ValidatedLifecycleTransitionV11,
+    pub(crate) intent: ValidatedPostureTransactionIntentV1,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -585,6 +658,34 @@ impl CharterAuthorityTransactionServiceV1 {
             canonical_fingerprint: head.canonical.fingerprint,
             promotion_ref: head.promotion_ancestor.reference,
             lifecycle_transition_ref: head.lifecycle_transition.reference,
+        }))
+    }
+
+    /// Observes the exact heterogeneous head needed only by the private
+    /// posture facade. The returned value remains crate-private so callers of
+    /// the public SDK cannot receive durable authority records.
+    pub(crate) fn observe_posture_authority_head(
+        &self,
+    ) -> Result<Option<AuthorityHeadV1>, CharterPromotionErrorV1> {
+        ensure_supported_platform()?;
+        let _locks = AuthorityLocks::acquire(&self.repo_root)?;
+        self.recover_pending_locked()?;
+        let Some(canonical_bytes) = read_current_canonical(&self.repo_root)? else {
+            return Ok(None);
+        };
+        let Some(head) = self.resolve_committed_authority_head_locked()? else {
+            return Ok(None);
+        };
+        validate_current_canonical_against_head(&canonical_bytes, &head.canonical)?;
+        Ok(Some(AuthorityHeadV1 {
+            kind: match head.source_kind {
+                AuthorityHeadKindV1::Promotion => "promotion".to_owned(),
+                AuthorityHeadKindV1::PostureTransition => "posture_transition".to_owned(),
+            },
+            source: head.source,
+            canonical: head.canonical,
+            lifecycle_transition: head.lifecycle_transition,
+            promotion_ancestor: head.promotion_ancestor,
         }))
     }
 
@@ -1491,19 +1592,6 @@ impl CharterAuthorityTransactionServiceV1 {
         Ok(committed_intents)
     }
 
-    pub(crate) fn current_committed_intent_locked(
-        &self,
-        canonical_fingerprint: &str,
-    ) -> Result<ValidatedPromotionIntentV12, CharterPromotionErrorV1> {
-        self.validate_terminal_history(None, Some(canonical_fingerprint))?
-            .ok_or_else(|| {
-                error(
-                    CharterPromotionErrorKindV1::DurabilityViolation,
-                    "promotion history has no committed chain head",
-                )
-            })
-    }
-
     pub(crate) fn current_committed_authority_head_locked(
         &self,
         canonical_fingerprint: &str,
@@ -1777,9 +1865,10 @@ impl CharterAuthorityTransactionServiceV1 {
         Ok(())
     }
 
-    /// Applies a fully prepared private posture transition while holding the
-    /// same authority locks as promotion. The record types are crate-private,
-    /// so this does not widen the external engine surface.
+    /// Test-only compatibility seam for direct private-writer fixtures. The
+    /// production path is `apply_posture_transition_idempotently`, reached via
+    /// the public typed engine facade.
+    #[cfg(test)]
     pub(crate) fn apply_posture_transition(
         &self,
         posture: &ValidatedPostureTransitionV1,
@@ -1790,6 +1879,121 @@ impl CharterAuthorityTransactionServiceV1 {
         let _locks = AuthorityLocks::acquire(&self.repo_root)?;
         self.recover_pending_locked()?;
         self.apply_posture_transition_locked(posture, lifecycle, intent)
+    }
+
+    /// Applies an exact private posture intent once, or validates and returns
+    /// its already-committed result for an exact retry. A reused transaction
+    /// identity with a different intent is refused before any new write.
+    pub(crate) fn apply_posture_transition_idempotently(
+        &self,
+        posture: &ValidatedPostureTransitionV1,
+        lifecycle: &ValidatedLifecycleTransitionV11,
+        intent: &ValidatedPostureTransactionIntentV1,
+    ) -> Result<PostureTransitionApplyDispositionV1, CharterPromotionErrorV1> {
+        ensure_supported_platform()?;
+        let _locks = AuthorityLocks::acquire(&self.repo_root)?;
+        self.recover_pending_locked()?;
+
+        let root = self.posture_transaction_root();
+        let transaction_id = &intent.record.transaction_id;
+        let pending = root.join(format!("{transaction_id}.pending"));
+        let committed = root.join(format!("{transaction_id}.committed"));
+        let rolled_back = root.join(format!("{transaction_id}.rolled-back"));
+
+        if committed.exists() {
+            let retained = read_valid_posture_intent(&committed)?;
+            validate_posture_terminal_directory_identity(&committed, &retained, ".committed")?;
+            validate_posture_terminal_payload(
+                &self.repo_root,
+                &committed,
+                &retained,
+                PostureTerminalKindV1::Committed,
+            )?;
+            validate_posture_final_records(&self.repo_root, &retained)?;
+            if retained == *intent {
+                return Ok(PostureTransitionApplyDispositionV1::Replayed);
+            }
+            return Err(error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture idempotency key is already bound to a different request",
+            ));
+        }
+
+        if pending.exists() || rolled_back.exists() {
+            return Err(error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture idempotency key is already bound to a non-committed transaction",
+            ));
+        }
+
+        self.apply_posture_transition_locked(posture, lifecycle, intent)?;
+        Ok(PostureTransitionApplyDispositionV1::Applied)
+    }
+
+    /// Recovers pending private journals, then returns an already-committed
+    /// posture transaction by its bounded idempotency identity. This is only
+    /// for the direct typed facade to decide an exact replay before it reads
+    /// the now-superseded canonical Charter.
+    pub(crate) fn recover_and_load_committed_posture_transition(
+        &self,
+        transaction_id: &str,
+    ) -> Result<Option<CommittedPostureTransitionReplayV1>, CharterPromotionErrorV1> {
+        ensure_supported_platform()?;
+        let _locks = AuthorityLocks::acquire(&self.repo_root)?;
+        self.recover_pending_locked()?;
+
+        let committed = self
+            .posture_transaction_root()
+            .join(format!("{transaction_id}.committed"));
+        if !committed.exists() {
+            return Ok(None);
+        }
+
+        let intent = read_valid_posture_intent(&committed)?;
+        validate_posture_terminal_directory_identity(&committed, &intent, ".committed")?;
+        validate_posture_terminal_payload(
+            &self.repo_root,
+            &committed,
+            &intent,
+            PostureTerminalKindV1::Committed,
+        )?;
+        validate_posture_final_records(&self.repo_root, &intent)?;
+
+        let posture_bytes = read_private_posture_output(
+            &self.repo_root,
+            &intent.record.outputs.posture_transition,
+            "committed posture idempotency replay",
+        )?;
+        let lifecycle_bytes = read_private_posture_output(
+            &self.repo_root,
+            &intent.record.outputs.lifecycle_transition,
+            "committed posture idempotency replay",
+        )?;
+        let posture = parse_posture_transition_v1(&posture_bytes).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                format!(
+                    "committed posture idempotency record refused: {}",
+                    failure.detail()
+                ),
+            )
+        })?;
+        let lifecycle = parse_lifecycle_transition_v11(&lifecycle_bytes).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                format!(
+                    "committed posture idempotency lifecycle refused: {}",
+                    failure.detail()
+                ),
+            )
+        })?;
+        validate_posture_terminal_bindings(&intent, &posture, &lifecycle)?;
+
+        Ok(Some(CommittedPostureTransitionReplayV1 {
+            posture,
+            lifecycle,
+            intent,
+        }))
     }
 
     fn apply_posture_transition_locked(
@@ -1877,6 +2081,8 @@ impl CharterAuthorityTransactionServiceV1 {
                 "posture canonical target differs after atomic installation",
             ));
         }
+        #[cfg(any(test, feature = "test-support"))]
+        inject_posture_transition_fault(PostureTransitionFaultPointV1::AfterCanonicalInstalled);
         sync_directory(&pending).map_err(map_lineage)?;
         publish_posture_marker(&pending, "canonical-installed", &intent.raw_bytes)?;
         self.install_posture_record_stage(
@@ -3278,6 +3484,13 @@ fn inject_writer_fault(boundary: WriterBoundaryV12) -> Result<(), CharterPromoti
         ));
     }
     Ok(())
+}
+
+#[cfg(any(test, feature = "test-support"))]
+fn inject_posture_transition_fault(expected: PostureTransitionFaultPointV1) {
+    if SELECTED_POSTURE_TRANSITION_FAULT_V1.with(Cell::get) == Some(expected) {
+        panic!("injected posture transition interruption after canonical installation");
+    }
 }
 
 #[cfg(test)]
@@ -5355,6 +5568,7 @@ fn validate_posture_terminal_bindings(
         || record.recovery.old_canonical != record.expected_canonical
         || record.change != posture.record.change
         || record.authority_inputs.recommendation != posture.record.recommendation
+        || record.authority_inputs.repository_identity != posture.record.repository_identity
         || record.authority_inputs.source_kernel != posture.record.source_kernel
         || record.authority_inputs.evaluation_policy != posture.record.evaluation_policy
         || record.authority_inputs.approval_inputs != posture.record.approval_inputs
@@ -5412,20 +5626,31 @@ fn validate_posture_kernel_replay(
     new_canonical: &[u8],
     posture: &ValidatedPostureTransitionV1,
 ) -> Result<(), CharterPromotionErrorV1> {
-    let source_kernel =
-        derive_project_posture_kernel(source, &change.current_canonical).map_err(|failure| {
+    let derived_source_kernel = derive_project_posture_kernel(source, &change.current_canonical)
+        .map_err(|failure| {
             error(
                 CharterPromotionErrorKindV1::DurabilityViolation,
                 format!("posture source kernel replay refused: {failure:?}"),
             )
         })?;
+    let source_kernel = replay_project_posture_kernel(
+        &derived_source_kernel.replay_plan,
+        source,
+        &change.current_canonical,
+    )
+    .map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture source kernel replay plan refused: {failure:?}"),
+        )
+    })?;
     let resulting_exact = bind_exact_canonical_bytes(new_canonical).map_err(|failure| {
         error(
             CharterPromotionErrorKindV1::DurabilityViolation,
             format!("posture resulting canonical bytes refused: {failure:?}"),
         )
     })?;
-    let resulting_kernel =
+    let derived_resulting_kernel =
         derive_project_posture_kernel(&change.resulting_charter, &resulting_exact).map_err(
             |failure| {
                 error(
@@ -5434,8 +5659,20 @@ fn validate_posture_kernel_replay(
                 )
             },
         )?;
+    let resulting_kernel = replay_project_posture_kernel(
+        &derived_resulting_kernel.replay_plan,
+        &change.resulting_charter,
+        &resulting_exact,
+    )
+    .map_err(|failure| {
+        error(
+            CharterPromotionErrorKindV1::DurabilityViolation,
+            format!("posture resulting kernel replay plan refused: {failure:?}"),
+        )
+    })?;
     let replay = &posture.record.kernel_replay;
-    if posture.record.source_kernel.fingerprint != source_kernel.kernel_fingerprint
+    if posture.record.source_kernel.reference != "project-posture-kernels/source"
+        || posture.record.source_kernel.fingerprint != source_kernel.kernel_fingerprint
         || posture.record.resulting_kernel.fingerprint != resulting_kernel.kernel_fingerprint
         || replay.source_input_fingerprint != source_kernel.input_fingerprint
         || replay.resulting_input_fingerprint != resulting_kernel.input_fingerprint
@@ -5568,8 +5805,25 @@ fn validate_posture_semantic_authority_closure(
         reference: retained_validation.relative_ref,
         fingerprint: validation.validation_result_fingerprint.clone(),
     };
+    let intake_pair = PairV1 {
+        reference: validation.intake_record_ref.clone(),
+        fingerprint: validation.intake_record_fingerprint.clone(),
+    };
     let replay = &posture.record.kernel_replay;
-    if posture.record.evaluation_policy.reference != validation.lifecycle_policy_ref
+    let repository_identity = fs::read_to_string(repo_root.join(REPOSITORY_IDENTITY_REPO_PATH))
+        .map_err(|_| {
+            error(
+                CharterPromotionErrorKindV1::Conflict,
+                "posture repository identity cannot be read",
+            )
+        })?;
+    if posture.record.repository_identity.reference != REPOSITORY_IDENTITY_REPO_PATH
+        || repository_identity.is_empty()
+        || repository_identity.contains('\n')
+        || DefinitionFingerprint::parse(&repository_identity).is_err()
+        || posture.record.repository_identity.fingerprint != repository_identity
+        || posture.record.reassessment.intake_definition != intake_pair
+        || posture.record.evaluation_policy.reference != validation.lifecycle_policy_ref
         || posture.record.evaluation_policy.fingerprint != validation.lifecycle_policy_fingerprint
         || replay.profile_input.reference != validation.profile_ref
         || replay.profile_input.fingerprint != validation.resolved_profile_fingerprint
@@ -5582,9 +5836,6 @@ fn validate_posture_semantic_authority_closure(
         || !replay.applicable_scope_refs.is_empty()
         || !replay.omitted_condition_refs.is_empty()
         || !replay.unresolved_condition_refs.is_empty()
-        || posture.record.reassessment.intake_definition.reference != validation.intake_record_ref
-        || posture.record.reassessment.intake_definition.fingerprint
-            != validation.intake_record_fingerprint
         || posture
             .record
             .reassessment
@@ -5797,10 +6048,10 @@ fn posture_stage_scratch_suffix(purpose: PostureStagePurposeV1) -> &'static str 
     }
 }
 
-fn posture_output_for<'a>(
-    intent: &'a ValidatedPostureTransactionIntentV1,
+fn posture_output_for(
+    intent: &ValidatedPostureTransactionIntentV1,
     purpose: PostureStagePurposeV1,
-) -> Result<&'a OutputRecordV1, CharterPromotionErrorV1> {
+) -> Result<&OutputRecordV1, CharterPromotionErrorV1> {
     match purpose {
         PostureStagePurposeV1::PostureTransition => Ok(&intent.record.outputs.posture_transition),
         PostureStagePurposeV1::LifecycleTransition => {

@@ -2,18 +2,32 @@
 
 ## Planning boundary
 
-This is a future implementation plan, not an SDK implementation selector. The
-catalog below is frozen from `05-contracts-schemas-and-gates.md`; an operation
-is not discoverable, callable, schema-published, or transport-supported until
-a fresh implementation authority supplies the exact public Rust API, operation
-definition, schemas, capability pins, tests, and proof.
+This is the frozen implementation plan. The operator continuation waiver admits
+the ordered HCM-4.1 implementation only under its exact boundaries. The first
+typed Rust posture method is callable by direct linkage but is not discoverable,
+schema-published, bootstrap-advertised, JSON-serializable, or
+transport-supported. Canonical operation discovery remains HCM-4.2.
+
+## Operator-authorized implementation sequence
+
+| Packet | Scope | Compatibility and proof boundary |
+|---|---|---|
+| 1 | Create `handbook-sdk`, the smallest repository-bound opening surface, direct typed posture request/outcomes, and purpose-named engine facade. | Keep all CLI routes and compiler behavior unchanged; no catalog/descriptor/bootstrap/Serde/schema/JSON/Tauri surface. |
+| 2 | Replay HCM-3.6 production reachability from SDK through facade to private writer. | Prove strict Clippy, first/replay/refusal, stale/fork, crash, recovery, restart, exact receipts, and no undeclared write without claiming HCM-3.6 or Phase-3 closure. |
+| 3 | Add only typed SDK composition for existing semantic-owner behavior. | No future Phase-5 owner, generic `Value`, raw durable record, or semantic duplication. |
+| 4 | Cut over Setup, Author, Approvers, Artifact, Pipeline, Generate, Inspect, and Doctor one route at a time. | Preserve exact grammar, output, exit codes, failures, and owner semantics; do not repurpose any route as posture ingress. |
+| 5 | Retire compiler normal-path composition. | Do so only after all eight parity walls pass and cargo/dependency/import/source scans prove removal of normal compiler use. |
 
 ## Shared typed-shape and proof vocabulary
 
-Every future method has an exact operation definition at `1.0.0`, an opaque
-typed Rust request/result, and a closed outcome union. The SDK is the normal
-caller. `CLI` means future HCM-4.3 JSON/human CLI adapter; `Tauri` means future
-HCM-4.4 adapter; neither may recalculate semantics.
+Every catalogued ordinary method has an exact operation definition at `1.0.0`,
+an opaque typed Rust request/result, and a closed outcome union. Packet 1's
+direct typed Rust posture method is the deliberately non-catalogued exception:
+it is callable only through Rust linkage and creates no operation definition,
+descriptor, bootstrap entry, shared Serde/JSON DTO, schema, JSON transport, or
+Tauri surface. The SDK is the normal caller. `CLI` means future HCM-4.3
+JSON/human CLI adapter; `Tauri` means future HCM-4.4 adapter; neither may
+recalculate semantics.
 
 | Code | Request/result/blocker/refusal/error shape | Mutation and required proof |
 |---|---|---|

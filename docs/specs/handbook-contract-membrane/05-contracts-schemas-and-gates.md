@@ -3990,10 +3990,14 @@ The target owner matrix is exact:
 
 The workspace dependency graph is acyclic. Owner crates never depend on `handbook-sdk`; no Handbook crate depends on Substrate; `handbook-contracts` never depends on pipeline; transports never become semantic owners. `handbook-compiler` is not in the target graph. HCM-4.1 retires it after moving ordinary composition to SDK, executable-shell behavior to CLI, and already-owned behavior to its owner crate.
 
-HCM-4.1 currently plans and inventories that future SDK coordinator only. It
-does not create the SDK crate, expose a public Rust API or DTO, alter a
-transport, or make the private owner path reachable; each effect requires a
-fresh HCM-4.1 implementation authority and its real-path proof.
+The exact HCM-4.1 operator continuation waiver at
+`slices/HCM-4.1/authority/20260810T160702Z--hcm-4-1-operator-no-v1-4-waiver.md`
+admits a bounded implementation: a direct typed Rust posture method and its
+owner facade may become reachable by Rust linkage after real-path proof. That
+exception does not create a canonical operation-definition, capability
+descriptor, bootstrap closure, shared Serde/JSON DTO, generated schema, CLI
+JSON parity, or Tauri transport. `posture.transition.apply@1.0.0` remains
+absent from discovery until HCM-4.2 supplies those exact later boundaries.
 
 HCM-0.4 selects `handbook-contracts` as the contract-membrane owner but does not preempt HCM-0.5 semantics. HCM-0.5 freezes the exact contract/dock types and appends their ordinary operation definitions. Process-dock implementation crates stay separable and are named only in their implementation packet.
 

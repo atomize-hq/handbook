@@ -5,19 +5,23 @@
 ## Decision
 
 HCM-4.1 may create and independently review its implementation-admission
-selector while Phase 3 remains open. Only if that selector is `CLEAN` may the
-exact selected SDK ordinary-use-case implementation proceed before Phase-3
-closeout, because a genuine SDK caller is needed to complete the private
-HCM-3.6 posture-transition reachability seam.
+selector while Phase 3 remains open. The immutable original selector was not
+`CLEAN`; the explicit human continuation waiver in
+`slices/HCM-4.1/authority/20260810T160702Z--hcm-4-1-operator-no-v1-4-waiver.md`
+allows the exact selected SDK sequence without invoking v1.4 process
+machinery. Every retained product, proof, independent-review, and Phase-3
+limit remains mandatory because a genuine SDK caller is needed to complete the
+private HCM-3.6 posture-transition reachability seam.
 
 ## Preserved limits
 
 - Phase 3, HCM-3.6, `HCM3EXIT-P2-CLIPPY-001`, and HCM-3.5 P5/P6 remain open.
 - The exception grants no phase exit, public transport/schema work, HCM-4.2+,
   Phase 5/6, release, publication, push, Substrate, or Tauri authority.
-- A selector that cannot map every retained normal CLI route to admitted SDK
-  composition without an unplanned compatibility decision must stop before
-  product edits.
+- The operator-selected route disposition is preservation: Setup, Author,
+  Approvers, Artifact, Pipeline, Generate, Inspect, and Doctor remain normal
+  routes and migrate one at a time to SDK composition with unchanged
+  user-visible behavior. No route is refused, removed, or made posture ingress.
 - A later Phase-3 closeout must consume real SDK production-adoption evidence
   and independently rerun strict Clippy, regression, causal-review, and exit
   gates.

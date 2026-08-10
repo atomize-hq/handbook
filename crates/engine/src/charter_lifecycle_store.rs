@@ -2480,10 +2480,8 @@ mod posture_rebase_v11_retention_tests {
             authority_transition: content_pair("posture-transitions/posture-transition", 'c'),
             reassessment: PostureReassessmentV1 {
                 intake_definition: PairV1 {
-                    reference: "handbook.intake.charter@1.0.0".to_owned(),
-                    fingerprint:
-                        "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
-                            .to_owned(),
+                    reference: format!("intake-records/intake_{}.json", "a".repeat(64)),
+                    fingerprint: fingerprint('a'),
                 },
                 affected_coverage_ids: vec!["engineering_posture.dimensions".to_owned()],
                 validation_result_inputs: vec![PairV1 {

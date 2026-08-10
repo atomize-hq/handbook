@@ -100,11 +100,10 @@ fn change() -> PostureChangeV1 {
 
 fn reassessment() -> PostureReassessmentV1 {
     PostureReassessmentV1 {
-        intake_definition: PairV1 {
-            reference: "handbook.intake.charter@1.0.0".to_owned(),
-            fingerprint: "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c"
-                .to_owned(),
-        },
+        intake_definition: pair(
+            &format!("intake-records/intake_{}.json", "a".repeat(64)),
+            'a',
+        ),
         affected_coverage_ids: vec!["engineering_posture.dimensions".to_owned()],
         validation_result_inputs: vec![pair("validation-results/example", 'd')],
     }
@@ -147,6 +146,7 @@ fn kernel_replay(old: &CanonicalDocumentV1, new: &CanonicalDocumentV1) -> Kernel
 fn posture_draft(old: &CanonicalDocumentV1, new: &CanonicalDocumentV1) -> PostureTransitionDraftV1 {
     PostureTransitionDraftV1 {
         recommendation: pair("recommendations/example", '2'),
+        repository_identity: pair(".handbook/repository-identity.v1", '1'),
         source_kernel: pair("project-posture-kernels/example", '3'),
         evaluation_policy: pair("posture-policies/example", '4'),
         prior_authority_head: authority_head(old),
@@ -268,6 +268,7 @@ fn live_record_bundle(
     };
     let posture = construct_posture_transition_v1(PostureTransitionDraftV1 {
         recommendation: pair("recommendations/example", '2'),
+        repository_identity: pair(".handbook/repository-identity.v1", '1'),
         source_kernel: PairV1 {
             reference: "project-posture-kernels/source".to_owned(),
             fingerprint: source_kernel.kernel_fingerprint,

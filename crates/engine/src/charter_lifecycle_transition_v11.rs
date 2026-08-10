@@ -10,7 +10,6 @@ use crate::charter_posture_transaction_intent_v1::{
 };
 use crate::DefinitionFingerprint;
 use serde::{Deserialize, Serialize};
-use sha2::{Digest, Sha256};
 
 const LIFECYCLE_POLICY_REF: &str = "handbook.lifecycle.constitutional-review-lock@1.0.0";
 const LIFECYCLE_POLICY_FINGERPRINT: &str =
@@ -166,10 +165,6 @@ pub(crate) fn lifecycle_transition_output_record_v11(
         document_sha256: DefinitionFingerprint::from_bytes(&transition.raw_bytes).to_string(),
         byte_length: transition.raw_bytes.len() as u64,
     }
-}
-
-pub(crate) fn lifecycle_transition_marker_v11(record_bytes: &[u8]) -> Vec<u8> {
-    format!("sha256:{:x}\n", Sha256::digest(record_bytes)).into_bytes()
 }
 
 fn validate_lifecycle_transition_record_v11(

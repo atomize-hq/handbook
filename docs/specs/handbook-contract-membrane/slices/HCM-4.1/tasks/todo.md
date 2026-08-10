@@ -9,8 +9,11 @@
   returned P1 HCM41-IA-01 (missing retained-route compatibility map) and P2
   HCM41-IA-02 (missing operation-definition/schema/bootstrap authority), so
   record the authority-boundary true stop.
-- [ ] Do not create `handbook-sdk`, alter Cargo, expose the posture bridge, or
-  cut over CLI/compiler composition until the implementation selector is CLEAN.
+- [x] Preserve the immutable non-CLEAN selector and authority stop, then record
+  the exact human continuation waiver without rewriting predecessor history.
+- [ ] Implement and directly independently review the five implementation
+  packets followed by aggregate proof and closeout in `tasks/plan.md`, including
+  route-by-route parity and compiler deletion proof.
 
 ## Planning/control package
 
@@ -24,17 +27,16 @@
   ordinary-consumer ingress requirements without adding a public surface.
 - [x] Inventory the ordinary catalog, future packet order, compatibility
   posture, no-fallback cutover, proof, risk, and stop conditions.
-- [ ] Validate the frozen planning subject and run a fresh discovery review.
-- [ ] Consolidate any valid P1/P2 remediation and obtain a different-fresh
-  closure review; do not run a review after CLEAN.
-- [ ] Commit reviewed primary documentation, then create the parent v1.4
-  handoff/ledger closeout in a separate mechanical commit and publish locally
-  with expected-old compare-and-swap only.
+- [ ] Obtain a fresh direct independent review for each material implementation
+  subject and repair every valid P1/P2 before publication.
+- [ ] Commit the reviewed implementation/control-pack state and publish it
+  locally with expected-old compare-and-swap only; do not push.
 
 ## Explicitly deferred
 
-- [ ] A fresh HCM-4.1 implementation selector must create any SDK crate,
-  public engine bridge, Cargo edge, compiler/CLI cutover, or test.
+- [ ] Complete the operator-authorized SDK crate, public engine bridge, Cargo
+  edge, compiler/CLI cutover, and tests under the no-v1.4 waiver while
+  retaining the product and proof boundaries.
 - [ ] HCM-4.2+ DTO/schema/CLI/Tauri work, HCM-3.5 Packet 5/6, Phase 5, package
   publication, and Substrate adoption remain later separately selected work.
 - [ ] HCM-3.6 and the strict-Clippy residual P2 remain open until a real

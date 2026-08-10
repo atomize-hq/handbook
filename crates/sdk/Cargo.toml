@@ -1,0 +1,23 @@
+[package]
+name = "handbook-sdk"
+version = "0.1.0"
+edition = "2021"
+description = "Direct typed Rust SDK for Handbook semantic owners."
+repository = "https://github.com/atomize-hq/system.git"
+documentation = "https://docs.rs/handbook-sdk"
+homepage = "https://github.com/atomize-hq/system.git"
+license = "MIT"
+
+[lib]
+name = "handbook_sdk"
+path = "src/lib.rs"
+
+[dependencies]
+handbook-engine = { path = "../engine", version = "0.2.0" }
+
+[dev-dependencies]
+handbook-engine = { path = "../engine", version = "0.2.0", features = ["test-support"] }
+p256 = { version = "0.13.2", default-features = false, features = ["ecdsa"] }
+serde_json = "1"
+sha2 = "0.10"
+tempfile = "3"

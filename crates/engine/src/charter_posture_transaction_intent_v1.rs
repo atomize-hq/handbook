@@ -13,9 +13,7 @@ pub(crate) const MAX_POSTURE_RECORD_BYTES_V1: usize = 262_144;
 pub(crate) const MAX_POSTURE_CANONICAL_BYTES_V1: u64 = 1_048_576;
 
 const CANONICAL_CHARTER_REF: &str = ".handbook/project/charter.yaml";
-const INTAKE_DEFINITION_REF: &str = "handbook.intake.charter@1.0.0";
-const INTAKE_DEFINITION_FINGERPRINT: &str =
-    "sha256:a92229722f25119c7d91137e1feef4ce51b88ae766ce308b585d37f39eb52d1c";
+const REPOSITORY_IDENTITY_REPO_PATH: &str = ".handbook/repository-identity.v1";
 const DIMENSION_BINDINGS: [(&str, &str); 9] = [
     (
         "speed_vs_quality",
@@ -185,6 +183,7 @@ pub(crate) struct PostureTransitionRecordV1 {
     pub(crate) schema_version: String,
     pub(crate) transition_id: String,
     pub(crate) recommendation: PairV1,
+    pub(crate) repository_identity: PairV1,
     pub(crate) source_kernel: PairV1,
     pub(crate) evaluation_policy: PairV1,
     pub(crate) target_authority_ref: String,
@@ -206,6 +205,7 @@ pub(crate) struct PostureTransitionRecordV1 {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub(crate) struct PostureTransitionDraftV1 {
     pub(crate) recommendation: PairV1,
+    pub(crate) repository_identity: PairV1,
     pub(crate) source_kernel: PairV1,
     pub(crate) evaluation_policy: PairV1,
     pub(crate) prior_authority_head: AuthorityHeadV1,
@@ -230,6 +230,7 @@ pub(crate) struct ValidatedPostureTransitionV1 {
 #[serde(deny_unknown_fields)]
 pub(crate) struct PostureAuthorityInputsV1 {
     pub(crate) recommendation: PairV1,
+    pub(crate) repository_identity: PairV1,
     pub(crate) source_kernel: PairV1,
     pub(crate) evaluation_policy: PairV1,
     pub(crate) approval_inputs: Vec<PairV1>,
@@ -294,6 +295,7 @@ pub(crate) fn construct_posture_transition_v1(
         schema_version: "1.0".to_owned(),
         transition_id: String::new(),
         recommendation: draft.recommendation,
+        repository_identity: draft.repository_identity,
         source_kernel: draft.source_kernel,
         evaluation_policy: draft.evaluation_policy,
         target_authority_ref: CANONICAL_CHARTER_REF.to_owned(),
@@ -357,6 +359,7 @@ pub(crate) fn posture_transition_output_record_v1(
     }
 }
 
+#[cfg(test)]
 pub(crate) fn posture_transition_marker_v1(record_bytes: &[u8]) -> Vec<u8> {
     format!("sha256:{:x}\n", Sha256::digest(record_bytes)).into_bytes()
 }
@@ -376,6 +379,7 @@ pub(crate) fn parse_posture_transaction_intent_v1(
     })
 }
 
+#[cfg(test)]
 pub(crate) fn construct_posture_transaction_intent_v1<F>(
     posture: &ValidatedPostureTransitionV1,
     lifecycle: &ValidatedLifecycleTransitionV11,
@@ -386,6 +390,23 @@ pub(crate) fn construct_posture_transaction_intent_v1<F>(
 where
     F: FnMut(&str) -> bool,
 {
+    let transaction_id = allocate_transaction_id_v1(&mut transaction_id_available)?;
+    construct_posture_transaction_intent_with_id_v1(
+        posture,
+        lifecycle,
+        old_canonical_bytes,
+        new_canonical_bytes,
+        transaction_id,
+    )
+}
+
+pub(crate) fn construct_posture_transaction_intent_with_id_v1(
+    posture: &ValidatedPostureTransitionV1,
+    lifecycle: &ValidatedLifecycleTransitionV11,
+    old_canonical_bytes: &[u8],
+    new_canonical_bytes: &[u8],
+    transaction_id: String,
+) -> Result<ValidatedPostureTransactionIntentV1, PostureRecordValidationErrorV1> {
     validate_lifecycle_transition_bindings_v11(lifecycle, posture)?;
     validate_exact_canonical_bytes_v1(
         old_canonical_bytes,
@@ -401,13 +422,14 @@ where
     let record = PostureTransactionIntentV1 {
         schema_id: "handbook.charter-posture-transaction-intent".to_owned(),
         schema_version: "1.0".to_owned(),
-        transaction_id: allocate_transaction_id_v1(&mut transaction_id_available)?,
+        transaction_id,
         mutation_mode: "single_dimension_level_override_replace".to_owned(),
         basis_head: posture.record.prior_authority_head.clone(),
         expected_canonical: posture.record.expected_canonical.clone(),
         change: posture.record.change.clone(),
         authority_inputs: PostureAuthorityInputsV1 {
             recommendation: posture.record.recommendation.clone(),
+            repository_identity: posture.record.repository_identity.clone(),
             source_kernel: posture.record.source_kernel.clone(),
             evaluation_policy: posture.record.evaluation_policy.clone(),
             approval_inputs: posture.record.approval_inputs.clone(),
@@ -675,6 +697,7 @@ fn validate_posture_transition_record_v1(
         "posture transition ID",
     )?;
     validate_pair_v1(&record.recommendation, "posture recommendation")?;
+    validate_repository_identity_v1(&record.repository_identity)?;
     validate_pair_v1(&record.source_kernel, "posture source kernel")?;
     validate_pair_v1(&record.evaluation_policy, "posture evaluation policy")?;
     validate_authority_head_v1(&record.prior_authority_head)?;
@@ -797,6 +820,7 @@ fn validate_authority_inputs_v1(
     value: &PostureAuthorityInputsV1,
 ) -> Result<(), PostureRecordValidationErrorV1> {
     validate_pair_v1(&value.recommendation, "intent recommendation")?;
+    validate_repository_identity_v1(&value.repository_identity)?;
     validate_pair_v1(&value.source_kernel, "intent source kernel")?;
     validate_pair_v1(&value.evaluation_policy, "intent evaluation policy")?;
     validate_sorted_pairs_v1(&value.approval_inputs, 1, 16, "intent approval inputs")?;
@@ -886,19 +910,28 @@ fn validate_change_v1(value: &PostureChangeV1) -> Result<(), PostureRecordValida
 pub(crate) fn validate_reassessment_v1(
     value: &PostureReassessmentV1,
 ) -> Result<(), PostureRecordValidationErrorV1> {
-    if value.intake_definition.reference != INTAKE_DEFINITION_REF
-        || value.intake_definition.fingerprint != INTAKE_DEFINITION_FINGERPRINT
-        || value.affected_coverage_ids != ["engineering_posture.dimensions"]
-    {
-        return Err(invalid("posture reassessment constants are invalid"));
+    if value.affected_coverage_ids != ["engineering_posture.dimensions"] {
+        return Err(invalid("posture reassessment coverage is invalid"));
     }
-    validate_pair_v1(&value.intake_definition, "posture intake definition")?;
+    validate_content_ref_v1(
+        &value.intake_definition,
+        "intake-records/intake_",
+        ".json",
+        "posture reassessment intake record",
+    )?;
     validate_sorted_pairs_v1(
         &value.validation_result_inputs,
         1,
         16,
         "posture validation result inputs",
     )
+}
+
+fn validate_repository_identity_v1(value: &PairV1) -> Result<(), PostureRecordValidationErrorV1> {
+    if value.reference != REPOSITORY_IDENTITY_REPO_PATH {
+        return Err(invalid("posture repository identity reference is invalid"));
+    }
+    validate_pair_v1(value, "posture repository identity")
 }
 
 fn validate_kernel_replay_v1(
@@ -1098,6 +1131,7 @@ fn validate_transaction_id_v1(value: &str) -> Result<(), PostureRecordValidation
     Ok(())
 }
 
+#[cfg(test)]
 fn allocate_transaction_id_v1<F>(
     transaction_id_available: &mut F,
 ) -> Result<String, PostureRecordValidationErrorV1>

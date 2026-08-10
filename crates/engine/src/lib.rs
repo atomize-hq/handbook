@@ -46,6 +46,7 @@ pub mod definition_identity;
 pub mod environment_context_artifact;
 pub mod freshness;
 pub mod instance_profile;
+mod posture_transition_facade;
 mod profile_builtins;
 pub mod profile_decision;
 pub mod profile_inspection;
@@ -136,6 +137,9 @@ pub use charter_authenticator::{
     NativeAuthenticatorPortV1, AUTHENTICATOR_RP_ID, CTAP_GET_ASSERTION_COMMAND,
     CTAP_MAKE_CREDENTIAL_COMMAND, MAX_ALLOW_LIST_ITEMS, MAX_CREDENTIAL_ID_BYTES,
 };
+#[cfg(feature = "test-support")]
+#[doc(hidden)]
+pub use charter_authority_transaction::PostureTransitionFaultInjectionGuardV1;
 pub use charter_authority_transaction::{
     CharterAuthorityTransactionServiceV1, CharterPromotionCommitV1, CharterPromotionErrorKindV1,
     CharterPromotionErrorV1, CommittedCharterAuthorityV1,
@@ -227,6 +231,12 @@ pub use instance_profile::{
     DefinitionSourceBinding, InstanceProfileDefinition, LayerDisposition, LayeredProfile,
     ProfileField, ProfileLayerDecision, ProfileLoadError, ProfileLoadErrorKind, ProfileScope,
     ProfileSelectionRequest, SymbolicId,
+};
+pub use posture_transition_facade::{
+    PostureCanonicalBindingV1, PostureDimensionChangeRequestV1, PostureReferenceV1,
+    PostureTransitionApplyRequestV1, PostureTransitionApplyResultV1,
+    PostureTransitionBlockedCodeV1, PostureTransitionEngineFacadeV1, PostureTransitionErrorCodeV1,
+    PostureTransitionReceiptV1, PostureTransitionRefusalCodeV1,
 };
 pub use profile_decision::{
     resolve_shipped_profile_decisions, ArtifactApplicability, ArtifactProfileDecision,
