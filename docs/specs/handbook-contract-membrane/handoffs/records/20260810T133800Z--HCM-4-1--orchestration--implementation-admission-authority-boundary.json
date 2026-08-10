@@ -1,0 +1,391 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260810T133800Z--HCM-4-1--orchestration--implementation-admission-authority-boundary",
+  "created_at_utc": "2026-08-10T13:38:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-4",
+  "slice_id": "HCM-4.1",
+  "packet_id": "HCM-4.1-IMPLEMENTATION-ADMISSION",
+  "orchestration_id": "handbook-hcm-4-1-implementation-20260810",
+  "source_handoff_ids": [
+    "20260810T012500Z--HCM-4-1--orchestration--sdk-owner-use-case-planning-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019febcb-566f-77c1-b736-fad8ed53d4d5"
+  },
+  "status": "escalation_required",
+  "stop_reason": "authority_boundary",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-10T13:30:00Z",
+    "evidence_ref": "Fresh built-in reviewer /root/hcm41_selector_review completed the schema-valid v1.4 discovery dispatch in read-only mode."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm41_implementation_admission_discovery_review",
+      "dispatch_id": "20260810T133000Z--HCM-4-1--implementation-admission-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260810T133000Z--HCM-4-1--implementation-admission-discovery-review.json",
+      "dispatch_fingerprint": "sha256:fade19678f1cbc9c465bbad45b1796a648d95b67778be1f0e78324f938065911",
+      "role": "review",
+      "agent_id": "/root/hcm41_selector_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:a557299036256e8c4ade786de08e8e8ea99c8748f4f40eeec58cc8bf5328dcef",
+      "result_subject_fingerprint": "sha256:a557299036256e8c4ade786de08e8e8ea99c8748f4f40eeec58cc8bf5328dcef",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "findings",
+      "finding_refs": [
+        "HCM41-IA-01",
+        "HCM41-IA-02"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260810T133000Z--HCM-4-1--implementation-admission-discovery-review.json",
+        "Fresh reviewer found P1 HCM41-IA-01 and P2 HCM41-IA-02; no remediation may choose the missing product/compatibility authority."
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-10T13:38:00Z",
+    "dispatch_count": 1,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:d19143c5f3ffe09eb511f3a2e03024d1c7714ff9c7290b0378b2e7a3cea12d21"
+    ],
+    "aggregate_fingerprint": "sha256:bacb926efa220795be295ec0e5c5695d40170bc32e19e4c9c0c6982c3629c576"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "22f8a583b7b81b05b92eb10856138bd35982a58b",
+    "subject_fingerprint": "sha256:a557299036256e8c4ade786de08e8e8ea99c8748f4f40eeec58cc8bf5328dcef",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260810T133000Z--HCM-4-1--implementation-admission-discovery-review.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md",
+      "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260810T132347Z--hcm-4-1-implementation-dependency-order-exception.md",
+      "git:22f8a583b7b81b05b92eb10856138bd35982a58b"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-4.1 implementation-admission authority-boundary stop",
+    "scope_horizon": "the selected SDK ordinary-use-case, real posture ingress, compiler retirement, and CLI composition outcome only",
+    "detail_resolution": "The selector safely freezes a typed SDK candidate and private engine bridge, but it cannot admit a public ordinary operation or retire the compiler without choosing missing operation/schema/bootstrap and normal-CLI route compatibility facts.",
+    "temporal_horizon": "Discovery review completed with P1/P2 before any Rust, Cargo, owner, compiler, CLI, test, schema, transport, or gate edit. No remediation is admissible because both material findings require a new authority decision.",
+    "authority_horizon": "This stop grants no SDK crate, Cargo edge, public DTO/schema, owner bridge, compiler retirement, CLI behavior change, HCM-4.2+, Phase 5/6, Phase-3 exit, release, publication, or remote action.",
+    "memory_horizon": "The bound nonce/task/host, exact completed planning handoff, selector, Phase-3-open exception, frozen dispatch population, review findings, primary commit, and protected-path proof remain mandatory same-slice context.",
+    "validation_horizon": "A fresh top-level same-slice resumption requires an exact authority-bounded retained-route map plus an operation-definition/schema/bootstrap decision, then repeats selector, impact, review, and proof gates before product edits."
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Implement exactly HCM-4.1 from the completed planning package: add the transport-free typed SDK facade, establish the real private-owner posture ordinary ingress, and complete the compiler/CLI composition cutover without changing Phase 3, HCM-3.6, HCM-3.5 P5/P6, later HCM-4 packets, transports, publication, or remote state.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260810T012500Z--HCM-4-1--orchestration--sdk-owner-use-case-planning-completed.json",
+      "sections": ["entire completed planning handoff"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md",
+      "sections": ["entire selector", "Independent review disposition"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260810T132347Z--hcm-4-1-implementation-dependency-order-exception.md",
+      "sections": ["entire exception"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": ["HCM-4"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": ["SDK ordinary-use-case contract", "Capability discovery and schema pins"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": ["Fresh review / remediation loop", "True-stop handoff"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": ["Causal review cadence", "Resolution escalation record", "Deterministic ledger rebuild"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": ["Review priority rubric"]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 22f8a583b7b81b05b92eb10856138bd35982a58b",
+    "head": "22f8a583b7b81b05b92eb10856138bd35982a58b",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260810T133800Z--HCM-4-1--orchestration--implementation-admission-authority-boundary.json"
+    ]
+  },
+  "work_completed": [
+    "Bound increment task 019febcb-566f-77c1-b736-fad8ed53d4d5, host local, meta workflow handbook-hcm-4-1-implementation-20260810, and nonce bd27738ab78de09e9279a65b00b41c63538f8d86ffa30f29a110b0b325ec8075 before repository work.",
+    "Verified the assigned checkout, detached HEAD, local integration ref, expected base/tree, required ancestor, remote baseline, cleanliness, worktree ownership, and protected-path baselines before editing. The exact base was 36524894aa6060150d78f50e9fa87275c1a99e7d with tree 2cc2c7180725c4ae1d3dc4eff7da91f6f4dc74cf; the remote baseline was origin/feat/handbook-contract-membrane at 1256e724a2b7da6b6250f57d6f63fced1e2cf949.",
+    "Created a fresh HCM-4.1 implementation selector and HCM-4.1-only Phase-3-open dependency-order exception, plus a schema-valid v1.4 fresh discovery-review dispatch.",
+    "Used local GitNexus exact context and upstream impacts before any potential existing-symbol edit. recover_pending_locked is CRITICAL with 24 upstream dependents across approval/finalization processes and was not edited; no existing product symbol was modified.",
+    "Fresh reviewer /root/hcm41_selector_review returned P1 HCM41-IA-01 and P2 HCM41-IA-02. The reviewed selector and true-stop control state were committed at 22f8a583b7b81b05b92eb10856138bd35982a58b. No Rust, Cargo, test, owner, bridge, compiler, CLI, schema, transport, gate, protected-path, integration-ref, remote, merge, rebase, reset, clean, force-update, fetch, pull, push, or publication change occurred."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md",
+      "status": "completed",
+      "summary": "Fresh selector freezes the candidate boundary and records the independent non-CLEAN admission result and exact resume authority."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260810T132347Z--hcm-4-1-implementation-dependency-order-exception.md",
+      "status": "completed",
+      "summary": "HCM-4.1-only ordering exception preserves all Phase-3 and predecessor gates and blocks unbounded CLI cutover."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260810T133000Z--HCM-4-1--implementation-admission-discovery-review.json",
+      "status": "completed",
+      "summary": "Validated immutable v1.4 discovery dispatch for the fresh independent review."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260810T133800Z--HCM-4-1--orchestration--implementation-admission-authority-boundary.json",
+      "status": "blocked",
+      "summary": "Parent-owned authority-bound true stop for the unresolved CLI compatibility and operation/schema/bootstrap decisions."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM41-IA-D1",
+      "summary": "Do not create handbook-sdk or retire compiler/CLI composition: the current authority does not decide the required retained-route compatibility map or the public operation-definition/schema/bootstrap boundary.",
+      "authority_effect": "none",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md",
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260810T133000Z--HCM-4-1--implementation-admission-discovery-review.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM41-IA-01",
+      "classification": "resolution_escalation",
+      "severity": "critical",
+      "priority": "P1",
+      "status": "open",
+      "source_run_id": "hcm41_implementation_admission_discovery_review",
+      "summary": "The eight current normal CLI routes lack an authority-bounded compatibility disposition. Required compiler retirement would force an unplanned decision to preserve, refuse, remove, or add an SDK operation for a route.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md",
+        "crates/cli/src/main.rs",
+        "crates/cli/Cargo.toml"
+      ]
+    },
+    {
+      "finding_id": "HCM41-IA-02",
+      "classification": "resolution_escalation",
+      "severity": "major",
+      "priority": "P2",
+      "status": "open",
+      "source_run_id": "hcm41_implementation_admission_discovery_review",
+      "summary": "The candidate posture capability cannot be honestly discoverable under the slice's no-schema/no-DTO ceiling because canonical capability discovery requires exact operation-definition, typed schema, and bootstrap bindings.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "HCM41-CLI-COMPATIBILITY-AUTHORITY",
+      "classification": "authority",
+      "summary": "The exact retained-route disposition for Setup, Author, Approvers, Artifact, Pipeline, Generate, Inspect, and Doctor is not authorized, yet completion requires no normal CLI compiler path or SDK bypass.",
+      "resume_condition": "An authorized same-slice selector supplies an exact disposition for each existing normal CLI route and any resulting bounded SDK method/compatibility proof.",
+      "owner": "user / authorized product authority"
+    },
+    {
+      "blocker_id": "HCM41-OPERATION-SCHEMA-BOOTSTRAP-AUTHORITY",
+      "classification": "authority",
+      "summary": "The exact operation-definition/schema/bootstrap contract required for discoverable posture.transition.apply is not selected while HCM-4.2+ schema work is excluded.",
+      "resume_condition": "An authorized same-slice selector either names the exact bounded operation-definition/schema/bootstrap surface or explicitly changes the implementation objective without claiming a public production ingress.",
+      "owner": "user / authorized product authority"
+    }
+  ],
+  "escalations": [
+    {
+      "escalation_id": "HCM41-IMPLEMENTATION-ADMISSION-ESC-001",
+      "trigger": "Fresh discovery review returned P1 HCM41-IA-01 and P2 HCM41-IA-02 before any product edit.",
+      "current_resolution": "The selector protects the correct SDK-owner and private-record boundaries, but it cannot become CLEAN because compiler retirement and capability discovery each force an unselected product compatibility/public-boundary decision.",
+      "target_resolution": "A new reviewed HCM-4.1 implementation authority freezes the exact retained CLI-route disposition and the exact posture operation-definition/schema/bootstrap boundary before any SDK, Cargo, owner, compiler, or CLI edit.",
+      "decision_required": "For every existing normal CLI route, state preserve/refuse/remove/replace behavior and the exact permitted SDK method or retained shell behavior. State the exact operation definition, typed public schema/value boundary, capability descriptor, and bootstrap version/pin needed for posture.transition.apply, or explicitly defer that operation and revise the objective.",
+      "options": [
+        "Option 1: authorize a complete retained-route map and the bounded posture operation/schema/bootstrap surface under a fresh HCM-4.1 selector.",
+        "Option 2: authorize a narrower non-public SDK skeleton objective and remove the promised ordinary posture ingress/compiler cutover from this increment.",
+        "Option 3: retain the authority stop with no HCM-4.1 product implementation."
+      ],
+      "recommendation": "Option 1 only if the map and public-boundary decisions are explicit; otherwise retain Option 3. Option 2 changes the contracted outcome and therefore also needs explicit authority.",
+      "affected_refs": [
+        "crates/cli/src/main.rs",
+        "crates/cli/Cargo.toml",
+        "crates/compiler/src/lib.rs",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ],
+      "preserve_current_work": true,
+      "resume_condition": "A fresh top-level same-slice task validates the new exact authority, repeats base/ref/protected-path preflight and existing-symbol GitNexus impact, and obtains a CLEAN implementation selector before any product edit."
+    }
+  ],
+  "validation": [
+    {
+      "command": "assigned checkout/ref/base/tree/ancestor/worktree/cleanliness/protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Assigned root was C:/Users/spmcc/.codex/worktrees/4c4f/handbook; HEAD and refs/heads/orchestration/handbook-hcm-4-1-implementation-20260810T130717Z equaled 36524894aa6060150d78f50e9fa87275c1a99e7d with tree 2cc2c7180725c4ae1d3dc4eff7da91f6f4dc74cf; required ancestor and origin/feat/handbook-contract-membrane baseline 1256e724a2b7da6b6250f57d6f63fced1e2cf949 were exact."
+    },
+    {
+      "command": "v1.4 discovery dispatch verification",
+      "status": "passed",
+      "evidence_ref": "validate_handoffs.py --verify-dispatch passed for 20260810T133000Z--HCM-4-1--implementation-admission-discovery-review with subject fingerprint sha256:a557299036256e8c4ade786de08e8e8ea99c8748f4f40eeec58cc8bf5328dcef."
+    },
+    {
+      "command": "fresh independent implementation-admission discovery review",
+      "status": "passed",
+      "evidence_ref": "Fresh reviewer /root/hcm41_selector_review returned findings P1 HCM41-IA-01 and P2 HCM41-IA-02; no in-scope remediation could satisfy them."
+    },
+    {
+      "command": "GitNexus context and upstream impact",
+      "status": "passed",
+      "evidence_ref": "Local GitNexus index is current at 36524894aa6060150d78f50e9fa87275c1a99e7d. recover_pending_locked impact was CRITICAL (24 upstream dependents, including approve_inner and finalize) and was not edited; apply_posture_transition was LOW."
+    },
+    {
+      "command": "GitNexus FTS query",
+      "status": "blocked",
+      "evidence_ref": "FTS extension was unavailable under load-only policy. It was recorded unavailable, never GREEN; direct context/impact remained available."
+    },
+    {
+      "command": "cargo fmt --all -- --check and git diff --check",
+      "status": "passed",
+      "evidence_ref": "Both checks passed before primary commit; this true stop changes no Rust source."
+    },
+    {
+      "command": "GitNexus scoped and compare-to-main change detection",
+      "status": "passed",
+      "evidence_ref": "Scoped detection reported 4 documentation files, 7 symbols, 0 affected processes, LOW risk. Compare-to-main was available but reported 1,622 historical divergent files, 12,357 symbols, and 266 processes at CRITICAL; it is not an HCM-4.1 source-change claim."
+    },
+    {
+      "command": "product build, test, and clippy proof wall",
+      "status": "not_run",
+      "evidence_ref": "No Rust, Cargo, product test, SDK, owner bridge, compiler, or CLI change was admitted; implementation proof would be outside the authority-bound true stop."
+    },
+    {
+      "command": "full current handoff and ledger validation",
+      "status": "blocked",
+      "evidence_ref": "validate_handoffs.py reached the pre-existing immutable predecessor 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning and failed: continuation writes or advances before selector CLEAN. This unrelated historical lineage contradiction is preserved and is not reported green."
+    },
+    {
+      "command": "v1.4 historical-admission self-test",
+      "status": "passed",
+      "evidence_ref": "validate_handoffs.py --self-test-v1-admission passed all immutable-record, legacy-dispatch, current-sentinel, and exact-ledger-rebuild rejection scenarios."
+    },
+    {
+      "command": "v1.4 orchestration-contract self-test",
+      "status": "passed",
+      "evidence_ref": "validate_handoffs.py --self-test-orchestration-contract passed causal-cadence, clean-review, inventory, lineage, two-commit, and true-stop contract scenarios."
+    },
+    {
+      "command": "deterministic ledger rebuild and exact parity",
+      "status": "passed",
+      "evidence_ref": "Rebuilt ledger.jsonl from all 109 canonical records using the required compact JSON ordering and verified exact bytes against the validator's expected ledger entries."
+    },
+    {
+      "command": "GitNexus mechanical closeout change detection",
+      "status": "passed",
+      "evidence_ref": "Scoped detection after the handoff/ledger-only closeout reported No changes detected because no indexed product symbol changed. Compare-to-main remained available and showed 1,625 historical divergent files at CRITICAL; FTS was unavailable and neither condition was treated as GREEN product evidence."
+    },
+    {
+      "command": "protected-boundary and local-only publication audit",
+      "status": "passed",
+      "evidence_ref": "No protected path was changed; no remote contact, fetch, pull, push, publish, merge, rebase, reset, clean, force-update, or integration-ref update occurred. The target ref remains at its expected base because this increment did not complete."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/SPEC.md",
+      "sections": ["Status", "Objective"],
+      "reason": "Records the non-CLEAN implementation admission result without promoting any runtime or later phase.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/tasks/todo.md",
+      "sections": ["Implementation admission"],
+      "reason": "Records the exact P1/P2 authority stop and preserves the no-product-edit condition.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "top_level_resume",
+    "objective": "Resume only HCM-4.1 implementation admission after an authorized resolution of the retained CLI-route compatibility map and posture operation-definition/schema/bootstrap boundary.",
+    "condition": "The user or authorized product authority provides a fresh reviewed same-slice selector that freezes both material decisions and confirms all other boundaries from this true stop remain unchanged.",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260810T133800Z--HCM-4-1--orchestration--implementation-admission-authority-boundary.json",
+        "sections": ["entire true-stop handoff"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T132347Z--hcm-4-1-implementation-admission-selector.md",
+        "sections": ["Independent review disposition", "Admission proof and unresolved compatibility question"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260810T012500Z--HCM-4-1--orchestration--sdk-owner-use-case-planning-completed.json",
+        "sections": ["entire completed planning handoff"]
+      }
+    ],
+    "allowed_scope": [
+      "Read-only same-slice authority adjudication until a new selector is validated.",
+      "After new authority, only the exact selected SDK/Cargo/owner/CLI/compiler/proof surface and mandatory impact/review sequence."
+    ],
+    "prohibited_scope": [
+      "Do not infer or silently choose a CLI compatibility disposition, public operation definition, schema/DTO/transport representation, capability bootstrap pin, or replacement objective from this stop.",
+      "Do not modify protected paths, integration refs, Phase 3, HCM-3.6, HCM-3.5 P5/P6, HCM-4.2+, Phase 5/6, Tauri, Substrate, release, publication, or any remote state.",
+      "Do not create handbook-sdk, alter Cargo, expose a private durable record, route posture through a forbidden caller, or cut over compiler/CLI until the fresh selector is CLEAN."
+    ],
+    "acceptance_criteria": [
+      "Each current normal CLI route has an exact preserve/refuse/remove/replace disposition, a bounded SDK method or retained shell behavior, and compatibility proof obligations.",
+      "The authority names the exact posture operation-definition, typed public boundary, descriptor/schema binding, capability discovery/bootstrap version/pin, and whether any HCM-4.2+ work is expressly included or remains deferred.",
+      "A fresh task repeats preflight and all required GitNexus impacts, obtains CLEAN selector review, then follows the HCM-4.1 packet, proof, and causal-review cadence without widening scope."
+    ],
+    "stop_conditions": [
+      "Stop again on any missing route decision, unbounded public/compatibility/schema choice, new dependency/semantic owner, unavailable required native proof, protected-path drift, or review P1/P2.",
+      "Do not update the dedicated integration ref unless a later complete HCM-4.1 closeout passes its local expected-old compare-and-swap."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-4.1 stopped before product edits. A fresh reviewer found a P1: compiler retirement would force unapproved compatibility choices for eight normal CLI routes, and a P2: discoverable posture.transition.apply needs operation/schema/bootstrap authority excluded by this slice. The selector, Phase-3-open exception, review dispatch, and authority stop are preserved; no SDK, Cargo, engine, compiler, CLI, test, integration-ref, or remote change occurred."
+}
