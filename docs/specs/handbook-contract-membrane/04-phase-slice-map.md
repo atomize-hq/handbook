@@ -623,30 +623,25 @@ separately authorized.
 
 **Purpose:** establish one ordinary-consumer facade and make every product transport thin.
 
-Phase 3 remains open. The narrowly scoped HCM-4.1 planning exception recorded
-in `phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md`
-permits planning the SDK/ordinary-consumer boundary required by the private
-HCM-3.6 posture seam. The exact HCM-4.1 operator continuation waiver permits
-the selected SDK implementation sequence while retaining product proof,
-independent review, CLI-parity, and Phase-3-open limits; it does not authorize
-any other Phase-4 work.
+Phase 3 remains open. The narrow HCM-4.1 dependency-order exception and
+operator continuation admitted the bounded SDK implementation/cutover now
+verified at checkpoint `28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1`.
 
 ### `HCM-4.1` — SDK owner and use-case implementation
 
-- implement the frozen SDK semantic-owner and ordinary-use-case inventory in
-  the operator-selected packet order: direct typed Rust posture ingress,
-  HCM-3.6 proof replay, existing-owner composition, eight-route cutover, then
-  compiler retirement;
-- the initial Rust posture method is direct-linkage-only and undiscoverable:
-  it creates no canonical operation-definition, capability descriptor,
-  bootstrap, DTO/schema, CLI JSON, or Tauri boundary;
-- retain all eight normal CLI routes and their observable behavior during
-  route-by-route SDK cutover; compiler retirement follows only full parity and
-  deletion proof;
-- preserve crate-local ownership of state, policy, validation, and mutation
-  semantics; HCM-4.2 owns canonical capability/schema/bootstrap discovery.
+**Completed bounded implementation/cutover:** checkpoint
+`28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1` adds direct typed,
+Rust-linkage-only posture ingress and existing-owner SDK composition; cuts over
+Setup, Author, Approvers, Artifact, Pipeline, Generate, Inspect, and Doctor
+while retaining their observable CLI behavior; and retires normal-path
+`handbook-compiler` composition. It creates no canonical operation-definition,
+capability descriptor, bootstrap closure, shared Serde/JSON DTO, generated
+schema, CLI JSON parity, or Tauri boundary. This checkpoint is bounded
+implementation/cutover evidence only: it does not close HCM-3.6,
+`HCM3EXIT-P2-CLIPPY-001`, HCM-3.5 P5/P6, or the Phase 3 exit, and it does not
+authorize other Phase-4 work.
 
-### `HCM-4.2` — Shared DTO and JSON Schema contract
+### `HCM-4.2` — Shared DTO and JSON Schema contract (next separately selected work)
 
 - request/result/error/refusal envelopes;
 - schema IDs and versioning;
@@ -678,7 +673,7 @@ any other Phase-4 work.
 
 ### Phase 4 exit gate
 - CLI, SDK, and Tauri adapter tests exercise the same typed use cases;
-- `handbook-compiler` has an explicit retained or retirement posture;
+- `handbook-compiler` is retired by the verified HCM-4.1 cutover checkpoint;
 - JSON Schema covers every supported machine response;
 - no transport owns domain truth.
 - custom artifact kinds and profile vocabulary do not add or rename CLI commands.

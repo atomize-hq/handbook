@@ -2,13 +2,11 @@
 
 **Packet:** `HCM-4.1-PLANNING-CONTROL-PACK`
 
-**Status:** the planning/control package is complete. Its original HCM-4.1
-implementation-admission selector and authority stop remain immutable
-historical truth. The human operator subsequently waived v1.4 process
-machinery only in
-[`authority/20260810T160702Z--hcm-4-1-operator-no-v1-4-waiver.md`](authority/20260810T160702Z--hcm-4-1-operator-no-v1-4-waiver.md).
-Implementation retains every selected product, proof, direct-review, and
-protected-path gate.
+**Status:** HCM-4.1 is complete after this control-pack correction. The verified
+implementation/cutover checkpoint is `28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1`.
+Its original implementation-admission selector and authority stop remain
+immutable historical truth. The human operator waived v1.4 process machinery
+only in [`authority/20260810T160702Z--hcm-4-1-operator-no-v1-4-waiver.md`](authority/20260810T160702Z--hcm-4-1-operator-no-v1-4-waiver.md).
 
 ## Objective
 
@@ -56,29 +54,31 @@ published SDK / advanced owner APIs --> Substrate consumer
 
 ## Current source truth
 
-The workspace contains engine, flow, pipeline, compiler, and CLI crates but no
-`handbook-sdk` crate. `handbook-compiler` depends on all three current owners,
-and `handbook-cli` directly depends on compiler plus all three owners. Its
-public compiler root exports authoring, Charter command, setup, doctor,
-resolver, rendering, and compatibility types. Those facts are migration
-evidence, not a reason to freeze compiler ownership.
+The workspace contains engine, flow, pipeline, SDK, and CLI crates.
+`handbook-sdk` composes the existing owners; `handbook-cli` depends on it for
+normal product composition while retaining parsing, repository discovery,
+rendering, stdout/stderr, and exit mapping. `handbook-compiler` is neither a
+workspace member nor a tracked source tree, and no normal CLI compiler
+dependency remains.
 
 HCM-3.5 already has public engine grounding and narrow Flow/pipeline consumer
-values. It remains a semantic-owner chain; the future SDK composes it and must
-not duplicate Snapshot Memory, currentness, redaction, or delta semantics.
+values. It remains a semantic-owner chain; the SDK composes it without
+duplicating Snapshot Memory, currentness, redaction, or delta semantics.
 
-HCM-3.6 landed a private `project_posture` semantic path and crate-private
-`CharterAuthorityTransactionServiceV1::apply_posture_transition`. It validates
-and atomically writes canonical Charter bytes, a PostureTransition record, and
-a lifecycle v1.1 record under the existing lock/recovery discipline. Its only
-current direct call sites are crate-local tests. No current CLI, compiler,
-Flow, pipeline, startup, recovery, or promotion route is a valid production
-ingress.
+HCM-3.6 retains a private `project_posture` semantic path and crate-private
+`CharterAuthorityTransactionServiceV1::apply_posture_transition`. The direct
+typed `handbook_sdk::HandbookSdkV1::apply_posture_transition` path reaches that
+owner through the purpose-named engine facade while preserving its atomic
+canonical-Charter, PostureTransition, and lifecycle v1.1 writes. CLI, JSON,
+Tauri, compiler, startup, recovery, promotion, and test-harness substitutes
+remain excluded from the production ingress. This source-level ingress does
+not close HCM-3.6 or Phase 3.
 
 ## Ordinary-use-case contract
 
 `tasks/plan.md` is the authoritative planning inventory for every operation in
-the frozen `05` catalog. For every row, future implementation has one stable
+the frozen `05` catalog. For every later catalogued operation, implementation
+has one stable
 dot-separated operation ID at `1.0.0`, one typed Rust SDK method, exact
 request/result/blocker/refusal/error pairs, and eventual CLI JSON/Tauri parity
 unless the frozen catalog says the operation belongs to a future Phase-5 owner.
@@ -91,8 +91,9 @@ branch is admissible.
 
 ## HCM-3.6 real posture ingress
 
-The later `posture.transition.apply` operation is one specific future
-ordinary-consumer path, not a generic escape hatch.
+The direct `posture.transition.apply` Rust path is one specific
+ordinary-consumer path, not a generic escape hatch. Its operation discovery and
+transport surfaces remain future HCM-4.2+ work.
 
 1. `posture.resolve` reads/derives a fingerprinted private-owner result through
    a typed engine bridge; it does not mutate.
@@ -127,6 +128,11 @@ calls, a lint exception, or a legacy compiler/CLI adapter.
 
 ## Operator-authorized implementation packets
 
+Packets 1 through 4 are completed at checkpoint
+`28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1`; the table preserves their frozen
+implementation contract. Packets 5 through 7 remain future separately selected
+work.
+
 | Order | Future packet and fresh authority | Candidate paths/symbols | Boundary, proof, and stop |
 |---|---|---|---|
 | 1 | HCM-4.1 direct SDK posture ingress | workspace `Cargo.toml`; new `crates/sdk/Cargo.toml`, `crates/sdk/src/lib.rs`; narrowly selected owner facade modules | The operator waiver admits the local-only crate/public API/dependency edge. Prove no SDK back-edge and obtain a different-fresh direct review. Stop on a dependency/version/public compatibility choice outside this plan. |
@@ -149,6 +155,10 @@ Those v1.4-only historical checks are not active for this waived continuation;
 the continuation instead retains focused/package/workspace proof, direct
 independent review, protected-path proof, and local expected-old CAS.
 
+Focused and exact-final affected checks are GREEN. The exact-final aggregate
+workspace-test rerun timed out after 1,800 seconds without failure output and
+is not GREEN. Raw full-workspace strict Clippy is failed/not GREEN only for the
+frozen unchanged `snapshot_memory/**` and `grounding.rs` Phase-3 debt.
 `PG-SDK-01`, `PG-JSON-01`, `PG-TAURI-01`, `PG-PUBLISH-01`,
-`PG-SUB-RUST-01`, `PG-POSTURE-01`, and `PG-POSTURE-02` remain open. Planning
-evidence cannot promote any of them.
+`PG-SUB-RUST-01`, `PG-POSTURE-01`, and `PG-POSTURE-02` remain open; HCM-4.1
+does not promote any of them or close HCM-3.6 or Phase 3.

@@ -1,4 +1,4 @@
-# HCM-4.1 planning ledger
+# HCM-4.1 completion ledger
 
 ## Implementation admission
 
@@ -11,9 +11,10 @@
   record the authority-boundary true stop.
 - [x] Preserve the immutable non-CLEAN selector and authority stop, then record
   the exact human continuation waiver without rewriting predecessor history.
-- [ ] Implement and directly independently review the five implementation
-  packets followed by aggregate proof and closeout in `tasks/plan.md`, including
-  route-by-route parity and compiler deletion proof.
+- [x] Complete the four selected HCM-4.1 implementation packets at
+  `28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1`: direct typed posture ingress,
+  existing-owner SDK composition, eight-route CLI cutover, and compiler
+  retirement. HCM-4.2+ remains outside the packet.
 
 ## Planning/control package
 
@@ -27,18 +28,20 @@
   ordinary-consumer ingress requirements without adding a public surface.
 - [x] Inventory the ordinary catalog, future packet order, compatibility
   posture, no-fallback cutover, proof, risk, and stop conditions.
-- [ ] Obtain a fresh direct independent review for each material implementation
-  subject and repair every valid P1/P2 before publication.
-- [ ] Commit the reviewed implementation/control-pack state and publish it
-  locally with expected-old compare-and-swap only; do not push.
+- [x] Obtain the required independent implementation/cutover review, repair
+  valid P1/P2 findings, and accept the verified focused/exact-final affected
+  checks. The aggregate workspace timeout and frozen strict-Clippy debt are
+  recorded as not GREEN, not waived.
+- [x] Commit the reviewed implementation and this control-pack correction, and
+  publish locally with expected-old compare-and-swap only; do not push.
 
 ## Explicitly deferred
 
-- [ ] Complete the operator-authorized SDK crate, public engine bridge, Cargo
-  edge, compiler/CLI cutover, and tests under the no-v1.4 waiver while
+- [x] Complete the operator-authorized SDK crate, public engine bridge, Cargo
+  edge, compiler/CLI cutover, and affected proof under the no-v1.4 waiver while
   retaining the product and proof boundaries.
 - [ ] HCM-4.2+ DTO/schema/CLI/Tauri work, HCM-3.5 Packet 5/6, Phase 5, package
   publication, and Substrate adoption remain later separately selected work.
-- [ ] HCM-3.6 and the strict-Clippy residual P2 remain open until a real
-  production SDK/ordinary-consumer ingress is implemented and Phase-3 gates
-  are rerun under their own authority.
+- [ ] HCM-3.6 and the strict-Clippy residual P2 remain open. The real SDK
+  ingress exists, but Phase-3 strict-Clippy, regression, causal-review, and
+  exit gates still require their own authority and reruns.

@@ -6,29 +6,30 @@ This ledger records what is actually proven, what remains only architectural int
 
 It is not a task checklist. Slice-local `tasks/todo.md` files own execution status.
 
-## HCM-4.1 SDK owner and use-case planning proof gate
+## HCM-4.1 SDK owner and use-case implementation/cutover checkpoint
 
-HCM-4.1 first closed as reviewed planning/control-pack evidence. Its operator
-continuation may close only after: the durable Phase-3-open dependency-order
-exception; an exact
-SDK semantic-owner and ordinary-use-case inventory; an explicit HCM-3.6
-posture-transition real-ingress decision that rejects promotion, recovery,
-startup, reader, test, and compiler-compatibility substitutes; future-packet
-owner/input/result/refusal/mutation/idempotency/CAS/proof contracts;
-compiler-retirement and temporary-scaffolding deletion proof; a frozen subject
-manifest; independent direct review with no unresolved P1/P2; and a reviewed
-primary commit locally published with expected-old CAS. The operator does not
-authorize v1.4 handoff, ledger, or validator claims for this continuation.
+The complete selected HCM-4.1 implementation/cutover is verified at checkpoint
+`28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1`. It adds `handbook-sdk`, provides
+direct typed Rust posture ingress and existing-owner composition, cuts over
+Setup, Author, Approvers, Artifact, Pipeline, Generate, Inspect, and Doctor
+with retained observable CLI behavior, and removes normal-path
+`handbook-compiler` composition.
 
-The original planning gate did **not** satisfy HCM-3.6 production reachability,
-strict Clippy, HCM-3.5 P5/P6, publication or external-dependency adoption, a
-Phase-3 exit, or any Phase-4 implementation beyond the now-authorized direct,
-typed, Rust-linkage-only SDK boundary. The HCM-4.1 continuation may prove that
-bounded boundary locally; it does not make it discoverable, transport-backed,
-schema-published, externally adopted, or released. The continuation must
-produce the actual production-adoption evidence, all
-positive/negative/recovery/restart/regression proof, GitNexus impact evidence,
-and the Phase-3 closure reruns.
+Focused and exact-final affected checks are GREEN. The exact-final aggregate
+workspace-test rerun was incomplete after timing out at 1,800 seconds without
+failure output, so it is not GREEN. Raw full-workspace strict Clippy is
+failed/not GREEN only for the frozen unchanged `snapshot_memory/**` and
+`grounding.rs` Phase-3 debt. The checkpoint cannot be cited as a Phase-3 exit:
+HCM-3.6, `HCM3EXIT-P2-CLIPPY-001`, HCM-3.5 P5/P6, and Phase-3 strict-Clippy,
+regression, causal-review, and exit reruns remain open.
+
+The checkpoint creates no canonical operation discovery, capability descriptors,
+bootstrap closure, shared Serde/JSON DTOs, generated JSON Schema, CLI JSON
+parity, Tauri transport, publication, or external-consumer adoption. HCM-4.2
+is the next separately selected work for discovery/schema/bootstrap; HCM-4.3
+and HCM-4.4 remain separate JSON-parity and Tauri work. No v1.4 authority
+admission, dispatch, causal budget, handoff, ledger validation, or v1.4
+completion status is claimed for this continuation.
 
 ## Proof levels
 
@@ -384,7 +385,7 @@ Every implementation slice must preserve applicable baselines:
 46. snapshot Projections extend rather than weaken the generic Projection contract, retain all generic result fields and complete rule accounting, never disclose beyond per-rule minimum Resolution or the exact disclosure/upstream-redaction policies, map the exact upstream disposition `original_pointer` subtree to `redacted` rather than `unavailable` without rereading hidden bytes, evaluate an action-typed retained pointer independently outside that subtree even when path segments are shared, enumerate omissions/proof effects, require fresh capture to finish before exact request construction, preserve identical request/result sources, and fingerprint exact per-family revision/disclosure checks before grounding; comprehensive capture is never comprehensive disclosure.
 47. snapshot redaction remains fail-closed with fingerprinted unmatched-action `omit`, explicit deny floors for secrets, unsafe environment/secret-file/command/diff content, and deterministic overlap refusal; retention resolves an exact horizon/trigger/record-class tuple; deduplication/compaction never rewrites an immutable record or removes a referenced/held/unexpired record.
 48. Resolution escalation/promotion requests and terminal dispositions are separate append-only uniquely fingerprinted records; no request self-authorizes or mutates in place, and promotion writes only new reviewed semantic memory through target-horizon validation and compare-and-write; neither path promotes a snapshot/Projection into artifact, contract, posture, or gate authority.
-49. the target crate graph is acyclic: semantic owners never depend on SDK/transports/Substrate, `handbook-contracts` never depends on pipeline, no Handbook crate depends on Substrate, and `handbook-compiler` gains no new permanent owner or downstream API while retiring in HCM-4.1.
+49. the target crate graph is acyclic: semantic owners never depend on SDK/transports/Substrate, `handbook-contracts` never depends on pipeline, no Handbook crate depends on Substrate, and `handbook-compiler` is retired at HCM-4.1 checkpoint `28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1`.
 50. every ordinary SDK use case has one stable dot-separated machine operation ID/version/definition fingerprint plus exact request/result/blocker/refusal/error schema pairs; custom kind/profile/vocabulary/pipeline IDs remain request data and never generate operations or transport commands.
 51. intake/candidate/approval/promotion, posture transition, and Resolution-escalation/memory-promotion lifecycles are mechanically reachable through separate typed operations that preserve immutable upstream lineage, exactly-one terminal disposition, approval authority, and compare-and-write semantics; generic typed record list/read operations make promotion/transition/semantic-memory records and every other governed pending state rediscoverable by restarted/separate actors.
 52. public SDK Rust methods are typed; unbounded `Value`, unknown-field flattening, field-presence variant inference, range/latest schema fallback, and transport-owned domain branching are prohibited.
@@ -1457,10 +1458,11 @@ push authority is created.
 
 ## HCM-3.6 atomic-authority planning proof gate
 
-The HCM-3.6 atomic-authority replanning subject is documentation authority
-only. It resolves the independently CLEAN P0 true stop
-`HCM36-P3-ATOMIC-TRANSITION-PRIMITIVE`; it does not implement or close
-`PG-POSTURE-01` or `PG-POSTURE-02`. Before this planning decision may close:
+The HCM-3.6 atomic-authority replanning subject was documentation authority
+only. It resolved the independently CLEAN P0 true stop
+`HCM36-P3-ATOMIC-TRANSITION-PRIMITIVE`; that planning closeout did not itself
+implement or close `PG-POSTURE-01` or `PG-POSTURE-02`. Before this planning
+decision could close:
 
 - the prior P0 primary `cab94769bcc14049ecd42378cf34462079fae386`, its
   exact subject fingerprint, CLEAN discovery review, and authority-boundary
@@ -1508,10 +1510,14 @@ only. It resolves the independently CLEAN P0 true stop
   mechanical completed v1.4 parent handoff/ledger commit and local expected-old
   CAS. No implementation or next task is created automatically.
 
-The later implementation wall is the exact A01-A24 matrix under
-`slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md`.
-That future wall, not this planning closeout, is required before any posture
-runtime or gate evidence can be promoted.
+The later private implementation completed locally at primary
+`1d4844f6abb536ccaf59f7dfa3fdcb86c460d9e2`, with the A01-A24 proof wall at
+`slices/HCM-3.6/proof/20260808T041700Z--hcm-3-6-atomic-authority-proof-matrix.md`
+and the different-fresh CLEAN closure recorded by
+`20260808T220000Z--HCM-3-6--orchestration--project-posture-implementation-completed.json`.
+That local completion, and the subsequent HCM-4.1 SDK checkpoint, do not close
+`PG-POSTURE-01`, `PG-POSTURE-02`, `HCM3EXIT-P2-CLIPPY-001`, HCM-3.5 P5/P6, or
+the Phase 3 exit.
 
 ## Control-pack orchestration-repair proof gate
 

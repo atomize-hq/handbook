@@ -115,7 +115,7 @@ The target should preserve the useful decoupling already present:
 - `handbook-flow`: request-scoped selection, context assembly, Resolution envelope application, posture/snapshot projection, and packet/projection results;
 - `handbook-pipeline`: declarative workflow compilation/capture/handoff and execution sequencing;
 - `handbook-contracts`: purpose-named owner for contract identity/lifecycle, claims, evidence admission, verdicts, hard gates, and protocol-neutral dock types; the HCM-0.5 design subject defines those type semantics without implementing the crate;
-- `handbook-compiler`: current compatibility/support seam with an approved retirement posture, not a target facade or SDK dependency;
+- `handbook-compiler`: HCM-4.1-retired historical compatibility/composition seam; it is not a workspace member, target facade, or SDK dependency;
 - `handbook-sdk`: ordinary-consumer composition and transport DTO facade;
 - `handbook-cli`: executable transport only.
 
@@ -189,15 +189,14 @@ private HCM-3.4 modules stay private; `handbook-flow` and
 `handbook-pipeline` consume those public grounding values and never import
 `snapshot_memory` or `projection`.
 
-`handbook-compiler` is retired during HCM-4.1: composition that belongs to ordinary consumers moves to `handbook-sdk`, executable-shell behavior moves to `handbook-cli`, and already-owned behavior remains in its owner crate. It may exist as bounded cutover scaffolding only until the CLI no longer depends on it; no new downstream API or permanent domain owner is added there.
-
-HCM-4.1 currently selects and documents that future boundary only. Its planned
-real ordinary-consumer ingress for the currently private HCM-3.6 posture
-transition must bind the approved recommendation, policy, approval, canonical
-head, reassessment, and compare-and-write inputs at the SDK coordinator; it
-must not be supplied by promotion, recovery, startup, tests, or a compiler
-compatibility seam. No HCM-4.1 implementation, public surface, crate, or
-dependency is created by this planning selection.
+At checkpoint `28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1`, HCM-4.1 retires
+`handbook-compiler`: ordinary composition resides in `handbook-sdk`,
+executable-shell behavior and rendering reside in `handbook-cli`, and semantic
+behavior remains in its owner crate. The direct Rust posture ingress is an
+SDK-to-engine path; it is not a CLI, JSON, or Tauri surface. This completed
+HCM-4.1 boundary does not close HCM-3.6 or a Phase-3 exit gate. HCM-4.2 remains
+the separately selected shared DTO/JSON-Schema/bootstrap-discovery slice;
+HCM-4.3 and HCM-4.4 remain the separately selected CLI-JSON and Tauri slices.
 
 ### Agent-facing Handbook skill
 

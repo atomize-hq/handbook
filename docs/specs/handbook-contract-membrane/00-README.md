@@ -24,15 +24,19 @@ packet's type boundary and proof ceiling only. It is not an implementation,
 published API, schema, package, registry, SDK, CLI, Substrate, or
 consumer-adoption claim.
 
-**HCM-4.1 planning exception:** HCM-4.1 is the selected planning/control-pack
-subject for the SDK-owner and ordinary-use-case boundary. The durable
-dependency-order exception in
-`phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md`
-authorizes that planning work while Phase 3 remains open because a real
-Phase-4 SDK/ordinary-consumer ingress is required to resolve the private
-HCM-3.6 posture-transition seam. It authorizes neither Phase-4 implementation
-nor HCM-4.2+, Phase 5/6, release, publication, or push; it does not alter the
-still-pending Phase-3 exit gates.
+**HCM-4.1 implementation correction:** At verified checkpoint
+`28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1`, HCM-4.1 creates
+`handbook-sdk` as the direct typed ordinary-consumer composition boundary,
+moves existing owner composition there, routes Setup, Author, Approvers,
+Artifact, Pipeline, Generate, Inspect, and Doctor through it, retains
+executable-shell and rendering concerns in `handbook-cli`, and removes
+`handbook-compiler` from the workspace. It also lands the direct Rust
+SDK-to-engine posture-transition ingress. HCM-4.1 is complete after the
+control-pack correction, but this is not a Phase-3 exit: HCM-3.6,
+`HCM3EXIT-P2-CLIPPY-001`, HCM-3.5 P5/P6, publication, and downstream adoption
+remain open. HCM-4.2 shared DTO/JSON-Schema/bootstrap discovery is next;
+HCM-4.3 CLI JSON parity, HCM-4.4 Tauri, Phase 5/6, release, publication, and
+push remain separately selected.
 
 **Scope:** target architecture, artifact-kind/schema registry, adaptive intake, Charter authority, posture kernel, sequencing, Context Resolution, Snapshot Memory, crate ownership, SDK/use-case and machine-transport boundaries, contract definitions, claims, evidence, verdicts, gates, dock protocol, context assembly, handoff, escalation, and proof gates
 

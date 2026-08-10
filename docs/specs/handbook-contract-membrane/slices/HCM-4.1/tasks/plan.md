@@ -2,9 +2,10 @@
 
 ## Planning boundary
 
-This is the frozen implementation plan. The operator continuation waiver admits
-the ordered HCM-4.1 implementation only under its exact boundaries. The first
-typed Rust posture method is callable by direct linkage but is not discoverable,
+This is the frozen implementation plan. Its ordered HCM-4.1 implementation is
+completed at checkpoint `28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1` under the
+operator continuation waiver and its exact boundaries. The direct typed Rust
+posture method is callable by linkage but is not discoverable,
 schema-published, bootstrap-advertised, JSON-serializable, or
 transport-supported. Canonical operation discovery remains HCM-4.2.
 
@@ -17,6 +18,18 @@ transport-supported. Canonical operation discovery remains HCM-4.2.
 | 3 | Add only typed SDK composition for existing semantic-owner behavior. | No future Phase-5 owner, generic `Value`, raw durable record, or semantic duplication. |
 | 4 | Cut over Setup, Author, Approvers, Artifact, Pipeline, Generate, Inspect, and Doctor one route at a time. | Preserve exact grammar, output, exit codes, failures, and owner semantics; do not repurpose any route as posture ingress. |
 | 5 | Retire compiler normal-path composition. | Do so only after all eight parity walls pass and cargo/dependency/import/source scans prove removal of normal compiler use. |
+
+## Completion evidence and proof limit
+
+At `28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1`, `handbook-sdk` and its typed
+engine facade exist; the eight retained CLI routes compose through SDK; and
+`handbook-compiler` is removed from Cargo, the workspace, and tracked source.
+Focused and exact-final affected checks are GREEN. The exact-final aggregate
+workspace-test rerun timed out after 1,800 seconds without failure output, so
+it is not GREEN; raw full-workspace strict Clippy is failed/not GREEN only for
+the frozen unchanged `snapshot_memory/**` and `grounding.rs` Phase-3 debt.
+HCM-4.2 DTO/schema/capability/bootstrap work is next. HCM-3.6 and Phase 3 stay
+open for their own strict-Clippy and exit gates.
 
 ## Shared typed-shape and proof vocabulary
 

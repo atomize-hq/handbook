@@ -3988,16 +3988,16 @@ The target owner matrix is exact:
 | Substrate process bridge | exact binary invocation and exact JSON protocol validation inside an isolated replaceable Substrate adapter | published Handbook binary only | human-output parsing, Handbook domain reimplementation, permanent integration claims |
 | Direct Substrate integration | Substrate-owned orchestration and product rendering over exact published SDK/owner APIs | exact crates.io versions of `handbook-sdk` and/or advanced owner crates | sibling/path/patch fallback, CLI process dependency in the proved seam, competing contract authority |
 
-The workspace dependency graph is acyclic. Owner crates never depend on `handbook-sdk`; no Handbook crate depends on Substrate; `handbook-contracts` never depends on pipeline; transports never become semantic owners. `handbook-compiler` is not in the target graph. HCM-4.1 retires it after moving ordinary composition to SDK, executable-shell behavior to CLI, and already-owned behavior to its owner crate.
+The workspace dependency graph is acyclic. Owner crates never depend on `handbook-sdk`; no Handbook crate depends on Substrate; `handbook-contracts` never depends on pipeline; transports never become semantic owners. `handbook-compiler` was retired at HCM-4.1 checkpoint `28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1` after ordinary composition moved to SDK, executable-shell behavior to CLI, and already-owned behavior remained with its owner crate.
 
-The exact HCM-4.1 operator continuation waiver at
-`slices/HCM-4.1/authority/20260810T160702Z--hcm-4-1-operator-no-v1-4-waiver.md`
-admits a bounded implementation: a direct typed Rust posture method and its
-owner facade may become reachable by Rust linkage after real-path proof. That
-exception does not create a canonical operation-definition, capability
-descriptor, bootstrap closure, shared Serde/JSON DTO, generated schema, CLI
-JSON parity, or Tauri transport. `posture.transition.apply@1.0.0` remains
-absent from discovery until HCM-4.2 supplies those exact later boundaries.
+The exact HCM-4.1 operator continuation admitted the bounded implementation
+completed at checkpoint `28fa4ab4f2fced48532d6830a7a69d8bd12a0cd1`: the
+direct typed Rust posture method and its owner facade are reachable by Rust
+linkage after real-path proof. This creates no canonical operation-definition,
+capability descriptor, bootstrap closure, shared Serde/JSON DTO, generated
+schema, CLI JSON parity, or Tauri transport. `posture.transition.apply@1.0.0`
+remains absent from discovery; HCM-4.2 is the next separately selected work
+that must supply those discovery/schema/bootstrap boundaries.
 
 HCM-0.4 selects `handbook-contracts` as the contract-membrane owner but does not preempt HCM-0.5 semantics. HCM-0.5 freezes the exact contract/dock types and appends their ordinary operation definitions. Process-dock implementation crates stay separable and are named only in their implementation packet.
 
