@@ -623,12 +623,24 @@ separately authorized.
 
 **Purpose:** establish one ordinary-consumer facade and make every product transport thin.
 
+Phase 3 remains open. The narrowly scoped HCM-4.1 planning exception recorded
+in `phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md`
+permits planning the SDK/ordinary-consumer boundary required by the private
+HCM-3.6 posture seam; it does not authorize implementation or any other
+Phase-4 work.
+
 ### `HCM-4.1` — SDK owner and use-case inventory
 
-- create or approve `handbook-sdk`;
-- move composition out of CLI/compiler compatibility seams where appropriate;
-- keep advanced owner-crate APIs public;
-- expose capabilities, not internal module topology.
+- planning/control-pack selection only: freeze the SDK semantic-owner and
+  ordinary-use-case inventory, implementation packets, proof gates, and
+  compiler-retirement cutover;
+- identify the future real SDK/ordinary-consumer ingress for the private
+  HCM-3.6 posture transition, including its approved-recommendation, policy,
+  approval, canonical-head, reassessment, and compare-and-write bindings;
+- reserve all crate creation, public API, dependency, compiler-cutover, and
+  transport implementation for a fresh HCM-4.1 implementation selector;
+- preserve crate-local ownership of state, policy, validation, and mutation
+  semantics; the SDK exposes capabilities rather than internal topology.
 
 ### `HCM-4.2` — Shared DTO and JSON Schema contract
 

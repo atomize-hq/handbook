@@ -1,0 +1,210 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260810T011200Z--HCM-4-1--sdk-owner-use-case-planning-discovery-review",
+  "created_at_utc": "2026-08-10T01:12:00Z",
+  "source_handoff_ids": [
+    "20260809T233300Z--HCM-3-6--orchestration--strict-clippy-partial-corrective-planning-authority-boundary"
+  ],
+  "parent_orchestration_id": "handbook-hcm-4-1-planning-20260810",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-4",
+  "slice_id": "HCM-4.1",
+  "packet_id": "HCM-4.1-PLANNING-CONTROL-PACK",
+  "subject_fingerprint": "sha256:2798dd3dc0a8185c01661bc26f35fddc1e015d7f6f19b3e4dca8c1ad9c80cafe",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm-4-1-sdk-owner-use-case-planning-discovery",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-10T01:11:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "hcm-4-1-sdk-owner-use-case-inventory-planning",
+        "packet_ids": [
+          "HCM-4.1-PLANNING-CONTROL-PACK"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:da42c5a0ed5d46be1df53b0972733f4670867e28997f288e52d466eec705b85a"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:18379165ba238567475ead2bc20ec93e1bc2f2d780b0f886256eba5b6785f753",
+    "integrated_outcome_id": "hcm-4-1-sdk-owner-use-case-inventory-planning",
+    "outcome_registry_fingerprint": "sha256:da42c5a0ed5d46be1df53b0972733f4670867e28997f288e52d466eec705b85a",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm-4-1-sdk-owner-use-case-planning-discovery-convergence",
+    "completed_at_utc": "2026-08-10T01:11:59Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read live AGENTS.md, docs/START_HERE.md, the complete 00-09 control pack, HCM-3.5 and HCM-3.6 packages, the current Phase-3 authority boundary, current source/Cargo evidence, and the HCM-4.1 selector/package.",
+        "evidence_ref": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/proof/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-preflight.md"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "Compare the 62 operation IDs in the 05 SDK ordinary-use-case catalog against the HCM-4.1 plan; inspect the source/Cargo ownership, compiler callers, and private posture transaction evidence.",
+        "evidence_ref": "The comparison reports catalog=62, planned=62, no missing IDs, no extras, and no duplicates; source findings are recorded in the HCM-4.1 research inventory."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the exact sorted repo-path-NUL-SHA256-newline-v1 subject manifest over the listed control, authority, package, and source evidence files.",
+        "evidence_ref": "subject fingerprint sha256:2798dd3dc0a8185c01661bc26f35fddc1e015d7f6f19b3e4dca8c1ad9c80cafe"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "cargo fmt --all -- --check",
+        "evidence_ref": "The check completed successfully on the planning subject; this slice changes no Rust source."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "git diff --check plus a manifest-wide trailing-space/tab scan",
+        "evidence_ref": "No diff whitespace error or subject trailing whitespace was found."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path":"Cargo.toml","sha256":"5e649b23d70726b023ea4a16ba7b608a735b8d023fa240ef1ec7fcfaf41a34dd"},
+      {"path":"crates/cli/src/author.rs","sha256":"8d77bdb65487746be69cdb611c1a4eb66044f55cf790000a31d89327a2d6b14e"},
+      {"path":"crates/cli/src/doctor.rs","sha256":"6e1d945460baf58fc67e3049899dcd01a01667d852fe101775d6445eadc51567"},
+      {"path":"crates/cli/src/main.rs","sha256":"81c09f2fe97e30e06fdad14fab6c62c88af4bfbfbdc841b3dfc1b4e4e90057c0"},
+      {"path":"crates/cli/src/setup.rs","sha256":"71eed0f9509da00987d88cbc0d53862ada77778b5f41b18104e5c48187dd93d1"},
+      {"path":"crates/compiler/src/lib.rs","sha256":"c1ca7d72b8657d90aaebeb8616b3ebec6ffa5801c9a5dbf79f7c3780eea6472f"},
+      {"path":"crates/engine/src/charter_authority_transaction.rs","sha256":"2a34ad8afd65654164dd60499e82104c1892120a8cb7917a4ee2372d4cac05dc"},
+      {"path":"crates/engine/src/project_posture.rs","sha256":"8b2c6048425dcd2a6a9365995cd886c1770f8b142c1a15d9a85ede4829374bab"},
+      {"path":"crates/flow/src/lib.rs","sha256":"fc394651c31524a6df70b545ead5984bb82e36ac2ed1bcd8ce98280d90dd969c"},
+      {"path":"crates/pipeline/src/lib.rs","sha256":"982a2f38dae8c3840f6f953b7ecacb96a1cbf58b209380d0bfc368f0ef2d920f"},
+      {"path":"docs/specs/handbook-contract-membrane/00-README.md","sha256":"6167257574b5013a4e898f8f14e73454f0e5f4384d3f7345b958ac7b33e1be60"},
+      {"path":"docs/specs/handbook-contract-membrane/01-target-architecture.md","sha256":"c7da4bc4d69606e25c18c8b4385d4d8313ac784ff3b694865d2b0bf500bd35f8"},
+      {"path":"docs/specs/handbook-contract-membrane/02-semantic-model.md","sha256":"7be3c436dea523dad72fa3ce9be1c6f42e793d337db3a55f07a5d4ea58d7f367"},
+      {"path":"docs/specs/handbook-contract-membrane/03-seam-crosswalk.md","sha256":"f7d968c491832f99fead951352080c131a86c8e6882b75475e03276fe32f1358"},
+      {"path":"docs/specs/handbook-contract-membrane/04-phase-slice-map.md","sha256":"24b7beb8a070ab342ddda9c80030a8c4a7e666dc84a90ffca3961e9746d0980d"},
+      {"path":"docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md","sha256":"3dbd698f80ad8e81b9c1d91071fde741f864481e33f3a64428f58c41fb39ba4d"},
+      {"path":"docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md","sha256":"fa8fa0b688f33f02a6989ad0e3491aec124a0175c33c79ae8b15397c0bbdfc57"},
+      {"path":"docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md","sha256":"dc4016127e4bc3dc0443e88defb22870b9c2029dfc7f64b912d5570df4ba6c26"},
+      {"path":"docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md","sha256":"a97aa3a384e5a081660515e3aaf36f98ddf91c95d8a3d471b21759d2fb9bc157"},
+      {"path":"docs/specs/handbook-contract-membrane/09-review-finding-inventory.md","sha256":"c25cdbfcfe967f2318ea09e147422629ed783c667aa5d5aa1806c3dd101d4bf1"},
+      {"path":"docs/specs/handbook-contract-membrane/handoffs/records/20260809T233300Z--HCM-3-6--orchestration--strict-clippy-partial-corrective-planning-authority-boundary.json","sha256":"f91f4883ebc203bfb01129bb2a59314d9a032e477f2bc9bf6cde69e953c9cb92"},
+      {"path":"docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md","sha256":"895ff972851b8cab13e0702c0a15c884dc03a4f4b684e4fbd10f7475641c5086"},
+      {"path":"docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260810T005634Z--hcm-4-1-planning-dependency-order-exception-proof.md","sha256":"894515597cb1ad43b335c129ecd3ad436343edc7ce7fbf845af523e30caa3f7d"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/SPEC.md","sha256":"762fef5405dd2e7fdeff5615e4b975ca34f9b29d0ced8e3e392f60c484668df5"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md","sha256":"f2e900d2ad9632a134beb3f6db3949b3eaaa49d97624d086b4a39f6cb3397c05"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/todo.md","sha256":"26477411f605c44b015207f66a3a81f727b8f4aa2a8fa97354f238fc1d7c6917"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.6/SPEC.md","sha256":"788e1cfe5df1877a62c370e91167f4c6375c995836e560a9b88d9efc04fd9280"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/plan.md","sha256":"cdb71fcd18b30211913fbc5a27028f7e1ec67c4e0cfb035cd08ee8c61d23b1e6"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.6/tasks/todo.md","sha256":"1e45b0f32a59c53e4f39dc5fcd6f3b789b68427ac7f86aef507de80746ad9e69"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.1/SPEC.md","sha256":"c4540be33b4288958d1ed47f5c6990e2f6d1a334f84e7d1b2cf64862f00e88df"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-selector.md","sha256":"0541680b957ec2297165a29b49ea84d15cd41825574527f6b5ff1758a59748d7"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.1/proof/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-preflight.md","sha256":"01fd219a57f7fc43887b77cfab21263dc5eb62a87611828f2889a9a886358c96"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.1/research/20260810T005634Z--sdk-owner-and-source-impact-inventory.md","sha256":"4bbc7ec72f4b1ab9c2ebaeb5a1a0617440fc873d9c9cd1127c292f4bd9fc56dd"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.1/tasks/plan.md","sha256":"c00429ec2ffa477a64918a785a1a7e798919cfd960d511b23459ddbde33cae03"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.1/tasks/todo.md","sha256":"1ac92d842657c4c4dfc7384a7d9771cce619b4d90550fdc72492da9d310487df"}
+    ],
+    "aggregate_fingerprint": "sha256:2798dd3dc0a8185c01661bc26f35fddc1e015d7f6f19b3e4dca8c1ad9c80cafe"
+  },
+  "active_resolution": {
+    "level": "HCM-4.1 SDK owner and ordinary-use-case planning",
+    "scope_horizon": "one planning/control-pack subject that freezes the SDK boundary and inventory while Phase 3 remains open",
+    "detail_resolution": "verify the exact owner/coordinator/transport, mutation, refusal, idempotency, CAS, proof, and compiler-cutover decisions without selecting an implementation surface",
+    "temporal_horizon": "one discovery review, a consolidated repair and different-fresh closure only if material P1/P2 findings require it, then mechanical two-commit closeout",
+    "authority_horizon": "documentation/control-pack only; no Rust, Cargo, dependency, public API, schema, runtime, compiler, CLI, or transport edit",
+    "memory_horizon": "the HCM-3.6 strict-Clippy authority boundary, HCM-3.5 P5/P6 deferrals, exact HCM-4.1 source/Cargo inventory, and canonical 00-09 contract",
+    "validation_horizon": "v1.4 dispatch validation, independent planning review, ordinary and self-test handoff validation, deterministic ledger parity, and local-only publication verification"
+  },
+  "authority_refs": [
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-selector.md","sections":["entire selector"]},
+    {"path":"docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md","sections":["Decision","Preserved limits"]},
+    {"path":"docs/specs/handbook-contract-membrane/handoffs/records/20260809T233300Z--HCM-3-6--orchestration--strict-clippy-partial-corrective-planning-authority-boundary.json","sections":["blockers","resume","stop_reason"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-3.5/tasks/plan.md","sections":["Packet 5","Packet 6","Explicit non-goals"]},
+    {"path":"docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md","sections":["SDK ordinary-use-case contract","Project posture kernel and recommendation contracts"]}
+  ],
+  "repo_truth": "This planning-only subject changes no product source. The workspace has no handbook-sdk crate; compiler currently composes owner crates for CLI-facing use; the HCM-3.6 posture authority path is crate-private with test-only direct callers and a CRITICAL transaction/recovery blast radius. GitNexus query/context/impact/detect_changes and compare-to-main are unavailable in this environment, so exact source-search evidence is recorded but no unavailable evidence is GREEN.",
+  "allowed_scope": [
+    "Read-only independent review of the frozen manifest, HCM-4.1 selector/spec/plan/todo/research/proof, durable Phase-3 exception, affected canonical 00-06 rows, governing 07-09 protocol, predecessor authorities, and named source/Cargo evidence.",
+    "Verify Phase 3 remains open, HCM-3.6 strict-Clippy and HCM-3.5 P5/P6 remain pending, and the exception permits HCM-4.1 planning only.",
+    "Verify all 62 canonical operations have exactly one plan row with the shared typed outcome/mutation/idempotency/CAS/proof vocabulary, and that posture has a real SDK ordinary-consumer ingress rather than a synthetic caller.",
+    "Report P1/P2 for unauthorized scope, owner/transport contradiction, a missing required operation or posture binding, a Phase-3 completion claim, an under-specified atomic/recovery write set, or a new permanent compiler owner/API. Report P3/P4 only with exact 09 disposition guidance."
+  ],
+  "non_goals": [
+    "Do not edit, format, stage, commit, publish, change refs, contact a remote, touch protected paths, write a handoff or ledger entry, or delegate.",
+    "Do not approve HCM-4.1 implementation, HCM-4.2+, Phase 5/6, a new SDK crate/module/type/dependency, a public API/DTO/schema, a compiler/CLI change, a transport, or any runtime proof promotion.",
+    "Do not approve reachability by visibility-only change, lint suppression, cfg(test), promotion, approval, recovery, startup, reader, unrelated service, or legacy compiler/CLI wiring; do not waive HCM3EXIT-P2-CLIPPY-001."
+  ],
+  "tasks": [
+    "Review five axes for this documentation/control subject: correctness against current source and canonical contracts, readable bounded plan, SDK/owner/transport architecture, security of authority and private-record boundaries, and proof/operational-risk completeness.",
+    "Check every HCM-4.1 required outcome, exact Phase-3-open exception limits, future-packet authority, compiler retirement/deletion proof, and all HCM-3.6 recommendation/policy/approval/head/reassessment/CAS/atomic/recovery bindings.",
+    "Return findings first in Critical, P1, P2, P3, P4 order with exact path/line/reason, then the verdict, validation evidence, advisory disposition, and parent disposition."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#hcm-4-1-sdk-owner-and-use-case-planning-proof-gate",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#built-in-delegated-run-protocol",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
+  ],
+  "stop_conditions": [
+    "Return findings if the documentation grants implementation, public/dependency/compatibility/transport authority, Phase-4 expansion, Phase-3 exit, release, publication, or push.",
+    "Return findings if posture reachability can be interpreted as a synthetic caller, exposes private durable records, omits approved recommendation/policy/approval/canonical-head/reassessment/CAS bindings, or under-specifies the three durable transaction outputs/recovery proof.",
+    "Return blocked only for unavailable required evidence or a product-impacting contradiction that cannot be resolved within this planning/control-pack scope."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

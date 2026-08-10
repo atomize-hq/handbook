@@ -191,6 +191,14 @@ private HCM-3.4 modules stay private; `handbook-flow` and
 
 `handbook-compiler` is retired during HCM-4.1: composition that belongs to ordinary consumers moves to `handbook-sdk`, executable-shell behavior moves to `handbook-cli`, and already-owned behavior remains in its owner crate. It may exist as bounded cutover scaffolding only until the CLI no longer depends on it; no new downstream API or permanent domain owner is added there.
 
+HCM-4.1 currently selects and documents that future boundary only. Its planned
+real ordinary-consumer ingress for the currently private HCM-3.6 posture
+transition must bind the approved recommendation, policy, approval, canonical
+head, reassessment, and compare-and-write inputs at the SDK coordinator; it
+must not be supplied by promotion, recovery, startup, tests, or a compiler
+compatibility seam. No HCM-4.1 implementation, public surface, crate, or
+dependency is created by this planning selection.
+
 ### Agent-facing Handbook skill
 
 The primary agent workflow is skill-directed CLI use:

@@ -6,6 +6,11 @@ The HCM-0.2 scope in this document is frozen design authority: stable semantics 
 
 These freezes are not implementation proof. HCM-0.6 now approves the exact shipped artifact-kind catalog, root-profile instances, requiredness, role/capability bindings, lifecycle posture, and intake/renderer support posture. Environment Context is optional advisory context without a project-applicability condition; future enforcement is separately selected and task-scoped. All runtime gates remain open, and shipped Resolution labels/default policy remain unresolved; examples still select nothing.
 
+The HCM-4.1 dependency-order exception is sequencing authority for planning
+only. It neither changes these ownership and transport-preservation semantics
+nor grants implementation, public-API, dependency, compatibility, or Phase-3
+exit authority.
+
 ## Purpose
 
 This file defines the conceptual model that profiles, artifacts, vocabulary, Context Resolution, projections, memory, contracts, and adapters must share.

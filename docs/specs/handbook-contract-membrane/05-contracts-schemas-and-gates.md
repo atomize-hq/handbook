@@ -3990,6 +3990,11 @@ The target owner matrix is exact:
 
 The workspace dependency graph is acyclic. Owner crates never depend on `handbook-sdk`; no Handbook crate depends on Substrate; `handbook-contracts` never depends on pipeline; transports never become semantic owners. `handbook-compiler` is not in the target graph. HCM-4.1 retires it after moving ordinary composition to SDK, executable-shell behavior to CLI, and already-owned behavior to its owner crate.
 
+HCM-4.1 currently plans and inventories that future SDK coordinator only. It
+does not create the SDK crate, expose a public Rust API or DTO, alter a
+transport, or make the private owner path reachable; each effect requires a
+fresh HCM-4.1 implementation authority and its real-path proof.
+
 HCM-0.4 selects `handbook-contracts` as the contract-membrane owner but does not preempt HCM-0.5 semantics. HCM-0.5 freezes the exact contract/dock types and appends their ordinary operation definitions. Process-dock implementation crates stay separable and are named only in their implementation packet.
 
 ## SDK ordinary-use-case contract

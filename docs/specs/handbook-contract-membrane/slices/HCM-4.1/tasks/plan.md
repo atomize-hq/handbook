@@ -1,0 +1,145 @@
+# HCM-4.1 executable SDK ownership plan
+
+## Planning boundary
+
+This is a future implementation plan, not an SDK implementation selector. The
+catalog below is frozen from `05-contracts-schemas-and-gates.md`; an operation
+is not discoverable, callable, schema-published, or transport-supported until
+a fresh implementation authority supplies the exact public Rust API, operation
+definition, schemas, capability pins, tests, and proof.
+
+## Shared typed-shape and proof vocabulary
+
+Every future method has an exact operation definition at `1.0.0`, an opaque
+typed Rust request/result, and a closed outcome union. The SDK is the normal
+caller. `CLI` means future HCM-4.3 JSON/human CLI adapter; `Tauri` means future
+HCM-4.4 adapter; neither may recalculate semantics.
+
+| Code | Request/result/blocker/refusal/error shape | Mutation and required proof |
+|---|---|---|
+| `R` | Exact repository/profile/capability/definition refs as applicable -> typed catalog, record, report, or derived value. Blocked when an exact prerequisite is unavailable; refused for malformed, stale, mismatched, unsupported, or insufficient-Resolution input; error only for redacted operation integrity. | Read-only/safe/no receipts. Prove direct SDK result equivalence with its owner and CLI/Tauri adapter parity after those slices. |
+| `A` | Typed immutable payload plus required idempotency key -> typed appended record/acknowledgment and one receipt. | Append-only/idempotency-key-required. Prove first execution, same-key replay, changed-key conflict/refusal, exact immutable lineage, restart discovery through `record.list/read`, and no raw key disclosure. |
+| `C` | Typed intent plus idempotency key and exact expected authority/head/fingerprint bindings -> typed success with declared atomic receipts, or typed stale/precondition/authority/safety refusal. | Compare-and-write/idempotency-key-required. Prove exact precondition, concurrent/stale refusal, same-key replay after basis movement, no undeclared write, recovery/restart, and exact receipt set. |
+| `D` | Exact bootstrap/schema/catalog selector and paging cursor -> bounded typed discovery result. | Read-only/safe. Prove restart-safe complete discovery, no inferred default or process-local state, and exact definition/schema fingerprints. |
+
+All rows have the following error/refusal floor: unknown/stale pair, incompatible
+capability or version, malformed typed request, unsupported operation, or
+insufficient Resolution returns a structured blocked/refused outcome before an
+undeclared read/write; an integrity failure is an error without raw secret or
+private durable payload. Every `A`/`C` method has a bounded input-only raw
+idempotency key and exposes only its scoped fingerprint.
+
+## Exact ordinary-use-case inventory
+
+`Caller` is the future normal route. A `Phase 5` owner row is reserved in this
+HCM-4.1 inventory but cannot be implemented before its Phase-5 authority.
+
+| Operation ID | Semantic owner | SDK coordinator / caller | Shape | Required real-path proof |
+|---|---|---|---|---|
+| `capabilities.describe` | SDK registry over implemented owners | SDK -> CLI/Tauri; bootstrap root | `D` | Every reported operation has exact schema/definition/capability pins; unavailable operations are absent, not inferred. |
+| `profile.list` | engine | SDK -> CLI/Tauri | `R,D` | Direct engine and SDK catalog parity; restart/page proof. |
+| `profile.resolve` | engine | SDK -> CLI/Tauri | `R` | Exact selected-profile/refusal parity. |
+| `schema.list` | engine | SDK -> CLI/Tauri | `R,D` | Exact schema catalog paging and no range/latest fallback. |
+| `schema.read` | engine | SDK -> CLI/Tauri | `R` | Exact schema ref/fingerprint and closed document parity. |
+| `vocabulary.read` | engine | SDK -> CLI/Tauri | `R` | Exact vocabulary ref/fingerprint and no presentation-owned semantics. |
+| `resolution.stack.read` | engine | SDK -> CLI/Tauri | `R` | Exact six-dimension stack selection/refusal parity. |
+| `projection.definition.read` | flow over engine definitions | SDK -> CLI/Tauri | `R` | Exact definition/currentness binding; no CLI-owned projection policy. |
+| `artifact.kind.list` | engine | SDK -> CLI/Tauri | `R,D` | Descriptor catalog parity; no generated operation/command. |
+| `artifact.instance.list` | engine | SDK -> CLI/Tauri | `R,D` | Profile-selected instance catalog parity and paging. |
+| `artifact.read` | engine | SDK -> CLI/Tauri | `R` | Exact typed record/provenance and redaction/refusal wall. |
+| `artifact.validate` | engine | SDK -> CLI/Tauri | `R` | Owner validation result and typed validation refusal parity. |
+| `artifact.render` | engine | SDK -> CLI/Tauri | `R` | Fixed renderer-derived output only; no capitalized Projection substitution. |
+| `intake.definition.read` | engine | SDK -> CLI/Tauri | `R` | Exact definition/fingerprint read. |
+| `intake.coverage.evaluate` | engine | SDK -> CLI/Tauri | `R` | Deterministic coverage/gap results; no hidden model authority. |
+| `intake.record.append` | engine | SDK repository transaction -> CLI/Tauri | `A` | One immutable record, same-key replay, and record rediscovery. |
+| `record.list` | engine | SDK -> CLI/Tauri | `R,D` | Closed family/state selector, snapshot-bound paging, and restart-safe discovery. |
+| `record.read` | engine | SDK -> CLI/Tauri | `R` | Family/ref/fingerprint match and typed variant-only result. |
+| `artifact.candidate.validate` | engine | SDK -> CLI/Tauri | `R` | Exact candidate/result identity and no write before validation. |
+| `artifact.candidate.append` | engine | SDK repository transaction -> CLI/Tauri | `A` | Immutable candidate, same-key replay, and unchanged prior records. |
+| `artifact.approval.append` | engine | SDK repository transaction -> CLI/Tauri | `A` | Exact candidate binding, authority refusal, and immutable approval replay. |
+| `artifact.candidate.promote` | engine | SDK repository transaction -> CLI/Tauri | `C` | Exact candidate/approval/current-target CAS, atomic canonical+promotion receipts, recovery and stale proof. |
+| `posture.resolve` | engine private posture owner through later typed bridge | SDK -> CLI/Tauri | `R` | Same exact inputs produce same kernel identity; private records stay private. |
+| `posture.recommendation.evaluate` | engine posture owner | SDK -> CLI/Tauri | `R` | Exactly one recommendation-or-no-recommendation result; advisory/no mutation, trigger/window/floor/red-line proof. |
+| `posture.recommendation.append` | engine repository transaction | SDK -> CLI/Tauri | `A` | Persisted exact evaluated recommendation, immutable lineage, replay and rediscovery. |
+| `posture.recommendation.acknowledge` | engine repository transaction | SDK -> CLI/Tauri | `A` | Separate immutable acknowledgment; no promotion or canonical mutation. |
+| `posture.transition.apply` | engine private posture/Charter authority transaction | SDK coordinator -> CLI/Tauri only after HCM-4.3/4.4 | `C` | Real production SDK ingress; full approved-recommendation/policy/approval/head/reassessment/byte-CAS binding; atomic canonical Charter, PostureTransition, and lifecycle-transition 1.1 outputs; no-op/stale/fork/refusal, crash/recovery/restart, and strict-Clippy reachability proof. |
+| `projection.create` | flow over engine definitions | SDK -> CLI/Tauri | `R` | Resolution, omission/lossiness/provenance, no hidden raw read, and owner parity. |
+| `resolution.escalation.request.append` | engine | SDK repository transaction -> CLI/Tauri | `A` | Exact pending immutable request and restart discovery. |
+| `resolution.escalation.disposition.append` | engine | SDK repository transaction -> CLI/Tauri | `A` | Exactly one approved/refused/superseded disposition; no in-place status. |
+| `memory.promotion.request.append` | engine | SDK repository transaction -> CLI/Tauri | `A` | Immutable request and no artifact/contract/posture shortcut. |
+| `memory.promotion.disposition.append` | engine | SDK repository transaction -> CLI/Tauri | `C` | Applied/refused/stale disposition; applied atomic semantic-memory receipt, no inferred promotion. |
+| `snapshot.capture` | engine normalization/repository readers | SDK orchestration -> CLI/Tauri | `A` | Exact capture identity, redaction, consistency, immutable record, and no authority promotion. |
+| `snapshot.read` | engine storage boundary | SDK -> CLI/Tauri | `R` | Exact record/ref/fingerprint and disclosure boundary. |
+| `snapshot.delta` | engine | SDK -> CLI/Tauri | `R` | Deterministic compatible-delta/refusal and relation-only signal boundary. |
+| `snapshot.project` | flow over engine snapshot semantics | SDK -> CLI/Tauri | `R` | Six-dimension Resolution, redaction-before-read, omissions, and provenance. |
+| `snapshot.verify_current` | SDK over engine comparison | SDK -> CLI/Tauri | `R` | Exact currentness result/refusal, no implicit capture. |
+| `snapshot.resolve_applicable` | SDK over engine policy/profile/Resolution comparison | SDK -> CLI/Tauri | `R,D` | Exact applicable-or-none deterministic selection and restart-safe catalog proof. |
+| `repository.setup.plan` | SDK over engine/profile owners | SDK -> CLI/Tauri | `R` | Typed plan and preserved non-authoring/blocked behavior. |
+| `repository.setup.apply` | SDK repository transaction | SDK -> CLI/Tauri | `C` | Exact repository basis, idempotent apply/replay, declared operational receipt, no semantic-authority expansion. |
+| `repository.doctor` | SDK over owner reports | SDK -> CLI/Tauri | `R` | Same typed readiness/report data and CLI exit mapping from, not instead of, result. |
+| `flow.resolve` | flow | SDK -> CLI/Tauri | `R` | Existing resolver compatibility, no posture/grounding fallback or widened request contract. |
+| `pipeline.catalog.list` | pipeline | SDK -> CLI/Tauri | `R,D` | Exact pipeline catalog paging. |
+| `pipeline.catalog.read` | pipeline | SDK -> CLI/Tauri | `R` | Exact selected pipeline/read refusal. |
+| `pipeline.route.resolve` | pipeline | SDK -> CLI/Tauri | `R` | Deterministic route/refusal parity. |
+| `pipeline.compile` | pipeline | SDK -> CLI/Tauri | `R` | In-memory only, deterministic provenance, no content-store write. |
+| `pipeline.capture.plan` | pipeline | SDK -> CLI/Tauri | `R` | Read-only capture plan/refusal parity. |
+| `pipeline.capture.apply` | pipeline | SDK repository transaction -> CLI/Tauri | `C` | Exact capture CAS, immutable evidence receipt, replay/recovery. |
+| `pipeline.handoff.emit` | pipeline | SDK repository transaction -> CLI/Tauri | `A` | One append-only handoff record; no global development-control handoff confusion. |
+| `pipeline.state.apply` | pipeline | SDK repository transaction -> CLI/Tauri | `C` | Exact state basis, atomic declared receipt, stale/replay proof. |
+| `contract.definition.list` | future contracts | SDK -> CLI/Tauri after Phase 5 | `R,D` | Phase-5 exact catalog proof; no pre-Phase-5 implementation claim. |
+| `contract.definition.read` | future contracts | SDK -> CLI/Tauri after Phase 5 | `R` | Exact definition/ref/fingerprint proof. |
+| `contract.definition.append` | future contracts | SDK transaction -> CLI/Tauri after Phase 5 | `A` | One exact draft record after admission; same-key replay. |
+| `contract.lifecycle.transition` | future contracts | SDK transaction -> CLI/Tauri after Phase 5 | `C` | Locked/current lifecycle authority, exact basis, stale/unauthorized refusal. |
+| `contract.evidence.list` | future contracts | SDK -> CLI/Tauri after Phase 5 | `R,D` | Exact canonical evidence catalog. |
+| `contract.evidence.read` | future contracts | SDK -> CLI/Tauri after Phase 5 | `R` | Exact evidence/provenance/freshness/Resolution read. |
+| `contract.evidence.append` | future contracts | SDK transaction -> CLI/Tauri after Phase 5 | `A` | One membrane-validated evidence record; rejected candidate writes none. |
+| `contract.verdict.evaluate` | future contracts | SDK -> CLI/Tauri after Phase 5 | `R` | Deterministic complete claim partition; validators/transports stay witnesses. |
+| `contract.gate.evaluate` | future contracts | SDK -> CLI/Tauri after Phase 5 | `R` | Hard/required/advisory precedence and no parent-promotion shortcut. |
+| `dock.manifest.list` | future contracts | SDK -> CLI/Tauri after Phase 5 | `R,D` | Exact manifest catalog and closure identity. |
+| `dock.manifest.read` | future contracts | SDK -> CLI/Tauri after Phase 5 | `R` | Exact bounded manifest/launch closure. |
+| `dock.run` | future contracts plus separable executor | SDK -> CLI/Tauri after Phase 5 | `A` | One admitted operational execution record, no direct verdict/gate/canonical-evidence mutation, failure-closed process proof. |
+
+## Detailed posture transition boundary
+
+The planned SDK method has a purpose-named typed request such as
+`ApplyPostureTransitionRequest`; names and fields are not selected as public
+Rust API until the HCM-4.1 implementation selector. Its required semantic
+fields are non-negotiable: repository identity; exact persisted
+recommendation/policy pairs; expected source-kernel pair; sorted immutable
+approval inputs and authorized actor; exact current heterogeneous
+canonical/lifecycle head; exact Charter reassessment inputs; selected fixed
+dimension change; expected canonical ref/fingerprint/document SHA-256/length;
+and a bounded idempotency key. It returns typed success with the three realized
+durable outputs and resulting kernel pair, or the closed blocked/refused/error
+outcomes stated in `SPEC.md`.
+
+The later engine-facing bridge owns conversion from this public typed intent to
+private `PostureTransition`, lifecycle v1.1, and journal values. The SDK never
+returns raw private durable bytes, raw Charter records, Snapshot payloads, or a
+transport-owned policy decision. New public engine facade types and their
+versioning are a deliberate later HCM-4.1 implementation choice; they are not
+created by this plan.
+
+## Compiler retirement and cutover plan
+
+| Current seam | Future destination | Temporary scaffolding | Required deletion proof |
+|---|---|---|---|
+| Compiler author/Charter product adapters | SDK composes engine owner operations; CLI parses input and renders result | A one-way internal CLI-to-SDK adapter may exist only during cutover. | CLI normal commands no longer depend on `handbook-compiler`; compiler public root does not gain a replacement facade. |
+| Compiler doctor/setup/resolver composition | SDK repository/flow composition; CLI keeps cwd, args, output, exit | No compatibility DTO or semantic wrapper in CLI. | Same SDK typed result powers direct Rust and CLI; legacy compiler code is deleted or remains only for separately named non-SDK support seams. |
+| Compiler rendering / CLI rendering | CLI owns human formatting; SDK never owns prose | None that evaluates domain state. | Human rendering is a pure adapter over typed SDK result; JSON is one schema-valid SDK response. |
+| Existing direct CLI owner imports | SDK methods | Transitional imports allowed only when documented by a fresh selector. | No normal CLI owner composition bypass remains; cargo graph shows CLI -> SDK, SDK -> owners, no compiler in target path. |
+
+No temporary route may become public API, become a second semantic owner, or
+make posture reachable by bypassing the approved SDK operation. Its deletion
+test is a cargo-graph/dependency assertion plus a source/import scan and
+real-path behavior/parity tests.
+
+## Implementation-time review and stop matrix
+
+| Risk | Required future proof | Stop condition |
+|---|---|---|
+| New SDK crate/public types | versioning/compatibility choice, package/archive and external consumer proof | Any changed dependency, public compatibility promise, or transport schema choice not selected by fresh authority. |
+| Compiler removal | CLI behavior and error/exit regression, no-cycle graph, source import scan | Any retained compiler behavior proves it remains semantic owner or needs a new public facade. |
+| HCM-3.6 posture ingress | GitNexus upstream impact; A01-A24 plus approval/head/CAS/atomic-recovery/real-caller proofs; strict Clippy and Phase-3 regression rerun | Missing approved input, need to expose private records, synthetic caller, HIGH/CRITICAL proof gap, or any P1/P2. |
+| DTO/transport work | HCM-4.2/4.3/4.4 selectors and exact schema/JSON/Tauri proof gates | Any attempt to treat planning or direct Rust calls as JSON/Tauri proof. |
+| HCM-3.5/P5/P6/Phase 5 | Exact selected later owner and gate/publication proof | Any local/pipeline success is misrepresented as parent promotion or published/consumer adoption. |
