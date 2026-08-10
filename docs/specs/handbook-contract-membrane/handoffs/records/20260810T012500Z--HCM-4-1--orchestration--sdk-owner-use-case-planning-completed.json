@@ -1,0 +1,376 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260810T012500Z--HCM-4-1--orchestration--sdk-owner-use-case-planning-completed",
+  "created_at_utc": "2026-08-10T01:25:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-4",
+  "slice_id": "HCM-4.1",
+  "packet_id": "HCM-4.1-PLANNING-CONTROL-PACK",
+  "orchestration_id": "handbook-hcm-4-1-planning-20260810",
+  "source_handoff_ids": [
+    "20260809T233300Z--HCM-3-6--orchestration--strict-clippy-partial-corrective-planning-authority-boundary"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fe926-a636-72c0-af48-855e6fed7a03"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-10T01:12:00Z",
+    "evidence_ref": "Fresh built-in read-only reviewer /root/hcm41_discovery_review completed the validated v1.4 discovery review CLEAN."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm41-sdk-owner-use-case-planning-discovery",
+      "dispatch_id": "20260810T011200Z--HCM-4-1--sdk-owner-use-case-planning-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260810T011200Z--HCM-4-1--sdk-owner-use-case-planning-discovery-review.json",
+      "dispatch_fingerprint": "sha256:26685b5aca98dbcb1b884642f2882ef9340c0d8d67488e7ec3fd95d71917fcdb",
+      "role": "review",
+      "agent_id": "/root/hcm41_discovery_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:2798dd3dc0a8185c01661bc26f35fddc1e015d7f6f19b3e4dca8c1ad9c80cafe",
+      "result_subject_fingerprint": "sha256:2798dd3dc0a8185c01661bc26f35fddc1e015d7f6f19b3e4dca8c1ad9c80cafe",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260810T011200Z--HCM-4-1--sdk-owner-use-case-planning-discovery-review.json",
+        "Fresh independent review returned CLEAN with no Critical/P1/P2/P3/P4 findings or advisories."
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-10T01:25:00Z",
+    "dispatch_count": 1,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:18379165ba238567475ead2bc20ec93e1bc2f2d780b0f886256eba5b6785f753"
+    ],
+    "aggregate_fingerprint": "sha256:8d8f37bba31ecca105a650d72ee0a44874dfee56ff4bed34b2b7818d63b47e84"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "7f4fcff4df414f684d1b073c04a8633969def836",
+    "subject_fingerprint": "sha256:2798dd3dc0a8185c01661bc26f35fddc1e015d7f6f19b3e4dca8c1ad9c80cafe",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260810T011200Z--HCM-4-1--sdk-owner-use-case-planning-discovery-review.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.1/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.1/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.1/proof/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-preflight.md",
+      "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260810T011200Z--HCM-4-1--sdk-owner-use-case-planning-discovery-review.json",
+      "git:7f4fcff4df414f684d1b073c04a8633969def836"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-4.1 SDK owner and ordinary-use-case planning completed",
+    "scope_horizon": "one reviewed planning/control package that freezes ownership, inventory, compiler cutover, and the HCM-3.6 ingress decision only",
+    "detail_resolution": "The package names each canonical ordinary operation, shared typed outcome/mutation/idempotency/CAS rules, the three private posture transaction outputs, and exact future authority boundaries without creating an SDK or exposing private durable records.",
+    "temporal_horizon": "The reviewed primary documentation state is committed; this record and deterministic ledger are the mechanical two-commit closeout only.",
+    "authority_horizon": "Planning/control pack only. HCM-4.1 implementation, HCM-4.2+, Phase 5/6, public API, crate, dependency, CLI/compiler/transport, runtime, release, publication, push, and Phase-3 exit remain unauthorized.",
+    "memory_horizon": "The Phase-3 strict-Clippy authority boundary, HCM-3.5 P5/P6 deferrals, source/Cargo inventory, 35-path manifest, one CLEAN reviewer result, and inherited ordinary-validator result are replay-critical.",
+    "validation_horizon": "Completed HCM-4.1 planning requires dispatch/manifest replay, a CLEAN review, cargo fmt, diff/whitespace checks, self-tests, deterministic ledger parity, and local-only expected-old ref publication; no unavailable GitNexus evidence is GREEN."
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Complete HCM-4.1 as a planning/control-pack increment only: establish the durable Phase-3-open dependency-order exception, freeze SDK ownership and the exact ordinary-use-case inventory, select the sole valid future HCM-3.6 production ingress, obtain independent CLEAN review, and close locally without implementation.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-selector.md",
+      "sections": [
+        "entire selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md",
+      "sections": [
+        "Decision",
+        "Preserved limits"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260809T233300Z--HCM-3-6--orchestration--strict-clippy-partial-corrective-planning-authority-boundary.json",
+      "sections": [
+        "blockers",
+        "resume"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Phase 4 — SDK and machine transports",
+        "HCM-4.1 — SDK owner and use-case inventory"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Two-commit true-stop closeout"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 7f4fcff4df414f684d1b073c04a8633969def836",
+    "head": "7f4fcff4df414f684d1b073c04a8633969def836",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260810T012500Z--HCM-4-1--orchestration--sdk-owner-use-case-planning-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Bound increment task 019fe926-a636-72c0-af48-855e6fed7a03 on host local and meta task 019fe86d-8591-75e3-b222-330527ba1fe4 on host local to nonce eabc0636e845a36c2745dba27ade56b9013808d8d0caa127c3c61d5d99b6dc2e; verified assigned root, base cc44a84c0f5b75f336301dac0c502cfae909c17e, tree 54309db1e88e6cfeb1611cf18dfab2d07c10d487, ancestry, target ref, remote baseline, clean start, and protected-path separation before edits.",
+    "Created the reviewed HCM-4.1 selector, executable spec/plan/todo, source/Cargo research, preflight proof, durable Phase-3 exception decision/proof, and affected canonical 00-06 reconciliation; no Rust, tests, Cargo, schema, dependency, public symbol, CLI/compiler, or transport changed.",
+    "Reconciled the 62 canonical ordinary operation IDs against the plan with no missing, extra, or duplicate row. The HCM-3.6 future ingress requires persisted approved recommendation/policy, approval, canonical/lifecycle head, reassessment, byte-CAS, idempotency, atomic canonical/PostureTransition/lifecycle outputs, recovery, and strict-Clippy real-path proof.",
+    "Created and validated the v1.4 discovery dispatch, then obtained a fresh independent CLEAN review with no Critical/P1/P2/P3/P4 finding. No remediation or post-CLEAN review ran.",
+    "Committed reviewed primary documentation state at 7f4fcff4df414f684d1b073c04a8633969def836. GitNexus MCP/CLI and compare-to-main were unavailable; the package records source-search evidence and unavailable status honestly."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-selector.md",
+      "status": "completed",
+      "summary": "Reviewed planning-only selector, exact allowed paths, exception limits, outcome identity, and causal cadence."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/SPEC.md",
+      "status": "completed",
+      "summary": "SDK ownership boundary, posture ingress, future packets, and explicit non-implementation ceiling."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/tasks/plan.md",
+      "status": "completed",
+      "summary": "Exact 62-operation owner/coordinator/shape/proof inventory and compiler deletion plan."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/tasks/todo.md",
+      "status": "completed",
+      "summary": "Planning ledger and explicit later-slice deferrals."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/research/20260810T005634Z--sdk-owner-and-source-impact-inventory.md",
+      "status": "completed",
+      "summary": "Source/Cargo ownership, caller, risk, and rejected-synthetic-ingress evidence."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/proof/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-preflight.md",
+      "status": "completed",
+      "summary": "Bound preflight and planning proof wall, including unavailable GitNexus evidence and inherited validator status."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md",
+      "status": "completed",
+      "summary": "Durable narrow exception preserving Phase-3-open and later real-adoption closure requirements."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/proof/20260810T005634Z--hcm-4-1-planning-dependency-order-exception-proof.md",
+      "status": "completed",
+      "summary": "Proof that the exception is ordering-only and does not promote a phase, gate, or product behavior."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM41-PLAN-D1",
+      "summary": "handbook-sdk is the ordinary-use-case coordinator; semantic owners remain engine, flow, pipeline, and future contracts, while CLI/Tauri are thin consumers and compiler has no target ownership.",
+      "authority_effect": "Planning only. No crate, public API, dependency, transport, or source implementation is selected.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.1/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.1/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM41-PLAN-D2",
+      "summary": "The only future HCM-3.6 reachability candidate is a real SDK ordinary operation with recommendation/policy/approval/head/reassessment/CAS inputs; promotion, recovery, startup, tests, readers, Flow/pipeline, and legacy compiler/CLI routes are rejected.",
+      "authority_effect": "Planning preserves the crate-private owner transaction and assigns any public bridge or DTO choice to a fresh HCM-4.1 implementation authority.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.1/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.1/research/20260810T005634Z--sdk-owner-and-source-impact-inventory.md"
+      ]
+    },
+    {
+      "decision_id": "HCM41-PLAN-D3",
+      "summary": "Phase 4 planning advances under one narrow durable ordering exception while Phase 3 remains open; later Phase-3 closure consumes actual adoption evidence and reruns strict-Clippy, regression, causal-review, and exit gates.",
+      "authority_effect": "No Phase-3 or HCM-3.5 completion, waiver, baseline, or proof promotion is claimed.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "bound worktree/base/tree/ancestor/target-ref/remote/protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Assigned worktree C:/Users/spmcc/.codex/worktrees/ebc1/handbook was clean and distinct from protected paths at base cc44a84c0f5b75f336301dac0c502cfae909c17e/tree 54309db1e88e6cfeb1611cf18dfab2d07c10d487; target ref and remote tracking ref matched their expected baselines."
+    },
+    {
+      "command": "62-operation catalog parity",
+      "status": "passed",
+      "evidence_ref": "Canonical 05 catalog=62 and HCM-4.1 plan=62 with no missing, extra, or duplicate operation IDs."
+    },
+    {
+      "command": "v1.4 discovery dispatch validation",
+      "status": "passed",
+      "evidence_ref": "validate_handoffs.py --verify-dispatch accepted 20260810T011200Z--HCM-4-1--sdk-owner-use-case-planning-discovery-review with subject sha256:2798dd3dc0a8185c01661bc26f35fddc1e015d7f6f19b3e4dca8c1ad9c80cafe."
+    },
+    {
+      "command": "independent planning review",
+      "status": "passed",
+      "evidence_ref": "Fresh /root/hcm41_discovery_review replayed all 35 manifest hashes and returned CLEAN with no Critical/P1/P2/P3/P4 findings."
+    },
+    {
+      "command": "cargo fmt --all -- --check; git diff --check; manifest whitespace scan",
+      "status": "passed",
+      "evidence_ref": "Formatting, diff whitespace, and the 35-path trailing-space/tab scan passed before primary commit."
+    },
+    {
+      "command": "GitNexus query/context/impact/detect_changes and compare-to-main",
+      "status": "not_run",
+      "evidence_ref": "GitNexus MCP tools and .gitnexus CLI runner were unavailable in this environment. Exact source/Cargo caller evidence is recorded, but unavailable FTS/callgraph/scoped/compare evidence is never GREEN."
+    },
+    {
+      "command": "ordinary v1.4 record/ledger validator",
+      "status": "failed",
+      "evidence_ref": "Exact inherited failure: 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN. This immutable predecessor contradiction is the sole ordinary-validator failure and is recorded failed/not GREEN without waiver or modification."
+    },
+    {
+      "command": "v1.4 admission and orchestration-contract self-tests",
+      "status": "passed",
+      "evidence_ref": "Both required self-tests passed before mechanical closeout."
+    },
+    {
+      "command": "targeted HCM-4.1 v1.4 parent semantic, baseline-manifest, and deterministic-ledger replay",
+      "status": "passed",
+      "evidence_ref": "The repository validator accepted this record's schema, complete parent dispatch population, causal sequence, CLEAN reviewed baseline replay at 7f4fcff4df414f684d1b073c04a8633969def836, and byte-identical rebuilt ledger."
+    },
+    {
+      "command": "product/runtime tests",
+      "status": "not_run",
+      "evidence_ref": "Prohibited by the selected planning-only HCM-4.1 authority; no product source or behavior changed."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/00-README.md",
+      "sections": ["HCM-4.1 planning exception"],
+      "reason": "Make the planning-only exception and Phase-3-open state canonical.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/01-target-architecture.md",
+      "sections": ["compiler retirement and HCM-3.6 posture ingress"],
+      "reason": "Reconcile SDK/CLI/owner target architecture with no implementation claim.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/02-semantic-model.md",
+      "sections": ["Status"],
+      "reason": "Preserve semantic and transport invariants under the sequencing exception.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": ["Project posture kernel", "Compiler seam", "Consumer facade"],
+      "reason": "Record live private posture and planned SDK/compiler truth.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": ["Phase 4", "HCM-4.1"],
+      "reason": "Constrain HCM-4.1 to planning and reserve implementation for a fresh selector.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": ["SDK ordinary-use-case contract"],
+      "reason": "Clarify that the HCM-4.1 inventory does not create a crate, public surface, or reachability.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": ["HCM-4.1 SDK owner and use-case planning proof gate"],
+      "reason": "Define the planning proof wall and non-promoting limits.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/",
+      "sections": ["selector", "SPEC", "tasks", "research", "proof"],
+      "reason": "Add the bounded reviewed HCM-4.1 planning/control package.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260810T005634Z--hcm-4-1-planning-dependency-order-exception.md",
+      "sections": ["entire decision"],
+      "reason": "Durably preserve the narrow Phase-3-open ordering authority.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "HCM-4.1 planning is completed locally; no same-slice work remains under this planning authority.",
+    "condition": "none",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260810T012500Z--HCM-4-1--orchestration--sdk-owner-use-case-planning-completed.json",
+        "sections": ["entire completed parent"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/decision/20260810T005634Z--hcm-4-1-sdk-owner-use-case-planning-selector.md",
+        "sections": ["entire selector"]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not treat this completion as HCM-4.1 implementation, Phase-3/HCM-3.6/HCM-3.5 P5/P6 closure, HCM-4.2+, Phase 5/6, release, publication, or push.",
+      "Do not create product reachability with tests, visibility, suppression, promotion, recovery, startup, reader, Flow/pipeline, or compiler/CLI synthetic calls.",
+      "Any future work requires a distinct authorized top-level dispatch and, for source edits, new GitNexus impact evidence."
+    ],
+    "acceptance_criteria": [],
+    "stop_conditions": [
+      "Stop if a future implementation requires a new public/dependency/compatibility/mutation-authority choice beyond its fresh selector.",
+      "Do not merge, rebase, reset, clean, force-update, fetch, pull, push, or publish remotely."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-4.1 planning is complete locally at reviewed primary 7f4fcff4df414f684d1b073c04a8633969def836. The package freezes SDK ownership, all 62 ordinary operations, compiler retirement, and the real future posture ingress while preserving Phase 3, HCM-3.6 strict-Clippy, and HCM-3.5 P5/P6 as open. One fresh review is CLEAN with no findings; no implementation or remote action occurred."
+}
