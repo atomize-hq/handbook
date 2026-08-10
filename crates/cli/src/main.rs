@@ -4,6 +4,16 @@ mod author;
 mod doctor;
 mod doctor_rendering;
 mod exit_policy;
+#[cfg(test)]
+#[path = "../tests_support/flow_output_model_hcm_2_1_tests.rs"]
+mod flow_output_model_hcm_2_1_tests;
+#[cfg(test)]
+#[path = "../tests_support/flow_output_model_hcm_2_2_tests.rs"]
+mod flow_output_model_hcm_2_2_tests;
+mod flow_rendering;
+#[cfg(test)]
+#[path = "../tests_support/flow_rendering_surface_tests.rs"]
+mod flow_rendering_surface_tests;
 mod generate;
 mod inspect;
 mod pipeline;
@@ -380,9 +390,8 @@ struct RequestArgs {
 
 const _: () = {
     let _ = (
-        std::mem::size_of::<handbook_compiler::DecisionLog>(),
-        std::mem::size_of::<handbook_flow::PacketResult>(),
-        std::mem::size_of::<handbook_compiler::CompilerError>(),
-        std::mem::size_of::<handbook_compiler::Refusal>(),
+        std::mem::size_of::<handbook_sdk::DecisionLog>(),
+        std::mem::size_of::<handbook_sdk::PacketResult>(),
+        std::mem::size_of::<handbook_sdk::Refusal>(),
     );
 };

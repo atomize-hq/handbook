@@ -134,13 +134,58 @@ transport-owned policy decision. New public engine facade types and their
 versioning are a deliberate later HCM-4.1 implementation choice; they are not
 created by this plan.
 
+## Artifact compatibility boundary
+
+The existing `artifact` route is a retained CLI compatibility surface, not an
+exception to the SDK boundary. Its SDK methods take operation-specific typed
+selectors and bounded document inputs and return closed Rust variants. In
+particular, the SDK must not expose `serde_json::Value`, a generic JSON
+dispatcher, raw lineage records, or internal transaction evidence records.
+
+Where the owner currently returns a JSON value, the SDK projects it into a
+recursive closed `ArtifactDocument` value (`null`, boolean, canonical number
+lexeme, string, array, or string-keyed object) and operation-specific result
+variants. Mutation success projects the existing lineage evidence only as an
+opaque typed receipt reference and fingerprint; it does not expose the durable
+record or payload. The CLI may render that typed receipt using its established
+legacy `internal_transaction_evidence_ref` and
+`internal_transaction_evidence_fingerprint` field names so current output
+remains compatible. This rendering compatibility does not make either field a
+new SDK JSON, Serde, schema, or transport promise.
+
+## Charter compatibility boundary
+
+`author charter` has a separate retained compatibility contract. The CLI keeps
+command-form selection, cwd/repository discovery, file and stdin reads, the
+CLI-argument/envelope fingerprint merge and mismatch refusal, human rendering,
+legacy `--json` rendering, stdout/stderr, and exit mapping. The SDK accepts a
+closed already-parsed Charter command request and returns a closed Rust result;
+it exposes no `Serialize`, `serde_json`, `serde_yaml`, `Value`, schema, or
+transport API. In particular, the approval identity-preflight result remains a
+CLI rendering case even though its established legacy JSON shape differs from
+the ordinary Charter-result wrapper.
+
+Before the compiler seam is removed, the Author route needs executable
+before/after parity fixtures for exact stdout and stderr bytes, exit status,
+and filesystem delta. Each fixture states and exercises its human or `--json`
+mode (both when the command supports both) while covering legacy-input refusal,
+malformed intake, first author and same-input replay, invalid selected Charter,
+validate success and missing Charter, approval identity-preflight refusal, and
+promotion invalid-intent refusal. The four current direct compiler behavior tests for author
+persistence/collision, approval preflight, and promotion refusal move to SDK
+typed-behavior tests without `serde_json::to_value`; CLI tests retain the
+legacy JSON and human-output assertions. The route-level source scan must show
+no compiler reference. Compiler removal remains last: all eight route parity
+walls must pass before the normal CLI dependency/import scan and
+`cargo tree -p handbook-cli -e normal -i handbook-compiler` prove its absence.
+
 ## Compiler retirement and cutover plan
 
 | Current seam | Future destination | Temporary scaffolding | Required deletion proof |
 |---|---|---|---|
 | Compiler author/Charter product adapters | SDK composes engine owner operations; CLI parses input and renders result | A one-way internal CLI-to-SDK adapter may exist only during cutover. | CLI normal commands no longer depend on `handbook-compiler`; compiler public root does not gain a replacement facade. |
 | Compiler doctor/setup/resolver composition | SDK repository/flow composition; CLI keeps cwd, args, output, exit | No compatibility DTO or semantic wrapper in CLI. | Same SDK typed result powers direct Rust and CLI; legacy compiler code is deleted or remains only for separately named non-SDK support seams. |
-| Compiler rendering / CLI rendering | CLI owns human formatting; SDK never owns prose | None that evaluates domain state. | Human rendering is a pure adapter over typed SDK result; JSON is one schema-valid SDK response. |
+| Compiler rendering / CLI rendering | CLI owns human and existing `--json` formatting; SDK never owns prose or a serializer | None that evaluates domain state. | Human and JSON rendering are pure legacy CLI adapters over typed SDK results. They preserve existing bytes without creating a shared SDK JSON/Serde/schema or transport promise; new shared JSON parity remains HCM-4.3. |
 | Existing direct CLI owner imports | SDK methods | Transitional imports allowed only when documented by a fresh selector. | No normal CLI owner composition bypass remains; cargo graph shows CLI -> SDK, SDK -> owners, no compiler in target path. |
 
 No temporary route may become public API, become a second semantic owner, or

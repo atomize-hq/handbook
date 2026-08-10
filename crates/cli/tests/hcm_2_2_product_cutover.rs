@@ -159,7 +159,7 @@ fn author_intent_is_evaluated_but_fails_closed_without_lineage_persistence() {
     let decisions = handbook_engine::resolve_shipped_profile_decisions(repo.path()).unwrap();
     let bundle = handbook_engine::evaluate_charter_intake(
         &decisions,
-        handbook_compiler::parse_charter_intake_envelope(&intake_yaml).unwrap(),
+        serde_yaml_bw::from_str(&intake_yaml).unwrap(),
         None,
     )
     .unwrap();
@@ -343,6 +343,82 @@ fn approver_commands_map_to_exact_identity_preflight_before_native_authority() {
         assert_eq!(value["changed_paths"], serde_json::json!([]));
         assert!(!repo.path().join(".handbook").exists());
     }
+}
+
+#[test]
+fn approver_mapping_grammar_refusal_stays_cli_owned_and_non_mutating() {
+    let repo = tempfile::tempdir().unwrap();
+    let before = snapshot_files(repo.path());
+
+    let output = run(
+        repo.path(),
+        &[
+            "approvers",
+            "add-credential",
+            "--approval-mapping",
+            "missing-separator",
+            "--json",
+        ],
+    );
+
+    assert_eq!(output.status.code(), Some(1));
+    assert_eq!(output.stderr, b"");
+    assert_eq!(
+        output.stdout,
+        br#"{
+  "changed_paths": [],
+  "next_actions": [
+    "use one or more exact non-empty class=authority approval mappings"
+  ],
+  "operation": "add_credential",
+  "refusal": {
+    "code": "invalid_request",
+    "message": "approver mapping must use exact class=authority syntax",
+    "retryable": false
+  },
+  "schema_id": "handbook.approver-admin-adapter-result",
+  "schema_version": "1.0",
+  "status": "refused"
+}
+"#,
+    );
+    assert_eq!(snapshot_files(repo.path()), before);
+
+    let duplicate = run(
+        repo.path(),
+        &[
+            "approvers",
+            "add-credential",
+            "--approval-mapping",
+            "owner=authority",
+            "--approval-mapping",
+            "owner=authority",
+            "--json",
+        ],
+    );
+
+    assert_eq!(duplicate.status.code(), Some(1));
+    assert_eq!(duplicate.stderr, b"");
+    assert_eq!(
+        duplicate.stdout,
+        br#"{
+  "changed_paths": [],
+  "next_actions": [
+    "use one or more exact non-empty class=authority approval mappings"
+  ],
+  "operation": "add_credential",
+  "refusal": {
+    "code": "invalid_request",
+    "message": "approver mappings must be unique",
+    "retryable": false
+  },
+  "schema_id": "handbook.approver-admin-adapter-result",
+  "schema_version": "1.0",
+  "status": "refused"
+}
+"#,
+    );
+    assert_eq!(snapshot_files(repo.path()), before);
 }
 
 #[test]

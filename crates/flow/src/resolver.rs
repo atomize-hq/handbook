@@ -676,12 +676,12 @@ const DEMO_EXECUTION_PACKET_ID: &str = "execution.demo.packet";
 const LIVE_EXECUTION_PACKET_ID: &str = "execution.live.packet";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct ResolveRequest {
+pub struct ResolveRequest<'a> {
     pub budget_policy: BudgetPolicy,
-    pub packet_id: &'static str,
+    pub packet_id: &'a str,
 }
 
-impl Default for ResolveRequest {
+impl Default for ResolveRequest<'_> {
     fn default() -> Self {
         Self {
             budget_policy: BudgetPolicy::default(),
@@ -718,14 +718,14 @@ pub struct ResolverResult {
 
 pub fn resolve(
     repo_root: impl AsRef<Path>,
-    request: ResolveRequest,
+    request: ResolveRequest<'_>,
 ) -> Result<ResolverResult, ManifestError> {
     resolve_with_contract(repo_root, request, *default_canonical_layout_contract())
 }
 
 pub fn resolve_with_contract(
     repo_root: impl AsRef<Path>,
-    request: ResolveRequest,
+    request: ResolveRequest<'_>,
     contract: CanonicalLayoutContract,
 ) -> Result<ResolverResult, ManifestError> {
     let repo_root = repo_root.as_ref();
@@ -936,10 +936,10 @@ pub fn resolve_with_contract(
     })
 }
 
-struct BuildPacketResultInput<'a> {
+struct BuildPacketResultInput<'a, 'request> {
     repo_root: &'a Path,
     contract: CanonicalLayoutContract,
-    request: &'a ResolveRequest,
+    request: &'a ResolveRequest<'request>,
     packet_artifact_inputs: PacketArtifactInputs<'a>,
     manifest: &'a ArtifactManifest,
     packet_artifact_plans: &'a [PacketArtifactPlan<'a>],
@@ -951,7 +951,7 @@ struct BuildPacketResultInput<'a> {
     decision_log_entries: usize,
 }
 
-fn build_packet_result(input: BuildPacketResultInput<'_>) -> PacketResult {
+fn build_packet_result(input: BuildPacketResultInput<'_, '_>) -> PacketResult {
     let BuildPacketResultInput {
         repo_root,
         contract,
@@ -1642,7 +1642,7 @@ fn compute_refusal(
     manifest: &ArtifactManifest,
     baseline_validations: &[BaselineArtifactValidation],
     budget_outcome: &BudgetOutcome,
-    request: &ResolveRequest,
+    request: &ResolveRequest<'_>,
     contract: CanonicalLayoutContract,
 ) -> Option<ResolverRefusal> {
     match manifest.system_root_status {
@@ -1888,7 +1888,7 @@ fn compute_blockers(
     manifest: &ArtifactManifest,
     baseline_validations: &[BaselineArtifactValidation],
     budget_outcome: &BudgetOutcome,
-    request: &ResolveRequest,
+    request: &ResolveRequest<'_>,
     contract: CanonicalLayoutContract,
 ) -> Vec<ResolverBlocker> {
     let mut blockers = build_required_baseline_blockers(manifest, baseline_validations, contract);

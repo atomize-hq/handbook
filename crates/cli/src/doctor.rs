@@ -10,7 +10,7 @@ pub(super) fn run(args: DoctorArgs) -> ExitCode {
         }
     };
     let repo_root = discover_managed_repo_root(&cwd);
-    let report = match handbook_compiler::doctor(&repo_root) {
+    let report = match handbook_sdk::HandbookSdkV1::open(&repo_root).doctor() {
         Ok(report) => report,
         Err(error) => {
             println!("OUTCOME: ERROR");
@@ -34,19 +34,19 @@ pub(super) fn run(args: DoctorArgs) -> ExitCode {
     exit_policy::repository_status(report.status)
 }
 
-fn doctor_error_kind_name(kind: handbook_compiler::DoctorErrorKind) -> &'static str {
+fn doctor_error_kind_name(kind: handbook_sdk::DoctorErrorKind) -> &'static str {
     match kind {
-        handbook_compiler::DoctorErrorKind::ProfileResolution => "profile_resolution",
-        handbook_compiler::DoctorErrorKind::ProfileDecision => "profile_decision",
+        handbook_sdk::DoctorErrorKind::ProfileResolution => "profile_resolution",
+        handbook_sdk::DoctorErrorKind::ProfileDecision => "profile_decision",
     }
 }
 
-fn doctor_error_reason_name(reason: handbook_compiler::DoctorErrorReasonCode) -> &'static str {
+fn doctor_error_reason_name(reason: handbook_sdk::DoctorErrorReasonCode) -> &'static str {
     match reason {
-        handbook_compiler::DoctorErrorReasonCode::ShippedProfileUnavailable => {
+        handbook_sdk::DoctorErrorReasonCode::ShippedProfileUnavailable => {
             "shipped_profile_unavailable"
         }
-        handbook_compiler::DoctorErrorReasonCode::SelectedProfileDecisionInvalid => {
+        handbook_sdk::DoctorErrorReasonCode::SelectedProfileDecisionInvalid => {
             "selected_profile_decision_invalid"
         }
     }

@@ -9,12 +9,14 @@ path = "src/main.rs"
 
 [dependencies]
 clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-handbook-compiler = { path = "../compiler" }
-handbook-engine = { path = "../engine" }
-handbook-flow = { path = "../flow" }
-handbook-pipeline = { path = "../pipeline" }
+serde_yaml_bw = "2.5.4"
+handbook-sdk = { path = "../sdk" }
 
 [dev-dependencies]
+handbook-engine = { path = "../engine", version = "0.2.0" }
+handbook-flow = { path = "../flow", version = "0.1.1" }
+handbook-pipeline = { path = "../pipeline", version = "0.1.2" }
 serde_json_canonicalizer = "0.3.2"
 tempfile = "3"

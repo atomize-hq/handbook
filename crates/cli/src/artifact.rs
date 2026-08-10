@@ -1,12 +1,16 @@
 use clap::{Args, Subcommand, ValueEnum};
-use handbook_engine::artifact_intake::MAX_ARTIFACT_INPUT_DOCUMENT_BYTES;
-use handbook_engine::artifact_intake_registry::AcquisitionModeV1;
-use handbook_engine::artifact_mutation::{execution_disposition_name, ArtifactMutationServiceV1};
-use handbook_engine::artifact_repository::{ArtifactRepositoryV1, ArtifactTargetV1};
-use serde_json::{json, Value};
+use handbook_sdk::artifact::{
+    ArtifactAcquisitionMode, ArtifactAuthorityClass, ArtifactCandidateAppendRequest,
+    ArtifactCandidateValidateRequest, ArtifactDocument, ArtifactInputDocument,
+    ArtifactIntakeAppendRequest, ArtifactIntakeDefinitionRequest, ArtifactIntakeEvaluateRequest,
+    ArtifactMutationDisposition, ArtifactMutationExecution, ArtifactMutationOutcome,
+    ArtifactMutationRefusalCode, ArtifactMutationRefusalLayer, ArtifactPromoteRequest,
+    ArtifactReadRequest, ArtifactSdk, ArtifactSelector, ArtifactValidateRequest,
+    ArtifactValidationLayerStatus, MAX_ARTIFACT_INPUT_DOCUMENT_BYTES,
+};
+use serde_json::{json, Map, Number, Value};
 use std::fs::File;
 use std::io::{self, Read};
-use std::path::Path;
 use std::process::ExitCode;
 
 #[derive(Args, Debug)]
@@ -154,74 +158,68 @@ pub(crate) fn run(args: ArtifactArgs) -> ExitCode {
 fn execute(command: ArtifactCommand) -> Result<(), String> {
     match command {
         ArtifactCommand::ListKinds(args) => {
-            let repository = open_repository(&args.repository_root)?;
-            let selection_fingerprint = repository
-                .selection_fingerprint()
+            let result = ArtifactSdk::open(&args.repository_root)
+                .list_kinds()
                 .map_err(|error| error.to_string())?;
-            let kinds = repository.list_kinds().map_err(|error| error.to_string())?;
             let value = json!({
                 "operation_id": "artifact.kind.list",
-                "selection_fingerprint": selection_fingerprint.as_str(),
-                "kinds": kinds.into_iter().map(|kind| json!({
-                    "kind_ref": kind.kind_ref.as_str(),
-                    "definition_fingerprint": kind.definition_fingerprint.as_str(),
-                    "schema_ref": kind.schema_ref.as_str(),
+                "selection_fingerprint": result.selection_fingerprint,
+                "kinds": result.kinds.into_iter().map(|kind| json!({
+                    "kind_ref": kind.kind_ref,
+                    "definition_fingerprint": kind.definition_fingerprint,
+                    "schema_ref": kind.schema_ref,
                 })).collect::<Vec<_>>()
             });
             emit(value, args.json)
         }
         ArtifactCommand::ListInstances(args) => {
-            let repository = open_repository(&args.repository_root)?;
-            let selection_fingerprint = repository
-                .selection_fingerprint()
-                .map_err(|error| error.to_string())?;
-            let instances = repository
+            let result = ArtifactSdk::open(&args.repository_root)
                 .list_instances()
                 .map_err(|error| error.to_string())?;
             let value = json!({
                 "operation_id": "artifact.instance.list",
-                "selection_fingerprint": selection_fingerprint.as_str(),
-                "instances": instances.into_iter().map(|instance| json!({
-                    "instance_id": instance.instance_id.as_str(),
-                    "kind_ref": instance.kind_ref.as_str(),
+                "selection_fingerprint": result.selection_fingerprint,
+                "instances": result.instances.into_iter().map(|instance| json!({
+                    "instance_id": instance.instance_id,
+                    "kind_ref": instance.kind_ref,
                     "canonical_path": instance.canonical_path,
-                    "intake_definition_ref": instance.intake_definition_ref.as_ref().map(|reference| reference.as_str()),
+                    "intake_definition_ref": instance.intake_definition_ref,
                 })).collect::<Vec<_>>()
             });
             emit(value, args.json)
         }
         ArtifactCommand::Read(args) => {
-            let repository = open_repository(&args.repository_root)?;
-            let target = target(&args.kind_ref, &args.instance_id)?;
-            let result = repository
-                .read(target.kind_ref(), target.instance_id())
+            let result = ArtifactSdk::open(&args.repository_root)
+                .read(ArtifactReadRequest {
+                    selector: selector(&args.kind_ref, &args.instance_id),
+                })
                 .map_err(|error| error.to_string())?;
             emit(
                 json!({
-                    "operation_id": result.operation_id.as_str(),
-                    "operation_context_fingerprint": result.operation_context_fingerprint.as_str(),
-                    "kind_ref": result.kind_ref.as_str(),
-                    "instance_id": result.instance_id.as_str(),
+                    "operation_id": result.operation_id,
+                    "operation_context_fingerprint": result.operation_context_fingerprint,
+                    "kind_ref": result.kind_ref,
+                    "instance_id": result.instance_id,
                     "canonical_path": result.canonical_path,
-                    "artifact_fingerprint": result.artifact_fingerprint.as_str(),
-                    "content": result.content,
+                    "artifact_fingerprint": result.artifact_fingerprint,
+                    "content": document_to_value(result.content)?,
                 }),
                 args.json,
             )
         }
         ArtifactCommand::Validate(args) => {
-            let repository = open_repository(&args.repository_root)?;
-            let target = target(&args.kind_ref, &args.instance_id)?;
-            let result = repository
-                .validate(target.kind_ref(), target.instance_id())
+            let result = ArtifactSdk::open(&args.repository_root)
+                .validate(ArtifactValidateRequest {
+                    selector: selector(&args.kind_ref, &args.instance_id),
+                })
                 .map_err(|error| error.to_string())?;
             emit(
                 json!({
-                    "operation_id": result.operation_id.as_str(),
-                    "operation_context_fingerprint": result.operation_context_fingerprint.as_str(),
-                    "artifact_fingerprint": result.artifact_fingerprint.as_str(),
+                    "operation_id": result.operation_id,
+                    "operation_context_fingerprint": result.operation_context_fingerprint,
+                    "artifact_fingerprint": result.artifact_fingerprint,
                     "outcome": "valid",
-                    "content": result.content,
+                    "content": document_to_value(result.content)?,
                     "layers": {
                         "structural": "pass",
                         "semantic": layer_status(result.semantic_status),
@@ -234,123 +232,96 @@ fn execute(command: ArtifactCommand) -> Result<(), String> {
             )
         }
         ArtifactCommand::IntakeDefinition(args) => {
-            let repository = open_repository(&args.repository_root)?;
-            let target = target(&args.kind_ref, &args.instance_id)?;
-            let definition = repository
-                .intake_definition(&target)
+            let definition = ArtifactSdk::open(&args.repository_root)
+                .intake_definition(ArtifactIntakeDefinitionRequest {
+                    selector: selector(&args.kind_ref, &args.instance_id),
+                })
                 .map_err(|error| error.to_string())?;
             emit(
                 json!({
                     "operation_id": "intake.definition.read",
-                    "kind_ref": target.kind_ref().as_str(),
-                    "instance_id": target.instance_id().as_str(),
-                    "intake_definition_ref": definition.exact_ref().as_str(),
-                    "intake_definition_fingerprint": definition.definition_fingerprint().as_str(),
-                    "candidate_schema_ref": definition.candidate_schema_ref().as_str(),
-                    "coverage": definition.coverage().iter().map(|row| json!({
-                        "coverage_id": row.coverage_id(),
-                        "target_paths": row.target_paths(),
-                        "minimum_specificity": format!("{:?}", row.minimum_specificity()).to_lowercase(),
+                    "kind_ref": definition.kind_ref,
+                    "instance_id": definition.instance_id,
+                    "intake_definition_ref": definition.intake_definition_ref,
+                    "intake_definition_fingerprint": definition.intake_definition_fingerprint,
+                    "candidate_schema_ref": definition.candidate_schema_ref,
+                    "coverage": definition.coverage.into_iter().map(|row| json!({
+                        "coverage_id": row.coverage_id,
+                        "target_paths": row.target_paths,
+                        "minimum_specificity": format!("{:?}", row.minimum_specificity).to_lowercase(),
                     })).collect::<Vec<_>>()
                 }),
                 args.json,
             )
         }
         ArtifactCommand::IntakeEvaluate(args) => {
-            let repository = open_repository(&args.repository_root)?;
-            let target = target(&args.kind_ref, &args.instance_id)?;
-            let bytes = read_bounded_input(&args.from_inputs)?;
-            let evaluation = repository
-                .evaluate_intake_document(
-                    &target,
-                    acquisition_mode(args.mode),
-                    args.expected_current_fingerprint.as_deref(),
-                    &bytes,
-                )
+            let evaluation = ArtifactSdk::open(&args.repository_root)
+                .evaluate_intake(ArtifactIntakeEvaluateRequest {
+                    selector: selector(&args.kind_ref, &args.instance_id),
+                    mode: acquisition_mode(args.mode),
+                    expected_current_fingerprint: args.expected_current_fingerprint,
+                    input: input_document(read_bounded_input(&args.from_inputs)?)?,
+                })
                 .map_err(|error| error.to_string())?;
-            emit(
-                evaluation
-                    .to_json_value()
-                    .map_err(|error| error.to_string())?,
-                args.json,
-            )
+            emit(document_to_value(evaluation.document)?, args.json)
         }
         ArtifactCommand::IntakeAppend(args) => {
-            let bytes = read_bounded_input(&args.from_request)?;
-            let execution = ArtifactMutationServiceV1::intake_append(
-                Path::new(&args.repository_root),
-                &args.kind_ref,
-                &args.instance_id,
-                &bytes,
-            )
-            .map_err(|error| error.to_string())?;
+            let execution = ArtifactSdk::open(&args.repository_root)
+                .intake_append(ArtifactIntakeAppendRequest {
+                    selector: selector(&args.kind_ref, &args.instance_id),
+                    input: input_document(read_bounded_input(&args.from_request)?)?,
+                })
+                .map_err(|error| error.to_string())?;
             emit_mutation(execution, args.json)
         }
         ArtifactCommand::CandidateValidate(args) => {
-            let preview = ArtifactMutationServiceV1::candidate_validate(
-                Path::new(&args.repository_root),
-                &args.kind_ref,
-                &args.instance_id,
-                &args.intake_record_ref,
-                &args.intake_record_fingerprint,
-                args.expected_current_fingerprint.as_deref(),
-            )
-            .map_err(|error| error.to_string())?;
-            emit(
-                serde_json::to_value(preview)
-                    .map_err(|_| "candidate preview could not be rendered".to_string())?,
-                args.json,
-            )
+            let preview = ArtifactSdk::open(&args.repository_root)
+                .candidate_validate(ArtifactCandidateValidateRequest {
+                    selector: selector(&args.kind_ref, &args.instance_id),
+                    intake_record_ref: args.intake_record_ref,
+                    intake_record_fingerprint: args.intake_record_fingerprint,
+                    expected_current_artifact_fingerprint: args.expected_current_fingerprint,
+                })
+                .map_err(|error| error.to_string())?;
+            emit(document_to_value(preview.document)?, args.json)
         }
         ArtifactCommand::CandidateAppend(args) => {
-            let bytes = read_bounded_input(&args.from_request)?;
-            let execution = ArtifactMutationServiceV1::candidate_append(
-                Path::new(&args.repository_root),
-                &args.kind_ref,
-                &args.instance_id,
-                &bytes,
-            )
-            .map_err(|error| error.to_string())?;
+            let execution = ArtifactSdk::open(&args.repository_root)
+                .candidate_append(ArtifactCandidateAppendRequest {
+                    selector: selector(&args.kind_ref, &args.instance_id),
+                    input: input_document(read_bounded_input(&args.from_request)?)?,
+                })
+                .map_err(|error| error.to_string())?;
             emit_mutation(execution, args.json)
         }
         ArtifactCommand::Promote(args) => {
-            let bytes = read_bounded_input(&args.from_request)?;
-            let execution = ArtifactMutationServiceV1::promote(
-                Path::new(&args.repository_root),
-                &args.kind_ref,
-                &args.instance_id,
-                &bytes,
-            )
-            .map_err(|error| error.to_string())?;
+            let execution = ArtifactSdk::open(&args.repository_root)
+                .promote(ArtifactPromoteRequest {
+                    selector: selector(&args.kind_ref, &args.instance_id),
+                    input: input_document(read_bounded_input(&args.from_request)?)?,
+                })
+                .map_err(|error| error.to_string())?;
             emit_mutation(execution, args.json)
         }
     }
 }
 
-fn open_repository(path: &str) -> Result<ArtifactRepositoryV1, String> {
-    ArtifactRepositoryV1::open(Path::new(path)).map_err(|error| error.to_string())
+fn selector(kind_ref: &str, instance_id: &str) -> ArtifactSelector {
+    ArtifactSelector::new(kind_ref, instance_id)
 }
 
-fn target(kind_ref: &str, instance_id: &str) -> Result<ArtifactTargetV1, String> {
-    ArtifactTargetV1::parse(kind_ref, instance_id).map_err(|error| error.to_string())
-}
-
-fn acquisition_mode(mode: IntakeModeArg) -> AcquisitionModeV1 {
+fn acquisition_mode(mode: IntakeModeArg) -> ArtifactAcquisitionMode {
     match mode {
-        IntakeModeArg::GuidedAdaptive => AcquisitionModeV1::GuidedAdaptive,
-        IntakeModeArg::Express => AcquisitionModeV1::Express,
-        IntakeModeArg::AgentAssisted => AcquisitionModeV1::AgentAssisted,
+        IntakeModeArg::GuidedAdaptive => ArtifactAcquisitionMode::GuidedAdaptive,
+        IntakeModeArg::Express => ArtifactAcquisitionMode::Express,
+        IntakeModeArg::AgentAssisted => ArtifactAcquisitionMode::AgentAssisted,
     }
 }
 
-fn layer_status(
-    status: handbook_engine::artifact_operations::ArtifactValidationLayerStatusV1,
-) -> &'static str {
+fn layer_status(status: ArtifactValidationLayerStatus) -> &'static str {
     match status {
-        handbook_engine::artifact_operations::ArtifactValidationLayerStatusV1::Pass => "pass",
-        handbook_engine::artifact_operations::ArtifactValidationLayerStatusV1::NotApplicable => {
-            "not_applicable"
-        }
+        ArtifactValidationLayerStatus::Pass => "pass",
+        ArtifactValidationLayerStatus::NotApplicable => "not_applicable",
     }
 }
 
@@ -372,6 +343,10 @@ fn read_bounded_input(path: &str) -> Result<Vec<u8>, String> {
     Ok(bytes)
 }
 
+fn input_document(bytes: Vec<u8>) -> Result<ArtifactInputDocument, String> {
+    ArtifactInputDocument::new(bytes).map_err(|error| error.to_string())
+}
+
 fn emit(value: Value, json_mode: bool) -> Result<(), String> {
     let rendered = if json_mode {
         serde_json::to_string(&value)
@@ -383,24 +358,104 @@ fn emit(value: Value, json_mode: bool) -> Result<(), String> {
     Ok(())
 }
 
-fn emit_mutation(
-    execution: handbook_engine::artifact_mutation::GenericMutationExecutionV1,
-    json_mode: bool,
-) -> Result<(), String> {
-    let refused = execution.result.outcome == "refused";
-    let mut value = serde_json::to_value(&execution.result)
-        .map_err(|_| "artifact mutation result could not be rendered".to_string())?;
-    value
-        .as_object_mut()
-        .expect("the lineage result is a JSON object")
-        .insert(
-            "execution_disposition".to_string(),
-            Value::String(execution_disposition_name(execution.disposition).to_string()),
-        );
+fn document_to_value(document: ArtifactDocument) -> Result<Value, String> {
+    match document {
+        ArtifactDocument::Null => Ok(Value::Null),
+        ArtifactDocument::Boolean(value) => Ok(Value::Bool(value)),
+        ArtifactDocument::Number(value) => value
+            .parse::<Number>()
+            .map(Value::Number)
+            .map_err(|_| "artifact result could not be rendered".to_string()),
+        ArtifactDocument::String(value) => Ok(Value::String(value)),
+        ArtifactDocument::Array(values) => values
+            .into_iter()
+            .map(document_to_value)
+            .collect::<Result<Vec<_>, _>>()
+            .map(Value::Array),
+        ArtifactDocument::Object(values) => values
+            .into_iter()
+            .map(|(key, value)| document_to_value(value).map(|value| (key, value)))
+            .collect::<Result<Map<_, _>, _>>()
+            .map(Value::Object),
+    }
+}
+
+fn emit_mutation(execution: ArtifactMutationExecution, json_mode: bool) -> Result<(), String> {
+    let refused = execution.result.outcome == ArtifactMutationOutcome::Refused;
+    let result = execution.result;
+    let value = json!({
+        "schema_id": result.schema_id,
+        "schema_version": result.schema_version,
+        "operation_id": result.operation_id,
+        "transaction_id": result.transaction_id,
+        "request_fingerprint": result.request_fingerprint,
+        "outcome": mutation_outcome_name(result.outcome),
+        "refusal": result.refusal.map(|refusal| json!({
+            "code": mutation_refusal_code_name(refusal.code),
+            "layer": mutation_refusal_layer_name(refusal.layer),
+            "expected_fingerprint": refusal.expected_fingerprint,
+            "observed_fingerprint": refusal.observed_fingerprint,
+        })),
+        "authoritative_outputs": result.authoritative_outputs.into_iter().map(|output| json!({
+            "authority_class": authority_class_name(output.authority_class),
+            "ref": output.reference,
+            "fingerprint": output.fingerprint,
+        })).collect::<Vec<_>>(),
+        "internal_transaction_evidence_ref": result.transaction_evidence.as_ref().map(|evidence| evidence.reference.as_str()),
+        "internal_transaction_evidence_fingerprint": result.transaction_evidence.as_ref().map(|evidence| evidence.fingerprint.as_str()),
+        "result_fingerprint": result.result_fingerprint,
+        "execution_disposition": mutation_disposition_name(execution.disposition),
+    });
     emit(value, json_mode)?;
     if refused {
         Err("the established artifact mutation was refused".to_string())
     } else {
         Ok(())
+    }
+}
+
+fn authority_class_name(authority_class: ArtifactAuthorityClass) -> &'static str {
+    match authority_class {
+        ArtifactAuthorityClass::SubordinateClosure => "subordinate_closure",
+        ArtifactAuthorityClass::SemanticRecord => "semantic_record",
+        ArtifactAuthorityClass::CanonicalTruth => "canonical_truth",
+    }
+}
+
+fn mutation_outcome_name(outcome: ArtifactMutationOutcome) -> &'static str {
+    match outcome {
+        ArtifactMutationOutcome::Committed => "committed",
+        ArtifactMutationOutcome::Refused => "refused",
+    }
+}
+
+fn mutation_disposition_name(disposition: ArtifactMutationDisposition) -> &'static str {
+    match disposition {
+        ArtifactMutationDisposition::Committed => "committed",
+        ArtifactMutationDisposition::Refused => "refused",
+        ArtifactMutationDisposition::Replayed => "replayed",
+    }
+}
+
+fn mutation_refusal_code_name(code: ArtifactMutationRefusalCode) -> &'static str {
+    match code {
+        ArtifactMutationRefusalCode::CanonicalSyntaxInvalid => "canonical_syntax_invalid",
+        ArtifactMutationRefusalCode::StructuralValidationFailed => "structural_validation_failed",
+        ArtifactMutationRefusalCode::IntakeCoverageBlocked => "intake_coverage_blocked",
+        ArtifactMutationRefusalCode::StaleBasis => "stale_basis",
+        ArtifactMutationRefusalCode::StaleCurrentArtifact => "stale_current_artifact",
+        ArtifactMutationRefusalCode::OperationIneligible => "operation_ineligible",
+        ArtifactMutationRefusalCode::PublicationBasisConflict => "publication_basis_conflict",
+    }
+}
+
+fn mutation_refusal_layer_name(layer: ArtifactMutationRefusalLayer) -> &'static str {
+    match layer {
+        ArtifactMutationRefusalLayer::CanonicalSyntax => "canonical_syntax",
+        ArtifactMutationRefusalLayer::Structural => "structural",
+        ArtifactMutationRefusalLayer::Intake => "intake",
+        ArtifactMutationRefusalLayer::Currentness => "currentness",
+        ArtifactMutationRefusalLayer::Eligibility => "eligibility",
+        ArtifactMutationRefusalLayer::Publication => "publication",
     }
 }

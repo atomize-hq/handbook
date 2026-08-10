@@ -1,3 +1,4 @@
+use std::collections::BTreeMap;
 use std::fs;
 use std::io::Write;
 #[cfg(unix)]
@@ -82,6 +83,36 @@ fn write_file(path: &Path, contents: &str) {
     fs::write(path, contents).expect("write");
 }
 
+fn snapshot_files(root: &Path) -> BTreeMap<String, Vec<u8>> {
+    fn visit(root: &Path, current: &Path, files: &mut BTreeMap<String, Vec<u8>>) {
+        if !current.exists() {
+            return;
+        }
+        let mut entries = fs::read_dir(current)
+            .expect("read directory")
+            .map(|entry| entry.expect("directory entry").path())
+            .collect::<Vec<_>>();
+        entries.sort();
+        for path in entries {
+            if path.is_dir() {
+                visit(root, &path, files);
+            } else if path.is_file() {
+                files.insert(
+                    path.strip_prefix(root)
+                        .expect("repo-relative path")
+                        .to_string_lossy()
+                        .replace('\\', "/"),
+                    fs::read(path).expect("file bytes"),
+                );
+            }
+        }
+    }
+
+    let mut files = BTreeMap::new();
+    visit(root, root, &mut files);
+    files
+}
+
 #[cfg(unix)]
 fn with_project_context_now_utc<T>(value: &str, action: impl FnOnce() -> T) -> T {
     let previous = std::env::var_os(AUTHOR_PROJECT_CONTEXT_NOW_UTC_ENV_VAR);
@@ -143,9 +174,8 @@ fn write_valid_selected_project_context(repo_root: &Path) {
 
 #[cfg(unix)]
 fn expected_project_context_markdown_from_yaml() -> String {
-    let input =
-        handbook_compiler::parse_project_context_input_yaml(valid_project_context_inputs_yaml())
-            .expect("parse project-context yaml");
+    let input = handbook_sdk::parse_project_context_input_yaml(valid_project_context_inputs_yaml())
+        .expect("parse project-context yaml");
     String::from_utf8(
         handbook_engine::serialize_canonical_project_context(
             &handbook_engine::resolve_shipped_profile_decisions(".")
@@ -601,7 +631,7 @@ fn project_context_file_inputs_succeed() {
     assert!(out.contains("SOURCE: "), "{out}");
     let expected_yaml = expected_project_context_markdown_from_yaml();
     let record =
-        handbook_compiler::parse_project_context_input_yaml(valid_project_context_inputs_yaml())
+        handbook_sdk::parse_project_context_input_yaml(valid_project_context_inputs_yaml())
             .unwrap();
     let rendered = handbook_engine::render_project_context_markdown(&record).unwrap();
     assert!(
@@ -716,4 +746,237 @@ fn charter_input_templates_and_fixtures_use_canonical_exception_record_location(
         );
         assert!(!contents.contains(".handbook/charter/CHARTER.md#exceptions"));
     }
+}
+
+#[test]
+fn charter_boundary_refusals_preserve_exact_stdout_stderr_exit_and_filesystem() {
+    let dir = legacy_authoring_fixture_repo();
+    let legacy_input = dir.path().join("legacy-inputs.yaml");
+    write_file(&legacy_input, "this must not be parsed\n");
+    let legacy_before = snapshot_files(dir.path());
+
+    let legacy = run_in(
+        dir.path(),
+        &[
+            "author",
+            "charter",
+            "--from-inputs",
+            legacy_input.to_str().expect("UTF-8 path"),
+            "--json",
+        ],
+    );
+    assert_eq!(legacy.status.code(), Some(1));
+    assert_eq!(legacy.stderr, b"");
+    assert_eq!(
+        stdout(&legacy),
+        concat!(
+            "{\n",
+            "  \"approval_fingerprint\": null,\n",
+            "  \"approval_ref\": null,\n",
+            "  \"candidate_fingerprint\": null,\n",
+            "  \"candidate_ref\": null,\n",
+            "  \"canonical_path\": null,\n",
+            "  \"changed_paths\": [],\n",
+            "  \"intake_fingerprint\": null,\n",
+            "  \"intake_ref\": null,\n",
+            "  \"next_actions\": [\n",
+            "    \"retry with --mode guided-adaptive, express, or agent-assisted\"\n",
+            "  ],\n",
+            "  \"operation\": \"author\",\n",
+            "  \"promotion_fingerprint\": null,\n",
+            "  \"promotion_ref\": null,\n",
+            "  \"refusal\": {\n",
+            "    \"code\": \"legacy_input_refused\",\n",
+            "    \"message\": \"--from-inputs without an explicit --mode is not a selected Charter operation\",\n",
+            "    \"retryable\": false\n",
+            "  },\n",
+            "  \"rendered_output_fingerprint\": null,\n",
+            "  \"schema_id\": \"handbook.charter-operation-result\",\n",
+            "  \"schema_version\": \"1.0\",\n",
+            "  \"source_fingerprint\": null,\n",
+            "  \"status\": \"refused\"\n",
+            "}\n"
+        )
+    );
+    assert_eq!(snapshot_files(dir.path()), legacy_before);
+
+    let malformed_input = dir.path().join("malformed-inputs.yaml");
+    write_file(&malformed_input, "project: [not valid");
+    let malformed_before = snapshot_files(dir.path());
+    let malformed = run_in(
+        dir.path(),
+        &[
+            "author",
+            "charter",
+            "--mode",
+            "guided-adaptive",
+            "--from-inputs",
+            malformed_input.to_str().expect("UTF-8 path"),
+        ],
+    );
+    assert_eq!(malformed.status.code(), Some(1));
+    assert_eq!(malformed.stderr, b"");
+    assert_eq!(
+        stdout(&malformed),
+        concat!(
+            "OUTCOME: REFUSED\n",
+            "OPERATION: author\n",
+            "CODE: invalid_intake_envelope\n",
+            "MESSAGE: Charter intake input does not match the closed engine envelope\n",
+            "RETRYABLE: false\n",
+            "NEXT SAFE ACTION: repair the typed Charter intake envelope and retry with an explicit --mode\n"
+        )
+    );
+    assert_eq!(snapshot_files(dir.path()), malformed_before);
+}
+
+#[test]
+fn charter_author_success_preserves_exact_json_and_filesystem_delta() {
+    let dir = legacy_authoring_fixture_repo();
+    let intake = valid_structured_inputs_yaml();
+    let input = dir.path().join("charter-inputs.yaml");
+    write_file(&input, &intake);
+    let before = snapshot_files(dir.path());
+
+    let output = run_in(
+        dir.path(),
+        &[
+            "author",
+            "charter",
+            "--mode",
+            "guided-adaptive",
+            "--from-inputs",
+            input.to_str().expect("UTF-8 path"),
+            "--json",
+        ],
+    );
+    assert_eq!(output.status.code(), Some(0));
+    assert_eq!(output.stderr, b"");
+    let value: serde_json::Value = serde_json::from_slice(&output.stdout).expect("author JSON");
+    let candidate_ref = value["candidate_ref"].as_str().expect("candidate ref");
+    let intake_ref = value["intake_ref"].as_str().expect("intake ref");
+    let validation_ref = serde_json::from_slice::<serde_json::Value>(
+        &fs::read(
+            dir.path()
+                .join(".handbook/evidence/charter")
+                .join(candidate_ref),
+        )
+        .expect("candidate bytes"),
+    )
+    .expect("candidate JSON")["validation_result_binding"]["validation_result_ref"]
+        .as_str()
+        .expect("validation ref")
+        .to_owned();
+    let expected = serde_json::json!({
+        "schema_id": "handbook.charter-operation-result",
+        "schema_version": "1.0",
+        "operation": "author",
+        "status": "succeeded",
+        "canonical_path": null,
+        "source_fingerprint": null,
+        "rendered_output_fingerprint": null,
+        "intake_ref": intake_ref,
+        "intake_fingerprint": value["intake_fingerprint"],
+        "candidate_ref": candidate_ref,
+        "candidate_fingerprint": value["candidate_fingerprint"],
+        "approval_ref": null,
+        "approval_fingerprint": null,
+        "promotion_ref": null,
+        "promotion_fingerprint": null,
+        "changed_paths": [
+            value["changed_paths"][0],
+            format!(".handbook/state/{intake_ref}"),
+            format!(".handbook/state/{validation_ref}"),
+            format!(".handbook/evidence/charter/{candidate_ref}"),
+        ],
+        "refusal": null,
+        "next_actions": [
+            "review the immutable candidate and record every required human approval"
+        ]
+    });
+    let expected_stdout = format!(
+        "{}\n",
+        serde_json::to_string_pretty(&expected).expect("expected JSON")
+    );
+    assert_eq!(stdout(&output), expected_stdout);
+
+    let after = snapshot_files(dir.path());
+    let changed = after
+        .keys()
+        .filter(|path| !before.contains_key(*path))
+        .cloned()
+        .collect::<Vec<_>>();
+    let mut expected_changed = vec![
+        format!(".handbook/evidence/charter/{candidate_ref}"),
+        value["changed_paths"][0]
+            .as_str()
+            .expect("normalized content")
+            .to_owned(),
+        format!(".handbook/state/{intake_ref}"),
+        format!(".handbook/state/{validation_ref}"),
+        ".handbook/state/locks/author-project_authority.lock".to_owned(),
+        ".handbook/state/locks/lifecycle.lock".to_owned(),
+        ".handbook/state/locks/promotion.lock".to_owned(),
+        ".handbook/state/locks/registry.lock".to_owned(),
+    ];
+    expected_changed.sort();
+    assert_eq!(changed, expected_changed);
+}
+
+#[test]
+fn charter_approval_preflight_preserves_the_exact_legacy_json_shape() {
+    let dir = legacy_authoring_fixture_repo();
+    let before = snapshot_files(dir.path());
+    let output = run_in(
+        dir.path(),
+        &[
+            "author",
+            "charter",
+            "--approve-candidate",
+            "candidates/candidate_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json",
+            "--approval-class",
+            "Project owner approval",
+            "--authority-ref",
+            "Project owner",
+            "--json",
+        ],
+    );
+    assert_eq!(output.status.code(), Some(1));
+    assert_eq!(output.stderr, b"");
+    assert_eq!(
+        stdout(&output),
+        concat!(
+            "{\n",
+            "  \"changed_paths\": [],\n",
+            "  \"next_actions\": [\n",
+            "    \"run or repair handbook setup, then retry the complete operation\"\n",
+            "  ],\n",
+            "  \"operation\": \"charter_approval\",\n",
+            "  \"operation_id\": null,\n",
+            "  \"refusal\": {\n",
+            "    \"code\": \"repository_identity_unavailable\",\n",
+            "    \"message\": \"repository invocation identity is unavailable\",\n",
+            "    \"retryable\": false\n",
+            "  },\n",
+            "  \"repository_identity_fingerprint\": null,\n",
+            "  \"schema_id\": \"handbook.repository-invocation-preflight-result\",\n",
+            "  \"schema_version\": \"1.0\",\n",
+            "  \"stage\": \"repository_identity\",\n",
+            "  \"status\": \"refused\"\n",
+            "}\n"
+        )
+    );
+    let after = snapshot_files(dir.path());
+    let changed = after
+        .keys()
+        .filter(|path| !before.contains_key(*path))
+        .cloned()
+        .collect::<Vec<_>>();
+    assert_eq!(
+        changed,
+        vec![
+            ".handbook/state/locks/promotion.lock".to_owned(),
+            ".handbook/state/locks/registry.lock".to_owned(),
+        ]
+    );
 }

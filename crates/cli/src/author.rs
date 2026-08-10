@@ -2,11 +2,78 @@ use crate::{
     shell_shared::{discover_managed_repo_root, read_stdin},
     AuthorArgs, AuthorCharterArgs, AuthorCommand, AuthorProjectContextArgs, CharterModeArg, Cli,
 };
+use serde::Deserialize;
 use std::fmt::Write as _;
 use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
 use std::process::ExitCode;
+
+#[derive(Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum CharterModeWire {
+    GuidedAdaptive,
+    Express,
+    AgentAssisted,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum CharterIntakeSourceKindWire {
+    UserDeclaration,
+    EvidencedInference,
+    DeterministicDefault,
+    KnownUnknown,
+    Contradiction,
+    Waiver,
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct CharterCoverageWire {
+    coverage_id: String,
+    source_kind: CharterIntakeSourceKindWire,
+    value_ref: String,
+    evidence_refs: Vec<String>,
+    confidence: String,
+    freshness: Option<String>,
+    sensitivity: String,
+    contradiction_refs: Vec<String>,
+    waiver_ref: Option<String>,
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct CharterConsumerWire {
+    kind: String,
+    id: String,
+    version: String,
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct CharterIntakeEnvelopeWire {
+    mode: CharterModeWire,
+    content: serde_json::Value,
+    coverage: Vec<CharterCoverageWire>,
+    consumer: CharterConsumerWire,
+    prompt_event_refs: Vec<String>,
+    finalized_at_utc: String,
+    expected_current_fingerprint: Option<String>,
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct ProjectContextInputWire {
+    schema_id: String,
+    schema_version: String,
+    record_id: String,
+    summary: String,
+    system_boundaries: Vec<String>,
+    ownership: Vec<String>,
+    authoritative_references: Vec<String>,
+    known_unknowns: Vec<String>,
+}
 
 pub(crate) fn run(args: AuthorArgs) -> ExitCode {
     match args.command {
@@ -30,7 +97,7 @@ fn author_charter_command(args: AuthorCharterArgs) -> ExitCode {
         render_charter_operation_text(&result)
     };
     print!("{rendered}");
-    if result.status == handbook_compiler::AdapterOperationStatus::Succeeded {
+    if result.status == handbook_sdk::AuthorOperationStatus::Succeeded {
         ExitCode::SUCCESS
     } else {
         ExitCode::from(1)
@@ -39,7 +106,7 @@ fn author_charter_command(args: AuthorCharterArgs) -> ExitCode {
 
 fn execute_selected_author_charter_command(
     args: AuthorCharterArgs,
-) -> handbook_compiler::CharterOperationResult {
+) -> handbook_sdk::CharterOperationResult {
     let author_selected = args.mode.is_some()
         && args.from_inputs.is_some()
         && args.approve_candidate.is_none()
@@ -88,25 +155,25 @@ fn execute_selected_author_charter_command(
         && !args.validate;
 
     if legacy_selected {
-        return handbook_compiler::legacy_charter_input_refusal();
+        return handbook_sdk::CharterOperationResult::legacy_input_refused();
     }
 
     let operation = if approve_selected {
-        handbook_compiler::CharterOperation::Approve
+        handbook_sdk::CharterOperation::Approve
     } else if promote_selected {
-        handbook_compiler::CharterOperation::Promote
+        handbook_sdk::CharterOperation::Promote
     } else if validate_selected {
-        handbook_compiler::CharterOperation::Validate
+        handbook_sdk::CharterOperation::Validate
     } else {
-        handbook_compiler::CharterOperation::Author
+        handbook_sdk::CharterOperation::Author
     };
     if !(author_selected || approve_selected || promote_selected || validate_selected) {
-        return handbook_compiler::invalid_charter_command_refusal(operation);
+        return handbook_sdk::CharterOperationResult::invalid_request(operation);
     }
 
     let cwd = match std::env::current_dir() {
         Ok(cwd) => cwd,
-        Err(_) => return handbook_compiler::invalid_charter_command_refusal(operation),
+        Err(_) => return handbook_sdk::CharterOperationResult::invalid_request(operation),
     };
     let repo_root = discover_managed_repo_root(&cwd);
     let intent = if author_selected {
@@ -120,28 +187,28 @@ fn execute_selected_author_charter_command(
             path_or_dash,
         ) {
             Ok(yaml) => yaml,
-            Err(_) => return handbook_compiler::invalid_charter_command_refusal(operation),
+            Err(_) => return handbook_sdk::CharterOperationResult::invalid_request(operation),
         };
-        let mut envelope = match handbook_compiler::parse_charter_intake_envelope(&yaml) {
+        let mut envelope = match parse_charter_intake_envelope(&yaml) {
             Ok(envelope) => envelope,
-            Err(refusal) => return refusal,
+            Err(()) => return handbook_sdk::CharterOperationResult::invalid_intake_envelope(),
         };
         if args.expected_current_fingerprint.is_some()
             && envelope.expected_current_fingerprint.is_some()
             && args.expected_current_fingerprint.as_deref()
                 != envelope.expected_current_fingerprint.as_deref()
         {
-            return handbook_compiler::invalid_charter_command_refusal(operation);
+            return handbook_sdk::CharterOperationResult::invalid_request(operation);
         }
         if args.expected_current_fingerprint.is_some() {
             envelope.expected_current_fingerprint = args.expected_current_fingerprint;
         }
-        handbook_compiler::CharterCommandIntent::Author {
+        handbook_sdk::CharterCommandRequest::Author {
             mode: charter_mode(args.mode.expect("author selection requires a mode")),
-            envelope,
+            intake: envelope,
         }
     } else if approve_selected {
-        handbook_compiler::CharterCommandIntent::Approve {
+        handbook_sdk::CharterCommandRequest::Approve {
             candidate_ref: args
                 .approve_candidate
                 .expect("approval selection requires a candidate"),
@@ -154,7 +221,7 @@ fn execute_selected_author_charter_command(
             accepted_waiver_refs: args.accept_waiver_refs,
         }
     } else if promote_selected {
-        handbook_compiler::CharterCommandIntent::Promote {
+        handbook_sdk::CharterCommandRequest::Promote {
             candidate_ref: args
                 .promote_candidate
                 .expect("promotion selection requires a candidate"),
@@ -164,36 +231,179 @@ fn execute_selected_author_charter_command(
             expected_current_fingerprint: args.expected_current_fingerprint,
         }
     } else {
-        handbook_compiler::CharterCommandIntent::Validate
+        handbook_sdk::CharterCommandRequest::Validate
     };
-    handbook_compiler::execute_charter_command(repo_root, intent)
+    handbook_sdk::HandbookSdkV1::open(repo_root).author_charter(intent)
 }
 
-fn charter_mode(mode: CharterModeArg) -> handbook_engine::CharterAcquisitionMode {
+fn charter_mode(mode: CharterModeArg) -> handbook_sdk::CharterAcquisitionMode {
     match mode {
-        CharterModeArg::GuidedAdaptive => handbook_engine::CharterAcquisitionMode::GuidedAdaptive,
-        CharterModeArg::Express => handbook_engine::CharterAcquisitionMode::Express,
-        CharterModeArg::AgentAssisted => handbook_engine::CharterAcquisitionMode::AgentAssisted,
+        CharterModeArg::GuidedAdaptive => handbook_sdk::CharterAcquisitionMode::GuidedAdaptive,
+        CharterModeArg::Express => handbook_sdk::CharterAcquisitionMode::Express,
+        CharterModeArg::AgentAssisted => handbook_sdk::CharterAcquisitionMode::AgentAssisted,
     }
 }
 
-fn render_charter_operation_json(result: &handbook_compiler::CharterOperationResult) -> String {
-    let mut output = serde_json::to_string_pretty(result)
+fn parse_charter_intake_envelope(yaml: &str) -> Result<handbook_sdk::CharterIntakeEnvelope, ()> {
+    let wire: CharterIntakeEnvelopeWire = serde_yaml_bw::from_str(yaml).map_err(|_| ())?;
+    Ok(handbook_sdk::CharterIntakeEnvelope {
+        mode: charter_mode_from_wire(wire.mode),
+        content: charter_input_value(wire.content),
+        coverage: wire
+            .coverage
+            .into_iter()
+            .map(|coverage| handbook_sdk::CharterCoverageSubmission {
+                coverage_id: coverage.coverage_id,
+                source_kind: charter_intake_source_kind(coverage.source_kind),
+                value_ref: coverage.value_ref,
+                evidence_refs: coverage.evidence_refs,
+                confidence: coverage.confidence,
+                freshness: coverage.freshness,
+                sensitivity: coverage.sensitivity,
+                contradiction_refs: coverage.contradiction_refs,
+                waiver_ref: coverage.waiver_ref,
+            })
+            .collect(),
+        consumer: handbook_sdk::CharterIntakeConsumer {
+            kind: wire.consumer.kind,
+            id: wire.consumer.id,
+            version: wire.consumer.version,
+        },
+        prompt_event_refs: wire.prompt_event_refs,
+        finalized_at_utc: wire.finalized_at_utc,
+        expected_current_fingerprint: wire.expected_current_fingerprint,
+    })
+}
+
+fn charter_mode_from_wire(mode: CharterModeWire) -> handbook_sdk::CharterAcquisitionMode {
+    match mode {
+        CharterModeWire::GuidedAdaptive => handbook_sdk::CharterAcquisitionMode::GuidedAdaptive,
+        CharterModeWire::Express => handbook_sdk::CharterAcquisitionMode::Express,
+        CharterModeWire::AgentAssisted => handbook_sdk::CharterAcquisitionMode::AgentAssisted,
+    }
+}
+
+fn charter_intake_source_kind(
+    source_kind: CharterIntakeSourceKindWire,
+) -> handbook_sdk::CharterIntakeSourceKind {
+    match source_kind {
+        CharterIntakeSourceKindWire::UserDeclaration => {
+            handbook_sdk::CharterIntakeSourceKind::UserDeclaration
+        }
+        CharterIntakeSourceKindWire::EvidencedInference => {
+            handbook_sdk::CharterIntakeSourceKind::EvidencedInference
+        }
+        CharterIntakeSourceKindWire::DeterministicDefault => {
+            handbook_sdk::CharterIntakeSourceKind::DeterministicDefault
+        }
+        CharterIntakeSourceKindWire::KnownUnknown => {
+            handbook_sdk::CharterIntakeSourceKind::KnownUnknown
+        }
+        CharterIntakeSourceKindWire::Contradiction => {
+            handbook_sdk::CharterIntakeSourceKind::Contradiction
+        }
+        CharterIntakeSourceKindWire::Waiver => handbook_sdk::CharterIntakeSourceKind::Waiver,
+    }
+}
+
+fn charter_input_value(value: serde_json::Value) -> handbook_sdk::CharterInputValue {
+    match value {
+        serde_json::Value::Null => handbook_sdk::CharterInputValue::Null,
+        serde_json::Value::Bool(value) => handbook_sdk::CharterInputValue::Boolean(value),
+        serde_json::Value::Number(value) => {
+            handbook_sdk::CharterInputValue::Number(value.to_string())
+        }
+        serde_json::Value::String(value) => handbook_sdk::CharterInputValue::String(value),
+        serde_json::Value::Array(values) => handbook_sdk::CharterInputValue::Sequence(
+            values.into_iter().map(charter_input_value).collect(),
+        ),
+        serde_json::Value::Object(values) => handbook_sdk::CharterInputValue::Mapping(
+            values
+                .into_iter()
+                .map(|(key, value)| (key, charter_input_value(value)))
+                .collect(),
+        ),
+    }
+}
+
+fn render_charter_operation_json(result: &handbook_sdk::CharterOperationResult) -> String {
+    let document = if let Some(failure) = &result.invocation_failure {
+        if let Some(stage) = &failure.stage {
+            serde_json::json!({
+                "schema_id": failure.schema_id,
+                "schema_version": failure.schema_version,
+                "operation": failure.operation,
+                "stage": stage,
+                "status": failure.status,
+                "repository_identity_fingerprint": failure.repository_identity_fingerprint,
+                "operation_id": failure.operation_id,
+                "changed_paths": failure.changed_paths,
+                "refusal": {
+                    "code": failure.refusal.code,
+                    "message": failure.refusal.message,
+                    "retryable": failure.refusal.retryable,
+                },
+                "next_actions": failure.next_actions,
+            })
+        } else {
+            serde_json::json!({
+                "schema_id": failure.schema_id,
+                "schema_version": failure.schema_version,
+                "operation": failure.operation,
+                "status": failure.status,
+                "repository_identity_fingerprint": failure.repository_identity_fingerprint,
+                "operation_id": failure.operation_id,
+                "changed_paths": failure.changed_paths,
+                "refusal": {
+                    "code": failure.refusal.code,
+                    "message": failure.refusal.message,
+                    "retryable": failure.refusal.retryable,
+                },
+                "next_actions": failure.next_actions,
+            })
+        }
+    } else {
+        serde_json::json!({
+            "schema_id": result.schema_id,
+            "schema_version": result.schema_version,
+            "operation": charter_operation_name(result.operation),
+            "status": author_operation_status_name(result.status),
+            "canonical_path": result.canonical_path,
+            "source_fingerprint": result.source_fingerprint,
+            "rendered_output_fingerprint": result.rendered_output_fingerprint,
+            "intake_ref": result.intake_ref,
+            "intake_fingerprint": result.intake_fingerprint,
+            "candidate_ref": result.candidate_ref,
+            "candidate_fingerprint": result.candidate_fingerprint,
+            "approval_ref": result.approval_ref,
+            "approval_fingerprint": result.approval_fingerprint,
+            "promotion_ref": result.promotion_ref,
+            "promotion_fingerprint": result.promotion_fingerprint,
+            "changed_paths": result.changed_paths,
+            "refusal": result.refusal.as_ref().map(|refusal| serde_json::json!({
+                "code": refusal.code,
+                "message": refusal.message,
+                "retryable": refusal.retryable,
+            })),
+            "next_actions": result.next_actions,
+        })
+    };
+    let mut output = serde_json::to_string_pretty(&document)
         .unwrap_or_else(|_| "{\"status\":\"refused\"}".to_owned());
     output.push('\n');
     output
 }
 
-fn render_charter_operation_text(result: &handbook_compiler::CharterOperationResult) -> String {
+fn render_charter_operation_text(result: &handbook_sdk::CharterOperationResult) -> String {
     let status = match result.status {
-        handbook_compiler::AdapterOperationStatus::Succeeded => "SUCCEEDED",
-        handbook_compiler::AdapterOperationStatus::Refused => "REFUSED",
+        handbook_sdk::AuthorOperationStatus::Succeeded => "SUCCEEDED",
+        handbook_sdk::AuthorOperationStatus::Refused => "REFUSED",
     };
     let operation = match result.operation {
-        handbook_compiler::CharterOperation::Author => "author",
-        handbook_compiler::CharterOperation::Approve => "approve",
-        handbook_compiler::CharterOperation::Promote => "promote",
-        handbook_compiler::CharterOperation::Validate => "validate",
+        handbook_sdk::CharterOperation::Author => "author",
+        handbook_sdk::CharterOperation::Approve => "approve",
+        handbook_sdk::CharterOperation::Promote => "promote",
+        handbook_sdk::CharterOperation::Validate => "validate",
     };
     let mut output = format!("OUTCOME: {status}\nOPERATION: {operation}\n");
     if let Some(refusal) = &result.refusal {
@@ -216,12 +426,32 @@ fn render_charter_operation_text(result: &handbook_compiler::CharterOperationRes
     output
 }
 
+fn charter_operation_name(operation: handbook_sdk::CharterOperation) -> &'static str {
+    match operation {
+        handbook_sdk::CharterOperation::Author => "author",
+        handbook_sdk::CharterOperation::Approve => "approve",
+        handbook_sdk::CharterOperation::Promote => "promote",
+        handbook_sdk::CharterOperation::Validate => "validate",
+    }
+}
+
+fn author_operation_status_name(status: handbook_sdk::AuthorOperationStatus) -> &'static str {
+    match status {
+        handbook_sdk::AuthorOperationStatus::Succeeded => "succeeded",
+        handbook_sdk::AuthorOperationStatus::Refused => "refused",
+    }
+}
+
 fn author_project_context_command(args: AuthorProjectContextArgs) -> ExitCode {
     let rendered = execute_author_project_context_command(
         args,
         std::env::current_dir,
-        |repo_root| handbook_compiler::preflight_author_project_context(repo_root),
-        |repo_root, input| handbook_compiler::author_project_context_from_input(repo_root, input),
+        |repo_root| {
+            handbook_sdk::HandbookSdkV1::open(repo_root).preflight_project_context_authoring()
+        },
+        |repo_root, input| {
+            handbook_sdk::HandbookSdkV1::open(repo_root).author_project_context(input)
+        },
     );
     println!("{}", rendered.output);
     rendered.exit_code
@@ -235,13 +465,13 @@ fn execute_author_project_context_command<GetCurrentDir, PreflightAuthoring, Run
 ) -> RenderedCommand
 where
     GetCurrentDir: FnOnce() -> io::Result<PathBuf>,
-    PreflightAuthoring: Fn(&Path) -> Result<(), handbook_compiler::AuthorProjectContextRefusal>,
+    PreflightAuthoring: Fn(&Path) -> Result<(), handbook_sdk::AuthorProjectContextRefusal>,
     RunAuthor: Fn(
         &Path,
-        &handbook_engine::CanonicalProjectContext,
+        &handbook_sdk::ProjectContextInput,
     ) -> Result<
-        handbook_compiler::AuthorProjectContextResult,
-        handbook_compiler::AuthorProjectContextRefusal,
+        handbook_sdk::AuthorProjectContextResult,
+        handbook_sdk::AuthorProjectContextRefusal,
     >,
 {
     let Some(path_or_dash) = args.from_inputs.as_deref() else {
@@ -289,7 +519,7 @@ where
             };
         }
     };
-    let input = match handbook_compiler::parse_project_context_input_yaml(&yaml) {
+    let input = match parse_project_context_input_yaml(&yaml) {
         Ok(input) => input,
         Err(refusal) => {
             return RenderedCommand {
@@ -298,6 +528,15 @@ where
             };
         }
     };
+
+    if let Err(refusal) =
+        handbook_sdk::HandbookSdkV1::open(&repo_root).validate_project_context(&input)
+    {
+        return RenderedCommand {
+            output: render_project_context_refusal(&refusal),
+            exit_code: ExitCode::from(1),
+        };
+    }
 
     let input_mode = if path_or_dash == "-" {
         "structured_inputs_stdin"
@@ -331,7 +570,7 @@ where
 }
 
 fn render_author_project_context_success(
-    result: &handbook_compiler::AuthorProjectContextResult,
+    result: &handbook_sdk::AuthorProjectContextResult,
     input_mode: &str,
     input_source: &str,
 ) -> String {
@@ -418,9 +657,7 @@ fn render_author_simple_refusal(
     )
 }
 
-fn render_project_context_refusal(
-    refusal: &handbook_compiler::AuthorProjectContextRefusal,
-) -> String {
+fn render_project_context_refusal(refusal: &handbook_sdk::AuthorProjectContextRefusal) -> String {
     render_author_simple_refusal(
         "author project-context",
         author_project_context_refusal_outcome_name(refusal.kind),
@@ -429,6 +666,29 @@ fn render_project_context_refusal(
         refusal.broken_subject.trim(),
         refusal.next_safe_action.trim(),
     )
+}
+
+fn parse_project_context_input_yaml(
+    yaml: &str,
+) -> Result<handbook_sdk::ProjectContextInput, handbook_sdk::AuthorProjectContextRefusal> {
+    let wire: ProjectContextInputWire =
+        serde_yaml_bw::from_str(yaml).map_err(|_| handbook_sdk::AuthorProjectContextRefusal {
+            kind: handbook_sdk::AuthorProjectContextRefusalKind::MalformedStructuredInput,
+            summary: "failed to parse canonical Project Context YAML".to_owned(),
+            broken_subject: "canonical project-context input".to_owned(),
+            next_safe_action: "repair the canonical `1.0` Project Context YAML and retry"
+                .to_owned(),
+        })?;
+    Ok(handbook_sdk::ProjectContextInput {
+        schema_id: wire.schema_id,
+        schema_version: wire.schema_version,
+        record_id: wire.record_id,
+        summary: wire.summary,
+        system_boundaries: wire.system_boundaries,
+        ownership: wire.ownership,
+        authoritative_references: wire.authoritative_references,
+        known_unknowns: wire.known_unknowns,
+    })
 }
 
 fn read_author_inputs_source(
@@ -462,42 +722,38 @@ fn read_author_inputs_source(
 }
 
 fn author_project_context_refusal_outcome_name(
-    kind: handbook_compiler::AuthorProjectContextRefusalKind,
+    kind: handbook_sdk::AuthorProjectContextRefusalKind,
 ) -> &'static str {
     match kind {
-        handbook_compiler::AuthorProjectContextRefusalKind::MissingSystemRoot
-        | handbook_compiler::AuthorProjectContextRefusalKind::InvalidSystemRoot
-        | handbook_compiler::AuthorProjectContextRefusalKind::MutationRefused => "BLOCKED",
-        handbook_compiler::AuthorProjectContextRefusalKind::MalformedStructuredInput
-        | handbook_compiler::AuthorProjectContextRefusalKind::IncompleteStructuredInput
-        | handbook_compiler::AuthorProjectContextRefusalKind::ExistingCanonicalTruth
-        | handbook_compiler::AuthorProjectContextRefusalKind::UnsupportedPlatformStrictMutation => {
+        handbook_sdk::AuthorProjectContextRefusalKind::MissingSystemRoot
+        | handbook_sdk::AuthorProjectContextRefusalKind::InvalidSystemRoot
+        | handbook_sdk::AuthorProjectContextRefusalKind::MutationRefused => "BLOCKED",
+        handbook_sdk::AuthorProjectContextRefusalKind::MalformedStructuredInput
+        | handbook_sdk::AuthorProjectContextRefusalKind::IncompleteStructuredInput
+        | handbook_sdk::AuthorProjectContextRefusalKind::ExistingCanonicalTruth
+        | handbook_sdk::AuthorProjectContextRefusalKind::UnsupportedPlatformStrictMutation => {
             "REFUSED"
         }
     }
 }
 
 fn author_project_context_refusal_kind_name(
-    kind: handbook_compiler::AuthorProjectContextRefusalKind,
+    kind: handbook_sdk::AuthorProjectContextRefusalKind,
 ) -> &'static str {
     match kind {
-        handbook_compiler::AuthorProjectContextRefusalKind::MissingSystemRoot => {
-            "MissingSystemRoot"
-        }
-        handbook_compiler::AuthorProjectContextRefusalKind::InvalidSystemRoot => {
-            "InvalidSystemRoot"
-        }
-        handbook_compiler::AuthorProjectContextRefusalKind::MalformedStructuredInput => {
+        handbook_sdk::AuthorProjectContextRefusalKind::MissingSystemRoot => "MissingSystemRoot",
+        handbook_sdk::AuthorProjectContextRefusalKind::InvalidSystemRoot => "InvalidSystemRoot",
+        handbook_sdk::AuthorProjectContextRefusalKind::MalformedStructuredInput => {
             "MalformedStructuredInput"
         }
-        handbook_compiler::AuthorProjectContextRefusalKind::IncompleteStructuredInput => {
+        handbook_sdk::AuthorProjectContextRefusalKind::IncompleteStructuredInput => {
             "IncompleteStructuredInput"
         }
-        handbook_compiler::AuthorProjectContextRefusalKind::ExistingCanonicalTruth => {
+        handbook_sdk::AuthorProjectContextRefusalKind::ExistingCanonicalTruth => {
             "ExistingCanonicalTruth"
         }
-        handbook_compiler::AuthorProjectContextRefusalKind::MutationRefused => "MutationRefused",
-        handbook_compiler::AuthorProjectContextRefusalKind::UnsupportedPlatformStrictMutation => {
+        handbook_sdk::AuthorProjectContextRefusalKind::MutationRefused => "MutationRefused",
+        handbook_sdk::AuthorProjectContextRefusalKind::UnsupportedPlatformStrictMutation => {
             "UnsupportedPlatformStrictMutation"
         }
     }

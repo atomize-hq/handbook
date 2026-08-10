@@ -17,12 +17,12 @@ pub(crate) fn flow_output(output: &PreparedFlowOutput) -> ExitCode {
     }
 }
 
-pub(crate) fn repository_status(status: handbook_compiler::RepositoryReadinessStatus) -> ExitCode {
+pub(crate) fn repository_status(status: handbook_sdk::RepositoryReadinessStatus) -> ExitCode {
     match status {
-        handbook_compiler::RepositoryReadinessStatus::Ready => success(),
-        handbook_compiler::RepositoryReadinessStatus::ActionRequired
-        | handbook_compiler::RepositoryReadinessStatus::Indeterminate
-        | handbook_compiler::RepositoryReadinessStatus::Invalid => failure(),
+        handbook_sdk::RepositoryReadinessStatus::Ready => success(),
+        handbook_sdk::RepositoryReadinessStatus::ActionRequired
+        | handbook_sdk::RepositoryReadinessStatus::Indeterminate
+        | handbook_sdk::RepositoryReadinessStatus::Invalid => failure(),
     }
 }
 
@@ -52,7 +52,7 @@ mod tests {
 
     #[test]
     fn repository_readiness_exit_table_is_exhaustive() {
-        use handbook_compiler::RepositoryReadinessStatus as Status;
+        use handbook_sdk::RepositoryReadinessStatus as Status;
         assert_eq!(repository_status(Status::Ready), ExitCode::SUCCESS);
         for status in [
             Status::ActionRequired,

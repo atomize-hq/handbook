@@ -475,30 +475,15 @@ name = "handbook-cli"
 version = "0.1.0"
 dependencies = [
  "clap",
- "handbook-compiler",
  "handbook-engine",
  "handbook-flow",
  "handbook-pipeline",
- "serde_json",
- "serde_json_canonicalizer",
- "tempfile",
-]
-
-[[package]]
-name = "handbook-compiler"
-version = "0.1.0"
-dependencies = [
- "handbook-engine",
- "handbook-flow",
- "handbook-pipeline",
- "libc",
+ "handbook-sdk",
  "serde",
  "serde_json",
  "serde_json_canonicalizer",
  "serde_yaml_bw",
- "sha2",
  "tempfile",
- "time",
 ]
 
 [[package]]
@@ -549,10 +534,15 @@ name = "handbook-sdk"
 version = "0.1.0"
 dependencies = [
  "handbook-engine",
+ "handbook-flow",
+ "handbook-pipeline",
+ "libc",
  "p256",
  "serde_json",
+ "serde_yaml_bw",
  "sha2",
  "tempfile",
+ "time",
 ]
 
 [[package]]

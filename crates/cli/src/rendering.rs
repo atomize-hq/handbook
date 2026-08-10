@@ -1,6 +1,8 @@
+use crate::flow_rendering;
+
 pub(crate) struct PreparedFlowOutput {
     ready: bool,
-    model: handbook_compiler::RenderOutputModel,
+    model: flow_rendering::RenderOutputModel,
 }
 
 impl PreparedFlowOutput {
@@ -35,7 +37,7 @@ impl PreparedFlowOutput {
     }
 }
 
-fn render_fixture_section_for_demo(context: &handbook_flow::PacketFixtureContext) -> String {
+fn render_fixture_section_for_demo(context: &handbook_sdk::PacketFixtureContext) -> String {
     let mut out = String::new();
     out.push_str("MODE: fixture-backed execution demo\n");
     out.push_str("## FIXTURE DEMO\n");
@@ -59,11 +61,11 @@ fn render_fixture_section_for_demo(context: &handbook_flow::PacketFixtureContext
     out
 }
 
-fn render_packet_source_summary(source: &handbook_flow::PacketSourceSummary) -> String {
+fn render_packet_source_summary(source: &handbook_sdk::PacketSourceSummary) -> String {
     let presence = match source.presence {
-        handbook_engine::ArtifactPresence::Missing => "missing",
-        handbook_engine::ArtifactPresence::PresentEmpty => "empty",
-        handbook_engine::ArtifactPresence::PresentNonEmpty => "present",
+        handbook_sdk::ArtifactPresence::Missing => "missing",
+        handbook_sdk::ArtifactPresence::PresentEmpty => "empty",
+        handbook_sdk::ArtifactPresence::PresentNonEmpty => "present",
     };
 
     if let (
@@ -110,7 +112,7 @@ fn inject_after_first_three_lines(rendered: &str, injection: &str) -> String {
     lines.join("\n")
 }
 
-fn render_markdown_output(model: &handbook_compiler::RenderOutputModel) -> String {
+fn render_markdown_output(model: &flow_rendering::RenderOutputModel) -> String {
     let mut output = String::new();
 
     push_line(&mut output, format!("OUTCOME: {}", render_outcome(model)));
@@ -165,7 +167,7 @@ fn render_markdown_output(model: &handbook_compiler::RenderOutputModel) -> Strin
     output
 }
 
-fn render_inspect_output(model: &handbook_compiler::RenderOutputModel) -> String {
+fn render_inspect_output(model: &flow_rendering::RenderOutputModel) -> String {
     let inspect_model = inspect_model(model);
     let mut output = String::new();
 
@@ -226,8 +228,8 @@ fn render_inspect_output(model: &handbook_compiler::RenderOutputModel) -> String
                     target.canonical_repo_relative_path,
                     target.byte_len,
                     match target.byte_domain {
-                        handbook_flow::BudgetByteDomain::Source => "source",
-                        handbook_flow::BudgetByteDomain::RenderedOutput => "rendered_output",
+                        handbook_sdk::BudgetByteDomain::Source => "source",
+                        handbook_sdk::BudgetByteDomain::RenderedOutput => "rendered_output",
                     }
                 ),
             );
@@ -320,15 +322,13 @@ fn render_inspect_output(model: &handbook_compiler::RenderOutputModel) -> String
     push_line(&mut output, "## JSON FALLBACK");
     push_line(
         &mut output,
-        handbook_compiler::render_json(&inspect_model).trim_end(),
+        flow_rendering::render_json(&inspect_model).trim_end(),
     );
 
     output
 }
 
-fn inspect_model(
-    model: &handbook_compiler::RenderOutputModel,
-) -> handbook_compiler::RenderOutputModel {
+fn inspect_model(model: &flow_rendering::RenderOutputModel) -> flow_rendering::RenderOutputModel {
     let mut inspect_model = model.clone();
     if inspect_model.packet_result.is_ready()
         && inspect_model.refusal.is_none()
@@ -343,12 +343,12 @@ fn inspect_model(
 }
 
 fn inspect_ready_next_safe_action(
-    _model: &handbook_compiler::RenderOutputModel,
-) -> handbook_flow::ReadyPacketNextSafeAction {
-    handbook_flow::ReadyPacketNextSafeAction::Generate
+    _model: &flow_rendering::RenderOutputModel,
+) -> handbook_sdk::ReadyPacketNextSafeAction {
+    handbook_sdk::ReadyPacketNextSafeAction::Generate
 }
 
-fn render_markdown_body(output: &mut String, model: &handbook_compiler::RenderOutputModel) {
+fn render_markdown_body(output: &mut String, model: &flow_rendering::RenderOutputModel) {
     push_line(output, "## PACKET OVERVIEW");
     push_line(
         output,
@@ -369,7 +369,7 @@ fn render_markdown_body(output: &mut String, model: &handbook_compiler::RenderOu
     render_packet_body(output, &model.packet_result);
 }
 
-fn render_packet_body(output: &mut String, packet: &handbook_flow::PacketResult) {
+fn render_packet_body(output: &mut String, packet: &handbook_sdk::PacketResult) {
     if let Some(context) = packet.fixture_context.as_ref() {
         output.push_str(&render_packet_fixture_context(context));
         output.push('\n');
@@ -444,7 +444,7 @@ fn render_packet_body(output: &mut String, packet: &handbook_flow::PacketResult)
     }
 }
 
-fn render_packet_fixture_context(context: &handbook_flow::PacketFixtureContext) -> String {
+fn render_packet_fixture_context(context: &handbook_sdk::PacketFixtureContext) -> String {
     let mut output = String::new();
     push_line(&mut output, "## FIXTURE DEMO");
     push_line(&mut output, "MODE: fixture-backed execution demo");
@@ -470,17 +470,17 @@ fn render_packet_fixture_context(context: &handbook_flow::PacketFixtureContext) 
     output
 }
 
-fn render_packet_note(note: &handbook_flow::PacketBodyNote) -> String {
+fn render_packet_note(note: &handbook_sdk::PacketBodyNote) -> String {
     let kind = match note.kind {
-        handbook_flow::PacketBodyNoteKind::Omission => "OMISSION",
-        handbook_flow::PacketBodyNoteKind::Budget => "BUDGET",
-        handbook_flow::PacketBodyNoteKind::InheritedDependency => "INHERITED DEPENDENCY",
+        handbook_sdk::PacketBodyNoteKind::Omission => "OMISSION",
+        handbook_sdk::PacketBodyNoteKind::Budget => "BUDGET",
+        handbook_sdk::PacketBodyNoteKind::InheritedDependency => "INHERITED DEPENDENCY",
     };
 
     format!("{kind}: {}", note.text)
 }
 
-fn render_packet_section(output: &mut String, section: &handbook_flow::PacketSection) {
+fn render_packet_section(output: &mut String, section: &handbook_sdk::PacketSection) {
     push_line(
         output,
         format!(
@@ -488,9 +488,9 @@ fn render_packet_section(output: &mut String, section: &handbook_flow::PacketSec
             section.title, section.canonical_repo_relative_path
         ),
     );
-    if section.mode == handbook_flow::PacketSectionMode::Summary {
+    if section.mode == handbook_sdk::PacketSectionMode::Summary {
         push_line(output, "MODE: summarized due to budget");
-    } else if section.mode == handbook_flow::PacketSectionMode::Rendered {
+    } else if section.mode == handbook_sdk::PacketSectionMode::Rendered {
         push_line(output, "MODE: rendered from selected canonical YAML");
         push_line(
             output,
@@ -521,12 +521,12 @@ fn render_packet_section(output: &mut String, section: &handbook_flow::PacketSec
     output.push_str("```\n");
 }
 
-fn render_outcome(model: &handbook_compiler::RenderOutputModel) -> &'static str {
+fn render_outcome(model: &flow_rendering::RenderOutputModel) -> &'static str {
     render_outcome_from_status(model.packet_status, model.refusal.is_some())
 }
 
 fn render_outcome_from_status(
-    packet_status: handbook_flow::PacketSelectionStatus,
+    packet_status: handbook_sdk::PacketSelectionStatus,
     refusal_present: bool,
 ) -> &'static str {
     if refusal_present {
@@ -534,12 +534,12 @@ fn render_outcome_from_status(
     }
 
     match packet_status {
-        handbook_flow::PacketSelectionStatus::Selected => "READY",
-        handbook_flow::PacketSelectionStatus::Blocked => "BLOCKED",
+        handbook_sdk::PacketSelectionStatus::Selected => "READY",
+        handbook_sdk::PacketSelectionStatus::Blocked => "BLOCKED",
     }
 }
 
-fn render_next_safe_action(model: &handbook_compiler::RenderOutputModel) -> String {
+fn render_next_safe_action(model: &flow_rendering::RenderOutputModel) -> String {
     render_next_safe_action_from_model(
         &model.packet_result,
         model.refusal.as_ref(),
@@ -548,9 +548,9 @@ fn render_next_safe_action(model: &handbook_compiler::RenderOutputModel) -> Stri
 }
 
 fn render_next_safe_action_from_model(
-    packet: &handbook_flow::PacketResult,
-    refusal: Option<&handbook_compiler::Refusal>,
-    blockers: &[handbook_compiler::Blocker],
+    packet: &handbook_sdk::PacketResult,
+    refusal: Option<&handbook_sdk::Refusal>,
+    blockers: &[handbook_sdk::Blocker],
 ) -> String {
     if let Some(refusal) = refusal {
         return render_next_safe_action_value(&refusal.next_safe_action);
@@ -567,9 +567,9 @@ fn render_next_safe_action_from_model(
     "run `doctor`".to_string()
 }
 
-fn render_ready_packet_next_safe_action(packet: &handbook_flow::PacketResult) -> String {
+fn render_ready_packet_next_safe_action(packet: &handbook_sdk::PacketResult) -> String {
     match packet.decision_summary.ready_next_safe_action {
-        handbook_flow::ReadyPacketNextSafeAction::InspectProof => {
+        handbook_sdk::ReadyPacketNextSafeAction::InspectProof => {
             if let Some(context) = packet.fixture_context.as_ref() {
                 format!(
                     "run `handbook inspect --packet {} --fixture-set {}` for proof",
@@ -582,7 +582,7 @@ fn render_ready_packet_next_safe_action(packet: &handbook_flow::PacketResult) ->
                 )
             }
         }
-        handbook_flow::ReadyPacketNextSafeAction::Generate => {
+        handbook_sdk::ReadyPacketNextSafeAction::Generate => {
             if let Some(context) = packet.fixture_context.as_ref() {
                 format!(
                     "run `handbook generate --packet {} --fixture-set {}`",
@@ -592,111 +592,107 @@ fn render_ready_packet_next_safe_action(packet: &handbook_flow::PacketResult) ->
                 format!("run `handbook generate --packet {}`", packet.packet_id)
             }
         }
-        handbook_flow::ReadyPacketNextSafeAction::RunDoctor => "run `doctor`".to_string(),
+        handbook_sdk::ReadyPacketNextSafeAction::RunDoctor => "run `doctor`".to_string(),
     }
 }
 
-fn render_next_safe_action_value(action: &handbook_compiler::NextSafeAction) -> String {
+fn render_next_safe_action_value(action: &handbook_sdk::NextSafeAction) -> String {
     match action {
-        handbook_compiler::NextSafeAction::RunSetup => "run `handbook setup`".to_string(),
-        handbook_compiler::NextSafeAction::RunSetupInit => "run `handbook setup init`".to_string(),
-        handbook_compiler::NextSafeAction::RunSetupRefresh => {
-            "run `handbook setup refresh`".to_string()
-        }
-        handbook_compiler::NextSafeAction::RunAuthorCharter => {
+        handbook_sdk::NextSafeAction::RunSetup => "run `handbook setup`".to_string(),
+        handbook_sdk::NextSafeAction::RunSetupInit => "run `handbook setup init`".to_string(),
+        handbook_sdk::NextSafeAction::RunSetupRefresh => "run `handbook setup refresh`".to_string(),
+        handbook_sdk::NextSafeAction::RunAuthorCharter => {
             "run `handbook author charter --from-inputs <path|->`".to_string()
         }
-        handbook_compiler::NextSafeAction::RunAuthorProjectContext => {
+        handbook_sdk::NextSafeAction::RunAuthorProjectContext => {
             "run `handbook author project-context --from-inputs <path|->`".to_string()
         }
-        handbook_compiler::NextSafeAction::CreateSystemRoot {
+        handbook_sdk::NextSafeAction::CreateSystemRoot {
             canonical_repo_relative_path,
         } => format!("create canonical .handbook root at {canonical_repo_relative_path}"),
-        handbook_compiler::NextSafeAction::EnsureSystemRootIsDirectory {
+        handbook_sdk::NextSafeAction::EnsureSystemRootIsDirectory {
             canonical_repo_relative_path,
         } => format!(
             "ensure canonical .handbook root is a directory at {canonical_repo_relative_path}"
         ),
-        handbook_compiler::NextSafeAction::RemoveSystemRootSymlink {
+        handbook_sdk::NextSafeAction::RemoveSystemRootSymlink {
             canonical_repo_relative_path,
         } => format!("remove canonical .handbook symlink at {canonical_repo_relative_path}"),
-        handbook_compiler::NextSafeAction::CreateCanonicalArtifact {
+        handbook_sdk::NextSafeAction::CreateCanonicalArtifact {
             canonical_repo_relative_path,
         } => format!("create canonical artifact at {canonical_repo_relative_path}"),
-        handbook_compiler::NextSafeAction::FillCanonicalArtifact {
+        handbook_sdk::NextSafeAction::FillCanonicalArtifact {
             canonical_repo_relative_path,
         } => format!("fill canonical artifact at {canonical_repo_relative_path}"),
-        handbook_compiler::NextSafeAction::ReduceCanonicalArtifactSize {
+        handbook_sdk::NextSafeAction::ReduceCanonicalArtifactSize {
             canonical_repo_relative_path,
         } => format!("reduce canonical artifact size at {canonical_repo_relative_path}"),
-        handbook_compiler::NextSafeAction::RunGenerate { packet_id } => {
+        handbook_sdk::NextSafeAction::RunGenerate { packet_id } => {
             format!("run `handbook generate --packet {packet_id}`")
         }
-        handbook_compiler::NextSafeAction::RunDoctor => "run `handbook doctor`".to_string(),
+        handbook_sdk::NextSafeAction::RunDoctor => "run `handbook doctor`".to_string(),
     }
 }
 
-fn render_packet_variant(variant: handbook_flow::PacketVariant) -> &'static str {
+fn render_packet_variant(variant: handbook_sdk::PacketVariant) -> &'static str {
     variant.as_str()
 }
 
-fn render_packet_status(status: handbook_flow::PacketSelectionStatus) -> &'static str {
+fn render_packet_status(status: handbook_sdk::PacketSelectionStatus) -> &'static str {
     match status {
-        handbook_flow::PacketSelectionStatus::Selected => "Selected",
-        handbook_flow::PacketSelectionStatus::Blocked => "Blocked",
+        handbook_sdk::PacketSelectionStatus::Selected => "Selected",
+        handbook_sdk::PacketSelectionStatus::Blocked => "Blocked",
     }
 }
 
-fn render_budget_disposition(disposition: handbook_flow::BudgetDisposition) -> &'static str {
+fn render_budget_disposition(disposition: handbook_sdk::BudgetDisposition) -> &'static str {
     match disposition {
-        handbook_flow::BudgetDisposition::Keep => "Keep",
-        handbook_flow::BudgetDisposition::Summarize => "Summarize",
-        handbook_flow::BudgetDisposition::Exclude => "Exclude",
-        handbook_flow::BudgetDisposition::Refuse => "Refuse",
+        handbook_sdk::BudgetDisposition::Keep => "Keep",
+        handbook_sdk::BudgetDisposition::Summarize => "Summarize",
+        handbook_sdk::BudgetDisposition::Exclude => "Exclude",
+        handbook_sdk::BudgetDisposition::Refuse => "Refuse",
     }
 }
 
-fn render_budget_reason(reason: &handbook_flow::BudgetReason) -> &'static str {
+fn render_budget_reason(reason: &handbook_sdk::BudgetReason) -> &'static str {
     match reason {
-        handbook_flow::BudgetReason::WithinBudget => "WithinBudget",
-        handbook_flow::BudgetReason::OptionalArtifactTooLarge => "OptionalArtifactTooLarge",
-        handbook_flow::BudgetReason::TotalBytesExceeded => "TotalBytesExceeded",
-        handbook_flow::BudgetReason::RequiredArtifactTooLarge => "RequiredArtifactTooLarge",
+        handbook_sdk::BudgetReason::WithinBudget => "WithinBudget",
+        handbook_sdk::BudgetReason::OptionalArtifactTooLarge => "OptionalArtifactTooLarge",
+        handbook_sdk::BudgetReason::TotalBytesExceeded => "TotalBytesExceeded",
+        handbook_sdk::BudgetReason::RequiredArtifactTooLarge => "RequiredArtifactTooLarge",
     }
 }
 
 fn render_budget_next_safe_action(
-    action: Option<&handbook_flow::NextSafeAction>,
+    action: Option<&handbook_sdk::BudgetNextSafeAction>,
 ) -> Option<String> {
     action.map(|action| match action {
-        handbook_flow::NextSafeAction::ReduceCanonicalArtifactSize {
+        handbook_sdk::BudgetNextSafeAction::ReduceCanonicalArtifactSize {
             canonical_repo_relative_path,
         } => format!("reduce canonical artifact size at {canonical_repo_relative_path}"),
     })
 }
 
-fn render_refusal_category(category: handbook_compiler::RefusalCategory) -> &'static str {
+fn render_refusal_category(category: handbook_sdk::RefusalCategory) -> &'static str {
     match category {
-        handbook_compiler::RefusalCategory::NonCanonicalInputAttempt => "NonCanonicalInputAttempt",
-        handbook_compiler::RefusalCategory::SystemRootMissing => "SystemRootMissing",
-        handbook_compiler::RefusalCategory::SystemRootNotDir => "SystemRootNotDir",
-        handbook_compiler::RefusalCategory::SystemRootSymlinkNotAllowed => {
-            "SystemRootSymlinkNotAllowed"
-        }
-        handbook_compiler::RefusalCategory::RequiredArtifactMissing => "RequiredArtifactMissing",
-        handbook_compiler::RefusalCategory::RequiredArtifactEmpty => "RequiredArtifactEmpty",
-        handbook_compiler::RefusalCategory::RequiredArtifactStarterTemplate => {
+        handbook_sdk::RefusalCategory::NonCanonicalInputAttempt => "NonCanonicalInputAttempt",
+        handbook_sdk::RefusalCategory::SystemRootMissing => "SystemRootMissing",
+        handbook_sdk::RefusalCategory::SystemRootNotDir => "SystemRootNotDir",
+        handbook_sdk::RefusalCategory::SystemRootSymlinkNotAllowed => "SystemRootSymlinkNotAllowed",
+        handbook_sdk::RefusalCategory::RequiredArtifactMissing => "RequiredArtifactMissing",
+        handbook_sdk::RefusalCategory::RequiredArtifactEmpty => "RequiredArtifactEmpty",
+        handbook_sdk::RefusalCategory::RequiredArtifactStarterTemplate => {
             "RequiredArtifactStarterTemplate"
         }
-        handbook_compiler::RefusalCategory::RequiredArtifactInvalid => "RequiredArtifactInvalid",
-        handbook_compiler::RefusalCategory::ArtifactReadError => "ArtifactReadError",
-        handbook_compiler::RefusalCategory::FreshnessInvalid => "FreshnessInvalid",
-        handbook_compiler::RefusalCategory::BudgetRefused => "BudgetRefused",
-        handbook_compiler::RefusalCategory::UnsupportedRequest => "UnsupportedRequest",
+        handbook_sdk::RefusalCategory::RequiredArtifactInvalid => "RequiredArtifactInvalid",
+        handbook_sdk::RefusalCategory::ArtifactReadError => "ArtifactReadError",
+        handbook_sdk::RefusalCategory::FreshnessInvalid => "FreshnessInvalid",
+        handbook_sdk::RefusalCategory::BudgetRefused => "BudgetRefused",
+        handbook_sdk::RefusalCategory::UnsupportedRequest => "UnsupportedRequest",
     }
 }
 
-fn render_blocker(output: &mut String, blocker: &handbook_compiler::Blocker) {
+fn render_blocker(output: &mut String, blocker: &handbook_sdk::Blocker) {
     push_line(
         output,
         format!("CATEGORY: {}", render_blocker_category(blocker.category)),
@@ -715,29 +711,27 @@ fn render_blocker(output: &mut String, blocker: &handbook_compiler::Blocker) {
     );
 }
 
-fn render_blocker_category(category: handbook_compiler::BlockerCategory) -> &'static str {
+fn render_blocker_category(category: handbook_sdk::BlockerCategory) -> &'static str {
     match category {
-        handbook_compiler::BlockerCategory::SystemRootMissing => "SystemRootMissing",
-        handbook_compiler::BlockerCategory::SystemRootNotDir => "SystemRootNotDir",
-        handbook_compiler::BlockerCategory::SystemRootSymlinkNotAllowed => {
-            "SystemRootSymlinkNotAllowed"
-        }
-        handbook_compiler::BlockerCategory::RequiredArtifactMissing => "RequiredArtifactMissing",
-        handbook_compiler::BlockerCategory::RequiredArtifactEmpty => "RequiredArtifactEmpty",
-        handbook_compiler::BlockerCategory::RequiredArtifactStarterTemplate => {
+        handbook_sdk::BlockerCategory::SystemRootMissing => "SystemRootMissing",
+        handbook_sdk::BlockerCategory::SystemRootNotDir => "SystemRootNotDir",
+        handbook_sdk::BlockerCategory::SystemRootSymlinkNotAllowed => "SystemRootSymlinkNotAllowed",
+        handbook_sdk::BlockerCategory::RequiredArtifactMissing => "RequiredArtifactMissing",
+        handbook_sdk::BlockerCategory::RequiredArtifactEmpty => "RequiredArtifactEmpty",
+        handbook_sdk::BlockerCategory::RequiredArtifactStarterTemplate => {
             "RequiredArtifactStarterTemplate"
         }
-        handbook_compiler::BlockerCategory::RequiredArtifactInvalid => "RequiredArtifactInvalid",
-        handbook_compiler::BlockerCategory::ArtifactReadError => "ArtifactReadError",
-        handbook_compiler::BlockerCategory::FreshnessInvalid => "FreshnessInvalid",
-        handbook_compiler::BlockerCategory::BudgetRefused => "BudgetRefused",
-        handbook_compiler::BlockerCategory::UnsupportedRequest => "UnsupportedRequest",
+        handbook_sdk::BlockerCategory::RequiredArtifactInvalid => "RequiredArtifactInvalid",
+        handbook_sdk::BlockerCategory::ArtifactReadError => "ArtifactReadError",
+        handbook_sdk::BlockerCategory::FreshnessInvalid => "FreshnessInvalid",
+        handbook_sdk::BlockerCategory::BudgetRefused => "BudgetRefused",
+        handbook_sdk::BlockerCategory::UnsupportedRequest => "UnsupportedRequest",
     }
 }
 
-fn render_subject_ref(subject: &handbook_compiler::SubjectRef) -> String {
+fn render_subject_ref(subject: &handbook_sdk::SubjectRef) -> String {
     match subject {
-        handbook_compiler::SubjectRef::CanonicalArtifact {
+        handbook_sdk::SubjectRef::CanonicalArtifact {
             label,
             canonical_repo_relative_path,
             ..
@@ -745,14 +739,14 @@ fn render_subject_ref(subject: &handbook_compiler::SubjectRef) -> String {
             "canonical artifact {} at {}",
             label, canonical_repo_relative_path
         ),
-        handbook_compiler::SubjectRef::InheritedDependency {
+        handbook_sdk::SubjectRef::InheritedDependency {
             dependency_id,
             version,
         } => match version {
             Some(version) => format!("inherited dependency {dependency_id}@{version}"),
             None => format!("inherited dependency {dependency_id}"),
         },
-        handbook_compiler::SubjectRef::Policy { policy_id } => format!("policy {policy_id}"),
+        handbook_sdk::SubjectRef::Policy { policy_id } => format!("policy {policy_id}"),
     }
 }
 
@@ -762,229 +756,13 @@ fn push_line(output: &mut String, line: impl AsRef<str>) {
 }
 
 pub(crate) fn prepare_flow_output(
-    result: handbook_flow::ResolverResult,
+    result: handbook_sdk::flow_api::PacketResolutionView,
 ) -> Result<PreparedFlowOutput, String> {
-    let ready = result.selection.status == handbook_flow::PacketSelectionStatus::Selected
+    let ready = result.selection.status == handbook_sdk::PacketSelectionStatus::Selected
         && result.refusal.is_none()
         && result.blockers.is_empty();
 
-    let compiler_result = flow_result_for_rendering(result);
-    let model =
-        handbook_compiler::build_output_model(&compiler_result).map_err(|err| format!("{err}"))?;
+    let model = flow_rendering::build_output_model(&result).map_err(|err| format!("{err}"))?;
 
     Ok(PreparedFlowOutput { ready, model })
-}
-
-fn flow_result_for_rendering(
-    result: handbook_flow::ResolverResult,
-) -> handbook_compiler::ResolverResult {
-    handbook_compiler::ResolverResult {
-        c04_result_version: result.c04_result_version,
-        c03_schema_version: result.c03_schema_version,
-        c03_manifest_generation_version: result.c03_manifest_generation_version,
-        c03_fingerprint_sha256: result.c03_fingerprint_sha256,
-        packet_result: result.packet_result,
-        decision_log: handbook_compiler::DecisionLog {
-            entries: result.decision_log_entries,
-        },
-        budget_outcome: result.budget_outcome,
-        selection: result.selection,
-        refusal: result.refusal.map(flow_refusal_for_rendering),
-        blockers: result
-            .blockers
-            .into_iter()
-            .map(flow_blocker_for_rendering)
-            .collect(),
-    }
-}
-
-fn flow_refusal_for_rendering(
-    refusal: handbook_flow::ResolverRefusal,
-) -> handbook_compiler::Refusal {
-    handbook_compiler::Refusal {
-        category: flow_refusal_category_for_rendering(refusal.category),
-        summary: refusal.summary,
-        broken_subject: flow_subject_ref_for_rendering(refusal.broken_subject),
-        next_safe_action: flow_next_safe_action_for_rendering(refusal.next_safe_action),
-    }
-}
-
-fn flow_blocker_for_rendering(
-    blocker: handbook_flow::ResolverBlocker,
-) -> handbook_compiler::Blocker {
-    handbook_compiler::Blocker {
-        category: flow_blocker_category_for_rendering(blocker.category),
-        subject: flow_subject_ref_for_rendering(blocker.subject),
-        summary: blocker.summary,
-        next_safe_action: flow_next_safe_action_for_rendering(blocker.next_safe_action),
-    }
-}
-
-fn flow_refusal_category_for_rendering(
-    category: handbook_flow::ResolverRefusalCategory,
-) -> handbook_compiler::RefusalCategory {
-    match category {
-        handbook_flow::ResolverRefusalCategory::NonCanonicalInputAttempt => {
-            handbook_compiler::RefusalCategory::NonCanonicalInputAttempt
-        }
-        handbook_flow::ResolverRefusalCategory::SystemRootMissing => {
-            handbook_compiler::RefusalCategory::SystemRootMissing
-        }
-        handbook_flow::ResolverRefusalCategory::SystemRootNotDir => {
-            handbook_compiler::RefusalCategory::SystemRootNotDir
-        }
-        handbook_flow::ResolverRefusalCategory::SystemRootSymlinkNotAllowed => {
-            handbook_compiler::RefusalCategory::SystemRootSymlinkNotAllowed
-        }
-        handbook_flow::ResolverRefusalCategory::RequiredArtifactMissing => {
-            handbook_compiler::RefusalCategory::RequiredArtifactMissing
-        }
-        handbook_flow::ResolverRefusalCategory::RequiredArtifactEmpty => {
-            handbook_compiler::RefusalCategory::RequiredArtifactEmpty
-        }
-        handbook_flow::ResolverRefusalCategory::RequiredArtifactStarterTemplate => {
-            handbook_compiler::RefusalCategory::RequiredArtifactStarterTemplate
-        }
-        handbook_flow::ResolverRefusalCategory::RequiredArtifactInvalid => {
-            handbook_compiler::RefusalCategory::RequiredArtifactInvalid
-        }
-        handbook_flow::ResolverRefusalCategory::ArtifactReadError => {
-            handbook_compiler::RefusalCategory::ArtifactReadError
-        }
-        handbook_flow::ResolverRefusalCategory::FreshnessInvalid => {
-            handbook_compiler::RefusalCategory::FreshnessInvalid
-        }
-        handbook_flow::ResolverRefusalCategory::BudgetRefused => {
-            handbook_compiler::RefusalCategory::BudgetRefused
-        }
-        handbook_flow::ResolverRefusalCategory::UnsupportedRequest => {
-            handbook_compiler::RefusalCategory::UnsupportedRequest
-        }
-    }
-}
-
-fn flow_blocker_category_for_rendering(
-    category: handbook_flow::ResolverBlockerCategory,
-) -> handbook_compiler::BlockerCategory {
-    match category {
-        handbook_flow::ResolverBlockerCategory::SystemRootMissing => {
-            handbook_compiler::BlockerCategory::SystemRootMissing
-        }
-        handbook_flow::ResolverBlockerCategory::SystemRootNotDir => {
-            handbook_compiler::BlockerCategory::SystemRootNotDir
-        }
-        handbook_flow::ResolverBlockerCategory::SystemRootSymlinkNotAllowed => {
-            handbook_compiler::BlockerCategory::SystemRootSymlinkNotAllowed
-        }
-        handbook_flow::ResolverBlockerCategory::RequiredArtifactMissing => {
-            handbook_compiler::BlockerCategory::RequiredArtifactMissing
-        }
-        handbook_flow::ResolverBlockerCategory::RequiredArtifactEmpty => {
-            handbook_compiler::BlockerCategory::RequiredArtifactEmpty
-        }
-        handbook_flow::ResolverBlockerCategory::RequiredArtifactStarterTemplate => {
-            handbook_compiler::BlockerCategory::RequiredArtifactStarterTemplate
-        }
-        handbook_flow::ResolverBlockerCategory::RequiredArtifactInvalid => {
-            handbook_compiler::BlockerCategory::RequiredArtifactInvalid
-        }
-        handbook_flow::ResolverBlockerCategory::ArtifactReadError => {
-            handbook_compiler::BlockerCategory::ArtifactReadError
-        }
-        handbook_flow::ResolverBlockerCategory::FreshnessInvalid => {
-            handbook_compiler::BlockerCategory::FreshnessInvalid
-        }
-        handbook_flow::ResolverBlockerCategory::BudgetRefused => {
-            handbook_compiler::BlockerCategory::BudgetRefused
-        }
-        handbook_flow::ResolverBlockerCategory::UnsupportedRequest => {
-            handbook_compiler::BlockerCategory::UnsupportedRequest
-        }
-    }
-}
-
-fn flow_subject_ref_for_rendering(
-    subject: handbook_flow::ResolverSubjectRef,
-) -> handbook_compiler::SubjectRef {
-    match subject {
-        handbook_flow::ResolverSubjectRef::CanonicalArtifact {
-            instance_id,
-            kind_ref,
-            label,
-            canonical_repo_relative_path,
-        } => handbook_compiler::SubjectRef::CanonicalArtifact {
-            instance_id,
-            kind_ref,
-            label,
-            canonical_repo_relative_path,
-        },
-        handbook_flow::ResolverSubjectRef::InheritedDependency {
-            dependency_id,
-            version,
-        } => handbook_compiler::SubjectRef::InheritedDependency {
-            dependency_id,
-            version,
-        },
-        handbook_flow::ResolverSubjectRef::Policy { policy_id } => {
-            handbook_compiler::SubjectRef::Policy { policy_id }
-        }
-    }
-}
-
-fn flow_next_safe_action_for_rendering(
-    action: handbook_flow::ResolverNextSafeAction,
-) -> handbook_compiler::NextSafeAction {
-    match action {
-        handbook_flow::ResolverNextSafeAction::RunSetup => {
-            handbook_compiler::NextSafeAction::RunSetup
-        }
-        handbook_flow::ResolverNextSafeAction::RunSetupInit => {
-            handbook_compiler::NextSafeAction::RunSetupInit
-        }
-        handbook_flow::ResolverNextSafeAction::RunSetupRefresh => {
-            handbook_compiler::NextSafeAction::RunSetupRefresh
-        }
-        handbook_flow::ResolverNextSafeAction::RunAuthorCharter => {
-            handbook_compiler::NextSafeAction::RunAuthorCharter
-        }
-        handbook_flow::ResolverNextSafeAction::RunAuthorProjectContext => {
-            handbook_compiler::NextSafeAction::RunAuthorProjectContext
-        }
-        handbook_flow::ResolverNextSafeAction::CreateSystemRoot {
-            canonical_repo_relative_path,
-        } => handbook_compiler::NextSafeAction::CreateSystemRoot {
-            canonical_repo_relative_path,
-        },
-        handbook_flow::ResolverNextSafeAction::EnsureSystemRootIsDirectory {
-            canonical_repo_relative_path,
-        } => handbook_compiler::NextSafeAction::EnsureSystemRootIsDirectory {
-            canonical_repo_relative_path,
-        },
-        handbook_flow::ResolverNextSafeAction::RemoveSystemRootSymlink {
-            canonical_repo_relative_path,
-        } => handbook_compiler::NextSafeAction::RemoveSystemRootSymlink {
-            canonical_repo_relative_path,
-        },
-        handbook_flow::ResolverNextSafeAction::CreateCanonicalArtifact {
-            canonical_repo_relative_path,
-        } => handbook_compiler::NextSafeAction::CreateCanonicalArtifact {
-            canonical_repo_relative_path,
-        },
-        handbook_flow::ResolverNextSafeAction::FillCanonicalArtifact {
-            canonical_repo_relative_path,
-        } => handbook_compiler::NextSafeAction::FillCanonicalArtifact {
-            canonical_repo_relative_path,
-        },
-        handbook_flow::ResolverNextSafeAction::ReduceCanonicalArtifactSize {
-            canonical_repo_relative_path,
-        } => handbook_compiler::NextSafeAction::ReduceCanonicalArtifactSize {
-            canonical_repo_relative_path,
-        },
-        handbook_flow::ResolverNextSafeAction::RunGenerate { packet_id } => {
-            handbook_compiler::NextSafeAction::RunGenerate { packet_id }
-        }
-        handbook_flow::ResolverNextSafeAction::RunDoctor => {
-            handbook_compiler::NextSafeAction::RunDoctor
-        }
-    }
 }

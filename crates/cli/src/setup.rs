@@ -12,19 +12,19 @@ pub(crate) fn run(args: SetupArgs) -> ExitCode {
     };
     let repo_root = crate::shell_shared::discover_managed_repo_root(&cwd);
     let request = match args.command {
-        None => handbook_compiler::SetupRequest::default(),
-        Some(SetupCommand::Init) => handbook_compiler::SetupRequest {
-            mode: handbook_compiler::SetupMode::Init,
-            ..handbook_compiler::SetupRequest::default()
+        None => handbook_sdk::SetupRequest::default(),
+        Some(SetupCommand::Init) => handbook_sdk::SetupRequest {
+            mode: handbook_sdk::SetupMode::Init,
+            ..handbook_sdk::SetupRequest::default()
         },
-        Some(SetupCommand::Refresh(refresh)) => handbook_compiler::SetupRequest {
-            mode: handbook_compiler::SetupMode::Refresh,
+        Some(SetupCommand::Refresh(refresh)) => handbook_sdk::SetupRequest {
+            mode: handbook_sdk::SetupMode::Refresh,
             rewrite: refresh.rewrite,
             reset_state: refresh.reset_state,
         },
     };
 
-    match handbook_compiler::run_setup(&repo_root, &request) {
+    match handbook_sdk::HandbookSdkV1::open(&repo_root).run_setup(&request) {
         Ok(outcome) => {
             print!("{}", render_setup_outcome(&outcome));
             exit_policy::repository_status(outcome.status)
@@ -36,7 +36,7 @@ pub(crate) fn run(args: SetupArgs) -> ExitCode {
     }
 }
 
-fn render_setup_outcome(outcome: &handbook_compiler::SetupOutcome) -> String {
+fn render_setup_outcome(outcome: &handbook_sdk::SetupOutcome) -> String {
     let mut output = String::new();
     writeln!(&mut output, "OUTCOME: {}", readiness_name(outcome.status)).expect("string write");
     writeln!(&mut output, "PROFILE: {}", outcome.plan.profile_ref).expect("string write");
@@ -74,7 +74,7 @@ fn render_setup_outcome(outcome: &handbook_compiler::SetupOutcome) -> String {
     output
 }
 
-fn render_setup_error(error: &handbook_compiler::SetupError) -> String {
+fn render_setup_error(error: &handbook_sdk::SetupError) -> String {
     let mut output = String::new();
     writeln!(&mut output, "OUTCOME: ERROR").expect("string write");
     writeln!(
@@ -95,156 +95,146 @@ fn render_setup_error(error: &handbook_compiler::SetupError) -> String {
     output
 }
 
-fn readiness_name(status: handbook_compiler::RepositoryReadinessStatus) -> &'static str {
+fn readiness_name(status: handbook_sdk::RepositoryReadinessStatus) -> &'static str {
     match status {
-        handbook_compiler::RepositoryReadinessStatus::Ready => "READY",
-        handbook_compiler::RepositoryReadinessStatus::ActionRequired => "ACTION_REQUIRED",
-        handbook_compiler::RepositoryReadinessStatus::Indeterminate => "INDETERMINATE",
-        handbook_compiler::RepositoryReadinessStatus::Invalid => "INVALID",
+        handbook_sdk::RepositoryReadinessStatus::Ready => "READY",
+        handbook_sdk::RepositoryReadinessStatus::ActionRequired => "ACTION_REQUIRED",
+        handbook_sdk::RepositoryReadinessStatus::Indeterminate => "INDETERMINATE",
+        handbook_sdk::RepositoryReadinessStatus::Invalid => "INVALID",
     }
 }
 
-fn setup_mode_name(mode: handbook_compiler::SetupMode) -> &'static str {
+fn setup_mode_name(mode: handbook_sdk::SetupMode) -> &'static str {
     match mode {
-        handbook_compiler::SetupMode::Auto => "auto",
-        handbook_compiler::SetupMode::Init => "init",
-        handbook_compiler::SetupMode::Refresh => "refresh",
+        handbook_sdk::SetupMode::Auto => "auto",
+        handbook_sdk::SetupMode::Init => "init",
+        handbook_sdk::SetupMode::Refresh => "refresh",
     }
 }
 
-fn root_action_name(action: handbook_compiler::SetupRootAction) -> &'static str {
+fn root_action_name(action: handbook_sdk::SetupRootAction) -> &'static str {
     match action {
-        handbook_compiler::SetupRootAction::Preserve => "preserve",
-        handbook_compiler::SetupRootAction::Create => "create",
+        handbook_sdk::SetupRootAction::Preserve => "preserve",
+        handbook_sdk::SetupRootAction::Create => "create",
     }
 }
 
-fn artifact_action_name(action: handbook_compiler::SetupArtifactActionKind) -> &'static str {
+fn artifact_action_name(action: handbook_sdk::SetupArtifactActionKind) -> &'static str {
     match action {
-        handbook_compiler::SetupArtifactActionKind::Preserve => "preserve",
-        handbook_compiler::SetupArtifactActionKind::AuthorRequired => "author_required",
-        handbook_compiler::SetupArtifactActionKind::OptionalAbsent => "optional_absent",
-        handbook_compiler::SetupArtifactActionKind::ConditionIndeterminate => {
-            "condition_indeterminate"
-        }
-        handbook_compiler::SetupArtifactActionKind::Invalid => "invalid",
+        handbook_sdk::SetupArtifactActionKind::Preserve => "preserve",
+        handbook_sdk::SetupArtifactActionKind::AuthorRequired => "author_required",
+        handbook_sdk::SetupArtifactActionKind::OptionalAbsent => "optional_absent",
+        handbook_sdk::SetupArtifactActionKind::ConditionIndeterminate => "condition_indeterminate",
+        handbook_sdk::SetupArtifactActionKind::Invalid => "invalid",
     }
 }
 
-fn inspection_status_name(status: handbook_engine::ArtifactInspectionStatus) -> &'static str {
+fn inspection_status_name(status: handbook_sdk::ArtifactInspectionStatus) -> &'static str {
     match status {
-        handbook_engine::ArtifactInspectionStatus::Missing => "missing",
-        handbook_engine::ArtifactInspectionStatus::StructurallyValid => "structurally_valid",
-        handbook_engine::ArtifactInspectionStatus::StructurallyInvalid => "structurally_invalid",
-        handbook_engine::ArtifactInspectionStatus::UnsafePath => "unsafe_path",
-        handbook_engine::ArtifactInspectionStatus::Unreadable => "unreadable",
-        handbook_engine::ArtifactInspectionStatus::NotInspected => "not_inspected",
+        handbook_sdk::ArtifactInspectionStatus::Missing => "missing",
+        handbook_sdk::ArtifactInspectionStatus::StructurallyValid => "structurally_valid",
+        handbook_sdk::ArtifactInspectionStatus::StructurallyInvalid => "structurally_invalid",
+        handbook_sdk::ArtifactInspectionStatus::UnsafePath => "unsafe_path",
+        handbook_sdk::ArtifactInspectionStatus::Unreadable => "unreadable",
+        handbook_sdk::ArtifactInspectionStatus::NotInspected => "not_inspected",
     }
 }
 
-fn inspection_reason_name(reason: handbook_engine::ArtifactInspectionReason) -> &'static str {
+fn inspection_reason_name(reason: handbook_sdk::ArtifactInspectionReason) -> &'static str {
     match reason {
-        handbook_engine::ArtifactInspectionReason::PresentAndStructurallyValid => {
+        handbook_sdk::ArtifactInspectionReason::PresentAndStructurallyValid => {
             "present_and_structurally_valid"
         }
-        handbook_engine::ArtifactInspectionReason::RequiredPathMissing => "required_path_missing",
-        handbook_engine::ArtifactInspectionReason::OptionalPathMissing => "optional_path_missing",
-        handbook_engine::ArtifactInspectionReason::ConditionalEvidenceUnavailablePathMissing => {
+        handbook_sdk::ArtifactInspectionReason::RequiredPathMissing => "required_path_missing",
+        handbook_sdk::ArtifactInspectionReason::OptionalPathMissing => "optional_path_missing",
+        handbook_sdk::ArtifactInspectionReason::ConditionalEvidenceUnavailablePathMissing => {
             "conditional_evidence_unavailable_path_missing"
         }
-        handbook_engine::ArtifactInspectionReason::ConditionalEvidenceUnavailablePathPresent => {
+        handbook_sdk::ArtifactInspectionReason::ConditionalEvidenceUnavailablePathPresent => {
             "conditional_evidence_unavailable_path_present"
         }
-        handbook_engine::ArtifactInspectionReason::YamlSyntaxInvalid => "yaml_syntax_invalid",
-        handbook_engine::ArtifactInspectionReason::DuplicateYamlKey => "duplicate_yaml_key",
-        handbook_engine::ArtifactInspectionReason::DocumentNotObject => "document_not_object",
-        handbook_engine::ArtifactInspectionReason::StructuralValidationFailed => {
+        handbook_sdk::ArtifactInspectionReason::YamlSyntaxInvalid => "yaml_syntax_invalid",
+        handbook_sdk::ArtifactInspectionReason::DuplicateYamlKey => "duplicate_yaml_key",
+        handbook_sdk::ArtifactInspectionReason::DocumentNotObject => "document_not_object",
+        handbook_sdk::ArtifactInspectionReason::StructuralValidationFailed => {
             "structural_validation_failed"
         }
-        handbook_engine::ArtifactInspectionReason::DocumentLimitExceeded => {
-            "document_limit_exceeded"
-        }
-        handbook_engine::ArtifactInspectionReason::AggregateReadLimitExceeded => {
+        handbook_sdk::ArtifactInspectionReason::DocumentLimitExceeded => "document_limit_exceeded",
+        handbook_sdk::ArtifactInspectionReason::AggregateReadLimitExceeded => {
             "aggregate_read_limit_exceeded"
         }
-        handbook_engine::ArtifactInspectionReason::SymlinkRefused => "symlink_refused",
-        handbook_engine::ArtifactInspectionReason::NonRegularFileRefused => {
-            "non_regular_file_refused"
-        }
-        handbook_engine::ArtifactInspectionReason::UnsafeRepositoryPath => "unsafe_repository_path",
-        handbook_engine::ArtifactInspectionReason::UnsupportedPlatformStrictRead => {
+        handbook_sdk::ArtifactInspectionReason::SymlinkRefused => "symlink_refused",
+        handbook_sdk::ArtifactInspectionReason::NonRegularFileRefused => "non_regular_file_refused",
+        handbook_sdk::ArtifactInspectionReason::UnsafeRepositoryPath => "unsafe_repository_path",
+        handbook_sdk::ArtifactInspectionReason::UnsupportedPlatformStrictRead => {
             "unsupported_platform_strict_read"
         }
-        handbook_engine::ArtifactInspectionReason::RepositoryReadFailed => "repository_read_failed",
-        handbook_engine::ArtifactInspectionReason::TypedDecodeFailed => "typed_decode_failed",
-        handbook_engine::ArtifactInspectionReason::RenderedViewRefused => "rendered_view_refused",
-        handbook_engine::ArtifactInspectionReason::ObservationChangedDuringInspection => {
+        handbook_sdk::ArtifactInspectionReason::RepositoryReadFailed => "repository_read_failed",
+        handbook_sdk::ArtifactInspectionReason::TypedDecodeFailed => "typed_decode_failed",
+        handbook_sdk::ArtifactInspectionReason::RenderedViewRefused => "rendered_view_refused",
+        handbook_sdk::ArtifactInspectionReason::ObservationChangedDuringInspection => {
             "observation_changed_during_inspection"
         }
     }
 }
 
-fn setup_error_kind_name(kind: handbook_compiler::SetupErrorKind) -> &'static str {
+fn setup_error_kind_name(kind: handbook_sdk::SetupErrorKind) -> &'static str {
     match kind {
-        handbook_compiler::SetupErrorKind::ProfileResolution => "profile_resolution",
-        handbook_compiler::SetupErrorKind::ProfileDecision => "profile_decision",
-        handbook_compiler::SetupErrorKind::AlreadyInitialized => "already_initialized",
-        handbook_compiler::SetupErrorKind::MissingCanonicalRoot => "missing_canonical_root",
-        handbook_compiler::SetupErrorKind::InvalidCanonicalRoot => "invalid_canonical_root",
-        handbook_compiler::SetupErrorKind::InvalidRequest => "invalid_request",
-        handbook_compiler::SetupErrorKind::MaterializerUnavailable => "materializer_unavailable",
-        handbook_compiler::SetupErrorKind::RuntimeStatePlan => "runtime_state_plan",
-        handbook_compiler::SetupErrorKind::RuntimeStateApply => "runtime_state_apply",
-        handbook_compiler::SetupErrorKind::RepositoryIdentity => "repository_identity",
+        handbook_sdk::SetupErrorKind::ProfileResolution => "profile_resolution",
+        handbook_sdk::SetupErrorKind::ProfileDecision => "profile_decision",
+        handbook_sdk::SetupErrorKind::AlreadyInitialized => "already_initialized",
+        handbook_sdk::SetupErrorKind::MissingCanonicalRoot => "missing_canonical_root",
+        handbook_sdk::SetupErrorKind::InvalidCanonicalRoot => "invalid_canonical_root",
+        handbook_sdk::SetupErrorKind::InvalidRequest => "invalid_request",
+        handbook_sdk::SetupErrorKind::MaterializerUnavailable => "materializer_unavailable",
+        handbook_sdk::SetupErrorKind::RuntimeStatePlan => "runtime_state_plan",
+        handbook_sdk::SetupErrorKind::RuntimeStateApply => "runtime_state_apply",
+        handbook_sdk::SetupErrorKind::RepositoryIdentity => "repository_identity",
     }
 }
 
-fn setup_error_reason_name(reason: handbook_compiler::SetupErrorReasonCode) -> &'static str {
+fn setup_error_reason_name(reason: handbook_sdk::SetupErrorReasonCode) -> &'static str {
     match reason {
-        handbook_compiler::SetupErrorReasonCode::ShippedProfileUnavailable => {
+        handbook_sdk::SetupErrorReasonCode::ShippedProfileUnavailable => {
             "shipped_profile_unavailable"
         }
-        handbook_compiler::SetupErrorReasonCode::SelectedProfileDecisionInvalid => {
+        handbook_sdk::SetupErrorReasonCode::SelectedProfileDecisionInvalid => {
             "selected_profile_decision_invalid"
         }
-        handbook_compiler::SetupErrorReasonCode::UnresolvedMode => "unresolved_mode",
-        handbook_compiler::SetupErrorReasonCode::InitRejectsRefreshFlags => {
-            "init_rejects_refresh_flags"
-        }
-        handbook_compiler::SetupErrorReasonCode::RootAlreadyInitialized => {
-            "root_already_initialized"
-        }
-        handbook_compiler::SetupErrorReasonCode::RefreshRootMissing => "refresh_root_missing",
-        handbook_compiler::SetupErrorReasonCode::RootNotDirectory => "root_not_directory",
-        handbook_compiler::SetupErrorReasonCode::RootSymlinkRefused => "root_symlink_refused",
-        handbook_compiler::SetupErrorReasonCode::CanonicalRootInspectFailed => {
+        handbook_sdk::SetupErrorReasonCode::UnresolvedMode => "unresolved_mode",
+        handbook_sdk::SetupErrorReasonCode::InitRejectsRefreshFlags => "init_rejects_refresh_flags",
+        handbook_sdk::SetupErrorReasonCode::RootAlreadyInitialized => "root_already_initialized",
+        handbook_sdk::SetupErrorReasonCode::RefreshRootMissing => "refresh_root_missing",
+        handbook_sdk::SetupErrorReasonCode::RootNotDirectory => "root_not_directory",
+        handbook_sdk::SetupErrorReasonCode::RootSymlinkRefused => "root_symlink_refused",
+        handbook_sdk::SetupErrorReasonCode::CanonicalRootInspectFailed => {
             "canonical_root_inspect_failed"
         }
-        handbook_compiler::SetupErrorReasonCode::CanonicalRootCreateFailed => {
+        handbook_sdk::SetupErrorReasonCode::CanonicalRootCreateFailed => {
             "canonical_root_create_failed"
         }
-        handbook_compiler::SetupErrorReasonCode::RewriteHasNoMaterializer => {
+        handbook_sdk::SetupErrorReasonCode::RewriteHasNoMaterializer => {
             "rewrite_has_no_materializer"
         }
-        handbook_compiler::SetupErrorReasonCode::RuntimeStateTargetUnsafe => {
+        handbook_sdk::SetupErrorReasonCode::RuntimeStateTargetUnsafe => {
             "runtime_state_target_unsafe"
         }
-        handbook_compiler::SetupErrorReasonCode::RuntimeStateMutationFailed => {
+        handbook_sdk::SetupErrorReasonCode::RuntimeStateMutationFailed => {
             "runtime_state_mutation_failed"
         }
-        handbook_compiler::SetupErrorReasonCode::RepositoryAuthorityRecoveryBlocked => {
+        handbook_sdk::SetupErrorReasonCode::RepositoryAuthorityRecoveryBlocked => {
             "repository_authority_recovery_blocked"
         }
-        handbook_compiler::SetupErrorReasonCode::RepositoryIdentityUnsafe => {
+        handbook_sdk::SetupErrorReasonCode::RepositoryIdentityUnsafe => {
             "repository_identity_unsafe"
         }
-        handbook_compiler::SetupErrorReasonCode::RepositoryIdentityMismatch => {
+        handbook_sdk::SetupErrorReasonCode::RepositoryIdentityMismatch => {
             "repository_identity_mismatch"
         }
-        handbook_compiler::SetupErrorReasonCode::RepositoryIdentityEntropyUnavailable => {
+        handbook_sdk::SetupErrorReasonCode::RepositoryIdentityEntropyUnavailable => {
             "repository_identity_entropy_unavailable"
         }
-        handbook_compiler::SetupErrorReasonCode::RepositoryIdentityPersistenceFailed => {
+        handbook_sdk::SetupErrorReasonCode::RepositoryIdentityPersistenceFailed => {
             "repository_identity_persistence_failed"
         }
     }
@@ -257,28 +247,28 @@ mod tests {
     #[test]
     fn repository_identity_setup_error_projection_is_exact() {
         assert_eq!(
-            setup_error_kind_name(handbook_compiler::SetupErrorKind::RepositoryIdentity),
+            setup_error_kind_name(handbook_sdk::SetupErrorKind::RepositoryIdentity),
             "repository_identity"
         );
         let cases = [
             (
-                handbook_compiler::SetupErrorReasonCode::RepositoryAuthorityRecoveryBlocked,
+                handbook_sdk::SetupErrorReasonCode::RepositoryAuthorityRecoveryBlocked,
                 "repository_authority_recovery_blocked",
             ),
             (
-                handbook_compiler::SetupErrorReasonCode::RepositoryIdentityUnsafe,
+                handbook_sdk::SetupErrorReasonCode::RepositoryIdentityUnsafe,
                 "repository_identity_unsafe",
             ),
             (
-                handbook_compiler::SetupErrorReasonCode::RepositoryIdentityMismatch,
+                handbook_sdk::SetupErrorReasonCode::RepositoryIdentityMismatch,
                 "repository_identity_mismatch",
             ),
             (
-                handbook_compiler::SetupErrorReasonCode::RepositoryIdentityEntropyUnavailable,
+                handbook_sdk::SetupErrorReasonCode::RepositoryIdentityEntropyUnavailable,
                 "repository_identity_entropy_unavailable",
             ),
             (
-                handbook_compiler::SetupErrorReasonCode::RepositoryIdentityPersistenceFailed,
+                handbook_sdk::SetupErrorReasonCode::RepositoryIdentityPersistenceFailed,
                 "repository_identity_persistence_failed",
             ),
         ];
