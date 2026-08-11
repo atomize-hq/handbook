@@ -1,0 +1,530 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260811T040300Z--HCM-4-2--orchestration--causal-remediation-planning-completed",
+  "created_at_utc": "2026-08-11T04:03:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-4",
+  "slice_id": "HCM-4.2",
+  "packet_id": "HCM-4.2-PLANNING-CONTROL-PACK",
+  "orchestration_id": "handbook-hcm-4-2-corrective-20260811",
+  "source_handoff_ids": [
+    "20260811T005500Z--HCM-4-2--orchestration--shared-dto-schema-planning-completed"
+  ],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019feeb8-3355-7923-b120-de897bd09f37"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-11T03:59:00Z",
+    "evidence_ref": "Fresh isolated xhigh selector reviewer, documentation implementer, and different-fresh complete-subject reviewer completed through built-in delegation inside the bound parent."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm42-corrective-selector-discovery-1",
+      "dispatch_id": "20260811T025748Z--HCM-4-2--causal-remediation-selector-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T025748Z--HCM-4-2--causal-remediation-selector-discovery-review.json",
+      "dispatch_fingerprint": "sha256:994e0a9640f8f25756284badeb6cd7ee0198f3a84927473fac74fbb363c1384f",
+      "role": "review",
+      "agent_id": "/root/hcm42_selector_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "documentation-and-adrs",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:570ef67b646699887e7fd869843fe0306c220690e336da73bdc161e0cfedbc26",
+      "result_subject_fingerprint": "sha256:570ef67b646699887e7fd869843fe0306c220690e336da73bdc161e0cfedbc26",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T025748Z--HCM-4-2--causal-remediation-selector-discovery-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T030408Z--causal-remediation-selector-discovery-review.md",
+        "Fresh selector review returned CLEAN with no P1/P2/P3/P4 and authorized the bounded consolidated correction."
+      ]
+    },
+    {
+      "run_id": "hcm42-corrective-documentation-implementation",
+      "dispatch_id": "20260811T030610Z--HCM-4-2--causal-remediation-documentation-implementation",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T030610Z--HCM-4-2--causal-remediation-documentation-implementation.json",
+      "dispatch_fingerprint": "sha256:ef265d511174c37ed81742663f65c41c2e2b303cbde69a0f92b17e98fbdc4e30",
+      "role": "implementation",
+      "agent_id": "/root/hcm42_correction_implementation",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-adrs",
+        "incremental-implementation",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:e867a311e7e4cf38dce13039fa42a71c047ecec7b2a53b87267244ca9536b73e",
+      "result_subject_fingerprint": "sha256:e47e7af466bc0089b91d9620aeceb12c648d1cc453e6da2a53cac29f40c946ba",
+      "review_round": null,
+      "predecessor_run_id": "hcm42-corrective-selector-discovery-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "not_applicable",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T030610Z--HCM-4-2--causal-remediation-documentation-implementation.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/20260811T033301Z--corrective-documentation-proof-wall.md",
+        "One consolidated documentation pass corrected all ten mandatory external-audit inputs without runtime, schema, transport, historical, protected, or remote mutation."
+      ]
+    },
+    {
+      "run_id": "hcm42-corrective-final-closeout-discovery-1",
+      "dispatch_id": "20260811T034900Z--HCM-4-2--causal-remediation-complete-subject-final-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T034900Z--HCM-4-2--causal-remediation-complete-subject-final-review.json",
+      "dispatch_fingerprint": "sha256:36c7e08479b8feb1f60190330df279426f069b1c5bbefb58e832365c942fc392",
+      "role": "review",
+      "agent_id": "/root/hcm42_final_review",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "code-review-and-quality",
+        "documentation-and-adrs",
+        "api-and-interface-design"
+      ],
+      "subject_fingerprint": "sha256:e47e7af466bc0089b91d9620aeceb12c648d1cc453e6da2a53cac29f40c946ba",
+      "result_subject_fingerprint": "sha256:e47e7af466bc0089b91d9620aeceb12c648d1cc453e6da2a53cac29f40c946ba",
+      "review_round": 2,
+      "predecessor_run_id": "hcm42-corrective-documentation-implementation",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [
+        "HCM-RF-0003"
+      ],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T034900Z--HCM-4-2--causal-remediation-complete-subject-final-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T035900Z--causal-remediation-complete-subject-final-review.md",
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+        "Different-fresh complete-subject review returned CLEAN with no P1/P2/P3 and one durably inventoried P4; CLEAN ended the review cadence."
+      ]
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-11T04:03:00Z",
+    "dispatch_count": 3,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:f7b1b67dcf5cda4435feffb4c91a951f1317b1f76fbfb9c0a6bceb0d25a2721f"
+    ],
+    "aggregate_fingerprint": "sha256:1989df7f01938ef3fdc868d46372141a04c1238e8b36f63c6b327a6863616fa6"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "35721817253f7086c0fb0b23feddbc47fa9a8b83",
+    "subject_fingerprint": "sha256:e47e7af466bc0089b91d9620aeceb12c648d1cc453e6da2a53cac29f40c946ba",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T034900Z--HCM-4-2--causal-remediation-complete-subject-final-review.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/todo.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T031843Z--corrective-owner-admission-matrix.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/strategy.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/20260811T033301Z--corrective-documentation-proof-wall.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T030408Z--causal-remediation-selector-discovery-review.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T035900Z--causal-remediation-complete-subject-final-review.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T025748Z--HCM-4-2--causal-remediation-selector-discovery-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T030610Z--HCM-4-2--causal-remediation-documentation-implementation.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T034900Z--HCM-4-2--causal-remediation-complete-subject-final-review.json",
+      "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "git:0a4366802467edbe194da9afaf584686921c1e94"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-4.2 bounded causal-remediation planning completed",
+    "scope_horizon": "one corrected and independently reviewed HCM-4.2 planning/control package only",
+    "detail_resolution": "The package closes all ten mandatory audit inputs, exact live posture projection, bootstrap/capability and framing contracts, correlation/original-result parity, and an authoritative 62-row owner/admission matrix while retaining one P4 wording advisory.",
+    "temporal_horizon": "The reviewed primary state is committed at 35721817253f7086c0fb0b23feddbc47fa9a8b83; this record and ledger are the separate mechanical closeout surface before expected-old local ref publication.",
+    "authority_horizon": "Planning readiness only. No DTO, schema, catalog, operation, Rust/Cargo, CLI, Tauri, public API, HCM-4.3/4.4/4.5, Phase 5/6, release, publication, push, or remote change is authorized or implemented.",
+    "memory_horizon": "The terminal predecessor and its historical evidence remain immutable consumed context; the external receipt remains mandatory correction evidence rather than Handbook review authority; only explicitly replaced completion recommendations/facts are superseded.",
+    "validation_horizon": "Completion requires exact manifest/dispatch replay, CLEAN with no P1/P2, durable P4 inventory, both v1.4 self-tests, governed ordinary-validator failure treatment, manual scoped change proof, protected-byte preservation, two commits, and expected-old local CAS."
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Correct HCM-4.2 as a planning-only package by repairing all ten mandatory causal-audit findings, freezing honest exact owner/admission evidence for all 62 operations, obtaining immutable exact-subject selector and final CLEAN review, and closing locally through the required two-commit v1.4 protocol without implementation or remote publication.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+      "sections": [
+        "entire CLEAN corrective selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+      "sections": [
+        "entire corrected planning contract"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T031843Z--corrective-owner-admission-matrix.md",
+      "sections": [
+        "authoritative 62-row matrix",
+        "mechanical consequences"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/20260811T033301Z--corrective-documentation-proof-wall.md",
+      "sections": [
+        "ten-finding disposition",
+        "parent pre-review convergence",
+        "exact primary manifest"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "SDK ordinary-use-case contract",
+        "Operation definition contract",
+        "Capability bootstrap and catalog discovery",
+        "Transport request and response contracts",
+        "Corrective posture.transition.apply projection"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/SPEC.md",
+      "sections": [
+        "completed direct Rust boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/tasks/plan.md",
+      "sections": [
+        "Exact ordinary-use-case inventory",
+        "Detailed posture transition boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "causal review cadence",
+        "full proof wall"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "built-in delegated-run protocol",
+        "review lineage",
+        "two-commit closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "HCM-RF-0003"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md",
+      "sections": [
+        "exact historical HCM-3.5 validator contradiction"
+      ]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 35721817253f7086c0fb0b23feddbc47fa9a8b83",
+    "head": "35721817253f7086c0fb0b23feddbc47fa9a8b83",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260811T040300Z--HCM-4-2--orchestration--causal-remediation-planning-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Bound top-level task 019feeb8-3355-7923-b120-de897bd09f37 on host local to dispatch nonce b57a7da90bd1b19ac37d8fe95ed56c92922d6d5de916e2feb059fbd049ca65c7 and new parent handbook-hcm-4-2-corrective-20260811; exact base/ref/tree/ancestor/remote/worktree/protected-path preflight passed before edits.",
+    "Consumed the immutable predecessor and exact external audit digest 3d30632a5827d8bdcec7adbe47aef77ff387380d5c143839ca9b1b4a8b8498d0 without treating that receipt as Handbook review authority; all ten stable finding IDs were corrected in one bounded documentation pass.",
+    "Created and validated an additive exact-subject corrective selector, obtained a fresh CLEAN selector review, delegated one consolidated implementation, converged a 14-path final subject including the dated proof wall, and obtained a different-fresh CLEAN final review with no P1/P2/P3.",
+    "Reconciled all 62 operation IDs across 05, HCM-4.1, predecessor inventory, and the authoritative corrective matrix: 26 live precursors, 24 absent, 12 Phase-5-deferred, 62 no current transport, and 62 discovery omissions. All 29 named source references resolved mechanically.",
+    "Corrected the raw mutation-key boundary, seven-field posture request and 14-result mapping, bootstrap/descriptor/capability closure, instance/schema/adapter framing, selector/final lineage, response parity, corrected Git proof ref, and exact four-terminal-field response assertion without code/runtime/schema/transport implementation.",
+    "Recorded the final review's sole P4 wording advisory as HCM-RF-0003 without rewriting the frozen CLEAN subject or running a prohibited post-CLEAN cycle.",
+    "Committed the reviewed primary corrective state at 35721817253f7086c0fb0b23feddbc47fa9a8b83/tree f0eaf588fc0aaa9738610bd6e5961846acea3836."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+      "status": "completed",
+      "summary": "Additive exact-objective/ten-finding corrective selector with immutable predecessor and audit digest boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+      "status": "completed",
+      "summary": "Corrected planning-only public DTO/schema/bootstrap/catalog/posture/framing/fingerprint contract."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T031843Z--corrective-owner-admission-matrix.md",
+      "status": "completed",
+      "summary": "Authoritative 62-row live owner, feasibility, transport-admission, and proof matrix."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/20260811T033301Z--corrective-documentation-proof-wall.md",
+      "status": "completed",
+      "summary": "Dated ten-finding, source, immutable-history, protected-path, validation, and exact-subject proof wall."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T035900Z--causal-remediation-complete-subject-final-review.md",
+      "status": "completed",
+      "summary": "Different-fresh immutable complete-subject CLEAN result with retained P4 disposition."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "status": "completed",
+      "summary": "Durable mechanical registration of HCM-RF-0003."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM42-CORRECTIVE-D1",
+      "summary": "The external causal audit supplies mandatory scheduling/correction inputs only; new v1.4 selector and review lineage over exact repository subjects supplies Handbook authority.",
+      "authority_effect": "No external receipt is promoted into a dispatch, selector, handoff, or review result, and immutable predecessor evidence is not rewritten.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T030408Z--causal-remediation-selector-discovery-review.md"
+      ]
+    },
+    {
+      "decision_id": "HCM42-CORRECTIVE-D2",
+      "summary": "A live Rust precursor is evidence only, never operation implementation or admission; every incomplete/deferred row remains absent from discovery.",
+      "authority_effect": "All 62 planned operations have no current admitted shared transport, including the explicit pipeline.route.resolve semantic mismatch and every Phase-5-deferred row.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T031843Z--corrective-owner-admission-matrix.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ]
+    },
+    {
+      "decision_id": "HCM42-CORRECTIVE-D3",
+      "summary": "The shared planning contract preserves input-only raw mutation keys, live owner authority, closed bootstrap/capability shapes, adapter-owned framing, and semantic/original-result parity with correlation-sensitive outer fingerprints.",
+      "authority_effect": "Planning is internally consistent but implements no DTO, schema, catalog, operation, or transport.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ]
+    },
+    {
+      "decision_id": "HCM42-CORRECTIVE-D4",
+      "summary": "CLEAN with one P4 ends review; the wording advisory is inventoried mechanically rather than repaired by rewriting the frozen subject or resetting cadence.",
+      "authority_effect": "HCM-RF-0003 remains accepted searchable debt with no P1/P2 waiver and no supplemental review cycle.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T035900Z--causal-remediation-complete-subject-final-review.md",
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "HCM-RF-0003",
+      "classification": "proof_gap",
+      "severity": "info",
+      "priority": "P4",
+      "status": "inventoried",
+      "source_run_id": "hcm42-corrective-final-closeout-discovery-1",
+      "summary": "The proof strategy duplicates the missing definition-pin label instead of naming registry-missing; normative 05 authority and proof remain correct.",
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/strategy.md:18",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md:4438",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T035900Z--causal-remediation-complete-subject-final-review.md",
+        "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md"
+      ]
+    }
+  ],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "exact base/ref/tree/ancestor/worktree/remote/protected-path preflight and pre-review replay",
+      "status": "passed",
+      "evidence_ref": "Base ea2be46856172e503e7f7668d2dbaac9d26d1d39/tree 9dbad2c418a331d5b2a0c266c55280d81b676aca, dedicated local ref, origin baseline 1256e724a2b7da6b6250f57d6f63fced1e2cf949, remote target absence, and all seven protected manifests matched."
+    },
+    {
+      "command": "external audit digest and ten stable finding IDs",
+      "status": "passed",
+      "evidence_ref": "SHA-256 3d30632a5827d8bdcec7adbe47aef77ff387380d5c143839ca9b1b4a8b8498d0; ten unique IDs with zero missing from correction proof/todo."
+    },
+    {
+      "command": "62-operation set equality, per-row admission, and live symbol replay",
+      "status": "passed",
+      "evidence_ref": "Matrix=05=HCM-4.1=predecessor=62; zero missing/extra/duplicate; 29/29 exact source references resolved; all rows have current transport none and discovery omit."
+    },
+    {
+      "command": "three immutable v1.4 dispatches and dispatch-population replay",
+      "status": "passed",
+      "evidence_ref": "Dispatch count 3; aggregate sha256:1989df7f01938ef3fdc868d46372141a04c1238e8b36f63c6b327a6863616fa6; selector and final review exact subjects verified before launch."
+    },
+    {
+      "command": "fresh selector and complete-subject independent review",
+      "status": "passed",
+      "evidence_ref": "Selector CLEAN had no findings. Final exact subject sha256:e47e7af466bc0089b91d9620aeceb12c648d1cc453e6da2a53cac29f40c946ba was CLEAN with no P1/P2/P3 and inventoried P4 HCM-RF-0003."
+    },
+    {
+      "command": "Markdown relative-link/path, UTF-8, JSON, final-LF, trailing-whitespace, and git diff --check validation",
+      "status": "passed",
+      "evidence_ref": "All primary/review files decoded and parsed; relative links and final LF passed; trailing whitespace and forbidden changed paths were zero; git diff --check exited 0."
+    },
+    {
+      "command": "GitNexus impact/detect_changes and compare-to-main",
+      "status": "not_run",
+      "evidence_ref": "GitNexus MCP is not exposed and .gitnexus/run.cjs is absent. Status is UNAVAILABLE_NOT_GREEN. No code symbol changed; exact-base manual scope was 17 allowed primary/review paths and compare-main was honestly non-green inherited branch comparison."
+    },
+    {
+      "command": "ordinary v1.4 record/dispatch/ledger validator",
+      "status": "failed",
+      "evidence_ref": "Sole exact governed failure: 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN. Permanent governance is applied exactly; no new failure is hidden and the result is never GREEN."
+    },
+    {
+      "command": "v1.4 admission and orchestration-contract self-tests",
+      "status": "passed",
+      "evidence_ref": "--self-test-v1-admission and --self-test-orchestration-contract both exited 0 before closeout."
+    },
+    {
+      "command": "product/runtime tests",
+      "status": "not_run",
+      "evidence_ref": "Planning-only authority forbids runtime/code/schema/transport implementation and no product behavior changed."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": [
+        "SDK public DTO, schema, and discovery membrane"
+      ],
+      "reason": "Bind planning-only owner/admission truth and additive corrective evidence.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "HCM-4.2"
+      ],
+      "reason": "Record the corrected planning boundary and later-slice exclusions without stale closeout state.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "SDK ordinary-use-case contract",
+        "Corrective posture.transition.apply projection",
+        "Capability bootstrap and catalog discovery",
+        "Transport request and response contracts"
+      ],
+      "reason": "Freeze exact request/response/bootstrap/framing/fingerprint and 62-row admission authority.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": [
+        "HCM-4.2 shared DTO, schema, and discovery planning proof gate"
+      ],
+      "reason": "Additively supersede invalid completion facts and malformed proof ref with exact current evidence.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/",
+      "sections": [
+        "SPEC",
+        "selector",
+        "tasks",
+        "proof",
+        "research",
+        "review"
+      ],
+      "reason": "Carry the complete corrected planning/control package and immutable review lineage.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "HCM-RF-0003"
+      ],
+      "reason": "Mechanically register the sole non-blocking final-review P4 after CLEAN.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "HCM-4.2 corrective planning readiness is completed locally; no same-slice work remains under this authority.",
+    "condition": "none",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260811T040300Z--HCM-4-2--orchestration--causal-remediation-planning-completed.json",
+        "sections": [
+          "entire completed corrective parent"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+        "sections": [
+          "entire corrected planning contract"
+        ]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T031843Z--corrective-owner-admission-matrix.md",
+        "sections": [
+          "authoritative 62-row matrix"
+        ]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not treat this completion as DTO/schema/catalog/operation implementation, transport admission, HCM-4.3/4.4/4.5, Phase 5/6, release, publication, push, or remote mutation.",
+      "Do not rewrite the terminal predecessor, any historical dispatch/review/proof, the external receipt, or the frozen CLEAN corrective subject.",
+      "HCM-RF-0003 is accepted wording debt only and requires fresh future authority if edited; it cannot reopen the completed review cadence."
+    ],
+    "acceptance_criteria": [],
+    "stop_conditions": [
+      "Any future implementation or public/dependency/mutation-authority work requires a distinct explicitly authorized top-level task and fresh selector/source-impact proof.",
+      "Do not merge, rebase, reset, clean, force-update, fetch, pull, push, or publish remotely under this completed parent."
+    ]
+  },
+  "supersedes": [
+    "Only the predecessor's recommendation/fact that HCM-4.2 planning was complete and implementation-ready is superseded; the predecessor record and all historical bytes remain immutable evidence.",
+    "The predecessor's invalid selector-review and complete-subject CLEAN authority claims are superseded by the new exact-subject v1.4 selector and final review lineage.",
+    "The predecessor's generic owner/admission, posture request/result, bootstrap/capability, framing, and response-parity completion facts are superseded by the corrected exact tables and 62-row matrix.",
+    "The predecessor's malformed Git proof-ref fact is superseded additively by git:0a4366802467edbe194da9afaf584686921c1e94; the malformed historical string remains preserved in its immutable record."
+  ],
+  "chat_summary": "HCM-4.2 bounded causal-remediation planning is complete at reviewed primary 35721817253f7086c0fb0b23feddbc47fa9a8b83. All ten mandatory audit inputs are corrected, the exact 62-row owner/admission matrix is honest and non-discoverable, fresh selector and final reviews are CLEAN with no P1/P2, HCM-RF-0003 retains the sole P4, and no runtime/schema/transport/remote change occurred."
+}
