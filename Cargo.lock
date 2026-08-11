@@ -538,6 +538,7 @@ dependencies = [
  "handbook-pipeline",
  "libc",
  "p256",
+ "serde",
  "serde_json",
  "serde_yaml_bw",
  "sha2",

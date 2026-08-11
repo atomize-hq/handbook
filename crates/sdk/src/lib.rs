@@ -10,6 +10,7 @@ mod author;
 mod author_route_api;
 mod blocker;
 mod charter_product;
+pub mod contract_membrane;
 mod decision_log;
 mod doctor;
 mod error;
