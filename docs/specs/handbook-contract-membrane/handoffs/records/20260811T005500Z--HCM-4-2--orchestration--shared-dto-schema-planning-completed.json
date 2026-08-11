@@ -1,0 +1,379 @@
+{
+  "schema_id": "handbook.session-handoff",
+  "schema_version": "1.4",
+  "handoff_id": "20260811T005500Z--HCM-4-2--orchestration--shared-dto-schema-planning-completed",
+  "created_at_utc": "2026-08-11T00:55:00Z",
+  "program_id": "handbook-contract-membrane",
+  "phase_id": "HCM-4",
+  "slice_id": "HCM-4.2",
+  "packet_id": "HCM-4.2-PLANNING-CONTROL-PACK",
+  "orchestration_id": "handbook-hcm-4-2-planning-20260811",
+  "source_handoff_ids": [],
+  "session": {
+    "kind": "orchestration",
+    "agent": "codex",
+    "thread_ref": "019fee28-5130-79d2-91e4-e55d475ee4c0"
+  },
+  "status": "completed",
+  "stop_reason": "completed",
+  "delegation_capability": {
+    "status": "available",
+    "checked_at_utc": "2026-08-11T00:45:00Z",
+    "evidence_ref": "Fresh built-in selector and complete-subject reviewers spawned and waited inside the active orchestration."
+  },
+  "delegated_runs": [
+    {
+      "run_id": "hcm42-selector-discovery-1",
+      "dispatch_id": "20260811T002100Z--HCM-4-2--selector-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T002100Z--HCM-4-2--selector-discovery-review.json",
+      "dispatch_fingerprint": "sha256:1f4030a270f47ed18273f729983e104bcc75eba2bfbc451cdaf0fea28e3758b3",
+      "role": "review",
+      "agent_id": "019fee35-e695-7ce3-81ae-54871bd4666d",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "code-review-and-quality"
+      ],
+      "subject_fingerprint": "sha256:734a5fd71096875d8608064011ec8b7f1cbcfc2cf04444540e87c4375e3b86f4",
+      "review_round": 1,
+      "predecessor_run_id": null,
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T002100Z--HCM-4-2--selector-discovery-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T002700Z--selector-discovery-review.md",
+        "Fresh built-in selector review returned CLEAN with no actionable findings."
+      ],
+      "result_subject_fingerprint": "sha256:734a5fd71096875d8608064011ec8b7f1cbcfc2cf04444540e87c4375e3b86f4"
+    },
+    {
+      "run_id": "hcm42-proof-discovery-1",
+      "dispatch_id": "20260811T003900Z--HCM-4-2--complete-subject-discovery-review",
+      "dispatch_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T003900Z--HCM-4-2--complete-subject-discovery-review.json",
+      "dispatch_fingerprint": "sha256:f3ecaaff3ab294c5dce61edd0b0103b691af74635228ce7f5b0c46adec35a5d5",
+      "role": "review",
+      "agent_id": "019fee47-3826-7e23-bf42-8b2032c6669c",
+      "agent_type": "default",
+      "fresh_context": true,
+      "required_skills": [
+        "using-agent-skills",
+        "context-engineering",
+        "code-review-and-quality",
+        "documentation-and-adrs"
+      ],
+      "subject_fingerprint": "sha256:053fdbfe031e10d4d749ebfdaebb12387f93c992df651b5cb01becf1d948a2b9",
+      "review_round": 2,
+      "predecessor_run_id": "hcm42-selector-discovery-1",
+      "remediation_for_run_ids": [],
+      "final_status": "completed",
+      "verdict": "clean",
+      "finding_refs": [],
+      "carried_finding_refs": [],
+      "evidence_refs": [
+        "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T003900Z--HCM-4-2--complete-subject-discovery-review.json",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T004500Z--complete-subject-discovery-review.md",
+        "Fresh built-in complete-subject review returned CLEAN with no actionable findings."
+      ],
+      "result_subject_fingerprint": "sha256:053fdbfe031e10d4d749ebfdaebb12387f93c992df651b5cb01becf1d948a2b9"
+    }
+  ],
+  "dispatch_population": {
+    "scope": "parent_orchestration",
+    "through_created_at_utc": "2026-08-11T00:55:00Z",
+    "dispatch_count": 2,
+    "algorithm": "sha256",
+    "encoding": "dispatch-ref-null-sha256-newline-v1",
+    "causal_budget_ids": [
+      "sha256:39a8729600ab14f288e03de59cc5d7ff98fa671257146617bfcc6575edc5c0ce"
+    ],
+    "aggregate_fingerprint": "sha256:f2e72f9d95ea9e5662f87f80da6e5306bfd70ccf3bfb35a5de478c1c79a4542f"
+  },
+  "authority_continuations": [],
+  "ancillary_diff_observations": [],
+  "remediations": [],
+  "reviewed_state": {
+    "baseline_head": "0a4366802467edbe194da9afaf584686921c1e94",
+    "subject_fingerprint": "sha256:053fdbfe031e10d4d749ebfdaebb12387f93c992df651b5cb01becf1d948a2b9",
+    "subject_manifest_ref": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T003900Z--HCM-4-2--complete-subject-discovery-review.json",
+    "proof_refs": [
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T001900Z--hcm-4-2-shared-dto-json-schema-selector.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/plan.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/todo.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T001900Z--source-impact-inventory.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/strategy.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/20260811T005000Z--planning-proof-wall.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T002700Z--selector-discovery-review.md",
+      "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T004500Z--complete-subject-discovery-review.md",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T002100Z--HCM-4-2--selector-discovery-review.json",
+      "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T003900Z--HCM-4-2--complete-subject-discovery-review.json",
+      "git:0a43668c5bdb2d80ee0ad9e6a6f2ce7af0d7b676"
+    ]
+  },
+  "active_resolution": {
+    "level": "HCM-4.2 shared DTO/schema/bootstrap planning completed",
+    "scope_horizon": "one reviewed planning/control package for HCM-4.2 only",
+    "detail_resolution": "The package freezes future typed DTO, operation-definition, schema-generation, JCS/fingerprint, immutable bootstrap/catalog, admission/refusal, and posture-discovery boundaries while preserving owner truth and exact 62-operation inventory.",
+    "temporal_horizon": "The reviewed primary documentation state is committed; this record and ledger are the mechanical two-commit closeout only.",
+    "authority_horizon": "HCM-4.2 planning/control pack only. Runtime DTOs, schemas, discovery, transports, HCM-4.3/4.4/4.5, Phase 5/6, publication, release, remote state, and Phase-3 closure remain unauthorized.",
+    "memory_horizon": "The selector, source/impact inventory, 62-operation reconciliation, complete-subject CLEAN review, proof wall, GitNexus unavailability, and inherited ordinary-validator contradiction are replay-critical.",
+    "validation_horizon": "Completed HCM-4.2 planning requires manifest replay, clean review, documentation/link/path checks, self-tests, deterministic ledger parity, protected-path proof, and local expected-old ref publication; unavailable GitNexus evidence is never GREEN."
+  },
+  "snapshot_refs": {
+    "capture_status": "not_available",
+    "prior_end_snapshot_ref": null,
+    "session_start_snapshot_ref": null,
+    "grounding_delta_ref": null,
+    "grounding_projection_ref": null,
+    "session_end_snapshot_ref": null,
+    "session_delta_ref": null
+  },
+  "semantic_refs": {
+    "artifact_kind_refs": [],
+    "artifact_instance_refs": [],
+    "intake_definition_refs": [],
+    "intake_record_refs": [],
+    "artifact_candidate_refs": [],
+    "canonical_artifact_refs": [],
+    "posture_kernel_ref": null,
+    "posture_recommendation_refs": [],
+    "posture_transition_refs": [],
+    "default_set_decision_ref": null
+  },
+  "objective": "Complete HCM-4.2 as a planning/control-pack increment only: reconcile frozen HCM-0.4/HCM-0.5 machine-contract semantics with HCM-4.1 direct typed Rust truth, freeze the future shared DTO/schema/bootstrap/catalog membrane and exact operation boundaries, obtain fresh CLEAN review, and close locally without implementation.",
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T001900Z--hcm-4-2-shared-dto-json-schema-selector.md",
+      "sections": ["entire selector"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+      "sections": ["entire implementation-ready planning package"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/plan.md",
+      "sections": ["packets P0-P5"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T001900Z--source-impact-inventory.md",
+      "sections": ["entire source and impact inventory"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": ["Project posture kernel", "SDK public DTO, schema, and discovery membrane"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": ["Phase 4", "HCM-4.1", "HCM-4.2", "HCM-4.3", "HCM-4.4", "HCM-4.5"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": ["Status", "crate ownership", "SDK ordinary-use-case contract", "operation definition", "capability bootstrap and catalog discovery", "DTO and JSON Schema generation"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": ["HCM-4.2 shared DTO, schema, and discovery planning proof gate"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": ["Two-commit true-stop closeout"]
+    }
+  ],
+  "repo_state": {
+    "branch": "detached at 0a4366802467edbe194da9afaf584686921c1e94",
+    "head": "0a4366802467edbe194da9afaf584686921c1e94",
+    "dirty": true,
+    "changed_paths": [
+      "docs/specs/handbook-contract-membrane/handoffs/ledger.jsonl",
+      "docs/specs/handbook-contract-membrane/handoffs/records/20260811T005500Z--HCM-4-2--orchestration--shared-dto-schema-planning-completed.json"
+    ]
+  },
+  "work_completed": [
+    "Bound task 019fee28-5130-79d2-91e4-e55d475ee4c0 on host local and meta workflow handbook-hcm-4-2-planning-20260811 to dispatch nonce 4b6d2f55a9cc4612bb7553f040b24c1fd574f604cb82cfdbe75d73e2c4c5b9a1; verified exact base/tree, ancestry, local integration ref, remote baseline, worktree ownership, cleanliness, and protected-path separation before edits.",
+    "Created the reviewed HCM-4.2 selector, source/impact inventory, SPEC, dependency-ordered future packets, todo, proof strategy, review evidence, and canonical 03-06 reconciliation; no Rust, Cargo, runtime, generated schema, DTO, transport, CLI, Tauri, skill, publication, release, or protected path changed.",
+    "Reconciled the complete ordinary operation inventory exactly: control pack 05=62, HCM-4.1 plan=62, HCM-4.2 inventory=62, missing=0, extra=0. Preserved direct typed Rust posture linkage as non-discoverable and owner-to-SDK dependency direction.",
+    "Created and validated the v1.4 selector and complete-subject discovery dispatches. Fresh built-in selector and complete-subject reviewers completed with CLEAN verdicts and no findings; no remediation or post-CLEAN review ran.",
+    "Committed the reviewed primary planning state at 0a4366802467edbe194da9afaf584686921c1e94. GitNexus MCP/CLI and scoped/compare detection were unavailable; the package records exact source/manual evidence and unavailable status honestly."
+  ],
+  "deliverables": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T001900Z--hcm-4-2-shared-dto-json-schema-selector.md",
+      "status": "completed",
+      "summary": "HCM-4.2 planning selector and authority boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+      "status": "completed",
+      "summary": "Implementation-ready shared DTO/schema/bootstrap/catalog planning contract with exact exclusions."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/plan.md",
+      "status": "completed",
+      "summary": "Dependency-ordered future packets P0-P5 with effects, proof, impact, risk, stops, rollback, and disallowed shortcuts."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T001900Z--source-impact-inventory.md",
+      "status": "completed",
+      "summary": "Live HCM-4.1 source, owner, caller, operation, and GitNexus-unavailable inventory."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/strategy.md",
+      "status": "completed",
+      "summary": "Future proof wall for schema bytes, serialization, discovery, refusal, receipts, equivalence, transport ownership, and closeout."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/20260811T005000Z--planning-proof-wall.md",
+      "status": "completed",
+      "summary": "Planning proof results, honest unavailable capabilities, and closeout boundary."
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T004500Z--complete-subject-discovery-review.md",
+      "status": "completed",
+      "summary": "Fresh complete-subject CLEAN review with no findings."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "HCM42-PLAN-D1",
+      "summary": "handbook-sdk owns ordinary-consumer composition and the shared transport-neutral public contract; owner crates retain domain truth and never depend on SDK.",
+      "authority_effect": "Planning only. No public DTO, schema, operation, bootstrap, catalog, transport, or runtime reachability is created.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/plan.md"
+      ]
+    },
+    {
+      "decision_id": "HCM42-PLAN-D2",
+      "summary": "The complete 62-operation inventory is the only ordinary admission set; direct typed posture Rust linkage remains non-discoverable until a separately proved public projection seam.",
+      "authority_effect": "No invented operation, private HCM-3.6 record exposure, CLI/Tauri ingress, contract/dock Phase-5 exposure, or future-owner early promotion is authorized.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T001900Z--source-impact-inventory.md",
+        "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md"
+      ]
+    },
+    {
+      "decision_id": "HCM42-PLAN-D3",
+      "summary": "Rust public types and checked-in Draft 2020-12 schemas will be one reviewed contract with full SemVer, RFC 8785/JCS fingerprints, immutable bootstrap/catalog snapshots, closed discriminants, and fail-closed admission/refusal.",
+      "authority_effect": "Implementation remains separately selected and must pass the future packet proof wall; no schema or runtime asset is promoted here.",
+      "refs": [
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+        "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/strategy.md"
+      ]
+    }
+  ],
+  "findings": [],
+  "blockers": [],
+  "escalations": [],
+  "validation": [
+    {
+      "command": "bound worktree/base/tree/ancestor/target-ref/remote/protected-path preflight",
+      "status": "passed",
+      "evidence_ref": "Exact base 818d3662f57fcda867a59b7f9e035755fee1b393/tree 6dd3872e93bcad6604e78534d05e2ec14a0f8aea, required ancestor, local ref, remote baseline, assigned worktree, and protected-path observations matched before editing."
+    },
+    {
+      "command": "62-operation catalog parity",
+      "status": "passed",
+      "evidence_ref": "Canonical 05 catalog=62, HCM-4.1 plan=62, and HCM-4.2 source inventory=62 with no missing, extra, or duplicate IDs."
+    },
+    {
+      "command": "v1.4 selector and complete-subject dispatch validation",
+      "status": "passed",
+      "evidence_ref": "validate_handoffs.py --verify-dispatch accepted both HCM-4.2 dispatches; final subject is sha256:053fdbfe031e10d4d749ebfdaebb12387f93c992df651b5cb01becf1d948a2b9."
+    },
+    {
+      "command": "fresh independent selector and complete-subject review",
+      "status": "passed",
+      "evidence_ref": "Fresh built-in reviewers completed both stages with CLEAN verdicts and no Critical/P1/P2/P3/P4 findings."
+    },
+    {
+      "command": "Markdown relative-link/path, UTF-8, JSON, absolute-path, trailing-whitespace, and git diff --check validation",
+      "status": "passed",
+      "evidence_ref": "12 planning/control files checked; missing links=0, trailing whitespace=0, absolute machine paths=0, JSON parsing passed, and git diff --check passed."
+    },
+    {
+      "command": "GitNexus query/context/impact/detect_changes and compare-to-main",
+      "status": "not_run",
+      "evidence_ref": "GitNexus MCP server, .gitnexus runner, and executable are unavailable. Manual exact source/owner/operation evidence is recorded, but unavailable callgraph/change-detection evidence is never GREEN."
+    },
+    {
+      "command": "ordinary v1.4 record/ledger validator",
+      "status": "failed",
+      "evidence_ref": "Exact inherited failure: 20260806T202700Z--HCM-3-5--resolution-aware-adoption-planning: continuation writes or advances before selector CLEAN. This immutable predecessor contradiction is outside HCM-4.2 scope and is the sole ordinary-validator failure; no waiver or modification was made."
+    },
+    {
+      "command": "v1.4 admission and orchestration-contract self-tests",
+      "status": "passed",
+      "evidence_ref": "--self-test-v1-admission and --self-test-orchestration-contract both passed."
+    },
+    {
+      "command": "product/runtime tests",
+      "status": "not_run",
+      "evidence_ref": "Prohibited by the planning-only HCM-4.2 authority; no product source or behavior changed."
+    }
+  ],
+  "pack_updates": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+      "sections": ["Project posture kernel", "SDK public DTO, schema, and discovery membrane"],
+      "reason": "Reconcile HCM-4.1 direct Rust truth with the HCM-4.2 target-only public membrane.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": ["Phase 4", "HCM-4.1", "HCM-4.2", "HCM-4.3", "HCM-4.4", "HCM-4.5"],
+      "reason": "Record the reviewed HCM-4.2 planning authority and later-phase exclusions.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": ["Status"],
+      "reason": "Record the 62-operation admission set, direct-Rust non-discoverability, and no runtime promotion.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+      "sections": ["HCM-4.2 shared DTO, schema, and discovery planning proof gate"],
+      "reason": "Add the HCM-4.2 future proof wall and non-promoting boundary.",
+      "status": "completed"
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/",
+      "sections": ["selector", "SPEC", "tasks", "research", "proof", "review"],
+      "reason": "Add the complete reviewed HCM-4.2 planning/control package and proof evidence.",
+      "status": "completed"
+    }
+  ],
+  "resume": {
+    "execution_target": "none",
+    "objective": "HCM-4.2 planning is completed locally; no same-slice work remains under this planning authority.",
+    "condition": "none",
+    "must_read": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260811T005500Z--HCM-4-2--orchestration--shared-dto-schema-planning-completed.json",
+        "sections": ["entire completed parent"]
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+        "sections": ["entire planning package"]
+      }
+    ],
+    "allowed_scope": [],
+    "prohibited_scope": [
+      "Do not treat this completion as HCM-4.2 implementation, HCM-4.3/4.4/4.5, Phase 3 closure, Phase 5/6, publication, release, or push.",
+      "Do not add runtime DTOs, schemas, discovery, transport, CLI/Tauri ingress, private posture record exposure, compiler resurrection, or owner-to-SDK dependency.",
+      "Any future work requires a distinct authorized top-level dispatch and new GitNexus impact evidence for source edits."
+    ],
+    "acceptance_criteria": [],
+    "stop_conditions": [
+      "Stop if future implementation requires a new public/dependency/compatibility/mutation-authority choice beyond a fresh selector.",
+      "Do not merge, rebase, reset, clean, force-update, fetch, pull, push, or publish remotely."
+    ]
+  },
+  "supersedes": [],
+  "chat_summary": "HCM-4.2 planning is complete locally at reviewed primary 0a4366802467edbe194da9afaf584686921c1e94. The package freezes shared typed DTO/schema/bootstrap/catalog boundaries, exact 62-operation admission, and non-discoverable HCM-4.1 direct Rust posture linkage. Fresh selector and complete-subject reviews are CLEAN; no runtime or remote change occurred."
+}
