@@ -643,10 +643,34 @@ authorize other Phase-4 work.
 
 ### `HCM-4.2` — Shared DTO and JSON Schema contract (next separately selected work)
 
-- request/result/error/refusal envelopes;
-- schema IDs and versioning;
-- generated JSON Schema;
-- deterministic serialization and compatibility tests.
+The reviewed HCM-4.2 planning package at
+[`slices/HCM-4.2/SPEC.md`](slices/HCM-4.2/SPEC.md) is the sole planning
+authority for this increment. It reconciles the frozen HCM-0.4/HCM-0.5
+machine-contract semantics with the HCM-4.1 checkpoint and records that
+`HandbookSdkV1::apply_posture_transition` is direct typed Rust linkage only,
+not a discoverable operation. The package is implementation-ready but does
+not itself add runtime types, schemas, discovery, or transport.
+
+- shared typed request/result/problem/error/refusal/blocker/reference/write-
+  receipt DTOs with explicit closed discriminants and owner-domain refusal;
+- exact definitions for the complete 62-operation ordinary inventory, with
+  owner availability and `contract.*`/`dock.*` deferred to Phase 5;
+- exact schema IDs, full SemVer, compatibility rules, fingerprints, and
+  checked-in generated Draft 2020-12 JSON Schema from Rust source truth;
+- RFC 8785 canonical serialization, UTF-8/LF byte identity, deterministic
+  regeneration, and unknown-field/discriminant/null/default proof;
+- immutable, restart-safe, fingerprint-bound bootstrap and schema/operation/
+  profile catalog snapshots with refusal/admission for stale, cold, missing,
+  tampered, unsupported, or unknown references;
+- a public posture projection seam that makes `posture.transition.apply`
+  discoverable without exposing private HCM-3.6 records or manufacturing CLI
+  or Tauri ingress; and
+- the complete future proof wall and dependency-ordered implementation
+  packets, including GitNexus impact gates and negative transport ownership.
+
+This package does not close Phase 3 or authorize HCM-4.3 CLI JSON, HCM-4.4
+Tauri, HCM-4.5 skills, Phase 5 contract/dock runtime, Phase 6 consumers,
+publication, release, or remote updates.
 
 ### `HCM-4.3` — Complete CLI `--json` parity
 

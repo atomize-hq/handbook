@@ -1,0 +1,190 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260811T002100Z--HCM-4-2--selector-discovery-review",
+  "created_at_utc": "2026-08-11T00:21:00Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "handbook-hcm-4-2-planning-20260811",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-4",
+  "slice_id": "HCM-4.2",
+  "packet_id": "HCM-4.2-PLANNING-CONTROL-PACK",
+  "subject_fingerprint": "sha256:734a5fd71096875d8608064011ec8b7f1cbcfc2cf04444540e87c4375e3b86f4",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm42-selector-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-11T00:19:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "HCM-4-2-DOCS-CONTROL-PACK",
+        "packet_ids": [
+          "HCM-4.2-PLANNING-CONTROL-PACK"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T001900Z--hcm-4-2-shared-dto-json-schema-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:7494fe1820049aee89fbecb7fe56bb9238e24e7b625fadb024933b5fc3e73eed"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:39a8729600ab14f288e03de59cc5d7ff98fa671257146617bfcc6575edc5c0ce",
+    "integrated_outcome_id": "HCM-4-2-DOCS-CONTROL-PACK",
+    "outcome_registry_fingerprint": "sha256:7494fe1820049aee89fbecb7fe56bb9238e24e7b625fadb024933b5fc3e73eed",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm42-selector-convergence-20260811T001900Z",
+    "completed_at_utc": "2026-08-11T00:20:30Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "read-only selector and source/impact packet scope review",
+        "evidence_ref": "selector-and-source-inventory files are the complete current packet subject"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "rg --files docs/specs/handbook-contract-membrane/slices/HCM-4.2",
+        "evidence_ref": "only the selector and source/impact inventory are in the review subject"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute SHA-256 for both UTF-8 manifest entries and aggregate",
+        "evidence_ref": "subject fingerprint sha256:734a5fd71096875d8608064011ec8b7f1cbcfc2cf04444540e87c4375e3b86f4"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "working-tree documentation diff has no whitespace errors"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "UTF-8 manifest-entry trailing-space/tab scan",
+        "evidence_ref": "text-files-no-trailing-whitespace-v1 scan passed"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T001900Z--hcm-4-2-shared-dto-json-schema-selector.md",
+        "sha256": "abab88e573178bbd94b17a64aa02dcf4456536df3397d6464a3dba641bef1f0f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T001900Z--source-impact-inventory.md",
+        "sha256": "938c2f3e519796490790726861b8a6e0f2ab1a35e0a0c2ad8f25c581e99c9c82"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:734a5fd71096875d8608064011ec8b7f1cbcfc2cf04444540e87c4375e3b86f4"
+  },
+  "active_resolution": {
+    "level": "planning",
+    "scope_horizon": "slice",
+    "detail_resolution": "normal",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "slice_closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T001900Z--hcm-4-2-shared-dto-json-schema-selector.md",
+      "sections": ["entire candidate selector"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": ["Phase 4", "HCM-4.1", "HCM-4.2", "HCM-4.3", "HCM-4.4", "HCM-4.5"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": ["HCM-0.4 crate ownership and dependency contract", "SDK ordinary-use-case contract", "Operation definition contract", "Capability bootstrap and catalog discovery", "DTO and JSON Schema generation contract"]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T001900Z--source-impact-inventory.md",
+      "sections": ["entire source, owner, and impact inventory"]
+    }
+  ],
+  "repo_truth": "Documentation-only candidate at base 818d3662f57fcda867a59b7f9e035755fee1b393/tree 6dd3872e93bcad6604e78534d05e2ec14a0f8aea. HCM-4.1 direct posture linkage is typed Rust only. GitNexus MCP/index is unavailable and is recorded unavailable.",
+  "allowed_scope": [
+    "Read the exact HCM-4.2 selector and source/impact inventory.",
+    "Review HCM-4.2 authority, owner direction, operation reconciliation, and boundary completeness.",
+    "Return independent findings; do not edit files or write handoffs/ledger entries."
+  ],
+  "non_goals": [
+    "Any Rust, Cargo, product test, generated schema, DTO, transport, CLI, Tauri, Phase-5, publication, or remote change.",
+    "Choosing unselected CLI compatibility or exposing private posture records.",
+    "Global handoff or ledger writes."
+  ],
+  "tasks": [
+    "Identify Critical, Required, Optional, and Nit findings first.",
+    "Check the selector against live 01-06 authority, HCM-4.1 truth, exact 62-operation inventory, and the HCM-4.2/HCM-4.3/HCM-4.4 boundary.",
+    "Check that unavailable GitNexus evidence is not represented as GREEN and that no implementation authority is implied.",
+    "For each finding provide file/line, violated contract, smallest valid remediation, and missing proof."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#sdk-ordinary-use-case-contract",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#capability-bootstrap-and-catalog-discovery",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#dto-and-json-schema-generation-contract",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
+  ],
+  "stop_conditions": [
+    "Return a P1/P2 finding for any missing authority, hidden implementation claim, owner inversion, or incomplete inventory.",
+    "Do not broaden into implementation or repair files."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260811T003900Z--HCM-4-2--complete-subject-discovery-review",
+  "created_at_utc": "2026-08-11T00:39:00Z",
+  "source_handoff_ids": [],
+  "parent_orchestration_id": "handbook-hcm-4-2-planning-20260811",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "documentation-and-adrs"
+  ],
+  "phase_id": "HCM-4",
+  "slice_id": "HCM-4.2",
+  "packet_id": "HCM-4.2-PLANNING-CONTROL-PACK",
+  "subject_fingerprint": "sha256:053fdbfe031e10d4d749ebfdaebb12387f93c992df651b5cb01becf1d948a2b9",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm42-proof-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-11T00:19:00Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "HCM-4-2-DOCS-CONTROL-PACK",
+        "packet_ids": [
+          "HCM-4.2-PLANNING-CONTROL-PACK"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T001900Z--hcm-4-2-shared-dto-json-schema-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:7494fe1820049aee89fbecb7fe56bb9238e24e7b625fadb024933b5fc3e73eed"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:39a8729600ab14f288e03de59cc5d7ff98fa671257146617bfcc6575edc5c0ce",
+    "integrated_outcome_id": "HCM-4-2-DOCS-CONTROL-PACK",
+    "outcome_registry_fingerprint": "sha256:7494fe1820049aee89fbecb7fe56bb9238e24e7b625fadb024933b5fc3e73eed",
+    "review_stage": "proof",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260811T002100Z--HCM-4-2--selector-discovery-review"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm42-complete-subject-convergence-20260811T003900Z",
+    "completed_at_utc": "2026-08-11T00:38:30Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "review exact manifest across canonical control pack and HCM-4.2 package",
+        "evidence_ref": "subject manifest below binds the full planning/control-pack subject"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "reconcile control pack 05 with HCM-4.1 plan and HCM-4.2 source inventory",
+        "evidence_ref": "62 operation IDs, missing 0, extra 0"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute SHA-256 for sorted UTF-8 repo-path-null-sha256-newline-v1 entries",
+        "evidence_ref": "subject fingerprint sha256:053fdbfe031e10d4d749ebfdaebb12387f93c992df651b5cb01becf1d948a2b9"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "git diff --check",
+        "evidence_ref": "documentation subject has no whitespace errors"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "inspect changed paths and assert no Rust/Cargo/runtime/generated-schema/transport paths",
+        "evidence_ref": "planning-only allowlist remains in force"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {"path":"docs/specs/handbook-contract-membrane/03-seam-crosswalk.md","sha256":"4072f9380f9b7e1e261eabef95bcaa699ed56cfe25d1e958a25abcaff93398d1"},
+      {"path":"docs/specs/handbook-contract-membrane/04-phase-slice-map.md","sha256":"5847719a89a589d2dae95375d6187f16cc6794e8a151902ac34d06eb005f9d02"},
+      {"path":"docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md","sha256":"10092135637387dc275af6cbbbad9a39dabb6fcb7806d939a0b97cd6f2698d09"},
+      {"path":"docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md","sha256":"310a2748be37014fd1bb2c2bd06b7de004faaca4dfd3ee854035e3ba79a96bd4"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md","sha256":"4304c216b3939bfdb9c788b687d6c7359a0d0959528345ffc9a10c136bff472a"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T001900Z--hcm-4-2-shared-dto-json-schema-selector.md","sha256":"abab88e573178bbd94b17a64aa02dcf4456536df3397d6464a3dba641bef1f0f"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/strategy.md","sha256":"65c03268c0c276b9568fde60485221b13d7b95f84e3cdc15454a413d77647bfc"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T001900Z--source-impact-inventory.md","sha256":"938c2f3e519796490790726861b8a6e0f2ab1a35e0a0c2ad8f25c581e99c9c82"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T002700Z--selector-discovery-review.md","sha256":"e5f2c98b27c4531efca8a6bc1bc158bb4e7b1549633f6567584b0042bab9466b"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/plan.md","sha256":"11255316f8a39557b36c1a7ae1b1cf85ebae918c8451b02a0031395f71dc5b4a"},
+      {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/todo.md","sha256":"1bd39d72aaa1dc93e59c0ccf43117826cd64a05c38923c9bd5d3897a89d6109b"}
+    ],
+    "aggregate_fingerprint": "sha256:053fdbfe031e10d4d749ebfdaebb12387f93c992df651b5cb01becf1d948a2b9"
+  },
+  "active_resolution": {
+    "level": "proof",
+    "scope_horizon": "slice",
+    "detail_resolution": "normal",
+    "temporal_horizon": "current_orchestration",
+    "authority_horizon": "slice_local",
+    "memory_horizon": "execution_record",
+    "validation_horizon": "slice_closeout"
+  },
+  "authority_refs": [
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md","sections":["entire implementation-ready planning package"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/plan.md","sections":["packets P0-P5"]},
+    {"path":"docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/strategy.md","sections":["entire future proof wall"]},
+    {"path":"docs/specs/handbook-contract-membrane/03-seam-crosswalk.md","sections":["SDK public DTO, schema, and discovery membrane"]},
+    {"path":"docs/specs/handbook-contract-membrane/04-phase-slice-map.md","sections":["Phase 4", "HCM-4.1", "HCM-4.2", "HCM-4.3", "HCM-4.4", "HCM-4.5"]},
+    {"path":"docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md","sections":["Status", "HCM-0.4 crate ownership and dependency contract", "SDK ordinary-use-case contract", "Operation definition contract", "Capability bootstrap and catalog discovery", "DTO and JSON Schema generation contract"]},
+    {"path":"docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md","sections":["HCM-4.2 shared DTO, schema, and discovery planning proof gate"]}
+  ],
+  "repo_truth": "Documentation-only HCM-4.2 package at base 818d3662f57fcda867a59b7f9e035755fee1b393/tree 6dd3872e93bcad6604e78534d05e2ec14a0f8aea. HCM-4.1 direct posture linkage is typed Rust only. GitNexus MCP/index is unavailable and is recorded unavailable.",
+  "allowed_scope": [
+    "Read the exact complete-subject manifest and live 01-06 authority.",
+    "Review the HCM-4.2 selector, package, control-pack reconciliation, proof wall, operation inventory, and boundary exclusions.",
+    "Return independent findings; do not edit files or write handoffs/ledger entries."
+  ],
+  "non_goals": [
+    "Any Rust, Cargo, product test, generated schema, DTO, transport, CLI, Tauri, Phase-5, Phase-6, publication, release, or remote change.",
+    "Treating direct Rust linkage as discoverable or exposing private HCM-3.6 records.",
+    "Global handoff or ledger writes."
+  ],
+  "tasks": [
+    "Identify Critical, Required, Optional, and Nit findings first.",
+    "Check every package/control-pack claim against live 01-06 authority, HCM-4.1 source truth, and the exact 62-operation inventory.",
+    "Check DTO ownership, dependency direction, schema source-of-truth, SemVer/JCS/fingerprint rules, bootstrap/catalog lifecycle, admission/refusal, posture discovery seam, and complete proof wall.",
+    "Check HCM-4.2 separation from HCM-4.3/4.4/4.5, Phase 5, Phase 6, publication, release, and Phase-3 closure.",
+    "Check that unavailable GitNexus evidence is not represented as GREEN and that no implementation authority is implied.",
+    "For each finding provide file/line, violated contract, smallest valid remediation, and missing proof."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#sdk-ordinary-use-case-contract",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#capability-bootstrap-and-catalog-discovery",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#dto-and-json-schema-generation-contract",
+    "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md#hcm-4-2-shared-dto-schema-and-discovery-planning-proof-gate",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
+  ],
+  "stop_conditions": [
+    "Return a P1/P2 finding for any missing authority, hidden implementation claim, owner inversion, incomplete inventory, or proof-wall gap.",
+    "Do not broaden into implementation or repair files."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

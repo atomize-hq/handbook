@@ -6,6 +6,16 @@ The HCM-0.2 sections are frozen design contracts: schema policy, instance-profil
 
 The HCM-0.4 owner, SDK/transport, and public-proof-plan sections remain frozen design authority and are changed by HCM-0.5 only through the explicitly appended ordinary contract/dock operations. `PG-CONTRACT-01`, `PG-DOCK-01`, and `PG-GATE-01` remain open; no contract/dock crate, schema, manifest, bundle, process, validator, SDK/CLI/Tauri/Substrate path, or runtime proof is implied. HCM-0.6 now freezes the shipped artifact-kind/default-instance/requiredness data and its exact condition/role/capability/lifecycle/support posture below. Shipped Resolution labels/default policy remain unresolved, and illustrative examples still select nothing.
 
+The HCM-4.2 slice is now a reviewed planning/control-pack subject only. The
+HCM-4.1 `HandbookSdkV1::apply_posture_transition` entrypoint remains direct
+typed Rust linkage and is not a discoverable operation, and the complete
+62-operation ordinary inventory remains the canonical admission set. The
+slice freezes future shared DTO, schema, serialization, immutable bootstrap,
+catalog, admission/refusal, and posture-projection boundaries; it does not
+promote any runtime asset, operation, transport, CLI/Tauri surface, Phase-5
+contract/dock owner, Phase-6 consumer, publication, or release. Owner crates
+retain domain truth and never depend on `handbook-sdk`.
+
 ## Schema policy
 
 - Canonical human-authored structured records use YAML where appropriate.

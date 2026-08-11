@@ -1519,6 +1519,51 @@ That local completion, and the subsequent HCM-4.1 SDK checkpoint, do not close
 `PG-POSTURE-01`, `PG-POSTURE-02`, `HCM3EXIT-P2-CLIPPY-001`, HCM-3.5 P5/P6, or
 the Phase 3 exit.
 
+## HCM-4.2 shared DTO, schema, and discovery planning proof gate
+
+The selected HCM-4.2 subject is documentation and future implementation
+authority only. Its reviewed package reconciles the frozen HCM-0.4/HCM-0.5
+semantics, the HCM-4.1 direct typed Rust checkpoint, and the complete 62-row
+ordinary operation inventory. It does not claim that a public DTO, generated
+schema, operation catalog, bootstrap surface, transport, or runtime proof
+exists. In particular, `HandbookSdkV1::apply_posture_transition` remains
+direct typed Rust linkage and is not discoverable until the bounded public
+projection/admission seam is implemented under a later selected proof wall.
+
+Before any future HCM-4.2 implementation may promote this boundary:
+
+- Rust public types and checked-in Draft 2020-12 schemas must share one
+  reviewed source of truth, regenerate byte-identically, and carry exact
+  schema IDs, full SemVer, lowercase SHA-256 fingerprints, explicit
+  null/default behavior, and compatibility rules;
+- RFC 8785/JCS UTF-8 canonical serialization, LF framing, duplicate-key
+  rejection, closed discriminants, unknown-field refusal, and supported /
+  unsupported major/minor behavior must be replayed across request, result,
+  problem, blocker, refusal, reference, cursor, page, and write-receipt DTOs;
+- immutable bootstrap and schema/operation/profile catalogs must be
+  restart-safe, snapshot-consistent, fingerprint-bound, and fail closed for
+  cold/stale/tampered snapshots, unknown operations, missing schema/profile,
+  pagination drift, and recheck failure; discovery cannot derive from CLI
+  help, prose, examples, Tauri names, ambient files, or range/latest lookup;
+- every ordinary operation must bind owner, mutability, idempotency, refusal,
+  write set, result, receipt, and authority without moving domain truth into
+  SDK or transport; direct-Rust equivalence and negative transport ownership
+  must be proven, while private HCM-3.6 records remain private;
+- the exact 62-operation reconciliation, owner/dependency direction,
+  generation layout, catalog lifecycle, future adapter seams, and all
+  HCM-4.3/4.4/4.5, Phase-5, Phase-6, publication, and Phase-3 exclusions
+  must remain unchanged; and
+- scoped and compare-to-main GitNexus evidence must be available for future
+  implementation edits, with HIGH/CRITICAL impact warned and accepted only
+  through reviewed proof. GitNexus is unavailable in this checkout today and
+  is recorded as unavailable, never GREEN.
+
+The HCM-4.2 planning package records the complete proof strategy, future
+packet cadence, stop/rollback rules, and its fresh independent selector and
+complete-subject review evidence. A planning closeout does not close
+`PG-CONTRACT-01`, `PG-DOCK-01`, `PG-GATE-01`, the Phase 3 exit, HCM-4.3,
+HCM-4.4, HCM-4.5, Phase 5, Phase 6, publication, or release.
+
 ## Control-pack orchestration-repair proof gate
 
 The immutable HCM-0.1 history remains evidence of the prior workflow and is not rewritten. At corrective slice HCM-0.8's completed closeout, the following conditions had to hold; the later HCM-0.6 decision resolves the shipped-default item that was intentionally open at that boundary:
