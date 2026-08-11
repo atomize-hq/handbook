@@ -1,0 +1,296 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260811T034900Z--HCM-4-2--causal-remediation-complete-subject-final-review",
+  "created_at_utc": "2026-08-11T03:49:00Z",
+  "source_handoff_ids": [
+    "20260811T005500Z--HCM-4-2--orchestration--shared-dto-schema-planning-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-4-2-corrective-20260811",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "code-review-and-quality",
+    "documentation-and-adrs",
+    "api-and-interface-design"
+  ],
+  "phase_id": "HCM-4",
+  "slice_id": "HCM-4.2",
+  "packet_id": "HCM-4.2-PLANNING-CONTROL-PACK",
+  "subject_fingerprint": "sha256:e47e7af466bc0089b91d9620aeceb12c648d1cc453e6da2a53cac29f40c946ba",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm42-corrective-final-closeout-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-11T02:55:58Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "HCM-4-2-DOCS-CONTROL-PACK",
+        "packet_ids": [
+          "HCM-4.2-PLANNING-CONTROL-PACK"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:5c5a0307169ebebe1809b8bde1a102ca225afbef55fdfa7ac4c419c8befeafb8"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f7b1b67dcf5cda4435feffb4c91a951f1317b1f76fbfb9c0a6bceb0d25a2721f",
+    "integrated_outcome_id": "HCM-4-2-DOCS-CONTROL-PACK",
+    "outcome_registry_fingerprint": "sha256:5c5a0307169ebebe1809b8bde1a102ca225afbef55fdfa7ac4c419c8befeafb8",
+    "review_stage": "final_closeout",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "implementation"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260811T030610Z--HCM-4-2--causal-remediation-documentation-implementation"
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm42-corrective-complete-subject-convergence-20260811T034900Z",
+    "completed_at_utc": "2026-08-11T03:48:30Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "reconcile all 14 primary paths, all ten mandatory findings, exact transport request/response authority, todo, and the dated proof wall",
+        "evidence_ref": "the exact immutable subject manifest below is the complete applicable primary wall"
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "mechanically compare matrix, canonical 05 inventory, HCM-4.1 plan, predecessor inventory, live source symbols, transport admission, and discovery state",
+        "evidence_ref": "62/62 exact set equality; 29/29 source references resolve; 62 current transports none and discovery omit"
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "recompute every SHA-256 and the ordinal repo-path-null-sha256-newline-v1 aggregate",
+        "evidence_ref": "subject fingerprint sha256:e47e7af466bc0089b91d9620aeceb12c648d1cc453e6da2a53cac29f40c946ba"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "UTF-8, JSON, relative-link, final-LF, and git diff --check validation",
+        "evidence_ref": "zero decode, parse, link, final-LF, or diff-check failures"
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "literal trailing-space/tab scan and exact changed-path allowlist",
+        "evidence_ref": "zero trailing-whitespace hits and zero forbidden runtime/schema/transport/historical/protected paths"
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "318f8e0d68705b2d69dacfcf90ae7fc1d2f6c8be4cf7695f70780832ed382a87"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "83c5fb9339c6fcc8b9b50e60fd0793239c11e4b6d914192b9a237ad91d869273"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "95e5d33b7f8ce0b4a4d714709926791f729a0c6c58245b37d471c8af8a3c8d64"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "dd7b8ca23794ec5bc6d639fa3f596c89f63d99a16e2ba99e5a369ef07f12ceab"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T025748Z--HCM-4-2--causal-remediation-selector-discovery-review.json",
+        "sha256": "994e0a9640f8f25756284badeb6cd7ee0198f3a84927473fac74fbb363c1384f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T030610Z--HCM-4-2--causal-remediation-documentation-implementation.json",
+        "sha256": "ef265d511174c37ed81742663f65c41c2e2b303cbde69a0f92b17e98fbdc4e30"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+        "sha256": "252ab4bbfdda5749a9081588762a00fc746dccca05603a095ddde1579ab06fa5"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+        "sha256": "7a3baaf81ebdf25a31db49003c429887d800761f047db12915c7bbf29f6e0aa4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/20260811T033301Z--corrective-documentation-proof-wall.md",
+        "sha256": "14354a23298b3a56aa39fdaee16845b0bf404d61df4e80ff884d246e0e8d46e9"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/strategy.md",
+        "sha256": "55447d66a0dddb87cb8f946360c4834f54fa748ad9e8ce6da508e314d518cf4f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T031843Z--corrective-owner-admission-matrix.md",
+        "sha256": "a52c11bc93c5b27d7463d0842df558b4f9adfa0b1e5a32d6df1cd9a550a941fa"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T030408Z--causal-remediation-selector-discovery-review.md",
+        "sha256": "3280e37aa7ade47ec4f17d37e4b4f4bceb876288451ddae032084b688e301820"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/plan.md",
+        "sha256": "e7644824ac3df95daaa5a505f9a48c5428d6ae53d2730983bcb7f7d362dfaf2e"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/todo.md",
+        "sha256": "9f6d4324a46a8c86877aaa42b601f21338057e3d12fc873130300de958facf1d"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:e47e7af466bc0089b91d9620aeceb12c648d1cc453e6da2a53cac29f40c946ba"
+  },
+  "active_resolution": {
+    "level": "HCM-4.2 complete-subject final closeout review",
+    "scope_horizon": "one immutable 14-path planning/control-pack subject plus mandatory ten-finding and 62-row proof",
+    "detail_resolution": "complete contract/source/process review of raw-key boundary, posture mapping, bootstrap/capability closure, framing, inventory admission, lineage, fingerprint parity, proof-ref supersession, terminal shape, and closeout consistency",
+    "temporal_horizon": "after selector CLEAN and consolidated implementation; before primary commit and additive handoff/ledger closeout",
+    "authority_horizon": "planning readiness only; no runtime, schema, CLI, Tauri, public API, Phase 5/6, remote, or publication authority",
+    "memory_horizon": "the completed predecessor remains immutable consumed context and the external audit remains mandatory scheduling/correction evidence rather than repository review authority",
+    "validation_horizon": "replay exact subject hashes, independently inspect all ten findings and 62 rows, and return a fresh complete-subject verdict"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+      "sections": [
+        "entire CLEAN corrective selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T030408Z--causal-remediation-selector-discovery-review.md",
+      "sections": [
+        "CLEAN selector review and parent admission"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "SDK ordinary-use-case contract",
+        "Operation definition contract",
+        "Capability bootstrap and catalog discovery",
+        "Transport request and response contracts",
+        "Corrective posture.transition.apply projection",
+        "DTO and JSON Schema generation contract",
+        "CLI JSON and Tauri adapter contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/SPEC.md",
+      "sections": [
+        "HCM-3.6 real posture ingress",
+        "completed direct Rust boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/tasks/plan.md",
+      "sections": [
+        "Exact ordinary-use-case inventory",
+        "Detailed posture transition boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "causal review cadence",
+        "full proof wall"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "delegated-run protocol",
+        "review lineage",
+        "two-commit closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "review priority rubric",
+        "P3/P4 durable disposition"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md",
+      "sections": [
+        "exact HCM-3.5 contradiction treatment"
+      ]
+    }
+  ],
+  "repo_truth": "Bound task 019feeb8-3355-7923-b120-de897bd09f37 on host local remains at exact detached ea2be46856172e503e7f7668d2dbaac9d26d1d39/tree 9dbad2c418a331d5b2a0c266c55280d81b676aca before commit. The dedicated local ref, origin baseline, origin target absence, immutable historical artifacts, and seven protected checkout manifests match preflight. The audit receipt digest is exact and all ten IDs are mandatory inputs. GitNexus MCP/local runner is unavailable and is not GREEN; no code symbol changed. Ordinary validation has only the governed historical HCM-3.5 failure; both v1.4 self-tests pass.",
+  "allowed_scope": [
+    "Read and replay the exact 14-path immutable subject and frozen dispatch before review.",
+    "Perform one complete-subject independent review across contract, live source, inventory/admission, proof, orchestration, and immutable-closeout readiness.",
+    "Return findings first with exact P1/P2/P3/P4 priority, file/line, violated authority, smallest valid remediation, missing proof, and a CLEAN verdict only when no unresolved P1/P2 remains."
+  ],
+  "non_goals": [
+    "Do not edit any file or launch another agent; do not stage, commit, write a handoff/ledger, update refs, contact the meta task, publish, push, or mutate a remote/protected checkout.",
+    "Do not treat the external audit as a Handbook selector, dispatch, handoff, or repository review result, and do not rewrite/downgrade/omit any of its ten mandatory inputs.",
+    "Do not claim DTO/schema/catalog/operation/transport implementation or expand into Rust, Cargo, generated schema, CLI, Tauri, public API, dependencies, HCM-4.3/4.4/4.5, Phase 5/6, release, or publication."
+  ],
+  "tasks": [
+    "Recompute the dispatch SHA-256, every subject entry SHA-256, the aggregate fingerprint, and confirm dispatch/schema validation before substantive review.",
+    "Review HCM42-CAUSAL-P2-001 through HCM42-CAUSAL-P2-008, HCM42-CAUSAL-P3-001, and HCM42-CAUSAL-P4-001 individually; confirm none was waived, renamed away, or replaced by a non-authoritative external receipt claim.",
+    "Verify the raw-key typed-input-only boundary and positive/negative proofs; exact seven-field posture request; exhaustive 14-result mapping; Problem/rule/details/recheck bindings; complete bootstrap/descriptor/OwnerVersionEntry/CapabilityEntry closure; distinct descriptor content/schema identity; and instance/schema/adapter framing separation.",
+    "Verify exact 62-ID equality, every row's live path::symbol or absent/phase5_deferred truth, owner/schema source, mutability/idempotency, outcome/receipt binding, declared/current transport state, proof binding, and mandatory discovery omission for incomplete/deferred rows.",
+    "Verify semantic/result/Problem/receipt/replay/original-result parity, correlation-sensitive outer fingerprint vectors, exact four-terminal-field response shape, resolvable corrected proof ref, immutable predecessor evidence, timeless todo/proof claims, complete dated proof wall, and no hidden runtime or publication claim.",
+    "Verify selector/final lineage equality, pre-launch immutable dispatch/subject bytes, causal cadence, permanent ordinary-validator treatment, GitNexus unavailable status, protected-path evidence, and readiness for two-commit local-only closeout."
+  ],
+  "contracts_and_gates": [
+    "The exact manifest and dispatch bytes are immutable before reviewer launch; any mismatch is P2 and stops review.",
+    "CLEAN requires no unresolved P1/P2 and explicit disposition of any P3/P4. A CLEAN result ends review; no post-CLEAN cycle is allowed.",
+    "The pipeline.route.resolve live write/read-only mismatch must remain explicit and omitted; a precursor never proves operation admission.",
+    "Ordinary validation's exact governed HCM-3.5 contradiction is FAILED_NOT_GREEN, while both v1.4 self-tests must pass.",
+    "Completion remains HCM-4.2 planning readiness only and requires later parent-owned primary and mechanical closeout commits plus expected-old local CAS."
+  ],
+  "stop_conditions": [
+    "Return a P1/P2 finding for any missing mandatory correction, authority contradiction, invented owner/admission claim, incomplete subject, mutable dispatch/subject, raw-key disclosure, fingerprint mismatch, invalid lineage, or hidden runtime/publication expansion.",
+    "Return exact P3/P4 advisories without manufacturing a supplemental cycle; the parent records durable disposition.",
+    "Do not repair files. Return only through the built-in parent channel."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}

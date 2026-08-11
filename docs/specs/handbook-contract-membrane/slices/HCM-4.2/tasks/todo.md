@@ -1,51 +1,70 @@
-# HCM-4.2 todo and completion wall
+# HCM-4.2 corrective todo and completion wall
 
-## Selector and grounding
+## Immutable lineage and grounding
 
-- [x] Validate exact base commit/tree, required ancestor, local integration ref,
-  remote baseline, worktree ownership, and protected paths.
-- [x] Read live `AGENTS.md`, 07, 08, 09, 00-06, HCM-4.1 selector/truth, and
-  required skill chain.
-- [x] Establish the HCM-4.2 selector and obtain fresh built-in selector review
-  CLEAN before authoring the package.
-- [x] Record GitNexus MCP/index unavailability as unavailable, not GREEN.
-- [x] Reconcile all 62 operations in 05 and HCM-4.1 plan with no invented IDs.
+- [x] Preserve the predecessor selector, dated
+  `proof/20260811T005000Z--planning-proof-wall.md`, historical reviews,
+  handoffs, and dispatches byte-for-byte as prior evidence.
+- [x] Verify the corrective selector and its fresh selector-discovery review
+  are CLEAN and exact-subject bound.
+- [x] Verify the implementation dispatch SHA-256, subject fingerprint, and
+  v1.4 `--verify-dispatch` before editing.
+- [x] Read the exact external audit receipt/digest, governing 03-08 authority,
+  HCM-4.1 posture truth, and live owner/SDK source.
+- [x] Record GitNexus MCP/local-runner status as unavailable/not GREEN; edit no
+  Rust symbol.
 
-## Planning package
+## One consolidated ten-finding correction
 
-- [x] Write `SPEC.md` with exact objective, owner/dependency direction,
-  SemVer/serialization/fingerprint rules, bootstrap/catalog lifecycle,
-  posture discovery seam, proof wall, rollback, and non-goals.
-- [x] Write dependency-ordered implementation packets with paths/symbols,
-  API/dependency effects, compatibility, proof, impact, review cadence, risks,
-  stop/rollback, and disallowed shortcuts.
-- [x] Write this task checklist and `proof/strategy.md`.
-- [ ] Obtain fresh independent discovery review of the complete final package.
-- [ ] If a valid P1/P2 appears, perform one consolidated remediation and a
-  different-fresh closure review; use only immediately causal supplementals.
+- [x] `HCM42-CAUSAL-P2-001`: restrict a raw mutation key to the one bounded
+  definition-pinned typed-body pointer; require positive owner delivery and
+  literal negative scans across outputs, replay, diagnostics, and receipts.
+- [x] `HCM42-CAUSAL-P2-002`: freeze the exact seven-field live posture request
+  and exhaustive 14-variant owner mapping to status, Problem/details,
+  idempotency, data, and receipts; remove caller policy/approval/head claims.
+- [x] `HCM42-CAUSAL-P2-003`: close bootstrap request/response/refusal,
+  descriptor, OwnerVersionEntry, and CapabilityEntry fields, tags, bounds,
+  null/default rules, preimages, versions, and declared/current transports;
+  separate descriptor-content from descriptor-schema identity.
+- [x] `HCM42-CAUSAL-P2-004`: separate LF-free JCS instance/fingerprint bytes,
+  one-terminal-LF checked-in schema bytes, CLI zero-or-one LF framing, and
+  Tauri-owned framing.
+- [x] `HCM42-CAUSAL-P2-005`: add the authoritative mechanically checkable
+  62-row owner/admission matrix with exact live precursor symbol, `absent`, or
+  `phase5_deferred` truth and discovery omission for every incomplete row.
+- [x] `HCM42-CAUSAL-P2-006`: point current planning truth to the additive
+  corrective selector/review lineage without rewriting predecessor evidence.
+- [x] `HCM42-CAUSAL-P2-007`: align SPEC, plan, todo, strategy, 03/04/05/06,
+  matrix, and additive corrective proof evidence; reserve final immutable
+  dispatch/review and closeout for the parent.
+- [x] `HCM42-CAUSAL-P2-008`: bind semantic/result/receipt/replay parity and
+  `original_result_fingerprint`, while requiring each transport to recompute
+  correlation-sensitive `response_fingerprint`; add changed-valid and absent/
+  null/invalid request-ID vectors.
+- [x] `HCM42-CAUSAL-P3-001`: preserve the historical bad proof ref as evidence
+  and additively record the exact resolvable primary ref
+  `git:0a4366802467edbe194da9afaf584686921c1e94`; do not edit the old handoff.
+- [x] `HCM42-CAUSAL-P4-001`: use and prove “four terminal fields” — `data` plus
+  the three terminal arrays — rather than “four terminal arrays.”
 
-## Canonical control-pack and closeout
+## Additive convergence and closeout protocol
 
-- [ ] Update coupled 03 crosswalk, 04 phase map, 05 status note if needed, and
-  06 proof ledger with exactly the same HCM-4.2 boundary.
-- [ ] Record final review evidence and any P3/P4 inventory disposition.
-- [ ] Run docs/link/path checks, formatting, whitespace, scoped and compare
-  change detection, protected-path proof, and applicable handoff validators.
-- [ ] Run both v1.4 self-tests and record any pre-existing immutable historical
-  validator failure honestly under the permanent ordinary-validator governance.
-- [ ] Commit the reviewed primary planning state.
-- [ ] Create the completed v1.4 parent handoff using the primary tip as its
-  reviewed baseline; rebuild and validate the ledger.
-- [ ] Commit only mechanical handoff/ledger/advisory closeout artifacts.
-- [ ] Recheck expected-old integration ref and atomically CAS it to closeout;
-  verify remote baseline unchanged and no push occurred.
-- [ ] Send one structured `codex.top-level-task-receipt.v1` as the final tool
-  action with `CLOSED_LOCAL_CLEAN` if every gate passes.
+This reviewed-primary checklist contains only facts that can be settled before
+the immutable final-review dispatch is frozen. Post-launch review findings,
+closure status, and P3/P4 dispositions are recorded only in additive review
+evidence. Proof-wall execution, both v1.4 self-tests, handoff/ledger validators,
+compare/protected-path/manifest results, commits, additive completed handoff,
+ledger rebuild, expected-old CAS, and terminal receipt are recorded only in
+their additive proof/handoff/ledger/receipt artifacts. The parent orchestrator
+owns those actions. No later actor edits this primary checklist merely to
+reflect a changed closeout state.
 
 ## Hard stops
 
-- [ ] Do not edit Rust/Cargo/tests/generated schemas or expose any transport.
-- [ ] Do not claim HCM-3.6, Phase 3, HCM-4.3/HCM-4.4/HCM-4.5, Phase 5/6,
-  publication, release, or downstream completion.
-- [ ] Stop for authority expansion, protected-path drift, base drift, unresolved
-  P1/P2, unavailable mandatory delegation, or unsupported native proof.
+- [x] No Rust/Cargo/test/schema/generated/runtime/CLI/Tauri/skill/dependency/
+  public-API edit and no transport or operation implementation claim.
+- [x] No selector, selector-dispatch, selector-review, implementation-dispatch,
+  predecessor proof wall, historical review/handoff/dispatch, validator,
+  schema, template, protected checkout, ledger, ref, or remote mutation.
+- [x] No HCM-3.6, Phase 3, HCM-4.3/4.4/4.5, Phase 5/6, publication, release,
+  or downstream completion claim.

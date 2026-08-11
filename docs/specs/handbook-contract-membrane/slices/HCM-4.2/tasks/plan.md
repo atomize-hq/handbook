@@ -25,8 +25,10 @@ symbol; GitNexus risk unavailable in this session is not evidence of LOW risk.
 - **Compatibility/migration:** `1.0.0` exact refs; full-SemVer major/minor/
   patch rules from SPEC; no legacy artifact-format compatibility promise.
 - **Proof gates:** closed discriminants, unknown fields, null/default,
-  duplicate-member, bounded-size, canonical JCS, all instance fingerprints,
-  raw-key non-disclosure, and direct-owner semantic mapping.
+  duplicate-member, bounded-size, LF-free canonical JCS instance/fingerprint
+  bytes, all instance fingerprints, a positive raw-key-to-owner vector at the
+  definition-pinned typed-body pointer, literal raw-key absence from every
+  output/replay/receipt/diagnostic surface, and direct-owner semantic mapping.
 - **GitNexus blast radius:** existing `HandbookSdkV1` and owner facade edits
   require upstream impact; current GitNexus is unavailable, so implementation
   must stop rather than infer risk.
@@ -55,7 +57,9 @@ symbol; GitNexus risk unavailable in this session is not evidence of LOW risk.
   versions and absent defaults; breaking/removal/meaning changes require a
   new major; patch cannot alter bytes/meaning.
 - **Proof gates:** clean regeneration into a temporary tree is byte-identical;
-  no missing/extra files; manifest byte length and fingerprints recompute;
+  every checked-in schema is canonical JSON plus exactly one terminal LF and
+  its fingerprint includes that LF; no schema-file LF leaks into DTO instance
+  identity or adapter framing; no missing/extra files; manifest byte length and fingerprints recompute;
   refs/IDs are unique and full-SemVer; all closed-object/discriminant rules
   are enforced.
 - **GitNexus blast radius:** new generated assets have no existing symbol
@@ -69,7 +73,9 @@ symbol; GitNexus risk unavailable in this session is not evidence of LOW risk.
 
 ## Packet 2 — operation definitions and owner-admission catalog
 
-- **Dependencies:** Packets 0-1; exact 62-row inventory in source inventory.
+- **Dependencies:** Packets 0-1; authoritative exact 62-row owner/admission
+  matrix at
+  `../research/20260811T031843Z--corrective-owner-admission-matrix.md`.
 - **Candidate paths/symbols:** SDK-owned operation registry/definition types
   under `crates/sdk/src/contract_membrane/operation.rs` and
   `catalog.rs`; owner adapters remain engine/flow/pipeline/contract seams.
@@ -81,10 +87,13 @@ symbol; GitNexus risk unavailable in this session is not evidence of LOW risk.
 - **Compatibility/migration:** definitions are exact refs; changes to
   operation meaning require major; replacement/migration refs are exact and
   fingerprinted; no silent removal.
-- **Proof gates:** set equality with 05 and HCM-4.1 plan; duplicate/unknown/
-  missing definitions; unsupported operation; definition-pin mismatch/stale;
-  capability closure; exact write-set/receipt matrix; honest absence of
-  unimplemented rows.
+- **Proof gates:** exactly 62 unique contiguous proof rows and set equality
+  with 05 and HCM-4.1 plan; every live `path::symbol` mechanically resolves;
+  test-only helpers remain absent; all 12 Phase-5 rows remain deferred;
+  duplicate/unknown/missing definitions; definition-pin mismatch/stale;
+  capability closure; exact write-set/receipt matrix; discovery omits every
+  row with incomplete closure. A live precursor is never an implementation or
+  admitted transport.
 - **GitNexus blast radius:** registry additions are new symbols; editing
   existing SDK method routing requires upstream impact. Missing GitNexus blocks
   an implementation claim.
@@ -98,17 +107,21 @@ symbol; GitNexus risk unavailable in this session is not evidence of LOW risk.
 - **Dependencies:** Packets 0-2 and exact schema manifest.
 - **Candidate paths/symbols:** `bootstrap.rs`, `catalog.rs`, and SDK discovery
   methods; checked-in bootstrap descriptor/schema fixtures.
-- **Public/API effect:** adds cold bootstrap request/response/refusal and
-  immutable capability/profile/schema catalog reads; no CLI/Tauri adapters.
+- **Public/API effect:** adds the SPEC's exact closed bootstrap request,
+  response, refusal, descriptor, OwnerVersionEntry, and CapabilityEntry
+  shapes and immutable capability/profile/schema catalog reads; no CLI/Tauri
+  adapters.
 - **Dependency/version effect:** API-major descriptor
   `handbook.bootstrap-descriptor@1.0.0` is compiled/checksum-pinned; a
   breaking descriptor change requires API major 2.
 - **Compatibility/migration:** exact same-major descriptor/fingerprint;
   compatible minor only when advertised; no range/latest fallback.
-- **Proof gates:** cold/stale/tampered/unsupported-major/cross-major,
-  unknown-operation, missing schema/profile, immutable snapshot, pagination,
-  cursor, expiry/restart, concurrent registry change, total-count, duplicate,
-  gap, and catalog fingerprint cases.
+- **Proof gates:** exact field/tag/bound/null/default tables; distinct
+  descriptor-content versus descriptor-schema identity; exact owner-version,
+  declared/current-transport, and fingerprint preimages; cold/stale/tampered/
+  unsupported-major/cross-major, unknown-operation, missing schema/profile,
+  immutable snapshot, pagination, cursor, expiry/restart, concurrent registry
+  change, total-count, duplicate, gap, and catalog fingerprint cases.
 - **GitNexus blast radius:** new discovery seam is new API; any integration
   into existing SDK method routing requires upstream impact and review.
 - **Risks/stop:** process-local discovery, mutable pages, or descriptor
@@ -128,13 +141,18 @@ symbol; GitNexus risk unavailable in this session is not evidence of LOW risk.
   not private records or raw canonical bytes.
 - **Dependency/version effect:** no owner back-edge, no compiler, no CLI/Tauri
   implementation, no Phase-5 runtime.
-- **Compatibility/migration:** exact recommendation/policy/approval/head/
-  reassessment/idempotency/document-byte/CAS bindings; future breaking public
+- **Compatibility/migration:** exact live seven-field request only:
+  idempotency key, repository identity, expected canonical binding,
+  recommendation, reassessment coverage IDs, change, and effective timestamp;
+  policy/approvals/heads remain engine-resolved. Future breaking public
   meaning requires a major schema/operation migration artifact.
-- **Proof gates:** direct-Rust result equivalence, recommendation/policy/
-  approval/head/reassessment/stale/no-op/refusal/error/replay/idempotency/
-  exact-receipt proof; private-record non-exposure; unknown operation and
-  capability absence before bootstrap.
+- **Proof gates:** all 14 live owner result variants map exhaustively to exact
+  status/Problem/details/idempotency/data/receipt shapes; applied/replayed bind
+  exactly the two declared receipts; direct-Rust semantic parity preserves
+  replay and `original_result_fingerprint` while each adapter recomputes the
+  correlation-sensitive outer response fingerprint; changed-valid and absent/
+  null/invalid request-ID vectors; private-record/raw-key non-exposure;
+  unknown operation and capability absence before bootstrap.
 - **GitNexus blast radius:** HIGH/CRITICAL risk must be warned and reviewed
   before existing SDK/engine method edits; current GitNexus unavailable is a
   hard implementation evidence gap.
@@ -149,9 +167,10 @@ symbol; GitNexus risk unavailable in this session is not evidence of LOW risk.
 - **Candidate paths/symbols:** SDK contract tests/fixtures only; HCM-4.3 and
   HCM-4.4 adapter paths are consumers and remain untouched.
 - **Public/API effect:** no new semantic authority; proves the stable seam.
-- **Proof gates:** the complete matrix in `proof/strategy.md`, package/docs/
-  manifest/schema regeneration, direct Rust equivalence, and negative
-  transport ownership.
+- **Proof gates:** the complete matrix in `proof/strategy.md`, exact four-
+  terminal-field shape assertions, package/docs/manifest/schema regeneration,
+  instance/schema/framing separation, direct Rust semantic equivalence, raw-
+  key negative scans, proof-ref resolution, and negative transport ownership.
 - **GitNexus blast radius:** scoped/compare-to-main detection is required
   before commit; unavailable comparison is recorded unavailable, never GREEN.
 - **Risks/stop:** any proof gap is a typed proof stop or causal supplemental,

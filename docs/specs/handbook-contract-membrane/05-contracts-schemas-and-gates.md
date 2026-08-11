@@ -6,7 +6,10 @@ The HCM-0.2 sections are frozen design contracts: schema policy, instance-profil
 
 The HCM-0.4 owner, SDK/transport, and public-proof-plan sections remain frozen design authority and are changed by HCM-0.5 only through the explicitly appended ordinary contract/dock operations. `PG-CONTRACT-01`, `PG-DOCK-01`, and `PG-GATE-01` remain open; no contract/dock crate, schema, manifest, bundle, process, validator, SDK/CLI/Tauri/Substrate path, or runtime proof is implied. HCM-0.6 now freezes the shipped artifact-kind/default-instance/requiredness data and its exact condition/role/capability/lifecycle/support posture below. Shipped Resolution labels/default policy remain unresolved, and illustrative examples still select nothing.
 
-The HCM-4.2 slice is now a reviewed planning/control-pack subject only. The
+The predecessor HCM-4.2 planning subject was invalidated by a later exact-
+subject audit. The corrective selector is CLEAN and this is the bounded
+corrective planning primary. Authoritative review/completion status is carried
+only by additive review/closeout evidence. The
 HCM-4.1 `HandbookSdkV1::apply_posture_transition` entrypoint remains direct
 typed Rust linkage and is not a discoverable operation, and the complete
 62-operation ordinary inventory remains the canonical admission set. The
@@ -4017,7 +4020,7 @@ The Rust SDK exposes one typed method per ordinary operation. It may share inter
 
 The frozen inventory below is data-oriented: custom kind IDs, instance IDs, vocabulary, profile selections, Resolution definitions, and pipeline IDs are request fields. They never create operation IDs, Rust methods, CLI commands, or Tauri commands.
 
-All listed operation IDs start at operation version `1.0.0`; an implemented definition adds exact schema/capability refs and a recomputable definition fingerprint before it becomes discoverable.
+All listed operation IDs start at operation version `1.0.0`; an implemented definition adds exact schema/capability refs and a recomputable definition fingerprint before it becomes discoverable. Current owner/admission truth for every row is the authoritative matrix at [`slices/HCM-4.2/research/20260811T031843Z--corrective-owner-admission-matrix.md`](slices/HCM-4.2/research/20260811T031843Z--corrective-owner-admission-matrix.md). A named Rust symbol there is only a precursor. At this corrective planning baseline every row lacks shared closure, has no current admitted operation transport, and must be omitted from discovery; the 12 `contract.*`/`dock.*` rows are additionally `phase5_deferred`.
 
 | Family | Stable operation ID | Semantic owner/composition | Effect |
 |---|---|---|---|
@@ -4148,6 +4151,17 @@ The example illustrates shape, not an implemented API or runtime proof.
 | `deprecation` | operation owner | null or `{replacement: ExactBinding, announced_in_api_version, removal_api_major, migration: ArtifactRef}`; replacement and migration fingerprints are mandatory and no silent removal or prose-only migration is valid |
 | `definition_fingerprint` | derived | normalized SHA-256 over every semantic field except itself; any field change changes the fingerprint |
 
+The raw mutation key is a narrow exception to the public-data prohibition: it
+is required input only at that single definition-pinned typed-body pointer.
+For `posture.transition.apply@1.0.0` the pointer is exactly
+`/body/idempotency_key`. The bounded accepted value reaches the owner and the
+SDK derives its scoped fingerprint before ledger use. The raw value is not
+legal in response/result schemas or instances, diagnostics, Problems/details,
+receipts, schema manifests, stdout/Tauri outputs, retained replay results,
+consumed-key or recovery-hold ledgers, or any other public/durable output.
+Positive owner-delivery vectors and literal negative scans over every
+prohibited surface are mandatory.
+
 Definition graphs are acyclic. A response/request schema may reference shared DTO schemas, but no DTO schema may reference an operation definition or transport adapter. Implemented capability discovery reports only definitions whose exact request/result/outcome schemas are present and whose transport status is honest.
 
 HCM-0.4 public transport and generated JSON Schema identities use one full-SemVer domain: `schema_id` is the stable identity, `schema_version` is full SemVer, and the exact schema ref is mechanically `schema_id + "@" + schema_version`. Operation refs are mechanically `operation_id + "@" + operation_version`. API compatibility versions are also full SemVer but are not schema or operation refs. The already-frozen HCM-0.2/HCM-0.3 records whose payload contains `schema_version: "1.0"` use that legacy field solely as a two-component **record-routing tag**; it is not a public JSON Schema identity, is never converted or aliased to `@1.0.0`, and cannot appear as a `SchemaManifestEntry`. When such a record is carried in an operation, its public wire schema is the distinct full-SemVer operation result schema cited by the operation definition and response manifest; kind/definition-specific exact bindings inside the record remain independently fingerprinted. A deprecation replacement is an exact operation ref/definition-fingerprint pair; its migration artifact is an exact bounded artifact ref/fingerprint pair. Clients refuse a public schema ref whose declared identity/version does not derive the cited ref, any fingerprint mismatch, any attempt to treat a record-routing tag as a schema ref, and a deprecated operation after its declared removal major.
@@ -4258,6 +4272,64 @@ A cold client sends only the descriptor-pinned bootstrap request. A matching run
 Every catalog/list request carries `page_size` and an exact-or-null cursor. `CatalogRoot` contains catalog ref/fingerprint, total entry count, entry schema binding, and canonical sort definition. A page repeats that root, contains a bounded duplicate-free contiguous entry sequence, and returns a null terminal cursor or a cursor cryptographically bound to the catalog fingerprint and next sort key. The first request atomically materializes an immutable content-addressed catalog snapshot; later pages read that same snapshot despite concurrent registry changes. If its declared retention expires before traversal finishes, the next page is `blocked` with a typed restart condition rather than mixing versions. Page-size overflow, cursor/catalog mismatch, gaps, duplicates, reordered entries, and total-count mismatch refuse. Bootstrap/catalog conformance proves empty, single-page, multi-page, concurrent-change, expiry/restart, and oversized cases.
 
 A stale descriptor fingerprint or unsupported API major returns the descriptor-defined typed bootstrap refusal without deserializing an ordinary operation body. After a valid bootstrap, an unknown/malformed ordinary operation ref, incompatible requested API context, or invalid/stale definition fingerprint returns the descriptor-bound admission-refusal envelope below rather than fabricating trusted ordinary operation fields. An unknown bootstrap operation, invalid descriptor checksum, cross-major descriptor substitution, or tampered/unparseable bootstrap response is an adapter/bootstrap failure and yields no fabricated Handbook domain result. The bootstrap descriptor may change only under a new exact descriptor ref/fingerprint, and a breaking bootstrap change requires a new API major.
+
+### Corrective closed bootstrap shapes
+
+The descriptor content identity is
+`handbook.bootstrap-descriptor@1.0.0`; its distinct checked-in schema identity
+is `handbook.bootstrap-descriptor-schema@1.0.0`. The content fingerprint hashes
+LF-free JCS of the complete descriptor except its own
+`descriptor_content_fingerprint`; the schema fingerprint hashes the exact
+checked-in schema bytes including their one terminal LF. They are not aliases.
+
+All bootstrap objects are closed. Fields are required and non-null unless the
+following shape explicitly says null. Refs/identifiers are non-empty and at
+most 255 UTF-8 bytes, fingerprints match lowercase `sha256:<64-hex>`, versions
+are full SemVer, and collection/object bytes and items are bounded by the exact
+positive descriptor ceiling. Exact ceiling succeeds and one over refuses.
+
+| Type | Exact fields |
+|---|---|
+| `BootstrapRequestV1` | `schema_id="handbook.bootstrap-request"`, `schema_version="1.0.0"`, safe `request_id:string|null`, `bootstrap_descriptor:ExactBinding`, `api_version="1.0.0"`, `page_size` in `1..=catalog_page_size_max`, `request_fingerprint`; no operation/body/repository/key/extensions |
+| `BootstrapResponseV1` | fixed schema ID/version, echoed `request_id`, `request_fingerprint`, `status="ok"`, `descriptor`, exactly three `catalog_roots` (`operations`, `schemas`, `profiles`), `first_capability_page`, sorted unique `owner_versions`, `schema_manifest`, `response_fingerprint` |
+| `BootstrapRefusalV1` | fixed schema ID/version, normalized `request_id`, recomputed `request_fingerprint`, `bootstrap_descriptor:ExactBinding|null`, `status="refused"`, `data:null`, `blockers:[]`, exactly one descriptor-owned refusal, `errors:[]`, `schema_manifest`, `response_fingerprint`; no ordinary result/idempotency/receipt |
+
+`BootstrapDescriptorV1` contains exactly `descriptor_ref`,
+`descriptor_schema`, `api_version`, `supported_api_major`, the three bootstrap
+schema bindings, generic ordinary request/response/admission-refusal bindings,
+the same-major `capabilities_describe_definition`, operation-definition/
+CapabilityEntry/OwnerVersionEntry schema bindings, ordered CatalogRoot/
+CatalogCursor/CatalogPage schema bindings, `ceilings`,
+`declared_transports=[cli_json,rust_sdk,tauri]`, and
+`descriptor_content_fingerprint`. `ceilings` contains exactly positive
+`bootstrap_request_max_bytes`, `bootstrap_response_max_bytes`,
+`ordinary_request_max_bytes`, `ordinary_response_max_bytes`,
+`catalog_page_size_max`, `catalog_entry_max_bytes`,
+`catalog_total_entries_max`, `owner_versions_max_items`,
+`idempotency_key_max_bytes`, and `bridge_recovery_record_max_bytes`, with the
+key ceiling no greater than 65536.
+
+`OwnerVersionEntry` contains exactly `owner_crate`, `owner_version`, `source`,
+and `entry_fingerprint`; its complete-entry-except-self LF-free JCS preimage is
+sorted by `(owner_crate, owner_version, source.ref, source.fingerprint)`.
+`CapabilityEntry` contains exactly `operation`, `owner_crate`, `owner_version`,
+`request_schema`, `result_schema`, `outcome_schemas` with exactly blocker/
+refusal/error, `required_capabilities`, `mutability`, `idempotency`,
+`declared_transports`, `current_transports`, nullable `deprecation`, and
+`entry_fingerprint`. Its complete-entry-except-self LF-free JCS preimage binds
+both transport arrays. They are sorted unique subsets of
+`cli_json|rust_sdk|tauri`; current is a subset of declared and may be empty.
+Discovery omits an entry unless the complete definition/schema/owner/outcome/
+receipt closure exists and at least one current transport has admission proof.
+
+Bootstrap request identity excludes exactly `request_id` and its own
+`request_fingerprint`. Bootstrap response/refusal identity excludes only its
+own `response_fingerprint`, and therefore binds the echoed correlation value.
+Changed valid IDs preserve semantic/request identity but change the outer
+response fingerprint. Absent, null, and invalid IDs normalize to null for the
+same selected refusal. The complete field/bound/null/default/preimage tables
+are duplicated normatively in the HCM-4.2 SPEC; disagreement is a planning
+stop, not an implementation choice.
 
 ### Preselection admission-refusal envelope
 
@@ -4507,7 +4579,20 @@ Transport schemas use closed objects (`additionalProperties: false`); the v1 `ex
 | `refused` | null | empty | non-empty | empty | request violates schema, capability, Resolution, authority, precondition, or safety contract and must change before retry |
 | `error` | null | empty | empty | non-empty | unexpected implementation/adapter failure prevented a trustworthy result; no domain decision may be inferred |
 
-All four terminal fields are always present. Mixed terminal outcome arrays refuse response construction. `request_fingerprint` is mandatory and must equal the exact normalized-valid or request-validation-refusal preimage selected by the total postselection algorithm above; failures before bounded UTF-8/JSON-object normalization are adapter/bootstrap failures with no Handbook response, while selection-field failures use the non-null-fingerprint admission envelope above. `idempotency` is a closed discriminated union:
+All four terminal fields are always present: `data` plus the three terminal
+arrays `blockers`, `refusals`, and `errors`. Mixed terminal outcome arrays
+refuse response construction. Shape proof asserts the exact key set, then
+asserts `ok => data != null && all arrays empty`, `blocked => data == null &&
+blockers non-empty && the other arrays empty`, `refused => data == null &&
+refusals non-empty && the other arrays empty`, and `error => data == null &&
+errors non-empty && the other arrays empty`. Each negative vector deletes one
+field, adds one terminal field, makes `data` illegal, or populates a second
+terminal array and must fail construction. `request_fingerprint` is mandatory
+and must equal the exact normalized-valid or request-validation-refusal
+preimage selected by the total postselection algorithm above; failures before
+bounded UTF-8/JSON-object normalization are adapter/bootstrap failures with no
+Handbook response, while selection-field failures use the non-null-fingerprint
+admission envelope above. `idempotency` is a closed discriminated union:
 
 The ordinary response's `request_id` is also `string | null`. A supplied ID matching `^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$` is echoed exactly. After exact definition acceptance, absent, null, non-string, overlong, or disallowed input emits null and terminates as `status=refused` with one `request_validation`/`schema` Problem whose exact code is `transport.request_id_invalid` and whose bounded details are the constant `{ "field": "request_id", "rule": "safe_correlation" }`; no raw correlation value or invalid-shape discriminator is included. The ordinary semantic `request_fingerprint`, details fingerprint, and Problem fingerprint therefore remain invariant across all invalid correlation representations. A read-only operation uses `idempotency.state=not_applicable`; a mutation uses `not_established` at `request_validation`, before key establishment or any write. The outer response fingerprint binds the emitted valid string or null. Cross-adapter fixtures cover the full valid/absent/null/non-string/overlong/disallowed matrix for both mutability classes.
 
@@ -4515,7 +4600,7 @@ The ordinary response's `request_id` is also `string | null`. A supplied ID matc
 - `not_established` is valid if and only if an accepted mutating operation terminates before a domain commit and has exactly `{state, stage, terminal_problem}` with no key/result fields. `stage` is one of `capability_validation`, `request_validation`, `resolution_validation`, `authority_validation`, `precondition_validation`, `safety_validation`, `idempotency_validation`, or `execution_start`. `terminal_problem: ProblemBinding` must match exactly one terminal Problem in the response by ID and instance fingerprint; and
 - `established` carries `{state, idempotency_key_fingerprint, request_fingerprint, replayed, original_result_fingerprint, result_retention_until_utc}`, with the key fingerprint equal to the scoped closure defined above, original result null on first execution, and original result equal to the persisted committed-result closure fingerprint on replay.
 
-The raw idempotency key is input-only secret-bearing material. It never appears in an ordinary response, `IdempotencyState`, response/result schema instance, stdout, Tauri payload, diagnostic, Problem details, schema-manifest entry, write receipt, durable-capture evidence, retained result, consumed-key tombstone, or recovery-hold ledger state. Generated Rust/JSON/Tauri DTOs expose only `idempotency_key_fingerprint`; direct SDK, CLI JSON, Tauri, first execution, retained replay, and tombstone fixtures require the same scoped digest and scan every serialized/diagnostic/evidence surface for absence of the raw key.
+The raw idempotency key is input-only secret-bearing material. A mutating request DTO exposes it only at the selected definition's required bounded typed-body pointer. It never appears in an ordinary response, `IdempotencyState`, response/result schema instance, stdout, Tauri response payload, diagnostic, Problem details, schema-manifest entry, write receipt, durable-capture evidence, retained result, consumed-key tombstone, or recovery-hold ledger state. Generated Rust/JSON/Tauri response/result DTOs expose only `idempotency_key_fingerprint`; direct SDK, CLI JSON, Tauri, first execution, retained replay, and tombstone fixtures require the same scoped digest and scan every serialized/diagnostic/evidence surface for absence of the raw key.
 
 The ordinary-response variants are mutually exclusive and total after exact definition acceptance: every response for an accepted read-only operation, including blocked/refused/error, uses only `not_applicable`; only an accepted mutating pre-commit blocked/refused/error uses `not_established`; and only a committed mutation result/replay uses `established`. Pre-definition failures use only the separate admission envelope. After selection, stage/category binding is exact: `capability_validation` permits blocker `prerequisite` or refusal `capability`; `request_validation` only refusal `schema`; `resolution_validation` blocker `prerequisite` or refusal `resolution`; `authority_validation` blocker `prerequisite` or refusal `authority`; `precondition_validation` blocker `prerequisite` or refusal `precondition`; `safety_validation` only refusal `safety`; `idempotency_validation` only refusal `idempotency`; and `execution_start` only error `implementation` or `adapter`. An implementation/adapter error detected after selection but before domain commit uses `execution_start` even if the underlying adapter failed while serving an earlier validation step. No other stage/status/category triple is valid.
 
@@ -4556,6 +4641,69 @@ The idempotency ledger is **protocol-control metadata**, not a governed/domain r
 
 `provenance` always contains canonically ordered `source_bindings`, exact-or-null Resolution and Snapshot bindings, and ordered `omissions`; it cannot be replaced by free-form text. `schema_manifest` lists every response/result/problem/details/parameter schema as `SchemaManifestEntry` values. `response_fingerprint` covers every field except itself using the request normalization rule. Producers validate the response against the generic, shared-DTO, and operation-result schemas before serialization; failure becomes an adapter invariant error and must never emit a partial success document.
 
+### Corrective `posture.transition.apply` projection
+
+The future operation request is an exact bounded projection of live
+`PostureTransitionApplyRequestV1` and has only `idempotency_key`,
+`repository_identity_fingerprint`, `expected_canonical`, `recommendation`,
+`reassessment_coverage_ids`, `change`, and `effective_at_utc` in its typed
+body. The engine resolves policy, approvals, canonical/lifecycle head, source
+kernel, profile, and lifecycle validation itself. A caller-supplied copy of
+any of those values is an unknown field and refuses. The reassessment list is
+ordered, unique, at most 64 entries, and each ID is at most 256 bytes.
+`expected_canonical` contains exactly `reference`, `fingerprint`,
+`document_sha256`, and `byte_length`; `recommendation` contains exactly
+`reference` and `fingerprint`; `change` contains exactly `dimension_id`,
+`dimension_index`, `authority_path`, `expected_stored_value`,
+`expected_effective_level`, and `proposed_effective_level`.
+
+The live-result mapping is exhaustive and fixed:
+
+| Owner variant | Response status / idempotency stage / category | Public mapping |
+|---|---|---|
+| `Applied(receipt)` | `ok` / `established` / no Problem | seven-field receipt data; `replayed=false`; `original_result_fingerprint=null`; exactly canonical-truth plus PostureTransition semantic-record receipts in one atomic group |
+| `Replayed(receipt)` | `ok` / `established` / no Problem | same semantic data and original two receipts; `replayed=true`; persisted `original_result_fingerprint`; no new write |
+| `Blocked(UnsupportedPlatform)` | `blocked` / `capability_validation` / `prerequisite` | one `posture.unsupported_platform` blocker and deterministic platform recheck; `not_established`; no receipts |
+| `Refused(InvalidIdempotencyKey)` | `refused` / `request_validation` / `schema` | one `posture.invalid_idempotency_key` refusal; `not_established`; no receipts/raw key |
+| `Refused(RepositoryIdentityMismatch)` | `refused` / `authority_validation` / `authority` | one `posture.repository_identity_mismatch` refusal; `not_established`; no receipts |
+| `Refused(InvalidFixedDimension)` | `refused` / `precondition_validation` / `precondition` | one `posture.invalid_fixed_dimension` refusal; `not_established`; no receipts |
+| `Refused(StaleCanonical)` | `refused` / `precondition_validation` / `precondition` | one `posture.stale_canonical` refusal; `not_established`; no receipts |
+| `Refused(MissingLifecycleAuthority)` | `refused` / `authority_validation` / `authority` | one `posture.missing_lifecycle_authority` refusal; `not_established`; no receipts |
+| `Refused(LifecycleNotCurrent)` | `refused` / `precondition_validation` / `precondition` | one `posture.lifecycle_not_current` refusal; `not_established`; no receipts |
+| `Refused(InvalidSemanticInput)` | `refused` / `precondition_validation` / `precondition` | one `posture.invalid_semantic_input` refusal; `not_established`; no receipts |
+| `Refused(AuthorityConflict)` | `refused` / `authority_validation` / `authority` | one `posture.authority_conflict` refusal; `not_established`; no receipts |
+| `Error(UnsafeFilesystem)` | `error` / `execution_start` / `implementation` | one `posture.unsafe_filesystem` error with non-secret correlation; `not_established`; no receipts |
+| `Error(IntegrityOrDurability)` | `error` / `execution_start` / `implementation` | one `posture.integrity_or_durability` error with non-secret correlation; `not_established`; no receipts |
+| `Error(Io)` | `error` / `execution_start` / `implementation` | one `posture.io` error with non-secret correlation; `not_established`; no receipts |
+
+Successful data contains exactly `idempotency_key_fingerprint`,
+`repository_identity_fingerprint`, `prior_canonical`, `resulting_canonical`,
+`posture_transition`, `lifecycle_transition`, and `resulting_kernel`. Each
+non-success Problem details object is exactly
+`{owner_variant:<original Rust variant tag>}`. Lowercase-kebab conversion of
+that tag is injective: every details schema is exactly
+`handbook.posture-details.<owner-variant-kebab>@1.0.0`; each refusal rule is
+exactly `handbook.posture-rule.<owner-variant-kebab>@1.0.0`; blocker and error
+rules are null. Every subject is the selected exact
+`posture.transition.apply@1.0.0` definition binding. `UnsupportedPlatform`
+alone carries recheck schema
+`handbook.posture-recheck.unsupported-platform@1.0.0` with condition exactly
+`{owner_variant:"UnsupportedPlatform"}`. The descriptor pins every named ref
+and fingerprint. Error details remain redacted because the one tag is the
+complete public evidence. The live owner remains authoritative and the SDK
+adds no semantic branch.
+
+Direct Rust, CLI JSON, and Tauri parity binds status, data, Problems,
+idempotency semantic state, realized receipts, and
+`original_result_fingerprint`. Each transport recomputes the complete outer
+response fingerprint because it includes normalized correlation. Same valid
+request ID gives byte-identical response instance bytes before adapter
+framing; changed valid IDs change only the echo and outer fingerprint. Absent,
+null, and invalid IDs all select the normalized-null `request_id_invalid`
+refusal before the owner. These cases, first execution/replay, and literal raw-
+key absence across every output/replay/receipt/diagnostic surface are mandatory
+fixtures.
+
 ## DTO and JSON Schema generation contract
 
 1. SDK request/result/problem/reference DTOs are public typed Rust structs/enums with Serde and Draft 2020-12 JSON Schema generation.
@@ -4565,6 +4713,7 @@ The idempotency ledger is **protocol-control metadata**, not a governed/domain r
 5. Breaking field/removal/meaning changes require a new operation/schema major. Additive optional fields require a new schema/operation minor and remain absent-by-default. Patch releases cannot change serialized meaning.
 6. Clients refuse unsupported majors and definition/schema fingerprint mismatch. They may accept a higher compatible minor only when capability negotiation explicitly advertises it; no range/latest fallback occurs.
 7. OpenAPI may later describe an HTTP adapter but cannot become authority for SDK, CLI, or Tauri DTOs.
+8. Instance and fingerprint bytes are LF-free UTF-8 RFC 8785/JCS. A checked-in generated schema file is canonical JSON plus exactly one terminal LF, and its schema fingerprint includes that LF. Adapter framing is outside both preimages; no generator or DTO schema may impose one universal wire newline.
 
 The generated package includes the immutable bootstrap descriptor and every discoverable schema document/index. Capability and profile/schema catalog fixtures prove cold, compatible, stale, unsupported-major, unknown-operation, missing-profile/schema, and tampered-fingerprint behavior. A machine client discovers behavior from these typed catalogs or exact compile-time Rust types, never by parsing CLI help, examples, error prose, or Tauri command names.
 
@@ -4574,7 +4723,7 @@ Each recognized nontrivial CLI invocation maps to exactly one operation definiti
 
 In JSON mode:
 
-1. stdout contains exactly one complete UTF-8 JSON response document followed only by zero or one LF byte;
+1. stdout contains exactly one complete LF-free UTF-8 JCS response instance followed only by zero or one adapter-owned LF byte; both framings normalize to the same instance/fingerprint and CRLF, a second LF, or any other trailing byte is invalid;
 2. stdout is empty until the validated response can be emitted atomically;
 3. progress, human diagnostics, tracing, and logs use stderr and do not alter the response;
 4. `ok`, `blocked`, `refused`, and `error` all serialize the response contract; no expected outcome is prose-only;
@@ -4599,6 +4748,10 @@ For selected JSON operations, exit and response status must agree. Machine consu
 ## Tauri adapter contract
 
 The Tauri adapter maintains a checked mapping from each exposed Tauri command ID to one exact SDK operation ref/fingerprint. It deserializes the operation request DTO, invokes the typed SDK method, and serializes the exact SDK response DTO without reshaping domain fields.
+
+Tauri owns its serializer and frame. It hashes and validates the LF-free JCS
+instance before applying any IPC framing and never imports the CLI's optional
+LF rule into DTO or schema identity.
 
 - command naming, window state, cancellation wiring, and async/blocking scheduling are adapter concerns;
 - repository discovery becomes an explicit trusted request context before the SDK call;

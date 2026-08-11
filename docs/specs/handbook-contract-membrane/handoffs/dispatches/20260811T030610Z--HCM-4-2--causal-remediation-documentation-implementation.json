@@ -1,0 +1,230 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260811T030610Z--HCM-4-2--causal-remediation-documentation-implementation",
+  "created_at_utc": "2026-08-11T03:06:10Z",
+  "source_handoff_ids": [
+    "20260811T005500Z--HCM-4-2--orchestration--shared-dto-schema-planning-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-4-2-corrective-20260811",
+  "orchestration_decision": "resume_same_packet",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "implementation",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "documentation-and-adrs",
+    "incremental-implementation",
+    "api-and-interface-design"
+  ],
+  "phase_id": "HCM-4",
+  "slice_id": "HCM-4.2",
+  "packet_id": "HCM-4.2-PLANNING-CONTROL-PACK",
+  "subject_fingerprint": "sha256:e867a311e7e4cf38dce13039fa42a71c047ecec7b2a53b87267244ca9536b73e",
+  "review_cycle": null,
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-11T02:55:58Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "HCM-4-2-DOCS-CONTROL-PACK",
+        "packet_ids": [
+          "HCM-4.2-PLANNING-CONTROL-PACK"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:5c5a0307169ebebe1809b8bde1a102ca225afbef55fdfa7ac4c419c8befeafb8"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f7b1b67dcf5cda4435feffb4c91a951f1317b1f76fbfb9c0a6bceb0d25a2721f",
+    "integrated_outcome_id": "HCM-4-2-DOCS-CONTROL-PACK",
+    "outcome_registry_fingerprint": "sha256:5c5a0307169ebebe1809b8bde1a102ca225afbef55fdfa7ac4c419c8befeafb8",
+    "review_stage": "implementation",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": "planning"
+    },
+    "event_reason": "planned_stage_transition",
+    "causal_predecessor_dispatch_id": "20260811T025748Z--HCM-4-2--causal-remediation-selector-discovery-review"
+  },
+  "pre_review_convergence": null,
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/03-seam-crosswalk.md",
+        "sha256": "4072f9380f9b7e1e261eabef95bcaa699ed56cfe25d1e958a25abcaff93398d1"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+        "sha256": "5847719a89a589d2dae95375d6187f16cc6794e8a151902ac34d06eb005f9d02"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+        "sha256": "10092135637387dc275af6cbbbad9a39dabb6fcb7806d939a0b97cd6f2698d09"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/06-proof-and-regression-ledger.md",
+        "sha256": "310a2748be37014fd1bb2c2bd06b7de004faaca4dfd3ee854035e3ba79a96bd4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/handoffs/dispatches/20260811T025748Z--HCM-4-2--causal-remediation-selector-discovery-review.json",
+        "sha256": "994e0a9640f8f25756284badeb6cd7ee0198f3a84927473fac74fbb363c1384f"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/SPEC.md",
+        "sha256": "4304c216b3939bfdb9c788b687d6c7359a0d0959528345ffc9a10c136bff472a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+        "sha256": "7a3baaf81ebdf25a31db49003c429887d800761f047db12915c7bbf29f6e0aa4"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/20260811T005000Z--planning-proof-wall.md",
+        "sha256": "089f596283877bc1f3ca1889197c9a0db3f5b4a52d284a8583a2df748f9d7798"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/proof/strategy.md",
+        "sha256": "65c03268c0c276b9568fde60485221b13d7b95f84e3cdc15454a413d77647bfc"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/research/20260811T001900Z--source-impact-inventory.md",
+        "sha256": "938c2f3e519796490790726861b8a6e0f2ab1a35e0a0c2ad8f25c581e99c9c82"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T030408Z--causal-remediation-selector-discovery-review.md",
+        "sha256": "3280e37aa7ade47ec4f17d37e4b4f4bceb876288451ddae032084b688e301820"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/plan.md",
+        "sha256": "11255316f8a39557b36c1a7ae1b1cf85ebae918c8451b02a0031395f71dc5b4a"
+      },
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/tasks/todo.md",
+        "sha256": "1bd39d72aaa1dc93e59c0ccf43117826cd64a05c38923c9bd5d3897a89d6109b"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:e867a311e7e4cf38dce13039fa42a71c047ecec7b2a53b87267244ca9536b73e"
+  },
+  "active_resolution": {
+    "level": "HCM-4.2 bounded causal-remediation documentation implementation",
+    "scope_horizon": "one consolidated correction pass over the ten mandatory audit findings after exact-subject selector CLEAN",
+    "detail_resolution": "shared request/response, live posture mapping, bootstrap/capability closure, framing, response parity, exact 62-row owner/admission matrix, selector/final lineage, proof-ref supersession, and terminal-shape wording",
+    "temporal_horizon": "after selector CLEAN and before immutable complete-subject final review",
+    "authority_horizon": "planning documentation only; no Rust, schema, adapter, transport, API, dependency, release, publication, or remote change",
+    "memory_horizon": "the completed predecessor and its dispatches remain immutable; the external audit is mandatory correction evidence but not Handbook review authority",
+    "validation_horizon": "exact source/path/symbol inspection, complete ten-ID and 62-ID equality, static proof, and parent-owned final review/closeout"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+      "sections": [
+        "entire CLEAN selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/review/20260811T030408Z--causal-remediation-selector-discovery-review.md",
+      "sections": [
+        "CLEAN selector result and parent admission"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "SDK ordinary-use-case contract",
+        "Operation definition contract",
+        "Capability bootstrap and catalog discovery",
+        "Transport request and response contracts",
+        "DTO and JSON Schema generation contract",
+        "CLI JSON and Tauri adapter contracts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.1/SPEC.md",
+      "sections": [
+        "HCM-3.6 real posture ingress",
+        "completed direct Rust boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "causal review cadence",
+        "full proof wall"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "built-in delegated-run protocol",
+        "review lineage",
+        "two-commit closeout"
+      ]
+    }
+  ],
+  "repo_truth": "Bound task 019feeb8-3355-7923-b120-de897bd09f37 on host local began at exact detached ea2be46856172e503e7f7668d2dbaac9d26d1d39/tree 9dbad2c418a331d5b2a0c266c55280d81b676aca. The selector dispatch and review are immutable and CLEAN. The remote/protected baselines are unchanged. GitNexus MCP and local runner are unavailable and are not GREEN; this task edits no code symbol.",
+  "allowed_scope": [
+    "Edit only the bounded HCM-4.2 planning/control paths admitted by the selector, including 03/04/05/06, existing mutable HCM-4.2 planning files, and new additive HCM-4.2 research/proof/review files.",
+    "Perform one coherent documentation correction for every one of the ten mandatory audit findings, grounded in the exact live Rust owner types and symbols without changing them.",
+    "Create one authoritative 62-row matrix whose every row has honest live path::symbol or absent/phase5_deferred state, schema/owner source, mutability/idempotency, outcome/receipt binding, declared/current transport state, discoverability, and proof binding."
+  ],
+  "non_goals": [
+    "Do not edit Rust, Cargo, schemas, generated assets, fixtures, runtime behavior, CLI, Tauri, skills, transport implementation, dependencies, public API, Phase 5/6, HCM-4.3/4.4/4.5, release, publication, remote state, or protected checkouts.",
+    "Do not edit/delete historical handoffs, historical dispatches/reviews, schemas, validators, templates, or the external receipt; do not claim any DTO/schema/catalog/operation is implemented.",
+    "Do not stage, commit, update refs, merge, rebase, reset, clean, push, write the final handoff/ledger, launch reviewers, or send the terminal receipt."
+  ],
+  "tasks": [
+    "Read the complete dispatch, frozen selector and CLEAN evidence, exact external audit receipt, current 03/04/05/06 and HCM-4.2 package, HCM-4.1 posture source/authority, and all live owner symbols needed for the 62-row matrix before editing.",
+    "Implement all ten findings in one consolidated documentation pass. Keep raw mutation keys input-only at definition-pinned typed-body pointers; freeze the exact live posture request and exhaustive owner-result mapping; close bootstrap/descriptor/CapabilityEntry fields, tags, bounds, identities, versions, transports; separate LF-free JCS, LF schema files, and adapter framing; freeze response replay/parity and exact four-terminal-field assertions.",
+    "Align the SPEC, plan, todo, proof strategy, crosswalk, phase map, contracts/gates, proof ledger, authoritative owner/admission matrix, and additive correction evidence without rewriting the immutable predecessor evidence.",
+    "Return changed files, exact ten-finding dispositions, exact 62-row count/set proof, mechanical live-symbol checks, validation output, GitNexus unavailable status, and any remaining blocker to the parent."
+  ],
+  "contracts_and_gates": [
+    "Selector CLEAN is the sole authority for this bounded write; every mandatory audit finding remains required and cannot be waived, downgraded, renamed, or omitted.",
+    "Discovery must omit every row lacking the complete definition/request/result/outcome schema and transport-admission closure, even when a direct Rust precursor exists.",
+    "The correction remains planning readiness only; the parent owns proof-wall convergence, immutable final dispatch/review, remediation cadence, commits, handoff/ledger, CAS, and receipt."
+  ],
+  "stop_conditions": [
+    "Return BLOCKED without broadening if a requested correction requires runtime/code/schema/transport/public/dependency/remote work, immutable-history mutation, a new product/public-contract decision, or a protected path.",
+    "Return BLOCKED if any mandatory finding or any of the 62 rows cannot be represented honestly from the named authority and exact live source.",
+    "Report all results through the built-in parent channel; do not create global closeout state or contact the meta task."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "bounded_write",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "changed_files",
+      "validation",
+      "gitnexus_status",
+      "parent_disposition"
+    ]
+  }
+}

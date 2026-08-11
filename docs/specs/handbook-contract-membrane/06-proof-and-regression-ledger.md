@@ -1521,14 +1521,16 @@ the Phase 3 exit.
 
 ## HCM-4.2 shared DTO, schema, and discovery planning proof gate
 
-The selected HCM-4.2 subject is documentation and future implementation
-authority only. Its reviewed package reconciles the frozen HCM-0.4/HCM-0.5
-semantics, the HCM-4.1 direct typed Rust checkpoint, and the complete 62-row
-ordinary operation inventory. It does not claim that a public DTO, generated
-schema, operation catalog, bootstrap surface, transport, or runtime proof
-exists. In particular, `HandbookSdkV1::apply_posture_transition` remains
-direct typed Rust linkage and is not discoverable until the bounded public
-projection/admission seam is implemented under a later selected proof wall.
+The corrective HCM-4.2 primary is documentation and future implementation
+authority only; additive review/closeout evidence alone records its completion
+status. It reconciles the frozen HCM-0.4/HCM-0.5 semantics, the HCM-4.1 direct
+typed Rust checkpoint, and the authoritative 62-row owner/admission matrix at
+[`slices/HCM-4.2/research/20260811T031843Z--corrective-owner-admission-matrix.md`](slices/HCM-4.2/research/20260811T031843Z--corrective-owner-admission-matrix.md).
+It does not claim that a public DTO, generated schema, operation definition,
+catalog, bootstrap surface, transport, or runtime proof exists. Every matrix
+row currently lacks complete shared closure/current operation transport and is
+omitted from discovery. A named Rust `path::symbol`, including
+`HandbookSdkV1::apply_posture_transition`, is precursor evidence only.
 
 Before any future HCM-4.2 implementation may promote this boundary:
 
@@ -1536,19 +1538,32 @@ Before any future HCM-4.2 implementation may promote this boundary:
   reviewed source of truth, regenerate byte-identically, and carry exact
   schema IDs, full SemVer, lowercase SHA-256 fingerprints, explicit
   null/default behavior, and compatibility rules;
-- RFC 8785/JCS UTF-8 canonical serialization, LF framing, duplicate-key
-  rejection, closed discriminants, unknown-field refusal, and supported /
+- LF-free RFC 8785/JCS UTF-8 instance/fingerprint bytes, exactly-one-LF
+  checked-in schema bytes, CLI zero-or-one LF and Tauri-owned framing,
+  duplicate-key rejection, closed discriminants, unknown-field refusal, and supported /
   unsupported major/minor behavior must be replayed across request, result,
   problem, blocker, refusal, reference, cursor, page, and write-receipt DTOs;
-- immutable bootstrap and schema/operation/profile catalogs must be
+- exact closed bootstrap request/response/refusal, descriptor,
+  OwnerVersionEntry, and CapabilityEntry fields/tags/bounds/nulls/defaults/
+  preimages, distinct descriptor-content/schema identities, honest declared/
+  current transport state, and immutable schema/operation/profile catalogs must be
   restart-safe, snapshot-consistent, fingerprint-bound, and fail closed for
   cold/stale/tampered snapshots, unknown operations, missing schema/profile,
   pagination drift, and recheck failure; discovery cannot derive from CLI
   help, prose, examples, Tauri names, ambient files, or range/latest lookup;
 - every ordinary operation must bind owner, mutability, idempotency, refusal,
   write set, result, receipt, and authority without moving domain truth into
-  SDK or transport; direct-Rust equivalence and negative transport ownership
-  must be proven, while private HCM-3.6 records remain private;
+  SDK or transport; exact 62-row path/absence/deferment and discovery omission
+  must be proved mechanically; raw keys are accepted only at definition-pinned
+  mutation-body pointers and scanned out of all prohibited surfaces;
+- posture proof must use only the seven live caller fields and exhaust all 14
+  live owner variants into exact status/Problem/details/idempotency/data/
+  receipt shapes; direct Rust and adapters preserve semantic/result/receipt/
+  `original_result_fingerprint` parity while each adapter recomputes the
+  correlation-sensitive outer response fingerprint;
+- ordinary response shape proof must assert all four terminal fields — `data`
+  plus the three arrays — and reject missing fields, illegal data, or mixed
+  terminal arrays;
 - the exact 62-operation reconciliation, owner/dependency direction,
   generation layout, catalog lifecycle, future adapter seams, and all
   HCM-4.3/4.4/4.5, Phase-5, Phase-6, publication, and Phase-3 exclusions
@@ -1558,9 +1573,19 @@ Before any future HCM-4.2 implementation may promote this boundary:
   through reviewed proof. GitNexus is unavailable in this checkout today and
   is recorded as unavailable, never GREEN.
 
-The HCM-4.2 planning package records the complete proof strategy, future
-packet cadence, stop/rollback rules, and its fresh independent selector and
-complete-subject review evidence. A planning closeout does not close
+The predecessor dated proof wall and historical reviews remain byte-for-byte
+prior evidence and are not current corrective completion evidence. The bad
+historical proof ref
+`git:0a43668c5bdb2d80ee0ad9e6a6f2ce7af0d7b676` is non-resolving; current
+correction evidence uses the exact resolvable predecessor primary
+`git:0a4366802467edbe194da9afaf584686921c1e94`. The historical handoff remains
+unchanged, and an additive completed handoff must record the supersession and
+strict resolution proof.
+
+The HCM-4.2 corrective primary records the complete proof strategy, future
+packet cadence, and stop/rollback rules. Its additive selector, reviews, proof
+wall, handoff, ledger, and receipt carry time-varying completion state. A
+planning closeout does not close
 `PG-CONTRACT-01`, `PG-DOCK-01`, `PG-GATE-01`, the Phase 3 exit, HCM-4.3,
 HCM-4.4, HCM-4.5, Phase 5, Phase 6, publication, or release.
 

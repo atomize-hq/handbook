@@ -641,34 +641,38 @@ implementation/cutover evidence only: it does not close HCM-3.6,
 `HCM3EXIT-P2-CLIPPY-001`, HCM-3.5 P5/P6, or the Phase 3 exit, and it does not
 authorize other Phase-4 work.
 
-### `HCM-4.2` — Shared DTO and JSON Schema contract (next separately selected work)
+### `HCM-4.2` — Shared DTO and JSON Schema corrective planning
 
-The reviewed HCM-4.2 planning package at
-[`slices/HCM-4.2/SPEC.md`](slices/HCM-4.2/SPEC.md) is the sole planning
-authority for this increment. It reconciles the frozen HCM-0.4/HCM-0.5
-machine-contract semantics with the HCM-4.1 checkpoint and records that
-`HandbookSdkV1::apply_posture_transition` is direct typed Rust linkage only,
-not a discoverable operation. The package is implementation-ready but does
-not itself add runtime types, schemas, discovery, or transport.
+The predecessor package was invalidated by a later exact-subject audit. The
+additive corrective selector is CLEAN; the corrected planning primary is
+[`slices/HCM-4.2/SPEC.md`](slices/HCM-4.2/SPEC.md), while authoritative
+readiness/completion status is carried only by additive review/closeout
+evidence. It reconciles the frozen HCM-0.4/HCM-0.5
+machine-contract semantics with the HCM-4.1 checkpoint and records that named
+Rust symbols, including `HandbookSdkV1::apply_posture_transition`, are owner/
+SDK precursors only, never discoverable HCM-4.2 operations.
 
 - shared typed request/result/problem/error/refusal/blocker/reference/write-
   receipt DTOs with explicit closed discriminants and owner-domain refusal;
-- exact definitions for the complete 62-operation ordinary inventory, with
-  owner availability and `contract.*`/`dock.*` deferred to Phase 5;
+- one authoritative exact 62-row owner/admission matrix with live precursor
+  `path::symbol`, `absent`, or `phase5_deferred` truth; every row currently
+  lacks complete shared closure/current operation transport and is omitted;
 - exact schema IDs, full SemVer, compatibility rules, fingerprints, and
   checked-in generated Draft 2020-12 JSON Schema from Rust source truth;
-- RFC 8785 canonical serialization, UTF-8/LF byte identity, deterministic
+- LF-free RFC 8785 instance/fingerprint bytes, exactly-one-LF checked-in schema
+  files, CLI zero-or-one LF framing, Tauri-owned framing, deterministic
   regeneration, and unknown-field/discriminant/null/default proof;
-- immutable, restart-safe, fingerprint-bound bootstrap and schema/operation/
-  profile catalog snapshots with refusal/admission for stale, cold, missing,
-  tampered, unsupported, or unknown references;
-- a public posture projection seam that makes `posture.transition.apply`
-  discoverable without exposing private HCM-3.6 records or manufacturing CLI
-  or Tauri ingress; and
+- exact closed bootstrap request/response/refusal, descriptor,
+  OwnerVersionEntry, and CapabilityEntry shapes with separate descriptor-
+  content/schema identities and honest declared/current transports;
+- a future public posture projection with only the seven live caller fields,
+  exhaustive owner-result/status/Problem/idempotency/data/receipt mapping,
+  input-only raw key, and correlation-sensitive outer-response parity; and
 - the complete future proof wall and dependency-ordered implementation
   packets, including GitNexus impact gates and negative transport ownership.
 
-This package does not close Phase 3 or authorize HCM-4.3 CLI JSON, HCM-4.4
+This corrective primary grants no implementation authority by itself. It does
+not close Phase 3 or authorize HCM-4.3 CLI JSON, HCM-4.4
 Tauri, HCM-4.5 skills, Phase 5 contract/dock runtime, Phase 6 consumers,
 publication, release, or remote updates.
 

@@ -1,0 +1,239 @@
+{
+  "schema_id": "handbook.internal-dispatch",
+  "schema_version": "1.4",
+  "dispatch_id": "20260811T025748Z--HCM-4-2--causal-remediation-selector-discovery-review",
+  "created_at_utc": "2026-08-11T02:57:48Z",
+  "source_handoff_ids": [
+    "20260811T005500Z--HCM-4-2--orchestration--shared-dto-schema-planning-completed"
+  ],
+  "parent_orchestration_id": "handbook-hcm-4-2-corrective-20260811",
+  "orchestration_decision": "proof_or_review_followup",
+  "execution_target": "internal_subagent",
+  "agent_type": "default",
+  "role": "review",
+  "fresh_context_required": true,
+  "closeout_owner": "parent_orchestrator",
+  "required_skills": [
+    "using-agent-skills",
+    "context-engineering",
+    "documentation-and-adrs",
+    "code-review-and-quality"
+  ],
+  "phase_id": "HCM-4",
+  "slice_id": "HCM-4.2",
+  "packet_id": "HCM-4.2-PLANNING-CONTROL-PACK",
+  "subject_fingerprint": "sha256:570ef67b646699887e7fd869843fe0306c220690e336da73bdc161e0cfedbc26",
+  "review_cycle": {
+    "kind": "discovery",
+    "cycle_id": "hcm42-corrective-selector-discovery-1",
+    "trigger_run_ids": [],
+    "finding_refs": []
+  },
+  "causal_outcome_registry": {
+    "declared_at_utc": "2026-08-11T02:55:58Z",
+    "algorithm": "sha256",
+    "encoding": "canonical-json-newline-v1",
+    "outcomes": [
+      {
+        "integrated_outcome_id": "HCM-4-2-DOCS-CONTROL-PACK",
+        "packet_ids": [
+          "HCM-4.2-PLANNING-CONTROL-PACK"
+        ],
+        "authority_ref": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md"
+      }
+    ],
+    "fingerprint": "sha256:5c5a0307169ebebe1809b8bde1a102ca225afbef55fdfa7ac4c419c8befeafb8"
+  },
+  "causal_control": {
+    "causal_budget_id": "sha256:f7b1b67dcf5cda4435feffb4c91a951f1317b1f76fbfb9c0a6bceb0d25a2721f",
+    "integrated_outcome_id": "HCM-4-2-DOCS-CONTROL-PACK",
+    "outcome_registry_fingerprint": "sha256:5c5a0307169ebebe1809b8bde1a102ca225afbef55fdfa7ac4c419c8befeafb8",
+    "review_stage": "planning",
+    "stage_transition": {
+      "kind": "enter",
+      "from_stage": null
+    },
+    "event_reason": "initial_stage_review",
+    "causal_predecessor_dispatch_id": null
+  },
+  "pre_review_convergence": {
+    "gate_id": "hcm42-corrective-selector-convergence-20260811T025748Z",
+    "completed_at_utc": "2026-08-11T02:57:47Z",
+    "checks": [
+      {
+        "kind": "complete_packet_wall",
+        "status": "passed",
+        "command": "Read the bound corrective contract, live AGENTS.md and 00/07/08/09 control authority, predecessor handoff, exact external causal-audit receipt, and permanent ordinary-validator governance before freezing the one-file selector subject.",
+        "evidence_ref": "The selector states the exact objective, ten stable finding IDs and repairs, allowed paths, documentation-only risk ceiling, audit digest, predecessor identity, non-goals, cadence, and proof/closeout boundary."
+      },
+      {
+        "kind": "recursive_fixture_consumer_inventory",
+        "status": "passed",
+        "command": "rg --files docs/specs/handbook-contract-membrane/slices/HCM-4.2 and enumerate predecessor dispatch/review/handoff plus audit-consumer boundaries",
+        "evidence_ref": "The corrective selector is intentionally the sole selector-review subject; historical HCM-4.2 artifacts are immutable context and the remaining correction package is not yet authored."
+      },
+      {
+        "kind": "manifest_replay",
+        "status": "passed",
+        "command": "Recompute the selector SHA-256 and repo-path-NUL-SHA256-newline-v1 aggregate from its frozen bytes.",
+        "evidence_ref": "selector SHA-256 7a3baaf81ebdf25a31db49003c429887d800761f047db12915c7bbf29f6e0aa4; subject fingerprint sha256:570ef67b646699887e7fd869843fe0306c220690e336da73bdc161e0cfedbc26"
+      },
+      {
+        "kind": "formatting",
+        "status": "passed",
+        "command": "git diff --check -- docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+        "evidence_ref": "The frozen selector diff has no formatting or whitespace errors."
+      },
+      {
+        "kind": "whitespace",
+        "status": "passed",
+        "command": "rg -n '[ \\t]+$' docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+        "evidence_ref": "No selector line has trailing spaces or tabs."
+      }
+    ]
+  },
+  "ancillary_allowance": {
+    "kind": "none",
+    "risk_ceiling": "no_ancillary_surface",
+    "baseline_ref": null,
+    "max_paths": 0,
+    "max_changed_lines": 0,
+    "entries": []
+  },
+  "subject_hygiene": {
+    "whitespace_policy": "text-files-no-trailing-whitespace-v1"
+  },
+  "subject_manifest": {
+    "algorithm": "sha256",
+    "encoding": "repo-path-null-sha256-newline-v1",
+    "entries": [
+      {
+        "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+        "sha256": "7a3baaf81ebdf25a31db49003c429887d800761f047db12915c7bbf29f6e0aa4"
+      }
+    ],
+    "aggregate_fingerprint": "sha256:570ef67b646699887e7fd869843fe0306c220690e336da73bdc161e0cfedbc26"
+  },
+  "active_resolution": {
+    "level": "HCM-4.2 causal-remediation selector admission",
+    "scope_horizon": "one additive exact-subject selector review before any remaining corrective package authoring",
+    "detail_resolution": "verify the exact ten-finding correction set, closed documentation paths, predecessor/audit roles, planning-only authority, causal cadence, proof wall, and two-commit local-only closeout",
+    "temporal_horizon": "one planning-stage discovery review; selector authoring stops on any unresolved P1/P2",
+    "authority_horizon": "review only; the consolidated correction pass remains unavailable until this exact subject receives CLEAN",
+    "memory_horizon": "completed predecessor evidence and the externally validated causal-audit receipt are immutable consumed context",
+    "validation_horizon": "v1.4 dispatch validation, immutable pre-launch hashes, fresh independent review, and exact selector/result/evidence equality"
+  },
+  "authority_refs": [
+    {
+      "path": "docs/specs/handbook-contract-membrane/slices/HCM-4.2/decision/20260811T025558Z--hcm-4-2-causal-remediation-selector.md",
+      "sections": [
+        "entire selector"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/handoffs/records/20260811T005500Z--HCM-4-2--orchestration--shared-dto-schema-planning-completed.json",
+      "sections": [
+        "immutable predecessor identity and prior completion facts"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/04-phase-slice-map.md",
+      "sections": [
+        "Phase 4",
+        "HCM-4.1",
+        "HCM-4.2",
+        "HCM-4.3",
+        "HCM-4.4",
+        "HCM-4.5"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md",
+      "sections": [
+        "HCM-0.4 crate ownership and dependency contract",
+        "SDK ordinary-use-case request and response contracts",
+        "Operation definition contract",
+        "Capability bootstrap and catalog discovery",
+        "DTO and JSON Schema generation contract",
+        "machine-transport request and response authority"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md",
+      "sections": [
+        "Fresh review / remediation loop",
+        "Full proof wall",
+        "True-stop handoff"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md",
+      "sections": [
+        "Built-in delegated-run protocol",
+        "Review lineage",
+        "Two-commit true-stop closeout"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md",
+      "sections": [
+        "Review priority rubric",
+        "Registration and review-subject boundary"
+      ]
+    },
+    {
+      "path": "docs/specs/handbook-contract-membrane/phase-3-exit/decision/20260809T150000Z--permanent-ordinary-validator-governance.md",
+      "sections": [
+        "entire permanent governance decision"
+      ]
+    }
+  ],
+  "repo_truth": "Bound task 019feeb8-3355-7923-b120-de897bd09f37 on host local is at detached HEAD and local integration ref ea2be46856172e503e7f7668d2dbaac9d26d1d39/tree 9dbad2c418a331d5b2a0c266c55280d81b676aca. Remote feat/handbook-contract-membrane remains 1256e724a2b7da6b6250f57d6f63fced1e2cf949. All protected checkout head/tree/index/content manifests and main target metadata match the external-audit baseline. The audit receipt digest is exact and contains eight P2, one P3, and one P4 mandatory findings. GitNexus MCP and local runner are unavailable and are not GREEN; no code symbol is in scope.",
+  "allowed_scope": [
+    "Read-only independent review of exactly the one-file corrective selector subject, the immutable predecessor context, the exact external audit receipt/digest, and the named live control authority.",
+    "Verify every one of the ten stable finding IDs and required dispositions is present without waiver or downgrade and that the selector admits only the bounded documentation correction.",
+    "Verify the selector preserves the predecessor packet/integrated-outcome lineage, freezes the review cadence, withholds authoring until CLEAN, and requires immutable pre-launch selector/final subjects plus two-commit local-only closeout.",
+    "Return independent findings; do not edit any file or write a handoff, ledger entry, receipt, or new dispatch."
+  ],
+  "non_goals": [
+    "Do not review or approve the not-yet-authored correction package, owner matrix contents, runtime implementation, DTOs, schemas, bootstrap/catalog code, adapters, CLI, Tauri, skills, Phase 5/6, publication, release, or remote state.",
+    "Do not treat the external audit receipt as Handbook repository authority or rewrite the predecessor record, dispatches, review evidence, validators, schemas, or templates.",
+    "Do not edit, format, stage, commit, update refs, contact a remote, delegate, write a global handoff, append the ledger, or create a user task hop."
+  ],
+  "tasks": [
+    "Assume the selector author may be overconfident. Identify findings independently before comparing any advisory candidate with the inventory.",
+    "Check exact objective, ten-ID completeness and disposition, allowed path closure, documentation-only risk ceiling, audit/predecessor role separation, explicit non-goals/stops, causal cadence, proof requirements, and local-only two-commit/CAS boundary.",
+    "Require equality among the selector bytes, dispatch manifest, delegated input/result, review evidence, and eventual closeout claim; report any mutable, incomplete, or self-authorizing lineage as P1/P2.",
+    "Return findings first in Critical, Required, Optional, Nit order with file/line, violated authority, why it is wrong, smallest valid remediation, and missing verification; then verdict, validation, advisory disposition, and parent disposition."
+  ],
+  "contracts_and_gates": [
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#sdk-ordinary-use-case-contract",
+    "docs/specs/handbook-contract-membrane/05-contracts-schemas-and-gates.md#capability-bootstrap-and-catalog-discovery",
+    "docs/specs/handbook-contract-membrane/07-orchestration-onboarding-prompt.md#phase-5--fresh-review--remediation-loop",
+    "docs/specs/handbook-contract-membrane/08-handoff-ledger-and-escalation-protocol.md#review-lineage",
+    "docs/specs/handbook-contract-membrane/09-review-finding-inventory.md#review-priority-rubric"
+  ],
+  "stop_conditions": [
+    "Return P1/P2 if any mandatory audit finding is omitted, weakened, or reclassified; the selector admits runtime/public/dependency/transport/remote or protected-path work; or external evidence is promoted into Handbook authority.",
+    "Return P1/P2 if immutable predecessor evidence would be rewritten, the exact-subject gate is circular or mutable, the causal cadence can reset/reopen discovery/run after CLEAN, or completion can occur without the complete frozen final subject and proof wall.",
+    "Return blocked only for a genuine missing authority or unavailable exact subject; do not broaden or repair files."
+  ],
+  "return_contract": {
+    "transport": "built_in_subagent",
+    "findings_first": true,
+    "include_agent_identity_and_status": true,
+    "edit_scope": "read_only",
+    "global_handoff": "forbidden",
+    "ledger_write": "forbidden",
+    "user_task_hop": "forbidden",
+    "required_result_fields": [
+      "agent_id",
+      "final_status",
+      "verdict",
+      "findings",
+      "advisory_disposition",
+      "validation",
+      "parent_disposition"
+    ]
+  }
+}
