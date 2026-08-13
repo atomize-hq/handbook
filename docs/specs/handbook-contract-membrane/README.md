@@ -24,6 +24,7 @@ Use the source that owns the question:
 | What does the product implement? | The tracked Rust workspace under [`crates/`](../../../crates/), including crate-local definitions, plus tracked declarative product assets under [`core/`](../../../core/). Source at the current commit is product truth. |
 | What behavior is executable and checked? | Crate and repository tests, together with the 37 retained files under [`slices/HCM-2.2`](slices/HCM-2.2/), [`slices/HCM-2.3`](slices/HCM-2.3/), and [`slices/HCM-2.4`](slices/HCM-2.4/). These fixtures are product inputs and test evidence, not control-plane or work authorization. |
 | What is the current program-level authority boundary? | This file. It owns only post-reset authority classification and navigation. |
+| What are the execution units and their lifecycle boundaries? | [`work-unit-lifecycle.md`](work-unit-lifecycle.md) defines slice and packet identity, ownership, completion, and genuine workflow stops. |
 | Where does future slice-specific intent belong? | In a newly authorized, clearly identified slice-specific document under `slices/<slice-id>/`, separate from retained fixtures. No such document is created or implied here. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 
