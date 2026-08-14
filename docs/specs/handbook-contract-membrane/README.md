@@ -4,7 +4,7 @@ This is the authority and navigation entry point for the Handbook contract-membr
 
 ## Current status
 
-Commit `1b1c327d58ff0f1012ef4cce05bd179fac752ada` removed the former control-plane documents and disabled the repository-local top-level orchestration skill while preserving the implemented product and 37 product-consumed fixtures.
+Commit `8c93d6f3eacf3312c935a6f83ff62244450dbf1b` removed the former control-plane documents and disabled the repository-local top-level orchestration skill while preserving the implemented product and 37 product-consumed fixtures.
 
 At this checkpoint:
 
