@@ -1,6 +1,6 @@
 # Slice and Packet Work-Unit Lifecycle
 
-This document is the normative lifecycle vocabulary for Handbook contract-membrane work. Humans, future task prompts, and a future thin routing skill consume these rules to identify the authorized outcome, divide it into execution units, and distinguish continuation from completion.
+This document is the normative lifecycle vocabulary for Handbook contract-membrane work. Humans, the task-session and meta-task prompts, and the thin routing skill consume these rules to identify the authorized outcome, divide it into execution units, and distinguish continuation from completion.
 
 It defines execution-unit identity and lifecycle boundaries only. It does not authorize a slice, prescribe a prompt or result format, or require an orchestration artifact.
 
