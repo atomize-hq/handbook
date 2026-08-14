@@ -24,6 +24,7 @@ Use the source that owns the question:
 | --- | --- |
 | What does the product implement? | The tracked Rust workspace under [`crates/`](../../../crates/), including crate-local definitions, plus tracked declarative product assets under [`core/`](../../../core/). Source at the current commit is product truth. |
 | What is implemented, precursor-only, absent/future, or external-unknown now? | [`implemented-baseline.md`](implemented-baseline.md) owns the compact current product-state classification. It is an implementation checkpoint, not slice authority, a schedule, or phase-exit evidence. |
+| What stable architecture and ownership direction must current and future membrane work preserve? | [`architecture-context.md`](architecture-context.md) owns semantic ownership, dependency direction, adapter, trust, and external-proof boundaries. It does not authorize work or report program status. |
 | What behavior is executable and checked? | Crate and repository tests, together with the 37 retained files under [`slices/HCM-2.2`](slices/HCM-2.2/), [`slices/HCM-2.3`](slices/HCM-2.3/), and [`slices/HCM-2.4`](slices/HCM-2.4/). These fixtures are product inputs and test evidence, not control-plane or work authorization. |
 | What is the current program-level authority boundary? | This file. It owns only post-reset authority classification and navigation. |
 | What are the execution units and their lifecycle boundaries? | [`work-unit-lifecycle.md`](work-unit-lifecycle.md) defines slice and packet identity, ownership, completion, and genuine workflow stops. |
