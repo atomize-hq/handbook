@@ -115,7 +115,7 @@ Exit requires one separate bounded evidence subject containing all of:
 | Slice | Program status | Concise outcome and boundary | Hard predecessor |
 | --- | --- | --- | --- |
 | `HCM-4.1` — SDK owner and use-case implementation | Implemented checkpoint | Checkpoint `28fa4ab` provides transport-free SDK composition and the typed posture ingress under a past dependency-order exception. It is not proof that Phase 3 exited. | Past explicit exception; no retroactive inference |
-| `HCM-4.2` — Shared DTO and JSON Schema membrane | Implemented checkpoint for Packet 0; Packets 1–5 Planned | Packet 0 at `8605d65` supplies owner-neutral bounded types, canonical identities, catalog primitives, secret-safe keys, and sealed verification. Later packets must establish operations, schemas, envelopes, discovery, mappings, and transport exposure under fresh slice/packet authority. | **Phase-3 exit before any further Packet-1 work**, unless the user grants a new explicit exception |
+| [`HCM-4.2` — Shared DTO and JSON Schema membrane](slices/HCM-4.2/README.md) | Authorized outcome; implemented checkpoint for Packet 0; Packets 1–5 Planned and unexecuted | Compact slice outcome authority now exists, but it authorizes no packet. Packet 0 at `8605d65` remains byte-unchanged; later packets require their own authority after the hard predecessor. | **Phase-3 exit before any Packet-1 dispatch**, unless the user grants a new explicit exception |
 | `HCM-4.3` — Complete CLI JSON parity | Planned | Every supported nontrivial command uses the shared typed result boundary, with machine output, human rendering, diagnostics, and exit behavior kept distinct. | Phase-3 exit and preceding slice closeout |
 | `HCM-4.4` — Tauri-ready command facade | Planned | Thin Serde/Tauri commands consume SDK types without a normal-operation CLI subprocess or frontend-owned semantics. | Preceding slice closeout |
 | `HCM-4.5` — Capability-driven Handbook skill | Planned | Agent workflows discover capabilities and gather structured inputs through supported machine surfaces without prompt-owned product logic. | Preceding slice closeout |
@@ -167,7 +167,7 @@ actual owner boundary. Unselected external consumers are not an exit failure.
 | --- | --- |
 | Ordinary grounding SDK/JSON exposure and consumer placement | Future Phase-4 authority must choose the bounded public seam; future Phase-6 authority must separately choose any publication, bridge, and adopter |
 | Broader posture evaluation, recommendation, notification, acknowledgement, and hysteresis | Future posture authority must place this policy without transferring engine-owned mutation authority to a gate or adapter |
-| Schema generation, operation inventory, and parser rules | Packet 1 authority; this map selects none |
+| Schema generation, schema inventory, operation inventory, generic envelopes, and parser rules | Packet 1 owns generator, schema-inventory, and parser/schema decisions; Packet 2 owns the operation inventory and generic envelopes. This map selects none. |
 | Request/response envelopes, discovery witnesses/catalog representation, and posture mapping | Their later packet authorities; no representation is selected here |
 | Contract-owner placement or neutral extraction | Future contract-owner authority, preserving the no-back-edge architecture rule |
 | Gate-to-posture input and policy boundary | Future gate and posture authorities, preserving posture ownership |
