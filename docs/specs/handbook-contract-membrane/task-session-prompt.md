@@ -31,7 +31,7 @@ Perform only the assigned unit. Treat the capsule, repository instructions, curr
 
 1. Read repository instructions, the assigned current authority, and the capsule's live context. Load additional live code, tests, or documentation only when the assigned unit requires them. Archived material is non-authority unless a current source explicitly adopts a bounded part of it.
 2. Inspect the current branch, worktree, pre-existing changes, required dependencies, scope and authority sufficiency, and required capabilities. Preserve unrelated user work.
-3. Confirm that the capsule is current, internally consistent, and sufficient to begin safely. If it is not possible before product edits, return `ADMISSION_FAILED` immediately using the result block below. Do not edit product files or manufacture a commit, review cycle, selector history, handoff, proof wall, ledger, or closeout artifact.
+3. Confirm that the capsule is current, internally consistent, and sufficient to begin safely. Resolve ordinary context gaps from current authority and live sources when one safe answer exists. Return `ADMISSION_FAILED` before product edits only when bounded recovery cannot establish a safe start. Do not manufacture a commit, review cycle, selector history, handoff, proof wall, ledger, or closeout artifact.
 
 ### Load context and skills when needed
 
@@ -44,7 +44,7 @@ Perform only the assigned unit. Treat the capsule, repository instructions, curr
 1. Complete the bounded change or read-only task within `ALLOWED_SCOPE` and `NON_GOALS`.
 2. Follow repository instructions. For this repository, that includes GitNexus impact analysis before editing an indexed function, class, or method; warning before a HIGH or CRITICAL impact edit; and change detection before committing.
 3. Verify against `ACCEPTANCE`, `VERIFICATION`, and measured risk. Prefer focused checks when they are sufficient. Do not manufacture an omnibus proof wall or rerun unrelated workspace suites by default.
-4. Report check failures, omissions, and environmental limits honestly.
+4. Remediate failed checks, review findings, and other friction when current authority supplies an in-scope path. Report failures, omissions, and environmental limits honestly.
 
 ### Review
 
@@ -61,7 +61,7 @@ Apply the review and closeout policy to the exact bounded subject.
 - With `read-only` posture or no material change, do not manufacture a commit.
 - In packet mode, return `PACKET_COMPLETE` only after the packet acceptance boundary is satisfied. Never claim `SLICE_COMPLETE`, choose the next packet, or perform whole-slice closeout; the meta task owns continuation.
 - In whole-slice mode, return `SLICE_COMPLETE` only after every authorized outcome condition is satisfied and the minimal slice closeout has been performed once.
-- If a genuine workflow-stop condition prevents safe continuation, return `STOPPED` with the exact condition and safe-resumption need. Do not call the slice complete.
+- Before returning `STOPPED`, exhaust safe bounded recovery that current authority identifies. Do not wait for a human decision inside the task session: return control to the meta task with the exact condition, attempts, truthful partial state, and safe-resumption need. Do not call the slice complete.
 
 ## Final result
 
@@ -78,6 +78,6 @@ COMMIT: <commit hash | none>
 NEXT: <return to meta-task decision | exact stop or admission condition and resumption need | none>
 ```
 
-For `PACKET_COMPLETE`, `NEXT` returns control to the meta task. For `STOPPED` or `ADMISSION_FAILED`, it states the exact condition and what is needed to resume safely. For `SLICE_COMPLETE`, it is `none`.
+For `PACKET_COMPLETE`, `NEXT` returns control to the meta task. For `STOPPED` or `ADMISSION_FAILED`, it states the exact condition and what is needed for meta adjudication or safe resumption; neither status automatically stops the slice. For `SLICE_COMPLETE`, it is `none`.
 
 Do not add dispatch IDs, selectors, subject fingerprints, evidence manifests, review counters, handoff IDs, ledger paths, command recipes, advisory inventories, the context capsule, or a skill-routing transcript.
