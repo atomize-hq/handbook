@@ -15,12 +15,9 @@ admitted.**
   remain byte-unchanged on this clean branch.
 - No authority file exists for Packets 1 through 5, and none of those packets is
   authorized for execution.
-- Phase-3 exit is a hard predecessor to Packet-1 dispatch.
-- The latest Phase-3 exit attempt stopped at strict Clippy with nine existing
-  violations: `ptr_arg`, three `unnecessary_map_or`, `redundant_closure`,
-  `large_enum_variant`, two `type_complexity`, and `unnecessary_sort_by`.
-- Packet 1 may be admitted only after separately authorized remediation and a
-  successful rerun that exits Phase 3. This document grants neither authority.
+- The Phase-3 hard predecessor is satisfied under the selected reduced boundary.
+- Packet 1 remains unadmitted until its open decisions are resolved and separate
+  explicit packet authority is granted. This document grants neither.
 
 The [`phase-and-slice map`](../../phase-and-slice-map.md) owns that predecessor
 and exit state. A later authority must not reinterpret Packet 0's chronology or

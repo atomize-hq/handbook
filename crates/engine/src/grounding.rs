@@ -291,8 +291,11 @@ pub struct SharedResolutionInclusion {
     provenance: GroundingProvenance,
 }
 
-#[derive(Debug)]
 pub struct GroundedResolution {
+    backing: Box<GroundedResolutionBacking>,
+}
+
+struct GroundedResolutionBacking {
     flow_packet_grounding: FlowPacketGrounding,
     shared_resolution_inclusion: SharedResolutionInclusion,
     delta_signal_summary: DeltaSignalSummary,
@@ -301,31 +304,52 @@ pub struct GroundedResolution {
     evidence: GroundingEvidence,
 }
 
+impl std::fmt::Debug for GroundedResolution {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("GroundedResolution")
+            .field("flow_packet_grounding", &self.backing.flow_packet_grounding)
+            .field(
+                "shared_resolution_inclusion",
+                &self.backing.shared_resolution_inclusion,
+            )
+            .field("delta_signal_summary", &self.backing.delta_signal_summary)
+            .field("provenance", &self.backing.provenance)
+            .field("omissions", &self.backing.omissions)
+            .field("evidence", &self.backing.evidence)
+            .finish()
+    }
+}
+
 impl GroundedResolution {
     pub fn flow_packet_grounding(&self) -> &FlowPacketGrounding {
-        &self.flow_packet_grounding
+        &self.backing.flow_packet_grounding
     }
 
     pub fn shared_resolution_inclusion(&self) -> &SharedResolutionInclusion {
-        &self.shared_resolution_inclusion
+        &self.backing.shared_resolution_inclusion
     }
 
     pub fn delta_signal_summary(&self) -> &DeltaSignalSummary {
-        &self.delta_signal_summary
+        &self.backing.delta_signal_summary
     }
 
     pub fn provenance(&self) -> &GroundingProvenance {
-        &self.provenance
+        &self.backing.provenance
     }
 
     pub fn omissions(&self) -> &[GroundingOmission] {
-        &self.omissions
+        &self.backing.omissions
     }
 
     pub fn evidence(&self) -> &GroundingEvidence {
-        &self.evidence
+        &self.backing.evidence
     }
 }
+
+type GroundingFailure = (GroundingRefusalKind, Vec<GroundingOmission>);
+type CurrentnessByFamily = BTreeMap<String, (String, BTreeMap<String, String>)>;
+type SummaryParts = (Vec<DeltaSignalSummaryEntry>, Vec<GroundingOmission>);
 
 #[derive(Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -475,16 +499,18 @@ fn resolve_with_authority(
         provenance: provenance.clone(),
     };
     Ok(GroundedResolution {
-        flow_packet_grounding: FlowPacketGrounding {
-            provenance: provenance.clone(),
-        },
-        shared_resolution_inclusion: SharedResolutionInclusion {
-            provenance: provenance.clone(),
-        },
-        delta_signal_summary: summary,
-        provenance,
-        omissions,
-        evidence: GroundingEvidence,
+        backing: Box::new(GroundedResolutionBacking {
+            flow_packet_grounding: FlowPacketGrounding {
+                provenance: provenance.clone(),
+            },
+            shared_resolution_inclusion: SharedResolutionInclusion {
+                provenance: provenance.clone(),
+            },
+            delta_signal_summary: summary,
+            provenance,
+            omissions,
+            evidence: GroundingEvidence,
+        }),
     })
 }
 
@@ -631,12 +657,7 @@ fn validate_currentness(
     Ok(())
 }
 
-fn currentness_from_snapshot(
-    snapshot: &Value,
-) -> Result<
-    BTreeMap<String, (String, BTreeMap<String, String>)>,
-    (GroundingRefusalKind, Vec<GroundingOmission>),
-> {
+fn currentness_from_snapshot(snapshot: &Value) -> Result<CurrentnessByFamily, GroundingFailure> {
     let observations = snapshot
         .get("family_observations")
         .and_then(Value::as_array)
@@ -685,10 +706,7 @@ fn summarize(
     disclosure: &DisclosurePolicy,
     delta: &Value,
     provenance: &GroundingProvenance,
-) -> Result<
-    (Vec<DeltaSignalSummaryEntry>, Vec<GroundingOmission>),
-    (GroundingRefusalKind, Vec<GroundingOmission>),
-> {
+) -> Result<SummaryParts, GroundingFailure> {
     let changes = delta
         .get("changes")
         .and_then(Value::as_array)

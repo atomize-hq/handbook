@@ -78,10 +78,10 @@ generation, notification and acknowledgement, and hysteresis are absent/future.
 The selected profile accepts only a null `posture_evaluation_policy` today.
 
 The historical dead-code condition was superseded by the later facade and SDK
-ingress. That implementation checkpoint is not Phase-3 exit: no current
-post-reset record supplies fresh strict-Clippy, focused regression, review, and
-Phase-3 exit evidence for a corrected boundary. This baseline therefore neither
-closes Phase 3 nor chooses the reduced boundary.
+ingress. The phase-and-slice map now records Phase 3 exited under the
+user-selected reduced boundary after fresh strict-Clippy, focused-regression,
+and focused-review evidence. This baseline does not own or reproduce that exit
+evidence; it continues to classify product state only.
 
 ## HCM-4.1 SDK boundary
 

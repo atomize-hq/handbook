@@ -796,7 +796,7 @@ fn normalize_fixture_payload(value: &mut Value, field_name: Option<&str>) {
                 || field_name == Some("refs")
                 || field_name.is_some_and(|field| field.ends_with("_refs"))
             {
-                values.sort_by(|left, right| canonical_json(left).cmp(&canonical_json(right)));
+                values.sort_by_key(canonical_json);
             }
         }
         Value::Object(values) => {

@@ -521,7 +521,7 @@ fn bind_capture_family(
 }
 
 fn validate_bound_capture_slot(slot: &BoundCaptureSlot) -> Result<(), RecordError> {
-    if !is_identifier(&slot.slot) || !slot.cursor.as_deref().map_or(true, is_safe_text) {
+    if !is_identifier(&slot.slot) || !slot.cursor.as_deref().is_none_or(is_safe_text) {
         return Err(RecordError::new(RecordErrorKind::InvalidCaptureProvenance));
     }
     validate_live_pair(&slot.revision)
@@ -531,7 +531,7 @@ fn validate_bound_capture_slot(slot: &BoundCaptureSlot) -> Result<(), RecordErro
 fn validate_bound_capture_window(window: &BoundCaptureWindow) -> Result<(), RecordError> {
     if !is_identifier(&window.window_id)
         || !is_identifier(&window.slot)
-        || !window.cursor.as_deref().map_or(true, is_safe_text)
+        || !window.cursor.as_deref().is_none_or(is_safe_text)
     {
         return Err(RecordError::new(RecordErrorKind::InvalidCaptureProvenance));
     }
@@ -890,7 +890,7 @@ fn normalize_observation(
             return Err(RecordError::new(RecordErrorKind::InvalidWindow));
         }
         validate_live_pair(&window.source_revision)?;
-        if !window.cursor.as_deref().map_or(true, is_safe_text)
+        if !window.cursor.as_deref().is_none_or(is_safe_text)
             || slots
                 .get(&window.source_slot)
                 .ok_or_else(|| RecordError::new(RecordErrorKind::InvalidWindow))?

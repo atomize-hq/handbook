@@ -6,7 +6,7 @@ outcome intent, phase-exit state, and primary unresolved decisions.
 
 Its current authority is the user-selected reduced Phase-3 boundary recorded
 below. That decision accepts the named implementation checkpoints as the
-selected Phase-3 outcome boundary while requiring fresh exit evidence.
+selected Phase-3 outcome boundary; its fresh exit evidence is now complete.
 
 This map is roadmap authority only. It does not authorize execution, define
 packet acceptance, replace slice-specific authority, repeat detailed product or
@@ -99,23 +99,21 @@ atomic posture transition while rehoming the residual work to later owners.
 
 ### Phase-3 exit state
 
-**Implemented checkpoint — exit verification pending; not Phase exited.** The
-later HCM-4.1 and Packet-0 checkpoints do not alter this state.
+**Phase exited under the selected reduced boundary.** Fresh closeout evidence
+comprises strict Clippy across the engine, Flow, and pipeline owner boundary;
+the focused engine, Flow, and pipeline `HCM-3.5` suites; the focused engine
+`project_posture_tests` and `charter_posture_transaction_tests` suites; and one
+focused causal review of the complete product-and-documentation subject.
 
-Exit requires one separate bounded evidence subject containing all of:
-
-1. fresh strict Clippy for the applicable Phase-3 product boundary;
-2. focused grounding regressions for the selected `HCM-3.5` Packets 1–4 result;
-3. focused posture regressions for the selected `HCM-3.6` atomic result;
-4. one focused causal review of that exact evidence subject; and
-5. explicit closeout against this reduced boundary.
+This exit does not upgrade or reclaim the rehomed work above. The later HCM-4.1
+and Packet-0 checkpoints remain chronology, not evidence for this exit.
 
 ## Phase 4 — SDK and machine transports
 
 | Slice | Program status | Concise outcome and boundary | Hard predecessor |
 | --- | --- | --- | --- |
-| `HCM-4.1` — SDK owner and use-case implementation | Implemented checkpoint | Checkpoint `28fa4ab` provides transport-free SDK composition and the typed posture ingress under a past dependency-order exception. It is not proof that Phase 3 exited. | Past explicit exception; no retroactive inference |
-| [`HCM-4.2` — Shared DTO and JSON Schema membrane](slices/HCM-4.2/README.md) | Authorized outcome; implemented checkpoint for Packet 0; Packets 1–5 Planned and unexecuted | Compact slice outcome authority now exists, but it authorizes no packet. Packet 0 at `8605d65` remains byte-unchanged; later packets require their own authority after the hard predecessor. | **Phase-3 exit before any Packet-1 dispatch**, unless the user grants a new explicit exception |
+| `HCM-4.1` — SDK owner and use-case implementation | Implemented checkpoint | Checkpoint `28fa4ab` provides transport-free SDK composition and the typed posture ingress under a past dependency-order exception. Its chronology was not Phase-3 exit evidence. | Past explicit exception; no retroactive inference |
+| [`HCM-4.2` — Shared DTO and JSON Schema membrane](slices/HCM-4.2/README.md) | Authorized outcome; implemented checkpoint for Packet 0; Packets 1–5 Planned and unexecuted | Compact slice outcome authority now exists, but it authorizes no packet. Packet 0 at `8605d65` remains byte-unchanged; later packets require their own authority. | **Phase-3 exit is satisfied; Packet 1 still requires a separate decision and explicit authority** |
 | `HCM-4.3` — Complete CLI JSON parity | Planned | Every supported nontrivial command uses the shared typed result boundary, with machine output, human rendering, diagnostics, and exit behavior kept distinct. | Phase-3 exit and preceding slice closeout |
 | `HCM-4.4` — Tauri-ready command facade | Planned | Thin Serde/Tauri commands consume SDK types without a normal-operation CLI subprocess or frontend-owned semantics. | Preceding slice closeout |
 | `HCM-4.5` — Capability-driven Handbook skill | Planned | Agent workflows discover capabilities and gather structured inputs through supported machine surfaces without prompt-owned product logic. | Preceding slice closeout |

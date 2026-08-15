@@ -160,10 +160,7 @@ fn is_valid_json_pointer(pointer: &str) -> bool {
         return false;
     }
 
-    pointer
-        .split('/')
-        .skip(1)
-        .all(|segment| valid_pointer_segment(segment))
+    pointer.split('/').skip(1).all(valid_pointer_segment)
 }
 
 fn valid_pointer_segment(segment: &str) -> bool {

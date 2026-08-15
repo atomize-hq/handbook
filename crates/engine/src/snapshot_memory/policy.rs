@@ -440,7 +440,7 @@ fn normalize_families(
 
 fn normalize_windows(
     source_slots: &BTreeSet<String>,
-    windows: &mut Vec<AuthoredStaticWindow>,
+    windows: &mut [AuthoredStaticWindow],
 ) -> Result<BTreeMap<String, StaticWindow>, PolicyError> {
     let mut normalized = BTreeMap::new();
     for window in windows.iter() {
