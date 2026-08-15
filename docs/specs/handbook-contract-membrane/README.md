@@ -10,11 +10,11 @@ At this checkpoint:
 
 - the Rust product implementation remains in the workspace;
 - only the retained executable fixtures remain under [`slices/`](slices/);
-- no live slice-specific intent, remaining-slice schedule, or continuation authority is present in this directory;
+- the [`phase-and-slice map`](phase-and-slice-map.md) supplies current roadmap status, order, hard predecessors, and exit state, but no live slice-specific execution or continuation authority is present;
 - the former orchestration skill under `.codex/skills/.disabled/` is inactive and is not authority for new work; and
 - the active thin router is routing guidance only and is not authority for product or slice work.
 
-Do not infer current program completion or future scope from pre-reset plans. No post-reset source currently establishes a remaining-slice status beyond the facts above.
+Do not infer current program completion or implementation authority from pre-reset plans or the roadmap. The phase-and-slice map supplies navigation and program status only; it does not prove completion or authorize implementation.
 
 ## Authority and navigation
 
@@ -26,6 +26,7 @@ Use the source that owns the question:
 | What is implemented, precursor-only, absent/future, or external-unknown now? | [`implemented-baseline.md`](implemented-baseline.md) owns the compact current product-state classification. It is an implementation checkpoint, not slice authority, a schedule, or phase-exit evidence. |
 | What stable architecture and ownership direction must current and future membrane work preserve? | [`architecture-context.md`](architecture-context.md) owns semantic ownership, dependency direction, adapter, trust, and external-proof boundaries. It does not authorize work or report program status. |
 | How do current producer and consumer seams route toward bounded migration owners? | [`seam-crosswalk.md`](seam-crosswalk.md) maps seams and migration ownership. It does not authorize work or establish schedule, status, or completion. |
+| What is the program roadmap status, order, and phase-exit state? | [`phase-and-slice-map.md`](phase-and-slice-map.md) owns roadmap status, ordering, hard predecessors, and exits. It does not authorize slice or packet execution. |
 | What behavior is executable and checked? | Crate and repository tests, together with the 37 retained files under [`slices/HCM-2.2`](slices/HCM-2.2/), [`slices/HCM-2.3`](slices/HCM-2.3/), and [`slices/HCM-2.4`](slices/HCM-2.4/). These fixtures are product inputs and test evidence, not control-plane or work authorization. |
 | What is the current program-level authority boundary? | This file. It owns only post-reset authority classification and navigation. |
 | What are the execution units and their lifecycle boundaries? | [`work-unit-lifecycle.md`](work-unit-lifecycle.md) defines slice and packet identity, ownership, completion, and genuine workflow stops. |
