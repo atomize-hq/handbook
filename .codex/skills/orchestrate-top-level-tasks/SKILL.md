@@ -34,10 +34,10 @@ If those signals conflict or remain ambiguous, request the missing role boundary
 ### Meta task
 
 1. Read the lifecycle, review policy, meta-task prompt, and only the current slice authority needed to route the slice.
-2. Select `whole-slice` or `packet-by-packet` mode from current authority. Do not infer mode or packets from historical material.
-3. Load the task-session prompt only when filling the current dispatch.
-4. In whole-slice mode, dispatch one bounded whole-slice task session.
-5. In packet-by-packet mode, dispatch exactly one authorized packet at a time. Do not preload or concurrently launch future packets.
+2. Select `whole-slice` or `packet-by-packet` mode and the current unit from current authority. Do not infer mode or packets from historical material.
+3. Use `agent-using-agent-skills` to select the minimal skill route for the current unit only. Do not select or preload skills for future packets.
+4. Use `agent-context-engineering` to fill the task-session prompt as one fresh context capsule containing only the current unit's starting state, relevant live sources and tests, a useful precedent when available, known risks or unknowns, and skill activation conditions.
+5. Dispatch one bounded whole-slice task session or exactly one authorized packet task session. Never concurrently launch future packets.
 6. Consume the task session's compact eight-field result and retain only one concise conversational summary per completed packet.
 7. Own every continuation decision. After the final packet, perform one proportionate aggregate verification, review when applicable, and slice closeout.
 
@@ -45,17 +45,18 @@ Accept `SLICE_COMPLETE` only from whole-slice mode. Accept `PACKET_COMPLETE` onl
 
 ### Task session
 
-1. Read the lifecycle, review policy, task-session prompt, assigned current authority, and only the live sources needed for the assigned unit.
+1. Read the lifecycle, review policy, task-session prompt, assigned current authority, and the supplied context capsule. Treat the authority, not the capsule, as the source of scope.
 2. Do not load the meta-task prompt, future packets, unrelated slice materials, or the disabled legacy skill.
-3. Perform only the assigned whole slice or packet within its stated scope, acceptance, verification, and commit posture.
-4. Return exactly the task-session prompt's eight semantic fields: `STATUS`, `UNIT`, `OUTCOME`, `CHANGED`, `VERIFICATION`, `REVIEW`, `COMMIT`, and `NEXT`.
-5. From a packet, return `PACKET_COMPLETE` and control to the meta task. Never claim slice completion, select another packet, or perform aggregate closeout.
+3. Load each capsule-selected skill only when its activation phase begins. If an unexpected phase or failure makes that route insufficient, consult `agent-using-agent-skills` once for this unit and add only the newly applicable skill.
+4. Perform only the assigned whole slice or packet within its stated scope, acceptance, verification, and commit posture.
+5. Return exactly the task-session prompt's eight semantic fields: `STATUS`, `UNIT`, `OUTCOME`, `CHANGED`, `VERIFICATION`, `REVIEW`, `COMMIT`, and `NEXT`.
+6. From a packet, return `PACKET_COMPLETE` and control to the meta task. Never claim slice completion, select another packet, or perform aggregate closeout.
 
 Return `ADMISSION_FAILED` before edits when current authority or another admission requirement is insufficient. Return `STOPPED` only for a genuine workflow stop defined by the lifecycle.
 
 ## Keep execution thin
 
-- Load other applicable skills only when their phase begins; do not blanket-preload skills.
+- Treat the context capsule and skill route as transient dispatch content. Do not persist or return either one, and do not blanket-preload skills.
 - Use one focused reviewer per causal review round when review applies. Add specialist input only for a named unresolved measured risk under the review policy.
 - Keep routing state in conversation. Do not create ledgers, selectors, handoffs, proof walls, schemas, validators, dispatch archives, or other durable orchestration state.
 - Create no mandatory mechanical second commit and no packet-level slice closeout.

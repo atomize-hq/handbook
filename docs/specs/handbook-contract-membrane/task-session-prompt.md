@@ -1,10 +1,10 @@
 # Task-Session Prompt
 
-Use this prompt to assign one authorized whole slice or one packet to a top-level task session. It operationalizes the [`Slice and Packet Work-Unit Lifecycle`](work-unit-lifecycle.md) and [`Review and Closeout Policy`](review-and-closeout-policy.md); those documents remain authoritative if this prompt is incomplete or ambiguous.
+Use this prompt to assign one authorized whole slice or one packet to a top-level task session. The completed assignment block is the task's transient context capsule. It operationalizes the [`Slice and Packet Work-Unit Lifecycle`](work-unit-lifecycle.md) and [`Review and Closeout Policy`](review-and-closeout-policy.md); those documents remain authoritative if this prompt is incomplete or ambiguous.
 
 Copy the assignment block and task instructions into the task session, replacing each angle-bracketed placeholder. Keep entries short and human-readable.
 
-## Assignment
+## Task context capsule
 
 ```text
 MODE: <whole-slice | packet>
@@ -18,22 +18,26 @@ PREREQUISITES: <dependencies and relevant starting state>
 ACCEPTANCE: <conditions that establish completion>
 VERIFICATION: <proportionate checks or expectations>
 COMMIT_POSTURE: <commit | read-only | another explicit bounded instruction>
+CONTEXT: <minimal live source, test, and type paths or sections; one useful precedent when available>
+KNOWN_RISKS: <known conflicts, measured risks, or unresolved questions | none>
+SKILL_ROUTE: <applicable skill names and the phase that activates each | none>
 ```
 
 ## Task instructions
 
-Perform only the assigned unit. Treat the assignment, repository instructions, current authority, lifecycle, and review policy as the work boundary. Do not infer additional scope from archived material or this prompt.
+Perform only the assigned unit. Treat the capsule, repository instructions, current authority, lifecycle, and review policy as the work boundary. The capsule curates context but does not override or expand authority. Do not infer additional scope from archived material or this prompt.
 
 ### Ground and admit
 
-1. Read repository instructions, the assigned current authority, and only the live code, tests, and documentation needed for this unit. Archived material is non-authority unless a current source explicitly adopts a bounded part of it.
+1. Read repository instructions, the assigned current authority, and the capsule's live context. Load additional live code, tests, or documentation only when the assigned unit requires them. Archived material is non-authority unless a current source explicitly adopts a bounded part of it.
 2. Inspect the current branch, worktree, pre-existing changes, required dependencies, scope and authority sufficiency, and required capabilities. Preserve unrelated user work.
-3. Begin when safe scoped work is possible. If it is not possible before product edits, return `ADMISSION_FAILED` immediately using the result block below. Do not edit product files or manufacture a commit, review cycle, selector history, handoff, proof wall, ledger, or closeout artifact.
+3. Confirm that the capsule is current, internally consistent, and sufficient to begin safely. If it is not possible before product edits, return `ADMISSION_FAILED` immediately using the result block below. Do not edit product files or manufacture a commit, review cycle, selector history, handoff, proof wall, ledger, or closeout artifact.
 
 ### Load context and skills when needed
 
-- Keep context bounded to this unit. Do not blanket-load archived plans, unrelated documents, or skills.
-- Discover and load an applicable skill only when its phase begins: debugging after an observed failure, Git workflow for commit work, review workflow when review applies, and other skills only when the assigned work genuinely triggers them.
+- Treat `SKILL_ROUTE` as the minimal starting route. Load each selected skill only when its named phase begins; do not preload skill bodies or a complete lifecycle.
+- If an unexpected phase or failure makes the route insufficient, consult `agent-using-agent-skills` once for this unit and add only the newly applicable skill. This does not widen `AUTHORITY`, `ALLOWED_SCOPE`, or `ACCEPTANCE`.
+- Keep context bounded to this unit. Do not blanket-load archived plans, future packets, unrelated documents, or skills.
 
 ### Execute and verify
 
@@ -76,4 +80,4 @@ NEXT: <return to meta-task decision | exact stop or admission condition and resu
 
 For `PACKET_COMPLETE`, `NEXT` returns control to the meta task. For `STOPPED` or `ADMISSION_FAILED`, it states the exact condition and what is needed to resume safely. For `SLICE_COMPLETE`, it is `none`.
 
-Do not add dispatch IDs, selectors, subject fingerprints, evidence manifests, review counters, handoff IDs, ledger paths, command recipes, or advisory inventories.
+Do not add dispatch IDs, selectors, subject fingerprints, evidence manifests, review counters, handoff IDs, ledger paths, command recipes, advisory inventories, the context capsule, or a skill-routing transcript.

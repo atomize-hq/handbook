@@ -35,10 +35,16 @@ Use the platform's normal task or thread mechanism when available. Do not invent
 
 - In `whole-slice` mode, fill the task-session prompt once with `MODE: whole-slice`, `PACKET: none`, and the complete authorized slice boundary.
 - In `packet-by-packet` mode, select exactly one currently authorized packet and fill the task-session prompt with `MODE: packet`. Run one packet task at a time. Do not pre-create every packet task, launch a default concurrent burst, or load future packet context before it is needed.
-- Supply the current authority, bounded objective, allowed scope, non-goals, prerequisites, acceptance conditions, proportionate verification, and commit posture. Do not expand them beyond the assignment.
 - The meta task chooses every next packet. A packet task never sequences itself.
 
-Load skills only when the meta task's current phase requires them. Do not load implementation or debugging skills merely to route work, and do not blanket-preload future phases.
+Before each dispatch, build one fresh context capsule by filling the task-session prompt's complete assignment block:
+
+1. Use `agent-using-agent-skills` to select the minimal skill route justified by the current unit. Name each selected skill's activation phase; do not import its full workflow into the capsule or select skills for future packets.
+2. Use `agent-context-engineering` to curate the current unit's starting state, relevant live source and test paths, a useful implementation precedent when available, and known risks or unresolved questions. Prefer precise paths or sections over pasted documents and transcripts.
+3. Supply the current authority, objective, scope, non-goals, prerequisites, acceptance, verification, commit posture, curated context, risks, and skill route without expanding them beyond the assignment.
+4. Keep the capsule inside the task dispatch. Do not write it to the repository, retain it as orchestration state, or ask the task session to return it.
+
+Load skills only when the meta task's current phase requires them. Do not load implementation or debugging skills merely to route work, and do not turn the example lifecycle from a routing skill into a mandatory sequence.
 
 ### Consume the compact task result
 
