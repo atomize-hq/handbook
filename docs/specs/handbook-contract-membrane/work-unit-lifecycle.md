@@ -9,7 +9,8 @@ It defines execution-unit identity and lifecycle boundaries only. It does not au
 - A **slice** is the complete authorized outcome. Its authorization defines the outcome conditions and any bounded packets.
 - A **packet** is a bounded part of one slice. It never becomes a slice merely because it executes in its own top-level task session.
 - The **meta task** selects an execution mode and owns packet selection, automatic sequencing, adjudication, and continuation across task sessions.
-- A **packet task** owns only its assigned packet. It may not claim authority over the rest of the slice.
+- A **task session** owns only its assigned whole slice or packet. It may work directly or delegate internally only to local subagents; it never dispatches or coordinates another user-visible top-level task.
+- A **packet task** may not claim authority over the rest of the slice.
 
 ## Execution modes
 

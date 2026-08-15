@@ -41,7 +41,7 @@ Perform only the assigned unit. Treat the capsule, repository instructions, curr
 
 ### Execute and verify
 
-1. Complete the bounded change or read-only task within `ALLOWED_SCOPE` and `NON_GOALS`.
+1. Complete the bounded change or read-only task within `ALLOWED_SCOPE` and `NON_GOALS`. Work directly or coordinate local collaboration subagents when delegation helps. Do not create, fork, monitor, or coordinate another user-visible top-level task; the meta task alone owns that layer. Remain responsible for all delegated work and the final task result.
 2. Follow repository instructions. For this repository, that includes GitNexus impact analysis before editing an indexed function, class, or method; warning before a HIGH or CRITICAL impact edit; and change detection before committing.
 3. Verify against `ACCEPTANCE`, `VERIFICATION`, and measured risk. Prefer focused checks when they are sufficient. Do not manufacture an omnibus proof wall or rerun unrelated workspace suites by default.
 4. Remediate failed checks, review findings, and other friction when current authority supplies an in-scope path. Report failures, omissions, and environmental limits honestly.
