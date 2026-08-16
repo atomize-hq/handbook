@@ -23,6 +23,12 @@ const EXACT_REF_PATTERN: &str = concat!(
     "(\\.(0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?",
     "(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
 );
+const SEMVER_PATTERN: &str = concat!(
+    "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)",
+    "(-(0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)",
+    "(\\.(0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?",
+    "(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
+);
 
 fn closed_object(properties: Vec<(&'static str, Schema)>, required: &[&'static str]) -> Schema {
     let properties = properties.into_iter().collect::<BTreeMap<_, _>>();
@@ -117,6 +123,13 @@ impl_schema!(ExactRef, "ExactRef", |_generator| json_schema!({
     "pattern": EXACT_REF_PATTERN
 }));
 
+impl_schema!(SemVer, "SemVer", |_generator| json_schema!({
+    "type": "string",
+    "minLength": 5,
+    "maxLength": 255,
+    "pattern": SEMVER_PATTERN
+}));
+
 impl_schema!(Fingerprint, "Fingerprint", |_generator| json_schema!({
     "type": "string",
     "minLength": 71,
@@ -131,6 +144,288 @@ impl_schema!(ExactBinding, "ExactBinding", |generator| closed_object(
     ],
     &["ref", "fingerprint"],
 ));
+
+impl_schema!(RequestId, "RequestId", |_generator| json_schema!({
+    "type": "string",
+    "minLength": 1,
+    "maxLength": 128,
+    "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+}));
+
+impl_schema!(JsonPointer, "JsonPointer", |_generator| json_schema!({
+    "type": "string",
+    "minLength": 2,
+    "maxLength": 255,
+    "pattern": "^/([^~/]|~[01])+(/([^~/]|~[01])+)*$"
+}));
+
+impl_schema!(
+    OperationOwnerBinding,
+    "OperationOwnerBinding",
+    |generator| closed_object(
+        vec![
+            (
+                "owner_crate",
+                generator.subschema_for::<BoundedString<255>>()
+            ),
+            ("owner_version", generator.subschema_for::<SemVer>()),
+            ("source", generator.subschema_for::<ExactBinding>()),
+        ],
+        &["owner_crate", "owner_version", "source"],
+    )
+);
+
+impl_schema!(
+    OperationOutcomeSchemas,
+    "OperationOutcomeSchemas",
+    |generator| closed_object(
+        vec![
+            ("blocker", generator.subschema_for::<ExactBinding>()),
+            ("refusal", generator.subschema_for::<ExactBinding>()),
+            ("error", generator.subschema_for::<ExactBinding>()),
+        ],
+        &["blocker", "refusal", "error"],
+    )
+);
+
+impl_schema!(DeclaredWrite, "DeclaredWrite", |generator| closed_object(
+    vec![
+        (
+            "record_kind",
+            generator.subschema_for::<BoundedString<255>>()
+        ),
+        (
+            "authority_class",
+            generator.subschema_for::<BoundedString<255>>()
+        ),
+        (
+            "atomic_group",
+            generator.subschema_for::<BoundedString<255>>()
+        ),
+        (
+            "condition_schema",
+            generator.subschema_for::<ExactBinding>()
+        ),
+    ],
+    &[
+        "record_kind",
+        "authority_class",
+        "atomic_group",
+        "condition_schema"
+    ],
+));
+
+impl_schema!(OperationIdempotency, "OperationIdempotency", |generator| {
+    let pointer = generator.subschema_for::<JsonPointer>();
+    let basis = generator.subschema_for::<BoundedVec<JsonPointer, 128>>();
+    json_schema!({
+        "oneOf": [
+            closed_object(vec![("kind", json_schema!({"const": "safe"}))], &["kind"]),
+            closed_object(
+                vec![
+                    ("kind", json_schema!({"const": "idempotency_key_required"})),
+                    ("key_pointer", pointer.clone()),
+                ],
+                &["kind", "key_pointer"],
+            ),
+            closed_object(
+                vec![
+                    ("kind", json_schema!({"const": "compare_and_write_required"})),
+                    ("key_pointer", pointer),
+                    ("expected_basis", basis),
+                ],
+                &["kind", "key_pointer", "expected_basis"],
+            ),
+        ]
+    })
+});
+
+impl_schema!(OperationDefinition, "OperationDefinition", |generator| {
+    closed_object(
+        vec![
+            (
+                "definition_schema",
+                generator.subschema_for::<ExactBinding>(),
+            ),
+            ("operation", generator.subschema_for::<ExactRef>()),
+            ("owner", generator.subschema_for::<OperationOwnerBinding>()),
+            ("request_schema", generator.subschema_for::<ExactBinding>()),
+            ("result_schema", generator.subschema_for::<ExactBinding>()),
+            (
+                "outcome_schemas",
+                generator.subschema_for::<OperationOutcomeSchemas>(),
+            ),
+            (
+                "required_capabilities",
+                generator.subschema_for::<BoundedVec<ExactBinding, 128>>(),
+            ),
+            ("class", generator.subschema_for::<OperationClass>()),
+            (
+                "idempotency",
+                generator.subschema_for::<OperationIdempotency>(),
+            ),
+            (
+                "write_set",
+                generator.subschema_for::<BoundedVec<DeclaredWrite, 128>>(),
+            ),
+            (
+                "declared_transports",
+                generator.subschema_for::<BoundedVec<OperationTransport, 3>>(),
+            ),
+            ("deprecation", nullable::<ExactBinding>(generator)),
+            (
+                "definition_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "definition_schema",
+            "operation",
+            "owner",
+            "request_schema",
+            "result_schema",
+            "outcome_schemas",
+            "required_capabilities",
+            "class",
+            "idempotency",
+            "write_set",
+            "declared_transports",
+            "deprecation",
+            "definition_fingerprint",
+        ],
+    )
+});
+
+impl_schema!(OperationRequestV1, "OperationRequestV1", |generator| {
+    closed_object(
+        vec![
+            ("schema", generator.subschema_for::<ExactBinding>()),
+            ("request_id", nullable::<RequestId>(generator)),
+            ("operation", generator.subschema_for::<ExactBinding>()),
+            ("body_schema", generator.subschema_for::<ExactBinding>()),
+            ("body", generator.subschema_for::<ContractValue>()),
+            (
+                "request_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "schema",
+            "request_id",
+            "operation",
+            "body_schema",
+            "body",
+            "request_fingerprint",
+        ],
+    )
+});
+
+impl_schema!(OperationResponseV1, "OperationResponseV1", |generator| {
+    closed_object(
+        vec![
+            ("schema", generator.subschema_for::<ExactBinding>()),
+            ("request_id", nullable::<RequestId>(generator)),
+            (
+                "request_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+            ("operation", generator.subschema_for::<ExactBinding>()),
+            ("result_schema", generator.subschema_for::<ExactBinding>()),
+            ("status", generator.subschema_for::<TerminalStatus>()),
+            ("data", nullable::<ContractValue>(generator)),
+            (
+                "blockers",
+                generator.subschema_for::<BoundedVec<Problem, 128>>(),
+            ),
+            (
+                "refusals",
+                generator.subschema_for::<BoundedVec<Problem, 128>>(),
+            ),
+            (
+                "errors",
+                generator.subschema_for::<BoundedVec<Problem, 128>>(),
+            ),
+            ("idempotency", generator.subschema_for::<IdempotencyState>()),
+            (
+                "receipts",
+                generator.subschema_for::<BoundedVec<WriteReceipt, 128>>(),
+            ),
+            (
+                "diagnostics",
+                generator.subschema_for::<BoundedVec<Diagnostic, 128>>(),
+            ),
+            (
+                "next_actions",
+                generator.subschema_for::<BoundedVec<NextAction, 128>>(),
+            ),
+            (
+                "result_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+            (
+                "response_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "schema",
+            "request_id",
+            "request_fingerprint",
+            "operation",
+            "result_schema",
+            "status",
+            "data",
+            "blockers",
+            "refusals",
+            "errors",
+            "idempotency",
+            "receipts",
+            "diagnostics",
+            "next_actions",
+            "result_fingerprint",
+            "response_fingerprint",
+        ],
+    )
+});
+
+impl_schema!(
+    OperationAdmissionRefusalV1,
+    "OperationAdmissionRefusalV1",
+    |generator| closed_object(
+        vec![
+            ("schema", generator.subschema_for::<ExactBinding>()),
+            ("request_id", nullable::<RequestId>(generator)),
+            ("attempted_operation", nullable::<ExactRef>(generator)),
+            ("attempted_definition", nullable::<ExactBinding>(generator)),
+            ("request_fingerprint", nullable::<Fingerprint>(generator)),
+            ("status", json_schema!({"const": "refused"})),
+            ("data", json_schema!({"type": "null"})),
+            ("blockers", json_schema!({"type": "array", "maxItems": 0})),
+            (
+                "refusals",
+                json_schema!({"type": "array", "items": generator.subschema_for::<Problem>(), "minItems": 1, "maxItems": 1})
+            ),
+            ("errors", json_schema!({"type": "array", "maxItems": 0})),
+            (
+                "response_fingerprint",
+                generator.subschema_for::<Fingerprint>()
+            ),
+        ],
+        &[
+            "schema",
+            "request_id",
+            "attempted_operation",
+            "attempted_definition",
+            "request_fingerprint",
+            "status",
+            "data",
+            "blockers",
+            "refusals",
+            "errors",
+            "response_fingerprint",
+        ],
+    )
+);
 
 impl_schema!(ContractValue, "ContractValue", |generator| {
     let recursive = generator.subschema_for::<ContractValue>();
@@ -157,6 +452,21 @@ macro_rules! impl_string_enum {
     };
 }
 
+impl_string_enum!(
+    OperationClass,
+    "OperationClass",
+    ["read_only", "append_only", "compare_and_write"]
+);
+impl_string_enum!(
+    OperationTransport,
+    "OperationTransport",
+    ["cli_json", "rust_sdk", "tauri"]
+);
+impl_string_enum!(
+    TerminalStatus,
+    "TerminalStatus",
+    ["ok", "blocked", "refused", "error"]
+);
 impl_string_enum!(DigestAlgorithm, "DigestAlgorithm", ["sha256"]);
 impl_string_enum!(
     Sensitivity,
@@ -644,7 +954,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 15] = [
+const INVENTORY: [SchemaDescriptor; 22] = [
     descriptor::<ArtifactRef>(
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
@@ -680,6 +990,34 @@ const INVENTORY: [SchemaDescriptor; 15] = [
     descriptor::<Omission>(
         "handbook.omission@1.0.0",
         "handbook.omission/1.0.0.schema.json",
+    ),
+    descriptor::<OperationAdmissionRefusalV1>(
+        "handbook.operation-admission-refusal@1.0.0",
+        "handbook.operation-admission-refusal/1.0.0.schema.json",
+    ),
+    descriptor::<Problem>(
+        "handbook.operation-blocker@1.0.0",
+        "handbook.operation-blocker/1.0.0.schema.json",
+    ),
+    descriptor::<OperationDefinition>(
+        "handbook.operation-definition@1.0.0",
+        "handbook.operation-definition/1.0.0.schema.json",
+    ),
+    descriptor::<Problem>(
+        "handbook.operation-error@1.0.0",
+        "handbook.operation-error/1.0.0.schema.json",
+    ),
+    descriptor::<Problem>(
+        "handbook.operation-refusal@1.0.0",
+        "handbook.operation-refusal/1.0.0.schema.json",
+    ),
+    descriptor::<OperationRequestV1>(
+        "handbook.operation-request@1.0.0",
+        "handbook.operation-request/1.0.0.schema.json",
+    ),
+    descriptor::<OperationResponseV1>(
+        "handbook.operation-response@1.0.0",
+        "handbook.operation-response/1.0.0.schema.json",
     ),
     descriptor::<ProblemBinding>(
         "handbook.problem-binding@1.0.0",
@@ -766,8 +1104,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 15 {
-        return Err("schema inventory must contain exactly 15 entries".to_owned());
+    if INVENTORY.len() != 22 {
+        return Err("schema inventory must contain exactly 22 entries".to_owned());
     }
 
     let mut previous_ref = None;

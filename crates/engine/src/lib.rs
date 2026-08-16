@@ -46,6 +46,7 @@ pub mod definition_identity;
 pub mod environment_context_artifact;
 pub mod freshness;
 pub mod instance_profile;
+pub mod operation_admission;
 mod posture_transition_facade;
 mod profile_builtins;
 pub mod profile_decision;

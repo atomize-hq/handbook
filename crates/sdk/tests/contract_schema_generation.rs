@@ -3,9 +3,13 @@ use handbook_sdk::contract_membrane::{
     BoundedString, BoundedVec, CatalogCursor, CatalogPage, CatalogRoot, ContractError,
     ContractLimits, ContractValue, ContractWitness, CorrelationRef, Diagnostic, DiagnosticSeverity,
     DraftVersion, ExactBinding, ExactRef, Fingerprint, IdempotencyStage, IdempotencyState,
-    NextAction, NextActionKind, Omission, OmissionReason, Problem, ProblemBinding, ProblemCategory,
-    ProofEffect, RecheckCondition, RetryDirective, SafeU64, SchemaManifestEntry, SchemaMediaType,
-    Sensitivity, SourceBinding, UtcTimestamp, VerificationError, Verified, WriteReceipt,
+    NextAction, NextActionKind, Omission, OmissionReason, OperationAdmissionRefusalV1,
+    OperationClass, OperationDefinition, OperationIdempotency, OperationOutcomeSchemas,
+    OperationOwnerBinding, OperationRequestV1, OperationResponseV1, OperationSchemaValidator,
+    OperationTransport, Problem, ProblemBinding, ProblemCategory, ProofEffect, RecheckCondition,
+    RequestId, RetryDirective, SafeU64, SchemaManifestEntry, SchemaMediaType, SemVer, Sensitivity,
+    SourceBinding, TerminalFields, TerminalStatus, UtcTimestamp, VerificationError, Verified,
+    WriteReceipt,
 };
 use jsonschema::{PatternOptions, Retrieve, Uri, Validator};
 use serde::de::DeserializeOwned;
@@ -16,7 +20,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 15] = [
+const ROOTS: [(&str, &str); 22] = [
     (
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
@@ -52,6 +56,34 @@ const ROOTS: [(&str, &str); 15] = [
     (
         "handbook.omission@1.0.0",
         "handbook.omission/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation-admission-refusal@1.0.0",
+        "handbook.operation-admission-refusal/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation-blocker@1.0.0",
+        "handbook.operation-blocker/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation-definition@1.0.0",
+        "handbook.operation-definition/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation-error@1.0.0",
+        "handbook.operation-error/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation-refusal@1.0.0",
+        "handbook.operation-refusal/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation-request@1.0.0",
+        "handbook.operation-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation-response@1.0.0",
+        "handbook.operation-response/1.0.0.schema.json",
     ),
     (
         "handbook.problem-binding@1.0.0",
@@ -171,7 +203,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 15);
+    assert_eq!(entries.len(), 22);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
@@ -195,7 +227,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
 }
 
 #[test]
-fn constructor_instances_validate_and_round_trip_through_all_fifteen_roots() {
+fn constructor_instances_validate_and_round_trip_through_packet_one_roots() {
     let limits = ContractLimits::packet0();
     let source = SourceBinding::new(
         binding("source.item"),
@@ -336,6 +368,93 @@ fn constructor_instances_validate_and_round_trip_through_all_fifteen_roots() {
         &IdempotencyState::not_established(IdempotencyStage::RequestValidation, problem_binding)
             .unwrap(),
     );
+}
+
+#[test]
+fn packet_two_constructor_instances_validate_and_round_trip_through_new_roots() {
+    let limits = ContractLimits::packet0();
+    let definition = operation_definition(&limits);
+    assert_schema_and_typed("handbook.operation-definition@1.0.0", &definition);
+
+    let request = OperationRequestV1::new(
+        binding("handbook.operation-request"),
+        Some(RequestId::parse("request-schema-proof").unwrap()),
+        &definition,
+        ContractValue::null(),
+        &FixtureSchemaValidator,
+        &limits,
+    )
+    .unwrap();
+    let request_bytes = canonical_json_bytes(&request, &limits).unwrap();
+    let request_value: Value = serde_json::from_slice(&request_bytes).unwrap();
+    assert!(validator("handbook.operation-request@1.0.0").is_valid(&request_value));
+    let parsed_request = OperationRequestV1::parse_and_admit(
+        &request_bytes,
+        &definition,
+        &FixtureSchemaValidator,
+        &limits,
+    )
+    .unwrap();
+    assert_eq!(parsed_request.request_id(), request.request_id());
+    assert_eq!(
+        parsed_request.request_fingerprint(),
+        request.request_fingerprint()
+    );
+
+    let response = OperationResponseV1::new(
+        binding("handbook.operation-response"),
+        request.request_id().cloned(),
+        request.request_fingerprint().clone(),
+        &definition,
+        TerminalFields::new(
+            TerminalStatus::Ok,
+            Some(ContractValue::null()),
+            BoundedVec::new(Vec::new()).unwrap(),
+            BoundedVec::new(Vec::new()).unwrap(),
+            BoundedVec::new(Vec::new()).unwrap(),
+        )
+        .unwrap(),
+        IdempotencyState::not_applicable().unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        &FixtureSchemaValidator,
+        &limits,
+    )
+    .unwrap();
+    assert_schema_valid("handbook.operation-response@1.0.0", &response);
+    let response_bytes = canonical_json_bytes(&response, &limits).unwrap();
+    assert_eq!(
+        OperationResponseV1::parse_and_admit(
+            &response_bytes,
+            &definition,
+            &FixtureSchemaValidator,
+            &limits,
+        )
+        .unwrap(),
+        response
+    );
+
+    let refusal_problem = operation_problem(&limits);
+    let refusal = OperationAdmissionRefusalV1::new(
+        binding("handbook.operation-admission-refusal"),
+        request.request_id().cloned(),
+        Some(definition.operation().clone()),
+        Some(definition.binding()),
+        Some(request.request_fingerprint().clone()),
+        refusal_problem.clone(),
+        &limits,
+    )
+    .unwrap();
+    assert_schema_and_typed("handbook.operation-admission-refusal@1.0.0", &refusal);
+
+    for exact_ref in [
+        "handbook.operation-blocker@1.0.0",
+        "handbook.operation-refusal@1.0.0",
+        "handbook.operation-error@1.0.0",
+    ] {
+        assert_schema_and_typed(exact_ref, &refusal_problem);
+    }
 }
 
 #[test]
@@ -618,7 +737,18 @@ where
         validator.is_valid(&instance),
         "constructor instance failed {exact_ref}"
     );
-    assert_eq!(parse_canonical_json::<T>(&bytes, &limits).unwrap(), *value);
+    let parsed = parse_canonical_json::<T>(&bytes, &limits)
+        .unwrap_or_else(|error| panic!("typed round trip failed for {exact_ref}: {error:?}"));
+    assert_eq!(parsed, *value);
+}
+
+fn assert_schema_valid(exact_ref: &str, value: &impl Serialize) {
+    let bytes = canonical_json_bytes(value, &ContractLimits::packet0()).unwrap();
+    let instance: Value = serde_json::from_slice(&bytes).unwrap();
+    assert!(
+        validator(exact_ref).is_valid(&instance),
+        "constructor instance failed {exact_ref}"
+    );
 }
 
 fn assert_schema_rejects(exact_ref: &str, instance: &Value) {
@@ -657,6 +787,70 @@ fn artifact(identity: &str, path: &str) -> ArtifactRef {
         ArtifactLocator::repo_relative(sha256_fingerprint(b"repository"), bounded(path)).unwrap(),
     )
     .unwrap()
+}
+
+fn operation_definition(limits: &ContractLimits) -> OperationDefinition {
+    OperationDefinition::new(
+        binding("handbook.operation-definition"),
+        ExactRef::parse("artifact.validate@1.0.0").unwrap(),
+        OperationOwnerBinding::new(
+            bounded("handbook-engine"),
+            SemVer::parse("0.2.0").unwrap(),
+            binding("source.owner"),
+        )
+        .unwrap(),
+        binding("handbook.operation.artifact-validate-request"),
+        binding("handbook.operation.artifact-validate-result"),
+        OperationOutcomeSchemas::new(
+            binding("handbook.operation-blocker"),
+            binding("handbook.operation-refusal"),
+            binding("handbook.operation-error"),
+        )
+        .unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        OperationClass::ReadOnly,
+        OperationIdempotency::safe(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        BoundedVec::new(vec![
+            OperationTransport::CliJson,
+            OperationTransport::RustSdk,
+            OperationTransport::Tauri,
+        ])
+        .unwrap(),
+        None,
+        limits,
+    )
+    .unwrap()
+}
+
+fn operation_problem(limits: &ContractLimits) -> Problem {
+    Problem::new(
+        bounded("problem.operation-refusal"),
+        bounded("operation.not-admitted"),
+        ProblemCategory::Capability,
+        binding("operation.subject"),
+        Some(binding("rule.owner-admission")),
+        binding("operation.problem-details"),
+        ContractValue::null(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        RetryDirective::Never,
+        None,
+        None,
+        limits,
+    )
+    .unwrap()
+}
+
+struct FixtureSchemaValidator;
+
+impl OperationSchemaValidator for FixtureSchemaValidator {
+    fn validate_instance(
+        &self,
+        _schema: &ExactBinding,
+        _instance: &ContractValue,
+    ) -> Result<(), ContractError> {
+        Ok(())
+    }
 }
 
 fn assert_no_unfingerprinted_key_name(value: &Value) {

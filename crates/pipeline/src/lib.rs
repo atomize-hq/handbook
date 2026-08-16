@@ -1,5 +1,6 @@
 mod declarative_roots;
 mod layout;
+pub mod operation_admission;
 pub mod pipeline;
 pub mod pipeline_capture;
 pub mod pipeline_compile;

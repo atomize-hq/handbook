@@ -3,6 +3,9 @@ mod binding;
 mod bounds;
 mod catalog;
 mod dto;
+mod envelope;
+mod operation;
+mod owner_admission;
 mod raw_key;
 mod response;
 #[cfg(feature = "contract-schema-generation")]
@@ -25,6 +28,20 @@ pub use dto::{
     Omission, OmissionReason, Problem, ProblemBinding, ProblemCategory, ProofEffect,
     RecheckCondition, RetryDirective, SchemaManifestEntry, SchemaMediaType, SourceBinding,
     WriteReceipt,
+};
+pub use envelope::{
+    OperationAdmissionRefusalV1, OperationRequestV1, OperationResponseV1, OperationSchemaValidator,
+    RequestId,
+};
+pub use operation::{
+    operation_inventory, validate_complete_definition_set, validate_complete_operation_ref_set,
+    AdmissionReason, DeclaredWrite, DefinitionSetError, DiscoveryState, JsonPointer,
+    OperationAvailability, OperationClass, OperationDefinition, OperationIdempotency,
+    OperationInventoryRow, OperationOutcomeSchemas, OperationOwner, OperationOwnerBinding,
+    OperationTransport,
+};
+pub use owner_admission::{
+    admit_operation_definition, OperationAdmissionResult, OwnerAdmissionToken,
 };
 pub use raw_key::{
     with_owner_idempotency_key, DefinitionPinnedKeyPointer, IdempotencyKeyConsumer,

@@ -2,6 +2,7 @@
 
 pub mod budget;
 pub mod grounded_packet;
+pub mod operation_admission;
 pub mod packet_result;
 pub mod resolver;
 

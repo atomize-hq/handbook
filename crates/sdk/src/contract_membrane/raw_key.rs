@@ -1,4 +1,4 @@
-use super::{ContractError, Fingerprint};
+use super::{sha256_fingerprint, ContractError, ExactRef, Fingerprint};
 use std::fmt;
 
 const MAX_RAW_KEY_BYTES: usize = 65_536;
@@ -24,6 +24,21 @@ impl RawIdempotencyKey {
             return Err(ContractError::InvalidString);
         }
         Ok(Self { bytes })
+    }
+
+    pub(super) fn as_str(&self) -> &str {
+        std::str::from_utf8(&self.bytes).expect("validated raw key must remain UTF-8")
+    }
+
+    pub(super) fn scoped_fingerprint(&self, operation: &ExactRef) -> Fingerprint {
+        let mut preimage = Vec::with_capacity(
+            41 + operation.as_str().len() + "/body/idempotency_key".len() + self.bytes.len(),
+        );
+        preimage.extend_from_slice(b"handbook.operation-idempotency-key-v1\0");
+        preimage.extend_from_slice(operation.as_str().as_bytes());
+        preimage.extend_from_slice(b"\0/body/idempotency_key\0");
+        preimage.extend_from_slice(&self.bytes);
+        sha256_fingerprint(&preimage)
     }
 }
 
