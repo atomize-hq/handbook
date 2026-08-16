@@ -1,6 +1,6 @@
 # Review and Closeout Policy
 
-This document is the normative quality policy for work governed by the [`Slice and Packet Work-Unit Lifecycle`](work-unit-lifecycle.md). Humans, the task-session and meta-task prompts, and the thin routing skill consume it to verify bounded work, conduct review when applicable, and close a slice or genuine workflow stop without recreating control-plane ceremony.
+This document is the normative quality policy for work governed by the [`Slice and Packet Work-Unit Lifecycle`](work-unit-lifecycle.md). Humans, the authority-preparation, task-session, and meta-task prompts, and the thin routing skill consume it to verify bounded work, conduct review when applicable, and close a slice or genuine workflow stop without recreating control-plane ceremony.
 
 It defines required behavior and information, not a prompt, receipt format, file layout, schema, validator, state store, or skill.
 

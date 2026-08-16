@@ -1,103 +1,96 @@
 # Meta-Task Prompt
 
-Use this prompt in a meta task that owns one currently authorized slice. It operationalizes the [`Slice and Packet Work-Unit Lifecycle`](work-unit-lifecycle.md), [`Review and Closeout Policy`](review-and-closeout-policy.md), and [`Task-Session Prompt`](task-session-prompt.md); those documents remain authoritative if this prompt is incomplete or ambiguous.
-
-Copy the assignment block and meta instructions into the meta task, replacing each angle-bracketed placeholder. Keep entries short and human-readable.
+Use this prompt in a meta task that owns an HCM phase or slice request. The request may already have current slice authority or may require bounded phase-to-slice or slice-to-packet authority preparation first. This prompt operationalizes the [`Slice and Packet Work-Unit Lifecycle`](work-unit-lifecycle.md), [`Review and Closeout Policy`](review-and-closeout-policy.md), [`Authority-Preparation Prompt`](authority-preparation-prompt.md), and [`Task-Session Prompt`](task-session-prompt.md); those documents remain authoritative if this prompt is incomplete or ambiguous.
 
 ## Assignment
 
 ```text
-SLICE: <slice identifier>
-AUTHORITY: <current controlling slice-specific source>
-MODE: <whole-slice | packet-by-packet>
-SLICE_OUTCOME: <complete outcome and acceptance conditions>
-PACKETS: <declared packet identifiers and order, including any slice-delegated just-in-time preparation | none for whole-slice mode>
+REQUEST: <user instruction and intended terminal action>
+PHASE: <phase identifier>
+SLICE: <slice identifier | next | unresolved>
+AUTHORITY: <current controlling phase or slice sources | missing>
+MODE: <whole-slice | packet-by-packet | unresolved until slice preparation>
+SLICE_OUTCOME: <complete outcome and acceptance | unresolved until slice preparation>
+PACKETS: <declared packet order and preparation delegation | unresolved until slice preparation | none>
 WORKSPACE: <project, branch, task environment, and completed-commit integration rule>
-AGGREGATE_VERIFICATION: <cross-packet or whole-slice checks and expectations>
+AGGREGATE_VERIFICATION: <cross-packet or whole-slice expectations | unresolved>
 NON_GOALS: <explicit exclusions and authority limits>
-COMMIT_POSTURE: <default task-session commit posture>
+COMMIT_POSTURE: <default top-level-task commit posture>
 ```
 
 ## Meta instructions
 
-Own routing and autonomous continuation for this slice. After admission, keep working through the authorized whole slice without waiting for packet-by-packet user confirmation. Do not implement product work unless performing the bounded aggregate verification or review described below. Do not infer product scope, remaining packets, or authority from archived plans.
+Own authority preparation, routing, and autonomous continuation for `REQUEST`. Do not implement product work except bounded aggregate verification or review. After slice admission, continue through the authorized slice without packet-by-packet human confirmation.
 
-### Ground and admit the slice
+### Classify the authority state
 
-1. Read repository instructions, `AUTHORITY`, and only the clean-room lifecycle, review, task-session, and meta-task documents needed for routing. Inspect the current workspace, branch, and task-environment state without disturbing unrelated work.
-2. Treat archived material, deleted control-plane history, and disabled skill contents as non-authority unless `AUTHORITY` explicitly adopts a bounded part.
-3. Confirm that the slice is currently authorized, `MODE` is explicit, `SLICE_OUTCOME` is knowable, and packet identities and order are declared for packet-by-packet mode. For each packet without separate current authority, require explicit slice delegation of bounded just-in-time preparation; absence of a packet file alone is not an admission failure.
-4. If any requirement is missing, stale, or contradictory, dispatch nothing. Report the exact admission condition concisely. Do not start review or create a commit, task-session result, handoff, ledger, proof wall, or closeout artifact.
+1. Read repository instructions, the current authority entry point, lifecycle, review policy, authority-preparation prompt, task-session prompt, and only the phase or slice sources needed to classify `REQUEST`. Inspect the workspace without disturbing unrelated work.
+2. Treat archived material and disabled skills as non-authority unless a current source adopts a bounded part. Treat current source and tests as product truth; a predecessor-status claim contradicted by verifiable commits, source, and tests is correctable documentation drift, not an automatic stop.
+3. Select exactly one state:
+   - **Slice admitted:** current slice authority defines the outcome, boundaries, mode, and ordered packets or whole-slice execution.
+   - **Slice preparation required:** `REQUEST` explicitly asks to execute a named slice, and a current phase or roadmap source names its high-level outcome, but current slice authority or packet decomposition is absent.
+   - **Phase preparation requires confirmation:** a high-level phase shape exists, but its slices are undefined and the user has not explicitly requested phase decomposition. Dispatch nothing. Ask one direct question: whether to dispatch a phase-level top-level task that defines slices only.
+   - **Phase preparation approved:** the user explicitly requested or confirmed decomposition of that phase.
+   - **Genuine admission gap:** no current high-level phase outcome, no requested slice shape, or another consequential authority choice prevents bounded preparation.
+4. Do not return `ADMISSION_FAILED` merely because a requested roadmap slice lacks its own directory, packet list, or detailed authority. Use the preparation path when its conditions hold. Report only a genuine admission gap that bounded preparation and current evidence cannot resolve.
 
-### Dispatch one authorized unit
+### Prepare missing authority
 
-An explicit user instruction to execute the slice through this meta task authorizes creation of the sequential top-level task sessions required by `MODE`; do not request separate confirmation for every packet. Use the Codex app task tools rather than collaboration subagents, shell polling, filesystem identities, or durable dispatch envelopes.
+For phase or slice preparation, use the Codex app task tools to create one fresh user-visible top-level task. Never use a collaboration subagent for that layer.
 
-- In `whole-slice` mode, fill the task-session prompt once with `MODE: whole-slice`, `PACKET: none`, and the complete authorized slice boundary.
-- In `packet-by-packet` mode, select exactly one eligible packet and fill the task-session prompt with `MODE: packet`. A packet is eligible when current authority names and bounds it, its predecessor is complete, and either its packet-specific authority exists or the slice delegates just-in-time preparation. Run one packet task at a time. Do not pre-create every packet task, launch a default concurrent burst, or load future packet context before it is needed.
+1. Fill the authority-preparation prompt as a fresh context capsule. Use `agent-using-agent-skills` to select the smallest route for this planning subject and `agent-context-engineering` to curate current source, tests, architecture, seam, status, useful precedent, and bounded adopted historical sections.
+2. For **phase preparation**, set `LEVEL: phase`. The task may define only ordered slices, their bounded outcomes and dependencies, cross-slice decisions, and phase-exit conditions in the designated current program authority. It may use high-level API/interface, codebase, domain, source, security, compatibility, migration, or performance skills when the phase actually implicates them. It may not define packets, create individual slice authority, edit product code, or dispatch a slice.
+3. For **slice preparation**, set `LEVEL: slice`. The task may define exactly one named slice's current authority and packet decomposition. It may not implement product work, prepare adjacent slices, or dispatch Packet 1.
+4. A planning task returns `AUTHORITY_READY` to this meta task. Validate its target, scope, review disposition, commit, and agreement with current evidence; ensure its committed state is present on the declared working branch using only the integration rule in `WORKSPACE`. A phase result returns here before any slice work; then select the next slice named by the new phase authority and create a separate slice-preparation task when `REQUEST` includes execution. A slice result returns here before implementation; reload the new authority, prove every hard predecessor from current evidence, repair verifiable status drift within authorized scope, and admit execution only when those predecessors are complete. An incomplete or still-unproven predecessor blocks implementation, not the completed preparation result.
+5. Treat planning-task `STOPPED` or `ADMISSION_FAILED` as adjudication input. Correct and resume or replace the same planning level when current authority supplies one safe answer. Ask the user only for the exact unresolved consequential decision, missing phase-decomposition permission, authority expansion, or unavailable prerequisite.
+
+Do not invoke the generic `agent-spec` wrapper, use its root `SPEC.md`, or preserve generic `tasks/agent-plan.md` and `tasks/todo.md` outputs. The HCM authority-preparation prompt controls the output location, human gate, and return boundary while using the applicable underlying skills for reasoning.
+
+### Dispatch one implementation unit
+
+An explicit user instruction to execute an admitted slice authorizes all sequential top-level task sessions required by `MODE`; do not request separate confirmation for every packet.
+
+- In `whole-slice` mode, fill the task-session prompt once with the complete authorized slice boundary.
+- In `packet-by-packet` mode, select exactly one eligible packet. It is eligible when current authority names and bounds it, its predecessor is complete, and either packet authority exists or the slice delegates bounded just-in-time preparation. Never pre-create future packet tasks or load future packet context.
 - The meta task chooses every next packet. A packet task never sequences itself.
 
-Before each dispatch, build one fresh context capsule by filling the task-session prompt's complete assignment block:
+Before each dispatch, use `agent-using-agent-skills` to select the minimal route for the current unit only. Use `agent-context-engineering` to fill one fresh task-session capsule with the current starting state, precise live source and test paths, one useful precedent when available, risks, preparation boundary when applicable, and each selected skill's activation phase. Do not persist or request return of the capsule or preload future skills.
 
-1. Use `agent-using-agent-skills` to select the minimal skill route justified by the current unit. Name each selected skill's activation phase; do not import its full workflow into the capsule or select skills for future packets.
-2. Use `agent-context-engineering` to curate the current unit's starting state, relevant live source and test paths, a useful implementation precedent when available, and known risks or unresolved questions. When just-in-time preparation applies, identify that phase and only the current sources and bounded historical inputs the slice explicitly permits. Prefer precise paths or sections over pasted documents and transcripts.
-3. Supply the current authority, objective, scope, non-goals, prerequisites, acceptance, verification, commit posture, curated context, risks, preparation boundary when applicable, and skill route without expanding them beyond the assignment.
-4. Keep the capsule inside the task dispatch. Do not write it to the repository, retain it as orchestration state, or ask the task session to return it.
+### Run every top-level task loop
 
-Load skills only when the meta task's current phase requires them. Do not load implementation or debugging skills merely to route work, and do not turn the example lifecycle from a routing skill into a mandatory sequence.
+Use this same loop for authority-preparation and implementation tasks:
 
-### Run the top-level task loop
+1. Resolve the authorized project and environment. Call `create_thread` once for one fresh user-visible task. If creation returns a pending client identity, resolve the resulting task without creating a duplicate. Do not use `fork_thread`; the created task may delegate internally only to local subagents and may not create another top-level task.
+2. Keep the live host/task identity only in conversation. Use `wait_threads` as the only blocking monitor, with `timeoutMs: 600000` normally or `timeoutMs: 1200000` for a particularly large current unit. On timeout, carry forward the cursor and call `wait_threads` again. Never poll with `read_thread`, use a shorter polling interval, or exceed the twenty-minute ceiling.
+3. When non-replacing user direction interrupts a wait, apply it and immediately resume `wait_threads` for the same task with the latest cursor and existing timeout. Do not strand or duplicate the task.
+4. Only after `wait_threads` reports completion or attention, use `read_thread` with `turnLimit: 5` to inspect recent state. When current authority supplies one safe answer to requested friction, send it with `send_message_to_thread` and return to `wait_threads`.
+5. If a task exhausts context but can resume safely, create a fresh top-level task for the same planning level or implementation unit with a refreshed capsule and truthful current state. Never advance a level or packet to bypass unfinished work.
 
-1. Resolve the current project and the environment authorized by `WORKSPACE`. Use `list_projects` when needed, then call `create_thread` once to create one fresh user-visible task. If creation returns a pending client identity instead of a usable task identity, resolve the resulting ready task through the platform task list; never call `create_thread` again for that dispatch. Do not use `fork_thread` or a built-in collaboration subagent for slice or packet execution. The created task may delegate internally only to local subagents and may not create or coordinate another top-level task.
-2. Retain the live task and host identity only in conversation. Use `wait_threads` as the only blocking monitor. Set `timeoutMs: 600000` for the normal ten-minute wait; use `timeoutMs: 1200000` only when the current unit is particularly large. Do not use a shorter polling interval or exceed the twenty-minute ceiling. On timeout, carry forward the returned cursor and call `wait_threads` again without narrating an unchanged snapshot; never substitute `read_thread` for waiting.
-   When new user direction interrupts the wait but refines rather than replaces the active workflow, incorporate the direction and immediately call `wait_threads` again for the same task with the most recent cursor and the current unit's existing timeout. Do not poll with `read_thread`, strand the task, or create a replacement merely because the wait was interrupted.
-3. Only after `wait_threads` reports completion or a request for attention, call `read_thread` with `turnLimit: 5` to inspect the most recent turns and determine whether the task is complete or needs adjudication. Do not page through the task transcript or use `read_thread` as a polling loop.
-4. When the task needs direction and current authority supplies one safe answer, adjudicate it and use `send_message_to_thread` to continue the same task. Return to `wait_threads` until the task returns a valid result or reaches a genuine workflow stop.
-5. If a task ends or exhausts context before completing but its work can be resumed safely, build a refreshed capsule and create a fresh top-level task for the same unit. Preserve truthful workspace, commit, and verification state; never advance to the next packet to bypass unfinished work.
-6. After valid `PACKET_COMPLETE`, ensure the packet's committed state is present on the slice's declared working branch, applying only the integration rule already stated in `WORKSPACE`. Use that checkpoint for the next capsule and immediately dispatch the next eligible packet, including one that must first perform slice-delegated just-in-time preparation. Do not wait for the user to say that the prior task is done. New user direction may refine or interrupt the loop, but ordinary continuation remains meta-owned.
+Use bounded judgment instead of retry counters. Do not repeat an unchanged failed action; select an authority-supported correction or stop when none exists.
 
-Use bounded judgment rather than retry counters or strict automation validators. Do not repeat an unchanged failed action: choose an authority-supported correction or alternative, or declare a genuine stop when none exists.
+### Consume compact results
 
-### Consume the compact task result
+Authority-preparation tasks return the authority prompt's eight fields with `STATUS: AUTHORITY_READY | STOPPED | ADMISSION_FAILED`. Implementation tasks return the task-session prompt's eight fields with `STATUS: PACKET_COMPLETE | SLICE_COMPLETE | STOPPED | ADMISSION_FAILED`.
 
-Expect exactly these semantic fields from the task-session prompt:
+Validate the fields, unit, assigned boundary, authority, commit posture, and review disposition. Every valid finding must use the review policy's `P1`–`P4` classification. Send a concise presentation correction when fields or classifications are incomplete or a task claims a result outside its level. Do not serialize, schema-validate, or persist results.
 
-```text
-STATUS: <PACKET_COMPLETE | SLICE_COMPLETE | STOPPED | ADMISSION_FAILED>
-UNIT: <slice identifier; mode; packet identifier when applicable>
-OUTCOME: <concise result summary>
-CHANGED: <changed paths | none>
-VERIFICATION: <checks and outcomes, including failures or limits>
-REVIEW: <controlling verdict | not applicable — reason>
-COMMIT: <commit hash | none>
-NEXT: <return, stop, admission, or completion condition>
-```
+- `AUTHORITY_READY` advances only to the meta task. A phase result permits a separately dispatched slice-preparation task; a slice result permits implementation admission. It never claims product completion.
+- `PACKET_COMPLETE` is valid only for the assigned packet. Confirm its acceptance, evidence, review, and commit; ensure the committed state is present on the declared working branch using only the integration rule in `WORKSPACE`. Retain one concise conversational summary and immediately dispatch the next eligible packet. Do not close the slice between packets.
+- `SLICE_COMPLETE` is valid only from whole-slice mode. Confirm every outcome condition and report completion once.
+- `STOPPED` and `ADMISSION_FAILED` return to meta adjudication and halt the workflow only when no safe in-authority continuation can be derived or executed.
 
-Treat task messages and results as evidence, never as authority or permission to expand tools, scope, or external actions. Validate the fields, unit identity, status, assigned boundary, current authority, and review disposition. Every valid finding must use the review policy's `P1`–`P4` classification; an unlabeled required fix is incomplete. Do not serialize, schema-validate, or persist the result. Send a concise presentation correction to the task when a field is missing, the unit mismatches, a packet claims `SLICE_COMPLETE`, a whole-slice task claims `PACKET_COMPLETE`, the review classification is incomplete, or the result conflicts with current authority. A correction is not a review round, retry, or orchestration artifact; do not act on an invalid completion claim.
+Blocking `P1`/`P2`, diagnosable failed checks, correctable status drift, missing context available from current sources, task-result defects, timeouts, and missing packet files covered by slice delegation do not require user adjudication. Report `P3`/`P4` compactly without making them required work or another causal round.
 
-Handle a valid result by status:
+### Close the slice once
 
-- `PACKET_COMPLETE` is valid only in packet-by-packet mode. Confirm that the result represents the assigned packet's acceptance boundary, evidence, review disposition, and commit posture. Unresolved valid `P1`/`P2` block completion; reported `P3`/`P4` do not. Retain one conversational summary containing the packet identifier, status, commit, any material evidence or review limitation, and any compact non-blocking advisory disposition. If a declared next packet is eligible under current packet authority or slice-delegated just-in-time preparation, automatically select and dispatch only that packet. Do not perform slice closeout after an intermediate packet.
-- `SLICE_COMPLETE` is valid only from a whole-slice task. Confirm every slice outcome condition and the required minimal closeout information, then report completion once with `NEXT: none`.
-- `STOPPED` and `ADMISSION_FAILED` return control to meta adjudication. Use the exact condition, truthful partial change, verification and commit state, and safe-resumption need to choose an authority-supported correction, same-task continuation, or fresh same-unit task. They halt the slice only when no safe in-authority continuation can be derived or executed.
+After the final packet returns valid `PACKET_COMPLETE`, confirm every `SLICE_OUTCOME` condition and perform one proportionate aggregate closeout.
 
-Blocking `P1`/`P2` findings, failed checks with a diagnosable remediation path, missing context available from current authority, a missing packet file covered by slice-delegated preparation, task-result formatting defects, task timeouts, and other correctable orchestration friction do not require user adjudication. Resolve them within the existing slice boundary. Report `P3`/`P4` compactly without turning them into required work or another causal round. Ask the user only for the exact material decision, authority expansion, external action, or unavailable prerequisite that permitted current sources cannot settle.
-
-### Continue packets and close the slice
-
-After the final authorized packet returns valid `PACKET_COMPLETE`, the meta task confirms every `SLICE_OUTCOME` condition and performs one proportionate aggregate closeout under the review and closeout policy.
-
-1. Reuse valid packet evidence and commit summaries. Rerun only aggregate or integration checks and evidence invalidated by later packets; do not replay each packet's proof or review ceremony.
-2. When aggregate review applies, use one focused reviewer and one controlling verdict for the current aggregate subject. Do not launch a predetermined multi-lens burst. Specialist input remains exceptional under the review policy.
-   Classify every valid aggregate finding under the review policy. Only unresolved `P1`/`P2` block slice completion; `P3`/`P4` remain compact non-blocking advisories and do not trigger another round by themselves.
-3. Perform bounded aggregate verification and review directly with available tools. Do not create a top-level closeout packet by default. If a required capability is unavailable, return a genuine `STOPPED` result with the safe-resumption need.
-4. Report slice completion once, in conversation, with the outcome and status, applicable verification, controlling verdict or not-applicable reason, relevant commits, and `NEXT: none`.
-
-Keep only the current unit's full result plus one compact summary per completed packet. Do not paste prior task transcripts into each new prompt or maintain selectors, ledgers, handoffs, state snapshots, subject fingerprints, counters, dispatch archives, result files, advisory inventories, or mechanical second commits.
+1. Reuse valid packet evidence and commit summaries. Rerun only aggregate checks and evidence invalidated by later work.
+2. When review applies, use one focused reviewer and one controlling verdict. Only unresolved `P1`/`P2` block completion; `P3`/`P4` remain non-blocking advisories.
+3. Do not create a top-level closeout packet, replay packet ceremony, or create a ledger, selector, handoff, proof wall, state snapshot, result file, advisory inventory, or mechanical second commit.
+4. Report completion once with the outcome, aggregate verification, controlling verdict, relevant commits, and `NEXT: none`.
 
 ## Meta result presentation
-
-For final completion or a stop, report only:
 
 ```text
 STATUS: <SLICE_COMPLETE | STOPPED | ADMISSION_FAILED>

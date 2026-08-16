@@ -4,7 +4,7 @@ This is the authority and navigation entry point for the Handbook contract-membr
 
 ## Current status
 
-Commit `8c93d6f3eacf3312c935a6f83ff62244450dbf1b` removed the former control-plane documents and moved the former repository-local orchestration skill into the disabled historical area while preserving the implemented product and 37 product-consumed fixtures. A thin active router now operationalizes the approved clean-room lifecycle and prompts without supplying work authority.
+Commit `8c93d6f3eacf3312c935a6f83ff62244450dbf1b` removed the former control-plane documents and moved the former repository-local orchestration skill into the disabled historical area while preserving the implemented product and 37 product-consumed fixtures. A thin active router now operationalizes bounded authority preparation and execution without supplying product scope or unresolved decisions.
 
 At this checkpoint:
 
@@ -35,11 +35,12 @@ Use the source that owns the question:
 | What is the current program-level authority boundary? | This file. It owns only post-reset authority classification and navigation. |
 | What are the execution units and their lifecycle boundaries? | [`work-unit-lifecycle.md`](work-unit-lifecycle.md) defines slice and packet identity, ownership, completion, and genuine workflow stops. |
 | What verification, review, and closeout apply at those boundaries? | [`review-and-closeout-policy.md`](review-and-closeout-policy.md) defines proportionate evidence, causal review rounds, escalation, and minimal closeout information. |
+| How is missing phase or slice authority prepared at the correct level? | [`authority-preparation-prompt.md`](authority-preparation-prompt.md) defines separate phase-to-slice and slice-to-packet top-level planning tasks. Each returns to the meta task before the next level. |
 | How is one authorized slice or packet assigned to a top-level task session? | [`task-session-prompt.md`](task-session-prompt.md) provides the copy/paste-ready assignment prompt and compact result presentation. |
-| How does a meta task route and continue one authorized slice? | [`meta-task-prompt.md`](meta-task-prompt.md) provides the copy/paste-ready routing prompt for whole-slice or sequential packet execution and one aggregate closeout. |
-| Where is the active routing entry point? | [`.codex/skills/orchestrate-top-level-tasks/SKILL.md`](../../../.codex/skills/orchestrate-top-level-tasks/SKILL.md) operationalizes role-specific routing for already-authorized work. It does not authorize product or slice work. |
+| How does a meta task prepare and continue requested HCM work? | [`meta-task-prompt.md`](meta-task-prompt.md) routes approved phase preparation, requested-slice preparation, whole-slice or sequential packet execution, and one aggregate closeout. |
+| Where is the active routing entry point? | [`.codex/skills/orchestrate-top-level-tasks/SKILL.md`](../../../.codex/skills/orchestrate-top-level-tasks/SKILL.md) operationalizes role-specific preparation and execution. User instructions and current authority supply permission and scope; the skill does not invent either. |
 | What is the current HCM-4.2 outcome and packet boundary? | [`slices/HCM-4.2/README.md`](slices/HCM-4.2/README.md) owns the complete slice outcome, implemented Packets 0–1, invariants, Packet 2–5 decomposition, and delegated just-in-time preparation. [`Packet 1`](slices/HCM-4.2/packet-1-schema-generation.md) records its completed decisions; Packet 2 is next. |
-| Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. The HCM-4.2 authority is the current example: slice authority must explicitly define whether and how execution is delegated; a roadmap listing never does. |
+| Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 
 If prose about implemented behavior conflicts with the current source and tests, treat the discrepancy as documentation drift; do not use the prose to override the product.
