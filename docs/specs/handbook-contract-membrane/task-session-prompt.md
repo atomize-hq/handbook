@@ -45,7 +45,7 @@ When the assigned packet already has complete current authority, proceed from it
 
 1. Use the current slice authority, live source and tests, and current architecture, seam, baseline, and program documents named in the capsule. Read historical planning only where the slice explicitly adopts a bounded input for this packet; historical status, authority claims, and ceremony remain inactive.
 2. Resolve each material packet decision against those sources. If they yield one safe in-scope answer, record a compact packet authority or decision checkpoint when it will prevent drift. The slice-level delegation supplies scope; the checkpoint only records or refines the selected answer.
-3. Before product edits, review newly selected material decisions through one focused causal round. Resolve actionable findings within current authority. A separate authority commit is allowed when it forms a meaningful implementation checkpoint, but is not required mechanically.
+3. Before product edits, review newly selected material decisions through one focused causal round. Classify every valid finding under the review policy. Resolve blocking `P1`/`P2` findings within current authority; report `P3`/`P4` advisories without treating them as required work. A separate authority commit is allowed when it forms a meaningful implementation checkpoint, but is not required mechanically.
 4. If permitted sources conflict or leave more than one consequential answer and current authority cannot select one, return `STOPPED` before product edits with that exact decision and required authority. Do not turn documentation absence by itself into a stop.
 
 After successful preparation, continue directly into implementation in this task. Do not return merely to obtain user confirmation, and do not create a separate top-level planning task.
@@ -55,13 +55,16 @@ After successful preparation, continue directly into implementation in this task
 1. Complete the bounded change or read-only task within `ALLOWED_SCOPE` and `NON_GOALS`. Work directly or coordinate local collaboration subagents when delegation helps. Do not create, fork, monitor, or coordinate another user-visible top-level task; the meta task alone owns that layer. Remain responsible for all delegated work and the final task result.
 2. Follow repository instructions. For this repository, that includes GitNexus impact analysis before editing an indexed function, class, or method; warning before a HIGH or CRITICAL impact edit; and change detection before committing.
 3. Verify against `ACCEPTANCE`, `VERIFICATION`, and measured risk. Prefer focused checks when they are sufficient. Do not manufacture an omnibus proof wall or rerun unrelated workspace suites by default.
-4. Remediate failed checks, review findings, and other friction when current authority supplies an in-scope path. Report failures, omissions, and environmental limits honestly.
+4. Remediate failed checks, blocking `P1`/`P2` findings, and other required friction when current authority supplies an in-scope path. Report `P3`/`P4` advisories, failures, omissions, and environmental limits honestly; do not turn advisories into required work.
 
 ### Review
 
 Apply the review and closeout policy to the exact bounded subject.
 
 - When review applies, use one focused reviewer and one controlling verdict for the current causal round. Do not launch a predetermined concurrent multi-lens burst.
+- Require every valid finding to be labeled `P1 Critical`, `P2 Required`, `P3 Optional/Consider`, or `P4 Nit`. An unlabeled required fix is not a complete review disposition.
+- Only `P1`/`P2` block completion and require remediation plus a later causal round on the materially changed subject. `P3`/`P4` are non-blocking and do not require remediation or re-review solely because they were reported.
+- A clean, proceed, or approve verdict means no unresolved valid `P1`/`P2` and may include compactly reported `P3`/`P4`. Do not create an advisory inventory or transcription step.
 - Material remediation may require one later causal round on the changed subject. Do not re-review an unchanged subject.
 - Request specialist input only for a named, unresolved measured-risk question that the focused reviewer cannot adequately cover. An eligible risk category does not automatically add a reviewer.
 - Do not create a review cycle for admission failure or ordinary continuation.
@@ -84,7 +87,7 @@ UNIT: <slice identifier; mode; packet identifier when applicable>
 OUTCOME: <concise result summary>
 CHANGED: <changed paths | none>
 VERIFICATION: <checks and outcomes, including failures or limits>
-REVIEW: <controlling verdict | not applicable — reason>
+REVIEW: <controlling verdict and compact P1–P4 disposition | not applicable — reason>
 COMMIT: <commit hash | none>
 NEXT: <return to meta-task decision | exact stop or admission condition and resumption need | none>
 ```

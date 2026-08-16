@@ -29,11 +29,28 @@ When review applies, begin a round only after a bounded subject is ready for eva
 
 Review applies when acceptance conditions or repository policy require it, or when a measured risk calls for independent evaluation. Do not create a review round merely because a task or packet started, a delegation occurred, or work advanced to another phase.
 
-The default round uses exactly one focused reviewer. The reviewer evaluates the subject and its evidence, states actionable findings with their significance, and returns one verdict. Do not launch a predetermined multi-lens burst or derive reviewer count from phase, packet count, task size, or the start of a task session.
+The default round uses exactly one focused reviewer. The reviewer evaluates the subject and its evidence, classifies every valid finding under the priority rubric below, and returns one verdict. Do not launch a predetermined multi-lens burst or derive reviewer count from phase, packet count, task size, or the start of a task session.
 
-If material remediation updates the subject and review remains applicable, conduct one subsequent causal review round with one focused reviewer. Do not re-review an unchanged subject. Ordinary continuation, delegation, verification, or packet sequencing does not create another round.
+### Finding priority and disposition
 
-A finding directly caused or unmasked by remediation may justify a later causal round after the subject changes again. A finding that requires unrelated authority or scope expansion follows the lifecycle's genuine-stop rules; it must not silently widen into a review cascade.
+Use the highest priority demonstrated against the selected review subject and its authorized outcome:
+
+| Priority | Review label | Meaning | Required disposition |
+|---|---|---|---|
+| `P1` | Critical | Completion would permit demonstrated data loss, a security-boundary break, authority corruption, unsafe mutation, or materially false success. | Blocking. Remediate and verify within current authority, then conduct one fresh causal round on the changed subject; otherwise use a genuine workflow stop. |
+| `P2` | Required | The subject violates its selected contract or acceptance boundary, has reachable incorrect behavior or an authority bypass, lacks required fail-closed behavior, or lacks evidence required to support completion. | Blocking. Remediate and verify within current authority, then conduct one fresh causal round on the changed subject; otherwise use a genuine workflow stop. |
+| `P3` | Optional / Consider | A defense-in-depth, maintainability, robustness, or additional-coverage improvement is plausible, but no selected contract or acceptance violation is demonstrated. | Non-blocking. Report it compactly; remediation and re-review are not required solely for this advisory. |
+| `P4` | Nit | Naming, phrasing, formatting, local consistency, or another observation has no correctness or authority effect. | Non-blocking. Report it compactly; remediation and re-review are not required solely for this advisory. |
+
+Priority follows the integrated selected outcome, not the severity of an isolated component observation. Do not classify an improvement as `P2` merely because it would be useful. When evidence cannot distinguish `P2` from `P3`, state the missing evidence and resolve that uncertainty before completion.
+
+A verdict requiring remediation contains at least one valid `P1` or `P2`. A clean, proceed, or approve verdict means no unresolved valid `P1` or `P2`; it may include `P3` or `P4` advisories. `P3` and `P4` alone do not block completion or trigger another causal round. If optional advisory work is nevertheless performed and materially changes the subject, the ordinary changed-subject review rule still applies.
+
+Keep advisory disposition in the compact review result and conversational packet or slice summary. This policy does not create an advisory inventory, backlog file, transcription step, or other durable orchestration state.
+
+If blocking `P1` or `P2` remediation, or another voluntary material change, updates the subject and review remains applicable, conduct one subsequent causal review round with one focused reviewer. Do not re-review an unchanged subject. Ordinary continuation, delegation, verification, packet sequencing, or an unfixed `P3` or `P4` advisory does not create another round.
+
+A blocking `P1` or `P2` finding directly caused or unmasked by the immediately preceding remediation may justify one next causal round only while scope, authority, and measured risk remain unchanged. That later round is delta-focused; it must not reopen general discovery. A `P3` or `P4` advisory does not justify another round. An unrelated finding or one requiring authority, scope, or risk expansion follows the lifecycle's genuine-stop rules; it must not silently widen into a review cascade.
 
 Do not add discovery, closure, or supplemental review phases, fixed round budgets, counters, selectors, or lineage records around this causal sequence.
 
