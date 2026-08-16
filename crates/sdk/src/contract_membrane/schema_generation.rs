@@ -846,6 +846,511 @@ impl_schema!(CatalogPage, "CatalogPage", |generator| closed_object(
     &["root", "entries", "next_cursor", "page_fingerprint"],
 ));
 
+impl_schema!(
+    CatalogPageSize,
+    "CatalogPageSize",
+    |_generator| json_schema!({
+        "type": "integer", "minimum": 1, "maximum": 128
+    })
+);
+
+impl_string_enum!(
+    BootstrapRefusalReason,
+    "BootstrapRefusalReason",
+    [
+        "stale_descriptor",
+        "tampered_descriptor",
+        "unsupported_api_version",
+        "unsupported_api_major",
+        "cross_major_descriptor",
+    ]
+);
+
+impl_schema!(BootstrapCeilings, "BootstrapCeilings", |_generator| {
+    closed_object(
+        vec![
+            (
+                "bootstrap_request_max_bytes",
+                json_schema!({"const": 1_048_576}),
+            ),
+            (
+                "bootstrap_response_max_bytes",
+                json_schema!({"const": 1_048_576}),
+            ),
+            (
+                "ordinary_request_max_bytes",
+                json_schema!({"const": 1_048_576}),
+            ),
+            (
+                "ordinary_response_max_bytes",
+                json_schema!({"const": 1_048_576}),
+            ),
+            ("catalog_page_size_max", json_schema!({"const": 128})),
+            ("catalog_entry_max_bytes", json_schema!({"const": 65_536})),
+            ("catalog_total_entries_max", json_schema!({"const": 128})),
+            ("owner_versions_max_items", json_schema!({"const": 128})),
+            ("idempotency_key_max_bytes", json_schema!({"const": 65_536})),
+            (
+                "bridge_recovery_record_max_bytes",
+                json_schema!({"const": 1_048_576}),
+            ),
+        ],
+        &[
+            "bootstrap_request_max_bytes",
+            "bootstrap_response_max_bytes",
+            "ordinary_request_max_bytes",
+            "ordinary_response_max_bytes",
+            "catalog_page_size_max",
+            "catalog_entry_max_bytes",
+            "catalog_total_entries_max",
+            "owner_versions_max_items",
+            "idempotency_key_max_bytes",
+            "bridge_recovery_record_max_bytes",
+        ],
+    )
+});
+
+impl_schema!(
+    BootstrapSchemaBindings,
+    "BootstrapSchemaBindings",
+    |generator| {
+        let mut binding = || generator.subschema_for::<ExactBinding>();
+        closed_object(
+            vec![
+                ("descriptor_schema", binding()),
+                ("bootstrap_request", binding()),
+                ("bootstrap_response", binding()),
+                ("bootstrap_refusal", binding()),
+                ("bootstrap_refusal_details", binding()),
+                ("capability_entry", binding()),
+                ("owner_version_entry", binding()),
+                ("profile_catalog_entry", binding()),
+                ("catalog_roots", binding()),
+                ("catalog_root", binding()),
+                ("typed_catalog_cursor", binding()),
+                ("capability_catalog_page", binding()),
+                ("schema_catalog_page", binding()),
+                ("profile_catalog_page", binding()),
+                ("catalog_read_blocked", binding()),
+                ("operation_definition", binding()),
+                ("operation_request", binding()),
+                ("operation_response", binding()),
+                ("operation_admission_refusal", binding()),
+            ],
+            &[
+                "descriptor_schema",
+                "bootstrap_request",
+                "bootstrap_response",
+                "bootstrap_refusal",
+                "bootstrap_refusal_details",
+                "capability_entry",
+                "owner_version_entry",
+                "profile_catalog_entry",
+                "catalog_roots",
+                "catalog_root",
+                "typed_catalog_cursor",
+                "capability_catalog_page",
+                "schema_catalog_page",
+                "profile_catalog_page",
+                "catalog_read_blocked",
+                "operation_definition",
+                "operation_request",
+                "operation_response",
+                "operation_admission_refusal",
+            ],
+        )
+    }
+);
+
+impl_schema!(
+    BootstrapDescriptorV1,
+    "BootstrapDescriptorV1",
+    |generator| closed_object(
+        vec![
+            ("schema", generator.subschema_for::<ExactBinding>()),
+            ("descriptor", generator.subschema_for::<ExactRef>()),
+            ("api_version", generator.subschema_for::<SemVer>()),
+            ("api_major", json_schema!({"const": 1})),
+            (
+                "supported_api_versions",
+                generator.subschema_for::<BoundedVec<SemVer, 16>>()
+            ),
+            (
+                "schemas",
+                generator.subschema_for::<BootstrapSchemaBindings>()
+            ),
+            ("ceilings", generator.subschema_for::<BootstrapCeilings>()),
+            (
+                "declared_transports",
+                generator.subschema_for::<BoundedVec<OperationTransport, 3>>()
+            ),
+            (
+                "descriptor_content_fingerprint",
+                generator.subschema_for::<Fingerprint>()
+            ),
+        ],
+        &[
+            "schema",
+            "descriptor",
+            "api_version",
+            "api_major",
+            "supported_api_versions",
+            "schemas",
+            "ceilings",
+            "declared_transports",
+            "descriptor_content_fingerprint"
+        ],
+    )
+);
+
+impl_schema!(BootstrapRequestV1, "BootstrapRequestV1", |generator| {
+    closed_object(
+        vec![
+            ("schema", generator.subschema_for::<ExactBinding>()),
+            ("request_id", nullable::<RequestId>(generator)),
+            (
+                "bootstrap_descriptor",
+                generator.subschema_for::<ExactBinding>(),
+            ),
+            ("api_version", generator.subschema_for::<SemVer>()),
+            ("page_size", generator.subschema_for::<CatalogPageSize>()),
+            (
+                "request_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "schema",
+            "request_id",
+            "bootstrap_descriptor",
+            "api_version",
+            "page_size",
+            "request_fingerprint",
+        ],
+    )
+});
+
+impl_schema!(OwnerVersionEntry, "OwnerVersionEntry", |generator| {
+    closed_object(
+        vec![
+            (
+                "owner_crate",
+                generator.subschema_for::<BoundedString<255>>(),
+            ),
+            ("owner_version", generator.subschema_for::<SemVer>()),
+            ("source", generator.subschema_for::<ExactBinding>()),
+            (
+                "entry_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "owner_crate",
+            "owner_version",
+            "source",
+            "entry_fingerprint",
+        ],
+    )
+});
+
+impl_schema!(ProfileCatalogEntry, "ProfileCatalogEntry", |generator| {
+    closed_object(
+        vec![
+            ("profile", generator.subschema_for::<ExactBinding>()),
+            ("source", generator.subschema_for::<ExactBinding>()),
+            (
+                "entry_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &["profile", "source", "entry_fingerprint"],
+    )
+});
+
+impl_schema!(CapabilityEntry, "CapabilityEntry", |generator| {
+    closed_object(
+        vec![
+            ("operation", generator.subschema_for::<ExactBinding>()),
+            ("owner", generator.subschema_for::<OperationOwnerBinding>()),
+            ("request_schema", generator.subschema_for::<ExactBinding>()),
+            ("result_schema", generator.subschema_for::<ExactBinding>()),
+            (
+                "outcome_schemas",
+                generator.subschema_for::<OperationOutcomeSchemas>(),
+            ),
+            (
+                "required_capabilities",
+                generator.subschema_for::<BoundedVec<ExactBinding, 128>>(),
+            ),
+            ("class", generator.subschema_for::<OperationClass>()),
+            (
+                "idempotency",
+                generator.subschema_for::<OperationIdempotency>(),
+            ),
+            (
+                "declared_transports",
+                generator.subschema_for::<BoundedVec<OperationTransport, 3>>(),
+            ),
+            (
+                "current_transports",
+                generator.subschema_for::<BoundedVec<OperationTransport, 3>>(),
+            ),
+            ("deprecation", nullable::<ExactBinding>(generator)),
+            (
+                "entry_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "operation",
+            "owner",
+            "request_schema",
+            "result_schema",
+            "outcome_schemas",
+            "required_capabilities",
+            "class",
+            "idempotency",
+            "declared_transports",
+            "current_transports",
+            "deprecation",
+            "entry_fingerprint",
+        ],
+    )
+});
+
+impl_schema!(CatalogRoots, "CatalogRoots", |generator| closed_object(
+    vec![
+        ("schema", generator.subschema_for::<ExactBinding>()),
+        ("operations", generator.subschema_for::<CatalogRoot>()),
+        ("schemas", generator.subschema_for::<CatalogRoot>()),
+        ("profiles", generator.subschema_for::<CatalogRoot>()),
+        (
+            "roots_fingerprint",
+            generator.subschema_for::<Fingerprint>()
+        ),
+    ],
+    &[
+        "schema",
+        "operations",
+        "schemas",
+        "profiles",
+        "roots_fingerprint"
+    ],
+));
+
+impl_schema!(TypedCatalogCursor, "TypedCatalogCursor", |generator| {
+    closed_object(
+        vec![
+            ("schema", generator.subschema_for::<ExactBinding>()),
+            ("api_major", json_schema!({"const": 1})),
+            ("catalog", generator.subschema_for::<ExactBinding>()),
+            ("page_size", generator.subschema_for::<CatalogPageSize>()),
+            ("next_index", generator.subschema_for::<SafeU64>()),
+            ("next_sort_key", generator.subschema_for::<ExactRef>()),
+            ("expires_at_utc", generator.subschema_for::<UtcTimestamp>()),
+            (
+                "cursor_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "schema",
+            "api_major",
+            "catalog",
+            "page_size",
+            "next_index",
+            "next_sort_key",
+            "expires_at_utc",
+            "cursor_fingerprint",
+        ],
+    )
+});
+
+impl<T> JsonSchema for TypedCatalogPage<T>
+where
+    T: JsonSchema + TypedCatalogEntry,
+{
+    fn schema_name() -> Cow<'static, str> {
+        format!("TypedCatalogPage_{}", T::schema_name()).into()
+    }
+
+    fn schema_id() -> Cow<'static, str> {
+        format!(
+            "handbook_sdk::contract_membrane::TypedCatalogPage<{}>",
+            T::schema_id()
+        )
+        .into()
+    }
+
+    fn json_schema(generator: &mut SchemaGenerator) -> Schema {
+        closed_object(
+            vec![
+                ("schema", generator.subschema_for::<ExactBinding>()),
+                ("api_major", json_schema!({"const": 1})),
+                ("root", generator.subschema_for::<CatalogRoot>()),
+                ("page_size", generator.subschema_for::<CatalogPageSize>()),
+                ("start_index", generator.subschema_for::<SafeU64>()),
+                ("entries", generator.subschema_for::<BoundedVec<T, 128>>()),
+                ("next_cursor", nullable::<TypedCatalogCursor>(generator)),
+                ("page_fingerprint", generator.subschema_for::<Fingerprint>()),
+            ],
+            &[
+                "schema",
+                "api_major",
+                "root",
+                "page_size",
+                "start_index",
+                "entries",
+                "next_cursor",
+                "page_fingerprint",
+            ],
+        )
+    }
+}
+
+impl_schema!(BootstrapResponseV1, "BootstrapResponseV1", |generator| {
+    closed_object(
+        vec![
+            ("schema", generator.subschema_for::<ExactBinding>()),
+            ("request_id", nullable::<RequestId>(generator)),
+            (
+                "request_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+            ("status", json_schema!({"const": "ok"})),
+            (
+                "descriptor",
+                generator.subschema_for::<BootstrapDescriptorV1>(),
+            ),
+            ("catalog_roots", generator.subschema_for::<CatalogRoots>()),
+            (
+                "first_capability_page",
+                generator.subschema_for::<CapabilityCatalogPage>(),
+            ),
+            (
+                "owner_versions",
+                generator.subschema_for::<BoundedVec<OwnerVersionEntry, 128>>(),
+            ),
+            (
+                "schema_manifest",
+                generator.subschema_for::<BoundedVec<SchemaManifestEntry, 128>>(),
+            ),
+            (
+                "response_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "schema",
+            "request_id",
+            "request_fingerprint",
+            "status",
+            "descriptor",
+            "catalog_roots",
+            "first_capability_page",
+            "owner_versions",
+            "schema_manifest",
+            "response_fingerprint",
+        ],
+    )
+});
+
+impl_schema!(
+    BootstrapRefusalDetails,
+    "BootstrapRefusalDetails",
+    |generator| closed_object(
+        vec![
+            (
+                "reason",
+                generator.subschema_for::<BootstrapRefusalReason>()
+            ),
+            (
+                "supported_api_versions",
+                generator.subschema_for::<BoundedVec<SemVer, 16>>()
+            ),
+        ],
+        &["reason", "supported_api_versions"],
+    )
+);
+
+impl_schema!(BootstrapRefusalV1, "BootstrapRefusalV1", |generator| {
+    closed_object(
+        vec![
+            ("schema", generator.subschema_for::<ExactBinding>()),
+            ("request_id", nullable::<RequestId>(generator)),
+            (
+                "request_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+            ("bootstrap_descriptor", nullable::<ExactBinding>(generator)),
+            ("status", json_schema!({"const": "refused"})),
+            ("data", json_schema!({"type": "null"})),
+            ("blockers", json_schema!({"type": "array", "maxItems": 0})),
+            (
+                "refusals",
+                json_schema!({"type": "array", "items": generator.subschema_for::<Problem>(), "minItems": 1, "maxItems": 1}),
+            ),
+            ("errors", json_schema!({"type": "array", "maxItems": 0})),
+            (
+                "schema_manifest",
+                generator.subschema_for::<BoundedVec<SchemaManifestEntry, 128>>(),
+            ),
+            (
+                "response_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "schema",
+            "request_id",
+            "request_fingerprint",
+            "bootstrap_descriptor",
+            "status",
+            "data",
+            "blockers",
+            "refusals",
+            "errors",
+            "schema_manifest",
+            "response_fingerprint",
+        ],
+    )
+});
+
+impl_schema!(CatalogReadBlockedV1, "CatalogReadBlockedV1", |generator| {
+    closed_object(
+        vec![
+            ("schema", generator.subschema_for::<ExactBinding>()),
+            ("api_major", json_schema!({"const": 1})),
+            ("catalog", generator.subschema_for::<ExactBinding>()),
+            ("status", json_schema!({"const": "blocked"})),
+            ("data", json_schema!({"type": "null"})),
+            (
+                "blockers",
+                json_schema!({"type": "array", "items": generator.subschema_for::<Problem>(), "minItems": 1, "maxItems": 1}),
+            ),
+            ("refusals", json_schema!({"type": "array", "maxItems": 0})),
+            ("errors", json_schema!({"type": "array", "maxItems": 0})),
+            ("restart_from_first_page", json_schema!({"const": true})),
+            (
+                "response_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "schema",
+            "api_major",
+            "catalog",
+            "status",
+            "data",
+            "blockers",
+            "refusals",
+            "errors",
+            "restart_from_first_page",
+            "response_fingerprint",
+        ],
+    )
+});
+
 impl_schema!(IdempotencyState, "IdempotencyState", |generator| {
     let not_applicable = closed_object(
         vec![(
@@ -954,10 +1459,38 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 22] = [
+const INVENTORY: [SchemaDescriptor; 36] = [
     descriptor::<ArtifactRef>(
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
+    ),
+    descriptor::<BootstrapDescriptorV1>(
+        "handbook.bootstrap-descriptor-schema@1.0.0",
+        "handbook.bootstrap-descriptor-schema/1.0.0.schema.json",
+    ),
+    descriptor::<BootstrapRefusalDetails>(
+        "handbook.bootstrap-refusal-details@1.0.0",
+        "handbook.bootstrap-refusal-details/1.0.0.schema.json",
+    ),
+    descriptor::<BootstrapRefusalV1>(
+        "handbook.bootstrap-refusal@1.0.0",
+        "handbook.bootstrap-refusal/1.0.0.schema.json",
+    ),
+    descriptor::<BootstrapRequestV1>(
+        "handbook.bootstrap-request@1.0.0",
+        "handbook.bootstrap-request/1.0.0.schema.json",
+    ),
+    descriptor::<BootstrapResponseV1>(
+        "handbook.bootstrap-response@1.0.0",
+        "handbook.bootstrap-response/1.0.0.schema.json",
+    ),
+    descriptor::<CapabilityCatalogPage>(
+        "handbook.capability-catalog-page@1.0.0",
+        "handbook.capability-catalog-page/1.0.0.schema.json",
+    ),
+    descriptor::<CapabilityEntry>(
+        "handbook.capability-entry@1.0.0",
+        "handbook.capability-entry/1.0.0.schema.json",
     ),
     descriptor::<CatalogCursor>(
         "handbook.catalog-cursor@1.0.0",
@@ -967,9 +1500,17 @@ const INVENTORY: [SchemaDescriptor; 22] = [
         "handbook.catalog-page@1.0.0",
         "handbook.catalog-page/1.0.0.schema.json",
     ),
+    descriptor::<CatalogReadBlockedV1>(
+        "handbook.catalog-read-blocked@1.0.0",
+        "handbook.catalog-read-blocked/1.0.0.schema.json",
+    ),
     descriptor::<CatalogRoot>(
         "handbook.catalog-root@1.0.0",
         "handbook.catalog-root/1.0.0.schema.json",
+    ),
+    descriptor::<CatalogRoots>(
+        "handbook.catalog-roots@1.0.0",
+        "handbook.catalog-roots/1.0.0.schema.json",
     ),
     descriptor::<CorrelationRef>(
         "handbook.correlation-ref@1.0.0",
@@ -1019,6 +1560,10 @@ const INVENTORY: [SchemaDescriptor; 22] = [
         "handbook.operation-response@1.0.0",
         "handbook.operation-response/1.0.0.schema.json",
     ),
+    descriptor::<OwnerVersionEntry>(
+        "handbook.owner-version-entry@1.0.0",
+        "handbook.owner-version-entry/1.0.0.schema.json",
+    ),
     descriptor::<ProblemBinding>(
         "handbook.problem-binding@1.0.0",
         "handbook.problem-binding/1.0.0.schema.json",
@@ -1027,9 +1572,21 @@ const INVENTORY: [SchemaDescriptor; 22] = [
         "handbook.problem@1.0.0",
         "handbook.problem/1.0.0.schema.json",
     ),
+    descriptor::<ProfileCatalogEntry>(
+        "handbook.profile-catalog-entry@1.0.0",
+        "handbook.profile-catalog-entry/1.0.0.schema.json",
+    ),
+    descriptor::<ProfileCatalogPage>(
+        "handbook.profile-catalog-page@1.0.0",
+        "handbook.profile-catalog-page/1.0.0.schema.json",
+    ),
     descriptor::<RecheckCondition>(
         "handbook.recheck-condition@1.0.0",
         "handbook.recheck-condition/1.0.0.schema.json",
+    ),
+    descriptor::<SchemaCatalogPage>(
+        "handbook.schema-catalog-page@1.0.0",
+        "handbook.schema-catalog-page/1.0.0.schema.json",
     ),
     descriptor::<SchemaManifestEntry>(
         "handbook.schema-manifest-entry@1.0.0",
@@ -1038,6 +1595,10 @@ const INVENTORY: [SchemaDescriptor; 22] = [
     descriptor::<SourceBinding>(
         "handbook.source-binding@1.0.0",
         "handbook.source-binding/1.0.0.schema.json",
+    ),
+    descriptor::<TypedCatalogCursor>(
+        "handbook.typed-catalog-cursor@1.0.0",
+        "handbook.typed-catalog-cursor/1.0.0.schema.json",
     ),
     descriptor::<WriteReceipt>(
         "handbook.write-receipt@1.0.0",
@@ -1104,8 +1665,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 22 {
-        return Err("schema inventory must contain exactly 22 entries".to_owned());
+    if INVENTORY.len() != 36 {
+        return Err("schema inventory must contain exactly 36 entries".to_owned());
     }
 
     let mut previous_ref = None;

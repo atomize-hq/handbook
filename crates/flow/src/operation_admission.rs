@@ -50,6 +50,23 @@ pub enum OwnerAdmissionRefusal {
     DefinitionMismatch,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct OwnerVersionEvidence {
+    pub owner_crate: &'static str,
+    pub owner_version: &'static str,
+    pub owner_source_ref: &'static str,
+    pub source_bytes: &'static [u8],
+}
+
+pub fn operation_owner_version_evidence() -> OwnerVersionEvidence {
+    OwnerVersionEvidence {
+        owner_crate: env!("CARGO_PKG_NAME"),
+        owner_version: env!("CARGO_PKG_VERSION"),
+        owner_source_ref: "handbook.owner.flow@0.1.1",
+        source_bytes: include_bytes!("operation_admission.rs"),
+    }
+}
+
 pub fn admit_contract_operation(
     claim: &OperationAdmissionClaim<'_>,
 ) -> Result<OwnerOperationAdmission, OwnerAdmissionRefusal> {

@@ -50,6 +50,56 @@ pub enum OwnerAdmissionRefusal {
     DefinitionMismatch,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct OwnerVersionEvidence {
+    pub owner_crate: &'static str,
+    pub owner_version: &'static str,
+    pub owner_source_ref: &'static str,
+    pub source_bytes: &'static [u8],
+}
+
+pub fn operation_owner_version_evidence() -> OwnerVersionEvidence {
+    OwnerVersionEvidence {
+        owner_crate: env!("CARGO_PKG_NAME"),
+        owner_version: env!("CARGO_PKG_VERSION"),
+        owner_source_ref: "handbook.owner.engine@0.2.0",
+        source_bytes: include_bytes!("operation_admission.rs"),
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ShippedProfileEvidence {
+    pub profile_ref: &'static str,
+    pub source_ref: &'static str,
+    pub source_bytes: &'static [u8],
+}
+
+pub fn shipped_profile_evidence() -> [ShippedProfileEvidence; 3] {
+    [
+        ShippedProfileEvidence {
+            profile_ref: "handbook.profile.shipped-root@1.0.0",
+            source_ref: "handbook.profile-source.shipped-root@1.0.0",
+            source_bytes: include_bytes!(
+                "../definitions/profiles/handbook.profile.shipped-root/1.0.0.yaml"
+            ),
+        },
+        ShippedProfileEvidence {
+            profile_ref: "handbook.profile.shipped-root@1.1.0",
+            source_ref: "handbook.profile-source.shipped-root@1.1.0",
+            source_bytes: include_bytes!(
+                "../definitions/profiles/handbook.profile.shipped-root/1.1.0.yaml"
+            ),
+        },
+        ShippedProfileEvidence {
+            profile_ref: "handbook.profile.shipped-root@1.2.0",
+            source_ref: "handbook.profile-source.shipped-root@1.2.0",
+            source_bytes: include_bytes!(
+                "../definitions/profiles/handbook.profile.shipped-root/1.2.0.yaml"
+            ),
+        },
+    ]
+}
+
 pub fn admit_contract_operation(
     claim: &OperationAdmissionClaim<'_>,
 ) -> Result<OwnerOperationAdmission, OwnerAdmissionRefusal> {
@@ -260,5 +310,28 @@ mod tests {
         assert_substitution_refused!(idempotency_fingerprint, "different");
         assert_substitution_refused!(write_set_fingerprint, "different");
         assert_substitution_refused!(required_capabilities_fingerprint, "different");
+    }
+
+    #[test]
+    fn owner_version_and_profile_evidence_are_owner_native_checked_in_bytes() {
+        let owner = operation_owner_version_evidence();
+        assert_eq!(owner.owner_crate, "handbook-engine");
+        assert_eq!(owner.owner_version, "0.2.0");
+        assert_eq!(owner.owner_source_ref, "handbook.owner.engine@0.2.0");
+        assert!(!owner.source_bytes.is_empty());
+
+        let profiles = shipped_profile_evidence();
+        assert_eq!(profiles.len(), 3);
+        assert_eq!(
+            profiles[0].profile_ref,
+            "handbook.profile.shipped-root@1.0.0"
+        );
+        assert_eq!(
+            profiles[2].profile_ref,
+            "handbook.profile.shipped-root@1.2.0"
+        );
+        assert!(profiles
+            .iter()
+            .all(|profile| !profile.source_bytes.is_empty()));
     }
 }

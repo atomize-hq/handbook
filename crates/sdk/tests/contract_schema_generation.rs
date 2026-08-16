@@ -1,13 +1,15 @@
 use handbook_sdk::contract_membrane::{
     canonical_json_bytes, parse_canonical_json, sha256_fingerprint, ArtifactLocator, ArtifactRef,
-    BoundedString, BoundedVec, CatalogCursor, CatalogPage, CatalogRoot, ContractError,
-    ContractLimits, ContractValue, ContractWitness, CorrelationRef, Diagnostic, DiagnosticSeverity,
-    DraftVersion, ExactBinding, ExactRef, Fingerprint, IdempotencyStage, IdempotencyState,
-    NextAction, NextActionKind, Omission, OmissionReason, OperationAdmissionRefusalV1,
-    OperationClass, OperationDefinition, OperationIdempotency, OperationOutcomeSchemas,
-    OperationOwnerBinding, OperationRequestV1, OperationResponseV1, OperationSchemaValidator,
-    OperationTransport, Problem, ProblemBinding, ProblemCategory, ProofEffect, RecheckCondition,
-    RequestId, RetryDirective, SafeU64, SchemaManifestEntry, SchemaMediaType, SemVer, Sensitivity,
+    BootstrapOutcome, BootstrapRefusalDetails, BootstrapRefusalReason, BootstrapRequestV1,
+    BoundedString, BoundedVec, CatalogCursor, CatalogPage, CatalogPageSize, CatalogRoot,
+    ContractError, ContractLimits, ContractValue, ContractWitness, CorrelationRef, Diagnostic,
+    DiagnosticSeverity, DraftVersion, ExactBinding, ExactRef, Fingerprint, IdempotencyStage,
+    IdempotencyState, NextAction, NextActionKind, Omission, OmissionReason,
+    OperationAdmissionRefusalV1, OperationClass, OperationDefinition, OperationIdempotency,
+    OperationOutcomeSchemas, OperationOwnerBinding, OperationRequestV1, OperationResponseV1,
+    OperationSchemaValidator, OperationTransport, Problem, ProblemBinding, ProblemCategory,
+    ProductionCatalogRead, ProductionWitness, ProofEffect, RecheckCondition, RequestId,
+    RetryDirective, SafeU64, SchemaManifestEntry, SchemaMediaType, SemVer, Sensitivity,
     SourceBinding, TerminalFields, TerminalStatus, UtcTimestamp, VerificationError, Verified,
     WriteReceipt,
 };
@@ -20,10 +22,38 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 22] = [
+const ROOTS: [(&str, &str); 36] = [
     (
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
+    ),
+    (
+        "handbook.bootstrap-descriptor-schema@1.0.0",
+        "handbook.bootstrap-descriptor-schema/1.0.0.schema.json",
+    ),
+    (
+        "handbook.bootstrap-refusal-details@1.0.0",
+        "handbook.bootstrap-refusal-details/1.0.0.schema.json",
+    ),
+    (
+        "handbook.bootstrap-refusal@1.0.0",
+        "handbook.bootstrap-refusal/1.0.0.schema.json",
+    ),
+    (
+        "handbook.bootstrap-request@1.0.0",
+        "handbook.bootstrap-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.bootstrap-response@1.0.0",
+        "handbook.bootstrap-response/1.0.0.schema.json",
+    ),
+    (
+        "handbook.capability-catalog-page@1.0.0",
+        "handbook.capability-catalog-page/1.0.0.schema.json",
+    ),
+    (
+        "handbook.capability-entry@1.0.0",
+        "handbook.capability-entry/1.0.0.schema.json",
     ),
     (
         "handbook.catalog-cursor@1.0.0",
@@ -34,8 +64,16 @@ const ROOTS: [(&str, &str); 22] = [
         "handbook.catalog-page/1.0.0.schema.json",
     ),
     (
+        "handbook.catalog-read-blocked@1.0.0",
+        "handbook.catalog-read-blocked/1.0.0.schema.json",
+    ),
+    (
         "handbook.catalog-root@1.0.0",
         "handbook.catalog-root/1.0.0.schema.json",
+    ),
+    (
+        "handbook.catalog-roots@1.0.0",
+        "handbook.catalog-roots/1.0.0.schema.json",
     ),
     (
         "handbook.correlation-ref@1.0.0",
@@ -86,6 +124,10 @@ const ROOTS: [(&str, &str); 22] = [
         "handbook.operation-response/1.0.0.schema.json",
     ),
     (
+        "handbook.owner-version-entry@1.0.0",
+        "handbook.owner-version-entry/1.0.0.schema.json",
+    ),
+    (
         "handbook.problem-binding@1.0.0",
         "handbook.problem-binding/1.0.0.schema.json",
     ),
@@ -94,8 +136,20 @@ const ROOTS: [(&str, &str); 22] = [
         "handbook.problem/1.0.0.schema.json",
     ),
     (
+        "handbook.profile-catalog-entry@1.0.0",
+        "handbook.profile-catalog-entry/1.0.0.schema.json",
+    ),
+    (
+        "handbook.profile-catalog-page@1.0.0",
+        "handbook.profile-catalog-page/1.0.0.schema.json",
+    ),
+    (
         "handbook.recheck-condition@1.0.0",
         "handbook.recheck-condition/1.0.0.schema.json",
+    ),
+    (
+        "handbook.schema-catalog-page@1.0.0",
+        "handbook.schema-catalog-page/1.0.0.schema.json",
     ),
     (
         "handbook.schema-manifest-entry@1.0.0",
@@ -104,6 +158,10 @@ const ROOTS: [(&str, &str); 22] = [
     (
         "handbook.source-binding@1.0.0",
         "handbook.source-binding/1.0.0.schema.json",
+    ),
+    (
+        "handbook.typed-catalog-cursor@1.0.0",
+        "handbook.typed-catalog-cursor/1.0.0.schema.json",
     ),
     (
         "handbook.write-receipt@1.0.0",
@@ -203,7 +261,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 22);
+    assert_eq!(entries.len(), 36);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
@@ -224,6 +282,132 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
             &sha256_fingerprint(&schema_bytes)
         );
     }
+}
+
+#[test]
+fn packet_three_constructor_instances_validate_against_every_new_root_shape() {
+    let limits = ContractLimits::packet0();
+    let witness =
+        ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
+            .unwrap();
+    assert_schema_valid(
+        "handbook.bootstrap-descriptor-schema@1.0.0",
+        witness.descriptor(),
+    );
+    assert_schema_valid("handbook.catalog-roots@1.0.0", witness.catalog_roots());
+    for owner in witness.owner_versions() {
+        assert_schema_valid("handbook.owner-version-entry@1.0.0", owner);
+    }
+    for profile in witness.profiles() {
+        assert_schema_valid("handbook.profile-catalog-entry@1.0.0", profile);
+    }
+
+    let request = BootstrapRequestV1::new(
+        witness.descriptor().schemas().bootstrap_request().clone(),
+        None,
+        witness.descriptor().binding(),
+        SemVer::parse("1.0.0").unwrap(),
+        CatalogPageSize::new(1).unwrap(),
+        &limits,
+    )
+    .unwrap();
+    assert_schema_valid("handbook.bootstrap-request@1.0.0", &request);
+    assert_schema_valid(
+        "handbook.bootstrap-refusal-details@1.0.0",
+        &BootstrapRefusalDetails::new(
+            BootstrapRefusalReason::UnsupportedApiMajor,
+            BoundedVec::new(vec![SemVer::parse("1.0.0").unwrap()]).unwrap(),
+        )
+        .unwrap(),
+    );
+    match witness
+        .bootstrap(
+            &request,
+            &UtcTimestamp::parse("2029-01-01T00:00:00Z").unwrap(),
+            &limits,
+        )
+        .unwrap()
+    {
+        BootstrapOutcome::Ok(response) => {
+            assert_schema_valid("handbook.bootstrap-response@1.0.0", &response);
+            assert_schema_valid(
+                "handbook.capability-catalog-page@1.0.0",
+                response.first_capability_page(),
+            );
+        }
+        BootstrapOutcome::Refused(_) => panic!("current descriptor was refused"),
+    }
+
+    let refused = BootstrapRequestV1::new(
+        witness.descriptor().schemas().bootstrap_request().clone(),
+        None,
+        witness.descriptor().binding(),
+        SemVer::parse("2.0.0").unwrap(),
+        CatalogPageSize::new(1).unwrap(),
+        &limits,
+    )
+    .unwrap();
+    match witness
+        .bootstrap(
+            &refused,
+            &UtcTimestamp::parse("2029-01-01T00:00:00Z").unwrap(),
+            &limits,
+        )
+        .unwrap()
+    {
+        BootstrapOutcome::Refused(refusal) => {
+            assert_schema_valid("handbook.bootstrap-refusal@1.0.0", &refusal)
+        }
+        BootstrapOutcome::Ok(_) => panic!("unsupported major was accepted"),
+    }
+
+    match witness
+        .read_schemas(
+            CatalogPageSize::new(1).unwrap(),
+            None,
+            &UtcTimestamp::parse("2029-01-01T00:00:00Z").unwrap(),
+            &limits,
+        )
+        .unwrap()
+    {
+        ProductionCatalogRead::Page(page) => {
+            assert_schema_valid("handbook.schema-catalog-page@1.0.0", &page);
+            assert_schema_valid(
+                "handbook.typed-catalog-cursor@1.0.0",
+                page.next_cursor().unwrap(),
+            );
+        }
+        _ => panic!("schema catalog first page was unavailable"),
+    }
+    match witness
+        .read_profiles(
+            CatalogPageSize::new(2).unwrap(),
+            None,
+            &UtcTimestamp::parse("2029-01-01T00:00:00Z").unwrap(),
+            &limits,
+        )
+        .unwrap()
+    {
+        ProductionCatalogRead::Page(page) => {
+            assert_schema_valid("handbook.profile-catalog-page@1.0.0", &page)
+        }
+        _ => panic!("profile catalog first page was unavailable"),
+    }
+    match witness
+        .read_schemas(
+            CatalogPageSize::new(1).unwrap(),
+            None,
+            &UtcTimestamp::parse("2031-01-01T00:00:00Z").unwrap(),
+            &limits,
+        )
+        .unwrap()
+    {
+        ProductionCatalogRead::Blocked(blocked) => {
+            assert_schema_valid("handbook.catalog-read-blocked@1.0.0", &blocked)
+        }
+        _ => panic!("expired catalog did not return a blocked restart"),
+    }
+    assert!(witness.capabilities().is_empty());
 }
 
 #[test]

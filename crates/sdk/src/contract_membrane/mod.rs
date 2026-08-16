@@ -1,23 +1,36 @@
 mod artifact;
 mod binding;
+mod bootstrap;
+mod bootstrap_envelope;
 mod bounds;
 mod catalog;
 mod dto;
 mod envelope;
 mod operation;
 mod owner_admission;
+mod production_witness;
 mod raw_key;
 mod response;
 #[cfg(feature = "contract-schema-generation")]
 #[doc(hidden)]
 pub mod schema_generation;
 mod serialization;
+mod typed_catalog;
 mod verification;
 
 pub use artifact::{
     ArtifactLocator, ArtifactLocatorRef, ArtifactRef, DigestAlgorithm, Sensitivity,
 };
 pub use binding::{ExactBinding, ExactRef, Fingerprint, SemVer};
+pub use bootstrap::{
+    BootstrapCeilings, BootstrapDescriptorV1, BootstrapRefusalReason, BootstrapRequestV1,
+    BootstrapSchemaBindings, CapabilityEntry, CurrentTransportEvidence, OwnerVersionEntry,
+    ProfileCatalogEntry,
+};
+pub use bootstrap_envelope::{
+    BootstrapRefusalDetails, BootstrapRefusalV1, BootstrapResponseV1, CapabilityCatalogPage,
+    CatalogReadBlockedV1, CatalogRoots, ProfileCatalogPage, SchemaCatalogPage,
+};
 pub use bounds::{
     BoundedString, BoundedVec, ContractLimits, ContractMember, ContractValue, ContractValueRef,
     SafeI64, SafeU64, UtcTimestamp,
@@ -43,6 +56,9 @@ pub use operation::{
 pub use owner_admission::{
     admit_operation_definition, OperationAdmissionResult, OwnerAdmissionToken,
 };
+pub use production_witness::{
+    BootstrapOutcome, ProductionCatalogRead, ProductionWitness, ProductionWitnessError,
+};
 pub use raw_key::{
     with_owner_idempotency_key, DefinitionPinnedKeyPointer, IdempotencyKeyConsumer,
     RawIdempotencyKey,
@@ -53,8 +69,15 @@ pub use response::{
 pub use serialization::{
     canonical_fingerprint, canonical_json_bytes, parse_canonical_json, sha256_fingerprint,
 };
+pub use typed_catalog::{
+    CatalogPageSize, CatalogReadError, ImmutableCatalog, TypedCatalogCursor, TypedCatalogEntry,
+    TypedCatalogPage,
+};
 pub use verification::{verify, ContractWitness, VerificationError, Verified, VerifyContract};
 
+#[doc(hidden)]
+#[allow(unused_imports)]
+pub(crate) use bootstrap::CurrentTransportEvidenceSealed;
 #[doc(hidden)]
 #[allow(unused_imports)]
 pub(crate) use raw_key::IdempotencyKeyConsumerSealed;
