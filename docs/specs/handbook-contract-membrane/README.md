@@ -48,4 +48,16 @@ If prose about implemented behavior conflicts with the current source and tests,
 
 The Git ref `archive/handbook-contract-membrane-pre-clean-20260812` preserves the former membrane control plane. Content under [`archived/`](../../../archived/) also records prior designs, plans, and evidence. Both are historical provenance and non-current authority unless a future, explicit current document adopts a bounded part of them.
 
+### Pre-clean recovery checkpoint
+
+The exact pre-clean checkpoint is commit `8605d6539355f350c55b921d95fb450bca30ee18`. It is preserved through these recovery anchors:
+
+- local branch `feat/handbook-contract-membrane` and remote branch `origin/feat/handbook-contract-membrane`;
+- annotated tag `archive/handbook-contract-membrane-pre-clean-20260812`; and
+- the complete-history, machine-local Git bundle at `C:\Users\spmcc\Documents\__Project_Code\handbook-contract-membrane-8605d65.bundle`.
+
+No durable old-branch worktree is required for recovery. Any detached Codex-managed worktree at this commit is incidental and may disappear; use the branches, tag, or bundle instead.
+
+Use the checkpoint as historical reference when current work needs to inspect former documents or specifications for intended product behavior, architectural preferences, design lineage, or other historical detail. Do not copy a former document set or control-plane package back into the active branch wholesale. Extract only the bounded material needed for the current decision, verify it against current source and tests, and record the resulting decision in an explicit current authority document. Historical status, orchestration ceremony, and authority claims remain inactive unless a current document separately and explicitly adopts a bounded part.
+
 The repository root README, [`docs/START_HERE.md`](../../START_HERE.md), and [`docs/README.md`](../../README.md) route current contract-membrane readers to this entry point.
