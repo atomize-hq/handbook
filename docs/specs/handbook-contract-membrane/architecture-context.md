@@ -28,8 +28,8 @@ The labels below describe architecture state, not lifecycle or authorization:
 | Flow and pipeline domains | Current | [`handbook-flow`](../../../crates/flow/) and [`handbook-pipeline`](../../../crates/pipeline/) own their domain behavior while depending on the engine for shared semantic truth. |
 | Grounding adoption and deterministic projection/snapshot components | Precursor | Typed Flow and pipeline adapters exist, while projection and snapshot components remain private and no ordinary grounding consumer completes the seam. |
 | SDK composition | Current | [`handbook-sdk`](../../../crates/sdk/) composes owner crates into bounded, transport-free public Rust surfaces. |
-| Contract-membrane kernel and schemas | Current | Packet 0 primitives and Packet 1's checked-in 15-root Draft 2020-12 schema tree, deterministic generator, and manifest are exported or owned at the SDK's present placement; no ordinary membrane operation owner or transport route exists. |
-| CLI adapter | Current | [`handbook-cli`](../../../crates/cli/) consumes the SDK for existing commands and owns command-line concerns, but has no contract-membrane route. |
+| Contract-membrane types, schemas, admission, and discovery | Current | Completed HCM-4.2 provides the bounded kernel, 53-root Draft 2020-12 tree and manifest, exact 62-row inventory, independent owner admission, immutable production bootstrap/catalog witness, and one admitted/discoverable Rust-SDK posture operation at the SDK's present placement. |
+| CLI adapter | Current | [`handbook-cli`](../../../crates/cli/) consumes the SDK for existing commands and owns command-line concerns. Its machine behavior remains partial and command-specific; no current CLI transport is proven through the HCM-4.2 ordinary-operation membrane. |
 | Contract/evidence/gate product owner, dock executor, and Tauri adapter | Target/future | These owner and adapter surfaces are absent; this topology does not authorize or design them. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
 
@@ -66,9 +66,10 @@ This is a semantic direction, not a requirement that every future type remain in
 its current crate forever. Any deliberately neutral shared layer must be
 authorized as such and must preserve owner independence.
 
-### Packet 0–1 placement
+### HCM-4.2 placement
 
-The Packet 0 kernel and Packet 1 schema-generation boundary currently live under
+The completed HCM-4.2 kernel, envelope, bootstrap, posture projection, and
+schema-generation boundaries currently live under
 [`handbook_sdk::contract_membrane`](../../../crates/sdk/src/contract_membrane/mod.rs)
 with checked-in assets under
 [`crates/sdk/schemas`](../../../crates/sdk/schemas/). That is current placement,
@@ -117,11 +118,13 @@ its sealed witness path then permits an owner to establish trusted
 decision. This distinction prevents well-formed but unauthorized or stale data
 from crossing a trust boundary.
 
-The posture seam demonstrates the intended owner relationship. The SDK accepts a
-bounded typed request and calls the engine facade. The engine independently
-resolves repository authority, policy, approvals, lifecycle state, persistence,
-and replay rather than trusting caller-supplied private records. This prevents a
-public caller from manufacturing the evidence that authorizes its own mutation.
+The posture seam demonstrates the intended owner relationship. The SDK accepts
+both the HCM-4.1 direct typed request and HCM-4.2's exact generic operation
+request, then calls the same engine facade. The Engine independently admits the
+operation definition and resolves repository authority, policy, approvals,
+lifecycle state, persistence, and replay rather than trusting caller-supplied
+private records. This prevents a public caller from manufacturing the evidence
+that authorizes its own mutation.
 
 Three byte and identity domains must remain separate:
 

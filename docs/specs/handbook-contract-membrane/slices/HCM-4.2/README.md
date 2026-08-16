@@ -1,28 +1,28 @@
 # HCM-4.2 Shared DTO and JSON Schema Membrane
 
-This document owns the compact outcome authority for HCM-4.2. It defines the
-shared result to be established across the slice, the invariants every packet
-must preserve, and the ordered packet boundaries. It also delegates bounded
-just-in-time decision preparation and sequential execution for the named
-remaining packets; it does not let a packet task select adjacent work.
+This document records the completed outcome authority and single aggregate
+closeout for HCM-4.2. It defines the shared result established across the
+slice, the invariants every packet preserved, and the packet boundaries. It no
+longer delegates active packet work and does not authorize adjacent work.
 
-## Current admission state
+## Current completion state
 
-**HCM-4.2 Packet 1 is complete. Packet 2 is next, and this authority delegates
-just-in-time preparation and sequential execution for Packets 2 through 5 as
-their declared predecessors complete.**
+**HCM-4.2 is complete. Packets 0 through 5 and the one aggregate closeout are
+finished; no HCM-4.2 packet remains eligible for dispatch.**
 
 - Packet 0 is an implemented checkpoint at
-  `8605d6539355f350c55b921d95fb450bca30ee18`; Packet 1 extended the module while
-  preserving the Packet-0 behavioral boundary and focused regressions.
-- [`packet-1-schema-generation.md`](packet-1-schema-generation.md) resolves the
-  Packet-1 generator, exact inventory, manifest, and validation boundary and
-  records the implementation completed at
-  `f54dcbd3ec9a50ad586d7952cbec8ca6d508eefe`.
-- Separate authority files do not yet exist for Packets 2 through 5. Their
-  absence is preparation work, not an admission stop, under the delegation
-  below.
-- The Phase-3 hard predecessor is satisfied under the selected reduced boundary.
+  `8605d6539355f350c55b921d95fb450bca30ee18`.
+- Packets 1 through 5 completed at `f54dcbd`, `4d70701`, `241b998`, `caf0ef4`,
+  and `c1f5d33`. Their linked checkpoint documents record the selected
+  generator/schema, operation/admission, bootstrap/catalog, posture, and
+  integrated-proof boundaries.
+- Aggregate verification passed the three-test Packet-5 integrated proof,
+  confirmed the package manifest plus exact 53-schema tree, and built strict
+  SDK rustdoc. One aggregate reviewer returned `APPROVE/PROCEED` with no P1 or
+  P2. Its P3 stale-status observation is corrected by the current navigation
+  update; its P3 bootstrap defense-in-depth observation remains non-blocking.
+- The Phase-3 hard predecessor was satisfied under the selected reduced
+  boundary before the remaining packet sequence completed.
 
 The [`phase-and-slice map`](../../phase-and-slice-map.md) owns that predecessor
 and exit state. A later authority must not reinterpret Packet 0's chronology or
@@ -34,7 +34,7 @@ HCM-4.2 establishes one bounded shared DTO and JSON Schema membrane through
 which semantic owners expose exact public truth without transferring their
 authority to the SDK or an adapter.
 
-The completed slice must make these surfaces agree:
+The completed slice made these surfaces agree:
 
 - exact bounded public types and checked-in schemas;
 - authoritative operation definitions and independent owner admission;
@@ -43,7 +43,7 @@ The completed slice must make these surfaces agree:
 - bounded posture request, outcome, problem, and receipt projections; and
 - deterministic schema generation and exact-byte manifest identity.
 
-This is outcome authority, not a claim that the outcome exists now. Detailed
+This is the completed outcome authority and aggregate closeout. Detailed
 current product classification remains in the
 [`implemented baseline`](../../implemented-baseline.md), stable ownership and
 dependency direction remain in the
@@ -120,10 +120,10 @@ bridge, or adoption owner.
 | --- | --- | --- |
 | **0 — implemented typed kernel** | Preserve the bounded owner-neutral types, exact identities, canonicalization, catalogs, redacted raw-key bridge, terminal closure, and sealed verification described above. | Implemented checkpoint at `8605d65`; Packet-0 behavior remains regression-protected; no retrospective authority file. |
 | **1 — schema generation and manifest** | Select and pin a generator; define the exact Packet-0 schema inventory and file mapping; produce a checked-in Draft 2020-12 tree and deterministic exact-byte fingerprint manifest; define the parser-versus-schema validation boundary. | Completed at `f54dcbd`; decisions remain recorded in [`packet-1-schema-generation.md`](packet-1-schema-generation.md). |
-| **2 — operation definitions and owner admission** | Define the exact operation/admission model and 62-row inventory; assign generic ordinary request, response, and admission-refusal envelopes; resolve source-state inconsistencies. | **Next.** Packet 1 is complete. This authority delegates the bounded preparation below before product edits. |
-| **3 — immutable bootstrap and catalogs** | Define descriptor/bootstrap shapes, capability and owner-version entries, production schema/catalog witness, and immutable roots, paging, cursors, and negotiation. | Depends on Packet 2. When that predecessor completes, this authority delegates bounded preparation of the unresolved representation and witness decisions. |
-| **4 — posture projection and direct-Rust admission** | Map current engine-owned outcomes into bounded public requests, results, problems, and receipts without exposing private records or moving authority. | Depends on Packet 3. When that predecessor completes, this authority delegates bounded preparation of the exact mapping, correlation, and honest current-transport state; `none` remains valid. |
-| **5 — integrated proof** | After the preceding work, prove regeneration, closed shapes, identity-domain separation, owner parity, replay identity, raw-key absence, catalog closure, and adapter non-authority. | Depends on Packets 1–4. When they complete, this authority delegates a compact evidence plan and integrated implementation; it creates no old proof wall or separate closeout ceremony. |
+| **2 — operation definitions and owner admission** | Define the exact operation/admission model and 62-row inventory; assign generic ordinary request, response, and admission-refusal envelopes; resolve source-state inconsistencies. | Completed at `4d70701`; decisions remain recorded in [`packet-2-operation-admission.md`](packet-2-operation-admission.md). |
+| **3 — immutable bootstrap and catalogs** | Define descriptor/bootstrap shapes, capability and owner-version entries, production schema/catalog witness, and immutable roots, paging, cursors, and negotiation. | Completed at `241b998`; decisions remain recorded in [`packet-3-immutable-bootstrap.md`](packet-3-immutable-bootstrap.md). |
+| **4 — posture projection and direct-Rust admission** | Map current engine-owned outcomes into bounded public requests, results, problems, and receipts without exposing private records or moving authority. | Completed at `caf0ef4`; decisions remain recorded in [`packet-4-posture-projection.md`](packet-4-posture-projection.md). |
+| **5 — integrated proof** | After the preceding work, prove regeneration, closed shapes, identity-domain separation, owner parity, replay identity, raw-key absence, catalog closure, and adapter non-authority. | Completed at `c1f5d33`; evidence selection remains recorded in [`packet-5-integrated-proof.md`](packet-5-integrated-proof.md). |
 
 The required dependency order is:
 
@@ -131,23 +131,20 @@ The required dependency order is:
 Packet 0 -> Packet 1 -> Packet 2 -> Packet 3 -> Packet 4 -> Packet 5
 ```
 
-Each completed packet returns control to the meta task under the
-[`work-unit lifecycle`](../../work-unit-lifecycle.md). The packet task never
-selects the next packet; the meta task sequences it from this declared order and
-delegation. Slice closeout occurs once, after Packet 5, under the
+Each completed packet returned control to the meta task under the
+[`work-unit lifecycle`](../../work-unit-lifecycle.md). The meta task sequenced
+the declared order, and slice closeout occurred once after Packet 5 under the
 [`review and closeout policy`](../../review-and-closeout-policy.md).
 
-## Delegated just-in-time preparation
+## Completed just-in-time preparation
 
-An explicit user instruction to execute HCM-4.2 packet by packet authorizes the
-meta task to continue through the ordered sequence above. For Packets 2 through
-5, the same fresh top-level packet task must resolve its remaining material
-decisions before product edits and then continue directly into implementation
-when permitted sources yield one safe in-scope answer. A compact packet
-authority or decision checkpoint may be committed when it prevents drift; a
-separate user confirmation or mechanical authority commit is not required.
+The packet-by-packet execution request authorized the meta task to continue
+through the ordered sequence above. Packets 2 through 5 used the delegated
+preparation boundary and recorded compact decision checkpoints before their
+product changes. That delegation is consumed and supplies no continuing
+implementation authority.
 
-Every preparation phase must reconcile the assigned packet against current
+Every completed preparation phase reconciled its assigned packet against current
 product source and tests, this authority, the
 [`implemented baseline`](../../implemented-baseline.md),
 [`architecture context`](../../architecture-context.md),
@@ -159,23 +156,21 @@ bounded planning input for the assigned packet's intended outcome, constraints,
 and candidate design. Their status, authority claims, selectors, proof walls,
 handoffs, and closeout procedure remain inactive.
 
-Packet 2 may additionally consult the archived
+Packet 2 additionally consulted the archived
 `research/20260811T031843Z--corrective-owner-admission-matrix.md` under that same
 HCM-4.2 ref solely as the candidate 62-row operation, ownership, mutability,
-precursor, transport, and discovery classification. It must recheck every
+precursor, transport, and discovery classification. It rechecked every
 material classification against current source and current Phase-3/Phase-4
 boundaries. The archived matrix cannot prove current implementation or decide a
 conflict by itself.
 
-If those permitted sources conflict or leave multiple consequential answers and
-current authority cannot choose among them, return `STOPPED` before product
-edits with the exact missing decision. Missing a separate packet file is not
-such a stop. An unnamed packet, an unsatisfied predecessor, scope outside this
-slice, or a genuinely unresolved material decision still blocks execution.
+The permitted sources yielded one bounded answer for each completed packet.
+This historical preparation record does not authorize reopening a packet or
+using its adoption rule for HCM-4.3.
 
-## Slice completion conditions
+## Satisfied slice completion conditions
 
-HCM-4.2 completes only when:
+HCM-4.2 completed after:
 
 - one bounded type/schema/operation membrane agrees with independent owner
   admission, bootstrap/catalog discovery, and posture mapping;
@@ -186,8 +181,8 @@ HCM-4.2 completes only when:
 - one aggregate review and closeout confirms the whole authorized outcome under
   current policy.
 
-Packet 0 alone does not satisfy these conditions. Neither the existence of this
-document nor a packet-level result establishes slice completion.
+No single packet established that result. The aggregate verification and
+review recorded above supplied the one slice closeout.
 
 ## Non-goals
 
@@ -203,35 +198,26 @@ HCM-4.2 completion does not require or authorize:
 Those concerns remain with their later owners even when they consume the shared
 membrane.
 
-## Open authority decisions
+## Deferred later-slice decisions
 
-Packet 1's generator, exact inventory, file mapping, and parser/schema boundary
-are implemented and remain controlled by its linked authority. The following
-decisions are intentionally left to the assigned packet's delegated preparation
-phase rather than preselected here:
+Packet 1's generator and schema boundary, Packet 2's operation/admission model,
+Packet 3's bootstrap/catalog representation, Packet 4's posture mapping, and
+Packet 5's proof surface are implemented and remain recorded in their linked
+checkpoints. Only later-slice concerns remain deferred:
 
-- the Packet-2 envelope owner or details, operation model, or 62-row
-  classifications;
-- Packet 3's typed-page versus `ContractValue` representation, production
-  witness, or transport list;
-- Packet 4's exact public mapping, correlation model, or current-transport
-  admission rule;
 - a future contract owner's crate placement, extraction strategy, or runtime;
 - future dock implementation choices; or
-- CLI/Tauri routes, publication, bridge, external adopter, or broader Phase-3
-  posture and gate policy.
+- HCM-4.3 CLI parity, HCM-4.4 Tauri, publication, bridge, external adopter, or
+  broader Phase-3 posture and gate policy.
 
-Each decision must remain inside its applicable packet outcome and durable
-invariants. Historical material may inform it only through the bounded adoption
-above; it cannot override current source or supply a missing consequential
-choice by itself.
+Each later decision requires its own current authority. HCM-4.2 historical
+material cannot override current source or supply a later consequential choice
+by itself.
 
 ## Use and drift
 
-Use this document to prepare a bounded packet authority when useful and to
-review cross-packet consistency. Use the
-[`task-session prompt`](../../task-session-prompt.md) after the meta task selects
-the next eligible packet from the sequence and delegation above.
+Use this document to review the completed HCM-4.2 boundary and cross-packet
+consistency. Do not dispatch another HCM-4.2 packet from it.
 
 If executable product truth changes Packet 0, update the implemented baseline
 and this authority in the same bounded change or record the discrepancy as

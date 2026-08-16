@@ -1,6 +1,9 @@
 # Handbook Contract Membrane Implemented Baseline
 
-This document classifies the current Handbook contract-membrane product state at commit `f54dcbd3ec9a50ad586d7952cbec8ca6d508eefe`. It is a compact implementation checkpoint, not a plan.
+This document classifies the current Handbook contract-membrane product state
+at product checkpoint `c1f5d333e2b74a76aa7279bc28a66615da6f8d24` and the
+current documentation HEAD. It is a
+compact implementation checkpoint, not a plan.
 
 ## Scope and authority
 
@@ -13,7 +16,7 @@ This document does not:
 - define a remaining schedule or choose a future owner;
 - declare a phase or slice complete;
 - select a Phase-3 boundary or establish Phase-3 exit evidence; or
-- authorize HCM-4.2 packet execution.
+- authorize HCM-4.3 packet execution.
 
 The [`README`](README.md) remains the authority and navigation entry point.
 Execution-unit identity comes from the [`work-unit lifecycle`](work-unit-lifecycle.md), and verification and closeout rules come from the [`review and closeout policy`](review-and-closeout-policy.md).
@@ -37,7 +40,8 @@ These are product-state labels only. None is a lifecycle state, authorization, p
 | Grounding and Flow adapters | Precursor-only | Typed grounding, delta summaries, transition materialization, and Flow adoption components exist; evaluation evidence remains unavailable and there is no ordinary grounding consumer. |
 | Atomic posture authority | Implemented | One-leaf compare-and-swap transition, private records, idempotent replay, persistence/recovery, engine facade, and direct typed SDK ingress are present. Broader posture-policy behavior is not. |
 | SDK and CLI composition | Implemented | The transport-free SDK and CLI compose current owner capabilities, including generic pipeline routes. Machine-transport parity is incomplete. |
-| HCM-4.2 Packets 0–1 typed and schema kernel | Implemented | The SDK exports bounded contract types, canonical serialization and fingerprints, catalog primitives, secret-safe raw-key handling, sealed verification, a feature-gated deterministic Draft 2020-12 generator, a checked-in 15-root schema tree, and an exact-byte manifest. Its boundary is recorded below. |
+| HCM-4.2 shared DTO and JSON Schema membrane | Implemented | Packets 0–5 provide bounded contract types, canonical serialization and fingerprints, a deterministic 53-root Draft 2020-12 schema tree and manifest, the exact 62-row operation inventory and independent owner-admission boundary, immutable production bootstrap/catalog witnessing, one admitted Rust-SDK posture operation, and integrated proof. |
+| Complete CLI JSON parity | Absent/future | Existing commands use mixed prose, partial command-specific JSON, local rendering, and local exit branches. No current product proves one shared typed execution boundary or complete `--json` coverage. HCM-4.3 authority does not change this product classification. |
 | Future contract/evidence/gate owner, dock executor, and Tauri | Absent/future | No current product owner or implementation establishes these capabilities. |
 | Current publication and Substrate adoption | External-unknown | Current repository evidence does not prove a present external publication, bridge, or Substrate seam; absence from the repository is not proof of external absence. |
 
@@ -168,26 +172,41 @@ Packet 0 does not implement:
 - Tauri integration;
 - a contract/gate/dock owner, publication, bridge, or Substrate adoption.
 
-## HCM-4.2 Packet 1: checked-in schemas and manifest
+## HCM-4.2 Packets 1–5: completed shared membrane
 
 Commit `f54dcbd3ec9a50ad586d7952cbec8ca6d508eefe`,
-`feat(sdk): generate contract membrane schemas`, added an exactly pinned,
-feature-gated Rust generator; 15 self-contained Draft 2020-12 schemas; the
-canonical exact-byte manifest; and focused schema, regeneration, parser-boundary,
-and Packet-0 regression coverage. Normal SDK builds do not generate files, and
-the validator uses no resolver features.
+`feat(sdk): generate contract membrane schemas`, added the exactly pinned,
+feature-gated Rust generator and the original 15 self-contained Draft 2020-12
+roots. Later packets extended the same deterministic exact-byte tree to 53
+roots without changing its generation or identity rules. Normal SDK builds do
+not generate files, and the validator uses no resolver features.
 
-The executable anchors are
+The Packet-1 executable anchors are
 [`schema_generation.rs`](../../../crates/sdk/src/contract_membrane/schema_generation.rs),
 [`schemas/`](../../../crates/sdk/schemas/), and
 [`contract_schema_generation.rs`](../../../crates/sdk/tests/contract_schema_generation.rs).
-This implements schema publication for the 15 Packet-0 roots only. It does not
-implement operation definitions, generic envelopes, owner admission, bootstrap
-or catalog producers, posture mapping, or transport routes.
+Commit `4d70701` added the exact 62-row operation inventory, generic ordinary
+request/response/admission-refusal envelopes, structural schema admission, and
+independent Engine/Flow/pipeline owner-token boundary. All rows default deny
+until their complete definition, schemas, owner admission, write closure, and
+current transport are proven.
 
-HCM-4.2 Packets 2 through 5 remain absent/future in product state. This baseline
-records implementation only; the HCM-4.2 slice authority owns their delegated
-execution boundary.
+Commit `241b998` added the immutable production witness, descriptor negotiation,
+owner/schema/profile evidence, and typed capability/schema/profile roots,
+pages, and cursors. It rejects stale, tampered, gapped, substituted, or
+self-attested inputs before discovery.
+
+Commit `caf0ef4` closed `posture.transition.apply@1.0.0` through exact request
+and result schemas, Engine-native definition admission, sealed raw-key use,
+exhaustive owner-result projection, compare-and-write receipts, and the current
+Rust-SDK transport. It is the sole discoverable current capability; the other
+61 inventory rows remain honestly omitted.
+
+Commit `c1f5d33` added the three-group integrated proof covering deterministic
+regeneration, identity-domain separation, owner/version parity, replay,
+raw-key absence, catalog closure, and adapter non-authority. The HCM-4.2 slice
+authority records the one aggregate closeout. No CLI or Tauri membrane route
+was added.
 
 ## Current anchors and drift rule
 
@@ -198,7 +217,12 @@ Use these anchors without treating the list as an exhaustive file inventory:
 - generic pipeline SDK surface: [`pipeline_route_api.rs`](../../../crates/sdk/src/pipeline_route_api.rs);
 - posture facade: [`posture_transition_facade.rs`](../../../crates/engine/src/posture_transition_facade.rs);
 - Packet 0 exports and focused regression: the two anchors in its section above;
-- Packet 1 generator, checked-in assets, and focused tests: the three anchors in its section above; and
+- complete HCM-4.2 exports and production witness:
+  [`contract_membrane/mod.rs`](../../../crates/sdk/src/contract_membrane/mod.rs),
+  [`production_witness.rs`](../../../crates/sdk/src/contract_membrane/production_witness.rs),
+  and [`contract_packet5_integrated_proof.rs`](../../../crates/sdk/tests/contract_packet5_integrated_proof.rs);
+- checked-in assets and schema-generation tests: the three Packet-1 anchors
+  above; and
 - retained executable product fixtures: [`slices/`](slices/), as classified by the README.
 
 When source, tests, or product-consumed assets change a classification, update

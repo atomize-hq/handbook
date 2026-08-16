@@ -113,8 +113,8 @@ and Packet-0 checkpoints remain chronology, not evidence for this exit.
 | Slice | Program status | Concise outcome and boundary | Hard predecessor |
 | --- | --- | --- | --- |
 | `HCM-4.1` — SDK owner and use-case implementation | Implemented checkpoint | Checkpoint `28fa4ab` provides transport-free SDK composition and the typed posture ingress under a past dependency-order exception. Its chronology was not Phase-3 exit evidence. | Past explicit exception; no retroactive inference |
-| [`HCM-4.2` — Shared DTO and JSON Schema membrane](slices/HCM-4.2/README.md) | Authorized active slice; Packets 0–1 implemented; Packet 2 next; Packets 2–5 sequentially delegated | Packet 0 established the typed kernel at `8605d65`; Packet 1 completed checked-in schema generation and the manifest at `f54dcbd`. The slice authority delegates bounded just-in-time preparation and execution for each named remaining packet after its predecessor completes. | **Phase-3 exit and Packet-1 predecessor are satisfied** |
-| `HCM-4.3` — Complete CLI JSON parity | Planned | Every supported nontrivial command uses the shared typed result boundary, with machine output, human rendering, diagnostics, and exit behavior kept distinct. | Phase-3 exit and preceding slice closeout |
+| [`HCM-4.2` — Shared DTO and JSON Schema membrane](slices/HCM-4.2/README.md) | Implemented checkpoint; slice closeout complete | Packets 0–5 established the bounded typed kernel, 53-root schema/manifest tree, exact 62-row operation inventory and owner-admission boundary, immutable production bootstrap/catalog witness, one admitted Rust-SDK posture operation, and integrated proof through `c1f5d33`. One aggregate verification and causal review completed the slice. | Phase-3 exit, satisfied |
+| [`HCM-4.3` — Complete CLI JSON parity](slices/HCM-4.3/README.md) | Authorized; Packet 1 next after meta-task admission; Packets 1–8 sequentially delegated | Every supported nontrivial current command must use one shared typed execution boundary, with exactly one versioned machine document on a writable stdout transport, human rendering from the same result, operational logging on stderr, stable exit behavior, and bounded legacy-JSON migration. | **Phase-3 exit and HCM-4.2 slice closeout are satisfied** |
 | `HCM-4.4` — Tauri-ready command facade | Planned | Thin Serde/Tauri commands consume SDK types without a normal-operation CLI subprocess or frontend-owned semantics. | Preceding slice closeout |
 | `HCM-4.5` — Capability-driven Handbook skill | Planned | Agent workflows discover capabilities and gather structured inputs through supported machine surfaces without prompt-owned product logic. | Preceding slice closeout |
 
@@ -165,12 +165,11 @@ actual owner boundary. Unselected external consumers are not an exit failure.
 | --- | --- |
 | Ordinary grounding SDK/JSON exposure and consumer placement | Future Phase-4 authority must choose the bounded public seam; future Phase-6 authority must separately choose any publication, bridge, and adopter |
 | Broader posture evaluation, recommendation, notification, acknowledgement, and hysteresis | Future posture authority must place this policy without transferring engine-owned mutation authority to a gate or adapter |
-| Operation inventory and generic envelopes | Packet 1's generator, schema inventory, and parser/schema boundary are implemented. Packet 2's delegated preparation must reconcile the bounded archived 62-row candidate matrix against current source and select the operation and envelope model before product edits. |
-| Request/response envelopes, discovery witnesses/catalog representation, and posture mapping | Their assigned packet's slice-delegated preparation phase; no representation is selected by this roadmap |
+| CLI operation-inventory expansion beyond the completed 62-row predecessor | HCM-4.3 does not expand the inventory for transport parity: its authority fixes the exact ordinary mappings and a closed six-entry SDK use-case registry. Any new semantic operation or use case requires later explicit authority, complete schemas, and independent owner admission where applicable. |
 | Contract-owner placement or neutral extraction | Future contract-owner authority, preserving the no-back-edge architecture rule |
 | Gate-to-posture input and policy boundary | Future gate and posture authorities, preserving posture ownership |
 | Dock implementation and runtime | Future dock authority; current Rust schema use does not preselect the executor |
-| CLI/Tauri membrane routes and framing | Future transport authorities after shared typed boundaries exist |
+| CLI/Tauri membrane routes and framing | HCM-4.3 owns current CLI parity and framing; HCM-4.4 separately owns the Tauri facade after HCM-4.3 closeout. |
 | Publication mechanism, exact versions, bridge, and external adopter | Future publication and consumer authorities with current external proof |
 
 Use this map to route a future slice author to the proper predecessor and
