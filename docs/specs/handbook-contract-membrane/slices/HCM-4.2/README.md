@@ -7,17 +7,18 @@ execution.
 
 ## Current admission state
 
-**HCM-4.2 outcome authority exists after this commit, but no new packet is
-admitted.**
+**HCM-4.2 Packet 1 is admitted by its separate current authority. No later
+packet is admitted.**
 
 - Packet 0 is an implemented checkpoint at
   `8605d6539355f350c55b921d95fb450bca30ee18`; its product and focused-test paths
   remain byte-unchanged on this clean branch.
-- No authority file exists for Packets 1 through 5, and none of those packets is
-  authorized for execution.
+- [`packet-1-schema-generation.md`](packet-1-schema-generation.md) resolves the
+  Packet-1 generator, exact inventory, manifest, and validation boundary and
+  authorizes that packet for execution.
+- No authority file exists for Packets 2 through 5, and none of those packets
+  is authorized for execution.
 - The Phase-3 hard predecessor is satisfied under the selected reduced boundary.
-- Packet 1 remains unadmitted until its open decisions are resolved and separate
-  explicit packet authority is granted. This document grants neither.
 
 The [`phase-and-slice map`](../../phase-and-slice-map.md) owns that predecessor
 and exit state. A later authority must not reinterpret Packet 0's chronology or
@@ -114,7 +115,7 @@ bridge, or adoption owner.
 | Packet | Bounded outcome | Dependency and present status |
 | --- | --- | --- |
 | **0 — implemented typed kernel** | Preserve the bounded owner-neutral types, exact identities, canonicalization, catalogs, redacted raw-key bridge, terminal closure, and sealed verification described above. | Implemented checkpoint at `8605d65`; byte-unchanged; no retrospective authority file. |
-| **1 — schema generation and manifest** | Select and pin a generator; define the exact Packet-0 schema inventory and file mapping; produce a checked-in Draft 2020-12 tree and deterministic exact-byte fingerprint manifest; define the parser-versus-schema validation boundary. | Depends on Packet 0 and Phase-3 exit. Generator, inventory, and validation responsibility are unresolved; no authority file exists. |
+| **1 — schema generation and manifest** | Select and pin a generator; define the exact Packet-0 schema inventory and file mapping; produce a checked-in Draft 2020-12 tree and deterministic exact-byte fingerprint manifest; define the parser-versus-schema validation boundary. | Admitted by [`packet-1-schema-generation.md`](packet-1-schema-generation.md); Packet 0 and Phase-3 exit predecessors are satisfied. |
 | **2 — operation definitions and owner admission** | Define the exact operation/admission model and later 62-row inventory; assign generic ordinary request, response, and admission-refusal envelopes; resolve source-state inconsistencies. The matrix is not part of this authority. | Depends on Packet 1. Envelope ownership, details, and classifications remain unresolved; no authority file exists. |
 | **3 — immutable bootstrap and catalogs** | Define descriptor/bootstrap shapes, capability and owner-version entries, production schema/catalog witness, and immutable roots, paging, cursors, and negotiation. | Depends on Packet 2. Catalog representation and production witness remain unresolved; no authority file exists. |
 | **4 — posture projection and direct-Rust admission** | Map current engine-owned outcomes into bounded public requests, results, problems, and receipts without exposing private records or moving authority. | Depends on Packet 3. Exact mapping, correlation, and current-transport admission state remain unresolved; `none` remains valid; no authority file exists. |
@@ -163,10 +164,11 @@ membrane.
 
 ## Open authority decisions
 
-This document deliberately does not select:
+Packet 1's generator, exact inventory, file mapping, and parser/schema boundary
+are resolved by its linked authority and may not be reopened during
+implementation without explicit replacement authority. This document still
+does not select:
 
-- the Packet-1 generator, exact schema inventory, file mapping, or division of
-  parser and schema responsibility;
 - the Packet-2 envelope owner or details, operation model, or 62-row
   classifications;
 - Packet 3's typed-page versus `ContractValue` representation, production
