@@ -87,7 +87,7 @@ fn completed_candidate_cli_fixture() -> CompletedCandidateCliFixture {
             CLI_KIND_REF,
             "--instance-id",
             CLI_INSTANCE_ID,
-            "--json",
+            "--legacy-json",
         ],
     ));
     let current = validation["artifact_fingerprint"].as_str().unwrap();
@@ -136,7 +136,7 @@ fn completed_candidate_cli_fixture() -> CompletedCandidateCliFixture {
             CLI_INSTANCE_ID,
             "--from-request",
             intake_request.to_str().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     ));
     let intake_record_ref = intake["authoritative_outputs"][0]["ref"]
@@ -164,7 +164,7 @@ fn completed_candidate_cli_fixture() -> CompletedCandidateCliFixture {
             &intake_record_fingerprint,
             "--expected-current-fingerprint",
             current,
-            "--json",
+            "--legacy-json",
         ],
     ));
     let candidate_request = repo.path().join("cli-recovery-candidate.json");
@@ -192,7 +192,7 @@ fn completed_candidate_cli_fixture() -> CompletedCandidateCliFixture {
             CLI_INSTANCE_ID,
             "--from-request",
             candidate_request.to_str().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     ));
     CompletedCandidateCliFixture {
@@ -309,7 +309,7 @@ fn candidate_validate_uses_the_exact_committed_intake_pair() {
         "--intake-record-ref",
         "--intake-record-fingerprint",
         "--expected-current-fingerprint",
-        "--json",
+        "--legacy-json",
     ] {
         assert!(help.contains(option), "missing {option}: {help}");
     }
@@ -413,7 +413,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             "list-kinds",
             "--repository-root",
             root,
-            "--json",
+            "--legacy-json",
         ],
     ));
     assert!(kinds["kinds"]
@@ -428,7 +428,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             "list-instances",
             "--repository-root",
             root,
-            "--json",
+            "--legacy-json",
         ],
     ));
     assert!(instances["instances"]
@@ -450,7 +450,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
                 kind_ref,
                 "--instance-id",
                 instance_id,
-                "--json",
+                "--legacy-json",
             ],
         ));
         assert_eq!(
@@ -495,7 +495,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             input,
             "--expected-current-fingerprint",
             "absent",
-            "--json",
+            "--legacy-json",
         ],
     );
     assert!(!stale_evaluation.status.success());
@@ -519,7 +519,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
                 input,
                 "--expected-current-fingerprint",
                 current_artifact_fingerprint.as_deref().unwrap(),
-                "--json",
+                "--legacy-json",
             ],
         ));
         let content = result["normalized_content"].clone();
@@ -552,7 +552,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             "-",
             "--expected-current-fingerprint",
             current_artifact_fingerprint.as_deref().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
         &fs::read(&input_path).unwrap(),
     ));
@@ -608,7 +608,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             instance_id,
             "--from-request",
             intake_request_path.to_str().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     ));
     assert_eq!(intake["operation_id"], "intake.record.append");
@@ -638,7 +638,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             instance_id,
             "--from-request",
             stale_intake_request_path.to_str().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     );
     assert!(!stale_intake.status.success());
@@ -666,7 +666,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             instance_id,
             "--from-request",
             stale_intake_request_path.to_str().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     );
     assert!(!stale_replay.status.success());
@@ -724,7 +724,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             intake_record_fingerprint,
             "--expected-current-fingerprint",
             current_artifact_fingerprint.as_deref().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     ));
     assert_eq!(candidate["operation_id"], "artifact.candidate.validate");
@@ -778,7 +778,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
         instance_id,
         "--from-request",
         candidate_mismatch_path.to_str().unwrap(),
-        "--json",
+        "--legacy-json",
     ];
     let mismatch = run_at(repo.path(), &mismatch_args);
     assert!(!mismatch.status.success());
@@ -835,7 +835,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             instance_id,
             "--from-request",
             candidate_request_path.to_str().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     ));
     assert_eq!(
@@ -920,7 +920,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             instance_id,
             "--from-request",
             promote_request_path.to_str().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     ));
     assert_eq!(promotion["operation_id"], "artifact.candidate.promote");
@@ -973,7 +973,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             kind_ref,
             "--instance-id",
             instance_id,
-            "--json",
+            "--legacy-json",
         ],
     ));
     assert_eq!(restarted_validation["outcome"], "valid");
@@ -1005,7 +1005,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
                 instance_id,
                 "--from-request",
                 request_path.to_str().unwrap(),
-                "--json",
+                "--legacy-json",
             ],
         ));
         assert_eq!(replay["execution_disposition"], "replayed");
@@ -1031,7 +1031,7 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             instance_id,
             "--from-request",
             "-",
-            "--json",
+            "--legacy-json",
         ],
         &fs::read(&intake_request_path).unwrap(),
     ));
@@ -1124,7 +1124,7 @@ fn actual_binary_uses_exact_exit_codes_explicit_roots_and_absent_spelling() {
                 inputs.to_str().unwrap(),
                 "--expected-current-fingerprint",
                 spelling,
-                "--json",
+                "--legacy-json",
             ],
         )
     };
@@ -1182,7 +1182,7 @@ fn actual_binary_recovers_every_post_marker_prefix_and_refuses_non_prefixes() {
                 CLI_INSTANCE_ID,
                 "--from-request",
                 repo.path().join(request_name).to_str().unwrap(),
-                "--json",
+                "--legacy-json",
             ],
         );
         let replay = successful_json(output);
@@ -1226,7 +1226,7 @@ fn actual_binary_recovers_every_post_marker_prefix_and_refuses_non_prefixes() {
                 CLI_INSTANCE_ID,
                 "--from-request",
                 repo.path().join(request_name).to_str().unwrap(),
-                "--json",
+                "--legacy-json",
             ],
         );
         assert_eq!(output.status.code(), Some(1), "missing {missing}");
@@ -1277,7 +1277,7 @@ fn actual_binary_enforces_exact_and_different_requests_under_a_tombstone() {
                 CLI_INSTANCE_ID,
                 "--from-request",
                 request.to_str().unwrap(),
-                "--json",
+                "--legacy-json",
             ],
         )
     };

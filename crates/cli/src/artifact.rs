@@ -48,8 +48,8 @@ struct RepositoryArgs {
     /// Exact repository root containing `.handbook/profile-selection.json`.
     #[arg(long = "repository-root")]
     repository_root: String,
-    /// Emit machine-readable JSON.
-    #[arg(long)]
+    /// Emit the deprecated pre-HCM-4.3 JSON projection.
+    #[arg(id = "legacy_json", long = "legacy-json", conflicts_with = "json")]
     json: bool,
 }
 
@@ -64,8 +64,8 @@ struct ArtifactSelectorArgs {
     /// Exact selected artifact instance ID.
     #[arg(long = "instance-id")]
     instance_id: String,
-    /// Emit machine-readable JSON.
-    #[arg(long)]
+    /// Emit the deprecated pre-HCM-4.3 JSON projection.
+    #[arg(id = "legacy_json", long = "legacy-json", conflicts_with = "json")]
     json: bool,
 }
 
@@ -96,8 +96,8 @@ struct IntakeEvaluateArgs {
     /// Compare against an exact current fingerprint or the literal `absent`.
     #[arg(long = "expected-current-fingerprint")]
     expected_current_fingerprint: Option<String>,
-    /// Emit machine-readable JSON.
-    #[arg(long)]
+    /// Emit the deprecated pre-HCM-4.3 JSON projection.
+    #[arg(id = "legacy_json", long = "legacy-json", conflicts_with = "json")]
     json: bool,
 }
 
@@ -115,8 +115,8 @@ struct MutationRequestArgs {
     /// Read one bounded mutation request document from a path or `-` for stdin.
     #[arg(long = "from-request", value_name = "path|-")]
     from_request: String,
-    /// Emit machine-readable JSON.
-    #[arg(long)]
+    /// Emit the deprecated pre-HCM-4.3 JSON projection.
+    #[arg(id = "legacy_json", long = "legacy-json", conflicts_with = "json")]
     json: bool,
 }
 
@@ -140,8 +140,8 @@ struct CandidateValidateArgs {
     /// Compare against an exact current fingerprint or the literal `absent`.
     #[arg(long = "expected-current-fingerprint")]
     expected_current_fingerprint: Option<String>,
-    /// Emit machine-readable JSON.
-    #[arg(long)]
+    /// Emit the deprecated pre-HCM-4.3 JSON projection.
+    #[arg(id = "legacy_json", long = "legacy-json", conflicts_with = "json")]
     json: bool,
 }
 

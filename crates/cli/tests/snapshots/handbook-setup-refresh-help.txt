@@ -3,6 +3,7 @@ Preserve canonical files by default and optionally rewrite starter files or rese
 Usage: handbook setup refresh [OPTIONS]
 
 Options:
+      --json         Emit the versioned handbook.invocation-response@1.0.0 machine protocol
       --rewrite      Rewrite setup-owned starter files in place
       --reset-state  Reset only `.handbook/state/**`
   -h, --help         Print help

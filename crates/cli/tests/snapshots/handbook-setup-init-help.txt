@@ -1,6 +1,7 @@
 Create canonical `.handbook/` scaffold and starter files for first-run setup
 
-Usage: handbook setup init
+Usage: handbook setup init [OPTIONS]
 
 Options:
+      --json  Emit the versioned handbook.invocation-response@1.0.0 machine protocol
   -h, --help  Print help

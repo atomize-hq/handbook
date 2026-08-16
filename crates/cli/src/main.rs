@@ -1,6 +1,7 @@
 mod approvers;
 mod artifact;
 mod author;
+mod coverage;
 mod doctor;
 mod doctor_rendering;
 mod exit_policy;
@@ -32,12 +33,13 @@ const PACKET_EXECUTION_LIVE_ID: &str = "execution.live.packet";
 const RELEASE_VERSION: &str = env!("HANDBOOK_RELEASE_VERSION");
 
 fn main() -> ExitCode {
+    coverage::validate().expect("closed HCM-4.3 CLI coverage table");
     let command = pipeline_help::apply_dynamic_pipeline_help(Cli::command());
     let matches = command.clone().get_matches();
     let cli = Cli::from_arg_matches(&matches).unwrap_or_else(|err| err.exit());
 
     match cli.command {
-        Some(command) => command.run(),
+        Some(command) => command.run(cli.json),
         None => {
             let mut command = command;
             command.print_help().expect("help output");
@@ -56,6 +58,9 @@ fn main() -> ExitCode {
     long_about = "Rust CLI for the reduced v1 handbook. `setup` initializes or refreshes canonical repo-local `.handbook/` inputs. `author` is the baseline authoring surface for charter and project context. `pipeline` is the orchestration surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations. planning packet generation uses canonical repo-local `.handbook/` inputs. fixture-backed execution demo flows through `execution.demo.packet`. live execution is explicitly refused. `inspect` is the packet proof surface. `doctor` is the recovery surface."
 )]
 struct Cli {
+    /// Emit the versioned handbook.invocation-response@1.0.0 machine protocol.
+    #[arg(long, global = true)]
+    json: bool,
     #[command(subcommand)]
     command: Option<Command>,
 }
@@ -81,7 +86,7 @@ enum Command {
 }
 
 impl Command {
-    fn run(self) -> ExitCode {
+    fn run(self, machine_json: bool) -> ExitCode {
         match self {
             Command::Setup(args) => setup::run(args),
             Command::Author(args) => author::run(args),
@@ -90,7 +95,7 @@ impl Command {
             Command::Pipeline(args) => pipeline::run(args),
             Command::Generate(args) => generate::run(args),
             Command::Inspect(args) => inspect::run(args),
-            Command::Doctor(args) => doctor::run(args),
+            Command::Doctor(args) => doctor::run(args, machine_json),
         }
     }
 }
@@ -165,8 +170,8 @@ struct AuthorCharterArgs {
     /// Validate selected canonical Charter truth without mutation.
     #[arg(long)]
     validate: bool,
-    /// Emit machine-readable JSON.
-    #[arg(long)]
+    /// Emit the deprecated pre-HCM-4.3 JSON projection.
+    #[arg(id = "legacy_json", long = "legacy-json", conflicts_with = "json")]
     json: bool,
 }
 
@@ -199,7 +204,7 @@ enum ApproversCommand {
 struct ApproverBootstrapArgs {
     #[arg(long = "initial-charter-quorum", required = true)]
     initial_charter_quorum: Vec<String>,
-    #[arg(long)]
+    #[arg(id = "legacy_json", long = "legacy-json", conflicts_with = "json")]
     json: bool,
 }
 
@@ -207,7 +212,7 @@ struct ApproverBootstrapArgs {
 struct ApproverAddCredentialArgs {
     #[arg(long = "approval-mapping", required = true)]
     approval_mappings: Vec<String>,
-    #[arg(long)]
+    #[arg(id = "legacy_json", long = "legacy-json", conflicts_with = "json")]
     json: bool,
 }
 
@@ -215,7 +220,7 @@ struct ApproverAddCredentialArgs {
 struct ApproverRevokeCredentialArgs {
     #[arg(long = "credential-id-hash")]
     credential_id_hash: String,
-    #[arg(long)]
+    #[arg(id = "legacy_json", long = "legacy-json", conflicts_with = "json")]
     json: bool,
 }
 
@@ -225,7 +230,7 @@ struct ApproverUpdateMappingArgs {
     credential_id_hash: String,
     #[arg(long = "approval-mapping", required = true)]
     approval_mappings: Vec<String>,
-    #[arg(long)]
+    #[arg(id = "legacy_json", long = "legacy-json", conflicts_with = "json")]
     json: bool,
 }
 
@@ -241,9 +246,9 @@ struct AuthorProjectContextArgs {
 
 #[derive(clap::Args, Debug)]
 struct DoctorArgs {
-    /// Emit machine-readable JSON to stdout.
-    #[arg(long)]
-    json: bool,
+    /// Emit the deprecated handbook.repository-doctor-report@1.2.0 projection.
+    #[arg(long = "legacy-json", conflicts_with = "json")]
+    legacy_json: bool,
 }
 
 #[derive(clap::Args, Debug)]

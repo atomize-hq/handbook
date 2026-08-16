@@ -3,14 +3,61 @@ use std::fmt::Write;
 
 const DOCTOR_REPORT_SCHEMA_ID: &str = "handbook.repository-doctor-report";
 const DOCTOR_REPORT_SCHEMA_VERSION: &str = "1.2.0";
+const DOCTOR_ERROR_SCHEMA_ID: &str = "handbook.repository-doctor-error";
+const DOCTOR_ERROR_SCHEMA_VERSION: &str = "1.0.0";
 
-pub(crate) fn render_json(report: &handbook_sdk::DoctorReport) -> Result<String, String> {
+pub(crate) fn render_invocation(
+    response: &handbook_sdk::contract_membrane::InvocationResponseV1,
+) -> Result<Vec<u8>, String> {
+    let mut output = handbook_sdk::contract_membrane::canonical_json_bytes(
+        response,
+        &handbook_sdk::contract_membrane::ContractLimits::packet0(),
+    )
+    .map_err(|_| "failed to serialize invocation response".to_owned())?;
+    output.push(b'\n');
+    Ok(output)
+}
+
+pub(crate) fn render_json(
+    response: &handbook_sdk::contract_membrane::InvocationResponseV1,
+) -> Result<String, String> {
+    match doctor_outcome(response)? {
+        Ok(report) => render_report_json(&report),
+        Err(error) => serde_json::to_string_pretty(&DoctorJsonError::from(error))
+            .map(|mut output| {
+                output.push('\n');
+                output
+            })
+            .map_err(|_| "failed to serialize doctor error".to_owned()),
+    }
+}
+
+fn render_report_json(report: &handbook_sdk::DoctorReport) -> Result<String, String> {
     serde_json::to_string_pretty(&DoctorJsonReport::from(report))
         .map(|mut output| {
             output.push('\n');
             output
         })
         .map_err(|_| "failed to serialize doctor report".to_owned())
+}
+
+#[derive(Serialize)]
+struct DoctorJsonError {
+    schema_id: &'static str,
+    schema_version: &'static str,
+    kind: &'static str,
+    reason: &'static str,
+}
+
+impl From<handbook_sdk::DoctorError> for DoctorJsonError {
+    fn from(error: handbook_sdk::DoctorError) -> Self {
+        Self {
+            schema_id: DOCTOR_ERROR_SCHEMA_ID,
+            schema_version: DOCTOR_ERROR_SCHEMA_VERSION,
+            kind: doctor_error_kind_name(error.kind()),
+            reason: doctor_error_reason_name(error.reason_code()),
+        }
+    }
 }
 
 #[derive(Serialize)]
@@ -226,7 +273,29 @@ impl<'a> From<&'a handbook_sdk::DoctorCharterRow> for DoctorJsonCharter<'a> {
     }
 }
 
-pub(crate) fn render_text(report: &handbook_sdk::DoctorReport) -> String {
+pub(crate) fn render_text(
+    response: &handbook_sdk::contract_membrane::InvocationResponseV1,
+) -> Result<String, String> {
+    match doctor_outcome(response)? {
+        Ok(report) => Ok(render_report_text(&report)),
+        Err(error) => Ok(format!(
+            "OUTCOME: ERROR\nCATEGORY: {}\nREASON: {}\n",
+            doctor_error_kind_name(error.kind()),
+            doctor_error_reason_name(error.reason_code())
+        )),
+    }
+}
+
+fn doctor_outcome(
+    response: &handbook_sdk::contract_membrane::InvocationResponseV1,
+) -> Result<Result<handbook_sdk::DoctorReport, handbook_sdk::DoctorError>, String> {
+    response
+        .repository_doctor_outcome(&handbook_sdk::contract_membrane::ContractLimits::packet0())
+        .map_err(|_| "failed to admit repository doctor invocation response".to_owned())?
+        .ok_or_else(|| "invocation response is not repository doctor".to_owned())
+}
+
+fn render_report_text(report: &handbook_sdk::DoctorReport) -> String {
     let mut output = String::new();
     writeln!(&mut output, "OUTCOME: {}", status_name(report.status)).expect("string write");
     writeln!(&mut output, "PROFILE: {}", report.profile_ref).expect("string write");
@@ -418,6 +487,24 @@ fn status_json_name(status: handbook_sdk::RepositoryReadinessStatus) -> &'static
     }
 }
 
+fn doctor_error_kind_name(kind: handbook_sdk::DoctorErrorKind) -> &'static str {
+    match kind {
+        handbook_sdk::DoctorErrorKind::ProfileResolution => "profile_resolution",
+        handbook_sdk::DoctorErrorKind::ProfileDecision => "profile_decision",
+    }
+}
+
+fn doctor_error_reason_name(reason: handbook_sdk::DoctorErrorReasonCode) -> &'static str {
+    match reason {
+        handbook_sdk::DoctorErrorReasonCode::ShippedProfileUnavailable => {
+            "shipped_profile_unavailable"
+        }
+        handbook_sdk::DoctorErrorReasonCode::SelectedProfileDecisionInvalid => {
+            "selected_profile_decision_invalid"
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -437,9 +524,9 @@ mod tests {
             status: handbook_sdk::RepositoryReadinessStatus::Ready,
         };
 
-        let text = render_text(&report);
+        let text = render_report_text(&report);
         assert!(text.starts_with("OUTCOME: READY\n"), "{text}");
-        let json = render_json(&report).unwrap();
+        let json = render_report_json(&report).unwrap();
         assert!(json.ends_with('\n'));
         assert!(!json.ends_with("\n\n"));
         let value: serde_json::Value = serde_json::from_str(&json).unwrap();
@@ -518,7 +605,7 @@ mod tests {
             status: handbook_sdk::RepositoryReadinessStatus::Indeterminate,
         };
 
-        let json = render_json(&report).unwrap();
+        let json = render_report_json(&report).unwrap();
         let value: serde_json::Value = serde_json::from_str(&json).unwrap();
         assert_eq!(value["schema_id"], DOCTOR_REPORT_SCHEMA_ID);
         assert_eq!(value["schema_version"], DOCTOR_REPORT_SCHEMA_VERSION);
@@ -537,7 +624,7 @@ mod tests {
         );
         assert_eq!(value["status"], "indeterminate");
 
-        let text = render_text(&report);
+        let text = render_report_text(&report);
         assert_eq!(
             text,
             concat!(
@@ -554,5 +641,63 @@ mod tests {
                 "NEXT ACTION: observe_lifecycle\n",
             )
         );
+    }
+
+    fn fingerprint(label: &str) -> String {
+        handbook_sdk::contract_membrane::sha256_fingerprint(label.as_bytes())
+            .as_str()
+            .to_owned()
+    }
+
+    fn invocation_for_report(
+        report: &handbook_sdk::DoctorReport,
+    ) -> handbook_sdk::contract_membrane::InvocationResponseV1 {
+        let limits = handbook_sdk::contract_membrane::ContractLimits::packet0();
+        let response =
+            handbook_sdk::contract_membrane::UseCaseResponseV1::repository_doctor(report, &limits)
+                .unwrap();
+        handbook_sdk::contract_membrane::InvocationResponseV1::use_case(response, &limits).unwrap()
+    }
+
+    #[test]
+    fn human_and_legacy_renderers_derive_from_the_invocation_response() {
+        let report = handbook_sdk::DoctorReport {
+            profile_ref: "example.profile.ready@1.0.0".to_owned(),
+            profile_fingerprint: fingerprint("profile"),
+            stable_role_registry_ref: "handbook.roles.core@1.1.0".to_owned(),
+            stable_role_registry_fingerprint: fingerprint("roles"),
+            conditions: vec![],
+            capabilities: vec![],
+            artifacts: vec![],
+            project_context: None,
+            charter: None,
+            status: handbook_sdk::RepositoryReadinessStatus::Ready,
+        };
+        let invocation = invocation_for_report(&report);
+        assert_eq!(
+            render_text(&invocation).unwrap(),
+            render_report_text(&report)
+        );
+        assert_eq!(
+            render_json(&invocation).unwrap(),
+            render_report_json(&report).unwrap()
+        );
+
+        let limits = handbook_sdk::contract_membrane::ContractLimits::packet0();
+        let failure = handbook_sdk::contract_membrane::UseCaseResponseV1::repository_doctor_error(
+            handbook_sdk::DoctorError::SelectedProfileDecisionInvalid,
+            &limits,
+        )
+        .unwrap();
+        let failure =
+            handbook_sdk::contract_membrane::InvocationResponseV1::use_case(failure, &limits)
+                .unwrap();
+        let legacy = render_json(&failure).unwrap();
+        let value: serde_json::Value = serde_json::from_str(&legacy).unwrap();
+        assert_eq!(value["schema_id"], DOCTOR_ERROR_SCHEMA_ID);
+        assert_eq!(value["kind"], "profile_decision");
+        assert_eq!(value["reason"], "selected_profile_decision_invalid");
+        assert!(legacy.ends_with('\n'));
+        assert!(!legacy.ends_with("\n\n"));
     }
 }

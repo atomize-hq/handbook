@@ -94,7 +94,7 @@ fn post_phase_2_runbook_binds_supported_disposable_journeys() {
         "runtime_smoke_valid.yaml",
         "AUTHENTICATOR_UNAVAILABLE",
         "hcm_2_3_generic_custom_kind/.handbook",
-        "artifact list-kinds --repository-root $GenericRepo --json",
+        "artifact list-kinds --repository-root $GenericRepo --legacy-json",
         "inspect_reports_ready_when_required_artifacts_present",
         "generate_emits_real_packet_body_when_ready",
         "pipeline show --id pipeline.foundation_inputs",

@@ -19,7 +19,7 @@ macro_rules! schema_asset {
 }
 
 const SCHEMA_MANIFEST_BYTES: &[u8] = include_bytes!("../../schemas/manifest.json");
-const SCHEMA_ASSETS: [(&str, &[u8]); 53] = [
+const SCHEMA_ASSETS: [(&str, &[u8]); 64] = [
     schema_asset!(
         "handbook.artifact-ref@1.0.0",
         "../../schemas/2020-12/handbook.artifact-ref/1.0.0.schema.json"
@@ -83,6 +83,10 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 53] = [
     schema_asset!(
         "handbook.idempotency-state@1.0.0",
         "../../schemas/2020-12/handbook.idempotency-state/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.invocation-response@1.0.0",
+        "../../schemas/2020-12/handbook.invocation-response/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.next-action@1.0.0",
@@ -225,8 +229,48 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 53] = [
         "../../schemas/2020-12/handbook.source-binding/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.transport-failure-details@1.0.0",
+        "../../schemas/2020-12/handbook.transport-failure-details/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.transport-failure@1.0.0",
+        "../../schemas/2020-12/handbook.transport-failure/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.typed-catalog-cursor@1.0.0",
         "../../schemas/2020-12/handbook.typed-catalog-cursor/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case-response@1.0.0",
+        "../../schemas/2020-12/handbook.use-case-response/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case.approver-administration-result@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.approver-administration-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case.author-charter-result@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.author-charter-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case.author-project-context-result@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.author-project-context-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case.pipeline-route-resolve-and-persist-result@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.pipeline-route-resolve-and-persist-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case.repository-doctor-details@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.repository-doctor-details/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case.repository-doctor-result@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.repository-doctor-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case.repository-setup-result@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.repository-setup-result/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.write-receipt@1.0.0",
@@ -500,7 +544,7 @@ fn verify_schema_assets(
         &ContractLimits::packet0(),
     )
     .map_err(|_| ProductionWitnessError::StaleManifest)?;
-    if manifest.len() != 53 || assets.len() != 53 || manifest.len() != assets.len() {
+    if manifest.len() != 64 || assets.len() != 64 || manifest.len() != assets.len() {
         return Err(ProductionWitnessError::ManifestCountMismatch);
     }
     let mut seen = BTreeSet::new();
@@ -753,7 +797,7 @@ mod tests {
         let witness =
             ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
                 .unwrap();
-        assert_eq!(witness.schema_manifest().len(), 53);
+        assert_eq!(witness.schema_manifest().len(), 64);
         assert_eq!(witness.owner_versions().len(), 3);
         assert_eq!(witness.profiles().len(), 3);
         assert_eq!(witness.capabilities().len(), 1);

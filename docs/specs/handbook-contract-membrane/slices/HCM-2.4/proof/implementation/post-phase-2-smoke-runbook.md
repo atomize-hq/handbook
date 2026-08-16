@@ -72,7 +72,7 @@ input from the released canonical Charter contract:
 ```powershell
 cargo test -p handbook-cli --test hcm_2_2_product_cutover author_intent_is_evaluated_but_fails_closed_without_lineage_persistence -- --exact
 Push-Location $EmptyRepo
-& $Handbook approvers bootstrap --initial-charter-quorum "Project owner approval=Project owner" --json
+& $Handbook approvers bootstrap --initial-charter-quorum "Project owner approval=Project owner" --legacy-json
 Pop-Location
 ```
 
@@ -89,13 +89,13 @@ Copy-Item -LiteralPath (Join-Path $SourceRoot "crates/engine/tests/fixtures/hcm_
 git -C $GenericRepo init -q
 Push-Location $GenericRepo
 & $Handbook setup
-& $Handbook artifact list-kinds --repository-root $GenericRepo --json
-& $Handbook artifact list-instances --repository-root $GenericRepo --json
+& $Handbook artifact list-kinds --repository-root $GenericRepo --legacy-json
+& $Handbook artifact list-instances --repository-root $GenericRepo --legacy-json
 Pop-Location
 ```
 
 Both list commands emit JSON after explicit profile selection and setup-created
-identity. In `$EmptyRepo`, the same `--json` commands still refuse missing
+identity. In `$EmptyRepo`, the same `--legacy-json` commands still refuse missing
 selection with empty stdout and plain stderr. HCM-2.3 defines no exact
 pre-establishment JSON error envelope; that presentation gap is deferred to an
 authority that can define versioned protocol semantics.

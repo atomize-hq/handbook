@@ -1,10 +1,11 @@
 Initialize or refresh canonical repo-local `.handbook/` inputs
 
-Usage: handbook setup [COMMAND]
+Usage: handbook setup [OPTIONS] [COMMAND]
 
 Commands:
   init     Create canonical `.handbook/` scaffold and starter files for first-run setup
   refresh  Preserve canonical files by default and optionally rewrite starter files or reset `.handbook/state/**`
 
 Options:
+      --json  Emit the versioned handbook.invocation-response@1.0.0 machine protocol
   -h, --help  Print help

@@ -110,7 +110,7 @@ fn charter_help_exposes_only_the_frozen_operation_grammar() {
         "--promote-candidate",
         "--approval-ref",
         "--validate",
-        "--json",
+        "--legacy-json",
     ] {
         assert!(help.contains(flag), "missing {flag} in:\n{help}");
     }
@@ -135,7 +135,7 @@ fn legacy_from_inputs_without_mode_refuses_before_read_or_mutation() {
             "charter",
             "--from-inputs",
             legacy.to_str().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     );
 
@@ -174,7 +174,7 @@ fn author_intent_is_evaluated_but_fails_closed_without_lineage_persistence() {
             "guided-adaptive",
             "--from-inputs",
             input.to_str().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     );
 
@@ -235,7 +235,7 @@ fn author_intent_is_evaluated_but_fails_closed_without_lineage_persistence() {
             "guided-adaptive",
             "--from-inputs",
             input.to_str().unwrap(),
-            "--json",
+            "--legacy-json",
         ],
     );
     assert!(replay.status.success(), "{}", stdout(&replay));
@@ -254,7 +254,10 @@ fn validate_is_selected_truth_only_and_non_mutating() {
     fs::write(&selected, CHARTER_YAML).unwrap();
     let before = fs::read(&selected).unwrap();
 
-    let output = run(repo.path(), &["author", "charter", "--validate", "--json"]);
+    let output = run(
+        repo.path(),
+        &["author", "charter", "--validate", "--legacy-json"],
+    );
 
     assert!(output.status.success(), "{}", stdout(&output));
     let value: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
@@ -283,7 +286,7 @@ fn approver_commands_map_to_exact_identity_preflight_before_native_authority() {
                 "bootstrap",
                 "--initial-charter-quorum",
                 "Project owner approval=Project owner",
-                "--json",
+                "--legacy-json",
             ],
             "bootstrap",
         ),
@@ -293,7 +296,7 @@ fn approver_commands_map_to_exact_identity_preflight_before_native_authority() {
                 "add-credential",
                 "--approval-mapping",
                 "Security approval=Security owner",
-                "--json",
+                "--legacy-json",
             ],
             "add_credential",
         ),
@@ -303,7 +306,7 @@ fn approver_commands_map_to_exact_identity_preflight_before_native_authority() {
                 "revoke-credential",
                 "--credential-id-hash",
                 "sha256:2222222222222222222222222222222222222222222222222222222222222222",
-                "--json",
+                "--legacy-json",
             ],
             "revoke_credential",
         ),
@@ -315,7 +318,7 @@ fn approver_commands_map_to_exact_identity_preflight_before_native_authority() {
                 "sha256:2222222222222222222222222222222222222222222222222222222222222222",
                 "--approval-mapping",
                 "Security approval=Security owner",
-                "--json",
+                "--legacy-json",
             ],
             "update_mapping",
         ),
@@ -357,7 +360,7 @@ fn approver_mapping_grammar_refusal_stays_cli_owned_and_non_mutating() {
             "add-credential",
             "--approval-mapping",
             "missing-separator",
-            "--json",
+            "--legacy-json",
         ],
     );
 
@@ -393,7 +396,7 @@ fn approver_mapping_grammar_refusal_stays_cli_owned_and_non_mutating() {
             "owner=authority",
             "--approval-mapping",
             "owner=authority",
-            "--json",
+            "--legacy-json",
         ],
     );
 
@@ -438,7 +441,7 @@ fn unsafe_predecessor_recovery_projects_the_exact_closed_refusal_with_zero_delta
             "bootstrap",
             "--initial-charter-quorum",
             "Project owner approval=Project owner",
-            "--json",
+            "--legacy-json",
         ],
     );
 
@@ -498,7 +501,7 @@ fn bootstrap_reaches_engine_and_native_unavailability_has_zero_current_operation
             "bootstrap",
             "--initial-charter-quorum",
             "Project owner approval=Project owner",
-            "--json",
+            "--legacy-json",
         ],
     );
 

@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 53] = [
+const ROOTS: [(&str, &str); 64] = [
     (
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
@@ -86,6 +86,10 @@ const ROOTS: [(&str, &str); 53] = [
     (
         "handbook.idempotency-state@1.0.0",
         "handbook.idempotency-state/1.0.0.schema.json",
+    ),
+    (
+        "handbook.invocation-response@1.0.0",
+        "handbook.invocation-response/1.0.0.schema.json",
     ),
     (
         "handbook.next-action@1.0.0",
@@ -228,8 +232,48 @@ const ROOTS: [(&str, &str); 53] = [
         "handbook.source-binding/1.0.0.schema.json",
     ),
     (
+        "handbook.transport-failure-details@1.0.0",
+        "handbook.transport-failure-details/1.0.0.schema.json",
+    ),
+    (
+        "handbook.transport-failure@1.0.0",
+        "handbook.transport-failure/1.0.0.schema.json",
+    ),
+    (
         "handbook.typed-catalog-cursor@1.0.0",
         "handbook.typed-catalog-cursor/1.0.0.schema.json",
+    ),
+    (
+        "handbook.use-case-response@1.0.0",
+        "handbook.use-case-response/1.0.0.schema.json",
+    ),
+    (
+        "handbook.use-case.approver-administration-result@1.0.0",
+        "handbook.use-case.approver-administration-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.use-case.author-charter-result@1.0.0",
+        "handbook.use-case.author-charter-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.use-case.author-project-context-result@1.0.0",
+        "handbook.use-case.author-project-context-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.use-case.pipeline-route-resolve-and-persist-result@1.0.0",
+        "handbook.use-case.pipeline-route-resolve-and-persist-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.use-case.repository-doctor-details@1.0.0",
+        "handbook.use-case.repository-doctor-details/1.0.0.schema.json",
+    ),
+    (
+        "handbook.use-case.repository-doctor-result@1.0.0",
+        "handbook.use-case.repository-doctor-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.use-case.repository-setup-result@1.0.0",
+        "handbook.use-case.repository-setup-result/1.0.0.schema.json",
     ),
     (
         "handbook.write-receipt@1.0.0",
@@ -275,7 +319,9 @@ fn checked_in_tree_contains_exactly_the_authorized_roots() {
     let actual = schema_files(&schema_root);
     let expected = ROOTS
         .iter()
-        .map(|(_, relative_path)| PathBuf::from(relative_path))
+        .map(|(_, relative_path)| {
+            PathBuf::from(relative_path.replace('/', std::path::MAIN_SEPARATOR_STR))
+        })
         .collect::<BTreeSet<_>>();
 
     assert_eq!(actual, expected);
@@ -329,7 +375,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 53);
+    assert_eq!(entries.len(), 64);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries

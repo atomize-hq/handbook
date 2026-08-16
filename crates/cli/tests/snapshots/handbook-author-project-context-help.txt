@@ -4,5 +4,6 @@ Usage: handbook author project-context [OPTIONS]
 
 Options:
       --from-inputs <path|->  Read normalized structured inputs from a YAML file or `-` for stdin
+      --json                  Emit the versioned handbook.invocation-response@1.0.0 machine protocol
       --validate              Validate canonical YAML input and fixed-view rendering without mutation
   -h, --help                  Print help

@@ -324,7 +324,7 @@ fn file_inputs_author_charter_successfully_with_deterministic_rendering() {
             "guided-adaptive",
             "--from-inputs",
             inputs_path.to_str().expect("utf-8 path"),
-            "--json",
+            "--legacy-json",
         ],
     );
 
@@ -362,7 +362,7 @@ fn file_inputs_author_charter_repairs_semantically_invalid_canonical_truth() {
             "guided-adaptive",
             "--from-inputs",
             inputs_path.to_str().expect("utf-8 path"),
-            "--json",
+            "--legacy-json",
         ],
     );
 
@@ -395,7 +395,7 @@ fn stdin_inputs_author_charter_successfully_with_deterministic_rendering() {
             "guided-adaptive",
             "--from-inputs",
             "-",
-            "--json",
+            "--legacy-json",
         ],
         &intake,
     );
@@ -420,7 +420,10 @@ fn validate_from_inputs_succeeds_without_mutation() {
     let selected = dir.path().join(".handbook/project/charter.yaml");
     write_file(&selected, CANONICAL_CHARTER_YAML);
     let before = fs::read(&selected).expect("selected Charter");
-    let output = run_in(dir.path(), &["author", "charter", "--validate", "--json"]);
+    let output = run_in(
+        dir.path(),
+        &["author", "charter", "--validate", "--legacy-json"],
+    );
 
     assert!(
         output.status.success(),
@@ -762,7 +765,7 @@ fn charter_boundary_refusals_preserve_exact_stdout_stderr_exit_and_filesystem() 
             "charter",
             "--from-inputs",
             legacy_input.to_str().expect("UTF-8 path"),
-            "--json",
+            "--legacy-json",
         ],
     );
     assert_eq!(legacy.status.code(), Some(1));
@@ -847,7 +850,7 @@ fn charter_author_success_preserves_exact_json_and_filesystem_delta() {
             "guided-adaptive",
             "--from-inputs",
             input.to_str().expect("UTF-8 path"),
-            "--json",
+            "--legacy-json",
         ],
     );
     assert_eq!(output.status.code(), Some(0));
@@ -938,7 +941,7 @@ fn charter_approval_preflight_preserves_the_exact_legacy_json_shape() {
             "Project owner approval",
             "--authority-ref",
             "Project owner",
-            "--json",
+            "--legacy-json",
         ],
     );
     assert_eq!(output.status.code(), Some(1));

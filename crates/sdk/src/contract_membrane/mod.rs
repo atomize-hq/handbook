@@ -6,6 +6,7 @@ mod bounds;
 mod catalog;
 mod dto;
 mod envelope;
+mod invocation;
 mod operation;
 mod owner_admission;
 mod posture;
@@ -46,6 +47,23 @@ pub use dto::{
 pub use envelope::{
     OperationAdmissionRefusalV1, OperationRequestV1, OperationResponseV1, OperationSchemaValidator,
     RequestId,
+};
+pub use invocation::{
+    ApproverAdministrationOperationV1, ApproverAdministrationResultV1, ArtifactApplicabilityV1,
+    ArtifactInspectionReasonV1, ArtifactInspectionStatusV1, AuthorCharterOperationV1,
+    AuthorCharterResultV1, AuthorProjectContextResultV1, DoctorCharterDefinitionClosureStatusV1,
+    DoctorCharterLifecycleStateV1, DoctorCharterNextActionV1, InvocationResponseKind,
+    InvocationResponseV1, PipelineResolvedStageV1, PipelineRouteResolveAndPersistResultV1,
+    PipelineRouteRunV1, PipelineRouteStageReasonV1, PipelineRouteStageStatusV1,
+    PipelineRouteStateV1, PipelineRoutingEntryV1, ProfileConditionOutcomeV1,
+    ProfileConditionReasonV1, ProfileRequirednessModeV1, ReferenceFingerprintV1,
+    RepositoryDoctorArtifactV1, RepositoryDoctorCapabilityV1, RepositoryDoctorCharterDefinitionV1,
+    RepositoryDoctorCharterV1, RepositoryDoctorConditionV1, RepositoryDoctorDetailsV1,
+    RepositoryDoctorFailureKindV1, RepositoryDoctorFailureReasonV1,
+    RepositoryDoctorProjectContextV1, RepositoryDoctorResultV1, RepositoryReadinessStatusV1,
+    RepositorySetupArtifactActionKindV1, RepositorySetupArtifactV1, RepositorySetupModeV1,
+    RepositorySetupResultV1, RepositorySetupRootActionV1, TransportFailureDetailsV1,
+    TransportFailureKind, TransportFailureV1, UseCaseResponseV1,
 };
 pub use operation::{
     operation_inventory, validate_complete_definition_set, validate_complete_operation_ref_set,

@@ -4649,7 +4649,7 @@ fn author_help_matches_snapshot() {
     assert_in_order(
         &rendered,
         &[
-            "Usage: handbook author [COMMAND]",
+            "Usage: handbook author [OPTIONS] [COMMAND]",
             "charter          Create, approve, promote, or validate the selected canonical Charter",
             "project-context  Deterministically author canonical `.handbook/project/context.yaml`",
         ],
@@ -4677,7 +4677,7 @@ fn author_charter_help_matches_snapshot() {
             "--promote-candidate <PROMOTE_CANDIDATE>",
             "--approval-ref <APPROVAL_REF>",
             "--validate",
-            "--json",
+            "--legacy-json",
         ],
     );
     assert!(!rendered.contains(".handbook/charter/CHARTER.md"));
@@ -4727,7 +4727,7 @@ fn profile_setup_and_doctor_use_typed_rows_json_and_exit_policy() {
     let text_stdout = String::from_utf8(text.stdout).expect("doctor stdout utf-8");
     assert!(text_stdout.contains("environment_context [.handbook/project/environment.yaml] APPLICABILITY: optional STATUS: missing REASON: optional_path_missing"), "{text_stdout}");
 
-    let json = run_in(doctor_repo.path(), &["doctor", "--json"]);
+    let json = run_in(doctor_repo.path(), &["doctor", "--legacy-json"]);
     assert!(!json.status.success());
     let json_stdout = String::from_utf8(json.stdout).expect("doctor json utf-8");
     assert!(json_stdout.ends_with('\n'));
@@ -5415,7 +5415,7 @@ fn doctor_reports_ready_when_required_artifacts_present() {
     assert!(stdout.contains("## PROJECT CONTEXT\n"), "{stdout}");
     assert!(stdout.contains("PATH: .handbook/project/context.yaml SOURCE FINGERPRINT: sha256:c8646d5821d80fe8e0eeade2713fc63f6e91b2cbb64f6832b5a1f178b810d02f RENDERED OUTPUT FINGERPRINT: sha256:9502d897dc9542a492fdc50ca9ebb2340ac59be25b37a615ea6cb842387641fd MEDIA TYPE: text/markdown\n"), "{stdout}");
 
-    let json_output = run_in(root, &["doctor", "--json"]);
+    let json_output = run_in(root, &["doctor", "--legacy-json"]);
     assert!(json_output.status.success());
     let json_stdout = String::from_utf8(json_output.stdout).expect("doctor JSON is utf-8");
     assert!(json_stdout.ends_with('\n'));

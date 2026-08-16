@@ -3,5 +3,6 @@ Diagnose blockers and safe next actions
 Usage: handbook doctor [OPTIONS]
 
 Options:
-      --json  Emit machine-readable JSON to stdout
-  -h, --help  Print help
+      --json         Emit the versioned handbook.invocation-response@1.0.0 machine protocol
+      --legacy-json  Emit the deprecated handbook.repository-doctor-report@1.2.0 projection
+  -h, --help         Print help
