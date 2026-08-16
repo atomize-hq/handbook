@@ -10,11 +10,11 @@ At this checkpoint:
 
 - the Rust product implementation remains in the workspace;
 - retained executable fixtures remain under [`slices/`](slices/), alongside the
-  [`HCM-4.2 outcome authority`](slices/HCM-4.2/README.md) and its admitted
-  [`Packet-1 authority`](slices/HCM-4.2/packet-1-schema-generation.md);
+  [`HCM-4.2 outcome authority`](slices/HCM-4.2/README.md) and completed
+  [`Packet-1 decision authority`](slices/HCM-4.2/packet-1-schema-generation.md);
 - Phase 3 is exited under its selected reduced boundary; its explicitly rehomed
   work remains with later owners;
-- the [`phase-and-slice map`](phase-and-slice-map.md) supplies current roadmap status, order, hard predecessors, and exit state, while HCM-4.2 Packet 1 is the sole live slice-specific execution authority;
+- the [`phase-and-slice map`](phase-and-slice-map.md) supplies current roadmap status, order, hard predecessors, and exit state, while the HCM-4.2 slice authority delegates sequential preparation and execution through its remaining named packets;
 - the former orchestration skill under `.codex/skills/.disabled/` is inactive and is not authority for new work; and
 - the active thin router is routing guidance only and is not authority for product or slice work.
 
@@ -38,8 +38,8 @@ Use the source that owns the question:
 | How is one authorized slice or packet assigned to a top-level task session? | [`task-session-prompt.md`](task-session-prompt.md) provides the copy/paste-ready assignment prompt and compact result presentation. |
 | How does a meta task route and continue one authorized slice? | [`meta-task-prompt.md`](meta-task-prompt.md) provides the copy/paste-ready routing prompt for whole-slice or sequential packet execution and one aggregate closeout. |
 | Where is the active routing entry point? | [`.codex/skills/orchestrate-top-level-tasks/SKILL.md`](../../../.codex/skills/orchestrate-top-level-tasks/SKILL.md) operationalizes role-specific routing for already-authorized work. It does not authorize product or slice work. |
-| What is the current HCM-4.2 outcome and packet boundary? | [`slices/HCM-4.2/README.md`](slices/HCM-4.2/README.md) owns the complete slice outcome, Packet-0 checkpoint, invariants, and Packet 1–5 decomposition. [`Packet 1`](slices/HCM-4.2/packet-1-schema-generation.md) is admitted; Packets 2–5 remain unadmitted. |
-| Where does future slice-specific intent belong? | In a newly authorized, clearly identified slice-specific document under `slices/<slice-id>/`, separate from retained fixtures. The HCM-4.2 authority is the current example; its existence does not authorize execution. |
+| What is the current HCM-4.2 outcome and packet boundary? | [`slices/HCM-4.2/README.md`](slices/HCM-4.2/README.md) owns the complete slice outcome, implemented Packets 0–1, invariants, Packet 2–5 decomposition, and delegated just-in-time preparation. [`Packet 1`](slices/HCM-4.2/packet-1-schema-generation.md) records its completed decisions; Packet 2 is next. |
+| Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. The HCM-4.2 authority is the current example: slice authority must explicitly define whether and how execution is delegated; a roadmap listing never does. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 
 If prose about implemented behavior conflicts with the current source and tests, treat the discrepancy as documentation drift; do not use the prose to override the product.

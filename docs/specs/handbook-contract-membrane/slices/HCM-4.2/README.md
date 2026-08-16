@@ -2,22 +2,26 @@
 
 This document owns the compact outcome authority for HCM-4.2. It defines the
 shared result to be established across the slice, the invariants every packet
-must preserve, and the ordered packet boundaries. It does not authorize packet
-execution.
+must preserve, and the ordered packet boundaries. It also delegates bounded
+just-in-time decision preparation and sequential execution for the named
+remaining packets; it does not let a packet task select adjacent work.
 
 ## Current admission state
 
-**HCM-4.2 Packet 1 is admitted by its separate current authority. No later
-packet is admitted.**
+**HCM-4.2 Packet 1 is complete. Packet 2 is next, and this authority delegates
+just-in-time preparation and sequential execution for Packets 2 through 5 as
+their declared predecessors complete.**
 
 - Packet 0 is an implemented checkpoint at
-  `8605d6539355f350c55b921d95fb450bca30ee18`; its product and focused-test paths
-  remain byte-unchanged on this clean branch.
+  `8605d6539355f350c55b921d95fb450bca30ee18`; Packet 1 extended the module while
+  preserving the Packet-0 behavioral boundary and focused regressions.
 - [`packet-1-schema-generation.md`](packet-1-schema-generation.md) resolves the
   Packet-1 generator, exact inventory, manifest, and validation boundary and
-  authorizes that packet for execution.
-- No authority file exists for Packets 2 through 5, and none of those packets
-  is authorized for execution.
+  records the implementation completed at
+  `f54dcbd3ec9a50ad586d7952cbec8ca6d508eefe`.
+- Separate authority files do not yet exist for Packets 2 through 5. Their
+  absence is preparation work, not an admission stop, under the delegation
+  below.
 - The Phase-3 hard predecessor is satisfied under the selected reduced boundary.
 
 The [`phase-and-slice map`](../../phase-and-slice-map.md) owns that predecessor
@@ -114,12 +118,12 @@ bridge, or adoption owner.
 
 | Packet | Bounded outcome | Dependency and present status |
 | --- | --- | --- |
-| **0 — implemented typed kernel** | Preserve the bounded owner-neutral types, exact identities, canonicalization, catalogs, redacted raw-key bridge, terminal closure, and sealed verification described above. | Implemented checkpoint at `8605d65`; byte-unchanged; no retrospective authority file. |
-| **1 — schema generation and manifest** | Select and pin a generator; define the exact Packet-0 schema inventory and file mapping; produce a checked-in Draft 2020-12 tree and deterministic exact-byte fingerprint manifest; define the parser-versus-schema validation boundary. | Admitted by [`packet-1-schema-generation.md`](packet-1-schema-generation.md); Packet 0 and Phase-3 exit predecessors are satisfied. |
-| **2 — operation definitions and owner admission** | Define the exact operation/admission model and later 62-row inventory; assign generic ordinary request, response, and admission-refusal envelopes; resolve source-state inconsistencies. The matrix is not part of this authority. | Depends on Packet 1. Envelope ownership, details, and classifications remain unresolved; no authority file exists. |
-| **3 — immutable bootstrap and catalogs** | Define descriptor/bootstrap shapes, capability and owner-version entries, production schema/catalog witness, and immutable roots, paging, cursors, and negotiation. | Depends on Packet 2. Catalog representation and production witness remain unresolved; no authority file exists. |
-| **4 — posture projection and direct-Rust admission** | Map current engine-owned outcomes into bounded public requests, results, problems, and receipts without exposing private records or moving authority. | Depends on Packet 3. Exact mapping, correlation, and current-transport admission state remain unresolved; `none` remains valid; no authority file exists. |
-| **5 — integrated proof** | After the preceding work, prove regeneration, closed shapes, identity-domain separation, owner parity, replay identity, raw-key absence, catalog closure, and adapter non-authority. | Depends on Packets 1–4. It creates no old proof wall or separate closeout ceremony; no authority file exists. |
+| **0 — implemented typed kernel** | Preserve the bounded owner-neutral types, exact identities, canonicalization, catalogs, redacted raw-key bridge, terminal closure, and sealed verification described above. | Implemented checkpoint at `8605d65`; Packet-0 behavior remains regression-protected; no retrospective authority file. |
+| **1 — schema generation and manifest** | Select and pin a generator; define the exact Packet-0 schema inventory and file mapping; produce a checked-in Draft 2020-12 tree and deterministic exact-byte fingerprint manifest; define the parser-versus-schema validation boundary. | Completed at `f54dcbd`; decisions remain recorded in [`packet-1-schema-generation.md`](packet-1-schema-generation.md). |
+| **2 — operation definitions and owner admission** | Define the exact operation/admission model and 62-row inventory; assign generic ordinary request, response, and admission-refusal envelopes; resolve source-state inconsistencies. | **Next.** Packet 1 is complete. This authority delegates the bounded preparation below before product edits. |
+| **3 — immutable bootstrap and catalogs** | Define descriptor/bootstrap shapes, capability and owner-version entries, production schema/catalog witness, and immutable roots, paging, cursors, and negotiation. | Depends on Packet 2. When that predecessor completes, this authority delegates bounded preparation of the unresolved representation and witness decisions. |
+| **4 — posture projection and direct-Rust admission** | Map current engine-owned outcomes into bounded public requests, results, problems, and receipts without exposing private records or moving authority. | Depends on Packet 3. When that predecessor completes, this authority delegates bounded preparation of the exact mapping, correlation, and honest current-transport state; `none` remains valid. |
+| **5 — integrated proof** | After the preceding work, prove regeneration, closed shapes, identity-domain separation, owner parity, replay identity, raw-key absence, catalog closure, and adapter non-authority. | Depends on Packets 1–4. When they complete, this authority delegates a compact evidence plan and integrated implementation; it creates no old proof wall or separate closeout ceremony. |
 
 The required dependency order is:
 
@@ -128,9 +132,46 @@ Packet 0 -> Packet 1 -> Packet 2 -> Packet 3 -> Packet 4 -> Packet 5
 ```
 
 Each completed packet returns control to the meta task under the
-[`work-unit lifecycle`](../../work-unit-lifecycle.md). Packet completion never
-selects or authorizes the next packet. Slice closeout occurs once, after Packet
-5, under the [`review and closeout policy`](../../review-and-closeout-policy.md).
+[`work-unit lifecycle`](../../work-unit-lifecycle.md). The packet task never
+selects the next packet; the meta task sequences it from this declared order and
+delegation. Slice closeout occurs once, after Packet 5, under the
+[`review and closeout policy`](../../review-and-closeout-policy.md).
+
+## Delegated just-in-time preparation
+
+An explicit user instruction to execute HCM-4.2 packet by packet authorizes the
+meta task to continue through the ordered sequence above. For Packets 2 through
+5, the same fresh top-level packet task must resolve its remaining material
+decisions before product edits and then continue directly into implementation
+when permitted sources yield one safe in-scope answer. A compact packet
+authority or decision checkpoint may be committed when it prevents drift; a
+separate user confirmation or mechanical authority commit is not required.
+
+Every preparation phase must reconcile the assigned packet against current
+product source and tests, this authority, the
+[`implemented baseline`](../../implemented-baseline.md),
+[`architecture context`](../../architecture-context.md),
+[`seam crosswalk`](../../seam-crosswalk.md), and
+[`phase-and-slice map`](../../phase-and-slice-map.md). The archived HCM-4.2
+`SPEC.md` and `tasks/plan.md` at ref
+`archive/handbook-contract-membrane-pre-clean-20260812` are adopted only as
+bounded planning input for the assigned packet's intended outcome, constraints,
+and candidate design. Their status, authority claims, selectors, proof walls,
+handoffs, and closeout procedure remain inactive.
+
+Packet 2 may additionally consult the archived
+`research/20260811T031843Z--corrective-owner-admission-matrix.md` under that same
+HCM-4.2 ref solely as the candidate 62-row operation, ownership, mutability,
+precursor, transport, and discovery classification. It must recheck every
+material classification against current source and current Phase-3/Phase-4
+boundaries. The archived matrix cannot prove current implementation or decide a
+conflict by itself.
+
+If those permitted sources conflict or leave multiple consequential answers and
+current authority cannot choose among them, return `STOPPED` before product
+edits with the exact missing decision. Missing a separate packet file is not
+such a stop. An unnamed packet, an unsatisfied predecessor, scope outside this
+slice, or a genuinely unresolved material decision still blocks execution.
 
 ## Slice completion conditions
 
@@ -165,9 +206,9 @@ membrane.
 ## Open authority decisions
 
 Packet 1's generator, exact inventory, file mapping, and parser/schema boundary
-are resolved by its linked authority and may not be reopened during
-implementation without explicit replacement authority. This document still
-does not select:
+are implemented and remain controlled by its linked authority. The following
+decisions are intentionally left to the assigned packet's delegated preparation
+phase rather than preselected here:
 
 - the Packet-2 envelope owner or details, operation model, or 62-row
   classifications;
@@ -180,19 +221,19 @@ does not select:
 - CLI/Tauri routes, publication, bridge, external adopter, or broader Phase-3
   posture and gate policy.
 
-Each decision belongs in the applicable future authority after its hard
-predecessors are satisfied. Until then, implementations, plans, examples, and
-historical material cannot supply the missing choice.
+Each decision must remain inside its applicable packet outcome and durable
+invariants. Historical material may inform it only through the bounded adoption
+above; it cannot override current source or supply a missing consequential
+choice by itself.
 
 ## Use and drift
 
-Use this document to author a later bounded packet authority and to review
-cross-packet consistency. Use the
-[`task-session prompt`](../../task-session-prompt.md) only after the meta task
-has selected a packet that current authority actually admits.
+Use this document to prepare a bounded packet authority when useful and to
+review cross-packet consistency. Use the
+[`task-session prompt`](../../task-session-prompt.md) after the meta task selects
+the next eligible packet from the sequence and delegation above.
 
 If executable product truth changes Packet 0, update the implemented baseline
 and this authority in the same bounded change or record the discrepancy as
 documentation drift. Never use this document to override newer source or tests,
-infer an external condition, or grant permission that its admission state
-withholds.
+infer an external condition, or expand the slice beyond its stated outcome.

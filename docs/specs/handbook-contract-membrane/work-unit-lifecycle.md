@@ -6,7 +6,7 @@ It defines execution-unit identity and lifecycle boundaries only. It does not au
 
 ## Work units
 
-- A **slice** is the complete authorized outcome. Its authorization defines the outcome conditions and any bounded packets.
+- A **slice** is the complete authorized outcome. Its authorization defines the outcome conditions, any bounded packet sequence, and whether named packets may resolve their remaining in-scope decisions just in time.
 - A **packet** is a bounded part of one slice. It never becomes a slice merely because it executes in its own top-level task session.
 - The **meta task** selects an execution mode and owns packet selection, automatic sequencing, adjudication, and continuation across task sessions.
 - A **task session** owns only its assigned whole slice or packet. It may work directly or delegate internally only to local subagents; it never dispatches or coordinates another user-visible top-level task.
@@ -19,7 +19,20 @@ A slice may execute in either mode:
 - **Whole-slice mode:** one top-level task session performs the authorized slice.
 - **Packet-by-packet mode:** one or more packets execute as separate top-level task sessions under the continuing meta task.
 
-Both modes are valid. Choosing packet-by-packet mode changes the execution boundary, not the slice authority or completion boundary. Once the slice is admitted, the meta task continues through authorized packets without requiring packet-by-packet human confirmation.
+Both modes are valid. Choosing packet-by-packet mode changes the execution boundary, not the slice authority or completion boundary. An explicit instruction to execute an admitted slice delegates continuation through its declared packet sequence without packet-by-packet human confirmation.
+
+## Just-in-time packet authority
+
+A separate packet-authority file is useful when a packet's material decisions are already resolved, but it is not a universal admission requirement. A current slice authority may explicitly delegate bounded just-in-time preparation for a named packet when:
+
+- the slice declares the packet's outcome, order, and non-goals;
+- every predecessor is complete;
+- the sources permitted for resolving the packet are identified; and
+- preparation stays inside the authorized slice outcome.
+
+In that case, the meta task dispatches the packet normally. Before product edits, the same fresh top-level packet task examines current slice authority, live source and tests, current architecture and program sources, and only the bounded historical planning that current authority explicitly adopts. If those sources yield one safe answer, the task records a compact current authority or decision checkpoint when useful, reviews a material decision under the causal-review policy, and proceeds with implementation in the same task. The checkpoint records or refines the slice-delegated answer; it does not create its own scope.
+
+If the permitted sources conflict or leave more than one consequential answer and current authority cannot select one, the packet returns `STOPPED` before product edits with the exact missing decision. Missing packet documentation alone is correctable preparation work, not `ADMISSION_FAILED` or a slice stop. Missing slice authorization, an unnamed packet, an unsatisfied predecessor, scope outside the slice, or an actually unresolved material decision still prevents execution.
 
 ## Completion boundaries
 
@@ -44,6 +57,7 @@ The following are not genuine workflow stops by themselves:
 - a review finding;
 - a failed check with an authority-supported diagnostic or remediation path;
 - a malformed task result or stale context capsule that the meta task can correct;
+- an absent packet-authority file when the slice delegates bounded just-in-time preparation;
 - an internal delegation boundary;
 - an intermediate packet completing;
 - ordinary remediation;
@@ -57,7 +71,8 @@ If task-session admission fails before product edits, return a bounded result to
 
 | Event | Lifecycle result | Owner of the next decision | Closeout |
 | --- | --- | --- | --- |
-| Packet completes and authorized packets remain | Packet complete; slice remains active | Meta task integrates its checkpoint when needed and automatically sequences the next packet | None at slice level |
+| Packet completes and declared packets remain | Packet complete; slice remains active | Meta task integrates its checkpoint when needed and automatically sequences the next packet, including delegated just-in-time preparation | None at slice level |
+| A named next packet lacks a separate authority file but satisfies the slice's preparation delegation | Slice and packet remain admitted | Meta task dispatches the packet; that same task prepares bounded authority before product edits | None at slice level |
 | Final packet completes and all outcome conditions are satisfied | Slice complete | Meta task confirms completion | Full closeout once |
 | Whole-slice work satisfies all outcome conditions | Slice complete | Current top-level task confirms completion | Full closeout once |
 | A task reports recoverable admission or execution friction | Current unit and slice remain active | Meta task corrects, resumes, or replaces the current task | None at slice level |

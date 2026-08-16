@@ -1,8 +1,8 @@
 # HCM-4.2 Packet 1 — Schema Generation and Manifest
 
-This document is the current implementation authority for HCM-4.2 Packet 1.
-It resolves the packet's generator, schema inventory, file mapping, manifest,
-and parser-versus-schema boundary. It authorizes only the bounded work below.
+This document records the current implementation authority and completed
+decision boundary for HCM-4.2 Packet 1. It resolves the packet's generator,
+schema inventory, file mapping, manifest, and parser-versus-schema boundary.
 
 The [HCM-4.2 slice authority](README.md) remains controlling for the complete
 slice outcome, cross-packet invariants, ordering, and non-goals. Packet 0 source
@@ -10,8 +10,11 @@ and tests remain product truth if this document drifts from them.
 
 ## Admission and objective
 
-Packet 1 is admitted after this authority lands. Packet 0 and the Phase-3 exit
-are satisfied predecessors. Packets 2 through 5 remain unadmitted.
+Packet 1 completed at
+`f54dcbd3ec9a50ad586d7952cbec8ca6d508eefe`. Packet 0 and the Phase-3 exit were
+its satisfied predecessors. The slice authority now governs automatic
+continuation and just-in-time preparation for Packets 2 through 5; this packet
+document does not expand their outcomes.
 
 Produce a deterministic, checked-in Draft 2020-12 schema tree for the concrete
 Packet-0 public roots and a manifest that binds each exact public ref to the
@@ -194,10 +197,10 @@ cargo clippy -p handbook-sdk --all-targets --features contract-schema-generation
 10. Required repository change detection and one focused causal review approve
     the exact Packet-1 implementation subject.
 
-Create one coherent local commit for completed material work. Return
-`PACKET_COMPLETE` to the HCM-4.2 meta task with the compact task result. Do not
-claim slice completion, perform aggregate closeout, or begin Packet 2. Packet 2
-still requires separate current authority.
+The completed packet returned `PACKET_COMPLETE` in one coherent local commit.
+It did not claim slice completion or perform aggregate closeout. The meta task,
+not the Packet-1 task, owns immediate sequencing to Packet 2 under the current
+slice authority's delegated preparation rule.
 
 ## Non-goals
 

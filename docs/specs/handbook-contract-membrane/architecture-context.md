@@ -28,7 +28,7 @@ The labels below describe architecture state, not lifecycle or authorization:
 | Flow and pipeline domains | Current | [`handbook-flow`](../../../crates/flow/) and [`handbook-pipeline`](../../../crates/pipeline/) own their domain behavior while depending on the engine for shared semantic truth. |
 | Grounding adoption and deterministic projection/snapshot components | Precursor | Typed Flow and pipeline adapters exist, while projection and snapshot components remain private and no ordinary grounding consumer completes the seam. |
 | SDK composition | Current | [`handbook-sdk`](../../../crates/sdk/) composes owner crates into bounded, transport-free public Rust surfaces. |
-| Contract-membrane kernel | Current | Packet 0 primitives are exported from the SDK at their present placement; no ordinary membrane operation owner or transport route exists. |
+| Contract-membrane kernel and schemas | Current | Packet 0 primitives and Packet 1's checked-in 15-root Draft 2020-12 schema tree, deterministic generator, and manifest are exported or owned at the SDK's present placement; no ordinary membrane operation owner or transport route exists. |
 | CLI adapter | Current | [`handbook-cli`](../../../crates/cli/) consumes the SDK for existing commands and owns command-line concerns, but has no contract-membrane route. |
 | Contract/evidence/gate product owner, dock executor, and Tauri adapter | Target/future | These owner and adapter surfaces are absent; this topology does not authorize or design them. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
@@ -66,12 +66,13 @@ This is a semantic direction, not a requirement that every future type remain in
 its current crate forever. Any deliberately neutral shared layer must be
 authorized as such and must preserve owner independence.
 
-### Packet 0 placement
+### Packet 0–1 placement
 
-The Packet 0 kernel currently lives under
-[`handbook_sdk::contract_membrane`](../../../crates/sdk/src/contract_membrane/mod.rs).
-That is current placement, not authority for a future contract product owner to
-depend back on the SDK.
+The Packet 0 kernel and Packet 1 schema-generation boundary currently live under
+[`handbook_sdk::contract_membrane`](../../../crates/sdk/src/contract_membrane/mod.rs)
+with checked-in assets under
+[`crates/sdk/schemas`](../../../crates/sdk/schemas/). That is current placement,
+not authority for a future contract product owner to depend back on the SDK.
 
 When a future contract owner is authorized, its authority must choose either
 outward mapping into SDK types or an explicitly authorized neutral extraction.

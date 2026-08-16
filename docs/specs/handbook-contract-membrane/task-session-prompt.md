@@ -11,7 +11,7 @@ MODE: <whole-slice | packet>
 SLICE: <slice identifier>
 PACKET: <packet identifier | none for whole-slice mode>
 OBJECTIVE: <bounded outcome>
-AUTHORITY: <current controlling sources>
+AUTHORITY: <current controlling slice and packet sources, including any slice-delegated just-in-time preparation boundary>
 ALLOWED_SCOPE: <paths or other explicit boundary>
 NON_GOALS: <explicit exclusions>
 PREREQUISITES: <dependencies and relevant starting state>
@@ -31,13 +31,24 @@ Perform only the assigned unit. Treat the capsule, repository instructions, curr
 
 1. Read repository instructions, the assigned current authority, and the capsule's live context. Load additional live code, tests, or documentation only when the assigned unit requires them. Archived material is non-authority unless a current source explicitly adopts a bounded part of it.
 2. Inspect the current branch, worktree, pre-existing changes, required dependencies, scope and authority sufficiency, and required capabilities. Preserve unrelated user work.
-3. Confirm that the capsule is current, internally consistent, and sufficient to begin safely. Resolve ordinary context gaps from current authority and live sources when one safe answer exists. Return `ADMISSION_FAILED` before product edits only when bounded recovery cannot establish a safe start. Do not manufacture a commit, review cycle, selector history, handoff, proof wall, ledger, or closeout artifact.
+3. Confirm that the capsule is current, internally consistent, and sufficient to begin safely. Resolve ordinary context gaps from current authority and live sources when one safe answer exists. A missing packet-authority file is not an admission failure when the controlling slice names and bounds the packet, its predecessor is complete, and the slice explicitly delegates just-in-time preparation. Return `ADMISSION_FAILED` before product edits only when bounded recovery cannot establish a safe start. Do not manufacture a commit, review cycle, selector history, handoff, proof wall, ledger, or closeout artifact.
 
 ### Load context and skills when needed
 
 - Treat `SKILL_ROUTE` as the minimal starting route. Load each selected skill only when its named phase begins; do not preload skill bodies or a complete lifecycle.
 - If an unexpected phase or failure makes the route insufficient, consult `agent-using-agent-skills` once for this unit and add only the newly applicable skill. This does not widen `AUTHORITY`, `ALLOWED_SCOPE`, or `ACCEPTANCE`.
 - Keep context bounded to this unit. Do not blanket-load archived plans, future packets, unrelated documents, or skills.
+
+### Prepare delegated packet authority before product edits
+
+When the assigned packet already has complete current authority, proceed from it. When the slice delegates just-in-time preparation instead, perform that bounded phase inside this same top-level task:
+
+1. Use the current slice authority, live source and tests, and current architecture, seam, baseline, and program documents named in the capsule. Read historical planning only where the slice explicitly adopts a bounded input for this packet; historical status, authority claims, and ceremony remain inactive.
+2. Resolve each material packet decision against those sources. If they yield one safe in-scope answer, record a compact packet authority or decision checkpoint when it will prevent drift. The slice-level delegation supplies scope; the checkpoint only records or refines the selected answer.
+3. Before product edits, review newly selected material decisions through one focused causal round. Resolve actionable findings within current authority. A separate authority commit is allowed when it forms a meaningful implementation checkpoint, but is not required mechanically.
+4. If permitted sources conflict or leave more than one consequential answer and current authority cannot select one, return `STOPPED` before product edits with that exact decision and required authority. Do not turn documentation absence by itself into a stop.
+
+After successful preparation, continue directly into implementation in this task. Do not return merely to obtain user confirmation, and do not create a separate top-level planning task.
 
 ### Execute and verify
 
