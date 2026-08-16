@@ -1,5 +1,6 @@
 //! Feature-gated JSON Schema descriptions and deterministic checked-in generation.
 
+use super::posture::REQUEST_SCHEMA_REF;
 use super::*;
 use schemars::generate::SchemaSettings;
 use schemars::{json_schema, JsonSchema, Schema, SchemaGenerator};
@@ -1451,6 +1452,294 @@ impl_schema!(Problem, "Problem", |generator| closed_object(
     ],
 ));
 
+impl_schema!(
+    PostureReferenceDtoV1,
+    "PostureReferenceDtoV1",
+    |generator| {
+        closed_object(
+            vec![
+                ("reference", generator.subschema_for::<BoundedString<255>>()),
+                ("fingerprint", generator.subschema_for::<Fingerprint>()),
+            ],
+            &["reference", "fingerprint"],
+        )
+    }
+);
+
+impl_schema!(
+    PostureCanonicalBindingDtoV1,
+    "PostureCanonicalBindingDtoV1",
+    |generator| {
+        closed_object(
+            vec![
+                (
+                    "reference",
+                    json_schema!({"const": ".handbook/project/charter.yaml"}),
+                ),
+                ("fingerprint", generator.subschema_for::<Fingerprint>()),
+                ("document_sha256", generator.subschema_for::<Fingerprint>()),
+                (
+                    "byte_length",
+                    json_schema!({"type": "integer", "minimum": 1, "maximum": MAX_SAFE_INTEGER}),
+                ),
+            ],
+            &["reference", "fingerprint", "document_sha256", "byte_length"],
+        )
+    }
+);
+
+impl_schema!(
+    PostureDimensionChangeDtoV1,
+    "PostureDimensionChangeDtoV1",
+    |generator| {
+        let level = json_schema!({"type": "integer", "minimum": 0, "maximum": 255});
+        closed_object(
+            vec![
+                (
+                    "dimension_id",
+                    generator.subschema_for::<BoundedString<255>>(),
+                ),
+                ("dimension_index", level.clone()),
+                ("authority_path", generator.subschema_for::<JsonPointer>()),
+                (
+                    "expected_stored_value",
+                    json_schema!({"anyOf": [level.clone(), {"type": "null"}]}),
+                ),
+                ("expected_effective_level", level.clone()),
+                ("proposed_effective_level", level),
+            ],
+            &[
+                "dimension_id",
+                "dimension_index",
+                "authority_path",
+                "expected_stored_value",
+                "expected_effective_level",
+                "proposed_effective_level",
+            ],
+        )
+    }
+);
+
+struct PostureTransitionApplyRequestSchemaV1;
+
+impl_schema!(
+    PostureTransitionApplyRequestSchemaV1,
+    "PostureTransitionApplyRequestSchemaV1",
+    |generator| {
+        closed_object(
+            vec![
+                (
+                    "change",
+                    generator.subschema_for::<PostureDimensionChangeDtoV1>(),
+                ),
+                (
+                    "effective_at_utc",
+                    generator.subschema_for::<UtcTimestamp>(),
+                ),
+                (
+                    "expected_canonical",
+                    generator.subschema_for::<PostureCanonicalBindingDtoV1>(),
+                ),
+                (
+                    "idempotency_key",
+                    json_schema!({"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[!-~]{1,256}$"}),
+                ),
+                (
+                    "reassessment_coverage_ids",
+                    json_schema!({
+                        "type": "array",
+                        "items": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[!-~]{1,256}$"},
+                        "minItems": 1,
+                        "maxItems": 64,
+                        "uniqueItems": true
+                    }),
+                ),
+                (
+                    "recommendation",
+                    generator.subschema_for::<PostureReferenceDtoV1>(),
+                ),
+                (
+                    "repository_identity_fingerprint",
+                    generator.subschema_for::<Fingerprint>(),
+                ),
+            ],
+            &[
+                "change",
+                "effective_at_utc",
+                "expected_canonical",
+                "idempotency_key",
+                "reassessment_coverage_ids",
+                "recommendation",
+                "repository_identity_fingerprint",
+            ],
+        )
+    }
+);
+
+impl_schema!(
+    PostureTransitionApplyResultDataV1,
+    "PostureTransitionApplyResultDataV1",
+    |generator| {
+        closed_object(
+            vec![
+                (
+                    "idempotency_key_fingerprint",
+                    generator.subschema_for::<Fingerprint>(),
+                ),
+                (
+                    "repository_identity_fingerprint",
+                    generator.subschema_for::<Fingerprint>(),
+                ),
+                (
+                    "prior_canonical",
+                    generator.subschema_for::<PostureCanonicalBindingDtoV1>(),
+                ),
+                (
+                    "resulting_canonical",
+                    generator.subschema_for::<PostureCanonicalBindingDtoV1>(),
+                ),
+                (
+                    "posture_transition",
+                    generator.subschema_for::<PostureReferenceDtoV1>(),
+                ),
+                (
+                    "lifecycle_transition",
+                    generator.subschema_for::<PostureReferenceDtoV1>(),
+                ),
+                (
+                    "resulting_kernel",
+                    generator.subschema_for::<PostureReferenceDtoV1>(),
+                ),
+            ],
+            &[
+                "idempotency_key_fingerprint",
+                "repository_identity_fingerprint",
+                "prior_canonical",
+                "resulting_canonical",
+                "posture_transition",
+                "lifecycle_transition",
+                "resulting_kernel",
+            ],
+        )
+    }
+);
+
+impl_schema!(
+    PostureCanonicalWriteConditionV1,
+    "PostureCanonicalWriteConditionV1",
+    |generator| closed_object(
+        vec![
+            (
+                "prior_canonical",
+                generator.subschema_for::<PostureCanonicalBindingDtoV1>(),
+            ),
+            (
+                "resulting_canonical",
+                generator.subschema_for::<PostureCanonicalBindingDtoV1>(),
+            ),
+        ],
+        &["prior_canonical", "resulting_canonical"],
+    )
+);
+
+impl_schema!(
+    PostureSemanticWriteConditionV1,
+    "PostureSemanticWriteConditionV1",
+    |generator| closed_object(
+        vec![
+            (
+                "lifecycle_transition",
+                generator.subschema_for::<PostureReferenceDtoV1>(),
+            ),
+            (
+                "posture_transition",
+                generator.subschema_for::<PostureReferenceDtoV1>(),
+            ),
+            (
+                "resulting_kernel",
+                generator.subschema_for::<PostureReferenceDtoV1>(),
+            ),
+        ],
+        &[
+            "lifecycle_transition",
+            "posture_transition",
+            "resulting_kernel",
+        ],
+    )
+);
+
+macro_rules! posture_variant_schema {
+    ($type:ident, $schema_name:literal, $variant:literal) => {
+        struct $type;
+        impl_schema!($type, $schema_name, |_generator| closed_object(
+            vec![("owner_variant", json_schema!({"const": $variant}))],
+            &["owner_variant"],
+        ));
+    };
+}
+
+posture_variant_schema!(
+    PostureAuthorityConflictDetailsSchema,
+    "PostureAuthorityConflictDetailsSchema",
+    "AuthorityConflict"
+);
+posture_variant_schema!(
+    PostureIntegrityOrDurabilityDetailsSchema,
+    "PostureIntegrityOrDurabilityDetailsSchema",
+    "IntegrityOrDurability"
+);
+posture_variant_schema!(
+    PostureInvalidFixedDimensionDetailsSchema,
+    "PostureInvalidFixedDimensionDetailsSchema",
+    "InvalidFixedDimension"
+);
+posture_variant_schema!(
+    PostureInvalidIdempotencyKeyDetailsSchema,
+    "PostureInvalidIdempotencyKeyDetailsSchema",
+    "InvalidIdempotencyKey"
+);
+posture_variant_schema!(
+    PostureInvalidSemanticInputDetailsSchema,
+    "PostureInvalidSemanticInputDetailsSchema",
+    "InvalidSemanticInput"
+);
+posture_variant_schema!(PostureIoDetailsSchema, "PostureIoDetailsSchema", "Io");
+posture_variant_schema!(
+    PostureLifecycleNotCurrentDetailsSchema,
+    "PostureLifecycleNotCurrentDetailsSchema",
+    "LifecycleNotCurrent"
+);
+posture_variant_schema!(
+    PostureMissingLifecycleAuthorityDetailsSchema,
+    "PostureMissingLifecycleAuthorityDetailsSchema",
+    "MissingLifecycleAuthority"
+);
+posture_variant_schema!(
+    PostureRepositoryIdentityMismatchDetailsSchema,
+    "PostureRepositoryIdentityMismatchDetailsSchema",
+    "RepositoryIdentityMismatch"
+);
+posture_variant_schema!(
+    PostureStaleCanonicalDetailsSchema,
+    "PostureStaleCanonicalDetailsSchema",
+    "StaleCanonical"
+);
+posture_variant_schema!(
+    PostureUnsafeFilesystemDetailsSchema,
+    "PostureUnsafeFilesystemDetailsSchema",
+    "UnsafeFilesystem"
+);
+posture_variant_schema!(
+    PostureUnsupportedPlatformDetailsSchema,
+    "PostureUnsupportedPlatformDetailsSchema",
+    "UnsupportedPlatform"
+);
+posture_variant_schema!(
+    PostureUnsupportedPlatformRecheckSchema,
+    "PostureUnsupportedPlatformRecheckSchema",
+    "UnsupportedPlatform"
+);
+
 const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
 
 struct SchemaDescriptor {
@@ -1459,7 +1748,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 36] = [
+const INVENTORY: [SchemaDescriptor; 53] = [
     descriptor::<ArtifactRef>(
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
@@ -1560,9 +1849,77 @@ const INVENTORY: [SchemaDescriptor; 36] = [
         "handbook.operation-response@1.0.0",
         "handbook.operation-response/1.0.0.schema.json",
     ),
+    descriptor::<PostureTransitionApplyRequestSchemaV1>(
+        "handbook.operation.posture-transition-apply-request@1.0.0",
+        "handbook.operation.posture-transition-apply-request/1.0.0.schema.json",
+    ),
+    descriptor::<PostureTransitionApplyResultDataV1>(
+        "handbook.operation.posture-transition-apply-result@1.0.0",
+        "handbook.operation.posture-transition-apply-result/1.0.0.schema.json",
+    ),
     descriptor::<OwnerVersionEntry>(
         "handbook.owner-version-entry@1.0.0",
         "handbook.owner-version-entry/1.0.0.schema.json",
+    ),
+    descriptor::<PostureAuthorityConflictDetailsSchema>(
+        "handbook.posture-details.authority-conflict@1.0.0",
+        "handbook.posture-details.authority-conflict/1.0.0.schema.json",
+    ),
+    descriptor::<PostureIntegrityOrDurabilityDetailsSchema>(
+        "handbook.posture-details.integrity-or-durability@1.0.0",
+        "handbook.posture-details.integrity-or-durability/1.0.0.schema.json",
+    ),
+    descriptor::<PostureInvalidFixedDimensionDetailsSchema>(
+        "handbook.posture-details.invalid-fixed-dimension@1.0.0",
+        "handbook.posture-details.invalid-fixed-dimension/1.0.0.schema.json",
+    ),
+    descriptor::<PostureInvalidIdempotencyKeyDetailsSchema>(
+        "handbook.posture-details.invalid-idempotency-key@1.0.0",
+        "handbook.posture-details.invalid-idempotency-key/1.0.0.schema.json",
+    ),
+    descriptor::<PostureInvalidSemanticInputDetailsSchema>(
+        "handbook.posture-details.invalid-semantic-input@1.0.0",
+        "handbook.posture-details.invalid-semantic-input/1.0.0.schema.json",
+    ),
+    descriptor::<PostureIoDetailsSchema>(
+        "handbook.posture-details.io@1.0.0",
+        "handbook.posture-details.io/1.0.0.schema.json",
+    ),
+    descriptor::<PostureLifecycleNotCurrentDetailsSchema>(
+        "handbook.posture-details.lifecycle-not-current@1.0.0",
+        "handbook.posture-details.lifecycle-not-current/1.0.0.schema.json",
+    ),
+    descriptor::<PostureMissingLifecycleAuthorityDetailsSchema>(
+        "handbook.posture-details.missing-lifecycle-authority@1.0.0",
+        "handbook.posture-details.missing-lifecycle-authority/1.0.0.schema.json",
+    ),
+    descriptor::<PostureRepositoryIdentityMismatchDetailsSchema>(
+        "handbook.posture-details.repository-identity-mismatch@1.0.0",
+        "handbook.posture-details.repository-identity-mismatch/1.0.0.schema.json",
+    ),
+    descriptor::<PostureStaleCanonicalDetailsSchema>(
+        "handbook.posture-details.stale-canonical@1.0.0",
+        "handbook.posture-details.stale-canonical/1.0.0.schema.json",
+    ),
+    descriptor::<PostureUnsafeFilesystemDetailsSchema>(
+        "handbook.posture-details.unsafe-filesystem@1.0.0",
+        "handbook.posture-details.unsafe-filesystem/1.0.0.schema.json",
+    ),
+    descriptor::<PostureUnsupportedPlatformDetailsSchema>(
+        "handbook.posture-details.unsupported-platform@1.0.0",
+        "handbook.posture-details.unsupported-platform/1.0.0.schema.json",
+    ),
+    descriptor::<PostureUnsupportedPlatformRecheckSchema>(
+        "handbook.posture-recheck.unsupported-platform@1.0.0",
+        "handbook.posture-recheck.unsupported-platform/1.0.0.schema.json",
+    ),
+    descriptor::<PostureCanonicalWriteConditionV1>(
+        "handbook.posture-write-condition.canonical-truth@1.0.0",
+        "handbook.posture-write-condition.canonical-truth/1.0.0.schema.json",
+    ),
+    descriptor::<PostureSemanticWriteConditionV1>(
+        "handbook.posture-write-condition.semantic-record@1.0.0",
+        "handbook.posture-write-condition.semantic-record/1.0.0.schema.json",
     ),
     descriptor::<ProblemBinding>(
         "handbook.problem-binding@1.0.0",
@@ -1665,8 +2022,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 36 {
-        return Err("schema inventory must contain exactly 36 entries".to_owned());
+    if INVENTORY.len() != 53 {
+        return Err("schema inventory must contain exactly 53 entries".to_owned());
     }
 
     let mut previous_ref = None;
@@ -1741,7 +2098,11 @@ fn validate_schema(
     let value = schema.as_value();
     validate_local_references(value, value, descriptor.relative_path)?;
     validate_closed_objects(value, descriptor.relative_path)?;
-    validate_no_raw_key_names(value, descriptor.relative_path)
+    if descriptor.exact_ref == REQUEST_SCHEMA_REF {
+        validate_posture_request_raw_key_schema(value, descriptor.relative_path)
+    } else {
+        validate_no_raw_key_names(value, descriptor.relative_path)
+    }
 }
 
 fn validate_local_references(
@@ -1800,6 +2161,54 @@ fn validate_closed_objects(value: &serde_json::Value, relative_path: &str) -> Re
         _ => {}
     }
     Ok(())
+}
+
+fn validate_posture_request_raw_key_schema(
+    value: &serde_json::Value,
+    relative_path: &str,
+) -> Result<(), String> {
+    let properties = value
+        .get("properties")
+        .and_then(serde_json::Value::as_object)
+        .ok_or_else(|| format!("{relative_path} has no root properties"))?;
+    let required = value
+        .get("required")
+        .and_then(serde_json::Value::as_array)
+        .ok_or_else(|| format!("{relative_path} has no root required set"))?;
+    if !properties.contains_key("idempotency_key")
+        || required
+            .iter()
+            .filter(|member| member.as_str() == Some("idempotency_key"))
+            .count()
+            != 1
+        || raw_key_name_occurrences(value) != 2
+    {
+        return Err(format!(
+            "{relative_path} must name the raw key only as one required root wire member"
+        ));
+    }
+    Ok(())
+}
+
+fn raw_key_name_occurrences(value: &serde_json::Value) -> usize {
+    match value {
+        serde_json::Value::Array(values) => values.iter().map(raw_key_name_occurrences).sum(),
+        serde_json::Value::Object(members) => members
+            .iter()
+            .map(|(key, value)| {
+                usize::from(matches!(
+                    key.as_str(),
+                    "idempotency_key" | "raw_idempotency_key"
+                )) + raw_key_name_occurrences(value)
+            })
+            .sum(),
+        serde_json::Value::String(value)
+            if matches!(value.as_str(), "idempotency_key" | "raw_idempotency_key") =>
+        {
+            1
+        }
+        _ => 0,
+    }
 }
 
 fn validate_no_raw_key_names(value: &serde_json::Value, relative_path: &str) -> Result<(), String> {

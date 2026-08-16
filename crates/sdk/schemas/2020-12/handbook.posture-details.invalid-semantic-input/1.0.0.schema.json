@@ -1,0 +1,1 @@
+{"$id":"urn:handbook:schema:handbook.posture-details.invalid-semantic-input:1.0.0","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"properties":{"owner_variant":{"const":"InvalidSemanticInput"}},"required":["owner_variant"],"title":"PostureInvalidSemanticInputDetailsSchema","type":"object"}

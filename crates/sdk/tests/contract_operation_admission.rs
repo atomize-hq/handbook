@@ -32,10 +32,21 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
     assert!(rows
         .iter()
         .all(|row| row.operation_ref().version().as_str() == "1.0.0"));
-    assert!(rows.iter().all(|row| row.current_transports().is_empty()));
-    assert!(rows
-        .iter()
-        .all(|row| row.discovery() == DiscoveryState::Omit));
+    assert_eq!(
+        rows.iter()
+            .filter(|row| !row.current_transports().is_empty())
+            .map(|row| row.operation_id())
+            .collect::<Vec<_>>(),
+        vec!["posture.transition.apply"]
+    );
+    assert!(rows.iter().all(|row| {
+        if row.operation_id() == "posture.transition.apply" {
+            row.current_transports() == [OperationTransport::RustSdk]
+                && row.discovery() == DiscoveryState::Discoverable
+        } else {
+            row.current_transports().is_empty() && row.discovery() == DiscoveryState::Omit
+        }
+    }));
 
     assert_eq!(
         rows.iter()
@@ -84,7 +95,7 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
     let frozen_bytes = canonical_json_bytes(&frozen_tuples, &ContractLimits::packet0()).unwrap();
     assert_eq!(
         handbook_sdk::contract_membrane::sha256_fingerprint(&frozen_bytes).as_str(),
-        "sha256:ec8eaa6447efd2473340d1de7225acaa8e81e04d6ce9184258b51fdd6c4380a5"
+        "sha256:6993971ab59c0b6d98485b7a6eff7c06b87f8dcc350837a2cdf2ccc1cd5d6d1f"
     );
 }
 
@@ -97,6 +108,10 @@ fn current_admission_reasons_preserve_owner_and_semantic_precedence() {
             .unwrap()
     };
 
+    assert_eq!(
+        row("posture.transition.apply").admission_reason(),
+        AdmissionReason::Admitted
+    );
     assert_eq!(
         row("artifact.validate").admission_reason(),
         AdmissionReason::IncompleteClosure

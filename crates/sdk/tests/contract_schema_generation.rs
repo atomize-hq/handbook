@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 36] = [
+const ROOTS: [(&str, &str); 53] = [
     (
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
@@ -124,8 +124,76 @@ const ROOTS: [(&str, &str); 36] = [
         "handbook.operation-response/1.0.0.schema.json",
     ),
     (
+        "handbook.operation.posture-transition-apply-request@1.0.0",
+        "handbook.operation.posture-transition-apply-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.posture-transition-apply-result@1.0.0",
+        "handbook.operation.posture-transition-apply-result/1.0.0.schema.json",
+    ),
+    (
         "handbook.owner-version-entry@1.0.0",
         "handbook.owner-version-entry/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.authority-conflict@1.0.0",
+        "handbook.posture-details.authority-conflict/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.integrity-or-durability@1.0.0",
+        "handbook.posture-details.integrity-or-durability/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.invalid-fixed-dimension@1.0.0",
+        "handbook.posture-details.invalid-fixed-dimension/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.invalid-idempotency-key@1.0.0",
+        "handbook.posture-details.invalid-idempotency-key/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.invalid-semantic-input@1.0.0",
+        "handbook.posture-details.invalid-semantic-input/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.io@1.0.0",
+        "handbook.posture-details.io/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.lifecycle-not-current@1.0.0",
+        "handbook.posture-details.lifecycle-not-current/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.missing-lifecycle-authority@1.0.0",
+        "handbook.posture-details.missing-lifecycle-authority/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.repository-identity-mismatch@1.0.0",
+        "handbook.posture-details.repository-identity-mismatch/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.stale-canonical@1.0.0",
+        "handbook.posture-details.stale-canonical/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.unsafe-filesystem@1.0.0",
+        "handbook.posture-details.unsafe-filesystem/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-details.unsupported-platform@1.0.0",
+        "handbook.posture-details.unsupported-platform/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-recheck.unsupported-platform@1.0.0",
+        "handbook.posture-recheck.unsupported-platform/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-write-condition.canonical-truth@1.0.0",
+        "handbook.posture-write-condition.canonical-truth/1.0.0.schema.json",
+    ),
+    (
+        "handbook.posture-write-condition.semantic-record@1.0.0",
+        "handbook.posture-write-condition.semantic-record/1.0.0.schema.json",
     ),
     (
         "handbook.problem-binding@1.0.0",
@@ -261,7 +329,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 36);
+    assert_eq!(entries.len(), 53);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
@@ -407,7 +475,7 @@ fn packet_three_constructor_instances_validate_against_every_new_root_shape() {
         }
         _ => panic!("expired catalog did not return a blocked restart"),
     }
-    assert!(witness.capabilities().is_empty());
+    assert_eq!(witness.capabilities().len(), 1);
 }
 
 #[test]
@@ -790,13 +858,109 @@ fn custom_wire_forms_are_exact_and_unfingerprinted_key_material_is_absent() {
     assert_eq!(idempotency["oneOf"].as_array().unwrap().len(), 3);
     assert!(idempotency["$defs"].get("IdempotencyStateKind").is_none());
 
-    for (_, relative_path) in ROOTS {
+    for (exact_ref, relative_path) in ROOTS {
         let schema = serde_json::from_slice::<Value>(&read_schema(relative_path)).unwrap();
-        assert_no_unfingerprinted_key_name(&schema);
+        if exact_ref == "handbook.operation.posture-transition-apply-request@1.0.0" {
+            assert!(schema.to_string().contains("idempotency_key"));
+        } else {
+            assert_no_unfingerprinted_key_name(&schema);
+        }
     }
     let manifest =
         fs::read(Path::new(env!("CARGO_MANIFEST_DIR")).join("schemas/manifest.json")).unwrap();
     assert_no_unfingerprinted_key_name(&serde_json::from_slice::<Value>(&manifest).unwrap());
+}
+
+#[test]
+fn packet_four_request_result_details_and_receipt_conditions_are_exact() {
+    let request = schema_value("handbook.operation.posture-transition-apply-request@1.0.0");
+    let expected_request = [
+        "change",
+        "effective_at_utc",
+        "expected_canonical",
+        "idempotency_key",
+        "reassessment_coverage_ids",
+        "recommendation",
+        "repository_identity_fingerprint",
+    ]
+    .into_iter()
+    .collect::<BTreeSet<_>>();
+    assert_eq!(
+        request["properties"]
+            .as_object()
+            .unwrap()
+            .keys()
+            .map(String::as_str)
+            .collect::<BTreeSet<_>>(),
+        expected_request
+    );
+    assert_eq!(
+        request["required"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|value| value.as_str().unwrap())
+            .collect::<BTreeSet<_>>(),
+        expected_request
+    );
+    assert_eq!(
+        request["properties"]["idempotency_key"]["pattern"],
+        "^[!-~]{1,256}$"
+    );
+    assert_eq!(
+        request["properties"]["reassessment_coverage_ids"]["minItems"],
+        1
+    );
+    assert_eq!(
+        request["properties"]["reassessment_coverage_ids"]["maxItems"],
+        64
+    );
+    assert_eq!(
+        request["$defs"]["PostureCanonicalBindingDtoV1"]["properties"]["reference"]["const"],
+        ".handbook/project/charter.yaml"
+    );
+
+    let result = schema_value("handbook.operation.posture-transition-apply-result@1.0.0");
+    assert_eq!(result["properties"].as_object().unwrap().len(), 7);
+    assert_eq!(result["required"].as_array().unwrap().len(), 7);
+    assert!(result["properties"].get("idempotency_key").is_none());
+
+    for exact_ref in [
+        "handbook.posture-details.authority-conflict@1.0.0",
+        "handbook.posture-details.integrity-or-durability@1.0.0",
+        "handbook.posture-details.invalid-fixed-dimension@1.0.0",
+        "handbook.posture-details.invalid-idempotency-key@1.0.0",
+        "handbook.posture-details.invalid-semantic-input@1.0.0",
+        "handbook.posture-details.io@1.0.0",
+        "handbook.posture-details.lifecycle-not-current@1.0.0",
+        "handbook.posture-details.missing-lifecycle-authority@1.0.0",
+        "handbook.posture-details.repository-identity-mismatch@1.0.0",
+        "handbook.posture-details.stale-canonical@1.0.0",
+        "handbook.posture-details.unsafe-filesystem@1.0.0",
+        "handbook.posture-details.unsupported-platform@1.0.0",
+        "handbook.posture-recheck.unsupported-platform@1.0.0",
+    ] {
+        let schema = schema_value(exact_ref);
+        assert_eq!(schema["properties"].as_object().unwrap().len(), 1);
+        assert_eq!(schema["required"], serde_json::json!(["owner_variant"]));
+    }
+
+    let canonical = schema_value("handbook.posture-write-condition.canonical-truth@1.0.0");
+    assert_eq!(canonical["properties"].as_object().unwrap().len(), 2);
+    assert_eq!(
+        canonical["required"],
+        serde_json::json!(["prior_canonical", "resulting_canonical"])
+    );
+    let semantic = schema_value("handbook.posture-write-condition.semantic-record@1.0.0");
+    assert_eq!(semantic["properties"].as_object().unwrap().len(), 3);
+    assert_eq!(
+        semantic["required"],
+        serde_json::json!([
+            "lifecycle_transition",
+            "posture_transition",
+            "resulting_kernel"
+        ])
+    );
 }
 
 fn schema_files(root: &Path) -> BTreeSet<PathBuf> {

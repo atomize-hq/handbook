@@ -9,6 +9,12 @@ use handbook_engine::{
     AUTHENTICATOR_RP_ID,
 };
 use handbook_sdk::{
+    contract_membrane::{
+        canonical_json_bytes, posture_transition_apply_request, ContractLimits, IdempotencyStage,
+        IdempotencyStateRef, PostureCanonicalBindingDtoV1, PostureDimensionChangeDtoV1,
+        PostureReferenceDtoV1, PostureTransitionApplyRequestDataV1, ProblemCategory,
+        RetryDirective, TerminalStatus,
+    },
     HandbookSdkV1, PostureCanonicalBindingV1, PostureDimensionChangeRequestV1, PostureReferenceV1,
     PostureTransitionApplyRequestV1, PostureTransitionApplyResultV1,
     PostureTransitionRefusalCodeV1,
@@ -344,6 +350,44 @@ fn prepared_posture_request() -> (tempfile::TempDir, PostureTransitionApplyReque
     (repo, request)
 }
 
+fn membrane_request(
+    request_id: &str,
+    request: &PostureTransitionApplyRequestV1,
+) -> handbook_sdk::contract_membrane::OperationRequestV1 {
+    posture_transition_apply_request(
+        Some(request_id),
+        &request.idempotency_key,
+        PostureTransitionApplyRequestDataV1::new(
+            request.repository_identity_fingerprint.clone(),
+            PostureCanonicalBindingDtoV1::new(
+                request.expected_canonical.reference.clone(),
+                request.expected_canonical.fingerprint.clone(),
+                request.expected_canonical.document_sha256.clone(),
+                request.expected_canonical.byte_length,
+            )
+            .unwrap(),
+            PostureReferenceDtoV1::new(
+                request.recommendation.reference.clone(),
+                request.recommendation.fingerprint.clone(),
+            )
+            .unwrap(),
+            request.reassessment_coverage_ids.clone(),
+            PostureDimensionChangeDtoV1::new(
+                request.change.dimension_id.clone(),
+                request.change.dimension_index,
+                request.change.authority_path.clone(),
+                request.change.expected_stored_value,
+                request.change.expected_effective_level,
+                request.change.proposed_effective_level,
+            )
+            .unwrap(),
+            request.effective_at_utc.clone(),
+        )
+        .unwrap(),
+    )
+    .unwrap()
+}
+
 #[test]
 fn direct_sdk_call_refuses_an_invalid_key_before_any_repository_access() {
     let sdk = HandbookSdkV1::open("this-path-is-never-read-for-an-invalid-key");
@@ -413,6 +457,161 @@ fn direct_sdk_method_applies_an_unfaulted_first_request_then_replays_exactly() {
         PostureTransitionApplyResultV1::Replayed(receipt)
     );
     assert_eq!(durable_state_snapshot(repo.path()), after_apply);
+}
+
+#[test]
+fn operation_envelope_matches_direct_rust_owner_semantics_and_correlation() {
+    let (repo, owner_request) = prepared_posture_request();
+    let sdk = HandbookSdkV1::open(repo.path());
+    let raw_key = owner_request.idempotency_key.clone();
+    assert!(!format!("{owner_request:?}").contains(&raw_key));
+    let first_request = membrane_request("operation-correlation-a", &owner_request);
+    let applied = sdk
+        .apply_posture_transition_operation(&first_request)
+        .unwrap();
+    assert_eq!(applied.terminal().status(), TerminalStatus::Ok);
+    assert_eq!(applied.receipts().len(), 2);
+    assert_eq!(
+        applied.receipts()[0].record().reference().as_str(),
+        "handbook.posture-record.constitutional-root@1.0.0"
+    );
+    assert_eq!(
+        applied.receipts()[1].record().reference().as_str(),
+        "handbook.posture-record.transition@1.0.0"
+    );
+    let applied_data: Value = serde_json::from_slice(
+        &canonical_json_bytes(
+            applied.terminal().data().unwrap(),
+            &ContractLimits::packet0(),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+
+    let direct = sdk.apply_posture_transition(owner_request.clone());
+    let PostureTransitionApplyResultV1::Replayed(owner_receipt) = direct else {
+        panic!("the legacy direct method must replay the operation-envelope write: {direct:?}")
+    };
+    assert_eq!(
+        applied_data["repository_identity_fingerprint"],
+        owner_receipt.repository_identity_fingerprint
+    );
+    assert_eq!(
+        applied_data["resulting_canonical"]["fingerprint"],
+        owner_receipt.resulting_canonical.fingerprint
+    );
+    assert_eq!(
+        applied_data["posture_transition"]["fingerprint"],
+        owner_receipt.posture_transition.fingerprint
+    );
+    assert_ne!(
+        applied_data["idempotency_key_fingerprint"],
+        owner_receipt.idempotency_key_fingerprint
+    );
+
+    let replay_request = membrane_request("operation-correlation-b", &owner_request);
+    assert_eq!(
+        first_request.request_fingerprint(),
+        replay_request.request_fingerprint()
+    );
+    let replayed = sdk
+        .apply_posture_transition_operation(&replay_request)
+        .unwrap();
+    assert_eq!(replayed.terminal().status(), TerminalStatus::Ok);
+    assert_eq!(applied.result_fingerprint(), replayed.result_fingerprint());
+    assert_ne!(
+        applied.response_fingerprint(),
+        replayed.response_fingerprint()
+    );
+    replayed.verify_replay_against(&applied).unwrap();
+
+    let before_changed = durable_state_snapshot(repo.path());
+    let mut changed = owner_request.clone();
+    changed.effective_at_utc = "2026-08-10T16:31:00Z".to_owned();
+    let refused = sdk
+        .apply_posture_transition_operation(&membrane_request("operation-correlation-c", &changed))
+        .unwrap();
+    assert_eq!(refused.terminal().status(), TerminalStatus::Refused);
+    assert_eq!(
+        refused.terminal().refusals()[0].code().as_str(),
+        "posture.authority_conflict"
+    );
+    assert_eq!(
+        refused.terminal().refusals()[0].retry(),
+        RetryDirective::AfterRequestChange
+    );
+    assert_eq!(durable_state_snapshot(repo.path()), before_changed);
+
+    let mut stale = owner_request;
+    stale.idempotency_key = "sdk-posture-proof-operation-stale".to_owned();
+    let stale_response = sdk
+        .apply_posture_transition_operation(&membrane_request("operation-correlation-d", &stale))
+        .unwrap();
+    assert_eq!(stale_response.terminal().status(), TerminalStatus::Refused);
+    assert_eq!(
+        stale_response.terminal().refusals()[0].code().as_str(),
+        "posture.stale_canonical"
+    );
+    assert_eq!(durable_state_snapshot(repo.path()), before_changed);
+
+    let response_bytes = canonical_json_bytes(&replayed, &ContractLimits::packet0()).unwrap();
+    assert!(!response_bytes
+        .windows(raw_key.len())
+        .any(|window| window == raw_key.as_bytes()));
+    assert_raw_key_absent_from_durable_files(repo.path(), &raw_key);
+}
+
+#[test]
+fn operation_envelope_projects_a_live_owner_error_without_private_state() {
+    let (repo, owner_request) = prepared_posture_request();
+    let sdk = HandbookSdkV1::open(repo.path());
+    fs::remove_file(repo.path().join(".handbook/project/charter.yaml")).unwrap();
+    let first_request = membrane_request("operation-live-error-a", &owner_request);
+    let response = sdk
+        .apply_posture_transition_operation(&first_request)
+        .unwrap();
+
+    assert_eq!(response.terminal().status(), TerminalStatus::Error);
+    assert!(response.terminal().data().is_none());
+    assert!(response.receipts().is_empty());
+    assert_eq!(response.terminal().errors().len(), 1);
+    let problem = &response.terminal().errors()[0];
+    assert_eq!(problem.category(), ProblemCategory::Implementation);
+    assert_eq!(problem.code().as_str(), "posture.integrity_or_durability");
+    assert_eq!(problem.retry(), RetryDirective::Never);
+    assert!(problem.correlation_ref().is_some());
+    assert!(matches!(
+        response.idempotency().as_ref(),
+        IdempotencyStateRef::NotEstablished {
+            stage: IdempotencyStage::ExecutionStart,
+            terminal_problem,
+        } if terminal_problem.problem_fingerprint() == problem.problem_fingerprint()
+    ));
+
+    let second_request = membrane_request("operation-live-error-b", &owner_request);
+    let second_response = sdk
+        .apply_posture_transition_operation(&second_request)
+        .unwrap();
+    let second_problem = &second_response.terminal().errors()[0];
+    assert_eq!(
+        second_problem.correlation_ref(),
+        problem.correlation_ref(),
+        "the live owner error correlation is semantic-request deterministic"
+    );
+    assert_eq!(
+        second_response.result_fingerprint(),
+        response.result_fingerprint()
+    );
+    assert_ne!(
+        second_response.response_fingerprint(),
+        response.response_fingerprint(),
+        "only the outer response correlation changes with a valid request ID"
+    );
+    let bytes = canonical_json_bytes(&response, &ContractLimits::packet0()).unwrap();
+    assert!(!bytes
+        .windows(owner_request.idempotency_key.len())
+        .any(|window| window == owner_request.idempotency_key.as_bytes()));
+    assert_raw_key_absent_from_durable_files(repo.path(), &owner_request.idempotency_key);
 }
 
 #[test]
@@ -518,6 +717,34 @@ fn durable_state_snapshot(repo_root: &Path) -> BTreeMap<String, String> {
     let mut snapshot = BTreeMap::new();
     collect_durable_files(&root, &root, &mut snapshot);
     snapshot
+}
+
+fn assert_raw_key_absent_from_durable_files(repo_root: &Path, raw_key: &str) {
+    assert!(!raw_key.is_empty());
+    let durable_root = repo_root.join(".handbook");
+    assert_raw_bytes_absent(&durable_root, raw_key.as_bytes());
+}
+
+fn assert_raw_bytes_absent(current: &Path, prohibited: &[u8]) {
+    for entry in fs::read_dir(current).unwrap() {
+        let entry = entry.unwrap();
+        let path = entry.path();
+        let metadata = entry.metadata().unwrap();
+        if metadata.is_dir() {
+            assert_raw_bytes_absent(&path, prohibited);
+        } else if metadata.is_file() {
+            let bytes = fs::read(&path).unwrap();
+            assert!(
+                !bytes
+                    .windows(prohibited.len())
+                    .any(|window| window == prohibited),
+                "a durable Handbook file contains prohibited raw key bytes: {}",
+                path.display()
+            );
+        } else {
+            panic!("durable fixture contains an unsupported filesystem entry");
+        }
+    }
 }
 
 fn collect_durable_files(root: &Path, current: &Path, snapshot: &mut BTreeMap<String, String>) {

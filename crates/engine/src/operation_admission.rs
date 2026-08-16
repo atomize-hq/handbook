@@ -116,6 +116,16 @@ pub fn admit_contract_operation(
         return Err(OwnerAdmissionRefusal::DefinitionMismatch);
     }
 
+    if claim.operation_ref == "posture.transition.apply@1.0.0" {
+        if !crate::posture_transition_facade::matches_posture_operation_claim(claim) {
+            return Err(OwnerAdmissionRefusal::DefinitionMismatch);
+        }
+        return Ok(OwnerOperationAdmission {
+            operation_ref: claim.operation_ref.to_owned(),
+            definition_fingerprint: claim.definition_fingerprint.to_owned(),
+        });
+    }
+
     let Some(expected_claim) = ADMITTED
         .iter()
         .find(|candidate| candidate.operation_ref == claim.operation_ref)

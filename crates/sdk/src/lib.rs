@@ -89,6 +89,15 @@ impl HandbookSdkV1 {
         self.posture.apply_posture_transition(request)
     }
 
+    /// Applies the exact public Packet-4 operation envelope through the same
+    /// engine-owned posture transition authority as the direct typed method.
+    pub fn apply_posture_transition_operation(
+        &self,
+        request: &contract_membrane::OperationRequestV1,
+    ) -> Result<contract_membrane::OperationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::apply_posture_transition_operation(&self.posture, request)
+    }
+
     /// Runs the existing repository setup composition for this SDK repository.
     pub fn run_setup(&self, request: &SetupRequest) -> Result<SetupOutcome, SetupError> {
         setup::run_setup(&self.repo_root, request)

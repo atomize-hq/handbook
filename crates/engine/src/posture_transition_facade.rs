@@ -29,7 +29,53 @@ use crate::{
     CharterAuthorityTransactionServiceV1, CharterPromotionErrorKindV1, DefinitionFingerprint,
     REPOSITORY_IDENTITY_REPO_PATH,
 };
+
+pub(crate) fn matches_posture_operation_claim(
+    claim: &crate::operation_admission::OperationAdmissionClaim<'_>,
+) -> bool {
+    use crate::operation_admission::OperationAdmissionClaim;
+
+    const EXPECTED: OperationAdmissionClaim<'static> = OperationAdmissionClaim {
+        operation_ref: "posture.transition.apply@1.0.0",
+        definition_fingerprint:
+            "sha256:49037ca77347209fec8dc10d05862fefec580a9c56af06d2cc088b5455b8b82e",
+        owner_crate: "handbook-engine",
+        owner_version: "0.2.0",
+        owner_source_ref: "handbook.owner.engine@0.2.0",
+        owner_source_fingerprint:
+            "sha256:75fddddeabf8a041b18a5eeb65dc683f199cb1805170b8db99b476b86df9c2f3",
+        definition_schema_ref: "handbook.operation-definition@1.0.0",
+        definition_schema_fingerprint:
+            "sha256:e668b32cb7ef3725e4d8c53696ec9032ba0741e387436883a7d8f264602ddd09",
+        request_schema_ref: "handbook.operation.posture-transition-apply-request@1.0.0",
+        request_schema_fingerprint:
+            "sha256:f3b08d34aa4aec4f5e8cb878f4638034bbd0d193f3c59515cad5ddad5abc72cc",
+        result_schema_ref: "handbook.operation.posture-transition-apply-result@1.0.0",
+        result_schema_fingerprint:
+            "sha256:0958a235d4b005a8b9a08bb5054742a9009def88d3056a1c3695fbe2f290f45a",
+        blocker_schema_ref: "handbook.operation-blocker@1.0.0",
+        blocker_schema_fingerprint:
+            "sha256:1125afb3a783af6ed4ee5b8caad86e00264420103d18db36e0337e34b889a009",
+        refusal_schema_ref: "handbook.operation-refusal@1.0.0",
+        refusal_schema_fingerprint:
+            "sha256:16357baa6276ae2d6b27e22296e789db78d646403845f98653148178afec8b23",
+        error_schema_ref: "handbook.operation-error@1.0.0",
+        error_schema_fingerprint:
+            "sha256:569cce41b965e3140591ed8c75ebad39aef2809c57e82b5c8f50db639d634355",
+        mutability: "compare_and_write",
+        idempotency: "compare_and_write_required",
+        idempotency_fingerprint:
+            "sha256:b33e4745428dc1e6058c90836f5d8f8c7a0651ae64d33c74d8c9fb06db073a7a",
+        write_set_fingerprint:
+            "sha256:8011f3d67027522c31cf32cf046abd5dfe00f0ad6392f5b7d05ddc7dbe97048b",
+        required_capabilities_fingerprint:
+            "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    };
+
+    claim == &EXPECTED
+}
 use sha2::{Digest, Sha256};
+use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
@@ -61,7 +107,7 @@ pub struct PostureDimensionChangeRequestV1 {
 /// All caller-supplied semantic inputs for the direct compile-time posture
 /// ingress. The engine independently resolves the current authority head,
 /// source kernel, approvals, policy, profile, and lifecycle-validation pair.
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Eq, PartialEq)]
 pub struct PostureTransitionApplyRequestV1 {
     /// An opaque bounded caller key. The engine hashes it before creating the
     /// private journal identity; the key itself is never persisted.
@@ -83,6 +129,24 @@ pub struct PostureTransitionApplyRequestV1 {
     pub reassessment_coverage_ids: Vec<String>,
     pub change: PostureDimensionChangeRequestV1,
     pub effective_at_utc: String,
+}
+
+impl fmt::Debug for PostureTransitionApplyRequestV1 {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter
+            .debug_struct("PostureTransitionApplyRequestV1")
+            .field("idempotency_key", &"[REDACTED raw idempotency key]")
+            .field(
+                "repository_identity_fingerprint",
+                &self.repository_identity_fingerprint,
+            )
+            .field("expected_canonical", &self.expected_canonical)
+            .field("recommendation", &self.recommendation)
+            .field("reassessment_coverage_ids", &self.reassessment_coverage_ids)
+            .field("change", &self.change)
+            .field("effective_at_utc", &self.effective_at_utc)
+            .finish()
+    }
 }
 
 /// A non-durable public summary of a successfully applied or replayed call.

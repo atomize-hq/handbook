@@ -10,7 +10,7 @@ use super::{
 use std::collections::BTreeSet;
 
 const INVENTORY_DIGEST: &str =
-    "sha256:ec8eaa6447efd2473340d1de7225acaa8e81e04d6ce9184258b51fdd6c4380a5";
+    "sha256:6993971ab59c0b6d98485b7a6eff7c06b87f8dcc350837a2cdf2ccc1cd5d6d1f";
 
 macro_rules! schema_asset {
     ($reference:literal, $path:literal) => {
@@ -19,7 +19,7 @@ macro_rules! schema_asset {
 }
 
 const SCHEMA_MANIFEST_BYTES: &[u8] = include_bytes!("../../schemas/manifest.json");
-const SCHEMA_ASSETS: [(&str, &[u8]); 36] = [
+const SCHEMA_ASSETS: [(&str, &[u8]); 53] = [
     schema_asset!(
         "handbook.artifact-ref@1.0.0",
         "../../schemas/2020-12/handbook.artifact-ref/1.0.0.schema.json"
@@ -121,8 +121,76 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 36] = [
         "../../schemas/2020-12/handbook.operation-response/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.operation.posture-transition-apply-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.posture-transition-apply-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.posture-transition-apply-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.posture-transition-apply-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.owner-version-entry@1.0.0",
         "../../schemas/2020-12/handbook.owner-version-entry/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.authority-conflict@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.authority-conflict/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.integrity-or-durability@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.integrity-or-durability/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.invalid-fixed-dimension@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.invalid-fixed-dimension/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.invalid-idempotency-key@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.invalid-idempotency-key/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.invalid-semantic-input@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.invalid-semantic-input/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.io@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.io/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.lifecycle-not-current@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.lifecycle-not-current/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.missing-lifecycle-authority@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.missing-lifecycle-authority/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.repository-identity-mismatch@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.repository-identity-mismatch/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.stale-canonical@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.stale-canonical/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.unsafe-filesystem@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.unsafe-filesystem/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-details.unsupported-platform@1.0.0",
+        "../../schemas/2020-12/handbook.posture-details.unsupported-platform/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-recheck.unsupported-platform@1.0.0",
+        "../../schemas/2020-12/handbook.posture-recheck.unsupported-platform/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-write-condition.canonical-truth@1.0.0",
+        "../../schemas/2020-12/handbook.posture-write-condition.canonical-truth/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.posture-write-condition.semantic-record@1.0.0",
+        "../../schemas/2020-12/handbook.posture-write-condition.semantic-record/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.problem-binding@1.0.0",
@@ -219,7 +287,13 @@ impl ProductionWitness {
         let manifest = verify_schema_assets(SCHEMA_MANIFEST_BYTES, &SCHEMA_ASSETS)?;
         let owners = current_owner_entries()?;
         let profiles = current_profile_entries()?;
-        Self::assemble(manifest, owners, profiles, Vec::new(), retention_until_utc)
+        Self::assemble(
+            manifest,
+            owners,
+            profiles,
+            vec![super::posture::current_posture_capability()?],
+            retention_until_utc,
+        )
     }
 
     pub fn descriptor(&self) -> &BootstrapDescriptorV1 {
@@ -426,7 +500,7 @@ fn verify_schema_assets(
         &ContractLimits::packet0(),
     )
     .map_err(|_| ProductionWitnessError::StaleManifest)?;
-    if manifest.len() != 36 || assets.len() != 36 || manifest.len() != assets.len() {
+    if manifest.len() != 53 || assets.len() != 53 || manifest.len() != assets.len() {
         return Err(ProductionWitnessError::ManifestCountMismatch);
     }
     let mut seen = BTreeSet::new();
@@ -450,6 +524,15 @@ fn verify_schema_assets(
     Ok(manifest)
 }
 
+pub(super) fn current_schema_binding(reference: &str) -> Result<ExactBinding, ContractError> {
+    verify_schema_assets(SCHEMA_MANIFEST_BYTES, &SCHEMA_ASSETS)
+        .map_err(|_| ContractError::InvalidInvariant)?
+        .into_iter()
+        .find(|entry| entry.schema().reference().as_str() == reference)
+        .map(|entry| entry.schema().clone())
+        .ok_or(ContractError::InvalidInvariant)
+}
+
 fn verify_inventory() -> Result<(), ProductionWitnessError> {
     let rows = operation_inventory();
     let unique_operation_refs = rows
@@ -463,7 +546,14 @@ fn verify_inventory() -> Result<(), ProductionWitnessError> {
             .enumerate()
             .any(|(index, row)| row.proof_ordinal() != (index + 1) as u16)
         || rows.iter().any(|row| {
-            !row.current_transports().is_empty() || row.discovery() != DiscoveryState::Omit
+            let is_posture = row.operation_ref().as_str() == super::posture::OPERATION_REF;
+            if is_posture {
+                row.admission_reason() != super::AdmissionReason::Admitted
+                    || row.current_transports() != [OperationTransport::RustSdk]
+                    || row.discovery() != DiscoveryState::Discoverable
+            } else {
+                !row.current_transports().is_empty() || row.discovery() != DiscoveryState::Omit
+            }
         })
     {
         return Err(ProductionWitnessError::InventoryMismatch);
@@ -623,9 +713,10 @@ fn validate_capabilities(
                 return Err(ProductionWitnessError::MissingOperationSchema);
             }
         }
-        if row.discovery() != DiscoveryState::Omit
+        if row.discovery() != DiscoveryState::Discoverable
             || row.current_transports().is_empty()
             || entry.current_transports().is_empty()
+            || entry.current_transports() != row.current_transports()
             || entry.current_transports().iter().any(|transport| {
                 !matches!(
                     transport,
@@ -638,6 +729,18 @@ fn validate_capabilities(
             return Err(ProductionWitnessError::UnprovenTransport);
         }
     }
+    let discoverable = operation_inventory()
+        .iter()
+        .filter(|row| row.discovery() == DiscoveryState::Discoverable)
+        .map(|row| row.operation_ref().as_str())
+        .collect::<BTreeSet<_>>();
+    if entries.len() != discoverable.len()
+        || entries
+            .iter()
+            .any(|entry| !discoverable.contains(entry.operation().reference().as_str()))
+    {
+        return Err(ProductionWitnessError::UnprovenTransport);
+    }
     Ok(())
 }
 
@@ -646,17 +749,21 @@ mod tests {
     use super::*;
 
     #[test]
-    fn production_witness_is_independent_exact_and_currently_omits_all_capabilities() {
+    fn production_witness_is_independent_exact_and_exposes_only_proven_capability() {
         let witness =
             ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
                 .unwrap();
-        assert_eq!(witness.schema_manifest().len(), 36);
+        assert_eq!(witness.schema_manifest().len(), 53);
         assert_eq!(witness.owner_versions().len(), 3);
         assert_eq!(witness.profiles().len(), 3);
-        assert!(witness.capabilities().is_empty());
+        assert_eq!(witness.capabilities().len(), 1);
+        assert_eq!(
+            witness.capabilities()[0].operation().reference().as_str(),
+            super::super::posture::OPERATION_REF
+        );
         assert_eq!(
             witness.catalog_roots().operations().total_entries().get(),
-            0
+            1
         );
         assert_ne!(
             witness.descriptor().schema().fingerprint(),

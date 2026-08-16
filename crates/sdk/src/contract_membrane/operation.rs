@@ -38,6 +38,7 @@ pub enum OperationClass {
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum AdmissionReason {
+    Admitted,
     IncompleteClosure,
     SemanticMismatch,
     IndependentOwnerAbsent,
@@ -47,6 +48,7 @@ pub enum AdmissionReason {
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum DiscoveryState {
+    Discoverable,
     Omit,
 }
 
@@ -67,6 +69,8 @@ pub struct OperationInventoryRow {
     availability: OperationAvailability,
     class: OperationClass,
     admission_reason: AdmissionReason,
+    current_transports: &'static [OperationTransport],
+    discovery: DiscoveryState,
 }
 
 impl OperationInventoryRow {
@@ -99,11 +103,11 @@ impl OperationInventoryRow {
     }
 
     pub fn current_transports(&self) -> &'static [OperationTransport] {
-        &[]
+        self.current_transports
     }
 
     pub fn discovery(&self) -> DiscoveryState {
-        DiscoveryState::Omit
+        self.discovery
     }
 }
 
@@ -759,6 +763,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
         .enumerate()
         .map(
             |(index, (operation_id, owner, availability, class, admission_reason))| {
+                let is_posture_apply = operation_id == "posture.transition.apply";
                 OperationInventoryRow {
                     proof_ordinal: (index + 1) as u16,
                     operation_id,
@@ -767,7 +772,21 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                     owner,
                     availability,
                     class,
-                    admission_reason,
+                    admission_reason: if is_posture_apply {
+                        AdmissionReason::Admitted
+                    } else {
+                        admission_reason
+                    },
+                    current_transports: if is_posture_apply {
+                        &[OperationTransport::RustSdk]
+                    } else {
+                        &[]
+                    },
+                    discovery: if is_posture_apply {
+                        DiscoveryState::Discoverable
+                    } else {
+                        DiscoveryState::Omit
+                    },
                 }
             },
         )

@@ -8,6 +8,7 @@ mod dto;
 mod envelope;
 mod operation;
 mod owner_admission;
+mod posture;
 mod production_witness;
 mod raw_key;
 mod response;
@@ -55,6 +56,14 @@ pub use operation::{
 };
 pub use owner_admission::{
     admit_operation_definition, OperationAdmissionResult, OwnerAdmissionToken,
+};
+pub(crate) use posture::apply_posture_transition_operation;
+pub use posture::{
+    admit_posture_transition_apply_request, posture_transition_apply_definition,
+    posture_transition_apply_request, PostureCanonicalBindingDtoV1,
+    PostureCanonicalWriteConditionV1, PostureDimensionChangeDtoV1, PostureOwnerVariantDetailsV1,
+    PostureOwnerVariantV1, PostureReferenceDtoV1, PostureSemanticWriteConditionV1,
+    PostureTransitionApplyRequestDataV1, PostureTransitionApplyResultDataV1,
 };
 pub use production_witness::{
     BootstrapOutcome, ProductionCatalogRead, ProductionWitness, ProductionWitnessError,

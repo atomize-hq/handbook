@@ -795,9 +795,10 @@ pub(crate) trait CurrentTransportEvidenceSealed {}
 
 /// A sealed proof that one owner-admitted definition has a current transport.
 ///
-/// Packet 3 deliberately supplies no production implementation. Declared
-/// transport targets cannot be promoted into current capability truth by a
-/// downstream crate:
+/// Packet 3 deliberately supplied no production implementation. Packet 4 adds
+/// the single owner-admitted posture Rust implementation inside this crate;
+/// declared transport targets still cannot be promoted into current capability
+/// truth by a downstream crate:
 ///
 /// ```compile_fail
 /// use handbook_sdk::contract_membrane::{
