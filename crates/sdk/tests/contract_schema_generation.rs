@@ -1,0 +1,682 @@
+use handbook_sdk::contract_membrane::{
+    canonical_json_bytes, parse_canonical_json, sha256_fingerprint, ArtifactLocator, ArtifactRef,
+    BoundedString, BoundedVec, CatalogCursor, CatalogPage, CatalogRoot, ContractError,
+    ContractLimits, ContractValue, ContractWitness, CorrelationRef, Diagnostic, DiagnosticSeverity,
+    DraftVersion, ExactBinding, ExactRef, Fingerprint, IdempotencyStage, IdempotencyState,
+    NextAction, NextActionKind, Omission, OmissionReason, Problem, ProblemBinding, ProblemCategory,
+    ProofEffect, RecheckCondition, RetryDirective, SafeU64, SchemaManifestEntry, SchemaMediaType,
+    Sensitivity, SourceBinding, UtcTimestamp, VerificationError, Verified, WriteReceipt,
+};
+use jsonschema::{PatternOptions, Retrieve, Uri, Validator};
+use serde::de::DeserializeOwned;
+use serde::Serialize;
+use serde_json::Value;
+use std::collections::{BTreeMap, BTreeSet};
+use std::fmt;
+use std::fs;
+use std::path::{Path, PathBuf};
+
+const ROOTS: [(&str, &str); 15] = [
+    (
+        "handbook.artifact-ref@1.0.0",
+        "handbook.artifact-ref/1.0.0.schema.json",
+    ),
+    (
+        "handbook.catalog-cursor@1.0.0",
+        "handbook.catalog-cursor/1.0.0.schema.json",
+    ),
+    (
+        "handbook.catalog-page@1.0.0",
+        "handbook.catalog-page/1.0.0.schema.json",
+    ),
+    (
+        "handbook.catalog-root@1.0.0",
+        "handbook.catalog-root/1.0.0.schema.json",
+    ),
+    (
+        "handbook.correlation-ref@1.0.0",
+        "handbook.correlation-ref/1.0.0.schema.json",
+    ),
+    (
+        "handbook.diagnostic@1.0.0",
+        "handbook.diagnostic/1.0.0.schema.json",
+    ),
+    (
+        "handbook.idempotency-state@1.0.0",
+        "handbook.idempotency-state/1.0.0.schema.json",
+    ),
+    (
+        "handbook.next-action@1.0.0",
+        "handbook.next-action/1.0.0.schema.json",
+    ),
+    (
+        "handbook.omission@1.0.0",
+        "handbook.omission/1.0.0.schema.json",
+    ),
+    (
+        "handbook.problem-binding@1.0.0",
+        "handbook.problem-binding/1.0.0.schema.json",
+    ),
+    (
+        "handbook.problem@1.0.0",
+        "handbook.problem/1.0.0.schema.json",
+    ),
+    (
+        "handbook.recheck-condition@1.0.0",
+        "handbook.recheck-condition/1.0.0.schema.json",
+    ),
+    (
+        "handbook.schema-manifest-entry@1.0.0",
+        "handbook.schema-manifest-entry/1.0.0.schema.json",
+    ),
+    (
+        "handbook.source-binding@1.0.0",
+        "handbook.source-binding/1.0.0.schema.json",
+    ),
+    (
+        "handbook.write-receipt@1.0.0",
+        "handbook.write-receipt/1.0.0.schema.json",
+    ),
+];
+
+const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
+const ZERO_FINGERPRINT: &str =
+    "sha256:0000000000000000000000000000000000000000000000000000000000000000";
+type IdempotencyVerifier = fn(
+    IdempotencyState,
+    &dyn ContractWitness,
+    &ContractLimits,
+) -> Result<Verified<IdempotencyState>, VerificationError>;
+
+#[derive(Debug)]
+struct RejectExternal;
+
+#[derive(Debug)]
+struct RetrievalDisabled;
+
+impl fmt::Display for RetrievalDisabled {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str("external schema retrieval is disabled")
+    }
+}
+
+impl std::error::Error for RetrievalDisabled {}
+
+impl Retrieve for RejectExternal {
+    fn retrieve(
+        &self,
+        _uri: &Uri<String>,
+    ) -> Result<Value, Box<dyn std::error::Error + Send + Sync>> {
+        Err(Box::new(RetrievalDisabled))
+    }
+}
+
+#[test]
+fn checked_in_tree_contains_exactly_the_authorized_roots() {
+    let schema_root = Path::new(env!("CARGO_MANIFEST_DIR")).join("schemas/2020-12");
+    let actual = schema_files(&schema_root);
+    let expected = ROOTS
+        .iter()
+        .map(|(_, relative_path)| PathBuf::from(relative_path))
+        .collect::<BTreeSet<_>>();
+
+    assert_eq!(actual, expected);
+    assert!(Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("schemas/manifest.json")
+        .is_file());
+}
+
+#[test]
+fn schemas_are_meta_valid_self_contained_closed_and_canonical() {
+    for (exact_ref, relative_path) in ROOTS {
+        let bytes = read_schema(relative_path);
+        assert_one_terminal_lf(&bytes, relative_path);
+        let without_lf = &bytes[..bytes.len() - 1];
+        let schema = parse_canonical_json::<Value>(without_lf, &ContractLimits::packet0())
+            .expect("schema bytes must be Packet-0 canonical JSON");
+        assert_eq!(
+            canonical_json_bytes(&schema, &ContractLimits::packet0()).unwrap(),
+            without_lf
+        );
+        assert_eq!(schema["$schema"], DIALECT);
+        let (identity, version) = exact_ref.split_once('@').unwrap();
+        assert_eq!(
+            schema["$id"],
+            format!("urn:handbook:schema:{identity}:{version}")
+        );
+        jsonschema::draft202012::meta::validate(&schema)
+            .expect("schema must validate against the bundled Draft 2020-12 meta-schema");
+        assert_local_refs_resolve(&schema, &schema);
+        assert_structural_objects_are_closed(&schema);
+
+        jsonschema::draft202012::options()
+            .with_pattern_options(PatternOptions::regex())
+            .with_retriever(RejectExternal)
+            .build(&schema)
+            .expect("self-contained schema must compile with external retrieval disabled");
+    }
+}
+
+#[test]
+fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
+    let manifest_path = Path::new(env!("CARGO_MANIFEST_DIR")).join("schemas/manifest.json");
+    let bytes = fs::read(&manifest_path).unwrap();
+    assert_one_terminal_lf(&bytes, "manifest.json");
+    let without_lf = &bytes[..bytes.len() - 1];
+    let value = parse_canonical_json::<Value>(without_lf, &ContractLimits::packet0()).unwrap();
+    assert_eq!(
+        canonical_json_bytes(&value, &ContractLimits::packet0()).unwrap(),
+        without_lf
+    );
+    let entries =
+        parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
+            .unwrap();
+    assert_eq!(entries.len(), 15);
+
+    let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
+    let refs = entries
+        .iter()
+        .map(|entry| entry.schema().reference().as_str())
+        .collect::<Vec<_>>();
+    assert!(refs.windows(2).all(|pair| pair[0] < pair[1]));
+    assert_eq!(refs, mapping.keys().copied().collect::<Vec<_>>());
+
+    for entry in entries {
+        assert_eq!(entry.draft(), DraftVersion::Draft202012);
+        assert_eq!(entry.media_type(), SchemaMediaType::ApplicationSchemaJson);
+        let exact_ref = entry.schema().reference().as_str();
+        let schema_bytes = read_schema(mapping[exact_ref]);
+        assert_eq!(entry.byte_length().get(), schema_bytes.len() as u64);
+        assert_eq!(
+            entry.schema().fingerprint(),
+            &sha256_fingerprint(&schema_bytes)
+        );
+    }
+}
+
+#[test]
+fn constructor_instances_validate_and_round_trip_through_all_fifteen_roots() {
+    let limits = ContractLimits::packet0();
+    let source = SourceBinding::new(
+        binding("source.item"),
+        binding("source.revision"),
+        binding("source.adapter"),
+    )
+    .unwrap();
+    let recheck =
+        RecheckCondition::new(binding("condition.schema"), ContractValue::null(), &limits).unwrap();
+    let correlation = CorrelationRef::new(bounded("corr_abcdefghijklmnop")).unwrap();
+    let artifact = artifact("artifact.sample", "reports/sample.json");
+    let problem = Problem::new(
+        bounded("problem.prerequisite"),
+        bounded("prerequisite.missing"),
+        ProblemCategory::Prerequisite,
+        binding("subject.item"),
+        None,
+        binding("details.schema"),
+        ContractValue::null(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        RetryDirective::AfterRecheck,
+        Some(recheck.clone()),
+        None,
+        &limits,
+    )
+    .unwrap();
+    let diagnostic = Diagnostic::new(
+        bounded("diagnostic.ready"),
+        DiagnosticSeverity::Information,
+        binding("subject.item"),
+        binding("details.schema"),
+        ContractValue::null(),
+        None,
+        &limits,
+    )
+    .unwrap();
+    let action = NextAction::new(
+        bounded("action.retry"),
+        NextActionKind::RetryTransient,
+        binding("subject.item"),
+        binding("parameter.schema"),
+        ContractValue::null(),
+        Some(bounded("Retry now")),
+        &limits,
+    )
+    .unwrap();
+    let omission = Omission::new(
+        binding("item.omitted"),
+        OmissionReason::Unavailable,
+        ProofEffect::Partial,
+        Some(source.clone()),
+        SafeU64::new(0).unwrap(),
+    )
+    .unwrap();
+    let manifest_entry = SchemaManifestEntry::new(
+        binding("schema.sample"),
+        DraftVersion::Draft202012,
+        SafeU64::new(1).unwrap(),
+        SchemaMediaType::ApplicationSchemaJson,
+    )
+    .unwrap();
+    let root = CatalogRoot::new(
+        binding("catalog.sample"),
+        binding("entry.schema"),
+        SafeU64::new(0).unwrap(),
+        binding("sort.definition"),
+        UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap(),
+    )
+    .unwrap();
+    let cursor =
+        CatalogCursor::new(root.catalog().clone(), ContractValue::null(), &limits).unwrap();
+    let page = CatalogPage::new(
+        root.clone(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        None,
+        &limits,
+    )
+    .unwrap();
+    let receipt = WriteReceipt::new(
+        bounded("record.kind"),
+        binding("record.item"),
+        bounded("authority.class"),
+        ContractValue::null(),
+        bounded("atomic.group"),
+        &limits,
+    )
+    .unwrap();
+    let problem_binding = ProblemBinding::new(
+        problem.problem_id().clone(),
+        problem.problem_fingerprint().clone(),
+    )
+    .unwrap();
+    let idempotency = IdempotencyState::established(
+        zero_fingerprint(),
+        sha256_fingerprint(b"request"),
+        false,
+        None,
+        UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap(),
+    )
+    .unwrap();
+
+    assert_schema_and_typed("handbook.problem@1.0.0", &problem);
+    assert_schema_and_typed("handbook.diagnostic@1.0.0", &diagnostic);
+    assert_schema_and_typed("handbook.next-action@1.0.0", &action);
+    assert_schema_and_typed("handbook.artifact-ref@1.0.0", &artifact);
+    assert_schema_and_typed("handbook.source-binding@1.0.0", &source);
+    assert_schema_and_typed("handbook.omission@1.0.0", &omission);
+    assert_schema_and_typed("handbook.schema-manifest-entry@1.0.0", &manifest_entry);
+    assert_schema_and_typed("handbook.catalog-root@1.0.0", &root);
+    assert_schema_and_typed("handbook.catalog-cursor@1.0.0", &cursor);
+    assert_schema_and_typed("handbook.catalog-page@1.0.0", &page);
+    assert_schema_and_typed("handbook.recheck-condition@1.0.0", &recheck);
+    assert_schema_and_typed("handbook.correlation-ref@1.0.0", &correlation);
+    assert_schema_and_typed("handbook.write-receipt@1.0.0", &receipt);
+    assert_schema_and_typed("handbook.idempotency-state@1.0.0", &idempotency);
+    assert_schema_and_typed("handbook.problem-binding@1.0.0", &problem_binding);
+
+    let content_binding = binding("artifact.content");
+    let content_locator = ArtifactLocator::content_addressed(
+        binding("store.content"),
+        content_binding.fingerprint().clone(),
+    );
+    let content_artifact = ArtifactRef::new(
+        content_binding,
+        bounded("application/json"),
+        SafeU64::new(2).unwrap(),
+        Sensitivity::Restricted,
+        content_locator,
+    )
+    .unwrap();
+    assert_schema_and_typed("handbook.artifact-ref@1.0.0", &content_artifact);
+    assert_schema_and_typed(
+        "handbook.idempotency-state@1.0.0",
+        &IdempotencyState::not_applicable().unwrap(),
+    );
+    assert_schema_and_typed(
+        "handbook.idempotency-state@1.0.0",
+        &IdempotencyState::not_established(IdempotencyStage::RequestValidation, problem_binding)
+            .unwrap(),
+    );
+}
+
+#[test]
+fn parser_schema_typed_and_owner_witness_gates_remain_distinct() {
+    let limits = ContractLimits::packet0();
+    let source = SourceBinding::new(
+        binding("source.item"),
+        binding("source.revision"),
+        binding("source.adapter"),
+    )
+    .unwrap();
+    let source_bytes = canonical_json_bytes(&source, &limits).unwrap();
+    let source_value: Value = serde_json::from_slice(&source_bytes).unwrap();
+    let source_text = String::from_utf8(source_bytes.clone()).unwrap();
+    let duplicate = format!(
+        "{{\"adapter\":{},{}",
+        source_value["adapter"],
+        &source_text[1..]
+    );
+    assert_eq!(
+        parse_canonical_json::<Value>(duplicate.as_bytes(), &limits),
+        Err(ContractError::InvalidJson)
+    );
+    let mut framed = source_bytes.clone();
+    framed.push(b'\n');
+    assert_eq!(
+        parse_canonical_json::<Value>(&framed, &limits),
+        Err(ContractError::NonCanonicalJson)
+    );
+
+    let mut unknown = source_value.clone();
+    unknown["unknown"] = Value::Bool(true);
+    assert_schema_rejects("handbook.source-binding@1.0.0", &unknown);
+    let unknown_bytes = canonical_json_bytes(&unknown, &limits).unwrap();
+    assert!(parse_canonical_json::<Value>(&unknown_bytes, &limits).is_ok());
+    assert_eq!(
+        parse_canonical_json::<SourceBinding>(&unknown_bytes, &limits),
+        Err(ContractError::InvalidJson)
+    );
+
+    assert_schema_rejects(
+        "handbook.idempotency-state@1.0.0",
+        &serde_json::json!({"state": "unknown"}),
+    );
+    assert_schema_rejects(
+        "handbook.correlation-ref@1.0.0",
+        &Value::String("corr_too_short".to_owned()),
+    );
+
+    let diagnostic = Diagnostic::new(
+        bounded("diagnostic.ready"),
+        DiagnosticSeverity::Information,
+        binding("subject.item"),
+        binding("details.schema"),
+        ContractValue::null(),
+        None,
+        &limits,
+    )
+    .unwrap();
+    let mut diagnostic_value = to_value(&diagnostic);
+    diagnostic_value.as_object_mut().unwrap().remove("code");
+    assert_schema_rejects("handbook.diagnostic@1.0.0", &diagnostic_value);
+    let mut diagnostic_null = to_value(&diagnostic);
+    diagnostic_null["display_message"] = Value::Null;
+    assert_schema_rejects("handbook.diagnostic@1.0.0", &diagnostic_null);
+    let mut diagnostic_enum = to_value(&diagnostic);
+    diagnostic_enum["severity"] = Value::String("critical".to_owned());
+    assert_schema_rejects("handbook.diagnostic@1.0.0", &diagnostic_enum);
+
+    let semantic_only = serde_json::json!({
+        "idempotency_key_fingerprint": zero_fingerprint(),
+        "original_result_fingerprint": sha256_fingerprint(b"result"),
+        "replayed": false,
+        "request_fingerprint": sha256_fingerprint(b"request"),
+        "result_retention_until_utc": "2030-01-01T00:00:00Z",
+        "state": "established"
+    });
+    assert!(validator("handbook.idempotency-state@1.0.0").is_valid(&semantic_only));
+    let semantic_bytes = canonical_json_bytes(&semantic_only, &limits).unwrap();
+    assert_eq!(
+        parse_canonical_json::<IdempotencyState>(&semantic_bytes, &limits),
+        Err(ContractError::InvalidInvariant)
+    );
+
+    let root = CatalogRoot::new(
+        binding("catalog.sample"),
+        binding("entry.schema"),
+        SafeU64::new(0).unwrap(),
+        binding("sort.definition"),
+        UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap(),
+    )
+    .unwrap();
+    let cursor =
+        CatalogCursor::new(root.catalog().clone(), ContractValue::null(), &limits).unwrap();
+    let mut mismatched_cursor = to_value(&cursor);
+    mismatched_cursor["cursor_fingerprint"] = Value::String(ZERO_FINGERPRINT.to_owned());
+    assert!(validator("handbook.catalog-cursor@1.0.0").is_valid(&mismatched_cursor));
+    let mismatched_bytes = canonical_json_bytes(&mismatched_cursor, &limits).unwrap();
+    assert_eq!(
+        parse_canonical_json::<CatalogCursor>(&mismatched_bytes, &limits),
+        Err(ContractError::FingerprintMismatch)
+    );
+
+    let _: IdempotencyVerifier = handbook_sdk::contract_membrane::verify::<IdempotencyState>;
+}
+
+#[test]
+fn custom_wire_forms_are_exact_and_unfingerprinted_key_material_is_absent() {
+    let correlation = schema_value("handbook.correlation-ref@1.0.0");
+    assert_eq!(correlation["type"], "string");
+    assert!(correlation.get("properties").is_none());
+
+    let problem = schema_value("handbook.problem@1.0.0");
+    let exact_binding = &problem["$defs"]["ExactBinding"];
+    assert!(exact_binding["properties"].get("ref").is_some());
+    assert!(exact_binding["properties"].get("reference").is_none());
+    assert!(problem["$defs"]["ContractValue"]["oneOf"].is_array());
+    assert!(problem["$defs"].get("ContractValueKind").is_none());
+    for required_nullable in ["rule", "recheck", "correlation_ref"] {
+        assert!(problem["required"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|field| field == required_nullable));
+        assert!(problem["properties"][required_nullable]["anyOf"].is_array());
+    }
+
+    let diagnostic = schema_value("handbook.diagnostic@1.0.0");
+    assert!(!diagnostic["required"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .any(|field| field == "display_message"));
+    assert_eq!(
+        diagnostic["properties"]["display_message"]["$ref"],
+        "#/$defs/BoundedString_1024"
+    );
+
+    let artifact = schema_value("handbook.artifact-ref@1.0.0");
+    let locator = &artifact["$defs"]["ArtifactLocator"]["oneOf"];
+    assert_eq!(locator[0]["properties"]["no_follow"]["const"], true);
+    assert_eq!(
+        locator[1]["properties"]["algorithm"]["$ref"],
+        "#/$defs/DigestAlgorithm"
+    );
+    assert!(artifact["$defs"].get("ArtifactLocatorKind").is_none());
+
+    let idempotency = schema_value("handbook.idempotency-state@1.0.0");
+    assert_eq!(idempotency["oneOf"].as_array().unwrap().len(), 3);
+    assert!(idempotency["$defs"].get("IdempotencyStateKind").is_none());
+
+    for (_, relative_path) in ROOTS {
+        let schema = serde_json::from_slice::<Value>(&read_schema(relative_path)).unwrap();
+        assert_no_unfingerprinted_key_name(&schema);
+    }
+    let manifest =
+        fs::read(Path::new(env!("CARGO_MANIFEST_DIR")).join("schemas/manifest.json")).unwrap();
+    assert_no_unfingerprinted_key_name(&serde_json::from_slice::<Value>(&manifest).unwrap());
+}
+
+fn schema_files(root: &Path) -> BTreeSet<PathBuf> {
+    fn visit(root: &Path, current: &Path, files: &mut BTreeSet<PathBuf>) {
+        for entry in fs::read_dir(current).expect("generated schema directory must exist") {
+            let entry = entry.expect("generated schema entry must be readable");
+            let path = entry.path();
+            if path.is_dir() {
+                visit(root, &path, files);
+            } else {
+                files.insert(
+                    path.strip_prefix(root)
+                        .expect("schema path must remain below its root")
+                        .to_path_buf(),
+                );
+            }
+        }
+    }
+
+    let mut files = BTreeSet::new();
+    visit(root, root, &mut files);
+    files
+}
+
+fn read_schema(relative_path: &str) -> Vec<u8> {
+    fs::read(
+        Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("schemas/2020-12")
+            .join(relative_path),
+    )
+    .unwrap()
+}
+
+fn assert_one_terminal_lf(bytes: &[u8], subject: &str) {
+    assert!(bytes.ends_with(b"\n"), "{subject} lacks its terminal LF");
+    assert!(bytes.len() > 1 && bytes[bytes.len() - 2] != b'\n');
+    assert!(!bytes[..bytes.len() - 1].contains(&b'\r'));
+}
+
+fn assert_local_refs_resolve(root: &Value, current: &Value) {
+    match current {
+        Value::Array(values) => {
+            for value in values {
+                assert_local_refs_resolve(root, value);
+            }
+        }
+        Value::Object(members) => {
+            if let Some(reference) = members.get("$ref") {
+                let reference = reference.as_str().expect("$ref must be a string");
+                let pointer = reference
+                    .strip_prefix('#')
+                    .filter(|pointer| pointer.starts_with("/$defs/"))
+                    .expect("all schema refs must be local $defs fragments");
+                assert!(
+                    root.pointer(pointer).is_some(),
+                    "unresolved ref: {reference}"
+                );
+            }
+            for value in members.values() {
+                assert_local_refs_resolve(root, value);
+            }
+        }
+        _ => {}
+    }
+}
+
+fn assert_structural_objects_are_closed(value: &Value) {
+    match value {
+        Value::Array(values) => {
+            for value in values {
+                assert_structural_objects_are_closed(value);
+            }
+        }
+        Value::Object(members) => {
+            if members.get("type") == Some(&Value::String("object".to_owned()))
+                && members.contains_key("properties")
+            {
+                assert_eq!(
+                    members.get("additionalProperties"),
+                    Some(&Value::Bool(false))
+                );
+            }
+            for value in members.values() {
+                assert_structural_objects_are_closed(value);
+            }
+        }
+        _ => {}
+    }
+}
+
+fn validator(exact_ref: &str) -> Validator {
+    let relative_path = ROOTS
+        .iter()
+        .find_map(|(candidate, path)| (*candidate == exact_ref).then_some(*path))
+        .unwrap();
+    let bytes = read_schema(relative_path);
+    let schema: Value = serde_json::from_slice(&bytes).unwrap();
+    jsonschema::draft202012::options()
+        .with_pattern_options(PatternOptions::regex())
+        .with_retriever(RejectExternal)
+        .build(&schema)
+        .unwrap()
+}
+
+fn schema_value(exact_ref: &str) -> Value {
+    let relative_path = ROOTS
+        .iter()
+        .find_map(|(candidate, path)| (*candidate == exact_ref).then_some(*path))
+        .unwrap();
+    serde_json::from_slice(&read_schema(relative_path)).unwrap()
+}
+
+fn assert_schema_and_typed<T>(exact_ref: &str, value: &T)
+where
+    T: Serialize + DeserializeOwned + Eq + fmt::Debug,
+{
+    let limits = ContractLimits::packet0();
+    let bytes = canonical_json_bytes(value, &limits).unwrap();
+    let instance: Value = serde_json::from_slice(&bytes).unwrap();
+    let validator = validator(exact_ref);
+    assert!(
+        validator.is_valid(&instance),
+        "constructor instance failed {exact_ref}"
+    );
+    assert_eq!(parse_canonical_json::<T>(&bytes, &limits).unwrap(), *value);
+}
+
+fn assert_schema_rejects(exact_ref: &str, instance: &Value) {
+    assert!(
+        !validator(exact_ref).is_valid(instance),
+        "schema unexpectedly accepted boundary fixture for {exact_ref}"
+    );
+}
+
+fn to_value(value: &impl Serialize) -> Value {
+    let bytes = canonical_json_bytes(value, &ContractLimits::packet0()).unwrap();
+    serde_json::from_slice(&bytes).unwrap()
+}
+
+fn bounded<const N: usize>(value: &str) -> BoundedString<N> {
+    BoundedString::new(value.to_owned()).unwrap()
+}
+
+fn binding(identity: &str) -> ExactBinding {
+    ExactBinding::new(
+        ExactRef::parse(&format!("{identity}@1.0.0")).unwrap(),
+        sha256_fingerprint(identity.as_bytes()),
+    )
+}
+
+fn zero_fingerprint() -> Fingerprint {
+    Fingerprint::parse(ZERO_FINGERPRINT).unwrap()
+}
+
+fn artifact(identity: &str, path: &str) -> ArtifactRef {
+    ArtifactRef::new(
+        binding(identity),
+        bounded("application/json"),
+        SafeU64::new(1).unwrap(),
+        Sensitivity::Internal,
+        ArtifactLocator::repo_relative(sha256_fingerprint(b"repository"), bounded(path)).unwrap(),
+    )
+    .unwrap()
+}
+
+fn assert_no_unfingerprinted_key_name(value: &Value) {
+    match value {
+        Value::Array(values) => {
+            for value in values {
+                assert_no_unfingerprinted_key_name(value);
+            }
+        }
+        Value::Object(members) => {
+            for (key, value) in members {
+                assert_ne!(key, "idempotency_key");
+                assert_ne!(key, "raw_idempotency_key");
+                assert_no_unfingerprinted_key_name(value);
+            }
+        }
+        Value::String(value) => {
+            assert_ne!(value, "idempotency_key");
+            assert_ne!(value, "raw_idempotency_key");
+        }
+        _ => {}
+    }
+}

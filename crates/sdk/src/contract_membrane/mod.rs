@@ -5,6 +5,9 @@ mod catalog;
 mod dto;
 mod raw_key;
 mod response;
+#[cfg(feature = "contract-schema-generation")]
+#[doc(hidden)]
+pub mod schema_generation;
 mod serialization;
 mod verification;
 
