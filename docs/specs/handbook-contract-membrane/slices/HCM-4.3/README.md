@@ -8,8 +8,9 @@ source of semantic operation identity.
 
 ## Current admission state
 
-**HCM-4.3 authority is ready for meta-task admission. If admitted, Packet 1 is
-next and Packets 1 through 8 are sequentially delegated.**
+**Packets 1 through 8 now have product and packet-level evidence checkpoints.
+The meta task still owns the one aggregate slice review, closeout, and any
+`SLICE_COMPLETE` decision.**
 
 The hard predecessor, HCM-4.2, is complete. Its packet commits are
 `f54dcbd`, `4d70701`, `241b998`, `caf0ef4`, and `c1f5d33`, following the
@@ -20,9 +21,9 @@ no P1 or P2. The prior P3 status-prose drift is corrected by the current
 authority-preparation change; the separate P3 bootstrap defense-in-depth note
 remains optional and does not block this slice.
 
-Product execution remains inadmissible until the meta task admits this
-authority and dispatches Packet 1. This document does not itself implement JSON
-parity or prove any CLI transport current.
+Packet implementation does not itself establish aggregate slice closeout.
+HCM-4.4 and later work remain inadmissible until the meta task evaluates this
+slice at its separate aggregate boundary.
 
 ## Outcome
 

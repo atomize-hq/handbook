@@ -485,6 +485,7 @@ dependencies = [
  "handbook-flow",
  "handbook-pipeline",
  "handbook-sdk",
+ "jsonschema",
  "serde",
  "serde_json",
  "serde_json_canonicalizer",

@@ -10,4 +10,4 @@ REFS:
 RUN:
   runner = <unset>
   profile = <unset>
-  repo_root = {{REPO_ROOT}}
+  repo_root = ${repo_root}

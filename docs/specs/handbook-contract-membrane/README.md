@@ -11,14 +11,14 @@ At this checkpoint:
 - the Rust product implementation remains in the workspace;
 - retained executable fixtures remain under [`slices/`](slices/), alongside the
   completed [`HCM-4.2 outcome authority`](slices/HCM-4.2/README.md), its Packet
-  1–5 checkpoints, and the authority-ready
+  1–5 checkpoints, and the Packet-1–8 implementation checkpoint for the
   [`HCM-4.3 slice authority`](slices/HCM-4.3/README.md);
 - Phase 3 is exited under its selected reduced boundary; its explicitly rehomed
   work remains with later owners;
 - the [`phase-and-slice map`](phase-and-slice-map.md) supplies current roadmap
   status, order, hard predecessors, and exit state; HCM-4.2 is complete, and
-  HCM-4.3 is the next authority-ready slice with sequential packet preparation
-  and execution bounded by its own authority;
+  HCM-4.3 has completed its sequential packet implementation boundary and is
+  pending the meta task's separate aggregate review and closeout;
 - the former orchestration skill under `.codex/skills/.disabled/` is inactive and is not authority for new work; and
 - the active thin router is routing guidance only and is not authority for product or slice work.
 
@@ -44,7 +44,7 @@ Use the source that owns the question:
 | How does a meta task prepare and continue requested HCM work? | [`meta-task-prompt.md`](meta-task-prompt.md) routes approved phase preparation, requested-slice preparation, whole-slice or sequential packet execution, and one aggregate closeout. |
 | Where is the active routing entry point? | [`.codex/skills/orchestrate-top-level-tasks/SKILL.md`](../../../.codex/skills/orchestrate-top-level-tasks/SKILL.md) operationalizes role-specific preparation and execution. User instructions and current authority supply permission and scope; the skill does not invent either. |
 | What is the completed HCM-4.2 outcome and evidence boundary? | [`slices/HCM-4.2/README.md`](slices/HCM-4.2/README.md) records the completed Packet 0–5 outcome, its single aggregate closeout, and links to the Packet 1–5 decision checkpoints. |
-| What is the current HCM-4.3 outcome and packet boundary? | [`slices/HCM-4.3/README.md`](slices/HCM-4.3/README.md) owns complete CLI JSON parity, the machine/human/diagnostic/exit contract, compatibility posture, ordered Packets 1–8, and bounded just-in-time preparation. Packet 1 is next after meta-task admission. |
+| What is the current HCM-4.3 outcome and packet boundary? | [`slices/HCM-4.3/README.md`](slices/HCM-4.3/README.md) owns complete CLI JSON parity, the machine/human/diagnostic/exit contract, compatibility posture, and ordered Packets 1–8. Packet implementation is present; aggregate slice review and closeout remain with the meta task. |
 | Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 

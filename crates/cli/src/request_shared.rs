@@ -131,9 +131,14 @@ fn validate_fixture_set_id(value: &str) -> Result<(), String> {
 }
 
 fn ensure_dir(path: &Path, what: &str) -> Result<(), String> {
+    let public_label = path
+        .file_name()
+        .and_then(|value| value.to_str())
+        .filter(|value| !value.is_empty())
+        .unwrap_or(what);
     match std::fs::metadata(path) {
         Ok(meta) if meta.is_dir() => Ok(()),
-        Ok(_) => Err(format!("{what} is not a directory: {}", path.display())),
-        Err(err) => Err(format!("{what} is missing: {} ({err})", path.display())),
+        Ok(_) => Err(format!("{what} is not a directory: {public_label}")),
+        Err(err) => Err(format!("{what} is missing: {public_label} ({err})")),
     }
 }

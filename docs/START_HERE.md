@@ -37,6 +37,7 @@ The prior reduced-v1 CLI/compiler material is still preserved:
 ## Minimal repo map
 
 - Active docs index: [`docs/README.md`](README.md)
+- Current CLI machine protocol: [`docs/cli-json-protocol.md`](cli-json-protocol.md)
 - Current architecture ideas: [`docs/ideas/`](ideas/)
 - Contract-membrane authority and navigation: [`docs/specs/handbook-contract-membrane/README.md`](specs/handbook-contract-membrane/README.md)
 - Rust code: `../crates/`

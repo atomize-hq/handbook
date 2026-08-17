@@ -4253,13 +4253,17 @@ fn transport_problem_schema(
     let subject = exact_binding_schema(generator, "handbook.transport-failure@1.0.0");
     let details_schema =
         exact_binding_schema(generator, "handbook.transport-failure-details@1.0.0");
-    let details = closed_object(
-        vec![
-            ("failure_kind", json_schema!({"const": failure_kind})),
-            ("reason_code", generator.subschema_for::<Token<255>>()),
-        ],
-        &["failure_kind", "reason_code"],
-    );
+    let details = json_schema!({
+        "allOf": [
+            generator.subschema_for::<TransportFailureDetailsV1>(),
+            {
+                "properties": {
+                    "failure_kind": {"const": failure_kind}
+                },
+                "required": ["failure_kind"]
+            }
+        ]
+    });
     let recheck = if recheck_required {
         generator.subschema_for::<RecheckCondition>()
     } else {

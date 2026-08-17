@@ -1,9 +1,8 @@
 # Handbook Contract Membrane Implemented Baseline
 
 This document classifies the current Handbook contract-membrane product state
-at product checkpoint `c1f5d333e2b74a76aa7279bc28a66615da6f8d24` and the
-current documentation HEAD. It is a
-compact implementation checkpoint, not a plan.
+at the tracked product and documentation HEAD. It is a compact implementation
+checkpoint, not a plan.
 
 ## Scope and authority
 
@@ -16,7 +15,7 @@ This document does not:
 - define a remaining schedule or choose a future owner;
 - declare a phase or slice complete;
 - select a Phase-3 boundary or establish Phase-3 exit evidence; or
-- authorize HCM-4.3 packet execution.
+- establish HCM-4.3 aggregate slice closeout.
 
 The [`README`](README.md) remains the authority and navigation entry point.
 Execution-unit identity comes from the [`work-unit lifecycle`](work-unit-lifecycle.md), and verification and closeout rules come from the [`review and closeout policy`](review-and-closeout-policy.md).
@@ -39,9 +38,9 @@ These are product-state labels only. None is a lifecycle state, authorization, p
 | Deterministic Projection and Snapshot components | Precursor-only | Deterministic projection and snapshot-memory components exist, including bounded capture, consistency, and delta behavior, but the complete ordinary/public consumer boundary is not established. |
 | Grounding and Flow adapters | Precursor-only | Typed grounding, delta summaries, transition materialization, and Flow adoption components exist; evaluation evidence remains unavailable and there is no ordinary grounding consumer. |
 | Atomic posture authority | Implemented | One-leaf compare-and-swap transition, private records, idempotent replay, persistence/recovery, engine facade, and direct typed SDK ingress are present. Broader posture-policy behavior is not. |
-| SDK and CLI composition | Implemented | The transport-free SDK and CLI compose current owner capabilities, including generic pipeline routes. Machine-transport parity is incomplete. |
+| SDK and CLI composition | Implemented | The transport-free SDK and CLI compose current owner capabilities, including generic pipeline routes. Every supported nontrivial CLI leaf now has one typed ordinary-operation or fixed use-case source for human and machine rendering. |
 | HCM-4.2 shared DTO and JSON Schema membrane | Implemented | Packets 0–5 provide bounded contract types, canonical serialization and fingerprints, a deterministic 53-root Draft 2020-12 schema tree and manifest, the exact 62-row operation inventory and independent owner-admission boundary, immutable production bootstrap/catalog witnessing, one admitted Rust-SDK posture operation, and integrated proof. |
-| Complete CLI JSON parity | Absent/future | Existing commands use mixed prose, partial command-specific JSON, local rendering, and local exit branches. No current product proves one shared typed execution boundary or complete `--json` coverage. HCM-4.3 authority does not change this product classification. |
+| Complete CLI JSON parity | Implemented | HCM-4.3 Packets 1–8 provide one global `--json` invocation envelope, 36-leaf exact coverage, six fixed use cases, 18 `cli_json` ordinary operations, a deterministic 115-root schema/manifest tree, singular writable-stdout framing, shared terminal/exit mapping, physical write-failure handling, and bounded `--legacy-json` compatibility. Aggregate slice closeout remains a lifecycle decision, not a product-state label. |
 | Future contract/evidence/gate owner, dock executor, and Tauri | Absent/future | No current product owner or implementation establishes these capabilities. |
 | Current publication and Substrate adoption | External-unknown | Current repository evidence does not prove a present external publication, bridge, or Substrate seam; absence from the repository is not proof of external absence. |
 

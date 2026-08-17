@@ -6,27 +6,91 @@ pub(crate) enum ResultClass {
     UseCase(&'static str),
 }
 
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub(crate) enum TypedExecutionSource {
+    EngineOwner,
+    FlowOwner,
+    PipelineOwner,
+    SdkUseCase,
+}
+
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub(crate) enum TerminalSource {
+    OperationResponse,
+    UseCaseResponse,
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub(crate) struct CoverageRow {
     pub(crate) leaf: &'static str,
     pub(crate) result_class: ResultClass,
+    pub(crate) typed_source: TypedExecutionSource,
+    pub(crate) terminal_source: TerminalSource,
     pub(crate) machine_json: bool,
     pub(crate) legacy_json: bool,
 }
 
-const fn operation(leaf: &'static str, operation: &'static str, legacy_json: bool) -> CoverageRow {
+const fn operation(
+    leaf: &'static str,
+    operation: &'static str,
+    typed_source: TypedExecutionSource,
+    legacy_json: bool,
+) -> CoverageRow {
     CoverageRow {
         leaf,
         result_class: ResultClass::Operation(operation),
+        typed_source,
+        terminal_source: TerminalSource::OperationResponse,
         machine_json: true,
         legacy_json,
     }
+}
+
+const fn engine_operation(
+    leaf: &'static str,
+    operation_ref: &'static str,
+    legacy_json: bool,
+) -> CoverageRow {
+    operation(
+        leaf,
+        operation_ref,
+        TypedExecutionSource::EngineOwner,
+        legacy_json,
+    )
+}
+
+const fn flow_operation(
+    leaf: &'static str,
+    operation_ref: &'static str,
+    legacy_json: bool,
+) -> CoverageRow {
+    operation(
+        leaf,
+        operation_ref,
+        TypedExecutionSource::FlowOwner,
+        legacy_json,
+    )
+}
+
+const fn pipeline_operation(
+    leaf: &'static str,
+    operation_ref: &'static str,
+    legacy_json: bool,
+) -> CoverageRow {
+    operation(
+        leaf,
+        operation_ref,
+        TypedExecutionSource::PipelineOwner,
+        legacy_json,
+    )
 }
 
 const fn use_case(leaf: &'static str, use_case: &'static str, legacy_json: bool) -> CoverageRow {
     CoverageRow {
         leaf,
         result_class: ResultClass::UseCase(use_case),
+        typed_source: TypedExecutionSource::SdkUseCase,
+        terminal_source: TerminalSource::UseCaseResponse,
         machine_json: true,
         legacy_json,
     }
@@ -98,68 +162,68 @@ static COVERAGE: [CoverageRow; 36] = [
         "handbook.use-case.approver-administration@1.0.0",
         true,
     ),
-    operation("artifact.list_kinds", "artifact.kind.list@1.0.0", true),
-    operation(
+    engine_operation("artifact.list_kinds", "artifact.kind.list@1.0.0", true),
+    engine_operation(
         "artifact.list_instances",
         "artifact.instance.list@1.0.0",
         true,
     ),
-    operation("artifact.read", "artifact.read@1.0.0", true),
-    operation("artifact.validate", "artifact.validate@1.0.0", true),
-    operation(
+    engine_operation("artifact.read", "artifact.read@1.0.0", true),
+    engine_operation("artifact.validate", "artifact.validate@1.0.0", true),
+    engine_operation(
         "artifact.intake_definition_read",
         "intake.definition.read@1.0.0",
         true,
     ),
-    operation(
+    engine_operation(
         "artifact.intake_evaluate",
         "intake.coverage.evaluate@1.0.0",
         true,
     ),
-    operation("artifact.intake_append", "intake.record.append@1.0.0", true),
-    operation(
+    engine_operation("artifact.intake_append", "intake.record.append@1.0.0", true),
+    engine_operation(
         "artifact.candidate_validate",
         "artifact.candidate.validate@1.0.0",
         true,
     ),
-    operation(
+    engine_operation(
         "artifact.candidate_append",
         "artifact.candidate.append@1.0.0",
         true,
     ),
-    operation("artifact.promote", "artifact.candidate.promote@1.0.0", true),
-    operation("pipeline.list", "pipeline.catalog.list@1.0.0", false),
-    operation("pipeline.show", "pipeline.catalog.read@1.0.0", false),
+    engine_operation("artifact.promote", "artifact.candidate.promote@1.0.0", true),
+    pipeline_operation("pipeline.list", "pipeline.catalog.list@1.0.0", false),
+    pipeline_operation("pipeline.show", "pipeline.catalog.read@1.0.0", false),
     use_case(
         "pipeline.resolve",
         "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0",
         false,
     ),
-    operation("pipeline.compile_payload", "pipeline.compile@1.0.0", false),
-    operation("pipeline.compile_explain", "pipeline.compile@1.0.0", false),
-    operation(
+    pipeline_operation("pipeline.compile_payload", "pipeline.compile@1.0.0", false),
+    pipeline_operation("pipeline.compile_explain", "pipeline.compile@1.0.0", false),
+    pipeline_operation(
         "pipeline.capture_preview",
         "pipeline.capture.plan@1.0.0",
         false,
     ),
-    operation(
+    pipeline_operation(
         "pipeline.capture_direct",
         "pipeline.capture.apply@1.0.0",
         false,
     ),
-    operation(
+    pipeline_operation(
         "pipeline.capture_apply",
         "pipeline.capture.apply@1.0.0",
         false,
     ),
-    operation(
+    pipeline_operation(
         "pipeline.handoff_emit",
         "pipeline.handoff.emit@1.0.0",
         false,
     ),
-    operation("pipeline.state_set", "pipeline.state.apply@1.0.0", false),
-    operation("flow.generate", "flow.resolve@1.0.0", false),
-    operation("flow.inspect", "flow.resolve@1.0.0", false),
+    pipeline_operation("pipeline.state_set", "pipeline.state.apply@1.0.0", false),
+    flow_operation("flow.generate", "flow.resolve@1.0.0", false),
+    flow_operation("flow.inspect", "flow.resolve@1.0.0", false),
     use_case("doctor", "handbook.use-case.repository-doctor@1.0.0", true),
 ];
 
@@ -223,6 +287,47 @@ fn authority_class(leaf: &str) -> Option<ResultClass> {
     }
 }
 
+fn authority_source(leaf: &str) -> Option<TypedExecutionSource> {
+    match leaf {
+        "setup.auto"
+        | "setup.init"
+        | "setup.refresh"
+        | "author.charter.author"
+        | "author.charter.approve"
+        | "author.charter.promote"
+        | "author.charter.validate"
+        | "author.project_context.author"
+        | "author.project_context.validate"
+        | "approvers.bootstrap"
+        | "approvers.add_credential"
+        | "approvers.revoke_credential"
+        | "approvers.update_mapping"
+        | "pipeline.resolve"
+        | "doctor" => Some(TypedExecutionSource::SdkUseCase),
+        "artifact.list_kinds"
+        | "artifact.list_instances"
+        | "artifact.read"
+        | "artifact.validate"
+        | "artifact.intake_definition_read"
+        | "artifact.intake_evaluate"
+        | "artifact.intake_append"
+        | "artifact.candidate_validate"
+        | "artifact.candidate_append"
+        | "artifact.promote" => Some(TypedExecutionSource::EngineOwner),
+        "pipeline.list"
+        | "pipeline.show"
+        | "pipeline.compile_payload"
+        | "pipeline.compile_explain"
+        | "pipeline.capture_preview"
+        | "pipeline.capture_direct"
+        | "pipeline.capture_apply"
+        | "pipeline.handoff_emit"
+        | "pipeline.state_set" => Some(TypedExecutionSource::PipelineOwner),
+        "flow.generate" | "flow.inspect" => Some(TypedExecutionSource::FlowOwner),
+        _ => None,
+    }
+}
+
 pub(crate) fn rows() -> &'static [CoverageRow] {
     &COVERAGE
 }
@@ -259,6 +364,21 @@ pub(crate) fn validate() -> Result<(), &'static str> {
         .any(|row| authority_class(row.leaf) != Some(row.result_class))
     {
         return Err("HCM-4.3 leaf/mode is missing or mapped to the wrong exact result authority");
+    }
+    if rows
+        .iter()
+        .any(|row| authority_source(row.leaf) != Some(row.typed_source))
+    {
+        return Err("HCM-4.3 leaf/mode is mapped to the wrong typed execution source");
+    }
+    if rows.iter().any(|row| {
+        row.terminal_source
+            != match row.result_class {
+                ResultClass::Operation(_) => TerminalSource::OperationResponse,
+                ResultClass::UseCase(_) => TerminalSource::UseCaseResponse,
+            }
+    }) {
+        return Err("HCM-4.3 leaf/mode is mapped to the wrong typed terminal source");
     }
     Ok(())
 }

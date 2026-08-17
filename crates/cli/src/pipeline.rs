@@ -601,13 +601,12 @@ fn pipeline_state_set(args: PipelineStateSetArgs, machine_json: bool) -> ExitCod
             Ok(response) => response,
             Err(_) => return pipeline_adapter_failure(machine_json, &limits),
         };
-    emit_pipeline_state(response, &args.id, &repo_root, machine_json, &limits)
+    emit_pipeline_state(response, &args.id, machine_json, &limits)
 }
 
 fn emit_pipeline_state(
     response: OperationResponseV1,
     requested_pipeline_id: &str,
-    repository_root: &std::path::Path,
     machine_json: bool,
     limits: &ContractLimits,
 ) -> ExitCode {
@@ -618,7 +617,7 @@ fn emit_pipeline_state(
     let rendered = match pipeline_state_apply_from_response(&response) {
         Ok(Some(mut outcome)) => {
             if let pipeline_sdk::PipelineStateUpdateResult::Applied(state) = &mut outcome.result {
-                state.run.repository_root = Some(repository_root.display().to_string());
+                state.run.repository_root = Some("${repo_root}".to_owned());
             }
             render_pipeline_state_set_output(&outcome.pipeline_id, outcome.result)
         }

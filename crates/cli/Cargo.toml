@@ -18,5 +18,6 @@ handbook-sdk = { path = "../sdk" }
 handbook-engine = { path = "../engine", version = "0.2.0" }
 handbook-flow = { path = "../flow", version = "0.1.1" }
 handbook-pipeline = { path = "../pipeline", version = "0.1.2" }
+jsonschema = { version = "=0.47.0", default-features = false }
 serde_json_canonicalizer = "0.3.2"
 tempfile = "3"

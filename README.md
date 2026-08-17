@@ -23,6 +23,7 @@ If you are trying to understand the current intended direction, start here:
 ## Where things live now
 
 - Active docs index: [`docs/README.md`](docs/README.md)
+- CLI JSON protocol and legacy migration: [`docs/cli-json-protocol.md`](docs/cli-json-protocol.md)
 - Contract-membrane authority and navigation: [`docs/specs/handbook-contract-membrane/README.md`](docs/specs/handbook-contract-membrane/README.md)
 - Current architecture memos: [`docs/ideas/`](docs/ideas/)
 - Archived reduced-v1 docs: [`archived/reduced-v1/`](archived/reduced-v1/)

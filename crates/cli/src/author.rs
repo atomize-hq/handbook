@@ -11,6 +11,7 @@ use handbook_sdk::contract_membrane::{
 use serde::Deserialize;
 use std::fmt::Write as _;
 use std::fs;
+use std::path::{Component, Path};
 use std::process::ExitCode;
 
 #[derive(Deserialize)]
@@ -392,6 +393,7 @@ fn execute_selected_author_charter_command(
             .from_inputs
             .as_deref()
             .expect("author selection requires an input source");
+        let public_input_source = public_input_source(path_or_dash);
         let yaml = match read_author_inputs_source(path_or_dash) {
             Ok(yaml) => yaml,
             Err(error) => {
@@ -401,7 +403,7 @@ fn execute_selected_author_charter_command(
                     reason_code: "transport.author_charter_input_unavailable",
                     presentation: Some(TransportDescriptorPresentation::AuthorInput {
                         route: AuthorInputTransportRouteV1::Charter,
-                        input_source: path_or_dash.to_owned(),
+                        input_source: public_input_source.clone(),
                         error: Some(error),
                     }),
                 });
@@ -415,7 +417,7 @@ fn execute_selected_author_charter_command(
                     reason_code: "transport.author_charter_input_invalid",
                     presentation: Some(TransportDescriptorPresentation::AuthorInput {
                         route: AuthorInputTransportRouteV1::Charter,
-                        input_source: path_or_dash.to_owned(),
+                        input_source: public_input_source,
                         error: None,
                     }),
                 })
@@ -732,6 +734,7 @@ fn author_project_context_command(args: AuthorProjectContextArgs, machine_json: 
     let limits = ContractLimits::packet0();
     let validate = args.validate;
     let invocation = if let Some(path_or_dash) = args.from_inputs.as_deref() {
+        let public_input_source = public_input_source(path_or_dash);
         let cwd = match std::env::current_dir() {
             Ok(dir) => dir,
             Err(error) => {
@@ -759,7 +762,7 @@ fn author_project_context_command(args: AuthorProjectContextArgs, machine_json: 
                     author_input_transport_kind(&error),
                     "transport.author_project_context_input_unavailable",
                     AuthorInputTransportRouteV1::ProjectContext,
-                    path_or_dash,
+                    &public_input_source,
                     Some(error),
                     &limits,
                 );
@@ -773,7 +776,7 @@ fn author_project_context_command(args: AuthorProjectContextArgs, machine_json: 
                     TransportFailureKind::Decoding,
                     "transport.author_project_context_input_invalid",
                     AuthorInputTransportRouteV1::ProjectContext,
-                    path_or_dash,
+                    &public_input_source,
                     None,
                     &limits,
                 );
@@ -791,7 +794,7 @@ fn author_project_context_command(args: AuthorProjectContextArgs, machine_json: 
             handbook_sdk::ProjectContextCommandRequest::Author(input)
         };
         handbook_sdk::HandbookSdkV1::open(repo_root)
-            .run_author_project_context_use_case(input_mode, path_or_dash, request, &limits)
+            .run_author_project_context_use_case(input_mode, &public_input_source, request, &limits)
             .and_then(|response| InvocationResponseV1::use_case(response, &limits))
     } else {
         let refusal = handbook_sdk::AuthorProjectContextRefusal {
@@ -1102,6 +1105,20 @@ fn read_author_inputs_source(path_or_dash: &str) -> Result<String, std::io::Erro
         return read_stdin();
     }
     fs::read_to_string(path_or_dash)
+}
+
+fn public_input_source(path_or_dash: &str) -> String {
+    let path = Path::new(path_or_dash);
+    let host_qualified =
+        path.has_root() || matches!(path.components().next(), Some(Component::Prefix(_)));
+    if path_or_dash == "-" || !host_qualified {
+        return path_or_dash.to_owned();
+    }
+    path.file_name()
+        .and_then(|name| name.to_str())
+        .filter(|name| !name.is_empty())
+        .unwrap_or("input")
+        .to_owned()
 }
 
 fn author_input_transport_kind(error: &TransportIoErrorV1) -> TransportFailureKind {

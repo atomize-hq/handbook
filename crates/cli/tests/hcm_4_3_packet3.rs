@@ -84,10 +84,8 @@ fn project_context_decode_failure_is_one_transport_invocation() {
     let details = &document["response"]["refusals"][0]["details"];
     assert_eq!(details["presentation"]["presentation_kind"], "author_input");
     assert_eq!(details["presentation"]["route"], "project_context");
-    assert_eq!(
-        details["presentation"]["input_source"],
-        input.to_str().unwrap()
-    );
+    assert_eq!(details["presentation"]["input_source"], "context.yaml");
+    assert!(!String::from_utf8_lossy(&output.stdout).contains(repo.path().to_str().unwrap()));
 }
 
 #[test]
@@ -234,12 +232,15 @@ fn project_context_input_transport_preserves_exact_human_io_presentation() {
         ],
     );
     let next = "repair the structured input file and retry `handbook author project-context --from-inputs <path|->`";
+    let input_label = "missing-project-context.yaml";
+    let human_stdout = String::from_utf8(human.stdout).unwrap();
     assert_eq!(
-        String::from_utf8(human.stdout).unwrap(),
+        human_stdout,
         format!(
-            "OUTCOME: REFUSED\nOBJECT: author project-context\nNEXT SAFE ACTION: {next}\n## REFUSAL\nCATEGORY: InputReadFailure\nSUMMARY: failed to read structured inputs from `{input}`: {io_error}\nBROKEN SUBJECT: structured input source\nNEXT SAFE ACTION: {next}\n"
+            "OUTCOME: REFUSED\nOBJECT: author project-context\nNEXT SAFE ACTION: {next}\n## REFUSAL\nCATEGORY: InputReadFailure\nSUMMARY: failed to read structured inputs from `{input_label}`: {io_error}\nBROKEN SUBJECT: structured input source\nNEXT SAFE ACTION: {next}\n"
         )
     );
+    assert!(!human_stdout.contains(repo.path().to_str().unwrap()));
     assert!(human.stderr.is_empty());
     assert_eq!(human.status.code(), Some(1));
     let document = value(&machine);

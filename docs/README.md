@@ -5,6 +5,8 @@
 Start here for the current direction:
 
 - [`docs/START_HERE.md`](START_HERE.md)
+- [`docs/cli-json-protocol.md`](cli-json-protocol.md) for the current CLI
+  machine protocol and legacy migration
 - [`docs/specs/handbook-contract-membrane/README.md`](specs/handbook-contract-membrane/README.md)
 - [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](ideas/handbook-contract-membrane-architecture-memo.md)
 - [`docs/ideas/substrate_executable_contracts_architecture.md`](ideas/substrate_executable_contracts_architecture.md)
