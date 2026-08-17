@@ -30,8 +30,11 @@ completion or schedule:
 
 - `None — preserve` means the current boundary should remain intact.
 - `HCM-4.2` identifies a completed boundary without reopening it.
-- `HCM-4.3` identifies the authority-ready CLI-parity migration without
-  authorizing a packet by itself.
+- `HCM-4.3` identifies the completed CLI-parity migration without reopening or
+  authorizing it.
+- `HCM-4.4` identifies the current Tauri-facade authority while its product
+  implementation remains absent; the label does not authorize a packet by
+  itself.
 - `Decision required in phase map` leaves the later owner deliberately
   unresolved.
 
