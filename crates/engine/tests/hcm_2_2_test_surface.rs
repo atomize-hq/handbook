@@ -14,7 +14,7 @@ fn production_surface_contains_no_fault_or_caller_clock_controls() {
         "#[cfg(test)]\n#[derive(Clone, Copy, Debug, Eq, PartialEq)]\nenum CharterPromotionFaultPointV1"
     ));
     assert!(LIFECYCLE_SOURCE.contains(
-        "#[cfg(test)]\n#[derive(Clone, Copy, Debug, Eq, PartialEq)]\nenum CharterLifecycleFaultPointV1"
+        "#[cfg(test)]\n#[derive(Clone, Copy, Debug, Eq, PartialEq)]\npub(crate) enum CharterLifecycleFaultPointV1"
     ));
     assert!(!TRANSACTION_SOURCE.contains("fault: Option<CharterPromotionFaultPointV1>"));
     assert!(!LIFECYCLE_SOURCE.contains("fault: Option<CharterLifecycleFaultPointV1>"));

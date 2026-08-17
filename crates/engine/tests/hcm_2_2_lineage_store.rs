@@ -176,12 +176,13 @@ fn author_bundle_persists_content_then_intake_then_candidate_idempotently() {
         .unwrap(),
         CANONICAL_CHARTER
     );
-    assert_eq!(
-        service
-            .persist(&decisions, author_envelope(), None)
-            .unwrap(),
-        created
-    );
+    let replayed = service
+        .persist(&decisions, author_envelope(), None)
+        .unwrap();
+    let mut expected_replay = created.clone();
+    expected_replay.public_effects.clear();
+    assert_eq!(created.public_effects.len(), 4);
+    assert_eq!(replayed, expected_replay);
 
     std::fs::write(
         repo.path()
